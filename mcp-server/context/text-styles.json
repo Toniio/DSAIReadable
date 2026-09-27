@@ -12,7 +12,7 @@
       "css_variable": "`--typography-font-family-sans`",
       "family": "Geist Sans",
       "tailwind_class": "`font-sans`",
-      "usage": "Usage optionnel pour le contenu éditorial ou les textes long-form"
+      "usage": "Touches `Kbd` et contenu éditorial long ; jamais pour l'interface"
     }
   ],
   "type_scale": [

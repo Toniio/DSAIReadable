@@ -42,7 +42,9 @@ Un Tier 2 ou 3 ne contient **que** des références `{…}`, jamais une valeur l
 et détectée par `npm run tokens:check`.
 
 Chaque token sémantique déclare son cycle de vie, vérifié par
-`npm run tokens:lint-lifecycle` : `$extensions.status` vaut `active` (consommé) ou
+`npm run tokens:lint-lifecycle` : `$extensions.status` vaut `active` (consommé ;
+une famille de police l'est par `next/font`, qui la charge — `tokens:lint-fonts`
+vérifie que le token nomme la bonne) ou
 `reserved` (décision valide que rien ne consomme encore, intention dans son
 `$description`), ou le token porte `$deprecated` (ne plus l'utiliser). Un token
 ajouté déclare son statut ; un `reserved` qu'on se met à consommer passe `active`.
@@ -52,7 +54,7 @@ Une primitive que plus aucun token ne référence se supprime, sauf à la décla
 ## 3. Commandes de validation
 
 ```bash
-npm run tokens-validate   # naming DTCG + valeurs brutes + bridge @theme + focus + contrastes + monotonie des palettes + palette de graphiques + cycle de vie + fraîcheur
+npm run tokens-validate   # naming DTCG + valeurs brutes + bridge @theme + focus + contrastes + monotonie des palettes + palette de graphiques + polices + cycle de vie + fraîcheur
 npm run typecheck:all     # app + scripts + mcp-server
 npm run lint              # ESLint
 npm run index:validate    # 5 checks : JSON Schema, tailles, data-slot, chaînes UI, types Props

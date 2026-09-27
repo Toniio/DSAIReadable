@@ -621,7 +621,7 @@
     "value_dark": "{typography.font-family.sans}",
     "css_variable": "--typography-font-family-sans",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "active"
   },
   {
     "path": "typography.font-family.mono",
@@ -629,7 +629,7 @@
     "value_dark": "{typography.font-family.mono}",
     "css_variable": "--typography-font-family-mono",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "active"
   },
   {
     "path": "radius.none",

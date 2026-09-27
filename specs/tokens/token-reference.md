@@ -134,38 +134,38 @@ que le statut dit ce que fait le code.
 
 ## Typography
 
-| Token                              | Variable CSS                         | Type        | Statut   | Valeur                      | Tailwind          |
-| ---------------------------------- | ------------------------------------ | ----------- | -------- | --------------------------- | ----------------- |
-| `typography.size.xs`               | `--typography-size-xs`               | dimension   | active   | `0.75rem`                   | `text-xs`         |
-| `typography.size.sm`               | `--typography-size-sm`               | dimension   | active   | `0.875rem`                  | `text-sm`         |
-| `typography.size.base`             | `--typography-size-base`             | dimension   | active   | `1rem`                      | `text-base`       |
-| `typography.size.lg`               | `--typography-size-lg`               | dimension   | active   | `1.125rem`                  | `text-lg`         |
-| `typography.size.xl`               | `--typography-size-xl`               | dimension   | active   | `1.25rem`                   | `text-xl`         |
-| `typography.size.2xl`              | `--typography-size-2xl`              | dimension   | active   | `1.5rem`                    | `text-2xl`        |
-| `typography.size.3xl`              | `--typography-size-3xl`              | dimension   | active   | `1.875rem`                  | `text-3xl`        |
-| `typography.size.4xl`              | `--typography-size-4xl`              | dimension   | active   | `2.25rem`                   | `text-4xl`        |
-| `typography.line-height.tight`     | `--typography-line-height-tight`     | number      | active   | `1.25`                      | `leading-tight`   |
-| `typography.line-height.snug`      | `--typography-line-height-snug`      | number      | active   | `1.375`                     | `leading-snug`    |
-| `typography.line-height.normal`    | `--typography-line-height-normal`    | number      | active   | `1.5`                       | `leading-normal`  |
-| `typography.line-height.relaxed`   | `--typography-line-height-relaxed`   | number      | active   | `1.625`                     | `leading-relaxed` |
-| `typography.line-height.loose`     | `--typography-line-height-loose`     | number      | active   | `2`                         | `leading-loose`   |
-| `typography.letter-spacing.tight`  | `--typography-letter-spacing-tight`  | dimension   | active   | `-0.025em`                  | `tracking-tight`  |
-| `typography.letter-spacing.normal` | `--typography-letter-spacing-normal` | dimension   | active   | `0em`                       | `tracking-normal` |
-| `typography.letter-spacing.wide`   | `--typography-letter-spacing-wide`   | dimension   | active   | `0.025em`                   | `tracking-wide`   |
-| `typography.letter-spacing.wider`  | `--typography-letter-spacing-wider`  | dimension   | active   | `0.05em`                    | `tracking-wider`  |
-| `typography.font-weight.normal`    | `--typography-font-weight-normal`    | font-weight | active   | `400`                       | `font-normal`     |
-| `typography.font-weight.medium`    | `--typography-font-weight-medium`    | font-weight | active   | `500`                       | `font-medium`     |
-| `typography.font-weight.semibold`  | `--typography-font-weight-semibold`  | font-weight | active   | `600`                       | `font-semibold`   |
-| `typography.font-weight.bold`      | `--typography-font-weight-bold`      | font-weight | active   | `700`                       | `font-bold`       |
-| `typography.font-family.sans`      | `--typography-font-family-sans`      | font-family | reserved | `Geist, sans-serif`         | —                 |
-| `typography.font-family.mono`      | `--typography-font-family-mono`      | font-family | reserved | `JetBrains Mono, monospace` | —                 |
+| Token                              | Variable CSS                         | Type        | Statut | Valeur                      | Tailwind          |
+| ---------------------------------- | ------------------------------------ | ----------- | ------ | --------------------------- | ----------------- |
+| `typography.size.xs`               | `--typography-size-xs`               | dimension   | active | `0.75rem`                   | `text-xs`         |
+| `typography.size.sm`               | `--typography-size-sm`               | dimension   | active | `0.875rem`                  | `text-sm`         |
+| `typography.size.base`             | `--typography-size-base`             | dimension   | active | `1rem`                      | `text-base`       |
+| `typography.size.lg`               | `--typography-size-lg`               | dimension   | active | `1.125rem`                  | `text-lg`         |
+| `typography.size.xl`               | `--typography-size-xl`               | dimension   | active | `1.25rem`                   | `text-xl`         |
+| `typography.size.2xl`              | `--typography-size-2xl`              | dimension   | active | `1.5rem`                    | `text-2xl`        |
+| `typography.size.3xl`              | `--typography-size-3xl`              | dimension   | active | `1.875rem`                  | `text-3xl`        |
+| `typography.size.4xl`              | `--typography-size-4xl`              | dimension   | active | `2.25rem`                   | `text-4xl`        |
+| `typography.line-height.tight`     | `--typography-line-height-tight`     | number      | active | `1.25`                      | `leading-tight`   |
+| `typography.line-height.snug`      | `--typography-line-height-snug`      | number      | active | `1.375`                     | `leading-snug`    |
+| `typography.line-height.normal`    | `--typography-line-height-normal`    | number      | active | `1.5`                       | `leading-normal`  |
+| `typography.line-height.relaxed`   | `--typography-line-height-relaxed`   | number      | active | `1.625`                     | `leading-relaxed` |
+| `typography.line-height.loose`     | `--typography-line-height-loose`     | number      | active | `2`                         | `leading-loose`   |
+| `typography.letter-spacing.tight`  | `--typography-letter-spacing-tight`  | dimension   | active | `-0.025em`                  | `tracking-tight`  |
+| `typography.letter-spacing.normal` | `--typography-letter-spacing-normal` | dimension   | active | `0em`                       | `tracking-normal` |
+| `typography.letter-spacing.wide`   | `--typography-letter-spacing-wide`   | dimension   | active | `0.025em`                   | `tracking-wide`   |
+| `typography.letter-spacing.wider`  | `--typography-letter-spacing-wider`  | dimension   | active | `0.05em`                    | `tracking-wider`  |
+| `typography.font-weight.normal`    | `--typography-font-weight-normal`    | font-weight | active | `400`                       | `font-normal`     |
+| `typography.font-weight.medium`    | `--typography-font-weight-medium`    | font-weight | active | `500`                       | `font-medium`     |
+| `typography.font-weight.semibold`  | `--typography-font-weight-semibold`  | font-weight | active | `600`                       | `font-semibold`   |
+| `typography.font-weight.bold`      | `--typography-font-weight-bold`      | font-weight | active | `700`                       | `font-bold`       |
+| `typography.font-family.sans`      | `--typography-font-family-sans`      | font-family | active | `Geist, sans-serif`         | —                 |
+| `typography.font-family.mono`      | `--typography-font-family-mono`      | font-family | active | `JetBrains Mono, monospace` | —                 |
 
 **Règles d'usage**
 
-| Portée                        | ✅ Do                                        | ❌ Don't                                                                            |
-| ----------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `typography.font-family.sans` | Usage optionnel pour le contenu éditorial.   | Ne pas utiliser comme police principale — le projet utilise `font-mono` par défaut. |
-| `typography.font-family.mono` | Police par défaut de tous les composants UI. | Ne pas surcharger sans décision de l'équipe design.                                 |
+| Portée                        | ✅ Do                                                                  | ❌ Don't                                                                                                                                       |
+| ----------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `typography.font-family.sans` | Réserver aux touches `Kbd` et au contenu éditorial long (`font-sans`). | Ne pas l'utiliser pour l'interface : tout le texte UI est en `font-mono`.                                                                      |
+| `typography.font-family.mono` | Police par défaut de tous les composants UI, appliquée sur `<html>`.   | Ne pas changer de police ici seulement : elle est chargée par `next/font` dans `app/layout.tsx`, que `tokens:lint-fonts` confronte à ce token. |
 
 ---
 

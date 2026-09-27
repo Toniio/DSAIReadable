@@ -3,6 +3,8 @@
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
 > ⚠️ **Note critique :** Ce projet utilise **JetBrains Mono** (`typography.font-family.mono`) comme police **par défaut** sur `<html>` via `@apply font-mono`. Geist Sans est disponible mais secondaire.
+>
+> **Qui décide de la police :** `next/font`, dans `app/layout.tsx`, qui l'auto-héberge et ajuste ses métriques de repli. Les tokens `typography.font-family.*` **décrivent** ce choix, ils ne le pilotent pas : `font-mono` et `font-sans` lisent `--font-mono` et `--font-sans`, posées par `next/font`. `npm run tokens:lint-fonts` vérifie que chaque token nomme la famille chargée sous sa variable. Changer de police, c'est changer le chargeur dans `layout.tsx` **et** le token.
 
 ---
 
@@ -11,7 +13,7 @@
 | Token                         | CSS Variable                    | Famille        | Tailwind Class | Usage                                                             |
 | ----------------------------- | ------------------------------- | -------------- | -------------- | ----------------------------------------------------------------- |
 | `typography.font-family.mono` | `--typography-font-family-mono` | JetBrains Mono | `font-mono`    | **Police par défaut** de l'application — tout le texte UI         |
-| `typography.font-family.sans` | `--typography-font-family-sans` | Geist Sans     | `font-sans`    | Usage optionnel pour le contenu éditorial ou les textes long-form |
+| `typography.font-family.sans` | `--typography-font-family-sans` | Geist Sans     | `font-sans`    | Touches `Kbd` et contenu éditorial long ; jamais pour l'interface |
 
 ```css
 /* Appliqué dans globals.css — @layer base */
