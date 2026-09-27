@@ -45,22 +45,27 @@ Le projet est né d'un constat : pour qu'un LLM génère du code conforme à un 
 ```
 dsaireadable/
 ├── app/                        # App Next.js (démo des composants)
-├── components/ui/              # 60 composants React du DS (shadcn/ui customisés)
+├── components/ui/              # 59 composants React du DS (shadcn/ui customisés)
+├── lib/                        # Modules partagés : utils, focus, ui-strings, overlay
 ├── tokens/                     # Source de vérité des tokens (DTCG JSON 3 tiers)
 │   ├── primitive.json          # Tier 1 — valeurs brutes (privé)
 │   ├── semantic.json           # Tier 2 — tokens sémantiques (public)
 │   └── component.json          # Tier 3 — aliases shadcn/ui (public)
-├── tokens.css                  # CSS custom properties générées
+├── tokens.css                  # CSS custom properties générées — ne pas éditer
 ├── specs/                      # Documentation markdown du DS
 │   ├── components/             # 59 specs composants (13 sections chacune)
 │   ├── foundations/            # Specs couleur, typo, spacing, motion, radius…
-│   └── tokens/token-reference.md  # Référence des 276 tokens (généré)
+│   └── tokens/token-reference.md  # Référence des 301 tokens (généré)
 ├── mcp-server/                 # MCP Server @dsaireadable/mcp-server
-│   └── src/
-│       ├── tools/              # Outils MCP (ds-core, dataviz, ux-writing, admin)
-│       ├── prompts/            # Prompts MCP
-│       └── context/            # Fichiers JSON pré-compilés (cache du DS)
-├── scripts/                    # Outillage : lint et build des tokens
+│   ├── src/
+│   │   ├── tools/              # Outils MCP (ds-core, dataviz, ux-writing, admin)
+│   │   ├── prompts/            # Prompts MCP
+│   │   ├── lib/                # Chargement du cache, validate_screen, règles de composition
+│   │   └── context/            # generate.ts : produit le cache
+│   └── context/                # Fichiers JSON pré-compilés (cache du DS) — générés
+├── scripts/                    # Outillage : génération et lint des tokens, specs, index, registre
+├── registry/                   # Sources des items de registre hors composants
+├── registry.json               # Registre shadcn — généré
 ├── design-system.index.json    # Inventaire machine-readable du DS
 └── design-system.schema.json   # JSON Schema validant l'index
 ```

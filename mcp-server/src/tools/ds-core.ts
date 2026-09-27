@@ -6,6 +6,7 @@ import {
   compositionRulesFor,
   type CompositionRule,
 } from "../lib/composition-rules.js"
+import { TAILWIND_RULE } from "../lib/tailwind-rule.js"
 
 interface ComponentEntry {
   name: string
@@ -264,64 +265,7 @@ import { cn } from "@/lib/utils"`,
     async ({ category }) => {
       const data = loadContext<Record<string, unknown>>("ux-writing.json")
 
-      const tailwindRule = {
-        id: "tailwind-tokens",
-        severity: "critical",
-        title: "Always use standard Tailwind CSS classes mapped to DS tokens",
-        description: [
-          "ALWAYS use standard Tailwind utility classes that reference the design system CSS custom properties.",
-          "The tokens.css file defines CSS variables (--background, --primary, --border, etc.) that Tailwind picks up automatically via theme.css (@theme bridge).",
-          "Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.",
-          "For spacing, use standard Tailwind spacing: p-4, gap-6, m-2, space-y-4, etc.",
-          "For radius, use: rounded-sm, rounded-md, rounded-lg, rounded-xl, etc. (mapped to --radius-*).",
-          "For shadows, use: shadow-xs, shadow-sm, shadow-md, shadow-lg (mapped to --elevation-*).",
-        ],
-        token_chain_explanation: {
-          description:
-            "Each Tailwind class resolves through 3 token layers. Example:",
-          example:
-            "bg-primary → --color-primary (@theme) → --color-action-background-default (Semantic L2) → --ds-prim-color-violet-600 = #432dd7 (Primitive L1)",
-          mapping: {
-            "bg-background":
-              "--color-background → --color-background-default → #ffffff (light) / #090b0c (dark)",
-            "bg-primary":
-              "--color-primary → --color-action-background-default → #432dd7",
-            "text-foreground":
-              "--color-foreground → --color-text-default → #090b0c (light) / #f9fbfb (dark)",
-            "text-primary-foreground":
-              "--color-primary-foreground → --color-action-background-foreground → #eef2ff",
-            "text-muted-foreground":
-              "--color-muted-foreground → --color-text-subtle → #67787c",
-            "bg-card": "--color-card → --color-background-subtle → #f1f3f3",
-            "border-border":
-              "--color-border → --color-border-default → #e3e7e8",
-            "bg-destructive":
-              "--color-destructive → --color-feedback-error-default → #e7000b",
-          },
-        },
-        do: [
-          "bg-background text-foreground (uses --background / --foreground tokens)",
-          "bg-primary text-primary-foreground (uses --primary tokens)",
-          "bg-muted text-muted-foreground (uses --muted tokens)",
-          "border-border (uses --border token)",
-          "bg-card text-card-foreground (uses --card tokens)",
-          "bg-destructive (uses --destructive token)",
-          "p-4 gap-6 m-2 space-y-4 (standard Tailwind spacing)",
-          "rounded-lg rounded-md (standard Tailwind radius — ALWAYS specify size)",
-          "shadow-sm shadow-md (standard Tailwind shadows)",
-          "text-sm text-base text-lg font-medium font-semibold (standard Tailwind typography)",
-        ],
-        dont: [
-          "bg-[#432dd7] — NEVER use arbitrary hex colors",
-          "text-[var(--ds-prim-color-violet-600)] — NEVER reference primitive tokens directly",
-          "style={{ color: 'var(--color-text-default)' }} — NEVER use inline styles with CSS variables",
-          "bg-violet-600 — NEVER use Tailwind's default palette, use DS semantic classes instead",
-          "p-[1.5rem] — NEVER use arbitrary spacing values, use standard Tailwind scale",
-          "rounded-[0.625rem] — NEVER use arbitrary radius values",
-          "opacity-90 — NEVER use arbitrary opacity, use DS opacity tokens if needed",
-          "rounded (without size) — ALWAYS specify size: rounded-md, rounded-lg, etc.",
-        ],
-      }
+      const tailwindRule = TAILWIND_RULE
 
       const componentRule = {
         id: "use-ds-components",

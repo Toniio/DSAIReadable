@@ -10,6 +10,7 @@ import {
   compositionRulesFor,
   type CompositionRule,
 } from "./lib/composition-rules.js"
+import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
 import { readdirSync, existsSync, readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -646,6 +647,43 @@ assert(
       (r) => !r.applies_to || r.applies_to.includes("Heading")
     ),
   '"composition" gets every rule; a component gets only rules that cover it'
+)
+
+// The styling rule served with every get_design_rules answer: each link of
+// its token chain must be the one app/globals.css declares, and it quotes no
+// value — values drift, get_tokens serves them from the tokens.
+const bridge = new Map(
+  [
+    ...readFileSync(
+      resolve(__dirname, "../../app/globals.css"),
+      "utf-8"
+    ).matchAll(/^\s*(--color-[\w-]+):\s*var\((--[\w-]+)\);/gm),
+  ].map((m) => [m[1], m[2]])
+)
+const semanticVars = new Set(
+  (
+    JSON.parse(
+      readFileSync(resolve(contextDir, "semantic-tokens.json"), "utf-8")
+    ) as { css_var: string }[]
+  ).map((t) => t.css_var)
+)
+const brokenLinks = Object.entries(
+  TAILWIND_RULE.token_chain_explanation.mapping
+).filter(([, chain]) => {
+  const [theme, semantic] = chain.split(" → ")
+  return bridge.get(theme) !== semantic || !semanticVars.has(semantic)
+})
+assert(
+  brokenLinks.length === 0,
+  `Every token chain of the styling rule matches app/globals.css (${brokenLinks.map(([c]) => c).join(", ") || "all"})`
+)
+const ruleText = JSON.stringify(TAILWIND_RULE)
+assert(
+  !ruleText.includes("theme.css") &&
+    !/#[0-9a-f]{6}\b/i.test(
+      JSON.stringify(TAILWIND_RULE.token_chain_explanation)
+    ),
+  "The styling rule names app/globals.css as the bridge and quotes no hex value"
 )
 
 const uxRules = (
