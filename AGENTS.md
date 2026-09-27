@@ -63,7 +63,7 @@ npm run docs:tokens       # régénère token-reference.md + tokens.manifest.jso
 npm run registry:check    # fraîcheur de registry.json + dépendances internes
 npm run registry:test-install  # installe les 61 items dans une app vierge et la compile
 npm run generate-context  # régénère le cache MCP — doit produire zéro diff
-npm run mcp:test          # 62 tests du serveur MCP
+npm run mcp:test          # suite de tests du serveur MCP
 npm run build             # build de production Next.js
 ```
 

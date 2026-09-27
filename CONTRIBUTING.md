@@ -59,15 +59,17 @@ avec `--no-verify`.**
 
 ## Ce que la CI vérifie
 
-| Job                 | Commande                                                  |
-| ------------------- | --------------------------------------------------------- |
-| `tokens-validate`   | `npm run tokens-validate`                                 |
-| `typecheck`         | `npm run typecheck:all`                                   |
-| `lint`              | `npm run lint` + `prettier --check`                       |
-| `build`             | `npm run build`                                           |
-| `index-schema`      | `npm run index:validate`                                  |
-| `context-freshness` | `npm run generate-context` puis échec si l'arbre est sale |
-| `mcp-test`          | `npm run mcp:test`                                        |
+| Job                 | Commande                                                                     |
+| ------------------- | ---------------------------------------------------------------------------- |
+| `tokens-validate`   | `npm run tokens-validate`                                                    |
+| `typecheck`         | `npm run typecheck:all`                                                      |
+| `lint`              | `npm run lint` + `prettier --check`                                          |
+| `build`             | `npm run build`                                                              |
+| `index-schema`      | `npm run index:validate`                                                     |
+| `spec-sections`     | `npm run specs:validate`                                                     |
+| `context-freshness` | `npm run generate-context` puis échec si l'arbre est sale                    |
+| `mcp-test`          | `npm run mcp:test`                                                           |
+| `registry`          | `npm run registry:check`, validation shadcn, `npm run registry:test-install` |
 
 ## Style de code
 
