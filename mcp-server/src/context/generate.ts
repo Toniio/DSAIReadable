@@ -834,9 +834,22 @@ function generateUxWriting() {
     }
   }
 
+  // Composition rules of design-system.index.json, served by get_design_rules:
+  // without them, the context cache carried rule-05 alone (in icons.json).
+  const compositionRules = (
+    dsIndex.composition_rules as Array<{
+      id: string
+      rule: string
+      applies_to?: string[]
+    }>
+  ).map(({ id, rule, applies_to }) =>
+    applies_to ? { id, rule, applies_to } : { id, rule }
+  )
+
   return write("ux-writing.json", {
     general_rules: generalRules,
     component_rules: componentRules,
+    composition_rules: compositionRules,
   })
 }
 

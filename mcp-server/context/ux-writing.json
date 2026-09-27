@@ -628,5 +628,118 @@
       "**MUST** — placer un `TooltipProvider` au-dessus dans l'arbre, par exemple dans le layout racine",
       "**MUST NOT** — poser un `Tooltip` directement sur un élément `disabled`, qui ne reçoit ni focus ni survol : envelopper l'élément dans un `<span tabIndex={0}>` qui porte le déclencheur"
     ]
-  }
+  },
+  "composition_rules": [
+    {
+      "id": "rule-01",
+      "rule": "Use only Semantic tokens (--color-*, --space-*, --elevation-*, --motion-*, --radius-*, --zindex-*) and Component aliases (--background, --primary, etc.) in component code. Never reference Primitive tokens (--ds-prim-*) directly."
+    },
+    {
+      "id": "rule-02",
+      "rule": "Never use raw values (oklch, hex, rgb, px, rem, ms, cubic-bezier) in component files. Every visual value must trace to a token. Exception: CSS attribute selectors targeting third-party library SVG attributes (annotate with // allow-raw: <reason>)."
+    },
+    {
+      "id": "rule-03",
+      "rule": "All class name composition must use cn() from @/lib/utils. Inline conditional className strings are not permitted."
+    },
+    {
+      "id": "rule-04",
+      "rule": "Component variants must be declared with cva() from class-variance-authority. Use data-variant and data-size attributes to expose variant state for CSS targeting."
+    },
+    {
+      "id": "rule-05",
+      "rule": "Icons must come exclusively from @phosphor-icons/react. No other icon library may be used. Default icon size within components is size-4 (1rem)."
+    },
+    {
+      "id": "rule-06",
+      "rule": "TooltipProvider must wrap the entire application at the layout root. Do not instantiate Tooltip outside of a TooltipProvider."
+    },
+    {
+      "id": "rule-07",
+      "rule": "Sonner Toaster must be instantiated once at the layout root. Do not render multiple Toaster instances."
+    },
+    {
+      "id": "rule-08",
+      "rule": "Dialog, Sheet, AlertDialog, and Drawer must always include an accessible title element (DialogTitle, SheetTitle, AlertDialogTitle, DrawerTitle). Visually-hidden titles are acceptable for screen-reader-only labels."
+    },
+    {
+      "id": "rule-09",
+      "rule": "Every form control (Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch) MUST have an associated visible label: Field with FieldLabel, or Label through htmlFor. It MUST sit in a Field as soon as it carries a description or an error message, which Field lays out and links to the control."
+    },
+    {
+      "id": "rule-10",
+      "rule": "Components using asChild must pass a single React element as children. The child receives all props via Slot.Root — do not wrap it in an additional element."
+    },
+    {
+      "id": "rule-11",
+      "rule": "Dark mode is class-based (.dark). Never use prefers-color-scheme media queries in component code — theming is controlled by ThemeProvider at the root."
+    },
+    {
+      "id": "rule-12",
+      "rule": "Spacing between components must use Semantic space tokens: space-component-xs/sm/md/lg/xl for intra-component gaps, space-layout-page-padding for page edges, space-layout-section-gap for section breaks."
+    },
+    {
+      "id": "rule-13",
+      "rule": "All new components must expose a data-slot attribute on the root element whose value matches the component name (e.g., data-slot='button'). Sub-parts also carry data-slot for CSS targeting."
+    },
+    {
+      "id": "rule-14",
+      "rule": "Beta components (status: beta in design-system.index.json) may have breaking API changes. Do not use them in production flows without explicit sign-off."
+    },
+    {
+      "id": "rule-15",
+      "rule": "Run npm run tokens-validate before every commit. Zero errors are required to merge. If a needed Semantic token does not exist, open a GitHub issue labelled design-system instead of creating an ad-hoc token."
+    },
+    {
+      "id": "rule-16",
+      "rule": "Dark mode is the .dark class on <html>, set by ThemeProvider (next-themes). It follows the OS preference by default (defaultTheme=\"system\") by setting that class, never through a prefers-color-scheme media query. Never override mode token values inline."
+    },
+    {
+      "id": "rule-17",
+      "rule": "Sidebar tokens follow the naming pattern color.sidebar.<role>.<emphasis>. Use --color-sidebar-primary (active item bg), --color-sidebar-primary-on (text on active), --color-sidebar-accent-default (hover surface), --color-sidebar-accent-foreground (text on hover). Do not use the legacy flat names."
+    },
+    {
+      "id": "rule-18",
+      "rule": "The canonical size scale is xs | sm | default | lg, with the square-format series icon-xs | icon-sm | icon | icon-lg. MUST use only the sizes listed in the component's inventory entry: a component that omits a step does not accept it, and no component accepts a name outside the scale. Components with no sizes field take no size prop."
+    },
+    {
+      "id": "rule-19",
+      "rule": "A `variant` prop carries exactly one axis: appearance, intent, or media. MUST NOT assume a component accepts a value because a sibling does. Media values (icon, image) belong to *Media sub-components only. MUST use variant=\"destructive\" for irreversible actions, never to obtain red styling."
+    },
+    {
+      "id": "rule-20",
+      "rule": "Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.",
+      "applies_to": [
+        "RadioGroup",
+        "Select",
+        "NativeSelect",
+        "Combobox",
+        "Checkbox",
+        "Switch"
+      ]
+    },
+    {
+      "id": "rule-21",
+      "rule": "Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.",
+      "applies_to": [
+        "AlertDialog",
+        "Dialog",
+        "Sheet",
+        "Drawer",
+        "Popover",
+        "HoverCard",
+        "Tooltip"
+      ]
+    },
+    {
+      "id": "rule-22",
+      "rule": "Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.",
+      "applies_to": [
+        "Item",
+        "Card",
+        "Table",
+        "DropdownMenu"
+      ]
+    }
+  ]
 }

@@ -6,6 +6,10 @@ import { registerUxWritingTools } from "./tools/ux-writing.js"
 import { registerAdminTools } from "./tools/admin.js"
 import { registerPrompts } from "./prompts/index.js"
 import { validateScreen, SCREEN_RULES } from "./lib/validate-screen.js"
+import {
+  compositionRulesFor,
+  type CompositionRule,
+} from "./lib/composition-rules.js"
 import { readdirSync, existsSync, readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -608,6 +612,40 @@ assert(
     (p) => p.component === "SidebarMenuAction" && p.prop === "`showOnHover`"
   ) === true,
   "A prop is filed under its own export (SidebarMenuAction.showOnHover)"
+)
+
+// Composition rules (design-system.index.json) reach MCP agents through
+// get_design_rules. Before, the context cache carried rule-05 alone.
+const indexRules = (
+  JSON.parse(
+    readFileSync(resolve(__dirname, "../../design-system.index.json"), "utf-8")
+  ) as { composition_rules: CompositionRule[] }
+).composition_rules
+const servedRules =
+  (
+    JSON.parse(
+      readFileSync(resolve(contextDir, "ux-writing.json"), "utf-8")
+    ) as { composition_rules?: CompositionRule[] }
+  ).composition_rules ?? []
+assert(
+  servedRules.length === indexRules.length &&
+    servedRules.every(
+      (r, i) => r.id === indexRules[i].id && r.rule === indexRules[i].rule
+    ),
+  `Every composition rule is served as written in the index (${indexRules.length})`
+)
+const forSelect = compositionRulesFor(servedRules, "Select").map((r) => r.id)
+assert(
+  forSelect.includes("rule-09") && forSelect.includes("rule-20"),
+  "A component name gets the rules that cover it (Select: rule-09, rule-20)"
+)
+assert(
+  compositionRulesFor(servedRules, "composition").length ===
+    indexRules.length &&
+    compositionRulesFor(servedRules, "Heading").every(
+      (r) => !r.applies_to || r.applies_to.includes("Heading")
+    ),
+  '"composition" gets every rule; a component gets only rules that cover it'
 )
 
 const uxRules = (

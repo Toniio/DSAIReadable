@@ -2,6 +2,10 @@ import { readdirSync } from "node:fs"
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { contextDir, loadContext, text } from "../lib/context.js"
+import {
+  compositionRulesFor,
+  type CompositionRule,
+} from "../lib/composition-rules.js"
 
 interface ComponentEntry {
   name: string
@@ -250,7 +254,7 @@ import { cn } from "@/lib/utils"`,
   // 8. get_design_rules
   server.tool(
     "get_design_rules",
-    "Returns design rules (do/don't) from foundations and component constraints, optionally filtered by category",
+    'Returns design rules: foundation do/don\'t, component constraints and the composition rules of design-system.index.json. Filter by category: a foundation (color, typography…), a component name (its constraints and the composition rules that cover it), or "composition" for every composition rule',
     {
       category: z
         .string()
@@ -369,6 +373,12 @@ import { cn } from "@/lib/utils"`,
       }
 
       const cat = category.toLowerCase()
+      const composition = compositionRulesFor(
+        (data.composition_rules as CompositionRule[] | undefined) ?? [],
+        category
+      )
+      if (["composition", "composition_rules", "rules"].includes(cat))
+        return text({ category, composition_rules: composition })
 
       if (cat === "tailwind" || cat === "css" || cat === "styling") {
         return text({ category, rules: [tailwindRule, componentRule] })
@@ -390,6 +400,7 @@ import { cn } from "@/lib/utils"`,
           return text({
             category,
             rules: filtered,
+            composition_rules: composition,
             critical_rules: [tailwindRule, componentRule],
           })
       }
@@ -400,6 +411,7 @@ import { cn } from "@/lib/utils"`,
           return text({
             category,
             rules: match,
+            composition_rules: composition,
             critical_rules: [tailwindRule, componentRule],
           })
       }
@@ -407,6 +419,7 @@ import { cn } from "@/lib/utils"`,
       return text({
         category,
         rules: [],
+        composition_rules: composition,
         critical_rules: [tailwindRule, componentRule],
       })
     }
