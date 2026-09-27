@@ -698,8 +698,8 @@
     "light": "{typography.font-family.sans}",
     "dark": "{typography.font-family.sans}",
     "type": "font-family",
-    "status": "reserved",
-    "usage": "Primary sans-serif typeface for UI text."
+    "status": "active",
+    "usage": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in app/layout.tsx under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens)."
   },
   {
     "path": "typography.font-family.mono",
@@ -707,8 +707,8 @@
     "light": "{typography.font-family.mono}",
     "dark": "{typography.font-family.mono}",
     "type": "font-family",
-    "status": "reserved",
-    "usage": "Monospace typeface for code, numbers, and technical content."
+    "status": "active",
+    "usage": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in app/layout.tsx under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens)."
   },
   {
     "path": "radius.none",

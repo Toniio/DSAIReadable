@@ -1109,25 +1109,25 @@
       "sans": {
         "$value": "{typography.font-family.sans}",
         "$type": "font-family",
-        "$description": "Primary sans-serif typeface for UI text.",
+        "$description": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in app/layout.tsx under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens).",
         "$extensions": {
           "docs": {
-            "do": "Usage optionnel pour le contenu éditorial.",
-            "dont": "Ne pas utiliser comme police principale — le projet utilise `font-mono` par défaut."
+            "do": "Réserver aux touches `Kbd` et au contenu éditorial long (`font-sans`).",
+            "dont": "Ne pas l'utiliser pour l'interface : tout le texte UI est en `font-mono`."
           },
-          "status": "reserved"
+          "status": "active"
         }
       },
       "mono": {
         "$value": "{typography.font-family.mono}",
         "$type": "font-family",
-        "$description": "Monospace typeface for code, numbers, and technical content.",
+        "$description": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in app/layout.tsx under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens).",
         "$extensions": {
           "docs": {
-            "do": "Police par défaut de tous les composants UI.",
-            "dont": "Ne pas surcharger sans décision de l'équipe design."
+            "do": "Police par défaut de tous les composants UI, appliquée sur `<html>`.",
+            "dont": "Ne pas changer de police ici seulement : elle est chargée par `next/font` dans `app/layout.tsx`, que `tokens:lint-fonts` confronte à ce token."
           },
-          "status": "reserved"
+          "status": "active"
         }
       }
     }
