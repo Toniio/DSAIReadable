@@ -41,12 +41,19 @@ Champ de saisie multi-lignes avec dimensionnement automatique (`field-sizing-con
 
 ## Tokens utilisés
 
-| Token                      | Usage                                                                              |
-| -------------------------- | ---------------------------------------------------------------------------------- |
-| `--color-input`            | Bordure (`border-input`), fond disabled (`bg-input/50`), fond dark (`bg-input/30`) |
-| `--color-ring`             | Anneau de focus (`ring-ring/50`, `border-ring`)                                    |
-| `--color-destructive`      | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)             |
-| `--color-muted-foreground` | Texte placeholder (`placeholder:text-muted-foreground`)                            |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                          | Classes et variables                                                                           | Où                                                        |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `border-width.default`         | `border`                                                                                       | `Textarea`                                                |
+| `color.border.focus`           | `border-ring` · `ring-ring/50`                                                                 | `Textarea` via `FOCUS_RING` (`lib/focus.ts`)              |
+| `color.border.input`           | `bg-input/30` · `bg-input/50` · `bg-input/80` · `border-input`                                 | `Textarea`                                                |
+| `color.feedback.error.default` | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Textarea`                                                |
+| `color.text.subtle`            | `text-muted-foreground`                                                                        | `Textarea`                                                |
+| `space.focus-ring-width`       | `ring-(length:--space-focus-ring-width)`                                                       | `Textarea` · `Textarea` via `FOCUS_RING` (`lib/focus.ts`) |
+| `typography.size.xs`           | `text-xs`                                                                                      | `Textarea`                                                |
+
+Relevé dans `components/ui/textarea.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

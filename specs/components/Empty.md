@@ -48,13 +48,20 @@
 
 ## Tokens utilisés
 
-| Token                   | Usage                                          |
-| ----------------------- | ---------------------------------------------- |
-| `bg-muted`              | Fond de la variante `icon` de `EmptyMedia`     |
-| `text-foreground`       | Couleur d'icône variante `icon`                |
-| `text-muted-foreground` | Couleur du texte de description                |
-| `text-primary`          | Couleur des liens au hover dans la description |
-| `font-heading`          | Police du titre                                |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                             | Classes et variables          | Où                                  |
+| --------------------------------- | ----------------------------- | ----------------------------------- |
+| `color.action.background.default` | `text-primary`                | `EmptyDescription`                  |
+| `color.background.subtle`         | `bg-muted`                    | `emptyMediaVariants.variant.icon`   |
+| `color.text.default`              | `text-foreground`             | `emptyMediaVariants.variant.icon`   |
+| `color.text.subtle`               | `text-muted-foreground`       | `EmptyDescription`                  |
+| `typography.font-weight.medium`   | `font-medium`                 | `EmptyTitle`                        |
+| `typography.line-height.relaxed`  | `text-xs/relaxed`             | `EmptyDescription`                  |
+| `typography.size.sm`              | `text-sm`                     | `EmptyTitle`                        |
+| `typography.size.xs`              | `text-xs` · `text-xs/relaxed` | `EmptyContent` · `EmptyDescription` |
+
+Relevé dans `components/ui/empty.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

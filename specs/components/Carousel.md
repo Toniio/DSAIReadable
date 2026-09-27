@@ -50,10 +50,11 @@ Conteneur de défilement horizontal ou vertical permettant de naviguer entre des
 
 ## Tokens utilisés
 
-| Token          | Usage                                                              |
-| -------------- | ------------------------------------------------------------------ |
-| `--spacing-4`  | Espacement entre les slides (`pl-4` horizontal, `pt-4` vertical)   |
-| `--spacing-12` | Positionnement des boutons de navigation (`-left-12`, `-right-12`) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+Aucun token : `components/ui/carousel.tsx` n'emploie aucune classe ni variable qui mène à un token sémantique.
+
+Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

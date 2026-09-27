@@ -41,13 +41,17 @@ Représentation visuelle d'une touche ou combinaison de touches clavier sous for
 
 ## Tokens utilisés
 
-| Token                   | Usage                               |
-| ----------------------- | ----------------------------------- |
-| `bg-muted`              | Fond de la touche par défaut        |
-| `text-muted-foreground` | Couleur du texte de la touche       |
-| `bg-background/20`      | Fond dans un tooltip (thème clair)  |
-| `text-background`       | Texte dans un tooltip               |
-| `bg-background/10`      | Fond dans un tooltip (thème sombre) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                                        | Où    |
+| ------------------------------- | ----------------------------------------------------------- | ----- |
+| `color.background.default`      | `bg-background/10` · `bg-background/20` · `text-background` | `Kbd` |
+| `color.background.subtle`       | `bg-muted`                                                  | `Kbd` |
+| `color.text.subtle`             | `text-muted-foreground`                                     | `Kbd` |
+| `typography.font-weight.medium` | `font-medium`                                               | `Kbd` |
+| `typography.size.xs`            | `text-xs`                                                   | `Kbd` |
+
+Relevé dans `components/ui/kbd.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

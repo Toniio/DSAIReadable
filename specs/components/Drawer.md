@@ -51,15 +51,23 @@ Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glisseme
 
 ## Tokens utilisés
 
-| Token                     | Usage                                                 |
-| ------------------------- | ----------------------------------------------------- |
-| `bg-popover`              | Fond du contenu du drawer                             |
-| `text-popover-foreground` | Couleur du texte principal                            |
-| `bg-black/10`             | Fond de l'overlay                                     |
-| `bg-muted`                | Indicateur de glissement (handle) en direction bottom |
-| `text-foreground`         | Couleur du titre                                      |
-| `text-muted-foreground`   | Couleur de la description                             |
-| `font-heading`            | Police du titre                                       |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                              | Où                                                                                                                       |
+| -------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `border-width.default`           | `border-b` · `border-l` · `border-r` · `border-t` | `DrawerContent`                                                                                                          |
+| `color.background.elevated`      | `bg-popover`                                      | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`)                                                         |
+| `color.background.subtle`        | `bg-muted`                                        | `DrawerContent`                                                                                                          |
+| `color.static.black`             | `bg-black/10`                                     | `DrawerOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                                    |
+| `color.text.default`             | `text-foreground` · `text-popover-foreground`     | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerTitle`                                         |
+| `color.text.subtle`              | `text-muted-foreground`                           | `DrawerDescription`                                                                                                      |
+| `typography.font-weight.medium`  | `font-medium`                                     | `DrawerTitle`                                                                                                            |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                                 | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerDescription`                                   |
+| `typography.size.sm`             | `text-sm`                                         | `DrawerTitle`                                                                                                            |
+| `typography.size.xs`             | `text-xs/relaxed`                                 | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerDescription`                                   |
+| `zindex.modal`                   | `z-modal`                                         | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
+
+Relevé dans `components/ui/drawer.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

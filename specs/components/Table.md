@@ -51,12 +51,18 @@ Ensemble de composants pour construire des tableaux de données sémantiques ave
 
 ## Tokens utilisés
 
-| Token                      | Usage                                                                              |
-| -------------------------- | ---------------------------------------------------------------------------------- |
-| `--color-border`           | Bordure inférieure des lignes (`border-b`)                                         |
-| `--color-muted`            | Fond de la ligne sélectionnée (`bg-muted`) et fond du pied de page (`bg-muted/50`) |
-| `--color-muted-foreground` | Texte de la légende (`text-muted-foreground`)                                      |
-| `--color-foreground`       | Texte des cellules d'en-tête (`text-foreground`)                                   |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables       | Où                                         |
+| ------------------------------- | -------------------------- | ------------------------------------------ |
+| `border-width.default`          | `border-b` · `border-t`    | `TableFooter` · `TableHeader` · `TableRow` |
+| `color.background.subtle`       | `bg-muted` · `bg-muted/50` | `TableFooter` · `TableRow`                 |
+| `color.text.default`            | `text-foreground`          | `TableHead`                                |
+| `color.text.subtle`             | `text-muted-foreground`    | `TableCaption`                             |
+| `typography.font-weight.medium` | `font-medium`              | `TableFooter` · `TableHead`                |
+| `typography.size.xs`            | `text-xs`                  | `TableCaption` · `Table`                   |
+
+Relevé dans `components/ui/table.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

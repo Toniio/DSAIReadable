@@ -46,34 +46,75 @@
     ],
     "tokens": [
       {
-        "token": "`--color-border-default`",
-        "usage": "Bordure inférieure entre les items (`not-last:border-b`)"
+        "token": "border-width.default",
+        "classes": [
+          "border",
+          "border-b"
+        ],
+        "where": [
+          "AccordionItem",
+          "AccordionTrigger"
+        ]
       },
       {
-        "token": "`--color-border-ring`",
-        "usage": "Bordure et anneau de focus visible sur le trigger"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "AccordionTrigger",
+          "AccordionTrigger via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-text-muted-foreground`",
-        "usage": "Couleur de l'icône chevron"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "AccordionContent"
+        ]
       },
       {
-        "token": "`--color-text-foreground`",
-        "usage": "Couleur des liens au hover dans le contenu"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "AccordionTrigger"
+        ]
       },
       {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité du trigger en état `disabled` (50 %)"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "AccordionTrigger via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--animate-accordion-down`",
-        "usage": "Animation d'ouverture du contenu"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "AccordionTrigger"
+        ]
       },
       {
-        "token": "`--animate-accordion-up`",
-        "usage": "Animation de fermeture du contenu"
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "AccordionContent",
+          "AccordionTrigger"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Accordion",
@@ -209,26 +250,86 @@
     ],
     "tokens": [
       {
-        "token": "`--color-background-subtle`",
-        "usage": "Fond de la carte (`bg-card`) pour les deux variantes"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "alertVariants"
+        ]
       },
       {
-        "token": "`--color-text-default`",
-        "usage": "Texte variante `default` (`text-card-foreground`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-card"
+        ],
+        "where": [
+          "alertVariants.variant.default",
+          "alertVariants.variant.destructive"
+        ]
       },
       {
-        "token": "`--color-feedback-error-default`",
-        "usage": "Texte variante `destructive` et description à 90 % d'opacité"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "text-destructive",
+          "text-destructive/90"
+        ],
+        "where": [
+          "alertVariants.variant.destructive"
+        ]
       },
       {
-        "token": "`--color-border-default`",
-        "usage": "Bordure de l'alerte"
+        "token": "color.text.default",
+        "classes": [
+          "text-card-foreground",
+          "text-foreground"
+        ],
+        "where": [
+          "AlertDescription",
+          "AlertTitle",
+          "alertVariants.variant.default"
+        ]
       },
       {
-        "token": "`--space-component-sm`",
-        "usage": "Gap interne (`gap-0.5`) entre titre et description"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "AlertDescription"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "AlertTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "AlertDescription"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs",
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "AlertDescription",
+          "alertVariants"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Alert",
@@ -411,37 +512,112 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond du contenu de la modale"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "AlertDialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte principal"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "AlertDialogMedia"
+        ]
       },
       {
-        "token": "`bg-black/10`",
-        "usage": "Fond de l'overlay"
+        "token": "color.static.black",
+        "classes": [
+          "bg-black/10"
+        ],
+        "where": [
+          "AlertDialogOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`ring-foreground/10`",
-        "usage": "Bordure subtile autour du contenu"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "AlertDialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)",
+          "AlertDialogDescription"
+        ]
       },
       {
-        "token": "`bg-muted`",
-        "usage": "Fond de la zone média/icône"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "AlertDialogDescription"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur du texte de description"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "AlertDialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)",
+          "AlertDialogOverlay"
+        ]
       },
       {
-        "token": "`font-heading`",
-        "usage": "Police du titre"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "AlertDialogTitle"
+        ]
       },
       {
-        "token": "`duration-fast`",
-        "usage": "Durée des animations d'entrée/sortie"
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "AlertDialogDescription"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "AlertDialogTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "AlertDialogDescription"
+        ]
+      },
+      {
+        "token": "zindex.modal",
+        "classes": [
+          "z-modal"
+        ],
+        "where": [
+          "AlertDialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)",
+          "AlertDialogOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Button"
     ],
     "props": [
       {
@@ -535,12 +711,8 @@
         "role": "Racine du composant, applique le ratio via padding-bottom"
       }
     ],
-    "tokens": [
-      {
-        "token": "—",
-        "usage": "Aucun token de design spécifique ; le composant est purement structurel"
-      }
-    ],
+    "tokens": [],
+    "tokens_from": [],
     "props": [
       {
         "component": "AspectRatio",
@@ -643,34 +815,102 @@
     ],
     "tokens": [
       {
-        "token": "`border-border`",
-        "usage": "Bordure interne de l'avatar (pseudo-élément `after`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Avatar"
+        ]
       },
       {
-        "token": "`bg-muted`",
-        "usage": "Fond du fallback et du compteur de groupe"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary"
+        ],
+        "where": [
+          "AvatarBadge"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Texte du fallback et du compteur"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "AvatarBadge"
+        ]
       },
       {
-        "token": "`bg-primary`",
-        "usage": "Fond du badge"
+        "token": "color.background.default",
+        "classes": [
+          "ring-background"
+        ],
+        "where": [
+          "AvatarBadge",
+          "AvatarGroupCount",
+          "AvatarGroup"
+        ]
       },
       {
-        "token": "`text-primary-foreground`",
-        "usage": "Icône / texte du badge"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "AvatarFallback",
+          "AvatarGroupCount"
+        ]
       },
       {
-        "token": "`ring-background`",
-        "usage": "Anneau séparateur du badge et des avatars dans un groupe"
+        "token": "color.border.default",
+        "classes": [
+          "border-border"
+        ],
+        "where": [
+          "Avatar"
+        ]
       },
       {
-        "token": "`z-dropdown`",
-        "usage": "Z-index du badge"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "AvatarFallback",
+          "AvatarGroupCount"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "AvatarFallback"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "AvatarFallback",
+          "AvatarGroupCount"
+        ]
+      },
+      {
+        "token": "zindex.dropdown",
+        "classes": [
+          "z-dropdown"
+        ],
+        "where": [
+          "AvatarBadge"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Avatar",
@@ -876,70 +1116,135 @@
     ],
     "tokens": [
       {
-        "token": "`bg-primary`",
-        "usage": "Fond variante `default`"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
       },
       {
-        "token": "`text-primary-foreground`",
-        "usage": "Texte variante `default`"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary",
+          "bg-primary/80",
+          "text-primary"
+        ],
+        "where": [
+          "badgeVariants.variant.default",
+          "badgeVariants.variant.link"
+        ]
       },
       {
-        "token": "`bg-secondary`",
-        "usage": "Fond variante `secondary`"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "badgeVariants.variant.default"
+        ]
       },
       {
-        "token": "`text-secondary-foreground`",
-        "usage": "Texte variante `secondary`"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted",
+          "bg-muted/50",
+          "bg-secondary",
+          "bg-secondary/80"
+        ],
+        "where": [
+          "badgeVariants.variant.ghost",
+          "badgeVariants.variant.outline",
+          "badgeVariants.variant.secondary"
+        ]
       },
       {
-        "token": "`bg-destructive/10`",
-        "usage": "Fond variante `destructive` (clair)"
+        "token": "color.border.default",
+        "classes": [
+          "border-border"
+        ],
+        "where": [
+          "badgeVariants.variant.outline"
+        ]
       },
       {
-        "token": "`bg-destructive/20`",
-        "usage": "Fond variante `destructive` (sombre)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "badgeVariants via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`text-destructive`",
-        "usage": "Texte variante `destructive`"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "bg-destructive/10",
+          "bg-destructive/20",
+          "border-destructive",
+          "border-destructive/40",
+          "ring-destructive/20",
+          "ring-destructive/40",
+          "text-destructive"
+        ],
+        "where": [
+          "badgeVariants.variant.destructive",
+          "badgeVariants.variant.destructive via FOCUS_RING_DESTRUCTIVE (lib/focus.ts)",
+          "badgeVariants"
+        ]
       },
       {
-        "token": "`border-border`",
-        "usage": "Bordure variante `outline`"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground",
+          "text-secondary-foreground"
+        ],
+        "where": [
+          "badgeVariants.variant.outline",
+          "badgeVariants.variant.secondary"
+        ]
       },
       {
-        "token": "`text-foreground`",
-        "usage": "Texte variante `outline`"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "badgeVariants.variant.ghost",
+          "badgeVariants.variant.outline"
+        ]
       },
       {
-        "token": "`bg-muted`",
-        "usage": "Fond variante `ghost` au hover"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "badgeVariants via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Texte variante `ghost` au hover"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
       },
       {
-        "token": "`text-primary`",
-        "usage": "Texte variante `link`"
-      },
-      {
-        "token": "`ring-ring/50`",
-        "usage": "Anneau de focus"
-      },
-      {
-        "token": "`border-ring`",
-        "usage": "Bordure au focus"
-      },
-      {
-        "token": "`border-destructive`",
-        "usage": "Bordure état `aria-invalid`"
-      },
-      {
-        "token": "`ring-destructive/20`",
-        "usage": "Anneau état `aria-invalid`"
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Badge",
@@ -1059,14 +1364,44 @@
     ],
     "tokens": [
       {
-        "token": "`--color-text-muted-foreground`",
-        "usage": "Couleur du texte de la liste et des séparateurs"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "BreadcrumbLink",
+          "BreadcrumbPage"
+        ]
       },
       {
-        "token": "`--color-text-foreground`",
-        "usage": "Couleur du lien au hover et de la page courante"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "BreadcrumbList"
+        ]
+      },
+      {
+        "token": "typography.font-weight.normal",
+        "classes": [
+          "font-normal"
+        ],
+        "where": [
+          "BreadcrumbPage"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "BreadcrumbList"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Breadcrumb",
@@ -1159,50 +1494,150 @@
     ],
     "tokens": [
       {
-        "token": "`--color-action-background-default`",
-        "usage": "Fond variante `default`"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "buttonVariants"
+        ]
       },
       {
-        "token": "`--color-action-background-foreground`",
-        "usage": "Texte/icône sur fond action"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary",
+          "bg-primary/80",
+          "text-primary"
+        ],
+        "where": [
+          "buttonVariants.variant.default",
+          "buttonVariants.variant.link"
+        ]
       },
       {
-        "token": "`--color-background-default`",
-        "usage": "Fond variante `outline` et `ghost` au hover"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "buttonVariants.variant.default"
+        ]
       },
       {
-        "token": "`--color-background-subtle`",
-        "usage": "Fond variante `secondary`"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "buttonVariants.variant.outline"
+        ]
       },
       {
-        "token": "`--color-border-default`",
-        "usage": "Bordure variante `outline`"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted",
+          "bg-muted/50",
+          "bg-secondary",
+          "bg-secondary/80"
+        ],
+        "where": [
+          "buttonVariants.variant.ghost",
+          "buttonVariants.variant.outline",
+          "buttonVariants.variant.secondary"
+        ]
       },
       {
-        "token": "`--color-border-focus`",
-        "usage": "Anneau de focus `focus-visible`"
+        "token": "color.border.default",
+        "classes": [
+          "border-border"
+        ],
+        "where": [
+          "buttonVariants.variant.outline"
+        ]
       },
       {
-        "token": "`--color-feedback-error-default`",
-        "usage": "Bordure et anneau état `aria-invalid`"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "buttonVariants via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-text-default`",
-        "usage": "Texte variante `ghost`, `link`, `secondary`"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "bg-input/50",
+          "border-input"
+        ],
+        "where": [
+          "buttonVariants.variant.outline"
+        ]
       },
       {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité état `disabled` (50 %)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "bg-destructive/10",
+          "bg-destructive/20",
+          "bg-destructive/30",
+          "border-destructive",
+          "border-destructive/40",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40",
+          "text-destructive"
+        ],
+        "where": [
+          "buttonVariants.variant.destructive",
+          "buttonVariants.variant.destructive via FOCUS_RING_DESTRUCTIVE (lib/focus.ts)",
+          "buttonVariants"
+        ]
       },
       {
-        "token": "`--motion-duration-normal`",
-        "usage": "Durée des transitions"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground",
+          "text-secondary-foreground"
+        ],
+        "where": [
+          "buttonVariants.variant.ghost",
+          "buttonVariants.variant.outline",
+          "buttonVariants.variant.secondary"
+        ]
       },
       {
-        "token": "`--motion-easing-default`",
-        "usage": "Courbe des transitions"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "buttonVariants",
+          "buttonVariants via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "buttonVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "buttonVariants.size.xs",
+          "buttonVariants"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Button",
@@ -1315,21 +1750,62 @@
     ],
     "tokens": [
       {
-        "token": "`bg-muted`",
-        "usage": "Fond du `ButtonGroupText`"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "ButtonGroupText"
+        ]
       },
       {
-        "token": "`border`",
-        "usage": "Bordure du `ButtonGroupText`"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "ButtonGroupText"
+        ]
       },
       {
-        "token": "`bg-input`",
-        "usage": "Couleur du `ButtonGroupSeparator`"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input"
+        ],
+        "where": [
+          "ButtonGroupSeparator"
+        ]
       },
       {
-        "token": "`z-dropdown`",
-        "usage": "Z-index des éléments en focus au sein du groupe"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "ButtonGroupText"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ButtonGroupText"
+        ]
+      },
+      {
+        "token": "zindex.dropdown",
+        "classes": [
+          "z-dropdown"
+        ],
+        "where": [
+          "buttonGroupVariants"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Separator"
     ],
     "props": [
       {
@@ -1483,41 +1959,148 @@
     ],
     "tokens": [
       {
-        "token": "`--color-background`",
-        "usage": "Fond principal du calendrier (`bg-background`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary"
+        ],
+        "where": [
+          "CalendarDayButton"
+        ]
       },
       {
-        "token": "`--color-muted`",
-        "usage": "Fond du jour courant et des plages sélectionnées (`bg-muted`)"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "CalendarDayButton"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte des jours extérieurs, des jours de la semaine et des numéros de semaine"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "Calendar"
+        ]
       },
       {
-        "token": "`--color-primary`",
-        "usage": "Fond du jour sélectionné et des extrémités de plage (`bg-primary`)"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "Calendar.dropdown"
+        ]
       },
       {
-        "token": "`--color-primary-foreground`",
-        "usage": "Texte du jour sélectionné (`text-primary-foreground`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "Calendar.range_end",
+          "Calendar.range_start",
+          "Calendar.today",
+          "CalendarDayButton"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Texte du jour courant (`text-foreground`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "CalendarDayButton"
+        ]
       },
       {
-        "token": "`--color-popover`",
-        "usage": "Fond du dropdown de sélection mois/année (`bg-popover`)"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "Calendar.today",
+          "CalendarDayButton"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus sur les jours (`border-ring`, `ring-ring/50`)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "Calendar.caption_label",
+          "Calendar.disabled",
+          "Calendar.outside",
+          "Calendar.week_number",
+          "Calendar.weekday"
+        ]
       },
       {
-        "token": "`--spacing-7`",
-        "usage": "Taille des cellules via `--cell-size`"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "CalendarDayButton"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "Calendar.caption_label",
+          "Calendar.dropdowns"
+        ]
+      },
+      {
+        "token": "typography.font-weight.normal",
+        "classes": [
+          "font-normal"
+        ],
+        "where": [
+          "Calendar.weekday",
+          "CalendarDayButton"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "Calendar.caption_label",
+          "Calendar.dropdowns"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "Calendar.week_number",
+          "Calendar.weekday",
+          "CalendarDayButton"
+        ]
+      },
+      {
+        "token": "zindex.dropdown",
+        "classes": [
+          "z-dropdown"
+        ],
+        "where": [
+          "CalendarDayButton"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Button"
     ],
     "props": [
       {
@@ -1668,30 +2251,82 @@
     ],
     "tokens": [
       {
-        "token": "`--color-background-subtle`",
-        "usage": "Fond de la carte (`bg-card`)"
+        "token": "border-width.default",
+        "classes": [
+          "border-t"
+        ],
+        "where": [
+          "CardFooter"
+        ]
       },
       {
-        "token": "`--color-text-default`",
-        "usage": "Texte principal (`text-card-foreground`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-card"
+        ],
+        "where": [
+          "Card"
+        ]
       },
       {
-        "token": "`--color-text-subtle`",
-        "usage": "Texte de `CardDescription`"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-card-foreground"
+        ],
+        "where": [
+          "Card"
+        ]
       },
       {
-        "token": "`--color-border-default`",
-        "usage": "Bordure supérieure de `CardFooter` et anneau `ring-foreground/10`"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "CardDescription"
+        ]
       },
       {
-        "token": "`--space-component-md`",
-        "usage": "Gap interne `gap-4` (default)"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "CardTitle"
+        ]
       },
       {
-        "token": "`--space-component-lg`",
-        "usage": "Padding `py-4`, `px-4` (default)"
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "CardDescription",
+          "Card"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "CardTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "CardDescription",
+          "Card"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Card",
@@ -1886,15 +2521,9 @@
         "role": "Bouton de navigation vers la slide suivante"
       }
     ],
-    "tokens": [
-      {
-        "token": "`--spacing-4`",
-        "usage": "Espacement entre les slides (`pl-4` horizontal, `pt-4` vertical)"
-      },
-      {
-        "token": "`--spacing-12`",
-        "usage": "Positionnement des boutons de navigation (`-left-12`, `-right-12`)"
-      }
+    "tokens": [],
+    "tokens_from": [
+      "Button"
     ],
     "props": [
       {
@@ -2028,6 +2657,7 @@
       "Ne pas utiliser pour des tableaux de données brutes — préférer `Table` pour les données tabulaires",
       "Le `ChartContainer` doit toujours recevoir un `config` valide avec au moins une entrée",
       "Les couleurs définies via `theme` dans `ChartConfig` prennent priorité sur `color`",
+      "Chaque clé de `config` devient une variable `--color-<clé>`, injectée par `ChartStyle` : la lire dans les séries (`fill=\"var(--color-revenue)\"`). Ce n'est pas un token : sa valeur vient de `config`",
       "Ne pas imbriquer plusieurs `ChartContainer` — chaque graphique doit avoir son propre conteneur",
       "Prévoir un texte alternatif ou un tableau de données associé pour l'accessibilité (les graphiques SVG ne sont pas lus par les lecteurs d'écran)"
     ],
@@ -2043,30 +2673,114 @@
     ],
     "tokens": [
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte des axes et des labels dans le tooltip (`fill-muted-foreground`, `text-muted-foreground`)"
+        "token": "border-width.chart-indicator",
+        "classes": [
+          "border-chart-indicator"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
       },
       {
-        "token": "`--color-border`",
-        "usage": "Lignes de grille, curseur et lignes de référence (`stroke-border`, `stroke-border/50`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
       },
       {
-        "token": "`--color-muted`",
-        "usage": "Fond du secteur d'arrière-plan des barres radiales et curseur rectangle (`fill-muted`)"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
       },
       {
-        "token": "`--color-background`",
-        "usage": "Fond du tooltip (`bg-background`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "fill-muted"
+        ],
+        "where": [
+          "ChartContainer"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Texte des valeurs dans le tooltip (`text-foreground`)"
+        "token": "color.border.default",
+        "classes": [
+          "border-border/50",
+          "stroke-border",
+          "stroke-border/50"
+        ],
+        "where": [
+          "ChartContainer",
+          "ChartTooltipContent"
+        ]
       },
       {
-        "token": "`--color-{key}`",
-        "usage": "Couleurs dynamiques par série, générées via `ChartStyle` à partir de `ChartConfig`"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "fill-muted-foreground",
+          "text-muted-foreground"
+        ],
+        "where": [
+          "ChartContainer",
+          "ChartLegendContent",
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "elevation.xl",
+        "classes": [
+          "shadow-xl"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "radius.xs",
+        "classes": [
+          "rounded-xs"
+        ],
+        "where": [
+          "ChartLegendContent",
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ChartContainer",
+          "ChartTooltipContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "ChartContainer",
@@ -2254,30 +2968,77 @@
     ],
     "tokens": [
       {
-        "token": "`--color-border-input`",
-        "usage": "Bordure état non coché par défaut"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Checkbox"
+        ]
       },
       {
-        "token": "`--color-border-focus`",
-        "usage": "Bordure + anneau `focus-visible`"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary",
+          "border-primary"
+        ],
+        "where": [
+          "Checkbox"
+        ]
       },
       {
-        "token": "`--color-action-background-default`",
-        "usage": "Fond état coché (`bg-primary`)"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "Checkbox"
+        ]
       },
       {
-        "token": "`--color-action-background-foreground`",
-        "usage": "Couleur de l'icône cochée (`text-primary-foreground`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "Checkbox via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-feedback-error-default`",
-        "usage": "Bordure et anneau état `aria-invalid`"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "border-input"
+        ],
+        "where": [
+          "Checkbox"
+        ]
       },
       {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité 50 % état `disabled`"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "Checkbox"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "Checkbox",
+          "Checkbox via FOCUS_RING (lib/focus.ts)"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Checkbox",
@@ -2421,12 +3182,8 @@
         "role": "Zone de contenu affichée ou masquée"
       }
     ],
-    "tokens": [
-      {
-        "token": "—",
-        "usage": "Aucun token de design spécifique ; le style est délégué au contenu enfant"
-      }
-    ],
+    "tokens": [],
+    "tokens_from": [],
     "props": [
       {
         "component": "Collapsible",
@@ -2591,49 +3348,165 @@
     ],
     "tokens": [
       {
-        "token": "`--color-popover`",
-        "usage": "Fond du popup (`bg-popover`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "ComboboxChips"
+        ]
       },
       {
-        "token": "`--color-popover-foreground`",
-        "usage": "Texte dans le popup (`text-popover-foreground`)"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "ComboboxContent"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte secondaire : labels, icône trigger (`text-muted-foreground`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-accent",
+          "bg-muted"
+        ],
+        "where": [
+          "ComboboxChip",
+          "ComboboxItem"
+        ]
       },
       {
-        "token": "`--color-accent`",
-        "usage": "Fond de l'option survolée (`bg-accent`)"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "ComboboxSeparator"
+        ]
       },
       {
-        "token": "`--color-accent-foreground`",
-        "usage": "Texte de l'option survolée (`text-accent-foreground`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "ComboboxChips via FOCUS_RING_WITHIN (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Bordure anneau du popup (`ring-foreground/10`), texte chip (`text-foreground`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "border-input",
+          "border-input/30"
+        ],
+        "where": [
+          "ComboboxChips",
+          "ComboboxContent"
+        ]
       },
       {
-        "token": "`--color-input`",
-        "usage": "Bordure du conteneur chips (`border-input`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "ComboboxChips"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus des chips (`ring-ring/50`)"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-accent-foreground",
+          "text-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "ComboboxChip",
+          "ComboboxContent",
+          "ComboboxItem"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "ComboboxEmpty",
+          "ComboboxLabel",
+          "ComboboxTrigger"
+        ]
       },
       {
-        "token": "`--color-muted`",
-        "usage": "Fond des chips (`bg-muted`)"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "ComboboxContent"
+        ]
       },
       {
-        "token": "`--color-border`",
-        "usage": "Séparateur (`bg-border`)"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "ComboboxContent"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "ComboboxChips",
+          "ComboboxChips via FOCUS_RING_WITHIN (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "ComboboxChip"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ComboboxChip",
+          "ComboboxChips",
+          "ComboboxEmpty",
+          "ComboboxItem",
+          "ComboboxLabel"
+        ]
+      },
+      {
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "ComboboxContent"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Button",
+      "InputGroup"
     ],
     "props": [
       {
@@ -2884,33 +3757,91 @@
     ],
     "tokens": [
       {
-        "token": "`--color-popover`",
-        "usage": "Fond du composant command (`bg-popover`)"
+        "token": "border-width.default",
+        "classes": [
+          "border-b"
+        ],
+        "where": [
+          "CommandInput"
+        ]
       },
       {
-        "token": "`--color-popover-foreground`",
-        "usage": "Texte principal (`text-popover-foreground`)"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "Command"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Texte des items et groupes (`text-foreground`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "CommandItem"
+        ]
       },
       {
-        "token": "`--color-muted`",
-        "usage": "Fond de l'item sélectionné (`bg-muted`)"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "CommandSeparator"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte secondaire : labels de groupe, raccourcis, icône recherche (`text-muted-foreground`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "border-input/30"
+        ],
+        "where": [
+          "CommandInput"
+        ]
       },
       {
-        "token": "`--color-border`",
-        "usage": "Séparateur (`bg-border`)"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "CommandGroup",
+          "CommandItem",
+          "CommandShortcut",
+          "Command"
+        ]
       },
       {
-        "token": "`--color-input`",
-        "usage": "Bordure du champ de recherche (`border-input/30`, `bg-input/30`)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "CommandGroup",
+          "CommandShortcut"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "CommandEmpty",
+          "CommandGroup",
+          "CommandInput",
+          "CommandItem",
+          "CommandShortcut"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Dialog",
+      "InputGroup"
     ],
     "props": [
       {
@@ -3108,46 +4039,137 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond du menu et sous-menu"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "ContextMenuSubContent"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte des items"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "ContextMenuContent",
+          "ContextMenuSubContent"
+        ]
       },
       {
-        "token": "`bg-accent`",
-        "usage": "Fond de l'item au focus"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-accent"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuRadioItem",
+          "ContextMenuSubTrigger"
+        ]
       },
       {
-        "token": "`text-accent-foreground`",
-        "usage": "Texte de l'item au focus"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "ContextMenuSeparator"
+        ]
       },
       {
-        "token": "`text-destructive`",
-        "usage": "Texte d'un item destructeur"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "bg-destructive/10",
+          "bg-destructive/20",
+          "text-destructive"
+        ],
+        "where": [
+          "ContextMenuItem"
+        ]
       },
       {
-        "token": "`bg-destructive/10`",
-        "usage": "Fond d'un item destructeur au focus"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-accent-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuContent",
+          "ContextMenuItem",
+          "ContextMenuRadioItem",
+          "ContextMenuShortcut",
+          "ContextMenuSubContent",
+          "ContextMenuSubTrigger"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur des labels et raccourcis"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "ContextMenuLabel",
+          "ContextMenuShortcut"
+        ]
       },
       {
-        "token": "`bg-border`",
-        "usage": "Couleur du séparateur"
+        "token": "elevation.lg",
+        "classes": [
+          "shadow-lg"
+        ],
+        "where": [
+          "ContextMenuSubContent"
+        ]
       },
       {
-        "token": "`ring-foreground/10`",
-        "usage": "Bordure subtile du contenu"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "ContextMenuContent"
+        ]
       },
       {
-        "token": "`duration-fast`",
-        "usage": "Durée des animations d'entrée/sortie"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "ContextMenuContent",
+          "ContextMenuSubContent"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuLabel",
+          "ContextMenuRadioItem",
+          "ContextMenuShortcut",
+          "ContextMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "ContextMenuContent",
+          "ContextMenuSubContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "ContextMenu",
@@ -3284,37 +4306,114 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond du contenu de la modale"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte principal"
+        "token": "color.static.black",
+        "classes": [
+          "bg-black/10"
+        ],
+        "where": [
+          "DialogOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`bg-black/10`",
-        "usage": "Fond de l'overlay"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)",
+          "DialogDescription"
+        ]
       },
       {
-        "token": "`ring-foreground/10`",
-        "usage": "Bordure subtile autour du contenu"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "DialogDescription"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur du texte de description"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)",
+          "DialogOverlay"
+        ]
       },
       {
-        "token": "`font-heading`",
-        "usage": "Police du titre"
+        "token": "space.component.lg",
+        "classes": [
+          "max-w-[calc(100%-var(--space-component-lg))]"
+        ],
+        "where": [
+          "DialogContent"
+        ]
       },
       {
-        "token": "`--space-component-lg`",
-        "usage": "Marge max-width responsive du contenu"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "DialogTitle"
+        ]
       },
       {
-        "token": "`duration-fast`",
-        "usage": "Durée des animations d'entrée/sortie"
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "DialogContent",
+          "DialogDescription"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "DialogTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "DialogContent",
+          "DialogDescription"
+        ]
+      },
+      {
+        "token": "zindex.modal",
+        "classes": [
+          "z-modal"
+        ],
+        "where": [
+          "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)",
+          "DialogOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Button"
     ],
     "props": [
       {
@@ -3411,12 +4510,8 @@
         "role": "Aucun slot ; le composant est un fournisseur de contexte sans rendu DOM propre"
       }
     ],
-    "tokens": [
-      {
-        "token": "—",
-        "usage": "Aucun token de design ; composant purement logique"
-      }
-    ],
+    "tokens": [],
+    "tokens_from": [],
     "props": [
       {
         "component": "Direction",
@@ -3542,34 +4637,114 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond du contenu du drawer"
+        "token": "border-width.default",
+        "classes": [
+          "border-b",
+          "border-l",
+          "border-r",
+          "border-t"
+        ],
+        "where": [
+          "DrawerContent"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte principal"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`bg-black/10`",
-        "usage": "Fond de l'overlay"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "DrawerContent"
+        ]
       },
       {
-        "token": "`bg-muted`",
-        "usage": "Indicateur de glissement (handle) en direction bottom"
+        "token": "color.static.black",
+        "classes": [
+          "bg-black/10"
+        ],
+        "where": [
+          "DrawerOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`text-foreground`",
-        "usage": "Couleur du titre"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "DrawerTitle"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur de la description"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "DrawerDescription"
+        ]
       },
       {
-        "token": "`font-heading`",
-        "usage": "Police du titre"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "DrawerTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "DrawerDescription"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "DrawerTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "DrawerDescription"
+        ]
+      },
+      {
+        "token": "zindex.modal",
+        "classes": [
+          "z-modal"
+        ],
+        "where": [
+          "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "DrawerOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Drawer",
@@ -3736,50 +4911,128 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond du menu et sous-menu"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "DropdownMenuContent",
+          "DropdownMenuSubContent"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte des items"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-accent"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuRadioItem",
+          "DropdownMenuSubTrigger"
+        ]
       },
       {
-        "token": "`bg-accent`",
-        "usage": "Fond de l'item au focus"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "DropdownMenuSeparator"
+        ]
       },
       {
-        "token": "`text-accent-foreground`",
-        "usage": "Texte de l'item au focus"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "bg-destructive/10",
+          "bg-destructive/20",
+          "text-destructive"
+        ],
+        "where": [
+          "DropdownMenuItem"
+        ]
       },
       {
-        "token": "`text-destructive`",
-        "usage": "Texte d'un item destructeur"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-accent-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuContent",
+          "DropdownMenuItem",
+          "DropdownMenuRadioItem",
+          "DropdownMenuShortcut",
+          "DropdownMenuSubContent",
+          "DropdownMenuSubTrigger"
+        ]
       },
       {
-        "token": "`bg-destructive/10`",
-        "usage": "Fond d'un item destructeur au focus (light)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "DropdownMenuLabel",
+          "DropdownMenuShortcut"
+        ]
       },
       {
-        "token": "`bg-destructive/20`",
-        "usage": "Fond d'un item destructeur au focus (dark)"
+        "token": "elevation.lg",
+        "classes": [
+          "shadow-lg"
+        ],
+        "where": [
+          "DropdownMenuSubContent"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur des labels et raccourcis"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "DropdownMenuContent"
+        ]
       },
       {
-        "token": "`bg-border`",
-        "usage": "Couleur du séparateur"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "DropdownMenuContent",
+          "DropdownMenuSubContent"
+        ]
       },
       {
-        "token": "`ring-foreground/10`",
-        "usage": "Bordure subtile du contenu"
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuLabel",
+          "DropdownMenuRadioItem",
+          "DropdownMenuShortcut",
+          "DropdownMenuSubTrigger"
+        ]
       },
       {
-        "token": "`duration-fast`",
-        "usage": "Durée des animations d'entrée/sortie"
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "DropdownMenuContent",
+          "DropdownMenuSubContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "DropdownMenu",
@@ -3905,26 +5158,81 @@
     ],
     "tokens": [
       {
-        "token": "`bg-muted`",
-        "usage": "Fond de la variante `icon` de `EmptyMedia`"
+        "token": "color.action.background.default",
+        "classes": [
+          "text-primary"
+        ],
+        "where": [
+          "EmptyDescription"
+        ]
       },
       {
-        "token": "`text-foreground`",
-        "usage": "Couleur d'icône variante `icon`"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "emptyMediaVariants.variant.icon"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur du texte de description"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "emptyMediaVariants.variant.icon"
+        ]
       },
       {
-        "token": "`text-primary`",
-        "usage": "Couleur des liens au hover dans la description"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "EmptyDescription"
+        ]
       },
       {
-        "token": "`font-heading`",
-        "usage": "Police du titre"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "EmptyTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "EmptyDescription"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "EmptyTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs",
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "EmptyContent",
+          "EmptyDescription"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Empty",
@@ -4170,29 +5478,132 @@
     ],
     "tokens": [
       {
-        "token": "`--color-text-default`",
-        "usage": "Texte de `FieldLegend`, `FieldLabel` et `FieldTitle`"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "FieldLabel"
+        ]
       },
       {
-        "token": "`--color-text-subtle`",
-        "usage": "Couleur de `FieldDescription` (`text-muted-foreground`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary/10",
+          "bg-primary/5",
+          "border-primary/20",
+          "border-primary/30",
+          "text-primary"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldLabel"
+        ]
       },
       {
-        "token": "`--color-feedback-error-default`",
-        "usage": "Couleur de `FieldError` et de `Field` quand `data-invalid=\"true\"` (`text-destructive`)"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "FieldSeparator"
+        ]
       },
       {
-        "token": "`--color-action-background-default`",
-        "usage": "Bordure et fond d'un `FieldLabel` sélectionné (`has-data-checked`), lien survolé dans `FieldDescription`"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "FieldError",
+          "fieldVariants"
+        ]
       },
       {
-        "token": "`--color-background-default`",
-        "usage": "Fond du libellé de `FieldSeparator` (`bg-background`)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldSeparator"
+        ]
       },
       {
-        "token": "`--space-component-sm`",
-        "usage": "Gap entre label et contrôle dans `Field` (`gap-2`)"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "FieldLegend"
+        ]
+      },
+      {
+        "token": "typography.font-weight.normal",
+        "classes": [
+          "font-normal"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldError"
+        ]
+      },
+      {
+        "token": "typography.line-height.normal",
+        "classes": [
+          "leading-normal"
+        ],
+        "where": [
+          "FieldDescription"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.snug",
+        "classes": [
+          "leading-snug"
+        ],
+        "where": [
+          "FieldContent",
+          "FieldLabel"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "FieldLegend"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs",
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldError",
+          "FieldLegend",
+          "FieldSeparator",
+          "FieldTitle"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Label",
+      "Separator"
     ],
     "props": [
       {
@@ -4452,14 +5863,61 @@
     ],
     "tokens": [
       {
-        "token": "`--font-heading`",
-        "usage": "Famille typographique (classe `font-heading`)"
+        "token": "typography.font-weight.semibold",
+        "classes": [
+          "font-semibold"
+        ],
+        "where": [
+          "headingVariants"
+        ]
       },
       {
-        "token": "`--foreground`",
-        "usage": "Couleur du texte, héritée du contexte"
+        "token": "typography.letter-spacing.tight",
+        "classes": [
+          "tracking-tight"
+        ],
+        "where": [
+          "headingVariants"
+        ]
+      },
+      {
+        "token": "typography.size.2xl",
+        "classes": [
+          "text-2xl"
+        ],
+        "where": [
+          "headingVariants.level.1"
+        ]
+      },
+      {
+        "token": "typography.size.base",
+        "classes": [
+          "text-base"
+        ],
+        "where": [
+          "headingVariants.level.4"
+        ]
+      },
+      {
+        "token": "typography.size.lg",
+        "classes": [
+          "text-lg"
+        ],
+        "where": [
+          "headingVariants.level.3"
+        ]
+      },
+      {
+        "token": "typography.size.xl",
+        "classes": [
+          "text-xl"
+        ],
+        "where": [
+          "headingVariants.level.2"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Heading",
@@ -4569,26 +6027,71 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond de la carte flottante"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
       },
       {
-        "token": "`ring-foreground/10`",
-        "usage": "Bordure subtile autour du contenu"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
       },
       {
-        "token": "`shadow-md`",
-        "usage": "Ombre portée de la carte"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
       },
       {
-        "token": "`duration-fast`",
-        "usage": "Durée des animations d'entrée/sortie"
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
+      },
+      {
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "HoverCard",
@@ -4704,14 +6207,25 @@
     ],
     "tokens": [
       {
-        "token": "`--muted`",
-        "usage": "Fond du conteneur (`bg-muted`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "Illustration"
+        ]
       },
       {
-        "token": "`--muted-foreground`",
-        "usage": "Couleur du tracé SVG (`text-muted-foreground` + `currentColor`)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "Illustration"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Illustration",
@@ -4804,34 +6318,96 @@
     ],
     "tokens": [
       {
-        "token": "`--color-border-input`",
-        "usage": "Bordure par défaut"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Input"
+        ]
       },
       {
-        "token": "`--color-border-focus`",
-        "usage": "Bordure + anneau au focus"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "Input via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-feedback-error-default`",
-        "usage": "Bordure et anneau état `aria-invalid`"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "bg-input/50",
+          "bg-input/80",
+          "border-input"
+        ],
+        "where": [
+          "Input"
+        ]
       },
       {
-        "token": "`--color-text-subtle`",
-        "usage": "Couleur du placeholder"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "Input"
+        ]
       },
       {
-        "token": "`--color-text-default`",
-        "usage": "Couleur du texte saisi"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "Input"
+        ]
       },
       {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité état `disabled` (50 %)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "Input"
+        ]
       },
       {
-        "token": "`--motion-duration-fast`",
-        "usage": "Durée de transition des couleurs"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "Input",
+          "Input via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "Input"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Input",
@@ -4932,21 +6508,91 @@
     ],
     "tokens": [
       {
-        "token": "`--color-input`",
-        "usage": "Bordure du groupe (`border-input`), fond disabled (`bg-input/50`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "InputGroup"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus (`ring-ring/50`, `border-ring`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "InputGroup"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "bg-input/50",
+          "bg-input/80",
+          "border-input"
+        ],
+        "where": [
+          "InputGroup"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte des addons et labels (`text-muted-foreground`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "InputGroup"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "InputGroupText",
+          "inputGroupAddonVariants"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "InputGroup"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "inputGroupAddonVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "InputGroupText",
+          "inputGroupAddonVariants",
+          "inputGroupButtonVariants"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Button",
+      "Input",
+      "Textarea"
     ],
     "props": [
       {
@@ -5140,22 +6786,96 @@
     ],
     "tokens": [
       {
-        "token": "`--color-input`",
-        "usage": "Bordure des slots (`border-input`)"
+        "token": "border-width.default",
+        "classes": [
+          "border-l",
+          "border-r",
+          "border-y"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Bordure et anneau du slot actif (`border-ring`, `ring-ring/50`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "border-input"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Caret animé (`bg-foreground`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "InputOTPGroup",
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "bg-foreground"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "motion.duration.extra-slow",
+        "classes": [
+          "duration-extra-slow"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "InputOTPGroup",
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "zindex.dropdown",
+        "classes": [
+          "z-dropdown"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "InputOtp",
@@ -5351,37 +7071,122 @@
     ],
     "tokens": [
       {
-        "token": "`border-border`",
-        "usage": "Bordure variante `outline`"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "itemVariants"
+        ]
       },
       {
-        "token": "`border-transparent`",
-        "usage": "Bordure variantes `default` et `muted`"
+        "token": "color.action.background.default",
+        "classes": [
+          "text-primary"
+        ],
+        "where": [
+          "ItemDescription"
+        ]
       },
       {
-        "token": "`bg-muted/50`",
-        "usage": "Fond variante `muted`"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted",
+          "bg-muted/50"
+        ],
+        "where": [
+          "itemVariants.variant.muted",
+          "itemVariants"
+        ]
       },
       {
-        "token": "`bg-muted`",
-        "usage": "Fond au hover des liens enfants"
+        "token": "color.border.default",
+        "classes": [
+          "border-border"
+        ],
+        "where": [
+          "itemVariants.variant.outline"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Texte de la description et hover des liens"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "itemVariants via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`text-primary`",
-        "usage": "Couleur des liens au hover dans la description"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "ItemDescription"
+        ]
       },
       {
-        "token": "`border-ring`",
-        "usage": "Bordure au focus-visible"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "itemVariants"
+        ]
       },
       {
-        "token": "`ring-ring/50`",
-        "usage": "Anneau de focus"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "itemVariants via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "ItemTitle"
+        ]
+      },
+      {
+        "token": "typography.font-weight.normal",
+        "classes": [
+          "font-normal"
+        ],
+        "where": [
+          "ItemDescription"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "ItemDescription"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs",
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "ItemDescription",
+          "ItemTitle",
+          "itemVariants"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Separator"
     ],
     "props": [
       {
@@ -5695,26 +7500,54 @@
     ],
     "tokens": [
       {
-        "token": "`bg-muted`",
-        "usage": "Fond de la touche par défaut"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background/10",
+          "bg-background/20",
+          "text-background"
+        ],
+        "where": [
+          "Kbd"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur du texte de la touche"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "Kbd"
+        ]
       },
       {
-        "token": "`bg-background/20`",
-        "usage": "Fond dans un tooltip (thème clair)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "Kbd"
+        ]
       },
       {
-        "token": "`text-background`",
-        "usage": "Texte dans un tooltip"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "Kbd"
+        ]
       },
       {
-        "token": "`bg-background/10`",
-        "usage": "Fond dans un tooltip (thème sombre)"
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "Kbd"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Kbd",
@@ -5821,22 +7654,16 @@
     ],
     "tokens": [
       {
-        "token": "`--color-text-default`",
-        "usage": "Couleur du texte du label"
-      },
-      {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité à 50 % quand le contrôle peer est désactivé"
-      },
-      {
-        "token": "`--typography-size-xs`",
-        "usage": "Taille de police `text-xs`"
-      },
-      {
-        "token": "`--typography-line-height-tight`",
-        "usage": "Interligne `leading-none`"
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "Label"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Label",
@@ -5935,18 +7762,70 @@
     ],
     "tokens": [
       {
-        "token": "`--primary`",
-        "usage": "Fond du carré pictogramme (`bg-primary`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary"
+        ],
+        "where": [
+          "Logo"
+        ]
       },
       {
-        "token": "`--primary-foreground`",
-        "usage": "Couleur du tracé du pictogramme"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "Logo"
+        ]
       },
       {
-        "token": "`--font-heading`",
-        "usage": "Famille typographique portée par le conteneur"
+        "token": "typography.font-weight.bold",
+        "classes": [
+          "font-bold"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.letter-spacing.tight",
+        "classes": [
+          "tracking-tight"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.size.2xl",
+        "classes": [
+          "text-2xl"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.size.base",
+        "classes": [
+          "text-base"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.size.xl",
+        "classes": [
+          "text-xl"
+        ],
+        "where": [
+          "Logo"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Logo",
@@ -6099,54 +7978,167 @@
     ],
     "tokens": [
       {
-        "token": "`--color-background-muted`",
-        "usage": "Fond du trigger au hover/expanded et fond du sub-trigger au focus/open"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Menubar"
+        ]
       },
       {
-        "token": "`--color-background-popover`",
-        "usage": "Fond du contenu de menu et sous-menu"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "MenubarContent",
+          "MenubarSubContent"
+        ]
       },
       {
-        "token": "`--color-text-popover-foreground`",
-        "usage": "Texte du contenu de menu"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-accent",
+          "bg-muted"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarRadioItem",
+          "MenubarSubTrigger",
+          "MenubarTrigger"
+        ]
       },
       {
-        "token": "`--color-background-accent`",
-        "usage": "Fond de l'item au focus"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "MenubarSeparator"
+        ]
       },
       {
-        "token": "`--color-text-accent-foreground`",
-        "usage": "Texte de l'item au focus"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "MenubarTrigger via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-text-destructive`",
-        "usage": "Texte de l'item en variante `destructive`"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "bg-destructive/10",
+          "bg-destructive/20",
+          "text-destructive"
+        ],
+        "where": [
+          "MenubarItem"
+        ]
       },
       {
-        "token": "`--color-background-destructive`",
-        "usage": "Fond atténué de l'item destructive au focus (10 %/20 %)"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-accent-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarContent",
+          "MenubarItem",
+          "MenubarRadioItem",
+          "MenubarShortcut",
+          "MenubarSubContent",
+          "MenubarSubTrigger"
+        ]
       },
       {
-        "token": "`--color-text-muted-foreground`",
-        "usage": "Texte du raccourci clavier et des labels"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "MenubarShortcut"
+        ]
       },
       {
-        "token": "`--color-border-default`",
-        "usage": "Bordure de la barre de menus et séparateurs"
+        "token": "elevation.lg",
+        "classes": [
+          "shadow-lg"
+        ],
+        "where": [
+          "MenubarSubContent"
+        ]
       },
       {
-        "token": "`--color-border-foreground`",
-        "usage": "Anneau subtil autour du contenu (`ring-foreground/10`)"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "MenubarContent"
+        ]
       },
       {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité des items désactivés (50 %)"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "MenubarContent",
+          "MenubarSubContent"
+        ]
       },
       {
-        "token": "`--duration-fast`",
-        "usage": "Durée des animations d'entrée/sortie du contenu"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "MenubarTrigger via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "MenubarTrigger"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarLabel",
+          "MenubarRadioItem",
+          "MenubarShortcut",
+          "MenubarSubTrigger",
+          "MenubarTrigger"
+        ]
+      },
+      {
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "MenubarContent",
+          "MenubarSubContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Menubar",
@@ -6281,30 +8273,95 @@
     ],
     "tokens": [
       {
-        "token": "`--color-input`",
-        "usage": "Bordure du select (`border-input`), fond dark (`bg-input/30`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus (`ring-ring/50`, `border-ring`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte placeholder et icône chevron (`text-muted-foreground`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "NativeSelect via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-primary`",
-        "usage": "Fond de la sélection de texte (`bg-primary`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "bg-input/50",
+          "border-input"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
       },
       {
-        "token": "`--color-primary-foreground`",
-        "usage": "Texte de la sélection (`text-primary-foreground`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "NativeSelect",
+          "NativeSelect via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "NativeSelect",
@@ -6471,42 +8528,135 @@
     ],
     "tokens": [
       {
-        "token": "`--color-background-muted`",
-        "usage": "Fond du trigger et du lien au hover/focus/active"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuViewport"
+        ]
       },
       {
-        "token": "`--color-background-popover`",
-        "usage": "Fond du viewport et du contenu (mode sans viewport)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted",
+          "bg-muted/50"
+        ],
+        "where": [
+          "NavigationMenuLink",
+          "navigationMenuTriggerStyle"
+        ]
       },
       {
-        "token": "`--color-text-popover-foreground`",
-        "usage": "Texte dans le viewport et le contenu"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "NavigationMenuIndicator"
+        ]
       },
       {
-        "token": "`--color-border-ring`",
-        "usage": "Anneau de focus visible sur trigger et lien (`ring-ring/50`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "NavigationMenuLink via FOCUS_RING (lib/focus.ts)",
+          "navigationMenuTriggerStyle via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-border-foreground`",
-        "usage": "Anneau subtil autour du viewport (`ring-foreground/10`)"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuViewport"
+        ]
       },
       {
-        "token": "`--color-background-border`",
-        "usage": "Fond de la flèche indicateur"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "NavigationMenuIndicator"
+        ]
       },
       {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité du trigger en état `disabled` (50 %)"
+        "token": "elevation.sm",
+        "classes": [
+          "shadow-sm"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuViewport"
+        ]
       },
       {
-        "token": "`--duration-fast`",
-        "usage": "Durée d'animation du viewport (ouverture/fermeture)"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "NavigationMenuViewport"
+        ]
       },
       {
-        "token": "`--duration-slow`",
-        "usage": "Durée de rotation du chevron et animations du contenu inline"
+        "token": "motion.duration.slow",
+        "classes": [
+          "duration-slow"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuTrigger"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "NavigationMenuLink via FOCUS_RING (lib/focus.ts)",
+          "navigationMenuTriggerStyle via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "navigationMenuTriggerStyle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "NavigationMenuLink",
+          "navigationMenuTriggerStyle"
+        ]
+      },
+      {
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "NavigationMenuViewport"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "NavigationMenu",
@@ -6633,27 +8783,9 @@
         "role": "Indicateur de troncature entre les numéros de page"
       }
     ],
-    "tokens": [
-      {
-        "token": "`--color-border-default`",
-        "usage": "Bordure du lien actif (variante `outline` du Button)"
-      },
-      {
-        "token": "`--color-background-default`",
-        "usage": "Fond du lien actif au hover (variante `outline`)"
-      },
-      {
-        "token": "`--color-text-default`",
-        "usage": "Texte des liens de pagination"
-      },
-      {
-        "token": "`--color-text-muted-foreground`",
-        "usage": "Non applicable directement — hérité via Button `ghost`"
-      },
-      {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité des liens désactivés via Button"
-      }
+    "tokens": [],
+    "tokens_from": [
+      "Button"
     ],
     "props": [
       {
@@ -6764,15 +8896,9 @@
         "role": "Bouton `Eye` / `EyeSlash` avec `aria-label` dynamique"
       }
     ],
-    "tokens": [
-      {
-        "token": "Hérités d'`InputGroup`",
-        "usage": "Bordure, fond, anneau de focus, état d'erreur"
-      },
-      {
-        "token": "`--muted-foreground`",
-        "usage": "Couleur des icônes `Eye` / `EyeSlash`, portée par l'addon"
-      }
+    "tokens": [],
+    "tokens_from": [
+      "InputGroup"
     ],
     "props": [
       {
@@ -6903,30 +9029,101 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond du contenu flottant"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte principal"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
       },
       {
-        "token": "`ring-foreground/10`",
-        "usage": "Bordure subtile autour du contenu"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "PopoverDescription"
+        ]
       },
       {
-        "token": "`shadow-md`",
-        "usage": "Ombre portée du popover"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur de la description"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
       },
       {
-        "token": "`duration-fast`",
-        "usage": "Durée des animations d'entrée/sortie"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "PopoverTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "PopoverDescription"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "PopoverTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs",
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "PopoverContent",
+          "PopoverDescription",
+          "PopoverHeader"
+        ]
+      },
+      {
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Popover",
@@ -7030,14 +9227,25 @@
     ],
     "tokens": [
       {
-        "token": "`--color-muted`",
-        "usage": "Fond de la barre de progression (track) (`bg-muted`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary"
+        ],
+        "where": [
+          "Progress"
+        ]
       },
       {
-        "token": "`--color-primary`",
-        "usage": "Couleur de l'indicateur de remplissage (`bg-primary`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "Progress"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Progress",
@@ -7135,26 +9343,78 @@
     ],
     "tokens": [
       {
-        "token": "`--color-input`",
-        "usage": "Bordure du radio non coché (`border-input`), fond dark (`bg-input/30`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
       },
       {
-        "token": "`--color-primary`",
-        "usage": "Fond et bordure du radio coché (`bg-primary`, `border-primary`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary",
+          "border-primary"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
       },
       {
-        "token": "`--color-primary-foreground`",
-        "usage": "Point indicateur de sélection (`bg-primary-foreground`)"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "bg-primary-foreground",
+          "text-primary-foreground"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus (`ring-ring/50`, `border-ring`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "RadioGroupItem via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "border-input"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
+      },
+      {
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "RadioGroupItem",
+          "RadioGroupItem via FOCUS_RING (lib/focus.ts)"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "RadioGroup",
@@ -7309,22 +9569,53 @@
     ],
     "tokens": [
       {
-        "token": "`bg-border`",
-        "usage": "Fond de la poignée de séparation et de l'indicateur visuel"
+        "token": "color.background.default",
+        "classes": [
+          "ring-offset-background"
+        ],
+        "where": [
+          "ResizableHandle"
+        ]
       },
       {
-        "token": "`ring-ring`",
-        "usage": "Anneau de focus sur la poignée (`focus-visible`)"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "ResizableHandle"
+        ]
       },
       {
-        "token": "`ring-offset-background`",
-        "usage": "Décalage de l'anneau de focus"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "ResizableHandle via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`z-dropdown`",
-        "usage": "Z-index de l'indicateur visuel de la poignée (`withHandle`)"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "ResizableHandle via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "zindex.dropdown",
+        "classes": [
+          "z-dropdown"
+        ],
+        "where": [
+          "ResizableHandle"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "ResizablePanelGroup",
@@ -7469,18 +9760,45 @@
     ],
     "tokens": [
       {
-        "token": "`bg-border`",
-        "usage": "Fond de la poignée de défilement (`scroll-area-thumb`)"
+        "token": "border-width.default",
+        "classes": [
+          "border-l",
+          "border-t"
+        ],
+        "where": [
+          "ScrollBar"
+        ]
       },
       {
-        "token": "`ring-ring/50`",
-        "usage": "Anneau de focus sur le viewport (`focus-visible`)"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "ScrollBar"
+        ]
       },
       {
-        "token": "`ring-focus`",
-        "usage": "Style de focus du viewport"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "ScrollArea via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "ScrollArea via FOCUS_RING (lib/focus.ts)"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "ScrollArea",
@@ -7621,46 +9939,158 @@
     ],
     "tokens": [
       {
-        "token": "`--color-input`",
-        "usage": "Bordure du trigger (`border-input`), fond dark (`bg-input/30`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus du trigger (`ring-ring/50`, `border-ring`)"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "SelectContent",
+          "SelectScrollDownButton",
+          "SelectScrollUpButton"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-accent"
+        ],
+        "where": [
+          "SelectItem"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte placeholder et icône chevron (`text-muted-foreground`)"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "SelectSeparator"
+        ]
       },
       {
-        "token": "`--color-popover`",
-        "usage": "Fond du popup et des boutons de scroll (`bg-popover`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "SelectTrigger via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-popover-foreground`",
-        "usage": "Texte dans le popup (`text-popover-foreground`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "bg-input/50",
+          "border-input"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
       },
       {
-        "token": "`--color-accent`",
-        "usage": "Fond de l'option en focus (`bg-accent`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
       },
       {
-        "token": "`--color-accent-foreground`",
-        "usage": "Texte de l'option en focus (`text-accent-foreground`)"
+        "token": "color.text.default",
+        "classes": [
+          "ring-foreground/10",
+          "text-accent-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "SelectContent",
+          "SelectItem"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Anneau du popup (`ring-foreground/10`)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "SelectLabel",
+          "SelectTrigger"
+        ]
       },
       {
-        "token": "`--color-border`",
-        "usage": "Séparateur (`bg-border`)"
+        "token": "elevation.md",
+        "classes": [
+          "shadow-md"
+        ],
+        "where": [
+          "SelectContent"
+        ]
+      },
+      {
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "SelectContent"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "SelectTrigger",
+          "SelectTrigger via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectLabel",
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "zindex.dropdown",
+        "classes": [
+          "z-dropdown"
+        ],
+        "where": [
+          "SelectScrollDownButton",
+          "SelectScrollUpButton"
+        ]
+      },
+      {
+        "token": "zindex.popover",
+        "classes": [
+          "z-popover"
+        ],
+        "where": [
+          "SelectContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Select",
@@ -7831,10 +10261,16 @@
     ],
     "tokens": [
       {
-        "token": "`--color-border-default`",
-        "usage": "Couleur de fond du séparateur (`bg-border`)"
+        "token": "color.border.default",
+        "classes": [
+          "bg-border"
+        ],
+        "where": [
+          "Separator"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Separator",
@@ -7973,37 +10409,135 @@
     ],
     "tokens": [
       {
-        "token": "`bg-popover`",
-        "usage": "Fond du contenu du panneau"
+        "token": "border-width.default",
+        "classes": [
+          "border-b",
+          "border-l",
+          "border-r",
+          "border-t"
+        ],
+        "where": [
+          "SheetContent"
+        ]
       },
       {
-        "token": "`text-popover-foreground`",
-        "usage": "Couleur du texte principal"
+        "token": "color.background.elevated",
+        "classes": [
+          "bg-popover"
+        ],
+        "where": [
+          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`bg-black/10`",
-        "usage": "Fond de l'overlay"
+        "token": "color.static.black",
+        "classes": [
+          "bg-black/10"
+        ],
+        "where": [
+          "SheetOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       },
       {
-        "token": "`text-foreground`",
-        "usage": "Couleur du titre"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground",
+          "text-popover-foreground"
+        ],
+        "where": [
+          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "SheetTitle"
+        ]
       },
       {
-        "token": "`text-muted-foreground`",
-        "usage": "Couleur de la description"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "SheetDescription"
+        ]
       },
       {
-        "token": "`font-heading`",
-        "usage": "Police du titre"
+        "token": "elevation.lg",
+        "classes": [
+          "shadow-lg"
+        ],
+        "where": [
+          "SheetContent"
+        ]
       },
       {
-        "token": "`shadow-lg`",
-        "usage": "Ombre portée du panneau"
+        "token": "motion.duration.fast",
+        "classes": [
+          "duration-fast"
+        ],
+        "where": [
+          "SheetOverlay"
+        ]
       },
       {
-        "token": "`duration-normal`",
-        "usage": "Durée de la transition d'entrée/sortie"
+        "token": "motion.duration.normal",
+        "classes": [
+          "duration-normal"
+        ],
+        "where": [
+          "SheetContent"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "SheetTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "SheetDescription",
+          "SheetOverlay"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "SheetTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "SheetDescription",
+          "SheetOverlay"
+        ]
+      },
+      {
+        "token": "zindex.modal",
+        "classes": [
+          "z-modal"
+        ],
+        "where": [
+          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "SheetOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Button"
     ],
     "props": [
       {
@@ -8214,49 +10748,223 @@
     ],
     "tokens": [
       {
-        "token": "`--space-layout-sidebar`",
-        "usage": "Largeur de la sidebar desktop"
+        "token": "border-width.default",
+        "classes": [
+          "border-l",
+          "border-r"
+        ],
+        "where": [
+          "SidebarMenuSub",
+          "Sidebar"
+        ]
       },
       {
-        "token": "`--space-layout-sidebar-mobile`",
-        "usage": "Largeur de la sidebar mobile"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "SidebarInput",
+          "SidebarInset",
+          "sidebarMenuButtonVariants.variant.outline"
+        ]
       },
       {
-        "token": "`--space-layout-sidebar-icon`",
-        "usage": "Largeur de la sidebar en mode icon-only"
+        "token": "color.sidebar.accent.default",
+        "classes": [
+          "bg-sidebar-accent",
+          "ring-sidebar-accent"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarMenuAction",
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants.variant.default",
+          "sidebarMenuButtonVariants.variant.outline",
+          "sidebarMenuButtonVariants"
+        ]
       },
       {
-        "token": "`bg-sidebar`",
-        "usage": "Fond de la sidebar"
+        "token": "color.sidebar.accent.foreground",
+        "classes": [
+          "text-sidebar-accent-foreground"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarMenuAction",
+          "SidebarMenuBadge",
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants.variant.default",
+          "sidebarMenuButtonVariants.variant.outline",
+          "sidebarMenuButtonVariants"
+        ]
       },
       {
-        "token": "`text-sidebar-foreground`",
-        "usage": "Couleur du texte principal"
+        "token": "color.sidebar.background",
+        "classes": [
+          "bg-sidebar"
+        ],
+        "where": [
+          "SidebarProvider",
+          "SidebarRail",
+          "Sidebar"
+        ]
       },
       {
-        "token": "`bg-sidebar-accent`",
-        "usage": "Fond des éléments au hover/active"
+        "token": "color.sidebar.border",
+        "classes": [
+          "bg-sidebar-border",
+          "border-sidebar-border",
+          "ring-sidebar-border"
+        ],
+        "where": [
+          "SidebarMenuSub",
+          "SidebarRail",
+          "SidebarSeparator",
+          "Sidebar",
+          "sidebarMenuButtonVariants.variant.outline"
+        ]
       },
       {
-        "token": "`text-sidebar-accent-foreground`",
-        "usage": "Texte des éléments au hover/active"
+        "token": "color.sidebar.foreground",
+        "classes": [
+          "text-sidebar-foreground",
+          "text-sidebar-foreground/70"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarGroupLabel",
+          "SidebarMenuAction",
+          "SidebarMenuBadge",
+          "SidebarMenuSubButton",
+          "Sidebar"
+        ]
       },
       {
-        "token": "`ring-sidebar-ring`",
-        "usage": "Anneau de focus des éléments interactifs"
+        "token": "color.sidebar.ring",
+        "classes": [
+          "ring-sidebar-ring"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarGroupLabel",
+          "SidebarMenuAction",
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants"
+        ]
       },
       {
-        "token": "`border-sidebar-border`",
-        "usage": "Bordure de la sidebar et des sous-menus"
+        "token": "elevation.sm",
+        "classes": [
+          "shadow-sm"
+        ],
+        "where": [
+          "SidebarInset",
+          "Sidebar"
+        ]
       },
       {
-        "token": "`bg-background`",
-        "usage": "Fond de l'input et de la variante outline du menu button"
+        "token": "motion.duration.normal",
+        "classes": [
+          "duration-normal"
+        ],
+        "where": [
+          "SidebarGroupLabel",
+          "Sidebar"
+        ]
       },
       {
-        "token": "`duration-normal`",
-        "usage": "Durée des transitions de largeur et d'opacité"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "SidebarGroupAction via FOCUS_RING_WIDTH (lib/focus.ts)",
+          "SidebarGroupLabel via FOCUS_RING_WIDTH (lib/focus.ts)",
+          "SidebarMenuAction via FOCUS_RING_WIDTH (lib/focus.ts)",
+          "SidebarMenuSubButton via FOCUS_RING_WIDTH (lib/focus.ts)",
+          "sidebarMenuButtonVariants via FOCUS_RING_WIDTH (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.layout.sidebar",
+        "classes": [
+          "var(--space-layout-sidebar)"
+        ],
+        "where": [
+          "SIDEBAR_WIDTH"
+        ]
+      },
+      {
+        "token": "space.layout.sidebar-icon",
+        "classes": [
+          "var(--space-layout-sidebar-icon)"
+        ],
+        "where": [
+          "SIDEBAR_WIDTH_ICON"
+        ]
+      },
+      {
+        "token": "space.layout.sidebar-mobile",
+        "classes": [
+          "var(--space-layout-sidebar-mobile)"
+        ],
+        "where": [
+          "SIDEBAR_WIDTH_MOBILE"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "SidebarMenuBadge",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "SidebarGroupContent",
+          "SidebarGroupLabel",
+          "SidebarMenuBadge",
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants.size.default",
+          "sidebarMenuButtonVariants.size.lg",
+          "sidebarMenuButtonVariants.size.sm",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
+        "token": "zindex.fixed",
+        "classes": [
+          "z-fixed"
+        ],
+        "where": [
+          "Sidebar"
+        ]
+      },
+      {
+        "token": "zindex.sticky",
+        "classes": [
+          "z-sticky"
+        ],
+        "where": [
+          "SidebarRail"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Button",
+      "Input",
+      "Separator",
+      "Sheet",
+      "Skeleton",
+      "Tooltip"
     ],
     "props": [
       {
@@ -8466,14 +11174,16 @@
     ],
     "tokens": [
       {
-        "token": "`bg-muted`",
-        "usage": "Fond du squelette (couleur neutre atténuée)"
-      },
-      {
-        "token": "`animate-pulse`",
-        "usage": "Animation de pulsation (opacité oscillante)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "Skeleton"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Skeleton",
@@ -8562,18 +11272,63 @@
     ],
     "tokens": [
       {
-        "token": "`--color-muted`",
-        "usage": "Fond de la piste (`bg-muted`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Slider"
+        ]
       },
       {
-        "token": "`--color-primary`",
-        "usage": "Fond de la plage sélectionnée (`bg-primary`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary"
+        ],
+        "where": [
+          "Slider"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Bordure et anneau de focus du thumb (`border-ring`, `ring-ring/50`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
+        "token": "color.static.white",
+        "classes": [
+          "bg-white"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "Slider",
+          "Slider via FOCUS_RING_WIDTH (lib/focus.ts)"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Slider",
@@ -8732,22 +11487,16 @@
     ],
     "tokens": [
       {
-        "token": "`--color-popover`",
-        "usage": "Fond du toast (`--normal-bg`)"
-      },
-      {
-        "token": "`--color-popover-foreground`",
-        "usage": "Texte du toast (`--normal-text`)"
-      },
-      {
-        "token": "`--color-border`",
-        "usage": "Bordure du toast (`--normal-border`)"
-      },
-      {
-        "token": "`--radius-md`",
-        "usage": "Rayon de bordure du toast (`--border-radius`)"
+        "token": "radius.md",
+        "classes": [
+          "var(--radius-md)"
+        ],
+        "where": [
+          "Toaster.--border-radius"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Sonner",
@@ -8826,16 +11575,8 @@
         "role": "`<svg>` rendu directement via `SpinnerIcon`, porte `role=\"status\"` et `aria-label`"
       }
     ],
-    "tokens": [
-      {
-        "token": "`--color-text-default`",
-        "usage": "Couleur héritée du contexte parent (le SVG hérite de `currentColor`)"
-      },
-      {
-        "token": "`--motion-duration-normal`",
-        "usage": "Durée de l'animation `animate-spin` (750 ms par défaut Tailwind)"
-      }
-    ],
+    "tokens": [],
+    "tokens_from": [],
     "props": [
       {
         "component": "Spinner",
@@ -8930,34 +11671,94 @@
     ],
     "tokens": [
       {
-        "token": "`--color-primary`",
-        "usage": "Fond de l'interrupteur activé (`bg-primary`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Switch"
+        ]
       },
       {
-        "token": "`--color-primary-foreground`",
-        "usage": "Thumb activé en mode dark (`bg-primary-foreground`)"
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary"
+        ],
+        "where": [
+          "Switch"
+        ]
       },
       {
-        "token": "`--color-input`",
-        "usage": "Fond de l'interrupteur désactivé (`bg-input`)"
+        "token": "color.action.background.foreground",
+        "classes": [
+          "bg-primary-foreground"
+        ],
+        "where": [
+          "Switch"
+        ]
       },
       {
-        "token": "`--color-background`",
-        "usage": "Fond du thumb (`bg-background`)"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "Switch"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Thumb désactivé en mode dark (`bg-foreground`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "Switch via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus (`ring-ring/50`, `border-ring`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input",
+          "bg-input/80"
+        ],
+        "where": [
+          "Switch"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "bg-foreground"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "Switch",
+          "Switch via FOCUS_RING (lib/focus.ts)"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Switch",
@@ -9112,22 +11913,68 @@
     ],
     "tokens": [
       {
-        "token": "`--color-border`",
-        "usage": "Bordure inférieure des lignes (`border-b`)"
+        "token": "border-width.default",
+        "classes": [
+          "border-b",
+          "border-t"
+        ],
+        "where": [
+          "TableFooter",
+          "TableHeader",
+          "TableRow"
+        ]
       },
       {
-        "token": "`--color-muted`",
-        "usage": "Fond de la ligne sélectionnée (`bg-muted`) et fond du pied de page (`bg-muted/50`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted",
+          "bg-muted/50"
+        ],
+        "where": [
+          "TableFooter",
+          "TableRow"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte de la légende (`text-muted-foreground`)"
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "TableHead"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Texte des cellules d'en-tête (`text-foreground`)"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "TableCaption"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "TableFooter",
+          "TableHead"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "TableCaption",
+          "Table"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Table",
@@ -9267,46 +12114,116 @@
     ],
     "tokens": [
       {
-        "token": "`--color-background-muted`",
-        "usage": "Fond de la liste d'onglets (variante `default`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
       },
       {
-        "token": "`--color-text-muted-foreground`",
-        "usage": "Couleur du texte des onglets inactifs"
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
       },
       {
-        "token": "`--color-text-foreground`",
-        "usage": "Couleur du texte des onglets au hover et actifs"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "tabsListVariants.variant.default"
+        ]
       },
       {
-        "token": "`--color-background-background`",
-        "usage": "Fond du trigger actif (variante `default`, light)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "outline-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "TabsContent via FOCUS_RING (lib/focus.ts)",
+          "TabsTrigger"
+        ]
       },
       {
-        "token": "`--color-border-ring`",
-        "usage": "Bordure et anneau de focus visible sur le trigger"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "border-input"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
       },
       {
-        "token": "`--color-ring-focus`",
-        "usage": "Anneau de focus `ring-focus`"
+        "token": "color.text.default",
+        "classes": [
+          "bg-foreground",
+          "text-foreground",
+          "text-foreground/60"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
       },
       {
-        "token": "`--color-border-input`",
-        "usage": "Bordure du trigger actif en mode sombre"
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "TabsTrigger",
+          "tabsListVariants"
+        ]
       },
       {
-        "token": "`--color-background-input`",
-        "usage": "Fond atténué du trigger actif en mode sombre (`bg-input/30`)"
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "TabsContent via FOCUS_RING (lib/focus.ts)",
+          "TabsTrigger via FOCUS_RING_WIDTH (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-background-foreground`",
-        "usage": "Fond de la barre d'indicateur de ligne active"
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
       },
       {
-        "token": "`--opacity-disabled`",
-        "usage": "Opacité du trigger en état `disabled` (50 %)"
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "TabsContent"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs",
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "TabsContent",
+          "TabsTrigger"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Tabs",
@@ -9417,22 +12334,78 @@
     ],
     "tokens": [
       {
-        "token": "`--color-input`",
-        "usage": "Bordure (`border-input`), fond disabled (`bg-input/50`), fond dark (`bg-input/30`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Textarea"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus (`ring-ring/50`, `border-ring`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "Textarea via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "bg-input/50",
+          "bg-input/80",
+          "border-input"
+        ],
+        "where": [
+          "Textarea"
+        ]
       },
       {
-        "token": "`--color-muted-foreground`",
-        "usage": "Texte placeholder (`placeholder:text-muted-foreground`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "Textarea",
+          "Textarea via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "Textarea"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Textarea",
@@ -9534,26 +12507,92 @@
     ],
     "tokens": [
       {
-        "token": "`--color-muted`",
-        "usage": "Fond au hover et état pressé (`bg-muted`)"
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "toggleVariants.variant.outline"
+        ]
       },
       {
-        "token": "`--color-foreground`",
-        "usage": "Texte au hover et état pressé (`text-foreground`)"
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "toggleVariants.variant.outline",
+          "toggleVariants"
+        ]
       },
       {
-        "token": "`--color-input`",
-        "usage": "Bordure variante `outline` (`border-input`)"
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "toggleVariants via FOCUS_RING (lib/focus.ts)"
+        ]
       },
       {
-        "token": "`--color-ring`",
-        "usage": "Anneau de focus (`ring-ring/50`, `border-ring`)"
+        "token": "color.border.input",
+        "classes": [
+          "border-input"
+        ],
+        "where": [
+          "toggleVariants.variant.outline"
+        ]
       },
       {
-        "token": "`--color-destructive`",
-        "usage": "Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)"
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "toggleVariants via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Toggle",
@@ -9683,17 +12722,27 @@
     ],
     "tokens": [
       {
-        "token": "`--gap` (CSS custom property)",
-        "usage": "Espacement entre les items (`spacing`)"
+        "token": "border-width.default",
+        "classes": [
+          "border-l",
+          "border-t"
+        ],
+        "where": [
+          "ToggleGroupItem"
+        ]
       },
       {
-        "token": "Tokens hérités de `toggleVariants`",
-        "usage": "Fond, texte et bordures selon la variante et l'état du toggle"
-      },
-      {
-        "token": "`z-dropdown`",
-        "usage": "Z-index de l'item en focus"
+        "token": "zindex.dropdown",
+        "classes": [
+          "z-dropdown"
+        ],
+        "where": [
+          "ToggleGroupItem"
+        ]
       }
+    ],
+    "tokens_from": [
+      "Toggle"
     ],
     "props": [
       {
@@ -9897,22 +12946,44 @@
     ],
     "tokens": [
       {
-        "token": "`bg-foreground`",
-        "usage": "Fond du tooltip et de la flèche"
+        "token": "color.background.default",
+        "classes": [
+          "text-background"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
       },
       {
-        "token": "`text-background`",
-        "usage": "Texte du tooltip (contraste inversé)"
+        "token": "color.text.default",
+        "classes": [
+          "bg-foreground",
+          "fill-foreground"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
       },
       {
-        "token": "`fill-foreground`",
-        "usage": "Remplissage SVG de la flèche"
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
       },
       {
-        "token": "`z-tooltip`",
-        "usage": "Z-index du contenu et de la flèche"
+        "token": "zindex.tooltip",
+        "classes": [
+          "z-tooltip"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
       }
     ],
+    "tokens_from": [],
     "props": [
       {
         "component": "Tooltip",

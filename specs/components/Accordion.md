@@ -47,15 +47,19 @@ Composant de navigation verticale permettant d'afficher et masquer des sections 
 
 ## Tokens utilisés
 
-| Token                           | Usage                                                    |
-| ------------------------------- | -------------------------------------------------------- |
-| `--color-border-default`        | Bordure inférieure entre les items (`not-last:border-b`) |
-| `--color-border-ring`           | Bordure et anneau de focus visible sur le trigger        |
-| `--color-text-muted-foreground` | Couleur de l'icône chevron                               |
-| `--color-text-foreground`       | Couleur des liens au hover dans le contenu               |
-| `--opacity-disabled`            | Opacité du trigger en état `disabled` (50 %)             |
-| `--animate-accordion-down`      | Animation d'ouverture du contenu                         |
-| `--animate-accordion-up`        | Animation de fermeture du contenu                        |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                     | Où                                                                        |
+| ------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------- |
+| `border-width.default`          | `border` · `border-b`                    | `AccordionItem` · `AccordionTrigger`                                      |
+| `color.border.focus`            | `border-ring` · `ring-ring/50`           | `AccordionTrigger` · `AccordionTrigger` via `FOCUS_RING` (`lib/focus.ts`) |
+| `color.text.default`            | `text-foreground`                        | `AccordionContent`                                                        |
+| `color.text.subtle`             | `text-muted-foreground`                  | `AccordionTrigger`                                                        |
+| `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)` | `AccordionTrigger` via `FOCUS_RING` (`lib/focus.ts`)                      |
+| `typography.font-weight.medium` | `font-medium`                            | `AccordionTrigger`                                                        |
+| `typography.size.xs`            | `text-xs`                                | `AccordionContent` · `AccordionTrigger`                                   |
+
+Relevé dans `components/ui/accordion.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

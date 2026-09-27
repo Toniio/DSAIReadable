@@ -42,11 +42,19 @@ Marque visuelle de l'application. Le composant rend le pictogramme seul ; il est
 
 ## Tokens utilisés
 
-| Token                  | Usage                                         |
-| ---------------------- | --------------------------------------------- |
-| `--primary`            | Fond du carré pictogramme (`bg-primary`)      |
-| `--primary-foreground` | Couleur du tracé du pictogramme               |
-| `--font-heading`       | Famille typographique portée par le conteneur |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables      | Où     |
+| ------------------------------------ | ------------------------- | ------ |
+| `color.action.background.default`    | `bg-primary`              | `Logo` |
+| `color.action.background.foreground` | `text-primary-foreground` | `Logo` |
+| `typography.font-weight.bold`        | `font-bold`               | `Logo` |
+| `typography.letter-spacing.tight`    | `tracking-tight`          | `Logo` |
+| `typography.size.2xl`                | `text-2xl`                | `Logo` |
+| `typography.size.base`               | `text-base`               | `Logo` |
+| `typography.size.xl`                 | `text-xl`                 | `Logo` |
+
+Relevé dans `components/ui/logo.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

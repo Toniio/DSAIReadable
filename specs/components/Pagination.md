@@ -47,13 +47,11 @@ Composant de navigation séquentielle permettant de parcourir des ensembles de r
 
 ## Tokens utilisés
 
-| Token                           | Usage                                                  |
-| ------------------------------- | ------------------------------------------------------ |
-| `--color-border-default`        | Bordure du lien actif (variante `outline` du Button)   |
-| `--color-background-default`    | Fond du lien actif au hover (variante `outline`)       |
-| `--color-text-default`          | Texte des liens de pagination                          |
-| `--color-text-muted-foreground` | Non applicable directement — hérité via Button `ghost` |
-| `--opacity-disabled`            | Opacité des liens désactivés via Button                |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+Aucun token : `components/ui/pagination.tsx` n'emploie aucune classe ni variable qui mène à un token sémantique.
+
+Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

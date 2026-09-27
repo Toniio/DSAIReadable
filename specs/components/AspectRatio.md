@@ -39,9 +39,9 @@ Conteneur qui impose un rapport largeur/hauteur fixe à son contenu (images, vid
 
 ## Tokens utilisés
 
-| Token | Usage                                                                   |
-| ----- | ----------------------------------------------------------------------- |
-| —     | Aucun token de design spécifique ; le composant est purement structurel |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+Aucun token : `components/ui/aspect-ratio.tsx` n'emploie aucune classe ni variable qui mène à un token sémantique.
 
 ## Props / API
 

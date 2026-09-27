@@ -56,18 +56,24 @@ Menu contextuel déclenché par un clic droit, affichant une liste d'actions per
 
 ## Tokens utilisés
 
-| Token                     | Usage                                |
-| ------------------------- | ------------------------------------ |
-| `bg-popover`              | Fond du menu et sous-menu            |
-| `text-popover-foreground` | Couleur du texte des items           |
-| `bg-accent`               | Fond de l'item au focus              |
-| `text-accent-foreground`  | Texte de l'item au focus             |
-| `text-destructive`        | Texte d'un item destructeur          |
-| `bg-destructive/10`       | Fond d'un item destructeur au focus  |
-| `text-muted-foreground`   | Couleur des labels et raccourcis     |
-| `bg-border`               | Couleur du séparateur                |
-| `ring-foreground/10`      | Bordure subtile du contenu           |
-| `duration-fast`           | Durée des animations d'entrée/sortie |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                          | Classes et variables                                                        | Où                                                                                                                                                                        |
+| ------------------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`         | `border`                                                                    | `ContextMenuSubContent`                                                                                                                                                   |
+| `color.background.elevated`    | `bg-popover`                                                                | `ContextMenuContent` · `ContextMenuSubContent`                                                                                                                            |
+| `color.background.subtle`      | `bg-accent`                                                                 | `ContextMenuCheckboxItem` · `ContextMenuItem` · `ContextMenuRadioItem` · `ContextMenuSubTrigger`                                                                          |
+| `color.border.default`         | `bg-border`                                                                 | `ContextMenuSeparator`                                                                                                                                                    |
+| `color.feedback.error.default` | `bg-destructive/10` · `bg-destructive/20` · `text-destructive`              | `ContextMenuItem`                                                                                                                                                         |
+| `color.text.default`           | `ring-foreground/10` · `text-accent-foreground` · `text-popover-foreground` | `ContextMenuCheckboxItem` · `ContextMenuContent` · `ContextMenuItem` · `ContextMenuRadioItem` · `ContextMenuShortcut` · `ContextMenuSubContent` · `ContextMenuSubTrigger` |
+| `color.text.subtle`            | `text-muted-foreground`                                                     | `ContextMenuLabel` · `ContextMenuShortcut`                                                                                                                                |
+| `elevation.lg`                 | `shadow-lg`                                                                 | `ContextMenuSubContent`                                                                                                                                                   |
+| `elevation.md`                 | `shadow-md`                                                                 | `ContextMenuContent`                                                                                                                                                      |
+| `motion.duration.fast`         | `duration-fast`                                                             | `ContextMenuContent` · `ContextMenuSubContent`                                                                                                                            |
+| `typography.size.xs`           | `text-xs`                                                                   | `ContextMenuCheckboxItem` · `ContextMenuItem` · `ContextMenuLabel` · `ContextMenuRadioItem` · `ContextMenuShortcut` · `ContextMenuSubTrigger`                             |
+| `zindex.popover`               | `z-popover`                                                                 | `ContextMenuContent` · `ContextMenuSubContent`                                                                                                                            |
+
+Relevé dans `components/ui/context-menu.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

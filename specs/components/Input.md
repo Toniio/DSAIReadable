@@ -43,15 +43,21 @@ Champ de saisie texte mono-ligne (ou fichier) servant de brique de base pour tou
 
 ## Tokens utilisés
 
-| Token                            | Usage                                 |
-| -------------------------------- | ------------------------------------- |
-| `--color-border-input`           | Bordure par défaut                    |
-| `--color-border-focus`           | Bordure + anneau au focus             |
-| `--color-feedback-error-default` | Bordure et anneau état `aria-invalid` |
-| `--color-text-subtle`            | Couleur du placeholder                |
-| `--color-text-default`           | Couleur du texte saisi                |
-| `--opacity-disabled`             | Opacité état `disabled` (50 %)        |
-| `--motion-duration-fast`         | Durée de transition des couleurs      |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                                                                           | Où                                                  |
+| ------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `border-width.default`          | `border`                                                                                       | `Input`                                             |
+| `color.border.focus`            | `border-ring` · `ring-ring/50`                                                                 | `Input` via `FOCUS_RING` (`lib/focus.ts`)           |
+| `color.border.input`            | `bg-input/30` · `bg-input/50` · `bg-input/80` · `border-input`                                 | `Input`                                             |
+| `color.feedback.error.default`  | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Input`                                             |
+| `color.text.default`            | `text-foreground`                                                                              | `Input`                                             |
+| `color.text.subtle`             | `text-muted-foreground`                                                                        | `Input`                                             |
+| `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                                                       | `Input` · `Input` via `FOCUS_RING` (`lib/focus.ts`) |
+| `typography.font-weight.medium` | `font-medium`                                                                                  | `Input`                                             |
+| `typography.size.xs`            | `text-xs`                                                                                      | `Input`                                             |
+
+Relevé dans `components/ui/input.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

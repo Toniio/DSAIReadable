@@ -47,10 +47,11 @@ Champ de saisie de mot de passe avec bouton de bascule de visibilité (œil ouve
 
 ## Tokens utilisés
 
-| Token                  | Usage                                                     |
-| ---------------------- | --------------------------------------------------------- |
-| Hérités d'`InputGroup` | Bordure, fond, anneau de focus, état d'erreur             |
-| `--muted-foreground`   | Couleur des icônes `Eye` / `EyeSlash`, portée par l'addon |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+Aucun token : `components/ui/password-input.tsx` n'emploie aucune classe ni variable qui mène à un token sémantique.
+
+Compose `InputGroup` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

@@ -43,10 +43,14 @@ Placeholder pour illustrations et images décoratives. Utilisé dans les layouts
 
 ## Tokens utilisés
 
-| Token                | Usage                                                           |
-| -------------------- | --------------------------------------------------------------- |
-| `--muted`            | Fond du conteneur (`bg-muted`)                                  |
-| `--muted-foreground` | Couleur du tracé SVG (`text-muted-foreground` + `currentColor`) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                     | Classes et variables    | Où             |
+| ------------------------- | ----------------------- | -------------- |
+| `color.background.subtle` | `bg-muted`              | `Illustration` |
+| `color.text.subtle`       | `text-muted-foreground` | `Illustration` |
+
+Relevé dans `components/ui/illustration.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

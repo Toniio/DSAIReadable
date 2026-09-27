@@ -47,15 +47,22 @@ Représentation visuelle d'un utilisateur ou d'une entité sous forme de photo, 
 
 ## Tokens utilisés
 
-| Token                     | Usage                                                    |
-| ------------------------- | -------------------------------------------------------- |
-| `border-border`           | Bordure interne de l'avatar (pseudo-élément `after`)     |
-| `bg-muted`                | Fond du fallback et du compteur de groupe                |
-| `text-muted-foreground`   | Texte du fallback et du compteur                         |
-| `bg-primary`              | Fond du badge                                            |
-| `text-primary-foreground` | Icône / texte du badge                                   |
-| `ring-background`         | Anneau séparateur du badge et des avatars dans un groupe |
-| `z-dropdown`              | Z-index du badge                                         |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables      | Où                                                 |
+| ------------------------------------ | ------------------------- | -------------------------------------------------- |
+| `border-width.default`               | `border`                  | `Avatar`                                           |
+| `color.action.background.default`    | `bg-primary`              | `AvatarBadge`                                      |
+| `color.action.background.foreground` | `text-primary-foreground` | `AvatarBadge`                                      |
+| `color.background.default`           | `ring-background`         | `AvatarBadge` · `AvatarGroupCount` · `AvatarGroup` |
+| `color.background.subtle`            | `bg-muted`                | `AvatarFallback` · `AvatarGroupCount`              |
+| `color.border.default`               | `border-border`           | `Avatar`                                           |
+| `color.text.subtle`                  | `text-muted-foreground`   | `AvatarFallback` · `AvatarGroupCount`              |
+| `typography.size.sm`                 | `text-sm`                 | `AvatarFallback`                                   |
+| `typography.size.xs`                 | `text-xs`                 | `AvatarFallback` · `AvatarGroupCount`              |
+| `zindex.dropdown`                    | `z-dropdown`              | `AvatarBadge`                                      |
+
+Relevé dans `components/ui/avatar.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

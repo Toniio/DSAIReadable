@@ -46,14 +46,21 @@ Menu déroulant natif du navigateur, léger et accessible, pour la sélection d'
 
 ## Tokens utilisés
 
-| Token                        | Usage                                                                  |
-| ---------------------------- | ---------------------------------------------------------------------- |
-| `--color-input`              | Bordure du select (`border-input`), fond dark (`bg-input/30`)          |
-| `--color-ring`               | Anneau de focus (`ring-ring/50`, `border-ring`)                        |
-| `--color-destructive`        | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`) |
-| `--color-muted-foreground`   | Texte placeholder et icône chevron (`text-muted-foreground`)           |
-| `--color-primary`            | Fond de la sélection de texte (`bg-primary`)                           |
-| `--color-primary-foreground` | Texte de la sélection (`text-primary-foreground`)                      |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables                                                                           | Où                                                                |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `border-width.default`               | `border`                                                                                       | `NativeSelect`                                                    |
+| `color.action.background.default`    | `bg-primary`                                                                                   | `NativeSelect`                                                    |
+| `color.action.background.foreground` | `text-primary-foreground`                                                                      | `NativeSelect`                                                    |
+| `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                 | `NativeSelect` via `FOCUS_RING` (`lib/focus.ts`)                  |
+| `color.border.input`                 | `bg-input/30` · `bg-input/50` · `border-input`                                                 | `NativeSelect`                                                    |
+| `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `NativeSelect`                                                    |
+| `color.text.subtle`                  | `text-muted-foreground`                                                                        | `NativeSelect`                                                    |
+| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `NativeSelect` · `NativeSelect` via `FOCUS_RING` (`lib/focus.ts`) |
+| `typography.size.xs`                 | `text-xs`                                                                                      | `NativeSelect`                                                    |
+
+Relevé dans `components/ui/native-select.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

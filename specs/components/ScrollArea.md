@@ -45,11 +45,16 @@ Zone de défilement personnalisée avec des barres de défilement stylisées, re
 
 ## Tokens utilisés
 
-| Token          | Usage                                                  |
-| -------------- | ------------------------------------------------------ |
-| `bg-border`    | Fond de la poignée de défilement (`scroll-area-thumb`) |
-| `ring-ring/50` | Anneau de focus sur le viewport (`focus-visible`)      |
-| `ring-focus`   | Style de focus du viewport                             |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                    | Classes et variables                     | Où                                             |
+| ------------------------ | ---------------------------------------- | ---------------------------------------------- |
+| `border-width.default`   | `border-l` · `border-t`                  | `ScrollBar`                                    |
+| `color.border.default`   | `bg-border`                              | `ScrollBar`                                    |
+| `color.border.focus`     | `border-ring` · `ring-ring/50`           | `ScrollArea` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.focus-ring-width` | `ring-(length:--space-focus-ring-width)` | `ScrollArea` via `FOCUS_RING` (`lib/focus.ts`) |
+
+Relevé dans `components/ui/scroll-area.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

@@ -51,18 +51,27 @@ Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi u
 
 ## Tokens utilisés
 
-| Token                        | Usage                                                                  |
-| ---------------------------- | ---------------------------------------------------------------------- |
-| `--color-input`              | Bordure du trigger (`border-input`), fond dark (`bg-input/30`)         |
-| `--color-ring`               | Anneau de focus du trigger (`ring-ring/50`, `border-ring`)             |
-| `--color-destructive`        | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`) |
-| `--color-muted-foreground`   | Texte placeholder et icône chevron (`text-muted-foreground`)           |
-| `--color-popover`            | Fond du popup et des boutons de scroll (`bg-popover`)                  |
-| `--color-popover-foreground` | Texte dans le popup (`text-popover-foreground`)                        |
-| `--color-accent`             | Fond de l'option en focus (`bg-accent`)                                |
-| `--color-accent-foreground`  | Texte de l'option en focus (`text-accent-foreground`)                  |
-| `--color-foreground`         | Anneau du popup (`ring-foreground/10`)                                 |
-| `--color-border`             | Séparateur (`bg-border`)                                               |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                          | Classes et variables                                                                           | Où                                                                  |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `border-width.default`         | `border`                                                                                       | `SelectTrigger`                                                     |
+| `color.background.elevated`    | `bg-popover`                                                                                   | `SelectContent` · `SelectScrollDownButton` · `SelectScrollUpButton` |
+| `color.background.subtle`      | `bg-accent`                                                                                    | `SelectItem`                                                        |
+| `color.border.default`         | `bg-border`                                                                                    | `SelectSeparator`                                                   |
+| `color.border.focus`           | `border-ring` · `ring-ring/50`                                                                 | `SelectTrigger` via `FOCUS_RING` (`lib/focus.ts`)                   |
+| `color.border.input`           | `bg-input/30` · `bg-input/50` · `border-input`                                                 | `SelectTrigger`                                                     |
+| `color.feedback.error.default` | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `SelectTrigger`                                                     |
+| `color.text.default`           | `ring-foreground/10` · `text-accent-foreground` · `text-popover-foreground`                    | `SelectContent` · `SelectItem`                                      |
+| `color.text.subtle`            | `text-muted-foreground`                                                                        | `SelectLabel` · `SelectTrigger`                                     |
+| `elevation.md`                 | `shadow-md`                                                                                    | `SelectContent`                                                     |
+| `motion.duration.fast`         | `duration-fast`                                                                                | `SelectContent`                                                     |
+| `space.focus-ring-width`       | `ring-(length:--space-focus-ring-width)`                                                       | `SelectTrigger` · `SelectTrigger` via `FOCUS_RING` (`lib/focus.ts`) |
+| `typography.size.xs`           | `text-xs`                                                                                      | `SelectItem` · `SelectLabel` · `SelectTrigger`                      |
+| `zindex.dropdown`              | `z-dropdown`                                                                                   | `SelectScrollDownButton` · `SelectScrollUpButton`                   |
+| `zindex.popover`               | `z-popover`                                                                                    | `SelectContent`                                                     |
+
+Relevé dans `components/ui/select.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

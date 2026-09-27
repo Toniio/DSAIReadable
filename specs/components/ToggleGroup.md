@@ -46,11 +46,16 @@ Groupe de boutons à bascule mutuellement exclusifs ou multi-sélection, basé s
 
 ## Tokens utilisés
 
-| Token                              | Usage                                                         |
-| ---------------------------------- | ------------------------------------------------------------- |
-| `--gap` (CSS custom property)      | Espacement entre les items (`spacing`)                        |
-| Tokens hérités de `toggleVariants` | Fond, texte et bordures selon la variante et l'état du toggle |
-| `z-dropdown`                       | Z-index de l'item en focus                                    |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                  | Classes et variables    | Où                |
+| ---------------------- | ----------------------- | ----------------- |
+| `border-width.default` | `border-l` · `border-t` | `ToggleGroupItem` |
+| `zindex.dropdown`      | `z-dropdown`            | `ToggleGroupItem` |
+
+Relevé dans `components/ui/toggle-group.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Toggle` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

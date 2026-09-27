@@ -46,18 +46,23 @@ Composant de navigation par onglets permettant d'alterner entre des panneaux de 
 
 ## Tokens utilisés
 
-| Token                           | Usage                                                        |
-| ------------------------------- | ------------------------------------------------------------ |
-| `--color-background-muted`      | Fond de la liste d'onglets (variante `default`)              |
-| `--color-text-muted-foreground` | Couleur du texte des onglets inactifs                        |
-| `--color-text-foreground`       | Couleur du texte des onglets au hover et actifs              |
-| `--color-background-background` | Fond du trigger actif (variante `default`, light)            |
-| `--color-border-ring`           | Bordure et anneau de focus visible sur le trigger            |
-| `--color-ring-focus`            | Anneau de focus `ring-focus`                                 |
-| `--color-border-input`          | Bordure du trigger actif en mode sombre                      |
-| `--color-background-input`      | Fond atténué du trigger actif en mode sombre (`bg-input/30`) |
-| `--color-background-foreground` | Fond de la barre d'indicateur de ligne active                |
-| `--opacity-disabled`            | Opacité du trigger en état `disabled` (50 %)                 |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                                       | Où                                                                                                      |
+| -------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `border-width.default`           | `border`                                                   | `TabsTrigger`                                                                                           |
+| `color.background.default`       | `bg-background`                                            | `TabsTrigger`                                                                                           |
+| `color.background.subtle`        | `bg-muted`                                                 | `tabsListVariants.variant.default`                                                                      |
+| `color.border.focus`             | `border-ring` · `outline-ring` · `ring-ring/50`            | `TabsContent` via `FOCUS_RING` (`lib/focus.ts`) · `TabsTrigger`                                         |
+| `color.border.input`             | `bg-input/30` · `border-input`                             | `TabsTrigger`                                                                                           |
+| `color.text.default`             | `bg-foreground` · `text-foreground` · `text-foreground/60` | `TabsTrigger`                                                                                           |
+| `color.text.subtle`              | `text-muted-foreground`                                    | `TabsTrigger` · `tabsListVariants`                                                                      |
+| `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                   | `TabsContent` via `FOCUS_RING` (`lib/focus.ts`) · `TabsTrigger` via `FOCUS_RING_WIDTH` (`lib/focus.ts`) |
+| `typography.font-weight.medium`  | `font-medium`                                              | `TabsTrigger`                                                                                           |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                                          | `TabsContent`                                                                                           |
+| `typography.size.xs`             | `text-xs` · `text-xs/relaxed`                              | `TabsContent` · `TabsTrigger`                                                                           |
+
+Relevé dans `components/ui/tabs.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

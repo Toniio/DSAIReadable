@@ -53,15 +53,22 @@ Palette de commandes avec recherche intégrée, permettant de filtrer et sélect
 
 ## Tokens utilisés
 
-| Token                        | Usage                                                                                      |
-| ---------------------------- | ------------------------------------------------------------------------------------------ |
-| `--color-popover`            | Fond du composant command (`bg-popover`)                                                   |
-| `--color-popover-foreground` | Texte principal (`text-popover-foreground`)                                                |
-| `--color-foreground`         | Texte des items et groupes (`text-foreground`)                                             |
-| `--color-muted`              | Fond de l'item sélectionné (`bg-muted`)                                                    |
-| `--color-muted-foreground`   | Texte secondaire : labels de groupe, raccourcis, icône recherche (`text-muted-foreground`) |
-| `--color-border`             | Séparateur (`bg-border`)                                                                   |
-| `--color-input`              | Bordure du champ de recherche (`border-input/30`, `bg-input/30`)                           |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                       | Classes et variables                          | Où                                                                                   |
+| --------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `border-width.default`      | `border-b`                                    | `CommandInput`                                                                       |
+| `color.background.elevated` | `bg-popover`                                  | `Command`                                                                            |
+| `color.background.subtle`   | `bg-muted`                                    | `CommandItem`                                                                        |
+| `color.border.default`      | `bg-border`                                   | `CommandSeparator`                                                                   |
+| `color.border.input`        | `bg-input/30` · `border-input/30`             | `CommandInput`                                                                       |
+| `color.text.default`        | `text-foreground` · `text-popover-foreground` | `CommandGroup` · `CommandItem` · `CommandShortcut` · `Command`                       |
+| `color.text.subtle`         | `text-muted-foreground`                       | `CommandGroup` · `CommandShortcut`                                                   |
+| `typography.size.xs`        | `text-xs`                                     | `CommandEmpty` · `CommandGroup` · `CommandInput` · `CommandItem` · `CommandShortcut` |
+
+Relevé dans `components/ui/command.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Dialog`, `InputGroup` : les tokens de ces composants sont listés dans leurs specs.
 
 ## Props / API
 

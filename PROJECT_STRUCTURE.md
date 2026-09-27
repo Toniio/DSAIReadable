@@ -154,6 +154,7 @@ Une spec par composant. Structure en 13 sections :
 `Metadata` · `Rôle` · `Usage` · `Contraintes` · `Dépendances` · `Anatomie` · `Tokens utilisés` · `Props / API` · `Variantes` · `États` · `Accessibilité` · `Exemple de code` · `Références croisées`
 
 `Variantes` est générée depuis les `cva()` du code (`npm run specs:variants`) ;
+`Tokens utilisés` est générée depuis les classes du code, résolues par Tailwind jusqu'au token sémantique (`npm run specs:tokens`) ;
 `Accessibilité` suit une structure fixe — Pattern, Rôle, Clavier, Nom accessible, Vigilance.
 
 ### `specs/foundations/` — Specs des fondations

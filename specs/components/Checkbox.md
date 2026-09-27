@@ -45,14 +45,19 @@ Case à cocher binaire (ou indéterminée) permettant la sélection d'une option
 
 ## Tokens utilisés
 
-| Token                                  | Usage                                                 |
-| -------------------------------------- | ----------------------------------------------------- |
-| `--color-border-input`                 | Bordure état non coché par défaut                     |
-| `--color-border-focus`                 | Bordure + anneau `focus-visible`                      |
-| `--color-action-background-default`    | Fond état coché (`bg-primary`)                        |
-| `--color-action-background-foreground` | Couleur de l'icône cochée (`text-primary-foreground`) |
-| `--color-feedback-error-default`       | Bordure et anneau état `aria-invalid`                 |
-| `--opacity-disabled`                   | Opacité 50 % état `disabled`                          |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables                                                                           | Où                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `border-width.default`               | `border`                                                                                       | `Checkbox`                                                |
+| `color.action.background.default`    | `bg-primary` · `border-primary`                                                                | `Checkbox`                                                |
+| `color.action.background.foreground` | `text-primary-foreground`                                                                      | `Checkbox`                                                |
+| `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                 | `Checkbox` via `FOCUS_RING` (`lib/focus.ts`)              |
+| `color.border.input`                 | `bg-input/30` · `border-input`                                                                 | `Checkbox`                                                |
+| `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Checkbox`                                                |
+| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `Checkbox` · `Checkbox` via `FOCUS_RING` (`lib/focus.ts`) |
+
+Relevé dans `components/ui/checkbox.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

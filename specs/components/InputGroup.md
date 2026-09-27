@@ -48,12 +48,22 @@ Conteneur structurant un champ de saisie avec des addons (icônes, boutons, text
 
 ## Tokens utilisés
 
-| Token                      | Usage                                                                  |
-| -------------------------- | ---------------------------------------------------------------------- |
-| `--color-input`            | Bordure du groupe (`border-input`), fond disabled (`bg-input/50`)      |
-| `--color-ring`             | Anneau de focus (`ring-ring/50`, `border-ring`)                        |
-| `--color-destructive`      | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`) |
-| `--color-muted-foreground` | Texte des addons et labels (`text-muted-foreground`)                   |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                                                 | Où                                                                        |
+| ------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `border-width.default`          | `border`                                                             | `InputGroup`                                                              |
+| `color.border.focus`            | `border-ring` · `ring-ring/50`                                       | `InputGroup`                                                              |
+| `color.border.input`            | `bg-input/30` · `bg-input/50` · `bg-input/80` · `border-input`       | `InputGroup`                                                              |
+| `color.feedback.error.default`  | `border-destructive` · `ring-destructive/20` · `ring-destructive/40` | `InputGroup`                                                              |
+| `color.text.subtle`             | `text-muted-foreground`                                              | `InputGroupText` · `inputGroupAddonVariants`                              |
+| `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                             | `InputGroup`                                                              |
+| `typography.font-weight.medium` | `font-medium`                                                        | `inputGroupAddonVariants`                                                 |
+| `typography.size.xs`            | `text-xs`                                                            | `InputGroupText` · `inputGroupAddonVariants` · `inputGroupButtonVariants` |
+
+Relevé dans `components/ui/input-group.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Button`, `Input`, `Textarea` : les tokens de ces composants sont listés dans leurs specs.
 
 ## Props / API
 

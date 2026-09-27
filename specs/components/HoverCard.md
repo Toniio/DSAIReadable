@@ -44,13 +44,19 @@ Carte flottante de prévisualisation apparaissant au survol d'un élément, affi
 
 ## Tokens utilisés
 
-| Token                     | Usage                                |
-| ------------------------- | ------------------------------------ |
-| `bg-popover`              | Fond de la carte flottante           |
-| `text-popover-foreground` | Couleur du texte                     |
-| `ring-foreground/10`      | Bordure subtile autour du contenu    |
-| `shadow-md`               | Ombre portée de la carte             |
-| `duration-fast`           | Durée des animations d'entrée/sortie |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                             | Où                 |
+| -------------------------------- | ------------------------------------------------ | ------------------ |
+| `color.background.elevated`      | `bg-popover`                                     | `HoverCardContent` |
+| `color.text.default`             | `ring-foreground/10` · `text-popover-foreground` | `HoverCardContent` |
+| `elevation.md`                   | `shadow-md`                                      | `HoverCardContent` |
+| `motion.duration.fast`           | `duration-fast`                                  | `HoverCardContent` |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                                | `HoverCardContent` |
+| `typography.size.xs`             | `text-xs/relaxed`                                | `HoverCardContent` |
+| `zindex.popover`                 | `z-popover`                                      | `HoverCardContent` |
+
+Relevé dans `components/ui/hover-card.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

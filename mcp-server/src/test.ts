@@ -559,6 +559,34 @@ assert(
   "A mapping table (Logo size → classes) is not served as props"
 )
 
+// Tokens utilisés is generated (scripts/build-spec-tokens.ts) with columns
+// Token | Classes et variables | Où. Read by position, the old parser served
+// the class list as the token's "usage" and dropped where it is used.
+type TokenRow = { token: string; classes: string[]; where: string[] }
+const tokenSpecs = specs as unknown as Record<
+  string,
+  { tokens: TokenRow[]; tokens_from: string[] }
+>
+const buttonPrimary = tokenSpecs.Button?.tokens.find(
+  (t) => t.token === "color.action.background.default"
+)
+assert(
+  buttonPrimary?.classes.includes("bg-primary") === true &&
+    buttonPrimary.where.includes("buttonVariants.variant.default"),
+  "Token rows read by header: token, classes and where (Button primary)"
+)
+assert(
+  Object.values(tokenSpecs).every((s) =>
+    s.tokens.every((t) => /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(t.token))
+  ),
+  "Every served token is a bare DTCG path (no backticks, no header row)"
+)
+assert(
+  tokenSpecs.Pagination?.tokens.length === 0 &&
+    tokenSpecs.Pagination.tokens_from.includes("Button"),
+  "A component with no token of its own points to the specs it composes"
+)
+
 const uxRules = (
   JSON.parse(readFileSync(resolve(contextDir, "ux-writing.json"), "utf-8")) as {
     general_rules: Array<{ rule: string }>

@@ -59,19 +59,23 @@ Menu déroulant déclenché par un clic sur un bouton, affichant une liste d'act
 
 ## Tokens utilisés
 
-| Token                     | Usage                                       |
-| ------------------------- | ------------------------------------------- |
-| `bg-popover`              | Fond du menu et sous-menu                   |
-| `text-popover-foreground` | Couleur du texte des items                  |
-| `bg-accent`               | Fond de l'item au focus                     |
-| `text-accent-foreground`  | Texte de l'item au focus                    |
-| `text-destructive`        | Texte d'un item destructeur                 |
-| `bg-destructive/10`       | Fond d'un item destructeur au focus (light) |
-| `bg-destructive/20`       | Fond d'un item destructeur au focus (dark)  |
-| `text-muted-foreground`   | Couleur des labels et raccourcis            |
-| `bg-border`               | Couleur du séparateur                       |
-| `ring-foreground/10`      | Bordure subtile du contenu                  |
-| `duration-fast`           | Durée des animations d'entrée/sortie        |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                          | Classes et variables                                                        | Où                                                                                                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color.background.elevated`    | `bg-popover`                                                                | `DropdownMenuContent` · `DropdownMenuSubContent`                                                                                                                                 |
+| `color.background.subtle`      | `bg-accent`                                                                 | `DropdownMenuCheckboxItem` · `DropdownMenuItem` · `DropdownMenuRadioItem` · `DropdownMenuSubTrigger`                                                                             |
+| `color.border.default`         | `bg-border`                                                                 | `DropdownMenuSeparator`                                                                                                                                                          |
+| `color.feedback.error.default` | `bg-destructive/10` · `bg-destructive/20` · `text-destructive`              | `DropdownMenuItem`                                                                                                                                                               |
+| `color.text.default`           | `ring-foreground/10` · `text-accent-foreground` · `text-popover-foreground` | `DropdownMenuCheckboxItem` · `DropdownMenuContent` · `DropdownMenuItem` · `DropdownMenuRadioItem` · `DropdownMenuShortcut` · `DropdownMenuSubContent` · `DropdownMenuSubTrigger` |
+| `color.text.subtle`            | `text-muted-foreground`                                                     | `DropdownMenuLabel` · `DropdownMenuShortcut`                                                                                                                                     |
+| `elevation.lg`                 | `shadow-lg`                                                                 | `DropdownMenuSubContent`                                                                                                                                                         |
+| `elevation.md`                 | `shadow-md`                                                                 | `DropdownMenuContent`                                                                                                                                                            |
+| `motion.duration.fast`         | `duration-fast`                                                             | `DropdownMenuContent` · `DropdownMenuSubContent`                                                                                                                                 |
+| `typography.size.xs`           | `text-xs`                                                                   | `DropdownMenuCheckboxItem` · `DropdownMenuItem` · `DropdownMenuLabel` · `DropdownMenuRadioItem` · `DropdownMenuShortcut` · `DropdownMenuSubTrigger`                              |
+| `zindex.popover`               | `z-popover`                                                                 | `DropdownMenuContent` · `DropdownMenuSubContent`                                                                                                                                 |
+
+Relevé dans `components/ui/dropdown-menu.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

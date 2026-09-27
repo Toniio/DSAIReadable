@@ -45,12 +45,13 @@ Fournisseur de notifications toast éphémères, basé sur la librairie `sonner`
 
 ## Tokens utilisés
 
-| Token                        | Usage                                         |
-| ---------------------------- | --------------------------------------------- |
-| `--color-popover`            | Fond du toast (`--normal-bg`)                 |
-| `--color-popover-foreground` | Texte du toast (`--normal-text`)              |
-| `--color-border`             | Bordure du toast (`--normal-border`)          |
-| `--radius-md`                | Rayon de bordure du toast (`--border-radius`) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token       | Classes et variables | Où                        |
+| ----------- | -------------------- | ------------------------- |
+| `radius.md` | `var(--radius-md)`   | `Toaster.--border-radius` |
+
+Relevé dans `components/ui/sonner.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

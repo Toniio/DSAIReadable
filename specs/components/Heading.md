@@ -40,10 +40,18 @@ Titre sémantique (h1–h4) avec quatre tailles visuelles et la police heading.
 
 ## Tokens utilisés
 
-| Token            | Usage                                         |
-| ---------------- | --------------------------------------------- |
-| `--font-heading` | Famille typographique (classe `font-heading`) |
-| `--foreground`   | Couleur du texte, héritée du contexte         |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                             | Classes et variables | Où                        |
+| --------------------------------- | -------------------- | ------------------------- |
+| `typography.font-weight.semibold` | `font-semibold`      | `headingVariants`         |
+| `typography.letter-spacing.tight` | `tracking-tight`     | `headingVariants`         |
+| `typography.size.2xl`             | `text-2xl`           | `headingVariants.level.1` |
+| `typography.size.base`            | `text-base`          | `headingVariants.level.4` |
+| `typography.size.lg`              | `text-lg`            | `headingVariants.level.3` |
+| `typography.size.xl`              | `text-xl`            | `headingVariants.level.2` |
+
+Relevé dans `components/ui/heading.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

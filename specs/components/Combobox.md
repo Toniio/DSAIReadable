@@ -60,19 +60,29 @@ Champ de saisie avec auto-complétion et sélection parmi une liste d'options fi
 
 ## Tokens utilisés
 
-| Token                        | Usage                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------ |
-| `--color-popover`            | Fond du popup (`bg-popover`)                                                   |
-| `--color-popover-foreground` | Texte dans le popup (`text-popover-foreground`)                                |
-| `--color-muted-foreground`   | Texte secondaire : labels, icône trigger (`text-muted-foreground`)             |
-| `--color-accent`             | Fond de l'option survolée (`bg-accent`)                                        |
-| `--color-accent-foreground`  | Texte de l'option survolée (`text-accent-foreground`)                          |
-| `--color-foreground`         | Bordure anneau du popup (`ring-foreground/10`), texte chip (`text-foreground`) |
-| `--color-input`              | Bordure du conteneur chips (`border-input`)                                    |
-| `--color-ring`               | Anneau de focus des chips (`ring-ring/50`)                                     |
-| `--color-destructive`        | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`)         |
-| `--color-muted`              | Fond des chips (`bg-muted`)                                                    |
-| `--color-border`             | Séparateur (`bg-border`)                                                       |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                                                                            | Où                                                                                    |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `border-width.default`          | `border`                                                                                        | `ComboboxChips`                                                                       |
+| `color.background.elevated`     | `bg-popover`                                                                                    | `ComboboxContent`                                                                     |
+| `color.background.subtle`       | `bg-accent` · `bg-muted`                                                                        | `ComboboxChip` · `ComboboxItem`                                                       |
+| `color.border.default`          | `bg-border`                                                                                     | `ComboboxSeparator`                                                                   |
+| `color.border.focus`            | `border-ring` · `ring-ring/50`                                                                  | `ComboboxChips` via `FOCUS_RING_WITHIN` (`lib/focus.ts`)                              |
+| `color.border.input`            | `bg-input/30` · `border-input` · `border-input/30`                                              | `ComboboxChips` · `ComboboxContent`                                                   |
+| `color.feedback.error.default`  | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40`  | `ComboboxChips`                                                                       |
+| `color.text.default`            | `ring-foreground/10` · `text-accent-foreground` · `text-foreground` · `text-popover-foreground` | `ComboboxChip` · `ComboboxContent` · `ComboboxItem`                                   |
+| `color.text.subtle`             | `text-muted-foreground`                                                                         | `ComboboxEmpty` · `ComboboxLabel` · `ComboboxTrigger`                                 |
+| `elevation.md`                  | `shadow-md`                                                                                     | `ComboboxContent`                                                                     |
+| `motion.duration.fast`          | `duration-fast`                                                                                 | `ComboboxContent`                                                                     |
+| `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                                                        | `ComboboxChips` · `ComboboxChips` via `FOCUS_RING_WITHIN` (`lib/focus.ts`)            |
+| `typography.font-weight.medium` | `font-medium`                                                                                   | `ComboboxChip`                                                                        |
+| `typography.size.xs`            | `text-xs`                                                                                       | `ComboboxChip` · `ComboboxChips` · `ComboboxEmpty` · `ComboboxItem` · `ComboboxLabel` |
+| `zindex.popover`                | `z-popover`                                                                                     | `ComboboxContent`                                                                     |
+
+Relevé dans `components/ui/combobox.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Button`, `InputGroup` : les tokens de ces composants sont listés dans leurs specs.
 
 ## Props / API
 

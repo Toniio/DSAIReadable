@@ -27,6 +27,7 @@ Conteneur et utilitaires de visualisation de données basés sur `recharts`, fou
 - Ne pas utiliser pour des tableaux de données brutes — préférer `Table` pour les données tabulaires
 - Le `ChartContainer` doit toujours recevoir un `config` valide avec au moins une entrée
 - Les couleurs définies via `theme` dans `ChartConfig` prennent priorité sur `color`
+- Chaque clé de `config` devient une variable `--color-<clé>`, injectée par `ChartStyle` : la lire dans les séries (`fill="var(--color-revenue)"`). Ce n'est pas un token : sa valeur vient de `config`
 - Ne pas imbriquer plusieurs `ChartContainer` — chaque graphique doit avoir son propre conteneur
 - Prévoir un texte alternatif ou un tableau de données associé pour l'accessibilité (les graphiques SVG ne sont pas lus par les lecteurs d'écran)
 
@@ -43,14 +44,23 @@ Conteneur et utilitaires de visualisation de données basés sur `recharts`, fou
 
 ## Tokens utilisés
 
-| Token                      | Usage                                                                                           |
-| -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `--color-muted-foreground` | Texte des axes et des labels dans le tooltip (`fill-muted-foreground`, `text-muted-foreground`) |
-| `--color-border`           | Lignes de grille, curseur et lignes de référence (`stroke-border`, `stroke-border/50`)          |
-| `--color-muted`            | Fond du secteur d'arrière-plan des barres radiales et curseur rectangle (`fill-muted`)          |
-| `--color-background`       | Fond du tooltip (`bg-background`)                                                               |
-| `--color-foreground`       | Texte des valeurs dans le tooltip (`text-foreground`)                                           |
-| `--color-{key}`            | Couleurs dynamiques par série, générées via `ChartStyle` à partir de `ChartConfig`              |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                                      | Où                                                              |
+| ------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------- |
+| `border-width.chart-indicator`  | `border-chart-indicator`                                  | `ChartTooltipContent`                                           |
+| `border-width.default`          | `border`                                                  | `ChartTooltipContent`                                           |
+| `color.background.default`      | `bg-background`                                           | `ChartTooltipContent`                                           |
+| `color.background.subtle`       | `fill-muted`                                              | `ChartContainer`                                                |
+| `color.border.default`          | `border-border/50` · `stroke-border` · `stroke-border/50` | `ChartContainer` · `ChartTooltipContent`                        |
+| `color.text.default`            | `text-foreground`                                         | `ChartTooltipContent`                                           |
+| `color.text.subtle`             | `fill-muted-foreground` · `text-muted-foreground`         | `ChartContainer` · `ChartLegendContent` · `ChartTooltipContent` |
+| `elevation.xl`                  | `shadow-xl`                                               | `ChartTooltipContent`                                           |
+| `radius.xs`                     | `rounded-xs`                                              | `ChartLegendContent` · `ChartTooltipContent`                    |
+| `typography.font-weight.medium` | `font-medium`                                             | `ChartTooltipContent`                                           |
+| `typography.size.xs`            | `text-xs`                                                 | `ChartContainer` · `ChartTooltipContent`                        |
+
+Relevé dans `components/ui/chart.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

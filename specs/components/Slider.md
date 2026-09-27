@@ -44,11 +44,18 @@ Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une
 
 ## Tokens utilisés
 
-| Token             | Usage                                                               |
-| ----------------- | ------------------------------------------------------------------- |
-| `--color-muted`   | Fond de la piste (`bg-muted`)                                       |
-| `--color-primary` | Fond de la plage sélectionnée (`bg-primary`)                        |
-| `--color-ring`    | Bordure et anneau de focus du thumb (`border-ring`, `ring-ring/50`) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                             | Classes et variables                     | Où                                                          |
+| --------------------------------- | ---------------------------------------- | ----------------------------------------------------------- |
+| `border-width.default`            | `border`                                 | `Slider`                                                    |
+| `color.action.background.default` | `bg-primary`                             | `Slider`                                                    |
+| `color.background.subtle`         | `bg-muted`                               | `Slider`                                                    |
+| `color.border.focus`              | `border-ring` · `ring-ring/50`           | `Slider`                                                    |
+| `color.static.white`              | `bg-white`                               | `Slider`                                                    |
+| `space.focus-ring-width`          | `ring-(length:--space-focus-ring-width)` | `Slider` · `Slider` via `FOCUS_RING_WIDTH` (`lib/focus.ts`) |
+
+Relevé dans `components/ui/slider.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

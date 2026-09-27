@@ -42,13 +42,21 @@ Bouton à bascule binaire (pressé/non pressé) disponible en plusieurs variante
 
 ## Tokens utilisés
 
-| Token                 | Usage                                                                  |
-| --------------------- | ---------------------------------------------------------------------- |
-| `--color-muted`       | Fond au hover et état pressé (`bg-muted`)                              |
-| `--color-foreground`  | Texte au hover et état pressé (`text-foreground`)                      |
-| `--color-input`       | Bordure variante `outline` (`border-input`)                            |
-| `--color-ring`        | Anneau de focus (`ring-ring/50`, `border-ring`)                        |
-| `--color-destructive` | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                                                 | Où                                                  |
+| ------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------- |
+| `border-width.default`          | `border`                                                             | `toggleVariants.variant.outline`                    |
+| `color.background.subtle`       | `bg-muted`                                                           | `toggleVariants.variant.outline` · `toggleVariants` |
+| `color.border.focus`            | `border-ring` · `ring-ring/50`                                       | `toggleVariants` via `FOCUS_RING` (`lib/focus.ts`)  |
+| `color.border.input`            | `border-input`                                                       | `toggleVariants.variant.outline`                    |
+| `color.feedback.error.default`  | `border-destructive` · `ring-destructive/20` · `ring-destructive/40` | `toggleVariants`                                    |
+| `color.text.default`            | `text-foreground`                                                    | `toggleVariants`                                    |
+| `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                             | `toggleVariants` via `FOCUS_RING` (`lib/focus.ts`)  |
+| `typography.font-weight.medium` | `font-medium`                                                        | `toggleVariants`                                    |
+| `typography.size.xs`            | `text-xs`                                                            | `toggleVariants`                                    |
+
+Relevé dans `components/ui/toggle.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

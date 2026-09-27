@@ -44,24 +44,24 @@
 
 ## Tokens utilisés
 
-| Token                       | Usage                                |
-| --------------------------- | ------------------------------------ |
-| `bg-primary`                | Fond variante `default`              |
-| `text-primary-foreground`   | Texte variante `default`             |
-| `bg-secondary`              | Fond variante `secondary`            |
-| `text-secondary-foreground` | Texte variante `secondary`           |
-| `bg-destructive/10`         | Fond variante `destructive` (clair)  |
-| `bg-destructive/20`         | Fond variante `destructive` (sombre) |
-| `text-destructive`          | Texte variante `destructive`         |
-| `border-border`             | Bordure variante `outline`           |
-| `text-foreground`           | Texte variante `outline`             |
-| `bg-muted`                  | Fond variante `ghost` au hover       |
-| `text-muted-foreground`     | Texte variante `ghost` au hover      |
-| `text-primary`              | Texte variante `link`                |
-| `ring-ring/50`              | Anneau de focus                      |
-| `border-ring`               | Bordure au focus                     |
-| `border-destructive`        | Bordure état `aria-invalid`          |
-| `ring-destructive/20`       | Anneau état `aria-invalid`           |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables                                                                                                                                            | Où                                                                                                                                        |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`               | `border`                                                                                                                                                        | `badgeVariants`                                                                                                                           |
+| `color.action.background.default`    | `bg-primary` · `bg-primary/80` · `text-primary`                                                                                                                 | `badgeVariants.variant.default` · `badgeVariants.variant.link`                                                                            |
+| `color.action.background.foreground` | `text-primary-foreground`                                                                                                                                       | `badgeVariants.variant.default`                                                                                                           |
+| `color.background.subtle`            | `bg-muted` · `bg-muted/50` · `bg-secondary` · `bg-secondary/80`                                                                                                 | `badgeVariants.variant.ghost` · `badgeVariants.variant.outline` · `badgeVariants.variant.secondary`                                       |
+| `color.border.default`               | `border-border`                                                                                                                                                 | `badgeVariants.variant.outline`                                                                                                           |
+| `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                                                                                  | `badgeVariants` via `FOCUS_RING` (`lib/focus.ts`)                                                                                         |
+| `color.feedback.error.default`       | `bg-destructive/10` · `bg-destructive/20` · `border-destructive` · `border-destructive/40` · `ring-destructive/20` · `ring-destructive/40` · `text-destructive` | `badgeVariants.variant.destructive` · `badgeVariants.variant.destructive` via `FOCUS_RING_DESTRUCTIVE` (`lib/focus.ts`) · `badgeVariants` |
+| `color.text.default`                 | `text-foreground` · `text-secondary-foreground`                                                                                                                 | `badgeVariants.variant.outline` · `badgeVariants.variant.secondary`                                                                       |
+| `color.text.subtle`                  | `text-muted-foreground`                                                                                                                                         | `badgeVariants.variant.ghost` · `badgeVariants.variant.outline`                                                                           |
+| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                                                                                        | `badgeVariants` via `FOCUS_RING` (`lib/focus.ts`)                                                                                         |
+| `typography.font-weight.medium`      | `font-medium`                                                                                                                                                   | `badgeVariants`                                                                                                                           |
+| `typography.size.xs`                 | `text-xs`                                                                                                                                                       | `badgeVariants`                                                                                                                           |
+
+Relevé dans `components/ui/badge.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 
