@@ -26,9 +26,9 @@ Déclencheur d'action primaire ou secondaire, disponible en plusieurs variantes 
 
 - **MUST NOT** — rendre un `<button>` pour naviguer vers un site externe → un `<a href>`, via `asChild` pour garder l'apparence
 - **MUST NOT** — placer plus de 2 boutons `variant="default"` (primaires) dans une même vue
-- L'état `disabled` supprime les événements pointer ; ne pas transmettre d'info uniquement via la couleur (ajouter un texte ou tooltip)
-- Les variantes `icon-*` requièrent un `aria-label` explicite
-- Ne pas imbriquer un `<button>` dans un autre `<button>` même via `asChild`
+- **MUST NOT** — signaler un état par la couleur seule : ajouter un texte ou un tooltip
+- **MUST** — donner un `aria-label` à un bouton de taille `icon-*`
+- **MUST NOT** — imbriquer un `<button>` dans un autre, y compris via `asChild`
 
 ## Dépendances
 

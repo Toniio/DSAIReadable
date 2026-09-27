@@ -24,11 +24,11 @@ Composant de navigation séquentielle permettant de parcourir des ensembles de r
 ## Contraintes
 
 - **MUST NOT** — servir de navigation hiérarchique → utiliser `Breadcrumb`
-- Le composant n'inclut pas de logique de pagination — le consommateur doit gérer l'état et les URLs
-- La page active porte `aria-current="page"` ; ne pas dupliquer cet attribut
-- Les liens `PaginationPrevious` et `PaginationNext` nécessitent un `href` valide ou un handler
-- L'ellipsis est masqué des lecteurs d'écran (`aria-hidden`)
-- Chaînes par défaut en anglais issues de `UI_STRINGS.pagination` — surcharger via `text`, `label` et `srLabel`
+- **MUST** — gérer soi-même l'état et les URL de pagination : le composant n'en contient pas
+- **MUST NOT** — dupliquer `aria-current="page"`, que la page active porte déjà
+- **MUST** — donner à `PaginationPrevious` et `PaginationNext` un `href` valide ou un handler
+- **Note** — l'ellipsis est masqué aux lecteurs d'écran (`aria-hidden`)
+- **MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.pagination` via `text`, `label` et `srLabel`
 
 ## Dépendances
 

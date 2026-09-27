@@ -26,9 +26,9 @@ Conteneur flottant interactif déclenché par un clic, permettant d'afficher du 
 
 - **MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`
 - **MUST NOT** — afficher une liste d'actions → utiliser `DropdownMenu`
-- Un seul Popover ouvert à la fois par défaut (sauf gestion manuelle)
+- **Note** — un seul `Popover` s'ouvre à la fois, sauf état contrôlé à la main
 - **MUST NOT** — contenir un contenu qui impose un défilement interne, ni un formulaire de plus de 3 champs → utiliser `Dialog` ou `Sheet`
-- Tester le positionnement sur les bords de l'écran (flip automatique Radix)
+- **MUST** — tester le positionnement près des bords de l'écran (retournement automatique de Radix)
 
 ## Dépendances
 

@@ -24,10 +24,10 @@ Bouton à bascule binaire (pressé/non pressé) disponible en plusieurs variante
 ## Contraintes
 
 - **MUST NOT** — déclencher une action non réversible → utiliser `Button`
-- Ne pas utiliser comme remplacement d'un `Switch` dans un formulaire de paramètres
-- La variante `outline` ajoute une bordure ; ne pas la combiner avec une bordure parente
-- Requiert un conteneur `"use client"` (composant client-side)
-- Fournir un `aria-label` lorsque le contenu est uniquement une icône
+- **MUST NOT** — remplacer un `Switch` dans un formulaire de réglages
+- **MUST NOT** — combiner la variante `outline` avec une bordure parente
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
+- **MUST** — donner un `aria-label` à un `Toggle` réduit à son icône
 
 ## Dépendances
 

@@ -24,9 +24,9 @@ Représentation visuelle d'un utilisateur ou d'une entité sous forme de photo, 
 
 ## Contraintes
 
-- Toujours fournir un `AvatarFallback` comme alternative à l'image
-- Ne pas utiliser `AvatarBadge` sans contexte textuel accessible (ajouter un `aria-label`)
-- L'image doit avoir un attribut `alt` descriptif via les props de `AvatarImage`
+- **MUST** — fournir un `AvatarFallback`, affiché si l'image manque
+- **MUST NOT** — utiliser `AvatarBadge` sans `aria-label` qui dit ce qu'il signale
+- **MUST** — donner un `alt` descriptif à `AvatarImage`
 - **MUST NOT** — afficher plus de 4 avatars dans un `AvatarGroup` : au-delà, montrer les 3 premiers et le reste dans `AvatarGroupCount`
 
 ## Dépendances

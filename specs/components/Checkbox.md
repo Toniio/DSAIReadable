@@ -23,11 +23,11 @@ Case à cocher binaire (ou indéterminée) permettant la sélection d'une option
 
 ## Contraintes
 
-- Toujours associer à un `<Label>` via `id` / `htmlFor` ou en l'encapsulant dans `<Field>`
+- **MUST** — associer la case à un `Label` (`id` / `htmlFor`) ou l'envelopper dans un `Field`
 - **MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`
-- La zone de clic étendue (`after: absolute -inset-x-3 -inset-y-2`) ne doit pas chevaucher d'autres contrôles interactifs adjacents
-- En état `disabled`, la valeur n'est pas soumise par le formulaire natif
-- Ne pas transmettre l'état uniquement par la couleur (ajouter une icône ou un texte)
+- **MUST NOT** — laisser la zone de clic étendue (`after:-inset-x-3 after:-inset-y-2`) chevaucher un contrôle voisin
+- **Note** — désactivée, la case n'est pas soumise avec le formulaire natif
+- **MUST NOT** — signaler un état par la couleur seule : ajouter une icône ou un texte
 
 ## Dépendances
 

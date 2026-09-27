@@ -25,9 +25,9 @@ Champ de saisie texte mono-ligne (ou fichier) servant de brique de base pour tou
 
 - **MUST NOT** — servir à une saisie sur plusieurs lignes → utiliser `Textarea`
 - **MUST NOT** — servir à un choix parmi des valeurs fixes → utiliser `Select` ou `Checkbox`
-- L'attribut `placeholder` ne remplace pas un `<Label>` visible
-- Un seul `Input` doit être `autofocus` par vue pour ne pas perturber la navigation clavier
-- En état `disabled`, le curseur passe en `not-allowed` ; la valeur n'est pas soumise avec le formulaire
+- **MUST NOT** — remplacer un `Label` visible par un `placeholder`
+- **MUST NOT** — mettre `autoFocus` sur plus d'un champ par vue
+- **Note** — désactivé, le champ affiche le curseur `not-allowed` et sa valeur n'est pas soumise
 
 ## Dépendances
 

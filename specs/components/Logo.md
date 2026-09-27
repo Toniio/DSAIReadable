@@ -23,9 +23,9 @@ Marque visuelle de l'application. Le composant rend le pictogramme seul ; il est
 ## Contraintes
 
 - **MUST** — afficher le logo avec le composant `Logo`, jamais avec un SVG inséré à la main
-- Ne pas déformer les proportions — passer par la prop `size`
-- Le composant n'affiche pas de logotype textuel : les enfants passés en props ne sont pas rendus. Pour accoler un nom de marque, le placer à côté du `Logo`
-- Le composant est un placeholder — remplacer par les vrais assets brand une fois disponibles
+- **MUST NOT** — déformer les proportions : passer par `size`
+- **MUST** — placer le nom de marque à côté du `Logo` : il ne rend pas ses enfants
+- **MUST** — remplacer ce placeholder par les vrais assets de marque dès qu'ils existent
 
 ## Dépendances
 

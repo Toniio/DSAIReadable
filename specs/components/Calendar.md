@@ -26,9 +26,9 @@ Sélecteur de date(s) interactif basé sur `react-day-picker`, supportant la sé
 
 - **MUST NOT** — servir d'agenda ou de planning (vues jour, semaine) : le design system n'en fournit pas
 - **MUST NOT** — afficher plus d'un `Calendar` par vue, **sauf** pour comparer deux plages de dates
-- Le composant nécessite un conteneur parent pour le positionnement (ex. : `Popover`, `Card`)
-- Les jours désactivés doivent rester visibles (`opacity-disabled`) avec `aria-disabled` pour l'accessibilité
-- La navigation clavier doit être fonctionnelle : flèches pour se déplacer entre les jours, Tab pour les contrôles
+- **MUST** — placer le `Calendar` dans un conteneur (`Popover`, `Card`…) : il ne se positionne pas seul
+- **MUST** — garder visibles les jours désactivés (`opacity-disabled`, `aria-disabled`)
+- **MUST NOT** — neutraliser la navigation clavier (flèches entre les jours, Tab vers les contrôles)
 
 ## Dépendances
 

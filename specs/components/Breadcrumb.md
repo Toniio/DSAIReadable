@@ -23,12 +23,12 @@ Composant de navigation secondaire affichant le chemin hiérarchique de la page 
 
 ## Contraintes
 
-- Ne pas utiliser comme navigation principale — c'est un repère contextuel
-- Un seul breadcrumb par page, placé en haut du contenu principal
-- Le dernier élément (`BreadcrumbPage`) ne doit pas être un lien cliquable
-- Les séparateurs et l'ellipsis sont masqués des lecteurs d'écran (`aria-hidden`)
-- Le composant racine porte `aria-label="breadcrumb"` — ne pas le surcharger sans raison
-- Chaînes par défaut en anglais issues de `UI_STRINGS.breadcrumb` — surcharger `BreadcrumbEllipsis` via `srLabel`
+- **MUST NOT** — servir de navigation principale : c'est un repère contextuel
+- **MUST** — placer un seul `Breadcrumb` par page, en haut du contenu principal
+- **MUST NOT** — rendre le dernier élément (`BreadcrumbPage`) cliquable
+- **Note** — les séparateurs et l'ellipsis sont masqués aux lecteurs d'écran (`aria-hidden`)
+- **MUST NOT** — remplacer l'`aria-label="breadcrumb"` de la racine, **sauf** pour le traduire
+- **MUST** — dans une interface qui n'est pas en anglais, traduire les chaînes de `UI_STRINGS.breadcrumb` (`srLabel` de `BreadcrumbEllipsis`)
 
 ## Dépendances
 

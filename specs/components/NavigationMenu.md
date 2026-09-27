@@ -26,9 +26,9 @@ Menu de navigation principal permettant d'organiser les liens du site en catégo
 
 - **MUST NOT** — servir de menu d'actions (commandes) → utiliser `Menubar` ou `DropdownMenu`
 - **MUST NOT** — dépasser 7 triggers de premier niveau
-- Le viewport peut être désactivé via `viewport={false}` pour un rendu inline
-- Les liens doivent utiliser `NavigationMenuLink` pour bénéficier de la gestion `data-active`
-- L'indicateur nécessite un positionnement relatif du parent pour fonctionner correctement
+- **Note** — `viewport={false}` rend les contenus en ligne, sans viewport
+- **MUST** — rendre chaque lien avec `NavigationMenuLink`, qui gère `data-active`
+- **MUST** — donner un positionnement relatif au parent de `NavigationMenuIndicator`
 
 ## Dépendances
 

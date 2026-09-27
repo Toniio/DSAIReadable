@@ -26,9 +26,9 @@
 
 - **MUST NOT** — servir de bouton d'action → utiliser `Button` avec `size="xs"`
 - **MUST NOT** — dépasser trois mots de texte
-- La variante `destructive` est réservée aux statuts d'erreur ou d'alerte critique
-- Ne pas imbriquer de composants interactifs complexes à l'intérieur du badge
-- Les variantes `ghost` et `link` n'ont pas de fond ; vérifier la lisibilité sur tous les arrière-plans
+- **MUST** — réserver la variante `destructive` aux statuts d'erreur ou d'alerte critique
+- **MUST NOT** — contenir d'élément interactif
+- **MUST** — vérifier le contraste des variantes `ghost` et `link`, sans fond, sur chaque arrière-plan où elles apparaissent
 
 ## Dépendances
 

@@ -24,10 +24,10 @@ Composant de navigation verticale permettant d'afficher et masquer des sections 
 
 ## Contraintes
 
-- Ne pas utiliser pour du contenu critique qui doit rester visible en permanence
+- **MUST NOT** — porter un contenu critique qui doit rester visible en permanence
 - **MUST NOT** — imbriquer un `Accordion` dans un autre : un seul niveau
-- Fournir un texte explicite dans le trigger pour l'accessibilité (pas d'icône seule)
-- L'état `disabled` sur le trigger supprime les événements pointer et réduit l'opacité
+- **MUST** — donner au trigger un texte explicite, jamais une icône seule
+- **Note** — l'état `disabled` d'un trigger supprime les événements pointer et applique `opacity-disabled`
 - **MUST NOT** — servir de navigation principale → utiliser `NavigationMenu` ou `Tabs`
 
 ## Dépendances

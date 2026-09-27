@@ -24,10 +24,10 @@ Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi u
 ## Contraintes
 
 - **MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`
-- Pour les formulaires mobiles avec de nombreuses options, `NativeSelect` offre une meilleure UX native
-- Le contenu est rendu dans un `Portal` — attention au contexte de z-index
-- Chaque `SelectItem` doit avoir une `value` unique
-- Requiert un conteneur `"use client"` (composant client-side)
+- **SHOULD** — sur mobile, utiliser `NativeSelect` pour une longue liste d'options ; **sauf** si les options exigent un rendu riche qu'un `<option>` ne peut pas afficher
+- **MUST** — tenir compte du `Portal` dans les empilements (`z-index`) : le contenu est rendu hors de son parent
+- **MUST** — donner à chaque `SelectItem` une `value` unique
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 
 ## Dépendances
 

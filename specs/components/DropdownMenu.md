@@ -26,9 +26,9 @@ Menu déroulant déclenché par un clic sur un bouton, affichant une liste d'act
 
 - **MUST NOT** — servir de menu contextuel au clic droit → utiliser `ContextMenu`
 - **MUST NOT** — servir de navigation principale → utiliser `NavigationMenu`
-- Un seul DropdownMenu ouvert à la fois
-- Les items `disabled` restent visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)
-- La largeur du contenu s'adapte à celle du trigger par défaut (`w-(--radix-dropdown-menu-trigger-width)`)
+- **Note** — un seul `DropdownMenu` s'ouvre à la fois (géré par Radix)
+- **MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)
+- **Note** — le contenu prend par défaut la largeur du trigger (`w-(--radix-dropdown-menu-trigger-width)`)
 
 ## Dépendances
 

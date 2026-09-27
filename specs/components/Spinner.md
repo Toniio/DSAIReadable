@@ -23,12 +23,12 @@ Indicateur de chargement animé signalant qu'une opération asynchrone est en co
 
 ## Contraintes
 
-- L'`aria-label` est obligatoire — la valeur par défaut `"Loading"` doit être remplacée par un libellé en français décrivant l'action (ex. : `"Connexion en cours"`)
-- Ne pas afficher plusieurs Spinners simultanément dans la même zone de vue — utiliser un seul indicateur global
-- La taille est contrôlée uniquement via `className` (ex. : `size-3`, `size-6`) — pas de prop `size` dédiée
+- **MUST** — remplacer l'`aria-label` par défaut (`"Loading"`) par un libellé qui décrit l'action (« Connexion en cours »)
+- **MUST NOT** — afficher plus d'un `Spinner` dans une même zone : un seul indicateur
+- **Note** — la taille se règle par `className` (`size-3`, `size-6`) : pas de prop `size`
 - **MUST NOT** — signaler un chargement de plus de 10 s → utiliser `Progress` avec un pourcentage
-- `role="status"` est déjà positionné ; ne pas en ajouter un second dans le parent
-- Nom accessible par défaut en anglais issu de `UI_STRINGS.spinner` — surcharger via `aria-label`
+- **MUST NOT** — ajouter un second `role="status"` dans le parent : le composant le porte
+- **MUST** — Nom accessible par défaut en anglais issu de `UI_STRINGS.spinner` — surcharger via `aria-label`
 
 ## Dépendances
 

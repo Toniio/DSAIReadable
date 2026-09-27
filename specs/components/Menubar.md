@@ -26,9 +26,9 @@ Barre de menus horizontale offrant un système de menus déroulants avec support
 
 - **MUST NOT** — servir de navigation de site → utiliser `NavigationMenu`
 - **MUST NOT** — imbriquer plus de 2 niveaux de sous-menus
-- Les items `disabled` sont visuellement atténués et non interactifs (`pointer-events-none`)
-- La variante `destructive` sur `MenubarItem` doit être réservée aux actions irréversibles
-- Les raccourcis affichés via `MenubarShortcut` doivent correspondre à des handlers réels
+- **Note** — un item `disabled` est atténué (`opacity-disabled`) et non interactif (`pointer-events-none`)
+- **MUST** — réserver `variant="destructive"` de `MenubarItem` aux actions irréversibles
+- **MUST** — brancher un handler réel pour chaque raccourci affiché par `MenubarShortcut`
 
 ## Dépendances
 

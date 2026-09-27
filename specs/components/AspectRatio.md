@@ -23,9 +23,9 @@ Conteneur qui impose un rapport largeur/hauteur fixe à son contenu (images, vid
 
 ## Contraintes
 
-- Ne pas utiliser pour du texte libre — le contenu risque d'être tronqué ou de déborder
-- Le contenu enfant doit être positionné en `absolute` ou `object-fit` pour remplir le cadre
-- Un seul enfant direct est attendu ; ne pas imbriquer plusieurs éléments sans wrapper
+- **MUST NOT** — contenir du texte libre : il serait tronqué ou déborderait
+- **MUST** — remplir le cadre avec un enfant en `absolute` (`size-full`) ou un média en `object-cover`
+- **MUST** — passer un seul enfant direct ; envelopper plusieurs éléments dans un conteneur
 
 ## Dépendances
 

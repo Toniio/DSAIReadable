@@ -23,11 +23,11 @@ Champ de saisie segmenté pour les codes à usage unique (OTP), avec navigation 
 
 ## Contraintes
 
-- Ne pas utiliser pour des saisies longues ou libres — réservé aux codes courts (4–8 caractères)
-- Chaque `InputOTPSlot` doit recevoir un `index` correspondant à sa position dans le groupe
-- Le `spellCheck` est désactivé par défaut : le navigateur ne propose pas de correction sur un code
-- L'accessibilité repose sur la bibliothèque `input-otp` ; ne pas surcharger les rôles ARIA
-- Requiert un conteneur `"use client"` (composant client-side)
+- **MUST NOT** — servir à une saisie libre ou de plus de 8 caractères : réservé aux codes de 4 à 8 caractères
+- **MUST** — donner à chaque `InputOTPSlot` l'`index` de sa position
+- **Note** — le `spellCheck` est désactivé par défaut : le navigateur ne propose pas de correction sur un code
+- **MUST NOT** — redéfinir les rôles ARIA : la bibliothèque `input-otp` les gère
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 
 ## Dépendances
 

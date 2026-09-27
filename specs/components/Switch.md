@@ -25,9 +25,9 @@ Interrupteur à bascule pour activer ou désactiver un paramètre binaire, avec 
 
 - **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
 - **MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`
-- Toujours associer un `<Label>` pour l'accessibilité
-- La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est intégrée — ne pas ajouter de padding supplémentaire
-- Requiert un conteneur `"use client"` (composant client-side)
+- **MUST** — associer un `Label`
+- **MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 
 ## Dépendances
 

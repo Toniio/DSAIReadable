@@ -22,10 +22,10 @@ Titre sémantique (h1–h4) avec quatre tailles visuelles et la police heading.
 
 ## Contraintes
 
-- Respecter la hiérarchie sémantique (pas de h1 après un h3)
-- Un seul h1 par page
-- Utiliser la prop `as` uniquement quand le niveau sémantique diffère du niveau visuel
-- Ne pas styler manuellement — passer par la prop `level`
+- **MUST NOT** — sauter un niveau de titre (un `h3` sous un `h1`)
+- **MUST NOT** — placer plus d'un `h1` par page
+- **MUST** — n'utiliser `as` que si le niveau sémantique diffère du niveau visuel
+- **MUST NOT** — styler un titre à la main : passer par `level`
 
 ## Dépendances
 

@@ -22,10 +22,10 @@
 
 ## Contraintes
 
-- Ne pas substituer un `Label` par du texte `placeholder` seul
-- Un label doit toujours référencer son contrôle (`htmlFor` ou `aria-labelledby`) — ne jamais laisser un champ sans libellé visible
+- **MUST NOT** — remplacer un `Label` par un `placeholder`
+- **MUST** — relier chaque `Label` à son contrôle (`htmlFor` ou `aria-labelledby`) ; aucun champ sans libellé visible
 - **MUST NOT** — servir de titre de section → utiliser `FieldLegend` ou `Heading`
-- Maximum un `Label` par contrôle
+- **MUST NOT** — associer plus d'un `Label` à un contrôle
 
 ## Dépendances
 

@@ -24,11 +24,11 @@ Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glisseme
 
 ## Contraintes
 
-- Ne pas utiliser sur desktop quand un `Dialog` ou un `Sheet` est plus adapté
+- **MUST NOT** — servir sur desktop (`md` et plus) → utiliser `Dialog` ou `Sheet`
 - **MUST NOT** — dépasser 80vh de hauteur en direction `top` ou `bottom` (appliqué par défaut)
-- Ne pas empiler plusieurs Drawers — un seul visible à la fois
-- `DrawerTitle` est requis pour l'accessibilité (lecteurs d'écran)
-- Le geste de fermeture par swipe peut interférer avec le scroll interne : tester sur mobile
+- **MUST NOT** — ouvrir un `Drawer` par-dessus un autre : un seul visible à la fois
+- **MUST** — rendre un `DrawerTitle` : c'est le nom annoncé par les lecteurs d'écran
+- **MUST** — tester sur mobile un `Drawer` au contenu défilant : le geste de fermeture peut capter le défilement
 
 ## Dépendances
 
