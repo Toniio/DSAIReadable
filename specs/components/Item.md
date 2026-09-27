@@ -28,7 +28,7 @@ Composant de ligne composable représentant un élément dans une liste, avec su
 - Ne pas utiliser la variante `outline` et `muted` simultanément
 - La taille `xs` est optimisée pour les menus contextuels — ne pas l'utiliser pour des listes principales
 - Limiter le nombre d'actions dans `ItemActions` (2 à 3 maximum)
-- L'`ItemGroup` applique `role="list"` ; les items ne portent pas automatiquement `role="listitem"`
+- Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role="listitem"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role="listitem"` explicitement
 
 ## Dépendances
 
@@ -39,18 +39,18 @@ Composant de ligne composable représentant un élément dans une liste, avec su
 
 ## Anatomie
 
-| Slot                           | Rôle                                                  |
-| ------------------------------ | ----------------------------------------------------- |
-| `data-slot="item"`             | Racine de l'item, porte `data-variant` et `data-size` |
-| `data-slot="item-media"`       | Média (icône, image), porte `data-variant`            |
-| `data-slot="item-content"`     | Conteneur principal (titre + description)             |
-| `data-slot="item-title"`       | Titre de l'item                                       |
-| `data-slot="item-description"` | Description secondaire                                |
-| `data-slot="item-actions"`     | Zone d'actions (boutons, badges)                      |
-| `data-slot="item-header"`      | En-tête pleine largeur                                |
-| `data-slot="item-footer"`      | Pied pleine largeur                                   |
-| `data-slot="item-group"`       | Conteneur de liste d'items (`role="list"`)            |
-| `data-slot="item-separator"`   | Séparateur horizontal entre items                     |
+| Slot                           | Rôle                                                                                          |
+| ------------------------------ | --------------------------------------------------------------------------------------------- |
+| `data-slot="item"`             | Racine de l'item, porte `data-variant` et `data-size` ; `role="listitem"` dans un `ItemGroup` |
+| `data-slot="item-media"`       | Média (icône, image), porte `data-variant`                                                    |
+| `data-slot="item-content"`     | Conteneur principal (titre + description)                                                     |
+| `data-slot="item-title"`       | Titre de l'item                                                                               |
+| `data-slot="item-description"` | Description secondaire                                                                        |
+| `data-slot="item-actions"`     | Zone d'actions (boutons, badges)                                                              |
+| `data-slot="item-header"`      | En-tête pleine largeur                                                                        |
+| `data-slot="item-footer"`      | Pied pleine largeur                                                                           |
+| `data-slot="item-group"`       | Conteneur de liste d'items (`role="list"`)                                                    |
+| `data-slot="item-separator"`   | Séparateur horizontal entre items                                                             |
 
 ## Tokens utilisés
 
@@ -134,7 +134,7 @@ Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props 
 
 **Pattern** : Liste (`role="list"`) d'éléments
 
-**Rôle** : `ItemGroup` porte `role="list"` ; `Item` est un `div` (ou l'élément fourni par `asChild`).
+**Rôle** : `ItemGroup` porte `role="list"` et donne `role="listitem"` à chaque `Item` enfant direct. Un `Item` en `asChild` (lien, bouton) garde son rôle natif : `ItemGroup` l'enveloppe dans un `div role="listitem"`. Un `role` passé explicitement à l'`Item` est conservé. Hors `ItemGroup`, `Item` est un `div` sans rôle.
 
 **Clavier** :
 
@@ -144,7 +144,8 @@ Aucune interaction propre ; un `Item` rendu en lien ou bouton suit le comporteme
 
 **Vigilance** :
 
-- **Défaut connu** : `ItemGroup` déclare `role="list"` mais `Item` n'a pas `role="listitem"` — une liste ARIA sans éléments de liste, signalée par axe. Ajouter `role="listitem"` aux `Item` d'un `ItemGroup` en attendant la correction.
+- Seuls les enfants directs d'`ItemGroup` sont reconnus : un `Item` rendu par un composant intermédiaire (`<Ligne />` qui retourne un `Item`) ou dans un fragment ne reçoit pas `role="listitem"` — le lui passer explicitement.
+- Tout autre enfant direct d'`ItemGroup` que `Item` ou `ItemSeparator` casse la liste ARIA.
 - Un `Item` entièrement cliquable ne doit pas contenir d'autre élément interactif.
 
 ## Exemple de code
