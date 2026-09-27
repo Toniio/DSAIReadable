@@ -23,10 +23,10 @@ Ligne de séparation visuelle horizontale ou verticale permettant de diviser des
 
 ## Contraintes
 
-- Utiliser `decorative={true}` (défaut) pour les séparateurs purement visuels — `aria-hidden="true"` est automatiquement appliqué
-- Utiliser `decorative={false}` uniquement si la séparation a une signification sémantique (ex. : séparation entre deux sections distinctes d'un article)
-- Ne pas multiplier les séparateurs dans une vue — utiliser l'espacement (`gap`) comme alternative quand possible
-- La hauteur (`h-px`) et la largeur (`w-px`) sont fixes ; ne pas les surcharger pour maintenir la cohérence visuelle
+- **MUST** — garder `decorative` (par défaut) pour un séparateur purement visuel : il est masqué aux lecteurs d'écran
+- **MUST** — ne passer `decorative={false}` que si la séparation a un sens (deux sections distinctes d'un article)
+- **MUST** — séparer par l'espacement (`gap`) quand un séparateur n'apporte pas de sens
+- **MUST NOT** — surcharger l'épaisseur (`h-px` / `w-px`)
 
 ## Dépendances
 

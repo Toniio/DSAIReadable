@@ -26,8 +26,8 @@ Bulle d'information contextuelle apparaissant au survol ou au focus d'un éléme
 
 - **MUST NOT** — contenir des éléments interactifs (liens, boutons) → utiliser `Popover`
 - **MUST NOT** — dépasser une ligne ou 80 caractères de texte
-- Ne pas utiliser comme seul moyen de communiquer une information critique
-- Vérifier que le `TooltipProvider` est placé en amont dans l'arbre (nécessaire pour le fonctionnement de Radix)
+- **MUST NOT** — être le seul support d'une information critique
+- **MUST** — placer un `TooltipProvider` au-dessus dans l'arbre, par exemple dans le layout racine
 - **MUST NOT** — poser un `Tooltip` directement sur un élément `disabled`, qui ne reçoit ni focus ni survol : envelopper l'élément dans un `<span tabIndex={0}>` qui porte le déclencheur
 
 ## Dépendances

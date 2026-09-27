@@ -23,10 +23,10 @@ Conteneur surfacé regroupant un titre, une description, du contenu et un pied d
 
 ## Contraintes
 
-- Ne pas imbriquer des `Card` sur plus d'un niveau — utiliser un fond différent pour créer de la hiérarchie
-- `CardAction` est positionné automatiquement en haut à droite du header ; ne pas y placer de contenu long
+- **MUST NOT** — imbriquer des `Card` sur plus d'un niveau : marquer la hiérarchie par un fond différent
+- **MUST NOT** — placer un contenu long dans `CardAction`, positionné en haut à droite de l'en-tête
 - **MUST NOT** — placer plus de 2 actions dans `CardFooter`
-- La `Card` n'est pas un composant interactif — ne pas lui ajouter `onClick` directement ; encapsuler dans un `<a>` ou un `<button>` si cliquable
+- **MUST NOT** — poser `onClick` sur une `Card` : l'envelopper dans un `<a>` ou un `<button>` si elle est cliquable
 
 ## Dépendances
 

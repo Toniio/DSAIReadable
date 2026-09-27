@@ -26,11 +26,11 @@ Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, bas
 
 - **MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`
 - **MUST NOT** — ouvrir un `Sheet` par-dessus un autre : un seul visible à la fois
-- `SheetTitle` est requis pour l'accessibilité (lecteurs d'écran)
-- La largeur est limitée à `sm:max-w-sm` pour les côtés gauche/droite
-- Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible
-- Sur mobile, considérer `Drawer` (avec geste swipe) comme alternative
-- Chaînes par défaut en anglais issues de `UI_STRINGS.sheet` — surcharger via `closeLabel`
+- **MUST** — rendre un `SheetTitle` : c'est le nom annoncé par les lecteurs d'écran
+- **Note** — à gauche et à droite, la largeur est limitée à `sm:max-w-sm`
+- **MUST** — garder un moyen de fermer le panneau quand `showCloseButton={false}` masque le bouton
+- **SHOULD** — sur mobile, utiliser `Drawer`, qui se ferme au geste ; **sauf** pour un panneau latéral de navigation
+- **MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.sheet` via `closeLabel`
 
 ## Dépendances
 

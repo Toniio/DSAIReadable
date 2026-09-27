@@ -25,10 +25,10 @@ Champ de saisie avec auto-complétion et sélection parmi une liste d'options fi
 ## Contraintes
 
 - **MUST NOT** — servir pour moins de 5 options → utiliser `Select` ou `NativeSelect`
-- L'option vide (`ComboboxEmpty`) doit toujours être fournie pour le cas « aucun résultat »
-- En mode multi-sélection, fournir un `anchor` pour le positionnement du popup par rapport aux chips
-- Les éléments `ComboboxItem` doivent avoir une valeur unique pour le bon fonctionnement de l'indicateur de sélection
-- Requiert un conteneur `"use client"` (composant client-side)
+- **MUST** — rendre un `ComboboxEmpty` pour le cas « aucun résultat »
+- **MUST** — en multi-sélection, fournir un `anchor` (`useComboboxAnchor`) pour positionner le popup sous les chips
+- **MUST** — donner à chaque `ComboboxItem` une valeur unique
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 - **MUST** — dans une interface qui n'est pas en anglais, traduire le nom accessible des trois boutons icon-only (trigger, clear, remove de chip) via `triggerLabel`, `clearLabel` et `removeLabel` : il est en anglais par défaut
 
 ## Dépendances

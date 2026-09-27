@@ -24,10 +24,10 @@ Groupe de boutons radio permettant la sélection exclusive d'une seule option pa
 ## Contraintes
 
 - **MUST NOT** — servir pour plus de 6 options → utiliser `Select` ou `Combobox`
-- Toujours associer chaque `RadioGroupItem` à un `<Label>` pour l'accessibilité
+- **MUST** — associer chaque `RadioGroupItem` à un `Label`
 - **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
-- La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est déjà intégrée — ne pas ajouter de padding supplémentaire
-- Requiert un conteneur `"use client"` (composant client-side)
+- **MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 
 ## Dépendances
 

@@ -24,10 +24,10 @@ Carte flottante de prévisualisation apparaissant au survol d'un élément, affi
 ## Contraintes
 
 - **MUST NOT** — contenir des éléments interactifs (formulaires, boutons) → utiliser `Popover`
-- Ne pas utiliser sur mobile (le survol n'existe pas sur tactile) — prévoir un fallback
-- Le contenu doit être purement informatif et non essentiel
+- **MUST NOT** — servir seul sur mobile, où le survol n'existe pas : prévoir un accès au clic
+- **MUST NOT** — contenir une information indispensable : le contenu est un complément
 - **MUST NOT** — poser des `HoverCard` sur deux déclencheurs adjacents (liste dense) : le survol de l'un ouvre l'autre
-- Ne pas y placer de contenu critique que l'utilisateur doit impérativement voir
+- **MUST NOT** — contenir un contenu critique que l'utilisateur doit voir
 
 ## Dépendances
 

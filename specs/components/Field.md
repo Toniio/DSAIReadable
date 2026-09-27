@@ -26,14 +26,14 @@ Système de mise en page pour les champs de formulaire, gérant l'association La
 
 ## Contraintes
 
-- Ne pas imbriquer des `<FieldSet>` sur plus de 2 niveaux — complexité cognitive
-- `data-invalid` doit être géré côté consommateur (validation côté serveur ou client)
-- `aria-invalid` doit être posé sur le contrôle lui-même : `<Field>` ne le propage pas
+- **MUST NOT** — imbriquer des `FieldSet` sur plus de 2 niveaux
+- **MUST** — poser `data-invalid` soi-même, selon la validation (serveur ou client) : `Field` ne valide rien
+- **MUST** — poser `aria-invalid` sur le contrôle lui-même : `Field` ne le propage pas
 - **MUST NOT** — utiliser `orientation="horizontal"` dans une mise en page qui doit tenir sur mobile → `orientation="responsive"`, qui passe en ligne quand son `FieldGroup` est assez large
-- L'orientation `responsive` exige un `<FieldGroup>` parent : elle s'appuie sur le conteneur `@container/field-group`
-- `<FieldLegend variant="legend">` est réservé aux `<fieldset>` ; utiliser `variant="label"` pour les contextes non-fieldset
-- `<FieldError>` ne rend rien si ni `children` ni `errors` non vide ne sont fournis
-- `<FieldTitle>` n'est pas un `<label>` : il ne lie pas de contrôle. Pour une association `htmlFor`, utiliser `<FieldLabel>`
+- **MUST** — placer un `Field` en `orientation="responsive"` dans un `FieldGroup`, dont il lit la largeur (`@container/field-group`)
+- **MUST** — réserver `FieldLegend variant="legend"` aux `<fieldset>` ; ailleurs, `variant="label"`
+- **Note** — `FieldError` ne rend rien sans `children` ni `errors` non vide
+- **MUST** — utiliser `FieldLabel` pour associer un libellé à un contrôle (`htmlFor`) : `FieldTitle` n'est pas un `<label>`
 
 ## Dépendances
 

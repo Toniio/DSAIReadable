@@ -24,10 +24,10 @@ Menu contextuel déclenché par un clic droit, affichant une liste d'actions per
 ## Contraintes
 
 - **MUST NOT** — servir de menu principal de navigation → utiliser `DropdownMenu`
-- Le menu contextuel remplace le menu natif du navigateur : s'assurer que les actions proposées sont pertinentes
-- Un seul menu contextuel visible à la fois (géré par Radix)
-- Prévoir un fallback clavier (touche `Shift+F10` ou touche contextuelle)
-- Les items `disabled` doivent rester visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)
+- **MUST** — ne proposer que des actions propres à l'élément ciblé : le menu remplace celui du navigateur
+- **Note** — un seul menu contextuel s'ouvre à la fois (géré par Radix)
+- **MUST** — rendre les mêmes actions accessibles au clavier (`Shift+F10` ou touche menu)
+- **MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)
 
 ## Dépendances
 

@@ -24,10 +24,10 @@ Menu déroulant natif du navigateur, léger et accessible, pour la sélection d'
 ## Contraintes
 
 - **MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`
-- Le style du menu déroulant ouvert dépend du navigateur et n'est pas personnalisable
-- Les options utilisent les couleurs système (`Canvas`, `CanvasText`) pour garantir la lisibilité native
-- La prop `size` est custom (pas celle native de `<select>`) — `"sm"` et `"default"` uniquement
-- Ne pas oublier un `<option value="">` vide pour le placeholder
+- **Note** — le menu ouvert est dessiné par le navigateur et ne se stylise pas
+- **Note** — les options prennent les couleurs système (`Canvas`, `CanvasText`)
+- **Note** — `size` est une prop du composant, pas l'attribut natif de `<select>` : `"sm"` ou `"default"`
+- **MUST** — prévoir une `<option value="">` vide comme placeholder
 
 ## Dépendances
 

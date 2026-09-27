@@ -23,11 +23,11 @@ Placeholder pour illustrations et images décoratives. Utilisé dans les layouts
 
 ## Contraintes
 
-- Toujours fournir un `alt` descriptif — il alimente `role="img"` + `aria-label`
-- Ce composant est un placeholder : remplacer par de vraies illustrations en production
+- **MUST** — fournir un `alt` descriptif : il alimente `role="img"` et `aria-label`
+- **MUST** — remplacer ce placeholder par de vraies illustrations avant la production
 - **MUST NOT** — afficher une image de contenu → utiliser `<img>` ou `next/image`
-- Le conteneur n'impose aucune dimension : les fixer via `className` côté appelant
-- Texte alternatif par défaut en anglais issu de `UI_STRINGS.illustration` — surcharger via `alt`
+- **MUST** — fixer les dimensions via `className` : le conteneur n'en impose aucune
+- **MUST** — dans une interface qui n'est pas en anglais, traduire le texte alternatif par défaut (`UI_STRINGS.illustration`) via `alt`
 
 ## Dépendances
 

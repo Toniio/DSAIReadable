@@ -25,11 +25,11 @@ Conteneur et utilitaires de visualisation de données basés sur `recharts`, fou
 ## Contraintes
 
 - **MUST NOT** — présenter des données brutes à lire valeur par valeur → utiliser `Table`
-- Le `ChartContainer` doit toujours recevoir un `config` valide avec au moins une entrée
-- Les couleurs définies via `theme` dans `ChartConfig` prennent priorité sur `color`
-- Chaque clé de `config` devient une variable `--color-<clé>`, injectée par `ChartStyle` : la lire dans les séries (`fill="var(--color-revenue)"`). Ce n'est pas un token : sa valeur vient de `config`
-- Ne pas imbriquer plusieurs `ChartContainer` — chaque graphique doit avoir son propre conteneur
-- Prévoir un texte alternatif ou un tableau de données associé pour l'accessibilité (les graphiques SVG ne sont pas lus par les lecteurs d'écran)
+- **MUST** — passer à `ChartContainer` un `config` d'au moins une entrée
+- **Note** — dans `ChartConfig`, `theme` prime sur `color`
+- **MUST** — lire la couleur d'une série dans la variable `--color-<clé>` que `ChartStyle` injecte pour chaque clé de `config` (`fill="var(--color-revenue)"`) ; ce n'est pas un token : sa valeur vient de `config`
+- **MUST NOT** — imbriquer des `ChartContainer` : un conteneur par graphique
+- **MUST** — accompagner le graphique d'un texte alternatif ou d'un tableau de données : les lecteurs d'écran ne lisent pas le SVG
 
 ## Dépendances
 

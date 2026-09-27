@@ -26,10 +26,10 @@ Conteneur de défilement horizontal ou vertical permettant de naviguer entre des
 
 - **MUST NOT** — porter un contenu critique, qui doit être visible sans interaction → une grille
 - **MUST NOT** — afficher plus d'un `Carousel` par vue : leurs navigations clavier entrent en conflit
-- Les boutons précédent/suivant doivent rester accessibles ; ne pas masquer les contrôles de navigation
-- Fournir un `aria-label` descriptif sur le conteneur pour les lecteurs d'écran
-- Le composant nécessite `CarouselContent` et au moins un `CarouselItem` comme enfants
-- Chaînes par défaut en anglais issues de `UI_STRINGS.carousel` — surcharger via `srLabel` sur `CarouselPrevious` / `CarouselNext`
+- **MUST NOT** — masquer les boutons précédent et suivant
+- **MUST** — donner au conteneur un `aria-label` descriptif
+- **MUST** — contenir un `CarouselContent` et au moins un `CarouselItem`
+- **MUST** — dans une interface qui n'est pas en anglais, traduire les chaînes de `UI_STRINGS.carousel` (`srLabel` de `CarouselPrevious` et `CarouselNext`)
 
 ## Dépendances
 

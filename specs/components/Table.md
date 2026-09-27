@@ -24,11 +24,11 @@ Ensemble de composants pour construire des tableaux de données sémantiques ave
 
 ## Contraintes
 
-- Ne pas utiliser pour la mise en page — les tableaux sont réservés aux données tabulaires uniquement
-- Le conteneur gère le défilement horizontal (`overflow-x-auto`) ; ne pas ajouter de scroll parent redondant
+- **MUST NOT** — servir à la mise en page : réservé aux données tabulaires
+- **MUST NOT** — ajouter un défilement horizontal parent : le conteneur défile déjà (`overflow-x-auto`)
 - **MUST** — au-delà de 4 colonnes, masquer les colonnes secondaires sous 640 px (le conteneur de `Table` défile déjà horizontalement)
-- Les cellules avec `role="checkbox"` reçoivent un padding réduit automatiquement (`pr-0`)
-- Fournir un `TableCaption` ou un `aria-label` pour l'accessibilité quand le contexte du tableau n'est pas évident
+- **Note** — une cellule `role="checkbox"` reçoit un padding réduit (`pr-0`)
+- **MUST** — nommer le tableau (`TableCaption` ou `aria-label`) quand le contexte ne le fait pas
 
 ## Dépendances
 

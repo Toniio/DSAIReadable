@@ -24,10 +24,10 @@ Barre de progression linéaire indiquant visuellement l'avancement d'une opérat
 
 ## Contraintes
 
-- Ne pas utiliser pour des valeurs indéterminées sans le communiquer — ajouter `aria-valuetext` ou un label explicite
+- **MUST NOT** — afficher une progression indéterminée sans le dire : `aria-valuetext` ou libellé explicite
 - **MUST NOT** — afficher plus d'une barre `Progress` par section
-- Toujours fournir un label associé (via `aria-label` ou un élément `<label>`) pour les lecteurs d'écran
-- La valeur `value` doit être comprise entre 0 et `max` (100 par défaut) — les valeurs hors limites ne sont pas gérées
+- **MUST** — nommer la barre (`aria-label` ou `<label>` associé)
+- **MUST** — garder `value` entre 0 et `max` (100 par défaut) : les valeurs hors limites ne sont pas gérées
 - **MUST NOT** — servir de jauge de données (température, stock…) : `Progress` exprime l'avancement d'une tâche
 
 ## Dépendances

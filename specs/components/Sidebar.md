@@ -24,12 +24,12 @@ Panneau de navigation latéral complet avec support responsive (Sheet mobile), �
 
 ## Contraintes
 
-- `Sidebar` doit être enfant d'un `SidebarProvider` — sinon `useSidebar` lèvera une erreur
-- Ne pas utiliser plus d'une `Sidebar` par côté (left/right) dans un même `SidebarProvider`
-- Les variantes `floating` et `inset` ajoutent des padding et ombres qui peuvent entrer en conflit avec des layouts imbriqués
-- Les boutons icône-seuls en mode collapsed nécessitent un `tooltip` pour l'accessibilité
+- **MUST** — placer `Sidebar` dans un `SidebarProvider`, sans quoi `useSidebar` lève une erreur
+- **MUST NOT** — placer plus d'une `Sidebar` par côté dans un même `SidebarProvider`
+- **MUST** — vérifier qu'une mise en page imbriquée tolère les marges et ombres des variantes `floating` et `inset`
+- **MUST** — donner un `tooltip` à chaque `SidebarMenuButton` réduit à son icône
 - **MUST NOT** — lier `Ctrl+B` / `⌘+B` à une autre action : `SidebarProvider` l'enregistre pour replier la barre
-- Libellé de `SidebarTrigger` et `SidebarRail` en anglais issu de `UI_STRINGS.sidebar`
+- **MUST** — dans une interface qui n'est pas en anglais, traduire le libellé de `SidebarTrigger` et `SidebarRail` (`UI_STRINGS.sidebar`)
 
 ## Dépendances
 

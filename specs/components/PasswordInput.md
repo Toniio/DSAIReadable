@@ -22,11 +22,11 @@ Champ de saisie de mot de passe avec bouton de bascule de visibilité (œil ouve
 
 ## Contraintes
 
-- Toujours envelopper dans un `Field` avec un `FieldLabel` associé
+- **MUST** — envelopper dans un `Field` avec son `FieldLabel`
 - **MUST NOT** — servir à un champ de texte non sensible → utiliser `Input`
-- La prop `type` n'est pas acceptée : le composant la pilote lui-même
-- Composant client (`"use client"`) — il porte l'état de visibilité
-- Libellés de la bascule en anglais issus de `UI_STRINGS.passwordInput`
+- **MUST NOT** — passer `type` : le composant le pilote
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
+- **MUST** — dans une interface qui n'est pas en anglais, traduire les libellés de la bascule (`UI_STRINGS.passwordInput`)
 
 ## Dépendances
 

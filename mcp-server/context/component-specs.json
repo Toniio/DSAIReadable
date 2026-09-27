@@ -12,10 +12,10 @@
       "Naviguer dans une arborescence de contenu hiérarchique"
     ],
     "constraints": [
-      "Ne pas utiliser pour du contenu critique qui doit rester visible en permanence",
+      "**MUST NOT** — porter un contenu critique qui doit rester visible en permanence",
       "**MUST NOT** — imbriquer un `Accordion` dans un autre : un seul niveau",
-      "Fournir un texte explicite dans le trigger pour l'accessibilité (pas d'icône seule)",
-      "L'état `disabled` sur le trigger supprime les événements pointer et réduit l'opacité",
+      "**MUST** — donner au trigger un texte explicite, jamais une icône seule",
+      "**Note** — l'état `disabled` d'un trigger supprime les événements pointer et applique `opacity-disabled`",
       "**MUST NOT** — servir de navigation principale → utiliser `NavigationMenu` ou `Tabs`"
     ],
     "dependencies": [
@@ -266,8 +266,8 @@
       "**MUST NOT** — afficher un message éphémère (toast) → utiliser `Sonner`",
       "**MUST NOT** — servir de dialogue bloquant → utiliser `AlertDialog`",
       "**MUST NOT** — placer plus d'une `Alert` par section de page",
-      "L'attribut `role=\"alert\"` est déjà positionné ; ne pas en ajouter un second dans les enfants",
-      "`AlertAction` est positionné en absolu dans le coin supérieur droit ; ne pas y placer de contenu de largeur variable"
+      "**MUST NOT** — ajouter un second `role=\"alert\"` dans les enfants : la racine le porte déjà",
+      "**MUST NOT** — placer un contenu de largeur variable dans `AlertAction`, positionné en absolu en haut à droite"
     ],
     "dependencies": [
       "Aucune dépendance de composant interne obligatoire",
@@ -518,9 +518,9 @@
     "constraints": [
       "**MUST NOT** — servir à un simple message d'information → utiliser `Dialog`, ou `Sonner` pour une notification",
       "**MUST NOT** — ouvrir un `AlertDialog` par-dessus un autre : un seul visible à la fois",
-      "Toujours proposer un bouton d'annulation pour ne pas piéger l'utilisateur",
-      "Le focus doit être piégé dans la modale (`focus trap` natif Radix)",
-      "`AlertDialogTitle` est requis pour l'accessibilité (annonce par les lecteurs d'écran)"
+      "**MUST** — proposer un bouton d'annulation (`AlertDialogCancel`)",
+      "**MUST NOT** — réimplémenter le piège à focus : Radix le fournit",
+      "**MUST** — rendre un `AlertDialogTitle` : c'est le nom annoncé par les lecteurs d'écran"
     ],
     "dependencies": [
       "`AlertDialog` de `radix-ui` (primitives Root, Trigger, Portal, Overlay, Content, Title, Description, Action, Cancel)",
@@ -912,9 +912,9 @@
       "Réserver l'espace d'un média avant son chargement, pour qu'il ne décale pas la mise en page (_cumulative layout shift_)"
     ],
     "constraints": [
-      "Ne pas utiliser pour du texte libre — le contenu risque d'être tronqué ou de déborder",
-      "Le contenu enfant doit être positionné en `absolute` ou `object-fit` pour remplir le cadre",
-      "Un seul enfant direct est attendu ; ne pas imbriquer plusieurs éléments sans wrapper"
+      "**MUST NOT** — contenir du texte libre : il serait tronqué ou déborderait",
+      "**MUST** — remplir le cadre avec un enfant en `absolute` (`size-full`) ou un média en `object-cover`",
+      "**MUST** — passer un seul enfant direct ; envelopper plusieurs éléments dans un conteneur"
     ],
     "dependencies": [
       "`AspectRatio.Root` de `radix-ui`"
@@ -998,9 +998,9 @@
       "Varier la taille selon le contexte (`sm` dans les listes, `lg` dans les profils)"
     ],
     "constraints": [
-      "Toujours fournir un `AvatarFallback` comme alternative à l'image",
-      "Ne pas utiliser `AvatarBadge` sans contexte textuel accessible (ajouter un `aria-label`)",
-      "L'image doit avoir un attribut `alt` descriptif via les props de `AvatarImage`",
+      "**MUST** — fournir un `AvatarFallback`, affiché si l'image manque",
+      "**MUST NOT** — utiliser `AvatarBadge` sans `aria-label` qui dit ce qu'il signale",
+      "**MUST** — donner un `alt` descriptif à `AvatarImage`",
       "**MUST NOT** — afficher plus de 4 avatars dans un `AvatarGroup` : au-delà, montrer les 3 premiers et le reste dans `AvatarGroupCount`"
     ],
     "dependencies": [
@@ -1303,9 +1303,9 @@
     "constraints": [
       "**MUST NOT** — servir de bouton d'action → utiliser `Button` avec `size=\"xs\"`",
       "**MUST NOT** — dépasser trois mots de texte",
-      "La variante `destructive` est réservée aux statuts d'erreur ou d'alerte critique",
-      "Ne pas imbriquer de composants interactifs complexes à l'intérieur du badge",
-      "Les variantes `ghost` et `link` n'ont pas de fond ; vérifier la lisibilité sur tous les arrière-plans"
+      "**MUST** — réserver la variante `destructive` aux statuts d'erreur ou d'alerte critique",
+      "**MUST NOT** — contenir d'élément interactif",
+      "**MUST** — vérifier le contraste des variantes `ghost` et `link`, sans fond, sur chaque arrière-plan où elles apparaissent"
     ],
     "dependencies": [
       "`class-variance-authority` pour la gestion des variantes",
@@ -1535,12 +1535,12 @@
       "Tronquer les chemins longs via l'ellipsis pour les arborescences profondes"
     ],
     "constraints": [
-      "Ne pas utiliser comme navigation principale — c'est un repère contextuel",
-      "Un seul breadcrumb par page, placé en haut du contenu principal",
-      "Le dernier élément (`BreadcrumbPage`) ne doit pas être un lien cliquable",
-      "Les séparateurs et l'ellipsis sont masqués des lecteurs d'écran (`aria-hidden`)",
-      "Le composant racine porte `aria-label=\"breadcrumb\"` — ne pas le surcharger sans raison",
-      "Chaînes par défaut en anglais issues de `UI_STRINGS.breadcrumb` — surcharger `BreadcrumbEllipsis` via `srLabel`"
+      "**MUST NOT** — servir de navigation principale : c'est un repère contextuel",
+      "**MUST** — placer un seul `Breadcrumb` par page, en haut du contenu principal",
+      "**MUST NOT** — rendre le dernier élément (`BreadcrumbPage`) cliquable",
+      "**Note** — les séparateurs et l'ellipsis sont masqués aux lecteurs d'écran (`aria-hidden`)",
+      "**MUST NOT** — remplacer l'`aria-label=\"breadcrumb\"` de la racine, **sauf** pour le traduire",
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire les chaînes de `UI_STRINGS.breadcrumb` (`srLabel` de `BreadcrumbEllipsis`)"
     ],
     "dependencies": [
       "`Slot.Root` de `radix-ui` (utilisé quand `asChild={true}` sur `BreadcrumbLink`)",
@@ -1770,9 +1770,9 @@
     "constraints": [
       "**MUST NOT** — rendre un `<button>` pour naviguer vers un site externe → un `<a href>`, via `asChild` pour garder l'apparence",
       "**MUST NOT** — placer plus de 2 boutons `variant=\"default\"` (primaires) dans une même vue",
-      "L'état `disabled` supprime les événements pointer ; ne pas transmettre d'info uniquement via la couleur (ajouter un texte ou tooltip)",
-      "Les variantes `icon-*` requièrent un `aria-label` explicite",
-      "Ne pas imbriquer un `<button>` dans un autre `<button>` même via `asChild`"
+      "**MUST NOT** — signaler un état par la couleur seule : ajouter un texte ou un tooltip",
+      "**MUST** — donner un `aria-label` à un bouton de taille `icon-*`",
+      "**MUST NOT** — imbriquer un `<button>` dans un autre, y compris via `asChild`"
     ],
     "dependencies": [
       "`Slot.Root` de `radix-ui` (utilisé quand `asChild={true}`)",
@@ -2040,9 +2040,9 @@
     "constraints": [
       "**MUST NOT** — grouper des actions sans lien logique → les espacer simplement (`flex gap-*`)",
       "**MUST NOT** — grouper plus de 5 boutons",
-      "L'orientation `vertical` doit être réservée aux barres d'outils latérales",
-      "Les enfants doivent supporter la fusion de bordures (les arrondis intermédiaires sont supprimés)",
-      "Les groupes imbriqués (`has-[>[data-slot=button-group]]`) ajoutent un `gap-2` automatique"
+      "**MUST** — réserver `orientation=\"vertical\"` aux barres d'outils latérales",
+      "**MUST** — n'y placer que des enfants dont les bordures peuvent fusionner : les arrondis intermédiaires sont supprimés",
+      "**Note** — un groupe imbriqué (`has-[>[data-slot=button-group]]`) reçoit un `gap-2` automatique"
     ],
     "dependencies": [
       "`class-variance-authority` pour les variantes d'orientation",
@@ -2249,9 +2249,9 @@
     "constraints": [
       "**MUST NOT** — servir d'agenda ou de planning (vues jour, semaine) : le design system n'en fournit pas",
       "**MUST NOT** — afficher plus d'un `Calendar` par vue, **sauf** pour comparer deux plages de dates",
-      "Le composant nécessite un conteneur parent pour le positionnement (ex. : `Popover`, `Card`)",
-      "Les jours désactivés doivent rester visibles (`opacity-disabled`) avec `aria-disabled` pour l'accessibilité",
-      "La navigation clavier doit être fonctionnelle : flèches pour se déplacer entre les jours, Tab pour les contrôles"
+      "**MUST** — placer le `Calendar` dans un conteneur (`Popover`, `Card`…) : il ne se positionne pas seul",
+      "**MUST** — garder visibles les jours désactivés (`opacity-disabled`, `aria-disabled`)",
+      "**MUST NOT** — neutraliser la navigation clavier (flèches entre les jours, Tab vers les contrôles)"
     ],
     "dependencies": [
       "`react-day-picker` — moteur de calendrier et types (`DayPicker`, `DayButton`, `Locale`)",
@@ -2553,10 +2553,10 @@
       "Utiliser `data-size=\"sm\"` pour les cartes compactes dans des listes denses"
     ],
     "constraints": [
-      "Ne pas imbriquer des `Card` sur plus d'un niveau — utiliser un fond différent pour créer de la hiérarchie",
-      "`CardAction` est positionné automatiquement en haut à droite du header ; ne pas y placer de contenu long",
+      "**MUST NOT** — imbriquer des `Card` sur plus d'un niveau : marquer la hiérarchie par un fond différent",
+      "**MUST NOT** — placer un contenu long dans `CardAction`, positionné en haut à droite de l'en-tête",
       "**MUST NOT** — placer plus de 2 actions dans `CardFooter`",
-      "La `Card` n'est pas un composant interactif — ne pas lui ajouter `onClick` directement ; encapsuler dans un `<a>` ou un `<button>` si cliquable"
+      "**MUST NOT** — poser `onClick` sur une `Card` : l'envelopper dans un `<a>` ou un `<button>` si elle est cliquable"
     ],
     "dependencies": [
       "Aucune dépendance de composant interne obligatoire",
@@ -2862,10 +2862,10 @@
     "constraints": [
       "**MUST NOT** — porter un contenu critique, qui doit être visible sans interaction → une grille",
       "**MUST NOT** — afficher plus d'un `Carousel` par vue : leurs navigations clavier entrent en conflit",
-      "Les boutons précédent/suivant doivent rester accessibles ; ne pas masquer les contrôles de navigation",
-      "Fournir un `aria-label` descriptif sur le conteneur pour les lecteurs d'écran",
-      "Le composant nécessite `CarouselContent` et au moins un `CarouselItem` comme enfants",
-      "Chaînes par défaut en anglais issues de `UI_STRINGS.carousel` — surcharger via `srLabel` sur `CarouselPrevious` / `CarouselNext`"
+      "**MUST NOT** — masquer les boutons précédent et suivant",
+      "**MUST** — donner au conteneur un `aria-label` descriptif",
+      "**MUST** — contenir un `CarouselContent` et au moins un `CarouselItem`",
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire les chaînes de `UI_STRINGS.carousel` (`srLabel` de `CarouselPrevious` et `CarouselNext`)"
     ],
     "dependencies": [
       "`embla-carousel-react` — moteur de carrousel et types (`UseEmblaCarouselType`)",
@@ -3111,11 +3111,11 @@
     ],
     "constraints": [
       "**MUST NOT** — présenter des données brutes à lire valeur par valeur → utiliser `Table`",
-      "Le `ChartContainer` doit toujours recevoir un `config` valide avec au moins une entrée",
-      "Les couleurs définies via `theme` dans `ChartConfig` prennent priorité sur `color`",
-      "Chaque clé de `config` devient une variable `--color-<clé>`, injectée par `ChartStyle` : la lire dans les séries (`fill=\"var(--color-revenue)\"`). Ce n'est pas un token : sa valeur vient de `config`",
-      "Ne pas imbriquer plusieurs `ChartContainer` — chaque graphique doit avoir son propre conteneur",
-      "Prévoir un texte alternatif ou un tableau de données associé pour l'accessibilité (les graphiques SVG ne sont pas lus par les lecteurs d'écran)"
+      "**MUST** — passer à `ChartContainer` un `config` d'au moins une entrée",
+      "**Note** — dans `ChartConfig`, `theme` prime sur `color`",
+      "**MUST** — lire la couleur d'une série dans la variable `--color-<clé>` que `ChartStyle` injecte pour chaque clé de `config` (`fill=\"var(--color-revenue)\"`) ; ce n'est pas un token : sa valeur vient de `config`",
+      "**MUST NOT** — imbriquer des `ChartContainer` : un conteneur par graphique",
+      "**MUST** — accompagner le graphique d'un texte alternatif ou d'un tableau de données : les lecteurs d'écran ne lisent pas le SVG"
     ],
     "dependencies": [
       "`recharts` — bibliothèque de graphiques (`ResponsiveContainer`, `Tooltip`, `Legend`, etc.)",
@@ -3461,11 +3461,11 @@
       "Utiliser l'état `indeterminate` pour représenter une sélection partielle d'un groupe"
     ],
     "constraints": [
-      "Toujours associer à un `<Label>` via `id` / `htmlFor` ou en l'encapsulant dans `<Field>`",
+      "**MUST** — associer la case à un `Label` (`id` / `htmlFor`) ou l'envelopper dans un `Field`",
       "**MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`",
-      "La zone de clic étendue (`after: absolute -inset-x-3 -inset-y-2`) ne doit pas chevaucher d'autres contrôles interactifs adjacents",
-      "En état `disabled`, la valeur n'est pas soumise par le formulaire natif",
-      "Ne pas transmettre l'état uniquement par la couleur (ajouter une icône ou un texte)"
+      "**MUST NOT** — laisser la zone de clic étendue (`after:-inset-x-3 after:-inset-y-2`) chevaucher un contrôle voisin",
+      "**Note** — désactivée, la case n'est pas soumise avec le formulaire natif",
+      "**MUST NOT** — signaler un état par la couleur seule : ajouter une icône ou un texte"
     ],
     "dependencies": [
       "`Checkbox.Root` et `Checkbox.Indicator` de `radix-ui`",
@@ -3693,9 +3693,9 @@
     ],
     "constraints": [
       "**MUST NOT** — servir de navigation multi-niveaux → utiliser `Accordion`",
-      "Le trigger doit être clairement identifiable comme interactif (bouton ou élément cliquable)",
-      "Le contenu masqué ne doit pas contenir d'éléments critiques pour la compréhension immédiate de la page",
-      "Assurer que `aria-expanded` est correctement géré (Radix le fait automatiquement)"
+      "**MUST** — rendre le trigger reconnaissable comme interactif (bouton ou lien)",
+      "**MUST NOT** — masquer un contenu nécessaire à la compréhension immédiate de la page",
+      "**MUST NOT** — gérer `aria-expanded` soi-même : Radix le fait"
     ],
     "dependencies": [
       "`Collapsible.Root`, `Collapsible.CollapsibleTrigger`, `Collapsible.CollapsibleContent` de `radix-ui`"
@@ -3832,10 +3832,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir pour moins de 5 options → utiliser `Select` ou `NativeSelect`",
-      "L'option vide (`ComboboxEmpty`) doit toujours être fournie pour le cas « aucun résultat »",
-      "En mode multi-sélection, fournir un `anchor` pour le positionnement du popup par rapport aux chips",
-      "Les éléments `ComboboxItem` doivent avoir une valeur unique pour le bon fonctionnement de l'indicateur de sélection",
-      "Requiert un conteneur `\"use client\"` (composant client-side)",
+      "**MUST** — rendre un `ComboboxEmpty` pour le cas « aucun résultat »",
+      "**MUST** — en multi-sélection, fournir un `anchor` (`useComboboxAnchor`) pour positionner le popup sous les chips",
+      "**MUST** — donner à chaque `ComboboxItem` une valeur unique",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
       "**MUST** — dans une interface qui n'est pas en anglais, traduire le nom accessible des trois boutons icon-only (trigger, clear, remove de chip) via `triggerLabel`, `clearLabel` et `removeLabel` : il est en anglais par défaut"
     ],
     "dependencies": [
@@ -4398,10 +4398,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir de simple champ de recherche → un `Input` qui filtre la liste",
-      "Le composant `CommandEmpty` doit toujours être présent pour le cas « aucun résultat »",
-      "Les raccourcis (`CommandShortcut`) sont informatifs uniquement ; le binding clavier doit être géré séparément",
-      "Requiert un conteneur `\"use client\"` (composant client-side)",
-      "En mode dialog, les props `title` et `description` sont rendues en `sr-only` pour l'accessibilité"
+      "**MUST** — rendre un `CommandEmpty` pour le cas « aucun résultat »",
+      "**MUST** — brancher soi-même le raccourci clavier affiché par `CommandShortcut`, qui n'est qu'un libellé",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
+      "**MUST** — en mode dialog, renseigner `title` et `description` : rendus en `sr-only`, ils nomment le dialogue"
     ],
     "dependencies": [
       "`cmdk` — bibliothèque Command primitive",
@@ -4734,10 +4734,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir de menu principal de navigation → utiliser `DropdownMenu`",
-      "Le menu contextuel remplace le menu natif du navigateur : s'assurer que les actions proposées sont pertinentes",
-      "Un seul menu contextuel visible à la fois (géré par Radix)",
-      "Prévoir un fallback clavier (touche `Shift+F10` ou touche contextuelle)",
-      "Les items `disabled` doivent rester visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)"
+      "**MUST** — ne proposer que des actions propres à l'élément ciblé : le menu remplace celui du navigateur",
+      "**Note** — un seul menu contextuel s'ouvre à la fois (géré par Radix)",
+      "**MUST** — rendre les mêmes actions accessibles au clavier (`Shift+F10` ou touche menu)",
+      "**MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)"
     ],
     "dependencies": [
       "`ContextMenu` de `radix-ui` (primitives Root, Trigger, Portal, Content, Item, CheckboxItem, RadioItem, RadioGroup, Label, Separator, Sub, SubTrigger, SubContent, Group)",
@@ -5219,10 +5219,10 @@
     "constraints": [
       "**MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`",
       "**MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois",
-      "`DialogTitle` est requis pour l'accessibilité (lecteurs d'écran)",
+      "**MUST** — rendre un `DialogTitle` : c'est le nom annoncé par les lecteurs d'écran",
       "**MUST NOT** — contenir un contenu qui impose un défilement interne → utiliser `Sheet` ou une page dédiée",
-      "Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible",
-      "Chaînes par défaut en anglais issues de `UI_STRINGS.dialog` — surcharger via `closeLabel`"
+      "**MUST** — garder un moyen de fermer le dialogue quand `showCloseButton={false}` masque le bouton",
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.dialog` via `closeLabel`"
     ],
     "dependencies": [
       "`Dialog` de `radix-ui` (primitives Root, Trigger, Portal, Overlay, Content, Close, Title, Description)",
@@ -5581,11 +5581,11 @@
       "Tester l'affichage RTL en développement"
     ],
     "constraints": [
-      "Ne pas utiliser plusieurs `DirectionProvider` imbriqués avec des directions contradictoires",
-      "Doit être placé au-dessus de tous les composants Radix qui nécessitent la direction",
-      "Ne remplace pas l'attribut HTML `dir` sur `<html>` — les deux doivent être cohérents",
-      "Composant utilitaire uniquement : ne génère aucun rendu visuel propre",
-      "**Seul composant du système sans `data-slot`** : il ne rend aucun nœud DOM propre, donc aucun élément ne peut porter l'attribut. L'exception est déclarée dans le code par `// no-data-slot:` et vérifiée par `npm run index:data-slot`. Cibler la direction via l'attribut `dir` que Radix pose sur les composants consommateurs"
+      "**MUST NOT** — imbriquer des `DirectionProvider` de directions contradictoires",
+      "**MUST** — placer le `DirectionProvider` au-dessus de tous les composants Radix qui lisent la direction",
+      "**MUST** — garder l'attribut `dir` de `<html>` cohérent avec le `DirectionProvider`, qui ne le remplace pas",
+      "**Note** — composant utilitaire : il ne rend rien de visible",
+      "**Note** — **Seul composant du système sans `data-slot`** : il ne rend aucun nœud DOM propre, donc aucun élément ne peut porter l'attribut. L'exception est déclarée dans le code par `// no-data-slot:` et vérifiée par `npm run index:data-slot`. Cibler la direction via l'attribut `dir` que Radix pose sur les composants consommateurs"
     ],
     "dependencies": [
       "`Direction.DirectionProvider` et `Direction.useDirection` de `radix-ui`"
@@ -5687,11 +5687,11 @@
       "Afficher du contenu complémentaire sans quitter le contexte actuel"
     ],
     "constraints": [
-      "Ne pas utiliser sur desktop quand un `Dialog` ou un `Sheet` est plus adapté",
+      "**MUST NOT** — servir sur desktop (`md` et plus) → utiliser `Dialog` ou `Sheet`",
       "**MUST NOT** — dépasser 80vh de hauteur en direction `top` ou `bottom` (appliqué par défaut)",
-      "Ne pas empiler plusieurs Drawers — un seul visible à la fois",
-      "`DrawerTitle` est requis pour l'accessibilité (lecteurs d'écran)",
-      "Le geste de fermeture par swipe peut interférer avec le scroll interne : tester sur mobile"
+      "**MUST NOT** — ouvrir un `Drawer` par-dessus un autre : un seul visible à la fois",
+      "**MUST** — rendre un `DrawerTitle` : c'est le nom annoncé par les lecteurs d'écran",
+      "**MUST** — tester sur mobile un `Drawer` au contenu défilant : le geste de fermeture peut capter le défilement"
     ],
     "dependencies": [
       "`Drawer` de `vaul` (primitives Root, Trigger, Portal, Overlay, Content, Close, Title, Description)"
@@ -6039,9 +6039,9 @@
     "constraints": [
       "**MUST NOT** — servir de menu contextuel au clic droit → utiliser `ContextMenu`",
       "**MUST NOT** — servir de navigation principale → utiliser `NavigationMenu`",
-      "Un seul DropdownMenu ouvert à la fois",
-      "Les items `disabled` restent visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)",
-      "La largeur du contenu s'adapte à celle du trigger par défaut (`w-(--radix-dropdown-menu-trigger-width)`)"
+      "**Note** — un seul `DropdownMenu` s'ouvre à la fois (géré par Radix)",
+      "**MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)",
+      "**Note** — le contenu prend par défaut la largeur du trigger (`w-(--radix-dropdown-menu-trigger-width)`)"
     ],
     "dependencies": [
       "`DropdownMenu` de `radix-ui` (primitives Root, Trigger, Portal, Content, Item, CheckboxItem, RadioItem, RadioGroup, Label, Separator, Sub, SubTrigger, SubContent, Group)",
@@ -6529,9 +6529,9 @@
     "constraints": [
       "**MUST NOT** — signaler une erreur serveur → utiliser `Alert` en `variant=\"destructive\"`",
       "**MUST NOT** — afficher plus d'un `Empty` par vue",
-      "Le média (`EmptyMedia`) doit rester décoratif ; ne pas y placer d'information essentielle sans texte alternatif",
-      "Le texte doit rester court et orienté action",
-      "`EmptyTitle` rend un `<h2>` : passer `as` (`\"h3\"`…) pour suivre la hiérarchie de la page — un niveau sous le titre de la section qui contient l'état vide. Ne pas styler via `as` : l'apparence est fixe"
+      "**MUST NOT** — placer dans `EmptyMedia` une information essentielle : le média est décoratif",
+      "**MUST NOT** — dépasser deux phrases de description ; la formuler autour de l'action à mener",
+      "**MUST** — `EmptyTitle` rend un `<h2>` : passer `as` (`\"h3\"`…) pour suivre la hiérarchie de la page — un niveau sous le titre de la section qui contient l'état vide. Ne pas styler via `as` : l'apparence est fixe"
     ],
     "dependencies": [
       "`class-variance-authority` pour les variantes de `EmptyMedia`",
@@ -6810,14 +6810,14 @@
       "Envelopper le texte d'une option (`FieldTitle` + `FieldDescription`) dans un `<FieldContent>` lorsque le contrôle est à gauche"
     ],
     "constraints": [
-      "Ne pas imbriquer des `<FieldSet>` sur plus de 2 niveaux — complexité cognitive",
-      "`data-invalid` doit être géré côté consommateur (validation côté serveur ou client)",
-      "`aria-invalid` doit être posé sur le contrôle lui-même : `<Field>` ne le propage pas",
+      "**MUST NOT** — imbriquer des `FieldSet` sur plus de 2 niveaux",
+      "**MUST** — poser `data-invalid` soi-même, selon la validation (serveur ou client) : `Field` ne valide rien",
+      "**MUST** — poser `aria-invalid` sur le contrôle lui-même : `Field` ne le propage pas",
       "**MUST NOT** — utiliser `orientation=\"horizontal\"` dans une mise en page qui doit tenir sur mobile → `orientation=\"responsive\"`, qui passe en ligne quand son `FieldGroup` est assez large",
-      "L'orientation `responsive` exige un `<FieldGroup>` parent : elle s'appuie sur le conteneur `@container/field-group`",
-      "`<FieldLegend variant=\"legend\">` est réservé aux `<fieldset>` ; utiliser `variant=\"label\"` pour les contextes non-fieldset",
-      "`<FieldError>` ne rend rien si ni `children` ni `errors` non vide ne sont fournis",
-      "`<FieldTitle>` n'est pas un `<label>` : il ne lie pas de contrôle. Pour une association `htmlFor`, utiliser `<FieldLabel>`"
+      "**MUST** — placer un `Field` en `orientation=\"responsive\"` dans un `FieldGroup`, dont il lit la largeur (`@container/field-group`)",
+      "**MUST** — réserver `FieldLegend variant=\"legend\"` aux `<fieldset>` ; ailleurs, `variant=\"label\"`",
+      "**Note** — `FieldError` ne rend rien sans `children` ni `errors` non vide",
+      "**MUST** — utiliser `FieldLabel` pour associer un libellé à un contrôle (`htmlFor`) : `FieldTitle` n'est pas un `<label>`"
     ],
     "dependencies": [
       "`Label` — primitive sur laquelle `FieldLabel` est construit",
@@ -7289,10 +7289,10 @@
       "Sous-titres dans les formulaires multi-étapes"
     ],
     "constraints": [
-      "Respecter la hiérarchie sémantique (pas de h1 après un h3)",
-      "Un seul h1 par page",
-      "Utiliser la prop `as` uniquement quand le niveau sémantique diffère du niveau visuel",
-      "Ne pas styler manuellement — passer par la prop `level`"
+      "**MUST NOT** — sauter un niveau de titre (un `h3` sous un `h1`)",
+      "**MUST NOT** — placer plus d'un `h1` par page",
+      "**MUST** — n'utiliser `as` que si le niveau sémantique diffère du niveau visuel",
+      "**MUST NOT** — styler un titre à la main : passer par `level`"
     ],
     "dependencies": [
       "`class-variance-authority` pour la gestion des variantes de `level`",
@@ -7452,10 +7452,10 @@
     ],
     "constraints": [
       "**MUST NOT** — contenir des éléments interactifs (formulaires, boutons) → utiliser `Popover`",
-      "Ne pas utiliser sur mobile (le survol n'existe pas sur tactile) — prévoir un fallback",
-      "Le contenu doit être purement informatif et non essentiel",
+      "**MUST NOT** — servir seul sur mobile, où le survol n'existe pas : prévoir un accès au clic",
+      "**MUST NOT** — contenir une information indispensable : le contenu est un complément",
       "**MUST NOT** — poser des `HoverCard` sur deux déclencheurs adjacents (liste dense) : le survol de l'un ouvre l'autre",
-      "Ne pas y placer de contenu critique que l'utilisateur doit impérativement voir"
+      "**MUST NOT** — contenir un contenu critique que l'utilisateur doit voir"
     ],
     "dependencies": [
       "`HoverCard` de `radix-ui` (primitives Root, Trigger, Portal, Content)"
@@ -7666,11 +7666,11 @@
       "Pages d'erreur (404, 500)"
     ],
     "constraints": [
-      "Toujours fournir un `alt` descriptif — il alimente `role=\"img\"` + `aria-label`",
-      "Ce composant est un placeholder : remplacer par de vraies illustrations en production",
+      "**MUST** — fournir un `alt` descriptif : il alimente `role=\"img\"` et `aria-label`",
+      "**MUST** — remplacer ce placeholder par de vraies illustrations avant la production",
       "**MUST NOT** — afficher une image de contenu → utiliser `<img>` ou `next/image`",
-      "Le conteneur n'impose aucune dimension : les fixer via `className` côté appelant",
-      "Texte alternatif par défaut en anglais issu de `UI_STRINGS.illustration` — surcharger via `alt`"
+      "**MUST** — fixer les dimensions via `className` : le conteneur n'en impose aucune",
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire le texte alternatif par défaut (`UI_STRINGS.illustration`) via `alt`"
     ],
     "dependencies": [
       "`cn` (`@/lib/utils`) pour la fusion des classes",
@@ -7788,9 +7788,9 @@
     "constraints": [
       "**MUST NOT** — servir à une saisie sur plusieurs lignes → utiliser `Textarea`",
       "**MUST NOT** — servir à un choix parmi des valeurs fixes → utiliser `Select` ou `Checkbox`",
-      "L'attribut `placeholder` ne remplace pas un `<Label>` visible",
-      "Un seul `Input` doit être `autofocus` par vue pour ne pas perturber la navigation clavier",
-      "En état `disabled`, le curseur passe en `not-allowed` ; la valeur n'est pas soumise avec le formulaire"
+      "**MUST NOT** — remplacer un `Label` visible par un `placeholder`",
+      "**MUST NOT** — mettre `autoFocus` sur plus d'un champ par vue",
+      "**Note** — désactivé, le champ affiche le curseur `not-allowed` et sa valeur n'est pas soumise"
     ],
     "dependencies": [
       "`Label` — doit être associé via `htmlFor`/`id`",
@@ -7978,11 +7978,11 @@
       "Base de composition pour `Combobox` et `Command`"
     ],
     "constraints": [
-      "Ne pas utiliser sans un `InputGroupInput` ou `InputGroupTextarea` comme enfant direct",
-      "Les addons `block-start` et `block-end` changent le layout en colonne — ne pas mélanger avec des addons `inline-*` dans le même groupe",
-      "L'état `disabled` est propagé visuellement via `has-disabled` mais doit être posé sur l'input enfant",
-      "Les boutons dans les addons doivent utiliser `InputGroupButton` pour hériter des tailles correctes",
-      "Requiert un conteneur `\"use client\"` (composant client-side)"
+      "**MUST NOT** — servir sans `InputGroupInput` ou `InputGroupTextarea` en enfant direct",
+      "**MUST NOT** — mêler des addons `block-*` et `inline-*` dans un même groupe : les `block-*` passent la mise en page en colonne",
+      "**MUST** — poser `disabled` sur le champ enfant : le groupe n'en reflète que l'apparence (`has-disabled`)",
+      "**MUST** — utiliser `InputGroupButton` pour un bouton dans un addon",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],
     "dependencies": [
       "`class-variance-authority` — gestion des variantes d'alignement des addons et tailles des boutons",
@@ -8280,11 +8280,11 @@
       "Formulaires de double authentification"
     ],
     "constraints": [
-      "Ne pas utiliser pour des saisies longues ou libres — réservé aux codes courts (4–8 caractères)",
-      "Chaque `InputOTPSlot` doit recevoir un `index` correspondant à sa position dans le groupe",
-      "Le `spellCheck` est désactivé par défaut : le navigateur ne propose pas de correction sur un code",
-      "L'accessibilité repose sur la bibliothèque `input-otp` ; ne pas surcharger les rôles ARIA",
-      "Requiert un conteneur `\"use client\"` (composant client-side)"
+      "**MUST NOT** — servir à une saisie libre ou de plus de 8 caractères : réservé aux codes de 4 à 8 caractères",
+      "**MUST** — donner à chaque `InputOTPSlot` l'`index` de sa position",
+      "**Note** — le `spellCheck` est désactivé par défaut : le navigateur ne propose pas de correction sur un code",
+      "**MUST NOT** — redéfinir les rôles ARIA : la bibliothèque `input-otp` les gère",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],
     "dependencies": [
       "`input-otp` — `OTPInput`, `OTPInputContext` (bibliothèque de gestion OTP)",
@@ -8552,11 +8552,11 @@
       "Regrouper des items avec `ItemGroup` et les séparer avec `ItemSeparator`"
     ],
     "constraints": [
-      "Toujours placer un `ItemTitle` pour l'accessibilité et la sémantique",
-      "Ne pas utiliser la variante `outline` et `muted` simultanément",
-      "La taille `xs` est optimisée pour les menus contextuels — ne pas l'utiliser pour des listes principales",
+      "**MUST** — rendre un `ItemTitle` dans chaque `Item`",
+      "**MUST NOT** — combiner les variantes `outline` et `muted`",
+      "**MUST** — réserver la taille `xs` aux menus contextuels, jamais une liste principale",
       "**MUST NOT** — placer plus de 3 actions dans `ItemActions`",
-      "Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role=\"listitem\"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role=\"listitem\"` explicitement"
+      "**MUST** — Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role=\"listitem\"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role=\"listitem\"` explicitement"
     ],
     "dependencies": [
       "`class-variance-authority` pour les variantes de `Item` et `ItemMedia`",
@@ -8989,10 +8989,10 @@
       "Grouper plusieurs touches avec `KbdGroup` pour les combinaisons (ex. : `⌘` + `Shift` + `P`)"
     ],
     "constraints": [
-      "Ne pas utiliser pour du texte générique — réservé aux touches clavier",
-      "Composant non interactif (`pointer-events-none`) ; ne pas ajouter de gestionnaire de clic",
-      "Vérifier le contraste dans les contextes sombres (styles adaptés automatiquement via `dark:`)",
-      "Prévoir un libellé textuel en complément pour les lecteurs d'écran si la touche est symbolique"
+      "**MUST NOT** — servir à autre chose qu'une touche clavier",
+      "**MUST NOT** — ajouter un gestionnaire de clic : le composant est non interactif (`pointer-events-none`)",
+      "**MUST** — vérifier le contraste en thème sombre, sur le fond réel",
+      "**MUST** — doubler une touche symbolique (⌘, ⇧) d'un libellé textuel pour les lecteurs d'écran"
     ],
     "dependencies": [
       "`cn` utilitaire depuis `@/lib/utils`"
@@ -9141,10 +9141,10 @@
       "Refléter l'état désactivé du contrôle associé (via `peer-disabled`)"
     ],
     "constraints": [
-      "Ne pas substituer un `Label` par du texte `placeholder` seul",
-      "Un label doit toujours référencer son contrôle (`htmlFor` ou `aria-labelledby`) — ne jamais laisser un champ sans libellé visible",
+      "**MUST NOT** — remplacer un `Label` par un `placeholder`",
+      "**MUST** — relier chaque `Label` à son contrôle (`htmlFor` ou `aria-labelledby`) ; aucun champ sans libellé visible",
       "**MUST NOT** — servir de titre de section → utiliser `FieldLegend` ou `Heading`",
-      "Maximum un `Label` par contrôle"
+      "**MUST NOT** — associer plus d'un `Label` à un contrôle"
     ],
     "dependencies": [
       "`Label.Root` de `radix-ui` — fournit la liaison sémantique native",
@@ -9258,9 +9258,9 @@
     ],
     "constraints": [
       "**MUST** — afficher le logo avec le composant `Logo`, jamais avec un SVG inséré à la main",
-      "Ne pas déformer les proportions — passer par la prop `size`",
-      "Le composant n'affiche pas de logotype textuel : les enfants passés en props ne sont pas rendus. Pour accoler un nom de marque, le placer à côté du `Logo`",
-      "Le composant est un placeholder — remplacer par les vrais assets brand une fois disponibles"
+      "**MUST NOT** — déformer les proportions : passer par `size`",
+      "**MUST** — placer le nom de marque à côté du `Logo` : il ne rend pas ses enfants",
+      "**MUST** — remplacer ce placeholder par les vrais assets de marque dès qu'ils existent"
     ],
     "dependencies": [
       "`cn` (`@/lib/utils`) pour la fusion des classes",
@@ -9428,9 +9428,9 @@
     "constraints": [
       "**MUST NOT** — servir de navigation de site → utiliser `NavigationMenu`",
       "**MUST NOT** — imbriquer plus de 2 niveaux de sous-menus",
-      "Les items `disabled` sont visuellement atténués et non interactifs (`pointer-events-none`)",
-      "La variante `destructive` sur `MenubarItem` doit être réservée aux actions irréversibles",
-      "Les raccourcis affichés via `MenubarShortcut` doivent correspondre à des handlers réels"
+      "**Note** — un item `disabled` est atténué (`opacity-disabled`) et non interactif (`pointer-events-none`)",
+      "**MUST** — réserver `variant=\"destructive\"` de `MenubarItem` aux actions irréversibles",
+      "**MUST** — brancher un handler réel pour chaque raccourci affiché par `MenubarShortcut`"
     ],
     "dependencies": [
       "`Menubar` (Root, Menu, Group, Portal, RadioGroup, Trigger, Content, Item, CheckboxItem, RadioItem, ItemIndicator, Label, Separator, Sub, SubTrigger, SubContent) de `radix-ui`",
@@ -9975,10 +9975,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
-      "Le style du menu déroulant ouvert dépend du navigateur et n'est pas personnalisable",
-      "Les options utilisent les couleurs système (`Canvas`, `CanvasText`) pour garantir la lisibilité native",
-      "La prop `size` est custom (pas celle native de `<select>`) — `\"sm\"` et `\"default\"` uniquement",
-      "Ne pas oublier un `<option value=\"\">` vide pour le placeholder"
+      "**Note** — le menu ouvert est dessiné par le navigateur et ne se stylise pas",
+      "**Note** — les options prennent les couleurs système (`Canvas`, `CanvasText`)",
+      "**Note** — `size` est une prop du composant, pas l'attribut natif de `<select>` : `\"sm\"` ou `\"default\"`",
+      "**MUST** — prévoir une `<option value=\"\">` vide comme placeholder"
     ],
     "dependencies": [
       "`@phosphor-icons/react` — `CaretDownIcon` (icône de flèche)",
@@ -10220,9 +10220,9 @@
     "constraints": [
       "**MUST NOT** — servir de menu d'actions (commandes) → utiliser `Menubar` ou `DropdownMenu`",
       "**MUST NOT** — dépasser 7 triggers de premier niveau",
-      "Le viewport peut être désactivé via `viewport={false}` pour un rendu inline",
-      "Les liens doivent utiliser `NavigationMenuLink` pour bénéficier de la gestion `data-active`",
-      "L'indicateur nécessite un positionnement relatif du parent pour fonctionner correctement"
+      "**Note** — `viewport={false}` rend les contenus en ligne, sans viewport",
+      "**MUST** — rendre chaque lien avec `NavigationMenuLink`, qui gère `data-active`",
+      "**MUST** — donner un positionnement relatif au parent de `NavigationMenuIndicator`"
     ],
     "dependencies": [
       "`NavigationMenu` (Root, List, Item, Trigger, Content, Link, Indicator, Viewport) de `radix-ui`",
@@ -10584,11 +10584,11 @@
     ],
     "constraints": [
       "**MUST NOT** — servir de navigation hiérarchique → utiliser `Breadcrumb`",
-      "Le composant n'inclut pas de logique de pagination — le consommateur doit gérer l'état et les URLs",
-      "La page active porte `aria-current=\"page\"` ; ne pas dupliquer cet attribut",
-      "Les liens `PaginationPrevious` et `PaginationNext` nécessitent un `href` valide ou un handler",
-      "L'ellipsis est masqué des lecteurs d'écran (`aria-hidden`)",
-      "Chaînes par défaut en anglais issues de `UI_STRINGS.pagination` — surcharger via `text`, `label` et `srLabel`"
+      "**MUST** — gérer soi-même l'état et les URL de pagination : le composant n'en contient pas",
+      "**MUST NOT** — dupliquer `aria-current=\"page\"`, que la page active porte déjà",
+      "**MUST** — donner à `PaginationPrevious` et `PaginationNext` un `href` valide ou un handler",
+      "**Note** — l'ellipsis est masqué aux lecteurs d'écran (`aria-hidden`)",
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.pagination` via `text`, `label` et `srLabel`"
     ],
     "dependencies": [
       "`Button` de `@/components/ui/button` (utilisé comme wrapper des liens de pagination)",
@@ -10812,11 +10812,11 @@
       "Changement / réinitialisation de mot de passe"
     ],
     "constraints": [
-      "Toujours envelopper dans un `Field` avec un `FieldLabel` associé",
+      "**MUST** — envelopper dans un `Field` avec son `FieldLabel`",
       "**MUST NOT** — servir à un champ de texte non sensible → utiliser `Input`",
-      "La prop `type` n'est pas acceptée : le composant la pilote lui-même",
-      "Composant client (`\"use client\"`) — il porte l'état de visibilité",
-      "Libellés de la bascule en anglais issus de `UI_STRINGS.passwordInput`"
+      "**MUST NOT** — passer `type` : le composant le pilote",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire les libellés de la bascule (`UI_STRINGS.passwordInput`)"
     ],
     "dependencies": [
       "`InputGroup` — conteneur structurant",
@@ -10943,9 +10943,9 @@
     "constraints": [
       "**MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`",
       "**MUST NOT** — afficher une liste d'actions → utiliser `DropdownMenu`",
-      "Un seul Popover ouvert à la fois par défaut (sauf gestion manuelle)",
+      "**Note** — un seul `Popover` s'ouvre à la fois, sauf état contrôlé à la main",
       "**MUST NOT** — contenir un contenu qui impose un défilement interne, ni un formulaire de plus de 3 champs → utiliser `Dialog` ou `Sheet`",
-      "Tester le positionnement sur les bords de l'écran (flip automatique Radix)"
+      "**MUST** — tester le positionnement près des bords de l'écran (retournement automatique de Radix)"
     ],
     "dependencies": [
       "`Popover` de `radix-ui` (primitives Root, Trigger, Portal, Content, Anchor)"
@@ -11230,10 +11230,10 @@
       "Afficher un ratio ou un pourcentage sous forme visuelle (ex. : quota consommé)"
     ],
     "constraints": [
-      "Ne pas utiliser pour des valeurs indéterminées sans le communiquer — ajouter `aria-valuetext` ou un label explicite",
+      "**MUST NOT** — afficher une progression indéterminée sans le dire : `aria-valuetext` ou libellé explicite",
       "**MUST NOT** — afficher plus d'une barre `Progress` par section",
-      "Toujours fournir un label associé (via `aria-label` ou un élément `<label>`) pour les lecteurs d'écran",
-      "La valeur `value` doit être comprise entre 0 et `max` (100 par défaut) — les valeurs hors limites ne sont pas gérées",
+      "**MUST** — nommer la barre (`aria-label` ou `<label>` associé)",
+      "**MUST** — garder `value` entre 0 et `max` (100 par défaut) : les valeurs hors limites ne sont pas gérées",
       "**MUST NOT** — servir de jauge de données (température, stock…) : `Progress` exprime l'avancement d'une tâche"
     ],
     "dependencies": [
@@ -11350,10 +11350,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir pour plus de 6 options → utiliser `Select` ou `Combobox`",
-      "Toujours associer chaque `RadioGroupItem` à un `<Label>` pour l'accessibilité",
+      "**MUST** — associer chaque `RadioGroupItem` à un `Label`",
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
-      "La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est déjà intégrée — ne pas ajouter de padding supplémentaire",
-      "Requiert un conteneur `\"use client\"` (composant client-side)"
+      "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],
     "dependencies": [
       "`radix-ui` — `RadioGroup` primitive (Root, Item, Indicator)"
@@ -11581,9 +11581,9 @@
     "constraints": [
       "**MUST NOT** — servir à une mise en page à largeurs fixes → une grille CSS (`grid`)",
       "**MUST** — donner un `minSize` à chaque `ResizablePanel`, pour que son contenu ne soit jamais écrasé",
-      "Le `ResizableHandle` doit être clavier-accessible (focus + flèches)",
+      "**MUST NOT** — retirer au `ResizableHandle` son focus ou sa commande aux flèches",
       "**MUST NOT** — imbriquer plus de 2 niveaux de `ResizablePanelGroup`",
-      "Orientation `vertical` et `horizontal` ne doivent pas être mélangées au même niveau"
+      "**MUST NOT** — mêler les orientations `vertical` et `horizontal` au même niveau"
     ],
     "dependencies": [
       "`react-resizable-panels` (`Group`, `Panel`, `Separator`)",
@@ -11781,10 +11781,10 @@
       "Combinaison avec `ResizablePanel` pour du contenu défilant dans un panneau redimensionnable"
     ],
     "constraints": [
-      "Ne pas utiliser pour le défilement principal de la page — laisser le `<body>` gérer le scroll natif",
-      "Le conteneur parent doit avoir une hauteur définie (fixe ou flex) pour que le défilement fonctionne",
+      "**MUST NOT** — servir au défilement principal de la page : laisser le `<body>` défiler",
+      "**MUST** — donner au parent une hauteur définie (fixe ou flex), sans quoi rien ne défile",
       "**MUST NOT** — imbriquer une `ScrollArea` dans une autre",
-      "Le contenu focusable à l'intérieur doit rester accessible au clavier"
+      "**MUST NOT** — rendre inaccessible au clavier un contenu focusable de la zone"
     ],
     "dependencies": [
       "`ScrollArea.Root`, `ScrollArea.Viewport`, `ScrollArea.ScrollAreaScrollbar`, `ScrollArea.ScrollAreaThumb`, `ScrollArea.Corner` de `radix-ui`",
@@ -11946,10 +11946,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
-      "Pour les formulaires mobiles avec de nombreuses options, `NativeSelect` offre une meilleure UX native",
-      "Le contenu est rendu dans un `Portal` — attention au contexte de z-index",
-      "Chaque `SelectItem` doit avoir une `value` unique",
-      "Requiert un conteneur `\"use client\"` (composant client-side)"
+      "**SHOULD** — sur mobile, utiliser `NativeSelect` pour une longue liste d'options ; **sauf** si les options exigent un rendu riche qu'un `<option>` ne peut pas afficher",
+      "**MUST** — tenir compte du `Portal` dans les empilements (`z-index`) : le contenu est rendu hors de son parent",
+      "**MUST** — donner à chaque `SelectItem` une `value` unique",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],
     "dependencies": [
       "`radix-ui` — `Select` primitive (Root, Group, Value, Trigger, Content, Portal, Viewport, Label, Item, ItemText, ItemIndicator, Separator, ScrollUpButton, ScrollDownButton, Icon)",
@@ -12385,10 +12385,10 @@
       "Utiliser l'orientation `vertical` pour séparer des éléments en ligne (ex. : barre d'outils)"
     ],
     "constraints": [
-      "Utiliser `decorative={true}` (défaut) pour les séparateurs purement visuels — `aria-hidden=\"true\"` est automatiquement appliqué",
-      "Utiliser `decorative={false}` uniquement si la séparation a une signification sémantique (ex. : séparation entre deux sections distinctes d'un article)",
-      "Ne pas multiplier les séparateurs dans une vue — utiliser l'espacement (`gap`) comme alternative quand possible",
-      "La hauteur (`h-px`) et la largeur (`w-px`) sont fixes ; ne pas les surcharger pour maintenir la cohérence visuelle"
+      "**MUST** — garder `decorative` (par défaut) pour un séparateur purement visuel : il est masqué aux lecteurs d'écran",
+      "**MUST** — ne passer `decorative={false}` que si la séparation a un sens (deux sections distinctes d'un article)",
+      "**MUST** — séparer par l'espacement (`gap`) quand un séparateur n'apporte pas de sens",
+      "**MUST NOT** — surcharger l'épaisseur (`h-px` / `w-px`)"
     ],
     "dependencies": [
       "`Separator` (primitive) de `radix-ui` — gère `aria-orientation` et `aria-hidden`"
@@ -12500,11 +12500,11 @@
     "constraints": [
       "**MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`",
       "**MUST NOT** — ouvrir un `Sheet` par-dessus un autre : un seul visible à la fois",
-      "`SheetTitle` est requis pour l'accessibilité (lecteurs d'écran)",
-      "La largeur est limitée à `sm:max-w-sm` pour les côtés gauche/droite",
-      "Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible",
-      "Sur mobile, considérer `Drawer` (avec geste swipe) comme alternative",
-      "Chaînes par défaut en anglais issues de `UI_STRINGS.sheet` — surcharger via `closeLabel`"
+      "**MUST** — rendre un `SheetTitle` : c'est le nom annoncé par les lecteurs d'écran",
+      "**Note** — à gauche et à droite, la largeur est limitée à `sm:max-w-sm`",
+      "**MUST** — garder un moyen de fermer le panneau quand `showCloseButton={false}` masque le bouton",
+      "**SHOULD** — sur mobile, utiliser `Drawer`, qui se ferme au geste ; **sauf** pour un panneau latéral de navigation",
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.sheet` via `closeLabel`"
     ],
     "dependencies": [
       "`Dialog` de `radix-ui` (utilisé comme `SheetPrimitive` — primitives Root, Trigger, Portal, Overlay, Content, Close, Title, Description)",
@@ -12856,12 +12856,12 @@
       "Layout de type dashboard avec header, content, footer dans la sidebar"
     ],
     "constraints": [
-      "`Sidebar` doit être enfant d'un `SidebarProvider` — sinon `useSidebar` lèvera une erreur",
-      "Ne pas utiliser plus d'une `Sidebar` par côté (left/right) dans un même `SidebarProvider`",
-      "Les variantes `floating` et `inset` ajoutent des padding et ombres qui peuvent entrer en conflit avec des layouts imbriqués",
-      "Les boutons icône-seuls en mode collapsed nécessitent un `tooltip` pour l'accessibilité",
+      "**MUST** — placer `Sidebar` dans un `SidebarProvider`, sans quoi `useSidebar` lève une erreur",
+      "**MUST NOT** — placer plus d'une `Sidebar` par côté dans un même `SidebarProvider`",
+      "**MUST** — vérifier qu'une mise en page imbriquée tolère les marges et ombres des variantes `floating` et `inset`",
+      "**MUST** — donner un `tooltip` à chaque `SidebarMenuButton` réduit à son icône",
       "**MUST NOT** — lier `Ctrl+B` / `⌘+B` à une autre action : `SidebarProvider` l'enregistre pour replier la barre",
-      "Libellé de `SidebarTrigger` et `SidebarRail` en anglais issu de `UI_STRINGS.sidebar`"
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire le libellé de `SidebarTrigger` et `SidebarRail` (`UI_STRINGS.sidebar`)"
     ],
     "dependencies": [
       "`Slot.Root` de `radix-ui` (pour `asChild`)",
@@ -13698,9 +13698,9 @@
       "Améliorer le ressenti utilisateur en évitant les écrans blancs ou spinners"
     ],
     "constraints": [
-      "Ne pas utiliser comme état permanent — le squelette doit être remplacé par le contenu réel",
+      "**MUST NOT** — rester affiché une fois le contenu chargé",
       "**MUST** — reprendre les dimensions du contenu final (hauteur, largeur, rayon), pour que son arrivée ne décale pas la mise en page",
-      "Ne pas animer les squelettes si l'utilisateur a activé `prefers-reduced-motion`",
+      "**MUST NOT** — animer un squelette quand `prefers-reduced-motion` est actif",
       "**MUST NOT** — afficher plus de squelettes que d'éléments attendus : chacun tient la place d'un contenu qui va arriver"
     ],
     "dependencies": [
@@ -13790,10 +13790,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir à saisir une valeur précise → un `Input` de type `number`",
-      "Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)",
-      "En mode vertical (`orientation=\"vertical\"`), une hauteur minimale (`min-h-40`) est requise",
-      "Les valeurs `min` et `max` doivent être cohérentes avec le pas (`step`)",
-      "Requiert un conteneur `\"use client\"` (composant client-side)"
+      "**MUST** — Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)",
+      "**MUST** — donner une hauteur minimale (`min-h-40`) à un `Slider` vertical",
+      "**MUST** — choisir `min`, `max` et `step` tels que `max - min` soit un multiple de `step`",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],
     "dependencies": [
       "`radix-ui` — `Slider` primitive (Root, Track, Range, Thumb)"
@@ -14026,10 +14026,10 @@
     ],
     "constraints": [
       "**MUST NOT** — porter un message critique qui exige une action → utiliser `AlertDialog`",
-      "Placer un seul `<Toaster />` à la racine du layout",
-      "Ne pas empiler plus de 3 toasts visibles simultanément pour préserver la lisibilité",
-      "Le contenu du toast doit être concis (une à deux phrases maximum)",
-      "Prévoir un moyen alternatif pour les lecteurs d'écran (`aria-live` géré par `sonner`)"
+      "**MUST** — placer un seul `<Toaster />`, à la racine du layout",
+      "**MUST NOT** — afficher plus de 3 toasts à la fois",
+      "**MUST NOT** — dépasser deux phrases",
+      "**Note** — `sonner` annonce les toasts aux lecteurs d'écran (`aria-live`)"
     ],
     "dependencies": [
       "`sonner` (librairie externe) — composant `Toaster` et types `ToasterProps`",
@@ -14125,12 +14125,12 @@
       "Toujours accompagner d'un `aria-label` décrivant l'opération en cours"
     ],
     "constraints": [
-      "L'`aria-label` est obligatoire — la valeur par défaut `\"Loading\"` doit être remplacée par un libellé en français décrivant l'action (ex. : `\"Connexion en cours\"`)",
-      "Ne pas afficher plusieurs Spinners simultanément dans la même zone de vue — utiliser un seul indicateur global",
-      "La taille est contrôlée uniquement via `className` (ex. : `size-3`, `size-6`) — pas de prop `size` dédiée",
+      "**MUST** — remplacer l'`aria-label` par défaut (`\"Loading\"`) par un libellé qui décrit l'action (« Connexion en cours »)",
+      "**MUST NOT** — afficher plus d'un `Spinner` dans une même zone : un seul indicateur",
+      "**Note** — la taille se règle par `className` (`size-3`, `size-6`) : pas de prop `size`",
       "**MUST NOT** — signaler un chargement de plus de 10 s → utiliser `Progress` avec un pourcentage",
-      "`role=\"status\"` est déjà positionné ; ne pas en ajouter un second dans le parent",
-      "Nom accessible par défaut en anglais issu de `UI_STRINGS.spinner` — surcharger via `aria-label`"
+      "**MUST NOT** — ajouter un second `role=\"status\"` dans le parent : le composant le porte",
+      "**MUST** — Nom accessible par défaut en anglais issu de `UI_STRINGS.spinner` — surcharger via `aria-label`"
     ],
     "dependencies": [
       "`SpinnerIcon` de `@phosphor-icons/react` — fournit l'icône SVG animée",
@@ -14225,9 +14225,9 @@
     "constraints": [
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "**MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`",
-      "Toujours associer un `<Label>` pour l'accessibilité",
-      "La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est intégrée — ne pas ajouter de padding supplémentaire",
-      "Requiert un conteneur `\"use client\"` (composant client-side)"
+      "**MUST** — associer un `Label`",
+      "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],
     "dependencies": [
       "`radix-ui` — `Switch` primitive (Root, Thumb)"
@@ -14451,11 +14451,11 @@
       "Ajouter une légende descriptive via `TableCaption`"
     ],
     "constraints": [
-      "Ne pas utiliser pour la mise en page — les tableaux sont réservés aux données tabulaires uniquement",
-      "Le conteneur gère le défilement horizontal (`overflow-x-auto`) ; ne pas ajouter de scroll parent redondant",
+      "**MUST NOT** — servir à la mise en page : réservé aux données tabulaires",
+      "**MUST NOT** — ajouter un défilement horizontal parent : le conteneur défile déjà (`overflow-x-auto`)",
       "**MUST** — au-delà de 4 colonnes, masquer les colonnes secondaires sous 640 px (le conteneur de `Table` défile déjà horizontalement)",
-      "Les cellules avec `role=\"checkbox\"` reçoivent un padding réduit automatiquement (`pr-0`)",
-      "Fournir un `TableCaption` ou un `aria-label` pour l'accessibilité quand le contexte du tableau n'est pas évident"
+      "**Note** — une cellule `role=\"checkbox\"` reçoit un padding réduit (`pr-0`)",
+      "**MUST** — nommer le tableau (`TableCaption` ou `aria-label`) quand le contexte ne le fait pas"
     ],
     "dependencies": [
       "`cn` (`@/lib/utils`) — utilitaire de fusion de classes",
@@ -14758,8 +14758,8 @@
       "**MUST NOT** — servir de navigation entre pages distinctes → utiliser `NavigationMenu`",
       "**MUST NOT** — dépasser 7 onglets par groupe",
       "**MUST NOT** — servir quand plusieurs sections doivent être visibles ensemble → utiliser `Accordion` (`Tabs` n'en montre qu'une)",
-      "L'état `disabled` sur un trigger supprime les événements pointer et réduit l'opacité",
-      "Le contenu de chaque panneau doit être autosuffisant (pas de dépendance entre onglets)"
+      "**Note** — un trigger `disabled` ne reçoit plus d'événement pointer et prend `opacity-disabled`",
+      "**MUST NOT** — faire dépendre le contenu d'un panneau d'un autre onglet"
     ],
     "dependencies": [
       "`Tabs` (Root, List, Trigger, Content) de `radix-ui`",
@@ -15041,10 +15041,10 @@
     ],
     "constraints": [
       "**MUST NOT** — servir à une saisie d'une ligne → utiliser `Input`",
-      "Le `field-sizing-content` fait grandir automatiquement le champ ; si une hauteur fixe est souhaitée, surcharger via `className`",
-      "La hauteur minimale est de `min-h-16` (4rem)",
-      "Le mode dark applique un fond `bg-input/30` — ne pas redéfinir le fond sans tenir compte du thème",
-      "Pas de dépendance client (`\"use client\"`) — composant serveur compatible"
+      "**Note** — le champ grandit avec son contenu (`field-sizing-content`) ; une hauteur fixe se donne par `className`",
+      "**Note** — hauteur minimale : `min-h-16` (4rem)",
+      "**MUST NOT** — redéfinir le fond sans sa variante sombre (`dark:bg-input/30` par défaut)",
+      "**Note** — composant serveur : il se rend sans `\"use client\"`"
     ],
     "dependencies": [
       "Aucune dépendance externe (composant autonome, HTML natif)"
@@ -15228,10 +15228,10 @@
     ],
     "constraints": [
       "**MUST NOT** — déclencher une action non réversible → utiliser `Button`",
-      "Ne pas utiliser comme remplacement d'un `Switch` dans un formulaire de paramètres",
-      "La variante `outline` ajoute une bordure ; ne pas la combiner avec une bordure parente",
-      "Requiert un conteneur `\"use client\"` (composant client-side)",
-      "Fournir un `aria-label` lorsque le contenu est uniquement une icône"
+      "**MUST NOT** — remplacer un `Switch` dans un formulaire de réglages",
+      "**MUST NOT** — combiner la variante `outline` avec une bordure parente",
+      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
+      "**MUST** — donner un `aria-label` à un `Toggle` réduit à son icône"
     ],
     "dependencies": [
       "`radix-ui` — `Toggle` primitive (Root)",
@@ -15455,11 +15455,11 @@
       "Créer une barre d'outils de formatage (gras, italique, souligné)"
     ],
     "constraints": [
-      "Utiliser `type=\"single\"` pour une sélection exclusive et `type=\"multiple\"` pour la multi-sélection",
-      "Fournir un `aria-label` sur le `ToggleGroup` pour décrire le groupe aux lecteurs d'écran",
+      "**MUST** — passer `type=\"single\"` pour une sélection exclusive, `type=\"multiple\"` sinon",
+      "**MUST** — donner au `ToggleGroup` un `aria-label` qui décrit le groupe",
       "**MUST NOT** — servir à la navigation → utiliser `Tabs` ou `NavigationMenu`",
-      "Le `spacing={0}` (par défaut) fusionne les bordures ; avec `spacing > 0` les items sont espacés",
-      "Les variantes et tailles sont propagées via contexte ; ne les surcharger sur `ToggleGroupItem` qu'en cas de besoin spécifique"
+      "**Note** — `spacing={0}` (par défaut) fusionne les bordures ; au-delà, les items sont espacés",
+      "**MUST NOT** — redéfinir `variant` ou `size` sur un `ToggleGroupItem`, **sauf** pour distinguer un item précis : le groupe les propage"
     ],
     "dependencies": [
       "`radix-ui` — `ToggleGroup` primitive (Root, Item)",
@@ -15671,8 +15671,8 @@
     "constraints": [
       "**MUST NOT** — contenir des éléments interactifs (liens, boutons) → utiliser `Popover`",
       "**MUST NOT** — dépasser une ligne ou 80 caractères de texte",
-      "Ne pas utiliser comme seul moyen de communiquer une information critique",
-      "Vérifier que le `TooltipProvider` est placé en amont dans l'arbre (nécessaire pour le fonctionnement de Radix)",
+      "**MUST NOT** — être le seul support d'une information critique",
+      "**MUST** — placer un `TooltipProvider` au-dessus dans l'arbre, par exemple dans le layout racine",
       "**MUST NOT** — poser un `Tooltip` directement sur un élément `disabled`, qui ne reçoit ni focus ni survol : envelopper l'élément dans un `<span tabIndex={0}>` qui porte le déclencheur"
     ],
     "dependencies": [

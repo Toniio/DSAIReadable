@@ -23,10 +23,10 @@ Représentation visuelle d'une touche ou combinaison de touches clavier sous for
 
 ## Contraintes
 
-- Ne pas utiliser pour du texte générique — réservé aux touches clavier
-- Composant non interactif (`pointer-events-none`) ; ne pas ajouter de gestionnaire de clic
-- Vérifier le contraste dans les contextes sombres (styles adaptés automatiquement via `dark:`)
-- Prévoir un libellé textuel en complément pour les lecteurs d'écran si la touche est symbolique
+- **MUST NOT** — servir à autre chose qu'une touche clavier
+- **MUST NOT** — ajouter un gestionnaire de clic : le composant est non interactif (`pointer-events-none`)
+- **MUST** — vérifier le contraste en thème sombre, sur le fond réel
+- **MUST** — doubler une touche symbolique (⌘, ⇧) d'un libellé textuel pour les lecteurs d'écran
 
 ## Dépendances
 

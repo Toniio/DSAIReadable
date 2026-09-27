@@ -24,11 +24,11 @@ Conteneur structurant un champ de saisie avec des addons (icônes, boutons, text
 
 ## Contraintes
 
-- Ne pas utiliser sans un `InputGroupInput` ou `InputGroupTextarea` comme enfant direct
-- Les addons `block-start` et `block-end` changent le layout en colonne — ne pas mélanger avec des addons `inline-*` dans le même groupe
-- L'état `disabled` est propagé visuellement via `has-disabled` mais doit être posé sur l'input enfant
-- Les boutons dans les addons doivent utiliser `InputGroupButton` pour hériter des tailles correctes
-- Requiert un conteneur `"use client"` (composant client-side)
+- **MUST NOT** — servir sans `InputGroupInput` ou `InputGroupTextarea` en enfant direct
+- **MUST NOT** — mêler des addons `block-*` et `inline-*` dans un même groupe : les `block-*` passent la mise en page en colonne
+- **MUST** — poser `disabled` sur le champ enfant : le groupe n'en reflète que l'apparence (`has-disabled`)
+- **MUST** — utiliser `InputGroupButton` pour un bouton dans un addon
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 
 ## Dépendances
 

@@ -27,8 +27,8 @@ Composant de navigation par onglets permettant d'alterner entre des panneaux de 
 - **MUST NOT** — servir de navigation entre pages distinctes → utiliser `NavigationMenu`
 - **MUST NOT** — dépasser 7 onglets par groupe
 - **MUST NOT** — servir quand plusieurs sections doivent être visibles ensemble → utiliser `Accordion` (`Tabs` n'en montre qu'une)
-- L'état `disabled` sur un trigger supprime les événements pointer et réduit l'opacité
-- Le contenu de chaque panneau doit être autosuffisant (pas de dépendance entre onglets)
+- **Note** — un trigger `disabled` ne reçoit plus d'événement pointer et prend `opacity-disabled`
+- **MUST NOT** — faire dépendre le contenu d'un panneau d'un autre onglet
 
 ## Dépendances
 

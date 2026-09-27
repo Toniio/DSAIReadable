@@ -23,11 +23,11 @@ Fournisseur de contexte qui propage la direction de lecture (LTR/RTL) à l'ensem
 
 ## Contraintes
 
-- Ne pas utiliser plusieurs `DirectionProvider` imbriqués avec des directions contradictoires
-- Doit être placé au-dessus de tous les composants Radix qui nécessitent la direction
-- Ne remplace pas l'attribut HTML `dir` sur `<html>` — les deux doivent être cohérents
-- Composant utilitaire uniquement : ne génère aucun rendu visuel propre
-- **Seul composant du système sans `data-slot`** : il ne rend aucun nœud DOM propre, donc aucun élément ne peut porter l'attribut. L'exception est déclarée dans le code par `// no-data-slot:` et vérifiée par `npm run index:data-slot`. Cibler la direction via l'attribut `dir` que Radix pose sur les composants consommateurs
+- **MUST NOT** — imbriquer des `DirectionProvider` de directions contradictoires
+- **MUST** — placer le `DirectionProvider` au-dessus de tous les composants Radix qui lisent la direction
+- **MUST** — garder l'attribut `dir` de `<html>` cohérent avec le `DirectionProvider`, qui ne le remplace pas
+- **Note** — composant utilitaire : il ne rend rien de visible
+- **Note** — **Seul composant du système sans `data-slot`** : il ne rend aucun nœud DOM propre, donc aucun élément ne peut porter l'attribut. L'exception est déclarée dans le code par `// no-data-slot:` et vérifiée par `npm run index:data-slot`. Cibler la direction via l'attribut `dir` que Radix pose sur les composants consommateurs
 
 ## Dépendances
 

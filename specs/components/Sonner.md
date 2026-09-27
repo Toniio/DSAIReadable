@@ -25,10 +25,10 @@ Fournisseur de notifications toast éphémères, basé sur la librairie `sonner`
 ## Contraintes
 
 - **MUST NOT** — porter un message critique qui exige une action → utiliser `AlertDialog`
-- Placer un seul `<Toaster />` à la racine du layout
-- Ne pas empiler plus de 3 toasts visibles simultanément pour préserver la lisibilité
-- Le contenu du toast doit être concis (une à deux phrases maximum)
-- Prévoir un moyen alternatif pour les lecteurs d'écran (`aria-live` géré par `sonner`)
+- **MUST** — placer un seul `<Toaster />`, à la racine du layout
+- **MUST NOT** — afficher plus de 3 toasts à la fois
+- **MUST NOT** — dépasser deux phrases
+- **Note** — `sonner` annonce les toasts aux lecteurs d'écran (`aria-live`)
 
 ## Dépendances
 

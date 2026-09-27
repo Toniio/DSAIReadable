@@ -24,10 +24,10 @@ Zone de défilement personnalisée avec des barres de défilement stylisées, re
 
 ## Contraintes
 
-- Ne pas utiliser pour le défilement principal de la page — laisser le `<body>` gérer le scroll natif
-- Le conteneur parent doit avoir une hauteur définie (fixe ou flex) pour que le défilement fonctionne
+- **MUST NOT** — servir au défilement principal de la page : laisser le `<body>` défiler
+- **MUST** — donner au parent une hauteur définie (fixe ou flex), sans quoi rien ne défile
 - **MUST NOT** — imbriquer une `ScrollArea` dans une autre
-- Le contenu focusable à l'intérieur doit rester accessible au clavier
+- **MUST NOT** — rendre inaccessible au clavier un contenu focusable de la zone
 
 ## Dépendances
 

@@ -25,10 +25,10 @@ Palette de commandes avec recherche intégrée, permettant de filtrer et sélect
 ## Contraintes
 
 - **MUST NOT** — servir de simple champ de recherche → un `Input` qui filtre la liste
-- Le composant `CommandEmpty` doit toujours être présent pour le cas « aucun résultat »
-- Les raccourcis (`CommandShortcut`) sont informatifs uniquement ; le binding clavier doit être géré séparément
-- Requiert un conteneur `"use client"` (composant client-side)
-- En mode dialog, les props `title` et `description` sont rendues en `sr-only` pour l'accessibilité
+- **MUST** — rendre un `CommandEmpty` pour le cas « aucun résultat »
+- **MUST** — brancher soi-même le raccourci clavier affiché par `CommandShortcut`, qui n'est qu'un libellé
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
+- **MUST** — en mode dialog, renseigner `title` et `description` : rendus en `sr-only`, ils nomment le dialogue
 
 ## Dépendances
 

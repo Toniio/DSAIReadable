@@ -26,9 +26,9 @@ Conteneur regroupant visuellement plusieurs boutons, inputs ou selects adjacents
 
 - **MUST NOT** — grouper des actions sans lien logique → les espacer simplement (`flex gap-*`)
 - **MUST NOT** — grouper plus de 5 boutons
-- L'orientation `vertical` doit être réservée aux barres d'outils latérales
-- Les enfants doivent supporter la fusion de bordures (les arrondis intermédiaires sont supprimés)
-- Les groupes imbriqués (`has-[>[data-slot=button-group]]`) ajoutent un `gap-2` automatique
+- **MUST** — réserver `orientation="vertical"` aux barres d'outils latérales
+- **MUST** — n'y placer que des enfants dont les bordures peuvent fusionner : les arrondis intermédiaires sont supprimés
+- **Note** — un groupe imbriqué (`has-[>[data-slot=button-group]]`) reçoit un `gap-2` automatique
 
 ## Dépendances
 

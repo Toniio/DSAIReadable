@@ -24,10 +24,10 @@ Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une
 ## Contraintes
 
 - **MUST NOT** — servir à saisir une valeur précise → un `Input` de type `number`
-- Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)
-- En mode vertical (`orientation="vertical"`), une hauteur minimale (`min-h-40`) est requise
-- Les valeurs `min` et `max` doivent être cohérentes avec le pas (`step`)
-- Requiert un conteneur `"use client"` (composant client-side)
+- **MUST** — Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)
+- **MUST** — donner une hauteur minimale (`min-h-40`) à un `Slider` vertical
+- **MUST** — choisir `min`, `max` et `step` tels que `max - min` soit un multiple de `step`
+- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 
 ## Dépendances
 
