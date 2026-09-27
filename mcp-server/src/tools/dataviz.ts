@@ -1,6 +1,6 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { loadContext, text } from "../lib/context.js"
+import { loadContext, notFound, text } from "../lib/context.js"
 import { READ_ONLY } from "../lib/annotations.js"
 
 interface ChartEntry {
@@ -110,10 +110,10 @@ export function registerDatavizTools(server: McpServer): void {
         }
       }
 
-      return text({
-        error: `Chart type "${chart_type}" not found`,
-        available: Object.keys(catalog),
-      })
+      return notFound(
+        `Chart type "${chart_type}" not found. Pass one of the available types.`,
+        Object.keys(catalog)
+      )
     }
   )
 }

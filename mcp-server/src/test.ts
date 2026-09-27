@@ -14,10 +14,19 @@ import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
 import { registerResources } from "./resources/index.js"
 import { Client } from "@modelcontextprotocol/sdk/client/index.js"
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
-import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
+import {
+  readdirSync,
+  existsSync,
+  readFileSync,
+  writeFileSync,
+  mkdtempSync,
+  rmSync,
+} from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { spawn } from "node:child_process"
+import { tmpdir } from "node:os"
+import { setContextDir, contextDir as servedContextDir } from "./lib/context.js"
 import { createServer as createNetServer } from "node:net"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -1107,6 +1116,37 @@ try {
     `An expired session is refused with 404 and told to initialize (got ${expired.status})`
   )
 
+  // MCP spec: the Origin header is validated against DNS rebinding.
+  const fromOrigin = (origin: string) =>
+    fetch(mcpUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/event-stream",
+        Origin: origin,
+      },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-06-18",
+          capabilities: {},
+          clientInfo: { name: "DSAIReadable-test", version: "1.0.0" },
+        },
+      }),
+    })
+  const hostile = await fromOrigin("http://attacker.example")
+  const hostileBody = await hostile.text()
+  const allowed = await fromOrigin(`http://localhost:${freePort}`)
+  await allowed.text()
+  assert(
+    hostile.status === 403 &&
+      hostileBody.includes("MCP_ALLOWED_ORIGINS") &&
+      allowed.status === 200,
+    `A hostile Origin is refused with 403, an allowed one is served (${hostile.status}, ${allowed.status})`
+  )
+
   const unknown = await post(listTools, "00000000-0000-0000-0000-000000000000")
   await unknown.text()
   assert(
@@ -1118,6 +1158,235 @@ try {
 } finally {
   httpServer.kill()
 }
+
+// --- Test 11: every tool, called as an agent calls it (P3-08) ---
+// One content assertion and one error case per tool. Errors are results with
+// isError: true, so the agent sees a failed call, and each says what to pass.
+console.log("\n11. Every tool: content and error")
+
+const toolServer = new McpServer({
+  name: "DSAIReadable-tools",
+  version: "1.0.0",
+})
+registerDsCoreTools(toolServer)
+registerDatavizTools(toolServer)
+registerUxWritingTools(toolServer)
+registerAdminTools(toolServer)
+const toolClient = new Client({
+  name: "DSAIReadable-test-client",
+  version: "1.0.0",
+})
+const [toolServerSide, toolClientSide] = InMemoryTransport.createLinkedPair()
+await Promise.all([
+  toolServer.connect(toolServerSide),
+  toolClient.connect(toolClientSide),
+])
+async function callTool(name: string, args: Record<string, unknown>) {
+  const result = (await toolClient.callTool({
+    name,
+    arguments: args,
+  })) as ToolText
+  return { isError: result.isError === true, text: result.content[0].text }
+}
+
+type Json = any // eslint-disable-line @typescript-eslint/no-explicit-any
+const semanticPaths = new Set(
+  (
+    JSON.parse(
+      readFileSync(resolve(contextDir, "semantic-tokens.json"), "utf-8")
+    ) as { path: string }[]
+  ).map((t) => t.path)
+)
+const meta = JSON.parse(
+  readFileSync(resolve(contextDir, "ds-metadata.json"), "utf-8")
+)
+const contentRuleCount = uxRules.filter(
+  (r) => (r as { source?: string }).source === "content.md"
+).length
+
+interface ToolCase {
+  args: Record<string, unknown>
+  content: (payload: Json) => boolean
+  /** Arguments that must fail; absent for a tool that takes none. */
+  errorArgs?: Record<string, unknown>
+  /** What the error must name so the agent can recover. */
+  errorNames?: string
+}
+
+const TOOL_CASES: Record<string, ToolCase> = {
+  get_design_system_overview: {
+    args: {},
+    content: (p) =>
+      p.name === "DSAIReadable" &&
+      p.version === meta.design_system_version &&
+      p.stats.total_components === specNames.length,
+  },
+  get_components: {
+    args: { category: "Forms" },
+    content: (p) =>
+      p.items.length > 0 &&
+      p.items.every((c: Json) => c.category === "Forms") &&
+      p.items.some((c: Json) => c.name === "Button"),
+    errorArgs: { cursor: "not-a-cursor" },
+    errorNames: "next_cursor",
+  },
+  get_component_specs: {
+    args: { component_name: "Button" },
+    // Minimal snapshot of the concise payload: its fields, in order.
+    content: (p) =>
+      Object.keys(p).join() ===
+        "name,category,status,role,constraints,exports,cross_references,detail" &&
+      p.exports.join() === "Button,buttonVariants",
+    errorArgs: { component_name: "NoSuchThing" },
+    errorNames: "Button",
+  },
+  get_component_variants: {
+    args: { component_name: "Button" },
+    content: (p) =>
+      p.variants.variant.values.join() ===
+      "default,outline,secondary,ghost,destructive,link",
+    errorArgs: { component_name: "NoSuchThing" },
+    errorNames: "Button",
+  },
+  get_tokens: {
+    args: { category: "color" },
+    content: (p) =>
+      p.items.every((t: Json) => t.path.startsWith("color.")) &&
+      p.items.some(
+        (t: Json) =>
+          t.path === "color.background.default" &&
+          t.css_var === "--color-background-default"
+      ),
+    errorArgs: { category: "colour" },
+    errorNames: "color",
+  },
+  get_typography: {
+    args: {},
+    content: (p) =>
+      p.font_families.length > 0 &&
+      p.font_families.every((f: Json) =>
+        semanticPaths.has(f.token.replace(/`/g, ""))
+      ),
+  },
+  get_icons: {
+    args: {},
+    content: (p) => p.library === "@phosphor-icons/react",
+  },
+  get_design_rules: {
+    args: { category: "Select" },
+    content: (p) => {
+      const ids = p.composition_rules.map((r: Json) => r.id)
+      return ids.includes("rule-09") && ids.includes("rule-20")
+    },
+    errorArgs: { category: "no-such-category" },
+    errorNames: "color",
+  },
+  get_page_patterns: {
+    args: {},
+    content: (p) =>
+      p.length > 0 &&
+      p.every((pattern: Json) =>
+        existsSync(resolve(__dirname, "../..", pattern.source))
+      ),
+  },
+  get_dataviz_recommendation: {
+    args: { objective: "evolution" },
+    content: (p) => p.recommended_charts.some((c: Json) => c.type === "line"),
+    errorArgs: { objective: "trend" },
+    errorNames: "evolution",
+  },
+  get_dataviz_specs: {
+    args: { chart_type: "bar" },
+    content: (p) => p.library === "recharts" && p.component === "BarChart",
+    errorArgs: { chart_type: "no-such-chart" },
+    errorNames: "bar",
+  },
+  get_ux_writing_rules: {
+    args: {},
+    content: (p) =>
+      Object.keys(p).join() === "rules,detail" &&
+      p.rules.length === contentRuleCount &&
+      p.rules.every((r: Json) => r.source === "content.md"),
+    errorArgs: { response_format: "verbose" },
+    errorNames: "detailed",
+  },
+  get_glossary: {
+    args: { term: "primitive" },
+    content: (p) =>
+      p.term === "primitive" && p.definition.includes("primitive.json"),
+    errorArgs: { term: "no-such-term" },
+    errorNames: "semantic",
+  },
+  get_content_library: {
+    args: { category: "labels" },
+    content: (p) => Object.keys(p.labels).length > 0,
+    errorArgs: { category: "buttons" },
+    errorNames: "labels",
+  },
+  get_stats: {
+    args: {},
+    content: (p) =>
+      p.total_components === specNames.length &&
+      p.total_tokens.semantic === semanticPaths.size,
+  },
+  validate_screen: {
+    args: { code: CLEAN_SCREEN },
+    content: (p) =>
+      p.passed === true &&
+      validateScreen('<div className="bg-[#ffffff]" />').passed === false,
+    errorArgs: {},
+    errorNames: "code",
+  },
+}
+
+const listedTools = (await toolClient.listTools()).tools.map((t) => t.name)
+assert(
+  listedTools.length === Object.keys(TOOL_CASES).length &&
+    listedTools.every((t) => t in TOOL_CASES),
+  `Every tool has its cases (${listedTools.filter((t) => !(t in TOOL_CASES)).join(", ") || "all"})`
+)
+
+for (const [tool, c] of Object.entries(TOOL_CASES)) {
+  const ok = await callTool(tool, c.args)
+  let content = false
+  try {
+    content = !ok.isError && c.content(JSON.parse(ok.text))
+  } catch {
+    content = false
+  }
+  assert(content, `${tool}: content`)
+
+  if (c.errorArgs) {
+    const failed = await callTool(tool, c.errorArgs)
+    assert(
+      failed.isError && failed.text.includes(c.errorNames ?? ""),
+      `${tool}: error on ${JSON.stringify(c.errorArgs)}, naming "${c.errorNames}"`
+    )
+  }
+}
+
+// A missing cache must fail the call and say how to rebuild it — never
+// answer as an empty design system. validate_screen reads no cache.
+const emptyContextDir = mkdtempSync(
+  resolve(tmpdir(), "dsaireadable-no-context-")
+)
+setContextDir(emptyContextDir)
+console.log("  (the [mcp] errors below are expected: one per tool)")
+const silentOnMissingCache: string[] = []
+for (const [tool, c] of Object.entries(TOOL_CASES)) {
+  if (tool === "validate_screen") continue
+  const result = await callTool(tool, c.args)
+  if (!result.isError || !result.text.includes("generate-context"))
+    silentOnMissingCache.push(tool)
+}
+setContextDir(contextDir)
+rmSync(emptyContextDir, { recursive: true })
+assert(
+  silentOnMissingCache.length === 0 && servedContextDir === contextDir,
+  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "15 tools"})`
+)
+
+await toolClient.close()
 
 // --- Summary ---
 console.log("\n" + "=".repeat(50))

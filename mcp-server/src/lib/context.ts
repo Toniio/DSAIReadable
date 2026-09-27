@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url"
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 /** Absolute path to the pre-compiled context cache. */
-export const contextDir = resolve(__dirname, "../../context")
+export let contextDir = resolve(__dirname, "../../context")
 
 const cache = new Map<string, unknown>()
 
@@ -61,7 +61,26 @@ export function text(data: unknown): {
   }
 }
 
-/** Clear the in-memory cache (used by tests). */
-export function clearContextCache(): void {
+/**
+ * Wrap a lookup that found nothing as a tool error. Without `isError`, an
+ * agent reads `{ error }` as a successful answer; with it, it sees a failed
+ * call and the names it can pass instead.
+ */
+export function notFound(
+  error: string,
+  available: string[]
+): {
+  content: { type: "text"; text: string }[]
+  isError: true
+} {
+  return { ...text({ error, available }), isError: true }
+}
+
+/**
+ * Serve the cache from another directory, and forget what was loaded. Tests
+ * point it at an empty directory to see each tool fail on a missing cache.
+ */
+export function setContextDir(dir: string): void {
+  contextDir = dir
   cache.clear()
 }
