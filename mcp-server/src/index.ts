@@ -134,9 +134,28 @@ if (mode === "http") {
     if (url.pathname === "/mcp") {
       const sessionId = req.headers["mcp-session-id"] as string | undefined
 
-      // Existing session
-      const existing = sessionId ? sessions.get(sessionId) : undefined
-      if (existing) {
+      if (sessionId !== undefined) {
+        // A session idle past its TTL is expired now, not at the next sweep:
+        // served, it would come back to life with a fresh lastSeen.
+        sweepSessions()
+        const existing = sessions.get(sessionId)
+        if (!existing) {
+          // Unknown, expired or closed. The spec answers 404, the signal for
+          // the client to initialize a new session.
+          res.writeHead(404, { "Content-Type": "application/json" })
+          res.end(
+            JSON.stringify({
+              jsonrpc: "2.0",
+              error: {
+                code: -32001,
+                message:
+                  "Session not found or expired. Send a new initialize request, without an Mcp-Session-Id header.",
+              },
+              id: null,
+            })
+          )
+          return
+        }
         existing.lastSeen = Date.now()
         await existing.transport.handleRequest(req, res)
         return
