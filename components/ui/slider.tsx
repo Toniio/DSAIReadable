@@ -12,8 +12,14 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  thumbLabels,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.Root> & {
+  /** Accessible name of each thumb, in value order. */
+  thumbLabels?: string[]
+}) {
   const _values = React.useMemo(
     () =>
       Array.isArray(value)
@@ -23,9 +29,17 @@ function Slider({
           : [min, max],
     [value, defaultValue, min, max]
   )
+  // The thumbs are the focusable role="slider" elements; the root is a span
+  // with no role, so a name left on it is announced by nothing. One thumb:
+  // the Slider's name is the thumb's. Several: it names the group, and each
+  // thumb takes its thumbLabels entry, else Radix's own ("Minimum"…).
+  const single = _values.length === 1
 
   return (
     <SliderPrimitive.Root
+      role={single ? undefined : "group"}
+      aria-label={single ? undefined : ariaLabel}
+      aria-labelledby={single ? undefined : ariaLabelledBy}
       data-slot="slider"
       defaultValue={defaultValue}
       value={value}
@@ -50,11 +64,32 @@ function Slider({
         <SliderPrimitive.Thumb
           data-slot="slider-thumb"
           key={index}
+          {...thumbName(
+            thumbLabels?.[index],
+            single,
+            ariaLabel,
+            ariaLabelledBy
+          )}
           className={`relative block size-3 shrink-0 rounded-none border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-(length:--space-focus-ring-width) ${FOCUS_RING_WIDTH} focus-visible:outline-hidden active:ring-(length:--space-focus-ring-width) disabled:pointer-events-none disabled:opacity-50`}
         />
       ))}
     </SliderPrimitive.Root>
   )
+}
+
+// Only the attributes that carry a name: Radix spreads the thumb's props over
+// its own, so an explicit aria-label={undefined} would erase Radix's default.
+function thumbName(
+  thumbLabel: string | undefined,
+  single: boolean,
+  ariaLabel: string | undefined,
+  ariaLabelledBy: string | undefined
+) {
+  if (thumbLabel) return { "aria-label": thumbLabel }
+  if (!single) return {}
+  if (ariaLabel) return { "aria-label": ariaLabel }
+  if (ariaLabelledBy) return { "aria-labelledby": ariaLabelledBy }
+  return {}
 }
 
 export { Slider }
