@@ -25,7 +25,7 @@ Champ de saisie segmenté pour les codes à usage unique (OTP), avec navigation 
 
 - Ne pas utiliser pour des saisies longues ou libres — réservé aux codes courts (4–8 caractères)
 - Chaque `InputOTPSlot` doit recevoir un `index` correspondant à sa position dans le groupe
-- Le `spellCheck` est désactivé par défaut pour éviter les suggestions du navigateur
+- Le `spellCheck` est désactivé par défaut : le navigateur ne propose pas de correction sur un code
 - L'accessibilité repose sur la bibliothèque `input-otp` ; ne pas surcharger les rôles ARIA
 - Requiert un conteneur `"use client"` (composant client-side)
 

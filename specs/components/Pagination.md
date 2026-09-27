@@ -23,7 +23,7 @@ Composant de navigation séquentielle permettant de parcourir des ensembles de r
 
 ## Contraintes
 
-- Ne pas utiliser pour une navigation hiérarchique — préférer `Breadcrumb`
+- **MUST NOT** — servir de navigation hiérarchique → utiliser `Breadcrumb`
 - Le composant n'inclut pas de logique de pagination — le consommateur doit gérer l'état et les URLs
 - La page active porte `aria-current="page"` ; ne pas dupliquer cet attribut
 - Les liens `PaginationPrevious` et `PaginationNext` nécessitent un `href` valide ou un handler

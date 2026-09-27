@@ -58,7 +58,7 @@ npm run tokens-validate   # naming DTCG + valeurs brutes + bridge @theme + focus
 npm run typecheck:all     # app + scripts + mcp-server
 npm run lint              # ESLint
 npm run index:validate    # 5 checks : JSON Schema, tailles, data-slot, chaînes UI, types Props
-npm run specs:validate    # les 59 specs contre les 13 sections canoniques + Variantes, Tokens utilisés et Props / API à jour
+npm run specs:validate    # les 59 specs contre les 13 sections canoniques + Variantes, Tokens utilisés et Props / API à jour + règles sans formulation floue
 npm run docs:tokens       # régénère token-reference.md + tokens.manifest.json
 npm run registry:check    # fraîcheur de registry.json + dépendances internes
 npm run registry:test-install  # installe les 61 items dans une app vierge et la compile

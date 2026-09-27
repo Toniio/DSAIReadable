@@ -23,8 +23,8 @@ Champ de saisie texte mono-ligne (ou fichier) servant de brique de base pour tou
 
 ## Contraintes
 
-- Ne pas utiliser pour des saisies multi-lignes — préférer `<Textarea>`
-- Ne pas utiliser pour des choix discrets — préférer `<Select>` ou `<Checkbox>`
+- **MUST NOT** — servir à une saisie sur plusieurs lignes → utiliser `Textarea`
+- **MUST NOT** — servir à un choix parmi des valeurs fixes → utiliser `Select` ou `Checkbox`
 - L'attribut `placeholder` ne remplace pas un `<Label>` visible
 - Un seul `Input` doit être `autofocus` par vue pour ne pas perturber la navigation clavier
 - En état `disabled`, le curseur passe en `not-allowed` ; la valeur n'est pas soumise avec le formulaire

@@ -24,7 +24,7 @@ Composant de divulgation qui permet d'afficher ou masquer une section de contenu
 
 ## Contraintes
 
-- Ne pas utiliser pour de la navigation multi-niveaux — préférer `Accordion` ou un menu arborescent
+- **MUST NOT** — servir de navigation multi-niveaux → utiliser `Accordion`
 - Le trigger doit être clairement identifiable comme interactif (bouton ou élément cliquable)
 - Le contenu masqué ne doit pas contenir d'éléments critiques pour la compréhension immédiate de la page
 - Assurer que `aria-expanded` est correctement géré (Radix le fait automatiquement)

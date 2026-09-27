@@ -22,7 +22,7 @@ Marque visuelle de l'application. Le composant rend le pictogramme seul ; il est
 
 ## Contraintes
 
-- Toujours utiliser le composant `Logo` plutôt que d'insérer un SVG à la main
+- **MUST** — afficher le logo avec le composant `Logo`, jamais avec un SVG inséré à la main
 - Ne pas déformer les proportions — passer par la prop `size`
 - Le composant n'affiche pas de logotype textuel : les enfants passés en props ne sont pas rendus. Pour accoler un nom de marque, le placer à côté du `Logo`
 - Le composant est un placeholder — remplacer par les vrais assets brand une fois disponibles

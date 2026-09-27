@@ -25,9 +25,9 @@ Placeholder animé de chargement qui représente la forme du contenu à venir, r
 ## Contraintes
 
 - Ne pas utiliser comme état permanent — le squelette doit être remplacé par le contenu réel
-- Préférer des dimensions proches du contenu final pour éviter un décalage de layout (CLS)
+- **MUST** — reprendre les dimensions du contenu final (hauteur, largeur, rayon), pour que son arrivée ne décale pas la mise en page
 - Ne pas animer les squelettes si l'utilisateur a activé `prefers-reduced-motion`
-- Limiter le nombre de squelettes visibles simultanément pour ne pas surcharger visuellement
+- **MUST NOT** — afficher plus de squelettes que d'éléments attendus : chacun tient la place d'un contenu qui va arriver
 
 ## Dépendances
 

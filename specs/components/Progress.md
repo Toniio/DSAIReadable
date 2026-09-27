@@ -25,10 +25,10 @@ Barre de progression linéaire indiquant visuellement l'avancement d'une opérat
 ## Contraintes
 
 - Ne pas utiliser pour des valeurs indéterminées sans le communiquer — ajouter `aria-valuetext` ou un label explicite
-- Limiter à une barre de progression visible par section pour éviter la surcharge visuelle
+- **MUST NOT** — afficher plus d'une barre `Progress` par section
 - Toujours fournir un label associé (via `aria-label` ou un élément `<label>`) pour les lecteurs d'écran
 - La valeur `value` doit être comprise entre 0 et `max` (100 par défaut) — les valeurs hors limites ne sont pas gérées
-- Ne pas utiliser comme jauge de données (ex. : température) — préférer un composant dédié
+- **MUST NOT** — servir de jauge de données (température, stock…) : `Progress` exprime l'avancement d'une tâche
 
 ## Dépendances
 

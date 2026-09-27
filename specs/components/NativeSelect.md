@@ -23,7 +23,7 @@ Menu déroulant natif du navigateur, léger et accessible, pour la sélection d'
 
 ## Contraintes
 
-- Ne pas utiliser si une recherche/filtrage est nécessaire — préférer `Combobox`
+- **MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`
 - Le style du menu déroulant ouvert dépend du navigateur et n'est pas personnalisable
 - Les options utilisent les couleurs système (`Canvas`, `CanvasText`) pour garantir la lisibilité native
 - La prop `size` est custom (pas celle native de `<select>`) — `"sm"` et `"default"` uniquement
@@ -128,7 +128,7 @@ Comportement natif du `select` (flèches, saisie, `Space` / `Enter` selon la pla
 
 **Vigilance** :
 
-- Préférer `NativeSelect` à `Select` quand la liste est longue ou sur mobile : le sélecteur du système est le plus accessible.
+- **SHOULD** — sur mobile, utiliser `NativeSelect` plutôt que `Select` : le sélecteur du système est le plus accessible ; **sauf** si les options exigent un rendu riche (icônes, descriptions) qu'un `<option>` ne peut pas afficher.
 
 ## Exemple de code
 

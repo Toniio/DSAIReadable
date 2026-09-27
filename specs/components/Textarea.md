@@ -23,7 +23,7 @@ Champ de saisie multi-lignes avec dimensionnement automatique (`field-sizing-con
 
 ## Contraintes
 
-- Ne pas utiliser pour des saisies courtes (une ligne) — préférer `Input`
+- **MUST NOT** — servir à une saisie d'une ligne → utiliser `Input`
 - Le `field-sizing-content` fait grandir automatiquement le champ ; si une hauteur fixe est souhaitée, surcharger via `className`
 - La hauteur minimale est de `min-h-16` (4rem)
 - Le mode dark applique un fond `bg-input/30` — ne pas redéfinir le fond sans tenir compte du thème

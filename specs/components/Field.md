@@ -29,7 +29,7 @@ Système de mise en page pour les champs de formulaire, gérant l'association La
 - Ne pas imbriquer des `<FieldSet>` sur plus de 2 niveaux — complexité cognitive
 - `data-invalid` doit être géré côté consommateur (validation côté serveur ou client)
 - `aria-invalid` doit être posé sur le contrôle lui-même : `<Field>` ne le propage pas
-- L'orientation `horizontal` n'est pas recommandée sur mobile (largeur < 640 px) — préférer `responsive`
+- **MUST NOT** — utiliser `orientation="horizontal"` dans une mise en page qui doit tenir sur mobile → `orientation="responsive"`, qui passe en ligne quand son `FieldGroup` est assez large
 - L'orientation `responsive` exige un `<FieldGroup>` parent : elle s'appuie sur le conteneur `@container/field-group`
 - `<FieldLegend variant="legend">` est réservé aux `<fieldset>` ; utiliser `variant="label"` pour les contextes non-fieldset
 - `<FieldError>` ne rend rien si ni `children` ni `errors` non vide ne sont fournis

@@ -23,8 +23,8 @@ Fenêtre modale de confirmation bloquante qui interrompt l'utilisateur pour vali
 
 ## Contraintes
 
-- Ne pas utiliser pour des messages d'information simple — préférer `Dialog` ou une notification
-- Limiter à 1 AlertDialog visible par vue à la fois
+- **MUST NOT** — servir à un simple message d'information → utiliser `Dialog`, ou `Sonner` pour une notification
+- **MUST NOT** — ouvrir un `AlertDialog` par-dessus un autre : un seul visible à la fois
 - Toujours proposer un bouton d'annulation pour ne pas piéger l'utilisateur
 - Le focus doit être piégé dans la modale (`focus trap` natif Radix)
 - `AlertDialogTitle` est requis pour l'accessibilité (annonce par les lecteurs d'écran)

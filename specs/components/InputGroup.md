@@ -164,7 +164,7 @@ Aucune interaction propre ; le champ et les `InputGroupButton` sont focalisables
 
 **Vigilance** :
 
-- Le texte d'un addon (« https:// », « € ») n'est pas lu comme partie du label : l'inclure dans le label ou la description si nécessaire.
+- **MUST** — quand le texte d'un addon (« https:// », « € ») porte du sens, le reprendre dans le label ou la description : il n'est pas lu comme partie du label.
 - L'erreur est stylisée sur le groupe via `aria-invalid` du champ ; le message reste à relier.
 
 ## Exemple de code

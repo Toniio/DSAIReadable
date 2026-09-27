@@ -24,7 +24,7 @@ Fournisseur de notifications toast éphémères, basé sur la librairie `sonner`
 
 ## Contraintes
 
-- Ne pas utiliser pour des messages critiques nécessitant une action — préférer `AlertDialog`
+- **MUST NOT** — porter un message critique qui exige une action → utiliser `AlertDialog`
 - Placer un seul `<Toaster />` à la racine du layout
 - Ne pas empiler plus de 3 toasts visibles simultanément pour préserver la lisibilité
 - Le contenu du toast doit être concis (une à deux phrases maximum)

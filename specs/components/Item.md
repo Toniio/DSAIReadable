@@ -27,7 +27,7 @@ Composant de ligne composable représentant un élément dans une liste, avec su
 - Toujours placer un `ItemTitle` pour l'accessibilité et la sémantique
 - Ne pas utiliser la variante `outline` et `muted` simultanément
 - La taille `xs` est optimisée pour les menus contextuels — ne pas l'utiliser pour des listes principales
-- Limiter le nombre d'actions dans `ItemActions` (2 à 3 maximum)
+- **MUST NOT** — placer plus de 3 actions dans `ItemActions`
 - Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role="listitem"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role="listitem"` explicitement
 
 ## Dépendances

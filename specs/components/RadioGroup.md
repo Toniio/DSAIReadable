@@ -17,15 +17,15 @@ Groupe de boutons radio permettant la sélection exclusive d'une seule option pa
 ## Usage
 
 - Choix exclusif entre 2 à 6 options dans un formulaire
-- Sélection de préférence (ex. : mode de livraison, fréquence)
+- Choix d'une option parmi quelques-unes (ex. : mode de livraison, fréquence)
 - Choix binaire explicite nécessitant la visibilité de toutes les options (vs. Switch)
 - Configuration de paramètres avec options mutuellement exclusives
 
 ## Contraintes
 
-- Ne pas utiliser pour plus de 6 options — préférer `Select` ou `Combobox`
+- **MUST NOT** — servir pour plus de 6 options → utiliser `Select` ou `Combobox`
 - Toujours associer chaque `RadioGroupItem` à un `<Label>` pour l'accessibilité
-- Ne pas utiliser pour des choix multiples — préférer `Checkbox`
+- **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
 - La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est déjà intégrée — ne pas ajouter de padding supplémentaire
 - Requiert un conteneur `"use client"` (composant client-side)
 

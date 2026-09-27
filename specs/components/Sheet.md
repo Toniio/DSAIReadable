@@ -24,8 +24,8 @@ Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, bas
 
 ## Contraintes
 
-- Ne pas utiliser pour des confirmations courtes — préférer `AlertDialog` ou `Dialog`
-- Limiter à 1 Sheet visible par vue (éviter l'empilement)
+- **MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`
+- **MUST NOT** — ouvrir un `Sheet` par-dessus un autre : un seul visible à la fois
 - `SheetTitle` est requis pour l'accessibilité (lecteurs d'écran)
 - La largeur est limitée à `sm:max-w-sm` pour les côtés gauche/droite
 - Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible
@@ -186,7 +186,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 **Vigilance** :
 
 - À la fermeture, le focus revient au déclencheur.
-- Un panneau latéral de navigation reste un dialogue modal : sur grand écran, préférer une `Sidebar` permanente.
+- **SHOULD** — pour une navigation latérale sur grand écran (`lg` et plus), utiliser une `Sidebar` permanente : un `Sheet` reste un dialogue modal ; **sauf** si la navigation doit rester masquée par défaut.
 
 ## Exemple de code
 
