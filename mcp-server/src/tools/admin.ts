@@ -2,6 +2,7 @@ import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { loadContext, text } from "../lib/context.js"
 import { validateScreen } from "../lib/validate-screen.js"
+import { READ_ONLY } from "../lib/annotations.js"
 
 interface ComponentEntry {
   name: string
@@ -24,10 +25,14 @@ function coverage(count: number, total: number): string {
 
 export function registerAdminTools(server: McpServer): void {
   // 1. get_stats
-  server.tool(
+  server.registerTool(
     "get_stats",
-    "Returns design system stats: total components, tokens per tier, spec coverage",
-    {},
+    {
+      title: "Design system stats",
+      description:
+        "Returns design system stats: total components, tokens per tier, spec coverage",
+      annotations: READ_ONLY,
+    },
     async () => {
       const components = loadContext<ComponentEntry[]>("components.json")
       const tokenData = loadContext<unknown[]>("semantic-tokens.json")
@@ -68,13 +73,20 @@ export function registerAdminTools(server: McpServer): void {
   )
 
   // 2. validate_screen
-  server.tool(
+  server.registerTool(
     "validate_screen",
-    "Analyzes code against DS rules: checks DS component usage, token usage, composition rules. Returns a list of issues/warnings",
     {
-      code: z
-        .string()
-        .describe("React/TSX code to validate against the design system rules"),
+      title: "Validate a screen",
+      description:
+        "Analyzes code against DS rules: checks DS component usage, token usage, composition rules. Returns a list of issues/warnings",
+      inputSchema: {
+        code: z
+          .string()
+          .describe(
+            "React/TSX code to validate against the design system rules"
+          ),
+      },
+      annotations: READ_ONLY,
     },
     async ({ code }) => text(validateScreen(code))
   )

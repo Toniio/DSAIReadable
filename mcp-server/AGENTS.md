@@ -4,9 +4,10 @@ Complète le [`AGENTS.md` racine](../AGENTS.md), qui reste la référence : ce
 fichier n'ajoute que ce qui est propre à `mcp-server/` et ne le contredit
 jamais. Une contradiction entre les deux est un bug à signaler.
 
-Le serveur expose le design system aux agents : **16 tools** (`src/tools/`) et
-**5 prompts** (`src/prompts/index.ts`). Il ne lit jamais les sources à la
-volée : il sert un cache JSON pré-compilé, `context/*.json`.
+Le serveur expose le design system aux agents : **16 tools** (`src/tools/`),
+**3 resources** (`src/resources/index.ts`) et **5 prompts**
+(`src/prompts/index.ts`). Il ne lit jamais les sources à la volée : il sert un
+cache JSON pré-compilé, `context/*.json`.
 
 ---
 
@@ -55,6 +56,7 @@ le supprimer et réinstaller.
 | **Chaque règle de `validate_screen` a sa fixture négative** (`NEGATIVE_FIXTURES` dans `src/test.ts`)                    | Une règle jamais vue en échec peut ne rien détecter                                                                  |
 | **Parser le Markdown par structure, pas par position** : tableaux par en-tête, `\|` échappés respectés                  | Les specs sont formatées par Prettier et contiennent plusieurs tableaux par section                                  |
 | **Le champ `version` vient de `ds-metadata.json`**, lui-même issu de `mcp-server/package.json`                          | Une version codée en dur ment dès le premier bump                                                                    |
+| **Chaque tool est déclaré avec `registerTool` et `annotations: READ_ONLY`** (`src/lib/annotations.ts`)                  | Sans annotation, la spec MCP présume un tool destructeur et ouvert : le client peut faire confirmer chaque appel     |
 | **HTTP lié à `127.0.0.1` par défaut** ; `MCP_HOST` et `MCP_ALLOWED_ORIGINS` ne s'élargissent que délibérément           | Le serveur n'a pas d'authentification                                                                                |
 | **Ne pas toucher `railway.json`** sans instruction                                                                      | Le maintien du déploiement HTTP distant reste à trancher par le propriétaire du dépôt                                |
 

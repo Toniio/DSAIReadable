@@ -11,6 +11,9 @@ import {
   type CompositionRule,
 } from "./lib/composition-rules.js"
 import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
+import { registerResources } from "./resources/index.js"
+import { Client } from "@modelcontextprotocol/sdk/client/index.js"
+import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
 import { readdirSync, existsSync, readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -695,6 +698,195 @@ assert(
   uxRules.every((r) => !r.rule.includes("|")),
   "No table header served as a UX writing rule"
 )
+
+// --- Test 8: annotations, resources, response_format, pagination (P3-06) ---
+// Called through a real client, as an agent calls them.
+console.log("\n8. Annotations, resources, response_format, pagination")
+
+const live = new McpServer({ name: "DSAIReadable-live", version: "1.0.0" })
+registerDsCoreTools(live)
+registerDatavizTools(live)
+registerUxWritingTools(live)
+registerAdminTools(live)
+registerResources(live)
+const client = new Client({
+  name: "DSAIReadable-test-client",
+  version: "1.0.0",
+})
+const [serverSide, clientSide] = InMemoryTransport.createLinkedPair()
+await Promise.all([live.connect(serverSide), client.connect(clientSide)])
+
+type ToolText = { content: { text: string }[]; isError?: boolean }
+async function call(name: string, args: Record<string, unknown> = {}) {
+  return (await client.callTool({ name, arguments: args })) as ToolText
+}
+const payload = async (name: string, args: Record<string, unknown> = {}) =>
+  (await call(name, args)).content[0].text
+
+// Without annotations, the MCP defaults describe a tool as destructive and
+// open-world: a client may then ask the user to confirm every call.
+const { tools } = await client.listTools()
+const unannotated = tools.filter(
+  (t) =>
+    t.annotations?.readOnlyHint !== true ||
+    t.annotations?.openWorldHint !== false
+)
+assert(
+  tools.length === 16 && unannotated.length === 0,
+  `Every tool is annotated read-only and closed-world (${tools.length} tools${unannotated.length ? `; missing: ${unannotated.map((t) => t.name).join(", ")}` : ""})`
+)
+
+const specNames = Object.keys(specs)
+const fullSpecs = specs as unknown as Record<
+  string,
+  { constraints: string[]; accessibility: string }
+>
+const { resources } = await client.listResources()
+const { resourceTemplates } = await client.listResourceTemplates()
+const templates = resourceTemplates.map((t) => t.uriTemplate)
+assert(
+  templates.includes("ds://component/{name}/spec") &&
+    templates.includes("ds://token/{path}") &&
+    resources.some((r) => r.uri === "ds://guidelines") &&
+    specNames.every((n) =>
+      resources.some((r) => r.uri === `ds://component/${n}/spec`)
+    ),
+  `Resources: 2 templates, ds://guidelines and the ${specNames.length} component specs listed`
+)
+
+const read = async (uri: string) =>
+  JSON.parse(
+    ((await client.readResource({ uri })).contents[0] as { text: string }).text
+  )
+assert(
+  JSON.stringify(await read("ds://component/Button/spec")) ===
+    JSON.stringify(specs.Button),
+  "ds://component/Button/spec serves the full spec"
+)
+assert(
+  (await read("ds://token/color.background.default")).css_var ===
+    "--color-background-default",
+  "ds://token/{path} serves a token by its dotted path"
+)
+const guidelines = await read("ds://guidelines")
+assert(
+  guidelines.composition_rules.length === indexRules.length &&
+    guidelines.critical_rules.some(
+      (r: { id: string }) => r.id === "tailwind-tokens"
+    ),
+  "ds://guidelines serves the critical and the composition rules"
+)
+let unknownRefused = false
+try {
+  await read("ds://component/NoSuchThing/spec")
+} catch (e) {
+  unknownRefused = String(e).includes("NoSuchThing")
+}
+assert(unknownRefused, "An unknown component is refused, and named")
+
+const completion = async (uri: string, name: string, value: string) =>
+  (
+    await client.complete({
+      ref: { type: "ref/resource", uri },
+      argument: { name, value },
+    })
+  ).completion.values
+assert(
+  JSON.stringify(
+    await completion("ds://component/{name}/spec", "name", "dia")
+  ) === JSON.stringify(["Dialog"]) &&
+    (await completion("ds://token/{path}", "path", "color.background.")).every(
+      (p) => p.startsWith("color.background.")
+    ),
+  "Completion finds a component name and a token path by prefix"
+)
+
+// concise is the default and stays ≤ 20 % of detailed: summed over every
+// spec for get_component_specs, unfiltered for the two rule tools.
+let conciseTotal = 0
+let detailedTotal = 0
+for (const name of specNames) {
+  conciseTotal += (
+    await payload("get_component_specs", { component_name: name })
+  ).length
+  detailedTotal += (
+    await payload("get_component_specs", {
+      component_name: name,
+      response_format: "detailed",
+    })
+  ).length
+}
+const ratios = {
+  get_component_specs: conciseTotal / detailedTotal,
+  get_design_rules:
+    (await payload("get_design_rules")).length /
+    (await payload("get_design_rules", { response_format: "detailed" })).length,
+  get_ux_writing_rules:
+    (await payload("get_ux_writing_rules")).length /
+    (await payload("get_ux_writing_rules", { response_format: "detailed" }))
+      .length,
+}
+for (const [tool, ratio] of Object.entries(ratios)) {
+  assert(
+    ratio <= 0.2,
+    `${tool}: concise is ${Math.round(ratio * 100)} % of detailed (≤ 20 %)`
+  )
+}
+const conciseButton = JSON.parse(
+  await payload("get_component_specs", { component_name: "Button" })
+)
+assert(
+  JSON.stringify(conciseButton.constraints) ===
+    JSON.stringify(fullSpecs.Button.constraints) &&
+    conciseButton.props === undefined &&
+    conciseButton.detail.includes("props"),
+  "concise keeps every constraint and names what detailed adds"
+)
+assert(
+  JSON.parse(
+    await payload("get_component_specs", {
+      component_name: "Button",
+      response_format: "detailed",
+    })
+  ).accessibility === fullSpecs.Button.accessibility,
+  "detailed serves the spec whole"
+)
+
+// Pagination: pages of a list are disjoint and add up to the whole list.
+const tokenPaths: string[] = []
+let cursor: string | undefined
+let pages = 0
+let total = 0
+do {
+  const page = JSON.parse(
+    await payload("get_tokens", { limit: 50, ...(cursor ? { cursor } : {}) })
+  ) as { total: number; items: { path: string }[]; next_cursor?: string }
+  tokenPaths.push(...(page.items ?? []).map((t) => t.path))
+  total = page.total
+  cursor = page.next_cursor
+  pages++
+} while (cursor && pages < 20)
+assert(
+  pages === Math.ceil(total / 50) &&
+    tokenPaths.length === total &&
+    new Set(tokenPaths).size === total,
+  `get_tokens pages cover the ${total} tokens once each (${pages} pages of 50)`
+)
+const components = JSON.parse(await payload("get_components"))
+assert(
+  components.total === specNames.length &&
+    components.items.length === specNames.length &&
+    components.next_cursor === undefined,
+  `get_components fits the ${specNames.length} components in one default page`
+)
+const badCursor = await call("get_tokens", { cursor: "not-a-cursor" })
+assert(
+  badCursor.isError === true &&
+    badCursor.content[0].text.includes("next_cursor"),
+  "A cursor the server did not issue is an error that says what to pass"
+)
+
+await client.close()
 
 // --- Summary ---
 console.log("\n" + "=".repeat(50))

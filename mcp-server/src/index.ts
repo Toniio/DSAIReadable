@@ -8,6 +8,7 @@ import { registerDatavizTools } from "./tools/dataviz.js"
 import { registerUxWritingTools } from "./tools/ux-writing.js"
 import { registerAdminTools } from "./tools/admin.js"
 import { registerPrompts } from "./prompts/index.js"
+import { registerResources } from "./resources/index.js"
 import { loadContext } from "./lib/context.js"
 
 /** Server version comes from the generated metadata, never hardcoded. */
@@ -70,6 +71,7 @@ function createMcpServer() {
   registerUxWritingTools(server)
   registerAdminTools(server)
   registerPrompts(server)
+  registerResources(server)
 
   return server
 }
