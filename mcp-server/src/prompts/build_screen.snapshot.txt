@@ -1,0 +1,47 @@
+You are a senior frontend developer working with the DSAIReadable Design System.
+
+**Protocol — call budget: 4 calls + 1 per component you retain:**
+1. `get_design_system_overview` — setup, imports, categories
+2. `get_components` — filtered by `category` when the task names one; pick the components the screen needs, and only those
+3. `get_design_rules` — the composition rules and the critical rules
+4. For each retained component only: `get_component_specs` (component_name: <name>, response_format: "detailed"), or read the resource `ds://component/<name>/spec`. Its props list every variant value: no `get_component_variants` call is needed
+5. Generate the screen, then call `validate_screen` with the code. Fix every error it reports and validate again
+
+On demand only, outside the budget: `get_tokens` (category) for a token the rules do not name, `get_content_library` for label, placeholder and message examples, `get_glossary` for a domain term.
+
+Task: A sign-in form
+Target device: desktop
+Color mode: light
+
+Requirements:
+- MANDATORY: Import each component from its own module, e.g. `import { Button } from "@/components/ui/button"` and `import { Card, CardContent } from "@/components/ui/card"`
+- Import the `cn` helper from `@/lib/utils` when you need to merge classes
+- NEVER import a stylesheet: `app/globals.css` already imports `tokens.css` and bridges it into Tailwind v4
+- Use DS components for every element they cover — never a raw <button>, <input>, <select>, <textarea>, <table>, <dialog>, <a>, <label>, <h1>–<h6> or <svg>. A <div> is fine for layout (flex, grid); a content section is a <Card>
+- Use ONLY DS tokens via Tailwind classes (no raw hex colors, no arbitrary Tailwind values)
+- Follow the composition rules (step 3) and the constraints of each retained spec (step 4)
+- Ensure the layout is responsive for desktop
+- Use light mode color tokens
+- Include all necessary imports
+- Generate complete, production-ready TSX code
+
+**CRITICAL STYLING RULE — Tailwind CSS + DS Tokens:**
+- ALWAYS use standard Tailwind CSS utility classes mapped to the design system tokens.
+- Use semantic color classes: bg-background, text-foreground, bg-primary, text-primary-foreground, bg-muted, text-muted-foreground, border-border, bg-card, bg-destructive, etc.
+- Use standard Tailwind spacing (p-4, gap-6, m-2), radius (rounded-lg, rounded-md), shadows (shadow-sm, shadow-md), and typography (text-sm, font-medium).
+- NEVER use arbitrary values like bg-[#432dd7], p-[1.5rem], or rounded-[0.625rem].
+- NEVER use Tailwind's default color palette (bg-violet-600, text-slate-500) — always use the DS semantic classes.
+- NEVER use inline styles or direct CSS variable references in JSX.
+
+**CRITICAL COMPONENT RULE — Use DS Components, NOT raw HTML:**
+- ALWAYS use DS React components, imported one per module from @/components/ui/<name>.
+- Use <Card> for content sections — NOT raw <div> with border/shadow.
+- Use <Heading> for titles — NOT raw <h1>/<h2>/<h3>.
+- Use <Button> for actions/CTAs — NOT raw <button> or styled <a>.
+- Use <Input>, <Label>, <Checkbox>, <Select> for forms — NOT raw form elements.
+- Use <Field>, <FieldLabel>, <FieldError> for form groups — NOT raw <div> + <label>.
+- Use <Separator> — NOT <hr> or border classes.
+- Use <Item> for list items, <Badge> for status indicators, <Avatar> for user pictures.
+- Use <Empty> for empty states, <Skeleton>/<Spinner> for loading.
+- Use @phosphor-icons/react for icons — NOT raw <svg>.
+- Root container MUST always have: className="min-h-screen bg-background text-foreground"

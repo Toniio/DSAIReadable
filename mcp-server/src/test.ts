@@ -14,7 +14,7 @@ import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
 import { registerResources } from "./resources/index.js"
 import { Client } from "@modelcontextprotocol/sdk/client/index.js"
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
-import { readdirSync, existsSync, readFileSync } from "node:fs"
+import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -887,6 +887,135 @@ assert(
 )
 
 await client.close()
+
+// --- Test 9: prompts (P3-07) ---
+// build_screen used to mandate 9 calls, specs and variants included, before
+// any code: the protocol an agent is likely to drop. It now asks for 4 calls
+// plus one per retained component, and ends with validate_screen.
+console.log("\n9. Prompts")
+
+const promptServer = new McpServer({
+  name: "DSAIReadable-prompts",
+  version: "1.0.0",
+})
+registerDsCoreTools(promptServer)
+registerDatavizTools(promptServer)
+registerUxWritingTools(promptServer)
+registerAdminTools(promptServer)
+registerPrompts(promptServer)
+const promptClient = new Client({
+  name: "DSAIReadable-test-client",
+  version: "1.0.0",
+})
+const [promptServerSide, promptClientSide] =
+  InMemoryTransport.createLinkedPair()
+await Promise.all([
+  promptServer.connect(promptServerSide),
+  promptClient.connect(promptClientSide),
+])
+
+const PROMPT_ARGS: Record<string, Record<string, string>> = {
+  build_screen: { task: "A sign-in form", device: "desktop", mode: "light" },
+  revise_design: { target: "Button", change: "Change the label" },
+  generate_idea: { experience: "dashboard" },
+  suggest_next_steps: { current_screen: "A sign-in form" },
+  showcase_components: { category: "Forms", device: "desktop" },
+}
+const promptText = async (name: string) =>
+  (
+    (await promptClient.getPrompt({ name, arguments: PROMPT_ARGS[name] }))
+      .messages[0].content as { text: string }
+  ).text
+
+const toolNames = new Set(
+  (await promptClient.listTools()).tools.map((t) => t.name)
+)
+const { prompts } = await promptClient.listPrompts()
+const unknownTools: string[] = []
+for (const { name } of prompts) {
+  for (const [, tool] of (await promptText(name)).matchAll(
+    /`((?:get|validate)_[a-z_]+)`/g
+  )) {
+    if (!toolNames.has(tool)) unknownTools.push(`${name} → ${tool}`)
+  }
+}
+assert(
+  prompts.length === Object.keys(PROMPT_ARGS).length &&
+    unknownTools.length === 0,
+  `Every tool a prompt names exists (${prompts.length} prompts${unknownTools.length ? `; unknown: ${unknownTools.join(", ")}` : ""})`
+)
+
+const buildScreen = await promptText("build_screen")
+const steps = [...buildScreen.matchAll(/^\d+\. .*$/gm)].map((m) => m[0])
+const stepTools = steps.map((step) =>
+  [...step.matchAll(/`((?:get|validate)_[a-z_]+)`/g)].map((m) => m[1])
+)
+assert(
+  JSON.stringify(stepTools) ===
+    JSON.stringify([
+      ["get_design_system_overview"],
+      ["get_components"],
+      ["get_design_rules"],
+      ["get_component_specs", "get_component_variants"],
+      ["validate_screen"],
+    ]) &&
+    /For each retained component only/.test(steps[3]) &&
+    /no `get_component_variants` call is needed/.test(steps[3]),
+  "build_screen: overview, components, rules, one spec per retained component, validate_screen"
+)
+assert(
+  /call budget: 4 calls \+ 1 per component you retain/.test(buildScreen) &&
+    !/no raw <div>/.test(buildScreen),
+  "build_screen states its call budget and allows a layout <div>"
+)
+
+// build_screen skips get_component_variants because the detailed spec's props
+// carry every cva axis and value (sub-components live in their parent spec).
+const cvaVariants = JSON.parse(
+  readFileSync(resolve(contextDir, "component-variants.json"), "utf-8")
+) as Record<
+  string,
+  { part_of: string | null; variants: Record<string, { values: string[] }> }
+>
+const propSpecs = specs as unknown as Record<
+  string,
+  { props: Array<PropRow & { component: string }> }
+>
+const missingValues: string[] = []
+let axisCount = 0
+for (const [name, entry] of Object.entries(cvaVariants)) {
+  const spec = propSpecs[name] ?? propSpecs[entry.part_of ?? ""]
+  for (const [axis, { values }] of Object.entries(entry.variants)) {
+    axisCount++
+    const row = spec?.props.find(
+      (p) => p.component === name && p.prop === `\`${axis}\``
+    )
+    const missing = values.filter(
+      (v) =>
+        !row || !new RegExp(`(^|[\\s|\`])"?${v}"?([\\s|\`]|$)`).test(row.type)
+    )
+    if (missing.length)
+      missingValues.push(`${name}.${axis}: ${missing.join(", ")}`)
+  }
+}
+assert(
+  axisCount > 0 && missingValues.length === 0,
+  `The detailed spec lists every variant value (${axisCount} axes${missingValues.length ? `; missing: ${missingValues.join("; ")}` : ""})`
+)
+
+// Any change to the build_screen text shows in review: regenerate with
+// UPDATE_SNAPSHOTS=1 npm run mcp:test, then read the diff.
+const snapshotPath = resolve(__dirname, "prompts/build_screen.snapshot.txt")
+if (process.env.UPDATE_SNAPSHOTS === "1") {
+  writeFileSync(snapshotPath, buildScreen)
+}
+assert(
+  existsSync(snapshotPath) &&
+    readFileSync(snapshotPath, "utf-8") === buildScreen,
+  "build_screen matches its snapshot (UPDATE_SNAPSHOTS=1 npm run mcp:test to accept a change)"
+)
+
+await promptClient.close()
 
 // --- Summary ---
 console.log("\n" + "=".repeat(50))

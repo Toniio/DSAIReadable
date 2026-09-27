@@ -38,6 +38,7 @@ Depuis la racine du dépôt :
 ```bash
 npm run generate-context   # régénère context/*.json — zéro diff attendu si rien n'a changé
 npm run mcp:test           # suite du serveur (src/test.ts)
+UPDATE_SNAPSHOTS=1 npm run mcp:test  # accepte un changement du prompt build_screen (snapshot), à relire dans le diff
 npm run typecheck:mcp      # tsc sur mcp-server/ (inclus dans typecheck:all)
 npm run mcp:start          # serveur stdio
 npm run mcp:start:http     # serveur HTTP, 127.0.0.1:3100 par défaut
