@@ -28,7 +28,7 @@ Groupe de boutons radio permettant la sélection exclusive d'une seule option pa
 ## Contraintes
 
 - **MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)
-- **MUST** — associer chaque `RadioGroupItem` à un `Label`
+- **MUST** — associer chaque `RadioGroupItem` à un `Label`, et placer le groupe dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)
 - **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
 - **MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)
 - **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur

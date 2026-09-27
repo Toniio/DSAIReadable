@@ -3464,7 +3464,7 @@
       "**Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
     ],
     "constraints": [
-      "**MUST** — associer la case à un `Label` (`id` / `htmlFor`) ou l'envelopper dans un `Field`",
+      "**MUST** — associer la case à un libellé visible : `Label` (`id` / `htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'elle porte une description ou un message d'erreur (`rule-09`)",
       "**MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`",
       "**MUST NOT** — laisser la zone de clic étendue (`after:-inset-x-3 after:-inset-y-2`) chevaucher un contrôle voisin",
       "**Note** — désactivée, la case n'est pas soumise avec le formulaire natif",
@@ -3474,7 +3474,7 @@
       "`Checkbox.Root` et `Checkbox.Indicator` de `radix-ui`",
       "`CheckIcon` de `lucide-react` (taille `size-3.5`)",
       "`Label` — obligatoire pour l'accessibilité",
-      "`Field` — **SHOULD** envelopper la case pour propager l'état invalide, **sauf** case isolée sans message d'erreur"
+      "`Field` — obligatoire dès que la case porte une description ou un message d'erreur (`rule-09`)"
     ],
     "anatomy": [
       {
@@ -11359,7 +11359,7 @@
     ],
     "constraints": [
       "**MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)",
-      "**MUST** — associer chaque `RadioGroupItem` à un `Label`",
+      "**MUST** — associer chaque `RadioGroupItem` à un `Label`, et placer le groupe dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)",
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
       "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
@@ -14237,7 +14237,7 @@
     "constraints": [
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "**MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`",
-      "**MUST** — associer un `Label`",
+      "**MUST** — associer un libellé visible : `Label` (`htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)",
       "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
       "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],

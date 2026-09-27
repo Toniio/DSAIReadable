@@ -396,7 +396,7 @@
     },
     {
       "id": "rule-09",
-      "rule": "Form inputs (Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch) must be wrapped in a Field component to ensure label association and error message display."
+      "rule": "Every form control (Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch) MUST have an associated visible label: Field with FieldLabel, or Label through htmlFor. It MUST sit in a Field as soon as it carries a description or an error message, which Field lays out and links to the control."
     },
     {
       "id": "rule-10",
@@ -424,7 +424,7 @@
     },
     {
       "id": "rule-16",
-      "rule": "Dark mode is applied via the .dark CSS class on a parent element (also supported via prefers-color-scheme: dark media query). Never override mode token values inline."
+      "rule": "Dark mode is the .dark class on <html>, set by ThemeProvider (next-themes). It follows the OS preference by default (defaultTheme=\"system\") by setting that class, never through a prefers-color-scheme media query. Never override mode token values inline."
     },
     {
       "id": "rule-17",

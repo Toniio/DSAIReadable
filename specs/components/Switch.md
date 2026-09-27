@@ -29,7 +29,7 @@ Interrupteur à bascule pour activer ou désactiver un paramètre binaire, avec 
 
 - **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
 - **MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`
-- **MUST** — associer un `Label`
+- **MUST** — associer un libellé visible : `Label` (`htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)
 - **MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)
 - **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
 
