@@ -58,9 +58,17 @@ function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function PopoverTitle({ className, ...props }: React.ComponentProps<"div">) {
+// A real heading, so screen readers list it; the level follows the page
+// outline, the look does not.
+function PopoverTitle({
+  className,
+  as: Comp = "h2",
+  ...props
+}: React.ComponentProps<"h2"> & {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
+}) {
   return (
-    <div
+    <Comp
       data-slot="popover-title"
       className={cn("text-sm font-medium", className)}
       {...props}
