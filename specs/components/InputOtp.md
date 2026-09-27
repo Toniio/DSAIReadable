@@ -45,12 +45,21 @@ Champ de saisie segmenté pour les codes à usage unique (OTP), avec navigation 
 
 ## Tokens utilisés
 
-| Token                 | Usage                                                                  |
-| --------------------- | ---------------------------------------------------------------------- |
-| `--color-input`       | Bordure des slots (`border-input`)                                     |
-| `--color-ring`        | Bordure et anneau du slot actif (`border-ring`, `ring-ring/50`)        |
-| `--color-destructive` | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`) |
-| `--color-foreground`  | Caret animé (`bg-foreground`)                                          |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                          | Classes et variables                                                 | Où                               |
+| ------------------------------ | -------------------------------------------------------------------- | -------------------------------- |
+| `border-width.default`         | `border-l` · `border-r` · `border-y`                                 | `InputOTPSlot`                   |
+| `color.border.focus`           | `border-ring` · `ring-ring/50`                                       | `InputOTPSlot`                   |
+| `color.border.input`           | `bg-input/30` · `border-input`                                       | `InputOTPSlot`                   |
+| `color.feedback.error.default` | `border-destructive` · `ring-destructive/20` · `ring-destructive/40` | `InputOTPGroup` · `InputOTPSlot` |
+| `color.text.default`           | `bg-foreground`                                                      | `InputOTPSlot`                   |
+| `motion.duration.extra-slow`   | `duration-extra-slow`                                                | `InputOTPSlot`                   |
+| `space.focus-ring-width`       | `ring-(length:--space-focus-ring-width)`                             | `InputOTPGroup` · `InputOTPSlot` |
+| `typography.size.xs`           | `text-xs`                                                            | `InputOTPSlot`                   |
+| `zindex.dropdown`              | `z-dropdown`                                                         | `InputOTPSlot`                   |
+
+Relevé dans `components/ui/input-otp.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

@@ -41,10 +41,13 @@ Placeholder animé de chargement qui représente la forme du contenu à venir, r
 
 ## Tokens utilisés
 
-| Token           | Usage                                       |
-| --------------- | ------------------------------------------- |
-| `bg-muted`      | Fond du squelette (couleur neutre atténuée) |
-| `animate-pulse` | Animation de pulsation (opacité oscillante) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                     | Classes et variables | Où         |
+| ------------------------- | -------------------- | ---------- |
+| `color.background.subtle` | `bg-muted`           | `Skeleton` |
+
+Relevé dans `components/ui/skeleton.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

@@ -43,10 +43,9 @@ Indicateur de chargement animé signalant qu'une opération asynchrone est en co
 
 ## Tokens utilisés
 
-| Token                      | Usage                                                                |
-| -------------------------- | -------------------------------------------------------------------- |
-| `--color-text-default`     | Couleur héritée du contexte parent (le SVG hérite de `currentColor`) |
-| `--motion-duration-normal` | Durée de l'animation `animate-spin` (750 ms par défaut Tailwind)     |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+Aucun token : `components/ui/spinner.tsx` n'emploie aucune classe ni variable qui mène à un token sémantique.
 
 ## Props / API
 

@@ -44,19 +44,25 @@ Déclencheur d'action primaire ou secondaire, disponible en plusieurs variantes 
 
 ## Tokens utilisés
 
-| Token                                  | Usage                                       |
-| -------------------------------------- | ------------------------------------------- |
-| `--color-action-background-default`    | Fond variante `default`                     |
-| `--color-action-background-foreground` | Texte/icône sur fond action                 |
-| `--color-background-default`           | Fond variante `outline` et `ghost` au hover |
-| `--color-background-subtle`            | Fond variante `secondary`                   |
-| `--color-border-default`               | Bordure variante `outline`                  |
-| `--color-border-focus`                 | Anneau de focus `focus-visible`             |
-| `--color-feedback-error-default`       | Bordure et anneau état `aria-invalid`       |
-| `--color-text-default`                 | Texte variante `ghost`, `link`, `secondary` |
-| `--opacity-disabled`                   | Opacité état `disabled` (50 %)              |
-| `--motion-duration-normal`             | Durée des transitions                       |
-| `--motion-easing-default`              | Courbe des transitions                      |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables                                                                                                                                                                                            | Où                                                                                                                                           |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`               | `border`                                                                                                                                                                                                        | `buttonVariants`                                                                                                                             |
+| `color.action.background.default`    | `bg-primary` · `bg-primary/80` · `text-primary`                                                                                                                                                                 | `buttonVariants.variant.default` · `buttonVariants.variant.link`                                                                             |
+| `color.action.background.foreground` | `text-primary-foreground`                                                                                                                                                                                       | `buttonVariants.variant.default`                                                                                                             |
+| `color.background.default`           | `bg-background`                                                                                                                                                                                                 | `buttonVariants.variant.outline`                                                                                                             |
+| `color.background.subtle`            | `bg-muted` · `bg-muted/50` · `bg-secondary` · `bg-secondary/80`                                                                                                                                                 | `buttonVariants.variant.ghost` · `buttonVariants.variant.outline` · `buttonVariants.variant.secondary`                                       |
+| `color.border.default`               | `border-border`                                                                                                                                                                                                 | `buttonVariants.variant.outline`                                                                                                             |
+| `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                                                                                                                                  | `buttonVariants` via `FOCUS_RING` (`lib/focus.ts`)                                                                                           |
+| `color.border.input`                 | `bg-input/30` · `bg-input/50` · `border-input`                                                                                                                                                                  | `buttonVariants.variant.outline`                                                                                                             |
+| `color.feedback.error.default`       | `bg-destructive/10` · `bg-destructive/20` · `bg-destructive/30` · `border-destructive` · `border-destructive/40` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` · `text-destructive` | `buttonVariants.variant.destructive` · `buttonVariants.variant.destructive` via `FOCUS_RING_DESTRUCTIVE` (`lib/focus.ts`) · `buttonVariants` |
+| `color.text.default`                 | `text-foreground` · `text-secondary-foreground`                                                                                                                                                                 | `buttonVariants.variant.ghost` · `buttonVariants.variant.outline` · `buttonVariants.variant.secondary`                                       |
+| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                                                                                                                                        | `buttonVariants` · `buttonVariants` via `FOCUS_RING` (`lib/focus.ts`)                                                                        |
+| `typography.font-weight.medium`      | `font-medium`                                                                                                                                                                                                   | `buttonVariants`                                                                                                                             |
+| `typography.size.xs`                 | `text-xs`                                                                                                                                                                                                       | `buttonVariants.size.xs` · `buttonVariants`                                                                                                  |
+
+Relevé dans `components/ui/button.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

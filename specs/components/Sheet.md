@@ -55,16 +55,27 @@ Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, bas
 
 ## Tokens utilisés
 
-| Token                     | Usage                                  |
-| ------------------------- | -------------------------------------- |
-| `bg-popover`              | Fond du contenu du panneau             |
-| `text-popover-foreground` | Couleur du texte principal             |
-| `bg-black/10`             | Fond de l'overlay                      |
-| `text-foreground`         | Couleur du titre                       |
-| `text-muted-foreground`   | Couleur de la description              |
-| `font-heading`            | Police du titre                        |
-| `shadow-lg`               | Ombre portée du panneau                |
-| `duration-normal`         | Durée de la transition d'entrée/sortie |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                              | Où                                                                                                                     |
+| -------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`           | `border-b` · `border-l` · `border-r` · `border-t` | `SheetContent`                                                                                                         |
+| `color.background.elevated`      | `bg-popover`                                      | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`)                                                        |
+| `color.static.black`             | `bg-black/10`                                     | `SheetOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                                   |
+| `color.text.default`             | `text-foreground` · `text-popover-foreground`     | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `SheetTitle`                                         |
+| `color.text.subtle`              | `text-muted-foreground`                           | `SheetDescription`                                                                                                     |
+| `elevation.lg`                   | `shadow-lg`                                       | `SheetContent`                                                                                                         |
+| `motion.duration.fast`           | `duration-fast`                                   | `SheetOverlay`                                                                                                         |
+| `motion.duration.normal`         | `duration-normal`                                 | `SheetContent`                                                                                                         |
+| `typography.font-weight.medium`  | `font-medium`                                     | `SheetTitle`                                                                                                           |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                                 | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `SheetDescription` · `SheetOverlay`                  |
+| `typography.size.sm`             | `text-sm`                                         | `SheetTitle`                                                                                                           |
+| `typography.size.xs`             | `text-xs/relaxed`                                 | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `SheetDescription` · `SheetOverlay`                  |
+| `zindex.modal`                   | `z-modal`                                         | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `SheetOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
+
+Relevé dans `components/ui/sheet.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

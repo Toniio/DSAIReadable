@@ -53,16 +53,25 @@ Fenêtre modale de confirmation bloquante qui interrompt l'utilisateur pour vali
 
 ## Tokens utilisés
 
-| Token                     | Usage                                |
-| ------------------------- | ------------------------------------ |
-| `bg-popover`              | Fond du contenu de la modale         |
-| `text-popover-foreground` | Couleur du texte principal           |
-| `bg-black/10`             | Fond de l'overlay                    |
-| `ring-foreground/10`      | Bordure subtile autour du contenu    |
-| `bg-muted`                | Fond de la zone média/icône          |
-| `text-muted-foreground`   | Couleur du texte de description      |
-| `font-heading`            | Police du titre                      |
-| `duration-fast`           | Durée des animations d'entrée/sortie |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                                                 | Où                                                                                                                            |
+| -------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `color.background.elevated`      | `bg-popover`                                                         | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                              |
+| `color.background.subtle`        | `bg-muted`                                                           | `AlertDialogMedia`                                                                                                            |
+| `color.static.black`             | `bg-black/10`                                                        | `AlertDialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                                    |
+| `color.text.default`             | `ring-foreground/10` · `text-foreground` · `text-popover-foreground` | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogDescription`                                   |
+| `color.text.subtle`              | `text-muted-foreground`                                              | `AlertDialogDescription`                                                                                                      |
+| `motion.duration.fast`           | `duration-fast`                                                      | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogOverlay`                                       |
+| `typography.font-weight.medium`  | `font-medium`                                                        | `AlertDialogTitle`                                                                                                            |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                                                    | `AlertDialogDescription`                                                                                                      |
+| `typography.size.sm`             | `text-sm`                                                            | `AlertDialogTitle`                                                                                                            |
+| `typography.size.xs`             | `text-xs/relaxed`                                                    | `AlertDialogDescription`                                                                                                      |
+| `zindex.modal`                   | `z-modal`                                                            | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
+
+Relevé dans `components/ui/alert-dialog.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

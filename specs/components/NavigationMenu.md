@@ -51,17 +51,25 @@ Menu de navigation principal permettant d'organiser les liens du site en catégo
 
 ## Tokens utilisés
 
-| Token                             | Usage                                                        |
-| --------------------------------- | ------------------------------------------------------------ |
-| `--color-background-muted`        | Fond du trigger et du lien au hover/focus/active             |
-| `--color-background-popover`      | Fond du viewport et du contenu (mode sans viewport)          |
-| `--color-text-popover-foreground` | Texte dans le viewport et le contenu                         |
-| `--color-border-ring`             | Anneau de focus visible sur trigger et lien (`ring-ring/50`) |
-| `--color-border-foreground`       | Anneau subtil autour du viewport (`ring-foreground/10`)      |
-| `--color-background-border`       | Fond de la flèche indicateur                                 |
-| `--opacity-disabled`              | Opacité du trigger en état `disabled` (50 %)                 |
-| `--duration-fast`                 | Durée d'animation du viewport (ouverture/fermeture)          |
-| `--duration-slow`                 | Durée de rotation du chevron et animations du contenu inline |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                             | Où                                                                                                                      |
+| ------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `color.background.elevated`     | `bg-popover`                                     | `NavigationMenuContent` · `NavigationMenuViewport`                                                                      |
+| `color.background.subtle`       | `bg-muted` · `bg-muted/50`                       | `NavigationMenuLink` · `navigationMenuTriggerStyle`                                                                     |
+| `color.border.default`          | `bg-border`                                      | `NavigationMenuIndicator`                                                                                               |
+| `color.border.focus`            | `border-ring` · `ring-ring/50`                   | `NavigationMenuLink` via `FOCUS_RING` (`lib/focus.ts`) · `navigationMenuTriggerStyle` via `FOCUS_RING` (`lib/focus.ts`) |
+| `color.text.default`            | `ring-foreground/10` · `text-popover-foreground` | `NavigationMenuContent` · `NavigationMenuViewport`                                                                      |
+| `elevation.md`                  | `shadow-md`                                      | `NavigationMenuIndicator`                                                                                               |
+| `elevation.sm`                  | `shadow-sm`                                      | `NavigationMenuContent` · `NavigationMenuViewport`                                                                      |
+| `motion.duration.fast`          | `duration-fast`                                  | `NavigationMenuViewport`                                                                                                |
+| `motion.duration.slow`          | `duration-slow`                                  | `NavigationMenuContent` · `NavigationMenuTrigger`                                                                       |
+| `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`         | `NavigationMenuLink` via `FOCUS_RING` (`lib/focus.ts`) · `navigationMenuTriggerStyle` via `FOCUS_RING` (`lib/focus.ts`) |
+| `typography.font-weight.medium` | `font-medium`                                    | `navigationMenuTriggerStyle`                                                                                            |
+| `typography.size.xs`            | `text-xs`                                        | `NavigationMenuLink` · `navigationMenuTriggerStyle`                                                                     |
+| `zindex.popover`                | `z-popover`                                      | `NavigationMenuViewport`                                                                                                |
+
+Relevé dans `components/ui/navigation-menu.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

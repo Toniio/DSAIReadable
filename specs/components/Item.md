@@ -54,16 +54,26 @@ Composant de ligne composable représentant un élément dans une liste, avec su
 
 ## Tokens utilisés
 
-| Token                   | Usage                                          |
-| ----------------------- | ---------------------------------------------- |
-| `border-border`         | Bordure variante `outline`                     |
-| `border-transparent`    | Bordure variantes `default` et `muted`         |
-| `bg-muted/50`           | Fond variante `muted`                          |
-| `bg-muted`              | Fond au hover des liens enfants                |
-| `text-muted-foreground` | Texte de la description et hover des liens     |
-| `text-primary`          | Couleur des liens au hover dans la description |
-| `border-ring`           | Bordure au focus-visible                       |
-| `ring-ring/50`          | Anneau de focus                                |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                             | Classes et variables                     | Où                                               |
+| --------------------------------- | ---------------------------------------- | ------------------------------------------------ |
+| `border-width.default`            | `border`                                 | `itemVariants`                                   |
+| `color.action.background.default` | `text-primary`                           | `ItemDescription`                                |
+| `color.background.subtle`         | `bg-muted` · `bg-muted/50`               | `itemVariants.variant.muted` · `itemVariants`    |
+| `color.border.default`            | `border-border`                          | `itemVariants.variant.outline`                   |
+| `color.border.focus`              | `border-ring` · `ring-ring/50`           | `itemVariants` via `FOCUS_RING` (`lib/focus.ts`) |
+| `color.text.subtle`               | `text-muted-foreground`                  | `ItemDescription`                                |
+| `motion.duration.fast`            | `duration-fast`                          | `itemVariants`                                   |
+| `space.focus-ring-width`          | `ring-(length:--space-focus-ring-width)` | `itemVariants` via `FOCUS_RING` (`lib/focus.ts`) |
+| `typography.font-weight.medium`   | `font-medium`                            | `ItemTitle`                                      |
+| `typography.font-weight.normal`   | `font-normal`                            | `ItemDescription`                                |
+| `typography.line-height.relaxed`  | `text-xs/relaxed`                        | `ItemDescription`                                |
+| `typography.size.xs`              | `text-xs` · `text-xs/relaxed`            | `ItemDescription` · `ItemTitle` · `itemVariants` |
+
+Relevé dans `components/ui/item.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Separator` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

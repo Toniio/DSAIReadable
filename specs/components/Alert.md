@@ -47,13 +47,20 @@ Bandeau de feedback non-modal affichant un message contextuel (informatif ou d'e
 
 ## Tokens utilisés
 
-| Token                            | Usage                                                        |
-| -------------------------------- | ------------------------------------------------------------ |
-| `--color-background-subtle`      | Fond de la carte (`bg-card`) pour les deux variantes         |
-| `--color-text-default`           | Texte variante `default` (`text-card-foreground`)            |
-| `--color-feedback-error-default` | Texte variante `destructive` et description à 90 % d'opacité |
-| `--color-border-default`         | Bordure de l'alerte                                          |
-| `--space-component-sm`           | Gap interne (`gap-0.5`) entre titre et description           |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                       | Où                                                                    |
+| -------------------------------- | ------------------------------------------ | --------------------------------------------------------------------- |
+| `border-width.default`           | `border`                                   | `alertVariants`                                                       |
+| `color.background.subtle`        | `bg-card`                                  | `alertVariants.variant.default` · `alertVariants.variant.destructive` |
+| `color.feedback.error.default`   | `text-destructive` · `text-destructive/90` | `alertVariants.variant.destructive`                                   |
+| `color.text.default`             | `text-card-foreground` · `text-foreground` | `AlertDescription` · `AlertTitle` · `alertVariants.variant.default`   |
+| `color.text.subtle`              | `text-muted-foreground`                    | `AlertDescription`                                                    |
+| `typography.font-weight.medium`  | `font-medium`                              | `AlertTitle`                                                          |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                          | `AlertDescription`                                                    |
+| `typography.size.xs`             | `text-xs` · `text-xs/relaxed`              | `AlertDescription` · `alertVariants`                                  |
+
+Relevé dans `components/ui/alert.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

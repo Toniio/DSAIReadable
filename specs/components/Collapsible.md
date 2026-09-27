@@ -43,9 +43,9 @@ Composant de divulgation qui permet d'afficher ou masquer une section de contenu
 
 ## Tokens utilisés
 
-| Token | Usage                                                                     |
-| ----- | ------------------------------------------------------------------------- |
-| —     | Aucun token de design spécifique ; le style est délégué au contenu enfant |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+Aucun token : `components/ui/collapsible.tsx` n'emploie aucune classe ni variable qui mène à un token sémantique.
 
 ## Props / API
 

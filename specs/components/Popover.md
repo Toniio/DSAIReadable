@@ -48,14 +48,22 @@ Conteneur flottant interactif déclenché par un clic, permettant d'afficher du 
 
 ## Tokens utilisés
 
-| Token                     | Usage                                |
-| ------------------------- | ------------------------------------ |
-| `bg-popover`              | Fond du contenu flottant             |
-| `text-popover-foreground` | Couleur du texte principal           |
-| `ring-foreground/10`      | Bordure subtile autour du contenu    |
-| `shadow-md`               | Ombre portée du popover              |
-| `text-muted-foreground`   | Couleur de la description            |
-| `duration-fast`           | Durée des animations d'entrée/sortie |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                             | Où                                                        |
+| -------------------------------- | ------------------------------------------------ | --------------------------------------------------------- |
+| `color.background.elevated`      | `bg-popover`                                     | `PopoverContent`                                          |
+| `color.text.default`             | `ring-foreground/10` · `text-popover-foreground` | `PopoverContent`                                          |
+| `color.text.subtle`              | `text-muted-foreground`                          | `PopoverDescription`                                      |
+| `elevation.md`                   | `shadow-md`                                      | `PopoverContent`                                          |
+| `motion.duration.fast`           | `duration-fast`                                  | `PopoverContent`                                          |
+| `typography.font-weight.medium`  | `font-medium`                                    | `PopoverTitle`                                            |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                                | `PopoverDescription`                                      |
+| `typography.size.sm`             | `text-sm`                                        | `PopoverTitle`                                            |
+| `typography.size.xs`             | `text-xs` · `text-xs/relaxed`                    | `PopoverContent` · `PopoverDescription` · `PopoverHeader` |
+| `zindex.popover`                 | `z-popover`                                      | `PopoverContent`                                          |
+
+Relevé dans `components/ui/popover.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

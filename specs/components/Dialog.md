@@ -54,16 +54,25 @@ Fenêtre modale polyvalente pour afficher du contenu interactif (formulaire, dé
 
 ## Tokens utilisés
 
-| Token                     | Usage                                 |
-| ------------------------- | ------------------------------------- |
-| `bg-popover`              | Fond du contenu de la modale          |
-| `text-popover-foreground` | Couleur du texte principal            |
-| `bg-black/10`             | Fond de l'overlay                     |
-| `ring-foreground/10`      | Bordure subtile autour du contenu     |
-| `text-muted-foreground`   | Couleur du texte de description       |
-| `font-heading`            | Police du titre                       |
-| `--space-component-lg`    | Marge max-width responsive du contenu |
-| `duration-fast`           | Durée des animations d'entrée/sortie  |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                                                 | Où                                                                                                                  |
+| -------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `color.background.elevated`      | `bg-popover`                                                         | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                         |
+| `color.static.black`             | `bg-black/10`                                                        | `DialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                               |
+| `color.text.default`             | `ring-foreground/10` · `text-foreground` · `text-popover-foreground` | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogDescription`                                   |
+| `color.text.subtle`              | `text-muted-foreground`                                              | `DialogDescription`                                                                                                 |
+| `motion.duration.fast`           | `duration-fast`                                                      | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogOverlay`                                       |
+| `space.component.lg`             | `max-w-[calc(100%-var(--space-component-lg))]`                       | `DialogContent`                                                                                                     |
+| `typography.font-weight.medium`  | `font-medium`                                                        | `DialogTitle`                                                                                                       |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                                                    | `DialogContent` · `DialogDescription`                                                                               |
+| `typography.size.sm`             | `text-sm`                                                            | `DialogTitle`                                                                                                       |
+| `typography.size.xs`             | `text-xs/relaxed`                                                    | `DialogContent` · `DialogDescription`                                                                               |
+| `zindex.modal`                   | `z-modal`                                                            | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
+
+Relevé dans `components/ui/dialog.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

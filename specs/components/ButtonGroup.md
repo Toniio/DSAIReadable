@@ -46,12 +46,20 @@ Conteneur regroupant visuellement plusieurs boutons, inputs ou selects adjacents
 
 ## Tokens utilisés
 
-| Token        | Usage                                           |
-| ------------ | ----------------------------------------------- |
-| `bg-muted`   | Fond du `ButtonGroupText`                       |
-| `border`     | Bordure du `ButtonGroupText`                    |
-| `bg-input`   | Couleur du `ButtonGroupSeparator`               |
-| `z-dropdown` | Z-index des éléments en focus au sein du groupe |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables | Où                     |
+| ------------------------------- | -------------------- | ---------------------- |
+| `border-width.default`          | `border`             | `ButtonGroupText`      |
+| `color.background.subtle`       | `bg-muted`           | `ButtonGroupText`      |
+| `color.border.input`            | `bg-input`           | `ButtonGroupSeparator` |
+| `typography.font-weight.medium` | `font-medium`        | `ButtonGroupText`      |
+| `typography.size.xs`            | `text-xs`            | `ButtonGroupText`      |
+| `zindex.dropdown`               | `z-dropdown`         | `buttonGroupVariants`  |
+
+Relevé dans `components/ui/button-group.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Separator` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

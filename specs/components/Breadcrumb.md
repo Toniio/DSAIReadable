@@ -49,10 +49,16 @@ Composant de navigation secondaire affichant le chemin hiérarchique de la page 
 
 ## Tokens utilisés
 
-| Token                           | Usage                                           |
-| ------------------------------- | ----------------------------------------------- |
-| `--color-text-muted-foreground` | Couleur du texte de la liste et des séparateurs |
-| `--color-text-foreground`       | Couleur du lien au hover et de la page courante |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables    | Où                                  |
+| ------------------------------- | ----------------------- | ----------------------------------- |
+| `color.text.default`            | `text-foreground`       | `BreadcrumbLink` · `BreadcrumbPage` |
+| `color.text.subtle`             | `text-muted-foreground` | `BreadcrumbList`                    |
+| `typography.font-weight.normal` | `font-normal`           | `BreadcrumbPage`                    |
+| `typography.size.xs`            | `text-xs`               | `BreadcrumbList`                    |
+
+Relevé dans `components/ui/breadcrumb.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

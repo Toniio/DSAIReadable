@@ -59,14 +59,26 @@ Système de mise en page pour les champs de formulaire, gérant l'association La
 
 ## Tokens utilisés
 
-| Token                               | Usage                                                                                                    |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--color-text-default`              | Texte de `FieldLegend`, `FieldLabel` et `FieldTitle`                                                     |
-| `--color-text-subtle`               | Couleur de `FieldDescription` (`text-muted-foreground`)                                                  |
-| `--color-feedback-error-default`    | Couleur de `FieldError` et de `Field` quand `data-invalid="true"` (`text-destructive`)                   |
-| `--color-action-background-default` | Bordure et fond d'un `FieldLabel` sélectionné (`has-data-checked`), lien survolé dans `FieldDescription` |
-| `--color-background-default`        | Fond du libellé de `FieldSeparator` (`bg-background`)                                                    |
-| `--space-component-sm`              | Gap entre label et contrôle dans `Field` (`gap-2`)                                                       |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                             | Classes et variables                                                                          | Où                                                                                  |
+| --------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `border-width.default`            | `border`                                                                                      | `FieldLabel`                                                                        |
+| `color.action.background.default` | `bg-primary/10` · `bg-primary/5` · `border-primary/20` · `border-primary/30` · `text-primary` | `FieldDescription` · `FieldLabel`                                                   |
+| `color.background.default`        | `bg-background`                                                                               | `FieldSeparator`                                                                    |
+| `color.feedback.error.default`    | `text-destructive`                                                                            | `FieldError` · `fieldVariants`                                                      |
+| `color.text.subtle`               | `text-muted-foreground`                                                                       | `FieldDescription` · `FieldSeparator`                                               |
+| `typography.font-weight.medium`   | `font-medium`                                                                                 | `FieldLegend`                                                                       |
+| `typography.font-weight.normal`   | `font-normal`                                                                                 | `FieldDescription` · `FieldError`                                                   |
+| `typography.line-height.normal`   | `leading-normal`                                                                              | `FieldDescription`                                                                  |
+| `typography.line-height.relaxed`  | `text-xs/relaxed`                                                                             | `FieldDescription` · `FieldTitle`                                                   |
+| `typography.line-height.snug`     | `leading-snug`                                                                                | `FieldContent` · `FieldLabel`                                                       |
+| `typography.size.sm`              | `text-sm`                                                                                     | `FieldLegend`                                                                       |
+| `typography.size.xs`              | `text-xs` · `text-xs/relaxed`                                                                 | `FieldDescription` · `FieldError` · `FieldLegend` · `FieldSeparator` · `FieldTitle` |
+
+Relevé dans `components/ui/field.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Label`, `Separator` : les tokens de ces composants sont listés dans leurs specs.
 
 ## Props / API
 

@@ -46,12 +46,16 @@ Bulle d'information contextuelle apparaissant au survol ou au focus d'un éléme
 
 ## Tokens utilisés
 
-| Token             | Usage                                |
-| ----------------- | ------------------------------------ |
-| `bg-foreground`   | Fond du tooltip et de la flèche      |
-| `text-background` | Texte du tooltip (contraste inversé) |
-| `fill-foreground` | Remplissage SVG de la flèche         |
-| `z-tooltip`       | Z-index du contenu et de la flèche   |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                      | Classes et variables                | Où               |
+| -------------------------- | ----------------------------------- | ---------------- |
+| `color.background.default` | `text-background`                   | `TooltipContent` |
+| `color.text.default`       | `bg-foreground` · `fill-foreground` | `TooltipContent` |
+| `typography.size.xs`       | `text-xs`                           | `TooltipContent` |
+| `zindex.tooltip`           | `z-tooltip`                         | `TooltipContent` |
+
+Relevé dans `components/ui/tooltip.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

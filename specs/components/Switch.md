@@ -42,15 +42,21 @@ Interrupteur à bascule pour activer ou désactiver un paramètre binaire, avec 
 
 ## Tokens utilisés
 
-| Token                        | Usage                                                                  |
-| ---------------------------- | ---------------------------------------------------------------------- |
-| `--color-primary`            | Fond de l'interrupteur activé (`bg-primary`)                           |
-| `--color-primary-foreground` | Thumb activé en mode dark (`bg-primary-foreground`)                    |
-| `--color-input`              | Fond de l'interrupteur désactivé (`bg-input`)                          |
-| `--color-background`         | Fond du thumb (`bg-background`)                                        |
-| `--color-foreground`         | Thumb désactivé en mode dark (`bg-foreground`)                         |
-| `--color-ring`               | Anneau de focus (`ring-ring/50`, `border-ring`)                        |
-| `--color-destructive`        | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables                                                                           | Où                                                    |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `border-width.default`               | `border`                                                                                       | `Switch`                                              |
+| `color.action.background.default`    | `bg-primary`                                                                                   | `Switch`                                              |
+| `color.action.background.foreground` | `bg-primary-foreground`                                                                        | `Switch`                                              |
+| `color.background.default`           | `bg-background`                                                                                | `Switch`                                              |
+| `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                 | `Switch` via `FOCUS_RING` (`lib/focus.ts`)            |
+| `color.border.input`                 | `bg-input` · `bg-input/80`                                                                     | `Switch`                                              |
+| `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Switch`                                              |
+| `color.text.default`                 | `bg-foreground`                                                                                | `Switch`                                              |
+| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `Switch` · `Switch` via `FOCUS_RING` (`lib/focus.ts`) |
+
+Relevé dans `components/ui/switch.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

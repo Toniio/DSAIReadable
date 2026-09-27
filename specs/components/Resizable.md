@@ -45,12 +45,17 @@ Système de panneaux redimensionnables permettant de diviser une zone en section
 
 ## Tokens utilisés
 
-| Token                    | Usage                                                       |
-| ------------------------ | ----------------------------------------------------------- |
-| `bg-border`              | Fond de la poignée de séparation et de l'indicateur visuel  |
-| `ring-ring`              | Anneau de focus sur la poignée (`focus-visible`)            |
-| `ring-offset-background` | Décalage de l'anneau de focus                               |
-| `z-dropdown`             | Z-index de l'indicateur visuel de la poignée (`withHandle`) |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                      | Classes et variables                     | Où                                                  |
+| -------------------------- | ---------------------------------------- | --------------------------------------------------- |
+| `color.background.default` | `ring-offset-background`                 | `ResizableHandle`                                   |
+| `color.border.default`     | `bg-border`                              | `ResizableHandle`                                   |
+| `color.border.focus`       | `border-ring` · `ring-ring/50`           | `ResizableHandle` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.focus-ring-width`   | `ring-(length:--space-focus-ring-width)` | `ResizableHandle` via `FOCUS_RING` (`lib/focus.ts`) |
+| `zindex.dropdown`          | `z-dropdown`                             | `ResizableHandle`                                   |
+
+Relevé dans `components/ui/resizable.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

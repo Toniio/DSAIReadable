@@ -41,12 +41,13 @@
 
 ## Tokens utilisés
 
-| Token                            | Usage                                               |
-| -------------------------------- | --------------------------------------------------- |
-| `--color-text-default`           | Couleur du texte du label                           |
-| `--opacity-disabled`             | Opacité à 50 % quand le contrôle peer est désactivé |
-| `--typography-size-xs`           | Taille de police `text-xs`                          |
-| `--typography-line-height-tight` | Interligne `leading-none`                           |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                | Classes et variables | Où      |
+| -------------------- | -------------------- | ------- |
+| `typography.size.xs` | `text-xs`            | `Label` |
+
+Relevé dans `components/ui/label.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

@@ -58,20 +58,27 @@ Barre de menus horizontale offrant un système de menus déroulants avec support
 
 ## Tokens utilisés
 
-| Token                             | Usage                                                                  |
-| --------------------------------- | ---------------------------------------------------------------------- |
-| `--color-background-muted`        | Fond du trigger au hover/expanded et fond du sub-trigger au focus/open |
-| `--color-background-popover`      | Fond du contenu de menu et sous-menu                                   |
-| `--color-text-popover-foreground` | Texte du contenu de menu                                               |
-| `--color-background-accent`       | Fond de l'item au focus                                                |
-| `--color-text-accent-foreground`  | Texte de l'item au focus                                               |
-| `--color-text-destructive`        | Texte de l'item en variante `destructive`                              |
-| `--color-background-destructive`  | Fond atténué de l'item destructive au focus (10 %/20 %)                |
-| `--color-text-muted-foreground`   | Texte du raccourci clavier et des labels                               |
-| `--color-border-default`          | Bordure de la barre de menus et séparateurs                            |
-| `--color-border-foreground`       | Anneau subtil autour du contenu (`ring-foreground/10`)                 |
-| `--opacity-disabled`              | Opacité des items désactivés (50 %)                                    |
-| `--duration-fast`                 | Durée des animations d'entrée/sortie du contenu                        |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                           | Classes et variables                                                        | Où                                                                                                                                            |
+| ------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`          | `border`                                                                    | `Menubar`                                                                                                                                     |
+| `color.background.elevated`     | `bg-popover`                                                                | `MenubarContent` · `MenubarSubContent`                                                                                                        |
+| `color.background.subtle`       | `bg-accent` · `bg-muted`                                                    | `MenubarCheckboxItem` · `MenubarItem` · `MenubarRadioItem` · `MenubarSubTrigger` · `MenubarTrigger`                                           |
+| `color.border.default`          | `bg-border`                                                                 | `MenubarSeparator`                                                                                                                            |
+| `color.border.focus`            | `border-ring` · `ring-ring/50`                                              | `MenubarTrigger` via `FOCUS_RING` (`lib/focus.ts`)                                                                                            |
+| `color.feedback.error.default`  | `bg-destructive/10` · `bg-destructive/20` · `text-destructive`              | `MenubarItem`                                                                                                                                 |
+| `color.text.default`            | `ring-foreground/10` · `text-accent-foreground` · `text-popover-foreground` | `MenubarCheckboxItem` · `MenubarContent` · `MenubarItem` · `MenubarRadioItem` · `MenubarShortcut` · `MenubarSubContent` · `MenubarSubTrigger` |
+| `color.text.subtle`             | `text-muted-foreground`                                                     | `MenubarShortcut`                                                                                                                             |
+| `elevation.lg`                  | `shadow-lg`                                                                 | `MenubarSubContent`                                                                                                                           |
+| `elevation.md`                  | `shadow-md`                                                                 | `MenubarContent`                                                                                                                              |
+| `motion.duration.fast`          | `duration-fast`                                                             | `MenubarContent` · `MenubarSubContent`                                                                                                        |
+| `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                                    | `MenubarTrigger` via `FOCUS_RING` (`lib/focus.ts`)                                                                                            |
+| `typography.font-weight.medium` | `font-medium`                                                               | `MenubarTrigger`                                                                                                                              |
+| `typography.size.xs`            | `text-xs`                                                                   | `MenubarCheckboxItem` · `MenubarItem` · `MenubarLabel` · `MenubarRadioItem` · `MenubarShortcut` · `MenubarSubTrigger` · `MenubarTrigger`      |
+| `zindex.popover`                | `z-popover`                                                                 | `MenubarContent` · `MenubarSubContent`                                                                                                        |
+
+Relevé dans `components/ui/menubar.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 

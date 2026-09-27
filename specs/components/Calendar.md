@@ -46,17 +46,28 @@ Sélecteur de date(s) interactif basé sur `react-day-picker`, supportant la sé
 
 ## Tokens utilisés
 
-| Token                        | Usage                                                                         |
-| ---------------------------- | ----------------------------------------------------------------------------- |
-| `--color-background`         | Fond principal du calendrier (`bg-background`)                                |
-| `--color-muted`              | Fond du jour courant et des plages sélectionnées (`bg-muted`)                 |
-| `--color-muted-foreground`   | Texte des jours extérieurs, des jours de la semaine et des numéros de semaine |
-| `--color-primary`            | Fond du jour sélectionné et des extrémités de plage (`bg-primary`)            |
-| `--color-primary-foreground` | Texte du jour sélectionné (`text-primary-foreground`)                         |
-| `--color-foreground`         | Texte du jour courant (`text-foreground`)                                     |
-| `--color-popover`            | Fond du dropdown de sélection mois/année (`bg-popover`)                       |
-| `--color-ring`               | Anneau de focus sur les jours (`border-ring`, `ring-ring/50`)                 |
-| `--spacing-7`                | Taille des cellules via `--cell-size`                                         |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                                | Classes et variables                     | Où                                                                                                                |
+| ------------------------------------ | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `color.action.background.default`    | `bg-primary`                             | `CalendarDayButton`                                                                                               |
+| `color.action.background.foreground` | `text-primary-foreground`                | `CalendarDayButton`                                                                                               |
+| `color.background.default`           | `bg-background`                          | `Calendar`                                                                                                        |
+| `color.background.elevated`          | `bg-popover`                             | `Calendar.dropdown`                                                                                               |
+| `color.background.subtle`            | `bg-muted`                               | `Calendar.range_end` · `Calendar.range_start` · `Calendar.today` · `CalendarDayButton`                            |
+| `color.border.focus`                 | `border-ring` · `ring-ring/50`           | `CalendarDayButton`                                                                                               |
+| `color.text.default`                 | `text-foreground`                        | `Calendar.today` · `CalendarDayButton`                                                                            |
+| `color.text.subtle`                  | `text-muted-foreground`                  | `Calendar.caption_label` · `Calendar.disabled` · `Calendar.outside` · `Calendar.week_number` · `Calendar.weekday` |
+| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)` | `CalendarDayButton`                                                                                               |
+| `typography.font-weight.medium`      | `font-medium`                            | `Calendar.caption_label` · `Calendar.dropdowns`                                                                   |
+| `typography.font-weight.normal`      | `font-normal`                            | `Calendar.weekday` · `CalendarDayButton`                                                                          |
+| `typography.size.sm`                 | `text-sm`                                | `Calendar.caption_label` · `Calendar.dropdowns`                                                                   |
+| `typography.size.xs`                 | `text-xs`                                | `Calendar.week_number` · `Calendar.weekday` · `CalendarDayButton`                                                 |
+| `zindex.dropdown`                    | `z-dropdown`                             | `CalendarDayButton`                                                                                               |
+
+Relevé dans `components/ui/calendar.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+
+Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 

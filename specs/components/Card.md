@@ -48,14 +48,20 @@ Conteneur surfacé regroupant un titre, une description, du contenu et un pied d
 
 ## Tokens utilisés
 
-| Token                       | Usage                                                             |
-| --------------------------- | ----------------------------------------------------------------- |
-| `--color-background-subtle` | Fond de la carte (`bg-card`)                                      |
-| `--color-text-default`      | Texte principal (`text-card-foreground`)                          |
-| `--color-text-subtle`       | Texte de `CardDescription`                                        |
-| `--color-border-default`    | Bordure supérieure de `CardFooter` et anneau `ring-foreground/10` |
-| `--space-component-md`      | Gap interne `gap-4` (default)                                     |
-| `--space-component-lg`      | Padding `py-4`, `px-4` (default)                                  |
+<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+
+| Token                            | Classes et variables                          | Où                         |
+| -------------------------------- | --------------------------------------------- | -------------------------- |
+| `border-width.default`           | `border-t`                                    | `CardFooter`               |
+| `color.background.subtle`        | `bg-card`                                     | `Card`                     |
+| `color.text.default`             | `ring-foreground/10` · `text-card-foreground` | `Card`                     |
+| `color.text.subtle`              | `text-muted-foreground`                       | `CardDescription`          |
+| `typography.font-weight.medium`  | `font-medium`                                 | `CardTitle`                |
+| `typography.line-height.relaxed` | `text-xs/relaxed`                             | `CardDescription` · `Card` |
+| `typography.size.sm`             | `text-sm`                                     | `CardTitle`                |
+| `typography.size.xs`             | `text-xs/relaxed`                             | `CardDescription` · `Card` |
+
+Relevé dans `components/ui/card.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
 
 ## Props / API
 
