@@ -60,6 +60,12 @@ Relevé dans `components/ui/switch.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Switch`
+
+Rend `SwitchPrimitive.Root`.
+
 | Prop              | Type                                                | Défaut      | Description                                                  |
 | ----------------- | --------------------------------------------------- | ----------- | ------------------------------------------------------------ |
 | `size`            | `"sm" \| "default"`                                 | `"default"` | Taille de l'interrupteur (`h-5 w-8` default, `h-3.5 w-6` sm) |
@@ -68,7 +74,9 @@ Relevé dans `components/ui/switch.tsx` et les constantes de `lib/` qu'il import
 | `onCheckedChange` | `(checked: boolean) => void`                        | —           | Callback de changement d'état                                |
 | `disabled`        | `boolean`                                           | `false`     | Désactive l'interrupteur                                     |
 | `className`       | `string`                                            | —           | Classes CSS additionnelles                                   |
-| `...props`        | `React.ComponentProps<typeof SwitchPrimitive.Root>` | —           | Props Radix Switch.Root                                      |
+| `...props`        | `React.ComponentProps<typeof SwitchPrimitive.Root>` | —           | Props de `SwitchPrimitive.Root`                              |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

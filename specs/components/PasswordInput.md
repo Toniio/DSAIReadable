@@ -55,13 +55,21 @@ Compose `InputGroup` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `PasswordInput`
+
+Rend `InputGroupInput`.
+
 | Prop           | Type                                          | Défaut | Description                                               |
 | -------------- | --------------------------------------------- | ------ | --------------------------------------------------------- |
 | `id`           | `string`                                      | —      | ID pour l'association avec le label                       |
 | `placeholder`  | `string`                                      | —      | Texte indicatif                                           |
-| `autoComplete` | `string`                                      | —      | Hint navigateur (`current-password`, `new-password`)      |
+| `autoComplete` | `React.HTMLInputAutoCompleteAttribute`        | —      | Hint navigateur (`current-password`, `new-password`)      |
 | `className`    | `string`                                      | —      | Classes CSS additionnelles, appliquées sur l'`InputGroup` |
-| `...props`     | `Omit<React.ComponentProps<"input">, "type">` | —      | Props natives de l'`<input>`, `type` exclu                |
+| `...props`     | `Omit<React.ComponentProps<"input">, "type">` | —      | Props transmises à l'élément rendu                        |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

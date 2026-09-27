@@ -107,43 +107,220 @@ Compose `Button`, `Input`, `Separator`, `Sheet`, `Skeleton`, `Tooltip` : les tok
 
 ## Props / API
 
-### SidebarProvider
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
 
-| Prop           | Type                      | Défaut | Description                             |
-| -------------- | ------------------------- | ------ | --------------------------------------- |
-| `defaultOpen`  | `boolean`                 | `true` | État initial d'ouverture (non contrôlé) |
-| `open`         | `boolean`                 | —      | État contrôlé d'ouverture               |
-| `onOpenChange` | `(open: boolean) => void` | —      | Callback de changement d'état           |
-| `className`    | `string`                  | —      | Classes CSS additionnelles              |
-| `style`        | `React.CSSProperties`     | —      | Styles inline additionnels              |
+### `Sidebar`
 
-### Sidebar
+Rend `<div>`.
 
 | Prop          | Type                                 | Défaut        | Description                         |
 | ------------- | ------------------------------------ | ------------- | ----------------------------------- |
 | `side`        | `"left" \| "right"`                  | `"left"`      | Côté d'affichage                    |
 | `variant`     | `"sidebar" \| "floating" \| "inset"` | `"sidebar"`   | Style visuel de la sidebar          |
 | `collapsible` | `"offcanvas" \| "icon" \| "none"`    | `"offcanvas"` | Comportement de repli               |
-| `dir`         | `"ltr" \| "rtl"`                     | —             | Direction de lecture (mobile Sheet) |
+| `dir`         | `string`                             | —             | Direction de lecture (mobile Sheet) |
 | `className`   | `string`                             | —             | Classes CSS additionnelles          |
+| `...props`    | `React.ComponentProps<"div">`        | —             | Props natives de `<div>`            |
 
-### SidebarMenuButton
+### `SidebarContent`
 
-| Prop       | Type                            | Défaut      | Description                                 |
-| ---------- | ------------------------------- | ----------- | ------------------------------------------- |
-| `variant`  | `"default" \| "outline"`        | `"default"` | Variante visuelle                           |
-| `size`     | `"default" \| "sm" \| "lg"`     | `"default"` | Taille du bouton                            |
-| `asChild`  | `boolean`                       | `false`     | Délègue le rendu au premier enfant via Slot |
-| `isActive` | `boolean`                       | `false`     | Marque l'élément comme actif                |
-| `tooltip`  | `string \| TooltipContentProps` | —           | Tooltip affiché en mode collapsed           |
+Rend `<div>`.
 
-### SidebarMenuSubButton
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
 
-| Prop       | Type           | Défaut  | Description                                 |
-| ---------- | -------------- | ------- | ------------------------------------------- |
-| `asChild`  | `boolean`      | `false` | Délègue le rendu au premier enfant via Slot |
-| `size`     | `"sm" \| "md"` | `"md"`  | Taille du bouton de sous-menu               |
-| `isActive` | `boolean`      | `false` | Marque l'élément comme actif                |
+### `SidebarFooter`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `SidebarGroup`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `SidebarGroupAction`
+
+Rend `<button>`, ou son enfant avec `asChild`.
+
+| Prop       | Type                             | Défaut  | Description                                                                            |
+| ---------- | -------------------------------- | ------- | -------------------------------------------------------------------------------------- |
+| `asChild`  | `boolean`                        | `false` | Délègue le rendu au premier enfant, qui reçoit les props et les classes (Radix `Slot`) |
+| `...props` | `React.ComponentProps<"button">` | —       | Props natives de `<button>`                                                            |
+
+### `SidebarGroupContent`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `SidebarGroupLabel`
+
+Rend `<div>`, ou son enfant avec `asChild`.
+
+| Prop       | Type                          | Défaut  | Description                                                                            |
+| ---------- | ----------------------------- | ------- | -------------------------------------------------------------------------------------- |
+| `asChild`  | `boolean`                     | `false` | Délègue le rendu au premier enfant, qui reçoit les props et les classes (Radix `Slot`) |
+| `...props` | `React.ComponentProps<"div">` | —       | Props natives de `<div>`                                                               |
+
+### `SidebarHeader`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `SidebarInput`
+
+Rend `Input`.
+
+| Prop       | Type                                 | Défaut | Description      |
+| ---------- | ------------------------------------ | ------ | ---------------- |
+| `...props` | `React.ComponentProps<typeof Input>` | —      | Props de `Input` |
+
+### `SidebarInset`
+
+Rend `<main>`.
+
+| Prop       | Type                           | Défaut | Description               |
+| ---------- | ------------------------------ | ------ | ------------------------- |
+| `...props` | `React.ComponentProps<"main">` | —      | Props natives de `<main>` |
+
+### `SidebarMenu`
+
+Rend `<ul>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"ul">` | —      | Props natives de `<ul>` |
+
+### `SidebarMenuAction`
+
+Rend `<button>`, ou son enfant avec `asChild`.
+
+| Prop          | Type                             | Défaut  | Description                                                                                                       |
+| ------------- | -------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| `asChild`     | `boolean`                        | `false` | Délègue le rendu au premier enfant, qui reçoit les props et les classes (Radix `Slot`)                            |
+| `showOnHover` | `boolean`                        | `false` | Masque l'action sur desktop (`md` et plus) jusqu'au survol ou au focus de l'item, ou tant que son menu est ouvert |
+| `...props`    | `React.ComponentProps<"button">` | —       | Props natives de `<button>`                                                                                       |
+
+### `SidebarMenuBadge`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `SidebarMenuButton`
+
+Rend `<button>`, ou son enfant avec `asChild`.
+
+| Prop       | Type                                                    | Défaut      | Description                                 |
+| ---------- | ------------------------------------------------------- | ----------- | ------------------------------------------- |
+| `asChild`  | `boolean`                                               | `false`     | Délègue le rendu au premier enfant via Slot |
+| `isActive` | `boolean`                                               | `false`     | Marque l'élément comme actif                |
+| `tooltip`  | `string \| React.ComponentProps<typeof TooltipContent>` | —           | Tooltip affiché en mode collapsed           |
+| `variant`  | `"default" \| "outline"`                                | `"default"` | Variante visuelle                           |
+| `size`     | `"default" \| "sm" \| "lg"`                             | `"default"` | Taille du bouton                            |
+| `...props` | `React.ComponentProps<"button">`                        | —           | Props natives de `<button>`                 |
+
+### `SidebarMenuItem`
+
+Rend `<li>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"li">` | —      | Props natives de `<li>` |
+
+### `SidebarMenuSkeleton`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut  | Description                                                  |
+| ---------- | ----------------------------- | ------- | ------------------------------------------------------------ |
+| `showIcon` | `boolean`                     | `false` | Ajoute un carré d'icône avant la barre de texte du squelette |
+| `...props` | `React.ComponentProps<"div">` | —       | Props natives de `<div>`                                     |
+
+### `SidebarMenuSub`
+
+Rend `<ul>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"ul">` | —      | Props natives de `<ul>` |
+
+### `SidebarMenuSubButton`
+
+Rend `<a>`, ou son enfant avec `asChild`.
+
+| Prop       | Type                        | Défaut      | Description                                 |
+| ---------- | --------------------------- | ----------- | ------------------------------------------- |
+| `asChild`  | `boolean`                   | `false`     | Délègue le rendu au premier enfant via Slot |
+| `size`     | `"sm" \| "default"`         | `"default"` | Taille du bouton de sous-menu               |
+| `isActive` | `boolean`                   | `false`     | Marque l'élément comme actif                |
+| `...props` | `React.ComponentProps<"a">` | —           | Props natives de `<a>`                      |
+
+### `SidebarMenuSubItem`
+
+Rend `<li>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"li">` | —      | Props natives de `<li>` |
+
+### `SidebarProvider`
+
+Rend `<div>`.
+
+| Prop           | Type                          | Défaut | Description                             |
+| -------------- | ----------------------------- | ------ | --------------------------------------- |
+| `defaultOpen`  | `boolean`                     | `true` | État initial d'ouverture (non contrôlé) |
+| `open`         | `boolean`                     | —      | État contrôlé d'ouverture               |
+| `onOpenChange` | `(open: boolean) => void`     | —      | Callback de changement d'état           |
+| `className`    | `string`                      | —      | Classes CSS additionnelles              |
+| `style`        | `React.CSSProperties`         | —      | Styles inline additionnels              |
+| `...props`     | `React.ComponentProps<"div">` | —      | Props natives de `<div>`                |
+
+### `SidebarRail`
+
+Rend `<button>`.
+
+| Prop       | Type                             | Défaut | Description                 |
+| ---------- | -------------------------------- | ------ | --------------------------- |
+| `...props` | `React.ComponentProps<"button">` | —      | Props natives de `<button>` |
+
+### `SidebarSeparator`
+
+Rend `Separator`.
+
+| Prop       | Type                                     | Défaut | Description          |
+| ---------- | ---------------------------------------- | ------ | -------------------- |
+| `...props` | `React.ComponentProps<typeof Separator>` | —      | Props de `Separator` |
+
+### `SidebarTrigger`
+
+Rend `Button`.
+
+| Prop       | Type                                  | Défaut | Description       |
+| ---------- | ------------------------------------- | ------ | ----------------- |
+| `...props` | `React.ComponentProps<typeof Button>` | —      | Props de `Button` |
+
+### `useSidebar()`
+
+Retourne `SidebarContextProps`.
+
+<!-- Fin de la partie générée. -->
 
 ### Hook exporté
 

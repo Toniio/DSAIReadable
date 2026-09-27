@@ -63,16 +63,48 @@ Relevé dans `components/ui/accordion.tsx` et les constantes de `lib/` qu'il imp
 
 ## Props / API
 
-| Prop            | Type                                            | Défaut  | Description                                                 |
-| --------------- | ----------------------------------------------- | ------- | ----------------------------------------------------------- |
-| `type`          | `"single" \| "multiple"`                        | —       | Mode d'ouverture : un seul ou plusieurs panneaux simultanés |
-| `value`         | `string \| string[]`                            | —       | Valeur(s) du/des panneau(x) ouvert(s) (contrôlé)            |
-| `defaultValue`  | `string \| string[]`                            | —       | Valeur(s) initiale(s) du/des panneau(x) ouvert(s)           |
-| `onValueChange` | `(value: string \| string[]) => void`           | —       | Callback lors du changement de panneau ouvert               |
-| `collapsible`   | `boolean`                                       | `false` | Permet de refermer tous les panneaux (mode `single`)        |
-| `disabled`      | `boolean`                                       | `false` | Désactive tous les triggers de l'accordéon                  |
-| `className`     | `string`                                        | —       | Classes CSS additionnelles sur la racine                    |
-| `...props`      | `React.ComponentProps<AccordionPrimitive.Root>` | —       | Props natives Radix Accordion                               |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Accordion`
+
+Rend `AccordionPrimitive.Root`.
+
+| Prop            | Type                                                       | Défaut  | Description                                                 |
+| --------------- | ---------------------------------------------------------- | ------- | ----------------------------------------------------------- |
+| `type`          | `"single" \| "multiple"`                                   | —       | Mode d'ouverture : un seul ou plusieurs panneaux simultanés |
+| `value`         | `string \| string[]`                                       | —       | Valeur(s) du/des panneau(x) ouvert(s) (contrôlé)            |
+| `defaultValue`  | `string \| string[]`                                       | —       | Valeur(s) initiale(s) du/des panneau(x) ouvert(s)           |
+| `onValueChange` | `((value: string) => void) \| ((value: string[]) => void)` | —       | Callback lors du changement de panneau ouvert               |
+| `collapsible`   | `boolean`                                                  | `false` | Permet de refermer tous les panneaux (mode `single`)        |
+| `disabled`      | `boolean`                                                  | `false` | Désactive tous les triggers de l'accordéon                  |
+| `className`     | `string`                                                   | —       | Classes CSS additionnelles sur la racine                    |
+| `...props`      | `React.ComponentProps<typeof AccordionPrimitive.Root>`     | —       | Props de `AccordionPrimitive.Root`                          |
+
+### `AccordionItem`
+
+Rend `AccordionPrimitive.Item`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof AccordionPrimitive.Item>` | —      | Props de `AccordionPrimitive.Item` |
+
+### `AccordionTrigger`
+
+Rend `AccordionPrimitive.Trigger`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AccordionPrimitive.Trigger>` | —      | Props de `AccordionPrimitive.Trigger` |
+
+### `AccordionContent`
+
+Rend `AccordionPrimitive.Content`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AccordionPrimitive.Content>` | —      | Props de `AccordionPrimitive.Content` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

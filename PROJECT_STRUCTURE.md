@@ -155,6 +155,7 @@ Une spec par composant. Structure en 13 sections :
 
 `Variantes` est générée depuis les `cva()` du code (`npm run specs:variants`) ;
 `Tokens utilisés` est générée depuis les classes du code, résolues par Tailwind jusqu'au token sémantique (`npm run specs:tokens`) ;
+`Props / API` est générée depuis les exports TypeScript — un bloc par export, types et défauts tirés du code ; seules les descriptions s'éditent à la main (`npm run specs:api`) ;
 `Accessibilité` suit une structure fixe — Pattern, Rôle, Clavier, Nom accessible, Vigilance.
 
 ### `specs/foundations/` — Specs des fondations

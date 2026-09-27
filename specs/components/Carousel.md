@@ -58,35 +58,68 @@ Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop          | Type                          | Défaut         | Description                                                          |
-| ------------- | ----------------------------- | -------------- | -------------------------------------------------------------------- |
-| `orientation` | `"horizontal" \| "vertical"`  | `"horizontal"` | Direction du défilement                                              |
-| `opts`        | `CarouselOptions`             | —              | Options de configuration `embla-carousel` (boucle, alignement, etc.) |
-| `plugins`     | `CarouselPlugin`              | —              | Plugins `embla-carousel` (autoplay, etc.)                            |
-| `setApi`      | `(api: CarouselApi) => void`  | —              | Callback pour récupérer l'instance API du carrousel                  |
-| `className`   | `string`                      | —              | Classes CSS additionnelles sur le conteneur racine                   |
-| `children`    | `ReactNode`                   | —              | Contenu du carrousel (`CarouselContent`, boutons, etc.)              |
-| `...props`    | `React.ComponentProps<"div">` | —              | Toutes les props natives du `<div>`                                  |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
 
-### CarouselContent
+### `Carousel`
 
-| Prop        | Type     | Défaut | Description                |
-| ----------- | -------- | ------ | -------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles |
+Rend `<div>`.
 
-### CarouselItem
+| Prop          | Type                                           | Défaut         | Description                                                          |
+| ------------- | ---------------------------------------------- | -------------- | -------------------------------------------------------------------- |
+| `opts`        | `CarouselOptions`                              | —              | Options de configuration `embla-carousel` (boucle, alignement, etc.) |
+| `plugins`     | `CarouselPlugin`                               | —              | Plugins `embla-carousel` (autoplay, etc.)                            |
+| `orientation` | `"horizontal" \| "vertical"`                   | `"horizontal"` | Direction du défilement                                              |
+| `setApi`      | `(api: CarouselApi) => void`                   | —              | Callback pour récupérer l'instance API du carrousel                  |
+| `className`   | `string`                                       | —              | Classes CSS additionnelles sur le conteneur racine                   |
+| `children`    | `React.ReactNode`                              | —              | Contenu du carrousel (`CarouselContent`, boutons, etc.)              |
+| `...props`    | `React.ComponentProps<"div"> & CarouselConfig` | —              | Props de `React.Component`                                           |
 
-| Prop        | Type     | Défaut | Description                |
-| ----------- | -------- | ------ | -------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles |
+### `CarouselContent`
 
-### CarouselPrevious / CarouselNext
+Rend `<div>`.
 
-| Prop        | Type            | Défaut      | Description                 |
-| ----------- | --------------- | ----------- | --------------------------- |
-| `variant`   | `ButtonVariant` | `"outline"` | Variante visuelle du bouton |
-| `size`      | `ButtonSize`    | `"icon-sm"` | Taille du bouton            |
-| `className` | `string`        | —           | Classes CSS additionnelles  |
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `CarouselItem`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `CarouselPrevious`
+
+Rend `Button`.
+
+| Prop        | Type                                                                                 | Défaut                         | Description                                                            |
+| ----------- | ------------------------------------------------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `variant`   | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`        | `"outline"`                    | Variante visuelle du bouton                                            |
+| `size`      | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon-sm"`                    | Taille du bouton                                                       |
+| `srLabel`   | `string`                                                                             | `UI_STRINGS.carousel.previous` | Texte lu par les lecteurs d'écran ; remplace la valeur de `UI_STRINGS` |
+| `className` | `string`                                                                             | —                              | Classes CSS additionnelles                                             |
+| `...props`  | `React.ComponentProps<typeof Button>`                                                | —                              | Props de `Button`                                                      |
+
+### `CarouselNext`
+
+Rend `Button`.
+
+| Prop       | Type                                                                                 | Défaut                     | Description                                                            |
+| ---------- | ------------------------------------------------------------------------------------ | -------------------------- | ---------------------------------------------------------------------- |
+| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`        | `"outline"`                | Prop de `Button`, voir sa spec                                         |
+| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon-sm"`                | Prop de `Button`, voir sa spec                                         |
+| `srLabel`  | `string`                                                                             | `UI_STRINGS.carousel.next` | Texte lu par les lecteurs d'écran ; remplace la valeur de `UI_STRINGS` |
+| `...props` | `React.ComponentProps<typeof Button>`                                                | —                          | Props de `Button`                                                      |
+
+### `useCarousel()`
+
+Retourne `CarouselContextProps`.
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

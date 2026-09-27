@@ -65,28 +65,65 @@ Relevé dans `components/ui/empty.tsx` et les constantes de `lib/` qu'il importe
 
 ## Props / API
 
-| Prop                 | Type                                           | Défaut      | Description                                       |
-| -------------------- | ---------------------------------------------- | ----------- | ------------------------------------------------- |
-| **Empty**            |                                                |             |                                                   |
-| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
-| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
-| **EmptyMedia**       |                                                |             |                                                   |
-| `variant`            | `"default" \| "icon"`                          | `"default"` | Apparence du conteneur média                      |
-| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
-| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
-| **EmptyHeader**      |                                                |             |                                                   |
-| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
-| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
-| **EmptyTitle**       |                                                |             |                                                   |
-| `as`                 | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6"` | `"h2"`      | Niveau de titre rendu ; ne change pas l'apparence |
-| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
-| `...props`           | `React.ComponentProps<"h2">`                   | —           | Props natives du titre                            |
-| **EmptyDescription** |                                                |             |                                                   |
-| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
-| `...props`           | `React.ComponentProps<"p">`                    | —           | Props natives du `<p>`                            |
-| **EmptyContent**     |                                                |             |                                                   |
-| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
-| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Empty`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `EmptyHeader`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `EmptyTitle`
+
+Rend `<h2>`, ou l'élément choisi par `as`.
+
+| Prop        | Type                                           | Défaut | Description                                       |
+| ----------- | ---------------------------------------------- | ------ | ------------------------------------------------- |
+| `as`        | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6"` | `"h2"` | Niveau de titre rendu ; ne change pas l'apparence |
+| `className` | `string`                                       | —      | Classes CSS additionnelles                        |
+| `...props`  | `React.ComponentProps<"h2">`                   | —      | Props natives de `<h2>`                           |
+
+### `EmptyDescription`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `EmptyContent`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `EmptyMedia`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut      | Description                  |
+| ----------- | ----------------------------- | ----------- | ---------------------------- |
+| `variant`   | `"default" \| "icon"`         | `"default"` | Apparence du conteneur média |
+| `className` | `string`                      | —           | Classes CSS additionnelles   |
+| `...props`  | `React.ComponentProps<"div">` | —           | Props natives de `<div>`     |
+
+<!-- Fin de la partie générée. -->
 
 > **Axes de variantes** — `Empty` n'a pas de `variant`. Seul `EmptyMedia` en porte un, sur l'axe **type de média** : `default` pour une illustration libre, `icon` pour une icône Phosphor centrée dans un cercle.
 

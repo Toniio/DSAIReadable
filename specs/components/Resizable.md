@@ -59,30 +59,40 @@ Relevé dans `components/ui/resizable.tsx` et les constantes de `lib/` qu'il imp
 
 ## Props / API
 
-### ResizablePanelGroup
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
 
-| Prop          | Type                            | Défaut         | Description                                         |
-| ------------- | ------------------------------- | -------------- | --------------------------------------------------- |
-| `orientation` | `"horizontal" \| "vertical"`    | `"horizontal"` | Orientation du groupe de panneaux                   |
-| `className`   | `string`                        | —              | Classes CSS additionnelles                          |
-| `...props`    | `ResizablePrimitive.GroupProps` | —              | Toutes les props du groupe `react-resizable-panels` |
+### `ResizableHandle`
 
-### ResizablePanel
-
-| Prop          | Type                            | Défaut | Description                    |
-| ------------- | ------------------------------- | ------ | ------------------------------ |
-| `defaultSize` | `number`                        | —      | Taille initiale en pourcentage |
-| `minSize`     | `number`                        | —      | Taille minimale en pourcentage |
-| `maxSize`     | `number`                        | —      | Taille maximale en pourcentage |
-| `...props`    | `ResizablePrimitive.PanelProps` | —      | Toutes les props du panneau    |
-
-### ResizableHandle
+Rend `ResizablePrimitive.Separator`.
 
 | Prop         | Type                                | Défaut  | Description                                         |
 | ------------ | ----------------------------------- | ------- | --------------------------------------------------- |
 | `withHandle` | `boolean`                           | `false` | Affiche un indicateur visuel de poignée (barre 6×1) |
 | `className`  | `string`                            | —       | Classes CSS additionnelles                          |
-| `...props`   | `ResizablePrimitive.SeparatorProps` | —       | Toutes les props du séparateur                      |
+| `...props`   | `ResizablePrimitive.SeparatorProps` | —       | Props de `ResizablePrimitive.Separator`             |
+
+### `ResizablePanel`
+
+Rend `ResizablePrimitive.Panel`.
+
+| Prop          | Type                            | Défaut | Description                         |
+| ------------- | ------------------------------- | ------ | ----------------------------------- |
+| `defaultSize` | `string \| number`              | —      | Taille initiale en pourcentage      |
+| `minSize`     | `string \| number`              | —      | Taille minimale en pourcentage      |
+| `maxSize`     | `string \| number`              | —      | Taille maximale en pourcentage      |
+| `...props`    | `ResizablePrimitive.PanelProps` | —      | Props de `ResizablePrimitive.Panel` |
+
+### `ResizablePanelGroup`
+
+Rend `ResizablePrimitive.Group`.
+
+| Prop          | Type                            | Défaut         | Description                         |
+| ------------- | ------------------------------- | -------------- | ----------------------------------- |
+| `orientation` | `"horizontal" \| "vertical"`    | `"horizontal"` | Orientation du groupe de panneaux   |
+| `className`   | `string`                        | —              | Classes CSS additionnelles          |
+| `...props`    | `ResizablePrimitive.GroupProps` | —              | Props de `ResizablePrimitive.Group` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

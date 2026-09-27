@@ -82,16 +82,148 @@ Relevé dans `components/ui/menubar.tsx` et les constantes de `lib/` qu'il impor
 
 ## Props / API
 
-| Prop          | Type                                       | Défaut      | Description                                                                                                              |
-| ------------- | ------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `className`   | `string`                                   | —           | Classes CSS additionnelles sur la racine                                                                                 |
-| `inset`       | `boolean`                                  | —           | Ajoute un padding gauche pour aligner avec les items à indicateur (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
-| `variant`     | `"default" \| "destructive"`               | `"default"` | Variante visuelle de `MenubarItem`                                                                                       |
-| `checked`     | `boolean`                                  | —           | État coché de `MenubarCheckboxItem`                                                                                      |
-| `align`       | `string`                                   | `"start"`   | Alignement du contenu par rapport au trigger                                                                             |
-| `alignOffset` | `number`                                   | `-4`        | Décalage d'alignement du contenu                                                                                         |
-| `sideOffset`  | `number`                                   | `8`         | Décalage latéral du contenu                                                                                              |
-| `...props`    | `React.ComponentProps<MenubarPrimitive.*>` | —           | Props natives Radix Menubar                                                                                              |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Menubar`
+
+Rend `MenubarPrimitive.Root`.
+
+| Prop        | Type                                                 | Défaut | Description                              |
+| ----------- | ---------------------------------------------------- | ------ | ---------------------------------------- |
+| `className` | `string`                                             | —      | Classes CSS additionnelles sur la racine |
+| `...props`  | `React.ComponentProps<typeof MenubarPrimitive.Root>` | —      | Props de `MenubarPrimitive.Root`         |
+
+### `MenubarPortal`
+
+Rend `MenubarPrimitive.Portal`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Portal>` | —      | Props de `MenubarPrimitive.Portal` |
+
+### `MenubarMenu`
+
+Rend `MenubarPrimitive.Menu`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Menu>` | —      | Props de `MenubarPrimitive.Menu` |
+
+### `MenubarTrigger`
+
+Rend `MenubarPrimitive.Trigger`.
+
+| Prop       | Type                                                    | Défaut | Description                         |
+| ---------- | ------------------------------------------------------- | ------ | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Trigger>` | —      | Props de `MenubarPrimitive.Trigger` |
+
+### `MenubarContent`
+
+Rend `MenubarPrimitive.Content`.
+
+| Prop          | Type                                                    | Défaut    | Description                                  |
+| ------------- | ------------------------------------------------------- | --------- | -------------------------------------------- |
+| `align`       | `"center" \| "end" \| "start"`                          | `"start"` | Alignement du contenu par rapport au trigger |
+| `sideOffset`  | `number`                                                | `8`       | Décalage latéral du contenu                  |
+| `alignOffset` | `number`                                                | `-4`      | Décalage d'alignement du contenu             |
+| `...props`    | `React.ComponentProps<typeof MenubarPrimitive.Content>` | —         | Props de `MenubarPrimitive.Content`          |
+
+### `MenubarGroup`
+
+Rend `MenubarPrimitive.Group`.
+
+| Prop       | Type                                                  | Défaut | Description                       |
+| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Group>` | —      | Props de `MenubarPrimitive.Group` |
+
+### `MenubarSeparator`
+
+Rend `MenubarPrimitive.Separator`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Separator>` | —      | Props de `MenubarPrimitive.Separator` |
+
+### `MenubarLabel`
+
+Rend `MenubarPrimitive.Label`.
+
+| Prop       | Type                                                  | Défaut | Description                                                                                                              |
+| ---------- | ----------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                             | —      | Ajoute un padding gauche pour aligner avec les items à indicateur (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Label>` | —      | Props de `MenubarPrimitive.Label`                                                                                        |
+
+### `MenubarItem`
+
+Rend `MenubarPrimitive.Item`.
+
+| Prop       | Type                                                 | Défaut      | Description                                                                                |
+| ---------- | ---------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                            | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `variant`  | `"default" \| "destructive"`                         | `"default"` | Variante visuelle de `MenubarItem`                                                         |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Item>` | —           | Props de `MenubarPrimitive.Item`                                                           |
+
+### `MenubarShortcut`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut | Description               |
+| ---------- | ------------------------------ | ------ | ------------------------- |
+| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+
+### `MenubarCheckboxItem`
+
+Rend `MenubarPrimitive.CheckboxItem`.
+
+| Prop       | Type                                                         | Défaut | Description                                                                                |
+| ---------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                    | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `checked`  | `CheckedState`                                               | —      | État coché de `MenubarCheckboxItem`                                                        |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.CheckboxItem>` | —      | Props de `MenubarPrimitive.CheckboxItem`                                                   |
+
+### `MenubarRadioGroup`
+
+Rend `MenubarPrimitive.RadioGroup`.
+
+| Prop       | Type                                                       | Défaut | Description                            |
+| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.RadioGroup>` | —      | Props de `MenubarPrimitive.RadioGroup` |
+
+### `MenubarRadioItem`
+
+Rend `MenubarPrimitive.RadioItem`.
+
+| Prop       | Type                                                      | Défaut | Description                                                                                |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                 | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.RadioItem>` | —      | Props de `MenubarPrimitive.RadioItem`                                                      |
+
+### `MenubarSub`
+
+Rend `MenubarPrimitive.Sub`.
+
+| Prop       | Type                                                | Défaut | Description                     |
+| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Sub>` | —      | Props de `MenubarPrimitive.Sub` |
+
+### `MenubarSubTrigger`
+
+Rend `MenubarPrimitive.SubTrigger`.
+
+| Prop       | Type                                                       | Défaut | Description                                                                                |
+| ---------- | ---------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                  | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.SubTrigger>` | —      | Props de `MenubarPrimitive.SubTrigger`                                                     |
+
+### `MenubarSubContent`
+
+Rend `MenubarPrimitive.SubContent`.
+
+| Prop       | Type                                                       | Défaut | Description                            |
+| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.SubContent>` | —      | Props de `MenubarPrimitive.SubContent` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

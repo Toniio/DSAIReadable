@@ -64,15 +64,63 @@ Relevé dans `components/ui/chart.tsx` et les constantes de `lib/` qu'il importe
 
 ## Props / API
 
-### ChartContainer
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
 
-| Prop               | Type                                | Défaut                        | Description                                                      |
-| ------------------ | ----------------------------------- | ----------------------------- | ---------------------------------------------------------------- |
-| `config`           | `ChartConfig`                       | —                             | Configuration des séries (labels, couleurs, icônes) — **requis** |
-| `children`         | `ReactElement`                      | —                             | Composant `recharts` à rendre (ex. : `BarChart`, `LineChart`)    |
-| `initialDimension` | `{ width: number; height: number }` | `{ width: 320, height: 200 }` | Dimensions initiales avant le calcul responsive                  |
-| `id`               | `string`                            | auto-généré                   | Identifiant unique pour le ciblage CSS des couleurs              |
-| `className`        | `string`                            | —                             | Classes CSS additionnelles                                       |
+### `ChartContainer`
+
+Rend `<div>`.
+
+| Prop               | Type                                                                               | Défaut              | Description                                                      |
+| ------------------ | ---------------------------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------- |
+| `children`         | `React.ComponentProps< typeof RechartsPrimitive.ResponsiveContainer >["children"]` | —                   | Composant `recharts` à rendre (ex. : `BarChart`, `LineChart`)    |
+| `config`           | `ChartConfig`                                                                      | —                   | Configuration des séries (labels, couleurs, icônes) — **requis** |
+| `initialDimension` | `{ width: number height: number }`                                                 | `INITIAL_DIMENSION` | Dimensions initiales avant le calcul responsive                  |
+| `id`               | `string`                                                                           | auto-généré         | Identifiant unique pour le ciblage CSS des couleurs              |
+| `className`        | `string`                                                                           | —                   | Classes CSS additionnelles                                       |
+| `...props`         | `React.ComponentProps<"div">`                                                      | —                   | Props natives de `<div>`                                         |
+
+### `ChartTooltip`
+
+Type : `(outsideProps: RechartsPrimitive.TooltipProps<RechartsPrimitive.TooltipValueType, NameType>) => React.JSX.Element \| null`.
+
+### `ChartTooltipContent`
+
+Rend `<div>`.
+
+| Prop            | Type                                                                                                                                                                                                     | Défaut  | Description                          |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------ |
+| `hideLabel`     | `boolean`                                                                                                                                                                                                | `false` | Masque le label du tooltip           |
+| `hideIndicator` | `boolean`                                                                                                                                                                                                | `false` | Masque l'indicateur de couleur       |
+| `indicator`     | `"line" \| "dot" \| "dashed"`                                                                                                                                                                            | `"dot"` | Style de l'indicateur de couleur     |
+| `nameKey`       | `string`                                                                                                                                                                                                 | —       | Clé utilisée pour le nom de la série |
+| `labelKey`      | `string`                                                                                                                                                                                                 | —       | Clé utilisée pour le label           |
+| `...props`      | `React.ComponentProps<typeof RechartsPrimitive.Tooltip> & React.ComponentProps<"div"> & Omit< RechartsPrimitive.DefaultTooltipContentProps< TooltipValueType, TooltipNameType >, "accessibilityLayer" >` | —       | Props de `RechartsPrimitive.Tooltip` |
+
+### `ChartLegend`
+
+Type : `React.MemoExoticComponent<(outsideProps: RechartsPrimitive.LegendProps) => React.ReactPortal \| null>`.
+
+### `ChartLegendContent`
+
+Rend `<div>`.
+
+| Prop            | Type                                                                        | Défaut     | Description                          |
+| --------------- | --------------------------------------------------------------------------- | ---------- | ------------------------------------ |
+| `hideIcon`      | `boolean`                                                                   | `false`    | Masque l'icône dans la légende       |
+| `nameKey`       | `string`                                                                    | —          | Clé utilisée pour le nom de la série |
+| `verticalAlign` | `VerticalAlignmentType`                                                     | `"bottom"` | Position verticale de la légende     |
+| `...props`      | `React.ComponentProps<"div"> & RechartsPrimitive.DefaultLegendContentProps` | —          | Props de `React.Component`           |
+
+### `ChartStyle`
+
+Rend `<style>`.
+
+| Prop     | Type          | Défaut | Description                                                                                                   |
+| -------- | ------------- | ------ | ------------------------------------------------------------------------------------------------------------- |
+| `id`     | `string`      | —      | Identifiant du graphique : les variables sont posées sous `[data-chart=<id>]`                                 |
+| `config` | `ChartConfig` | —      | Configuration des séries : chaque entrée à `color` ou `theme` devient une variable `--color-<clé>`, par thème |
+
+<!-- Fin de la partie générée. -->
 
 ### ChartConfig (type)
 
@@ -82,24 +130,6 @@ Relevé dans `components/ui/chart.tsx` et les constantes de `lib/` qu'il importe
 | `icon`    | `React.ComponentType`             | Icône optionnelle dans le tooltip et la légende |
 | `color`   | `string`                          | Couleur CSS de la série (mode simple)           |
 | `theme`   | `{ light: string; dark: string }` | Couleurs par thème (prioritaire sur `color`)    |
-
-### ChartTooltipContent
-
-| Prop            | Type                          | Défaut  | Description                          |
-| --------------- | ----------------------------- | ------- | ------------------------------------ |
-| `indicator`     | `"dot" \| "line" \| "dashed"` | `"dot"` | Style de l'indicateur de couleur     |
-| `hideLabel`     | `boolean`                     | `false` | Masque le label du tooltip           |
-| `hideIndicator` | `boolean`                     | `false` | Masque l'indicateur de couleur       |
-| `nameKey`       | `string`                      | —       | Clé utilisée pour le nom de la série |
-| `labelKey`      | `string`                      | —       | Clé utilisée pour le label           |
-
-### ChartLegendContent
-
-| Prop            | Type                | Défaut     | Description                          |
-| --------------- | ------------------- | ---------- | ------------------------------------ |
-| `hideIcon`      | `boolean`           | `false`    | Masque l'icône dans la légende       |
-| `nameKey`       | `string`            | —          | Clé utilisée pour le nom de la série |
-| `verticalAlign` | `"top" \| "bottom"` | `"bottom"` | Position verticale de la légende     |
 
 ## Variantes
 

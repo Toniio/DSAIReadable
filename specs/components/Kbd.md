@@ -55,14 +55,27 @@ Relevé dans `components/ui/kbd.tsx` et les constantes de `lib/` qu'il importe ;
 
 ## Props / API
 
-| Prop         | Type                          | Défaut | Description                |
-| ------------ | ----------------------------- | ------ | -------------------------- |
-| **Kbd**      |                               |        |                            |
-| `className`  | `string`                      | —      | Classes CSS additionnelles |
-| `...props`   | `React.ComponentProps<"kbd">` | —      | Props natives du `<kbd>`   |
-| **KbdGroup** |                               |        |                            |
-| `className`  | `string`                      | —      | Classes CSS additionnelles |
-| `...props`   | `React.ComponentProps<"div">` | —      | Props natives du `<div>`   |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Kbd`
+
+Rend `<kbd>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"kbd">` | —      | Props natives de `<kbd>`   |
+
+### `KbdGroup`
+
+Rend `<kbd>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"kbd">` | —      | Props natives de `<kbd>`   |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

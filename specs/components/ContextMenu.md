@@ -77,13 +77,137 @@ Relevé dans `components/ui/context-menu.tsx` et les constantes de `lib/` qu'il 
 
 ## Props / API
 
-| Prop        | Type                                     | Défaut      | Description                                                                                    |
-| ----------- | ---------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
-| `inset`     | `boolean`                                | `undefined` | Ajoute un padding gauche supplémentaire (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
-| `variant`   | `"default" \| "destructive"`             | `"default"` | Variante visuelle de l'item (sur ContextMenuItem)                                              |
-| `checked`   | `boolean`                                | `undefined` | État coché d'un CheckboxItem                                                                   |
-| `className` | `string`                                 | —           | Classes CSS additionnelles (sur chaque sous-composant)                                         |
-| `side`      | `"top" \| "right" \| "bottom" \| "left"` | —           | Côté d'apparition du contenu                                                                   |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `ContextMenu`
+
+Rend `ContextMenuPrimitive.Root`.
+
+| Prop       | Type                                                     | Défaut | Description                          |
+| ---------- | -------------------------------------------------------- | ------ | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Root>` | —      | Props de `ContextMenuPrimitive.Root` |
+
+### `ContextMenuTrigger`
+
+Rend `ContextMenuPrimitive.Trigger`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Trigger>` | —      | Props de `ContextMenuPrimitive.Trigger` |
+
+### `ContextMenuContent`
+
+Rend `ContextMenuPrimitive.Content`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `side`     | `"top" \| "right" \| "bottom" \| "left"`                    | —      | Côté d'apparition du contenu            |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Content>` | —      | Props de `ContextMenuPrimitive.Content` |
+
+### `ContextMenuItem`
+
+Rend `ContextMenuPrimitive.Item`.
+
+| Prop       | Type                                                     | Défaut      | Description                                                                                    |
+| ---------- | -------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                | `undefined` | Ajoute un padding gauche supplémentaire (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
+| `variant`  | `"default" \| "destructive"`                             | `"default"` | Variante visuelle de l'item (sur ContextMenuItem)                                              |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Item>` | —           | Props de `ContextMenuPrimitive.Item`                                                           |
+
+### `ContextMenuCheckboxItem`
+
+Rend `ContextMenuPrimitive.CheckboxItem`.
+
+| Prop       | Type                                                             | Défaut      | Description                                                                                |
+| ---------- | ---------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                        | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `checked`  | `CheckedState`                                                   | `undefined` | État coché d'un CheckboxItem                                                               |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>` | —           | Props de `ContextMenuPrimitive.CheckboxItem`                                               |
+
+### `ContextMenuRadioItem`
+
+Rend `ContextMenuPrimitive.RadioItem`.
+
+| Prop       | Type                                                          | Défaut | Description                                                                                |
+| ---------- | ------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                     | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.RadioItem>` | —      | Props de `ContextMenuPrimitive.RadioItem`                                                  |
+
+### `ContextMenuLabel`
+
+Rend `ContextMenuPrimitive.Label`.
+
+| Prop       | Type                                                      | Défaut | Description                                                                                |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                 | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Label>` | —      | Props de `ContextMenuPrimitive.Label`                                                      |
+
+### `ContextMenuSeparator`
+
+Rend `ContextMenuPrimitive.Separator`.
+
+| Prop       | Type                                                          | Défaut | Description                               |
+| ---------- | ------------------------------------------------------------- | ------ | ----------------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Separator>` | —      | Props de `ContextMenuPrimitive.Separator` |
+
+### `ContextMenuShortcut`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut | Description               |
+| ---------- | ------------------------------ | ------ | ------------------------- |
+| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+
+### `ContextMenuGroup`
+
+Rend `ContextMenuPrimitive.Group`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Group>` | —      | Props de `ContextMenuPrimitive.Group` |
+
+### `ContextMenuPortal`
+
+Rend `ContextMenuPrimitive.Portal`.
+
+| Prop       | Type                                                       | Défaut | Description                            |
+| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Portal>` | —      | Props de `ContextMenuPrimitive.Portal` |
+
+### `ContextMenuSub`
+
+Rend `ContextMenuPrimitive.Sub`.
+
+| Prop       | Type                                                    | Défaut | Description                         |
+| ---------- | ------------------------------------------------------- | ------ | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Sub>` | —      | Props de `ContextMenuPrimitive.Sub` |
+
+### `ContextMenuSubContent`
+
+Rend `ContextMenuPrimitive.SubContent`.
+
+| Prop       | Type                                                           | Défaut | Description                                |
+| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.SubContent>` | —      | Props de `ContextMenuPrimitive.SubContent` |
+
+### `ContextMenuSubTrigger`
+
+Rend `ContextMenuPrimitive.SubTrigger`.
+
+| Prop       | Type                                                           | Défaut | Description                                                                                |
+| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                      | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.SubTrigger>` | —      | Props de `ContextMenuPrimitive.SubTrigger`                                                 |
+
+### `ContextMenuRadioGroup`
+
+Rend `ContextMenuPrimitive.RadioGroup`.
+
+| Prop       | Type                                                           | Défaut | Description                                |
+| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.RadioGroup>` | —      | Props de `ContextMenuPrimitive.RadioGroup` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

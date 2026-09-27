@@ -58,21 +58,29 @@ Relevé dans `components/ui/scroll-area.tsx` et les constantes de `lib/` qu'il i
 
 ## Props / API
 
-### ScrollArea
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `ScrollArea`
+
+Rend `ScrollAreaPrimitive.Root`.
 
 | Prop        | Type                                                    | Défaut | Description                              |
 | ----------- | ------------------------------------------------------- | ------ | ---------------------------------------- |
 | `className` | `string`                                                | —      | Classes CSS additionnelles sur la racine |
 | `children`  | `React.ReactNode`                                       | —      | Contenu scrollable                       |
-| `...props`  | `React.ComponentProps<typeof ScrollAreaPrimitive.Root>` | —      | Toutes les props du primitif Radix       |
+| `...props`  | `React.ComponentProps<typeof ScrollAreaPrimitive.Root>` | —      | Props de `ScrollAreaPrimitive.Root`      |
 
-### ScrollBar
+### `ScrollBar`
 
-| Prop          | Type                                                                   | Défaut       | Description                            |
-| ------------- | ---------------------------------------------------------------------- | ------------ | -------------------------------------- |
-| `orientation` | `"vertical" \| "horizontal"`                                           | `"vertical"` | Direction de la barre de défilement    |
-| `className`   | `string`                                                               | —            | Classes CSS additionnelles             |
-| `...props`    | `React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>` | —            | Toutes les props de la scrollbar Radix |
+Rend `ScrollAreaPrimitive.ScrollAreaScrollbar`.
+
+| Prop          | Type                                                                   | Défaut       | Description                                        |
+| ------------- | ---------------------------------------------------------------------- | ------------ | -------------------------------------------------- |
+| `orientation` | `"horizontal" \| "vertical"`                                           | `"vertical"` | Direction de la barre de défilement                |
+| `className`   | `string`                                                               | —            | Classes CSS additionnelles                         |
+| `...props`    | `React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>` | —            | Props de `ScrollAreaPrimitive.ScrollAreaScrollbar` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

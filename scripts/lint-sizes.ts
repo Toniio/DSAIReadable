@@ -83,13 +83,19 @@ const propSizes = (source: string): string[] =>
     (m) => [...m[1].matchAll(/"([\w-]+)"/g)].map((v) => v[1])
   )
 
-/** Size values listed by the `size` row of a component spec's props table. */
-const specSizes = (spec: string): string[] | null => {
-  const row = spec.split("\n").find((l) => /^\|\s*`size`\s*\|/.test(l.trim()))
-  if (!row) return null
-  const cells = row.split(/(?<!\\)\|/)
-  return [...(cells[2] ?? "").matchAll(/"([\w-]+)"/g)].map((m) => m[1])
-}
+/**
+ * Size values listed by each `size` row of a component spec's props tables.
+ * A spec has one per export that takes a size: AlertDialogContent's own
+ * scale, and AlertDialogAction's, borrowed from Button.
+ */
+const specSizes = (spec: string): string[][] =>
+  spec
+    .split("\n")
+    .filter((l) => /^\|\s*`size`\s*\|/.test(l.trim()))
+    .map((row) => {
+      const cells = row.split(/(?<!\\)\|/)
+      return [...(cells[2] ?? "").matchAll(/"([\w-]+)"/g)].map((m) => m[1])
+    })
 
 type Finding = { name: string; detail: string }
 const findings: Finding[] = []
@@ -145,14 +151,20 @@ for (const entry of index.inventory) {
 
   // ③ The spec is what an agent reads, through the MCP server.
   const specPath = `specs/components/${entry.name}.md`
-  const listed = specSizes(readFileSync(resolve(ROOT, specPath), "utf-8"))
-  if (listed === null) {
+  const rows = specSizes(readFileSync(resolve(ROOT, specPath), "utf-8"))
+  if (rows.length === 0) {
     findings.push({
       name: entry.name,
       detail: `has no \`size\` row in ${specPath}, so the spec omits a prop the component accepts.`,
     })
     continue
   }
+  // The row for the scale this file declares: the one that lists it exactly,
+  // else the closest, to report what differs.
+  const gap = (listed: string[]) =>
+    found.filter((s) => !listed.includes(s)).length +
+    listed.filter((s) => !found.includes(s)).length
+  const listed = rows.reduce((best, r) => (gap(r) < gap(best) ? r : best))
   const unlisted = found.filter((s) => !listed.includes(s))
   const phantom = listed.filter((s) => !found.includes(s))
   if (unlisted.length > 0 || phantom.length > 0)

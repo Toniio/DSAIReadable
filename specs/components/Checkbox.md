@@ -61,17 +61,25 @@ Relevé dans `components/ui/checkbox.tsx` et les constantes de `lib/` qu'il impo
 
 ## Props / API
 
-| Prop              | Type                                            | Défaut  | Description                                   |
-| ----------------- | ----------------------------------------------- | ------- | --------------------------------------------- |
-| `checked`         | `boolean \| "indeterminate"`                    | —       | État contrôlé de la case                      |
-| `defaultChecked`  | `boolean`                                       | —       | État initial non contrôlé                     |
-| `onCheckedChange` | `(checked: boolean \| "indeterminate") => void` | —       | Callback de changement d'état                 |
-| `disabled`        | `boolean`                                       | `false` | Désactive la case                             |
-| `required`        | `boolean`                                       | `false` | Rend la case obligatoire dans le formulaire   |
-| `name`            | `string`                                        | —       | Nom du champ pour la soumission de formulaire |
-| `value`           | `string`                                        | `"on"`  | Valeur soumise quand la case est cochée       |
-| `className`       | `string`                                        | —       | Classes CSS additionnelles                    |
-| `...props`        | `React.ComponentProps<typeof Checkbox.Root>`    | —       | Toutes les props Radix Checkbox.Root          |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Checkbox`
+
+Rend `CheckboxPrimitive.Root`.
+
+| Prop              | Type                                                  | Défaut  | Description                                   |
+| ----------------- | ----------------------------------------------------- | ------- | --------------------------------------------- |
+| `checked`         | `CheckboxPrimitive.CheckedState`                      | —       | État contrôlé de la case                      |
+| `defaultChecked`  | `CheckboxPrimitive.CheckedState`                      | —       | État initial non contrôlé                     |
+| `onCheckedChange` | `(checked: CheckboxPrimitive.CheckedState) => void`   | —       | Callback de changement d'état                 |
+| `disabled`        | `boolean`                                             | `false` | Désactive la case                             |
+| `required`        | `boolean`                                             | `false` | Rend la case obligatoire dans le formulaire   |
+| `name`            | `string`                                              | —       | Nom du champ pour la soumission de formulaire |
+| `value`           | `string \| number \| readonly string[]`               | `"on"`  | Valeur soumise quand la case est cochée       |
+| `className`       | `string`                                              | —       | Classes CSS additionnelles                    |
+| `...props`        | `React.ComponentProps<typeof CheckboxPrimitive.Root>` | —       | Props de `CheckboxPrimitive.Root`             |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

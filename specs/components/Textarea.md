@@ -57,13 +57,21 @@ Relevé dans `components/ui/textarea.tsx` et les constantes de `lib/` qu'il impo
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Textarea`
+
+Rend `<textarea>`.
+
 | Prop          | Type                               | Défaut  | Description                                                  |
 | ------------- | ---------------------------------- | ------- | ------------------------------------------------------------ |
 | `className`   | `string`                           | —       | Classes CSS additionnelles                                   |
 | `placeholder` | `string`                           | —       | Texte indicatif avant la saisie                              |
 | `disabled`    | `boolean`                          | `false` | Désactive le champ                                           |
 | `rows`        | `number`                           | —       | Nombre de lignes visibles (surcharge `field-sizing-content`) |
-| `...props`    | `React.ComponentProps<"textarea">` | —       | Toutes les props natives du `<textarea>`                     |
+| `...props`    | `React.ComponentProps<"textarea">` | —       | Props natives de `<textarea>`                                |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

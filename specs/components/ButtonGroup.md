@@ -63,20 +63,43 @@ Compose `Separator` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop                     | Type                                     | Défaut         | Description                                       |
-| ------------------------ | ---------------------------------------- | -------------- | ------------------------------------------------- |
-| **ButtonGroup**          |                                          |                |                                                   |
-| `orientation`            | `"horizontal" \| "vertical"`             | `"horizontal"` | Direction de l'empilement des enfants             |
-| `className`              | `string`                                 | —              | Classes CSS additionnelles                        |
-| `...props`               | `React.ComponentProps<"div">`            | —              | Props natives du `<div>`                          |
-| **ButtonGroupText**      |                                          |                |                                                   |
-| `asChild`                | `boolean`                                | `false`        | Délègue le rendu au premier enfant via Radix Slot |
-| `className`              | `string`                                 | —              | Classes CSS additionnelles                        |
-| `...props`               | `React.ComponentProps<"div">`            | —              | Props natives du `<div>`                          |
-| **ButtonGroupSeparator** |                                          |                |                                                   |
-| `orientation`            | `"horizontal" \| "vertical"`             | `"vertical"`   | Direction du séparateur                           |
-| `className`              | `string`                                 | —              | Classes CSS additionnelles                        |
-| `...props`               | `React.ComponentProps<typeof Separator>` | —              | Props du composant `Separator`                    |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `ButtonGroup`
+
+Rend `<div>`.
+
+| Prop          | Type                          | Défaut         | Description                           |
+| ------------- | ----------------------------- | -------------- | ------------------------------------- |
+| `orientation` | `"horizontal" \| "vertical"`  | `"horizontal"` | Direction de l'empilement des enfants |
+| `className`   | `string`                      | —              | Classes CSS additionnelles            |
+| `...props`    | `React.ComponentProps<"div">` | —              | Props natives de `<div>`              |
+
+### `ButtonGroupSeparator`
+
+Rend `Separator`.
+
+| Prop          | Type                                     | Défaut       | Description                |
+| ------------- | ---------------------------------------- | ------------ | -------------------------- |
+| `orientation` | `"horizontal" \| "vertical"`             | `"vertical"` | Direction du séparateur    |
+| `className`   | `string`                                 | —            | Classes CSS additionnelles |
+| `...props`    | `React.ComponentProps<typeof Separator>` | —            | Props de `Separator`       |
+
+### `ButtonGroupText`
+
+Rend `<div>`, ou son enfant avec `asChild`.
+
+| Prop        | Type                          | Défaut  | Description                                       |
+| ----------- | ----------------------------- | ------- | ------------------------------------------------- |
+| `asChild`   | `boolean`                     | `false` | Délègue le rendu au premier enfant via Radix Slot |
+| `className` | `string`                      | —       | Classes CSS additionnelles                        |
+| `...props`  | `React.ComponentProps<"div">` | —       | Props natives de `<div>`                          |
+
+### `buttonGroupVariants`
+
+Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

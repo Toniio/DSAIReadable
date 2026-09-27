@@ -302,6 +302,21 @@ function generateComponentSpecs() {
     // Columns are read by header name: a table whose first column is not a
     // prop, a config property or a hook (e.g. a size → class mapping) is not
     // API and stays out of `props`.
+    // Each export's block (scripts/build-spec-api.ts) opens with a one-line
+    // summary: what a component renders, what a hook returns.
+    const exports: { name: string; summary: string }[] = []
+    const apiLines = propsSection.split("\n").map((l) => l.trim())
+    apiLines.forEach((line, i) => {
+      const heading = line.match(/^### `(.+)`$/)
+      if (!heading) return
+      const summary = apiLines
+        .slice(i + 1)
+        .find((l) => l !== "" && !l.startsWith("|"))
+      exports.push({
+        name: heading[1],
+        summary: summary && !summary.startsWith("#") ? summary : "",
+      })
+    })
     const props = mdTables(propsSection).flatMap((t) => {
       const col = (...names: string[]) =>
         t.header.findIndex((h) => names.includes(h.toLowerCase()))
@@ -351,6 +366,7 @@ function generateComponentSpecs() {
       anatomy,
       tokens,
       tokens_from: tokensFrom,
+      exports,
       props,
       states,
       accessibility,

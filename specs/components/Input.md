@@ -61,10 +61,18 @@ Relevé dans `components/ui/input.tsx` et les constantes de `lib/` qu'il importe
 
 ## Props / API
 
-| Prop        | Type                            | Défaut | Description                                                                                         |
-| ----------- | ------------------------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| `className` | `string`                        | —      | Classes CSS additionnelles                                                                          |
-| `...props`  | `React.ComponentProps<"input">` | —      | Toutes les props natives de `<input>` (type, value, onChange, placeholder, disabled, aria-invalid…) |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Input`
+
+Rend `<input>`.
+
+| Prop        | Type                            | Défaut | Description                |
+| ----------- | ------------------------------- | ------ | -------------------------- |
+| `className` | `string`                        | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"input">` | —      | Props natives de `<input>` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

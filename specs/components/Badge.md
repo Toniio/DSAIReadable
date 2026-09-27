@@ -65,12 +65,24 @@ Relevé dans `components/ui/badge.tsx` et les constantes de `lib/` qu'il importe
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Badge`
+
+Rend `<span>`, ou son enfant avec `asChild`.
+
 | Prop        | Type                                                                          | Défaut      | Description                                       |
 | ----------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
 | `variant`   | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"` | `"default"` | Apparence visuelle du badge                       |
 | `asChild`   | `boolean`                                                                     | `false`     | Délègue le rendu au premier enfant via Radix Slot |
 | `className` | `string`                                                                      | —           | Classes CSS additionnelles                        |
-| `...props`  | `React.ComponentProps<"span">`                                                | —           | Props natives du `<span>`                         |
+| `...props`  | `React.ComponentProps<"span">`                                                | —           | Props natives de `<span>`                         |
+
+### `badgeVariants`
+
+Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+
+<!-- Fin de la partie générée. -->
 
 > **Axes de variantes** — `variant` décrit l'**apparence** : `default`, `secondary`, `outline`, `ghost`, `link` ne changent que la prominence visuelle. Seul `destructive` relève de l'**intention** : il annonce un état d'erreur ou une donnée dangereuse. Ne jamais l'employer pour obtenir du rouge — un badge simplement coloré passe par `outline` et un token de couleur.
 

@@ -58,11 +58,19 @@ Relevé dans `components/ui/logo.tsx` et les constantes de `lib/` qu'il importe 
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Logo`
+
+Rend `<div>`.
+
 | Prop        | Type                          | Défaut      | Description                                     |
 | ----------- | ----------------------------- | ----------- | ----------------------------------------------- |
 | `size`      | `"sm" \| "default" \| "lg"`   | `"default"` | Taille du pictogramme, propagée via `data-size` |
 | `className` | `string`                      | —           | Classes CSS additionnelles                      |
-| `...props`  | `React.ComponentProps<"div">` | —           | Props natives du `<div>`, hors `children`       |
+| `...props`  | `React.ComponentProps<"div">` | —           | Props natives de `<div>`                        |
+
+<!-- Fin de la partie générée. -->
 
 | `size`    | Carré     | Pictogramme |
 | --------- | --------- | ----------- |

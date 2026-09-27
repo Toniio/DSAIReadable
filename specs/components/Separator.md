@@ -50,12 +50,20 @@ Relevé dans `components/ui/separator.tsx` et les constantes de `lib/` qu'il imp
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Separator`
+
+Rend `SeparatorPrimitive.Root`.
+
 | Prop          | Type                                                   | Défaut         | Description                                                                                                      |
 | ------------- | ------------------------------------------------------ | -------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `orientation` | `"horizontal" \| "vertical"`                           | `"horizontal"` | Direction du séparateur : `h-px w-full` vs `w-px self-stretch`                                                   |
 | `decorative`  | `boolean`                                              | `true`         | Si `true`, applique `aria-hidden="true"` (séparateur purement visuel) ; si `false`, le séparateur est sémantique |
 | `className`   | `string`                                               | —              | Classes CSS additionnelles                                                                                       |
-| `...props`    | `React.ComponentProps<typeof SeparatorPrimitive.Root>` | —              | Toutes les props Radix Separator                                                                                 |
+| `...props`    | `React.ComponentProps<typeof SeparatorPrimitive.Root>` | —              | Props de `SeparatorPrimitive.Root`                                                                               |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

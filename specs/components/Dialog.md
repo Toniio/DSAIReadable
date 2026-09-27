@@ -76,13 +76,95 @@ Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop              | Type                      | Défaut      | Description                                                     |
-| ----------------- | ------------------------- | ----------- | --------------------------------------------------------------- |
-| `open`            | `boolean`                 | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)                    |
-| `onOpenChange`    | `(open: boolean) => void` | —           | Callback lors du changement d'état                              |
-| `showCloseButton` | `boolean`                 | `true`      | Affiche le bouton × en haut à droite (sur `DialogContent`)      |
-| `showCloseButton` | `boolean`                 | `false`     | Affiche un bouton « Close » dans le footer (sur `DialogFooter`) |
-| `className`       | `string`                  | —           | Classes CSS additionnelles (sur chaque sous-composant)          |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Dialog`
+
+Rend `DialogPrimitive.Root`.
+
+| Prop           | Type                                                | Défaut      | Description                                  |
+| -------------- | --------------------------------------------------- | ----------- | -------------------------------------------- |
+| `open`         | `boolean`                                           | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
+| `onOpenChange` | `(open: boolean) => void`                           | —           | Callback lors du changement d'état           |
+| `...props`     | `React.ComponentProps<typeof DialogPrimitive.Root>` | —           | Props de `DialogPrimitive.Root`              |
+
+### `DialogClose`
+
+Rend `DialogPrimitive.Close`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Close>` | —      | Props de `DialogPrimitive.Close` |
+
+### `DialogContent`
+
+Rend `DialogPrimitive.Content`.
+
+| Prop              | Type                                                   | Défaut                    | Description                                                                |
+| ----------------- | ------------------------------------------------------ | ------------------------- | -------------------------------------------------------------------------- |
+| `showCloseButton` | `boolean`                                              | `true`                    | Affiche un bouton « Close » dans le footer (sur `DialogFooter`)            |
+| `closeLabel`      | `string`                                               | `UI_STRINGS.dialog.close` | Nom accessible du bouton de fermeture ; remplace la valeur de `UI_STRINGS` |
+| `...props`        | `React.ComponentProps<typeof DialogPrimitive.Content>` | —                         | Props de `DialogPrimitive.Content`                                         |
+
+### `DialogDescription`
+
+Rend `DialogPrimitive.Description`.
+
+| Prop       | Type                                                       | Défaut | Description                            |
+| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Description>` | —      | Props de `DialogPrimitive.Description` |
+
+### `DialogFooter`
+
+Rend `<div>`.
+
+| Prop              | Type                          | Défaut                    | Description                                                                |
+| ----------------- | ----------------------------- | ------------------------- | -------------------------------------------------------------------------- |
+| `showCloseButton` | `boolean`                     | `false`                   | Affiche le bouton de fermeture                                             |
+| `closeLabel`      | `string`                      | `UI_STRINGS.dialog.close` | Nom accessible du bouton de fermeture ; remplace la valeur de `UI_STRINGS` |
+| `...props`        | `React.ComponentProps<"div">` | —                         | Props natives de `<div>`                                                   |
+
+### `DialogHeader`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `DialogOverlay`
+
+Rend `DialogPrimitive.Overlay`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Overlay>` | —      | Props de `DialogPrimitive.Overlay` |
+
+### `DialogPortal`
+
+Rend `DialogPrimitive.Portal`.
+
+| Prop       | Type                                                  | Défaut | Description                       |
+| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Portal>` | —      | Props de `DialogPrimitive.Portal` |
+
+### `DialogTitle`
+
+Rend `DialogPrimitive.Title`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Title>` | —      | Props de `DialogPrimitive.Title` |
+
+### `DialogTrigger`
+
+Rend `DialogPrimitive.Trigger`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Trigger>` | —      | Props de `DialogPrimitive.Trigger` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

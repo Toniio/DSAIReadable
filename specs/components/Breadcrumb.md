@@ -62,12 +62,69 @@ Relevé dans `components/ui/breadcrumb.tsx` et les constantes de `lib/` qu'il im
 
 ## Props / API
 
-| Prop        | Type                          | Défaut  | Description                                                              |
-| ----------- | ----------------------------- | ------- | ------------------------------------------------------------------------ |
-| `className` | `string`                      | —       | Classes CSS additionnelles sur le `<nav>` racine                         |
-| `asChild`   | `boolean`                     | `false` | Sur `BreadcrumbLink` : délègue le rendu au premier enfant via Radix Slot |
-| `children`  | `ReactNode`                   | —       | Contenu du séparateur (remplace le chevron par défaut)                   |
-| `...props`  | `React.ComponentProps<"nav">` | —       | Props natives du `<nav>` (racine)                                        |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Breadcrumb`
+
+Rend `<nav>`.
+
+| Prop        | Type                          | Défaut | Description                                            |
+| ----------- | ----------------------------- | ------ | ------------------------------------------------------ |
+| `className` | `string`                      | —      | Classes CSS additionnelles sur le `<nav>` racine       |
+| `children`  | `React.ReactNode`             | —      | Contenu du séparateur (remplace le chevron par défaut) |
+| `...props`  | `React.ComponentProps<"nav">` | —      | Props natives de `<nav>`                               |
+
+### `BreadcrumbList`
+
+Rend `<ol>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"ol">` | —      | Props natives de `<ol>` |
+
+### `BreadcrumbItem`
+
+Rend `<li>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"li">` | —      | Props natives de `<li>` |
+
+### `BreadcrumbLink`
+
+Rend `<a>`, ou son enfant avec `asChild`.
+
+| Prop       | Type                        | Défaut  | Description                                                              |
+| ---------- | --------------------------- | ------- | ------------------------------------------------------------------------ |
+| `asChild`  | `boolean`                   | `false` | Sur `BreadcrumbLink` : délègue le rendu au premier enfant via Radix Slot |
+| `...props` | `React.ComponentProps<"a">` | —       | Props natives de `<a>`                                                   |
+
+### `BreadcrumbPage`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut | Description               |
+| ---------- | ------------------------------ | ------ | ------------------------- |
+| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+
+### `BreadcrumbSeparator`
+
+Rend `<li>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"li">` | —      | Props natives de `<li>` |
+
+### `BreadcrumbEllipsis`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut                           | Description                                                            |
+| ---------- | ------------------------------ | -------------------------------- | ---------------------------------------------------------------------- |
+| `srLabel`  | `string`                       | `UI_STRINGS.breadcrumb.ellipsis` | Texte lu par les lecteurs d'écran ; remplace la valeur de `UI_STRINGS` |
+| `...props` | `React.ComponentProps<"span">` | —                                | Props natives de `<span>`                                              |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

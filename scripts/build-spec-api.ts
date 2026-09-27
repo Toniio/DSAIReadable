@@ -1,0 +1,427 @@
+/**
+ * Writes the `## Props / API` section of every component spec from the
+ * component file's TypeScript exports.
+ *
+ * Written by hand, the section documented whichever exports its author
+ * thought of: ContextMenu's table covered none of its 15 exports by name,
+ * Sidebar's left out `SidebarMenuAction.showOnHover` and
+ * `SidebarMenuSkeleton.showIcon`, Combobox's `ComboboxValue`,
+ * `ComboboxChipsInput` and `useComboboxAnchor`. An agent reading a spec could
+ * not know an export existed.
+ *
+ * The code decides the structure: one `### \`Export\`` block per runtime
+ * export, what a component renders, the props it declares or defaults, their
+ * types (from the TypeScript checker) and their defaults (from the code).
+ * People decide the words: a row's Description is read back from the spec and
+ * kept, so it is edited in place — except for `...props`, whose description
+ * follows from its type. A row documented by hand for a prop the
+ * code does not declare (Radix's `step`, say) is kept as long as the
+ * component's type accepts it; one the type does not accept is dropped and
+ * reported. Prose after the generated part (variant-axis notes, a size table)
+ * is kept as written.
+ *
+ *   npx tsx scripts/build-spec-api.ts [--check]
+ */
+
+import { readFileSync, readdirSync, writeFileSync } from "node:fs"
+import { resolve, dirname, basename } from "node:path"
+import { fileURLToPath } from "node:url"
+import { format, resolveConfig } from "prettier"
+import { apiOf, loadProgram, type ApiExport } from "./lib/component-api"
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
+const CHECK = process.argv.includes("--check")
+const SPECS_DIR = resolve(ROOT, "specs/components")
+const HEADING = "## Props / API"
+const START =
+  "<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->"
+const END = "<!-- Fin de la partie générée. -->"
+const PLACEHOLDER = "_À documenter._"
+
+type Variants = Record<
+  string,
+  { variants: Record<string, { values: string[] }> }
+>
+const variants = JSON.parse(
+  readFileSync(
+    resolve(ROOT, "mcp-server/context/component-variants.json"),
+    "utf-8"
+  )
+) as Variants
+
+/** A code span; one that holds a backtick (a template literal type) takes two. */
+const code = (s: string) => {
+  const text = s.replace(/\|/g, "\\|")
+  return text.includes("`") ? `\`\` ${text} \`\`` : `\`${text}\``
+}
+const cells = (line: string) =>
+  line
+    .trim()
+    .replace(/^\||\|$/g, "")
+    .split(/(?<!\\)\|/)
+    .map((c) => c.trim())
+const bare = (cell: string) =>
+  cell
+    .replace(/^`` (.*) ``$/, "$1")
+    .replace(/`/g, "")
+    .replace(/\\\|/g, "|")
+
+// ---------------------------------------------------------------------------
+// What the spec already says
+// ---------------------------------------------------------------------------
+interface Written {
+  description: string
+  default: string
+}
+
+interface Existing {
+  /** `Component\0prop` → the row as written. */
+  rows: Map<string, Written>
+  /** Hand-written rows in order, per component, for props the code does not declare. */
+  order: Map<string, string[]>
+  /** Everything that is not a prop table: kept after the generated part. */
+  tail: string
+}
+
+const key = (component: string, prop: string) => `${component}\0${prop}`
+
+function readExisting(
+  section: string,
+  main: string,
+  exports: Set<string>
+): Existing {
+  const rows = new Map<string, Written>()
+  const order = new Map<string, string[]>()
+  const generated = section.includes(END)
+  const lines = (generated ? section.split(END)[0] : section).split("\n")
+  const tail: string[] = generated ? [section.split(END)[1]] : []
+
+  let component = main
+  // A `###` block about something that is not a runtime export — the
+  // ChartConfig type — is not the generator's: it is kept as written.
+  let foreign = false
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const h3 = line.match(/^### `?(\w+)/)
+    if (h3) {
+      component = h3[1]
+      foreign = !exports.has(component)
+      if (foreign && !generated) tail.push(line)
+      continue
+    }
+    if (foreign) {
+      if (!generated) tail.push(line)
+      continue
+    }
+    if (!line.startsWith("|")) {
+      if (
+        !generated &&
+        line !== START &&
+        !/^Rend |^Retourne |^Fonction `cva`|^Type : /.test(line)
+      )
+        tail.push(line)
+      continue
+    }
+    // A table: header, delimiter, rows.
+    let end = i
+    while (end < lines.length && lines[end].startsWith("|")) end++
+    const header = cells(line).map((h) => h.toLowerCase())
+    if (!["prop", "propriété"].includes(header[0])) {
+      if (!generated) tail.push(...lines.slice(i, end))
+      i = end - 1
+      continue
+    }
+    const col = (name: string) => header.indexOf(name)
+    for (const row of lines.slice(i + 2, end)) {
+      const c = cells(row)
+      const bold = c[0].match(/^\*\*`?(\w+)`?\*\*$/)
+      if (bold) {
+        component = bold[1]
+        continue
+      }
+      const prop = bare(c[0])
+      rows.set(key(component, prop), {
+        description: c[col("description")] ?? "",
+        default: c[col("défaut")] ?? "—",
+      })
+      order.set(component, [...(order.get(component) ?? []), prop])
+    }
+    i = end - 1
+  }
+  return {
+    rows,
+    order,
+    tail: tail
+      .join("\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim(),
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Section
+// ---------------------------------------------------------------------------
+const dropped: string[] = []
+const undocumented: string[] = []
+const mismatched: string[] = []
+
+/** Descriptions of props whose role is the same wherever they appear. */
+const STANDARD: Record<string, string> = {
+  asChild:
+    "Délègue le rendu au premier enfant, qui reçoit les props et les classes (Radix `Slot`)",
+  inset:
+    "Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône",
+  side: "Côté de l'ancre où s'ouvre le contenu",
+  align: "Alignement du contenu le long du côté de l'ancre",
+  sideOffset: "Distance entre l'ancre et le contenu, en px",
+  alignOffset: "Décalage le long de l'axe d'alignement, en px",
+  showCloseButton: "Affiche le bouton de fermeture",
+  closeLabel:
+    "Nom accessible du bouton de fermeture ; remplace la valeur de `UI_STRINGS`",
+  srLabel:
+    "Texte lu par les lecteurs d'écran ; remplace la valeur de `UI_STRINGS`",
+  isActive: "Marque l'élément courant (page ou entrée active)",
+}
+
+/** A description nobody wrote yet, when the prop's role is standard. */
+function standardDescription(
+  prop: string,
+  rest: string | undefined,
+  from: string | undefined
+): string | undefined {
+  if (prop === "...props") {
+    const native = rest?.match(/^React\.ComponentProps<"(\w+)">$/)
+    if (native) return `Props natives de \`<${native[1]}>\``
+    const of = rest?.match(
+      /^(?:React\.ComponentProps(?:WithRef)?<typeof ([\w.]+)>|([\w.]+?)\.Props\b|([\w.]+?)Props\b)/
+    )
+    const target = of?.[1] ?? of?.[2] ?? of?.[3]
+    return target
+      ? `Props de ${code(target)}`
+      : "Props transmises à l'élément rendu"
+  }
+  if (from) return `Prop de ${code(from)}, voir sa spec`
+  return STANDARD[prop]
+}
+
+/**
+ * A row filed under the wrong export — a single table that lists
+ * PopoverContent's `align` under Popover — moves to the export that takes
+ * the prop: the one that declares or defaults it, else the first that
+ * accepts it. A row no export accepts is dropped.
+ */
+function refile(spec: string, api: ApiExport[], existing: Existing) {
+  const components = api.filter(
+    (a): a is Extract<ApiExport, { kind: "component" }> =>
+      a.kind === "component"
+  )
+  const byName = new Map(components.map((c) => [c.name, c]))
+  for (const [component, props] of [...existing.order]) {
+    for (const prop of props) {
+      if (prop === "...props") continue
+      const owner = byName.get(component)
+      // JSX takes any data-* attribute on an element the props reach.
+      if (owner?.accepts.has(prop)) continue
+      if (owner?.rest && prop.startsWith("data-")) continue
+      const target =
+        components.find((c) => c.documented.some((p) => p.name === prop)) ??
+        (prop === "className"
+          ? undefined
+          : components.find((c) => c.accepts.has(prop)))
+      const written = existing.rows.get(key(component, prop))!
+      existing.order.set(
+        component,
+        existing.order.get(component)!.filter((p) => p !== prop)
+      )
+      if (!target || existing.rows.has(key(target.name, prop))) {
+        dropped.push(`${spec} › ${component}.${prop}`)
+        continue
+      }
+      existing.rows.set(key(target.name, prop), written)
+      existing.order.set(target.name, [
+        ...(existing.order.get(target.name) ?? []),
+        prop,
+      ])
+    }
+  }
+}
+
+function blockFor(spec: string, api: ApiExport, existing: Existing): string[] {
+  const heading = api.kind === "hook" ? `${api.name}()` : api.name
+  const lines = [`### ${code(heading)}`, ""]
+
+  if (api.kind === "hook") {
+    lines.push(`Retourne ${code(api.returns)}.`)
+    return lines
+  }
+  if (api.kind === "variants") {
+    lines.push(
+      "Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément."
+    )
+    return lines
+  }
+  if (api.kind === "other") {
+    lines.push(`Type : ${code(api.type)}.`)
+    return lines
+  }
+
+  const { element, swappedBy, inside } = api.renders
+  lines.push(
+    `Rend ${code(element)}${
+      swappedBy === "asChild"
+        ? ", ou son enfant avec `asChild`"
+        : swappedBy === "as"
+          ? ", ou l'élément choisi par `as`"
+          : ""
+    }${inside ? `, dans un ${code(inside)}` : ""}.`,
+    ""
+  )
+  const native = api.rest?.match(/^React\.ComponentProps<"(\w+)">$/)?.[1]
+  if (
+    native &&
+    !swappedBy &&
+    /^<[a-z]/.test(element) &&
+    element !== `<${native}>`
+  )
+    mismatched.push(`${api.name}: typed <${native}>, renders ${element}`)
+
+  const axes = variants[api.name]?.variants ?? {}
+  const typeOf = (name: string, fallback: string) =>
+    axes[name]
+      ? axes[name].values
+          .map((v) => (/^\d+$/.test(v) ? v : `"${v}"`))
+          .join(" | ")
+      : fallback
+
+  const rows: string[][] = []
+  const seen = new Set<string>()
+  const row = (
+    prop: string,
+    type: string,
+    codeDefault?: string,
+    from?: string
+  ) => {
+    seen.add(prop)
+    const written = existing.rows.get(key(api.name, prop))
+    // `...props` is derived from the type alone: a kept description would go
+    // stale the day the type changes (EmptyDescription's said `<p>`).
+    let description =
+      (prop === "...props" ? undefined : written?.description) ||
+      (axes[prop]
+        ? "Voir **Variantes**"
+        : standardDescription(prop, api.rest, from && specOf.get(from)))
+    if (!description) {
+      description = PLACEHOLDER
+      undocumented.push(`${spec} › ${api.name}.${prop}`)
+    }
+    const def =
+      codeDefault !== undefined ? code(codeDefault) : (written?.default ?? "—")
+    rows.push([code(prop), type ? code(type) : "—", def, description])
+  }
+
+  for (const p of api.documented)
+    row(p.name, typeOf(p.name, p.type), p.default, p.from)
+  for (const prop of existing.order.get(api.name) ?? []) {
+    if (seen.has(prop) || prop === "...props") continue
+    const accepted = api.accepts.get(prop)
+    if (!accepted && !(api.rest && prop.startsWith("data-"))) {
+      dropped.push(`${spec} › ${api.name}.${prop}`)
+      continue
+    }
+    row(prop, accepted ? typeOf(prop, accepted.type) : "", accepted?.default)
+  }
+  if (api.rest) row("...props", api.rest)
+
+  lines.push(
+    "| Prop | Type | Défaut | Description |",
+    "|---|---|---|---|",
+    ...rows.map((r) => `| ${r.join(" | ")} |`)
+  )
+  return lines
+}
+
+function sectionFor(spec: string, api: ApiExport[], current: string): string {
+  const components = api.filter((a) => a.kind === "component")
+  const main =
+    (components.find((a) => a.name === spec) ?? components[0])?.name ?? spec
+  const existing = readExisting(current, main, new Set(api.map((a) => a.name)))
+  refile(spec, api, existing)
+  const lines = [HEADING, "", START, ""]
+  for (const a of api) lines.push(...blockFor(spec, a, existing), "")
+  lines.push(END)
+  if (existing.tail) lines.push("", existing.tail)
+  return lines.join("\n") + "\n"
+}
+
+function sectionOf(markdown: string): { start: number; end: number } {
+  const start = markdown.indexOf(`\n${HEADING}\n`)
+  if (start === -1) throw new Error(`no "${HEADING}" section`)
+  return { start: start + 1, end: markdown.indexOf("\n## ", start + 1) + 1 }
+}
+
+// ---------------------------------------------------------------------------
+// Run
+// ---------------------------------------------------------------------------
+const specFiles = readdirSync(SPECS_DIR).filter((f) => f.endsWith(".md"))
+const codePathOf = new Map(
+  specFiles.map((file) => {
+    const md = readFileSync(resolve(SPECS_DIR, file), "utf-8")
+    const codePath = md.match(/^\| code_path\s*\|\s*(\S+)/m)?.[1]
+    if (!codePath) throw new Error(`${file}: no code_path in Metadata`)
+    return [file, codePath]
+  })
+)
+const specOf = new Map(
+  [...codePathOf].map(([file, codePath]) => [codePath, basename(file, ".md")])
+)
+const program = loadProgram(ROOT, [...codePathOf.values()])
+
+const stale: string[] = []
+for (const file of specFiles) {
+  const path = resolve(SPECS_DIR, file)
+  const current = readFileSync(path, "utf-8")
+  const spec = basename(file, ".md")
+  const { start, end } = sectionOf(current)
+  const body = current.slice(start + HEADING.length + 1, end)
+  const api = apiOf(program, resolve(ROOT, codePathOf.get(file)!))
+  const next = await format(
+    current.slice(0, start) +
+      sectionFor(spec, api, body) +
+      "\n" +
+      current.slice(end),
+    { ...(await resolveConfig(path)), filepath: path }
+  )
+  if (next === current) continue
+  if (CHECK) stale.push(file)
+  else writeFileSync(path, next)
+}
+
+const report = (title: string, items: string[]) => {
+  if (items.length > 0)
+    console.log(`${title} (${items.length}):\n  ${items.join("\n  ")}`)
+}
+if (!CHECK) {
+  report(
+    "Rows dropped — the component's type does not accept the prop",
+    dropped
+  )
+  report("Rows without a description", undocumented)
+}
+if (mismatched.length > 0) {
+  console.error(
+    `❌ build-spec-api: props typed for one element, rendered as another:\n  ${mismatched.join("\n  ")}`
+  )
+  process.exit(1)
+}
+if (CHECK && stale.length > 0) {
+  console.error(
+    `❌ build-spec-api: ${stale.length} spec(s) out of date with the code's exports: ${stale.join(", ")}\n` +
+      "   Run `npm run specs:api` and commit the result."
+  )
+  process.exit(1)
+}
+console.log(
+  CHECK
+    ? "✅ build-spec-api: every spec's Props / API section matches the code's exports."
+    : "✅ build-spec-api: Props / API sections written."
+)

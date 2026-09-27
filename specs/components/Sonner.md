@@ -55,10 +55,18 @@ Relevé dans `components/ui/sonner.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
-| Prop       | Type                            | Défaut                    | Description                                                     |
-| ---------- | ------------------------------- | ------------------------- | --------------------------------------------------------------- |
-| `theme`    | `"light" \| "dark" \| "system"` | `system` (via `useTheme`) | Thème visuel des toasts                                         |
-| `...props` | `ToasterProps`                  | —                         | Toutes les props de `sonner.Toaster` (position, duration, etc.) |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Toaster`
+
+Rend `Sonner`.
+
+| Prop       | Type                            | Défaut                    | Description             |
+| ---------- | ------------------------------- | ------------------------- | ----------------------- |
+| `theme`    | `"light" \| "dark" \| "system"` | `system` (via `useTheme`) | Thème visuel des toasts |
+| `...props` | `ToasterProps`                  | —                         | Props de `Toaster`      |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

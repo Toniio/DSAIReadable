@@ -60,6 +60,12 @@ Relevé dans `components/ui/toggle.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Toggle`
+
+Rend `TogglePrimitive.Root`.
+
 | Prop              | Type                                                | Défaut      | Description                                          |
 | ----------------- | --------------------------------------------------- | ----------- | ---------------------------------------------------- |
 | `variant`         | `"default" \| "outline"`                            | `"default"` | Apparence visuelle du toggle                         |
@@ -69,7 +75,13 @@ Relevé dans `components/ui/toggle.tsx` et les constantes de `lib/` qu'il import
 | `onPressedChange` | `(pressed: boolean) => void`                        | —           | Callback de changement d'état                        |
 | `disabled`        | `boolean`                                           | `false`     | Désactive le toggle                                  |
 | `className`       | `string`                                            | —           | Classes CSS additionnelles                           |
-| `...props`        | `React.ComponentProps<typeof TogglePrimitive.Root>` | —           | Props Radix Toggle.Root                              |
+| `...props`        | `React.ComponentProps<typeof TogglePrimitive.Root>` | —           | Props de `TogglePrimitive.Root`                      |
+
+### `toggleVariants`
+
+Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

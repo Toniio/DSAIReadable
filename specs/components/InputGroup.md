@@ -67,24 +67,65 @@ Compose `Button`, `Input`, `Textarea` : les tokens de ces composants sont listé
 
 ## Props / API
 
-| Prop                   | Type                                                             | Défaut           | Description                                       |
-| ---------------------- | ---------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
-| **InputGroup**         |                                                                  |                  |                                                   |
-| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
-| `...props`             | `React.ComponentProps<"div">`                                    | —                | Props natives du `<div>`                          |
-| **InputGroupAddon**    |                                                                  |                  |                                                   |
-| `align`                | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` | Position de l'addon par rapport à l'input         |
-| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
-| **InputGroupButton**   |                                                                  |                  |                                                   |
-| `variant`              | `string`                                                         | `"ghost"`        | Variante visuelle du bouton (héritée de `Button`) |
-| `size`                 | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"`                         | `"xs"`           | Taille du bouton dans le groupe                   |
-| `type`                 | `string`                                                         | `"button"`       | Type HTML du bouton                               |
-| **InputGroupInput**    |                                                                  |                  |                                                   |
-| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
-| `...props`             | `React.ComponentProps<"input">`                                  | —                | Props natives de l'`<input>`                      |
-| **InputGroupTextarea** |                                                                  |                  |                                                   |
-| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
-| `...props`             | `React.ComponentProps<"textarea">`                               | —                | Props natives du `<textarea>`                     |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `InputGroup`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `InputGroupAddon`
+
+Rend `<div>`.
+
+| Prop        | Type                                                             | Défaut           | Description                               |
+| ----------- | ---------------------------------------------------------------- | ---------------- | ----------------------------------------- |
+| `align`     | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` | Position de l'addon par rapport à l'input |
+| `className` | `string`                                                         | —                | Classes CSS additionnelles                |
+| `...props`  | `React.ComponentProps<"div">`                                    | —                | Props natives de `<div>`                  |
+
+### `InputGroupButton`
+
+Rend `Button`.
+
+| Prop       | Type                                                                          | Défaut     | Description                                       |
+| ---------- | ----------------------------------------------------------------------------- | ---------- | ------------------------------------------------- |
+| `type`     | `"button" \| "submit" \| "reset"`                                             | `"button"` | Type HTML du bouton                               |
+| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"` | `"ghost"`  | Variante visuelle du bouton (héritée de `Button`) |
+| `size`     | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"`                                      | `"xs"`     | Taille du bouton dans le groupe                   |
+| `...props` | `Omit<React.ComponentProps<typeof Button>, "size">`                           | —          | Props transmises à l'élément rendu                |
+
+### `InputGroupText`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut | Description               |
+| ---------- | ------------------------------ | ------ | ------------------------- |
+| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+
+### `InputGroupInput`
+
+Rend `Input`.
+
+| Prop        | Type                            | Défaut | Description                |
+| ----------- | ------------------------------- | ------ | -------------------------- |
+| `className` | `string`                        | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"input">` | —      | Props natives de `<input>` |
+
+### `InputGroupTextarea`
+
+Rend `Textarea`.
+
+| Prop        | Type                               | Défaut | Description                   |
+| ----------- | ---------------------------------- | ------ | ----------------------------- |
+| `className` | `string`                           | —      | Classes CSS additionnelles    |
+| `...props`  | `React.ComponentProps<"textarea">` | —      | Props natives de `<textarea>` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

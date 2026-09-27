@@ -49,6 +49,12 @@ Aucun token : `components/ui/collapsible.tsx` n'emploie aucune classe ni variabl
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Collapsible`
+
+Rend `CollapsiblePrimitive.Root`.
+
 | Prop           | Type                                                     | Défaut  | Description                                    |
 | -------------- | -------------------------------------------------------- | ------- | ---------------------------------------------- |
 | `open`         | `boolean`                                                | —       | État contrôlé d'ouverture                      |
@@ -56,7 +62,25 @@ Aucun token : `components/ui/collapsible.tsx` n'emploie aucune classe ni variabl
 | `onOpenChange` | `(open: boolean) => void`                                | —       | Callback déclenché au changement d'état        |
 | `disabled`     | `boolean`                                                | `false` | Désactive le trigger et empêche le basculement |
 | `className`    | `string`                                                 | —       | Classes CSS additionnelles                     |
-| `...props`     | `React.ComponentProps<typeof CollapsiblePrimitive.Root>` | —       | Toutes les props du primitif Radix             |
+| `...props`     | `React.ComponentProps<typeof CollapsiblePrimitive.Root>` | —       | Props de `CollapsiblePrimitive.Root`           |
+
+### `CollapsibleTrigger`
+
+Rend `CollapsiblePrimitive.CollapsibleTrigger`.
+
+| Prop       | Type                                                                   | Défaut | Description                                        |
+| ---------- | ---------------------------------------------------------------------- | ------ | -------------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>` | —      | Props de `CollapsiblePrimitive.CollapsibleTrigger` |
+
+### `CollapsibleContent`
+
+Rend `CollapsiblePrimitive.CollapsibleContent`.
+
+| Prop       | Type                                                                   | Défaut | Description                                        |
+| ---------- | ---------------------------------------------------------------------- | ------ | -------------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleContent>` | —      | Props de `CollapsiblePrimitive.CollapsibleContent` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

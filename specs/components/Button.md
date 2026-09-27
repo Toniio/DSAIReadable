@@ -66,13 +66,25 @@ Relevé dans `components/ui/button.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Button`
+
+Rend `<button>`, ou son enfant avec `asChild`.
+
 | Prop        | Type                                                                                 | Défaut      | Description                                       |
 | ----------- | ------------------------------------------------------------------------------------ | ----------- | ------------------------------------------------- |
 | `variant`   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"`        | `"default"` | Apparence visuelle du bouton                      |
 | `size`      | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` | Taille du bouton (`h-8` par défaut)               |
 | `asChild`   | `boolean`                                                                            | `false`     | Délègue le rendu au premier enfant via Radix Slot |
 | `className` | `string`                                                                             | —           | Classes CSS additionnelles                        |
-| `...props`  | `React.ComponentProps<"button">`                                                     | —           | Toutes les props natives du `<button>`            |
+| `...props`  | `React.ComponentProps<"button">`                                                     | —           | Props natives de `<button>`                       |
+
+### `buttonVariants`
+
+Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+
+<!-- Fin de la partie générée. -->
 
 > **Axes de variantes** — `variant` décrit l'**apparence** : `default`, `secondary`, `outline`, `ghost`, `link` classent le bouton par prominence décroissante, de l'action principale au lien textuel. Seul `destructive` relève de l'**intention** : il déclare une action irréversible, et le rouge en découle. Un bouton qui n'est pas destructeur ne doit pas l'utiliser, même si le rouge convient à la maquette.
 

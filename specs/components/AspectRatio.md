@@ -45,11 +45,19 @@ Aucun token : `components/ui/aspect-ratio.tsx` n'emploie aucune classe ni variab
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `AspectRatio`
+
+Rend `AspectRatioPrimitive.Root`.
+
 | Prop        | Type                                                     | Défaut | Description                          |
 | ----------- | -------------------------------------------------------- | ------ | ------------------------------------ |
 | `ratio`     | `number`                                                 | `1`    | Rapport largeur/hauteur (ex. `16/9`) |
 | `className` | `string`                                                 | —      | Classes CSS additionnelles           |
-| `...props`  | `React.ComponentProps<typeof AspectRatioPrimitive.Root>` | —      | Toutes les props du primitif Radix   |
+| `...props`  | `React.ComponentProps<typeof AspectRatioPrimitive.Root>` | —      | Props de `AspectRatioPrimitive.Root` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

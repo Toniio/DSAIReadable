@@ -73,15 +73,83 @@ Relevé dans `components/ui/navigation-menu.tsx` et les constantes de `lib/` qu'
 
 ## Props / API
 
-| Prop            | Type                                                 | Défaut         | Description                                          |
-| --------------- | ---------------------------------------------------- | -------------- | ---------------------------------------------------- |
-| `viewport`      | `boolean`                                            | `true`         | Active/désactive le viewport partagé pour le contenu |
-| `orientation`   | `"horizontal" \| "vertical"`                         | `"horizontal"` | Orientation du menu de navigation                    |
-| `value`         | `string`                                             | —              | Item actif (contrôlé)                                |
-| `defaultValue`  | `string`                                             | —              | Item actif par défaut                                |
-| `onValueChange` | `(value: string) => void`                            | —              | Callback lors du changement d'item actif             |
-| `className`     | `string`                                             | —              | Classes CSS additionnelles                           |
-| `...props`      | `React.ComponentProps<NavigationMenuPrimitive.Root>` | —              | Props natives Radix NavigationMenu                   |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `NavigationMenu`
+
+Rend `NavigationMenuPrimitive.Root`.
+
+| Prop            | Type                                                        | Défaut         | Description                                          |
+| --------------- | ----------------------------------------------------------- | -------------- | ---------------------------------------------------- |
+| `viewport`      | `boolean`                                                   | `true`         | Active/désactive le viewport partagé pour le contenu |
+| `orientation`   | `Orientation`                                               | `"horizontal"` | Orientation du menu de navigation                    |
+| `value`         | `string`                                                    | —              | Item actif (contrôlé)                                |
+| `defaultValue`  | `string`                                                    | —              | Item actif par défaut                                |
+| `onValueChange` | `(value: string) => void`                                   | —              | Callback lors du changement d'item actif             |
+| `className`     | `string`                                                    | —              | Classes CSS additionnelles                           |
+| `...props`      | `React.ComponentProps<typeof NavigationMenuPrimitive.Root>` | —              | Props de `NavigationMenuPrimitive.Root`              |
+
+### `NavigationMenuList`
+
+Rend `NavigationMenuPrimitive.List`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.List>` | —      | Props de `NavigationMenuPrimitive.List` |
+
+### `NavigationMenuItem`
+
+Rend `NavigationMenuPrimitive.Item`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Item>` | —      | Props de `NavigationMenuPrimitive.Item` |
+
+### `NavigationMenuContent`
+
+Rend `NavigationMenuPrimitive.Content`.
+
+| Prop       | Type                                                           | Défaut | Description                                |
+| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Content>` | —      | Props de `NavigationMenuPrimitive.Content` |
+
+### `NavigationMenuTrigger`
+
+Rend `NavigationMenuPrimitive.Trigger`.
+
+| Prop       | Type                                                           | Défaut | Description                                |
+| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>` | —      | Props de `NavigationMenuPrimitive.Trigger` |
+
+### `NavigationMenuLink`
+
+Rend `NavigationMenuPrimitive.Link`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Link>` | —      | Props de `NavigationMenuPrimitive.Link` |
+
+### `NavigationMenuIndicator`
+
+Rend `NavigationMenuPrimitive.Indicator`.
+
+| Prop       | Type                                                             | Défaut | Description                                  |
+| ---------- | ---------------------------------------------------------------- | ------ | -------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>` | —      | Props de `NavigationMenuPrimitive.Indicator` |
+
+### `NavigationMenuViewport`
+
+Rend `NavigationMenuPrimitive.Viewport`, dans un `<div>`.
+
+| Prop       | Type                                                            | Défaut | Description                                 |
+| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>` | —      | Props de `NavigationMenuPrimitive.Viewport` |
+
+### `navigationMenuTriggerStyle`
+
+Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

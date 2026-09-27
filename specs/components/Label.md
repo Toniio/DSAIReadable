@@ -51,11 +51,19 @@ Relevé dans `components/ui/label.tsx` et les constantes de `lib/` qu'il importe
 
 ## Props / API
 
-| Prop        | Type                                      | Défaut | Description                                               |
-| ----------- | ----------------------------------------- | ------ | --------------------------------------------------------- |
-| `htmlFor`   | `string`                                  | —      | ID du contrôle associé (obligatoire pour l'accessibilité) |
-| `className` | `string`                                  | —      | Classes CSS additionnelles                                |
-| `...props`  | `React.ComponentProps<typeof Label.Root>` | —      | Toutes les props natives Radix Label                      |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Label`
+
+Rend `LabelPrimitive.Root`.
+
+| Prop        | Type                                               | Défaut | Description                                               |
+| ----------- | -------------------------------------------------- | ------ | --------------------------------------------------------- |
+| `htmlFor`   | `string`                                           | —      | ID du contrôle associé (obligatoire pour l'accessibilité) |
+| `className` | `string`                                           | —      | Classes CSS additionnelles                                |
+| `...props`  | `React.ComponentProps<typeof LabelPrimitive.Root>` | —      | Props de `LabelPrimitive.Root`                            |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

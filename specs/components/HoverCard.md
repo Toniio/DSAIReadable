@@ -60,15 +60,39 @@ Relevé dans `components/ui/hover-card.tsx` et les constantes de `lib/` qu'il im
 
 ## Props / API
 
-| Prop           | Type                           | Défaut      | Description                                                            |
-| -------------- | ------------------------------ | ----------- | ---------------------------------------------------------------------- |
-| `open`         | `boolean`                      | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)                           |
-| `onOpenChange` | `(open: boolean) => void`      | —           | Callback lors du changement d'état                                     |
-| `openDelay`    | `number`                       | `700`       | Délai en ms avant l'ouverture au survol                                |
-| `closeDelay`   | `number`                       | `300`       | Délai en ms avant la fermeture à la sortie                             |
-| `align`        | `"start" \| "center" \| "end"` | `"center"`  | Alignement du contenu par rapport au trigger (sur `HoverCardContent`)  |
-| `sideOffset`   | `number`                       | `4`         | Espacement en px entre le trigger et la carte (sur `HoverCardContent`) |
-| `className`    | `string`                       | —           | Classes CSS additionnelles (sur `HoverCardContent`)                    |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `HoverCard`
+
+Rend `HoverCardPrimitive.Root`.
+
+| Prop           | Type                                                   | Défaut      | Description                                  |
+| -------------- | ------------------------------------------------------ | ----------- | -------------------------------------------- |
+| `open`         | `boolean`                                              | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
+| `onOpenChange` | `(open: boolean) => void`                              | —           | Callback lors du changement d'état           |
+| `openDelay`    | `number`                                               | `700`       | Délai en ms avant l'ouverture au survol      |
+| `closeDelay`   | `number`                                               | `300`       | Délai en ms avant la fermeture à la sortie   |
+| `...props`     | `React.ComponentProps<typeof HoverCardPrimitive.Root>` | —           | Props de `HoverCardPrimitive.Root`           |
+
+### `HoverCardTrigger`
+
+Rend `HoverCardPrimitive.Trigger`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof HoverCardPrimitive.Trigger>` | —      | Props de `HoverCardPrimitive.Trigger` |
+
+### `HoverCardContent`
+
+Rend `HoverCardPrimitive.Content`.
+
+| Prop         | Type                                                      | Défaut     | Description                                                            |
+| ------------ | --------------------------------------------------------- | ---------- | ---------------------------------------------------------------------- |
+| `align`      | `"center" \| "end" \| "start"`                            | `"center"` | Alignement du contenu par rapport au trigger (sur `HoverCardContent`)  |
+| `sideOffset` | `number`                                                  | `4`        | Espacement en px entre le trigger et la carte (sur `HoverCardContent`) |
+| `...props`   | `React.ComponentProps<typeof HoverCardPrimitive.Content>` | —          | Props de `HoverCardPrimitive.Content`                                  |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 
