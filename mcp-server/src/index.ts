@@ -11,15 +11,18 @@ import { registerPrompts } from "./prompts/index.js"
 import { registerResources } from "./resources/index.js"
 import { loadContext } from "./lib/context.js"
 
-/** Server version comes from the generated metadata, never hardcoded. */
+/**
+ * Server version comes from the generated metadata, never hardcoded. Without
+ * a cache it is "unknown": a made-up zero version would read as a real one.
+ */
 const mcpServerVersion = (() => {
   try {
     return (
       loadContext<{ mcp_server_version?: string }>("ds-metadata.json")
-        .mcp_server_version ?? "0.0.0"
+        .mcp_server_version ?? "unknown"
     )
   } catch {
-    return "0.0.0"
+    return "unknown"
   }
 })()
 

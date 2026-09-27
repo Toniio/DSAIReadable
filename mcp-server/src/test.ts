@@ -1218,7 +1218,11 @@ const TOOL_CASES: Record<string, ToolCase> = {
     args: {},
     content: (p) =>
       p.name === "DSAIReadable" &&
-      p.version === meta.design_system_version &&
+      p.version === undefined &&
+      p.design_system_version === meta.design_system_version &&
+      p.mcp_server_version === meta.mcp_server_version &&
+      p.distribution.install ===
+        `npx shadcn@latest add ${meta.registry_source.item_address}` &&
       p.stats.total_components === specNames.length,
   },
   get_components: {
@@ -1387,6 +1391,64 @@ assert(
 )
 
 await toolClient.close()
+
+// --- Test 12: versions and identity, each from its source (P3-09) ---
+console.log("\n12. Versions and identity")
+
+const readRoot = (rel: string) =>
+  JSON.parse(readFileSync(resolve(__dirname, "../..", rel), "utf-8"))
+const rootPkg = readRoot("package.json")
+const rootDeps = { ...rootPkg.devDependencies, ...rootPkg.dependencies }
+const registryJson = readRoot("registry.json")
+const repository = new URL(registryJson.homepage).pathname.replace(
+  /^\/|\/$/g,
+  ""
+)
+assert(
+  meta.design_system_version === readRoot("design-system.index.json").version &&
+    meta.mcp_server_version === readRoot("mcp-server/package.json").version,
+  `design_system_version (${meta.design_system_version}) and mcp_server_version (${meta.mcp_server_version}) match their files`
+)
+assert(
+  meta.registry_source?.repository === repository &&
+    meta.registry_source?.registry === registryJson.name &&
+    meta.registry_source?.item_address === `${repository}/<item>`,
+  `registry_source matches registry.json (${repository}, ${registryJson.name})`
+)
+assert(
+  ["react", "next", "tailwindcss"].every(
+    (dep) => meta.stack?.[dep] === rootDeps[dep]
+  ) &&
+    meta.framework ===
+      `React ${/\d+/.exec(rootDeps.react)?.[0]} / Next.js ${/\d+/.exec(rootDeps.next)?.[0]} / Tailwind CSS v${/\d+/.exec(rootDeps.tailwindcss)?.[0]} / shadcn-ui`,
+  `stack and framework come from package.json (${meta.framework})`
+)
+assert(
+  meta.last_publish === undefined &&
+    readRoot("design-system.index.json").library === undefined,
+  "No last_publish: only the removed Figma library set it"
+)
+
+// A version written in the served code lies at the first bump.
+const servedSources = [
+  "index.ts",
+  ...["tools", "resources", "prompts", "lib"].flatMap((dir) =>
+    readdirSync(resolve(__dirname, dir))
+      .filter((f) => f.endsWith(".ts"))
+      .map((f) => `${dir}/${f}`)
+  ),
+]
+const versionLiterals = servedSources.flatMap((file) =>
+  [
+    ...readFileSync(resolve(__dirname, file), "utf-8").matchAll(
+      /["'`]v?\d+\.\d+\.\d+["'`]/g
+    ),
+  ].map((m) => `${file}: ${m[0]}`)
+)
+assert(
+  versionLiterals.length === 0,
+  `No version literal in the served code (${servedSources.length} files${versionLiterals.length ? `; ${versionLiterals.join(", ")}` : ""})`
+)
 
 // --- Summary ---
 console.log("\n" + "=".repeat(50))
