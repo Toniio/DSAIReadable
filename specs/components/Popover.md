@@ -29,6 +29,7 @@ Conteneur flottant interactif déclenché par un clic, permettant d'afficher du 
 ## Contraintes
 
 - **MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`
+- **MUST** — régler `as` de `PopoverTitle` sur la hiérarchie réelle : il rend un `<h2>` par défaut, `as="h3"` sous une section en `h2`
 - **MUST NOT** — afficher une liste d'actions → utiliser `DropdownMenu`
 - **Note** — un seul `Popover` s'ouvre à la fois, sauf état contrôlé à la main
 - **MUST NOT** — contenir un contenu qui impose un défilement interne, ni un formulaire de plus de 3 champs → utiliser `Dialog` ou `Sheet`
@@ -119,11 +120,12 @@ Rend `<div>`.
 
 ### `PopoverTitle`
 
-Rend `<div>`.
+Rend `<h2>`, ou l'élément choisi par `as`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                                           | Défaut | Description                                       |
+| ---------- | ---------------------------------------------- | ------ | ------------------------------------------------- |
+| `as`       | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6"` | `"h2"` | Niveau de titre rendu ; ne change pas l'apparence |
+| `...props` | `React.ComponentProps<"h2">`                   | —      | Props natives de `<h2>`                           |
 
 ### `PopoverTrigger`
 

@@ -10950,6 +10950,7 @@
     ],
     "constraints": [
       "**MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`",
+      "**MUST** — régler `as` de `PopoverTitle` sur la hiérarchie réelle : il rend un `<h2>` par défaut, `as=\"h3\"` sous une section en `h2`",
       "**MUST NOT** — afficher une liste d'actions → utiliser `DropdownMenu`",
       "**Note** — un seul `Popover` s'ouvre à la fois, sauf état contrôlé à la main",
       "**MUST NOT** — contenir un contenu qui impose un défilement interne, ni un formulaire de plus de 3 champs → utiliser `Dialog` ou `Sheet`",
@@ -11108,7 +11109,7 @@
       },
       {
         "name": "PopoverTitle",
-        "summary": "Rend `<div>`."
+        "summary": "Rend `<h2>`, ou l'élément choisi par `as`."
       },
       {
         "name": "PopoverTrigger",
@@ -11181,10 +11182,17 @@
       },
       {
         "component": "PopoverTitle",
+        "prop": "`as`",
+        "type": "`\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"`",
+        "default": "`\"h2\"`",
+        "description": "Niveau de titre rendu ; ne change pas l'apparence"
+      },
+      {
+        "component": "PopoverTitle",
         "prop": "`...props`",
-        "type": "`React.ComponentProps<\"div\">`",
+        "type": "`React.ComponentProps<\"h2\">`",
         "default": "—",
-        "description": "Props natives de `<div>`"
+        "description": "Props natives de `<h2>`"
       },
       {
         "component": "PopoverTrigger",
