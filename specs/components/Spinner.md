@@ -49,11 +49,19 @@ Aucun token : `components/ui/spinner.tsx` n'emploie aucune classe ni variable qu
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Spinner`
+
+Rend `SpinnerIcon`.
+
 | Prop         | Type                          | Défaut                  | Description                                                                       |
 | ------------ | ----------------------------- | ----------------------- | --------------------------------------------------------------------------------- |
 | `aria-label` | `string`                      | `"Loading"`             | Libellé accessible décrivant l'opération en cours — **obligatoire en production** |
 | `className`  | `string`                      | `"size-4 animate-spin"` | Classes CSS pour surcharger la taille ou l'animation                              |
-| `...props`   | `React.ComponentProps<"svg">` | —                       | Toutes les props natives `<svg>` (`role="status"` déjà défini)                    |
+| `...props`   | `React.ComponentProps<"svg">` | —                       | Props natives de `<svg>`                                                          |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

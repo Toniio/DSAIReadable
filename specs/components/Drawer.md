@@ -71,13 +71,93 @@ Relevé dans `components/ui/drawer.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
-| Prop                    | Type                                     | Défaut      | Description                                                               |
-| ----------------------- | ---------------------------------------- | ----------- | ------------------------------------------------------------------------- |
-| `open`                  | `boolean`                                | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)                              |
-| `onOpenChange`          | `(open: boolean) => void`                | —           | Callback lors du changement d'état                                        |
-| `direction`             | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"`  | Direction d'apparition du panneau (via vaul `data-vaul-drawer-direction`) |
-| `shouldScaleBackground` | `boolean`                                | —           | Réduit l'arrière-plan lors de l'ouverture                                 |
-| `className`             | `string`                                 | —           | Classes CSS additionnelles (sur chaque sous-composant)                    |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Drawer`
+
+Rend `DrawerPrimitive.Root`.
+
+| Prop                    | Type                                                | Défaut      | Description                                                               |
+| ----------------------- | --------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `open`                  | `boolean`                                           | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)                              |
+| `onOpenChange`          | `(open: boolean) => void`                           | —           | Callback lors du changement d'état                                        |
+| `direction`             | `"left" \| "right" \| "top" \| "bottom"`            | `"bottom"`  | Direction d'apparition du panneau (via vaul `data-vaul-drawer-direction`) |
+| `shouldScaleBackground` | `boolean`                                           | —           | Réduit l'arrière-plan lors de l'ouverture                                 |
+| `...props`              | `React.ComponentProps<typeof DrawerPrimitive.Root>` | —           | Props de `DrawerPrimitive.Root`                                           |
+
+### `DrawerPortal`
+
+Rend `DrawerPrimitive.Portal`.
+
+| Prop       | Type                                                  | Défaut | Description                       |
+| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Portal>` | —      | Props de `DrawerPrimitive.Portal` |
+
+### `DrawerOverlay`
+
+Rend `DrawerPrimitive.Overlay`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Overlay>` | —      | Props de `DrawerPrimitive.Overlay` |
+
+### `DrawerTrigger`
+
+Rend `DrawerPrimitive.Trigger`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Trigger>` | —      | Props de `DrawerPrimitive.Trigger` |
+
+### `DrawerClose`
+
+Rend `DrawerPrimitive.Close`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Close>` | —      | Props de `DrawerPrimitive.Close` |
+
+### `DrawerContent`
+
+Rend `DrawerPrimitive.Content`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Content>` | —      | Props de `DrawerPrimitive.Content` |
+
+### `DrawerHeader`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `DrawerFooter`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `DrawerTitle`
+
+Rend `DrawerPrimitive.Title`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Title>` | —      | Props de `DrawerPrimitive.Title` |
+
+### `DrawerDescription`
+
+Rend `DrawerPrimitive.Description`.
+
+| Prop       | Type                                                       | Défaut | Description                            |
+| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Description>` | —      | Props de `DrawerPrimitive.Description` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

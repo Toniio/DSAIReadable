@@ -64,34 +64,46 @@ Relevé dans `components/ui/alert.tsx` et les constantes de `lib/` qu'il importe
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
 ### `Alert`
 
-| Prop        | Type                          | Défaut      | Description                                            |
-| ----------- | ----------------------------- | ----------- | ------------------------------------------------------ |
-| `variant`   | `"default" \| "destructive"`  | `"default"` | Style visuel : informatif ou d'erreur                  |
-| `className` | `string`                      | —           | Classes CSS additionnelles                             |
-| `...props`  | `React.ComponentProps<"div">` | —           | Props natives `<div>` (`role="alert"` déjà positionné) |
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut      | Description                           |
+| ----------- | ----------------------------- | ----------- | ------------------------------------- |
+| `variant`   | `"default" \| "destructive"`  | `"default"` | Style visuel : informatif ou d'erreur |
+| `className` | `string`                      | —           | Classes CSS additionnelles            |
+| `...props`  | `React.ComponentProps<"div">` | —           | Props natives de `<div>`              |
 
 ### `AlertTitle`
 
+Rend `<div>`.
+
 | Prop        | Type                          | Défaut | Description                |
 | ----------- | ----------------------------- | ------ | -------------------------- |
 | `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
 
 ### `AlertDescription`
 
+Rend `<div>`.
+
 | Prop        | Type                          | Défaut | Description                |
 | ----------- | ----------------------------- | ------ | -------------------------- |
 | `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
 
 ### `AlertAction`
 
+Rend `<div>`.
+
 | Prop        | Type                          | Défaut | Description                |
 | ----------- | ----------------------------- | ------ | -------------------------- |
 | `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

@@ -66,27 +66,64 @@ Relevé dans `components/ui/avatar.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
-| Prop                 | Type                                             | Défaut      | Description                                          |
-| -------------------- | ------------------------------------------------ | ----------- | ---------------------------------------------------- |
-| **Avatar**           |                                                  |             |                                                      |
-| `size`               | `"default" \| "sm" \| "lg"`                      | `"default"` | Taille de l'avatar (`size-6` / `size-8` / `size-10`) |
-| `className`          | `string`                                         | —           | Classes CSS additionnelles                           |
-| `...props`           | `React.ComponentProps<AvatarPrimitive.Root>`     | —           | Props Radix Root                                     |
-| **AvatarImage**      |                                                  |             |                                                      |
-| `className`          | `string`                                         | —           | Classes CSS additionnelles                           |
-| `...props`           | `React.ComponentProps<AvatarPrimitive.Image>`    | —           | Props Radix Image (src, alt, etc.)                   |
-| **AvatarFallback**   |                                                  |             |                                                      |
-| `className`          | `string`                                         | —           | Classes CSS additionnelles                           |
-| `...props`           | `React.ComponentProps<AvatarPrimitive.Fallback>` | —           | Props Radix Fallback (delayMs, etc.)                 |
-| **AvatarBadge**      |                                                  |             |                                                      |
-| `className`          | `string`                                         | —           | Classes CSS additionnelles                           |
-| `...props`           | `React.ComponentProps<"span">`                   | —           | Props natives du `<span>`                            |
-| **AvatarGroup**      |                                                  |             |                                                      |
-| `className`          | `string`                                         | —           | Classes CSS additionnelles                           |
-| `...props`           | `React.ComponentProps<"div">`                    | —           | Props natives du `<div>`                             |
-| **AvatarGroupCount** |                                                  |             |                                                      |
-| `className`          | `string`                                         | —           | Classes CSS additionnelles                           |
-| `...props`           | `React.ComponentProps<"div">`                    | —           | Props natives du `<div>`                             |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Avatar`
+
+Rend `AvatarPrimitive.Root`.
+
+| Prop        | Type                                                | Défaut      | Description                                          |
+| ----------- | --------------------------------------------------- | ----------- | ---------------------------------------------------- |
+| `size`      | `"default" \| "sm" \| "lg"`                         | `"default"` | Taille de l'avatar (`size-6` / `size-8` / `size-10`) |
+| `className` | `string`                                            | —           | Classes CSS additionnelles                           |
+| `...props`  | `React.ComponentProps<typeof AvatarPrimitive.Root>` | —           | Props de `AvatarPrimitive.Root`                      |
+
+### `AvatarImage`
+
+Rend `AvatarPrimitive.Image`.
+
+| Prop        | Type                                                 | Défaut | Description                      |
+| ----------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `className` | `string`                                             | —      | Classes CSS additionnelles       |
+| `...props`  | `React.ComponentProps<typeof AvatarPrimitive.Image>` | —      | Props de `AvatarPrimitive.Image` |
+
+### `AvatarFallback`
+
+Rend `AvatarPrimitive.Fallback`.
+
+| Prop        | Type                                                    | Défaut | Description                         |
+| ----------- | ------------------------------------------------------- | ------ | ----------------------------------- |
+| `className` | `string`                                                | —      | Classes CSS additionnelles          |
+| `...props`  | `React.ComponentProps<typeof AvatarPrimitive.Fallback>` | —      | Props de `AvatarPrimitive.Fallback` |
+
+### `AvatarGroup`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `AvatarGroupCount`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `AvatarBadge`
+
+Rend `<span>`.
+
+| Prop        | Type                           | Défaut | Description                |
+| ----------- | ------------------------------ | ------ | -------------------------- |
+| `className` | `string`                       | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"span">` | —      | Props natives de `<span>`  |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

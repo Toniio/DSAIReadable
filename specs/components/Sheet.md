@@ -79,13 +79,78 @@ Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop              | Type                                     | Défaut      | Description                                               |
-| ----------------- | ---------------------------------------- | ----------- | --------------------------------------------------------- |
-| `open`            | `boolean`                                | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)              |
-| `onOpenChange`    | `(open: boolean) => void`                | —           | Callback lors du changement d'état                        |
-| `side`            | `"top" \| "right" \| "bottom" \| "left"` | `"right"`   | Côté d'apparition du panneau (sur `SheetContent`)         |
-| `showCloseButton` | `boolean`                                | `true`      | Affiche le bouton × en haut à droite (sur `SheetContent`) |
-| `className`       | `string`                                 | —           | Classes CSS additionnelles (sur chaque sous-composant)    |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Sheet`
+
+Rend `SheetPrimitive.Root`.
+
+| Prop           | Type                                               | Défaut      | Description                                  |
+| -------------- | -------------------------------------------------- | ----------- | -------------------------------------------- |
+| `open`         | `boolean`                                          | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
+| `onOpenChange` | `(open: boolean) => void`                          | —           | Callback lors du changement d'état           |
+| `...props`     | `React.ComponentProps<typeof SheetPrimitive.Root>` | —           | Props de `SheetPrimitive.Root`               |
+
+### `SheetTrigger`
+
+Rend `SheetPrimitive.Trigger`.
+
+| Prop       | Type                                                  | Défaut | Description                       |
+| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Trigger>` | —      | Props de `SheetPrimitive.Trigger` |
+
+### `SheetClose`
+
+Rend `SheetPrimitive.Close`.
+
+| Prop       | Type                                                | Défaut | Description                     |
+| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Close>` | —      | Props de `SheetPrimitive.Close` |
+
+### `SheetContent`
+
+Rend `SheetPrimitive.Content`.
+
+| Prop              | Type                                                  | Défaut                   | Description                                                                |
+| ----------------- | ----------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------- |
+| `side`            | `"top" \| "right" \| "bottom" \| "left"`              | `"right"`                | Côté d'apparition du panneau (sur `SheetContent`)                          |
+| `showCloseButton` | `boolean`                                             | `true`                   | Affiche le bouton × en haut à droite (sur `SheetContent`)                  |
+| `closeLabel`      | `string`                                              | `UI_STRINGS.sheet.close` | Nom accessible du bouton de fermeture ; remplace la valeur de `UI_STRINGS` |
+| `...props`        | `React.ComponentProps<typeof SheetPrimitive.Content>` | —                        | Props de `SheetPrimitive.Content`                                          |
+
+### `SheetHeader`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `SheetFooter`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `SheetTitle`
+
+Rend `SheetPrimitive.Title`.
+
+| Prop       | Type                                                | Défaut | Description                     |
+| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Title>` | —      | Props de `SheetPrimitive.Title` |
+
+### `SheetDescription`
+
+Rend `SheetPrimitive.Description`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Description>` | —      | Props de `SheetPrimitive.Description` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

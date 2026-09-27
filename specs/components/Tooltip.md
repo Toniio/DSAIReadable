@@ -59,20 +59,45 @@ Relevé dans `components/ui/tooltip.tsx` et les constantes de `lib/` qu'il impor
 
 ## Props / API
 
-| Prop                | Type                                              | Défaut | Description                                         |
-| ------------------- | ------------------------------------------------- | ------ | --------------------------------------------------- |
-| **TooltipProvider** |                                                   |        |                                                     |
-| `delayDuration`     | `number`                                          | `0`    | Délai avant apparition (ms)                         |
-| `...props`          | `React.ComponentProps<TooltipPrimitive.Provider>` | —      | Props du provider Radix                             |
-| **Tooltip**         |                                                   |        |                                                     |
-| `...props`          | `React.ComponentProps<TooltipPrimitive.Root>`     | —      | Props de la racine Radix (open, onOpenChange, etc.) |
-| **TooltipTrigger**  |                                                   |        |                                                     |
-| `...props`          | `React.ComponentProps<TooltipPrimitive.Trigger>`  | —      | Props du trigger Radix (asChild, etc.)              |
-| **TooltipContent**  |                                                   |        |                                                     |
-| `sideOffset`        | `number`                                          | `0`    | Décalage par rapport au trigger (px)                |
-| `className`         | `string`                                          | —      | Classes CSS additionnelles                          |
-| `children`          | `React.ReactNode`                                 | —      | Contenu du tooltip                                  |
-| `...props`          | `React.ComponentProps<TooltipPrimitive.Content>`  | —      | Props du contenu Radix (side, align, etc.)          |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Tooltip`
+
+Rend `TooltipPrimitive.Root`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof TooltipPrimitive.Root>` | —      | Props de `TooltipPrimitive.Root` |
+
+### `TooltipContent`
+
+Rend `TooltipPrimitive.Content`.
+
+| Prop         | Type                                                    | Défaut | Description                          |
+| ------------ | ------------------------------------------------------- | ------ | ------------------------------------ |
+| `sideOffset` | `number`                                                | `0`    | Décalage par rapport au trigger (px) |
+| `className`  | `string`                                                | —      | Classes CSS additionnelles           |
+| `children`   | `React.ReactNode`                                       | —      | Contenu du tooltip                   |
+| `...props`   | `React.ComponentProps<typeof TooltipPrimitive.Content>` | —      | Props de `TooltipPrimitive.Content`  |
+
+### `TooltipProvider`
+
+Rend `TooltipPrimitive.Provider`.
+
+| Prop            | Type                                                     | Défaut | Description                          |
+| --------------- | -------------------------------------------------------- | ------ | ------------------------------------ |
+| `delayDuration` | `number`                                                 | `0`    | Délai avant apparition (ms)          |
+| `...props`      | `React.ComponentProps<typeof TooltipPrimitive.Provider>` | —      | Props de `TooltipPrimitive.Provider` |
+
+### `TooltipTrigger`
+
+Rend `TooltipPrimitive.Trigger`.
+
+| Prop       | Type                                                    | Défaut | Description                         |
+| ---------- | ------------------------------------------------------- | ------ | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof TooltipPrimitive.Trigger>` | —      | Props de `TooltipPrimitive.Trigger` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

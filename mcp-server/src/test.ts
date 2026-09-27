@@ -587,6 +587,29 @@ assert(
   "A component with no token of its own points to the specs it composes"
 )
 
+// Props / API is generated (scripts/build-spec-api.ts): one `### \`Export\``
+// block per runtime export, opening with what it renders or returns.
+const apiSpecs = specs as unknown as Record<
+  string,
+  { exports: { name: string; summary: string }[]; props: PropRow[] }
+>
+const sidebarExports = apiSpecs.Sidebar?.exports ?? []
+assert(
+  sidebarExports.some(
+    (e) => e.name === "useSidebar()" && e.summary.startsWith("Retourne ")
+  ) &&
+    sidebarExports.some(
+      (e) => e.name === "SidebarMenuAction" && e.summary.startsWith("Rend ")
+    ),
+  "Every export is served with its summary (Sidebar: a hook and a component)"
+)
+assert(
+  apiSpecs.Sidebar?.props.some(
+    (p) => p.component === "SidebarMenuAction" && p.prop === "`showOnHover`"
+  ) === true,
+  "A prop is filed under its own export (SidebarMenuAction.showOnHover)"
+)
+
 const uxRules = (
   JSON.parse(readFileSync(resolve(contextDir, "ux-writing.json"), "utf-8")) as {
     general_rules: Array<{ rule: string }>

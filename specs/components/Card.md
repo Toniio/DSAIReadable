@@ -65,55 +65,73 @@ Relevé dans `components/ui/card.tsx` et les constantes de `lib/` qu'il importe 
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
 ### `Card`
+
+Rend `<div>`.
 
 | Prop        | Type                          | Défaut      | Description                                                                            |
 | ----------- | ----------------------------- | ----------- | -------------------------------------------------------------------------------------- |
 | `size`      | `"default" \| "sm"`           | `"default"` | Taille de la carte : `gap-4 py-4` vs `gap-2 py-3`. Rendue en `data-size` sur la racine |
 | `className` | `string`                      | —           | Classes CSS additionnelles                                                             |
-| `...props`  | `React.ComponentProps<"div">` | —           | Props natives `<div>`                                                                  |
+| `...props`  | `React.ComponentProps<"div">` | —           | Props natives de `<div>`                                                               |
 
 ### `CardHeader`
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
-
-### `CardTitle`
+Rend `<div>`.
 
 | Prop        | Type                          | Défaut | Description                |
 | ----------- | ----------------------------- | ------ | -------------------------- |
 | `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
-
-### `CardDescription`
-
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
-
-### `CardAction`
-
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
-
-### `CardContent`
-
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
 
 ### `CardFooter`
 
+Rend `<div>`.
+
 | Prop        | Type                          | Défaut | Description                |
 | ----------- | ----------------------------- | ------ | -------------------------- |
 | `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `CardTitle`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `CardAction`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `CardDescription`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `CardContent`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

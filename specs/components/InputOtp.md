@@ -63,21 +63,48 @@ Relevé dans `components/ui/input-otp.tsx` et les constantes de `lib/` qu'il imp
 
 ## Props / API
 
-| Prop                  | Type                                    | Défaut | Description                                                    |
-| --------------------- | --------------------------------------- | ------ | -------------------------------------------------------------- |
-| **InputOTP**          |                                         |        |                                                                |
-| `containerClassName`  | `string`                                | —      | Classes CSS sur le conteneur flex externe                      |
-| `className`           | `string`                                | —      | Classes CSS sur l'input caché                                  |
-| `maxLength`           | `number`                                | —      | Nombre total de caractères attendus                            |
-| `pattern`             | `string`                                | —      | Regex de validation par caractère (ex. : `REGEXP_ONLY_DIGITS`) |
-| `...props`            | `React.ComponentProps<typeof OTPInput>` | —      | Toutes les props de `input-otp`                                |
-| **InputOTPGroup**     |                                         |        |                                                                |
-| `className`           | `string`                                | —      | Classes CSS additionnelles                                     |
-| **InputOTPSlot**      |                                         |        |                                                                |
-| `index`               | `number`                                | —      | Position du slot dans la séquence (obligatoire)                |
-| `className`           | `string`                                | —      | Classes CSS additionnelles                                     |
-| **InputOTPSeparator** |                                         |        |                                                                |
-| `...props`            | `React.ComponentProps<"div">`           | —      | Props natives du conteneur séparateur                          |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `InputOTP`
+
+Rend `OTPInput`.
+
+| Prop                 | Type                                    | Défaut | Description                                                    |
+| -------------------- | --------------------------------------- | ------ | -------------------------------------------------------------- |
+| `containerClassName` | `string`                                | —      | Classes CSS sur le conteneur flex externe                      |
+| `className`          | `string`                                | —      | Classes CSS sur l'input caché                                  |
+| `maxLength`          | `number`                                | —      | Nombre total de caractères attendus                            |
+| `pattern`            | `string`                                | —      | Regex de validation par caractère (ex. : `REGEXP_ONLY_DIGITS`) |
+| `...props`           | `React.ComponentProps<typeof OTPInput>` | —      | Props de `OTPInput`                                            |
+
+### `InputOTPGroup`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `InputOTPSlot`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                                     |
+| ----------- | ----------------------------- | ------ | ----------------------------------------------- |
+| `index`     | `number`                      | —      | Position du slot dans la séquence (obligatoire) |
+| `className` | `string`                      | —      | Classes CSS additionnelles                      |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`                        |
+
+### `InputOTPSeparator`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

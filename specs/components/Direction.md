@@ -47,11 +47,24 @@ Aucun token : `components/ui/direction.tsx` n'emploie aucune classe ni variable 
 
 ## Props / API
 
-| Prop        | Type              | Défaut | Description                                                                       |
-| ----------- | ----------------- | ------ | --------------------------------------------------------------------------------- |
-| `dir`       | `"ltr" \| "rtl"`  | —      | Direction de lecture (prop native Radix)                                          |
-| `direction` | `"ltr" \| "rtl"`  | —      | Alias de `dir` pour une API plus explicite ; prioritaire si les deux sont fournis |
-| `children`  | `React.ReactNode` | —      | Arbre de composants enfants                                                       |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `DirectionProvider`
+
+Rend `Direction.DirectionProvider`.
+
+| Prop        | Type                                                              | Défaut | Description                                                                       |
+| ----------- | ----------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------- |
+| `direction` | `React.ComponentProps<typeof Direction.DirectionProvider>["dir"]` | —      | Alias de `dir` pour une API plus explicite ; prioritaire si les deux sont fournis |
+| `dir`       | `Direction`                                                       | —      | Direction de lecture (prop native Radix)                                          |
+| `children`  | `React.ReactNode`                                                 | —      | Arbre de composants enfants                                                       |
+| `...props`  | `React.ComponentProps<typeof Direction.DirectionProvider>`        | —      | Props de `Direction.DirectionProvider`                                            |
+
+### `useDirection`
+
+Type : `(localDir?: Direction) => Direction`.
+
+<!-- Fin de la partie générée. -->
 
 ### Hook exporté
 

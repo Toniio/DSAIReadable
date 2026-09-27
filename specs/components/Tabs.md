@@ -66,15 +66,51 @@ Relevé dans `components/ui/tabs.tsx` et les constantes de `lib/` qu'il importe 
 
 ## Props / API
 
-| Prop            | Type                                       | Défaut         | Description                               |
-| --------------- | ------------------------------------------ | -------------- | ----------------------------------------- |
-| `orientation`   | `"horizontal" \| "vertical"`               | `"horizontal"` | Orientation de la disposition des onglets |
-| `value`         | `string`                                   | —              | Onglet actif (contrôlé)                   |
-| `defaultValue`  | `string`                                   | —              | Onglet actif par défaut                   |
-| `onValueChange` | `(value: string) => void`                  | —              | Callback lors du changement d'onglet      |
-| `variant`       | `"default" \| "line"`                      | `"default"`    | Variante visuelle de `TabsList`           |
-| `className`     | `string`                                   | —              | Classes CSS additionnelles                |
-| `...props`      | `React.ComponentProps<TabsPrimitive.Root>` | —              | Props natives Radix Tabs                  |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Tabs`
+
+Rend `TabsPrimitive.Root`.
+
+| Prop            | Type                                              | Défaut         | Description                               |
+| --------------- | ------------------------------------------------- | -------------- | ----------------------------------------- |
+| `orientation`   | `"horizontal" \| "vertical"`                      | `"horizontal"` | Orientation de la disposition des onglets |
+| `value`         | `string`                                          | —              | Onglet actif (contrôlé)                   |
+| `defaultValue`  | `string`                                          | —              | Onglet actif par défaut                   |
+| `onValueChange` | `(value: string) => void`                         | —              | Callback lors du changement d'onglet      |
+| `className`     | `string`                                          | —              | Classes CSS additionnelles                |
+| `...props`      | `React.ComponentProps<typeof TabsPrimitive.Root>` | —              | Props de `TabsPrimitive.Root`             |
+
+### `TabsList`
+
+Rend `TabsPrimitive.List`.
+
+| Prop       | Type                                              | Défaut      | Description                     |
+| ---------- | ------------------------------------------------- | ----------- | ------------------------------- |
+| `variant`  | `"default" \| "line"`                             | `"default"` | Variante visuelle de `TabsList` |
+| `...props` | `React.ComponentProps<typeof TabsPrimitive.List>` | —           | Props de `TabsPrimitive.List`   |
+
+### `TabsTrigger`
+
+Rend `TabsPrimitive.Trigger`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof TabsPrimitive.Trigger>` | —      | Props de `TabsPrimitive.Trigger` |
+
+### `TabsContent`
+
+Rend `TabsPrimitive.Content`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof TabsPrimitive.Content>` | —      | Props de `TabsPrimitive.Content` |
+
+### `tabsListVariants`
+
+Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+
+<!-- Fin de la partie générée. -->
 
 > **Axes de variantes** — `Tabs` n'a pas de `variant`. Seul `TabsList` en porte un, sur l'axe **apparence** : `default` dessine un conteneur plein, `line` un simple soulignement de l'onglet actif. Les deux décrivent le même comportement de navigation.
 

@@ -79,14 +79,138 @@ Relevé dans `components/ui/dropdown-menu.tsx` et les constantes de `lib/` qu'il
 
 ## Props / API
 
-| Prop         | Type                           | Défaut      | Description                                                                          |
-| ------------ | ------------------------------ | ----------- | ------------------------------------------------------------------------------------ |
-| `align`      | `"start" \| "center" \| "end"` | `"start"`   | Alignement du menu par rapport au trigger (sur `DropdownMenuContent`)                |
-| `sideOffset` | `number`                       | `4`         | Espacement en px entre le trigger et le menu (sur `DropdownMenuContent`)             |
-| `inset`      | `boolean`                      | `undefined` | Padding gauche supplémentaire (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
-| `variant`    | `"default" \| "destructive"`   | `"default"` | Variante visuelle de l'item (sur `DropdownMenuItem`)                                 |
-| `checked`    | `boolean`                      | `undefined` | État coché d'un CheckboxItem                                                         |
-| `className`  | `string`                       | —           | Classes CSS additionnelles (sur chaque sous-composant)                               |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `DropdownMenu`
+
+Rend `DropdownMenuPrimitive.Root`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Root>` | —      | Props de `DropdownMenuPrimitive.Root` |
+
+### `DropdownMenuPortal`
+
+Rend `DropdownMenuPrimitive.Portal`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Portal>` | —      | Props de `DropdownMenuPrimitive.Portal` |
+
+### `DropdownMenuTrigger`
+
+Rend `DropdownMenuPrimitive.Trigger`.
+
+| Prop       | Type                                                         | Défaut | Description                              |
+| ---------- | ------------------------------------------------------------ | ------ | ---------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>` | —      | Props de `DropdownMenuPrimitive.Trigger` |
+
+### `DropdownMenuContent`
+
+Rend `DropdownMenuPrimitive.Content`.
+
+| Prop         | Type                                                         | Défaut    | Description                                                              |
+| ------------ | ------------------------------------------------------------ | --------- | ------------------------------------------------------------------------ |
+| `align`      | `"center" \| "end" \| "start"`                               | `"start"` | Alignement du menu par rapport au trigger (sur `DropdownMenuContent`)    |
+| `sideOffset` | `number`                                                     | `4`       | Espacement en px entre le trigger et le menu (sur `DropdownMenuContent`) |
+| `...props`   | `React.ComponentProps<typeof DropdownMenuPrimitive.Content>` | —         | Props de `DropdownMenuPrimitive.Content`                                 |
+
+### `DropdownMenuGroup`
+
+Rend `DropdownMenuPrimitive.Group`.
+
+| Prop       | Type                                                       | Défaut | Description                            |
+| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Group>` | —      | Props de `DropdownMenuPrimitive.Group` |
+
+### `DropdownMenuLabel`
+
+Rend `DropdownMenuPrimitive.Label`.
+
+| Prop       | Type                                                       | Défaut      | Description                                                                          |
+| ---------- | ---------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                  | `undefined` | Padding gauche supplémentaire (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Label>` | —           | Props de `DropdownMenuPrimitive.Label`                                               |
+
+### `DropdownMenuItem`
+
+Rend `DropdownMenuPrimitive.Item`.
+
+| Prop       | Type                                                      | Défaut      | Description                                                                                |
+| ---------- | --------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                 | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `variant`  | `"default" \| "destructive"`                              | `"default"` | Variante visuelle de l'item (sur `DropdownMenuItem`)                                       |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Item>` | —           | Props de `DropdownMenuPrimitive.Item`                                                      |
+
+### `DropdownMenuCheckboxItem`
+
+Rend `DropdownMenuPrimitive.CheckboxItem`.
+
+| Prop       | Type                                                              | Défaut      | Description                                                                                |
+| ---------- | ----------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                         | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `checked`  | `CheckedState`                                                    | `undefined` | État coché d'un CheckboxItem                                                               |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>` | —           | Props de `DropdownMenuPrimitive.CheckboxItem`                                              |
+
+### `DropdownMenuRadioGroup`
+
+Rend `DropdownMenuPrimitive.RadioGroup`.
+
+| Prop       | Type                                                            | Défaut | Description                                 |
+| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>` | —      | Props de `DropdownMenuPrimitive.RadioGroup` |
+
+### `DropdownMenuRadioItem`
+
+Rend `DropdownMenuPrimitive.RadioItem`.
+
+| Prop       | Type                                                           | Défaut | Description                                                                                |
+| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                      | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>` | —      | Props de `DropdownMenuPrimitive.RadioItem`                                                 |
+
+### `DropdownMenuSeparator`
+
+Rend `DropdownMenuPrimitive.Separator`.
+
+| Prop       | Type                                                           | Défaut | Description                                |
+| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Separator>` | —      | Props de `DropdownMenuPrimitive.Separator` |
+
+### `DropdownMenuShortcut`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut | Description               |
+| ---------- | ------------------------------ | ------ | ------------------------- |
+| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+
+### `DropdownMenuSub`
+
+Rend `DropdownMenuPrimitive.Sub`.
+
+| Prop       | Type                                                     | Défaut | Description                          |
+| ---------- | -------------------------------------------------------- | ------ | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Sub>` | —      | Props de `DropdownMenuPrimitive.Sub` |
+
+### `DropdownMenuSubTrigger`
+
+Rend `DropdownMenuPrimitive.SubTrigger`.
+
+| Prop       | Type                                                            | Défaut | Description                                                                                |
+| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                       | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger>` | —      | Props de `DropdownMenuPrimitive.SubTrigger`                                                |
+
+### `DropdownMenuSubContent`
+
+Rend `DropdownMenuPrimitive.SubContent`.
+
+| Prop       | Type                                                            | Défaut | Description                                 |
+| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>` | —      | Props de `DropdownMenuPrimitive.SubContent` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

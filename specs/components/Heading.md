@@ -55,12 +55,24 @@ Relevé dans `components/ui/heading.tsx` et les constantes de `lib/` qu'il impor
 
 ## Props / API
 
-| Prop        | Type                           | Défaut              | Description                                                    |
-| ----------- | ------------------------------ | ------------------- | -------------------------------------------------------------- |
-| `level`     | `1 \| 2 \| 3 \| 4`             | `1`                 | Niveau hiérarchique et taille visuelle                         |
-| `as`        | `"h1" \| "h2" \| "h3" \| "h4"` | auto (= `h{level}`) | Override du tag HTML si le niveau sémantique diffère du visuel |
-| `className` | `string`                       | —                   | Classes CSS additionnelles                                     |
-| `...props`  | `React.ComponentProps<"h1">`   | —                   | Props natives de l'élément heading                             |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Heading`
+
+Rend `<h{level}>`, ou l'élément choisi par `as`.
+
+| Prop        | Type                         | Défaut              | Description                                                    |
+| ----------- | ---------------------------- | ------------------- | -------------------------------------------------------------- |
+| `level`     | `1 \| 2 \| 3 \| 4`           | `1`                 | Niveau hiérarchique et taille visuelle                         |
+| `as`        | `` `h${HeadingLevel}` ``     | auto (= `h{level}`) | Override du tag HTML si le niveau sémantique diffère du visuel |
+| `className` | `string`                     | —                   | Classes CSS additionnelles                                     |
+| `...props`  | `React.ComponentProps<"h1">` | —                   | Props natives de `<h1>`                                        |
+
+### `headingVariants`
+
+Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+
+<!-- Fin de la partie générée. -->
 
 Correspondance `level` → taille. La graisse est `font-semibold` et la
 gouttière `tracking-tight` à tous les niveaux, aucun niveau ne les redéfinit.

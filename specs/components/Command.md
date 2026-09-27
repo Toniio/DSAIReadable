@@ -72,19 +72,87 @@ Compose `Dialog`, `InputGroup` : les tokens de ces composants sont listés dans 
 
 ## Props / API
 
-| Prop              | Type                                                  | Défaut                             | Description                                |
-| ----------------- | ----------------------------------------------------- | ---------------------------------- | ------------------------------------------ |
-| `className`       | `string`                                              | —                                  | Classes CSS additionnelles sur la racine   |
-| `...props`        | `React.ComponentProps<typeof CommandPrimitive>`       | —                                  | Toutes les props de `cmdk` Command         |
-| **CommandDialog** |                                                       |                                    |                                            |
-| `title`           | `string`                                              | `"Command Palette"`                | Titre accessible du dialog (sr-only)       |
-| `description`     | `string`                                              | `"Search for a command to run..."` | Description accessible du dialog (sr-only) |
-| `className`       | `string`                                              | —                                  | Classes CSS additionnelles sur le contenu  |
-| `showCloseButton` | `boolean`                                             | `false`                            | Affiche le bouton de fermeture du dialog   |
-| `...props`        | `React.ComponentProps<typeof Dialog>`                 | —                                  | Props du composant Dialog                  |
-| **CommandInput**  |                                                       |                                    |                                            |
-| `className`       | `string`                                              | —                                  | Classes CSS additionnelles                 |
-| `...props`        | `React.ComponentProps<typeof CommandPrimitive.Input>` | —                                  | Props de l'input cmdk                      |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Command`
+
+Rend `CommandPrimitive`.
+
+| Prop        | Type                                            | Défaut | Description                              |
+| ----------- | ----------------------------------------------- | ------ | ---------------------------------------- |
+| `className` | `string`                                        | —      | Classes CSS additionnelles sur la racine |
+| `...props`  | `React.ComponentProps<typeof CommandPrimitive>` | —      | Props de `CommandPrimitive`              |
+
+### `CommandDialog`
+
+Rend `Dialog`.
+
+| Prop              | Type                                  | Défaut                             | Description                                |
+| ----------------- | ------------------------------------- | ---------------------------------- | ------------------------------------------ |
+| `title`           | `string`                              | `"Command Palette"`                | Titre accessible du dialog (sr-only)       |
+| `description`     | `string`                              | `"Search for a command to run..."` | Description accessible du dialog (sr-only) |
+| `className`       | `string`                              | —                                  | Classes CSS additionnelles sur le contenu  |
+| `showCloseButton` | `boolean`                             | `false`                            | Affiche le bouton de fermeture du dialog   |
+| `...props`        | `React.ComponentProps<typeof Dialog>` | —                                  | Props de `Dialog`                          |
+
+### `CommandInput`
+
+Rend `CommandPrimitive.Input`, dans un `<div>`.
+
+| Prop        | Type                                                  | Défaut | Description                       |
+| ----------- | ----------------------------------------------------- | ------ | --------------------------------- |
+| `className` | `string`                                              | —      | Classes CSS additionnelles        |
+| `...props`  | `React.ComponentProps<typeof CommandPrimitive.Input>` | —      | Props de `CommandPrimitive.Input` |
+
+### `CommandList`
+
+Rend `CommandPrimitive.List`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.List>` | —      | Props de `CommandPrimitive.List` |
+
+### `CommandEmpty`
+
+Rend `CommandPrimitive.Empty`.
+
+| Prop       | Type                                                  | Défaut | Description                       |
+| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Empty>` | —      | Props de `CommandPrimitive.Empty` |
+
+### `CommandGroup`
+
+Rend `CommandPrimitive.Group`.
+
+| Prop       | Type                                                  | Défaut | Description                       |
+| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Group>` | —      | Props de `CommandPrimitive.Group` |
+
+### `CommandItem`
+
+Rend `CommandPrimitive.Item`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Item>` | —      | Props de `CommandPrimitive.Item` |
+
+### `CommandShortcut`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut | Description               |
+| ---------- | ------------------------------ | ------ | ------------------------- |
+| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+
+### `CommandSeparator`
+
+Rend `CommandPrimitive.Separator`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Separator>` | —      | Props de `CommandPrimitive.Separator` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

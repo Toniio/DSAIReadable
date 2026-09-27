@@ -66,54 +66,81 @@ Relevé dans `components/ui/table.tsx` et les constantes de `lib/` qu'il importe
 
 ## Props / API
 
-### Table
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Table`
+
+Rend `<table>`, dans un `<div>`.
 
 | Prop        | Type                            | Défaut | Description                              |
 | ----------- | ------------------------------- | ------ | ---------------------------------------- |
 | `className` | `string`                        | —      | Classes CSS additionnelles sur `<table>` |
-| `...props`  | `React.ComponentProps<"table">` | —      | Toutes les props natives de `<table>`    |
+| `...props`  | `React.ComponentProps<"table">` | —      | Props natives de `<table>`               |
 
-### TableHeader
+### `TableHeader`
 
-| Prop        | Type     | Défaut | Description                              |
-| ----------- | -------- | ------ | ---------------------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles sur `<thead>` |
+Rend `<thead>`.
 
-### TableBody
+| Prop        | Type                            | Défaut | Description                              |
+| ----------- | ------------------------------- | ------ | ---------------------------------------- |
+| `className` | `string`                        | —      | Classes CSS additionnelles sur `<thead>` |
+| `...props`  | `React.ComponentProps<"thead">` | —      | Props natives de `<thead>`               |
 
-| Prop        | Type     | Défaut | Description                              |
-| ----------- | -------- | ------ | ---------------------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles sur `<tbody>` |
+### `TableBody`
 
-### TableFooter
+Rend `<tbody>`.
 
-| Prop        | Type     | Défaut | Description                              |
-| ----------- | -------- | ------ | ---------------------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles sur `<tfoot>` |
+| Prop        | Type                            | Défaut | Description                              |
+| ----------- | ------------------------------- | ------ | ---------------------------------------- |
+| `className` | `string`                        | —      | Classes CSS additionnelles sur `<tbody>` |
+| `...props`  | `React.ComponentProps<"tbody">` | —      | Props natives de `<tbody>`               |
 
-### TableRow
+### `TableFooter`
 
-| Prop        | Type     | Défaut | Description                           |
-| ----------- | -------- | ------ | ------------------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles sur `<tr>` |
+Rend `<tfoot>`.
 
-### TableHead
+| Prop        | Type                            | Défaut | Description                              |
+| ----------- | ------------------------------- | ------ | ---------------------------------------- |
+| `className` | `string`                        | —      | Classes CSS additionnelles sur `<tfoot>` |
+| `...props`  | `React.ComponentProps<"tfoot">` | —      | Props natives de `<tfoot>`               |
 
-| Prop        | Type     | Défaut | Description                           |
-| ----------- | -------- | ------ | ------------------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles sur `<th>` |
+### `TableHead`
 
-### TableCell
+Rend `<th>`.
 
-| Prop        | Type     | Défaut | Description                           |
-| ----------- | -------- | ------ | ------------------------------------- |
-| `className` | `string` | —      | Classes CSS additionnelles sur `<td>` |
+| Prop        | Type                         | Défaut | Description                           |
+| ----------- | ---------------------------- | ------ | ------------------------------------- |
+| `className` | `string`                     | —      | Classes CSS additionnelles sur `<th>` |
+| `...props`  | `React.ComponentProps<"th">` | —      | Props natives de `<th>`               |
 
-### TableCaption
+### `TableRow`
 
-| Prop        | Type     | Défaut | Description                                |
-| ----------- | -------- | ------ | ------------------------------------------ |
-| `className` | `string` | —      | Classes CSS additionnelles sur `<caption>` |
+Rend `<tr>`.
+
+| Prop        | Type                         | Défaut | Description                           |
+| ----------- | ---------------------------- | ------ | ------------------------------------- |
+| `className` | `string`                     | —      | Classes CSS additionnelles sur `<tr>` |
+| `...props`  | `React.ComponentProps<"tr">` | —      | Props natives de `<tr>`               |
+
+### `TableCell`
+
+Rend `<td>`.
+
+| Prop        | Type                         | Défaut | Description                           |
+| ----------- | ---------------------------- | ------ | ------------------------------------- |
+| `className` | `string`                     | —      | Classes CSS additionnelles sur `<td>` |
+| `...props`  | `React.ComponentProps<"td">` | —      | Props natives de `<td>`               |
+
+### `TableCaption`
+
+Rend `<caption>`.
+
+| Prop        | Type                              | Défaut | Description                                |
+| ----------- | --------------------------------- | ------ | ------------------------------------------ |
+| `className` | `string`                          | —      | Classes CSS additionnelles sur `<caption>` |
+| `...props`  | `React.ComponentProps<"caption">` | —      | Props natives de `<caption>`               |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

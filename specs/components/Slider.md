@@ -59,21 +59,29 @@ Relevé dans `components/ui/slider.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Slider`
+
+Rend `SliderPrimitive.Root`.
+
 | Prop              | Type                                                | Défaut         | Description                                                              |
 | ----------------- | --------------------------------------------------- | -------------- | ------------------------------------------------------------------------ |
-| `value`           | `number[]`                                          | —              | Valeur(s) contrôlée(s) du slider                                         |
-| `defaultValue`    | `number[]`                                          | —              | Valeur(s) par défaut (non contrôlé)                                      |
 | `min`             | `number`                                            | `0`            | Valeur minimale de la plage                                              |
 | `max`             | `number`                                            | `100`          | Valeur maximale de la plage                                              |
+| `thumbLabels`     | `string[]`                                          | —              | Nom de chaque poignée, dans l'ordre des valeurs ; prime sur `aria-label` |
+| `value`           | `number[]`                                          | —              | Valeur(s) contrôlée(s) du slider                                         |
+| `defaultValue`    | `number[]`                                          | —              | Valeur(s) par défaut (non contrôlé)                                      |
 | `step`            | `number`                                            | `1`            | Incrément entre les valeurs                                              |
 | `orientation`     | `"horizontal" \| "vertical"`                        | `"horizontal"` | Orientation du slider                                                    |
 | `onValueChange`   | `(value: number[]) => void`                         | —              | Callback de changement de valeur                                         |
 | `disabled`        | `boolean`                                           | `false`        | Désactive le slider                                                      |
 | `aria-label`      | `string`                                            | —              | Nom de la poignée unique, ou du groupe de poignées                       |
 | `aria-labelledby` | `string`                                            | —              | Idem, par référence à l'`id` d'un libellé visible                        |
-| `thumbLabels`     | `string[]`                                          | —              | Nom de chaque poignée, dans l'ordre des valeurs ; prime sur `aria-label` |
 | `className`       | `string`                                            | —              | Classes CSS additionnelles                                               |
-| `...props`        | `React.ComponentProps<typeof SliderPrimitive.Root>` | —              | Props Radix Slider.Root                                                  |
+| `...props`        | `React.ComponentProps<typeof SliderPrimitive.Root>` | —              | Props de `SliderPrimitive.Root`                                          |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

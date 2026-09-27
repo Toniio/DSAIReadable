@@ -71,17 +71,34 @@ Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop              | Type                                                             | Défaut    | Description                                                                   |
-| ----------------- | ---------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------- |
-| `className`       | `string`                                                         | —         | Classes CSS additionnelles sur le conteneur                                   |
-| `classNames`      | `Partial<ClassNames>`                                            | —         | Surcharge des classes CSS internes de `react-day-picker`                      |
-| `showOutsideDays` | `boolean`                                                        | `true`    | Affiche les jours du mois précédent/suivant                                   |
-| `captionLayout`   | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"` | Mode d'affichage du titre (label statique ou dropdown)                        |
-| `buttonVariant`   | `ButtonVariant`                                                  | `"ghost"` | Variante visuelle des boutons de navigation                                   |
-| `locale`          | `Partial<Locale>`                                                | —         | Locale pour le formatage des dates et mois                                    |
-| `formatters`      | `Formatters`                                                     | —         | Fonctions de formatage personnalisées                                         |
-| `components`      | `Components`                                                     | —         | Surcharge des sous-composants internes                                        |
-| `...props`        | `React.ComponentProps<typeof DayPicker>`                         | —         | Toutes les props de `react-day-picker` (`mode`, `selected`, `onSelect`, etc.) |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Calendar`
+
+Rend `DayPicker`.
+
+| Prop              | Type                                                                          | Défaut    | Description                                              |
+| ----------------- | ----------------------------------------------------------------------------- | --------- | -------------------------------------------------------- |
+| `captionLayout`   | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"`              | `"label"` | Mode d'affichage du titre (label statique ou dropdown)   |
+| `showOutsideDays` | `boolean`                                                                     | `true`    | Affiche les jours du mois précédent/suivant              |
+| `buttonVariant`   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"ghost"` | Variante visuelle des boutons de navigation              |
+| `className`       | `string`                                                                      | —         | Classes CSS additionnelles sur le conteneur              |
+| `classNames`      | `Partial<ClassNames> & Partial<DeprecatedUI<string>>`                         | —         | Surcharge des classes CSS internes de `react-day-picker` |
+| `locale`          | `Partial<DayPickerLocale>`                                                    | —         | Locale pour le formatage des dates et mois               |
+| `formatters`      | `Partial<Formatters>`                                                         | —         | Fonctions de formatage personnalisées                    |
+| `components`      | `Partial<CustomComponents>`                                                   | —         | Surcharge des sous-composants internes                   |
+| `...props`        | `React.ComponentProps<typeof DayPicker>`                                      | —         | Props de `DayPicker`                                     |
+
+### `CalendarDayButton`
+
+Rend `Button`.
+
+| Prop       | Type                                     | Défaut | Description                                                             |
+| ---------- | ---------------------------------------- | ------ | ----------------------------------------------------------------------- |
+| `locale`   | `Partial<Locale>`                        | —      | Locale `date-fns` transmise par `Calendar` ; sert à formater `data-day` |
+| `...props` | `React.ComponentProps<typeof DayButton>` | —      | Props de `DayButton`                                                    |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

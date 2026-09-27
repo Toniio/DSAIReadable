@@ -77,42 +77,103 @@ Compose `Separator` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop                | Type                                     | Défaut      | Description                                       |
-| ------------------- | ---------------------------------------- | ----------- | ------------------------------------------------- |
-| **Item**            |                                          |             |                                                   |
-| `variant`           | `"default" \| "outline" \| "muted"`      | `"default"` | Apparence visuelle de l'item                      |
-| `size`              | `"default" \| "sm" \| "xs"`              | `"default"` | Taille et espacement interne                      |
-| `asChild`           | `boolean`                                | `false`     | Délègue le rendu au premier enfant via Radix Slot |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemMedia**       |                                          |             |                                                   |
-| `variant`           | `"default" \| "icon" \| "image"`         | `"default"` | Type de média affiché                             |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemContent**     |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemTitle**       |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemDescription** |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"p">`              | —           | Props natives du `<p>`                            |
-| **ItemActions**     |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemHeader**      |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemFooter**      |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemGroup**       |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<"div">`            | —           | Props natives du `<div>`                          |
-| **ItemSeparator**   |                                          |             |                                                   |
-| `className`         | `string`                                 | —           | Classes CSS additionnelles                        |
-| `...props`          | `React.ComponentProps<typeof Separator>` | —           | Props du composant `Separator`                    |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Item`
+
+Rend `<div>`, ou son enfant avec `asChild`.
+
+| Prop        | Type                                | Défaut      | Description                                       |
+| ----------- | ----------------------------------- | ----------- | ------------------------------------------------- |
+| `variant`   | `"default" \| "outline" \| "muted"` | `"default"` | Apparence visuelle de l'item                      |
+| `size`      | `"default" \| "sm" \| "xs"`         | `"default"` | Taille et espacement interne                      |
+| `asChild`   | `boolean`                           | `false`     | Délègue le rendu au premier enfant via Radix Slot |
+| `className` | `string`                            | —           | Classes CSS additionnelles                        |
+| `...props`  | `React.ComponentProps<"div">`       | —           | Props natives de `<div>`                          |
+
+### `ItemMedia`
+
+Rend `<div>`.
+
+| Prop        | Type                             | Défaut      | Description                |
+| ----------- | -------------------------------- | ----------- | -------------------------- |
+| `variant`   | `"default" \| "icon" \| "image"` | `"default"` | Type de média affiché      |
+| `className` | `string`                         | —           | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">`    | —           | Props natives de `<div>`   |
+
+### `ItemContent`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `ItemActions`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `ItemGroup`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `ItemSeparator`
+
+Rend `Separator`.
+
+| Prop        | Type                                     | Défaut | Description                |
+| ----------- | ---------------------------------------- | ------ | -------------------------- |
+| `className` | `string`                                 | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<typeof Separator>` | —      | Props de `Separator`       |
+
+### `ItemTitle`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `ItemDescription`
+
+Rend `<p>`.
+
+| Prop        | Type                        | Défaut | Description                |
+| ----------- | --------------------------- | ------ | -------------------------- |
+| `className` | `string`                    | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"p">` | —      | Props natives de `<p>`     |
+
+### `ItemHeader`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `ItemFooter`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+<!-- Fin de la partie générée. -->
 
 > **Axes de variantes** — `Item` et `ItemMedia` portent chacun un `variant`, sur deux axes différents. Sur `Item`, c'est l'**apparence** : `default`, `outline`, `muted`. Sur `ItemMedia`, c'est le **type de média** que le slot contient : `default` (texte ou badge), `icon`, `image` — il conditionne la taille et le rognage. `<Item variant="icon">` n'existe pas.
 

@@ -86,29 +86,147 @@ Compose `Button`, `InputGroup` : les tokens de ces composants sont listés dans 
 
 ## Props / API
 
-| Prop                | Type                                     | Défaut              | Description                                                                |
-| ------------------- | ---------------------------------------- | ------------------- | -------------------------------------------------------------------------- |
-| `Combobox`          | `ComboboxPrimitive.Root.Props`           | —                   | Racine du composant, gère l'état ouvert/fermé et la valeur                 |
-| **ComboboxInput**   |                                          |                     |                                                                            |
-| `showTrigger`       | `boolean`                                | `true`              | Affiche le bouton chevron pour ouvrir le popup                             |
-| `showClear`         | `boolean`                                | `false`             | Affiche le bouton de réinitialisation                                      |
-| `triggerLabel`      | `string`                                 | `"Open list"`       | Nom accessible du bouton chevron, transmis à `ComboboxTrigger`             |
-| `clearLabel`        | `string`                                 | `"Clear selection"` | Nom accessible du bouton de réinitialisation, transmis à `ComboboxClear`   |
-| `disabled`          | `boolean`                                | `false`             | Désactive le champ de saisie                                               |
-| `className`         | `string`                                 | —                   | Classes CSS additionnelles                                                 |
-| **ComboboxContent** |                                          |                     |                                                                            |
-| `side`              | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"`          | Côté d'affichage du popup                                                  |
-| `sideOffset`        | `number`                                 | `6`                 | Décalage par rapport au trigger                                            |
-| `align`             | `"start" \| "center" \| "end"`           | `"start"`           | Alignement du popup                                                        |
-| `alignOffset`       | `number`                                 | `0`                 | Décalage d'alignement                                                      |
-| `anchor`            | `HTMLElement \| null`                    | —                   | Élément d'ancrage (pour mode chips)                                        |
-| **ComboboxTrigger** |                                          |                     |                                                                            |
-| `triggerLabel`      | `string`                                 | `"Open list"`       | `aria-label` appliqué uniquement quand le trigger n'a pas d'enfant visible |
-| **ComboboxClear**   |                                          |                     |                                                                            |
-| `clearLabel`        | `string`                                 | `"Clear selection"` | `aria-label` du bouton de réinitialisation                                 |
-| **ComboboxChip**    |                                          |                     |                                                                            |
-| `showRemove`        | `boolean`                                | `true`              | Affiche le bouton de suppression de la chip                                |
-| `removeLabel`       | `string`                                 | `"Remove"`          | `aria-label` du bouton de suppression de la chip                           |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Combobox`
+
+Rend `ComboboxPrimitive.Root`.
+
+| Prop       | Type                                            | Défaut | Description                       |
+| ---------- | ----------------------------------------------- | ------ | --------------------------------- |
+| `...props` | `ComboboxPrimitive.Root.Props<Value, Multiple>` | —      | Props de `ComboboxPrimitive.Root` |
+
+### `ComboboxInput`
+
+Rend `ComboboxPrimitive.Input`.
+
+| Prop           | Type                                                           | Défaut              | Description                                                              |
+| -------------- | -------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------ |
+| `disabled`     | `boolean`                                                      | `false`             | Désactive le champ de saisie                                             |
+| `showTrigger`  | `boolean`                                                      | `true`              | Affiche le bouton chevron pour ouvrir le popup                           |
+| `showClear`    | `boolean`                                                      | `false`             | Affiche le bouton de réinitialisation                                    |
+| `triggerLabel` | `string`                                                       | `"Open list"`       | Nom accessible du bouton chevron, transmis à `ComboboxTrigger`           |
+| `clearLabel`   | `string`                                                       | `"Clear selection"` | Nom accessible du bouton de réinitialisation, transmis à `ComboboxClear` |
+| `className`    | `string \| (state: ComboboxInputState) => string \| undefined` | —                   | Classes CSS additionnelles                                               |
+| `...props`     | `ComboboxPrimitive.Input.Props`                                | —                   | Props de `ComboboxPrimitive.Input`                                       |
+
+### `ComboboxContent`
+
+Rend `ComboboxPrimitive.Popup`.
+
+| Prop          | Type                                                                                                                                         | Défaut     | Description                         |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------- |
+| `align`       | `Align`                                                                                                                                      | `"start"`  | Alignement du popup                 |
+| `side`        | `Side`                                                                                                                                       | `"bottom"` | Côté d'affichage du popup           |
+| `sideOffset`  | `number \| OffsetFunction`                                                                                                                   | `6`        | Décalage par rapport au trigger     |
+| `alignOffset` | `number \| OffsetFunction`                                                                                                                   | `0`        | Décalage d'alignement               |
+| `anchor`      | `Element \| VirtualElement \| React.RefObject<Element \| null> \| () => Element \| VirtualElement \| null`                                   | —          | Élément d'ancrage (pour mode chips) |
+| `...props`    | `ComboboxPrimitive.Popup.Props & Pick< ComboboxPrimitive.Positioner.Props, "side" \| "align" \| "sideOffset" \| "alignOffset" \| "anchor" >` | —          | Props de `ComboboxPrimitive.Popup`  |
+
+### `ComboboxList`
+
+Rend `ComboboxPrimitive.List`.
+
+| Prop       | Type                           | Défaut | Description                       |
+| ---------- | ------------------------------ | ------ | --------------------------------- |
+| `...props` | `ComboboxPrimitive.List.Props` | —      | Props de `ComboboxPrimitive.List` |
+
+### `ComboboxItem`
+
+Rend `ComboboxPrimitive.Item`.
+
+| Prop       | Type                           | Défaut | Description                       |
+| ---------- | ------------------------------ | ------ | --------------------------------- |
+| `...props` | `ComboboxPrimitive.Item.Props` | —      | Props de `ComboboxPrimitive.Item` |
+
+### `ComboboxGroup`
+
+Rend `ComboboxPrimitive.Group`.
+
+| Prop       | Type                            | Défaut | Description                        |
+| ---------- | ------------------------------- | ------ | ---------------------------------- |
+| `...props` | `ComboboxPrimitive.Group.Props` | —      | Props de `ComboboxPrimitive.Group` |
+
+### `ComboboxLabel`
+
+Rend `ComboboxPrimitive.GroupLabel`.
+
+| Prop       | Type                                 | Défaut | Description                             |
+| ---------- | ------------------------------------ | ------ | --------------------------------------- |
+| `...props` | `ComboboxPrimitive.GroupLabel.Props` | —      | Props de `ComboboxPrimitive.GroupLabel` |
+
+### `ComboboxCollection`
+
+Rend `ComboboxPrimitive.Collection`.
+
+| Prop       | Type                                 | Défaut | Description                             |
+| ---------- | ------------------------------------ | ------ | --------------------------------------- |
+| `...props` | `ComboboxPrimitive.Collection.Props` | —      | Props de `ComboboxPrimitive.Collection` |
+
+### `ComboboxEmpty`
+
+Rend `ComboboxPrimitive.Empty`.
+
+| Prop       | Type                            | Défaut | Description                        |
+| ---------- | ------------------------------- | ------ | ---------------------------------- |
+| `...props` | `ComboboxPrimitive.Empty.Props` | —      | Props de `ComboboxPrimitive.Empty` |
+
+### `ComboboxSeparator`
+
+Rend `ComboboxPrimitive.Separator`.
+
+| Prop       | Type                                | Défaut | Description                            |
+| ---------- | ----------------------------------- | ------ | -------------------------------------- |
+| `...props` | `ComboboxPrimitive.Separator.Props` | —      | Props de `ComboboxPrimitive.Separator` |
+
+### `ComboboxChips`
+
+Rend `ComboboxPrimitive.Chips`.
+
+| Prop       | Type                                                                                          | Défaut | Description                        |
+| ---------- | --------------------------------------------------------------------------------------------- | ------ | ---------------------------------- |
+| `...props` | `React.ComponentPropsWithRef<typeof ComboboxPrimitive.Chips> & ComboboxPrimitive.Chips.Props` | —      | Props de `ComboboxPrimitive.Chips` |
+
+### `ComboboxChip`
+
+Rend `ComboboxPrimitive.Chip`.
+
+| Prop          | Type                           | Défaut     | Description                                      |
+| ------------- | ------------------------------ | ---------- | ------------------------------------------------ |
+| `showRemove`  | `boolean`                      | `true`     | Affiche le bouton de suppression de la chip      |
+| `removeLabel` | `string`                       | `"Remove"` | `aria-label` du bouton de suppression de la chip |
+| `...props`    | `ComboboxPrimitive.Chip.Props` | —          | Props de `ComboboxPrimitive.Chip`                |
+
+### `ComboboxChipsInput`
+
+Rend `ComboboxPrimitive.Input`.
+
+| Prop       | Type                            | Défaut | Description                        |
+| ---------- | ------------------------------- | ------ | ---------------------------------- |
+| `...props` | `ComboboxPrimitive.Input.Props` | —      | Props de `ComboboxPrimitive.Input` |
+
+### `ComboboxTrigger`
+
+Rend `ComboboxPrimitive.Trigger`.
+
+| Prop           | Type                              | Défaut        | Description                                                                |
+| -------------- | --------------------------------- | ------------- | -------------------------------------------------------------------------- |
+| `triggerLabel` | `string`                          | `"Open list"` | `aria-label` appliqué uniquement quand le trigger n'a pas d'enfant visible |
+| `...props`     | `ComboboxPrimitive.Trigger.Props` | —             | Props de `ComboboxPrimitive.Trigger`                                       |
+
+### `ComboboxValue`
+
+Rend `ComboboxPrimitive.Value`.
+
+| Prop       | Type                            | Défaut | Description                        |
+| ---------- | ------------------------------- | ------ | ---------------------------------- |
+| `...props` | `ComboboxPrimitive.Value.Props` | —      | Props de `ComboboxPrimitive.Value` |
+
+### `useComboboxAnchor()`
+
+Retourne `React.RefObject<HTMLDivElement \| null>`.
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

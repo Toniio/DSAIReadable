@@ -55,13 +55,75 @@ Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop        | Type                        | Défaut                  | Description                                           |
-| ----------- | --------------------------- | ----------------------- | ----------------------------------------------------- |
-| `className` | `string`                    | —                       | Classes CSS additionnelles sur le `<nav>` racine      |
-| `isActive`  | `boolean`                   | —                       | Marque le lien comme page courante (`PaginationLink`) |
-| `size`      | `ButtonProps["size"]`       | `"icon"`                | Taille du bouton wrapper (`PaginationLink`)           |
-| `text`      | `string`                    | `"Previous"` / `"Next"` | Texte des boutons précédent/suivant                   |
-| `...props`  | `React.ComponentProps<"a">` | —                       | Props natives du `<a>` pour `PaginationLink`          |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Pagination`
+
+Rend `<nav>`.
+
+| Prop        | Type                          | Défaut | Description                                      |
+| ----------- | ----------------------------- | ------ | ------------------------------------------------ |
+| `className` | `string`                      | —      | Classes CSS additionnelles sur le `<nav>` racine |
+| `...props`  | `React.ComponentProps<"nav">` | —      | Props natives de `<nav>`                         |
+
+### `PaginationContent`
+
+Rend `<ul>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"ul">` | —      | Props natives de `<ul>` |
+
+### `PaginationEllipsis`
+
+Rend `<span>`.
+
+| Prop       | Type                           | Défaut                           | Description                                                            |
+| ---------- | ------------------------------ | -------------------------------- | ---------------------------------------------------------------------- |
+| `srLabel`  | `string`                       | `UI_STRINGS.pagination.ellipsis` | Texte lu par les lecteurs d'écran ; remplace la valeur de `UI_STRINGS` |
+| `...props` | `React.ComponentProps<"span">` | —                                | Props natives de `<span>`                                              |
+
+### `PaginationItem`
+
+Rend `<li>`.
+
+| Prop       | Type                         | Défaut | Description             |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| `...props` | `React.ComponentProps<"li">` | —      | Props natives de `<li>` |
+
+### `PaginationLink`
+
+Rend `<a>`.
+
+| Prop       | Type                                                                                 | Défaut   | Description                                           |
+| ---------- | ------------------------------------------------------------------------------------ | -------- | ----------------------------------------------------- |
+| `isActive` | `boolean`                                                                            | —        | Marque le lien comme page courante (`PaginationLink`) |
+| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon"` | Taille du bouton wrapper (`PaginationLink`)           |
+| `...props` | `PaginationLinkProps`                                                                | —        | Props de `PaginationLink`                             |
+
+### `PaginationNext`
+
+Rend `PaginationLink`.
+
+| Prop       | Type                                          | Défaut                            | Description                                                                |
+| ---------- | --------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------- |
+| `isActive` | `boolean`                                     | —                                 | Marque l'élément courant (page ou entrée active)                           |
+| `text`     | `string`                                      | `UI_STRINGS.pagination.nextText`  | Texte des boutons précédent/suivant                                        |
+| `label`    | `string`                                      | `UI_STRINGS.pagination.nextLabel` | Nom accessible du lien (`aria-label`) ; remplace la valeur de `UI_STRINGS` |
+| `...props` | `React.ComponentProps<typeof PaginationLink>` | —                                 | Props de `PaginationLink`                                                  |
+
+### `PaginationPrevious`
+
+Rend `PaginationLink`.
+
+| Prop       | Type                                          | Défaut                                | Description                                                                |
+| ---------- | --------------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------- |
+| `isActive` | `boolean`                                     | —                                     | Marque l'élément courant (page ou entrée active)                           |
+| `text`     | `string`                                      | `UI_STRINGS.pagination.previousText`  | Texte visible du lien ; remplace la valeur de `UI_STRINGS`                 |
+| `label`    | `string`                                      | `UI_STRINGS.pagination.previousLabel` | Nom accessible du lien (`aria-label`) ; remplace la valeur de `UI_STRINGS` |
+| `...props` | `React.ComponentProps<typeof PaginationLink>` | —                                     | Props de `PaginationLink`                                                  |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

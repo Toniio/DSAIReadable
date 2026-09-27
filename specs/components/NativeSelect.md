@@ -64,18 +64,37 @@ Relevé dans `components/ui/native-select.tsx` et les constantes de `lib/` qu'il
 
 ## Props / API
 
-| Prop                     | Type                                           | Défaut      | Description                                     |
-| ------------------------ | ---------------------------------------------- | ----------- | ----------------------------------------------- |
-| **NativeSelect**         |                                                |             |                                                 |
-| `size`                   | `"sm" \| "default"`                            | `"default"` | Taille du select (`h-8` default, `h-7` sm)      |
-| `className`              | `string`                                       | —           | Classes CSS additionnelles sur le wrapper       |
-| `...props`               | `Omit<React.ComponentProps<"select">, "size">` | —           | Props natives du `<select>` (sauf `size` natif) |
-| **NativeSelectOption**   |                                                |             |                                                 |
-| `className`              | `string`                                       | —           | Classes CSS additionnelles                      |
-| `...props`               | `React.ComponentProps<"option">`               | —           | Props natives de `<option>`                     |
-| **NativeSelectOptGroup** |                                                |             |                                                 |
-| `className`              | `string`                                       | —           | Classes CSS additionnelles                      |
-| `...props`               | `React.ComponentProps<"optgroup">`             | —           | Props natives de `<optgroup>`                   |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `NativeSelect`
+
+Rend `<select>`, dans un `<div>`.
+
+| Prop        | Type                | Défaut      | Description                                |
+| ----------- | ------------------- | ----------- | ------------------------------------------ |
+| `size`      | `"sm" \| "default"` | `"default"` | Taille du select (`h-8` default, `h-7` sm) |
+| `className` | `string`            | —           | Classes CSS additionnelles sur le wrapper  |
+| `...props`  | `NativeSelectProps` | —           | Props de `NativeSelect`                    |
+
+### `NativeSelectOptGroup`
+
+Rend `<optgroup>`.
+
+| Prop        | Type                               | Défaut | Description                   |
+| ----------- | ---------------------------------- | ------ | ----------------------------- |
+| `className` | `string`                           | —      | Classes CSS additionnelles    |
+| `...props`  | `React.ComponentProps<"optgroup">` | —      | Props natives de `<optgroup>` |
+
+### `NativeSelectOption`
+
+Rend `<option>`.
+
+| Prop        | Type                             | Défaut | Description                 |
+| ----------- | -------------------------------- | ------ | --------------------------- |
+| `className` | `string`                         | —      | Classes CSS additionnelles  |
+| `...props`  | `React.ComponentProps<"option">` | —      | Props natives de `<option>` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

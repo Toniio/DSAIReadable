@@ -75,23 +75,98 @@ Relevé dans `components/ui/select.tsx` et les constantes de `lib/` qu'il import
 
 ## Props / API
 
-| Prop              | Type                                                   | Défaut           | Description                                                |
-| ----------------- | ------------------------------------------------------ | ---------------- | ---------------------------------------------------------- |
-| **Select**        |                                                        |                  |                                                            |
-| `...props`        | `React.ComponentProps<typeof SelectPrimitive.Root>`    | —                | Props Radix Select.Root (value, onValueChange, open, etc.) |
-| **SelectTrigger** |                                                        |                  |                                                            |
-| `size`            | `"sm" \| "default"`                                    | `"default"`      | Taille du trigger (`h-8` default, `h-7` sm)                |
-| `className`       | `string`                                               | —                | Classes CSS additionnelles                                 |
-| `children`        | `ReactNode`                                            | —                | Contenu du trigger (typiquement `<SelectValue>`)           |
-| `...props`        | `React.ComponentProps<typeof SelectPrimitive.Trigger>` | —                | Props Radix Select.Trigger                                 |
-| **SelectContent** |                                                        |                  |                                                            |
-| `position`        | `"item-aligned" \| "popper"`                           | `"item-aligned"` | Mode de positionnement du popup                            |
-| `align`           | `"start" \| "center" \| "end"`                         | `"center"`       | Alignement du contenu                                      |
-| `className`       | `string`                                               | —                | Classes CSS additionnelles                                 |
-| **SelectItem**    |                                                        |                  |                                                            |
-| `value`           | `string`                                               | —                | Valeur de l'option (obligatoire)                           |
-| `className`       | `string`                                               | —                | Classes CSS additionnelles                                 |
-| `children`        | `ReactNode`                                            | —                | Contenu affiché de l'option                                |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Select`
+
+Rend `SelectPrimitive.Root`.
+
+| Prop       | Type                                                | Défaut | Description                     |
+| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Root>` | —      | Props de `SelectPrimitive.Root` |
+
+### `SelectContent`
+
+Rend `SelectPrimitive.Content`.
+
+| Prop        | Type                                                   | Défaut           | Description                        |
+| ----------- | ------------------------------------------------------ | ---------------- | ---------------------------------- |
+| `position`  | `"item-aligned" \| "popper"`                           | `"item-aligned"` | Mode de positionnement du popup    |
+| `align`     | `"center" \| "end" \| "start"`                         | `"center"`       | Alignement du contenu              |
+| `className` | `string`                                               | —                | Classes CSS additionnelles         |
+| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Content>` | —                | Props de `SelectPrimitive.Content` |
+
+### `SelectGroup`
+
+Rend `SelectPrimitive.Group`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Group>` | —      | Props de `SelectPrimitive.Group` |
+
+### `SelectItem`
+
+Rend `SelectPrimitive.Item`.
+
+| Prop        | Type                                                | Défaut | Description                      |
+| ----------- | --------------------------------------------------- | ------ | -------------------------------- |
+| `value`     | `string`                                            | —      | Valeur de l'option (obligatoire) |
+| `className` | `string`                                            | —      | Classes CSS additionnelles       |
+| `children`  | `React.ReactNode`                                   | —      | Contenu affiché de l'option      |
+| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Item>` | —      | Props de `SelectPrimitive.Item`  |
+
+### `SelectLabel`
+
+Rend `SelectPrimitive.Label`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Label>` | —      | Props de `SelectPrimitive.Label` |
+
+### `SelectScrollDownButton`
+
+Rend `SelectPrimitive.ScrollDownButton`.
+
+| Prop       | Type                                                            | Défaut | Description                                 |
+| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>` | —      | Props de `SelectPrimitive.ScrollDownButton` |
+
+### `SelectScrollUpButton`
+
+Rend `SelectPrimitive.ScrollUpButton`.
+
+| Prop       | Type                                                          | Défaut | Description                               |
+| ---------- | ------------------------------------------------------------- | ------ | ----------------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>` | —      | Props de `SelectPrimitive.ScrollUpButton` |
+
+### `SelectSeparator`
+
+Rend `SelectPrimitive.Separator`.
+
+| Prop       | Type                                                     | Défaut | Description                          |
+| ---------- | -------------------------------------------------------- | ------ | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Separator>` | —      | Props de `SelectPrimitive.Separator` |
+
+### `SelectTrigger`
+
+Rend `SelectPrimitive.Trigger`.
+
+| Prop        | Type                                                   | Défaut      | Description                                      |
+| ----------- | ------------------------------------------------------ | ----------- | ------------------------------------------------ |
+| `size`      | `"sm" \| "default"`                                    | `"default"` | Taille du trigger (`h-8` default, `h-7` sm)      |
+| `className` | `string`                                               | —           | Classes CSS additionnelles                       |
+| `children`  | `React.ReactNode`                                      | —           | Contenu du trigger (typiquement `<SelectValue>`) |
+| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Trigger>` | —           | Props de `SelectPrimitive.Trigger`               |
+
+### `SelectValue`
+
+Rend `SelectPrimitive.Value`.
+
+| Prop       | Type                                                 | Défaut | Description                      |
+| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Value>` | —      | Props de `SelectPrimitive.Value` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

@@ -55,12 +55,20 @@ Relevé dans `components/ui/progress.tsx` et les constantes de `lib/` qu'il impo
 
 ## Props / API
 
-| Prop        | Type                                         | Défaut | Description                                                                                |
-| ----------- | -------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `value`     | `number \| null`                             | —      | Valeur courante de la progression (0 à `max`)                                              |
-| `max`       | `number`                                     | `100`  | Valeur maximale de la progression                                                          |
-| `className` | `string`                                     | —      | Classes CSS additionnelles sur la racine                                                   |
-| `...props`  | `React.ComponentProps<typeof Progress.Root>` | —      | Toutes les props du primitive Radix `Progress.Root` (`aria-label`, `aria-valuetext`, etc.) |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Progress`
+
+Rend `ProgressPrimitive.Root`.
+
+| Prop        | Type                                                  | Défaut | Description                                   |
+| ----------- | ----------------------------------------------------- | ------ | --------------------------------------------- |
+| `value`     | `number`                                              | —      | Valeur courante de la progression (0 à `max`) |
+| `max`       | `number`                                              | `100`  | Valeur maximale de la progression             |
+| `className` | `string`                                              | —      | Classes CSS additionnelles sur la racine      |
+| `...props`  | `React.ComponentProps<typeof ProgressPrimitive.Root>` | —      | Props de `ProgressPrimitive.Root`             |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

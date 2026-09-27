@@ -67,13 +67,69 @@ Relevé dans `components/ui/popover.tsx` et les constantes de `lib/` qu'il impor
 
 ## Props / API
 
-| Prop           | Type                           | Défaut      | Description                                                            |
-| -------------- | ------------------------------ | ----------- | ---------------------------------------------------------------------- |
-| `open`         | `boolean`                      | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)                           |
-| `onOpenChange` | `(open: boolean) => void`      | —           | Callback lors du changement d'état                                     |
-| `align`        | `"start" \| "center" \| "end"` | `"center"`  | Alignement du contenu par rapport au trigger (sur `PopoverContent`)    |
-| `sideOffset`   | `number`                       | `4`         | Espacement en px entre le trigger et le popover (sur `PopoverContent`) |
-| `className`    | `string`                       | —           | Classes CSS additionnelles (sur chaque sous-composant)                 |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Popover`
+
+Rend `PopoverPrimitive.Root`.
+
+| Prop           | Type                                                 | Défaut      | Description                                  |
+| -------------- | ---------------------------------------------------- | ----------- | -------------------------------------------- |
+| `open`         | `boolean`                                            | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
+| `onOpenChange` | `(open: boolean) => void`                            | —           | Callback lors du changement d'état           |
+| `...props`     | `React.ComponentProps<typeof PopoverPrimitive.Root>` | —           | Props de `PopoverPrimitive.Root`             |
+
+### `PopoverAnchor`
+
+Rend `PopoverPrimitive.Anchor`.
+
+| Prop       | Type                                                   | Défaut | Description                        |
+| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof PopoverPrimitive.Anchor>` | —      | Props de `PopoverPrimitive.Anchor` |
+
+### `PopoverContent`
+
+Rend `PopoverPrimitive.Content`.
+
+| Prop         | Type                                                    | Défaut     | Description                                                            |
+| ------------ | ------------------------------------------------------- | ---------- | ---------------------------------------------------------------------- |
+| `align`      | `"center" \| "end" \| "start"`                          | `"center"` | Alignement du contenu par rapport au trigger (sur `PopoverContent`)    |
+| `sideOffset` | `number`                                                | `4`        | Espacement en px entre le trigger et le popover (sur `PopoverContent`) |
+| `...props`   | `React.ComponentProps<typeof PopoverPrimitive.Content>` | —          | Props de `PopoverPrimitive.Content`                                    |
+
+### `PopoverDescription`
+
+Rend `<p>`.
+
+| Prop       | Type                        | Défaut | Description            |
+| ---------- | --------------------------- | ------ | ---------------------- |
+| `...props` | `React.ComponentProps<"p">` | —      | Props natives de `<p>` |
+
+### `PopoverHeader`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `PopoverTitle`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `PopoverTrigger`
+
+Rend `PopoverPrimitive.Trigger`.
+
+| Prop       | Type                                                    | Défaut | Description                         |
+| ---------- | ------------------------------------------------------- | ------ | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof PopoverPrimitive.Trigger>` | —      | Props de `PopoverPrimitive.Trigger` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

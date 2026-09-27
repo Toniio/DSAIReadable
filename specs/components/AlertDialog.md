@@ -75,13 +75,112 @@ Compose `Button` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop           | Type                            | Défaut      | Description                                            |
-| -------------- | ------------------------------- | ----------- | ------------------------------------------------------ |
-| `open`         | `boolean`                       | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)           |
-| `onOpenChange` | `(open: boolean) => void`       | —           | Callback lors du changement d'état                     |
-| `size`         | `"default" \| "sm"`             | `"default"` | Taille du contenu (sur `AlertDialogContent`)           |
-| `variant`      | `"default" \| "outline" \| ...` | `"default"` | Variante du bouton Action                              |
-| `className`    | `string`                        | —           | Classes CSS additionnelles (sur chaque sous-composant) |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `AlertDialog`
+
+Rend `AlertDialogPrimitive.Root`.
+
+| Prop           | Type                                                     | Défaut      | Description                                  |
+| -------------- | -------------------------------------------------------- | ----------- | -------------------------------------------- |
+| `open`         | `boolean`                                                | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
+| `onOpenChange` | `(open: boolean) => void`                                | —           | Callback lors du changement d'état           |
+| `...props`     | `React.ComponentProps<typeof AlertDialogPrimitive.Root>` | —           | Props de `AlertDialogPrimitive.Root`         |
+
+### `AlertDialogAction`
+
+Rend `AlertDialogPrimitive.Action`.
+
+| Prop       | Type                                                                                                                        | Défaut      | Description                                  |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------- |
+| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`                                               | `"default"` | Variante du bouton Action                    |
+| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"`                                        | `"default"` | Taille du contenu (sur `AlertDialogContent`) |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Action> & Pick<React.ComponentProps<typeof Button>, "variant" \| "size">` | —           | Props de `AlertDialogPrimitive.Action`       |
+
+### `AlertDialogCancel`
+
+Rend `AlertDialogPrimitive.Cancel`.
+
+| Prop       | Type                                                                                                                        | Défaut      | Description                            |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------- |
+| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`                                               | `"outline"` | Prop de `Button`, voir sa spec         |
+| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"`                                        | `"default"` | Prop de `Button`, voir sa spec         |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Cancel> & Pick<React.ComponentProps<typeof Button>, "variant" \| "size">` | —           | Props de `AlertDialogPrimitive.Cancel` |
+
+### `AlertDialogContent`
+
+Rend `AlertDialogPrimitive.Content`.
+
+| Prop       | Type                                                        | Défaut      | Description                                                                                                                                            |
+| ---------- | ----------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `size`     | `"default" \| "sm"`                                         | `"default"` | `sm` garde la boîte étroite et son contenu centré à toutes les largeurs ; `default` l'élargit et aligne l'en-tête à gauche à partir du breakpoint `sm` |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Content>` | —           | Props de `AlertDialogPrimitive.Content`                                                                                                                |
+
+### `AlertDialogDescription`
+
+Rend `AlertDialogPrimitive.Description`.
+
+| Prop       | Type                                                            | Défaut | Description                                 |
+| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Description>` | —      | Props de `AlertDialogPrimitive.Description` |
+
+### `AlertDialogFooter`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `AlertDialogHeader`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `AlertDialogMedia`
+
+Rend `<div>`.
+
+| Prop       | Type                          | Défaut | Description              |
+| ---------- | ----------------------------- | ------ | ------------------------ |
+| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+
+### `AlertDialogOverlay`
+
+Rend `AlertDialogPrimitive.Overlay`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Overlay>` | —      | Props de `AlertDialogPrimitive.Overlay` |
+
+### `AlertDialogPortal`
+
+Rend `AlertDialogPrimitive.Portal`.
+
+| Prop       | Type                                                       | Défaut | Description                            |
+| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Portal>` | —      | Props de `AlertDialogPrimitive.Portal` |
+
+### `AlertDialogTitle`
+
+Rend `AlertDialogPrimitive.Title`.
+
+| Prop       | Type                                                      | Défaut | Description                           |
+| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Title>` | —      | Props de `AlertDialogPrimitive.Title` |
+
+### `AlertDialogTrigger`
+
+Rend `AlertDialogPrimitive.Trigger`.
+
+| Prop       | Type                                                        | Défaut | Description                             |
+| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Trigger>` | —      | Props de `AlertDialogPrimitive.Trigger` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

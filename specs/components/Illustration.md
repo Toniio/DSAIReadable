@@ -54,11 +54,19 @@ Relevé dans `components/ui/illustration.tsx` et les constantes de `lib/` qu'il 
 
 ## Props / API
 
-| Prop        | Type                          | Défaut           | Description                                       |
-| ----------- | ----------------------------- | ---------------- | ------------------------------------------------- |
-| `alt`       | `string`                      | `"Illustration"` | Description accessible, exposée via `aria-label`  |
-| `className` | `string`                      | —                | Classes CSS additionnelles (dimensions, couleurs) |
-| `...props`  | `React.ComponentProps<"div">` | —                | Props natives du `<div>`                          |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Illustration`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut                        | Description                                       |
+| ----------- | ----------------------------- | ----------------------------- | ------------------------------------------------- |
+| `alt`       | `string`                      | `UI_STRINGS.illustration.alt` | Description accessible, exposée via `aria-label`  |
+| `className` | `string`                      | —                             | Classes CSS additionnelles (dimensions, couleurs) |
+| `...props`  | `React.ComponentProps<"div">` | —                             | Props natives de `<div>`                          |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

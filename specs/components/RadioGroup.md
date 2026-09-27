@@ -59,19 +59,32 @@ Relevé dans `components/ui/radio-group.tsx` et les constantes de `lib/` qu'il i
 
 ## Props / API
 
-| Prop               | Type                                                    | Défaut  | Description                              |
-| ------------------ | ------------------------------------------------------- | ------- | ---------------------------------------- |
-| **RadioGroup**     |                                                         |         |                                          |
-| `className`        | `string`                                                | —       | Classes CSS additionnelles               |
-| `value`            | `string`                                                | —       | Valeur contrôlée du radio sélectionné    |
-| `defaultValue`     | `string`                                                | —       | Valeur par défaut (non contrôlé)         |
-| `onValueChange`    | `(value: string) => void`                               | —       | Callback de changement de valeur         |
-| `disabled`         | `boolean`                                               | `false` | Désactive tous les radios du groupe      |
-| `...props`         | `React.ComponentProps<typeof RadioGroupPrimitive.Root>` | —       | Props Radix RadioGroup.Root              |
-| **RadioGroupItem** |                                                         |         |                                          |
-| `value`            | `string`                                                | —       | Valeur associée à ce radio (obligatoire) |
-| `className`        | `string`                                                | —       | Classes CSS additionnelles               |
-| `...props`         | `React.ComponentProps<typeof RadioGroupPrimitive.Item>` | —       | Props Radix RadioGroup.Item              |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `RadioGroup`
+
+Rend `RadioGroupPrimitive.Root`.
+
+| Prop            | Type                                                    | Défaut  | Description                           |
+| --------------- | ------------------------------------------------------- | ------- | ------------------------------------- |
+| `className`     | `string`                                                | —       | Classes CSS additionnelles            |
+| `value`         | `string`                                                | —       | Valeur contrôlée du radio sélectionné |
+| `defaultValue`  | `string`                                                | —       | Valeur par défaut (non contrôlé)      |
+| `onValueChange` | `(value: string) => void`                               | —       | Callback de changement de valeur      |
+| `disabled`      | `boolean`                                               | `false` | Désactive tous les radios du groupe   |
+| `...props`      | `React.ComponentProps<typeof RadioGroupPrimitive.Root>` | —       | Props de `RadioGroupPrimitive.Root`   |
+
+### `RadioGroupItem`
+
+Rend `RadioGroupPrimitive.Item`.
+
+| Prop        | Type                                                    | Défaut | Description                              |
+| ----------- | ------------------------------------------------------- | ------ | ---------------------------------------- |
+| `value`     | `string`                                                | —      | Valeur associée à ce radio (obligatoire) |
+| `className` | `string`                                                | —      | Classes CSS additionnelles               |
+| `...props`  | `React.ComponentProps<typeof RadioGroupPrimitive.Item>` | —      | Props de `RadioGroupPrimitive.Item`      |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

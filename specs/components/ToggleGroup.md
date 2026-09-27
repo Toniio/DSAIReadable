@@ -59,25 +59,38 @@ Compose `Toggle` : les tokens de ce composant sont listés dans sa spec.
 
 ## Props / API
 
-| Prop                | Type                                              | Défaut         | Description                                           |
-| ------------------- | ------------------------------------------------- | -------------- | ----------------------------------------------------- |
-| **ToggleGroup**     |                                                   |                |                                                       |
-| `type`              | `"single" \| "multiple"`                          | —              | Mode de sélection (requis par Radix)                  |
-| `variant`           | `"default" \| "outline"`                          | `"default"`    | Variante visuelle propagée aux items                  |
-| `size`              | `"default" \| "sm" \| "lg"`                       | `"default"`    | Taille propagée aux items                             |
-| `spacing`           | `number`                                          | `0`            | Espacement entre les items (en unités de `--spacing`) |
-| `orientation`       | `"horizontal" \| "vertical"`                      | `"horizontal"` | Direction du groupe                                   |
-| `value`             | `string \| string[]`                              | —              | Valeur(s) sélectionnée(s) (contrôlé)                  |
-| `defaultValue`      | `string \| string[]`                              | —              | Valeur(s) initiale(s) (non contrôlé)                  |
-| `onValueChange`     | `(value: string \| string[]) => void`             | —              | Callback de changement de sélection                   |
-| `className`         | `string`                                          | —              | Classes CSS additionnelles                            |
-| `...props`          | `React.ComponentProps<ToggleGroupPrimitive.Root>` | —              | Props Radix Root                                      |
-| **ToggleGroupItem** |                                                   |                |                                                       |
-| `value`             | `string`                                          | —              | Valeur unique de l'item (requis)                      |
-| `variant`           | `"default" \| "outline"`                          | `"default"`    | Surcharge locale de la variante                       |
-| `size`              | `"default" \| "sm" \| "lg"`                       | `"default"`    | Surcharge locale de la taille                         |
-| `className`         | `string`                                          | —              | Classes CSS additionnelles                            |
-| `...props`          | `React.ComponentProps<ToggleGroupPrimitive.Item>` | —              | Props Radix Item                                      |
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `ToggleGroup`
+
+Rend `ToggleGroupPrimitive.Root`.
+
+| Prop            | Type                                                       | Défaut         | Description                                           |
+| --------------- | ---------------------------------------------------------- | -------------- | ----------------------------------------------------- |
+| `orientation`   | `"horizontal" \| "vertical"`                               | `"horizontal"` | Direction du groupe                                   |
+| `spacing`       | `number`                                                   | `0`            | Espacement entre les items (en unités de `--spacing`) |
+| `type`          | `"single" \| "multiple"`                                   | —              | Mode de sélection (requis par Radix)                  |
+| `variant`       | `"default" \| "outline"`                                   | `"default"`    | Variante visuelle propagée aux items                  |
+| `size`          | `"default" \| "sm" \| "lg"`                                | `"default"`    | Taille propagée aux items                             |
+| `value`         | `string \| string[]`                                       | —              | Valeur(s) sélectionnée(s) (contrôlé)                  |
+| `defaultValue`  | `string \| string[]`                                       | —              | Valeur(s) initiale(s) (non contrôlé)                  |
+| `onValueChange` | `((value: string) => void) \| ((value: string[]) => void)` | —              | Callback de changement de sélection                   |
+| `className`     | `string`                                                   | —              | Classes CSS additionnelles                            |
+| `...props`      | `React.ComponentProps<typeof ToggleGroupPrimitive.Root>`   | —              | Props de `ToggleGroupPrimitive.Root`                  |
+
+### `ToggleGroupItem`
+
+Rend `ToggleGroupPrimitive.Item`.
+
+| Prop        | Type                                                     | Défaut      | Description                          |
+| ----------- | -------------------------------------------------------- | ----------- | ------------------------------------ |
+| `variant`   | `"default" \| "outline"`                                 | `"default"` | Surcharge locale de la variante      |
+| `size`      | `"default" \| "sm" \| "lg"`                              | `"default"` | Surcharge locale de la taille        |
+| `value`     | `string`                                                 | —           | Valeur unique de l'item (requis)     |
+| `className` | `string`                                                 | —           | Classes CSS additionnelles           |
+| `...props`  | `React.ComponentProps<typeof ToggleGroupPrimitive.Item>` | —           | Props de `ToggleGroupPrimitive.Item` |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

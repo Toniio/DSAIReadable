@@ -82,82 +82,106 @@ Compose `Label`, `Separator` : les tokens de ces composants sont listés dans le
 
 ## Props / API
 
-### `FieldSet`
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
 
-| Prop        | Type                               | Défaut | Description                |
-| ----------- | ---------------------------------- | ------ | -------------------------- |
-| `className` | `string`                           | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"fieldset">` | —      | Props natives `<fieldset>` |
+### `Field`
+
+Rend `<div>`.
+
+| Prop           | Type                                         | Défaut       | Description                                                                |
+| -------------- | -------------------------------------------- | ------------ | -------------------------------------------------------------------------- |
+| `orientation`  | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` | Disposition label/contrôle, exposée en `data-orientation`                  |
+| `data-invalid` | —                                            | —            | Attribut posé par le consommateur : bascule le champ en `text-destructive` |
+| `className`    | `string`                                     | —            | Classes CSS additionnelles                                                 |
+| `...props`     | `React.ComponentProps<"div">`                | —            | Props natives de `<div>`                                                   |
+
+### `FieldLabel`
+
+Rend `Label`.
+
+| Prop        | Type                                 | Défaut | Description                     |
+| ----------- | ------------------------------------ | ------ | ------------------------------- |
+| `htmlFor`   | `string`                             | —      | Identifiant du contrôle associé |
+| `className` | `string`                             | —      | Classes CSS additionnelles      |
+| `...props`  | `React.ComponentProps<typeof Label>` | —      | Props de `Label`                |
+
+### `FieldDescription`
+
+Rend `<p>`.
+
+| Prop        | Type                        | Défaut | Description                |
+| ----------- | --------------------------- | ------ | -------------------------- |
+| `className` | `string`                    | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"p">` | —      | Props natives de `<p>`     |
+
+### `FieldError`
+
+Rend `<div>`.
+
+| Prop        | Type                                       | Défaut | Description                                                                               |
+| ----------- | ------------------------------------------ | ------ | ----------------------------------------------------------------------------------------- |
+| `errors`    | `Array<{ message?: string } \| undefined>` | —      | Erreurs de validation ; dédupliquées par `message`, rendues en `<ul>` au-delà d'une seule |
+| `children`  | `ReactNode`                                | —      | Message explicite ; prioritaire sur `errors`                                              |
+| `className` | `string`                                   | —      | Classes CSS additionnelles                                                                |
+| `...props`  | `React.ComponentProps<"div">`              | —      | Props natives de `<div>`                                                                  |
+
+### `FieldGroup`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
 
 ### `FieldLegend`
+
+Rend `<legend>`.
 
 | Prop        | Type                             | Défaut     | Description                                                            |
 | ----------- | -------------------------------- | ---------- | ---------------------------------------------------------------------- |
 | `variant`   | `"legend" \| "label"`            | `"legend"` | Style typographique, exposé en `data-variant` (`text-sm` vs `text-xs`) |
 | `className` | `string`                         | —          | Classes CSS additionnelles                                             |
-| `...props`  | `React.ComponentProps<"legend">` | —          | Props natives `<legend>`                                               |
-
-### `FieldGroup`
-
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
-
-### `Field`
-
-| Prop           | Type                                         | Défaut       | Description                                                                |
-| -------------- | -------------------------------------------- | ------------ | -------------------------------------------------------------------------- |
-| `orientation`  | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` | Disposition label/contrôle, exposée en `data-orientation`                  |
-| `data-invalid` | `"true" \| "false"`                          | —            | Attribut posé par le consommateur : bascule le champ en `text-destructive` |
-| `className`    | `string`                                     | —            | Classes CSS additionnelles                                                 |
-| `...props`     | `React.ComponentProps<"div">`                | —            | Props natives `<div>` (le rôle `group` est appliqué par le composant)      |
-
-### `FieldLabel`
-
-| Prop        | Type                                 | Défaut | Description                           |
-| ----------- | ------------------------------------ | ------ | ------------------------------------- |
-| `htmlFor`   | `string`                             | —      | Identifiant du contrôle associé       |
-| `className` | `string`                             | —      | Classes CSS additionnelles            |
-| `...props`  | `React.ComponentProps<typeof Label>` | —      | Props de `Label` (Radix `Label.Root`) |
-
-### `FieldContent`
-
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
-
-### `FieldTitle`
-
-| Prop        | Type                          | Défaut | Description                                              |
-| ----------- | ----------------------------- | ------ | -------------------------------------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles                               |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`. Rend un `<div>`, pas un `<label>` |
-
-### `FieldDescription`
-
-| Prop        | Type                        | Défaut | Description                |
-| ----------- | --------------------------- | ------ | -------------------------- |
-| `className` | `string`                    | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"p">` | —      | Props natives `<p>`        |
-
-### `FieldError`
-
-| Prop        | Type                                       | Défaut | Description                                                                               |
-| ----------- | ------------------------------------------ | ------ | ----------------------------------------------------------------------------------------- |
-| `children`  | `React.ReactNode`                          | —      | Message explicite ; prioritaire sur `errors`                                              |
-| `errors`    | `Array<{ message?: string } \| undefined>` | —      | Erreurs de validation ; dédupliquées par `message`, rendues en `<ul>` au-delà d'une seule |
-| `className` | `string`                                   | —      | Classes CSS additionnelles                                                                |
-| `...props`  | `React.ComponentProps<"div">`              | —      | Props natives `<div>` (le rôle `alert` est appliqué par le composant)                     |
+| `...props`  | `React.ComponentProps<"legend">` | —          | Props natives de `<legend>`                                            |
 
 ### `FieldSeparator`
+
+Rend `<div>`.
 
 | Prop        | Type                          | Défaut | Description                                            |
 | ----------- | ----------------------------- | ------ | ------------------------------------------------------ |
 | `children`  | `React.ReactNode`             | —      | Libellé centré sur la ligne ; renseigne `data-content` |
 | `className` | `string`                      | —      | Classes CSS additionnelles                             |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`                                  |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`                               |
+
+### `FieldSet`
+
+Rend `<fieldset>`.
+
+| Prop        | Type                               | Défaut | Description                   |
+| ----------- | ---------------------------------- | ------ | ----------------------------- |
+| `className` | `string`                           | —      | Classes CSS additionnelles    |
+| `...props`  | `React.ComponentProps<"fieldset">` | —      | Props natives de `<fieldset>` |
+
+### `FieldContent`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+### `FieldTitle`
+
+Rend `<div>`.
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 

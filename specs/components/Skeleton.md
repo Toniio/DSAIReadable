@@ -51,10 +51,18 @@ Relevé dans `components/ui/skeleton.tsx` et les constantes de `lib/` qu'il impo
 
 ## Props / API
 
+<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+
+### `Skeleton`
+
+Rend `<div>`.
+
 | Prop        | Type                          | Défaut | Description                                                  |
 | ----------- | ----------------------------- | ------ | ------------------------------------------------------------ |
 | `className` | `string`                      | —      | Classes CSS additionnelles (dimensions, border-radius, etc.) |
-| `...props`  | `React.ComponentProps<"div">` | —      | Toutes les props natives du `<div>`                          |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`                                     |
+
+<!-- Fin de la partie générée. -->
 
 ## Variantes
 
