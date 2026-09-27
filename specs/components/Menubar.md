@@ -73,6 +73,7 @@ Barre de menus horizontale offrant un système de menus déroulants avec support
 | `elevation.lg`                  | `shadow-lg`                                                                 | `MenubarSubContent`                                                                                                                           |
 | `elevation.md`                  | `shadow-md`                                                                 | `MenubarContent`                                                                                                                              |
 | `motion.duration.fast`          | `duration-fast`                                                             | `MenubarContent` · `MenubarSubContent`                                                                                                        |
+| `opacity.disabled`              | `opacity-disabled`                                                          | `MenubarItem` · `MenubarRadioItem`                                                                                                            |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                                    | `MenubarTrigger` via `FOCUS_RING` (`lib/focus.ts`)                                                                                            |
 | `typography.font-weight.medium` | `font-medium`                                                               | `MenubarTrigger`                                                                                                                              |
 | `typography.size.xs`            | `text-xs`                                                                   | `MenubarCheckboxItem` · `MenubarItem` · `MenubarLabel` · `MenubarRadioItem` · `MenubarShortcut` · `MenubarSubTrigger` · `MenubarTrigger`      |
@@ -233,13 +234,13 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 
 ## États
 
-| État     | Description                                                       |
-| -------- | ----------------------------------------------------------------- |
-| default  | Barre avec bordure, triggers au repos                             |
-| hover    | Fond `bg-muted` sur le trigger survolé                            |
-| focus    | Fond `bg-accent`, texte `accent-foreground` sur l'item focalisé   |
-| active   | Trigger expanded avec fond `bg-muted`, menu ouvert avec animation |
-| disabled | `pointer-events-none`, `opacity-50` sur les items désactivés      |
+| État     | Description                                                        |
+| -------- | ------------------------------------------------------------------ |
+| default  | Barre avec bordure, triggers au repos                              |
+| hover    | Fond `bg-muted` sur le trigger survolé                             |
+| focus    | Fond `bg-accent`, texte `accent-foreground` sur l'item focalisé    |
+| active   | Trigger expanded avec fond `bg-muted`, menu ouvert avec animation  |
+| disabled | `pointer-events-none`, `opacity-disabled` sur les items désactivés |
 
 ## Accessibilité
 

@@ -53,6 +53,7 @@ Champ de saisie texte mono-ligne (ou fichier) servant de brique de base pour tou
 | `color.feedback.error.default`  | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Input`                                             |
 | `color.text.default`            | `text-foreground`                                                                              | `Input`                                             |
 | `color.text.subtle`             | `text-muted-foreground`                                                                        | `Input`                                             |
+| `opacity.disabled`              | `opacity-disabled`                                                                             | `Input`                                             |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                                                       | `Input` · `Input` via `FOCUS_RING` (`lib/focus.ts`) |
 | `typography.font-weight.medium` | `font-medium`                                                                                  | `Input`                                             |
 | `typography.size.xs`            | `text-xs`                                                                                      | `Input`                                             |
@@ -88,7 +89,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | `hover`    | Pas de changement visuel défini (géré par le focus)                                                         |
 | `focus`    | `border-ring` + `ring-1 ring-ring/50`                                                                       |
 | `active`   | Identique à `focus`                                                                                         |
-| `disabled` | `pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-50` (dark: `bg-input/80`)              |
+| `disabled` | `pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-disabled` (dark: `bg-input/80`)        |
 | `loading`  | Non défini nativement — gérer via un état parent                                                            |
 | `error`    | `aria-invalid="true"` : `border-destructive` + `ring-1 ring-destructive/20` (dark: `border-destructive/50`) |
 

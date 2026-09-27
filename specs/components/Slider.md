@@ -53,6 +53,7 @@ Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une
 | `color.background.subtle`         | `bg-muted`                               | `Slider`                                                    |
 | `color.border.focus`              | `border-ring` · `ring-ring/50`           | `Slider`                                                    |
 | `color.static.white`              | `bg-white`                               | `Slider`                                                    |
+| `opacity.disabled`                | `opacity-disabled`                       | `Slider`                                                    |
 | `space.focus-ring-width`          | `ring-(length:--space-focus-ring-width)` | `Slider` · `Slider` via `FOCUS_RING_WIDTH` (`lib/focus.ts`) |
 
 Relevé dans `components/ui/slider.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
@@ -97,7 +98,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | hover    | Anneau `ring-ring/50` (1px) sur le thumb                        |
 | focus    | Anneau `ring-ring/50` (1px) + outline masqué sur le thumb       |
 | active   | Anneau `ring-ring/50` (1px) sur le thumb pendant le drag        |
-| disabled | `pointer-events-none`, opacité réduite (`opacity-50`)           |
+| disabled | `pointer-events-none`, opacité réduite (`opacity-disabled`)     |
 
 ## Accessibilité
 

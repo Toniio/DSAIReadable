@@ -27,7 +27,7 @@ Menu contextuel déclenché par un clic droit, affichant une liste d'actions per
 - Le menu contextuel remplace le menu natif du navigateur : s'assurer que les actions proposées sont pertinentes
 - Un seul menu contextuel visible à la fois (géré par Radix)
 - Prévoir un fallback clavier (touche `Shift+F10` ou touche contextuelle)
-- Les items `disabled` doivent rester visibles mais non interactifs (`opacity-50`, `pointer-events-none`)
+- Les items `disabled` doivent rester visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)
 
 ## Dépendances
 
@@ -70,6 +70,7 @@ Menu contextuel déclenché par un clic droit, affichant une liste d'actions per
 | `elevation.lg`                 | `shadow-lg`                                                                 | `ContextMenuSubContent`                                                                                                                                                   |
 | `elevation.md`                 | `shadow-md`                                                                 | `ContextMenuContent`                                                                                                                                                      |
 | `motion.duration.fast`         | `duration-fast`                                                             | `ContextMenuContent` · `ContextMenuSubContent`                                                                                                                            |
+| `opacity.disabled`             | `opacity-disabled`                                                          | `ContextMenuCheckboxItem` · `ContextMenuItem` · `ContextMenuRadioItem`                                                                                                    |
 | `typography.size.xs`           | `text-xs`                                                                   | `ContextMenuCheckboxItem` · `ContextMenuItem` · `ContextMenuLabel` · `ContextMenuRadioItem` · `ContextMenuShortcut` · `ContextMenuSubTrigger`                             |
 | `zindex.popover`               | `z-popover`                                                                 | `ContextMenuContent` · `ContextMenuSubContent`                                                                                                                            |
 
@@ -223,7 +224,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | open     | Menu affiché avec animation `fade-in` + `zoom-in-95`       |
 | focus    | Item surligné avec `bg-accent` et `text-accent-foreground` |
 | active   | Item en cours de sélection                                 |
-| disabled | Item grisé (`opacity-50`, `pointer-events-none`)           |
+| disabled | Item grisé (`opacity-disabled`, `pointer-events-none`)     |
 
 ## Accessibilité
 

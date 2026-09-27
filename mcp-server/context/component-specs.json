@@ -86,6 +86,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "AccordionTrigger"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -231,7 +240,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, `opacity-50` — interaction impossible"
+        "behavior": "`pointer-events-none`, `opacity-disabled` — interaction impossible"
       }
     ],
     "accessibility": "**Pattern** : [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) (Radix Accordion)\n\n**Rôle** : Chaque déclencheur est un `button` dans un titre, avec `aria-expanded` et `aria-controls` ; chaque panneau est une `region` étiquetée par son déclencheur.\n\n**Clavier** :\n\n| Touche                  | Action                                                    |\n| ----------------------- | --------------------------------------------------------- |\n| `Enter` / `Space`       | Ouvre ou ferme le panneau du déclencheur focalisé         |\n| `ArrowDown` / `ArrowUp` | Déclencheur suivant / précédent                           |\n| `Home` / `End`          | Premier / dernier déclencheur                             |\n| `Tab`                   | Sort des déclencheurs vers le contenu focalisable suivant |\n\n**Nom accessible** : Le texte de `AccordionTrigger` nomme le bouton et étiquette le panneau : il doit décrire le contenu, pas « Voir plus ».\n\n**Vigilance** :\n\n- Ne pas placer d'élément interactif dans `AccordionTrigger` : un bouton ne peut pas en contenir un autre.\n- Le niveau de titre qui enveloppe le déclencheur doit s'inscrire dans la hiérarchie de la page.",
@@ -1892,6 +1901,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "buttonVariants"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -1988,7 +2006,7 @@
       },
       {
         "state": "`disabled`",
-        "behavior": "`pointer-events-none`, `opacity-50` — interaction impossible"
+        "behavior": "`pointer-events-none`, `opacity-disabled` — interaction impossible"
       },
       {
         "state": "`loading`",
@@ -2232,7 +2250,7 @@
       "Ne pas utiliser comme agenda ou planning — préférer un composant dédié avec vue journalière/hebdomadaire",
       "Limiter à un calendrier visible par vue pour éviter la surcharge cognitive (sauf comparaison de plages)",
       "Le composant nécessite un conteneur parent pour le positionnement (ex. : `Popover`, `Card`)",
-      "Les jours désactivés doivent rester visibles (`opacity-50`) avec `aria-disabled` pour l'accessibilité",
+      "Les jours désactivés doivent rester visibles (`opacity-disabled`) avec `aria-disabled` pour l'accessibilité",
       "La navigation clavier doit être fonctionnelle : flèches pour se déplacer entre les jours, Tab pour les contrôles"
     ],
     "dependencies": [
@@ -2328,6 +2346,17 @@
           "Calendar.outside",
           "Calendar.week_number",
           "Calendar.weekday"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "Calendar.button_next",
+          "Calendar.button_previous",
+          "Calendar.disabled"
         ]
       },
       {
@@ -2501,7 +2530,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Jour non sélectionnable, `opacity-50` et `aria-disabled`, texte `muted-foreground`"
+        "behavior": "Jour non sélectionnable, `opacity-disabled` et `aria-disabled`, texte `muted-foreground`"
       }
     ],
     "accessibility": "**Pattern** : [Grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) de dates (react-day-picker)\n\n**Rôle** : Grille de dates ; le jour sélectionné porte `aria-selected`, les jours indisponibles `aria-disabled`.\n\n**Clavier** :\n\n| Touche                            | Action                                     |\n| --------------------------------- | ------------------------------------------ |\n| `ArrowLeft` / `ArrowRight`        | Jour précédent / suivant                   |\n| `ArrowUp` / `ArrowDown`           | Même jour la semaine précédente / suivante |\n| `Home` / `End`                    | Début / fin de la semaine                  |\n| `PageUp` / `PageDown`             | Mois précédent / suivant                   |\n| `Shift+PageUp` / `Shift+PageDown` | Année précédente / suivante                |\n| `Enter` / `Space`                 | Sélectionne le jour focalisé               |\n\n**Nom accessible** : Les boutons de navigation entre mois sont nommés par react-day-picker, en anglais par défaut : fournir les libellés localisés via ses props `labels`.\n\n**Vigilance** :\n\n- Un calendrier seul ne suffit pas à saisir une date connue : proposer aussi un champ de saisie texte.\n- Indiquer les jours indisponibles autrement que par la couleur.",
@@ -3516,6 +3545,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "Checkbox"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -3617,7 +3655,7 @@
       },
       {
         "state": "`disabled`",
-        "behavior": "`cursor-not-allowed opacity-50`, `pointer-events-none`"
+        "behavior": "`cursor-not-allowed opacity-disabled`, `pointer-events-none`"
       },
       {
         "state": "`checked`",
@@ -3985,6 +4023,16 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "ComboboxChip",
+          "ComboboxItem"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -4320,7 +4368,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Opacité réduite (`opacity-50`), `pointer-events-none`"
+        "behavior": "Opacité réduite (`opacity-disabled`), `pointer-events-none`"
       },
       {
         "state": "error",
@@ -4467,6 +4515,16 @@
         "where": [
           "CommandGroup",
           "CommandShortcut"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "CommandInput",
+          "CommandItem"
         ]
       },
       {
@@ -4651,7 +4709,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Item grisé (`opacity-50`, `pointer-events-none`) via `data-[disabled=true]`"
+        "behavior": "Item grisé (`opacity-disabled`, `pointer-events-none`) via `data-[disabled=true]`"
       }
     ],
     "accessibility": "**Pattern** : [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) + listbox (cmdk)\n\n**Rôle** : `CommandInput` porte `role=\"combobox\"` ; `CommandList` est une `listbox` d'options (`role=\"option\"`, `aria-selected`).\n\n**Clavier** :\n\n| Touche                  | Action                       |\n| ----------------------- | ---------------------------- |\n| `ArrowDown` / `ArrowUp` | Option suivante / précédente |\n| `Home` / `End`          | Première / dernière option   |\n| `Enter`                 | Exécute l'option active      |\n| Saisie                  | Filtre                       |\n\n**Nom accessible** : Donner un `placeholder` et un `aria-label` explicites au champ ; `CommandDialog` porte un titre (masqué visuellement) qui nomme le dialogue.\n\n**Vigilance** :\n\n- `CommandEmpty` doit rester textuel : c'est ce qu'entend l'utilisateur quand rien ne correspond.\n- Dans `CommandDialog`, `Escape` ferme le dialogue et rend le focus au déclencheur.",
@@ -4679,7 +4737,7 @@
       "Le menu contextuel remplace le menu natif du navigateur : s'assurer que les actions proposées sont pertinentes",
       "Un seul menu contextuel visible à la fois (géré par Radix)",
       "Prévoir un fallback clavier (touche `Shift+F10` ou touche contextuelle)",
-      "Les items `disabled` doivent rester visibles mais non interactifs (`opacity-50`, `pointer-events-none`)"
+      "Les items `disabled` doivent rester visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)"
     ],
     "dependencies": [
       "`ContextMenu` de `radix-ui` (primitives Root, Trigger, Portal, Content, Item, CheckboxItem, RadioItem, RadioGroup, Label, Separator, Sub, SubTrigger, SubContent, Group)",
@@ -4852,6 +4910,17 @@
         "where": [
           "ContextMenuContent",
           "ContextMenuSubContent"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuRadioItem"
         ]
       },
       {
@@ -5124,7 +5193,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Item grisé (`opacity-50`, `pointer-events-none`)"
+        "behavior": "Item grisé (`opacity-disabled`, `pointer-events-none`)"
       }
     ],
     "accessibility": "**Pattern** : [Menu](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) contextuel (Radix ContextMenu)\n\n**Rôle** : `role=\"menu\"` et `menuitem` / `menuitemcheckbox` / `menuitemradio`.\n\n**Clavier** :\n\n| Touche                               | Action                                          |\n| ------------------------------------ | ----------------------------------------------- |\n| Clic droit, `Shift+F10`, touche Menu | Ouvre le menu sur la zone                       |\n| `ArrowDown` / `ArrowUp`              | Élément suivant / précédent                     |\n| `ArrowRight` / `ArrowLeft`           | Ouvre / ferme un sous-menu                      |\n| `Enter` / `Space`                    | Active l'élément                                |\n| `Escape`                             | Ferme le menu                                   |\n| Saisie                               | Va à l'élément qui commence par la lettre tapée |\n\n**Nom accessible** : Le texte de chaque élément ; un élément icône seule doit avoir un `aria-label`.\n\n**Vigilance** :\n\n- Un menu contextuel est invisible tant qu'on ne le cherche pas : chaque action qu'il propose doit exister ailleurs (bouton, menu visible).\n- La zone déclencheuse doit être focalisable pour que `Shift+F10` l'atteigne.",
@@ -5971,7 +6040,7 @@
       "Ne pas utiliser pour les menus contextuels au clic droit — préférer `ContextMenu`",
       "Ne pas utiliser pour la navigation principale — préférer une barre de navigation dédiée",
       "Un seul DropdownMenu ouvert à la fois",
-      "Les items `disabled` restent visibles mais non interactifs (`opacity-50`, `pointer-events-none`)",
+      "Les items `disabled` restent visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)",
       "La largeur du contenu s'adapte à celle du trigger par défaut (`w-(--radix-dropdown-menu-trigger-width)`)"
     ],
     "dependencies": [
@@ -6144,6 +6213,17 @@
         "where": [
           "DropdownMenuContent",
           "DropdownMenuSubContent"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuRadioItem"
         ]
       },
       {
@@ -6423,7 +6503,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Item grisé (`opacity-50`, `pointer-events-none`)"
+        "behavior": "Item grisé (`opacity-disabled`, `pointer-events-none`)"
       }
     ],
     "accessibility": "**Pattern** : [Menu Button](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) (Radix DropdownMenu)\n\n**Rôle** : Déclencheur avec `aria-haspopup=\"menu\"` et `aria-expanded` ; `role=\"menu\"` et `menuitem` / `menuitemcheckbox` / `menuitemradio`.\n\n**Clavier** :\n\n| Touche                          | Action                                          |\n| ------------------------------- | ----------------------------------------------- |\n| `Enter` / `Space` / `ArrowDown` | Ouvre le menu (focus sur le premier élément)    |\n| `ArrowDown` / `ArrowUp`         | Élément suivant / précédent                     |\n| `Home` / `End`                  | Premier / dernier élément                       |\n| `ArrowRight` / `ArrowLeft`      | Ouvre / ferme un sous-menu                      |\n| `Enter` / `Space`               | Active l'élément                                |\n| `Escape`                        | Ferme le menu et rend le focus au déclencheur   |\n| Saisie                          | Va à l'élément qui commence par la lettre tapée |\n\n**Nom accessible** : Le déclencheur doit être nommé ; un déclencheur icône seule (« … ») exige un `aria-label` (« Actions de la ligne »).\n\n**Vigilance** :\n\n- Un menu contient des actions, pas de la navigation de site : pour des liens de navigation, utiliser `NavigationMenu`.\n- Les raccourcis affichés (`DropdownMenuShortcut`) doivent réellement fonctionner.",
@@ -6838,6 +6918,16 @@
         "where": [
           "FieldDescription",
           "FieldSeparator"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "FieldLabel",
+          "FieldTitle"
         ]
       },
       {
@@ -7776,6 +7866,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -7846,7 +7945,7 @@
       },
       {
         "state": "`disabled`",
-        "behavior": "`pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-50` (dark: `bg-input/80`)"
+        "behavior": "`pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-disabled` (dark: `bg-input/80`)"
       },
       {
         "state": "`loading`",
@@ -7959,6 +8058,16 @@
         ],
         "where": [
           "InputGroupText",
+          "inputGroupAddonVariants"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "InputGroup",
           "inputGroupAddonVariants"
         ]
       },
@@ -8142,7 +8251,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Fond `bg-input/50`, opacité réduite (`opacity-50`) via `has-disabled`"
+        "behavior": "Fond `bg-input/50`, opacité réduite (`opacity-disabled`) via `has-disabled`"
       },
       {
         "state": "error",
@@ -8259,6 +8368,15 @@
         ],
         "where": [
           "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "InputOTP"
         ]
       },
       {
@@ -8407,7 +8525,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-50`) sur le conteneur"
+        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-disabled`) sur le conteneur"
       },
       {
         "state": "error",
@@ -9041,6 +9159,15 @@
     ],
     "tokens": [
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "Label"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
@@ -9099,7 +9226,7 @@
       },
       {
         "state": "`disabled`",
-        "behavior": "`peer-disabled: cursor-not-allowed opacity-50` — lorsque le contrôle associé est `disabled`"
+        "behavior": "`peer-disabled: cursor-not-allowed opacity-disabled` — lorsque le contrôle associé est `disabled`"
       },
       {
         "state": "`loading`",
@@ -9494,6 +9621,16 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "MenubarItem",
+          "MenubarRadioItem"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -9814,7 +9951,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, `opacity-50` sur les items désactivés"
+        "behavior": "`pointer-events-none`, `opacity-disabled` sur les items désactivés"
       }
     ],
     "accessibility": "**Pattern** : [Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix Menubar)\n\n**Rôle** : `role=\"menubar\"` ; chaque menu est un `menu` avec ses `menuitem`.\n\n**Clavier** :\n\n| Touche                          | Action                                          |\n| ------------------------------- | ----------------------------------------------- |\n| `ArrowRight` / `ArrowLeft`      | Menu suivant / précédent de la barre            |\n| `Enter` / `Space` / `ArrowDown` | Ouvre le menu focalisé                          |\n| `ArrowDown` / `ArrowUp`         | Élément suivant / précédent dans un menu ouvert |\n| `Escape`                        | Ferme le menu                                   |\n| Saisie                          | Va à l'élément qui commence par la lettre tapée |\n\n**Nom accessible** : Le texte de chaque menu et élément.\n\n**Vigilance** :\n\n- Une barre de menus d'application n'est pas une navigation de site : pour des liens, utiliser `NavigationMenu`.\n- Un seul arrêt de tabulation pour toute la barre : les flèches font le reste.",
@@ -9940,6 +10077,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -10044,7 +10190,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, `cursor-not-allowed`, opacité réduite (`opacity-50`)"
+        "behavior": "`pointer-events-none`, `cursor-not-allowed`, opacité réduite (`opacity-disabled`)"
       },
       {
         "state": "error",
@@ -10206,6 +10352,15 @@
         "where": [
           "NavigationMenuContent",
           "NavigationMenuTrigger"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "navigationMenuTriggerStyle"
         ]
       },
       {
@@ -10405,7 +10560,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, `opacity-50` — interaction impossible"
+        "behavior": "`pointer-events-none`, `opacity-disabled` — interaction impossible"
       }
     ],
     "accessibility": "**Pattern** : Navigation de site (Radix NavigationMenu)\n\n**Rôle** : `nav` (nommée « Main » par Radix) ; déclencheurs `button` avec `aria-expanded` ; liens natifs.\n\n**Clavier** :\n\n| Touche                     | Action                                           |\n| -------------------------- | ------------------------------------------------ |\n| `Tab` / `Shift+Tab`        | Déclencheur ou lien suivant / précédent          |\n| `Enter` / `Space`          | Ouvre le contenu du déclencheur                  |\n| `ArrowDown`                | Entre dans le contenu ouvert                     |\n| `ArrowLeft` / `ArrowRight` | Déclencheur précédent / suivant                  |\n| `Escape`                   | Ferme le contenu et rend le focus au déclencheur |\n\n**Nom accessible** : Radix nomme le repère « Main », en anglais : si la page a plusieurs `nav`, leur donner des `aria-label` distincts et localisés.\n\n**Vigilance** :\n\n- Le lien de la page courante porte `aria-current=\"page\"` (prop `active` de `NavigationMenuLink`).",
@@ -11280,6 +11435,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -11385,7 +11549,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-50`)"
+        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-disabled`)"
       },
       {
         "state": "error",
@@ -11946,6 +12110,16 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectTrigger"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -12183,7 +12357,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-50`) sur le trigger ou l'item"
+        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-disabled`) sur le trigger ou l'item"
       },
       {
         "state": "error",
@@ -12936,6 +13110,16 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -13476,7 +13660,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Éléments désactivés : `pointer-events-none`, `opacity-50`"
+        "behavior": "Éléments désactivés : `pointer-events-none`, `opacity-disabled`"
       },
       {
         "state": "collapsed",
@@ -13680,6 +13864,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -13809,7 +14002,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, opacité réduite (`opacity-50`)"
+        "behavior": "`pointer-events-none`, opacité réduite (`opacity-disabled`)"
       }
     ],
     "accessibility": "**Pattern** : [Slider](https://www.w3.org/WAI/ARIA/apg/patterns/slider/) (Radix Slider)\n\n**Rôle** : Chaque poignée porte `role=\"slider\"` avec `aria-valuenow`, `aria-valuemin`, `aria-valuemax`.\n\n**Clavier** :\n\n| Touche                    | Action                            |\n| ------------------------- | --------------------------------- |\n| `ArrowRight` / `ArrowUp`  | Augmente d'un pas                 |\n| `ArrowLeft` / `ArrowDown` | Diminue d'un pas                  |\n| `PageUp` / `PageDown`     | Augmente / diminue d'un grand pas |\n| `Home` / `End`            | Valeur minimale / maximale        |\n\n**Nom accessible** : Porté par les poignées, seuls éléments focusables. Une poignée : le `aria-label` ou `aria-labelledby` du `Slider` lui est transmis. Plusieurs poignées : ce nom va au groupe (`role=\"group\"` sur la racine), et chaque poignée prend son entrée de `thumbLabels`, à défaut le nom générique de Radix, en anglais (« Minimum » / « Maximum » ; « Value 1 of 3 »… au-delà de deux).\n\n**Vigilance** :\n\n- Un `Slider` à une poignée sans `aria-label`, `aria-labelledby` ni `thumbLabels` n'a pas de nom (violation axe `aria-input-field-name`).\n- Avec plusieurs poignées, fournir `thumbLabels` : les noms par défaut de Radix ne disent pas ce que la poignée règle et ne sont pas traduits.\n- Afficher la valeur en texte : la position seule ne la communique pas.",
@@ -14128,6 +14321,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -14219,7 +14421,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-50`)"
+        "behavior": "`cursor-not-allowed`, opacité réduite (`opacity-disabled`)"
       },
       {
         "state": "error",
@@ -14653,6 +14855,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -14806,7 +15017,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, `opacity-50` — interaction impossible"
+        "behavior": "`pointer-events-none`, `opacity-disabled` — interaction impossible"
       }
     ],
     "accessibility": "**Pattern** : [Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) (Radix Tabs)\n\n**Rôle** : `tablist`, `tab` (`aria-selected`, `aria-controls`), `tabpanel`.\n\n**Clavier** :\n\n| Touche                     | Action                                                       |\n| -------------------------- | ------------------------------------------------------------ |\n| `Tab`                      | Entre dans la liste sur l'onglet actif, puis va au panneau   |\n| `ArrowRight` / `ArrowLeft` | Onglet suivant / précédent, activé (orientation horizontale) |\n| `ArrowDown` / `ArrowUp`    | Idem en orientation verticale                                |\n| `Home` / `End`             | Premier / dernier onglet                                     |\n\n**Nom accessible** : Le texte de chaque onglet ; nommer la `TabsList` (`aria-label`) si plusieurs listes d'onglets coexistent.\n\n**Vigilance** :\n\n- Activation automatique au déplacement : si l'affichage d'un panneau est coûteux, passer `activationMode=\"manual\"`.\n- Des onglets ne servent pas à naviguer entre des pages : pour cela, des liens.",
@@ -14898,6 +15109,15 @@
         ]
       },
       {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -14980,7 +15200,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed`, fond `bg-input/50`, opacité réduite (`opacity-50`)"
+        "behavior": "`cursor-not-allowed`, fond `bg-input/50`, opacité réduite (`opacity-disabled`)"
       },
       {
         "state": "error",
@@ -15077,6 +15297,15 @@
         "token": "color.text.default",
         "classes": [
           "text-foreground"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
         ],
         "where": [
           "toggleVariants"
@@ -15198,7 +15427,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, opacité réduite (`opacity-50`)"
+        "behavior": "`pointer-events-none`, opacité réduite (`opacity-disabled`)"
       },
       {
         "state": "error",

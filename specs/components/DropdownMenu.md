@@ -27,7 +27,7 @@ Menu déroulant déclenché par un clic sur un bouton, affichant une liste d'act
 - Ne pas utiliser pour les menus contextuels au clic droit — préférer `ContextMenu`
 - Ne pas utiliser pour la navigation principale — préférer une barre de navigation dédiée
 - Un seul DropdownMenu ouvert à la fois
-- Les items `disabled` restent visibles mais non interactifs (`opacity-50`, `pointer-events-none`)
+- Les items `disabled` restent visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)
 - La largeur du contenu s'adapte à celle du trigger par défaut (`w-(--radix-dropdown-menu-trigger-width)`)
 
 ## Dépendances
@@ -72,6 +72,7 @@ Menu déroulant déclenché par un clic sur un bouton, affichant une liste d'act
 | `elevation.lg`                 | `shadow-lg`                                                                 | `DropdownMenuSubContent`                                                                                                                                                         |
 | `elevation.md`                 | `shadow-md`                                                                 | `DropdownMenuContent`                                                                                                                                                            |
 | `motion.duration.fast`         | `duration-fast`                                                             | `DropdownMenuContent` · `DropdownMenuSubContent`                                                                                                                                 |
+| `opacity.disabled`             | `opacity-disabled`                                                          | `DropdownMenuCheckboxItem` · `DropdownMenuItem` · `DropdownMenuRadioItem`                                                                                                        |
 | `typography.size.xs`           | `text-xs`                                                                   | `DropdownMenuCheckboxItem` · `DropdownMenuItem` · `DropdownMenuLabel` · `DropdownMenuRadioItem` · `DropdownMenuShortcut` · `DropdownMenuSubTrigger`                              |
 | `zindex.popover`               | `z-popover`                                                                 | `DropdownMenuContent` · `DropdownMenuSubContent`                                                                                                                                 |
 
@@ -226,7 +227,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | open     | Menu affiché avec animation `fade-in` + `zoom-in-95` + slide directionnel |
 | focus    | Item surligné avec `bg-accent` et `text-accent-foreground`                |
 | active   | Item en cours de sélection                                                |
-| disabled | Item grisé (`opacity-50`, `pointer-events-none`)                          |
+| disabled | Item grisé (`opacity-disabled`, `pointer-events-none`)                    |
 
 ## Accessibilité
 

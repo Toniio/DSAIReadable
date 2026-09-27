@@ -57,6 +57,7 @@ Composant de navigation par onglets permettant d'alterner entre des panneaux de 
 | `color.border.input`             | `bg-input/30` · `border-input`                             | `TabsTrigger`                                                                                           |
 | `color.text.default`             | `bg-foreground` · `text-foreground` · `text-foreground/60` | `TabsTrigger`                                                                                           |
 | `color.text.subtle`              | `text-muted-foreground`                                    | `TabsTrigger` · `tabsListVariants`                                                                      |
+| `opacity.disabled`               | `opacity-disabled`                                         | `TabsTrigger`                                                                                           |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                   | `TabsContent` via `FOCUS_RING` (`lib/focus.ts`) · `TabsTrigger` via `FOCUS_RING_WIDTH` (`lib/focus.ts`) |
 | `typography.font-weight.medium`  | `font-medium`                                              | `TabsTrigger`                                                                                           |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                          | `TabsContent`                                                                                           |
@@ -132,7 +133,7 @@ Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props 
 | hover    | Texte passe à `text-foreground` sur le trigger survolé                                    |
 | focus    | Anneau `ring-focus ring-ring/50` + bordure `border-ring` + outline                        |
 | active   | Fond `bg-background`, texte `text-foreground`, barre indicateur visible (variante `line`) |
-| disabled | `pointer-events-none`, `opacity-50` — interaction impossible                              |
+| disabled | `pointer-events-none`, `opacity-disabled` — interaction impossible                        |
 
 ## Accessibilité
 

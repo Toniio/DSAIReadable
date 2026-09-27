@@ -36,6 +36,21 @@ const eslintConfig = defineConfig([
           ignore: ["^toaster$", "^cn-input-otp$"],
         },
       ],
+      // A disabled state reads opacity.disabled, not Tailwind's opacity
+      // scale: `disabled:opacity-50` would keep the look and drop the token.
+      "better-tailwindcss/no-restricted-classes": [
+        "error",
+        {
+          restrict: [
+            {
+              pattern: "^(.*disabled[^:]*:)opacity-\\d+$",
+              message:
+                "A disabled state uses the opacity.disabled token: write $1opacity-disabled.",
+              fix: "$1opacity-disabled",
+            },
+          ],
+        },
+      ],
     },
   },
   {

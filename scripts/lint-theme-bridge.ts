@@ -55,7 +55,8 @@ const PRIVATE_PREFIX = "--ds-prim-"
  * utilities. Anything else declared in `@theme` is an ordinary custom property
  * with no class behind it. Verified against compiled output, not from memory:
  * `--transition-duration-*` is here because `.duration-fast` is emitted, while
- * `--transition-timing-function-*` is absent because `.ease-spring` was not.
+ * `--transition-timing-function-*` is absent because `.ease-spring` was not;
+ * `--opacity-*` because `.opacity-disabled` is (P3-15).
  *
  * A name outside this set is not necessarily wrong — it just has to earn its
  * place in NON_UTILITY_ALLOWLIST with a reason.
@@ -75,6 +76,7 @@ const UTILITY_NAMESPACES = [
   "--font-weight-",
   "--inset-shadow-",
   "--leading-",
+  "--opacity-",
   "--perspective-",
   "--radius-",
   "--shadow-",

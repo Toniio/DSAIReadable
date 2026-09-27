@@ -64,6 +64,7 @@ Menu de navigation principal permettant d'organiser les liens du site en catégo
 | `elevation.sm`                  | `shadow-sm`                                      | `NavigationMenuContent` · `NavigationMenuViewport`                                                                      |
 | `motion.duration.fast`          | `duration-fast`                                  | `NavigationMenuViewport`                                                                                                |
 | `motion.duration.slow`          | `duration-slow`                                  | `NavigationMenuContent` · `NavigationMenuTrigger`                                                                       |
+| `opacity.disabled`              | `opacity-disabled`                               | `navigationMenuTriggerStyle`                                                                                            |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`         | `NavigationMenuLink` via `FOCUS_RING` (`lib/focus.ts`) · `navigationMenuTriggerStyle` via `FOCUS_RING` (`lib/focus.ts`) |
 | `typography.font-weight.medium` | `font-medium`                                    | `navigationMenuTriggerStyle`                                                                                            |
 | `typography.size.xs`            | `text-xs`                                        | `NavigationMenuLink` · `navigationMenuTriggerStyle`                                                                     |
@@ -165,7 +166,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | hover    | Fond `bg-muted` sur le trigger et le lien survolés                        |
 | focus    | Fond `bg-muted` + anneau `ring-1 ring-ring/50` + outline sur trigger/lien |
 | active   | Fond `bg-muted/50` sur le trigger/lien actif, panneau de contenu ouvert   |
-| disabled | `pointer-events-none`, `opacity-50` — interaction impossible              |
+| disabled | `pointer-events-none`, `opacity-disabled` — interaction impossible        |
 
 ## Accessibilité
 

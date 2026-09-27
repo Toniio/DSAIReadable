@@ -27,7 +27,7 @@ Sélecteur de date(s) interactif basé sur `react-day-picker`, supportant la sé
 - Ne pas utiliser comme agenda ou planning — préférer un composant dédié avec vue journalière/hebdomadaire
 - Limiter à un calendrier visible par vue pour éviter la surcharge cognitive (sauf comparaison de plages)
 - Le composant nécessite un conteneur parent pour le positionnement (ex. : `Popover`, `Card`)
-- Les jours désactivés doivent rester visibles (`opacity-50`) avec `aria-disabled` pour l'accessibilité
+- Les jours désactivés doivent rester visibles (`opacity-disabled`) avec `aria-disabled` pour l'accessibilité
 - La navigation clavier doit être fonctionnelle : flèches pour se déplacer entre les jours, Tab pour les contrôles
 
 ## Dépendances
@@ -58,6 +58,7 @@ Sélecteur de date(s) interactif basé sur `react-day-picker`, supportant la sé
 | `color.border.focus`                 | `border-ring` · `ring-ring/50`           | `CalendarDayButton`                                                                                               |
 | `color.text.default`                 | `text-foreground`                        | `Calendar.today` · `CalendarDayButton`                                                                            |
 | `color.text.subtle`                  | `text-muted-foreground`                  | `Calendar.caption_label` · `Calendar.disabled` · `Calendar.outside` · `Calendar.week_number` · `Calendar.weekday` |
+| `opacity.disabled`                   | `opacity-disabled`                       | `Calendar.button_next` · `Calendar.button_previous` · `Calendar.disabled`                                         |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)` | `CalendarDayButton`                                                                                               |
 | `typography.font-weight.medium`      | `font-medium`                            | `Calendar.caption_label` · `Calendar.dropdowns`                                                                   |
 | `typography.font-weight.normal`      | `font-normal`                            | `Calendar.weekday` · `CalendarDayButton`                                                                          |
@@ -112,13 +113,13 @@ Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props 
 
 ## États
 
-| État     | Description                                                                        |
-| -------- | ---------------------------------------------------------------------------------- |
-| default  | Grille de jours affichée, aucun jour sélectionné                                   |
-| hover    | Jour survolé avec atténuation du fond (via variante `ghost` du `Button`)           |
-| focus    | Anneau de focus visible (`ring-ring/50`, `border-ring`) sur le jour ayant le focus |
-| active   | Jour sélectionné en `bg-primary` / `text-primary-foreground`                       |
-| disabled | Jour non sélectionnable, `opacity-50` et `aria-disabled`, texte `muted-foreground` |
+| État     | Description                                                                              |
+| -------- | ---------------------------------------------------------------------------------------- |
+| default  | Grille de jours affichée, aucun jour sélectionné                                         |
+| hover    | Jour survolé avec atténuation du fond (via variante `ghost` du `Button`)                 |
+| focus    | Anneau de focus visible (`ring-ring/50`, `border-ring`) sur le jour ayant le focus       |
+| active   | Jour sélectionné en `bg-primary` / `text-primary-foreground`                             |
+| disabled | Jour non sélectionnable, `opacity-disabled` et `aria-disabled`, texte `muted-foreground` |
 
 ## Accessibilité
 

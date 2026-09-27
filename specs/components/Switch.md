@@ -54,6 +54,7 @@ Interrupteur à bascule pour activer ou désactiver un paramètre binaire, avec 
 | `color.border.input`                 | `bg-input` · `bg-input/80`                                                                     | `Switch`                                              |
 | `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Switch`                                              |
 | `color.text.default`                 | `bg-foreground`                                                                                | `Switch`                                              |
+| `opacity.disabled`                   | `opacity-disabled`                                                                             | `Switch`                                              |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `Switch` · `Switch` via `FOCUS_RING` (`lib/focus.ts`) |
 
 Relevé dans `components/ui/switch.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
@@ -93,7 +94,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | hover         | — (pas de style hover spécifique)                                      |
 | focus         | Bordure `ring` + anneau `ring-ring/50` via `focus-visible`             |
 | active        | Transition du thumb entre les positions                                |
-| disabled      | `cursor-not-allowed`, opacité réduite (`opacity-50`)                   |
+| disabled      | `cursor-not-allowed`, opacité réduite (`opacity-disabled`)             |
 | error         | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid` |
 
 ## Accessibilité

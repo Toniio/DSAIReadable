@@ -57,6 +57,7 @@ Conteneur structurant un champ de saisie avec des addons (icônes, boutons, text
 | `color.border.input`            | `bg-input/30` · `bg-input/50` · `bg-input/80` · `border-input`       | `InputGroup`                                                              |
 | `color.feedback.error.default`  | `border-destructive` · `ring-destructive/20` · `ring-destructive/40` | `InputGroup`                                                              |
 | `color.text.subtle`             | `text-muted-foreground`                                              | `InputGroupText` · `inputGroupAddonVariants`                              |
+| `opacity.disabled`              | `opacity-disabled`                                                   | `InputGroup` · `inputGroupAddonVariants`                                  |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                             | `InputGroup`                                                              |
 | `typography.font-weight.medium` | `font-medium`                                                        | `inputGroupAddonVariants`                                                 |
 | `typography.size.xs`            | `text-xs`                                                            | `InputGroupText` · `inputGroupAddonVariants` · `inputGroupButtonVariants` |
@@ -146,7 +147,7 @@ Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props 
 | hover    | — (pas de style hover spécifique sur le groupe)                                    |
 | focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible` sur l'input enfant      |
 | active   | —                                                                                  |
-| disabled | Fond `bg-input/50`, opacité réduite (`opacity-50`) via `has-disabled`              |
+| disabled | Fond `bg-input/50`, opacité réduite (`opacity-disabled`) via `has-disabled`        |
 | error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid` sur l'input |
 
 ## Accessibilité

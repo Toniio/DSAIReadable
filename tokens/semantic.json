@@ -1493,10 +1493,10 @@
       "$description": "Opacity for disabled interactive elements. Not for placeholder or overlay use.",
       "$extensions": {
         "docs": {
-          "do": "Utiliser `disabled:opacity-50` (classe Tailwind) sur les éléments interactifs désactivés.",
-          "dont": "Ne pas utiliser pour du texte secondaire — utiliser `color.text.subtle`."
+          "do": "Utiliser `opacity-disabled` sous la variante de l'état désactivé : `disabled:opacity-disabled`, `data-disabled:opacity-disabled`, `aria-disabled:opacity-disabled`…",
+          "dont": "Ne pas écrire `disabled:opacity-50` (ESLint le refuse), ni l'utiliser pour du texte secondaire — utiliser `color.text.subtle`."
         },
-        "status": "reserved"
+        "status": "active"
       }
     },
     "placeholder": {

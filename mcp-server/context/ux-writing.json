@@ -169,15 +169,15 @@
       "source": "content.md"
     },
     {
-      "rule": "✅ Préféré — classe Tailwind (état disabled géré par Tailwind)",
+      "rule": "✅ Le token, sous la variante de l'état",
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Acceptable — via CSS variable (pour des cas CSS custom)",
+      "rule": "❌ Même rendu, mais le token n'y est plus : ESLint refuse",
       "source": "opacity.md"
     },
     {
-      "rule": "❌ Valeur hardcodée — à éviter",
+      "rule": "❌ Valeur en dur",
       "source": "opacity.md"
     },
     {
@@ -279,7 +279,7 @@
       "Ne pas utiliser comme agenda ou planning — préférer un composant dédié avec vue journalière/hebdomadaire",
       "Limiter à un calendrier visible par vue pour éviter la surcharge cognitive (sauf comparaison de plages)",
       "Le composant nécessite un conteneur parent pour le positionnement (ex. : `Popover`, `Card`)",
-      "Les jours désactivés doivent rester visibles (`opacity-50`) avec `aria-disabled` pour l'accessibilité",
+      "Les jours désactivés doivent rester visibles (`opacity-disabled`) avec `aria-disabled` pour l'accessibilité",
       "La navigation clavier doit être fonctionnelle : flèches pour se déplacer entre les jours, Tab pour les contrôles"
     ],
     "Card": [
@@ -337,7 +337,7 @@
       "Le menu contextuel remplace le menu natif du navigateur : s'assurer que les actions proposées sont pertinentes",
       "Un seul menu contextuel visible à la fois (géré par Radix)",
       "Prévoir un fallback clavier (touche `Shift+F10` ou touche contextuelle)",
-      "Les items `disabled` doivent rester visibles mais non interactifs (`opacity-50`, `pointer-events-none`)"
+      "Les items `disabled` doivent rester visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)"
     ],
     "Dialog": [
       "Ne pas utiliser pour les confirmations destructrices — préférer `AlertDialog`",
@@ -365,7 +365,7 @@
       "Ne pas utiliser pour les menus contextuels au clic droit — préférer `ContextMenu`",
       "Ne pas utiliser pour la navigation principale — préférer une barre de navigation dédiée",
       "Un seul DropdownMenu ouvert à la fois",
-      "Les items `disabled` restent visibles mais non interactifs (`opacity-50`, `pointer-events-none`)",
+      "Les items `disabled` restent visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)",
       "La largeur du contenu s'adapte à celle du trigger par défaut (`w-(--radix-dropdown-menu-trigger-width)`)"
     ],
     "Empty": [

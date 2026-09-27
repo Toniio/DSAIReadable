@@ -55,6 +55,7 @@ Champ de saisie segmenté pour les codes à usage unique (OTP), avec navigation 
 | `color.feedback.error.default` | `border-destructive` · `ring-destructive/20` · `ring-destructive/40` | `InputOTPGroup` · `InputOTPSlot` |
 | `color.text.default`           | `bg-foreground`                                                      | `InputOTPSlot`                   |
 | `motion.duration.extra-slow`   | `duration-extra-slow`                                                | `InputOTPSlot`                   |
+| `opacity.disabled`             | `opacity-disabled`                                                   | `InputOTP`                       |
 | `space.focus-ring-width`       | `ring-(length:--space-focus-ring-width)`                             | `InputOTPGroup` · `InputOTPSlot` |
 | `typography.size.xs`           | `text-xs`                                                            | `InputOTPSlot`                   |
 | `zindex.dropdown`              | `z-dropdown`                                                         | `InputOTPSlot`                   |
@@ -120,7 +121,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | hover    | — (pas de style hover spécifique)                                              |
 | focus    | Slot actif : bordure `ring`, anneau `ring-ring/50`, z-index élevé, caret animé |
 | active   | Caret clignotant (`animate-caret-blink`) dans le slot actif                    |
-| disabled | `cursor-not-allowed`, opacité réduite (`opacity-50`) sur le conteneur          |
+| disabled | `cursor-not-allowed`, opacité réduite (`opacity-disabled`) sur le conteneur    |
 | error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`         |
 
 ## Accessibilité

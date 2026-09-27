@@ -57,6 +57,7 @@ Menu déroulant natif du navigateur, léger et accessible, pour la sélection d'
 | `color.border.input`                 | `bg-input/30` · `bg-input/50` · `border-input`                                                 | `NativeSelect`                                                    |
 | `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `NativeSelect`                                                    |
 | `color.text.subtle`                  | `text-muted-foreground`                                                                        | `NativeSelect`                                                    |
+| `opacity.disabled`                   | `opacity-disabled`                                                                             | `NativeSelect`                                                    |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `NativeSelect` · `NativeSelect` via `FOCUS_RING` (`lib/focus.ts`) |
 | `typography.size.xs`                 | `text-xs`                                                                                      | `NativeSelect`                                                    |
 
@@ -104,14 +105,14 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 
 ## États
 
-| État     | Description                                                                 |
-| -------- | --------------------------------------------------------------------------- |
-| default  | Bordure `input`, fond transparent, hauteur `h-8` (ou `h-7` en `sm`)         |
-| hover    | Fond dark passe à `bg-input/50`                                             |
-| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible`                  |
-| active   | Menu déroulant natif du navigateur ouvert                                   |
-| disabled | `pointer-events-none`, `cursor-not-allowed`, opacité réduite (`opacity-50`) |
-| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`      |
+| État     | Description                                                                       |
+| -------- | --------------------------------------------------------------------------------- |
+| default  | Bordure `input`, fond transparent, hauteur `h-8` (ou `h-7` en `sm`)               |
+| hover    | Fond dark passe à `bg-input/50`                                                   |
+| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible`                        |
+| active   | Menu déroulant natif du navigateur ouvert                                         |
+| disabled | `pointer-events-none`, `cursor-not-allowed`, opacité réduite (`opacity-disabled`) |
+| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`            |
 
 ## Accessibilité
 

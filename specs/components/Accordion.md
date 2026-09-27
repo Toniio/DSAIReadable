@@ -55,6 +55,7 @@ Composant de navigation verticale permettant d'afficher et masquer des sections 
 | `color.border.focus`            | `border-ring` · `ring-ring/50`           | `AccordionTrigger` · `AccordionTrigger` via `FOCUS_RING` (`lib/focus.ts`) |
 | `color.text.default`            | `text-foreground`                        | `AccordionContent`                                                        |
 | `color.text.subtle`             | `text-muted-foreground`                  | `AccordionTrigger`                                                        |
+| `opacity.disabled`              | `opacity-disabled`                       | `AccordionTrigger`                                                        |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)` | `AccordionTrigger` via `FOCUS_RING` (`lib/focus.ts`)                      |
 | `typography.font-weight.medium` | `font-medium`                            | `AccordionTrigger`                                                        |
 | `typography.size.xs`            | `text-xs`                                | `AccordionContent` · `AccordionTrigger`                                   |
@@ -120,7 +121,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | hover    | Soulignement du texte du trigger                                      |
 | focus    | Anneau `ring-1 ring-ring/50` + bordure `border-ring` sur le trigger   |
 | active   | Panneau ouvert, icône chevron vers le haut, contenu animé vers le bas |
-| disabled | `pointer-events-none`, `opacity-50` — interaction impossible          |
+| disabled | `pointer-events-none`, `opacity-disabled` — interaction impossible    |
 
 ## Accessibilité
 

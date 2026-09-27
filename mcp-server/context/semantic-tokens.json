@@ -959,7 +959,7 @@
     "light": "{opacity.0-50}",
     "dark": "{opacity.0-50}",
     "type": "number",
-    "status": "reserved",
+    "status": "active",
     "usage": "Opacity for disabled interactive elements. Not for placeholder or overlay use."
   },
   {

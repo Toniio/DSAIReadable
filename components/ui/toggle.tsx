@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 
 const toggleVariants = cva(
-  `group/toggle inline-flex items-center justify-center gap-1 rounded-none text-xs font-medium whitespace-nowrap transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted hover:text-foreground ${FOCUS_RING} disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
+  `group/toggle inline-flex items-center justify-center gap-1 rounded-none text-xs font-medium whitespace-nowrap transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted hover:text-foreground ${FOCUS_RING} disabled:pointer-events-none disabled:opacity-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
   {
     variants: {
       variant: {

@@ -52,6 +52,7 @@ Bouton à bascule binaire (pressé/non pressé) disponible en plusieurs variante
 | `color.border.input`            | `border-input`                                                       | `toggleVariants.variant.outline`                    |
 | `color.feedback.error.default`  | `border-destructive` · `ring-destructive/20` · `ring-destructive/40` | `toggleVariants`                                    |
 | `color.text.default`            | `text-foreground`                                                    | `toggleVariants`                                    |
+| `opacity.disabled`              | `opacity-disabled`                                                   | `toggleVariants`                                    |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                             | `toggleVariants` via `FOCUS_RING` (`lib/focus.ts`)  |
 | `typography.font-weight.medium` | `font-medium`                                                        | `toggleVariants`                                    |
 | `typography.size.xs`            | `text-xs`                                                            | `toggleVariants`                                    |
@@ -102,7 +103,7 @@ Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props 
 | hover            | Fond `muted`, texte `foreground`                                       |
 | focus            | Bordure `ring` + anneau `ring-ring/50` via `focus-visible`             |
 | active (pressed) | Fond `muted` via `aria-pressed` / `data-[state=on]`                    |
-| disabled         | `pointer-events-none`, opacité réduite (`opacity-50`)                  |
+| disabled         | `pointer-events-none`, opacité réduite (`opacity-disabled`)            |
 | error            | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid` |
 
 ## Accessibilité

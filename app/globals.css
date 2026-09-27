@@ -109,6 +109,11 @@
   --ease-out: var(--motion-easing-out);
   --ease-spring: var(--motion-easing-spring);
 
+  /* Opacity → opacity-disabled, for every disabled state
+     (disabled:, data-disabled:, aria-disabled:…). ESLint refuses
+     opacity-50 there: the token, not Tailwind's scale, sets the value. */
+  --opacity-disabled: var(--opacity-disabled);
+
   /* Layout spacing */
   --spacing-page: var(--space-layout-page-padding);
   --spacing-section: var(--space-layout-section-gap);
