@@ -22,6 +22,10 @@ Conteneur flottant interactif déclenché par un clic, permettant d'afficher du 
 - Afficher des options de configuration contextuelles
 - Ancrer un contenu flottant à un élément arbitraire via `PopoverAnchor`
 
+<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+
 ## Contraintes
 
 - **MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`

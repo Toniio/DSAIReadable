@@ -21,6 +21,10 @@ Fenêtre modale de confirmation bloquante qui interrompt l'utilisateur pour vali
 - Afficher un avertissement nécessitant une réponse obligatoire de l'utilisateur
 - Bloquer l'interaction avec le reste de l'interface tant que le choix n'est pas fait
 
+<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+
 ## Contraintes
 
 - **MUST NOT** — servir à un simple message d'information → utiliser `Dialog`, ou `Sonner` pour une notification

@@ -20,9 +20,7 @@
     },
     "library": {
       "type": "object",
-      "required": [
-        "last_publish"
-      ],
+      "required": ["last_publish"],
       "additionalProperties": false,
       "properties": {
         "last_publish": {
@@ -36,11 +34,7 @@
       "description": "Exhaustive list of all components in the codebase.",
       "items": {
         "type": "object",
-        "required": [
-          "name",
-          "code_path",
-          "status"
-        ],
+        "required": ["name", "code_path", "status"],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -71,11 +65,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "stable",
-              "beta",
-              "deprecated"
-            ]
+            "enum": ["stable", "beta", "deprecated"]
           }
         }
       }
@@ -86,15 +76,18 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "rule"
-        ],
+        "required": ["id", "rule"],
         "additionalProperties": false,
         "properties": {
           "id": {
             "type": "string",
             "pattern": "^rule-[0-9]+$"
+          },
+          "applies_to": {
+            "type": "array",
+            "description": "Components whose spec repeats this rule in its Usage section (scripts/build-spec-choices.ts).",
+            "minItems": 1,
+            "items": { "type": "string" }
           },
           "rule": {
             "type": "string"

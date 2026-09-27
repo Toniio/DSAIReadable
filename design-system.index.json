@@ -437,6 +437,41 @@
     {
       "id": "rule-19",
       "rule": "A `variant` prop carries exactly one axis: appearance, intent, or media. MUST NOT assume a component accepts a value because a sibling does. Media values (icon, image) belong to *Media sub-components only. MUST use variant=\"destructive\" for irreversible actions, never to obtain red styling."
+    },
+    {
+      "id": "rule-20",
+      "applies_to": [
+        "RadioGroup",
+        "Select",
+        "NativeSelect",
+        "Combobox",
+        "Checkbox",
+        "Switch"
+      ],
+      "rule": "Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
+    },
+    {
+      "id": "rule-21",
+      "applies_to": [
+        "AlertDialog",
+        "Dialog",
+        "Sheet",
+        "Drawer",
+        "Popover",
+        "HoverCard",
+        "Tooltip"
+      ],
+      "rule": "Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
+    },
+    {
+      "id": "rule-22",
+      "applies_to": [
+        "Item",
+        "Card",
+        "Table",
+        "DropdownMenu"
+      ],
+      "rule": "Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`."
     }
   ],
   "glossary": {

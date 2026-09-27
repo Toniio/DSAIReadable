@@ -22,6 +22,10 @@ Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, bas
 - Présenter des détails d'un élément sélectionné dans un tableau
 - Remplacer une page dédiée pour des flux courts (création rapide)
 
+<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+
 ## Contraintes
 
 - **MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`
@@ -29,7 +33,7 @@ Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, bas
 - **MUST** — rendre un `SheetTitle` : c'est le nom annoncé par les lecteurs d'écran
 - **Note** — à gauche et à droite, la largeur est limitée à `sm:max-w-sm`
 - **MUST** — garder un moyen de fermer le panneau quand `showCloseButton={false}` masque le bouton
-- **SHOULD** — sur mobile, utiliser `Drawer`, qui se ferme au geste ; **sauf** pour un panneau latéral de navigation
+- **MUST NOT** — servir sous `md` → `Drawer`, **sauf** pour la navigation latérale (`rule-21`)
 - **MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.sheet` via `closeLabel`
 
 ## Dépendances

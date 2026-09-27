@@ -21,10 +21,14 @@ Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi u
 - Alternative stylisée au `<select>` natif avec contrôle total du rendu
 - Sélection nécessitant des icônes ou du contenu riche dans les options
 
+<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+
 ## Contraintes
 
 - **MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`
-- **SHOULD** — sur mobile, utiliser `NativeSelect` pour une longue liste d'options ; **sauf** si les options exigent un rendu riche qu'un `<option>` ne peut pas afficher
+- **MUST NOT** — servir sous `md` quand les options n'exigent pas de rendu riche → `NativeSelect` (`rule-20`)
 - **MUST** — tenir compte du `Portal` dans les empilements (`z-index`) : le contenu est rendu hors de son parent
 - **MUST** — donner à chaque `SelectItem` une `value` unique
 - **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur

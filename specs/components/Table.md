@@ -22,6 +22,10 @@ Ensemble de composants pour construire des tableaux de données sémantiques ave
 - Afficher un récapitulatif avec pied de page (totaux, moyennes)
 - Ajouter une légende descriptive via `TableCaption`
 
+<!-- rule-22 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.
+
 ## Contraintes
 
 - **MUST NOT** — servir à la mise en page : réservé aux données tabulaires

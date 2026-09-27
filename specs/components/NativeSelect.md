@@ -16,10 +16,12 @@ Menu déroulant natif du navigateur, léger et accessible, pour la sélection d'
 
 ## Usage
 
-- Sélection simple dans un formulaire avec peu d'options (< 10)
-- Formulaires mobiles où le sélecteur natif offre une meilleure UX
-- Remplacement léger d'un `Select` Radix quand la personnalisation n'est pas nécessaire
-- Formulaires à fort volume où la performance est prioritaire
+- Sélection d'une valeur parmi 6 à 15 options sous `md`
+- Formulaires mobiles, où le sélecteur du système offre la meilleure ergonomie
+
+<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
 
 ## Contraintes
 
@@ -128,7 +130,7 @@ Comportement natif du `select` (flèches, saisie, `Space` / `Enter` selon la pla
 
 **Vigilance** :
 
-- **SHOULD** — sur mobile, utiliser `NativeSelect` plutôt que `Select` : le sélecteur du système est le plus accessible ; **sauf** si les options exigent un rendu riche (icônes, descriptions) qu'un `<option>` ne peut pas afficher.
+- Le sélecteur du système est le plus accessible sur mobile : c'est pourquoi `rule-20` retient `NativeSelect` sous `md`, **sauf** options à rendu riche (icônes, descriptions) qu'un `<option>` ne peut pas afficher.
 
 ## Exemple de code
 
