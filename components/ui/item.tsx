@@ -6,7 +6,11 @@ import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { Separator } from "@/components/ui/separator"
 
-function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
+function ItemGroup({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"div">) {
   return (
     <div
       role="list"
@@ -16,8 +20,22 @@ function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
         className
       )}
       {...props}
-    />
+    >
+      {React.Children.map(children, asListItem)}
+    </div>
   )
+}
+
+// Un Item enfant direct d'un ItemGroup devient un élément de liste, sauf rôle
+// explicite. Rendu via asChild (lien, bouton), il garde son rôle natif : c'est
+// un conteneur qui porte listitem.
+function asListItem(child: React.ReactNode) {
+  if (!React.isValidElement<ItemProps>(child) || child.type !== Item) {
+    return child
+  }
+  if (child.props.role) return child
+  if (child.props.asChild) return <div role="listitem">{child}</div>
+  return React.cloneElement(child, { role: "listitem" })
 }
 
 function ItemSeparator({

@@ -429,7 +429,7 @@
       "Ne pas utiliser la variante `outline` et `muted` simultanément",
       "La taille `xs` est optimisée pour les menus contextuels — ne pas l'utiliser pour des listes principales",
       "Limiter le nombre d'actions dans `ItemActions` (2 à 3 maximum)",
-      "L'`ItemGroup` applique `role=\"list\"` ; les items ne portent pas automatiquement `role=\"listitem\"`"
+      "Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role=\"listitem\"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role=\"listitem\"` explicitement"
     ],
     "Kbd": [
       "Ne pas utiliser pour du texte générique — réservé aux touches clavier",

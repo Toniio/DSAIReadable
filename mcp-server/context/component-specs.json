@@ -5291,7 +5291,7 @@
       "Ne pas utiliser la variante `outline` et `muted` simultanément",
       "La taille `xs` est optimisée pour les menus contextuels — ne pas l'utiliser pour des listes principales",
       "Limiter le nombre d'actions dans `ItemActions` (2 à 3 maximum)",
-      "L'`ItemGroup` applique `role=\"list\"` ; les items ne portent pas automatiquement `role=\"listitem\"`"
+      "Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role=\"listitem\"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role=\"listitem\"` explicitement"
     ],
     "dependencies": [
       "`class-variance-authority` pour les variantes de `Item` et `ItemMedia`",
@@ -5302,7 +5302,7 @@
     "anatomy": [
       {
         "slot": "`data-slot=\"item\"`",
-        "role": "Racine de l'item, porte `data-variant` et `data-size`"
+        "role": "Racine de l'item, porte `data-variant` et `data-size` ; `role=\"listitem\"` dans un `ItemGroup`"
       },
       {
         "slot": "`data-slot=\"item-media\"`",
@@ -5645,7 +5645,7 @@
         "behavior": "Non applicable directement"
       }
     ],
-    "accessibility": "**Pattern** : Liste (`role=\"list\"`) d'éléments\n\n**Rôle** : `ItemGroup` porte `role=\"list\"` ; `Item` est un `div` (ou l'élément fourni par `asChild`).\n\n**Clavier** :\n\nAucune interaction propre ; un `Item` rendu en lien ou bouton suit le comportement natif.\n\n**Nom accessible** : Le contenu de `ItemTitle` ; un `Item` cliquable doit être un lien ou un bouton nommé.\n\n**Vigilance** :\n\n- **Défaut connu** : `ItemGroup` déclare `role=\"list\"` mais `Item` n'a pas `role=\"listitem\"` — une liste ARIA sans éléments de liste, signalée par axe. Ajouter `role=\"listitem\"` aux `Item` d'un `ItemGroup` en attendant la correction.\n- Un `Item` entièrement cliquable ne doit pas contenir d'autre élément interactif.",
+    "accessibility": "**Pattern** : Liste (`role=\"list\"`) d'éléments\n\n**Rôle** : `ItemGroup` porte `role=\"list\"` et donne `role=\"listitem\"` à chaque `Item` enfant direct. Un `Item` en `asChild` (lien, bouton) garde son rôle natif : `ItemGroup` l'enveloppe dans un `div role=\"listitem\"`. Un `role` passé explicitement à l'`Item` est conservé. Hors `ItemGroup`, `Item` est un `div` sans rôle.\n\n**Clavier** :\n\nAucune interaction propre ; un `Item` rendu en lien ou bouton suit le comportement natif.\n\n**Nom accessible** : Le contenu de `ItemTitle` ; un `Item` cliquable doit être un lien ou un bouton nommé.\n\n**Vigilance** :\n\n- Seuls les enfants directs d'`ItemGroup` sont reconnus : un `Item` rendu par un composant intermédiaire (`<Ligne />` qui retourne un `Item`) ou dans un fragment ne reçoit pas `role=\"listitem\"` — le lui passer explicitement.\n- Tout autre enfant direct d'`ItemGroup` que `Item` ou `ItemSeparator` casse la liste ARIA.\n- Un `Item` entièrement cliquable ne doit pas contenir d'autre élément interactif.",
     "code_example": "import {\n  Item,\n  ItemMedia,\n  ItemContent,\n  ItemTitle,\n  ItemDescription,\n  ItemActions,\n  ItemGroup,\n} from \"@/components/ui/item\"\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { FileIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <ItemGroup>\n      <Item variant=\"outline\">\n        <ItemMedia variant=\"icon\">\n          <FileIcon />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Rapport annuel 2024</ItemTitle>\n          <ItemDescription>\n            Dernière modification il y a 2 jours\n          </ItemDescription>\n        </ItemContent>\n        <ItemActions>\n          <Badge variant=\"secondary\">PDF</Badge>\n          <Button variant=\"ghost\" size=\"icon-sm\">\n            ⋯\n          </Button>\n        </ItemActions>\n      </Item>\n    </ItemGroup>\n  )\n}",
     "cross_references": [
       "Avatar",
