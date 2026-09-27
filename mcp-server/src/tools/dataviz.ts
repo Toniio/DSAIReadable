@@ -1,6 +1,7 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { loadContext, text } from "../lib/context.js"
+import { READ_ONLY } from "../lib/annotations.js"
 
 interface ChartEntry {
   type?: string
@@ -12,20 +13,25 @@ interface ChartEntry {
 
 export function registerDatavizTools(server: McpServer): void {
   // 1. get_dataviz_recommendation
-  server.tool(
+  server.registerTool(
     "get_dataviz_recommendation",
-    "Returns recommended chart types for a given data visualization objective",
     {
-      objective: z
-        .enum([
-          "evolution",
-          "correlation",
-          "comparison",
-          "distribution",
-          "proportion",
-          "kpi",
-        ])
-        .describe("The data visualization objective"),
+      title: "Chart recommendation",
+      description:
+        "Returns recommended chart types for a given data visualization objective",
+      inputSchema: {
+        objective: z
+          .enum([
+            "evolution",
+            "correlation",
+            "comparison",
+            "distribution",
+            "proportion",
+            "kpi",
+          ])
+          .describe("The data visualization objective"),
+      },
+      annotations: READ_ONLY,
     },
     async ({ objective }) => {
       const data = loadContext<{
@@ -65,15 +71,20 @@ export function registerDatavizTools(server: McpServer): void {
   )
 
   // 2. get_dataviz_specs
-  server.tool(
+  server.registerTool(
     "get_dataviz_specs",
-    "Returns full specs for a chart type (tokens, anatomy, do/don't, library, variants)",
     {
-      chart_type: z
-        .string()
-        .describe(
-          "The chart type to get specs for (e.g. 'bar', 'line', 'pie')"
-        ),
+      title: "Chart spec",
+      description:
+        "Returns full specs for a chart type (tokens, anatomy, do/don't, library, variants)",
+      inputSchema: {
+        chart_type: z
+          .string()
+          .describe(
+            "The chart type to get specs for (e.g. 'bar', 'line', 'pie')"
+          ),
+      },
+      annotations: READ_ONLY,
     },
     async ({ chart_type }) => {
       const catalog = loadContext<Record<string, unknown>>(

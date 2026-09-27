@@ -109,8 +109,22 @@ portant une origine non autorisée reçoit un `403`.
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **DS Core**    | `get_design_system_overview`, `get_components`, `get_component_specs`, `get_component_variants`, `get_tokens`, `get_typography`, `get_icons`, `get_design_rules`, `get_page_patterns` |
 | **Dataviz**    | Outils spécifiques aux graphiques (Recharts + tokens DS)                                                                                                                              |
-| **UX Writing** | Règles de rédaction, tonalité, patterns de messages                                                                                                                                   |
+| **UX Writing** | `get_ux_writing_rules` (chaînes par défaut, surcharge, langue), `get_glossary`, `get_content_library`                                                                                 |
 | **Admin**      | Outils de gestion et d'inspection du DS                                                                                                                                               |
+
+Tous les outils sont annotés en lecture seule (`readOnlyHint`, `openWorldHint: false`) : un client n'a pas
+à faire confirmer leurs appels. `get_component_specs`, `get_design_rules` et `get_ux_writing_rules`
+prennent `response_format` : `concise` par défaut (moins de 20 % du volume), `detailed` pour tout.
+`get_components` et `get_tokens` paginent : `limit` (100 par défaut) et `cursor`, réponse
+`{ total, items, next_cursor }`.
+
+### Ressources
+
+| URI                          | Contenu                                                                            |
+| ---------------------------- | ---------------------------------------------------------------------------------- |
+| `ds://component/{name}/spec` | Spec complète d'un composant ; les 59 sont listées, `{name}` se complète           |
+| `ds://token/{path}`          | Un token sémantique (`ds://token/color.background.default`) ; `{path}` se complète |
+| `ds://guidelines`            | Règles critiques, règles des fondations, règles de composition                     |
 
 ### Connexion dans VS Code / Copilot
 

@@ -1,6 +1,12 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { loadContext, text } from "../lib/context.js"
+import { READ_ONLY } from "../lib/annotations.js"
+import {
+  conciseUxWriting,
+  responseFormat,
+  type RuleSet,
+} from "../lib/response-format.js"
 
 interface GlossaryEntry {
   term?: string
@@ -16,21 +22,38 @@ interface ContentEntry {
 
 export function registerUxWritingTools(server: McpServer): void {
   // 1. get_ux_writing_rules
-  server.tool(
+  server.registerTool(
     "get_ux_writing_rules",
-    "Returns all UX writing rules (tone, voice, guidelines, do/don't)",
-    {},
-    async () => {
-      const rules = loadContext("ux-writing.json")
-      return text(rules)
+    {
+      title: "UX writing rules",
+      description:
+        'Returns the rules for the text a UI renders. "concise" (default): the content foundation rules — default strings from UI_STRINGS, one override prop per string, language of the defaults. "detailed": the whole rule set — foundation rules, component constraints, composition rules — which get_design_rules also serves',
+      inputSchema: {
+        response_format: responseFormat(
+          "every foundation rule, the component constraints and the composition rules"
+        ),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ response_format }) => {
+      const rules = loadContext<RuleSet>("ux-writing.json")
+      return text(
+        response_format === "detailed" ? rules : conciseUxWriting(rules)
+      )
     }
   )
 
   // 2. get_glossary
-  server.tool(
+  server.registerTool(
     "get_glossary",
-    "Returns the full glossary or a specific term definition",
-    { term: z.string().optional().describe("Specific term to look up") },
+    {
+      title: "Glossary",
+      description: "Returns the full glossary or a specific term definition",
+      inputSchema: {
+        term: z.string().optional().describe("Specific term to look up"),
+      },
+      annotations: READ_ONLY,
+    },
     async ({ term }) => {
       const data = loadContext<
         { terms?: GlossaryEntry[] } & Record<string, unknown>
@@ -60,14 +83,19 @@ export function registerUxWritingTools(server: McpServer): void {
   )
 
   // 3. get_content_library
-  server.tool(
+  server.registerTool(
     "get_content_library",
-    "Returns content examples (labels, placeholders, messages), optionally filtered by category",
     {
-      category: z
-        .enum(["labels", "placeholders", "messages"])
-        .optional()
-        .describe("Content category to filter by"),
+      title: "Content library",
+      description:
+        "Returns content examples (labels, placeholders, messages), optionally filtered by category",
+      inputSchema: {
+        category: z
+          .enum(["labels", "placeholders", "messages"])
+          .optional()
+          .describe("Content category to filter by"),
+      },
+      annotations: READ_ONLY,
     },
     async ({ category }) => {
       const data = loadContext<

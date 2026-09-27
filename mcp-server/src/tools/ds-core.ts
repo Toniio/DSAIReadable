@@ -6,7 +6,18 @@ import {
   compositionRulesFor,
   type CompositionRule,
 } from "../lib/composition-rules.js"
-import { TAILWIND_RULE } from "../lib/tailwind-rule.js"
+import { READ_ONLY } from "../lib/annotations.js"
+import { pageParams, paginate } from "../lib/paginate.js"
+import {
+  conciseRuleSet,
+  conciseSpec,
+  CRITICAL_RULES,
+  criticalRuleTitles,
+  responseFormat,
+  type ComponentSpec,
+  type ResponseFormat,
+  type RuleSet,
+} from "../lib/response-format.js"
 
 interface ComponentEntry {
   name: string
@@ -18,10 +29,14 @@ interface ComponentEntry {
 
 export function registerDsCoreTools(server: McpServer): void {
   // 1. get_design_system_overview
-  server.tool(
+  server.registerTool(
     "get_design_system_overview",
-    "Returns DS version, library info, stats summary (components, tokens, spec coverage)",
-    {},
+    {
+      title: "Design system overview",
+      description:
+        "Returns DS version, library info, stats summary (components, tokens, spec coverage)",
+      annotations: READ_ONLY,
+    },
     async () => {
       const components = loadContext<ComponentEntry[]>("components.json")
       const semanticTokens = loadContext<unknown[]>("semantic-tokens.json")
@@ -98,45 +113,63 @@ import { cn } from "@/lib/utils"`,
   )
 
   // 2. get_components
-  server.tool(
+  server.registerTool(
     "get_components",
-    "Returns the full list of components, optionally filtered by category",
     {
-      category: z
-        .string()
-        .optional()
-        .describe(
-          "Filter by category (Forms, Overlay, Navigation, Data, Layout, Feedback, Misc)"
-        ),
+      title: "Components",
+      description:
+        "Returns the list of components, optionally filtered by category, one page at a time: { total, items, next_cursor }",
+      inputSchema: {
+        category: z
+          .string()
+          .optional()
+          .describe(
+            "Filter by category (Forms, Overlay, Navigation, Data, Layout, Feedback, Misc)"
+          ),
+        ...pageParams,
+      },
+      annotations: READ_ONLY,
     },
-    async ({ category }) => {
+    async ({ category, limit, cursor }) => {
       let components = loadContext<ComponentEntry[]>("components.json")
       if (!Array.isArray(components)) components = []
       if (category) {
         const cat = category.toLowerCase()
         components = components.filter((c) => c.category?.toLowerCase() === cat)
       }
-      return text(components)
+      return text(paginate(components, limit, cursor))
     }
   )
 
   // 3. get_component_specs
-  server.tool(
+  server.registerTool(
     "get_component_specs",
-    "Returns the full spec for one component (role, usage, constraints, anatomy, tokens, props, states, accessibility — ARIA pattern, keyboard, accessible name, known pitfalls —, code example, cross-references)",
     {
-      component_name: z
-        .string()
-        .describe("Component name (e.g. Button, Card, Dialog)"),
+      title: "Component spec",
+      description:
+        'Returns the spec of one component. "concise" (default): role, MUST / MUST NOT constraints, exported names, cross-references. "detailed": the full spec — usage, anatomy, tokens, props, states, accessibility (ARIA pattern, keyboard, accessible name, known pitfalls), code example. The full spec is also the resource ds://component/{name}/spec',
+      inputSchema: {
+        component_name: z
+          .string()
+          .describe("Component name (e.g. Button, Card, Dialog)"),
+        response_format: responseFormat(
+          "usage, anatomy, tokens, props, states, accessibility and the code example"
+        ),
+      },
+      annotations: READ_ONLY,
     },
-    async ({ component_name }) => {
-      const specs = loadContext<Record<string, unknown>>("component-specs.json")
+    async ({ component_name, response_format }) => {
+      const specs = loadContext<Record<string, ComponentSpec>>(
+        "component-specs.json"
+      )
       const needle = component_name.toLowerCase().replace(/[\s-_]/g, "")
+      const answer = (spec: ComponentSpec) =>
+        text(response_format === "detailed" ? spec : conciseSpec(spec))
 
       // Exact match first
       for (const [key, value] of Object.entries(specs)) {
         if (key.toLowerCase().replace(/[\s-_]/g, "") === needle) {
-          return text(value)
+          return answer(value)
         }
       }
       // Fuzzy match
@@ -147,7 +180,7 @@ import { cn } from "@/lib/utils"`,
             .replace(/[\s-_]/g, "")
             .includes(needle)
         ) {
-          return text(value)
+          return answer(value)
         }
       }
 
@@ -159,13 +192,18 @@ import { cn } from "@/lib/utils"`,
   )
 
   // 4. get_component_variants
-  server.tool(
+  server.registerTool(
     "get_component_variants",
-    "Returns the variants/props extracted from cva() for a component",
     {
-      component_name: z
-        .string()
-        .describe("Component name to look up variants for"),
+      title: "Component variants",
+      description:
+        "Returns the variants/props extracted from cva() for a component",
+      inputSchema: {
+        component_name: z
+          .string()
+          .describe("Component name to look up variants for"),
+      },
+      annotations: READ_ONLY,
     },
     async ({ component_name }) => {
       const variants = loadContext<Record<string, unknown>>(
@@ -197,44 +235,53 @@ import { cn } from "@/lib/utils"`,
   )
 
   // 5. get_tokens
-  server.tool(
+  server.registerTool(
     "get_tokens",
-    "Returns design tokens filtered by category, or all tokens if no category specified",
     {
-      category: z
-        .enum([
-          "color",
-          "space",
-          "typography",
-          "radius",
-          "elevation",
-          "motion",
-          "opacity",
-          "zindex",
-          "breakpoint",
-          "border-width",
-        ])
-        .optional()
-        .describe("Token category to filter by"),
+      title: "Semantic tokens",
+      description:
+        "Returns the semantic design tokens, filtered by category or all of them, one page at a time: { total, items, next_cursor }. One token is also the resource ds://token/{path}",
+      inputSchema: {
+        category: z
+          .enum([
+            "color",
+            "space",
+            "typography",
+            "radius",
+            "elevation",
+            "motion",
+            "opacity",
+            "zindex",
+            "breakpoint",
+            "border-width",
+          ])
+          .optional()
+          .describe("Token category to filter by"),
+        ...pageParams,
+      },
+      annotations: READ_ONLY,
     },
-    async ({ category }) => {
+    async ({ category, limit, cursor }) => {
       const tokens = loadContext<
         Array<{ path: string; css_var: string; [k: string]: unknown }>
       >("semantic-tokens.json")
-      if (!Array.isArray(tokens)) return text([])
-
-      if (!category) return text(tokens)
-
-      const filtered = tokens.filter((t) => t.path.startsWith(category + "."))
-      return text(filtered)
+      const all = Array.isArray(tokens) ? tokens : []
+      const filtered = category
+        ? all.filter((t) => t.path.startsWith(category + "."))
+        : all
+      return text(paginate(filtered, limit, cursor))
     }
   )
 
   // 6. get_typography
-  server.tool(
+  server.registerTool(
     "get_typography",
-    "Returns the full typography system (families, scale, weights, line-heights)",
-    {},
+    {
+      title: "Typography",
+      description:
+        "Returns the full typography system (families, scale, weights, line-heights)",
+      annotations: READ_ONLY,
+    },
     async () => {
       const typo = loadContext("text-styles.json")
       return text(typo)
@@ -242,10 +289,13 @@ import { cn } from "@/lib/utils"`,
   )
 
   // 7. get_icons
-  server.tool(
+  server.registerTool(
     "get_icons",
-    "Returns the icon catalog and recommendations",
-    {},
+    {
+      title: "Icons",
+      description: "Returns the icon catalog and recommendations",
+      annotations: READ_ONLY,
+    },
     async () => {
       const icons = loadContext("icons.json")
       return text(icons)
@@ -253,67 +303,36 @@ import { cn } from "@/lib/utils"`,
   )
 
   // 8. get_design_rules
-  server.tool(
+  server.registerTool(
     "get_design_rules",
-    'Returns design rules: foundation do/don\'t, component constraints and the composition rules of design-system.index.json. Filter by category: a foundation (color, typography…), a component name (its constraints and the composition rules that cover it), or "composition" for every composition rule',
     {
-      category: z
-        .string()
-        .optional()
-        .describe("Filter rules by category (e.g. color, typography, spacing)"),
+      title: "Design rules",
+      description:
+        'Returns design rules: foundation do/don\'t, component constraints and the composition rules of design-system.index.json. Filter by category: a foundation (color, typography…), a component name (its constraints and the composition rules that cover it), "composition" for every composition rule, or "tailwind" for the critical rules in full. Without a category, "concise" (default) returns the composition rules, the titles of the critical rules and the categories; "detailed" returns every rule. With a category, "concise" reduces the critical rules to their titles',
+      inputSchema: {
+        category: z
+          .string()
+          .optional()
+          .describe(
+            "Filter rules by category (e.g. color, typography, spacing)"
+          ),
+        response_format: responseFormat(
+          "every rule without a category, and the critical rules in full with one"
+        ),
+      },
+      annotations: READ_ONLY,
     },
-    async ({ category }) => {
-      const data = loadContext<Record<string, unknown>>("ux-writing.json")
-
-      const tailwindRule = TAILWIND_RULE
-
-      const componentRule = {
-        id: "use-ds-components",
-        severity: "critical",
-        title: "ALWAYS use DS React components — NEVER use raw HTML elements",
-        description: [
-          "The design system provides pre-built React components that enforce tokens, accessibility, and visual consistency.",
-          "ALWAYS prefer DS components over raw HTML elements. Every visual element should come from @/components/ui/<name>.",
-        ],
-        mandatory_mappings: {
-          "Content sections / containers":
-            "Use <Card>, <CardHeader>, <CardContent>, <CardFooter> — NOT raw <div>",
-          "Titles / headings":
-            "Use <Heading> component — NOT raw <h1>, <h2>, <h3>",
-          "Buttons / CTAs":
-            "Use <Button> component with variant prop — NOT raw <button> or <a> styled as button",
-          "Form fields":
-            "Use <Input>, <Label>, <Checkbox>, <Select>, <Textarea>, <RadioGroup> — NOT raw <input>",
-          "Form groups":
-            "Use <Field>, <FieldLabel>, <FieldDescription>, <FieldError> — NOT raw <div> + <label>",
-          "Links with icon":
-            "Use <Button variant='link'> or <Button variant='ghost'> — NOT raw <a>",
-          Separators: "Use <Separator> — NOT raw <hr> or border-b",
-          "Loading / empty states":
-            "Use <Skeleton>, <Spinner>, <Empty> — NOT custom loading divs",
-          "Modals / dialogs":
-            "Use <Dialog> or <AlertDialog> — NOT custom overlay divs",
-          Icons: "Use @phosphor-icons/react — NOT raw <svg> elements",
-          Navigation:
-            "Use <NavigationMenu>, <Breadcrumb>, <Tabs> — NOT raw <nav> + <a>",
-          Tooltips: "Use <Tooltip> — NOT title attribute",
-          "Lists of items":
-            "Use <Item>, <ItemHeader>, <ItemContent> — NOT raw <li> or <div>",
-          "Data display": "Use <Table>, <Badge>, <Avatar> — NOT custom layouts",
-          Notifications:
-            "Use <Alert>, Toaster (sonner) — NOT custom notification divs",
-        },
-        page_structure: [
-          "Root container MUST have: className='min-h-screen bg-background text-foreground'",
-          "Every page MUST set bg-background and text-foreground on the outermost element",
-          "Wrap content sections in <Card> components for visual grouping",
-          "Use <Heading> for all titles with proper level (1-4)",
-          "All interactive elements MUST be DS components (Button, Input, etc.)",
-        ],
-      }
+    async ({ category, response_format }) => {
+      const data = loadContext<RuleSet>("ux-writing.json")
+      const critical = (format: ResponseFormat) =>
+        format === "detailed" ? CRITICAL_RULES : criticalRuleTitles()
 
       if (!category) {
-        return text({ ...data, critical_rules: [tailwindRule, componentRule] })
+        return text(
+          response_format === "detailed"
+            ? { ...data, critical_rules: CRITICAL_RULES }
+            : conciseRuleSet(data)
+        )
       }
 
       const cat = category.toLowerCase()
@@ -325,7 +344,7 @@ import { cn } from "@/lib/utils"`,
         return text({ category, composition_rules: composition })
 
       if (cat === "tailwind" || cat === "css" || cat === "styling") {
-        return text({ category, rules: [tailwindRule, componentRule] })
+        return text({ category, rules: CRITICAL_RULES })
       }
 
       // Check general_rules and component_rules
@@ -345,7 +364,7 @@ import { cn } from "@/lib/utils"`,
             category,
             rules: filtered,
             composition_rules: composition,
-            critical_rules: [tailwindRule, componentRule],
+            critical_rules: critical(response_format),
           })
       }
 
@@ -356,7 +375,7 @@ import { cn } from "@/lib/utils"`,
             category,
             rules: match,
             composition_rules: composition,
-            critical_rules: [tailwindRule, componentRule],
+            critical_rules: critical(response_format),
           })
       }
 
@@ -364,16 +383,19 @@ import { cn } from "@/lib/utils"`,
         category,
         rules: [],
         composition_rules: composition,
-        critical_rules: [tailwindRule, componentRule],
+        critical_rules: critical(response_format),
       })
     }
   )
 
   // 9. get_page_patterns
-  server.tool(
+  server.registerTool(
     "get_page_patterns",
-    "Returns all page layout patterns",
-    {},
+    {
+      title: "Page patterns",
+      description: "Returns all page layout patterns",
+      annotations: READ_ONLY,
+    },
     async () => {
       const patterns = loadContext("page-patterns.json")
       return text(patterns)

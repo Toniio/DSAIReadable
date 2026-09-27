@@ -111,7 +111,7 @@ ${TAILWIND_RULE}`,
               text: `You are a senior frontend developer working with the DSAIReadable Design System.
 
 **BEFORE making any changes, you MUST call these tools:**
-1. \`get_component_specs\` (component_name: "${target}") — to understand the component's full spec
+1. \`get_component_specs\` (component_name: "${target}", response_format: "detailed") — to understand the component's full spec
 2. \`get_component_variants\` (component_name: "${target}") — to understand available variants${uxWritingInstruction}
 
 **Only after gathering this information, suggest the revision.**
@@ -251,7 +251,7 @@ ${TAILWIND_RULE}`,
 1. \`get_design_system_overview\` — to understand the DS scope
 2. \`get_components\`${category ? ` (category: "${category}")` : ""} — to get the component list
 3. For each component found, call:
-   - \`get_component_specs\` (component_name: <name>) — full specs
+   - \`get_component_specs\` (component_name: <name>, response_format: "detailed") — full specs
    - \`get_component_variants\` (component_name: <name>) — all variants
 4. \`get_tokens\` — to get all design tokens
 5. \`get_design_rules\` — to ensure showcase follows rules
