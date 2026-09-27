@@ -17,14 +17,14 @@ Interrupteur à bascule pour activer ou désactiver un paramètre binaire, avec 
 ## Usage
 
 - Activation/désactivation d'un paramètre (ex. : notifications, mode sombre)
-- Choix binaire on/off dans un formulaire de préférences
+- Choix binaire on/off dans un formulaire de réglages
 - Contrôle d'état avec effet immédiat (pas de soumission requise)
 - Alternative visuelle à un checkbox unique
 
 ## Contraintes
 
-- Ne pas utiliser pour des choix multiples — préférer `Checkbox`
-- Ne pas utiliser pour un choix entre deux options nommées — préférer `RadioGroup`
+- **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
+- **MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`
 - Toujours associer un `<Label>` pour l'accessibilité
 - La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est intégrée — ne pas ajouter de padding supplémentaire
 - Requiert un conteneur `"use client"` (composant client-side)

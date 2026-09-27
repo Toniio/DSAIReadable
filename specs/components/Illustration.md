@@ -25,7 +25,7 @@ Placeholder pour illustrations et images décoratives. Utilisé dans les layouts
 
 - Toujours fournir un `alt` descriptif — il alimente `role="img"` + `aria-label`
 - Ce composant est un placeholder : remplacer par de vraies illustrations en production
-- Ne pas utiliser pour des images de contenu — préférer `<img>` ou `next/image`
+- **MUST NOT** — afficher une image de contenu → utiliser `<img>` ou `next/image`
 - Le conteneur n'impose aucune dimension : les fixer via `className` côté appelant
 - Texte alternatif par défaut en anglais issu de `UI_STRINGS.illustration` — surcharger via `alt`
 

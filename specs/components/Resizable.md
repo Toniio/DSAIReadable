@@ -24,10 +24,10 @@ Système de panneaux redimensionnables permettant de diviser une zone en section
 
 ## Contraintes
 
-- Ne pas utiliser pour des mises en page simples à largeur fixe — préférer un grid CSS
-- Les panneaux doivent avoir des tailles minimales pour éviter le contenu écrasé
+- **MUST NOT** — servir à une mise en page à largeurs fixes → une grille CSS (`grid`)
+- **MUST** — donner un `minSize` à chaque `ResizablePanel`, pour que son contenu ne soit jamais écrasé
 - Le `ResizableHandle` doit être clavier-accessible (focus + flèches)
-- Limiter la profondeur d'imbrication des groupes pour éviter les conflits de redimensionnement
+- **MUST NOT** — imbriquer plus de 2 niveaux de `ResizablePanelGroup`
 - Orientation `vertical` et `horizontal` ne doivent pas être mélangées au même niveau
 
 ## Dépendances

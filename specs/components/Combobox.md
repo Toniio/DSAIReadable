@@ -24,12 +24,12 @@ Champ de saisie avec auto-complétion et sélection parmi une liste d'options fi
 
 ## Contraintes
 
-- Ne pas utiliser pour des listes courtes (< 5 options) — préférer `Select` ou `NativeSelect`
+- **MUST NOT** — servir pour moins de 5 options → utiliser `Select` ou `NativeSelect`
 - L'option vide (`ComboboxEmpty`) doit toujours être fournie pour le cas « aucun résultat »
 - En mode multi-sélection, fournir un `anchor` pour le positionnement du popup par rapport aux chips
 - Les éléments `ComboboxItem` doivent avoir une valeur unique pour le bon fonctionnement de l'indicateur de sélection
 - Requiert un conteneur `"use client"` (composant client-side)
-- Les trois boutons icon-only (trigger, clear, remove de chip) ont un nom accessible par défaut en anglais ; le traduire via `triggerLabel`, `clearLabel` et `removeLabel` plutôt que de le laisser vide
+- **MUST** — dans une interface qui n'est pas en anglais, traduire le nom accessible des trois boutons icon-only (trigger, clear, remove de chip) via `triggerLabel`, `clearLabel` et `removeLabel` : il est en anglais par défaut
 
 ## Dépendances
 

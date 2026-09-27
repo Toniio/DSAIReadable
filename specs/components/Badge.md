@@ -24,8 +24,8 @@
 
 ## Contraintes
 
-- Ne pas utiliser comme bouton d'action — préférer `Button` avec `size="xs"`
-- Le texte doit rester très court (un à trois mots maximum)
+- **MUST NOT** — servir de bouton d'action → utiliser `Button` avec `size="xs"`
+- **MUST NOT** — dépasser trois mots de texte
 - La variante `destructive` est réservée aux statuts d'erreur ou d'alerte critique
 - Ne pas imbriquer de composants interactifs complexes à l'intérieur du badge
 - Les variantes `ghost` et `link` n'ont pas de fond ; vérifier la lisibilité sur tous les arrière-plans

@@ -24,8 +24,8 @@ Déclencheur d'action primaire ou secondaire, disponible en plusieurs variantes 
 
 ## Contraintes
 
-- Ne pas utiliser pour la navigation externe — préférer un `<a>` sémantique
-- Limiter à 2 boutons primaires par vue pour éviter la surcharge cognitive
+- **MUST NOT** — rendre un `<button>` pour naviguer vers un site externe → un `<a href>`, via `asChild` pour garder l'apparence
+- **MUST NOT** — placer plus de 2 boutons `variant="default"` (primaires) dans une même vue
 - L'état `disabled` supprime les événements pointer ; ne pas transmettre d'info uniquement via la couleur (ajouter un texte ou tooltip)
 - Les variantes `icon-*` requièrent un `aria-label` explicite
 - Ne pas imbriquer un `<button>` dans un autre `<button>` même via `asChild`
@@ -34,7 +34,7 @@ Déclencheur d'action primaire ou secondaire, disponible en plusieurs variantes 
 
 - `Slot.Root` de `radix-ui` (utilisé quand `asChild={true}`)
 - `class-variance-authority` pour la gestion des variantes
-- Icônes SVG compatibles (Phosphor Icons recommandé)
+- Icônes : `@phosphor-icons/react` uniquement (**MUST**, règle du dépôt)
 
 ## Anatomie
 
@@ -129,7 +129,7 @@ Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props 
 
 **Vigilance** :
 
-- Désactiver avec `disabled` retire le bouton de l'ordre de tabulation : si l'utilisateur doit comprendre pourquoi, préférer `aria-disabled` et une explication.
+- **MUST** — quand l'utilisateur doit comprendre pourquoi l'action est indisponible, utiliser `aria-disabled` et une explication : `disabled` retire le bouton de l'ordre de tabulation.
 - Un bouton qui navigue doit être un lien (`asChild` + `a`), pas un `onClick` qui change de page.
 - `variant="destructive"` doit être doublé d'un libellé explicite.
 

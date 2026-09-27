@@ -24,8 +24,8 @@ Conteneur de défilement horizontal ou vertical permettant de naviguer entre des
 
 ## Contraintes
 
-- Ne pas utiliser pour du contenu critique qui doit être visible sans interaction — préférer une grille
-- Limiter à un carrousel par vue pour éviter les conflits de navigation clavier
+- **MUST NOT** — porter un contenu critique, qui doit être visible sans interaction → une grille
+- **MUST NOT** — afficher plus d'un `Carousel` par vue : leurs navigations clavier entrent en conflit
 - Les boutons précédent/suivant doivent rester accessibles ; ne pas masquer les contrôles de navigation
 - Fournir un `aria-label` descriptif sur le conteneur pour les lecteurs d'écran
 - Le composant nécessite `CarouselContent` et au moins un `CarouselItem` comme enfants

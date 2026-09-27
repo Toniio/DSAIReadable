@@ -24,10 +24,10 @@ Fenêtre modale polyvalente pour afficher du contenu interactif (formulaire, dé
 
 ## Contraintes
 
-- Ne pas utiliser pour les confirmations destructrices — préférer `AlertDialog`
-- Limiter à 1 Dialog visible par vue (éviter l'empilement de modales)
+- **MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`
+- **MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois
 - `DialogTitle` est requis pour l'accessibilité (lecteurs d'écran)
-- Ne pas placer de contenu scrollable très long — préférer `Sheet` ou une page dédiée
+- **MUST NOT** — contenir un contenu qui impose un défilement interne → utiliser `Sheet` ou une page dédiée
 - Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible
 - Chaînes par défaut en anglais issues de `UI_STRINGS.dialog` — surcharger via `closeLabel`
 

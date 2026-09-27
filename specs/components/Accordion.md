@@ -25,10 +25,10 @@ Composant de navigation verticale permettant d'afficher et masquer des sections 
 ## Contraintes
 
 - Ne pas utiliser pour du contenu critique qui doit rester visible en permanence
-- Limiter la profondeur d'imbrication à un seul niveau pour éviter la confusion
+- **MUST NOT** — imbriquer un `Accordion` dans un autre : un seul niveau
 - Fournir un texte explicite dans le trigger pour l'accessibilité (pas d'icône seule)
 - L'état `disabled` sur le trigger supprime les événements pointer et réduit l'opacité
-- Ne pas utiliser pour une navigation principale — préférer `NavigationMenu` ou `Tabs`
+- **MUST NOT** — servir de navigation principale → utiliser `NavigationMenu` ou `Tabs`
 
 ## Dépendances
 

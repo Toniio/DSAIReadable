@@ -24,7 +24,7 @@
 
 - Ne pas substituer un `Label` par du texte `placeholder` seul
 - Un label doit toujours référencer son contrôle (`htmlFor` ou `aria-labelledby`) — ne jamais laisser un champ sans libellé visible
-- Ne pas utiliser pour des titres de section — préférer `FieldLegend` ou un `<h*>`
+- **MUST NOT** — servir de titre de section → utiliser `FieldLegend` ou `Heading`
 - Maximum un `Label` par contrôle
 
 ## Dépendances

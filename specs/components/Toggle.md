@@ -23,7 +23,7 @@ Bouton à bascule binaire (pressé/non pressé) disponible en plusieurs variante
 
 ## Contraintes
 
-- Ne pas utiliser pour des actions non réversibles — préférer `Button`
+- **MUST NOT** — déclencher une action non réversible → utiliser `Button`
 - Ne pas utiliser comme remplacement d'un `Switch` dans un formulaire de paramètres
 - La variante `outline` ajoute une bordure ; ne pas la combiner avec une bordure parente
 - Requiert un conteneur `"use client"` (composant client-side)

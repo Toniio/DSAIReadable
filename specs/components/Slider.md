@@ -23,7 +23,7 @@ Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une
 
 ## Contraintes
 
-- Ne pas utiliser pour des valeurs précises — préférer un `Input` de type `number`
+- **MUST NOT** — servir à saisir une valeur précise → un `Input` de type `number`
 - Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)
 - En mode vertical (`orientation="vertical"`), une hauteur minimale (`min-h-40`) est requise
 - Les valeurs `min` et `max` doivent être cohérentes avec le pas (`step`)

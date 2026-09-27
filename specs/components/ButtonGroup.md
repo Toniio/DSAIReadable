@@ -24,8 +24,8 @@ Conteneur regroupant visuellement plusieurs boutons, inputs ou selects adjacents
 
 ## Contraintes
 
-- Ne pas utiliser pour des actions sans lien logique — préférer un espacement simple
-- Limiter le nombre de boutons groupés (3 à 5 maximum) pour la lisibilité
+- **MUST NOT** — grouper des actions sans lien logique → les espacer simplement (`flex gap-*`)
+- **MUST NOT** — grouper plus de 5 boutons
 - L'orientation `vertical` doit être réservée aux barres d'outils latérales
 - Les enfants doivent supporter la fusion de bordures (les arrondis intermédiaires sont supprimés)
 - Les groupes imbriqués (`has-[>[data-slot=button-group]]`) ajoutent un `gap-2` automatique

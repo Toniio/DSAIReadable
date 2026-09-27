@@ -26,7 +26,7 @@ Ensemble de composants pour construire des tableaux de données sémantiques ave
 
 - Ne pas utiliser pour la mise en page — les tableaux sont réservés aux données tabulaires uniquement
 - Le conteneur gère le défilement horizontal (`overflow-x-auto`) ; ne pas ajouter de scroll parent redondant
-- Limiter le nombre de colonnes visibles pour rester lisible sur mobile (préférer le scroll horizontal)
+- **MUST** — au-delà de 4 colonnes, masquer les colonnes secondaires sous 640 px (le conteneur de `Table` défile déjà horizontalement)
 - Les cellules avec `role="checkbox"` reçoivent un padding réduit automatiquement (`pr-0`)
 - Fournir un `TableCaption` ou un `aria-label` pour l'accessibilité quand le contexte du tableau n'est pas évident
 

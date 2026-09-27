@@ -24,7 +24,7 @@ Conteneur et utilitaires de visualisation de données basés sur `recharts`, fou
 
 ## Contraintes
 
-- Ne pas utiliser pour des tableaux de données brutes — préférer `Table` pour les données tabulaires
+- **MUST NOT** — présenter des données brutes à lire valeur par valeur → utiliser `Table`
 - Le `ChartContainer` doit toujours recevoir un `config` valide avec au moins une entrée
 - Les couleurs définies via `theme` dans `ChartConfig` prennent priorité sur `color`
 - Chaque clé de `config` devient une variable `--color-<clé>`, injectée par `ChartStyle` : la lire dans les séries (`fill="var(--color-revenue)"`). Ce n'est pas un token : sa valeur vient de `config`

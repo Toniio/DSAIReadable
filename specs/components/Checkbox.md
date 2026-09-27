@@ -24,7 +24,7 @@ Case à cocher binaire (ou indéterminée) permettant la sélection d'une option
 ## Contraintes
 
 - Toujours associer à un `<Label>` via `id` / `htmlFor` ou en l'encapsulant dans `<Field>`
-- Ne pas utiliser pour des choix mutuellement exclusifs — préférer `<RadioGroup>`
+- **MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`
 - La zone de clic étendue (`after: absolute -inset-x-3 -inset-y-2`) ne doit pas chevaucher d'autres contrôles interactifs adjacents
 - En état `disabled`, la valeur n'est pas soumise par le formulaire natif
 - Ne pas transmettre l'état uniquement par la couleur (ajouter une icône ou un texte)
@@ -34,7 +34,7 @@ Case à cocher binaire (ou indéterminée) permettant la sélection d'une option
 - `Checkbox.Root` et `Checkbox.Indicator` de `radix-ui`
 - `CheckIcon` de `lucide-react` (taille `size-3.5`)
 - `Label` — obligatoire pour l'accessibilité
-- `Field` — recommandé pour la propagation de l'état invalide
+- `Field` — **SHOULD** envelopper la case pour propager l'état invalide, **sauf** case isolée sans message d'erreur
 
 ## Anatomie
 

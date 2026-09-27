@@ -23,7 +23,7 @@ Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi u
 
 ## Contraintes
 
-- Ne pas utiliser si une recherche/filtrage est nécessaire — préférer `Combobox`
+- **MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`
 - Pour les formulaires mobiles avec de nombreuses options, `NativeSelect` offre une meilleure UX native
 - Le contenu est rendu dans un `Portal` — attention au contexte de z-index
 - Chaque `SelectItem` doit avoir une `value` unique

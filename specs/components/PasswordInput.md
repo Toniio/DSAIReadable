@@ -23,7 +23,7 @@ Champ de saisie de mot de passe avec bouton de bascule de visibilité (œil ouve
 ## Contraintes
 
 - Toujours envelopper dans un `Field` avec un `FieldLabel` associé
-- Ne pas utiliser pour des champs de texte classiques — préférer `Input`
+- **MUST NOT** — servir à un champ de texte non sensible → utiliser `Input`
 - La prop `type` n'est pas acceptée : le composant la pilote lui-même
 - Composant client (`"use client"`) — il porte l'état de visibilité
 - Libellés de la bascule en anglais issus de `UI_STRINGS.passwordInput`
@@ -129,4 +129,4 @@ export default function Example() {
 
 - `Field` — encadrement obligatoire (label, description, erreur)
 - `InputGroup` — socle de composition du champ
-- `Input` — à préférer pour tout champ non sensible
+- `Input` — le champ de toute saisie non sensible

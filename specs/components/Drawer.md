@@ -25,7 +25,7 @@ Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glisseme
 ## Contraintes
 
 - Ne pas utiliser sur desktop quand un `Dialog` ou un `Sheet` est plus adapté
-- Limiter la hauteur à 80vh pour les directions top/bottom (appliqué par défaut)
+- **MUST NOT** — dépasser 80vh de hauteur en direction `top` ou `bottom` (appliqué par défaut)
 - Ne pas empiler plusieurs Drawers — un seul visible à la fois
 - `DrawerTitle` est requis pour l'accessibilité (lecteurs d'écran)
 - Le geste de fermeture par swipe peut interférer avec le scroll interne : tester sur mobile

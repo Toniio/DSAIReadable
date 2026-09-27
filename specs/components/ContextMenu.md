@@ -23,7 +23,7 @@ Menu contextuel déclenché par un clic droit, affichant une liste d'actions per
 
 ## Contraintes
 
-- Ne pas utiliser comme menu principal de navigation — préférer `DropdownMenu`
+- **MUST NOT** — servir de menu principal de navigation → utiliser `DropdownMenu`
 - Le menu contextuel remplace le menu natif du navigateur : s'assurer que les actions proposées sont pertinentes
 - Un seul menu contextuel visible à la fois (géré par Radix)
 - Prévoir un fallback clavier (touche `Shift+F10` ou touche contextuelle)

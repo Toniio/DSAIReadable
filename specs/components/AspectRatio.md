@@ -19,7 +19,7 @@ Conteneur qui impose un rapport largeur/hauteur fixe à son contenu (images, vid
 - Afficher une image ou une vidéo dans un ratio constant (16/9, 4/3, 1/1, etc.)
 - Garantir la cohérence visuelle d'une grille de vignettes
 - Encadrer un contenu embed (iframe, carte) sans décalage de mise en page
-- Éviter le _cumulative layout shift_ (CLS) en réservant l'espace avant le chargement
+- Réserver l'espace d'un média avant son chargement, pour qu'il ne décale pas la mise en page (_cumulative layout shift_)
 
 ## Contraintes
 

@@ -24,7 +24,7 @@ Palette de commandes avec recherche intégrée, permettant de filtrer et sélect
 
 ## Contraintes
 
-- Ne pas utiliser pour un simple champ de recherche — préférer un `Input` avec filtrage
+- **MUST NOT** — servir de simple champ de recherche → un `Input` qui filtre la liste
 - Le composant `CommandEmpty` doit toujours être présent pour le cas « aucun résultat »
 - Les raccourcis (`CommandShortcut`) sont informatifs uniquement ; le binding clavier doit être géré séparément
 - Requiert un conteneur `"use client"` (composant client-side)

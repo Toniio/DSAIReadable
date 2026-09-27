@@ -26,7 +26,7 @@ Groupe de boutons à bascule mutuellement exclusifs ou multi-sélection, basé s
 
 - Utiliser `type="single"` pour une sélection exclusive et `type="multiple"` pour la multi-sélection
 - Fournir un `aria-label` sur le `ToggleGroup` pour décrire le groupe aux lecteurs d'écran
-- Ne pas utiliser pour la navigation — préférer `Tabs` ou `NavigationMenu`
+- **MUST NOT** — servir à la navigation → utiliser `Tabs` ou `NavigationMenu`
 - Le `spacing={0}` (par défaut) fusionne les bordures ; avec `spacing > 0` les items sont espacés
 - Les variantes et tailles sont propagées via contexte ; ne les surcharger sur `ToggleGroupItem` qu'en cas de besoin spécifique
 

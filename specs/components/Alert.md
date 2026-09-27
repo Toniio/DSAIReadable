@@ -23,9 +23,9 @@ Bandeau de feedback non-modal affichant un message contextuel (informatif ou d'e
 
 ## Contraintes
 
-- Ne pas utiliser pour des messages éphémères (toast) — préférer un composant `Toast`
-- Ne pas utiliser pour des dialogues bloquants — préférer `AlertDialog`
-- Maximum 1 Alert par section de page pour éviter la surcharge informationnelle
+- **MUST NOT** — afficher un message éphémère (toast) → utiliser `Sonner`
+- **MUST NOT** — servir de dialogue bloquant → utiliser `AlertDialog`
+- **MUST NOT** — placer plus d'une `Alert` par section de page
 - L'attribut `role="alert"` est déjà positionné ; ne pas en ajouter un second dans les enfants
 - `AlertAction` est positionné en absolu dans le coin supérieur droit ; ne pas y placer de contenu de largeur variable
 

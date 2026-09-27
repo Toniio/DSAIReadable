@@ -28,7 +28,7 @@ Panneau de navigation latéral complet avec support responsive (Sheet mobile), �
 - Ne pas utiliser plus d'une `Sidebar` par côté (left/right) dans un même `SidebarProvider`
 - Les variantes `floating` et `inset` ajoutent des padding et ombres qui peuvent entrer en conflit avec des layouts imbriqués
 - Les boutons icône-seuls en mode collapsed nécessitent un `tooltip` pour l'accessibilité
-- Le raccourci clavier `Ctrl+B` / `⌘+B` est automatiquement enregistré — éviter les conflits avec d'autres raccourcis
+- **MUST NOT** — lier `Ctrl+B` / `⌘+B` à une autre action : `SidebarProvider` l'enregistre pour replier la barre
 - Libellé de `SidebarTrigger` et `SidebarRail` en anglais issu de `UI_STRINGS.sidebar`
 
 ## Dépendances

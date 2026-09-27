@@ -23,10 +23,10 @@ Carte flottante de prévisualisation apparaissant au survol d'un élément, affi
 
 ## Contraintes
 
-- Ne pas utiliser pour des contenus interactifs complexes (formulaires, boutons) — préférer `Popover`
+- **MUST NOT** — contenir des éléments interactifs (formulaires, boutons) → utiliser `Popover`
 - Ne pas utiliser sur mobile (le survol n'existe pas sur tactile) — prévoir un fallback
 - Le contenu doit être purement informatif et non essentiel
-- Éviter les HoverCards sur des éléments trop proches pour ne pas créer de flickering
+- **MUST NOT** — poser des `HoverCard` sur deux déclencheurs adjacents (liste dense) : le survol de l'un ouvre l'autre
 - Ne pas y placer de contenu critique que l'utilisateur doit impérativement voir
 
 ## Dépendances
@@ -123,7 +123,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | `Tab` (focus du déclencheur) | Ouvre l'aperçu |
 | Perte du focus               | Ferme l'aperçu |
 
-**Nom accessible** : Le déclencheur est généralement un lien, nommé par son texte.
+**Nom accessible** : Celui du déclencheur, le plus souvent un lien nommé par son texte.
 
 **Vigilance** :
 

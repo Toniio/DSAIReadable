@@ -24,8 +24,8 @@
 
 ## Contraintes
 
-- Ne pas utiliser pour les erreurs serveur — préférer un composant d'erreur dédié
-- Limiter à une seule instance `Empty` par vue pour éviter la confusion
+- **MUST NOT** — signaler une erreur serveur → utiliser `Alert` en `variant="destructive"`
+- **MUST NOT** — afficher plus d'un `Empty` par vue
 - Le média (`EmptyMedia`) doit rester décoratif ; ne pas y placer d'information essentielle sans texte alternatif
 - Le texte doit rester court et orienté action
 - `EmptyTitle` rend un `<h2>` : passer `as` (`"h3"`…) pour suivre la hiérarchie de la page — un niveau sous le titre de la section qui contient l'état vide. Ne pas styler via `as` : l'apparence est fixe

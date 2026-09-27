@@ -216,21 +216,21 @@
   "component_rules": {
     "Accordion": [
       "Ne pas utiliser pour du contenu critique qui doit rester visible en permanence",
-      "Limiter la profondeur d'imbrication à un seul niveau pour éviter la confusion",
+      "**MUST NOT** — imbriquer un `Accordion` dans un autre : un seul niveau",
       "Fournir un texte explicite dans le trigger pour l'accessibilité (pas d'icône seule)",
       "L'état `disabled` sur le trigger supprime les événements pointer et réduit l'opacité",
-      "Ne pas utiliser pour une navigation principale — préférer `NavigationMenu` ou `Tabs`"
+      "**MUST NOT** — servir de navigation principale → utiliser `NavigationMenu` ou `Tabs`"
     ],
     "Alert": [
-      "Ne pas utiliser pour des messages éphémères (toast) — préférer un composant `Toast`",
-      "Ne pas utiliser pour des dialogues bloquants — préférer `AlertDialog`",
-      "Maximum 1 Alert par section de page pour éviter la surcharge informationnelle",
+      "**MUST NOT** — afficher un message éphémère (toast) → utiliser `Sonner`",
+      "**MUST NOT** — servir de dialogue bloquant → utiliser `AlertDialog`",
+      "**MUST NOT** — placer plus d'une `Alert` par section de page",
       "L'attribut `role=\"alert\"` est déjà positionné ; ne pas en ajouter un second dans les enfants",
       "`AlertAction` est positionné en absolu dans le coin supérieur droit ; ne pas y placer de contenu de largeur variable"
     ],
     "AlertDialog": [
-      "Ne pas utiliser pour des messages d'information simple — préférer `Dialog` ou une notification",
-      "Limiter à 1 AlertDialog visible par vue à la fois",
+      "**MUST NOT** — servir à un simple message d'information → utiliser `Dialog`, ou `Sonner` pour une notification",
+      "**MUST NOT** — ouvrir un `AlertDialog` par-dessus un autre : un seul visible à la fois",
       "Toujours proposer un bouton d'annulation pour ne pas piéger l'utilisateur",
       "Le focus doit être piégé dans la modale (`focus trap` natif Radix)",
       "`AlertDialogTitle` est requis pour l'accessibilité (annonce par les lecteurs d'écran)"
@@ -244,11 +244,11 @@
       "Toujours fournir un `AvatarFallback` comme alternative à l'image",
       "Ne pas utiliser `AvatarBadge` sans contexte textuel accessible (ajouter un `aria-label`)",
       "L'image doit avoir un attribut `alt` descriptif via les props de `AvatarImage`",
-      "Limiter le nombre d'avatars visibles dans un `AvatarGroup` et afficher un compteur via `AvatarGroupCount`"
+      "**MUST NOT** — afficher plus de 4 avatars dans un `AvatarGroup` : au-delà, montrer les 3 premiers et le reste dans `AvatarGroupCount`"
     ],
     "Badge": [
-      "Ne pas utiliser comme bouton d'action — préférer `Button` avec `size=\"xs\"`",
-      "Le texte doit rester très court (un à trois mots maximum)",
+      "**MUST NOT** — servir de bouton d'action → utiliser `Button` avec `size=\"xs\"`",
+      "**MUST NOT** — dépasser trois mots de texte",
       "La variante `destructive` est réservée aux statuts d'erreur ou d'alerte critique",
       "Ne pas imbriquer de composants interactifs complexes à l'intérieur du badge",
       "Les variantes `ghost` et `link` n'ont pas de fond ; vérifier la lisibilité sur tous les arrière-plans"
@@ -262,22 +262,22 @@
       "Chaînes par défaut en anglais issues de `UI_STRINGS.breadcrumb` — surcharger `BreadcrumbEllipsis` via `srLabel`"
     ],
     "Button": [
-      "Ne pas utiliser pour la navigation externe — préférer un `<a>` sémantique",
-      "Limiter à 2 boutons primaires par vue pour éviter la surcharge cognitive",
+      "**MUST NOT** — rendre un `<button>` pour naviguer vers un site externe → un `<a href>`, via `asChild` pour garder l'apparence",
+      "**MUST NOT** — placer plus de 2 boutons `variant=\"default\"` (primaires) dans une même vue",
       "L'état `disabled` supprime les événements pointer ; ne pas transmettre d'info uniquement via la couleur (ajouter un texte ou tooltip)",
       "Les variantes `icon-*` requièrent un `aria-label` explicite",
       "Ne pas imbriquer un `<button>` dans un autre `<button>` même via `asChild`"
     ],
     "ButtonGroup": [
-      "Ne pas utiliser pour des actions sans lien logique — préférer un espacement simple",
-      "Limiter le nombre de boutons groupés (3 à 5 maximum) pour la lisibilité",
+      "**MUST NOT** — grouper des actions sans lien logique → les espacer simplement (`flex gap-*`)",
+      "**MUST NOT** — grouper plus de 5 boutons",
       "L'orientation `vertical` doit être réservée aux barres d'outils latérales",
       "Les enfants doivent supporter la fusion de bordures (les arrondis intermédiaires sont supprimés)",
       "Les groupes imbriqués (`has-[>[data-slot=button-group]]`) ajoutent un `gap-2` automatique"
     ],
     "Calendar": [
-      "Ne pas utiliser comme agenda ou planning — préférer un composant dédié avec vue journalière/hebdomadaire",
-      "Limiter à un calendrier visible par vue pour éviter la surcharge cognitive (sauf comparaison de plages)",
+      "**MUST NOT** — servir d'agenda ou de planning (vues jour, semaine) : le design system n'en fournit pas",
+      "**MUST NOT** — afficher plus d'un `Calendar` par vue, **sauf** pour comparer deux plages de dates",
       "Le composant nécessite un conteneur parent pour le positionnement (ex. : `Popover`, `Card`)",
       "Les jours désactivés doivent rester visibles (`opacity-disabled`) avec `aria-disabled` pour l'accessibilité",
       "La navigation clavier doit être fonctionnelle : flèches pour se déplacer entre les jours, Tab pour les contrôles"
@@ -285,19 +285,19 @@
     "Card": [
       "Ne pas imbriquer des `Card` sur plus d'un niveau — utiliser un fond différent pour créer de la hiérarchie",
       "`CardAction` est positionné automatiquement en haut à droite du header ; ne pas y placer de contenu long",
-      "Éviter de surcharger `CardFooter` avec plus de 2 actions",
+      "**MUST NOT** — placer plus de 2 actions dans `CardFooter`",
       "La `Card` n'est pas un composant interactif — ne pas lui ajouter `onClick` directement ; encapsuler dans un `<a>` ou un `<button>` si cliquable"
     ],
     "Carousel": [
-      "Ne pas utiliser pour du contenu critique qui doit être visible sans interaction — préférer une grille",
-      "Limiter à un carrousel par vue pour éviter les conflits de navigation clavier",
+      "**MUST NOT** — porter un contenu critique, qui doit être visible sans interaction → une grille",
+      "**MUST NOT** — afficher plus d'un `Carousel` par vue : leurs navigations clavier entrent en conflit",
       "Les boutons précédent/suivant doivent rester accessibles ; ne pas masquer les contrôles de navigation",
       "Fournir un `aria-label` descriptif sur le conteneur pour les lecteurs d'écran",
       "Le composant nécessite `CarouselContent` et au moins un `CarouselItem` comme enfants",
       "Chaînes par défaut en anglais issues de `UI_STRINGS.carousel` — surcharger via `srLabel` sur `CarouselPrevious` / `CarouselNext`"
     ],
     "Chart": [
-      "Ne pas utiliser pour des tableaux de données brutes — préférer `Table` pour les données tabulaires",
+      "**MUST NOT** — présenter des données brutes à lire valeur par valeur → utiliser `Table`",
       "Le `ChartContainer` doit toujours recevoir un `config` valide avec au moins une entrée",
       "Les couleurs définies via `theme` dans `ChartConfig` prennent priorité sur `color`",
       "Chaque clé de `config` devient une variable `--color-<clé>`, injectée par `ChartStyle` : la lire dans les séries (`fill=\"var(--color-revenue)\"`). Ce n'est pas un token : sa valeur vient de `config`",
@@ -306,44 +306,44 @@
     ],
     "Checkbox": [
       "Toujours associer à un `<Label>` via `id` / `htmlFor` ou en l'encapsulant dans `<Field>`",
-      "Ne pas utiliser pour des choix mutuellement exclusifs — préférer `<RadioGroup>`",
+      "**MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`",
       "La zone de clic étendue (`after: absolute -inset-x-3 -inset-y-2`) ne doit pas chevaucher d'autres contrôles interactifs adjacents",
       "En état `disabled`, la valeur n'est pas soumise par le formulaire natif",
       "Ne pas transmettre l'état uniquement par la couleur (ajouter une icône ou un texte)"
     ],
     "Collapsible": [
-      "Ne pas utiliser pour de la navigation multi-niveaux — préférer `Accordion` ou un menu arborescent",
+      "**MUST NOT** — servir de navigation multi-niveaux → utiliser `Accordion`",
       "Le trigger doit être clairement identifiable comme interactif (bouton ou élément cliquable)",
       "Le contenu masqué ne doit pas contenir d'éléments critiques pour la compréhension immédiate de la page",
       "Assurer que `aria-expanded` est correctement géré (Radix le fait automatiquement)"
     ],
     "Combobox": [
-      "Ne pas utiliser pour des listes courtes (< 5 options) — préférer `Select` ou `NativeSelect`",
+      "**MUST NOT** — servir pour moins de 5 options → utiliser `Select` ou `NativeSelect`",
       "L'option vide (`ComboboxEmpty`) doit toujours être fournie pour le cas « aucun résultat »",
       "En mode multi-sélection, fournir un `anchor` pour le positionnement du popup par rapport aux chips",
       "Les éléments `ComboboxItem` doivent avoir une valeur unique pour le bon fonctionnement de l'indicateur de sélection",
       "Requiert un conteneur `\"use client\"` (composant client-side)",
-      "Les trois boutons icon-only (trigger, clear, remove de chip) ont un nom accessible par défaut en anglais ; le traduire via `triggerLabel`, `clearLabel` et `removeLabel` plutôt que de le laisser vide"
+      "**MUST** — dans une interface qui n'est pas en anglais, traduire le nom accessible des trois boutons icon-only (trigger, clear, remove de chip) via `triggerLabel`, `clearLabel` et `removeLabel` : il est en anglais par défaut"
     ],
     "Command": [
-      "Ne pas utiliser pour un simple champ de recherche — préférer un `Input` avec filtrage",
+      "**MUST NOT** — servir de simple champ de recherche → un `Input` qui filtre la liste",
       "Le composant `CommandEmpty` doit toujours être présent pour le cas « aucun résultat »",
       "Les raccourcis (`CommandShortcut`) sont informatifs uniquement ; le binding clavier doit être géré séparément",
       "Requiert un conteneur `\"use client\"` (composant client-side)",
       "En mode dialog, les props `title` et `description` sont rendues en `sr-only` pour l'accessibilité"
     ],
     "ContextMenu": [
-      "Ne pas utiliser comme menu principal de navigation — préférer `DropdownMenu`",
+      "**MUST NOT** — servir de menu principal de navigation → utiliser `DropdownMenu`",
       "Le menu contextuel remplace le menu natif du navigateur : s'assurer que les actions proposées sont pertinentes",
       "Un seul menu contextuel visible à la fois (géré par Radix)",
       "Prévoir un fallback clavier (touche `Shift+F10` ou touche contextuelle)",
       "Les items `disabled` doivent rester visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)"
     ],
     "Dialog": [
-      "Ne pas utiliser pour les confirmations destructrices — préférer `AlertDialog`",
-      "Limiter à 1 Dialog visible par vue (éviter l'empilement de modales)",
+      "**MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`",
+      "**MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois",
       "`DialogTitle` est requis pour l'accessibilité (lecteurs d'écran)",
-      "Ne pas placer de contenu scrollable très long — préférer `Sheet` ou une page dédiée",
+      "**MUST NOT** — contenir un contenu qui impose un défilement interne → utiliser `Sheet` ou une page dédiée",
       "Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible",
       "Chaînes par défaut en anglais issues de `UI_STRINGS.dialog` — surcharger via `closeLabel`"
     ],
@@ -356,21 +356,21 @@
     ],
     "Drawer": [
       "Ne pas utiliser sur desktop quand un `Dialog` ou un `Sheet` est plus adapté",
-      "Limiter la hauteur à 80vh pour les directions top/bottom (appliqué par défaut)",
+      "**MUST NOT** — dépasser 80vh de hauteur en direction `top` ou `bottom` (appliqué par défaut)",
       "Ne pas empiler plusieurs Drawers — un seul visible à la fois",
       "`DrawerTitle` est requis pour l'accessibilité (lecteurs d'écran)",
       "Le geste de fermeture par swipe peut interférer avec le scroll interne : tester sur mobile"
     ],
     "DropdownMenu": [
-      "Ne pas utiliser pour les menus contextuels au clic droit — préférer `ContextMenu`",
-      "Ne pas utiliser pour la navigation principale — préférer une barre de navigation dédiée",
+      "**MUST NOT** — servir de menu contextuel au clic droit → utiliser `ContextMenu`",
+      "**MUST NOT** — servir de navigation principale → utiliser `NavigationMenu`",
       "Un seul DropdownMenu ouvert à la fois",
       "Les items `disabled` restent visibles mais non interactifs (`opacity-disabled`, `pointer-events-none`)",
       "La largeur du contenu s'adapte à celle du trigger par défaut (`w-(--radix-dropdown-menu-trigger-width)`)"
     ],
     "Empty": [
-      "Ne pas utiliser pour les erreurs serveur — préférer un composant d'erreur dédié",
-      "Limiter à une seule instance `Empty` par vue pour éviter la confusion",
+      "**MUST NOT** — signaler une erreur serveur → utiliser `Alert` en `variant=\"destructive\"`",
+      "**MUST NOT** — afficher plus d'un `Empty` par vue",
       "Le média (`EmptyMedia`) doit rester décoratif ; ne pas y placer d'information essentielle sans texte alternatif",
       "Le texte doit rester court et orienté action",
       "`EmptyTitle` rend un `<h2>` : passer `as` (`\"h3\"`…) pour suivre la hiérarchie de la page — un niveau sous le titre de la section qui contient l'état vide. Ne pas styler via `as` : l'apparence est fixe"
@@ -379,7 +379,7 @@
       "Ne pas imbriquer des `<FieldSet>` sur plus de 2 niveaux — complexité cognitive",
       "`data-invalid` doit être géré côté consommateur (validation côté serveur ou client)",
       "`aria-invalid` doit être posé sur le contrôle lui-même : `<Field>` ne le propage pas",
-      "L'orientation `horizontal` n'est pas recommandée sur mobile (largeur < 640 px) — préférer `responsive`",
+      "**MUST NOT** — utiliser `orientation=\"horizontal\"` dans une mise en page qui doit tenir sur mobile → `orientation=\"responsive\"`, qui passe en ligne quand son `FieldGroup` est assez large",
       "L'orientation `responsive` exige un `<FieldGroup>` parent : elle s'appuie sur le conteneur `@container/field-group`",
       "`<FieldLegend variant=\"legend\">` est réservé aux `<fieldset>` ; utiliser `variant=\"label\"` pour les contextes non-fieldset",
       "`<FieldError>` ne rend rien si ni `children` ni `errors` non vide ne sont fournis",
@@ -392,22 +392,22 @@
       "Ne pas styler manuellement — passer par la prop `level`"
     ],
     "HoverCard": [
-      "Ne pas utiliser pour des contenus interactifs complexes (formulaires, boutons) — préférer `Popover`",
+      "**MUST NOT** — contenir des éléments interactifs (formulaires, boutons) → utiliser `Popover`",
       "Ne pas utiliser sur mobile (le survol n'existe pas sur tactile) — prévoir un fallback",
       "Le contenu doit être purement informatif et non essentiel",
-      "Éviter les HoverCards sur des éléments trop proches pour ne pas créer de flickering",
+      "**MUST NOT** — poser des `HoverCard` sur deux déclencheurs adjacents (liste dense) : le survol de l'un ouvre l'autre",
       "Ne pas y placer de contenu critique que l'utilisateur doit impérativement voir"
     ],
     "Illustration": [
       "Toujours fournir un `alt` descriptif — il alimente `role=\"img\"` + `aria-label`",
       "Ce composant est un placeholder : remplacer par de vraies illustrations en production",
-      "Ne pas utiliser pour des images de contenu — préférer `<img>` ou `next/image`",
+      "**MUST NOT** — afficher une image de contenu → utiliser `<img>` ou `next/image`",
       "Le conteneur n'impose aucune dimension : les fixer via `className` côté appelant",
       "Texte alternatif par défaut en anglais issu de `UI_STRINGS.illustration` — surcharger via `alt`"
     ],
     "Input": [
-      "Ne pas utiliser pour des saisies multi-lignes — préférer `<Textarea>`",
-      "Ne pas utiliser pour des choix discrets — préférer `<Select>` ou `<Checkbox>`",
+      "**MUST NOT** — servir à une saisie sur plusieurs lignes → utiliser `Textarea`",
+      "**MUST NOT** — servir à un choix parmi des valeurs fixes → utiliser `Select` ou `Checkbox`",
       "L'attribut `placeholder` ne remplace pas un `<Label>` visible",
       "Un seul `Input` doit être `autofocus` par vue pour ne pas perturber la navigation clavier",
       "En état `disabled`, le curseur passe en `not-allowed` ; la valeur n'est pas soumise avec le formulaire"
@@ -422,7 +422,7 @@
     "InputOtp": [
       "Ne pas utiliser pour des saisies longues ou libres — réservé aux codes courts (4–8 caractères)",
       "Chaque `InputOTPSlot` doit recevoir un `index` correspondant à sa position dans le groupe",
-      "Le `spellCheck` est désactivé par défaut pour éviter les suggestions du navigateur",
+      "Le `spellCheck` est désactivé par défaut : le navigateur ne propose pas de correction sur un code",
       "L'accessibilité repose sur la bibliothèque `input-otp` ; ne pas surcharger les rôles ARIA",
       "Requiert un conteneur `\"use client\"` (composant client-side)"
     ],
@@ -430,7 +430,7 @@
       "Toujours placer un `ItemTitle` pour l'accessibilité et la sémantique",
       "Ne pas utiliser la variante `outline` et `muted` simultanément",
       "La taille `xs` est optimisée pour les menus contextuels — ne pas l'utiliser pour des listes principales",
-      "Limiter le nombre d'actions dans `ItemActions` (2 à 3 maximum)",
+      "**MUST NOT** — placer plus de 3 actions dans `ItemActions`",
       "Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role=\"listitem\"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role=\"listitem\"` explicitement"
     ],
     "Kbd": [
@@ -442,38 +442,38 @@
     "Label": [
       "Ne pas substituer un `Label` par du texte `placeholder` seul",
       "Un label doit toujours référencer son contrôle (`htmlFor` ou `aria-labelledby`) — ne jamais laisser un champ sans libellé visible",
-      "Ne pas utiliser pour des titres de section — préférer `FieldLegend` ou un `<h*>`",
+      "**MUST NOT** — servir de titre de section → utiliser `FieldLegend` ou `Heading`",
       "Maximum un `Label` par contrôle"
     ],
     "Logo": [
-      "Toujours utiliser le composant `Logo` plutôt que d'insérer un SVG à la main",
+      "**MUST** — afficher le logo avec le composant `Logo`, jamais avec un SVG inséré à la main",
       "Ne pas déformer les proportions — passer par la prop `size`",
       "Le composant n'affiche pas de logotype textuel : les enfants passés en props ne sont pas rendus. Pour accoler un nom de marque, le placer à côté du `Logo`",
       "Le composant est un placeholder — remplacer par les vrais assets brand une fois disponibles"
     ],
     "Menubar": [
-      "Ne pas utiliser pour une navigation de site classique — préférer `NavigationMenu`",
-      "Limiter la profondeur des sous-menus à 2 niveaux pour la lisibilité",
+      "**MUST NOT** — servir de navigation de site → utiliser `NavigationMenu`",
+      "**MUST NOT** — imbriquer plus de 2 niveaux de sous-menus",
       "Les items `disabled` sont visuellement atténués et non interactifs (`pointer-events-none`)",
       "La variante `destructive` sur `MenubarItem` doit être réservée aux actions irréversibles",
       "Les raccourcis affichés via `MenubarShortcut` doivent correspondre à des handlers réels"
     ],
     "NativeSelect": [
-      "Ne pas utiliser si une recherche/filtrage est nécessaire — préférer `Combobox`",
+      "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
       "Le style du menu déroulant ouvert dépend du navigateur et n'est pas personnalisable",
       "Les options utilisent les couleurs système (`Canvas`, `CanvasText`) pour garantir la lisibilité native",
       "La prop `size` est custom (pas celle native de `<select>`) — `\"sm\"` et `\"default\"` uniquement",
       "Ne pas oublier un `<option value=\"\">` vide pour le placeholder"
     ],
     "NavigationMenu": [
-      "Ne pas utiliser pour des menus d'actions (commandes) — préférer `Menubar` ou `DropdownMenu`",
-      "Limiter le nombre de triggers de premier niveau à 5-7 pour la lisibilité",
+      "**MUST NOT** — servir de menu d'actions (commandes) → utiliser `Menubar` ou `DropdownMenu`",
+      "**MUST NOT** — dépasser 7 triggers de premier niveau",
       "Le viewport peut être désactivé via `viewport={false}` pour un rendu inline",
       "Les liens doivent utiliser `NavigationMenuLink` pour bénéficier de la gestion `data-active`",
       "L'indicateur nécessite un positionnement relatif du parent pour fonctionner correctement"
     ],
     "Pagination": [
-      "Ne pas utiliser pour une navigation hiérarchique — préférer `Breadcrumb`",
+      "**MUST NOT** — servir de navigation hiérarchique → utiliser `Breadcrumb`",
       "Le composant n'inclut pas de logique de pagination — le consommateur doit gérer l'état et les URLs",
       "La page active porte `aria-current=\"page\"` ; ne pas dupliquer cet attribut",
       "Les liens `PaginationPrevious` et `PaginationNext` nécessitent un `href` valide ou un handler",
@@ -482,47 +482,47 @@
     ],
     "PasswordInput": [
       "Toujours envelopper dans un `Field` avec un `FieldLabel` associé",
-      "Ne pas utiliser pour des champs de texte classiques — préférer `Input`",
+      "**MUST NOT** — servir à un champ de texte non sensible → utiliser `Input`",
       "La prop `type` n'est pas acceptée : le composant la pilote lui-même",
       "Composant client (`\"use client\"`) — il porte l'état de visibilité",
       "Libellés de la bascule en anglais issus de `UI_STRINGS.passwordInput`"
     ],
     "Popover": [
-      "Ne pas utiliser pour un simple texte d'aide — préférer `Tooltip` ou `HoverCard`",
-      "Ne pas utiliser pour une liste d'actions simple — préférer `DropdownMenu`",
+      "**MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`",
+      "**MUST NOT** — afficher une liste d'actions → utiliser `DropdownMenu`",
       "Un seul Popover ouvert à la fois par défaut (sauf gestion manuelle)",
-      "Le contenu ne doit pas être trop volumineux — préférer `Dialog` ou `Sheet` pour les cas complexes",
+      "**MUST NOT** — contenir un contenu qui impose un défilement interne, ni un formulaire de plus de 3 champs → utiliser `Dialog` ou `Sheet`",
       "Tester le positionnement sur les bords de l'écran (flip automatique Radix)"
     ],
     "Progress": [
       "Ne pas utiliser pour des valeurs indéterminées sans le communiquer — ajouter `aria-valuetext` ou un label explicite",
-      "Limiter à une barre de progression visible par section pour éviter la surcharge visuelle",
+      "**MUST NOT** — afficher plus d'une barre `Progress` par section",
       "Toujours fournir un label associé (via `aria-label` ou un élément `<label>`) pour les lecteurs d'écran",
       "La valeur `value` doit être comprise entre 0 et `max` (100 par défaut) — les valeurs hors limites ne sont pas gérées",
-      "Ne pas utiliser comme jauge de données (ex. : température) — préférer un composant dédié"
+      "**MUST NOT** — servir de jauge de données (température, stock…) : `Progress` exprime l'avancement d'une tâche"
     ],
     "RadioGroup": [
-      "Ne pas utiliser pour plus de 6 options — préférer `Select` ou `Combobox`",
+      "**MUST NOT** — servir pour plus de 6 options → utiliser `Select` ou `Combobox`",
       "Toujours associer chaque `RadioGroupItem` à un `<Label>` pour l'accessibilité",
-      "Ne pas utiliser pour des choix multiples — préférer `Checkbox`",
+      "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est déjà intégrée — ne pas ajouter de padding supplémentaire",
       "Requiert un conteneur `\"use client\"` (composant client-side)"
     ],
     "Resizable": [
-      "Ne pas utiliser pour des mises en page simples à largeur fixe — préférer un grid CSS",
-      "Les panneaux doivent avoir des tailles minimales pour éviter le contenu écrasé",
+      "**MUST NOT** — servir à une mise en page à largeurs fixes → une grille CSS (`grid`)",
+      "**MUST** — donner un `minSize` à chaque `ResizablePanel`, pour que son contenu ne soit jamais écrasé",
       "Le `ResizableHandle` doit être clavier-accessible (focus + flèches)",
-      "Limiter la profondeur d'imbrication des groupes pour éviter les conflits de redimensionnement",
+      "**MUST NOT** — imbriquer plus de 2 niveaux de `ResizablePanelGroup`",
       "Orientation `vertical` et `horizontal` ne doivent pas être mélangées au même niveau"
     ],
     "ScrollArea": [
       "Ne pas utiliser pour le défilement principal de la page — laisser le `<body>` gérer le scroll natif",
       "Le conteneur parent doit avoir une hauteur définie (fixe ou flex) pour que le défilement fonctionne",
-      "Éviter d'imbriquer plusieurs `ScrollArea` — cela crée une expérience confuse",
+      "**MUST NOT** — imbriquer une `ScrollArea` dans une autre",
       "Le contenu focusable à l'intérieur doit rester accessible au clavier"
     ],
     "Select": [
-      "Ne pas utiliser si une recherche/filtrage est nécessaire — préférer `Combobox`",
+      "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
       "Pour les formulaires mobiles avec de nombreuses options, `NativeSelect` offre une meilleure UX native",
       "Le contenu est rendu dans un `Portal` — attention au contexte de z-index",
       "Chaque `SelectItem` doit avoir une `value` unique",
@@ -535,8 +535,8 @@
       "La hauteur (`h-px`) et la largeur (`w-px`) sont fixes ; ne pas les surcharger pour maintenir la cohérence visuelle"
     ],
     "Sheet": [
-      "Ne pas utiliser pour des confirmations courtes — préférer `AlertDialog` ou `Dialog`",
-      "Limiter à 1 Sheet visible par vue (éviter l'empilement)",
+      "**MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`",
+      "**MUST NOT** — ouvrir un `Sheet` par-dessus un autre : un seul visible à la fois",
       "`SheetTitle` est requis pour l'accessibilité (lecteurs d'écran)",
       "La largeur est limitée à `sm:max-w-sm` pour les côtés gauche/droite",
       "Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible",
@@ -548,24 +548,24 @@
       "Ne pas utiliser plus d'une `Sidebar` par côté (left/right) dans un même `SidebarProvider`",
       "Les variantes `floating` et `inset` ajoutent des padding et ombres qui peuvent entrer en conflit avec des layouts imbriqués",
       "Les boutons icône-seuls en mode collapsed nécessitent un `tooltip` pour l'accessibilité",
-      "Le raccourci clavier `Ctrl+B` / `⌘+B` est automatiquement enregistré — éviter les conflits avec d'autres raccourcis",
+      "**MUST NOT** — lier `Ctrl+B` / `⌘+B` à une autre action : `SidebarProvider` l'enregistre pour replier la barre",
       "Libellé de `SidebarTrigger` et `SidebarRail` en anglais issu de `UI_STRINGS.sidebar`"
     ],
     "Skeleton": [
       "Ne pas utiliser comme état permanent — le squelette doit être remplacé par le contenu réel",
-      "Préférer des dimensions proches du contenu final pour éviter un décalage de layout (CLS)",
+      "**MUST** — reprendre les dimensions du contenu final (hauteur, largeur, rayon), pour que son arrivée ne décale pas la mise en page",
       "Ne pas animer les squelettes si l'utilisateur a activé `prefers-reduced-motion`",
-      "Limiter le nombre de squelettes visibles simultanément pour ne pas surcharger visuellement"
+      "**MUST NOT** — afficher plus de squelettes que d'éléments attendus : chacun tient la place d'un contenu qui va arriver"
     ],
     "Slider": [
-      "Ne pas utiliser pour des valeurs précises — préférer un `Input` de type `number`",
+      "**MUST NOT** — servir à saisir une valeur précise → un `Input` de type `number`",
       "Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)",
       "En mode vertical (`orientation=\"vertical\"`), une hauteur minimale (`min-h-40`) est requise",
       "Les valeurs `min` et `max` doivent être cohérentes avec le pas (`step`)",
       "Requiert un conteneur `\"use client\"` (composant client-side)"
     ],
     "Sonner": [
-      "Ne pas utiliser pour des messages critiques nécessitant une action — préférer `AlertDialog`",
+      "**MUST NOT** — porter un message critique qui exige une action → utiliser `AlertDialog`",
       "Placer un seul `<Toaster />` à la racine du layout",
       "Ne pas empiler plus de 3 toasts visibles simultanément pour préserver la lisibilité",
       "Le contenu du toast doit être concis (une à deux phrases maximum)",
@@ -575,13 +575,13 @@
       "L'`aria-label` est obligatoire — la valeur par défaut `\"Loading\"` doit être remplacée par un libellé en français décrivant l'action (ex. : `\"Connexion en cours\"`)",
       "Ne pas afficher plusieurs Spinners simultanément dans la même zone de vue — utiliser un seul indicateur global",
       "La taille est contrôlée uniquement via `className` (ex. : `size-3`, `size-6`) — pas de prop `size` dédiée",
-      "Ne pas utiliser pour des chargements de longue durée (> 10 s) — préférer une barre de progression avec pourcentage",
+      "**MUST NOT** — signaler un chargement de plus de 10 s → utiliser `Progress` avec un pourcentage",
       "`role=\"status\"` est déjà positionné ; ne pas en ajouter un second dans le parent",
       "Nom accessible par défaut en anglais issu de `UI_STRINGS.spinner` — surcharger via `aria-label`"
     ],
     "Switch": [
-      "Ne pas utiliser pour des choix multiples — préférer `Checkbox`",
-      "Ne pas utiliser pour un choix entre deux options nommées — préférer `RadioGroup`",
+      "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
+      "**MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`",
       "Toujours associer un `<Label>` pour l'accessibilité",
       "La zone de clic étendue (`after:absolute after:-inset-x-3 after:-inset-y-2`) est intégrée — ne pas ajouter de padding supplémentaire",
       "Requiert un conteneur `\"use client\"` (composant client-side)"
@@ -589,26 +589,26 @@
     "Table": [
       "Ne pas utiliser pour la mise en page — les tableaux sont réservés aux données tabulaires uniquement",
       "Le conteneur gère le défilement horizontal (`overflow-x-auto`) ; ne pas ajouter de scroll parent redondant",
-      "Limiter le nombre de colonnes visibles pour rester lisible sur mobile (préférer le scroll horizontal)",
+      "**MUST** — au-delà de 4 colonnes, masquer les colonnes secondaires sous 640 px (le conteneur de `Table` défile déjà horizontalement)",
       "Les cellules avec `role=\"checkbox\"` reçoivent un padding réduit automatiquement (`pr-0`)",
       "Fournir un `TableCaption` ou un `aria-label` pour l'accessibilité quand le contexte du tableau n'est pas évident"
     ],
     "Tabs": [
-      "Ne pas utiliser pour de la navigation entre pages distinctes — préférer `NavigationMenu`",
-      "Limiter le nombre d'onglets à 5-7 par groupe pour la lisibilité",
-      "Un seul onglet actif à la fois — pour du contenu cumulatif, préférer `Accordion`",
+      "**MUST NOT** — servir de navigation entre pages distinctes → utiliser `NavigationMenu`",
+      "**MUST NOT** — dépasser 7 onglets par groupe",
+      "**MUST NOT** — servir quand plusieurs sections doivent être visibles ensemble → utiliser `Accordion` (`Tabs` n'en montre qu'une)",
       "L'état `disabled` sur un trigger supprime les événements pointer et réduit l'opacité",
       "Le contenu de chaque panneau doit être autosuffisant (pas de dépendance entre onglets)"
     ],
     "Textarea": [
-      "Ne pas utiliser pour des saisies courtes (une ligne) — préférer `Input`",
+      "**MUST NOT** — servir à une saisie d'une ligne → utiliser `Input`",
       "Le `field-sizing-content` fait grandir automatiquement le champ ; si une hauteur fixe est souhaitée, surcharger via `className`",
       "La hauteur minimale est de `min-h-16` (4rem)",
       "Le mode dark applique un fond `bg-input/30` — ne pas redéfinir le fond sans tenir compte du thème",
       "Pas de dépendance client (`\"use client\"`) — composant serveur compatible"
     ],
     "Toggle": [
-      "Ne pas utiliser pour des actions non réversibles — préférer `Button`",
+      "**MUST NOT** — déclencher une action non réversible → utiliser `Button`",
       "Ne pas utiliser comme remplacement d'un `Switch` dans un formulaire de paramètres",
       "La variante `outline` ajoute une bordure ; ne pas la combiner avec une bordure parente",
       "Requiert un conteneur `\"use client\"` (composant client-side)",
@@ -617,16 +617,16 @@
     "ToggleGroup": [
       "Utiliser `type=\"single\"` pour une sélection exclusive et `type=\"multiple\"` pour la multi-sélection",
       "Fournir un `aria-label` sur le `ToggleGroup` pour décrire le groupe aux lecteurs d'écran",
-      "Ne pas utiliser pour la navigation — préférer `Tabs` ou `NavigationMenu`",
+      "**MUST NOT** — servir à la navigation → utiliser `Tabs` ou `NavigationMenu`",
       "Le `spacing={0}` (par défaut) fusionne les bordures ; avec `spacing > 0` les items sont espacés",
       "Les variantes et tailles sont propagées via contexte ; ne les surcharger sur `ToggleGroupItem` qu'en cas de besoin spécifique"
     ],
     "Tooltip": [
-      "Ne pas utiliser pour du contenu interactif (liens, boutons) — préférer `Popover`",
-      "Le texte du tooltip doit rester très court (une ligne, max ~80 caractères)",
+      "**MUST NOT** — contenir des éléments interactifs (liens, boutons) → utiliser `Popover`",
+      "**MUST NOT** — dépasser une ligne ou 80 caractères de texte",
       "Ne pas utiliser comme seul moyen de communiquer une information critique",
       "Vérifier que le `TooltipProvider` est placé en amont dans l'arbre (nécessaire pour le fonctionnement de Radix)",
-      "Éviter les tooltips sur les éléments `disabled` — le focus n'est pas accessible"
+      "**MUST NOT** — poser un `Tooltip` directement sur un élément `disabled`, qui ne reçoit ni focus ni survol : envelopper l'élément dans un `<span tabIndex={0}>` qui porte le déclencheur"
     ]
   }
 }
