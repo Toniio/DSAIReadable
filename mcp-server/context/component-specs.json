@@ -8526,7 +8526,7 @@
     ],
     "constraints": [
       "Ne pas utiliser pour des valeurs précises — préférer un `Input` de type `number`",
-      "Toujours fournir un label accessible (via `aria-label` ou `<Label>`)",
+      "Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)",
       "En mode vertical (`orientation=\"vertical\"`), une hauteur minimale (`min-h-40`) est requise",
       "Les valeurs `min` et `max` doivent être cohérentes avec le pas (`step`)",
       "Requiert un conteneur `\"use client\"` (composant client-side)"
@@ -8537,7 +8537,7 @@
     "anatomy": [
       {
         "slot": "`data-slot=\"slider\"`",
-        "role": "Racine du composant, conteneur flex"
+        "role": "Racine du composant, conteneur flex ; `role=\"group\"` avec plusieurs poignées"
       },
       {
         "slot": "`data-slot=\"slider-track\"`",
@@ -8549,7 +8549,7 @@
       },
       {
         "slot": "`data-slot=\"slider-thumb\"`",
-        "role": "Poignée(s) déplaçable(s) pour ajuster la valeur"
+        "role": "Poignée(s) déplaçable(s) pour ajuster la valeur ; `role=\"slider\"`, porte le nom accessible"
       }
     ],
     "tokens": [
@@ -8625,6 +8625,27 @@
       },
       {
         "component": "Slider",
+        "prop": "`aria-label`",
+        "type": "`string`",
+        "default": "—",
+        "description": "Nom de la poignée unique, ou du groupe de poignées"
+      },
+      {
+        "component": "Slider",
+        "prop": "`aria-labelledby`",
+        "type": "`string`",
+        "default": "—",
+        "description": "Idem, par référence à l'`id` d'un libellé visible"
+      },
+      {
+        "component": "Slider",
+        "prop": "`thumbLabels`",
+        "type": "`string[]`",
+        "default": "—",
+        "description": "Nom de chaque poignée, dans l'ordre des valeurs ; prime sur `aria-label`"
+      },
+      {
+        "component": "Slider",
         "prop": "`className`",
         "type": "`string`",
         "default": "—",
@@ -8660,8 +8681,8 @@
         "behavior": "`pointer-events-none`, opacité réduite (`opacity-50`)"
       }
     ],
-    "accessibility": "**Pattern** : [Slider](https://www.w3.org/WAI/ARIA/apg/patterns/slider/) (Radix Slider)\n\n**Rôle** : Chaque poignée porte `role=\"slider\"` avec `aria-valuenow`, `aria-valuemin`, `aria-valuemax`.\n\n**Clavier** :\n\n| Touche                    | Action                            |\n| ------------------------- | --------------------------------- |\n| `ArrowRight` / `ArrowUp`  | Augmente d'un pas                 |\n| `ArrowLeft` / `ArrowDown` | Diminue d'un pas                  |\n| `PageUp` / `PageDown`     | Augmente / diminue d'un grand pas |\n| `Home` / `End`            | Valeur minimale / maximale        |\n\n**Nom accessible** : Chaque poignée devrait être nommée (« Prix minimum », « Prix maximum »).\n\n**Vigilance** :\n\n- **Défaut connu** : le composant rend ses poignées lui-même et ne leur transmet aucun `aria-label` ; avec une seule poignée, elle n'a pas de nom (Radix ne nomme que les poignées d'un intervalle, « Minimum » / « Maximum »).\n- Afficher la valeur en texte : la position seule ne la communique pas.",
-    "code_example": "import { Slider } from \"@/components/ui/slider\"\n\nexport default function Example() {\n  return (\n    <Slider\n      defaultValue={[25, 75]}\n      min={0}\n      max={100}\n      step={1}\n      aria-label=\"Plage de prix\"\n    />\n  )\n}",
+    "accessibility": "**Pattern** : [Slider](https://www.w3.org/WAI/ARIA/apg/patterns/slider/) (Radix Slider)\n\n**Rôle** : Chaque poignée porte `role=\"slider\"` avec `aria-valuenow`, `aria-valuemin`, `aria-valuemax`.\n\n**Clavier** :\n\n| Touche                    | Action                            |\n| ------------------------- | --------------------------------- |\n| `ArrowRight` / `ArrowUp`  | Augmente d'un pas                 |\n| `ArrowLeft` / `ArrowDown` | Diminue d'un pas                  |\n| `PageUp` / `PageDown`     | Augmente / diminue d'un grand pas |\n| `Home` / `End`            | Valeur minimale / maximale        |\n\n**Nom accessible** : Porté par les poignées, seuls éléments focusables. Une poignée : le `aria-label` ou `aria-labelledby` du `Slider` lui est transmis. Plusieurs poignées : ce nom va au groupe (`role=\"group\"` sur la racine), et chaque poignée prend son entrée de `thumbLabels`, à défaut le nom générique de Radix, en anglais (« Minimum » / « Maximum » ; « Value 1 of 3 »… au-delà de deux).\n\n**Vigilance** :\n\n- Un `Slider` à une poignée sans `aria-label`, `aria-labelledby` ni `thumbLabels` n'a pas de nom (violation axe `aria-input-field-name`).\n- Avec plusieurs poignées, fournir `thumbLabels` : les noms par défaut de Radix ne disent pas ce que la poignée règle et ne sont pas traduits.\n- Afficher la valeur en texte : la position seule ne la communique pas.",
+    "code_example": "import { Slider } from \"@/components/ui/slider\"\n\nexport default function Example() {\n  return (\n    <Slider\n      defaultValue={[25, 75]}\n      min={0}\n      max={100}\n      step={1}\n      aria-label=\"Plage de prix\"\n      thumbLabels={[\"Prix minimum\", \"Prix maximum\"]}\n    />\n  )\n}",
     "cross_references": [
       "Input",
       "Field"

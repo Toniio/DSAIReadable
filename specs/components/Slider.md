@@ -24,7 +24,7 @@ Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une
 ## Contraintes
 
 - Ne pas utiliser pour des valeurs précises — préférer un `Input` de type `number`
-- Toujours fournir un label accessible (via `aria-label` ou `<Label>`)
+- Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)
 - En mode vertical (`orientation="vertical"`), une hauteur minimale (`min-h-40`) est requise
 - Les valeurs `min` et `max` doivent être cohérentes avec le pas (`step`)
 - Requiert un conteneur `"use client"` (composant client-side)
@@ -35,12 +35,12 @@ Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une
 
 ## Anatomie
 
-| Slot                       | Rôle                                            |
-| -------------------------- | ----------------------------------------------- |
-| `data-slot="slider"`       | Racine du composant, conteneur flex             |
-| `data-slot="slider-track"` | Piste de fond du slider                         |
-| `data-slot="slider-range"` | Zone colorée représentant la plage sélectionnée |
-| `data-slot="slider-thumb"` | Poignée(s) déplaçable(s) pour ajuster la valeur |
+| Slot                       | Rôle                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------ |
+| `data-slot="slider"`       | Racine du composant, conteneur flex ; `role="group"` avec plusieurs poignées               |
+| `data-slot="slider-track"` | Piste de fond du slider                                                                    |
+| `data-slot="slider-range"` | Zone colorée représentant la plage sélectionnée                                            |
+| `data-slot="slider-thumb"` | Poignée(s) déplaçable(s) pour ajuster la valeur ; `role="slider"`, porte le nom accessible |
 
 ## Tokens utilisés
 
@@ -52,18 +52,21 @@ Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une
 
 ## Props / API
 
-| Prop            | Type                                                | Défaut         | Description                         |
-| --------------- | --------------------------------------------------- | -------------- | ----------------------------------- |
-| `value`         | `number[]`                                          | —              | Valeur(s) contrôlée(s) du slider    |
-| `defaultValue`  | `number[]`                                          | —              | Valeur(s) par défaut (non contrôlé) |
-| `min`           | `number`                                            | `0`            | Valeur minimale de la plage         |
-| `max`           | `number`                                            | `100`          | Valeur maximale de la plage         |
-| `step`          | `number`                                            | `1`            | Incrément entre les valeurs         |
-| `orientation`   | `"horizontal" \| "vertical"`                        | `"horizontal"` | Orientation du slider               |
-| `onValueChange` | `(value: number[]) => void`                         | —              | Callback de changement de valeur    |
-| `disabled`      | `boolean`                                           | `false`        | Désactive le slider                 |
-| `className`     | `string`                                            | —              | Classes CSS additionnelles          |
-| `...props`      | `React.ComponentProps<typeof SliderPrimitive.Root>` | —              | Props Radix Slider.Root             |
+| Prop              | Type                                                | Défaut         | Description                                                              |
+| ----------------- | --------------------------------------------------- | -------------- | ------------------------------------------------------------------------ |
+| `value`           | `number[]`                                          | —              | Valeur(s) contrôlée(s) du slider                                         |
+| `defaultValue`    | `number[]`                                          | —              | Valeur(s) par défaut (non contrôlé)                                      |
+| `min`             | `number`                                            | `0`            | Valeur minimale de la plage                                              |
+| `max`             | `number`                                            | `100`          | Valeur maximale de la plage                                              |
+| `step`            | `number`                                            | `1`            | Incrément entre les valeurs                                              |
+| `orientation`     | `"horizontal" \| "vertical"`                        | `"horizontal"` | Orientation du slider                                                    |
+| `onValueChange`   | `(value: number[]) => void`                         | —              | Callback de changement de valeur                                         |
+| `disabled`        | `boolean`                                           | `false`        | Désactive le slider                                                      |
+| `aria-label`      | `string`                                            | —              | Nom de la poignée unique, ou du groupe de poignées                       |
+| `aria-labelledby` | `string`                                            | —              | Idem, par référence à l'`id` d'un libellé visible                        |
+| `thumbLabels`     | `string[]`                                          | —              | Nom de chaque poignée, dans l'ordre des valeurs ; prime sur `aria-label` |
+| `className`       | `string`                                            | —              | Classes CSS additionnelles                                               |
+| `...props`        | `React.ComponentProps<typeof SliderPrimitive.Root>` | —              | Props Radix Slider.Root                                                  |
 
 ## Variantes
 
@@ -96,11 +99,12 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | `PageUp` / `PageDown`     | Augmente / diminue d'un grand pas |
 | `Home` / `End`            | Valeur minimale / maximale        |
 
-**Nom accessible** : Chaque poignée devrait être nommée (« Prix minimum », « Prix maximum »).
+**Nom accessible** : Porté par les poignées, seuls éléments focusables. Une poignée : le `aria-label` ou `aria-labelledby` du `Slider` lui est transmis. Plusieurs poignées : ce nom va au groupe (`role="group"` sur la racine), et chaque poignée prend son entrée de `thumbLabels`, à défaut le nom générique de Radix, en anglais (« Minimum » / « Maximum » ; « Value 1 of 3 »… au-delà de deux).
 
 **Vigilance** :
 
-- **Défaut connu** : le composant rend ses poignées lui-même et ne leur transmet aucun `aria-label` ; avec une seule poignée, elle n'a pas de nom (Radix ne nomme que les poignées d'un intervalle, « Minimum » / « Maximum »).
+- Un `Slider` à une poignée sans `aria-label`, `aria-labelledby` ni `thumbLabels` n'a pas de nom (violation axe `aria-input-field-name`).
+- Avec plusieurs poignées, fournir `thumbLabels` : les noms par défaut de Radix ne disent pas ce que la poignée règle et ne sont pas traduits.
 - Afficher la valeur en texte : la position seule ne la communique pas.
 
 ## Exemple de code
@@ -116,6 +120,7 @@ export default function Example() {
       max={100}
       step={1}
       aria-label="Plage de prix"
+      thumbLabels={["Prix minimum", "Prix maximum"]}
     />
   )
 }
