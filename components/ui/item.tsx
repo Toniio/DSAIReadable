@@ -26,9 +26,9 @@ function ItemGroup({
   )
 }
 
-// Un Item enfant direct d'un ItemGroup devient un élément de liste, sauf rôle
-// explicite. Rendu via asChild (lien, bouton), il garde son rôle natif : c'est
-// un conteneur qui porte listitem.
+// A direct Item child of an ItemGroup becomes a list item, unless it has an
+// explicit role. Rendered through asChild (link, button), it keeps its native
+// role: a wrapper carries listitem instead.
 function asListItem(child: React.ReactNode) {
   if (!React.isValidElement<ItemProps>(child) || child.type !== Item) {
     return child
