@@ -1,7 +1,7 @@
 import { readdirSync } from "node:fs"
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { contextDir, loadContext, text } from "../lib/context.js"
+import { contextDir, loadContext, notFound, text } from "../lib/context.js"
 import {
   compositionRulesFor,
   type CompositionRule,
@@ -184,10 +184,10 @@ import { cn } from "@/lib/utils"`,
         }
       }
 
-      return text({
-        error: `Component "${component_name}" not found`,
-        available: Object.keys(specs),
-      })
+      return notFound(
+        `Component "${component_name}" not found. Pass one of the available names.`,
+        Object.keys(specs)
+      )
     }
   )
 
@@ -227,10 +227,10 @@ import { cn } from "@/lib/utils"`,
         }
       }
 
-      return text({
-        error: `No variants found for "${component_name}"`,
-        available: Object.keys(variants),
-      })
+      return notFound(
+        `No variants found for "${component_name}". Pass one of the available names; a component absent from this list has no cva variants.`,
+        Object.keys(variants)
+      )
     }
   )
 
@@ -313,9 +313,7 @@ import { cn } from "@/lib/utils"`,
         category: z
           .string()
           .optional()
-          .describe(
-            "Filter rules by category (e.g. color, typography, spacing)"
-          ),
+          .describe("Filter rules by category (e.g. color, radius, Button)"),
         response_format: responseFormat(
           "every rule without a category, and the critical rules in full with one"
         ),
@@ -369,7 +367,9 @@ import { cn } from "@/lib/utils"`,
       }
 
       if (componentRules && typeof componentRules === "object") {
-        const match = (componentRules as Record<string, unknown>)[category]
+        const match = Object.entries(
+          componentRules as Record<string, unknown>
+        ).find(([name]) => name.toLowerCase() === cat)?.[1]
         if (match)
           return text({
             category,
@@ -379,12 +379,20 @@ import { cn } from "@/lib/utils"`,
           })
       }
 
-      return text({
-        category,
-        rules: [],
-        composition_rules: composition,
-        critical_rules: critical(response_format),
-      })
+      if (composition.length > 0)
+        return text({
+          category,
+          rules: [],
+          composition_rules: composition,
+          critical_rules: critical(response_format),
+        })
+
+      // Nothing matched: an empty answer would read as "no rules apply".
+      const { foundations, components } = conciseRuleSet(data).categories
+      return notFound(
+        `No rules for category "${category}". Pass a foundation or a component name below, "composition", or "tailwind".`,
+        [...foundations, ...components] as string[]
+      )
     }
   )
 

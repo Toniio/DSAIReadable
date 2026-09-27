@@ -1,6 +1,6 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { loadContext, text } from "../lib/context.js"
+import { loadContext, notFound, text } from "../lib/context.js"
 import { READ_ONLY } from "../lib/annotations.js"
 import {
   conciseUxWriting,
@@ -72,10 +72,10 @@ export function registerUxWritingTools(server: McpServer): void {
       )
 
       if (!match) {
-        return text({
-          error: `Term "${term}" not found`,
-          available: terms.map((t) => t.term ?? t.name),
-        })
+        return notFound(
+          `Term "${term}" not found. Pass one of the available terms, or omit term for the whole glossary.`,
+          terms.map((t) => t.term ?? t.name ?? "").filter(Boolean)
+        )
       }
 
       return text(match)
