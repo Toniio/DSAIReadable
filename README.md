@@ -95,13 +95,13 @@ Le serveur n'écoute que sur la boucle locale et **valide l'en-tête `Origin`**
 (exigence de la spec MCP, contre les attaques par DNS rebinding). Une requête
 portant une origine non autorisée reçoit un `403`.
 
-| Variable              | Défaut                                         | Rôle                                             |
-| --------------------- | ---------------------------------------------- | ------------------------------------------------ |
-| `MCP_HOST`            | `127.0.0.1`                                    | Interface d'écoute. Ne l'ouvrir que délibérément |
-| `PORT` / `MCP_PORT`   | `3100`                                         | Port d'écoute                                    |
-| `MCP_ALLOWED_ORIGINS` | `localhost` + `127.0.0.1` sur le port d'écoute | Liste d'origines séparées par des virgules       |
-| `MCP_SESSION_TTL_MS`  | `1800000` (30 min)                             | Expiration des sessions inactives                |
-| `MCP_MAX_SESSIONS`    | `100`                                          | Plafond de sessions simultanées                  |
+| Variable              | Défaut                                         | Rôle                                                                                |
+| --------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `MCP_HOST`            | `127.0.0.1`                                    | Interface d'écoute. Ne l'ouvrir que délibérément                                    |
+| `PORT` / `MCP_PORT`   | `3100`                                         | Port d'écoute                                                                       |
+| `MCP_ALLOWED_ORIGINS` | `localhost` + `127.0.0.1` sur le port d'écoute | Liste d'origines séparées par des virgules                                          |
+| `MCP_SESSION_TTL_MS`  | `1800000` (30 min)                             | Expiration des sessions inactives ; une session expirée ou inconnue reçoit un `404` |
+| `MCP_MAX_SESSIONS`    | `100`                                          | Plafond de sessions simultanées                                                     |
 
 ### Outils disponibles
 

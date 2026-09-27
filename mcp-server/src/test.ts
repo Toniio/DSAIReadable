@@ -17,6 +17,8 @@ import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
 import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { spawn } from "node:child_process"
+import { createServer as createNetServer } from "node:net"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const contextDir = resolve(__dirname, "../context")
@@ -1016,6 +1018,106 @@ assert(
 )
 
 await promptClient.close()
+
+// --- Test 10: HTTP transport ---
+// The real server, started as a subprocess on a free port with a short TTL.
+console.log("\n10. HTTP transport")
+
+const SESSION_TTL_MS = 300
+const freePort = await new Promise<number>((done) => {
+  const probe = createNetServer().listen(0, "127.0.0.1", () => {
+    const { port } = probe.address() as { port: number }
+    probe.close(() => done(port))
+  })
+})
+const httpServer = spawn(
+  process.execPath,
+  ["--import", "tsx", resolve(__dirname, "index.ts"), "--http"],
+  {
+    env: {
+      ...process.env,
+      MCP_PORT: String(freePort),
+      MCP_SESSION_TTL_MS: String(SESSION_TTL_MS),
+    },
+    stdio: ["ignore", "pipe", "inherit"],
+  }
+)
+try {
+  await new Promise<void>((ready, fail) => {
+    const timer = setTimeout(
+      () => fail(new Error("HTTP server did not start")),
+      20_000
+    )
+    httpServer.stdout.on("data", (chunk: Buffer) => {
+      if (chunk.toString().includes("listening")) {
+        clearTimeout(timer)
+        ready()
+      }
+    })
+    httpServer.on("exit", (code) =>
+      fail(new Error(`HTTP server exited (${code})`))
+    )
+  })
+
+  const mcpUrl = `http://127.0.0.1:${freePort}/mcp`
+  const post = (body: unknown, sessionId?: string) =>
+    fetch(mcpUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/event-stream",
+        ...(sessionId ? { "Mcp-Session-Id": sessionId } : {}),
+      },
+      body: JSON.stringify(body),
+    })
+  const init = await post({
+    jsonrpc: "2.0",
+    id: 1,
+    method: "initialize",
+    params: {
+      protocolVersion: "2025-06-18",
+      capabilities: {},
+      clientInfo: { name: "DSAIReadable-test", version: "1.0.0" },
+    },
+  })
+  const sessionId = init.headers.get("mcp-session-id") ?? ""
+  await init.text()
+  await (
+    await post(
+      { jsonrpc: "2.0", method: "notifications/initialized" },
+      sessionId
+    )
+  ).text()
+  const listTools = { jsonrpc: "2.0", id: 2, method: "tools/list" }
+
+  const live = await post(listTools, sessionId)
+  await live.text()
+  assert(
+    init.status === 200 && sessionId !== "" && live.status === 200,
+    "A session answers within its TTL"
+  )
+
+  // Expired, the session must be refused at once — not at the next sweep,
+  // 60 s later, and not revived by the request.
+  await new Promise((wait) => setTimeout(wait, SESSION_TTL_MS * 2))
+  const expired = await post(listTools, sessionId)
+  const expiredBody = await expired.text()
+  assert(
+    expired.status === 404 && expiredBody.includes("initialize"),
+    `An expired session is refused with 404 and told to initialize (got ${expired.status})`
+  )
+
+  const unknown = await post(listTools, "00000000-0000-0000-0000-000000000000")
+  await unknown.text()
+  assert(
+    unknown.status === 404,
+    `An unknown session is refused with 404, the spec's signal to initialize (got ${unknown.status})`
+  )
+} catch (e) {
+  assert(false, `HTTP transport: ${e}`)
+} finally {
+  httpServer.kill()
+}
 
 // --- Summary ---
 console.log("\n" + "=".repeat(50))
