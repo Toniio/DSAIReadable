@@ -1,0 +1,1704 @@
+{
+  "color": {
+    "background": {
+      "default": {
+        "$value": "{color.mist.0}",
+        "$type": "color",
+        "$description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.950}"
+            }
+          },
+          "docs": {
+            "description": "Surface principale de la page — fond de `<html>` et des conteneurs racines.",
+            "do": "Utiliser comme fond de la page racine et des containers principaux (`<body>`, `<main>`).",
+            "dont": "Ne pas utiliser pour les cards, popovers ou surfaces élevées — préférer `color.background.subtle` ou `color.background.elevated`."
+          },
+          "status": "active"
+        }
+      },
+      "subtle": {
+        "$value": "{color.mist.100}",
+        "$type": "color",
+        "$description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.800}"
+            }
+          },
+          "docs": {
+            "description": "Surface secondaire légèrement atténuée pour créer une hiérarchie visuelle.",
+            "do": "Utiliser pour les cards, zones muted, sidebars secondaires, panneaux internes.",
+            "dont": "Ne pas utiliser pour le fond principal de la page."
+          },
+          "status": "active"
+        }
+      },
+      "elevated": {
+        "$value": "{color.mist.0}",
+        "$type": "color",
+        "$description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.900}"
+            }
+          },
+          "docs": {
+            "description": "Surface flottante au-dessus du contenu principal.",
+            "do": "Utiliser pour popovers, dropdowns, dialogs, tooltips à fond clair.",
+            "dont": "Ne pas utiliser pour les cards inline — elles ne sont pas \"élevées\" au sens Z."
+          },
+          "status": "active"
+        }
+      },
+      "inverse": {
+        "$value": "{color.mist.950}",
+        "$type": "color",
+        "$description": "Inverted surface for contrast callouts. Not for general-purpose backgrounds.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.0}"
+            }
+          },
+          "docs": {
+            "description": "Surface inversée pour créer un fort contraste avec le fond principal.",
+            "do": "Utiliser pour les tooltips sombres, les badges inversés, les bandeaux d'alerte.",
+            "dont": "Ne pas utiliser comme fond de page général — réservé aux surfaces ponctuelles inversées."
+          },
+          "status": "reserved"
+        }
+      }
+    },
+    "text": {
+      "default": {
+        "$value": "{color.mist.950}",
+        "$type": "color",
+        "$description": "Primary body and heading text. Not for secondary, placeholder, or disabled text.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.50}"
+            }
+          },
+          "docs": {
+            "description": "Couleur de texte principale pour le corps et les headings.",
+            "do": "Utiliser pour tout texte de contenu principal, titres, labels importants.",
+            "dont": "Ne pas réduire l'opacité pour simuler un texte secondaire — utiliser `color.text.subtle`."
+          },
+          "status": "active"
+        }
+      },
+      "subtle": {
+        "$value": "{color.mist.600}",
+        "$type": "color",
+        "$description": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.400}"
+            }
+          },
+          "docs": {
+            "description": "Texte secondaire, captions, helper text, métadonnées.",
+            "do": "Utiliser pour les labels de champs, les descriptions de formulaire, les timestamps.",
+            "dont": "Ne pas utiliser pour le contenu de corps principal — le contraste est insuffisant pour la lecture longue."
+          },
+          "status": "active"
+        }
+      },
+      "bold": {
+        "$value": "{color.mist.950}",
+        "$type": "color",
+        "$description": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.50}"
+            }
+          },
+          "docs": {
+            "description": "Texte emphatique à fort contraste — utilisé pour les emphases dans des contextes où `text.default` ne suffit pas.",
+            "do": "Utiliser pour les emphases dans des zones où le contexte visuel est complexe.",
+            "dont": "Ne pas utiliser comme substitut à `text.default` pour le corps standard."
+          },
+          "status": "reserved"
+        }
+      },
+      "inverse": {
+        "$value": "{color.mist.0}",
+        "$type": "color",
+        "$description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.950}"
+            }
+          },
+          "docs": {
+            "description": "Texte sur surface inverse (fond sombre en light, fond clair en dark).",
+            "do": "Utiliser uniquement posé sur `color.background.inverse`.",
+            "dont": "Ne pas utiliser sur surfaces standard — le contraste sera insuffisant."
+          },
+          "status": "reserved"
+        }
+      },
+      "action": {
+        "default": {
+          "$value": "{color.violet.600}",
+          "$type": "color",
+          "$description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.violet.400}"
+              }
+            },
+            "docs": {
+              "description": "Texte d'action primaire — liens, labels de navigation actifs.",
+              "do": "Utiliser pour les liens textuels et les labels exprimant une action cliquable.",
+              "dont": "Ne pas utiliser pour le texte de corps générique — réservé aux éléments actionnables."
+            },
+            "status": "reserved"
+          }
+        },
+        "on": {
+          "$value": "{color.violet.50}",
+          "$type": "color",
+          "$description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.violet.50}"
+              }
+            },
+            "docs": {
+              "description": "Texte posé sur un fond `color.action.background.default`.",
+              "do": "Utiliser pour le label d'un bouton primaire.",
+              "dont": "Ne pas utiliser sur surfaces neutres — contraste insuffisant sur fond clair."
+            },
+            "status": "reserved"
+          }
+        }
+      },
+      "destructive": {
+        "default": {
+          "$value": "{color.red.600}",
+          "$type": "color",
+          "$description": "Error, danger, or destructive action text. Not for general warning or informational text.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.red.500}"
+              }
+            },
+            "docs": {
+              "description": "Texte d'état destructif ou d'erreur.",
+              "do": "Utiliser pour les messages de validation d'erreur, les confirmations de suppression.",
+              "dont": "Ne pas utiliser pour les avertissements (warning) ou les informations — réservé aux erreurs critiques."
+            },
+            "status": "reserved"
+          }
+        }
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.mist.200}",
+        "$type": "color",
+        "$description": "Standard dividers and component outlines. Not for input fields or focus rings.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.white-alpha.10}"
+            }
+          },
+          "docs": {
+            "description": "Bordure standard pour les séparateurs et contours de composants.",
+            "do": "Utiliser pour les dividers entre sections, les contours de cards.",
+            "dont": "Ne pas utiliser pour les champs de formulaire — préférer `color.border.input`."
+          },
+          "status": "active"
+        }
+      },
+      "subtle": {
+        "$value": "{color.mist.200}",
+        "$type": "color",
+        "$description": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.white-alpha.10}"
+            }
+          },
+          "docs": {
+            "description": "Bordure discrète à faible poids visuel.",
+            "do": "Utiliser pour les séparateurs internes de listes, les divisions légères.",
+            "dont": "Ne pas utiliser sur des composants interactifs nécessitant une bordure visible."
+          },
+          "status": "reserved"
+        }
+      },
+      "input": {
+        "$value": "{color.mist.200}",
+        "$type": "color",
+        "$description": "Border for form input fields. Not for decorative dividers or layout borders.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.white-alpha.15}"
+            }
+          },
+          "docs": {
+            "description": "Bordure spécifique aux champs de formulaire.",
+            "do": "Utiliser pour toutes les bordures de `<input>`, `<select>`, `<textarea>`, `<checkbox>`.",
+            "dont": "Ne pas utiliser pour les séparateurs décoratifs — réservé aux contrôles de formulaire."
+          },
+          "status": "active"
+        }
+      },
+      "focus": {
+        "$value": "{color.mist.500}",
+        "$type": "color",
+        "$description": "Focus ring outline for keyboard accessibility. Not for resting or hover states.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.500}"
+            }
+          },
+          "docs": {
+            "description": "Focus ring pour l'accessibilité clavier (`:focus-visible`).",
+            "do": "Utiliser uniquement pour l'état `:focus-visible` des éléments interactifs.",
+            "dont": "Ne jamais supprimer le focus ring — c'est une exigence d'accessibilité WCAG 2.4.7."
+          },
+          "status": "active"
+        }
+      }
+    },
+    "icon": {
+      "default": {
+        "$value": "{color.mist.950}",
+        "$type": "color",
+        "$description": "Standard icon fill. Not for icons in branded or destructive contexts.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.50}"
+            }
+          },
+          "docs": {
+            "description": "Couleur d'icône standard en contexte neutre.",
+            "do": "Utiliser pour les icônes de navigation, d'action standard, de contenu.",
+            "dont": "Ne pas utiliser pour les icônes dans des boutons primaires — utiliser `color.icon.action`."
+          },
+          "status": "reserved"
+        }
+      },
+      "subtle": {
+        "$value": "{color.mist.500}",
+        "$type": "color",
+        "$description": "Muted/secondary icon fill. Not for primary interactive icons.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.400}"
+            }
+          },
+          "docs": {
+            "description": "Icône secondaire, décorative ou atténuée.",
+            "do": "Utiliser pour les icônes d'état, les indicateurs de chargement, les icônes de métadonnées.",
+            "dont": "Ne pas utiliser pour les icônes d'action principale."
+          },
+          "status": "reserved"
+        }
+      },
+      "action": {
+        "$value": "{color.violet.50}",
+        "$type": "color",
+        "$description": "Icon on a primary action background. Not for icons on neutral surfaces.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.violet.50}"
+            }
+          },
+          "docs": {
+            "description": "Icône posée sur un fond d'action primaire.",
+            "do": "Utiliser pour les icônes à l'intérieur de boutons primaires ou de badges d'action.",
+            "dont": "Ne pas utiliser sur fond neutre ou clair."
+          },
+          "status": "reserved"
+        }
+      }
+    },
+    "action": {
+      "background": {
+        "default": {
+          "$value": "{color.violet.600}",
+          "$type": "color",
+          "$description": "Primary call-to-action button/element background. Not for secondary or ghost variants.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.violet.700}"
+              }
+            },
+            "docs": {
+              "description": "Fond du composant CTA primaire.",
+              "do": "Utiliser pour le fond des boutons primaires et des éléments CTA.",
+              "dont": "Ne pas utiliser pour les variantes secondary, ghost ou outline — ces variantes n'ont pas de fond coloré."
+            },
+            "status": "active"
+          }
+        },
+        "foreground": {
+          "$value": "{color.violet.50}",
+          "$type": "color",
+          "$description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.violet.50}"
+              }
+            },
+            "docs": {
+              "description": "Texte/icône sur fond d'action primaire.",
+              "do": "Toujours associer avec `color.action.background.default` pour le texte d'un bouton primaire.",
+              "dont": "Ne pas utiliser sur fond neutre ou clair."
+            },
+            "status": "active"
+          }
+        }
+      }
+    },
+    "feedback": {
+      "error": {
+        "default": {
+          "$value": "{color.red.600}",
+          "$type": "color",
+          "$description": "Error state color for backgrounds, icons, and borders. Not for warnings or success states.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.red.500}"
+              }
+            },
+            "docs": {
+              "description": "Couleur d'état d'erreur — fond, icône, bordure.",
+              "do": "Utiliser pour les messages de validation, les bordures de champs invalides, les icônes d'erreur.",
+              "dont": "Ne pas utiliser pour les avertissements ou les états de succès."
+            },
+            "status": "active"
+          }
+        },
+        "foreground": {
+          "$value": "{color.mist.0}",
+          "$type": "color",
+          "$description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.mist.950}"
+              }
+            },
+            "docs": {
+              "description": "Texte et icônes posés **sur** une surface d'erreur pleine.",
+              "do": "Utiliser dès qu'un fond `bg-destructive` plein porte du texte ou une icône.",
+              "dont": "Ne jamais poser `color.text.default` ni `text-white` sur une surface d'erreur — en dark, blanc sur red.500 tombe à 2.89:1."
+            },
+            "status": "active"
+          }
+        }
+      }
+    },
+    "chart": {
+      "1": {
+        "$value": "{color.violet.600}",
+        "$type": "color",
+        "$description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.violet.400}"
+            }
+          },
+          "status": "active"
+        }
+      },
+      "2": {
+        "$value": "{color.blue.600}",
+        "$type": "color",
+        "$description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.blue.300}"
+            }
+          },
+          "status": "active"
+        }
+      },
+      "3": {
+        "$value": "{color.amber.600}",
+        "$type": "color",
+        "$description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.yellow.200}"
+            }
+          },
+          "status": "active"
+        }
+      },
+      "4": {
+        "$value": "{color.plum.800}",
+        "$type": "color",
+        "$description": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.plum.500}"
+            }
+          },
+          "status": "active"
+        }
+      },
+      "5": {
+        "$value": "{color.amber.800}",
+        "$type": "color",
+        "$description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.amber.500}"
+            }
+          },
+          "status": "active"
+        }
+      },
+      "$extensions": {
+        "docs": {
+          "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+          "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+          "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        }
+      },
+      "sequential": {
+        "1": {
+          "$value": "{color.green.200}",
+          "$type": "color",
+          "$description": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "2": {
+          "$value": "{color.green.300}",
+          "$type": "color",
+          "$description": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "3": {
+          "$value": "{color.green.400}",
+          "$type": "color",
+          "$description": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "4": {
+          "$value": "{color.green.500}",
+          "$type": "color",
+          "$description": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "5": {
+          "$value": "{color.green.600}",
+          "$type": "color",
+          "$description": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "background": {
+        "$value": "{color.mist.50}",
+        "$type": "color",
+        "$description": "Sidebar panel surface. Not for the main content area or popovers.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.900}"
+            }
+          },
+          "docs": {
+            "tailwind": "mist.900"
+          },
+          "status": "active"
+        }
+      },
+      "foreground": {
+        "$value": "{color.mist.950}",
+        "$type": "color",
+        "$description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.50}"
+            }
+          },
+          "docs": {
+            "tailwind": "mist.50"
+          },
+          "status": "active"
+        }
+      },
+      "border": {
+        "$value": "{color.mist.200}",
+        "$type": "color",
+        "$description": "Sidebar internal divider/border. Not for content-area borders.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.white-alpha.10}"
+            }
+          },
+          "docs": {
+            "tailwind": "white-alpha.10"
+          },
+          "status": "active"
+        }
+      },
+      "ring": {
+        "$value": "{color.mist.500}",
+        "$type": "color",
+        "$description": "Focus ring within the sidebar. Not for main content focus rings.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.500}"
+            }
+          },
+          "docs": {
+            "tailwind": "mist.500"
+          },
+          "status": "active"
+        }
+      },
+      "primary": {
+        "default": {
+          "$value": "{color.violet.550}",
+          "$type": "color",
+          "$description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.violet.500}"
+              }
+            },
+            "docs": {
+              "tailwind": "violet.500"
+            },
+            "status": "active"
+          }
+        },
+        "on": {
+          "$value": "{color.violet.50}",
+          "$type": "color",
+          "$description": "Text on top of the sidebar primary active item. Not for inactive item text.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.mist.0}"
+              }
+            },
+            "docs": {
+              "tailwind": "mist.0"
+            },
+            "status": "active"
+          }
+        }
+      },
+      "accent": {
+        "default": {
+          "$value": "{color.mist.100}",
+          "$type": "color",
+          "$description": "Hovered or secondary sidebar item background. Not for the active primary item.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.mist.800}"
+              }
+            },
+            "docs": {
+              "tailwind": "mist.800"
+            },
+            "status": "active"
+          }
+        },
+        "foreground": {
+          "$value": "{color.mist.900}",
+          "$type": "color",
+          "$description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
+          "$extensions": {
+            "modes": {
+              "dark": {
+                "$value": "{color.mist.50}"
+              }
+            },
+            "docs": {
+              "tailwind": "mist.50"
+            },
+            "status": "active"
+          }
+        }
+      },
+      "$extensions": {
+        "docs": {
+          "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+          "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar."
+        }
+      }
+    },
+    "static": {
+      "white": {
+        "$value": "{color.mist.0}",
+        "$type": "color",
+        "$description": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.mist.0}"
+            }
+          },
+          "docs": {
+            "tailwind": "bg-white, text-white"
+          },
+          "status": "active"
+        }
+      },
+      "black": {
+        "$value": "{color.black}",
+        "$type": "color",
+        "$description": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces.",
+        "$extensions": {
+          "modes": {
+            "dark": {
+              "$value": "{color.black}"
+            }
+          },
+          "docs": {
+            "tailwind": "bg-black/10"
+          },
+          "status": "active"
+        }
+      }
+    }
+  },
+  "space": {
+    "component": {
+      "xs": {
+        "$value": "{space.1}",
+        "$type": "dimension",
+        "$description": "Extra-small component padding/gap (4px). Not for layout or section spacing.",
+        "$extensions": {
+          "docs": {
+            "do": "Gap entre icône et label dans un bouton compact, padding interne d'un badge.",
+            "dont": "Ne pas utiliser pour des espacements de layout."
+          },
+          "status": "reserved"
+        }
+      },
+      "sm": {
+        "$value": "{space.2}",
+        "$type": "dimension",
+        "$description": "Small component padding/gap (8px). Not for layout or section spacing.",
+        "$extensions": {
+          "docs": {
+            "do": "Padding d'un bouton compact, gap d'une liste serrée.",
+            "dont": "Ne pas utiliser pour espacer des sections de page."
+          },
+          "status": "reserved"
+        }
+      },
+      "md": {
+        "$value": "{space.4}",
+        "$type": "dimension",
+        "$description": "Medium component padding/gap (16px). Not for layout or section spacing.",
+        "$extensions": {
+          "docs": {
+            "do": "Padding standard d'une card, gap entre boutons d'un groupe.",
+            "dont": "Ne pas utiliser pour le gap entre sections de page."
+          },
+          "status": "reserved"
+        }
+      },
+      "lg": {
+        "$value": "{space.6}",
+        "$type": "dimension",
+        "$description": "Large component padding/gap (24px). Not for layout or section spacing.",
+        "$extensions": {
+          "docs": {
+            "do": "Padding interne d'un dialog, gap entre champs de formulaire.",
+            "dont": "Ne pas confondre avec `space.layout.page-padding` (même valeur, contexte différent)."
+          },
+          "status": "active"
+        }
+      },
+      "xl": {
+        "$value": "{space.8}",
+        "$type": "dimension",
+        "$description": "Extra-large component padding/gap (32px). Not for layout or section spacing.",
+        "$extensions": {
+          "docs": {
+            "do": "Padding d'une section de card large, espacement entre groupes de formulaire.",
+            "dont": "Ne pas utiliser pour les espacements entre éléments inline proches."
+          },
+          "status": "reserved"
+        }
+      }
+    },
+    "focus-ring-width": {
+      "$value": "{space.focus-ring-width}",
+      "$type": "dimension",
+      "$description": "Width of the focus ring indicator (2px). Use for all focus-visible ring styles.",
+      "$extensions": {
+        "status": "active"
+      }
+    },
+    "layout": {
+      "page-padding": {
+        "$value": "{space.page}",
+        "$type": "dimension",
+        "$description": "Horizontal padding for the main page container. Not for component-level spacing.",
+        "$extensions": {
+          "docs": {
+            "do": "Padding horizontal du conteneur de page racine.",
+            "dont": "Ne pas appliquer sur des composants internes."
+          },
+          "status": "active"
+        }
+      },
+      "section-gap": {
+        "$value": "{space.section}",
+        "$type": "dimension",
+        "$description": "Vertical gap between major page sections. Not for component-level spacing.",
+        "$extensions": {
+          "docs": {
+            "do": "Espace vertical entre sections majeures d'une page.",
+            "dont": "Ne pas utiliser entre composants d'une même section."
+          },
+          "status": "active"
+        }
+      },
+      "content-sm": {
+        "$value": "{space.content-sm}",
+        "$type": "dimension",
+        "$description": "Narrow content column max-width (42rem). Not for full-width or wide layouts.",
+        "$extensions": {
+          "docs": {
+            "do": "`max-w-[var(--space-layout-content-sm)]` pour les pages editoriales.",
+            "dont": "Ne pas utiliser comme valeur de padding."
+          },
+          "status": "reserved"
+        }
+      },
+      "content-default": {
+        "$value": "{space.content}",
+        "$type": "dimension",
+        "$description": "Default content column max-width (64rem). Not for narrow or wide layouts.",
+        "$extensions": {
+          "docs": {
+            "do": "Conteneur de contenu principal de la majorité des pages.",
+            "dont": "Ne pas dépasser pour les layouts de contenu standard."
+          },
+          "status": "reserved"
+        }
+      },
+      "content-lg": {
+        "$value": "{space.content-lg}",
+        "$type": "dimension",
+        "$description": "Wide content column max-width (80rem). Not for narrow or default layouts.",
+        "$extensions": {
+          "docs": {
+            "do": "Dashboards, tableaux de données, layouts avec plusieurs colonnes.",
+            "dont": "Ne pas utiliser pour les pages de contenu éditorial."
+          },
+          "status": "reserved"
+        }
+      },
+      "sidebar": {
+        "$value": "{space.sidebar}",
+        "$type": "dimension",
+        "$description": "Default sidebar width (16rem). Use for the main navigation sidebar.",
+        "$extensions": {
+          "status": "active"
+        }
+      },
+      "sidebar-mobile": {
+        "$value": "{space.sidebar-mobile}",
+        "$type": "dimension",
+        "$description": "Sidebar width on mobile viewports (18rem). Slightly wider for touch targets.",
+        "$extensions": {
+          "status": "active"
+        }
+      },
+      "sidebar-icon": {
+        "$value": "{space.12}",
+        "$type": "dimension",
+        "$description": "Sidebar width in icon-only/collapsed mode (3rem).",
+        "$extensions": {
+          "status": "active"
+        }
+      }
+    }
+  },
+  "typography": {
+    "size": {
+      "xs": {
+        "$value": "{typography.size.xs}",
+        "$type": "dimension",
+        "$description": "Extra-small text size (12px). Use for labels, badges, captions.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-xs"
+          },
+          "status": "active"
+        }
+      },
+      "sm": {
+        "$value": "{typography.size.sm}",
+        "$type": "dimension",
+        "$description": "Small text size (14px). Use for secondary content and UI labels.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-sm"
+          },
+          "status": "active"
+        }
+      },
+      "base": {
+        "$value": "{typography.size.base}",
+        "$type": "dimension",
+        "$description": "Default body text size (16px). Use for main readable content.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-base"
+          },
+          "status": "active"
+        }
+      },
+      "lg": {
+        "$value": "{typography.size.lg}",
+        "$type": "dimension",
+        "$description": "Large text size (18px). Use for featured body text.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-lg"
+          },
+          "status": "active"
+        }
+      },
+      "xl": {
+        "$value": "{typography.size.xl}",
+        "$type": "dimension",
+        "$description": "XL text (20px). Use for section headings.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-xl"
+          },
+          "status": "active"
+        }
+      },
+      "2xl": {
+        "$value": "{typography.size.2xl}",
+        "$type": "dimension",
+        "$description": "2XL text (24px). Use for page-level headings.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-2xl"
+          },
+          "status": "active"
+        }
+      },
+      "3xl": {
+        "$value": "{typography.size.3xl}",
+        "$type": "dimension",
+        "$description": "3XL text (30px). Use for hero or primary headings.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-3xl"
+          },
+          "status": "active"
+        }
+      },
+      "4xl": {
+        "$value": "{typography.size.4xl}",
+        "$type": "dimension",
+        "$description": "4XL text (36px). Use for display headings only.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-4xl"
+          },
+          "status": "active"
+        }
+      }
+    },
+    "line-height": {
+      "tight": {
+        "$value": "{typography.line-height.tight}",
+        "$type": "number",
+        "$description": "Tight line height for headings. Not for paragraph text.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "leading-tight"
+          },
+          "status": "active"
+        }
+      },
+      "snug": {
+        "$value": "{typography.line-height.snug}",
+        "$type": "number",
+        "$description": "Snug line height. Not for long-form reading content.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "leading-snug"
+          },
+          "status": "active"
+        }
+      },
+      "normal": {
+        "$value": "{typography.line-height.normal}",
+        "$type": "number",
+        "$description": "Default line height for body text.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "leading-normal"
+          },
+          "status": "active"
+        }
+      },
+      "relaxed": {
+        "$value": "{typography.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Relaxed line height for improved readability in long-form content.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "leading-relaxed"
+          },
+          "status": "active"
+        }
+      },
+      "loose": {
+        "$value": "{typography.line-height.loose}",
+        "$type": "number",
+        "$description": "Loose line height for highly spaced text. Not for dense UIs.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "leading-loose"
+          },
+          "status": "active"
+        }
+      }
+    },
+    "letter-spacing": {
+      "tight": {
+        "$value": "{typography.letter-spacing.tight}",
+        "$type": "dimension",
+        "$description": "Tight letter spacing for large headings. Not for body text.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "tracking-tight"
+          },
+          "status": "active"
+        }
+      },
+      "normal": {
+        "$value": "{typography.letter-spacing.normal}",
+        "$type": "dimension",
+        "$description": "Default letter spacing. Use as baseline.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "tracking-normal"
+          },
+          "status": "active"
+        }
+      },
+      "wide": {
+        "$value": "{typography.letter-spacing.wide}",
+        "$type": "dimension",
+        "$description": "Wide letter spacing for small UI labels.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "tracking-wide"
+          },
+          "status": "active"
+        }
+      },
+      "wider": {
+        "$value": "{typography.letter-spacing.wider}",
+        "$type": "dimension",
+        "$description": "Wider letter spacing for all-caps or overline text.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "tracking-wider"
+          },
+          "status": "active"
+        }
+      }
+    },
+    "font-weight": {
+      "normal": {
+        "$value": "{typography.font-weight.normal}",
+        "$type": "font-weight",
+        "$description": "Normal weight for body text.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "font-normal"
+          },
+          "status": "active"
+        }
+      },
+      "medium": {
+        "$value": "{typography.font-weight.medium}",
+        "$type": "font-weight",
+        "$description": "Medium weight for UI labels and buttons.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "font-medium"
+          },
+          "status": "active"
+        }
+      },
+      "semibold": {
+        "$value": "{typography.font-weight.semibold}",
+        "$type": "font-weight",
+        "$description": "Semibold for sub-headings and emphasis.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "font-semibold"
+          },
+          "status": "active"
+        }
+      },
+      "bold": {
+        "$value": "{typography.font-weight.bold}",
+        "$type": "font-weight",
+        "$description": "Bold for headings and strong emphasis.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "font-bold"
+          },
+          "status": "active"
+        }
+      }
+    },
+    "font-family": {
+      "sans": {
+        "$value": "{typography.font-family.sans}",
+        "$type": "font-family",
+        "$description": "Primary sans-serif typeface for UI text.",
+        "$extensions": {
+          "docs": {
+            "do": "Usage optionnel pour le contenu éditorial.",
+            "dont": "Ne pas utiliser comme police principale — le projet utilise `font-mono` par défaut."
+          },
+          "status": "reserved"
+        }
+      },
+      "mono": {
+        "$value": "{typography.font-family.mono}",
+        "$type": "font-family",
+        "$description": "Monospace typeface for code, numbers, and technical content.",
+        "$extensions": {
+          "docs": {
+            "do": "Police par défaut de tous les composants UI.",
+            "dont": "Ne pas surcharger sans décision de l'équipe design."
+          },
+          "status": "reserved"
+        }
+      }
+    }
+  },
+  "radius": {
+    "none": {
+      "$value": "{radius.none}",
+      "$type": "dimension",
+      "$description": "Zero radius — square corners. Use for full-bleed or table elements.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-none"
+        },
+        "status": "reserved"
+      }
+    },
+    "xs": {
+      "$value": "{radius.xs}",
+      "$type": "dimension",
+      "$description": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-xs"
+        },
+        "status": "active"
+      }
+    },
+    "sm": {
+      "$value": "{radius.sm}",
+      "$type": "dimension",
+      "$description": "Small rounding (0.6× base). Use for inputs, small buttons.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-sm"
+        },
+        "status": "active"
+      }
+    },
+    "md": {
+      "$value": "{radius.md}",
+      "$type": "dimension",
+      "$description": "Medium rounding (0.8× base). Use for default buttons and form controls.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-md"
+        },
+        "status": "active"
+      }
+    },
+    "lg": {
+      "$value": "{radius.lg}",
+      "$type": "dimension",
+      "$description": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-lg"
+        },
+        "status": "active"
+      }
+    },
+    "xl": {
+      "$value": "{radius.xl}",
+      "$type": "dimension",
+      "$description": "Larger rounding (1.4× base). Use for modals and prominent containers.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-xl"
+        },
+        "status": "active"
+      }
+    },
+    "2xl": {
+      "$value": "{radius.2xl}",
+      "$type": "dimension",
+      "$description": "Extra-large rounding (1.8× base). Use for floating panels.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-2xl"
+        },
+        "status": "active"
+      }
+    },
+    "3xl": {
+      "$value": "{radius.3xl}",
+      "$type": "dimension",
+      "$description": "Very large rounding (2.2× base). Use sparingly for decorative containers.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-3xl"
+        },
+        "status": "active"
+      }
+    },
+    "4xl": {
+      "$value": "{radius.4xl}",
+      "$type": "dimension",
+      "$description": "Maximum rounding (2.6× base). Use only for hero cards or large chips.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-4xl"
+        },
+        "status": "active"
+      }
+    },
+    "full": {
+      "$value": "{radius.full}",
+      "$type": "dimension",
+      "$description": "Pill/full rounding. Use for pills, avatars, toggles.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-full"
+        },
+        "status": "reserved"
+      }
+    },
+    "$extensions": {
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système."
+      }
+    }
+  },
+  "elevation": {
+    "xs": {
+      "$value": "{elevation.light.xs}",
+      "$type": "shadow",
+      "$description": "Minimal lift for interactive elements. Not for decorative purposes.",
+      "$extensions": {
+        "modes": {
+          "dark": {
+            "$value": "{elevation.dark.xs}"
+          }
+        },
+        "docs": {
+          "tailwind": "shadow-xs"
+        },
+        "status": "active"
+      }
+    },
+    "sm": {
+      "$value": "{elevation.light.sm}",
+      "$type": "shadow",
+      "$description": "Small lift for cards and hover states. Not for fixed navigation.",
+      "$extensions": {
+        "modes": {
+          "dark": {
+            "$value": "{elevation.dark.sm}"
+          }
+        },
+        "docs": {
+          "tailwind": "shadow-sm"
+        },
+        "status": "active"
+      }
+    },
+    "md": {
+      "$value": "{elevation.light.md}",
+      "$type": "shadow",
+      "$description": "Medium elevation for dropdowns and context menus. Not for inline content.",
+      "$extensions": {
+        "modes": {
+          "dark": {
+            "$value": "{elevation.dark.md}"
+          }
+        },
+        "docs": {
+          "tailwind": "shadow-md"
+        },
+        "status": "active"
+      }
+    },
+    "lg": {
+      "$value": "{elevation.light.lg}",
+      "$type": "shadow",
+      "$description": "Large elevation for modals and side panels. Not for standard cards.",
+      "$extensions": {
+        "modes": {
+          "dark": {
+            "$value": "{elevation.dark.lg}"
+          }
+        },
+        "docs": {
+          "tailwind": "shadow-lg"
+        },
+        "status": "active"
+      }
+    },
+    "xl": {
+      "$value": "{elevation.light.xl}",
+      "$type": "shadow",
+      "$description": "Extra-large elevation for full overlay panels. Not for inline components.",
+      "$extensions": {
+        "modes": {
+          "dark": {
+            "$value": "{elevation.dark.xl}"
+          }
+        },
+        "docs": {
+          "tailwind": "shadow-xl"
+        },
+        "status": "active"
+      }
+    },
+    "2xl": {
+      "$value": "{elevation.light.2xl}",
+      "$type": "shadow",
+      "$description": "Maximum elevation for toasts and high-priority overlays. Use sparingly.",
+      "$extensions": {
+        "modes": {
+          "dark": {
+            "$value": "{elevation.dark.2xl}"
+          }
+        },
+        "docs": {
+          "tailwind": "shadow-2xl"
+        },
+        "status": "active"
+      }
+    },
+    "inner": {
+      "$value": "{elevation.light.inner}",
+      "$type": "shadow",
+      "$description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements.",
+      "$extensions": {
+        "modes": {
+          "dark": {
+            "$value": "{elevation.dark.inner}"
+          }
+        },
+        "docs": {
+          "tailwind": "shadow-inner"
+        },
+        "status": "active"
+      }
+    },
+    "$extensions": {
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément."
+      }
+    }
+  },
+  "motion": {
+    "duration": {
+      "instant": {
+        "$value": "{motion.duration.instant}",
+        "$type": "duration",
+        "$description": "No duration — for immediate state changes. Not for visual transitions.",
+        "$extensions": {
+          "status": "reserved"
+        }
+      },
+      "fast": {
+        "$value": "{motion.duration.fast}",
+        "$type": "duration",
+        "$description": "Fast micro-interactions (100ms). Use for hover/focus feedback.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "duration-fast"
+          },
+          "status": "active"
+        }
+      },
+      "normal": {
+        "$value": "{motion.duration.normal}",
+        "$type": "duration",
+        "$description": "Standard transition duration (200ms). Default for most transitions.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "duration-normal"
+          },
+          "status": "active"
+        }
+      },
+      "slow": {
+        "$value": "{motion.duration.slow}",
+        "$type": "duration",
+        "$description": "Slow, deliberate transitions (300ms). Use for modals and drawers.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "duration-slow"
+          },
+          "status": "active"
+        }
+      },
+      "slower": {
+        "$value": "{motion.duration.slower}",
+        "$type": "duration",
+        "$description": "Slowest transitions (500ms). Use only for complex animations.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "duration-slower"
+          },
+          "status": "active"
+        }
+      },
+      "extra-slow": {
+        "$value": "{motion.duration.extra-slow}",
+        "$type": "duration",
+        "$description": "Extra-slow duration (1000ms). Use for blink/pulse animations like caret blink.",
+        "$extensions": {
+          "status": "active"
+        }
+      }
+    },
+    "easing": {
+      "default": {
+        "$value": "{motion.easing.default}",
+        "$type": "cubicBezier",
+        "$description": "Standard ease-in-out. Default for all UI transitions.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "ease-default"
+          },
+          "status": "active"
+        }
+      },
+      "in": {
+        "$value": "{motion.easing.in}",
+        "$type": "cubicBezier",
+        "$description": "Ease-in curve. Use for elements exiting the screen.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "ease-in"
+          },
+          "status": "active"
+        }
+      },
+      "out": {
+        "$value": "{motion.easing.out}",
+        "$type": "cubicBezier",
+        "$description": "Ease-out curve. Use for elements entering the screen.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "ease-out"
+          },
+          "status": "active"
+        }
+      },
+      "spring": {
+        "$value": "{motion.easing.spring}",
+        "$type": "cubicBezier",
+        "$description": "Spring overshoot. Use for playful or bouncy interactions only.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "ease-spring"
+          },
+          "status": "active"
+        }
+      }
+    },
+    "$extensions": {
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS."
+      }
+    }
+  },
+  "opacity": {
+    "disabled": {
+      "$value": "{opacity.0-50}",
+      "$type": "number",
+      "$description": "Opacity for disabled interactive elements. Not for placeholder or overlay use.",
+      "$extensions": {
+        "docs": {
+          "do": "Utiliser `disabled:opacity-50` (classe Tailwind) sur les éléments interactifs désactivés.",
+          "dont": "Ne pas utiliser pour du texte secondaire — utiliser `color.text.subtle`."
+        },
+        "status": "reserved"
+      }
+    },
+    "placeholder": {
+      "$value": "{opacity.0-50}",
+      "$type": "number",
+      "$description": "Opacity for placeholder text. Not for disabled or overlay use.",
+      "$extensions": {
+        "docs": {
+          "do": "Appliquer sur `::placeholder` des champs de formulaire.",
+          "dont": "Ne pas confondre avec `opacity.disabled` — usages distincts."
+        },
+        "status": "reserved"
+      }
+    },
+    "overlay": {
+      "$value": "{opacity.0-80}",
+      "$type": "number",
+      "$description": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency.",
+      "$extensions": {
+        "docs": {
+          "do": "Utiliser pour les backdrops de modals et dialogs.",
+          "dont": "Ne pas réduire en dessous de `0.7` — le contraste devient insuffisant."
+        },
+        "status": "reserved"
+      }
+    }
+  },
+  "zindex": {
+    "dropdown": {
+      "$value": "{zindex.dropdown}",
+      "$type": "number",
+      "$description": "Dropdown menus. Renders above page content.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-dropdown"
+        },
+        "status": "active"
+      }
+    },
+    "sticky": {
+      "$value": "{zindex.sticky}",
+      "$type": "number",
+      "$description": "Sticky headers/footers. Renders above dropdowns.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-sticky"
+        },
+        "status": "active"
+      }
+    },
+    "fixed": {
+      "$value": "{zindex.fixed}",
+      "$type": "number",
+      "$description": "Fixed position elements. Renders above sticky.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-fixed"
+        },
+        "status": "active"
+      }
+    },
+    "overlay": {
+      "$value": "{zindex.overlay}",
+      "$type": "number",
+      "$description": "Overlay/backdrop. Renders above fixed elements.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-overlay"
+        },
+        "status": "active"
+      }
+    },
+    "modal": {
+      "$value": "{zindex.modal}",
+      "$type": "number",
+      "$description": "Modal dialogs. Renders above overlays.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-modal"
+        },
+        "status": "active"
+      }
+    },
+    "popover": {
+      "$value": "{zindex.popover}",
+      "$type": "number",
+      "$description": "Popovers and tooltips of high priority. Renders above modals.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-popover"
+        },
+        "status": "active"
+      }
+    },
+    "toast": {
+      "$value": "{zindex.toast}",
+      "$type": "number",
+      "$description": "Toast notifications. Always visible above other layers.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-toast"
+        },
+        "status": "active"
+      }
+    },
+    "tooltip": {
+      "$value": "{zindex.tooltip}",
+      "$type": "number",
+      "$description": "Tooltips. Highest z-index to always appear on top.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "z-tooltip"
+        },
+        "status": "active"
+      }
+    },
+    "$extensions": {
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation."
+      }
+    }
+  },
+  "breakpoint": {
+    "sm": {
+      "$value": "{breakpoint.sm}",
+      "$type": "dimension",
+      "$description": "Viewport width from which the `sm:` variant applies (mobile-first, min-width). Not a container width.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "sm:"
+        },
+        "status": "active"
+      }
+    },
+    "md": {
+      "$value": "{breakpoint.md}",
+      "$type": "dimension",
+      "$description": "Viewport width from which the `md:` variant applies (mobile-first, min-width). Not a container width.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "md:"
+        },
+        "status": "active"
+      }
+    },
+    "lg": {
+      "$value": "{breakpoint.lg}",
+      "$type": "dimension",
+      "$description": "Viewport width from which the `lg:` variant applies (mobile-first, min-width). Not a container width.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "lg:"
+        },
+        "status": "active"
+      }
+    },
+    "xl": {
+      "$value": "{breakpoint.xl}",
+      "$type": "dimension",
+      "$description": "Viewport width from which the `xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "xl:"
+        },
+        "status": "reserved"
+      }
+    },
+    "2xl": {
+      "$value": "{breakpoint.2xl}",
+      "$type": "dimension",
+      "$description": "Viewport width from which the `2xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "2xl:"
+        },
+        "status": "reserved"
+      }
+    }
+  },
+  "border-width": {
+    "default": {
+      "$value": "{border-width.1}",
+      "$type": "dimension",
+      "$description": "Width of every plain border: `border`, `border-t`, `divide-x`… Not for focus rings, which use space.focus-ring-width.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "border"
+        },
+        "status": "active"
+      }
+    },
+    "chart-indicator": {
+      "$value": "{border-width.1-5}",
+      "$type": "dimension",
+      "$description": "Stroke of the dashed series indicator in chart tooltips. Not for component borders.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "border-chart-indicator"
+        },
+        "status": "active"
+      }
+    }
+  }
+}

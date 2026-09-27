@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.local/design-system.index.schema.json",
+  "title": "DesignSystemIndex",
+  "description": "Schema for the machine-readable design system index consumed by AI tooling (MCP agents, LLM code generators).",
+  "type": "object",
+  "required": [
+    "version",
+    "library",
+    "inventory",
+    "composition_rules",
+    "glossary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semver of the index itself."
+    },
+    "library": {
+      "type": "object",
+      "required": [
+        "last_publish"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "last_publish": {
+          "type": "string",
+          "description": "ISO-8601 datetime of the last library publish."
+        }
+      }
+    },
+    "inventory": {
+      "type": "array",
+      "description": "Exhaustive list of all components in the codebase.",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "code_path",
+          "status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "code_path": {
+            "type": "string",
+            "description": "Path relative to project root."
+          },
+          "sizes": {
+            "type": "array",
+            "description": "Sizes the component's size prop accepts, in ascending order. Absent means the component takes no size prop. Enforced against the source by scripts/lint-sizes.ts.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "xs",
+                "sm",
+                "default",
+                "lg",
+                "icon-xs",
+                "icon-sm",
+                "icon",
+                "icon-lg"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "stable",
+              "beta",
+              "deprecated"
+            ]
+          }
+        }
+      }
+    },
+    "composition_rules": {
+      "type": "array",
+      "description": "Rules an AI must follow when composing UI using this design system.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "rule"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^rule-[0-9]+$"
+          },
+          "rule": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "glossary": {
+      "type": "object",
+      "description": "Key terms used in this design system and their precise definitions.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+# Calendar
+
+## Metadata
+
+| Champ         | Valeur                     |
+| ------------- | -------------------------- |
+| Nom           | Calendar                   |
+| Catégorie     | Data                       |
+| Statut        | stable                     |
+| figma_node_id |                            |
+| code_path     | components/ui/calendar.tsx |
+
+## Rôle
+
+Sélecteur de date(s) interactif basé sur `react-day-picker`, supportant la sélection simple, multiple et par plage avec navigation mensuelle.
+
+## Usage
+
+- Sélectionner une date unique dans un formulaire (ex. : date de naissance, échéance)
+- Sélectionner une plage de dates (ex. : période de facturation, congés)
+- Afficher un calendrier dans un `Popover` pour les champs de type date-picker
+- Permettre la navigation par mois/année via des dropdowns intégrés
+- Afficher les numéros de semaine pour un contexte métier (option `showWeekNumber`)
+
+## Contraintes
+
+- Ne pas utiliser comme agenda ou planning — préférer un composant dédié avec vue journalière/hebdomadaire
+- Limiter à un calendrier visible par vue pour éviter la surcharge cognitive (sauf comparaison de plages)
+- Le composant nécessite un conteneur parent pour le positionnement (ex. : `Popover`, `Card`)
+- Les jours désactivés doivent rester visibles (`opacity-50`) avec `aria-disabled` pour l'accessibilité
+- La navigation clavier doit être fonctionnelle : flèches pour se déplacer entre les jours, Tab pour les contrôles
+
+## Dépendances
+
+- `react-day-picker` — moteur de calendrier et types (`DayPicker`, `DayButton`, `Locale`)
+- `Button` (`@/components/ui/button`) — boutons de navigation et cellules de jour
+- `buttonVariants` (`@/components/ui/button`) — classes CSS des boutons de navigation
+- `CaretLeftIcon`, `CaretRightIcon`, `CaretDownIcon` (`@phosphor-icons/react`) — icônes de navigation
+- `cn` (`@/lib/utils`) — utilitaire de fusion de classes
+
+## Anatomie
+
+| Slot                   | Rôle                                      |
+| ---------------------- | ----------------------------------------- |
+| `data-slot="calendar"` | Racine du composant (conteneur principal) |
+
+## Tokens utilisés
+
+| Token                        | Usage                                                                         |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| `--color-background`         | Fond principal du calendrier (`bg-background`)                                |
+| `--color-muted`              | Fond du jour courant et des plages sélectionnées (`bg-muted`)                 |
+| `--color-muted-foreground`   | Texte des jours extérieurs, des jours de la semaine et des numéros de semaine |
+| `--color-primary`            | Fond du jour sélectionné et des extrémités de plage (`bg-primary`)            |
+| `--color-primary-foreground` | Texte du jour sélectionné (`text-primary-foreground`)                         |
+| `--color-foreground`         | Texte du jour courant (`text-foreground`)                                     |
+| `--color-popover`            | Fond du dropdown de sélection mois/année (`bg-popover`)                       |
+| `--color-ring`               | Anneau de focus sur les jours (`border-ring`, `ring-ring/50`)                 |
+| `--spacing-7`                | Taille des cellules via `--cell-size`                                         |
+
+## Props / API
+
+| Prop              | Type                                                             | Défaut    | Description                                                                   |
+| ----------------- | ---------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------- |
+| `className`       | `string`                                                         | —         | Classes CSS additionnelles sur le conteneur                                   |
+| `classNames`      | `Partial<ClassNames>`                                            | —         | Surcharge des classes CSS internes de `react-day-picker`                      |
+| `showOutsideDays` | `boolean`                                                        | `true`    | Affiche les jours du mois précédent/suivant                                   |
+| `captionLayout`   | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"` | Mode d'affichage du titre (label statique ou dropdown)                        |
+| `buttonVariant`   | `ButtonVariant`                                                  | `"ghost"` | Variante visuelle des boutons de navigation                                   |
+| `locale`          | `Partial<Locale>`                                                | —         | Locale pour le formatage des dates et mois                                    |
+| `formatters`      | `Formatters`                                                     | —         | Fonctions de formatage personnalisées                                         |
+| `components`      | `Components`                                                     | —         | Surcharge des sous-composants internes                                        |
+| `...props`        | `React.ComponentProps<typeof DayPicker>`                         | —         | Toutes les props de `react-day-picker` (`mode`, `selected`, `onSelect`, etc.) |
+
+## Variantes
+
+<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+
+| Composant  | Axe             | Valeurs                                                                | Défaut  |
+| ---------- | --------------- | ---------------------------------------------------------------------- | ------- |
+| `Calendar` | `buttonVariant` | `default` · `outline` · `secondary` · `ghost` · `destructive` · `link` | `ghost` |
+
+Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+
+## États
+
+| État     | Description                                                                        |
+| -------- | ---------------------------------------------------------------------------------- |
+| default  | Grille de jours affichée, aucun jour sélectionné                                   |
+| hover    | Jour survolé avec atténuation du fond (via variante `ghost` du `Button`)           |
+| focus    | Anneau de focus visible (`ring-ring/50`, `border-ring`) sur le jour ayant le focus |
+| active   | Jour sélectionné en `bg-primary` / `text-primary-foreground`                       |
+| disabled | Jour non sélectionnable, `opacity-50` et `aria-disabled`, texte `muted-foreground` |
+
+## Accessibilité
+
+**Pattern** : [Grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) de dates (react-day-picker)
+
+**Rôle** : Grille de dates ; le jour sélectionné porte `aria-selected`, les jours indisponibles `aria-disabled`.
+
+**Clavier** :
+
+| Touche                            | Action                                     |
+| --------------------------------- | ------------------------------------------ |
+| `ArrowLeft` / `ArrowRight`        | Jour précédent / suivant                   |
+| `ArrowUp` / `ArrowDown`           | Même jour la semaine précédente / suivante |
+| `Home` / `End`                    | Début / fin de la semaine                  |
+| `PageUp` / `PageDown`             | Mois précédent / suivant                   |
+| `Shift+PageUp` / `Shift+PageDown` | Année précédente / suivante                |
+| `Enter` / `Space`                 | Sélectionne le jour focalisé               |
+
+**Nom accessible** : Les boutons de navigation entre mois sont nommés par react-day-picker, en anglais par défaut : fournir les libellés localisés via ses props `labels`.
+
+**Vigilance** :
+
+- Un calendrier seul ne suffit pas à saisir une date connue : proposer aussi un champ de saisie texte.
+- Indiquer les jours indisponibles autrement que par la couleur.
+
+## Exemple de code
+
+```tsx
+import { Calendar } from "@/components/ui/calendar"
+import { useState } from "react"
+
+export default function Example() {
+  const [date, setDate] = useState<Date | undefined>(new Date())
+
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      showOutsideDays
+    />
+  )
+}
+```
+
+## Références croisées
+
+- `Popover` — conteneur fréquent pour afficher le calendrier en overlay
+- `Button` — utilisé pour les cellules de jour et la navigation
+- `Input` — partenaire dans les champs date-picker (déclenche le popover)

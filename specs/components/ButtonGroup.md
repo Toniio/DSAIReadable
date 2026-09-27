@@ -1,0 +1,134 @@
+# ButtonGroup
+
+## Metadata
+
+| Champ         | Valeur                         |
+| ------------- | ------------------------------ |
+| Nom           | ButtonGroup                    |
+| Catégorie     | Misc                           |
+| Statut        | stable                         |
+| figma_node_id |                                |
+| code_path     | components/ui/button-group.tsx |
+
+## Rôle
+
+Conteneur regroupant visuellement plusieurs boutons, inputs ou selects adjacents en fusionnant leurs bordures et arrondis.
+
+## Usage
+
+- Regrouper des actions liées (ex. : « Précédent / Suivant »)
+- Combiner un champ de saisie et un bouton d'action (ex. : recherche avec bouton « Go »)
+- Assembler un select et un bouton dans une barre d'outils compacte
+- Disposer des boutons en colonne avec l'orientation `vertical`
+- Séparer visuellement des sous-groupes avec `ButtonGroupSeparator`
+
+## Contraintes
+
+- Ne pas utiliser pour des actions sans lien logique — préférer un espacement simple
+- Limiter le nombre de boutons groupés (3 à 5 maximum) pour la lisibilité
+- L'orientation `vertical` doit être réservée aux barres d'outils latérales
+- Les enfants doivent supporter la fusion de bordures (les arrondis intermédiaires sont supprimés)
+- Les groupes imbriqués (`has-[>[data-slot=button-group]]`) ajoutent un `gap-2` automatique
+
+## Dépendances
+
+- `class-variance-authority` pour les variantes d'orientation
+- `Slot.Root` de `radix-ui` (utilisé par `ButtonGroupText` quand `asChild={true}`)
+- `Separator` depuis `@/components/ui/separator`
+- `cn` utilitaire depuis `@/lib/utils`
+
+## Anatomie
+
+| Slot                                 | Rôle                                                         |
+| ------------------------------------ | ------------------------------------------------------------ |
+| `data-slot="button-group"`           | Racine du groupe, porte `data-orientation` et `role="group"` |
+| `data-slot="button-group-separator"` | Séparateur visuel entre les éléments du groupe               |
+
+## Tokens utilisés
+
+| Token        | Usage                                           |
+| ------------ | ----------------------------------------------- |
+| `bg-muted`   | Fond du `ButtonGroupText`                       |
+| `border`     | Bordure du `ButtonGroupText`                    |
+| `bg-input`   | Couleur du `ButtonGroupSeparator`               |
+| `z-dropdown` | Z-index des éléments en focus au sein du groupe |
+
+## Props / API
+
+| Prop                     | Type                                     | Défaut         | Description                                       |
+| ------------------------ | ---------------------------------------- | -------------- | ------------------------------------------------- |
+| **ButtonGroup**          |                                          |                |                                                   |
+| `orientation`            | `"horizontal" \| "vertical"`             | `"horizontal"` | Direction de l'empilement des enfants             |
+| `className`              | `string`                                 | —              | Classes CSS additionnelles                        |
+| `...props`               | `React.ComponentProps<"div">`            | —              | Props natives du `<div>`                          |
+| **ButtonGroupText**      |                                          |                |                                                   |
+| `asChild`                | `boolean`                                | `false`        | Délègue le rendu au premier enfant via Radix Slot |
+| `className`              | `string`                                 | —              | Classes CSS additionnelles                        |
+| `...props`               | `React.ComponentProps<"div">`            | —              | Props natives du `<div>`                          |
+| **ButtonGroupSeparator** |                                          |                |                                                   |
+| `orientation`            | `"horizontal" \| "vertical"`             | `"vertical"`   | Direction du séparateur                           |
+| `className`              | `string`                                 | —              | Classes CSS additionnelles                        |
+| `...props`               | `React.ComponentProps<typeof Separator>` | —              | Props du composant `Separator`                    |
+
+## Variantes
+
+<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+
+| Composant     | Axe           | Valeurs                   | Défaut       |
+| ------------- | ------------- | ------------------------- | ------------ |
+| `ButtonGroup` | `orientation` | `horizontal` · `vertical` | `horizontal` |
+
+Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+
+## États
+
+| État         | Description                                                                                     |
+| ------------ | ----------------------------------------------------------------------------------------------- |
+| default      | Groupe horizontal, bordures fusionnées, arrondis aux extrémités                                 |
+| vertical     | Empilement vertical, fusion des bordures haut/bas                                               |
+| focus-within | L'enfant en focus passe en `z-dropdown` pour afficher son anneau de focus au-dessus des voisins |
+| hover        | Délégué aux composants enfants (Button, Select, etc.)                                           |
+| disabled     | Délégué aux composants enfants                                                                  |
+
+## Accessibilité
+
+**Pattern** : Groupe (`role="group"`)
+
+**Rôle** : `role="group"` sur la racine ; chaque bouton garde sa sémantique.
+
+**Clavier** :
+
+| Touche              | Action                                                      |
+| ------------------- | ----------------------------------------------------------- |
+| `Tab` / `Shift+Tab` | Passe d'un bouton à l'autre (pas de navigation aux flèches) |
+
+**Nom accessible** : Donner un `aria-label` au groupe quand sa fonction n'est pas évidente (« Mise en forme du texte »).
+
+**Vigilance** :
+
+- Pour un choix exclusif entre options, utiliser `ToggleGroup`, qui porte l'état sélectionné ; `ButtonGroup` ne fait que regrouper visuellement.
+
+## Exemple de code
+
+```tsx
+import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
+import { Button } from "@/components/ui/button"
+
+export default function Example() {
+  return (
+    <ButtonGroup orientation="horizontal">
+      <Button variant="outline">Précédent</Button>
+      <ButtonGroupSeparator />
+      <Button variant="outline">Suivant</Button>
+    </ButtonGroup>
+  )
+}
+```
+
+## Références croisées
+
+- `Button` — enfant principal du groupe
+- `Separator` — utilisé en interne par `ButtonGroupSeparator`
+- `Select` — peut être combiné avec des boutons dans le groupe
+- `Input` — champ de saisie intégrable dans le groupe (flex-1)
+- `ToggleGroup` — alternative pour des choix mutuellement exclusifs

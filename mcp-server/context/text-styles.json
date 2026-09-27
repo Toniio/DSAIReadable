@@ -1,0 +1,182 @@
+{
+  "font_families": [
+    {
+      "token": "`typography.font-family.mono`",
+      "css_variable": "`--typography-font-family-mono`",
+      "family": "JetBrains Mono",
+      "tailwind_class": "`font-mono`",
+      "usage": "**Police par défaut** de l'application — tout le texte UI"
+    },
+    {
+      "token": "`typography.font-family.sans`",
+      "css_variable": "`--typography-font-family-sans`",
+      "family": "Geist Sans",
+      "tailwind_class": "`font-sans`",
+      "usage": "Usage optionnel pour le contenu éditorial ou les textes long-form"
+    }
+  ],
+  "type_scale": [
+    {
+      "token": "`typography.size.xs`",
+      "css_variable": "`--typography-size-xs`",
+      "rem": "`0.75rem`",
+      "px": "12 px",
+      "tailwind_class": "`text-xs`",
+      "usage": "Labels, badges, légendes de graphiques"
+    },
+    {
+      "token": "`typography.size.sm`",
+      "css_variable": "`--typography-size-sm`",
+      "rem": "`0.875rem`",
+      "px": "14 px",
+      "tailwind_class": "`text-sm`",
+      "usage": "Texte secondaire, labels de champs, helper text"
+    },
+    {
+      "token": "`typography.size.base`",
+      "css_variable": "`--typography-size-base`",
+      "rem": "`1rem`",
+      "px": "16 px",
+      "tailwind_class": "`text-base`",
+      "usage": "Corps de texte principal"
+    },
+    {
+      "token": "`typography.size.lg`",
+      "css_variable": "`--typography-size-lg`",
+      "rem": "`1.125rem`",
+      "px": "18 px",
+      "tailwind_class": "`text-lg`",
+      "usage": "Corps de texte mis en avant, intro"
+    },
+    {
+      "token": "`typography.size.xl`",
+      "css_variable": "`--typography-size-xl`",
+      "rem": "`1.25rem`",
+      "px": "20 px",
+      "tailwind_class": "`text-xl`",
+      "usage": "Titres de sections (h3, h4)"
+    },
+    {
+      "token": "`typography.size.2xl`",
+      "css_variable": "`--typography-size-2xl`",
+      "rem": "`1.5rem`",
+      "px": "24 px",
+      "tailwind_class": "`text-2xl`",
+      "usage": "Titres de page (h2)"
+    },
+    {
+      "token": "`typography.size.3xl`",
+      "css_variable": "`--typography-size-3xl`",
+      "rem": "`1.875rem`",
+      "px": "30 px",
+      "tailwind_class": "`text-3xl`",
+      "usage": "Titres héros (h1)"
+    },
+    {
+      "token": "`typography.size.4xl`",
+      "css_variable": "`--typography-size-4xl`",
+      "rem": "`2.25rem`",
+      "px": "36 px",
+      "tailwind_class": "`text-4xl`",
+      "usage": "Titres display — usage rare"
+    }
+  ],
+  "line_heights": [
+    {
+      "token": "`typography.line-height.tight`",
+      "css_variable": "`--typography-line-height-tight`",
+      "value": "`1.25`",
+      "tailwind_class": "`leading-tight`",
+      "usage": "Headings — textes courts sur 1-2 lignes"
+    },
+    {
+      "token": "`typography.line-height.snug`",
+      "css_variable": "`--typography-line-height-snug`",
+      "value": "`1.375`",
+      "tailwind_class": "`leading-snug`",
+      "usage": "Sous-titres, labels multilignes"
+    },
+    {
+      "token": "`typography.line-height.normal`",
+      "css_variable": "`--typography-line-height-normal`",
+      "value": "`1.5`",
+      "tailwind_class": "`leading-normal`",
+      "usage": "Corps de texte par défaut"
+    },
+    {
+      "token": "`typography.line-height.relaxed`",
+      "css_variable": "`--typography-line-height-relaxed`",
+      "value": "`1.625`",
+      "tailwind_class": "`leading-relaxed`",
+      "usage": "Texte long-form, articles"
+    },
+    {
+      "token": "`typography.line-height.loose`",
+      "css_variable": "`--typography-line-height-loose`",
+      "value": "`2`",
+      "tailwind_class": "`leading-loose`",
+      "usage": "Texte très aéré — usage très rare"
+    }
+  ],
+  "font_weights": [
+    {
+      "token": "`typography.font-weight.normal`",
+      "css_variable": "`--typography-font-weight-normal`",
+      "value": "`400`",
+      "tailwind_class": "`font-normal`",
+      "usage": "Corps de texte standard"
+    },
+    {
+      "token": "`typography.font-weight.medium`",
+      "css_variable": "`--typography-font-weight-medium`",
+      "value": "`500`",
+      "tailwind_class": "`font-medium`",
+      "usage": "Labels UI, boutons, éléments de navigation"
+    },
+    {
+      "token": "`typography.font-weight.semibold`",
+      "css_variable": "`--typography-font-weight-semibold`",
+      "value": "`600`",
+      "tailwind_class": "`font-semibold`",
+      "usage": "Sous-titres, emphasis dans l'UI"
+    },
+    {
+      "token": "`typography.font-weight.bold`",
+      "css_variable": "`--typography-font-weight-bold`",
+      "value": "`700`",
+      "tailwind_class": "`font-bold`",
+      "usage": "Titres principaux, forte emphase"
+    }
+  ],
+  "letter_spacings": [
+    {
+      "token": "`typography.letter-spacing.tight`",
+      "css_variable": "`--typography-letter-spacing-tight`",
+      "value": "`-0.025em`",
+      "tailwind_class": "`tracking-tight`",
+      "usage": "Grands headings (3xl, 4xl) — resserre les lettres"
+    },
+    {
+      "token": "`typography.letter-spacing.normal`",
+      "css_variable": "`--typography-letter-spacing-normal`",
+      "value": "`0em`",
+      "tailwind_class": "`tracking-normal`",
+      "usage": "Texte courant — valeur par défaut"
+    },
+    {
+      "token": "`typography.letter-spacing.wide`",
+      "css_variable": "`--typography-letter-spacing-wide`",
+      "value": "`0.025em`",
+      "tailwind_class": "`tracking-wide`",
+      "usage": "Labels UI petits (xs, sm)"
+    },
+    {
+      "token": "`typography.letter-spacing.wider`",
+      "css_variable": "`--typography-letter-spacing-wider`",
+      "value": "`0.05em`",
+      "tailwind_class": "`tracking-wider`",
+      "usage": "Texte en capitales, overlines"
+    }
+  ],
+  "usage_rules": []
+}

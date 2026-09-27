@@ -1,0 +1,466 @@
+/* ============================================================
+   DS Tokens — 3-Tier CSS Output
+   Generated from tokens/primitive.json + tokens/semantic.json + tokens/component.json
+   DO NOT EDIT DIRECTLY — edit the source JSON files instead.
+   Regenerate with: npm run tokens:build
+   ============================================================ */
+
+/* ── Layer 1 · Primitives (private) ──────────────────────── */
+:root {
+  /* color · mist */
+  --ds-prim-color-mist-0:   #ffffff;
+  --ds-prim-color-mist-50:  #f9fbfb;
+  --ds-prim-color-mist-100: #f1f3f3;
+  --ds-prim-color-mist-200: #e3e7e8;
+  --ds-prim-color-mist-400: #9ca8ab;
+  --ds-prim-color-mist-500: #67787c;
+  --ds-prim-color-mist-600: #607175;
+  --ds-prim-color-mist-700: #424f52;
+  --ds-prim-color-mist-800: #22292b;
+  --ds-prim-color-mist-900: #161b1d;
+  --ds-prim-color-mist-950: #090b0c;
+
+  /* color · violet */
+  --ds-prim-color-violet-50:  #eef2ff;
+  --ds-prim-color-violet-400: #6e6cff;
+  --ds-prim-color-violet-500: #615fff;
+  --ds-prim-color-violet-550: #4f39f6;
+  --ds-prim-color-violet-600: #432dd7;
+  --ds-prim-color-violet-700: #372aac;
+
+  /* color · red */
+  --ds-prim-color-red-500: #ff6467;
+  --ds-prim-color-red-600: #e7000b;
+
+  /* color · green */
+  --ds-prim-color-green-200: #bbf451;
+  --ds-prim-color-green-300: #7ccf00;
+  --ds-prim-color-green-400: #5ea500;
+  --ds-prim-color-green-500: #497d00;
+  --ds-prim-color-green-600: #3c6300;
+
+  /* color · blue */
+  --ds-prim-color-blue-300: #8fd6fa;
+  --ds-prim-color-blue-600: #438fbd;
+
+  /* color · yellow */
+  --ds-prim-color-yellow-200: #e5e747;
+
+  /* color · amber */
+  --ds-prim-color-amber-500: #c89005;
+  --ds-prim-color-amber-600: #af8526;
+  --ds-prim-color-amber-800: #734e00;
+
+  /* color · plum */
+  --ds-prim-color-plum-500: #9b5f7c;
+  --ds-prim-color-plum-800: #4d2761;
+
+  /* color */
+  --ds-prim-color-black: #000000;
+
+  /* color · white-alpha */
+  --ds-prim-color-white-alpha-10: rgba(255, 255, 255, 0.1);
+  --ds-prim-color-white-alpha-15: rgba(255, 255, 255, 0.15);
+
+  /* space */
+  --ds-prim-space-1:                0.25rem;
+  --ds-prim-space-2:                0.5rem;
+  --ds-prim-space-3:                0.75rem;
+  --ds-prim-space-4:                1rem;
+  --ds-prim-space-5:                1.25rem;
+  --ds-prim-space-6:                1.5rem;
+  --ds-prim-space-8:                2rem;
+  --ds-prim-space-10:               2.5rem;
+  --ds-prim-space-12:               3rem;
+  --ds-prim-space-16:               4rem;
+  --ds-prim-space-24:               6rem;
+  --ds-prim-space-32:               8rem;
+  --ds-prim-space-0-5:              0.125rem;
+  --ds-prim-space-page:             1.5rem;
+  --ds-prim-space-section:          4rem;
+  --ds-prim-space-content-sm:       42rem;
+  --ds-prim-space-content:          64rem;
+  --ds-prim-space-content-lg:       80rem;
+  --ds-prim-space-sidebar:          16rem;
+  --ds-prim-space-sidebar-mobile:   18rem;
+  --ds-prim-space-focus-ring-width: 2px;
+
+  /* radius */
+  --ds-prim-radius-none: 0rem;
+  --ds-prim-radius-base: 0.625rem;
+  --ds-prim-radius-xs:   0.25rem;
+  --ds-prim-radius-sm:   0.375rem;
+  --ds-prim-radius-md:   0.5rem;
+  --ds-prim-radius-lg:   0.625rem;
+  --ds-prim-radius-xl:   0.875rem;
+  --ds-prim-radius-2xl:  1.125rem;
+  --ds-prim-radius-3xl:  1.375rem;
+  --ds-prim-radius-4xl:  1.625rem;
+  --ds-prim-radius-full: 9999px;
+
+  /* typography · size */
+  --ds-prim-typography-size-xs:   0.75rem;
+  --ds-prim-typography-size-sm:   0.875rem;
+  --ds-prim-typography-size-base: 1rem;
+  --ds-prim-typography-size-lg:   1.125rem;
+  --ds-prim-typography-size-xl:   1.25rem;
+  --ds-prim-typography-size-2xl:  1.5rem;
+  --ds-prim-typography-size-3xl:  1.875rem;
+  --ds-prim-typography-size-4xl:  2.25rem;
+
+  /* typography · line-height */
+  --ds-prim-typography-line-height-tight:   1.25;
+  --ds-prim-typography-line-height-snug:    1.375;
+  --ds-prim-typography-line-height-normal:  1.5;
+  --ds-prim-typography-line-height-relaxed: 1.625;
+  --ds-prim-typography-line-height-loose:   2;
+
+  /* typography · letter-spacing */
+  --ds-prim-typography-letter-spacing-tight:  -0.025em;
+  --ds-prim-typography-letter-spacing-normal: 0em;
+  --ds-prim-typography-letter-spacing-wide:   0.025em;
+  --ds-prim-typography-letter-spacing-wider:  0.05em;
+
+  /* typography · font-weight */
+  --ds-prim-typography-font-weight-normal:   400;
+  --ds-prim-typography-font-weight-medium:   500;
+  --ds-prim-typography-font-weight-semibold: 600;
+  --ds-prim-typography-font-weight-bold:     700;
+
+  /* typography · font-family */
+  --ds-prim-typography-font-family-sans: Geist, sans-serif;
+  --ds-prim-typography-font-family-mono: JetBrains Mono, monospace;
+
+  /* elevation · light */
+  --ds-prim-elevation-light-xs:    0 1px 2px rgba(0, 0, 0, 0.04);
+  --ds-prim-elevation-light-sm:    0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --ds-prim-elevation-light-md:    0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --ds-prim-elevation-light-lg:    0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+  --ds-prim-elevation-light-xl:    0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03);
+  --ds-prim-elevation-light-2xl:   0 25px 50px rgba(0, 0, 0, 0.12);
+  --ds-prim-elevation-light-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  /* elevation · dark */
+  --ds-prim-elevation-dark-xs:    0 1px 2px rgba(0, 0, 0, 0.2);
+  --ds-prim-elevation-dark-sm:    0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --ds-prim-elevation-dark-md:    0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18);
+  --ds-prim-elevation-dark-lg:    0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+  --ds-prim-elevation-dark-xl:    0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2);
+  --ds-prim-elevation-dark-2xl:   0 25px 50px rgba(0, 0, 0, 0.5);
+  --ds-prim-elevation-dark-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  /* motion */
+  --ds-prim-motion-duration-instant:    0ms;
+  --ds-prim-motion-duration-fast:       100ms;
+  --ds-prim-motion-duration-normal:     200ms;
+  --ds-prim-motion-duration-slow:       300ms;
+  --ds-prim-motion-duration-slower:     500ms;
+  --ds-prim-motion-duration-extra-slow: 1000ms;
+  --ds-prim-motion-easing-default:      cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-prim-motion-easing-in:           cubic-bezier(0.4, 0, 1, 1);
+  --ds-prim-motion-easing-out:          cubic-bezier(0, 0, 0.2, 1);
+  --ds-prim-motion-easing-spring:       cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* opacity */
+  --ds-prim-opacity-0-03: 0.03;
+  --ds-prim-opacity-0-04: 0.04;
+  --ds-prim-opacity-0-05: 0.05;
+  --ds-prim-opacity-0-07: 0.07;
+  --ds-prim-opacity-0-08: 0.08;
+  --ds-prim-opacity-0-10: 0.10;
+  --ds-prim-opacity-0-12: 0.12;
+  --ds-prim-opacity-0-15: 0.15;
+  --ds-prim-opacity-0-18: 0.18;
+  --ds-prim-opacity-0-20: 0.20;
+  --ds-prim-opacity-0-25: 0.25;
+  --ds-prim-opacity-0-30: 0.30;
+  --ds-prim-opacity-0-35: 0.35;
+  --ds-prim-opacity-0-50: 0.50;
+  --ds-prim-opacity-0-80: 0.80;
+
+  /* zindex */
+  --ds-prim-zindex-dropdown: 1000;
+  --ds-prim-zindex-sticky:   1100;
+  --ds-prim-zindex-fixed:    1200;
+  --ds-prim-zindex-overlay:  1300;
+  --ds-prim-zindex-modal:    1400;
+  --ds-prim-zindex-popover:  1500;
+  --ds-prim-zindex-toast:    1600;
+  --ds-prim-zindex-tooltip:  1700;
+
+  /* breakpoint */
+  --ds-prim-breakpoint-sm:  40rem;
+  --ds-prim-breakpoint-md:  48rem;
+  --ds-prim-breakpoint-lg:  64rem;
+  --ds-prim-breakpoint-xl:  80rem;
+  --ds-prim-breakpoint-2xl: 96rem;
+
+  /* border-width */
+  --ds-prim-border-width-1:   1px;
+  --ds-prim-border-width-1-5: 1.5px;
+}
+
+/* ── Layer 2 · Semantic (light defaults) ─────────────────── */
+:root {
+  /* color · background */
+  --color-background-default:  var(--ds-prim-color-mist-0);
+  --color-background-subtle:   var(--ds-prim-color-mist-100);
+  --color-background-elevated: var(--ds-prim-color-mist-0);
+  --color-background-inverse:  var(--ds-prim-color-mist-950);
+
+  /* color · text */
+  --color-text-default:             var(--ds-prim-color-mist-950);
+  --color-text-subtle:              var(--ds-prim-color-mist-600);
+  --color-text-bold:                var(--ds-prim-color-mist-950);
+  --color-text-inverse:             var(--ds-prim-color-mist-0);
+  --color-text-action-default:      var(--ds-prim-color-violet-600);
+  --color-text-action-on:           var(--ds-prim-color-violet-50);
+  --color-text-destructive-default: var(--ds-prim-color-red-600);
+
+  /* color · border */
+  --color-border-default: var(--ds-prim-color-mist-200);
+  --color-border-subtle:  var(--ds-prim-color-mist-200);
+  --color-border-input:   var(--ds-prim-color-mist-200);
+  --color-border-focus:   var(--ds-prim-color-mist-500);
+
+  /* color · icon */
+  --color-icon-default: var(--ds-prim-color-mist-950);
+  --color-icon-subtle:  var(--ds-prim-color-mist-500);
+  --color-icon-action:  var(--ds-prim-color-violet-50);
+
+  /* color · action */
+  --color-action-background-default:    var(--ds-prim-color-violet-600);
+  --color-action-background-foreground: var(--ds-prim-color-violet-50);
+
+  /* color · feedback */
+  --color-feedback-error-default:    var(--ds-prim-color-red-600);
+  --color-feedback-error-foreground: var(--ds-prim-color-mist-0);
+
+  /* color · chart */
+  --color-chart-1:            var(--ds-prim-color-violet-600);
+  --color-chart-2:            var(--ds-prim-color-blue-600);
+  --color-chart-3:            var(--ds-prim-color-amber-600);
+  --color-chart-4:            var(--ds-prim-color-plum-800);
+  --color-chart-5:            var(--ds-prim-color-amber-800);
+  --color-chart-sequential-1: var(--ds-prim-color-green-200);
+  --color-chart-sequential-2: var(--ds-prim-color-green-300);
+  --color-chart-sequential-3: var(--ds-prim-color-green-400);
+  --color-chart-sequential-4: var(--ds-prim-color-green-500);
+  --color-chart-sequential-5: var(--ds-prim-color-green-600);
+
+  /* color · sidebar */
+  --color-sidebar-background:        var(--ds-prim-color-mist-50);
+  --color-sidebar-foreground:        var(--ds-prim-color-mist-950);
+  --color-sidebar-border:            var(--ds-prim-color-mist-200);
+  --color-sidebar-ring:              var(--ds-prim-color-mist-500);
+  --color-sidebar-primary-default:   var(--ds-prim-color-violet-550);
+  --color-sidebar-primary-on:        var(--ds-prim-color-violet-50);
+  --color-sidebar-accent-default:    var(--ds-prim-color-mist-100);
+  --color-sidebar-accent-foreground: var(--ds-prim-color-mist-900);
+
+  /* color · static */
+  --color-static-white: var(--ds-prim-color-mist-0);
+  --color-static-black: var(--ds-prim-color-black);
+
+  /* space */
+  --space-component-xs:           var(--ds-prim-space-1);
+  --space-component-sm:           var(--ds-prim-space-2);
+  --space-component-md:           var(--ds-prim-space-4);
+  --space-component-lg:           var(--ds-prim-space-6);
+  --space-component-xl:           var(--ds-prim-space-8);
+  --space-focus-ring-width:       var(--ds-prim-space-focus-ring-width);
+  --space-layout-page-padding:    var(--ds-prim-space-page);
+  --space-layout-section-gap:     var(--ds-prim-space-section);
+  --space-layout-content-sm:      var(--ds-prim-space-content-sm);
+  --space-layout-content-default: var(--ds-prim-space-content);
+  --space-layout-content-lg:      var(--ds-prim-space-content-lg);
+  --space-layout-sidebar:         var(--ds-prim-space-sidebar);
+  --space-layout-sidebar-mobile:  var(--ds-prim-space-sidebar-mobile);
+  --space-layout-sidebar-icon:    var(--ds-prim-space-12);
+
+  /* typography · size */
+  --typography-size-xs:   var(--ds-prim-typography-size-xs);
+  --typography-size-sm:   var(--ds-prim-typography-size-sm);
+  --typography-size-base: var(--ds-prim-typography-size-base);
+  --typography-size-lg:   var(--ds-prim-typography-size-lg);
+  --typography-size-xl:   var(--ds-prim-typography-size-xl);
+  --typography-size-2xl:  var(--ds-prim-typography-size-2xl);
+  --typography-size-3xl:  var(--ds-prim-typography-size-3xl);
+  --typography-size-4xl:  var(--ds-prim-typography-size-4xl);
+
+  /* typography · line-height */
+  --typography-line-height-tight:   var(--ds-prim-typography-line-height-tight);
+  --typography-line-height-snug:    var(--ds-prim-typography-line-height-snug);
+  --typography-line-height-normal:  var(--ds-prim-typography-line-height-normal);
+  --typography-line-height-relaxed: var(--ds-prim-typography-line-height-relaxed);
+  --typography-line-height-loose:   var(--ds-prim-typography-line-height-loose);
+
+  /* typography · letter-spacing */
+  --typography-letter-spacing-tight:  var(--ds-prim-typography-letter-spacing-tight);
+  --typography-letter-spacing-normal: var(--ds-prim-typography-letter-spacing-normal);
+  --typography-letter-spacing-wide:   var(--ds-prim-typography-letter-spacing-wide);
+  --typography-letter-spacing-wider:  var(--ds-prim-typography-letter-spacing-wider);
+
+  /* typography · font-weight */
+  --typography-font-weight-normal:   var(--ds-prim-typography-font-weight-normal);
+  --typography-font-weight-medium:   var(--ds-prim-typography-font-weight-medium);
+  --typography-font-weight-semibold: var(--ds-prim-typography-font-weight-semibold);
+  --typography-font-weight-bold:     var(--ds-prim-typography-font-weight-bold);
+
+  /* typography · font-family */
+  --typography-font-family-sans: var(--ds-prim-typography-font-family-sans);
+  --typography-font-family-mono: var(--ds-prim-typography-font-family-mono);
+
+  /* radius */
+  --radius-none: var(--ds-prim-radius-none);
+  --radius-xs:   var(--ds-prim-radius-xs);
+  --radius-sm:   var(--ds-prim-radius-sm);
+  --radius-md:   var(--ds-prim-radius-md);
+  --radius-lg:   var(--ds-prim-radius-lg);
+  --radius-xl:   var(--ds-prim-radius-xl);
+  --radius-2xl:  var(--ds-prim-radius-2xl);
+  --radius-3xl:  var(--ds-prim-radius-3xl);
+  --radius-4xl:  var(--ds-prim-radius-4xl);
+  --radius-full: var(--ds-prim-radius-full);
+
+  /* elevation */
+  --elevation-xs:    var(--ds-prim-elevation-light-xs);
+  --elevation-sm:    var(--ds-prim-elevation-light-sm);
+  --elevation-md:    var(--ds-prim-elevation-light-md);
+  --elevation-lg:    var(--ds-prim-elevation-light-lg);
+  --elevation-xl:    var(--ds-prim-elevation-light-xl);
+  --elevation-2xl:   var(--ds-prim-elevation-light-2xl);
+  --elevation-inner: var(--ds-prim-elevation-light-inner);
+
+  /* motion */
+  --motion-duration-instant:    var(--ds-prim-motion-duration-instant);
+  --motion-duration-fast:       var(--ds-prim-motion-duration-fast);
+  --motion-duration-normal:     var(--ds-prim-motion-duration-normal);
+  --motion-duration-slow:       var(--ds-prim-motion-duration-slow);
+  --motion-duration-slower:     var(--ds-prim-motion-duration-slower);
+  --motion-duration-extra-slow: var(--ds-prim-motion-duration-extra-slow);
+  --motion-easing-default:      var(--ds-prim-motion-easing-default);
+  --motion-easing-in:           var(--ds-prim-motion-easing-in);
+  --motion-easing-out:          var(--ds-prim-motion-easing-out);
+  --motion-easing-spring:       var(--ds-prim-motion-easing-spring);
+
+  /* opacity */
+  --opacity-disabled:    var(--ds-prim-opacity-0-50);
+  --opacity-placeholder: var(--ds-prim-opacity-0-50);
+  --opacity-overlay:     var(--ds-prim-opacity-0-80);
+
+  /* z-index */
+  --zindex-dropdown: var(--ds-prim-zindex-dropdown);
+  --zindex-sticky:   var(--ds-prim-zindex-sticky);
+  --zindex-fixed:    var(--ds-prim-zindex-fixed);
+  --zindex-overlay:  var(--ds-prim-zindex-overlay);
+  --zindex-modal:    var(--ds-prim-zindex-modal);
+  --zindex-popover:  var(--ds-prim-zindex-popover);
+  --zindex-toast:    var(--ds-prim-zindex-toast);
+  --zindex-tooltip:  var(--ds-prim-zindex-tooltip);
+
+  /* breakpoint */
+  --breakpoint-sm:  var(--ds-prim-breakpoint-sm);
+  --breakpoint-md:  var(--ds-prim-breakpoint-md);
+  --breakpoint-lg:  var(--ds-prim-breakpoint-lg);
+  --breakpoint-xl:  var(--ds-prim-breakpoint-xl);
+  --breakpoint-2xl: var(--ds-prim-breakpoint-2xl);
+
+  /* border-width */
+  --border-width-default:         var(--ds-prim-border-width-1);
+  --border-width-chart-indicator: var(--ds-prim-border-width-1-5);
+}
+
+/* ── Layer 2 · Semantic — dark mode overrides ─────────────── */
+.dark {
+  --color-background-default:  var(--ds-prim-color-mist-950);
+  --color-background-subtle:   var(--ds-prim-color-mist-800);
+  --color-background-elevated: var(--ds-prim-color-mist-900);
+  --color-background-inverse:  var(--ds-prim-color-mist-0);
+
+  --color-text-default:             var(--ds-prim-color-mist-50);
+  --color-text-subtle:              var(--ds-prim-color-mist-400);
+  --color-text-bold:                var(--ds-prim-color-mist-50);
+  --color-text-inverse:             var(--ds-prim-color-mist-950);
+  --color-text-action-default:      var(--ds-prim-color-violet-400);
+  --color-text-action-on:           var(--ds-prim-color-violet-50);
+  --color-text-destructive-default: var(--ds-prim-color-red-500);
+
+  --color-border-default: var(--ds-prim-color-white-alpha-10);
+  --color-border-subtle:  var(--ds-prim-color-white-alpha-10);
+  --color-border-input:   var(--ds-prim-color-white-alpha-15);
+  --color-border-focus:   var(--ds-prim-color-mist-500);
+
+  --color-icon-default: var(--ds-prim-color-mist-50);
+  --color-icon-subtle:  var(--ds-prim-color-mist-400);
+  --color-icon-action:  var(--ds-prim-color-violet-50);
+
+  --color-action-background-default:    var(--ds-prim-color-violet-700);
+  --color-action-background-foreground: var(--ds-prim-color-violet-50);
+
+  --color-feedback-error-default:    var(--ds-prim-color-red-500);
+  --color-feedback-error-foreground: var(--ds-prim-color-mist-950);
+
+  --color-chart-1: var(--ds-prim-color-violet-400);
+  --color-chart-2: var(--ds-prim-color-blue-300);
+  --color-chart-3: var(--ds-prim-color-yellow-200);
+  --color-chart-4: var(--ds-prim-color-plum-500);
+  --color-chart-5: var(--ds-prim-color-amber-500);
+
+  --color-sidebar-background:        var(--ds-prim-color-mist-900);
+  --color-sidebar-foreground:        var(--ds-prim-color-mist-50);
+  --color-sidebar-border:            var(--ds-prim-color-white-alpha-10);
+  --color-sidebar-ring:              var(--ds-prim-color-mist-500);
+  --color-sidebar-primary-default:   var(--ds-prim-color-violet-500);
+  --color-sidebar-primary-on:        var(--ds-prim-color-mist-0);
+  --color-sidebar-accent-default:    var(--ds-prim-color-mist-800);
+  --color-sidebar-accent-foreground: var(--ds-prim-color-mist-50);
+
+  --color-static-white: var(--ds-prim-color-mist-0);
+  --color-static-black: var(--ds-prim-color-black);
+
+  --elevation-xs:    var(--ds-prim-elevation-dark-xs);
+  --elevation-sm:    var(--ds-prim-elevation-dark-sm);
+  --elevation-md:    var(--ds-prim-elevation-dark-md);
+  --elevation-lg:    var(--ds-prim-elevation-dark-lg);
+  --elevation-xl:    var(--ds-prim-elevation-dark-xl);
+  --elevation-2xl:   var(--ds-prim-elevation-dark-2xl);
+  --elevation-inner: var(--ds-prim-elevation-dark-inner);
+}
+
+/* ── Layer 3 · Component (shadcn compatibility) ───────────── */
+:root {
+  --background:                 var(--color-background-default);
+  --foreground:                 var(--color-text-default);
+  --card:                       var(--color-background-subtle);
+  --card-foreground:            var(--color-text-default);
+  --popover:                    var(--color-background-elevated);
+  --popover-foreground:         var(--color-text-default);
+  --primary:                    var(--color-action-background-default);
+  --primary-foreground:         var(--color-action-background-foreground);
+  --secondary:                  var(--color-background-subtle);
+  --secondary-foreground:       var(--color-text-default);
+  --muted:                      var(--color-background-subtle);
+  --muted-foreground:           var(--color-text-subtle);
+  --accent:                     var(--color-background-subtle);
+  --accent-foreground:          var(--color-text-default);
+  --destructive:                var(--color-feedback-error-default);
+  --destructive-foreground:     var(--color-feedback-error-foreground);
+  --border:                     var(--color-border-default);
+  --input:                      var(--color-border-input);
+  --ring:                       var(--color-border-focus);
+  --radius:                     var(--radius-lg);
+  --chart-1:                    var(--color-chart-1);
+  --chart-2:                    var(--color-chart-2);
+  --chart-3:                    var(--color-chart-3);
+  --chart-4:                    var(--color-chart-4);
+  --chart-5:                    var(--color-chart-5);
+  --sidebar:                    var(--color-sidebar-background);
+  --sidebar-foreground:         var(--color-sidebar-foreground);
+  --sidebar-primary:            var(--color-sidebar-primary-default);
+  --sidebar-primary-foreground: var(--color-sidebar-primary-on);
+  --sidebar-accent:             var(--color-sidebar-accent-default);
+  --sidebar-accent-foreground:  var(--color-sidebar-accent-foreground);
+  --sidebar-border:             var(--color-sidebar-border);
+  --sidebar-ring:               var(--color-sidebar-ring);
+}

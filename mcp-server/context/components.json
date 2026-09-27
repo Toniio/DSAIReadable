@@ -1,0 +1,415 @@
+[
+  {
+    "name": "Accordion",
+    "category": "Navigation",
+    "status": "stable",
+    "code_path": "components/ui/accordion.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Alert",
+    "category": "Feedback",
+    "status": "stable",
+    "code_path": "components/ui/alert.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "AlertDialog",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/alert-dialog.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "AspectRatio",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/aspect-ratio.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Avatar",
+    "category": "Misc",
+    "status": "stable",
+    "code_path": "components/ui/avatar.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Badge",
+    "category": "Misc",
+    "status": "stable",
+    "code_path": "components/ui/badge.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Breadcrumb",
+    "category": "Navigation",
+    "status": "stable",
+    "code_path": "components/ui/breadcrumb.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Button",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/button.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "ButtonGroup",
+    "category": "Misc",
+    "status": "beta",
+    "code_path": "components/ui/button-group.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Calendar",
+    "category": "Data",
+    "status": "stable",
+    "code_path": "components/ui/calendar.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Card",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/card.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Carousel",
+    "category": "Data",
+    "status": "stable",
+    "code_path": "components/ui/carousel.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Chart",
+    "category": "Data",
+    "status": "stable",
+    "code_path": "components/ui/chart.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Checkbox",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/checkbox.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Collapsible",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/collapsible.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Combobox",
+    "category": "Forms",
+    "status": "beta",
+    "code_path": "components/ui/combobox.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Command",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/command.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "ContextMenu",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/context-menu.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Dialog",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/dialog.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Direction",
+    "category": "Layout",
+    "status": "beta",
+    "code_path": "components/ui/direction.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Drawer",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/drawer.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "DropdownMenu",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/dropdown-menu.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Empty",
+    "category": "Feedback",
+    "status": "beta",
+    "code_path": "components/ui/empty.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Field",
+    "category": "Forms",
+    "status": "beta",
+    "code_path": "components/ui/field.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Heading",
+    "category": "Typography",
+    "status": "stable",
+    "code_path": "components/ui/heading.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "HoverCard",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/hover-card.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Illustration",
+    "category": "Media",
+    "status": "stable",
+    "code_path": "components/ui/illustration.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Input",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/input.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "InputGroup",
+    "category": "Forms",
+    "status": "beta",
+    "code_path": "components/ui/input-group.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "InputOtp",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/input-otp.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Item",
+    "category": "Misc",
+    "status": "beta",
+    "code_path": "components/ui/item.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Kbd",
+    "category": "Misc",
+    "status": "beta",
+    "code_path": "components/ui/kbd.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Label",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/label.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Logo",
+    "category": "Brand",
+    "status": "stable",
+    "code_path": "components/ui/logo.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Menubar",
+    "category": "Navigation",
+    "status": "stable",
+    "code_path": "components/ui/menubar.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "NativeSelect",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/native-select.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "NavigationMenu",
+    "category": "Navigation",
+    "status": "stable",
+    "code_path": "components/ui/navigation-menu.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Pagination",
+    "category": "Navigation",
+    "status": "stable",
+    "code_path": "components/ui/pagination.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "PasswordInput",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/password-input.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Popover",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/popover.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Progress",
+    "category": "Data",
+    "status": "stable",
+    "code_path": "components/ui/progress.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "RadioGroup",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/radio-group.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Resizable",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/resizable.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "ScrollArea",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/scroll-area.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Select",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/select.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Separator",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/separator.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Sheet",
+    "category": "Overlay",
+    "status": "stable",
+    "code_path": "components/ui/sheet.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Sidebar",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/sidebar.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Skeleton",
+    "category": "Layout",
+    "status": "stable",
+    "code_path": "components/ui/skeleton.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Slider",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/slider.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Sonner",
+    "category": "Feedback",
+    "status": "stable",
+    "code_path": "components/ui/sonner.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Spinner",
+    "category": "Feedback",
+    "status": "beta",
+    "code_path": "components/ui/spinner.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Switch",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/switch.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Table",
+    "category": "Data",
+    "status": "stable",
+    "code_path": "components/ui/table.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Tabs",
+    "category": "Navigation",
+    "status": "stable",
+    "code_path": "components/ui/tabs.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Textarea",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/textarea.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Toggle",
+    "category": "Forms",
+    "status": "stable",
+    "code_path": "components/ui/toggle.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "ToggleGroup",
+    "category": "Misc",
+    "status": "stable",
+    "code_path": "components/ui/toggle-group.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Tooltip",
+    "category": "Feedback",
+    "status": "stable",
+    "code_path": "components/ui/tooltip.tsx",
+    "has_spec": true
+  }
+]

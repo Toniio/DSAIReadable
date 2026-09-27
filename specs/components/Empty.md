@@ -1,0 +1,161 @@
+# Empty
+
+## Metadata
+
+| Champ         | Valeur                  |
+| ------------- | ----------------------- |
+| Nom           | Empty                   |
+| Catégorie     | Feedback                |
+| Statut        | stable                  |
+| figma_node_id |                         |
+| code_path     | components/ui/empty.tsx |
+
+## Rôle
+
+État vide composable affiché lorsqu'une vue, liste ou section ne contient aucune donnée.
+
+## Usage
+
+- Indiquer qu'une liste ou un tableau ne contient aucun résultat
+- Proposer une action de création lorsqu'une collection est vide
+- Afficher un message d'accueil sur un dashboard sans données
+- Remplacer un contenu en attente de données initiales
+- Communiquer un état « zéro résultat » après un filtrage
+
+## Contraintes
+
+- Ne pas utiliser pour les erreurs serveur — préférer un composant d'erreur dédié
+- Limiter à une seule instance `Empty` par vue pour éviter la confusion
+- Le média (`EmptyMedia`) doit rester décoratif ; ne pas y placer d'information essentielle sans texte alternatif
+- Le texte doit rester court et orienté action
+
+## Dépendances
+
+- `class-variance-authority` pour les variantes de `EmptyMedia`
+- `cn` utilitaire depuis `@/lib/utils`
+
+## Anatomie
+
+| Slot                            | Rôle                                                  |
+| ------------------------------- | ----------------------------------------------------- |
+| `data-slot="empty"`             | Conteneur racine, centrage et espacement              |
+| `data-slot="empty-header"`      | Bloc d'en-tête regroupant média, titre et description |
+| `data-slot="empty-icon"`        | Média / icône décorative (porte `data-variant`)       |
+| `data-slot="empty-title"`       | Titre principal de l'état vide                        |
+| `data-slot="empty-description"` | Description complémentaire                            |
+| `data-slot="empty-content"`     | Zone d'actions (boutons, liens)                       |
+
+## Tokens utilisés
+
+| Token                   | Usage                                          |
+| ----------------------- | ---------------------------------------------- |
+| `bg-muted`              | Fond de la variante `icon` de `EmptyMedia`     |
+| `text-foreground`       | Couleur d'icône variante `icon`                |
+| `text-muted-foreground` | Couleur du texte de description                |
+| `text-primary`          | Couleur des liens au hover dans la description |
+| `font-heading`          | Police du titre                                |
+
+## Props / API
+
+| Prop                 | Type                          | Défaut      | Description                  |
+| -------------------- | ----------------------------- | ----------- | ---------------------------- |
+| **Empty**            |                               |             |                              |
+| `className`          | `string`                      | —           | Classes CSS additionnelles   |
+| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
+| **EmptyMedia**       |                               |             |                              |
+| `variant`            | `"default" \| "icon"`         | `"default"` | Apparence du conteneur média |
+| `className`          | `string`                      | —           | Classes CSS additionnelles   |
+| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
+| **EmptyHeader**      |                               |             |                              |
+| `className`          | `string`                      | —           | Classes CSS additionnelles   |
+| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
+| **EmptyTitle**       |                               |             |                              |
+| `className`          | `string`                      | —           | Classes CSS additionnelles   |
+| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
+| **EmptyDescription** |                               |             |                              |
+| `className`          | `string`                      | —           | Classes CSS additionnelles   |
+| `...props`           | `React.ComponentProps<"p">`   | —           | Props natives du `<p>`       |
+| **EmptyContent**     |                               |             |                              |
+| `className`          | `string`                      | —           | Classes CSS additionnelles   |
+| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
+
+> **Axes de variantes** — `Empty` n'a pas de `variant`. Seul `EmptyMedia` en porte un, sur l'axe **type de média** : `default` pour une illustration libre, `icon` pour une icône Phosphor centrée dans un cercle.
+
+## Variantes
+
+<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+
+| Composant    | Axe       | Valeurs            | Défaut    |
+| ------------ | --------- | ------------------ | --------- |
+| `EmptyMedia` | `variant` | `default` · `icon` | `default` |
+
+Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+
+## États
+
+| État     | Description                                                 |
+| -------- | ----------------------------------------------------------- |
+| default  | Conteneur centré avec bordure en pointillé, texte équilibré |
+| hover    | Non applicable (composant passif)                           |
+| focus    | Non applicable (composant passif)                           |
+| active   | Non applicable (composant passif)                           |
+| disabled | Non applicable (composant passif)                           |
+
+## Accessibilité
+
+**Pattern** : Aucun — état vide composé
+
+**Rôle** : Aucun rôle : des `div`. `EmptyTitle` n'est pas un élément de titre.
+
+**Clavier** :
+
+Aucune interaction propre ; les actions placées dans `EmptyContent` sont focalisables.
+
+**Nom accessible** : Sans objet. Si l'état vide remplace le contenu principal, envelopper le titre dans un vrai titre (`Heading`).
+
+**Vigilance** :
+
+- **Défaut connu** : `EmptyTitle` est un `div`, donc absent de la liste des titres d'un lecteur d'écran.
+- Si l'état vide apparaît après une action (recherche sans résultat), l'annoncer par une région `aria-live`.
+- L'illustration de `EmptyMedia` est décorative sauf si elle porte une information : `alt=""` par défaut.
+
+## Exemple de code
+
+```tsx
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent,
+} from "@/components/ui/empty"
+import { Button } from "@/components/ui/button"
+import { PlusIcon, FolderIcon } from "@phosphor-icons/react"
+
+export default function Example() {
+  return (
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <FolderIcon />
+        </EmptyMedia>
+        <EmptyTitle>Aucun projet</EmptyTitle>
+        <EmptyDescription>
+          Vous n'avez pas encore créé de projet. Commencez dès maintenant.
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button size="sm">
+          <PlusIcon /> Créer un projet
+        </Button>
+      </EmptyContent>
+    </Empty>
+  )
+}
+```
+
+## Références croisées
+
+- `Button` — action principale placée dans `EmptyContent`
+- `Card` — peut encapsuler un `Empty` dans un conteneur visuel

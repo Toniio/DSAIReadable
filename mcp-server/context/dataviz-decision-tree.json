@@ -1,0 +1,54 @@
+{
+  "objectives": [
+    {
+      "name": "Evolution",
+      "description": "Montrer un changement dans le temps",
+      "recommended_charts": [
+        "line",
+        "area",
+        "difference"
+      ]
+    },
+    {
+      "name": "Correlation",
+      "description": "Montrer la relation entre variables",
+      "recommended_charts": [
+        "bubble",
+        "heatmap"
+      ]
+    },
+    {
+      "name": "Comparison",
+      "description": "Comparer des valeurs",
+      "recommended_charts": [
+        "bar",
+        "cigarette",
+        "radar"
+      ]
+    },
+    {
+      "name": "Distribution",
+      "description": "Montrer la répartition",
+      "recommended_charts": [
+        "histogram"
+      ]
+    },
+    {
+      "name": "Proportion",
+      "description": "Montrer les parts d'un tout",
+      "recommended_charts": [
+        "pie",
+        "donut"
+      ]
+    },
+    {
+      "name": "KPI",
+      "description": "Afficher un indicateur clé",
+      "recommended_charts": [
+        "data_card",
+        "gauge",
+        "mini_chart"
+      ]
+    }
+  ]
+}

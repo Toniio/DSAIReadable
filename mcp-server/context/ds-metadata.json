@@ -1,0 +1,8 @@
+{
+  "name": "DSAIReadable",
+  "description": "Design System AI-Readable",
+  "design_system_version": "1.1.0",
+  "mcp_server_version": "1.0.0",
+  "framework": "React 19 / Next.js 16 / Tailwind CSS v4 / shadcn-ui",
+  "last_publish": "2025-07-08T12:00:00Z"
+}

@@ -1,0 +1,169 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "../tokens.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Lockdown: Tailwind's default colours, radii and shadows are removed, so
+     bg-red-500, rounded-[default] or shadow-2xs generate no CSS at all. Only
+     the names declared below exist. Spacing and typography keep Tailwind's
+     scale: see specs/foundations for why they are wired but not locked. */
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+
+  --font-heading: var(--font-mono);
+  --font-mono: var(--font-mono);
+
+  /* Colors → Tailwind utilities (via semantic Layer 2) */
+  --color-white: var(--color-static-white);
+  --color-black: var(--color-static-black);
+  --color-background: var(--color-background-default);
+  --color-foreground: var(--color-text-default);
+  --color-card: var(--color-background-subtle);
+  --color-card-foreground: var(--color-text-default);
+  --color-popover: var(--color-background-elevated);
+  --color-popover-foreground: var(--color-text-default);
+  --color-primary: var(--color-action-background-default);
+  --color-primary-foreground: var(--color-action-background-foreground);
+  --color-secondary: var(--color-background-subtle);
+  --color-secondary-foreground: var(--color-text-default);
+  --color-muted: var(--color-background-subtle);
+  --color-muted-foreground: var(--color-text-subtle);
+  --color-accent: var(--color-background-subtle);
+  --color-accent-foreground: var(--color-text-default);
+  --color-destructive: var(--color-feedback-error-default);
+  --color-destructive-foreground: var(--color-feedback-error-foreground);
+  --color-border: var(--color-border-default);
+  --color-input: var(--color-border-input);
+  --color-ring: var(--color-border-focus);
+  --color-chart-1: var(--color-chart-1);
+  --color-chart-2: var(--color-chart-2);
+  --color-chart-3: var(--color-chart-3);
+  --color-chart-4: var(--color-chart-4);
+  --color-chart-5: var(--color-chart-5);
+  --color-sidebar: var(--color-sidebar-background);
+  --color-sidebar-foreground: var(--color-sidebar-foreground);
+  --color-sidebar-primary: var(--color-sidebar-primary-default);
+  --color-sidebar-primary-foreground: var(--color-sidebar-primary-on);
+  --color-sidebar-accent: var(--color-sidebar-accent-default);
+  --color-sidebar-accent-foreground: var(--color-sidebar-accent-foreground);
+  --color-sidebar-border: var(--color-sidebar-border);
+  --color-sidebar-ring: var(--color-sidebar-ring);
+
+  /* Radius → bridged to the semantic scale in tokens.css */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-4xl: var(--radius-4xl);
+
+  /* Typography → text-xs … text-4xl, font-medium, leading-snug, tracking-wide.
+     The values equal Tailwind's defaults, so nothing moves on screen; what
+     changes is that the tokens now decide them. Each text-* keeps Tailwind's
+     paired line-height, which is why this namespace is not reset. */
+  --text-xs: var(--typography-size-xs);
+  --text-sm: var(--typography-size-sm);
+  --text-base: var(--typography-size-base);
+  --text-lg: var(--typography-size-lg);
+  --text-xl: var(--typography-size-xl);
+  --text-2xl: var(--typography-size-2xl);
+  --text-3xl: var(--typography-size-3xl);
+  --text-4xl: var(--typography-size-4xl);
+  --font-weight-normal: var(--typography-font-weight-normal);
+  --font-weight-medium: var(--typography-font-weight-medium);
+  --font-weight-semibold: var(--typography-font-weight-semibold);
+  --font-weight-bold: var(--typography-font-weight-bold);
+  --leading-tight: var(--typography-line-height-tight);
+  --leading-snug: var(--typography-line-height-snug);
+  --leading-normal: var(--typography-line-height-normal);
+  --leading-relaxed: var(--typography-line-height-relaxed);
+  --leading-loose: var(--typography-line-height-loose);
+  --tracking-tight: var(--typography-letter-spacing-tight);
+  --tracking-normal: var(--typography-letter-spacing-normal);
+  --tracking-wide: var(--typography-letter-spacing-wide);
+  --tracking-wider: var(--typography-letter-spacing-wider);
+
+  /* Shadows → shadow-xs … shadow-inner */
+  --shadow-xs: var(--elevation-xs);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
+  --shadow-xl: var(--elevation-xl);
+  --shadow-2xl: var(--elevation-2xl);
+  --shadow-inner: var(--elevation-inner);
+
+  /* Motion → duration-fast … ease-spring */
+  --transition-duration-fast: var(--motion-duration-fast);
+  --transition-duration-normal: var(--motion-duration-normal);
+  --transition-duration-slow: var(--motion-duration-slow);
+  --transition-duration-slower: var(--motion-duration-slower);
+  --transition-duration-extra-slow: var(--motion-duration-extra-slow);
+  --ease-default: var(--motion-easing-default);
+  --ease-in: var(--motion-easing-in);
+  --ease-out: var(--motion-easing-out);
+  --ease-spring: var(--motion-easing-spring);
+
+  /* Layout spacing */
+  --spacing-page: var(--space-layout-page-padding);
+  --spacing-section: var(--space-layout-section-gap);
+  --spacing-sidebar: var(--space-layout-sidebar);
+  --spacing-sidebar-mobile: var(--space-layout-sidebar-mobile);
+  --spacing-sidebar-icon: var(--space-layout-sidebar-icon);
+
+  /* Border widths → border, border-t, divide-x… and border-chart-indicator.
+     --default-border-width is what a bare `border` reads. */
+  --default-border-width: var(--border-width-default);
+  --border-width-chart-indicator: var(--border-width-chart-indicator);
+
+  /* Breakpoints are not bridged: Tailwind compiles `sm:` into a media query
+     at build time, and a media query cannot read var(). Its defaults are the
+     breakpoint.* tokens; lint-theme-bridge checks the two stay equal. */
+}
+
+/* Z-index utilities.
+   Tailwind v4 has no theme namespace for z-index: `--z-*` inside `@theme`
+   declares a custom property and nothing else, so `z-modal` emitted no CSS
+   and every overlay in the system rendered unlayered. `@utility` is the
+   supported way to name a z-index; the values stay in tokens.css. */
+@utility z-dropdown {
+  z-index: var(--zindex-dropdown);
+}
+@utility z-sticky {
+  z-index: var(--zindex-sticky);
+}
+@utility z-fixed {
+  z-index: var(--zindex-fixed);
+}
+@utility z-overlay {
+  z-index: var(--zindex-overlay);
+}
+@utility z-modal {
+  z-index: var(--zindex-modal);
+}
+@utility z-popover {
+  z-index: var(--zindex-popover);
+}
+@utility z-toast {
+  z-index: var(--zindex-toast);
+}
+@utility z-tooltip {
+  z-index: var(--zindex-tooltip);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-mono;
+  }
+}

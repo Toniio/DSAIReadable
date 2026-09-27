@@ -1,0 +1,25 @@
+{
+  "name": "@dsaireadable/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for the DSAIReadable Design System",
+  "type": "module",
+  "main": "src/index.ts",
+  "bin": {
+    "dsaireadable-mcp": "src/index.ts"
+  },
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "start:http": "tsx src/index.ts --http",
+    "generate-context": "tsx src/context/generate.ts",
+    "dev": "tsx watch src/index.ts",
+    "test": "tsx src/test.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "tsx": "^4.19.4",
+    "zod": "^3.25.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

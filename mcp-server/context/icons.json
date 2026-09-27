@@ -1,0 +1,12 @@
+{
+  "library": "@phosphor-icons/react",
+  "description": "Le design system utilise exclusivement Phosphor Icons via @phosphor-icons/react.",
+  "default_size": "size-4 (1rem)",
+  "rule": "Icons must come exclusively from @phosphor-icons/react. No other icon library may be used. Default icon size within components is size-4 (1rem).",
+  "usage": [
+    "Toutes les icônes doivent provenir de @phosphor-icons/react",
+    "Taille par défaut dans les composants : size-4 (1rem)",
+    "Aucune autre bibliothèque d'icônes n'est autorisée"
+  ],
+  "catalog_url": "https://phosphoricons.com/"
+}

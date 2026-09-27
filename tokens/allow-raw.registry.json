@@ -1,0 +1,110 @@
+{
+  "$comment": "Registry of every `allow-raw` exemption in the codebase. An inline `// allow-raw: <id>` comment is only accepted by scripts/lint-raw-values.ts if a matching entry exists here for the same file. Run `npm run tokens:lint-values` after any change.",
+  "exemptions": [
+    {
+      "id": "subpixel-tab-border",
+      "file": "components/ui/tabs.tsx",
+      "reason": "h-[calc(100%-1px)] — the active tab must overlap the 1px bottom border of the tab list. A subpixel offset derived from a border width has no equivalent in the spacing scale.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "recharts-attribute-selector",
+      "file": "components/ui/chart.tsx",
+      "reason": "#ccc and #fff are values matched inside CSS attribute selectors ([stroke='#ccc']) against SVG attributes injected by Recharts at runtime. A custom property cannot appear inside an attribute selector.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "local-stacking",
+      "file": "components/ui/navigation-menu.tsx",
+      "reason": "z-1 raises the indicator above the menu bar border inside a local stacking context. The z-index scale addresses global layers (dropdown, modal, tooltip), not local ordering.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "arbitrary-position",
+      "file": "components/ui/navigation-menu.tsx",
+      "reason": "top-[60%] positions the arrow diamond relative to the indicator bar. A geometric ratio, not a spacing decision.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "viewport-constraint",
+      "file": "components/ui/drawer.tsx",
+      "reason": "max-h-[80vh] caps the drawer height relative to the viewport. Viewport units are outside the spacing scale by design.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "subpixel-offset",
+      "file": "components/ui/tooltip.tsx",
+      "reason": "The translate-y calc compensates for the rotation of the arrow square so its tip lands exactly on the edge. Derived from the geometry, not from the spacing scale.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "subpixel-offset",
+      "file": "components/ui/switch.tsx",
+      "reason": "translate-x calc(100%-2px) compensates for the border inset of the thumb so it stops flush with the track edge.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "local-stacking",
+      "file": "components/ui/calendar.tsx",
+      "reason": "z-0 creates a local stacking context so the range-highlight pseudo-elements paint below the day cells. Two occurrences, same rationale.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "css-system-color",
+      "file": "components/ui/native-select.tsx",
+      "reason": "Canvas and CanvasText are CSS system color keywords. Native <option> and <optgroup> are rendered by the OS, which ignores custom properties. Two occurrences, same rationale.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "subpixel-offset",
+      "file": "components/ui/sidebar.tsx",
+      "reason": "The +2px in the collapsed icon width compensates for the border of the floating variant, so the rail lines up with the expanded sidebar.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "sidebar-icon-gutter",
+      "file": "components/ui/sidebar.tsx",
+      "reason": "w-[calc(var(--sidebar-width-icon)+(--spacing(4)))] — the floating and inset variants sit inside a padded shell, so the collapsed rail measures its own width plus that padding. The sum is a property of the variant, not a value of the spacing scale.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "sidebar-offcanvas-shift",
+      "file": "components/ui/sidebar.tsx",
+      "reason": "left/right-[calc(var(--sidebar-width)*-1)] — the offcanvas panel is pushed out by exactly its own width, mirrored per side. The multiplication by -1 is the mirroring itself, and a token cannot carry a sign.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "viewport-gutter",
+      "file": "components/ui/dialog.tsx",
+      "reason": "max-w-[calc(100%-var(--space-component-lg))] — the dialog is capped at the viewport minus one gutter on each side. The gutter is already a token; the subtraction from a width the component does not know cannot be one.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "anchor-relative-width",
+      "file": "components/ui/combobox.tsx",
+      "reason": "min-w-[calc(var(--anchor-width)+--spacing(7))] — --anchor-width is measured by Base UI when the popup opens. The popup must clear the trigger plus room for the clear and chevron buttons; only that room is a token.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "anchor-relative-height",
+      "file": "components/ui/combobox.tsx",
+      "reason": "max-h-[min(calc(--spacing(72)---spacing(9)),calc(var(--available-height)---spacing(9)))] — the list stops at the shorter of a fixed ceiling and the space Base UI measured below the trigger, both less the sticky input. The comparison is the behaviour, not a size.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    }
+  ]
+}

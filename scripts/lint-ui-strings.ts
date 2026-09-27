@@ -1,0 +1,97 @@
+/**
+ * A component must not invent the words it renders.
+ *
+ * Accessible names that never appear on screen - aria-label, title, sr-only
+ * text - are the ones that quietly drift: nobody sees them, so nobody notices
+ * when one is English and the next is French, or when a translator misses one
+ * because it is buried in JSX. They all come from lib/ui-strings.ts, so there
+ * is a single place to read the product's voice and a single place to replace
+ * it.
+ *
+ * Values that are not copy - ARIA tokens like aria-label="true", data
+ * attributes, empty strings - are not flagged.
+ */
+import { readFileSync, readdirSync } from "node:fs"
+import { join } from "node:path"
+
+const DIR = "components/ui"
+const SOURCE = "@/lib/ui-strings"
+
+/** aria-* values that are part of the ARIA grammar, not text for a human. */
+const ARIA_KEYWORDS = new Set([
+  "true",
+  "false",
+  "none",
+  "polite",
+  "assertive",
+  "off",
+  "inline",
+  "list",
+  "both",
+  "page",
+  "step",
+  "location",
+  "date",
+  "time",
+  "dialog",
+  "menu",
+  "listbox",
+  "tree",
+  "grid",
+  "vertical",
+  "horizontal",
+])
+
+interface Finding {
+  file: string
+  line: number
+  text: string
+  kind: string
+}
+
+const findings: Finding[] = []
+
+for (const name of readdirSync(DIR)
+  .filter((f) => f.endsWith(".tsx"))
+  .sort()) {
+  const file = join(DIR, name)
+  const lines = readFileSync(file, "utf8").split("\n")
+
+  lines.forEach((line, index) => {
+    const at = { file, line: index + 1 }
+
+    for (const attr of ["aria-label", "title", "alt", "aria-description"]) {
+      const match = line.match(new RegExp(`\\b${attr}="([^"]*)"`))
+      if (!match) continue
+      const value = match[1].trim()
+      if (value === "" || ARIA_KEYWORDS.has(value)) continue
+      findings.push({ ...at, text: `${attr}="${value}"`, kind: attr })
+    }
+
+    const srOnly = line.match(/className="sr-only"\s*>\s*([^<{][^<]*)</)
+    if (srOnly && srOnly[1].trim() !== "") {
+      findings.push({ ...at, text: srOnly[1].trim(), kind: "sr-only" })
+    }
+  })
+}
+
+if (findings.length > 0) {
+  console.error(`❌ lint-ui-strings: ${findings.length} hardcoded string(s).\n`)
+  for (const f of findings) {
+    console.error(`   ${f.file}:${f.line} [${f.kind}] ${f.text}`)
+  }
+  console.error(
+    `\n   Move the wording to lib/ui-strings.ts and read it from there, so the` +
+      `\n   component exposes one prop to override it instead of hiding a literal.`
+  )
+  process.exit(1)
+}
+
+const modules = readdirSync(DIR).filter((f) => f.endsWith(".tsx"))
+const consumers = modules.filter((f) =>
+  readFileSync(join(DIR, f), "utf8").includes(SOURCE)
+).length
+
+console.log(
+  `✅ lint-ui-strings: no hardcoded accessible name, ${consumers} component(s) read lib/ui-strings.ts.`
+)

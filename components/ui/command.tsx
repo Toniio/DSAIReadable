@@ -1,0 +1,214 @@
+"use client"
+
+import * as React from "react"
+import { Command as CommandPrimitive } from "cmdk"
+
+import { cn } from "@/lib/utils"
+import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { InputGroup, InputGroupAddon } from "@/components/ui/input-group"
+import { MagnifyingGlassIcon, CheckIcon } from "@phosphor-icons/react"
+
+function Command({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive>) {
+  return (
+    <CommandPrimitive
+      data-slot="command"
+      className={cn(
+        "flex size-full flex-col overflow-hidden rounded-none bg-popover text-popover-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CommandDialog({
+  title = "Command Palette",
+  description = "Search for a command to run...",
+  children,
+  className,
+  showCloseButton = false,
+  ...props
+}: React.ComponentProps<typeof Dialog> & {
+  title?: string
+  description?: string
+  className?: string
+  showCloseButton?: boolean
+}) {
+  return (
+    <Dialog {...props}>
+      <DialogHeader className="sr-only">
+        <DialogTitle>{title}</DialogTitle>
+        <DialogDescription>{description}</DialogDescription>
+      </DialogHeader>
+      <DialogContent
+        className={cn(
+          "top-1/3 translate-y-0 overflow-hidden rounded-none p-0",
+          className
+        )}
+        showCloseButton={showCloseButton}
+      >
+        {children}
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+function CommandInput({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.Input>) {
+  return (
+    <div data-slot="command-input-wrapper" className="border-b pb-0">
+      <InputGroup className="h-8 border-none border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+        <CommandPrimitive.Input
+          data-slot="command-input"
+          className={cn(
+            // focus-managed: this control sits inside an InputGroup, whose
+            // has-[[data-slot=input-group-control]:focus-visible] rule draws the ring
+            // around the whole group. A second ring would nest inside the first.
+            "w-full text-xs outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          )}
+          {...props}
+        />
+        <InputGroupAddon>
+          <MagnifyingGlassIcon className="size-4 shrink-0 opacity-50" />
+        </InputGroupAddon>
+      </InputGroup>
+    </div>
+  )
+}
+
+function CommandList({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.List>) {
+  return (
+    <CommandPrimitive.List
+      data-slot="command-list"
+      className={cn(
+        // focus-managed: Radix mounts this surface with tabIndex={-1} and moves
+        // focus to a control inside it, so a ring on the surface itself would mark
+        // something the user cannot act on.
+        `no-scrollbar max-h-72 scroll-py-0 overflow-x-hidden overflow-y-auto ${FOCUS_OUTLINE_RESET}`,
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CommandEmpty({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.Empty>) {
+  return (
+    <CommandPrimitive.Empty
+      data-slot="command-empty"
+      className={cn("py-6 text-center text-xs", className)}
+      {...props}
+    />
+  )
+}
+
+function CommandGroup({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.Group>) {
+  return (
+    <CommandPrimitive.Group
+      data-slot="command-group"
+      className={cn(
+        "overflow-hidden text-foreground **:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:text-muted-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CommandSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.Separator>) {
+  return (
+    <CommandPrimitive.Separator
+      data-slot="command-separator"
+      className={cn("-mx-1 h-px bg-border", className)}
+      {...props}
+    />
+  )
+}
+
+function CommandItem({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.Item>) {
+  return (
+    <CommandPrimitive.Item
+      data-slot="command-item"
+      className={cn(
+        // focus-managed: Radix moves a roving tabindex across these items and marks
+        // the current one with focus/data-highlighted, which the background colour
+        // below renders. A ring here would double an indicator that already exists.
+        "group/command-item relative flex cursor-default items-center gap-2 rounded-none px-2 py-2 text-xs outline-hidden select-none in-data-[slot=dialog-content]:rounded-none! data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <CheckIcon className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
+    </CommandPrimitive.Item>
+  )
+}
+
+function CommandShortcut({
+  className,
+  ...props
+}: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="command-shortcut"
+      className={cn(
+        "ml-auto text-xs tracking-widest text-muted-foreground group-data-selected/command-item:text-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+}
+
+export type CommandProps = React.ComponentProps<typeof Command>
+export type CommandDialogProps = React.ComponentProps<typeof CommandDialog>
+export type CommandEmptyProps = React.ComponentProps<typeof CommandEmpty>
+export type CommandGroupProps = React.ComponentProps<typeof CommandGroup>
+export type CommandInputProps = React.ComponentProps<typeof CommandInput>
+export type CommandItemProps = React.ComponentProps<typeof CommandItem>
+export type CommandListProps = React.ComponentProps<typeof CommandList>
+export type CommandSeparatorProps = React.ComponentProps<
+  typeof CommandSeparator
+>
+export type CommandShortcutProps = React.ComponentProps<typeof CommandShortcut>

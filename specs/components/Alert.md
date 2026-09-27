@@ -1,0 +1,153 @@
+# Alert
+
+## Metadata
+
+| Champ         | Valeur                  |
+| ------------- | ----------------------- |
+| Nom           | Alert                   |
+| Catégorie     | Feedback                |
+| Statut        | stable                  |
+| figma_node_id |                         |
+| code_path     | components/ui/alert.tsx |
+
+## Rôle
+
+Bandeau de feedback non-modal affichant un message contextuel (informatif ou d'erreur) avec titre, description et action optionnelle.
+
+## Usage
+
+- Afficher une erreur d'authentification suite à une tentative de connexion échouée
+- Informer l'utilisateur d'un état système (session expirée, erreur réseau)
+- Présenter un avertissement avant une action irréversible
+- Ajouter une icône SVG comme premier enfant pour renforcer le signal visuel
+
+## Contraintes
+
+- Ne pas utiliser pour des messages éphémères (toast) — préférer un composant `Toast`
+- Ne pas utiliser pour des dialogues bloquants — préférer `AlertDialog`
+- Maximum 1 Alert par section de page pour éviter la surcharge informationnelle
+- L'attribut `role="alert"` est déjà positionné ; ne pas en ajouter un second dans les enfants
+- `AlertAction` est positionné en absolu dans le coin supérieur droit ; ne pas y placer de contenu de largeur variable
+
+## Dépendances
+
+- Aucune dépendance de composant interne obligatoire
+- `Button` — action typique dans `AlertAction`
+- Icône SVG (Phosphor Icons) — enfant direct de `Alert` pour activer la mise en page bi-colonnes
+
+## Anatomie
+
+| Slot                            | Rôle                                                                |
+| ------------------------------- | ------------------------------------------------------------------- |
+| `data-slot="alert"`             | `<div>` racine avec `role="alert"`, porte la variante               |
+| `data-slot="alert-title"`       | `<div>` titre en gras, passe en col-start-2 si icône présente       |
+| `data-slot="alert-description"` | `<div>` description en couleur subtile (`text-muted-foreground`)    |
+| `data-slot="alert-action"`      | `<div>` action positionnée en absolu en haut à droite               |
+| _(icône implicite)_             | Premier enfant `<svg>` : couvre 2 lignes de grille, taille `size-4` |
+
+## Tokens utilisés
+
+| Token                            | Usage                                                        |
+| -------------------------------- | ------------------------------------------------------------ |
+| `--color-background-subtle`      | Fond de la carte (`bg-card`) pour les deux variantes         |
+| `--color-text-default`           | Texte variante `default` (`text-card-foreground`)            |
+| `--color-feedback-error-default` | Texte variante `destructive` et description à 90 % d'opacité |
+| `--color-border-default`         | Bordure de l'alerte                                          |
+| `--space-component-sm`           | Gap interne (`gap-0.5`) entre titre et description           |
+
+## Props / API
+
+### `Alert`
+
+| Prop        | Type                          | Défaut      | Description                                            |
+| ----------- | ----------------------------- | ----------- | ------------------------------------------------------ |
+| `variant`   | `"default" \| "destructive"`  | `"default"` | Style visuel : informatif ou d'erreur                  |
+| `className` | `string`                      | —           | Classes CSS additionnelles                             |
+| `...props`  | `React.ComponentProps<"div">` | —           | Props natives `<div>` (`role="alert"` déjà positionné) |
+
+### `AlertTitle`
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+
+### `AlertDescription`
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+
+### `AlertAction`
+
+| Prop        | Type                          | Défaut | Description                |
+| ----------- | ----------------------------- | ------ | -------------------------- |
+| `className` | `string`                      | —      | Classes CSS additionnelles |
+| `...props`  | `React.ComponentProps<"div">` | —      | Props natives `<div>`      |
+
+## Variantes
+
+<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+
+| Composant | Axe       | Valeurs                   | Défaut    |
+| --------- | --------- | ------------------------- | --------- |
+| `Alert`   | `variant` | `default` · `destructive` | `default` |
+
+Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+
+## États
+
+| État          | Comportement visuel                                                                                |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| `default`     | Fond `bg-card`, texte `text-card-foreground`, bordure subtile                                      |
+| `destructive` | Texte `text-destructive`, description à `text-destructive/90`, icône hérite de la couleur courante |
+| `hover`       | Non applicable (composant non interactif)                                                          |
+| `focus`       | Non applicable (sauf si `AlertAction` contient un `Button`)                                        |
+| `active`      | Non applicable                                                                                     |
+| `disabled`    | Non applicable                                                                                     |
+| `loading`     | Non applicable                                                                                     |
+| `error`       | Utiliser `variant="destructive"`                                                                   |
+
+## Accessibilité
+
+**Pattern** : Rôle `alert` (live region assertive)
+
+**Rôle** : `role="alert"` sur la racine : le contenu est annoncé immédiatement par les lecteurs d'écran dès son insertion.
+
+**Clavier** :
+
+Aucune interaction clavier propre ; seuls les éléments interactifs placés dedans sont focalisables.
+
+**Nom accessible** : Le titre (`AlertTitle`) et la description (`AlertDescription`) forment le message annoncé.
+
+**Vigilance** :
+
+- `role="alert"` interrompt la lecture en cours : réserver `Alert` aux messages importants apparus en réaction à l'utilisateur, pas à un encart statique présent au chargement.
+- La variante `destructive` ne porte pas seule le sens : le texte doit dire qu'il s'agit d'une erreur (icône + mot, pas la couleur seule).
+
+## Exemple de code
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import { WarningCircleIcon } from "@phosphor-icons/react"
+
+export default function Example() {
+  return (
+    <Alert variant="destructive">
+      <WarningCircleIcon />
+      <AlertTitle>Identifiants incorrects</AlertTitle>
+      <AlertDescription>
+        Vérifiez votre adresse e-mail et votre mot de passe, puis réessayez.
+      </AlertDescription>
+    </Alert>
+  )
+}
+```
+
+## Références croisées
+
+- `Card` — peut accueillir une `Alert` dans `CardContent`
+- `Button` — action dans `AlertAction`
+- `AlertDialog` — alternative modale bloquante
+- `Toast` — alternative éphémère non persistante

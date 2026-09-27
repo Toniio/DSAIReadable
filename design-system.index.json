@@ -1,0 +1,466 @@
+{
+  "version": "1.1.0",
+  "library": {
+    "last_publish": "2025-07-08T12:00:00Z"
+  },
+  "inventory": [
+    {
+      "name": "Accordion",
+      "code_path": "components/ui/accordion.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Alert",
+      "code_path": "components/ui/alert.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "AlertDialog",
+      "code_path": "components/ui/alert-dialog.tsx",
+      "sizes": [
+        "default",
+        "sm"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "AspectRatio",
+      "code_path": "components/ui/aspect-ratio.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Avatar",
+      "code_path": "components/ui/avatar.tsx",
+      "sizes": [
+        "default",
+        "sm",
+        "lg"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "Badge",
+      "code_path": "components/ui/badge.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Breadcrumb",
+      "code_path": "components/ui/breadcrumb.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Button",
+      "code_path": "components/ui/button.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "ButtonGroup",
+      "code_path": "components/ui/button-group.tsx",
+      "status": "beta"
+    },
+    {
+      "name": "Calendar",
+      "code_path": "components/ui/calendar.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Card",
+      "code_path": "components/ui/card.tsx",
+      "sizes": [
+        "default",
+        "sm"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "Carousel",
+      "code_path": "components/ui/carousel.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Chart",
+      "code_path": "components/ui/chart.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Checkbox",
+      "code_path": "components/ui/checkbox.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Collapsible",
+      "code_path": "components/ui/collapsible.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Combobox",
+      "code_path": "components/ui/combobox.tsx",
+      "status": "beta"
+    },
+    {
+      "name": "Command",
+      "code_path": "components/ui/command.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "ContextMenu",
+      "code_path": "components/ui/context-menu.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Dialog",
+      "code_path": "components/ui/dialog.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Direction",
+      "code_path": "components/ui/direction.tsx",
+      "status": "beta"
+    },
+    {
+      "name": "Drawer",
+      "code_path": "components/ui/drawer.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "DropdownMenu",
+      "code_path": "components/ui/dropdown-menu.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Empty",
+      "code_path": "components/ui/empty.tsx",
+      "status": "beta"
+    },
+    {
+      "name": "Field",
+      "code_path": "components/ui/field.tsx",
+      "status": "beta"
+    },
+    {
+      "name": "Heading",
+      "code_path": "components/ui/heading.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "HoverCard",
+      "code_path": "components/ui/hover-card.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Illustration",
+      "code_path": "components/ui/illustration.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Input",
+      "code_path": "components/ui/input.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "InputGroup",
+      "code_path": "components/ui/input-group.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "icon-xs",
+        "icon-sm"
+      ],
+      "status": "beta"
+    },
+    {
+      "name": "InputOtp",
+      "code_path": "components/ui/input-otp.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Item",
+      "code_path": "components/ui/item.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default"
+      ],
+      "status": "beta"
+    },
+    {
+      "name": "Kbd",
+      "code_path": "components/ui/kbd.tsx",
+      "status": "beta"
+    },
+    {
+      "name": "Label",
+      "code_path": "components/ui/label.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Logo",
+      "code_path": "components/ui/logo.tsx",
+      "sizes": [
+        "sm",
+        "default",
+        "lg"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "Menubar",
+      "code_path": "components/ui/menubar.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "NativeSelect",
+      "code_path": "components/ui/native-select.tsx",
+      "sizes": [
+        "sm",
+        "default"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "NavigationMenu",
+      "code_path": "components/ui/navigation-menu.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Pagination",
+      "code_path": "components/ui/pagination.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "PasswordInput",
+      "code_path": "components/ui/password-input.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Popover",
+      "code_path": "components/ui/popover.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Progress",
+      "code_path": "components/ui/progress.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "RadioGroup",
+      "code_path": "components/ui/radio-group.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Resizable",
+      "code_path": "components/ui/resizable.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "ScrollArea",
+      "code_path": "components/ui/scroll-area.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Select",
+      "code_path": "components/ui/select.tsx",
+      "sizes": [
+        "sm",
+        "default"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "Separator",
+      "code_path": "components/ui/separator.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Sheet",
+      "code_path": "components/ui/sheet.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Sidebar",
+      "code_path": "components/ui/sidebar.tsx",
+      "sizes": [
+        "sm",
+        "default",
+        "lg"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "Skeleton",
+      "code_path": "components/ui/skeleton.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Slider",
+      "code_path": "components/ui/slider.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Sonner",
+      "code_path": "components/ui/sonner.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Spinner",
+      "code_path": "components/ui/spinner.tsx",
+      "status": "beta"
+    },
+    {
+      "name": "Switch",
+      "code_path": "components/ui/switch.tsx",
+      "sizes": [
+        "sm",
+        "default"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "Table",
+      "code_path": "components/ui/table.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Tabs",
+      "code_path": "components/ui/tabs.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Textarea",
+      "code_path": "components/ui/textarea.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Toggle",
+      "code_path": "components/ui/toggle.tsx",
+      "sizes": [
+        "sm",
+        "default",
+        "lg"
+      ],
+      "status": "stable"
+    },
+    {
+      "name": "ToggleGroup",
+      "code_path": "components/ui/toggle-group.tsx",
+      "status": "stable"
+    },
+    {
+      "name": "Tooltip",
+      "code_path": "components/ui/tooltip.tsx",
+      "status": "stable"
+    }
+  ],
+  "composition_rules": [
+    {
+      "id": "rule-01",
+      "rule": "Use only Semantic tokens (--color-*, --space-*, --elevation-*, --motion-*, --radius-*, --zindex-*) and Component aliases (--background, --primary, etc.) in component code. Never reference Primitive tokens (--ds-prim-*) directly."
+    },
+    {
+      "id": "rule-02",
+      "rule": "Never use raw values (oklch, hex, rgb, px, rem, ms, cubic-bezier) in component files. Every visual value must trace to a token. Exception: CSS attribute selectors targeting third-party library SVG attributes (annotate with // allow-raw: <reason>)."
+    },
+    {
+      "id": "rule-03",
+      "rule": "All class name composition must use cn() from @/lib/utils. Inline conditional className strings are not permitted."
+    },
+    {
+      "id": "rule-04",
+      "rule": "Component variants must be declared with cva() from class-variance-authority. Use data-variant and data-size attributes to expose variant state for CSS targeting."
+    },
+    {
+      "id": "rule-05",
+      "rule": "Icons must come exclusively from @phosphor-icons/react. No other icon library may be used. Default icon size within components is size-4 (1rem)."
+    },
+    {
+      "id": "rule-06",
+      "rule": "TooltipProvider must wrap the entire application at the layout root. Do not instantiate Tooltip outside of a TooltipProvider."
+    },
+    {
+      "id": "rule-07",
+      "rule": "Sonner Toaster must be instantiated once at the layout root. Do not render multiple Toaster instances."
+    },
+    {
+      "id": "rule-08",
+      "rule": "Dialog, Sheet, AlertDialog, and Drawer must always include an accessible title element (DialogTitle, SheetTitle, AlertDialogTitle, DrawerTitle). Visually-hidden titles are acceptable for screen-reader-only labels."
+    },
+    {
+      "id": "rule-09",
+      "rule": "Form inputs (Input, Textarea, Select, NativeSelect, Checkbox, RadioGroup, Switch) must be wrapped in a Field component to ensure label association and error message display."
+    },
+    {
+      "id": "rule-10",
+      "rule": "Components using asChild must pass a single React element as children. The child receives all props via Slot.Root — do not wrap it in an additional element."
+    },
+    {
+      "id": "rule-11",
+      "rule": "Dark mode is class-based (.dark). Never use prefers-color-scheme media queries in component code — theming is controlled by ThemeProvider at the root."
+    },
+    {
+      "id": "rule-12",
+      "rule": "Spacing between components must use Semantic space tokens: space-component-xs/sm/md/lg/xl for intra-component gaps, space-layout-page-padding for page edges, space-layout-section-gap for section breaks."
+    },
+    {
+      "id": "rule-13",
+      "rule": "All new components must expose a data-slot attribute on the root element whose value matches the component name (e.g., data-slot='button'). Sub-parts also carry data-slot for CSS targeting."
+    },
+    {
+      "id": "rule-14",
+      "rule": "Beta components (status: beta in design-system.index.json) may have breaking API changes. Do not use them in production flows without explicit sign-off."
+    },
+    {
+      "id": "rule-15",
+      "rule": "Run npm run tokens-validate before every commit. Zero errors are required to merge. If a needed Semantic token does not exist, open a GitHub issue labelled design-system instead of creating an ad-hoc token."
+    },
+    {
+      "id": "rule-16",
+      "rule": "Dark mode is applied via the .dark CSS class on a parent element (also supported via prefers-color-scheme: dark media query). Never override mode token values inline."
+    },
+    {
+      "id": "rule-17",
+      "rule": "Sidebar tokens follow the naming pattern color.sidebar.<role>.<emphasis>. Use --color-sidebar-primary (active item bg), --color-sidebar-primary-on (text on active), --color-sidebar-accent-default (hover surface), --color-sidebar-accent-foreground (text on hover). Do not use the legacy flat names."
+    },
+    {
+      "id": "rule-18",
+      "rule": "The canonical size scale is xs | sm | default | lg, with the square-format series icon-xs | icon-sm | icon | icon-lg. MUST use only the sizes listed in the component's inventory entry: a component that omits a step does not accept it, and no component accepts a name outside the scale. Components with no sizes field take no size prop."
+    },
+    {
+      "id": "rule-19",
+      "rule": "A `variant` prop carries exactly one axis: appearance, intent, or media. MUST NOT assume a component accepts a value because a sibling does. Media values (icon, image) belong to *Media sub-components only. MUST use variant=\"destructive\" for irreversible actions, never to obtain red styling."
+    }
+  ],
+  "glossary": {
+    "primitive": "A raw, named design value in tokens/primitive.json. Marked $private: true. Never referenced directly in component or application code — only Semantic tokens may reference primitives.",
+    "semantic": "An intentional design decision in tokens/semantic.json, following the naming grammar foundation.property[.role][.emphasis][.state]. The only tier component authors interact with.",
+    "component-token": "A local override in tokens/component.json used only when a Semantic token cannot cover the use case. Primarily holds shadcn CSS variable aliases.",
+    "DTCG": "Design Token Community Group — the open standard format for design tokens. Each token carries $value, $type, and $description keys.",
+    "cva": "Class Variance Authority — the utility used to declare typed variant APIs on components. Required for all multi-variant components.",
+    "cn": "The class merging utility from @/lib/utils, combining clsx and tailwind-merge. The only approved way to compose Tailwind class strings in this codebase.",
+    "asChild": "A prop pattern (from Radix UI / shadcn) that delegates a component's rendering to its child element via Slot.Root, preserving all props and event handlers.",
+    "data-slot": "An HTML data attribute marking a component's anatomical part. Used for CSS targeting and Code Connect prop mapping. Value matches the component or sub-part name.",
+    "allow-raw": "An inline code annotation (// allow-raw: <reason>) that exempts a specific raw value from the lint-raw-values check. Only valid when the raw value is technically unavoidable (e.g., third-party CSS attribute selectors).",
+    "Tier 0": "The flat CSS variable structure (e.g., --background: oklch(...)) that existed before the 3-tier DTCG migration. Retained only as Layer 3 compatibility aliases pointing to Semantic tokens.",
+    "Layer 1": "The CSS output of tokens/primitive.json — all --ds-prim-* variables. Private; never used directly in components.",
+    "Layer 2": "The CSS output of tokens/semantic.json — semantic variables (--color-background-default, --elevation-sm, etc.). The authoritative source of truth for visual decisions.",
+    "Layer 3": "The CSS output of tokens/component.json — shadcn compatibility aliases (--background, --primary, etc.) that map to Layer 2 variables.",
+    "mode": "A visual configuration of the Semantic tier. Available modes: light (default), dark (.dark class). Modes override Semantic token values only — Primitive and Component tiers are mode-agnostic.",
+    "stable": "A component whose public API is frozen and safe for production use.",
+    "beta": "A component whose API may change. Not recommended for production without explicit sign-off.",
+    "deprecated": "A component that will be removed in a future release. Migrate to the suggested replacement.",
+    "variant-axis": "The meaning carried by a `variant` prop. Three axes exist, and a component's variant prop uses exactly one of them: appearance (how prominent the element is drawn), intent (what the action means), and media (what kind of content a slot holds). Read the component's entry before assuming which axis applies.",
+    "appearance": "The appearance axis: default, secondary, outline, ghost, muted, link, line. Purely visual prominence. Swapping one for another never changes what the element does. This is the axis of Button, Badge, Item and TabsList.",
+    "intent": "The intent axis: destructive. It declares that the action is irreversible or damaging, and the red styling follows from that. It is not a way to obtain a red button; an element that merely looks dangerous but is not must use the appearance axis and its own colour. Historically it shares the `variant` prop with the appearance axis on Button and Badge.",
+    "media": "The media axis: default, icon, image. It declares the kind of content a media slot holds so the slot can size and clip it. It belongs to the *Media sub-components — ItemMedia, EmptyMedia — never to their parent. `<Item variant=\"icon\">` is not valid.",
+    "sub-component": "A component exported from the same file as its parent and styled by its own cva, such as ItemMedia, EmptyMedia, TabsList, SidebarMenuButton, InputGroupAddon and InputGroupButton. It has its own variants, listed under its own name in component-variants.json, and those variants do not apply to the parent."
+  }
+}

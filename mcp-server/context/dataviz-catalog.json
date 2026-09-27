@@ -1,0 +1,432 @@
+{
+  "line": {
+    "name": "Line Chart",
+    "description": "Graphique en ligne pour l'évolution temporelle",
+    "library": "recharts",
+    "component": "LineChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "axes",
+      "lines",
+      "dots",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Limiter à 5 séries max",
+      "Utiliser les tokens --color-chart-* pour les couleurs de séries",
+      "Ajouter un tooltip pour le détail des valeurs"
+    ],
+    "dont": [
+      "Ne pas utiliser pour comparer des catégories non temporelles",
+      "Ne pas dépasser 5 séries dans un même graphique"
+    ],
+    "variants": [
+      "single",
+      "multi",
+      "stacked"
+    ]
+  },
+  "area": {
+    "name": "Area Chart",
+    "description": "Graphique en aire pour montrer les volumes dans le temps",
+    "library": "recharts",
+    "component": "AreaChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "axes",
+      "areas",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Utiliser la transparence pour les zones empilées",
+      "Limiter à 3 séries pour la lisibilité"
+    ],
+    "dont": [
+      "Ne pas empiler plus de 3 séries",
+      "Ne pas utiliser sans axe temporel"
+    ],
+    "variants": [
+      "single",
+      "stacked",
+      "gradient"
+    ]
+  },
+  "bar": {
+    "name": "Bar Chart",
+    "description": "Graphique en barres pour comparer des valeurs entre catégories",
+    "library": "recharts",
+    "component": "BarChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "axes",
+      "bars",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Ordonner les barres par valeur quand c'est pertinent",
+      "Utiliser des barres horizontales si les labels sont longs"
+    ],
+    "dont": [
+      "Ne pas utiliser pour montrer une évolution temporelle (préférer line)",
+      "Ne pas surcharger avec plus de 5 catégories par groupe"
+    ],
+    "variants": [
+      "vertical",
+      "horizontal",
+      "grouped",
+      "stacked"
+    ]
+  },
+  "pie": {
+    "name": "Pie Chart",
+    "description": "Graphique circulaire pour les proportions",
+    "library": "recharts",
+    "component": "PieChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "slices",
+      "labels",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Limiter à 5 segments max",
+      "Grouper les petites valeurs dans 'Autres'"
+    ],
+    "dont": [
+      "Ne pas utiliser pour comparer des valeurs précises",
+      "Ne pas afficher plus de 6 segments"
+    ],
+    "variants": [
+      "full",
+      "half"
+    ]
+  },
+  "donut": {
+    "name": "Donut Chart",
+    "description": "Variante du pie chart avec un trou central pour un KPI",
+    "library": "recharts",
+    "component": "PieChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "slices",
+      "center_label",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Afficher le KPI principal au centre",
+      "Limiter à 5 segments max"
+    ],
+    "dont": [
+      "Ne pas imbriquer plusieurs donuts",
+      "Ne pas utiliser sans valeur centrale"
+    ],
+    "variants": [
+      "with_center_label",
+      "minimal"
+    ]
+  },
+  "radar": {
+    "name": "Radar Chart",
+    "description": "Graphique radar pour comparer des entités sur plusieurs axes",
+    "library": "recharts",
+    "component": "RadarChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "axes",
+      "polygons",
+      "dots",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Utiliser 5 à 8 axes pour la lisibilité",
+      "Normaliser les données sur une même échelle"
+    ],
+    "dont": [
+      "Ne pas utiliser avec moins de 3 axes",
+      "Ne pas comparer plus de 3 entités"
+    ],
+    "variants": [
+      "filled",
+      "stroke_only"
+    ]
+  },
+  "histogram": {
+    "name": "Histogram",
+    "description": "Histogramme pour montrer la distribution d'une variable",
+    "library": "recharts",
+    "component": "BarChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "axes",
+      "bars",
+      "tooltip"
+    ],
+    "do": [
+      "Choisir un nombre de bacs approprié (5-20)",
+      "Utiliser une seule couleur pour les barres"
+    ],
+    "dont": [
+      "Ne pas confondre avec un bar chart catégoriel",
+      "Ne pas utiliser de gaps entre les barres"
+    ],
+    "variants": [
+      "standard",
+      "cumulative"
+    ]
+  },
+  "bubble": {
+    "name": "Bubble Chart",
+    "description": "Nuage de points dimensionné pour montrer 3 variables simultanément",
+    "library": "recharts",
+    "component": "ScatterChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "axes",
+      "bubbles",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Encoder la troisième variable dans la taille du point",
+      "Ajouter une légende de taille"
+    ],
+    "dont": [
+      "Ne pas surcharger avec plus de 50 points",
+      "Ne pas utiliser sans tooltip explicatif"
+    ],
+    "variants": [
+      "standard"
+    ]
+  },
+  "heatmap": {
+    "name": "Heatmap",
+    "description": "Carte de chaleur pour montrer la densité ou la corrélation",
+    "library": "recharts",
+    "component": "custom",
+    "tokens": [
+      "--color-chart-sequential-1",
+      "--color-chart-sequential-2",
+      "--color-chart-sequential-3",
+      "--color-chart-sequential-4",
+      "--color-chart-sequential-5"
+    ],
+    "anatomy": [
+      "grid",
+      "cells",
+      "color_scale",
+      "tooltip",
+      "axes"
+    ],
+    "do": [
+      "Utiliser la palette séquentielle color.chart.sequential.1 à 5 (du plus clair au plus foncé)",
+      "Ajouter des labels dans les cellules si l'espace le permet"
+    ],
+    "dont": [
+      "Ne pas utiliser de couleurs non ordonnées",
+      "Ne pas afficher trop de cellules (limiter à 20×20)"
+    ],
+    "variants": [
+      "matrix",
+      "calendar"
+    ]
+  },
+  "data_card": {
+    "name": "Data Card",
+    "description": "Carte de KPI affichant une valeur clé avec label et tendance",
+    "library": "native",
+    "component": "Card",
+    "tokens": [
+      "--color-text-default",
+      "--color-text-subtle",
+      "--color-chart-1",
+      "--color-chart-2"
+    ],
+    "anatomy": [
+      "label",
+      "value",
+      "trend",
+      "icon"
+    ],
+    "do": [
+      "Afficher une seule métrique par carte",
+      "Indiquer la tendance avec une flèche ou un pourcentage"
+    ],
+    "dont": [
+      "Ne pas surcharger avec trop d'informations",
+      "Ne pas omettre le label descriptif"
+    ],
+    "variants": [
+      "simple",
+      "with_trend",
+      "with_sparkline"
+    ]
+  },
+  "gauge": {
+    "name": "Gauge",
+    "description": "Jauge circulaire ou semi-circulaire pour un KPI en pourcentage",
+    "library": "recharts",
+    "component": "PieChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "arc",
+      "needle",
+      "value_label",
+      "scale"
+    ],
+    "do": [
+      "Afficher la valeur au centre",
+      "Utiliser des seuils de couleur (vert/jaune/rouge)"
+    ],
+    "dont": [
+      "Ne pas utiliser pour des valeurs non bornées",
+      "Ne pas imbriquer plusieurs jauges"
+    ],
+    "variants": [
+      "semi_circle",
+      "full_circle"
+    ]
+  },
+  "mini_chart": {
+    "name": "Mini Chart (Sparkline)",
+    "description": "Micro-graphique inline pour montrer une tendance dans un tableau ou une carte",
+    "library": "recharts",
+    "component": "LineChart",
+    "tokens": [
+      "--color-chart-1"
+    ],
+    "anatomy": [
+      "line",
+      "area"
+    ],
+    "do": [
+      "Garder simple — pas d'axes ni de labels",
+      "Utiliser dans les tableaux ou les data cards"
+    ],
+    "dont": [
+      "Ne pas afficher de tooltip complexe",
+      "Ne pas utiliser comme graphique principal"
+    ],
+    "variants": [
+      "line",
+      "bar"
+    ]
+  },
+  "difference": {
+    "name": "Difference Chart",
+    "description": "Graphique montrant l'écart entre deux séries dans le temps",
+    "library": "recharts",
+    "component": "AreaChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2"
+    ],
+    "anatomy": [
+      "axes",
+      "areas",
+      "baseline",
+      "tooltip"
+    ],
+    "do": [
+      "Colorer les zones positives et négatives différemment",
+      "Ajouter une ligne de référence à zéro"
+    ],
+    "dont": [
+      "Ne pas utiliser pour plus de 2 séries",
+      "Ne pas omettre la baseline"
+    ],
+    "variants": [
+      "standard"
+    ]
+  },
+  "cigarette": {
+    "name": "Cigarette Chart (Stacked Bar 100%)",
+    "description": "Barre empilée à 100% pour comparer les proportions entre catégories",
+    "library": "recharts",
+    "component": "BarChart",
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-chart-5"
+    ],
+    "anatomy": [
+      "axes",
+      "segments",
+      "tooltip",
+      "legend"
+    ],
+    "do": [
+      "Normaliser à 100%",
+      "Limiter à 5 segments par barre"
+    ],
+    "dont": [
+      "Ne pas utiliser si les valeurs absolues sont importantes",
+      "Ne pas surcharger avec trop de catégories"
+    ],
+    "variants": [
+      "horizontal",
+      "vertical"
+    ]
+  }
+}

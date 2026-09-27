@@ -1,0 +1,5307 @@
+{
+  "tokenCount": 301,
+  "tokens": [
+    {
+      "token": "color.mist.0",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-0",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#ffffff"
+      },
+      "value": {
+        "light": "#ffffff"
+      },
+      "description": "Pure white. Primitive only.",
+      "private": true
+    },
+    {
+      "token": "color.mist.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-50",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#f9fbfb"
+      },
+      "value": {
+        "light": "#f9fbfb"
+      },
+      "description": "Near-white with mist hue.",
+      "private": true
+    },
+    {
+      "token": "color.mist.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-100",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#f1f3f3"
+      },
+      "value": {
+        "light": "#f1f3f3"
+      },
+      "description": "Lightest mist surface.",
+      "private": true
+    },
+    {
+      "token": "color.mist.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-200",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#e3e7e8"
+      },
+      "value": {
+        "light": "#e3e7e8"
+      },
+      "description": "Light mist border/divider.",
+      "private": true
+    },
+    {
+      "token": "color.mist.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#9ca8ab"
+      },
+      "value": {
+        "light": "#9ca8ab"
+      },
+      "description": "Mid mist, used for rings and focus indicators.",
+      "private": true
+    },
+    {
+      "token": "color.mist.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#67787c"
+      },
+      "value": {
+        "light": "#67787c"
+      },
+      "description": "Muted foreground level.",
+      "private": true
+    },
+    {
+      "token": "color.mist.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#607175"
+      },
+      "value": {
+        "light": "#607175"
+      },
+      "description": "Muted foreground on a subtle surface — 4.58:1 on mist.100, lightest step clearing WCAG AA there.",
+      "private": true
+    },
+    {
+      "token": "color.mist.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-700",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#424f52"
+      },
+      "value": {
+        "light": "#424f52"
+      },
+      "description": "Fills the 600 → 800 gap so the scale stays monotonic and evenly spaced.",
+      "private": true
+    },
+    {
+      "token": "color.mist.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-800",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#22292b"
+      },
+      "value": {
+        "light": "#22292b"
+      },
+      "description": "Dark surface for muted areas in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.mist.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-900",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#161b1d"
+      },
+      "value": {
+        "light": "#161b1d"
+      },
+      "description": "Card/popover surface in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.mist.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-950",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#090b0c"
+      },
+      "value": {
+        "light": "#090b0c"
+      },
+      "description": "Near-black background in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.violet.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-50",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#eef2ff"
+      },
+      "value": {
+        "light": "#eef2ff"
+      },
+      "description": "Lightest violet, primary foreground.",
+      "private": true
+    },
+    {
+      "token": "color.violet.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#6e6cff"
+      },
+      "value": {
+        "light": "#6e6cff"
+      },
+      "description": "Light violet for action text in dark mode — 4.93:1 on mist.950.",
+      "private": true
+    },
+    {
+      "token": "color.violet.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#615fff"
+      },
+      "value": {
+        "light": "#615fff"
+      },
+      "description": "Vivid violet, sidebar primary in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.violet.550",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-550",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#4f39f6"
+      },
+      "value": {
+        "light": "#4f39f6"
+      },
+      "description": "Sidebar primary violet in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.violet.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#432dd7"
+      },
+      "value": {
+        "light": "#432dd7"
+      },
+      "description": "Brand violet, primary action in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.violet.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-700",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#372aac"
+      },
+      "value": {
+        "light": "#372aac"
+      },
+      "description": "Deep violet, primary action in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.red.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#ff6467"
+      },
+      "value": {
+        "light": "#ff6467"
+      },
+      "description": "Bright red, destructive in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.red.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#e7000b"
+      },
+      "value": {
+        "light": "#e7000b"
+      },
+      "description": "Deep red, destructive in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.green.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-200",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#bbf451"
+      },
+      "value": {
+        "light": "#bbf451"
+      },
+      "description": "Lightest green data viz, chart-1.",
+      "private": true
+    },
+    {
+      "token": "color.green.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#7ccf00"
+      },
+      "value": {
+        "light": "#7ccf00"
+      },
+      "description": "Light green data viz, chart-2.",
+      "private": true
+    },
+    {
+      "token": "color.green.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#5ea500"
+      },
+      "value": {
+        "light": "#5ea500"
+      },
+      "description": "Mid green data viz, chart-3.",
+      "private": true
+    },
+    {
+      "token": "color.green.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#497d00"
+      },
+      "value": {
+        "light": "#497d00"
+      },
+      "description": "Dark green data viz, chart-4.",
+      "private": true
+    },
+    {
+      "token": "color.green.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#3c6300"
+      },
+      "value": {
+        "light": "#3c6300"
+      },
+      "description": "Darkest green data viz, chart-5.",
+      "private": true
+    },
+    {
+      "token": "color.blue.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#8fd6fa"
+      },
+      "value": {
+        "light": "#8fd6fa"
+      },
+      "description": "Light sky blue, categorical chart series 2 in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.blue.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#438fbd"
+      },
+      "value": {
+        "light": "#438fbd"
+      },
+      "description": "Steel blue, categorical chart series 2 in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.yellow.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-200",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#e5e747"
+      },
+      "value": {
+        "light": "#e5e747"
+      },
+      "description": "Bright yellow, categorical chart series 3 in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.amber.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#c89005"
+      },
+      "value": {
+        "light": "#c89005"
+      },
+      "description": "Gold, categorical chart series 5 in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.amber.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#af8526"
+      },
+      "value": {
+        "light": "#af8526"
+      },
+      "description": "Ochre, categorical chart series 3 in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.amber.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-800",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#734e00"
+      },
+      "value": {
+        "light": "#734e00"
+      },
+      "description": "Brown, categorical chart series 5 in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.plum.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#9b5f7c"
+      },
+      "value": {
+        "light": "#9b5f7c"
+      },
+      "description": "Dusty rose, categorical chart series 4 in dark mode.",
+      "private": true
+    },
+    {
+      "token": "color.plum.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-800",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#4d2761"
+      },
+      "value": {
+        "light": "#4d2761"
+      },
+      "description": "Deep plum, categorical chart series 4 in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.black",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-black",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#000000"
+      },
+      "value": {
+        "light": "#000000"
+      },
+      "description": "Pure black. The base of color.static.black (modal scrims); elevation values still embed rgba(0, 0, 0, …) literally.",
+      "private": true
+    },
+    {
+      "token": "color.white-alpha.10",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-white-alpha-10",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "rgba(255, 255, 255, 0.1)"
+      },
+      "value": {
+        "light": "rgba(255, 255, 255, 0.1)"
+      },
+      "description": "10% opaque white, dark mode borders.",
+      "private": true
+    },
+    {
+      "token": "color.white-alpha.15",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-white-alpha-15",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "rgba(255, 255, 255, 0.15)"
+      },
+      "value": {
+        "light": "rgba(255, 255, 255, 0.15)"
+      },
+      "description": "15% opaque white, dark mode input borders.",
+      "private": true
+    },
+    {
+      "token": "space.1",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-1",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.25rem"
+      },
+      "value": {
+        "light": "0.25rem"
+      },
+      "description": "4px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "space.2",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-2",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.5rem"
+      },
+      "value": {
+        "light": "0.5rem"
+      },
+      "description": "8px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "space.3",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-3",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.75rem"
+      },
+      "value": {
+        "light": "0.75rem"
+      },
+      "description": "12px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "private": true
+    },
+    {
+      "token": "space.4",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-4",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1rem"
+      },
+      "value": {
+        "light": "1rem"
+      },
+      "description": "16px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "space.5",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-5",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.25rem"
+      },
+      "value": {
+        "light": "1.25rem"
+      },
+      "description": "20px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "private": true
+    },
+    {
+      "token": "space.6",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-6",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.5rem"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "24px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "space.8",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-8",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2rem"
+      },
+      "value": {
+        "light": "2rem"
+      },
+      "description": "32px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "space.10",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-10",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2.5rem"
+      },
+      "value": {
+        "light": "2.5rem"
+      },
+      "description": "40px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "private": true
+    },
+    {
+      "token": "space.12",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-12",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "3rem"
+      },
+      "value": {
+        "light": "3rem"
+      },
+      "description": "48px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "space.16",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-16",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "4rem"
+      },
+      "value": {
+        "light": "4rem"
+      },
+      "description": "64px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "private": true
+    },
+    {
+      "token": "space.24",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-24",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "6rem"
+      },
+      "value": {
+        "light": "6rem"
+      },
+      "description": "96px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "private": true
+    },
+    {
+      "token": "space.32",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-32",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "8rem"
+      },
+      "value": {
+        "light": "8rem"
+      },
+      "description": "128px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "private": true
+    },
+    {
+      "token": "space.0-5",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-0-5",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.125rem"
+      },
+      "value": {
+        "light": "0.125rem"
+      },
+      "description": "2px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "private": true
+    },
+    {
+      "token": "space.page",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-page",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.5rem"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "Default horizontal page padding.",
+      "private": true
+    },
+    {
+      "token": "space.section",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-section",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "4rem"
+      },
+      "value": {
+        "light": "4rem"
+      },
+      "description": "Vertical gap between page sections.",
+      "private": true
+    },
+    {
+      "token": "space.content-sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-content-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "42rem"
+      },
+      "value": {
+        "light": "42rem"
+      },
+      "description": "Narrow content container width.",
+      "private": true
+    },
+    {
+      "token": "space.content",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-content",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "64rem"
+      },
+      "value": {
+        "light": "64rem"
+      },
+      "description": "Default content container width.",
+      "private": true
+    },
+    {
+      "token": "space.content-lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-content-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "80rem"
+      },
+      "value": {
+        "light": "80rem"
+      },
+      "description": "Wide content container width.",
+      "private": true
+    },
+    {
+      "token": "space.sidebar",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-sidebar",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "16rem"
+      },
+      "value": {
+        "light": "16rem"
+      },
+      "description": "Default sidebar collapsed width.",
+      "private": true
+    },
+    {
+      "token": "space.sidebar-mobile",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-sidebar-mobile",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "18rem"
+      },
+      "value": {
+        "light": "18rem"
+      },
+      "description": "Sidebar width on mobile viewports.",
+      "private": true
+    },
+    {
+      "token": "space.focus-ring-width",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-focus-ring-width",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2px"
+      },
+      "value": {
+        "light": "2px"
+      },
+      "description": "Default focus ring outline width.",
+      "private": true
+    },
+    {
+      "token": "radius.none",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-none",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0rem"
+      },
+      "value": {
+        "light": "0rem"
+      },
+      "description": "No border radius.",
+      "private": true
+    },
+    {
+      "token": "radius.base",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-base",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.625rem"
+      },
+      "value": {
+        "light": "0.625rem"
+      },
+      "description": "Base border radius. The derived steps below were resolved from it (ratio recorded in each description) so that Tier 2 stays a pure alias layer.",
+      "private": true
+    },
+    {
+      "token": "radius.xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.25rem"
+      },
+      "value": {
+        "light": "0.25rem"
+      },
+      "description": "Border radius step xs — 0.4x base (0.25rem).",
+      "private": true
+    },
+    {
+      "token": "radius.sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.375rem"
+      },
+      "value": {
+        "light": "0.375rem"
+      },
+      "description": "Border radius step sm — 0.6x base (0.375rem).",
+      "private": true
+    },
+    {
+      "token": "radius.md",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-md",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.5rem"
+      },
+      "value": {
+        "light": "0.5rem"
+      },
+      "description": "Border radius step md — 0.8x base (0.5rem).",
+      "private": true
+    },
+    {
+      "token": "radius.lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.625rem"
+      },
+      "value": {
+        "light": "0.625rem"
+      },
+      "description": "Border radius step lg — 1x base (0.625rem).",
+      "private": true
+    },
+    {
+      "token": "radius.xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.875rem"
+      },
+      "value": {
+        "light": "0.875rem"
+      },
+      "description": "Border radius step xl — 1.4x base (0.875rem).",
+      "private": true
+    },
+    {
+      "token": "radius.2xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-2xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.125rem"
+      },
+      "value": {
+        "light": "1.125rem"
+      },
+      "description": "Border radius step 2xl — 1.8x base (1.125rem).",
+      "private": true
+    },
+    {
+      "token": "radius.3xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-3xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.375rem"
+      },
+      "value": {
+        "light": "1.375rem"
+      },
+      "description": "Border radius step 3xl — 2.2x base (1.375rem).",
+      "private": true
+    },
+    {
+      "token": "radius.4xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-4xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.625rem"
+      },
+      "value": {
+        "light": "1.625rem"
+      },
+      "description": "Border radius step 4xl — 2.6x base (1.625rem).",
+      "private": true
+    },
+    {
+      "token": "radius.full",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-radius-full",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "9999px"
+      },
+      "value": {
+        "light": "9999px"
+      },
+      "description": "Full/pill border radius.",
+      "private": true
+    },
+    {
+      "token": "typography.size.xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.75rem"
+      },
+      "value": {
+        "light": "0.75rem"
+      },
+      "description": "Extra-small font size (12px).",
+      "private": true
+    },
+    {
+      "token": "typography.size.sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.875rem"
+      },
+      "value": {
+        "light": "0.875rem"
+      },
+      "description": "Small font size (14px).",
+      "private": true
+    },
+    {
+      "token": "typography.size.base",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-base",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1rem"
+      },
+      "value": {
+        "light": "1rem"
+      },
+      "description": "Base font size (16px).",
+      "private": true
+    },
+    {
+      "token": "typography.size.lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.125rem"
+      },
+      "value": {
+        "light": "1.125rem"
+      },
+      "description": "Large font size (18px).",
+      "private": true
+    },
+    {
+      "token": "typography.size.xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.25rem"
+      },
+      "value": {
+        "light": "1.25rem"
+      },
+      "description": "XL font size (20px).",
+      "private": true
+    },
+    {
+      "token": "typography.size.2xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-2xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.5rem"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "2XL font size (24px).",
+      "private": true
+    },
+    {
+      "token": "typography.size.3xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-3xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.875rem"
+      },
+      "value": {
+        "light": "1.875rem"
+      },
+      "description": "3XL font size (30px).",
+      "private": true
+    },
+    {
+      "token": "typography.size.4xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-4xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2.25rem"
+      },
+      "value": {
+        "light": "2.25rem"
+      },
+      "description": "4XL font size (36px).",
+      "private": true
+    },
+    {
+      "token": "typography.line-height.tight",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-line-height-tight",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.25"
+      },
+      "value": {
+        "light": "1.25"
+      },
+      "description": "Tight line height for headings.",
+      "private": true
+    },
+    {
+      "token": "typography.line-height.snug",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-line-height-snug",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.375"
+      },
+      "value": {
+        "light": "1.375"
+      },
+      "description": "Snug line height.",
+      "private": true
+    },
+    {
+      "token": "typography.line-height.normal",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-line-height-normal",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.5"
+      },
+      "value": {
+        "light": "1.5"
+      },
+      "description": "Normal line height for body text.",
+      "private": true
+    },
+    {
+      "token": "typography.line-height.relaxed",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-line-height-relaxed",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.625"
+      },
+      "value": {
+        "light": "1.625"
+      },
+      "description": "Relaxed line height for readable text.",
+      "private": true
+    },
+    {
+      "token": "typography.line-height.loose",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-line-height-loose",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2"
+      },
+      "value": {
+        "light": "2"
+      },
+      "description": "Loose line height for spaced-out text.",
+      "private": true
+    },
+    {
+      "token": "typography.letter-spacing.tight",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-letter-spacing-tight",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "-0.025em"
+      },
+      "value": {
+        "light": "-0.025em"
+      },
+      "description": "Tight tracking for headings.",
+      "private": true
+    },
+    {
+      "token": "typography.letter-spacing.normal",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-letter-spacing-normal",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0em"
+      },
+      "value": {
+        "light": "0em"
+      },
+      "description": "Normal tracking.",
+      "private": true
+    },
+    {
+      "token": "typography.letter-spacing.wide",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-letter-spacing-wide",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.025em"
+      },
+      "value": {
+        "light": "0.025em"
+      },
+      "description": "Wide tracking.",
+      "private": true
+    },
+    {
+      "token": "typography.letter-spacing.wider",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-letter-spacing-wider",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.05em"
+      },
+      "value": {
+        "light": "0.05em"
+      },
+      "description": "Wider tracking for all-caps or labels.",
+      "private": true
+    },
+    {
+      "token": "typography.font-weight.normal",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-weight-normal",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "400"
+      },
+      "value": {
+        "light": "400"
+      },
+      "description": "Normal weight.",
+      "private": true
+    },
+    {
+      "token": "typography.font-weight.medium",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-weight-medium",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "500"
+      },
+      "value": {
+        "light": "500"
+      },
+      "description": "Medium weight.",
+      "private": true
+    },
+    {
+      "token": "typography.font-weight.semibold",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-weight-semibold",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "600"
+      },
+      "value": {
+        "light": "600"
+      },
+      "description": "Semibold weight.",
+      "private": true
+    },
+    {
+      "token": "typography.font-weight.bold",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-weight-bold",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "700"
+      },
+      "value": {
+        "light": "700"
+      },
+      "description": "Bold weight.",
+      "private": true
+    },
+    {
+      "token": "typography.font-family.sans",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-family-sans",
+      "type": "font-family",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "Geist, sans-serif"
+      },
+      "value": {
+        "light": "Geist, sans-serif"
+      },
+      "description": "Primary sans-serif typeface.",
+      "private": true
+    },
+    {
+      "token": "typography.font-family.mono",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-family-mono",
+      "type": "font-family",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "JetBrains Mono, monospace"
+      },
+      "value": {
+        "light": "JetBrains Mono, monospace"
+      },
+      "description": "Monospace typeface for code and numeric data.",
+      "private": true
+    },
+    {
+      "token": "elevation.light.xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-light-xs",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 1px 2px rgba(0, 0, 0, 0.04)"
+      },
+      "value": {
+        "light": "0 1px 2px rgba(0, 0, 0, 0.04)"
+      },
+      "description": "Minimal elevation, barely visible.",
+      "private": true
+    },
+    {
+      "token": "elevation.light.sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-light-sm",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)"
+      },
+      "value": {
+        "light": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)"
+      },
+      "description": "Small elevation for cards and subtle lifts.",
+      "private": true
+    },
+    {
+      "token": "elevation.light.md",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-light-md",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)"
+      },
+      "value": {
+        "light": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)"
+      },
+      "description": "Medium elevation for dropdowns and popovers.",
+      "private": true
+    },
+    {
+      "token": "elevation.light.lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-light-lg",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)"
+      },
+      "value": {
+        "light": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)"
+      },
+      "description": "Large elevation for modals and dialogs.",
+      "private": true
+    },
+    {
+      "token": "elevation.light.xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-light-xl",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)"
+      },
+      "value": {
+        "light": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)"
+      },
+      "description": "Extra-large elevation for overlay panels.",
+      "private": true
+    },
+    {
+      "token": "elevation.light.2xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-light-2xl",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 25px 50px rgba(0, 0, 0, 0.12)"
+      },
+      "value": {
+        "light": "0 25px 50px rgba(0, 0, 0, 0.12)"
+      },
+      "description": "Maximum elevation for toasts and high-impact overlays.",
+      "private": true
+    },
+    {
+      "token": "elevation.light.inner",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-light-inner",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.05)"
+      },
+      "value": {
+        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.05)"
+      },
+      "description": "Inner shadow for pressed/inset states.",
+      "private": true
+    },
+    {
+      "token": "elevation.dark.xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-dark-xs",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 1px 2px rgba(0, 0, 0, 0.2)"
+      },
+      "value": {
+        "light": "0 1px 2px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Minimal elevation in dark mode.",
+      "private": true
+    },
+    {
+      "token": "elevation.dark.sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-dark-sm",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)"
+      },
+      "value": {
+        "light": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Small elevation in dark mode.",
+      "private": true
+    },
+    {
+      "token": "elevation.dark.md",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-dark-md",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)"
+      },
+      "value": {
+        "light": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)"
+      },
+      "description": "Medium elevation in dark mode.",
+      "private": true
+    },
+    {
+      "token": "elevation.dark.lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-dark-lg",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)"
+      },
+      "value": {
+        "light": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Large elevation in dark mode.",
+      "private": true
+    },
+    {
+      "token": "elevation.dark.xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-dark-xl",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)"
+      },
+      "value": {
+        "light": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Extra-large elevation in dark mode.",
+      "private": true
+    },
+    {
+      "token": "elevation.dark.2xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-dark-2xl",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0 25px 50px rgba(0, 0, 0, 0.5)"
+      },
+      "value": {
+        "light": "0 25px 50px rgba(0, 0, 0, 0.5)"
+      },
+      "description": "Maximum elevation in dark mode.",
+      "private": true
+    },
+    {
+      "token": "elevation.dark.inner",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-elevation-dark-inner",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.3)"
+      },
+      "value": {
+        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.3)"
+      },
+      "description": "Inner shadow in dark mode.",
+      "private": true
+    },
+    {
+      "token": "motion.duration.instant",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-duration-instant",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0ms"
+      },
+      "value": {
+        "light": "0ms"
+      },
+      "description": "Zero duration — immediate state change, not a visual transition.",
+      "private": true
+    },
+    {
+      "token": "motion.duration.fast",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-duration-fast",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "100ms"
+      },
+      "value": {
+        "light": "100ms"
+      },
+      "description": "Fast micro-interactions.",
+      "private": true
+    },
+    {
+      "token": "motion.duration.normal",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-duration-normal",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "200ms"
+      },
+      "value": {
+        "light": "200ms"
+      },
+      "description": "Standard transition duration.",
+      "private": true
+    },
+    {
+      "token": "motion.duration.slow",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-duration-slow",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "300ms"
+      },
+      "value": {
+        "light": "300ms"
+      },
+      "description": "Slow, deliberate transitions.",
+      "private": true
+    },
+    {
+      "token": "motion.duration.slower",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-duration-slower",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "500ms"
+      },
+      "value": {
+        "light": "500ms"
+      },
+      "description": "Slowest transitions for complex animations.",
+      "private": true
+    },
+    {
+      "token": "motion.duration.extra-slow",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-duration-extra-slow",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1000ms"
+      },
+      "value": {
+        "light": "1000ms"
+      },
+      "description": "Extra-slow duration for blink/pulse animations.",
+      "private": true
+    },
+    {
+      "token": "motion.easing.default",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-easing-default",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "value": {
+        "light": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "description": "Standard ease-in-out curve.",
+      "private": true
+    },
+    {
+      "token": "motion.easing.in",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-easing-in",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "cubic-bezier(0.4, 0, 1, 1)"
+      },
+      "value": {
+        "light": "cubic-bezier(0.4, 0, 1, 1)"
+      },
+      "description": "Ease-in: starts slow, ends fast.",
+      "private": true
+    },
+    {
+      "token": "motion.easing.out",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-easing-out",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      "value": {
+        "light": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      "description": "Ease-out: starts fast, ends slow.",
+      "private": true
+    },
+    {
+      "token": "motion.easing.spring",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-motion-easing-spring",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+      },
+      "value": {
+        "light": "cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+      },
+      "description": "Spring overshoot for playful interactions.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-03",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-03",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.03"
+      },
+      "value": {
+        "light": "0.03"
+      },
+      "description": "3% opacity. Embedded literally in the shadow-xl light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-04",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-04",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.04"
+      },
+      "value": {
+        "light": "0.04"
+      },
+      "description": "4% opacity. Embedded literally in the shadow-xs/sm/md/lg light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-05",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-05",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.05"
+      },
+      "value": {
+        "light": "0.05"
+      },
+      "description": "5% opacity. Embedded literally in the shadow-inner light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-07",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-07",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.07"
+      },
+      "value": {
+        "light": "0.07"
+      },
+      "description": "7% opacity. Embedded literally in the shadow-md light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-08",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-08",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.08"
+      },
+      "value": {
+        "light": "0.08"
+      },
+      "description": "8% opacity. Embedded literally in the shadow-sm/lg/xl light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-10",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-10",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.10"
+      },
+      "value": {
+        "light": "0.10"
+      },
+      "description": "10% opacity. Embedded literally in color.white-alpha.10 today. Reserved for a white-alpha token that would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-12",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-12",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.12"
+      },
+      "value": {
+        "light": "0.12"
+      },
+      "description": "12% opacity. Embedded literally in the shadow-2xl light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-15",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-15",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.15"
+      },
+      "value": {
+        "light": "0.15"
+      },
+      "description": "15% opacity. Embedded literally in color.white-alpha.15 today. Reserved for a white-alpha token that would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-18",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-18",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.18"
+      },
+      "value": {
+        "light": "0.18"
+      },
+      "description": "18% opacity. Embedded literally in the shadow-md dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-20",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-20",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.20"
+      },
+      "value": {
+        "light": "0.20"
+      },
+      "description": "20% opacity. Embedded literally in the shadow-xs/sm/lg/xl dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-25",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-25",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.25"
+      },
+      "value": {
+        "light": "0.25"
+      },
+      "description": "25% opacity. Embedded literally in the shadow-md dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-30",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-30",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.30"
+      },
+      "value": {
+        "light": "0.30"
+      },
+      "description": "30% opacity. Embedded literally in the shadow-sm/lg/inner dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-35",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-35",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.35"
+      },
+      "value": {
+        "light": "0.35"
+      },
+      "description": "35% opacity. Embedded literally in the shadow-xl dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-50",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.50"
+      },
+      "value": {
+        "light": "0.50"
+      },
+      "description": "50% opacity, used in shadow-2xl dark and disabled states.",
+      "private": true
+    },
+    {
+      "token": "opacity.0-80",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-opacity-0-80",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.80"
+      },
+      "value": {
+        "light": "0.80"
+      },
+      "description": "80% opacity, used for overlay backdrop.",
+      "private": true
+    },
+    {
+      "token": "zindex.dropdown",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-dropdown",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1000"
+      },
+      "value": {
+        "light": "1000"
+      },
+      "description": "Raw stacking value for the dropdown layer.",
+      "private": true
+    },
+    {
+      "token": "zindex.sticky",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-sticky",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1100"
+      },
+      "value": {
+        "light": "1100"
+      },
+      "description": "Raw stacking value for the sticky layer.",
+      "private": true
+    },
+    {
+      "token": "zindex.fixed",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-fixed",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1200"
+      },
+      "value": {
+        "light": "1200"
+      },
+      "description": "Raw stacking value for the fixed layer.",
+      "private": true
+    },
+    {
+      "token": "zindex.overlay",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-overlay",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1300"
+      },
+      "value": {
+        "light": "1300"
+      },
+      "description": "Raw stacking value for the overlay layer.",
+      "private": true
+    },
+    {
+      "token": "zindex.modal",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-modal",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1400"
+      },
+      "value": {
+        "light": "1400"
+      },
+      "description": "Raw stacking value for the modal layer.",
+      "private": true
+    },
+    {
+      "token": "zindex.popover",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-popover",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1500"
+      },
+      "value": {
+        "light": "1500"
+      },
+      "description": "Raw stacking value for the popover layer.",
+      "private": true
+    },
+    {
+      "token": "zindex.toast",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-toast",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1600"
+      },
+      "value": {
+        "light": "1600"
+      },
+      "description": "Raw stacking value for the toast layer.",
+      "private": true
+    },
+    {
+      "token": "zindex.tooltip",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-zindex-tooltip",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1700"
+      },
+      "value": {
+        "light": "1700"
+      },
+      "description": "Raw stacking value for the tooltip layer.",
+      "private": true
+    },
+    {
+      "token": "breakpoint.sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-breakpoint-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "40rem"
+      },
+      "value": {
+        "light": "40rem"
+      },
+      "description": "Viewport min-width of the `sm:` variant. Equal to Tailwind's default, which the build compiles into media queries.",
+      "private": true
+    },
+    {
+      "token": "breakpoint.md",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-breakpoint-md",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "48rem"
+      },
+      "value": {
+        "light": "48rem"
+      },
+      "description": "Viewport min-width of the `md:` variant. Equal to Tailwind's default, which the build compiles into media queries.",
+      "private": true
+    },
+    {
+      "token": "breakpoint.lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-breakpoint-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "64rem"
+      },
+      "value": {
+        "light": "64rem"
+      },
+      "description": "Viewport min-width of the `lg:` variant. Equal to Tailwind's default, which the build compiles into media queries.",
+      "private": true
+    },
+    {
+      "token": "breakpoint.xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-breakpoint-xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "80rem"
+      },
+      "value": {
+        "light": "80rem"
+      },
+      "description": "Viewport min-width of the `xl:` variant. Equal to Tailwind's default, which the build compiles into media queries.",
+      "private": true
+    },
+    {
+      "token": "breakpoint.2xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-breakpoint-2xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "96rem"
+      },
+      "value": {
+        "light": "96rem"
+      },
+      "description": "Viewport min-width of the `2xl:` variant. Equal to Tailwind's default, which the build compiles into media queries.",
+      "private": true
+    },
+    {
+      "token": "border-width.1",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-border-width-1",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1px"
+      },
+      "value": {
+        "light": "1px"
+      },
+      "description": "Hairline border width.",
+      "private": true
+    },
+    {
+      "token": "border-width.1-5",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-border-width-1-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.5px"
+      },
+      "value": {
+        "light": "1.5px"
+      },
+      "description": "Between hairline and 2px; reads as a solid stroke on small marks.",
+      "private": true
+    },
+    {
+      "token": "color.background.default",
+      "tier": "semantic",
+      "cssVar": "--color-background-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.0}",
+        "dark": "{color.mist.950}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#090b0c"
+      },
+      "description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
+      "docs": {
+        "description": "Surface principale de la page — fond de `<html>` et des conteneurs racines.",
+        "do": "Utiliser comme fond de la page racine et des containers principaux (`<body>`, `<main>`).",
+        "dont": "Ne pas utiliser pour les cards, popovers ou surfaces élevées — préférer `color.background.subtle` ou `color.background.elevated`."
+      }
+    },
+    {
+      "token": "color.background.subtle",
+      "tier": "semantic",
+      "cssVar": "--color-background-subtle",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.100}",
+        "dark": "{color.mist.800}"
+      },
+      "value": {
+        "light": "#f1f3f3",
+        "dark": "#22292b"
+      },
+      "description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
+      "docs": {
+        "description": "Surface secondaire légèrement atténuée pour créer une hiérarchie visuelle.",
+        "do": "Utiliser pour les cards, zones muted, sidebars secondaires, panneaux internes.",
+        "dont": "Ne pas utiliser pour le fond principal de la page."
+      }
+    },
+    {
+      "token": "color.background.elevated",
+      "tier": "semantic",
+      "cssVar": "--color-background-elevated",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.0}",
+        "dark": "{color.mist.900}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#161b1d"
+      },
+      "description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
+      "docs": {
+        "description": "Surface flottante au-dessus du contenu principal.",
+        "do": "Utiliser pour popovers, dropdowns, dialogs, tooltips à fond clair.",
+        "dont": "Ne pas utiliser pour les cards inline — elles ne sont pas \"élevées\" au sens Z."
+      }
+    },
+    {
+      "token": "color.background.inverse",
+      "tier": "semantic",
+      "cssVar": "--color-background-inverse",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.950}",
+        "dark": "{color.mist.0}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#ffffff"
+      },
+      "description": "Inverted surface for contrast callouts. Not for general-purpose backgrounds.",
+      "docs": {
+        "description": "Surface inversée pour créer un fort contraste avec le fond principal.",
+        "do": "Utiliser pour les tooltips sombres, les badges inversés, les bandeaux d'alerte.",
+        "dont": "Ne pas utiliser comme fond de page général — réservé aux surfaces ponctuelles inversées."
+      }
+    },
+    {
+      "token": "color.text.default",
+      "tier": "semantic",
+      "cssVar": "--color-text-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.950}",
+        "dark": "{color.mist.50}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "Primary body and heading text. Not for secondary, placeholder, or disabled text.",
+      "docs": {
+        "description": "Couleur de texte principale pour le corps et les headings.",
+        "do": "Utiliser pour tout texte de contenu principal, titres, labels importants.",
+        "dont": "Ne pas réduire l'opacité pour simuler un texte secondaire — utiliser `color.text.subtle`."
+      }
+    },
+    {
+      "token": "color.text.subtle",
+      "tier": "semantic",
+      "cssVar": "--color-text-subtle",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.600}",
+        "dark": "{color.mist.400}"
+      },
+      "value": {
+        "light": "#607175",
+        "dark": "#9ca8ab"
+      },
+      "description": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content.",
+      "docs": {
+        "description": "Texte secondaire, captions, helper text, métadonnées.",
+        "do": "Utiliser pour les labels de champs, les descriptions de formulaire, les timestamps.",
+        "dont": "Ne pas utiliser pour le contenu de corps principal — le contraste est insuffisant pour la lecture longue."
+      }
+    },
+    {
+      "token": "color.text.bold",
+      "tier": "semantic",
+      "cssVar": "--color-text-bold",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.950}",
+        "dark": "{color.mist.50}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text.",
+      "docs": {
+        "description": "Texte emphatique à fort contraste — utilisé pour les emphases dans des contextes où `text.default` ne suffit pas.",
+        "do": "Utiliser pour les emphases dans des zones où le contexte visuel est complexe.",
+        "dont": "Ne pas utiliser comme substitut à `text.default` pour le corps standard."
+      }
+    },
+    {
+      "token": "color.text.inverse",
+      "tier": "semantic",
+      "cssVar": "--color-text-inverse",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.0}",
+        "dark": "{color.mist.950}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#090b0c"
+      },
+      "description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
+      "docs": {
+        "description": "Texte sur surface inverse (fond sombre en light, fond clair en dark).",
+        "do": "Utiliser uniquement posé sur `color.background.inverse`.",
+        "dont": "Ne pas utiliser sur surfaces standard — le contraste sera insuffisant."
+      }
+    },
+    {
+      "token": "color.text.action.default",
+      "tier": "semantic",
+      "cssVar": "--color-text-action-default",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.600}",
+        "dark": "{color.violet.400}"
+      },
+      "value": {
+        "light": "#432dd7",
+        "dark": "#6e6cff"
+      },
+      "description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
+      "docs": {
+        "description": "Texte d'action primaire — liens, labels de navigation actifs.",
+        "do": "Utiliser pour les liens textuels et les labels exprimant une action cliquable.",
+        "dont": "Ne pas utiliser pour le texte de corps générique — réservé aux éléments actionnables."
+      }
+    },
+    {
+      "token": "color.text.action.on",
+      "tier": "semantic",
+      "cssVar": "--color-text-action-on",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.50}",
+        "dark": "{color.violet.50}"
+      },
+      "value": {
+        "light": "#eef2ff",
+        "dark": "#eef2ff"
+      },
+      "description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
+      "docs": {
+        "description": "Texte posé sur un fond `color.action.background.default`.",
+        "do": "Utiliser pour le label d'un bouton primaire.",
+        "dont": "Ne pas utiliser sur surfaces neutres — contraste insuffisant sur fond clair."
+      }
+    },
+    {
+      "token": "color.text.destructive.default",
+      "tier": "semantic",
+      "cssVar": "--color-text-destructive-default",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.red.600}",
+        "dark": "{color.red.500}"
+      },
+      "value": {
+        "light": "#e7000b",
+        "dark": "#ff6467"
+      },
+      "description": "Error, danger, or destructive action text. Not for general warning or informational text.",
+      "docs": {
+        "description": "Texte d'état destructif ou d'erreur.",
+        "do": "Utiliser pour les messages de validation d'erreur, les confirmations de suppression.",
+        "dont": "Ne pas utiliser pour les avertissements (warning) ou les informations — réservé aux erreurs critiques."
+      }
+    },
+    {
+      "token": "color.border.default",
+      "tier": "semantic",
+      "cssVar": "--color-border-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.200}",
+        "dark": "{color.white-alpha.10}"
+      },
+      "value": {
+        "light": "#e3e7e8",
+        "dark": "rgba(255, 255, 255, 0.1)"
+      },
+      "description": "Standard dividers and component outlines. Not for input fields or focus rings.",
+      "docs": {
+        "description": "Bordure standard pour les séparateurs et contours de composants.",
+        "do": "Utiliser pour les dividers entre sections, les contours de cards.",
+        "dont": "Ne pas utiliser pour les champs de formulaire — préférer `color.border.input`."
+      }
+    },
+    {
+      "token": "color.border.subtle",
+      "tier": "semantic",
+      "cssVar": "--color-border-subtle",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.200}",
+        "dark": "{color.white-alpha.10}"
+      },
+      "value": {
+        "light": "#e3e7e8",
+        "dark": "rgba(255, 255, 255, 0.1)"
+      },
+      "description": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders.",
+      "docs": {
+        "description": "Bordure discrète à faible poids visuel.",
+        "do": "Utiliser pour les séparateurs internes de listes, les divisions légères.",
+        "dont": "Ne pas utiliser sur des composants interactifs nécessitant une bordure visible."
+      }
+    },
+    {
+      "token": "color.border.input",
+      "tier": "semantic",
+      "cssVar": "--color-border-input",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.200}",
+        "dark": "{color.white-alpha.15}"
+      },
+      "value": {
+        "light": "#e3e7e8",
+        "dark": "rgba(255, 255, 255, 0.15)"
+      },
+      "description": "Border for form input fields. Not for decorative dividers or layout borders.",
+      "docs": {
+        "description": "Bordure spécifique aux champs de formulaire.",
+        "do": "Utiliser pour toutes les bordures de `<input>`, `<select>`, `<textarea>`, `<checkbox>`.",
+        "dont": "Ne pas utiliser pour les séparateurs décoratifs — réservé aux contrôles de formulaire."
+      }
+    },
+    {
+      "token": "color.border.focus",
+      "tier": "semantic",
+      "cssVar": "--color-border-focus",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.500}",
+        "dark": "{color.mist.500}"
+      },
+      "value": {
+        "light": "#67787c",
+        "dark": "#67787c"
+      },
+      "description": "Focus ring outline for keyboard accessibility. Not for resting or hover states.",
+      "docs": {
+        "description": "Focus ring pour l'accessibilité clavier (`:focus-visible`).",
+        "do": "Utiliser uniquement pour l'état `:focus-visible` des éléments interactifs.",
+        "dont": "Ne jamais supprimer le focus ring — c'est une exigence d'accessibilité WCAG 2.4.7."
+      }
+    },
+    {
+      "token": "color.icon.default",
+      "tier": "semantic",
+      "cssVar": "--color-icon-default",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.950}",
+        "dark": "{color.mist.50}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "Standard icon fill. Not for icons in branded or destructive contexts.",
+      "docs": {
+        "description": "Couleur d'icône standard en contexte neutre.",
+        "do": "Utiliser pour les icônes de navigation, d'action standard, de contenu.",
+        "dont": "Ne pas utiliser pour les icônes dans des boutons primaires — utiliser `color.icon.action`."
+      }
+    },
+    {
+      "token": "color.icon.subtle",
+      "tier": "semantic",
+      "cssVar": "--color-icon-subtle",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.500}",
+        "dark": "{color.mist.400}"
+      },
+      "value": {
+        "light": "#67787c",
+        "dark": "#9ca8ab"
+      },
+      "description": "Muted/secondary icon fill. Not for primary interactive icons.",
+      "docs": {
+        "description": "Icône secondaire, décorative ou atténuée.",
+        "do": "Utiliser pour les icônes d'état, les indicateurs de chargement, les icônes de métadonnées.",
+        "dont": "Ne pas utiliser pour les icônes d'action principale."
+      }
+    },
+    {
+      "token": "color.icon.action",
+      "tier": "semantic",
+      "cssVar": "--color-icon-action",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.50}",
+        "dark": "{color.violet.50}"
+      },
+      "value": {
+        "light": "#eef2ff",
+        "dark": "#eef2ff"
+      },
+      "description": "Icon on a primary action background. Not for icons on neutral surfaces.",
+      "docs": {
+        "description": "Icône posée sur un fond d'action primaire.",
+        "do": "Utiliser pour les icônes à l'intérieur de boutons primaires ou de badges d'action.",
+        "dont": "Ne pas utiliser sur fond neutre ou clair."
+      }
+    },
+    {
+      "token": "color.action.background.default",
+      "tier": "semantic",
+      "cssVar": "--color-action-background-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.600}",
+        "dark": "{color.violet.700}"
+      },
+      "value": {
+        "light": "#432dd7",
+        "dark": "#372aac"
+      },
+      "description": "Primary call-to-action button/element background. Not for secondary or ghost variants.",
+      "docs": {
+        "description": "Fond du composant CTA primaire.",
+        "do": "Utiliser pour le fond des boutons primaires et des éléments CTA.",
+        "dont": "Ne pas utiliser pour les variantes secondary, ghost ou outline — ces variantes n'ont pas de fond coloré."
+      }
+    },
+    {
+      "token": "color.action.background.foreground",
+      "tier": "semantic",
+      "cssVar": "--color-action-background-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.50}",
+        "dark": "{color.violet.50}"
+      },
+      "value": {
+        "light": "#eef2ff",
+        "dark": "#eef2ff"
+      },
+      "description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
+      "docs": {
+        "description": "Texte/icône sur fond d'action primaire.",
+        "do": "Toujours associer avec `color.action.background.default` pour le texte d'un bouton primaire.",
+        "dont": "Ne pas utiliser sur fond neutre ou clair."
+      }
+    },
+    {
+      "token": "color.feedback.error.default",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-error-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.red.600}",
+        "dark": "{color.red.500}"
+      },
+      "value": {
+        "light": "#e7000b",
+        "dark": "#ff6467"
+      },
+      "description": "Error state color for backgrounds, icons, and borders. Not for warnings or success states.",
+      "docs": {
+        "description": "Couleur d'état d'erreur — fond, icône, bordure.",
+        "do": "Utiliser pour les messages de validation, les bordures de champs invalides, les icônes d'erreur.",
+        "dont": "Ne pas utiliser pour les avertissements ou les états de succès."
+      }
+    },
+    {
+      "token": "color.feedback.error.foreground",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-error-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.0}",
+        "dark": "{color.mist.950}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#090b0c"
+      },
+      "description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
+      "docs": {
+        "description": "Texte et icônes posés **sur** une surface d'erreur pleine.",
+        "do": "Utiliser dès qu'un fond `bg-destructive` plein porte du texte ou une icône.",
+        "dont": "Ne jamais poser `color.text.default` ni `text-white` sur une surface d'erreur — en dark, blanc sur red.500 tombe à 2.89:1."
+      }
+    },
+    {
+      "token": "color.chart.1",
+      "tier": "semantic",
+      "cssVar": "--color-chart-1",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.600}",
+        "dark": "{color.violet.400}"
+      },
+      "value": {
+        "light": "#432dd7",
+        "dark": "#6e6cff"
+      },
+      "description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.2",
+      "tier": "semantic",
+      "cssVar": "--color-chart-2",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.blue.600}",
+        "dark": "{color.blue.300}"
+      },
+      "value": {
+        "light": "#438fbd",
+        "dark": "#8fd6fa"
+      },
+      "description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.3",
+      "tier": "semantic",
+      "cssVar": "--color-chart-3",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.amber.600}",
+        "dark": "{color.yellow.200}"
+      },
+      "value": {
+        "light": "#af8526",
+        "dark": "#e5e747"
+      },
+      "description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.4",
+      "tier": "semantic",
+      "cssVar": "--color-chart-4",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.plum.800}",
+        "dark": "{color.plum.500}"
+      },
+      "value": {
+        "light": "#4d2761",
+        "dark": "#9b5f7c"
+      },
+      "description": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.5",
+      "tier": "semantic",
+      "cssVar": "--color-chart-5",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.amber.800}",
+        "dark": "{color.amber.500}"
+      },
+      "value": {
+        "light": "#734e00",
+        "dark": "#c89005"
+      },
+      "description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.sequential.1",
+      "tier": "semantic",
+      "cssVar": "--color-chart-sequential-1",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.green.200}"
+      },
+      "value": {
+        "light": "#bbf451"
+      },
+      "description": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.sequential.2",
+      "tier": "semantic",
+      "cssVar": "--color-chart-sequential-2",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.green.300}"
+      },
+      "value": {
+        "light": "#7ccf00"
+      },
+      "description": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.sequential.3",
+      "tier": "semantic",
+      "cssVar": "--color-chart-sequential-3",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.green.400}"
+      },
+      "value": {
+        "light": "#5ea500"
+      },
+      "description": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.sequential.4",
+      "tier": "semantic",
+      "cssVar": "--color-chart-sequential-4",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.green.500}"
+      },
+      "value": {
+        "light": "#497d00"
+      },
+      "description": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.chart.sequential.5",
+      "tier": "semantic",
+      "cssVar": "--color-chart-sequential-5",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.green.600}"
+      },
+      "value": {
+        "light": "#3c6300"
+      },
+      "description": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
+      "docs": {
+        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
+        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
+        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+      }
+    },
+    {
+      "token": "color.sidebar.background",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-background",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.50}",
+        "dark": "{color.mist.900}"
+      },
+      "value": {
+        "light": "#f9fbfb",
+        "dark": "#161b1d"
+      },
+      "description": "Sidebar panel surface. Not for the main content area or popovers.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "mist.900"
+      }
+    },
+    {
+      "token": "color.sidebar.foreground",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.950}",
+        "dark": "{color.mist.50}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "mist.50"
+      }
+    },
+    {
+      "token": "color.sidebar.border",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-border",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.200}",
+        "dark": "{color.white-alpha.10}"
+      },
+      "value": {
+        "light": "#e3e7e8",
+        "dark": "rgba(255, 255, 255, 0.1)"
+      },
+      "description": "Sidebar internal divider/border. Not for content-area borders.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "white-alpha.10"
+      }
+    },
+    {
+      "token": "color.sidebar.ring",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-ring",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.500}",
+        "dark": "{color.mist.500}"
+      },
+      "value": {
+        "light": "#67787c",
+        "dark": "#67787c"
+      },
+      "description": "Focus ring within the sidebar. Not for main content focus rings.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "mist.500"
+      }
+    },
+    {
+      "token": "color.sidebar.primary.default",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-primary-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.550}",
+        "dark": "{color.violet.500}"
+      },
+      "value": {
+        "light": "#4f39f6",
+        "dark": "#615fff"
+      },
+      "description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "violet.500"
+      }
+    },
+    {
+      "token": "color.sidebar.primary.on",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-primary-on",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.violet.50}",
+        "dark": "{color.mist.0}"
+      },
+      "value": {
+        "light": "#eef2ff",
+        "dark": "#ffffff"
+      },
+      "description": "Text on top of the sidebar primary active item. Not for inactive item text.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "mist.0"
+      }
+    },
+    {
+      "token": "color.sidebar.accent.default",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-accent-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.100}",
+        "dark": "{color.mist.800}"
+      },
+      "value": {
+        "light": "#f1f3f3",
+        "dark": "#22292b"
+      },
+      "description": "Hovered or secondary sidebar item background. Not for the active primary item.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "mist.800"
+      }
+    },
+    {
+      "token": "color.sidebar.accent.foreground",
+      "tier": "semantic",
+      "cssVar": "--color-sidebar-accent-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.900}",
+        "dark": "{color.mist.50}"
+      },
+      "value": {
+        "light": "#161b1d",
+        "dark": "#f9fbfb"
+      },
+      "description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
+      "docs": {
+        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
+        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "tailwind": "mist.50"
+      }
+    },
+    {
+      "token": "color.static.white",
+      "tier": "semantic",
+      "cssVar": "--color-static-white",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.mist.0}",
+        "dark": "{color.mist.0}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#ffffff"
+      },
+      "description": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies.",
+      "docs": {
+        "tailwind": "bg-white, text-white"
+      }
+    },
+    {
+      "token": "color.static.black",
+      "tier": "semantic",
+      "cssVar": "--color-static-black",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{color.black}",
+        "dark": "{color.black}"
+      },
+      "value": {
+        "light": "#000000",
+        "dark": "#000000"
+      },
+      "description": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces.",
+      "docs": {
+        "tailwind": "bg-black/10"
+      }
+    },
+    {
+      "token": "space.component.xs",
+      "tier": "semantic",
+      "cssVar": "--space-component-xs",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.1}"
+      },
+      "value": {
+        "light": "0.25rem"
+      },
+      "description": "Extra-small component padding/gap (4px). Not for layout or section spacing.",
+      "docs": {
+        "do": "Gap entre icône et label dans un bouton compact, padding interne d'un badge.",
+        "dont": "Ne pas utiliser pour des espacements de layout."
+      }
+    },
+    {
+      "token": "space.component.sm",
+      "tier": "semantic",
+      "cssVar": "--space-component-sm",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.2}"
+      },
+      "value": {
+        "light": "0.5rem"
+      },
+      "description": "Small component padding/gap (8px). Not for layout or section spacing.",
+      "docs": {
+        "do": "Padding d'un bouton compact, gap d'une liste serrée.",
+        "dont": "Ne pas utiliser pour espacer des sections de page."
+      }
+    },
+    {
+      "token": "space.component.md",
+      "tier": "semantic",
+      "cssVar": "--space-component-md",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.4}"
+      },
+      "value": {
+        "light": "1rem"
+      },
+      "description": "Medium component padding/gap (16px). Not for layout or section spacing.",
+      "docs": {
+        "do": "Padding standard d'une card, gap entre boutons d'un groupe.",
+        "dont": "Ne pas utiliser pour le gap entre sections de page."
+      }
+    },
+    {
+      "token": "space.component.lg",
+      "tier": "semantic",
+      "cssVar": "--space-component-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.6}"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "Large component padding/gap (24px). Not for layout or section spacing.",
+      "docs": {
+        "do": "Padding interne d'un dialog, gap entre champs de formulaire.",
+        "dont": "Ne pas confondre avec `space.layout.page-padding` (même valeur, contexte différent)."
+      }
+    },
+    {
+      "token": "space.component.xl",
+      "tier": "semantic",
+      "cssVar": "--space-component-xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.8}"
+      },
+      "value": {
+        "light": "2rem"
+      },
+      "description": "Extra-large component padding/gap (32px). Not for layout or section spacing.",
+      "docs": {
+        "do": "Padding d'une section de card large, espacement entre groupes de formulaire.",
+        "dont": "Ne pas utiliser pour les espacements entre éléments inline proches."
+      }
+    },
+    {
+      "token": "space.focus-ring-width",
+      "tier": "semantic",
+      "cssVar": "--space-focus-ring-width",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.focus-ring-width}"
+      },
+      "value": {
+        "light": "2px"
+      },
+      "description": "Width of the focus ring indicator (2px). Use for all focus-visible ring styles."
+    },
+    {
+      "token": "space.layout.page-padding",
+      "tier": "semantic",
+      "cssVar": "--space-layout-page-padding",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.page}"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "Horizontal padding for the main page container. Not for component-level spacing.",
+      "docs": {
+        "do": "Padding horizontal du conteneur de page racine.",
+        "dont": "Ne pas appliquer sur des composants internes."
+      }
+    },
+    {
+      "token": "space.layout.section-gap",
+      "tier": "semantic",
+      "cssVar": "--space-layout-section-gap",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.section}"
+      },
+      "value": {
+        "light": "4rem"
+      },
+      "description": "Vertical gap between major page sections. Not for component-level spacing.",
+      "docs": {
+        "do": "Espace vertical entre sections majeures d'une page.",
+        "dont": "Ne pas utiliser entre composants d'une même section."
+      }
+    },
+    {
+      "token": "space.layout.content-sm",
+      "tier": "semantic",
+      "cssVar": "--space-layout-content-sm",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.content-sm}"
+      },
+      "value": {
+        "light": "42rem"
+      },
+      "description": "Narrow content column max-width (42rem). Not for full-width or wide layouts.",
+      "docs": {
+        "do": "`max-w-[var(--space-layout-content-sm)]` pour les pages editoriales.",
+        "dont": "Ne pas utiliser comme valeur de padding."
+      }
+    },
+    {
+      "token": "space.layout.content-default",
+      "tier": "semantic",
+      "cssVar": "--space-layout-content-default",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.content}"
+      },
+      "value": {
+        "light": "64rem"
+      },
+      "description": "Default content column max-width (64rem). Not for narrow or wide layouts.",
+      "docs": {
+        "do": "Conteneur de contenu principal de la majorité des pages.",
+        "dont": "Ne pas dépasser pour les layouts de contenu standard."
+      }
+    },
+    {
+      "token": "space.layout.content-lg",
+      "tier": "semantic",
+      "cssVar": "--space-layout-content-lg",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.content-lg}"
+      },
+      "value": {
+        "light": "80rem"
+      },
+      "description": "Wide content column max-width (80rem). Not for narrow or default layouts.",
+      "docs": {
+        "do": "Dashboards, tableaux de données, layouts avec plusieurs colonnes.",
+        "dont": "Ne pas utiliser pour les pages de contenu éditorial."
+      }
+    },
+    {
+      "token": "space.layout.sidebar",
+      "tier": "semantic",
+      "cssVar": "--space-layout-sidebar",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.sidebar}"
+      },
+      "value": {
+        "light": "16rem"
+      },
+      "description": "Default sidebar width (16rem). Use for the main navigation sidebar."
+    },
+    {
+      "token": "space.layout.sidebar-mobile",
+      "tier": "semantic",
+      "cssVar": "--space-layout-sidebar-mobile",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.sidebar-mobile}"
+      },
+      "value": {
+        "light": "18rem"
+      },
+      "description": "Sidebar width on mobile viewports (18rem). Slightly wider for touch targets."
+    },
+    {
+      "token": "space.layout.sidebar-icon",
+      "tier": "semantic",
+      "cssVar": "--space-layout-sidebar-icon",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{space.12}"
+      },
+      "value": {
+        "light": "3rem"
+      },
+      "description": "Sidebar width in icon-only/collapsed mode (3rem)."
+    },
+    {
+      "token": "typography.size.xs",
+      "tier": "semantic",
+      "cssVar": "--typography-size-xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.xs}"
+      },
+      "value": {
+        "light": "0.75rem"
+      },
+      "description": "Extra-small text size (12px). Use for labels, badges, captions.",
+      "docs": {
+        "tailwind": "text-xs"
+      }
+    },
+    {
+      "token": "typography.size.sm",
+      "tier": "semantic",
+      "cssVar": "--typography-size-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.sm}"
+      },
+      "value": {
+        "light": "0.875rem"
+      },
+      "description": "Small text size (14px). Use for secondary content and UI labels.",
+      "docs": {
+        "tailwind": "text-sm"
+      }
+    },
+    {
+      "token": "typography.size.base",
+      "tier": "semantic",
+      "cssVar": "--typography-size-base",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.base}"
+      },
+      "value": {
+        "light": "1rem"
+      },
+      "description": "Default body text size (16px). Use for main readable content.",
+      "docs": {
+        "tailwind": "text-base"
+      }
+    },
+    {
+      "token": "typography.size.lg",
+      "tier": "semantic",
+      "cssVar": "--typography-size-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.lg}"
+      },
+      "value": {
+        "light": "1.125rem"
+      },
+      "description": "Large text size (18px). Use for featured body text.",
+      "docs": {
+        "tailwind": "text-lg"
+      }
+    },
+    {
+      "token": "typography.size.xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.xl}"
+      },
+      "value": {
+        "light": "1.25rem"
+      },
+      "description": "XL text (20px). Use for section headings.",
+      "docs": {
+        "tailwind": "text-xl"
+      }
+    },
+    {
+      "token": "typography.size.2xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-2xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.2xl}"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "2XL text (24px). Use for page-level headings.",
+      "docs": {
+        "tailwind": "text-2xl"
+      }
+    },
+    {
+      "token": "typography.size.3xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-3xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.3xl}"
+      },
+      "value": {
+        "light": "1.875rem"
+      },
+      "description": "3XL text (30px). Use for hero or primary headings.",
+      "docs": {
+        "tailwind": "text-3xl"
+      }
+    },
+    {
+      "token": "typography.size.4xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-4xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.size.4xl}"
+      },
+      "value": {
+        "light": "2.25rem"
+      },
+      "description": "4XL text (36px). Use for display headings only.",
+      "docs": {
+        "tailwind": "text-4xl"
+      }
+    },
+    {
+      "token": "typography.line-height.tight",
+      "tier": "semantic",
+      "cssVar": "--typography-line-height-tight",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.line-height.tight}"
+      },
+      "value": {
+        "light": "1.25"
+      },
+      "description": "Tight line height for headings. Not for paragraph text.",
+      "docs": {
+        "tailwind": "leading-tight"
+      }
+    },
+    {
+      "token": "typography.line-height.snug",
+      "tier": "semantic",
+      "cssVar": "--typography-line-height-snug",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.line-height.snug}"
+      },
+      "value": {
+        "light": "1.375"
+      },
+      "description": "Snug line height. Not for long-form reading content.",
+      "docs": {
+        "tailwind": "leading-snug"
+      }
+    },
+    {
+      "token": "typography.line-height.normal",
+      "tier": "semantic",
+      "cssVar": "--typography-line-height-normal",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.line-height.normal}"
+      },
+      "value": {
+        "light": "1.5"
+      },
+      "description": "Default line height for body text.",
+      "docs": {
+        "tailwind": "leading-normal"
+      }
+    },
+    {
+      "token": "typography.line-height.relaxed",
+      "tier": "semantic",
+      "cssVar": "--typography-line-height-relaxed",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.line-height.relaxed}"
+      },
+      "value": {
+        "light": "1.625"
+      },
+      "description": "Relaxed line height for improved readability in long-form content.",
+      "docs": {
+        "tailwind": "leading-relaxed"
+      }
+    },
+    {
+      "token": "typography.line-height.loose",
+      "tier": "semantic",
+      "cssVar": "--typography-line-height-loose",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.line-height.loose}"
+      },
+      "value": {
+        "light": "2"
+      },
+      "description": "Loose line height for highly spaced text. Not for dense UIs.",
+      "docs": {
+        "tailwind": "leading-loose"
+      }
+    },
+    {
+      "token": "typography.letter-spacing.tight",
+      "tier": "semantic",
+      "cssVar": "--typography-letter-spacing-tight",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.letter-spacing.tight}"
+      },
+      "value": {
+        "light": "-0.025em"
+      },
+      "description": "Tight letter spacing for large headings. Not for body text.",
+      "docs": {
+        "tailwind": "tracking-tight"
+      }
+    },
+    {
+      "token": "typography.letter-spacing.normal",
+      "tier": "semantic",
+      "cssVar": "--typography-letter-spacing-normal",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.letter-spacing.normal}"
+      },
+      "value": {
+        "light": "0em"
+      },
+      "description": "Default letter spacing. Use as baseline.",
+      "docs": {
+        "tailwind": "tracking-normal"
+      }
+    },
+    {
+      "token": "typography.letter-spacing.wide",
+      "tier": "semantic",
+      "cssVar": "--typography-letter-spacing-wide",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.letter-spacing.wide}"
+      },
+      "value": {
+        "light": "0.025em"
+      },
+      "description": "Wide letter spacing for small UI labels.",
+      "docs": {
+        "tailwind": "tracking-wide"
+      }
+    },
+    {
+      "token": "typography.letter-spacing.wider",
+      "tier": "semantic",
+      "cssVar": "--typography-letter-spacing-wider",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.letter-spacing.wider}"
+      },
+      "value": {
+        "light": "0.05em"
+      },
+      "description": "Wider letter spacing for all-caps or overline text.",
+      "docs": {
+        "tailwind": "tracking-wider"
+      }
+    },
+    {
+      "token": "typography.font-weight.normal",
+      "tier": "semantic",
+      "cssVar": "--typography-font-weight-normal",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.font-weight.normal}"
+      },
+      "value": {
+        "light": "400"
+      },
+      "description": "Normal weight for body text.",
+      "docs": {
+        "tailwind": "font-normal"
+      }
+    },
+    {
+      "token": "typography.font-weight.medium",
+      "tier": "semantic",
+      "cssVar": "--typography-font-weight-medium",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.font-weight.medium}"
+      },
+      "value": {
+        "light": "500"
+      },
+      "description": "Medium weight for UI labels and buttons.",
+      "docs": {
+        "tailwind": "font-medium"
+      }
+    },
+    {
+      "token": "typography.font-weight.semibold",
+      "tier": "semantic",
+      "cssVar": "--typography-font-weight-semibold",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.font-weight.semibold}"
+      },
+      "value": {
+        "light": "600"
+      },
+      "description": "Semibold for sub-headings and emphasis.",
+      "docs": {
+        "tailwind": "font-semibold"
+      }
+    },
+    {
+      "token": "typography.font-weight.bold",
+      "tier": "semantic",
+      "cssVar": "--typography-font-weight-bold",
+      "type": "font-weight",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.font-weight.bold}"
+      },
+      "value": {
+        "light": "700"
+      },
+      "description": "Bold for headings and strong emphasis.",
+      "docs": {
+        "tailwind": "font-bold"
+      }
+    },
+    {
+      "token": "typography.font-family.sans",
+      "tier": "semantic",
+      "cssVar": "--typography-font-family-sans",
+      "type": "font-family",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.font-family.sans}"
+      },
+      "value": {
+        "light": "Geist, sans-serif"
+      },
+      "description": "Primary sans-serif typeface for UI text.",
+      "docs": {
+        "do": "Usage optionnel pour le contenu éditorial.",
+        "dont": "Ne pas utiliser comme police principale — le projet utilise `font-mono` par défaut."
+      }
+    },
+    {
+      "token": "typography.font-family.mono",
+      "tier": "semantic",
+      "cssVar": "--typography-font-family-mono",
+      "type": "font-family",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{typography.font-family.mono}"
+      },
+      "value": {
+        "light": "JetBrains Mono, monospace"
+      },
+      "description": "Monospace typeface for code, numbers, and technical content.",
+      "docs": {
+        "do": "Police par défaut de tous les composants UI.",
+        "dont": "Ne pas surcharger sans décision de l'équipe design."
+      }
+    },
+    {
+      "token": "radius.none",
+      "tier": "semantic",
+      "cssVar": "--radius-none",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.none}"
+      },
+      "value": {
+        "light": "0rem"
+      },
+      "description": "Zero radius — square corners. Use for full-bleed or table elements.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-none"
+      }
+    },
+    {
+      "token": "radius.xs",
+      "tier": "semantic",
+      "cssVar": "--radius-xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.xs}"
+      },
+      "value": {
+        "light": "0.25rem"
+      },
+      "description": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-xs"
+      }
+    },
+    {
+      "token": "radius.sm",
+      "tier": "semantic",
+      "cssVar": "--radius-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.sm}"
+      },
+      "value": {
+        "light": "0.375rem"
+      },
+      "description": "Small rounding (0.6× base). Use for inputs, small buttons.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-sm"
+      }
+    },
+    {
+      "token": "radius.md",
+      "tier": "semantic",
+      "cssVar": "--radius-md",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.md}"
+      },
+      "value": {
+        "light": "0.5rem"
+      },
+      "description": "Medium rounding (0.8× base). Use for default buttons and form controls.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-md"
+      }
+    },
+    {
+      "token": "radius.lg",
+      "tier": "semantic",
+      "cssVar": "--radius-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.lg}"
+      },
+      "value": {
+        "light": "0.625rem"
+      },
+      "description": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-lg"
+      }
+    },
+    {
+      "token": "radius.xl",
+      "tier": "semantic",
+      "cssVar": "--radius-xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.xl}"
+      },
+      "value": {
+        "light": "0.875rem"
+      },
+      "description": "Larger rounding (1.4× base). Use for modals and prominent containers.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-xl"
+      }
+    },
+    {
+      "token": "radius.2xl",
+      "tier": "semantic",
+      "cssVar": "--radius-2xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.2xl}"
+      },
+      "value": {
+        "light": "1.125rem"
+      },
+      "description": "Extra-large rounding (1.8× base). Use for floating panels.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-2xl"
+      }
+    },
+    {
+      "token": "radius.3xl",
+      "tier": "semantic",
+      "cssVar": "--radius-3xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.3xl}"
+      },
+      "value": {
+        "light": "1.375rem"
+      },
+      "description": "Very large rounding (2.2× base). Use sparingly for decorative containers.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-3xl"
+      }
+    },
+    {
+      "token": "radius.4xl",
+      "tier": "semantic",
+      "cssVar": "--radius-4xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.4xl}"
+      },
+      "value": {
+        "light": "1.625rem"
+      },
+      "description": "Maximum rounding (2.6× base). Use only for hero cards or large chips.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-4xl"
+      }
+    },
+    {
+      "token": "radius.full",
+      "tier": "semantic",
+      "cssVar": "--radius-full",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{radius.full}"
+      },
+      "value": {
+        "light": "9999px"
+      },
+      "description": "Pill/full rounding. Use for pills, avatars, toggles.",
+      "docs": {
+        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
+        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "tailwind": "rounded-full"
+      }
+    },
+    {
+      "token": "elevation.xs",
+      "tier": "semantic",
+      "cssVar": "--elevation-xs",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{elevation.light.xs}",
+        "dark": "{elevation.dark.xs}"
+      },
+      "value": {
+        "light": "0 1px 2px rgba(0, 0, 0, 0.04)",
+        "dark": "0 1px 2px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Minimal lift for interactive elements. Not for decorative purposes.",
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "tailwind": "shadow-xs"
+      }
+    },
+    {
+      "token": "elevation.sm",
+      "tier": "semantic",
+      "cssVar": "--elevation-sm",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{elevation.light.sm}",
+        "dark": "{elevation.dark.sm}"
+      },
+      "value": {
+        "light": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)",
+        "dark": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Small lift for cards and hover states. Not for fixed navigation.",
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "tailwind": "shadow-sm"
+      }
+    },
+    {
+      "token": "elevation.md",
+      "tier": "semantic",
+      "cssVar": "--elevation-md",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{elevation.light.md}",
+        "dark": "{elevation.dark.md}"
+      },
+      "value": {
+        "light": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)",
+        "dark": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)"
+      },
+      "description": "Medium elevation for dropdowns and context menus. Not for inline content.",
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "tailwind": "shadow-md"
+      }
+    },
+    {
+      "token": "elevation.lg",
+      "tier": "semantic",
+      "cssVar": "--elevation-lg",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{elevation.light.lg}",
+        "dark": "{elevation.dark.lg}"
+      },
+      "value": {
+        "light": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)",
+        "dark": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Large elevation for modals and side panels. Not for standard cards.",
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "tailwind": "shadow-lg"
+      }
+    },
+    {
+      "token": "elevation.xl",
+      "tier": "semantic",
+      "cssVar": "--elevation-xl",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{elevation.light.xl}",
+        "dark": "{elevation.dark.xl}"
+      },
+      "value": {
+        "light": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)",
+        "dark": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)"
+      },
+      "description": "Extra-large elevation for full overlay panels. Not for inline components.",
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "tailwind": "shadow-xl"
+      }
+    },
+    {
+      "token": "elevation.2xl",
+      "tier": "semantic",
+      "cssVar": "--elevation-2xl",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{elevation.light.2xl}",
+        "dark": "{elevation.dark.2xl}"
+      },
+      "value": {
+        "light": "0 25px 50px rgba(0, 0, 0, 0.12)",
+        "dark": "0 25px 50px rgba(0, 0, 0, 0.5)"
+      },
+      "description": "Maximum elevation for toasts and high-priority overlays. Use sparingly.",
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "tailwind": "shadow-2xl"
+      }
+    },
+    {
+      "token": "elevation.inner",
+      "tier": "semantic",
+      "cssVar": "--elevation-inner",
+      "type": "shadow",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{elevation.light.inner}",
+        "dark": "{elevation.dark.inner}"
+      },
+      "value": {
+        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.05)",
+        "dark": "inset 0 2px 4px rgba(0, 0, 0, 0.3)"
+      },
+      "description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements.",
+      "docs": {
+        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
+        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "tailwind": "shadow-inner"
+      }
+    },
+    {
+      "token": "motion.duration.instant",
+      "tier": "semantic",
+      "cssVar": "--motion-duration-instant",
+      "type": "duration",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.duration.instant}"
+      },
+      "value": {
+        "light": "0ms"
+      },
+      "description": "No duration — for immediate state changes. Not for visual transitions.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS."
+      }
+    },
+    {
+      "token": "motion.duration.fast",
+      "tier": "semantic",
+      "cssVar": "--motion-duration-fast",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.duration.fast}"
+      },
+      "value": {
+        "light": "100ms"
+      },
+      "description": "Fast micro-interactions (100ms). Use for hover/focus feedback.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "duration-fast"
+      }
+    },
+    {
+      "token": "motion.duration.normal",
+      "tier": "semantic",
+      "cssVar": "--motion-duration-normal",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.duration.normal}"
+      },
+      "value": {
+        "light": "200ms"
+      },
+      "description": "Standard transition duration (200ms). Default for most transitions.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "duration-normal"
+      }
+    },
+    {
+      "token": "motion.duration.slow",
+      "tier": "semantic",
+      "cssVar": "--motion-duration-slow",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.duration.slow}"
+      },
+      "value": {
+        "light": "300ms"
+      },
+      "description": "Slow, deliberate transitions (300ms). Use for modals and drawers.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "duration-slow"
+      }
+    },
+    {
+      "token": "motion.duration.slower",
+      "tier": "semantic",
+      "cssVar": "--motion-duration-slower",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.duration.slower}"
+      },
+      "value": {
+        "light": "500ms"
+      },
+      "description": "Slowest transitions (500ms). Use only for complex animations.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "duration-slower"
+      }
+    },
+    {
+      "token": "motion.duration.extra-slow",
+      "tier": "semantic",
+      "cssVar": "--motion-duration-extra-slow",
+      "type": "duration",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.duration.extra-slow}"
+      },
+      "value": {
+        "light": "1000ms"
+      },
+      "description": "Extra-slow duration (1000ms). Use for blink/pulse animations like caret blink.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS."
+      }
+    },
+    {
+      "token": "motion.easing.default",
+      "tier": "semantic",
+      "cssVar": "--motion-easing-default",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.easing.default}"
+      },
+      "value": {
+        "light": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "description": "Standard ease-in-out. Default for all UI transitions.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "ease-default"
+      }
+    },
+    {
+      "token": "motion.easing.in",
+      "tier": "semantic",
+      "cssVar": "--motion-easing-in",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.easing.in}"
+      },
+      "value": {
+        "light": "cubic-bezier(0.4, 0, 1, 1)"
+      },
+      "description": "Ease-in curve. Use for elements exiting the screen.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "ease-in"
+      }
+    },
+    {
+      "token": "motion.easing.out",
+      "tier": "semantic",
+      "cssVar": "--motion-easing-out",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.easing.out}"
+      },
+      "value": {
+        "light": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      "description": "Ease-out curve. Use for elements entering the screen.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "ease-out"
+      }
+    },
+    {
+      "token": "motion.easing.spring",
+      "tier": "semantic",
+      "cssVar": "--motion-easing-spring",
+      "type": "cubicBezier",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{motion.easing.spring}"
+      },
+      "value": {
+        "light": "cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+      },
+      "description": "Spring overshoot. Use for playful or bouncy interactions only.",
+      "docs": {
+        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
+        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "tailwind": "ease-spring"
+      }
+    },
+    {
+      "token": "opacity.disabled",
+      "tier": "semantic",
+      "cssVar": "--opacity-disabled",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{opacity.0-50}"
+      },
+      "value": {
+        "light": "0.50"
+      },
+      "description": "Opacity for disabled interactive elements. Not for placeholder or overlay use.",
+      "docs": {
+        "do": "Utiliser `disabled:opacity-50` (classe Tailwind) sur les éléments interactifs désactivés.",
+        "dont": "Ne pas utiliser pour du texte secondaire — utiliser `color.text.subtle`."
+      }
+    },
+    {
+      "token": "opacity.placeholder",
+      "tier": "semantic",
+      "cssVar": "--opacity-placeholder",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{opacity.0-50}"
+      },
+      "value": {
+        "light": "0.50"
+      },
+      "description": "Opacity for placeholder text. Not for disabled or overlay use.",
+      "docs": {
+        "do": "Appliquer sur `::placeholder` des champs de formulaire.",
+        "dont": "Ne pas confondre avec `opacity.disabled` — usages distincts."
+      }
+    },
+    {
+      "token": "opacity.overlay",
+      "tier": "semantic",
+      "cssVar": "--opacity-overlay",
+      "type": "number",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{opacity.0-80}"
+      },
+      "value": {
+        "light": "0.80"
+      },
+      "description": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency.",
+      "docs": {
+        "do": "Utiliser pour les backdrops de modals et dialogs.",
+        "dont": "Ne pas réduire en dessous de `0.7` — le contraste devient insuffisant."
+      }
+    },
+    {
+      "token": "zindex.dropdown",
+      "tier": "semantic",
+      "cssVar": "--zindex-dropdown",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.dropdown}"
+      },
+      "value": {
+        "light": "1000"
+      },
+      "description": "Dropdown menus. Renders above page content.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-dropdown"
+      }
+    },
+    {
+      "token": "zindex.sticky",
+      "tier": "semantic",
+      "cssVar": "--zindex-sticky",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.sticky}"
+      },
+      "value": {
+        "light": "1100"
+      },
+      "description": "Sticky headers/footers. Renders above dropdowns.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-sticky"
+      }
+    },
+    {
+      "token": "zindex.fixed",
+      "tier": "semantic",
+      "cssVar": "--zindex-fixed",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.fixed}"
+      },
+      "value": {
+        "light": "1200"
+      },
+      "description": "Fixed position elements. Renders above sticky.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-fixed"
+      }
+    },
+    {
+      "token": "zindex.overlay",
+      "tier": "semantic",
+      "cssVar": "--zindex-overlay",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.overlay}"
+      },
+      "value": {
+        "light": "1300"
+      },
+      "description": "Overlay/backdrop. Renders above fixed elements.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-overlay"
+      }
+    },
+    {
+      "token": "zindex.modal",
+      "tier": "semantic",
+      "cssVar": "--zindex-modal",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.modal}"
+      },
+      "value": {
+        "light": "1400"
+      },
+      "description": "Modal dialogs. Renders above overlays.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-modal"
+      }
+    },
+    {
+      "token": "zindex.popover",
+      "tier": "semantic",
+      "cssVar": "--zindex-popover",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.popover}"
+      },
+      "value": {
+        "light": "1500"
+      },
+      "description": "Popovers and tooltips of high priority. Renders above modals.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-popover"
+      }
+    },
+    {
+      "token": "zindex.toast",
+      "tier": "semantic",
+      "cssVar": "--zindex-toast",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.toast}"
+      },
+      "value": {
+        "light": "1600"
+      },
+      "description": "Toast notifications. Always visible above other layers.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-toast"
+      }
+    },
+    {
+      "token": "zindex.tooltip",
+      "tier": "semantic",
+      "cssVar": "--zindex-tooltip",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{zindex.tooltip}"
+      },
+      "value": {
+        "light": "1700"
+      },
+      "description": "Tooltips. Highest z-index to always appear on top.",
+      "docs": {
+        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
+        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "tailwind": "z-tooltip"
+      }
+    },
+    {
+      "token": "breakpoint.sm",
+      "tier": "semantic",
+      "cssVar": "--breakpoint-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{breakpoint.sm}"
+      },
+      "value": {
+        "light": "40rem"
+      },
+      "description": "Viewport width from which the `sm:` variant applies (mobile-first, min-width). Not a container width.",
+      "docs": {
+        "tailwind": "sm:"
+      }
+    },
+    {
+      "token": "breakpoint.md",
+      "tier": "semantic",
+      "cssVar": "--breakpoint-md",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{breakpoint.md}"
+      },
+      "value": {
+        "light": "48rem"
+      },
+      "description": "Viewport width from which the `md:` variant applies (mobile-first, min-width). Not a container width.",
+      "docs": {
+        "tailwind": "md:"
+      }
+    },
+    {
+      "token": "breakpoint.lg",
+      "tier": "semantic",
+      "cssVar": "--breakpoint-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{breakpoint.lg}"
+      },
+      "value": {
+        "light": "64rem"
+      },
+      "description": "Viewport width from which the `lg:` variant applies (mobile-first, min-width). Not a container width.",
+      "docs": {
+        "tailwind": "lg:"
+      }
+    },
+    {
+      "token": "breakpoint.xl",
+      "tier": "semantic",
+      "cssVar": "--breakpoint-xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{breakpoint.xl}"
+      },
+      "value": {
+        "light": "80rem"
+      },
+      "description": "Viewport width from which the `xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts.",
+      "docs": {
+        "tailwind": "xl:"
+      }
+    },
+    {
+      "token": "breakpoint.2xl",
+      "tier": "semantic",
+      "cssVar": "--breakpoint-2xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{breakpoint.2xl}"
+      },
+      "value": {
+        "light": "96rem"
+      },
+      "description": "Viewport width from which the `2xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts.",
+      "docs": {
+        "tailwind": "2xl:"
+      }
+    },
+    {
+      "token": "border-width.default",
+      "tier": "semantic",
+      "cssVar": "--border-width-default",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{border-width.1}"
+      },
+      "value": {
+        "light": "1px"
+      },
+      "description": "Width of every plain border: `border`, `border-t`, `divide-x`… Not for focus rings, which use space.focus-ring-width.",
+      "docs": {
+        "tailwind": "border"
+      }
+    },
+    {
+      "token": "border-width.chart-indicator",
+      "tier": "semantic",
+      "cssVar": "--border-width-chart-indicator",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{border-width.1-5}"
+      },
+      "value": {
+        "light": "1.5px"
+      },
+      "description": "Stroke of the dashed series indicator in chart tooltips. Not for component borders.",
+      "docs": {
+        "tailwind": "border-chart-indicator"
+      }
+    },
+    {
+      "token": "shadcn.background",
+      "tier": "component",
+      "cssVar": "--background",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.background.default}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#090b0c"
+      },
+      "description": "shadcn --background compatibility alias. Maps the semantic default surface to the shadcn variable name expected by shadcn/ui components."
+    },
+    {
+      "token": "shadcn.foreground",
+      "tier": "component",
+      "cssVar": "--foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.text.default}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "shadcn --foreground compatibility alias. Maps primary text color to the shadcn variable name."
+    },
+    {
+      "token": "shadcn.card",
+      "tier": "component",
+      "cssVar": "--card",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.background.subtle}"
+      },
+      "value": {
+        "light": "#f1f3f3",
+        "dark": "#22292b"
+      },
+      "description": "shadcn --card compatibility alias. Cards use the subtle surface (slightly off-white / dark mist) rather than pure default to create visual separation."
+    },
+    {
+      "token": "shadcn.card-foreground",
+      "tier": "component",
+      "cssVar": "--card-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.text.default}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "shadcn --card-foreground compatibility alias. Reuses default text color for card content."
+    },
+    {
+      "token": "shadcn.popover",
+      "tier": "component",
+      "cssVar": "--popover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.background.elevated}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#161b1d"
+      },
+      "description": "shadcn --popover compatibility alias. Popovers use the elevated surface token to convey depth above the page."
+    },
+    {
+      "token": "shadcn.popover-foreground",
+      "tier": "component",
+      "cssVar": "--popover-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.text.default}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "shadcn --popover-foreground compatibility alias. Reuses default text color for popover content."
+    },
+    {
+      "token": "shadcn.primary",
+      "tier": "component",
+      "cssVar": "--primary",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.action.background.default}"
+      },
+      "value": {
+        "light": "#432dd7",
+        "dark": "#372aac"
+      },
+      "description": "shadcn --primary compatibility alias. Maps the brand action background to the shadcn primary slot."
+    },
+    {
+      "token": "shadcn.primary-foreground",
+      "tier": "component",
+      "cssVar": "--primary-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.action.background.foreground}"
+      },
+      "value": {
+        "light": "#eef2ff",
+        "dark": "#eef2ff"
+      },
+      "description": "shadcn --primary-foreground compatibility alias. Maps the on-action foreground to the shadcn primary-foreground slot."
+    },
+    {
+      "token": "shadcn.secondary",
+      "tier": "component",
+      "cssVar": "--secondary",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.background.subtle}"
+      },
+      "value": {
+        "light": "#f1f3f3",
+        "dark": "#22292b"
+      },
+      "description": "shadcn --secondary compatibility alias. The secondary variant shares the subtle surface token rather than a palette of its own."
+    },
+    {
+      "token": "shadcn.secondary-foreground",
+      "tier": "component",
+      "cssVar": "--secondary-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.text.default}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "shadcn --secondary-foreground compatibility alias. Secondary text uses default text color for legibility."
+    },
+    {
+      "token": "shadcn.muted",
+      "tier": "component",
+      "cssVar": "--muted",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.background.subtle}"
+      },
+      "value": {
+        "light": "#f1f3f3",
+        "dark": "#22292b"
+      },
+      "description": "shadcn --muted compatibility alias. Muted areas share the subtle surface token."
+    },
+    {
+      "token": "shadcn.muted-foreground",
+      "tier": "component",
+      "cssVar": "--muted-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.text.subtle}"
+      },
+      "value": {
+        "light": "#607175",
+        "dark": "#9ca8ab"
+      },
+      "description": "shadcn --muted-foreground compatibility alias. Muted foreground maps to the semantic subtle text token."
+    },
+    {
+      "token": "shadcn.accent",
+      "tier": "component",
+      "cssVar": "--accent",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.background.subtle}"
+      },
+      "value": {
+        "light": "#f1f3f3",
+        "dark": "#22292b"
+      },
+      "description": "shadcn --accent compatibility alias. Accent hover states share the subtle surface token with muted areas."
+    },
+    {
+      "token": "shadcn.accent-foreground",
+      "tier": "component",
+      "cssVar": "--accent-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.text.default}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "shadcn --accent-foreground compatibility alias. Accent foreground uses default text for contrast."
+    },
+    {
+      "token": "shadcn.destructive",
+      "tier": "component",
+      "cssVar": "--destructive",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.feedback.error.default}"
+      },
+      "value": {
+        "light": "#e7000b",
+        "dark": "#ff6467"
+      },
+      "description": "shadcn --destructive compatibility alias. Maps the semantic error token to the shadcn destructive slot."
+    },
+    {
+      "token": "shadcn.destructive-foreground",
+      "tier": "component",
+      "cssVar": "--destructive-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.feedback.error.foreground}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#090b0c"
+      },
+      "description": "shadcn --destructive-foreground compatibility alias. Text and icons on a solid destructive surface."
+    },
+    {
+      "token": "shadcn.border",
+      "tier": "component",
+      "cssVar": "--border",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.border.default}"
+      },
+      "value": {
+        "light": "#e3e7e8",
+        "dark": "rgba(255, 255, 255, 0.1)"
+      },
+      "description": "shadcn --border compatibility alias. Maps the semantic default border to the shadcn border slot."
+    },
+    {
+      "token": "shadcn.input",
+      "tier": "component",
+      "cssVar": "--input",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.border.input}"
+      },
+      "value": {
+        "light": "#e3e7e8",
+        "dark": "rgba(255, 255, 255, 0.15)"
+      },
+      "description": "shadcn --input compatibility alias. Maps the semantic input border to the shadcn input slot for form field outlines."
+    },
+    {
+      "token": "shadcn.ring",
+      "tier": "component",
+      "cssVar": "--ring",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.border.focus}"
+      },
+      "value": {
+        "light": "#67787c",
+        "dark": "#67787c"
+      },
+      "description": "shadcn --ring compatibility alias. Maps the semantic focus ring to the shadcn ring slot."
+    },
+    {
+      "token": "shadcn.radius",
+      "tier": "component",
+      "cssVar": "--radius",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{radius.lg}"
+      },
+      "value": {
+        "light": "0.625rem"
+      },
+      "description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem), the canonical border-radius used across shadcn components."
+    },
+    {
+      "token": "shadcn.chart-1",
+      "tier": "component",
+      "cssVar": "--chart-1",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.chart.1}"
+      },
+      "value": {
+        "light": "#432dd7",
+        "dark": "#6e6cff"
+      },
+      "description": "shadcn --chart-1 compatibility alias. Maps the semantic chart series 1 token."
+    },
+    {
+      "token": "shadcn.chart-2",
+      "tier": "component",
+      "cssVar": "--chart-2",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.chart.2}"
+      },
+      "value": {
+        "light": "#438fbd",
+        "dark": "#8fd6fa"
+      },
+      "description": "shadcn --chart-2 compatibility alias. Maps the semantic chart series 2 token."
+    },
+    {
+      "token": "shadcn.chart-3",
+      "tier": "component",
+      "cssVar": "--chart-3",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.chart.3}"
+      },
+      "value": {
+        "light": "#af8526",
+        "dark": "#e5e747"
+      },
+      "description": "shadcn --chart-3 compatibility alias. Maps the semantic chart series 3 token."
+    },
+    {
+      "token": "shadcn.chart-4",
+      "tier": "component",
+      "cssVar": "--chart-4",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.chart.4}"
+      },
+      "value": {
+        "light": "#4d2761",
+        "dark": "#9b5f7c"
+      },
+      "description": "shadcn --chart-4 compatibility alias. Maps the semantic chart series 4 token."
+    },
+    {
+      "token": "shadcn.chart-5",
+      "tier": "component",
+      "cssVar": "--chart-5",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.chart.5}"
+      },
+      "value": {
+        "light": "#734e00",
+        "dark": "#c89005"
+      },
+      "description": "shadcn --chart-5 compatibility alias. Maps the semantic chart series 5 token."
+    },
+    {
+      "token": "shadcn.sidebar",
+      "tier": "component",
+      "cssVar": "--sidebar",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.background}"
+      },
+      "value": {
+        "light": "#f9fbfb",
+        "dark": "#161b1d"
+      },
+      "description": "shadcn --sidebar compatibility alias. Maps the semantic sidebar background token."
+    },
+    {
+      "token": "shadcn.sidebar-foreground",
+      "tier": "component",
+      "cssVar": "--sidebar-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.foreground}"
+      },
+      "value": {
+        "light": "#090b0c",
+        "dark": "#f9fbfb"
+      },
+      "description": "shadcn --sidebar-foreground compatibility alias. Maps the semantic sidebar foreground token."
+    },
+    {
+      "token": "shadcn.sidebar-primary",
+      "tier": "component",
+      "cssVar": "--sidebar-primary",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.primary.default}"
+      },
+      "value": {
+        "light": "#4f39f6",
+        "dark": "#615fff"
+      },
+      "description": "shadcn --sidebar-primary compatibility alias. Maps the active/primary sidebar item color."
+    },
+    {
+      "token": "shadcn.sidebar-primary-foreground",
+      "tier": "component",
+      "cssVar": "--sidebar-primary-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.primary.on}"
+      },
+      "value": {
+        "light": "#eef2ff",
+        "dark": "#ffffff"
+      },
+      "description": "shadcn --sidebar-primary-foreground compatibility alias. Maps the on-primary sidebar text; the name mismatch (primary-foreground vs primary.on) is why this bridge is needed."
+    },
+    {
+      "token": "shadcn.sidebar-accent",
+      "tier": "component",
+      "cssVar": "--sidebar-accent",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.accent.default}"
+      },
+      "value": {
+        "light": "#f1f3f3",
+        "dark": "#22292b"
+      },
+      "description": "shadcn --sidebar-accent compatibility alias. Maps the sidebar hover/accent surface token."
+    },
+    {
+      "token": "shadcn.sidebar-accent-foreground",
+      "tier": "component",
+      "cssVar": "--sidebar-accent-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.accent.foreground}"
+      },
+      "value": {
+        "light": "#161b1d",
+        "dark": "#f9fbfb"
+      },
+      "description": "shadcn --sidebar-accent-foreground compatibility alias. Maps the sidebar accent text token."
+    },
+    {
+      "token": "shadcn.sidebar-border",
+      "tier": "component",
+      "cssVar": "--sidebar-border",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.border}"
+      },
+      "value": {
+        "light": "#e3e7e8",
+        "dark": "rgba(255, 255, 255, 0.1)"
+      },
+      "description": "shadcn --sidebar-border compatibility alias. Maps the sidebar border token."
+    },
+    {
+      "token": "shadcn.sidebar-ring",
+      "tier": "component",
+      "cssVar": "--sidebar-ring",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/component.json",
+      "reference": {
+        "light": "{color.sidebar.ring}"
+      },
+      "value": {
+        "light": "#67787c",
+        "dark": "#67787c"
+      },
+      "description": "shadcn --sidebar-ring compatibility alias. Maps the sidebar focus ring token."
+    }
+  ]
+}

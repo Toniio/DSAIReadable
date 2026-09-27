@@ -1,0 +1,614 @@
+{
+  "Accordion": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "AlertDialog": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Alert": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "destructive"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "alertVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "AspectRatio": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Avatar": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Badge": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline",
+          "ghost",
+          "link"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "badgeVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "Breadcrumb": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "ButtonGroup": {
+    "variants": {
+      "orientation": {
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    },
+    "sources": [
+      "buttonGroupVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "Button": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "destructive",
+          "link"
+        ],
+        "default": "default"
+      },
+      "size": {
+        "values": [
+          "default",
+          "xs",
+          "sm",
+          "lg",
+          "icon",
+          "icon-xs",
+          "icon-sm",
+          "icon-lg"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "buttonVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "Calendar": {
+    "variants": {
+      "buttonVariant": {
+        "values": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "destructive",
+          "link"
+        ],
+        "default": "ghost"
+      }
+    },
+    "sources": [],
+    "part_of": null,
+    "has_variants": true
+  },
+  "Card": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Carousel": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Chart": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Checkbox": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Collapsible": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Combobox": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Command": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "ContextMenu": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Dialog": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Direction": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Drawer": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "DropdownMenu": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Empty": {
+    "variants": {},
+    "sources": [
+      "emptyMediaVariants"
+    ],
+    "part_of": null,
+    "has_variants": false
+  },
+  "EmptyMedia": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "icon"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [],
+    "part_of": "Empty",
+    "has_variants": true
+  },
+  "Field": {
+    "variants": {
+      "orientation": {
+        "values": [
+          "vertical",
+          "horizontal",
+          "responsive"
+        ],
+        "default": "vertical"
+      }
+    },
+    "sources": [
+      "fieldVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "Heading": {
+    "variants": {
+      "level": {
+        "values": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "default": "1"
+      }
+    },
+    "sources": [
+      "headingVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "HoverCard": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Illustration": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "InputGroup": {
+    "variants": {},
+    "sources": [
+      "inputGroupAddonVariants",
+      "inputGroupButtonVariants"
+    ],
+    "part_of": null,
+    "has_variants": false
+  },
+  "InputGroupAddon": {
+    "variants": {
+      "align": {
+        "values": [
+          "inline-start",
+          "inline-end",
+          "block-start",
+          "block-end"
+        ],
+        "default": "inline-start"
+      }
+    },
+    "sources": [],
+    "part_of": "InputGroup",
+    "has_variants": true
+  },
+  "InputGroupButton": {
+    "variants": {
+      "size": {
+        "values": [
+          "xs",
+          "sm",
+          "icon-xs",
+          "icon-sm"
+        ],
+        "default": "xs"
+      }
+    },
+    "sources": [],
+    "part_of": "InputGroup",
+    "has_variants": true
+  },
+  "InputOtp": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Input": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Item": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "outline",
+          "muted"
+        ],
+        "default": "default"
+      },
+      "size": {
+        "values": [
+          "default",
+          "sm",
+          "xs"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "itemVariants",
+      "itemMediaVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "ItemMedia": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "icon",
+          "image"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [],
+    "part_of": "Item",
+    "has_variants": true
+  },
+  "Kbd": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Label": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Logo": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Menubar": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "NativeSelect": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "NavigationMenu": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Pagination": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "PasswordInput": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Popover": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Progress": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "RadioGroup": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Resizable": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "ScrollArea": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Select": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Separator": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Sheet": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Sidebar": {
+    "variants": {},
+    "sources": [
+      "sidebarMenuButtonVariants"
+    ],
+    "part_of": null,
+    "has_variants": false
+  },
+  "SidebarMenuButton": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      "size": {
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [],
+    "part_of": "Sidebar",
+    "has_variants": true
+  },
+  "Skeleton": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Slider": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Sonner": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Spinner": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Switch": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Table": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Tabs": {
+    "variants": {},
+    "sources": [
+      "tabsListVariants"
+    ],
+    "part_of": null,
+    "has_variants": false
+  },
+  "TabsList": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "line"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [],
+    "part_of": "Tabs",
+    "has_variants": true
+  },
+  "Textarea": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "ToggleGroup": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      "size": {
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "toggleVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "Toggle": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      "size": {
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "toggleVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "Tooltip": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  }
+}

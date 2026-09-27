@@ -1,0 +1,12 @@
+# Refuse tout push direct sur main : le workflow impose une PR.
+# Doublon local du ruleset GitHub, qui reste l'autorite cote serveur.
+protected="main"
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+	case "$remote_ref" in
+		"refs/heads/$protected")
+			echo "pre-push: push direct sur '$protected' refuse."
+			echo "Ouvre une PR depuis une branche feat/ fix/ chore/ docs/ ci/ refactor/ test/."
+			exit 1
+			;;
+	esac
+done

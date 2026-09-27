@@ -1,0 +1,498 @@
+#!/usr/bin/env tsx
+/**
+ * lint-token-naming.ts
+ *
+ * Validates every token key in the three tiers against a declarative grammar.
+ *
+ * The previous implementation matched a single regex,
+ * `^(foundation)(\.[a-z0-9-]+){1,4}$`, which accepted any kebab-case segment
+ * in any position: `color.foo.bar.baz` passed. It also never opened
+ * `primitive.json`, so the private tier was unchecked.
+ *
+ * The grammar below is a closed table. Every foundation declares the exact
+ * shapes it accepts, and every variable segment resolves to a closed enum or
+ * an explicit pattern. Introducing a new role or a new state is therefore a
+ * deliberate edit to this table, which is the point: the lint is a gate, not
+ * a formality.
+ *
+ * Note on `component.json`: its keys are `shadcn.<alias>`, and the alias
+ * vocabulary is dictated by upstream shadcn/ui, not by us. Segment shape is
+ * checked here; that each alias resolves to a real semantic token is checked
+ * from the other side by `lint-theme-bridge.ts`.
+ *
+ * Exit 1 on any invalid key.
+ */
+
+import fs from "fs"
+import path from "path"
+
+// ---------------------------------------------------------------------------
+// Closed enums — a variable segment may only take one of these values
+// ---------------------------------------------------------------------------
+const ENUMS: Record<string, string[]> = {
+  // Tier 1 — palettes and raw scales
+  palette: [
+    "mist",
+    "violet",
+    "green",
+    "blue",
+    "yellow",
+    "amber",
+    "plum",
+    "red",
+    "white-alpha",
+  ],
+  colorKeyword: ["black", "white", "transparent", "current"],
+  mode: ["light", "dark"],
+  spaceAlias: [
+    "page",
+    "section",
+    "content",
+    "content-sm",
+    "content-lg",
+    "sidebar",
+    "sidebar-mobile",
+    "focus-ring-width",
+  ],
+  /** Tier 1 carries `base` plus every step resolved from it (see P1-04). */
+  radiusPrimitive: [
+    "none",
+    "base",
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "xl",
+    "2xl",
+    "3xl",
+    "4xl",
+    "full",
+  ],
+
+  // Tier 2 — semantic roles
+  emphasis: ["default", "subtle", "bold", "elevated", "inverse"],
+  /** Closed state enum. A state is never fused into a role segment. */
+  state: ["hover", "active", "focus", "disabled", "selected"],
+  /** Foreground relationship: the colour that sits *on* a surface. */
+  onSurface: ["default", "on", "foreground"],
+  textRole: ["action", "destructive"],
+  borderRole: ["default", "subtle", "input", "focus"],
+  iconRole: ["default", "subtle", "action"],
+  feedbackRole: ["error", "success", "warning", "info"],
+  /** Colours that ignore the mode — shadcn's bg-white / bg-black. */
+  staticColor: ["white", "black"],
+  sidebarSurface: ["background", "foreground", "border", "ring"],
+  sidebarRole: ["primary", "accent"],
+  elevationSize: ["xs", "sm", "md", "lg", "xl", "2xl", "inner"],
+  radiusSize: [
+    "none",
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "xl",
+    "2xl",
+    "3xl",
+    "4xl",
+    "full",
+  ],
+  componentSize: ["xs", "sm", "md", "lg", "xl"],
+  layoutName: [
+    "page-padding",
+    "section-gap",
+    "content-sm",
+    "content-default",
+    "content-lg",
+    "sidebar",
+    "sidebar-mobile",
+    "sidebar-icon",
+  ],
+  opacityRole: ["disabled", "placeholder", "overlay"],
+  /** Tailwind's responsive variants — the only breakpoints there are. */
+  breakpoint: ["sm", "md", "lg", "xl", "2xl"],
+  borderWidthRole: ["default", "chart-indicator"],
+  zLayer: [
+    "dropdown",
+    "sticky",
+    "fixed",
+    "overlay",
+    "modal",
+    "popover",
+    "tooltip",
+    "toast",
+  ],
+
+  // Shared across tiers
+  durationName: ["instant", "fast", "normal", "slow", "slower", "extra-slow"],
+  easingName: ["default", "in", "out", "spring"],
+  fontFamily: ["sans", "mono", "serif"],
+  fontWeight: ["normal", "medium", "semibold", "bold"],
+  letterSpacing: ["tight", "normal", "wide", "wider"],
+  lineHeight: ["tight", "snug", "normal", "relaxed", "loose"],
+  typeScale: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl"],
+}
+
+// ---------------------------------------------------------------------------
+// Pattern-backed segments — open numeric scales
+// ---------------------------------------------------------------------------
+const PATTERNS: Record<string, { pattern: RegExp; label: string }> = {
+  paletteStep: { pattern: /^\d{1,3}$/, label: "numeric step 0–950" },
+  spaceStep: {
+    pattern: /^\d+(?:-\d+)?$/,
+    label: "numeric step, halves written with a dash (0-5, 1, 24)",
+  },
+  widthStep: {
+    pattern: /^\d+(?:-\d+)?$/,
+    label: "width in px, halves written with a dash (1, 1-5)",
+  },
+  opacityStep: {
+    pattern: /^0-\d{2}$/,
+    label: "two-digit hundredth (0-05, 0-50)",
+  },
+  chartIndex: { pattern: /^\d{1,2}$/, label: "1-based chart series index" },
+  shadcnAlias: {
+    pattern: /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/,
+    label: "kebab-case shadcn/ui variable name",
+  },
+}
+
+// ---------------------------------------------------------------------------
+// Grammar — foundation → accepted shapes, per tier
+//
+// A shape is written as dot-separated segments. `<name>` is a variable
+// segment resolved against ENUMS or PATTERNS; anything else is a literal.
+// ---------------------------------------------------------------------------
+type Grammar = Record<string, string[]>
+
+const TYPOGRAPHY_SHAPES = [
+  "typography.font-family.<fontFamily>",
+  "typography.font-weight.<fontWeight>",
+  "typography.letter-spacing.<letterSpacing>",
+  "typography.line-height.<lineHeight>",
+  "typography.size.<typeScale>",
+]
+
+const MOTION_SHAPES = [
+  "motion.duration.<durationName>",
+  "motion.easing.<easingName>",
+]
+
+const PRIMITIVE_GRAMMAR: Grammar = {
+  "border-width": ["border-width.<widthStep>"],
+  breakpoint: ["breakpoint.<breakpoint>"],
+  color: ["color.<palette>.<paletteStep>", "color.<colorKeyword>"],
+  elevation: ["elevation.<mode>.<elevationSize>"],
+  motion: MOTION_SHAPES,
+  opacity: ["opacity.<opacityStep>"],
+  radius: ["radius.<radiusPrimitive>"],
+  space: ["space.<spaceStep>", "space.<spaceAlias>"],
+  typography: TYPOGRAPHY_SHAPES,
+  zindex: ["zindex.<zLayer>"],
+}
+
+const SEMANTIC_GRAMMAR: Grammar = {
+  "border-width": ["border-width.<borderWidthRole>"],
+  breakpoint: ["breakpoint.<breakpoint>"],
+  color: [
+    "color.background.<emphasis>",
+    "color.text.<emphasis>",
+    "color.text.<textRole>.<onSurface>",
+    "color.border.<borderRole>",
+    "color.icon.<iconRole>",
+    "color.action.background.<onSurface>",
+    "color.action.background.<state>",
+    "color.feedback.<feedbackRole>.<onSurface>",
+    "color.feedback.<feedbackRole>.<emphasis>",
+    "color.chart.<chartIndex>",
+    "color.chart.sequential.<chartIndex>",
+    "color.static.<staticColor>",
+    "color.sidebar.<sidebarSurface>",
+    "color.sidebar.<sidebarRole>.<onSurface>",
+  ],
+  elevation: ["elevation.<elevationSize>"],
+  motion: MOTION_SHAPES,
+  opacity: ["opacity.<opacityRole>"],
+  radius: ["radius.<radiusSize>"],
+  space: [
+    "space.component.<componentSize>",
+    "space.layout.<layoutName>",
+    "space.focus-ring-width",
+  ],
+  typography: TYPOGRAPHY_SHAPES,
+  zindex: ["zindex.<zLayer>"],
+}
+
+const COMPONENT_GRAMMAR: Grammar = {
+  shadcn: ["shadcn.<shadcnAlias>"],
+}
+
+// ---------------------------------------------------------------------------
+// Fused role+state segments — rejected with a dedicated message
+// ---------------------------------------------------------------------------
+const FUSED_STATE_SEGMENTS = [
+  /-hover(ed)?$/,
+  /-focus(ed)?$/,
+  /-active(d)?$/,
+  /-pressed$/,
+  /-selected$/,
+  /-checked$/,
+  /-disabled$/,
+  /-indeterminate$/,
+]
+
+// ---------------------------------------------------------------------------
+// Shape matching
+// ---------------------------------------------------------------------------
+function segmentMatches(segment: string, spec: string): boolean {
+  if (!spec.startsWith("<")) return segment === spec
+
+  const name = spec.slice(1, -1)
+  const values = ENUMS[name]
+  if (values) return values.includes(segment)
+
+  const pattern = PATTERNS[name]
+  if (pattern) return pattern.pattern.test(segment)
+
+  throw new Error(`Grammar references unknown segment type <${name}>`)
+}
+
+function shapeMatches(key: string, shape: string): boolean {
+  const segments = key.split(".")
+  const specs = shape.split(".")
+  if (segments.length !== specs.length) return false
+  return segments.every((segment, i) => segmentMatches(segment, specs[i]))
+}
+
+/** Human-readable expansion of a shape, used in error messages. */
+function describeShape(shape: string): string {
+  return shape
+    .split(".")
+    .map((spec) => {
+      if (!spec.startsWith("<")) return spec
+      const name = spec.slice(1, -1)
+      const values = ENUMS[name]
+      if (values) return `{${values.join("|")}}`
+      const pattern = PATTERNS[name]
+      return pattern ? `{${pattern.label}}` : spec
+    })
+    .join(".")
+}
+
+// ---------------------------------------------------------------------------
+// Flatten nested JSON to dot-notation keys (skip DTCG meta-keys)
+// ---------------------------------------------------------------------------
+const DTCG_META_KEYS = new Set([
+  "$value",
+  "$type",
+  "$description",
+  "$private",
+  "$extensions",
+])
+
+function flattenKeys(obj: Record<string, unknown>, prefix = ""): string[] {
+  const keys: string[] = []
+  for (const [key, value] of Object.entries(obj)) {
+    if (DTCG_META_KEYS.has(key)) continue
+    const fullKey = prefix ? `${prefix}.${key}` : key
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      const child = value as Record<string, unknown>
+      if ("$value" in child) {
+        keys.push(fullKey)
+      } else {
+        keys.push(...flattenKeys(child, fullKey))
+      }
+    }
+  }
+  return keys
+}
+
+// ---------------------------------------------------------------------------
+// Validate a single key against a grammar
+// ---------------------------------------------------------------------------
+interface KeyError {
+  key: string
+  reason: string
+}
+
+/**
+ * Tiers 2 and 3 are alias layers: every value, including each mode override,
+ * must be a `{…}` reference. A literal there means a design decision was
+ * duplicated instead of pointing at the tier below.
+ */
+function checkReferencePurity(
+  obj: Record<string, unknown>,
+  prefix = ""
+): KeyError[] {
+  const errors: KeyError[] = []
+
+  const report = (key: string, label: string, value: unknown) => {
+    const literal = typeof value === "string" ? value : JSON.stringify(value)
+    if (typeof value === "string" && /^\{[^{}]+\}$/.test(value.trim())) return
+    errors.push({
+      key,
+      reason: `${label} is the literal ${literal}, not a {…} reference. Move the value into tokens/primitive.json and alias it here.`,
+    })
+  }
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (DTCG_META_KEYS.has(key)) continue
+    if (!value || typeof value !== "object" || Array.isArray(value)) continue
+
+    const child = value as Record<string, unknown>
+    const fullKey = prefix ? `${prefix}.${key}` : key
+
+    if (!("$value" in child)) {
+      errors.push(...checkReferencePurity(child, fullKey))
+      continue
+    }
+
+    report(fullKey, "$value", child.$value)
+
+    const modes = (child.$extensions as Record<string, unknown> | undefined)
+      ?.modes as Record<string, unknown> | undefined
+    for (const [mode, override] of Object.entries(modes ?? {})) {
+      const raw =
+        override && typeof override === "object" && "$value" in override
+          ? (override as Record<string, unknown>).$value
+          : override
+      report(fullKey, `mode "${mode}"`, raw)
+    }
+  }
+
+  return errors
+}
+
+function validateKey(key: string, grammar: Grammar): KeyError | null {
+  const segments = key.split(".")
+  const foundation = segments[0]
+  const shapes = grammar[foundation]
+
+  if (!shapes) {
+    return {
+      key,
+      reason: `Unknown foundation "${foundation}". Allowed in this tier: ${Object.keys(
+        grammar
+      )
+        .sort()
+        .join(", ")}.`,
+    }
+  }
+
+  for (const segment of segments.slice(1)) {
+    for (const fused of FUSED_STATE_SEGMENTS) {
+      if (fused.test(segment)) {
+        return {
+          key,
+          reason: `Segment "${segment}" fuses a role and a state. Split them into separate segments. Valid states: ${ENUMS.state.join(
+            ", "
+          )}.`,
+        }
+      }
+    }
+  }
+
+  if (shapes.some((shape) => shapeMatches(key, shape))) return null
+
+  const sameDepth = shapes.filter(
+    (shape) => shape.split(".").length === segments.length
+  )
+  const candidates = sameDepth.length > 0 ? sameDepth : shapes
+
+  return {
+    key,
+    reason: `No declared shape accepts this key. Expected one of:\n       ${candidates
+      .map(describeShape)
+      .join("\n       ")}`,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+interface TierSpec {
+  file: string
+  grammar: Grammar
+  label: string
+  /** Tiers above the primitive layer may only hold `{…}` references. */
+  referencesOnly: boolean
+}
+
+function main() {
+  const root = process.cwd()
+  const tiers: TierSpec[] = [
+    {
+      file: path.join(root, "tokens", "primitive.json"),
+      grammar: PRIMITIVE_GRAMMAR,
+      label: "Tier 1 — primitive, private",
+      referencesOnly: false,
+    },
+    {
+      file: path.join(root, "tokens", "semantic.json"),
+      grammar: SEMANTIC_GRAMMAR,
+      label: "Tier 2 — semantic",
+      referencesOnly: true,
+    },
+    {
+      file: path.join(root, "tokens", "component.json"),
+      grammar: COMPONENT_GRAMMAR,
+      label: "Tier 3 — component aliases",
+      referencesOnly: true,
+    },
+  ]
+
+  let totalKeys = 0
+  let totalErrors = 0
+
+  for (const tier of tiers) {
+    if (!fs.existsSync(tier.file)) {
+      console.error(`❌ File not found: ${tier.file}`)
+      totalErrors++
+      continue
+    }
+
+    const data = JSON.parse(fs.readFileSync(tier.file, "utf-8")) as Record<
+      string,
+      unknown
+    >
+    const keys = flattenKeys(data)
+    const errors = keys
+      .map((key) => validateKey(key, tier.grammar))
+      .filter((e): e is KeyError => e !== null)
+
+    if (tier.referencesOnly) errors.push(...checkReferencePurity(data))
+
+    totalKeys += keys.length
+    totalErrors += errors.length
+
+    const rel = path.relative(root, tier.file)
+    if (errors.length === 0) {
+      console.log(`✅ ${rel} — ${keys.length} keys, all valid (${tier.label})`)
+    } else {
+      console.log(
+        `❌ ${rel} — ${errors.length} problem(s) in ${keys.length} keys`
+      )
+      for (const e of errors) {
+        console.log(`   • ${e.key}`)
+        console.log(`     ${e.reason}`)
+      }
+    }
+  }
+
+  console.log(
+    `\n📊 Summary: ${totalErrors} error(s) in ${totalKeys} keys across ${tiers.length} tier(s).`
+  )
+
+  if (totalErrors > 0) {
+    console.error(
+      "\n❌ Token validation failed. Fix the keys, or extend the grammar table in scripts/lint-token-naming.ts if the new shape is deliberate."
+    )
+    process.exit(1)
+  }
+
+  console.log(
+    "\n✅ All token keys conform to the declared grammar, and both alias tiers hold references only."
+  )
+  process.exit(0)
+}
+
+main()

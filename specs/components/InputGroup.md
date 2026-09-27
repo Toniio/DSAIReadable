@@ -1,0 +1,150 @@
+# InputGroup
+
+## Metadata
+
+| Champ         | Valeur                        |
+| ------------- | ----------------------------- |
+| Nom           | InputGroup                    |
+| Catégorie     | Forms                         |
+| Statut        | stable                        |
+| figma_node_id |                               |
+| code_path     | components/ui/input-group.tsx |
+
+## Rôle
+
+Conteneur structurant un champ de saisie avec des addons (icônes, boutons, texte, labels) positionnés autour de l'input.
+
+## Usage
+
+- Ajouter une icône ou un label à gauche/droite d'un champ de saisie
+- Intégrer un bouton d'action dans un champ (ex. : afficher/masquer mot de passe, recherche)
+- Composer un champ avec un label flottant au-dessus ou un complément en dessous
+- Grouper un `Input` ou `Textarea` avec des éléments visuels additionnels
+- Base de composition pour `Combobox` et `Command`
+
+## Contraintes
+
+- Ne pas utiliser sans un `InputGroupInput` ou `InputGroupTextarea` comme enfant direct
+- Les addons `block-start` et `block-end` changent le layout en colonne — ne pas mélanger avec des addons `inline-*` dans le même groupe
+- L'état `disabled` est propagé visuellement via `has-disabled` mais doit être posé sur l'input enfant
+- Les boutons dans les addons doivent utiliser `InputGroupButton` pour hériter des tailles correctes
+- Requiert un conteneur `"use client"` (composant client-side)
+
+## Dépendances
+
+- `class-variance-authority` — gestion des variantes d'alignement des addons et tailles des boutons
+- `Button` de `@/components/ui/button` — utilisé par `InputGroupButton`
+- `Input` de `@/components/ui/input` — utilisé par `InputGroupInput`
+- `Textarea` de `@/components/ui/textarea` — utilisé par `InputGroupTextarea`
+
+## Anatomie
+
+| Slot                              | Rôle                                                                                       |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| `data-slot="input-group"`         | Racine du groupe, conteneur flex avec bordure                                              |
+| `data-slot="input-group-addon"`   | Zone d'addon (icône, texte, bouton) positionnée via `data-align`                           |
+| `data-slot="input-group-control"` | Input ou textarea enfant (focus/validation propagée au groupe)                             |
+| `data-slot="input-group-button"`  | Bouton inline héritant de la prop `data-size` — non déclaré dans le slot mais via `Button` |
+
+## Tokens utilisés
+
+| Token                      | Usage                                                                  |
+| -------------------------- | ---------------------------------------------------------------------- |
+| `--color-input`            | Bordure du groupe (`border-input`), fond disabled (`bg-input/50`)      |
+| `--color-ring`             | Anneau de focus (`ring-ring/50`, `border-ring`)                        |
+| `--color-destructive`      | Bordure et anneau erreur (`border-destructive`, `ring-destructive/20`) |
+| `--color-muted-foreground` | Texte des addons et labels (`text-muted-foreground`)                   |
+
+## Props / API
+
+| Prop                   | Type                                                             | Défaut           | Description                                       |
+| ---------------------- | ---------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
+| **InputGroup**         |                                                                  |                  |                                                   |
+| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
+| `...props`             | `React.ComponentProps<"div">`                                    | —                | Props natives du `<div>`                          |
+| **InputGroupAddon**    |                                                                  |                  |                                                   |
+| `align`                | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` | Position de l'addon par rapport à l'input         |
+| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
+| **InputGroupButton**   |                                                                  |                  |                                                   |
+| `variant`              | `string`                                                         | `"ghost"`        | Variante visuelle du bouton (héritée de `Button`) |
+| `size`                 | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"`                         | `"xs"`           | Taille du bouton dans le groupe                   |
+| `type`                 | `string`                                                         | `"button"`       | Type HTML du bouton                               |
+| **InputGroupInput**    |                                                                  |                  |                                                   |
+| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
+| `...props`             | `React.ComponentProps<"input">`                                  | —                | Props natives de l'`<input>`                      |
+| **InputGroupTextarea** |                                                                  |                  |                                                   |
+| `className`            | `string`                                                         | —                | Classes CSS additionnelles                        |
+| `...props`             | `React.ComponentProps<"textarea">`                               | —                | Props natives du `<textarea>`                     |
+
+## Variantes
+
+<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+
+| Composant          | Axe     | Valeurs                                                     | Défaut         |
+| ------------------ | ------- | ----------------------------------------------------------- | -------------- |
+| `InputGroupAddon`  | `align` | `inline-start` · `inline-end` · `block-start` · `block-end` | `inline-start` |
+| `InputGroupButton` | `size`  | `xs` · `sm` · `icon-xs` · `icon-sm`                         | `xs`           |
+
+Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+
+## États
+
+| État     | Description                                                                        |
+| -------- | ---------------------------------------------------------------------------------- |
+| default  | Bordure `input`, fond transparent, hauteur `h-8`                                   |
+| hover    | — (pas de style hover spécifique sur le groupe)                                    |
+| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible` sur l'input enfant      |
+| active   | —                                                                                  |
+| disabled | Fond `bg-input/50`, opacité réduite (`opacity-50`) via `has-disabled`              |
+| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid` sur l'input |
+
+## Accessibilité
+
+**Pattern** : Groupe (`role="group"`) autour d'un champ
+
+**Rôle** : `role="group"` ; le champ garde sa sémantique ; un clic sur un addon donne le focus au champ.
+
+**Clavier** :
+
+Aucune interaction propre ; le champ et les `InputGroupButton` sont focalisables normalement.
+
+**Nom accessible** : Le champ doit être étiqueté comme un `Input`. Un `InputGroupButton` icône seule exige un `aria-label` (« Effacer la recherche »).
+
+**Vigilance** :
+
+- Le texte d'un addon (« https:// », « € ») n'est pas lu comme partie du label : l'inclure dans le label ou la description si nécessaire.
+- L'erreur est stylisée sur le groupe via `aria-invalid` du champ ; le message reste à relier.
+
+## Exemple de code
+
+```tsx
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group"
+import { MagnifyingGlassIcon } from "@phosphor-icons/react"
+
+export default function Example() {
+  return (
+    <InputGroup>
+      <InputGroupAddon align="inline-start">
+        <InputGroupText>
+          <MagnifyingGlassIcon />
+        </InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput placeholder="Rechercher…" />
+    </InputGroup>
+  )
+}
+```
+
+## Références croisées
+
+- `Input` — utilisé en interne par `InputGroupInput`
+- `Textarea` — utilisé en interne par `InputGroupTextarea`
+- `Button` — utilisé en interne par `InputGroupButton`
+- `Combobox` — utilise `InputGroup` pour structurer son champ de saisie
+- `Command` — utilise `InputGroup` pour structurer le champ de recherche

@@ -1,0 +1,231 @@
+{
+  "tokens": [
+    {
+      "path": "space.component.xs",
+      "css_var": "--space-component-xs",
+      "value": "{space.1}",
+      "type": "dimension",
+      "description": "Extra-small component padding/gap (4px). Not for layout or section spacing."
+    },
+    {
+      "path": "space.component.sm",
+      "css_var": "--space-component-sm",
+      "value": "{space.2}",
+      "type": "dimension",
+      "description": "Small component padding/gap (8px). Not for layout or section spacing."
+    },
+    {
+      "path": "space.component.md",
+      "css_var": "--space-component-md",
+      "value": "{space.4}",
+      "type": "dimension",
+      "description": "Medium component padding/gap (16px). Not for layout or section spacing."
+    },
+    {
+      "path": "space.component.lg",
+      "css_var": "--space-component-lg",
+      "value": "{space.6}",
+      "type": "dimension",
+      "description": "Large component padding/gap (24px). Not for layout or section spacing."
+    },
+    {
+      "path": "space.component.xl",
+      "css_var": "--space-component-xl",
+      "value": "{space.8}",
+      "type": "dimension",
+      "description": "Extra-large component padding/gap (32px). Not for layout or section spacing."
+    },
+    {
+      "path": "space.focus-ring-width",
+      "css_var": "--space-focus-ring-width",
+      "value": "{space.focus-ring-width}",
+      "type": "dimension",
+      "description": "Width of the focus ring indicator (2px). Use for all focus-visible ring styles."
+    },
+    {
+      "path": "space.layout.page-padding",
+      "css_var": "--space-layout-page-padding",
+      "value": "{space.page}",
+      "type": "dimension",
+      "description": "Horizontal padding for the main page container. Not for component-level spacing."
+    },
+    {
+      "path": "space.layout.section-gap",
+      "css_var": "--space-layout-section-gap",
+      "value": "{space.section}",
+      "type": "dimension",
+      "description": "Vertical gap between major page sections. Not for component-level spacing."
+    },
+    {
+      "path": "space.layout.content-sm",
+      "css_var": "--space-layout-content-sm",
+      "value": "{space.content-sm}",
+      "type": "dimension",
+      "description": "Narrow content column max-width (42rem). Not for full-width or wide layouts."
+    },
+    {
+      "path": "space.layout.content-default",
+      "css_var": "--space-layout-content-default",
+      "value": "{space.content}",
+      "type": "dimension",
+      "description": "Default content column max-width (64rem). Not for narrow or wide layouts."
+    },
+    {
+      "path": "space.layout.content-lg",
+      "css_var": "--space-layout-content-lg",
+      "value": "{space.content-lg}",
+      "type": "dimension",
+      "description": "Wide content column max-width (80rem). Not for narrow or default layouts."
+    },
+    {
+      "path": "space.layout.sidebar",
+      "css_var": "--space-layout-sidebar",
+      "value": "{space.sidebar}",
+      "type": "dimension",
+      "description": "Default sidebar width (16rem). Use for the main navigation sidebar."
+    },
+    {
+      "path": "space.layout.sidebar-mobile",
+      "css_var": "--space-layout-sidebar-mobile",
+      "value": "{space.sidebar-mobile}",
+      "type": "dimension",
+      "description": "Sidebar width on mobile viewports (18rem). Slightly wider for touch targets."
+    },
+    {
+      "path": "space.layout.sidebar-icon",
+      "css_var": "--space-layout-sidebar-icon",
+      "value": "{space.12}",
+      "type": "dimension",
+      "description": "Sidebar width in icon-only/collapsed mode (3rem)."
+    },
+    {
+      "path": "radius.none",
+      "css_var": "--radius-none",
+      "value": "{radius.none}",
+      "type": "dimension",
+      "description": "Zero radius — square corners. Use for full-bleed or table elements."
+    },
+    {
+      "path": "radius.xs",
+      "css_var": "--radius-xs",
+      "value": "{radius.xs}",
+      "type": "dimension",
+      "description": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips."
+    },
+    {
+      "path": "radius.sm",
+      "css_var": "--radius-sm",
+      "value": "{radius.sm}",
+      "type": "dimension",
+      "description": "Small rounding (0.6× base). Use for inputs, small buttons."
+    },
+    {
+      "path": "radius.md",
+      "css_var": "--radius-md",
+      "value": "{radius.md}",
+      "type": "dimension",
+      "description": "Medium rounding (0.8× base). Use for default buttons and form controls."
+    },
+    {
+      "path": "radius.lg",
+      "css_var": "--radius-lg",
+      "value": "{radius.lg}",
+      "type": "dimension",
+      "description": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius."
+    },
+    {
+      "path": "radius.xl",
+      "css_var": "--radius-xl",
+      "value": "{radius.xl}",
+      "type": "dimension",
+      "description": "Larger rounding (1.4× base). Use for modals and prominent containers."
+    },
+    {
+      "path": "radius.2xl",
+      "css_var": "--radius-2xl",
+      "value": "{radius.2xl}",
+      "type": "dimension",
+      "description": "Extra-large rounding (1.8× base). Use for floating panels."
+    },
+    {
+      "path": "radius.3xl",
+      "css_var": "--radius-3xl",
+      "value": "{radius.3xl}",
+      "type": "dimension",
+      "description": "Very large rounding (2.2× base). Use sparingly for decorative containers."
+    },
+    {
+      "path": "radius.4xl",
+      "css_var": "--radius-4xl",
+      "value": "{radius.4xl}",
+      "type": "dimension",
+      "description": "Maximum rounding (2.6× base). Use only for hero cards or large chips."
+    },
+    {
+      "path": "radius.full",
+      "css_var": "--radius-full",
+      "value": "{radius.full}",
+      "type": "dimension",
+      "description": "Pill/full rounding. Use for pills, avatars, toggles."
+    },
+    {
+      "path": "elevation.xs",
+      "css_var": "--elevation-xs",
+      "value": "{elevation.light.xs}",
+      "dark_value": "{elevation.dark.xs}",
+      "type": "shadow",
+      "description": "Minimal lift for interactive elements. Not for decorative purposes."
+    },
+    {
+      "path": "elevation.sm",
+      "css_var": "--elevation-sm",
+      "value": "{elevation.light.sm}",
+      "dark_value": "{elevation.dark.sm}",
+      "type": "shadow",
+      "description": "Small lift for cards and hover states. Not for fixed navigation."
+    },
+    {
+      "path": "elevation.md",
+      "css_var": "--elevation-md",
+      "value": "{elevation.light.md}",
+      "dark_value": "{elevation.dark.md}",
+      "type": "shadow",
+      "description": "Medium elevation for dropdowns and context menus. Not for inline content."
+    },
+    {
+      "path": "elevation.lg",
+      "css_var": "--elevation-lg",
+      "value": "{elevation.light.lg}",
+      "dark_value": "{elevation.dark.lg}",
+      "type": "shadow",
+      "description": "Large elevation for modals and side panels. Not for standard cards."
+    },
+    {
+      "path": "elevation.xl",
+      "css_var": "--elevation-xl",
+      "value": "{elevation.light.xl}",
+      "dark_value": "{elevation.dark.xl}",
+      "type": "shadow",
+      "description": "Extra-large elevation for full overlay panels. Not for inline components."
+    },
+    {
+      "path": "elevation.2xl",
+      "css_var": "--elevation-2xl",
+      "value": "{elevation.light.2xl}",
+      "dark_value": "{elevation.dark.2xl}",
+      "type": "shadow",
+      "description": "Maximum elevation for toasts and high-priority overlays. Use sparingly."
+    },
+    {
+      "path": "elevation.inner",
+      "css_var": "--elevation-inner",
+      "value": "{elevation.light.inner}",
+      "dark_value": "{elevation.dark.inner}",
+      "type": "shadow",
+      "description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements."
+    }
+  ],
+  "spacing_rules": [],
+  "radius_rules": [],
+  "elevation_rules": []
+}

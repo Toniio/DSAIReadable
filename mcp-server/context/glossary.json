@@ -1,0 +1,114 @@
+[
+  {
+    "term": "primitive",
+    "definition": "A raw, named design value in tokens/primitive.json. Marked $private: true. Never referenced directly in component or application code — only Semantic tokens may reference primitives."
+  },
+  {
+    "term": "semantic",
+    "definition": "An intentional design decision in tokens/semantic.json, following the naming grammar foundation.property[.role][.emphasis][.state]. The only tier component authors interact with."
+  },
+  {
+    "term": "component-token",
+    "definition": "A local override in tokens/component.json used only when a Semantic token cannot cover the use case. Primarily holds shadcn CSS variable aliases."
+  },
+  {
+    "term": "DTCG",
+    "definition": "Design Token Community Group — the open standard format for design tokens. Each token carries $value, $type, and $description keys."
+  },
+  {
+    "term": "cva",
+    "definition": "Class Variance Authority — the utility used to declare typed variant APIs on components. Required for all multi-variant components."
+  },
+  {
+    "term": "cn",
+    "definition": "The class merging utility from @/lib/utils, combining clsx and tailwind-merge. The only approved way to compose Tailwind class strings in this codebase."
+  },
+  {
+    "term": "asChild",
+    "definition": "A prop pattern (from Radix UI / shadcn) that delegates a component's rendering to its child element via Slot.Root, preserving all props and event handlers."
+  },
+  {
+    "term": "data-slot",
+    "definition": "An HTML data attribute marking a component's anatomical part. Used for CSS targeting and Code Connect prop mapping. Value matches the component or sub-part name."
+  },
+  {
+    "term": "allow-raw",
+    "definition": "An inline code annotation (// allow-raw: <reason>) that exempts a specific raw value from the lint-raw-values check. Only valid when the raw value is technically unavoidable (e.g., third-party CSS attribute selectors)."
+  },
+  {
+    "term": "Tier 0",
+    "definition": "The flat CSS variable structure (e.g., --background: oklch(...)) that existed before the 3-tier DTCG migration. Retained only as Layer 3 compatibility aliases pointing to Semantic tokens."
+  },
+  {
+    "term": "Layer 1",
+    "definition": "The CSS output of tokens/primitive.json — all --ds-prim-* variables. Private; never used directly in components."
+  },
+  {
+    "term": "Layer 2",
+    "definition": "The CSS output of tokens/semantic.json — semantic variables (--color-background-default, --elevation-sm, etc.). The authoritative source of truth for visual decisions."
+  },
+  {
+    "term": "Layer 3",
+    "definition": "The CSS output of tokens/component.json — shadcn compatibility aliases (--background, --primary, etc.) that map to Layer 2 variables."
+  },
+  {
+    "term": "mode",
+    "definition": "A visual configuration of the Semantic tier. Available modes: light (default), dark (.dark class). Modes override Semantic token values only — Primitive and Component tiers are mode-agnostic."
+  },
+  {
+    "term": "stable",
+    "definition": "A component whose public API is frozen and safe for production use."
+  },
+  {
+    "term": "beta",
+    "definition": "A component whose API may change. Not recommended for production without explicit sign-off."
+  },
+  {
+    "term": "deprecated",
+    "definition": "A component that will be removed in a future release. Migrate to the suggested replacement."
+  },
+  {
+    "term": "variant-axis",
+    "definition": "The meaning carried by a `variant` prop. Three axes exist, and a component's variant prop uses exactly one of them: appearance (how prominent the element is drawn), intent (what the action means), and media (what kind of content a slot holds). Read the component's entry before assuming which axis applies."
+  },
+  {
+    "term": "appearance",
+    "definition": "The appearance axis: default, secondary, outline, ghost, muted, link, line. Purely visual prominence. Swapping one for another never changes what the element does. This is the axis of Button, Badge, Item and TabsList."
+  },
+  {
+    "term": "intent",
+    "definition": "The intent axis: destructive. It declares that the action is irreversible or damaging, and the red styling follows from that. It is not a way to obtain a red button; an element that merely looks dangerous but is not must use the appearance axis and its own colour. Historically it shares the `variant` prop with the appearance axis on Button and Badge."
+  },
+  {
+    "term": "media",
+    "definition": "The media axis: default, icon, image. It declares the kind of content a media slot holds so the slot can size and clip it. It belongs to the *Media sub-components — ItemMedia, EmptyMedia — never to their parent. `<Item variant=\"icon\">` is not valid."
+  },
+  {
+    "term": "sub-component",
+    "definition": "A component exported from the same file as its parent and styled by its own cva, such as ItemMedia, EmptyMedia, TabsList, SidebarMenuButton, InputGroupAddon and InputGroupButton. It has its own variants, listed under its own name in component-variants.json, and those variants do not apply to the parent."
+  },
+  {
+    "term": "design system",
+    "definition": "Ensemble cohérent de composants, tokens et règles qui garantissent la consistance visuelle et fonctionnelle d'un produit."
+  },
+  {
+    "term": "variant",
+    "definition": "Déclinaison visuelle d'un composant (ex: default, outline, ghost pour un Button)."
+  },
+  {
+    "term": "composant",
+    "definition": "Élément UI réutilisable avec une API définie (props, slots, événements)."
+  },
+  {
+    "term": "foundation",
+    "definition": "Couche de base du design system — couleurs, typographie, espacement, élévation, radius, opacité, motion."
+  },
+  {
+    "term": "slot",
+    "definition": "Point d'ancrage dans l'anatomie d'un composant, exposé via l'attribut data-slot."
+  },
+  {
+    "term": "token",
+    "definition": "Design token — variable de design réutilisable qui encode une décision visuelle (couleur, espacement, etc.)."
+  }
+]

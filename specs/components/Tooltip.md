@@ -1,0 +1,142 @@
+# Tooltip
+
+## Metadata
+
+| Champ         | Valeur                    |
+| ------------- | ------------------------- |
+| Nom           | Tooltip                   |
+| Catégorie     | Feedback                  |
+| Statut        | stable                    |
+| figma_node_id |                           |
+| code_path     | components/ui/tooltip.tsx |
+
+## Rôle
+
+Bulle d'information contextuelle apparaissant au survol ou au focus d'un élément déclencheur, basée sur Radix Tooltip.
+
+## Usage
+
+- Décrire la fonction d'un bouton icône sans label visible
+- Afficher un raccourci clavier associé à une action (via `Kbd` imbriqué)
+- Préciser le sens d'une icône ou d'une abréviation
+- Fournir un complément d'information sur un élément interactif
+- Afficher un aperçu court au survol d'un lien ou d'un élément tronqué
+
+## Contraintes
+
+- Ne pas utiliser pour du contenu interactif (liens, boutons) — préférer `Popover`
+- Le texte du tooltip doit rester très court (une ligne, max ~80 caractères)
+- Ne pas utiliser comme seul moyen de communiquer une information critique
+- Vérifier que le `TooltipProvider` est placé en amont dans l'arbre (nécessaire pour le fonctionnement de Radix)
+- Éviter les tooltips sur les éléments `disabled` — le focus n'est pas accessible
+
+## Dépendances
+
+- `radix-ui` — `Tooltip` primitive (Provider, Root, Trigger, Content, Portal, Arrow)
+- `cn` utilitaire depuis `@/lib/utils`
+
+## Anatomie
+
+| Slot                           | Rôle                                                    |
+| ------------------------------ | ------------------------------------------------------- |
+| `data-slot="tooltip-provider"` | Fournisseur de contexte (délai, configuration)          |
+| `data-slot="tooltip"`          | Racine logique du tooltip (gestion ouverture/fermeture) |
+| `data-slot="tooltip-trigger"`  | Élément déclencheur (hover / focus)                     |
+| `data-slot="tooltip-content"`  | Contenu de la bulle, rendu dans un `Portal`             |
+
+## Tokens utilisés
+
+| Token             | Usage                                |
+| ----------------- | ------------------------------------ |
+| `bg-foreground`   | Fond du tooltip et de la flèche      |
+| `text-background` | Texte du tooltip (contraste inversé) |
+| `fill-foreground` | Remplissage SVG de la flèche         |
+| `z-tooltip`       | Z-index du contenu et de la flèche   |
+
+## Props / API
+
+| Prop                | Type                                              | Défaut | Description                                         |
+| ------------------- | ------------------------------------------------- | ------ | --------------------------------------------------- |
+| **TooltipProvider** |                                                   |        |                                                     |
+| `delayDuration`     | `number`                                          | `0`    | Délai avant apparition (ms)                         |
+| `...props`          | `React.ComponentProps<TooltipPrimitive.Provider>` | —      | Props du provider Radix                             |
+| **Tooltip**         |                                                   |        |                                                     |
+| `...props`          | `React.ComponentProps<TooltipPrimitive.Root>`     | —      | Props de la racine Radix (open, onOpenChange, etc.) |
+| **TooltipTrigger**  |                                                   |        |                                                     |
+| `...props`          | `React.ComponentProps<TooltipPrimitive.Trigger>`  | —      | Props du trigger Radix (asChild, etc.)              |
+| **TooltipContent**  |                                                   |        |                                                     |
+| `sideOffset`        | `number`                                          | `0`    | Décalage par rapport au trigger (px)                |
+| `className`         | `string`                                          | —      | Classes CSS additionnelles                          |
+| `children`          | `React.ReactNode`                                 | —      | Contenu du tooltip                                  |
+| `...props`          | `React.ComponentProps<TooltipPrimitive.Content>`  | —      | Props du contenu Radix (side, align, etc.)          |
+
+## Variantes
+
+<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+
+Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+
+## États
+
+| État     | Description                                                              |
+| -------- | ------------------------------------------------------------------------ |
+| default  | Tooltip masqué                                                           |
+| hover    | Apparition après le délai configuré (animation `fade-in` + `zoom-in-95`) |
+| focus    | Même comportement que hover, déclenché par la navigation clavier         |
+| active   | Non applicable                                                           |
+| disabled | Non applicable — le trigger ne doit pas être disabled                    |
+| closing  | Animation de sortie `fade-out` + `zoom-out-95`                           |
+
+## Accessibilité
+
+**Pattern** : [Tooltip](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) (Radix Tooltip)
+
+**Rôle** : `role="tooltip"` ; le déclencheur est décrit par l'infobulle (`aria-describedby`).
+
+**Clavier** :
+
+| Touche               | Action              |
+| -------------------- | ------------------- |
+| Focus du déclencheur | Affiche l'infobulle |
+| `Escape`             | La masque           |
+
+**Nom accessible** : L'infobulle décrit, elle ne nomme pas : un bouton icône seule garde son `aria-label` même avec une infobulle.
+
+**Vigilance** :
+
+- Pas d'information essentielle ni de contenu interactif dans une infobulle.
+- Un bouton `disabled` ne reçoit pas le focus : son infobulle est inaccessible au clavier.
+- Le contenu doit rester affiché au survol de l'infobulle elle-même (WCAG 1.4.13) : ne pas raccourcir les délais.
+
+## Exemple de code
+
+```tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Kbd } from "@/components/ui/kbd"
+
+export default function Example() {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button aria-label="Copier">📋</button>
+        </TooltipTrigger>
+        <TooltipContent>
+          Copier <Kbd>⌘C</Kbd>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+}
+```
+
+## Références croisées
+
+- `Kbd` — raccourci clavier affiché à l'intérieur du tooltip (style adapté via `in-data-[slot=tooltip-content]`)
+- `Popover` — alternative pour du contenu interactif
+- `Button` — déclencheur fréquent du tooltip (variantes `icon-*`)

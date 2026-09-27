@@ -1,0 +1,988 @@
+{
+  "color": {
+    "mist": {
+      "0": {
+        "$value": "#ffffff",
+        "$type": "color",
+        "$private": true,
+        "$description": "Pure white. Primitive only."
+      },
+      "50": {
+        "$value": "#f9fbfb",
+        "$type": "color",
+        "$private": true,
+        "$description": "Near-white with mist hue."
+      },
+      "100": {
+        "$value": "#f1f3f3",
+        "$type": "color",
+        "$private": true,
+        "$description": "Lightest mist surface."
+      },
+      "200": {
+        "$value": "#e3e7e8",
+        "$type": "color",
+        "$private": true,
+        "$description": "Light mist border/divider."
+      },
+      "400": {
+        "$value": "#9ca8ab",
+        "$type": "color",
+        "$private": true,
+        "$description": "Mid mist, used for rings and focus indicators."
+      },
+      "500": {
+        "$value": "#67787c",
+        "$type": "color",
+        "$private": true,
+        "$description": "Muted foreground level."
+      },
+      "600": {
+        "$value": "#607175",
+        "$type": "color",
+        "$private": true,
+        "$description": "Muted foreground on a subtle surface — 4.58:1 on mist.100, lightest step clearing WCAG AA there."
+      },
+      "700": {
+        "$value": "#424f52",
+        "$type": "color",
+        "$private": true,
+        "$description": "Fills the 600 → 800 gap so the scale stays monotonic and evenly spaced.",
+        "$extensions": {
+          "status": "reserved"
+        }
+      },
+      "800": {
+        "$value": "#22292b",
+        "$type": "color",
+        "$private": true,
+        "$description": "Dark surface for muted areas in dark mode."
+      },
+      "900": {
+        "$value": "#161b1d",
+        "$type": "color",
+        "$private": true,
+        "$description": "Card/popover surface in dark mode."
+      },
+      "950": {
+        "$value": "#090b0c",
+        "$type": "color",
+        "$private": true,
+        "$description": "Near-black background in dark mode."
+      }
+    },
+    "violet": {
+      "50": {
+        "$value": "#eef2ff",
+        "$type": "color",
+        "$private": true,
+        "$description": "Lightest violet, primary foreground."
+      },
+      "400": {
+        "$value": "#6e6cff",
+        "$type": "color",
+        "$private": true,
+        "$description": "Light violet for action text in dark mode — 4.93:1 on mist.950."
+      },
+      "500": {
+        "$value": "#615fff",
+        "$type": "color",
+        "$private": true,
+        "$description": "Vivid violet, sidebar primary in dark mode."
+      },
+      "550": {
+        "$value": "#4f39f6",
+        "$type": "color",
+        "$private": true,
+        "$description": "Sidebar primary violet in light mode."
+      },
+      "600": {
+        "$value": "#432dd7",
+        "$type": "color",
+        "$private": true,
+        "$description": "Brand violet, primary action in light mode."
+      },
+      "700": {
+        "$value": "#372aac",
+        "$type": "color",
+        "$private": true,
+        "$description": "Deep violet, primary action in dark mode."
+      }
+    },
+    "red": {
+      "500": {
+        "$value": "#ff6467",
+        "$type": "color",
+        "$private": true,
+        "$description": "Bright red, destructive in dark mode."
+      },
+      "600": {
+        "$value": "#e7000b",
+        "$type": "color",
+        "$private": true,
+        "$description": "Deep red, destructive in light mode."
+      }
+    },
+    "green": {
+      "200": {
+        "$value": "#bbf451",
+        "$type": "color",
+        "$private": true,
+        "$description": "Lightest green data viz, chart-1."
+      },
+      "300": {
+        "$value": "#7ccf00",
+        "$type": "color",
+        "$private": true,
+        "$description": "Light green data viz, chart-2."
+      },
+      "400": {
+        "$value": "#5ea500",
+        "$type": "color",
+        "$private": true,
+        "$description": "Mid green data viz, chart-3."
+      },
+      "500": {
+        "$value": "#497d00",
+        "$type": "color",
+        "$private": true,
+        "$description": "Dark green data viz, chart-4."
+      },
+      "600": {
+        "$value": "#3c6300",
+        "$type": "color",
+        "$private": true,
+        "$description": "Darkest green data viz, chart-5."
+      }
+    },
+    "blue": {
+      "300": {
+        "$value": "#8fd6fa",
+        "$type": "color",
+        "$private": true,
+        "$description": "Light sky blue, categorical chart series 2 in dark mode."
+      },
+      "600": {
+        "$value": "#438fbd",
+        "$type": "color",
+        "$private": true,
+        "$description": "Steel blue, categorical chart series 2 in light mode."
+      }
+    },
+    "yellow": {
+      "200": {
+        "$value": "#e5e747",
+        "$type": "color",
+        "$private": true,
+        "$description": "Bright yellow, categorical chart series 3 in dark mode."
+      }
+    },
+    "amber": {
+      "500": {
+        "$value": "#c89005",
+        "$type": "color",
+        "$private": true,
+        "$description": "Gold, categorical chart series 5 in dark mode."
+      },
+      "600": {
+        "$value": "#af8526",
+        "$type": "color",
+        "$private": true,
+        "$description": "Ochre, categorical chart series 3 in light mode."
+      },
+      "800": {
+        "$value": "#734e00",
+        "$type": "color",
+        "$private": true,
+        "$description": "Brown, categorical chart series 5 in light mode."
+      }
+    },
+    "plum": {
+      "500": {
+        "$value": "#9b5f7c",
+        "$type": "color",
+        "$private": true,
+        "$description": "Dusty rose, categorical chart series 4 in dark mode."
+      },
+      "800": {
+        "$value": "#4d2761",
+        "$type": "color",
+        "$private": true,
+        "$description": "Deep plum, categorical chart series 4 in light mode."
+      }
+    },
+    "black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$private": true,
+      "$description": "Pure black. The base of color.static.black (modal scrims); elevation values still embed rgba(0, 0, 0, …) literally."
+    },
+    "white-alpha": {
+      "10": {
+        "$value": "rgba(255, 255, 255, 0.1)",
+        "$type": "color",
+        "$private": true,
+        "$description": "10% opaque white, dark mode borders."
+      },
+      "15": {
+        "$value": "rgba(255, 255, 255, 0.15)",
+        "$type": "color",
+        "$private": true,
+        "$description": "15% opaque white, dark mode input borders."
+      }
+    }
+  },
+  "space": {
+    "0-5": {
+      "$value": "0.125rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "2px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "1": {
+      "$value": "0.25rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "4px equivalent spacing step."
+    },
+    "2": {
+      "$value": "0.5rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "8px equivalent spacing step."
+    },
+    "3": {
+      "$value": "0.75rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "12px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "4": {
+      "$value": "1rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "16px equivalent spacing step."
+    },
+    "5": {
+      "$value": "1.25rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "20px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "6": {
+      "$value": "1.5rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "24px equivalent spacing step."
+    },
+    "8": {
+      "$value": "2rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "32px equivalent spacing step."
+    },
+    "10": {
+      "$value": "2.5rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "40px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "12": {
+      "$value": "3rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "48px equivalent spacing step."
+    },
+    "16": {
+      "$value": "4rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "64px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "24": {
+      "$value": "6rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "96px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "32": {
+      "$value": "8rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "128px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "page": {
+      "$value": "1.5rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Default horizontal page padding."
+    },
+    "section": {
+      "$value": "4rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Vertical gap between page sections."
+    },
+    "content-sm": {
+      "$value": "42rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Narrow content container width."
+    },
+    "content": {
+      "$value": "64rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Default content container width."
+    },
+    "content-lg": {
+      "$value": "80rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Wide content container width."
+    },
+    "sidebar": {
+      "$value": "16rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Default sidebar collapsed width."
+    },
+    "sidebar-mobile": {
+      "$value": "18rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Sidebar width on mobile viewports."
+    },
+    "focus-ring-width": {
+      "$value": "2px",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Default focus ring outline width."
+    }
+  },
+  "radius": {
+    "none": {
+      "$value": "0rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "No border radius."
+    },
+    "base": {
+      "$value": "0.625rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Base border radius. The derived steps below were resolved from it (ratio recorded in each description) so that Tier 2 stays a pure alias layer.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "xs": {
+      "$value": "0.25rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step xs — 0.4x base (0.25rem)."
+    },
+    "sm": {
+      "$value": "0.375rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step sm — 0.6x base (0.375rem)."
+    },
+    "md": {
+      "$value": "0.5rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step md — 0.8x base (0.5rem)."
+    },
+    "lg": {
+      "$value": "0.625rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step lg — 1x base (0.625rem)."
+    },
+    "xl": {
+      "$value": "0.875rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step xl — 1.4x base (0.875rem)."
+    },
+    "2xl": {
+      "$value": "1.125rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step 2xl — 1.8x base (1.125rem)."
+    },
+    "3xl": {
+      "$value": "1.375rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step 3xl — 2.2x base (1.375rem)."
+    },
+    "4xl": {
+      "$value": "1.625rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Border radius step 4xl — 2.6x base (1.625rem)."
+    },
+    "full": {
+      "$value": "9999px",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Full/pill border radius."
+    }
+  },
+  "typography": {
+    "size": {
+      "xs": {
+        "$value": "0.75rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Extra-small font size (12px)."
+      },
+      "sm": {
+        "$value": "0.875rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Small font size (14px)."
+      },
+      "base": {
+        "$value": "1rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Base font size (16px)."
+      },
+      "lg": {
+        "$value": "1.125rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Large font size (18px)."
+      },
+      "xl": {
+        "$value": "1.25rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "XL font size (20px)."
+      },
+      "2xl": {
+        "$value": "1.5rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "2XL font size (24px)."
+      },
+      "3xl": {
+        "$value": "1.875rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "3XL font size (30px)."
+      },
+      "4xl": {
+        "$value": "2.25rem",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "4XL font size (36px)."
+      }
+    },
+    "line-height": {
+      "tight": {
+        "$value": "1.25",
+        "$type": "number",
+        "$private": true,
+        "$description": "Tight line height for headings."
+      },
+      "snug": {
+        "$value": "1.375",
+        "$type": "number",
+        "$private": true,
+        "$description": "Snug line height."
+      },
+      "normal": {
+        "$value": "1.5",
+        "$type": "number",
+        "$private": true,
+        "$description": "Normal line height for body text."
+      },
+      "relaxed": {
+        "$value": "1.625",
+        "$type": "number",
+        "$private": true,
+        "$description": "Relaxed line height for readable text."
+      },
+      "loose": {
+        "$value": "2",
+        "$type": "number",
+        "$private": true,
+        "$description": "Loose line height for spaced-out text."
+      }
+    },
+    "letter-spacing": {
+      "tight": {
+        "$value": "-0.025em",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Tight tracking for headings."
+      },
+      "normal": {
+        "$value": "0em",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Normal tracking."
+      },
+      "wide": {
+        "$value": "0.025em",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Wide tracking."
+      },
+      "wider": {
+        "$value": "0.05em",
+        "$type": "dimension",
+        "$private": true,
+        "$description": "Wider tracking for all-caps or labels."
+      }
+    },
+    "font-weight": {
+      "normal": {
+        "$value": "400",
+        "$type": "font-weight",
+        "$private": true,
+        "$description": "Normal weight."
+      },
+      "medium": {
+        "$value": "500",
+        "$type": "font-weight",
+        "$private": true,
+        "$description": "Medium weight."
+      },
+      "semibold": {
+        "$value": "600",
+        "$type": "font-weight",
+        "$private": true,
+        "$description": "Semibold weight."
+      },
+      "bold": {
+        "$value": "700",
+        "$type": "font-weight",
+        "$private": true,
+        "$description": "Bold weight."
+      }
+    },
+    "font-family": {
+      "sans": {
+        "$value": "Geist, sans-serif",
+        "$type": "font-family",
+        "$private": true,
+        "$description": "Primary sans-serif typeface."
+      },
+      "mono": {
+        "$value": "JetBrains Mono, monospace",
+        "$type": "font-family",
+        "$private": true,
+        "$description": "Monospace typeface for code and numeric data."
+      }
+    }
+  },
+  "elevation": {
+    "light": {
+      "xs": {
+        "$value": "0 1px 2px rgba(0, 0, 0, 0.04)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Minimal elevation, barely visible."
+      },
+      "sm": {
+        "$value": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Small elevation for cards and subtle lifts."
+      },
+      "md": {
+        "$value": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Medium elevation for dropdowns and popovers."
+      },
+      "lg": {
+        "$value": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Large elevation for modals and dialogs."
+      },
+      "xl": {
+        "$value": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Extra-large elevation for overlay panels."
+      },
+      "2xl": {
+        "$value": "0 25px 50px rgba(0, 0, 0, 0.12)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Maximum elevation for toasts and high-impact overlays."
+      },
+      "inner": {
+        "$value": "inset 0 2px 4px rgba(0, 0, 0, 0.05)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Inner shadow for pressed/inset states."
+      }
+    },
+    "dark": {
+      "xs": {
+        "$value": "0 1px 2px rgba(0, 0, 0, 0.2)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Minimal elevation in dark mode."
+      },
+      "sm": {
+        "$value": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Small elevation in dark mode."
+      },
+      "md": {
+        "$value": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Medium elevation in dark mode."
+      },
+      "lg": {
+        "$value": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Large elevation in dark mode."
+      },
+      "xl": {
+        "$value": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Extra-large elevation in dark mode."
+      },
+      "2xl": {
+        "$value": "0 25px 50px rgba(0, 0, 0, 0.5)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Maximum elevation in dark mode."
+      },
+      "inner": {
+        "$value": "inset 0 2px 4px rgba(0, 0, 0, 0.3)",
+        "$type": "shadow",
+        "$private": true,
+        "$description": "Inner shadow in dark mode."
+      }
+    }
+  },
+  "motion": {
+    "duration": {
+      "instant": {
+        "$value": "0ms",
+        "$type": "duration",
+        "$private": true,
+        "$description": "Zero duration — immediate state change, not a visual transition."
+      },
+      "fast": {
+        "$value": "100ms",
+        "$type": "duration",
+        "$private": true,
+        "$description": "Fast micro-interactions."
+      },
+      "normal": {
+        "$value": "200ms",
+        "$type": "duration",
+        "$private": true,
+        "$description": "Standard transition duration."
+      },
+      "slow": {
+        "$value": "300ms",
+        "$type": "duration",
+        "$private": true,
+        "$description": "Slow, deliberate transitions."
+      },
+      "slower": {
+        "$value": "500ms",
+        "$type": "duration",
+        "$private": true,
+        "$description": "Slowest transitions for complex animations."
+      },
+      "extra-slow": {
+        "$value": "1000ms",
+        "$type": "duration",
+        "$private": true,
+        "$description": "Extra-slow duration for blink/pulse animations."
+      }
+    },
+    "easing": {
+      "default": {
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "$type": "cubicBezier",
+        "$private": true,
+        "$description": "Standard ease-in-out curve."
+      },
+      "in": {
+        "$value": "cubic-bezier(0.4, 0, 1, 1)",
+        "$type": "cubicBezier",
+        "$private": true,
+        "$description": "Ease-in: starts slow, ends fast."
+      },
+      "out": {
+        "$value": "cubic-bezier(0, 0, 0.2, 1)",
+        "$type": "cubicBezier",
+        "$private": true,
+        "$description": "Ease-out: starts fast, ends slow."
+      },
+      "spring": {
+        "$value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        "$type": "cubicBezier",
+        "$private": true,
+        "$description": "Spring overshoot for playful interactions."
+      }
+    }
+  },
+  "opacity": {
+    "0-03": {
+      "$value": "0.03",
+      "$type": "number",
+      "$private": true,
+      "$description": "3% opacity. Embedded literally in the shadow-xl light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-04": {
+      "$value": "0.04",
+      "$type": "number",
+      "$private": true,
+      "$description": "4% opacity. Embedded literally in the shadow-xs/sm/md/lg light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-05": {
+      "$value": "0.05",
+      "$type": "number",
+      "$private": true,
+      "$description": "5% opacity. Embedded literally in the shadow-inner light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-07": {
+      "$value": "0.07",
+      "$type": "number",
+      "$private": true,
+      "$description": "7% opacity. Embedded literally in the shadow-md light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-08": {
+      "$value": "0.08",
+      "$type": "number",
+      "$private": true,
+      "$description": "8% opacity. Embedded literally in the shadow-sm/lg/xl light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-10": {
+      "$value": "0.10",
+      "$type": "number",
+      "$private": true,
+      "$description": "10% opacity. Embedded literally in color.white-alpha.10 today. Reserved for a white-alpha token that would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-12": {
+      "$value": "0.12",
+      "$type": "number",
+      "$private": true,
+      "$description": "12% opacity. Embedded literally in the shadow-2xl light elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-15": {
+      "$value": "0.15",
+      "$type": "number",
+      "$private": true,
+      "$description": "15% opacity. Embedded literally in color.white-alpha.15 today. Reserved for a white-alpha token that would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-18": {
+      "$value": "0.18",
+      "$type": "number",
+      "$private": true,
+      "$description": "18% opacity. Embedded literally in the shadow-md dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-20": {
+      "$value": "0.20",
+      "$type": "number",
+      "$private": true,
+      "$description": "20% opacity. Embedded literally in the shadow-xs/sm/lg/xl dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-25": {
+      "$value": "0.25",
+      "$type": "number",
+      "$private": true,
+      "$description": "25% opacity. Embedded literally in the shadow-md dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-30": {
+      "$value": "0.30",
+      "$type": "number",
+      "$private": true,
+      "$description": "30% opacity. Embedded literally in the shadow-sm/lg/inner dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-35": {
+      "$value": "0.35",
+      "$type": "number",
+      "$private": true,
+      "$description": "35% opacity. Embedded literally in the shadow-xl dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
+      "$extensions": {
+        "status": "reserved"
+      }
+    },
+    "0-50": {
+      "$value": "0.50",
+      "$type": "number",
+      "$private": true,
+      "$description": "50% opacity, used in shadow-2xl dark and disabled states."
+    },
+    "0-80": {
+      "$value": "0.80",
+      "$type": "number",
+      "$private": true,
+      "$description": "80% opacity, used for overlay backdrop."
+    }
+  },
+  "zindex": {
+    "dropdown": {
+      "$value": "1000",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the dropdown layer."
+    },
+    "sticky": {
+      "$value": "1100",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the sticky layer."
+    },
+    "fixed": {
+      "$value": "1200",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the fixed layer."
+    },
+    "overlay": {
+      "$value": "1300",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the overlay layer."
+    },
+    "modal": {
+      "$value": "1400",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the modal layer."
+    },
+    "popover": {
+      "$value": "1500",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the popover layer."
+    },
+    "toast": {
+      "$value": "1600",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the toast layer."
+    },
+    "tooltip": {
+      "$value": "1700",
+      "$type": "number",
+      "$private": true,
+      "$description": "Raw stacking value for the tooltip layer."
+    }
+  },
+  "breakpoint": {
+    "sm": {
+      "$value": "40rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Viewport min-width of the `sm:` variant. Equal to Tailwind's default, which the build compiles into media queries."
+    },
+    "md": {
+      "$value": "48rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Viewport min-width of the `md:` variant. Equal to Tailwind's default, which the build compiles into media queries."
+    },
+    "lg": {
+      "$value": "64rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Viewport min-width of the `lg:` variant. Equal to Tailwind's default, which the build compiles into media queries."
+    },
+    "xl": {
+      "$value": "80rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Viewport min-width of the `xl:` variant. Equal to Tailwind's default, which the build compiles into media queries."
+    },
+    "2xl": {
+      "$value": "96rem",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Viewport min-width of the `2xl:` variant. Equal to Tailwind's default, which the build compiles into media queries."
+    }
+  },
+  "border-width": {
+    "1": {
+      "$value": "1px",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Hairline border width."
+    },
+    "1-5": {
+      "$value": "1.5px",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Between hairline and 2px; reads as a solid stroke on small marks."
+    }
+  }
+}

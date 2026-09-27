@@ -1,0 +1,10 @@
+{
+  "// ": "Copier ce fichier vers .vscode/mcp.json (non versionne). N'y mettre AUCUN secret.",
+  "servers": {
+    "dsaireadable": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["tsx", "./mcp-server/src/index.ts"]
+    }
+  }
+}

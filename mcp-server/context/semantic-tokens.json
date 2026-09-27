@@ -1,0 +1,1118 @@
+[
+  {
+    "path": "color.background.default",
+    "css_var": "--color-background-default",
+    "light": "{color.mist.0}",
+    "dark": "{color.mist.950}",
+    "type": "color",
+    "status": "active",
+    "usage": "Main page/app surface. Not for cards, popovers, or elevated layers."
+  },
+  {
+    "path": "color.background.subtle",
+    "css_var": "--color-background-subtle",
+    "light": "{color.mist.100}",
+    "dark": "{color.mist.800}",
+    "type": "color",
+    "status": "active",
+    "usage": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface."
+  },
+  {
+    "path": "color.background.elevated",
+    "css_var": "--color-background-elevated",
+    "light": "{color.mist.0}",
+    "dark": "{color.mist.900}",
+    "type": "color",
+    "status": "active",
+    "usage": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces."
+  },
+  {
+    "path": "color.background.inverse",
+    "css_var": "--color-background-inverse",
+    "light": "{color.mist.950}",
+    "dark": "{color.mist.0}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Inverted surface for contrast callouts. Not for general-purpose backgrounds."
+  },
+  {
+    "path": "color.text.default",
+    "css_var": "--color-text-default",
+    "light": "{color.mist.950}",
+    "dark": "{color.mist.50}",
+    "type": "color",
+    "status": "active",
+    "usage": "Primary body and heading text. Not for secondary, placeholder, or disabled text."
+  },
+  {
+    "path": "color.text.subtle",
+    "css_var": "--color-text-subtle",
+    "light": "{color.mist.600}",
+    "dark": "{color.mist.400}",
+    "type": "color",
+    "status": "active",
+    "usage": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content."
+  },
+  {
+    "path": "color.text.bold",
+    "css_var": "--color-text-bold",
+    "light": "{color.mist.950}",
+    "dark": "{color.mist.50}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text."
+  },
+  {
+    "path": "color.text.inverse",
+    "css_var": "--color-text-inverse",
+    "light": "{color.mist.0}",
+    "dark": "{color.mist.950}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Text on top of inverse (dark) surfaces. Not for default surface text."
+  },
+  {
+    "path": "color.text.action.default",
+    "css_var": "--color-text-action-default",
+    "light": "{color.violet.600}",
+    "dark": "{color.violet.400}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Text conveying a primary action (links, active button labels). Not for generic body text."
+  },
+  {
+    "path": "color.text.action.on",
+    "css_var": "--color-text-action-on",
+    "light": "{color.violet.50}",
+    "dark": "{color.violet.50}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Text rendered on top of a primary action background. Not for text on neutral surfaces."
+  },
+  {
+    "path": "color.text.destructive.default",
+    "css_var": "--color-text-destructive-default",
+    "light": "{color.red.600}",
+    "dark": "{color.red.500}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Error, danger, or destructive action text. Not for general warning or informational text."
+  },
+  {
+    "path": "color.border.default",
+    "css_var": "--color-border-default",
+    "light": "{color.mist.200}",
+    "dark": "{color.white-alpha.10}",
+    "type": "color",
+    "status": "active",
+    "usage": "Standard dividers and component outlines. Not for input fields or focus rings."
+  },
+  {
+    "path": "color.border.subtle",
+    "css_var": "--color-border-subtle",
+    "light": "{color.mist.200}",
+    "dark": "{color.white-alpha.10}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders."
+  },
+  {
+    "path": "color.border.input",
+    "css_var": "--color-border-input",
+    "light": "{color.mist.200}",
+    "dark": "{color.white-alpha.15}",
+    "type": "color",
+    "status": "active",
+    "usage": "Border for form input fields. Not for decorative dividers or layout borders."
+  },
+  {
+    "path": "color.border.focus",
+    "css_var": "--color-border-focus",
+    "light": "{color.mist.500}",
+    "dark": "{color.mist.500}",
+    "type": "color",
+    "status": "active",
+    "usage": "Focus ring outline for keyboard accessibility. Not for resting or hover states."
+  },
+  {
+    "path": "color.icon.default",
+    "css_var": "--color-icon-default",
+    "light": "{color.mist.950}",
+    "dark": "{color.mist.50}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Standard icon fill. Not for icons in branded or destructive contexts."
+  },
+  {
+    "path": "color.icon.subtle",
+    "css_var": "--color-icon-subtle",
+    "light": "{color.mist.500}",
+    "dark": "{color.mist.400}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Muted/secondary icon fill. Not for primary interactive icons."
+  },
+  {
+    "path": "color.icon.action",
+    "css_var": "--color-icon-action",
+    "light": "{color.violet.50}",
+    "dark": "{color.violet.50}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Icon on a primary action background. Not for icons on neutral surfaces."
+  },
+  {
+    "path": "color.action.background.default",
+    "css_var": "--color-action-background-default",
+    "light": "{color.violet.600}",
+    "dark": "{color.violet.700}",
+    "type": "color",
+    "status": "active",
+    "usage": "Primary call-to-action button/element background. Not for secondary or ghost variants."
+  },
+  {
+    "path": "color.action.background.foreground",
+    "css_var": "--color-action-background-foreground",
+    "light": "{color.violet.50}",
+    "dark": "{color.violet.50}",
+    "type": "color",
+    "status": "active",
+    "usage": "Text or icon on top of a primary action background. Not for text on neutral surfaces."
+  },
+  {
+    "path": "color.feedback.error.default",
+    "css_var": "--color-feedback-error-default",
+    "light": "{color.red.600}",
+    "dark": "{color.red.500}",
+    "type": "color",
+    "status": "active",
+    "usage": "Error state color for backgrounds, icons, and borders. Not for warnings or success states."
+  },
+  {
+    "path": "color.feedback.error.foreground",
+    "css_var": "--color-feedback-error-foreground",
+    "light": "{color.mist.0}",
+    "dark": "{color.mist.950}",
+    "type": "color",
+    "status": "active",
+    "usage": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface."
+  },
+  {
+    "path": "color.chart.1",
+    "css_var": "--color-chart-1",
+    "light": "{color.violet.600}",
+    "dark": "{color.violet.400}",
+    "type": "color",
+    "status": "active",
+    "usage": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+  },
+  {
+    "path": "color.chart.2",
+    "css_var": "--color-chart-2",
+    "light": "{color.blue.600}",
+    "dark": "{color.blue.300}",
+    "type": "color",
+    "status": "active",
+    "usage": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+  },
+  {
+    "path": "color.chart.3",
+    "css_var": "--color-chart-3",
+    "light": "{color.amber.600}",
+    "dark": "{color.yellow.200}",
+    "type": "color",
+    "status": "active",
+    "usage": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+  },
+  {
+    "path": "color.chart.4",
+    "css_var": "--color-chart-4",
+    "light": "{color.plum.800}",
+    "dark": "{color.plum.500}",
+    "type": "color",
+    "status": "active",
+    "usage": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+  },
+  {
+    "path": "color.chart.5",
+    "css_var": "--color-chart-5",
+    "light": "{color.amber.800}",
+    "dark": "{color.amber.500}",
+    "type": "color",
+    "status": "active",
+    "usage": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+  },
+  {
+    "path": "color.chart.sequential.1",
+    "css_var": "--color-chart-sequential-1",
+    "light": "{color.green.200}",
+    "dark": "{color.green.200}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
+  },
+  {
+    "path": "color.chart.sequential.2",
+    "css_var": "--color-chart-sequential-2",
+    "light": "{color.green.300}",
+    "dark": "{color.green.300}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
+  },
+  {
+    "path": "color.chart.sequential.3",
+    "css_var": "--color-chart-sequential-3",
+    "light": "{color.green.400}",
+    "dark": "{color.green.400}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
+  },
+  {
+    "path": "color.chart.sequential.4",
+    "css_var": "--color-chart-sequential-4",
+    "light": "{color.green.500}",
+    "dark": "{color.green.500}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
+  },
+  {
+    "path": "color.chart.sequential.5",
+    "css_var": "--color-chart-sequential-5",
+    "light": "{color.green.600}",
+    "dark": "{color.green.600}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
+  },
+  {
+    "path": "color.sidebar.background",
+    "css_var": "--color-sidebar-background",
+    "light": "{color.mist.50}",
+    "dark": "{color.mist.900}",
+    "type": "color",
+    "status": "active",
+    "usage": "Sidebar panel surface. Not for the main content area or popovers."
+  },
+  {
+    "path": "color.sidebar.foreground",
+    "css_var": "--color-sidebar-foreground",
+    "light": "{color.mist.950}",
+    "dark": "{color.mist.50}",
+    "type": "color",
+    "status": "active",
+    "usage": "Default text and icon color within the sidebar. Not for sidebar accent or muted items."
+  },
+  {
+    "path": "color.sidebar.border",
+    "css_var": "--color-sidebar-border",
+    "light": "{color.mist.200}",
+    "dark": "{color.white-alpha.10}",
+    "type": "color",
+    "status": "active",
+    "usage": "Sidebar internal divider/border. Not for content-area borders."
+  },
+  {
+    "path": "color.sidebar.ring",
+    "css_var": "--color-sidebar-ring",
+    "light": "{color.mist.500}",
+    "dark": "{color.mist.500}",
+    "type": "color",
+    "status": "active",
+    "usage": "Focus ring within the sidebar. Not for main content focus rings."
+  },
+  {
+    "path": "color.sidebar.primary.default",
+    "css_var": "--color-sidebar-primary-default",
+    "light": "{color.violet.550}",
+    "dark": "{color.violet.500}",
+    "type": "color",
+    "status": "active",
+    "usage": "Active/primary nav item background in the sidebar. Not for generic sidebar items."
+  },
+  {
+    "path": "color.sidebar.primary.on",
+    "css_var": "--color-sidebar-primary-on",
+    "light": "{color.violet.50}",
+    "dark": "{color.mist.0}",
+    "type": "color",
+    "status": "active",
+    "usage": "Text on top of the sidebar primary active item. Not for inactive item text."
+  },
+  {
+    "path": "color.sidebar.accent.default",
+    "css_var": "--color-sidebar-accent-default",
+    "light": "{color.mist.100}",
+    "dark": "{color.mist.800}",
+    "type": "color",
+    "status": "active",
+    "usage": "Hovered or secondary sidebar item background. Not for the active primary item."
+  },
+  {
+    "path": "color.sidebar.accent.foreground",
+    "css_var": "--color-sidebar-accent-foreground",
+    "light": "{color.mist.900}",
+    "dark": "{color.mist.50}",
+    "type": "color",
+    "status": "active",
+    "usage": "Text on sidebar accent (hover) surfaces. Not for primary active item text."
+  },
+  {
+    "path": "color.static.white",
+    "css_var": "--color-static-white",
+    "light": "{color.mist.0}",
+    "dark": "{color.mist.0}",
+    "type": "color",
+    "status": "active",
+    "usage": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies."
+  },
+  {
+    "path": "color.static.black",
+    "css_var": "--color-static-black",
+    "light": "{color.black}",
+    "dark": "{color.black}",
+    "type": "color",
+    "status": "active",
+    "usage": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces."
+  },
+  {
+    "path": "space.component.xs",
+    "css_var": "--space-component-xs",
+    "light": "{space.1}",
+    "dark": "{space.1}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Extra-small component padding/gap (4px). Not for layout or section spacing."
+  },
+  {
+    "path": "space.component.sm",
+    "css_var": "--space-component-sm",
+    "light": "{space.2}",
+    "dark": "{space.2}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Small component padding/gap (8px). Not for layout or section spacing."
+  },
+  {
+    "path": "space.component.md",
+    "css_var": "--space-component-md",
+    "light": "{space.4}",
+    "dark": "{space.4}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Medium component padding/gap (16px). Not for layout or section spacing."
+  },
+  {
+    "path": "space.component.lg",
+    "css_var": "--space-component-lg",
+    "light": "{space.6}",
+    "dark": "{space.6}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Large component padding/gap (24px). Not for layout or section spacing."
+  },
+  {
+    "path": "space.component.xl",
+    "css_var": "--space-component-xl",
+    "light": "{space.8}",
+    "dark": "{space.8}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Extra-large component padding/gap (32px). Not for layout or section spacing."
+  },
+  {
+    "path": "space.focus-ring-width",
+    "css_var": "--space-focus-ring-width",
+    "light": "{space.focus-ring-width}",
+    "dark": "{space.focus-ring-width}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Width of the focus ring indicator (2px). Use for all focus-visible ring styles."
+  },
+  {
+    "path": "space.layout.page-padding",
+    "css_var": "--space-layout-page-padding",
+    "light": "{space.page}",
+    "dark": "{space.page}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Horizontal padding for the main page container. Not for component-level spacing."
+  },
+  {
+    "path": "space.layout.section-gap",
+    "css_var": "--space-layout-section-gap",
+    "light": "{space.section}",
+    "dark": "{space.section}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Vertical gap between major page sections. Not for component-level spacing."
+  },
+  {
+    "path": "space.layout.content-sm",
+    "css_var": "--space-layout-content-sm",
+    "light": "{space.content-sm}",
+    "dark": "{space.content-sm}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Narrow content column max-width (42rem). Not for full-width or wide layouts."
+  },
+  {
+    "path": "space.layout.content-default",
+    "css_var": "--space-layout-content-default",
+    "light": "{space.content}",
+    "dark": "{space.content}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Default content column max-width (64rem). Not for narrow or wide layouts."
+  },
+  {
+    "path": "space.layout.content-lg",
+    "css_var": "--space-layout-content-lg",
+    "light": "{space.content-lg}",
+    "dark": "{space.content-lg}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Wide content column max-width (80rem). Not for narrow or default layouts."
+  },
+  {
+    "path": "space.layout.sidebar",
+    "css_var": "--space-layout-sidebar",
+    "light": "{space.sidebar}",
+    "dark": "{space.sidebar}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Default sidebar width (16rem). Use for the main navigation sidebar."
+  },
+  {
+    "path": "space.layout.sidebar-mobile",
+    "css_var": "--space-layout-sidebar-mobile",
+    "light": "{space.sidebar-mobile}",
+    "dark": "{space.sidebar-mobile}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Sidebar width on mobile viewports (18rem). Slightly wider for touch targets."
+  },
+  {
+    "path": "space.layout.sidebar-icon",
+    "css_var": "--space-layout-sidebar-icon",
+    "light": "{space.12}",
+    "dark": "{space.12}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Sidebar width in icon-only/collapsed mode (3rem)."
+  },
+  {
+    "path": "typography.size.xs",
+    "css_var": "--typography-size-xs",
+    "light": "{typography.size.xs}",
+    "dark": "{typography.size.xs}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Extra-small text size (12px). Use for labels, badges, captions."
+  },
+  {
+    "path": "typography.size.sm",
+    "css_var": "--typography-size-sm",
+    "light": "{typography.size.sm}",
+    "dark": "{typography.size.sm}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Small text size (14px). Use for secondary content and UI labels."
+  },
+  {
+    "path": "typography.size.base",
+    "css_var": "--typography-size-base",
+    "light": "{typography.size.base}",
+    "dark": "{typography.size.base}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Default body text size (16px). Use for main readable content."
+  },
+  {
+    "path": "typography.size.lg",
+    "css_var": "--typography-size-lg",
+    "light": "{typography.size.lg}",
+    "dark": "{typography.size.lg}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Large text size (18px). Use for featured body text."
+  },
+  {
+    "path": "typography.size.xl",
+    "css_var": "--typography-size-xl",
+    "light": "{typography.size.xl}",
+    "dark": "{typography.size.xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "XL text (20px). Use for section headings."
+  },
+  {
+    "path": "typography.size.2xl",
+    "css_var": "--typography-size-2xl",
+    "light": "{typography.size.2xl}",
+    "dark": "{typography.size.2xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "2XL text (24px). Use for page-level headings."
+  },
+  {
+    "path": "typography.size.3xl",
+    "css_var": "--typography-size-3xl",
+    "light": "{typography.size.3xl}",
+    "dark": "{typography.size.3xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "3XL text (30px). Use for hero or primary headings."
+  },
+  {
+    "path": "typography.size.4xl",
+    "css_var": "--typography-size-4xl",
+    "light": "{typography.size.4xl}",
+    "dark": "{typography.size.4xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "4XL text (36px). Use for display headings only."
+  },
+  {
+    "path": "typography.line-height.tight",
+    "css_var": "--typography-line-height-tight",
+    "light": "{typography.line-height.tight}",
+    "dark": "{typography.line-height.tight}",
+    "type": "number",
+    "status": "active",
+    "usage": "Tight line height for headings. Not for paragraph text."
+  },
+  {
+    "path": "typography.line-height.snug",
+    "css_var": "--typography-line-height-snug",
+    "light": "{typography.line-height.snug}",
+    "dark": "{typography.line-height.snug}",
+    "type": "number",
+    "status": "active",
+    "usage": "Snug line height. Not for long-form reading content."
+  },
+  {
+    "path": "typography.line-height.normal",
+    "css_var": "--typography-line-height-normal",
+    "light": "{typography.line-height.normal}",
+    "dark": "{typography.line-height.normal}",
+    "type": "number",
+    "status": "active",
+    "usage": "Default line height for body text."
+  },
+  {
+    "path": "typography.line-height.relaxed",
+    "css_var": "--typography-line-height-relaxed",
+    "light": "{typography.line-height.relaxed}",
+    "dark": "{typography.line-height.relaxed}",
+    "type": "number",
+    "status": "active",
+    "usage": "Relaxed line height for improved readability in long-form content."
+  },
+  {
+    "path": "typography.line-height.loose",
+    "css_var": "--typography-line-height-loose",
+    "light": "{typography.line-height.loose}",
+    "dark": "{typography.line-height.loose}",
+    "type": "number",
+    "status": "active",
+    "usage": "Loose line height for highly spaced text. Not for dense UIs."
+  },
+  {
+    "path": "typography.letter-spacing.tight",
+    "css_var": "--typography-letter-spacing-tight",
+    "light": "{typography.letter-spacing.tight}",
+    "dark": "{typography.letter-spacing.tight}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Tight letter spacing for large headings. Not for body text."
+  },
+  {
+    "path": "typography.letter-spacing.normal",
+    "css_var": "--typography-letter-spacing-normal",
+    "light": "{typography.letter-spacing.normal}",
+    "dark": "{typography.letter-spacing.normal}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Default letter spacing. Use as baseline."
+  },
+  {
+    "path": "typography.letter-spacing.wide",
+    "css_var": "--typography-letter-spacing-wide",
+    "light": "{typography.letter-spacing.wide}",
+    "dark": "{typography.letter-spacing.wide}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Wide letter spacing for small UI labels."
+  },
+  {
+    "path": "typography.letter-spacing.wider",
+    "css_var": "--typography-letter-spacing-wider",
+    "light": "{typography.letter-spacing.wider}",
+    "dark": "{typography.letter-spacing.wider}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Wider letter spacing for all-caps or overline text."
+  },
+  {
+    "path": "typography.font-weight.normal",
+    "css_var": "--typography-font-weight-normal",
+    "light": "{typography.font-weight.normal}",
+    "dark": "{typography.font-weight.normal}",
+    "type": "font-weight",
+    "status": "active",
+    "usage": "Normal weight for body text."
+  },
+  {
+    "path": "typography.font-weight.medium",
+    "css_var": "--typography-font-weight-medium",
+    "light": "{typography.font-weight.medium}",
+    "dark": "{typography.font-weight.medium}",
+    "type": "font-weight",
+    "status": "active",
+    "usage": "Medium weight for UI labels and buttons."
+  },
+  {
+    "path": "typography.font-weight.semibold",
+    "css_var": "--typography-font-weight-semibold",
+    "light": "{typography.font-weight.semibold}",
+    "dark": "{typography.font-weight.semibold}",
+    "type": "font-weight",
+    "status": "active",
+    "usage": "Semibold for sub-headings and emphasis."
+  },
+  {
+    "path": "typography.font-weight.bold",
+    "css_var": "--typography-font-weight-bold",
+    "light": "{typography.font-weight.bold}",
+    "dark": "{typography.font-weight.bold}",
+    "type": "font-weight",
+    "status": "active",
+    "usage": "Bold for headings and strong emphasis."
+  },
+  {
+    "path": "typography.font-family.sans",
+    "css_var": "--typography-font-family-sans",
+    "light": "{typography.font-family.sans}",
+    "dark": "{typography.font-family.sans}",
+    "type": "font-family",
+    "status": "reserved",
+    "usage": "Primary sans-serif typeface for UI text."
+  },
+  {
+    "path": "typography.font-family.mono",
+    "css_var": "--typography-font-family-mono",
+    "light": "{typography.font-family.mono}",
+    "dark": "{typography.font-family.mono}",
+    "type": "font-family",
+    "status": "reserved",
+    "usage": "Monospace typeface for code, numbers, and technical content."
+  },
+  {
+    "path": "radius.none",
+    "css_var": "--radius-none",
+    "light": "{radius.none}",
+    "dark": "{radius.none}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Zero radius — square corners. Use for full-bleed or table elements."
+  },
+  {
+    "path": "radius.xs",
+    "css_var": "--radius-xs",
+    "light": "{radius.xs}",
+    "dark": "{radius.xs}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips."
+  },
+  {
+    "path": "radius.sm",
+    "css_var": "--radius-sm",
+    "light": "{radius.sm}",
+    "dark": "{radius.sm}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Small rounding (0.6× base). Use for inputs, small buttons."
+  },
+  {
+    "path": "radius.md",
+    "css_var": "--radius-md",
+    "light": "{radius.md}",
+    "dark": "{radius.md}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Medium rounding (0.8× base). Use for default buttons and form controls."
+  },
+  {
+    "path": "radius.lg",
+    "css_var": "--radius-lg",
+    "light": "{radius.lg}",
+    "dark": "{radius.lg}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius."
+  },
+  {
+    "path": "radius.xl",
+    "css_var": "--radius-xl",
+    "light": "{radius.xl}",
+    "dark": "{radius.xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Larger rounding (1.4× base). Use for modals and prominent containers."
+  },
+  {
+    "path": "radius.2xl",
+    "css_var": "--radius-2xl",
+    "light": "{radius.2xl}",
+    "dark": "{radius.2xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Extra-large rounding (1.8× base). Use for floating panels."
+  },
+  {
+    "path": "radius.3xl",
+    "css_var": "--radius-3xl",
+    "light": "{radius.3xl}",
+    "dark": "{radius.3xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Very large rounding (2.2× base). Use sparingly for decorative containers."
+  },
+  {
+    "path": "radius.4xl",
+    "css_var": "--radius-4xl",
+    "light": "{radius.4xl}",
+    "dark": "{radius.4xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Maximum rounding (2.6× base). Use only for hero cards or large chips."
+  },
+  {
+    "path": "radius.full",
+    "css_var": "--radius-full",
+    "light": "{radius.full}",
+    "dark": "{radius.full}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Pill/full rounding. Use for pills, avatars, toggles."
+  },
+  {
+    "path": "elevation.xs",
+    "css_var": "--elevation-xs",
+    "light": "{elevation.light.xs}",
+    "dark": "{elevation.dark.xs}",
+    "type": "shadow",
+    "status": "active",
+    "usage": "Minimal lift for interactive elements. Not for decorative purposes."
+  },
+  {
+    "path": "elevation.sm",
+    "css_var": "--elevation-sm",
+    "light": "{elevation.light.sm}",
+    "dark": "{elevation.dark.sm}",
+    "type": "shadow",
+    "status": "active",
+    "usage": "Small lift for cards and hover states. Not for fixed navigation."
+  },
+  {
+    "path": "elevation.md",
+    "css_var": "--elevation-md",
+    "light": "{elevation.light.md}",
+    "dark": "{elevation.dark.md}",
+    "type": "shadow",
+    "status": "active",
+    "usage": "Medium elevation for dropdowns and context menus. Not for inline content."
+  },
+  {
+    "path": "elevation.lg",
+    "css_var": "--elevation-lg",
+    "light": "{elevation.light.lg}",
+    "dark": "{elevation.dark.lg}",
+    "type": "shadow",
+    "status": "active",
+    "usage": "Large elevation for modals and side panels. Not for standard cards."
+  },
+  {
+    "path": "elevation.xl",
+    "css_var": "--elevation-xl",
+    "light": "{elevation.light.xl}",
+    "dark": "{elevation.dark.xl}",
+    "type": "shadow",
+    "status": "active",
+    "usage": "Extra-large elevation for full overlay panels. Not for inline components."
+  },
+  {
+    "path": "elevation.2xl",
+    "css_var": "--elevation-2xl",
+    "light": "{elevation.light.2xl}",
+    "dark": "{elevation.dark.2xl}",
+    "type": "shadow",
+    "status": "active",
+    "usage": "Maximum elevation for toasts and high-priority overlays. Use sparingly."
+  },
+  {
+    "path": "elevation.inner",
+    "css_var": "--elevation-inner",
+    "light": "{elevation.light.inner}",
+    "dark": "{elevation.dark.inner}",
+    "type": "shadow",
+    "status": "active",
+    "usage": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements."
+  },
+  {
+    "path": "motion.duration.instant",
+    "css_var": "--motion-duration-instant",
+    "light": "{motion.duration.instant}",
+    "dark": "{motion.duration.instant}",
+    "type": "duration",
+    "status": "reserved",
+    "usage": "No duration — for immediate state changes. Not for visual transitions."
+  },
+  {
+    "path": "motion.duration.fast",
+    "css_var": "--motion-duration-fast",
+    "light": "{motion.duration.fast}",
+    "dark": "{motion.duration.fast}",
+    "type": "duration",
+    "status": "active",
+    "usage": "Fast micro-interactions (100ms). Use for hover/focus feedback."
+  },
+  {
+    "path": "motion.duration.normal",
+    "css_var": "--motion-duration-normal",
+    "light": "{motion.duration.normal}",
+    "dark": "{motion.duration.normal}",
+    "type": "duration",
+    "status": "active",
+    "usage": "Standard transition duration (200ms). Default for most transitions."
+  },
+  {
+    "path": "motion.duration.slow",
+    "css_var": "--motion-duration-slow",
+    "light": "{motion.duration.slow}",
+    "dark": "{motion.duration.slow}",
+    "type": "duration",
+    "status": "active",
+    "usage": "Slow, deliberate transitions (300ms). Use for modals and drawers."
+  },
+  {
+    "path": "motion.duration.slower",
+    "css_var": "--motion-duration-slower",
+    "light": "{motion.duration.slower}",
+    "dark": "{motion.duration.slower}",
+    "type": "duration",
+    "status": "active",
+    "usage": "Slowest transitions (500ms). Use only for complex animations."
+  },
+  {
+    "path": "motion.duration.extra-slow",
+    "css_var": "--motion-duration-extra-slow",
+    "light": "{motion.duration.extra-slow}",
+    "dark": "{motion.duration.extra-slow}",
+    "type": "duration",
+    "status": "active",
+    "usage": "Extra-slow duration (1000ms). Use for blink/pulse animations like caret blink."
+  },
+  {
+    "path": "motion.easing.default",
+    "css_var": "--motion-easing-default",
+    "light": "{motion.easing.default}",
+    "dark": "{motion.easing.default}",
+    "type": "cubicBezier",
+    "status": "active",
+    "usage": "Standard ease-in-out. Default for all UI transitions."
+  },
+  {
+    "path": "motion.easing.in",
+    "css_var": "--motion-easing-in",
+    "light": "{motion.easing.in}",
+    "dark": "{motion.easing.in}",
+    "type": "cubicBezier",
+    "status": "active",
+    "usage": "Ease-in curve. Use for elements exiting the screen."
+  },
+  {
+    "path": "motion.easing.out",
+    "css_var": "--motion-easing-out",
+    "light": "{motion.easing.out}",
+    "dark": "{motion.easing.out}",
+    "type": "cubicBezier",
+    "status": "active",
+    "usage": "Ease-out curve. Use for elements entering the screen."
+  },
+  {
+    "path": "motion.easing.spring",
+    "css_var": "--motion-easing-spring",
+    "light": "{motion.easing.spring}",
+    "dark": "{motion.easing.spring}",
+    "type": "cubicBezier",
+    "status": "active",
+    "usage": "Spring overshoot. Use for playful or bouncy interactions only."
+  },
+  {
+    "path": "opacity.disabled",
+    "css_var": "--opacity-disabled",
+    "light": "{opacity.0-50}",
+    "dark": "{opacity.0-50}",
+    "type": "number",
+    "status": "reserved",
+    "usage": "Opacity for disabled interactive elements. Not for placeholder or overlay use."
+  },
+  {
+    "path": "opacity.placeholder",
+    "css_var": "--opacity-placeholder",
+    "light": "{opacity.0-50}",
+    "dark": "{opacity.0-50}",
+    "type": "number",
+    "status": "reserved",
+    "usage": "Opacity for placeholder text. Not for disabled or overlay use."
+  },
+  {
+    "path": "opacity.overlay",
+    "css_var": "--opacity-overlay",
+    "light": "{opacity.0-80}",
+    "dark": "{opacity.0-80}",
+    "type": "number",
+    "status": "reserved",
+    "usage": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency."
+  },
+  {
+    "path": "zindex.dropdown",
+    "css_var": "--zindex-dropdown",
+    "light": "{zindex.dropdown}",
+    "dark": "{zindex.dropdown}",
+    "type": "number",
+    "status": "active",
+    "usage": "Dropdown menus. Renders above page content."
+  },
+  {
+    "path": "zindex.sticky",
+    "css_var": "--zindex-sticky",
+    "light": "{zindex.sticky}",
+    "dark": "{zindex.sticky}",
+    "type": "number",
+    "status": "active",
+    "usage": "Sticky headers/footers. Renders above dropdowns."
+  },
+  {
+    "path": "zindex.fixed",
+    "css_var": "--zindex-fixed",
+    "light": "{zindex.fixed}",
+    "dark": "{zindex.fixed}",
+    "type": "number",
+    "status": "active",
+    "usage": "Fixed position elements. Renders above sticky."
+  },
+  {
+    "path": "zindex.overlay",
+    "css_var": "--zindex-overlay",
+    "light": "{zindex.overlay}",
+    "dark": "{zindex.overlay}",
+    "type": "number",
+    "status": "active",
+    "usage": "Overlay/backdrop. Renders above fixed elements."
+  },
+  {
+    "path": "zindex.modal",
+    "css_var": "--zindex-modal",
+    "light": "{zindex.modal}",
+    "dark": "{zindex.modal}",
+    "type": "number",
+    "status": "active",
+    "usage": "Modal dialogs. Renders above overlays."
+  },
+  {
+    "path": "zindex.popover",
+    "css_var": "--zindex-popover",
+    "light": "{zindex.popover}",
+    "dark": "{zindex.popover}",
+    "type": "number",
+    "status": "active",
+    "usage": "Popovers and tooltips of high priority. Renders above modals."
+  },
+  {
+    "path": "zindex.toast",
+    "css_var": "--zindex-toast",
+    "light": "{zindex.toast}",
+    "dark": "{zindex.toast}",
+    "type": "number",
+    "status": "active",
+    "usage": "Toast notifications. Always visible above other layers."
+  },
+  {
+    "path": "zindex.tooltip",
+    "css_var": "--zindex-tooltip",
+    "light": "{zindex.tooltip}",
+    "dark": "{zindex.tooltip}",
+    "type": "number",
+    "status": "active",
+    "usage": "Tooltips. Highest z-index to always appear on top."
+  },
+  {
+    "path": "breakpoint.sm",
+    "css_var": "--breakpoint-sm",
+    "light": "{breakpoint.sm}",
+    "dark": "{breakpoint.sm}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Viewport width from which the `sm:` variant applies (mobile-first, min-width). Not a container width."
+  },
+  {
+    "path": "breakpoint.md",
+    "css_var": "--breakpoint-md",
+    "light": "{breakpoint.md}",
+    "dark": "{breakpoint.md}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Viewport width from which the `md:` variant applies (mobile-first, min-width). Not a container width."
+  },
+  {
+    "path": "breakpoint.lg",
+    "css_var": "--breakpoint-lg",
+    "light": "{breakpoint.lg}",
+    "dark": "{breakpoint.lg}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Viewport width from which the `lg:` variant applies (mobile-first, min-width). Not a container width."
+  },
+  {
+    "path": "breakpoint.xl",
+    "css_var": "--breakpoint-xl",
+    "light": "{breakpoint.xl}",
+    "dark": "{breakpoint.xl}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Viewport width from which the `xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts."
+  },
+  {
+    "path": "breakpoint.2xl",
+    "css_var": "--breakpoint-2xl",
+    "light": "{breakpoint.2xl}",
+    "dark": "{breakpoint.2xl}",
+    "type": "dimension",
+    "status": "reserved",
+    "usage": "Viewport width from which the `2xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts."
+  },
+  {
+    "path": "border-width.default",
+    "css_var": "--border-width-default",
+    "light": "{border-width.1}",
+    "dark": "{border-width.1}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Width of every plain border: `border`, `border-t`, `divide-x`… Not for focus rings, which use space.focus-ring-width."
+  },
+  {
+    "path": "border-width.chart-indicator",
+    "css_var": "--border-width-chart-indicator",
+    "light": "{border-width.1-5}",
+    "dark": "{border-width.1-5}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Stroke of the dashed series indicator in chart tooltips. Not for component borders."
+  }
+]

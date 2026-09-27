@@ -1,0 +1,145 @@
+name: CI
+
+# Pas de filtre `paths:` volontairement : un check requis par la protection de
+# branche doit s'executer sur chaque PR, sinon il reste "en attente" et bloque
+# le merge au lieu de le garder.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "24"
+
+jobs:
+  tokens-validate:
+    name: tokens-validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run tokens-validate
+
+  typecheck:
+    name: typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm ci --prefix mcp-server
+      - run: npm run typecheck:all
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx prettier --check "**/*.{ts,tsx,md}"
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+  index-schema:
+    name: index-schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run index:validate
+
+  spec-sections:
+    name: spec-sections
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run specs:validate
+
+  context-freshness:
+    name: context-freshness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm ci --prefix mcp-server
+      - run: npm run generate-context
+      # `git diff --exit-code` ignorerait un fichier de contexte nouvellement
+      # genere et non suivi : c'est precisement le cas qui doit echouer.
+      - name: Fail if generated context drifted
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Le contexte genere derive des sources. Lance 'npm run generate-context' et commite le resultat."
+            git status --porcelain
+            git diff
+            exit 1
+          fi
+
+  mcp-test:
+    name: mcp-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm ci --prefix mcp-server
+      - run: npm run mcp:test
+
+  registry:
+    name: registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      # Freshness first: it also rejects bare or dangling registryDependencies,
+      # which `shadcn registry validate` does not look at.
+      - run: npm run registry:check
+      - run: npx --yes shadcn@latest registry validate ./registry.json
+      # The only check that proves the registry is consumable: every item
+      # installed into a blank app, then type-checked. A pull request tests the
+      # registry it builds; a push to main tests the published addresses.
+      - run: npm run registry:test-install -- --source ${{ github.event_name == 'push' && 'github' || 'local' }}

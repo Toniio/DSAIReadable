@@ -1,0 +1,169 @@
+{
+  "shadcn": {
+    "background": {
+      "$value": "{color.background.default}",
+      "$type": "color",
+      "$description": "shadcn --background compatibility alias. Maps the semantic default surface to the shadcn variable name expected by shadcn/ui components."
+    },
+    "foreground": {
+      "$value": "{color.text.default}",
+      "$type": "color",
+      "$description": "shadcn --foreground compatibility alias. Maps primary text color to the shadcn variable name."
+    },
+    "card": {
+      "$value": "{color.background.subtle}",
+      "$type": "color",
+      "$description": "shadcn --card compatibility alias. Cards use the subtle surface (slightly off-white / dark mist) rather than pure default to create visual separation."
+    },
+    "card-foreground": {
+      "$value": "{color.text.default}",
+      "$type": "color",
+      "$description": "shadcn --card-foreground compatibility alias. Reuses default text color for card content."
+    },
+    "popover": {
+      "$value": "{color.background.elevated}",
+      "$type": "color",
+      "$description": "shadcn --popover compatibility alias. Popovers use the elevated surface token to convey depth above the page."
+    },
+    "popover-foreground": {
+      "$value": "{color.text.default}",
+      "$type": "color",
+      "$description": "shadcn --popover-foreground compatibility alias. Reuses default text color for popover content."
+    },
+    "primary": {
+      "$value": "{color.action.background.default}",
+      "$type": "color",
+      "$description": "shadcn --primary compatibility alias. Maps the brand action background to the shadcn primary slot."
+    },
+    "primary-foreground": {
+      "$value": "{color.action.background.foreground}",
+      "$type": "color",
+      "$description": "shadcn --primary-foreground compatibility alias. Maps the on-action foreground to the shadcn primary-foreground slot."
+    },
+    "secondary": {
+      "$value": "{color.background.subtle}",
+      "$type": "color",
+      "$description": "shadcn --secondary compatibility alias. The secondary variant shares the subtle surface token rather than a palette of its own."
+    },
+    "secondary-foreground": {
+      "$value": "{color.text.default}",
+      "$type": "color",
+      "$description": "shadcn --secondary-foreground compatibility alias. Secondary text uses default text color for legibility."
+    },
+    "muted": {
+      "$value": "{color.background.subtle}",
+      "$type": "color",
+      "$description": "shadcn --muted compatibility alias. Muted areas share the subtle surface token."
+    },
+    "muted-foreground": {
+      "$value": "{color.text.subtle}",
+      "$type": "color",
+      "$description": "shadcn --muted-foreground compatibility alias. Muted foreground maps to the semantic subtle text token."
+    },
+    "accent": {
+      "$value": "{color.background.subtle}",
+      "$type": "color",
+      "$description": "shadcn --accent compatibility alias. Accent hover states share the subtle surface token with muted areas."
+    },
+    "accent-foreground": {
+      "$value": "{color.text.default}",
+      "$type": "color",
+      "$description": "shadcn --accent-foreground compatibility alias. Accent foreground uses default text for contrast."
+    },
+    "destructive": {
+      "$value": "{color.feedback.error.default}",
+      "$type": "color",
+      "$description": "shadcn --destructive compatibility alias. Maps the semantic error token to the shadcn destructive slot."
+    },
+    "destructive-foreground": {
+      "$value": "{color.feedback.error.foreground}",
+      "$type": "color",
+      "$description": "shadcn --destructive-foreground compatibility alias. Text and icons on a solid destructive surface."
+    },
+    "border": {
+      "$value": "{color.border.default}",
+      "$type": "color",
+      "$description": "shadcn --border compatibility alias. Maps the semantic default border to the shadcn border slot."
+    },
+    "input": {
+      "$value": "{color.border.input}",
+      "$type": "color",
+      "$description": "shadcn --input compatibility alias. Maps the semantic input border to the shadcn input slot for form field outlines."
+    },
+    "ring": {
+      "$value": "{color.border.focus}",
+      "$type": "color",
+      "$description": "shadcn --ring compatibility alias. Maps the semantic focus ring to the shadcn ring slot."
+    },
+    "radius": {
+      "$value": "{radius.lg}",
+      "$type": "dimension",
+      "$description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem), the canonical border-radius used across shadcn components."
+    },
+    "chart-1": {
+      "$value": "{color.chart.1}",
+      "$type": "color",
+      "$description": "shadcn --chart-1 compatibility alias. Maps the semantic chart series 1 token."
+    },
+    "chart-2": {
+      "$value": "{color.chart.2}",
+      "$type": "color",
+      "$description": "shadcn --chart-2 compatibility alias. Maps the semantic chart series 2 token."
+    },
+    "chart-3": {
+      "$value": "{color.chart.3}",
+      "$type": "color",
+      "$description": "shadcn --chart-3 compatibility alias. Maps the semantic chart series 3 token."
+    },
+    "chart-4": {
+      "$value": "{color.chart.4}",
+      "$type": "color",
+      "$description": "shadcn --chart-4 compatibility alias. Maps the semantic chart series 4 token."
+    },
+    "chart-5": {
+      "$value": "{color.chart.5}",
+      "$type": "color",
+      "$description": "shadcn --chart-5 compatibility alias. Maps the semantic chart series 5 token."
+    },
+    "sidebar": {
+      "$value": "{color.sidebar.background}",
+      "$type": "color",
+      "$description": "shadcn --sidebar compatibility alias. Maps the semantic sidebar background token."
+    },
+    "sidebar-foreground": {
+      "$value": "{color.sidebar.foreground}",
+      "$type": "color",
+      "$description": "shadcn --sidebar-foreground compatibility alias. Maps the semantic sidebar foreground token."
+    },
+    "sidebar-primary": {
+      "$value": "{color.sidebar.primary.default}",
+      "$type": "color",
+      "$description": "shadcn --sidebar-primary compatibility alias. Maps the active/primary sidebar item color."
+    },
+    "sidebar-primary-foreground": {
+      "$value": "{color.sidebar.primary.on}",
+      "$type": "color",
+      "$description": "shadcn --sidebar-primary-foreground compatibility alias. Maps the on-primary sidebar text; the name mismatch (primary-foreground vs primary.on) is why this bridge is needed."
+    },
+    "sidebar-accent": {
+      "$value": "{color.sidebar.accent.default}",
+      "$type": "color",
+      "$description": "shadcn --sidebar-accent compatibility alias. Maps the sidebar hover/accent surface token."
+    },
+    "sidebar-accent-foreground": {
+      "$value": "{color.sidebar.accent.foreground}",
+      "$type": "color",
+      "$description": "shadcn --sidebar-accent-foreground compatibility alias. Maps the sidebar accent text token."
+    },
+    "sidebar-border": {
+      "$value": "{color.sidebar.border}",
+      "$type": "color",
+      "$description": "shadcn --sidebar-border compatibility alias. Maps the sidebar border token."
+    },
+    "sidebar-ring": {
+      "$value": "{color.sidebar.ring}",
+      "$type": "color",
+      "$description": "shadcn --sidebar-ring compatibility alias. Maps the sidebar focus ring token."
+    }
+  }
+}

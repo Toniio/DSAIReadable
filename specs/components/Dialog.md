@@ -1,0 +1,156 @@
+# Dialog
+
+## Metadata
+
+| Champ         | Valeur                   |
+| ------------- | ------------------------ |
+| Nom           | Dialog                   |
+| Catégorie     | Overlay                  |
+| Statut        | stable                   |
+| figma_node_id |                          |
+| code_path     | components/ui/dialog.tsx |
+
+## Rôle
+
+Fenêtre modale polyvalente pour afficher du contenu interactif (formulaire, détail, confirmation) au-dessus de l'interface principale.
+
+## Usage
+
+- Afficher un formulaire de création ou d'édition sans quitter la page
+- Présenter des détails complémentaires dans une fenêtre superposée
+- Demander une saisie utilisateur avant de poursuivre un flux
+- Afficher un contenu riche nécessitant une attention focalisée
+- Alternative desktop aux écrans plein-écran sur mobile
+
+## Contraintes
+
+- Ne pas utiliser pour les confirmations destructrices — préférer `AlertDialog`
+- Limiter à 1 Dialog visible par vue (éviter l'empilement de modales)
+- `DialogTitle` est requis pour l'accessibilité (lecteurs d'écran)
+- Ne pas placer de contenu scrollable très long — préférer `Sheet` ou une page dédiée
+- Le bouton de fermeture peut être masqué via `showCloseButton={false}` mais un moyen de fermer doit rester disponible
+- Chaînes par défaut en anglais issues de `UI_STRINGS.dialog` — surcharger via `closeLabel`
+
+## Dépendances
+
+- `Dialog` de `radix-ui` (primitives Root, Trigger, Portal, Overlay, Content, Close, Title, Description)
+- `Button` de `@/components/ui/button` (bouton de fermeture et bouton dans le footer)
+- `@phosphor-icons/react` — icône `XIcon` pour le bouton de fermeture
+
+## Anatomie
+
+| Slot                             | Rôle                                     |
+| -------------------------------- | ---------------------------------------- |
+| `data-slot="dialog"`             | Racine du composant                      |
+| `data-slot="dialog-trigger"`     | Élément déclencheur d'ouverture          |
+| `data-slot="dialog-portal"`      | Portail de rendu hors du DOM parent      |
+| `data-slot="dialog-overlay"`     | Fond semi-transparent avec backdrop-blur |
+| `data-slot="dialog-content"`     | Conteneur principal de la modale         |
+| `data-slot="dialog-close"`       | Bouton de fermeture (icône ×)            |
+| `data-slot="dialog-header"`      | Zone d'en-tête (titre + description)     |
+| `data-slot="dialog-footer"`      | Zone de pied (boutons d'action)          |
+| `data-slot="dialog-title"`       | Titre de la modale                       |
+| `data-slot="dialog-description"` | Description textuelle                    |
+
+## Tokens utilisés
+
+| Token                     | Usage                                 |
+| ------------------------- | ------------------------------------- |
+| `bg-popover`              | Fond du contenu de la modale          |
+| `text-popover-foreground` | Couleur du texte principal            |
+| `bg-black/10`             | Fond de l'overlay                     |
+| `ring-foreground/10`      | Bordure subtile autour du contenu     |
+| `text-muted-foreground`   | Couleur du texte de description       |
+| `font-heading`            | Police du titre                       |
+| `--space-component-lg`    | Marge max-width responsive du contenu |
+| `duration-fast`           | Durée des animations d'entrée/sortie  |
+
+## Props / API
+
+| Prop              | Type                      | Défaut      | Description                                                     |
+| ----------------- | ------------------------- | ----------- | --------------------------------------------------------------- |
+| `open`            | `boolean`                 | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)                    |
+| `onOpenChange`    | `(open: boolean) => void` | —           | Callback lors du changement d'état                              |
+| `showCloseButton` | `boolean`                 | `true`      | Affiche le bouton × en haut à droite (sur `DialogContent`)      |
+| `showCloseButton` | `boolean`                 | `false`     | Affiche un bouton « Close » dans le footer (sur `DialogFooter`) |
+| `className`       | `string`                  | —           | Classes CSS additionnelles (sur chaque sous-composant)          |
+
+## Variantes
+
+<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+
+Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+
+## États
+
+| État     | Description                                                             |
+| -------- | ----------------------------------------------------------------------- |
+| default  | Modale fermée, aucun overlay visible                                    |
+| open     | Overlay affiché, contenu centré avec animation `fade-in` + `zoom-in-95` |
+| closing  | Animation de sortie `fade-out` + `zoom-out-95`                          |
+| focus    | Focus piégé à l'intérieur de la modale (focus trap Radix)               |
+| disabled | N/A — les contrôles internes gèrent leur propre état disabled           |
+
+## Accessibilité
+
+**Pattern** : [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)
+
+**Rôle** : `role="dialog"`, `aria-modal="true"` ; étiqueté par `DialogTitle`, décrit par `DialogDescription`.
+
+**Clavier** :
+
+| Touche              | Action                                                      |
+| ------------------- | ----------------------------------------------------------- |
+| `Tab` / `Shift+Tab` | Parcourt les éléments focalisables, piégés dans le dialogue |
+| `Escape`            | Ferme le dialogue                                           |
+
+**Nom accessible** : `DialogTitle` est obligatoire (Radix avertit en son absence) ; le masquer visuellement si besoin, jamais le supprimer. Le bouton de fermeture est nommé par `closeLabel` (`UI_STRINGS.dialog.close`).
+
+**Vigilance** :
+
+- À la fermeture, le focus revient au déclencheur : ne pas démonter le déclencheur pendant que le dialogue est ouvert.
+- La surface elle-même n'affiche pas d'anneau de focus (`focus-managed`) : le focus va sur un contrôle à l'intérieur.
+
+## Exemple de code
+
+```tsx
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+
+export default function Example() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Modifier le profil</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Modifier le profil</DialogTitle>
+          <DialogDescription>
+            Modifiez vos informations personnelles ci-dessous.
+          </DialogDescription>
+        </DialogHeader>
+        {/* Contenu du formulaire */}
+        <DialogFooter>
+          <Button type="submit">Enregistrer</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
+```
+
+## Références croisées
+
+- `AlertDialog` — pour les confirmations bloquantes nécessitant une réponse obligatoire
+- `Sheet` — panneau latéral pour du contenu étendu ou des formulaires longs
+- `Drawer` — alternative mobile au Dialog, panneau glissant depuis un bord
+- `Button` — utilisé en interne pour le bouton de fermeture

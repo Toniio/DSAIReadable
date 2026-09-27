@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+dist/
+out/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+
+# Config locale VS Code — seul l'exemple est versionne
+.vscode/*
+!.vscode/mcp.json.example
+
+# Agent workspaces (decision 2026-09-17 #3)
+.claude/
+worklog/
+
+# Audit & backlog documents — kept outside the public repository
+audit-*.md
+backlog-*.md
+validation-report.md
