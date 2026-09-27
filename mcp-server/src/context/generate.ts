@@ -1401,24 +1401,58 @@ function generatePagePatterns() {
 
 // ── 16. ds-metadata.json ────────────────────────────────────────────
 /**
- * Single source of truth for version and library identity, so no tool has to
- * hardcode them. Sourced from design-system.index.json and mcp-server/package.json.
+ * Single source of truth for versions and identity, so no tool has to
+ * hardcode them. Each field is read from the file `sources` names:
+ *
+ * - design_system_version: design-system.index.json
+ * - mcp_server_version:    mcp-server/package.json
+ * - registry_source:       registry.json. No ref: an address such as
+ *   Toniio/DSAIReadable/button carries none, and the shadcn CLI reads the
+ *   repository's default branch.
+ * - stack, framework:      the root package.json dependencies
  */
 function generateDsMetadata() {
-  const pkg = JSON.parse(
+  const mcpPkg = JSON.parse(
     readFileSync(
       path.resolve(import.meta.dirname, "../../package.json"),
       "utf-8"
     )
   )
+  const appPkg = readJSON("package.json")
+  const registry = readJSON("registry.json")
+  const deps: Record<string, string> = {
+    ...appPkg.devDependencies,
+    ...appPkg.dependencies,
+  }
+  const range = (name: string) => {
+    if (!deps[name]) throw new Error(`package.json declares no "${name}"`)
+    return deps[name]
+  }
+  const major = (name: string) => /\d+/.exec(range(name))?.[0]
+  const repository = new URL(registry.homepage).pathname.replace(/^\/|\/$/g, "")
 
   return write("ds-metadata.json", {
     name: "DSAIReadable",
     description: "Design System AI-Readable",
     design_system_version: dsIndex.version,
-    mcp_server_version: pkg.version,
-    framework: "React 19 / Next.js 16 / Tailwind CSS v4 / shadcn-ui",
-    last_publish: dsIndex.library?.last_publish ?? null,
+    mcp_server_version: mcpPkg.version,
+    registry_source: {
+      repository,
+      registry: registry.name,
+      item_address: `${repository}/<item>`,
+    },
+    stack: {
+      react: range("react"),
+      next: range("next"),
+      tailwindcss: range("tailwindcss"),
+    },
+    framework: `React ${major("react")} / Next.js ${major("next")} / Tailwind CSS v${major("tailwindcss")} / shadcn-ui`,
+    sources: {
+      design_system_version: "design-system.index.json#version",
+      mcp_server_version: "mcp-server/package.json#version",
+      registry_source: "registry.json#homepage,name",
+      stack: "package.json#dependencies",
+    },
   })
 }
 

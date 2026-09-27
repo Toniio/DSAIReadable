@@ -19,6 +19,22 @@ import {
   type RuleSet,
 } from "../lib/response-format.js"
 
+/** The generated ds-metadata.json (src/context/generate.ts). */
+interface DsMetadata {
+  name: string
+  description: string
+  design_system_version: string
+  mcp_server_version: string
+  registry_source: {
+    repository: string
+    registry: string
+    item_address: string
+  }
+  stack: Record<string, string>
+  framework: string
+  sources: Record<string, string>
+}
+
 interface ComponentEntry {
   name: string
   category?: string
@@ -42,13 +58,7 @@ export function registerDsCoreTools(server: McpServer): void {
       const semanticTokens = loadContext<unknown[]>("semantic-tokens.json")
       const primitives = loadContext<unknown[]>("primitives.json")
       const variables = loadContext<Array<{ tier?: string }>>("variables.json")
-      const meta = loadContext<{
-        name?: string
-        description?: string
-        design_system_version?: string
-        mcp_server_version?: string
-        framework?: string
-      }>("ds-metadata.json")
+      const meta = loadContext<DsMetadata>("ds-metadata.json")
 
       const withSpec = components.filter((c) => c.has_spec).length
       const contextFiles = readdirSync(contextDir).filter((f) =>
@@ -66,18 +76,22 @@ export function registerDsCoreTools(server: McpServer): void {
         components.length > 0 ? Math.round((n / components.length) * 100) : 0
 
       return text({
-        name: meta.name ?? "DSAIReadable",
-        version: meta.design_system_version ?? "unknown",
-        mcp_server_version: meta.mcp_server_version ?? "unknown",
-        description: meta.description ?? "Design System AI-Readable",
-        framework:
-          meta.framework ??
-          "React 19 / Next.js 16 / Tailwind CSS v4 / shadcn-ui",
+        name: meta.name,
+        description: meta.description,
+        // Two versions, never one ambiguous "version": each is read from the
+        // file ds-metadata.json names in `sources`.
+        design_system_version: meta.design_system_version,
+        mcp_server_version: meta.mcp_server_version,
+        framework: meta.framework,
+        stack: meta.stack,
         distribution: {
           model:
             "shadcn registry — component source is copied into the consuming project, there is no npm package to install",
+          registry_source: meta.registry_source,
+          install: `npx shadcn@latest add ${meta.registry_source.item_address}`,
           component_location: "components/ui/<name>.tsx",
         },
+        sources: meta.sources,
         required_setup: {
           description:
             "MANDATORY: Every generated file MUST import each component from its own module inside the consuming project.",

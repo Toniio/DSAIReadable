@@ -405,8 +405,10 @@ Serveur `figma-console-mcp` à réenregistrer. Règle d'or historique :
 
 ### `design-system.schema.json`
 
-- `library.required` : réajouter `"figma_file_key"` ;
-- `library.properties` : `figma_file_key`, `figma_site` ;
+- `library` : l'objet a été retiré avec `last_publish` (P3-09 : seule la bibliothèque Figma
+  le renseignait). Le réajouter à la racine (`required` et `properties`), avec
+  `required: ["last_publish", "figma_file_key"]` et les propriétés `last_publish`,
+  `figma_file_key`, `figma_site` (chaînes, `additionalProperties: false`) ;
 - `inventory.items.required` : réajouter `"figma_node_id"` ;
 - `inventory.items.properties.figma_node_id` : `{ "type": ["string","null"] }`.
 
