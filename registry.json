@@ -113,6 +113,7 @@
           "ease-in": "var(--motion-easing-in)",
           "ease-out": "var(--motion-easing-out)",
           "ease-spring": "var(--motion-easing-spring)",
+          "opacity-disabled": "var(--opacity-disabled)",
           "spacing-page": "var(--space-layout-page-padding)",
           "spacing-section": "var(--space-layout-section-gap)",
           "spacing-sidebar": "var(--space-layout-sidebar)",

@@ -50,6 +50,7 @@ Champ de saisie multi-lignes avec dimensionnement automatique (`field-sizing-con
 | `color.border.input`           | `bg-input/30` · `bg-input/50` · `bg-input/80` · `border-input`                                 | `Textarea`                                                |
 | `color.feedback.error.default` | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Textarea`                                                |
 | `color.text.subtle`            | `text-muted-foreground`                                                                        | `Textarea`                                                |
+| `opacity.disabled`             | `opacity-disabled`                                                                             | `Textarea`                                                |
 | `space.focus-ring-width`       | `ring-(length:--space-focus-ring-width)`                                                       | `Textarea` · `Textarea` via `FOCUS_RING` (`lib/focus.ts`) |
 | `typography.size.xs`           | `text-xs`                                                                                      | `Textarea`                                                |
 
@@ -81,14 +82,14 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 
 ## États
 
-| État     | Description                                                              |
-| -------- | ------------------------------------------------------------------------ |
-| default  | Bordure `input`, fond transparent, texte `text-xs`, hauteur auto         |
-| hover    | — (pas de style hover spécifique)                                        |
-| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible`               |
-| active   | —                                                                        |
-| disabled | `cursor-not-allowed`, fond `bg-input/50`, opacité réduite (`opacity-50`) |
-| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`   |
+| État     | Description                                                                    |
+| -------- | ------------------------------------------------------------------------------ |
+| default  | Bordure `input`, fond transparent, texte `text-xs`, hauteur auto               |
+| hover    | — (pas de style hover spécifique)                                              |
+| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible`                     |
+| active   | —                                                                              |
+| disabled | `cursor-not-allowed`, fond `bg-input/50`, opacité réduite (`opacity-disabled`) |
+| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`         |
 
 ## Accessibilité
 

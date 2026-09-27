@@ -53,6 +53,7 @@ Groupe de boutons radio permettant la sélection exclusive d'une seule option pa
 | `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                 | `RadioGroupItem` via `FOCUS_RING` (`lib/focus.ts`)                    |
 | `color.border.input`                 | `bg-input/30` · `border-input`                                                                 | `RadioGroupItem`                                                      |
 | `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `RadioGroupItem`                                                      |
+| `opacity.disabled`                   | `opacity-disabled`                                                                             | `RadioGroupItem`                                                      |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `RadioGroupItem` · `RadioGroupItem` via `FOCUS_RING` (`lib/focus.ts`) |
 
 Relevé dans `components/ui/radio-group.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
@@ -100,7 +101,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | hover    | — (pas de style hover spécifique, zone de clic étendue)                             |
 | focus    | Bordure `ring` + anneau `ring-ring/50` (3px) via `focus-visible`                    |
 | active   | Sélectionné : fond `primary`, bordure `primary`, point central `primary-foreground` |
-| disabled | `cursor-not-allowed`, opacité réduite (`opacity-50`)                                |
+| disabled | `cursor-not-allowed`, opacité réduite (`opacity-disabled`)                          |
 | error    | Bordure `destructive`, anneau `ring-destructive/20` (3px) via `aria-invalid`        |
 
 ## Accessibilité

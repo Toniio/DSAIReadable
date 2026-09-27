@@ -45,6 +45,7 @@
 
 | Token                | Classes et variables | Où      |
 | -------------------- | -------------------- | ------- |
+| `opacity.disabled`   | `opacity-disabled`   | `Label` |
 | `typography.size.xs` | `text-xs`            | `Label` |
 
 Relevé dans `components/ui/label.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
@@ -73,15 +74,15 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 
 ## États
 
-| État       | Comportement visuel                                                                         |
-| ---------- | ------------------------------------------------------------------------------------------- |
-| `default`  | Texte `text-xs leading-none`, couleur `text-default`                                        |
-| `hover`    | Pas de style dédié                                                                          |
-| `focus`    | Pas de style dédié (le focus est sur le contrôle)                                           |
-| `active`   | Pas de style dédié                                                                          |
-| `disabled` | `peer-disabled: cursor-not-allowed opacity-50` — lorsque le contrôle associé est `disabled` |
-| `loading`  | Non applicable                                                                              |
-| `error`    | Pas de style propre — c'est `FieldError` qui porte la couleur d'erreur                      |
+| État       | Comportement visuel                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------- |
+| `default`  | Texte `text-xs leading-none`, couleur `text-default`                                              |
+| `hover`    | Pas de style dédié                                                                                |
+| `focus`    | Pas de style dédié (le focus est sur le contrôle)                                                 |
+| `active`   | Pas de style dédié                                                                                |
+| `disabled` | `peer-disabled: cursor-not-allowed opacity-disabled` — lorsque le contrôle associé est `disabled` |
+| `loading`  | Non applicable                                                                                    |
+| `error`    | Pas de style propre — c'est `FieldError` qui porte la couleur d'erreur                            |
 
 ## Accessibilité
 

@@ -853,7 +853,7 @@
     "value_dark": "{opacity.0-50}",
     "css_variable": "--opacity-disabled",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "active"
   },
   {
     "path": "opacity.placeholder",

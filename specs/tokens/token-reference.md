@@ -239,17 +239,17 @@ que le statut dit ce que fait le code.
 
 | Token                 | Variable CSS            | Type   | Statut   | Valeur | Tailwind |
 | --------------------- | ----------------------- | ------ | -------- | ------ | -------- |
-| `opacity.disabled`    | `--opacity-disabled`    | number | reserved | `0.50` | —        |
+| `opacity.disabled`    | `--opacity-disabled`    | number | active   | `0.50` | —        |
 | `opacity.placeholder` | `--opacity-placeholder` | number | reserved | `0.50` | —        |
 | `opacity.overlay`     | `--opacity-overlay`     | number | reserved | `0.80` | —        |
 
 **Règles d'usage**
 
-| Portée                | ✅ Do                                                                                     | ❌ Don't                                                                 |
-| --------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `opacity.disabled`    | Utiliser `disabled:opacity-50` (classe Tailwind) sur les éléments interactifs désactivés. | Ne pas utiliser pour du texte secondaire — utiliser `color.text.subtle`. |
-| `opacity.placeholder` | Appliquer sur `::placeholder` des champs de formulaire.                                   | Ne pas confondre avec `opacity.disabled` — usages distincts.             |
-| `opacity.overlay`     | Utiliser pour les backdrops de modals et dialogs.                                         | Ne pas réduire en dessous de `0.7` — le contraste devient insuffisant.   |
+| Portée                | ✅ Do                                                                                                                                                               | ❌ Don't                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `opacity.disabled`    | Utiliser `opacity-disabled` sous la variante de l'état désactivé : `disabled:opacity-disabled`, `data-disabled:opacity-disabled`, `aria-disabled:opacity-disabled`… | Ne pas écrire `disabled:opacity-50` (ESLint le refuse), ni l'utiliser pour du texte secondaire — utiliser `color.text.subtle`. |
+| `opacity.placeholder` | Appliquer sur `::placeholder` des champs de formulaire.                                                                                                             | Ne pas confondre avec `opacity.disabled` — usages distincts.                                                                   |
+| `opacity.overlay`     | Utiliser pour les backdrops de modals et dialogs.                                                                                                                   | Ne pas réduire en dessous de `0.7` — le contraste devient insuffisant.                                                         |
 
 ---
 

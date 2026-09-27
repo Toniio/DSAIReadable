@@ -4438,7 +4438,7 @@
       "tier": "semantic",
       "cssVar": "--opacity-disabled",
       "type": "number",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{opacity.0-50}"
@@ -4448,8 +4448,8 @@
       },
       "description": "Opacity for disabled interactive elements. Not for placeholder or overlay use.",
       "docs": {
-        "do": "Utiliser `disabled:opacity-50` (classe Tailwind) sur les éléments interactifs désactivés.",
-        "dont": "Ne pas utiliser pour du texte secondaire — utiliser `color.text.subtle`."
+        "do": "Utiliser `opacity-disabled` sous la variante de l'état désactivé : `disabled:opacity-disabled`, `data-disabled:opacity-disabled`, `aria-disabled:opacity-disabled`…",
+        "dont": "Ne pas écrire `disabled:opacity-50` (ESLint le refuse), ni l'utiliser pour du texte secondaire — utiliser `color.text.subtle`."
       }
     },
     {

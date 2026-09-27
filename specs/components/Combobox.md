@@ -75,6 +75,7 @@ Champ de saisie avec auto-complétion et sélection parmi une liste d'options fi
 | `color.text.subtle`             | `text-muted-foreground`                                                                         | `ComboboxEmpty` · `ComboboxLabel` · `ComboboxTrigger`                                 |
 | `elevation.md`                  | `shadow-md`                                                                                     | `ComboboxContent`                                                                     |
 | `motion.duration.fast`          | `duration-fast`                                                                                 | `ComboboxContent`                                                                     |
+| `opacity.disabled`              | `opacity-disabled`                                                                              | `ComboboxChip` · `ComboboxItem`                                                       |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`                                                        | `ComboboxChips` · `ComboboxChips` via `FOCUS_RING_WITHIN` (`lib/focus.ts`)            |
 | `typography.font-weight.medium` | `font-medium`                                                                                   | `ComboboxChip`                                                                        |
 | `typography.size.xs`            | `text-xs`                                                                                       | `ComboboxChip` · `ComboboxChips` · `ComboboxEmpty` · `ComboboxItem` · `ComboboxLabel` |
@@ -242,7 +243,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | hover    | Fond de l'option candidate passe en `accent`                                |
 | focus    | Anneau `ring-ring/50` et bordure `border-ring` sur le conteneur chips/input |
 | active   | Popup ouvert avec animation `fade-in` + `zoom-in-95`                        |
-| disabled | Opacité réduite (`opacity-50`), `pointer-events-none`                       |
+| disabled | Opacité réduite (`opacity-disabled`), `pointer-events-none`                 |
 | error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`      |
 
 ## Accessibilité

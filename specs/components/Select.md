@@ -66,6 +66,7 @@ Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi u
 | `color.text.subtle`            | `text-muted-foreground`                                                                        | `SelectLabel` · `SelectTrigger`                                     |
 | `elevation.md`                 | `shadow-md`                                                                                    | `SelectContent`                                                     |
 | `motion.duration.fast`         | `duration-fast`                                                                                | `SelectContent`                                                     |
+| `opacity.disabled`             | `opacity-disabled`                                                                             | `SelectItem` · `SelectTrigger`                                      |
 | `space.focus-ring-width`       | `ring-(length:--space-focus-ring-width)`                                                       | `SelectTrigger` · `SelectTrigger` via `FOCUS_RING` (`lib/focus.ts`) |
 | `typography.size.xs`           | `text-xs`                                                                                      | `SelectItem` · `SelectLabel` · `SelectTrigger`                      |
 | `zindex.dropdown`              | `z-dropdown`                                                                                   | `SelectScrollDownButton` · `SelectScrollUpButton`                   |
@@ -176,14 +177,14 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 
 ## États
 
-| État     | Description                                                                       |
-| -------- | --------------------------------------------------------------------------------- |
-| default  | Trigger avec bordure `input`, fond transparent, texte de la valeur ou placeholder |
-| hover    | Fond dark du trigger passe à `bg-input/50`                                        |
-| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible` sur le trigger         |
-| active   | Popup ouvert avec animation `fade-in` + `zoom-in-95`, item focus en `accent`      |
-| disabled | `cursor-not-allowed`, opacité réduite (`opacity-50`) sur le trigger ou l'item     |
-| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`            |
+| État     | Description                                                                         |
+| -------- | ----------------------------------------------------------------------------------- |
+| default  | Trigger avec bordure `input`, fond transparent, texte de la valeur ou placeholder   |
+| hover    | Fond dark du trigger passe à `bg-input/50`                                          |
+| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible` sur le trigger           |
+| active   | Popup ouvert avec animation `fade-in` + `zoom-in-95`, item focus en `accent`        |
+| disabled | `cursor-not-allowed`, opacité réduite (`opacity-disabled`) sur le trigger ou l'item |
+| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`              |
 
 ## Accessibilité
 

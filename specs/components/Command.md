@@ -64,6 +64,7 @@ Palette de commandes avec recherche intégrée, permettant de filtrer et sélect
 | `color.border.input`        | `bg-input/30` · `border-input/30`             | `CommandInput`                                                                       |
 | `color.text.default`        | `text-foreground` · `text-popover-foreground` | `CommandGroup` · `CommandItem` · `CommandShortcut` · `Command`                       |
 | `color.text.subtle`         | `text-muted-foreground`                       | `CommandGroup` · `CommandShortcut`                                                   |
+| `opacity.disabled`          | `opacity-disabled`                            | `CommandInput` · `CommandItem`                                                       |
 | `typography.size.xs`        | `text-xs`                                     | `CommandEmpty` · `CommandGroup` · `CommandInput` · `CommandItem` · `CommandShortcut` |
 
 Relevé dans `components/ui/command.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
@@ -162,13 +163,13 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 
 ## États
 
-| État     | Description                                                                 |
-| -------- | --------------------------------------------------------------------------- |
-| default  | Fond `popover`, texte `popover-foreground`, liste scrollable                |
-| hover    | — (navigation clavier privilégiée)                                          |
-| focus    | Champ de recherche actif, items navigables au clavier                       |
-| active   | Item sélectionné avec fond `muted` et texte `foreground`                    |
-| disabled | Item grisé (`opacity-50`, `pointer-events-none`) via `data-[disabled=true]` |
+| État     | Description                                                                       |
+| -------- | --------------------------------------------------------------------------------- |
+| default  | Fond `popover`, texte `popover-foreground`, liste scrollable                      |
+| hover    | — (navigation clavier privilégiée)                                                |
+| focus    | Champ de recherche actif, items navigables au clavier                             |
+| active   | Item sélectionné avec fond `muted` et texte `foreground`                          |
+| disabled | Item grisé (`opacity-disabled`, `pointer-events-none`) via `data-[disabled=true]` |
 
 ## Accessibilité
 

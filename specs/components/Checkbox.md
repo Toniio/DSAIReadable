@@ -55,6 +55,7 @@ Case à cocher binaire (ou indéterminée) permettant la sélection d'une option
 | `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                 | `Checkbox` via `FOCUS_RING` (`lib/focus.ts`)              |
 | `color.border.input`                 | `bg-input/30` · `border-input`                                                                 | `Checkbox`                                                |
 | `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Checkbox`                                                |
+| `opacity.disabled`                   | `opacity-disabled`                                                                             | `Checkbox`                                                |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `Checkbox` · `Checkbox` via `FOCUS_RING` (`lib/focus.ts`) |
 
 Relevé dans `components/ui/checkbox.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
@@ -95,7 +96,7 @@ Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se rè
 | `hover`               | Pas de style dédié (géré par le focus natif)                                              |
 | `focus`               | `border-ring` + `ring-1 ring-ring/50`                                                     |
 | `active`              | Pas de style dédié                                                                        |
-| `disabled`            | `cursor-not-allowed opacity-50`, `pointer-events-none`                                    |
+| `disabled`            | `cursor-not-allowed opacity-disabled`, `pointer-events-none`                              |
 | `checked`             | `border-primary bg-primary text-primary-foreground`, icône `CheckIcon` visible            |
 | `indeterminate`       | Radix gère `data-state="indeterminate"` — prévoir une icône `MinusIcon` côté consommateur |
 | `error`               | `aria-invalid="true"` : `border-destructive ring-destructive/20`                          |
