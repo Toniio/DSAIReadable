@@ -305,7 +305,7 @@
       "**MUST** — accompagner le graphique d'un texte alternatif ou d'un tableau de données : les lecteurs d'écran ne lisent pas le SVG"
     ],
     "Checkbox": [
-      "**MUST** — associer la case à un `Label` (`id` / `htmlFor`) ou l'envelopper dans un `Field`",
+      "**MUST** — associer la case à un libellé visible : `Label` (`id` / `htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'elle porte une description ou un message d'erreur (`rule-09`)",
       "**MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`",
       "**MUST NOT** — laisser la zone de clic étendue (`after:-inset-x-3 after:-inset-y-2`) chevaucher un contrôle voisin",
       "**Note** — désactivée, la case n'est pas soumise avec le formulaire natif",
@@ -503,7 +503,7 @@
     ],
     "RadioGroup": [
       "**MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)",
-      "**MUST** — associer chaque `RadioGroupItem` à un `Label`",
+      "**MUST** — associer chaque `RadioGroupItem` à un `Label`, et placer le groupe dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)",
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
       "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
@@ -582,7 +582,7 @@
     "Switch": [
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "**MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`",
-      "**MUST** — associer un `Label`",
+      "**MUST** — associer un libellé visible : `Label` (`htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)",
       "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
       "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
     ],
