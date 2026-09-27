@@ -56,9 +56,17 @@ function EmptyMedia({
   )
 }
 
-function EmptyTitle({ className, ...props }: React.ComponentProps<"div">) {
+// A real heading, so screen readers list it; the level follows the page
+// outline, the look does not.
+function EmptyTitle({
+  className,
+  as: Comp = "h2",
+  ...props
+}: React.ComponentProps<"h2"> & {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
+}) {
   return (
-    <div
+    <Comp
       data-slot="empty-title"
       className={cn("font-heading text-sm font-medium", className)}
       {...props}

@@ -3870,7 +3870,8 @@
       "Ne pas utiliser pour les erreurs serveur — préférer un composant d'erreur dédié",
       "Limiter à une seule instance `Empty` par vue pour éviter la confusion",
       "Le média (`EmptyMedia`) doit rester décoratif ; ne pas y placer d'information essentielle sans texte alternatif",
-      "Le texte doit rester court et orienté action"
+      "Le texte doit rester court et orienté action",
+      "`EmptyTitle` rend un `<h2>` : passer `as` (`\"h3\"`…) pour suivre la hiérarchie de la page — un niveau sous le titre de la section qui contient l'état vide. Ne pas styler via `as` : l'apparence est fixe"
     ],
     "dependencies": [
       "`class-variance-authority` pour les variantes de `EmptyMedia`",
@@ -3891,7 +3892,7 @@
       },
       {
         "slot": "`data-slot=\"empty-title\"`",
-        "role": "Titre principal de l'état vide"
+        "role": "Titre principal de l'état vide (`<h2>` par défaut)"
       },
       {
         "slot": "`data-slot=\"empty-description\"`",
@@ -4004,6 +4005,13 @@
       },
       {
         "component": "Empty",
+        "prop": "`as`",
+        "type": "`\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"`",
+        "default": "`\"h2\"`",
+        "description": "Niveau de titre rendu ; ne change pas l'apparence"
+      },
+      {
+        "component": "Empty",
         "prop": "`className`",
         "type": "`string`",
         "default": "—",
@@ -4012,9 +4020,9 @@
       {
         "component": "Empty",
         "prop": "`...props`",
-        "type": "`React.ComponentProps<\"div\">`",
+        "type": "`React.ComponentProps<\"h2\">`",
         "default": "—",
-        "description": "Props natives du `<div>`"
+        "description": "Props natives du titre"
       },
       {
         "component": "Empty",
@@ -4081,7 +4089,7 @@
         "behavior": "Non applicable (composant passif)"
       }
     ],
-    "accessibility": "**Pattern** : Aucun — état vide composé\n\n**Rôle** : Aucun rôle : des `div`. `EmptyTitle` n'est pas un élément de titre.\n\n**Clavier** :\n\nAucune interaction propre ; les actions placées dans `EmptyContent` sont focalisables.\n\n**Nom accessible** : Sans objet. Si l'état vide remplace le contenu principal, envelopper le titre dans un vrai titre (`Heading`).\n\n**Vigilance** :\n\n- **Défaut connu** : `EmptyTitle` est un `div`, donc absent de la liste des titres d'un lecteur d'écran.\n- Si l'état vide apparaît après une action (recherche sans résultat), l'annoncer par une région `aria-live`.\n- L'illustration de `EmptyMedia` est décorative sauf si elle porte une information : `alt=\"\"` par défaut.",
+    "accessibility": "**Pattern** : Aucun — état vide composé\n\n**Rôle** : Des `div`, sauf `EmptyTitle` : un titre natif (`<h2>` par défaut, niveau réglable par `as`), listé par les lecteurs d'écran.\n\n**Clavier** :\n\nAucune interaction propre ; les actions placées dans `EmptyContent` sont focalisables.\n\n**Nom accessible** : Sans objet ; le texte d'`EmptyTitle` est le titre de l'état vide.\n\n**Vigilance** :\n\n- Régler `as` sur la hiérarchie réelle : le `<h2>` par défaut suppose que l'état vide occupe une vue titrée en `h1`. Dans une section en `h2`, passer `as=\"h3\"`.\n- Ne pas envelopper `EmptyTitle` dans un `Heading` : cela imbriquerait deux titres.\n- Si l'état vide apparaît après une action (recherche sans résultat), l'annoncer par une région `aria-live`.\n- L'illustration de `EmptyMedia` est décorative sauf si elle porte une information : `alt=\"\"` par défaut.",
     "code_example": "import {\n  Empty,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n  EmptyDescription,\n  EmptyContent,\n} from \"@/components/ui/empty\"\nimport { Button } from \"@/components/ui/button\"\nimport { PlusIcon, FolderIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <Empty>\n      <EmptyHeader>\n        <EmptyMedia variant=\"icon\">\n          <FolderIcon />\n        </EmptyMedia>\n        <EmptyTitle>Aucun projet</EmptyTitle>\n        <EmptyDescription>\n          Vous n'avez pas encore créé de projet. Commencez dès maintenant.\n        </EmptyDescription>\n      </EmptyHeader>\n      <EmptyContent>\n        <Button size=\"sm\">\n          <PlusIcon /> Créer un projet\n        </Button>\n      </EmptyContent>\n    </Empty>\n  )\n}",
     "cross_references": [
       "Button",

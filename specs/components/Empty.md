@@ -28,6 +28,7 @@
 - Limiter à une seule instance `Empty` par vue pour éviter la confusion
 - Le média (`EmptyMedia`) doit rester décoratif ; ne pas y placer d'information essentielle sans texte alternatif
 - Le texte doit rester court et orienté action
+- `EmptyTitle` rend un `<h2>` : passer `as` (`"h3"`…) pour suivre la hiérarchie de la page — un niveau sous le titre de la section qui contient l'état vide. Ne pas styler via `as` : l'apparence est fixe
 
 ## Dépendances
 
@@ -41,7 +42,7 @@
 | `data-slot="empty"`             | Conteneur racine, centrage et espacement              |
 | `data-slot="empty-header"`      | Bloc d'en-tête regroupant média, titre et description |
 | `data-slot="empty-icon"`        | Média / icône décorative (porte `data-variant`)       |
-| `data-slot="empty-title"`       | Titre principal de l'état vide                        |
+| `data-slot="empty-title"`       | Titre principal de l'état vide (`<h2>` par défaut)    |
 | `data-slot="empty-description"` | Description complémentaire                            |
 | `data-slot="empty-content"`     | Zone d'actions (boutons, liens)                       |
 
@@ -57,27 +58,28 @@
 
 ## Props / API
 
-| Prop                 | Type                          | Défaut      | Description                  |
-| -------------------- | ----------------------------- | ----------- | ---------------------------- |
-| **Empty**            |                               |             |                              |
-| `className`          | `string`                      | —           | Classes CSS additionnelles   |
-| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
-| **EmptyMedia**       |                               |             |                              |
-| `variant`            | `"default" \| "icon"`         | `"default"` | Apparence du conteneur média |
-| `className`          | `string`                      | —           | Classes CSS additionnelles   |
-| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
-| **EmptyHeader**      |                               |             |                              |
-| `className`          | `string`                      | —           | Classes CSS additionnelles   |
-| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
-| **EmptyTitle**       |                               |             |                              |
-| `className`          | `string`                      | —           | Classes CSS additionnelles   |
-| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
-| **EmptyDescription** |                               |             |                              |
-| `className`          | `string`                      | —           | Classes CSS additionnelles   |
-| `...props`           | `React.ComponentProps<"p">`   | —           | Props natives du `<p>`       |
-| **EmptyContent**     |                               |             |                              |
-| `className`          | `string`                      | —           | Classes CSS additionnelles   |
-| `...props`           | `React.ComponentProps<"div">` | —           | Props natives du `<div>`     |
+| Prop                 | Type                                           | Défaut      | Description                                       |
+| -------------------- | ---------------------------------------------- | ----------- | ------------------------------------------------- |
+| **Empty**            |                                                |             |                                                   |
+| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
+| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
+| **EmptyMedia**       |                                                |             |                                                   |
+| `variant`            | `"default" \| "icon"`                          | `"default"` | Apparence du conteneur média                      |
+| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
+| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
+| **EmptyHeader**      |                                                |             |                                                   |
+| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
+| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
+| **EmptyTitle**       |                                                |             |                                                   |
+| `as`                 | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6"` | `"h2"`      | Niveau de titre rendu ; ne change pas l'apparence |
+| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
+| `...props`           | `React.ComponentProps<"h2">`                   | —           | Props natives du titre                            |
+| **EmptyDescription** |                                                |             |                                                   |
+| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
+| `...props`           | `React.ComponentProps<"p">`                    | —           | Props natives du `<p>`                            |
+| **EmptyContent**     |                                                |             |                                                   |
+| `className`          | `string`                                       | —           | Classes CSS additionnelles                        |
+| `...props`           | `React.ComponentProps<"div">`                  | —           | Props natives du `<div>`                          |
 
 > **Axes de variantes** — `Empty` n'a pas de `variant`. Seul `EmptyMedia` en porte un, sur l'axe **type de média** : `default` pour une illustration libre, `icon` pour une icône Phosphor centrée dans un cercle.
 
@@ -105,17 +107,18 @@ Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props 
 
 **Pattern** : Aucun — état vide composé
 
-**Rôle** : Aucun rôle : des `div`. `EmptyTitle` n'est pas un élément de titre.
+**Rôle** : Des `div`, sauf `EmptyTitle` : un titre natif (`<h2>` par défaut, niveau réglable par `as`), listé par les lecteurs d'écran.
 
 **Clavier** :
 
 Aucune interaction propre ; les actions placées dans `EmptyContent` sont focalisables.
 
-**Nom accessible** : Sans objet. Si l'état vide remplace le contenu principal, envelopper le titre dans un vrai titre (`Heading`).
+**Nom accessible** : Sans objet ; le texte d'`EmptyTitle` est le titre de l'état vide.
 
 **Vigilance** :
 
-- **Défaut connu** : `EmptyTitle` est un `div`, donc absent de la liste des titres d'un lecteur d'écran.
+- Régler `as` sur la hiérarchie réelle : le `<h2>` par défaut suppose que l'état vide occupe une vue titrée en `h1`. Dans une section en `h2`, passer `as="h3"`.
+- Ne pas envelopper `EmptyTitle` dans un `Heading` : cela imbriquerait deux titres.
 - Si l'état vide apparaît après une action (recherche sans résultat), l'annoncer par une région `aria-live`.
 - L'illustration de `EmptyMedia` est décorative sauf si elle porte une information : `alt=""` par défaut.
 
