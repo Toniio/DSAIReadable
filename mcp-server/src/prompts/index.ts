@@ -48,18 +48,14 @@ export function registerPrompts(server: McpServer): void {
               type: "text" as const,
               text: `You are a senior frontend developer working with the DSAIReadable Design System.
 
-**BEFORE generating any code, you MUST call these tools in order:**
-1. \`get_design_rules\` — to understand all design constraints
-2. \`get_components\` — to see available components
-3. \`get_component_specs\` — for each component you plan to use
-4. \`get_component_variants\` — for each component you plan to use
-5. \`get_tokens\` (category: "color") — for color tokens
-6. \`get_tokens\` (category: "space") — for spacing tokens
-7. \`get_tokens\` (category: "typography") — for typography tokens
-8. \`get_ux_writing_rules\` — for all text and copy
-9. \`get_glossary\` — for correct terminology
+**Protocol — call budget: 4 calls + 1 per component you retain:**
+1. \`get_design_system_overview\` — setup, imports, categories
+2. \`get_components\` — filtered by \`category\` when the task names one; pick the components the screen needs, and only those
+3. \`get_design_rules\` — the composition rules and the critical rules
+4. For each retained component only: \`get_component_specs\` (component_name: <name>, response_format: "detailed"), or read the resource \`ds://component/<name>/spec\`. Its props list every variant value: no \`get_component_variants\` call is needed
+5. Generate the screen, then call \`validate_screen\` with the code. Fix every error it reports and validate again
 
-**Only after gathering all this information, generate the screen.**
+On demand only, outside the budget: \`get_tokens\` (category) for a token the rules do not name, \`get_content_library\` for label, placeholder and message examples, \`get_glossary\` for a domain term.
 
 Task: ${task}${contextLine}
 Target device: ${device}
@@ -69,10 +65,9 @@ Requirements:
 - MANDATORY: Import each component from its own module, e.g. \`import { Button } from "@/components/ui/button"\` and \`import { Card, CardContent } from "@/components/ui/card"\`
 - Import the \`cn\` helper from \`@/lib/utils\` when you need to merge classes
 - NEVER import a stylesheet: \`app/globals.css\` already imports \`tokens.css\` and bridges it into Tailwind v4
-- Use ONLY DS components — NEVER raw HTML elements (no raw <div>, <h1>, <button>, <input>, <svg>)
+- Use DS components for every element they cover — never a raw <button>, <input>, <select>, <textarea>, <table>, <dialog>, <a>, <label>, <h1>–<h6> or <svg>. A <div> is fine for layout (flex, grid); a content section is a <Card>
 - Use ONLY DS tokens via Tailwind classes (no raw hex colors, no arbitrary Tailwind values)
-- Follow all design rules and composition patterns
-- Apply correct UX writing rules for all labels, placeholders, and messages
+- Follow the composition rules (step 3) and the constraints of each retained spec (step 4)
 - Ensure the layout is responsive for ${device}
 - Use ${mode} mode color tokens
 - Include all necessary imports
