@@ -21,6 +21,10 @@ Case à cocher binaire (ou indéterminée) permettant la sélection d'une option
 - Sélectionner plusieurs éléments dans une liste
 - Utiliser l'état `indeterminate` pour représenter une sélection partielle d'un groupe
 
+<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+
 ## Contraintes
 
 - **MUST** — associer la case à un `Label` (`id` / `htmlFor`) ou l'envelopper dans un `Field`

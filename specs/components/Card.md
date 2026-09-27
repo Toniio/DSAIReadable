@@ -21,6 +21,10 @@ Conteneur surfacé regroupant un titre, une description, du contenu et un pied d
 - Regrouper visuellement des informations hétérogènes sur un tableau de bord
 - Utiliser `data-size="sm"` pour les cartes compactes dans des listes denses
 
+<!-- rule-22 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.
+
 ## Contraintes
 
 - **MUST NOT** — imbriquer des `Card` sur plus d'un niveau : marquer la hiérarchie par un fond différent

@@ -318,7 +318,7 @@
       "**MUST NOT** — gérer `aria-expanded` soi-même : Radix le fait"
     ],
     "Combobox": [
-      "**MUST NOT** — servir pour moins de 5 options → utiliser `Select` ou `NativeSelect`",
+      "**MUST NOT** — servir pour 15 options ou moins sans recherche → `RadioGroup` jusqu'à 5, `Select` ou `NativeSelect` de 6 à 15 (`rule-20`)",
       "**MUST** — rendre un `ComboboxEmpty` pour le cas « aucun résultat »",
       "**MUST** — en multi-sélection, fournir un `anchor` (`useComboboxAnchor`) pour positionner le popup sous les chips",
       "**MUST** — donner à chaque `ComboboxItem` une valeur unique",
@@ -343,7 +343,7 @@
       "**MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`",
       "**MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois",
       "**MUST** — rendre un `DialogTitle` : c'est le nom annoncé par les lecteurs d'écran",
-      "**MUST NOT** — contenir un contenu qui impose un défilement interne → utiliser `Sheet` ou une page dédiée",
+      "**MUST NOT** — contenir un contenu qui impose un défilement interne → `Sheet` à partir de `md`, `Drawer` en dessous (`rule-21`), ou une page dédiée",
       "**MUST** — garder un moyen de fermer le dialogue quand `showCloseButton={false}` masque le bouton",
       "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.dialog` via `closeLabel`"
     ],
@@ -502,7 +502,7 @@
       "**MUST NOT** — servir de jauge de données (température, stock…) : `Progress` exprime l'avancement d'une tâche"
     ],
     "RadioGroup": [
-      "**MUST NOT** — servir pour plus de 6 options → utiliser `Select` ou `Combobox`",
+      "**MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)",
       "**MUST** — associer chaque `RadioGroupItem` à un `Label`",
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
@@ -523,7 +523,7 @@
     ],
     "Select": [
       "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
-      "**SHOULD** — sur mobile, utiliser `NativeSelect` pour une longue liste d'options ; **sauf** si les options exigent un rendu riche qu'un `<option>` ne peut pas afficher",
+      "**MUST NOT** — servir sous `md` quand les options n'exigent pas de rendu riche → `NativeSelect` (`rule-20`)",
       "**MUST** — tenir compte du `Portal` dans les empilements (`z-index`) : le contenu est rendu hors de son parent",
       "**MUST** — donner à chaque `SelectItem` une `value` unique",
       "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
@@ -540,7 +540,7 @@
       "**MUST** — rendre un `SheetTitle` : c'est le nom annoncé par les lecteurs d'écran",
       "**Note** — à gauche et à droite, la largeur est limitée à `sm:max-w-sm`",
       "**MUST** — garder un moyen de fermer le panneau quand `showCloseButton={false}` masque le bouton",
-      "**SHOULD** — sur mobile, utiliser `Drawer`, qui se ferme au geste ; **sauf** pour un panneau latéral de navigation",
+      "**MUST NOT** — servir sous `md` → `Drawer`, **sauf** pour la navigation latérale (`rule-21`)",
       "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.sheet` via `closeLabel`"
     ],
     "Sidebar": [

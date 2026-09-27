@@ -22,12 +22,16 @@ Fenêtre modale polyvalente pour afficher du contenu interactif (formulaire, dé
 - Afficher un contenu riche nécessitant une attention focalisée
 - Alternative desktop aux écrans plein-écran sur mobile
 
+<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+
 ## Contraintes
 
 - **MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`
 - **MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois
 - **MUST** — rendre un `DialogTitle` : c'est le nom annoncé par les lecteurs d'écran
-- **MUST NOT** — contenir un contenu qui impose un défilement interne → utiliser `Sheet` ou une page dédiée
+- **MUST NOT** — contenir un contenu qui impose un défilement interne → `Sheet` à partir de `md`, `Drawer` en dessous (`rule-21`), ou une page dédiée
 - **MUST** — garder un moyen de fermer le dialogue quand `showCloseButton={false}` masque le bouton
 - **MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.dialog` via `closeLabel`
 

@@ -21,6 +21,10 @@ Interrupteur à bascule pour activer ou désactiver un paramètre binaire, avec 
 - Contrôle d'état avec effet immédiat (pas de soumission requise)
 - Alternative visuelle à un checkbox unique
 
+<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+
 ## Contraintes
 
 - **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`

@@ -513,7 +513,8 @@
       "Confirmer une action irréversible (suppression, résiliation, envoi définitif)",
       "Demander une validation explicite avant un changement destructeur",
       "Afficher un avertissement nécessitant une réponse obligatoire de l'utilisateur",
-      "Bloquer l'interaction avec le reste de l'interface tant que le choix n'est pas fait"
+      "Bloquer l'interaction avec le reste de l'interface tant que le choix n'est pas fait",
+      "**Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
     ],
     "constraints": [
       "**MUST NOT** — servir à un simple message d'information → utiliser `Dialog`, ou `Sonner` pour une notification",
@@ -2550,7 +2551,8 @@
       "Encapsuler le formulaire de connexion dans une surface délimitée",
       "Présenter une entité (profil, paramètre, notification) avec ses actions associées",
       "Regrouper visuellement des informations hétérogènes sur un tableau de bord",
-      "Utiliser `data-size=\"sm\"` pour les cartes compactes dans des listes denses"
+      "Utiliser `data-size=\"sm\"` pour les cartes compactes dans des listes denses",
+      "**Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`."
     ],
     "constraints": [
       "**MUST NOT** — imbriquer des `Card` sur plus d'un niveau : marquer la hiérarchie par un fond différent",
@@ -3458,7 +3460,8 @@
       "Accepter des conditions d'utilisation ou de confidentialité",
       "Activer/désactiver une préférence (ex. : \"Se souvenir de moi\")",
       "Sélectionner plusieurs éléments dans une liste",
-      "Utiliser l'état `indeterminate` pour représenter une sélection partielle d'un groupe"
+      "Utiliser l'état `indeterminate` pour représenter une sélection partielle d'un groupe",
+      "**Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
     ],
     "constraints": [
       "**MUST** — associer la case à un `Label` (`id` / `htmlFor`) ou l'envelopper dans un `Field`",
@@ -3828,10 +3831,11 @@
       "Recherche et filtrage en temps réel dans un jeu de données",
       "Sélection multiple avec affichage sous forme de chips",
       "Remplacement d'un `<select>` natif lorsqu'une recherche est nécessaire",
-      "Formulaires nécessitant une saisie assistée (auto-complétion)"
+      "Formulaires nécessitant une saisie assistée (auto-complétion)",
+      "**Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
     ],
     "constraints": [
-      "**MUST NOT** — servir pour moins de 5 options → utiliser `Select` ou `NativeSelect`",
+      "**MUST NOT** — servir pour 15 options ou moins sans recherche → `RadioGroup` jusqu'à 5, `Select` ou `NativeSelect` de 6 à 15 (`rule-20`)",
       "**MUST** — rendre un `ComboboxEmpty` pour le cas « aucun résultat »",
       "**MUST** — en multi-sélection, fournir un `anchor` (`useComboboxAnchor`) pour positionner le popup sous les chips",
       "**MUST** — donner à chaque `ComboboxItem` une valeur unique",
@@ -5214,13 +5218,14 @@
       "Présenter des détails complémentaires dans une fenêtre superposée",
       "Demander une saisie utilisateur avant de poursuivre un flux",
       "Afficher un contenu riche nécessitant une attention focalisée",
-      "Alternative desktop aux écrans plein-écran sur mobile"
+      "Alternative desktop aux écrans plein-écran sur mobile",
+      "**Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
     ],
     "constraints": [
       "**MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`",
       "**MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois",
       "**MUST** — rendre un `DialogTitle` : c'est le nom annoncé par les lecteurs d'écran",
-      "**MUST NOT** — contenir un contenu qui impose un défilement interne → utiliser `Sheet` ou une page dédiée",
+      "**MUST NOT** — contenir un contenu qui impose un défilement interne → `Sheet` à partir de `md`, `Drawer` en dessous (`rule-21`), ou une page dédiée",
       "**MUST** — garder un moyen de fermer le dialogue quand `showCloseButton={false}` masque le bouton",
       "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.dialog` via `closeLabel`"
     ],
@@ -5681,10 +5686,10 @@
     "role": "Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glissement (swipe), idéal pour les interactions mobiles.",
     "usage": [
       "Afficher un formulaire ou des options depuis le bas de l'écran sur mobile",
-      "Proposer un panneau de filtres ou de paramètres latéral",
-      "Offrir une navigation secondaire glissante depuis la gauche ou la droite",
-      "Remplacer un Dialog sur les écrans tactiles pour une meilleure ergonomie",
-      "Afficher du contenu complémentaire sans quitter le contexte actuel"
+      "Proposer un panneau de filtres ou de paramètres sous `md`",
+      "Afficher sous `md` un contenu long qui irait dans un `Sheet` sur desktop",
+      "Afficher du contenu complémentaire sans quitter le contexte actuel",
+      "**Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
     ],
     "constraints": [
       "**MUST NOT** — servir sur desktop (`md` et plus) → utiliser `Dialog` ou `Sheet`",
@@ -6034,7 +6039,8 @@
       "Offrir une liste de choix (navigation, tri, paramètres)",
       "Permettre des sélections multiples via checkbox items",
       "Permettre un choix exclusif via radio items",
-      "Organiser des actions complexes avec sous-menus et groupes"
+      "Organiser des actions complexes avec sous-menus et groupes",
+      "**Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`."
     ],
     "constraints": [
       "**MUST NOT** — servir de menu contextuel au clic droit → utiliser `ContextMenu`",
@@ -7448,7 +7454,8 @@
       "Prévisualiser le profil d'un utilisateur au survol de son nom ou avatar",
       "Afficher un résumé d'un lien ou d'une ressource avant navigation",
       "Montrer des métadonnées complémentaires sans encombrer l'interface",
-      "Fournir un aperçu rapide d'un élément dans une liste"
+      "Fournir un aperçu rapide d'un élément dans une liste",
+      "**Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
     ],
     "constraints": [
       "**MUST NOT** — contenir des éléments interactifs (formulaires, boutons) → utiliser `Popover`",
@@ -8549,7 +8556,8 @@
       "Composer une ligne de tableau de bord avec icône, titre, description et actions",
       "Construire un menu ou une liste de navigation structurée",
       "Afficher un item dans un `DropdownMenu` via la variante `xs`",
-      "Regrouper des items avec `ItemGroup` et les séparer avec `ItemSeparator`"
+      "Regrouper des items avec `ItemGroup` et les séparer avec `ItemSeparator`",
+      "**Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`."
     ],
     "constraints": [
       "**MUST** — rendre un `ItemTitle` dans chaque `Item`",
@@ -9968,10 +9976,9 @@
     "status": "stable",
     "role": "Menu déroulant natif du navigateur, léger et accessible, pour la sélection d'une option parmi une liste.",
     "usage": [
-      "Sélection simple dans un formulaire avec peu d'options (< 10)",
-      "Formulaires mobiles où le sélecteur natif offre une meilleure UX",
-      "Remplacement léger d'un `Select` Radix quand la personnalisation n'est pas nécessaire",
-      "Formulaires à fort volume où la performance est prioritaire"
+      "Sélection d'une valeur parmi 6 à 15 options sous `md`",
+      "Formulaires mobiles, où le sélecteur du système offre la meilleure ergonomie",
+      "**Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
     ],
     "constraints": [
       "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
@@ -10197,7 +10204,7 @@
         "behavior": "Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`"
       }
     ],
-    "accessibility": "**Pattern** : Élément natif `select`\n\n**Rôle** : `select` natif ; l'icône chevron est masquée (`aria-hidden`).\n\n**Clavier** :\n\nComportement natif du `select` (flèches, saisie, `Space` / `Enter` selon la plateforme).\n\n**Nom accessible** : Obligatoire : `Label` associé ou `aria-label`.\n\n**Vigilance** :\n\n- **SHOULD** — sur mobile, utiliser `NativeSelect` plutôt que `Select` : le sélecteur du système est le plus accessible ; **sauf** si les options exigent un rendu riche (icônes, descriptions) qu'un `<option>` ne peut pas afficher.",
+    "accessibility": "**Pattern** : Élément natif `select`\n\n**Rôle** : `select` natif ; l'icône chevron est masquée (`aria-hidden`).\n\n**Clavier** :\n\nComportement natif du `select` (flèches, saisie, `Space` / `Enter` selon la plateforme).\n\n**Nom accessible** : Obligatoire : `Label` associé ou `aria-label`.\n\n**Vigilance** :\n\n- Le sélecteur du système est le plus accessible sur mobile : c'est pourquoi `rule-20` retient `NativeSelect` sous `md`, **sauf** options à rendu riche (icônes, descriptions) qu'un `<option>` ne peut pas afficher.",
     "code_example": "import { NativeSelect, NativeSelectOption } from \"@/components/ui/native-select\"\n\nexport default function Example() {\n  return (\n    <NativeSelect size=\"default\">\n      <NativeSelectOption value=\"\">Choisir une option…</NativeSelectOption>\n      <NativeSelectOption value=\"paris\">Paris</NativeSelectOption>\n      <NativeSelectOption value=\"lyon\">Lyon</NativeSelectOption>\n      <NativeSelectOption value=\"marseille\">Marseille</NativeSelectOption>\n    </NativeSelect>\n  )\n}",
     "cross_references": [
       "Select",
@@ -10938,7 +10945,8 @@
       "Proposer un mini-formulaire de saisie rapide (ex. : renommer, ajouter une note)",
       "Montrer un aperçu détaillé d'un élément avec des actions",
       "Afficher des options de configuration contextuelles",
-      "Ancrer un contenu flottant à un élément arbitraire via `PopoverAnchor`"
+      "Ancrer un contenu flottant à un élément arbitraire via `PopoverAnchor`",
+      "**Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
     ],
     "constraints": [
       "**MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`",
@@ -11343,13 +11351,14 @@
     "status": "stable",
     "role": "Groupe de boutons radio permettant la sélection exclusive d'une seule option parmi plusieurs choix.",
     "usage": [
-      "Choix exclusif entre 2 à 6 options dans un formulaire",
+      "Choix exclusif entre 2 et 5 options dans un formulaire",
       "Choix d'une option parmi quelques-unes (ex. : mode de livraison, fréquence)",
       "Choix binaire explicite nécessitant la visibilité de toutes les options (vs. Switch)",
-      "Configuration de paramètres avec options mutuellement exclusives"
+      "Configuration de paramètres avec options mutuellement exclusives",
+      "**Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
     ],
     "constraints": [
-      "**MUST NOT** — servir pour plus de 6 options → utiliser `Select` ou `Combobox`",
+      "**MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)",
       "**MUST** — associer chaque `RadioGroupItem` à un `Label`",
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
       "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
@@ -11942,11 +11951,12 @@
       "Sélection d'une valeur dans un formulaire (ex. : catégorie, rôle, statut)",
       "Liste déroulante avec groupes d'options et séparateurs",
       "Alternative stylisée au `<select>` natif avec contrôle total du rendu",
-      "Sélection nécessitant des icônes ou du contenu riche dans les options"
+      "Sélection nécessitant des icônes ou du contenu riche dans les options",
+      "**Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
     ],
     "constraints": [
       "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
-      "**SHOULD** — sur mobile, utiliser `NativeSelect` pour une longue liste d'options ; **sauf** si les options exigent un rendu riche qu'un `<option>` ne peut pas afficher",
+      "**MUST NOT** — servir sous `md` quand les options n'exigent pas de rendu riche → `NativeSelect` (`rule-20`)",
       "**MUST** — tenir compte du `Portal` dans les empilements (`z-index`) : le contenu est rendu hors de son parent",
       "**MUST** — donner à chaque `SelectItem` une `value` unique",
       "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
@@ -12495,7 +12505,8 @@
       "Proposer un panier, un historique ou une liste de notifications",
       "Afficher une navigation secondaire ou des filtres avancés",
       "Présenter des détails d'un élément sélectionné dans un tableau",
-      "Remplacer une page dédiée pour des flux courts (création rapide)"
+      "Remplacer une page dédiée pour des flux courts (création rapide)",
+      "**Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
     ],
     "constraints": [
       "**MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`",
@@ -12503,7 +12514,7 @@
       "**MUST** — rendre un `SheetTitle` : c'est le nom annoncé par les lecteurs d'écran",
       "**Note** — à gauche et à droite, la largeur est limitée à `sm:max-w-sm`",
       "**MUST** — garder un moyen de fermer le panneau quand `showCloseButton={false}` masque le bouton",
-      "**SHOULD** — sur mobile, utiliser `Drawer`, qui se ferme au geste ; **sauf** pour un panneau latéral de navigation",
+      "**MUST NOT** — servir sous `md` → `Drawer`, **sauf** pour la navigation latérale (`rule-21`)",
       "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.sheet` via `closeLabel`"
     ],
     "dependencies": [
@@ -14220,7 +14231,8 @@
       "Activation/désactivation d'un paramètre (ex. : notifications, mode sombre)",
       "Choix binaire on/off dans un formulaire de réglages",
       "Contrôle d'état avec effet immédiat (pas de soumission requise)",
-      "Alternative visuelle à un checkbox unique"
+      "Alternative visuelle à un checkbox unique",
+      "**Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`."
     ],
     "constraints": [
       "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
@@ -14448,7 +14460,8 @@
       "Présenter des données comparatives avec colonnes triables",
       "Construire des tableaux de bord avec sélection de lignes (via checkbox)",
       "Afficher un récapitulatif avec pied de page (totaux, moyennes)",
-      "Ajouter une légende descriptive via `TableCaption`"
+      "Ajouter une légende descriptive via `TableCaption`",
+      "**Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`."
     ],
     "constraints": [
       "**MUST NOT** — servir à la mise en page : réservé aux données tabulaires",
@@ -15666,7 +15679,8 @@
       "Afficher un raccourci clavier associé à une action (via `Kbd` imbriqué)",
       "Préciser le sens d'une icône ou d'une abréviation",
       "Fournir un complément d'information sur un élément interactif",
-      "Afficher un aperçu court au survol d'un lien ou d'un élément tronqué"
+      "Afficher un aperçu court au survol d'un lien ou d'un élément tronqué",
+      "**Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`."
     ],
     "constraints": [
       "**MUST NOT** — contenir des éléments interactifs (liens, boutons) → utiliser `Popover`",

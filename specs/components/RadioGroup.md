@@ -16,14 +16,18 @@ Groupe de boutons radio permettant la sélection exclusive d'une seule option pa
 
 ## Usage
 
-- Choix exclusif entre 2 à 6 options dans un formulaire
+- Choix exclusif entre 2 et 5 options dans un formulaire
 - Choix d'une option parmi quelques-unes (ex. : mode de livraison, fréquence)
 - Choix binaire explicite nécessitant la visibilité de toutes les options (vs. Switch)
 - Configuration de paramètres avec options mutuellement exclusives
 
+<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+
 ## Contraintes
 
-- **MUST NOT** — servir pour plus de 6 options → utiliser `Select` ou `Combobox`
+- **MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)
 - **MUST** — associer chaque `RadioGroupItem` à un `Label`
 - **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
 - **MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)

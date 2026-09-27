@@ -22,6 +22,10 @@ Composant de ligne composable représentant un élément dans une liste, avec su
 - Afficher un item dans un `DropdownMenu` via la variante `xs`
 - Regrouper des items avec `ItemGroup` et les séparer avec `ItemSeparator`
 
+<!-- rule-22 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.
+
 ## Contraintes
 
 - **MUST** — rendre un `ItemTitle` dans chaque `Item`

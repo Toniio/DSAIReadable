@@ -22,9 +22,13 @@ Champ de saisie avec auto-complétion et sélection parmi une liste d'options fi
 - Remplacement d'un `<select>` natif lorsqu'une recherche est nécessaire
 - Formulaires nécessitant une saisie assistée (auto-complétion)
 
+<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+
 ## Contraintes
 
-- **MUST NOT** — servir pour moins de 5 options → utiliser `Select` ou `NativeSelect`
+- **MUST NOT** — servir pour 15 options ou moins sans recherche → `RadioGroup` jusqu'à 5, `Select` ou `NativeSelect` de 6 à 15 (`rule-20`)
 - **MUST** — rendre un `ComboboxEmpty` pour le cas « aucun résultat »
 - **MUST** — en multi-sélection, fournir un `anchor` (`useComboboxAnchor`) pour positionner le popup sous les chips
 - **MUST** — donner à chaque `ComboboxItem` une valeur unique

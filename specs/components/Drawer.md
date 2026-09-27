@@ -17,10 +17,13 @@ Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glisseme
 ## Usage
 
 - Afficher un formulaire ou des options depuis le bas de l'écran sur mobile
-- Proposer un panneau de filtres ou de paramètres latéral
-- Offrir une navigation secondaire glissante depuis la gauche ou la droite
-- Remplacer un Dialog sur les écrans tactiles pour une meilleure ergonomie
+- Proposer un panneau de filtres ou de paramètres sous `md`
+- Afficher sous `md` un contenu long qui irait dans un `Sheet` sur desktop
 - Afficher du contenu complémentaire sans quitter le contexte actuel
+
+<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+
+- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
 
 ## Contraintes
 

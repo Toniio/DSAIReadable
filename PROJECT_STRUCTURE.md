@@ -156,6 +156,7 @@ Une spec par composant. Structure en 13 sections :
 `Variantes` est générée depuis les `cva()` du code (`npm run specs:variants`) ;
 `Tokens utilisés` est générée depuis les classes du code, résolues par Tailwind jusqu'au token sémantique (`npm run specs:tokens`) ;
 Les règles s'écrivent **MUST** / **MUST NOT** ou **SHOULD** … **sauf** (**Note** pour un fait, en Contraintes) ; `lint-spec-wording` refuse « éviter », « préférer », « limiter »… et toute ligne de Contraintes sans mot-clé ;
+Les règles de choix entre composants voisins (`composition_rules` de l'index, champ `applies_to`) sont recopiées en dernière puce de leur `Usage` (`npm run specs:choices`) ;
 `Props / API` est générée depuis les exports TypeScript — un bloc par export, types et défauts tirés du code ; seules les descriptions s'éditent à la main (`npm run specs:api`) ;
 `Accessibilité` suit une structure fixe — Pattern, Rôle, Clavier, Nom accessible, Vigilance.
 
