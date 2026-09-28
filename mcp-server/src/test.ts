@@ -24,8 +24,8 @@ import {
 } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { spawn } from "node:child_process"
-import { tmpdir } from "node:os"
+import { spawn, type ChildProcess } from "node:child_process"
+import { tmpdir, networkInterfaces } from "node:os"
 import { setContextDir, contextDir as servedContextDir } from "./lib/context.js"
 import { createServer as createNetServer } from "node:net"
 
@@ -1043,12 +1043,31 @@ await promptClient.close()
 console.log("\n10. HTTP transport")
 
 const SESSION_TTL_MS = 300
-const freePort = await new Promise<number>((done) => {
-  const probe = createNetServer().listen(0, "127.0.0.1", () => {
-    const { port } = probe.address() as { port: number }
-    probe.close(() => done(port))
+const getFreePort = () =>
+  new Promise<number>((done) => {
+    const probe = createNetServer().listen(0, "127.0.0.1", () => {
+      const { port } = probe.address() as { port: number }
+      probe.close(() => done(port))
+    })
   })
-})
+// Resolves with the server's startup log once it listens.
+const listening = (server: ChildProcess) =>
+  new Promise<string>((ready, fail) => {
+    let log = ""
+    const timer = setTimeout(
+      () => fail(new Error("HTTP server did not start")),
+      20_000
+    )
+    server.stdout?.on("data", (chunk: Buffer) => {
+      log += chunk.toString()
+      if (log.includes("listening")) {
+        clearTimeout(timer)
+        ready(log)
+      }
+    })
+    server.on("exit", (code) => fail(new Error(`HTTP server exited (${code})`)))
+  })
+const freePort = await getFreePort()
 const httpServer = spawn(
   process.execPath,
   ["--import", "tsx", resolve(__dirname, "index.ts"), "--http"],
@@ -1062,21 +1081,7 @@ const httpServer = spawn(
   }
 )
 try {
-  await new Promise<void>((ready, fail) => {
-    const timer = setTimeout(
-      () => fail(new Error("HTTP server did not start")),
-      20_000
-    )
-    httpServer.stdout.on("data", (chunk: Buffer) => {
-      if (chunk.toString().includes("listening")) {
-        clearTimeout(timer)
-        ready()
-      }
-    })
-    httpServer.on("exit", (code) =>
-      fail(new Error(`HTTP server exited (${code})`))
-    )
-  })
+  await listening(httpServer)
 
   const mcpUrl = `http://127.0.0.1:${freePort}/mcp`
   const post = (body: unknown, sessionId?: string) =>
@@ -1089,7 +1094,7 @@ try {
       },
       body: JSON.stringify(body),
     })
-  const init = await post({
+  const initialize = {
     jsonrpc: "2.0",
     id: 1,
     method: "initialize",
@@ -1098,7 +1103,8 @@ try {
       capabilities: {},
       clientInfo: { name: "DSAIReadable-test", version: "1.0.0" },
     },
-  })
+  }
+  const init = await post(initialize)
   const sessionId = init.headers.get("mcp-session-id") ?? ""
   await init.text()
   await (
@@ -1135,16 +1141,7 @@ try {
         Accept: "application/json, text/event-stream",
         Origin: origin,
       },
-      body: JSON.stringify({
-        jsonrpc: "2.0",
-        id: 1,
-        method: "initialize",
-        params: {
-          protocolVersion: "2025-06-18",
-          capabilities: {},
-          clientInfo: { name: "DSAIReadable-test", version: "1.0.0" },
-        },
-      }),
+      body: JSON.stringify(initialize),
     })
   const hostile = await fromOrigin("http://attacker.example")
   const hostileBody = await hostile.text()
@@ -1163,10 +1160,86 @@ try {
     unknown.status === 404,
     `An unknown session is refused with 404, the spec's signal to initialize (got ${unknown.status})`
   )
+
+  // A session the client closes (DELETE) leaves the server at once. Kept, it
+  // is routed to its closed transport, which never answers, and counts
+  // against MCP_MAX_SESSIONS until the TTL sweep.
+  const closing = await post(initialize)
+  const closingId = closing.headers.get("mcp-session-id") ?? ""
+  await closing.text()
+  const deleted = await fetch(mcpUrl, {
+    method: "DELETE",
+    headers: { "Mcp-Session-Id": closingId },
+  })
+  await deleted.text()
+  const afterDelete = await fetch(mcpUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json, text/event-stream",
+      "Mcp-Session-Id": closingId,
+    },
+    body: JSON.stringify(listTools),
+    signal: AbortSignal.timeout(5_000),
+  })
+    .then(async (res) => {
+      await res.text()
+      return String(res.status)
+    })
+    .catch((e: Error) => e.name)
+  assert(
+    closingId !== "" && deleted.status === 200 && afterDelete === "404",
+    `A session closed by the client is refused with 404 (DELETE ${deleted.status}, then ${afterDelete})`
+  )
 } catch (e) {
   assert(false, `HTTP transport: ${e}`)
 } finally {
   httpServer.kill()
+}
+
+// --- Test 10b: the Railway deployment ---
+// railway.json's start command, run as Railway runs it: PORT injected, none of
+// the MCP_* variables set. The healthcheck comes from outside the container,
+// so the server must answer on a non-loopback interface, not only 127.0.0.1.
+console.log("\n10b. Railway deployment")
+
+const railway = JSON.parse(
+  readFileSync(resolve(__dirname, "../railway.json"), "utf-8")
+) as { deploy: { startCommand: string; healthcheckPath: string } }
+const railwayPort = await getFreePort()
+const railwayEnv: NodeJS.ProcessEnv = {
+  ...process.env,
+  PORT: String(railwayPort),
+}
+for (const key of ["MCP_HOST", "MCP_PORT", "MCP_ALLOWED_ORIGINS"]) {
+  delete railwayEnv[key]
+}
+const [railwayBin, ...railwayArgs] = railway.deploy.startCommand.split(/\s+/)
+const railwayServer = spawn(railwayBin, railwayArgs, {
+  cwd: resolve(__dirname, ".."),
+  env: railwayEnv,
+  stdio: ["ignore", "pipe", "inherit"],
+})
+try {
+  const log = await listening(railwayServer)
+  // Any non-loopback IPv4 of this machine stands in for Railway's network.
+  const external = Object.values(networkInterfaces())
+    .flat()
+    .find((i) => i?.family === "IPv4" && !i.internal)?.address
+  const health = await fetch(
+    `http://${external ?? "127.0.0.1"}:${railwayPort}${railway.deploy.healthcheckPath}`,
+    { signal: AbortSignal.timeout(5_000) }
+  )
+    .then(async (res) => (await res.json()) as { status?: string })
+    .catch((e: Error) => ({ status: e.name }))
+  assert(
+    log.includes(`http://0.0.0.0:${railwayPort}/mcp`) && health.status === "ok",
+    `railway.json listens on 0.0.0.0:$PORT and ${railway.deploy.healthcheckPath} answers from ${external ?? "loopback (no other interface)"} (got ${health.status})`
+  )
+} catch (e) {
+  assert(false, `Railway deployment: ${e}`)
+} finally {
+  railwayServer.kill()
 }
 
 // --- Test 11: every tool, called as an agent calls it (P3-08) ---

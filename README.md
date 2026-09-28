@@ -91,9 +91,10 @@ Its output is deterministic: two runs in a row produce no diff.
 
 ### HTTP mode configuration
 
-The server only listens on the loopback interface and **validates the `Origin`
-header** (a requirement of the MCP spec, against DNS rebinding attacks). A
-request with an origin that is not allowed receives a `403`.
+By default the server only listens on the loopback interface, and it always
+**validates the `Origin` header** (a requirement of the MCP spec, against DNS
+rebinding attacks). A request with an origin that is not allowed receives a
+`403`.
 
 | Variable              | Default                                         | Role                                                                    |
 | --------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
@@ -102,6 +103,24 @@ request with an origin that is not allowed receives a `403`.
 | `MCP_ALLOWED_ORIGINS` | `localhost` + `127.0.0.1` on the listening port | Comma-separated list of origins                                         |
 | `MCP_SESSION_TTL_MS`  | `1800000` (30 min)                              | Expiry of idle sessions; an expired or unknown session receives a `404` |
 | `MCP_MAX_SESSIONS`    | `100`                                           | Maximum number of concurrent sessions                                   |
+
+### Local and deployed
+
+|             | Local (`npm run start:http`) | Railway (`mcp-server/railway.json`)                         |
+| ----------- | ---------------------------- | ----------------------------------------------------------- |
+| Interface   | `127.0.0.1`                  | `0.0.0.0`, set by `env MCP_HOST=0.0.0.0` in `startCommand`  |
+| Port        | `3100`                       | `PORT`, injected by Railway                                 |
+| Healthcheck | `GET /health`                | `GET /health`, Railway's `healthcheckPath`                  |
+| Origins     | `localhost` and `127.0.0.1`  | Default; set `MCP_ALLOWED_ORIGINS` in Railway for a browser |
+
+Railway's config as code cannot declare variables, so the listening interface
+lives in the start command. Other variables, `MCP_ALLOWED_ORIGINS` included, are
+set in the Railway service. MCP clients that are not browsers send no `Origin`
+and need none. The deployed server has **no authentication**: every tool is
+read-only and serves public data only.
+
+`npm run mcp:test` runs `railway.json`'s start command with an injected `PORT`
+and checks that `/health` answers on a non-loopback interface.
 
 ### Available tools
 
