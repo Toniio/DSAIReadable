@@ -45,6 +45,7 @@
     "mcp:test": "npm --prefix mcp-server run test",
     "generate-context": "npm --prefix mcp-server run generate-context",
     "test": "npm run mcp:test",
+    "check": "tsx scripts/check.ts",
     "prepare": "husky",
     "index:strings": "tsx scripts/lint-ui-strings.ts",
     "index:props": "tsx scripts/lint-props-types.ts"
