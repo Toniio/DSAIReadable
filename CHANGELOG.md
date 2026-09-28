@@ -66,6 +66,9 @@ section that fits.
 - Two composition rules the repository contradicted
   ([#12](https://github.com/Toniio/DSAIReadable/pull/12)); facts the
   documentation got wrong ([#14](https://github.com/Toniio/DSAIReadable/pull/14)).
+- Combobox reads the default names of its icon buttons from
+  `UI_STRINGS.combobox`, as its spec says; `index:strings` now reports a
+  literal default on a `label` or `*Label` prop.
 
 ### Removed
 

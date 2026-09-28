@@ -33,7 +33,7 @@ A text input with autocomplete that picks from a filterable list of options; sup
 - **MUST** — in multiple selection, provide an `anchor` (`useComboboxAnchor`) so the popup opens below the chips
 - **MUST** — give each `ComboboxItem` a unique value
 - **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
-- **MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they are in English by default
+- **MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they default to the English `UI_STRINGS.combobox`
 
 ## Dependencies
 
@@ -105,15 +105,15 @@ Renders `ComboboxPrimitive.Root`.
 
 Renders `ComboboxPrimitive.Input`.
 
-| Prop           | Type                                                           | Default             | Description                                                      |
-| -------------- | -------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------- |
-| `disabled`     | `boolean`                                                      | `false`             | Disables the input                                               |
-| `showTrigger`  | `boolean`                                                      | `true`              | Shows the caret button that opens the popup                      |
-| `showClear`    | `boolean`                                                      | `false`             | Shows the clear button                                           |
-| `triggerLabel` | `string`                                                       | `"Open list"`       | Accessible name of the caret button, passed to `ComboboxTrigger` |
-| `clearLabel`   | `string`                                                       | `"Clear selection"` | Accessible name of the clear button, passed to `ComboboxClear`   |
-| `className`    | `string \| (state: ComboboxInputState) => string \| undefined` | —                   | Additional CSS classes                                           |
-| `...props`     | `ComboboxPrimitive.Input.Props`                                | —                   | `ComboboxPrimitive.Input` props                                  |
+| Prop           | Type                                                           | Default                       | Description                                                      |
+| -------------- | -------------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------------- |
+| `disabled`     | `boolean`                                                      | `false`                       | Disables the input                                               |
+| `showTrigger`  | `boolean`                                                      | `true`                        | Shows the caret button that opens the popup                      |
+| `showClear`    | `boolean`                                                      | `false`                       | Shows the clear button                                           |
+| `triggerLabel` | `string`                                                       | `UI_STRINGS.combobox.trigger` | Accessible name of the caret button, passed to `ComboboxTrigger` |
+| `clearLabel`   | `string`                                                       | `UI_STRINGS.combobox.clear`   | Accessible name of the clear button, passed to `ComboboxClear`   |
+| `className`    | `string \| (state: ComboboxInputState) => string \| undefined` | —                             | Additional CSS classes                                           |
+| `...props`     | `ComboboxPrimitive.Input.Props`                                | —                             | `ComboboxPrimitive.Input` props                                  |
 
 ### `ComboboxContent`
 
@@ -196,11 +196,11 @@ Renders `ComboboxPrimitive.Chips`.
 
 Renders `ComboboxPrimitive.Chip`.
 
-| Prop          | Type                           | Default    | Description                              |
-| ------------- | ------------------------------ | ---------- | ---------------------------------------- |
-| `showRemove`  | `boolean`                      | `true`     | Shows the chip's remove button           |
-| `removeLabel` | `string`                       | `"Remove"` | `aria-label` of the chip's remove button |
-| `...props`    | `ComboboxPrimitive.Chip.Props` | —          | `ComboboxPrimitive.Chip` props           |
+| Prop          | Type                           | Default                      | Description                              |
+| ------------- | ------------------------------ | ---------------------------- | ---------------------------------------- |
+| `showRemove`  | `boolean`                      | `true`                       | Shows the chip's remove button           |
+| `removeLabel` | `string`                       | `UI_STRINGS.combobox.remove` | `aria-label` of the chip's remove button |
+| `...props`    | `ComboboxPrimitive.Chip.Props` | —                            | `ComboboxPrimitive.Chip` props           |
 
 ### `ComboboxChipsInput`
 
@@ -214,10 +214,10 @@ Renders `ComboboxPrimitive.Input`.
 
 Renders `ComboboxPrimitive.Trigger`.
 
-| Prop           | Type                              | Default       | Description                                                     |
-| -------------- | --------------------------------- | ------------- | --------------------------------------------------------------- |
-| `triggerLabel` | `string`                          | `"Open list"` | `aria-label` applied only when the trigger has no visible child |
-| `...props`     | `ComboboxPrimitive.Trigger.Props` | —             | `ComboboxPrimitive.Trigger` props                               |
+| Prop           | Type                              | Default                       | Description                                                     |
+| -------------- | --------------------------------- | ----------------------------- | --------------------------------------------------------------- |
+| `triggerLabel` | `string`                          | `UI_STRINGS.combobox.trigger` | `aria-label` applied only when the trigger has no visible child |
+| `...props`     | `ComboboxPrimitive.Trigger.Props` | —                             | `ComboboxPrimitive.Trigger` props                               |
 
 ### `ComboboxValue`
 
@@ -265,7 +265,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 | `Escape`                | Closes the list                        |
 | Typing                  | Filters the options                    |
 
-**Accessible name**: A `Label` tied to the input is required. The icon buttons (clear, remove a chip) are named by `clearLabel` / `removeLabel` (defaults in `UI_STRINGS`).
+**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`).
 
 **Pitfalls**:
 

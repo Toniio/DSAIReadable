@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/input-group"
 import { CaretDownIcon, XIcon, CheckIcon } from "@phosphor-icons/react"
 
+import { UI_STRINGS } from "@/lib/ui-strings"
+
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   ...props
 }: ComboboxPrimitive.Root.Props<Value, Multiple>) {
@@ -27,7 +29,7 @@ function ComboboxValue({ ...props }: ComboboxPrimitive.Value.Props) {
 function ComboboxTrigger({
   className,
   children,
-  triggerLabel = "Open list",
+  triggerLabel = UI_STRINGS.combobox.trigger,
   ...props
 }: ComboboxPrimitive.Trigger.Props & { triggerLabel?: string }) {
   return (
@@ -45,7 +47,7 @@ function ComboboxTrigger({
 
 function ComboboxClear({
   className,
-  clearLabel = "Clear selection",
+  clearLabel = UI_STRINGS.combobox.clear,
   ...props
 }: ComboboxPrimitive.Clear.Props & { clearLabel?: string }) {
   return (
@@ -265,7 +267,7 @@ function ComboboxChip({
   className,
   children,
   showRemove = true,
-  removeLabel = "Remove",
+  removeLabel = UI_STRINGS.combobox.remove,
   ...props
 }: ComboboxPrimitive.Chip.Props & {
   showRemove?: boolean
