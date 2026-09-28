@@ -55,7 +55,25 @@ with `--no-verify`.**
   validation command.
 - **Green CI required.** `main` is protected; no direct push is possible.
 - Squash merge, then delete the branch.
-- A version tag is set at the end of each priority batch of the backlog.
+- A change in behavior adds its line under **Unreleased** in
+  [`CHANGELOG.md`](./CHANGELOG.md).
+
+## Where a change goes
+
+Most of what an agent reads is generated: change the source, run its command,
+and commit both. CI fails on a generated file that is out of step with its
+source.
+
+| To change                                      | Edit                                                          | Then run                                                              |
+| ---------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------- |
+| A token value or decision                      | `tokens/*.json`                                               | `npm run tokens:build && npm run docs:tokens`                         |
+| A component                                    | `components/ui/<component>.tsx`, after reading its spec       | `npm run specs:variants && npm run specs:tokens && npm run specs:api` |
+| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections | `npm run docs:llms` when the Role changed                             |
+| A choice between sibling components            | `composition_rules` in `design-system.index.json`             | `npm run specs:choices`                                               |
+| Anything the MCP server serves                 | its source above                                              | `npm run generate-context`                                            |
+| A registry item                                | the component or `registry/`                                  | `npm run registry:build`                                              |
+
+The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-areas-not-to-touch-without-an-explicit-instruction).
 
 ## What CI checks
 
@@ -80,6 +98,10 @@ Tailwind classes by hand — `prettier-plugin-tailwindcss` takes care of it.
 
 Everything committed is written in English, natively — code, comments, docs,
 specs and demo copy.
+
+## Reporting a vulnerability
+
+Privately, never in a public issue — see [`SECURITY.md`](./SECURITY.md).
 
 ## Running the MCP server locally
 

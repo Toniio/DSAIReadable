@@ -67,7 +67,8 @@ dsaireadable/
 ├── registry/                   # Sources of the registry items that are not components
 ├── registry.json               # shadcn registry — generated
 ├── design-system.index.json    # Machine-readable inventory of the design system
-└── design-system.schema.json   # JSON Schema that validates the index
+├── design-system.schema.json   # JSON Schema that validates the index
+└── llms.txt                    # Documentation map for agents (llms.txt format) — generated
 ```
 
 ---
@@ -200,7 +201,7 @@ npx shadcn@latest view Toniio/DSAIReadable/card        # view an item and its so
 npx shadcn@latest add Toniio/DSAIReadable/card --dry-run
 ```
 
-Every component has its spec — props, variants, states, accessibility — in [`specs/components/`](./specs/components/).
+Every component has its spec — props, variants, states, accessibility — in [`specs/components/`](./specs/components/). [`llms.txt`](./llms.txt) lists every spec with its role, the entry points and the machine-readable sources, in the [llms.txt](https://llmstxt.org/) format.
 
 ### With an agent
 
