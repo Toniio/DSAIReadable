@@ -206,7 +206,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Alert Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) (Radix AlertDialog)
 
-**Role**: `role="alertdialog"`, `aria-modal="true"`; labelled by `AlertDialogTitle`, described by `AlertDialogDescription`.
+**Role**: `role="alertdialog"`; labelled by `AlertDialogTitle`, described by `AlertDialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
 
 **Keyboard**:
 

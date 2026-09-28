@@ -125,6 +125,18 @@ jobs:
       - run: npm ci --prefix mcp-server
       - run: npm run mcp:test
 
+  component-tests:
+    name: component-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run test:components
+
   registry:
     name: registry
     runs-on: ubuntu-latest

@@ -5,7 +5,7 @@ The rules that apply to AI agents and humans alike are in
 
 ## Prerequisites
 
-- Node.js 24
+- Node.js 24 (`.nvmrc`); the component tests need at least 22.12
 - `npm ci` at the root **and** `npm ci --prefix mcp-server`
 
 The git hooks are installed automatically by the `prepare` script (husky).
@@ -87,6 +87,7 @@ The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-a
 | `spec-sections`     | `npm run specs:validate`                                                     |
 | `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                  |
 | `mcp-test`          | `npm run mcp:test`                                                           |
+| `component-tests`   | `npm run test:components`                                                    |
 | `registry`          | `npm run registry:check`, shadcn validation, `npm run registry:test-install` |
 
 ## Code style

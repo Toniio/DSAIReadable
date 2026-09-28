@@ -13,6 +13,10 @@ section that fits.
 
 ### Added
 
+- Component tests: `npm run test:components` (Vitest, Testing Library, axe-core)
+  covers Button, Field, Progress, Combobox, Dialog, Tabs and Select — roles,
+  accessible names, keyboard, variants and zero axe violations — and runs in CI.
+
 - `llms.txt` at the root, generated from the specs; `SECURITY.md`, `CHANGELOG.md`
   and `.github/CODEOWNERS`.
 - `npm run check`: every CI check in one call, printing only the failures
@@ -45,6 +49,9 @@ section that fits.
 
 ### Fixed
 
+- Specs: Dialog, AlertDialog, Drawer and Sheet no longer claim
+  `aria-modal="true"`; Radix hides the rest of the page with `aria-hidden`
+  instead.
 - MCP server: closed HTTP sessions are dropped instead of blocking the next
   request ([#25](https://github.com/Toniio/DSAIReadable/pull/25)); an expired or
   unknown session is refused with `404`
