@@ -4,7 +4,7 @@ export default function LoginIndexPage() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-8 p-8">
       <h1 className="font-heading text-xl font-semibold">
-        Login — 3 déclinaisons
+        Sign-in — 4 layouts
       </h1>
       <nav className="flex flex-col gap-4 text-sm">
         <Link
@@ -17,7 +17,7 @@ export default function LoginIndexPage() {
           href="/login/centered"
           className="underline underline-offset-4 hover:text-primary"
         >
-          2. Centré (Card)
+          2. Centered (Card)
         </Link>
         <Link
           href="/login/fullscreen"

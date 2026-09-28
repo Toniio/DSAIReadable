@@ -1,14 +1,14 @@
 [
   {
     "name": "Banking Dashboard",
-    "description": "Page d'accueil d'une app bancaire avec header, cartes de compte, actions rapides et onglets transactions/budget",
+    "description": "Home page of a banking app with a header, account cards, quick actions and transactions / budget tabs",
     "source": "app/banking/page.tsx",
     "structure": [
       "Header with logo, app name, notifications, and avatar",
       "Welcome section with greeting and date",
       "Account cards grid (3 columns)",
-      "Quick actions bar (Virement, Paiement, RIB, Plafonds)",
-      "Tabs: Transactions récentes / Budget mensuel",
+      "Quick actions bar (Transfer, Pay, Account details, Limits)",
+      "Tabs: Recent transactions / Monthly budget",
       "Transactions table with status badges",
       "Budget cards with progress bars",
       "Footer with copyright"
@@ -42,7 +42,7 @@
   },
   {
     "name": "Login Fullscreen",
-    "description": "Page de connexion plein écran avec fond sombre inversé, motif de points, formulaire centré",
+    "description": "Full-screen sign-in page with an inverted dark background, a dot pattern and a centered form",
     "source": "app/login/fullscreen/page.tsx",
     "structure": [
       "Dark inverse background with dot pattern",

@@ -2,7 +2,7 @@
   "objectives": [
     {
       "name": "Evolution",
-      "description": "Montrer un changement dans le temps",
+      "description": "Show change over time",
       "recommended_charts": [
         "line",
         "area",
@@ -11,7 +11,7 @@
     },
     {
       "name": "Correlation",
-      "description": "Montrer la relation entre variables",
+      "description": "Show the relationship between variables",
       "recommended_charts": [
         "bubble",
         "heatmap"
@@ -19,7 +19,7 @@
     },
     {
       "name": "Comparison",
-      "description": "Comparer des valeurs",
+      "description": "Compare values",
       "recommended_charts": [
         "bar",
         "cigarette",
@@ -28,14 +28,14 @@
     },
     {
       "name": "Distribution",
-      "description": "Montrer la répartition",
+      "description": "Show how values are spread",
       "recommended_charts": [
         "histogram"
       ]
     },
     {
       "name": "Proportion",
-      "description": "Montrer les parts d'un tout",
+      "description": "Show the parts of a whole",
       "recommended_charts": [
         "pie",
         "donut"
@@ -43,7 +43,7 @@
     },
     {
       "name": "KPI",
-      "description": "Afficher un indicateur clé",
+      "description": "Show a key indicator",
       "recommended_charts": [
         "data_card",
         "gauge",

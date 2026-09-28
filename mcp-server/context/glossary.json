@@ -89,26 +89,26 @@
   },
   {
     "term": "design system",
-    "definition": "Ensemble cohérent de composants, tokens et règles qui garantissent la consistance visuelle et fonctionnelle d'un produit."
+    "definition": "A coherent set of components, tokens and rules that keeps a product visually and functionally consistent."
   },
   {
     "term": "variant",
-    "definition": "Déclinaison visuelle d'un composant (ex: default, outline, ghost pour un Button)."
+    "definition": "A visual version of a component (for example default, outline or ghost for a Button)."
   },
   {
-    "term": "composant",
-    "definition": "Élément UI réutilisable avec une API définie (props, slots, événements)."
+    "term": "component",
+    "definition": "A reusable UI element with a defined API (props, slots, events)."
   },
   {
     "term": "foundation",
-    "definition": "Couche de base du design system — couleurs, typographie, espacement, élévation, radius, opacité, motion."
+    "definition": "The base layer of the design system — color, typography, spacing, elevation, radius, opacity, motion."
   },
   {
     "term": "slot",
-    "definition": "Point d'ancrage dans l'anatomie d'un composant, exposé via l'attribut data-slot."
+    "definition": "A named part of a component's anatomy, exposed through the data-slot attribute."
   },
   {
     "term": "token",
-    "definition": "Design token — variable de design réutilisable qui encode une décision visuelle (couleur, espacement, etc.)."
+    "definition": "Design token — a reusable design variable that encodes a visual decision (color, spacing…)."
   }
 ]

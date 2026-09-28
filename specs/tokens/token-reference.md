@@ -8,19 +8,19 @@
 > 301 tokens · source `tokens/primitive.json` · `tokens/semantic.json` · `tokens/component.json`
 > Machine-readable counterpart: `tokens.manifest.json`
 
-Les tokens publics sont les tiers Semantic et Component. Le tier Primitive est privé :
-il est listé en fin de document uniquement pour tracer l'origine des valeurs.
+The public tokens are the Semantic and Component tiers. The Primitive tier is private:
+it is listed at the end of this document only to trace where the values come from.
 
-Colonne **Statut** : `active` — consommé par un composant, le pont `@theme` ou un autre token ;
-`reserved` — décision valide que rien ne consomme encore, utilisable si son rôle correspond
-exactement au besoin ; `deprecated` — ne plus utiliser. `npm run tokens:lint-lifecycle` garantit
-que le statut dit ce que fait le code.
+**Status** column: `active` — consumed by a component, the `@theme` bridge or another token;
+`reserved` — a valid decision nothing consumes yet, usable when its role matches the need
+exactly; `deprecated` — do not use any more. `npm run tokens:lint-lifecycle` makes sure
+the status says what the code does.
 
 ---
 
 ## Color
 
-| Token                                | Variable CSS                           | Type  | Statut   | Light     | Dark                        | Tailwind               |
+| Token                                | CSS variable                           | Type  | Status   | Light     | Dark                        | Tailwind               |
 | ------------------------------------ | -------------------------------------- | ----- | -------- | --------- | --------------------------- | ---------------------- |
 | `color.background.default`           | `--color-background-default`           | color | active   | `#ffffff` | `#090b0c`                   | —                      |
 | `color.background.subtle`            | `--color-background-subtle`            | color | active   | `#f1f3f3` | `#22292b`                   | —                      |
@@ -65,40 +65,40 @@ que le statut dit ce que fait le code.
 | `color.static.white`                 | `--color-static-white`                 | color | active   | `#ffffff` | `#ffffff`                   | `bg-white, text-white` |
 | `color.static.black`                 | `--color-static-black`                 | color | active   | `#000000` | `#000000`                   | `bg-black/10`          |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée                               | ✅ Do                                                                                            | ❌ Don't                                                                                                                          |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `color.background.default`           | Utiliser comme fond de la page racine et des containers principaux (`<body>`, `<main>`).         | Ne pas utiliser pour les cards, popovers ou surfaces élevées — préférer `color.background.subtle` ou `color.background.elevated`. |
-| `color.background.subtle`            | Utiliser pour les cards, zones muted, sidebars secondaires, panneaux internes.                   | Ne pas utiliser pour le fond principal de la page.                                                                                |
-| `color.background.elevated`          | Utiliser pour popovers, dropdowns, dialogs, tooltips à fond clair.                               | Ne pas utiliser pour les cards inline — elles ne sont pas "élevées" au sens Z.                                                    |
-| `color.background.inverse`           | Utiliser pour les tooltips sombres, les badges inversés, les bandeaux d'alerte.                  | Ne pas utiliser comme fond de page général — réservé aux surfaces ponctuelles inversées.                                          |
-| `color.text.default`                 | Utiliser pour tout texte de contenu principal, titres, labels importants.                        | Ne pas réduire l'opacité pour simuler un texte secondaire — utiliser `color.text.subtle`.                                         |
-| `color.text.subtle`                  | Utiliser pour les labels de champs, les descriptions de formulaire, les timestamps.              | Ne pas utiliser pour le contenu de corps principal — le contraste est insuffisant pour la lecture longue.                         |
-| `color.text.bold`                    | Utiliser pour les emphases dans des zones où le contexte visuel est complexe.                    | Ne pas utiliser comme substitut à `text.default` pour le corps standard.                                                          |
-| `color.text.inverse`                 | Utiliser uniquement posé sur `color.background.inverse`.                                         | Ne pas utiliser sur surfaces standard — le contraste sera insuffisant.                                                            |
-| `color.text.action.default`          | Utiliser pour les liens textuels et les labels exprimant une action cliquable.                   | Ne pas utiliser pour le texte de corps générique — réservé aux éléments actionnables.                                             |
-| `color.text.action.on`               | Utiliser pour le label d'un bouton primaire.                                                     | Ne pas utiliser sur surfaces neutres — contraste insuffisant sur fond clair.                                                      |
-| `color.text.destructive.default`     | Utiliser pour les messages de validation d'erreur, les confirmations de suppression.             | Ne pas utiliser pour les avertissements (warning) ou les informations — réservé aux erreurs critiques.                            |
-| `color.border.default`               | Utiliser pour les dividers entre sections, les contours de cards.                                | Ne pas utiliser pour les champs de formulaire — préférer `color.border.input`.                                                    |
-| `color.border.subtle`                | Utiliser pour les séparateurs internes de listes, les divisions légères.                         | Ne pas utiliser sur des composants interactifs nécessitant une bordure visible.                                                   |
-| `color.border.input`                 | Utiliser pour toutes les bordures de `<input>`, `<select>`, `<textarea>`, `<checkbox>`.          | Ne pas utiliser pour les séparateurs décoratifs — réservé aux contrôles de formulaire.                                            |
-| `color.border.focus`                 | Utiliser uniquement pour l'état `:focus-visible` des éléments interactifs.                       | Ne jamais supprimer le focus ring — c'est une exigence d'accessibilité WCAG 2.4.7.                                                |
-| `color.icon.default`                 | Utiliser pour les icônes de navigation, d'action standard, de contenu.                           | Ne pas utiliser pour les icônes dans des boutons primaires — utiliser `color.icon.action`.                                        |
-| `color.icon.subtle`                  | Utiliser pour les icônes d'état, les indicateurs de chargement, les icônes de métadonnées.       | Ne pas utiliser pour les icônes d'action principale.                                                                              |
-| `color.icon.action`                  | Utiliser pour les icônes à l'intérieur de boutons primaires ou de badges d'action.               | Ne pas utiliser sur fond neutre ou clair.                                                                                         |
-| `color.action.background.default`    | Utiliser pour le fond des boutons primaires et des éléments CTA.                                 | Ne pas utiliser pour les variantes secondary, ghost ou outline — ces variantes n'ont pas de fond coloré.                          |
-| `color.action.background.foreground` | Toujours associer avec `color.action.background.default` pour le texte d'un bouton primaire.     | Ne pas utiliser sur fond neutre ou clair.                                                                                         |
-| `color.feedback.error.default`       | Utiliser pour les messages de validation, les bordures de champs invalides, les icônes d'erreur. | Ne pas utiliser pour les avertissements ou les états de succès.                                                                   |
-| `color.feedback.error.foreground`    | Utiliser dès qu'un fond `bg-destructive` plein porte du texte ou une icône.                      | Ne jamais poser `color.text.default` ni `text-white` sur une surface d'erreur — en dark, blanc sur red.500 tombe à 2.89:1.        |
-| `color.chart.*`                      | Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.                                     | Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données.                              |
-| `color.sidebar.*`                    | Utiliser exclusivement dans les composants de navigation latérale.                               | Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.                                       |
+| Scope                                | ✅ Do                                                                                | ❌ Don't                                                                                                             |
+| ------------------------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `color.background.default`           | Use as the background of the root page and the main containers (`<body>`, `<main>`). | Do not use for cards, popovers or raised surfaces — use `color.background.subtle` or `color.background.elevated`.    |
+| `color.background.subtle`            | Use for cards, muted areas, secondary sidebars, inner panels.                        | Do not use for the page's main background.                                                                           |
+| `color.background.elevated`          | Use for popovers, drop-downs, dialogs, light tooltips.                               | Do not use for inline cards — they are not "raised" on the Z axis.                                                   |
+| `color.background.inverse`           | Use for dark tooltips, inverted badges, alert banners.                               | Do not use as a general page background — it is reserved for occasional inverted surfaces.                           |
+| `color.text.default`                 | Use for all main content text, titles and important labels.                          | Do not lower the opacity to fake secondary text — use `color.text.subtle`.                                           |
+| `color.text.subtle`                  | Use for field labels, form descriptions, timestamps.                                 | Do not use for main body content — its contrast is too low for long reading.                                         |
+| `color.text.bold`                    | Use for emphasis in areas with a busy visual context.                                | Do not use as a substitute for `text.default` in standard body text.                                                 |
+| `color.text.inverse`                 | Use only on `color.background.inverse`.                                              | Do not use on standard surfaces — the contrast would be too low.                                                     |
+| `color.text.action.default`          | Use for text links and labels that express a clickable action.                       | Do not use for generic body text — it is reserved for actionable elements.                                           |
+| `color.text.action.on`               | Use for the label of a primary button.                                               | Do not use on neutral surfaces — the contrast is too low on a light background.                                      |
+| `color.text.destructive.default`     | Use for error validation messages and deletion confirmations.                        | Do not use for warnings or information — it is reserved for critical errors.                                         |
+| `color.border.default`               | Use for dividers between sections and card outlines.                                 | Do not use for form fields — use `color.border.input`.                                                               |
+| `color.border.subtle`                | Use for inner list separators and light divisions.                                   | Do not use on interactive components that need a visible border.                                                     |
+| `color.border.input`                 | Use for every `<input>`, `<select>`, `<textarea>` and `<checkbox>` border.           | Do not use for decorative separators — it is reserved for form controls.                                             |
+| `color.border.focus`                 | Use only for the `:focus-visible` state of interactive elements.                     | Never remove the focus ring — it is a WCAG 2.4.7 accessibility requirement.                                          |
+| `color.icon.default`                 | Use for navigation, standard action and content icons.                               | Do not use for icons inside primary buttons — use `color.icon.action`.                                               |
+| `color.icon.subtle`                  | Use for status icons, loading indicators and metadata icons.                         | Do not use for main action icons.                                                                                    |
+| `color.icon.action`                  | Use for icons inside primary buttons or action badges.                               | Do not use on a neutral or light background.                                                                         |
+| `color.action.background.default`    | Use for the background of primary buttons and CTA elements.                          | Do not use for the secondary, ghost or outline variants — those variants have no colored background.                 |
+| `color.action.background.foreground` | Always pair with `color.action.background.default` for the text of a primary button. | Do not use on a neutral or light background.                                                                         |
+| `color.feedback.error.default`       | Use for validation messages, the borders of invalid fields and error icons.          | Do not use for warnings or success states.                                                                           |
+| `color.feedback.error.foreground`    | Use whenever a solid `bg-destructive` background carries text or an icon.            | Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.500 drops to 2.89:1. |
+| `color.chart.*`                      | Use in order (1 → 5) for chart series.                                               | Do not reuse these tokens for general UI colors — they are reserved for data visualization.                          |
+| `color.sidebar.*`                    | Use only in side navigation components.                                              | Do not reuse these tokens in the main content — they belong to the sidebar's context.                                |
 
 ---
 
 ## Space
 
-| Token                          | Variable CSS                     | Type      | Statut   | Valeur    | Tailwind |
+| Token                          | CSS variable                     | Type      | Status   | Value     | Tailwind |
 | ------------------------------ | -------------------------------- | --------- | -------- | --------- | -------- |
 | `space.component.xs`           | `--space-component-xs`           | dimension | reserved | `0.25rem` | —        |
 | `space.component.sm`           | `--space-component-sm`           | dimension | reserved | `0.5rem`  | —        |
@@ -115,26 +115,26 @@ que le statut dit ce que fait le code.
 | `space.layout.sidebar-mobile`  | `--space-layout-sidebar-mobile`  | dimension | active   | `18rem`   | —        |
 | `space.layout.sidebar-icon`    | `--space-layout-sidebar-icon`    | dimension | active   | `3rem`    | —        |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée                         | ✅ Do                                                                        | ❌ Don't                                                                             |
-| ------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `space.component.xs`           | Gap entre icône et label dans un bouton compact, padding interne d'un badge. | Ne pas utiliser pour des espacements de layout.                                      |
-| `space.component.sm`           | Padding d'un bouton compact, gap d'une liste serrée.                         | Ne pas utiliser pour espacer des sections de page.                                   |
-| `space.component.md`           | Padding standard d'une card, gap entre boutons d'un groupe.                  | Ne pas utiliser pour le gap entre sections de page.                                  |
-| `space.component.lg`           | Padding interne d'un dialog, gap entre champs de formulaire.                 | Ne pas confondre avec `space.layout.page-padding` (même valeur, contexte différent). |
-| `space.component.xl`           | Padding d'une section de card large, espacement entre groupes de formulaire. | Ne pas utiliser pour les espacements entre éléments inline proches.                  |
-| `space.layout.page-padding`    | Padding horizontal du conteneur de page racine.                              | Ne pas appliquer sur des composants internes.                                        |
-| `space.layout.section-gap`     | Espace vertical entre sections majeures d'une page.                          | Ne pas utiliser entre composants d'une même section.                                 |
-| `space.layout.content-sm`      | `max-w-[var(--space-layout-content-sm)]` pour les pages editoriales.         | Ne pas utiliser comme valeur de padding.                                             |
-| `space.layout.content-default` | Conteneur de contenu principal de la majorité des pages.                     | Ne pas dépasser pour les layouts de contenu standard.                                |
-| `space.layout.content-lg`      | Dashboards, tableaux de données, layouts avec plusieurs colonnes.            | Ne pas utiliser pour les pages de contenu éditorial.                                 |
+| Scope                          | ✅ Do                                                                           | ❌ Don't                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `space.component.xs`           | Gap between an icon and its label in a compact button, a badge's inner padding. | Do not use for layout spacing.                                                   |
+| `space.component.sm`           | Padding of a compact button, gap of a tight list.                               | Do not use to space out page sections.                                           |
+| `space.component.md`           | Standard card padding, gap between the buttons of a group.                      | Do not use for the gap between page sections.                                    |
+| `space.component.lg`           | A dialog's inner padding, gap between form fields.                              | Do not confuse with `space.layout.page-padding` (same value, different context). |
+| `space.component.xl`           | Padding of a large card section, spacing between groups of form fields.         | Do not use between nearby inline elements.                                       |
+| `space.layout.page-padding`    | Horizontal padding of the root page container.                                  | Do not apply to inner components.                                                |
+| `space.layout.section-gap`     | Vertical space between the major sections of a page.                            | Do not use between components of the same section.                               |
+| `space.layout.content-sm`      | `max-w-[var(--space-layout-content-sm)]` for editorial pages.                   | Do not use as a padding value.                                                   |
+| `space.layout.content-default` | The main content container of most pages.                                       | Do not exceed it for standard content layouts.                                   |
+| `space.layout.content-lg`      | Dashboards, data tables, multi-column layouts.                                  | Do not use for editorial content pages.                                          |
 
 ---
 
 ## Typography
 
-| Token                              | Variable CSS                         | Type        | Statut | Valeur                      | Tailwind          |
+| Token                              | CSS variable                         | Type        | Status | Value                       | Tailwind          |
 | ---------------------------------- | ------------------------------------ | ----------- | ------ | --------------------------- | ----------------- |
 | `typography.size.xs`               | `--typography-size-xs`               | dimension   | active | `0.75rem`                   | `text-xs`         |
 | `typography.size.sm`               | `--typography-size-sm`               | dimension   | active | `0.875rem`                  | `text-sm`         |
@@ -160,18 +160,18 @@ que le statut dit ce que fait le code.
 | `typography.font-family.sans`      | `--typography-font-family-sans`      | font-family | active | `Geist, sans-serif`         | —                 |
 | `typography.font-family.mono`      | `--typography-font-family-mono`      | font-family | active | `JetBrains Mono, monospace` | —                 |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée                        | ✅ Do                                                                  | ❌ Don't                                                                                                                                       |
-| ----------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `typography.font-family.sans` | Réserver aux touches `Kbd` et au contenu éditorial long (`font-sans`). | Ne pas l'utiliser pour l'interface : tout le texte UI est en `font-mono`.                                                                      |
-| `typography.font-family.mono` | Police par défaut de tous les composants UI, appliquée sur `<html>`.   | Ne pas changer de police ici seulement : elle est chargée par `next/font` dans `app/layout.tsx`, que `tokens:lint-fonts` confronte à ce token. |
+| Scope                         | ✅ Do                                                            | ❌ Don't                                                                                                                                     |
+| ----------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `typography.font-family.sans` | Keep it for `Kbd` keys and long editorial content (`font-sans`). | Do not use it for the interface: all UI text is set in `font-mono`.                                                                          |
+| `typography.font-family.mono` | The default typeface of every UI component, set on `<html>`.     | Do not change the typeface here alone: it is loaded by `next/font` in `app/layout.tsx`, which `tokens:lint-fonts` checks against this token. |
 
 ---
 
 ## Radius
 
-| Token         | Variable CSS    | Type      | Statut   | Valeur     | Tailwind       |
+| Token         | CSS variable    | Type      | Status   | Value      | Tailwind       |
 | ------------- | --------------- | --------- | -------- | ---------- | -------------- |
 | `radius.none` | `--radius-none` | dimension | reserved | `0rem`     | `rounded-none` |
 | `radius.xs`   | `--radius-xs`   | dimension | active   | `0.25rem`  | `rounded-xs`   |
@@ -184,17 +184,17 @@ que le statut dit ce que fait le code.
 | `radius.4xl`  | `--radius-4xl`  | dimension | active   | `1.625rem` | `rounded-4xl`  |
 | `radius.full` | `--radius-full` | dimension | reserved | `9999px`   | `rounded-full` |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée     | ✅ Do                                                                                                       | ❌ Don't                                                   |
-| ---------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `radius.*` | `radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules. | Pas de valeurs arbitraires — toujours un token du système. |
+| Scope      | ✅ Do                                                                                      | ❌ Don't                                              |
+| ---------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| `radius.*` | `radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges. | No arbitrary values — always a token from the system. |
 
 ---
 
 ## Elevation
 
-| Token             | Variable CSS        | Type   | Statut | Light                                                              | Dark                                                              | Tailwind       |
+| Token             | CSS variable        | Type   | Status | Light                                                              | Dark                                                              | Tailwind       |
 | ----------------- | ------------------- | ------ | ------ | ------------------------------------------------------------------ | ----------------------------------------------------------------- | -------------- |
 | `elevation.xs`    | `--elevation-xs`    | shadow | active | `0 1px 2px rgba(0, 0, 0, 0.04)`                                    | `0 1px 2px rgba(0, 0, 0, 0.2)`                                    | `shadow-xs`    |
 | `elevation.sm`    | `--elevation-sm`    | shadow | active | `0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)`     | `0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)`      | `shadow-sm`    |
@@ -204,17 +204,17 @@ que le statut dit ce que fait le code.
 | `elevation.2xl`   | `--elevation-2xl`   | shadow | active | `0 25px 50px rgba(0, 0, 0, 0.12)`                                  | `0 25px 50px rgba(0, 0, 0, 0.5)`                                  | `shadow-2xl`   |
 | `elevation.inner` | `--elevation-inner` | shadow | active | `inset 0 2px 4px rgba(0, 0, 0, 0.05)`                              | `inset 0 2px 4px rgba(0, 0, 0, 0.3)`                              | `shadow-inner` |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée        | ✅ Do                                                                                    | ❌ Don't                                                                   |
-| ------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `elevation.*` | `shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals. | Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément. |
+| Scope         | ✅ Do                                                                      | ❌ Don't                                                                |
+| ------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `elevation.*` | `shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals. | Do not combine `shadow-inner` with an outer shadow on the same element. |
 
 ---
 
 ## Motion
 
-| Token                        | Variable CSS                   | Type        | Statut   | Valeur                                    | Tailwind          |
+| Token                        | CSS variable                   | Type        | Status   | Value                                     | Tailwind          |
 | ---------------------------- | ------------------------------ | ----------- | -------- | ----------------------------------------- | ----------------- |
 | `motion.duration.instant`    | `--motion-duration-instant`    | duration    | reserved | `0ms`                                     | —                 |
 | `motion.duration.fast`       | `--motion-duration-fast`       | duration    | active   | `100ms`                                   | `duration-fast`   |
@@ -227,35 +227,35 @@ que le statut dit ce que fait le code.
 | `motion.easing.out`          | `--motion-easing-out`          | cubicBezier | active   | `cubic-bezier(0, 0, 0.2, 1)`              | `ease-out`        |
 | `motion.easing.spring`       | `--motion-easing-spring`       | cubicBezier | active   | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | `ease-spring`     |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée     | ✅ Do                                                               | ❌ Don't                                                                    |
-| ---------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `motion.*` | `duration-normal` + `ease-default` comme point de départ universel. | Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS. |
+| Scope      | ✅ Do                                                                  | ❌ Don't                                                          |
+| ---------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `motion.*` | `duration-normal` with `ease-default` as the universal starting point. | Never hard-code durations or easings — always use the CSS tokens. |
 
 ---
 
 ## Opacity
 
-| Token                 | Variable CSS            | Type   | Statut   | Valeur | Tailwind |
+| Token                 | CSS variable            | Type   | Status   | Value  | Tailwind |
 | --------------------- | ----------------------- | ------ | -------- | ------ | -------- |
 | `opacity.disabled`    | `--opacity-disabled`    | number | active   | `0.50` | —        |
 | `opacity.placeholder` | `--opacity-placeholder` | number | reserved | `0.50` | —        |
 | `opacity.overlay`     | `--opacity-overlay`     | number | reserved | `0.80` | —        |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée                | ✅ Do                                                                                                                                                               | ❌ Don't                                                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `opacity.disabled`    | Utiliser `opacity-disabled` sous la variante de l'état désactivé : `disabled:opacity-disabled`, `data-disabled:opacity-disabled`, `aria-disabled:opacity-disabled`… | Ne pas écrire `disabled:opacity-50` (ESLint le refuse), ni l'utiliser pour du texte secondaire — utiliser `color.text.subtle`. |
-| `opacity.placeholder` | Appliquer sur `::placeholder` des champs de formulaire.                                                                                                             | Ne pas confondre avec `opacity.disabled` — usages distincts.                                                                   |
-| `opacity.overlay`     | Utiliser pour les backdrops de modals et dialogs.                                                                                                                   | Ne pas réduire en dessous de `0.7` — le contraste devient insuffisant.                                                         |
+| Scope                 | ✅ Do                                                                                                                                                     | ❌ Don't                                                                                                                |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `opacity.disabled`    | Use `opacity-disabled` under the disabled-state variant: `disabled:opacity-disabled`, `data-disabled:opacity-disabled`, `aria-disabled:opacity-disabled`… | Do not write `disabled:opacity-50` (ESLint rejects it), and do not use it for secondary text — use `color.text.subtle`. |
+| `opacity.placeholder` | Apply to the `::placeholder` of form fields.                                                                                                              | Do not confuse with `opacity.disabled` — they serve different purposes.                                                 |
+| `opacity.overlay`     | Use for the backdrops of modals and dialogs.                                                                                                              | Do not go below `0.7` — the contrast becomes too low.                                                                   |
 
 ---
 
 ## Z-Index
 
-| Token             | Variable CSS        | Type   | Statut | Valeur | Tailwind     |
+| Token             | CSS variable        | Type   | Status | Value  | Tailwind     |
 | ----------------- | ------------------- | ------ | ------ | ------ | ------------ |
 | `zindex.dropdown` | `--zindex-dropdown` | number | active | `1000` | `z-dropdown` |
 | `zindex.sticky`   | `--zindex-sticky`   | number | active | `1100` | `z-sticky`   |
@@ -266,17 +266,17 @@ que le statut dit ce que fait le code.
 | `zindex.toast`    | `--zindex-toast`    | number | active | `1600` | `z-toast`    |
 | `zindex.tooltip`  | `--zindex-tooltip`  | number | active | `1700` | `z-tooltip`  |
 
-**Règles d'usage**
+**Usage rules**
 
-| Portée     | ✅ Do                                                                           | ❌ Don't                                                                             |
-| ---------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `zindex.*` | Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées. | Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation. |
+| Scope      | ✅ Do                                                            | ❌ Don't                                                              |
+| ---------- | ---------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `zindex.*` | Always use the z-index tokens — never hard-coded numeric values. | Do not create new z-index levels outside this scale without approval. |
 
 ---
 
 ## breakpoint
 
-| Token            | Variable CSS       | Type      | Statut   | Valeur  | Tailwind |
+| Token            | CSS variable       | Type      | Status   | Value   | Tailwind |
 | ---------------- | ------------------ | --------- | -------- | ------- | -------- |
 | `breakpoint.sm`  | `--breakpoint-sm`  | dimension | active   | `40rem` | `sm:`    |
 | `breakpoint.md`  | `--breakpoint-md`  | dimension | active   | `48rem` | `md:`    |
@@ -288,16 +288,16 @@ que le statut dit ce que fait le code.
 
 ## border-width
 
-| Token                          | Variable CSS                     | Type      | Statut | Valeur  | Tailwind                 |
+| Token                          | CSS variable                     | Type      | Status | Value   | Tailwind                 |
 | ------------------------------ | -------------------------------- | --------- | ------ | ------- | ------------------------ |
 | `border-width.default`         | `--border-width-default`         | dimension | active | `1px`   | `border`                 |
 | `border-width.chart-indicator` | `--border-width-chart-indicator` | dimension | active | `1.5px` | `border-chart-indicator` |
 
 ---
 
-## Aliases shadcn
+## shadcn aliases
 
-| Token                               | Variable CSS                   | Type      | Statut | Light      | Dark                        | Tailwind |
+| Token                               | CSS variable                   | Type      | Status | Light      | Dark                        | Tailwind |
 | ----------------------------------- | ------------------------------ | --------- | ------ | ---------- | --------------------------- | -------- |
 | `shadcn.background`                 | `--background`                 | color     | active | `#ffffff`  | `#090b0c`                   | —        |
 | `shadcn.foreground`                 | `--foreground`                 | color     | active | `#090b0c`  | `#f9fbfb`                   | —        |
@@ -335,13 +335,13 @@ que le statut dit ce que fait le code.
 
 ---
 
-## Primitives — privé, ne pas utiliser
+## Primitives — private, do not use
 
-Ces variables sont le tier 1. Les référencer depuis un composant, une spec ou
-`globals.css` contourne les décisions du design system et casse le mode dark :
-`npm run tokens-validate` échoue si l'une d'elles apparaît hors de `tokens.css`.
+These variables are tier 1. Referencing them from a component, a spec or
+`globals.css` bypasses the design system's decisions and breaks dark mode:
+`npm run tokens-validate` fails if any of them appears outside `tokens.css`.
 
-| Token                              | Variable CSS                                 | Type        | Statut   | Valeur                                                             | Tailwind |
+| Token                              | CSS variable                                 | Type        | Status   | Value                                                              | Tailwind |
 | ---------------------------------- | -------------------------------------------- | ----------- | -------- | ------------------------------------------------------------------ | -------- |
 | `color.mist.0`                     | `--ds-prim-color-mist-0`                     | color       | active   | `#ffffff`                                                          | —        |
 | `color.mist.50`                    | `--ds-prim-color-mist-50`                    | color       | active   | `#f9fbfb`                                                          | —        |
