@@ -64,6 +64,7 @@ npm run registry:check    # registry.json freshness + internal dependencies
 npm run registry:test-install  # installs the 61 items in a blank app and builds it
 npm run generate-context  # regenerates the MCP cache — must produce zero diff
 npm run mcp:test          # the MCP server's test suite
+npm run test:components   # component tests: roles, names, keyboard, variants, axe-core
 npm run build             # Next.js production build
 ```
 
@@ -95,13 +96,13 @@ problem: fix it, do not disable it.
 
 ## 5. Guards in place
 
-| Guard                             | What it blocks                                                                                                                        |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `.husky/pre-commit` → lint-staged | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                 |
-| `.husky/commit-msg` → commitlint  | A non-conforming commit message                                                                                                       |
-| `.husky/pre-push`                 | A direct push to `main`                                                                                                               |
-| `.github/workflows/ci.yml`        | 9 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `registry` |
-| `.github/workflows/pr-lint.yml`   | A non-conforming PR title                                                                                                             |
+| Guard                             | What it blocks                                                                                                                                            |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.husky/pre-commit` → lint-staged | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                                     |
+| `.husky/commit-msg` → commitlint  | A non-conforming commit message                                                                                                                           |
+| `.husky/pre-push`                 | A direct push to `main`                                                                                                                                   |
+| `.github/workflows/ci.yml`        | 10 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
+| `.github/workflows/pr-lint.yml`   | A non-conforming PR title                                                                                                                                 |
 
 ## 6. Publishing identity
 

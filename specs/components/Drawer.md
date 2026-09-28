@@ -183,7 +183,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (vaul, on top of Radix Dialog)
 
-**Role**: `role="dialog"`, `aria-modal="true"`; labelled by `DrawerTitle`.
+**Role**: `role="dialog"`; labelled by `DrawerTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
 
 **Keyboard**:
 

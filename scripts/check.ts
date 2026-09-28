@@ -70,6 +70,7 @@ const STEPS: [string, () => Result][] = [
   ["registry:check", () => run("npm run -s registry:check")],
   ["context freshness", contextFreshness],
   ["mcp:test", () => run("npm run -s mcp:test")],
+  ["test:components", () => run("npm run -s test:components")],
 ]
 
 const failed: string[] = []
