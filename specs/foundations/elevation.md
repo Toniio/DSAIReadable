@@ -2,29 +2,29 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
-Les élévations traduisent la **hauteur relative** d'une surface dans la hiérarchie visuelle. Plus le niveau est élevé, plus l'ombre est prononcée. En mode dark, les opacités sont nettement plus fortes pour compenser la luminosité réduite du fond.
+Elevation expresses the **relative height** of a surface in the visual hierarchy. The higher the level, the stronger the shadow. In dark mode, the opacities are much higher to make up for the darker background.
 
 ---
 
-## Les 7 niveaux d'élévation
+## The 7 elevation levels
 
-| Token             | CSS Variable        | Tailwind Class | Sémantique / Surface                                       |
-| ----------------- | ------------------- | -------------- | ---------------------------------------------------------- |
-| `elevation.xs`    | `--elevation-xs`    | `shadow-xs`    | Micro-lift — hover sur un élément interactif               |
-| `elevation.sm`    | `--elevation-sm`    | `shadow-sm`    | Lift léger — card au repos, hover renforcé                 |
-| `elevation.md`    | `--elevation-md`    | `shadow-md`    | Élévation standard — dropdowns, context menus              |
-| `elevation.lg`    | `--elevation-lg`    | `shadow-lg`    | Élévation marquée — modals, side panels                    |
-| `elevation.xl`    | `--elevation-xl`    | `shadow-xl`    | Forte élévation — panneau plein écran, drawer              |
-| `elevation.2xl`   | `--elevation-2xl`   | `shadow-2xl`   | Élévation maximale — toasts, notifications hautes priorité |
-| `elevation.inner` | `--elevation-inner` | `shadow-inner` | Ombre interne — inputs déprimés, état pressé               |
+| Token             | CSS Variable        | Tailwind Class | Meaning / Surface                                       |
+| ----------------- | ------------------- | -------------- | ------------------------------------------------------- |
+| `elevation.xs`    | `--elevation-xs`    | `shadow-xs`    | Micro-lift — hover on an interactive element            |
+| `elevation.sm`    | `--elevation-sm`    | `shadow-sm`    | Light lift — a card at rest, a stronger hover           |
+| `elevation.md`    | `--elevation-md`    | `shadow-md`    | Standard elevation — drop-downs, context menus          |
+| `elevation.lg`    | `--elevation-lg`    | `shadow-lg`    | Marked elevation — modals, side panels                  |
+| `elevation.xl`    | `--elevation-xl`    | `shadow-xl`    | High elevation — full-screen panel, drawer              |
+| `elevation.2xl`   | `--elevation-2xl`   | `shadow-2xl`   | Maximum elevation — toasts, high-priority notifications |
+| `elevation.inner` | `--elevation-inner` | `shadow-inner` | Inner shadow — sunken inputs, pressed state             |
 
 ---
 
-## Valeurs CSS
+## CSS values
 
-### Light Mode (opacités faibles, 4–12%)
+### Light Mode (low opacities, 4–12%)
 
-| Token             | Valeur                                                             |
+| Token             | Value                                                              |
 | ----------------- | ------------------------------------------------------------------ |
 | `elevation.xs`    | `0 1px 2px rgba(0, 0, 0, 0.04)`                                    |
 | `elevation.sm`    | `0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)`     |
@@ -34,9 +34,9 @@ Les élévations traduisent la **hauteur relative** d'une surface dans la hiéra
 | `elevation.2xl`   | `0 25px 50px rgba(0, 0, 0, 0.12)`                                  |
 | `elevation.inner` | `inset 0 2px 4px rgba(0, 0, 0, 0.05)`                              |
 
-### Dark Mode (opacités fortes, 20–50%)
+### Dark Mode (high opacities, 20–50%)
 
-| Token             | Valeur                                                            |
+| Token             | Value                                                             |
 | ----------------- | ----------------------------------------------------------------- |
 | `elevation.xs`    | `0 1px 2px rgba(0, 0, 0, 0.2)`                                    |
 | `elevation.sm`    | `0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)`      |
@@ -46,43 +46,43 @@ Les élévations traduisent la **hauteur relative** d'une surface dans la hiéra
 | `elevation.2xl`   | `0 25px 50px rgba(0, 0, 0, 0.5)`                                  |
 | `elevation.inner` | `inset 0 2px 4px rgba(0, 0, 0, 0.3)`                              |
 
-> **Pourquoi des opacités plus fortes en dark ?** Les fonds sombres absorbent les ombres légères. Une opacité de 0.08 en dark est presque invisible — il faut 0.25–0.50 pour obtenir le même rendu perceptuel qu'en light.
+> **Why higher opacities in dark mode?** Dark backgrounds swallow light shadows. An opacity of 0.08 is nearly invisible in dark mode — it takes 0.25–0.50 to get the same perceived result as in light mode.
 
 ---
 
-## Hiérarchie sémantique
+## Semantic hierarchy
 
 ```
-Niveau       Surface type                      Z-index approximatif
+Level        Surface type                      Approximate z-index
 ─────────────────────────────────────────────────────────────────────
-2xl   ████   Toasts, notifications urgentes     z-toast (1600)
-xl    ███    Drawers, panneaux plein-écran       z-modal (1400)
-lg    ███    Modals, dialogs                     z-modal (1400)
-md    ██     Dropdowns, menus contextuels        z-dropdown (1000)
-sm    █      Cards au repos, hover d'éléments    —
-xs    ░      Micro-interactions, hover subtil    —
-inner ▼      Inputs déprimés, état pressé        —
+2xl   ████   Toasts, urgent notifications       z-toast (1600)
+xl    ███    Drawers, full-screen panels        z-modal (1400)
+lg    ███    Modals, dialogs                    z-modal (1400)
+md    ██     Drop-downs, context menus          z-dropdown (1000)
+sm    █      Cards at rest, element hover       —
+xs    ░      Micro-interactions, subtle hover   —
+inner ▼      Sunken inputs, pressed state       —
 ```
 
 ---
 
-## Exemples d'utilisation
+## Examples
 
 ```tsx
-// Card au repos
+// Card at rest
 <div className="shadow-sm rounded-lg bg-card p-4">...</div>
 
-// Card au hover — élévation augmentée
+// Card on hover — raised elevation
 <div className="shadow-sm hover:shadow-md transition-shadow duration-normal rounded-lg bg-card p-4">
   ...
 </div>
 
-// Dropdown menu
+// Drop-down menu
 <div className="shadow-md rounded-lg bg-popover p-2">
   <MenuItem />
 </div>
 
-// Dialog / Modal
+// Dialog / modal
 <div className="shadow-lg rounded-xl bg-card p-6">
   <DialogContent />
 </div>
@@ -92,36 +92,36 @@ inner ▼      Inputs déprimés, état pressé        —
   <ToastContent />
 </div>
 
-// Input avec ombre interne (état focus ou inset)
+// Input with an inner shadow (focus or inset state)
 <input className="shadow-inner border-input rounded-sm px-3 py-2" />
 ```
 
 ---
 
-## Note sur `shadow-inner`
+## A note on `shadow-inner`
 
-`shadow-inner` est une **ombre interne** (inset). Elle s'utilise pour :
+`shadow-inner` is an **inner shadow** (inset). Use it to:
 
-- Indiquer un **état pressé** sur un bouton ou contrôle
-- Donner une apparence **déprimée** à un champ de formulaire actif
-- Simuler un **fond enfoncé** sur une zone sélectionnée
+- Show a **pressed state** on a button or a control
+- Make an active form field look **sunken**
+- Suggest a **recessed background** on a selected area
 
 ```tsx
-// Bouton pressé
-<button className="shadow-inner active:shadow-inner">Cliquer</button>
+// Pressed button
+<button className="shadow-inner active:shadow-inner">Click</button>
 
-// Input déprimé (focus)
+// Sunken input (focus)
 <input className="focus:shadow-inner focus:border-ring" />
 ```
 
-> **Important :** Ne jamais combiner `shadow-inner` avec une ombre externe. Les deux entrent en conflit visuellement.
+> **Important:** never combine `shadow-inner` with an outer shadow. The two clash visually.
 
 ---
 
 ## Usage Rules
 
-1. **Suivre la hiérarchie** — l'élévation doit refléter la position Z réelle de la surface. Un popover ne doit jamais avoir moins d'élévation qu'une card inline.
-2. **Toujours tester en dark mode** — les ombres légères du light sont invisibles en dark sans ajustement. Les tokens s'en chargent automatiquement.
-3. **Transitions d'élévation** — utiliser `transition-shadow` avec `duration-normal` (200ms) lors de changements d'état (hover, focus).
-4. **`shadow-inner` est exclusif** — ne pas l'associer avec une ombre externe sur le même élément.
-5. **Éviter les ombres décoratifs** — les élévations expriment une structure, pas un style. Ne pas ajouter `shadow-lg` sur une card simplement pour "faire joli".
+1. **Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.
+2. **Always test in dark mode** — light-mode shadows vanish in dark mode unless adjusted. The tokens handle this automatically.
+3. **Elevation transitions** — use `transition-shadow` with `duration-normal` (200ms) on state changes (hover, focus).
+4. **`shadow-inner` stands alone** — never pair it with an outer shadow on the same element.
+5. **No decorative shadows** — elevation expresses structure, not style. Do not add `shadow-lg` to a card just to make it look nice.

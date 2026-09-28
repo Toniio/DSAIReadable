@@ -2,66 +2,66 @@
 
 ## Metadata
 
-| Champ         | Valeur                  |
+| Field         | Value                   |
 | ------------- | ----------------------- |
-| Nom           | Field                   |
-| Catégorie     | Forms                   |
-| Statut        | stable                  |
+| Name          | Field                   |
+| Category      | Forms                   |
+| Status        | stable                  |
 | figma_node_id |                         |
 | code_path     | components/ui/field.tsx |
 
-## Rôle
+## Role
 
-Système de mise en page pour les champs de formulaire, gérant l'association Label/contrôle, la propagation de l'état invalide, les textes d'aide et les messages d'erreur.
+A layout system for form fields: it ties a label to its control, carries the invalid state, and holds help text and error messages.
 
 ## Usage
 
-- Encapsuler chaque paire `FieldLabel` + contrôle dans un `<Field>` pour la cohérence et la gestion d'erreur
-- Regrouper plusieurs `<Field>` dans un `<FieldGroup>` pour espacer uniformément les champs
-- Utiliser `<FieldSet>` + `<FieldLegend>` pour les groupes sémantiques de contrôles (ex. : choix multiples)
-- Passer `data-invalid="true"` sur `<Field>` pour basculer le champ en couleur d'erreur
-- Utiliser `<FieldDescription>` pour un texte d'aide permanent et `<FieldError>` pour un message de validation
-- Choisir l'orientation `horizontal` pour les formulaires compacts, `responsive` pour basculer de `vertical` à `horizontal` au conteneur `@md`
-- Envelopper le texte d'une option (`FieldTitle` + `FieldDescription`) dans un `<FieldContent>` lorsque le contrôle est à gauche
+- Wrap each `FieldLabel` and control pair in a `<Field>` for consistency and error handling
+- Group several `<Field>`s in a `<FieldGroup>` to space them evenly
+- Use `<FieldSet>` and `<FieldLegend>` for semantic groups of controls (multiple choices, for example)
+- Set `data-invalid="true"` on `<Field>` to switch the field to the error color
+- Use `<FieldDescription>` for standing help text and `<FieldError>` for a validation message
+- Pick the `horizontal` orientation for compact forms, and `responsive` to switch from `vertical` to `horizontal` at the `@md` container width
+- Wrap an option's text (`FieldTitle` and `FieldDescription`) in a `<FieldContent>` when the control sits on the left
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — imbriquer des `FieldSet` sur plus de 2 niveaux
-- **MUST** — poser `data-invalid` soi-même, selon la validation (serveur ou client) : `Field` ne valide rien
-- **MUST** — poser `aria-invalid` sur le contrôle lui-même : `Field` ne le propage pas
-- **MUST NOT** — utiliser `orientation="horizontal"` dans une mise en page qui doit tenir sur mobile → `orientation="responsive"`, qui passe en ligne quand son `FieldGroup` est assez large
-- **MUST** — placer un `Field` en `orientation="responsive"` dans un `FieldGroup`, dont il lit la largeur (`@container/field-group`)
-- **MUST** — réserver `FieldLegend variant="legend"` aux `<fieldset>` ; ailleurs, `variant="label"`
-- **Note** — `FieldError` ne rend rien sans `children` ni `errors` non vide
-- **MUST** — utiliser `FieldLabel` pour associer un libellé à un contrôle (`htmlFor`) : `FieldTitle` n'est pas un `<label>`
+- **MUST NOT** — nest `FieldSet`s more than 2 levels deep
+- **MUST** — set `data-invalid` yourself, from the validation result (server or client): `Field` validates nothing
+- **MUST** — set `aria-invalid` on the control itself: `Field` does not pass it down
+- **MUST NOT** — use `orientation="horizontal"` in a layout that has to fit on mobile → `orientation="responsive"`, which switches to a row once its `FieldGroup` is wide enough
+- **MUST** — place a `Field` with `orientation="responsive"` inside a `FieldGroup`, whose width it reads (`@container/field-group`)
+- **MUST** — keep `FieldLegend variant="legend"` for `<fieldset>`s; everywhere else, `variant="label"`
+- **Note** — `FieldError` renders nothing without `children` or a non-empty `errors`
+- **MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`
 
-## Dépendances
+## Dependencies
 
-- `Label` — primitive sur laquelle `FieldLabel` est construit
-- `Separator` — rendu par `FieldSeparator`
-- `Input` / `Checkbox` / `RadioGroup` / tout contrôle — slot contrôle de `Field`
-- `class-variance-authority` pour les variantes d'orientation de `Field`
+- `Label` — the primitive `FieldLabel` is built on
+- `Separator` — rendered by `FieldSeparator`
+- `Input` / `Checkbox` / `RadioGroup` / any control — the control slot of `Field`
+- `class-variance-authority` for the orientation variants of `Field`
 
-## Anatomie
+## Anatomy
 
-| Slot                                  | Rôle                                                                                         |
-| ------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `data-slot="field-set"`               | `<fieldset>` racine, regroupe des champs liés sémantiquement                                 |
-| `data-slot="field-legend"`            | `<legend>` du fieldset, titre du groupe, porte `data-variant`                                |
-| `data-slot="field-group"`             | `<div>` conteneur vertical espacé (`gap-5`), définit le conteneur `@container/field-group`   |
-| `data-slot="field"`                   | `<div role="group">` principal d'un champ, porte `data-orientation` et reçoit `data-invalid` |
-| `data-slot="field-label"`             | `<label>` du champ (`FieldLabel`) ou titre non interactif (`FieldTitle`)                     |
-| `data-slot="field-content"`           | `<div>` colonne de texte (titre + description) à côté d'un contrôle                          |
-| `data-slot="field-description"`       | `<p>` texte d'aide sous le contrôle                                                          |
-| `data-slot="field-error"`             | `<div role="alert">` message d'erreur de validation                                          |
-| `data-slot="field-separator"`         | `<div>` séparateur entre groupes, porte `data-content`                                       |
-| `data-slot="field-separator-content"` | `<span>` libellé centré sur le séparateur                                                    |
+| Slot                                  | Role                                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `data-slot="field-set"`               | Root `<fieldset>`; groups semantically related fields                                       |
+| `data-slot="field-legend"`            | The fieldset's `<legend>`, the group's title; carries `data-variant`                        |
+| `data-slot="field-group"`             | Spaced vertical `<div>` container (`gap-5`); defines the `@container/field-group` container |
+| `data-slot="field"`                   | A field's main `<div role="group">`; carries `data-orientation` and receives `data-invalid` |
+| `data-slot="field-label"`             | The field's `<label>` (`FieldLabel`) or a non-interactive title (`FieldTitle`)              |
+| `data-slot="field-content"`           | Text column `<div>` (title and description) next to a control                               |
+| `data-slot="field-description"`       | Help text `<p>` below the control                                                           |
+| `data-slot="field-error"`             | Validation error message, a `<div role="alert">`                                            |
+| `data-slot="field-separator"`         | Separator `<div>` between groups; carries `data-content`                                    |
+| `data-slot="field-separator-content"` | Label `<span>` centered on the separator                                                    |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                             | Classes et variables                                                                          | Où                                                                                  |
+| Token                             | Classes and variables                                                                         | Where                                                                               |
 | --------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | `border-width.default`            | `border`                                                                                      | `FieldLabel`                                                                        |
 | `color.action.background.default` | `bg-primary/10` · `bg-primary/5` · `border-primary/20` · `border-primary/30` · `text-primary` | `FieldDescription` · `FieldLabel`                                                   |
@@ -77,154 +77,154 @@ Système de mise en page pour les champs de formulaire, gérant l'association La
 | `typography.size.sm`              | `text-sm`                                                                                     | `FieldLegend`                                                                       |
 | `typography.size.xs`              | `text-xs` · `text-xs/relaxed`                                                                 | `FieldDescription` · `FieldError` · `FieldLegend` · `FieldSeparator` · `FieldTitle` |
 
-Relevé dans `components/ui/field.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/field.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Label`, `Separator` : les tokens de ces composants sont listés dans leurs specs.
+Composes `Label`, `Separator` — their tokens are listed in their own specs.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Field`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop           | Type                                         | Défaut       | Description                                                                |
-| -------------- | -------------------------------------------- | ------------ | -------------------------------------------------------------------------- |
-| `orientation`  | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` | Disposition label/contrôle, exposée en `data-orientation`                  |
-| `data-invalid` | —                                            | —            | Attribut posé par le consommateur : bascule le champ en `text-destructive` |
-| `className`    | `string`                                     | —            | Classes CSS additionnelles                                                 |
-| `...props`     | `React.ComponentProps<"div">`                | —            | Props natives de `<div>`                                                   |
+| Prop           | Type                                         | Default      | Description                                                               |
+| -------------- | -------------------------------------------- | ------------ | ------------------------------------------------------------------------- |
+| `orientation`  | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` | How the label and the control are laid out; exposed as `data-orientation` |
+| `data-invalid` | —                                            | —            | Set by the consumer: switches the field to `text-destructive`             |
+| `className`    | `string`                                     | —            | Additional CSS classes                                                    |
+| `...props`     | `React.ComponentProps<"div">`                | —            | Native `<div>` props                                                      |
 
 ### `FieldLabel`
 
-Rend `Label`.
+Renders `Label`.
 
-| Prop        | Type                                 | Défaut | Description                     |
-| ----------- | ------------------------------------ | ------ | ------------------------------- |
-| `htmlFor`   | `string`                             | —      | Identifiant du contrôle associé |
-| `className` | `string`                             | —      | Classes CSS additionnelles      |
-| `...props`  | `React.ComponentProps<typeof Label>` | —      | Props de `Label`                |
+| Prop        | Type                                 | Default | Description                  |
+| ----------- | ------------------------------------ | ------- | ---------------------------- |
+| `htmlFor`   | `string`                             | —       | ID of the associated control |
+| `className` | `string`                             | —       | Additional CSS classes       |
+| `...props`  | `React.ComponentProps<typeof Label>` | —       | `Label` props                |
 
 ### `FieldDescription`
 
-Rend `<p>`.
+Renders `<p>`.
 
-| Prop        | Type                        | Défaut | Description                |
-| ----------- | --------------------------- | ------ | -------------------------- |
-| `className` | `string`                    | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"p">` | —      | Props natives de `<p>`     |
+| Prop        | Type                        | Default | Description            |
+| ----------- | --------------------------- | ------- | ---------------------- |
+| `className` | `string`                    | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"p">` | —       | Native `<p>` props     |
 
 ### `FieldError`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                                       | Défaut | Description                                                                               |
-| ----------- | ------------------------------------------ | ------ | ----------------------------------------------------------------------------------------- |
-| `errors`    | `Array<{ message?: string } \| undefined>` | —      | Erreurs de validation ; dédupliquées par `message`, rendues en `<ul>` au-delà d'une seule |
-| `children`  | `ReactNode`                                | —      | Message explicite ; prioritaire sur `errors`                                              |
-| `className` | `string`                                   | —      | Classes CSS additionnelles                                                                |
-| `...props`  | `React.ComponentProps<"div">`              | —      | Props natives de `<div>`                                                                  |
+| Prop        | Type                                       | Default | Description                                                                                    |
+| ----------- | ------------------------------------------ | ------- | ---------------------------------------------------------------------------------------------- |
+| `errors`    | `Array<{ message?: string } \| undefined>` | —       | Validation errors; deduplicated by `message`, rendered as a `<ul>` when there is more than one |
+| `children`  | `ReactNode`                                | —       | An explicit message; takes precedence over `errors`                                            |
+| `className` | `string`                                   | —       | Additional CSS classes                                                                         |
+| `...props`  | `React.ComponentProps<"div">`              | —       | Native `<div>` props                                                                           |
 
 ### `FieldGroup`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `FieldLegend`
 
-Rend `<legend>`.
+Renders `<legend>`.
 
-| Prop        | Type                             | Défaut     | Description                                                            |
-| ----------- | -------------------------------- | ---------- | ---------------------------------------------------------------------- |
-| `variant`   | `"legend" \| "label"`            | `"legend"` | Style typographique, exposé en `data-variant` (`text-sm` vs `text-xs`) |
-| `className` | `string`                         | —          | Classes CSS additionnelles                                             |
-| `...props`  | `React.ComponentProps<"legend">` | —          | Props natives de `<legend>`                                            |
+| Prop        | Type                             | Default    | Description                                                    |
+| ----------- | -------------------------------- | ---------- | -------------------------------------------------------------- |
+| `variant`   | `"legend" \| "label"`            | `"legend"` | Type style, exposed as `data-variant` (`text-sm` or `text-xs`) |
+| `className` | `string`                         | —          | Additional CSS classes                                         |
+| `...props`  | `React.ComponentProps<"legend">` | —          | Native `<legend>` props                                        |
 
 ### `FieldSeparator`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                                            |
-| ----------- | ----------------------------- | ------ | ------------------------------------------------------ |
-| `children`  | `React.ReactNode`             | —      | Libellé centré sur la ligne ; renseigne `data-content` |
-| `className` | `string`                      | —      | Classes CSS additionnelles                             |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`                               |
+| Prop        | Type                          | Default | Description                                      |
+| ----------- | ----------------------------- | ------- | ------------------------------------------------ |
+| `children`  | `React.ReactNode`             | —       | Label centered on the line; fills `data-content` |
+| `className` | `string`                      | —       | Additional CSS classes                           |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props                             |
 
 ### `FieldSet`
 
-Rend `<fieldset>`.
+Renders `<fieldset>`.
 
-| Prop        | Type                               | Défaut | Description                   |
-| ----------- | ---------------------------------- | ------ | ----------------------------- |
-| `className` | `string`                           | —      | Classes CSS additionnelles    |
-| `...props`  | `React.ComponentProps<"fieldset">` | —      | Props natives de `<fieldset>` |
+| Prop        | Type                               | Default | Description               |
+| ----------- | ---------------------------------- | ------- | ------------------------- |
+| `className` | `string`                           | —       | Additional CSS classes    |
+| `...props`  | `React.ComponentProps<"fieldset">` | —       | Native `<fieldset>` props |
 
 ### `FieldContent`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `FieldTitle`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-| Composant | Axe           | Valeurs                                  | Défaut     |
+| Component | Axis          | Values                                   | Default    |
 | --------- | ------------- | ---------------------------------------- | ---------- |
 | `Field`   | `orientation` | `vertical` · `horizontal` · `responsive` | `vertical` |
 
-Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+What each axis means (appearance, intent, size…) is stated under **Props / API**.
 
-## États
+## States
 
-| État       | Comportement visuel                                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `default`  | Label et contrôle en couleurs par défaut ; `FieldDescription` en `text-muted-foreground`                                                                |
-| `hover`    | Pas de style dédié sur le Field ; les liens de `FieldDescription` passent en couleur d'action                                                           |
-| `focus`    | Géré par le contrôle enfant                                                                                                                             |
-| `active`   | `FieldLabel` enveloppant un contrôle coché (`has-data-checked`) reçoit bordure et fond teintés                                                          |
-| `disabled` | `data-disabled="true"` sur `<Field>` : `FieldLabel` et `FieldTitle` passent à 50 % d'opacité                                                            |
-| `loading`  | Non applicable au niveau Field                                                                                                                          |
-| `error`    | `data-invalid="true"` sur `<Field>` : le champ passe en `text-destructive` ; `FieldError` rend un `role="alert"` ; poser `aria-invalid` sur le contrôle |
+| State      | Visual behavior                                                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `default`  | Label and control in their default colors; `FieldDescription` in `text-muted-foreground`                                                         |
+| `hover`    | No dedicated style on the Field; links inside `FieldDescription` take the action color                                                           |
+| `focus`    | Handled by the child control                                                                                                                     |
+| `active`   | A `FieldLabel` wrapping a checked control (`has-data-checked`) gets a tinted border and background                                               |
+| `disabled` | `data-disabled="true"` on `<Field>`: `FieldLabel` and `FieldTitle` drop to 50 % opacity                                                          |
+| `loading`  | Not applicable at the Field level                                                                                                                |
+| `error`    | `data-invalid="true"` on `<Field>`: the field turns `text-destructive`; `FieldError` renders a `role="alert"`; set `aria-invalid` on the control |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : Groupe de champ de formulaire
+**Pattern**: Form field group
 
-**Rôle** : `Field` porte `role="group"` ; `FieldSet` / `FieldLegend` rendent `fieldset` / `legend` ; `FieldError` porte `role="alert"`.
+**Role**: `Field` carries `role="group"`; `FieldSet` / `FieldLegend` render `fieldset` / `legend`; `FieldError` carries `role="alert"`.
 
-**Clavier** :
+**Keyboard**:
 
-Aucune interaction propre ; le contrôle contenu garde son comportement clavier.
+No interaction of its own; the control inside keeps its keyboard behavior.
 
-**Nom accessible** : `FieldLabel` doit être associé au contrôle (`htmlFor` / `id`). Un groupe de cases à cocher ou de radios se nomme par `FieldLegend`.
+**Accessible name**: `FieldLabel` must be tied to the control (`htmlFor` / `id`). A group of checkboxes or radios is named by its `FieldLegend`.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Relier `FieldDescription` et `FieldError` au contrôle par `aria-describedby` : le composant ne le fait pas seul.
-- Poser `aria-invalid` sur le contrôle en erreur ; `FieldError` annonce le message à son apparition.
-- Ne pas remplacer le label par le `placeholder`.
+- Link `FieldDescription` and `FieldError` to the control through `aria-describedby`: the component does not do it for you.
+- Set `aria-invalid` on the control in error; `FieldError` announces the message when it appears.
+- Never replace the label with the `placeholder`.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -250,9 +250,9 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Label` — primitive sous-jacente de `FieldLabel`
-- `Input` / `Checkbox` / `RadioGroup` — contrôles disposés par `Field`
-- `Separator` — rendu par `FieldSeparator`
-- `Button` / `Textarea` / `Select` — autres contrôles couramment disposés dans un `Field`
+- `Label` — the primitive under `FieldLabel`
+- `Input` / `Checkbox` / `RadioGroup` — controls that `Field` lays out
+- `Separator` — rendered by `FieldSeparator`
+- `Button` / `Textarea` / `Select` — other controls often laid out in a `Field`

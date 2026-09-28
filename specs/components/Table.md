@@ -2,62 +2,62 @@
 
 ## Metadata
 
-| Champ         | Valeur                  |
+| Field         | Value                   |
 | ------------- | ----------------------- |
-| Nom           | Table                   |
-| Catégorie     | Data                    |
-| Statut        | stable                  |
+| Name          | Table                   |
+| Category      | Data                    |
+| Status        | stable                  |
 | figma_node_id |                         |
 | code_path     | components/ui/table.tsx |
 
-## Rôle
+## Role
 
-Ensemble de composants pour construire des tableaux de données sémantiques avec en-têtes, corps, pied de page et légende, supportant le défilement horizontal.
+A set of components for building semantic data tables — header, body, footer and caption — with horizontal scrolling.
 
 ## Usage
 
-- Afficher des données tabulaires structurées (ex. : liste d'utilisateurs, factures, résultats)
-- Présenter des données comparatives avec colonnes triables
-- Construire des tableaux de bord avec sélection de lignes (via checkbox)
-- Afficher un récapitulatif avec pied de page (totaux, moyennes)
-- Ajouter une légende descriptive via `TableCaption`
+- Show structured tabular data (a list of users, invoices, results)
+- Present comparable data in sortable columns
+- Build dashboards with row selection (through a checkbox)
+- Show a summary with a footer (totals, averages)
+- Add a descriptive caption through `TableCaption`
 
-<!-- rule-22 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-22: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.
+- **Choice** (`rule-22`) — Pick how to present a collection from the nature of its content. Short-lived actions opened from a trigger: `DropdownMenuItem`. Rows to compare that share the same attributes, 3 or more per row: `Table`. A vertical list of entries (media, title, description, actions): `Item` inside an `ItemGroup`. A self-contained block with a header, body and footer, alone or in a grid: `Card`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir à la mise en page : réservé aux données tabulaires
-- **MUST NOT** — ajouter un défilement horizontal parent : le conteneur défile déjà (`overflow-x-auto`)
-- **MUST** — au-delà de 4 colonnes, masquer les colonnes secondaires sous 640 px (le conteneur de `Table` défile déjà horizontalement)
-- **Note** — une cellule `role="checkbox"` reçoit un padding réduit (`pr-0`)
-- **MUST** — nommer le tableau (`TableCaption` ou `aria-label`) quand le contexte ne le fait pas
+- **MUST NOT** — be used for layout: it is for tabular data only
+- **MUST NOT** — add horizontal scrolling on a parent: the container already scrolls (`overflow-x-auto`)
+- **MUST** — beyond 4 columns, hide the secondary columns below 640 px (the `Table` container already scrolls horizontally)
+- **Note** — a `role="checkbox"` cell gets reduced padding (`pr-0`)
+- **MUST** — name the table (`TableCaption` or `aria-label`) when the context does not
 
-## Dépendances
+## Dependencies
 
-- `cn` (`@/lib/utils`) — utilitaire de fusion de classes
-- Aucune dépendance externe (composants natifs HTML `table`, `thead`, `tbody`, etc.)
+- `cn` (`@/lib/utils`) — the class-merging utility
+- No external dependency (native HTML `table`, `thead`, `tbody`… elements)
 
-## Anatomie
+## Anatomy
 
-| Slot                          | Rôle                                         |
-| ----------------------------- | -------------------------------------------- |
-| `data-slot="table-container"` | Conteneur wrapper avec défilement horizontal |
-| `data-slot="table"`           | Élément `<table>` racine                     |
-| `data-slot="table-header"`    | En-tête du tableau (`<thead>`)               |
-| `data-slot="table-body"`      | Corps du tableau (`<tbody>`)                 |
-| `data-slot="table-footer"`    | Pied de page du tableau (`<tfoot>`)          |
-| `data-slot="table-row"`       | Ligne du tableau (`<tr>`)                    |
-| `data-slot="table-head"`      | Cellule d'en-tête (`<th>`)                   |
-| `data-slot="table-cell"`      | Cellule de données (`<td>`)                  |
-| `data-slot="table-caption"`   | Légende du tableau (`<caption>`)             |
+| Slot                          | Role                                        |
+| ----------------------------- | ------------------------------------------- |
+| `data-slot="table-container"` | Wrapper container with horizontal scrolling |
+| `data-slot="table"`           | Root `<table>` element                      |
+| `data-slot="table-header"`    | Table header (`<thead>`)                    |
+| `data-slot="table-body"`      | Table body (`<tbody>`)                      |
+| `data-slot="table-footer"`    | Table footer (`<tfoot>`)                    |
+| `data-slot="table-row"`       | Table row (`<tr>`)                          |
+| `data-slot="table-head"`      | Header cell (`<th>`)                        |
+| `data-slot="table-cell"`      | Data cell (`<td>`)                          |
+| `data-slot="table-caption"`   | Table caption (`<caption>`)                 |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                           | Classes et variables       | Où                                         |
+| Token                           | Classes and variables      | Where                                      |
 | ------------------------------- | -------------------------- | ------------------------------------------ |
 | `border-width.default`          | `border-b` · `border-t`    | `TableFooter` · `TableHeader` · `TableRow` |
 | `color.background.subtle`       | `bg-muted` · `bg-muted/50` | `TableFooter` · `TableRow`                 |
@@ -66,121 +66,121 @@ Ensemble de composants pour construire des tableaux de données sémantiques ave
 | `typography.font-weight.medium` | `font-medium`              | `TableFooter` · `TableHead`                |
 | `typography.size.xs`            | `text-xs`                  | `TableCaption` · `Table`                   |
 
-Relevé dans `components/ui/table.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/table.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Table`
 
-Rend `<table>`, dans un `<div>`.
+Renders `<table>`, inside a `<div>`.
 
-| Prop        | Type                            | Défaut | Description                              |
-| ----------- | ------------------------------- | ------ | ---------------------------------------- |
-| `className` | `string`                        | —      | Classes CSS additionnelles sur `<table>` |
-| `...props`  | `React.ComponentProps<"table">` | —      | Props natives de `<table>`               |
+| Prop        | Type                            | Default | Description                         |
+| ----------- | ------------------------------- | ------- | ----------------------------------- |
+| `className` | `string`                        | —       | Additional CSS classes on `<table>` |
+| `...props`  | `React.ComponentProps<"table">` | —       | Native `<table>` props              |
 
 ### `TableHeader`
 
-Rend `<thead>`.
+Renders `<thead>`.
 
-| Prop        | Type                            | Défaut | Description                              |
-| ----------- | ------------------------------- | ------ | ---------------------------------------- |
-| `className` | `string`                        | —      | Classes CSS additionnelles sur `<thead>` |
-| `...props`  | `React.ComponentProps<"thead">` | —      | Props natives de `<thead>`               |
+| Prop        | Type                            | Default | Description                         |
+| ----------- | ------------------------------- | ------- | ----------------------------------- |
+| `className` | `string`                        | —       | Additional CSS classes on `<thead>` |
+| `...props`  | `React.ComponentProps<"thead">` | —       | Native `<thead>` props              |
 
 ### `TableBody`
 
-Rend `<tbody>`.
+Renders `<tbody>`.
 
-| Prop        | Type                            | Défaut | Description                              |
-| ----------- | ------------------------------- | ------ | ---------------------------------------- |
-| `className` | `string`                        | —      | Classes CSS additionnelles sur `<tbody>` |
-| `...props`  | `React.ComponentProps<"tbody">` | —      | Props natives de `<tbody>`               |
+| Prop        | Type                            | Default | Description                         |
+| ----------- | ------------------------------- | ------- | ----------------------------------- |
+| `className` | `string`                        | —       | Additional CSS classes on `<tbody>` |
+| `...props`  | `React.ComponentProps<"tbody">` | —       | Native `<tbody>` props              |
 
 ### `TableFooter`
 
-Rend `<tfoot>`.
+Renders `<tfoot>`.
 
-| Prop        | Type                            | Défaut | Description                              |
-| ----------- | ------------------------------- | ------ | ---------------------------------------- |
-| `className` | `string`                        | —      | Classes CSS additionnelles sur `<tfoot>` |
-| `...props`  | `React.ComponentProps<"tfoot">` | —      | Props natives de `<tfoot>`               |
+| Prop        | Type                            | Default | Description                         |
+| ----------- | ------------------------------- | ------- | ----------------------------------- |
+| `className` | `string`                        | —       | Additional CSS classes on `<tfoot>` |
+| `...props`  | `React.ComponentProps<"tfoot">` | —       | Native `<tfoot>` props              |
 
 ### `TableHead`
 
-Rend `<th>`.
+Renders `<th>`.
 
-| Prop        | Type                         | Défaut | Description                           |
-| ----------- | ---------------------------- | ------ | ------------------------------------- |
-| `className` | `string`                     | —      | Classes CSS additionnelles sur `<th>` |
-| `...props`  | `React.ComponentProps<"th">` | —      | Props natives de `<th>`               |
+| Prop        | Type                         | Default | Description                      |
+| ----------- | ---------------------------- | ------- | -------------------------------- |
+| `className` | `string`                     | —       | Additional CSS classes on `<th>` |
+| `...props`  | `React.ComponentProps<"th">` | —       | Native `<th>` props              |
 
 ### `TableRow`
 
-Rend `<tr>`.
+Renders `<tr>`.
 
-| Prop        | Type                         | Défaut | Description                           |
-| ----------- | ---------------------------- | ------ | ------------------------------------- |
-| `className` | `string`                     | —      | Classes CSS additionnelles sur `<tr>` |
-| `...props`  | `React.ComponentProps<"tr">` | —      | Props natives de `<tr>`               |
+| Prop        | Type                         | Default | Description                      |
+| ----------- | ---------------------------- | ------- | -------------------------------- |
+| `className` | `string`                     | —       | Additional CSS classes on `<tr>` |
+| `...props`  | `React.ComponentProps<"tr">` | —       | Native `<tr>` props              |
 
 ### `TableCell`
 
-Rend `<td>`.
+Renders `<td>`.
 
-| Prop        | Type                         | Défaut | Description                           |
-| ----------- | ---------------------------- | ------ | ------------------------------------- |
-| `className` | `string`                     | —      | Classes CSS additionnelles sur `<td>` |
-| `...props`  | `React.ComponentProps<"td">` | —      | Props natives de `<td>`               |
+| Prop        | Type                         | Default | Description                      |
+| ----------- | ---------------------------- | ------- | -------------------------------- |
+| `className` | `string`                     | —       | Additional CSS classes on `<td>` |
+| `...props`  | `React.ComponentProps<"td">` | —       | Native `<td>` props              |
 
 ### `TableCaption`
 
-Rend `<caption>`.
+Renders `<caption>`.
 
-| Prop        | Type                              | Défaut | Description                                |
-| ----------- | --------------------------------- | ------ | ------------------------------------------ |
-| `className` | `string`                          | —      | Classes CSS additionnelles sur `<caption>` |
-| `...props`  | `React.ComponentProps<"caption">` | —      | Props natives de `<caption>`               |
+| Prop        | Type                              | Default | Description                           |
+| ----------- | --------------------------------- | ------- | ------------------------------------- |
+| `className` | `string`                          | —       | Additional CSS classes on `<caption>` |
+| `...props`  | `React.ComponentProps<"caption">` | —       | Native `<caption>` props              |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                                            |
+| State    | Description                                                                                            |
 | -------- | ------------------------------------------------------------------------------------------------------ |
-| default  | Tableau affiché avec bordures inférieures sur chaque ligne                                             |
-| hover    | Ligne survolée avec fond `bg-muted/50` pour le retour visuel                                           |
-| focus    | Non géré au niveau du tableau — le focus est sur les éléments interactifs internes (checkbox, boutons) |
-| active   | Ligne avec `aria-expanded` ouvre un fond `bg-muted/50` ; `data-[state=selected]` applique `bg-muted`   |
-| disabled | Non applicable directement — gérer la désactivation au niveau des cellules interactives                |
+| default  | Table shown with a bottom border on each row                                                           |
+| hover    | The hovered row gets a `bg-muted/50` background as visual feedback                                     |
+| focus    | Not handled at the table level — focus is on the interactive elements inside (checkboxes, buttons)     |
+| active   | A row with `aria-expanded` gets a `bg-muted/50` background; `data-[state=selected]` applies `bg-muted` |
+| disabled | Not applicable directly — handle it on the interactive cells                                           |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : Tableau natif `table`
+**Pattern**: Native `table`
 
-**Rôle** : Sémantique native : `table`, `thead`, `th`, `td` ; `TableCaption` rend `caption`.
+**Role**: Native semantics: `table`, `thead`, `th`, `td`; `TableCaption` renders a `caption`.
 
-**Clavier** :
+**Keyboard**:
 
-Aucune interaction propre ; les lecteurs d'écran parcourent les cellules avec leurs raccourcis.
+No interaction of its own; screen readers move through the cells with their own shortcuts.
 
-**Nom accessible** : `TableCaption` nomme le tableau ; à défaut, `aria-label` ou `aria-labelledby`.
+**Accessible name**: `TableCaption` names the table; failing that, `aria-label` or `aria-labelledby`.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Poser `scope="col"` / `scope="row"` sur les `TableHead` des tableaux à double entrée.
-- Un en-tête triable doit exposer `aria-sort` et être un bouton : le composant ne le fait pas.
-- Ne pas utiliser `Table` pour de la mise en page.
+- Set `scope="col"` / `scope="row"` on the `TableHead`s of two-way tables.
+- A sortable header must expose `aria-sort` and be a button: the component does not do it.
+- Never use `Table` for layout.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -196,24 +196,24 @@ import {
 export default function Example() {
   return (
     <Table>
-      <TableCaption>Liste des factures récentes</TableCaption>
+      <TableCaption>Recent invoices</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Référence</TableHead>
-          <TableHead>Statut</TableHead>
-          <TableHead className="text-right">Montant</TableHead>
+          <TableHead>Reference</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow>
           <TableCell>INV-001</TableCell>
-          <TableCell>Payée</TableCell>
-          <TableCell className="text-right">250,00 €</TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell className="text-right">$250.00</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>INV-002</TableCell>
-          <TableCell>En attente</TableCell>
-          <TableCell className="text-right">150,00 €</TableCell>
+          <TableCell>Pending</TableCell>
+          <TableCell className="text-right">$150.00</TableCell>
         </TableRow>
       </TableBody>
     </Table>
@@ -221,9 +221,9 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Checkbox` — utilisé dans les cellules pour la sélection de lignes
-- `Badge` — utilisé dans les cellules pour afficher des statuts
-- `Pagination` — partenaire fréquent pour paginer les données du tableau
-- `Chart` — alternative visuelle pour représenter les mêmes données sous forme graphique
+- `Checkbox` — used in cells to select rows
+- `Badge` — used in cells to show statuses
+- `Pagination` — a frequent partner for paging through the table's data
+- `Chart` — the visual alternative for the same data

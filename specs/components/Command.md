@@ -2,60 +2,60 @@
 
 ## Metadata
 
-| Champ         | Valeur                    |
+| Field         | Value                     |
 | ------------- | ------------------------- |
-| Nom           | Command                   |
-| Catégorie     | Forms                     |
-| Statut        | stable                    |
+| Name          | Command                   |
+| Category      | Forms                     |
+| Status        | stable                    |
 | figma_node_id |                           |
 | code_path     | components/ui/command.tsx |
 
-## Rôle
+## Role
 
-Palette de commandes avec recherche intégrée, permettant de filtrer et sélectionner rapidement une action ou un élément parmi une liste structurée.
+A command palette with built-in search, for quickly filtering and picking an action or an item from a structured list.
 
 ## Usage
 
-- Palette de commandes globale accessible via raccourci clavier (⌘K / Ctrl+K)
-- Recherche rapide dans une liste d'actions, pages ou éléments
-- Menu de sélection avec filtrage en temps réel
-- Navigation clavier entre groupes d'options
-- Affichage dans un dialog modal via `CommandDialog`
+- A global command palette opened with a keyboard shortcut (⌘K / Ctrl+K)
+- Quick search through a list of actions, pages or items
+- A selection menu filtered as the user types
+- Keyboard navigation between groups of options
+- Shown in a modal dialog through `CommandDialog`
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir de simple champ de recherche → un `Input` qui filtre la liste
-- **MUST** — rendre un `CommandEmpty` pour le cas « aucun résultat »
-- **MUST** — brancher soi-même le raccourci clavier affiché par `CommandShortcut`, qui n'est qu'un libellé
-- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
-- **MUST** — en mode dialog, renseigner `title` et `description` : rendus en `sr-only`, ils nomment le dialogue
+- **MUST NOT** — serve as a plain search field → an `Input` that filters the list
+- **MUST** — render a `CommandEmpty` for the "no results" case
+- **MUST** — wire up the keyboard shortcut that `CommandShortcut` displays yourself: it is only a label
+- **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
+- **MUST** — in dialog mode, set `title` and `description`: rendered `sr-only`, they name the dialog
 
-## Dépendances
+## Dependencies
 
-- `cmdk` — bibliothèque Command primitive
-- `Dialog`, `DialogContent`, `DialogDescription`, `DialogHeader`, `DialogTitle` de `@/components/ui/dialog`
-- `InputGroup`, `InputGroupAddon` de `@/components/ui/input-group`
+- `cmdk` — the Command primitive library
+- `Dialog`, `DialogContent`, `DialogDescription`, `DialogHeader`, `DialogTitle` from `@/components/ui/dialog`
+- `InputGroup`, `InputGroupAddon` from `@/components/ui/input-group`
 - `@phosphor-icons/react` — `MagnifyingGlassIcon`, `CheckIcon`
 
-## Anatomie
+## Anatomy
 
-| Slot                                | Rôle                                             |
-| ----------------------------------- | ------------------------------------------------ |
-| `data-slot="command"`               | Racine du composant command                      |
-| `data-slot="command-input-wrapper"` | Wrapper du champ de recherche avec bordure basse |
-| `data-slot="command-input"`         | Champ de saisie de recherche                     |
-| `data-slot="command-list"`          | Liste scrollable des résultats                   |
-| `data-slot="command-empty"`         | Message affiché quand aucun résultat             |
-| `data-slot="command-group"`         | Groupe logique de commandes                      |
-| `data-slot="command-item"`          | Élément de commande individuel                   |
-| `data-slot="command-shortcut"`      | Raccourci clavier affiché à droite de l'item     |
-| `data-slot="command-separator"`     | Séparateur visuel entre groupes                  |
+| Slot                                | Role                                              |
+| ----------------------------------- | ------------------------------------------------- |
+| `data-slot="command"`               | Root of the command palette                       |
+| `data-slot="command-input-wrapper"` | Wrapper of the search input, with a bottom border |
+| `data-slot="command-input"`         | Search input                                      |
+| `data-slot="command-list"`          | Scrolling list of results                         |
+| `data-slot="command-empty"`         | Message shown when nothing matches                |
+| `data-slot="command-group"`         | A logical group of commands                       |
+| `data-slot="command-item"`          | A single command                                  |
+| `data-slot="command-shortcut"`      | Keyboard shortcut shown at the right of the item  |
+| `data-slot="command-separator"`     | Visual separator between groups                   |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                       | Classes et variables                          | Où                                                                                   |
+| Token                       | Classes and variables                         | Where                                                                                |
 | --------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
 | `border-width.default`      | `border-b`                                    | `CommandInput`                                                                       |
 | `color.background.elevated` | `bg-popover`                                  | `Command`                                                                            |
@@ -67,133 +67,133 @@ Palette de commandes avec recherche intégrée, permettant de filtrer et sélect
 | `opacity.disabled`          | `opacity-disabled`                            | `CommandInput` · `CommandItem`                                                       |
 | `typography.size.xs`        | `text-xs`                                     | `CommandEmpty` · `CommandGroup` · `CommandInput` · `CommandItem` · `CommandShortcut` |
 
-Relevé dans `components/ui/command.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/command.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Dialog`, `InputGroup` : les tokens de ces composants sont listés dans leurs specs.
+Composes `Dialog`, `InputGroup` — their tokens are listed in their own specs.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Command`
 
-Rend `CommandPrimitive`.
+Renders `CommandPrimitive`.
 
-| Prop        | Type                                            | Défaut | Description                              |
-| ----------- | ----------------------------------------------- | ------ | ---------------------------------------- |
-| `className` | `string`                                        | —      | Classes CSS additionnelles sur la racine |
-| `...props`  | `React.ComponentProps<typeof CommandPrimitive>` | —      | Props de `CommandPrimitive`              |
+| Prop        | Type                                            | Default | Description                        |
+| ----------- | ----------------------------------------------- | ------- | ---------------------------------- |
+| `className` | `string`                                        | —       | Additional CSS classes on the root |
+| `...props`  | `React.ComponentProps<typeof CommandPrimitive>` | —       | `CommandPrimitive` props           |
 
 ### `CommandDialog`
 
-Rend `Dialog`.
+Renders `Dialog`.
 
-| Prop              | Type                                  | Défaut                             | Description                                |
-| ----------------- | ------------------------------------- | ---------------------------------- | ------------------------------------------ |
-| `title`           | `string`                              | `"Command Palette"`                | Titre accessible du dialog (sr-only)       |
-| `description`     | `string`                              | `"Search for a command to run..."` | Description accessible du dialog (sr-only) |
-| `className`       | `string`                              | —                                  | Classes CSS additionnelles sur le contenu  |
-| `showCloseButton` | `boolean`                             | `false`                            | Affiche le bouton de fermeture du dialog   |
-| `...props`        | `React.ComponentProps<typeof Dialog>` | —                                  | Props de `Dialog`                          |
+| Prop              | Type                                  | Default                            | Description                                      |
+| ----------------- | ------------------------------------- | ---------------------------------- | ------------------------------------------------ |
+| `title`           | `string`                              | `"Command Palette"`                | Accessible title of the dialog (`sr-only`)       |
+| `description`     | `string`                              | `"Search for a command to run..."` | Accessible description of the dialog (`sr-only`) |
+| `className`       | `string`                              | —                                  | Additional CSS classes on the content            |
+| `showCloseButton` | `boolean`                             | `false`                            | Shows the dialog's close button                  |
+| `...props`        | `React.ComponentProps<typeof Dialog>` | —                                  | `Dialog` props                                   |
 
 ### `CommandInput`
 
-Rend `CommandPrimitive.Input`, dans un `<div>`.
+Renders `CommandPrimitive.Input`, inside a `<div>`.
 
-| Prop        | Type                                                  | Défaut | Description                       |
-| ----------- | ----------------------------------------------------- | ------ | --------------------------------- |
-| `className` | `string`                                              | —      | Classes CSS additionnelles        |
-| `...props`  | `React.ComponentProps<typeof CommandPrimitive.Input>` | —      | Props de `CommandPrimitive.Input` |
+| Prop        | Type                                                  | Default | Description                    |
+| ----------- | ----------------------------------------------------- | ------- | ------------------------------ |
+| `className` | `string`                                              | —       | Additional CSS classes         |
+| `...props`  | `React.ComponentProps<typeof CommandPrimitive.Input>` | —       | `CommandPrimitive.Input` props |
 
 ### `CommandList`
 
-Rend `CommandPrimitive.List`.
+Renders `CommandPrimitive.List`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof CommandPrimitive.List>` | —      | Props de `CommandPrimitive.List` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.List>` | —       | `CommandPrimitive.List` props |
 
 ### `CommandEmpty`
 
-Rend `CommandPrimitive.Empty`.
+Renders `CommandPrimitive.Empty`.
 
-| Prop       | Type                                                  | Défaut | Description                       |
-| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
-| `...props` | `React.ComponentProps<typeof CommandPrimitive.Empty>` | —      | Props de `CommandPrimitive.Empty` |
+| Prop       | Type                                                  | Default | Description                    |
+| ---------- | ----------------------------------------------------- | ------- | ------------------------------ |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Empty>` | —       | `CommandPrimitive.Empty` props |
 
 ### `CommandGroup`
 
-Rend `CommandPrimitive.Group`.
+Renders `CommandPrimitive.Group`.
 
-| Prop       | Type                                                  | Défaut | Description                       |
-| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
-| `...props` | `React.ComponentProps<typeof CommandPrimitive.Group>` | —      | Props de `CommandPrimitive.Group` |
+| Prop       | Type                                                  | Default | Description                    |
+| ---------- | ----------------------------------------------------- | ------- | ------------------------------ |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Group>` | —       | `CommandPrimitive.Group` props |
 
 ### `CommandItem`
 
-Rend `CommandPrimitive.Item`.
+Renders `CommandPrimitive.Item`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof CommandPrimitive.Item>` | —      | Props de `CommandPrimitive.Item` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Item>` | —       | `CommandPrimitive.Item` props |
 
 ### `CommandShortcut`
 
-Rend `<span>`.
+Renders `<span>`.
 
-| Prop       | Type                           | Défaut | Description               |
-| ---------- | ------------------------------ | ------ | ------------------------- |
-| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+| Prop       | Type                           | Default | Description           |
+| ---------- | ------------------------------ | ------- | --------------------- |
+| `...props` | `React.ComponentProps<"span">` | —       | Native `<span>` props |
 
 ### `CommandSeparator`
 
-Rend `CommandPrimitive.Separator`.
+Renders `CommandPrimitive.Separator`.
 
-| Prop       | Type                                                      | Défaut | Description                           |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
-| `...props` | `React.ComponentProps<typeof CommandPrimitive.Separator>` | —      | Props de `CommandPrimitive.Separator` |
+| Prop       | Type                                                      | Default | Description                        |
+| ---------- | --------------------------------------------------------- | ------- | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof CommandPrimitive.Separator>` | —       | `CommandPrimitive.Separator` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                       |
-| -------- | --------------------------------------------------------------------------------- |
-| default  | Fond `popover`, texte `popover-foreground`, liste scrollable                      |
-| hover    | — (navigation clavier privilégiée)                                                |
-| focus    | Champ de recherche actif, items navigables au clavier                             |
-| active   | Item sélectionné avec fond `muted` et texte `foreground`                          |
-| disabled | Item grisé (`opacity-disabled`, `pointer-events-none`) via `data-[disabled=true]` |
+| State    | Description                                                                                |
+| -------- | ------------------------------------------------------------------------------------------ |
+| default  | `popover` background, `popover-foreground` text, scrolling list                            |
+| hover    | — (keyboard navigation comes first)                                                        |
+| focus    | Search input active; items reachable from the keyboard                                     |
+| active   | Selected item with a `muted` background and `foreground` text                              |
+| disabled | Grayed-out item (`opacity-disabled`, `pointer-events-none`) through `data-[disabled=true]` |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) + listbox (cmdk)
+**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a listbox (cmdk)
 
-**Rôle** : `CommandInput` porte `role="combobox"` ; `CommandList` est une `listbox` d'options (`role="option"`, `aria-selected`).
+**Role**: `CommandInput` carries `role="combobox"`; `CommandList` is a `listbox` of options (`role="option"`, `aria-selected`).
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                  | Action                       |
-| ----------------------- | ---------------------------- |
-| `ArrowDown` / `ArrowUp` | Option suivante / précédente |
-| `Home` / `End`          | Première / dernière option   |
-| `Enter`                 | Exécute l'option active      |
-| Saisie                  | Filtre                       |
+| Key                     | Action                 |
+| ----------------------- | ---------------------- |
+| `ArrowDown` / `ArrowUp` | Next / previous option |
+| `Home` / `End`          | First / last option    |
+| `Enter`                 | Runs the active option |
+| Typing                  | Filters                |
 
-**Nom accessible** : Donner un `placeholder` et un `aria-label` explicites au champ ; `CommandDialog` porte un titre (masqué visuellement) qui nomme le dialogue.
+**Accessible name**: Give the input an explicit `placeholder` and `aria-label`; `CommandDialog` carries a visually hidden title that names the dialog.
 
-**Vigilance** :
+**Pitfalls**:
 
-- `CommandEmpty` doit rester textuel : c'est ce qu'entend l'utilisateur quand rien ne correspond.
-- Dans `CommandDialog`, `Escape` ferme le dialogue et rend le focus au déclencheur.
+- `CommandEmpty` must stay text: it is what the user hears when nothing matches.
+- In `CommandDialog`, `Escape` closes the dialog and returns focus to the trigger.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -210,23 +210,23 @@ import {
 export default function Example() {
   return (
     <Command>
-      <CommandInput placeholder="Rechercher une commande…" />
+      <CommandInput placeholder="Search for a command…" />
       <CommandList>
-        <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
+        <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Actions">
           <CommandItem>
-            Nouveau fichier
+            New file
             <CommandShortcut>⌘N</CommandShortcut>
           </CommandItem>
           <CommandItem>
-            Rechercher
+            Search
             <CommandShortcut>⌘F</CommandShortcut>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Navigation">
-          <CommandItem>Accueil</CommandItem>
-          <CommandItem>Paramètres</CommandItem>
+          <CommandItem>Home</CommandItem>
+          <CommandItem>Settings</CommandItem>
         </CommandGroup>
       </CommandList>
     </Command>
@@ -234,9 +234,9 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Dialog` — utilisé en interne par `CommandDialog` pour l'affichage modal
-- `InputGroup` — utilisé en interne pour structurer le champ de recherche
-- `Combobox` — alternative pour la sélection avec auto-complétion dans un formulaire
-- `Select` — alternative pour une sélection simple sans recherche
+- `Dialog` — used internally by `CommandDialog` for the modal display
+- `InputGroup` — structures the search input internally
+- `Combobox` — the alternative for autocomplete selection in a form
+- `Select` — the alternative for a simple selection without search

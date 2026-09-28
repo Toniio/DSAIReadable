@@ -2,61 +2,61 @@
 
 ## Metadata
 
-| Champ         | Valeur                   |
+| Field         | Value                    |
 | ------------- | ------------------------ |
-| Nom           | Drawer                   |
-| Catégorie     | Overlay                  |
-| Statut        | stable                   |
+| Name          | Drawer                   |
+| Category      | Overlay                  |
+| Status        | stable                   |
 | figma_node_id |                          |
 | code_path     | components/ui/drawer.tsx |
 
-## Rôle
+## Role
 
-Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glissement (swipe), idéal pour les interactions mobiles.
+A panel that slides in from an edge of the screen and follows the user's swipe — built for mobile interactions.
 
 ## Usage
 
-- Afficher un formulaire ou des options depuis le bas de l'écran sur mobile
-- Proposer un panneau de filtres ou de paramètres sous `md`
-- Afficher sous `md` un contenu long qui irait dans un `Sheet` sur desktop
-- Afficher du contenu complémentaire sans quitter le contexte actuel
+- Show a form or options from the bottom of the screen on mobile
+- Offer a filters or settings panel below `md`
+- Below `md`, show long content that would go in a `Sheet` on desktop
+- Show supporting content without leaving the current context
 
-<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-21: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+- **Choice** (`rule-21`) — Pick the surface from how much it blocks and how long its content is. A blocking decision (confirm, destroy): `AlertDialog`. A short task with no inner scrolling: `Dialog`. Long content or side context: `Sheet` from `md` up, `Drawer` below — **unless** it is side navigation, which stays a `Sheet` at every width (this is what `Sidebar` does below `md`). Anchored, non-blocking content with no scrolling and at most 3 fields: `Popover`. An informative preview on hover, from `md` up: `HoverCard`. A one-line, non-interactive label of at most 80 characters: `Tooltip`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir sur desktop (`md` et plus) → utiliser `Dialog` ou `Sheet`
-- **MUST NOT** — dépasser 80vh de hauteur en direction `top` ou `bottom` (appliqué par défaut)
-- **MUST NOT** — ouvrir un `Drawer` par-dessus un autre : un seul visible à la fois
-- **MUST** — rendre un `DrawerTitle` : c'est le nom annoncé par les lecteurs d'écran
-- **MUST** — tester sur mobile un `Drawer` au contenu défilant : le geste de fermeture peut capter le défilement
+- **MUST NOT** — be used on desktop (`md` and up) → use `Dialog` or `Sheet`
+- **MUST NOT** — exceed 80vh in height in the `top` or `bottom` direction (applied by default)
+- **MUST NOT** — open a `Drawer` on top of another: one visible at a time
+- **MUST** — render a `DrawerTitle`: it is the name screen readers announce
+- **MUST** — test a `Drawer` with scrolling content on mobile: the close gesture can capture the scroll
 
-## Dépendances
+## Dependencies
 
-- `Drawer` de `vaul` (primitives Root, Trigger, Portal, Overlay, Content, Close, Title, Description)
+- `Drawer` from `vaul` (Root, Trigger, Portal, Overlay, Content, Close, Title, Description)
 
-## Anatomie
+## Anatomy
 
-| Slot                             | Rôle                                     |
-| -------------------------------- | ---------------------------------------- |
-| `data-slot="drawer"`             | Racine du composant                      |
-| `data-slot="drawer-trigger"`     | Élément déclencheur d'ouverture          |
-| `data-slot="drawer-portal"`      | Portail de rendu                         |
-| `data-slot="drawer-overlay"`     | Fond semi-transparent avec backdrop-blur |
-| `data-slot="drawer-content"`     | Conteneur principal, ancré à un bord     |
-| `data-slot="drawer-header"`      | Zone d'en-tête (titre + description)     |
-| `data-slot="drawer-footer"`      | Zone de pied (boutons d'action)          |
-| `data-slot="drawer-title"`       | Titre du panneau                         |
-| `data-slot="drawer-description"` | Description textuelle                    |
-| `data-slot="drawer-close"`       | Élément de fermeture                     |
+| Slot                             | Role                                  |
+| -------------------------------- | ------------------------------------- |
+| `data-slot="drawer"`             | Root                                  |
+| `data-slot="drawer-trigger"`     | Element that opens the drawer         |
+| `data-slot="drawer-portal"`      | Rendering portal                      |
+| `data-slot="drawer-overlay"`     | Semi-transparent backdrop with a blur |
+| `data-slot="drawer-content"`     | Main container, anchored to an edge   |
+| `data-slot="drawer-header"`      | Header area (title and description)   |
+| `data-slot="drawer-footer"`      | Footer area (action buttons)          |
+| `data-slot="drawer-title"`       | The panel's title                     |
+| `data-slot="drawer-description"` | Descriptive text                      |
+| `data-slot="drawer-close"`       | Element that closes the drawer        |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                            | Classes et variables                              | Où                                                                                                                       |
+| Token                            | Classes and variables                             | Where                                                                                                                    |
 | -------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `border-width.default`           | `border-b` · `border-l` · `border-r` · `border-t` | `DrawerContent`                                                                                                          |
 | `color.background.elevated`      | `bg-popover`                                      | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`)                                                         |
@@ -70,136 +70,136 @@ Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glisseme
 | `typography.size.xs`             | `text-xs/relaxed`                                 | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerDescription`                                   |
 | `zindex.modal`                   | `z-modal`                                         | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
 
-Relevé dans `components/ui/drawer.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/drawer.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Drawer`
 
-Rend `DrawerPrimitive.Root`.
+Renders `DrawerPrimitive.Root`.
 
-| Prop                    | Type                                                | Défaut      | Description                                                               |
-| ----------------------- | --------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
-| `open`                  | `boolean`                                           | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé)                              |
-| `onOpenChange`          | `(open: boolean) => void`                           | —           | Callback lors du changement d'état                                        |
-| `direction`             | `"left" \| "right" \| "top" \| "bottom"`            | `"bottom"`  | Direction d'apparition du panneau (via vaul `data-vaul-drawer-direction`) |
-| `shouldScaleBackground` | `boolean`                                           | —           | Réduit l'arrière-plan lors de l'ouverture                                 |
-| `...props`              | `React.ComponentProps<typeof DrawerPrimitive.Root>` | —           | Props de `DrawerPrimitive.Root`                                           |
+| Prop                    | Type                                                | Default     | Description                                                                 |
+| ----------------------- | --------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| `open`                  | `boolean`                                           | `undefined` | Whether the drawer is open (controlled mode)                                |
+| `onOpenChange`          | `(open: boolean) => void`                           | —           | Called when the drawer opens or closes                                      |
+| `direction`             | `"left" \| "right" \| "top" \| "bottom"`            | `"bottom"`  | Edge the panel slides in from (through vaul's `data-vaul-drawer-direction`) |
+| `shouldScaleBackground` | `boolean`                                           | —           | Scales the background down while the drawer is open                         |
+| `...props`              | `React.ComponentProps<typeof DrawerPrimitive.Root>` | —           | `DrawerPrimitive.Root` props                                                |
 
 ### `DrawerPortal`
 
-Rend `DrawerPrimitive.Portal`.
+Renders `DrawerPrimitive.Portal`.
 
-| Prop       | Type                                                  | Défaut | Description                       |
-| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
-| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Portal>` | —      | Props de `DrawerPrimitive.Portal` |
+| Prop       | Type                                                  | Default | Description                    |
+| ---------- | ----------------------------------------------------- | ------- | ------------------------------ |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Portal>` | —       | `DrawerPrimitive.Portal` props |
 
 ### `DrawerOverlay`
 
-Rend `DrawerPrimitive.Overlay`.
+Renders `DrawerPrimitive.Overlay`.
 
-| Prop       | Type                                                   | Défaut | Description                        |
-| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
-| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Overlay>` | —      | Props de `DrawerPrimitive.Overlay` |
+| Prop       | Type                                                   | Default | Description                     |
+| ---------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Overlay>` | —       | `DrawerPrimitive.Overlay` props |
 
 ### `DrawerTrigger`
 
-Rend `DrawerPrimitive.Trigger`.
+Renders `DrawerPrimitive.Trigger`.
 
-| Prop       | Type                                                   | Défaut | Description                        |
-| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
-| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Trigger>` | —      | Props de `DrawerPrimitive.Trigger` |
+| Prop       | Type                                                   | Default | Description                     |
+| ---------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Trigger>` | —       | `DrawerPrimitive.Trigger` props |
 
 ### `DrawerClose`
 
-Rend `DrawerPrimitive.Close`.
+Renders `DrawerPrimitive.Close`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Close>` | —      | Props de `DrawerPrimitive.Close` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Close>` | —       | `DrawerPrimitive.Close` props |
 
 ### `DrawerContent`
 
-Rend `DrawerPrimitive.Content`.
+Renders `DrawerPrimitive.Content`.
 
-| Prop       | Type                                                   | Défaut | Description                        |
-| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
-| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Content>` | —      | Props de `DrawerPrimitive.Content` |
+| Prop       | Type                                                   | Default | Description                     |
+| ---------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Content>` | —       | `DrawerPrimitive.Content` props |
 
 ### `DrawerHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `DrawerFooter`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `DrawerTitle`
 
-Rend `DrawerPrimitive.Title`.
+Renders `DrawerPrimitive.Title`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Title>` | —      | Props de `DrawerPrimitive.Title` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Title>` | —       | `DrawerPrimitive.Title` props |
 
 ### `DrawerDescription`
 
-Rend `DrawerPrimitive.Description`.
+Renders `DrawerPrimitive.Description`.
 
-| Prop       | Type                                                       | Défaut | Description                            |
-| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Description>` | —      | Props de `DrawerPrimitive.Description` |
+| Prop       | Type                                                       | Default | Description                         |
+| ---------- | ---------------------------------------------------------- | ------- | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof DrawerPrimitive.Description>` | —       | `DrawerPrimitive.Description` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                   |
-| -------- | ------------------------------------------------------------- |
-| default  | Drawer fermé, aucun overlay visible                           |
-| open     | Overlay affiché, panneau glissé depuis le bord avec animation |
-| dragging | L'utilisateur fait glisser le panneau (geste tactile)         |
-| closing  | Animation de fermeture par glissement ou par l'overlay        |
-| focus    | Focus piégé à l'intérieur du panneau                          |
-| disabled | N/A — les contrôles internes gèrent leur propre état          |
+| State    | Description                                                |
+| -------- | ---------------------------------------------------------- |
+| default  | Drawer closed, no overlay                                  |
+| open     | Overlay shown; the panel slides in from its edge           |
+| dragging | The user is dragging the panel (touch gesture)             |
+| closing  | Closing animation, after a swipe or a click on the overlay |
+| focus    | Focus trapped inside the panel                             |
+| disabled | N/A — the controls inside handle their own state           |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (vaul, sur Radix Dialog)
+**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (vaul, on top of Radix Dialog)
 
-**Rôle** : `role="dialog"`, `aria-modal="true"` ; étiqueté par `DrawerTitle`.
+**Role**: `role="dialog"`, `aria-modal="true"`; labelled by `DrawerTitle`.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche              | Action                                                    |
-| ------------------- | --------------------------------------------------------- |
-| `Tab` / `Shift+Tab` | Parcourt les éléments focalisables, piégés dans le tiroir |
-| `Escape`            | Ferme le tiroir                                           |
+| Key                 | Action                                                      |
+| ------------------- | ----------------------------------------------------------- |
+| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the drawer |
+| `Escape`            | Closes the drawer                                           |
 
-**Nom accessible** : `DrawerTitle` est obligatoire, même masqué visuellement.
+**Accessible name**: `DrawerTitle` is required, even when visually hidden.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Le glissement pour fermer n'existe pas au clavier ni pour tous les utilisateurs : prévoir un bouton de fermeture visible (`DrawerClose`).
-- À la fermeture, le focus revient au déclencheur.
+- Swipe-to-close does not exist for keyboard users, nor for every user: provide a visible close button (`DrawerClose`).
+- On close, focus returns to the trigger.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -218,20 +218,20 @@ export default function Example() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant="outline">Ouvrir le panneau</Button>
+        <Button variant="outline">Open filters</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Filtres</DrawerTitle>
+          <DrawerTitle>Filters</DrawerTitle>
           <DrawerDescription>
-            Affinez votre recherche avec les filtres ci-dessous.
+            Narrow down your search with the filters below.
           </DrawerDescription>
         </DrawerHeader>
-        {/* Contenu des filtres */}
+        {/* Filter controls */}
         <DrawerFooter>
-          <Button>Appliquer</Button>
+          <Button>Apply</Button>
           <DrawerClose asChild>
-            <Button variant="outline">Annuler</Button>
+            <Button variant="outline">Cancel</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -240,8 +240,8 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Sheet` — panneau latéral similaire mais sans geste de glissement, basé sur Radix Dialog
-- `Dialog` — modale centrée pour desktop
-- `AlertDialog` — modale de confirmation bloquante
+- `Sheet` — a similar side panel without the swipe gesture, built on Radix Dialog
+- `Dialog` — a centered modal for desktop
+- `AlertDialog` — a blocking confirmation modal

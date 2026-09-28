@@ -2,65 +2,65 @@
 
 ## Metadata
 
-| Champ         | Valeur                    |
+| Field         | Value                     |
 | ------------- | ------------------------- |
-| Nom           | Menubar                   |
-| Catégorie     | Navigation                |
-| Statut        | stable                    |
+| Name          | Menubar                   |
+| Category      | Navigation                |
+| Status        | stable                    |
 | figma_node_id |                           |
 | code_path     | components/ui/menubar.tsx |
 
-## Rôle
+## Role
 
-Barre de menus horizontale offrant un système de menus déroulants avec support des sous-menus, items à cocher, groupes radio et raccourcis clavier.
+A horizontal bar of drop-down menus, with submenus, checkable items, radio groups and keyboard shortcuts.
 
 ## Usage
 
-- Barre de menus d'application de type desktop (Fichier, Édition, Affichage…)
-- Regrouper des actions et options dans des menus déroulants thématiques
-- Proposer des options à cocher ou des sélections exclusives (radio) dans un menu
-- Afficher les raccourcis clavier associés aux actions
-- Organiser des actions complexes avec des sous-menus imbriqués
+- A desktop-style application menu bar (File, Edit, View…)
+- Gather actions and options into themed drop-down menus
+- Offer checkable options or exclusive (radio) choices inside a menu
+- Show the keyboard shortcut of each action
+- Organize complex actions into nested submenus
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir de navigation de site → utiliser `NavigationMenu`
-- **MUST NOT** — imbriquer plus de 2 niveaux de sous-menus
-- **Note** — un item `disabled` est atténué (`opacity-disabled`) et non interactif (`pointer-events-none`)
-- **MUST** — réserver `variant="destructive"` de `MenubarItem` aux actions irréversibles
-- **MUST** — brancher un handler réel pour chaque raccourci affiché par `MenubarShortcut`
+- **MUST NOT** — serve as site navigation → use `NavigationMenu`
+- **MUST NOT** — nest submenus more than 2 levels deep
+- **Note** — a `disabled` item is dimmed (`opacity-disabled`) and inert (`pointer-events-none`)
+- **MUST** — keep `variant="destructive"` on `MenubarItem` for irreversible actions
+- **MUST** — wire a real handler for every shortcut `MenubarShortcut` displays
 
-## Dépendances
+## Dependencies
 
-- `Menubar` (Root, Menu, Group, Portal, RadioGroup, Trigger, Content, Item, CheckboxItem, RadioItem, ItemIndicator, Label, Separator, Sub, SubTrigger, SubContent) de `radix-ui`
-- `CheckIcon`, `CaretRightIcon` de `@phosphor-icons/react`
+- `Menubar` (Root, Menu, Group, Portal, RadioGroup, Trigger, Content, Item, CheckboxItem, RadioItem, ItemIndicator, Label, Separator, Sub, SubTrigger, SubContent) from `radix-ui`
+- `CheckIcon`, `CaretRightIcon` from `@phosphor-icons/react`
 
-## Anatomie
+## Anatomy
 
-| Slot                                | Rôle                                                   |
-| ----------------------------------- | ------------------------------------------------------ |
-| `data-slot="menubar"`               | Racine de la barre de menus, conteneur flex horizontal |
-| `data-slot="menubar-menu"`          | Conteneur d'un menu individuel                         |
-| `data-slot="menubar-trigger"`       | Bouton déclencheur d'ouverture d'un menu               |
-| `data-slot="menubar-portal"`        | Portail de rendu hors du DOM parent                    |
-| `data-slot="menubar-content"`       | Contenu du menu déroulant                              |
-| `data-slot="menubar-group"`         | Groupe logique d'items                                 |
-| `data-slot="menubar-item"`          | Item d'action dans le menu                             |
-| `data-slot="menubar-checkbox-item"` | Item à cocher avec indicateur visuel                   |
-| `data-slot="menubar-radio-group"`   | Groupe de sélection exclusive                          |
-| `data-slot="menubar-radio-item"`    | Item radio avec indicateur visuel                      |
-| `data-slot="menubar-label"`         | Label non interactif pour un groupe                    |
-| `data-slot="menubar-separator"`     | Séparateur horizontal entre les groupes                |
-| `data-slot="menubar-shortcut"`      | Texte du raccourci clavier associé                     |
-| `data-slot="menubar-sub"`           | Conteneur de sous-menu                                 |
-| `data-slot="menubar-sub-trigger"`   | Déclencheur de sous-menu avec chevron droit            |
-| `data-slot="menubar-sub-content"`   | Contenu du sous-menu                                   |
+| Slot                                | Role                                              |
+| ----------------------------------- | ------------------------------------------------- |
+| `data-slot="menubar"`               | Root of the menu bar, a horizontal flex container |
+| `data-slot="menubar-menu"`          | Container of a single menu                        |
+| `data-slot="menubar-trigger"`       | Button that opens a menu                          |
+| `data-slot="menubar-portal"`        | Portal that renders outside the parent DOM        |
+| `data-slot="menubar-content"`       | Content of the drop-down menu                     |
+| `data-slot="menubar-group"`         | A logical group of items                          |
+| `data-slot="menubar-item"`          | An action item in the menu                        |
+| `data-slot="menubar-checkbox-item"` | A checkable item with a visual indicator          |
+| `data-slot="menubar-radio-group"`   | A group of exclusive choices                      |
+| `data-slot="menubar-radio-item"`    | A radio item with a visual indicator              |
+| `data-slot="menubar-label"`         | Non-interactive label of a group                  |
+| `data-slot="menubar-separator"`     | Horizontal separator between groups               |
+| `data-slot="menubar-shortcut"`      | Text of the associated keyboard shortcut          |
+| `data-slot="menubar-sub"`           | Submenu container                                 |
+| `data-slot="menubar-sub-trigger"`   | Submenu trigger, with a right caret               |
+| `data-slot="menubar-sub-content"`   | Submenu content                                   |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                           | Classes et variables                                                        | Où                                                                                                                                            |
+| Token                           | Classes and variables                                                       | Where                                                                                                                                         |
 | ------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `border-width.default`          | `border`                                                                    | `Menubar`                                                                                                                                     |
 | `color.background.elevated`     | `bg-popover`                                                                | `MenubarContent` · `MenubarSubContent`                                                                                                        |
@@ -79,193 +79,193 @@ Barre de menus horizontale offrant un système de menus déroulants avec support
 | `typography.size.xs`            | `text-xs`                                                                   | `MenubarCheckboxItem` · `MenubarItem` · `MenubarLabel` · `MenubarRadioItem` · `MenubarShortcut` · `MenubarSubTrigger` · `MenubarTrigger`      |
 | `zindex.popover`                | `z-popover`                                                                 | `MenubarContent` · `MenubarSubContent`                                                                                                        |
 
-Relevé dans `components/ui/menubar.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/menubar.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Menubar`
 
-Rend `MenubarPrimitive.Root`.
+Renders `MenubarPrimitive.Root`.
 
-| Prop        | Type                                                 | Défaut | Description                              |
-| ----------- | ---------------------------------------------------- | ------ | ---------------------------------------- |
-| `className` | `string`                                             | —      | Classes CSS additionnelles sur la racine |
-| `...props`  | `React.ComponentProps<typeof MenubarPrimitive.Root>` | —      | Props de `MenubarPrimitive.Root`         |
+| Prop        | Type                                                 | Default | Description                        |
+| ----------- | ---------------------------------------------------- | ------- | ---------------------------------- |
+| `className` | `string`                                             | —       | Additional CSS classes on the root |
+| `...props`  | `React.ComponentProps<typeof MenubarPrimitive.Root>` | —       | `MenubarPrimitive.Root` props      |
 
 ### `MenubarPortal`
 
-Rend `MenubarPrimitive.Portal`.
+Renders `MenubarPrimitive.Portal`.
 
-| Prop       | Type                                                   | Défaut | Description                        |
-| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Portal>` | —      | Props de `MenubarPrimitive.Portal` |
+| Prop       | Type                                                   | Default | Description                     |
+| ---------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Portal>` | —       | `MenubarPrimitive.Portal` props |
 
 ### `MenubarMenu`
 
-Rend `MenubarPrimitive.Menu`.
+Renders `MenubarPrimitive.Menu`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Menu>` | —      | Props de `MenubarPrimitive.Menu` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Menu>` | —       | `MenubarPrimitive.Menu` props |
 
 ### `MenubarTrigger`
 
-Rend `MenubarPrimitive.Trigger`.
+Renders `MenubarPrimitive.Trigger`.
 
-| Prop       | Type                                                    | Défaut | Description                         |
-| ---------- | ------------------------------------------------------- | ------ | ----------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Trigger>` | —      | Props de `MenubarPrimitive.Trigger` |
+| Prop       | Type                                                    | Default | Description                      |
+| ---------- | ------------------------------------------------------- | ------- | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Trigger>` | —       | `MenubarPrimitive.Trigger` props |
 
 ### `MenubarContent`
 
-Rend `MenubarPrimitive.Content`.
+Renders `MenubarPrimitive.Content`.
 
-| Prop          | Type                                                    | Défaut    | Description                                  |
+| Prop          | Type                                                    | Default   | Description                                  |
 | ------------- | ------------------------------------------------------- | --------- | -------------------------------------------- |
-| `align`       | `"center" \| "end" \| "start"`                          | `"start"` | Alignement du contenu par rapport au trigger |
-| `sideOffset`  | `number`                                                | `8`       | Décalage latéral du contenu                  |
-| `alignOffset` | `number`                                                | `-4`      | Décalage d'alignement du contenu             |
-| `...props`    | `React.ComponentProps<typeof MenubarPrimitive.Content>` | —         | Props de `MenubarPrimitive.Content`          |
+| `align`       | `"center" \| "end" \| "start"`                          | `"start"` | Alignment of the content against the trigger |
+| `sideOffset`  | `number`                                                | `8`       | Distance between the trigger and the content |
+| `alignOffset` | `number`                                                | `-4`      | Offset along the alignment axis              |
+| `...props`    | `React.ComponentProps<typeof MenubarPrimitive.Content>` | —         | `MenubarPrimitive.Content` props             |
 
 ### `MenubarGroup`
 
-Rend `MenubarPrimitive.Group`.
+Renders `MenubarPrimitive.Group`.
 
-| Prop       | Type                                                  | Défaut | Description                       |
-| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Group>` | —      | Props de `MenubarPrimitive.Group` |
+| Prop       | Type                                                  | Default | Description                    |
+| ---------- | ----------------------------------------------------- | ------- | ------------------------------ |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Group>` | —       | `MenubarPrimitive.Group` props |
 
 ### `MenubarSeparator`
 
-Rend `MenubarPrimitive.Separator`.
+Renders `MenubarPrimitive.Separator`.
 
-| Prop       | Type                                                      | Défaut | Description                           |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Separator>` | —      | Props de `MenubarPrimitive.Separator` |
+| Prop       | Type                                                      | Default | Description                        |
+| ---------- | --------------------------------------------------------- | ------- | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Separator>` | —       | `MenubarPrimitive.Separator` props |
 
 ### `MenubarLabel`
 
-Rend `MenubarPrimitive.Label`.
+Renders `MenubarPrimitive.Label`.
 
-| Prop       | Type                                                  | Défaut | Description                                                                                                              |
-| ---------- | ----------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                             | —      | Ajoute un padding gauche pour aligner avec les items à indicateur (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Label>` | —      | Props de `MenubarPrimitive.Label`                                                                                        |
+| Prop       | Type                                                  | Default | Description                                                                                                          |
+| ---------- | ----------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| `inset`    | `boolean`                                             | —       | Adds left padding to line up with items that have an indicator (on Item, CheckboxItem, RadioItem, Label, SubTrigger) |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Label>` | —       | `MenubarPrimitive.Label` props                                                                                       |
 
 ### `MenubarItem`
 
-Rend `MenubarPrimitive.Item`.
+Renders `MenubarPrimitive.Item`.
 
-| Prop       | Type                                                 | Défaut      | Description                                                                                |
-| ---------- | ---------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                            | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `variant`  | `"default" \| "destructive"`                         | `"default"` | Variante visuelle de `MenubarItem`                                                         |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Item>` | —           | Props de `MenubarPrimitive.Item`                                                           |
+| Prop       | Type                                                 | Default     | Description                                                         |
+| ---------- | ---------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                            | —           | Adds left padding so the text lines up with items that have an icon |
+| `variant`  | `"default" \| "destructive"`                         | `"default"` | Visual variant of `MenubarItem`                                     |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Item>` | —           | `MenubarPrimitive.Item` props                                       |
 
 ### `MenubarShortcut`
 
-Rend `<span>`.
+Renders `<span>`.
 
-| Prop       | Type                           | Défaut | Description               |
-| ---------- | ------------------------------ | ------ | ------------------------- |
-| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+| Prop       | Type                           | Default | Description           |
+| ---------- | ------------------------------ | ------- | --------------------- |
+| `...props` | `React.ComponentProps<"span">` | —       | Native `<span>` props |
 
 ### `MenubarCheckboxItem`
 
-Rend `MenubarPrimitive.CheckboxItem`.
+Renders `MenubarPrimitive.CheckboxItem`.
 
-| Prop       | Type                                                         | Défaut | Description                                                                                |
-| ---------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                    | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `checked`  | `CheckedState`                                               | —      | État coché de `MenubarCheckboxItem`                                                        |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.CheckboxItem>` | —      | Props de `MenubarPrimitive.CheckboxItem`                                                   |
+| Prop       | Type                                                         | Default | Description                                                         |
+| ---------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                    | —       | Adds left padding so the text lines up with items that have an icon |
+| `checked`  | `CheckedState`                                               | —       | Checked state of `MenubarCheckboxItem`                              |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.CheckboxItem>` | —       | `MenubarPrimitive.CheckboxItem` props                               |
 
 ### `MenubarRadioGroup`
 
-Rend `MenubarPrimitive.RadioGroup`.
+Renders `MenubarPrimitive.RadioGroup`.
 
-| Prop       | Type                                                       | Défaut | Description                            |
-| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.RadioGroup>` | —      | Props de `MenubarPrimitive.RadioGroup` |
+| Prop       | Type                                                       | Default | Description                         |
+| ---------- | ---------------------------------------------------------- | ------- | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.RadioGroup>` | —       | `MenubarPrimitive.RadioGroup` props |
 
 ### `MenubarRadioItem`
 
-Rend `MenubarPrimitive.RadioItem`.
+Renders `MenubarPrimitive.RadioItem`.
 
-| Prop       | Type                                                      | Défaut | Description                                                                                |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                 | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.RadioItem>` | —      | Props de `MenubarPrimitive.RadioItem`                                                      |
+| Prop       | Type                                                      | Default | Description                                                         |
+| ---------- | --------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                 | —       | Adds left padding so the text lines up with items that have an icon |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.RadioItem>` | —       | `MenubarPrimitive.RadioItem` props                                  |
 
 ### `MenubarSub`
 
-Rend `MenubarPrimitive.Sub`.
+Renders `MenubarPrimitive.Sub`.
 
-| Prop       | Type                                                | Défaut | Description                     |
-| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Sub>` | —      | Props de `MenubarPrimitive.Sub` |
+| Prop       | Type                                                | Default | Description                  |
+| ---------- | --------------------------------------------------- | ------- | ---------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.Sub>` | —       | `MenubarPrimitive.Sub` props |
 
 ### `MenubarSubTrigger`
 
-Rend `MenubarPrimitive.SubTrigger`.
+Renders `MenubarPrimitive.SubTrigger`.
 
-| Prop       | Type                                                       | Défaut | Description                                                                                |
-| ---------- | ---------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                  | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.SubTrigger>` | —      | Props de `MenubarPrimitive.SubTrigger`                                                     |
+| Prop       | Type                                                       | Default | Description                                                         |
+| ---------- | ---------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                  | —       | Adds left padding so the text lines up with items that have an icon |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.SubTrigger>` | —       | `MenubarPrimitive.SubTrigger` props                                 |
 
 ### `MenubarSubContent`
 
-Rend `MenubarPrimitive.SubContent`.
+Renders `MenubarPrimitive.SubContent`.
 
-| Prop       | Type                                                       | Défaut | Description                            |
-| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
-| `...props` | `React.ComponentProps<typeof MenubarPrimitive.SubContent>` | —      | Props de `MenubarPrimitive.SubContent` |
+| Prop       | Type                                                       | Default | Description                         |
+| ---------- | ---------------------------------------------------------- | ------- | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof MenubarPrimitive.SubContent>` | —       | `MenubarPrimitive.SubContent` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                        |
-| -------- | ------------------------------------------------------------------ |
-| default  | Barre avec bordure, triggers au repos                              |
-| hover    | Fond `bg-muted` sur le trigger survolé                             |
-| focus    | Fond `bg-accent`, texte `accent-foreground` sur l'item focalisé    |
-| active   | Trigger expanded avec fond `bg-muted`, menu ouvert avec animation  |
-| disabled | `pointer-events-none`, `opacity-disabled` sur les items désactivés |
+| State    | Description                                                            |
+| -------- | ---------------------------------------------------------------------- |
+| default  | Bordered bar, triggers at rest                                         |
+| hover    | `bg-muted` background on the hovered trigger                           |
+| focus    | `bg-accent` background, `accent-foreground` text on the focused item   |
+| active   | Expanded trigger with a `bg-muted` background; the menu opens animated |
+| disabled | `pointer-events-none`, `opacity-disabled` on disabled items            |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix Menubar)
+**Pattern**: [Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix Menubar)
 
-**Rôle** : `role="menubar"` ; chaque menu est un `menu` avec ses `menuitem`.
+**Role**: `role="menubar"`; each menu is a `menu` with its `menuitem`s.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                          | Action                                          |
-| ------------------------------- | ----------------------------------------------- |
-| `ArrowRight` / `ArrowLeft`      | Menu suivant / précédent de la barre            |
-| `Enter` / `Space` / `ArrowDown` | Ouvre le menu focalisé                          |
-| `ArrowDown` / `ArrowUp`         | Élément suivant / précédent dans un menu ouvert |
-| `Escape`                        | Ferme le menu                                   |
-| Saisie                          | Va à l'élément qui commence par la lettre tapée |
+| Key                             | Action                                              |
+| ------------------------------- | --------------------------------------------------- |
+| `ArrowRight` / `ArrowLeft`      | Next / previous menu in the bar                     |
+| `Enter` / `Space` / `ArrowDown` | Opens the focused menu                              |
+| `ArrowDown` / `ArrowUp`         | Next / previous item in an open menu                |
+| `Escape`                        | Closes the menu                                     |
+| Typing                          | Moves to the item that starts with the typed letter |
 
-**Nom accessible** : Le texte de chaque menu et élément.
+**Accessible name**: The text of each menu and item.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Une barre de menus d'application n'est pas une navigation de site : pour des liens, utiliser `NavigationMenu`.
-- Un seul arrêt de tabulation pour toute la barre : les flèches font le reste.
+- An application menu bar is not site navigation: for links, use `NavigationMenu`.
+- The whole bar is a single tab stop: the arrow keys do the rest.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -282,16 +282,16 @@ export default function Example() {
   return (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>Fichier</MenubarTrigger>
+        <MenubarTrigger>File</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
-            Nouveau <MenubarShortcut>⌘N</MenubarShortcut>
+            New <MenubarShortcut>⌘N</MenubarShortcut>
           </MenubarItem>
           <MenubarItem>
-            Ouvrir <MenubarShortcut>⌘O</MenubarShortcut>
+            Open <MenubarShortcut>⌘O</MenubarShortcut>
           </MenubarItem>
           <MenubarSeparator />
-          <MenubarItem variant="destructive">Supprimer</MenubarItem>
+          <MenubarItem variant="destructive">Delete</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
@@ -299,8 +299,8 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `NavigationMenu` — alternative pour la navigation de site (liens, pas d'actions)
-- `DropdownMenu` — menu contextuel attaché à un bouton unique
-- `ContextMenu` — menu déclenché par clic droit
+- `NavigationMenu` — the alternative for site navigation (links, not actions)
+- `DropdownMenu` — a menu attached to a single button
+- `ContextMenu` — a menu opened by a right-click

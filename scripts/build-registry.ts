@@ -67,7 +67,7 @@ const inventory = (
   }
 ).inventory
 
-/** First paragraph of the `## Rôle` section — the component in one line. */
+/** First paragraph of the `## Role` section — the component in one line. */
 function roleOf(component: string): string | undefined {
   let spec: string
   try {
@@ -75,7 +75,7 @@ function roleOf(component: string): string | undefined {
   } catch {
     return undefined
   }
-  const body = spec.split(/^##\s+R[oô]le\s*$/m)[1]
+  const body = spec.split(/^##\s+Role\s*$/m)[1]
   if (!body) return undefined
   const paragraph = body.split(/\n\s*\n/).find((p) => p.trim().length > 0)
   return paragraph?.trim().replace(/\s+/g, " ")
@@ -285,7 +285,7 @@ const conventions: RegistryItem = {
   type: "registry:item",
   title: "DSAIReadable conventions",
   description:
-    "Les règles du design system pour les agents du projet consommateur (Cursor, Claude Code, Copilot) : adresses du registre, tokens sémantiques seuls, icônes Phosphor, dark mode par classe, accessibilité.",
+    "The design system's rules for the consuming project's agents (Cursor, Claude Code, Copilot): registry addresses, semantic tokens only, Phosphor icons, class-based dark mode, accessibility.",
   files: CONVENTIONS_TARGETS.map((target) => ({
     path: CONVENTIONS_SOURCE,
     type: "registry:file",
@@ -321,7 +321,7 @@ if (missing.length > 0 || phantom.length > 0) {
 const missingDescription = items.filter((i) => !i.description)
 if (missingDescription.length > 0) {
   console.error(
-    `❌ build-registry: no "## Rôle" section found for ${missingDescription
+    `❌ build-registry: no "## Role" section found for ${missingDescription
       .map((i) => i.title)
       .join(", ")}.`
   )

@@ -2,162 +2,162 @@
 
 ## Metadata
 
-| Champ         | Valeur                     |
+| Field         | Value                      |
 | ------------- | -------------------------- |
-| Nom           | Carousel                   |
-| Catégorie     | Data                       |
-| Statut        | stable                     |
+| Name          | Carousel                   |
+| Category      | Data                       |
+| Status        | stable                     |
 | figma_node_id |                            |
 | code_path     | components/ui/carousel.tsx |
 
-## Rôle
+## Role
 
-Conteneur de défilement horizontal ou vertical permettant de naviguer entre des slides via des boutons ou le clavier, basé sur `embla-carousel`.
+A horizontal or vertical scroller that moves between slides with buttons or the keyboard, built on `embla-carousel`.
 
 ## Usage
 
-- Présenter une galerie d'images ou de cartes avec défilement (ex. : produits, témoignages)
-- Afficher un carrousel de contenus promotionnels ou informatifs
-- Naviguer entre des étapes visuelles ou des aperçus de contenu
-- Mettre en avant des éléments dans un espace contraint avec navigation précédent/suivant
-- Proposer un défilement vertical pour des listes de contenu empilées
+- Present a scrolling gallery of images or cards (products, testimonials)
+- Show a carousel of promotional or informational content
+- Step through visual stages or content previews
+- Feature items in a tight space with previous / next navigation
+- Scroll vertically through stacked content
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — porter un contenu critique, qui doit être visible sans interaction → une grille
-- **MUST NOT** — afficher plus d'un `Carousel` par vue : leurs navigations clavier entrent en conflit
-- **MUST NOT** — masquer les boutons précédent et suivant
-- **MUST** — donner au conteneur un `aria-label` descriptif
-- **MUST** — contenir un `CarouselContent` et au moins un `CarouselItem`
-- **MUST** — dans une interface qui n'est pas en anglais, traduire les chaînes de `UI_STRINGS.carousel` (`srLabel` de `CarouselPrevious` et `CarouselNext`)
+- **MUST NOT** — hold critical content that must be visible without interaction → use a grid
+- **MUST NOT** — show more than one `Carousel` per view: their keyboard navigation conflicts
+- **MUST NOT** — hide the previous and next buttons
+- **MUST** — give the container a descriptive `aria-label`
+- **MUST** — contain a `CarouselContent` and at least one `CarouselItem`
+- **MUST** — in an interface that is not in English, translate the `UI_STRINGS.carousel` strings (`srLabel` on `CarouselPrevious` and `CarouselNext`)
 
-## Dépendances
+## Dependencies
 
-- `embla-carousel-react` — moteur de carrousel et types (`UseEmblaCarouselType`)
-- `Button` (`@/components/ui/button`) — boutons de navigation précédent/suivant
-- `CaretLeftIcon`, `CaretRightIcon` (`@phosphor-icons/react`) — icônes de navigation
-- `cn` (`@/lib/utils`) — utilitaire de fusion de classes
+- `embla-carousel-react` — the carousel engine and its types (`UseEmblaCarouselType`)
+- `Button` (`@/components/ui/button`) — the previous / next buttons
+- `CaretLeftIcon`, `CaretRightIcon` (`@phosphor-icons/react`) — navigation icons
+- `cn` (`@/lib/utils`) — the class-merging utility
 
-## Anatomie
+## Anatomy
 
-| Slot                            | Rôle                                                                            |
-| ------------------------------- | ------------------------------------------------------------------------------- |
-| `data-slot="carousel"`          | Racine du composant, porte `role="region"` et `aria-roledescription="carousel"` |
-| `data-slot="carousel-content"`  | Conteneur scrollable des slides (ref `embla`)                                   |
-| `data-slot="carousel-item"`     | Slide individuel, porte `role="group"` et `aria-roledescription="slide"`        |
-| `data-slot="carousel-previous"` | Bouton de navigation vers la slide précédente                                   |
-| `data-slot="carousel-next"`     | Bouton de navigation vers la slide suivante                                     |
+| Slot                            | Role                                                                      |
+| ------------------------------- | ------------------------------------------------------------------------- |
+| `data-slot="carousel"`          | Root; carries `role="region"` and `aria-roledescription="carousel"`       |
+| `data-slot="carousel-content"`  | Scrolling container of the slides (the `embla` ref)                       |
+| `data-slot="carousel-item"`     | A single slide; carries `role="group"` and `aria-roledescription="slide"` |
+| `data-slot="carousel-previous"` | Button that goes to the previous slide                                    |
+| `data-slot="carousel-next"`     | Button that goes to the next slide                                        |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-Aucun token : `components/ui/carousel.tsx` n'emploie aucune classe ni variable qui mène à un token sémantique.
+No token: `components/ui/carousel.tsx` uses no class or variable that leads to a semantic token.
 
-Compose `Button` : les tokens de ce composant sont listés dans sa spec.
+Composes `Button` — its tokens are listed in its own spec.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Carousel`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop          | Type                                           | Défaut         | Description                                                          |
-| ------------- | ---------------------------------------------- | -------------- | -------------------------------------------------------------------- |
-| `opts`        | `CarouselOptions`                              | —              | Options de configuration `embla-carousel` (boucle, alignement, etc.) |
-| `plugins`     | `CarouselPlugin`                               | —              | Plugins `embla-carousel` (autoplay, etc.)                            |
-| `orientation` | `"horizontal" \| "vertical"`                   | `"horizontal"` | Direction du défilement                                              |
-| `setApi`      | `(api: CarouselApi) => void`                   | —              | Callback pour récupérer l'instance API du carrousel                  |
-| `className`   | `string`                                       | —              | Classes CSS additionnelles sur le conteneur racine                   |
-| `children`    | `React.ReactNode`                              | —              | Contenu du carrousel (`CarouselContent`, boutons, etc.)              |
-| `...props`    | `React.ComponentProps<"div"> & CarouselConfig` | —              | Props de `React.Component`                                           |
+| Prop          | Type                                           | Default        | Description                                    |
+| ------------- | ---------------------------------------------- | -------------- | ---------------------------------------------- |
+| `opts`        | `CarouselOptions`                              | —              | `embla-carousel` options (looping, alignment…) |
+| `plugins`     | `CarouselPlugin`                               | —              | `embla-carousel` plugins (autoplay…)           |
+| `orientation` | `"horizontal" \| "vertical"`                   | `"horizontal"` | Scroll direction                               |
+| `setApi`      | `(api: CarouselApi) => void`                   | —              | Receives the carousel's API instance           |
+| `className`   | `string`                                       | —              | Additional CSS classes on the root container   |
+| `children`    | `React.ReactNode`                              | —              | Carousel content (`CarouselContent`, buttons…) |
+| `...props`    | `React.ComponentProps<"div"> & CarouselConfig` | —              | `React.Component` props                        |
 
 ### `CarouselContent`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `CarouselItem`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `CarouselPrevious`
 
-Rend `Button`.
+Renders `Button`.
 
-| Prop        | Type                                                                                 | Défaut                         | Description                                                            |
-| ----------- | ------------------------------------------------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `variant`   | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`        | `"outline"`                    | Variante visuelle du bouton                                            |
-| `size`      | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon-sm"`                    | Taille du bouton                                                       |
-| `srLabel`   | `string`                                                                             | `UI_STRINGS.carousel.previous` | Texte lu par les lecteurs d'écran ; remplace la valeur de `UI_STRINGS` |
-| `className` | `string`                                                                             | —                              | Classes CSS additionnelles                                             |
-| `...props`  | `React.ComponentProps<typeof Button>`                                                | —                              | Props de `Button`                                                      |
+| Prop        | Type                                                                                 | Default                        | Description                                                   |
+| ----------- | ------------------------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------- |
+| `variant`   | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`        | `"outline"`                    | Visual variant of the button                                  |
+| `size`      | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon-sm"`                    | Button size                                                   |
+| `srLabel`   | `string`                                                                             | `UI_STRINGS.carousel.previous` | Text read by screen readers; overrides the `UI_STRINGS` value |
+| `className` | `string`                                                                             | —                              | Additional CSS classes                                        |
+| `...props`  | `React.ComponentProps<typeof Button>`                                                | —                              | `Button` props                                                |
 
 ### `CarouselNext`
 
-Rend `Button`.
+Renders `Button`.
 
-| Prop       | Type                                                                                 | Défaut                     | Description                                                            |
-| ---------- | ------------------------------------------------------------------------------------ | -------------------------- | ---------------------------------------------------------------------- |
-| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`        | `"outline"`                | Prop de `Button`, voir sa spec                                         |
-| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon-sm"`                | Prop de `Button`, voir sa spec                                         |
-| `srLabel`  | `string`                                                                             | `UI_STRINGS.carousel.next` | Texte lu par les lecteurs d'écran ; remplace la valeur de `UI_STRINGS` |
-| `...props` | `React.ComponentProps<typeof Button>`                                                | —                          | Props de `Button`                                                      |
+| Prop       | Type                                                                                 | Default                    | Description                                                   |
+| ---------- | ------------------------------------------------------------------------------------ | -------------------------- | ------------------------------------------------------------- |
+| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`        | `"outline"`                | `Button` prop — see its spec                                  |
+| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon-sm"`                | `Button` prop — see its spec                                  |
+| `srLabel`  | `string`                                                                             | `UI_STRINGS.carousel.next` | Text read by screen readers; overrides the `UI_STRINGS` value |
+| `...props` | `React.ComponentProps<typeof Button>`                                                | —                          | `Button` props                                                |
 
 ### `useCarousel()`
 
-Retourne `CarouselContextProps`.
+Returns `CarouselContextProps`.
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                     |
-| -------- | ------------------------------------------------------------------------------- |
-| default  | Première slide visible, boutons de navigation affichés selon la position        |
-| hover    | Boutons de navigation réagissent au survol (via variante `outline` du `Button`) |
-| focus    | Navigation clavier via `ArrowLeft` / `ArrowRight` pour changer de slide         |
-| active   | Slide courante visible dans le viewport du carrousel                            |
-| disabled | Bouton précédent/suivant désactivé quand la limite de défilement est atteinte   |
+| State    | Description                                                                  |
+| -------- | ---------------------------------------------------------------------------- |
+| default  | First slide visible; navigation buttons shown according to the position      |
+| hover    | Navigation buttons react on hover (through the `Button`'s `outline` variant) |
+| focus    | `ArrowLeft` / `ArrowRight` change slides from the keyboard                   |
+| active   | The current slide is visible in the carousel's viewport                      |
+| disabled | The previous / next button is disabled once the scroll limit is reached      |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Carousel](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/) (Embla)
+**Pattern**: [Carousel](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/) (Embla)
 
-**Rôle** : `role="region"` avec `aria-roledescription="carousel"` ; chaque diapositive `role="group"` avec `aria-roledescription="slide"`.
+**Role**: `role="region"` with `aria-roledescription="carousel"`; each slide is a `role="group"` with `aria-roledescription="slide"`.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                     | Action                                                                  |
-| -------------------------- | ----------------------------------------------------------------------- |
-| `ArrowLeft` / `ArrowRight` | Diapositive précédente / suivante, quand le focus est dans le carrousel |
-| `Tab`                      | Atteint les boutons précédent / suivant et le contenu des diapositives  |
+| Key                        | Action                                                      |
+| -------------------------- | ----------------------------------------------------------- |
+| `ArrowLeft` / `ArrowRight` | Previous / next slide, while focus is inside the carousel   |
+| `Tab`                      | Reaches the previous / next buttons and the slides' content |
 
-**Nom accessible** : Les boutons précédent / suivant sont nommés par `UI_STRINGS.carousel.previous` / `.next`. Donner un `aria-label` au carrousel lui-même (« Produits similaires »).
+**Accessible name**: The previous / next buttons are named by `UI_STRINGS.carousel.previous` / `.next`. Give the carousel itself an `aria-label` ("Similar products").
 
-**Vigilance** :
+**Pitfalls**:
 
-- Pas de défilement automatique sans bouton pause : un contenu qui bouge seul plus de 5 s doit pouvoir être arrêté (WCAG 2.2.2).
-- Le contenu des diapositives hors écran reste atteignable au clavier : vérifier que l'ordre de tabulation reste compréhensible.
+- No auto-rotation without a pause button: content that moves on its own for more than 5 s must be stoppable (WCAG 2.2.2).
+- The content of off-screen slides stays reachable from the keyboard: make sure the tab order still makes sense.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -170,7 +170,7 @@ import {
 
 export default function Example() {
   return (
-    <Carousel className="w-full max-w-xs">
+    <Carousel className="w-full max-w-xs" aria-label="Featured products">
       <CarouselContent>
         <CarouselItem>Slide 1</CarouselItem>
         <CarouselItem>Slide 2</CarouselItem>
@@ -183,8 +183,8 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Card` — contenu fréquent à l'intérieur des slides
-- `Button` — utilisé pour les contrôles de navigation
-- `AspectRatio` — utile pour maintenir les proportions d'images dans les slides
+- `Card` — frequent content inside the slides
+- `Button` — used for the navigation controls
+- `AspectRatio` — keeps the images in the slides in proportion

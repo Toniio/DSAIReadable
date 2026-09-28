@@ -2,41 +2,40 @@
 
 > Source: `lib/focus.ts` · Token: `space.focus-ring-width` · CSS variable: `--space-focus-ring-width` · Linter: `npm run tokens:lint-focus`
 
-Un seul anneau de focus, une seule largeur, une seule source. Tout élément
-focalisable du système affiche le même indicateur : un anneau de **2px** en
-`ring/50`, doublé d'un changement de couleur de bordure. Aucun composant ne
-décrit son focus lui-même.
+One focus ring, one width, one source. Every focusable element in the system
+shows the same indicator: a **2px** ring in `ring/50`, paired with a change of
+border color. No component describes its own focus.
 
 ---
 
-## Le problème que cette fondation résout
+## The problem this foundation solves
 
-Avant sa mise en place, le dépôt comptait **16 patterns de focus distincts sur
-30 sites**, répartis sur 21 composants — trois largeurs différentes (`ring-1`,
-`ring-2`, `ring-3`), deux mécanismes de reset (`outline-none`, `outline-hidden`)
-et plusieurs combinaisons de couleurs.
+Before it existed, the repository held **16 different focus patterns across 30
+sites**, spread over 21 components — three different widths (`ring-1`,
+`ring-2`, `ring-3`), two reset mechanisms (`outline-none`, `outline-hidden`)
+and several color combinations.
 
-Plus grave : la classe `ring-focus`, utilisée par **Toggle, ScrollArea et
-Calendar**, n'a jamais existé. `--ring-*` n'est pas un namespace de thème
-Tailwind v4 : la déclaration `--ring-focus` dans `@theme inline` créait une
-custom property et rien d'autre. Aucune règle CSS n'était émise. Ces trois
-composants étaient livrés **sans aucun indicateur de focus visible** —
-échec de [WCAG 2.2 SC 2.4.7 (Focus Visible), niveau A](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible).
+Worse: the `ring-focus` class, used by **Toggle, ScrollArea and Calendar**,
+never existed. `--ring-*` is not a Tailwind v4 theme namespace: declaring
+`--ring-focus` in `@theme inline` created a custom property and nothing else.
+No CSS rule was emitted. Those three components shipped **with no visible focus
+indicator at all** — a failure of
+[WCAG 2.2 SC 2.4.7 (Focus Visible), level A](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible).
 
-Rien n'échouait : ni le build, ni le typecheck, ni le lint du bridge, qui
-validait `--ring-focus` parce que sa _référence_ résolvait. Une référence qui
-résout n'est pas une utilitaire qui existe.
+Nothing failed: not the build, not the typecheck, not the bridge lint, which
+accepted `--ring-focus` because its _reference_ resolved. A reference that
+resolves is not a utility that exists.
 
 ---
 
-## Le token
+## The token
 
-| Token                    | CSS Variable               | Valeur | Pourquoi                                                                                                                                                         |
-| ------------------------ | -------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `space.focus-ring-width` | `--space-focus-ring-width` | `2px`  | Compromis entre les `3px` initiaux, inhabituellement épais, et le `1px` majoritairement employé dans le code, trop fin pour rester perceptible sur un fond clair |
+| Token                    | CSS Variable               | Value | Why                                                                                                                                              |
+| ------------------------ | -------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `space.focus-ring-width` | `--space-focus-ring-width` | `2px` | A middle ground between the original `3px`, unusually thick, and the `1px` used most in the code, too thin to stay visible on a light background |
 
-La syntaxe Tailwind v4 qui lit un token comme longueur d'anneau est
-`ring-(length:--nom-du-token)`. Elle compile bien :
+The Tailwind v4 syntax that reads a token as a ring length is
+`ring-(length:--token-name)`. It compiles as expected:
 
 ```css
 .focus-visible\:ring-\(length\:--space-focus-ring-width\):focus-visible {
@@ -49,17 +48,18 @@ La syntaxe Tailwind v4 qui lit un token comme longueur d'anneau est
 
 ---
 
-## Les presets
+## The presets
 
-Tous exportés par `lib/focus.ts`. Un composant importe, il ne recompose pas.
+All exported by `lib/focus.ts`. A component imports them; it does not rebuild
+them.
 
-| Constante                | Quand                                                                                                                   |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `FOCUS_RING`             | Cas général. Bordure + anneau + couleur. **Le défaut de tout élément focalisable.**                                     |
-| `FOCUS_RING_WIDTH`       | L'épaisseur seule, quand l'élément fournit sa propre couleur d'anneau — c'est le cas de Sidebar via `ring-sidebar-ring` |
-| `FOCUS_RING_DESTRUCTIVE` | Surcharge de couleur pour un état destructif ou invalide. Se compose **après** `FOCUS_RING`                             |
-| `FOCUS_RING_WITHIN`      | Le même anneau, déclenché par le focus d'un descendant — InputGroup, Combobox                                           |
-| `FOCUS_OUTLINE_RESET`    | Neutralise l'outline natif. **Toujours à la place de `outline-none`**                                                   |
+| Constant                 | When                                                                                                     |
+| ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `FOCUS_RING`             | The general case. Border, ring and color. **The default for every focusable element.**                   |
+| `FOCUS_RING_WIDTH`       | The width alone, when the element supplies its own ring color — as Sidebar does with `ring-sidebar-ring` |
+| `FOCUS_RING_DESTRUCTIVE` | A color override for a destructive or invalid state. Composed **after** `FOCUS_RING`                     |
+| `FOCUS_RING_WITHIN`      | The same ring, triggered by the focus of a descendant — InputGroup, Combobox                             |
+| `FOCUS_OUTLINE_RESET`    | Neutralizes the native outline. **Always instead of `outline-none`**                                     |
 
 ```tsx
 import { FOCUS_RING, FOCUS_OUTLINE_RESET } from "@/lib/focus"
@@ -74,63 +74,63 @@ const buttonVariants = cva(
 
 ## Usage Rules
 
-1. **Jamais de largeur d'anneau en dur sur un état de focus** — `ring-1`,
-   `ring-2`, `ring-3` sont des pixels, interdits par la première règle du dépôt.
-   Le linter les refuse sur tout préfixe `focus`, `focus-visible`,
-   `focus-within`, `data-[active=true]`, `data-[focused=true]` et `aria-invalid`.
-2. **Jamais `outline-none`** — utiliser `FOCUS_OUTLINE_RESET` (`outline-hidden`).
-   En mode contrastes forcés, les `box-shadow` ne sont pas peints : `outline-none`
-   laisse l'élément sans aucun indicateur, là où `outline-hidden` conserve un
-   outline transparent que le mode rend visible. `outline-none` empoisonne de
-   surcroît `--tw-outline-style`, ce qui désactivait silencieusement les
-   `outline-1` de ScrollArea et NavigationMenu.
-3. **L'anneau d'état invalide suit la largeur de l'anneau de focus** — les deux
-   peuvent s'appliquer simultanément sur un champ à la fois invalide et focalisé.
-   Deux largeurs différentes produisent un rendu qui dépend de l'ordre des
-   utilitaires dans la feuille compilée.
-4. **`ring-0` est une suppression légitime** — c'est ainsi qu'un wrapper comme
-   InputGroup reprend à son compte l'indicateur de son contrôle interne.
-5. **Masquer l'outline oblige à dessiner un anneau — vérifié occurrence par
-   occurrence.** L'anneau doit figurer dans la _même_ chaîne de classes. Un
-   composant qui neutralise l'outline à dix endroits et dessine un anneau à un
-   seul ne satisfait pas la règle.
+1. **Never hard-code a ring width on a focus state** — `ring-1`, `ring-2` and
+   `ring-3` are pixels, forbidden by the repository's first rule. The linter
+   rejects them under any `focus`, `focus-visible`, `focus-within`,
+   `data-[active=true]`, `data-[focused=true]` or `aria-invalid` prefix.
+2. **Never `outline-none`** — use `FOCUS_OUTLINE_RESET` (`outline-hidden`). In
+   forced-colors mode, `box-shadow`s are not painted: `outline-none` leaves the
+   element with no indicator at all, whereas `outline-hidden` keeps a
+   transparent outline that the mode makes visible. On top of that,
+   `outline-none` poisons `--tw-outline-style`, which silently disabled the
+   `outline-1` of ScrollArea and NavigationMenu.
+3. **The invalid-state ring follows the focus ring's width** — both can apply at
+   once on a field that is invalid and focused. Two different widths give a
+   result that depends on the order of the utilities in the compiled stylesheet.
+4. **`ring-0` is a legitimate removal** — it is how a wrapper such as
+   InputGroup takes over the indicator of its inner control.
+5. **Hiding the outline requires drawing a ring — checked occurrence by
+   occurrence.** The ring must appear in the _same_ class string. A component
+   that neutralizes the outline in ten places and draws a ring in one does not
+   meet the rule.
 
-   Trois mécanismes de remplacement sont admis, chacun déclaré par un
-   commentaire `// focus-managed: <mécanisme>` que le linter exige non vide :
+   Three replacement mechanisms are allowed, each declared by a
+   `// focus-managed: <mechanism>` comment, which the linter requires to be
+   non-empty:
 
-   | Mécanisme                                                                                                                          | Composants                                                                           |
-   | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-   | Focus roving : Radix déplace le tabindex et marque l'item courant par `focus:bg-accent` ou `data-highlighted:bg-accent`            | DropdownMenu, ContextMenu, Menubar, Select, Command, Combobox                        |
-   | Anneau dessiné par le wrapper : le contrôle est dans un InputGroup qui porte `has-[[data-slot=input-group-control]:focus-visible]` | CommandInput, ComboboxInput                                                          |
-   | Surface focalisée programmatiquement : Radix monte l'overlay avec `tabIndex={-1}` puis passe le focus à un contrôle interne        | Dialog, AlertDialog, Popover, HoverCard, DropdownMenu, ContextMenu, Menubar, Command |
+   | Mechanism                                                                                                                       | Components                                                                           |
+   | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+   | Roving focus: Radix moves the tabindex and marks the current item with `focus:bg-accent` or `data-highlighted:bg-accent`        | DropdownMenu, ContextMenu, Menubar, Select, Command, Combobox                        |
+   | Ring drawn by the wrapper: the control sits in an InputGroup that carries `has-[[data-slot=input-group-control]:focus-visible]` | CommandInput, ComboboxInput                                                          |
+   | Programmatically focused surface: Radix mounts the overlay with `tabIndex={-1}`, then moves focus to a control inside it        | Dialog, AlertDialog, Popover, HoverCard, DropdownMenu, ContextMenu, Menubar, Command |
 
-   Ces mécanismes signalent le focus **par la couleur seule**. Ils restent
-   acceptables parce que le focus y est toujours accompagné d'un déplacement
-   visible dans une liste, mais ils ne conviennent pas à un contrôle isolé.
-
----
-
-## Contraste
-
-L'anneau est vérifié par `npm run tokens:lint-contrast` contre le seuil WCAG 2.2
-SC 1.4.11 de **3:1** pour un composant d'interface, dans les deux modes :
-
-| Paire                                       | Clair | Sombre |
-| ------------------------------------------- | ----- | ------ |
-| anneau de focus sur surface par défaut      | 4.61  | 4.28   |
-| anneau de focus sur surface atténuée        | 4.14  | 3.21   |
-| anneau de focus sidebar sur surface sidebar | 4.44  | 3.77   |
+   These mechanisms signal focus **through color alone**. They remain
+   acceptable because focus always comes with visible movement through a list,
+   but they are not suitable for a standalone control.
 
 ---
 
-## Garde-fou
+## Contrast
 
-`scripts/lint-focus-ring.ts`, branché dans `npm run tokens-validate` et dans la
-CI. Quatre règles, chacune correspondant à un bug réellement livré :
+`npm run tokens:lint-contrast` checks the ring against the WCAG 2.2 SC 1.4.11
+threshold of **3:1** for a user-interface component, in both modes:
 
-| Règle          | Ce qu'elle bloque                                                                                        |
-| -------------- | -------------------------------------------------------------------------------------------------------- |
-| `dead-class`   | `ring-focus`, la classe qui n'a jamais existé                                                            |
-| `raw-width`    | une largeur d'anneau de focus en pixels                                                                  |
-| `outline-none` | le reset qui efface l'indicateur en contrastes forcés                                                    |
-| `no-indicator` | une chaîne de classes qui masque l'outline sans rien dessiner à la place, ni déclarer ce qui s'en charge |
+| Pair                                      | Light | Dark |
+| ----------------------------------------- | ----- | ---- |
+| focus ring on the default surface         | 4.61  | 4.28 |
+| focus ring on the subtle surface          | 4.14  | 3.21 |
+| sidebar focus ring on the sidebar surface | 4.44  | 3.77 |
+
+---
+
+## Guard
+
+`scripts/lint-focus-ring.ts`, wired into `npm run tokens-validate` and CI. Four
+rules, each matching a bug that actually shipped:
+
+| Rule           | What it blocks                                                                                      |
+| -------------- | --------------------------------------------------------------------------------------------------- |
+| `dead-class`   | `ring-focus`, the class that never existed                                                          |
+| `raw-width`    | a focus ring width in pixels                                                                        |
+| `outline-none` | the reset that erases the indicator in forced-colors mode                                           |
+| `no-indicator` | a class string that hides the outline without drawing anything in its place, or declaring what does |

@@ -2,155 +2,155 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
-> ⚠️ **Note critique :** Ce projet utilise **JetBrains Mono** (`typography.font-family.mono`) comme police **par défaut** sur `<html>` via `@apply font-mono`. Geist Sans est disponible mais secondaire.
+> ⚠️ **Key point:** this project uses **JetBrains Mono** (`typography.font-family.mono`) as the **default** typeface on `<html>`, through `@apply font-mono`. Geist Sans is available but secondary.
 >
-> **Qui décide de la police :** `next/font`, dans `app/layout.tsx`, qui l'auto-héberge et ajuste ses métriques de repli. Les tokens `typography.font-family.*` **décrivent** ce choix, ils ne le pilotent pas : `font-mono` et `font-sans` lisent `--font-mono` et `--font-sans`, posées par `next/font`. `npm run tokens:lint-fonts` vérifie que chaque token nomme la famille chargée sous sa variable. Changer de police, c'est changer le chargeur dans `layout.tsx` **et** le token.
+> **Who picks the typeface:** `next/font`, in `app/layout.tsx`, which self-hosts it and adjusts its fallback metrics. The `typography.font-family.*` tokens **describe** that choice; they do not drive it: `font-mono` and `font-sans` read `--font-mono` and `--font-sans`, which `next/font` sets. `npm run tokens:lint-fonts` checks that each token names the family loaded under its variable. Changing the typeface means changing the loader in `layout.tsx` **and** the token.
 
 ---
 
 ## Font Families
 
-| Token                         | CSS Variable                    | Famille        | Tailwind Class | Usage                                                             |
-| ----------------------------- | ------------------------------- | -------------- | -------------- | ----------------------------------------------------------------- |
-| `typography.font-family.mono` | `--typography-font-family-mono` | JetBrains Mono | `font-mono`    | **Police par défaut** de l'application — tout le texte UI         |
-| `typography.font-family.sans` | `--typography-font-family-sans` | Geist Sans     | `font-sans`    | Touches `Kbd` et contenu éditorial long ; jamais pour l'interface |
+| Token                         | CSS Variable                    | Family         | Tailwind Class | Usage                                                          |
+| ----------------------------- | ------------------------------- | -------------- | -------------- | -------------------------------------------------------------- |
+| `typography.font-family.mono` | `--typography-font-family-mono` | JetBrains Mono | `font-mono`    | **The application's default typeface** — all UI text           |
+| `typography.font-family.sans` | `--typography-font-family-sans` | Geist Sans     | `font-sans`    | `Kbd` keys and long editorial content; never for the interface |
 
 ```css
-/* Appliqué dans globals.css — @layer base */
+/* Applied in globals.css — @layer base */
 html {
   @apply font-mono;
 }
 ```
 
-> **Do :** Utiliser `font-mono` partout sauf décision explicite contraire.  
-> **Don't :** Ne pas surcharger `font-sans` sur les composants UI standard — cela crée une incohérence visuelle.
+> **Do:** use `font-mono` everywhere, unless an explicit decision says otherwise.  
+> **Don't:** do not force `font-sans` on standard UI components — it breaks visual consistency.
 
 ---
 
 ## Type Scale (Sizes)
 
-| Token                  | CSS Variable             | Valeur rem | Valeur px | Tailwind Class | Usage                                           |
-| ---------------------- | ------------------------ | ---------- | --------- | -------------- | ----------------------------------------------- |
-| `typography.size.xs`   | `--typography-size-xs`   | `0.75rem`  | 12 px     | `text-xs`      | Labels, badges, légendes de graphiques          |
-| `typography.size.sm`   | `--typography-size-sm`   | `0.875rem` | 14 px     | `text-sm`      | Texte secondaire, labels de champs, helper text |
-| `typography.size.base` | `--typography-size-base` | `1rem`     | 16 px     | `text-base`    | Corps de texte principal                        |
-| `typography.size.lg`   | `--typography-size-lg`   | `1.125rem` | 18 px     | `text-lg`      | Corps de texte mis en avant, intro              |
-| `typography.size.xl`   | `--typography-size-xl`   | `1.25rem`  | 20 px     | `text-xl`      | Titres de sections (h3, h4)                     |
-| `typography.size.2xl`  | `--typography-size-2xl`  | `1.5rem`   | 24 px     | `text-2xl`     | Titres de page (h2)                             |
-| `typography.size.3xl`  | `--typography-size-3xl`  | `1.875rem` | 30 px     | `text-3xl`     | Titres héros (h1)                               |
-| `typography.size.4xl`  | `--typography-size-4xl`  | `2.25rem`  | 36 px     | `text-4xl`     | Titres display — usage rare                     |
+| Token                  | CSS Variable             | rem value  | px value | Tailwind Class | Usage                                     |
+| ---------------------- | ------------------------ | ---------- | -------- | -------------- | ----------------------------------------- |
+| `typography.size.xs`   | `--typography-size-xs`   | `0.75rem`  | 12 px    | `text-xs`      | Labels, badges, chart legends             |
+| `typography.size.sm`   | `--typography-size-sm`   | `0.875rem` | 14 px    | `text-sm`      | Secondary text, field labels, helper text |
+| `typography.size.base` | `--typography-size-base` | `1rem`     | 16 px    | `text-base`    | Main body text                            |
+| `typography.size.lg`   | `--typography-size-lg`   | `1.125rem` | 18 px    | `text-lg`      | Emphasized body text, introductions       |
+| `typography.size.xl`   | `--typography-size-xl`   | `1.25rem`  | 20 px    | `text-xl`      | Section headings (h3, h4)                 |
+| `typography.size.2xl`  | `--typography-size-2xl`  | `1.5rem`   | 24 px    | `text-2xl`     | Page headings (h2)                        |
+| `typography.size.3xl`  | `--typography-size-3xl`  | `1.875rem` | 30 px    | `text-3xl`     | Hero headings (h1)                        |
+| `typography.size.4xl`  | `--typography-size-4xl`  | `2.25rem`  | 36 px    | `text-4xl`     | Display headings — rare                   |
 
 ---
 
 ## Line Heights
 
-| Token                            | CSS Variable                       | Valeur  | Tailwind Class    | Usage                                   |
-| -------------------------------- | ---------------------------------- | ------- | ----------------- | --------------------------------------- |
-| `typography.line-height.tight`   | `--typography-line-height-tight`   | `1.25`  | `leading-tight`   | Headings — textes courts sur 1-2 lignes |
-| `typography.line-height.snug`    | `--typography-line-height-snug`    | `1.375` | `leading-snug`    | Sous-titres, labels multilignes         |
-| `typography.line-height.normal`  | `--typography-line-height-normal`  | `1.5`   | `leading-normal`  | Corps de texte par défaut               |
-| `typography.line-height.relaxed` | `--typography-line-height-relaxed` | `1.625` | `leading-relaxed` | Texte long-form, articles               |
-| `typography.line-height.loose`   | `--typography-line-height-loose`   | `2`     | `leading-loose`   | Texte très aéré — usage très rare       |
+| Token                            | CSS Variable                       | Value   | Tailwind Class    | Usage                                 |
+| -------------------------------- | ---------------------------------- | ------- | ----------------- | ------------------------------------- |
+| `typography.line-height.tight`   | `--typography-line-height-tight`   | `1.25`  | `leading-tight`   | Headings — short text on 1 or 2 lines |
+| `typography.line-height.snug`    | `--typography-line-height-snug`    | `1.375` | `leading-snug`    | Subheadings, multi-line labels        |
+| `typography.line-height.normal`  | `--typography-line-height-normal`  | `1.5`   | `leading-normal`  | Default body text                     |
+| `typography.line-height.relaxed` | `--typography-line-height-relaxed` | `1.625` | `leading-relaxed` | Long-form text, articles              |
+| `typography.line-height.loose`   | `--typography-line-height-loose`   | `2`     | `leading-loose`   | Very airy text — seldom used          |
 
 ---
 
 ## Letter Spacings
 
-| Token                              | CSS Variable                         | Valeur     | Tailwind Class    | Usage                                             |
-| ---------------------------------- | ------------------------------------ | ---------- | ----------------- | ------------------------------------------------- |
-| `typography.letter-spacing.tight`  | `--typography-letter-spacing-tight`  | `-0.025em` | `tracking-tight`  | Grands headings (3xl, 4xl) — resserre les lettres |
-| `typography.letter-spacing.normal` | `--typography-letter-spacing-normal` | `0em`      | `tracking-normal` | Texte courant — valeur par défaut                 |
-| `typography.letter-spacing.wide`   | `--typography-letter-spacing-wide`   | `0.025em`  | `tracking-wide`   | Labels UI petits (xs, sm)                         |
-| `typography.letter-spacing.wider`  | `--typography-letter-spacing-wider`  | `0.05em`   | `tracking-wider`  | Texte en capitales, overlines                     |
+| Token                              | CSS Variable                         | Value      | Tailwind Class    | Usage                                            |
+| ---------------------------------- | ------------------------------------ | ---------- | ----------------- | ------------------------------------------------ |
+| `typography.letter-spacing.tight`  | `--typography-letter-spacing-tight`  | `-0.025em` | `tracking-tight`  | Large headings (3xl, 4xl) — tightens the letters |
+| `typography.letter-spacing.normal` | `--typography-letter-spacing-normal` | `0em`      | `tracking-normal` | Running text — the default                       |
+| `typography.letter-spacing.wide`   | `--typography-letter-spacing-wide`   | `0.025em`  | `tracking-wide`   | Small UI labels (xs, sm)                         |
+| `typography.letter-spacing.wider`  | `--typography-letter-spacing-wider`  | `0.05em`   | `tracking-wider`  | All-caps text, overlines                         |
 
 ---
 
 ## Font Weights
 
-| Token                             | CSS Variable                        | Valeur | Tailwind Class  | Usage                                      |
-| --------------------------------- | ----------------------------------- | ------ | --------------- | ------------------------------------------ |
-| `typography.font-weight.normal`   | `--typography-font-weight-normal`   | `400`  | `font-normal`   | Corps de texte standard                    |
-| `typography.font-weight.medium`   | `--typography-font-weight-medium`   | `500`  | `font-medium`   | Labels UI, boutons, éléments de navigation |
-| `typography.font-weight.semibold` | `--typography-font-weight-semibold` | `600`  | `font-semibold` | Sous-titres, emphasis dans l'UI            |
-| `typography.font-weight.bold`     | `--typography-font-weight-bold`     | `700`  | `font-bold`     | Titres principaux, forte emphase           |
+| Token                             | CSS Variable                        | Value | Tailwind Class  | Usage                                |
+| --------------------------------- | ----------------------------------- | ----- | --------------- | ------------------------------------ |
+| `typography.font-weight.normal`   | `--typography-font-weight-normal`   | `400` | `font-normal`   | Standard body text                   |
+| `typography.font-weight.medium`   | `--typography-font-weight-medium`   | `500` | `font-medium`   | UI labels, buttons, navigation items |
+| `typography.font-weight.semibold` | `--typography-font-weight-semibold` | `600` | `font-semibold` | Subheadings, emphasis in the UI      |
+| `typography.font-weight.bold`     | `--typography-font-weight-bold`     | `700` | `font-bold`     | Main headings, strong emphasis       |
 
 ---
 
-## Type Scale — Combinaisons recommandées
+## Type Scale — suggested combinations
 
-Ces combinaisons définissent les styles typographiques canoniques du design system.
+These combinations define the design system's canonical text styles.
 
-### Body — Corps de texte
+### Body — body text
 
 ```tsx
 <p className="text-base leading-normal font-normal text-foreground">
-  Texte principal de l'application.
+  The application's main text.
 </p>
 ```
 
 `size: base (16px)` · `lineHeight: normal (1.5)` · `weight: normal (400)`
 
-### Body Small — Texte secondaire
+### Body Small — secondary text
 
 ```tsx
 <p className="text-sm leading-normal font-normal text-muted-foreground">
-  Texte d'aide ou métadonnée.
+  Help text or metadata.
 </p>
 ```
 
 `size: sm (14px)` · `lineHeight: normal (1.5)` · `weight: normal (400)`
 
-### Label — Label de champ ou bouton
+### Label — field or button label
 
 ```tsx
 <label className="text-sm leading-snug font-medium tracking-wide text-foreground">
-  Nom du champ
+  Field name
 </label>
 ```
 
 `size: sm (14px)` · `lineHeight: snug (1.375)` · `weight: medium (500)` · `tracking: wide`
 
-### Heading 1 — Titre de page
+### Heading 1 — page title
 
 ```tsx
 <h1 className="text-3xl leading-tight font-bold tracking-tight text-foreground">
-  Titre principal
+  Main title
 </h1>
 ```
 
 `size: 3xl (30px)` · `lineHeight: tight (1.25)` · `weight: bold (700)` · `tracking: tight`
 
-### Heading 2 — Titre de section
+### Heading 2 — section title
 
 ```tsx
 <h2 className="text-2xl leading-tight font-semibold text-foreground">
-  Titre de section
+  Section title
 </h2>
 ```
 
 `size: 2xl (24px)` · `lineHeight: tight (1.25)` · `weight: semibold (600)`
 
-### Heading 3 — Sous-section
+### Heading 3 — subsection
 
 ```tsx
 <h3 className="text-xl leading-snug font-semibold text-foreground">
-  Sous-section
+  Subsection
 </h3>
 ```
 
 `size: xl (20px)` · `lineHeight: snug (1.375)` · `weight: semibold (600)`
 
-### Caption — Légende, annotation
+### Caption — caption, annotation
 
 ```tsx
 <span className="text-xs leading-normal font-normal tracking-wide text-muted-foreground">
-  Légende ou note de bas de page
+  Caption or footnote
 </span>
 ```
 
 `size: xs (12px)` · `lineHeight: normal (1.5)` · `weight: normal (400)` · `tracking: wide`
 
-### Code — Blocs et inline code
+### Code — code blocks and inline code
 
 ```tsx
 <code className="font-mono text-sm leading-relaxed text-foreground">
@@ -160,9 +160,9 @@ Ces combinaisons définissent les styles typographiques canoniques du design sys
 
 `size: sm (14px)` · `lineHeight: relaxed (1.625)` · `family: mono` · `weight: normal (400)`
 
-> Note : Le projet utilise déjà `font-mono` sur `<html>`, donc les blocs de code ne nécessitent pas de classe supplémentaire de famille.
+> Note: the project already sets `font-mono` on `<html>`, so code blocks need no extra family class.
 
-### Display — Grand titre héros
+### Display — large hero title
 
 ```tsx
 <h1 className="text-4xl leading-tight font-bold tracking-tight text-foreground">
@@ -176,8 +176,8 @@ Ces combinaisons définissent les styles typographiques canoniques du design sys
 
 ## Usage Rules
 
-1. **JetBrains Mono est la police par défaut** — ne jamais surcharger `font-family` sur les composants UI standard sans validation design.
-2. **Toujours coupler `size` et `lineHeight`** — un heading sans `leading-tight` paraît trop aéré ; du corps sans `leading-normal` est illisible.
-3. **`tracking-tight` uniquement à partir de `text-3xl`** — sur du texte petit, l'espacement négatif nuit à la lisibilité.
-4. **`tracking-wider` réservé au tout-capitales** — ne jamais l'utiliser sur du texte minuscule normal.
-5. **Hiérarchie de poids stricte** — `normal` → corps, `medium` → labels/nav, `semibold` → sous-titres, `bold` → titres principaux. Ne pas sauter de niveaux.
+1. **JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.
+2. **Always pair `size` with `lineHeight`** — a heading without `leading-tight` looks too loose; body text without `leading-normal` is hard to read.
+3. **`tracking-tight` only from `text-3xl` up** — on small text, negative spacing hurts readability.
+4. **`tracking-wider` is for all-caps only** — never use it on regular lowercase text.
+5. **A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels.

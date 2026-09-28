@@ -2,71 +2,71 @@
 
 ## Metadata
 
-| Champ         | Valeur                     |
+| Field         | Value                      |
 | ------------- | -------------------------- |
-| Nom           | Combobox                   |
-| Catégorie     | Forms                      |
-| Statut        | stable                     |
+| Name          | Combobox                   |
+| Category      | Forms                      |
+| Status        | stable                     |
 | figma_node_id |                            |
 | code_path     | components/ui/combobox.tsx |
 
-## Rôle
+## Role
 
-Champ de saisie avec auto-complétion et sélection parmi une liste d'options filtrable, supportant la sélection simple et multiple (chips).
+A text input with autocomplete that picks from a filterable list of options; supports single and multiple selection (chips).
 
 ## Usage
 
-- Sélectionner une valeur parmi une longue liste (ex. : pays, villes)
-- Recherche et filtrage en temps réel dans un jeu de données
-- Sélection multiple avec affichage sous forme de chips
-- Remplacement d'un `<select>` natif lorsqu'une recherche est nécessaire
-- Formulaires nécessitant une saisie assistée (auto-complétion)
+- Pick a value from a long list (countries, cities)
+- Search and filter a data set as the user types
+- Select several values, shown as chips
+- Replace a native `<select>` when search is needed
+- Forms that benefit from assisted input (autocomplete)
 
-<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-20: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+- **Choice** (`rule-20`) — Pick the selection control from the number of options and the screen width. One value out of 2 to 5 options: `RadioGroup`, with every option visible. Out of 6 to 15: `Select` from `md` up; below `md`, `NativeSelect`, **unless** the options need rich rendering (icons, descriptions) → `Select`. More than 15 options, or search required: `Combobox`. Several values: `Checkbox` up to 5 options, `Combobox` in multiple mode beyond that. An on/off toggle that takes effect immediately: `Switch`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir pour 15 options ou moins sans recherche → `RadioGroup` jusqu'à 5, `Select` ou `NativeSelect` de 6 à 15 (`rule-20`)
-- **MUST** — rendre un `ComboboxEmpty` pour le cas « aucun résultat »
-- **MUST** — en multi-sélection, fournir un `anchor` (`useComboboxAnchor`) pour positionner le popup sous les chips
-- **MUST** — donner à chaque `ComboboxItem` une valeur unique
-- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
-- **MUST** — dans une interface qui n'est pas en anglais, traduire le nom accessible des trois boutons icon-only (trigger, clear, remove de chip) via `triggerLabel`, `clearLabel` et `removeLabel` : il est en anglais par défaut
+- **MUST NOT** — be used for 15 options or fewer without search → `RadioGroup` up to 5, `Select` or `NativeSelect` from 6 to 15 (`rule-20`)
+- **MUST** — render a `ComboboxEmpty` for the "no results" case
+- **MUST** — in multiple selection, provide an `anchor` (`useComboboxAnchor`) so the popup opens below the chips
+- **MUST** — give each `ComboboxItem` a unique value
+- **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
+- **MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they are in English by default
 
-## Dépendances
+## Dependencies
 
-- `@base-ui/react` — `Combobox` primitive (Root, Value, Trigger, Clear, Input, Popup, Positioner, Portal, List, Item, ItemIndicator, Group, GroupLabel, Collection, Empty, Separator, Chips, Chip, ChipRemove)
-- `InputGroup`, `InputGroupAddon`, `InputGroupButton`, `InputGroupInput` de `@/components/ui/input-group`
-- `Button` de `@/components/ui/button`
+- `@base-ui/react` — the `Combobox` primitive (Root, Value, Trigger, Clear, Input, Popup, Positioner, Portal, List, Item, ItemIndicator, Group, GroupLabel, Collection, Empty, Separator, Chips, Chip, ChipRemove)
+- `InputGroup`, `InputGroupAddon`, `InputGroupButton`, `InputGroupInput` from `@/components/ui/input-group`
+- `Button` from `@/components/ui/button`
 - `@phosphor-icons/react` — `CaretDownIcon`, `XIcon`, `CheckIcon`
 
-## Anatomie
+## Anatomy
 
-| Slot                               | Rôle                                       |
-| ---------------------------------- | ------------------------------------------ |
-| `data-slot="combobox-value"`       | Affiche la valeur sélectionnée             |
-| `data-slot="combobox-trigger"`     | Bouton déclencheur d'ouverture du popup    |
-| `data-slot="combobox-clear"`       | Bouton de réinitialisation de la sélection |
-| `data-slot="combobox-content"`     | Conteneur popup des options                |
-| `data-slot="combobox-list"`        | Liste scrollable des options               |
-| `data-slot="combobox-item"`        | Option individuelle                        |
-| `data-slot="combobox-group"`       | Groupe logique d'options                   |
-| `data-slot="combobox-label"`       | Label d'un groupe d'options                |
-| `data-slot="combobox-collection"`  | Collection de données                      |
-| `data-slot="combobox-empty"`       | Message affiché quand aucun résultat       |
-| `data-slot="combobox-separator"`   | Séparateur visuel entre groupes            |
-| `data-slot="combobox-chips"`       | Conteneur des chips (multi-sélection)      |
-| `data-slot="combobox-chip"`        | Chip individuelle (valeur sélectionnée)    |
-| `data-slot="combobox-chip-remove"` | Bouton de suppression d'une chip           |
-| `data-slot="combobox-chip-input"`  | Champ de saisie intégré aux chips          |
+| Slot                               | Role                                        |
+| ---------------------------------- | ------------------------------------------- |
+| `data-slot="combobox-value"`       | Shows the selected value                    |
+| `data-slot="combobox-trigger"`     | Button that opens the popup                 |
+| `data-slot="combobox-clear"`       | Button that clears the selection            |
+| `data-slot="combobox-content"`     | Popup container of the options              |
+| `data-slot="combobox-list"`        | Scrolling list of options                   |
+| `data-slot="combobox-item"`        | A single option                             |
+| `data-slot="combobox-group"`       | A logical group of options                  |
+| `data-slot="combobox-label"`       | Label of a group of options                 |
+| `data-slot="combobox-collection"`  | A data collection                           |
+| `data-slot="combobox-empty"`       | Message shown when nothing matches          |
+| `data-slot="combobox-separator"`   | Visual separator between groups             |
+| `data-slot="combobox-chips"`       | Container of the chips (multiple selection) |
+| `data-slot="combobox-chip"`        | A single chip (a selected value)            |
+| `data-slot="combobox-chip-remove"` | Button that removes a chip                  |
+| `data-slot="combobox-chip-input"`  | Text input inside the chips                 |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                           | Classes et variables                                                                            | Où                                                                                    |
+| Token                           | Classes and variables                                                                           | Where                                                                                 |
 | ------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `border-width.default`          | `border`                                                                                        | `ComboboxChips`                                                                       |
 | `color.background.elevated`     | `bg-popover`                                                                                    | `ComboboxContent`                                                                     |
@@ -85,193 +85,193 @@ Champ de saisie avec auto-complétion et sélection parmi une liste d'options fi
 | `typography.size.xs`            | `text-xs`                                                                                       | `ComboboxChip` · `ComboboxChips` · `ComboboxEmpty` · `ComboboxItem` · `ComboboxLabel` |
 | `zindex.popover`                | `z-popover`                                                                                     | `ComboboxContent`                                                                     |
 
-Relevé dans `components/ui/combobox.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/combobox.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Button`, `InputGroup` : les tokens de ces composants sont listés dans leurs specs.
+Composes `Button`, `InputGroup` — their tokens are listed in their own specs.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Combobox`
 
-Rend `ComboboxPrimitive.Root`.
+Renders `ComboboxPrimitive.Root`.
 
-| Prop       | Type                                            | Défaut | Description                       |
-| ---------- | ----------------------------------------------- | ------ | --------------------------------- |
-| `...props` | `ComboboxPrimitive.Root.Props<Value, Multiple>` | —      | Props de `ComboboxPrimitive.Root` |
+| Prop       | Type                                            | Default | Description                    |
+| ---------- | ----------------------------------------------- | ------- | ------------------------------ |
+| `...props` | `ComboboxPrimitive.Root.Props<Value, Multiple>` | —       | `ComboboxPrimitive.Root` props |
 
 ### `ComboboxInput`
 
-Rend `ComboboxPrimitive.Input`.
+Renders `ComboboxPrimitive.Input`.
 
-| Prop           | Type                                                           | Défaut              | Description                                                              |
-| -------------- | -------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------ |
-| `disabled`     | `boolean`                                                      | `false`             | Désactive le champ de saisie                                             |
-| `showTrigger`  | `boolean`                                                      | `true`              | Affiche le bouton chevron pour ouvrir le popup                           |
-| `showClear`    | `boolean`                                                      | `false`             | Affiche le bouton de réinitialisation                                    |
-| `triggerLabel` | `string`                                                       | `"Open list"`       | Nom accessible du bouton chevron, transmis à `ComboboxTrigger`           |
-| `clearLabel`   | `string`                                                       | `"Clear selection"` | Nom accessible du bouton de réinitialisation, transmis à `ComboboxClear` |
-| `className`    | `string \| (state: ComboboxInputState) => string \| undefined` | —                   | Classes CSS additionnelles                                               |
-| `...props`     | `ComboboxPrimitive.Input.Props`                                | —                   | Props de `ComboboxPrimitive.Input`                                       |
+| Prop           | Type                                                           | Default             | Description                                                      |
+| -------------- | -------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------- |
+| `disabled`     | `boolean`                                                      | `false`             | Disables the input                                               |
+| `showTrigger`  | `boolean`                                                      | `true`              | Shows the caret button that opens the popup                      |
+| `showClear`    | `boolean`                                                      | `false`             | Shows the clear button                                           |
+| `triggerLabel` | `string`                                                       | `"Open list"`       | Accessible name of the caret button, passed to `ComboboxTrigger` |
+| `clearLabel`   | `string`                                                       | `"Clear selection"` | Accessible name of the clear button, passed to `ComboboxClear`   |
+| `className`    | `string \| (state: ComboboxInputState) => string \| undefined` | —                   | Additional CSS classes                                           |
+| `...props`     | `ComboboxPrimitive.Input.Props`                                | —                   | `ComboboxPrimitive.Input` props                                  |
 
 ### `ComboboxContent`
 
-Rend `ComboboxPrimitive.Popup`.
+Renders `ComboboxPrimitive.Popup`.
 
-| Prop          | Type                                                                                                                                         | Défaut     | Description                         |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------- |
-| `align`       | `Align`                                                                                                                                      | `"start"`  | Alignement du popup                 |
-| `side`        | `Side`                                                                                                                                       | `"bottom"` | Côté d'affichage du popup           |
-| `sideOffset`  | `number \| OffsetFunction`                                                                                                                   | `6`        | Décalage par rapport au trigger     |
-| `alignOffset` | `number \| OffsetFunction`                                                                                                                   | `0`        | Décalage d'alignement               |
-| `anchor`      | `Element \| VirtualElement \| React.RefObject<Element \| null> \| () => Element \| VirtualElement \| null`                                   | —          | Élément d'ancrage (pour mode chips) |
-| `...props`    | `ComboboxPrimitive.Popup.Props & Pick< ComboboxPrimitive.Positioner.Props, "side" \| "align" \| "sideOffset" \| "alignOffset" \| "anchor" >` | —          | Props de `ComboboxPrimitive.Popup`  |
+| Prop          | Type                                                                                                                                         | Default    | Description                     |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------- |
+| `align`       | `Align`                                                                                                                                      | `"start"`  | Alignment of the popup          |
+| `side`        | `Side`                                                                                                                                       | `"bottom"` | Side the popup opens on         |
+| `sideOffset`  | `number \| OffsetFunction`                                                                                                                   | `6`        | Distance from the trigger       |
+| `alignOffset` | `number \| OffsetFunction`                                                                                                                   | `0`        | Offset along the alignment axis |
+| `anchor`      | `Element \| VirtualElement \| React.RefObject<Element \| null> \| () => Element \| VirtualElement \| null`                                   | —          | Anchor element (for chips mode) |
+| `...props`    | `ComboboxPrimitive.Popup.Props & Pick< ComboboxPrimitive.Positioner.Props, "side" \| "align" \| "sideOffset" \| "alignOffset" \| "anchor" >` | —          | `ComboboxPrimitive.Popup` props |
 
 ### `ComboboxList`
 
-Rend `ComboboxPrimitive.List`.
+Renders `ComboboxPrimitive.List`.
 
-| Prop       | Type                           | Défaut | Description                       |
-| ---------- | ------------------------------ | ------ | --------------------------------- |
-| `...props` | `ComboboxPrimitive.List.Props` | —      | Props de `ComboboxPrimitive.List` |
+| Prop       | Type                           | Default | Description                    |
+| ---------- | ------------------------------ | ------- | ------------------------------ |
+| `...props` | `ComboboxPrimitive.List.Props` | —       | `ComboboxPrimitive.List` props |
 
 ### `ComboboxItem`
 
-Rend `ComboboxPrimitive.Item`.
+Renders `ComboboxPrimitive.Item`.
 
-| Prop       | Type                           | Défaut | Description                       |
-| ---------- | ------------------------------ | ------ | --------------------------------- |
-| `...props` | `ComboboxPrimitive.Item.Props` | —      | Props de `ComboboxPrimitive.Item` |
+| Prop       | Type                           | Default | Description                    |
+| ---------- | ------------------------------ | ------- | ------------------------------ |
+| `...props` | `ComboboxPrimitive.Item.Props` | —       | `ComboboxPrimitive.Item` props |
 
 ### `ComboboxGroup`
 
-Rend `ComboboxPrimitive.Group`.
+Renders `ComboboxPrimitive.Group`.
 
-| Prop       | Type                            | Défaut | Description                        |
-| ---------- | ------------------------------- | ------ | ---------------------------------- |
-| `...props` | `ComboboxPrimitive.Group.Props` | —      | Props de `ComboboxPrimitive.Group` |
+| Prop       | Type                            | Default | Description                     |
+| ---------- | ------------------------------- | ------- | ------------------------------- |
+| `...props` | `ComboboxPrimitive.Group.Props` | —       | `ComboboxPrimitive.Group` props |
 
 ### `ComboboxLabel`
 
-Rend `ComboboxPrimitive.GroupLabel`.
+Renders `ComboboxPrimitive.GroupLabel`.
 
-| Prop       | Type                                 | Défaut | Description                             |
-| ---------- | ------------------------------------ | ------ | --------------------------------------- |
-| `...props` | `ComboboxPrimitive.GroupLabel.Props` | —      | Props de `ComboboxPrimitive.GroupLabel` |
+| Prop       | Type                                 | Default | Description                          |
+| ---------- | ------------------------------------ | ------- | ------------------------------------ |
+| `...props` | `ComboboxPrimitive.GroupLabel.Props` | —       | `ComboboxPrimitive.GroupLabel` props |
 
 ### `ComboboxCollection`
 
-Rend `ComboboxPrimitive.Collection`.
+Renders `ComboboxPrimitive.Collection`.
 
-| Prop       | Type                                 | Défaut | Description                             |
-| ---------- | ------------------------------------ | ------ | --------------------------------------- |
-| `...props` | `ComboboxPrimitive.Collection.Props` | —      | Props de `ComboboxPrimitive.Collection` |
+| Prop       | Type                                 | Default | Description                          |
+| ---------- | ------------------------------------ | ------- | ------------------------------------ |
+| `...props` | `ComboboxPrimitive.Collection.Props` | —       | `ComboboxPrimitive.Collection` props |
 
 ### `ComboboxEmpty`
 
-Rend `ComboboxPrimitive.Empty`.
+Renders `ComboboxPrimitive.Empty`.
 
-| Prop       | Type                            | Défaut | Description                        |
-| ---------- | ------------------------------- | ------ | ---------------------------------- |
-| `...props` | `ComboboxPrimitive.Empty.Props` | —      | Props de `ComboboxPrimitive.Empty` |
+| Prop       | Type                            | Default | Description                     |
+| ---------- | ------------------------------- | ------- | ------------------------------- |
+| `...props` | `ComboboxPrimitive.Empty.Props` | —       | `ComboboxPrimitive.Empty` props |
 
 ### `ComboboxSeparator`
 
-Rend `ComboboxPrimitive.Separator`.
+Renders `ComboboxPrimitive.Separator`.
 
-| Prop       | Type                                | Défaut | Description                            |
-| ---------- | ----------------------------------- | ------ | -------------------------------------- |
-| `...props` | `ComboboxPrimitive.Separator.Props` | —      | Props de `ComboboxPrimitive.Separator` |
+| Prop       | Type                                | Default | Description                         |
+| ---------- | ----------------------------------- | ------- | ----------------------------------- |
+| `...props` | `ComboboxPrimitive.Separator.Props` | —       | `ComboboxPrimitive.Separator` props |
 
 ### `ComboboxChips`
 
-Rend `ComboboxPrimitive.Chips`.
+Renders `ComboboxPrimitive.Chips`.
 
-| Prop       | Type                                                                                          | Défaut | Description                        |
-| ---------- | --------------------------------------------------------------------------------------------- | ------ | ---------------------------------- |
-| `...props` | `React.ComponentPropsWithRef<typeof ComboboxPrimitive.Chips> & ComboboxPrimitive.Chips.Props` | —      | Props de `ComboboxPrimitive.Chips` |
+| Prop       | Type                                                                                          | Default | Description                     |
+| ---------- | --------------------------------------------------------------------------------------------- | ------- | ------------------------------- |
+| `...props` | `React.ComponentPropsWithRef<typeof ComboboxPrimitive.Chips> & ComboboxPrimitive.Chips.Props` | —       | `ComboboxPrimitive.Chips` props |
 
 ### `ComboboxChip`
 
-Rend `ComboboxPrimitive.Chip`.
+Renders `ComboboxPrimitive.Chip`.
 
-| Prop          | Type                           | Défaut     | Description                                      |
-| ------------- | ------------------------------ | ---------- | ------------------------------------------------ |
-| `showRemove`  | `boolean`                      | `true`     | Affiche le bouton de suppression de la chip      |
-| `removeLabel` | `string`                       | `"Remove"` | `aria-label` du bouton de suppression de la chip |
-| `...props`    | `ComboboxPrimitive.Chip.Props` | —          | Props de `ComboboxPrimitive.Chip`                |
+| Prop          | Type                           | Default    | Description                              |
+| ------------- | ------------------------------ | ---------- | ---------------------------------------- |
+| `showRemove`  | `boolean`                      | `true`     | Shows the chip's remove button           |
+| `removeLabel` | `string`                       | `"Remove"` | `aria-label` of the chip's remove button |
+| `...props`    | `ComboboxPrimitive.Chip.Props` | —          | `ComboboxPrimitive.Chip` props           |
 
 ### `ComboboxChipsInput`
 
-Rend `ComboboxPrimitive.Input`.
+Renders `ComboboxPrimitive.Input`.
 
-| Prop       | Type                            | Défaut | Description                        |
-| ---------- | ------------------------------- | ------ | ---------------------------------- |
-| `...props` | `ComboboxPrimitive.Input.Props` | —      | Props de `ComboboxPrimitive.Input` |
+| Prop       | Type                            | Default | Description                     |
+| ---------- | ------------------------------- | ------- | ------------------------------- |
+| `...props` | `ComboboxPrimitive.Input.Props` | —       | `ComboboxPrimitive.Input` props |
 
 ### `ComboboxTrigger`
 
-Rend `ComboboxPrimitive.Trigger`.
+Renders `ComboboxPrimitive.Trigger`.
 
-| Prop           | Type                              | Défaut        | Description                                                                |
-| -------------- | --------------------------------- | ------------- | -------------------------------------------------------------------------- |
-| `triggerLabel` | `string`                          | `"Open list"` | `aria-label` appliqué uniquement quand le trigger n'a pas d'enfant visible |
-| `...props`     | `ComboboxPrimitive.Trigger.Props` | —             | Props de `ComboboxPrimitive.Trigger`                                       |
+| Prop           | Type                              | Default       | Description                                                     |
+| -------------- | --------------------------------- | ------------- | --------------------------------------------------------------- |
+| `triggerLabel` | `string`                          | `"Open list"` | `aria-label` applied only when the trigger has no visible child |
+| `...props`     | `ComboboxPrimitive.Trigger.Props` | —             | `ComboboxPrimitive.Trigger` props                               |
 
 ### `ComboboxValue`
 
-Rend `ComboboxPrimitive.Value`.
+Renders `ComboboxPrimitive.Value`.
 
-| Prop       | Type                            | Défaut | Description                        |
-| ---------- | ------------------------------- | ------ | ---------------------------------- |
-| `...props` | `ComboboxPrimitive.Value.Props` | —      | Props de `ComboboxPrimitive.Value` |
+| Prop       | Type                            | Default | Description                     |
+| ---------- | ------------------------------- | ------- | ------------------------------- |
+| `...props` | `ComboboxPrimitive.Value.Props` | —       | `ComboboxPrimitive.Value` props |
 
 ### `useComboboxAnchor()`
 
-Retourne `React.RefObject<HTMLDivElement \| null>`.
+Returns `React.RefObject<HTMLDivElement \| null>`.
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                 |
+| State    | Description                                                                 |
 | -------- | --------------------------------------------------------------------------- |
-| default  | Champ de saisie avec bordure `input`, fond transparent                      |
-| hover    | Fond de l'option candidate passe en `accent`                                |
-| focus    | Anneau `ring-ring/50` et bordure `border-ring` sur le conteneur chips/input |
-| active   | Popup ouvert avec animation `fade-in` + `zoom-in-95`                        |
-| disabled | Opacité réduite (`opacity-disabled`), `pointer-events-none`                 |
-| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`      |
+| default  | Input with an `input` border and a transparent background                   |
+| hover    | The candidate option's background turns `accent`                            |
+| focus    | `ring-ring/50` ring and `border-ring` border on the chips / input container |
+| active   | Popup open, animated with `fade-in` and `zoom-in-95`                        |
+| disabled | Reduced opacity (`opacity-disabled`), `pointer-events-none`                 |
+| error    | `destructive` border and `ring-destructive/20` ring through `aria-invalid`  |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) avec liste (Base UI)
+**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)
 
-**Rôle** : Champ `role="combobox"` relié à une `listbox` ; `aria-expanded` sur le champ, `aria-selected` sur l'option active.
+**Role**: An input with `role="combobox"` linked to a `listbox`; `aria-expanded` on the input, `aria-selected` on the active option.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                  | Action                                       |
-| ----------------------- | -------------------------------------------- |
-| `ArrowDown` / `ArrowUp` | Ouvre la liste, option suivante / précédente |
-| `Enter`                 | Sélectionne l'option active                  |
-| `Escape`                | Ferme la liste                               |
-| Saisie                  | Filtre les options                           |
+| Key                     | Action                                 |
+| ----------------------- | -------------------------------------- |
+| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |
+| `Enter`                 | Selects the active option              |
+| `Escape`                | Closes the list                        |
+| Typing                  | Filters the options                    |
 
-**Nom accessible** : Un `Label` associé au champ est obligatoire. Les boutons icône (effacer, retirer un élément) sont nommés par `clearLabel` / `removeLabel` (défauts dans `UI_STRINGS`).
+**Accessible name**: A `Label` tied to the input is required. The icon buttons (clear, remove a chip) are named by `clearLabel` / `removeLabel` (defaults in `UI_STRINGS`).
 
-**Vigilance** :
+**Pitfalls**:
 
-- Le nombre de résultats n'est pas annoncé automatiquement : ajouter un message `aria-live` si la liste filtrée change fortement.
+- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -284,18 +284,18 @@ import {
 } from "@/components/ui/combobox"
 
 const fruits = [
-  { value: "pomme", label: "Pomme" },
-  { value: "banane", label: "Banane" },
-  { value: "cerise", label: "Cerise" },
+  { value: "apple", label: "Apple" },
+  { value: "banana", label: "Banana" },
+  { value: "cherry", label: "Cherry" },
 ]
 
 export default function Example() {
   return (
     <Combobox>
-      <ComboboxInput placeholder="Rechercher un fruit…" />
+      <ComboboxInput placeholder="Search for a fruit…" />
       <ComboboxContent>
         <ComboboxList>
-          <ComboboxEmpty>Aucun résultat</ComboboxEmpty>
+          <ComboboxEmpty>No results</ComboboxEmpty>
           {fruits.map((fruit) => (
             <ComboboxItem key={fruit.value} value={fruit.value}>
               {fruit.label}
@@ -308,9 +308,9 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `InputGroup` — utilisé en interne pour structurer le champ de saisie
-- `Button` — utilisé pour le bouton de suppression des chips
-- `Select` — alternative sans recherche pour les listes courtes
-- `Command` — alternative pour les palettes de commandes
+- `InputGroup` — structures the input internally
+- `Button` — used for the chips' remove button
+- `Select` — the alternative without search, for short lists
+- `Command` — the alternative for command palettes

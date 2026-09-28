@@ -2,85 +2,85 @@
 
 ## Metadata
 
-| Champ         | Valeur                    |
+| Field         | Value                     |
 | ------------- | ------------------------- |
-| Nom           | Sidebar                   |
-| Catégorie     | Layout                    |
-| Statut        | stable                    |
+| Name          | Sidebar                   |
+| Category      | Layout                    |
+| Status        | stable                    |
 | figma_node_id |                           |
 | code_path     | components/ui/sidebar.tsx |
 
-## Rôle
+## Role
 
-Panneau de navigation latéral complet avec support responsive (Sheet mobile), état collapsible, raccourci clavier et persistance d'état via cookie.
+A complete side navigation panel: responsive (a Sheet on mobile), collapsible, with a keyboard shortcut and its state persisted in a cookie.
 
 ## Usage
 
-- Navigation principale d'une application (menu latéral gauche ou droit)
-- Organisation hiérarchique des liens avec groupes, sous-menus et badges
-- Mode icon-only (collapsed) pour maximiser l'espace de contenu
-- Navigation mobile via Sheet avec ouverture/fermeture en swipe
-- Layout de type dashboard avec header, content, footer dans la sidebar
+- The primary navigation of an application (a left or right side menu)
+- Organize links hierarchically, with groups, submenus and badges
+- An icon-only (collapsed) mode that frees up space for the content
+- Mobile navigation in a Sheet that opens and closes with a swipe
+- Dashboard-style layouts with a header, content and a footer inside the sidebar
 
-## Contraintes
+## Constraints
 
-- **MUST** — placer `Sidebar` dans un `SidebarProvider`, sans quoi `useSidebar` lève une erreur
-- **MUST NOT** — placer plus d'une `Sidebar` par côté dans un même `SidebarProvider`
-- **MUST** — vérifier qu'une mise en page imbriquée tolère les marges et ombres des variantes `floating` et `inset`
-- **MUST** — donner un `tooltip` à chaque `SidebarMenuButton` réduit à son icône
-- **MUST NOT** — lier `Ctrl+B` / `⌘+B` à une autre action : `SidebarProvider` l'enregistre pour replier la barre
-- **MUST** — dans une interface qui n'est pas en anglais, traduire le libellé de `SidebarTrigger` et `SidebarRail` (`UI_STRINGS.sidebar`)
+- **MUST** — place `Sidebar` inside a `SidebarProvider`, otherwise `useSidebar` throws
+- **MUST NOT** — place more than one `Sidebar` per side in the same `SidebarProvider`
+- **MUST** — check that a nested layout copes with the margins and shadows of the `floating` and `inset` variants
+- **MUST** — give a `tooltip` to every `SidebarMenuButton` collapsed to its icon
+- **MUST NOT** — bind `Ctrl+B` / `⌘+B` to another action: `SidebarProvider` registers it to collapse the bar
+- **MUST** — in an interface that is not in English, translate the label of `SidebarTrigger` and `SidebarRail` (`UI_STRINGS.sidebar`)
 
-## Dépendances
+## Dependencies
 
-- `Slot.Root` de `radix-ui` (pour `asChild`)
-- `class-variance-authority` (variantes de `SidebarMenuButton`)
-- `@/hooks/use-mobile` (hook `useIsMobile`)
-- `@/lib/utils` (utilitaire `cn`)
-- `@/components/ui/button` (composant `Button`)
-- `@/components/ui/input` (composant `Input`)
-- `@/components/ui/separator` (composant `Separator`)
-- `@/components/ui/sheet` (composants `Sheet`, `SheetContent`, `SheetHeader`, `SheetTitle`, `SheetDescription`)
-- `@/components/ui/skeleton` (composant `Skeleton`)
-- `@/components/ui/tooltip` (composants `Tooltip`, `TooltipContent`, `TooltipTrigger`)
-- `@phosphor-icons/react` (icône `SidebarIcon`)
+- `Slot.Root` from `radix-ui` (for `asChild`)
+- `class-variance-authority` (the `SidebarMenuButton` variants)
+- `@/hooks/use-mobile` (the `useIsMobile` hook)
+- `@/lib/utils` (the `cn` utility)
+- `@/components/ui/button` (the `Button` component)
+- `@/components/ui/input` (the `Input` component)
+- `@/components/ui/separator` (the `Separator` component)
+- `@/components/ui/sheet` (the `Sheet`, `SheetContent`, `SheetHeader`, `SheetTitle`, `SheetDescription` components)
+- `@/components/ui/skeleton` (the `Skeleton` component)
+- `@/components/ui/tooltip` (the `Tooltip`, `TooltipContent`, `TooltipTrigger` components)
+- `@phosphor-icons/react` (the `SidebarIcon` icon)
 
-## Anatomie
+## Anatomy
 
-| Slot                                  | Rôle                                                                       |
-| ------------------------------------- | -------------------------------------------------------------------------- |
-| `data-slot="sidebar-wrapper"`         | Conteneur racine du provider, porte les variables CSS                      |
-| `data-slot="sidebar"`                 | Panneau principal de la sidebar                                            |
-| `data-slot="sidebar-gap"`             | Espace réservé pour la sidebar sur desktop (gère la transition de largeur) |
-| `data-slot="sidebar-container"`       | Conteneur fixe positionné (fixed inset-y-0)                                |
-| `data-slot="sidebar-inner"`           | Wrapper interne avec le fond et les styles de variante                     |
-| `data-slot="sidebar-trigger"`         | Bouton de bascule ouvert/fermé                                             |
-| `data-slot="sidebar-rail"`            | Rail cliquable fin sur le bord pour basculer la sidebar                    |
-| `data-slot="sidebar-inset"`           | Zone de contenu principale (`<main>`) adjacente à la sidebar               |
-| `data-slot="sidebar-input"`           | Champ de recherche dans la sidebar                                         |
-| `data-slot="sidebar-header"`          | En-tête de la sidebar                                                      |
-| `data-slot="sidebar-footer"`          | Pied de la sidebar                                                         |
-| `data-slot="sidebar-separator"`       | Séparateur horizontal                                                      |
-| `data-slot="sidebar-content"`         | Zone de contenu scrollable principale                                      |
-| `data-slot="sidebar-group"`           | Groupe de navigation                                                       |
-| `data-slot="sidebar-group-label"`     | Label de groupe                                                            |
-| `data-slot="sidebar-group-action"`    | Action contextuelle d'un groupe                                            |
-| `data-slot="sidebar-group-content"`   | Contenu d'un groupe                                                        |
-| `data-slot="sidebar-menu"`            | Liste de menu (`<ul>`)                                                     |
-| `data-slot="sidebar-menu-item"`       | Élément de menu (`<li>`)                                                   |
-| `data-slot="sidebar-menu-button"`     | Bouton de menu interactif                                                  |
-| `data-slot="sidebar-menu-action"`     | Action contextuelle d'un élément de menu                                   |
-| `data-slot="sidebar-menu-badge"`      | Badge de notification sur un élément                                       |
-| `data-slot="sidebar-menu-skeleton"`   | Squelette de chargement d'un élément                                       |
-| `data-slot="sidebar-menu-sub"`        | Sous-menu (`<ul>` imbriqué)                                                |
-| `data-slot="sidebar-menu-sub-item"`   | Élément de sous-menu                                                       |
-| `data-slot="sidebar-menu-sub-button"` | Bouton de sous-menu                                                        |
+| Slot                                  | Role                                                                     |
+| ------------------------------------- | ------------------------------------------------------------------------ |
+| `data-slot="sidebar-wrapper"`         | The provider's root container; carries the CSS variables                 |
+| `data-slot="sidebar"`                 | The sidebar's main panel                                                 |
+| `data-slot="sidebar-gap"`             | Space reserved for the sidebar on desktop (handles the width transition) |
+| `data-slot="sidebar-container"`       | Fixed-position container (`fixed inset-y-0`)                             |
+| `data-slot="sidebar-inner"`           | Inner wrapper with the background and the variant styles                 |
+| `data-slot="sidebar-trigger"`         | Button that opens and closes the sidebar                                 |
+| `data-slot="sidebar-rail"`            | Thin clickable rail on the edge that toggles the sidebar                 |
+| `data-slot="sidebar-inset"`           | Main content area (`<main>`) next to the sidebar                         |
+| `data-slot="sidebar-input"`           | Search field inside the sidebar                                          |
+| `data-slot="sidebar-header"`          | The sidebar's header                                                     |
+| `data-slot="sidebar-footer"`          | The sidebar's footer                                                     |
+| `data-slot="sidebar-separator"`       | Horizontal separator                                                     |
+| `data-slot="sidebar-content"`         | Main scrolling content area                                              |
+| `data-slot="sidebar-group"`           | A navigation group                                                       |
+| `data-slot="sidebar-group-label"`     | Group label                                                              |
+| `data-slot="sidebar-group-action"`    | Contextual action of a group                                             |
+| `data-slot="sidebar-group-content"`   | Content of a group                                                       |
+| `data-slot="sidebar-menu"`            | Menu list (`<ul>`)                                                       |
+| `data-slot="sidebar-menu-item"`       | Menu item (`<li>`)                                                       |
+| `data-slot="sidebar-menu-button"`     | Interactive menu button                                                  |
+| `data-slot="sidebar-menu-action"`     | Contextual action of a menu item                                         |
+| `data-slot="sidebar-menu-badge"`      | Notification badge on an item                                            |
+| `data-slot="sidebar-menu-skeleton"`   | Loading skeleton of an item                                              |
+| `data-slot="sidebar-menu-sub"`        | Submenu (a nested `<ul>`)                                                |
+| `data-slot="sidebar-menu-sub-item"`   | Submenu item                                                             |
+| `data-slot="sidebar-menu-sub-button"` | Submenu button                                                           |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                             | Classes et variables                                                  | Où                                                                                                                                                                                                                                                                                                                              |
+| Token                             | Classes and variables                                                 | Where                                                                                                                                                                                                                                                                                                                           |
 | --------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `border-width.default`            | `border-l` · `border-r`                                               | `SidebarMenuSub` · `Sidebar`                                                                                                                                                                                                                                                                                                    |
 | `color.background.default`        | `bg-background`                                                       | `SidebarInput` · `SidebarInset` · `sidebarMenuButtonVariants.variant.outline`                                                                                                                                                                                                                                                   |
@@ -102,279 +102,279 @@ Panneau de navigation latéral complet avec support responsive (Sheet mobile), �
 | `zindex.fixed`                    | `z-fixed`                                                             | `Sidebar`                                                                                                                                                                                                                                                                                                                       |
 | `zindex.sticky`                   | `z-sticky`                                                            | `SidebarRail`                                                                                                                                                                                                                                                                                                                   |
 
-Relevé dans `components/ui/sidebar.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/sidebar.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Button`, `Input`, `Separator`, `Sheet`, `Skeleton`, `Tooltip` : les tokens de ces composants sont listés dans leurs specs.
+Composes `Button`, `Input`, `Separator`, `Sheet`, `Skeleton`, `Tooltip` — their tokens are listed in their own specs.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Sidebar`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop          | Type                                 | Défaut        | Description                         |
-| ------------- | ------------------------------------ | ------------- | ----------------------------------- |
-| `side`        | `"left" \| "right"`                  | `"left"`      | Côté d'affichage                    |
-| `variant`     | `"sidebar" \| "floating" \| "inset"` | `"sidebar"`   | Style visuel de la sidebar          |
-| `collapsible` | `"offcanvas" \| "icon" \| "none"`    | `"offcanvas"` | Comportement de repli               |
-| `dir`         | `string`                             | —             | Direction de lecture (mobile Sheet) |
-| `className`   | `string`                             | —             | Classes CSS additionnelles          |
-| `...props`    | `React.ComponentProps<"div">`        | —             | Props natives de `<div>`            |
+| Prop          | Type                                 | Default       | Description                      |
+| ------------- | ------------------------------------ | ------------- | -------------------------------- |
+| `side`        | `"left" \| "right"`                  | `"left"`      | Side the sidebar sits on         |
+| `variant`     | `"sidebar" \| "floating" \| "inset"` | `"sidebar"`   | Visual style of the sidebar      |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"`    | `"offcanvas"` | How the sidebar collapses        |
+| `dir`         | `string`                             | —             | Reading direction (mobile Sheet) |
+| `className`   | `string`                             | —             | Additional CSS classes           |
+| `...props`    | `React.ComponentProps<"div">`        | —             | Native `<div>` props             |
 
 ### `SidebarContent`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SidebarFooter`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SidebarGroup`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SidebarGroupAction`
 
-Rend `<button>`, ou son enfant avec `asChild`.
+Renders `<button>`, or its child with `asChild`.
 
-| Prop       | Type                             | Défaut  | Description                                                                            |
-| ---------- | -------------------------------- | ------- | -------------------------------------------------------------------------------------- |
-| `asChild`  | `boolean`                        | `false` | Délègue le rendu au premier enfant, qui reçoit les props et les classes (Radix `Slot`) |
-| `...props` | `React.ComponentProps<"button">` | —       | Props natives de `<button>`                                                            |
+| Prop       | Type                             | Default | Description                                                                      |
+| ---------- | -------------------------------- | ------- | -------------------------------------------------------------------------------- |
+| `asChild`  | `boolean`                        | `false` | Renders the first child instead, passing it the props and classes (Radix `Slot`) |
+| `...props` | `React.ComponentProps<"button">` | —       | Native `<button>` props                                                          |
 
 ### `SidebarGroupContent`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SidebarGroupLabel`
 
-Rend `<div>`, ou son enfant avec `asChild`.
+Renders `<div>`, or its child with `asChild`.
 
-| Prop       | Type                          | Défaut  | Description                                                                            |
-| ---------- | ----------------------------- | ------- | -------------------------------------------------------------------------------------- |
-| `asChild`  | `boolean`                     | `false` | Délègue le rendu au premier enfant, qui reçoit les props et les classes (Radix `Slot`) |
-| `...props` | `React.ComponentProps<"div">` | —       | Props natives de `<div>`                                                               |
+| Prop       | Type                          | Default | Description                                                                      |
+| ---------- | ----------------------------- | ------- | -------------------------------------------------------------------------------- |
+| `asChild`  | `boolean`                     | `false` | Renders the first child instead, passing it the props and classes (Radix `Slot`) |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props                                                             |
 
 ### `SidebarHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SidebarInput`
 
-Rend `Input`.
+Renders `Input`.
 
-| Prop       | Type                                 | Défaut | Description      |
-| ---------- | ------------------------------------ | ------ | ---------------- |
-| `...props` | `React.ComponentProps<typeof Input>` | —      | Props de `Input` |
+| Prop       | Type                                 | Default | Description   |
+| ---------- | ------------------------------------ | ------- | ------------- |
+| `...props` | `React.ComponentProps<typeof Input>` | —       | `Input` props |
 
 ### `SidebarInset`
 
-Rend `<main>`.
+Renders `<main>`.
 
-| Prop       | Type                           | Défaut | Description               |
-| ---------- | ------------------------------ | ------ | ------------------------- |
-| `...props` | `React.ComponentProps<"main">` | —      | Props natives de `<main>` |
+| Prop       | Type                           | Default | Description           |
+| ---------- | ------------------------------ | ------- | --------------------- |
+| `...props` | `React.ComponentProps<"main">` | —       | Native `<main>` props |
 
 ### `SidebarMenu`
 
-Rend `<ul>`.
+Renders `<ul>`.
 
-| Prop       | Type                         | Défaut | Description             |
-| ---------- | ---------------------------- | ------ | ----------------------- |
-| `...props` | `React.ComponentProps<"ul">` | —      | Props natives de `<ul>` |
+| Prop       | Type                         | Default | Description         |
+| ---------- | ---------------------------- | ------- | ------------------- |
+| `...props` | `React.ComponentProps<"ul">` | —       | Native `<ul>` props |
 
 ### `SidebarMenuAction`
 
-Rend `<button>`, ou son enfant avec `asChild`.
+Renders `<button>`, or its child with `asChild`.
 
-| Prop          | Type                             | Défaut  | Description                                                                                                       |
-| ------------- | -------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
-| `asChild`     | `boolean`                        | `false` | Délègue le rendu au premier enfant, qui reçoit les props et les classes (Radix `Slot`)                            |
-| `showOnHover` | `boolean`                        | `false` | Masque l'action sur desktop (`md` et plus) jusqu'au survol ou au focus de l'item, ou tant que son menu est ouvert |
-| `...props`    | `React.ComponentProps<"button">` | —       | Props natives de `<button>`                                                                                       |
+| Prop          | Type                             | Default | Description                                                                                                |
+| ------------- | -------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| `asChild`     | `boolean`                        | `false` | Renders the first child instead, passing it the props and classes (Radix `Slot`)                           |
+| `showOnHover` | `boolean`                        | `false` | On desktop (`md` and up), hides the action until the item is hovered or focused, or while its menu is open |
+| `...props`    | `React.ComponentProps<"button">` | —       | Native `<button>` props                                                                                    |
 
 ### `SidebarMenuBadge`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SidebarMenuButton`
 
-Rend `<button>`, ou son enfant avec `asChild`.
+Renders `<button>`, or its child with `asChild`.
 
-| Prop       | Type                                                    | Défaut      | Description                                 |
-| ---------- | ------------------------------------------------------- | ----------- | ------------------------------------------- |
-| `asChild`  | `boolean`                                               | `false`     | Délègue le rendu au premier enfant via Slot |
-| `isActive` | `boolean`                                               | `false`     | Marque l'élément comme actif                |
-| `tooltip`  | `string \| React.ComponentProps<typeof TooltipContent>` | —           | Tooltip affiché en mode collapsed           |
-| `variant`  | `"default" \| "outline"`                                | `"default"` | Variante visuelle                           |
-| `size`     | `"default" \| "sm" \| "lg"`                             | `"default"` | Taille du bouton                            |
-| `...props` | `React.ComponentProps<"button">`                        | —           | Props natives de `<button>`                 |
+| Prop       | Type                                                    | Default     | Description                                   |
+| ---------- | ------------------------------------------------------- | ----------- | --------------------------------------------- |
+| `asChild`  | `boolean`                                               | `false`     | Renders the first child instead, through Slot |
+| `isActive` | `boolean`                                               | `false`     | Marks the item as active                      |
+| `tooltip`  | `string \| React.ComponentProps<typeof TooltipContent>` | —           | Tooltip shown in collapsed mode               |
+| `variant`  | `"default" \| "outline"`                                | `"default"` | Visual variant                                |
+| `size`     | `"default" \| "sm" \| "lg"`                             | `"default"` | Button size                                   |
+| `...props` | `React.ComponentProps<"button">`                        | —           | Native `<button>` props                       |
 
 ### `SidebarMenuItem`
 
-Rend `<li>`.
+Renders `<li>`.
 
-| Prop       | Type                         | Défaut | Description             |
-| ---------- | ---------------------------- | ------ | ----------------------- |
-| `...props` | `React.ComponentProps<"li">` | —      | Props natives de `<li>` |
+| Prop       | Type                         | Default | Description         |
+| ---------- | ---------------------------- | ------- | ------------------- |
+| `...props` | `React.ComponentProps<"li">` | —       | Native `<li>` props |
 
 ### `SidebarMenuSkeleton`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut  | Description                                                  |
-| ---------- | ----------------------------- | ------- | ------------------------------------------------------------ |
-| `showIcon` | `boolean`                     | `false` | Ajoute un carré d'icône avant la barre de texte du squelette |
-| `...props` | `React.ComponentProps<"div">` | —       | Props natives de `<div>`                                     |
+| Prop       | Type                          | Default | Description                                        |
+| ---------- | ----------------------------- | ------- | -------------------------------------------------- |
+| `showIcon` | `boolean`                     | `false` | Adds an icon square before the skeleton's text bar |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props                               |
 
 ### `SidebarMenuSub`
 
-Rend `<ul>`.
+Renders `<ul>`.
 
-| Prop       | Type                         | Défaut | Description             |
-| ---------- | ---------------------------- | ------ | ----------------------- |
-| `...props` | `React.ComponentProps<"ul">` | —      | Props natives de `<ul>` |
+| Prop       | Type                         | Default | Description         |
+| ---------- | ---------------------------- | ------- | ------------------- |
+| `...props` | `React.ComponentProps<"ul">` | —       | Native `<ul>` props |
 
 ### `SidebarMenuSubButton`
 
-Rend `<a>`, ou son enfant avec `asChild`.
+Renders `<a>`, or its child with `asChild`.
 
-| Prop       | Type                        | Défaut      | Description                                 |
-| ---------- | --------------------------- | ----------- | ------------------------------------------- |
-| `asChild`  | `boolean`                   | `false`     | Délègue le rendu au premier enfant via Slot |
-| `size`     | `"sm" \| "default"`         | `"default"` | Taille du bouton de sous-menu               |
-| `isActive` | `boolean`                   | `false`     | Marque l'élément comme actif                |
-| `...props` | `React.ComponentProps<"a">` | —           | Props natives de `<a>`                      |
+| Prop       | Type                        | Default     | Description                                   |
+| ---------- | --------------------------- | ----------- | --------------------------------------------- |
+| `asChild`  | `boolean`                   | `false`     | Renders the first child instead, through Slot |
+| `size`     | `"sm" \| "default"`         | `"default"` | Size of the submenu button                    |
+| `isActive` | `boolean`                   | `false`     | Marks the item as active                      |
+| `...props` | `React.ComponentProps<"a">` | —           | Native `<a>` props                            |
 
 ### `SidebarMenuSubItem`
 
-Rend `<li>`.
+Renders `<li>`.
 
-| Prop       | Type                         | Défaut | Description             |
-| ---------- | ---------------------------- | ------ | ----------------------- |
-| `...props` | `React.ComponentProps<"li">` | —      | Props natives de `<li>` |
+| Prop       | Type                         | Default | Description         |
+| ---------- | ---------------------------- | ------- | ------------------- |
+| `...props` | `React.ComponentProps<"li">` | —       | Native `<li>` props |
 
 ### `SidebarProvider`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop           | Type                          | Défaut | Description                             |
-| -------------- | ----------------------------- | ------ | --------------------------------------- |
-| `defaultOpen`  | `boolean`                     | `true` | État initial d'ouverture (non contrôlé) |
-| `open`         | `boolean`                     | —      | État contrôlé d'ouverture               |
-| `onOpenChange` | `(open: boolean) => void`     | —      | Callback de changement d'état           |
-| `className`    | `string`                      | —      | Classes CSS additionnelles              |
-| `style`        | `React.CSSProperties`         | —      | Styles inline additionnels              |
-| `...props`     | `React.ComponentProps<"div">` | —      | Props natives de `<div>`                |
+| Prop           | Type                          | Default | Description                        |
+| -------------- | ----------------------------- | ------- | ---------------------------------- |
+| `defaultOpen`  | `boolean`                     | `true`  | Initial open state (uncontrolled)  |
+| `open`         | `boolean`                     | —       | Open state (controlled)            |
+| `onOpenChange` | `(open: boolean) => void`     | —       | Called when the open state changes |
+| `className`    | `string`                      | —       | Additional CSS classes             |
+| `style`        | `React.CSSProperties`         | —       | Additional inline styles           |
+| `...props`     | `React.ComponentProps<"div">` | —       | Native `<div>` props               |
 
 ### `SidebarRail`
 
-Rend `<button>`.
+Renders `<button>`.
 
-| Prop       | Type                             | Défaut | Description                 |
-| ---------- | -------------------------------- | ------ | --------------------------- |
-| `...props` | `React.ComponentProps<"button">` | —      | Props natives de `<button>` |
+| Prop       | Type                             | Default | Description             |
+| ---------- | -------------------------------- | ------- | ----------------------- |
+| `...props` | `React.ComponentProps<"button">` | —       | Native `<button>` props |
 
 ### `SidebarSeparator`
 
-Rend `Separator`.
+Renders `Separator`.
 
-| Prop       | Type                                     | Défaut | Description          |
-| ---------- | ---------------------------------------- | ------ | -------------------- |
-| `...props` | `React.ComponentProps<typeof Separator>` | —      | Props de `Separator` |
+| Prop       | Type                                     | Default | Description       |
+| ---------- | ---------------------------------------- | ------- | ----------------- |
+| `...props` | `React.ComponentProps<typeof Separator>` | —       | `Separator` props |
 
 ### `SidebarTrigger`
 
-Rend `Button`.
+Renders `Button`.
 
-| Prop       | Type                                  | Défaut | Description       |
-| ---------- | ------------------------------------- | ------ | ----------------- |
-| `...props` | `React.ComponentProps<typeof Button>` | —      | Props de `Button` |
+| Prop       | Type                                  | Default | Description    |
+| ---------- | ------------------------------------- | ------- | -------------- |
+| `...props` | `React.ComponentProps<typeof Button>` | —       | `Button` props |
 
 ### `useSidebar()`
 
-Retourne `SidebarContextProps`.
+Returns `SidebarContextProps`.
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-### Hook exporté
+### Exported hook
 
-| Hook         | Retour                | Description                                                                                     |
-| ------------ | --------------------- | ----------------------------------------------------------------------------------------------- |
-| `useSidebar` | `SidebarContextProps` | Accède à `state`, `open`, `setOpen`, `openMobile`, `setOpenMobile`, `isMobile`, `toggleSidebar` |
+| Hook         | Returns               | Description                                                                                            |
+| ------------ | --------------------- | ------------------------------------------------------------------------------------------------------ |
+| `useSidebar` | `SidebarContextProps` | Gives access to `state`, `open`, `setOpen`, `openMobile`, `setOpenMobile`, `isMobile`, `toggleSidebar` |
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-| Composant           | Axe       | Valeurs                 | Défaut    |
+| Component           | Axis      | Values                  | Default   |
 | ------------------- | --------- | ----------------------- | --------- |
 | `SidebarMenuButton` | `variant` | `default` · `outline`   | `default` |
 | `SidebarMenuButton` | `size`    | `default` · `sm` · `lg` | `default` |
 
-Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+What each axis means (appearance, intent, size…) is stated under **Props / API**.
 
-## États
+## States
 
-| État      | Description                                                                 |
-| --------- | --------------------------------------------------------------------------- |
-| default   | Sidebar ouverte (`data-state="expanded"`), largeur complète                 |
-| hover     | Éléments de menu changent de fond (`bg-sidebar-accent`)                     |
-| focus     | Anneau `ring-2 ring-sidebar-ring` sur les éléments interactifs              |
-| active    | Élément de menu marqué actif (`data-active`), fond accentué et texte medium |
-| disabled  | Éléments désactivés : `pointer-events-none`, `opacity-disabled`             |
-| collapsed | Sidebar réduite en mode icon-only ou hors écran selon `collapsible`         |
-| mobile    | Sidebar rendue en `Sheet` overlay sur les viewports mobiles                 |
+| State     | Description                                                                      |
+| --------- | -------------------------------------------------------------------------------- |
+| default   | Sidebar open (`data-state="expanded"`), full width                               |
+| hover     | Menu items change background (`bg-sidebar-accent`)                               |
+| focus     | `ring-2 ring-sidebar-ring` ring on interactive elements                          |
+| active    | Menu item marked active (`data-active`): accented background, medium-weight text |
+| disabled  | Disabled items: `pointer-events-none`, `opacity-disabled`                        |
+| collapsed | Sidebar reduced to icons, or moved off-screen, depending on `collapsible`        |
+| mobile    | Sidebar rendered as an overlay `Sheet` on mobile viewports                       |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : Navigation latérale (composition) ; `Sheet` sur mobile
+**Pattern**: Side navigation (a composition); a `Sheet` on mobile
 
-**Rôle** : Menus en `ul` / `li` de boutons ou de liens ; sur mobile, la barre s'ouvre dans un `Sheet` (dialogue modal).
+**Role**: Menus are `ul` / `li` lists of buttons or links; on mobile, the bar opens in a `Sheet` (a modal dialog).
 
-**Clavier** :
+**Keyboard**:
 
-| Touche             | Action                           |
-| ------------------ | -------------------------------- |
-| `Ctrl+B` / `Cmd+B` | Ouvre / replie la barre latérale |
-| `Tab`              | Parcourt les éléments du menu    |
-| `Enter` / `Space`  | Active l'élément                 |
+| Key                | Action                        |
+| ------------------ | ----------------------------- |
+| `Ctrl+B` / `Cmd+B` | Opens / collapses the sidebar |
+| `Tab`              | Moves through the menu items  |
+| `Enter` / `Space`  | Activates the item            |
 
-**Nom accessible** : `SidebarTrigger` est nommé par `UI_STRINGS.sidebar.toggle`. Envelopper les menus de navigation dans une `nav` nommée.
+**Accessible name**: `SidebarTrigger` is named by `UI_STRINGS.sidebar.toggle`. Wrap navigation menus in a named `nav`.
 
-**Vigilance** :
+**Pitfalls**:
 
-- `SidebarRail` n'est pas focalisable (`tabIndex={-1}`) : c'est un raccourci souris, le déclencheur reste la voie clavier.
-- Repliée en icônes, chaque bouton doit garder un nom (texte masqué ou `tooltip`).
-- Le raccourci `Ctrl/Cmd+B` peut entrer en conflit avec la mise en gras d'un éditeur : le désactiver dans ce contexte.
+- `SidebarRail` is not focusable (`tabIndex={-1}`): it is a mouse shortcut; the trigger remains the keyboard path.
+- Collapsed to icons, every button must keep a name (hidden text or a `tooltip`).
+- The `Ctrl/Cmd+B` shortcut can clash with an editor's bold command: turn it off in that context.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -398,10 +398,10 @@ export default function Example() {
             <SidebarGroupLabel>Navigation</SidebarGroupLabel>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton isActive>Tableau de bord</SidebarMenuButton>
+                <SidebarMenuButton isActive>Dashboard</SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton>Paramètres</SidebarMenuButton>
+                <SidebarMenuButton>Settings</SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroup>
@@ -409,21 +409,21 @@ export default function Example() {
       </Sidebar>
       <main className="flex-1 p-4">
         <SidebarTrigger />
-        <p>Contenu principal</p>
+        <p>Main content</p>
       </main>
     </SidebarProvider>
   )
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Sheet` — utilisé en interne pour le mode mobile
-- `Button` — base du `SidebarTrigger`
-- `Tooltip` — affiché en mode collapsed sur les `SidebarMenuButton`
-- `Separator` — base du `SidebarSeparator`
-- `Skeleton` — base du `SidebarMenuSkeleton`
-- `Input` — base du `SidebarInput`
-- `Collapsible` — pattern similaire pour les sections repliables
-- `ScrollArea` — alternative pour le défilement du contenu
-- `Direction` — fournit la direction de lecture pour le positionnement
+- `Sheet` — used internally for the mobile mode
+- `Button` — the base of `SidebarTrigger`
+- `Tooltip` — shown on `SidebarMenuButton`s in collapsed mode
+- `Separator` — the base of `SidebarSeparator`
+- `Skeleton` — the base of `SidebarMenuSkeleton`
+- `Input` — the base of `SidebarInput`
+- `Collapsible` — a similar pattern for collapsible sections
+- `ScrollArea` — the alternative for scrolling the content
+- `Direction` — provides the reading direction used for positioning

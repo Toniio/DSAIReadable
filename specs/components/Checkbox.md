@@ -2,56 +2,56 @@
 
 ## Metadata
 
-| Champ         | Valeur                     |
+| Field         | Value                      |
 | ------------- | -------------------------- |
-| Nom           | Checkbox                   |
-| Catégorie     | Forms                      |
-| Statut        | stable                     |
+| Name          | Checkbox                   |
+| Category      | Forms                      |
+| Status        | stable                     |
 | figma_node_id |                            |
 | code_path     | components/ui/checkbox.tsx |
 
-## Rôle
+## Role
 
-Case à cocher binaire (ou indéterminée) permettant la sélection d'une option dans un formulaire, basée sur Radix `Checkbox.Root`.
+A two-state (or indeterminate) checkbox for selecting an option in a form, built on Radix `Checkbox.Root`.
 
 ## Usage
 
-- Accepter des conditions d'utilisation ou de confidentialité
-- Activer/désactiver une préférence (ex. : "Se souvenir de moi")
-- Sélectionner plusieurs éléments dans une liste
-- Utiliser l'état `indeterminate` pour représenter une sélection partielle d'un groupe
+- Accept terms of use or a privacy policy
+- Turn a preference on or off (for example "Remember me")
+- Select several entries in a list
+- Use the `indeterminate` state for a partially selected group
 
-<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-20: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+- **Choice** (`rule-20`) — Pick the selection control from the number of options and the screen width. One value out of 2 to 5 options: `RadioGroup`, with every option visible. Out of 6 to 15: `Select` from `md` up; below `md`, `NativeSelect`, **unless** the options need rich rendering (icons, descriptions) → `Select`. More than 15 options, or search required: `Combobox`. Several values: `Checkbox` up to 5 options, `Combobox` in multiple mode beyond that. An on/off toggle that takes effect immediately: `Switch`.
 
-## Contraintes
+## Constraints
 
-- **MUST** — associer la case à un libellé visible : `Label` (`id` / `htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'elle porte une description ou un message d'erreur (`rule-09`)
-- **MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`
-- **MUST NOT** — laisser la zone de clic étendue (`after:-inset-x-3 after:-inset-y-2`) chevaucher un contrôle voisin
-- **Note** — désactivée, la case n'est pas soumise avec le formulaire natif
-- **MUST NOT** — signaler un état par la couleur seule : ajouter une icône ou un texte
+- **MUST** — pair the checkbox with a visible label: `Label` (`id` / `htmlFor`), or `Field` with a `FieldLabel`; inside a `Field` as soon as it has a description or an error message (`rule-09`)
+- **MUST NOT** — serve mutually exclusive choices → use `RadioGroup`
+- **MUST NOT** — let the enlarged hit area (`after:-inset-x-3 after:-inset-y-2`) overlap a neighboring control
+- **Note** — a disabled checkbox is not submitted with the native form
+- **MUST NOT** — convey a state through color alone: add an icon or text
 
-## Dépendances
+## Dependencies
 
-- `Checkbox.Root` et `Checkbox.Indicator` de `radix-ui`
-- `CheckIcon` de `lucide-react` (taille `size-3.5`)
-- `Label` — obligatoire pour l'accessibilité
-- `Field` — obligatoire dès que la case porte une description ou un message d'erreur (`rule-09`)
+- `Checkbox.Root` and `Checkbox.Indicator` from `radix-ui`
+- `CheckIcon` from `@phosphor-icons/react` (sized `size-3.5`)
+- `Label` — required for accessibility
+- `Field` — required as soon as the checkbox has a description or an error message (`rule-09`)
 
-## Anatomie
+## Anatomy
 
-| Slot                             | Rôle                                                   |
-| -------------------------------- | ------------------------------------------------------ |
-| `data-slot="checkbox"`           | `<button>` Radix Checkbox.Root, carré 16 × 16 px       |
-| `data-slot="checkbox-indicator"` | Radix Checkbox.Indicator contenant l'icône `CheckIcon` |
+| Slot                             | Role                                                  |
+| -------------------------------- | ----------------------------------------------------- |
+| `data-slot="checkbox"`           | Radix `Checkbox.Root` `<button>`, a 16 × 16 px square |
+| `data-slot="checkbox-indicator"` | Radix `Checkbox.Indicator`, holds the `CheckIcon`     |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                                | Classes et variables                                                                           | Où                                                        |
+| Token                                | Classes and variables                                                                          | Where                                                     |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | `border-width.default`               | `border`                                                                                       | `Checkbox`                                                |
 | `color.action.background.default`    | `bg-primary` · `border-primary`                                                                | `Checkbox`                                                |
@@ -62,70 +62,70 @@ Case à cocher binaire (ou indéterminée) permettant la sélection d'une option
 | `opacity.disabled`                   | `opacity-disabled`                                                                             | `Checkbox`                                                |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `Checkbox` · `Checkbox` via `FOCUS_RING` (`lib/focus.ts`) |
 
-Relevé dans `components/ui/checkbox.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/checkbox.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Checkbox`
 
-Rend `CheckboxPrimitive.Root`.
+Renders `CheckboxPrimitive.Root`.
 
-| Prop              | Type                                                  | Défaut  | Description                                   |
-| ----------------- | ----------------------------------------------------- | ------- | --------------------------------------------- |
-| `checked`         | `CheckboxPrimitive.CheckedState`                      | —       | État contrôlé de la case                      |
-| `defaultChecked`  | `CheckboxPrimitive.CheckedState`                      | —       | État initial non contrôlé                     |
-| `onCheckedChange` | `(checked: CheckboxPrimitive.CheckedState) => void`   | —       | Callback de changement d'état                 |
-| `disabled`        | `boolean`                                             | `false` | Désactive la case                             |
-| `required`        | `boolean`                                             | `false` | Rend la case obligatoire dans le formulaire   |
-| `name`            | `string`                                              | —       | Nom du champ pour la soumission de formulaire |
-| `value`           | `string \| number \| readonly string[]`               | `"on"`  | Valeur soumise quand la case est cochée       |
-| `className`       | `string`                                              | —       | Classes CSS additionnelles                    |
-| `...props`        | `React.ComponentProps<typeof CheckboxPrimitive.Root>` | —       | Props de `CheckboxPrimitive.Root`             |
+| Prop              | Type                                                  | Default | Description                                |
+| ----------------- | ----------------------------------------------------- | ------- | ------------------------------------------ |
+| `checked`         | `CheckboxPrimitive.CheckedState`                      | —       | Checked state (controlled)                 |
+| `defaultChecked`  | `CheckboxPrimitive.CheckedState`                      | —       | Initial checked state (uncontrolled)       |
+| `onCheckedChange` | `(checked: CheckboxPrimitive.CheckedState) => void`   | —       | Called when the checked state changes      |
+| `disabled`        | `boolean`                                             | `false` | Disables the checkbox                      |
+| `required`        | `boolean`                                             | `false` | Makes the checkbox required in the form    |
+| `name`            | `string`                                              | —       | Field name used when the form is submitted |
+| `value`           | `string \| number \| readonly string[]`               | `"on"`  | Value submitted when the box is checked    |
+| `className`       | `string`                                              | —       | Additional CSS classes                     |
+| `...props`        | `React.ComponentProps<typeof CheckboxPrimitive.Root>` | —       | `CheckboxPrimitive.Root` props             |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État                  | Comportement visuel                                                                       |
-| --------------------- | ----------------------------------------------------------------------------------------- |
-| `default` (unchecked) | Fond transparent, bordure `border-input`                                                  |
-| `hover`               | Pas de style dédié (géré par le focus natif)                                              |
-| `focus`               | `border-ring` + `ring-1 ring-ring/50`                                                     |
-| `active`              | Pas de style dédié                                                                        |
-| `disabled`            | `cursor-not-allowed opacity-disabled`, `pointer-events-none`                              |
-| `checked`             | `border-primary bg-primary text-primary-foreground`, icône `CheckIcon` visible            |
-| `indeterminate`       | Radix gère `data-state="indeterminate"` — prévoir une icône `MinusIcon` côté consommateur |
-| `error`               | `aria-invalid="true"` : `border-destructive ring-destructive/20`                          |
+| State                 | Visual behavior                                                               |
+| --------------------- | ----------------------------------------------------------------------------- |
+| `default` (unchecked) | Transparent background, `border-input` border                                 |
+| `hover`               | No dedicated style (native focus handles it)                                  |
+| `focus`               | `border-ring` and `ring-1 ring-ring/50`                                       |
+| `active`              | No dedicated style                                                            |
+| `disabled`            | `cursor-not-allowed opacity-disabled`, `pointer-events-none`                  |
+| `checked`             | `border-primary bg-primary text-primary-foreground`, `CheckIcon` visible      |
+| `indeterminate`       | Radix sets `data-state="indeterminate"` — the consumer provides a `MinusIcon` |
+| `error`               | `aria-invalid="true"`: `border-destructive ring-destructive/20`               |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) (Radix Checkbox)
+**Pattern**: [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) (Radix Checkbox)
 
-**Rôle** : `role="checkbox"` sur un `button`, `aria-checked` : `true`, `false` ou `mixed` (indéterminé).
+**Role**: `role="checkbox"` on a `button`, with `aria-checked`: `true`, `false` or `mixed` (indeterminate).
 
-**Clavier** :
+**Keyboard**:
 
-| Touche  | Action          |
-| ------- | --------------- |
-| `Space` | Coche / décoche |
-| `Tab`   | Focus suivant   |
+| Key     | Action                          |
+| ------- | ------------------------------- |
+| `Space` | Checks / unchecks the box       |
+| `Tab`   | Moves focus to the next element |
 
-**Nom accessible** : Obligatoire : un `Label` associé par `htmlFor` / `id`, ou `aria-label`. Cliquer le label coche la case.
+**Accessible name**: Required: a `Label` tied through `htmlFor` / `id`, or an `aria-label`. Clicking the label toggles the box.
 
-**Vigilance** :
+**Pitfalls**:
 
-- `Enter` ne coche pas la case (comportement natif) : ne pas l'ajouter.
-- `aria-invalid` stylise l'erreur ; le message doit être relié par `aria-describedby`.
+- `Enter` does not toggle the box (native behavior): do not add it.
+- `aria-invalid` styles the error; the message must be linked through `aria-describedby`.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import { Checkbox } from "@/components/ui/checkbox"
@@ -135,15 +135,15 @@ export default function Example() {
   return (
     <div className="flex items-center gap-2">
       <Checkbox id="remember" name="remember" />
-      <Label htmlFor="remember">Se souvenir de moi</Label>
+      <Label htmlFor="remember">Remember me</Label>
     </div>
   )
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Label` — association obligatoire
-- `Field` — propagation de l'état invalide
-- `FieldError` — message d'erreur associé
-- `RadioGroup` — alternative pour les choix mutuellement exclusifs
+- `Label` — a required pairing
+- `Field` — passes the invalid state down
+- `FieldError` — the related error message
+- `RadioGroup` — the alternative for mutually exclusive choices

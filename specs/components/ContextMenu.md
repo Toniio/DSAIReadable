@@ -2,63 +2,63 @@
 
 ## Metadata
 
-| Champ         | Valeur                         |
+| Field         | Value                          |
 | ------------- | ------------------------------ |
-| Nom           | ContextMenu                    |
-| Catégorie     | Overlay                        |
-| Statut        | stable                         |
+| Name          | ContextMenu                    |
+| Category      | Overlay                        |
+| Status        | stable                         |
 | figma_node_id |                                |
 | code_path     | components/ui/context-menu.tsx |
 
-## Rôle
+## Role
 
-Menu contextuel déclenché par un clic droit, affichant une liste d'actions pertinentes pour l'élément ciblé.
+A menu opened with a right-click that lists the actions relevant to the element under the pointer.
 
 ## Usage
 
-- Proposer des actions contextuelles sur un élément (copier, coller, supprimer)
-- Offrir des raccourcis d'actions dans une zone de travail (canvas, tableau, liste)
-- Permettre des sélections via checkbox ou radio dans un menu contextuel
-- Organiser des actions en groupes avec séparateurs et sous-menus
+- Offer contextual actions on an element (copy, paste, delete)
+- Provide action shortcuts in a workspace (a canvas, a table, a list)
+- Let the user make checkbox or radio choices from a context menu
+- Organize actions into groups, with separators and submenus
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir de menu principal de navigation → utiliser `DropdownMenu`
-- **MUST** — ne proposer que des actions propres à l'élément ciblé : le menu remplace celui du navigateur
-- **Note** — un seul menu contextuel s'ouvre à la fois (géré par Radix)
-- **MUST** — rendre les mêmes actions accessibles au clavier (`Shift+F10` ou touche menu)
-- **MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)
+- **MUST NOT** — serve as the main navigation menu → use `DropdownMenu`
+- **MUST** — only offer actions that belong to the targeted element: the menu replaces the browser's own
+- **Note** — only one context menu opens at a time (Radix handles it)
+- **MUST** — make the same actions reachable from the keyboard (`Shift+F10` or the Menu key)
+- **MUST** — keep `disabled` items visible (`opacity-disabled`, `pointer-events-none`)
 
-## Dépendances
+## Dependencies
 
-- `ContextMenu` de `radix-ui` (primitives Root, Trigger, Portal, Content, Item, CheckboxItem, RadioItem, RadioGroup, Label, Separator, Sub, SubTrigger, SubContent, Group)
-- `@phosphor-icons/react` — icônes `CaretRightIcon` (sous-menu) et `CheckIcon` (indicateur de sélection)
+- `ContextMenu` from `radix-ui` (Root, Trigger, Portal, Content, Item, CheckboxItem, RadioItem, RadioGroup, Label, Separator, Sub, SubTrigger, SubContent, Group)
+- `@phosphor-icons/react` — `CaretRightIcon` (submenu) and `CheckIcon` (selection indicator)
 
-## Anatomie
+## Anatomy
 
-| Slot                                     | Rôle                                         |
-| ---------------------------------------- | -------------------------------------------- |
-| `data-slot="context-menu"`               | Racine du composant                          |
-| `data-slot="context-menu-trigger"`       | Zone réactive au clic droit                  |
-| `data-slot="context-menu-portal"`        | Portail de rendu                             |
-| `data-slot="context-menu-content"`       | Conteneur du menu flottant                   |
-| `data-slot="context-menu-item"`          | Élément d'action simple                      |
-| `data-slot="context-menu-checkbox-item"` | Élément avec case à cocher                   |
-| `data-slot="context-menu-radio-item"`    | Élément avec bouton radio                    |
-| `data-slot="context-menu-radio-group"`   | Groupe de radio items                        |
-| `data-slot="context-menu-group"`         | Groupe logique d'items                       |
-| `data-slot="context-menu-label"`         | Libellé de section                           |
-| `data-slot="context-menu-separator"`     | Séparateur visuel entre groupes              |
-| `data-slot="context-menu-shortcut"`      | Raccourci clavier affiché à droite           |
-| `data-slot="context-menu-sub"`           | Conteneur de sous-menu                       |
-| `data-slot="context-menu-sub-trigger"`   | Déclencheur de sous-menu (avec icône flèche) |
-| `data-slot="context-menu-sub-content"`   | Contenu du sous-menu                         |
+| Slot                                     | Role                                  |
+| ---------------------------------------- | ------------------------------------- |
+| `data-slot="context-menu"`               | Root                                  |
+| `data-slot="context-menu-trigger"`       | Area that responds to the right-click |
+| `data-slot="context-menu-portal"`        | Rendering portal                      |
+| `data-slot="context-menu-content"`       | Floating menu container               |
+| `data-slot="context-menu-item"`          | A plain action item                   |
+| `data-slot="context-menu-checkbox-item"` | An item with a checkbox               |
+| `data-slot="context-menu-radio-item"`    | An item with a radio button           |
+| `data-slot="context-menu-radio-group"`   | A group of radio items                |
+| `data-slot="context-menu-group"`         | A logical group of items              |
+| `data-slot="context-menu-label"`         | Section label                         |
+| `data-slot="context-menu-separator"`     | Visual separator between groups       |
+| `data-slot="context-menu-shortcut"`      | Keyboard shortcut shown at the right  |
+| `data-slot="context-menu-sub"`           | Submenu container                     |
+| `data-slot="context-menu-sub-trigger"`   | Submenu trigger (with an arrow icon)  |
+| `data-slot="context-menu-sub-content"`   | Submenu content                       |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                          | Classes et variables                                                        | Où                                                                                                                                                                        |
+| Token                          | Classes and variables                                                       | Where                                                                                                                                                                     |
 | ------------------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `border-width.default`         | `border`                                                                    | `ContextMenuSubContent`                                                                                                                                                   |
 | `color.background.elevated`    | `bg-popover`                                                                | `ContextMenuContent` · `ContextMenuSubContent`                                                                                                                            |
@@ -74,183 +74,183 @@ Menu contextuel déclenché par un clic droit, affichant une liste d'actions per
 | `typography.size.xs`           | `text-xs`                                                                   | `ContextMenuCheckboxItem` · `ContextMenuItem` · `ContextMenuLabel` · `ContextMenuRadioItem` · `ContextMenuShortcut` · `ContextMenuSubTrigger`                             |
 | `zindex.popover`               | `z-popover`                                                                 | `ContextMenuContent` · `ContextMenuSubContent`                                                                                                                            |
 
-Relevé dans `components/ui/context-menu.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/context-menu.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `ContextMenu`
 
-Rend `ContextMenuPrimitive.Root`.
+Renders `ContextMenuPrimitive.Root`.
 
-| Prop       | Type                                                     | Défaut | Description                          |
-| ---------- | -------------------------------------------------------- | ------ | ------------------------------------ |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Root>` | —      | Props de `ContextMenuPrimitive.Root` |
+| Prop       | Type                                                     | Default | Description                       |
+| ---------- | -------------------------------------------------------- | ------- | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Root>` | —       | `ContextMenuPrimitive.Root` props |
 
 ### `ContextMenuTrigger`
 
-Rend `ContextMenuPrimitive.Trigger`.
+Renders `ContextMenuPrimitive.Trigger`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Trigger>` | —      | Props de `ContextMenuPrimitive.Trigger` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Trigger>` | —       | `ContextMenuPrimitive.Trigger` props |
 
 ### `ContextMenuContent`
 
-Rend `ContextMenuPrimitive.Content`.
+Renders `ContextMenuPrimitive.Content`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `side`     | `"top" \| "right" \| "bottom" \| "left"`                    | —      | Côté d'apparition du contenu            |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Content>` | —      | Props de `ContextMenuPrimitive.Content` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `side`     | `"top" \| "right" \| "bottom" \| "left"`                    | —       | Side the content appears on          |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Content>` | —       | `ContextMenuPrimitive.Content` props |
 
 ### `ContextMenuItem`
 
-Rend `ContextMenuPrimitive.Item`.
+Renders `ContextMenuPrimitive.Item`.
 
-| Prop       | Type                                                     | Défaut      | Description                                                                                    |
-| ---------- | -------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
-| `inset`    | `boolean`                                                | `undefined` | Ajoute un padding gauche supplémentaire (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
-| `variant`  | `"default" \| "destructive"`                             | `"default"` | Variante visuelle de l'item (sur ContextMenuItem)                                              |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Item>` | —           | Props de `ContextMenuPrimitive.Item`                                                           |
+| Prop       | Type                                                     | Default     | Description                                                                   |
+| ---------- | -------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                | `undefined` | Adds extra left padding (on Item, CheckboxItem, RadioItem, Label, SubTrigger) |
+| `variant`  | `"default" \| "destructive"`                             | `"default"` | Visual variant of the item (on `ContextMenuItem`)                             |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Item>` | —           | `ContextMenuPrimitive.Item` props                                             |
 
 ### `ContextMenuCheckboxItem`
 
-Rend `ContextMenuPrimitive.CheckboxItem`.
+Renders `ContextMenuPrimitive.CheckboxItem`.
 
-| Prop       | Type                                                             | Défaut      | Description                                                                                |
-| ---------- | ---------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                        | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `checked`  | `CheckedState`                                                   | `undefined` | État coché d'un CheckboxItem                                                               |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>` | —           | Props de `ContextMenuPrimitive.CheckboxItem`                                               |
+| Prop       | Type                                                             | Default     | Description                                                         |
+| ---------- | ---------------------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                        | —           | Adds left padding so the text lines up with items that have an icon |
+| `checked`  | `CheckedState`                                                   | `undefined` | Checked state of a CheckboxItem                                     |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>` | —           | `ContextMenuPrimitive.CheckboxItem` props                           |
 
 ### `ContextMenuRadioItem`
 
-Rend `ContextMenuPrimitive.RadioItem`.
+Renders `ContextMenuPrimitive.RadioItem`.
 
-| Prop       | Type                                                          | Défaut | Description                                                                                |
-| ---------- | ------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                     | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.RadioItem>` | —      | Props de `ContextMenuPrimitive.RadioItem`                                                  |
+| Prop       | Type                                                          | Default | Description                                                         |
+| ---------- | ------------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                     | —       | Adds left padding so the text lines up with items that have an icon |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.RadioItem>` | —       | `ContextMenuPrimitive.RadioItem` props                              |
 
 ### `ContextMenuLabel`
 
-Rend `ContextMenuPrimitive.Label`.
+Renders `ContextMenuPrimitive.Label`.
 
-| Prop       | Type                                                      | Défaut | Description                                                                                |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                 | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Label>` | —      | Props de `ContextMenuPrimitive.Label`                                                      |
+| Prop       | Type                                                      | Default | Description                                                         |
+| ---------- | --------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                 | —       | Adds left padding so the text lines up with items that have an icon |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Label>` | —       | `ContextMenuPrimitive.Label` props                                  |
 
 ### `ContextMenuSeparator`
 
-Rend `ContextMenuPrimitive.Separator`.
+Renders `ContextMenuPrimitive.Separator`.
 
-| Prop       | Type                                                          | Défaut | Description                               |
-| ---------- | ------------------------------------------------------------- | ------ | ----------------------------------------- |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Separator>` | —      | Props de `ContextMenuPrimitive.Separator` |
+| Prop       | Type                                                          | Default | Description                            |
+| ---------- | ------------------------------------------------------------- | ------- | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Separator>` | —       | `ContextMenuPrimitive.Separator` props |
 
 ### `ContextMenuShortcut`
 
-Rend `<span>`.
+Renders `<span>`.
 
-| Prop       | Type                           | Défaut | Description               |
-| ---------- | ------------------------------ | ------ | ------------------------- |
-| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+| Prop       | Type                           | Default | Description           |
+| ---------- | ------------------------------ | ------- | --------------------- |
+| `...props` | `React.ComponentProps<"span">` | —       | Native `<span>` props |
 
 ### `ContextMenuGroup`
 
-Rend `ContextMenuPrimitive.Group`.
+Renders `ContextMenuPrimitive.Group`.
 
-| Prop       | Type                                                      | Défaut | Description                           |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Group>` | —      | Props de `ContextMenuPrimitive.Group` |
+| Prop       | Type                                                      | Default | Description                        |
+| ---------- | --------------------------------------------------------- | ------- | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Group>` | —       | `ContextMenuPrimitive.Group` props |
 
 ### `ContextMenuPortal`
 
-Rend `ContextMenuPrimitive.Portal`.
+Renders `ContextMenuPrimitive.Portal`.
 
-| Prop       | Type                                                       | Défaut | Description                            |
-| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Portal>` | —      | Props de `ContextMenuPrimitive.Portal` |
+| Prop       | Type                                                       | Default | Description                         |
+| ---------- | ---------------------------------------------------------- | ------- | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Portal>` | —       | `ContextMenuPrimitive.Portal` props |
 
 ### `ContextMenuSub`
 
-Rend `ContextMenuPrimitive.Sub`.
+Renders `ContextMenuPrimitive.Sub`.
 
-| Prop       | Type                                                    | Défaut | Description                         |
-| ---------- | ------------------------------------------------------- | ------ | ----------------------------------- |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Sub>` | —      | Props de `ContextMenuPrimitive.Sub` |
+| Prop       | Type                                                    | Default | Description                      |
+| ---------- | ------------------------------------------------------- | ------- | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.Sub>` | —       | `ContextMenuPrimitive.Sub` props |
 
 ### `ContextMenuSubContent`
 
-Rend `ContextMenuPrimitive.SubContent`.
+Renders `ContextMenuPrimitive.SubContent`.
 
-| Prop       | Type                                                           | Défaut | Description                                |
-| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.SubContent>` | —      | Props de `ContextMenuPrimitive.SubContent` |
+| Prop       | Type                                                           | Default | Description                             |
+| ---------- | -------------------------------------------------------------- | ------- | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.SubContent>` | —       | `ContextMenuPrimitive.SubContent` props |
 
 ### `ContextMenuSubTrigger`
 
-Rend `ContextMenuPrimitive.SubTrigger`.
+Renders `ContextMenuPrimitive.SubTrigger`.
 
-| Prop       | Type                                                           | Défaut | Description                                                                                |
-| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                      | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.SubTrigger>` | —      | Props de `ContextMenuPrimitive.SubTrigger`                                                 |
+| Prop       | Type                                                           | Default | Description                                                         |
+| ---------- | -------------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                      | —       | Adds left padding so the text lines up with items that have an icon |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.SubTrigger>` | —       | `ContextMenuPrimitive.SubTrigger` props                             |
 
 ### `ContextMenuRadioGroup`
 
-Rend `ContextMenuPrimitive.RadioGroup`.
+Renders `ContextMenuPrimitive.RadioGroup`.
 
-| Prop       | Type                                                           | Défaut | Description                                |
-| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
-| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.RadioGroup>` | —      | Props de `ContextMenuPrimitive.RadioGroup` |
+| Prop       | Type                                                           | Default | Description                             |
+| ---------- | -------------------------------------------------------------- | ------- | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof ContextMenuPrimitive.RadioGroup>` | —       | `ContextMenuPrimitive.RadioGroup` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                |
-| -------- | ---------------------------------------------------------- |
-| default  | Menu fermé, trigger en attente de clic droit               |
-| open     | Menu affiché avec animation `fade-in` + `zoom-in-95`       |
-| focus    | Item surligné avec `bg-accent` et `text-accent-foreground` |
-| active   | Item en cours de sélection                                 |
-| disabled | Item grisé (`opacity-disabled`, `pointer-events-none`)     |
+| State    | Description                                                    |
+| -------- | -------------------------------------------------------------- |
+| default  | Menu closed; the trigger waits for a right-click               |
+| open     | Menu shown, animated with `fade-in` and `zoom-in-95`           |
+| focus    | Item highlighted with `bg-accent` and `text-accent-foreground` |
+| active   | Item being selected                                            |
+| disabled | Grayed-out item (`opacity-disabled`, `pointer-events-none`)    |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Menu](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) contextuel (Radix ContextMenu)
+**Pattern**: Context [menu](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix ContextMenu)
 
-**Rôle** : `role="menu"` et `menuitem` / `menuitemcheckbox` / `menuitemradio`.
+**Role**: `role="menu"`, with `menuitem` / `menuitemcheckbox` / `menuitemradio` items.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                               | Action                                          |
-| ------------------------------------ | ----------------------------------------------- |
-| Clic droit, `Shift+F10`, touche Menu | Ouvre le menu sur la zone                       |
-| `ArrowDown` / `ArrowUp`              | Élément suivant / précédent                     |
-| `ArrowRight` / `ArrowLeft`           | Ouvre / ferme un sous-menu                      |
-| `Enter` / `Space`                    | Active l'élément                                |
-| `Escape`                             | Ferme le menu                                   |
-| Saisie                               | Va à l'élément qui commence par la lettre tapée |
+| Key                                | Action                                              |
+| ---------------------------------- | --------------------------------------------------- |
+| Right-click, `Shift+F10`, Menu key | Opens the menu on the area                          |
+| `ArrowDown` / `ArrowUp`            | Next / previous item                                |
+| `ArrowRight` / `ArrowLeft`         | Opens / closes a submenu                            |
+| `Enter` / `Space`                  | Activates the item                                  |
+| `Escape`                           | Closes the menu                                     |
+| Typing                             | Moves to the item that starts with the typed letter |
 
-**Nom accessible** : Le texte de chaque élément ; un élément icône seule doit avoir un `aria-label`.
+**Accessible name**: Each item's text; an icon-only item needs an `aria-label`.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Un menu contextuel est invisible tant qu'on ne le cherche pas : chaque action qu'il propose doit exister ailleurs (bouton, menu visible).
-- La zone déclencheuse doit être focalisable pour que `Shift+F10` l'atteigne.
+- A context menu stays invisible until someone looks for it: every action it offers must also exist somewhere else (a button, a visible menu).
+- The trigger area must be focusable so `Shift+F10` can reach it.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -266,25 +266,25 @@ export default function Example() {
   return (
     <ContextMenu>
       <ContextMenuTrigger className="flex h-36 w-64 items-center justify-center rounded-xs border border-dashed">
-        Clic droit ici
+        Right-click here
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem>
-          Copier <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+          Copy <ContextMenuShortcut>⌘C</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem>
-          Coller <ContextMenuShortcut>⌘V</ContextMenuShortcut>
+          Paste <ContextMenuShortcut>⌘V</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSeparator />
-        <ContextMenuItem variant="destructive">Supprimer</ContextMenuItem>
+        <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   )
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `DropdownMenu` — menu déclenché par un clic gauche sur un bouton
-- `Popover` — contenu flottant plus riche qu'un simple menu
-- `Sheet` — panneau latéral pour des listes d'actions étendues
+- `DropdownMenu` — a menu opened by a left-click on a button
+- `Popover` — floating content richer than a plain menu
+- `Sheet` — a side panel for long lists of actions

@@ -2,75 +2,73 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
-Le système de motion définit des **durées** et des **courbes d'accélération** (easings) cohérentes pour toutes les transitions et animations de l'interface. La combinaison par défaut est `motion.duration.normal` (200ms) + `motion.easing.default` (ease-in-out).
+The motion system defines consistent **durations** and **easing curves** for every transition and animation in the interface. The default combination is `motion.duration.normal` (200ms) with `motion.easing.default` (ease-in-out).
 
 ---
 
-## Durées
+## Durations
 
-| Token                     | CSS Variable                | Valeur  | Tailwind Class    | Cas d'usage typique                                             |
-| ------------------------- | --------------------------- | ------- | ----------------- | --------------------------------------------------------------- |
-| `motion.duration.instant` | `--motion-duration-instant` | `0ms`   | —                 | Changements d'état sans transition (ex: masquer un élément)     |
-| `motion.duration.fast`    | `--motion-duration-fast`    | `100ms` | `duration-fast`   | Hover/focus — feedback immédiat sur des éléments interactifs    |
-| `motion.duration.normal`  | `--motion-duration-normal`  | `200ms` | `duration-normal` | **Valeur par défaut** — transitions de couleur, border, opacity |
-| `motion.duration.slow`    | `--motion-duration-slow`    | `300ms` | `duration-slow`   | Modals, drawers, accordéons — entrée/sortie d'éléments larges   |
-| `motion.duration.slower`  | `--motion-duration-slower`  | `500ms` | `duration-slower` | Animations complexes — uniquement pour effets très délibérés    |
+| Token                     | CSS Variable                | Value   | Tailwind Class    | Typical use                                                      |
+| ------------------------- | --------------------------- | ------- | ----------------- | ---------------------------------------------------------------- |
+| `motion.duration.instant` | `--motion-duration-instant` | `0ms`   | —                 | State changes with no transition (hiding an element)             |
+| `motion.duration.fast`    | `--motion-duration-fast`    | `100ms` | `duration-fast`   | Hover and focus — immediate feedback on interactive elements     |
+| `motion.duration.normal`  | `--motion-duration-normal`  | `200ms` | `duration-normal` | **The default** — color, border and opacity transitions          |
+| `motion.duration.slow`    | `--motion-duration-slow`    | `300ms` | `duration-slow`   | Modals, drawers, accordions — large elements entering or leaving |
+| `motion.duration.slower`  | `--motion-duration-slower`  | `500ms` | `duration-slower` | Complex animations — only for deliberate effects                 |
 
-> **Tailwind :** Les classes `duration-fast`, `duration-normal`, `duration-slow`, `duration-slower` sont générées via `@theme inline` (`--transition-duration-*`).
+> **Tailwind:** the `duration-fast`, `duration-normal`, `duration-slow` and `duration-slower` classes are generated through `@theme inline` (`--transition-duration-*`).
 
 ---
 
 ## Easings
 
-| Token                   | CSS Variable              | Valeur CSS                                | Tailwind Class | Ressenti visuel                                     |
-| ----------------------- | ------------------------- | ----------------------------------------- | -------------- | --------------------------------------------------- |
-| `motion.easing.default` | `--motion-easing-default` | `cubic-bezier(0.4, 0, 0.2, 1)`            | `ease-default` | Naturel — accélère puis décélère, fluidité générale |
-| `motion.easing.in`      | `--motion-easing-in`      | `cubic-bezier(0.4, 0, 1, 1)`              | `ease-in`      | Accélère vers la fin — pour les sorties d'écran     |
-| `motion.easing.out`     | `--motion-easing-out`     | `cubic-bezier(0, 0, 0.2, 1)`              | `ease-out`     | Décélère en fin — pour les entrées à l'écran        |
-| `motion.easing.spring`  | `--motion-easing-spring`  | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | `ease-spring`  | Ressort avec dépassement — interactions ludiques    |
+| Token                   | CSS Variable              | CSS value                                 | Tailwind Class | How it feels                                         |
+| ----------------------- | ------------------------- | ----------------------------------------- | -------------- | ---------------------------------------------------- |
+| `motion.easing.default` | `--motion-easing-default` | `cubic-bezier(0.4, 0, 0.2, 1)`            | `ease-default` | Natural — speeds up, then slows down; smooth overall |
+| `motion.easing.in`      | `--motion-easing-in`      | `cubic-bezier(0.4, 0, 1, 1)`              | `ease-in`      | Speeds up toward the end — for leaving the screen    |
+| `motion.easing.out`     | `--motion-easing-out`     | `cubic-bezier(0, 0, 0.2, 1)`              | `ease-out`     | Slows down at the end — for entering the screen      |
+| `motion.easing.spring`  | `--motion-easing-spring`  | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | `ease-spring`  | Springy, with overshoot — for playful interactions   |
 
-> **Tailwind :** Les classes `ease-default`, `ease-in`, `ease-out`, `ease-spring` sont générées via `@theme inline` (`--ease-*`). Elles ont longtemps été déclarées sous `--transition-timing-function-*`, qui n'est pas un namespace Tailwind v4 : aucune des quatre classes n'existait réellement.
+> **Tailwind:** the `ease-default`, `ease-in`, `ease-out` and `ease-spring` classes are generated through `@theme inline` (`--ease-*`). For a long time they were declared under `--transition-timing-function-*`, which is not a Tailwind v4 namespace: none of the four classes actually existed.
 
-### Quand utiliser quel easing ?
+### Which easing when?
 
 ```
-Élément entrant à l'écran    → ease-out  (décélère à l'arrivée, semble naturel)
-Élément quittant l'écran     → ease-in   (accélère vers la sortie)
-Transition d'état neutre     → ease-default (hover, color, opacity)
-Interaction playful/feedback → ease-spring  (bouton "pop", badge d'ajout)
+Element entering the screen   → ease-out      (slows down on arrival, feels natural)
+Element leaving the screen    → ease-in       (speeds up on the way out)
+Neutral state change          → ease-default  (hover, color, opacity)
+Playful interaction/feedback  → ease-spring   (a button "pop", an added badge)
 ```
 
 ---
 
----
+## Examples
 
-## Exemples d'utilisation
-
-### Hover standard (couleur/opacité)
+### Standard hover (color / opacity)
 
 ```tsx
 <button className="transition-colors duration-fast ease-default hover:bg-accent">
-  Bouton
+  Button
 </button>
 ```
 
-### Fade d'un élément
+### Fading an element
 
 ```tsx
 <div className="opacity-0 transition-opacity duration-normal ease-default data-[visible=true]:opacity-100">
-  Contenu conditionnel
+  Conditional content
 </div>
 ```
 
-### Entrée d'un modal
+### A modal entering
 
 ```tsx
 <dialog className="transition-all duration-slow ease-out">
-  Contenu du dialog
+  Dialog content
 </dialog>
 ```
 
-### Sortie d'un dropdown
+### A drop-down leaving
 
 ```tsx
 <div className="transition-all duration-normal ease-in data-[state=closed]:scale-95 data-[state=closed]:opacity-0">
@@ -78,7 +76,7 @@ Interaction playful/feedback → ease-spring  (bouton "pop", badge d'ajout)
 </div>
 ```
 
-### Animation spring sur un badge
+### A spring animation on a badge
 
 ```tsx
 <span className="transition-transform duration-normal ease-spring hover:scale-110">
@@ -88,24 +86,24 @@ Interaction playful/feedback → ease-spring  (bouton "pop", badge d'ajout)
 
 ---
 
-## Combinaisons recommandées
+## Suggested combinations
 
-| Cas                              | Durée            | Easing         |
-| -------------------------------- | ---------------- | -------------- |
-| Hover / focus (couleur, bordure) | `fast` (100ms)   | `ease-default` |
-| Fade in/out d'un élément         | `normal` (200ms) | `ease-default` |
-| Entrée d'un overlay/modal        | `slow` (300ms)   | `ease-out`     |
-| Sortie d'un overlay/modal        | `normal` (200ms) | `ease-in`      |
-| Expansion d'accordéon            | `slow` (300ms)   | `ease-out`     |
-| Micro-animation ludique          | `normal` (200ms) | `ease-spring`  |
-| Animation de graphique           | `slower` (500ms) | `ease-out`     |
+| Case                          | Duration         | Easing         |
+| ----------------------------- | ---------------- | -------------- |
+| Hover / focus (color, border) | `fast` (100ms)   | `ease-default` |
+| Fading an element in or out   | `normal` (200ms) | `ease-default` |
+| An overlay or modal entering  | `slow` (300ms)   | `ease-out`     |
+| An overlay or modal leaving   | `normal` (200ms) | `ease-in`      |
+| An accordion expanding        | `slow` (300ms)   | `ease-out`     |
+| A playful micro-animation     | `normal` (200ms) | `ease-spring`  |
+| A chart animation             | `slower` (500ms) | `ease-out`     |
 
 ---
 
 ## Usage Rules
 
-1. **Point de départ universel** — `motion.duration.normal` (200ms) + `motion.easing.default` est la combinaison par défaut pour toute nouvelle transition.
-2. **Toujours utiliser les tokens CSS** — jamais de valeurs de durée ou d'easing hardcodées dans le code.
-3. **`ease-in` pour les sorties, `ease-out` pour les entrées** — c'est une convention UX universelle qui correspond au comportement physique naturel.
-4. **`ease-spring` avec parcimonie** — uniquement pour des interactions expressives et délibérées (feedback positif, gamification). Jamais sur les transitions d'état basiques.
-5. **Ne jamais contourner les tokens** — pas de valeurs hardcodées ni de `!important` sur les propriétés de transition.
+1. **A universal starting point** — `motion.duration.normal` (200ms) with `motion.easing.default` is the default combination for any new transition.
+2. **Always use the CSS tokens** — never hard-code a duration or an easing in the code.
+3. **`ease-in` for exits, `ease-out` for entrances** — a universal UX convention that matches natural physical motion.
+4. **`ease-spring` sparingly** — only for expressive, deliberate interactions (positive feedback, gamification). Never on basic state transitions.
+5. **Never work around the tokens** — no hard-coded values and no `!important` on transition properties.

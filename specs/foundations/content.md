@@ -1,14 +1,14 @@
-# Content — chaînes par défaut et localisation
+# Content — default strings and localization
 
-## Principe
+## Principle
 
-Un composant ne décide pas des mots qu'il affiche. Les seules chaînes qu'il
-produit sans qu'on le lui demande sont les **noms accessibles** de contrôles
-sans libellé visible — la croix de fermeture d'un `Dialog`, les flèches d'un
-`Carousel`, la bascule d'un `PasswordInput` — plus le nom des deux points de
-repère (`Breadcrumb`, `Pagination`).
+A component does not decide which words it displays. The only strings it
+produces without being asked are the **accessible names** of controls that have
+no visible label — a `Dialog`'s close cross, a `Carousel`'s arrows, a
+`PasswordInput`'s toggle — plus the names of the two landmarks (`Breadcrumb`,
+`Pagination`).
 
-Toutes vivent dans `lib/ui-strings.ts`, dans un objet gelé `UI_STRINGS`.
+They all live in `lib/ui-strings.ts`, in a frozen `UI_STRINGS` object.
 
 ```ts
 import { UI_STRINGS } from "@/lib/ui-strings"
@@ -17,44 +17,44 @@ UI_STRINGS.dialog.close // "Close"
 UI_STRINGS.pagination.nextLabel // "Go to next page"
 ```
 
-## Langue
+## Language
 
-**Les défauts sont en anglais.** Ce n'est pas une préférence éditoriale : c'est
-la langue dans laquelle les composants sont distribués, de la même façon que
-leurs noms de props. Toute autre locale est fournie par l'appelant.
+**The defaults are in English.** This is not an editorial preference: it is the
+language the components are distributed in, just like their prop names. Any
+other locale is supplied by the caller.
 
-## Surcharger
+## Overriding
 
-Chaque chaîne est atteignable par une prop, jamais par un fork du composant.
+Every string can be reached through a prop, never through a fork of the
+component.
 
-| Composant                               | Prop                    | Défaut                             |
-| --------------------------------------- | ----------------------- | ---------------------------------- |
-| `BreadcrumbEllipsis`                    | `srLabel`               | `More`                             |
-| `CarouselPrevious` / `CarouselNext`     | `srLabel`               | `Previous slide` / `Next slide`    |
-| `DialogContent` / `DialogFooter`        | `closeLabel`            | `Close`                            |
-| `SheetContent`                          | `closeLabel`            | `Close`                            |
-| `Illustration`                          | `alt`                   | `Illustration`                     |
-| `PaginationPrevious` / `PaginationNext` | `text`, `label`         | `Previous` / `Go to previous page` |
-| `PaginationEllipsis`                    | `srLabel`               | `More pages`                       |
-| `Spinner`                               | `aria-label`            | `Loading`                          |
-| `PasswordInput`, `SidebarTrigger`       | — (lisent `UI_STRINGS`) |                                    |
+| Component                               | Prop                  | Default                            |
+| --------------------------------------- | --------------------- | ---------------------------------- |
+| `BreadcrumbEllipsis`                    | `srLabel`             | `More`                             |
+| `CarouselPrevious` / `CarouselNext`     | `srLabel`             | `Previous slide` / `Next slide`    |
+| `DialogContent` / `DialogFooter`        | `closeLabel`          | `Close`                            |
+| `SheetContent`                          | `closeLabel`          | `Close`                            |
+| `Illustration`                          | `alt`                 | `Illustration`                     |
+| `PaginationPrevious` / `PaginationNext` | `text`, `label`       | `Previous` / `Go to previous page` |
+| `PaginationEllipsis`                    | `srLabel`             | `More pages`                       |
+| `Spinner`                               | `aria-label`          | `Loading`                          |
+| `PasswordInput`, `SidebarTrigger`       | — (read `UI_STRINGS`) |                                    |
 
-Pour traduire l'ensemble d'une application, passer les props depuis une couche
-i18n de l'application. `UI_STRINGS` ne lit aucune locale et n'est pas réactif :
-c'est un défaut, pas un système de traduction.
+To translate a whole application, pass the props from the application's own
+i18n layer. `UI_STRINGS` reads no locale and is not reactive: it is a set of
+defaults, not a translation system.
 
 ## Usage Rules
 
-- ✅ Lire toute chaîne par défaut depuis `UI_STRINGS`, jamais en littéral dans le JSX
-- ✅ Exposer une prop de surcharge pour chaque chaîne qu'un composant rend
-- ✅ Écrire les défauts en anglais ; fournir les autres locales par props
-- ❌ Ne jamais coder en dur un `aria-label`, un `title` ou un texte `sr-only` dans un composant
-- ❌ Ne jamais mélanger deux langues dans les défauts — `npm run index:strings` échoue sur tout littéral
+- ✅ Read every default string from `UI_STRINGS`, never as a literal in the JSX
+- ✅ Expose an override prop for every string a component renders
+- ✅ Write the defaults in English; supply the other locales through props
+- ❌ Never hard-code an `aria-label`, a `title` or `sr-only` text in a component
+- ❌ Never mix two languages in the defaults — `npm run index:strings` fails on any literal
 
-## Garde-fou
+## Guard
 
-`scripts/lint-ui-strings.ts` (`npm run index:strings`) échoue sur tout
-`aria-label`, `title`, `alt` ou texte `sr-only` écrit en littéral dans
-`components/ui/`. Les valeurs qui relèvent de la grammaire ARIA
-(`aria-label="true"`, `aria-live="polite"`…) ne sont pas du texte et ne sont pas
-signalées.
+`scripts/lint-ui-strings.ts` (`npm run index:strings`) fails on any
+`aria-label`, `title`, `alt` or `sr-only` text written as a literal in
+`components/ui/`. Values that belong to the ARIA grammar
+(`aria-label="true"`, `aria-live="polite"`…) are not text and are not flagged.
