@@ -1,29 +1,30 @@
-# Instructions Copilot — DSAIReadable
+# Copilot instructions — DSAIReadable
 
-> **Source de vérité unique : [`AGENTS.md`](../AGENTS.md) à la racine du dépôt.**
-> Lis-le intégralement avant toute modification. Ce fichier n'en est qu'un rappel
-> court ; il n'existe pas pour dupliquer les règles — deux copies divergent.
+> **Single source of truth: [`AGENTS.md`](../AGENTS.md) at the root of the repository.**
+> Read it in full before any change. This file is only a short reminder; it does
+> not exist to duplicate the rules — two copies drift apart.
 
-## Rappel des règles bloquantes
+## Blocking rules, in brief
 
-- **Zéro valeur brute** dans un composant : hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`
-  passent par un token. Exception explicite uniquement : `// allow-raw: <raison>`.
-- **Tier 1 privé** : ne jamais référencer `tokens/primitive.json` hors de `semantic.json`.
-- **Icônes Phosphor uniquement** (`@phosphor-icons/react`).
-- **Dark mode class-based** (`.dark` sur `<html>`), jamais `prefers-color-scheme`.
-- **Lire `specs/components/<Composant>.md`** avant d'écrire ou modifier un composant.
-- **Ne jamais éditer à la main** `tokens.css`, `mcp-server/context/*.json`,
+- **Zero raw values** in a component: hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`
+  go through a token. The only exception is explicit: `// allow-raw: <reason>`.
+- **Tier 1 is private**: never reference `tokens/primitive.json` outside `semantic.json`.
+- **Phosphor icons only** (`@phosphor-icons/react`).
+- **Class-based dark mode** (`.dark` on `<html>`), never `prefers-color-scheme`.
+- **Read `specs/components/<Component>.md`** before writing or changing a component.
+- **Never edit by hand** `tokens.css`, `mcp-server/context/*.json`,
   `design-system.index.json`, `specs/tokens/token-reference.md`, `tokens.manifest.json` —
-  ces fichiers sont générés.
+  these files are generated.
+- **Write everything in English**, natively: code, comments, docs, specs.
 
-## Avant de proposer un commit
+## Before suggesting a commit
 
 ```bash
 npm run tokens-validate && npm run typecheck:all && npm run lint
 ```
 
-## Workflow git
+## Git workflow
 
-Branche typée (`feat/` `fix/` `chore/` `docs/` `ci/` `refactor/` `test/`) →
-commits Conventional Commits → PR (1 PR = 1 item de backlog) → squash merge.
-`main` est protégée, aucun push direct. Ne jamais utiliser `--no-verify`.
+Typed branch (`feat/` `fix/` `chore/` `docs/` `ci/` `refactor/` `test/`) →
+Conventional Commits → PR (1 PR = 1 backlog item) → squash merge.
+`main` is protected; no direct push. Never use `--no-verify`.

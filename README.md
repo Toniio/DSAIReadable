@@ -1,134 +1,134 @@
-# DSAIReadable — Design System AI-Readable
+# DSAIReadable — an AI-readable design system
 
 > **React 19 · Next.js 16 · Tailwind CSS v4 · shadcn/ui (radix-lyra) · TypeScript 5**
 
-Un design system construit pour être **lu et utilisé par les LLMs aussi bien que par les humains**. Chaque composant, chaque token, chaque règle de composition est documenté dans un format structuré et machine-readable, consommable par les agents MCP et tout générateur de code IA.
+A design system built to be **read and used by LLMs as well as by people**. Every component, every token and every composition rule is documented in a structured, machine-readable format that MCP agents and any AI code generator can consume.
 
 ---
 
-## Pourquoi ce projet existe
+## Why this project exists
 
-Les design systems traditionnels s'adressent aux humains : documentation dans un outil de maquettage, Storybook, Confluence. Dès qu'un LLM génère du code UI, il produit des valeurs brutes (`#432dd7`, `16px`), des icônes aléatoires (Lucide, Heroicons), et des composants HTML natifs (`<button>`, `<div>`) plutôt que les composants du DS.
+Traditional design systems are written for people: documentation in a design tool, Storybook, Confluence. As soon as an LLM generates UI code, it produces raw values (`#432dd7`, `16px`), random icons (Lucide, Heroicons) and native HTML elements (`<button>`, `<div>`) instead of the design system's components.
 
-L'objectif de **DSAIReadable** est de rendre le design system **première classe pour l'IA** :
+**DSAIReadable** aims to make the design system **a first-class citizen for AI**:
 
-- **Un MCP Server** expose l'intégralité du DS comme outils interrogeables par n'importe quel agent (Copilot, Cursor, Claude).
-- **Un registre shadcn** distribue les composants, les tokens et les guidelines : le code source est copié dans le projet consommateur, pas installé comme dépendance opaque.
-- **Des specs markdown à 13 sections** par composant, lisibles par les humains _et_ ingérables par les LLMs.
-- **Un inventaire JSON (`design-system.index.json`)** — source de vérité machine-readable de l'état du DS.
-- **Des linters de tokens** intégrés en CI pour garantir qu'aucune valeur brute ne s'infiltre dans le code généré.
-
----
-
-## Comment c'est construit
-
-Le projet est né d'un constat : pour qu'un LLM génère du code conforme à un DS, il faut lui donner le DS sous une forme qu'il peut _consommer_, pas seulement _lire_.
-
-### Approche
-
-1. **Tokens 3 tiers (DTCG W3C)** — Primitive → Semantic → Component. Chaque valeur visuelle a une source unique dans `tokens/*.json`, exportée en CSS custom properties.
-
-2. **Specs composants structurées** — Chaque composant a une spec markdown en 13 sections standardisées (`specs/components/`). Ces specs sont à la fois lisibles en revue de design et ingérables par le MCP Server comme contexte.
-
-3. **MCP Server maison** (`mcp-server/`) — Un serveur [Model Context Protocol](https://modelcontextprotocol.io/) développé avec le SDK officiel. Il expose le DS complet comme outils appelables par les agents IA : composants, tokens, variantes, règles de design, patterns de pages, UX writing, dataviz.
-
-4. **Distribution par registre shadcn** — Le dépôt lui-même est le canal de distribution : la CLI shadcn copie le source des composants, les tokens CSS et les guidelines dans le projet consommateur. L'agent génère donc contre du code qu'il peut lire et modifier.
-
-5. **CI de validation** — GitHub Actions valide la nomenclature DTCG des tokens et l'absence de valeurs brutes dans les composants à chaque push/PR.
-
-> La couche d'intégration Figma (Code Connect, sync de variables, génération de composants) a été retirée du repo. Voir [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md) pour la spécification de ré-intégration.
+- **An MCP server** exposes the whole design system as tools any agent can query (Copilot, Cursor, Claude).
+- **A shadcn registry** distributes the components, the tokens and the guidelines: the source code is copied into the consuming project, not installed as an opaque dependency.
+- **13-section Markdown specs** for every component, readable by people _and_ ingestible by LLMs.
+- **A JSON inventory (`design-system.index.json`)** — the machine-readable source of truth for the state of the design system.
+- **Token linters** wired into CI, so no raw value slips into generated code.
 
 ---
 
-## Structure du projet
+## How it is built
+
+The project started from one observation: for an LLM to generate code that conforms to a design system, it has to receive the design system in a form it can _consume_, not just _read_.
+
+### Approach
+
+1. **Three-tier tokens (W3C DTCG)** — Primitive → Semantic → Component. Every visual value has a single source in `tokens/*.json`, exported as CSS custom properties.
+
+2. **Structured component specs** — every component has a Markdown spec in 13 standard sections (`specs/components/`). The specs are readable in a design review and ingestible by the MCP server as context.
+
+3. **An in-house MCP server** (`mcp-server/`) — a [Model Context Protocol](https://modelcontextprotocol.io/) server built with the official SDK. It exposes the full design system as tools AI agents can call: components, tokens, variants, design rules, page patterns, UX writing, data visualization.
+
+4. **Distribution through a shadcn registry** — the repository itself is the distribution channel: the shadcn CLI copies the components' source, the CSS tokens and the guidelines into the consuming project. The agent therefore generates against code it can read and change.
+
+5. **Validation CI** — GitHub Actions checks the DTCG naming of the tokens and the absence of raw values in components on every push and PR.
+
+> The Figma integration layer (Code Connect, variable sync, component generation) has been removed from the repository. See [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md) for the reintegration spec.
+
+---
+
+## Project structure
 
 ```
 dsaireadable/
-├── app/                        # App Next.js (démo des composants)
-├── components/ui/              # 59 composants React du DS (shadcn/ui customisés)
-├── lib/                        # Modules partagés : utils, focus, ui-strings, overlay
-├── tokens/                     # Source de vérité des tokens (DTCG JSON 3 tiers)
-│   ├── primitive.json          # Tier 1 — valeurs brutes (privé)
-│   ├── semantic.json           # Tier 2 — tokens sémantiques (public)
-│   └── component.json          # Tier 3 — aliases shadcn/ui (public)
-├── tokens.css                  # CSS custom properties générées — ne pas éditer
-├── specs/                      # Documentation markdown du DS
-│   ├── components/             # 59 specs composants (13 sections chacune)
-│   ├── foundations/            # Specs couleur, typo, spacing, motion, radius…
-│   └── tokens/token-reference.md  # Référence des 301 tokens (généré)
-├── mcp-server/                 # MCP Server @dsaireadable/mcp-server
+├── app/                        # Next.js app (component demos)
+├── components/ui/              # The design system's 59 React components (customized shadcn/ui)
+├── lib/                        # Shared modules: utils, focus, ui-strings, overlay
+├── tokens/                     # Source of truth for the tokens (three-tier DTCG JSON)
+│   ├── primitive.json          # Tier 1 — raw values (private)
+│   ├── semantic.json           # Tier 2 — semantic tokens (public)
+│   └── component.json          # Tier 3 — shadcn/ui aliases (public)
+├── tokens.css                  # Generated CSS custom properties — do not edit
+├── specs/                      # The design system's Markdown documentation
+│   ├── components/             # 59 component specs (13 sections each)
+│   ├── foundations/            # Color, typography, spacing, motion, radius… specs
+│   └── tokens/token-reference.md  # Reference of the 301 tokens (generated)
+├── mcp-server/                 # MCP server @dsaireadable/mcp-server
 │   ├── src/
-│   │   ├── tools/              # Outils MCP (ds-core, dataviz, ux-writing, admin)
-│   │   ├── prompts/            # Prompts MCP
-│   │   ├── lib/                # Chargement du cache, validate_screen, règles de composition
-│   │   └── context/            # generate.ts : produit le cache
-│   └── context/                # Fichiers JSON pré-compilés (cache du DS) — générés
-├── scripts/                    # Outillage : génération et lint des tokens, specs, index, registre
-├── registry/                   # Sources des items de registre hors composants
-├── registry.json               # Registre shadcn — généré
-├── design-system.index.json    # Inventaire machine-readable du DS
-└── design-system.schema.json   # JSON Schema validant l'index
+│   │   ├── tools/              # MCP tools (ds-core, dataviz, ux-writing, admin)
+│   │   ├── prompts/            # MCP prompts
+│   │   ├── lib/                # Cache loading, validate_screen, composition rules
+│   │   └── context/            # generate.ts: builds the cache
+│   └── context/                # Precompiled JSON files (the design system cache) — generated
+├── scripts/                    # Tooling: token, spec, index and registry generation and linting
+├── registry/                   # Sources of the registry items that are not components
+├── registry.json               # shadcn registry — generated
+├── design-system.index.json    # Machine-readable inventory of the design system
+└── design-system.schema.json   # JSON Schema that validates the index
 ```
 
 ---
 
-## MCP Server
+## MCP server
 
-Le MCP Server (`mcp-server/`) expose le design system comme outils interrogeables par les agents IA.
+The MCP server (`mcp-server/`) exposes the design system as tools AI agents can query.
 
-### Démarrage
+### Getting started
 
 ```bash
 cd mcp-server
-npm run start          # mode stdio (Copilot CLI, Claude Desktop)
-npm run start:http     # mode HTTP sur :3100 (VS Code)
-npm run generate-context  # régénère les fichiers JSON du cache context/
+npm run start          # stdio mode (Copilot CLI, Claude Desktop)
+npm run start:http     # HTTP mode on :3100 (VS Code)
+npm run generate-context  # regenerates the JSON files of the context/ cache
 ```
 
-`generate-context` sort en **code 1** si un générateur échoue ou si l'inventaire
-(`design-system.index.json`) dérive des fichiers présents dans `components/ui/`.
-Sa sortie est déterministe : deux exécutions consécutives ne produisent aucun diff.
+`generate-context` exits with **code 1** when a generator fails or when the
+inventory (`design-system.index.json`) drifts from the files in `components/ui/`.
+Its output is deterministic: two runs in a row produce no diff.
 
-### Configuration du mode HTTP
+### HTTP mode configuration
 
-Le serveur n'écoute que sur la boucle locale et **valide l'en-tête `Origin`**
-(exigence de la spec MCP, contre les attaques par DNS rebinding). Une requête
-portant une origine non autorisée reçoit un `403`.
+The server only listens on the loopback interface and **validates the `Origin`
+header** (a requirement of the MCP spec, against DNS rebinding attacks). A
+request with an origin that is not allowed receives a `403`.
 
-| Variable              | Défaut                                         | Rôle                                                                                |
-| --------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `MCP_HOST`            | `127.0.0.1`                                    | Interface d'écoute. Ne l'ouvrir que délibérément                                    |
-| `PORT` / `MCP_PORT`   | `3100`                                         | Port d'écoute                                                                       |
-| `MCP_ALLOWED_ORIGINS` | `localhost` + `127.0.0.1` sur le port d'écoute | Liste d'origines séparées par des virgules                                          |
-| `MCP_SESSION_TTL_MS`  | `1800000` (30 min)                             | Expiration des sessions inactives ; une session expirée ou inconnue reçoit un `404` |
-| `MCP_MAX_SESSIONS`    | `100`                                          | Plafond de sessions simultanées                                                     |
+| Variable              | Default                                         | Role                                                                    |
+| --------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
+| `MCP_HOST`            | `127.0.0.1`                                     | Listening interface. Only widen it deliberately                         |
+| `PORT` / `MCP_PORT`   | `3100`                                          | Listening port                                                          |
+| `MCP_ALLOWED_ORIGINS` | `localhost` + `127.0.0.1` on the listening port | Comma-separated list of origins                                         |
+| `MCP_SESSION_TTL_MS`  | `1800000` (30 min)                              | Expiry of idle sessions; an expired or unknown session receives a `404` |
+| `MCP_MAX_SESSIONS`    | `100`                                           | Maximum number of concurrent sessions                                   |
 
-### Outils disponibles
+### Available tools
 
-| Catégorie      | Outils                                                                                                                                                                                |
+| Category       | Tools                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **DS Core**    | `get_design_system_overview`, `get_components`, `get_component_specs`, `get_component_variants`, `get_tokens`, `get_typography`, `get_icons`, `get_design_rules`, `get_page_patterns` |
-| **Dataviz**    | Outils spécifiques aux graphiques (Recharts + tokens DS)                                                                                                                              |
-| **UX Writing** | `get_ux_writing_rules` (chaînes par défaut, surcharge, langue), `get_glossary`, `get_content_library`                                                                                 |
-| **Admin**      | Outils de gestion et d'inspection du DS                                                                                                                                               |
+| **Dataviz**    | Chart-specific tools (Recharts + design system tokens)                                                                                                                                |
+| **UX Writing** | `get_ux_writing_rules` (default strings, overriding, language), `get_glossary`, `get_content_library`                                                                                 |
+| **Admin**      | Tools to manage and inspect the design system                                                                                                                                         |
 
-Tous les outils sont annotés en lecture seule (`readOnlyHint`, `openWorldHint: false`) : un client n'a pas
-à faire confirmer leurs appels. `get_component_specs`, `get_design_rules` et `get_ux_writing_rules`
-prennent `response_format` : `concise` par défaut (moins de 20 % du volume), `detailed` pour tout.
-`get_components` et `get_tokens` paginent : `limit` (100 par défaut) et `cursor`, réponse
-`{ total, items, next_cursor }`.
+Every tool is annotated as read-only (`readOnlyHint`, `openWorldHint: false`): a client does not need
+to confirm its calls. `get_component_specs`, `get_design_rules` and `get_ux_writing_rules` take
+`response_format`: `concise` by default (under 20 % of the volume), `detailed` for everything.
+`get_components` and `get_tokens` paginate: `limit` (100 by default) and `cursor`, with a
+`{ total, items, next_cursor }` response.
 
-### Ressources
+### Resources
 
-| URI                          | Contenu                                                                            |
-| ---------------------------- | ---------------------------------------------------------------------------------- |
-| `ds://component/{name}/spec` | Spec complète d'un composant ; les 59 sont listées, `{name}` se complète           |
-| `ds://token/{path}`          | Un token sémantique (`ds://token/color.background.default`) ; `{path}` se complète |
-| `ds://guidelines`            | Règles critiques, règles des fondations, règles de composition                     |
+| URI                          | Content                                                                          |
+| ---------------------------- | -------------------------------------------------------------------------------- |
+| `ds://component/{name}/spec` | A component's full spec; all 59 are listed, and `{name}` autocompletes           |
+| `ds://token/{path}`          | A semantic token (`ds://token/color.background.default`); `{path}` autocompletes |
+| `ds://guidelines`            | Critical rules, foundation rules, composition rules                              |
 
-### Connexion dans VS Code / Copilot
+### Connecting from VS Code / Copilot
 
-Ajout dans `.vscode/mcp.json` ou `~/.copilot/mcp-config.json` :
+Add to `.vscode/mcp.json` or `~/.copilot/mcp-config.json`:
 
 ```json
 {
@@ -143,46 +143,46 @@ Ajout dans `.vscode/mcp.json` ou `~/.copilot/mcp-config.json` :
 
 ---
 
-## Identité de publication
+## Publishing identity
 
-Un seul nom, décliné selon la contrainte de chaque canal. Toute publication future
-s'y conforme — ne pas réintroduire de variante en majuscules.
+One name, adapted to the constraint of each channel. Any future publication
+follows it — do not reintroduce a capitalized variant.
 
-| Canal               | Identifiant                  | Pourquoi cette forme                                                        |
-| ------------------- | ---------------------------- | --------------------------------------------------------------------------- |
-| Dépôt GitHub        | `Toniio/DSAIReadable`        | Nom historique du projet, seul endroit où la casse est libre                |
-| Registre shadcn     | `dsaireadable`               | Le nom de registre n'admet qu'alphanumériques, tirets et underscores        |
-| Item d'un composant | `Toniio/DSAIReadable/<item>` | Adresse GitHub complète : un nom nu désignerait le registre shadcn officiel |
-| Scope npm           | `@dsaireadable`              | npm interdit les majuscules dans un scope                                   |
-| Package npm publié  | `@dsaireadable/mcp-server`   | Seul package publié à ce jour                                               |
+| Channel               | Identifier                   | Why this form                                                                    |
+| --------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
+| GitHub repository     | `Toniio/DSAIReadable`        | The project's original name; the only place where casing is free                 |
+| shadcn registry       | `dsaireadable`               | A registry name only allows alphanumerics, hyphens and underscores               |
+| A component's item    | `Toniio/DSAIReadable/<item>` | The full GitHub address: a bare name would point to the official shadcn registry |
+| npm scope             | `@dsaireadable`              | npm forbids capitals in a scope                                                  |
+| Published npm package | `@dsaireadable/mcp-server`   | The only package published so far                                                |
 
-Le scope `@dsaireadable` n'est **pas réservé** sur npm : il ne le sera que si un second
-package est réellement publié. L'ancien scope `@DSAIReadable` était impubliable — il ne
-subsiste que dans les documents d'archive, signalé comme caduc.
+The `@dsaireadable` scope is **not reserved** on npm: it will only be once a second
+package is actually published. The former `@DSAIReadable` scope could not be
+published — it only survives in archived documents, flagged as obsolete.
 
 ---
 
-## Consommer le design system
+## Consuming the design system
 
-Le canal de distribution est le **registre shadcn** porté par ce dépôt public : il n'y a pas de package npm à installer. Le `registry.json` à la racine suffit — la CLI lit le dépôt directement, sans serveur ni JSON par composant à héberger.
+The distribution channel is the **shadcn registry** carried by this public repository: there is no npm package to install. The `registry.json` at the root is enough — the CLI reads the repository directly, with no server and no per-component JSON to host.
 
-Prérequis côté consommateur : un projet React + Tailwind CSS v4 avec un `components.json` (`npx shadcn@latest init`). Les alias du projet sont respectés : la CLI réécrit les imports `@/…` vers les siens.
+What the consumer needs: a React + Tailwind CSS v4 project with a `components.json` (`npx shadcn@latest init`). The project's aliases are respected: the CLI rewrites the `@/…` imports to its own.
 
-### Installer
+### Install
 
 ```bash
-# Un composant — l'item de base (tokens, dark mode, cn(), focus, libellés, surfaces modales) suit automatiquement
+# A component — the base item (tokens, dark mode, cn(), focus, labels, modal surfaces) comes along automatically
 npx shadcn@latest add Toniio/DSAIReadable/button
 
-# Les règles du design system pour les agents du projet
+# The design system's rules for the project's agents
 npx shadcn@latest add Toniio/DSAIReadable/conventions
 ```
 
-**Toujours l'adresse complète** `Toniio/DSAIReadable/<item>` : un nom nu (`npx shadcn add button`) désigne le registre shadcn officiel, et remplacerait le composant du design system par le sien.
+**Always the full address** `Toniio/DSAIReadable/<item>`: a bare name (`npx shadcn add button`) points to the official shadcn registry, and would replace the design system's component with its own.
 
-Chaque dépendance npm arrive avec la plage de version contre laquelle le composant est écrit (`react-day-picker@^9.14.0`), jamais « la dernière ».
+Every npm dependency comes with the version range the component is written against (`react-day-picker@^9.14.0`), never "latest".
 
-La CLI copie le source dans le projet, qui l'importe ensuite localement :
+The CLI copies the source into the project, which then imports it locally:
 
 ```tsx
 import { Button } from "@/components/ui/button"
@@ -190,108 +190,108 @@ import { Field, FieldLabel, FieldError } from "@/components/ui/field"
 import { cn } from "@/lib/utils"
 ```
 
-Les tokens ne s'importent pas dans le TSX : l'item de base fusionne leurs variables CSS dans la feuille de style du projet, pont `@theme inline` compris. Les classes s'écrivent donc avec les noms sémantiques (`bg-primary`, `text-muted-foreground`, `rounded-lg`).
+Tokens are not imported into TSX: the base item merges their CSS variables into the project's stylesheet, `@theme inline` bridge included. Classes are therefore written with the semantic names (`bg-primary`, `text-muted-foreground`, `rounded-lg`).
 
-### Explorer
+### Explore
 
 ```bash
-npx shadcn@latest search Toniio/DSAIReadable -q card   # chercher
-npx shadcn@latest view Toniio/DSAIReadable/card        # voir un item et son source
+npx shadcn@latest search Toniio/DSAIReadable -q card   # search
+npx shadcn@latest view Toniio/DSAIReadable/card        # view an item and its source
 npx shadcn@latest add Toniio/DSAIReadable/card --dry-run
 ```
 
-Chaque composant a sa spec — props, variantes, états, accessibilité — dans [`specs/components/`](./specs/components/).
+Every component has its spec — props, variants, states, accessibility — in [`specs/components/`](./specs/components/).
 
-### Avec un agent
+### With an agent
 
-1. **Les règles** : l'item `conventions` dépose un même fichier là où chaque outil charge ses règles seul — `.cursor/rules/dsaireadable.mdc`, `.claude/rules/dsaireadable.md`, `.github/instructions/dsaireadable.instructions.md`. Il n'écrase aucun `AGENTS.md`. Un outil qui ne lit que `AGENTS.md` (Codex…) : y ajouter une ligne qui renvoie à `.claude/rules/dsaireadable.md`.
-2. **Le catalogue** : `npx shadcn@latest mcp init --client claude` (ou `cursor`, `vscode`, `codex`, `opencode`) branche le serveur MCP de shadcn. Il accepte le registre `Toniio/DSAIReadable` pour chercher, consulter et obtenir la commande d'installation d'un item ; les règles ci-dessus donnent l'adresse à l'agent.
-3. **Le détail du design system** (specs, tokens, validation d'écran) : le [serveur MCP du dépôt](#mcp-server), à lancer en local.
+1. **The rules**: the `conventions` item drops the same file wherever each tool loads its rules on its own — `.cursor/rules/dsaireadable.mdc`, `.claude/rules/dsaireadable.md`, `.github/instructions/dsaireadable.instructions.md`. It overwrites no `AGENTS.md`. For a tool that only reads `AGENTS.md` (Codex…): add a line there that points to `.claude/rules/dsaireadable.md`.
+2. **The catalog**: `npx shadcn@latest mcp init --client claude` (or `cursor`, `vscode`, `codex`, `opencode`) wires up shadcn's MCP server. It accepts the `Toniio/DSAIReadable` registry to search, browse and get the install command of an item; the rules above give the agent the address.
+3. **The design system in detail** (specs, tokens, screen validation): the [repository's MCP server](#mcp-server), run locally.
 
 ### Versions
 
-Sans suffixe, un item s'installe depuis `main`. `#<tag|SHA complet>` épingle **l'item demandé seulement** : ses dépendances internes (`design-system`, un autre composant) restent résolues sur `main` — vérifié avec la CLI 4.21. Un épinglage complet attendra des versions publiées.
+With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the requested item only**: its internal dependencies (`design-system`, another component) are still resolved on `main` — checked with CLI 4.21. Full pinning will wait for published versions.
 
-### Garanties
+### Guarantees
 
-`registry.json` est **généré** — `npm run registry:build` le dérive de l'inventaire, des specs et des imports réels. La CI refuse un registre désynchronisé, une dépendance interne écrite en nom nu, et surtout un registre **inutilisable** : `npm run registry:test-install` installe les 61 items dans une app vierge aux alias non standard, puis la compile. Sur une PR, il teste le registre construit par la branche ; après chaque merge, les adresses publiées.
+`registry.json` is **generated** — `npm run registry:build` derives it from the inventory, the specs and the actual imports. CI rejects a registry that is out of sync, an internal dependency written as a bare name and, above all, an **unusable** registry: `npm run registry:test-install` installs the 61 items in a blank app with non-standard aliases, then builds it. On a PR, it tests the registry built by the branch; after each merge, the published addresses.
 
 ---
 
 ## Tokens
 
-Architecture 3 tiers format [DTCG W3C](https://design-tokens.github.io/community-group/format/) :
+Three-tier architecture in the [W3C DTCG](https://design-tokens.github.io/community-group/format/) format:
 
 ```
-tokens/primitive.json   → valeurs brutes (hex, rem, ms) — jamais référencé directement
-tokens/semantic.json    → décisions de design avec modes light/dark
-tokens/component.json   → aliases shadcn/ui (--background, --primary, --ring…)
+tokens/primitive.json   → raw values (hex, rem, ms) — never referenced directly
+tokens/semantic.json    → design decisions, with light/dark modes
+tokens/component.json   → shadcn/ui aliases (--background, --primary, --ring…)
 ```
 
-Les tokens sont exportés en CSS custom properties dans `tokens.css`.
+The tokens are exported as CSS custom properties in `tokens.css`.
 
 ---
 
-## Specs composants
+## Component specs
 
-Chaque composant dispose d'une spec dans `specs/components/<component>.md`, structurée en 13 sections :
+Every component has a spec in `specs/components/<component>.md`, in 13 sections:
 
 > **Metadata** · **Role** · **Usage** · **Constraints** · **Dependencies** · **Anatomy** · **Tokens** · **Props / API** · **Variants** · **States** · **Accessibility** · **Code example** · **Cross-references**
 
-**Variants** est générée depuis les `cva()` du code (`npm run specs:variants`) **Tokens** depuis ses classes, résolues par Tailwind jusqu'au token sémantique (`npm run specs:tokens`), et **Props / API** depuis ses exports TypeScript, dont seules les descriptions s'éditent à la main (`npm run specs:api`) ; `specs:validate` vérifie les trois. Les règles de choix entre composants voisins (sélection, surfaces, collections) vivent une fois dans `composition_rules` et sont recopiées dans le **Usage** des specs concernées (`npm run specs:choices`). Les règles (**Constraints**, **Accessibility**…) s'écrivent **MUST** / **MUST NOT** avec un seuil ou un critère observable, ou **SHOULD** avec son exception (**unless**) ; chaque ligne de **Constraints** ouvre sur l'un de ces mots-clés, ou sur **Note** pour un fait qui n'impose rien ; `specs:validate` refuse les formulations qui laissent la décision au lecteur (“avoid”, “prefer”, “if needed”…). **Accessibility** donne, dans une structure fixe, le pattern ARIA, le rôle, les touches, l'exigence de nom accessible et les points de vigilance — défauts connus compris.
+**Variants** is generated from the code's `cva()` calls (`npm run specs:variants`), **Tokens** from its classes, resolved by Tailwind down to the semantic token (`npm run specs:tokens`), and **Props / API** from its TypeScript exports, where only the descriptions are edited by hand (`npm run specs:api`); `specs:validate` checks all three. The rules for choosing between sibling components (selection, surfaces, collections) live once in `composition_rules` and are copied into the **Usage** of the specs they concern (`npm run specs:choices`). Rules (**Constraints**, **Accessibility**…) are written **MUST** / **MUST NOT** with a threshold or an observable criterion, or **SHOULD** with its exception (**unless**); every **Constraints** line opens with one of these keywords, or with **Note** for a fact that imposes nothing; `specs:validate` rejects wording that leaves the decision to the reader ("avoid", "prefer", "if needed"…). **Accessibility** gives, in a fixed structure, the ARIA pattern, the role, the keys, the accessible-name requirement and the pitfalls — known defects included.
 
-Ces specs sont ingérées par le MCP Server via `get_component_specs` et constituent la source de vérité comportementale des composants.
+The MCP server ingests these specs through `get_component_specs`; they are the components' behavioral source of truth.
 
 ---
 
-## Scripts et outillage
+## Scripts and tooling
 
-### Validation des tokens
+### Token validation
 
 ```bash
-npm run tokens:lint-naming   # Valide les clés des 3 tiers contre la grammaire déclarative
-npm run docs:tokens          # Régénère token-reference.md + tokens.manifest.json
-npm run tokens:lint-values   # Détecte les valeurs brutes dans les composants
-npm run tokens:lint-bridge   # Vérifie le bridge @theme de Tailwind
-npm run tokens:lint-monotonic # Chaque palette s'assombrit strictement quand le numéro de palier monte
-npm run tokens:lint-chart     # Séries de graphique : 3:1 sur les fonds, distinctes deux à deux, daltonisme compris
-npm run tokens:lint-lifecycle # Statut active / reserved / deprecated de chaque token, conforme au code
-npm run tokens-validate      # Toutes les validations en séquence (requis avant tout commit)
+npm run tokens:lint-naming   # Checks the keys of the 3 tiers against the declarative grammar
+npm run docs:tokens          # Regenerates token-reference.md + tokens.manifest.json
+npm run tokens:lint-values   # Detects raw values in components
+npm run tokens:lint-bridge   # Checks Tailwind's @theme bridge
+npm run tokens:lint-monotonic # Every palette gets strictly darker as its step number goes up
+npm run tokens:lint-chart     # Chart series: 3:1 on the backgrounds, pairwise distinct, color blindness included
+npm run tokens:lint-lifecycle # Each token's active / reserved / deprecated status matches the code
+npm run tokens-validate      # Every check in sequence (required before any commit)
 ```
 
-- **`lint-token-naming.ts`** — Valide les **3 tiers** contre une grammaire déclarative : chaque fondation déclare ses formes autorisées, et chaque segment variable est résolu contre une **enum fermée** (états : `hover|active|focus|disabled|selected`) ou un motif numérique explicite. Ajouter un rôle ou un état est donc une modification volontaire de la table de grammaire, en tête de `scripts/lint-token-naming.ts`.
-- **`lint-raw-values.ts`** — Interdit tout hex, rgb, px, ms dans les composants. Exception : `// allow-raw: <raison>`.
-- **`lint-theme-bridge.ts`** — Vérifie que le bridge `@theme` de `app/globals.css` reste aligné sur les tokens.
+- **`lint-token-naming.ts`** — checks the **3 tiers** against a declarative grammar: each foundation declares its allowed shapes, and each variable segment is resolved against a **closed enum** (states: `hover|active|focus|disabled|selected`) or an explicit numeric pattern. Adding a role or a state is therefore a deliberate change to the grammar table at the top of `scripts/lint-token-naming.ts`.
+- **`lint-raw-values.ts`** — forbids any hex, rgb, px or ms in components. Exception: `// allow-raw: <reason>`.
+- **`lint-theme-bridge.ts`** — checks that the `@theme` bridge in `app/globals.css` stays aligned with the tokens.
 
-### Développement
+### Development
 
 ```bash
-npm run dev          # Next.js avec Turbopack
-npm run build        # Build de production
+npm run dev          # Next.js with Turbopack
+npm run build        # Production build
 npm run lint         # ESLint
-npm run format       # Prettier (trie les classes Tailwind automatiquement)
+npm run format       # Prettier (sorts Tailwind classes automatically)
 npm run typecheck    # tsc --noEmit
 ```
 
 ---
 
-## Conventions non-négociables
+## Non-negotiable conventions
 
-- **Jamais de valeur brute** dans un composant — tout passe par un token CSS (`var(--color-*)`) ou une classe Tailwind mappée sur un token.
-- **Jamais de token Primitive directement** — seuls les tiers Semantic (`tokens/semantic.json`) et Component (`tokens/component.json`) sont publics.
-- **`npm run tokens-validate` avant tout commit** — zéro erreur requis pour merger.
-- **Icônes Phosphor uniquement** — `@phosphor-icons/react`. Pas de Lucide, pas de Heroicons.
-- **Dark mode class-based** — classe `.dark` sur `<html>`. Pas de `prefers-color-scheme`.
-- **Lire la spec** avant d'écrire ou modifier un composant (`specs/components/<component>.md`).
+- **Never a raw value** in a component — everything goes through a CSS token (`var(--color-*)`) or a Tailwind class mapped to a token.
+- **Never a Primitive token directly** — only the Semantic (`tokens/semantic.json`) and Component (`tokens/component.json`) tiers are public.
+- **`npm run tokens-validate` before every commit** — zero errors required to merge.
+- **Phosphor icons only** — `@phosphor-icons/react`. No Lucide, no Heroicons.
+- **Class-based dark mode** — the `.dark` class on `<html>`. No `prefers-color-scheme`.
+- **Read the spec** before writing or changing a component (`specs/components/<component>.md`).
+- **Everything in English** — code, comments, docs, specs and demo copy.
 
 ---
 
-## Outil de design
+## Design tool
 
-La couche d'intégration avec un outil de maquettage (Code Connect, synchronisation de
-variables, génération programmatique de composants) a été retirée du repo pour garder
-le design system **code-first** et exclusivement pilotable par un agent IA.
+The integration layer with a design tool (Code Connect, variable sync,
+programmatic component generation) has been removed from the repository to keep
+the design system **code-first** and driven by AI agents only.
 
-La spécification complète de ré-intégration — mapping des node-ids, comportement des
-scripts, dépendances et configuration — est conservée dans
-[`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).
+The full reintegration spec — node-id mapping, script behavior, dependencies and
+configuration — is kept in [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).

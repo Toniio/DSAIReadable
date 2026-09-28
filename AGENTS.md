@@ -1,145 +1,145 @@
-# AGENTS.md — règles du dépôt DSAIReadable
+# AGENTS.md — DSAIReadable repository rules
 
-Ce fichier est lu automatiquement à chaque session d'agent. Il fait autorité sur
-toute mémoire, habitude ou convention générique. En cas de contradiction avec un
-autre document du dépôt, **c'est ce fichier qui gagne** — et la contradiction doit
-être signalée.
+Every agent session reads this file automatically. It overrides any memory,
+habit or generic convention. When it contradicts another document in the
+repository, **this file wins** — and the contradiction must be reported.
 
-Ce dépôt est un design system conçu pour être consommé par des LLMs. Chaque règle
-ci-dessous existe parce que sa violation produit du code généré non conforme.
+This repository is a design system built to be consumed by LLMs. Each rule
+below exists because breaking it produces non-conforming generated code.
 
 ---
 
-## 1. Conventions non négociables
+## 1. Non-negotiable conventions
 
-| Règle                                                                                     | Pourquoi                                                                                                                                                                                                                                                                 |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Jamais de valeur brute** (hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`) dans un composant | Tout passe par un token CSS `var(--color-*)` ou une classe Tailwind mappée sur un token. Exception explicite uniquement : `// allow-raw: <raison>`                                                                                                                       |
-| **Jamais de token Primitive référencé directement**                                       | `tokens/primitive.json` est le Tier 1, privé. Seuls Semantic (`tokens/semantic.json`) et Component (`tokens/component.json`) sont publics                                                                                                                                |
-| **Icônes Phosphor uniquement** — `@phosphor-icons/react`                                  | Pas de Lucide, pas de Heroicons, pas de SVG inline                                                                                                                                                                                                                       |
-| **Seules les classes Tailwind du design system existent**                                 | `app/globals.css` supprime les couleurs, rayons et ombres par défaut (`--color-*: initial`…) : `bg-red-500` ne génère aucun CSS, et `better-tailwindcss/no-unknown-classes` le refuse au lint. Blanc et noir fixes : `bg-white`, `bg-black/10` (tokens `color.static.*`) |
-| **Dark mode class-based** — classe `.dark` sur `<html>`                                   | Pas de `prefers-color-scheme`                                                                                                                                                                                                                                            |
-| **Lire `specs/components/<Composant>.md` avant d'écrire ou modifier un composant**        | La spec est la source de vérité comportementale, en 13 sections                                                                                                                                                                                                          |
-| **`npm run tokens-validate` avant tout commit**                                           | Zéro erreur requis                                                                                                                                                                                                                                                       |
+| Rule                                                                                                        | Why                                                                                                                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Never a raw value** (hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`) in a component                           | Everything goes through a `var(--color-*)` CSS token or a Tailwind class mapped to a token. The only exception is explicit: `// allow-raw: <reason>`                                                                                                                    |
+| **Never reference a Primitive token directly**                                                              | `tokens/primitive.json` is Tier 1, private. Only Semantic (`tokens/semantic.json`) and Component (`tokens/component.json`) are public                                                                                                                                   |
+| **Phosphor icons only** — `@phosphor-icons/react`                                                           | No Lucide, no Heroicons, no inline SVG                                                                                                                                                                                                                                  |
+| **Only the design system's Tailwind classes exist**                                                         | `app/globals.css` removes the default colors, radii and shadows (`--color-*: initial`…): `bg-red-500` generates no CSS, and `better-tailwindcss/no-unknown-classes` rejects it at lint time. Fixed white and black: `bg-white`, `bg-black/10` (`color.static.*` tokens) |
+| **Class-based dark mode** — the `.dark` class on `<html>`                                                   | No `prefers-color-scheme`                                                                                                                                                                                                                                               |
+| **Read `specs/components/<Component>.md` before writing or changing a component**                           | The spec is the behavioral source of truth, in 13 sections                                                                                                                                                                                                              |
+| **`npm run tokens-validate` before every commit**                                                           | Zero errors required                                                                                                                                                                                                                                                    |
+| **Everything committed is written in English** — code, comments, docs, specs, token descriptions, demo copy | The repository is public and read by people and agents who may not speak any other language. Write natively, do not translate                                                                                                                                           |
 
-## 2. Architecture des tokens
+## 2. Token architecture
 
-Trois tiers au format [DTCG W3C](https://design-tokens.github.io/community-group/format/),
-dans cet ordre de référence strict :
+Three tiers in the [W3C DTCG](https://design-tokens.github.io/community-group/format/)
+format, in this strict order of reference:
 
 ```
-tokens/primitive.json   Tier 1 — valeurs brutes            PRIVÉ, jamais référencé hors Tier 2
-tokens/semantic.json    Tier 2 — décisions, modes light/dark
-tokens/component.json   Tier 3 — aliases shadcn/ui (--background, --primary, --ring…)
+tokens/primitive.json   Tier 1 — raw values                PRIVATE, never referenced outside Tier 2
+tokens/semantic.json    Tier 2 — decisions, light/dark modes
+tokens/component.json   Tier 3 — shadcn/ui aliases (--background, --primary, --ring…)
         ↓ npm run tokens:build
-tokens.css              CSS custom properties générées — NE JAMAIS ÉDITER À LA MAIN
-        ↓ bridge @theme
+tokens.css              generated CSS custom properties — NEVER EDIT BY HAND
+        ↓ @theme bridge
 app/globals.css
 ```
 
-Un Tier 2 ou 3 ne contient **que** des références `{…}`, jamais une valeur littérale.
-`tokens.css` est généré : toute modification directe sera écrasée au prochain build
-et détectée par `npm run tokens:check`.
+A Tier 2 or 3 token holds **only** `{…}` references, never a literal value.
+`tokens.css` is generated: any direct edit is overwritten by the next build and
+caught by `npm run tokens:check`.
 
-Chaque token sémantique déclare son cycle de vie, vérifié par
-`npm run tokens:lint-lifecycle` : `$extensions.status` vaut `active` (consommé ;
-une famille de police l'est par `next/font`, qui la charge — `tokens:lint-fonts`
-vérifie que le token nomme la bonne) ou
-`reserved` (décision valide que rien ne consomme encore, intention dans son
-`$description`), ou le token porte `$deprecated` (ne plus l'utiliser). Un token
-ajouté déclare son statut ; un `reserved` qu'on se met à consommer passe `active`.
-Une primitive que plus aucun token ne référence se supprime, sauf à la déclarer
-`reserved` en disant pourquoi.
+Every semantic token declares its lifecycle, checked by
+`npm run tokens:lint-lifecycle`: `$extensions.status` is `active` (consumed; a
+font family is consumed by `next/font`, which loads it — `tokens:lint-fonts`
+checks that the token names the right one) or `reserved` (a valid decision
+nothing consumes yet, with its intent in its `$description`), or the token
+carries `$deprecated` (do not use it any more). A new token declares its status;
+a `reserved` token that starts being consumed becomes `active`. A primitive that
+no token references any more is deleted, unless it is declared `reserved` with
+the reason why.
 
-## 3. Commandes de validation
+## 3. Validation commands
 
 ```bash
-npm run tokens-validate   # naming DTCG + valeurs brutes + bridge @theme + focus + contrastes + monotonie des palettes + palette de graphiques + polices + cycle de vie + fraîcheur
+npm run tokens-validate   # DTCG naming + raw values + @theme bridge + focus + contrast + palette monotonicity + chart palette + fonts + lifecycle + freshness
 npm run typecheck:all     # app + scripts + mcp-server
 npm run lint              # ESLint
-npm run index:validate    # 5 checks : JSON Schema, tailles, data-slot, chaînes UI, types Props
-npm run specs:validate    # les 59 specs contre les 13 sections canoniques + Variants, Tokens, Props / API et règles de choix à jour + règles sans formulation floue
-npm run docs:tokens       # régénère token-reference.md + tokens.manifest.json
-npm run registry:check    # fraîcheur de registry.json + dépendances internes
-npm run registry:test-install  # installe les 61 items dans une app vierge et la compile
-npm run generate-context  # régénère le cache MCP — doit produire zéro diff
-npm run mcp:test          # suite de tests du serveur MCP
-npm run build             # build de production Next.js
+npm run index:validate    # 5 checks: JSON Schema, sizes, data-slot, UI strings, Props types
+npm run specs:validate    # the 59 specs against the 13 canonical sections + Variants, Tokens, Props / API and choice rules up to date + no hedged wording
+npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
+npm run registry:check    # registry.json freshness + internal dependencies
+npm run registry:test-install  # installs the 61 items in a blank app and builds it
+npm run generate-context  # regenerates the MCP cache — must produce zero diff
+npm run mcp:test          # the MCP server's test suite
+npm run build             # Next.js production build
 ```
 
-Après toute modification de tokens ou de TypeScript :
+After any token or TypeScript change:
 `npm run tokens-validate && npm run typecheck:all`.
 
-## 4. Workflow git — obligatoire
+## 4. Git workflow — mandatory
 
-Trunk-based léger avec PR. `main` est protégée : **aucun push direct**, y compris
-pour le propriétaire du dépôt.
+Lightweight trunk-based development with PRs. `main` is protected: **no direct
+push**, not even for the repository owner.
 
-1. **Une branche par item de backlog**, préfixée par son type :
+1. **One branch per backlog item**, prefixed with its type:
    `feat/` `fix/` `chore/` `docs/` `ci/` `refactor/` `test/`
-   Exemple : `fix/p0-03-destructive-foreground`
-2. **Commits au format [Conventional Commits](https://www.conventionalcommits.org/)**.
-   Exemple : `fix(tokens): add destructive-foreground token`
-   Le hook `commit-msg` rejette tout message non conforme.
-3. **1 PR = 1 item de backlog**, **squash merge**, branche supprimée après merge.
-   Le titre de la PR devient le message de commit : il doit lui aussi être conforme.
-4. **CI verte obligatoire** avant merge.
+   Example: `fix/p0-03-destructive-foreground`
+2. **Commits follow [Conventional Commits](https://www.conventionalcommits.org/)**.
+   Example: `fix(tokens): add destructive-foreground token`
+   The `commit-msg` hook rejects any non-conforming message.
+3. **1 PR = 1 backlog item**, **squash merge**, branch deleted after the merge.
+   The PR title becomes the commit message: it must conform too.
+4. **Green CI required** before merging.
 
-Ne jamais contourner un hook avec `--no-verify`. Un hook qui bloque signale un
-problème réel : le corriger, pas le désactiver.
+Never bypass a hook with `--no-verify`. A hook that blocks points at a real
+problem: fix it, do not disable it.
 
-## 5. Garde-fous en place
+## 5. Guards in place
 
-| Garde-fou                         | Ce qu'il bloque                                                                                                                        |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `.husky/pre-commit` → lint-staged | Prettier + ESLint sur les fichiers touchés, `typecheck:all` sur tout                                                                   |
-| `.husky/commit-msg` → commitlint  | Message de commit non conforme                                                                                                         |
-| `.husky/pre-push`                 | Push direct sur `main`                                                                                                                 |
-| `.github/workflows/ci.yml`        | 9 jobs : `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `registry` |
-| `.github/workflows/pr-lint.yml`   | Titre de PR non conforme                                                                                                               |
+| Guard                             | What it blocks                                                                                                                        |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `.husky/pre-commit` → lint-staged | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                 |
+| `.husky/commit-msg` → commitlint  | A non-conforming commit message                                                                                                       |
+| `.husky/pre-push`                 | A direct push to `main`                                                                                                               |
+| `.github/workflows/ci.yml`        | 9 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `registry` |
+| `.github/workflows/pr-lint.yml`   | A non-conforming PR title                                                                                                             |
 
-## 6. Identité de publication
+## 6. Publishing identity
 
-Un seul nom par canal, documenté dans une table unique :
-[README → _Identité de publication_](./README.md#identité-de-publication).
-En résumé : dépôt `Toniio/DSAIReadable`, registre shadcn `dsaireadable`, scope npm
-`@dsaireadable`, dépendance interne `Toniio/DSAIReadable/<item>`. **Jamais de
-majuscules** hors du nom de dépôt GitHub.
+One name per channel, documented in a single table:
+[README → _Publishing identity_](./README.md#publishing-identity).
+In short: repository `Toniio/DSAIReadable`, shadcn registry `dsaireadable`, npm
+scope `@dsaireadable`, internal dependency `Toniio/DSAIReadable/<item>`.
+**Never any capitals** outside the GitHub repository name.
 
-## 7. Style de code
+## 7. Code style
 
-Défini par `.prettierrc`, appliqué automatiquement : **2 espaces, guillemets
-doubles, pas de point-virgule, `trailingComma: es5`**. Une configuration unique
-couvre tout le dépôt — `.ts`, `.tsx` et `.md`, `mcp-server/` compris — et la CI
-la vérifie. Les Markdown générés (`token-reference.md`) sont émis au format par
-leur générateur. Les classes Tailwind sont triées par
-`prettier-plugin-tailwindcss` — ne jamais les réordonner à la main.
+Defined by `.prettierrc` and applied automatically: **2 spaces, double quotes,
+no semicolons, `trailingComma: es5`**. A single configuration covers the whole
+repository — `.ts`, `.tsx` and `.md`, `mcp-server/` included — and CI checks it.
+Generated Markdown (`token-reference.md`) is emitted already formatted by its
+generator. Tailwind classes are sorted by `prettier-plugin-tailwindcss` — never
+reorder them by hand.
 
-## 8. Périmètres à ne pas toucher sans instruction explicite
+## 8. Areas not to touch without an explicit instruction
 
-- `tokens.css` — généré par `npm run tokens:build`
-- `mcp-server/context/*.json` — généré par `npm run generate-context`
-- `design-system.index.json` — inventaire, régénéré par l'outillage
-- `registry.json` — registre shadcn, généré par `npm run registry:build`
-- `specs/tokens/token-reference.md` et `tokens.manifest.json` — générés par `npm run docs:tokens`
-  (la prose éditoriale se modifie dans `$extensions.docs` des `tokens/*.json`)
-- Les fichiers d'audit et de backlog à la racine : hors dépôt (`.gitignore`)
+- `tokens.css` — generated by `npm run tokens:build`
+- `mcp-server/context/*.json` — generated by `npm run generate-context`
+- `design-system.index.json` — the inventory, regenerated by the tooling
+- `registry.json` — the shadcn registry, generated by `npm run registry:build`
+- `specs/tokens/token-reference.md` and `tokens.manifest.json` — generated by `npm run docs:tokens`
+  (edit the editorial prose in the `$extensions.docs` of `tokens/*.json`)
+- The audit and backlog files at the root: kept out of the repository (`.gitignore`)
 
-## 9. En cas de doute
+## 9. When in doubt
 
-Si une instruction de tâche contredit ce fichier, **s'arrêter et le signaler**
-plutôt que de trancher seul. Une règle violée ici se propage à tout le code
-généré par les agents en aval.
+When a task instruction contradicts this file, **stop and report it** instead of
+deciding alone. A rule broken here spreads to all the code that downstream
+agents generate.
 
-## 10. Fichiers d'instructions agents
+## 10. Agent instruction files
 
-| Fichier                             | Rôle                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
-| `AGENTS.md`                         | Ce fichier : règles de tout le dépôt, référence unique                         |
-| `mcp-server/AGENTS.md`              | Règles propres au serveur MCP ; complète celui-ci, ne le contredit jamais      |
-| `CLAUDE.md`, `mcp-server/CLAUDE.md` | Symlinks vers le `AGENTS.md` du même dossier, pour Claude Code — ne pas éditer |
-| `.github/copilot-instructions.md`   | Rappel court pour Copilot, qui renvoie ici                                     |
+| File                                | Role                                                                          |
+| ----------------------------------- | ----------------------------------------------------------------------------- |
+| `AGENTS.md`                         | This file: rules for the whole repository, the single reference               |
+| `mcp-server/AGENTS.md`              | Rules specific to the MCP server; complements this file, never contradicts it |
+| `CLAUDE.md`, `mcp-server/CLAUDE.md` | Symlinks to the `AGENTS.md` of the same folder, for Claude Code — do not edit |
+| `.github/copilot-instructions.md`   | A short reminder for Copilot, pointing here                                   |
 
-Une règle s'écrit **une seule fois**, dans le `AGENTS.md` le plus proche du code
-qu'elle gouverne. Ne jamais lister un `CLAUDE.md` dans un item du registre shadcn :
-les symlinks ne sont pas distribués.
+A rule is written **once**, in the `AGENTS.md` closest to the code it governs.
+Never list a `CLAUDE.md` in a shadcn registry item: symlinks are not
+distributed.

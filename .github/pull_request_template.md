@@ -1,26 +1,26 @@
 <!--
-Titre de PR au format Conventional Commits — il devient le message de commit
-sur `main` en squash merge. Ex. : `fix(tokens): add destructive-foreground token`
+PR title in Conventional Commits format — it becomes the commit message on
+`main` with a squash merge. Example: `fix(tokens): add destructive-foreground token`
 -->
 
-## Item du backlog
+## Backlog item
 
-<!-- 1 PR = 1 item. Ex. : P0-03 -->
+<!-- 1 PR = 1 item. Example: P0-03 -->
 
-## Ce que change cette PR
+## What this PR changes
 
-<!-- Le quoi et le pourquoi. Pas le comment : le diff le dit deja. -->
+<!-- The what and the why. Not the how: the diff already says it. -->
 
-## Critères d'acceptation
+## Acceptance criteria
 
-<!-- Recopier ceux de l'item du backlog et cocher ce qui est prouvé. -->
+<!-- Copy the item's criteria and tick what is proven. -->
 
 - [ ]
 - [ ]
 
-## Validation exécutée
+## Validation run
 
-<!-- Coller la commande de validation de l'item et sa sortie. -->
+<!-- Paste the item's validation command and its output. -->
 
 ```
 
@@ -28,10 +28,11 @@ sur `main` en squash merge. Ex. : `fix(tokens): add destructive-foreground token
 
 ## Checklist
 
-- [ ] `npm run tokens-validate` passe (si des tokens ont été touchés)
-- [ ] `npm run typecheck:all` passe
-- [ ] `npm run lint` ne remonte aucune erreur
-- [ ] `npm run generate-context` ne produit aucun diff (si le DS a changé)
-- [ ] Aucune valeur brute (hex, px, rem) ajoutée hors de `tokens/primitive.json`
-- [ ] La spec du composant a été lue avant modification, et mise à jour si l'API change
-- [ ] Icônes Phosphor uniquement
+- [ ] `npm run tokens-validate` passes (if tokens were touched)
+- [ ] `npm run typecheck:all` passes
+- [ ] `npm run lint` reports no error
+- [ ] `npm run generate-context` produces no diff (if the design system changed)
+- [ ] No raw value (hex, px, rem) added outside `tokens/primitive.json`
+- [ ] The component's spec was read before the change, and updated if the API changed
+- [ ] Phosphor icons only
+- [ ] Everything written in English
