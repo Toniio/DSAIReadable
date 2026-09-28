@@ -176,25 +176,23 @@ if (mode === "http") {
         return
       }
 
-      // New session (initialize request)
+      // New session (initialize request). Only the SDK's public API is used:
+      // the session is stored once initialized and dropped when the transport
+      // closes (DELETE from the client, or eviction by the sweep).
       const transport = new StreamableHTTPServerTransport({
         sessionIdGenerator: () => crypto.randomUUID(),
+        onsessioninitialized: (sid) => {
+          sessions.set(sid, { transport, lastSeen: Date.now() })
+        },
       })
 
       transport.onclose = () => {
-        const sid = (transport as unknown as { _sessionId?: string })._sessionId
-        if (sid) sessions.delete(sid)
+        if (transport.sessionId) sessions.delete(transport.sessionId)
       }
 
       const server = createMcpServer()
       await server.connect(transport)
       await transport.handleRequest(req, res)
-
-      // Store session after handling (session ID is set by handleRequest)
-      const newId = (transport as unknown as { sessionId?: string }).sessionId
-      if (newId) {
-        sessions.set(newId, { transport, lastSeen: Date.now() })
-      }
     } else if (url.pathname === "/health") {
       res.writeHead(200, { "Content-Type": "application/json" })
       res.end(

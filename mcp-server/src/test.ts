@@ -1089,7 +1089,7 @@ try {
       },
       body: JSON.stringify(body),
     })
-  const init = await post({
+  const initialize = {
     jsonrpc: "2.0",
     id: 1,
     method: "initialize",
@@ -1098,7 +1098,8 @@ try {
       capabilities: {},
       clientInfo: { name: "DSAIReadable-test", version: "1.0.0" },
     },
-  })
+  }
+  const init = await post(initialize)
   const sessionId = init.headers.get("mcp-session-id") ?? ""
   await init.text()
   await (
@@ -1135,16 +1136,7 @@ try {
         Accept: "application/json, text/event-stream",
         Origin: origin,
       },
-      body: JSON.stringify({
-        jsonrpc: "2.0",
-        id: 1,
-        method: "initialize",
-        params: {
-          protocolVersion: "2025-06-18",
-          capabilities: {},
-          clientInfo: { name: "DSAIReadable-test", version: "1.0.0" },
-        },
-      }),
+      body: JSON.stringify(initialize),
     })
   const hostile = await fromOrigin("http://attacker.example")
   const hostileBody = await hostile.text()
@@ -1162,6 +1154,37 @@ try {
   assert(
     unknown.status === 404,
     `An unknown session is refused with 404, the spec's signal to initialize (got ${unknown.status})`
+  )
+
+  // A session the client closes (DELETE) leaves the server at once. Kept, it
+  // is routed to its closed transport, which never answers, and counts
+  // against MCP_MAX_SESSIONS until the TTL sweep.
+  const closing = await post(initialize)
+  const closingId = closing.headers.get("mcp-session-id") ?? ""
+  await closing.text()
+  const deleted = await fetch(mcpUrl, {
+    method: "DELETE",
+    headers: { "Mcp-Session-Id": closingId },
+  })
+  await deleted.text()
+  const afterDelete = await fetch(mcpUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json, text/event-stream",
+      "Mcp-Session-Id": closingId,
+    },
+    body: JSON.stringify(listTools),
+    signal: AbortSignal.timeout(5_000),
+  })
+    .then(async (res) => {
+      await res.text()
+      return String(res.status)
+    })
+    .catch((e: Error) => e.name)
+  assert(
+    closingId !== "" && deleted.status === 200 && afterDelete === "404",
+    `A session closed by the client is refused with 404 (DELETE ${deleted.status}, then ${afterDelete})`
   )
 } catch (e) {
   assert(false, `HTTP transport: ${e}`)
