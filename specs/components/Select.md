@@ -2,62 +2,62 @@
 
 ## Metadata
 
-| Champ         | Valeur                   |
+| Field         | Value                    |
 | ------------- | ------------------------ |
-| Nom           | Select                   |
-| Catégorie     | Forms                    |
-| Statut        | stable                   |
+| Name          | Select                   |
+| Category      | Forms                    |
+| Status        | stable                   |
 | figma_node_id |                          |
 | code_path     | components/ui/select.tsx |
 
-## Rôle
+## Role
 
-Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi une liste, avec support du positionnement automatique et des groupes.
+A styled drop-down built on Radix for picking one option from a list, with automatic positioning and option groups.
 
 ## Usage
 
-- Sélection d'une valeur dans un formulaire (ex. : catégorie, rôle, statut)
-- Liste déroulante avec groupes d'options et séparateurs
-- Alternative stylisée au `<select>` natif avec contrôle total du rendu
-- Sélection nécessitant des icônes ou du contenu riche dans les options
+- Pick a value in a form (a category, a role, a status)
+- A drop-down list with option groups and separators
+- A styled alternative to the native `<select>`, with full control over rendering
+- A selection whose options need icons or rich content
 
-<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-20: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+- **Choice** (`rule-20`) — Pick the selection control from the number of options and the screen width. One value out of 2 to 5 options: `RadioGroup`, with every option visible. Out of 6 to 15: `Select` from `md` up; below `md`, `NativeSelect`, **unless** the options need rich rendering (icons, descriptions) → `Select`. More than 15 options, or search required: `Combobox`. Several values: `Checkbox` up to 5 options, `Combobox` in multiple mode beyond that. An on/off toggle that takes effect immediately: `Switch`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`
-- **MUST NOT** — servir sous `md` quand les options n'exigent pas de rendu riche → `NativeSelect` (`rule-20`)
-- **MUST** — tenir compte du `Portal` dans les empilements (`z-index`) : le contenu est rendu hors de son parent
-- **MUST** — donner à chaque `SelectItem` une `value` unique
-- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
+- **MUST NOT** — be used when the list has to be filtered by typing → use `Combobox`
+- **MUST NOT** — be used below `md` when the options need no rich rendering → `NativeSelect` (`rule-20`)
+- **MUST** — account for the `Portal` in stacking (`z-index`): the content renders outside its parent
+- **MUST** — give each `SelectItem` a unique `value`
+- **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
 
-## Dépendances
+## Dependencies
 
-- `radix-ui` — `Select` primitive (Root, Group, Value, Trigger, Content, Portal, Viewport, Label, Item, ItemText, ItemIndicator, Separator, ScrollUpButton, ScrollDownButton, Icon)
+- `radix-ui` — the `Select` primitive (Root, Group, Value, Trigger, Content, Portal, Viewport, Label, Item, ItemText, ItemIndicator, Separator, ScrollUpButton, ScrollDownButton, Icon)
 - `@phosphor-icons/react` — `CaretDownIcon`, `CheckIcon`, `CaretUpIcon`
 
-## Anatomie
+## Anatomy
 
-| Slot                                    | Rôle                                                   |
-| --------------------------------------- | ------------------------------------------------------ |
-| `data-slot="select"`                    | Racine du composant Select (état ouvert/fermé, valeur) |
-| `data-slot="select-trigger"`            | Bouton déclencheur affichant la valeur sélectionnée    |
-| `data-slot="select-value"`              | Texte de la valeur sélectionnée dans le trigger        |
-| `data-slot="select-content"`            | Conteneur popup des options (portail)                  |
-| `data-slot="select-group"`              | Groupe logique d'options                               |
-| `data-slot="select-label"`              | Label d'un groupe d'options                            |
-| `data-slot="select-item"`               | Option individuelle avec indicateur de sélection       |
-| `data-slot="select-separator"`          | Séparateur visuel entre groupes                        |
-| `data-slot="select-scroll-up-button"`   | Bouton de défilement vers le haut                      |
-| `data-slot="select-scroll-down-button"` | Bouton de défilement vers le bas                       |
+| Slot                                    | Role                                            |
+| --------------------------------------- | ----------------------------------------------- |
+| `data-slot="select"`                    | Root of the Select (open / closed state, value) |
+| `data-slot="select-trigger"`            | Trigger button that shows the selected value    |
+| `data-slot="select-value"`              | Text of the selected value inside the trigger   |
+| `data-slot="select-content"`            | Popup container of the options (in a portal)    |
+| `data-slot="select-group"`              | A logical group of options                      |
+| `data-slot="select-label"`              | Label of a group of options                     |
+| `data-slot="select-item"`               | A single option, with a selection indicator     |
+| `data-slot="select-separator"`          | Visual separator between groups                 |
+| `data-slot="select-scroll-up-button"`   | Button that scrolls up                          |
+| `data-slot="select-scroll-down-button"` | Button that scrolls down                        |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                          | Classes et variables                                                                           | Où                                                                  |
+| Token                          | Classes and variables                                                                          | Where                                                               |
 | ------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `border-width.default`         | `border`                                                                                       | `SelectTrigger`                                                     |
 | `color.background.elevated`    | `bg-popover`                                                                                   | `SelectContent` · `SelectScrollDownButton` · `SelectScrollUpButton` |
@@ -76,145 +76,145 @@ Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi u
 | `zindex.dropdown`              | `z-dropdown`                                                                                   | `SelectScrollDownButton` · `SelectScrollUpButton`                   |
 | `zindex.popover`               | `z-popover`                                                                                    | `SelectContent`                                                     |
 
-Relevé dans `components/ui/select.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/select.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Select`
 
-Rend `SelectPrimitive.Root`.
+Renders `SelectPrimitive.Root`.
 
-| Prop       | Type                                                | Défaut | Description                     |
-| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
-| `...props` | `React.ComponentProps<typeof SelectPrimitive.Root>` | —      | Props de `SelectPrimitive.Root` |
+| Prop       | Type                                                | Default | Description                  |
+| ---------- | --------------------------------------------------- | ------- | ---------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Root>` | —       | `SelectPrimitive.Root` props |
 
 ### `SelectContent`
 
-Rend `SelectPrimitive.Content`.
+Renders `SelectPrimitive.Content`.
 
-| Prop        | Type                                                   | Défaut           | Description                        |
-| ----------- | ------------------------------------------------------ | ---------------- | ---------------------------------- |
-| `position`  | `"item-aligned" \| "popper"`                           | `"item-aligned"` | Mode de positionnement du popup    |
-| `align`     | `"center" \| "end" \| "start"`                         | `"center"`       | Alignement du contenu              |
-| `className` | `string`                                               | —                | Classes CSS additionnelles         |
-| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Content>` | —                | Props de `SelectPrimitive.Content` |
+| Prop        | Type                                                   | Default          | Description                     |
+| ----------- | ------------------------------------------------------ | ---------------- | ------------------------------- |
+| `position`  | `"item-aligned" \| "popper"`                           | `"item-aligned"` | How the popup is positioned     |
+| `align`     | `"center" \| "end" \| "start"`                         | `"center"`       | Alignment of the content        |
+| `className` | `string`                                               | —                | Additional CSS classes          |
+| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Content>` | —                | `SelectPrimitive.Content` props |
 
 ### `SelectGroup`
 
-Rend `SelectPrimitive.Group`.
+Renders `SelectPrimitive.Group`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof SelectPrimitive.Group>` | —      | Props de `SelectPrimitive.Group` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Group>` | —       | `SelectPrimitive.Group` props |
 
 ### `SelectItem`
 
-Rend `SelectPrimitive.Item`.
+Renders `SelectPrimitive.Item`.
 
-| Prop        | Type                                                | Défaut | Description                      |
-| ----------- | --------------------------------------------------- | ------ | -------------------------------- |
-| `value`     | `string`                                            | —      | Valeur de l'option (obligatoire) |
-| `className` | `string`                                            | —      | Classes CSS additionnelles       |
-| `children`  | `React.ReactNode`                                   | —      | Contenu affiché de l'option      |
-| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Item>` | —      | Props de `SelectPrimitive.Item`  |
+| Prop        | Type                                                | Default | Description                     |
+| ----------- | --------------------------------------------------- | ------- | ------------------------------- |
+| `value`     | `string`                                            | —       | Value of the option (required)  |
+| `className` | `string`                                            | —       | Additional CSS classes          |
+| `children`  | `React.ReactNode`                                   | —       | Displayed content of the option |
+| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Item>` | —       | `SelectPrimitive.Item` props    |
 
 ### `SelectLabel`
 
-Rend `SelectPrimitive.Label`.
+Renders `SelectPrimitive.Label`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof SelectPrimitive.Label>` | —      | Props de `SelectPrimitive.Label` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Label>` | —       | `SelectPrimitive.Label` props |
 
 ### `SelectScrollDownButton`
 
-Rend `SelectPrimitive.ScrollDownButton`.
+Renders `SelectPrimitive.ScrollDownButton`.
 
-| Prop       | Type                                                            | Défaut | Description                                 |
-| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
-| `...props` | `React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>` | —      | Props de `SelectPrimitive.ScrollDownButton` |
+| Prop       | Type                                                            | Default | Description                              |
+| ---------- | --------------------------------------------------------------- | ------- | ---------------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>` | —       | `SelectPrimitive.ScrollDownButton` props |
 
 ### `SelectScrollUpButton`
 
-Rend `SelectPrimitive.ScrollUpButton`.
+Renders `SelectPrimitive.ScrollUpButton`.
 
-| Prop       | Type                                                          | Défaut | Description                               |
-| ---------- | ------------------------------------------------------------- | ------ | ----------------------------------------- |
-| `...props` | `React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>` | —      | Props de `SelectPrimitive.ScrollUpButton` |
+| Prop       | Type                                                          | Default | Description                            |
+| ---------- | ------------------------------------------------------------- | ------- | -------------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>` | —       | `SelectPrimitive.ScrollUpButton` props |
 
 ### `SelectSeparator`
 
-Rend `SelectPrimitive.Separator`.
+Renders `SelectPrimitive.Separator`.
 
-| Prop       | Type                                                     | Défaut | Description                          |
-| ---------- | -------------------------------------------------------- | ------ | ------------------------------------ |
-| `...props` | `React.ComponentProps<typeof SelectPrimitive.Separator>` | —      | Props de `SelectPrimitive.Separator` |
+| Prop       | Type                                                     | Default | Description                       |
+| ---------- | -------------------------------------------------------- | ------- | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Separator>` | —       | `SelectPrimitive.Separator` props |
 
 ### `SelectTrigger`
 
-Rend `SelectPrimitive.Trigger`.
+Renders `SelectPrimitive.Trigger`.
 
-| Prop        | Type                                                   | Défaut      | Description                                      |
+| Prop        | Type                                                   | Default     | Description                                      |
 | ----------- | ------------------------------------------------------ | ----------- | ------------------------------------------------ |
-| `size`      | `"sm" \| "default"`                                    | `"default"` | Taille du trigger (`h-8` default, `h-7` sm)      |
-| `className` | `string`                                               | —           | Classes CSS additionnelles                       |
-| `children`  | `React.ReactNode`                                      | —           | Contenu du trigger (typiquement `<SelectValue>`) |
-| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Trigger>` | —           | Props de `SelectPrimitive.Trigger`               |
+| `size`      | `"sm" \| "default"`                                    | `"default"` | Size of the trigger (`h-8` default, `h-7` sm)    |
+| `className` | `string`                                               | —           | Additional CSS classes                           |
+| `children`  | `React.ReactNode`                                      | —           | Content of the trigger (usually `<SelectValue>`) |
+| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Trigger>` | —           | `SelectPrimitive.Trigger` props                  |
 
 ### `SelectValue`
 
-Rend `SelectPrimitive.Value`.
+Renders `SelectPrimitive.Value`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof SelectPrimitive.Value>` | —      | Props de `SelectPrimitive.Value` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof SelectPrimitive.Value>` | —       | `SelectPrimitive.Value` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                         |
-| -------- | ----------------------------------------------------------------------------------- |
-| default  | Trigger avec bordure `input`, fond transparent, texte de la valeur ou placeholder   |
-| hover    | Fond dark du trigger passe à `bg-input/50`                                          |
-| focus    | Bordure `ring` + anneau `ring-ring/50` via `focus-visible` sur le trigger           |
-| active   | Popup ouvert avec animation `fade-in` + `zoom-in-95`, item focus en `accent`        |
-| disabled | `cursor-not-allowed`, opacité réduite (`opacity-disabled`) sur le trigger ou l'item |
-| error    | Bordure `destructive`, anneau `ring-destructive/20` via `aria-invalid`              |
+| State    | Description                                                                           |
+| -------- | ------------------------------------------------------------------------------------- |
+| default  | Trigger with an `input` border, a transparent background, the value or a placeholder  |
+| hover    | In dark mode, the trigger's background turns `bg-input/50`                            |
+| focus    | `ring` border and `ring-ring/50` ring through `focus-visible` on the trigger          |
+| active   | Popup open, animated with `fade-in` and `zoom-in-95`; the focused item in `accent`    |
+| disabled | `cursor-not-allowed`, reduced opacity (`opacity-disabled`) on the trigger or the item |
+| error    | `destructive` border and `ring-destructive/20` ring through `aria-invalid`            |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Select-Only Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) (Radix Select)
+**Pattern**: [Select-Only Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) (Radix Select)
 
-**Rôle** : Déclencheur `role="combobox"` avec `aria-expanded` ; liste `listbox` d'`option`.
+**Role**: A trigger with `role="combobox"` and `aria-expanded`; a `listbox` of `option`s.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                                      | Action                                         |
-| ------------------------------------------- | ---------------------------------------------- |
-| `Enter` / `Space` / `ArrowDown` / `ArrowUp` | Ouvre la liste                                 |
-| `ArrowDown` / `ArrowUp`                     | Option suivante / précédente                   |
-| `Home` / `End`                              | Première / dernière option                     |
-| `Enter` / `Space`                           | Sélectionne l'option                           |
-| `Escape`                                    | Ferme sans changer                             |
-| Saisie                                      | Va à l'option qui commence par la lettre tapée |
+| Key                                         | Action                                                |
+| ------------------------------------------- | ----------------------------------------------------- |
+| `Enter` / `Space` / `ArrowDown` / `ArrowUp` | Opens the list                                        |
+| `ArrowDown` / `ArrowUp`                     | Next / previous option                                |
+| `Home` / `End`                              | First / last option                                   |
+| `Enter` / `Space`                           | Selects the option                                    |
+| `Escape`                                    | Closes without changing anything                      |
+| Typing                                      | Moves to the option that starts with the typed letter |
 
-**Nom accessible** : Obligatoire : `Label` associé au déclencheur ou `aria-label`.
+**Accessible name**: Required: a `Label` tied to the trigger, or an `aria-label`.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Pour une longue liste ou sur mobile, `NativeSelect` est plus accessible.
-- La valeur affichée (`SelectValue`) doit rester lisible quand aucune option n'est choisie (placeholder).
+- For a long list or on mobile, `NativeSelect` is more accessible.
+- The displayed value (`SelectValue`) must stay readable when no option is chosen (a placeholder).
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -231,14 +231,14 @@ export default function Example() {
   return (
     <Select>
       <SelectTrigger>
-        <SelectValue placeholder="Choisir un fruit" />
+        <SelectValue placeholder="Choose a fruit" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="pomme">Pomme</SelectItem>
-          <SelectItem value="banane">Banane</SelectItem>
-          <SelectItem value="cerise">Cerise</SelectItem>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="cherry">Cherry</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
@@ -246,9 +246,9 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `NativeSelect` — alternative native plus légère pour les cas simples
-- `Combobox` — alternative avec recherche/filtrage intégré
-- `Field` — encapsule le select avec label et messages d'erreur
-- `RadioGroup` — alternative pour un petit nombre d'options visibles simultanément
+- `NativeSelect` — the lighter native alternative for simple cases
+- `Combobox` — the alternative with built-in search and filtering
+- `Field` — wraps the select with a label and error messages
+- `RadioGroup` — the alternative for a few options, all visible at once

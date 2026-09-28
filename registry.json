@@ -477,7 +477,7 @@
       "name": "conventions",
       "type": "registry:item",
       "title": "DSAIReadable conventions",
-      "description": "Les règles du design system pour les agents du projet consommateur (Cursor, Claude Code, Copilot) : adresses du registre, tokens sémantiques seuls, icônes Phosphor, dark mode par classe, accessibilité.",
+      "description": "The design system's rules for the consuming project's agents (Cursor, Claude Code, Copilot): registry addresses, semantic tokens only, Phosphor icons, class-based dark mode, accessibility.",
       "files": [
         {
           "path": "registry/conventions/dsaireadable.md",
@@ -500,7 +500,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Composant de navigation verticale permettant d'afficher et masquer des sections de contenu via des panneaux repliables.",
+      "description": "A vertical stack of collapsible panels that shows and hides sections of content.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -522,7 +522,7 @@
       "name": "alert-dialog",
       "type": "registry:ui",
       "title": "AlertDialog",
-      "description": "Fenêtre modale de confirmation bloquante qui interrompt l'utilisateur pour valider ou annuler une action critique.",
+      "description": "A blocking modal that stops the user to confirm or cancel a critical action.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -544,7 +544,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "Bandeau de feedback non-modal affichant un message contextuel (informatif ou d'erreur) avec titre, description et action optionnelle.",
+      "description": "A non-modal banner that delivers a contextual message — informational or an error — with a title, a description and an optional action.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -565,7 +565,7 @@
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "AspectRatio",
-      "description": "Conteneur qui impose un rapport largeur/hauteur fixe à son contenu (images, vidéos, cartes embed).",
+      "description": "A container that locks its content — an image, a video, an embedded map — to a fixed width-to-height ratio.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -583,7 +583,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Représentation visuelle d'un utilisateur ou d'une entité sous forme de photo, initiales ou icône, avec support de groupes et badges.",
+      "description": "A visual stand-in for a person or an entity — a photo, initials or an icon — with support for groups and status badges.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -604,7 +604,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Étiquette compacte utilisée pour catégoriser, marquer un statut ou mettre en avant une métadonnée sur un élément.",
+      "description": "A compact label that categorizes an element, marks its status or highlights a piece of metadata.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.4.3"
@@ -626,7 +626,7 @@
       "name": "breadcrumb",
       "type": "registry:ui",
       "title": "Breadcrumb",
-      "description": "Composant de navigation secondaire affichant le chemin hiérarchique de la page courante pour permettre à l'utilisateur de remonter dans l'arborescence.",
+      "description": "Secondary navigation that shows the path to the current page, so the user can climb back up the hierarchy.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -648,7 +648,7 @@
       "name": "button-group",
       "type": "registry:ui",
       "title": "ButtonGroup",
-      "description": "Conteneur regroupant visuellement plusieurs boutons, inputs ou selects adjacents en fusionnant leurs bordures et arrondis.",
+      "description": "A container that visually joins adjacent buttons, inputs or selects by merging their borders and corners.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.4.3"
@@ -671,7 +671,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Déclencheur d'action primaire ou secondaire, disponible en plusieurs variantes visuelles et tailles.",
+      "description": "Triggers a primary or secondary action; comes in several visual variants and sizes.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.4.3"
@@ -693,7 +693,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
-      "description": "Sélecteur de date(s) interactif basé sur `react-day-picker`, supportant la sélection simple, multiple et par plage avec navigation mensuelle.",
+      "description": "An interactive date picker built on `react-day-picker`: single, multiple or range selection, with month-by-month navigation.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "react-day-picker@^9.14.0"
@@ -716,7 +716,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "Conteneur surfacé regroupant un titre, une description, du contenu et un pied de page dans une structure cohérente.",
+      "description": "A surface that brings a title, a description, content and a footer together in one consistent structure.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -734,7 +734,7 @@
       "name": "carousel",
       "type": "registry:ui",
       "title": "Carousel",
-      "description": "Conteneur de défilement horizontal ou vertical permettant de naviguer entre des slides via des boutons ou le clavier, basé sur `embla-carousel`.",
+      "description": "A horizontal or vertical scroller that moves between slides with buttons or the keyboard, built on `embla-carousel`.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "embla-carousel-react@^8.6.0"
@@ -757,7 +757,7 @@
       "name": "chart",
       "type": "registry:ui",
       "title": "Chart",
-      "description": "Conteneur et utilitaires de visualisation de données basés sur `recharts`, fournissant un système de thème, des tooltips et une légende configurables via un objet `ChartConfig`.",
+      "description": "A container and a set of helpers for data visualization, built on `recharts`: theming, tooltips and a legend, all configured through a `ChartConfig` object.",
       "dependencies": [
         "recharts@^3.8.0"
       ],
@@ -778,7 +778,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Case à cocher binaire (ou indéterminée) permettant la sélection d'une option dans un formulaire, basée sur Radix `Checkbox.Root`.",
+      "description": "A two-state (or indeterminate) checkbox for selecting an option in a form, built on Radix `Checkbox.Root`.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -800,7 +800,7 @@
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
-      "description": "Composant de divulgation qui permet d'afficher ou masquer une section de contenu via un déclencheur.",
+      "description": "A disclosure: a trigger that shows or hides one section of content.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -818,7 +818,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "Champ de saisie avec auto-complétion et sélection parmi une liste d'options filtrable, supportant la sélection simple et multiple (chips).",
+      "description": "A text input with autocomplete that picks from a filterable list of options; supports single and multiple selection (chips).",
       "dependencies": [
         "@base-ui/react@^1.4.1",
         "@phosphor-icons/react@^2.1.10"
@@ -842,7 +842,7 @@
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
-      "description": "Palette de commandes avec recherche intégrée, permettant de filtrer et sélectionner rapidement une action ou un élément parmi une liste structurée.",
+      "description": "A command palette with built-in search, for quickly filtering and picking an action or an item from a structured list.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "cmdk@^1.1.1"
@@ -866,7 +866,7 @@
       "name": "context-menu",
       "type": "registry:ui",
       "title": "ContextMenu",
-      "description": "Menu contextuel déclenché par un clic droit, affichant une liste d'actions pertinentes pour l'élément ciblé.",
+      "description": "A menu opened with a right-click that lists the actions relevant to the element under the pointer.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -888,7 +888,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Fenêtre modale polyvalente pour afficher du contenu interactif (formulaire, détail, confirmation) au-dessus de l'interface principale.",
+      "description": "A general-purpose modal window that shows interactive content — a form, details, a confirmation — above the main interface.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -911,7 +911,7 @@
       "name": "direction",
       "type": "registry:ui",
       "title": "Direction",
-      "description": "Fournisseur de contexte qui propage la direction de lecture (LTR/RTL) à l'ensemble des composants enfants.",
+      "description": "A context provider that passes the reading direction (LTR / RTL) down to every child component.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -929,7 +929,7 @@
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "Panneau glissant ancré à un bord de l'écran, contrôlé par geste de glissement (swipe), idéal pour les interactions mobiles.",
+      "description": "A panel that slides in from an edge of the screen and follows the user's swipe — built for mobile interactions.",
       "dependencies": [
         "vaul@^1.1.2"
       ],
@@ -950,7 +950,7 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "DropdownMenu",
-      "description": "Menu déroulant déclenché par un clic sur un bouton, affichant une liste d'actions ou d'options de sélection.",
+      "description": "A menu opened by clicking a button, listing actions or selection options.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -972,7 +972,7 @@
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
-      "description": "État vide composable affiché lorsqu'une vue, liste ou section ne contient aucune donnée.",
+      "description": "A composable empty state, shown when a view, a list or a section has no data.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -993,7 +993,7 @@
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
-      "description": "Système de mise en page pour les champs de formulaire, gérant l'association Label/contrôle, la propagation de l'état invalide, les textes d'aide et les messages d'erreur.",
+      "description": "A layout system for form fields: it ties a label to its control, carries the invalid state, and holds help text and error messages.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -1016,7 +1016,7 @@
       "name": "heading",
       "type": "registry:ui",
       "title": "Heading",
-      "description": "Titre sémantique (h1–h4) avec quatre tailles visuelles et la police heading.",
+      "description": "A semantic heading (h1–h4) with four visual sizes, set in the heading typeface.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -1037,7 +1037,7 @@
       "name": "hover-card",
       "type": "registry:ui",
       "title": "HoverCard",
-      "description": "Carte flottante de prévisualisation apparaissant au survol d'un élément, affichant des informations complémentaires sans clic.",
+      "description": "A floating preview card that appears when the pointer rests on an element and shows extra information without a click.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1058,7 +1058,7 @@
       "name": "illustration",
       "type": "registry:ui",
       "title": "Illustration",
-      "description": "Placeholder pour illustrations et images décoratives. Utilisé dans les layouts split-screen, les pages d'erreur, les empty states et l'onboarding.",
+      "description": "A placeholder for illustrations and decorative images, used in split-screen layouts, error pages, empty states and onboarding.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -1076,7 +1076,7 @@
       "name": "input-group",
       "type": "registry:ui",
       "title": "InputGroup",
-      "description": "Conteneur structurant un champ de saisie avec des addons (icônes, boutons, texte, labels) positionnés autour de l'input.",
+      "description": "A container that arranges an input with add-ons — icons, buttons, text, labels — around it.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -1100,7 +1100,7 @@
       "name": "input-otp",
       "type": "registry:ui",
       "title": "InputOtp",
-      "description": "Champ de saisie segmenté pour les codes à usage unique (OTP), avec navigation automatique entre les cases et caret animé.",
+      "description": "A segmented input for one-time passcodes (OTP), with automatic movement between slots and an animated caret.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "input-otp@^1.4.2"
@@ -1122,7 +1122,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Champ de saisie texte mono-ligne (ou fichier) servant de brique de base pour tous les formulaires.",
+      "description": "A single-line text (or file) input: the basic building block of every form.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -1140,7 +1140,7 @@
       "name": "item",
       "type": "registry:ui",
       "title": "Item",
-      "description": "Composant de ligne composable représentant un élément dans une liste, avec support pour média, titre, description, actions et sections header/footer.",
+      "description": "A composable row that stands for one entry in a list, with slots for media, a title, a description, actions, and header and footer sections.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.4.3"
@@ -1163,7 +1163,7 @@
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
-      "description": "Représentation visuelle d'une touche ou combinaison de touches clavier sous forme d'étiquette inline.",
+      "description": "An inline label that shows a keyboard key or a key combination.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -1181,7 +1181,7 @@
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "Étiquette accessible associée à un contrôle de formulaire, basée sur Radix `Label.Root`.",
+      "description": "An accessible label tied to a form control, built on Radix `Label.Root`.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1202,7 +1202,7 @@
       "name": "logo",
       "type": "registry:ui",
       "title": "Logo",
-      "description": "Marque visuelle de l'application. Le composant rend le pictogramme seul ; il est un placeholder à remplacer par les vrais assets brand une fois fournis.",
+      "description": "The application's brand mark. The component renders the pictogram alone; it is a placeholder, to be swapped for the real brand assets once they are provided.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -1220,7 +1220,7 @@
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",
-      "description": "Barre de menus horizontale offrant un système de menus déroulants avec support des sous-menus, items à cocher, groupes radio et raccourcis clavier.",
+      "description": "A horizontal bar of drop-down menus, with submenus, checkable items, radio groups and keyboard shortcuts.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -1242,7 +1242,7 @@
       "name": "native-select",
       "type": "registry:ui",
       "title": "NativeSelect",
-      "description": "Menu déroulant natif du navigateur, léger et accessible, pour la sélection d'une option parmi une liste.",
+      "description": "The browser's native drop-down: a light, accessible way to pick one option from a list.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10"
       ],
@@ -1263,7 +1263,7 @@
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "NavigationMenu",
-      "description": "Menu de navigation principal permettant d'organiser les liens du site en catégories avec des panneaux de contenu déroulants et des animations de transition.",
+      "description": "Primary navigation that organizes the site's links into categories, with drop-down content panels and transition animations.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "class-variance-authority@^0.7.1",
@@ -1286,7 +1286,7 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "Composant de navigation séquentielle permettant de parcourir des ensembles de résultats paginés via des liens numérotés, précédent/suivant et ellipsis.",
+      "description": "Sequential navigation through paged result sets, with numbered links, previous / next links and an ellipsis.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10"
       ],
@@ -1308,7 +1308,7 @@
       "name": "password-input",
       "type": "registry:ui",
       "title": "PasswordInput",
-      "description": "Champ de saisie de mot de passe avec bouton de bascule de visibilité (œil ouvert / barré). Composition de `InputGroup`, `InputGroupInput` et `InputGroupButton`.",
+      "description": "A password field with a button that toggles visibility (open eye / slashed eye). Composed of `InputGroup`, `InputGroupInput` and `InputGroupButton`.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10"
       ],
@@ -1330,7 +1330,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "Conteneur flottant interactif déclenché par un clic, permettant d'afficher du contenu riche (formulaire, sélecteur, aperçu) sans quitter le contexte.",
+      "description": "An interactive floating container opened by a click, for rich content — a form, a picker, a preview — without leaving the current context.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1351,7 +1351,7 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "Barre de progression linéaire indiquant visuellement l'avancement d'une opération ou d'un processus, basée sur le primitive `Radix UI Progress`.",
+      "description": "A linear progress bar that shows how far an operation or a process has gone, built on the Radix UI `Progress` primitive.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1372,7 +1372,7 @@
       "name": "radio-group",
       "type": "registry:ui",
       "title": "RadioGroup",
-      "description": "Groupe de boutons radio permettant la sélection exclusive d'une seule option parmi plusieurs choix.",
+      "description": "A group of radio buttons for picking exactly one option out of several.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1393,7 +1393,7 @@
       "name": "resizable",
       "type": "registry:ui",
       "title": "Resizable",
-      "description": "Système de panneaux redimensionnables permettant de diviser une zone en sections ajustables par l'utilisateur via des poignées de séparation.",
+      "description": "Resizable panels: an area split into sections the user adjusts by dragging the handles between them.",
       "dependencies": [
         "react-resizable-panels@^4.10.0"
       ],
@@ -1414,7 +1414,7 @@
       "name": "scroll-area",
       "type": "registry:ui",
       "title": "ScrollArea",
-      "description": "Zone de défilement personnalisée avec des barres de défilement stylisées, remplaçant les scrollbars natives du navigateur.",
+      "description": "A scroll container with styled scrollbars that replace the browser's native ones.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1435,7 +1435,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Menu déroulant stylisé basé sur Radix pour la sélection d'une option parmi une liste, avec support du positionnement automatique et des groupes.",
+      "description": "A styled drop-down built on Radix for picking one option from a list, with automatic positioning and option groups.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -1457,7 +1457,7 @@
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
-      "description": "Ligne de séparation visuelle horizontale ou verticale permettant de diviser des sections de contenu, basée sur Radix `Separator`.",
+      "description": "A horizontal or vertical rule that divides sections of content, built on Radix `Separator`.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1478,7 +1478,7 @@
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
-      "description": "Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, basé sur Radix Dialog, pour afficher du contenu étendu sans quitter la page.",
+      "description": "A panel that slides in from the side (or from the top or bottom) over the interface, built on Radix Dialog, to show longer content without leaving the page.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.4.3"
@@ -1501,7 +1501,7 @@
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
-      "description": "Panneau de navigation latéral complet avec support responsive (Sheet mobile), état collapsible, raccourci clavier et persistance d'état via cookie.",
+      "description": "A complete side navigation panel: responsive (a Sheet on mobile), collapsible, with a keyboard shortcut and its state persisted in a cookie.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "class-variance-authority@^0.7.1",
@@ -1534,7 +1534,7 @@
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "Placeholder animé de chargement qui représente la forme du contenu à venir, réduisant la perception de latence.",
+      "description": "An animated loading placeholder in the shape of the content to come, which makes waiting feel shorter.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -1552,7 +1552,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "Curseur de sélection d'une valeur numérique (ou d'un intervalle) au sein d'une plage définie, en mode horizontal ou vertical.",
+      "description": "A slider that picks a numeric value (or a range) within set bounds, horizontally or vertically.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1573,7 +1573,7 @@
       "name": "sonner",
       "type": "registry:ui",
       "title": "Sonner",
-      "description": "Fournisseur de notifications toast éphémères, basé sur la librairie `sonner`, avec icônes personnalisées et thème adaptatif.",
+      "description": "The provider for short-lived toast notifications, built on the `sonner` library, with custom icons and a theme that follows the app's.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "next-themes@^0.4.6",
@@ -1593,7 +1593,7 @@
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
-      "description": "Indicateur de chargement animé signalant qu'une opération asynchrone est en cours.",
+      "description": "An animated loading indicator that signals an asynchronous operation is in progress.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10"
       ],
@@ -1614,7 +1614,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "Interrupteur à bascule pour activer ou désactiver un paramètre binaire, avec retour visuel immédiat.",
+      "description": "A toggle switch that turns a two-state setting on or off, with immediate visual feedback.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],
@@ -1635,7 +1635,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Ensemble de composants pour construire des tableaux de données sémantiques avec en-têtes, corps, pied de page et légende, supportant le défilement horizontal.",
+      "description": "A set of components for building semantic data tables — header, body, footer and caption — with horizontal scrolling.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -1653,7 +1653,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Composant de navigation par onglets permettant d'alterner entre des panneaux de contenu mutuellement exclusifs, disponible en orientation horizontale ou verticale et en variante par défaut ou ligne.",
+      "description": "Tabbed navigation that switches between mutually exclusive content panels; horizontal or vertical, in a default or a line style.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.4.3"
@@ -1675,7 +1675,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "Champ de saisie multi-lignes avec dimensionnement automatique (`field-sizing-content`) pour la saisie de texte libre.",
+      "description": "A multi-line text field that grows with its content (`field-sizing-content`), for free-form text.",
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
       ],
@@ -1693,7 +1693,7 @@
       "name": "toggle-group",
       "type": "registry:ui",
       "title": "ToggleGroup",
-      "description": "Groupe de boutons à bascule mutuellement exclusifs ou multi-sélection, basé sur Radix ToggleGroup, partageant variante et taille via contexte.",
+      "description": "A group of toggle buttons — exclusive or multi-select — built on Radix ToggleGroup, sharing one variant and size through context.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.4.3"
@@ -1716,7 +1716,7 @@
       "name": "toggle",
       "type": "registry:ui",
       "title": "Toggle",
-      "description": "Bouton à bascule binaire (pressé/non pressé) disponible en plusieurs variantes et tailles, exportant ses variantes pour réutilisation (ex. : `ToggleGroup`).",
+      "description": "A two-state (pressed / not pressed) toggle button in several variants and sizes; its variants are exported for reuse (by `ToggleGroup`, for example).",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.4.3"
@@ -1738,7 +1738,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "Bulle d'information contextuelle apparaissant au survol ou au focus d'un élément déclencheur, basée sur Radix Tooltip.",
+      "description": "A small contextual label that appears when a trigger is hovered or focused, built on Radix Tooltip.",
       "dependencies": [
         "radix-ui@^1.4.3"
       ],

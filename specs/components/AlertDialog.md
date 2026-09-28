@@ -2,64 +2,64 @@
 
 ## Metadata
 
-| Champ         | Valeur                         |
+| Field         | Value                          |
 | ------------- | ------------------------------ |
-| Nom           | AlertDialog                    |
-| Catégorie     | Overlay                        |
-| Statut        | stable                         |
+| Name          | AlertDialog                    |
+| Category      | Overlay                        |
+| Status        | stable                         |
 | figma_node_id |                                |
 | code_path     | components/ui/alert-dialog.tsx |
 
-## Rôle
+## Role
 
-Fenêtre modale de confirmation bloquante qui interrompt l'utilisateur pour valider ou annuler une action critique.
+A blocking modal that stops the user to confirm or cancel a critical action.
 
 ## Usage
 
-- Confirmer une action irréversible (suppression, résiliation, envoi définitif)
-- Demander une validation explicite avant un changement destructeur
-- Afficher un avertissement nécessitant une réponse obligatoire de l'utilisateur
-- Bloquer l'interaction avec le reste de l'interface tant que le choix n'est pas fait
+- Confirm an irreversible action (deletion, cancellation, final submission)
+- Ask for explicit approval before a destructive change
+- Show a warning the user has to answer
+- Block the rest of the interface until the user has made a choice
 
-<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-21: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+- **Choice** (`rule-21`) — Pick the surface from how much it blocks and how long its content is. A blocking decision (confirm, destroy): `AlertDialog`. A short task with no inner scrolling: `Dialog`. Long content or side context: `Sheet` from `md` up, `Drawer` below — **unless** it is side navigation, which stays a `Sheet` at every width (this is what `Sidebar` does below `md`). Anchored, non-blocking content with no scrolling and at most 3 fields: `Popover`. An informative preview on hover, from `md` up: `HoverCard`. A one-line, non-interactive label of at most 80 characters: `Tooltip`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir à un simple message d'information → utiliser `Dialog`, ou `Sonner` pour une notification
-- **MUST NOT** — ouvrir un `AlertDialog` par-dessus un autre : un seul visible à la fois
-- **MUST** — proposer un bouton d'annulation (`AlertDialogCancel`)
-- **MUST NOT** — réimplémenter le piège à focus : Radix le fournit
-- **MUST** — rendre un `AlertDialogTitle` : c'est le nom annoncé par les lecteurs d'écran
+- **MUST NOT** — carry a plain informational message → use `Dialog`, or `Sonner` for a notification
+- **MUST NOT** — open an `AlertDialog` on top of another: one visible at a time
+- **MUST** — offer a cancel button (`AlertDialogCancel`)
+- **MUST NOT** — re-implement the focus trap: Radix provides it
+- **MUST** — render an `AlertDialogTitle`: it is the name screen readers announce
 
-## Dépendances
+## Dependencies
 
-- `AlertDialog` de `radix-ui` (primitives Root, Trigger, Portal, Overlay, Content, Title, Description, Action, Cancel)
-- `Button` de `@/components/ui/button` (utilisé par AlertDialogAction et AlertDialogCancel)
+- `AlertDialog` from `radix-ui` (Root, Trigger, Portal, Overlay, Content, Title, Description, Action, Cancel)
+- `Button` from `@/components/ui/button` (used by `AlertDialogAction` and `AlertDialogCancel`)
 
-## Anatomie
+## Anatomy
 
-| Slot                                   | Rôle                                                |
-| -------------------------------------- | --------------------------------------------------- |
-| `data-slot="alert-dialog"`             | Racine, conteneur logique du composant              |
-| `data-slot="alert-dialog-trigger"`     | Élément déclencheur d'ouverture                     |
-| `data-slot="alert-dialog-portal"`      | Portail de rendu hors du DOM parent                 |
-| `data-slot="alert-dialog-overlay"`     | Fond semi-transparent derrière la modale            |
-| `data-slot="alert-dialog-content"`     | Conteneur principal de la modale, porte `data-size` |
-| `data-slot="alert-dialog-header"`      | Zone d'en-tête (titre + description)                |
-| `data-slot="alert-dialog-footer"`      | Zone de pied (boutons d'action)                     |
-| `data-slot="alert-dialog-media"`       | Zone média/icône optionnelle dans le header         |
-| `data-slot="alert-dialog-title"`       | Titre de la modale                                  |
-| `data-slot="alert-dialog-description"` | Description textuelle                               |
-| `data-slot="alert-dialog-action"`      | Bouton d'action principale (confirmer)              |
-| `data-slot="alert-dialog-cancel"`      | Bouton d'annulation                                 |
+| Slot                                   | Role                                             |
+| -------------------------------------- | ------------------------------------------------ |
+| `data-slot="alert-dialog"`             | Root, the component's logical container          |
+| `data-slot="alert-dialog-trigger"`     | Element that opens the dialog                    |
+| `data-slot="alert-dialog-portal"`      | Portal that renders outside the parent DOM       |
+| `data-slot="alert-dialog-overlay"`     | Semi-transparent backdrop behind the dialog      |
+| `data-slot="alert-dialog-content"`     | The dialog's main container; carries `data-size` |
+| `data-slot="alert-dialog-header"`      | Header area (title and description)              |
+| `data-slot="alert-dialog-footer"`      | Footer area (action buttons)                     |
+| `data-slot="alert-dialog-media"`       | Optional media or icon area in the header        |
+| `data-slot="alert-dialog-title"`       | The dialog's title                               |
+| `data-slot="alert-dialog-description"` | Descriptive text                                 |
+| `data-slot="alert-dialog-action"`      | Primary action button (confirm)                  |
+| `data-slot="alert-dialog-cancel"`      | Cancel button                                    |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                            | Classes et variables                                                 | Où                                                                                                                            |
+| Token                            | Classes and variables                                                | Where                                                                                                                         |
 | -------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `color.background.elevated`      | `bg-popover`                                                         | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                              |
 | `color.background.subtle`        | `bg-muted`                                                           | `AlertDialogMedia`                                                                                                            |
@@ -73,158 +73,158 @@ Fenêtre modale de confirmation bloquante qui interrompt l'utilisateur pour vali
 | `typography.size.xs`             | `text-xs/relaxed`                                                    | `AlertDialogDescription`                                                                                                      |
 | `zindex.modal`                   | `z-modal`                                                            | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
 
-Relevé dans `components/ui/alert-dialog.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/alert-dialog.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Button` : les tokens de ce composant sont listés dans sa spec.
+Composes `Button` — its tokens are listed in its own spec.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `AlertDialog`
 
-Rend `AlertDialogPrimitive.Root`.
+Renders `AlertDialogPrimitive.Root`.
 
-| Prop           | Type                                                     | Défaut      | Description                                  |
+| Prop           | Type                                                     | Default     | Description                                  |
 | -------------- | -------------------------------------------------------- | ----------- | -------------------------------------------- |
-| `open`         | `boolean`                                                | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
-| `onOpenChange` | `(open: boolean) => void`                                | —           | Callback lors du changement d'état           |
-| `...props`     | `React.ComponentProps<typeof AlertDialogPrimitive.Root>` | —           | Props de `AlertDialogPrimitive.Root`         |
+| `open`         | `boolean`                                                | `undefined` | Whether the dialog is open (controlled mode) |
+| `onOpenChange` | `(open: boolean) => void`                                | —           | Called when the dialog opens or closes       |
+| `...props`     | `React.ComponentProps<typeof AlertDialogPrimitive.Root>` | —           | `AlertDialogPrimitive.Root` props            |
 
 ### `AlertDialogAction`
 
-Rend `AlertDialogPrimitive.Action`.
+Renders `AlertDialogPrimitive.Action`.
 
-| Prop       | Type                                                                                                                        | Défaut      | Description                                  |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------- |
-| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`                                               | `"default"` | Variante du bouton Action                    |
-| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"`                                        | `"default"` | Taille du contenu (sur `AlertDialogContent`) |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Action> & Pick<React.ComponentProps<typeof Button>, "variant" \| "size">` | —           | Props de `AlertDialogPrimitive.Action`       |
+| Prop       | Type                                                                                                                        | Default     | Description                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------- |
+| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`                                               | `"default"` | Variant of the action button        |
+| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"`                                        | `"default"` | Size of the action button           |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Action> & Pick<React.ComponentProps<typeof Button>, "variant" \| "size">` | —           | `AlertDialogPrimitive.Action` props |
 
 ### `AlertDialogCancel`
 
-Rend `AlertDialogPrimitive.Cancel`.
+Renders `AlertDialogPrimitive.Cancel`.
 
-| Prop       | Type                                                                                                                        | Défaut      | Description                            |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------- |
-| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`                                               | `"outline"` | Prop de `Button`, voir sa spec         |
-| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"`                                        | `"default"` | Prop de `Button`, voir sa spec         |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Cancel> & Pick<React.ComponentProps<typeof Button>, "variant" \| "size">` | —           | Props de `AlertDialogPrimitive.Cancel` |
+| Prop       | Type                                                                                                                        | Default     | Description                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------- |
+| `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"`                                               | `"outline"` | `Button` prop — see its spec        |
+| `size`     | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"`                                        | `"default"` | `Button` prop — see its spec        |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Cancel> & Pick<React.ComponentProps<typeof Button>, "variant" \| "size">` | —           | `AlertDialogPrimitive.Cancel` props |
 
 ### `AlertDialogContent`
 
-Rend `AlertDialogPrimitive.Content`.
+Renders `AlertDialogPrimitive.Content`.
 
-| Prop       | Type                                                        | Défaut      | Description                                                                                                                                            |
-| ---------- | ----------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `size`     | `"default" \| "sm"`                                         | `"default"` | `sm` garde la boîte étroite et son contenu centré à toutes les largeurs ; `default` l'élargit et aligne l'en-tête à gauche à partir du breakpoint `sm` |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Content>` | —           | Props de `AlertDialogPrimitive.Content`                                                                                                                |
+| Prop       | Type                                                        | Default     | Description                                                                                                                                   |
+| ---------- | ----------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `size`     | `"default" \| "sm"`                                         | `"default"` | `sm` keeps the box narrow and its content centered at every width; `default` widens it and left-aligns the header from the `sm` breakpoint up |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Content>` | —           | `AlertDialogPrimitive.Content` props                                                                                                          |
 
 ### `AlertDialogDescription`
 
-Rend `AlertDialogPrimitive.Description`.
+Renders `AlertDialogPrimitive.Description`.
 
-| Prop       | Type                                                            | Défaut | Description                                 |
-| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Description>` | —      | Props de `AlertDialogPrimitive.Description` |
+| Prop       | Type                                                            | Default | Description                              |
+| ---------- | --------------------------------------------------------------- | ------- | ---------------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Description>` | —       | `AlertDialogPrimitive.Description` props |
 
 ### `AlertDialogFooter`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `AlertDialogHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `AlertDialogMedia`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `AlertDialogOverlay`
 
-Rend `AlertDialogPrimitive.Overlay`.
+Renders `AlertDialogPrimitive.Overlay`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Overlay>` | —      | Props de `AlertDialogPrimitive.Overlay` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Overlay>` | —       | `AlertDialogPrimitive.Overlay` props |
 
 ### `AlertDialogPortal`
 
-Rend `AlertDialogPrimitive.Portal`.
+Renders `AlertDialogPrimitive.Portal`.
 
-| Prop       | Type                                                       | Défaut | Description                            |
-| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Portal>` | —      | Props de `AlertDialogPrimitive.Portal` |
+| Prop       | Type                                                       | Default | Description                         |
+| ---------- | ---------------------------------------------------------- | ------- | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Portal>` | —       | `AlertDialogPrimitive.Portal` props |
 
 ### `AlertDialogTitle`
 
-Rend `AlertDialogPrimitive.Title`.
+Renders `AlertDialogPrimitive.Title`.
 
-| Prop       | Type                                                      | Défaut | Description                           |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Title>` | —      | Props de `AlertDialogPrimitive.Title` |
+| Prop       | Type                                                      | Default | Description                        |
+| ---------- | --------------------------------------------------------- | ------- | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Title>` | —       | `AlertDialogPrimitive.Title` props |
 
 ### `AlertDialogTrigger`
 
-Rend `AlertDialogPrimitive.Trigger`.
+Renders `AlertDialogPrimitive.Trigger`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Trigger>` | —      | Props de `AlertDialogPrimitive.Trigger` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof AlertDialogPrimitive.Trigger>` | —       | `AlertDialogPrimitive.Trigger` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                   |
-| -------- | ----------------------------------------------------------------------------- |
-| default  | Modale fermée, aucun overlay visible                                          |
-| open     | Overlay affiché, contenu centré avec animation `fade-in` + `zoom-in-95`       |
-| closing  | Animation de sortie `fade-out` + `zoom-out-95`                                |
-| focus    | Focus piégé à l'intérieur de la modale (focus trap Radix)                     |
-| disabled | Boutons Action/Cancel peuvent être désactivés individuellement via `disabled` |
+| State    | Description                                                               |
+| -------- | ------------------------------------------------------------------------- |
+| default  | Dialog closed, no overlay                                                 |
+| open     | Overlay shown, content centered, animated with `fade-in` and `zoom-in-95` |
+| closing  | Exit animation: `fade-out` and `zoom-out-95`                              |
+| focus    | Focus trapped inside the dialog (Radix focus trap)                        |
+| disabled | The Action and Cancel buttons can each be disabled with `disabled`        |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Alert Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) (Radix AlertDialog)
+**Pattern**: [Alert Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) (Radix AlertDialog)
 
-**Rôle** : `role="alertdialog"`, `aria-modal="true"` ; étiqueté par `AlertDialogTitle`, décrit par `AlertDialogDescription`.
+**Role**: `role="alertdialog"`, `aria-modal="true"`; labelled by `AlertDialogTitle`, described by `AlertDialogDescription`.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche              | Action                                                      |
+| Key                 | Action                                                      |
 | ------------------- | ----------------------------------------------------------- |
-| `Tab` / `Shift+Tab` | Parcourt les éléments focalisables, piégés dans le dialogue |
-| `Escape`            | Ferme le dialogue (équivaut à Annuler)                      |
-| `Enter` / `Space`   | Active le bouton focalisé                                   |
+| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the dialog |
+| `Escape`            | Closes the dialog (same as Cancel)                          |
+| `Enter` / `Space`   | Activates the focused button                                |
 
-**Nom accessible** : `AlertDialogTitle` est obligatoire ; `AlertDialogDescription` doit dire la conséquence de l'action.
+**Accessible name**: `AlertDialogTitle` is required; `AlertDialogDescription` must state what the action will do.
 
-**Vigilance** :
+**Pitfalls**:
 
-- À l'ouverture, le focus va sur `AlertDialogCancel` : l'action destructrice ne doit jamais être le choix par défaut.
-- À la fermeture, le focus revient au déclencheur.
-- Un clic hors du dialogue ne le ferme pas : c'est voulu, la décision doit être explicite.
+- On open, focus goes to `AlertDialogCancel`: the destructive action must never be the default choice.
+- On close, focus returns to the trigger.
+- Clicking outside does not close the dialog. That is deliberate: the decision must be explicit.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -238,24 +238,24 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
 
 export default function Example() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">Supprimer</Button>
+        <Button variant="destructive">Delete</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Confirmer la suppression</AlertDialogTitle>
+          <AlertDialogTitle>Delete this item?</AlertDialogTitle>
           <AlertDialogDescription>
-            Cette action est irréversible. Les données seront définitivement
-            supprimées.
+            This cannot be undone. The data will be permanently deleted.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Annuler</AlertDialogCancel>
-          <AlertDialogAction variant="destructive">Supprimer</AlertDialogAction>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -263,8 +263,8 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Dialog` — pour les modales non-bloquantes sans obligation de réponse
-- `Button` — utilisé en interne par AlertDialogAction et AlertDialogCancel
-- `Drawer` — alternative modale pour mobile (panneau glissant)
+- `Dialog` — for non-blocking dialogs that need no answer
+- `Button` — used internally by `AlertDialogAction` and `AlertDialogCancel`
+- `Drawer` — the modal alternative on mobile (a sliding panel)

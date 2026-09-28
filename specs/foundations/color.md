@@ -8,116 +8,116 @@
 
 ### Background
 
-| Token                       | CSS Variable                  | Light                | Dark                 | Usage                                                    |
-| --------------------------- | ----------------------------- | -------------------- | -------------------- | -------------------------------------------------------- |
-| `color.background.default`  | `--color-background-default`  | `#ffffff` (mist.0)   | `#090b0c` (mist.950) | Surface principale — page racine, body                   |
-| `color.background.subtle`   | `--color-background-subtle`   | `#f1f3f3` (mist.100) | `#22292b` (mist.800) | Surfaces secondaires — cards, zones atténuées            |
-| `color.background.elevated` | `--color-background-elevated` | `#ffffff` (mist.0)   | `#161b1d` (mist.900) | Surfaces flottantes — popovers, dropdowns, dialogs       |
-| `color.background.inverse`  | `--color-background-inverse`  | `#090b0c` (mist.950) | `#ffffff` (mist.0)   | Surfaces inversées — tooltips sombres, badges contrastés |
+| Token                       | CSS Variable                  | Light                | Dark                 | Usage                                                   |
+| --------------------------- | ----------------------------- | -------------------- | -------------------- | ------------------------------------------------------- |
+| `color.background.default`  | `--color-background-default`  | `#ffffff` (mist.0)   | `#090b0c` (mist.950) | Main surface — the root page, the body                  |
+| `color.background.subtle`   | `--color-background-subtle`   | `#f1f3f3` (mist.100) | `#22292b` (mist.800) | Secondary surfaces — cards, muted areas                 |
+| `color.background.elevated` | `--color-background-elevated` | `#ffffff` (mist.0)   | `#161b1d` (mist.900) | Floating surfaces — popovers, drop-downs, dialogs       |
+| `color.background.inverse`  | `--color-background-inverse`  | `#090b0c` (mist.950) | `#ffffff` (mist.0)   | Inverted surfaces — dark tooltips, high-contrast badges |
 
-**Do / Don't :**
+**Do / Don't:**
 
-- ✅ `background.default` — fond de `<html>` et des conteneurs racines.
-- ❌ Ne pas utiliser `background.default` pour les cards — préférer `background.subtle`.
-- ✅ `background.elevated` pour tout élément qui flotte au-dessus du contenu (menu, dialog).
-- ❌ Ne pas utiliser `background.elevated` pour une card inline — ce n'est pas une surface flottante.
+- ✅ `background.default` — the background of `<html>` and of root containers.
+- ❌ Do not use `background.default` for cards — use `background.subtle`.
+- ✅ `background.elevated` for anything that floats above the content (a menu, a dialog).
+- ❌ Do not use `background.elevated` for an inline card — it is not a floating surface.
 
 ---
 
 ### Text
 
-| Token                            | CSS Variable                       | Light      | Dark       | Usage                                                 |
-| -------------------------------- | ---------------------------------- | ---------- | ---------- | ----------------------------------------------------- |
-| `color.text.default`             | `--color-text-default`             | mist.950   | mist.50    | Corps de texte principal, headings                    |
-| `color.text.subtle`              | `--color-text-subtle`              | mist.600   | mist.400   | Texte secondaire — captions, helper text, métadonnées |
-| `color.text.bold`                | `--color-text-bold`                | mist.950   | mist.50    | Texte emphatique à fort contraste                     |
-| `color.text.inverse`             | `--color-text-inverse`             | mist.0     | mist.950   | Texte sur surface inverse (fond sombre en light)      |
-| `color.text.action.default`      | `--color-text-action-default`      | violet.600 | violet.400 | Liens, labels d'action primaire                       |
-| `color.text.action.on`           | `--color-text-action-on`           | violet.50  | violet.50  | Texte posé sur un fond `action.background.default`    |
-| `color.text.destructive.default` | `--color-text-destructive-default` | red.600    | red.500    | Messages d'erreur, actions destructives               |
+| Token                            | CSS Variable                       | Light      | Dark       | Usage                                                        |
+| -------------------------------- | ---------------------------------- | ---------- | ---------- | ------------------------------------------------------------ |
+| `color.text.default`             | `--color-text-default`             | mist.950   | mist.50    | Main body text, headings                                     |
+| `color.text.subtle`              | `--color-text-subtle`              | mist.600   | mist.400   | Secondary text — captions, helper text, metadata             |
+| `color.text.bold`                | `--color-text-bold`                | mist.950   | mist.50    | High-contrast emphasized text                                |
+| `color.text.inverse`             | `--color-text-inverse`             | mist.0     | mist.950   | Text on an inverse surface (a dark background in light mode) |
+| `color.text.action.default`      | `--color-text-action-default`      | violet.600 | violet.400 | Links, primary action labels                                 |
+| `color.text.action.on`           | `--color-text-action-on`           | violet.50  | violet.50  | Text on an `action.background.default` background            |
+| `color.text.destructive.default` | `--color-text-destructive-default` | red.600    | red.500    | Error messages, destructive actions                          |
 
-**Do / Don't :**
+**Do / Don't:**
 
-- ✅ `text.subtle` pour les labels de champs, placeholders visibles, metadata.
-- ❌ Ne pas utiliser `text.default` avec une opacité réduite pour simuler `text.subtle` — utiliser le token dédié.
-- ✅ `text.action.on` uniquement sur fond `color.action.background.default`.
-- ❌ Ne pas utiliser `text.destructive.default` pour des avertissements — c'est réservé aux erreurs.
+- ✅ `text.subtle` for field labels, visible placeholders, metadata.
+- ❌ Do not dim `text.default` with opacity to fake `text.subtle` — use the dedicated token.
+- ✅ `text.action.on` only on a `color.action.background.default` background.
+- ❌ Do not use `text.destructive.default` for warnings — it is reserved for errors.
 
 ---
 
 ### Border
 
-| Token                  | CSS Variable             | Light    | Dark           | Usage                                         |
-| ---------------------- | ------------------------ | -------- | -------------- | --------------------------------------------- |
-| `color.border.default` | `--color-border-default` | mist.200 | white-alpha.10 | Séparateurs standards, contours de composants |
-| `color.border.subtle`  | `--color-border-subtle`  | mist.200 | white-alpha.10 | Séparateurs discrets, poids visuel minimal    |
-| `color.border.input`   | `--color-border-input`   | mist.200 | white-alpha.15 | Bordure spécifique aux champs de formulaire   |
-| `color.border.focus`   | `--color-border-focus`   | mist.500 | mist.500       | Focus ring pour l'accessibilité clavier       |
+| Token                  | CSS Variable             | Light    | Dark           | Usage                                      |
+| ---------------------- | ------------------------ | -------- | -------------- | ------------------------------------------ |
+| `color.border.default` | `--color-border-default` | mist.200 | white-alpha.10 | Standard separators, component outlines    |
+| `color.border.subtle`  | `--color-border-subtle`  | mist.200 | white-alpha.10 | Discreet separators, minimal visual weight |
+| `color.border.input`   | `--color-border-input`   | mist.200 | white-alpha.15 | The border of form fields                  |
+| `color.border.focus`   | `--color-border-focus`   | mist.500 | mist.500       | Focus ring for keyboard accessibility      |
 
-**Do / Don't :**
+**Do / Don't:**
 
-- ✅ `border.input` pour toutes les bordures de `<input>`, `<select>`, `<textarea>`.
-- ❌ Ne pas utiliser `border.focus` au repos ou au hover — uniquement pour l'état `:focus-visible`.
-- ✅ `border.subtle` pour les dividers entre sections d'une page.
-- ❌ Ne pas mélanger `border.default` et `border.subtle` dans le même composant.
+- ✅ `border.input` for every `<input>`, `<select>` and `<textarea>` border.
+- ❌ Do not use `border.focus` at rest or on hover — only for the `:focus-visible` state.
+- ✅ `border.subtle` for dividers between the sections of a page.
+- ❌ Do not mix `border.default` and `border.subtle` in the same component.
 
 ---
 
 ### Icon
 
-| Token                | CSS Variable           | Light     | Dark      | Usage                                            |
-| -------------------- | ---------------------- | --------- | --------- | ------------------------------------------------ |
-| `color.icon.default` | `--color-icon-default` | mist.950  | mist.50   | Icône principale en contexte neutre              |
-| `color.icon.subtle`  | `--color-icon-subtle`  | mist.500  | mist.400  | Icône secondaire, désactivée ou décorative       |
-| `color.icon.action`  | `--color-icon-action`  | violet.50 | violet.50 | Icône posée sur fond `action.background.default` |
+| Token                | CSS Variable           | Light     | Dark      | Usage                                             |
+| -------------------- | ---------------------- | --------- | --------- | ------------------------------------------------- |
+| `color.icon.default` | `--color-icon-default` | mist.950  | mist.50   | Main icon in a neutral context                    |
+| `color.icon.subtle`  | `--color-icon-subtle`  | mist.500  | mist.400  | Secondary, disabled or decorative icon            |
+| `color.icon.action`  | `--color-icon-action`  | violet.50 | violet.50 | Icon on an `action.background.default` background |
 
-**Do / Don't :**
+**Do / Don't:**
 
-- ✅ `icon.action` uniquement à l'intérieur d'un bouton primaire ou d'un badge d'action.
-- ❌ Ne pas utiliser `icon.default` pour une icône à l'intérieur d'un bouton primaire — utiliser `icon.action`.
+- ✅ `icon.action` only inside a primary button or an action badge.
+- ❌ Do not use `icon.default` for an icon inside a primary button — use `icon.action`.
 
 ---
 
 ### Action
 
-| Token                                | CSS Variable                           | Light      | Dark       | Usage                                 |
-| ------------------------------------ | -------------------------------------- | ---------- | ---------- | ------------------------------------- |
-| `color.action.background.default`    | `--color-action-background-default`    | violet.600 | violet.700 | Fond du bouton/composant CTA primaire |
-| `color.action.background.foreground` | `--color-action-background-foreground` | violet.50  | violet.50  | Texte/icône sur fond action primaire  |
+| Token                                | CSS Variable                           | Light      | Dark       | Usage                                             |
+| ------------------------------------ | -------------------------------------- | ---------- | ---------- | ------------------------------------------------- |
+| `color.action.background.default`    | `--color-action-background-default`    | violet.600 | violet.700 | Background of the primary CTA button or component |
+| `color.action.background.foreground` | `--color-action-background-foreground` | violet.50  | violet.50  | Text or icon on the primary action background     |
 
-**Do / Don't :**
+**Do / Don't:**
 
-- ✅ Toujours associer `action.background.default` avec `action.background.foreground` pour le texte.
-- ❌ Ne pas utiliser ces tokens pour les variantes `secondary`, `ghost` ou `outline`.
+- ✅ Always pair `action.background.default` with `action.background.foreground` for the text.
+- ❌ Do not use these tokens for the `secondary`, `ghost` or `outline` variants.
 
 ---
 
 ### Feedback
 
-| Token                             | CSS Variable                        | Light   | Dark     | Usage                                                |
-| --------------------------------- | ----------------------------------- | ------- | -------- | ---------------------------------------------------- |
-| `color.feedback.error.default`    | `--color-feedback-error-default`    | red.600 | red.500  | Fond/icône/bordure d'état d'erreur                   |
-| `color.feedback.error.foreground` | `--color-feedback-error-foreground` | mist.0  | mist.950 | Texte/icône posé **sur** une surface d'erreur pleine |
+| Token                             | CSS Variable                        | Light   | Dark     | Usage                                            |
+| --------------------------------- | ----------------------------------- | ------- | -------- | ------------------------------------------------ |
+| `color.feedback.error.default`    | `--color-feedback-error-default`    | red.600 | red.500  | Background, icon or border of an error state     |
+| `color.feedback.error.foreground` | `--color-feedback-error-foreground` | mist.0  | mist.950 | Text or icon placed **on** a solid error surface |
 
-**Do / Don't :**
+**Do / Don't:**
 
-- ✅ Utiliser pour les messages de validation d'erreur et les bordures de champs invalides.
-- ✅ Sur un fond d'erreur plein, toujours employer `color.feedback.error.foreground` (alias shadcn `--destructive-foreground`).
-- ❌ Ne pas utiliser pour les avertissements (warning) ou les succès — des tokens dédiés seront ajoutés.
-- ❌ Ne jamais poser de blanc en dur sur une surface d'erreur : en dark, blanc sur red.500 tombe à 2.89:1.
+- ✅ Use them for validation error messages and for the borders of invalid fields.
+- ✅ On a solid error background, always use `color.feedback.error.foreground` (shadcn alias `--destructive-foreground`).
+- ❌ Do not use them for warnings or successes — dedicated tokens will be added.
+- ❌ Never put hard-coded white on an error surface: in dark mode, white on red.500 drops to 2.89:1.
 
 ---
 
 ### Chart
 
-Deux palettes, pour deux natures de données. Les confondre est l'erreur que
-`npm run tokens:lint-chart` et ce tableau existent pour empêcher.
+Two palettes, for two kinds of data. Mixing them up is the mistake that
+`npm run tokens:lint-chart` and this table exist to prevent.
 
-**Catégorielle** — catégories **sans ordre** (postes de dépenses, produits, canaux).
-Les séries se distinguent par la **teinte**. Chaque série atteint 3:1 sur les fonds
-`default`, `subtle` et `elevated` de son mode (WCAG 1.4.11), et toutes les paires
-restent distinctes en vision normale, en protanopie et en deutéranopie (écart OKLab
-≥ 0,15 ; la palette actuelle est à 0,19 au pire).
+**Categorical** — categories with **no order** (expense lines, products,
+channels). Series are told apart by **hue**. Every series reaches 3:1 against
+the `default`, `subtle` and `elevated` backgrounds of its mode (WCAG 1.4.11),
+and every pair stays distinct under normal vision, protanopia and deuteranopia
+(OKLab distance ≥ 0.15; the current palette's worst pair is at 0.19).
 
 | Token           | CSS Variable      | Light                | Dark                 | Tailwind     |
 | --------------- | ----------------- | -------------------- | -------------------- | ------------ |
@@ -127,57 +127,57 @@ restent distinctes en vision normale, en protanopie et en deutéranopie (écart 
 | `color.chart.4` | `--color-chart-4` | plum.800 `#4d2761`   | plum.500 `#9b5f7c`   | `bg-chart-4` |
 | `color.chart.5` | `--color-chart-5` | amber.800 `#734e00`  | amber.500 `#c89005`  | `bg-chart-5` |
 
-**Séquentielle** — données **ordonnées** (intensité, densité, heatmap). Les pas ne
-diffèrent que par la clarté, du plus clair au plus foncé ; ils ne séparent pas des
-catégories. Statut `reserved` : aucun composant ne l'emploie encore, pas de classe
-Tailwind — la lire par `var(--color-chart-sequential-N)`.
+**Sequential** — **ordered** data (intensity, density, heatmaps). The steps
+differ only in lightness, from lightest to darkest; they do not separate
+categories. Status `reserved`: no component uses it yet, and it has no Tailwind
+class — read it through `var(--color-chart-sequential-N)`.
 
-| Token                      | CSS Variable                 | Valeur (les deux modes) |
-| -------------------------- | ---------------------------- | ----------------------- |
-| `color.chart.sequential.1` | `--color-chart-sequential-1` | green.200 `#bbf451`     |
-| `color.chart.sequential.2` | `--color-chart-sequential-2` | green.300 `#7ccf00`     |
-| `color.chart.sequential.3` | `--color-chart-sequential-3` | green.400 `#5ea500`     |
-| `color.chart.sequential.4` | `--color-chart-sequential-4` | green.500 `#497d00`     |
-| `color.chart.sequential.5` | `--color-chart-sequential-5` | green.600 `#3c6300`     |
+| Token                      | CSS Variable                 | Value (both modes)  |
+| -------------------------- | ---------------------------- | ------------------- |
+| `color.chart.sequential.1` | `--color-chart-sequential-1` | green.200 `#bbf451` |
+| `color.chart.sequential.2` | `--color-chart-sequential-2` | green.300 `#7ccf00` |
+| `color.chart.sequential.3` | `--color-chart-sequential-3` | green.400 `#5ea500` |
+| `color.chart.sequential.4` | `--color-chart-sequential-4` | green.500 `#497d00` |
+| `color.chart.sequential.5` | `--color-chart-sequential-5` | green.600 `#3c6300` |
 
-**Do / Don't :**
+**Do / Don't:**
 
-- ✅ Catégories sans ordre : `chart-1` à `chart-5`, dans l'ordre, sans en sauter.
-- ✅ Doubler la couleur d'un libellé ou d'une légende : la couleur seule ne porte jamais le sens.
-- ✅ Données ordonnées : `color.chart.sequential.*`, du plus clair (valeur faible) au plus foncé.
-- ❌ Ne jamais utiliser la palette séquentielle pour des catégories : ses pas se confondent.
-- ❌ Ne pas employer une couleur de série pour du texte ou un état (positif, négatif) : ce ne sont pas des couleurs de feedback.
+- ✅ Unordered categories: `chart-1` to `chart-5`, in order, skipping none.
+- ✅ Back every color up with a label or a legend: color alone never carries meaning.
+- ✅ Ordered data: `color.chart.sequential.*`, from lightest (low value) to darkest.
+- ❌ Never use the sequential palette for categories: its steps blur together.
+- ❌ Do not use a series color for text or for a state (positive, negative): these are not feedback colors.
 
 ---
 
 ### Static
 
-Couleurs qui **ignorent le mode** — les seules à le faire. La palette par défaut de
-Tailwind est supprimée (`--color-*: initial` dans `app/globals.css`) : `bg-white` et
-`bg-black` n'existent que parce que ces deux tokens les déclarent.
+Colors that **ignore the mode** — the only ones that do. Tailwind's default
+palette is removed (`--color-*: initial` in `app/globals.css`): `bg-white` and
+`bg-black` only exist because these two tokens declare them.
 
-| Token                | CSS Variable           | Light / Dark     | Tailwind      | Usage                                       |
-| -------------------- | ---------------------- | ---------------- | ------------- | ------------------------------------------- |
-| `color.static.white` | `--color-static-white` | mist.0 `#ffffff` | `bg-white`    | Pastille de slider, texte sur une photo     |
-| `color.static.black` | `--color-static-black` | black `#000000`  | `bg-black/10` | Voile derrière une modale, avec une opacité |
+| Token                | CSS Variable           | Light / Dark     | Tailwind      | Usage                                 |
+| -------------------- | ---------------------- | ---------------- | ------------- | ------------------------------------- |
+| `color.static.white` | `--color-static-white` | mist.0 `#ffffff` | `bg-white`    | Slider thumb, text on a photo         |
+| `color.static.black` | `--color-static-black` | black `#000000`  | `bg-black/10` | Scrim behind a modal, with an opacity |
 
-- ✅ `bg-black/10` pour le voile d'une modale : il assombrit pareil dans les deux modes.
-- ❌ Ne pas employer `static.*` pour une surface ou un texte courant : le mode sombre ne s'appliquerait pas — utiliser `background.*` / `text.*`.
+- ✅ `bg-black/10` for a modal's scrim: it darkens the same way in both modes.
+- ❌ Do not use `static.*` for a regular surface or text: dark mode would not apply — use `background.*` / `text.*`.
 
 ---
 
 ### Sidebar
 
-| Token                             | CSS Variable                        | Light      | Dark           | Usage                                                 |
-| --------------------------------- | ----------------------------------- | ---------- | -------------- | ----------------------------------------------------- |
-| `color.sidebar.background`        | `--color-sidebar-background`        | mist.50    | mist.900       | Fond du panneau de navigation latérale                |
-| `color.sidebar.foreground`        | `--color-sidebar-foreground`        | mist.950   | mist.50        | Texte/icône par défaut dans la sidebar                |
-| `color.sidebar.primary.default`   | `--color-sidebar-primary-default`   | violet.550 | violet.500     | Fond de l'élément de navigation actif                 |
-| `color.sidebar.primary.on`        | `--color-sidebar-primary-on`        | violet.50  | mist.0         | Texte sur l'élément actif de la sidebar               |
-| `color.sidebar.accent.default`    | `--color-sidebar-accent-default`    | mist.100   | mist.800       | Fond hover/accent d'un élément sidebar                |
-| `color.sidebar.accent.foreground` | `--color-sidebar-accent-foreground` | mist.900   | mist.50        | Texte sur fond accent sidebar                         |
-| `color.sidebar.border`            | `--color-sidebar-border`            | mist.200   | white-alpha.10 | Séparateur interne de la sidebar                      |
-| `color.sidebar.ring`              | `--color-sidebar-ring`              | mist.500   | mist.500       | Focus ring pour les éléments navigables de la sidebar |
+| Token                             | CSS Variable                        | Light      | Dark           | Usage                                        |
+| --------------------------------- | ----------------------------------- | ---------- | -------------- | -------------------------------------------- |
+| `color.sidebar.background`        | `--color-sidebar-background`        | mist.50    | mist.900       | Background of the side navigation panel      |
+| `color.sidebar.foreground`        | `--color-sidebar-foreground`        | mist.950   | mist.50        | Default text or icon in the sidebar          |
+| `color.sidebar.primary.default`   | `--color-sidebar-primary-default`   | violet.550 | violet.500     | Background of the active navigation item     |
+| `color.sidebar.primary.on`        | `--color-sidebar-primary-on`        | violet.50  | mist.0         | Text on the sidebar's active item            |
+| `color.sidebar.accent.default`    | `--color-sidebar-accent-default`    | mist.100   | mist.800       | Hover or accent background of a sidebar item |
+| `color.sidebar.accent.foreground` | `--color-sidebar-accent-foreground` | mist.900   | mist.50        | Text on the sidebar's accent background      |
+| `color.sidebar.border`            | `--color-sidebar-border`            | mist.200   | white-alpha.10 | The sidebar's inner separator                |
+| `color.sidebar.ring`              | `--color-sidebar-ring`              | mist.500   | mist.500       | Focus ring of the sidebar's navigable items  |
 
 ---
 
@@ -185,79 +185,63 @@ Tailwind est supprimée (`--color-*: initial` dans `app/globals.css`) : `bg-whit
 
 ### Dark Mode
 
-Activé via la classe `.dark` sur `<html>`. Toutes les surcharges sont définies dans `tokens.css` au sélecteur `.dark`. Les tokens de couleur basculent automatiquement — **ne jamais hardcoder** les valeurs primitives directement dans les composants.
+Turned on by the `.dark` class on `<html>`. Every override is defined in
+`tokens.css` under the `.dark` selector. The color tokens switch automatically —
+**never hard-code** primitive values in components.
 
-```css
-/* Automatique — ne rien faire d'autre */
-<html class="dark">
+```html
+<!-- Automatic — nothing else to do -->
+<html class="dark"></html>
 ```
 
 ---
 
 ## Tailwind Classes
 
-Les tokens sont exposés via `@theme inline` dans `globals.css` et génèrent les classes utilitaires suivantes :
+The tokens are exposed through `@theme inline` in `globals.css`, which generates
+these utility classes:
 
-```html
-<!-- Backgrounds -->
-<div class="bg-background">
-  <!-- color.background.default -->
-  <div class="bg-card">
-    <!-- color.background.subtle -->
-    <div class="bg-popover">
-      <!-- color.background.elevated -->
-
-      <!-- Text -->
-      <p class="text-foreground"><!-- color.text.default --></p>
-      <p class="text-muted-foreground">
-        <!-- color.text.subtle -->
-        <a class="text-primary">
-          <!-- color.text.action.default (via shadcn mapping) -->
-          <p class="text-destructive">
-            <!-- color.text.destructive.default -->
-
-            <!-- Borders -->
-          </p>
-
-          <div class="border-border">
-            <!-- color.border.default -->
-            <input class="border-input" />
-            <!-- color.border.input -->
-            <div class="ring-ring"><!-- color.border.focus --></div>
-          </div></a
-        >
-      </p>
-    </div>
-  </div>
-</div>
-```
+| Class                   | Token                                                    |
+| ----------------------- | -------------------------------------------------------- |
+| `bg-background`         | `color.background.default`                               |
+| `bg-card`               | `color.background.subtle`                                |
+| `bg-popover`            | `color.background.elevated`                              |
+| `text-foreground`       | `color.text.default`                                     |
+| `text-muted-foreground` | `color.text.subtle`                                      |
+| `text-primary`          | `color.text.action.default` (through the shadcn mapping) |
+| `text-destructive`      | `color.text.destructive.default`                         |
+| `border-border`         | `color.border.default`                                   |
+| `border-input`          | `color.border.input`                                     |
+| `ring-ring`             | `color.border.focus`                                     |
 
 ---
 
 ## Usage Rules
 
-1. **Toujours utiliser les tokens sémantiques** — jamais les valeurs primitives `mist.X` ou `violet.X` directement dans les composants. Les primitives sont privées (`--ds-prim-*`).
-2. **Ne jamais simuler la subtilité par l'opacité** — utiliser `color.text.subtle` plutôt que `color.text.default` avec `opacity-50`.
-3. **Respecter la hiérarchie des surfaces** : `default` → `subtle` → `elevated`. Une card est `subtle`, un popover est `elevated`.
-4. **Toujours tester les deux modes** — chaque composant doit être validé en light ET dark avant livraison.
-5. **Accessibilité avant tout** — le ratio de contraste minimum est 4.5:1 (WCAG AA) pour le texte de corps, 3:1 pour les grands textes et composants UI.
-6. **Le contraste est vérifié mécaniquement** — `npm run tokens:lint-contrast` (inclus dans `npm run tokens-validate`) résout chaque paire fond/texte réellement livrée, dans les deux modes, et échoue sous le seuil. Les paires à surveiller sont déclarées dans `scripts/lint-contrast.ts` : **ajouter une paire dès qu'un nouveau couple fond/texte apparaît dans le DS**, sinon il n'est couvert par rien. Corriger le token, jamais le seuil.
+1. **Always use the semantic tokens** — never the `mist.X` or `violet.X` primitive values directly in components. Primitives are private (`--ds-prim-*`).
+2. **Never fake subtlety with opacity** — use `color.text.subtle`, not `color.text.default` with `opacity-50`.
+3. **Follow the surface hierarchy**: `default` → `subtle` → `elevated`. A card is `subtle`, a popover is `elevated`.
+4. **Always test both modes** — every component must be checked in light AND dark before it ships.
+5. **Accessibility first** — the minimum contrast ratio is 4.5:1 (WCAG AA) for body text, and 3:1 for large text and UI components.
+6. **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lint-contrast.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. Fix the token, never the threshold.
 
-## Contraste mesuré
+## Measured contrast
 
-Ratios WCAG 2.x des paires sous surveillance, à jour de la correction des 6 échecs du 2026-09-17.
+WCAG 2.x ratios of the pairs under watch, as of the fix of the 6 failures on 2026-09-17.
 
-| Paire                                                          | Light | Dark  | Seuil |
-| -------------------------------------------------------------- | ----- | ----- | ----- |
-| focus ring sur surface `default`                               | 4.61  | 4.28  | 3.0   |
-| focus ring sur surface `subtle`                                | 4.14  | 3.21  | 3.0   |
-| focus ring sidebar sur surface sidebar                         | 4.44  | 3.77  | 3.0   |
-| `text.default` sur `background.default`                        | 19.72 | 18.99 | 4.5   |
-| `text.subtle` sur `background.default`                         | 5.10  | 8.08  | 4.5   |
-| `text.subtle` sur `background.subtle` (`muted-foreground`)     | 4.58  | 6.06  | 4.5   |
-| `text.action.default` sur `background.default`                 | 8.09  | 4.93  | 4.5   |
-| `action.background.foreground` sur `action.background.default` | 7.24  | 8.99  | 4.5   |
-| `feedback.error.foreground` sur `feedback.error.default`       | 4.77  | 6.83  | 4.5   |
-| `sidebar.primary.on` sur `sidebar.primary.default`             | 5.78  | 4.58  | 4.5   |
+| Pair                                                          | Light | Dark  | Threshold |
+| ------------------------------------------------------------- | ----- | ----- | --------- |
+| focus ring on the `default` surface                           | 4.61  | 4.28  | 3.0       |
+| focus ring on the `subtle` surface                            | 4.14  | 3.21  | 3.0       |
+| sidebar focus ring on the sidebar surface                     | 4.44  | 3.77  | 3.0       |
+| `text.default` on `background.default`                        | 19.72 | 18.99 | 4.5       |
+| `text.subtle` on `background.default`                         | 5.10  | 8.08  | 4.5       |
+| `text.subtle` on `background.subtle` (`muted-foreground`)     | 4.58  | 6.06  | 4.5       |
+| `text.action.default` on `background.default`                 | 8.09  | 4.93  | 4.5       |
+| `action.background.foreground` on `action.background.default` | 7.24  | 8.99  | 4.5       |
+| `feedback.error.foreground` on `feedback.error.default`       | 4.77  | 6.83  | 4.5       |
+| `sidebar.primary.on` on `sidebar.primary.default`             | 5.78  | 4.58  | 4.5       |
 
-Paliers primitifs ajoutés pour y parvenir : **`mist.600`** (`#607175`), **`mist.700`** (`#424f52`, comble le saut 500 → 800 et préserve la monotonicité de l'échelle) et **`violet.400`** (`#6e6cff`).
+Primitive steps added to get there: **`mist.600`** (`#607175`), **`mist.700`**
+(`#424f52`, which fills the 500 → 800 gap and keeps the scale monotonic) and
+**`violet.400`** (`#6e6cff`).

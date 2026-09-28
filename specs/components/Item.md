@@ -2,65 +2,65 @@
 
 ## Metadata
 
-| Champ         | Valeur                 |
+| Field         | Value                  |
 | ------------- | ---------------------- |
-| Nom           | Item                   |
-| Catégorie     | Misc                   |
-| Statut        | stable                 |
+| Name          | Item                   |
+| Category      | Misc                   |
+| Status        | stable                 |
 | figma_node_id |                        |
 | code_path     | components/ui/item.tsx |
 
-## Rôle
+## Role
 
-Composant de ligne composable représentant un élément dans une liste, avec support pour média, titre, description, actions et sections header/footer.
+A composable row that stands for one entry in a list, with slots for media, a title, a description, actions, and header and footer sections.
 
 ## Usage
 
-- Afficher un élément dans une liste de résultats ou un feed
-- Composer une ligne de tableau de bord avec icône, titre, description et actions
-- Construire un menu ou une liste de navigation structurée
-- Afficher un item dans un `DropdownMenu` via la variante `xs`
-- Regrouper des items avec `ItemGroup` et les séparer avec `ItemSeparator`
+- Show an entry in a list of results or a feed
+- Compose a dashboard row with an icon, a title, a description and actions
+- Build a menu or a structured navigation list
+- Show an entry inside a `DropdownMenu` with the `xs` size
+- Group entries with `ItemGroup` and split them with `ItemSeparator`
 
-<!-- rule-22 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-22: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.
+- **Choice** (`rule-22`) — Pick how to present a collection from the nature of its content. Short-lived actions opened from a trigger: `DropdownMenuItem`. Rows to compare that share the same attributes, 3 or more per row: `Table`. A vertical list of entries (media, title, description, actions): `Item` inside an `ItemGroup`. A self-contained block with a header, body and footer, alone or in a grid: `Card`.
 
-## Contraintes
+## Constraints
 
-- **MUST** — rendre un `ItemTitle` dans chaque `Item`
-- **MUST NOT** — combiner les variantes `outline` et `muted`
-- **MUST** — réserver la taille `xs` aux menus contextuels, jamais une liste principale
-- **MUST NOT** — placer plus de 3 actions dans `ItemActions`
-- **MUST** — Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role="listitem"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role="listitem"` explicitement
+- **MUST** — render an `ItemTitle` in every `Item`
+- **MUST NOT** — combine the `outline` and `muted` variants
+- **MUST** — keep the `xs` size for context menus, never a main list
+- **MUST NOT** — place more than 3 actions in `ItemActions`
+- **MUST** — place each `Item` of an `ItemGroup` as a direct child (or through `.map()`): `ItemGroup` gives it `role="listitem"`. An `Item` rendered by an intermediate component is not detected — pass it `role="listitem"` explicitly
 
-## Dépendances
+## Dependencies
 
-- `class-variance-authority` pour les variantes de `Item` et `ItemMedia`
-- `Slot.Root` de `radix-ui` (utilisé par `Item` quand `asChild={true}`)
-- `Separator` depuis `@/components/ui/separator`
-- `cn` utilitaire depuis `@/lib/utils`
+- `class-variance-authority` for the `Item` and `ItemMedia` variants
+- `Slot.Root` from `radix-ui` (used by `Item` when `asChild={true}`)
+- `Separator` from `@/components/ui/separator`
+- The `cn` utility from `@/lib/utils`
 
-## Anatomie
+## Anatomy
 
-| Slot                           | Rôle                                                                                          |
-| ------------------------------ | --------------------------------------------------------------------------------------------- |
-| `data-slot="item"`             | Racine de l'item, porte `data-variant` et `data-size` ; `role="listitem"` dans un `ItemGroup` |
-| `data-slot="item-media"`       | Média (icône, image), porte `data-variant`                                                    |
-| `data-slot="item-content"`     | Conteneur principal (titre + description)                                                     |
-| `data-slot="item-title"`       | Titre de l'item                                                                               |
-| `data-slot="item-description"` | Description secondaire                                                                        |
-| `data-slot="item-actions"`     | Zone d'actions (boutons, badges)                                                              |
-| `data-slot="item-header"`      | En-tête pleine largeur                                                                        |
-| `data-slot="item-footer"`      | Pied pleine largeur                                                                           |
-| `data-slot="item-group"`       | Conteneur de liste d'items (`role="list"`)                                                    |
-| `data-slot="item-separator"`   | Séparateur horizontal entre items                                                             |
+| Slot                           | Role                                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| `data-slot="item"`             | Item root; carries `data-variant` and `data-size`; `role="listitem"` inside an `ItemGroup` |
+| `data-slot="item-media"`       | Media (icon, image); carries `data-variant`                                                |
+| `data-slot="item-content"`     | Main container (title and description)                                                     |
+| `data-slot="item-title"`       | The item's title                                                                           |
+| `data-slot="item-description"` | Secondary description                                                                      |
+| `data-slot="item-actions"`     | Actions area (buttons, badges)                                                             |
+| `data-slot="item-header"`      | Full-width header                                                                          |
+| `data-slot="item-footer"`      | Full-width footer                                                                          |
+| `data-slot="item-group"`       | List container of items (`role="list"`)                                                    |
+| `data-slot="item-separator"`   | Horizontal separator between items                                                         |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                             | Classes et variables                     | Où                                               |
+| Token                             | Classes and variables                    | Where                                            |
 | --------------------------------- | ---------------------------------------- | ------------------------------------------------ |
 | `border-width.default`            | `border`                                 | `itemVariants`                                   |
 | `color.action.background.default` | `text-primary`                           | `ItemDescription`                                |
@@ -75,155 +75,155 @@ Composant de ligne composable représentant un élément dans une liste, avec su
 | `typography.line-height.relaxed`  | `text-xs/relaxed`                        | `ItemDescription`                                |
 | `typography.size.xs`              | `text-xs` · `text-xs/relaxed`            | `ItemDescription` · `ItemTitle` · `itemVariants` |
 
-Relevé dans `components/ui/item.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/item.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Separator` : les tokens de ce composant sont listés dans sa spec.
+Composes `Separator` — its tokens are listed in its own spec.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Item`
 
-Rend `<div>`, ou son enfant avec `asChild`.
+Renders `<div>`, or its child with `asChild`.
 
-| Prop        | Type                                | Défaut      | Description                                       |
-| ----------- | ----------------------------------- | ----------- | ------------------------------------------------- |
-| `variant`   | `"default" \| "outline" \| "muted"` | `"default"` | Apparence visuelle de l'item                      |
-| `size`      | `"default" \| "sm" \| "xs"`         | `"default"` | Taille et espacement interne                      |
-| `asChild`   | `boolean`                           | `false`     | Délègue le rendu au premier enfant via Radix Slot |
-| `className` | `string`                            | —           | Classes CSS additionnelles                        |
-| `...props`  | `React.ComponentProps<"div">`       | —           | Props natives de `<div>`                          |
+| Prop        | Type                                | Default     | Description                                         |
+| ----------- | ----------------------------------- | ----------- | --------------------------------------------------- |
+| `variant`   | `"default" \| "outline" \| "muted"` | `"default"` | How the item looks                                  |
+| `size`      | `"default" \| "sm" \| "xs"`         | `"default"` | Size and inner spacing                              |
+| `asChild`   | `boolean`                           | `false`     | Renders the first child instead, through Radix Slot |
+| `className` | `string`                            | —           | Additional CSS classes                              |
+| `...props`  | `React.ComponentProps<"div">`       | —           | Native `<div>` props                                |
 
 ### `ItemMedia`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                             | Défaut      | Description                |
-| ----------- | -------------------------------- | ----------- | -------------------------- |
-| `variant`   | `"default" \| "icon" \| "image"` | `"default"` | Type de média affiché      |
-| `className` | `string`                         | —           | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">`    | —           | Props natives de `<div>`   |
+| Prop        | Type                             | Default     | Description             |
+| ----------- | -------------------------------- | ----------- | ----------------------- |
+| `variant`   | `"default" \| "icon" \| "image"` | `"default"` | Kind of media displayed |
+| `className` | `string`                         | —           | Additional CSS classes  |
+| `...props`  | `React.ComponentProps<"div">`    | —           | Native `<div>` props    |
 
 ### `ItemContent`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `ItemActions`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `ItemGroup`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `ItemSeparator`
 
-Rend `Separator`.
+Renders `Separator`.
 
-| Prop        | Type                                     | Défaut | Description                |
-| ----------- | ---------------------------------------- | ------ | -------------------------- |
-| `className` | `string`                                 | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<typeof Separator>` | —      | Props de `Separator`       |
+| Prop        | Type                                     | Default | Description            |
+| ----------- | ---------------------------------------- | ------- | ---------------------- |
+| `className` | `string`                                 | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<typeof Separator>` | —       | `Separator` props      |
 
 ### `ItemTitle`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `ItemDescription`
 
-Rend `<p>`.
+Renders `<p>`.
 
-| Prop        | Type                        | Défaut | Description                |
-| ----------- | --------------------------- | ------ | -------------------------- |
-| `className` | `string`                    | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"p">` | —      | Props natives de `<p>`     |
+| Prop        | Type                        | Default | Description            |
+| ----------- | --------------------------- | ------- | ---------------------- |
+| `className` | `string`                    | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"p">` | —       | Native `<p>` props     |
 
 ### `ItemHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `ItemFooter`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-> **Axes de variantes** — `Item` et `ItemMedia` portent chacun un `variant`, sur deux axes différents. Sur `Item`, c'est l'**apparence** : `default`, `outline`, `muted`. Sur `ItemMedia`, c'est le **type de média** que le slot contient : `default` (texte ou badge), `icon`, `image` — il conditionne la taille et le rognage. `<Item variant="icon">` n'existe pas.
+> **Variant axes** — `Item` and `ItemMedia` each take a `variant`, on two different axes. On `Item`, it is **appearance**: `default`, `outline`, `muted`. On `ItemMedia`, it is the **kind of media** the slot holds: `default` (text or a badge), `icon`, `image` — which sets the sizing and the clipping. `<Item variant="icon">` does not exist.
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-| Composant   | Axe       | Valeurs                         | Défaut    |
+| Component   | Axis      | Values                          | Default   |
 | ----------- | --------- | ------------------------------- | --------- |
 | `Item`      | `variant` | `default` · `outline` · `muted` | `default` |
 | `Item`      | `size`    | `default` · `sm` · `xs`         | `default` |
 | `ItemMedia` | `variant` | `default` · `icon` · `image`    | `default` |
 
-Le sens de chaque axe (apparence, intention, taille…) est donné dans **Props / API**.
+What each axis means (appearance, intent, size…) is stated under **Props / API**.
 
-## États
+## States
 
-| État     | Description                                         |
-| -------- | --------------------------------------------------- |
-| default  | Bordure transparente, espacement standard           |
-| outline  | Bordure `border-border` visible                     |
-| muted    | Fond `bg-muted/50`, bordure transparente            |
-| hover    | Fond `bg-muted` sur les liens enfants (`[a]:hover`) |
-| focus    | Anneau `ring-ring/50` + bordure `border-ring`       |
-| active   | Non applicable directement                          |
-| disabled | Non applicable directement                          |
+| State    | Description                                        |
+| -------- | -------------------------------------------------- |
+| default  | Transparent border, standard spacing               |
+| outline  | Visible `border-border` border                     |
+| muted    | `bg-muted/50` background, transparent border       |
+| hover    | `bg-muted` background on child links (`[a]:hover`) |
+| focus    | `ring-ring/50` ring and `border-ring` border       |
+| active   | Not applicable directly                            |
+| disabled | Not applicable directly                            |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : Liste (`role="list"`) d'éléments
+**Pattern**: A list (`role="list"`) of entries
 
-**Rôle** : `ItemGroup` porte `role="list"` et donne `role="listitem"` à chaque `Item` enfant direct. Un `Item` en `asChild` (lien, bouton) garde son rôle natif : `ItemGroup` l'enveloppe dans un `div role="listitem"`. Un `role` passé explicitement à l'`Item` est conservé. Hors `ItemGroup`, `Item` est un `div` sans rôle.
+**Role**: `ItemGroup` carries `role="list"` and gives `role="listitem"` to each direct `Item` child. An `Item` rendered with `asChild` (a link, a button) keeps its native role: `ItemGroup` wraps it in a `div role="listitem"`. A `role` passed explicitly to the `Item` is kept. Outside an `ItemGroup`, `Item` is a `div` with no role.
 
-**Clavier** :
+**Keyboard**:
 
-Aucune interaction propre ; un `Item` rendu en lien ou bouton suit le comportement natif.
+No interaction of its own; an `Item` rendered as a link or a button behaves natively.
 
-**Nom accessible** : Le contenu de `ItemTitle` ; un `Item` cliquable doit être un lien ou un bouton nommé.
+**Accessible name**: The content of `ItemTitle`; a clickable `Item` must be a named link or button.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Seuls les enfants directs d'`ItemGroup` sont reconnus : un `Item` rendu par un composant intermédiaire (`<Ligne />` qui retourne un `Item`) ou dans un fragment ne reçoit pas `role="listitem"` — le lui passer explicitement.
-- Tout autre enfant direct d'`ItemGroup` que `Item` ou `ItemSeparator` casse la liste ARIA.
-- Un `Item` entièrement cliquable ne doit pas contenir d'autre élément interactif.
+- Only direct children of `ItemGroup` are recognized: an `Item` rendered by an intermediate component (a `<Row />` that returns an `Item`) or inside a fragment does not get `role="listitem"` — pass it explicitly.
+- Any direct child of `ItemGroup` other than `Item` or `ItemSeparator` breaks the ARIA list.
+- A fully clickable `Item` must not contain another interactive element.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -247,14 +247,12 @@ export default function Example() {
           <FileIcon />
         </ItemMedia>
         <ItemContent>
-          <ItemTitle>Rapport annuel 2024</ItemTitle>
-          <ItemDescription>
-            Dernière modification il y a 2 jours
-          </ItemDescription>
+          <ItemTitle>Annual report 2024</ItemTitle>
+          <ItemDescription>Last edited 2 days ago</ItemDescription>
         </ItemContent>
         <ItemActions>
           <Badge variant="secondary">PDF</Badge>
-          <Button variant="ghost" size="icon-sm">
+          <Button variant="ghost" size="icon-sm" aria-label="More actions">
             ⋯
           </Button>
         </ItemActions>
@@ -264,10 +262,10 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Avatar` — souvent utilisé comme `ItemMedia` dans les listes d'utilisateurs
-- `Badge` — affiché dans `ItemActions` ou `ItemTitle` pour un statut
-- `Separator` — utilisé en interne par `ItemSeparator`
-- `Button` — actions dans `ItemActions`
-- `DropdownMenu` — item en taille `xs` adapté au contexte menu
+- `Avatar` — often the `ItemMedia` of a list of users
+- `Badge` — shown in `ItemActions` or `ItemTitle` for a status
+- `Separator` — used internally by `ItemSeparator`
+- `Button` — actions in `ItemActions`
+- `DropdownMenu` — the `xs` size suits a menu

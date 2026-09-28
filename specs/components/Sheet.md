@@ -2,66 +2,66 @@
 
 ## Metadata
 
-| Champ         | Valeur                  |
+| Field         | Value                   |
 | ------------- | ----------------------- |
-| Nom           | Sheet                   |
-| Catégorie     | Overlay                 |
-| Statut        | stable                  |
+| Name          | Sheet                   |
+| Category      | Overlay                 |
+| Status        | stable                  |
 | figma_node_id |                         |
 | code_path     | components/ui/sheet.tsx |
 
-## Rôle
+## Role
 
-Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, basé sur Radix Dialog, pour afficher du contenu étendu sans quitter la page.
+A panel that slides in from the side (or from the top or bottom) over the interface, built on Radix Dialog, to show longer content without leaving the page.
 
 ## Usage
 
-- Afficher un formulaire d'édition détaillé dans un panneau latéral
-- Proposer un panier, un historique ou une liste de notifications
-- Afficher une navigation secondaire ou des filtres avancés
-- Présenter des détails d'un élément sélectionné dans un tableau
-- Remplacer une page dédiée pour des flux courts (création rapide)
+- Show a detailed edit form in a side panel
+- Show a cart, a history or a list of notifications
+- Show secondary navigation or advanced filters
+- Present the details of an item selected in a table
+- Stand in for a dedicated page in short flows (quick creation)
 
-<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-21: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+- **Choice** (`rule-21`) — Pick the surface from how much it blocks and how long its content is. A blocking decision (confirm, destroy): `AlertDialog`. A short task with no inner scrolling: `Dialog`. Long content or side context: `Sheet` from `md` up, `Drawer` below — **unless** it is side navigation, which stays a `Sheet` at every width (this is what `Sidebar` does below `md`). Anchored, non-blocking content with no scrolling and at most 3 fields: `Popover`. An informative preview on hover, from `md` up: `HoverCard`. A one-line, non-interactive label of at most 80 characters: `Tooltip`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`
-- **MUST NOT** — ouvrir un `Sheet` par-dessus un autre : un seul visible à la fois
-- **MUST** — rendre un `SheetTitle` : c'est le nom annoncé par les lecteurs d'écran
-- **Note** — à gauche et à droite, la largeur est limitée à `sm:max-w-sm`
-- **MUST** — garder un moyen de fermer le panneau quand `showCloseButton={false}` masque le bouton
-- **MUST NOT** — servir sous `md` → `Drawer`, **sauf** pour la navigation latérale (`rule-21`)
-- **MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.sheet` via `closeLabel`
+- **MUST NOT** — carry a short confirmation → use `AlertDialog` or `Dialog`
+- **MUST NOT** — open a `Sheet` on top of another: one visible at a time
+- **MUST** — render a `SheetTitle`: it is the name screen readers announce
+- **Note** — on the left and right sides, the width is capped at `sm:max-w-sm`
+- **MUST** — keep a way to close the panel when `showCloseButton={false}` hides the button
+- **MUST NOT** — be used below `md` → `Drawer`, **unless** it is side navigation (`rule-21`)
+- **MUST** — in an interface that is not in English, translate `UI_STRINGS.sheet` through `closeLabel`
 
-## Dépendances
+## Dependencies
 
-- `Dialog` de `radix-ui` (utilisé comme `SheetPrimitive` — primitives Root, Trigger, Portal, Overlay, Content, Close, Title, Description)
-- `Button` de `@/components/ui/button` (bouton de fermeture)
-- `@phosphor-icons/react` — icône `XIcon` pour le bouton de fermeture
+- `Dialog` from `radix-ui` (used as `SheetPrimitive` — Root, Trigger, Portal, Overlay, Content, Close, Title, Description)
+- `Button` from `@/components/ui/button` (the close button)
+- `@phosphor-icons/react` — the `XIcon` of the close button
 
-## Anatomie
+## Anatomy
 
-| Slot                            | Rôle                                                    |
-| ------------------------------- | ------------------------------------------------------- |
-| `data-slot="sheet"`             | Racine du composant                                     |
-| `data-slot="sheet-trigger"`     | Élément déclencheur d'ouverture                         |
-| `data-slot="sheet-portal"`      | Portail de rendu                                        |
-| `data-slot="sheet-overlay"`     | Fond semi-transparent avec backdrop-blur                |
-| `data-slot="sheet-content"`     | Conteneur principal, ancré à un bord, porte `data-side` |
-| `data-slot="sheet-close"`       | Bouton de fermeture (icône ×)                           |
-| `data-slot="sheet-header"`      | Zone d'en-tête (titre + description)                    |
-| `data-slot="sheet-footer"`      | Zone de pied (boutons d'action)                         |
-| `data-slot="sheet-title"`       | Titre du panneau                                        |
-| `data-slot="sheet-description"` | Description textuelle                                   |
+| Slot                            | Role                                                     |
+| ------------------------------- | -------------------------------------------------------- |
+| `data-slot="sheet"`             | Root                                                     |
+| `data-slot="sheet-trigger"`     | Element that opens the sheet                             |
+| `data-slot="sheet-portal"`      | Rendering portal                                         |
+| `data-slot="sheet-overlay"`     | Semi-transparent backdrop with a blur                    |
+| `data-slot="sheet-content"`     | Main container, anchored to an edge; carries `data-side` |
+| `data-slot="sheet-close"`       | Close button (× icon)                                    |
+| `data-slot="sheet-header"`      | Header area (title and description)                      |
+| `data-slot="sheet-footer"`      | Footer area (action buttons)                             |
+| `data-slot="sheet-title"`       | The panel's title                                        |
+| `data-slot="sheet-description"` | Descriptive text                                         |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                            | Classes et variables                              | Où                                                                                                                     |
+| Token                            | Classes and variables                             | Where                                                                                                                  |
 | -------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `border-width.default`           | `border-b` · `border-l` · `border-r` · `border-t` | `SheetContent`                                                                                                         |
 | `color.background.elevated`      | `bg-popover`                                      | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`)                                                        |
@@ -77,122 +77,122 @@ Panneau latéral glissant (ou depuis le haut/bas) superposé à l'interface, bas
 | `typography.size.xs`             | `text-xs/relaxed`                                 | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `SheetDescription` · `SheetOverlay`                  |
 | `zindex.modal`                   | `z-modal`                                         | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `SheetOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
 
-Relevé dans `components/ui/sheet.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/sheet.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Button` : les tokens de ce composant sont listés dans sa spec.
+Composes `Button` — its tokens are listed in its own spec.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Sheet`
 
-Rend `SheetPrimitive.Root`.
+Renders `SheetPrimitive.Root`.
 
-| Prop           | Type                                               | Défaut      | Description                                  |
-| -------------- | -------------------------------------------------- | ----------- | -------------------------------------------- |
-| `open`         | `boolean`                                          | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
-| `onOpenChange` | `(open: boolean) => void`                          | —           | Callback lors du changement d'état           |
-| `...props`     | `React.ComponentProps<typeof SheetPrimitive.Root>` | —           | Props de `SheetPrimitive.Root`               |
+| Prop           | Type                                               | Default     | Description                                 |
+| -------------- | -------------------------------------------------- | ----------- | ------------------------------------------- |
+| `open`         | `boolean`                                          | `undefined` | Whether the sheet is open (controlled mode) |
+| `onOpenChange` | `(open: boolean) => void`                          | —           | Called when the sheet opens or closes       |
+| `...props`     | `React.ComponentProps<typeof SheetPrimitive.Root>` | —           | `SheetPrimitive.Root` props                 |
 
 ### `SheetTrigger`
 
-Rend `SheetPrimitive.Trigger`.
+Renders `SheetPrimitive.Trigger`.
 
-| Prop       | Type                                                  | Défaut | Description                       |
-| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
-| `...props` | `React.ComponentProps<typeof SheetPrimitive.Trigger>` | —      | Props de `SheetPrimitive.Trigger` |
+| Prop       | Type                                                  | Default | Description                    |
+| ---------- | ----------------------------------------------------- | ------- | ------------------------------ |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Trigger>` | —       | `SheetPrimitive.Trigger` props |
 
 ### `SheetClose`
 
-Rend `SheetPrimitive.Close`.
+Renders `SheetPrimitive.Close`.
 
-| Prop       | Type                                                | Défaut | Description                     |
-| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
-| `...props` | `React.ComponentProps<typeof SheetPrimitive.Close>` | —      | Props de `SheetPrimitive.Close` |
+| Prop       | Type                                                | Default | Description                  |
+| ---------- | --------------------------------------------------- | ------- | ---------------------------- |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Close>` | —       | `SheetPrimitive.Close` props |
 
 ### `SheetContent`
 
-Rend `SheetPrimitive.Content`.
+Renders `SheetPrimitive.Content`.
 
-| Prop              | Type                                                  | Défaut                   | Description                                                                |
-| ----------------- | ----------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------- |
-| `side`            | `"top" \| "right" \| "bottom" \| "left"`              | `"right"`                | Côté d'apparition du panneau (sur `SheetContent`)                          |
-| `showCloseButton` | `boolean`                                             | `true`                   | Affiche le bouton × en haut à droite (sur `SheetContent`)                  |
-| `closeLabel`      | `string`                                              | `UI_STRINGS.sheet.close` | Nom accessible du bouton de fermeture ; remplace la valeur de `UI_STRINGS` |
-| `...props`        | `React.ComponentProps<typeof SheetPrimitive.Content>` | —                        | Props de `SheetPrimitive.Content`                                          |
+| Prop              | Type                                                  | Default                  | Description                                                           |
+| ----------------- | ----------------------------------------------------- | ------------------------ | --------------------------------------------------------------------- |
+| `side`            | `"top" \| "right" \| "bottom" \| "left"`              | `"right"`                | Edge the panel slides in from                                         |
+| `showCloseButton` | `boolean`                                             | `true`                   | Shows the × button at the top right                                   |
+| `closeLabel`      | `string`                                              | `UI_STRINGS.sheet.close` | Accessible name of the close button; overrides the `UI_STRINGS` value |
+| `...props`        | `React.ComponentProps<typeof SheetPrimitive.Content>` | —                        | `SheetPrimitive.Content` props                                        |
 
 ### `SheetHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SheetFooter`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `SheetTitle`
 
-Rend `SheetPrimitive.Title`.
+Renders `SheetPrimitive.Title`.
 
-| Prop       | Type                                                | Défaut | Description                     |
-| ---------- | --------------------------------------------------- | ------ | ------------------------------- |
-| `...props` | `React.ComponentProps<typeof SheetPrimitive.Title>` | —      | Props de `SheetPrimitive.Title` |
+| Prop       | Type                                                | Default | Description                  |
+| ---------- | --------------------------------------------------- | ------- | ---------------------------- |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Title>` | —       | `SheetPrimitive.Title` props |
 
 ### `SheetDescription`
 
-Rend `SheetPrimitive.Description`.
+Renders `SheetPrimitive.Description`.
 
-| Prop       | Type                                                      | Défaut | Description                           |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
-| `...props` | `React.ComponentProps<typeof SheetPrimitive.Description>` | —      | Props de `SheetPrimitive.Description` |
+| Prop       | Type                                                      | Default | Description                        |
+| ---------- | --------------------------------------------------------- | ------- | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof SheetPrimitive.Description>` | —       | `SheetPrimitive.Description` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                       |
-| -------- | --------------------------------------------------------------------------------- |
-| default  | Panneau fermé, aucun overlay visible                                              |
-| open     | Overlay affiché, panneau glissé depuis le bord avec `fade-in` + `slide-in-from-*` |
-| closing  | Animation de sortie `fade-out` + `slide-out-to-*`                                 |
-| focus    | Focus piégé à l'intérieur du panneau (focus trap Radix)                           |
-| disabled | N/A — les contrôles internes gèrent leur propre état disabled                     |
+| State    | Description                                                                           |
+| -------- | ------------------------------------------------------------------------------------- |
+| default  | Panel closed, no overlay                                                              |
+| open     | Overlay shown; the panel slides in from its edge with `fade-in` and `slide-in-from-*` |
+| closing  | Exit animation: `fade-out` and `slide-out-to-*`                                       |
+| focus    | Focus trapped inside the panel (Radix focus trap)                                     |
+| disabled | N/A — the controls inside handle their own disabled state                             |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)
+**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)
 
-**Rôle** : `role="dialog"`, `aria-modal="true"` ; étiqueté par `SheetTitle`.
+**Role**: `role="dialog"`, `aria-modal="true"`; labelled by `SheetTitle`.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche              | Action                                                     |
+| Key                 | Action                                                     |
 | ------------------- | ---------------------------------------------------------- |
-| `Tab` / `Shift+Tab` | Parcourt les éléments focalisables, piégés dans le panneau |
-| `Escape`            | Ferme le panneau                                           |
+| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the panel |
+| `Escape`            | Closes the panel                                           |
 
-**Nom accessible** : `SheetTitle` est obligatoire, même masqué visuellement. Le bouton de fermeture est nommé par `closeLabel` (`UI_STRINGS.sheet.close`).
+**Accessible name**: `SheetTitle` is required, even when visually hidden. The close button is named by `closeLabel` (`UI_STRINGS.sheet.close`).
 
-**Vigilance** :
+**Pitfalls**:
 
-- À la fermeture, le focus revient au déclencheur.
-- **SHOULD** — pour une navigation latérale sur grand écran (`lg` et plus), utiliser une `Sidebar` permanente : un `Sheet` reste un dialogue modal ; **sauf** si la navigation doit rester masquée par défaut.
+- On close, focus returns to the trigger.
+- **SHOULD** — for side navigation on large screens (`lg` and up), use a permanent `Sidebar`: a `Sheet` is still a modal dialog; **unless** the navigation must stay hidden by default.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -210,18 +210,18 @@ export default function Example() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Ouvrir le panneau</Button>
+        <Button variant="outline">Open panel</Button>
       </SheetTrigger>
       <SheetContent side="right">
         <SheetHeader>
-          <SheetTitle>Détails du compte</SheetTitle>
+          <SheetTitle>Account details</SheetTitle>
           <SheetDescription>
-            Consultez et modifiez les informations de votre compte.
+            Review and update your account information.
           </SheetDescription>
         </SheetHeader>
-        {/* Contenu du panneau */}
+        {/* Panel content */}
         <SheetFooter>
-          <Button type="submit">Enregistrer</Button>
+          <Button type="submit">Save changes</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
@@ -229,9 +229,9 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Drawer` — panneau glissant avec geste swipe (basé sur vaul), idéal pour mobile
-- `Dialog` — modale centrée pour du contenu plus court
-- `AlertDialog` — modale de confirmation bloquante
-- `Button` — utilisé en interne pour le bouton de fermeture
+- `Drawer` — a sliding panel with a swipe gesture (built on vaul), made for mobile
+- `Dialog` — a centered modal for shorter content
+- `AlertDialog` — a blocking confirmation modal
+- `Button` — used internally for the close button

@@ -2,70 +2,70 @@
 
 ## Metadata
 
-| Champ         | Valeur                          |
+| Field         | Value                           |
 | ------------- | ------------------------------- |
-| Nom           | DropdownMenu                    |
-| Catégorie     | Overlay                         |
-| Statut        | stable                          |
+| Name          | DropdownMenu                    |
+| Category      | Overlay                         |
+| Status        | stable                          |
 | figma_node_id |                                 |
 | code_path     | components/ui/dropdown-menu.tsx |
 
-## Rôle
+## Role
 
-Menu déroulant déclenché par un clic sur un bouton, affichant une liste d'actions ou d'options de sélection.
+A menu opened by clicking a button, listing actions or selection options.
 
 ## Usage
 
-- Proposer des actions supplémentaires via un bouton « Plus » ou un bouton icône
-- Offrir une liste de choix (navigation, tri, paramètres)
-- Permettre des sélections multiples via checkbox items
-- Permettre un choix exclusif via radio items
-- Organiser des actions complexes avec sous-menus et groupes
+- Offer extra actions behind a "More" button or an icon button
+- Present a list of choices (navigation, sorting, settings)
+- Allow several selections through checkbox items
+- Allow one exclusive choice through radio items
+- Organize complex actions into submenus and groups
 
-<!-- rule-22 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-22: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.
+- **Choice** (`rule-22`) — Pick how to present a collection from the nature of its content. Short-lived actions opened from a trigger: `DropdownMenuItem`. Rows to compare that share the same attributes, 3 or more per row: `Table`. A vertical list of entries (media, title, description, actions): `Item` inside an `ItemGroup`. A self-contained block with a header, body and footer, alone or in a grid: `Card`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir de menu contextuel au clic droit → utiliser `ContextMenu`
-- **MUST NOT** — servir de navigation principale → utiliser `NavigationMenu`
-- **Note** — un seul `DropdownMenu` s'ouvre à la fois (géré par Radix)
-- **MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)
-- **Note** — le contenu prend par défaut la largeur du trigger (`w-(--radix-dropdown-menu-trigger-width)`)
+- **MUST NOT** — serve as a right-click context menu → use `ContextMenu`
+- **MUST NOT** — serve as primary navigation → use `NavigationMenu`
+- **Note** — only one `DropdownMenu` opens at a time (Radix handles it)
+- **MUST** — keep `disabled` items visible (`opacity-disabled`, `pointer-events-none`)
+- **Note** — the content takes the trigger's width by default (`w-(--radix-dropdown-menu-trigger-width)`)
 
-## Dépendances
+## Dependencies
 
-- `DropdownMenu` de `radix-ui` (primitives Root, Trigger, Portal, Content, Item, CheckboxItem, RadioItem, RadioGroup, Label, Separator, Sub, SubTrigger, SubContent, Group)
-- `@phosphor-icons/react` — icônes `CheckIcon` (indicateur de sélection) et `CaretRightIcon` (sous-menu)
+- `DropdownMenu` from `radix-ui` (Root, Trigger, Portal, Content, Item, CheckboxItem, RadioItem, RadioGroup, Label, Separator, Sub, SubTrigger, SubContent, Group)
+- `@phosphor-icons/react` — `CheckIcon` (selection indicator) and `CaretRightIcon` (submenu)
 
-## Anatomie
+## Anatomy
 
-| Slot                                                | Rôle                                         |
-| --------------------------------------------------- | -------------------------------------------- |
-| `data-slot="dropdown-menu"`                         | Racine du composant                          |
-| `data-slot="dropdown-menu-trigger"`                 | Bouton déclencheur                           |
-| `data-slot="dropdown-menu-portal"`                  | Portail de rendu                             |
-| `data-slot="dropdown-menu-content"`                 | Conteneur du menu flottant                   |
-| `data-slot="dropdown-menu-item"`                    | Élément d'action simple                      |
-| `data-slot="dropdown-menu-checkbox-item"`           | Élément avec case à cocher                   |
-| `data-slot="dropdown-menu-checkbox-item-indicator"` | Indicateur visuel de la case cochée          |
-| `data-slot="dropdown-menu-radio-item"`              | Élément avec bouton radio                    |
-| `data-slot="dropdown-menu-radio-item-indicator"`    | Indicateur visuel du radio sélectionné       |
-| `data-slot="dropdown-menu-radio-group"`             | Groupe de radio items                        |
-| `data-slot="dropdown-menu-group"`                   | Groupe logique d'items                       |
-| `data-slot="dropdown-menu-label"`                   | Libellé de section                           |
-| `data-slot="dropdown-menu-separator"`               | Séparateur visuel entre groupes              |
-| `data-slot="dropdown-menu-shortcut"`                | Raccourci clavier affiché à droite           |
-| `data-slot="dropdown-menu-sub"`                     | Conteneur de sous-menu                       |
-| `data-slot="dropdown-menu-sub-trigger"`             | Déclencheur de sous-menu (avec icône flèche) |
-| `data-slot="dropdown-menu-sub-content"`             | Contenu du sous-menu                         |
+| Slot                                                | Role                                   |
+| --------------------------------------------------- | -------------------------------------- |
+| `data-slot="dropdown-menu"`                         | Root                                   |
+| `data-slot="dropdown-menu-trigger"`                 | Trigger button                         |
+| `data-slot="dropdown-menu-portal"`                  | Rendering portal                       |
+| `data-slot="dropdown-menu-content"`                 | Floating menu container                |
+| `data-slot="dropdown-menu-item"`                    | A plain action item                    |
+| `data-slot="dropdown-menu-checkbox-item"`           | An item with a checkbox                |
+| `data-slot="dropdown-menu-checkbox-item-indicator"` | Visual indicator of the checked box    |
+| `data-slot="dropdown-menu-radio-item"`              | An item with a radio button            |
+| `data-slot="dropdown-menu-radio-item-indicator"`    | Visual indicator of the selected radio |
+| `data-slot="dropdown-menu-radio-group"`             | A group of radio items                 |
+| `data-slot="dropdown-menu-group"`                   | A logical group of items               |
+| `data-slot="dropdown-menu-label"`                   | Section label                          |
+| `data-slot="dropdown-menu-separator"`               | Visual separator between groups        |
+| `data-slot="dropdown-menu-shortcut"`                | Keyboard shortcut shown at the right   |
+| `data-slot="dropdown-menu-sub"`                     | Submenu container                      |
+| `data-slot="dropdown-menu-sub-trigger"`             | Submenu trigger (with an arrow icon)   |
+| `data-slot="dropdown-menu-sub-content"`             | Submenu content                        |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                          | Classes et variables                                                        | Où                                                                                                                                                                               |
+| Token                          | Classes and variables                                                       | Where                                                                                                                                                                            |
 | ------------------------------ | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `color.background.elevated`    | `bg-popover`                                                                | `DropdownMenuContent` · `DropdownMenuSubContent`                                                                                                                                 |
 | `color.background.subtle`      | `bg-accent`                                                                 | `DropdownMenuCheckboxItem` · `DropdownMenuItem` · `DropdownMenuRadioItem` · `DropdownMenuSubTrigger`                                                                             |
@@ -80,185 +80,185 @@ Menu déroulant déclenché par un clic sur un bouton, affichant une liste d'act
 | `typography.size.xs`           | `text-xs`                                                                   | `DropdownMenuCheckboxItem` · `DropdownMenuItem` · `DropdownMenuLabel` · `DropdownMenuRadioItem` · `DropdownMenuShortcut` · `DropdownMenuSubTrigger`                              |
 | `zindex.popover`               | `z-popover`                                                                 | `DropdownMenuContent` · `DropdownMenuSubContent`                                                                                                                                 |
 
-Relevé dans `components/ui/dropdown-menu.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/dropdown-menu.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `DropdownMenu`
 
-Rend `DropdownMenuPrimitive.Root`.
+Renders `DropdownMenuPrimitive.Root`.
 
-| Prop       | Type                                                      | Défaut | Description                           |
-| ---------- | --------------------------------------------------------- | ------ | ------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Root>` | —      | Props de `DropdownMenuPrimitive.Root` |
+| Prop       | Type                                                      | Default | Description                        |
+| ---------- | --------------------------------------------------------- | ------- | ---------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Root>` | —       | `DropdownMenuPrimitive.Root` props |
 
 ### `DropdownMenuPortal`
 
-Rend `DropdownMenuPrimitive.Portal`.
+Renders `DropdownMenuPrimitive.Portal`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Portal>` | —      | Props de `DropdownMenuPrimitive.Portal` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Portal>` | —       | `DropdownMenuPrimitive.Portal` props |
 
 ### `DropdownMenuTrigger`
 
-Rend `DropdownMenuPrimitive.Trigger`.
+Renders `DropdownMenuPrimitive.Trigger`.
 
-| Prop       | Type                                                         | Défaut | Description                              |
-| ---------- | ------------------------------------------------------------ | ------ | ---------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>` | —      | Props de `DropdownMenuPrimitive.Trigger` |
+| Prop       | Type                                                         | Default | Description                           |
+| ---------- | ------------------------------------------------------------ | ------- | ------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>` | —       | `DropdownMenuPrimitive.Trigger` props |
 
 ### `DropdownMenuContent`
 
-Rend `DropdownMenuPrimitive.Content`.
+Renders `DropdownMenuPrimitive.Content`.
 
-| Prop         | Type                                                         | Défaut    | Description                                                              |
-| ------------ | ------------------------------------------------------------ | --------- | ------------------------------------------------------------------------ |
-| `align`      | `"center" \| "end" \| "start"`                               | `"start"` | Alignement du menu par rapport au trigger (sur `DropdownMenuContent`)    |
-| `sideOffset` | `number`                                                     | `4`       | Espacement en px entre le trigger et le menu (sur `DropdownMenuContent`) |
-| `...props`   | `React.ComponentProps<typeof DropdownMenuPrimitive.Content>` | —         | Props de `DropdownMenuPrimitive.Content`                                 |
+| Prop         | Type                                                         | Default   | Description                                   |
+| ------------ | ------------------------------------------------------------ | --------- | --------------------------------------------- |
+| `align`      | `"center" \| "end" \| "start"`                               | `"start"` | Alignment of the menu against the trigger     |
+| `sideOffset` | `number`                                                     | `4`       | Space between the trigger and the menu, in px |
+| `...props`   | `React.ComponentProps<typeof DropdownMenuPrimitive.Content>` | —         | `DropdownMenuPrimitive.Content` props         |
 
 ### `DropdownMenuGroup`
 
-Rend `DropdownMenuPrimitive.Group`.
+Renders `DropdownMenuPrimitive.Group`.
 
-| Prop       | Type                                                       | Défaut | Description                            |
-| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Group>` | —      | Props de `DropdownMenuPrimitive.Group` |
+| Prop       | Type                                                       | Default | Description                         |
+| ---------- | ---------------------------------------------------------- | ------- | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Group>` | —       | `DropdownMenuPrimitive.Group` props |
 
 ### `DropdownMenuLabel`
 
-Rend `DropdownMenuPrimitive.Label`.
+Renders `DropdownMenuPrimitive.Label`.
 
-| Prop       | Type                                                       | Défaut      | Description                                                                          |
-| ---------- | ---------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                  | `undefined` | Padding gauche supplémentaire (sur Item, CheckboxItem, RadioItem, Label, SubTrigger) |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Label>` | —           | Props de `DropdownMenuPrimitive.Label`                                               |
+| Prop       | Type                                                       | Default     | Description                                                              |
+| ---------- | ---------------------------------------------------------- | ----------- | ------------------------------------------------------------------------ |
+| `inset`    | `boolean`                                                  | `undefined` | Extra left padding (on Item, CheckboxItem, RadioItem, Label, SubTrigger) |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Label>` | —           | `DropdownMenuPrimitive.Label` props                                      |
 
 ### `DropdownMenuItem`
 
-Rend `DropdownMenuPrimitive.Item`.
+Renders `DropdownMenuPrimitive.Item`.
 
-| Prop       | Type                                                      | Défaut      | Description                                                                                |
-| ---------- | --------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                 | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `variant`  | `"default" \| "destructive"`                              | `"default"` | Variante visuelle de l'item (sur `DropdownMenuItem`)                                       |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Item>` | —           | Props de `DropdownMenuPrimitive.Item`                                                      |
+| Prop       | Type                                                      | Default     | Description                                                         |
+| ---------- | --------------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                 | —           | Adds left padding so the text lines up with items that have an icon |
+| `variant`  | `"default" \| "destructive"`                              | `"default"` | Visual variant of the item                                          |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Item>` | —           | `DropdownMenuPrimitive.Item` props                                  |
 
 ### `DropdownMenuCheckboxItem`
 
-Rend `DropdownMenuPrimitive.CheckboxItem`.
+Renders `DropdownMenuPrimitive.CheckboxItem`.
 
-| Prop       | Type                                                              | Défaut      | Description                                                                                |
-| ---------- | ----------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                         | —           | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `checked`  | `CheckedState`                                                    | `undefined` | État coché d'un CheckboxItem                                                               |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>` | —           | Props de `DropdownMenuPrimitive.CheckboxItem`                                              |
+| Prop       | Type                                                              | Default     | Description                                                         |
+| ---------- | ----------------------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                         | —           | Adds left padding so the text lines up with items that have an icon |
+| `checked`  | `CheckedState`                                                    | `undefined` | Checked state of a CheckboxItem                                     |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>` | —           | `DropdownMenuPrimitive.CheckboxItem` props                          |
 
 ### `DropdownMenuRadioGroup`
 
-Rend `DropdownMenuPrimitive.RadioGroup`.
+Renders `DropdownMenuPrimitive.RadioGroup`.
 
-| Prop       | Type                                                            | Défaut | Description                                 |
-| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>` | —      | Props de `DropdownMenuPrimitive.RadioGroup` |
+| Prop       | Type                                                            | Default | Description                              |
+| ---------- | --------------------------------------------------------------- | ------- | ---------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>` | —       | `DropdownMenuPrimitive.RadioGroup` props |
 
 ### `DropdownMenuRadioItem`
 
-Rend `DropdownMenuPrimitive.RadioItem`.
+Renders `DropdownMenuPrimitive.RadioItem`.
 
-| Prop       | Type                                                           | Défaut | Description                                                                                |
-| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                      | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>` | —      | Props de `DropdownMenuPrimitive.RadioItem`                                                 |
+| Prop       | Type                                                           | Default | Description                                                         |
+| ---------- | -------------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                      | —       | Adds left padding so the text lines up with items that have an icon |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>` | —       | `DropdownMenuPrimitive.RadioItem` props                             |
 
 ### `DropdownMenuSeparator`
 
-Rend `DropdownMenuPrimitive.Separator`.
+Renders `DropdownMenuPrimitive.Separator`.
 
-| Prop       | Type                                                           | Défaut | Description                                |
-| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Separator>` | —      | Props de `DropdownMenuPrimitive.Separator` |
+| Prop       | Type                                                           | Default | Description                             |
+| ---------- | -------------------------------------------------------------- | ------- | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Separator>` | —       | `DropdownMenuPrimitive.Separator` props |
 
 ### `DropdownMenuShortcut`
 
-Rend `<span>`.
+Renders `<span>`.
 
-| Prop       | Type                           | Défaut | Description               |
-| ---------- | ------------------------------ | ------ | ------------------------- |
-| `...props` | `React.ComponentProps<"span">` | —      | Props natives de `<span>` |
+| Prop       | Type                           | Default | Description           |
+| ---------- | ------------------------------ | ------- | --------------------- |
+| `...props` | `React.ComponentProps<"span">` | —       | Native `<span>` props |
 
 ### `DropdownMenuSub`
 
-Rend `DropdownMenuPrimitive.Sub`.
+Renders `DropdownMenuPrimitive.Sub`.
 
-| Prop       | Type                                                     | Défaut | Description                          |
-| ---------- | -------------------------------------------------------- | ------ | ------------------------------------ |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Sub>` | —      | Props de `DropdownMenuPrimitive.Sub` |
+| Prop       | Type                                                     | Default | Description                       |
+| ---------- | -------------------------------------------------------- | ------- | --------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.Sub>` | —       | `DropdownMenuPrimitive.Sub` props |
 
 ### `DropdownMenuSubTrigger`
 
-Rend `DropdownMenuPrimitive.SubTrigger`.
+Renders `DropdownMenuPrimitive.SubTrigger`.
 
-| Prop       | Type                                                            | Défaut | Description                                                                                |
-| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `inset`    | `boolean`                                                       | —      | Ajoute un retrait à gauche, pour aligner le texte sur celui des éléments qui ont une icône |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger>` | —      | Props de `DropdownMenuPrimitive.SubTrigger`                                                |
+| Prop       | Type                                                            | Default | Description                                                         |
+| ---------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `inset`    | `boolean`                                                       | —       | Adds left padding so the text lines up with items that have an icon |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger>` | —       | `DropdownMenuPrimitive.SubTrigger` props                            |
 
 ### `DropdownMenuSubContent`
 
-Rend `DropdownMenuPrimitive.SubContent`.
+Renders `DropdownMenuPrimitive.SubContent`.
 
-| Prop       | Type                                                            | Défaut | Description                                 |
-| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>` | —      | Props de `DropdownMenuPrimitive.SubContent` |
+| Prop       | Type                                                            | Default | Description                              |
+| ---------- | --------------------------------------------------------------- | ------- | ---------------------------------------- |
+| `...props` | `React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>` | —       | `DropdownMenuPrimitive.SubContent` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                               |
+| State    | Description                                                               |
 | -------- | ------------------------------------------------------------------------- |
-| default  | Menu fermé, trigger en attente de clic                                    |
-| open     | Menu affiché avec animation `fade-in` + `zoom-in-95` + slide directionnel |
-| focus    | Item surligné avec `bg-accent` et `text-accent-foreground`                |
-| active   | Item en cours de sélection                                                |
-| disabled | Item grisé (`opacity-disabled`, `pointer-events-none`)                    |
+| default  | Menu closed; the trigger waits for a click                                |
+| open     | Menu shown, animated with `fade-in`, `zoom-in-95` and a directional slide |
+| focus    | Item highlighted with `bg-accent` and `text-accent-foreground`            |
+| active   | Item being selected                                                       |
+| disabled | Grayed-out item (`opacity-disabled`, `pointer-events-none`)               |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Menu Button](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) (Radix DropdownMenu)
+**Pattern**: [Menu Button](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) (Radix DropdownMenu)
 
-**Rôle** : Déclencheur avec `aria-haspopup="menu"` et `aria-expanded` ; `role="menu"` et `menuitem` / `menuitemcheckbox` / `menuitemradio`.
+**Role**: A trigger with `aria-haspopup="menu"` and `aria-expanded`; `role="menu"`, with `menuitem` / `menuitemcheckbox` / `menuitemradio` items.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                          | Action                                          |
-| ------------------------------- | ----------------------------------------------- |
-| `Enter` / `Space` / `ArrowDown` | Ouvre le menu (focus sur le premier élément)    |
-| `ArrowDown` / `ArrowUp`         | Élément suivant / précédent                     |
-| `Home` / `End`                  | Premier / dernier élément                       |
-| `ArrowRight` / `ArrowLeft`      | Ouvre / ferme un sous-menu                      |
-| `Enter` / `Space`               | Active l'élément                                |
-| `Escape`                        | Ferme le menu et rend le focus au déclencheur   |
-| Saisie                          | Va à l'élément qui commence par la lettre tapée |
+| Key                             | Action                                              |
+| ------------------------------- | --------------------------------------------------- |
+| `Enter` / `Space` / `ArrowDown` | Opens the menu (focus on the first item)            |
+| `ArrowDown` / `ArrowUp`         | Next / previous item                                |
+| `Home` / `End`                  | First / last item                                   |
+| `ArrowRight` / `ArrowLeft`      | Opens / closes a submenu                            |
+| `Enter` / `Space`               | Activates the item                                  |
+| `Escape`                        | Closes the menu and returns focus to the trigger    |
+| Typing                          | Moves to the item that starts with the typed letter |
 
-**Nom accessible** : Le déclencheur doit être nommé ; un déclencheur icône seule (« … ») exige un `aria-label` (« Actions de la ligne »).
+**Accessible name**: The trigger must be named; an icon-only trigger ("…") needs an `aria-label` ("Row actions").
 
-**Vigilance** :
+**Pitfalls**:
 
-- Un menu contient des actions, pas de la navigation de site : pour des liens de navigation, utiliser `NavigationMenu`.
-- Les raccourcis affichés (`DropdownMenuShortcut`) doivent réellement fonctionner.
+- A menu holds actions, not site navigation: for navigation links, use `NavigationMenu`.
+- The shortcuts it displays (`DropdownMenuShortcut`) must actually work.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -278,20 +278,20 @@ export default function Example() {
         <Button variant="outline">Options</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Mon compte</DropdownMenuLabel>
+        <DropdownMenuLabel>My account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profil</DropdownMenuItem>
-        <DropdownMenuItem>Paramètres</DropdownMenuItem>
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">Déconnexion</DropdownMenuItem>
+        <DropdownMenuItem variant="destructive">Sign out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `ContextMenu` — menu déclenché par un clic droit au lieu d'un clic gauche
-- `Popover` — contenu flottant plus riche qu'un simple menu d'actions
-- `Button` — souvent utilisé comme trigger du menu
+- `ContextMenu` — a menu opened by a right-click instead of a left-click
+- `Popover` — floating content richer than a menu of actions
+- `Button` — the usual trigger of the menu

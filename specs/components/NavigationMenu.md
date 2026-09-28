@@ -2,58 +2,58 @@
 
 ## Metadata
 
-| Champ         | Valeur                            |
+| Field         | Value                             |
 | ------------- | --------------------------------- |
-| Nom           | NavigationMenu                    |
-| Catégorie     | Navigation                        |
-| Statut        | stable                            |
+| Name          | NavigationMenu                    |
+| Category      | Navigation                        |
+| Status        | stable                            |
 | figma_node_id |                                   |
 | code_path     | components/ui/navigation-menu.tsx |
 
-## Rôle
+## Role
 
-Menu de navigation principal permettant d'organiser les liens du site en catégories avec des panneaux de contenu déroulants et des animations de transition.
+Primary navigation that organizes the site's links into categories, with drop-down content panels and transition animations.
 
 ## Usage
 
-- Navigation principale d'un site ou d'une application (header)
-- Regrouper les liens par catégorie avec des panneaux de contenu riche
-- Proposer des mega-menus avec descriptions et icônes
-- Navigation horizontale avec indicateur visuel de la section active
-- Liens directs sans sous-menu via `NavigationMenuLink`
+- The primary navigation of a site or an app (in the header)
+- Group links by category, with rich content panels
+- Mega menus with descriptions and icons
+- Horizontal navigation with a visual indicator of the active section
+- Direct links with no submenu, through `NavigationMenuLink`
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir de menu d'actions (commandes) → utiliser `Menubar` ou `DropdownMenu`
-- **MUST NOT** — dépasser 7 triggers de premier niveau
-- **Note** — `viewport={false}` rend les contenus en ligne, sans viewport
-- **MUST** — rendre chaque lien avec `NavigationMenuLink`, qui gère `data-active`
-- **MUST** — donner un positionnement relatif au parent de `NavigationMenuIndicator`
+- **MUST NOT** — serve as a menu of actions (commands) → use `Menubar` or `DropdownMenu`
+- **MUST NOT** — exceed 7 top-level triggers
+- **Note** — `viewport={false}` renders the content inline, without a viewport
+- **MUST** — render every link with `NavigationMenuLink`, which handles `data-active`
+- **MUST** — give the parent of `NavigationMenuIndicator` relative positioning
 
-## Dépendances
+## Dependencies
 
-- `NavigationMenu` (Root, List, Item, Trigger, Content, Link, Indicator, Viewport) de `radix-ui`
-- `class-variance-authority` pour le style du trigger (`navigationMenuTriggerStyle`)
-- `CaretDownIcon` de `@phosphor-icons/react`
+- `NavigationMenu` (Root, List, Item, Trigger, Content, Link, Indicator, Viewport) from `radix-ui`
+- `class-variance-authority` for the trigger style (`navigationMenuTriggerStyle`)
+- `CaretDownIcon` from `@phosphor-icons/react`
 
-## Anatomie
+## Anatomy
 
-| Slot                                    | Rôle                                             |
-| --------------------------------------- | ------------------------------------------------ |
-| `data-slot="navigation-menu"`           | Racine du composant, porte `data-viewport`       |
-| `data-slot="navigation-menu-list"`      | Liste de navigation flex horizontale             |
-| `data-slot="navigation-menu-item"`      | Élément de navigation individuel                 |
-| `data-slot="navigation-menu-trigger"`   | Bouton déclencheur du panneau de contenu         |
-| `data-slot="navigation-menu-content"`   | Panneau de contenu animé avec liens              |
-| `data-slot="navigation-menu-link"`      | Lien de navigation individuel                    |
-| `data-slot="navigation-menu-viewport"`  | Zone de rendu partagée pour le contenu actif     |
-| `data-slot="navigation-menu-indicator"` | Indicateur visuel (flèche) sous le trigger actif |
+| Slot                                    | Role                                                 |
+| --------------------------------------- | ---------------------------------------------------- |
+| `data-slot="navigation-menu"`           | Root; carries `data-viewport`                        |
+| `data-slot="navigation-menu-list"`      | Horizontal flex list of navigation items             |
+| `data-slot="navigation-menu-item"`      | A single navigation item                             |
+| `data-slot="navigation-menu-trigger"`   | Button that opens the content panel                  |
+| `data-slot="navigation-menu-content"`   | Animated content panel with links                    |
+| `data-slot="navigation-menu-link"`      | A single navigation link                             |
+| `data-slot="navigation-menu-viewport"`  | Shared rendering area for the active content         |
+| `data-slot="navigation-menu-indicator"` | Visual indicator (an arrow) below the active trigger |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                           | Classes et variables                             | Où                                                                                                                      |
+| Token                           | Classes and variables                            | Where                                                                                                                   |
 | ------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | `color.background.elevated`     | `bg-popover`                                     | `NavigationMenuContent` · `NavigationMenuViewport`                                                                      |
 | `color.background.subtle`       | `bg-muted` · `bg-muted/50`                       | `NavigationMenuLink` · `navigationMenuTriggerStyle`                                                                     |
@@ -70,127 +70,127 @@ Menu de navigation principal permettant d'organiser les liens du site en catégo
 | `typography.size.xs`            | `text-xs`                                        | `NavigationMenuLink` · `navigationMenuTriggerStyle`                                                                     |
 | `zindex.popover`                | `z-popover`                                      | `NavigationMenuViewport`                                                                                                |
 
-Relevé dans `components/ui/navigation-menu.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/navigation-menu.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `NavigationMenu`
 
-Rend `NavigationMenuPrimitive.Root`.
+Renders `NavigationMenuPrimitive.Root`.
 
-| Prop            | Type                                                        | Défaut         | Description                                          |
-| --------------- | ----------------------------------------------------------- | -------------- | ---------------------------------------------------- |
-| `viewport`      | `boolean`                                                   | `true`         | Active/désactive le viewport partagé pour le contenu |
-| `orientation`   | `Orientation`                                               | `"horizontal"` | Orientation du menu de navigation                    |
-| `value`         | `string`                                                    | —              | Item actif (contrôlé)                                |
-| `defaultValue`  | `string`                                                    | —              | Item actif par défaut                                |
-| `onValueChange` | `(value: string) => void`                                   | —              | Callback lors du changement d'item actif             |
-| `className`     | `string`                                                    | —              | Classes CSS additionnelles                           |
-| `...props`      | `React.ComponentProps<typeof NavigationMenuPrimitive.Root>` | —              | Props de `NavigationMenuPrimitive.Root`              |
+| Prop            | Type                                                        | Default        | Description                                 |
+| --------------- | ----------------------------------------------------------- | -------------- | ------------------------------------------- |
+| `viewport`      | `boolean`                                                   | `true`         | Turns the shared content viewport on or off |
+| `orientation`   | `Orientation`                                               | `"horizontal"` | Orientation of the navigation menu          |
+| `value`         | `string`                                                    | —              | Active item (controlled)                    |
+| `defaultValue`  | `string`                                                    | —              | Item active by default                      |
+| `onValueChange` | `(value: string) => void`                                   | —              | Called when the active item changes         |
+| `className`     | `string`                                                    | —              | Additional CSS classes                      |
+| `...props`      | `React.ComponentProps<typeof NavigationMenuPrimitive.Root>` | —              | `NavigationMenuPrimitive.Root` props        |
 
 ### `NavigationMenuList`
 
-Rend `NavigationMenuPrimitive.List`.
+Renders `NavigationMenuPrimitive.List`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.List>` | —      | Props de `NavigationMenuPrimitive.List` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.List>` | —       | `NavigationMenuPrimitive.List` props |
 
 ### `NavigationMenuItem`
 
-Rend `NavigationMenuPrimitive.Item`.
+Renders `NavigationMenuPrimitive.Item`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Item>` | —      | Props de `NavigationMenuPrimitive.Item` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Item>` | —       | `NavigationMenuPrimitive.Item` props |
 
 ### `NavigationMenuContent`
 
-Rend `NavigationMenuPrimitive.Content`.
+Renders `NavigationMenuPrimitive.Content`.
 
-| Prop       | Type                                                           | Défaut | Description                                |
-| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
-| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Content>` | —      | Props de `NavigationMenuPrimitive.Content` |
+| Prop       | Type                                                           | Default | Description                             |
+| ---------- | -------------------------------------------------------------- | ------- | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Content>` | —       | `NavigationMenuPrimitive.Content` props |
 
 ### `NavigationMenuTrigger`
 
-Rend `NavigationMenuPrimitive.Trigger`.
+Renders `NavigationMenuPrimitive.Trigger`.
 
-| Prop       | Type                                                           | Défaut | Description                                |
-| ---------- | -------------------------------------------------------------- | ------ | ------------------------------------------ |
-| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>` | —      | Props de `NavigationMenuPrimitive.Trigger` |
+| Prop       | Type                                                           | Default | Description                             |
+| ---------- | -------------------------------------------------------------- | ------- | --------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>` | —       | `NavigationMenuPrimitive.Trigger` props |
 
 ### `NavigationMenuLink`
 
-Rend `NavigationMenuPrimitive.Link`.
+Renders `NavigationMenuPrimitive.Link`.
 
-| Prop       | Type                                                        | Défaut | Description                             |
-| ---------- | ----------------------------------------------------------- | ------ | --------------------------------------- |
-| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Link>` | —      | Props de `NavigationMenuPrimitive.Link` |
+| Prop       | Type                                                        | Default | Description                          |
+| ---------- | ----------------------------------------------------------- | ------- | ------------------------------------ |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Link>` | —       | `NavigationMenuPrimitive.Link` props |
 
 ### `NavigationMenuIndicator`
 
-Rend `NavigationMenuPrimitive.Indicator`.
+Renders `NavigationMenuPrimitive.Indicator`.
 
-| Prop       | Type                                                             | Défaut | Description                                  |
-| ---------- | ---------------------------------------------------------------- | ------ | -------------------------------------------- |
-| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>` | —      | Props de `NavigationMenuPrimitive.Indicator` |
+| Prop       | Type                                                             | Default | Description                               |
+| ---------- | ---------------------------------------------------------------- | ------- | ----------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>` | —       | `NavigationMenuPrimitive.Indicator` props |
 
 ### `NavigationMenuViewport`
 
-Rend `NavigationMenuPrimitive.Viewport`, dans un `<div>`.
+Renders `NavigationMenuPrimitive.Viewport`, inside a `<div>`.
 
-| Prop       | Type                                                            | Défaut | Description                                 |
-| ---------- | --------------------------------------------------------------- | ------ | ------------------------------------------- |
-| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>` | —      | Props de `NavigationMenuPrimitive.Viewport` |
+| Prop       | Type                                                            | Default | Description                              |
+| ---------- | --------------------------------------------------------------- | ------- | ---------------------------------------- |
+| `...props` | `React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>` | —       | `NavigationMenuPrimitive.Viewport` props |
 
 ### `navigationMenuTriggerStyle`
 
-Fonction `cva` : renvoie les classes d'une combinaison de ses axes (voir **Variantes**), pour donner ce style à un autre élément.
+A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                               |
-| -------- | ------------------------------------------------------------------------- |
-| default  | Triggers au repos, texte en couleur standard                              |
-| hover    | Fond `bg-muted` sur le trigger et le lien survolés                        |
-| focus    | Fond `bg-muted` + anneau `ring-1 ring-ring/50` + outline sur trigger/lien |
-| active   | Fond `bg-muted/50` sur le trigger/lien actif, panneau de contenu ouvert   |
-| disabled | `pointer-events-none`, `opacity-disabled` — interaction impossible        |
+| State    | Description                                                                             |
+| -------- | --------------------------------------------------------------------------------------- |
+| default  | Triggers at rest, text in the standard color                                            |
+| hover    | `bg-muted` background on the hovered trigger or link                                    |
+| focus    | `bg-muted` background, `ring-1 ring-ring/50` ring and an outline on the trigger or link |
+| active   | `bg-muted/50` background on the active trigger or link; content panel open              |
+| disabled | `pointer-events-none`, `opacity-disabled` — no interaction                              |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : Navigation de site (Radix NavigationMenu)
+**Pattern**: Site navigation (Radix NavigationMenu)
 
-**Rôle** : `nav` (nommée « Main » par Radix) ; déclencheurs `button` avec `aria-expanded` ; liens natifs.
+**Role**: A `nav` (named "Main" by Radix); triggers are `button`s with `aria-expanded`; links are native.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                     | Action                                           |
-| -------------------------- | ------------------------------------------------ |
-| `Tab` / `Shift+Tab`        | Déclencheur ou lien suivant / précédent          |
-| `Enter` / `Space`          | Ouvre le contenu du déclencheur                  |
-| `ArrowDown`                | Entre dans le contenu ouvert                     |
-| `ArrowLeft` / `ArrowRight` | Déclencheur précédent / suivant                  |
-| `Escape`                   | Ferme le contenu et rend le focus au déclencheur |
+| Key                        | Action                                              |
+| -------------------------- | --------------------------------------------------- |
+| `Tab` / `Shift+Tab`        | Next / previous trigger or link                     |
+| `Enter` / `Space`          | Opens the trigger's content                         |
+| `ArrowDown`                | Moves into the open content                         |
+| `ArrowLeft` / `ArrowRight` | Previous / next trigger                             |
+| `Escape`                   | Closes the content and returns focus to the trigger |
 
-**Nom accessible** : Radix nomme le repère « Main », en anglais : si la page a plusieurs `nav`, leur donner des `aria-label` distincts et localisés.
+**Accessible name**: Radix names the landmark "Main", in English: when the page has several `nav`s, give each a distinct, localized `aria-label`.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Le lien de la page courante porte `aria-current="page"` (prop `active` de `NavigationMenuLink`).
+- The link to the current page carries `aria-current="page"` (the `active` prop of `NavigationMenuLink`).
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -207,18 +207,18 @@ export default function Example() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Produits</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <NavigationMenuLink href="/produits/catalogue">
-              Catalogue
+            <NavigationMenuLink href="/products/catalog">
+              Catalog
             </NavigationMenuLink>
-            <NavigationMenuLink href="/produits/nouveautes">
-              Nouveautés
+            <NavigationMenuLink href="/products/new">
+              New arrivals
             </NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="/a-propos">À propos</NavigationMenuLink>
+          <NavigationMenuLink href="/about">About</NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
@@ -226,8 +226,8 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Menubar` — barre de menus d'actions (commandes, raccourcis)
-- `Breadcrumb` — fil d'Ariane pour la navigation contextuelle
-- `Tabs` — navigation par onglets pour du contenu mutuellement exclusif
+- `Menubar` — a menu bar of actions (commands, shortcuts)
+- `Breadcrumb` — a trail for contextual navigation
+- `Tabs` — tabbed navigation for mutually exclusive content

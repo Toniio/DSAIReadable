@@ -2,54 +2,54 @@
 
 ## Metadata
 
-| Champ         | Valeur                        |
+| Field         | Value                         |
 | ------------- | ----------------------------- |
-| Nom           | RadioGroup                    |
-| Catégorie     | Forms                         |
-| Statut        | stable                        |
+| Name          | RadioGroup                    |
+| Category      | Forms                         |
+| Status        | stable                        |
 | figma_node_id |                               |
 | code_path     | components/ui/radio-group.tsx |
 
-## Rôle
+## Role
 
-Groupe de boutons radio permettant la sélection exclusive d'une seule option parmi plusieurs choix.
+A group of radio buttons for picking exactly one option out of several.
 
 ## Usage
 
-- Choix exclusif entre 2 et 5 options dans un formulaire
-- Choix d'une option parmi quelques-unes (ex. : mode de livraison, fréquence)
-- Choix binaire explicite nécessitant la visibilité de toutes les options (vs. Switch)
-- Configuration de paramètres avec options mutuellement exclusives
+- An exclusive choice between 2 and 5 options in a form
+- Pick one option out of a few (delivery method, frequency)
+- An explicit two-way choice where both options must stay visible (as opposed to a Switch)
+- Settings with mutually exclusive options
 
-<!-- rule-20 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-20: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-20`) — Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.
+- **Choice** (`rule-20`) — Pick the selection control from the number of options and the screen width. One value out of 2 to 5 options: `RadioGroup`, with every option visible. Out of 6 to 15: `Select` from `md` up; below `md`, `NativeSelect`, **unless** the options need rich rendering (icons, descriptions) → `Select`. More than 15 options, or search required: `Combobox`. Several values: `Checkbox` up to 5 options, `Combobox` in multiple mode beyond that. An on/off toggle that takes effect immediately: `Switch`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)
-- **MUST** — associer chaque `RadioGroupItem` à un `Label`, et placer le groupe dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)
-- **MUST NOT** — servir à des choix multiples → utiliser `Checkbox`
-- **MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)
-- **MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`"use client"`), seules des props sérialisables lui parviennent d'un composant serveur
+- **MUST NOT** — be used for more than 5 options → `Select` from 6 to 15, `Combobox` beyond (`rule-20`)
+- **MUST** — tie each `RadioGroupItem` to a `Label`, and place the group in a `Field` as soon as it has a description or an error message (`rule-09`)
+- **MUST NOT** — serve multiple choices → use `Checkbox`
+- **MUST NOT** — add padding to enlarge the hit area: it is already enlarged (`after:-inset-x-3 after:-inset-y-2`)
+- **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
 
-## Dépendances
+## Dependencies
 
-- `radix-ui` — `RadioGroup` primitive (Root, Item, Indicator)
+- `radix-ui` — the `RadioGroup` primitive (Root, Item, Indicator)
 
-## Anatomie
+## Anatomy
 
-| Slot                                | Rôle                                              |
-| ----------------------------------- | ------------------------------------------------- |
-| `data-slot="radio-group"`           | Racine du groupe, grille avec gap entre les items |
-| `data-slot="radio-group-item"`      | Bouton radio individuel (cercle avec indicateur)  |
-| `data-slot="radio-group-indicator"` | Indicateur visuel de sélection (point central)    |
+| Slot                                | Role                                               |
+| ----------------------------------- | -------------------------------------------------- |
+| `data-slot="radio-group"`           | Group root, a grid with a gap between the items    |
+| `data-slot="radio-group-item"`      | A single radio button (a circle with an indicator) |
+| `data-slot="radio-group-indicator"` | Visual selection indicator (the center dot)        |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                                | Classes et variables                                                                           | Où                                                                    |
+| Token                                | Classes and variables                                                                          | Where                                                                 |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | `border-width.default`               | `border`                                                                                       | `RadioGroupItem`                                                      |
 | `color.action.background.default`    | `bg-primary` · `border-primary`                                                                | `RadioGroupItem`                                                      |
@@ -60,76 +60,76 @@ Groupe de boutons radio permettant la sélection exclusive d'une seule option pa
 | `opacity.disabled`                   | `opacity-disabled`                                                                             | `RadioGroupItem`                                                      |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `RadioGroupItem` · `RadioGroupItem` via `FOCUS_RING` (`lib/focus.ts`) |
 
-Relevé dans `components/ui/radio-group.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/radio-group.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `RadioGroup`
 
-Rend `RadioGroupPrimitive.Root`.
+Renders `RadioGroupPrimitive.Root`.
 
-| Prop            | Type                                                    | Défaut  | Description                           |
-| --------------- | ------------------------------------------------------- | ------- | ------------------------------------- |
-| `className`     | `string`                                                | —       | Classes CSS additionnelles            |
-| `value`         | `string`                                                | —       | Valeur contrôlée du radio sélectionné |
-| `defaultValue`  | `string`                                                | —       | Valeur par défaut (non contrôlé)      |
-| `onValueChange` | `(value: string) => void`                               | —       | Callback de changement de valeur      |
-| `disabled`      | `boolean`                                               | `false` | Désactive tous les radios du groupe   |
-| `...props`      | `React.ComponentProps<typeof RadioGroupPrimitive.Root>` | —       | Props de `RadioGroupPrimitive.Root`   |
+| Prop            | Type                                                    | Default | Description                              |
+| --------------- | ------------------------------------------------------- | ------- | ---------------------------------------- |
+| `className`     | `string`                                                | —       | Additional CSS classes                   |
+| `value`         | `string`                                                | —       | Value of the selected radio (controlled) |
+| `defaultValue`  | `string`                                                | —       | Default value (uncontrolled)             |
+| `onValueChange` | `(value: string) => void`                               | —       | Called when the value changes            |
+| `disabled`      | `boolean`                                               | `false` | Disables every radio in the group        |
+| `...props`      | `React.ComponentProps<typeof RadioGroupPrimitive.Root>` | —       | `RadioGroupPrimitive.Root` props         |
 
 ### `RadioGroupItem`
 
-Rend `RadioGroupPrimitive.Item`.
+Renders `RadioGroupPrimitive.Item`.
 
-| Prop        | Type                                                    | Défaut | Description                              |
-| ----------- | ------------------------------------------------------- | ------ | ---------------------------------------- |
-| `value`     | `string`                                                | —      | Valeur associée à ce radio (obligatoire) |
-| `className` | `string`                                                | —      | Classes CSS additionnelles               |
-| `...props`  | `React.ComponentProps<typeof RadioGroupPrimitive.Item>` | —      | Props de `RadioGroupPrimitive.Item`      |
+| Prop        | Type                                                    | Default | Description                      |
+| ----------- | ------------------------------------------------------- | ------- | -------------------------------- |
+| `value`     | `string`                                                | —       | Value of this radio (required)   |
+| `className` | `string`                                                | —       | Additional CSS classes           |
+| `...props`  | `React.ComponentProps<typeof RadioGroupPrimitive.Item>` | —       | `RadioGroupPrimitive.Item` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                         |
-| -------- | ----------------------------------------------------------------------------------- |
-| default  | Cercle avec bordure `input`, fond transparent                                       |
-| hover    | — (pas de style hover spécifique, zone de clic étendue)                             |
-| focus    | Bordure `ring` + anneau `ring-ring/50` (3px) via `focus-visible`                    |
-| active   | Sélectionné : fond `primary`, bordure `primary`, point central `primary-foreground` |
-| disabled | `cursor-not-allowed`, opacité réduite (`opacity-disabled`)                          |
-| error    | Bordure `destructive`, anneau `ring-destructive/20` (3px) via `aria-invalid`        |
+| State    | Description                                                                       |
+| -------- | --------------------------------------------------------------------------------- |
+| default  | Circle with an `input` border and a transparent background                        |
+| hover    | — (no specific hover style; the hit area is enlarged)                             |
+| focus    | `ring` border and `ring-ring/50` ring (3px) through `focus-visible`               |
+| active   | Selected: `primary` background, `primary` border, `primary-foreground` center dot |
+| disabled | `cursor-not-allowed`, reduced opacity (`opacity-disabled`)                        |
+| error    | `destructive` border and `ring-destructive/20` ring (3px) through `aria-invalid`  |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) (Radix RadioGroup)
+**Pattern**: [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) (Radix RadioGroup)
 
-**Rôle** : `role="radiogroup"` ; chaque option `role="radio"` avec `aria-checked`.
+**Role**: `role="radiogroup"`; each option is a `role="radio"` with `aria-checked`.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche                     | Action                                   |
-| -------------------------- | ---------------------------------------- |
-| `Tab`                      | Entre dans le groupe sur l'option cochée |
-| `ArrowDown` / `ArrowRight` | Option suivante, cochée                  |
-| `ArrowUp` / `ArrowLeft`    | Option précédente, cochée                |
-| `Space`                    | Coche l'option focalisée                 |
+| Key                        | Action                                     |
+| -------------------------- | ------------------------------------------ |
+| `Tab`                      | Enters the group on the checked option     |
+| `ArrowDown` / `ArrowRight` | Moves to the next option and checks it     |
+| `ArrowUp` / `ArrowLeft`    | Moves to the previous option and checks it |
+| `Space`                    | Checks the focused option                  |
 
-**Nom accessible** : Chaque option a un `Label` associé ; le groupe se nomme par une légende (`FieldLegend`) ou `aria-label`.
+**Accessible name**: Each option has a tied `Label`; the group is named by a legend (`FieldLegend`) or an `aria-label`.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Un seul arrêt de tabulation pour tout le groupe : ne pas s'étonner que `Tab` saute les autres options.
+- The whole group is a single tab stop: `Tab` skipping the other options is expected behavior.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -147,18 +147,18 @@ export default function Example() {
         <Label htmlFor="express">Express</Label>
       </div>
       <div className="flex items-center gap-2">
-        <RadioGroupItem value="prioritaire" id="prioritaire" />
-        <Label htmlFor="prioritaire">Prioritaire</Label>
+        <RadioGroupItem value="priority" id="priority" />
+        <Label htmlFor="priority">Priority</Label>
       </div>
     </RadioGroup>
   )
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Label` — associé à chaque `RadioGroupItem` pour l'accessibilité
-- `Field` — encapsule le groupe avec label global et messages d'erreur
-- `Select` — alternative pour un grand nombre d'options
-- `Switch` — alternative pour un choix binaire on/off
-- `Checkbox` — alternative pour des choix multiples
+- `Label` — tied to each `RadioGroupItem` for accessibility
+- `Field` — wraps the group with an overall label and error messages
+- `Select` — the alternative for a large number of options
+- `Switch` — the alternative for an on/off choice
+- `Checkbox` — the alternative for multiple choices

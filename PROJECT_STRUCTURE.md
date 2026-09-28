@@ -155,12 +155,12 @@ Chaque script documente en tête de fichier ce qu'il vérifie et pourquoi. Tous 
 
 | Script                   | Commande npm     | Rôle                                                                                  |
 | ------------------------ | ---------------- | ------------------------------------------------------------------------------------- |
-| `build-spec-variants.ts` | `specs:variants` | Section `Variantes`, depuis les `cva()` du code                                       |
-| `build-spec-tokens.ts`   | `specs:tokens`   | Section `Tokens utilisés`, classes résolues par Tailwind jusqu'au token               |
+| `build-spec-variants.ts` | `specs:variants` | Section `Variants`, depuis les `cva()` du code                                        |
+| `build-spec-tokens.ts`   | `specs:tokens`   | Section `Tokens`, classes résolues par Tailwind jusqu'au token                        |
 | `build-spec-api.ts`      | `specs:api`      | Section `Props / API`, depuis les exports TypeScript (`scripts/lib/component-api.ts`) |
 | `build-spec-choices.ts`  | `specs:choices`  | Règles de choix de l'index recopiées dans l'`Usage` des specs concernées              |
 | `lint-spec-sections.ts`  | —                | Les 13 sections canoniques, dans l'ordre                                              |
-| `lint-spec-wording.ts`   | —                | Aucune formulation floue ; chaque ligne de Contraintes ouvre sur un mot-clé           |
+| `lint-spec-wording.ts`   | —                | Aucune formulation floue ; chaque ligne de Constraints ouvre sur un mot-clé           |
 
 ### Index — `npm run index:validate`
 
@@ -190,14 +190,14 @@ Documentation markdown structurée, consommable par les humains **et les LLMs** 
 ### `specs/components/` — Specs composants (59 fichiers)
 
 Une spec par composant. Structure en 13 sections :
-`Metadata` · `Rôle` · `Usage` · `Contraintes` · `Dépendances` · `Anatomie` · `Tokens utilisés` · `Props / API` · `Variantes` · `États` · `Accessibilité` · `Exemple de code` · `Références croisées`
+`Metadata` · `Role` · `Usage` · `Constraints` · `Dependencies` · `Anatomy` · `Tokens` · `Props / API` · `Variants` · `States` · `Accessibility` · `Code example` · `Cross-references`
 
-`Variantes` est générée depuis les `cva()` du code (`npm run specs:variants`) ;
-`Tokens utilisés` est générée depuis les classes du code, résolues par Tailwind jusqu'au token sémantique (`npm run specs:tokens`) ;
-Les règles s'écrivent **MUST** / **MUST NOT** ou **SHOULD** … **sauf** (**Note** pour un fait, en Contraintes) ; `lint-spec-wording` refuse « éviter », « préférer », « limiter »… et toute ligne de Contraintes sans mot-clé ;
+`Variants` est générée depuis les `cva()` du code (`npm run specs:variants`) ;
+`Tokens` est générée depuis les classes du code, résolues par Tailwind jusqu'au token sémantique (`npm run specs:tokens`) ;
+Les règles s'écrivent **MUST** / **MUST NOT** ou **SHOULD** … **unless** (**Note** pour un fait, en Constraints) ; `lint-spec-wording` refuse “avoid”, “prefer”, “if needed”… et toute ligne de Constraints sans mot-clé ;
 Les règles de choix entre composants voisins (`composition_rules` de l'index, champ `applies_to`) sont recopiées en dernière puce de leur `Usage` (`npm run specs:choices`) ;
 `Props / API` est générée depuis les exports TypeScript — un bloc par export, types et défauts tirés du code ; seules les descriptions s'éditent à la main (`npm run specs:api`) ;
-`Accessibilité` suit une structure fixe — Pattern, Rôle, Clavier, Nom accessible, Vigilance.
+`Accessibility` suit une structure fixe — Pattern, Role, Keyboard, Accessible name, Pitfalls.
 
 ### `specs/foundations/` — Specs des fondations
 
@@ -309,7 +309,7 @@ tokens/*.json
     ├──▶ tokens.css ──▶ app/globals.css (@theme inline) ──▶ classes Tailwind ──▶ components/ui/
     └──▶ token-reference.md · tokens.manifest.json          (docs:tokens)
 
-components/ui/*.tsx ──▶ specs/components/*.md               (Variantes, Tokens utilisés, Props / API)
+components/ui/*.tsx ──▶ specs/components/*.md               (Variants, Tokens, Props / API)
 design-system.index.json ──▶ specs/components/*.md          (règles de choix, Usage)
 
 specs/ · tokens/ · index · components/ ──▶ mcp-server/context/*.json   (generate-context) ──▶ agents MCP

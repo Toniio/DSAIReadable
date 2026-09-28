@@ -344,8 +344,8 @@ console.log("\n5b. Borrowed variant axes")
 
 // --- Test 5c: spec sections read to their real end (non-regression) ---
 // mdSection ended sections on `\Z`, which JavaScript reads as a literal "Z":
-// the last section of every spec (Références croisées) was never found, and a
-// section stopped at its first capital Z (ScrollArea's role, "Zone …").
+// the last section of every spec (Cross-references) was never found, and a
+// section stopped at its first capital Z (ScrollArea's role, then "Zone …").
 console.log("\n5c. Spec sections read to their end")
 {
   const specs = JSON.parse(
@@ -358,9 +358,19 @@ console.log("\n5c. Spec sections read to their end")
     withRefs === Object.keys(specs).length,
     `Every spec serves its cross-references (${withRefs}/${Object.keys(specs).length})`
   )
+  // Each served role must equal the section as written, whatever letters it
+  // holds: read here with a plain split, independent of mdSection.
+  const truncated = Object.keys(specs).filter((name) => {
+    const md = readFileSync(
+      resolve(contextDir, `../../specs/components/${name}.md`),
+      "utf-8"
+    )
+    const written = md.split("\n## Role\n")[1]?.split("\n## ")[0].trim()
+    return specs[name].role !== written
+  })
   assert(
-    specs.ScrollArea?.role.startsWith("Zone de défilement") === true,
-    "A section starting with a capital Z is read in full (ScrollArea role)"
+    truncated.length === 0,
+    `Every role is served in full, as written (${truncated.join(", ") || "none truncated"})`
   )
   const rules = (
     JSON.parse(
@@ -381,7 +391,7 @@ console.log("\n5d. Spec accessibility section")
     readFileSync(resolve(contextDir, "component-specs.json"), "utf-8")
   ) as Record<string, { accessibility?: string }>
   const withA11y = Object.values(specs).filter((s) =>
-    /\*\*Pattern\*\* :[\s\S]*\*\*Clavier\*\* :[\s\S]*\*\*Nom accessible\*\* :[\s\S]*\*\*Vigilance\*\* :/.test(
+    /\*\*Pattern\*\*:[\s\S]*\*\*Keyboard\*\*:[\s\S]*\*\*Accessible name\*\*:[\s\S]*\*\*Pitfalls\*\*:/.test(
       s.accessibility ?? ""
     )
   ).length
@@ -543,7 +553,7 @@ const allProps = Object.values(specs).flatMap((s) => s.props)
 const leaked = allProps.filter(
   (p) =>
     /^:?-+:?$/.test(p.prop) ||
-    ["prop", "propriété", "hook"].includes(p.prop.toLowerCase())
+    ["prop", "property", "hook"].includes(p.prop.toLowerCase())
 )
 assert(
   leaked.length === 0,
@@ -578,8 +588,8 @@ assert(
   "A mapping table (Logo size → classes) is not served as props"
 )
 
-// Tokens utilisés is generated (scripts/build-spec-tokens.ts) with columns
-// Token | Classes et variables | Où. Read by position, the old parser served
+// Tokens is generated (scripts/build-spec-tokens.ts) with columns
+// Token | Classes and variables | Where. Read by position, the old parser served
 // the class list as the token's "usage" and dropped where it is used.
 type TokenRow = { token: string; classes: string[]; where: string[] }
 const tokenSpecs = specs as unknown as Record<
@@ -615,10 +625,10 @@ const apiSpecs = specs as unknown as Record<
 const sidebarExports = apiSpecs.Sidebar?.exports ?? []
 assert(
   sidebarExports.some(
-    (e) => e.name === "useSidebar()" && e.summary.startsWith("Retourne ")
+    (e) => e.name === "useSidebar()" && e.summary.startsWith("Returns ")
   ) &&
     sidebarExports.some(
-      (e) => e.name === "SidebarMenuAction" && e.summary.startsWith("Rend ")
+      (e) => e.name === "SidebarMenuAction" && e.summary.startsWith("Renders ")
     ),
   "Every export is served with its summary (Sidebar: a hook and a component)"
 )

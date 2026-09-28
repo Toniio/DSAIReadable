@@ -2,34 +2,34 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
-Le système d'espacement est divisé en deux axes distincts : l'espacement **composant** (micro) et l'espacement **layout** (macro). Ne jamais utiliser un token layout pour un espacement interne de composant, et vice versa.
+The spacing system has two separate axes: **component** spacing (micro) and **layout** spacing (macro). Never use a layout token for spacing inside a component, and vice versa.
 
 ---
 
 ## Component Spacing
 
-Espace **interne** à un composant (`padding`, `gap`) ou **entre composants proches**. Gamme : 4 px → 32 px.
+Space **inside** a component (`padding`, `gap`) or **between nearby components**. Range: 4 px → 32 px.
 
-| Token                | CSS Variable           | Valeur rem | Valeur px | Cas d'usage typique                                                         |
-| -------------------- | ---------------------- | ---------- | --------- | --------------------------------------------------------------------------- |
-| `space.component.xs` | `--space-component-xs` | `0.25rem`  | 4 px      | Gap entre icône et label, padding interne de badge                          |
-| `space.component.sm` | `--space-component-sm` | `0.5rem`   | 8 px      | Padding d'un bouton compact, gap d'items de liste serrés                    |
-| `space.component.md` | `--space-component-md` | `1rem`     | 16 px     | Padding standard d'une card, gap entre boutons d'un groupe                  |
-| `space.component.lg` | `--space-component-lg` | `1.5rem`   | 24 px     | Padding interne d'un dialog, gap entre champs d'un formulaire               |
-| `space.component.xl` | `--space-component-xl` | `2rem`     | 32 px     | Padding d'une section de card large, espacement entre groupes de formulaire |
+| Token                | CSS Variable           | rem value | px value | Typical use                                                            |
+| -------------------- | ---------------------- | --------- | -------- | ---------------------------------------------------------------------- |
+| `space.component.xs` | `--space-component-xs` | `0.25rem` | 4 px     | Gap between an icon and its label, a badge's inner padding             |
+| `space.component.sm` | `--space-component-sm` | `0.5rem`  | 8 px     | Padding of a compact button, gap between tight list items              |
+| `space.component.md` | `--space-component-md` | `1rem`    | 16 px    | Standard card padding, gap between the buttons of a group              |
+| `space.component.lg` | `--space-component-lg` | `1.5rem`  | 24 px    | A dialog's inner padding, gap between the fields of a form             |
+| `space.component.xl` | `--space-component-xl` | `2rem`    | 32 px    | Padding of a large card section, spacing between groups of form fields |
 
-### Exemples Tailwind
+### Tailwind examples
 
 ```tsx
-// Bouton compact — xs gap entre icône et label
+// Compact button — xs gap between the icon and the label
 <button className="flex items-center gap-1 px-3 py-1.5">
   <Icon /> Label
 </button>
 
-// Card standard — md padding
+// Standard card — md padding
 <div className="p-4 flex flex-col gap-4">
-  <h2>Titre</h2>
-  <p>Contenu</p>
+  <h2>Title</h2>
+  <p>Content</p>
 </div>
 
 // Dialog — lg padding
@@ -39,50 +39,50 @@ Espace **interne** à un composant (`padding`, `gap`) ou **entre composants proc
 </div>
 ```
 
-> **Note Tailwind :** Les valeurs numériques Tailwind (`gap-1` = 4px, `gap-2` = 8px, `gap-4` = 16px, `gap-6` = 24px, `gap-8` = 32px) correspondent directement aux tokens de composants. Utiliser ces classes en priorité.
+> **Tailwind note:** Tailwind's numeric values (`gap-1` = 4px, `gap-2` = 8px, `gap-4` = 16px, `gap-6` = 24px, `gap-8` = 32px) map directly onto the component tokens. Reach for these classes first.
 
 ---
 
 ## Layout Spacing
 
-Espace de **mise en page** : padding de page, gap entre sections, largeurs max de contenu.
+**Layout** space: page padding, gaps between sections, maximum content widths.
 
-| Token                          | CSS Variable                     | Valeur           | Cas d'usage typique                                |
-| ------------------------------ | -------------------------------- | ---------------- | -------------------------------------------------- |
-| `space.layout.page-padding`    | `--space-layout-page-padding`    | `1.5rem` (24 px) | Padding horizontal du conteneur de page racine     |
-| `space.layout.section-gap`     | `--space-layout-section-gap`     | `4rem` (64 px)   | Espace vertical entre sections majeures d'une page |
-| `space.layout.content-sm`      | `--space-layout-content-sm`      | `42rem`          | `max-width` pour colonne étroite (article, prose)  |
-| `space.layout.content-default` | `--space-layout-content-default` | `64rem`          | `max-width` par défaut pour le contenu principal   |
-| `space.layout.content-lg`      | `--space-layout-content-lg`      | `80rem`          | `max-width` pour les layouts larges (dashboards)   |
+| Token                          | CSS Variable                     | Value            | Typical use                                         |
+| ------------------------------ | -------------------------------- | ---------------- | --------------------------------------------------- |
+| `space.layout.page-padding`    | `--space-layout-page-padding`    | `1.5rem` (24 px) | Horizontal padding of the root page container       |
+| `space.layout.section-gap`     | `--space-layout-section-gap`     | `4rem` (64 px)   | Vertical space between the major sections of a page |
+| `space.layout.content-sm`      | `--space-layout-content-sm`      | `42rem`          | `max-width` of a narrow column (an article, prose)  |
+| `space.layout.content-default` | `--space-layout-content-default` | `64rem`          | Default `max-width` of the main content             |
+| `space.layout.content-lg`      | `--space-layout-content-lg`      | `80rem`          | `max-width` of wide layouts (dashboards)            |
 
-### Classes Tailwind générées
+### Generated Tailwind classes
 
-Via `@theme inline` dans `globals.css`, les tokens layout sont disponibles comme :
+Through `@theme inline` in `globals.css`, the layout tokens are available as:
 
 ```tsx
-// Page container — px-page = 1.5rem de padding horizontal
+// Page container — px-page = 1.5rem of horizontal padding
 <main className="px-page mx-auto max-w-[var(--space-layout-content-default)]">
   ...
 </main>
 
-// Gap entre sections — gap-section = 4rem
+// Gap between sections — gap-section = 4rem
 <div className="flex flex-col gap-section">
   <HeroSection />
   <FeaturesSection />
   <CTASection />
 </div>
 
-// Conteneur de contenu — largeurs max
+// Content container — maximum widths
 <article className="mx-auto w-full max-w-[var(--space-layout-content-sm)]">
-  {/* prose / article étroit */}
+  {/* prose / narrow article */}
 </article>
 
 <div className="mx-auto w-full max-w-[var(--space-layout-content-lg)]">
-  {/* dashboard large */}
+  {/* wide dashboard */}
 </div>
 ```
 
-### Exemple de layout de page complet
+### A full page layout
 
 ```tsx
 // app/layout.tsx
@@ -102,7 +102,7 @@ export default function Layout({ children }) {
 
 ---
 
-## Échelle visuelle
+## Visual scale
 
 ```
 xs  ▌ 4px
@@ -119,31 +119,30 @@ section-gap   ██████████████████████
 
 ## Usage Rules
 
-1. **Deux axes, deux vocabulaires** — `space.component.*` pour l'intérieur des composants ; `space.layout.*` pour la mise en page globale. Ne jamais inverser.
-2. **Pas de valeurs arbitraires** — utiliser exclusivement les tokens. Si une valeur intermédiaire est nécessaire, en discuter d'abord avec l'équipe design.
-3. **Cohérence de l'axe composant** — un formulaire utilise `lg` (24px) entre ses champs et `md` (16px) en padding interne. Rester sur cet axe partout dans le même composant.
-4. **`page-padding` appliqué une seule fois** — sur le conteneur racine de la page, pas sur chaque section individuelle.
-5. **`content-*` via `max-width`** — ces tokens définissent des largeurs maximales, pas des paddings. Toujours associer avec `mx-auto` pour centrer.
+1. **Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.
+2. **No arbitrary values** — use the tokens only. When an in-between value is needed, discuss it with the design team first.
+3. **Stay on the component axis** — a form uses `lg` (24px) between its fields and `md` (16px) for inner padding. Keep to that axis throughout the same component.
+4. **`page-padding` is applied once** — on the page's root container, not on each section.
+5. **`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center.
 
-### Valeurs arbitraires : lire un token est gratuit, calculer ne l'est pas
+### Arbitrary values: reading a token is free, computing one is not
 
-Une valeur arbitraire Tailwind (`w-[…]`, `gap-[…]`, `grid-cols-[…]`…) est
-autorisée sans justification tant qu'elle **lit** une décision sans en prendre
-une :
+A Tailwind arbitrary value (`w-[…]`, `gap-[…]`, `grid-cols-[…]`…) is allowed
+without justification as long as it **reads** a decision without making one:
 
-| Autorisé sans justification | Pourquoi                                                  |
-| --------------------------- | --------------------------------------------------------- |
-| `w-[var(--sidebar-width)]`  | lecture d'un token ; changer le token change le composant |
-| `gap-[--spacing(4)]`        | lecture de l'échelle d'espacement                         |
-| `top-[50%]`                 | relatif à la boîte parente, pas une valeur de design      |
-| `grid-cols-[auto_1fr]`      | décrit une structure, pas une taille                      |
+| Allowed without justification | Why                                                     |
+| ----------------------------- | ------------------------------------------------------- |
+| `w-[var(--sidebar-width)]`    | reads a token; changing the token changes the component |
+| `gap-[--spacing(4)]`          | reads the spacing scale                                 |
+| `top-[50%]`                   | relative to the parent box, not a design value          |
+| `grid-cols-[auto_1fr]`        | describes a structure, not a size                       |
 
-Dès qu'il y a une **arithmétique** — `calc()`, `+`, `-`, `*`, `/` — la valeur
-encode une relation inventée dans le composant, qu'aucun token n'exprime et
-qu'aucun agent ne peut deviner. Elle exige alors `// allow-raw: <id>` sur la
-ligne, ou juste au-dessus dans un bloc de commentaires contigu, **et** une
-entrée correspondante dans `tokens/allow-raw.registry.json`.
+As soon as there is **arithmetic** — `calc()`, `+`, `-`, `*`, `/` — the value
+encodes a relationship invented inside the component, which no token expresses
+and no agent can guess. It then requires `// allow-raw: <id>` on the line, or
+right above it in a contiguous comment block, **and** a matching entry in
+`tokens/allow-raw.registry.json`.
 
-`npm run tokens:lint-values` applique la règle. Préférer d'abord la
-simplification : `top-[calc(--spacing(1.25))]` s'écrit `top-1.25` et compile à
-l'identique.
+`npm run tokens:lint-values` enforces the rule. Simplify first:
+`top-[calc(--spacing(1.25))]` is written `top-1.25` and compiles to the same
+thing.

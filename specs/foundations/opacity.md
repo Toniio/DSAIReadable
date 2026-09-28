@@ -2,65 +2,65 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
-Le système d'opacité définit **trois tokens sémantiques** couvrant les cas d'usage principaux : désactivation, placeholder, et backdrop d'overlay. En dehors de ces trois cas, **l'opacité ne doit pas être utilisée** comme substitut aux tokens de couleur dédiés.
+The opacity system defines **three semantic tokens** for the main use cases: disabled elements, placeholders and overlay backdrops. Outside those three cases, **opacity must not be used** as a substitute for the dedicated color tokens.
 
 ---
 
 ## Semantic Tokens
 
-| Token                 | CSS Variable            | Valeur | Tailwind Class                                                   | Usage                                           |
-| --------------------- | ----------------------- | ------ | ---------------------------------------------------------------- | ----------------------------------------------- |
-| `opacity.disabled`    | `--opacity-disabled`    | `0.5`  | `disabled:opacity-disabled` (et toute variante d'état désactivé) | Éléments interactifs désactivés                 |
-| `opacity.placeholder` | `--opacity-placeholder` | `0.5`  | `placeholder:opacity-50`                                         | Texte placeholder dans les champs de formulaire |
-| `opacity.overlay`     | `--opacity-overlay`     | `0.8`  | `opacity-80`                                                     | Backdrop/backdrop de modals et dialogs          |
+| Token                 | CSS Variable            | Value | Tailwind Class                                                 | Usage                           |
+| --------------------- | ----------------------- | ----- | -------------------------------------------------------------- | ------------------------------- |
+| `opacity.disabled`    | `--opacity-disabled`    | `0.5` | `disabled:opacity-disabled` (and every disabled-state variant) | Disabled interactive elements   |
+| `opacity.placeholder` | `--opacity-placeholder` | `0.5` | `placeholder:opacity-50`                                       | Placeholder text in form fields |
+| `opacity.overlay`     | `--opacity-overlay`     | `0.8` | `opacity-80`                                                   | Backdrop of modals and dialogs  |
 
 ---
 
-## `opacity.disabled` — Éléments désactivés
+## `opacity.disabled` — disabled elements
 
-### Quand utiliser
+### When to use it
 
-Appliquer sur tout élément interactif en état `disabled` : boutons, inputs, selects, checkboxes, etc.
+Apply it to every interactive element in the `disabled` state: buttons, inputs, selects, checkboxes…
 
-### La classe `opacity-disabled`
+### The `opacity-disabled` class
 
-Le pont `@theme` de `app/globals.css` fait du token une classe Tailwind : `opacity-disabled` lit `--opacity-disabled`. Elle se place sous la variante de l'état désactivé, quelle que soit sa forme :
+The `@theme` bridge in `app/globals.css` turns the token into a Tailwind class: `opacity-disabled` reads `--opacity-disabled`. It goes under the disabled-state variant, whatever form that variant takes:
 
 ```tsx
-// ✅ Le token, sous la variante de l'état
+// ✅ The token, under the state's variant
 <button disabled className="disabled:opacity-disabled disabled:cursor-not-allowed">
-  Bouton désactivé
+  Disabled button
 </button>
-// Même règle pour data-disabled:, aria-disabled:, has-disabled:, peer-disabled:,
+// Same rule for data-disabled:, aria-disabled:, has-disabled:, peer-disabled:,
 // group-data-[disabled=true]/…:
 
-// ❌ Même rendu, mais le token n'y est plus : ESLint refuse
+// ❌ Same rendering, but the token is gone: ESLint rejects it
 <button disabled className="disabled:opacity-50">
-  Bouton désactivé
+  Disabled button
 </button>
 
-// ❌ Valeur en dur
+// ❌ Hard-coded value
 <button disabled style={{ opacity: 0.5 }}>
-  Bouton désactivé
+  Disabled button
 </button>
 ```
 
-> **Garde-fou :** la règle `better-tailwindcss/no-restricted-classes` refuse `opacity-<n>` sous toute variante contenant `disabled`, et `eslint --fix` la remplace par `opacity-disabled`. Elle ne voit pas une classe nue dont l'état est porté ailleurs — la clé `disabled` des `classNames` de `Calendar`, par exemple : l'y écrire à la main.
+> **Guard:** the `better-tailwindcss/no-restricted-classes` rule rejects `opacity-<n>` under any variant that contains `disabled`, and `eslint --fix` replaces it with `opacity-disabled`. It cannot see a bare class whose state lives elsewhere — the `disabled` key of `Calendar`'s `classNames`, for example: write it there by hand.
 
 ---
 
-## `opacity.placeholder` — Texte placeholder
+## `opacity.placeholder` — placeholder text
 
-Appliqué au pseudo-élément `::placeholder` des champs de formulaire :
+Applied to the `::placeholder` pseudo-element of form fields:
 
 ```tsx
-// ✅ Via Tailwind
+// ✅ Through Tailwind
 <input
   className="placeholder:opacity-50 placeholder:text-foreground"
-  placeholder="Saisir une valeur..."
+  placeholder="Enter a value..."
 />
 
-// ✅ Via CSS
+// ✅ Through CSS
 input::placeholder {
   opacity: var(--opacity-placeholder);
 }
@@ -68,62 +68,62 @@ input::placeholder {
 
 ---
 
-## `opacity.overlay` — Backdrops de modals
+## `opacity.overlay` — modal backdrops
 
-Appliqué sur le fond semi-transparent (`backdrop`) derrière les modals, drawers et dialogs :
+Applied to the semi-transparent backdrop behind modals, drawers and dialogs:
 
 ```tsx
-// ✅ Backdrop de modal
+// ✅ Modal backdrop
 <div
   className="fixed inset-0 bg-background-inverse opacity-80 z-overlay"
   aria-hidden="true"
 />
 
-// Ou avec classe Tailwind directe
+// Or with a Tailwind class directly
 <div className="fixed inset-0 bg-black/80 z-overlay" aria-hidden="true" />
 ```
 
-> La valeur `0.8` assure un assombrissement suffisant pour que le contenu du modal reste lisible, sans bloquer complètement le contexte visuel sous-jacent.
+> A value of `0.8` darkens enough for the modal's content to stay readable, without hiding the visual context underneath entirely.
 
 ---
 
-## ⚠️ Quand NE PAS utiliser l'opacité
+## ⚠️ When NOT to use opacity
 
-L'opacité globale modifie **tout** le composant (texte, fond, bordure, icône). Elle est **non-sélective** et peut créer des effets indésirables.
+Global opacity changes **the whole** component (text, background, border, icon). It is **not selective**, and it can have side effects.
 
-### Cas à éviter — préférer les tokens de couleur
+### Cases to steer clear of — use the color tokens instead
 
-| ❌ Ne pas faire                                          | ✅ Faire à la place                                     |
-| -------------------------------------------------------- | ------------------------------------------------------- |
-| `<p class="opacity-50">Texte secondaire</p>`             | `<p class="text-muted-foreground">Texte secondaire</p>` |
-| `<p class="text-foreground opacity-50">Caption</p>`      | `<p class="text-muted-foreground text-xs">Caption</p>`  |
-| `<div class="bg-primary opacity-70">Zone atténuée</div>` | `<div class="bg-secondary">Zone atténuée</div>`         |
-| `<Icon class="opacity-50" />`                            | `<Icon class="text-muted-foreground" />`                |
+| ❌ Don't                                              | ✅ Do instead                                          |
+| ----------------------------------------------------- | ------------------------------------------------------ |
+| `<p class="opacity-50">Secondary text</p>`            | `<p class="text-muted-foreground">Secondary text</p>`  |
+| `<p class="text-foreground opacity-50">Caption</p>`   | `<p class="text-muted-foreground text-xs">Caption</p>` |
+| `<div class="bg-primary opacity-70">Muted area</div>` | `<div class="bg-secondary">Muted area</div>`           |
+| `<Icon class="opacity-50" />`                         | `<Icon class="text-muted-foreground" />`               |
 
-**Règle :** Si l'intention est de réduire la **prominente visuelle** d'un texte ou d'une icône, utiliser les tokens de couleur `subtle` / `muted-foreground`. L'opacité est réservée aux **états binaires** (disabled, overlay).
+**Rule:** when the intent is to reduce the **visual prominence** of a text or an icon, use the `subtle` / `muted-foreground` color tokens. Opacity is reserved for **binary states** (disabled, overlay).
 
 ---
 
-## Résumé de décision
+## Decision summary
 
 ```
-Besoin                                    → Solution
+Need                                   → Solution
 ──────────────────────────────────────────────────────────────────
-Désactiver un bouton / input              → disabled:opacity-disabled
-Placeholder d'un champ                   → placeholder:opacity-50
-Backdrop d'une modal / dialog            → opacity-80 (bg-black/80)
-Texte secondaire / atténué               → text-muted-foreground
-Icône secondaire                         → text-muted-foreground
-Fond atténué                             → bg-card / bg-secondary
-Réduire la saturation d'une image        → CSS filter (hors tokens)
+Disable a button / input               → disabled:opacity-disabled
+A field's placeholder                  → placeholder:opacity-50
+A modal / dialog backdrop              → opacity-80 (bg-black/80)
+Secondary / muted text                 → text-muted-foreground
+Secondary icon                         → text-muted-foreground
+Muted background                       → bg-card / bg-secondary
+Desaturate an image                    → CSS filter (outside the tokens)
 ```
 
 ---
 
 ## Usage Rules
 
-1. **Trois cas, trois tokens** — `disabled`, `placeholder`, `overlay` sont les seuls contextes légitimes pour l'opacité globale.
-2. **Un état désactivé s'écrit `opacity-disabled`** sous sa variante (`disabled:opacity-disabled`) — jamais `opacity-50`, que ESLint refuse : la valeur est celle du token, pas celle de l'échelle de Tailwind.
-3. **Ne jamais utiliser l'opacité pour simuler une couleur subtile** — toujours utiliser `color.text.subtle` / `text-muted-foreground`.
-4. **L'opacité est non-sélective** — elle s'applique à tout le sous-arbre DOM. En cas de besoin partiel, utiliser des tokens de couleur ciblés.
-5. **`opacity.overlay` à `0.8` est la valeur de référence** — ne pas diminuer cette valeur pour les modals standards, cela nuit à la lisibilité du contenu principal.
+1. **Three cases, three tokens** — `disabled`, `placeholder` and `overlay` are the only legitimate contexts for global opacity.
+2. **A disabled state is written `opacity-disabled`** under its variant (`disabled:opacity-disabled`) — never `opacity-50`, which ESLint rejects: the value is the token's, not a step of Tailwind's scale.
+3. **Never use opacity to fake a subtle color** — always use `color.text.subtle` / `text-muted-foreground`.
+4. **Opacity is not selective** — it applies to the whole DOM subtree. When only part of it should change, use targeted color tokens.
+5. **`opacity.overlay` at `0.8` is the reference value** — do not lower it for standard modals: it hurts the readability of the main content.

@@ -1,6 +1,6 @@
 /**
  * Component spec section linter — every spec in `specs/components/` must
- * expose the eleven canonical sections, in order, and nothing else.
+ * expose the thirteen canonical sections, in order, and nothing else.
  *
  * These specs are the behavioural source of truth served to agents by the
  * MCP server. An agent asking "what are this component's states?" gets
@@ -26,18 +26,18 @@ const SPECS_DIR = resolve(ROOT, "specs/components")
  */
 const CANONICAL_SECTIONS = [
   "Metadata",
-  "Rôle",
+  "Role",
   "Usage",
-  "Contraintes",
-  "Dépendances",
-  "Anatomie",
-  "Tokens utilisés",
+  "Constraints",
+  "Dependencies",
+  "Anatomy",
+  "Tokens",
   "Props / API",
-  "Variantes",
-  "États",
-  "Accessibilité",
-  "Exemple de code",
-  "Références croisées",
+  "Variants",
+  "States",
+  "Accessibility",
+  "Code example",
+  "Cross-references",
 ] as const
 
 /** Fenced code blocks may contain `## ` lines that are not spec sections. */
@@ -90,24 +90,24 @@ if (specs.length === 0) {
 }
 
 /**
- * The Accessibilité section has a fixed shape so an agent can read it the
+ * The Accessibility section has a fixed shape so an agent can read it the
  * same way in every spec. Each of these labels must open a paragraph there.
  */
 const A11Y_LABELS = [
   "**Pattern**",
-  "**Rôle**",
-  "**Clavier**",
-  "**Nom accessible**",
-  "**Vigilance**",
+  "**Role**",
+  "**Keyboard**",
+  "**Accessible name**",
+  "**Pitfalls**",
 ] as const
 
 function a11yProblems(markdown: string): string[] {
-  const start = markdown.indexOf("\n## Accessibilité\n")
+  const start = markdown.indexOf("\n## Accessibility\n")
   if (start === -1) return []
   const end = markdown.indexOf("\n## ", start + 1)
   const body = markdown.slice(start, end === -1 ? undefined : end)
-  const missing = A11Y_LABELS.filter((l) => !body.includes(`\n${l} :`))
-  return missing.length ? [`Accessibilité lacks ${missing.join(", ")}`] : []
+  const missing = A11Y_LABELS.filter((l) => !body.includes(`\n${l}:`))
+  return missing.length ? [`Accessibility lacks ${missing.join(", ")}`] : []
 }
 
 const failures: string[] = []

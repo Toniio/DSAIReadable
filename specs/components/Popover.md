@@ -2,60 +2,60 @@
 
 ## Metadata
 
-| Champ         | Valeur                    |
+| Field         | Value                     |
 | ------------- | ------------------------- |
-| Nom           | Popover                   |
-| Catégorie     | Overlay                   |
-| Statut        | stable                    |
+| Name          | Popover                   |
+| Category      | Overlay                   |
+| Status        | stable                    |
 | figma_node_id |                           |
 | code_path     | components/ui/popover.tsx |
 
-## Rôle
+## Role
 
-Conteneur flottant interactif déclenché par un clic, permettant d'afficher du contenu riche (formulaire, sélecteur, aperçu) sans quitter le contexte.
+An interactive floating container opened by a click, for rich content — a form, a picker, a preview — without leaving the current context.
 
 ## Usage
 
-- Afficher un sélecteur de date ou de couleur au clic sur un champ
-- Proposer un mini-formulaire de saisie rapide (ex. : renommer, ajouter une note)
-- Montrer un aperçu détaillé d'un élément avec des actions
-- Afficher des options de configuration contextuelles
-- Ancrer un contenu flottant à un élément arbitraire via `PopoverAnchor`
+- Show a date or color picker when a field is clicked
+- Offer a small quick-entry form (rename, add a note)
+- Show a detailed preview of an element, with actions
+- Show contextual configuration options
+- Anchor floating content to any element through `PopoverAnchor`
 
-<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-21: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+- **Choice** (`rule-21`) — Pick the surface from how much it blocks and how long its content is. A blocking decision (confirm, destroy): `AlertDialog`. A short task with no inner scrolling: `Dialog`. Long content or side context: `Sheet` from `md` up, `Drawer` below — **unless** it is side navigation, which stays a `Sheet` at every width (this is what `Sidebar` does below `md`). Anchored, non-blocking content with no scrolling and at most 3 fields: `Popover`. An informative preview on hover, from `md` up: `HoverCard`. A one-line, non-interactive label of at most 80 characters: `Tooltip`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`
-- **MUST** — régler `as` de `PopoverTitle` sur la hiérarchie réelle : il rend un `<h2>` par défaut, `as="h3"` sous une section en `h2`
-- **MUST NOT** — afficher une liste d'actions → utiliser `DropdownMenu`
-- **Note** — un seul `Popover` s'ouvre à la fois, sauf état contrôlé à la main
-- **MUST NOT** — contenir un contenu qui impose un défilement interne, ni un formulaire de plus de 3 champs → utiliser `Dialog` ou `Sheet`
-- **MUST** — tester le positionnement près des bords de l'écran (retournement automatique de Radix)
+- **MUST NOT** — show plain help text → use `Tooltip` or `HoverCard`
+- **MUST** — set `as` on `PopoverTitle` from the real hierarchy: it renders an `<h2>` by default, `as="h3"` under an `h2` section
+- **MUST NOT** — show a list of actions → use `DropdownMenu`
+- **Note** — only one `Popover` opens at a time, unless the state is controlled by hand
+- **MUST NOT** — hold content that needs its own scrolling, or a form of more than 3 fields → use `Dialog` or `Sheet`
+- **MUST** — test the positioning near the edges of the screen (Radix flips it automatically)
 
-## Dépendances
+## Dependencies
 
-- `Popover` de `radix-ui` (primitives Root, Trigger, Portal, Content, Anchor)
+- `Popover` from `radix-ui` (Root, Trigger, Portal, Content, Anchor)
 
-## Anatomie
+## Anatomy
 
-| Slot                              | Rôle                                 |
-| --------------------------------- | ------------------------------------ |
-| `data-slot="popover"`             | Racine du composant                  |
-| `data-slot="popover-trigger"`     | Élément déclencheur au clic          |
-| `data-slot="popover-content"`     | Conteneur du contenu flottant        |
-| `data-slot="popover-anchor"`      | Ancre de positionnement alternative  |
-| `data-slot="popover-header"`      | Zone d'en-tête (titre + description) |
-| `data-slot="popover-title"`       | Titre du popover                     |
-| `data-slot="popover-description"` | Description textuelle                |
+| Slot                              | Role                                    |
+| --------------------------------- | --------------------------------------- |
+| `data-slot="popover"`             | Root                                    |
+| `data-slot="popover-trigger"`     | Element that opens the popover on click |
+| `data-slot="popover-content"`     | Container of the floating content       |
+| `data-slot="popover-anchor"`      | Alternative positioning anchor          |
+| `data-slot="popover-header"`      | Header area (title and description)     |
+| `data-slot="popover-title"`       | The popover's title                     |
+| `data-slot="popover-description"` | Descriptive text                        |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                            | Classes et variables                             | Où                                                        |
+| Token                            | Classes and variables                            | Where                                                     |
 | -------------------------------- | ------------------------------------------------ | --------------------------------------------------------- |
 | `color.background.elevated`      | `bg-popover`                                     | `PopoverContent`                                          |
 | `color.text.default`             | `ring-foreground/10` · `text-popover-foreground` | `PopoverContent`                                          |
@@ -68,112 +68,112 @@ Conteneur flottant interactif déclenché par un clic, permettant d'afficher du 
 | `typography.size.xs`             | `text-xs` · `text-xs/relaxed`                    | `PopoverContent` · `PopoverDescription` · `PopoverHeader` |
 | `zindex.popover`                 | `z-popover`                                      | `PopoverContent`                                          |
 
-Relevé dans `components/ui/popover.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/popover.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Popover`
 
-Rend `PopoverPrimitive.Root`.
+Renders `PopoverPrimitive.Root`.
 
-| Prop           | Type                                                 | Défaut      | Description                                  |
-| -------------- | ---------------------------------------------------- | ----------- | -------------------------------------------- |
-| `open`         | `boolean`                                            | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
-| `onOpenChange` | `(open: boolean) => void`                            | —           | Callback lors du changement d'état           |
-| `...props`     | `React.ComponentProps<typeof PopoverPrimitive.Root>` | —           | Props de `PopoverPrimitive.Root`             |
+| Prop           | Type                                                 | Default     | Description                                   |
+| -------------- | ---------------------------------------------------- | ----------- | --------------------------------------------- |
+| `open`         | `boolean`                                            | `undefined` | Whether the popover is open (controlled mode) |
+| `onOpenChange` | `(open: boolean) => void`                            | —           | Called when the popover opens or closes       |
+| `...props`     | `React.ComponentProps<typeof PopoverPrimitive.Root>` | —           | `PopoverPrimitive.Root` props                 |
 
 ### `PopoverAnchor`
 
-Rend `PopoverPrimitive.Anchor`.
+Renders `PopoverPrimitive.Anchor`.
 
-| Prop       | Type                                                   | Défaut | Description                        |
-| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
-| `...props` | `React.ComponentProps<typeof PopoverPrimitive.Anchor>` | —      | Props de `PopoverPrimitive.Anchor` |
+| Prop       | Type                                                   | Default | Description                     |
+| ---------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof PopoverPrimitive.Anchor>` | —       | `PopoverPrimitive.Anchor` props |
 
 ### `PopoverContent`
 
-Rend `PopoverPrimitive.Content`.
+Renders `PopoverPrimitive.Content`.
 
-| Prop         | Type                                                    | Défaut     | Description                                                            |
-| ------------ | ------------------------------------------------------- | ---------- | ---------------------------------------------------------------------- |
-| `align`      | `"center" \| "end" \| "start"`                          | `"center"` | Alignement du contenu par rapport au trigger (sur `PopoverContent`)    |
-| `sideOffset` | `number`                                                | `4`        | Espacement en px entre le trigger et le popover (sur `PopoverContent`) |
-| `...props`   | `React.ComponentProps<typeof PopoverPrimitive.Content>` | —          | Props de `PopoverPrimitive.Content`                                    |
+| Prop         | Type                                                    | Default    | Description                                      |
+| ------------ | ------------------------------------------------------- | ---------- | ------------------------------------------------ |
+| `align`      | `"center" \| "end" \| "start"`                          | `"center"` | Alignment of the content against the trigger     |
+| `sideOffset` | `number`                                                | `4`        | Space between the trigger and the popover, in px |
+| `...props`   | `React.ComponentProps<typeof PopoverPrimitive.Content>` | —          | `PopoverPrimitive.Content` props                 |
 
 ### `PopoverDescription`
 
-Rend `<p>`.
+Renders `<p>`.
 
-| Prop       | Type                        | Défaut | Description            |
-| ---------- | --------------------------- | ------ | ---------------------- |
-| `...props` | `React.ComponentProps<"p">` | —      | Props natives de `<p>` |
+| Prop       | Type                        | Default | Description        |
+| ---------- | --------------------------- | ------- | ------------------ |
+| `...props` | `React.ComponentProps<"p">` | —       | Native `<p>` props |
 
 ### `PopoverHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `PopoverTitle`
 
-Rend `<h2>`, ou l'élément choisi par `as`.
+Renders `<h2>`, or the element chosen with `as`.
 
-| Prop       | Type                                           | Défaut | Description                                       |
-| ---------- | ---------------------------------------------- | ------ | ------------------------------------------------- |
-| `as`       | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6"` | `"h2"` | Niveau de titre rendu ; ne change pas l'apparence |
-| `...props` | `React.ComponentProps<"h2">`                   | —      | Props natives de `<h2>`                           |
+| Prop       | Type                                           | Default | Description                                            |
+| ---------- | ---------------------------------------------- | ------- | ------------------------------------------------------ |
+| `as`       | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6"` | `"h2"`  | Heading level rendered; does not change the appearance |
+| `...props` | `React.ComponentProps<"h2">`                   | —       | Native `<h2>` props                                    |
 
 ### `PopoverTrigger`
 
-Rend `PopoverPrimitive.Trigger`.
+Renders `PopoverPrimitive.Trigger`.
 
-| Prop       | Type                                                    | Défaut | Description                         |
-| ---------- | ------------------------------------------------------- | ------ | ----------------------------------- |
-| `...props` | `React.ComponentProps<typeof PopoverPrimitive.Trigger>` | —      | Props de `PopoverPrimitive.Trigger` |
+| Prop       | Type                                                    | Default | Description                      |
+| ---------- | ------------------------------------------------------- | ------- | -------------------------------- |
+| `...props` | `React.ComponentProps<typeof PopoverPrimitive.Trigger>` | —       | `PopoverPrimitive.Trigger` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                                  |
+| State    | Description                                                                  |
 | -------- | ---------------------------------------------------------------------------- |
-| default  | Popover fermé, trigger en attente de clic                                    |
-| open     | Contenu affiché avec animation `fade-in` + `zoom-in-95` + slide directionnel |
-| closing  | Animation de sortie `fade-out` + `zoom-out-95`                               |
-| focus    | Le focus peut naviguer dans le contenu du popover                            |
-| disabled | N/A — géré au niveau du trigger parent                                       |
+| default  | Popover closed; the trigger waits for a click                                |
+| open     | Content shown, animated with `fade-in`, `zoom-in-95` and a directional slide |
+| closing  | Exit animation: `fade-out` and `zoom-out-95`                                 |
+| focus    | Focus can move through the popover's content                                 |
+| disabled | N/A — handled at the parent trigger                                          |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Dialog (non modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Popover)
+**Pattern**: [Dialog (non-modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Popover)
 
-**Rôle** : Le contenu porte `role="dialog"` ; le déclencheur `aria-haspopup="dialog"` et `aria-expanded`.
+**Role**: The content carries `role="dialog"`; the trigger carries `aria-haspopup="dialog"` and `aria-expanded`.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche            | Action                                |
-| ----------------- | ------------------------------------- |
-| `Enter` / `Space` | Ouvre le popover                      |
-| `Tab`             | Parcourt le contenu (focus non piégé) |
-| `Escape`          | Ferme et rend le focus au déclencheur |
+| Key               | Action                                           |
+| ----------------- | ------------------------------------------------ |
+| `Enter` / `Space` | Opens the popover                                |
+| `Tab`             | Moves through the content (focus is not trapped) |
+| `Escape`          | Closes it and returns focus to the trigger       |
 
-**Nom accessible** : Le déclencheur doit être nommé ; donner un titre ou un `aria-label` au contenu s'il n'est pas évident.
+**Accessible name**: The trigger must be named; give the content a title or an `aria-label` when its purpose is not obvious.
 
-**Vigilance** :
+**Pitfalls**:
 
-- Non modal : le reste de la page reste atteignable. Pour une décision bloquante, utiliser `Dialog`.
+- Non-modal: the rest of the page stays reachable. For a blocking decision, use `Dialog`.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -190,25 +190,25 @@ export default function Example() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline">Paramètres</Button>
+        <Button variant="outline">Settings</Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverHeader>
           <PopoverTitle>Dimensions</PopoverTitle>
           <PopoverDescription>
-            Configurez les dimensions du composant.
+            Set the dimensions of the component.
           </PopoverDescription>
         </PopoverHeader>
-        {/* Contenu interactif (inputs, sliders, etc.) */}
+        {/* Interactive content (inputs, sliders…) */}
       </PopoverContent>
     </Popover>
   )
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `HoverCard` — carte flottante déclenchée au survol (non interactive)
-- `DropdownMenu` — menu d'actions déclenché par un clic
-- `Tooltip` — info-bulle légère pour un texte d'aide court
-- `Dialog` — modale centrée pour du contenu plus complexe
+- `HoverCard` — a floating card opened on hover (not interactive)
+- `DropdownMenu` — a menu of actions opened by a click
+- `Tooltip` — a light hint for short help text
+- `Dialog` — a centered modal for more complex content

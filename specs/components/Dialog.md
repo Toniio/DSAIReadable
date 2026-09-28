@@ -2,65 +2,65 @@
 
 ## Metadata
 
-| Champ         | Valeur                   |
+| Field         | Value                    |
 | ------------- | ------------------------ |
-| Nom           | Dialog                   |
-| Catégorie     | Overlay                  |
-| Statut        | stable                   |
+| Name          | Dialog                   |
+| Category      | Overlay                  |
+| Status        | stable                   |
 | figma_node_id |                          |
 | code_path     | components/ui/dialog.tsx |
 
-## Rôle
+## Role
 
-Fenêtre modale polyvalente pour afficher du contenu interactif (formulaire, détail, confirmation) au-dessus de l'interface principale.
+A general-purpose modal window that shows interactive content — a form, details, a confirmation — above the main interface.
 
 ## Usage
 
-- Afficher un formulaire de création ou d'édition sans quitter la page
-- Présenter des détails complémentaires dans une fenêtre superposée
-- Demander une saisie utilisateur avant de poursuivre un flux
-- Afficher un contenu riche nécessitant une attention focalisée
-- Alternative desktop aux écrans plein-écran sur mobile
+- Show a create or edit form without leaving the page
+- Present additional details in an overlaid window
+- Ask the user for input before a flow continues
+- Show rich content that needs the user's full attention
+- The desktop counterpart of full-screen views on mobile
 
-<!-- rule-21 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-21: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-21`) — Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.
+- **Choice** (`rule-21`) — Pick the surface from how much it blocks and how long its content is. A blocking decision (confirm, destroy): `AlertDialog`. A short task with no inner scrolling: `Dialog`. Long content or side context: `Sheet` from `md` up, `Drawer` below — **unless** it is side navigation, which stays a `Sheet` at every width (this is what `Sidebar` does below `md`). Anchored, non-blocking content with no scrolling and at most 3 fields: `Popover`. An informative preview on hover, from `md` up: `HoverCard`. A one-line, non-interactive label of at most 80 characters: `Tooltip`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`
-- **MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois
-- **MUST** — rendre un `DialogTitle` : c'est le nom annoncé par les lecteurs d'écran
-- **MUST NOT** — contenir un contenu qui impose un défilement interne → `Sheet` à partir de `md`, `Drawer` en dessous (`rule-21`), ou une page dédiée
-- **MUST** — garder un moyen de fermer le dialogue quand `showCloseButton={false}` masque le bouton
-- **MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.dialog` via `closeLabel`
+- **MUST NOT** — carry a destructive confirmation → use `AlertDialog`
+- **MUST NOT** — open a `Dialog` on top of another: one visible at a time
+- **MUST** — render a `DialogTitle`: it is the name screen readers announce
+- **MUST NOT** — hold content that needs its own scrolling → `Sheet` from `md` up, `Drawer` below (`rule-21`), or a dedicated page
+- **MUST** — keep a way to close the dialog when `showCloseButton={false}` hides the button
+- **MUST** — in an interface that is not in English, translate `UI_STRINGS.dialog` through `closeLabel`
 
-## Dépendances
+## Dependencies
 
-- `Dialog` de `radix-ui` (primitives Root, Trigger, Portal, Overlay, Content, Close, Title, Description)
-- `Button` de `@/components/ui/button` (bouton de fermeture et bouton dans le footer)
-- `@phosphor-icons/react` — icône `XIcon` pour le bouton de fermeture
+- `Dialog` from `radix-ui` (Root, Trigger, Portal, Overlay, Content, Close, Title, Description)
+- `Button` from `@/components/ui/button` (the close button and the footer button)
+- `@phosphor-icons/react` — the `XIcon` of the close button
 
-## Anatomie
+## Anatomy
 
-| Slot                             | Rôle                                     |
-| -------------------------------- | ---------------------------------------- |
-| `data-slot="dialog"`             | Racine du composant                      |
-| `data-slot="dialog-trigger"`     | Élément déclencheur d'ouverture          |
-| `data-slot="dialog-portal"`      | Portail de rendu hors du DOM parent      |
-| `data-slot="dialog-overlay"`     | Fond semi-transparent avec backdrop-blur |
-| `data-slot="dialog-content"`     | Conteneur principal de la modale         |
-| `data-slot="dialog-close"`       | Bouton de fermeture (icône ×)            |
-| `data-slot="dialog-header"`      | Zone d'en-tête (titre + description)     |
-| `data-slot="dialog-footer"`      | Zone de pied (boutons d'action)          |
-| `data-slot="dialog-title"`       | Titre de la modale                       |
-| `data-slot="dialog-description"` | Description textuelle                    |
+| Slot                             | Role                                       |
+| -------------------------------- | ------------------------------------------ |
+| `data-slot="dialog"`             | Root                                       |
+| `data-slot="dialog-trigger"`     | Element that opens the dialog              |
+| `data-slot="dialog-portal"`      | Portal that renders outside the parent DOM |
+| `data-slot="dialog-overlay"`     | Semi-transparent backdrop with a blur      |
+| `data-slot="dialog-content"`     | The dialog's main container                |
+| `data-slot="dialog-close"`       | Close button (× icon)                      |
+| `data-slot="dialog-header"`      | Header area (title and description)        |
+| `data-slot="dialog-footer"`      | Footer area (action buttons)               |
+| `data-slot="dialog-title"`       | The dialog's title                         |
+| `data-slot="dialog-description"` | Descriptive text                           |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                            | Classes et variables                                                 | Où                                                                                                                  |
+| Token                            | Classes and variables                                                | Where                                                                                                               |
 | -------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `color.background.elevated`      | `bg-popover`                                                         | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                         |
 | `color.static.black`             | `bg-black/10`                                                        | `DialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                               |
@@ -74,139 +74,139 @@ Fenêtre modale polyvalente pour afficher du contenu interactif (formulaire, dé
 | `typography.size.xs`             | `text-xs/relaxed`                                                    | `DialogContent` · `DialogDescription`                                                                               |
 | `zindex.modal`                   | `z-modal`                                                            | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
 
-Relevé dans `components/ui/dialog.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/dialog.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
-Compose `Button` : les tokens de ce composant sont listés dans sa spec.
+Composes `Button` — its tokens are listed in its own spec.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Dialog`
 
-Rend `DialogPrimitive.Root`.
+Renders `DialogPrimitive.Root`.
 
-| Prop           | Type                                                | Défaut      | Description                                  |
+| Prop           | Type                                                | Default     | Description                                  |
 | -------------- | --------------------------------------------------- | ----------- | -------------------------------------------- |
-| `open`         | `boolean`                                           | `undefined` | Contrôle l'état ouvert/fermé (mode contrôlé) |
-| `onOpenChange` | `(open: boolean) => void`                           | —           | Callback lors du changement d'état           |
-| `...props`     | `React.ComponentProps<typeof DialogPrimitive.Root>` | —           | Props de `DialogPrimitive.Root`              |
+| `open`         | `boolean`                                           | `undefined` | Whether the dialog is open (controlled mode) |
+| `onOpenChange` | `(open: boolean) => void`                           | —           | Called when the dialog opens or closes       |
+| `...props`     | `React.ComponentProps<typeof DialogPrimitive.Root>` | —           | `DialogPrimitive.Root` props                 |
 
 ### `DialogClose`
 
-Rend `DialogPrimitive.Close`.
+Renders `DialogPrimitive.Close`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof DialogPrimitive.Close>` | —      | Props de `DialogPrimitive.Close` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Close>` | —       | `DialogPrimitive.Close` props |
 
 ### `DialogContent`
 
-Rend `DialogPrimitive.Content`.
+Renders `DialogPrimitive.Content`.
 
-| Prop              | Type                                                   | Défaut                    | Description                                                                |
-| ----------------- | ------------------------------------------------------ | ------------------------- | -------------------------------------------------------------------------- |
-| `showCloseButton` | `boolean`                                              | `true`                    | Affiche un bouton « Close » dans le footer (sur `DialogFooter`)            |
-| `closeLabel`      | `string`                                               | `UI_STRINGS.dialog.close` | Nom accessible du bouton de fermeture ; remplace la valeur de `UI_STRINGS` |
-| `...props`        | `React.ComponentProps<typeof DialogPrimitive.Content>` | —                         | Props de `DialogPrimitive.Content`                                         |
+| Prop              | Type                                                   | Default                   | Description                                                           |
+| ----------------- | ------------------------------------------------------ | ------------------------- | --------------------------------------------------------------------- |
+| `showCloseButton` | `boolean`                                              | `true`                    | Shows the close button in the top corner                              |
+| `closeLabel`      | `string`                                               | `UI_STRINGS.dialog.close` | Accessible name of the close button; overrides the `UI_STRINGS` value |
+| `...props`        | `React.ComponentProps<typeof DialogPrimitive.Content>` | —                         | `DialogPrimitive.Content` props                                       |
 
 ### `DialogDescription`
 
-Rend `DialogPrimitive.Description`.
+Renders `DialogPrimitive.Description`.
 
-| Prop       | Type                                                       | Défaut | Description                            |
-| ---------- | ---------------------------------------------------------- | ------ | -------------------------------------- |
-| `...props` | `React.ComponentProps<typeof DialogPrimitive.Description>` | —      | Props de `DialogPrimitive.Description` |
+| Prop       | Type                                                       | Default | Description                         |
+| ---------- | ---------------------------------------------------------- | ------- | ----------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Description>` | —       | `DialogPrimitive.Description` props |
 
 ### `DialogFooter`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop              | Type                          | Défaut                    | Description                                                                |
-| ----------------- | ----------------------------- | ------------------------- | -------------------------------------------------------------------------- |
-| `showCloseButton` | `boolean`                     | `false`                   | Affiche le bouton de fermeture                                             |
-| `closeLabel`      | `string`                      | `UI_STRINGS.dialog.close` | Nom accessible du bouton de fermeture ; remplace la valeur de `UI_STRINGS` |
-| `...props`        | `React.ComponentProps<"div">` | —                         | Props natives de `<div>`                                                   |
+| Prop              | Type                          | Default                   | Description                                                           |
+| ----------------- | ----------------------------- | ------------------------- | --------------------------------------------------------------------- |
+| `showCloseButton` | `boolean`                     | `false`                   | Shows a "Close" button in the footer                                  |
+| `closeLabel`      | `string`                      | `UI_STRINGS.dialog.close` | Accessible name of the close button; overrides the `UI_STRINGS` value |
+| `...props`        | `React.ComponentProps<"div">` | —                         | Native `<div>` props                                                  |
 
 ### `DialogHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop       | Type                          | Défaut | Description              |
-| ---------- | ----------------------------- | ------ | ------------------------ |
-| `...props` | `React.ComponentProps<"div">` | —      | Props natives de `<div>` |
+| Prop       | Type                          | Default | Description          |
+| ---------- | ----------------------------- | ------- | -------------------- |
+| `...props` | `React.ComponentProps<"div">` | —       | Native `<div>` props |
 
 ### `DialogOverlay`
 
-Rend `DialogPrimitive.Overlay`.
+Renders `DialogPrimitive.Overlay`.
 
-| Prop       | Type                                                   | Défaut | Description                        |
-| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
-| `...props` | `React.ComponentProps<typeof DialogPrimitive.Overlay>` | —      | Props de `DialogPrimitive.Overlay` |
+| Prop       | Type                                                   | Default | Description                     |
+| ---------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Overlay>` | —       | `DialogPrimitive.Overlay` props |
 
 ### `DialogPortal`
 
-Rend `DialogPrimitive.Portal`.
+Renders `DialogPrimitive.Portal`.
 
-| Prop       | Type                                                  | Défaut | Description                       |
-| ---------- | ----------------------------------------------------- | ------ | --------------------------------- |
-| `...props` | `React.ComponentProps<typeof DialogPrimitive.Portal>` | —      | Props de `DialogPrimitive.Portal` |
+| Prop       | Type                                                  | Default | Description                    |
+| ---------- | ----------------------------------------------------- | ------- | ------------------------------ |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Portal>` | —       | `DialogPrimitive.Portal` props |
 
 ### `DialogTitle`
 
-Rend `DialogPrimitive.Title`.
+Renders `DialogPrimitive.Title`.
 
-| Prop       | Type                                                 | Défaut | Description                      |
-| ---------- | ---------------------------------------------------- | ------ | -------------------------------- |
-| `...props` | `React.ComponentProps<typeof DialogPrimitive.Title>` | —      | Props de `DialogPrimitive.Title` |
+| Prop       | Type                                                 | Default | Description                   |
+| ---------- | ---------------------------------------------------- | ------- | ----------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Title>` | —       | `DialogPrimitive.Title` props |
 
 ### `DialogTrigger`
 
-Rend `DialogPrimitive.Trigger`.
+Renders `DialogPrimitive.Trigger`.
 
-| Prop       | Type                                                   | Défaut | Description                        |
-| ---------- | ------------------------------------------------------ | ------ | ---------------------------------- |
-| `...props` | `React.ComponentProps<typeof DialogPrimitive.Trigger>` | —      | Props de `DialogPrimitive.Trigger` |
+| Prop       | Type                                                   | Default | Description                     |
+| ---------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| `...props` | `React.ComponentProps<typeof DialogPrimitive.Trigger>` | —       | `DialogPrimitive.Trigger` props |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État     | Description                                                             |
-| -------- | ----------------------------------------------------------------------- |
-| default  | Modale fermée, aucun overlay visible                                    |
-| open     | Overlay affiché, contenu centré avec animation `fade-in` + `zoom-in-95` |
-| closing  | Animation de sortie `fade-out` + `zoom-out-95`                          |
-| focus    | Focus piégé à l'intérieur de la modale (focus trap Radix)               |
-| disabled | N/A — les contrôles internes gèrent leur propre état disabled           |
+| State    | Description                                                               |
+| -------- | ------------------------------------------------------------------------- |
+| default  | Dialog closed, no overlay                                                 |
+| open     | Overlay shown, content centered, animated with `fade-in` and `zoom-in-95` |
+| closing  | Exit animation: `fade-out` and `zoom-out-95`                              |
+| focus    | Focus trapped inside the dialog (Radix focus trap)                        |
+| disabled | N/A — the controls inside handle their own disabled state                 |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)
+**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)
 
-**Rôle** : `role="dialog"`, `aria-modal="true"` ; étiqueté par `DialogTitle`, décrit par `DialogDescription`.
+**Role**: `role="dialog"`, `aria-modal="true"`; labelled by `DialogTitle`, described by `DialogDescription`.
 
-**Clavier** :
+**Keyboard**:
 
-| Touche              | Action                                                      |
+| Key                 | Action                                                      |
 | ------------------- | ----------------------------------------------------------- |
-| `Tab` / `Shift+Tab` | Parcourt les éléments focalisables, piégés dans le dialogue |
-| `Escape`            | Ferme le dialogue                                           |
+| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the dialog |
+| `Escape`            | Closes the dialog                                           |
 
-**Nom accessible** : `DialogTitle` est obligatoire (Radix avertit en son absence) ; le masquer visuellement si besoin, jamais le supprimer. Le bouton de fermeture est nommé par `closeLabel` (`UI_STRINGS.dialog.close`).
+**Accessible name**: `DialogTitle` is required (Radix warns when it is missing); hide it visually if you must, never remove it. The close button is named by `closeLabel` (`UI_STRINGS.dialog.close`).
 
-**Vigilance** :
+**Pitfalls**:
 
-- À la fermeture, le focus revient au déclencheur : ne pas démonter le déclencheur pendant que le dialogue est ouvert.
-- La surface elle-même n'affiche pas d'anneau de focus (`focus-managed`) : le focus va sur un contrôle à l'intérieur.
+- On close, focus returns to the trigger: do not unmount the trigger while the dialog is open.
+- The surface itself shows no focus ring (`focus-managed`): focus goes to a control inside it.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -224,18 +224,18 @@ export default function Example() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Modifier le profil</Button>
+        <Button>Edit profile</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Modifier le profil</DialogTitle>
+          <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
-            Modifiez vos informations personnelles ci-dessous.
+            Update your personal details below.
           </DialogDescription>
         </DialogHeader>
-        {/* Contenu du formulaire */}
+        {/* Form fields */}
         <DialogFooter>
-          <Button type="submit">Enregistrer</Button>
+          <Button type="submit">Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -243,9 +243,9 @@ export default function Example() {
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `AlertDialog` — pour les confirmations bloquantes nécessitant une réponse obligatoire
-- `Sheet` — panneau latéral pour du contenu étendu ou des formulaires longs
-- `Drawer` — alternative mobile au Dialog, panneau glissant depuis un bord
-- `Button` — utilisé en interne pour le bouton de fermeture
+- `AlertDialog` — for blocking confirmations that require an answer
+- `Sheet` — a side panel for long content or long forms
+- `Drawer` — the mobile alternative to Dialog, a panel that slides in from an edge
+- `Button` — used internally for the close button

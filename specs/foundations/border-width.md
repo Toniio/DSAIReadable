@@ -2,28 +2,28 @@
 
 > Source: `tokens/semantic.json` (`border-width.*`) · CSS variables: `tokens.css` Layer 2
 
-Deux largeurs de bordure, et pas davantage : une bordure du design system est un
-filet d'un pixel, sauf un cas nommé. Le pont `@theme` de `app/globals.css` branche
-les tokens sur Tailwind — un `border` nu lit `--border-width-default`.
+Two border widths, and no more: a design-system border is a one-pixel hairline,
+except in one named case. The `@theme` bridge in `app/globals.css` wires the
+tokens into Tailwind — a bare `border` reads `--border-width-default`.
 
 ---
 
 ## Token Reference
 
-| Token                          | Variable CSS                     | Valeur | Classe Tailwind                               | Cas d'usage                                        |
-| ------------------------------ | -------------------------------- | ------ | --------------------------------------------- | -------------------------------------------------- |
-| `border-width.default`         | `--border-width-default`         | 1px    | `border`, `border-t`, `border-x`, `divide-y`… | Toute bordure : champs, cards, séparateurs, tables |
-| `border-width.chart-indicator` | `--border-width-chart-indicator` | 1.5px  | `border-chart-indicator`                      | Trait pointillé de l'indicateur de série (Chart)   |
+| Token                          | CSS variable                     | Value | Tailwind class                                | Use                                             |
+| ------------------------------ | -------------------------------- | ----- | --------------------------------------------- | ----------------------------------------------- |
+| `border-width.default`         | `--border-width-default`         | 1px   | `border`, `border-t`, `border-x`, `divide-y`… | Every border: inputs, cards, separators, tables |
+| `border-width.chart-indicator` | `--border-width-chart-indicator` | 1.5px | `border-chart-indicator`                      | Dashed stroke of the series indicator (Chart)   |
 
-L'anneau de focus n'est pas une bordure : sa largeur est `space.focus-ring-width`,
-appliquée par les presets de `lib/focus` (voir [focus.md](./focus.md)).
+The focus ring is not a border: its width is `space.focus-ring-width`, applied
+by the `lib/focus` presets (see [focus.md](./focus.md)).
 
 ---
 
 ## Usage Rules
 
-- ✅ Écrire `border` (ou `border-t`, `border-b`…) : la largeur vient du token `border-width.default`
-- ✅ Retirer une bordure avec `border-0` / `border-t-0` — une remise à zéro n'est pas une valeur
-- ✅ Ajouter un token `border-width.*` nommé par son rôle quand un composant a réellement besoin d'une autre largeur
-- ❌ Ne jamais écrire de largeur en dur : `border-2`, `border-[1.5px]`, `border-(length:3px)` — `npm run tokens:lint-values` les refuse
-- ❌ Ne pas utiliser `border-none` pour retirer une bordure : c'est le **style** de bordure, pas sa largeur
+- ✅ Write `border` (or `border-t`, `border-b`…): the width comes from the `border-width.default` token
+- ✅ Remove a border with `border-0` / `border-t-0` — a reset to zero is not a value
+- ✅ Add a `border-width.*` token named after its role when a component genuinely needs another width
+- ❌ Never hard-code a width: `border-2`, `border-[1.5px]`, `border-(length:3px)` — `npm run tokens:lint-values` rejects them
+- ❌ Do not use `border-none` to remove a border: it sets the border **style**, not its width

@@ -1,211 +1,211 @@
 {
   "general_rules": [
     {
-      "rule": "✅ Écrire `border` (ou `border-t`, `border-b`…) : la largeur vient du token `border-width.default`",
+      "rule": "✅ Write `border` (or `border-t`, `border-b`…): the width comes from the `border-width.default` token",
       "source": "border-width.md"
     },
     {
-      "rule": "✅ Retirer une bordure avec `border-0` / `border-t-0` — une remise à zéro n'est pas une valeur",
+      "rule": "✅ Remove a border with `border-0` / `border-t-0` — a reset to zero is not a value",
       "source": "border-width.md"
     },
     {
-      "rule": "✅ Ajouter un token `border-width.*` nommé par son rôle quand un composant a réellement besoin d'une autre largeur",
+      "rule": "✅ Add a `border-width.*` token named after its role when a component genuinely needs another width",
       "source": "border-width.md"
     },
     {
-      "rule": "❌ Ne jamais écrire de largeur en dur : `border-2`, `border-[1.5px]`, `border-(length:3px)` — `npm run tokens:lint-values` les refuse",
+      "rule": "❌ Never hard-code a width: `border-2`, `border-[1.5px]`, `border-(length:3px)` — `npm run tokens:lint-values` rejects them",
       "source": "border-width.md"
     },
     {
-      "rule": "❌ Ne pas utiliser `border-none` pour retirer une bordure : c'est le **style** de bordure, pas sa largeur",
+      "rule": "❌ Do not use `border-none` to remove a border: it sets the border **style**, not its width",
       "source": "border-width.md"
     },
     {
-      "rule": "✅ Écrire la version mobile sans préfixe, puis ajouter `sm:` / `md:` / `lg:` pour les écrans plus larges",
+      "rule": "✅ Write the mobile version without a prefix, then add `sm:` / `md:` / `lg:` for wider screens",
       "source": "breakpoints.md"
     },
     {
-      "rule": "✅ Choisir le premier breakpoint où la mise en page casse, pas un appareil précis",
+      "rule": "✅ Pick the first breakpoint at which the layout breaks, not a specific device",
       "source": "breakpoints.md"
     },
     {
-      "rule": "❌ Ne jamais écrire de breakpoint arbitraire (`min-[600px]:`, `max-[900px]:`) — seuls les préfixes du tableau existent",
+      "rule": "❌ Never write an arbitrary breakpoint (`min-[600px]:`, `max-[900px]:`) — only the prefixes in the table exist",
       "source": "breakpoints.md"
     },
     {
-      "rule": "❌ Ne jamais lire `var(--breakpoint-*)` dans une media query : elle ne résout pas les variables",
+      "rule": "❌ Never read `var(--breakpoint-*)` inside a media query: media queries do not resolve variables",
       "source": "breakpoints.md"
     },
     {
-      "rule": "❌ Ne pas modifier une valeur de `breakpoint.*` sans déclarer la même valeur, en littéral, dans le `@theme` de `app/globals.css` — le lint du pont le rappelle",
+      "rule": "❌ Do not change a `breakpoint.*` value without declaring the same value, as a literal, in the `@theme` of `app/globals.css` — the bridge lint will remind you",
       "source": "breakpoints.md"
     },
     {
-      "rule": "✅ `background.default` — fond de `<html>` et des conteneurs racines.",
+      "rule": "✅ `background.default` — the background of `<html>` and of root containers.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser `background.default` pour les cards — préférer `background.subtle`.",
+      "rule": "❌ Do not use `background.default` for cards — use `background.subtle`.",
       "source": "color.md"
     },
     {
-      "rule": "✅ `background.elevated` pour tout élément qui flotte au-dessus du contenu (menu, dialog).",
+      "rule": "✅ `background.elevated` for anything that floats above the content (a menu, a dialog).",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser `background.elevated` pour une card inline — ce n'est pas une surface flottante.",
+      "rule": "❌ Do not use `background.elevated` for an inline card — it is not a floating surface.",
       "source": "color.md"
     },
     {
-      "rule": "✅ `text.subtle` pour les labels de champs, placeholders visibles, metadata.",
+      "rule": "✅ `text.subtle` for field labels, visible placeholders, metadata.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser `text.default` avec une opacité réduite pour simuler `text.subtle` — utiliser le token dédié.",
+      "rule": "❌ Do not dim `text.default` with opacity to fake `text.subtle` — use the dedicated token.",
       "source": "color.md"
     },
     {
-      "rule": "✅ `text.action.on` uniquement sur fond `color.action.background.default`.",
+      "rule": "✅ `text.action.on` only on a `color.action.background.default` background.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser `text.destructive.default` pour des avertissements — c'est réservé aux erreurs.",
+      "rule": "❌ Do not use `text.destructive.default` for warnings — it is reserved for errors.",
       "source": "color.md"
     },
     {
-      "rule": "✅ `border.input` pour toutes les bordures de `<input>`, `<select>`, `<textarea>`.",
+      "rule": "✅ `border.input` for every `<input>`, `<select>` and `<textarea>` border.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser `border.focus` au repos ou au hover — uniquement pour l'état `:focus-visible`.",
+      "rule": "❌ Do not use `border.focus` at rest or on hover — only for the `:focus-visible` state.",
       "source": "color.md"
     },
     {
-      "rule": "✅ `border.subtle` pour les dividers entre sections d'une page.",
+      "rule": "✅ `border.subtle` for dividers between the sections of a page.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas mélanger `border.default` et `border.subtle` dans le même composant.",
+      "rule": "❌ Do not mix `border.default` and `border.subtle` in the same component.",
       "source": "color.md"
     },
     {
-      "rule": "✅ `icon.action` uniquement à l'intérieur d'un bouton primaire ou d'un badge d'action.",
+      "rule": "✅ `icon.action` only inside a primary button or an action badge.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser `icon.default` pour une icône à l'intérieur d'un bouton primaire — utiliser `icon.action`.",
+      "rule": "❌ Do not use `icon.default` for an icon inside a primary button — use `icon.action`.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Toujours associer `action.background.default` avec `action.background.foreground` pour le texte.",
+      "rule": "✅ Always pair `action.background.default` with `action.background.foreground` for the text.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser ces tokens pour les variantes `secondary`, `ghost` ou `outline`.",
+      "rule": "❌ Do not use these tokens for the `secondary`, `ghost` or `outline` variants.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Utiliser pour les messages de validation d'erreur et les bordures de champs invalides.",
+      "rule": "✅ Use them for validation error messages and for the borders of invalid fields.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Sur un fond d'erreur plein, toujours employer `color.feedback.error.foreground` (alias shadcn `--destructive-foreground`).",
+      "rule": "✅ On a solid error background, always use `color.feedback.error.foreground` (shadcn alias `--destructive-foreground`).",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas utiliser pour les avertissements (warning) ou les succès — des tokens dédiés seront ajoutés.",
+      "rule": "❌ Do not use them for warnings or successes — dedicated tokens will be added.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne jamais poser de blanc en dur sur une surface d'erreur : en dark, blanc sur red.500 tombe à 2.89:1.",
+      "rule": "❌ Never put hard-coded white on an error surface: in dark mode, white on red.500 drops to 2.89:1.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Catégories sans ordre : `chart-1` à `chart-5`, dans l'ordre, sans en sauter.",
+      "rule": "✅ Unordered categories: `chart-1` to `chart-5`, in order, skipping none.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Doubler la couleur d'un libellé ou d'une légende : la couleur seule ne porte jamais le sens.",
+      "rule": "✅ Back every color up with a label or a legend: color alone never carries meaning.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Données ordonnées : `color.chart.sequential.*`, du plus clair (valeur faible) au plus foncé.",
+      "rule": "✅ Ordered data: `color.chart.sequential.*`, from lightest (low value) to darkest.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne jamais utiliser la palette séquentielle pour des catégories : ses pas se confondent.",
+      "rule": "❌ Never use the sequential palette for categories: its steps blur together.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas employer une couleur de série pour du texte ou un état (positif, négatif) : ce ne sont pas des couleurs de feedback.",
+      "rule": "❌ Do not use a series color for text or for a state (positive, negative): these are not feedback colors.",
       "source": "color.md"
     },
     {
-      "rule": "✅ `bg-black/10` pour le voile d'une modale : il assombrit pareil dans les deux modes.",
+      "rule": "✅ `bg-black/10` for a modal's scrim: it darkens the same way in both modes.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Ne pas employer `static.*` pour une surface ou un texte courant : le mode sombre ne s'appliquerait pas — utiliser `background.*` / `text.*`.",
+      "rule": "❌ Do not use `static.*` for a regular surface or text: dark mode would not apply — use `background.*` / `text.*`.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Lire toute chaîne par défaut depuis `UI_STRINGS`, jamais en littéral dans le JSX",
+      "rule": "✅ Read every default string from `UI_STRINGS`, never as a literal in the JSX",
       "source": "content.md"
     },
     {
-      "rule": "✅ Exposer une prop de surcharge pour chaque chaîne qu'un composant rend",
+      "rule": "✅ Expose an override prop for every string a component renders",
       "source": "content.md"
     },
     {
-      "rule": "✅ Écrire les défauts en anglais ; fournir les autres locales par props",
+      "rule": "✅ Write the defaults in English; supply the other locales through props",
       "source": "content.md"
     },
     {
-      "rule": "❌ Ne jamais coder en dur un `aria-label`, un `title` ou un texte `sr-only` dans un composant",
+      "rule": "❌ Never hard-code an `aria-label`, a `title` or `sr-only` text in a component",
       "source": "content.md"
     },
     {
-      "rule": "❌ Ne jamais mélanger deux langues dans les défauts — `npm run index:strings` échoue sur tout littéral",
+      "rule": "❌ Never mix two languages in the defaults — `npm run index:strings` fails on any literal",
       "source": "content.md"
     },
     {
-      "rule": "✅ Le token, sous la variante de l'état",
+      "rule": "✅ The token, under the state's variant",
       "source": "opacity.md"
     },
     {
-      "rule": "❌ Même rendu, mais le token n'y est plus : ESLint refuse",
+      "rule": "❌ Same rendering, but the token is gone: ESLint rejects it",
       "source": "opacity.md"
     },
     {
-      "rule": "❌ Valeur en dur",
+      "rule": "❌ Hard-coded value",
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Via Tailwind",
+      "rule": "✅ Through Tailwind",
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Via CSS",
+      "rule": "✅ Through CSS",
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Backdrop de modal",
+      "rule": "✅ Modal backdrop",
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Card standard",
+      "rule": "✅ Standard card",
       "source": "radius.md"
     },
     {
-      "rule": "✅ Bouton default",
+      "rule": "✅ Default button",
       "source": "radius.md"
     },
     {
-      "rule": "✅ Badge pilule",
+      "rule": "✅ Pill badge",
       "source": "radius.md"
     },
     {
-      "rule": "✅ Table cell — pas de radius",
+      "rule": "✅ Table cell — no radius",
       "source": "radius.md"
     },
     {
@@ -215,419 +215,419 @@
   ],
   "component_rules": {
     "Accordion": [
-      "**MUST NOT** — porter un contenu critique qui doit rester visible en permanence",
-      "**MUST NOT** — imbriquer un `Accordion` dans un autre : un seul niveau",
-      "**MUST** — donner au trigger un texte explicite, jamais une icône seule",
-      "**Note** — l'état `disabled` d'un trigger supprime les événements pointer et applique `opacity-disabled`",
-      "**MUST NOT** — servir de navigation principale → utiliser `NavigationMenu` ou `Tabs`"
+      "**MUST NOT** — hold critical content that has to stay visible at all times",
+      "**MUST NOT** — nest an `Accordion` inside another: one level only",
+      "**MUST** — give each trigger explicit text, never an icon alone",
+      "**Note** — a disabled trigger drops pointer events and applies `opacity-disabled`",
+      "**MUST NOT** — serve as primary navigation → use `NavigationMenu` or `Tabs`"
     ],
     "Alert": [
-      "**MUST NOT** — afficher un message éphémère (toast) → utiliser `Sonner`",
-      "**MUST NOT** — servir de dialogue bloquant → utiliser `AlertDialog`",
-      "**MUST NOT** — placer plus d'une `Alert` par section de page",
-      "**MUST NOT** — ajouter un second `role=\"alert\"` dans les enfants : la racine le porte déjà",
-      "**MUST NOT** — placer un contenu de largeur variable dans `AlertAction`, positionné en absolu en haut à droite"
+      "**MUST NOT** — show a transient message (toast) → use `Sonner`",
+      "**MUST NOT** — act as a blocking dialog → use `AlertDialog`",
+      "**MUST NOT** — place more than one `Alert` per page section",
+      "**MUST NOT** — add a second `role=\"alert\"` among the children: the root already carries it",
+      "**MUST NOT** — put variable-width content in `AlertAction`, which is absolutely positioned at the top right"
     ],
     "AlertDialog": [
-      "**MUST NOT** — servir à un simple message d'information → utiliser `Dialog`, ou `Sonner` pour une notification",
-      "**MUST NOT** — ouvrir un `AlertDialog` par-dessus un autre : un seul visible à la fois",
-      "**MUST** — proposer un bouton d'annulation (`AlertDialogCancel`)",
-      "**MUST NOT** — réimplémenter le piège à focus : Radix le fournit",
-      "**MUST** — rendre un `AlertDialogTitle` : c'est le nom annoncé par les lecteurs d'écran"
+      "**MUST NOT** — carry a plain informational message → use `Dialog`, or `Sonner` for a notification",
+      "**MUST NOT** — open an `AlertDialog` on top of another: one visible at a time",
+      "**MUST** — offer a cancel button (`AlertDialogCancel`)",
+      "**MUST NOT** — re-implement the focus trap: Radix provides it",
+      "**MUST** — render an `AlertDialogTitle`: it is the name screen readers announce"
     ],
     "AspectRatio": [
-      "**MUST NOT** — contenir du texte libre : il serait tronqué ou déborderait",
-      "**MUST** — remplir le cadre avec un enfant en `absolute` (`size-full`) ou un média en `object-cover`",
-      "**MUST** — passer un seul enfant direct ; envelopper plusieurs éléments dans un conteneur"
+      "**MUST NOT** — hold free-flowing text: it would be clipped or overflow",
+      "**MUST** — fill the frame with an `absolute` child (`size-full`) or an `object-cover` media element",
+      "**MUST** — pass a single direct child; wrap several elements in a container"
     ],
     "Avatar": [
-      "**MUST** — fournir un `AvatarFallback`, affiché si l'image manque",
-      "**MUST NOT** — utiliser `AvatarBadge` sans `aria-label` qui dit ce qu'il signale",
-      "**MUST** — donner un `alt` descriptif à `AvatarImage`",
-      "**MUST NOT** — afficher plus de 4 avatars dans un `AvatarGroup` : au-delà, montrer les 3 premiers et le reste dans `AvatarGroupCount`"
+      "**MUST** — provide an `AvatarFallback`, shown when the image is missing",
+      "**MUST NOT** — use `AvatarBadge` without an `aria-label` that says what it signals",
+      "**MUST** — give `AvatarImage` a descriptive `alt`",
+      "**MUST NOT** — show more than 4 avatars in an `AvatarGroup`: beyond that, show the first 3 and put the rest in `AvatarGroupCount`"
     ],
     "Badge": [
-      "**MUST NOT** — servir de bouton d'action → utiliser `Button` avec `size=\"xs\"`",
-      "**MUST NOT** — dépasser trois mots de texte",
-      "**MUST** — réserver la variante `destructive` aux statuts d'erreur ou d'alerte critique",
-      "**MUST NOT** — contenir d'élément interactif",
-      "**MUST** — vérifier le contraste des variantes `ghost` et `link`, sans fond, sur chaque arrière-plan où elles apparaissent"
+      "**MUST NOT** — act as an action button → use `Button` with `size=\"xs\"`",
+      "**MUST NOT** — exceed three words of text",
+      "**MUST** — keep the `destructive` variant for error or critical-alert statuses",
+      "**MUST NOT** — contain an interactive element",
+      "**MUST** — check the contrast of the background-less `ghost` and `link` variants on every surface they appear on"
     ],
     "Breadcrumb": [
-      "**MUST NOT** — servir de navigation principale : c'est un repère contextuel",
-      "**MUST** — placer un seul `Breadcrumb` par page, en haut du contenu principal",
-      "**MUST NOT** — rendre le dernier élément (`BreadcrumbPage`) cliquable",
-      "**Note** — les séparateurs et l'ellipsis sont masqués aux lecteurs d'écran (`aria-hidden`)",
-      "**MUST NOT** — remplacer l'`aria-label=\"breadcrumb\"` de la racine, **sauf** pour le traduire",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire les chaînes de `UI_STRINGS.breadcrumb` (`srLabel` de `BreadcrumbEllipsis`)"
+      "**MUST NOT** — serve as primary navigation: it is a contextual landmark",
+      "**MUST** — place a single `Breadcrumb` per page, at the top of the main content",
+      "**MUST NOT** — make the last item (`BreadcrumbPage`) clickable",
+      "**Note** — separators and the ellipsis are hidden from screen readers (`aria-hidden`)",
+      "**MUST NOT** — replace the root's `aria-label=\"breadcrumb\"`, **unless** to translate it",
+      "**MUST** — in an interface that is not in English, translate the `UI_STRINGS.breadcrumb` strings (`srLabel` on `BreadcrumbEllipsis`)"
     ],
     "Button": [
-      "**MUST NOT** — rendre un `<button>` pour naviguer vers un site externe → un `<a href>`, via `asChild` pour garder l'apparence",
-      "**MUST NOT** — placer plus de 2 boutons `variant=\"default\"` (primaires) dans une même vue",
-      "**MUST NOT** — signaler un état par la couleur seule : ajouter un texte ou un tooltip",
-      "**MUST** — donner un `aria-label` à un bouton de taille `icon-*`",
-      "**MUST NOT** — imbriquer un `<button>` dans un autre, y compris via `asChild`"
+      "**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look",
+      "**MUST NOT** — place more than 2 `variant=\"default\"` (primary) buttons in the same view",
+      "**MUST NOT** — convey a state through color alone: add text or a tooltip",
+      "**MUST** — give an `icon-*` button an `aria-label`",
+      "**MUST NOT** — nest a `<button>` inside another, including through `asChild`"
     ],
     "ButtonGroup": [
-      "**MUST NOT** — grouper des actions sans lien logique → les espacer simplement (`flex gap-*`)",
-      "**MUST NOT** — grouper plus de 5 boutons",
-      "**MUST** — réserver `orientation=\"vertical\"` aux barres d'outils latérales",
-      "**MUST** — n'y placer que des enfants dont les bordures peuvent fusionner : les arrondis intermédiaires sont supprimés",
-      "**Note** — un groupe imbriqué (`has-[>[data-slot=button-group]]`) reçoit un `gap-2` automatique"
+      "**MUST NOT** — group unrelated actions → just space them out (`flex gap-*`)",
+      "**MUST NOT** — group more than 5 buttons",
+      "**MUST** — keep `orientation=\"vertical\"` for side toolbars",
+      "**MUST** — only hold children whose borders can merge: the inner corners are removed",
+      "**Note** — a nested group (`has-[>[data-slot=button-group]]`) automatically gets `gap-2`"
     ],
     "Calendar": [
-      "**MUST NOT** — servir d'agenda ou de planning (vues jour, semaine) : le design system n'en fournit pas",
-      "**MUST NOT** — afficher plus d'un `Calendar` par vue, **sauf** pour comparer deux plages de dates",
-      "**MUST** — placer le `Calendar` dans un conteneur (`Popover`, `Card`…) : il ne se positionne pas seul",
-      "**MUST** — garder visibles les jours désactivés (`opacity-disabled`, `aria-disabled`)",
-      "**MUST NOT** — neutraliser la navigation clavier (flèches entre les jours, Tab vers les contrôles)"
+      "**MUST NOT** — serve as a scheduler or planner (day or week views): the design system does not provide one",
+      "**MUST NOT** — show more than one `Calendar` per view, **unless** comparing two date ranges",
+      "**MUST** — place the `Calendar` inside a container (`Popover`, `Card`…): it does not position itself",
+      "**MUST** — keep disabled days visible (`opacity-disabled`, `aria-disabled`)",
+      "**MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)"
     ],
     "Card": [
-      "**MUST NOT** — imbriquer des `Card` sur plus d'un niveau : marquer la hiérarchie par un fond différent",
-      "**MUST NOT** — placer un contenu long dans `CardAction`, positionné en haut à droite de l'en-tête",
-      "**MUST NOT** — placer plus de 2 actions dans `CardFooter`",
-      "**MUST NOT** — poser `onClick` sur une `Card` : l'envelopper dans un `<a>` ou un `<button>` si elle est cliquable"
+      "**MUST NOT** — nest `Card`s more than one level deep: show hierarchy with a different background",
+      "**MUST NOT** — put long content in `CardAction`, which sits at the top right of the header",
+      "**MUST NOT** — place more than 2 actions in `CardFooter`",
+      "**MUST NOT** — put `onClick` on a `Card`: wrap it in an `<a>` or a `<button>` when it is clickable"
     ],
     "Carousel": [
-      "**MUST NOT** — porter un contenu critique, qui doit être visible sans interaction → une grille",
-      "**MUST NOT** — afficher plus d'un `Carousel` par vue : leurs navigations clavier entrent en conflit",
-      "**MUST NOT** — masquer les boutons précédent et suivant",
-      "**MUST** — donner au conteneur un `aria-label` descriptif",
-      "**MUST** — contenir un `CarouselContent` et au moins un `CarouselItem`",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire les chaînes de `UI_STRINGS.carousel` (`srLabel` de `CarouselPrevious` et `CarouselNext`)"
+      "**MUST NOT** — hold critical content that must be visible without interaction → use a grid",
+      "**MUST NOT** — show more than one `Carousel` per view: their keyboard navigation conflicts",
+      "**MUST NOT** — hide the previous and next buttons",
+      "**MUST** — give the container a descriptive `aria-label`",
+      "**MUST** — contain a `CarouselContent` and at least one `CarouselItem`",
+      "**MUST** — in an interface that is not in English, translate the `UI_STRINGS.carousel` strings (`srLabel` on `CarouselPrevious` and `CarouselNext`)"
     ],
     "Chart": [
-      "**MUST NOT** — présenter des données brutes à lire valeur par valeur → utiliser `Table`",
-      "**MUST** — passer à `ChartContainer` un `config` d'au moins une entrée",
-      "**Note** — dans `ChartConfig`, `theme` prime sur `color`",
-      "**MUST** — lire la couleur d'une série dans la variable `--color-<clé>` que `ChartStyle` injecte pour chaque clé de `config` (`fill=\"var(--color-revenue)\"`) ; ce n'est pas un token : sa valeur vient de `config`",
-      "**MUST NOT** — imbriquer des `ChartContainer` : un conteneur par graphique",
-      "**MUST** — accompagner le graphique d'un texte alternatif ou d'un tableau de données : les lecteurs d'écran ne lisent pas le SVG"
+      "**MUST NOT** — present raw data meant to be read value by value → use `Table`",
+      "**MUST** — pass `ChartContainer` a `config` with at least one entry",
+      "**Note** — in `ChartConfig`, `theme` takes precedence over `color`",
+      "**MUST** — read a series' color from the `--color-<key>` variable that `ChartStyle` injects for each `config` key (`fill=\"var(--color-revenue)\"`); it is not a token: its value comes from `config`",
+      "**MUST NOT** — nest `ChartContainer`s: one container per chart",
+      "**MUST** — pair the chart with alternative text or a data table: screen readers do not read the SVG"
     ],
     "Checkbox": [
-      "**MUST** — associer la case à un libellé visible : `Label` (`id` / `htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'elle porte une description ou un message d'erreur (`rule-09`)",
-      "**MUST NOT** — servir à des choix mutuellement exclusifs → utiliser `RadioGroup`",
-      "**MUST NOT** — laisser la zone de clic étendue (`after:-inset-x-3 after:-inset-y-2`) chevaucher un contrôle voisin",
-      "**Note** — désactivée, la case n'est pas soumise avec le formulaire natif",
-      "**MUST NOT** — signaler un état par la couleur seule : ajouter une icône ou un texte"
+      "**MUST** — pair the checkbox with a visible label: `Label` (`id` / `htmlFor`), or `Field` with a `FieldLabel`; inside a `Field` as soon as it has a description or an error message (`rule-09`)",
+      "**MUST NOT** — serve mutually exclusive choices → use `RadioGroup`",
+      "**MUST NOT** — let the enlarged hit area (`after:-inset-x-3 after:-inset-y-2`) overlap a neighboring control",
+      "**Note** — a disabled checkbox is not submitted with the native form",
+      "**MUST NOT** — convey a state through color alone: add an icon or text"
     ],
     "Collapsible": [
-      "**MUST NOT** — servir de navigation multi-niveaux → utiliser `Accordion`",
-      "**MUST** — rendre le trigger reconnaissable comme interactif (bouton ou lien)",
-      "**MUST NOT** — masquer un contenu nécessaire à la compréhension immédiate de la page",
-      "**MUST NOT** — gérer `aria-expanded` soi-même : Radix le fait"
+      "**MUST NOT** — serve as multi-level navigation → use `Accordion`",
+      "**MUST** — make the trigger recognizable as interactive (a button or a link)",
+      "**MUST NOT** — hide content the page needs to be understood at a glance",
+      "**MUST NOT** — manage `aria-expanded` yourself: Radix does it"
     ],
     "Combobox": [
-      "**MUST NOT** — servir pour 15 options ou moins sans recherche → `RadioGroup` jusqu'à 5, `Select` ou `NativeSelect` de 6 à 15 (`rule-20`)",
-      "**MUST** — rendre un `ComboboxEmpty` pour le cas « aucun résultat »",
-      "**MUST** — en multi-sélection, fournir un `anchor` (`useComboboxAnchor`) pour positionner le popup sous les chips",
-      "**MUST** — donner à chaque `ComboboxItem` une valeur unique",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire le nom accessible des trois boutons icon-only (trigger, clear, remove de chip) via `triggerLabel`, `clearLabel` et `removeLabel` : il est en anglais par défaut"
+      "**MUST NOT** — be used for 15 options or fewer without search → `RadioGroup` up to 5, `Select` or `NativeSelect` from 6 to 15 (`rule-20`)",
+      "**MUST** — render a `ComboboxEmpty` for the \"no results\" case",
+      "**MUST** — in multiple selection, provide an `anchor` (`useComboboxAnchor`) so the popup opens below the chips",
+      "**MUST** — give each `ComboboxItem` a unique value",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
+      "**MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they are in English by default"
     ],
     "Command": [
-      "**MUST NOT** — servir de simple champ de recherche → un `Input` qui filtre la liste",
-      "**MUST** — rendre un `CommandEmpty` pour le cas « aucun résultat »",
-      "**MUST** — brancher soi-même le raccourci clavier affiché par `CommandShortcut`, qui n'est qu'un libellé",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
-      "**MUST** — en mode dialog, renseigner `title` et `description` : rendus en `sr-only`, ils nomment le dialogue"
+      "**MUST NOT** — serve as a plain search field → an `Input` that filters the list",
+      "**MUST** — render a `CommandEmpty` for the \"no results\" case",
+      "**MUST** — wire up the keyboard shortcut that `CommandShortcut` displays yourself: it is only a label",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
+      "**MUST** — in dialog mode, set `title` and `description`: rendered `sr-only`, they name the dialog"
     ],
     "ContextMenu": [
-      "**MUST NOT** — servir de menu principal de navigation → utiliser `DropdownMenu`",
-      "**MUST** — ne proposer que des actions propres à l'élément ciblé : le menu remplace celui du navigateur",
-      "**Note** — un seul menu contextuel s'ouvre à la fois (géré par Radix)",
-      "**MUST** — rendre les mêmes actions accessibles au clavier (`Shift+F10` ou touche menu)",
-      "**MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)"
+      "**MUST NOT** — serve as the main navigation menu → use `DropdownMenu`",
+      "**MUST** — only offer actions that belong to the targeted element: the menu replaces the browser's own",
+      "**Note** — only one context menu opens at a time (Radix handles it)",
+      "**MUST** — make the same actions reachable from the keyboard (`Shift+F10` or the Menu key)",
+      "**MUST** — keep `disabled` items visible (`opacity-disabled`, `pointer-events-none`)"
     ],
     "Dialog": [
-      "**MUST NOT** — servir à une confirmation destructrice → utiliser `AlertDialog`",
-      "**MUST NOT** — ouvrir un `Dialog` par-dessus un autre : un seul visible à la fois",
-      "**MUST** — rendre un `DialogTitle` : c'est le nom annoncé par les lecteurs d'écran",
-      "**MUST NOT** — contenir un contenu qui impose un défilement interne → `Sheet` à partir de `md`, `Drawer` en dessous (`rule-21`), ou une page dédiée",
-      "**MUST** — garder un moyen de fermer le dialogue quand `showCloseButton={false}` masque le bouton",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.dialog` via `closeLabel`"
+      "**MUST NOT** — carry a destructive confirmation → use `AlertDialog`",
+      "**MUST NOT** — open a `Dialog` on top of another: one visible at a time",
+      "**MUST** — render a `DialogTitle`: it is the name screen readers announce",
+      "**MUST NOT** — hold content that needs its own scrolling → `Sheet` from `md` up, `Drawer` below (`rule-21`), or a dedicated page",
+      "**MUST** — keep a way to close the dialog when `showCloseButton={false}` hides the button",
+      "**MUST** — in an interface that is not in English, translate `UI_STRINGS.dialog` through `closeLabel`"
     ],
     "Direction": [
-      "**MUST NOT** — imbriquer des `DirectionProvider` de directions contradictoires",
-      "**MUST** — placer le `DirectionProvider` au-dessus de tous les composants Radix qui lisent la direction",
-      "**MUST** — garder l'attribut `dir` de `<html>` cohérent avec le `DirectionProvider`, qui ne le remplace pas",
-      "**Note** — composant utilitaire : il ne rend rien de visible",
-      "**Note** — **Seul composant du système sans `data-slot`** : il ne rend aucun nœud DOM propre, donc aucun élément ne peut porter l'attribut. L'exception est déclarée dans le code par `// no-data-slot:` et vérifiée par `npm run index:data-slot`. Cibler la direction via l'attribut `dir` que Radix pose sur les composants consommateurs"
+      "**MUST NOT** — nest `DirectionProvider`s with conflicting directions",
+      "**MUST** — place the `DirectionProvider` above every Radix component that reads the direction",
+      "**MUST** — keep the `dir` attribute of `<html>` consistent with the `DirectionProvider`, which does not replace it",
+      "**Note** — a utility component: it renders nothing visible",
+      "**Note** — **The only component in the system without a `data-slot`**: it renders no DOM node of its own, so no element can carry the attribute. The exception is declared in the code with `// no-data-slot:` and checked by `npm run index:data-slot`. Target the direction through the `dir` attribute Radix sets on the consuming components"
     ],
     "Drawer": [
-      "**MUST NOT** — servir sur desktop (`md` et plus) → utiliser `Dialog` ou `Sheet`",
-      "**MUST NOT** — dépasser 80vh de hauteur en direction `top` ou `bottom` (appliqué par défaut)",
-      "**MUST NOT** — ouvrir un `Drawer` par-dessus un autre : un seul visible à la fois",
-      "**MUST** — rendre un `DrawerTitle` : c'est le nom annoncé par les lecteurs d'écran",
-      "**MUST** — tester sur mobile un `Drawer` au contenu défilant : le geste de fermeture peut capter le défilement"
+      "**MUST NOT** — be used on desktop (`md` and up) → use `Dialog` or `Sheet`",
+      "**MUST NOT** — exceed 80vh in height in the `top` or `bottom` direction (applied by default)",
+      "**MUST NOT** — open a `Drawer` on top of another: one visible at a time",
+      "**MUST** — render a `DrawerTitle`: it is the name screen readers announce",
+      "**MUST** — test a `Drawer` with scrolling content on mobile: the close gesture can capture the scroll"
     ],
     "DropdownMenu": [
-      "**MUST NOT** — servir de menu contextuel au clic droit → utiliser `ContextMenu`",
-      "**MUST NOT** — servir de navigation principale → utiliser `NavigationMenu`",
-      "**Note** — un seul `DropdownMenu` s'ouvre à la fois (géré par Radix)",
-      "**MUST** — garder visibles les items `disabled` (`opacity-disabled`, `pointer-events-none`)",
-      "**Note** — le contenu prend par défaut la largeur du trigger (`w-(--radix-dropdown-menu-trigger-width)`)"
+      "**MUST NOT** — serve as a right-click context menu → use `ContextMenu`",
+      "**MUST NOT** — serve as primary navigation → use `NavigationMenu`",
+      "**Note** — only one `DropdownMenu` opens at a time (Radix handles it)",
+      "**MUST** — keep `disabled` items visible (`opacity-disabled`, `pointer-events-none`)",
+      "**Note** — the content takes the trigger's width by default (`w-(--radix-dropdown-menu-trigger-width)`)"
     ],
     "Empty": [
-      "**MUST NOT** — signaler une erreur serveur → utiliser `Alert` en `variant=\"destructive\"`",
-      "**MUST NOT** — afficher plus d'un `Empty` par vue",
-      "**MUST NOT** — placer dans `EmptyMedia` une information essentielle : le média est décoratif",
-      "**MUST NOT** — dépasser deux phrases de description ; la formuler autour de l'action à mener",
-      "**MUST** — `EmptyTitle` rend un `<h2>` : passer `as` (`\"h3\"`…) pour suivre la hiérarchie de la page — un niveau sous le titre de la section qui contient l'état vide. Ne pas styler via `as` : l'apparence est fixe"
+      "**MUST NOT** — report a server error → use an `Alert` with `variant=\"destructive\"`",
+      "**MUST NOT** — show more than one `Empty` per view",
+      "**MUST NOT** — put essential information in `EmptyMedia`: the media is decorative",
+      "**MUST NOT** — exceed two sentences of description; frame it around the action to take",
+      "**MUST** — `EmptyTitle` renders an `<h2>`: pass `as` (`\"h3\"`…) to follow the page's hierarchy — one level below the heading of the section that holds the empty state. Do not style through `as`: the look is fixed"
     ],
     "Field": [
-      "**MUST NOT** — imbriquer des `FieldSet` sur plus de 2 niveaux",
-      "**MUST** — poser `data-invalid` soi-même, selon la validation (serveur ou client) : `Field` ne valide rien",
-      "**MUST** — poser `aria-invalid` sur le contrôle lui-même : `Field` ne le propage pas",
-      "**MUST NOT** — utiliser `orientation=\"horizontal\"` dans une mise en page qui doit tenir sur mobile → `orientation=\"responsive\"`, qui passe en ligne quand son `FieldGroup` est assez large",
-      "**MUST** — placer un `Field` en `orientation=\"responsive\"` dans un `FieldGroup`, dont il lit la largeur (`@container/field-group`)",
-      "**MUST** — réserver `FieldLegend variant=\"legend\"` aux `<fieldset>` ; ailleurs, `variant=\"label\"`",
-      "**Note** — `FieldError` ne rend rien sans `children` ni `errors` non vide",
-      "**MUST** — utiliser `FieldLabel` pour associer un libellé à un contrôle (`htmlFor`) : `FieldTitle` n'est pas un `<label>`"
+      "**MUST NOT** — nest `FieldSet`s more than 2 levels deep",
+      "**MUST** — set `data-invalid` yourself, from the validation result (server or client): `Field` validates nothing",
+      "**MUST** — set `aria-invalid` on the control itself: `Field` does not pass it down",
+      "**MUST NOT** — use `orientation=\"horizontal\"` in a layout that has to fit on mobile → `orientation=\"responsive\"`, which switches to a row once its `FieldGroup` is wide enough",
+      "**MUST** — place a `Field` with `orientation=\"responsive\"` inside a `FieldGroup`, whose width it reads (`@container/field-group`)",
+      "**MUST** — keep `FieldLegend variant=\"legend\"` for `<fieldset>`s; everywhere else, `variant=\"label\"`",
+      "**Note** — `FieldError` renders nothing without `children` or a non-empty `errors`",
+      "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`"
     ],
     "Heading": [
-      "**MUST NOT** — sauter un niveau de titre (un `h3` sous un `h1`)",
-      "**MUST NOT** — placer plus d'un `h1` par page",
-      "**MUST** — n'utiliser `as` que si le niveau sémantique diffère du niveau visuel",
-      "**MUST NOT** — styler un titre à la main : passer par `level`"
+      "**MUST NOT** — skip a heading level (an `h3` under an `h1`)",
+      "**MUST NOT** — place more than one `h1` per page",
+      "**MUST** — only use `as` when the semantic level differs from the visual level",
+      "**MUST NOT** — style a heading by hand: go through `level`"
     ],
     "HoverCard": [
-      "**MUST NOT** — contenir des éléments interactifs (formulaires, boutons) → utiliser `Popover`",
-      "**MUST NOT** — servir seul sur mobile, où le survol n'existe pas : prévoir un accès au clic",
-      "**MUST NOT** — contenir une information indispensable : le contenu est un complément",
-      "**MUST NOT** — poser des `HoverCard` sur deux déclencheurs adjacents (liste dense) : le survol de l'un ouvre l'autre",
-      "**MUST NOT** — contenir un contenu critique que l'utilisateur doit voir"
+      "**MUST NOT** — contain interactive elements (forms, buttons) → use `Popover`",
+      "**MUST NOT** — be the only path on mobile, where hover does not exist: provide access on tap",
+      "**MUST NOT** — hold information the user cannot do without: its content is a supplement",
+      "**MUST NOT** — sit on two adjacent triggers (a dense list): hovering one opens the other",
+      "**MUST NOT** — hold critical content the user has to see"
     ],
     "Illustration": [
-      "**MUST** — fournir un `alt` descriptif : il alimente `role=\"img\"` et `aria-label`",
-      "**MUST** — remplacer ce placeholder par de vraies illustrations avant la production",
-      "**MUST NOT** — afficher une image de contenu → utiliser `<img>` ou `next/image`",
-      "**MUST** — fixer les dimensions via `className` : le conteneur n'en impose aucune",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire le texte alternatif par défaut (`UI_STRINGS.illustration`) via `alt`"
+      "**MUST** — provide a descriptive `alt`: it feeds `role=\"img\"` and `aria-label`",
+      "**MUST** — replace this placeholder with real illustrations before production",
+      "**MUST NOT** — display a content image → use `<img>` or `next/image`",
+      "**MUST** — set the dimensions through `className`: the container imposes none",
+      "**MUST** — in an interface that is not in English, translate the default alternative text (`UI_STRINGS.illustration`) through `alt`"
     ],
     "Input": [
-      "**MUST NOT** — servir à une saisie sur plusieurs lignes → utiliser `Textarea`",
-      "**MUST NOT** — servir à un choix parmi des valeurs fixes → utiliser `Select` ou `Checkbox`",
-      "**MUST NOT** — remplacer un `Label` visible par un `placeholder`",
-      "**MUST NOT** — mettre `autoFocus` sur plus d'un champ par vue",
-      "**Note** — désactivé, le champ affiche le curseur `not-allowed` et sa valeur n'est pas soumise"
+      "**MUST NOT** — take multi-line input → use `Textarea`",
+      "**MUST NOT** — offer a choice among fixed values → use `Select` or `Checkbox`",
+      "**MUST NOT** — replace a visible `Label` with a `placeholder`",
+      "**MUST NOT** — set `autoFocus` on more than one field per view",
+      "**Note** — when disabled, the field shows the `not-allowed` cursor and its value is not submitted"
     ],
     "InputGroup": [
-      "**MUST NOT** — servir sans `InputGroupInput` ou `InputGroupTextarea` en enfant direct",
-      "**MUST NOT** — mêler des addons `block-*` et `inline-*` dans un même groupe : les `block-*` passent la mise en page en colonne",
-      "**MUST** — poser `disabled` sur le champ enfant : le groupe n'en reflète que l'apparence (`has-disabled`)",
-      "**MUST** — utiliser `InputGroupButton` pour un bouton dans un addon",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
+      "**MUST NOT** — be used without an `InputGroupInput` or `InputGroupTextarea` as a direct child",
+      "**MUST NOT** — mix `block-*` and `inline-*` add-ons in the same group: `block-*` add-ons switch the layout to a column",
+      "**MUST** — set `disabled` on the child field: the group only mirrors its appearance (`has-disabled`)",
+      "**MUST** — use `InputGroupButton` for a button inside an add-on",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],
     "InputOtp": [
-      "**MUST NOT** — servir à une saisie libre ou de plus de 8 caractères : réservé aux codes de 4 à 8 caractères",
-      "**MUST** — donner à chaque `InputOTPSlot` l'`index` de sa position",
-      "**Note** — le `spellCheck` est désactivé par défaut : le navigateur ne propose pas de correction sur un code",
-      "**MUST NOT** — redéfinir les rôles ARIA : la bibliothèque `input-otp` les gère",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
+      "**MUST NOT** — take free text or more than 8 characters: it is meant for codes of 4 to 8 characters",
+      "**MUST** — give each `InputOTPSlot` the `index` of its position",
+      "**Note** — `spellCheck` is off by default: the browser offers no correction on a code",
+      "**MUST NOT** — redefine the ARIA roles: the `input-otp` library handles them",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],
     "Item": [
-      "**MUST** — rendre un `ItemTitle` dans chaque `Item`",
-      "**MUST NOT** — combiner les variantes `outline` et `muted`",
-      "**MUST** — réserver la taille `xs` aux menus contextuels, jamais une liste principale",
-      "**MUST NOT** — placer plus de 3 actions dans `ItemActions`",
-      "**MUST** — Placer chaque `Item` d'un `ItemGroup` en enfant direct (ou via `.map()`) : `ItemGroup` lui donne `role=\"listitem\"`. Un `Item` rendu par un composant intermédiaire n'est pas détecté — lui passer `role=\"listitem\"` explicitement"
+      "**MUST** — render an `ItemTitle` in every `Item`",
+      "**MUST NOT** — combine the `outline` and `muted` variants",
+      "**MUST** — keep the `xs` size for context menus, never a main list",
+      "**MUST NOT** — place more than 3 actions in `ItemActions`",
+      "**MUST** — place each `Item` of an `ItemGroup` as a direct child (or through `.map()`): `ItemGroup` gives it `role=\"listitem\"`. An `Item` rendered by an intermediate component is not detected — pass it `role=\"listitem\"` explicitly"
     ],
     "Kbd": [
-      "**MUST NOT** — servir à autre chose qu'une touche clavier",
-      "**MUST NOT** — ajouter un gestionnaire de clic : le composant est non interactif (`pointer-events-none`)",
-      "**MUST** — vérifier le contraste en thème sombre, sur le fond réel",
-      "**MUST** — doubler une touche symbolique (⌘, ⇧) d'un libellé textuel pour les lecteurs d'écran"
+      "**MUST NOT** — stand for anything but a keyboard key",
+      "**MUST NOT** — add a click handler: the component is not interactive (`pointer-events-none`)",
+      "**MUST** — check the contrast in the dark theme, on the actual background",
+      "**MUST** — pair a symbol key (⌘, ⇧) with a text label for screen readers"
     ],
     "Label": [
-      "**MUST NOT** — remplacer un `Label` par un `placeholder`",
-      "**MUST** — relier chaque `Label` à son contrôle (`htmlFor` ou `aria-labelledby`) ; aucun champ sans libellé visible",
-      "**MUST NOT** — servir de titre de section → utiliser `FieldLegend` ou `Heading`",
-      "**MUST NOT** — associer plus d'un `Label` à un contrôle"
+      "**MUST NOT** — replace a `Label` with a `placeholder`",
+      "**MUST** — tie every `Label` to its control (`htmlFor` or `aria-labelledby`); no field goes without a visible label",
+      "**MUST NOT** — serve as a section title → use `FieldLegend` or `Heading`",
+      "**MUST NOT** — tie more than one `Label` to a control"
     ],
     "Logo": [
-      "**MUST** — afficher le logo avec le composant `Logo`, jamais avec un SVG inséré à la main",
-      "**MUST NOT** — déformer les proportions : passer par `size`",
-      "**MUST** — placer le nom de marque à côté du `Logo` : il ne rend pas ses enfants",
-      "**MUST** — remplacer ce placeholder par les vrais assets de marque dès qu'ils existent"
+      "**MUST** — show the logo through the `Logo` component, never through a hand-inserted SVG",
+      "**MUST NOT** — distort its proportions: go through `size`",
+      "**MUST** — place the brand name next to the `Logo`: it does not render its children",
+      "**MUST** — replace this placeholder with the real brand assets as soon as they exist"
     ],
     "Menubar": [
-      "**MUST NOT** — servir de navigation de site → utiliser `NavigationMenu`",
-      "**MUST NOT** — imbriquer plus de 2 niveaux de sous-menus",
-      "**Note** — un item `disabled` est atténué (`opacity-disabled`) et non interactif (`pointer-events-none`)",
-      "**MUST** — réserver `variant=\"destructive\"` de `MenubarItem` aux actions irréversibles",
-      "**MUST** — brancher un handler réel pour chaque raccourci affiché par `MenubarShortcut`"
+      "**MUST NOT** — serve as site navigation → use `NavigationMenu`",
+      "**MUST NOT** — nest submenus more than 2 levels deep",
+      "**Note** — a `disabled` item is dimmed (`opacity-disabled`) and inert (`pointer-events-none`)",
+      "**MUST** — keep `variant=\"destructive\"` on `MenubarItem` for irreversible actions",
+      "**MUST** — wire a real handler for every shortcut `MenubarShortcut` displays"
     ],
     "NativeSelect": [
-      "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
-      "**Note** — le menu ouvert est dessiné par le navigateur et ne se stylise pas",
-      "**Note** — les options prennent les couleurs système (`Canvas`, `CanvasText`)",
-      "**Note** — `size` est une prop du composant, pas l'attribut natif de `<select>` : `\"sm\"` ou `\"default\"`",
-      "**MUST** — prévoir une `<option value=\"\">` vide comme placeholder"
+      "**MUST NOT** — be used when the list has to be filtered by typing → use `Combobox`",
+      "**Note** — the open menu is drawn by the browser and cannot be styled",
+      "**Note** — the options take the system colors (`Canvas`, `CanvasText`)",
+      "**Note** — `size` is a prop of the component, not the native `<select>` attribute: `\"sm\"` or `\"default\"`",
+      "**MUST** — provide an empty `<option value=\"\">` as a placeholder"
     ],
     "NavigationMenu": [
-      "**MUST NOT** — servir de menu d'actions (commandes) → utiliser `Menubar` ou `DropdownMenu`",
-      "**MUST NOT** — dépasser 7 triggers de premier niveau",
-      "**Note** — `viewport={false}` rend les contenus en ligne, sans viewport",
-      "**MUST** — rendre chaque lien avec `NavigationMenuLink`, qui gère `data-active`",
-      "**MUST** — donner un positionnement relatif au parent de `NavigationMenuIndicator`"
+      "**MUST NOT** — serve as a menu of actions (commands) → use `Menubar` or `DropdownMenu`",
+      "**MUST NOT** — exceed 7 top-level triggers",
+      "**Note** — `viewport={false}` renders the content inline, without a viewport",
+      "**MUST** — render every link with `NavigationMenuLink`, which handles `data-active`",
+      "**MUST** — give the parent of `NavigationMenuIndicator` relative positioning"
     ],
     "Pagination": [
-      "**MUST NOT** — servir de navigation hiérarchique → utiliser `Breadcrumb`",
-      "**MUST** — gérer soi-même l'état et les URL de pagination : le composant n'en contient pas",
-      "**MUST NOT** — dupliquer `aria-current=\"page\"`, que la page active porte déjà",
-      "**MUST** — donner à `PaginationPrevious` et `PaginationNext` un `href` valide ou un handler",
-      "**Note** — l'ellipsis est masqué aux lecteurs d'écran (`aria-hidden`)",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.pagination` via `text`, `label` et `srLabel`"
+      "**MUST NOT** — serve as hierarchical navigation → use `Breadcrumb`",
+      "**MUST** — manage the pagination state and URLs yourself: the component holds none",
+      "**MUST NOT** — duplicate `aria-current=\"page\"`, which the active page already carries",
+      "**MUST** — give `PaginationPrevious` and `PaginationNext` a valid `href` or a handler",
+      "**Note** — the ellipsis is hidden from screen readers (`aria-hidden`)",
+      "**MUST** — in an interface that is not in English, translate `UI_STRINGS.pagination` through `text`, `label` and `srLabel`"
     ],
     "PasswordInput": [
-      "**MUST** — envelopper dans un `Field` avec son `FieldLabel`",
-      "**MUST NOT** — servir à un champ de texte non sensible → utiliser `Input`",
-      "**MUST NOT** — passer `type` : le composant le pilote",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire les libellés de la bascule (`UI_STRINGS.passwordInput`)"
+      "**MUST** — wrap it in a `Field` with its `FieldLabel`",
+      "**MUST NOT** — be used for non-sensitive text → use `Input`",
+      "**MUST NOT** — pass `type`: the component controls it",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
+      "**MUST** — in an interface that is not in English, translate the toggle's labels (`UI_STRINGS.passwordInput`)"
     ],
     "Popover": [
-      "**MUST NOT** — afficher un simple texte d'aide → utiliser `Tooltip` ou `HoverCard`",
-      "**MUST** — régler `as` de `PopoverTitle` sur la hiérarchie réelle : il rend un `<h2>` par défaut, `as=\"h3\"` sous une section en `h2`",
-      "**MUST NOT** — afficher une liste d'actions → utiliser `DropdownMenu`",
-      "**Note** — un seul `Popover` s'ouvre à la fois, sauf état contrôlé à la main",
-      "**MUST NOT** — contenir un contenu qui impose un défilement interne, ni un formulaire de plus de 3 champs → utiliser `Dialog` ou `Sheet`",
-      "**MUST** — tester le positionnement près des bords de l'écran (retournement automatique de Radix)"
+      "**MUST NOT** — show plain help text → use `Tooltip` or `HoverCard`",
+      "**MUST** — set `as` on `PopoverTitle` from the real hierarchy: it renders an `<h2>` by default, `as=\"h3\"` under an `h2` section",
+      "**MUST NOT** — show a list of actions → use `DropdownMenu`",
+      "**Note** — only one `Popover` opens at a time, unless the state is controlled by hand",
+      "**MUST NOT** — hold content that needs its own scrolling, or a form of more than 3 fields → use `Dialog` or `Sheet`",
+      "**MUST** — test the positioning near the edges of the screen (Radix flips it automatically)"
     ],
     "Progress": [
-      "**MUST NOT** — afficher une progression indéterminée sans le dire : `aria-valuetext` ou libellé explicite",
-      "**MUST NOT** — afficher plus d'une barre `Progress` par section",
-      "**MUST** — nommer la barre (`aria-label` ou `<label>` associé)",
-      "**MUST** — garder `value` entre 0 et `max` (100 par défaut) : les valeurs hors limites ne sont pas gérées",
-      "**MUST NOT** — servir de jauge de données (température, stock…) : `Progress` exprime l'avancement d'une tâche"
+      "**MUST NOT** — show indeterminate progress without saying so: set `aria-valuetext` or an explicit label",
+      "**MUST NOT** — show more than one `Progress` bar per section",
+      "**MUST** — name the bar (`aria-label` or a tied `<label>`)",
+      "**MUST** — keep `value` between 0 and `max` (100 by default): out-of-range values are not handled",
+      "**MUST NOT** — serve as a data gauge (temperature, stock…): `Progress` expresses how far a task has gone"
     ],
     "RadioGroup": [
-      "**MUST NOT** — servir pour plus de 5 options → `Select` de 6 à 15, `Combobox` au-delà (`rule-20`)",
-      "**MUST** — associer chaque `RadioGroupItem` à un `Label`, et placer le groupe dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)",
-      "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
-      "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
+      "**MUST NOT** — be used for more than 5 options → `Select` from 6 to 15, `Combobox` beyond (`rule-20`)",
+      "**MUST** — tie each `RadioGroupItem` to a `Label`, and place the group in a `Field` as soon as it has a description or an error message (`rule-09`)",
+      "**MUST NOT** — serve multiple choices → use `Checkbox`",
+      "**MUST NOT** — add padding to enlarge the hit area: it is already enlarged (`after:-inset-x-3 after:-inset-y-2`)",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],
     "Resizable": [
-      "**MUST NOT** — servir à une mise en page à largeurs fixes → une grille CSS (`grid`)",
-      "**MUST** — donner un `minSize` à chaque `ResizablePanel`, pour que son contenu ne soit jamais écrasé",
-      "**MUST NOT** — retirer au `ResizableHandle` son focus ou sa commande aux flèches",
-      "**MUST NOT** — imbriquer plus de 2 niveaux de `ResizablePanelGroup`",
-      "**MUST NOT** — mêler les orientations `vertical` et `horizontal` au même niveau"
+      "**MUST NOT** — serve a fixed-width layout → a CSS grid (`grid`)",
+      "**MUST** — give each `ResizablePanel` a `minSize`, so its content is never crushed",
+      "**MUST NOT** — take away the `ResizableHandle`'s focus or its arrow-key control",
+      "**MUST NOT** — nest `ResizablePanelGroup`s more than 2 levels deep",
+      "**MUST NOT** — mix `vertical` and `horizontal` orientations at the same level"
     ],
     "ScrollArea": [
-      "**MUST NOT** — servir au défilement principal de la page : laisser le `<body>` défiler",
-      "**MUST** — donner au parent une hauteur définie (fixe ou flex), sans quoi rien ne défile",
-      "**MUST NOT** — imbriquer une `ScrollArea` dans une autre",
-      "**MUST NOT** — rendre inaccessible au clavier un contenu focusable de la zone"
+      "**MUST NOT** — handle the page's main scrolling: let the `<body>` scroll",
+      "**MUST** — give the parent a defined height (fixed or flex), otherwise nothing scrolls",
+      "**MUST NOT** — nest a `ScrollArea` inside another",
+      "**MUST NOT** — make focusable content in the area unreachable from the keyboard"
     ],
     "Select": [
-      "**MUST NOT** — servir quand la liste doit être filtrée par saisie → utiliser `Combobox`",
-      "**MUST NOT** — servir sous `md` quand les options n'exigent pas de rendu riche → `NativeSelect` (`rule-20`)",
-      "**MUST** — tenir compte du `Portal` dans les empilements (`z-index`) : le contenu est rendu hors de son parent",
-      "**MUST** — donner à chaque `SelectItem` une `value` unique",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
+      "**MUST NOT** — be used when the list has to be filtered by typing → use `Combobox`",
+      "**MUST NOT** — be used below `md` when the options need no rich rendering → `NativeSelect` (`rule-20`)",
+      "**MUST** — account for the `Portal` in stacking (`z-index`): the content renders outside its parent",
+      "**MUST** — give each `SelectItem` a unique `value`",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],
     "Separator": [
-      "**MUST** — garder `decorative` (par défaut) pour un séparateur purement visuel : il est masqué aux lecteurs d'écran",
-      "**MUST** — ne passer `decorative={false}` que si la séparation a un sens (deux sections distinctes d'un article)",
-      "**MUST** — séparer par l'espacement (`gap`) quand un séparateur n'apporte pas de sens",
-      "**MUST NOT** — surcharger l'épaisseur (`h-px` / `w-px`)"
+      "**MUST** — keep `decorative` (the default) for a purely visual separator: it is hidden from screen readers",
+      "**MUST** — only pass `decorative={false}` when the separation carries meaning (two distinct sections of an article)",
+      "**MUST** — separate with spacing (`gap`) when a separator adds no meaning",
+      "**MUST NOT** — override the thickness (`h-px` / `w-px`)"
     ],
     "Sheet": [
-      "**MUST NOT** — servir à une confirmation courte → utiliser `AlertDialog` ou `Dialog`",
-      "**MUST NOT** — ouvrir un `Sheet` par-dessus un autre : un seul visible à la fois",
-      "**MUST** — rendre un `SheetTitle` : c'est le nom annoncé par les lecteurs d'écran",
-      "**Note** — à gauche et à droite, la largeur est limitée à `sm:max-w-sm`",
-      "**MUST** — garder un moyen de fermer le panneau quand `showCloseButton={false}` masque le bouton",
-      "**MUST NOT** — servir sous `md` → `Drawer`, **sauf** pour la navigation latérale (`rule-21`)",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire `UI_STRINGS.sheet` via `closeLabel`"
+      "**MUST NOT** — carry a short confirmation → use `AlertDialog` or `Dialog`",
+      "**MUST NOT** — open a `Sheet` on top of another: one visible at a time",
+      "**MUST** — render a `SheetTitle`: it is the name screen readers announce",
+      "**Note** — on the left and right sides, the width is capped at `sm:max-w-sm`",
+      "**MUST** — keep a way to close the panel when `showCloseButton={false}` hides the button",
+      "**MUST NOT** — be used below `md` → `Drawer`, **unless** it is side navigation (`rule-21`)",
+      "**MUST** — in an interface that is not in English, translate `UI_STRINGS.sheet` through `closeLabel`"
     ],
     "Sidebar": [
-      "**MUST** — placer `Sidebar` dans un `SidebarProvider`, sans quoi `useSidebar` lève une erreur",
-      "**MUST NOT** — placer plus d'une `Sidebar` par côté dans un même `SidebarProvider`",
-      "**MUST** — vérifier qu'une mise en page imbriquée tolère les marges et ombres des variantes `floating` et `inset`",
-      "**MUST** — donner un `tooltip` à chaque `SidebarMenuButton` réduit à son icône",
-      "**MUST NOT** — lier `Ctrl+B` / `⌘+B` à une autre action : `SidebarProvider` l'enregistre pour replier la barre",
-      "**MUST** — dans une interface qui n'est pas en anglais, traduire le libellé de `SidebarTrigger` et `SidebarRail` (`UI_STRINGS.sidebar`)"
+      "**MUST** — place `Sidebar` inside a `SidebarProvider`, otherwise `useSidebar` throws",
+      "**MUST NOT** — place more than one `Sidebar` per side in the same `SidebarProvider`",
+      "**MUST** — check that a nested layout copes with the margins and shadows of the `floating` and `inset` variants",
+      "**MUST** — give a `tooltip` to every `SidebarMenuButton` collapsed to its icon",
+      "**MUST NOT** — bind `Ctrl+B` / `⌘+B` to another action: `SidebarProvider` registers it to collapse the bar",
+      "**MUST** — in an interface that is not in English, translate the label of `SidebarTrigger` and `SidebarRail` (`UI_STRINGS.sidebar`)"
     ],
     "Skeleton": [
-      "**MUST NOT** — rester affiché une fois le contenu chargé",
-      "**MUST** — reprendre les dimensions du contenu final (hauteur, largeur, rayon), pour que son arrivée ne décale pas la mise en page",
-      "**MUST NOT** — animer un squelette quand `prefers-reduced-motion` est actif",
-      "**MUST NOT** — afficher plus de squelettes que d'éléments attendus : chacun tient la place d'un contenu qui va arriver"
+      "**MUST NOT** — stay on screen once the content has loaded",
+      "**MUST** — match the final content's dimensions (height, width, radius), so its arrival does not shift the layout",
+      "**MUST NOT** — animate a skeleton while `prefers-reduced-motion` is on",
+      "**MUST NOT** — show more skeletons than the entries expected: each one holds the place of content that is coming"
     ],
     "Slider": [
-      "**MUST NOT** — servir à saisir une valeur précise → un `Input` de type `number`",
-      "**MUST** — Toujours nommer le Slider : `aria-label`, ou `aria-labelledby` pointant vers l'`id` d'un `<Label>` (`htmlFor` ne nomme pas une poignée, qui n'est pas un champ de formulaire). Avec plusieurs poignées, nommer aussi chacune via `thumbLabels` (« Prix minimum », « Prix maximum »)",
-      "**MUST** — donner une hauteur minimale (`min-h-40`) à un `Slider` vertical",
-      "**MUST** — choisir `min`, `max` et `step` tels que `max - min` soit un multiple de `step`",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
+      "**MUST NOT** — be used to enter an exact value → a `number` `Input`",
+      "**MUST** — always name the Slider: `aria-label`, or `aria-labelledby` pointing to the `id` of a `<Label>` (`htmlFor` does not name a thumb, which is not a form field). With several thumbs, name each one as well through `thumbLabels` (\"Minimum price\", \"Maximum price\")",
+      "**MUST** — give a vertical `Slider` a minimum height (`min-h-40`)",
+      "**MUST** — pick `min`, `max` and `step` so that `max - min` is a multiple of `step`",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],
     "Sonner": [
-      "**MUST NOT** — porter un message critique qui exige une action → utiliser `AlertDialog`",
-      "**MUST** — placer un seul `<Toaster />`, à la racine du layout",
-      "**MUST NOT** — afficher plus de 3 toasts à la fois",
-      "**MUST NOT** — dépasser deux phrases",
-      "**Note** — `sonner` annonce les toasts aux lecteurs d'écran (`aria-live`)"
+      "**MUST NOT** — carry a critical message that requires an action → use `AlertDialog`",
+      "**MUST** — place a single `<Toaster />`, at the root of the layout",
+      "**MUST NOT** — show more than 3 toasts at once",
+      "**MUST NOT** — exceed two sentences",
+      "**Note** — `sonner` announces toasts to screen readers (`aria-live`)"
     ],
     "Spinner": [
-      "**MUST** — remplacer l'`aria-label` par défaut (`\"Loading\"`) par un libellé qui décrit l'action (« Connexion en cours »)",
-      "**MUST NOT** — afficher plus d'un `Spinner` dans une même zone : un seul indicateur",
-      "**Note** — la taille se règle par `className` (`size-3`, `size-6`) : pas de prop `size`",
-      "**MUST NOT** — signaler un chargement de plus de 10 s → utiliser `Progress` avec un pourcentage",
-      "**MUST NOT** — ajouter un second `role=\"status\"` dans le parent : le composant le porte",
-      "**MUST** — Nom accessible par défaut en anglais issu de `UI_STRINGS.spinner` — surcharger via `aria-label`"
+      "**MUST** — replace the default `aria-label` (`\"Loading\"`) with a label that describes the action (\"Signing in\")",
+      "**MUST NOT** — show more than one `Spinner` in the same area: one indicator",
+      "**Note** — the size is set through `className` (`size-3`, `size-6`): there is no `size` prop",
+      "**MUST NOT** — signal a load that lasts more than 10 s → use `Progress` with a percentage",
+      "**MUST NOT** — add a second `role=\"status\"` in the parent: the component carries it",
+      "**MUST** — the default accessible name comes from `UI_STRINGS.spinner`, in English — override it through `aria-label`"
     ],
     "Switch": [
-      "**MUST NOT** — servir à des choix multiples → utiliser `Checkbox`",
-      "**MUST NOT** — servir à choisir entre deux options nommées → utiliser `RadioGroup`",
-      "**MUST** — associer un libellé visible : `Label` (`htmlFor`), ou `Field` avec `FieldLabel` ; dans un `Field` dès qu'il porte une description ou un message d'erreur (`rule-09`)",
-      "**MUST NOT** — ajouter de padding pour agrandir la zone de clic : elle est déjà étendue (`after:-inset-x-3 after:-inset-y-2`)",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur"
+      "**MUST NOT** — serve multiple choices → use `Checkbox`",
+      "**MUST NOT** — serve a choice between two named options → use `RadioGroup`",
+      "**MUST** — pair it with a visible label: `Label` (`htmlFor`), or `Field` with a `FieldLabel`; inside a `Field` as soon as it has a description or an error message (`rule-09`)",
+      "**MUST NOT** — add padding to enlarge the hit area: it is already enlarged (`after:-inset-x-3 after:-inset-y-2`)",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],
     "Table": [
-      "**MUST NOT** — servir à la mise en page : réservé aux données tabulaires",
-      "**MUST NOT** — ajouter un défilement horizontal parent : le conteneur défile déjà (`overflow-x-auto`)",
-      "**MUST** — au-delà de 4 colonnes, masquer les colonnes secondaires sous 640 px (le conteneur de `Table` défile déjà horizontalement)",
-      "**Note** — une cellule `role=\"checkbox\"` reçoit un padding réduit (`pr-0`)",
-      "**MUST** — nommer le tableau (`TableCaption` ou `aria-label`) quand le contexte ne le fait pas"
+      "**MUST NOT** — be used for layout: it is for tabular data only",
+      "**MUST NOT** — add horizontal scrolling on a parent: the container already scrolls (`overflow-x-auto`)",
+      "**MUST** — beyond 4 columns, hide the secondary columns below 640 px (the `Table` container already scrolls horizontally)",
+      "**Note** — a `role=\"checkbox\"` cell gets reduced padding (`pr-0`)",
+      "**MUST** — name the table (`TableCaption` or `aria-label`) when the context does not"
     ],
     "Tabs": [
-      "**MUST NOT** — servir de navigation entre pages distinctes → utiliser `NavigationMenu`",
-      "**MUST NOT** — dépasser 7 onglets par groupe",
-      "**MUST NOT** — servir quand plusieurs sections doivent être visibles ensemble → utiliser `Accordion` (`Tabs` n'en montre qu'une)",
-      "**Note** — un trigger `disabled` ne reçoit plus d'événement pointer et prend `opacity-disabled`",
-      "**MUST NOT** — faire dépendre le contenu d'un panneau d'un autre onglet"
+      "**MUST NOT** — serve as navigation between separate pages → use `NavigationMenu`",
+      "**MUST NOT** — exceed 7 tabs per group",
+      "**MUST NOT** — be used when several sections must be visible together → use `Accordion` (`Tabs` shows only one)",
+      "**Note** — a `disabled` trigger stops receiving pointer events and takes `opacity-disabled`",
+      "**MUST NOT** — make a panel's content depend on another tab"
     ],
     "Textarea": [
-      "**MUST NOT** — servir à une saisie d'une ligne → utiliser `Input`",
-      "**Note** — le champ grandit avec son contenu (`field-sizing-content`) ; une hauteur fixe se donne par `className`",
-      "**Note** — hauteur minimale : `min-h-16` (4rem)",
-      "**MUST NOT** — redéfinir le fond sans sa variante sombre (`dark:bg-input/30` par défaut)",
-      "**Note** — composant serveur : il se rend sans `\"use client\"`"
+      "**MUST NOT** — take single-line input → use `Input`",
+      "**Note** — the field grows with its content (`field-sizing-content`); set a fixed height through `className`",
+      "**Note** — minimum height: `min-h-16` (4rem)",
+      "**MUST NOT** — redefine the background without its dark counterpart (`dark:bg-input/30` by default)",
+      "**Note** — a server component: it renders without `\"use client\"`"
     ],
     "Toggle": [
-      "**MUST NOT** — déclencher une action non réversible → utiliser `Button`",
-      "**MUST NOT** — remplacer un `Switch` dans un formulaire de réglages",
-      "**MUST NOT** — combiner la variante `outline` avec une bordure parente",
-      "**MUST NOT** — lui passer une fonction (callback, gestionnaire d'événement) depuis un composant serveur : c'est un composant client (`\"use client\"`), seules des props sérialisables lui parviennent d'un composant serveur",
-      "**MUST** — donner un `aria-label` à un `Toggle` réduit à son icône"
+      "**MUST NOT** — trigger an action that cannot be undone → use `Button`",
+      "**MUST NOT** — stand in for a `Switch` in a settings form",
+      "**MUST NOT** — combine the `outline` variant with a border on the parent",
+      "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
+      "**MUST** — give an icon-only `Toggle` an `aria-label`"
     ],
     "ToggleGroup": [
-      "**MUST** — passer `type=\"single\"` pour une sélection exclusive, `type=\"multiple\"` sinon",
-      "**MUST** — donner au `ToggleGroup` un `aria-label` qui décrit le groupe",
-      "**MUST NOT** — servir à la navigation → utiliser `Tabs` ou `NavigationMenu`",
-      "**Note** — `spacing={0}` (par défaut) fusionne les bordures ; au-delà, les items sont espacés",
-      "**MUST NOT** — redéfinir `variant` ou `size` sur un `ToggleGroupItem`, **sauf** pour distinguer un item précis : le groupe les propage"
+      "**MUST** — pass `type=\"single\"` for an exclusive selection, `type=\"multiple\"` otherwise",
+      "**MUST** — give the `ToggleGroup` an `aria-label` that describes the group",
+      "**MUST NOT** — serve as navigation → use `Tabs` or `NavigationMenu`",
+      "**Note** — `spacing={0}` (the default) merges the borders; above that, the items are spaced out",
+      "**MUST NOT** — redefine `variant` or `size` on a `ToggleGroupItem`, **unless** to set one item apart: the group passes them down"
     ],
     "Tooltip": [
-      "**MUST NOT** — contenir des éléments interactifs (liens, boutons) → utiliser `Popover`",
-      "**MUST NOT** — dépasser une ligne ou 80 caractères de texte",
-      "**MUST NOT** — être le seul support d'une information critique",
-      "**MUST** — placer un `TooltipProvider` au-dessus dans l'arbre, par exemple dans le layout racine",
-      "**MUST NOT** — poser un `Tooltip` directement sur un élément `disabled`, qui ne reçoit ni focus ni survol : envelopper l'élément dans un `<span tabIndex={0}>` qui porte le déclencheur"
+      "**MUST NOT** — contain interactive elements (links, buttons) → use `Popover`",
+      "**MUST NOT** — exceed one line or 80 characters of text",
+      "**MUST NOT** — be the only place critical information appears",
+      "**MUST** — place a `TooltipProvider` higher in the tree, for example in the root layout",
+      "**MUST NOT** — sit directly on a `disabled` element, which receives neither focus nor hover: wrap the element in a `<span tabIndex={0}>` that carries the trigger"
     ]
   },
   "composition_rules": [
@@ -709,7 +709,7 @@
     },
     {
       "id": "rule-20",
-      "rule": "Choisir le composant de sélection d'après le nombre d'options et la largeur d'écran. Une valeur parmi 2 à 5 options : `RadioGroup`, toutes visibles. Parmi 6 à 15 : `Select` à partir de `md` ; sous `md`, `NativeSelect`, **sauf** si les options exigent un rendu riche (icônes, descriptions) → `Select`. Plus de 15 options, ou recherche requise : `Combobox`. Plusieurs valeurs : `Checkbox` jusqu'à 5 options, `Combobox` en mode multiple au-delà. Bascule on/off à effet immédiat : `Switch`.",
+      "rule": "Pick the selection control from the number of options and the screen width. One value out of 2 to 5 options: `RadioGroup`, with every option visible. Out of 6 to 15: `Select` from `md` up; below `md`, `NativeSelect`, **unless** the options need rich rendering (icons, descriptions) → `Select`. More than 15 options, or search required: `Combobox`. Several values: `Checkbox` up to 5 options, `Combobox` in multiple mode beyond that. An on/off toggle that takes effect immediately: `Switch`.",
       "applies_to": [
         "RadioGroup",
         "Select",
@@ -721,7 +721,7 @@
     },
     {
       "id": "rule-21",
-      "rule": "Choisir la surface d'après le blocage et la longueur du contenu. Décision bloquante (confirmer, détruire) : `AlertDialog`. Tâche courte, sans défilement interne : `Dialog`. Contenu long ou contexte latéral : `Sheet` à partir de `md`, `Drawer` en dessous — **sauf** la navigation latérale, qui reste un `Sheet` à toute largeur (c'est ce que fait `Sidebar` sous `md`). Contenu ancré non bloquant, sans défilement et d'au plus 3 champs : `Popover`. Aperçu informatif au survol, à partir de `md` : `HoverCard`. Libellé non interactif d'une ligne (80 caractères au plus) : `Tooltip`.",
+      "rule": "Pick the surface from how much it blocks and how long its content is. A blocking decision (confirm, destroy): `AlertDialog`. A short task with no inner scrolling: `Dialog`. Long content or side context: `Sheet` from `md` up, `Drawer` below — **unless** it is side navigation, which stays a `Sheet` at every width (this is what `Sidebar` does below `md`). Anchored, non-blocking content with no scrolling and at most 3 fields: `Popover`. An informative preview on hover, from `md` up: `HoverCard`. A one-line, non-interactive label of at most 80 characters: `Tooltip`.",
       "applies_to": [
         "AlertDialog",
         "Dialog",
@@ -734,7 +734,7 @@
     },
     {
       "id": "rule-22",
-      "rule": "Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.",
+      "rule": "Pick how to present a collection from the nature of its content. Short-lived actions opened from a trigger: `DropdownMenuItem`. Rows to compare that share the same attributes, 3 or more per row: `Table`. A vertical list of entries (media, title, description, actions): `Item` inside an `ItemGroup`. A self-contained block with a header, body and footer, alone or in a grid: `Card`.",
       "applies_to": [
         "Item",
         "Card",

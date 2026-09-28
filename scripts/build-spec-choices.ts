@@ -35,9 +35,9 @@ const rules = (
 ).composition_rules.filter((r) => r.applies_to)
 
 const marker = (id: string) =>
-  `<!-- ${id} : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->`
-const MARKER = /^<!-- rule-\d+ : généré depuis design-system\.index\.json/
-const CHOICE = /^- \*\*Choix\*\* \(`rule-\d+`\) — /
+  `<!-- ${id}: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->`
+const MARKER = /^<!-- rule-\d+: generated from design-system\.index\.json/
+const CHOICE = /^- \*\*Choice\*\* \(`rule-\d+`\) — /
 
 /** Usage bullets for one spec: its own, then the rules that apply to it. */
 function withChoices(markdown: string, spec: string): string {
@@ -53,7 +53,7 @@ function withChoices(markdown: string, spec: string): string {
     .trim()
   const choices = rules
     .filter((r) => r.applies_to!.includes(spec))
-    .map((r) => `${marker(r.id)}\n- **Choix** (\`${r.id}\`) — ${r.rule}`)
+    .map((r) => `${marker(r.id)}\n- **Choice** (\`${r.id}\`) — ${r.rule}`)
   const body = [own, ...choices].join("\n\n")
   return (
     markdown.slice(0, start + 1) + `${USAGE}\n\n${body}\n` + markdown.slice(end)

@@ -2,59 +2,59 @@
 
 ## Metadata
 
-| Champ         | Valeur                 |
+| Field         | Value                  |
 | ------------- | ---------------------- |
-| Nom           | Card                   |
-| Catégorie     | Layout                 |
-| Statut        | stable                 |
+| Name          | Card                   |
+| Category      | Layout                 |
+| Status        | stable                 |
 | figma_node_id |                        |
 | code_path     | components/ui/card.tsx |
 
-## Rôle
+## Role
 
-Conteneur surfacé regroupant un titre, une description, du contenu et un pied de page dans une structure cohérente.
+A surface that brings a title, a description, content and a footer together in one consistent structure.
 
 ## Usage
 
-- Encapsuler le formulaire de connexion dans une surface délimitée
-- Présenter une entité (profil, paramètre, notification) avec ses actions associées
-- Regrouper visuellement des informations hétérogènes sur un tableau de bord
-- Utiliser `data-size="sm"` pour les cartes compactes dans des listes denses
+- Wrap the sign-in form in a bounded surface
+- Present an entity (a profile, a setting, a notification) with its actions
+- Group mixed information visually on a dashboard
+- Use `data-size="sm"` for compact cards in dense lists
 
-<!-- rule-22 : généré depuis design-system.index.json par scripts/build-spec-choices.ts — ne pas éditer à la main. -->
+<!-- rule-22: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choix** (`rule-22`) — Choisir la présentation d'une collection d'après la nature de son contenu. Actions éphémères ouvertes depuis un déclencheur : `DropdownMenuItem`. Lignes à comparer qui partagent les mêmes attributs, 3 ou plus par ligne : `Table`. Liste verticale d'éléments (média, titre, description, actions) : `Item` dans un `ItemGroup`. Bloc autonome à en-tête, corps et pied, seul ou en grille : `Card`.
+- **Choice** (`rule-22`) — Pick how to present a collection from the nature of its content. Short-lived actions opened from a trigger: `DropdownMenuItem`. Rows to compare that share the same attributes, 3 or more per row: `Table`. A vertical list of entries (media, title, description, actions): `Item` inside an `ItemGroup`. A self-contained block with a header, body and footer, alone or in a grid: `Card`.
 
-## Contraintes
+## Constraints
 
-- **MUST NOT** — imbriquer des `Card` sur plus d'un niveau : marquer la hiérarchie par un fond différent
-- **MUST NOT** — placer un contenu long dans `CardAction`, positionné en haut à droite de l'en-tête
-- **MUST NOT** — placer plus de 2 actions dans `CardFooter`
-- **MUST NOT** — poser `onClick` sur une `Card` : l'envelopper dans un `<a>` ou un `<button>` si elle est cliquable
+- **MUST NOT** — nest `Card`s more than one level deep: show hierarchy with a different background
+- **MUST NOT** — put long content in `CardAction`, which sits at the top right of the header
+- **MUST NOT** — place more than 2 actions in `CardFooter`
+- **MUST NOT** — put `onClick` on a `Card`: wrap it in an `<a>` or a `<button>` when it is clickable
 
-## Dépendances
+## Dependencies
 
-- Aucune dépendance de composant interne obligatoire
-- `Button` — action typique dans `CardFooter` ou `CardAction`
-- `Separator` — peut être utilisé à l'intérieur de `CardContent`
+- No internal component is required
+- `Button` — the usual action in `CardFooter` or `CardAction`
+- `Separator` — can be used inside `CardContent`
 
-## Anatomie
+## Anatomy
 
-| Slot                           | Rôle                                                         |
-| ------------------------------ | ------------------------------------------------------------ |
-| `data-slot="card"`             | `<div>` racine, porte `data-size`                            |
-| `data-slot="card-header"`      | En-tête en grille, accueille titre, description et action    |
-| `data-slot="card-title"`       | Titre principal de la carte                                  |
-| `data-slot="card-description"` | Description ou sous-titre en couleur subtile                 |
-| `data-slot="card-action"`      | Zone d'action positionnée en haut à droite du header         |
-| `data-slot="card-content"`     | Corps principal de la carte                                  |
-| `data-slot="card-footer"`      | Pied de carte avec bordure supérieure, alignement horizontal |
+| Slot                           | Role                                                     |
+| ------------------------------ | -------------------------------------------------------- |
+| `data-slot="card"`             | Root `<div>`; carries `data-size`                        |
+| `data-slot="card-header"`      | Grid header that holds the title, description and action |
+| `data-slot="card-title"`       | The card's main title                                    |
+| `data-slot="card-description"` | Description or subtitle in a subdued color               |
+| `data-slot="card-action"`      | Action area at the top right of the header               |
+| `data-slot="card-content"`     | The card's main body                                     |
+| `data-slot="card-footer"`      | Footer with a top border, laid out horizontally          |
 
-## Tokens utilisés
+## Tokens
 
-<!-- Généré par scripts/build-spec-tokens.ts depuis le code du composant — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-tokens.ts from the component's code — do not edit by hand. -->
 
-| Token                            | Classes et variables                          | Où                         |
+| Token                            | Classes and variables                         | Where                      |
 | -------------------------------- | --------------------------------------------- | -------------------------- |
 | `border-width.default`           | `border-t`                                    | `CardFooter`               |
 | `color.background.subtle`        | `bg-card`                                     | `Card`                     |
@@ -65,114 +65,114 @@ Conteneur surfacé regroupant un titre, une description, du contenu et un pied d
 | `typography.size.sm`             | `text-sm`                                     | `CardTitle`                |
 | `typography.size.xs`             | `text-xs/relaxed`                             | `CardDescription` · `Card` |
 
-Relevé dans `components/ui/card.tsx` et les constantes de `lib/` qu'il importe ; chaque classe est résolue par Tailwind jusqu'au token sémantique. **Où** : sous-composant, chemin de variante `cva` ou constante d'origine. Les classes qui ne lisent aucun token (espacement `p-2`, tailles, mise en page) n'y figurent pas.
+Collected from `components/ui/card.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
 
 ## Props / API
 
-<!-- Généré par scripts/build-spec-api.ts depuis les exports TypeScript. Seules les descriptions s'éditent à la main : elles sont conservées. -->
+<!-- Generated by scripts/build-spec-api.ts from the TypeScript exports. Only the descriptions are edited by hand; they are kept. -->
 
 ### `Card`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut      | Description                                                                            |
-| ----------- | ----------------------------- | ----------- | -------------------------------------------------------------------------------------- |
-| `size`      | `"default" \| "sm"`           | `"default"` | Taille de la carte : `gap-4 py-4` vs `gap-2 py-3`. Rendue en `data-size` sur la racine |
-| `className` | `string`                      | —           | Classes CSS additionnelles                                                             |
-| `...props`  | `React.ComponentProps<"div">` | —           | Props natives de `<div>`                                                               |
+| Prop        | Type                          | Default     | Description                                                                  |
+| ----------- | ----------------------------- | ----------- | ---------------------------------------------------------------------------- |
+| `size`      | `"default" \| "sm"`           | `"default"` | Card size: `gap-4 py-4` or `gap-2 py-3`. Rendered as `data-size` on the root |
+| `className` | `string`                      | —           | Additional CSS classes                                                       |
+| `...props`  | `React.ComponentProps<"div">` | —           | Native `<div>` props                                                         |
 
 ### `CardHeader`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `CardFooter`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `CardTitle`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `CardAction`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `CardDescription`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
 ### `CardContent`
 
-Rend `<div>`.
+Renders `<div>`.
 
-| Prop        | Type                          | Défaut | Description                |
-| ----------- | ----------------------------- | ------ | -------------------------- |
-| `className` | `string`                      | —      | Classes CSS additionnelles |
-| `...props`  | `React.ComponentProps<"div">` | —      | Props natives de `<div>`   |
+| Prop        | Type                          | Default | Description            |
+| ----------- | ----------------------------- | ------- | ---------------------- |
+| `className` | `string`                      | —       | Additional CSS classes |
+| `...props`  | `React.ComponentProps<"div">` | —       | Native `<div>` props   |
 
-<!-- Fin de la partie générée. -->
+<!-- End of the generated part. -->
 
-## Variantes
+## Variants
 
-<!-- Généré par scripts/build-spec-variants.ts depuis mcp-server/context/component-variants.json — ne pas éditer à la main. -->
+<!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-Aucun axe de variante : le composant n'appelle pas `cva()`. Son apparence se règle par ses props et, en dernier recours, par `className` avec des classes de tokens.
+No variant axis: the component does not call `cva()`. Its appearance is set through its props and, as a last resort, through `className` with token classes.
 
-## États
+## States
 
-| État       | Comportement visuel                                                               |
-| ---------- | --------------------------------------------------------------------------------- |
-| `default`  | Fond `bg-card`, anneau `ring-1 ring-foreground/10`, coins carrés (`rounded-none`) |
-| `hover`    | Pas de style dédié (Card n'est pas interactif par défaut)                         |
-| `focus`    | Non applicable                                                                    |
-| `active`   | Non applicable                                                                    |
-| `disabled` | Non applicable                                                                    |
-| `loading`  | Gérer via un skeleton dans `CardContent`                                          |
-| `error`    | Non applicable — utiliser `Alert` dans `CardContent`                              |
+| State      | Visual behavior                                                                         |
+| ---------- | --------------------------------------------------------------------------------------- |
+| `default`  | `bg-card` background, `ring-1 ring-foreground/10` ring, square corners (`rounded-none`) |
+| `hover`    | No dedicated style (a Card is not interactive by default)                               |
+| `focus`    | Not applicable                                                                          |
+| `active`   | Not applicable                                                                          |
+| `disabled` | Not applicable                                                                          |
+| `loading`  | Handle it with a skeleton inside `CardContent`                                          |
+| `error`    | Not applicable — use an `Alert` inside `CardContent`                                    |
 
-## Accessibilité
+## Accessibility
 
-**Pattern** : Aucun — conteneur de mise en page
+**Pattern**: None — a layout container
 
-**Rôle** : Aucun rôle : des `div`. `CardTitle` n'est pas un élément de titre.
+**Role**: No role: plain `div`s. `CardTitle` is not a heading element.
 
-**Clavier** :
+**Keyboard**:
 
-Aucune interaction clavier propre.
+No keyboard interaction of its own.
 
-**Nom accessible** : Sans objet. Si la carte est une section de page, envelopper son titre dans un titre de niveau adapté (`Heading`).
+**Accessible name**: Not applicable. When the card is a section of the page, wrap its title in a heading of the right level (`Heading`).
 
-**Vigilance** :
+**Pitfalls**:
 
-- Une carte entièrement cliquable doit contenir un vrai lien (dont la zone peut être étendue), pas un `onClick` sur le conteneur.
-- `CardTitle` étant un `div`, il n'apparaît pas dans la liste des titres d'un lecteur d'écran.
+- A fully clickable card must contain a real link (whose hit area can be stretched), not an `onClick` on the container.
+- `CardTitle` is a `div`, so it does not appear in a screen reader's list of headings.
 
-## Exemple de code
+## Code example
 
 ```tsx
 import {
@@ -189,23 +189,21 @@ export default function Example() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Se connecter</CardTitle>
-        <CardDescription>
-          Entrez vos identifiants pour continuer.
-        </CardDescription>
+        <CardTitle>Sign in</CardTitle>
+        <CardDescription>Enter your credentials to continue.</CardDescription>
       </CardHeader>
-      <CardContent>{/* formulaire */}</CardContent>
+      <CardContent>{/* form */}</CardContent>
       <CardFooter>
-        <Button type="submit">Connexion</Button>
+        <Button type="submit">Sign in</Button>
       </CardFooter>
     </Card>
   )
 }
 ```
 
-## Références croisées
+## Cross-references
 
-- `Button` — action principale dans `CardFooter` ou `CardAction`
-- `Alert` — à placer dans `CardContent` pour les messages d'état
-- `Separator` — séparation visuelle optionnelle dans `CardContent`
-- `Field` / `Input` — contenu de formulaire typique dans `CardContent`
+- `Button` — the main action in `CardFooter` or `CardAction`
+- `Alert` — goes inside `CardContent` for status messages
+- `Separator` — optional visual break inside `CardContent`
+- `Field` / `Input` — typical form content inside `CardContent`
