@@ -22,6 +22,13 @@ export const UI_STRINGS = Object.freeze({
     previous: "Previous slide",
     next: "Next slide",
   }),
+  combobox: Object.freeze({
+    /** The caret button that opens the list. */
+    trigger: "Open list",
+    clear: "Clear selection",
+    /** The button that removes a chip from a multiple selection. */
+    remove: "Remove",
+  }),
   dialog: Object.freeze({
     close: "Close",
   }),

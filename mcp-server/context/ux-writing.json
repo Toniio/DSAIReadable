@@ -323,7 +323,7 @@
       "**MUST** — in multiple selection, provide an `anchor` (`useComboboxAnchor`) so the popup opens below the chips",
       "**MUST** — give each `ComboboxItem` a unique value",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
-      "**MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they are in English by default"
+      "**MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they default to the English `UI_STRINGS.combobox`"
     ],
     "Command": [
       "**MUST NOT** — serve as a plain search field → an `Input` that filters the list",

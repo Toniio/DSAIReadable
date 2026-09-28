@@ -15,8 +15,8 @@ section that fits.
 
 - Component tests: `npm run test:components` (Vitest, Testing Library, axe-core)
   covers Button, Field, Progress, Combobox, Dialog, Tabs and Select — roles,
-  accessible names, keyboard, variants and zero axe violations — and runs in CI.
-
+  accessible names, keyboard, variants and zero axe violations — and runs in CI
+  ([#27](https://github.com/Toniio/DSAIReadable/pull/27)).
 - `llms.txt` at the root, generated from the specs; `SECURITY.md`, `CHANGELOG.md`
   and `.github/CODEOWNERS`.
 - `npm run check`: every CI check in one call, printing only the failures
@@ -51,7 +51,7 @@ section that fits.
 
 - Specs: Dialog, AlertDialog, Drawer and Sheet no longer claim
   `aria-modal="true"`; Radix hides the rest of the page with `aria-hidden`
-  instead.
+  instead ([#27](https://github.com/Toniio/DSAIReadable/pull/27)).
 - MCP server: closed HTTP sessions are dropped instead of blocking the next
   request ([#25](https://github.com/Toniio/DSAIReadable/pull/25)); an expired or
   unknown session is refused with `404`
@@ -66,6 +66,10 @@ section that fits.
 - Two composition rules the repository contradicted
   ([#12](https://github.com/Toniio/DSAIReadable/pull/12)); facts the
   documentation got wrong ([#14](https://github.com/Toniio/DSAIReadable/pull/14)).
+- Combobox reads the default names of its icon buttons from
+  `UI_STRINGS.combobox`, as its spec says; `index:strings` now reports a
+  literal default on a `label` or `*Label` prop
+  ([#28](https://github.com/Toniio/DSAIReadable/pull/28)).
 
 ### Removed
 

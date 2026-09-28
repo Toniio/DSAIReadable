@@ -2,9 +2,9 @@
  * A component must not invent the words it renders.
  *
  * Accessible names that never appear on screen - aria-label, title, sr-only
- * text - are the ones that quietly drift: nobody sees them, so nobody notices
- * when one is English and the next is French, or when a translator misses one
- * because it is buried in JSX. They all come from lib/ui-strings.ts, so there
+ * text, the default of a `label` or `*Label` prop - are the ones that quietly
+ * drift: nobody sees them, so nobody notices when one is English and the next
+ * is French, or when a translator misses one because it is buried in JSX. They all come from lib/ui-strings.ts, so there
  * is a single place to read the product's voice and a single place to replace
  * it.
  *
@@ -66,6 +66,27 @@ for (const name of readdirSync(DIR)
       const value = match[1].trim()
       if (value === "" || ARIA_KEYWORDS.has(value)) continue
       findings.push({ ...at, text: `${attr}="${value}"`, kind: attr })
+    }
+
+    // A prop that carries an accessible name, given a literal default in its
+    // destructuring (`clearLabel = "Clear"`): the name is still hardcoded, only
+    // one step away from the JSX that renders it.
+    const labelDefault = line.match(
+      /(?<![\w-])(label|\w+Label)\s*=\s*(?:"([^"]*)"|'([^']*)'|`([^`$]*)`)/
+    )
+    if (labelDefault) {
+      const value = (
+        labelDefault[2] ??
+        labelDefault[3] ??
+        labelDefault[4]
+      ).trim()
+      if (value !== "") {
+        findings.push({
+          ...at,
+          text: `${labelDefault[1]} = "${value}"`,
+          kind: "default",
+        })
+      }
     }
 
     const srOnly = line.match(/className="sr-only"\s*>\s*([^<{][^<]*)</)

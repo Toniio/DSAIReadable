@@ -3840,7 +3840,7 @@
       "**MUST** — in multiple selection, provide an `anchor` (`useComboboxAnchor`) so the popup opens below the chips",
       "**MUST** — give each `ComboboxItem` a unique value",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
-      "**MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they are in English by default"
+      "**MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they default to the English `UI_STRINGS.combobox`"
     ],
     "dependencies": [
       "`@base-ui/react` — the `Combobox` primitive (Root, Value, Trigger, Clear, Input, Popup, Positioner, Portal, List, Item, ItemIndicator, Group, GroupLabel, Collection, Empty, Separator, Chips, Chip, ChipRemove)",
@@ -4181,14 +4181,14 @@
         "component": "ComboboxInput",
         "prop": "`triggerLabel`",
         "type": "`string`",
-        "default": "`\"Open list\"`",
+        "default": "`UI_STRINGS.combobox.trigger`",
         "description": "Accessible name of the caret button, passed to `ComboboxTrigger`"
       },
       {
         "component": "ComboboxInput",
         "prop": "`clearLabel`",
         "type": "`string`",
-        "default": "`\"Clear selection\"`",
+        "default": "`UI_STRINGS.combobox.clear`",
         "description": "Accessible name of the clear button, passed to `ComboboxClear`"
       },
       {
@@ -4314,7 +4314,7 @@
         "component": "ComboboxChip",
         "prop": "`removeLabel`",
         "type": "`string`",
-        "default": "`\"Remove\"`",
+        "default": "`UI_STRINGS.combobox.remove`",
         "description": "`aria-label` of the chip's remove button"
       },
       {
@@ -4335,7 +4335,7 @@
         "component": "ComboboxTrigger",
         "prop": "`triggerLabel`",
         "type": "`string`",
-        "default": "`\"Open list\"`",
+        "default": "`UI_STRINGS.combobox.trigger`",
         "description": "`aria-label` applied only when the trigger has no visible child"
       },
       {
@@ -4379,7 +4379,7 @@
         "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
       }
     ],
-    "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)\n\n**Role**: An input with `role=\"combobox\"` linked to a `listbox`; `aria-expanded` on the input, `aria-selected` on the active option.\n\n**Keyboard**:\n\n| Key                     | Action                                 |\n| ----------------------- | -------------------------------------- |\n| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |\n| `Enter`                 | Selects the active option              |\n| `Escape`                | Closes the list                        |\n| Typing                  | Filters the options                    |\n\n**Accessible name**: A `Label` tied to the input is required. The icon buttons (clear, remove a chip) are named by `clearLabel` / `removeLabel` (defaults in `UI_STRINGS`).\n\n**Pitfalls**:\n\n- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.",
+    "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)\n\n**Role**: An input with `role=\"combobox\"` linked to a `listbox`; `aria-expanded` on the input, `aria-selected` on the active option.\n\n**Keyboard**:\n\n| Key                     | Action                                 |\n| ----------------------- | -------------------------------------- |\n| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |\n| `Enter`                 | Selects the active option              |\n| `Escape`                | Closes the list                        |\n| Typing                  | Filters the options                    |\n\n**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`).\n\n**Pitfalls**:\n\n- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.",
     "code_example": "import {\n  Combobox,\n  ComboboxInput,\n  ComboboxContent,\n  ComboboxList,\n  ComboboxItem,\n  ComboboxEmpty,\n} from \"@/components/ui/combobox\"\n\nconst fruits = [\n  { value: \"apple\", label: \"Apple\" },\n  { value: \"banana\", label: \"Banana\" },\n  { value: \"cherry\", label: \"Cherry\" },\n]\n\nexport default function Example() {\n  return (\n    <Combobox>\n      <ComboboxInput placeholder=\"Search for a fruit…\" />\n      <ComboboxContent>\n        <ComboboxList>\n          <ComboboxEmpty>No results</ComboboxEmpty>\n          {fruits.map((fruit) => (\n            <ComboboxItem key={fruit.value} value={fruit.value}>\n              {fruit.label}\n            </ComboboxItem>\n          ))}\n        </ComboboxList>\n      </ComboboxContent>\n    </Combobox>\n  )\n}",
     "cross_references": [
       "InputGroup",
