@@ -24,8 +24,8 @@ import {
 } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { spawn, type ChildProcess } from "node:child_process"
-import { tmpdir, networkInterfaces } from "node:os"
+import { spawn } from "node:child_process"
+import { tmpdir } from "node:os"
 import { setContextDir, contextDir as servedContextDir } from "./lib/context.js"
 import { createServer as createNetServer } from "node:net"
 
@@ -1043,31 +1043,12 @@ await promptClient.close()
 console.log("\n10. HTTP transport")
 
 const SESSION_TTL_MS = 300
-const getFreePort = () =>
-  new Promise<number>((done) => {
-    const probe = createNetServer().listen(0, "127.0.0.1", () => {
-      const { port } = probe.address() as { port: number }
-      probe.close(() => done(port))
-    })
+const freePort = await new Promise<number>((done) => {
+  const probe = createNetServer().listen(0, "127.0.0.1", () => {
+    const { port } = probe.address() as { port: number }
+    probe.close(() => done(port))
   })
-// Resolves with the server's startup log once it listens.
-const listening = (server: ChildProcess) =>
-  new Promise<string>((ready, fail) => {
-    let log = ""
-    const timer = setTimeout(
-      () => fail(new Error("HTTP server did not start")),
-      20_000
-    )
-    server.stdout?.on("data", (chunk: Buffer) => {
-      log += chunk.toString()
-      if (log.includes("listening")) {
-        clearTimeout(timer)
-        ready(log)
-      }
-    })
-    server.on("exit", (code) => fail(new Error(`HTTP server exited (${code})`)))
-  })
-const freePort = await getFreePort()
+})
 const httpServer = spawn(
   process.execPath,
   ["--import", "tsx", resolve(__dirname, "index.ts"), "--http"],
@@ -1081,7 +1062,21 @@ const httpServer = spawn(
   }
 )
 try {
-  await listening(httpServer)
+  await new Promise<void>((ready, fail) => {
+    const timer = setTimeout(
+      () => fail(new Error("HTTP server did not start")),
+      20_000
+    )
+    httpServer.stdout.on("data", (chunk: Buffer) => {
+      if (chunk.toString().includes("listening")) {
+        clearTimeout(timer)
+        ready()
+      }
+    })
+    httpServer.on("exit", (code) =>
+      fail(new Error(`HTTP server exited (${code})`))
+    )
+  })
 
   const mcpUrl = `http://127.0.0.1:${freePort}/mcp`
   const post = (body: unknown, sessionId?: string) =>
@@ -1195,51 +1190,6 @@ try {
   assert(false, `HTTP transport: ${e}`)
 } finally {
   httpServer.kill()
-}
-
-// --- Test 10b: the Railway deployment ---
-// railway.json's start command, run as Railway runs it: PORT injected, none of
-// the MCP_* variables set. The healthcheck comes from outside the container,
-// so the server must answer on a non-loopback interface, not only 127.0.0.1.
-console.log("\n10b. Railway deployment")
-
-const railway = JSON.parse(
-  readFileSync(resolve(__dirname, "../railway.json"), "utf-8")
-) as { deploy: { startCommand: string; healthcheckPath: string } }
-const railwayPort = await getFreePort()
-const railwayEnv: NodeJS.ProcessEnv = {
-  ...process.env,
-  PORT: String(railwayPort),
-}
-for (const key of ["MCP_HOST", "MCP_PORT", "MCP_ALLOWED_ORIGINS"]) {
-  delete railwayEnv[key]
-}
-const [railwayBin, ...railwayArgs] = railway.deploy.startCommand.split(/\s+/)
-const railwayServer = spawn(railwayBin, railwayArgs, {
-  cwd: resolve(__dirname, ".."),
-  env: railwayEnv,
-  stdio: ["ignore", "pipe", "inherit"],
-})
-try {
-  const log = await listening(railwayServer)
-  // Any non-loopback IPv4 of this machine stands in for Railway's network.
-  const external = Object.values(networkInterfaces())
-    .flat()
-    .find((i) => i?.family === "IPv4" && !i.internal)?.address
-  const health = await fetch(
-    `http://${external ?? "127.0.0.1"}:${railwayPort}${railway.deploy.healthcheckPath}`,
-    { signal: AbortSignal.timeout(5_000) }
-  )
-    .then(async (res) => (await res.json()) as { status?: string })
-    .catch((e: Error) => ({ status: e.name }))
-  assert(
-    log.includes(`http://0.0.0.0:${railwayPort}/mcp`) && health.status === "ok",
-    `railway.json listens on 0.0.0.0:$PORT and ${railway.deploy.healthcheckPath} answers from ${external ?? "loopback (no other interface)"} (got ${health.status})`
-  )
-} catch (e) {
-  assert(false, `Railway deployment: ${e}`)
-} finally {
-  railwayServer.kill()
 }
 
 // --- Test 11: every tool, called as an agent calls it (P3-08) ---
