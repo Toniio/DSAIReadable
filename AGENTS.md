@@ -70,6 +70,11 @@ npm run build             # Next.js production build
 After any token or TypeScript change:
 `npm run tokens-validate && npm run typecheck:all`.
 
+Before a commit, `npm run check` runs every CI check above in one call except
+`build`, `registry:test-install` and the networked `shadcn registry validate`,
+and prints only what failed. Prefer it to running the checks one by one: each
+separate run is one more agent turn and more output in the context.
+
 ## 4. Git workflow — mandatory
 
 Lightweight trunk-based development with PRs. `main` is protected: **no direct
