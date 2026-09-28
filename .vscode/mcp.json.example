@@ -1,5 +1,5 @@
 {
-  "// ": "Copier ce fichier vers .vscode/mcp.json (non versionne). N'y mettre AUCUN secret.",
+  "// ": "Copy this file to .vscode/mcp.json (not committed). Put NO secrets in it.",
   "servers": {
     "dsaireadable": {
       "type": "stdio",

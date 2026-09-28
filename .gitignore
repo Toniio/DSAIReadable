@@ -15,7 +15,7 @@ out/
 # OS
 .DS_Store
 
-# Config locale VS Code — seul l'exemple est versionne
+# Local VS Code config — only the example is committed
 .vscode/*
 !.vscode/mcp.json.example
 

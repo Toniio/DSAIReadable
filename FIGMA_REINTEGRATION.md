@@ -1,146 +1,146 @@
-# Ré-intégration de la couche Figma
+# Reintegrating the Figma layer
 
-> **Statut** : couche Figma retirée du repo le **2026-09-17**.
-> Ce document est la spécification complète permettant de la reconstruire.
-> Objectif du retrait : obtenir un design system source-of-truth **code-first**,
-> consommable par un agent IA de design sans dépendance à un outil externe.
+> **Status**: Figma layer removed from the repository on **2026-09-17**.
+> This document is the full spec for rebuilding it.
+> Why it was removed: to get a **code-first** source-of-truth design system that
+> an AI design agent can consume without depending on an external tool.
 
 ---
 
-## 0. Archive de sauvegarde
+## 0. Backup archive
 
-Le repo **n'est pas versionné en git**. Une archive de tous les fichiers supprimés
-ou modifiés a été créée avant l'opération :
+At the time, the repository **was not under git**. An archive of every file
+deleted or modified was created before the operation:
 
 ```
 ~/.copilot/session-state/73c95c37-f3bc-49dc-b749-63a3e92eb8fa/files/figma-archive/figma-removed-2026-09-17.tar.gz
 ```
 
-Elle contient l'état d'origine de :
+It holds the original state of:
 `components/ui/*.figma.tsx`, `scripts/figma/`, `scripts/figma-push-variables.py`,
 `scripts/tokens-diff.ts`, `figma.config.json`, `tsconfig.figma.json`,
 `types/figma-code-connect.d.ts`, `design-system.index.json`, `design-system.schema.json`,
 `mcp-server/src/**`, `README.md`, `PROJECT_STRUCTURE.md`, `specs/`.
 
-> ⚠️ L'archive contient aussi `packages/make-kit/**`. Ce package a depuis été **supprimé du dépôt** :
-> la distribution passe par le registre shadcn. Ne pas le restaurer — voir la section caduque en fin de §7.
+> ⚠️ The archive also holds `packages/make-kit/**`. That package has since been **deleted from the repository**:
+> distribution goes through the shadcn registry. Do not restore it — see the obsolete section at the end of §7.
 
-**Avant toute ré-intégration, extraire cette archive dans un dossier temporaire pour
-récupérer les mappings de props Code Connect** (non reproduits intégralement ci-dessous).
-
----
-
-## 1. Ce qui existait — vue d'ensemble
-
-La couche Figma couvrait **cinq responsabilités distinctes**. Elles sont indépendantes :
-on peut en ré-intégrer une sans les autres.
-
-| #   | Brique                                                           | Direction    | Fichiers                                                                               |
-| --- | ---------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------- |
-| 1   | **Code Connect** — mapping composant React ↔ composant Figma     | code → Figma | `components/ui/*.figma.tsx` (54), `figma.config.json`, `types/figma-code-connect.d.ts` |
-| 2   | **Push de tokens** — tokens DTCG → Figma Variables               | code → Figma | `scripts/figma-push-variables.py`                                                      |
-| 3   | **Diff de tokens** — détection de drift code ↔ Figma             | Figma → code | `scripts/tokens-diff.ts`                                                               |
-| 4   | **Création de composants Figma** via Plugin API                  | code → Figma | `scripts/figma/*.ts` + `*.cjs` (17)                                                    |
-| 5   | **Métadonnées d'inventaire** — `figma_node_id`, `figma_file_key` | descriptif   | `design-system.index.json`, `specs/components/*.md`, MCP context                       |
-
-### Coordonnées du fichier Figma source
-
-Les valeurs réelles ne sont pas publiées : le fichier et son registre appartiennent à un espace
-Figma privé. Les relever dans Figma (menu _Share → Copy link_ pour la clé ; réglages de
-l'organisation pour le registre) et ne jamais les commiter.
-
-| Clé                | Valeur                                                         |
-| ------------------ | -------------------------------------------------------------- |
-| `figma_file_key`   | `<FIGMA_FILE_KEY>`                                             |
-| `figma_site`       | `https://www.figma.com/design/<FIGMA_FILE_KEY>/DSAIReadable`   |
-| `last_publish`     | `2025-07-08T12:00:00Z`                                         |
-| Registry npm privé | `https://registry.figma.com/npm/<FIGMA_REGISTRY_ID>/registry/` |
-
-### Variables d'environnement requises
-
-| Variable          | Utilisée par                                | Scopes / rôle                                                                            |
-| ----------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `FIGMA_FILE_KEY`  | `tokens-diff.ts`, `figma-push-variables.py` | clé du fichier                                                                           |
-| `FIGMA_TOKEN`     | idem                                        | PAT avec `file_content:read`, `library_content:read`, `file_variables:write`             |
-| `FIGMA_NPM_TOKEN` | `.npmrc`                                    | ~~auth registry `registry.figma.com`~~ — **caduc** : plus aucun package npm n'est publié |
+**Before any reintegration, extract this archive into a temporary folder to
+recover the Code Connect prop mappings** (not reproduced in full below).
 
 ---
 
-## 2. Mapping `figma_node_id` — à restaurer tel quel
+## 1. What existed — overview
 
-Table de référence complète au moment du retrait. Les lignes `figma_node_id` des specs
-ont été **conservées mais vidées** : il suffit de les repeupler avec ces valeurs.
+The Figma layer covered **five separate responsibilities**. They are independent:
+any one of them can be reintegrated without the others.
 
-| Composant      | figma_node_id | code_path                         | Avait un Code Connect |
-| -------------- | ------------- | --------------------------------- | --------------------- |
-| Accordion      | 176:2492      | components/ui/accordion.tsx       | oui                   |
-| Alert          | 176:2331      | components/ui/alert.tsx           | oui                   |
-| AlertDialog    | 176:2678      | components/ui/alert-dialog.tsx    | oui                   |
-| AspectRatio    | —             | components/ui/aspect-ratio.tsx    | —                     |
-| Avatar         | 176:2401      | components/ui/avatar.tsx          | oui                   |
-| Badge          | 176:2394      | components/ui/badge.tsx           | oui                   |
-| Breadcrumb     | 176:2474      | components/ui/breadcrumb.tsx      | oui                   |
-| Button         | 176:2322      | components/ui/button.tsx          | oui                   |
-| ButtonGroup    | 176:2593      | components/ui/button-group.tsx    | oui                   |
-| Calendar       | 176:2812      | components/ui/calendar.tsx        | oui                   |
-| Card           | 176:2356      | components/ui/card.tsx            | oui                   |
-| Carousel       | 176:2773      | components/ui/carousel.tsx        | oui                   |
-| Chart          | 176:2957      | components/ui/chart.tsx           | oui                   |
-| Checkbox       | 176:2273      | components/ui/checkbox.tsx        | oui                   |
-| Collapsible    | 176:2662      | components/ui/collapsible.tsx     | oui                   |
-| Combobox       | 176:2763      | components/ui/combobox.tsx        | oui                   |
-| Command        | 176:2719      | components/ui/command.tsx         | oui                   |
-| ContextMenu    | 176:2702      | components/ui/context-menu.tsx    | oui                   |
-| Dialog         | 176:2510      | components/ui/dialog.tsx          | oui                   |
-| Direction      | —             | components/ui/direction.tsx       | —                     |
-| Drawer         | 176:2701      | components/ui/drawer.tsx          | oui                   |
-| DropdownMenu   | 176:2533      | components/ui/dropdown-menu.tsx   | oui                   |
-| Empty          | 176:2571      | components/ui/empty.tsx           | oui                   |
-| Field          | 176:2381      | components/ui/field.tsx           | oui                   |
-| Heading        | 176:2549      | components/ui/heading.tsx         | oui                   |
-| HoverCard      | 176:2689      | components/ui/hover-card.tsx      | oui                   |
-| Illustration   | —             | components/ui/illustration.tsx    | —                     |
-| Input          | 176:2262      | components/ui/input.tsx           | oui                   |
-| InputGroup     | 176:2618      | components/ui/input-group.tsx     | oui                   |
-| InputOtp       | 176:2619      | components/ui/input-otp.tsx       | oui                   |
-| Item           | 176:2811      | components/ui/item.tsx            | oui                   |
-| Kbd            | 176:2554      | components/ui/kbd.tsx             | oui                   |
-| Label          | 176:2244      | components/ui/label.tsx           | oui                   |
-| Logo           | —             | components/ui/logo.tsx            | —                     |
-| Menubar        | 176:2712      | components/ui/menubar.tsx         | oui                   |
-| NativeSelect   | 176:2634      | components/ui/native-select.tsx   | oui                   |
-| NavigationMenu | 176:2738      | components/ui/navigation-menu.tsx | oui                   |
-| Pagination     | 176:2493      | components/ui/pagination.tsx      | oui                   |
-| PasswordInput  | —             | components/ui/password-input.tsx  | —                     |
-| Popover        | 176:2687      | components/ui/popover.tsx         | oui                   |
-| Progress       | 176:2507      | components/ui/progress.tsx        | oui                   |
-| RadioGroup     | 176:2430      | components/ui/radio-group.tsx     | oui                   |
-| Resizable      | 176:2677      | components/ui/resizable.tsx       | oui                   |
-| ScrollArea     | 176:2772      | components/ui/scroll-area.tsx     | oui                   |
-| Select         | 176:2456      | components/ui/select.tsx          | oui                   |
-| Separator      | 176:2250      | components/ui/separator.tsx       | oui                   |
-| Sheet          | 176:2532      | components/ui/sheet.tsx           | oui                   |
-| Sidebar        | 176:2935      | components/ui/sidebar.tsx         | oui                   |
-| Skeleton       | 176:2553      | components/ui/skeleton.tsx        | oui                   |
-| Slider         | 176:2440      | components/ui/slider.tsx          | oui                   |
-| Sonner         | 176:2956      | components/ui/sonner.tsx          | oui                   |
-| Spinner        | 176:2251      | components/ui/spinner.tsx         | oui                   |
-| Switch         | 176:2410      | components/ui/switch.tsx          | oui                   |
-| Table          | 176:2570      | components/ui/table.tsx           | oui                   |
-| Tabs           | 176:2473      | components/ui/tabs.tsx            | oui                   |
-| Textarea       | 176:2439      | components/ui/textarea.tsx        | oui                   |
-| Toggle         | 176:2423      | components/ui/toggle.tsx          | oui                   |
-| ToggleGroup    | 176:2651      | components/ui/toggle-group.tsx    | oui                   |
-| Tooltip        | 176:2520      | components/ui/tooltip.tsx         | oui                   |
+| #   | Building block                                               | Direction    | Files                                                                                  |
+| --- | ------------------------------------------------------------ | ------------ | -------------------------------------------------------------------------------------- |
+| 1   | **Code Connect** — React component ↔ Figma component mapping | code → Figma | `components/ui/*.figma.tsx` (54), `figma.config.json`, `types/figma-code-connect.d.ts` |
+| 2   | **Token push** — DTCG tokens → Figma Variables               | code → Figma | `scripts/figma-push-variables.py`                                                      |
+| 3   | **Token diff** — code ↔ Figma drift detection                | Figma → code | `scripts/tokens-diff.ts`                                                               |
+| 4   | **Figma component creation** through the Plugin API          | code → Figma | `scripts/figma/*.ts` + `*.cjs` (17)                                                    |
+| 5   | **Inventory metadata** — `figma_node_id`, `figma_file_key`   | descriptive  | `design-system.index.json`, `specs/components/*.md`, MCP context                       |
 
-> Tous les node-ids appartiennent à la page `176:*` du fichier source. `AspectRatio`,
-> `Direction`, `Illustration`, `Logo` et `PasswordInput` n'avaient **jamais** d'équivalent Figma.
+### Coordinates of the source Figma file
+
+The real values are not published: the file and its registry belong to a private
+Figma workspace. Look them up in Figma (_Share → Copy link_ for the key; the
+organization settings for the registry) and never commit them.
+
+| Key                  | Value                                                          |
+| -------------------- | -------------------------------------------------------------- |
+| `figma_file_key`     | `<FIGMA_FILE_KEY>`                                             |
+| `figma_site`         | `https://www.figma.com/design/<FIGMA_FILE_KEY>/DSAIReadable`   |
+| `last_publish`       | `2025-07-08T12:00:00Z`                                         |
+| Private npm registry | `https://registry.figma.com/npm/<FIGMA_REGISTRY_ID>/registry/` |
+
+### Required environment variables
+
+| Variable          | Used by                                     | Scopes / role                                                                                       |
+| ----------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `FIGMA_FILE_KEY`  | `tokens-diff.ts`, `figma-push-variables.py` | the file key                                                                                        |
+| `FIGMA_TOKEN`     | same                                        | a PAT with `file_content:read`, `library_content:read`, `file_variables:write`                      |
+| `FIGMA_NPM_TOKEN` | `.npmrc`                                    | ~~auth for the `registry.figma.com` registry~~ — **obsolete**: no npm package is published any more |
 
 ---
 
-## 3. Brique 1 — Figma Code Connect
+## 2. `figma_node_id` mapping — restore as is
 
-### Dépendances npm retirées
+The full reference table at the time of the removal. The specs' `figma_node_id`
+rows were **kept but emptied**: repopulating them with these values is enough.
+
+| Component      | figma_node_id | code_path                         | Had a Code Connect |
+| -------------- | ------------- | --------------------------------- | ------------------ |
+| Accordion      | 176:2492      | components/ui/accordion.tsx       | yes                |
+| Alert          | 176:2331      | components/ui/alert.tsx           | yes                |
+| AlertDialog    | 176:2678      | components/ui/alert-dialog.tsx    | yes                |
+| AspectRatio    | —             | components/ui/aspect-ratio.tsx    | —                  |
+| Avatar         | 176:2401      | components/ui/avatar.tsx          | yes                |
+| Badge          | 176:2394      | components/ui/badge.tsx           | yes                |
+| Breadcrumb     | 176:2474      | components/ui/breadcrumb.tsx      | yes                |
+| Button         | 176:2322      | components/ui/button.tsx          | yes                |
+| ButtonGroup    | 176:2593      | components/ui/button-group.tsx    | yes                |
+| Calendar       | 176:2812      | components/ui/calendar.tsx        | yes                |
+| Card           | 176:2356      | components/ui/card.tsx            | yes                |
+| Carousel       | 176:2773      | components/ui/carousel.tsx        | yes                |
+| Chart          | 176:2957      | components/ui/chart.tsx           | yes                |
+| Checkbox       | 176:2273      | components/ui/checkbox.tsx        | yes                |
+| Collapsible    | 176:2662      | components/ui/collapsible.tsx     | yes                |
+| Combobox       | 176:2763      | components/ui/combobox.tsx        | yes                |
+| Command        | 176:2719      | components/ui/command.tsx         | yes                |
+| ContextMenu    | 176:2702      | components/ui/context-menu.tsx    | yes                |
+| Dialog         | 176:2510      | components/ui/dialog.tsx          | yes                |
+| Direction      | —             | components/ui/direction.tsx       | —                  |
+| Drawer         | 176:2701      | components/ui/drawer.tsx          | yes                |
+| DropdownMenu   | 176:2533      | components/ui/dropdown-menu.tsx   | yes                |
+| Empty          | 176:2571      | components/ui/empty.tsx           | yes                |
+| Field          | 176:2381      | components/ui/field.tsx           | yes                |
+| Heading        | 176:2549      | components/ui/heading.tsx         | yes                |
+| HoverCard      | 176:2689      | components/ui/hover-card.tsx      | yes                |
+| Illustration   | —             | components/ui/illustration.tsx    | —                  |
+| Input          | 176:2262      | components/ui/input.tsx           | yes                |
+| InputGroup     | 176:2618      | components/ui/input-group.tsx     | yes                |
+| InputOtp       | 176:2619      | components/ui/input-otp.tsx       | yes                |
+| Item           | 176:2811      | components/ui/item.tsx            | yes                |
+| Kbd            | 176:2554      | components/ui/kbd.tsx             | yes                |
+| Label          | 176:2244      | components/ui/label.tsx           | yes                |
+| Logo           | —             | components/ui/logo.tsx            | —                  |
+| Menubar        | 176:2712      | components/ui/menubar.tsx         | yes                |
+| NativeSelect   | 176:2634      | components/ui/native-select.tsx   | yes                |
+| NavigationMenu | 176:2738      | components/ui/navigation-menu.tsx | yes                |
+| Pagination     | 176:2493      | components/ui/pagination.tsx      | yes                |
+| PasswordInput  | —             | components/ui/password-input.tsx  | —                  |
+| Popover        | 176:2687      | components/ui/popover.tsx         | yes                |
+| Progress       | 176:2507      | components/ui/progress.tsx        | yes                |
+| RadioGroup     | 176:2430      | components/ui/radio-group.tsx     | yes                |
+| Resizable      | 176:2677      | components/ui/resizable.tsx       | yes                |
+| ScrollArea     | 176:2772      | components/ui/scroll-area.tsx     | yes                |
+| Select         | 176:2456      | components/ui/select.tsx          | yes                |
+| Separator      | 176:2250      | components/ui/separator.tsx       | yes                |
+| Sheet          | 176:2532      | components/ui/sheet.tsx           | yes                |
+| Sidebar        | 176:2935      | components/ui/sidebar.tsx         | yes                |
+| Skeleton       | 176:2553      | components/ui/skeleton.tsx        | yes                |
+| Slider         | 176:2440      | components/ui/slider.tsx          | yes                |
+| Sonner         | 176:2956      | components/ui/sonner.tsx          | yes                |
+| Spinner        | 176:2251      | components/ui/spinner.tsx         | yes                |
+| Switch         | 176:2410      | components/ui/switch.tsx          | yes                |
+| Table          | 176:2570      | components/ui/table.tsx           | yes                |
+| Tabs           | 176:2473      | components/ui/tabs.tsx            | yes                |
+| Textarea       | 176:2439      | components/ui/textarea.tsx        | yes                |
+| Toggle         | 176:2423      | components/ui/toggle.tsx          | yes                |
+| ToggleGroup    | 176:2651      | components/ui/toggle-group.tsx    | yes                |
+| Tooltip        | 176:2520      | components/ui/tooltip.tsx         | yes                |
+
+> Every node-id belongs to the `176:*` page of the source file. `AspectRatio`,
+> `Direction`, `Illustration`, `Logo` and `PasswordInput` **never** had a Figma counterpart.
+
+---
+
+## 3. Building block 1 — Figma Code Connect
+
+### Removed npm dependencies
 
 ```jsonc
 // package.json → devDependencies
@@ -148,7 +148,7 @@ ont été **conservées mais vidées** : il suffit de les repeupler avec ces val
 "@figma/plugin-typings": "^1.138.0"
 ```
 
-### `figma.config.json` (à recréer à la racine)
+### `figma.config.json` (to recreate at the root)
 
 ```json
 {
@@ -162,10 +162,10 @@ ont été **conservées mais vidées** : il suffit de les repeupler avec ces val
 }
 ```
 
-### `types/figma-code-connect.d.ts` (à recréer)
+### `types/figma-code-connect.d.ts` (to recreate)
 
-Augmentation de type nécessaire car la clé `instructions` — utilisée pour donner du
-contexte d'usage aux LLMs via Dev Mode — n'est pas déclarée par le package upstream.
+A type augmentation, needed because the `instructions` key — used to give LLMs
+usage context through Dev Mode — is not declared by the upstream package.
 
 ```ts
 import "@figma/code-connect"
@@ -182,7 +182,7 @@ declare module "@figma/code-connect/dist/connect/api" {
 }
 ```
 
-### `tsconfig.json` — mapping de chemin à réajouter
+### `tsconfig.json` — path mapping to add back
 
 ```jsonc
 "paths": {
@@ -192,7 +192,7 @@ declare module "@figma/code-connect/dist/connect/api" {
 }
 ```
 
-### `eslint.config.mjs` — override à réajouter
+### `eslint.config.mjs` — override to add back
 
 ```js
 {
@@ -204,7 +204,7 @@ declare module "@figma/code-connect/dist/connect/api" {
 }
 ```
 
-### Anatomie d'un fichier `.figma.tsx` (référence : `button.figma.tsx`)
+### Anatomy of a `.figma.tsx` file (reference: `button.figma.tsx`)
 
 ```tsx
 import figma from "@figma/code-connect"
@@ -251,50 +251,51 @@ figma.connect(
 )
 ```
 
-**Règles invariantes observées dans les 54 fichiers :**
+**Invariant rules observed across the 54 files:**
 
-- un `figma.connect()` par composant racine ; les sous-composants (ex. `CardHeader`)
-  font l'objet d'appels `figma.connect()` séparés dans le même fichier ;
-- `figma.enum()` mappe une propriété de variante Figma (clé = label Figma, **capitalisé**)
-  vers la valeur de prop React (**kebab/lowercase**) ;
-- `figma.string()` / `figma.boolean()` / `figma.children()` pour le contenu ;
-- `links[]` pointe systématiquement vers le fichier source sur GitHub ;
-- `instructions` est un texte en anglais décrivant _quand_ utiliser le composant —
-  cette information est **déjà présente en français** dans `specs/components/<Nom>.md`
-  (sections `## Rôle`, `## Usage`, `## Contraintes`) et peut en être régénérée.
+- one `figma.connect()` per root component; sub-components (such as `CardHeader`)
+  get their own `figma.connect()` calls in the same file;
+- `figma.enum()` maps a Figma variant property (key = the Figma label,
+  **capitalized**) to the React prop value (**kebab / lowercase**);
+- `figma.string()` / `figma.boolean()` / `figma.children()` for content;
+- `links[]` always points to the source file on GitHub;
+- `instructions` is English text that says _when_ to use the component — that
+  information **already exists** in `specs/components/<Name>.md` (the
+  `## Role`, `## Usage` and `## Constraints` sections) and can be regenerated
+  from it.
 
-> **Les mappings d'enums exacts ne sont pas reproduits ici** (54 fichiers).
-> Les récupérer depuis l'archive §0, ou les régénérer depuis les blocs `cva` des composants.
+> **The exact enum mappings are not reproduced here** (54 files).
+> Recover them from the §0 archive, or regenerate them from the components' `cva` blocks.
 
-### Scripts npm à restaurer
+### npm scripts to restore
 
 ```jsonc
 "typecheck:figma": "tsc --noEmit -p tsconfig.figma.json",
 "typecheck:all": "npm run typecheck && npm run typecheck:scripts && npm run typecheck:figma && npm run typecheck:mcp"
 ```
 
-Publication : `npx figma connect publish`.
+Publishing: `npx figma connect publish`.
 
 ---
 
-## 4. Brique 2 — Push des tokens vers Figma Variables
+## 4. Building block 2 — Pushing tokens to Figma Variables
 
-Fichier : `scripts/figma-push-variables.py` (~19 Ko, Python 3, stdlib uniquement).
+File: `scripts/figma-push-variables.py` (~19 KB, Python 3, standard library only).
 
-### Comportement
+### Behavior
 
-1. lit `tokens/primitive.json`, `tokens/semantic.json`, `tokens/component.json` (format DTCG) ;
-2. crée / met à jour **3 collections** Figma Variables :
-   - `Primitive` — collection **masquée** de la publication (`hiddenFromPublishing: true`),
-   - `Semantic` — **2 modes** : `light` + `dark`,
-   - `Component` — mode unique ;
-3. convertit `oklch(...)` → sRGB `{r,g,b,a}` (l'API Figma n'accepte pas oklch) ;
-4. `POST https://api.figma.com/v1/files/{FIGMA_FILE_KEY}/variables` avec
-   header `X-Figma-Token: $FIGMA_TOKEN` ;
-5. traduit la notation pointée locale (`color.background.default`) en notation
-   slash Figma (`color/background/default`).
+1. reads `tokens/primitive.json`, `tokens/semantic.json`, `tokens/component.json` (DTCG format);
+2. creates or updates **3** Figma Variables **collections**:
+   - `Primitive` — a collection **hidden** from publishing (`hiddenFromPublishing: true`),
+   - `Semantic` — **2 modes**: `light` + `dark`,
+   - `Component` — a single mode;
+3. converts `oklch(...)` → sRGB `{r,g,b,a}` (the Figma API does not accept oklch);
+4. `POST https://api.figma.com/v1/files/{FIGMA_FILE_KEY}/variables` with the
+   header `X-Figma-Token: $FIGMA_TOKEN`;
+5. translates the local dot notation (`color.background.default`) into Figma's
+   slash notation (`color/background/default`).
 
-### Scripts npm à restaurer
+### npm scripts to restore
 
 ```jsonc
 "figma:push": "python3 scripts/figma-push-variables.py",
@@ -303,32 +304,32 @@ Fichier : `scripts/figma-push-variables.py` (~19 Ko, Python 3, stdlib uniquement
 
 ---
 
-## 5. Brique 3 — Diff de tokens code ↔ Figma
+## 5. Building block 3 — Code ↔ Figma token diff
 
-Fichier : `scripts/tokens-diff.ts` (~14 Ko, tsx). **Était câblé dans `tokens-validate`
-et donc dans la CI.**
+File: `scripts/tokens-diff.ts` (~14 KB, tsx). **It was wired into `tokens-validate`,
+and therefore into CI.**
 
-### Comportement
+### Behavior
 
-- `GET https://api.figma.com/v1/files/{FIGMA_FILE_KEY}/variables/local` ;
-- si `FIGMA_FILE_KEY` ou `FIGMA_TOKEN` absents → **exit 0 avec warning** (non bloquant en local) ;
-- compare trois ensembles et sort en erreur sur `valueMismatch` :
-  - `onlyInLocal` (avertissement), `onlyInFigma` (avertissement), `valueMismatch` (**exit 1**).
+- `GET https://api.figma.com/v1/files/{FIGMA_FILE_KEY}/variables/local`;
+- when `FIGMA_FILE_KEY` or `FIGMA_TOKEN` is missing → **exit 0 with a warning** (not blocking locally);
+- compares three sets and exits with an error on `valueMismatch`:
+  - `onlyInLocal` (warning), `onlyInFigma` (warning), `valueMismatch` (**exit 1**).
 
-### Règles de normalisation à reproduire impérativement
+### Normalization rules to reproduce exactly
 
-| Cas               | Règle                                                                                                         |
-| ----------------- | ------------------------------------------------------------------------------------------------------------- |
-| Séparateur de nom | Figma `/` ↔ code `.`                                                                                          |
-| Couleurs          | Figma renvoie `{r,g,b,a}` floats → convertir en `#hex`, comparaison insensible à la casse                     |
-| Alias de variable | `{type: "VARIABLE_ALIAS"}` → **ignorer** (référence vers une autre variable)                                  |
-| Nombres           | tolérance absolue de **0.02** (précision flottante Figma)                                                     |
-| `letter-spacing`  | Figma ne sait pas représenter les `em` → stocke `0` ; tolérance de **1** sur ces clés                         |
-| Ombres / effets   | **exclues** de la comparaison (Figma les stocke en objets d'effet, pas en chaînes CSS)                        |
-| Mots composés     | Figma n'utilise pas de tiret → table `FIGMA_NAME_NORMALIZATION`                                               |
-| Renommages        | table bidirectionnelle `CODE_TO_FIGMA_ALIASES` / `FIGMA_TO_CODE_ALIASES`, le temps que Figma rattrape le code |
+| Case              | Rule                                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------------- |
+| Name separator    | Figma `/` ↔ code `.`                                                                                    |
+| Colors            | Figma returns `{r,g,b,a}` floats → convert to `#hex`, case-insensitive comparison                       |
+| Variable alias    | `{type: "VARIABLE_ALIAS"}` → **ignore** (a reference to another variable)                               |
+| Numbers           | absolute tolerance of **0.02** (Figma's floating-point precision)                                       |
+| `letter-spacing`  | Figma cannot represent `em` → stores `0`; tolerance of **1** on these keys                              |
+| Shadows / effects | **excluded** from the comparison (Figma stores them as effect objects, not CSS strings)                 |
+| Compound words    | Figma uses no hyphen → the `FIGMA_NAME_NORMALIZATION` table                                             |
+| Renames           | a two-way `CODE_TO_FIGMA_ALIASES` / `FIGMA_TO_CODE_ALIASES` table, while Figma catches up with the code |
 
-### Scripts npm à restaurer
+### npm scripts to restore
 
 ```jsonc
 "tokens:diff": "tsx scripts/tokens-diff.ts",
@@ -337,24 +338,24 @@ et donc dans la CI.**
 
 ---
 
-## 6. Brique 4 — Création programmatique des composants Figma
+## 6. Building block 4 — Creating the Figma components programmatically
 
-Dossier : `scripts/figma/` (17 fichiers). Pilotait la **Figma Plugin API** depuis VS Code
-via le serveur MCP `figma-console-mcp`.
+Folder: `scripts/figma/` (17 files). It drove the **Figma Plugin API** from VS Code
+through the `figma-console-mcp` MCP server.
 
-| Fichier                                           | Rôle                                                                                                 |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `_helpers.ts`                                     | primitives partagées : création de frames, application de variables, auto-layout                     |
-| `01-label.ts` → `10-finalize.ts`                  | un composant par script, **dans l'ordre de dépendance** (Label avant Field, Input avant Field, etc.) |
-| `run-all.ts`                                      | orchestrateur séquentiel                                                                             |
-| `all-components.js` (177 Ko)                      | dump généré de l'intégralité des composants                                                          |
-| `get-node-ids.js`                                 | extraction des node-ids après création → alimente `design-system.index.json`                         |
-| `mcp-client.cjs`, `run-query.cjs`, `sync-all.cjs` | client MCP bas niveau + synchronisation                                                              |
+| File                                              | Role                                                                                        |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `_helpers.ts`                                     | shared primitives: frame creation, variable binding, auto-layout                            |
+| `01-label.ts` → `10-finalize.ts`                  | one component per script, **in dependency order** (Label before Field, Input before Field…) |
+| `run-all.ts`                                      | sequential orchestrator                                                                     |
+| `all-components.js` (177 KB)                      | a generated dump of every component                                                         |
+| `get-node-ids.js`                                 | extracts the node-ids after creation → feeds `design-system.index.json`                     |
+| `mcp-client.cjs`, `run-query.cjs`, `sync-all.cjs` | low-level MCP client + synchronization                                                      |
 
-### `tsconfig.figma.json` (à recréer)
+### `tsconfig.figma.json` (to recreate)
 
-Projet TS séparé : le sandbox du Plugin Figma n'a **pas** les types Node.js,
-d'où `types: ["@figma/plugin-typings"]` et `lib: ["ES2020"]` isolés.
+A separate TS project: the Figma Plugin sandbox has **no** Node.js types, hence
+`types: ["@figma/plugin-typings"]` and `lib: ["ES2020"]`, kept apart.
 
 ```json
 {
@@ -369,16 +370,16 @@ d'où `types: ["@figma/plugin-typings"]` et `lib: ["ES2020"]` isolés.
 }
 ```
 
-Le `tsconfig.json` racine doit alors **exclure** `scripts/figma/**`.
+The root `tsconfig.json` must then **exclude** `scripts/figma/**`.
 
-### Configuration MCP (`.vscode/mcp.json`, absent du repo actuel)
+### MCP configuration (`.vscode/mcp.json`, not in the repository today)
 
-Serveur `figma-console-mcp` à réenregistrer. Règle d'or historique :
-**ne jamais modifier le kit Figma source à la main** — tout passe par ces scripts.
+The `figma-console-mcp` server must be registered again. The golden rule back
+then: **never edit the source Figma kit by hand** — everything goes through these scripts.
 
 ---
 
-## 7. Brique 5 — Métadonnées d'inventaire
+## 7. Building block 5 — Inventory metadata
 
 ### `design-system.index.json`
 
@@ -405,91 +406,95 @@ Serveur `figma-console-mcp` à réenregistrer. Règle d'or historique :
 
 ### `design-system.schema.json`
 
-- `library` : l'objet a été retiré avec `last_publish` (P3-09 : seule la bibliothèque Figma
-  le renseignait). Le réajouter à la racine (`required` et `properties`), avec
-  `required: ["last_publish", "figma_file_key"]` et les propriétés `last_publish`,
-  `figma_file_key`, `figma_site` (chaînes, `additionalProperties: false`) ;
-- `inventory.items.required` : réajouter `"figma_node_id"` ;
-- `inventory.items.properties.figma_node_id` : `{ "type": ["string","null"] }`.
+- `library`: the object was removed along with `last_publish` (P3-09: only the
+  Figma library filled it in). Add it back at the root (`required` and
+  `properties`), with `required: ["last_publish", "figma_file_key"]` and the
+  `last_publish`, `figma_file_key` and `figma_site` properties (strings,
+  `additionalProperties: false`);
+- `inventory.items.required`: add `"figma_node_id"` back;
+- `inventory.items.properties.figma_node_id`: `{ "type": ["string","null"] }`.
 
-### `specs/components/*.md` — **conservé, vidé**
+### `specs/components/*.md` — **kept, emptied**
 
-La ligne `| figma_node_id | |` est **toujours présente dans les 59 specs**, avec une
-valeur vide. C'est le point d'ancrage voulu : repeupler depuis la table §2.
-`mcp-server/src/context/generate.ts` lit ce champ via `get("figma_node_id") || null`.
+The `| figma_node_id | |` row is **still present in all 59 specs**, with an
+empty value. It is the intended anchor: repopulate it from the §2 table.
+`mcp-server/src/context/generate.ts` no longer reads it; restoring
+`figma_node_id: get("figma_node_id") || null` (below) is what brings it back to
+the MCP context.
 
-Deux sections ont par ailleurs été renommées et une supprimée :
+Two sections were also renamed and one was deleted:
 
-| Fichier                             | Avant                       | Après          |
-| ----------------------------------- | --------------------------- | -------------- |
-| `specs/components/Heading.md`       | `## Variantes Figma`        | `## Variantes` |
-| `specs/components/PasswordInput.md` | `## Variantes Figma`        | `## Variantes` |
-| `specs/components/Illustration.md`  | `## Notes Figma` (2 lignes) | supprimée      |
+| File                                | Before                            | After         |
+| ----------------------------------- | --------------------------------- | ------------- |
+| `specs/components/Heading.md`       | A "Figma variants" section        | `## Variants` |
+| `specs/components/PasswordInput.md` | A "Figma variants" section        | `## Variants` |
+| `specs/components/Illustration.md`  | A "Figma notes" section (2 lines) | deleted       |
 
 ### `mcp-server/src/context/generate.ts`
 
-À restaurer :
+To restore:
 
-- type `inventory[].figma_node_id: string | null` ;
-- `components.json` : champs `figma_node_id` et
-  `has_code_connect: existsSync(code_path.replace(/\.tsx$/, ".figma.tsx"))` ;
-- filtre du scan `components/ui/` : `!f.endsWith(".figma.tsx")` ;
-- `component-specs.json` : `figma_node_id: get("figma_node_id") || null` ;
-- `ds-metadata.json` : bloc `figma: { file_key, site, last_publish }`.
+- the type `inventory[].figma_node_id: string | null`;
+- `components.json`: the `figma_node_id` and
+  `has_code_connect: existsSync(code_path.replace(/\.tsx$/, ".figma.tsx"))` fields;
+- the `components/ui/` scan filter: `!f.endsWith(".figma.tsx")`;
+- `component-specs.json`: `figma_node_id: get("figma_node_id") || null`;
+- `ds-metadata.json`: a `figma: { file_key, site, last_publish }` block.
 
-### `mcp-server/src/tools/ds-core.ts` et `admin.ts`
+### `mcp-server/src/tools/ds-core.ts` and `admin.ts`
 
-À restaurer : `figma_coverage` et `code_connect_coverage` dans les stats,
-et le bloc `figma: { file_key, site }` dans `ds_overview`.
+To restore: `figma_coverage` and `code_connect_coverage` in the stats, and the
+`figma: { file_key, site }` block in `ds_overview`.
 
 ### `mcp-server/src/index.ts`
 
 ```ts
 const DEFAULT_ALLOWED_ORIGINS = [
-  "https://www.figma.com", // requis pour Figma Make en mode HTTP
+  "https://www.figma.com", // required for Figma Make in HTTP mode
   "https://figma.com",
   `http://localhost:${port}`,
   `http://127.0.0.1:${port}`,
 ]
 ```
 
-Et la description du serveur se terminait par `… tokens, Figma-synced`.
+And the server description ended with `… tokens, Figma-synced`.
 
-### ~~`packages/make-kit`~~ — section caduque
+### ~~`packages/make-kit`~~ — obsolete section
 
-Le package `make-kit` a été **supprimé du dépôt** (décision du 2026-09-17) : il était le véhicule
-de consommation pour Figma Make, et son scope npm `@DSAIReadable` — majuscules interdites par npm —
-n'était de toute façon pas publiable. Le canal de distribution unique est désormais le
-**registre shadcn** porté par ce dépôt.
+The `make-kit` package was **deleted from the repository** (decision of 2026-09-17): it
+was the delivery vehicle for Figma Make, and its npm scope `@DSAIReadable` — npm
+forbids capitals — could not have been published anyway. The single distribution
+channel is now the **shadcn registry** carried by this repository.
 
-Rien n'est à restaurer ici. Pour mémoire, les éléments Figma qu'il portait étaient :
-`publishConfig.registry` vers `registry.figma.com`, une section `## Figma library` dans son
-README, un en-tête `> Figma library: …` dans `guidelines.md`, une copie de
-`design-system.index.json` et un `.npmrc` redirigeant le scope vers le registre Figma.
+Nothing to restore here. For the record, the Figma elements it carried were:
+`publishConfig.registry` pointing to `registry.figma.com`, a `## Figma library`
+section in its README, a `> Figma library: …` header in `guidelines.md`, a copy
+of `design-system.index.json` and an `.npmrc` redirecting the scope to the Figma
+registry.
 
 ---
 
-## 8. Procédure de ré-intégration recommandée
+## 8. Suggested reintegration procedure
 
-Les briques sont indépendantes ; les faire dans cet ordre minimise le risque.
+The building blocks are independent; doing them in this order keeps the risk down.
 
-1. **Métadonnées d'abord** (brique 5) — repeupler `figma_node_id` dans les specs depuis §2,
-   puis `design-system.index.json` + `design-system.schema.json`, puis restaurer les
-   champs dans `generate.ts` / `ds-core.ts` / `admin.ts`.
+1. **Metadata first** (building block 5) — repopulate `figma_node_id` in the
+   specs from §2, then `design-system.index.json` + `design-system.schema.json`,
+   then restore the fields in `generate.ts` / `ds-core.ts` / `admin.ts`.
    → `npm run generate-context && npm run typecheck:mcp`
-2. **Tokens montants** (brique 2) — `figma-push-variables.py` : c'est la source de vérité
-   qui part du code, donc sans risque pour le DS.
+2. **Tokens going up** (building block 2) — `figma-push-variables.py`: the source
+   of truth flows out of the code, so it carries no risk for the design system.
    → `npm run figma:push:dry`
-3. **Tokens descendants** (brique 3) — `tokens-diff.ts`, puis le rebrancher dans
-   `tokens-validate` **seulement une fois qu'il passe au vert**, sinon la CI casse.
-4. **Code Connect** (brique 1) — réinstaller `@figma/code-connect`, recréer
-   `figma.config.json` + `types/figma-code-connect.d.ts` + overrides tsconfig/eslint,
-   puis restaurer les `.figma.tsx` depuis l'archive §0.
+3. **Tokens coming down** (building block 3) — `tokens-diff.ts`, then wire it back
+   into `tokens-validate` **only once it passes**, otherwise CI breaks.
+4. **Code Connect** (building block 1) — reinstall `@figma/code-connect`, recreate
+   `figma.config.json` + `types/figma-code-connect.d.ts` + the tsconfig / eslint
+   overrides, then restore the `.figma.tsx` files from the §0 archive.
    → `npm run typecheck:figma && npx figma connect publish`
-5. **Génération de composants Figma** (brique 4) — la plus lourde, à ne refaire que si
-   le kit Figma doit être régénéré depuis zéro.
+5. **Figma component generation** (building block 4) — the heaviest; only redo
+   it if the Figma kit has to be regenerated from scratch.
 
-### Checklist de vérification
+### Verification checklist
 
 ```bash
 npm run typecheck:all
@@ -500,16 +505,16 @@ npm run test
 
 ---
 
-## 9. Point de vigilance pour l'objectif « DS piloté par un agent IA »
+## 9. What matters for an "AI-driven design system"
 
-La couche Figma portait deux choses de nature différente :
+The Figma layer carried two things of a different nature:
 
-- **de la plomberie de synchronisation** (briques 1-4) — inutile à un agent IA qui
-  génère du code, puisqu'il lit directement les specs et les tokens ;
-- **de la sémantique de design** (le champ `instructions` des Code Connect,
-  les tables `## Variantes Figma`) — **précieuse** pour un agent.
+- **synchronization plumbing** (building blocks 1–4) — useless to an AI agent that
+  generates code, since it reads the specs and the tokens directly;
+- **design semantics** (the `instructions` field of the Code Connect files, the
+  "Figma variants" tables) — **valuable** to an agent.
 
-Cette sémantique n'a pas été perdue : elle est redondante avec
-`specs/components/*.md` (`## Rôle`, `## Usage`, `## Contraintes`, `## Props / API`)
-et avec `mcp-server/context/component-specs.json`. **Si la brique 1 est ré-intégrée,
-générer les `instructions` depuis les specs plutôt que de les maintenir en double.**
+Those semantics were not lost: they overlap with `specs/components/*.md`
+(`## Role`, `## Usage`, `## Constraints`, `## Props / API`) and with
+`mcp-server/context/component-specs.json`. **If building block 1 is reintegrated,
+generate the `instructions` from the specs instead of maintaining them twice.**

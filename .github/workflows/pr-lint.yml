@@ -1,8 +1,8 @@
 name: PR title
 
-# En squash merge, le titre de la PR devient le message du commit sur `main`.
-# Un titre non conforme casserait donc l'historique Conventional Commits que
-# le hook commit-msg protege en local.
+# With squash merges, the PR title becomes the commit message on `main`. A
+# non-conforming title would break the Conventional Commits history that the
+# commit-msg hook protects locally.
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
@@ -21,9 +21,9 @@ jobs:
           node-version: "24"
           cache: npm
       - run: npm ci
-      # Le titre passe par une variable d'environnement, jamais par une
-      # interpolation ${{ }} dans le shell : un titre de PR est une entree
-      # controlee par l'auteur (injection de commande).
+      # The title goes through an environment variable, never through a
+      # ${{ }} interpolation in the shell: a PR title is input controlled by
+      # its author (command injection).
       - name: Validate PR title against commitlint
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}

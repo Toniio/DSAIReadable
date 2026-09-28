@@ -1,8 +1,8 @@
 name: CI
 
-# Pas de filtre `paths:` volontairement : un check requis par la protection de
-# branche doit s'executer sur chaque PR, sinon il reste "en attente" et bloque
-# le merge au lieu de le garder.
+# No `paths:` filter, on purpose: a check required by branch protection must run
+# on every PR; otherwise it stays "pending" and blocks the merge instead of
+# guarding it.
 on:
   push:
     branches: [main]
@@ -101,12 +101,12 @@ jobs:
       - run: npm ci
       - run: npm ci --prefix mcp-server
       - run: npm run generate-context
-      # `git diff --exit-code` ignorerait un fichier de contexte nouvellement
-      # genere et non suivi : c'est precisement le cas qui doit echouer.
+      # `git diff --exit-code` would miss a newly generated, untracked context
+      # file: that is exactly the case that must fail.
       - name: Fail if generated context drifted
         run: |
           if [ -n "$(git status --porcelain)" ]; then
-            echo "::error::Le contexte genere derive des sources. Lance 'npm run generate-context' et commite le resultat."
+            echo "::error::The generated context has drifted from its sources. Run 'npm run generate-context' and commit the result."
             git status --porcelain
             git diff
             exit 1

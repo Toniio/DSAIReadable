@@ -1,65 +1,65 @@
-# Contribuer à DSAIReadable
+# Contributing to DSAIReadable
 
-Les règles applicables aux agents IA comme aux humains sont dans
-[`AGENTS.md`](./AGENTS.md). Ce document ne couvre que le processus de contribution.
+The rules that apply to AI agents and humans alike are in
+[`AGENTS.md`](./AGENTS.md). This document only covers the contribution process.
 
-## Prérequis
+## Prerequisites
 
 - Node.js 24
-- `npm ci` à la racine **et** `npm ci --prefix mcp-server`
+- `npm ci` at the root **and** `npm ci --prefix mcp-server`
 
-Les hooks git sont installés automatiquement par le script `prepare` (husky).
-Si `.husky/_` est absent, lancer `npm install`.
+The git hooks are installed automatically by the `prepare` script (husky).
+If `.husky/_` is missing, run `npm install`.
 
-## Cycle de travail
+## Workflow
 
-Une contribution = **un item du backlog**.
+One contribution = **one backlog item**.
 
 ```bash
 git switch -c fix/p0-03-destructive-foreground
-# … modifications …
+# … changes …
 npm run tokens-validate && npm run typecheck:all && npm run lint
 git commit -m "fix(tokens): add destructive-foreground token"
 git push -u origin fix/p0-03-destructive-foreground
 gh pr create
 ```
 
-### Nommage des branches
+### Branch names
 
-| Préfixe     | Usage                                   |
-| ----------- | --------------------------------------- |
-| `feat/`     | nouvelle capacité                       |
-| `fix/`      | correction de bug                       |
-| `chore/`    | maintenance, dépendances                |
-| `docs/`     | documentation, specs                    |
-| `ci/`       | CI, hooks, outillage de build           |
-| `refactor/` | refonte sans changement de comportement |
-| `test/`     | tests                                   |
+| Prefix      | Use                                 |
+| ----------- | ----------------------------------- |
+| `feat/`     | a new capability                    |
+| `fix/`      | a bug fix                           |
+| `chore/`    | maintenance, dependencies           |
+| `docs/`     | documentation, specs                |
+| `ci/`       | CI, hooks, build tooling            |
+| `refactor/` | a rework with no change in behavior |
+| `test/`     | tests                               |
 
-### Messages de commit
+### Commit messages
 
-Format [Conventional Commits](https://www.conventionalcommits.org/) :
-`type(scope): sujet à l'impératif, sans majuscule initiale, sans point final`.
+[Conventional Commits](https://www.conventionalcommits.org/) format:
+`type(scope): subject in the imperative, no leading capital, no trailing period`.
 
-Types autorisés : `feat` `fix` `chore` `docs` `ci` `refactor` `test` `style`
-`perf` `build` `revert`. En-tête limité à 100 caractères.
+Allowed types: `feat` `fix` `chore` `docs` `ci` `refactor` `test` `style`
+`perf` `build` `revert`. The header is limited to 100 characters.
 
-Le hook `commit-msg` rejette tout message non conforme. **Ne jamais contourner
-avec `--no-verify`.**
+The `commit-msg` hook rejects any non-conforming message. **Never bypass it
+with `--no-verify`.**
 
 ### Pull requests
 
-- Le **titre de la PR** devient le message de commit sur `main` (squash merge) :
-  il doit être au format Conventional Commits. Le workflow `pr-lint` le vérifie.
-- Remplir le gabarit : item du backlog, critères d'acceptation, sortie de la
-  commande de validation.
-- **CI verte obligatoire.** `main` est protégée, aucun push direct n'est possible.
-- Squash merge, puis suppression de la branche.
-- Un tag de version est posé à la fin de chaque lot de priorité du backlog.
+- The **PR title** becomes the commit message on `main` (squash merge): it must
+  follow Conventional Commits. The `pr-lint` workflow checks it.
+- Fill in the template: backlog item, acceptance criteria, output of the
+  validation command.
+- **Green CI required.** `main` is protected; no direct push is possible.
+- Squash merge, then delete the branch.
+- A version tag is set at the end of each priority batch of the backlog.
 
-## Ce que la CI vérifie
+## What CI checks
 
-| Job                 | Commande                                                                     |
+| Job                 | Command                                                                      |
 | ------------------- | ---------------------------------------------------------------------------- |
 | `tokens-validate`   | `npm run tokens-validate`                                                    |
 | `typecheck`         | `npm run typecheck:all`                                                      |
@@ -67,17 +67,20 @@ avec `--no-verify`.**
 | `build`             | `npm run build`                                                              |
 | `index-schema`      | `npm run index:validate`                                                     |
 | `spec-sections`     | `npm run specs:validate`                                                     |
-| `context-freshness` | `npm run generate-context` puis échec si l'arbre est sale                    |
+| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                  |
 | `mcp-test`          | `npm run mcp:test`                                                           |
-| `registry`          | `npm run registry:check`, validation shadcn, `npm run registry:test-install` |
+| `registry`          | `npm run registry:check`, shadcn validation, `npm run registry:test-install` |
 
-## Style de code
+## Code style
 
-Imposé par `.prettierrc` et appliqué par le hook pre-commit : 2 espaces,
-guillemets doubles, pas de point-virgule, `trailingComma: es5`. Une configuration
-unique pour tout le dépôt (`.ts`, `.tsx`, `.md`), `mcp-server/` compris. Ne jamais réordonner les classes
-Tailwind à la main — `prettier-plugin-tailwindcss` s'en charge.
+Enforced by `.prettierrc` and applied by the pre-commit hook: 2 spaces, double
+quotes, no semicolons, `trailingComma: es5`. A single configuration for the whole
+repository (`.ts`, `.tsx`, `.md`), `mcp-server/` included. Never reorder
+Tailwind classes by hand — `prettier-plugin-tailwindcss` takes care of it.
 
-## Serveur MCP en local
+Everything committed is written in English, natively — code, comments, docs,
+specs and demo copy.
 
-Copier `.vscode/mcp.json.example` vers `.vscode/mcp.json` (non versionné).
+## Running the MCP server locally
+
+Copy `.vscode/mcp.json.example` to `.vscode/mcp.json` (not committed).

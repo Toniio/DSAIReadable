@@ -1,122 +1,123 @@
-# Structure du projet — Design System
+# Project structure — Design System
 
-> Next.js 16 · React 19 · Tailwind CSS v4 · shadcn/ui (style `radix-lyra`) · TypeScript 5
+> Next.js 16 · React 19 · Tailwind CSS v4 · shadcn/ui (`radix-lyra` style) · TypeScript 5
 
-Ce repo est un **design system code-first** : les composants React, les tokens et la documentation machine-readable ont une source unique dans le code. Chaque valeur visuelle a une source unique.
+This repository is a **code-first design system**: the React components, the tokens and the machine-readable documentation have a single source, in the code. Every visual value has a single source.
 
-> La couche d'intégration Figma a été retirée. Spécification de ré-intégration : [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).
+> The Figma integration layer has been removed. Reintegration spec: [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).
 
 ---
 
-## Vue d'ensemble
+## Overview
 
 ```
 dsaireadable/
-├── app/                        # App Next.js (démo) : accueil, login (3 déclinaisons), banking
-├── components/ui/              # 59 composants React du DS
-├── lib/                        # Modules partagés : utils, focus, ui-strings, overlay
-├── hooks/                      # Hooks partagés (use-mobile)
-├── tokens/                     # Source de vérité des tokens (DTCG JSON)
-├── tokens.css                  # CSS custom properties générées — ne pas éditer
-├── specs/                      # Documentation markdown du DS (composants, fondations, tokens)
-├── scripts/                    # Outillage : génération et lint des tokens, specs, index, registre
-├── mcp-server/                 # Serveur MCP qui sert le DS aux agents (règles propres : son AGENTS.md)
-├── registry/                   # Sources des items de registre hors composants (conventions)
-├── registry.json               # Registre shadcn — généré
-├── design-system.index.json    # Inventaire machine-readable du DS
-├── design-system.schema.json   # JSON Schema validant l'index
-└── .husky/                     # Hooks git : pre-commit, commit-msg, pre-push
+├── app/                        # Next.js app (demo): home, sign-in (4 layouts), banking
+├── components/ui/              # The design system's 59 React components
+├── lib/                        # Shared modules: utils, focus, ui-strings, overlay
+├── hooks/                      # Shared hooks (use-mobile)
+├── tokens/                     # Source of truth for the tokens (DTCG JSON)
+├── tokens.css                  # Generated CSS custom properties — do not edit
+├── specs/                      # The design system's Markdown documentation (components, foundations, tokens)
+├── scripts/                    # Tooling: token, spec, index and registry generation and linting
+├── mcp-server/                 # MCP server that serves the design system to agents (its own rules: its AGENTS.md)
+├── registry/                   # Sources of the registry items that are not components (conventions)
+├── registry.json               # shadcn registry — generated
+├── design-system.index.json    # Machine-readable inventory of the design system
+├── design-system.schema.json   # JSON Schema that validates the index
+└── .husky/                     # Git hooks: pre-commit, commit-msg, pre-push
 ```
 
 ---
 
-## `app/` — Application Next.js
+## `app/` — Next.js application
 
-Point d'entrée de la démo. Pas d'écrans métier — sert uniquement à valider que les composants s'assemblent correctement.
+The demo's entry point. No business screens — it only exists to check that the components fit together.
 
-| Fichier                           | Rôle                                                                                                                 |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `app/layout.tsx`                  | Layout racine : charge les fonts (Geist, JetBrains Mono), wrap avec `ThemeProvider` (dark mode) et `TooltipProvider` |
-| `app/page.tsx`                    | Page de démo minimale — affiche un `<Button>` pour vérifier que le setup fonctionne                                  |
-| `app/globals.css`                 | CSS global : import de Tailwind et de `tokens.css`, pont `@theme inline` qui fait des tokens des classes Tailwind    |
-| `app/banking/page.tsx`            | Écran de démo bancaire : cartes, onglets, tableau de transactions, barres de budget (`Progress`)                     |
-| `app/login/page.tsx`              | Index des 3 déclinaisons de login (liens vers les sous-routes)                                                       |
-| `app/login/split-screen/page.tsx` | Login split-screen : illustration à gauche, formulaire à droite                                                      |
-| `app/login/centered/page.tsx`     | Login centré : formulaire dans une `<Card>` centrée sur la page                                                      |
-| `app/login/fullscreen/page.tsx`   | Login plein écran : formulaire occupe toute la hauteur de la fenêtre                                                 |
+| File                              | Role                                                                                                                     |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `app/layout.tsx`                  | Root layout: loads the fonts (Geist, JetBrains Mono), wraps the app in `ThemeProvider` (dark mode) and `TooltipProvider` |
+| `app/page.tsx`                    | Minimal demo page — renders a `<Button>` to check that the setup works                                                   |
+| `app/globals.css`                 | Global CSS: imports Tailwind and `tokens.css`; the `@theme inline` bridge turns the tokens into Tailwind classes         |
+| `app/banking/page.tsx`            | Banking demo screen: cards, tabs, a transactions table, budget bars (`Progress`)                                         |
+| `app/login/page.tsx`              | Index of the 4 sign-in layouts (links to the sub-routes)                                                                 |
+| `app/login/split-screen/page.tsx` | Split-screen sign-in: illustration on the left, form on the right                                                        |
+| `app/login/centered/page.tsx`     | Centered sign-in: the form in a `<Card>` centered on the page                                                            |
+| `app/login/fullscreen/page.tsx`   | Full-screen sign-in: the form fills the window's height                                                                  |
+| `app/login/secure/page.tsx`       | Secure sign-in: dark background with a dot pattern, back link                                                            |
 
 ---
 
-## `components/` — Composants React
+## `components/` — React components
 
 ### `components/theme-provider.tsx`
 
-Wrapper `next-themes` qui injecte la classe `dark` sur `<html>` et permet le toggle light/dark.
+A `next-themes` wrapper that sets the `dark` class on `<html>` and lets the user switch between light and dark.
 
-### `components/ui/` — Bibliothèque de composants
+### `components/ui/` — Component library
 
-59 composants shadcn/ui customisés. Chaque fichier exporte un ou plusieurs composants React avec :
+59 customized shadcn/ui components. Each file exports one or more React components with:
 
-- variantes gérées par `class-variance-authority` (cva)
-- tokens de design via les classes Tailwind que le pont `@theme` rattache aux tokens (`bg-primary`, `text-muted-foreground`…) — la liste exacte par composant est dans la section « Tokens utilisés » de sa spec
-- accessibilité Radix UI / Base UI sous-jacente
+- variants handled by `class-variance-authority` (cva)
+- design tokens through the Tailwind classes the `@theme` bridge ties to tokens (`bg-primary`, `text-muted-foreground`…) — the exact list per component is in the "Tokens" section of its spec
+- the accessibility of the underlying Radix UI / Base UI primitives
 
-**Composants notables :**
+**Notable components:**
 
-| Fichier              | Ce qu'il apporte                                                                                                           |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `button.tsx`         | Variantes default, outline, secondary, ghost, destructive, link + tailles xs/sm/default/lg et icon-xs/icon-sm/icon/icon-lg |
-| `field.tsx`          | Composition Label + Input + message d'erreur/helper — bloc formulaire complet                                              |
-| `input-group.tsx`    | Input avec addons gauche/droite (icônes, préfixes texte)                                                                   |
-| `password-input.tsx` | Input mot de passe avec toggle visibilité                                                                                  |
-| `combobox.tsx`       | Sélecteur avec recherche, simple ou multiple (Base UI `Combobox`)                                                          |
-| `empty.tsx`          | État vide standardisé avec illustration + message                                                                          |
-| `item.tsx`           | Ligne générique réutilisable (liste, menu, option)                                                                         |
-| `native-select.tsx`  | `<select>` natif stylisé — fallback accessible au `<Select>` Radix                                                         |
-| `spinner.tsx`        | Indicateur de chargement accessible                                                                                        |
-| `sidebar.tsx`        | Sidebar responsive complète avec collapse, navigation, raccourcis clavier                                                  |
-| `chart.tsx`          | Wrapper Recharts avec tokens DS + config légende/tooltip                                                                   |
-| `heading.tsx`        | Titre typographique (h1–h4) : `level` fixe niveau et taille, `as` découple le niveau sémantique                            |
-| `logo.tsx`           | Logo SVG composant                                                                                                         |
-| `illustration.tsx`   | Illustrations SVG du DS                                                                                                    |
+| File                 | What it brings                                                                                                              |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `button.tsx`         | default, outline, secondary, ghost, destructive and link variants + xs/sm/default/lg and icon-xs/icon-sm/icon/icon-lg sizes |
+| `field.tsx`          | Label + input + error/help message composition — a complete form block                                                      |
+| `input-group.tsx`    | An input with left / right add-ons (icons, text prefixes)                                                                   |
+| `password-input.tsx` | A password input with a visibility toggle                                                                                   |
+| `combobox.tsx`       | A searchable picker, single or multiple (Base UI `Combobox`)                                                                |
+| `empty.tsx`          | A standard empty state with an illustration and a message                                                                   |
+| `item.tsx`           | A generic reusable row (list, menu, option)                                                                                 |
+| `native-select.tsx`  | A styled native `<select>` — the accessible fallback to the Radix `<Select>`                                                |
+| `spinner.tsx`        | An accessible loading indicator                                                                                             |
+| `sidebar.tsx`        | A complete responsive sidebar with collapse, navigation and keyboard shortcuts                                              |
+| `chart.tsx`          | A Recharts wrapper with design system tokens and legend / tooltip configuration                                             |
+| `heading.tsx`        | A typographic heading (h1–h4): `level` sets the level and the size, `as` decouples the semantic level                       |
+| `logo.tsx`           | The logo, as an SVG component                                                                                               |
+| `illustration.tsx`   | The design system's SVG illustrations                                                                                       |
 
 ---
 
-## `tokens/` — Source de vérité des design tokens
+## `tokens/` — Source of truth for the design tokens
 
-Architecture **3 tiers** (format [DTCG W3C](https://design-tokens.github.io/community-group/format/)) :
+A **three-tier** architecture (in the [W3C DTCG](https://design-tokens.github.io/community-group/format/) format):
 
 ```
 tokens/
-├── primitive.json    # Tier 1 : valeurs brutes (privé)
-├── semantic.json     # Tier 2 : tokens sémantiques (public)
-└── component.json    # Tier 3 : aliases shadcn/ui (public)
+├── primitive.json    # Tier 1: raw values (private)
+├── semantic.json     # Tier 2: semantic tokens (public)
+└── component.json    # Tier 3: shadcn/ui aliases (public)
 ```
 
-### `tokens/primitive.json` — Tier 1 Primitif
+### `tokens/primitive.json` — Tier 1, Primitive
 
-Palette de valeurs brutes : couleurs hex, espacements rem, rayons, typographie, etc.  
-Marqués `"$private": true` — **jamais référencés directement dans les composants**.  
-Exemples : `color.mist.100`, `space.4`, `radius.md`.
+A palette of raw values: hex colors, rem spacing, radii, typography…  
+Marked `"$private": true` — **never referenced directly in components**.  
+Examples: `color.mist.100`, `space.4`, `radius.md`.
 
-### `tokens/semantic.json` — Tier 2 Sémantique
+### `tokens/semantic.json` — Tier 2, Semantic
 
-Tokens avec sens métier — référencent les primitives via `{color.mist.100}`.  
-Contient les **modes** light/dark dans `$extensions.modes`.  
-Exemples : `color.background.default`, `color.text.subtle`, `space.component.md`.
+Tokens that carry meaning — they reference the primitives through `{color.mist.100}`.  
+Holds the light / dark **modes** in `$extensions.modes`.  
+Examples: `color.background.default`, `color.text.subtle`, `space.component.md`.
 
-C'est la couche que lisent les composants : le pont `@theme` de `app/globals.css` rattache chaque classe Tailwind (`bg-background`) à un token sémantique (`--color-background-default`).
+This is the layer the components read: the `@theme` bridge in `app/globals.css` ties each Tailwind class (`bg-background`) to a semantic token (`--color-background-default`).
 
-### `tokens/component.json` — Tier 3 Composant
+### `tokens/component.json` — Tier 3, Component
 
-**Aliases de compatibilité shadcn/ui** : mappe les tokens sémantiques vers les noms attendus par shadcn (`--background`, `--primary`, `--ring`, etc.).  
-Ils servent le code shadcn externe qu'un consommateur ajouterait ; les composants du DS n'en lisent aucun.
+**shadcn/ui compatibility aliases**: they map the semantic tokens to the names shadcn expects (`--background`, `--primary`, `--ring`…).  
+They serve external shadcn code a consumer might add; the design system's own components read none of them.
 
 ---
 
-## `tokens.css` — CSS Custom Properties
+## `tokens.css` — CSS custom properties
 
-Fichier **généré exclusivement par `npm run tokens:build` — ne jamais l'éditer** (`tokens:check` détecte toute dérive). Il expose tous les tokens comme variables CSS :
+A file **generated only by `npm run tokens:build` — never edit it** (`tokens:check` catches any drift). It exposes every token as a CSS variable:
 
 ```css
 :root {
@@ -127,215 +128,219 @@ Fichier **généré exclusivement par `npm run tokens:build` — ne jamais l'éd
 }
 ```
 
-Importé dans `app/globals.css`, dont le bloc `@theme inline` fait le pont entre ces variables et les classes Tailwind.
+Imported into `app/globals.css`, whose `@theme inline` block bridges these variables to the Tailwind classes.
 
 ---
 
-## `scripts/` — Outillage
+## `scripts/` — Tooling
 
-Chaque script documente en tête de fichier ce qu'il vérifie et pourquoi. Tous tournent en CI.
+Each script explains at the top of the file what it checks and why. They all run in CI.
 
 ### Tokens — `npm run tokens-validate`
 
-| Script                      | Commande npm                        | Rôle                                                                                                                         |
-| --------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `build-tokens.ts`           | `tokens:build` / `tokens:check`     | Génère `tokens.css` depuis les sources DTCG ; `--check` échoue en cas de dérive                                              |
-| `lint-token-naming.ts`      | `tokens:lint-naming`                | Grammaire des clés (`foundation.property[.role][.emphasis][.state]`) ; les tiers 2 et 3 ne contiennent que des références    |
-| `lint-raw-values.ts`        | `tokens:lint-values`                | Détecte les valeurs brutes (hex, px, rem…) dans les composants. Exception : `// allow-raw: <raison>`                         |
-| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | Le pont `@theme` de `app/globals.css` : références résolues, aucun tier privé, chaque nom dans un espace de noms Tailwind    |
-| `lint-focus-ring.ts`        | `tokens:lint-focus`                 | Un seul anneau de focus (`lib/focus.ts`) pour tous les composants focusables                                                 |
-| `lint-contrast.ts`          | `tokens:lint-contrast`              | Contrastes WCAG des paires texte / fond, en clair et en sombre                                                               |
-| `lint-palette-monotonic.ts` | `tokens:lint-monotonic`             | Dans chaque palette, la luminance décroît strictement quand le palier monte                                                  |
-| `lint-chart-palette.ts`     | `tokens:lint-chart`                 | Chaque série `color.chart.*` à 3:1 sur ses fonds ; paires distinctes en OKLab, en vision normale, protanopie et deutéranopie |
-| `lint-font-tokens.ts`       | `tokens:lint-fonts`                 | Chaque token `typography.font-family.*` nomme la police que `next/font` charge sous sa variable                              |
-| `lint-token-lifecycle.ts`   | `tokens:lint-lifecycle`             | Chaque token sémantique déclare `active`, `reserved` ou `$deprecated`, et le statut correspond au code                       |
-| `build-token-docs.ts`       | `docs:tokens` / `docs:tokens:check` | Génère `specs/tokens/token-reference.md` et `tokens.manifest.json`                                                           |
+| Script                      | npm command                         | Role                                                                                                                             |
+| --------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `build-tokens.ts`           | `tokens:build` / `tokens:check`     | Generates `tokens.css` from the DTCG sources; `--check` fails on drift                                                           |
+| `lint-token-naming.ts`      | `tokens:lint-naming`                | Key grammar (`foundation.property[.role][.emphasis][.state]`); tiers 2 and 3 hold only references                                |
+| `lint-raw-values.ts`        | `tokens:lint-values`                | Detects raw values (hex, px, rem…) in components. Exception: `// allow-raw: <reason>`                                            |
+| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | The `@theme` bridge in `app/globals.css`: references resolve, no private tier, every name in a Tailwind namespace                |
+| `lint-focus-ring.ts`        | `tokens:lint-focus`                 | A single focus ring (`lib/focus.ts`) for every focusable component                                                               |
+| `lint-contrast.ts`          | `tokens:lint-contrast`              | WCAG contrast of the text / background pairs, in light and dark                                                                  |
+| `lint-palette-monotonic.ts` | `tokens:lint-monotonic`             | In every palette, luminance strictly decreases as the step goes up                                                               |
+| `lint-chart-palette.ts`     | `tokens:lint-chart`                 | Every `color.chart.*` series at 3:1 on its backgrounds; pairs distinct in OKLab under normal vision, protanopia and deuteranopia |
+| `lint-font-tokens.ts`       | `tokens:lint-fonts`                 | Every `typography.font-family.*` token names the font `next/font` loads under its variable                                       |
+| `lint-token-lifecycle.ts`   | `tokens:lint-lifecycle`             | Every semantic token declares `active`, `reserved` or `$deprecated`, and the status matches the code                             |
+| `build-token-docs.ts`       | `docs:tokens` / `docs:tokens:check` | Generates `specs/tokens/token-reference.md` and `tokens.manifest.json`                                                           |
 
 ### Specs — `npm run specs:validate`
 
-| Script                   | Commande npm     | Rôle                                                                                  |
-| ------------------------ | ---------------- | ------------------------------------------------------------------------------------- |
-| `build-spec-variants.ts` | `specs:variants` | Section `Variants`, depuis les `cva()` du code                                        |
-| `build-spec-tokens.ts`   | `specs:tokens`   | Section `Tokens`, classes résolues par Tailwind jusqu'au token                        |
-| `build-spec-api.ts`      | `specs:api`      | Section `Props / API`, depuis les exports TypeScript (`scripts/lib/component-api.ts`) |
-| `build-spec-choices.ts`  | `specs:choices`  | Règles de choix de l'index recopiées dans l'`Usage` des specs concernées              |
-| `lint-spec-sections.ts`  | —                | Les 13 sections canoniques, dans l'ordre                                              |
-| `lint-spec-wording.ts`   | —                | Aucune formulation floue ; chaque ligne de Constraints ouvre sur un mot-clé           |
+| Script                   | npm command      | Role                                                                                    |
+| ------------------------ | ---------------- | --------------------------------------------------------------------------------------- |
+| `build-spec-variants.ts` | `specs:variants` | The `Variants` section, from the code's `cva()` calls                                   |
+| `build-spec-tokens.ts`   | `specs:tokens`   | The `Tokens` section, classes resolved by Tailwind down to the token                    |
+| `build-spec-api.ts`      | `specs:api`      | The `Props / API` section, from the TypeScript exports (`scripts/lib/component-api.ts`) |
+| `build-spec-choices.ts`  | `specs:choices`  | The index's choice rules, copied into the `Usage` of the specs they concern             |
+| `lint-spec-sections.ts`  | —                | The 13 canonical sections, in order                                                     |
+| `lint-spec-wording.ts`   | —                | No hedged wording; every Constraints line opens with a keyword                          |
 
 ### Index — `npm run index:validate`
 
-| Script                | Commande npm      | Rôle                                                                                                        |
-| --------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| `validate-index.ts`   | `index:schema`    | `design-system.index.json` conforme à son JSON Schema                                                       |
-| `lint-sizes.ts`       | `index:sizes`     | Tailles de l'inventaire = tailles du code = tailles des specs                                               |
-| `lint-data-slot.ts`   | `index:data-slot` | Chaque composant expose un `data-slot`                                                                      |
-| `lint-ui-strings.ts`  | `index:strings`   | Les noms accessibles par défaut (aria-label, sr-only) viennent de `lib/ui-strings.ts`, jamais écrits en dur |
-| `lint-props-types.ts` | `index:props`     | Chaque composant exporté exporte le type de ses props                                                       |
+| Script                | npm command       | Role                                                                                           |
+| --------------------- | ----------------- | ---------------------------------------------------------------------------------------------- |
+| `validate-index.ts`   | `index:schema`    | `design-system.index.json` matches its JSON Schema                                             |
+| `lint-sizes.ts`       | `index:sizes`     | Inventory sizes = code sizes = spec sizes                                                      |
+| `lint-data-slot.ts`   | `index:data-slot` | Every component exposes a `data-slot`                                                          |
+| `lint-ui-strings.ts`  | `index:strings`   | Default accessible names (aria-label, sr-only) come from `lib/ui-strings.ts`, never hard-coded |
+| `lint-props-types.ts` | `index:props`     | Every exported component exports the type of its props                                         |
 
-### Registre
+### Registry
 
-| Script                     | Commande npm                        | Rôle                                                                 |
-| -------------------------- | ----------------------------------- | -------------------------------------------------------------------- |
-| `build-registry.ts`        | `registry:build` / `registry:check` | Génère `registry.json` depuis l'inventaire, les specs et les imports |
-| `test-registry-install.ts` | `registry:test-install`             | Installe tous les items dans une app vierge et la compile            |
+| Script                     | npm command                         | Role                                                                    |
+| -------------------------- | ----------------------------------- | ----------------------------------------------------------------------- |
+| `build-registry.ts`        | `registry:build` / `registry:check` | Generates `registry.json` from the inventory, the specs and the imports |
+| `test-registry-install.ts` | `registry:test-install`             | Installs every item in a blank app and builds it                        |
 
-Modules partagés : `scripts/lib/` (API des composants, polices `next/font`), `wcag.ts`, `color-vision.ts`.
+Shared modules: `scripts/lib/` (component API, `next/font` fonts), `wcag.ts`, `color-vision.ts`.
 
 ---
 
-## `specs/` — Documentation du design system
+## `specs/` — Design system documentation
 
-Documentation markdown structurée, consommable par les humains **et les LLMs** (via MCP).
+Structured Markdown documentation, consumable by people **and LLMs** (through MCP).
 
-### `specs/components/` — Specs composants (59 fichiers)
+### `specs/components/` — Component specs (59 files)
 
-Une spec par composant. Structure en 13 sections :
+One spec per component, in 13 sections:
 `Metadata` · `Role` · `Usage` · `Constraints` · `Dependencies` · `Anatomy` · `Tokens` · `Props / API` · `Variants` · `States` · `Accessibility` · `Code example` · `Cross-references`
 
-`Variants` est générée depuis les `cva()` du code (`npm run specs:variants`) ;
-`Tokens` est générée depuis les classes du code, résolues par Tailwind jusqu'au token sémantique (`npm run specs:tokens`) ;
-Les règles s'écrivent **MUST** / **MUST NOT** ou **SHOULD** … **unless** (**Note** pour un fait, en Constraints) ; `lint-spec-wording` refuse “avoid”, “prefer”, “if needed”… et toute ligne de Constraints sans mot-clé ;
-Les règles de choix entre composants voisins (`composition_rules` de l'index, champ `applies_to`) sont recopiées en dernière puce de leur `Usage` (`npm run specs:choices`) ;
-`Props / API` est générée depuis les exports TypeScript — un bloc par export, types et défauts tirés du code ; seules les descriptions s'éditent à la main (`npm run specs:api`) ;
-`Accessibility` suit une structure fixe — Pattern, Role, Keyboard, Accessible name, Pitfalls.
+`Variants` is generated from the code's `cva()` calls (`npm run specs:variants`);
+`Tokens` is generated from the code's classes, resolved by Tailwind down to the semantic token (`npm run specs:tokens`);
+rules are written **MUST** / **MUST NOT** or **SHOULD** … **unless** (**Note** for a fact, in Constraints); `lint-spec-wording` rejects "avoid", "prefer", "if needed"… and any Constraints line without a keyword;
+the rules for choosing between sibling components (the index's `composition_rules`, `applies_to` field) are copied as the last bullet of their `Usage` (`npm run specs:choices`);
+`Props / API` is generated from the TypeScript exports — one block per export, types and defaults taken from the code; only the descriptions are edited by hand (`npm run specs:api`);
+`Accessibility` follows a fixed structure — Pattern, Role, Keyboard, Accessible name, Pitfalls.
 
-### `specs/foundations/` — Specs des fondations
+### `specs/foundations/` — Foundation specs
 
-| Fichier           | Contient                                                                 |
-| ----------------- | ------------------------------------------------------------------------ |
-| `border-width.md` | Les deux largeurs de bordure et leur branchement Tailwind                |
-| `breakpoints.md`  | Les préfixes responsive comme contrat, valeurs des tokens `breakpoint.*` |
-| `color.md`        | Tableau complet tokens couleur light/dark + Do/Don't                     |
-| `elevation.md`    | Shadows et niveaux de profondeur                                         |
-| `motion.md`       | Durées et easings d'animation                                            |
-| `opacity.md`      | Niveaux d'opacité standardisés                                           |
-| `radius.md`       | Valeurs de border-radius                                                 |
-| `spacing.md`      | Grille d'espacement (space.1 = 4px → space.32 = 128px)                   |
-| `typography.md`   | Échelle typographique, familles, poids                                   |
+| File              | Holds                                                                          |
+| ----------------- | ------------------------------------------------------------------------------ |
+| `border-width.md` | The two border widths and how they are wired into Tailwind                     |
+| `breakpoints.md`  | The responsive prefixes as a contract; the values of the `breakpoint.*` tokens |
+| `color.md`        | The full table of light / dark color tokens + Do / Don't                       |
+| `content.md`      | Default strings (`UI_STRINGS`) and how to override them for another locale     |
+| `elevation.md`    | Shadows and depth levels                                                       |
+| `focus.md`        | The single focus ring and its presets (`lib/focus.ts`)                         |
+| `motion.md`       | Animation durations and easings                                                |
+| `opacity.md`      | The three semantic opacity levels                                              |
+| `radius.md`       | Border-radius values                                                           |
+| `spacing.md`      | Component spacing (4px → 32px) and layout spacing                              |
+| `typography.md`   | Type scale, families, weights                                                  |
 
-### `specs/tokens/token-reference.md` · `tokens.manifest.json` — générés
+### `specs/tokens/token-reference.md` · `tokens.manifest.json` — generated
 
-Référence exhaustive des **301** tokens des trois tiers : variable CSS, type, valeurs
-light/dark résolues, utilitaire Tailwind, Do/Don't. Le markdown est destiné aux
-humains, `tokens.manifest.json` à l'outillage.
+An exhaustive reference of the **301** tokens of the three tiers: CSS variable,
+type, resolved light / dark values, Tailwind utility, Do / Don't. The Markdown is
+meant for people, `tokens.manifest.json` for tooling.
 
-Les deux sont produits par `npm run docs:tokens` depuis `tokens/*.json` — la prose
-vit dans `$extensions.docs`. **Ne jamais les éditer à la main** : `npm run tokens-validate`
-échoue en cas de dérive.
-
----
-
-## Distribution — registre shadcn
-
-Il n'existe pas de package npm : le dépôt **est** le canal de distribution. Le
-`registry.json` à la racine suffit — pas de serveur, pas de JSON par item à héberger.
-Mode d'emploi consommateur complet : [README → _Consommer le design system_](./README.md#consommer-le-design-system).
-
-| Item                                | Contenu                                                                                                                    |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `Toniio/DSAIReadable/design-system` | Item de base : variables CSS des tokens, `lib/utils`, `lib/focus`, `lib/ui-strings`, `lib/overlay` — suit chaque composant |
-| `Toniio/DSAIReadable/<composant>`   | Un item par composant de `components/ui/`                                                                                  |
-| `Toniio/DSAIReadable/conventions`   | `registry/conventions/dsaireadable.md`, déposé en règles Cursor, Claude Code et Copilot                                    |
-
-`registry.json` est **généré** par `npm run registry:build` depuis
-`design-system.index.json`, les specs et les imports réels des composants —
-ne pas l'éditer à la main. Chaque dépendance npm y porte sa plage de version,
-prise dans `package.json`.
-
-> Une dépendance interne s'écrit en adresse complète `Toniio/DSAIReadable/<item>`.
-> Un nom nu comme `button` désigne le registre shadcn officiel, pas ce dépôt :
-> `registry:check` le refuse, car `shadcn registry validate` ne le voit pas.
-
-`npm run registry:test-install` installe tous les items dans une app vierge aux
-alias non standard et la compile : c'est le seul check qui prouve que le registre
-est **consommable**, pas seulement cohérent.
+Both are produced by `npm run docs:tokens` from `tokens/*.json` — the prose lives
+in `$extensions.docs`. **Never edit them by hand**: `npm run tokens-validate`
+fails on drift.
 
 ---
 
-## Fichiers de configuration racine
+## Distribution — shadcn registry
 
-| Fichier                     | Rôle                                                                                                                                                                                    |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `design-system.index.json`  | Inventaire machine-readable : liste tous les composants (`code_path`, statut), les règles de composition, le glossaire. Référencé par les scripts MCP et par la génération du registre. |
-| `design-system.schema.json` | JSON Schema qui valide la structure de `design-system.index.json`                                                                                                                       |
-| `components.json`           | Config shadcn CLI : style `radix-lyra`, couleur de base `mist`, icônes Phosphor, chemins d'alias                                                                                        |
-| `tokens.css`                | Variables CSS des tokens (importé par `globals.css`)                                                                                                                                    |
-| `next.config.mjs`           | Config Next.js standard                                                                                                                                                                 |
-| `tsconfig.json`             | TypeScript strict pour l'app ; `scripts/` et `mcp-server/` ont leurs propres projets                                                                                                    |
-| `eslint.config.mjs`         | ESLint : règles Next.js, et `better-tailwindcss` qui refuse les classes hors design system et `opacity-N` sur un état désactivé                                                         |
-| `lint-staged.config.mjs`    | Hook pre-commit : Prettier et ESLint sur les fichiers indexés, `typecheck:all`                                                                                                          |
-| `commitlint.config.mjs`     | Hook commit-msg : Conventional Commits                                                                                                                                                  |
-| `tsconfig.scripts.json`     | Projet TypeScript de `scripts/`                                                                                                                                                         |
-| `registry.json`             | Registre shadcn — généré par `npm run registry:build`                                                                                                                                   |
-| `postcss.config.mjs`        | PostCSS avec `@tailwindcss/postcss`                                                                                                                                                     |
+There is no npm package: the repository **is** the distribution channel. The
+`registry.json` at the root is enough — no server, no per-item JSON to host.
+Full consumer guide: [README → _Consuming the design system_](./README.md#consuming-the-design-system).
+
+| Item                                | Content                                                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `Toniio/DSAIReadable/design-system` | Base item: the tokens' CSS variables, `lib/utils`, `lib/focus`, `lib/ui-strings`, `lib/overlay` — follows every component |
+| `Toniio/DSAIReadable/<component>`   | One item per component in `components/ui/`                                                                                |
+| `Toniio/DSAIReadable/conventions`   | `registry/conventions/dsaireadable.md`, dropped as Cursor, Claude Code and Copilot rules                                  |
+
+`registry.json` is **generated** by `npm run registry:build` from
+`design-system.index.json`, the specs and the components' actual imports — do
+not edit it by hand. Each npm dependency carries its version range there, taken
+from `package.json`.
+
+> An internal dependency is written as a full address, `Toniio/DSAIReadable/<item>`.
+> A bare name such as `button` points to the official shadcn registry, not this
+> repository: `registry:check` rejects it, because `shadcn registry validate`
+> does not see it.
+
+`npm run registry:test-install` installs every item in a blank app with
+non-standard aliases and builds it: it is the only check that proves the
+registry is **consumable**, not just consistent.
 
 ---
 
-## Fichiers cachés (dotfiles)
+## Root configuration files
 
-### Racine
+| File                        | Role                                                                                                                                                                  |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `design-system.index.json`  | Machine-readable inventory: lists every component (`code_path`, status), the composition rules, the glossary. Read by the MCP scripts and by the registry generation. |
+| `design-system.schema.json` | JSON Schema that validates the structure of `design-system.index.json`                                                                                                |
+| `components.json`           | shadcn CLI config: `radix-lyra` style, `mist` base color, Phosphor icons, alias paths                                                                                 |
+| `tokens.css`                | The tokens' CSS variables (imported by `globals.css`)                                                                                                                 |
+| `next.config.mjs`           | Standard Next.js config                                                                                                                                               |
+| `tsconfig.json`             | Strict TypeScript for the app; `scripts/` and `mcp-server/` have their own projects                                                                                   |
+| `eslint.config.mjs`         | ESLint: Next.js rules, and `better-tailwindcss`, which rejects classes outside the design system and `opacity-N` on a disabled state                                  |
+| `lint-staged.config.mjs`    | Pre-commit hook: Prettier and ESLint on the staged files, `typecheck:all`                                                                                             |
+| `commitlint.config.mjs`     | Commit-msg hook: Conventional Commits                                                                                                                                 |
+| `tsconfig.scripts.json`     | The TypeScript project of `scripts/`                                                                                                                                  |
+| `registry.json`             | shadcn registry — generated by `npm run registry:build`                                                                                                               |
+| `postcss.config.mjs`        | PostCSS with `@tailwindcss/postcss`                                                                                                                                   |
 
-| Fichier           | Rôle                                                                                                                                                                       |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.prettierrc`     | Format : 2 espaces, guillemets doubles, pas de point-virgule, `trailingComma: es5`, plugin tailwindcss pour trier les classes. Configuration unique, `mcp-server/` compris |
-| `.prettierignore` | Exclut `dist/`, `node_modules/`, `.next/`, `*.tsbuildinfo`, `package-lock.json`, `next-env.d.ts` du formatage Prettier                                                     |
-| `.gitignore`      | Exclut `.next/`, `node_modules/`, `tsconfig.tsbuildinfo`, etc. du versioning                                                                                               |
+---
+
+## Hidden files (dotfiles)
+
+### Root
+
+| File              | Role                                                                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `.prettierrc`     | Format: 2 spaces, double quotes, no semicolons, `trailingComma: es5`, the tailwindcss plugin to sort classes. A single configuration, `mcp-server/` included |
+| `.prettierignore` | Keeps `dist/`, `node_modules/`, `.next/`, `*.tsbuildinfo`, `package-lock.json`, `next-env.d.ts` out of Prettier                                              |
+| `.gitignore`      | Keeps `.next/`, `node_modules/`, `tsconfig.tsbuildinfo`… out of version control                                                                              |
 
 ### `.github/`
 
-| Fichier                            | Rôle                                                                                                                                                      |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.github/copilot-instructions.md`  | Pointeur vers `AGENTS.md`, source de vérité unique des règles agent                                                                                       |
-| `.github/pull_request_template.md` | Gabarit de PR                                                                                                                                             |
-| `.github/workflows/ci.yml`         | CI GitHub Actions, 9 jobs : `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `registry` |
-| `.github/workflows/pr-lint.yml`    | Vérifie que le titre de PR respecte Conventional Commits                                                                                                  |
+| File                               | Role                                                                                                                                                     |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.github/copilot-instructions.md`  | Points to `AGENTS.md`, the single source of truth for agent rules                                                                                        |
+| `.github/pull_request_template.md` | PR template                                                                                                                                              |
+| `.github/workflows/ci.yml`         | GitHub Actions CI, 9 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `registry` |
+| `.github/workflows/pr-lint.yml`    | Checks that the PR title follows Conventional Commits                                                                                                    |
 
 ### `.vscode/`
 
-| Fichier                    | Rôle                                                                                                           |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `.vscode/mcp.json.example` | Gabarit versionné de configuration des serveurs MCP VS Code ; `.vscode/mcp.json` reste local et ignoré par git |
+| File                       | Role                                                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `.vscode/mcp.json.example` | Committed template of the VS Code MCP server configuration; `.vscode/mcp.json` stays local and ignored by git |
 
-### Fichiers `.gitkeep`
+### `.gitkeep` files
 
-Présents dans `components/`, `hooks/`, `lib/`, `public/` — vestiges de l'initialisation, quand ces dossiers étaient vides ; `public/` l'est encore.
+Present in `components/`, `hooks/`, `lib/`, `public/` — leftovers from the initial setup, when these folders were empty; `public/` still is.
 
 ---
 
-## Flux de données
+## Data flow
 
 ```
 tokens/*.json
-    ├──▶ tokens.css ──▶ app/globals.css (@theme inline) ──▶ classes Tailwind ──▶ components/ui/
+    ├──▶ tokens.css ──▶ app/globals.css (@theme inline) ──▶ Tailwind classes ──▶ components/ui/
     └──▶ token-reference.md · tokens.manifest.json          (docs:tokens)
 
 components/ui/*.tsx ──▶ specs/components/*.md               (Variants, Tokens, Props / API)
-design-system.index.json ──▶ specs/components/*.md          (règles de choix, Usage)
+design-system.index.json ──▶ specs/components/*.md          (choice rules, Usage)
 
-specs/ · tokens/ · index · components/ ──▶ mcp-server/context/*.json   (generate-context) ──▶ agents MCP
-index · specs · components/ ──▶ registry.json               (registry:build) ──▶ consommateurs shadcn
+specs/ · tokens/ · index · components/ ──▶ mcp-server/context/*.json   (generate-context) ──▶ MCP agents
+index · specs · components/ ──▶ registry.json               (registry:build) ──▶ shadcn consumers
 ```
 
 ---
 
-## Commandes clés
+## Key commands
 
 ```bash
-npm run dev               # Démarrer Next.js (démo)
-npm run tokens:lint-values  # Vérifier l'absence de valeurs brutes dans les composants
-npm run tokens:lint-naming  # Vérifier la grammaire DTCG des tokens
-npm run tokens:lint-bridge  # Vérifier le bridge @theme de Tailwind
-npm run tokens-validate     # Toutes les validations de tokens en séquence
-npm run specs:validate      # Specs : sections, parties générées, formulation
-npm run typecheck:all       # TypeScript : app, scripts, mcp-server
-npm run format              # Prettier sur tous les .ts/.tsx/.md
+npm run dev               # Start Next.js (demo)
+npm run tokens:lint-values  # Check that components hold no raw values
+npm run tokens:lint-naming  # Check the tokens' DTCG grammar
+npm run tokens:lint-bridge  # Check Tailwind's @theme bridge
+npm run tokens-validate     # Every token check in sequence
+npm run specs:validate      # Specs: sections, generated parts, wording
+npm run typecheck:all       # TypeScript: app, scripts, mcp-server
+npm run format              # Prettier on every .ts/.tsx/.md
 ```
 
 ---
 
-## Conventions importantes
+## Key conventions
 
-- **Jamais de valeur brute** dans un composant — tout passe par une classe Tailwind mappée sur un token, ou un token CSS (`var(--…)`).
-- **Exception** : `// allow-raw: <raison>` autorise ponctuellement une valeur brute inévitable (ex. sélecteurs d'attributs CSS ciblant des SVGs Recharts).
-- **Grammaire de naming** : `foundation.property[.role][.emphasis][.state]`. Rôle et état ne se fusionnent jamais en un seul segment.
-- **Tier 1 (primitive) est privé** — les composants et l'extérieur ne l'utilisent jamais directement.
+- **Never a raw value** in a component — everything goes through a Tailwind class mapped to a token, or a CSS token (`var(--…)`).
+- **Exception**: `// allow-raw: <reason>` allows an unavoidable raw value on a case-by-case basis (for example CSS attribute selectors that target Recharts SVGs).
+- **Naming grammar**: `foundation.property[.role][.emphasis][.state]`. Role and state are never merged into a single segment.
+- **Tier 1 (primitive) is private** — components and the outside world never use it directly.
+- **Everything in English** — code, comments, docs, specs and demo copy.

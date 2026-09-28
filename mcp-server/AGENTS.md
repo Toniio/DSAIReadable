@@ -1,69 +1,69 @@
-# AGENTS.md — serveur MCP
+# AGENTS.md — MCP server
 
-Complète le [`AGENTS.md` racine](../AGENTS.md), qui reste la référence : ce
-fichier n'ajoute que ce qui est propre à `mcp-server/` et ne le contredit
-jamais. Une contradiction entre les deux est un bug à signaler.
+Complements the [root `AGENTS.md`](../AGENTS.md), which remains the reference:
+this file only adds what is specific to `mcp-server/` and never contradicts it.
+A contradiction between the two is a bug to report.
 
-Le serveur expose le design system aux agents : **16 tools** (`src/tools/`),
-**3 resources** (`src/resources/index.ts`) et **5 prompts**
-(`src/prompts/index.ts`). Il ne lit jamais les sources à la volée : il sert un
-cache JSON pré-compilé, `context/*.json`.
+The server exposes the design system to agents: **16 tools** (`src/tools/`),
+**3 resources** (`src/resources/index.ts`) and **5 prompts**
+(`src/prompts/index.ts`). It never reads the sources on the fly: it serves a
+precompiled JSON cache, `context/*.json`.
 
 ---
 
-## 1. Le cache de contexte est généré
+## 1. The context cache is generated
 
 ```
 specs/components/*.md  specs/foundations/*.md  tokens/*.json
 design-system.index.json  components/ui/*.tsx  app/**/page.tsx
 package.json  mcp-server/package.json  registry.json
         ↓ npm run generate-context   (src/context/generate.ts)
-mcp-server/context/*.json            16 fichiers — NE JAMAIS ÉDITER À LA MAIN
+mcp-server/context/*.json            16 files — NEVER EDIT BY HAND
         ↓ loadContext()              (src/lib/context.ts)
-tools et prompts
+tools and prompts
 ```
 
-- Une réponse fausse d'un tool se corrige **à la source** (la spec, le token)
-  ou **dans le générateur**, jamais dans le JSON.
-- Après toute modification d'une source ci-dessus : `npm run generate-context`
-  et commiter le résultat. Le job CI `context-freshness` échoue sur le moindre
-  écart.
-- `loadContext()` lève une erreur si un fichier manque ou est corrompu. Ne pas
-  la remplacer par un repli silencieux (`{}`) : un cache vide ressemble à un
-  design system vide, et l'agent répond faux avec assurance.
+- A wrong answer from a tool is fixed **at the source** (the spec, the token)
+  or **in the generator**, never in the JSON.
+- After any change to one of the sources above: run `npm run generate-context`
+  and commit the result. The `context-freshness` CI job fails on the slightest
+  drift.
+- `loadContext()` throws when a file is missing or corrupt. Do not replace that
+  with a silent fallback (`{}`): an empty cache looks like an empty design
+  system, and the agent answers wrongly with confidence.
 
-## 2. Commandes
+## 2. Commands
 
-Depuis la racine du dépôt :
+From the root of the repository:
 
 ```bash
-npm run generate-context   # régénère context/*.json — zéro diff attendu si rien n'a changé
-npm run mcp:test           # suite du serveur (src/test.ts)
-UPDATE_SNAPSHOTS=1 npm run mcp:test  # accepte un changement du prompt build_screen (snapshot), à relire dans le diff
-npm run typecheck:mcp      # tsc sur mcp-server/ (inclus dans typecheck:all)
-npm run mcp:start          # serveur stdio
-npm run mcp:start:http     # serveur HTTP, 127.0.0.1:3100 par défaut
+npm run generate-context   # regenerates context/*.json — zero diff expected when nothing changed
+npm run mcp:test           # the server's suite (src/test.ts)
+UPDATE_SNAPSHOTS=1 npm run mcp:test  # accepts a change to the build_screen prompt (snapshot); review it in the diff
+npm run typecheck:mcp      # tsc on mcp-server/ (part of typecheck:all)
+npm run mcp:start          # stdio server
+npm run mcp:start:http     # HTTP server, 127.0.0.1:3100 by default
 ```
 
-⚠️ `npm ci` à la racine **n'installe pas** `mcp-server/`. Après un clone ou une
-copie du dépôt : `npm ci --prefix mcp-server`. Un `node_modules` recopié d'une
-autre machine casse `generate-context` (binaire esbuild d'une autre plateforme) :
-le supprimer et réinstaller.
+⚠️ `npm ci` at the root **does not install** `mcp-server/`. After cloning or
+copying the repository: `npm ci --prefix mcp-server`. A `node_modules` copied
+from another machine breaks `generate-context` (an esbuild binary built for
+another platform): delete it and reinstall.
 
-## 3. Règles propres au serveur
+## 3. Server-specific rules
 
-| Règle                                                                                                                                                                                                                                                                                                                                 | Pourquoi                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **Tout correctif du générateur ou d'un tool ajoute un test à `src/test.ts`, et ce test doit échouer sans le correctif**                                                                                                                                                                                                               | Les bugs du parseur (variantes cva, tableaux de specs) servaient des données fausses sans qu'aucun check ne rougisse |
-| **Chaque règle de `validate_screen` a sa fixture négative** (`NEGATIVE_FIXTURES` dans `src/test.ts`)                                                                                                                                                                                                                                  | Une règle jamais vue en échec peut ne rien détecter                                                                  |
-| **Parser le Markdown par structure, pas par position** : tableaux par en-tête, `\|` échappés respectés                                                                                                                                                                                                                                | Les specs sont formatées par Prettier et contiennent plusieurs tableaux par section                                  |
-| **Versions et identité viennent de `ds-metadata.json`**, qui nomme la source de chaque champ (`sources`) : `design_system_version` ← `design-system.index.json`, `mcp_server_version` ← `mcp-server/package.json`, `registry_source` ← `registry.json`, `stack` ← `package.json` ; aucune version littérale dans le code servi (test) | Une version codée en dur ment dès le premier bump                                                                    |
-| **Chaque tool est déclaré avec `registerTool` et `annotations: READ_ONLY`** (`src/lib/annotations.ts`)                                                                                                                                                                                                                                | Sans annotation, la spec MCP présume un tool destructeur et ouvert : le client peut faire confirmer chaque appel     |
-| **Un tool qui ne trouve rien renvoie `notFound()`** (`isError: true` + les valeurs admises) ; **chaque tool a son cas dans `TOOL_CASES`** (`src/test.ts`) : une assertion de contenu, un cas d'erreur                                                                                                                                 | Un `{ error }` sans `isError` se lit comme une réponse réussie ; un tool ajouté sans cas n'est vérifié par rien      |
-| **HTTP lié à `127.0.0.1` par défaut** ; `MCP_HOST` et `MCP_ALLOWED_ORIGINS` ne s'élargissent que délibérément                                                                                                                                                                                                                         | Le serveur n'a pas d'authentification                                                                                |
-| **Ne pas toucher `railway.json`** sans instruction                                                                                                                                                                                                                                                                                    | Le maintien du déploiement HTTP distant reste à trancher par le propriétaire du dépôt                                |
+| Rule                                                                                                                                                                                                                                                                                                                            | Why                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Every fix to the generator or to a tool adds a test to `src/test.ts`, and that test must fail without the fix**                                                                                                                                                                                                               | Parser bugs (cva variants, spec tables) served wrong data while no check turned red                              |
+| **Every `validate_screen` rule has its negative fixture** (`NEGATIVE_FIXTURES` in `src/test.ts`)                                                                                                                                                                                                                                | A rule never seen failing may detect nothing                                                                     |
+| **Parse Markdown by structure, not by position**: tables by header, escaped `\|` respected                                                                                                                                                                                                                                      | The specs are formatted by Prettier and hold several tables per section                                          |
+| **Versions and identity come from `ds-metadata.json`**, which names the source of each field (`sources`): `design_system_version` ← `design-system.index.json`, `mcp_server_version` ← `mcp-server/package.json`, `registry_source` ← `registry.json`, `stack` ← `package.json`; no literal version in the served code (tested) | A hard-coded version is wrong from the first bump                                                                |
+| **Every tool is declared with `registerTool` and `annotations: READ_ONLY`** (`src/lib/annotations.ts`)                                                                                                                                                                                                                          | Without annotations, the MCP spec assumes a destructive, open-world tool: the client may confirm every call      |
+| **A tool that finds nothing returns `notFound()`** (`isError: true` plus the accepted values); **every tool has its case in `TOOL_CASES`** (`src/test.ts`): one content assertion, one error case                                                                                                                               | An `{ error }` without `isError` reads as a successful answer; a tool added without a case is checked by nothing |
+| **HTTP bound to `127.0.0.1` by default**; `MCP_HOST` and `MCP_ALLOWED_ORIGINS` are only widened deliberately                                                                                                                                                                                                                    | The server has no authentication                                                                                 |
+| **Do not touch `railway.json`** without an instruction                                                                                                                                                                                                                                                                          | Whether to keep the remote HTTP deployment is still for the repository owner to decide                           |
 
 ## 4. Style
 
-Même configuration Prettier que la racine (§ 7 du `AGENTS.md` racine) : pas de
-`.prettierrc` local, n'en ajouter aucun.
+The same Prettier configuration as the root (§ 7 of the root `AGENTS.md`): no
+local `.prettierrc`; do not add one.
