@@ -13,7 +13,8 @@
 - **Class-based dark mode** (`.dark` on `<html>`), never `prefers-color-scheme`.
 - **Read `specs/components/<Component>.md`** before writing or changing a component.
 - **Never edit by hand** `tokens.css`, `mcp-server/context/*.json`,
-  `design-system.index.json`, `specs/tokens/token-reference.md`, `tokens.manifest.json` —
+  `design-system.index.json`, `specs/tokens/token-reference.md`, `tokens.manifest.json`,
+  `registry.json`, `llms.txt` —
   these files are generated.
 - **Write everything in English**, natively: code, comments, docs, specs.
 

@@ -1,0 +1,103 @@
+# DSAIReadable
+
+> An AI-readable design system for React 19, Next.js 16 and Tailwind CSS v4, built on shadcn/ui. Components install from a shadcn registry as source code; tokens, specs and composition rules are published as structured files an agent can read, and a local MCP server serves them as tools.
+
+Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes or `var(--…)` tokens, never a raw value (hex, `px`, `rem`, `ms`); and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections.
+
+## Start here
+
+- [README](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/README.md): what the design system is, how to install its components and run its MCP server
+- [Conventions](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/registry/conventions/dsaireadable.md): the rules for any UI written with the components — the file the `conventions` registry item installs
+- [AGENTS.md](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/AGENTS.md): the rules for changing this repository
+- [Contributing](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/CONTRIBUTING.md): branches, commits, pull requests and the checks CI runs
+
+## Machine-readable sources
+
+- [design-system.index.json](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/design-system.index.json): the inventory: every component with its code path, status and sizes, the composition rules and the glossary
+- [design-system.schema.json](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/design-system.schema.json): the JSON Schema of the inventory
+- [Token reference](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/tokens/token-reference.md): every token with its CSS variable, status, light and dark values and Tailwind class
+- [tokens.manifest.json](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/tokens.manifest.json): the same tokens as JSON
+- [registry.json](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/registry.json): the shadcn registry; install an item with `npx shadcn@latest add Toniio/DSAIReadable/<item>`
+
+## Foundations
+
+- [Border Width](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/border-width.md)
+- [Breakpoints](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/breakpoints.md)
+- [Color](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/color.md)
+- [Content — default strings and localization](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/content.md)
+- [Elevation](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/elevation.md)
+- [Focus](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/focus.md)
+- [Motion](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/motion.md)
+- [Opacity](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/opacity.md)
+- [Radius](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/radius.md)
+- [Spacing](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/spacing.md)
+- [Typography](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/typography.md)
+
+## Component specs
+
+- [Accordion](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Accordion.md): Navigation — A vertical stack of collapsible panels that shows and hides sections of content.
+- [Alert](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Alert.md): Feedback — A non-modal banner that delivers a contextual message — informational or an error — with a title, a description and an optional action.
+- [AlertDialog](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/AlertDialog.md): Overlay — A blocking modal that stops the user to confirm or cancel a critical action.
+- [AspectRatio](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/AspectRatio.md): Layout — A container that locks its content — an image, a video, an embedded map — to a fixed width-to-height ratio.
+- [Avatar](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Avatar.md): Misc — A visual stand-in for a person or an entity — a photo, initials or an icon — with support for groups and status badges.
+- [Badge](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Badge.md): Misc — A compact label that categorizes an element, marks its status or highlights a piece of metadata.
+- [Breadcrumb](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Breadcrumb.md): Navigation — Secondary navigation that shows the path to the current page, so the user can climb back up the hierarchy.
+- [Button](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Button.md): Forms — Triggers a primary or secondary action; comes in several visual variants and sizes.
+- [ButtonGroup](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/ButtonGroup.md): Misc — A container that visually joins adjacent buttons, inputs or selects by merging their borders and corners.
+- [Calendar](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Calendar.md): Data — An interactive date picker built on `react-day-picker`: single, multiple or range selection, with month-by-month navigation.
+- [Card](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Card.md): Layout — A surface that brings a title, a description, content and a footer together in one consistent structure.
+- [Carousel](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Carousel.md): Data — A horizontal or vertical scroller that moves between slides with buttons or the keyboard, built on `embla-carousel`.
+- [Chart](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Chart.md): Data — A container and a set of helpers for data visualization, built on `recharts`: theming, tooltips and a legend, all configured through a `ChartConfig` object.
+- [Checkbox](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Checkbox.md): Forms — A two-state (or indeterminate) checkbox for selecting an option in a form, built on Radix `Checkbox.Root`.
+- [Collapsible](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Collapsible.md): Layout — A disclosure: a trigger that shows or hides one section of content.
+- [Combobox](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Combobox.md): Forms — A text input with autocomplete that picks from a filterable list of options; supports single and multiple selection (chips).
+- [Command](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Command.md): Forms — A command palette with built-in search, for quickly filtering and picking an action or an item from a structured list.
+- [ContextMenu](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/ContextMenu.md): Overlay — A menu opened with a right-click that lists the actions relevant to the element under the pointer.
+- [Dialog](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Dialog.md): Overlay — A general-purpose modal window that shows interactive content — a form, details, a confirmation — above the main interface.
+- [Direction](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Direction.md): Layout — A context provider that passes the reading direction (LTR / RTL) down to every child component.
+- [Drawer](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Drawer.md): Overlay — A panel that slides in from an edge of the screen and follows the user's swipe — built for mobile interactions.
+- [DropdownMenu](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/DropdownMenu.md): Overlay — A menu opened by clicking a button, listing actions or selection options.
+- [Empty](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Empty.md): Feedback — A composable empty state, shown when a view, a list or a section has no data.
+- [Field](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Field.md): Forms — A layout system for form fields: it ties a label to its control, carries the invalid state, and holds help text and error messages.
+- [Heading](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Heading.md): Typography — A semantic heading (h1–h4) with four visual sizes, set in the heading typeface.
+- [HoverCard](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/HoverCard.md): Overlay — A floating preview card that appears when the pointer rests on an element and shows extra information without a click.
+- [Illustration](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Illustration.md): Media — A placeholder for illustrations and decorative images, used in split-screen layouts, error pages, empty states and onboarding.
+- [Input](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Input.md): Forms — A single-line text (or file) input: the basic building block of every form.
+- [InputGroup](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/InputGroup.md): Forms — A container that arranges an input with add-ons — icons, buttons, text, labels — around it.
+- [InputOtp](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/InputOtp.md): Forms — A segmented input for one-time passcodes (OTP), with automatic movement between slots and an animated caret.
+- [Item](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Item.md): Misc — A composable row that stands for one entry in a list, with slots for media, a title, a description, actions, and header and footer sections.
+- [Kbd](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Kbd.md): Misc — An inline label that shows a keyboard key or a key combination.
+- [Label](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Label.md): Forms — An accessible label tied to a form control, built on Radix `Label.Root`.
+- [Logo](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Logo.md): Brand — The application's brand mark. The component renders the pictogram alone; it is a placeholder, to be swapped for the real brand assets once they are provided.
+- [Menubar](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Menubar.md): Navigation — A horizontal bar of drop-down menus, with submenus, checkable items, radio groups and keyboard shortcuts.
+- [NativeSelect](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/NativeSelect.md): Forms — The browser's native drop-down: a light, accessible way to pick one option from a list.
+- [NavigationMenu](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/NavigationMenu.md): Navigation — Primary navigation that organizes the site's links into categories, with drop-down content panels and transition animations.
+- [Pagination](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Pagination.md): Navigation — Sequential navigation through paged result sets, with numbered links, previous / next links and an ellipsis.
+- [PasswordInput](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/PasswordInput.md): Forms — A password field with a button that toggles visibility (open eye / slashed eye). Composed of `InputGroup`, `InputGroupInput` and `InputGroupButton`.
+- [Popover](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Popover.md): Overlay — An interactive floating container opened by a click, for rich content — a form, a picker, a preview — without leaving the current context.
+- [Progress](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Progress.md): Data — A linear progress bar that shows how far an operation or a process has gone, built on the Radix UI `Progress` primitive.
+- [RadioGroup](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/RadioGroup.md): Forms — A group of radio buttons for picking exactly one option out of several.
+- [Resizable](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Resizable.md): Layout — Resizable panels: an area split into sections the user adjusts by dragging the handles between them.
+- [ScrollArea](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/ScrollArea.md): Layout — A scroll container with styled scrollbars that replace the browser's native ones.
+- [Select](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Select.md): Forms — A styled drop-down built on Radix for picking one option from a list, with automatic positioning and option groups.
+- [Separator](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Separator.md): Layout — A horizontal or vertical rule that divides sections of content, built on Radix `Separator`.
+- [Sheet](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Sheet.md): Overlay — A panel that slides in from the side (or from the top or bottom) over the interface, built on Radix Dialog, to show longer content without leaving the page.
+- [Sidebar](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Sidebar.md): Layout — A complete side navigation panel: responsive (a Sheet on mobile), collapsible, with a keyboard shortcut and its state persisted in a cookie.
+- [Skeleton](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Skeleton.md): Layout — An animated loading placeholder in the shape of the content to come, which makes waiting feel shorter.
+- [Slider](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Slider.md): Forms — A slider that picks a numeric value (or a range) within set bounds, horizontally or vertically.
+- [Sonner](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Sonner.md): Feedback — The provider for short-lived toast notifications, built on the `sonner` library, with custom icons and a theme that follows the app's.
+- [Spinner](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Spinner.md): Feedback — An animated loading indicator that signals an asynchronous operation is in progress.
+- [Switch](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Switch.md): Forms — A toggle switch that turns a two-state setting on or off, with immediate visual feedback.
+- [Table](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Table.md): Data — A set of components for building semantic data tables — header, body, footer and caption — with horizontal scrolling.
+- [Tabs](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Tabs.md): Navigation — Tabbed navigation that switches between mutually exclusive content panels; horizontal or vertical, in a default or a line style.
+- [Textarea](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Textarea.md): Forms — A multi-line text field that grows with its content (`field-sizing-content`), for free-form text.
+- [Toggle](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Toggle.md): Forms — A two-state (pressed / not pressed) toggle button in several variants and sizes; its variants are exported for reuse (by `ToggleGroup`, for example).
+- [ToggleGroup](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/ToggleGroup.md): Misc — A group of toggle buttons — exclusive or multi-select — built on Radix ToggleGroup, sharing one variant and size through context.
+- [Tooltip](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Tooltip.md): Feedback — A small contextual label that appears when a trigger is hovered or focused, built on Radix Tooltip.
+
+## Optional
+
+- [Project structure](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/PROJECT_STRUCTURE.md): where each kind of file lives and which files are generated
+- [MCP server rules](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/mcp-server/AGENTS.md): the rules for changing the MCP server
+- [Changelog](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/CHANGELOG.md)
+- [Security policy](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/SECURITY.md)
