@@ -25,29 +25,27 @@ export default function LoginCentered() {
         <Card className="w-full">
           <CardHeader>
             <CardTitle>
-              <Heading level={2}>Se connecter</Heading>
+              <Heading level={2}>Sign in</Heading>
             </CardTitle>
             <CardDescription>
-              Entrez vos identifiants pour accéder à votre espace.
+              Enter your credentials to access your account.
             </CardDescription>
           </CardHeader>
 
           <CardContent>
             <form className="flex flex-col gap-5">
               <Field>
-                <FieldLabel htmlFor="email-centered">Adresse e-mail</FieldLabel>
+                <FieldLabel htmlFor="email-centered">Email address</FieldLabel>
                 <Input
                   id="email-centered"
                   type="email"
-                  placeholder="nom@entreprise.fr"
+                  placeholder="name@company.com"
                   autoComplete="email"
                 />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="password-centered">
-                  Mot de passe
-                </FieldLabel>
+                <FieldLabel htmlFor="password-centered">Password</FieldLabel>
                 <PasswordInput
                   id="password-centered"
                   placeholder="••••••••"
@@ -59,23 +57,23 @@ export default function LoginCentered() {
                 <Field orientation="horizontal">
                   <Checkbox id="remember-centered" />
                   <FieldLabel htmlFor="remember-centered">
-                    Se souvenir de moi
+                    Remember me
                   </FieldLabel>
                 </Field>
                 <Button variant="link" className="h-auto p-0 text-xs" asChild>
-                  <a href="#">Mot de passe oublié ?</a>
+                  <a href="#">Forgot password?</a>
                 </Button>
               </div>
 
               <Button type="submit" className="w-full">
-                Se connecter
+                Sign in
               </Button>
             </form>
           </CardContent>
 
           <CardFooter className="justify-center">
             <FieldDescription>
-              Pas encore de compte ? <a href="#">Créer un compte</a>
+              Don&apos;t have an account? <a href="#">Sign up</a>
             </FieldDescription>
           </CardFooter>
         </Card>

@@ -27,24 +27,24 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 const accounts = [
   {
     id: "checking",
-    label: "Compte courant",
+    label: "Checking account",
     number: "•••• 4821",
     balance: 12_847.32,
-    currency: "€",
+    currency: "$",
   },
   {
     id: "savings",
-    label: "Livret A",
+    label: "Savings account",
     number: "•••• 9103",
     balance: 34_520.0,
-    currency: "€",
+    currency: "$",
   },
   {
     id: "investment",
-    label: "PEA",
+    label: "Brokerage account",
     number: "•••• 6754",
     balance: 8_312.45,
-    currency: "€",
+    currency: "$",
     trend: "+3.2%",
   },
 ]
@@ -52,57 +52,57 @@ const accounts = [
 const transactions = [
   {
     id: "t1",
-    label: "Carrefour Market",
-    category: "Courses",
-    date: "10 mai",
+    label: "Corner Grocery",
+    category: "Groceries",
+    date: "May 10",
     amount: -67.42,
     status: "completed",
   },
   {
     id: "t2",
-    label: "Virement — Salaire",
-    category: "Revenus",
-    date: "5 mai",
+    label: "Direct deposit — Salary",
+    category: "Income",
+    date: "May 5",
     amount: 3_240.0,
     status: "completed",
   },
   {
     id: "t3",
     label: "Netflix",
-    category: "Abonnements",
-    date: "3 mai",
+    category: "Subscriptions",
+    date: "May 3",
     amount: -17.99,
     status: "completed",
   },
   {
     id: "t4",
-    label: "EDF Électricité",
-    category: "Énergie",
-    date: "2 mai",
+    label: "Metro Electric",
+    category: "Utilities",
+    date: "May 2",
     amount: -89.0,
     status: "pending",
   },
   {
     id: "t5",
-    label: "Transfert → Livret A",
-    category: "Épargne",
-    date: "1 mai",
+    label: "Transfer → Savings",
+    category: "Savings",
+    date: "May 1",
     amount: -500.0,
     status: "completed",
   },
 ]
 
 const budgets = [
-  { label: "Courses", spent: 320, limit: 450, color: "bg-chart-1" },
-  { label: "Transports", spent: 85, limit: 120, color: "bg-chart-2" },
-  { label: "Loisirs", spent: 190, limit: 200, color: "bg-chart-3" },
-  { label: "Abonnements", spent: 62, limit: 80, color: "bg-chart-4" },
+  { label: "Groceries", spent: 320, limit: 450, color: "bg-chart-1" },
+  { label: "Transportation", spent: 85, limit: 120, color: "bg-chart-2" },
+  { label: "Entertainment", spent: 190, limit: 200, color: "bg-chart-3" },
+  { label: "Subscriptions", spent: 62, limit: 80, color: "bg-chart-4" },
 ]
 
 function formatCurrency(amount: number) {
-  return new Intl.NumberFormat("fr-FR", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "EUR",
+    currency: "USD",
   }).format(amount)
 }
 
@@ -135,9 +135,9 @@ export default function BankingHomePage() {
 
       {/* Welcome */}
       <section className="flex flex-col gap-1">
-        <Heading level={1}>Bonjour, Anthony</Heading>
+        <Heading level={1}>Hello, Anthony</Heading>
         <p className="text-sm text-muted-foreground">
-          Voici le résumé de vos comptes au 10 mai 2026.
+          Here is a summary of your accounts as of May 10, 2026.
         </p>
       </section>
 
@@ -166,16 +166,16 @@ export default function BankingHomePage() {
       {/* Quick Actions */}
       <section className="flex flex-wrap gap-2">
         <Button variant="default" size="sm">
-          Virement
+          Transfer
         </Button>
         <Button variant="outline" size="sm">
-          Paiement
+          Pay
         </Button>
         <Button variant="outline" size="sm">
-          RIB
+          Account details
         </Button>
         <Button variant="ghost" size="sm">
-          Plafonds
+          Limits
         </Button>
       </section>
 
@@ -184,8 +184,8 @@ export default function BankingHomePage() {
       {/* Tabs: Transactions / Budget */}
       <Tabs defaultValue="transactions" className="flex flex-col gap-4">
         <TabsList variant="line">
-          <TabsTrigger value="transactions">Transactions récentes</TabsTrigger>
-          <TabsTrigger value="budget">Budget mensuel</TabsTrigger>
+          <TabsTrigger value="transactions">Recent transactions</TabsTrigger>
+          <TabsTrigger value="budget">Monthly budget</TabsTrigger>
         </TabsList>
 
         {/* Transactions Tab */}
@@ -195,11 +195,11 @@ export default function BankingHomePage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Opération</TableHead>
-                    <TableHead>Catégorie</TableHead>
+                    <TableHead>Transaction</TableHead>
+                    <TableHead>Category</TableHead>
                     <TableHead>Date</TableHead>
-                    <TableHead className="text-right">Montant</TableHead>
-                    <TableHead>Statut</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                    <TableHead>Status</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -222,7 +222,7 @@ export default function BankingHomePage() {
                             tx.status === "completed" ? "secondary" : "outline"
                           }
                         >
-                          {tx.status === "completed" ? "Effectué" : "En cours"}
+                          {tx.status === "completed" ? "Completed" : "Pending"}
                         </Badge>
                       </TableCell>
                     </TableRow>
@@ -256,7 +256,7 @@ export default function BankingHomePage() {
                     {Math.round(
                       ((budget.limit - budget.spent) / budget.limit) * 100
                     )}
-                    % restant
+                    % left
                   </p>
                 </CardContent>
               </Card>
@@ -269,7 +269,7 @@ export default function BankingHomePage() {
       <footer className="mt-auto pt-4">
         <Separator />
         <p className="pt-4 text-center text-xs text-muted-foreground">
-          © 2026 BankApp — Données simulées à des fins de démonstration.
+          © 2026 BankApp — Simulated data for demonstration purposes.
         </p>
       </footer>
     </div>

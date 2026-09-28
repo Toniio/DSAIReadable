@@ -31,22 +31,22 @@ export default function LoginFullscreen() {
 
         <div className="flex flex-col gap-1">
           <Heading level={1} className="text-background">
-            Se connecter
+            Sign in
           </Heading>
           <p className="text-sm text-background/70">
-            Entrez vos identifiants pour accéder à votre espace.
+            Enter your credentials to access your account.
           </p>
         </div>
 
         <form className="flex flex-col gap-5">
           <Field>
             <FieldLabel htmlFor="email-full" className="text-background/80">
-              Adresse e-mail
+              Email address
             </FieldLabel>
             <Input
               id="email-full"
               type="email"
-              placeholder="nom@entreprise.fr"
+              placeholder="name@company.com"
               autoComplete="email"
               className="border-background/20 bg-background/10 text-background placeholder:text-background/40 focus-visible:border-background/40 focus-visible:ring-background/20"
             />
@@ -54,7 +54,7 @@ export default function LoginFullscreen() {
 
           <Field>
             <FieldLabel htmlFor="password-full" className="text-background/80">
-              Mot de passe
+              Password
             </FieldLabel>
             <PasswordInput
               id="password-full"
@@ -74,7 +74,7 @@ export default function LoginFullscreen() {
                 htmlFor="remember-full"
                 className="text-background/80"
               >
-                Se souvenir de moi
+                Remember me
               </FieldLabel>
             </Field>
             <Button
@@ -82,7 +82,7 @@ export default function LoginFullscreen() {
               className="h-auto p-0 text-xs text-background/80 hover:text-background"
               asChild
             >
-              <a href="#">Mot de passe oublié ?</a>
+              <a href="#">Forgot password?</a>
             </Button>
           </div>
 
@@ -90,12 +90,12 @@ export default function LoginFullscreen() {
             type="submit"
             className="w-full bg-background text-foreground hover:bg-background/90"
           >
-            Se connecter
+            Sign in
           </Button>
         </form>
 
         <FieldDescription className="text-center text-background/60 [&_a]:text-background/80 [&_a:hover]:text-background">
-          Pas encore de compte ? <a href="#">Créer un compte</a>
+          Don&apos;t have an account? <a href="#">Sign up</a>
         </FieldDescription>
       </div>
     </div>

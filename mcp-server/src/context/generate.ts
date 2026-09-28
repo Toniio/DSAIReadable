@@ -780,13 +780,13 @@ function generateIcons() {
   const result = {
     library: "@phosphor-icons/react",
     description:
-      "Le design system utilise exclusivement Phosphor Icons via @phosphor-icons/react.",
+      "The design system uses Phosphor Icons exclusively, through @phosphor-icons/react.",
     default_size: "size-4 (1rem)",
     rule: rule?.rule ?? "",
     usage: [
-      "Toutes les icônes doivent provenir de @phosphor-icons/react",
-      "Taille par défaut dans les composants : size-4 (1rem)",
-      "Aucune autre bibliothèque d'icônes n'est autorisée",
+      "Every icon comes from @phosphor-icons/react",
+      "Default size inside components: size-4 (1rem)",
+      "No other icon library is allowed",
     ],
     catalog_url: "https://phosphoricons.com/",
   }
@@ -869,32 +869,32 @@ function generateGlossary() {
     {
       term: "design system",
       definition:
-        "Ensemble cohérent de composants, tokens et règles qui garantissent la consistance visuelle et fonctionnelle d'un produit.",
+        "A coherent set of components, tokens and rules that keeps a product visually and functionally consistent.",
     },
     {
       term: "variant",
       definition:
-        "Déclinaison visuelle d'un composant (ex: default, outline, ghost pour un Button).",
+        "A visual version of a component (for example default, outline or ghost for a Button).",
     },
     {
-      term: "composant",
+      term: "component",
       definition:
-        "Élément UI réutilisable avec une API définie (props, slots, événements).",
+        "A reusable UI element with a defined API (props, slots, events).",
     },
     {
       term: "foundation",
       definition:
-        "Couche de base du design system — couleurs, typographie, espacement, élévation, radius, opacité, motion.",
+        "The base layer of the design system — color, typography, spacing, elevation, radius, opacity, motion.",
     },
     {
       term: "slot",
       definition:
-        "Point d'ancrage dans l'anatomie d'un composant, exposé via l'attribut data-slot.",
+        "A named part of a component's anatomy, exposed through the data-slot attribute.",
     },
     {
       term: "token",
       definition:
-        "Design token — variable de design réutilisable qui encode une décision visuelle (couleur, espacement, etc.).",
+        "Design token — a reusable design variable that encodes a visual decision (color, spacing…).",
     },
   ]
 
@@ -918,8 +918,8 @@ function generateContentLibrary() {
   for (const pf of pageFiles) {
     try {
       const code = read(pf)
-      // French string literals from JSX
-      const stringRegex = /["'>]([A-ZÀ-Ÿ][a-zà-ÿ\s,'·—\-…]+)["'<]/g
+      // Capitalized string literals and JSX text
+      const stringRegex = /["'>]([A-Z][a-z\s,'·—\-…]+)["'<]/g
       let m
       while ((m = stringRegex.exec(code)) !== null) {
         const val = m[1].trim()
@@ -927,7 +927,7 @@ function generateContentLibrary() {
           const key = val
             .toLowerCase()
             .replace(/\s+/g, "_")
-            .replace(/[^a-z0-9_àâäéèêëïîôùûüÿç]/g, "")
+            .replace(/[^a-z0-9_]/g, "")
             .slice(0, 30)
           labels[key] = val
         }
@@ -954,7 +954,7 @@ function generateContentLibrary() {
     const codeSection = mdSection(md, "Code example")
     const code = mdCode(codeSection || md)
     if (code) {
-      const labelRegex = />\s*([A-ZÀ-Ÿ][a-zà-ÿ\s']+)\s*</g
+      const labelRegex = />\s*([A-Z][a-z\s']+)\s*</g
       let m
       while ((m = labelRegex.exec(code)) !== null) {
         const val = m[1].trim()
@@ -962,7 +962,7 @@ function generateContentLibrary() {
           const key = val
             .toLowerCase()
             .replace(/\s+/g, "_")
-            .replace(/[^a-z0-9_àâäéèêëïîôùûüÿç]/g, "")
+            .replace(/[^a-z0-9_]/g, "")
             .slice(0, 30)
           labels[key] = val
         }
@@ -972,32 +972,32 @@ function generateContentLibrary() {
 
   // Add common UI labels
   Object.assign(labels, {
-    se_connecter: "Se connecter",
-    annuler: "Annuler",
-    confirmer: "Confirmer",
-    enregistrer: "Enregistrer",
-    supprimer: "Supprimer",
-    fermer: "Fermer",
-    suivant: "Suivant",
-    précédent: "Précédent",
-    rechercher: "Rechercher",
-    virement: "Virement",
-    paiement: "Paiement",
+    sign_in: "Sign in",
+    cancel: "Cancel",
+    confirm: "Confirm",
+    save: "Save",
+    delete: "Delete",
+    close: "Close",
+    next: "Next",
+    previous: "Previous",
+    search: "Search",
+    transfer: "Transfer",
+    payment: "Payment",
   })
 
   Object.assign(placeholders, {
-    email: "nom@entreprise.fr",
+    email: "name@company.com",
     password: "••••••••",
-    search: "Rechercher…",
+    search: "Search…",
   })
 
   Object.assign(messages, {
-    error_generic: "Une erreur est survenue",
-    error_network: "Erreur de connexion au serveur",
-    success_saved: "Modifications enregistrées",
-    empty_state: "Aucun résultat trouvé",
-    loading: "Chargement en cours…",
-    confirm_delete: "Êtes-vous sûr de vouloir supprimer cet élément ?",
+    error_generic: "Something went wrong",
+    error_network: "Couldn't reach the server",
+    success_saved: "Changes saved",
+    empty_state: "No results found",
+    loading: "Loading…",
+    confirm_delete: "Delete this item? This can't be undone.",
   })
 
   return write("content-library.json", { labels, placeholders, messages })
@@ -1009,32 +1009,32 @@ function generateDatavizDecisionTree() {
     objectives: [
       {
         name: "Evolution",
-        description: "Montrer un changement dans le temps",
+        description: "Show change over time",
         recommended_charts: ["line", "area", "difference"],
       },
       {
         name: "Correlation",
-        description: "Montrer la relation entre variables",
+        description: "Show the relationship between variables",
         recommended_charts: ["bubble", "heatmap"],
       },
       {
         name: "Comparison",
-        description: "Comparer des valeurs",
+        description: "Compare values",
         recommended_charts: ["bar", "cigarette", "radar"],
       },
       {
         name: "Distribution",
-        description: "Montrer la répartition",
+        description: "Show how values are spread",
         recommended_charts: ["histogram"],
       },
       {
         name: "Proportion",
-        description: "Montrer les parts d'un tout",
+        description: "Show the parts of a whole",
         recommended_charts: ["pie", "donut"],
       },
       {
         name: "KPI",
-        description: "Afficher un indicateur clé",
+        description: "Show a key indicator",
         recommended_charts: ["data_card", "gauge", "mini_chart"],
       },
     ],
@@ -1059,162 +1059,155 @@ function generateDatavizCatalog() {
   const catalog: JsonObject = {
     line: {
       name: "Line Chart",
-      description: "Graphique en ligne pour l'évolution temporelle",
+      description: "Line chart for change over time",
       library: "recharts",
       component: "LineChart",
       tokens: chartTokens,
       anatomy: ["axes", "lines", "dots", "tooltip", "legend"],
       do: [
-        "Limiter à 5 séries max",
-        "Utiliser les tokens --color-chart-* pour les couleurs de séries",
-        "Ajouter un tooltip pour le détail des valeurs",
+        "Keep it to 5 series at most",
+        "Use the --color-chart-* tokens for the series colors",
+        "Add a tooltip for the detailed values",
       ],
       dont: [
-        "Ne pas utiliser pour comparer des catégories non temporelles",
-        "Ne pas dépasser 5 séries dans un même graphique",
+        "Do not use it to compare categories that are not over time",
+        "Do not exceed 5 series in the same chart",
       ],
       variants: ["single", "multi", "stacked"],
     },
     area: {
       name: "Area Chart",
-      description: "Graphique en aire pour montrer les volumes dans le temps",
+      description: "Area chart for volumes over time",
       library: "recharts",
       component: "AreaChart",
       tokens: chartTokens,
       anatomy: ["axes", "areas", "tooltip", "legend"],
       do: [
-        "Utiliser la transparence pour les zones empilées",
-        "Limiter à 3 séries pour la lisibilité",
+        "Use transparency for stacked areas",
+        "Keep it to 3 series for readability",
       ],
       dont: [
-        "Ne pas empiler plus de 3 séries",
-        "Ne pas utiliser sans axe temporel",
+        "Do not stack more than 3 series",
+        "Do not use it without a time axis",
       ],
       variants: ["single", "stacked", "gradient"],
     },
     bar: {
       name: "Bar Chart",
-      description:
-        "Graphique en barres pour comparer des valeurs entre catégories",
+      description: "Bar chart for comparing values across categories",
       library: "recharts",
       component: "BarChart",
       tokens: chartTokens,
       anatomy: ["axes", "bars", "tooltip", "legend"],
       do: [
-        "Ordonner les barres par valeur quand c'est pertinent",
-        "Utiliser des barres horizontales si les labels sont longs",
+        "Sort the bars by value when the order carries meaning",
+        "Use horizontal bars when the labels are long",
       ],
       dont: [
-        "Ne pas utiliser pour montrer une évolution temporelle (préférer line)",
-        "Ne pas surcharger avec plus de 5 catégories par groupe",
+        "Do not use it to show change over time (use line)",
+        "Do not put more than 5 categories in a group",
       ],
       variants: ["vertical", "horizontal", "grouped", "stacked"],
     },
     pie: {
       name: "Pie Chart",
-      description: "Graphique circulaire pour les proportions",
+      description: "Pie chart for proportions",
       library: "recharts",
       component: "PieChart",
       tokens: chartTokens,
       anatomy: ["slices", "labels", "tooltip", "legend"],
       do: [
-        "Limiter à 5 segments max",
-        "Grouper les petites valeurs dans 'Autres'",
+        "Keep it to 5 slices at most",
+        "Group the small values into 'Other'",
       ],
       dont: [
-        "Ne pas utiliser pour comparer des valeurs précises",
-        "Ne pas afficher plus de 6 segments",
+        "Do not use it to compare precise values",
+        "Do not show more than 6 slices",
       ],
       variants: ["full", "half"],
     },
     donut: {
       name: "Donut Chart",
-      description: "Variante du pie chart avec un trou central pour un KPI",
+      description: "A pie chart with a hole in the middle for a KPI",
       library: "recharts",
       component: "PieChart",
       tokens: chartTokens,
       anatomy: ["slices", "center_label", "tooltip", "legend"],
-      do: ["Afficher le KPI principal au centre", "Limiter à 5 segments max"],
+      do: ["Show the main KPI in the center", "Keep it to 5 slices at most"],
       dont: [
-        "Ne pas imbriquer plusieurs donuts",
-        "Ne pas utiliser sans valeur centrale",
+        "Do not nest several donuts",
+        "Do not use it without a center value",
       ],
       variants: ["with_center_label", "minimal"],
     },
     radar: {
       name: "Radar Chart",
-      description:
-        "Graphique radar pour comparer des entités sur plusieurs axes",
+      description: "Radar chart for comparing entities across several axes",
       library: "recharts",
       component: "RadarChart",
       tokens: chartTokens,
       anatomy: ["axes", "polygons", "dots", "tooltip", "legend"],
       do: [
-        "Utiliser 5 à 8 axes pour la lisibilité",
-        "Normaliser les données sur une même échelle",
+        "Use 5 to 8 axes for readability",
+        "Normalize the data to a single scale",
       ],
       dont: [
-        "Ne pas utiliser avec moins de 3 axes",
-        "Ne pas comparer plus de 3 entités",
+        "Do not use it with fewer than 3 axes",
+        "Do not compare more than 3 entities",
       ],
       variants: ["filled", "stroke_only"],
     },
     histogram: {
       name: "Histogram",
-      description: "Histogramme pour montrer la distribution d'une variable",
+      description: "Histogram for the distribution of a variable",
       library: "recharts",
       component: "BarChart",
       tokens: chartTokens,
       anatomy: ["axes", "bars", "tooltip"],
-      do: [
-        "Choisir un nombre de bacs approprié (5-20)",
-        "Utiliser une seule couleur pour les barres",
-      ],
+      do: ["Use between 5 and 20 bins", "Use a single color for the bars"],
       dont: [
-        "Ne pas confondre avec un bar chart catégoriel",
-        "Ne pas utiliser de gaps entre les barres",
+        "Do not confuse it with a categorical bar chart",
+        "Do not leave gaps between the bars",
       ],
       variants: ["standard", "cumulative"],
     },
     bubble: {
       name: "Bubble Chart",
-      description:
-        "Nuage de points dimensionné pour montrer 3 variables simultanément",
+      description: "Sized scatter plot that shows 3 variables at once",
       library: "recharts",
       component: "ScatterChart",
       tokens: chartTokens,
       anatomy: ["axes", "bubbles", "tooltip", "legend"],
       do: [
-        "Encoder la troisième variable dans la taille du point",
-        "Ajouter une légende de taille",
+        "Encode the third variable in the size of the point",
+        "Add a size legend",
       ],
       dont: [
-        "Ne pas surcharger avec plus de 50 points",
-        "Ne pas utiliser sans tooltip explicatif",
+        "Do not plot more than 50 points",
+        "Do not use it without an explanatory tooltip",
       ],
       variants: ["standard"],
     },
     heatmap: {
       name: "Heatmap",
-      description: "Carte de chaleur pour montrer la densité ou la corrélation",
+      description: "Heatmap for density or correlation",
       library: "recharts",
       component: "custom",
       tokens: sequentialTokens,
       anatomy: ["grid", "cells", "color_scale", "tooltip", "axes"],
       do: [
-        "Utiliser la palette séquentielle color.chart.sequential.1 à 5 (du plus clair au plus foncé)",
-        "Ajouter des labels dans les cellules si l'espace le permet",
+        "Use the sequential palette color.chart.sequential.1 to 5 (lightest to darkest)",
+        "Add labels inside the cells when there is room",
       ],
       dont: [
-        "Ne pas utiliser de couleurs non ordonnées",
-        "Ne pas afficher trop de cellules (limiter à 20×20)",
+        "Do not use unordered colors",
+        "Do not show more than 20×20 cells",
       ],
       variants: ["matrix", "calendar"],
     },
     data_card: {
       name: "Data Card",
-      description:
-        "Carte de KPI affichant une valeur clé avec label et tendance",
+      description: "KPI card showing a key value with a label and a trend",
       library: "native",
       component: "Card",
       tokens: [
@@ -1224,80 +1217,79 @@ function generateDatavizCatalog() {
       ],
       anatomy: ["label", "value", "trend", "icon"],
       do: [
-        "Afficher une seule métrique par carte",
-        "Indiquer la tendance avec une flèche ou un pourcentage",
+        "Show a single metric per card",
+        "Show the trend with an arrow or a percentage",
       ],
       dont: [
-        "Ne pas surcharger avec trop d'informations",
-        "Ne pas omettre le label descriptif",
+        "Do not crowd it with extra information",
+        "Do not leave out the descriptive label",
       ],
       variants: ["simple", "with_trend", "with_sparkline"],
     },
     gauge: {
       name: "Gauge",
-      description:
-        "Jauge circulaire ou semi-circulaire pour un KPI en pourcentage",
+      description: "Circular or semi-circular gauge for a percentage KPI",
       library: "recharts",
       component: "PieChart",
       tokens: chartTokens,
       anatomy: ["arc", "needle", "value_label", "scale"],
       do: [
-        "Afficher la valeur au centre",
-        "Utiliser des seuils de couleur (vert/jaune/rouge)",
+        "Show the value in the center",
+        "Use color thresholds (green / yellow / red)",
       ],
       dont: [
-        "Ne pas utiliser pour des valeurs non bornées",
-        "Ne pas imbriquer plusieurs jauges",
+        "Do not use it for unbounded values",
+        "Do not nest several gauges",
       ],
       variants: ["semi_circle", "full_circle"],
     },
     mini_chart: {
       name: "Mini Chart (Sparkline)",
       description:
-        "Micro-graphique inline pour montrer une tendance dans un tableau ou une carte",
+        "Inline micro-chart that shows a trend inside a table or a card",
       library: "recharts",
       component: "LineChart",
       tokens: chartTokens.slice(0, 1),
       anatomy: ["line", "area"],
       do: [
-        "Garder simple — pas d'axes ni de labels",
-        "Utiliser dans les tableaux ou les data cards",
+        "Keep it simple — no axes and no labels",
+        "Use it in tables or data cards",
       ],
       dont: [
-        "Ne pas afficher de tooltip complexe",
-        "Ne pas utiliser comme graphique principal",
+        "Do not show a complex tooltip",
+        "Do not use it as the main chart",
       ],
       variants: ["line", "bar"],
     },
     difference: {
       name: "Difference Chart",
-      description: "Graphique montrant l'écart entre deux séries dans le temps",
+      description: "Chart showing the gap between two series over time",
       library: "recharts",
       component: "AreaChart",
       tokens: chartTokens.slice(0, 2),
       anatomy: ["axes", "areas", "baseline", "tooltip"],
       do: [
-        "Colorer les zones positives et négatives différemment",
-        "Ajouter une ligne de référence à zéro",
+        "Color the positive and negative areas differently",
+        "Add a reference line at zero",
       ],
       dont: [
-        "Ne pas utiliser pour plus de 2 séries",
-        "Ne pas omettre la baseline",
+        "Do not use it for more than 2 series",
+        "Do not leave out the baseline",
       ],
       variants: ["standard"],
     },
     cigarette: {
       name: "Cigarette Chart (Stacked Bar 100%)",
       description:
-        "Barre empilée à 100% pour comparer les proportions entre catégories",
+        "100% stacked bar for comparing proportions across categories",
       library: "recharts",
       component: "BarChart",
       tokens: chartTokens,
       anatomy: ["axes", "segments", "tooltip", "legend"],
-      do: ["Normaliser à 100%", "Limiter à 5 segments par barre"],
+      do: ["Normalize to 100%", "Keep it to 5 segments per bar"],
       dont: [
-        "Ne pas utiliser si les valeurs absolues sont importantes",
-        "Ne pas surcharger avec trop de catégories",
+        "Do not use it when the absolute values matter",
+        "Do not use more than 5 categories",
       ],
       variants: ["horizontal", "vertical"],
     },
@@ -1334,14 +1326,14 @@ function generatePagePatterns() {
     pages.push({
       name: "Banking Dashboard",
       description:
-        "Page d'accueil d'une app bancaire avec header, cartes de compte, actions rapides et onglets transactions/budget",
+        "Home page of a banking app with a header, account cards, quick actions and transactions / budget tabs",
       source: "app/banking/page.tsx",
       structure: [
         "Header with logo, app name, notifications, and avatar",
         "Welcome section with greeting and date",
         "Account cards grid (3 columns)",
-        "Quick actions bar (Virement, Paiement, RIB, Plafonds)",
-        "Tabs: Transactions récentes / Budget mensuel",
+        "Quick actions bar (Transfer, Pay, Account details, Limits)",
+        "Tabs: Recent transactions / Monthly budget",
         "Transactions table with status badges",
         "Budget cards with progress bars",
         "Footer with copyright",
@@ -1375,7 +1367,7 @@ function generatePagePatterns() {
     pages.push({
       name: "Login Fullscreen",
       description:
-        "Page de connexion plein écran avec fond sombre inversé, motif de points, formulaire centré",
+        "Full-screen sign-in page with an inverted dark background, a dot pattern and a centered form",
       source: "app/login/fullscreen/page.tsx",
       structure: [
         "Dark inverse background with dot pattern",

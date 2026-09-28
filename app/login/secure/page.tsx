@@ -34,7 +34,7 @@ export default function LoginSecure() {
         >
           <Link href="/login">
             <CaretLeft className="size-4" />
-            Retour
+            Back
           </Link>
         </Button>
       </div>
@@ -48,22 +48,22 @@ export default function LoginSecure() {
 
         <div className="flex flex-col items-center gap-2 text-center">
           <Heading level={1} className="text-background">
-            Connexion sécurisée
+            Secure sign-in
           </Heading>
           <p className="text-sm text-background/70">
-            Accédez à votre espace personnel
+            Access your personal account
           </p>
         </div>
 
         <form className="flex w-full flex-col gap-5">
           <Field>
             <FieldLabel htmlFor="email-secure" className="text-background/80">
-              Adresse email
+              Email address
             </FieldLabel>
             <Input
               id="email-secure"
               type="email"
-              placeholder="nom@exemple.fr"
+              placeholder="name@example.com"
               autoComplete="email"
               className="border-background/20 bg-background/10 text-background placeholder:text-background/40 focus-visible:border-background/40 focus-visible:ring-background/20"
             />
@@ -75,14 +75,14 @@ export default function LoginSecure() {
                 htmlFor="password-secure"
                 className="text-background/80"
               >
-                Mot de passe
+                Password
               </FieldLabel>
               <Button
                 variant="link"
                 className="h-auto p-0 text-xs text-background/60 hover:text-background"
                 asChild
               >
-                <a href="#">Oublié ?</a>
+                <a href="#">Forgot?</a>
               </Button>
             </div>
             <PasswordInput
@@ -102,7 +102,7 @@ export default function LoginSecure() {
               htmlFor="remember-secure"
               className="text-background/80"
             >
-              Se souvenir de moi
+              Remember me
             </FieldLabel>
           </Field>
 
@@ -110,14 +110,14 @@ export default function LoginSecure() {
             type="submit"
             className="w-full bg-background text-foreground hover:bg-background/90"
           >
-            Se connecter
+            Sign in
           </Button>
         </form>
 
         <FieldDescription className="text-center text-background/60 [&_a]:text-background/80 [&_a:hover]:text-background">
-          Pas encore de compte ?{" "}
+          Don&apos;t have an account?{" "}
           <a href="#" className="underline underline-offset-2">
-            S&apos;inscrire
+            Sign up
           </a>
         </FieldDescription>
       </div>

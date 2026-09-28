@@ -2322,9 +2322,9 @@
       },
       "description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
       "docs": {
-        "description": "Surface principale de la page — fond de `<html>` et des conteneurs racines.",
-        "do": "Utiliser comme fond de la page racine et des containers principaux (`<body>`, `<main>`).",
-        "dont": "Ne pas utiliser pour les cards, popovers ou surfaces élevées — préférer `color.background.subtle` ou `color.background.elevated`."
+        "description": "Main surface of the page — the background of `<html>` and root containers.",
+        "do": "Use as the background of the root page and the main containers (`<body>`, `<main>`).",
+        "dont": "Do not use for cards, popovers or raised surfaces — use `color.background.subtle` or `color.background.elevated`."
       }
     },
     {
@@ -2344,9 +2344,9 @@
       },
       "description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
       "docs": {
-        "description": "Surface secondaire légèrement atténuée pour créer une hiérarchie visuelle.",
-        "do": "Utiliser pour les cards, zones muted, sidebars secondaires, panneaux internes.",
-        "dont": "Ne pas utiliser pour le fond principal de la page."
+        "description": "A slightly muted secondary surface that creates visual hierarchy.",
+        "do": "Use for cards, muted areas, secondary sidebars, inner panels.",
+        "dont": "Do not use for the page's main background."
       }
     },
     {
@@ -2366,9 +2366,9 @@
       },
       "description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
       "docs": {
-        "description": "Surface flottante au-dessus du contenu principal.",
-        "do": "Utiliser pour popovers, dropdowns, dialogs, tooltips à fond clair.",
-        "dont": "Ne pas utiliser pour les cards inline — elles ne sont pas \"élevées\" au sens Z."
+        "description": "A floating surface above the main content.",
+        "do": "Use for popovers, drop-downs, dialogs, light tooltips.",
+        "dont": "Do not use for inline cards — they are not \"raised\" on the Z axis."
       }
     },
     {
@@ -2388,9 +2388,9 @@
       },
       "description": "Inverted surface for contrast callouts. Not for general-purpose backgrounds.",
       "docs": {
-        "description": "Surface inversée pour créer un fort contraste avec le fond principal.",
-        "do": "Utiliser pour les tooltips sombres, les badges inversés, les bandeaux d'alerte.",
-        "dont": "Ne pas utiliser comme fond de page général — réservé aux surfaces ponctuelles inversées."
+        "description": "An inverted surface that contrasts strongly with the main background.",
+        "do": "Use for dark tooltips, inverted badges, alert banners.",
+        "dont": "Do not use as a general page background — it is reserved for occasional inverted surfaces."
       }
     },
     {
@@ -2410,9 +2410,9 @@
       },
       "description": "Primary body and heading text. Not for secondary, placeholder, or disabled text.",
       "docs": {
-        "description": "Couleur de texte principale pour le corps et les headings.",
-        "do": "Utiliser pour tout texte de contenu principal, titres, labels importants.",
-        "dont": "Ne pas réduire l'opacité pour simuler un texte secondaire — utiliser `color.text.subtle`."
+        "description": "Main text color for body text and headings.",
+        "do": "Use for all main content text, titles and important labels.",
+        "dont": "Do not lower the opacity to fake secondary text — use `color.text.subtle`."
       }
     },
     {
@@ -2432,9 +2432,9 @@
       },
       "description": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content.",
       "docs": {
-        "description": "Texte secondaire, captions, helper text, métadonnées.",
-        "do": "Utiliser pour les labels de champs, les descriptions de formulaire, les timestamps.",
-        "dont": "Ne pas utiliser pour le contenu de corps principal — le contraste est insuffisant pour la lecture longue."
+        "description": "Secondary text, captions, helper text, metadata.",
+        "do": "Use for field labels, form descriptions, timestamps.",
+        "dont": "Do not use for main body content — its contrast is too low for long reading."
       }
     },
     {
@@ -2454,9 +2454,9 @@
       },
       "description": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text.",
       "docs": {
-        "description": "Texte emphatique à fort contraste — utilisé pour les emphases dans des contextes où `text.default` ne suffit pas.",
-        "do": "Utiliser pour les emphases dans des zones où le contexte visuel est complexe.",
-        "dont": "Ne pas utiliser comme substitut à `text.default` pour le corps standard."
+        "description": "High-contrast emphasized text — for emphasis where `text.default` is not enough.",
+        "do": "Use for emphasis in areas with a busy visual context.",
+        "dont": "Do not use as a substitute for `text.default` in standard body text."
       }
     },
     {
@@ -2476,9 +2476,9 @@
       },
       "description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
       "docs": {
-        "description": "Texte sur surface inverse (fond sombre en light, fond clair en dark).",
-        "do": "Utiliser uniquement posé sur `color.background.inverse`.",
-        "dont": "Ne pas utiliser sur surfaces standard — le contraste sera insuffisant."
+        "description": "Text on an inverse surface (a dark background in light mode, a light one in dark mode).",
+        "do": "Use only on `color.background.inverse`.",
+        "dont": "Do not use on standard surfaces — the contrast would be too low."
       }
     },
     {
@@ -2498,9 +2498,9 @@
       },
       "description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
       "docs": {
-        "description": "Texte d'action primaire — liens, labels de navigation actifs.",
-        "do": "Utiliser pour les liens textuels et les labels exprimant une action cliquable.",
-        "dont": "Ne pas utiliser pour le texte de corps générique — réservé aux éléments actionnables."
+        "description": "Primary action text — links, active navigation labels.",
+        "do": "Use for text links and labels that express a clickable action.",
+        "dont": "Do not use for generic body text — it is reserved for actionable elements."
       }
     },
     {
@@ -2520,9 +2520,9 @@
       },
       "description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
-        "description": "Texte posé sur un fond `color.action.background.default`.",
-        "do": "Utiliser pour le label d'un bouton primaire.",
-        "dont": "Ne pas utiliser sur surfaces neutres — contraste insuffisant sur fond clair."
+        "description": "Text on a `color.action.background.default` background.",
+        "do": "Use for the label of a primary button.",
+        "dont": "Do not use on neutral surfaces — the contrast is too low on a light background."
       }
     },
     {
@@ -2542,9 +2542,9 @@
       },
       "description": "Error, danger, or destructive action text. Not for general warning or informational text.",
       "docs": {
-        "description": "Texte d'état destructif ou d'erreur.",
-        "do": "Utiliser pour les messages de validation d'erreur, les confirmations de suppression.",
-        "dont": "Ne pas utiliser pour les avertissements (warning) ou les informations — réservé aux erreurs critiques."
+        "description": "Destructive or error-state text.",
+        "do": "Use for error validation messages and deletion confirmations.",
+        "dont": "Do not use for warnings or information — it is reserved for critical errors."
       }
     },
     {
@@ -2564,9 +2564,9 @@
       },
       "description": "Standard dividers and component outlines. Not for input fields or focus rings.",
       "docs": {
-        "description": "Bordure standard pour les séparateurs et contours de composants.",
-        "do": "Utiliser pour les dividers entre sections, les contours de cards.",
-        "dont": "Ne pas utiliser pour les champs de formulaire — préférer `color.border.input`."
+        "description": "Standard border for separators and component outlines.",
+        "do": "Use for dividers between sections and card outlines.",
+        "dont": "Do not use for form fields — use `color.border.input`."
       }
     },
     {
@@ -2586,9 +2586,9 @@
       },
       "description": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders.",
       "docs": {
-        "description": "Bordure discrète à faible poids visuel.",
-        "do": "Utiliser pour les séparateurs internes de listes, les divisions légères.",
-        "dont": "Ne pas utiliser sur des composants interactifs nécessitant une bordure visible."
+        "description": "A discreet, low-weight border.",
+        "do": "Use for inner list separators and light divisions.",
+        "dont": "Do not use on interactive components that need a visible border."
       }
     },
     {
@@ -2608,9 +2608,9 @@
       },
       "description": "Border for form input fields. Not for decorative dividers or layout borders.",
       "docs": {
-        "description": "Bordure spécifique aux champs de formulaire.",
-        "do": "Utiliser pour toutes les bordures de `<input>`, `<select>`, `<textarea>`, `<checkbox>`.",
-        "dont": "Ne pas utiliser pour les séparateurs décoratifs — réservé aux contrôles de formulaire."
+        "description": "The border of form fields.",
+        "do": "Use for every `<input>`, `<select>`, `<textarea>` and `<checkbox>` border.",
+        "dont": "Do not use for decorative separators — it is reserved for form controls."
       }
     },
     {
@@ -2630,9 +2630,9 @@
       },
       "description": "Focus ring outline for keyboard accessibility. Not for resting or hover states.",
       "docs": {
-        "description": "Focus ring pour l'accessibilité clavier (`:focus-visible`).",
-        "do": "Utiliser uniquement pour l'état `:focus-visible` des éléments interactifs.",
-        "dont": "Ne jamais supprimer le focus ring — c'est une exigence d'accessibilité WCAG 2.4.7."
+        "description": "Focus ring for keyboard accessibility (`:focus-visible`).",
+        "do": "Use only for the `:focus-visible` state of interactive elements.",
+        "dont": "Never remove the focus ring — it is a WCAG 2.4.7 accessibility requirement."
       }
     },
     {
@@ -2652,9 +2652,9 @@
       },
       "description": "Standard icon fill. Not for icons in branded or destructive contexts.",
       "docs": {
-        "description": "Couleur d'icône standard en contexte neutre.",
-        "do": "Utiliser pour les icônes de navigation, d'action standard, de contenu.",
-        "dont": "Ne pas utiliser pour les icônes dans des boutons primaires — utiliser `color.icon.action`."
+        "description": "Standard icon color in a neutral context.",
+        "do": "Use for navigation, standard action and content icons.",
+        "dont": "Do not use for icons inside primary buttons — use `color.icon.action`."
       }
     },
     {
@@ -2674,9 +2674,9 @@
       },
       "description": "Muted/secondary icon fill. Not for primary interactive icons.",
       "docs": {
-        "description": "Icône secondaire, décorative ou atténuée.",
-        "do": "Utiliser pour les icônes d'état, les indicateurs de chargement, les icônes de métadonnées.",
-        "dont": "Ne pas utiliser pour les icônes d'action principale."
+        "description": "A secondary, decorative or muted icon.",
+        "do": "Use for status icons, loading indicators and metadata icons.",
+        "dont": "Do not use for main action icons."
       }
     },
     {
@@ -2696,9 +2696,9 @@
       },
       "description": "Icon on a primary action background. Not for icons on neutral surfaces.",
       "docs": {
-        "description": "Icône posée sur un fond d'action primaire.",
-        "do": "Utiliser pour les icônes à l'intérieur de boutons primaires ou de badges d'action.",
-        "dont": "Ne pas utiliser sur fond neutre ou clair."
+        "description": "An icon on a primary action background.",
+        "do": "Use for icons inside primary buttons or action badges.",
+        "dont": "Do not use on a neutral or light background."
       }
     },
     {
@@ -2718,9 +2718,9 @@
       },
       "description": "Primary call-to-action button/element background. Not for secondary or ghost variants.",
       "docs": {
-        "description": "Fond du composant CTA primaire.",
-        "do": "Utiliser pour le fond des boutons primaires et des éléments CTA.",
-        "dont": "Ne pas utiliser pour les variantes secondary, ghost ou outline — ces variantes n'ont pas de fond coloré."
+        "description": "Background of the primary CTA component.",
+        "do": "Use for the background of primary buttons and CTA elements.",
+        "dont": "Do not use for the secondary, ghost or outline variants — those variants have no colored background."
       }
     },
     {
@@ -2740,9 +2740,9 @@
       },
       "description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
-        "description": "Texte/icône sur fond d'action primaire.",
-        "do": "Toujours associer avec `color.action.background.default` pour le texte d'un bouton primaire.",
-        "dont": "Ne pas utiliser sur fond neutre ou clair."
+        "description": "Text or icon on a primary action background.",
+        "do": "Always pair with `color.action.background.default` for the text of a primary button.",
+        "dont": "Do not use on a neutral or light background."
       }
     },
     {
@@ -2762,9 +2762,9 @@
       },
       "description": "Error state color for backgrounds, icons, and borders. Not for warnings or success states.",
       "docs": {
-        "description": "Couleur d'état d'erreur — fond, icône, bordure.",
-        "do": "Utiliser pour les messages de validation, les bordures de champs invalides, les icônes d'erreur.",
-        "dont": "Ne pas utiliser pour les avertissements ou les états de succès."
+        "description": "Error-state color — background, icon, border.",
+        "do": "Use for validation messages, the borders of invalid fields and error icons.",
+        "dont": "Do not use for warnings or success states."
       }
     },
     {
@@ -2784,9 +2784,9 @@
       },
       "description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
       "docs": {
-        "description": "Texte et icônes posés **sur** une surface d'erreur pleine.",
-        "do": "Utiliser dès qu'un fond `bg-destructive` plein porte du texte ou une icône.",
-        "dont": "Ne jamais poser `color.text.default` ni `text-white` sur une surface d'erreur — en dark, blanc sur red.500 tombe à 2.89:1."
+        "description": "Text and icons placed **on** a solid error surface.",
+        "do": "Use whenever a solid `bg-destructive` background carries text or an icon.",
+        "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.500 drops to 2.89:1."
       }
     },
     {
@@ -2806,9 +2806,9 @@
       },
       "description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2828,9 +2828,9 @@
       },
       "description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2850,9 +2850,9 @@
       },
       "description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2872,9 +2872,9 @@
       },
       "description": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2894,9 +2894,9 @@
       },
       "description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2914,9 +2914,9 @@
       },
       "description": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2934,9 +2934,9 @@
       },
       "description": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2954,9 +2954,9 @@
       },
       "description": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2974,9 +2974,9 @@
       },
       "description": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -2994,9 +2994,9 @@
       },
       "description": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
-        "description": "Palette séquentielle pour les séries de données dans les graphiques.",
-        "do": "Utiliser dans l'ordre (1 → 5) pour les séries de graphiques.",
-        "dont": "Ne pas réutiliser ces tokens pour des couleurs UI générales — réservé à la visualisation de données."
+        "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
+        "do": "Use in order (1 → 5) for chart series.",
+        "dont": "Do not reuse these tokens for general UI colors — they are reserved for data visualization."
       }
     },
     {
@@ -3016,8 +3016,8 @@
       },
       "description": "Sidebar panel surface. Not for the main content area or popovers.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "mist.900"
       }
     },
@@ -3038,8 +3038,8 @@
       },
       "description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "mist.50"
       }
     },
@@ -3060,8 +3060,8 @@
       },
       "description": "Sidebar internal divider/border. Not for content-area borders.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "white-alpha.10"
       }
     },
@@ -3082,8 +3082,8 @@
       },
       "description": "Focus ring within the sidebar. Not for main content focus rings.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "mist.500"
       }
     },
@@ -3104,8 +3104,8 @@
       },
       "description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "violet.500"
       }
     },
@@ -3126,8 +3126,8 @@
       },
       "description": "Text on top of the sidebar primary active item. Not for inactive item text.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "mist.0"
       }
     },
@@ -3148,8 +3148,8 @@
       },
       "description": "Hovered or secondary sidebar item background. Not for the active primary item.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "mist.800"
       }
     },
@@ -3170,8 +3170,8 @@
       },
       "description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
       "docs": {
-        "do": "Utiliser exclusivement dans les composants de navigation latérale.",
-        "dont": "Ne pas réutiliser ces tokens dans le contenu principal — ils sont contextuels à la sidebar.",
+        "do": "Use only in side navigation components.",
+        "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
         "tailwind": "mist.50"
       }
     },
@@ -3230,8 +3230,8 @@
       },
       "description": "Extra-small component padding/gap (4px). Not for layout or section spacing.",
       "docs": {
-        "do": "Gap entre icône et label dans un bouton compact, padding interne d'un badge.",
-        "dont": "Ne pas utiliser pour des espacements de layout."
+        "do": "Gap between an icon and its label in a compact button, a badge's inner padding.",
+        "dont": "Do not use for layout spacing."
       }
     },
     {
@@ -3249,8 +3249,8 @@
       },
       "description": "Small component padding/gap (8px). Not for layout or section spacing.",
       "docs": {
-        "do": "Padding d'un bouton compact, gap d'une liste serrée.",
-        "dont": "Ne pas utiliser pour espacer des sections de page."
+        "do": "Padding of a compact button, gap of a tight list.",
+        "dont": "Do not use to space out page sections."
       }
     },
     {
@@ -3268,8 +3268,8 @@
       },
       "description": "Medium component padding/gap (16px). Not for layout or section spacing.",
       "docs": {
-        "do": "Padding standard d'une card, gap entre boutons d'un groupe.",
-        "dont": "Ne pas utiliser pour le gap entre sections de page."
+        "do": "Standard card padding, gap between the buttons of a group.",
+        "dont": "Do not use for the gap between page sections."
       }
     },
     {
@@ -3287,8 +3287,8 @@
       },
       "description": "Large component padding/gap (24px). Not for layout or section spacing.",
       "docs": {
-        "do": "Padding interne d'un dialog, gap entre champs de formulaire.",
-        "dont": "Ne pas confondre avec `space.layout.page-padding` (même valeur, contexte différent)."
+        "do": "A dialog's inner padding, gap between form fields.",
+        "dont": "Do not confuse with `space.layout.page-padding` (same value, different context)."
       }
     },
     {
@@ -3306,8 +3306,8 @@
       },
       "description": "Extra-large component padding/gap (32px). Not for layout or section spacing.",
       "docs": {
-        "do": "Padding d'une section de card large, espacement entre groupes de formulaire.",
-        "dont": "Ne pas utiliser pour les espacements entre éléments inline proches."
+        "do": "Padding of a large card section, spacing between groups of form fields.",
+        "dont": "Do not use between nearby inline elements."
       }
     },
     {
@@ -3340,8 +3340,8 @@
       },
       "description": "Horizontal padding for the main page container. Not for component-level spacing.",
       "docs": {
-        "do": "Padding horizontal du conteneur de page racine.",
-        "dont": "Ne pas appliquer sur des composants internes."
+        "do": "Horizontal padding of the root page container.",
+        "dont": "Do not apply to inner components."
       }
     },
     {
@@ -3359,8 +3359,8 @@
       },
       "description": "Vertical gap between major page sections. Not for component-level spacing.",
       "docs": {
-        "do": "Espace vertical entre sections majeures d'une page.",
-        "dont": "Ne pas utiliser entre composants d'une même section."
+        "do": "Vertical space between the major sections of a page.",
+        "dont": "Do not use between components of the same section."
       }
     },
     {
@@ -3378,8 +3378,8 @@
       },
       "description": "Narrow content column max-width (42rem). Not for full-width or wide layouts.",
       "docs": {
-        "do": "`max-w-[var(--space-layout-content-sm)]` pour les pages editoriales.",
-        "dont": "Ne pas utiliser comme valeur de padding."
+        "do": "`max-w-[var(--space-layout-content-sm)]` for editorial pages.",
+        "dont": "Do not use as a padding value."
       }
     },
     {
@@ -3397,8 +3397,8 @@
       },
       "description": "Default content column max-width (64rem). Not for narrow or wide layouts.",
       "docs": {
-        "do": "Conteneur de contenu principal de la majorité des pages.",
-        "dont": "Ne pas dépasser pour les layouts de contenu standard."
+        "do": "The main content container of most pages.",
+        "dont": "Do not exceed it for standard content layouts."
       }
     },
     {
@@ -3416,8 +3416,8 @@
       },
       "description": "Wide content column max-width (80rem). Not for narrow or default layouts.",
       "docs": {
-        "do": "Dashboards, tableaux de données, layouts avec plusieurs colonnes.",
-        "dont": "Ne pas utiliser pour les pages de contenu éditorial."
+        "do": "Dashboards, data tables, multi-column layouts.",
+        "dont": "Do not use for editorial content pages."
       }
     },
     {
@@ -3858,8 +3858,8 @@
       },
       "description": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in app/layout.tsx under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens).",
       "docs": {
-        "do": "Réserver aux touches `Kbd` et au contenu éditorial long (`font-sans`).",
-        "dont": "Ne pas l'utiliser pour l'interface : tout le texte UI est en `font-mono`."
+        "do": "Keep it for `Kbd` keys and long editorial content (`font-sans`).",
+        "dont": "Do not use it for the interface: all UI text is set in `font-mono`."
       }
     },
     {
@@ -3877,8 +3877,8 @@
       },
       "description": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in app/layout.tsx under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens).",
       "docs": {
-        "do": "Police par défaut de tous les composants UI, appliquée sur `<html>`.",
-        "dont": "Ne pas changer de police ici seulement : elle est chargée par `next/font` dans `app/layout.tsx`, que `tokens:lint-fonts` confronte à ce token."
+        "do": "The default typeface of every UI component, set on `<html>`.",
+        "dont": "Do not change the typeface here alone: it is loaded by `next/font` in `app/layout.tsx`, which `tokens:lint-fonts` checks against this token."
       }
     },
     {
@@ -3896,8 +3896,8 @@
       },
       "description": "Zero radius — square corners. Use for full-bleed or table elements.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-none"
       }
     },
@@ -3916,8 +3916,8 @@
       },
       "description": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-xs"
       }
     },
@@ -3936,8 +3936,8 @@
       },
       "description": "Small rounding (0.6× base). Use for inputs, small buttons.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-sm"
       }
     },
@@ -3956,8 +3956,8 @@
       },
       "description": "Medium rounding (0.8× base). Use for default buttons and form controls.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-md"
       }
     },
@@ -3976,8 +3976,8 @@
       },
       "description": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-lg"
       }
     },
@@ -3996,8 +3996,8 @@
       },
       "description": "Larger rounding (1.4× base). Use for modals and prominent containers.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-xl"
       }
     },
@@ -4016,8 +4016,8 @@
       },
       "description": "Extra-large rounding (1.8× base). Use for floating panels.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-2xl"
       }
     },
@@ -4036,8 +4036,8 @@
       },
       "description": "Very large rounding (2.2× base). Use sparingly for decorative containers.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-3xl"
       }
     },
@@ -4056,8 +4056,8 @@
       },
       "description": "Maximum rounding (2.6× base). Use only for hero cards or large chips.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-4xl"
       }
     },
@@ -4076,8 +4076,8 @@
       },
       "description": "Pill/full rounding. Use for pills, avatars, toggles.",
       "docs": {
-        "do": "`radius.lg` pour les cards; `radius.md` pour les boutons; `radius.full` pour les avatars et badges pilules.",
-        "dont": "Pas de valeurs arbitraires — toujours un token du système.",
+        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
+        "dont": "No arbitrary values — always a token from the system.",
         "tailwind": "rounded-full"
       }
     },
@@ -4098,8 +4098,8 @@
       },
       "description": "Minimal lift for interactive elements. Not for decorative purposes.",
       "docs": {
-        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
-        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-xs"
       }
     },
@@ -4120,8 +4120,8 @@
       },
       "description": "Small lift for cards and hover states. Not for fixed navigation.",
       "docs": {
-        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
-        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-sm"
       }
     },
@@ -4142,8 +4142,8 @@
       },
       "description": "Medium elevation for dropdowns and context menus. Not for inline content.",
       "docs": {
-        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
-        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-md"
       }
     },
@@ -4164,8 +4164,8 @@
       },
       "description": "Large elevation for modals and side panels. Not for standard cards.",
       "docs": {
-        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
-        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-lg"
       }
     },
@@ -4186,8 +4186,8 @@
       },
       "description": "Extra-large elevation for full overlay panels. Not for inline components.",
       "docs": {
-        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
-        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-xl"
       }
     },
@@ -4208,8 +4208,8 @@
       },
       "description": "Maximum elevation for toasts and high-priority overlays. Use sparingly.",
       "docs": {
-        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
-        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-2xl"
       }
     },
@@ -4230,8 +4230,8 @@
       },
       "description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements.",
       "docs": {
-        "do": "`shadow-sm` pour les cards, `shadow-md` pour les dropdowns, `shadow-lg` pour les modals.",
-        "dont": "Ne pas utiliser `shadow-inner` avec une ombre externe sur le même élément.",
+        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-inner"
       }
     },
@@ -4250,8 +4250,8 @@
       },
       "description": "No duration — for immediate state changes. Not for visual transitions.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS."
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens."
       }
     },
     {
@@ -4269,8 +4269,8 @@
       },
       "description": "Fast micro-interactions (100ms). Use for hover/focus feedback.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-fast"
       }
     },
@@ -4289,8 +4289,8 @@
       },
       "description": "Standard transition duration (200ms). Default for most transitions.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-normal"
       }
     },
@@ -4309,8 +4309,8 @@
       },
       "description": "Slow, deliberate transitions (300ms). Use for modals and drawers.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-slow"
       }
     },
@@ -4329,8 +4329,8 @@
       },
       "description": "Slowest transitions (500ms). Use only for complex animations.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-slower"
       }
     },
@@ -4349,8 +4349,8 @@
       },
       "description": "Extra-slow duration (1000ms). Use for blink/pulse animations like caret blink.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS."
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens."
       }
     },
     {
@@ -4368,8 +4368,8 @@
       },
       "description": "Standard ease-in-out. Default for all UI transitions.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-default"
       }
     },
@@ -4388,8 +4388,8 @@
       },
       "description": "Ease-in curve. Use for elements exiting the screen.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-in"
       }
     },
@@ -4408,8 +4408,8 @@
       },
       "description": "Ease-out curve. Use for elements entering the screen.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-out"
       }
     },
@@ -4428,8 +4428,8 @@
       },
       "description": "Spring overshoot. Use for playful or bouncy interactions only.",
       "docs": {
-        "do": "`duration-normal` + `ease-default` comme point de départ universel.",
-        "dont": "Jamais de durées ou d'easings hardcodés — toujours utiliser les tokens CSS.",
+        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-spring"
       }
     },
@@ -4448,8 +4448,8 @@
       },
       "description": "Opacity for disabled interactive elements. Not for placeholder or overlay use.",
       "docs": {
-        "do": "Utiliser `opacity-disabled` sous la variante de l'état désactivé : `disabled:opacity-disabled`, `data-disabled:opacity-disabled`, `aria-disabled:opacity-disabled`…",
-        "dont": "Ne pas écrire `disabled:opacity-50` (ESLint le refuse), ni l'utiliser pour du texte secondaire — utiliser `color.text.subtle`."
+        "do": "Use `opacity-disabled` under the disabled-state variant: `disabled:opacity-disabled`, `data-disabled:opacity-disabled`, `aria-disabled:opacity-disabled`…",
+        "dont": "Do not write `disabled:opacity-50` (ESLint rejects it), and do not use it for secondary text — use `color.text.subtle`."
       }
     },
     {
@@ -4467,8 +4467,8 @@
       },
       "description": "Opacity for placeholder text. Not for disabled or overlay use.",
       "docs": {
-        "do": "Appliquer sur `::placeholder` des champs de formulaire.",
-        "dont": "Ne pas confondre avec `opacity.disabled` — usages distincts."
+        "do": "Apply to the `::placeholder` of form fields.",
+        "dont": "Do not confuse with `opacity.disabled` — they serve different purposes."
       }
     },
     {
@@ -4486,8 +4486,8 @@
       },
       "description": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency.",
       "docs": {
-        "do": "Utiliser pour les backdrops de modals et dialogs.",
-        "dont": "Ne pas réduire en dessous de `0.7` — le contraste devient insuffisant."
+        "do": "Use for the backdrops of modals and dialogs.",
+        "dont": "Do not go below `0.7` — the contrast becomes too low."
       }
     },
     {
@@ -4505,8 +4505,8 @@
       },
       "description": "Dropdown menus. Renders above page content.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-dropdown"
       }
     },
@@ -4525,8 +4525,8 @@
       },
       "description": "Sticky headers/footers. Renders above dropdowns.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-sticky"
       }
     },
@@ -4545,8 +4545,8 @@
       },
       "description": "Fixed position elements. Renders above sticky.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-fixed"
       }
     },
@@ -4565,8 +4565,8 @@
       },
       "description": "Overlay/backdrop. Renders above fixed elements.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-overlay"
       }
     },
@@ -4585,8 +4585,8 @@
       },
       "description": "Modal dialogs. Renders above overlays.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-modal"
       }
     },
@@ -4605,8 +4605,8 @@
       },
       "description": "Popovers and tooltips of high priority. Renders above modals.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-popover"
       }
     },
@@ -4625,8 +4625,8 @@
       },
       "description": "Toast notifications. Always visible above other layers.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-toast"
       }
     },
@@ -4645,8 +4645,8 @@
       },
       "description": "Tooltips. Highest z-index to always appear on top.",
       "docs": {
-        "do": "Toujours utiliser les tokens z-index — jamais de valeurs numériques hardcodées.",
-        "dont": "Ne pas créer de nouveaux niveaux z-index en dehors de cette échelle sans validation.",
+        "do": "Always use the z-index tokens — never hard-coded numeric values.",
+        "dont": "Do not create new z-index levels outside this scale without approval.",
         "tailwind": "z-tooltip"
       }
     },

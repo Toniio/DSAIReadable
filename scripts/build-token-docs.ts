@@ -273,13 +273,13 @@ const FOUNDATION_TITLES: Record<string, string> = {
   motion: "Motion",
   opacity: "Opacity",
   zindex: "Z-Index",
-  shadcn: "Aliases shadcn",
+  shadcn: "shadcn aliases",
 }
 
 function foundationTable(rows: Entry[], showDark: boolean): string[] {
   const head = showDark
-    ? "| Token | Variable CSS | Type | Statut | Light | Dark | Tailwind |"
-    : "| Token | Variable CSS | Type | Statut | Valeur | Tailwind |"
+    ? "| Token | CSS variable | Type | Status | Light | Dark | Tailwind |"
+    : "| Token | CSS variable | Type | Status | Value | Tailwind |"
   const sep = showDark
     ? "|---|---|---|---|---|---|---|"
     : "|---|---|---|---|---|---|"
@@ -316,9 +316,9 @@ function guidanceTable(foundation: string): string[] {
   if (rows.length === 0) return []
   const lines = [
     "",
-    "**Règles d'usage**",
+    "**Usage rules**",
     "",
-    "| Portée | ✅ Do | ❌ Don't |",
+    "| Scope | ✅ Do | ❌ Don't |",
     "|---|---|---|",
   ]
   for (const r of rows) {
@@ -341,13 +341,13 @@ const md: string[] = [
   `> ${entries.length} tokens · source \`tokens/primitive.json\` · \`tokens/semantic.json\` · \`tokens/component.json\``,
   "> Machine-readable counterpart: `tokens.manifest.json`",
   "",
-  "Les tokens publics sont les tiers Semantic et Component. Le tier Primitive est privé :",
-  "il est listé en fin de document uniquement pour tracer l'origine des valeurs.",
+  "The public tokens are the Semantic and Component tiers. The Primitive tier is private:",
+  "it is listed at the end of this document only to trace where the values come from.",
   "",
-  "Colonne **Statut** : `active` — consommé par un composant, le pont `@theme` ou un autre token ;",
-  "`reserved` — décision valide que rien ne consomme encore, utilisable si son rôle correspond",
-  "exactement au besoin ; `deprecated` — ne plus utiliser. `npm run tokens:lint-lifecycle` garantit",
-  "que le statut dit ce que fait le code.",
+  "**Status** column: `active` — consumed by a component, the `@theme` bridge or another token;",
+  "`reserved` — a valid decision nothing consumes yet, usable when its role matches the need",
+  "exactly; `deprecated` — do not use any more. `npm run tokens:lint-lifecycle` makes sure",
+  "the status says what the code does.",
   "",
   "---",
 ]
@@ -374,11 +374,11 @@ for (const foundation of foundations) {
 const primitives = entries.filter((e) => e.tier === "primitive")
 md.push(
   "",
-  "## Primitives — privé, ne pas utiliser",
+  "## Primitives — private, do not use",
   "",
-  "Ces variables sont le tier 1. Les référencer depuis un composant, une spec ou",
-  "`globals.css` contourne les décisions du design system et casse le mode dark :",
-  "`npm run tokens-validate` échoue si l'une d'elles apparaît hors de `tokens.css`.",
+  "These variables are tier 1. Referencing them from a component, a spec or",
+  "`globals.css` bypasses the design system's decisions and breaks dark mode:",
+  "`npm run tokens-validate` fails if any of them appears outside `tokens.css`.",
   "",
   ...foundationTable(primitives, false),
   ""
