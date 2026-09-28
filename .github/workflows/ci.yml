@@ -150,7 +150,7 @@ jobs:
       # Freshness first: it also rejects bare or dangling registryDependencies,
       # which `shadcn registry validate` does not look at.
       - run: npm run registry:check
-      - run: npx --yes shadcn@latest registry validate ./registry.json
+      - run: npx --no -- shadcn registry validate ./registry.json
       # The only check that proves the registry is consumable: every item
       # installed into a blank app, then type-checked. A pull request tests the
       # registry it builds; a push to main tests the published addresses.

@@ -46,6 +46,10 @@ section that fits.
   [#10](https://github.com/Toniio/DSAIReadable/pull/10)).
 - `build_screen` asks for 4 calls plus one per retained component
   ([#17](https://github.com/Toniio/DSAIReadable/pull/17)).
+- Tooling: `engines` requires Node.js 22.12 or later; CI validates the registry
+  with the `shadcn` version from the lockfile instead of `@latest`; Dependabot
+  opens weekly grouped updates for npm and GitHub Actions; Prettier skips the
+  generated JSON ([#29](https://github.com/Toniio/DSAIReadable/pull/29)).
 
 ### Fixed
 
@@ -75,3 +79,9 @@ section that fits.
 
 - The Railway deployment: the MCP server runs locally only
   ([#25](https://github.com/Toniio/DSAIReadable/pull/25)).
+
+### Security
+
+- MCP server: the transitive `hono`, `fast-uri`, `ip-address`,
+  `@hono/node-server` and `qs` advisories are fixed by lockfile updates
+  ([#29](https://github.com/Toniio/DSAIReadable/pull/29)).

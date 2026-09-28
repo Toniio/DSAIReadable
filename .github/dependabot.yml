@@ -1,0 +1,28 @@
+# Weekly, grouped dependency updates. Security updates are switched on in the
+# repository settings, not here.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directories:
+      - /
+      - /mcp-server
+    schedule:
+      interval: weekly
+    groups:
+      npm-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: chore
+      include: scope
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: ci
