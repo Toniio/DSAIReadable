@@ -87,22 +87,29 @@ const buttonVariants = cva(
 3. **The invalid-state ring follows the focus ring's width** — both can apply at
    once on a field that is invalid and focused. Two different widths give a
    result that depends on the order of the utilities in the compiled stylesheet.
-4. **`ring-0` is a legitimate removal** — it is how a wrapper such as
-   InputGroup takes over the indicator of its inner control.
+4. **A bare `ring-0` is a legitimate removal** — it is how a wrapper such as
+   InputGroup takes over the indicator of its inner control. Under a focus
+   state (`focus-visible:ring-0`) it removes the indicator, and counts as a
+   reset under rule 5.
 5. **Hiding the outline requires drawing a ring — checked occurrence by
-   occurrence.** The ring must appear in the _same_ class string. A component
-   that neutralizes the outline in ten places and draws a ring in one does not
-   meet the rule.
+   occurrence, and target by target.** The ring must appear in the _same_ class
+   string, on the _same_ target: a reset written under `**:`, `*:`,
+   `[&_x]:` or `before:` hides the indicator of other nodes, and only a ring
+   under the same variant answers it. A component that neutralizes the outline
+   in ten places and draws a ring in one does not meet the rule, and neither
+   did NavigationMenu, whose `**:data-[slot=navigation-menu-link]:focus:outline-none`
+   hid every link's ring while the menu drew its own.
 
-   Three replacement mechanisms are allowed, each declared by a
+   Four replacement mechanisms are allowed, each declared by a
    `// focus-managed: <mechanism>` comment, which the linter requires to be
    non-empty:
 
    | Mechanism                                                                                                                       | Components                                                                           |
    | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
    | Roving focus: Radix moves the tabindex and marks the current item with `focus:bg-accent` or `data-highlighted:bg-accent`        | DropdownMenu, ContextMenu, Menubar, Select, Command, Combobox                        |
-   | Ring drawn by the wrapper: the control sits in an InputGroup that carries `has-[[data-slot=input-group-control]:focus-visible]` | CommandInput, ComboboxInput                                                          |
+   | Ring drawn by the wrapper: the control sits in an InputGroup that carries `has-[[data-slot=input-group-control]:focus-visible]` | CommandInput, ComboboxInput, InputGroupInput, InputGroupTextarea                     |
    | Programmatically focused surface: Radix mounts the overlay with `tabIndex={-1}`, then moves focus to a control inside it        | Dialog, AlertDialog, Popover, HoverCard, DropdownMenu, ContextMenu, Menubar, Command |
+   | Chart accessibility layer: Recharts answers focus on the chart surface by showing the tooltip and its cursor on a data point    | Chart                                                                                |
 
    These mechanisms signal focus **through color alone**. They remain
    acceptable because focus always comes with visible movement through a list,
@@ -128,9 +135,9 @@ threshold of **3:1** for a user-interface component, in both modes:
 `scripts/lint-focus-ring.ts`, wired into `npm run tokens-validate` and CI. Four
 rules, each matching a bug that actually shipped:
 
-| Rule           | What it blocks                                                                                      |
-| -------------- | --------------------------------------------------------------------------------------------------- |
-| `dead-class`   | `ring-focus`, the class that never existed                                                          |
-| `raw-width`    | a focus ring width in pixels                                                                        |
-| `outline-none` | the reset that erases the indicator in forced-colors mode                                           |
-| `no-indicator` | a class string that hides the outline without drawing anything in its place, or declaring what does |
+| Rule           | What it blocks                                                                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dead-class`   | `ring-focus`, the class that never existed                                                                                                     |
+| `raw-width`    | a focus ring width in pixels                                                                                                                   |
+| `outline-none` | the reset that erases the indicator in forced-colors mode                                                                                      |
+| `no-indicator` | a class string that hides the outline, or removes a focus ring, on a target without drawing a ring on that same target, or declaring what does |

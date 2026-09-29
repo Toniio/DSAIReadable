@@ -57,6 +57,7 @@ the reason why.
 npm run tokens-validate   # DTCG naming + raw values + @theme bridge + focus + contrast + palette monotonicity + chart palette + fonts + lifecycle + freshness
 npm run typecheck:all     # app + scripts + mcp-server
 npm run lint              # ESLint
+npm run lint:language     # English only: French words and diacritics in tracked files
 npm run index:validate    # 5 checks: JSON Schema, sizes, data-slot, UI strings, Props types
 npm run specs:validate    # the 59 specs against the 13 canonical sections + Variants, Tokens, Props / API and choice rules up to date + no hedged wording + llms.txt up to date
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
@@ -104,6 +105,19 @@ problem: fix it, do not disable it.
 | `.github/workflows/ci.yml`                    | 10 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
 | `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                                 |
 | `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result                    |
+
+Each § 1 rule, and the check that enforces it:
+
+| § 1 rule                              | Enforced by                                                                                                                                                                                                                                       |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Never a raw value                     | `tokens:lint-values` — hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`, arbitrary Tailwind values (`duration-[…]`, `ease-[…]`, `p-[…]`…), each `allow-raw` checked against `tokens/allow-raw.registry.json`; `tokens:lint-focus` for focus-ring widths |
+| Never reference a Primitive token     | `tokens:lint-values` (`--ds-prim-*` in `app/`, `components/`, `lib/`, `hooks/`, no `allow-raw` opt-out), `tokens:lint-bridge` (the `@theme` bridge), `tokens:build` (Tier 3 may reference Tier 2 only)                                            |
+| Phosphor icons only                   | ESLint `no-restricted-imports` (other icon kits) and `no-restricted-syntax` (inline `<svg>`; `logo.tsx` and `illustration.tsx` declared as artwork in `eslint.config.mjs`)                                                                        |
+| Only the design system's classes      | ESLint `better-tailwindcss/no-unknown-classes`, and `no-restricted-classes` for opacity outside binary states                                                                                                                                     |
+| Class-based dark mode                 | `tokens:lint-values` (`prefers-color-scheme`, no `allow-raw` opt-out)                                                                                                                                                                             |
+| Read the spec first                   | Not checkable; `specs:validate` keeps each spec in step with its code (Variants, Tokens, Props / API) and `index:schema` keeps its Metadata in step with the index, so what the spec says is true                                                 |
+| `tokens-validate` before every commit | The required `tokens-validate` CI job, and `npm run check`                                                                                                                                                                                        |
+| Everything committed in English       | `lint:language`, in `npm run check` and the CI `lint` job                                                                                                                                                                                         |
 
 ## 6. Publishing identity
 

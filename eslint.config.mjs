@@ -58,10 +58,68 @@ const eslintConfig = defineConfig([
                 "A disabled state uses the opacity.disabled token: write $1opacity-disabled.",
               fix: "$1opacity-disabled",
             },
+            // specs/foundations/opacity.md: opacity is for binary states. What
+            // is left once disabled is handled: show / hide (0, 100), a
+            // placeholder (placeholder:opacity-50) and a modal backdrop
+            // (opacity-80). Dimming a text or an icon is a colour token's job.
+            {
+              pattern:
+                "^(?!(?:.*:)?opacity-(?:0|100|80|disabled)$)(?!placeholder:opacity-50$).*opacity-\\d+$",
+              message:
+                "Opacity is for binary states (specs/foundations/opacity.md): show / hide with opacity-0 and opacity-100, or a color token such as text-muted-foreground to dim a text or an icon.",
+            },
           ],
         },
       ],
     },
+  },
+  {
+    // AGENTS.md § 1 — Phosphor icons only. A second kit is not a style choice:
+    // its icons have other sizes and strokes, and agents copy what they see.
+    files: ["{app,components,lib,hooks}/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: [
+                "lucide-react",
+                "lucide-react/*",
+                "@heroicons/*",
+                "react-icons",
+                "react-icons/*",
+                "@radix-ui/react-icons",
+                "@tabler/icons-react",
+                "react-feather",
+                "@fortawesome/*",
+                "@mui/icons-material",
+                "@mui/icons-material/*",
+                "iconoir-react",
+                "@iconify/*",
+              ],
+              message:
+                "Icons come from @phosphor-icons/react only (AGENTS.md § 1).",
+            },
+          ],
+        },
+      ],
+      // No inline SVG either: an icon drawn by hand is an icon outside the kit.
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "JSXOpeningElement[name.name='svg']",
+          message:
+            "No inline SVG (AGENTS.md § 1): use an icon from @phosphor-icons/react.",
+        },
+      ],
+    },
+  },
+  {
+    // Declared exceptions to the inline SVG rule: artwork, not icons. The
+    // brand mark and the placeholder illustration have no Phosphor equivalent.
+    files: ["components/ui/logo.tsx", "components/ui/illustration.tsx"],
+    rules: { "no-restricted-syntax": "off" },
   },
   {
     // CommonJS tooling scripts: require() is the correct syntax there.

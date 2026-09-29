@@ -68,6 +68,8 @@ function ChartContainer({
           // allow-raw: recharts-attribute-selector — #ccc and #fff are CSS attribute selector values targeting
           // SVG stroke/fill attributes injected by Recharts at runtime. CSS custom properties cannot be used
           // inside attribute selectors ([attr='value']), so these raw hex values are unavoidable.
+          // focus-managed: Recharts' accessibility layer (on by default) answers focus on the chart surface by
+          // showing ChartTooltip and its cursor on the first data point; the arrow keys then move them.
           "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className
         )}

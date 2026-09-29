@@ -20,10 +20,14 @@
  *      the same class string or by a "focus-managed: <mechanism>" comment
  *      naming what draws the indicator instead. Checked per occurrence, not
  *      per file: a component with ten reset sites and one ring elsewhere was
- *      passing a file-level version of this rule.
+ *      passing a file-level version of this rule. Checked per target, too:
+ *      `**:data-[slot=navigation-menu-link]:focus:outline-none` stripped every
+ *      link of its indicator while a ring on the menu itself, or any `ring-0`
+ *      on the line, satisfied a line-level version.
  *
- * `ring-0` is allowed: removing a ring is a deliberate act, and it is how a
- * wrapper such as InputGroup takes over the indicator for its inner control.
+ * A bare `ring-0` is allowed: removing a ring is a deliberate act, and it is
+ * how a wrapper such as InputGroup takes over the indicator for its inner
+ * control. Under a focus state it removes the indicator, and counts as a reset.
  *
  *   npx tsx scripts/lint-focus-ring.ts
  */
@@ -38,7 +42,13 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const PRESET = "lib/focus.ts"
 const TOKEN = "ring-(length:--space-focus-ring-width)"
 
-/** How far above a reset a "focus-managed:" comment may sit. */
+/**
+ * Variants that move a class off the element onto other nodes: its children,
+ * its descendants, a pseudo-element. Everything else (focus, hover, data-*,
+ * group-*, md:) only says *when* the class applies to the same node.
+ */
+const TARGET_VARIANT =
+  /^(?:\*|\*\*|before|after|placeholder|file|marker|selection|backdrop|\[[^\]]*[_>+~][^\]]*\])$/
 
 /** States whose ring is a focus indicator and must therefore share the token. */
 const FOCUS_STATES =
@@ -98,47 +108,64 @@ for (const abs of files) {
       })
     }
 
-    // ④ An outline reset with nothing to replace it.
-    const resets =
-      line.includes("FOCUS_OUTLINE_RESET") ||
-      /(?<![\w:-])outline-hidden\b/.test(line)
-    if (resets) {
-      const drawsRing = line.includes("FOCUS_RING") || line.includes(TOKEN)
-      const declared =
-        lines
-          .slice(0, i + 1)
-          .reverse()
-          .reduce<boolean | null>((found, l, offset) => {
-            // A marker belongs to the class string it sits against: the line
-            // itself, then every comment line touching it. A fixed line budget
-            // instead made the marker's position among other comments matter.
-            if (found !== null) return found
-            if (MARKER.test(l)) return true
-            if (offset > 0 && !isCommentLine(l)) return false
-            return null
-          }, null) === true
-      if (!drawsRing && !declared && !line.includes("ring-0"))
-        findings.push({
-          ...at,
-          rule: "no-indicator",
-          detail:
-            `hides the native outline without drawing a ring in the same class ` +
-            `string, so focusing this element shows nothing (WCAG 2.2 SC 2.4.7). ` +
-            `Add FOCUS_RING, or name what draws the indicator instead with a ` +
-            `"// focus-managed: <mechanism>" comment on the lines just above.`,
-        })
+    // ④ A reset with nothing to replace it, read class by class: every
+    // outline reset, and every ring removed under a focus state, must be
+    // answered by a ring drawn on the same target (the element itself, or the
+    // children a `*:` / `**:` / `[&_x]:` / `before:` variant selects).
+    const classes = classTokens(line)
+    const declared =
+      lines
+        .slice(0, i + 1)
+        .reverse()
+        .reduce<boolean | null>((found, l, offset) => {
+          // A marker belongs to the class string it sits against: the line
+          // itself, then every comment line touching it. A fixed line budget
+          // instead made the marker's position among other comments matter.
+          if (found !== null) return found
+          if (MARKER.test(l)) return true
+          if (offset > 0 && !isCommentLine(l)) return false
+          return null
+        }, null) === true
+    const drawn = new Set(
+      classes.filter((c) => c.utility === TOKEN).map((c) => c.target)
+    )
+    if (line.includes("FOCUS_RING")) drawn.add("")
+    const resets = classes.filter(
+      (c) =>
+        /^outline-(?:hidden|none)$/.test(c.utility) ||
+        (c.utility === "ring-0" && FOCUS_STATES.test(c.prefix))
+    )
+    if (line.includes("FOCUS_OUTLINE_RESET"))
+      resets.push({ prefix: "", target: "", utility: "FOCUS_OUTLINE_RESET" })
+    for (const reset of resets) {
+      if (declared || drawn.has(reset.target)) continue
+      const where = reset.target
+        ? `the elements "${reset.target}:" selects`
+        : "this element"
+      findings.push({
+        ...at,
+        rule: "no-indicator",
+        detail:
+          `"${reset.prefix}${reset.utility}" removes the focus indicator of ` +
+          `${where}, and no ring is drawn on the same target in this class ` +
+          `string, so focusing it shows nothing (WCAG 2.2 SC 2.4.7). Add ` +
+          `FOCUS_RING (or "${reset.target ? reset.target + ":" : ""}focus-visible:${TOKEN}"), ` +
+          `or name what draws the indicator instead with a ` +
+          `"// focus-managed: <mechanism>" comment on the lines just above.`,
+      })
     }
 
-    // ③ The outline reset that erases the indicator in forced-colors mode.
-    if (/(?<![\w:-])outline-none(?![\w-])/.test(line))
+    // ③ The outline reset that erases the indicator in forced-colors mode,
+    // whatever variant it sits under.
+    for (const c of classes.filter((c) => c.utility === "outline-none"))
       findings.push({
         ...at,
         rule: "outline-none",
         detail:
-          `uses "outline-none". Forced-colors mode does not paint box-shadow ` +
-          `rings, so the element is left with no focus indicator at all, and ` +
-          `"outline-none" also poisons --tw-outline-style for any later ` +
-          `"outline-<n>". Use FOCUS_OUTLINE_RESET from @/lib/focus.`,
+          `uses "${c.prefix}outline-none". Forced-colors mode does not paint ` +
+          `box-shadow rings, so the element is left with no focus indicator ` +
+          `at all, and "outline-none" also poisons --tw-outline-style for any ` +
+          `later "outline-<n>". Use FOCUS_OUTLINE_RESET from @/lib/focus.`,
       })
   })
 }
@@ -157,6 +184,38 @@ console.log(
   `✅ lint-focus-ring: ${files.length} components, one focus preset from ${PRESET}, ` +
     `no raw ring width, no outline-none.`
 )
+
+type ClassToken = { prefix: string; target: string; utility: string }
+
+/** Splits a source line into Tailwind classes, each with its variant chain. */
+function classTokens(line: string): ClassToken[] {
+  return line
+    .split(/[\s"'`${}]+/)
+    .filter((raw) => /^[\w*!\[@-]/.test(raw) && raw.length > 1)
+    .map((raw) => {
+      const parts = splitVariants(raw.replace(/!/g, ""))
+      const utility = parts.pop() ?? ""
+      const lastTarget = parts.findLastIndex((v) => TARGET_VARIANT.test(v))
+      return {
+        prefix: parts.map((v) => `${v}:`).join(""),
+        target: parts.slice(0, lastTarget + 1).join(":"),
+        utility,
+      }
+    })
+}
+
+/** Splits `a:[b:c]:d-(e:f)` on the colons outside brackets and parentheses. */
+function splitVariants(raw: string): string[] {
+  const parts = [""]
+  let depth = 0
+  for (const ch of raw) {
+    if (ch === "[" || ch === "(") depth++
+    if (ch === "]" || ch === ")") depth--
+    if (ch === ":" && depth === 0) parts.push("")
+    else parts[parts.length - 1] += ch
+  }
+  return parts
+}
 
 function isCommentLine(line: string): boolean {
   const t = line.trim()

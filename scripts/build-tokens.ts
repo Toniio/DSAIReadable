@@ -88,9 +88,13 @@ function toCss(
     const name = ref.replace(/\./g, "-")
     if (tier === "semantic") return `var(--ds-prim-${name})`
     if (tier === "component") {
-      // Prefer the semantic tier; fall back to a primitive reference.
+      // Tier 3 aliases Tier 2 only (AGENTS.md § 2). A primitive reached from
+      // here would skip the semantic decision, and its light/dark mode.
       if (hasPath(semantic, ref)) return `var(--${name})`
-      if (hasPath(primitive, ref)) return `var(--ds-prim-${name})`
+      if (hasPath(primitive, ref))
+        throw new Error(
+          `Component token references the primitive "{${ref}}": Tier 3 may only reference Tier 2 (tokens/semantic.json).`
+        )
       throw new Error(`Unresolved token reference "{${ref}}" in component tier`)
     }
     return `var(--${name})`

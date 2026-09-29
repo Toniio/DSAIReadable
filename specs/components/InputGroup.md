@@ -6,7 +6,7 @@
 | ------------- | ----------------------------- |
 | Name          | InputGroup                    |
 | Category      | Forms                         |
-| Status        | stable                        |
+| Status        | beta                          |
 | figma_node_id |                               |
 | code_path     | components/ui/input-group.tsx |
 

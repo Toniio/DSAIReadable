@@ -64,6 +64,7 @@ const STEPS: [string, () => Result][] = [
   ["tokens-validate", () => run("npm run -s tokens-validate")],
   ["typecheck:all", () => run("npm run -s typecheck:all")],
   ["lint", () => run("npm run -s lint")],
+  ["lint:language", () => run("npm run -s lint:language")],
   ["prettier --check", () => run('npx prettier --check "**/*.{ts,tsx,md}"')],
   ["index:validate", () => run("npm run -s index:validate")],
   ["specs:validate", () => run("npm run -s specs:validate")],
