@@ -4692,15 +4692,15 @@
         "component": "CommandDialog",
         "prop": "`title`",
         "type": "`string`",
-        "default": "`\"Command Palette\"`",
-        "description": "Accessible title of the dialog (`sr-only`)"
+        "default": "`UI_STRINGS.command.dialogTitle`",
+        "description": "Accessible title of the dialog (`sr-only`); overrides the `UI_STRINGS` value"
       },
       {
         "component": "CommandDialog",
         "prop": "`description`",
         "type": "`string`",
-        "default": "`\"Search for a command to run...\"`",
-        "description": "Accessible description of the dialog (`sr-only`)"
+        "default": "`UI_STRINGS.command.dialogDescription`",
+        "description": "Accessible description of the dialog (`sr-only`); overrides the `UI_STRINGS` value"
       },
       {
         "component": "CommandDialog",

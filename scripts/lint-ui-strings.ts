@@ -2,7 +2,7 @@
  * A component must not invent the words it renders.
  *
  * Accessible names that never appear on screen - aria-label, title, sr-only
- * text, the default of a `label` or `*Label` prop, the text of a dialog title
+ * text, the default of a `label`, `title` or `description` prop, the text of a dialog title
  * a component writes for itself - are the ones that quietly
  * drift: nobody sees them, so nobody notices when one is English and the next
  * is French, or when a translator misses one because it is buried in JSX. They all come from lib/ui-strings.ts, so there
@@ -70,10 +70,10 @@ for (const name of readdirSync(DIR)
     }
 
     // A prop that carries an accessible name, given a literal default in its
-    // destructuring (`clearLabel = "Clear"`): the name is still hardcoded, only
-    // one step away from the JSX that renders it.
+    // destructuring (`clearLabel = "Clear"`, `title = "Command Palette"`): the
+    // name is still hardcoded, only one step away from the JSX that renders it.
     const labelDefault = line.match(
-      /(?<![\w-])(label|\w+Label)\s*=\s*(?:"([^"]*)"|'([^']*)'|`([^`$]*)`)/
+      /(?<![\w-])(label|\w+Label|title|\w+Title|description|\w+Description)\s*=\s*(?:"([^"]*)"|'([^']*)'|`([^`$]*)`)/
     )
     if (labelDefault) {
       const value = (

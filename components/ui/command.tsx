@@ -5,6 +5,7 @@ import { Command as CommandPrimitive } from "cmdk"
 
 import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
+import { UI_STRINGS } from "@/lib/ui-strings"
 import {
   Dialog,
   DialogContent,
@@ -34,8 +35,8 @@ function Command({
 // no-data-slot: CommandDialog renders a Dialog, whose surface keeps its own
 // dialog-content slot: CommandItem styles itself in-data-[slot=dialog-content].
 function CommandDialog({
-  title = "Command Palette",
-  description = "Search for a command to run...",
+  title = UI_STRINGS.command.dialogTitle,
+  description = UI_STRINGS.command.dialogDescription,
   children,
   className,
   showCloseButton = false,
