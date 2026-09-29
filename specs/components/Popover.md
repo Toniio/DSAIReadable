@@ -57,6 +57,7 @@ An interactive floating container opened by a click, for rich content — a form
 
 | Token                            | Classes and variables                            | Where                                                     |
 | -------------------------------- | ------------------------------------------------ | --------------------------------------------------------- |
+| `border-width.default`           | `ring-(length:--border-width-default)`           | `PopoverContent` via `SURFACE_OUTLINE` (`lib/surface.ts`) |
 | `color.background.elevated`      | `bg-popover`                                     | `PopoverContent`                                          |
 | `color.text.default`             | `ring-foreground/10` · `text-popover-foreground` | `PopoverContent`                                          |
 | `color.text.subtle`              | `text-muted-foreground`                          | `PopoverDescription`                                      |

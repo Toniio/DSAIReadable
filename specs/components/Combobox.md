@@ -69,7 +69,7 @@ A text input with autocomplete that picks from a filterable list of options; sup
 
 | Token                           | Classes and variables                                                                           | Where                                                                                 |
 | ------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `border-width.default`          | `border`                                                                                        | `ComboboxChips`                                                                       |
+| `border-width.default`          | `border` · `ring-(length:--border-width-default)`                                               | `ComboboxChips` · `ComboboxContent` via `SURFACE_OUTLINE` (`lib/surface.ts`)          |
 | `color.background.elevated`     | `bg-popover`                                                                                    | `ComboboxContent`                                                                     |
 | `color.background.subtle`       | `bg-accent` · `bg-muted`                                                                        | `ComboboxChip` · `ComboboxItem`                                                       |
 | `color.border.default`          | `bg-border`                                                                                     | `ComboboxSeparator`                                                                   |

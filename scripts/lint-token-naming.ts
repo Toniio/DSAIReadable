@@ -110,7 +110,7 @@ const ENUMS: Record<string, string[]> = {
   opacityRole: ["disabled", "placeholder", "overlay"],
   /** Tailwind's responsive variants — the only breakpoints there are. */
   breakpoint: ["sm", "md", "lg", "xl", "2xl"],
-  borderWidthRole: ["default", "chart-indicator"],
+  borderWidthRole: ["default", "chart-indicator", "separation"],
   zLayer: [
     "dropdown",
     "sticky",

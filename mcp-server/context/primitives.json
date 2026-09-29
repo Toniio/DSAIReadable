@@ -725,6 +725,11 @@
     "type": "dimension"
   },
   {
+    "path": "border-width.2",
+    "value": "2px",
+    "type": "dimension"
+  },
+  {
     "path": "border-width.1-5",
     "value": "1.5px",
     "type": "dimension"

@@ -5,7 +5,7 @@
 
 # Token Reference
 
-> 303 tokens · source `tokens/primitive.json` · `tokens/semantic.json` · `tokens/component.json`
+> 305 tokens · source `tokens/primitive.json` · `tokens/semantic.json` · `tokens/component.json`
 > Machine-readable counterpart: `tokens.manifest.json`
 
 The public tokens are the Semantic and Component tiers. The Primitive tier is private:
@@ -288,10 +288,11 @@ the status says what the code does.
 
 ## border-width
 
-| Token                          | CSS variable                     | Type      | Status | Value   | Tailwind                 |
-| ------------------------------ | -------------------------------- | --------- | ------ | ------- | ------------------------ |
-| `border-width.default`         | `--border-width-default`         | dimension | active | `1px`   | `border`                 |
-| `border-width.chart-indicator` | `--border-width-chart-indicator` | dimension | active | `1.5px` | `border-chart-indicator` |
+| Token                          | CSS variable                     | Type      | Status | Value   | Tailwind                                  |
+| ------------------------------ | -------------------------------- | --------- | ------ | ------- | ----------------------------------------- |
+| `border-width.default`         | `--border-width-default`         | dimension | active | `1px`   | `border`                                  |
+| `border-width.chart-indicator` | `--border-width-chart-indicator` | dimension | active | `1.5px` | `border-chart-indicator`                  |
+| `border-width.separation`      | `--border-width-separation`      | dimension | active | `2px`   | `ring-(length:--border-width-separation)` |
 
 ---
 
@@ -488,4 +489,5 @@ These variables are tier 1. Referencing them from a component, a spec or
 | `breakpoint.xl`                    | `--ds-prim-breakpoint-xl`                    | dimension   | active   | `80rem`                                                            | —        |
 | `breakpoint.2xl`                   | `--ds-prim-breakpoint-2xl`                   | dimension   | active   | `96rem`                                                            | —        |
 | `border-width.1`                   | `--ds-prim-border-width-1`                   | dimension   | active   | `1px`                                                              | —        |
+| `border-width.2`                   | `--ds-prim-border-width-2`                   | dimension   | active   | `2px`                                                              | —        |
 | `border-width.1-5`                 | `--ds-prim-border-width-1-5`                 | dimension   | active   | `1.5px`                                                            | —        |

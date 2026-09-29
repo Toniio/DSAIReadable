@@ -28,6 +28,10 @@
         {
           "path": "lib/overlay.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "lib/surface.ts",
+          "type": "registry:lib"
         }
       ],
       "cssVars": {
@@ -269,6 +273,7 @@
           "ds-prim-breakpoint-xl": "80rem",
           "ds-prim-breakpoint-2xl": "96rem",
           "ds-prim-border-width-1": "1px",
+          "ds-prim-border-width-2": "2px",
           "ds-prim-border-width-1-5": "1.5px",
           "color-background-default": "var(--ds-prim-color-mist-0)",
           "color-background-subtle": "var(--ds-prim-color-mist-100)",
@@ -394,6 +399,7 @@
           "breakpoint-2xl": "var(--ds-prim-breakpoint-2xl)",
           "border-width-default": "var(--ds-prim-border-width-1)",
           "border-width-chart-indicator": "var(--ds-prim-border-width-1-5)",
+          "border-width-separation": "var(--ds-prim-border-width-2)",
           "background": "var(--color-background-default)",
           "foreground": "var(--color-text-default)",
           "card": "var(--color-background-subtle)",

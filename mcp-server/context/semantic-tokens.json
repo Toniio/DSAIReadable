@@ -1114,5 +1114,14 @@
     "type": "dimension",
     "status": "active",
     "usage": "Stroke of the dashed series indicator in chart tooltips. Not for component borders."
+  },
+  {
+    "path": "border-width.separation",
+    "css_var": "--border-width-separation",
+    "light": "{border-width.2}",
+    "dark": "{border-width.2}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Ring painted in the background color around an element that overlaps another, cutting it out: stacked avatars, an avatar's badge. Not for borders or focus rings."
   }
 ]

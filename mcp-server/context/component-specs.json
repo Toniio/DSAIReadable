@@ -579,6 +579,15 @@
     ],
     "tokens": [
       {
+        "token": "border-width.default",
+        "classes": [
+          "ring-(length:--border-width-default)"
+        ],
+        "where": [
+          "AlertDialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
         "token": "color.background.elevated",
         "classes": [
           "bg-popover"
@@ -1051,6 +1060,17 @@
         ],
         "where": [
           "Avatar"
+        ]
+      },
+      {
+        "token": "border-width.separation",
+        "classes": [
+          "ring-(length:--border-width-separation)"
+        ],
+        "where": [
+          "AvatarBadge via SEPARATION_RING (lib/surface.ts)",
+          "AvatarGroupCount via SEPARATION_RING (lib/surface.ts)",
+          "AvatarGroup"
         ]
       },
       {
@@ -2624,10 +2644,12 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border-t"
+          "border-t",
+          "ring-(length:--border-width-default)"
         ],
         "where": [
-          "CardFooter"
+          "CardFooter",
+          "Card via SURFACE_OUTLINE (lib/surface.ts)"
         ]
       },
       {
@@ -3958,10 +3980,12 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "ring-(length:--border-width-default)"
         ],
         "where": [
-          "ComboboxChips"
+          "ComboboxChips",
+          "ComboboxContent via SURFACE_OUTLINE (lib/surface.ts)"
         ]
       },
       {
@@ -4859,9 +4883,11 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "ring-(length:--border-width-default)"
         ],
         "where": [
+          "ContextMenuContent via SURFACE_OUTLINE (lib/surface.ts)",
           "ContextMenuSubContent"
         ]
       },
@@ -5331,6 +5357,15 @@
       }
     ],
     "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "ring-(length:--border-width-default)"
+        ],
+        "where": [
+          "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
+      },
       {
         "token": "color.background.elevated",
         "classes": [
@@ -6196,6 +6231,16 @@
       }
     ],
     "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "ring-(length:--border-width-default)"
+        ],
+        "where": [
+          "DropdownMenuContent via SURFACE_OUTLINE (lib/surface.ts)",
+          "DropdownMenuSubContent via SURFACE_OUTLINE (lib/surface.ts)"
+        ]
+      },
       {
         "token": "color.background.elevated",
         "classes": [
@@ -7584,6 +7629,15 @@
       }
     ],
     "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "ring-(length:--border-width-default)"
+        ],
+        "where": [
+          "HoverCardContent via SURFACE_OUTLINE (lib/surface.ts)"
+        ]
+      },
       {
         "token": "color.background.elevated",
         "classes": [
@@ -9631,9 +9685,12 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "ring-(length:--border-width-default)"
         ],
         "where": [
+          "MenubarContent via SURFACE_OUTLINE (lib/surface.ts)",
+          "MenubarSubContent via SURFACE_OUTLINE (lib/surface.ts)",
           "Menubar"
         ]
       },
@@ -10397,6 +10454,16 @@
     ],
     "tokens": [
       {
+        "token": "border-width.default",
+        "classes": [
+          "ring-(length:--border-width-default)"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuViewport via SURFACE_OUTLINE (lib/surface.ts)"
+        ]
+      },
+      {
         "token": "color.background.elevated",
         "classes": [
           "bg-popover"
@@ -11124,6 +11191,15 @@
       }
     ],
     "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "ring-(length:--border-width-default)"
+        ],
+        "where": [
+          "PopoverContent via SURFACE_OUTLINE (lib/surface.ts)"
+        ]
+      },
       {
         "token": "color.background.elevated",
         "classes": [
@@ -12153,9 +12229,11 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "ring-(length:--border-width-default)"
         ],
         "where": [
+          "SelectContent via SURFACE_OUTLINE (lib/surface.ts)",
           "SelectTrigger"
         ]
       },
@@ -13149,11 +13227,13 @@
         "token": "border-width.default",
         "classes": [
           "border-l",
-          "border-r"
+          "border-r",
+          "ring-(length:--border-width-default)"
         ],
         "where": [
           "SidebarMenuSub",
-          "Sidebar"
+          "Sidebar",
+          "sidebarMenuButtonVariants.variant.outline via SURFACE_OUTLINE (lib/surface.ts)"
         ]
       },
       {

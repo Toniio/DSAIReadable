@@ -48,6 +48,7 @@ const BASE_MODULES = new Map([
   ["@/lib/focus", "lib/focus.ts"],
   ["@/lib/ui-strings", "lib/ui-strings.ts"],
   ["@/lib/overlay", "lib/overlay.ts"],
+  ["@/lib/surface", "lib/surface.ts"],
 ])
 
 const read = (rel: string) => readFileSync(resolve(ROOT, rel), "utf-8")
