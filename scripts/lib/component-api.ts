@@ -18,6 +18,8 @@ interface ApiProp {
   own: boolean
   /** File that declares it, when another component file does (`variant` of Button). */
   from?: string
+  /** Declared by React's DOM attribute types (`id`, `onClick`…), not by a component or a library. */
+  dom: boolean
 }
 
 interface Rendered {
@@ -299,6 +301,9 @@ function componentOf(
             ),
         default: defaults.get(symbol.name),
         own,
+        dom: decls.every((d) =>
+          /\/node_modules\/@types\/react\//.test(d.getSourceFile().fileName)
+        ),
       })
     }
   }

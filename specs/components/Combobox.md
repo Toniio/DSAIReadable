@@ -96,11 +96,7 @@ Composes `Button`, `InputGroup` — their tokens are listed in their own specs.
 
 ### `Combobox`
 
-Renders `ComboboxPrimitive.Root`.
-
-| Prop       | Type                                            | Default | Description                    |
-| ---------- | ----------------------------------------------- | ------- | ------------------------------ |
-| `...props` | `ComboboxPrimitive.Root.Props<Value, Multiple>` | —       | `ComboboxPrimitive.Root` props |
+Type: `<Value, Multiple extends boolean \| undefined = false, Item = Value>(props: ComboboxPrimitive.Root.Props<Value, Multiple, Item>) => React.JSX.Element`.
 
 ### `ComboboxInput`
 

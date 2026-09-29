@@ -27,7 +27,7 @@ A group of toggle buttons — exclusive or multi-select — built on Radix Toggl
 - **MUST** — pass `type="single"` for an exclusive selection, `type="multiple"` otherwise
 - **MUST** — give the `ToggleGroup` an `aria-label` that describes the group
 - **MUST NOT** — serve as navigation → use `Tabs` or `NavigationMenu`
-- **Note** — `spacing={0}` (the default) merges the borders; above that, the items are spaced out
+- **Note** — the items are spaced out by default (`spacing={2}`, as in shadcn/ui); `spacing={0}` merges the borders into one segmented control
 - **MUST NOT** — redefine `variant` or `size` on a `ToggleGroupItem`, **unless** to set one item apart: the group passes them down
 
 ## Dependencies
@@ -68,7 +68,7 @@ Renders `ToggleGroupPrimitive.Root`.
 | Prop            | Type                                                       | Default        | Description                                    |
 | --------------- | ---------------------------------------------------------- | -------------- | ---------------------------------------------- |
 | `orientation`   | `"horizontal" \| "vertical"`                               | `"horizontal"` | Direction of the group                         |
-| `spacing`       | `number`                                                   | `0`            | Space between the items (in `--spacing` units) |
+| `spacing`       | `number`                                                   | `2`            | Space between the items (in `--spacing` units) |
 | `type`          | `"single" \| "multiple"`                                   | —              | Selection mode (required by Radix)             |
 | `variant`       | `"default" \| "outline"`                                   | `"default"`    | Visual variant passed down to the items        |
 | `size`          | `"default" \| "sm" \| "lg"`                                | `"default"`    | Size passed down to the items                  |

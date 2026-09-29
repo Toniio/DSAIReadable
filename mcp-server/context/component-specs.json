@@ -249,7 +249,11 @@
       "Tabs",
       "NavigationMenu",
       "Collapsible"
-    ]
+    ],
+    "shadcn": {
+      "item": "accordion",
+      "divergences": []
+    }
   },
   "Alert": {
     "name": "Alert",
@@ -502,7 +506,11 @@
       "Button",
       "AlertDialog",
       "Toast"
-    ]
+    ],
+    "shadcn": {
+      "item": "alert",
+      "divergences": []
+    }
   },
   "AlertDialog": {
     "name": "AlertDialog",
@@ -917,7 +925,11 @@
       "Dialog",
       "Button",
       "Drawer"
-    ]
+    ],
+    "shadcn": {
+      "item": "alert-dialog",
+      "divergences": []
+    }
   },
   "AspectRatio": {
     "name": "AspectRatio",
@@ -1002,7 +1014,11 @@
     "cross_references": [
       "Card",
       "Skeleton"
-    ]
+    ],
+    "shadcn": {
+      "item": "aspect-ratio",
+      "divergences": []
+    }
   },
   "Avatar": {
     "name": "Avatar",
@@ -1316,7 +1332,11 @@
       "Item",
       "DropdownMenu",
       "Tooltip"
-    ]
+    ],
+    "shadcn": {
+      "item": "avatar",
+      "divergences": []
+    }
   },
   "Badge": {
     "name": "Badge",
@@ -1559,7 +1579,11 @@
       "Button",
       "Item",
       "Table"
-    ]
+    ],
+    "shadcn": {
+      "item": "badge",
+      "divergences": []
+    }
   },
   "Breadcrumb": {
     "name": "Breadcrumb",
@@ -1791,7 +1815,18 @@
       "NavigationMenu",
       "Pagination",
       "Button"
-    ]
+    ],
+    "shadcn": {
+      "item": "breadcrumb",
+      "divergences": [
+        {
+          "export": "BreadcrumbEllipsis",
+          "prop": "srLabel",
+          "type": "added",
+          "note": "Overrides its default screen reader text, UI_STRINGS.breadcrumb.ellipsis, so the string can be translated (content.md)."
+        }
+      ]
+    }
   },
   "Button": {
     "name": "Button",
@@ -2069,7 +2104,11 @@
       "Field",
       "Spinner",
       "Input"
-    ]
+    ],
+    "shadcn": {
+      "item": "button",
+      "divergences": []
+    }
   },
   "ButtonGroup": {
     "name": "ButtonGroup",
@@ -2282,7 +2321,11 @@
       "Select",
       "Input",
       "ToggleGroup"
-    ]
+    ],
+    "shadcn": {
+      "item": "button-group",
+      "divergences": []
+    }
   },
   "Calendar": {
     "name": "Calendar",
@@ -2593,7 +2636,11 @@
       "Popover",
       "Button",
       "Input"
-    ]
+    ],
+    "shadcn": {
+      "item": "calendar",
+      "divergences": []
+    }
   },
   "Card": {
     "name": "Card",
@@ -2911,7 +2958,11 @@
       "Alert",
       "Separator",
       "Field"
-    ]
+    ],
+    "shadcn": {
+      "item": "card",
+      "divergences": []
+    }
   },
   "Carousel": {
     "name": "Carousel",
@@ -3161,7 +3212,24 @@
       "Card",
       "Button",
       "AspectRatio"
-    ]
+    ],
+    "shadcn": {
+      "item": "carousel",
+      "divergences": [
+        {
+          "export": "CarouselPrevious",
+          "prop": "srLabel",
+          "type": "added",
+          "note": "Overrides its default screen reader text, UI_STRINGS.carousel.previous, so the string can be translated (content.md)."
+        },
+        {
+          "export": "CarouselNext",
+          "prop": "srLabel",
+          "type": "added",
+          "note": "Overrides its default screen reader text, UI_STRINGS.carousel.next, so the string can be translated (content.md)."
+        }
+      ]
+    }
   },
   "Chart": {
     "name": "Chart",
@@ -3530,7 +3598,11 @@
       "Card",
       "Table",
       "Skeleton"
-    ]
+    ],
+    "shadcn": {
+      "item": "chart",
+      "divergences": []
+    }
   },
   "Checkbox": {
     "name": "Checkbox",
@@ -3761,7 +3833,11 @@
       "Field",
       "FieldError",
       "RadioGroup"
-    ]
+    ],
+    "shadcn": {
+      "item": "checkbox",
+      "divergences": []
+    }
   },
   "Collapsible": {
     "name": "Collapsible",
@@ -3900,7 +3976,11 @@
       "Accordion",
       "Sidebar",
       "Sheet"
-    ]
+    ],
+    "shadcn": {
+      "item": "collapsible",
+      "divergences": []
+    }
   },
   "Combobox": {
     "name": "Combobox",
@@ -4170,7 +4250,7 @@
     "exports": [
       {
         "name": "Combobox",
-        "summary": "Renders `ComboboxPrimitive.Root`."
+        "summary": "Type: `<Value, Multiple extends boolean \\| undefined = false, Item = Value>(props: ComboboxPrimitive.Root.Props<Value, Multiple, Item>) => React.JSX.Element`."
       },
       {
         "name": "ComboboxInput",
@@ -4234,13 +4314,6 @@
       }
     ],
     "props": [
-      {
-        "component": "Combobox",
-        "prop": "`...props`",
-        "type": "`ComboboxPrimitive.Root.Props<Value, Multiple>`",
-        "default": "—",
-        "description": "`ComboboxPrimitive.Root` props"
-      },
       {
         "component": "ComboboxInput",
         "prop": "`disabled`",
@@ -4471,7 +4544,36 @@
       "Button",
       "Select",
       "Command"
-    ]
+    ],
+    "shadcn": {
+      "item": "combobox",
+      "divergences": [
+        {
+          "export": "ComboboxTrigger",
+          "prop": "triggerLabel",
+          "type": "added",
+          "note": "Overrides its default accessible name, UI_STRINGS.combobox.trigger, so the string can be translated (content.md)."
+        },
+        {
+          "export": "ComboboxInput",
+          "prop": "triggerLabel",
+          "type": "added",
+          "note": "Passed to the ComboboxTrigger it renders: overrides UI_STRINGS.combobox.trigger (content.md)."
+        },
+        {
+          "export": "ComboboxInput",
+          "prop": "clearLabel",
+          "type": "added",
+          "note": "Accessible name of the clear button it renders; overrides UI_STRINGS.combobox.clear (content.md)."
+        },
+        {
+          "export": "ComboboxChip",
+          "prop": "removeLabel",
+          "type": "added",
+          "note": "Overrides the default accessible name of its remove button, UI_STRINGS.combobox.remove(item), which names the item, so the string can be translated (content.md)."
+        }
+      ]
+    }
   },
   "Command": {
     "name": "Command",
@@ -4809,7 +4911,11 @@
       "InputGroup",
       "Combobox",
       "Select"
-    ]
+    ],
+    "shadcn": {
+      "item": "command",
+      "divergences": []
+    }
   },
   "ContextMenu": {
     "name": "ContextMenu",
@@ -5302,7 +5408,11 @@
       "DropdownMenu",
       "Popover",
       "Sheet"
-    ]
+    ],
+    "shadcn": {
+      "item": "context-menu",
+      "divergences": []
+    }
   },
   "Dialog": {
     "name": "Dialog",
@@ -5686,7 +5796,24 @@
       "Sheet",
       "Drawer",
       "Button"
-    ]
+    ],
+    "shadcn": {
+      "item": "dialog",
+      "divergences": [
+        {
+          "export": "DialogContent",
+          "prop": "closeLabel",
+          "type": "added",
+          "note": "Overrides its default accessible name for the close button, UI_STRINGS.dialog.close, so the string can be translated (content.md)."
+        },
+        {
+          "export": "DialogFooter",
+          "prop": "closeLabel",
+          "type": "added",
+          "note": "Overrides its default text for the close button, UI_STRINGS.dialog.close, so the string can be translated (content.md)."
+        }
+      ]
+    }
   },
   "Direction": {
     "name": "Direction",
@@ -5791,7 +5918,11 @@
     "cross_references": [
       "Sidebar",
       "Tooltip"
-    ]
+    ],
+    "shadcn": {
+      "item": "direction",
+      "divergences": []
+    }
   },
   "Drawer": {
     "name": "Drawer",
@@ -6150,7 +6281,11 @@
       "Sheet",
       "Dialog",
       "AlertDialog"
-    ]
+    ],
+    "shadcn": {
+      "item": "drawer",
+      "divergences": []
+    }
   },
   "DropdownMenu": {
     "name": "DropdownMenu",
@@ -6659,7 +6794,11 @@
       "ContextMenu",
       "Popover",
       "Button"
-    ]
+    ],
+    "shadcn": {
+      "item": "dropdown-menu",
+      "divergences": []
+    }
   },
   "Empty": {
     "name": "Empty",
@@ -6949,7 +7088,36 @@
     "cross_references": [
       "Button",
       "Card"
-    ]
+    ],
+    "shadcn": {
+      "item": "empty",
+      "divergences": [
+        {
+          "export": "EmptyTitle",
+          "type": "changed",
+          "upstream": "<div>",
+          "note": "Renders a heading (h2 by default) instead of a <div>, so the empty state's title is in the document outline."
+        },
+        {
+          "export": "EmptyTitle",
+          "type": "changed",
+          "upstream": "React.ComponentProps<\"div\">",
+          "note": "Its props are typed for the heading it renders."
+        },
+        {
+          "export": "EmptyTitle",
+          "prop": "as",
+          "type": "added",
+          "note": "Picks the heading level (h2 to h6) to fit the page outline."
+        },
+        {
+          "export": "EmptyDescription",
+          "type": "changed",
+          "upstream": "React.ComponentProps<\"p\">",
+          "note": "shadcn/ui types the props for a <p> but renders a <div>; here they are typed for the <div> it renders."
+        }
+      ]
+    }
   },
   "Field": {
     "name": "Field",
@@ -7432,7 +7600,11 @@
       "Input",
       "Separator",
       "Button"
-    ]
+    ],
+    "shadcn": {
+      "item": "field",
+      "divergences": []
+    }
   },
   "Heading": {
     "name": "Heading",
@@ -7602,7 +7774,16 @@
       "Card",
       "Logo",
       "Separator"
-    ]
+    ],
+    "shadcn": {
+      "item": null,
+      "divergences": [
+        {
+          "type": "added",
+          "note": "Not a shadcn/ui component: the design system's h1–h4 headings, with four visual sizes set in the heading typeface."
+        }
+      ]
+    }
   },
   "HoverCard": {
     "name": "HoverCard",
@@ -7827,7 +8008,11 @@
       "Popover",
       "Tooltip",
       "DropdownMenu"
-    ]
+    ],
+    "shadcn": {
+      "item": "hover-card",
+      "divergences": []
+    }
   },
   "Illustration": {
     "name": "Illustration",
@@ -7948,7 +8133,16 @@
       "Empty",
       "Card",
       "Skeleton"
-    ]
+    ],
+    "shadcn": {
+      "item": null,
+      "divergences": [
+        {
+          "type": "added",
+          "note": "Not a shadcn/ui component: a placeholder for illustrations and decorative images in split-screen layouts, error pages, empty states and onboarding."
+        }
+      ]
+    }
   },
   "Input": {
     "name": "Input",
@@ -8139,7 +8333,11 @@
       "Field",
       "FieldError",
       "Button"
-    ]
+    ],
+    "shadcn": {
+      "item": "input",
+      "divergences": []
+    }
   },
   "InputGroup": {
     "name": "InputGroup",
@@ -8446,7 +8644,11 @@
       "Button",
       "Combobox",
       "Command"
-    ]
+    ],
+    "shadcn": {
+      "item": "input-group",
+      "divergences": []
+    }
   },
   "InputOtp": {
     "name": "InputOtp",
@@ -8717,7 +8919,11 @@
     "cross_references": [
       "Input",
       "Field"
-    ]
+    ],
+    "shadcn": {
+      "item": "input-otp",
+      "divergences": []
+    }
   },
   "Item": {
     "name": "Item",
@@ -9156,7 +9362,11 @@
       "Separator",
       "Button",
       "DropdownMenu"
-    ]
+    ],
+    "shadcn": {
+      "item": "item",
+      "divergences": []
+    }
   },
   "Kbd": {
     "name": "Kbd",
@@ -9318,7 +9528,18 @@
     "cross_references": [
       "Tooltip",
       "DropdownMenu"
-    ]
+    ],
+    "shadcn": {
+      "item": "kbd",
+      "divergences": [
+        {
+          "export": "KbdGroup",
+          "type": "changed",
+          "upstream": "React.ComponentProps<\"div\">",
+          "note": "shadcn/ui types the props for a <div> but renders a <kbd>; here they are typed for the <kbd> it renders."
+        }
+      ]
+    }
   },
   "Label": {
     "name": "Label",
@@ -9434,7 +9655,11 @@
       "Input",
       "Checkbox",
       "FieldLegend"
-    ]
+    ],
+    "shadcn": {
+      "item": "label",
+      "divergences": []
+    }
   },
   "Logo": {
     "name": "Logo",
@@ -9610,7 +9835,16 @@
       "Heading",
       "Sidebar",
       "Illustration"
-    ]
+    ],
+    "shadcn": {
+      "item": null,
+      "divergences": [
+        {
+          "type": "added",
+          "note": "Not a shadcn/ui component: the application's brand mark, a placeholder until the real brand assets are provided."
+        }
+      ]
+    }
   },
   "Menubar": {
     "name": "Menubar",
@@ -10170,7 +10404,11 @@
       "NavigationMenu",
       "DropdownMenu",
       "ContextMenu"
-    ]
+    ],
+    "shadcn": {
+      "item": "menubar",
+      "divergences": []
+    }
   },
   "NativeSelect": {
     "name": "NativeSelect",
@@ -10412,7 +10650,11 @@
       "Select",
       "Combobox",
       "Field"
-    ]
+    ],
+    "shadcn": {
+      "item": "native-select",
+      "divergences": []
+    }
   },
   "NavigationMenu": {
     "name": "NavigationMenu",
@@ -10797,7 +11039,11 @@
       "Menubar",
       "Breadcrumb",
       "Tabs"
-    ]
+    ],
+    "shadcn": {
+      "item": "navigation-menu",
+      "divergences": []
+    }
   },
   "Pagination": {
     "name": "Pagination",
@@ -11035,7 +11281,30 @@
       "Button",
       "Breadcrumb",
       "Tabs"
-    ]
+    ],
+    "shadcn": {
+      "item": "pagination",
+      "divergences": [
+        {
+          "export": "PaginationPrevious",
+          "prop": "label",
+          "type": "added",
+          "note": "Overrides its default accessible name, UI_STRINGS.pagination.previousLabel, so the string can be translated (content.md)."
+        },
+        {
+          "export": "PaginationNext",
+          "prop": "label",
+          "type": "added",
+          "note": "Overrides its default accessible name, UI_STRINGS.pagination.nextLabel, so the string can be translated (content.md)."
+        },
+        {
+          "export": "PaginationEllipsis",
+          "prop": "srLabel",
+          "type": "added",
+          "note": "Overrides its default screen reader text, UI_STRINGS.pagination.ellipsis, so the string can be translated (content.md)."
+        }
+      ]
+    }
   },
   "PasswordInput": {
     "name": "PasswordInput",
@@ -11176,7 +11445,16 @@
       "Field",
       "InputGroup",
       "Input"
-    ]
+    ],
+    "shadcn": {
+      "item": null,
+      "divergences": [
+        {
+          "type": "added",
+          "note": "Not a shadcn/ui component: a password field with a visibility toggle, composed of InputGroup, InputGroupInput and InputGroupButton."
+        }
+      ]
+    }
   },
   "Popover": {
     "name": "Popover",
@@ -11483,7 +11761,24 @@
       "DropdownMenu",
       "Tooltip",
       "Dialog"
-    ]
+    ],
+    "shadcn": {
+      "item": "popover",
+      "divergences": [
+        {
+          "export": "PopoverTitle",
+          "type": "changed",
+          "upstream": "<div>",
+          "note": "Renders a heading (h2 by default) instead of a <div>, so the popover's title is announced as one."
+        },
+        {
+          "export": "PopoverTitle",
+          "prop": "as",
+          "type": "added",
+          "note": "Picks the heading level (h2 to h6) to fit the page outline."
+        }
+      ]
+    }
   },
   "Progress": {
     "name": "Progress",
@@ -11603,7 +11898,11 @@
       "Skeleton",
       "Badge",
       "Card"
-    ]
+    ],
+    "shadcn": {
+      "item": "progress",
+      "divergences": []
+    }
   },
   "RadioGroup": {
     "name": "RadioGroup",
@@ -11833,7 +12132,11 @@
       "Select",
       "Switch",
       "Checkbox"
-    ]
+    ],
+    "shadcn": {
+      "item": "radio-group",
+      "divergences": []
+    }
   },
   "Resizable": {
     "name": "Resizable",
@@ -12035,7 +12338,11 @@
       "Sidebar",
       "Separator",
       "ScrollArea"
-    ]
+    ],
+    "shadcn": {
+      "item": "resizable",
+      "divergences": []
+    }
   },
   "ScrollArea": {
     "name": "ScrollArea",
@@ -12200,7 +12507,11 @@
       "ResizablePanel",
       "Sidebar",
       "DropdownMenu"
-    ]
+    ],
+    "shadcn": {
+      "item": "scroll-area",
+      "divergences": []
+    }
   },
   "Select": {
     "name": "Select",
@@ -12643,7 +12954,11 @@
       "Combobox",
       "Field",
       "RadioGroup"
-    ]
+    ],
+    "shadcn": {
+      "item": "select",
+      "divergences": []
+    }
   },
   "Separator": {
     "name": "Separator",
@@ -12755,7 +13070,11 @@
       "Card",
       "Field",
       "NavigationMenu"
-    ]
+    ],
+    "shadcn": {
+      "item": "separator",
+      "divergences": []
+    }
   },
   "Sheet": {
     "name": "Sheet",
@@ -13123,7 +13442,18 @@
       "Dialog",
       "AlertDialog",
       "Button"
-    ]
+    ],
+    "shadcn": {
+      "item": "sheet",
+      "divergences": [
+        {
+          "export": "SheetContent",
+          "prop": "closeLabel",
+          "type": "added",
+          "note": "Overrides its default accessible name for the close button, UI_STRINGS.sheet.close, so the string can be translated (content.md)."
+        }
+      ]
+    }
   },
   "Sidebar": {
     "name": "Sidebar",
@@ -13995,7 +14325,44 @@
       "Collapsible",
       "ScrollArea",
       "Direction"
-    ]
+    ],
+    "shadcn": {
+      "item": "sidebar",
+      "divergences": [
+        {
+          "export": "Sidebar",
+          "prop": "mobileTitle",
+          "type": "added",
+          "note": "Overrides its default title of the mobile sheet (screen readers only), UI_STRINGS.sidebar.mobileTitle, so the string can be translated (content.md)."
+        },
+        {
+          "export": "Sidebar",
+          "prop": "mobileDescription",
+          "type": "added",
+          "note": "Overrides its default description of the mobile sheet (screen readers only), UI_STRINGS.sidebar.mobileDescription, so the string can be translated (content.md)."
+        },
+        {
+          "export": "SidebarTrigger",
+          "prop": "toggleLabel",
+          "type": "added",
+          "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md)."
+        },
+        {
+          "export": "SidebarRail",
+          "prop": "toggleLabel",
+          "type": "added",
+          "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md)."
+        },
+        {
+          "export": "SidebarMenuSubButton",
+          "prop": "size",
+          "value": "default",
+          "type": "renamed",
+          "upstream": "md",
+          "note": "The canonical size scale names the base size \"default\" and has no \"md\" (sizes in this index): write size=\"default\", or leave it out."
+        }
+      ]
+    }
   },
   "Skeleton": {
     "name": "Skeleton",
@@ -14087,7 +14454,11 @@
       "Card",
       "AspectRatio",
       "Avatar"
-    ]
+    ],
+    "shadcn": {
+      "item": "skeleton",
+      "divergences": []
+    }
   },
   "Slider": {
     "name": "Slider",
@@ -14322,7 +14693,18 @@
     "cross_references": [
       "Input",
       "Field"
-    ]
+    ],
+    "shadcn": {
+      "item": "slider",
+      "divergences": [
+        {
+          "export": "Slider",
+          "prop": "thumbLabels",
+          "type": "added",
+          "note": "One accessible name per thumb, in order; a thumb without one keeps Radix's (\"Minimum\", \"Maximum\"…)."
+        }
+      ]
+    }
   },
   "Sonner": {
     "name": "Sonner",
@@ -14423,7 +14805,11 @@
     "cross_references": [
       "AlertDialog",
       "Tooltip"
-    ]
+    ],
+    "shadcn": {
+      "item": "sonner",
+      "divergences": []
+    }
   },
   "Spinner": {
     "name": "Spinner",
@@ -14521,7 +14907,11 @@
       "Button",
       "Alert",
       "Field"
-    ]
+    ],
+    "shadcn": {
+      "item": "spinner",
+      "divergences": []
+    }
   },
   "Switch": {
     "name": "Switch",
@@ -14749,7 +15139,11 @@
       "Checkbox",
       "RadioGroup",
       "Toggle"
-    ]
+    ],
+    "shadcn": {
+      "item": "switch",
+      "divergences": []
+    }
   },
   "Table": {
     "name": "Table",
@@ -15054,7 +15448,11 @@
       "Badge",
       "Pagination",
       "Chart"
-    ]
+    ],
+    "shadcn": {
+      "item": "table",
+      "divergences": []
+    }
   },
   "Tabs": {
     "name": "Tabs",
@@ -15341,7 +15739,11 @@
       "Accordion",
       "NavigationMenu",
       "Card"
-    ]
+    ],
+    "shadcn": {
+      "item": "tabs",
+      "divergences": []
+    }
   },
   "Textarea": {
     "name": "Textarea",
@@ -15528,7 +15930,11 @@
       "Input",
       "InputGroup",
       "Field"
-    ]
+    ],
+    "shadcn": {
+      "item": "textarea",
+      "divergences": []
+    }
   },
   "Toggle": {
     "name": "Toggle",
@@ -15755,7 +16161,11 @@
       "ToggleGroup",
       "Button",
       "Switch"
-    ]
+    ],
+    "shadcn": {
+      "item": "toggle",
+      "divergences": []
+    }
   },
   "ToggleGroup": {
     "name": "ToggleGroup",
@@ -15773,7 +16183,7 @@
       "**MUST** — pass `type=\"single\"` for an exclusive selection, `type=\"multiple\"` otherwise",
       "**MUST** — give the `ToggleGroup` an `aria-label` that describes the group",
       "**MUST NOT** — serve as navigation → use `Tabs` or `NavigationMenu`",
-      "**Note** — `spacing={0}` (the default) merges the borders; above that, the items are spaced out",
+      "**Note** — the items are spaced out by default (`spacing={2}`, as in shadcn/ui); `spacing={0}` merges the borders into one segmented control",
       "**MUST NOT** — redefine `variant` or `size` on a `ToggleGroupItem`, **unless** to set one item apart: the group passes them down"
     ],
     "dependencies": [
@@ -15838,7 +16248,7 @@
         "component": "ToggleGroup",
         "prop": "`spacing`",
         "type": "`number`",
-        "default": "`0`",
+        "default": "`2`",
         "description": "Space between the items (in `--spacing` units)"
       },
       {
@@ -15969,7 +16379,11 @@
       "Toggle",
       "ButtonGroup",
       "Tabs"
-    ]
+    ],
+    "shadcn": {
+      "item": "toggle-group",
+      "divergences": []
+    }
   },
   "Tooltip": {
     "name": "Tooltip",
@@ -16161,6 +16575,10 @@
       "Kbd",
       "Popover",
       "Button"
-    ]
+    ],
+    "shadcn": {
+      "item": "tooltip",
+      "divergences": []
+    }
   }
 }

@@ -34,5 +34,6 @@ PR title in Conventional Commits format — it becomes the commit message on
 - [ ] `npm run generate-context` produces no diff (if the design system changed)
 - [ ] No raw value (hex, px, rem) added outside `tokens/primitive.json`
 - [ ] The component's spec was read before the change, and updated if the API changed
+- [ ] Any divergence from the shadcn/ui API is additive, or justified, and declared in `design-system.index.json` (`npm run index:shadcn`)
 - [ ] Phosphor icons only
 - [ ] Everything written in American English

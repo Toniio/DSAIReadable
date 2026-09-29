@@ -35,6 +35,7 @@ export interface ComponentSpec {
   constraints?: string[]
   exports?: Array<{ name: string }>
   cross_references?: string[]
+  shadcn?: unknown
   [section: string]: unknown
 }
 
@@ -46,11 +47,14 @@ const CONCISE_SPEC_FIELDS = [
   "constraints",
   "exports",
   "cross_references",
+  "shadcn",
 ]
 
 /**
  * A spec reduced to its role, its MUST / MUST NOT constraints, the names it
- * exports and the components it points to.
+ * exports, the components it points to and how its API departs from
+ * shadcn/ui's: an agent writes the shadcn/ui API from memory, so the
+ * divergences belong in the short answer.
  */
 export function conciseSpec(spec: ComponentSpec) {
   const omitted = Object.keys(spec).filter(
@@ -64,6 +68,7 @@ export function conciseSpec(spec: ComponentSpec) {
     constraints: spec.constraints ?? [],
     exports: (spec.exports ?? []).map((e) => e.name),
     cross_references: spec.cross_references ?? [],
+    shadcn: spec.shadcn ?? null,
     detail: `response_format: "detailed" adds ${omitted.join(", ")}`,
   }
 }

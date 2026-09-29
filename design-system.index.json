@@ -4,12 +4,20 @@
     {
       "name": "Accordion",
       "code_path": "components/ui/accordion.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "accordion",
+        "divergences": []
+      }
     },
     {
       "name": "Alert",
       "code_path": "components/ui/alert.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "alert",
+        "divergences": []
+      }
     },
     {
       "name": "AlertDialog",
@@ -24,12 +32,20 @@
         "icon",
         "icon-lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "alert-dialog",
+        "divergences": []
+      }
     },
     {
       "name": "AspectRatio",
       "code_path": "components/ui/aspect-ratio.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "aspect-ratio",
+        "divergences": []
+      }
     },
     {
       "name": "Avatar",
@@ -39,17 +55,36 @@
         "sm",
         "lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "avatar",
+        "divergences": []
+      }
     },
     {
       "name": "Badge",
       "code_path": "components/ui/badge.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "badge",
+        "divergences": []
+      }
     },
     {
       "name": "Breadcrumb",
       "code_path": "components/ui/breadcrumb.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "breadcrumb",
+        "divergences": [
+          {
+            "export": "BreadcrumbEllipsis",
+            "prop": "srLabel",
+            "type": "added",
+            "note": "Overrides its default screen reader text, UI_STRINGS.breadcrumb.ellipsis, so the string can be translated (content.md)."
+          }
+        ]
+      }
     },
     {
       "name": "Button",
@@ -64,17 +99,29 @@
         "icon",
         "icon-lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "button",
+        "divergences": []
+      }
     },
     {
       "name": "ButtonGroup",
       "code_path": "components/ui/button-group.tsx",
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "button-group",
+        "divergences": []
+      }
     },
     {
       "name": "Calendar",
       "code_path": "components/ui/calendar.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "calendar",
+        "divergences": []
+      }
     },
     {
       "name": "Card",
@@ -83,7 +130,11 @@
         "default",
         "sm"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "card",
+        "divergences": []
+      }
     },
     {
       "name": "Carousel",
@@ -98,87 +149,241 @@
         "icon",
         "icon-lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "carousel",
+        "divergences": [
+          {
+            "export": "CarouselPrevious",
+            "prop": "srLabel",
+            "type": "added",
+            "note": "Overrides its default screen reader text, UI_STRINGS.carousel.previous, so the string can be translated (content.md)."
+          },
+          {
+            "export": "CarouselNext",
+            "prop": "srLabel",
+            "type": "added",
+            "note": "Overrides its default screen reader text, UI_STRINGS.carousel.next, so the string can be translated (content.md)."
+          }
+        ]
+      }
     },
     {
       "name": "Chart",
       "code_path": "components/ui/chart.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "chart",
+        "divergences": []
+      }
     },
     {
       "name": "Checkbox",
       "code_path": "components/ui/checkbox.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "checkbox",
+        "divergences": []
+      }
     },
     {
       "name": "Collapsible",
       "code_path": "components/ui/collapsible.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "collapsible",
+        "divergences": []
+      }
     },
     {
       "name": "Combobox",
       "code_path": "components/ui/combobox.tsx",
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "combobox",
+        "divergences": [
+          {
+            "export": "ComboboxTrigger",
+            "prop": "triggerLabel",
+            "type": "added",
+            "note": "Overrides its default accessible name, UI_STRINGS.combobox.trigger, so the string can be translated (content.md)."
+          },
+          {
+            "export": "ComboboxInput",
+            "prop": "triggerLabel",
+            "type": "added",
+            "note": "Passed to the ComboboxTrigger it renders: overrides UI_STRINGS.combobox.trigger (content.md)."
+          },
+          {
+            "export": "ComboboxInput",
+            "prop": "clearLabel",
+            "type": "added",
+            "note": "Accessible name of the clear button it renders; overrides UI_STRINGS.combobox.clear (content.md)."
+          },
+          {
+            "export": "ComboboxChip",
+            "prop": "removeLabel",
+            "type": "added",
+            "note": "Overrides the default accessible name of its remove button, UI_STRINGS.combobox.remove(item), which names the item, so the string can be translated (content.md)."
+          }
+        ]
+      }
     },
     {
       "name": "Command",
       "code_path": "components/ui/command.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "command",
+        "divergences": []
+      }
     },
     {
       "name": "ContextMenu",
       "code_path": "components/ui/context-menu.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "context-menu",
+        "divergences": []
+      }
     },
     {
       "name": "Dialog",
       "code_path": "components/ui/dialog.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "dialog",
+        "divergences": [
+          {
+            "export": "DialogContent",
+            "prop": "closeLabel",
+            "type": "added",
+            "note": "Overrides its default accessible name for the close button, UI_STRINGS.dialog.close, so the string can be translated (content.md)."
+          },
+          {
+            "export": "DialogFooter",
+            "prop": "closeLabel",
+            "type": "added",
+            "note": "Overrides its default text for the close button, UI_STRINGS.dialog.close, so the string can be translated (content.md)."
+          }
+        ]
+      }
     },
     {
       "name": "Direction",
       "code_path": "components/ui/direction.tsx",
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "direction",
+        "divergences": []
+      }
     },
     {
       "name": "Drawer",
       "code_path": "components/ui/drawer.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "drawer",
+        "divergences": []
+      }
     },
     {
       "name": "DropdownMenu",
       "code_path": "components/ui/dropdown-menu.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "dropdown-menu",
+        "divergences": []
+      }
     },
     {
       "name": "Empty",
       "code_path": "components/ui/empty.tsx",
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "empty",
+        "divergences": [
+          {
+            "export": "EmptyTitle",
+            "type": "changed",
+            "upstream": "<div>",
+            "note": "Renders a heading (h2 by default) instead of a <div>, so the empty state's title is in the document outline."
+          },
+          {
+            "export": "EmptyTitle",
+            "type": "changed",
+            "upstream": "React.ComponentProps<\"div\">",
+            "note": "Its props are typed for the heading it renders."
+          },
+          {
+            "export": "EmptyTitle",
+            "prop": "as",
+            "type": "added",
+            "note": "Picks the heading level (h2 to h6) to fit the page outline."
+          },
+          {
+            "export": "EmptyDescription",
+            "type": "changed",
+            "upstream": "React.ComponentProps<\"p\">",
+            "note": "shadcn/ui types the props for a <p> but renders a <div>; here they are typed for the <div> it renders."
+          }
+        ]
+      }
     },
     {
       "name": "Field",
       "code_path": "components/ui/field.tsx",
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "field",
+        "divergences": []
+      }
     },
     {
       "name": "Heading",
       "code_path": "components/ui/heading.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": null,
+        "divergences": [
+          {
+            "type": "added",
+            "note": "Not a shadcn/ui component: the design system's h1–h4 headings, with four visual sizes set in the heading typeface."
+          }
+        ]
+      }
     },
     {
       "name": "HoverCard",
       "code_path": "components/ui/hover-card.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "hover-card",
+        "divergences": []
+      }
     },
     {
       "name": "Illustration",
       "code_path": "components/ui/illustration.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": null,
+        "divergences": [
+          {
+            "type": "added",
+            "note": "Not a shadcn/ui component: a placeholder for illustrations and decorative images in split-screen layouts, error pages, empty states and onboarding."
+          }
+        ]
+      }
     },
     {
       "name": "Input",
       "code_path": "components/ui/input.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "input",
+        "divergences": []
+      }
     },
     {
       "name": "InputGroup",
@@ -189,12 +394,20 @@
         "icon-xs",
         "icon-sm"
       ],
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "input-group",
+        "divergences": []
+      }
     },
     {
       "name": "InputOtp",
       "code_path": "components/ui/input-otp.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "input-otp",
+        "divergences": []
+      }
     },
     {
       "name": "Item",
@@ -204,17 +417,36 @@
         "sm",
         "default"
       ],
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "item",
+        "divergences": []
+      }
     },
     {
       "name": "Kbd",
       "code_path": "components/ui/kbd.tsx",
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "kbd",
+        "divergences": [
+          {
+            "export": "KbdGroup",
+            "type": "changed",
+            "upstream": "React.ComponentProps<\"div\">",
+            "note": "shadcn/ui types the props for a <div> but renders a <kbd>; here they are typed for the <kbd> it renders."
+          }
+        ]
+      }
     },
     {
       "name": "Label",
       "code_path": "components/ui/label.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "label",
+        "divergences": []
+      }
     },
     {
       "name": "Logo",
@@ -224,12 +456,25 @@
         "default",
         "lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": null,
+        "divergences": [
+          {
+            "type": "added",
+            "note": "Not a shadcn/ui component: the application's brand mark, a placeholder until the real brand assets are provided."
+          }
+        ]
+      }
     },
     {
       "name": "Menubar",
       "code_path": "components/ui/menubar.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "menubar",
+        "divergences": []
+      }
     },
     {
       "name": "NativeSelect",
@@ -238,12 +483,20 @@
         "sm",
         "default"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "native-select",
+        "divergences": []
+      }
     },
     {
       "name": "NavigationMenu",
       "code_path": "components/ui/navigation-menu.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "navigation-menu",
+        "divergences": []
+      }
     },
     {
       "name": "Pagination",
@@ -258,37 +511,102 @@
         "icon",
         "icon-lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "pagination",
+        "divergences": [
+          {
+            "export": "PaginationPrevious",
+            "prop": "label",
+            "type": "added",
+            "note": "Overrides its default accessible name, UI_STRINGS.pagination.previousLabel, so the string can be translated (content.md)."
+          },
+          {
+            "export": "PaginationNext",
+            "prop": "label",
+            "type": "added",
+            "note": "Overrides its default accessible name, UI_STRINGS.pagination.nextLabel, so the string can be translated (content.md)."
+          },
+          {
+            "export": "PaginationEllipsis",
+            "prop": "srLabel",
+            "type": "added",
+            "note": "Overrides its default screen reader text, UI_STRINGS.pagination.ellipsis, so the string can be translated (content.md)."
+          }
+        ]
+      }
     },
     {
       "name": "PasswordInput",
       "code_path": "components/ui/password-input.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": null,
+        "divergences": [
+          {
+            "type": "added",
+            "note": "Not a shadcn/ui component: a password field with a visibility toggle, composed of InputGroup, InputGroupInput and InputGroupButton."
+          }
+        ]
+      }
     },
     {
       "name": "Popover",
       "code_path": "components/ui/popover.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "popover",
+        "divergences": [
+          {
+            "export": "PopoverTitle",
+            "type": "changed",
+            "upstream": "<div>",
+            "note": "Renders a heading (h2 by default) instead of a <div>, so the popover's title is announced as one."
+          },
+          {
+            "export": "PopoverTitle",
+            "prop": "as",
+            "type": "added",
+            "note": "Picks the heading level (h2 to h6) to fit the page outline."
+          }
+        ]
+      }
     },
     {
       "name": "Progress",
       "code_path": "components/ui/progress.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "progress",
+        "divergences": []
+      }
     },
     {
       "name": "RadioGroup",
       "code_path": "components/ui/radio-group.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "radio-group",
+        "divergences": []
+      }
     },
     {
       "name": "Resizable",
       "code_path": "components/ui/resizable.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "resizable",
+        "divergences": []
+      }
     },
     {
       "name": "ScrollArea",
       "code_path": "components/ui/scroll-area.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "scroll-area",
+        "divergences": []
+      }
     },
     {
       "name": "Select",
@@ -297,17 +615,36 @@
         "sm",
         "default"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "select",
+        "divergences": []
+      }
     },
     {
       "name": "Separator",
       "code_path": "components/ui/separator.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "separator",
+        "divergences": []
+      }
     },
     {
       "name": "Sheet",
       "code_path": "components/ui/sheet.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "sheet",
+        "divergences": [
+          {
+            "export": "SheetContent",
+            "prop": "closeLabel",
+            "type": "added",
+            "note": "Overrides its default accessible name for the close button, UI_STRINGS.sheet.close, so the string can be translated (content.md)."
+          }
+        ]
+      }
     },
     {
       "name": "Sidebar",
@@ -322,27 +659,87 @@
         "icon",
         "icon-lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "sidebar",
+        "divergences": [
+          {
+            "export": "Sidebar",
+            "prop": "mobileTitle",
+            "type": "added",
+            "note": "Overrides its default title of the mobile sheet (screen readers only), UI_STRINGS.sidebar.mobileTitle, so the string can be translated (content.md)."
+          },
+          {
+            "export": "Sidebar",
+            "prop": "mobileDescription",
+            "type": "added",
+            "note": "Overrides its default description of the mobile sheet (screen readers only), UI_STRINGS.sidebar.mobileDescription, so the string can be translated (content.md)."
+          },
+          {
+            "export": "SidebarTrigger",
+            "prop": "toggleLabel",
+            "type": "added",
+            "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md)."
+          },
+          {
+            "export": "SidebarRail",
+            "prop": "toggleLabel",
+            "type": "added",
+            "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md)."
+          },
+          {
+            "export": "SidebarMenuSubButton",
+            "prop": "size",
+            "value": "default",
+            "type": "renamed",
+            "upstream": "md",
+            "note": "The canonical size scale names the base size \"default\" and has no \"md\" (sizes in this index): write size=\"default\", or leave it out."
+          }
+        ]
+      }
     },
     {
       "name": "Skeleton",
       "code_path": "components/ui/skeleton.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "skeleton",
+        "divergences": []
+      }
     },
     {
       "name": "Slider",
       "code_path": "components/ui/slider.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "slider",
+        "divergences": [
+          {
+            "export": "Slider",
+            "prop": "thumbLabels",
+            "type": "added",
+            "note": "One accessible name per thumb, in order; a thumb without one keeps Radix's (\"Minimum\", \"Maximum\"…)."
+          }
+        ]
+      }
     },
     {
       "name": "Sonner",
       "code_path": "components/ui/sonner.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "sonner",
+        "divergences": []
+      }
     },
     {
       "name": "Spinner",
       "code_path": "components/ui/spinner.tsx",
-      "status": "beta"
+      "status": "beta",
+      "shadcn": {
+        "item": "spinner",
+        "divergences": []
+      }
     },
     {
       "name": "Switch",
@@ -351,22 +748,38 @@
         "sm",
         "default"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "switch",
+        "divergences": []
+      }
     },
     {
       "name": "Table",
       "code_path": "components/ui/table.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "table",
+        "divergences": []
+      }
     },
     {
       "name": "Tabs",
       "code_path": "components/ui/tabs.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "tabs",
+        "divergences": []
+      }
     },
     {
       "name": "Textarea",
       "code_path": "components/ui/textarea.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "textarea",
+        "divergences": []
+      }
     },
     {
       "name": "Toggle",
@@ -376,7 +789,11 @@
         "default",
         "lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "toggle",
+        "divergences": []
+      }
     },
     {
       "name": "ToggleGroup",
@@ -386,12 +803,20 @@
         "default",
         "lg"
       ],
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "toggle-group",
+        "divergences": []
+      }
     },
     {
       "name": "Tooltip",
       "code_path": "components/ui/tooltip.tsx",
-      "status": "stable"
+      "status": "stable",
+      "shadcn": {
+        "item": "tooltip",
+        "divergences": []
+      }
     }
   ],
   "composition_rules": [
