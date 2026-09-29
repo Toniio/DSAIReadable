@@ -842,7 +842,7 @@ assert(
 const specNames = Object.keys(specs)
 const fullSpecs = specs as unknown as Record<
   string,
-  { constraints: string[]; accessibility: string }
+  { constraints: string[]; accessibility: string; shadcn?: unknown }
 >
 const { resources } = await client.listResources()
 const { resourceTemplates } = await client.listResourceTemplates()
@@ -954,6 +954,45 @@ assert(
   ).accessibility === fullSpecs.Button.accessibility,
   "detailed serves the spec whole"
 )
+
+// Divergences from shadcn/ui (design-system.index.json) reach the agent in the
+// concise answer: it writes the shadcn/ui API from memory.
+{
+  const inventory = (
+    JSON.parse(
+      readFileSync(
+        resolve(__dirname, "../../design-system.index.json"),
+        "utf-8"
+      )
+    ) as { inventory: { name: string; shadcn: unknown }[] }
+  ).inventory
+  const sidebar = JSON.parse(
+    await payload("get_component_specs", { component_name: "Sidebar" })
+  ) as {
+    shadcn: {
+      item: string
+      divergences: { export?: string; prop?: string; type: string }[]
+    }
+  }
+  const heading = JSON.parse(
+    await payload("get_component_specs", { component_name: "Heading" })
+  ) as { shadcn: { item: string | null } }
+  assert(
+    inventory.every(
+      (c) =>
+        JSON.stringify(fullSpecs[c.name]?.shadcn) === JSON.stringify(c.shadcn)
+    ) &&
+      sidebar.shadcn.item === "sidebar" &&
+      sidebar.shadcn.divergences.some(
+        (d) =>
+          d.export === "SidebarMenuSubButton" &&
+          d.prop === "size" &&
+          d.type === "renamed"
+      ) &&
+      heading.shadcn.item === null,
+    "get_component_specs serves each component's divergences from shadcn/ui, concise included"
+  )
+}
 
 // Pagination: pages of a list are disjoint and add up to the whole list.
 const tokenPaths: string[] = []
@@ -1373,7 +1412,7 @@ const TOOL_CASES: Record<string, ToolCase> = {
     // Minimal snapshot of the concise payload: its fields, in order.
     content: (p) =>
       Object.keys(p).join() ===
-        "name,category,status,role,constraints,exports,cross_references,detail" &&
+        "name,category,status,role,constraints,exports,cross_references,shadcn,detail" &&
       p.exports.join() === "Button,buttonVariants",
     errorArgs: { component_name: "NoSuchThing" },
     errorNames: "Button",

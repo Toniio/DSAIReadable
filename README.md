@@ -68,6 +68,7 @@ dsaireadable/
 ├── registry.json               # shadcn registry — generated
 ├── design-system.index.json    # Machine-readable inventory of the design system
 ├── design-system.schema.json   # JSON Schema that validates the index
+├── shadcn-api.baseline.json    # The upstream shadcn/ui API the components are checked against — generated
 └── llms.txt                    # Documentation map for agents (llms.txt format) — generated
 ```
 

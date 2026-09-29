@@ -1,0 +1,5794 @@
+{
+  "source": "https://ui.shadcn.com/r/styles/radix-lyra",
+  "fetched": "2026-09-29",
+  "dom": {
+    "common": [
+      "about",
+      "accessKey",
+      "aria-activedescendant",
+      "aria-atomic",
+      "aria-autocomplete",
+      "aria-braillelabel",
+      "aria-brailleroledescription",
+      "aria-busy",
+      "aria-checked",
+      "aria-colcount",
+      "aria-colindex",
+      "aria-colindextext",
+      "aria-colspan",
+      "aria-controls",
+      "aria-current",
+      "aria-describedby",
+      "aria-description",
+      "aria-details",
+      "aria-disabled",
+      "aria-dropeffect",
+      "aria-errormessage",
+      "aria-expanded",
+      "aria-flowto",
+      "aria-grabbed",
+      "aria-haspopup",
+      "aria-hidden",
+      "aria-invalid",
+      "aria-keyshortcuts",
+      "aria-label",
+      "aria-labelledby",
+      "aria-level",
+      "aria-live",
+      "aria-modal",
+      "aria-multiline",
+      "aria-multiselectable",
+      "aria-orientation",
+      "aria-owns",
+      "aria-placeholder",
+      "aria-posinset",
+      "aria-pressed",
+      "aria-readonly",
+      "aria-relevant",
+      "aria-required",
+      "aria-roledescription",
+      "aria-rowcount",
+      "aria-rowindex",
+      "aria-rowindextext",
+      "aria-rowspan",
+      "aria-selected",
+      "aria-setsize",
+      "aria-sort",
+      "aria-valuemax",
+      "aria-valuemin",
+      "aria-valuenow",
+      "aria-valuetext",
+      "autoCapitalize",
+      "autoCorrect",
+      "autoFocus",
+      "autoSave",
+      "children",
+      "className",
+      "color",
+      "content",
+      "contentEditable",
+      "contextMenu",
+      "dangerouslySetInnerHTML",
+      "datatype",
+      "defaultChecked",
+      "defaultValue",
+      "dir",
+      "draggable",
+      "enterKeyHint",
+      "exportparts",
+      "hidden",
+      "id",
+      "inert",
+      "inlist",
+      "inputMode",
+      "is",
+      "itemID",
+      "itemProp",
+      "itemRef",
+      "itemScope",
+      "itemType",
+      "key",
+      "lang",
+      "nonce",
+      "onAbort",
+      "onAbortCapture",
+      "onAnimationEnd",
+      "onAnimationEndCapture",
+      "onAnimationIteration",
+      "onAnimationIterationCapture",
+      "onAnimationStart",
+      "onAnimationStartCapture",
+      "onAuxClick",
+      "onAuxClickCapture",
+      "onBeforeInput",
+      "onBeforeInputCapture",
+      "onBeforeToggle",
+      "onBlur",
+      "onBlurCapture",
+      "onCanPlay",
+      "onCanPlayCapture",
+      "onCanPlayThrough",
+      "onCanPlayThroughCapture",
+      "onChange",
+      "onChangeCapture",
+      "onClick",
+      "onClickCapture",
+      "onCompositionEnd",
+      "onCompositionEndCapture",
+      "onCompositionStart",
+      "onCompositionStartCapture",
+      "onCompositionUpdate",
+      "onCompositionUpdateCapture",
+      "onContextMenu",
+      "onContextMenuCapture",
+      "onCopy",
+      "onCopyCapture",
+      "onCut",
+      "onCutCapture",
+      "onDoubleClick",
+      "onDoubleClickCapture",
+      "onDrag",
+      "onDragCapture",
+      "onDragEnd",
+      "onDragEndCapture",
+      "onDragEnter",
+      "onDragEnterCapture",
+      "onDragExit",
+      "onDragExitCapture",
+      "onDragLeave",
+      "onDragLeaveCapture",
+      "onDragOver",
+      "onDragOverCapture",
+      "onDragStart",
+      "onDragStartCapture",
+      "onDrop",
+      "onDropCapture",
+      "onDurationChange",
+      "onDurationChangeCapture",
+      "onEmptied",
+      "onEmptiedCapture",
+      "onEncrypted",
+      "onEncryptedCapture",
+      "onEnded",
+      "onEndedCapture",
+      "onError",
+      "onErrorCapture",
+      "onFocus",
+      "onFocusCapture",
+      "onGotPointerCapture",
+      "onGotPointerCaptureCapture",
+      "onInput",
+      "onInputCapture",
+      "onInvalid",
+      "onInvalidCapture",
+      "onKeyDown",
+      "onKeyDownCapture",
+      "onKeyPress",
+      "onKeyPressCapture",
+      "onKeyUp",
+      "onKeyUpCapture",
+      "onLoad",
+      "onLoadCapture",
+      "onLoadStart",
+      "onLoadStartCapture",
+      "onLoadedData",
+      "onLoadedDataCapture",
+      "onLoadedMetadata",
+      "onLoadedMetadataCapture",
+      "onLostPointerCapture",
+      "onLostPointerCaptureCapture",
+      "onMouseDown",
+      "onMouseDownCapture",
+      "onMouseEnter",
+      "onMouseLeave",
+      "onMouseMove",
+      "onMouseMoveCapture",
+      "onMouseOut",
+      "onMouseOutCapture",
+      "onMouseOver",
+      "onMouseOverCapture",
+      "onMouseUp",
+      "onMouseUpCapture",
+      "onPaste",
+      "onPasteCapture",
+      "onPause",
+      "onPauseCapture",
+      "onPlay",
+      "onPlayCapture",
+      "onPlaying",
+      "onPlayingCapture",
+      "onPointerCancel",
+      "onPointerCancelCapture",
+      "onPointerDown",
+      "onPointerDownCapture",
+      "onPointerEnter",
+      "onPointerLeave",
+      "onPointerMove",
+      "onPointerMoveCapture",
+      "onPointerOut",
+      "onPointerOutCapture",
+      "onPointerOver",
+      "onPointerOverCapture",
+      "onPointerUp",
+      "onPointerUpCapture",
+      "onProgress",
+      "onProgressCapture",
+      "onRateChange",
+      "onRateChangeCapture",
+      "onReset",
+      "onResetCapture",
+      "onScroll",
+      "onScrollCapture",
+      "onScrollEnd",
+      "onScrollEndCapture",
+      "onSeeked",
+      "onSeekedCapture",
+      "onSeeking",
+      "onSeekingCapture",
+      "onSelect",
+      "onSelectCapture",
+      "onStalled",
+      "onStalledCapture",
+      "onSubmit",
+      "onSubmitCapture",
+      "onSuspend",
+      "onSuspendCapture",
+      "onTimeUpdate",
+      "onTimeUpdateCapture",
+      "onToggle",
+      "onTouchCancel",
+      "onTouchCancelCapture",
+      "onTouchEnd",
+      "onTouchEndCapture",
+      "onTouchMove",
+      "onTouchMoveCapture",
+      "onTouchStart",
+      "onTouchStartCapture",
+      "onTransitionCancel",
+      "onTransitionCancelCapture",
+      "onTransitionEnd",
+      "onTransitionEndCapture",
+      "onTransitionRun",
+      "onTransitionRunCapture",
+      "onTransitionStart",
+      "onTransitionStartCapture",
+      "onVolumeChange",
+      "onVolumeChangeCapture",
+      "onWaiting",
+      "onWaitingCapture",
+      "onWheel",
+      "onWheelCapture",
+      "part",
+      "popover",
+      "popoverTarget",
+      "popoverTargetAction",
+      "prefix",
+      "property",
+      "radioGroup",
+      "ref",
+      "rel",
+      "resource",
+      "results",
+      "rev",
+      "role",
+      "security",
+      "slot",
+      "spellCheck",
+      "style",
+      "suppressContentEditableWarning",
+      "suppressHydrationWarning",
+      "tabIndex",
+      "title",
+      "translate",
+      "typeof",
+      "unselectable",
+      "vocab"
+    ],
+    "sets": {
+      "003738c82c": {
+        "add": [
+          "disabled",
+          "label",
+          "selected",
+          "value"
+        ]
+      },
+      "021e381454": {
+        "drop": [
+          "children"
+        ]
+      },
+      "04a7af7aa1": {
+        "add": [
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "name",
+          "type",
+          "value"
+        ],
+        "drop": [
+          "className",
+          "color",
+          "defaultChecked",
+          "defaultValue",
+          "style"
+        ]
+      },
+      "13d4aa5f15": {
+        "drop": [
+          "children",
+          "className",
+          "id",
+          "key",
+          "ref",
+          "style"
+        ]
+      },
+      "19b158d26a": {
+        "add": [
+          "abbr",
+          "align",
+          "colSpan",
+          "headers",
+          "height",
+          "rowSpan",
+          "scope",
+          "valign",
+          "width"
+        ]
+      },
+      "1a0a77747a": {
+        "drop": [
+          "aria-label"
+        ]
+      },
+      "2641d43839": {
+        "add": [
+          "align",
+          "bgcolor",
+          "border",
+          "cellPadding",
+          "cellSpacing",
+          "frame",
+          "rules",
+          "summary",
+          "width"
+        ]
+      },
+      "28d11cde7d": {
+        "drop": [
+          "className",
+          "id",
+          "key",
+          "ref",
+          "role",
+          "style",
+          "tabIndex"
+        ]
+      },
+      "2c2ea486de": {
+        "add": [
+          "alt",
+          "crossOrigin",
+          "decoding",
+          "fetchPriority",
+          "height",
+          "loading",
+          "referrerPolicy",
+          "sizes",
+          "src",
+          "srcSet",
+          "useMap",
+          "width"
+        ]
+      },
+      "2efd361f24": {
+        "add": [
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "name",
+          "type"
+        ]
+      },
+      "306217993b": {
+        "add": [
+          "download",
+          "href",
+          "hrefLang",
+          "media",
+          "ping",
+          "referrerPolicy",
+          "target",
+          "type"
+        ]
+      },
+      "30b990ce5c": {
+        "drop": [
+          "children",
+          "dangerouslySetInnerHTML",
+          "onAbort",
+          "onAbortCapture",
+          "onAnimationEnd",
+          "onAnimationEndCapture",
+          "onAnimationIteration",
+          "onAnimationIterationCapture",
+          "onAnimationStart",
+          "onAnimationStartCapture",
+          "onAuxClick",
+          "onAuxClickCapture",
+          "onBeforeInput",
+          "onBeforeInputCapture",
+          "onBlur",
+          "onBlurCapture",
+          "onCanPlay",
+          "onCanPlayCapture",
+          "onCanPlayThrough",
+          "onCanPlayThroughCapture",
+          "onChange",
+          "onChangeCapture",
+          "onClick",
+          "onClickCapture",
+          "onCompositionEnd",
+          "onCompositionEndCapture",
+          "onCompositionStart",
+          "onCompositionStartCapture",
+          "onCompositionUpdate",
+          "onCompositionUpdateCapture",
+          "onContextMenu",
+          "onContextMenuCapture",
+          "onCopy",
+          "onCopyCapture",
+          "onCut",
+          "onCutCapture",
+          "onDoubleClick",
+          "onDoubleClickCapture",
+          "onDrag",
+          "onDragCapture",
+          "onDragEnd",
+          "onDragEndCapture",
+          "onDragEnter",
+          "onDragEnterCapture",
+          "onDragExit",
+          "onDragExitCapture",
+          "onDragLeave",
+          "onDragLeaveCapture",
+          "onDragOver",
+          "onDragOverCapture",
+          "onDragStart",
+          "onDragStartCapture",
+          "onDrop",
+          "onDropCapture",
+          "onDurationChange",
+          "onDurationChangeCapture",
+          "onEmptied",
+          "onEmptiedCapture",
+          "onEncrypted",
+          "onEncryptedCapture",
+          "onEnded",
+          "onEndedCapture",
+          "onError",
+          "onErrorCapture",
+          "onFocus",
+          "onFocusCapture",
+          "onGotPointerCapture",
+          "onGotPointerCaptureCapture",
+          "onInput",
+          "onInputCapture",
+          "onInvalid",
+          "onInvalidCapture",
+          "onKeyDown",
+          "onKeyDownCapture",
+          "onKeyPress",
+          "onKeyPressCapture",
+          "onKeyUp",
+          "onKeyUpCapture",
+          "onLoad",
+          "onLoadCapture",
+          "onLoadStart",
+          "onLoadStartCapture",
+          "onLoadedData",
+          "onLoadedDataCapture",
+          "onLoadedMetadata",
+          "onLoadedMetadataCapture",
+          "onLostPointerCapture",
+          "onLostPointerCaptureCapture",
+          "onMouseDown",
+          "onMouseDownCapture",
+          "onMouseEnter",
+          "onMouseLeave",
+          "onMouseMove",
+          "onMouseMoveCapture",
+          "onMouseOut",
+          "onMouseOutCapture",
+          "onMouseOver",
+          "onMouseOverCapture",
+          "onMouseUp",
+          "onMouseUpCapture",
+          "onPaste",
+          "onPasteCapture",
+          "onPause",
+          "onPauseCapture",
+          "onPlay",
+          "onPlayCapture",
+          "onPlaying",
+          "onPlayingCapture",
+          "onPointerCancel",
+          "onPointerCancelCapture",
+          "onPointerDown",
+          "onPointerDownCapture",
+          "onPointerEnter",
+          "onPointerLeave",
+          "onPointerMove",
+          "onPointerMoveCapture",
+          "onPointerOut",
+          "onPointerOutCapture",
+          "onPointerOver",
+          "onPointerOverCapture",
+          "onPointerUp",
+          "onPointerUpCapture",
+          "onProgress",
+          "onProgressCapture",
+          "onRateChange",
+          "onRateChangeCapture",
+          "onReset",
+          "onResetCapture",
+          "onScroll",
+          "onScrollCapture",
+          "onSeeked",
+          "onSeekedCapture",
+          "onSeeking",
+          "onSeekingCapture",
+          "onSelect",
+          "onSelectCapture",
+          "onStalled",
+          "onStalledCapture",
+          "onSubmit",
+          "onSubmitCapture",
+          "onSuspend",
+          "onSuspendCapture",
+          "onTimeUpdate",
+          "onTimeUpdateCapture",
+          "onTouchCancel",
+          "onTouchCancelCapture",
+          "onTouchEnd",
+          "onTouchEndCapture",
+          "onTouchMove",
+          "onTouchMoveCapture",
+          "onTouchStart",
+          "onTouchStartCapture",
+          "onTransitionEnd",
+          "onTransitionEndCapture",
+          "onVolumeChange",
+          "onVolumeChangeCapture",
+          "onWaiting",
+          "onWaitingCapture",
+          "onWheel",
+          "onWheelCapture"
+        ]
+      },
+      "3536ddcb3f": {
+        "drop": [
+          "children",
+          "defaultValue"
+        ]
+      },
+      "3a72cf30cf": {},
+      "51274cce08": {
+        "drop": [
+          "children",
+          "onSelect"
+        ]
+      },
+      "59335b04af": {
+        "drop": [
+          "className",
+          "color",
+          "defaultChecked",
+          "defaultValue",
+          "style"
+        ]
+      },
+      "5b637ac308": {
+        "add": [
+          "disabled",
+          "form",
+          "name"
+        ]
+      },
+      "5dde3695ea": {
+        "add": [
+          "accept",
+          "alt",
+          "autoComplete",
+          "capture",
+          "checked",
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "height",
+          "list",
+          "max",
+          "maxLength",
+          "min",
+          "minLength",
+          "multiple",
+          "name",
+          "pattern",
+          "placeholder",
+          "readOnly",
+          "required",
+          "size",
+          "src",
+          "step",
+          "type",
+          "value",
+          "width"
+        ]
+      },
+      "5df36366d3": {
+        "add": [
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "name",
+          "type",
+          "value"
+        ]
+      },
+      "60536a2c61": {
+        "add": [
+          "accentHeight",
+          "accumulate",
+          "additive",
+          "alignmentBaseline",
+          "allowReorder",
+          "alphabetic",
+          "amplitude",
+          "arabicForm",
+          "ascent",
+          "attributeName",
+          "attributeType",
+          "autoReverse",
+          "azimuth",
+          "baseFrequency",
+          "baseProfile",
+          "baselineShift",
+          "bbox",
+          "begin",
+          "bias",
+          "by",
+          "calcMode",
+          "capHeight",
+          "clip",
+          "clipPath",
+          "clipPathUnits",
+          "clipRule",
+          "colorInterpolation",
+          "colorInterpolationFilters",
+          "colorProfile",
+          "colorRendering",
+          "contentScriptType",
+          "contentStyleType",
+          "crossOrigin",
+          "cursor",
+          "cx",
+          "cy",
+          "d",
+          "decelerate",
+          "descent",
+          "diffuseConstant",
+          "direction",
+          "display",
+          "divisor",
+          "dominantBaseline",
+          "dur",
+          "dx",
+          "dy",
+          "edgeMode",
+          "elevation",
+          "enableBackground",
+          "end",
+          "exponent",
+          "externalResourcesRequired",
+          "fill",
+          "fillOpacity",
+          "fillRule",
+          "filter",
+          "filterRes",
+          "filterUnits",
+          "floodColor",
+          "floodOpacity",
+          "focusable",
+          "fontFamily",
+          "fontSize",
+          "fontSizeAdjust",
+          "fontStretch",
+          "fontStyle",
+          "fontVariant",
+          "fontWeight",
+          "format",
+          "fr",
+          "from",
+          "fx",
+          "fy",
+          "g1",
+          "g2",
+          "glyphName",
+          "glyphOrientationHorizontal",
+          "glyphOrientationVertical",
+          "glyphRef",
+          "gradientTransform",
+          "gradientUnits",
+          "hanging",
+          "height",
+          "horizAdvX",
+          "horizOriginX",
+          "href",
+          "ideographic",
+          "imageRendering",
+          "in",
+          "in2",
+          "intercept",
+          "k",
+          "k1",
+          "k2",
+          "k3",
+          "k4",
+          "kernelMatrix",
+          "kernelUnitLength",
+          "kerning",
+          "keyPoints",
+          "keySplines",
+          "keyTimes",
+          "lengthAdjust",
+          "letterSpacing",
+          "lightingColor",
+          "limitingConeAngle",
+          "local",
+          "markerEnd",
+          "markerHeight",
+          "markerMid",
+          "markerStart",
+          "markerUnits",
+          "markerWidth",
+          "mask",
+          "maskContentUnits",
+          "maskUnits",
+          "mathematical",
+          "max",
+          "media",
+          "method",
+          "min",
+          "mode",
+          "name",
+          "numOctaves",
+          "offset",
+          "opacity",
+          "operator",
+          "order",
+          "orient",
+          "orientation",
+          "origin",
+          "overflow",
+          "overlinePosition",
+          "overlineThickness",
+          "paintOrder",
+          "panose1",
+          "path",
+          "pathLength",
+          "patternContentUnits",
+          "patternTransform",
+          "patternUnits",
+          "pointerEvents",
+          "points",
+          "pointsAtX",
+          "pointsAtY",
+          "pointsAtZ",
+          "preserveAlpha",
+          "preserveAspectRatio",
+          "primitiveUnits",
+          "r",
+          "radius",
+          "refX",
+          "refY",
+          "renderingIntent",
+          "repeatCount",
+          "repeatDur",
+          "requiredExtensions",
+          "requiredFeatures",
+          "restart",
+          "result",
+          "rotate",
+          "rx",
+          "ry",
+          "scale",
+          "seed",
+          "shapeRendering",
+          "slope",
+          "spacing",
+          "specularConstant",
+          "specularExponent",
+          "speed",
+          "spreadMethod",
+          "startOffset",
+          "stdDeviation",
+          "stemh",
+          "stemv",
+          "stitchTiles",
+          "stopColor",
+          "stopOpacity",
+          "strikethroughPosition",
+          "strikethroughThickness",
+          "string",
+          "stroke",
+          "strokeDasharray",
+          "strokeDashoffset",
+          "strokeLinecap",
+          "strokeLinejoin",
+          "strokeMiterlimit",
+          "strokeOpacity",
+          "strokeWidth",
+          "surfaceScale",
+          "systemLanguage",
+          "tableValues",
+          "target",
+          "targetX",
+          "targetY",
+          "textAnchor",
+          "textDecoration",
+          "textLength",
+          "textRendering",
+          "to",
+          "transform",
+          "type",
+          "u1",
+          "u2",
+          "underlinePosition",
+          "underlineThickness",
+          "unicode",
+          "unicodeBidi",
+          "unicodeRange",
+          "unitsPerEm",
+          "vAlphabetic",
+          "vHanging",
+          "vIdeographic",
+          "vMathematical",
+          "values",
+          "vectorEffect",
+          "version",
+          "vertAdvY",
+          "vertOriginX",
+          "vertOriginY",
+          "viewBox",
+          "viewTarget",
+          "visibility",
+          "width",
+          "widths",
+          "wordSpacing",
+          "writingMode",
+          "x",
+          "x1",
+          "x2",
+          "xChannelSelector",
+          "xHeight",
+          "xlinkActuate",
+          "xlinkArcrole",
+          "xlinkHref",
+          "xlinkRole",
+          "xlinkShow",
+          "xlinkTitle",
+          "xlinkType",
+          "xmlBase",
+          "xmlLang",
+          "xmlSpace",
+          "xmlns",
+          "xmlnsXlink",
+          "y",
+          "y1",
+          "y2",
+          "yChannelSelector",
+          "z",
+          "zoomAndPan"
+        ],
+        "drop": [
+          "about",
+          "accessKey",
+          "autoCapitalize",
+          "autoCorrect",
+          "autoFocus",
+          "autoSave",
+          "content",
+          "contentEditable",
+          "contextMenu",
+          "datatype",
+          "defaultChecked",
+          "defaultValue",
+          "dir",
+          "draggable",
+          "enterKeyHint",
+          "exportparts",
+          "hidden",
+          "inert",
+          "inlist",
+          "inputMode",
+          "is",
+          "itemID",
+          "itemProp",
+          "itemRef",
+          "itemScope",
+          "itemType",
+          "popover",
+          "popoverTarget",
+          "popoverTargetAction",
+          "prefix",
+          "property",
+          "radioGroup",
+          "rel",
+          "resource",
+          "results",
+          "rev",
+          "security",
+          "spellCheck",
+          "suppressContentEditableWarning",
+          "title",
+          "translate",
+          "typeof",
+          "unselectable",
+          "vocab"
+        ]
+      },
+      "6097c3de5a": {
+        "drop": [
+          "dir"
+        ]
+      },
+      "6a6bdd2809": {
+        "add": [
+          "accept",
+          "alt",
+          "autoComplete",
+          "capture",
+          "checked",
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "height",
+          "list",
+          "max",
+          "maxLength",
+          "min",
+          "minLength",
+          "multiple",
+          "name",
+          "pattern",
+          "placeholder",
+          "readOnly",
+          "required",
+          "size",
+          "src",
+          "step",
+          "width"
+        ],
+        "drop": [
+          "onChange"
+        ]
+      },
+      "6e5593b02b": {
+        "add": [
+          "accept",
+          "alt",
+          "autoComplete",
+          "capture",
+          "checked",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "height",
+          "list",
+          "max",
+          "maxLength",
+          "min",
+          "minLength",
+          "multiple",
+          "name",
+          "pattern",
+          "placeholder",
+          "readOnly",
+          "required",
+          "size",
+          "src",
+          "step",
+          "type",
+          "value",
+          "width"
+        ],
+        "drop": [
+          "className",
+          "color",
+          "defaultChecked",
+          "defaultValue",
+          "style"
+        ]
+      },
+      "7a8968e4dd": {
+        "add": [
+          "form",
+          "htmlFor"
+        ]
+      },
+      "7e43299827": {
+        "drop": [
+          "onSelect"
+        ]
+      },
+      "881252f70e": {
+        "add": [
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "name",
+          "type",
+          "value"
+        ],
+        "drop": [
+          "key",
+          "ref"
+        ]
+      },
+      "8e431750e6": {
+        "add": [
+          "download",
+          "href",
+          "hrefLang",
+          "media",
+          "ping",
+          "referrerPolicy",
+          "target",
+          "type"
+        ],
+        "drop": [
+          "onSelect"
+        ]
+      },
+      "9e8bbedabb": {
+        "add": [
+          "reversed",
+          "start",
+          "type"
+        ]
+      },
+      "a5cae41ffe": {
+        "add": [
+          "accept",
+          "alt",
+          "autoComplete",
+          "capture",
+          "checked",
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "height",
+          "list",
+          "max",
+          "min",
+          "minLength",
+          "multiple",
+          "name",
+          "pattern",
+          "placeholder",
+          "readOnly",
+          "required",
+          "size",
+          "src",
+          "step",
+          "type",
+          "width"
+        ],
+        "drop": [
+          "children",
+          "nonce",
+          "onChange"
+        ]
+      },
+      "b7d7e810fe": {
+        "drop": [
+          "children",
+          "className",
+          "color",
+          "defaultChecked",
+          "defaultValue",
+          "id",
+          "onClick",
+          "style"
+        ]
+      },
+      "bbf96f0437": {
+        "add": [
+          "value"
+        ]
+      },
+      "bc745545fb": {
+        "drop": [
+          "content"
+        ]
+      },
+      "c1399507fb": {
+        "add": [
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "name",
+          "type",
+          "value"
+        ],
+        "drop": [
+          "defaultChecked"
+        ]
+      },
+      "c262dd851c": {
+        "add": [
+          "disabled",
+          "form",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "type"
+        ]
+      },
+      "d452ecae52": {
+        "add": [
+          "autoComplete",
+          "disabled",
+          "form",
+          "multiple",
+          "name",
+          "required",
+          "value"
+        ]
+      },
+      "da39a3ee5e": {
+        "drop": [
+          "about",
+          "accessKey",
+          "aria-activedescendant",
+          "aria-atomic",
+          "aria-autocomplete",
+          "aria-braillelabel",
+          "aria-brailleroledescription",
+          "aria-busy",
+          "aria-checked",
+          "aria-colcount",
+          "aria-colindex",
+          "aria-colindextext",
+          "aria-colspan",
+          "aria-controls",
+          "aria-current",
+          "aria-describedby",
+          "aria-description",
+          "aria-details",
+          "aria-disabled",
+          "aria-dropeffect",
+          "aria-errormessage",
+          "aria-expanded",
+          "aria-flowto",
+          "aria-grabbed",
+          "aria-haspopup",
+          "aria-hidden",
+          "aria-invalid",
+          "aria-keyshortcuts",
+          "aria-label",
+          "aria-labelledby",
+          "aria-level",
+          "aria-live",
+          "aria-modal",
+          "aria-multiline",
+          "aria-multiselectable",
+          "aria-orientation",
+          "aria-owns",
+          "aria-placeholder",
+          "aria-posinset",
+          "aria-pressed",
+          "aria-readonly",
+          "aria-relevant",
+          "aria-required",
+          "aria-roledescription",
+          "aria-rowcount",
+          "aria-rowindex",
+          "aria-rowindextext",
+          "aria-rowspan",
+          "aria-selected",
+          "aria-setsize",
+          "aria-sort",
+          "aria-valuemax",
+          "aria-valuemin",
+          "aria-valuenow",
+          "aria-valuetext",
+          "autoCapitalize",
+          "autoCorrect",
+          "autoFocus",
+          "autoSave",
+          "children",
+          "className",
+          "color",
+          "content",
+          "contentEditable",
+          "contextMenu",
+          "dangerouslySetInnerHTML",
+          "datatype",
+          "defaultChecked",
+          "defaultValue",
+          "dir",
+          "draggable",
+          "enterKeyHint",
+          "exportparts",
+          "hidden",
+          "id",
+          "inert",
+          "inlist",
+          "inputMode",
+          "is",
+          "itemID",
+          "itemProp",
+          "itemRef",
+          "itemScope",
+          "itemType",
+          "key",
+          "lang",
+          "nonce",
+          "onAbort",
+          "onAbortCapture",
+          "onAnimationEnd",
+          "onAnimationEndCapture",
+          "onAnimationIteration",
+          "onAnimationIterationCapture",
+          "onAnimationStart",
+          "onAnimationStartCapture",
+          "onAuxClick",
+          "onAuxClickCapture",
+          "onBeforeInput",
+          "onBeforeInputCapture",
+          "onBeforeToggle",
+          "onBlur",
+          "onBlurCapture",
+          "onCanPlay",
+          "onCanPlayCapture",
+          "onCanPlayThrough",
+          "onCanPlayThroughCapture",
+          "onChange",
+          "onChangeCapture",
+          "onClick",
+          "onClickCapture",
+          "onCompositionEnd",
+          "onCompositionEndCapture",
+          "onCompositionStart",
+          "onCompositionStartCapture",
+          "onCompositionUpdate",
+          "onCompositionUpdateCapture",
+          "onContextMenu",
+          "onContextMenuCapture",
+          "onCopy",
+          "onCopyCapture",
+          "onCut",
+          "onCutCapture",
+          "onDoubleClick",
+          "onDoubleClickCapture",
+          "onDrag",
+          "onDragCapture",
+          "onDragEnd",
+          "onDragEndCapture",
+          "onDragEnter",
+          "onDragEnterCapture",
+          "onDragExit",
+          "onDragExitCapture",
+          "onDragLeave",
+          "onDragLeaveCapture",
+          "onDragOver",
+          "onDragOverCapture",
+          "onDragStart",
+          "onDragStartCapture",
+          "onDrop",
+          "onDropCapture",
+          "onDurationChange",
+          "onDurationChangeCapture",
+          "onEmptied",
+          "onEmptiedCapture",
+          "onEncrypted",
+          "onEncryptedCapture",
+          "onEnded",
+          "onEndedCapture",
+          "onError",
+          "onErrorCapture",
+          "onFocus",
+          "onFocusCapture",
+          "onGotPointerCapture",
+          "onGotPointerCaptureCapture",
+          "onInput",
+          "onInputCapture",
+          "onInvalid",
+          "onInvalidCapture",
+          "onKeyDown",
+          "onKeyDownCapture",
+          "onKeyPress",
+          "onKeyPressCapture",
+          "onKeyUp",
+          "onKeyUpCapture",
+          "onLoad",
+          "onLoadCapture",
+          "onLoadStart",
+          "onLoadStartCapture",
+          "onLoadedData",
+          "onLoadedDataCapture",
+          "onLoadedMetadata",
+          "onLoadedMetadataCapture",
+          "onLostPointerCapture",
+          "onLostPointerCaptureCapture",
+          "onMouseDown",
+          "onMouseDownCapture",
+          "onMouseEnter",
+          "onMouseLeave",
+          "onMouseMove",
+          "onMouseMoveCapture",
+          "onMouseOut",
+          "onMouseOutCapture",
+          "onMouseOver",
+          "onMouseOverCapture",
+          "onMouseUp",
+          "onMouseUpCapture",
+          "onPaste",
+          "onPasteCapture",
+          "onPause",
+          "onPauseCapture",
+          "onPlay",
+          "onPlayCapture",
+          "onPlaying",
+          "onPlayingCapture",
+          "onPointerCancel",
+          "onPointerCancelCapture",
+          "onPointerDown",
+          "onPointerDownCapture",
+          "onPointerEnter",
+          "onPointerLeave",
+          "onPointerMove",
+          "onPointerMoveCapture",
+          "onPointerOut",
+          "onPointerOutCapture",
+          "onPointerOver",
+          "onPointerOverCapture",
+          "onPointerUp",
+          "onPointerUpCapture",
+          "onProgress",
+          "onProgressCapture",
+          "onRateChange",
+          "onRateChangeCapture",
+          "onReset",
+          "onResetCapture",
+          "onScroll",
+          "onScrollCapture",
+          "onScrollEnd",
+          "onScrollEndCapture",
+          "onSeeked",
+          "onSeekedCapture",
+          "onSeeking",
+          "onSeekingCapture",
+          "onSelect",
+          "onSelectCapture",
+          "onStalled",
+          "onStalledCapture",
+          "onSubmit",
+          "onSubmitCapture",
+          "onSuspend",
+          "onSuspendCapture",
+          "onTimeUpdate",
+          "onTimeUpdateCapture",
+          "onToggle",
+          "onTouchCancel",
+          "onTouchCancelCapture",
+          "onTouchEnd",
+          "onTouchEndCapture",
+          "onTouchMove",
+          "onTouchMoveCapture",
+          "onTouchStart",
+          "onTouchStartCapture",
+          "onTransitionCancel",
+          "onTransitionCancelCapture",
+          "onTransitionEnd",
+          "onTransitionEndCapture",
+          "onTransitionRun",
+          "onTransitionRunCapture",
+          "onTransitionStart",
+          "onTransitionStartCapture",
+          "onVolumeChange",
+          "onVolumeChangeCapture",
+          "onWaiting",
+          "onWaitingCapture",
+          "onWheel",
+          "onWheelCapture",
+          "part",
+          "popover",
+          "popoverTarget",
+          "popoverTargetAction",
+          "prefix",
+          "property",
+          "radioGroup",
+          "ref",
+          "rel",
+          "resource",
+          "results",
+          "rev",
+          "role",
+          "security",
+          "slot",
+          "spellCheck",
+          "style",
+          "suppressContentEditableWarning",
+          "suppressHydrationWarning",
+          "tabIndex",
+          "title",
+          "translate",
+          "typeof",
+          "unselectable",
+          "vocab"
+        ]
+      },
+      "e5a08c6209": {
+        "drop": [
+          "className",
+          "id",
+          "key",
+          "ref",
+          "style"
+        ]
+      },
+      "e632426e35": {
+        "drop": [
+          "children",
+          "className",
+          "color",
+          "defaultChecked",
+          "defaultValue",
+          "style"
+        ]
+      },
+      "ece7db12bc": {
+        "add": [
+          "disabled",
+          "label"
+        ]
+      },
+      "f33e968c93": {
+        "drop": [
+          "defaultValue",
+          "dir"
+        ]
+      },
+      "fac6311b21": {
+        "add": [
+          "abbr",
+          "align",
+          "colSpan",
+          "headers",
+          "rowSpan",
+          "scope"
+        ]
+      },
+      "fb7a021609": {
+        "add": [
+          "autoComplete",
+          "cols",
+          "dirName",
+          "disabled",
+          "form",
+          "maxLength",
+          "minLength",
+          "name",
+          "placeholder",
+          "readOnly",
+          "required",
+          "rows",
+          "value",
+          "wrap"
+        ]
+      }
+    }
+  },
+  "items": {
+    "accordion": [
+      {
+        "name": "Accordion",
+        "kind": "component",
+        "element": "AccordionPrimitive.Root",
+        "base": "React.ComponentProps<typeof AccordionPrimitive.Root>",
+        "dom": "f33e968c93",
+        "props": {
+          "asChild": {},
+          "collapsible": {},
+          "defaultValue": {},
+          "dir": {},
+          "disabled": {},
+          "onValueChange": {},
+          "orientation": {},
+          "type": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "AccordionItem",
+        "kind": "component",
+        "element": "AccordionPrimitive.Item",
+        "base": "React.ComponentProps<typeof AccordionPrimitive.Item>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "AccordionTrigger",
+        "kind": "component",
+        "element": "AccordionPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof AccordionPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "AccordionContent",
+        "kind": "component",
+        "element": "AccordionPrimitive.Content",
+        "base": "React.ComponentProps<typeof AccordionPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {}
+        }
+      }
+    ],
+    "alert": [
+      {
+        "name": "Alert",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "variant": {
+            "type": "\"default\" | \"destructive\""
+          }
+        }
+      },
+      {
+        "name": "AlertTitle",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AlertDescription",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AlertAction",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "alert-dialog": [
+      {
+        "name": "AlertDialog",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Root",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "AlertDialogAction",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Action",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Action> & Pick<React.ComponentProps<typeof Button>, \"variant\" | \"size\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {
+            "default": "\"default\""
+          },
+          "variant": {
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "AlertDialogCancel",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Cancel",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Cancel> & Pick<React.ComponentProps<typeof Button>, \"variant\" | \"size\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {
+            "default": "\"default\""
+          },
+          "variant": {
+            "default": "\"outline\""
+          }
+        }
+      },
+      {
+        "name": "AlertDialogContent",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Content",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "deferPointerDownOutside": {},
+          "forceMount": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onOpenAutoFocus": {},
+          "size": {
+            "type": "\"default\" | \"sm\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "AlertDialogDescription",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Description",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Description>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "AlertDialogFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AlertDialogHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AlertDialogMedia",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AlertDialogOverlay",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Overlay",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Overlay>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "AlertDialogPortal",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Portal",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Portal>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "container": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "AlertDialogTitle",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Title",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Title>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "AlertDialogTrigger",
+        "kind": "component",
+        "element": "AlertDialogPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof AlertDialogPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      }
+    ],
+    "aspect-ratio": [
+      {
+        "name": "AspectRatio",
+        "kind": "component",
+        "element": "AspectRatioPrimitive.Root",
+        "base": "React.ComponentProps<typeof AspectRatioPrimitive.Root>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "ratio": {}
+        }
+      }
+    ],
+    "avatar": [
+      {
+        "name": "Avatar",
+        "kind": "component",
+        "element": "AvatarPrimitive.Root",
+        "base": "React.ComponentProps<typeof AvatarPrimitive.Root>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "size": {
+            "type": "\"default\" | \"sm\" | \"lg\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "AvatarImage",
+        "kind": "component",
+        "element": "AvatarPrimitive.Image",
+        "base": "React.ComponentProps<typeof AvatarPrimitive.Image>",
+        "dom": "2c2ea486de",
+        "props": {
+          "asChild": {},
+          "onLoadingStatusChange": {}
+        }
+      },
+      {
+        "name": "AvatarFallback",
+        "kind": "component",
+        "element": "AvatarPrimitive.Fallback",
+        "base": "React.ComponentProps<typeof AvatarPrimitive.Fallback>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "delayMs": {}
+        }
+      },
+      {
+        "name": "AvatarGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AvatarGroupCount",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AvatarBadge",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "badge": [
+      {
+        "name": "Badge",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "variant": {
+            "type": "\"link\" | \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "kind": "variants",
+        "name": "badgeVariants"
+      }
+    ],
+    "breadcrumb": [
+      {
+        "name": "Breadcrumb",
+        "kind": "component",
+        "element": "<nav>",
+        "base": "React.ComponentProps<\"nav\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "BreadcrumbList",
+        "kind": "component",
+        "element": "<ol>",
+        "base": "React.ComponentProps<\"ol\">",
+        "dom": "9e8bbedabb",
+        "props": {}
+      },
+      {
+        "name": "BreadcrumbItem",
+        "kind": "component",
+        "element": "<li>",
+        "base": "React.ComponentProps<\"li\">",
+        "dom": "bbf96f0437",
+        "props": {}
+      },
+      {
+        "name": "BreadcrumbLink",
+        "kind": "component",
+        "element": "<a>",
+        "base": "React.ComponentProps<\"a\">",
+        "dom": "306217993b",
+        "props": {
+          "asChild": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "name": "BreadcrumbPage",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "BreadcrumbSeparator",
+        "kind": "component",
+        "element": "<li>",
+        "base": "React.ComponentProps<\"li\">",
+        "dom": "bbf96f0437",
+        "props": {}
+      },
+      {
+        "name": "BreadcrumbEllipsis",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "button": [
+      {
+        "name": "Button",
+        "kind": "component",
+        "element": "<button>",
+        "base": "React.ComponentProps<\"button\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "size": {
+            "type": "\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"",
+            "default": "\"default\""
+          },
+          "variant": {
+            "type": "\"link\" | \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "kind": "variants",
+        "name": "buttonVariants"
+      }
+    ],
+    "button-group": [
+      {
+        "name": "ButtonGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "orientation": {
+            "type": "\"horizontal\" | \"vertical\""
+          }
+        }
+      },
+      {
+        "name": "ButtonGroupSeparator",
+        "kind": "component",
+        "element": "Separator",
+        "base": "React.ComponentProps<typeof Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "decorative": {},
+          "orientation": {
+            "default": "\"vertical\""
+          }
+        }
+      },
+      {
+        "name": "ButtonGroupText",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "kind": "variants",
+        "name": "buttonGroupVariants"
+      }
+    ],
+    "calendar": [
+      {
+        "name": "Calendar",
+        "kind": "component",
+        "element": "DayPicker",
+        "base": "React.ComponentProps<typeof DayPicker>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "animate": {},
+          "aria-label": {},
+          "aria-labelledby": {},
+          "autoFocus": {},
+          "broadcastCalendar": {},
+          "buttonVariant": {
+            "type": "React.ComponentProps<typeof Button>[\"variant\"]",
+            "default": "\"ghost\""
+          },
+          "captionLayout": {
+            "default": "\"label\""
+          },
+          "className": {},
+          "classNames": {},
+          "components": {},
+          "dateLib": {},
+          "defaultMonth": {},
+          "dir": {},
+          "disabled": {},
+          "disableNavigation": {},
+          "endMonth": {},
+          "excludeDisabled": {},
+          "firstWeekContainsDate": {},
+          "fixedWeeks": {},
+          "footer": {},
+          "formatters": {},
+          "hidden": {},
+          "hideNavigation": {},
+          "hideWeekdays": {},
+          "id": {},
+          "ISOWeek": {},
+          "labels": {},
+          "lang": {},
+          "locale": {},
+          "max": {},
+          "min": {},
+          "mode": {},
+          "modifiers": {},
+          "modifiersClassNames": {},
+          "modifiersStyles": {},
+          "month": {},
+          "navLayout": {},
+          "nonce": {},
+          "noonSafe": {},
+          "numberOfMonths": {},
+          "numerals": {},
+          "onDayBlur": {},
+          "onDayClick": {},
+          "onDayFocus": {},
+          "onDayKeyDown": {},
+          "onDayMouseEnter": {},
+          "onDayMouseLeave": {},
+          "onMonthChange": {},
+          "onNextClick": {},
+          "onPrevClick": {},
+          "onSelect": {},
+          "pagedNavigation": {},
+          "required": {},
+          "resetOnSelect": {},
+          "reverseMonths": {},
+          "reverseYears": {},
+          "role": {},
+          "selected": {},
+          "showOutsideDays": {
+            "default": "true"
+          },
+          "showWeekNumber": {},
+          "startMonth": {},
+          "style": {},
+          "styles": {},
+          "timeZone": {},
+          "title": {},
+          "today": {},
+          "useAdditionalDayOfYearTokens": {},
+          "useAdditionalWeekYearTokens": {},
+          "weekStartsOn": {}
+        }
+      },
+      {
+        "name": "CalendarDayButton",
+        "kind": "component",
+        "element": "Button",
+        "base": "React.ComponentProps<typeof DayButton>",
+        "dom": "881252f70e",
+        "props": {
+          "day": {},
+          "locale": {
+            "type": "Partial<Locale>"
+          },
+          "modifiers": {}
+        }
+      }
+    ],
+    "card": [
+      {
+        "name": "Card",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "size": {
+            "type": "\"default\" | \"sm\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "CardHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CardFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CardTitle",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CardAction",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CardDescription",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CardContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "carousel": [
+      {
+        "name": "Carousel",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\"> & CarouselProps",
+        "dom": "3a72cf30cf",
+        "props": {
+          "opts": {
+            "type": "CarouselOptions"
+          },
+          "orientation": {
+            "type": "\"horizontal\" | \"vertical\"",
+            "default": "\"horizontal\""
+          },
+          "plugins": {
+            "type": "CarouselPlugin"
+          },
+          "setApi": {
+            "type": "(api: CarouselApi) => void"
+          }
+        }
+      },
+      {
+        "name": "CarouselContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CarouselItem",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CarouselPrevious",
+        "kind": "component",
+        "element": "Button",
+        "base": "React.ComponentProps<typeof Button>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {
+            "default": "\"icon-sm\""
+          },
+          "variant": {
+            "default": "\"outline\""
+          }
+        }
+      },
+      {
+        "name": "CarouselNext",
+        "kind": "component",
+        "element": "Button",
+        "base": "React.ComponentProps<typeof Button>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {
+            "default": "\"icon-sm\""
+          },
+          "variant": {
+            "default": "\"outline\""
+          }
+        }
+      },
+      {
+        "name": "useCarousel",
+        "kind": "hook",
+        "signature": "useCarousel(): CarouselContextProps"
+      }
+    ],
+    "chart": [
+      {
+        "name": "ChartContainer",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "021e381454",
+        "props": {
+          "children": {
+            "type": "React.ComponentProps< typeof RechartsPrimitive.ResponsiveContainer >[\"children\"]"
+          },
+          "config": {
+            "type": "ChartConfig"
+          },
+          "initialDimension": {
+            "type": "{ width: number height: number }",
+            "default": "INITIAL_DIMENSION"
+          }
+        }
+      },
+      {
+        "kind": "other",
+        "name": "ChartTooltip",
+        "type": "(outsideProps: RechartsPrimitive.TooltipProps<RechartsPrimitive.TooltipValueType, NameType>) => React.JSX.Element | null"
+      },
+      {
+        "name": "ChartTooltipContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<typeof RechartsPrimitive.Tooltip> & React.ComponentProps<\"div\"> & Omit< RechartsPrimitive.DefaultTooltipContentProps< TooltipValueType, TooltipNameType >, \"accessibilityLayer\" >",
+        "dom": "bc745545fb",
+        "props": {
+          "active": {},
+          "allowEscapeViewBox": {},
+          "animationDuration": {},
+          "animationEasing": {},
+          "axisId": {},
+          "content": {},
+          "contentStyle": {},
+          "cursor": {},
+          "defaultIndex": {},
+          "filterNull": {},
+          "formatter": {},
+          "hideIndicator": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "hideLabel": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "includeHidden": {},
+          "indicator": {
+            "type": "\"line\" | \"dot\" | \"dashed\"",
+            "default": "\"dot\""
+          },
+          "isAnimationActive": {},
+          "itemSorter": {},
+          "itemStyle": {},
+          "label": {},
+          "labelClassName": {},
+          "labelFormatter": {},
+          "labelKey": {
+            "type": "string"
+          },
+          "labelStyle": {},
+          "nameKey": {
+            "type": "string"
+          },
+          "offset": {},
+          "payload": {},
+          "payloadUniqBy": {},
+          "portal": {},
+          "position": {},
+          "reverseDirection": {},
+          "separator": {},
+          "shared": {},
+          "trigger": {},
+          "useTranslate3d": {},
+          "wrapperClassName": {},
+          "wrapperStyle": {}
+        }
+      },
+      {
+        "kind": "other",
+        "name": "ChartLegend",
+        "type": "React.MemoExoticComponent<(outsideProps: RechartsPrimitive.LegendProps) => React.ReactPortal | null>"
+      },
+      {
+        "name": "ChartLegendContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\"> & RechartsPrimitive.DefaultLegendContentProps",
+        "dom": "30b990ce5c",
+        "props": {
+          "align": {},
+          "children": {},
+          "dangerouslySetInnerHTML": {},
+          "formatter": {},
+          "hideIcon": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "iconSize": {},
+          "iconType": {},
+          "inactiveColor": {},
+          "labelStyle": {},
+          "layout": {},
+          "nameKey": {
+            "type": "string"
+          },
+          "onAbort": {},
+          "onAbortCapture": {},
+          "onAnimationEnd": {},
+          "onAnimationEndCapture": {},
+          "onAnimationIteration": {},
+          "onAnimationIterationCapture": {},
+          "onAnimationStart": {},
+          "onAnimationStartCapture": {},
+          "onAuxClick": {},
+          "onAuxClickCapture": {},
+          "onBeforeInput": {},
+          "onBeforeInputCapture": {},
+          "onBlur": {},
+          "onBlurCapture": {},
+          "onCanPlay": {},
+          "onCanPlayCapture": {},
+          "onCanPlayThrough": {},
+          "onCanPlayThroughCapture": {},
+          "onChange": {},
+          "onChangeCapture": {},
+          "onClick": {},
+          "onClickCapture": {},
+          "onCompositionEnd": {},
+          "onCompositionEndCapture": {},
+          "onCompositionStart": {},
+          "onCompositionStartCapture": {},
+          "onCompositionUpdate": {},
+          "onCompositionUpdateCapture": {},
+          "onContextMenu": {},
+          "onContextMenuCapture": {},
+          "onCopy": {},
+          "onCopyCapture": {},
+          "onCut": {},
+          "onCutCapture": {},
+          "onDoubleClick": {},
+          "onDoubleClickCapture": {},
+          "onDrag": {},
+          "onDragCapture": {},
+          "onDragEnd": {},
+          "onDragEndCapture": {},
+          "onDragEnter": {},
+          "onDragEnterCapture": {},
+          "onDragExit": {},
+          "onDragExitCapture": {},
+          "onDragLeave": {},
+          "onDragLeaveCapture": {},
+          "onDragOver": {},
+          "onDragOverCapture": {},
+          "onDragStart": {},
+          "onDragStartCapture": {},
+          "onDrop": {},
+          "onDropCapture": {},
+          "onDurationChange": {},
+          "onDurationChangeCapture": {},
+          "onEmptied": {},
+          "onEmptiedCapture": {},
+          "onEncrypted": {},
+          "onEncryptedCapture": {},
+          "onEnded": {},
+          "onEndedCapture": {},
+          "onError": {},
+          "onErrorCapture": {},
+          "onFocus": {},
+          "onFocusCapture": {},
+          "onGotPointerCapture": {},
+          "onGotPointerCaptureCapture": {},
+          "onInput": {},
+          "onInputCapture": {},
+          "onInvalid": {},
+          "onInvalidCapture": {},
+          "onKeyDown": {},
+          "onKeyDownCapture": {},
+          "onKeyPress": {},
+          "onKeyPressCapture": {},
+          "onKeyUp": {},
+          "onKeyUpCapture": {},
+          "onLoad": {},
+          "onLoadCapture": {},
+          "onLoadedData": {},
+          "onLoadedDataCapture": {},
+          "onLoadedMetadata": {},
+          "onLoadedMetadataCapture": {},
+          "onLoadStart": {},
+          "onLoadStartCapture": {},
+          "onLostPointerCapture": {},
+          "onLostPointerCaptureCapture": {},
+          "onMouseDown": {},
+          "onMouseDownCapture": {},
+          "onMouseEnter": {},
+          "onMouseLeave": {},
+          "onMouseMove": {},
+          "onMouseMoveCapture": {},
+          "onMouseOut": {},
+          "onMouseOutCapture": {},
+          "onMouseOver": {},
+          "onMouseOverCapture": {},
+          "onMouseUp": {},
+          "onMouseUpCapture": {},
+          "onPaste": {},
+          "onPasteCapture": {},
+          "onPause": {},
+          "onPauseCapture": {},
+          "onPlay": {},
+          "onPlayCapture": {},
+          "onPlaying": {},
+          "onPlayingCapture": {},
+          "onPointerCancel": {},
+          "onPointerCancelCapture": {},
+          "onPointerDown": {},
+          "onPointerDownCapture": {},
+          "onPointerEnter": {},
+          "onPointerEnterCapture": {},
+          "onPointerLeave": {},
+          "onPointerLeaveCapture": {},
+          "onPointerMove": {},
+          "onPointerMoveCapture": {},
+          "onPointerOut": {},
+          "onPointerOutCapture": {},
+          "onPointerOver": {},
+          "onPointerOverCapture": {},
+          "onPointerUp": {},
+          "onPointerUpCapture": {},
+          "onProgress": {},
+          "onProgressCapture": {},
+          "onRateChange": {},
+          "onRateChangeCapture": {},
+          "onReset": {},
+          "onResetCapture": {},
+          "onScroll": {},
+          "onScrollCapture": {},
+          "onSeeked": {},
+          "onSeekedCapture": {},
+          "onSeeking": {},
+          "onSeekingCapture": {},
+          "onSelect": {},
+          "onSelectCapture": {},
+          "onStalled": {},
+          "onStalledCapture": {},
+          "onSubmit": {},
+          "onSubmitCapture": {},
+          "onSuspend": {},
+          "onSuspendCapture": {},
+          "onTimeUpdate": {},
+          "onTimeUpdateCapture": {},
+          "onTouchCancel": {},
+          "onTouchCancelCapture": {},
+          "onTouchEnd": {},
+          "onTouchEndCapture": {},
+          "onTouchMove": {},
+          "onTouchMoveCapture": {},
+          "onTouchStart": {},
+          "onTouchStartCapture": {},
+          "onTransitionEnd": {},
+          "onTransitionEndCapture": {},
+          "onVolumeChange": {},
+          "onVolumeChangeCapture": {},
+          "onWaiting": {},
+          "onWaitingCapture": {},
+          "onWheel": {},
+          "onWheelCapture": {},
+          "payload": {},
+          "verticalAlign": {
+            "default": "\"bottom\""
+          }
+        }
+      },
+      {
+        "name": "ChartStyle",
+        "kind": "component",
+        "element": "<style>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "config": {
+            "type": "ChartConfig"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      }
+    ],
+    "checkbox": [
+      {
+        "name": "Checkbox",
+        "kind": "component",
+        "element": "CheckboxPrimitive.Root",
+        "base": "React.ComponentProps<typeof CheckboxPrimitive.Root>",
+        "dom": "c1399507fb",
+        "props": {
+          "asChild": {},
+          "checked": {},
+          "defaultChecked": {},
+          "onCheckedChange": {},
+          "required": {}
+        }
+      }
+    ],
+    "collapsible": [
+      {
+        "name": "Collapsible",
+        "kind": "component",
+        "element": "CollapsiblePrimitive.Root",
+        "base": "React.ComponentProps<typeof CollapsiblePrimitive.Root>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "defaultOpen": {},
+          "disabled": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "CollapsibleTrigger",
+        "kind": "component",
+        "element": "CollapsiblePrimitive.CollapsibleTrigger",
+        "base": "React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "CollapsibleContent",
+        "kind": "component",
+        "element": "CollapsiblePrimitive.CollapsibleContent",
+        "base": "React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleContent>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {}
+        }
+      }
+    ],
+    "combobox": [
+      {
+        "kind": "other",
+        "name": "Combobox",
+        "type": "<Value, Multiple extends boolean | undefined = false, Item = Value>(props: ComboboxPrimitive.Root.Props<Value, Multiple, Item>) => React.JSX.Element"
+      },
+      {
+        "name": "ComboboxInput",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Input",
+        "base": "ComboboxPrimitive.Input.Props",
+        "dom": "6e5593b02b",
+        "props": {
+          "className": {},
+          "disabled": {
+            "default": "false"
+          },
+          "render": {},
+          "showClear": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "showTrigger": {
+            "type": "boolean",
+            "default": "true"
+          },
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxContent",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Popup",
+        "base": "ComboboxPrimitive.Popup.Props & Pick< ComboboxPrimitive.Positioner.Props, \"side\" | \"align\" | \"sideOffset\" | \"alignOffset\" | \"anchor\" >",
+        "dom": "59335b04af",
+        "props": {
+          "align": {
+            "default": "\"start\""
+          },
+          "alignOffset": {
+            "default": "0"
+          },
+          "anchor": {},
+          "className": {},
+          "finalFocus": {},
+          "initialFocus": {},
+          "render": {},
+          "side": {
+            "default": "\"bottom\""
+          },
+          "sideOffset": {
+            "default": "6"
+          },
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxList",
+        "kind": "component",
+        "element": "ComboboxPrimitive.List",
+        "base": "ComboboxPrimitive.List.Props",
+        "dom": "e632426e35",
+        "props": {
+          "children": {},
+          "className": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxItem",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Item",
+        "base": "ComboboxPrimitive.Item.Props",
+        "dom": "b7d7e810fe",
+        "props": {
+          "children": {},
+          "className": {},
+          "disabled": {},
+          "index": {},
+          "nativeButton": {},
+          "onClick": {},
+          "render": {},
+          "style": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "ComboboxGroup",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Group",
+        "base": "ComboboxPrimitive.Group.Props",
+        "dom": "59335b04af",
+        "props": {
+          "className": {},
+          "items": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxLabel",
+        "kind": "component",
+        "element": "ComboboxPrimitive.GroupLabel",
+        "base": "ComboboxPrimitive.GroupLabel.Props",
+        "dom": "59335b04af",
+        "props": {
+          "className": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxCollection",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Collection",
+        "base": "ComboboxPrimitive.Collection.Props",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {}
+        }
+      },
+      {
+        "name": "ComboboxEmpty",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Empty",
+        "base": "ComboboxPrimitive.Empty.Props",
+        "dom": "59335b04af",
+        "props": {
+          "className": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxSeparator",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Separator",
+        "base": "ComboboxPrimitive.Separator.Props",
+        "dom": "59335b04af",
+        "props": {
+          "className": {},
+          "orientation": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxChips",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Chips",
+        "base": "React.ComponentPropsWithRef<typeof ComboboxPrimitive.Chips> & ComboboxPrimitive.Chips.Props",
+        "dom": "59335b04af",
+        "props": {
+          "className": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxChip",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Chip",
+        "base": "ComboboxPrimitive.Chip.Props",
+        "dom": "59335b04af",
+        "props": {
+          "className": {},
+          "render": {},
+          "showRemove": {
+            "type": "boolean",
+            "default": "true"
+          },
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxChipsInput",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Input",
+        "base": "ComboboxPrimitive.Input.Props",
+        "dom": "6e5593b02b",
+        "props": {
+          "className": {},
+          "disabled": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxTrigger",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Trigger",
+        "base": "ComboboxPrimitive.Trigger.Props",
+        "dom": "04a7af7aa1",
+        "props": {
+          "className": {},
+          "disabled": {},
+          "nativeButton": {},
+          "render": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ComboboxValue",
+        "kind": "component",
+        "element": "ComboboxPrimitive.Value",
+        "base": "ComboboxPrimitive.Value.Props",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "placeholder": {}
+        }
+      },
+      {
+        "name": "useComboboxAnchor",
+        "kind": "hook",
+        "signature": "useComboboxAnchor(): React.RefObject<HTMLDivElement | null>"
+      }
+    ],
+    "command": [
+      {
+        "name": "Command",
+        "kind": "component",
+        "element": "CommandPrimitive",
+        "base": "React.ComponentProps<typeof CommandPrimitive>",
+        "dom": "3536ddcb3f",
+        "props": {
+          "asChild": {},
+          "children": {},
+          "defaultValue": {},
+          "disablePointerSelection": {},
+          "filter": {},
+          "label": {},
+          "loop": {},
+          "onValueChange": {},
+          "shouldFilter": {},
+          "value": {},
+          "vimBindings": {}
+        }
+      },
+      {
+        "name": "CommandDialog",
+        "kind": "component",
+        "element": "Dialog",
+        "base": "React.ComponentProps<typeof Dialog>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "className": {
+            "type": "string"
+          },
+          "defaultOpen": {},
+          "description": {
+            "type": "string",
+            "default": "\"Search for a command to run...\""
+          },
+          "modal": {},
+          "onOpenChange": {},
+          "open": {},
+          "showCloseButton": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "title": {
+            "type": "string",
+            "default": "\"Command Palette\""
+          }
+        }
+      },
+      {
+        "name": "CommandInput",
+        "kind": "component",
+        "element": "CommandPrimitive.Input",
+        "base": "React.ComponentProps<typeof CommandPrimitive.Input>",
+        "dom": "6a6bdd2809",
+        "props": {
+          "asChild": {},
+          "onValueChange": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "CommandList",
+        "kind": "component",
+        "element": "CommandPrimitive.List",
+        "base": "React.ComponentProps<typeof CommandPrimitive.List>",
+        "dom": "021e381454",
+        "props": {
+          "asChild": {},
+          "children": {},
+          "label": {}
+        }
+      },
+      {
+        "name": "CommandEmpty",
+        "kind": "component",
+        "element": "CommandPrimitive.Empty",
+        "base": "React.ComponentProps<typeof CommandPrimitive.Empty>",
+        "dom": "021e381454",
+        "props": {
+          "asChild": {},
+          "children": {}
+        }
+      },
+      {
+        "name": "CommandGroup",
+        "kind": "component",
+        "element": "CommandPrimitive.Group",
+        "base": "React.ComponentProps<typeof CommandPrimitive.Group>",
+        "dom": "021e381454",
+        "props": {
+          "asChild": {},
+          "children": {},
+          "forceMount": {},
+          "heading": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "CommandItem",
+        "kind": "component",
+        "element": "CommandPrimitive.Item",
+        "base": "React.ComponentProps<typeof CommandPrimitive.Item>",
+        "dom": "51274cce08",
+        "props": {
+          "asChild": {},
+          "children": {},
+          "disabled": {},
+          "forceMount": {},
+          "keywords": {},
+          "onSelect": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "CommandShortcut",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CommandSeparator",
+        "kind": "component",
+        "element": "CommandPrimitive.Separator",
+        "base": "React.ComponentProps<typeof CommandPrimitive.Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "alwaysRender": {},
+          "asChild": {}
+        }
+      }
+    ],
+    "context-menu": [
+      {
+        "name": "ContextMenu",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Root",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "dir": {},
+          "modal": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "ContextMenuTrigger",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Trigger>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "disabled": {}
+        }
+      },
+      {
+        "name": "ContextMenuContent",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Content",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Content>",
+        "dom": "6097c3de5a",
+        "props": {
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "loop": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {},
+          "side": {
+            "type": "\"top\" | \"right\" | \"bottom\" | \"left\""
+          },
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      },
+      {
+        "name": "ContextMenuItem",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Item",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Item>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onSelect": {},
+          "textValue": {},
+          "variant": {
+            "type": "\"default\" | \"destructive\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "ContextMenuCheckboxItem",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.CheckboxItem",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "checked": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onCheckedChange": {},
+          "onSelect": {},
+          "textValue": {}
+        }
+      },
+      {
+        "name": "ContextMenuRadioItem",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.RadioItem",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.RadioItem>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onSelect": {},
+          "textValue": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "ContextMenuLabel",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Label",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Label>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "inset": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "name": "ContextMenuSeparator",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Separator",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "ContextMenuShortcut",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "ContextMenuGroup",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Group",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Group>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "ContextMenuPortal",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Portal",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Portal>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "container": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "ContextMenuSub",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.Sub",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.Sub>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "ContextMenuSubContent",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.SubContent",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.SubContent>",
+        "dom": "6097c3de5a",
+        "props": {
+          "align": {},
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "loop": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {},
+          "sideOffset": {},
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      },
+      {
+        "name": "ContextMenuSubTrigger",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.SubTrigger",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.SubTrigger>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "textValue": {}
+        }
+      },
+      {
+        "name": "ContextMenuRadioGroup",
+        "kind": "component",
+        "element": "ContextMenuPrimitive.RadioGroup",
+        "base": "React.ComponentProps<typeof ContextMenuPrimitive.RadioGroup>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "onValueChange": {},
+          "value": {}
+        }
+      }
+    ],
+    "dialog": [
+      {
+        "name": "Dialog",
+        "kind": "component",
+        "element": "DialogPrimitive.Root",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "modal": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "DialogClose",
+        "kind": "component",
+        "element": "DialogPrimitive.Close",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Close>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DialogContent",
+        "kind": "component",
+        "element": "DialogPrimitive.Content",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "deferPointerDownOutside": {},
+          "forceMount": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onOpenAutoFocus": {},
+          "onPointerDownOutside": {},
+          "showCloseButton": {
+            "type": "boolean",
+            "default": "true"
+          }
+        }
+      },
+      {
+        "name": "DialogDescription",
+        "kind": "component",
+        "element": "DialogPrimitive.Description",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Description>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DialogFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "showCloseButton": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "DialogHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "DialogOverlay",
+        "kind": "component",
+        "element": "DialogPrimitive.Overlay",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Overlay>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "DialogPortal",
+        "kind": "component",
+        "element": "DialogPrimitive.Portal",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Portal>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "container": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "DialogTitle",
+        "kind": "component",
+        "element": "DialogPrimitive.Title",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Title>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DialogTrigger",
+        "kind": "component",
+        "element": "DialogPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof DialogPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      }
+    ],
+    "direction": [
+      {
+        "name": "DirectionProvider",
+        "kind": "component",
+        "element": "Direction.DirectionProvider",
+        "base": "React.ComponentProps<typeof Direction.DirectionProvider>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "dir": {},
+          "direction": {
+            "type": "React.ComponentProps<typeof Direction.DirectionProvider>[\"dir\"]"
+          }
+        }
+      },
+      {
+        "kind": "other",
+        "name": "useDirection",
+        "type": "(localDir?: Direction) => Direction"
+      }
+    ],
+    "drawer": [
+      {
+        "name": "Drawer",
+        "kind": "component",
+        "element": "DrawerPrimitive.Root",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "activeSnapPoint": {},
+          "autoFocus": {},
+          "children": {},
+          "closeThreshold": {},
+          "container": {},
+          "defaultOpen": {},
+          "direction": {},
+          "disablePreventScroll": {},
+          "dismissible": {},
+          "fadeFromIndex": {},
+          "fixed": {},
+          "handleOnly": {},
+          "modal": {},
+          "nested": {},
+          "noBodyStyles": {},
+          "onAnimationEnd": {},
+          "onClose": {},
+          "onDrag": {},
+          "onOpenChange": {},
+          "onRelease": {},
+          "open": {},
+          "preventScrollRestoration": {},
+          "repositionInputs": {},
+          "scrollLockTimeout": {},
+          "setActiveSnapPoint": {},
+          "setBackgroundColorOnScale": {},
+          "shouldScaleBackground": {},
+          "snapPoints": {},
+          "snapToSequentialPoint": {}
+        }
+      },
+      {
+        "name": "DrawerPortal",
+        "kind": "component",
+        "element": "DrawerPrimitive.Portal",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Portal>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "container": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "DrawerOverlay",
+        "kind": "component",
+        "element": "DrawerPrimitive.Overlay",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Overlay>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "DrawerTrigger",
+        "kind": "component",
+        "element": "DrawerPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DrawerClose",
+        "kind": "component",
+        "element": "DrawerPrimitive.Close",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Close>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DrawerContent",
+        "kind": "component",
+        "element": "DrawerPrimitive.Content",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "deferPointerDownOutside": {},
+          "forceMount": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onOpenAutoFocus": {},
+          "onPointerDownOutside": {}
+        }
+      },
+      {
+        "name": "DrawerHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "DrawerFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "DrawerTitle",
+        "kind": "component",
+        "element": "DrawerPrimitive.Title",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Title>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DrawerDescription",
+        "kind": "component",
+        "element": "DrawerPrimitive.Description",
+        "base": "React.ComponentProps<typeof DrawerPrimitive.Description>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      }
+    ],
+    "dropdown-menu": [
+      {
+        "name": "DropdownMenu",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Root",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "dir": {},
+          "modal": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "DropdownMenuPortal",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Portal",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Portal>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "container": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "DropdownMenuTrigger",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DropdownMenuContent",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Content",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Content>",
+        "dom": "6097c3de5a",
+        "props": {
+          "align": {
+            "default": "\"start\""
+          },
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "loop": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {},
+          "side": {},
+          "sideOffset": {
+            "default": "4"
+          },
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      },
+      {
+        "name": "DropdownMenuGroup",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Group",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Group>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DropdownMenuLabel",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Label",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Label>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "inset": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "name": "DropdownMenuItem",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Item",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Item>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onSelect": {},
+          "textValue": {},
+          "variant": {
+            "type": "\"default\" | \"destructive\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "DropdownMenuCheckboxItem",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.CheckboxItem",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "checked": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onCheckedChange": {},
+          "onSelect": {},
+          "textValue": {}
+        }
+      },
+      {
+        "name": "DropdownMenuRadioGroup",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.RadioGroup",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "onValueChange": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "DropdownMenuRadioItem",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.RadioItem",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onSelect": {},
+          "textValue": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "DropdownMenuSeparator",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Separator",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "DropdownMenuShortcut",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "DropdownMenuSub",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.Sub",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.Sub>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "DropdownMenuSubTrigger",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.SubTrigger",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "textValue": {}
+        }
+      },
+      {
+        "name": "DropdownMenuSubContent",
+        "kind": "component",
+        "element": "DropdownMenuPrimitive.SubContent",
+        "base": "React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>",
+        "dom": "6097c3de5a",
+        "props": {
+          "align": {},
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "loop": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {},
+          "sideOffset": {},
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      }
+    ],
+    "empty": [
+      {
+        "name": "Empty",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "EmptyHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "EmptyTitle",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "EmptyDescription",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"p\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "EmptyContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "EmptyMedia",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "variant": {
+            "type": "\"default\" | \"icon\"",
+            "default": "\"default\""
+          }
+        }
+      }
+    ],
+    "field": [
+      {
+        "name": "Field",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "orientation": {
+            "type": "\"horizontal\" | \"vertical\" | \"responsive\"",
+            "default": "\"vertical\""
+          }
+        }
+      },
+      {
+        "name": "FieldLabel",
+        "kind": "component",
+        "element": "Label",
+        "base": "React.ComponentProps<typeof Label>",
+        "dom": "7a8968e4dd",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "FieldDescription",
+        "kind": "component",
+        "element": "<p>",
+        "base": "React.ComponentProps<\"p\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "FieldError",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "errors": {
+            "type": "Array<{ message?: string } | undefined>"
+          }
+        }
+      },
+      {
+        "name": "FieldGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "FieldLegend",
+        "kind": "component",
+        "element": "<legend>",
+        "base": "React.ComponentProps<\"legend\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "variant": {
+            "type": "\"legend\" | \"label\"",
+            "default": "\"legend\""
+          }
+        }
+      },
+      {
+        "name": "FieldSeparator",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "021e381454",
+        "props": {
+          "children": {
+            "type": "React.ReactNode"
+          }
+        }
+      },
+      {
+        "name": "FieldSet",
+        "kind": "component",
+        "element": "<fieldset>",
+        "base": "React.ComponentProps<\"fieldset\">",
+        "dom": "5b637ac308",
+        "props": {}
+      },
+      {
+        "name": "FieldContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "FieldTitle",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "hover-card": [
+      {
+        "name": "HoverCard",
+        "kind": "component",
+        "element": "HoverCardPrimitive.Root",
+        "base": "React.ComponentProps<typeof HoverCardPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "closeDelay": {},
+          "defaultOpen": {},
+          "onOpenChange": {},
+          "open": {},
+          "openDelay": {}
+        }
+      },
+      {
+        "name": "HoverCardTrigger",
+        "kind": "component",
+        "element": "HoverCardPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof HoverCardPrimitive.Trigger>",
+        "dom": "306217993b",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "HoverCardContent",
+        "kind": "component",
+        "element": "HoverCardPrimitive.Content",
+        "base": "React.ComponentProps<typeof HoverCardPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "align": {
+            "default": "\"center\""
+          },
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {},
+          "side": {},
+          "sideOffset": {
+            "default": "4"
+          },
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      }
+    ],
+    "input": [
+      {
+        "name": "Input",
+        "kind": "component",
+        "element": "<input>",
+        "base": "React.ComponentProps<\"input\">",
+        "dom": "5dde3695ea",
+        "props": {}
+      }
+    ],
+    "input-group": [
+      {
+        "name": "InputGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "InputGroupAddon",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "align": {
+            "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+            "default": "\"inline-start\""
+          }
+        }
+      },
+      {
+        "name": "InputGroupButton",
+        "kind": "component",
+        "element": "Button",
+        "base": "Omit<React.ComponentProps<typeof Button>, \"size\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {
+            "type": "\"xs\" | \"sm\" | \"icon-xs\" | \"icon-sm\"",
+            "default": "\"xs\""
+          },
+          "variant": {
+            "default": "\"ghost\""
+          }
+        }
+      },
+      {
+        "name": "InputGroupText",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "InputGroupInput",
+        "kind": "component",
+        "element": "Input",
+        "base": "React.ComponentProps<\"input\">",
+        "dom": "5dde3695ea",
+        "props": {}
+      },
+      {
+        "name": "InputGroupTextarea",
+        "kind": "component",
+        "element": "Textarea",
+        "base": "React.ComponentProps<\"textarea\">",
+        "dom": "fb7a021609",
+        "props": {}
+      }
+    ],
+    "input-otp": [
+      {
+        "name": "InputOTP",
+        "kind": "component",
+        "element": "OTPInput",
+        "base": "React.ComponentProps<typeof OTPInput>",
+        "dom": "a5cae41ffe",
+        "props": {
+          "children": {},
+          "containerClassName": {
+            "type": "string"
+          },
+          "maxLength": {},
+          "nonce": {},
+          "noScriptCSSFallback": {},
+          "onChange": {},
+          "onComplete": {},
+          "pasteTransformer": {},
+          "pushPasswordManagerStrategy": {},
+          "render": {},
+          "textAlign": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "InputOTPGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "InputOTPSlot",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "index": {
+            "type": "number"
+          }
+        }
+      },
+      {
+        "name": "InputOTPSeparator",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "item": [
+      {
+        "name": "Item",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "size": {
+            "type": "\"default\" | \"xs\" | \"sm\"",
+            "default": "\"default\""
+          },
+          "variant": {
+            "type": "\"default\" | \"outline\" | \"muted\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "ItemMedia",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "variant": {
+            "type": "\"image\" | \"default\" | \"icon\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "ItemContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "ItemActions",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "ItemGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "ItemSeparator",
+        "kind": "component",
+        "element": "Separator",
+        "base": "React.ComponentProps<typeof Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "decorative": {},
+          "orientation": {}
+        }
+      },
+      {
+        "name": "ItemTitle",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "ItemDescription",
+        "kind": "component",
+        "element": "<p>",
+        "base": "React.ComponentProps<\"p\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "ItemHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "ItemFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "kbd": [
+      {
+        "name": "Kbd",
+        "kind": "component",
+        "element": "<kbd>",
+        "base": "React.ComponentProps<\"kbd\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "KbdGroup",
+        "kind": "component",
+        "element": "<kbd>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "label": [
+      {
+        "name": "Label",
+        "kind": "component",
+        "element": "LabelPrimitive.Root",
+        "base": "React.ComponentProps<typeof LabelPrimitive.Root>",
+        "dom": "7a8968e4dd",
+        "props": {
+          "asChild": {}
+        }
+      }
+    ],
+    "menubar": [
+      {
+        "name": "Menubar",
+        "kind": "component",
+        "element": "MenubarPrimitive.Root",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Root>",
+        "dom": "f33e968c93",
+        "props": {
+          "asChild": {},
+          "defaultValue": {},
+          "dir": {},
+          "loop": {},
+          "onValueChange": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "MenubarPortal",
+        "kind": "component",
+        "element": "MenubarPrimitive.Portal",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Portal>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "container": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "MenubarMenu",
+        "kind": "component",
+        "element": "MenubarPrimitive.Menu",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Menu>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "__scopeMenubar": {},
+          "children": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "MenubarTrigger",
+        "kind": "component",
+        "element": "MenubarPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "MenubarContent",
+        "kind": "component",
+        "element": "MenubarPrimitive.Content",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Content>",
+        "dom": "6097c3de5a",
+        "props": {
+          "align": {
+            "default": "\"start\""
+          },
+          "alignOffset": {
+            "default": "-4"
+          },
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "loop": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {},
+          "side": {},
+          "sideOffset": {
+            "default": "8"
+          },
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      },
+      {
+        "name": "MenubarGroup",
+        "kind": "component",
+        "element": "MenubarPrimitive.Group",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Group>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "MenubarSeparator",
+        "kind": "component",
+        "element": "MenubarPrimitive.Separator",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "MenubarLabel",
+        "kind": "component",
+        "element": "MenubarPrimitive.Label",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Label>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "inset": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "name": "MenubarItem",
+        "kind": "component",
+        "element": "MenubarPrimitive.Item",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Item>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onSelect": {},
+          "textValue": {},
+          "variant": {
+            "type": "\"default\" | \"destructive\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "MenubarShortcut",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "MenubarCheckboxItem",
+        "kind": "component",
+        "element": "MenubarPrimitive.CheckboxItem",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.CheckboxItem>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "checked": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onCheckedChange": {},
+          "onSelect": {},
+          "textValue": {}
+        }
+      },
+      {
+        "name": "MenubarRadioGroup",
+        "kind": "component",
+        "element": "MenubarPrimitive.RadioGroup",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.RadioGroup>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "onValueChange": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "MenubarRadioItem",
+        "kind": "component",
+        "element": "MenubarPrimitive.RadioItem",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.RadioItem>",
+        "dom": "7e43299827",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "onSelect": {},
+          "textValue": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "MenubarSub",
+        "kind": "component",
+        "element": "MenubarPrimitive.Sub",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.Sub>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "MenubarSubTrigger",
+        "kind": "component",
+        "element": "MenubarPrimitive.SubTrigger",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.SubTrigger>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "inset": {
+            "type": "boolean"
+          },
+          "textValue": {}
+        }
+      },
+      {
+        "name": "MenubarSubContent",
+        "kind": "component",
+        "element": "MenubarPrimitive.SubContent",
+        "base": "React.ComponentProps<typeof MenubarPrimitive.SubContent>",
+        "dom": "6097c3de5a",
+        "props": {
+          "align": {},
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "loop": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {},
+          "sideOffset": {},
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      }
+    ],
+    "native-select": [
+      {
+        "name": "NativeSelect",
+        "kind": "component",
+        "element": "<select>",
+        "base": "NativeSelectProps",
+        "dom": "d452ecae52",
+        "props": {
+          "size": {
+            "type": "\"sm\" | \"default\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "NativeSelectOptGroup",
+        "kind": "component",
+        "element": "<optgroup>",
+        "base": "React.ComponentProps<\"optgroup\">",
+        "dom": "ece7db12bc",
+        "props": {}
+      },
+      {
+        "name": "NativeSelectOption",
+        "kind": "component",
+        "element": "<option>",
+        "base": "React.ComponentProps<\"option\">",
+        "dom": "003738c82c",
+        "props": {}
+      }
+    ],
+    "navigation-menu": [
+      {
+        "name": "NavigationMenu",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.Root",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Root>",
+        "dom": "f33e968c93",
+        "props": {
+          "asChild": {},
+          "defaultValue": {},
+          "delayDuration": {},
+          "dir": {},
+          "onValueChange": {},
+          "orientation": {},
+          "skipDelayDuration": {},
+          "value": {},
+          "viewport": {
+            "type": "boolean",
+            "default": "true"
+          }
+        }
+      },
+      {
+        "name": "NavigationMenuList",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.List",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.List>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "NavigationMenuItem",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.Item",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Item>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "NavigationMenuContent",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.Content",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "deferPointerDownOutside": {},
+          "forceMount": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onPointerDownOutside": {}
+        }
+      },
+      {
+        "name": "NavigationMenuTrigger",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "NavigationMenuLink",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.Link",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Link>",
+        "dom": "8e431750e6",
+        "props": {
+          "active": {},
+          "asChild": {},
+          "onSelect": {}
+        }
+      },
+      {
+        "name": "NavigationMenuIndicator",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.Indicator",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "name": "NavigationMenuViewport",
+        "kind": "component",
+        "element": "NavigationMenuPrimitive.Viewport",
+        "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {}
+        }
+      },
+      {
+        "kind": "variants",
+        "name": "navigationMenuTriggerStyle"
+      }
+    ],
+    "pagination": [
+      {
+        "name": "Pagination",
+        "kind": "component",
+        "element": "<nav>",
+        "base": "React.ComponentProps<\"nav\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "PaginationContent",
+        "kind": "component",
+        "element": "<ul>",
+        "base": "React.ComponentProps<\"ul\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "PaginationEllipsis",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "PaginationItem",
+        "kind": "component",
+        "element": "<li>",
+        "base": "React.ComponentProps<\"li\">",
+        "dom": "bbf96f0437",
+        "props": {}
+      },
+      {
+        "name": "PaginationLink",
+        "kind": "component",
+        "element": "<a>",
+        "base": "PaginationLinkProps",
+        "dom": "306217993b",
+        "props": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "size": {
+            "default": "\"icon\""
+          }
+        }
+      },
+      {
+        "name": "PaginationNext",
+        "kind": "component",
+        "element": "PaginationLink",
+        "base": "React.ComponentProps<typeof PaginationLink>",
+        "dom": "306217993b",
+        "props": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "size": {},
+          "text": {
+            "type": "string",
+            "default": "\"Next\""
+          }
+        }
+      },
+      {
+        "name": "PaginationPrevious",
+        "kind": "component",
+        "element": "PaginationLink",
+        "base": "React.ComponentProps<typeof PaginationLink>",
+        "dom": "306217993b",
+        "props": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "size": {},
+          "text": {
+            "type": "string",
+            "default": "\"Previous\""
+          }
+        }
+      }
+    ],
+    "popover": [
+      {
+        "name": "Popover",
+        "kind": "component",
+        "element": "PopoverPrimitive.Root",
+        "base": "React.ComponentProps<typeof PopoverPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "modal": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "PopoverAnchor",
+        "kind": "component",
+        "element": "PopoverPrimitive.Anchor",
+        "base": "React.ComponentProps<typeof PopoverPrimitive.Anchor>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "virtualRef": {}
+        }
+      },
+      {
+        "name": "PopoverContent",
+        "kind": "component",
+        "element": "PopoverPrimitive.Content",
+        "base": "React.ComponentProps<typeof PopoverPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "align": {
+            "default": "\"center\""
+          },
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "deferPointerDownOutside": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onOpenAutoFocus": {},
+          "onPointerDownOutside": {},
+          "side": {},
+          "sideOffset": {
+            "default": "4"
+          },
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      },
+      {
+        "name": "PopoverDescription",
+        "kind": "component",
+        "element": "<p>",
+        "base": "React.ComponentProps<\"p\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "PopoverHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "PopoverTitle",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"h2\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "PopoverTrigger",
+        "kind": "component",
+        "element": "PopoverPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof PopoverPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      }
+    ],
+    "progress": [
+      {
+        "name": "Progress",
+        "kind": "component",
+        "element": "ProgressPrimitive.Root",
+        "base": "React.ComponentProps<typeof ProgressPrimitive.Root>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "getValueLabel": {},
+          "max": {},
+          "value": {}
+        }
+      }
+    ],
+    "radio-group": [
+      {
+        "name": "RadioGroup",
+        "kind": "component",
+        "element": "RadioGroupPrimitive.Root",
+        "base": "React.ComponentProps<typeof RadioGroupPrimitive.Root>",
+        "dom": "f33e968c93",
+        "props": {
+          "asChild": {},
+          "defaultValue": {},
+          "dir": {},
+          "disabled": {},
+          "form": {},
+          "loop": {},
+          "name": {},
+          "onValueChange": {},
+          "orientation": {},
+          "required": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "RadioGroupItem",
+        "kind": "component",
+        "element": "RadioGroupPrimitive.Item",
+        "base": "React.ComponentProps<typeof RadioGroupPrimitive.Item>",
+        "dom": "c262dd851c",
+        "props": {
+          "asChild": {},
+          "checked": {},
+          "required": {},
+          "value": {}
+        }
+      }
+    ],
+    "resizable": [
+      {
+        "name": "ResizableHandle",
+        "kind": "component",
+        "element": "ResizablePrimitive.Separator",
+        "base": "ResizablePrimitive.SeparatorProps",
+        "dom": "28d11cde7d",
+        "props": {
+          "className": {},
+          "disabled": {},
+          "disableDoubleClick": {},
+          "elementRef": {},
+          "id": {},
+          "preview": {},
+          "style": {},
+          "withHandle": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "name": "ResizablePanel",
+        "kind": "component",
+        "element": "ResizablePrimitive.Panel",
+        "base": "ResizablePrimitive.PanelProps",
+        "dom": "e5a08c6209",
+        "props": {
+          "className": {},
+          "collapsedSize": {},
+          "collapsedThreshold": {},
+          "collapsible": {},
+          "defaultSize": {},
+          "disabled": {},
+          "elementRef": {},
+          "groupResizeBehavior": {},
+          "id": {},
+          "maxSize": {},
+          "minSize": {},
+          "onResize": {},
+          "panelRef": {},
+          "style": {}
+        }
+      },
+      {
+        "name": "ResizablePanelGroup",
+        "kind": "component",
+        "element": "ResizablePrimitive.Group",
+        "base": "ResizablePrimitive.GroupProps",
+        "dom": "13d4aa5f15",
+        "props": {
+          "children": {},
+          "className": {},
+          "defaultLayout": {},
+          "disableCursor": {},
+          "disabled": {},
+          "elementRef": {},
+          "groupRef": {},
+          "id": {},
+          "onLayoutChange": {},
+          "onLayoutChanged": {},
+          "orientation": {},
+          "resizePreviewMode": {},
+          "resizeTargetMinimumSize": {},
+          "style": {}
+        }
+      }
+    ],
+    "scroll-area": [
+      {
+        "name": "ScrollArea",
+        "kind": "component",
+        "element": "ScrollAreaPrimitive.Root",
+        "base": "React.ComponentProps<typeof ScrollAreaPrimitive.Root>",
+        "dom": "6097c3de5a",
+        "props": {
+          "asChild": {},
+          "dir": {},
+          "scrollHideDelay": {},
+          "type": {}
+        }
+      },
+      {
+        "name": "ScrollBar",
+        "kind": "component",
+        "element": "ScrollAreaPrimitive.ScrollAreaScrollbar",
+        "base": "React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {},
+          "orientation": {
+            "default": "\"vertical\""
+          }
+        }
+      }
+    ],
+    "select": [
+      {
+        "name": "Select",
+        "kind": "component",
+        "element": "SelectPrimitive.Root",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "autoComplete": {},
+          "children": {},
+          "defaultOpen": {},
+          "defaultValue": {},
+          "dir": {},
+          "disabled": {},
+          "form": {},
+          "name": {},
+          "onOpenChange": {},
+          "onValueChange": {},
+          "open": {},
+          "required": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "SelectContent",
+        "kind": "component",
+        "element": "SelectPrimitive.Content",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "align": {
+            "default": "\"center\""
+          },
+          "alignOffset": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onPointerDownOutside": {},
+          "position": {
+            "default": "\"item-aligned\""
+          },
+          "side": {},
+          "sideOffset": {},
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      },
+      {
+        "name": "SelectGroup",
+        "kind": "component",
+        "element": "SelectPrimitive.Group",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Group>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SelectItem",
+        "kind": "component",
+        "element": "SelectPrimitive.Item",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Item>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "disabled": {},
+          "textValue": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "SelectLabel",
+        "kind": "component",
+        "element": "SelectPrimitive.Label",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Label>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SelectScrollDownButton",
+        "kind": "component",
+        "element": "SelectPrimitive.ScrollDownButton",
+        "base": "React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SelectScrollUpButton",
+        "kind": "component",
+        "element": "SelectPrimitive.ScrollUpButton",
+        "base": "React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SelectSeparator",
+        "kind": "component",
+        "element": "SelectPrimitive.Separator",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SelectTrigger",
+        "kind": "component",
+        "element": "SelectPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {
+            "type": "\"sm\" | \"default\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "SelectValue",
+        "kind": "component",
+        "element": "SelectPrimitive.Value",
+        "base": "React.ComponentProps<typeof SelectPrimitive.Value>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "placeholder": {}
+        }
+      }
+    ],
+    "separator": [
+      {
+        "name": "Separator",
+        "kind": "component",
+        "element": "SeparatorPrimitive.Root",
+        "base": "React.ComponentProps<typeof SeparatorPrimitive.Root>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "decorative": {
+            "default": "true"
+          },
+          "orientation": {
+            "default": "\"horizontal\""
+          }
+        }
+      }
+    ],
+    "sheet": [
+      {
+        "name": "Sheet",
+        "kind": "component",
+        "element": "SheetPrimitive.Root",
+        "base": "React.ComponentProps<typeof SheetPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "modal": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "SheetTrigger",
+        "kind": "component",
+        "element": "SheetPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof SheetPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SheetClose",
+        "kind": "component",
+        "element": "SheetPrimitive.Close",
+        "base": "React.ComponentProps<typeof SheetPrimitive.Close>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SheetContent",
+        "kind": "component",
+        "element": "SheetPrimitive.Content",
+        "base": "React.ComponentProps<typeof SheetPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "deferPointerDownOutside": {},
+          "forceMount": {},
+          "onCloseAutoFocus": {},
+          "onEscapeKeyDown": {},
+          "onFocusOutside": {},
+          "onInteractOutside": {},
+          "onOpenAutoFocus": {},
+          "onPointerDownOutside": {},
+          "showCloseButton": {
+            "type": "boolean",
+            "default": "true"
+          },
+          "side": {
+            "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+            "default": "\"right\""
+          }
+        }
+      },
+      {
+        "name": "SheetHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SheetFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SheetTitle",
+        "kind": "component",
+        "element": "SheetPrimitive.Title",
+        "base": "React.ComponentProps<typeof SheetPrimitive.Title>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      },
+      {
+        "name": "SheetDescription",
+        "kind": "component",
+        "element": "SheetPrimitive.Description",
+        "base": "React.ComponentProps<typeof SheetPrimitive.Description>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {}
+        }
+      }
+    ],
+    "sidebar": [
+      {
+        "name": "Sidebar",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "collapsible": {
+            "type": "\"offcanvas\" | \"icon\" | \"none\"",
+            "default": "\"offcanvas\""
+          },
+          "side": {
+            "type": "\"left\" | \"right\"",
+            "default": "\"left\""
+          },
+          "variant": {
+            "type": "\"sidebar\" | \"floating\" | \"inset\"",
+            "default": "\"sidebar\""
+          }
+        }
+      },
+      {
+        "name": "SidebarContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarGroupAction",
+        "kind": "component",
+        "element": "<button>",
+        "base": "React.ComponentProps<\"button\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "SidebarGroupContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarGroupLabel",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "SidebarHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarInput",
+        "kind": "component",
+        "element": "Input",
+        "base": "React.ComponentProps<typeof Input>",
+        "dom": "5dde3695ea",
+        "props": {}
+      },
+      {
+        "name": "SidebarInset",
+        "kind": "component",
+        "element": "<main>",
+        "base": "React.ComponentProps<\"main\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarMenu",
+        "kind": "component",
+        "element": "<ul>",
+        "base": "React.ComponentProps<\"ul\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarMenuAction",
+        "kind": "component",
+        "element": "<button>",
+        "base": "React.ComponentProps<\"button\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "showOnHover": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "SidebarMenuBadge",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarMenuButton",
+        "kind": "component",
+        "element": "<button>",
+        "base": "React.ComponentProps<\"button\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "isActive": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "size": {
+            "type": "\"default\" | \"sm\" | \"lg\"",
+            "default": "\"default\""
+          },
+          "tooltip": {
+            "type": "string | React.ComponentProps<typeof TooltipContent>"
+          },
+          "variant": {
+            "type": "\"default\" | \"outline\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "SidebarMenuItem",
+        "kind": "component",
+        "element": "<li>",
+        "base": "React.ComponentProps<\"li\">",
+        "dom": "bbf96f0437",
+        "props": {}
+      },
+      {
+        "name": "SidebarMenuSkeleton",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "showIcon": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "SidebarMenuSub",
+        "kind": "component",
+        "element": "<ul>",
+        "base": "React.ComponentProps<\"ul\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "SidebarMenuSubButton",
+        "kind": "component",
+        "element": "<a>",
+        "base": "React.ComponentProps<\"a\">",
+        "dom": "306217993b",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "isActive": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "size": {
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\""
+          }
+        }
+      },
+      {
+        "name": "SidebarMenuSubItem",
+        "kind": "component",
+        "element": "<li>",
+        "base": "React.ComponentProps<\"li\">",
+        "dom": "bbf96f0437",
+        "props": {}
+      },
+      {
+        "name": "SidebarProvider",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "defaultOpen": {
+            "type": "boolean",
+            "default": "true"
+          },
+          "onOpenChange": {
+            "type": "(open: boolean) => void"
+          },
+          "open": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "name": "SidebarRail",
+        "kind": "component",
+        "element": "<button>",
+        "base": "React.ComponentProps<\"button\">",
+        "dom": "5df36366d3",
+        "props": {}
+      },
+      {
+        "name": "SidebarSeparator",
+        "kind": "component",
+        "element": "Separator",
+        "base": "React.ComponentProps<typeof Separator>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "decorative": {},
+          "orientation": {}
+        }
+      },
+      {
+        "name": "SidebarTrigger",
+        "kind": "component",
+        "element": "Button",
+        "base": "React.ComponentProps<typeof Button>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {},
+          "variant": {}
+        }
+      },
+      {
+        "name": "useSidebar",
+        "kind": "hook",
+        "signature": "useSidebar(): SidebarContextProps"
+      }
+    ],
+    "skeleton": [
+      {
+        "name": "Skeleton",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "slider": [
+      {
+        "name": "Slider",
+        "kind": "component",
+        "element": "SliderPrimitive.Root",
+        "base": "React.ComponentProps<typeof SliderPrimitive.Root>",
+        "dom": "f33e968c93",
+        "props": {
+          "asChild": {},
+          "defaultValue": {},
+          "dir": {},
+          "disabled": {},
+          "form": {},
+          "inverted": {},
+          "max": {
+            "default": "100"
+          },
+          "min": {
+            "default": "0"
+          },
+          "minStepsBetweenThumbs": {},
+          "name": {},
+          "onValueChange": {},
+          "onValueCommit": {},
+          "orientation": {},
+          "step": {},
+          "value": {}
+        }
+      }
+    ],
+    "sonner": [
+      {
+        "name": "Toaster",
+        "kind": "component",
+        "element": "Sonner",
+        "base": "ToasterProps",
+        "dom": "da39a3ee5e",
+        "props": {
+          "className": {},
+          "closeButton": {},
+          "containerAriaLabel": {},
+          "customAriaLabel": {},
+          "dir": {},
+          "duration": {},
+          "expand": {},
+          "gap": {},
+          "hotkey": {},
+          "icons": {},
+          "id": {},
+          "invert": {},
+          "mobileOffset": {},
+          "offset": {},
+          "position": {},
+          "richColors": {},
+          "style": {},
+          "swipeDirections": {},
+          "theme": {},
+          "toastOptions": {},
+          "visibleToasts": {}
+        }
+      }
+    ],
+    "spinner": [
+      {
+        "name": "Spinner",
+        "kind": "component",
+        "element": "IconPlaceholder",
+        "base": "React.ComponentProps<\"svg\">",
+        "dom": "60536a2c61",
+        "props": {}
+      }
+    ],
+    "switch": [
+      {
+        "name": "Switch",
+        "kind": "component",
+        "element": "SwitchPrimitive.Root",
+        "base": "React.ComponentProps<typeof SwitchPrimitive.Root>",
+        "dom": "c1399507fb",
+        "props": {
+          "asChild": {},
+          "checked": {},
+          "defaultChecked": {},
+          "onCheckedChange": {},
+          "required": {},
+          "size": {
+            "type": "\"sm\" | \"default\"",
+            "default": "\"default\""
+          }
+        }
+      }
+    ],
+    "table": [
+      {
+        "name": "Table",
+        "kind": "component",
+        "element": "<table>",
+        "base": "React.ComponentProps<\"table\">",
+        "dom": "2641d43839",
+        "props": {}
+      },
+      {
+        "name": "TableHeader",
+        "kind": "component",
+        "element": "<thead>",
+        "base": "React.ComponentProps<\"thead\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TableBody",
+        "kind": "component",
+        "element": "<tbody>",
+        "base": "React.ComponentProps<\"tbody\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TableFooter",
+        "kind": "component",
+        "element": "<tfoot>",
+        "base": "React.ComponentProps<\"tfoot\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TableHead",
+        "kind": "component",
+        "element": "<th>",
+        "base": "React.ComponentProps<\"th\">",
+        "dom": "fac6311b21",
+        "props": {}
+      },
+      {
+        "name": "TableRow",
+        "kind": "component",
+        "element": "<tr>",
+        "base": "React.ComponentProps<\"tr\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TableCell",
+        "kind": "component",
+        "element": "<td>",
+        "base": "React.ComponentProps<\"td\">",
+        "dom": "19b158d26a",
+        "props": {}
+      },
+      {
+        "name": "TableCaption",
+        "kind": "component",
+        "element": "<caption>",
+        "base": "React.ComponentProps<\"caption\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "tabs": [
+      {
+        "name": "Tabs",
+        "kind": "component",
+        "element": "TabsPrimitive.Root",
+        "base": "React.ComponentProps<typeof TabsPrimitive.Root>",
+        "dom": "f33e968c93",
+        "props": {
+          "activationMode": {},
+          "asChild": {},
+          "defaultValue": {},
+          "dir": {},
+          "onValueChange": {},
+          "orientation": {
+            "default": "\"horizontal\""
+          },
+          "value": {}
+        }
+      },
+      {
+        "name": "TabsList",
+        "kind": "component",
+        "element": "TabsPrimitive.List",
+        "base": "React.ComponentProps<typeof TabsPrimitive.List>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "loop": {},
+          "variant": {
+            "type": "\"line\" | \"default\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "TabsTrigger",
+        "kind": "component",
+        "element": "TabsPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof TabsPrimitive.Trigger>",
+        "dom": "2efd361f24",
+        "props": {
+          "asChild": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "TabsContent",
+        "kind": "component",
+        "element": "TabsPrimitive.Content",
+        "base": "React.ComponentProps<typeof TabsPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {},
+          "forceMount": {},
+          "value": {}
+        }
+      },
+      {
+        "kind": "variants",
+        "name": "tabsListVariants"
+      }
+    ],
+    "textarea": [
+      {
+        "name": "Textarea",
+        "kind": "component",
+        "element": "<textarea>",
+        "base": "React.ComponentProps<\"textarea\">",
+        "dom": "fb7a021609",
+        "props": {}
+      }
+    ],
+    "toggle": [
+      {
+        "name": "Toggle",
+        "kind": "component",
+        "element": "TogglePrimitive.Root",
+        "base": "React.ComponentProps<typeof TogglePrimitive.Root>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "defaultPressed": {},
+          "onPressedChange": {},
+          "pressed": {},
+          "size": {
+            "type": "\"default\" | \"sm\" | \"lg\"",
+            "default": "\"default\""
+          },
+          "variant": {
+            "type": "\"default\" | \"outline\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "kind": "variants",
+        "name": "toggleVariants"
+      }
+    ],
+    "toggle-group": [
+      {
+        "name": "ToggleGroup",
+        "kind": "component",
+        "element": "ToggleGroupPrimitive.Root",
+        "base": "React.ComponentProps<typeof ToggleGroupPrimitive.Root>",
+        "dom": "f33e968c93",
+        "props": {
+          "asChild": {},
+          "defaultValue": {},
+          "dir": {},
+          "disabled": {},
+          "loop": {},
+          "onValueChange": {},
+          "orientation": {
+            "type": "\"horizontal\" | \"vertical\"",
+            "default": "\"horizontal\""
+          },
+          "rovingFocus": {},
+          "size": {},
+          "spacing": {
+            "type": "number",
+            "default": "2"
+          },
+          "type": {},
+          "value": {},
+          "variant": {}
+        }
+      },
+      {
+        "name": "ToggleGroupItem",
+        "kind": "component",
+        "element": "ToggleGroupPrimitive.Item",
+        "base": "React.ComponentProps<typeof ToggleGroupPrimitive.Item>",
+        "dom": "2efd361f24",
+        "props": {
+          "asChild": {},
+          "size": {
+            "default": "\"default\""
+          },
+          "value": {},
+          "variant": {
+            "default": "\"default\""
+          }
+        }
+      }
+    ],
+    "tooltip": [
+      {
+        "name": "Tooltip",
+        "kind": "component",
+        "element": "TooltipPrimitive.Root",
+        "base": "React.ComponentProps<typeof TooltipPrimitive.Root>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "defaultOpen": {},
+          "delayDuration": {},
+          "disableHoverableContent": {},
+          "onOpenChange": {},
+          "open": {}
+        }
+      },
+      {
+        "name": "TooltipContent",
+        "kind": "component",
+        "element": "TooltipPrimitive.Content",
+        "base": "React.ComponentProps<typeof TooltipPrimitive.Content>",
+        "dom": "1a0a77747a",
+        "props": {
+          "align": {},
+          "alignOffset": {},
+          "aria-label": {},
+          "arrowPadding": {},
+          "asChild": {},
+          "avoidCollisions": {},
+          "collisionBoundary": {},
+          "collisionPadding": {},
+          "forceMount": {},
+          "hideWhenDetached": {},
+          "onEscapeKeyDown": {},
+          "onPointerDownOutside": {},
+          "side": {},
+          "sideOffset": {
+            "default": "0"
+          },
+          "sticky": {},
+          "updatePositionStrategy": {}
+        }
+      },
+      {
+        "name": "TooltipProvider",
+        "kind": "component",
+        "element": "TooltipPrimitive.Provider",
+        "base": "React.ComponentProps<typeof TooltipPrimitive.Provider>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "children": {},
+          "delayDuration": {
+            "default": "0"
+          },
+          "disableHoverableContent": {},
+          "skipDelayDuration": {}
+        }
+      },
+      {
+        "name": "TooltipTrigger",
+        "kind": "component",
+        "element": "TooltipPrimitive.Trigger",
+        "base": "React.ComponentProps<typeof TooltipPrimitive.Trigger>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {}
+        }
+      }
+    ]
+  },
+  "absent": [
+    "heading",
+    "illustration",
+    "logo",
+    "password-input"
+  ]
+}

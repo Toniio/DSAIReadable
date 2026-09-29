@@ -193,6 +193,7 @@ const inventory: Array<{
   name: string
   code_path: string
   status: string
+  shadcn: { item: string | null; divergences: JsonObject[] }
 }> = dsIndex.inventory
 
 const semanticTokens = readJSON("tokens/semantic.json")
@@ -381,6 +382,9 @@ function generateComponentSpecs() {
       accessibility,
       code_example: codeExample,
       cross_references: crossReferences,
+      // How its API departs from shadcn/ui's, the API models already know
+      // (design-system.index.json, checked by scripts/lint-shadcn-api.ts).
+      shadcn: inventory.find((c) => c.name === name)?.shadcn ?? null,
     }
   }
 

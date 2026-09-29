@@ -161,7 +161,7 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Component spec",
       description:
-        'Returns the spec of one component. "concise" (default): role, MUST / MUST NOT constraints, exported names, cross-references. "detailed": the full spec — usage, anatomy, tokens, props, states, accessibility (ARIA pattern, keyboard, accessible name, known pitfalls), code example. The full spec is also the resource ds://component/{name}/spec',
+        'Returns the spec of one component. "concise" (default): role, MUST / MUST NOT constraints, exported names, cross-references, and how its API departs from shadcn/ui (shadcn: the registry item it derives from, and each divergence — added, removed, renamed or changed — with the reason; write the shadcn/ui API everywhere else). "detailed": the full spec — usage, anatomy, tokens, props, states, accessibility (ARIA pattern, keyboard, accessible name, known pitfalls), code example. The full spec is also the resource ds://component/{name}/spec',
       inputSchema: {
         component_name: z
           .string()

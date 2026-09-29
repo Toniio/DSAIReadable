@@ -27,6 +27,7 @@ dsaireadable/
 ├── registry.json               # shadcn registry — generated
 ├── design-system.index.json    # Machine-readable inventory of the design system
 ├── design-system.schema.json   # JSON Schema that validates the index
+├── shadcn-api.baseline.json    # The upstream shadcn/ui API the components are checked against — generated
 ├── llms.txt                    # Documentation map for agents (llms.txt format) — generated
 └── .husky/                     # Git hooks: pre-commit, commit-msg, pre-push
 ```
@@ -172,13 +173,14 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Index — `npm run index:validate`
 
-| Script                | npm command       | Role                                                                                           |
-| --------------------- | ----------------- | ---------------------------------------------------------------------------------------------- |
-| `validate-index.ts`   | `index:schema`    | `design-system.index.json` matches its JSON Schema                                             |
-| `lint-sizes.ts`       | `index:sizes`     | Inventory sizes = code sizes = spec sizes                                                      |
-| `lint-data-slot.ts`   | `index:data-slot` | Every component exposes a `data-slot`                                                          |
-| `lint-ui-strings.ts`  | `index:strings`   | Default accessible names (aria-label, sr-only) come from `lib/ui-strings.ts`, never hard-coded |
-| `lint-props-types.ts` | `index:props`     | Every exported component exports the type of its props                                         |
+| Script                | npm command                                                   | Role                                                                                            |
+| --------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `validate-index.ts`   | `index:schema`                                                | `design-system.index.json` matches its JSON Schema                                              |
+| `lint-sizes.ts`       | `index:sizes`                                                 | Inventory sizes = code sizes = spec sizes                                                       |
+| `lint-data-slot.ts`   | `index:data-slot`                                             | Every component exposes a `data-slot`                                                           |
+| `lint-ui-strings.ts`  | `index:strings`                                               | Default accessible names (aria-label, sr-only) come from `lib/ui-strings.ts`, never hard-coded  |
+| `lint-props-types.ts` | `index:props`                                                 | Every exported component exports the type of its props                                          |
+| `lint-shadcn-api.ts`  | `index:shadcn` (`shadcn:baseline` refetches the upstream API) | Every divergence from the shadcn/ui API is declared in the index, and every declaration is real |
 
 ### Registry
 
@@ -285,24 +287,24 @@ registry is **consumable**, not just consistent.
 
 ## Root configuration files
 
-| File                        | Role                                                                                                                                                                  |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `design-system.index.json`  | Machine-readable inventory: lists every component (`code_path`, status), the composition rules, the glossary. Read by the MCP scripts and by the registry generation. |
-| `design-system.schema.json` | JSON Schema that validates the structure of `design-system.index.json`                                                                                                |
-| `components.json`           | shadcn CLI config: `radix-lyra` style, `mist` base color, Phosphor icons, alias paths                                                                                 |
-| `tokens.css`                | The tokens' CSS variables (imported by `globals.css`)                                                                                                                 |
-| `next.config.mjs`           | Standard Next.js config                                                                                                                                               |
-| `tsconfig.json`             | Strict TypeScript for the app; `scripts/` and `mcp-server/` have their own projects                                                                                   |
-| `eslint.config.mjs`         | ESLint: Next.js rules, and `better-tailwindcss`, which rejects classes outside the design system and `opacity-N` on a disabled state                                  |
-| `lint-staged.config.mjs`    | Pre-commit hook: Prettier and ESLint on the staged files, `typecheck:all`                                                                                             |
-| `commitlint.config.mjs`     | Commit-msg hook: Conventional Commits                                                                                                                                 |
-| `tsconfig.scripts.json`     | The TypeScript project of `scripts/`                                                                                                                                  |
-| `registry.json`             | shadcn registry — generated by `npm run registry:build`                                                                                                               |
-| `llms.txt`                  | Documentation map for agents in the [llms.txt](https://llmstxt.org/) format — generated by `npm run docs:llms`, checked by `specs:validate`                           |
-| `CHANGELOG.md`              | Notable changes, in the Keep a Changelog format; a PR that changes behavior adds its line under **Unreleased**                                                        |
-| `SECURITY.md`               | How to report a vulnerability privately, and what is in scope                                                                                                         |
-| `vitest.config.ts`          | Vitest for the component tests: jsdom, the `@/` alias, `tests/setup.ts`                                                                                               |
-| `postcss.config.mjs`        | PostCSS with `@tailwindcss/postcss`                                                                                                                                   |
+| File                        | Role                                                                                                                                                                                              |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `design-system.index.json`  | Machine-readable inventory: lists every component (`code_path`, status, divergences from shadcn/ui), the composition rules, the glossary. Read by the MCP scripts and by the registry generation. |
+| `design-system.schema.json` | JSON Schema that validates the structure of `design-system.index.json`                                                                                                                            |
+| `components.json`           | shadcn CLI config: `radix-lyra` style, `mist` base color, Phosphor icons, alias paths                                                                                                             |
+| `tokens.css`                | The tokens' CSS variables (imported by `globals.css`)                                                                                                                                             |
+| `next.config.mjs`           | Standard Next.js config                                                                                                                                                                           |
+| `tsconfig.json`             | Strict TypeScript for the app; `scripts/` and `mcp-server/` have their own projects                                                                                                               |
+| `eslint.config.mjs`         | ESLint: Next.js rules, and `better-tailwindcss`, which rejects classes outside the design system and `opacity-N` on a disabled state                                                              |
+| `lint-staged.config.mjs`    | Pre-commit hook: Prettier and ESLint on the staged files, `typecheck:all`                                                                                                                         |
+| `commitlint.config.mjs`     | Commit-msg hook: Conventional Commits                                                                                                                                                             |
+| `tsconfig.scripts.json`     | The TypeScript project of `scripts/`                                                                                                                                                              |
+| `registry.json`             | shadcn registry — generated by `npm run registry:build`                                                                                                                                           |
+| `llms.txt`                  | Documentation map for agents in the [llms.txt](https://llmstxt.org/) format — generated by `npm run docs:llms`, checked by `specs:validate`                                                       |
+| `CHANGELOG.md`              | Notable changes, in the Keep a Changelog format; a PR that changes behavior adds its line under **Unreleased**                                                                                    |
+| `SECURITY.md`               | How to report a vulnerability privately, and what is in scope                                                                                                                                     |
+| `vitest.config.ts`          | Vitest for the component tests: jsdom, the `@/` alias, `tests/setup.ts`                                                                                                                           |
+| `postcss.config.mjs`        | PostCSS with `@tailwindcss/postcss`                                                                                                                                                               |
 
 ---
 

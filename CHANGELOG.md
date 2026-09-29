@@ -13,6 +13,18 @@ section that fits.
 
 ### Added
 
+- The shadcn/ui API is the contract (AGENTS.md § 1): `npm run index:shadcn`, in
+  `index:validate`, compares every component with the upstream API
+  (`shadcn-api.baseline.json`, refetched by `npm run shadcn:baseline`) and
+  requires each divergence to be declared in `design-system.index.json`
+  (`shadcn.divergences`). `get_component_specs` serves them, in the concise
+  answer too. 55 components derive from shadcn/ui with 26 declared divergences:
+  20 added props (translatable accessible names, heading levels, slider thumb
+  names), one renamed value (`SidebarMenuSubButton` `size="md"` is
+  `"default"`, following the size scale), and five changed exports
+  (`EmptyTitle` and `PopoverTitle` render a heading; `EmptyDescription` and
+  `KbdGroup` type their props for the element they render). 4 components are
+  the design system's own.
 - `npm run knip`, in `npm run check` and the CI `lint` job: no unused file,
   export or dependency in the app or in `mcp-server/`. The registry items are
   its entry points, since consumers install them even when the demo app does
@@ -64,6 +76,10 @@ section that fits.
 
 ### Changed
 
+- ToggleGroup: the items are spaced out by default (`spacing` 2, shadcn/ui's
+  default); pass `spacing={0}` for a segmented control with merged borders.
+- Combobox: `Combobox` is Base UI's `Combobox.Root`, as in shadcn/ui, so it
+  takes the root's third type parameter, `Item`.
 - The design system's stylesheet moved out of the demo app:
   `app/globals.css` → `styles/globals.css` (the `@theme` bridge, and the
   `css` entry of `components.json`), and the `next/font` typefaces from

@@ -22,7 +22,7 @@
       "description": "Exhaustive list of all components in the codebase.",
       "items": {
         "type": "object",
-        "required": ["name", "code_path", "status"],
+        "required": ["name", "code_path", "status", "shadcn"],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -54,6 +54,55 @@
           "status": {
             "type": "string",
             "enum": ["stable", "beta", "deprecated"]
+          },
+          "shadcn": {
+            "type": "object",
+            "description": "How the component's API departs from shadcn/ui's, the API models already know (AGENTS.md § 1: the shadcn/ui API is the contract, a divergence is additive and declared). Enforced against the code and shadcn-api.baseline.json by scripts/lint-shadcn-api.ts: every divergence is listed, and every listed one exists.",
+            "required": ["item", "divergences"],
+            "additionalProperties": false,
+            "properties": {
+              "item": {
+                "type": ["string", "null"],
+                "description": "The shadcn/ui registry item it derives from, in the style of components.json; null for a component shadcn/ui does not have."
+              },
+              "divergences": {
+                "type": "array",
+                "description": "Empty when the API is shadcn/ui's. A component outside shadcn/ui lists one entry, { type: added } with no export.",
+                "items": {
+                  "type": "object",
+                  "required": ["type", "note"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "export": {
+                      "type": "string",
+                      "description": "The export it concerns; absent for the whole component."
+                    },
+                    "prop": {
+                      "type": "string",
+                      "description": "The prop it concerns; absent for the export itself."
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "The value of a union prop it concerns (size=\"default\" → default)."
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": ["added", "removed", "renamed", "changed"],
+                      "description": "added: shadcn/ui does not have it. removed: shadcn/ui has it, this component does not. renamed: this is shadcn/ui's upstream under another name. changed: same name, another element, props type, type or default (upstream says which)."
+                    },
+                    "upstream": {
+                      "type": "string",
+                      "description": "What shadcn/ui has: the former name (renamed); the rendered element, the props type, the prop's type, or its default written = value (changed)."
+                    },
+                    "note": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Why the design system departs from shadcn/ui, and what to write instead."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

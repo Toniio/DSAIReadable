@@ -65,14 +65,32 @@ Most of what an agent reads is generated: change the source, run its command,
 and commit both. CI fails on a generated file that is out of step with its
 source.
 
-| To change                                      | Edit                                                          | Then run                                                              |
-| ---------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------- |
-| A token value or decision                      | `tokens/*.json`                                               | `npm run tokens:build && npm run docs:tokens`                         |
-| A component                                    | `components/ui/<component>.tsx`, after reading its spec       | `npm run specs:variants && npm run specs:tokens && npm run specs:api` |
-| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections | `npm run docs:llms` when the Role changed                             |
-| A choice between sibling components            | `composition_rules` in `design-system.index.json`             | `npm run specs:choices`                                               |
-| Anything the MCP server serves                 | its source above                                              | `npm run generate-context`                                            |
-| A registry item                                | the component or `registry/`                                  | `npm run registry:build`                                              |
+| To change                                      | Edit                                                                             | Then run                                                              |
+| ---------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| A token value or decision                      | `tokens/*.json`                                                                  | `npm run tokens:build && npm run docs:tokens`                         |
+| A component                                    | `components/ui/<component>.tsx`, after reading its spec                          | `npm run specs:variants && npm run specs:tokens && npm run specs:api` |
+| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections                    | `npm run docs:llms` when the Role changed                             |
+| A choice between sibling components            | `composition_rules` in `design-system.index.json`                                | `npm run specs:choices`                                               |
+| Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                            |
+| A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                              |
+| A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                |
+
+### The shadcn/ui API is the contract
+
+Models already know the shadcn/ui API: it is the surface an agent gets right
+without being told. Keep it:
+
+- **Add, do not change.** A new optional prop, a new export or a new component
+  is fine. Renaming or removing a prop, an export or a union value, changing a
+  default or the element a component renders takes a reason.
+- **Declare every divergence** in the component's `shadcn.divergences` entry of
+  `design-system.index.json`: what differs (`export`, `prop`, `value`), how
+  (`added`, `removed`, `renamed`, `changed`), what shadcn/ui has (`upstream`)
+  and why (`note`). The MCP server serves it with the component's spec.
+- `npm run index:shadcn` compares each component with `shadcn-api.baseline.json`,
+  the upstream API extracted from the shadcn/ui registry, and prints the entry
+  to add for an undeclared divergence. To follow a newer shadcn/ui, run
+  `npm run shadcn:baseline` (network) and review the diff.
 
 The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-areas-not-to-touch-without-an-explicit-instruction).
 
