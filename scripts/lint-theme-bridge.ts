@@ -38,6 +38,8 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { createRequire } from "node:module"
 
+import { FONTS } from "./lib/next-fonts.js"
+
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
 /**
@@ -123,14 +125,14 @@ function themeInlineBody(css: string): string {
 }
 
 const globals = stripComments(
-  readFileSync(resolve(ROOT, "app/globals.css"), "utf-8")
+  readFileSync(resolve(ROOT, "styles/globals.css"), "utf-8")
 )
 const tokens = readFileSync(resolve(ROOT, "tokens.css"), "utf-8")
-const layout = readFileSync(resolve(ROOT, "app/layout.tsx"), "utf-8")
+const fonts = readFileSync(resolve(ROOT, FONTS), "utf-8")
 
 // next/font injects its variables on <html>, outside any cascade layer.
 const fontVars = new Set(
-  [...layout.matchAll(/variable:\s*["'](--[\w-]+)["']/g)].map((m) => m[1])
+  [...fonts.matchAll(/variable:\s*["'](--[\w-]+)["']/g)].map((m) => m[1])
 )
 
 const providers = new Set([...declaredVars(tokens), ...fontVars])

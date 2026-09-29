@@ -3888,7 +3888,7 @@
       "value": {
         "light": "Geist, sans-serif"
       },
-      "description": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in app/layout.tsx under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens).",
+      "description": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in lib/fonts.ts under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens).",
       "docs": {
         "do": "Keep it for `Kbd` keys and long editorial content (`font-sans`).",
         "dont": "Do not use it for the interface: all UI text is set in `font-mono`."
@@ -3907,10 +3907,10 @@
       "value": {
         "light": "JetBrains Mono, monospace"
       },
-      "description": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in app/layout.tsx under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens).",
+      "description": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in lib/fonts.ts under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens).",
       "docs": {
         "do": "The default typeface of every UI component, set on `<html>`.",
-        "dont": "Do not change the typeface here alone: it is loaded by `next/font` in `app/layout.tsx`, which `tokens:lint-fonts` checks against this token."
+        "dont": "Do not change the typeface here alone: it is loaded by `next/font` in `lib/fonts.ts`, which `tokens:lint-fonts` checks against this token."
       }
     },
     {

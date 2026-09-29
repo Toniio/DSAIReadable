@@ -53,6 +53,10 @@ section that fits.
 
 ### Changed
 
+- The design system's stylesheet moved out of the demo app:
+  `app/globals.css` → `styles/globals.css` (the `@theme` bridge, and the
+  `css` entry of `components.json`), and the `next/font` typefaces from
+  `app/layout.tsx` to `lib/fonts.ts`. `app/` now holds test pages only.
 - **Breaking**: `UI_STRINGS.combobox.remove` is a function of the item,
   `remove("Apple")` → `"Remove Apple"`; `Combobox` no longer passes a
   `data-slot` to a Root that renders no element ([#51](https://github.com/Toniio/DSAIReadable/pull/51)).

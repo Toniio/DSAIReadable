@@ -11,7 +11,7 @@
  *
  * Each string of the component's file, plus the value of each constant it
  * imports from `@/lib/*`, is split into class candidates. Tailwind resolves
- * every candidate against app/globals.css — the same design system the build
+ * every candidate against styles/globals.css — the same design system the build
  * uses — and the `var(--…)` its CSS reads is looked up in tokens.manifest.json.
  * Because the bridge is `@theme inline`, a class resolves straight to the
  * semantic token: `bg-primary` → `--color-action-background-default`. A
@@ -65,8 +65,8 @@ function semanticToken(cssVar: string): string | undefined {
 }
 
 const designSystem = await __unstable__loadDesignSystem(
-  readFileSync(resolve(ROOT, "app/globals.css"), "utf-8"),
-  { base: resolve(ROOT, "app") }
+  readFileSync(resolve(ROOT, "styles/globals.css"), "utf-8"),
+  { base: resolve(ROOT, "styles") }
 )
 
 const VAR = /var\((--[\w-]+)/g

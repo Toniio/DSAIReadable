@@ -588,6 +588,7 @@ async function main() {
     "app/**/*.{css,scss,ts,tsx}",
     "hooks/**/*.{css,scss,ts,tsx}",
     "lib/**/*.{css,scss,ts,tsx}",
+    "styles/**/*.{css,scss,ts,tsx}",
   ]
 
   // `mcp-server/**` is deliberately out of scope: it emits no CSS. The hex

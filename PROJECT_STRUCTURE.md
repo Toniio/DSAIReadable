@@ -12,9 +12,10 @@ This repository is a **code-first design system**: the React components, the tok
 
 ```
 dsaireadable/
-├── app/                        # Next.js app (demo): home, sign-in (4 layouts), banking
+├── app/                        # Test pages (demo): home, sign-in (4 layouts), banking — not part of the design system
 ├── components/ui/              # The design system's 59 React components
-├── lib/                        # Shared modules: utils, focus, ui-strings, overlay
+├── styles/globals.css          # Tailwind entry point: the @theme bridge from the tokens to the classes
+├── lib/                        # Shared modules: utils, focus, ui-strings, overlay, fonts
 ├── hooks/                      # Shared hooks (use-mobile)
 ├── tokens/                     # Source of truth for the tokens (DTCG JSON)
 ├── tokens.css                  # Generated CSS custom properties — do not edit
@@ -32,21 +33,24 @@ dsaireadable/
 
 ---
 
-## `app/` — Next.js application
+## `styles/globals.css` and `lib/fonts.ts` — what every page loads
 
-The demo's entry point. No business screens — it only exists to check that the components fit together.
+`styles/globals.css` imports Tailwind and `tokens.css`, removes Tailwind's default colors, radii and shadows, and its `@theme inline` bridge turns the tokens into Tailwind classes. `lib/fonts.ts` loads the typefaces with `next/font` (Geist, JetBrains Mono) under the `--font-*` variables the `typography.font-family.*` tokens describe. Neither lives in `app/`: the tooling reads them whether the demo pages exist or not.
 
-| File                              | Role                                                                                                                     |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `app/layout.tsx`                  | Root layout: loads the fonts (Geist, JetBrains Mono), wraps the app in `ThemeProvider` (dark mode) and `TooltipProvider` |
-| `app/page.tsx`                    | Minimal demo page — renders a `<Button>` to check that the setup works                                                   |
-| `app/globals.css`                 | Global CSS: imports Tailwind and `tokens.css`; the `@theme inline` bridge turns the tokens into Tailwind classes         |
-| `app/banking/page.tsx`            | Banking demo screen: cards, tabs, a transactions table, budget bars (`Progress`)                                         |
-| `app/login/page.tsx`              | Index of the 4 sign-in layouts (links to the sub-routes)                                                                 |
-| `app/login/split-screen/page.tsx` | Split-screen sign-in: illustration on the left, form on the right                                                        |
-| `app/login/centered/page.tsx`     | Centered sign-in: the form in a `<Card>` centered on the page                                                            |
-| `app/login/fullscreen/page.tsx`   | Full-screen sign-in: the form fills the window's height                                                                  |
-| `app/login/secure/page.tsx`       | Secure sign-in: dark background with a dot pattern, back link                                                            |
+## `app/` — Test pages
+
+The demo pages. No business screens — they only exist to check that the components fit together, and are not part of the design system.
+
+| File                              | Role                                                                                                                                                         |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `app/layout.tsx`                  | Root layout: imports `styles/globals.css`, puts the `lib/fonts.ts` variables on `<html>`, wraps the app in `ThemeProvider` (dark mode) and `TooltipProvider` |
+| `app/page.tsx`                    | Minimal demo page — renders a `<Button>` to check that the setup works                                                                                       |
+| `app/banking/page.tsx`            | Banking demo screen: cards, tabs, a transactions table, budget bars (`Progress`)                                                                             |
+| `app/login/page.tsx`              | Index of the 4 sign-in layouts (links to the sub-routes)                                                                                                     |
+| `app/login/split-screen/page.tsx` | Split-screen sign-in: illustration on the left, form on the right                                                                                            |
+| `app/login/centered/page.tsx`     | Centered sign-in: the form in a `<Card>` centered on the page                                                                                                |
+| `app/login/fullscreen/page.tsx`   | Full-screen sign-in: the form fills the window's height                                                                                                      |
+| `app/login/secure/page.tsx`       | Secure sign-in: dark background with a dot pattern, back link                                                                                                |
 
 ---
 
@@ -108,7 +112,7 @@ Tokens that carry meaning — they reference the primitives through `{color.mist
 Holds the light / dark **modes** in `$extensions.modes`.  
 Examples: `color.background.default`, `color.text.subtle`, `space.component.md`.
 
-This is the layer the components read: the `@theme` bridge in `app/globals.css` ties each Tailwind class (`bg-background`) to a semantic token (`--color-background-default`).
+This is the layer the components read: the `@theme` bridge in `styles/globals.css` ties each Tailwind class (`bg-background`) to a semantic token (`--color-background-default`).
 
 ### `tokens/component.json` — Tier 3, Component
 
@@ -130,7 +134,7 @@ A file **generated only by `npm run tokens:build` — never edit it** (`tokens:c
 }
 ```
 
-Imported into `app/globals.css`, whose `@theme inline` block bridges these variables to the Tailwind classes.
+Imported into `styles/globals.css`, whose `@theme inline` block bridges these variables to the Tailwind classes.
 
 ---
 
@@ -145,7 +149,7 @@ Each script explains at the top of the file what it checks and why. They all run
 | `build-tokens.ts`           | `tokens:build` / `tokens:check`     | Generates `tokens.css` from the DTCG sources; `--check` fails on drift                                                           |
 | `lint-token-naming.ts`      | `tokens:lint-naming`                | Key grammar (`foundation.property[.role][.emphasis][.state]`); tiers 2 and 3 hold only references                                |
 | `lint-raw-values.ts`        | `tokens:lint-values`                | Detects raw values (hex, px, rem…) in components. Exception: `// allow-raw: <reason>`                                            |
-| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | The `@theme` bridge in `app/globals.css`: references resolve, no private tier, every name in a Tailwind namespace                |
+| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | The `@theme` bridge in `styles/globals.css`: references resolve, no private tier, every name in a Tailwind namespace             |
 | `lint-focus-ring.ts`        | `tokens:lint-focus`                 | A single focus ring (`lib/focus.ts`) for every focusable component                                                               |
 | `lint-contrast.ts`          | `tokens:lint-contrast`              | WCAG contrast of the text / background pairs, in light and dark                                                                  |
 | `lint-palette-monotonic.ts` | `tokens:lint-monotonic`             | In every palette, luminance strictly decreases as the step goes up                                                               |
@@ -338,7 +342,7 @@ Present in `components/`, `hooks/`, `lib/`, `public/` — leftovers from the ini
 
 ```
 tokens/*.json
-    ├──▶ tokens.css ──▶ app/globals.css (@theme inline) ──▶ Tailwind classes ──▶ components/ui/
+    ├──▶ tokens.css ──▶ styles/globals.css (@theme inline) ──▶ Tailwind classes ──▶ components/ui/
     └──▶ token-reference.md · tokens.manifest.json          (docs:tokens)
 
 components/ui/*.tsx ──▶ specs/components/*.md               (Variants, Tokens, Props / API)

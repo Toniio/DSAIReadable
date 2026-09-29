@@ -3,7 +3,7 @@
 > Source: `tokens/semantic.json` (`border-width.*`) · CSS variables: `tokens.css` Layer 2
 
 Two border widths, and no more: a design-system border is a one-pixel hairline,
-except in one named case. The `@theme` bridge in `app/globals.css` wires the
+except in one named case. The `@theme` bridge in `styles/globals.css` wires the
 tokens into Tailwind — a bare `border` reads `--border-width-default`.
 
 ---

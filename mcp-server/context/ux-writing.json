@@ -37,7 +37,7 @@
       "source": "breakpoints.md"
     },
     {
-      "rule": "❌ Do not change a `breakpoint.*` value without declaring the same value, as a literal, in the `@theme` of `app/globals.css` — the bridge lint will remind you",
+      "rule": "❌ Do not change a `breakpoint.*` value without declaring the same value, as a literal, in the `@theme` of `styles/globals.css` — the bridge lint will remind you",
       "source": "breakpoints.md"
     },
     {

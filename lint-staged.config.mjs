@@ -27,5 +27,5 @@ export default {
   ],
 
   // The @theme bridge breaks silently, so check it whenever it is touched.
-  "app/globals.css": () => "npm run tokens:lint-bridge",
+  "styles/globals.css": () => "npm run tokens:lint-bridge",
 }

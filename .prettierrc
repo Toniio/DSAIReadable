@@ -4,6 +4,6 @@
   "useTabs": false,
   "tabWidth": 2,
   "trailingComma": "es5",
-  "tailwindStylesheet": "./app/globals.css",
+  "tailwindStylesheet": "./styles/globals.css",
   "plugins": ["prettier-plugin-tailwindcss"]
 }

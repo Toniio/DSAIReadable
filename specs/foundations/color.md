@@ -155,7 +155,7 @@ class — read it through `var(--color-chart-sequential-N)`.
 ### Static
 
 Colors that **ignore the mode** — the only ones that do. Tailwind's default
-palette is removed (`--color-*: initial` in `app/globals.css`): `bg-white` and
+palette is removed (`--color-*: initial` in `styles/globals.css`): `bg-white` and
 `bg-black` only exist because these two tokens declare them.
 
 | Token                | CSS Variable           | Light / Dark     | Tailwind      | Usage                                 |
