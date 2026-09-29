@@ -20,6 +20,7 @@ import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { blend, luminance } from "./wcag.js"
+import { cssValue } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -29,7 +30,7 @@ type Json = Record<string, unknown>
 const read = (name: string): Json =>
   JSON.parse(readFileSync(resolve(ROOT, "tokens", name), "utf-8")) as Json
 
-// The three tiers share one reference namespace: `{color.mist.500}` lives in
+// The three tiers form one DTCG document: `{primitive.color.mist.500}` lives in
 // primitive.json, `{color.text.default}` in semantic.json.
 const TIERS = [
   read("primitive.json"),
@@ -74,11 +75,13 @@ function resolveColor(
     (node.$extensions as Json | undefined)?.modes as Json | undefined
   )?.[mode] as Json | undefined
 
-  const value = (override?.$value ?? node.$value) as string | undefined
-  if (typeof value !== "string") throw new Error(`Token ${path} has no $value`)
+  const value = override?.$value ?? node.$value
+  if (value === undefined) throw new Error(`Token ${path} has no $value`)
 
-  const ref = REF.exec(value)
-  return ref ? resolveColor(ref[1], mode, seen) : value
+  const ref = typeof value === "string" ? REF.exec(value) : null
+  return ref
+    ? resolveColor(ref[1], mode, seen)
+    : cssValue(value, node.$type as string)
 }
 
 function ratio(a: string, b: string): number {

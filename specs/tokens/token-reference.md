@@ -134,31 +134,31 @@ the status says what the code does.
 
 ## Typography
 
-| Token                              | CSS variable                         | Type        | Status | Value                       | Tailwind          |
-| ---------------------------------- | ------------------------------------ | ----------- | ------ | --------------------------- | ----------------- |
-| `typography.size.xs`               | `--typography-size-xs`               | dimension   | active | `0.75rem`                   | `text-xs`         |
-| `typography.size.sm`               | `--typography-size-sm`               | dimension   | active | `0.875rem`                  | `text-sm`         |
-| `typography.size.base`             | `--typography-size-base`             | dimension   | active | `1rem`                      | `text-base`       |
-| `typography.size.lg`               | `--typography-size-lg`               | dimension   | active | `1.125rem`                  | `text-lg`         |
-| `typography.size.xl`               | `--typography-size-xl`               | dimension   | active | `1.25rem`                   | `text-xl`         |
-| `typography.size.2xl`              | `--typography-size-2xl`              | dimension   | active | `1.5rem`                    | `text-2xl`        |
-| `typography.size.3xl`              | `--typography-size-3xl`              | dimension   | active | `1.875rem`                  | `text-3xl`        |
-| `typography.size.4xl`              | `--typography-size-4xl`              | dimension   | active | `2.25rem`                   | `text-4xl`        |
-| `typography.line-height.tight`     | `--typography-line-height-tight`     | number      | active | `1.25`                      | `leading-tight`   |
-| `typography.line-height.snug`      | `--typography-line-height-snug`      | number      | active | `1.375`                     | `leading-snug`    |
-| `typography.line-height.normal`    | `--typography-line-height-normal`    | number      | active | `1.5`                       | `leading-normal`  |
-| `typography.line-height.relaxed`   | `--typography-line-height-relaxed`   | number      | active | `1.625`                     | `leading-relaxed` |
-| `typography.line-height.loose`     | `--typography-line-height-loose`     | number      | active | `2`                         | `leading-loose`   |
-| `typography.letter-spacing.tight`  | `--typography-letter-spacing-tight`  | dimension   | active | `-0.025em`                  | `tracking-tight`  |
-| `typography.letter-spacing.normal` | `--typography-letter-spacing-normal` | dimension   | active | `0em`                       | `tracking-normal` |
-| `typography.letter-spacing.wide`   | `--typography-letter-spacing-wide`   | dimension   | active | `0.025em`                   | `tracking-wide`   |
-| `typography.letter-spacing.wider`  | `--typography-letter-spacing-wider`  | dimension   | active | `0.05em`                    | `tracking-wider`  |
-| `typography.font-weight.normal`    | `--typography-font-weight-normal`    | font-weight | active | `400`                       | `font-normal`     |
-| `typography.font-weight.medium`    | `--typography-font-weight-medium`    | font-weight | active | `500`                       | `font-medium`     |
-| `typography.font-weight.semibold`  | `--typography-font-weight-semibold`  | font-weight | active | `600`                       | `font-semibold`   |
-| `typography.font-weight.bold`      | `--typography-font-weight-bold`      | font-weight | active | `700`                       | `font-bold`       |
-| `typography.font-family.sans`      | `--typography-font-family-sans`      | font-family | active | `Geist, sans-serif`         | —                 |
-| `typography.font-family.mono`      | `--typography-font-family-mono`      | font-family | active | `JetBrains Mono, monospace` | —                 |
+| Token                              | CSS variable                         | Type       | Status | Value                       | Tailwind          |
+| ---------------------------------- | ------------------------------------ | ---------- | ------ | --------------------------- | ----------------- |
+| `typography.size.xs`               | `--typography-size-xs`               | dimension  | active | `0.75rem`                   | `text-xs`         |
+| `typography.size.sm`               | `--typography-size-sm`               | dimension  | active | `0.875rem`                  | `text-sm`         |
+| `typography.size.base`             | `--typography-size-base`             | dimension  | active | `1rem`                      | `text-base`       |
+| `typography.size.lg`               | `--typography-size-lg`               | dimension  | active | `1.125rem`                  | `text-lg`         |
+| `typography.size.xl`               | `--typography-size-xl`               | dimension  | active | `1.25rem`                   | `text-xl`         |
+| `typography.size.2xl`              | `--typography-size-2xl`              | dimension  | active | `1.5rem`                    | `text-2xl`        |
+| `typography.size.3xl`              | `--typography-size-3xl`              | dimension  | active | `1.875rem`                  | `text-3xl`        |
+| `typography.size.4xl`              | `--typography-size-4xl`              | dimension  | active | `2.25rem`                   | `text-4xl`        |
+| `typography.line-height.tight`     | `--typography-line-height-tight`     | number     | active | `1.25`                      | `leading-tight`   |
+| `typography.line-height.snug`      | `--typography-line-height-snug`      | number     | active | `1.375`                     | `leading-snug`    |
+| `typography.line-height.normal`    | `--typography-line-height-normal`    | number     | active | `1.5`                       | `leading-normal`  |
+| `typography.line-height.relaxed`   | `--typography-line-height-relaxed`   | number     | active | `1.625`                     | `leading-relaxed` |
+| `typography.line-height.loose`     | `--typography-line-height-loose`     | number     | active | `2`                         | `leading-loose`   |
+| `typography.letter-spacing.tight`  | `--typography-letter-spacing-tight`  | dimension  | active | `-0.025em`                  | `tracking-tight`  |
+| `typography.letter-spacing.normal` | `--typography-letter-spacing-normal` | dimension  | active | `0em`                       | `tracking-normal` |
+| `typography.letter-spacing.wide`   | `--typography-letter-spacing-wide`   | dimension  | active | `0.025em`                   | `tracking-wide`   |
+| `typography.letter-spacing.wider`  | `--typography-letter-spacing-wider`  | dimension  | active | `0.05em`                    | `tracking-wider`  |
+| `typography.font-weight.normal`    | `--typography-font-weight-normal`    | fontWeight | active | `400`                       | `font-normal`     |
+| `typography.font-weight.medium`    | `--typography-font-weight-medium`    | fontWeight | active | `500`                       | `font-medium`     |
+| `typography.font-weight.semibold`  | `--typography-font-weight-semibold`  | fontWeight | active | `600`                       | `font-semibold`   |
+| `typography.font-weight.bold`      | `--typography-font-weight-bold`      | fontWeight | active | `700`                       | `font-bold`       |
+| `typography.font-family.sans`      | `--typography-font-family-sans`      | fontFamily | active | `Geist, sans-serif`         | —                 |
+| `typography.font-family.mono`      | `--typography-font-family-mono`      | fontFamily | active | `JetBrains Mono, monospace` | —                 |
 
 **Usage rules**
 
@@ -237,11 +237,11 @@ the status says what the code does.
 
 ## Opacity
 
-| Token                 | CSS variable            | Type   | Status   | Value  | Tailwind |
-| --------------------- | ----------------------- | ------ | -------- | ------ | -------- |
-| `opacity.disabled`    | `--opacity-disabled`    | number | active   | `0.50` | —        |
-| `opacity.placeholder` | `--opacity-placeholder` | number | reserved | `0.50` | —        |
-| `opacity.overlay`     | `--opacity-overlay`     | number | reserved | `0.80` | —        |
+| Token                 | CSS variable            | Type   | Status   | Value | Tailwind |
+| --------------------- | ----------------------- | ------ | -------- | ----- | -------- |
+| `opacity.disabled`    | `--opacity-disabled`    | number | active   | `0.5` | —        |
+| `opacity.placeholder` | `--opacity-placeholder` | number | reserved | `0.5` | —        |
+| `opacity.overlay`     | `--opacity-overlay`     | number | reserved | `0.8` | —        |
 
 **Usage rules**
 
@@ -342,152 +342,152 @@ These variables are tier 1. Referencing them from a component, a spec or
 `globals.css` bypasses the design system's decisions and breaks dark mode:
 `npm run tokens-validate` fails if any of them appears outside `tokens.css`.
 
-| Token                              | CSS variable                                 | Type        | Status   | Value                                                              | Tailwind |
-| ---------------------------------- | -------------------------------------------- | ----------- | -------- | ------------------------------------------------------------------ | -------- |
-| `color.mist.0`                     | `--ds-prim-color-mist-0`                     | color       | active   | `#ffffff`                                                          | —        |
-| `color.mist.50`                    | `--ds-prim-color-mist-50`                    | color       | active   | `#f9fbfb`                                                          | —        |
-| `color.mist.100`                   | `--ds-prim-color-mist-100`                   | color       | active   | `#f1f3f3`                                                          | —        |
-| `color.mist.200`                   | `--ds-prim-color-mist-200`                   | color       | active   | `#e3e7e8`                                                          | —        |
-| `color.mist.400`                   | `--ds-prim-color-mist-400`                   | color       | active   | `#9ca8ab`                                                          | —        |
-| `color.mist.500`                   | `--ds-prim-color-mist-500`                   | color       | active   | `#67787c`                                                          | —        |
-| `color.mist.600`                   | `--ds-prim-color-mist-600`                   | color       | active   | `#607175`                                                          | —        |
-| `color.mist.700`                   | `--ds-prim-color-mist-700`                   | color       | reserved | `#424f52`                                                          | —        |
-| `color.mist.800`                   | `--ds-prim-color-mist-800`                   | color       | active   | `#22292b`                                                          | —        |
-| `color.mist.900`                   | `--ds-prim-color-mist-900`                   | color       | active   | `#161b1d`                                                          | —        |
-| `color.mist.950`                   | `--ds-prim-color-mist-950`                   | color       | active   | `#090b0c`                                                          | —        |
-| `color.violet.50`                  | `--ds-prim-color-violet-50`                  | color       | active   | `#eef2ff`                                                          | —        |
-| `color.violet.400`                 | `--ds-prim-color-violet-400`                 | color       | active   | `#6e6cff`                                                          | —        |
-| `color.violet.500`                 | `--ds-prim-color-violet-500`                 | color       | active   | `#615fff`                                                          | —        |
-| `color.violet.550`                 | `--ds-prim-color-violet-550`                 | color       | active   | `#4f39f6`                                                          | —        |
-| `color.violet.600`                 | `--ds-prim-color-violet-600`                 | color       | active   | `#432dd7`                                                          | —        |
-| `color.violet.700`                 | `--ds-prim-color-violet-700`                 | color       | active   | `#372aac`                                                          | —        |
-| `color.red.300`                    | `--ds-prim-color-red-300`                    | color       | active   | `#ffa2a2`                                                          | —        |
-| `color.red.500`                    | `--ds-prim-color-red-500`                    | color       | active   | `#ff6467`                                                          | —        |
-| `color.red.600`                    | `--ds-prim-color-red-600`                    | color       | active   | `#e7000b`                                                          | —        |
-| `color.red.800`                    | `--ds-prim-color-red-800`                    | color       | active   | `#9f0712`                                                          | —        |
-| `color.green.200`                  | `--ds-prim-color-green-200`                  | color       | active   | `#bbf451`                                                          | —        |
-| `color.green.300`                  | `--ds-prim-color-green-300`                  | color       | active   | `#7ccf00`                                                          | —        |
-| `color.green.400`                  | `--ds-prim-color-green-400`                  | color       | active   | `#5ea500`                                                          | —        |
-| `color.green.500`                  | `--ds-prim-color-green-500`                  | color       | active   | `#497d00`                                                          | —        |
-| `color.green.600`                  | `--ds-prim-color-green-600`                  | color       | active   | `#3c6300`                                                          | —        |
-| `color.blue.300`                   | `--ds-prim-color-blue-300`                   | color       | active   | `#8fd6fa`                                                          | —        |
-| `color.blue.600`                   | `--ds-prim-color-blue-600`                   | color       | active   | `#438fbd`                                                          | —        |
-| `color.yellow.200`                 | `--ds-prim-color-yellow-200`                 | color       | active   | `#e5e747`                                                          | —        |
-| `color.amber.500`                  | `--ds-prim-color-amber-500`                  | color       | active   | `#c89005`                                                          | —        |
-| `color.amber.600`                  | `--ds-prim-color-amber-600`                  | color       | active   | `#af8526`                                                          | —        |
-| `color.amber.800`                  | `--ds-prim-color-amber-800`                  | color       | active   | `#734e00`                                                          | —        |
-| `color.plum.500`                   | `--ds-prim-color-plum-500`                   | color       | active   | `#9b5f7c`                                                          | —        |
-| `color.plum.800`                   | `--ds-prim-color-plum-800`                   | color       | active   | `#4d2761`                                                          | —        |
-| `color.black`                      | `--ds-prim-color-black`                      | color       | active   | `#000000`                                                          | —        |
-| `color.white-alpha.10`             | `--ds-prim-color-white-alpha-10`             | color       | active   | `rgba(255, 255, 255, 0.1)`                                         | —        |
-| `color.white-alpha.15`             | `--ds-prim-color-white-alpha-15`             | color       | active   | `rgba(255, 255, 255, 0.15)`                                        | —        |
-| `space.1`                          | `--ds-prim-space-1`                          | dimension   | active   | `0.25rem`                                                          | —        |
-| `space.2`                          | `--ds-prim-space-2`                          | dimension   | active   | `0.5rem`                                                           | —        |
-| `space.3`                          | `--ds-prim-space-3`                          | dimension   | reserved | `0.75rem`                                                          | —        |
-| `space.4`                          | `--ds-prim-space-4`                          | dimension   | active   | `1rem`                                                             | —        |
-| `space.5`                          | `--ds-prim-space-5`                          | dimension   | reserved | `1.25rem`                                                          | —        |
-| `space.6`                          | `--ds-prim-space-6`                          | dimension   | active   | `1.5rem`                                                           | —        |
-| `space.8`                          | `--ds-prim-space-8`                          | dimension   | active   | `2rem`                                                             | —        |
-| `space.10`                         | `--ds-prim-space-10`                         | dimension   | reserved | `2.5rem`                                                           | —        |
-| `space.12`                         | `--ds-prim-space-12`                         | dimension   | active   | `3rem`                                                             | —        |
-| `space.16`                         | `--ds-prim-space-16`                         | dimension   | reserved | `4rem`                                                             | —        |
-| `space.24`                         | `--ds-prim-space-24`                         | dimension   | reserved | `6rem`                                                             | —        |
-| `space.32`                         | `--ds-prim-space-32`                         | dimension   | reserved | `8rem`                                                             | —        |
-| `space.0-5`                        | `--ds-prim-space-0-5`                        | dimension   | reserved | `0.125rem`                                                         | —        |
-| `space.page`                       | `--ds-prim-space-page`                       | dimension   | active   | `1.5rem`                                                           | —        |
-| `space.section`                    | `--ds-prim-space-section`                    | dimension   | active   | `4rem`                                                             | —        |
-| `space.content-sm`                 | `--ds-prim-space-content-sm`                 | dimension   | active   | `42rem`                                                            | —        |
-| `space.content`                    | `--ds-prim-space-content`                    | dimension   | active   | `64rem`                                                            | —        |
-| `space.content-lg`                 | `--ds-prim-space-content-lg`                 | dimension   | active   | `80rem`                                                            | —        |
-| `space.sidebar`                    | `--ds-prim-space-sidebar`                    | dimension   | active   | `16rem`                                                            | —        |
-| `space.sidebar-mobile`             | `--ds-prim-space-sidebar-mobile`             | dimension   | active   | `18rem`                                                            | —        |
-| `space.focus-ring-width`           | `--ds-prim-space-focus-ring-width`           | dimension   | active   | `2px`                                                              | —        |
-| `radius.none`                      | `--ds-prim-radius-none`                      | dimension   | active   | `0rem`                                                             | —        |
-| `radius.base`                      | `--ds-prim-radius-base`                      | dimension   | reserved | `0.625rem`                                                         | —        |
-| `radius.xs`                        | `--ds-prim-radius-xs`                        | dimension   | active   | `0.25rem`                                                          | —        |
-| `radius.sm`                        | `--ds-prim-radius-sm`                        | dimension   | active   | `0.375rem`                                                         | —        |
-| `radius.md`                        | `--ds-prim-radius-md`                        | dimension   | active   | `0.5rem`                                                           | —        |
-| `radius.lg`                        | `--ds-prim-radius-lg`                        | dimension   | active   | `0.625rem`                                                         | —        |
-| `radius.xl`                        | `--ds-prim-radius-xl`                        | dimension   | active   | `0.875rem`                                                         | —        |
-| `radius.2xl`                       | `--ds-prim-radius-2xl`                       | dimension   | active   | `1.125rem`                                                         | —        |
-| `radius.3xl`                       | `--ds-prim-radius-3xl`                       | dimension   | active   | `1.375rem`                                                         | —        |
-| `radius.4xl`                       | `--ds-prim-radius-4xl`                       | dimension   | active   | `1.625rem`                                                         | —        |
-| `radius.full`                      | `--ds-prim-radius-full`                      | dimension   | active   | `9999px`                                                           | —        |
-| `typography.size.xs`               | `--ds-prim-typography-size-xs`               | dimension   | active   | `0.75rem`                                                          | —        |
-| `typography.size.sm`               | `--ds-prim-typography-size-sm`               | dimension   | active   | `0.875rem`                                                         | —        |
-| `typography.size.base`             | `--ds-prim-typography-size-base`             | dimension   | active   | `1rem`                                                             | —        |
-| `typography.size.lg`               | `--ds-prim-typography-size-lg`               | dimension   | active   | `1.125rem`                                                         | —        |
-| `typography.size.xl`               | `--ds-prim-typography-size-xl`               | dimension   | active   | `1.25rem`                                                          | —        |
-| `typography.size.2xl`              | `--ds-prim-typography-size-2xl`              | dimension   | active   | `1.5rem`                                                           | —        |
-| `typography.size.3xl`              | `--ds-prim-typography-size-3xl`              | dimension   | active   | `1.875rem`                                                         | —        |
-| `typography.size.4xl`              | `--ds-prim-typography-size-4xl`              | dimension   | active   | `2.25rem`                                                          | —        |
-| `typography.line-height.tight`     | `--ds-prim-typography-line-height-tight`     | number      | active   | `1.25`                                                             | —        |
-| `typography.line-height.snug`      | `--ds-prim-typography-line-height-snug`      | number      | active   | `1.375`                                                            | —        |
-| `typography.line-height.normal`    | `--ds-prim-typography-line-height-normal`    | number      | active   | `1.5`                                                              | —        |
-| `typography.line-height.relaxed`   | `--ds-prim-typography-line-height-relaxed`   | number      | active   | `1.625`                                                            | —        |
-| `typography.line-height.loose`     | `--ds-prim-typography-line-height-loose`     | number      | active   | `2`                                                                | —        |
-| `typography.letter-spacing.tight`  | `--ds-prim-typography-letter-spacing-tight`  | dimension   | active   | `-0.025em`                                                         | —        |
-| `typography.letter-spacing.normal` | `--ds-prim-typography-letter-spacing-normal` | dimension   | active   | `0em`                                                              | —        |
-| `typography.letter-spacing.wide`   | `--ds-prim-typography-letter-spacing-wide`   | dimension   | active   | `0.025em`                                                          | —        |
-| `typography.letter-spacing.wider`  | `--ds-prim-typography-letter-spacing-wider`  | dimension   | active   | `0.05em`                                                           | —        |
-| `typography.font-weight.normal`    | `--ds-prim-typography-font-weight-normal`    | font-weight | active   | `400`                                                              | —        |
-| `typography.font-weight.medium`    | `--ds-prim-typography-font-weight-medium`    | font-weight | active   | `500`                                                              | —        |
-| `typography.font-weight.semibold`  | `--ds-prim-typography-font-weight-semibold`  | font-weight | active   | `600`                                                              | —        |
-| `typography.font-weight.bold`      | `--ds-prim-typography-font-weight-bold`      | font-weight | active   | `700`                                                              | —        |
-| `typography.font-family.sans`      | `--ds-prim-typography-font-family-sans`      | font-family | active   | `Geist, sans-serif`                                                | —        |
-| `typography.font-family.mono`      | `--ds-prim-typography-font-family-mono`      | font-family | active   | `JetBrains Mono, monospace`                                        | —        |
-| `elevation.light.xs`               | `--ds-prim-elevation-light-xs`               | shadow      | active   | `0 1px 2px rgba(0, 0, 0, 0.04)`                                    | —        |
-| `elevation.light.sm`               | `--ds-prim-elevation-light-sm`               | shadow      | active   | `0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)`     | —        |
-| `elevation.light.md`               | `--ds-prim-elevation-light-md`               | shadow      | active   | `0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)`     | —        |
-| `elevation.light.lg`               | `--ds-prim-elevation-light-lg`               | shadow      | active   | `0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)`   | —        |
-| `elevation.light.xl`               | `--ds-prim-elevation-light-xl`               | shadow      | active   | `0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)` | —        |
-| `elevation.light.2xl`              | `--ds-prim-elevation-light-2xl`              | shadow      | active   | `0 25px 50px rgba(0, 0, 0, 0.12)`                                  | —        |
-| `elevation.light.inner`            | `--ds-prim-elevation-light-inner`            | shadow      | active   | `inset 0 2px 4px rgba(0, 0, 0, 0.05)`                              | —        |
-| `elevation.dark.xs`                | `--ds-prim-elevation-dark-xs`                | shadow      | active   | `0 1px 2px rgba(0, 0, 0, 0.2)`                                     | —        |
-| `elevation.dark.sm`                | `--ds-prim-elevation-dark-sm`                | shadow      | active   | `0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)`       | —        |
-| `elevation.dark.md`                | `--ds-prim-elevation-dark-md`                | shadow      | active   | `0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)`     | —        |
-| `elevation.dark.lg`                | `--ds-prim-elevation-dark-lg`                | shadow      | active   | `0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)`     | —        |
-| `elevation.dark.xl`                | `--ds-prim-elevation-dark-xl`                | shadow      | active   | `0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)`  | —        |
-| `elevation.dark.2xl`               | `--ds-prim-elevation-dark-2xl`               | shadow      | active   | `0 25px 50px rgba(0, 0, 0, 0.5)`                                   | —        |
-| `elevation.dark.inner`             | `--ds-prim-elevation-dark-inner`             | shadow      | active   | `inset 0 2px 4px rgba(0, 0, 0, 0.3)`                               | —        |
-| `motion.duration.instant`          | `--ds-prim-motion-duration-instant`          | duration    | active   | `0ms`                                                              | —        |
-| `motion.duration.fast`             | `--ds-prim-motion-duration-fast`             | duration    | active   | `100ms`                                                            | —        |
-| `motion.duration.normal`           | `--ds-prim-motion-duration-normal`           | duration    | active   | `200ms`                                                            | —        |
-| `motion.duration.slow`             | `--ds-prim-motion-duration-slow`             | duration    | active   | `300ms`                                                            | —        |
-| `motion.duration.slower`           | `--ds-prim-motion-duration-slower`           | duration    | active   | `500ms`                                                            | —        |
-| `motion.duration.extra-slow`       | `--ds-prim-motion-duration-extra-slow`       | duration    | active   | `1000ms`                                                           | —        |
-| `motion.easing.default`            | `--ds-prim-motion-easing-default`            | cubicBezier | active   | `cubic-bezier(0.4, 0, 0.2, 1)`                                     | —        |
-| `motion.easing.in`                 | `--ds-prim-motion-easing-in`                 | cubicBezier | active   | `cubic-bezier(0.4, 0, 1, 1)`                                       | —        |
-| `motion.easing.out`                | `--ds-prim-motion-easing-out`                | cubicBezier | active   | `cubic-bezier(0, 0, 0.2, 1)`                                       | —        |
-| `motion.easing.spring`             | `--ds-prim-motion-easing-spring`             | cubicBezier | active   | `cubic-bezier(0.175, 0.885, 0.32, 1.275)`                          | —        |
-| `opacity.0-03`                     | `--ds-prim-opacity-0-03`                     | number      | reserved | `0.03`                                                             | —        |
-| `opacity.0-04`                     | `--ds-prim-opacity-0-04`                     | number      | reserved | `0.04`                                                             | —        |
-| `opacity.0-05`                     | `--ds-prim-opacity-0-05`                     | number      | reserved | `0.05`                                                             | —        |
-| `opacity.0-07`                     | `--ds-prim-opacity-0-07`                     | number      | reserved | `0.07`                                                             | —        |
-| `opacity.0-08`                     | `--ds-prim-opacity-0-08`                     | number      | reserved | `0.08`                                                             | —        |
-| `opacity.0-10`                     | `--ds-prim-opacity-0-10`                     | number      | reserved | `0.10`                                                             | —        |
-| `opacity.0-12`                     | `--ds-prim-opacity-0-12`                     | number      | reserved | `0.12`                                                             | —        |
-| `opacity.0-15`                     | `--ds-prim-opacity-0-15`                     | number      | reserved | `0.15`                                                             | —        |
-| `opacity.0-18`                     | `--ds-prim-opacity-0-18`                     | number      | reserved | `0.18`                                                             | —        |
-| `opacity.0-20`                     | `--ds-prim-opacity-0-20`                     | number      | reserved | `0.20`                                                             | —        |
-| `opacity.0-25`                     | `--ds-prim-opacity-0-25`                     | number      | reserved | `0.25`                                                             | —        |
-| `opacity.0-30`                     | `--ds-prim-opacity-0-30`                     | number      | reserved | `0.30`                                                             | —        |
-| `opacity.0-35`                     | `--ds-prim-opacity-0-35`                     | number      | reserved | `0.35`                                                             | —        |
-| `opacity.0-50`                     | `--ds-prim-opacity-0-50`                     | number      | active   | `0.50`                                                             | —        |
-| `opacity.0-80`                     | `--ds-prim-opacity-0-80`                     | number      | active   | `0.80`                                                             | —        |
-| `zindex.dropdown`                  | `--ds-prim-zindex-dropdown`                  | number      | active   | `1000`                                                             | —        |
-| `zindex.sticky`                    | `--ds-prim-zindex-sticky`                    | number      | active   | `1100`                                                             | —        |
-| `zindex.fixed`                     | `--ds-prim-zindex-fixed`                     | number      | active   | `1200`                                                             | —        |
-| `zindex.overlay`                   | `--ds-prim-zindex-overlay`                   | number      | active   | `1300`                                                             | —        |
-| `zindex.modal`                     | `--ds-prim-zindex-modal`                     | number      | active   | `1400`                                                             | —        |
-| `zindex.popover`                   | `--ds-prim-zindex-popover`                   | number      | active   | `1500`                                                             | —        |
-| `zindex.toast`                     | `--ds-prim-zindex-toast`                     | number      | active   | `1600`                                                             | —        |
-| `zindex.tooltip`                   | `--ds-prim-zindex-tooltip`                   | number      | active   | `1700`                                                             | —        |
-| `breakpoint.sm`                    | `--ds-prim-breakpoint-sm`                    | dimension   | active   | `40rem`                                                            | —        |
-| `breakpoint.md`                    | `--ds-prim-breakpoint-md`                    | dimension   | active   | `48rem`                                                            | —        |
-| `breakpoint.lg`                    | `--ds-prim-breakpoint-lg`                    | dimension   | active   | `64rem`                                                            | —        |
-| `breakpoint.xl`                    | `--ds-prim-breakpoint-xl`                    | dimension   | active   | `80rem`                                                            | —        |
-| `breakpoint.2xl`                   | `--ds-prim-breakpoint-2xl`                   | dimension   | active   | `96rem`                                                            | —        |
-| `border-width.1`                   | `--ds-prim-border-width-1`                   | dimension   | active   | `1px`                                                              | —        |
-| `border-width.2`                   | `--ds-prim-border-width-2`                   | dimension   | active   | `2px`                                                              | —        |
-| `border-width.1-5`                 | `--ds-prim-border-width-1-5`                 | dimension   | active   | `1.5px`                                                            | —        |
+| Token                                        | CSS variable                                 | Type        | Status   | Value                                                              | Tailwind |
+| -------------------------------------------- | -------------------------------------------- | ----------- | -------- | ------------------------------------------------------------------ | -------- |
+| `primitive.color.mist.0`                     | `--ds-prim-color-mist-0`                     | color       | active   | `#ffffff`                                                          | —        |
+| `primitive.color.mist.50`                    | `--ds-prim-color-mist-50`                    | color       | active   | `#f9fbfb`                                                          | —        |
+| `primitive.color.mist.100`                   | `--ds-prim-color-mist-100`                   | color       | active   | `#f1f3f3`                                                          | —        |
+| `primitive.color.mist.200`                   | `--ds-prim-color-mist-200`                   | color       | active   | `#e3e7e8`                                                          | —        |
+| `primitive.color.mist.400`                   | `--ds-prim-color-mist-400`                   | color       | active   | `#9ca8ab`                                                          | —        |
+| `primitive.color.mist.500`                   | `--ds-prim-color-mist-500`                   | color       | active   | `#67787c`                                                          | —        |
+| `primitive.color.mist.600`                   | `--ds-prim-color-mist-600`                   | color       | active   | `#607175`                                                          | —        |
+| `primitive.color.mist.700`                   | `--ds-prim-color-mist-700`                   | color       | reserved | `#424f52`                                                          | —        |
+| `primitive.color.mist.800`                   | `--ds-prim-color-mist-800`                   | color       | active   | `#22292b`                                                          | —        |
+| `primitive.color.mist.900`                   | `--ds-prim-color-mist-900`                   | color       | active   | `#161b1d`                                                          | —        |
+| `primitive.color.mist.950`                   | `--ds-prim-color-mist-950`                   | color       | active   | `#090b0c`                                                          | —        |
+| `primitive.color.violet.50`                  | `--ds-prim-color-violet-50`                  | color       | active   | `#eef2ff`                                                          | —        |
+| `primitive.color.violet.400`                 | `--ds-prim-color-violet-400`                 | color       | active   | `#6e6cff`                                                          | —        |
+| `primitive.color.violet.500`                 | `--ds-prim-color-violet-500`                 | color       | active   | `#615fff`                                                          | —        |
+| `primitive.color.violet.550`                 | `--ds-prim-color-violet-550`                 | color       | active   | `#4f39f6`                                                          | —        |
+| `primitive.color.violet.600`                 | `--ds-prim-color-violet-600`                 | color       | active   | `#432dd7`                                                          | —        |
+| `primitive.color.violet.700`                 | `--ds-prim-color-violet-700`                 | color       | active   | `#372aac`                                                          | —        |
+| `primitive.color.red.300`                    | `--ds-prim-color-red-300`                    | color       | active   | `#ffa2a2`                                                          | —        |
+| `primitive.color.red.500`                    | `--ds-prim-color-red-500`                    | color       | active   | `#ff6467`                                                          | —        |
+| `primitive.color.red.600`                    | `--ds-prim-color-red-600`                    | color       | active   | `#e7000b`                                                          | —        |
+| `primitive.color.red.800`                    | `--ds-prim-color-red-800`                    | color       | active   | `#9f0712`                                                          | —        |
+| `primitive.color.green.200`                  | `--ds-prim-color-green-200`                  | color       | active   | `#bbf451`                                                          | —        |
+| `primitive.color.green.300`                  | `--ds-prim-color-green-300`                  | color       | active   | `#7ccf00`                                                          | —        |
+| `primitive.color.green.400`                  | `--ds-prim-color-green-400`                  | color       | active   | `#5ea500`                                                          | —        |
+| `primitive.color.green.500`                  | `--ds-prim-color-green-500`                  | color       | active   | `#497d00`                                                          | —        |
+| `primitive.color.green.600`                  | `--ds-prim-color-green-600`                  | color       | active   | `#3c6300`                                                          | —        |
+| `primitive.color.blue.300`                   | `--ds-prim-color-blue-300`                   | color       | active   | `#8fd6fa`                                                          | —        |
+| `primitive.color.blue.600`                   | `--ds-prim-color-blue-600`                   | color       | active   | `#438fbd`                                                          | —        |
+| `primitive.color.yellow.200`                 | `--ds-prim-color-yellow-200`                 | color       | active   | `#e5e747`                                                          | —        |
+| `primitive.color.amber.500`                  | `--ds-prim-color-amber-500`                  | color       | active   | `#c89005`                                                          | —        |
+| `primitive.color.amber.600`                  | `--ds-prim-color-amber-600`                  | color       | active   | `#af8526`                                                          | —        |
+| `primitive.color.amber.800`                  | `--ds-prim-color-amber-800`                  | color       | active   | `#734e00`                                                          | —        |
+| `primitive.color.plum.500`                   | `--ds-prim-color-plum-500`                   | color       | active   | `#9b5f7c`                                                          | —        |
+| `primitive.color.plum.800`                   | `--ds-prim-color-plum-800`                   | color       | active   | `#4d2761`                                                          | —        |
+| `primitive.color.black`                      | `--ds-prim-color-black`                      | color       | active   | `#000000`                                                          | —        |
+| `primitive.color.white-alpha.10`             | `--ds-prim-color-white-alpha-10`             | color       | active   | `rgba(255, 255, 255, 0.1)`                                         | —        |
+| `primitive.color.white-alpha.15`             | `--ds-prim-color-white-alpha-15`             | color       | active   | `rgba(255, 255, 255, 0.15)`                                        | —        |
+| `primitive.space.1`                          | `--ds-prim-space-1`                          | dimension   | active   | `0.25rem`                                                          | —        |
+| `primitive.space.2`                          | `--ds-prim-space-2`                          | dimension   | active   | `0.5rem`                                                           | —        |
+| `primitive.space.3`                          | `--ds-prim-space-3`                          | dimension   | reserved | `0.75rem`                                                          | —        |
+| `primitive.space.4`                          | `--ds-prim-space-4`                          | dimension   | active   | `1rem`                                                             | —        |
+| `primitive.space.5`                          | `--ds-prim-space-5`                          | dimension   | reserved | `1.25rem`                                                          | —        |
+| `primitive.space.6`                          | `--ds-prim-space-6`                          | dimension   | active   | `1.5rem`                                                           | —        |
+| `primitive.space.8`                          | `--ds-prim-space-8`                          | dimension   | active   | `2rem`                                                             | —        |
+| `primitive.space.10`                         | `--ds-prim-space-10`                         | dimension   | reserved | `2.5rem`                                                           | —        |
+| `primitive.space.12`                         | `--ds-prim-space-12`                         | dimension   | active   | `3rem`                                                             | —        |
+| `primitive.space.16`                         | `--ds-prim-space-16`                         | dimension   | reserved | `4rem`                                                             | —        |
+| `primitive.space.24`                         | `--ds-prim-space-24`                         | dimension   | reserved | `6rem`                                                             | —        |
+| `primitive.space.32`                         | `--ds-prim-space-32`                         | dimension   | reserved | `8rem`                                                             | —        |
+| `primitive.space.0-5`                        | `--ds-prim-space-0-5`                        | dimension   | reserved | `0.125rem`                                                         | —        |
+| `primitive.space.page`                       | `--ds-prim-space-page`                       | dimension   | active   | `1.5rem`                                                           | —        |
+| `primitive.space.section`                    | `--ds-prim-space-section`                    | dimension   | active   | `4rem`                                                             | —        |
+| `primitive.space.content-sm`                 | `--ds-prim-space-content-sm`                 | dimension   | active   | `42rem`                                                            | —        |
+| `primitive.space.content`                    | `--ds-prim-space-content`                    | dimension   | active   | `64rem`                                                            | —        |
+| `primitive.space.content-lg`                 | `--ds-prim-space-content-lg`                 | dimension   | active   | `80rem`                                                            | —        |
+| `primitive.space.sidebar`                    | `--ds-prim-space-sidebar`                    | dimension   | active   | `16rem`                                                            | —        |
+| `primitive.space.sidebar-mobile`             | `--ds-prim-space-sidebar-mobile`             | dimension   | active   | `18rem`                                                            | —        |
+| `primitive.space.focus-ring-width`           | `--ds-prim-space-focus-ring-width`           | dimension   | active   | `2px`                                                              | —        |
+| `primitive.radius.none`                      | `--ds-prim-radius-none`                      | dimension   | active   | `0rem`                                                             | —        |
+| `primitive.radius.base`                      | `--ds-prim-radius-base`                      | dimension   | reserved | `0.625rem`                                                         | —        |
+| `primitive.radius.xs`                        | `--ds-prim-radius-xs`                        | dimension   | active   | `0.25rem`                                                          | —        |
+| `primitive.radius.sm`                        | `--ds-prim-radius-sm`                        | dimension   | active   | `0.375rem`                                                         | —        |
+| `primitive.radius.md`                        | `--ds-prim-radius-md`                        | dimension   | active   | `0.5rem`                                                           | —        |
+| `primitive.radius.lg`                        | `--ds-prim-radius-lg`                        | dimension   | active   | `0.625rem`                                                         | —        |
+| `primitive.radius.xl`                        | `--ds-prim-radius-xl`                        | dimension   | active   | `0.875rem`                                                         | —        |
+| `primitive.radius.2xl`                       | `--ds-prim-radius-2xl`                       | dimension   | active   | `1.125rem`                                                         | —        |
+| `primitive.radius.3xl`                       | `--ds-prim-radius-3xl`                       | dimension   | active   | `1.375rem`                                                         | —        |
+| `primitive.radius.4xl`                       | `--ds-prim-radius-4xl`                       | dimension   | active   | `1.625rem`                                                         | —        |
+| `primitive.radius.full`                      | `--ds-prim-radius-full`                      | dimension   | active   | `9999px`                                                           | —        |
+| `primitive.typography.size.xs`               | `--ds-prim-typography-size-xs`               | dimension   | active   | `0.75rem`                                                          | —        |
+| `primitive.typography.size.sm`               | `--ds-prim-typography-size-sm`               | dimension   | active   | `0.875rem`                                                         | —        |
+| `primitive.typography.size.base`             | `--ds-prim-typography-size-base`             | dimension   | active   | `1rem`                                                             | —        |
+| `primitive.typography.size.lg`               | `--ds-prim-typography-size-lg`               | dimension   | active   | `1.125rem`                                                         | —        |
+| `primitive.typography.size.xl`               | `--ds-prim-typography-size-xl`               | dimension   | active   | `1.25rem`                                                          | —        |
+| `primitive.typography.size.2xl`              | `--ds-prim-typography-size-2xl`              | dimension   | active   | `1.5rem`                                                           | —        |
+| `primitive.typography.size.3xl`              | `--ds-prim-typography-size-3xl`              | dimension   | active   | `1.875rem`                                                         | —        |
+| `primitive.typography.size.4xl`              | `--ds-prim-typography-size-4xl`              | dimension   | active   | `2.25rem`                                                          | —        |
+| `primitive.typography.line-height.tight`     | `--ds-prim-typography-line-height-tight`     | number      | active   | `1.25`                                                             | —        |
+| `primitive.typography.line-height.snug`      | `--ds-prim-typography-line-height-snug`      | number      | active   | `1.375`                                                            | —        |
+| `primitive.typography.line-height.normal`    | `--ds-prim-typography-line-height-normal`    | number      | active   | `1.5`                                                              | —        |
+| `primitive.typography.line-height.relaxed`   | `--ds-prim-typography-line-height-relaxed`   | number      | active   | `1.625`                                                            | —        |
+| `primitive.typography.line-height.loose`     | `--ds-prim-typography-line-height-loose`     | number      | active   | `2`                                                                | —        |
+| `primitive.typography.letter-spacing.tight`  | `--ds-prim-typography-letter-spacing-tight`  | dimension   | active   | `-0.025em`                                                         | —        |
+| `primitive.typography.letter-spacing.normal` | `--ds-prim-typography-letter-spacing-normal` | dimension   | active   | `0em`                                                              | —        |
+| `primitive.typography.letter-spacing.wide`   | `--ds-prim-typography-letter-spacing-wide`   | dimension   | active   | `0.025em`                                                          | —        |
+| `primitive.typography.letter-spacing.wider`  | `--ds-prim-typography-letter-spacing-wider`  | dimension   | active   | `0.05em`                                                           | —        |
+| `primitive.typography.font-weight.normal`    | `--ds-prim-typography-font-weight-normal`    | fontWeight  | active   | `400`                                                              | —        |
+| `primitive.typography.font-weight.medium`    | `--ds-prim-typography-font-weight-medium`    | fontWeight  | active   | `500`                                                              | —        |
+| `primitive.typography.font-weight.semibold`  | `--ds-prim-typography-font-weight-semibold`  | fontWeight  | active   | `600`                                                              | —        |
+| `primitive.typography.font-weight.bold`      | `--ds-prim-typography-font-weight-bold`      | fontWeight  | active   | `700`                                                              | —        |
+| `primitive.typography.font-family.sans`      | `--ds-prim-typography-font-family-sans`      | fontFamily  | active   | `Geist, sans-serif`                                                | —        |
+| `primitive.typography.font-family.mono`      | `--ds-prim-typography-font-family-mono`      | fontFamily  | active   | `JetBrains Mono, monospace`                                        | —        |
+| `primitive.elevation.light.xs`               | `--ds-prim-elevation-light-xs`               | shadow      | active   | `0 1px 2px rgba(0, 0, 0, 0.04)`                                    | —        |
+| `primitive.elevation.light.sm`               | `--ds-prim-elevation-light-sm`               | shadow      | active   | `0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)`     | —        |
+| `primitive.elevation.light.md`               | `--ds-prim-elevation-light-md`               | shadow      | active   | `0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)`     | —        |
+| `primitive.elevation.light.lg`               | `--ds-prim-elevation-light-lg`               | shadow      | active   | `0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)`   | —        |
+| `primitive.elevation.light.xl`               | `--ds-prim-elevation-light-xl`               | shadow      | active   | `0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)` | —        |
+| `primitive.elevation.light.2xl`              | `--ds-prim-elevation-light-2xl`              | shadow      | active   | `0 25px 50px rgba(0, 0, 0, 0.12)`                                  | —        |
+| `primitive.elevation.light.inner`            | `--ds-prim-elevation-light-inner`            | shadow      | active   | `inset 0 2px 4px rgba(0, 0, 0, 0.05)`                              | —        |
+| `primitive.elevation.dark.xs`                | `--ds-prim-elevation-dark-xs`                | shadow      | active   | `0 1px 2px rgba(0, 0, 0, 0.2)`                                     | —        |
+| `primitive.elevation.dark.sm`                | `--ds-prim-elevation-dark-sm`                | shadow      | active   | `0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)`       | —        |
+| `primitive.elevation.dark.md`                | `--ds-prim-elevation-dark-md`                | shadow      | active   | `0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)`     | —        |
+| `primitive.elevation.dark.lg`                | `--ds-prim-elevation-dark-lg`                | shadow      | active   | `0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)`     | —        |
+| `primitive.elevation.dark.xl`                | `--ds-prim-elevation-dark-xl`                | shadow      | active   | `0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)`  | —        |
+| `primitive.elevation.dark.2xl`               | `--ds-prim-elevation-dark-2xl`               | shadow      | active   | `0 25px 50px rgba(0, 0, 0, 0.5)`                                   | —        |
+| `primitive.elevation.dark.inner`             | `--ds-prim-elevation-dark-inner`             | shadow      | active   | `inset 0 2px 4px rgba(0, 0, 0, 0.3)`                               | —        |
+| `primitive.motion.duration.instant`          | `--ds-prim-motion-duration-instant`          | duration    | active   | `0ms`                                                              | —        |
+| `primitive.motion.duration.fast`             | `--ds-prim-motion-duration-fast`             | duration    | active   | `100ms`                                                            | —        |
+| `primitive.motion.duration.normal`           | `--ds-prim-motion-duration-normal`           | duration    | active   | `200ms`                                                            | —        |
+| `primitive.motion.duration.slow`             | `--ds-prim-motion-duration-slow`             | duration    | active   | `300ms`                                                            | —        |
+| `primitive.motion.duration.slower`           | `--ds-prim-motion-duration-slower`           | duration    | active   | `500ms`                                                            | —        |
+| `primitive.motion.duration.extra-slow`       | `--ds-prim-motion-duration-extra-slow`       | duration    | active   | `1000ms`                                                           | —        |
+| `primitive.motion.easing.default`            | `--ds-prim-motion-easing-default`            | cubicBezier | active   | `cubic-bezier(0.4, 0, 0.2, 1)`                                     | —        |
+| `primitive.motion.easing.in`                 | `--ds-prim-motion-easing-in`                 | cubicBezier | active   | `cubic-bezier(0.4, 0, 1, 1)`                                       | —        |
+| `primitive.motion.easing.out`                | `--ds-prim-motion-easing-out`                | cubicBezier | active   | `cubic-bezier(0, 0, 0.2, 1)`                                       | —        |
+| `primitive.motion.easing.spring`             | `--ds-prim-motion-easing-spring`             | cubicBezier | active   | `cubic-bezier(0.175, 0.885, 0.32, 1.275)`                          | —        |
+| `primitive.opacity.0-03`                     | `--ds-prim-opacity-0-03`                     | number      | reserved | `0.03`                                                             | —        |
+| `primitive.opacity.0-04`                     | `--ds-prim-opacity-0-04`                     | number      | reserved | `0.04`                                                             | —        |
+| `primitive.opacity.0-05`                     | `--ds-prim-opacity-0-05`                     | number      | reserved | `0.05`                                                             | —        |
+| `primitive.opacity.0-07`                     | `--ds-prim-opacity-0-07`                     | number      | reserved | `0.07`                                                             | —        |
+| `primitive.opacity.0-08`                     | `--ds-prim-opacity-0-08`                     | number      | reserved | `0.08`                                                             | —        |
+| `primitive.opacity.0-10`                     | `--ds-prim-opacity-0-10`                     | number      | reserved | `0.1`                                                              | —        |
+| `primitive.opacity.0-12`                     | `--ds-prim-opacity-0-12`                     | number      | reserved | `0.12`                                                             | —        |
+| `primitive.opacity.0-15`                     | `--ds-prim-opacity-0-15`                     | number      | reserved | `0.15`                                                             | —        |
+| `primitive.opacity.0-18`                     | `--ds-prim-opacity-0-18`                     | number      | reserved | `0.18`                                                             | —        |
+| `primitive.opacity.0-20`                     | `--ds-prim-opacity-0-20`                     | number      | reserved | `0.2`                                                              | —        |
+| `primitive.opacity.0-25`                     | `--ds-prim-opacity-0-25`                     | number      | reserved | `0.25`                                                             | —        |
+| `primitive.opacity.0-30`                     | `--ds-prim-opacity-0-30`                     | number      | reserved | `0.3`                                                              | —        |
+| `primitive.opacity.0-35`                     | `--ds-prim-opacity-0-35`                     | number      | reserved | `0.35`                                                             | —        |
+| `primitive.opacity.0-50`                     | `--ds-prim-opacity-0-50`                     | number      | active   | `0.5`                                                              | —        |
+| `primitive.opacity.0-80`                     | `--ds-prim-opacity-0-80`                     | number      | active   | `0.8`                                                              | —        |
+| `primitive.zindex.dropdown`                  | `--ds-prim-zindex-dropdown`                  | number      | active   | `1000`                                                             | —        |
+| `primitive.zindex.sticky`                    | `--ds-prim-zindex-sticky`                    | number      | active   | `1100`                                                             | —        |
+| `primitive.zindex.fixed`                     | `--ds-prim-zindex-fixed`                     | number      | active   | `1200`                                                             | —        |
+| `primitive.zindex.overlay`                   | `--ds-prim-zindex-overlay`                   | number      | active   | `1300`                                                             | —        |
+| `primitive.zindex.modal`                     | `--ds-prim-zindex-modal`                     | number      | active   | `1400`                                                             | —        |
+| `primitive.zindex.popover`                   | `--ds-prim-zindex-popover`                   | number      | active   | `1500`                                                             | —        |
+| `primitive.zindex.toast`                     | `--ds-prim-zindex-toast`                     | number      | active   | `1600`                                                             | —        |
+| `primitive.zindex.tooltip`                   | `--ds-prim-zindex-tooltip`                   | number      | active   | `1700`                                                             | —        |
+| `primitive.breakpoint.sm`                    | `--ds-prim-breakpoint-sm`                    | dimension   | active   | `40rem`                                                            | —        |
+| `primitive.breakpoint.md`                    | `--ds-prim-breakpoint-md`                    | dimension   | active   | `48rem`                                                            | —        |
+| `primitive.breakpoint.lg`                    | `--ds-prim-breakpoint-lg`                    | dimension   | active   | `64rem`                                                            | —        |
+| `primitive.breakpoint.xl`                    | `--ds-prim-breakpoint-xl`                    | dimension   | active   | `80rem`                                                            | —        |
+| `primitive.breakpoint.2xl`                   | `--ds-prim-breakpoint-2xl`                   | dimension   | active   | `96rem`                                                            | —        |
+| `primitive.border-width.1`                   | `--ds-prim-border-width-1`                   | dimension   | active   | `1px`                                                              | —        |
+| `primitive.border-width.2`                   | `--ds-prim-border-width-2`                   | dimension   | active   | `2px`                                                              | —        |
+| `primitive.border-width.1-5`                 | `--ds-prim-border-width-1-5`                 | dimension   | active   | `1.5px`                                                            | —        |

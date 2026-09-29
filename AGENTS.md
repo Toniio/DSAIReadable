@@ -25,8 +25,9 @@ below exists because breaking it produces non-conforming generated code.
 
 ## 2. Token architecture
 
-Three tiers in the [W3C DTCG](https://design-tokens.github.io/community-group/format/)
-format, in this strict order of reference:
+Three tiers in the [W3C DTCG](https://www.designtokens.org/TR/2025.10/format/)
+format — Format Module 2025.10, checked by `tz check` (`terrazzo.config.ts`) —
+in this strict order of reference:
 
 ```
 tokens/primitive.json   Tier 1 — raw values                PRIVATE, never referenced outside Tier 2
@@ -39,6 +40,13 @@ styles/globals.css
 ```
 
 A Tier 2 or 3 token holds **only** `{…}` references, never a literal value.
+The three files form one DTCG document: the primitives sit under the
+`primitive` group, so a semantic token names one in full,
+`{primitive.radius.md}`. Values take the 2025.10 object forms
+(`{ "colorSpace": "srgb", "components": […] }`, `{ "value": 1, "unit": "rem" }`),
+and `mcp-server/src/lib/dtcg.ts` prints them as CSS. One declared divergence:
+letter spacing stays in `em`, which the Format Module does not list. Light/dark
+modes stay in `$extensions.modes` until they move to a DTCG Resolver.
 `tokens.css` is generated: any direct edit is overwritten by the next build and
 caught by `npm run tokens:check`.
 
@@ -55,7 +63,7 @@ the reason why.
 ## 3. Validation commands
 
 ```bash
-npm run tokens-validate   # DTCG naming + raw values + @theme bridge + focus + contrast + palette monotonicity + chart palette + fonts + lifecycle + freshness
+npm run tokens-validate   # DTCG 2025.10 conformance + naming + raw values + @theme bridge + focus + contrast + palette monotonicity + chart palette + fonts + lifecycle + freshness
 npm run typecheck:all     # app + scripts + mcp-server
 npm run lint              # ESLint, zero warnings
 npm run lint:language     # American English only: French words, diacritics and British spellings

@@ -18,6 +18,7 @@ const config = {
   // whole pipeline exists to prevent.
   "{tokens/*.json,tokens.css}": () => [
     "npm run tokens:check",
+    "npm run tokens:lint-dtcg",
     "npm run tokens:lint-naming",
     "npm run tokens:lint-values",
     "npm run tokens:lint-bridge",

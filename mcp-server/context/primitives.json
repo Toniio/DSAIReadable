@@ -1,736 +1,736 @@
 [
   {
-    "path": "color.mist.0",
+    "path": "primitive.color.mist.0",
     "value": "#ffffff",
     "type": "color"
   },
   {
-    "path": "color.mist.50",
+    "path": "primitive.color.mist.50",
     "value": "#f9fbfb",
     "type": "color"
   },
   {
-    "path": "color.mist.100",
+    "path": "primitive.color.mist.100",
     "value": "#f1f3f3",
     "type": "color"
   },
   {
-    "path": "color.mist.200",
+    "path": "primitive.color.mist.200",
     "value": "#e3e7e8",
     "type": "color"
   },
   {
-    "path": "color.mist.400",
+    "path": "primitive.color.mist.400",
     "value": "#9ca8ab",
     "type": "color"
   },
   {
-    "path": "color.mist.500",
+    "path": "primitive.color.mist.500",
     "value": "#67787c",
     "type": "color"
   },
   {
-    "path": "color.mist.600",
+    "path": "primitive.color.mist.600",
     "value": "#607175",
     "type": "color"
   },
   {
-    "path": "color.mist.700",
+    "path": "primitive.color.mist.700",
     "value": "#424f52",
     "type": "color"
   },
   {
-    "path": "color.mist.800",
+    "path": "primitive.color.mist.800",
     "value": "#22292b",
     "type": "color"
   },
   {
-    "path": "color.mist.900",
+    "path": "primitive.color.mist.900",
     "value": "#161b1d",
     "type": "color"
   },
   {
-    "path": "color.mist.950",
+    "path": "primitive.color.mist.950",
     "value": "#090b0c",
     "type": "color"
   },
   {
-    "path": "color.violet.50",
+    "path": "primitive.color.violet.50",
     "value": "#eef2ff",
     "type": "color"
   },
   {
-    "path": "color.violet.400",
+    "path": "primitive.color.violet.400",
     "value": "#6e6cff",
     "type": "color"
   },
   {
-    "path": "color.violet.500",
+    "path": "primitive.color.violet.500",
     "value": "#615fff",
     "type": "color"
   },
   {
-    "path": "color.violet.550",
+    "path": "primitive.color.violet.550",
     "value": "#4f39f6",
     "type": "color"
   },
   {
-    "path": "color.violet.600",
+    "path": "primitive.color.violet.600",
     "value": "#432dd7",
     "type": "color"
   },
   {
-    "path": "color.violet.700",
+    "path": "primitive.color.violet.700",
     "value": "#372aac",
     "type": "color"
   },
   {
-    "path": "color.red.300",
+    "path": "primitive.color.red.300",
     "value": "#ffa2a2",
     "type": "color"
   },
   {
-    "path": "color.red.500",
+    "path": "primitive.color.red.500",
     "value": "#ff6467",
     "type": "color"
   },
   {
-    "path": "color.red.600",
+    "path": "primitive.color.red.600",
     "value": "#e7000b",
     "type": "color"
   },
   {
-    "path": "color.red.800",
+    "path": "primitive.color.red.800",
     "value": "#9f0712",
     "type": "color"
   },
   {
-    "path": "color.green.200",
+    "path": "primitive.color.green.200",
     "value": "#bbf451",
     "type": "color"
   },
   {
-    "path": "color.green.300",
+    "path": "primitive.color.green.300",
     "value": "#7ccf00",
     "type": "color"
   },
   {
-    "path": "color.green.400",
+    "path": "primitive.color.green.400",
     "value": "#5ea500",
     "type": "color"
   },
   {
-    "path": "color.green.500",
+    "path": "primitive.color.green.500",
     "value": "#497d00",
     "type": "color"
   },
   {
-    "path": "color.green.600",
+    "path": "primitive.color.green.600",
     "value": "#3c6300",
     "type": "color"
   },
   {
-    "path": "color.blue.300",
+    "path": "primitive.color.blue.300",
     "value": "#8fd6fa",
     "type": "color"
   },
   {
-    "path": "color.blue.600",
+    "path": "primitive.color.blue.600",
     "value": "#438fbd",
     "type": "color"
   },
   {
-    "path": "color.yellow.200",
+    "path": "primitive.color.yellow.200",
     "value": "#e5e747",
     "type": "color"
   },
   {
-    "path": "color.amber.500",
+    "path": "primitive.color.amber.500",
     "value": "#c89005",
     "type": "color"
   },
   {
-    "path": "color.amber.600",
+    "path": "primitive.color.amber.600",
     "value": "#af8526",
     "type": "color"
   },
   {
-    "path": "color.amber.800",
+    "path": "primitive.color.amber.800",
     "value": "#734e00",
     "type": "color"
   },
   {
-    "path": "color.plum.500",
+    "path": "primitive.color.plum.500",
     "value": "#9b5f7c",
     "type": "color"
   },
   {
-    "path": "color.plum.800",
+    "path": "primitive.color.plum.800",
     "value": "#4d2761",
     "type": "color"
   },
   {
-    "path": "color.black",
+    "path": "primitive.color.black",
     "value": "#000000",
     "type": "color"
   },
   {
-    "path": "color.white-alpha.10",
+    "path": "primitive.color.white-alpha.10",
     "value": "rgba(255, 255, 255, 0.1)",
     "type": "color"
   },
   {
-    "path": "color.white-alpha.15",
+    "path": "primitive.color.white-alpha.15",
     "value": "rgba(255, 255, 255, 0.15)",
     "type": "color"
   },
   {
-    "path": "space.1",
+    "path": "primitive.space.1",
     "value": "0.25rem",
     "type": "dimension"
   },
   {
-    "path": "space.2",
+    "path": "primitive.space.2",
     "value": "0.5rem",
     "type": "dimension"
   },
   {
-    "path": "space.3",
+    "path": "primitive.space.3",
     "value": "0.75rem",
     "type": "dimension"
   },
   {
-    "path": "space.4",
+    "path": "primitive.space.4",
     "value": "1rem",
     "type": "dimension"
   },
   {
-    "path": "space.5",
+    "path": "primitive.space.5",
     "value": "1.25rem",
     "type": "dimension"
   },
   {
-    "path": "space.6",
+    "path": "primitive.space.6",
     "value": "1.5rem",
     "type": "dimension"
   },
   {
-    "path": "space.8",
+    "path": "primitive.space.8",
     "value": "2rem",
     "type": "dimension"
   },
   {
-    "path": "space.10",
+    "path": "primitive.space.10",
     "value": "2.5rem",
     "type": "dimension"
   },
   {
-    "path": "space.12",
+    "path": "primitive.space.12",
     "value": "3rem",
     "type": "dimension"
   },
   {
-    "path": "space.16",
+    "path": "primitive.space.16",
     "value": "4rem",
     "type": "dimension"
   },
   {
-    "path": "space.24",
+    "path": "primitive.space.24",
     "value": "6rem",
     "type": "dimension"
   },
   {
-    "path": "space.32",
+    "path": "primitive.space.32",
     "value": "8rem",
     "type": "dimension"
   },
   {
-    "path": "space.0-5",
+    "path": "primitive.space.0-5",
     "value": "0.125rem",
     "type": "dimension"
   },
   {
-    "path": "space.page",
+    "path": "primitive.space.page",
     "value": "1.5rem",
     "type": "dimension"
   },
   {
-    "path": "space.section",
+    "path": "primitive.space.section",
     "value": "4rem",
     "type": "dimension"
   },
   {
-    "path": "space.content-sm",
+    "path": "primitive.space.content-sm",
     "value": "42rem",
     "type": "dimension"
   },
   {
-    "path": "space.content",
+    "path": "primitive.space.content",
     "value": "64rem",
     "type": "dimension"
   },
   {
-    "path": "space.content-lg",
+    "path": "primitive.space.content-lg",
     "value": "80rem",
     "type": "dimension"
   },
   {
-    "path": "space.sidebar",
+    "path": "primitive.space.sidebar",
     "value": "16rem",
     "type": "dimension"
   },
   {
-    "path": "space.sidebar-mobile",
+    "path": "primitive.space.sidebar-mobile",
     "value": "18rem",
     "type": "dimension"
   },
   {
-    "path": "space.focus-ring-width",
+    "path": "primitive.space.focus-ring-width",
     "value": "2px",
     "type": "dimension"
   },
   {
-    "path": "radius.none",
+    "path": "primitive.radius.none",
     "value": "0rem",
     "type": "dimension"
   },
   {
-    "path": "radius.base",
+    "path": "primitive.radius.base",
     "value": "0.625rem",
     "type": "dimension"
   },
   {
-    "path": "radius.xs",
+    "path": "primitive.radius.xs",
     "value": "0.25rem",
     "type": "dimension"
   },
   {
-    "path": "radius.sm",
+    "path": "primitive.radius.sm",
     "value": "0.375rem",
     "type": "dimension"
   },
   {
-    "path": "radius.md",
+    "path": "primitive.radius.md",
     "value": "0.5rem",
     "type": "dimension"
   },
   {
-    "path": "radius.lg",
+    "path": "primitive.radius.lg",
     "value": "0.625rem",
     "type": "dimension"
   },
   {
-    "path": "radius.xl",
+    "path": "primitive.radius.xl",
     "value": "0.875rem",
     "type": "dimension"
   },
   {
-    "path": "radius.2xl",
+    "path": "primitive.radius.2xl",
     "value": "1.125rem",
     "type": "dimension"
   },
   {
-    "path": "radius.3xl",
+    "path": "primitive.radius.3xl",
     "value": "1.375rem",
     "type": "dimension"
   },
   {
-    "path": "radius.4xl",
+    "path": "primitive.radius.4xl",
     "value": "1.625rem",
     "type": "dimension"
   },
   {
-    "path": "radius.full",
+    "path": "primitive.radius.full",
     "value": "9999px",
     "type": "dimension"
   },
   {
-    "path": "typography.size.xs",
+    "path": "primitive.typography.size.xs",
     "value": "0.75rem",
     "type": "dimension"
   },
   {
-    "path": "typography.size.sm",
+    "path": "primitive.typography.size.sm",
     "value": "0.875rem",
     "type": "dimension"
   },
   {
-    "path": "typography.size.base",
+    "path": "primitive.typography.size.base",
     "value": "1rem",
     "type": "dimension"
   },
   {
-    "path": "typography.size.lg",
+    "path": "primitive.typography.size.lg",
     "value": "1.125rem",
     "type": "dimension"
   },
   {
-    "path": "typography.size.xl",
+    "path": "primitive.typography.size.xl",
     "value": "1.25rem",
     "type": "dimension"
   },
   {
-    "path": "typography.size.2xl",
+    "path": "primitive.typography.size.2xl",
     "value": "1.5rem",
     "type": "dimension"
   },
   {
-    "path": "typography.size.3xl",
+    "path": "primitive.typography.size.3xl",
     "value": "1.875rem",
     "type": "dimension"
   },
   {
-    "path": "typography.size.4xl",
+    "path": "primitive.typography.size.4xl",
     "value": "2.25rem",
     "type": "dimension"
   },
   {
-    "path": "typography.line-height.tight",
+    "path": "primitive.typography.line-height.tight",
     "value": "1.25",
     "type": "number"
   },
   {
-    "path": "typography.line-height.snug",
+    "path": "primitive.typography.line-height.snug",
     "value": "1.375",
     "type": "number"
   },
   {
-    "path": "typography.line-height.normal",
+    "path": "primitive.typography.line-height.normal",
     "value": "1.5",
     "type": "number"
   },
   {
-    "path": "typography.line-height.relaxed",
+    "path": "primitive.typography.line-height.relaxed",
     "value": "1.625",
     "type": "number"
   },
   {
-    "path": "typography.line-height.loose",
+    "path": "primitive.typography.line-height.loose",
     "value": "2",
     "type": "number"
   },
   {
-    "path": "typography.letter-spacing.tight",
+    "path": "primitive.typography.letter-spacing.tight",
     "value": "-0.025em",
     "type": "dimension"
   },
   {
-    "path": "typography.letter-spacing.normal",
+    "path": "primitive.typography.letter-spacing.normal",
     "value": "0em",
     "type": "dimension"
   },
   {
-    "path": "typography.letter-spacing.wide",
+    "path": "primitive.typography.letter-spacing.wide",
     "value": "0.025em",
     "type": "dimension"
   },
   {
-    "path": "typography.letter-spacing.wider",
+    "path": "primitive.typography.letter-spacing.wider",
     "value": "0.05em",
     "type": "dimension"
   },
   {
-    "path": "typography.font-weight.normal",
+    "path": "primitive.typography.font-weight.normal",
     "value": "400",
-    "type": "font-weight"
+    "type": "fontWeight"
   },
   {
-    "path": "typography.font-weight.medium",
+    "path": "primitive.typography.font-weight.medium",
     "value": "500",
-    "type": "font-weight"
+    "type": "fontWeight"
   },
   {
-    "path": "typography.font-weight.semibold",
+    "path": "primitive.typography.font-weight.semibold",
     "value": "600",
-    "type": "font-weight"
+    "type": "fontWeight"
   },
   {
-    "path": "typography.font-weight.bold",
+    "path": "primitive.typography.font-weight.bold",
     "value": "700",
-    "type": "font-weight"
+    "type": "fontWeight"
   },
   {
-    "path": "typography.font-family.sans",
+    "path": "primitive.typography.font-family.sans",
     "value": "Geist, sans-serif",
-    "type": "font-family"
+    "type": "fontFamily"
   },
   {
-    "path": "typography.font-family.mono",
+    "path": "primitive.typography.font-family.mono",
     "value": "JetBrains Mono, monospace",
-    "type": "font-family"
+    "type": "fontFamily"
   },
   {
-    "path": "elevation.light.xs",
+    "path": "primitive.elevation.light.xs",
     "value": "0 1px 2px rgba(0, 0, 0, 0.04)",
     "type": "shadow"
   },
   {
-    "path": "elevation.light.sm",
+    "path": "primitive.elevation.light.sm",
     "value": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)",
     "type": "shadow"
   },
   {
-    "path": "elevation.light.md",
+    "path": "primitive.elevation.light.md",
     "value": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)",
     "type": "shadow"
   },
   {
-    "path": "elevation.light.lg",
+    "path": "primitive.elevation.light.lg",
     "value": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)",
     "type": "shadow"
   },
   {
-    "path": "elevation.light.xl",
+    "path": "primitive.elevation.light.xl",
     "value": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)",
     "type": "shadow"
   },
   {
-    "path": "elevation.light.2xl",
+    "path": "primitive.elevation.light.2xl",
     "value": "0 25px 50px rgba(0, 0, 0, 0.12)",
     "type": "shadow"
   },
   {
-    "path": "elevation.light.inner",
+    "path": "primitive.elevation.light.inner",
     "value": "inset 0 2px 4px rgba(0, 0, 0, 0.05)",
     "type": "shadow"
   },
   {
-    "path": "elevation.dark.xs",
+    "path": "primitive.elevation.dark.xs",
     "value": "0 1px 2px rgba(0, 0, 0, 0.2)",
     "type": "shadow"
   },
   {
-    "path": "elevation.dark.sm",
+    "path": "primitive.elevation.dark.sm",
     "value": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)",
     "type": "shadow"
   },
   {
-    "path": "elevation.dark.md",
+    "path": "primitive.elevation.dark.md",
     "value": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)",
     "type": "shadow"
   },
   {
-    "path": "elevation.dark.lg",
+    "path": "primitive.elevation.dark.lg",
     "value": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)",
     "type": "shadow"
   },
   {
-    "path": "elevation.dark.xl",
+    "path": "primitive.elevation.dark.xl",
     "value": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)",
     "type": "shadow"
   },
   {
-    "path": "elevation.dark.2xl",
+    "path": "primitive.elevation.dark.2xl",
     "value": "0 25px 50px rgba(0, 0, 0, 0.5)",
     "type": "shadow"
   },
   {
-    "path": "elevation.dark.inner",
+    "path": "primitive.elevation.dark.inner",
     "value": "inset 0 2px 4px rgba(0, 0, 0, 0.3)",
     "type": "shadow"
   },
   {
-    "path": "motion.duration.instant",
+    "path": "primitive.motion.duration.instant",
     "value": "0ms",
     "type": "duration"
   },
   {
-    "path": "motion.duration.fast",
+    "path": "primitive.motion.duration.fast",
     "value": "100ms",
     "type": "duration"
   },
   {
-    "path": "motion.duration.normal",
+    "path": "primitive.motion.duration.normal",
     "value": "200ms",
     "type": "duration"
   },
   {
-    "path": "motion.duration.slow",
+    "path": "primitive.motion.duration.slow",
     "value": "300ms",
     "type": "duration"
   },
   {
-    "path": "motion.duration.slower",
+    "path": "primitive.motion.duration.slower",
     "value": "500ms",
     "type": "duration"
   },
   {
-    "path": "motion.duration.extra-slow",
+    "path": "primitive.motion.duration.extra-slow",
     "value": "1000ms",
     "type": "duration"
   },
   {
-    "path": "motion.easing.default",
+    "path": "primitive.motion.easing.default",
     "value": "cubic-bezier(0.4, 0, 0.2, 1)",
     "type": "cubicBezier"
   },
   {
-    "path": "motion.easing.in",
+    "path": "primitive.motion.easing.in",
     "value": "cubic-bezier(0.4, 0, 1, 1)",
     "type": "cubicBezier"
   },
   {
-    "path": "motion.easing.out",
+    "path": "primitive.motion.easing.out",
     "value": "cubic-bezier(0, 0, 0.2, 1)",
     "type": "cubicBezier"
   },
   {
-    "path": "motion.easing.spring",
+    "path": "primitive.motion.easing.spring",
     "value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
     "type": "cubicBezier"
   },
   {
-    "path": "opacity.0-03",
+    "path": "primitive.opacity.0-03",
     "value": "0.03",
     "type": "number"
   },
   {
-    "path": "opacity.0-04",
+    "path": "primitive.opacity.0-04",
     "value": "0.04",
     "type": "number"
   },
   {
-    "path": "opacity.0-05",
+    "path": "primitive.opacity.0-05",
     "value": "0.05",
     "type": "number"
   },
   {
-    "path": "opacity.0-07",
+    "path": "primitive.opacity.0-07",
     "value": "0.07",
     "type": "number"
   },
   {
-    "path": "opacity.0-08",
+    "path": "primitive.opacity.0-08",
     "value": "0.08",
     "type": "number"
   },
   {
-    "path": "opacity.0-10",
-    "value": "0.10",
+    "path": "primitive.opacity.0-10",
+    "value": "0.1",
     "type": "number"
   },
   {
-    "path": "opacity.0-12",
+    "path": "primitive.opacity.0-12",
     "value": "0.12",
     "type": "number"
   },
   {
-    "path": "opacity.0-15",
+    "path": "primitive.opacity.0-15",
     "value": "0.15",
     "type": "number"
   },
   {
-    "path": "opacity.0-18",
+    "path": "primitive.opacity.0-18",
     "value": "0.18",
     "type": "number"
   },
   {
-    "path": "opacity.0-20",
-    "value": "0.20",
+    "path": "primitive.opacity.0-20",
+    "value": "0.2",
     "type": "number"
   },
   {
-    "path": "opacity.0-25",
+    "path": "primitive.opacity.0-25",
     "value": "0.25",
     "type": "number"
   },
   {
-    "path": "opacity.0-30",
-    "value": "0.30",
+    "path": "primitive.opacity.0-30",
+    "value": "0.3",
     "type": "number"
   },
   {
-    "path": "opacity.0-35",
+    "path": "primitive.opacity.0-35",
     "value": "0.35",
     "type": "number"
   },
   {
-    "path": "opacity.0-50",
-    "value": "0.50",
+    "path": "primitive.opacity.0-50",
+    "value": "0.5",
     "type": "number"
   },
   {
-    "path": "opacity.0-80",
-    "value": "0.80",
+    "path": "primitive.opacity.0-80",
+    "value": "0.8",
     "type": "number"
   },
   {
-    "path": "zindex.dropdown",
+    "path": "primitive.zindex.dropdown",
     "value": "1000",
     "type": "number"
   },
   {
-    "path": "zindex.sticky",
+    "path": "primitive.zindex.sticky",
     "value": "1100",
     "type": "number"
   },
   {
-    "path": "zindex.fixed",
+    "path": "primitive.zindex.fixed",
     "value": "1200",
     "type": "number"
   },
   {
-    "path": "zindex.overlay",
+    "path": "primitive.zindex.overlay",
     "value": "1300",
     "type": "number"
   },
   {
-    "path": "zindex.modal",
+    "path": "primitive.zindex.modal",
     "value": "1400",
     "type": "number"
   },
   {
-    "path": "zindex.popover",
+    "path": "primitive.zindex.popover",
     "value": "1500",
     "type": "number"
   },
   {
-    "path": "zindex.toast",
+    "path": "primitive.zindex.toast",
     "value": "1600",
     "type": "number"
   },
   {
-    "path": "zindex.tooltip",
+    "path": "primitive.zindex.tooltip",
     "value": "1700",
     "type": "number"
   },
   {
-    "path": "breakpoint.sm",
+    "path": "primitive.breakpoint.sm",
     "value": "40rem",
     "type": "dimension"
   },
   {
-    "path": "breakpoint.md",
+    "path": "primitive.breakpoint.md",
     "value": "48rem",
     "type": "dimension"
   },
   {
-    "path": "breakpoint.lg",
+    "path": "primitive.breakpoint.lg",
     "value": "64rem",
     "type": "dimension"
   },
   {
-    "path": "breakpoint.xl",
+    "path": "primitive.breakpoint.xl",
     "value": "80rem",
     "type": "dimension"
   },
   {
-    "path": "breakpoint.2xl",
+    "path": "primitive.breakpoint.2xl",
     "value": "96rem",
     "type": "dimension"
   },
   {
-    "path": "border-width.1",
+    "path": "primitive.border-width.1",
     "value": "1px",
     "type": "dimension"
   },
   {
-    "path": "border-width.2",
+    "path": "primitive.border-width.2",
     "value": "2px",
     "type": "dimension"
   },
   {
-    "path": "border-width.1-5",
+    "path": "primitive.border-width.1-5",
     "value": "1.5px",
     "type": "dimension"
   }

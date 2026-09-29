@@ -15,6 +15,8 @@ import {
 import path from "path"
 import ts from "typescript"
 
+import { cssValue } from "../lib/dtcg.js"
+
 // ── Paths ───────────────────────────────────────────────────────────
 /** Structural type for the arbitrary JSON we read from tokens/ and specs/. */
 type Json = string | number | boolean | null | Json[] | { [key: string]: Json }
@@ -707,9 +709,10 @@ function generateLayoutTokens() {
 // ── 7. primitives.json ──────────────────────────────────────────────
 function generatePrimitives() {
   const flat = flattenDTCG(primitiveTokens)
+  // The CSS form of each DTCG 2025.10 value: what tokens.css declares.
   const result = flat.map((t) => ({
     path: t.path,
-    value: t.$value,
+    value: cssValue(t.$value, t.$type as string),
     type: t.$type ?? "",
   }))
   return write("primitives.json", result)

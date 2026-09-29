@@ -19,16 +19,15 @@ import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { luminance } from "./wcag.js"
+import { cssValue, primitiveGroups } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const HEX = /^#[0-9a-f]{6}$/i
 
-type Leaf = { $value?: unknown }
-const colors = (
-  JSON.parse(readFileSync(resolve(ROOT, "tokens/primitive.json"), "utf-8")) as {
-    color: Record<string, Record<string, Leaf> | Leaf>
-  }
-).color
+type Leaf = { $value?: unknown; $type?: string }
+const colors = primitiveGroups(
+  JSON.parse(readFileSync(resolve(ROOT, "tokens/primitive.json"), "utf-8"))
+).color as Record<string, Record<string, Leaf> | Leaf>
 
 const findings: string[] = []
 const checked: string[] = []
@@ -36,17 +35,13 @@ const checked: string[] = []
 for (const [palette, steps] of Object.entries(colors)) {
   if ("$value" in steps) continue // a single color, not a scale
   const scale = Object.entries(steps as Record<string, Leaf>)
-    .filter(
-      ([step, leaf]) =>
-        /^\d+$/.test(step) &&
-        typeof leaf.$value === "string" &&
-        HEX.test(leaf.$value)
-    )
+    .filter(([step]) => /^\d+$/.test(step))
     .map(([step, leaf]) => ({
       step: Number(step),
-      hex: leaf.$value as string,
-      lum: luminance(leaf.$value as string),
+      hex: cssValue(leaf.$value, leaf.$type),
     }))
+    .filter(({ hex }) => HEX.test(hex))
+    .map((entry) => ({ ...entry, lum: luminance(entry.hex) }))
     .sort((a, b) => a.step - b.step)
   if (scale.length < 2) continue
   checked.push(`${palette} (${scale.length})`)
