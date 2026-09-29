@@ -58,6 +58,7 @@ npm run tokens-validate   # DTCG naming + raw values + @theme bridge + focus + c
 npm run typecheck:all     # app + scripts + mcp-server
 npm run lint              # ESLint, zero warnings
 npm run lint:language     # American English only: French words, diacritics and British spellings
+npm run knip              # zero-base: no unused file, export or dependency (knip.jsonc says why each entry point stays)
 npm run index:validate    # 5 checks: JSON Schema, sizes, data-slot, UI strings, Props types
 npm run specs:validate    # the 59 specs against the 13 canonical sections + Variants, Tokens, Props / API and choice rules up to date + no hedged wording + llms.txt up to date
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json

@@ -1,0 +1,28 @@
+// Zero-base rule: every file, export and dependency is either consumed,
+// generated, or listed here with the reason it stays. `npm run knip` must
+// report nothing; CI fails otherwise.
+{
+  "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
+  "workspaces": {
+    ".": {
+      // The Next app and the package.json scripts are found by knip's plugins.
+      // The registry items are entry points on top of that: consumers install
+      // them with the shadcn CLI, so every file and export they ship is public
+      // API even when the demo app never imports it.
+      "entry": [
+        "components/ui/*.tsx",
+        "hooks/*.ts",
+        "lib/{focus,overlay,surface,ui-strings,utils}.ts"
+      ],
+      "project": [
+        "{app,components,hooks,lib,scripts,tests}/**/*.{ts,tsx}",
+        "styles/*.css",
+        "*.{ts,mjs}"
+      ]
+    },
+    "mcp-server": {
+      // `bin` (src/index.ts) and the package.json scripts are found by knip.
+      "project": ["src/**/*.ts"]
+    }
+  }
+}

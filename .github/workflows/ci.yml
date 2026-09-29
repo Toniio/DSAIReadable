@@ -53,6 +53,9 @@ jobs:
       - run: npm run lint
       - run: npm run lint:language
       - run: npx prettier --check "**/*.{ts,tsx,md}"
+      # Zero-base: no unused file, export or dependency, in the app or in
+      # mcp-server/ (knip.jsonc lists the entry points and why).
+      - run: npm run knip
 
   build:
     name: build

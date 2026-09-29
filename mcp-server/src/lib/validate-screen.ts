@@ -9,9 +9,9 @@
  * written, which may not parse yet.
  */
 
-export type Severity = "error" | "warning" | "info"
+type Severity = "error" | "warning" | "info"
 
-export interface ScreenIssue {
+interface ScreenIssue {
   severity: Severity
   rule: string
   message: string
