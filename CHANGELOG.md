@@ -40,6 +40,9 @@ section that fits.
 
 ### Changed
 
+- Tooling: ESLint 10. `eslint-plugin-react` reads the installed React version
+  instead of detecting it, which relies on an API ESLint 10 removed; the unused
+  `@eslint/eslintrc` is removed.
 - The whole repository is written in native English
   ([#21](https://github.com/Toniio/DSAIReadable/pull/21),
   [#22](https://github.com/Toniio/DSAIReadable/pull/22),
