@@ -104,11 +104,52 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "pt-0"
+        ],
+        "where": [
+          "AccordionContent"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "pb-2.5",
+          "py-2.5"
+        ],
+        "where": [
+          "AccordionContent",
+          "AccordionTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "mb-4",
+          "size-4"
+        ],
+        "where": [
+          "AccordionContent",
+          "AccordionTrigger"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
+          "AccordionTrigger"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "AccordionContent",
           "AccordionTrigger"
         ]
       },
@@ -376,6 +417,73 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "translate-y-0"
+        ],
+        "where": [
+          "alertVariants"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "gap-0.5"
+        ],
+        "where": [
+          "alertVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1-25",
+        "classes": [
+          "right-1.25",
+          "top-1.25"
+        ],
+        "where": [
+          "AlertAction"
+        ]
+      },
+      {
+        "token": "space.scale.18",
+        "classes": [
+          "pr-18"
+        ],
+        "where": [
+          "alertVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-x-2",
+          "mb-2",
+          "py-2"
+        ],
+        "where": [
+          "AlertDescription",
+          "alertVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "alertVariants"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "alertVariants"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -391,6 +499,15 @@
         ],
         "where": [
           "AlertDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "alertVariants"
         ]
       },
       {
@@ -701,6 +818,65 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-0"
+        ],
+        "where": [
+          "AlertDialogOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5"
+        ],
+        "where": [
+          "AlertDialogHeader"
+        ]
+      },
+      {
+        "token": "space.scale.10",
+        "classes": [
+          "size-10"
+        ],
+        "where": [
+          "AlertDialogMedia"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "mb-2"
+        ],
+        "where": [
+          "AlertDialogFooter",
+          "AlertDialogMedia"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "gap-x-4",
+          "p-4"
+        ],
+        "where": [
+          "AlertDialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)",
+          "AlertDialogHeader"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "size-6"
+        ],
+        "where": [
+          "AlertDialogMedia"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -725,6 +901,15 @@
         ],
         "where": [
           "AlertDialogDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "AlertDialogTitle"
         ]
       },
       {
@@ -1195,6 +1380,115 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "bottom-0",
+          "inset-0",
+          "right-0"
+        ],
+        "where": [
+          "AvatarBadge",
+          "Avatar"
+        ]
+      },
+      {
+        "token": "space.scale.10",
+        "classes": [
+          "size-10"
+        ],
+        "where": [
+          "AvatarGroupCount",
+          "Avatar"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "-space-x-2",
+          "size-2"
+        ],
+        "where": [
+          "AvatarBadge",
+          "AvatarGroup"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "size-2.5"
+        ],
+        "where": [
+          "AvatarBadge"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "size-3"
+        ],
+        "where": [
+          "AvatarBadge",
+          "AvatarGroupCount"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "AvatarGroupCount"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "size-5"
+        ],
+        "where": [
+          "AvatarGroupCount"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "size-6"
+        ],
+        "where": [
+          "AvatarGroupCount",
+          "Avatar"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "size-8"
+        ],
+        "where": [
+          "AvatarGroupCount",
+          "Avatar"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "AvatarFallback"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "AvatarFallback",
+          "AvatarGroupCount"
+        ]
+      },
+      {
         "token": "typography.size.sm",
         "classes": [
           "text-sm"
@@ -1574,9 +1868,73 @@
         ]
       },
       {
+        "token": "space.scale.0-5",
+        "classes": [
+          "py-0.5"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "pl-1.5",
+          "pr-1.5"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "px-2"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "size-3"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "h-5"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
         ],
         "where": [
           "badgeVariants"
@@ -1760,12 +2118,66 @@
         ]
       },
       {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "BreadcrumbItem"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5"
+        ],
+        "where": [
+          "BreadcrumbList"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "BreadcrumbSeparator"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "BreadcrumbEllipsis"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "size-5"
+        ],
+        "where": [
+          "BreadcrumbEllipsis"
+        ]
+      },
+      {
         "token": "typography.font-weight.normal",
         "classes": [
           "font-normal"
         ],
         "where": [
           "BreadcrumbPage"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "BreadcrumbList"
         ]
       },
       {
@@ -2102,11 +2514,141 @@
         ]
       },
       {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "buttonVariants.size.sm",
+          "buttonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5",
+          "pl-1.5",
+          "pr-1.5"
+        ],
+        "where": [
+          "buttonVariants.size.default",
+          "buttonVariants.size.lg",
+          "buttonVariants.size.sm",
+          "buttonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "pl-2",
+          "pr-2",
+          "px-2"
+        ],
+        "where": [
+          "buttonVariants.size.default",
+          "buttonVariants.size.lg",
+          "buttonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "buttonVariants.size.default",
+          "buttonVariants.size.lg",
+          "buttonVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "size-3"
+        ],
+        "where": [
+          "buttonVariants.size.icon-xs",
+          "buttonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "buttonVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "buttonVariants"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "h-6",
+          "size-6"
+        ],
+        "where": [
+          "buttonVariants.size.icon-xs",
+          "buttonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "h-7",
+          "size-7"
+        ],
+        "where": [
+          "buttonVariants.size.icon-sm",
+          "buttonVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "size-8"
+        ],
+        "where": [
+          "buttonVariants.size.default",
+          "buttonVariants.size.icon"
+        ]
+      },
+      {
+        "token": "space.scale.9",
+        "classes": [
+          "h-9",
+          "size-9"
+        ],
+        "where": [
+          "buttonVariants.size.icon-lg",
+          "buttonVariants.size.lg"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
+          "buttonVariants"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "buttonVariants.size.xs",
           "buttonVariants"
         ]
       },
@@ -2279,9 +2821,46 @@
         ]
       },
       {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "ButtonGroupText",
+          "buttonGroupVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "ButtonGroupText"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "ButtonGroupText"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
+        ],
+        "where": [
+          "ButtonGroupText"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
         ],
         "where": [
           "ButtonGroupText"
@@ -2567,6 +3146,91 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-0",
+          "inset-x-0",
+          "inset-y-0",
+          "left-0",
+          "p-0",
+          "right-0",
+          "top-0"
+        ],
+        "where": [
+          "Calendar.button_next",
+          "Calendar.button_previous",
+          "Calendar.day",
+          "Calendar.dropdown",
+          "Calendar.nav",
+          "Calendar.range_end",
+          "Calendar.range_start"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "Calendar.caption_label",
+          "Calendar.nav",
+          "CalendarDayButton"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5"
+        ],
+        "where": [
+          "Calendar.dropdowns"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "mt-2",
+          "p-2"
+        ],
+        "where": [
+          "Calendar.week",
+          "Calendar"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "Calendar.caption_label"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "size-4",
+          "w-4"
+        ],
+        "where": [
+          "Calendar.Chevron",
+          "Calendar.month",
+          "Calendar.months",
+          "Calendar.range_end",
+          "Calendar.range_start"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "[--cell-size:var(--space-scale-7)]"
+        ],
+        "where": [
+          "Calendar"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -2582,6 +3246,27 @@
           "font-normal"
         ],
         "where": [
+          "Calendar.weekday",
+          "CalendarDayButton"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "Calendar.caption_label",
+          "Calendar.dropdowns"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "Calendar.week_number",
           "Calendar.weekday",
           "CalendarDayButton"
         ]
@@ -2837,6 +3522,65 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "pb-0",
+          "pt-0"
+        ],
+        "where": [
+          "Card"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "CardHeader"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "Card"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "p-3",
+          "pb-3",
+          "px-3",
+          "py-3"
+        ],
+        "where": [
+          "CardContent",
+          "CardFooter",
+          "CardHeader",
+          "Card"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "p-4",
+          "pb-4",
+          "px-4",
+          "py-4"
+        ],
+        "where": [
+          "CardContent",
+          "CardFooter",
+          "CardHeader",
+          "Card"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -2862,6 +3606,15 @@
         "where": [
           "CardDescription",
           "Card"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "CardTitle"
         ]
       },
       {
@@ -3113,7 +3866,43 @@
         "role": "Button that goes to the next slide"
       }
     ],
-    "tokens": [],
+    "tokens": [
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "min-w-0"
+        ],
+        "where": [
+          "CarouselItem"
+        ]
+      },
+      {
+        "token": "space.scale.12",
+        "classes": [
+          "-bottom-12",
+          "-left-12",
+          "-right-12",
+          "-top-12"
+        ],
+        "where": [
+          "CarouselNext",
+          "CarouselPrevious"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "-ml-4",
+          "-mt-4",
+          "pl-4",
+          "pt-4"
+        ],
+        "where": [
+          "CarouselContent",
+          "CarouselItem"
+        ]
+      }
+    ],
     "tokens_from": [
       "Button"
     ],
@@ -3460,6 +4249,97 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "w-0"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "my-0.5"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "w-1"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5",
+          "py-1.5"
+        ],
+        "where": [
+          "ChartLegendContent",
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "h-2",
+          "w-2"
+        ],
+        "where": [
+          "ChartLegendContent",
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "h-2.5",
+          "px-2.5",
+          "w-2.5"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "h-3",
+          "pb-3",
+          "pt-3",
+          "w-3"
+        ],
+        "where": [
+          "ChartLegendContent"
+        ]
+      },
+      {
+        "token": "space.scale.32",
+        "classes": [
+          "min-w-32"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4"
+        ],
+        "where": [
+          "ChartLegendContent"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-mono"
@@ -3474,6 +4354,16 @@
           "font-medium"
         ],
         "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ChartContainer",
           "ChartTooltipContent"
         ]
       },
@@ -3818,6 +4708,42 @@
         "where": [
           "Checkbox",
           "Checkbox via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "-inset-y-2"
+        ],
+        "where": [
+          "Checkbox"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "-inset-x-3"
+        ],
+        "where": [
+          "Checkbox"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "Checkbox"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "Checkbox"
         ]
       }
     ],
@@ -4313,12 +5239,158 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "mb-0",
+          "p-0",
+          "pr-0"
+        ],
+        "where": [
+          "ComboboxChip",
+          "ComboboxContent",
+          "ComboboxList"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-ml-1",
+          "-mx-1",
+          "gap-1",
+          "m-1",
+          "px-1",
+          "py-1",
+          "scroll-py-1"
+        ],
+        "where": [
+          "ComboboxChip",
+          "ComboboxChips",
+          "ComboboxContent",
+          "ComboboxList",
+          "ComboboxSeparator"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "px-1.5"
+        ],
+        "where": [
+          "ComboboxChip"
+        ]
+      },
+      {
+        "token": "space.scale.16",
+        "classes": [
+          "min-w-16"
+        ],
+        "where": [
+          "ComboboxChipsInput"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pl-2",
+          "px-2",
+          "py-2",
+          "right-2"
+        ],
+        "where": [
+          "ComboboxEmpty",
+          "ComboboxItem",
+          "ComboboxLabel"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "ComboboxChips"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "ComboboxItem",
+          "ComboboxTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.5-25",
+        "classes": [
+          "h-5.25"
+        ],
+        "where": [
+          "ComboboxChip"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "min-w-[calc(var(--anchor-width)+var(--space-scale-7))]"
+        ],
+        "where": [
+          "ComboboxContent"
+        ]
+      },
+      {
+        "token": "space.scale.72",
+        "classes": [
+          "max-h-[min(calc(var(--space-scale-72)-var(--space-scale-9)),calc(var(--available-height)-var(--space-scale-9)))]"
+        ],
+        "where": [
+          "ComboboxList"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "min-h-8",
+          "pr-8"
+        ],
+        "where": [
+          "ComboboxChips",
+          "ComboboxContent",
+          "ComboboxItem"
+        ]
+      },
+      {
+        "token": "space.scale.9",
+        "classes": [
+          "max-h-[min(calc(var(--space-scale-72)-var(--space-scale-9)),calc(var(--available-height)-var(--space-scale-9)))]"
+        ],
+        "where": [
+          "ComboboxList"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
           "ComboboxChip"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ComboboxChip",
+          "ComboboxChips",
+          "ComboboxEmpty",
+          "ComboboxItem",
+          "ComboboxLabel"
         ]
       },
       {
@@ -4821,6 +5893,111 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "p-0",
+          "pb-0",
+          "scroll-py-0",
+          "translate-y-0"
+        ],
+        "where": [
+          "CommandDialog",
+          "CommandInput",
+          "CommandList"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-mx-1"
+        ],
+        "where": [
+          "CommandSeparator"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "py-1.5"
+        ],
+        "where": [
+          "CommandGroup"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pl-2",
+          "px-2",
+          "py-2"
+        ],
+        "where": [
+          "CommandGroup",
+          "CommandInput",
+          "CommandItem"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "CommandInput",
+          "CommandItem"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "py-6"
+        ],
+        "where": [
+          "CommandEmpty"
+        ]
+      },
+      {
+        "token": "space.scale.72",
+        "classes": [
+          "max-h-72"
+        ],
+        "where": [
+          "CommandList"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8"
+        ],
+        "where": [
+          "CommandInput"
+        ]
+      },
+      {
+        "token": "typography.letter-spacing.widest",
+        "classes": [
+          "tracking-widest"
+        ],
+        "where": [
+          "CommandShortcut"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "CommandEmpty",
+          "CommandGroup",
+          "CommandInput",
+          "CommandItem",
+          "CommandShortcut"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
@@ -5228,6 +6405,108 @@
           "ContextMenuCheckboxItem",
           "ContextMenuItem",
           "ContextMenuRadioItem"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-mx-1"
+        ],
+        "where": [
+          "ContextMenuSeparator"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pl-2",
+          "px-2",
+          "py-2",
+          "right-2"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuLabel",
+          "ContextMenuRadioItem",
+          "ContextMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.32",
+        "classes": [
+          "min-w-32"
+        ],
+        "where": [
+          "ContextMenuSubContent"
+        ]
+      },
+      {
+        "token": "space.scale.36",
+        "classes": [
+          "min-w-36"
+        ],
+        "where": [
+          "ContextMenuContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuRadioItem",
+          "ContextMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "pl-7"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuLabel",
+          "ContextMenuRadioItem",
+          "ContextMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "pr-8"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuRadioItem"
+        ]
+      },
+      {
+        "token": "typography.letter-spacing.widest",
+        "classes": [
+          "tracking-widest"
+        ],
+        "where": [
+          "ContextMenuShortcut"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuLabel",
+          "ContextMenuRadioItem",
+          "ContextMenuShortcut",
+          "ContextMenuSubTrigger"
         ]
       },
       {
@@ -5652,6 +6931,46 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-0"
+        ],
+        "where": [
+          "DialogOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "DialogHeader"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "right-2",
+          "top-2"
+        ],
+        "where": [
+          "DialogContent",
+          "DialogFooter"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "p-4"
+        ],
+        "where": [
+          "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -5677,6 +6996,15 @@
         "where": [
           "DialogContent",
           "DialogDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "DialogTitle"
         ]
       },
       {
@@ -6150,6 +7478,72 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "bottom-0",
+          "inset-0",
+          "inset-x-0",
+          "inset-y-0",
+          "left-0",
+          "right-0",
+          "top-0"
+        ],
+        "where": [
+          "DrawerContent",
+          "DrawerOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "gap-0.5"
+        ],
+        "where": [
+          "DrawerHeader"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "h-1"
+        ],
+        "where": [
+          "DrawerContent"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "DrawerFooter"
+        ]
+      },
+      {
+        "token": "space.scale.24",
+        "classes": [
+          "mb-24",
+          "mt-24",
+          "w-24"
+        ],
+        "where": [
+          "DrawerContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "mt-4",
+          "p-4"
+        ],
+        "where": [
+          "DrawerContent",
+          "DrawerFooter",
+          "DrawerHeader"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -6175,6 +7569,15 @@
         "where": [
           "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
           "DrawerDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "DrawerTitle"
         ]
       },
       {
@@ -6610,6 +8013,108 @@
         ]
       },
       {
+        "token": "space.scale.1",
+        "classes": [
+          "-mx-1"
+        ],
+        "where": [
+          "DropdownMenuSeparator"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pl-2",
+          "px-2",
+          "py-2",
+          "right-2"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuLabel",
+          "DropdownMenuRadioItem",
+          "DropdownMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.24",
+        "classes": [
+          "min-w-24"
+        ],
+        "where": [
+          "DropdownMenuSubContent"
+        ]
+      },
+      {
+        "token": "space.scale.32",
+        "classes": [
+          "min-w-32"
+        ],
+        "where": [
+          "DropdownMenuContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuRadioItem",
+          "DropdownMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "pl-7"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuLabel",
+          "DropdownMenuRadioItem",
+          "DropdownMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "pr-8"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuRadioItem"
+        ]
+      },
+      {
+        "token": "typography.letter-spacing.widest",
+        "classes": [
+          "tracking-widest"
+        ],
+        "where": [
+          "DropdownMenuShortcut"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuLabel",
+          "DropdownMenuRadioItem",
+          "DropdownMenuShortcut",
+          "DropdownMenuSubTrigger"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
@@ -6988,6 +8493,65 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "min-w-0"
+        ],
+        "where": [
+          "EmptyContent",
+          "Empty"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "mb-2"
+        ],
+        "where": [
+          "EmptyHeader",
+          "emptyMediaVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "gap-2.5"
+        ],
+        "where": [
+          "EmptyContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "size-4"
+        ],
+        "where": [
+          "Empty",
+          "emptyMediaVariants.variant.icon"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "p-6"
+        ],
+        "where": [
+          "Empty"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "size-8"
+        ],
+        "where": [
+          "emptyMediaVariants.variant.icon"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -7012,6 +8576,24 @@
         ],
         "where": [
           "EmptyDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "EmptyTitle"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "EmptyContent"
         ]
       },
       {
@@ -7356,6 +8938,104 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-0",
+          "mt-0"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldSeparator"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "gap-0.5"
+        ],
+        "where": [
+          "FieldContent"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-mt-1",
+          "gap-1"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldError"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "-mt-1.5"
+        ],
+        "where": [
+          "FieldDescription"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "-mb-2",
+          "-my-2",
+          "gap-2",
+          "p-2",
+          "px-2"
+        ],
+        "where": [
+          "FieldLabel",
+          "FieldSeparator",
+          "FieldTitle",
+          "fieldVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "mb-2.5"
+        ],
+        "where": [
+          "FieldLegend"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "gap-3"
+        ],
+        "where": [
+          "FieldGroup",
+          "FieldSet"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "ml-4"
+        ],
+        "where": [
+          "FieldError",
+          "FieldGroup",
+          "FieldSet"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "gap-5",
+          "h-5"
+        ],
+        "where": [
+          "FieldGroup",
+          "FieldSeparator"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -7401,6 +9081,26 @@
         "where": [
           "FieldContent",
           "FieldLabel"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "FieldLegend"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "FieldError",
+          "FieldLegend",
+          "FieldSeparator"
         ]
       },
       {
@@ -7762,6 +9462,42 @@
         ]
       },
       {
+        "token": "typography.size-line-height.2xl",
+        "classes": [
+          "text-2xl"
+        ],
+        "where": [
+          "headingVariants.level.1"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.base",
+        "classes": [
+          "text-base"
+        ],
+        "where": [
+          "headingVariants.level.4"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.lg",
+        "classes": [
+          "text-lg"
+        ],
+        "where": [
+          "headingVariants.level.3"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xl",
+        "classes": [
+          "text-xl"
+        ],
+        "where": [
+          "headingVariants.level.2"
+        ]
+      },
+      {
         "token": "typography.size.2xl",
         "classes": [
           "text-2xl"
@@ -7974,6 +9710,24 @@
         ]
       },
       {
+        "token": "space.scale.2-5",
+        "classes": [
+          "p-2.5"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
+      },
+      {
+        "token": "space.scale.64",
+        "classes": [
+          "w-64"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
+      },
+      {
         "token": "typography.line-height.relaxed",
         "classes": [
           "text-xs/relaxed"
@@ -8162,6 +9916,15 @@
         "classes": [
           "text-muted-foreground",
           "text-muted-foreground/20"
+        ],
+        "where": [
+          "Illustration"
+        ]
+      },
+      {
+        "token": "space.scale.48",
+        "classes": [
+          "size-48"
         ],
         "where": [
           "Illustration"
@@ -8356,9 +10119,63 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "min-w-0"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "py-1"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "h-6"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
         ],
         "where": [
           "Input"
@@ -8560,12 +10377,163 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "min-w-0",
+          "p-0"
+        ],
+        "where": [
+          "InputGroup",
+          "inputGroupButtonVariants.size.icon-sm",
+          "inputGroupButtonVariants.size.icon-xs"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "-ml-0.5",
+          "-mr-0.5"
+        ],
+        "where": [
+          "inputGroupAddonVariants.align.inline-end",
+          "inputGroupAddonVariants.align.inline-start"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-ml-1",
+          "-mr-1",
+          "gap-1"
+        ],
+        "where": [
+          "inputGroupAddonVariants.align.inline-end",
+          "inputGroupAddonVariants.align.inline-start",
+          "inputGroupButtonVariants.size.sm",
+          "inputGroupButtonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "pl-1.5",
+          "pr-1.5",
+          "px-1.5",
+          "py-1.5"
+        ],
+        "where": [
+          "InputGroup",
+          "inputGroupAddonVariants",
+          "inputGroupButtonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pb-2",
+          "pl-2",
+          "pr-2",
+          "pt-2",
+          "py-2"
+        ],
+        "where": [
+          "InputGroupText",
+          "InputGroupTextarea",
+          "inputGroupAddonVariants.align.block-end",
+          "inputGroupAddonVariants.align.block-start",
+          "inputGroupAddonVariants.align.inline-end",
+          "inputGroupAddonVariants.align.inline-start",
+          "inputGroupAddonVariants",
+          "inputGroupButtonVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "inputGroupAddonVariants.align.block-end",
+          "inputGroupAddonVariants.align.block-start"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "pb-3",
+          "pt-3"
+        ],
+        "where": [
+          "InputGroup"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "inputGroupButtonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "InputGroupText",
+          "inputGroupAddonVariants"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "h-6",
+          "size-6"
+        ],
+        "where": [
+          "inputGroupButtonVariants.size.icon-xs",
+          "inputGroupButtonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "size-7"
+        ],
+        "where": [
+          "inputGroupButtonVariants.size.icon-sm"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8"
+        ],
+        "where": [
+          "InputGroup"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
           "inputGroupAddonVariants"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "InputGroupText",
+          "inputGroupAddonVariants",
+          "inputGroupButtonVariants"
         ]
       },
       {
@@ -8873,6 +10841,44 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-0"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "h-4",
+          "size-4"
+        ],
+        "where": [
+          "InputOTPSeparator",
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "size-8"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
@@ -9171,6 +11177,115 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "gap-0",
+          "p-0"
+        ],
+        "where": [
+          "ItemContent",
+          "itemVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "translate-y-0.5"
+        ],
+        "where": [
+          "itemMediaVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "ItemContent"
+        ]
+      },
+      {
+        "token": "space.scale.10",
+        "classes": [
+          "size-10"
+        ],
+        "where": [
+          "itemMediaVariants.variant.image"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "my-2",
+          "py-2"
+        ],
+        "where": [
+          "ItemActions",
+          "ItemFooter",
+          "ItemGroup",
+          "ItemHeader",
+          "ItemSeparator",
+          "ItemTitle",
+          "itemMediaVariants",
+          "itemVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "gap-2.5",
+          "px-2.5",
+          "py-2.5"
+        ],
+        "where": [
+          "ItemGroup",
+          "itemVariants.size.default",
+          "itemVariants.size.sm",
+          "itemVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "px-3"
+        ],
+        "where": [
+          "itemVariants.size.default",
+          "itemVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "size-4"
+        ],
+        "where": [
+          "ItemGroup",
+          "itemMediaVariants.variant.icon"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "size-6"
+        ],
+        "where": [
+          "itemMediaVariants.variant.image"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "size-8"
+        ],
+        "where": [
+          "itemMediaVariants.variant.image"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -9195,6 +11310,16 @@
         ],
         "where": [
           "ItemDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ItemTitle",
+          "itemVariants"
         ]
       },
       {
@@ -9530,6 +11655,36 @@
         ]
       },
       {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1",
+          "px-1"
+        ],
+        "where": [
+          "KbdGroup",
+          "Kbd"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "size-3"
+        ],
+        "where": [
+          "Kbd"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "h-5",
+          "min-w-5"
+        ],
+        "where": [
+          "Kbd"
+        ]
+      },
+      {
         "token": "typography.font-family.sans",
         "classes": [
           "font-sans"
@@ -9542,6 +11697,15 @@
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
+        ],
+        "where": [
+          "Kbd"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
         ],
         "where": [
           "Kbd"
@@ -9674,6 +11838,24 @@
         "token": "opacity.disabled",
         "classes": [
           "opacity-disabled"
+        ],
+        "where": [
+          "Label"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "Label"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
         ],
         "where": [
           "Label"
@@ -9816,6 +11998,69 @@
         ]
       },
       {
+        "token": "space.scale.11",
+        "classes": [
+          "size-11"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "size-5"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "size-6"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "size-7"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "space.scale.9",
+        "classes": [
+          "size-9"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -9837,6 +12082,33 @@
         "token": "typography.letter-spacing.tight",
         "classes": [
           "tracking-tight"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.2xl",
+        "classes": [
+          "text-2xl"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.base",
+        "classes": [
+          "text-base"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xl",
+        "classes": [
+          "text-xl"
         ],
         "where": [
           "Logo"
@@ -10185,11 +12457,140 @@
         ]
       },
       {
+        "token": "space.scale.0-5",
+        "classes": [
+          "gap-0.5"
+        ],
+        "where": [
+          "Menubar"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-mx-1",
+          "my-1",
+          "p-1",
+          "py-1"
+        ],
+        "where": [
+          "MenubarSeparator",
+          "MenubarTrigger",
+          "Menubar"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "left-1.5",
+          "px-1.5"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarRadioItem",
+          "MenubarTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pr-2",
+          "px-2",
+          "py-2"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarLabel",
+          "MenubarRadioItem",
+          "MenubarSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.28",
+        "classes": [
+          "pr-28"
+        ],
+        "where": [
+          "MenubarCheckboxItem"
+        ]
+      },
+      {
+        "token": "space.scale.32",
+        "classes": [
+          "min-w-32"
+        ],
+        "where": [
+          "MenubarSubContent"
+        ]
+      },
+      {
+        "token": "space.scale.36",
+        "classes": [
+          "min-w-36"
+        ],
+        "where": [
+          "MenubarContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarRadioItem",
+          "MenubarSubTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "pl-8"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarLabel",
+          "MenubarRadioItem",
+          "MenubarSubTrigger",
+          "Menubar"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
+          "MenubarTrigger"
+        ]
+      },
+      {
+        "token": "typography.letter-spacing.widest",
+        "classes": [
+          "tracking-widest"
+        ],
+        "where": [
+          "MenubarShortcut"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarLabel",
+          "MenubarRadioItem",
+          "MenubarShortcut",
+          "MenubarSubTrigger",
           "MenubarTrigger"
         ]
       },
@@ -10644,6 +13045,80 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "min-w-0"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "py-0.5"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "py-1"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "pl-2.5",
+          "right-2.5"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "h-7"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "pr-8"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
@@ -10945,11 +13420,108 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "gap-0",
+          "left-0",
+          "top-0"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuList",
+          "NavigationMenuViewport"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "ml-1",
+          "p-1"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "h-1.5",
+          "mt-1.5",
+          "py-1.5"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuIndicator",
+          "NavigationMenuViewport",
+          "navigationMenuTriggerStyle"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "h-2",
+          "p-2",
+          "w-2"
+        ],
+        "where": [
+          "NavigationMenuIndicator",
+          "NavigationMenuLink"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "navigationMenuTriggerStyle"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "size-3"
+        ],
+        "where": [
+          "NavigationMenuTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "NavigationMenuLink"
+        ]
+      },
+      {
+        "token": "space.scale.9",
+        "classes": [
+          "h-9"
+        ],
+        "where": [
+          "navigationMenuTriggerStyle"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
+          "navigationMenuTriggerStyle"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "NavigationMenuLink",
           "navigationMenuTriggerStyle"
         ]
       },
@@ -11199,7 +13771,46 @@
         "role": "Marks where page numbers have been collapsed"
       }
     ],
-    "tokens": [],
+    "tokens": [
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "gap-0.5"
+        ],
+        "where": [
+          "PaginationContent"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "pl-1.5",
+          "pr-1.5"
+        ],
+        "where": [
+          "PaginationNext",
+          "PaginationPrevious"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "PaginationEllipsis"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "size-8"
+        ],
+        "where": [
+          "PaginationEllipsis"
+        ]
+      }
+    ],
     "tokens_from": [
       "Button"
     ],
@@ -11668,6 +14279,34 @@
         ]
       },
       {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "PopoverHeader"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "gap-2.5",
+          "p-2.5"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
+      },
+      {
+        "token": "space.scale.72",
+        "classes": [
+          "w-72"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -11683,6 +14322,25 @@
         ],
         "where": [
           "PopoverDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "PopoverTitle"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "PopoverContent",
+          "PopoverHeader"
         ]
       },
       {
@@ -11932,6 +14590,15 @@
         "where": [
           "Progress"
         ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "h-1"
+        ],
+        "where": [
+          "Progress"
+        ]
       }
     ],
     "tokens_from": [],
@@ -12120,6 +14787,36 @@
         "where": [
           "RadioGroupItem",
           "RadioGroupItem via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "-inset-y-2",
+          "gap-2",
+          "size-2"
+        ],
+        "where": [
+          "RadioGroupItem",
+          "RadioGroup"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "-inset-x-3"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "RadioGroupItem"
         ]
       }
     ],
@@ -12312,6 +15009,36 @@
         ],
         "where": [
           "ResizableHandle via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-y-0",
+          "left-0",
+          "translate-x-0"
+        ],
+        "where": [
+          "ResizableHandle"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "h-1",
+          "w-1"
+        ],
+        "where": [
+          "ResizableHandle"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "h-6"
+        ],
+        "where": [
+          "ResizableHandle"
         ]
       },
       {
@@ -12522,6 +15249,16 @@
         ],
         "where": [
           "ScrollArea via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "h-2.5",
+          "w-2.5"
+        ],
+        "where": [
+          "ScrollBar"
         ]
       }
     ],
@@ -12811,6 +15548,111 @@
         "where": [
           "SelectTrigger",
           "SelectTrigger via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-mx-1",
+          "-translate-x-1",
+          "-translate-y-1",
+          "py-1",
+          "scroll-my-1",
+          "translate-x-1",
+          "translate-y-1"
+        ],
+        "where": [
+          "SelectContent",
+          "SelectGroup",
+          "SelectScrollDownButton",
+          "SelectScrollUpButton",
+          "SelectSeparator"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pl-2",
+          "pr-2",
+          "px-2",
+          "py-2",
+          "right-2"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectLabel",
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "pl-2.5"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.36",
+        "classes": [
+          "min-w-36"
+        ],
+        "where": [
+          "SelectContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectScrollDownButton",
+          "SelectScrollUpButton",
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "h-7"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "pr-8"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectLabel",
+          "SelectTrigger"
         ]
       },
       {
@@ -13325,6 +16167,60 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "bottom-0",
+          "inset-0",
+          "inset-x-0",
+          "inset-y-0",
+          "left-0",
+          "right-0",
+          "top-0"
+        ],
+        "where": [
+          "SheetContent",
+          "SheetOverlay via OVERLAY_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "gap-0.5"
+        ],
+        "where": [
+          "SheetHeader"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "SheetFooter"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "right-3",
+          "top-3"
+        ],
+        "where": [
+          "SheetContent"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "p-4"
+        ],
+        "where": [
+          "SheetFooter",
+          "SheetHeader"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -13351,6 +16247,15 @@
           "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
           "SheetDescription",
           "SheetOverlay"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "SheetTitle"
         ]
       },
       {
@@ -13875,12 +16780,221 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "gap-0",
+          "inset-y-0",
+          "left-0",
+          "min-h-0",
+          "min-w-0",
+          "ml-0",
+          "p-0",
+          "right-0",
+          "translate-x-0",
+          "w-0"
+        ],
+        "where": [
+          "SidebarContent",
+          "SidebarGroupAction",
+          "SidebarGroup",
+          "SidebarInset",
+          "SidebarMenuAction",
+          "SidebarMenuSubButton",
+          "SidebarMenuSub",
+          "SidebarMenu",
+          "SidebarRail",
+          "Sidebar",
+          "sidebarMenuButtonVariants.size.lg"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "py-0.5",
+          "w-0.5"
+        ],
+        "where": [
+          "SidebarMenuSub",
+          "SidebarRail"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1",
+          "px-1",
+          "right-1",
+          "top-1"
+        ],
+        "where": [
+          "SidebarMenuAction",
+          "SidebarMenuBadge",
+          "SidebarMenuSub"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "top-1.5"
+        ],
+        "where": [
+          "SidebarMenuAction",
+          "SidebarMenuBadge"
+        ]
+      },
+      {
+        "token": "space.scale.12",
+        "classes": [
+          "h-12"
+        ],
+        "where": [
+          "sidebarMenuButtonVariants.size.lg"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "-inset-2",
+          "-left-2",
+          "-right-2",
+          "gap-2",
+          "m-2",
+          "ml-2",
+          "mx-2",
+          "p-2",
+          "px-2"
+        ],
+        "where": [
+          "SidebarFooter",
+          "SidebarGroupAction",
+          "SidebarGroupLabel",
+          "SidebarGroup",
+          "SidebarHeader",
+          "SidebarInset",
+          "SidebarMenuAction",
+          "SidebarMenuSkeleton",
+          "SidebarMenuSubButton",
+          "SidebarRail",
+          "SidebarSeparator",
+          "Sidebar",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5",
+          "top-2.5"
+        ],
+        "where": [
+          "SidebarMenuAction",
+          "SidebarMenuBadge",
+          "SidebarMenuSub"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "right-3"
+        ],
+        "where": [
+          "SidebarGroupAction"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "mx-3.5",
+          "top-3.5"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarMenuSub"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "-right-4",
+          "h-4",
+          "size-4",
+          "w-4",
+          "w-[calc(var(--sidebar-width-icon)+var(--space-scale-4))]",
+          "w-[calc(var(--sidebar-width-icon)+var(--space-scale-4)+2px)]"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarGroupLabel",
+          "SidebarMenuAction",
+          "SidebarMenuSkeleton",
+          "SidebarMenuSubButton",
+          "SidebarRail",
+          "Sidebar",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "h-5",
+          "min-w-5",
+          "w-5"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarMenuAction",
+          "SidebarMenuBadge"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "h-7"
+        ],
+        "where": [
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "-mt-8",
+          "h-8",
+          "pr-8",
+          "size-8"
+        ],
+        "where": [
+          "SidebarGroupLabel",
+          "SidebarInput",
+          "SidebarMenuSkeleton",
+          "sidebarMenuButtonVariants.size.default",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
           "SidebarMenuBadge",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "SidebarGroupContent",
+          "SidebarGroupLabel",
+          "SidebarMenuBadge",
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants.size.default",
+          "sidebarMenuButtonVariants.size.lg",
+          "sidebarMenuButtonVariants.size.sm",
           "sidebarMenuButtonVariants"
         ]
       },
@@ -14665,6 +17779,43 @@
           "Slider",
           "Slider via FOCUS_RING_WIDTH (lib/focus.ts)"
         ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "h-1",
+          "w-1"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "-inset-2"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "size-3"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
+        "token": "space.scale.40",
+        "classes": [
+          "min-h-40"
+        ],
+        "where": [
+          "Slider"
+        ]
       }
     ],
     "tokens_from": [],
@@ -14850,6 +18001,19 @@
         "where": [
           "Toaster.--border-radius"
         ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "Toaster.error",
+          "Toaster.info",
+          "Toaster.loading",
+          "Toaster.success",
+          "Toaster.warning"
+        ]
       }
     ],
     "tokens_from": [],
@@ -14941,7 +18105,17 @@
         "role": "`<svg>` rendered directly through `SpinnerIcon`; carries `role=\"status\"` and `aria-label`"
       }
     ],
-    "tokens": [],
+    "tokens": [
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "Spinner"
+        ]
+      }
+    ],
     "tokens_from": [],
     "exports": [
       {
@@ -15141,6 +18315,79 @@
         "where": [
           "Switch",
           "Switch via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "translate-x-0"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "-inset-y-2"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "-inset-x-3",
+          "size-3"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "h-3.5"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.scale.5",
+        "classes": [
+          "h-5"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "w-6"
+        ],
+        "where": [
+          "Switch"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "w-8"
+        ],
+        "where": [
+          "Switch"
         ]
       }
     ],
@@ -15351,6 +18598,45 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "pr-0"
+        ],
+        "where": [
+          "TableCell",
+          "TableHead"
+        ]
+      },
+      {
+        "token": "space.scale.10",
+        "classes": [
+          "h-10"
+        ],
+        "where": [
+          "TableHead"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "p-2",
+          "px-2"
+        ],
+        "where": [
+          "TableCell",
+          "TableHead"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "mt-4"
+        ],
+        "where": [
+          "TableCaption"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -15358,6 +18644,16 @@
         "where": [
           "TableFooter",
           "TableHead"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "TableCaption",
+          "Table"
         ]
       },
       {
@@ -15688,6 +18984,89 @@
         ]
       },
       {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-x-0",
+          "inset-y-0"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "h-0.5",
+          "py-0.5",
+          "w-0.5"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "-bottom-1",
+          "-right-1",
+          "gap-1",
+          "p-1",
+          "pl-1",
+          "pr-1"
+        ],
+        "where": [
+          "TabsTrigger",
+          "tabsListVariants.variant.line",
+          "tabsListVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1-25",
+        "classes": [
+          "py-1.25"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5",
+          "px-1.5"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "Tabs"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8"
+        ],
+        "where": [
+          "tabsListVariants"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -15703,6 +19082,15 @@
         ],
         "where": [
           "TabsContent"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "TabsTrigger"
         ]
       },
       {
@@ -15946,6 +19334,42 @@
         ]
       },
       {
+        "token": "space.scale.16",
+        "classes": [
+          "min-h-16"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "py-2"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
@@ -16143,9 +19567,98 @@
         ]
       },
       {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "pl-1.5",
+          "pr-1.5"
+        ],
+        "where": [
+          "toggleVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "pl-2",
+          "pr-2"
+        ],
+        "where": [
+          "toggleVariants.size.default",
+          "toggleVariants.size.lg"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "toggleVariants.size.default",
+          "toggleVariants.size.lg",
+          "toggleVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "h-7",
+          "min-w-7"
+        ],
+        "where": [
+          "toggleVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "min-w-8"
+        ],
+        "where": [
+          "toggleVariants.size.default"
+        ]
+      },
+      {
+        "token": "space.scale.9",
+        "classes": [
+          "h-9",
+          "min-w-9"
+        ],
+        "where": [
+          "toggleVariants.size.lg"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
         ],
         "where": [
           "toggleVariants"
@@ -16309,6 +19822,25 @@
         "classes": [
           "border-l",
           "border-t"
+        ],
+        "where": [
+          "ToggleGroupItem"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "pl-1.5",
+          "pr-1.5"
+        ],
+        "where": [
+          "ToggleGroupItem"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "px-2"
         ],
         "where": [
           "ToggleGroupItem"
@@ -16543,6 +20075,44 @@
         "classes": [
           "bg-foreground",
           "fill-foreground"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5",
+          "pr-1.5",
+          "py-1.5"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "size-2.5"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "px-3"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
         ],
         "where": [
           "TooltipContent"

@@ -12,8 +12,10 @@
  * `$deprecated` property instead.
  *
  *   active     consumed — aliased by the component tier, bridged by
- *              styles/globals.css, read with var() in components/, app/, lib/
- *              or hooks/, for a breakpoint used as its `sm:` variant, or,
+ *              styles/globals.css, read with var() in components/, lib/ or
+ *              hooks/, for a breakpoint used as its `sm:` variant, for a
+ *              container width used as its class (`max-w-sm`) or its `@sm:`
+ *              container-query variant, or,
  *              for a font family, loaded by next/font under its variable
  *              (lint-font-tokens checks it names that font)
  *   reserved   a deliberate decision nothing consumes yet; its $description
@@ -95,9 +97,11 @@ const referencedByComponent = new Set(
   componentRefs.filter((ref) => semanticPaths.has(ref))
 )
 
-// Code that can read a token: the components, the demo app, the shared
-// helpers — and styles/globals.css, whose @theme bridge is what turns a token
-// into a Tailwind utility for every consumer of the registry.
+// Code that can read a token: the components, the shared helpers — and
+// styles/globals.css, whose @theme bridge is what turns a token into a
+// Tailwind utility for every consumer of the registry. app/ is left out: its
+// pages are a test area, never part of the design system, so a token only
+// they use is not consumed.
 const walk = (dir: string): string[] =>
   readdirSync(resolve(ROOT, dir), { withFileTypes: true }).flatMap((e) => {
     const p = `${dir}/${e.name}`
@@ -105,7 +109,7 @@ const walk = (dir: string): string[] =>
     return /\.(tsx?|css)$/.test(e.name) ? [p] : []
   })
 // Block comments are dropped: a comment that names a token is not a use.
-const corpus = ["components", "app", "lib", "hooks", "styles"]
+const corpus = ["components", "lib", "hooks", "styles"]
   .flatMap(walk)
   .map((file) => read(file).replace(/\/\*[\s\S]*?\*\//g, ""))
   .join("\n")
@@ -135,10 +139,23 @@ const loadedFont = (path: string) => {
   return variable !== undefined && fontVariables.has(variable)
 }
 
+// A container width is consumed the same way: Tailwind compiles its own value
+// into `max-w-sm` and `@sm:` (lint-theme-bridge checks it equals the token).
+const usesContainer = (path: string) => {
+  const size = path.match(/^space\.container\.([\w-]+)$/)?.[1]
+  return (
+    size !== undefined &&
+    new RegExp(
+      `(?<![\\w-])(?:(?:max-w|min-w|w|basis)-${size}(?![\\w-])|@${size}[:/])`
+    ).test(corpus)
+  )
+}
+
 const consumed = (path: string) =>
   referencedByComponent.has(path) ||
   readByCode(path) ||
   usesVariant(path) ||
+  usesContainer(path) ||
   loadedFont(path)
 
 const findings: string[] = []

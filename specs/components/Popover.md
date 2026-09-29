@@ -63,13 +63,18 @@ An interactive floating container opened by a click, for rich content — a form
 | `color.text.subtle`              | `text-muted-foreground`                          | `PopoverDescription`                                      |
 | `elevation.md`                   | `shadow-md`                                      | `PopoverContent`                                          |
 | `motion.duration.fast`           | `duration-fast`                                  | `PopoverContent`                                          |
+| `space.scale.1`                  | `gap-1`                                          | `PopoverHeader`                                           |
+| `space.scale.2-5`                | `gap-2.5` · `p-2.5`                              | `PopoverContent`                                          |
+| `space.scale.72`                 | `w-72`                                           | `PopoverContent`                                          |
 | `typography.font-weight.medium`  | `font-medium`                                    | `PopoverTitle`                                            |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                | `PopoverDescription`                                      |
+| `typography.size-line-height.sm` | `text-sm`                                        | `PopoverTitle`                                            |
+| `typography.size-line-height.xs` | `text-xs`                                        | `PopoverContent` · `PopoverHeader`                        |
 | `typography.size.sm`             | `text-sm`                                        | `PopoverTitle`                                            |
 | `typography.size.xs`             | `text-xs` · `text-xs/relaxed`                    | `PopoverContent` · `PopoverDescription` · `PopoverHeader` |
 | `zindex.popover`                 | `z-popover`                                      | `PopoverContent`                                          |
 
-Collected from `components/ui/popover.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/popover.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

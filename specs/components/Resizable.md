@@ -53,9 +53,12 @@ Resizable panels: an area split into sections the user adjusts by dragging the h
 | `color.border.default`     | `bg-border`                              | `ResizableHandle`                                   |
 | `color.border.focus`       | `border-ring` · `ring-ring/50`           | `ResizableHandle` via `FOCUS_RING` (`lib/focus.ts`) |
 | `space.focus-ring-width`   | `ring-(length:--space-focus-ring-width)` | `ResizableHandle` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.scale.0`            | `inset-y-0` · `left-0` · `translate-x-0` | `ResizableHandle`                                   |
+| `space.scale.1`            | `h-1` · `w-1`                            | `ResizableHandle`                                   |
+| `space.scale.6`            | `h-6`                                    | `ResizableHandle`                                   |
 | `zindex.dropdown`          | `z-dropdown`                             | `ResizableHandle`                                   |
 
-Collected from `components/ui/resizable.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/resizable.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

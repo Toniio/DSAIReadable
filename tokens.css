@@ -76,19 +76,43 @@
   --ds-prim-color-white-alpha-15: rgba(255, 255, 255, 0.15);
 
   /* space */
+  --ds-prim-space-0:                0rem;
   --ds-prim-space-1:                0.25rem;
   --ds-prim-space-2:                0.5rem;
   --ds-prim-space-3:                0.75rem;
   --ds-prim-space-4:                1rem;
   --ds-prim-space-5:                1.25rem;
   --ds-prim-space-6:                1.5rem;
+  --ds-prim-space-7:                1.75rem;
   --ds-prim-space-8:                2rem;
+  --ds-prim-space-9:                2.25rem;
   --ds-prim-space-10:               2.5rem;
+  --ds-prim-space-11:               2.75rem;
   --ds-prim-space-12:               3rem;
+  --ds-prim-space-14:               3.5rem;
   --ds-prim-space-16:               4rem;
+  --ds-prim-space-18:               4.5rem;
+  --ds-prim-space-20:               5rem;
   --ds-prim-space-24:               6rem;
+  --ds-prim-space-28:               7rem;
   --ds-prim-space-32:               8rem;
+  --ds-prim-space-36:               9rem;
+  --ds-prim-space-40:               10rem;
+  --ds-prim-space-44:               11rem;
+  --ds-prim-space-48:               12rem;
+  --ds-prim-space-52:               13rem;
+  --ds-prim-space-56:               14rem;
+  --ds-prim-space-60:               15rem;
+  --ds-prim-space-64:               16rem;
+  --ds-prim-space-72:               18rem;
+  --ds-prim-space-80:               20rem;
+  --ds-prim-space-96:               24rem;
   --ds-prim-space-0-5:              0.125rem;
+  --ds-prim-space-1-25:             0.3125rem;
+  --ds-prim-space-1-5:              0.375rem;
+  --ds-prim-space-2-5:              0.625rem;
+  --ds-prim-space-3-5:              0.875rem;
+  --ds-prim-space-5-25:             1.3125rem;
   --ds-prim-space-page:             1.5rem;
   --ds-prim-space-section:          4rem;
   --ds-prim-space-content-sm:       42rem;
@@ -97,6 +121,19 @@
   --ds-prim-space-sidebar:          16rem;
   --ds-prim-space-sidebar-mobile:   18rem;
   --ds-prim-space-focus-ring-width: 2px;
+  --ds-prim-space-container-3xs:    16rem;
+  --ds-prim-space-container-2xs:    18rem;
+  --ds-prim-space-container-xs:     20rem;
+  --ds-prim-space-container-sm:     24rem;
+  --ds-prim-space-container-md:     28rem;
+  --ds-prim-space-container-lg:     32rem;
+  --ds-prim-space-container-xl:     36rem;
+  --ds-prim-space-container-2xl:    42rem;
+  --ds-prim-space-container-3xl:    48rem;
+  --ds-prim-space-container-4xl:    56rem;
+  --ds-prim-space-container-5xl:    64rem;
+  --ds-prim-space-container-6xl:    72rem;
+  --ds-prim-space-container-7xl:    80rem;
 
   /* radius */
   --ds-prim-radius-none: 0rem;
@@ -133,6 +170,7 @@
   --ds-prim-typography-letter-spacing-normal: 0em;
   --ds-prim-typography-letter-spacing-wide:   0.025em;
   --ds-prim-typography-letter-spacing-wider:  0.05em;
+  --ds-prim-typography-letter-spacing-widest: 0.1em;
 
   /* typography · font-weight */
   --ds-prim-typography-font-weight-normal:   400;
@@ -143,6 +181,16 @@
   /* typography · font-family */
   --ds-prim-typography-font-family-sans: Geist, sans-serif;
   --ds-prim-typography-font-family-mono: JetBrains Mono, monospace;
+
+  /* typography · size-line-height */
+  --ds-prim-typography-size-line-height-xs:   1.33334;
+  --ds-prim-typography-size-line-height-sm:   1.42858;
+  --ds-prim-typography-size-line-height-base: 1.5;
+  --ds-prim-typography-size-line-height-lg:   1.55556;
+  --ds-prim-typography-size-line-height-xl:   1.4;
+  --ds-prim-typography-size-line-height-2xl:  1.33334;
+  --ds-prim-typography-size-line-height-3xl:  1.2;
+  --ds-prim-typography-size-line-height-4xl:  1.11112;
 
   /* elevation · light */
   --ds-prim-elevation-light-xs:    0 1px 2px rgba(0, 0, 0, 0.04);
@@ -288,6 +336,56 @@
   --space-component-md:           var(--ds-prim-space-4);
   --space-component-lg:           var(--ds-prim-space-6);
   --space-component-xl:           var(--ds-prim-space-8);
+  --space-scale-0:                var(--ds-prim-space-0);
+  --space-scale-1:                var(--ds-prim-space-1);
+  --space-scale-2:                var(--ds-prim-space-2);
+  --space-scale-3:                var(--ds-prim-space-3);
+  --space-scale-4:                var(--ds-prim-space-4);
+  --space-scale-5:                var(--ds-prim-space-5);
+  --space-scale-6:                var(--ds-prim-space-6);
+  --space-scale-7:                var(--ds-prim-space-7);
+  --space-scale-8:                var(--ds-prim-space-8);
+  --space-scale-9:                var(--ds-prim-space-9);
+  --space-scale-10:               var(--ds-prim-space-10);
+  --space-scale-11:               var(--ds-prim-space-11);
+  --space-scale-12:               var(--ds-prim-space-12);
+  --space-scale-14:               var(--ds-prim-space-14);
+  --space-scale-16:               var(--ds-prim-space-16);
+  --space-scale-18:               var(--ds-prim-space-18);
+  --space-scale-20:               var(--ds-prim-space-20);
+  --space-scale-24:               var(--ds-prim-space-24);
+  --space-scale-28:               var(--ds-prim-space-28);
+  --space-scale-32:               var(--ds-prim-space-32);
+  --space-scale-36:               var(--ds-prim-space-36);
+  --space-scale-40:               var(--ds-prim-space-40);
+  --space-scale-44:               var(--ds-prim-space-44);
+  --space-scale-48:               var(--ds-prim-space-48);
+  --space-scale-52:               var(--ds-prim-space-52);
+  --space-scale-56:               var(--ds-prim-space-56);
+  --space-scale-60:               var(--ds-prim-space-60);
+  --space-scale-64:               var(--ds-prim-space-64);
+  --space-scale-72:               var(--ds-prim-space-72);
+  --space-scale-80:               var(--ds-prim-space-80);
+  --space-scale-96:               var(--ds-prim-space-96);
+  --space-scale-0-5:              var(--ds-prim-space-0-5);
+  --space-scale-1-25:             var(--ds-prim-space-1-25);
+  --space-scale-1-5:              var(--ds-prim-space-1-5);
+  --space-scale-2-5:              var(--ds-prim-space-2-5);
+  --space-scale-3-5:              var(--ds-prim-space-3-5);
+  --space-scale-5-25:             var(--ds-prim-space-5-25);
+  --space-container-3xs:          var(--ds-prim-space-container-3xs);
+  --space-container-2xs:          var(--ds-prim-space-container-2xs);
+  --space-container-xs:           var(--ds-prim-space-container-xs);
+  --space-container-sm:           var(--ds-prim-space-container-sm);
+  --space-container-md:           var(--ds-prim-space-container-md);
+  --space-container-lg:           var(--ds-prim-space-container-lg);
+  --space-container-xl:           var(--ds-prim-space-container-xl);
+  --space-container-2xl:          var(--ds-prim-space-container-2xl);
+  --space-container-3xl:          var(--ds-prim-space-container-3xl);
+  --space-container-4xl:          var(--ds-prim-space-container-4xl);
+  --space-container-5xl:          var(--ds-prim-space-container-5xl);
+  --space-container-6xl:          var(--ds-prim-space-container-6xl);
+  --space-container-7xl:          var(--ds-prim-space-container-7xl);
   --space-focus-ring-width:       var(--ds-prim-space-focus-ring-width);
   --space-layout-page-padding:    var(--ds-prim-space-page);
   --space-layout-section-gap:     var(--ds-prim-space-section);
@@ -308,6 +406,16 @@
   --typography-size-3xl:  var(--ds-prim-typography-size-3xl);
   --typography-size-4xl:  var(--ds-prim-typography-size-4xl);
 
+  /* typography · size-line-height */
+  --typography-size-line-height-xs:   var(--ds-prim-typography-size-line-height-xs);
+  --typography-size-line-height-sm:   var(--ds-prim-typography-size-line-height-sm);
+  --typography-size-line-height-base: var(--ds-prim-typography-size-line-height-base);
+  --typography-size-line-height-lg:   var(--ds-prim-typography-size-line-height-lg);
+  --typography-size-line-height-xl:   var(--ds-prim-typography-size-line-height-xl);
+  --typography-size-line-height-2xl:  var(--ds-prim-typography-size-line-height-2xl);
+  --typography-size-line-height-3xl:  var(--ds-prim-typography-size-line-height-3xl);
+  --typography-size-line-height-4xl:  var(--ds-prim-typography-size-line-height-4xl);
+
   /* typography · line-height */
   --typography-line-height-tight:   var(--ds-prim-typography-line-height-tight);
   --typography-line-height-snug:    var(--ds-prim-typography-line-height-snug);
@@ -320,6 +428,7 @@
   --typography-letter-spacing-normal: var(--ds-prim-typography-letter-spacing-normal);
   --typography-letter-spacing-wide:   var(--ds-prim-typography-letter-spacing-wide);
   --typography-letter-spacing-wider:  var(--ds-prim-typography-letter-spacing-wider);
+  --typography-letter-spacing-widest: var(--ds-prim-typography-letter-spacing-widest);
 
   /* typography · font-weight */
   --typography-font-weight-normal:   var(--ds-prim-typography-font-weight-normal);

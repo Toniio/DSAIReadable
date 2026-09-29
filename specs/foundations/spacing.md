@@ -39,7 +39,43 @@ Space **inside** a component (`padding`, `gap`) or **between nearby components**
 </div>
 ```
 
-> **Tailwind note:** Tailwind's numeric values (`gap-1` = 4px, `gap-2` = 8px, `gap-4` = 16px, `gap-6` = 24px, `gap-8` = 32px) map directly onto the component tokens. Reach for these classes first.
+> **Tailwind note:** the numeric classes (`gap-1` = 4px, `gap-2` = 8px, `gap-4` = 16px, `gap-6` = 24px, `gap-8` = 32px) read the steps of the spacing scale below, and land on the same values as the component tokens. Reach for these classes first.
+
+---
+
+## The Spacing Scale
+
+Every numeric spacing and sizing class reads one step of `space.scale.*`: `p-2`
+reads `--space-scale-2`, `gap-1.5` reads `--space-scale-1-5`, `size-9` reads
+`--space-scale-9`. A step `n` is `n × 4px`. Width, height and size share the
+scale with padding, margin, gap, inset and translate, because Tailwind reads
+them from one namespace; negative steps (`-mx-1`) come for free.
+
+| Steps                                                            | Values          | Note                                                                                                            |
+| ---------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
+| `0` `0.5` `1` `1.5` `2` `2.5` `3` `3.5`                          | 0 → 14px        | fine adjustments inside components                                                                              |
+| `4` `5` `6` `7` `8` `9` `10` `11` `12`                           | 16 → 48px       | padding, gaps, control heights (`h-8`, `h-9`)                                                                   |
+| `14` `16` `20` `24` `28` `32` `36` `40` `44` `48` `52` `56` `60` | 56 → 240px      | large sizes (`min-w-32`, `size-48`)                                                                             |
+| `64` `72` `80` `96`                                              | 256 → 384px     | panel widths (`w-64`, `w-72`)                                                                                   |
+| `1.25` `5.25` `18`                                               | 5px, 21px, 72px | outside Tailwind v3's scale: `Alert`'s close button and action room, `Combobox`'s chip, as shadcn/ui draws them |
+
+This is Tailwind v3's spacing scale, the one models write from memory and
+shadcn/ui draws with, plus the three steps shadcn/ui adds. Any other step
+(`p-13`, `h-15`, `gap-17`) generates no CSS.
+
+### Container widths
+
+`max-w-*` and `w-*` also take the container scale, `space.container.*`:
+`3xs` (256px), `2xs` (288px), `xs` (320px), `sm` (384px), `md` (448px), `lg`
+(512px), `xl` (576px), `2xl` (672px), `3xl` (768px), `4xl` (896px), `5xl`
+(1024px), `6xl` (1152px), `7xl` (1280px). `max-w-2xl`, `max-w-5xl` and
+`max-w-7xl` match `space.layout.content-sm`, `content-default` and
+`content-lg`.
+
+These are also the steps of container queries (`@md/field-group:`), which
+Tailwind compiles at build time and which cannot read `var()`. So, like the
+breakpoints, they are not bridged: Tailwind's own values are the
+`space.container.*` tokens, and `tokens:lint-bridge` checks the two stay equal.
 
 ---
 
@@ -117,19 +153,33 @@ section-gap   ██████████████████████
 
 ---
 
-## Why spacing is wired but not locked
+## The Lock
 
-Colors, radii and shadows are locked: `styles/globals.css` resets their Tailwind
-namespaces (`--color-*: initial`…), so only the names the design system declares
-generate CSS. Spacing is not reset, on purpose. Components draw with Tailwind's
-multiplier scale (`p-2`, `gap-1.5`, `--spacing(9)`), and the tokens above name
-only a few of its steps; the layout tokens are bridged by name (`p-page`,
-`gap-section`, `w-sidebar`). Resetting `--spacing` today would remove every class
-of that scale before a canonical scale exists to replace it.
+`styles/globals.css` resets Tailwind's spacing namespace (`--spacing: initial`,
+`--spacing-*: initial`), then
+declares each step of the scale by name, read from its token:
+`--spacing-2: var(--space-scale-2)`, `--spacing-0\.5: var(--space-scale-0-5)`.
+While `--spacing` exists, Tailwind accepts any multiple of it; without it, only
+the declared steps resolve. So `p-13` and `max-w-13` generate no CSS, and
+ESLint (`better-tailwindcss/no-unknown-classes`) rejects them.
 
-So `p-13` still compiles. Until the canonical spacing scale is decided and the
-namespace is locked, the Usage Rules below and review are what keep off-scale
-steps out.
+- **`--spacing()` no longer compiles** in an arbitrary value: read the step's
+  token instead, `[--cell-size:var(--space-scale-7)]`.
+- **The runtime `--spacing` variable stays**: `tw-animate-css`
+  (`slide-in-from-top-2`) and `shadcn/tailwind.css` (the scroll fade) read
+  `var(--spacing)` in their CSS, so `@layer base` sets it on `:root` to
+  `--space-scale-1`. It
+  generates no class. `ToggleGroup` multiplies it by its `spacing` prop, a
+  number of scale units.
+- **Adding a step** takes a primitive, a `space.scale.*` token and its bridge
+  line; review is where the scale grows.
+
+**`@theme static`: not adopted.** `static` would print every theme variable to
+`:root`, including an alias for each step (`--spacing-2` beside
+`--space-scale-2`). `tokens.css` already prints every token, and `@theme inline`
+compiles each class straight to the token (`p-2` → `var(--space-scale-2)`), so
+the aliases would only add a second name that code could read instead of the
+token.
 
 ---
 
@@ -146,12 +196,12 @@ steps out.
 A Tailwind arbitrary value (`w-[…]`, `gap-[…]`, `grid-cols-[…]`…) is allowed
 without justification as long as it **reads** a decision without making one:
 
-| Allowed without justification | Why                                                     |
-| ----------------------------- | ------------------------------------------------------- |
-| `w-[var(--sidebar-width)]`    | reads a token; changing the token changes the component |
-| `gap-[--spacing(4)]`          | reads the spacing scale                                 |
-| `top-[50%]`                   | relative to the parent box, not a design value          |
-| `grid-cols-[auto_1fr]`        | describes a structure, not a size                       |
+| Allowed without justification        | Why                                                     |
+| ------------------------------------ | ------------------------------------------------------- |
+| `w-[var(--sidebar-width)]`           | reads a token; changing the token changes the component |
+| `[--cell-size:var(--space-scale-7)]` | reads a step of the spacing scale                       |
+| `top-[50%]`                          | relative to the parent box, not a design value          |
+| `grid-cols-[auto_1fr]`               | describes a structure, not a size                       |
 
 As soon as there is **arithmetic** — `calc()`, `+`, `-`, `*`, `/` — the value
 encodes a relationship invented inside the component, which no token expresses
@@ -160,5 +210,5 @@ right above it in a contiguous comment block, **and** a matching entry in
 `tokens/allow-raw.registry.json`.
 
 `npm run tokens:lint-values` enforces the rule. Simplify first:
-`top-[calc(--spacing(1.25))]` is written `top-1.25` and compiles to the same
-thing.
+`top-[calc(var(--space-scale-1-25))]` is written `top-1.25` and compiles to
+the same thing.

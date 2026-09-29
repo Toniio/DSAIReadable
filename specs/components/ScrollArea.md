@@ -53,8 +53,9 @@ A scroll container with styled scrollbars that replace the browser's native ones
 | `color.border.default`   | `bg-border`                              | `ScrollBar`                                    |
 | `color.border.focus`     | `border-ring` · `ring-ring/50`           | `ScrollArea` via `FOCUS_RING` (`lib/focus.ts`) |
 | `space.focus-ring-width` | `ring-(length:--space-focus-ring-width)` | `ScrollArea` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.scale.2-5`        | `h-2.5` · `w-2.5`                        | `ScrollBar`                                    |
 
-Collected from `components/ui/scroll-area.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/scroll-area.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

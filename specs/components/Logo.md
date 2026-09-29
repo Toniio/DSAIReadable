@@ -48,14 +48,24 @@ The application's brand mark. The component renders the pictogram alone; it is a
 | ------------------------------------ | ------------------------- | ------ |
 | `color.action.background.default`    | `bg-primary`              | `Logo` |
 | `color.action.background.foreground` | `text-primary-foreground` | `Logo` |
+| `space.scale.11`                     | `size-11`                 | `Logo` |
+| `space.scale.2`                      | `gap-2`                   | `Logo` |
+| `space.scale.4`                      | `size-4`                  | `Logo` |
+| `space.scale.5`                      | `size-5`                  | `Logo` |
+| `space.scale.6`                      | `size-6`                  | `Logo` |
+| `space.scale.7`                      | `size-7`                  | `Logo` |
+| `space.scale.9`                      | `size-9`                  | `Logo` |
 | `typography.font-family.mono`        | `font-heading`            | `Logo` |
 | `typography.font-weight.bold`        | `font-bold`               | `Logo` |
 | `typography.letter-spacing.tight`    | `tracking-tight`          | `Logo` |
+| `typography.size-line-height.2xl`    | `text-2xl`                | `Logo` |
+| `typography.size-line-height.base`   | `text-base`               | `Logo` |
+| `typography.size-line-height.xl`     | `text-xl`                 | `Logo` |
 | `typography.size.2xl`                | `text-2xl`                | `Logo` |
 | `typography.size.base`               | `text-base`               | `Logo` |
 | `typography.size.xl`                 | `text-xl`                 | `Logo` |
 
-Collected from `components/ui/logo.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/logo.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

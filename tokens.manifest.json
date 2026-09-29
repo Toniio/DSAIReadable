@@ -1,5 +1,5 @@
 {
-  "tokenCount": 319,
+  "tokenCount": 424,
   "tokens": [
     {
       "token": "primitive.color.mist.0",
@@ -722,6 +722,22 @@
       "private": true
     },
     {
+      "token": "primitive.space.0",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-0",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0rem"
+      },
+      "value": {
+        "light": "0rem"
+      },
+      "description": "0px equivalent spacing step.",
+      "private": true
+    },
+    {
       "token": "primitive.space.1",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-1",
@@ -758,7 +774,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-space-3",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "0.75rem"
@@ -766,7 +782,7 @@
       "value": {
         "light": "0.75rem"
       },
-      "description": "12px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "description": "12px equivalent spacing step.",
       "private": true
     },
     {
@@ -790,7 +806,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-space-5",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "1.25rem"
@@ -798,7 +814,7 @@
       "value": {
         "light": "1.25rem"
       },
-      "description": "20px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "description": "20px equivalent spacing step.",
       "private": true
     },
     {
@@ -818,6 +834,22 @@
       "private": true
     },
     {
+      "token": "primitive.space.7",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-7",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.75rem"
+      },
+      "value": {
+        "light": "1.75rem"
+      },
+      "description": "28px equivalent spacing step.",
+      "private": true
+    },
+    {
       "token": "primitive.space.8",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-8",
@@ -834,11 +866,27 @@
       "private": true
     },
     {
+      "token": "primitive.space.9",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-9",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2.25rem"
+      },
+      "value": {
+        "light": "2.25rem"
+      },
+      "description": "36px equivalent spacing step.",
+      "private": true
+    },
+    {
       "token": "primitive.space.10",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-10",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "2.5rem"
@@ -846,7 +894,23 @@
       "value": {
         "light": "2.5rem"
       },
-      "description": "40px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "description": "40px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.11",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-11",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2.75rem"
+      },
+      "value": {
+        "light": "2.75rem"
+      },
+      "description": "44px equivalent spacing step.",
       "private": true
     },
     {
@@ -866,11 +930,27 @@
       "private": true
     },
     {
+      "token": "primitive.space.14",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-14",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "3.5rem"
+      },
+      "value": {
+        "light": "3.5rem"
+      },
+      "description": "56px equivalent spacing step.",
+      "private": true
+    },
+    {
       "token": "primitive.space.16",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-16",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "4rem"
@@ -878,7 +958,39 @@
       "value": {
         "light": "4rem"
       },
-      "description": "64px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "description": "64px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.18",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-18",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "4.5rem"
+      },
+      "value": {
+        "light": "4.5rem"
+      },
+      "description": "72px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.20",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-20",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "5rem"
+      },
+      "value": {
+        "light": "5rem"
+      },
+      "description": "80px equivalent spacing step.",
       "private": true
     },
     {
@@ -886,7 +998,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-space-24",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "6rem"
@@ -894,7 +1006,23 @@
       "value": {
         "light": "6rem"
       },
-      "description": "96px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "description": "96px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.28",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-28",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "7rem"
+      },
+      "value": {
+        "light": "7rem"
+      },
+      "description": "112px equivalent spacing step.",
       "private": true
     },
     {
@@ -902,7 +1030,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-space-32",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "8rem"
@@ -910,7 +1038,183 @@
       "value": {
         "light": "8rem"
       },
-      "description": "128px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "description": "128px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.36",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-36",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "9rem"
+      },
+      "value": {
+        "light": "9rem"
+      },
+      "description": "144px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.40",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-40",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "10rem"
+      },
+      "value": {
+        "light": "10rem"
+      },
+      "description": "160px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.44",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-44",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "11rem"
+      },
+      "value": {
+        "light": "11rem"
+      },
+      "description": "176px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.48",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-48",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "12rem"
+      },
+      "value": {
+        "light": "12rem"
+      },
+      "description": "192px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.52",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-52",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "13rem"
+      },
+      "value": {
+        "light": "13rem"
+      },
+      "description": "208px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.56",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-56",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "14rem"
+      },
+      "value": {
+        "light": "14rem"
+      },
+      "description": "224px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.60",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-60",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "15rem"
+      },
+      "value": {
+        "light": "15rem"
+      },
+      "description": "240px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.64",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-64",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "16rem"
+      },
+      "value": {
+        "light": "16rem"
+      },
+      "description": "256px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.72",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-72",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "18rem"
+      },
+      "value": {
+        "light": "18rem"
+      },
+      "description": "288px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.80",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-80",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "20rem"
+      },
+      "value": {
+        "light": "20rem"
+      },
+      "description": "320px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.96",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-96",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "24rem"
+      },
+      "value": {
+        "light": "24rem"
+      },
+      "description": "384px equivalent spacing step.",
       "private": true
     },
     {
@@ -918,7 +1222,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-space-0-5",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "0.125rem"
@@ -926,7 +1230,87 @@
       "value": {
         "light": "0.125rem"
       },
-      "description": "2px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
+      "description": "2px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.1-25",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-1-25",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.3125rem"
+      },
+      "value": {
+        "light": "0.3125rem"
+      },
+      "description": "5px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.1-5",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-1-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.375rem"
+      },
+      "value": {
+        "light": "0.375rem"
+      },
+      "description": "6px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.2-5",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-2-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.625rem"
+      },
+      "value": {
+        "light": "0.625rem"
+      },
+      "description": "10px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.3-5",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-3-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.875rem"
+      },
+      "value": {
+        "light": "0.875rem"
+      },
+      "description": "14px equivalent spacing step.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.5-25",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-5-25",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.3125rem"
+      },
+      "value": {
+        "light": "1.3125rem"
+      },
+      "description": "21px equivalent spacing step.",
       "private": true
     },
     {
@@ -1055,6 +1439,214 @@
         "light": "2px"
       },
       "description": "Default focus ring outline width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.3xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-3xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "16rem"
+      },
+      "value": {
+        "light": "16rem"
+      },
+      "description": "256px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.2xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-2xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "18rem"
+      },
+      "value": {
+        "light": "18rem"
+      },
+      "description": "288px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "20rem"
+      },
+      "value": {
+        "light": "20rem"
+      },
+      "description": "320px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "24rem"
+      },
+      "value": {
+        "light": "24rem"
+      },
+      "description": "384px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.md",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-md",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "28rem"
+      },
+      "value": {
+        "light": "28rem"
+      },
+      "description": "448px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-lg",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "32rem"
+      },
+      "value": {
+        "light": "32rem"
+      },
+      "description": "512px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "36rem"
+      },
+      "value": {
+        "light": "36rem"
+      },
+      "description": "576px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.2xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-2xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "42rem"
+      },
+      "value": {
+        "light": "42rem"
+      },
+      "description": "672px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.3xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-3xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "48rem"
+      },
+      "value": {
+        "light": "48rem"
+      },
+      "description": "768px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.4xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-4xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "56rem"
+      },
+      "value": {
+        "light": "56rem"
+      },
+      "description": "896px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.5xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-5xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "64rem"
+      },
+      "value": {
+        "light": "64rem"
+      },
+      "description": "1024px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.6xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-6xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "72rem"
+      },
+      "value": {
+        "light": "72rem"
+      },
+      "description": "1152px container width.",
+      "private": true
+    },
+    {
+      "token": "primitive.space.container.7xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-space-container-7xl",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "80rem"
+      },
+      "value": {
+        "light": "80rem"
+      },
+      "description": "1280px container width.",
       "private": true
     },
     {
@@ -1506,6 +2098,22 @@
       "private": true
     },
     {
+      "token": "primitive.typography.letter-spacing.widest",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-letter-spacing-widest",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "0.1em"
+      },
+      "value": {
+        "light": "0.1em"
+      },
+      "description": "Widest tracking, for keyboard shortcuts.",
+      "private": true
+    },
+    {
       "token": "primitive.typography.font-weight.normal",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-font-weight-normal",
@@ -1599,6 +2207,134 @@
         "light": "JetBrains Mono, monospace"
       },
       "description": "Monospace typeface for code and numeric data.",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.xs",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-xs",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.33334"
+      },
+      "value": {
+        "light": "1.33334"
+      },
+      "description": "Line height paired with the xs font size (1 / 0.75), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel.",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.sm",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-sm",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.42858"
+      },
+      "value": {
+        "light": "1.42858"
+      },
+      "description": "Line height paired with the sm font size (1.25 / 0.875), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel.",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.base",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-base",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.5"
+      },
+      "value": {
+        "light": "1.5"
+      },
+      "description": "Line height paired with the base font size (1.5 / 1).",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.lg",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-lg",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.55556"
+      },
+      "value": {
+        "light": "1.55556"
+      },
+      "description": "Line height paired with the lg font size (1.75 / 1.125), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel.",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.4"
+      },
+      "value": {
+        "light": "1.4"
+      },
+      "description": "Line height paired with the xl font size (1.75 / 1.25).",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.2xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-2xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.33334"
+      },
+      "value": {
+        "light": "1.33334"
+      },
+      "description": "Line height paired with the 2xl font size (2 / 1.5), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel.",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.3xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-3xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.2"
+      },
+      "value": {
+        "light": "1.2"
+      },
+      "description": "Line height paired with the 3xl font size (2.25 / 1.875).",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.size-line-height.4xl",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-size-line-height-4xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "1.11112"
+      },
+      "value": {
+        "light": "1.11112"
+      },
+      "description": "Line height paired with the 4xl font size (2.5 / 2.25), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel.",
       "private": true
     },
     {
@@ -3603,6 +4339,906 @@
       }
     },
     {
+      "token": "space.scale.0",
+      "tier": "semantic",
+      "cssVar": "--space-scale-0",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.0}"
+      },
+      "value": {
+        "light": "0rem"
+      },
+      "description": "Spacing step 0 (0px): the `0` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-0 · m-0 · gap-0 · size-0"
+      }
+    },
+    {
+      "token": "space.scale.1",
+      "tier": "semantic",
+      "cssVar": "--space-scale-1",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.1}"
+      },
+      "value": {
+        "light": "0.25rem"
+      },
+      "description": "Spacing step 1 (4px): the `1` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-1 · m-1 · gap-1 · size-1"
+      }
+    },
+    {
+      "token": "space.scale.2",
+      "tier": "semantic",
+      "cssVar": "--space-scale-2",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.2}"
+      },
+      "value": {
+        "light": "0.5rem"
+      },
+      "description": "Spacing step 2 (8px): the `2` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-2 · m-2 · gap-2 · size-2"
+      }
+    },
+    {
+      "token": "space.scale.3",
+      "tier": "semantic",
+      "cssVar": "--space-scale-3",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.3}"
+      },
+      "value": {
+        "light": "0.75rem"
+      },
+      "description": "Spacing step 3 (12px): the `3` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-3 · m-3 · gap-3 · size-3"
+      }
+    },
+    {
+      "token": "space.scale.4",
+      "tier": "semantic",
+      "cssVar": "--space-scale-4",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.4}"
+      },
+      "value": {
+        "light": "1rem"
+      },
+      "description": "Spacing step 4 (16px): the `4` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-4 · m-4 · gap-4 · size-4"
+      }
+    },
+    {
+      "token": "space.scale.5",
+      "tier": "semantic",
+      "cssVar": "--space-scale-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.5}"
+      },
+      "value": {
+        "light": "1.25rem"
+      },
+      "description": "Spacing step 5 (20px): the `5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-5 · m-5 · gap-5 · size-5"
+      }
+    },
+    {
+      "token": "space.scale.6",
+      "tier": "semantic",
+      "cssVar": "--space-scale-6",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.6}"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "Spacing step 6 (24px): the `6` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-6 · m-6 · gap-6 · size-6"
+      }
+    },
+    {
+      "token": "space.scale.7",
+      "tier": "semantic",
+      "cssVar": "--space-scale-7",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.7}"
+      },
+      "value": {
+        "light": "1.75rem"
+      },
+      "description": "Spacing step 7 (28px): the `7` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-7 · m-7 · gap-7 · size-7"
+      }
+    },
+    {
+      "token": "space.scale.8",
+      "tier": "semantic",
+      "cssVar": "--space-scale-8",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.8}"
+      },
+      "value": {
+        "light": "2rem"
+      },
+      "description": "Spacing step 8 (32px): the `8` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-8 · m-8 · gap-8 · size-8"
+      }
+    },
+    {
+      "token": "space.scale.9",
+      "tier": "semantic",
+      "cssVar": "--space-scale-9",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.9}"
+      },
+      "value": {
+        "light": "2.25rem"
+      },
+      "description": "Spacing step 9 (36px): the `9` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-9 · m-9 · gap-9 · size-9"
+      }
+    },
+    {
+      "token": "space.scale.10",
+      "tier": "semantic",
+      "cssVar": "--space-scale-10",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.10}"
+      },
+      "value": {
+        "light": "2.5rem"
+      },
+      "description": "Spacing step 10 (40px): the `10` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-10 · m-10 · gap-10 · size-10"
+      }
+    },
+    {
+      "token": "space.scale.11",
+      "tier": "semantic",
+      "cssVar": "--space-scale-11",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.11}"
+      },
+      "value": {
+        "light": "2.75rem"
+      },
+      "description": "Spacing step 11 (44px): the `11` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-11 · m-11 · gap-11 · size-11"
+      }
+    },
+    {
+      "token": "space.scale.12",
+      "tier": "semantic",
+      "cssVar": "--space-scale-12",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.12}"
+      },
+      "value": {
+        "light": "3rem"
+      },
+      "description": "Spacing step 12 (48px): the `12` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-12 · m-12 · gap-12 · size-12"
+      }
+    },
+    {
+      "token": "space.scale.14",
+      "tier": "semantic",
+      "cssVar": "--space-scale-14",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.14}"
+      },
+      "value": {
+        "light": "3.5rem"
+      },
+      "description": "Spacing step 14 (56px): the `14` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-14 · m-14 · gap-14 · size-14"
+      }
+    },
+    {
+      "token": "space.scale.16",
+      "tier": "semantic",
+      "cssVar": "--space-scale-16",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.16}"
+      },
+      "value": {
+        "light": "4rem"
+      },
+      "description": "Spacing step 16 (64px): the `16` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-16 · m-16 · gap-16 · size-16"
+      }
+    },
+    {
+      "token": "space.scale.18",
+      "tier": "semantic",
+      "cssVar": "--space-scale-18",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.18}"
+      },
+      "value": {
+        "light": "4.5rem"
+      },
+      "description": "Spacing step 18 (72px): the `18` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the room `Alert` leaves for its action (`pr-18`), as shadcn/ui draws it.",
+      "docs": {
+        "tailwind": "p-18 · m-18 · gap-18 · size-18"
+      }
+    },
+    {
+      "token": "space.scale.20",
+      "tier": "semantic",
+      "cssVar": "--space-scale-20",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.20}"
+      },
+      "value": {
+        "light": "5rem"
+      },
+      "description": "Spacing step 20 (80px): the `20` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-20 · m-20 · gap-20 · size-20"
+      }
+    },
+    {
+      "token": "space.scale.24",
+      "tier": "semantic",
+      "cssVar": "--space-scale-24",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.24}"
+      },
+      "value": {
+        "light": "6rem"
+      },
+      "description": "Spacing step 24 (96px): the `24` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-24 · m-24 · gap-24 · size-24"
+      }
+    },
+    {
+      "token": "space.scale.28",
+      "tier": "semantic",
+      "cssVar": "--space-scale-28",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.28}"
+      },
+      "value": {
+        "light": "7rem"
+      },
+      "description": "Spacing step 28 (112px): the `28` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-28 · m-28 · gap-28 · size-28"
+      }
+    },
+    {
+      "token": "space.scale.32",
+      "tier": "semantic",
+      "cssVar": "--space-scale-32",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.32}"
+      },
+      "value": {
+        "light": "8rem"
+      },
+      "description": "Spacing step 32 (128px): the `32` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-32 · m-32 · gap-32 · size-32"
+      }
+    },
+    {
+      "token": "space.scale.36",
+      "tier": "semantic",
+      "cssVar": "--space-scale-36",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.36}"
+      },
+      "value": {
+        "light": "9rem"
+      },
+      "description": "Spacing step 36 (144px): the `36` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-36 · m-36 · gap-36 · size-36"
+      }
+    },
+    {
+      "token": "space.scale.40",
+      "tier": "semantic",
+      "cssVar": "--space-scale-40",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.40}"
+      },
+      "value": {
+        "light": "10rem"
+      },
+      "description": "Spacing step 40 (160px): the `40` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-40 · m-40 · gap-40 · size-40"
+      }
+    },
+    {
+      "token": "space.scale.44",
+      "tier": "semantic",
+      "cssVar": "--space-scale-44",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.44}"
+      },
+      "value": {
+        "light": "11rem"
+      },
+      "description": "Spacing step 44 (176px): the `44` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-44 · m-44 · gap-44 · size-44"
+      }
+    },
+    {
+      "token": "space.scale.48",
+      "tier": "semantic",
+      "cssVar": "--space-scale-48",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.48}"
+      },
+      "value": {
+        "light": "12rem"
+      },
+      "description": "Spacing step 48 (192px): the `48` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-48 · m-48 · gap-48 · size-48"
+      }
+    },
+    {
+      "token": "space.scale.52",
+      "tier": "semantic",
+      "cssVar": "--space-scale-52",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.52}"
+      },
+      "value": {
+        "light": "13rem"
+      },
+      "description": "Spacing step 52 (208px): the `52` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-52 · m-52 · gap-52 · size-52"
+      }
+    },
+    {
+      "token": "space.scale.56",
+      "tier": "semantic",
+      "cssVar": "--space-scale-56",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.56}"
+      },
+      "value": {
+        "light": "14rem"
+      },
+      "description": "Spacing step 56 (224px): the `56` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-56 · m-56 · gap-56 · size-56"
+      }
+    },
+    {
+      "token": "space.scale.60",
+      "tier": "semantic",
+      "cssVar": "--space-scale-60",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.60}"
+      },
+      "value": {
+        "light": "15rem"
+      },
+      "description": "Spacing step 60 (240px): the `60` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-60 · m-60 · gap-60 · size-60"
+      }
+    },
+    {
+      "token": "space.scale.64",
+      "tier": "semantic",
+      "cssVar": "--space-scale-64",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.64}"
+      },
+      "value": {
+        "light": "16rem"
+      },
+      "description": "Spacing step 64 (256px): the `64` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-64 · m-64 · gap-64 · size-64"
+      }
+    },
+    {
+      "token": "space.scale.72",
+      "tier": "semantic",
+      "cssVar": "--space-scale-72",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.72}"
+      },
+      "value": {
+        "light": "18rem"
+      },
+      "description": "Spacing step 72 (288px): the `72` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-72 · m-72 · gap-72 · size-72"
+      }
+    },
+    {
+      "token": "space.scale.80",
+      "tier": "semantic",
+      "cssVar": "--space-scale-80",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.80}"
+      },
+      "value": {
+        "light": "20rem"
+      },
+      "description": "Spacing step 80 (320px): the `80` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-80 · m-80 · gap-80 · size-80"
+      }
+    },
+    {
+      "token": "space.scale.96",
+      "tier": "semantic",
+      "cssVar": "--space-scale-96",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.96}"
+      },
+      "value": {
+        "light": "24rem"
+      },
+      "description": "Spacing step 96 (384px): the `96` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-96 · m-96 · gap-96 · size-96"
+      }
+    },
+    {
+      "token": "space.scale.0-5",
+      "tier": "semantic",
+      "cssVar": "--space-scale-0-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.0-5}"
+      },
+      "value": {
+        "light": "0.125rem"
+      },
+      "description": "Spacing step 0.5 (2px): the `0.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-0.5 · m-0.5 · gap-0.5 · size-0.5"
+      }
+    },
+    {
+      "token": "space.scale.1-25",
+      "tier": "semantic",
+      "cssVar": "--space-scale-1-25",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.1-25}"
+      },
+      "value": {
+        "light": "0.3125rem"
+      },
+      "description": "Spacing step 1.25 (5px): the `1.25` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the close button of `Alert` (`top-1.25 right-1.25`), as shadcn/ui draws it.",
+      "docs": {
+        "tailwind": "p-1.25 · m-1.25 · gap-1.25 · size-1.25"
+      }
+    },
+    {
+      "token": "space.scale.1-5",
+      "tier": "semantic",
+      "cssVar": "--space-scale-1-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.1-5}"
+      },
+      "value": {
+        "light": "0.375rem"
+      },
+      "description": "Spacing step 1.5 (6px): the `1.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-1.5 · m-1.5 · gap-1.5 · size-1.5"
+      }
+    },
+    {
+      "token": "space.scale.2-5",
+      "tier": "semantic",
+      "cssVar": "--space-scale-2-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.2-5}"
+      },
+      "value": {
+        "light": "0.625rem"
+      },
+      "description": "Spacing step 2.5 (10px): the `2.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-2.5 · m-2.5 · gap-2.5 · size-2.5"
+      }
+    },
+    {
+      "token": "space.scale.3-5",
+      "tier": "semantic",
+      "cssVar": "--space-scale-3-5",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.3-5}"
+      },
+      "value": {
+        "light": "0.875rem"
+      },
+      "description": "Spacing step 3.5 (14px): the `3.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+      "docs": {
+        "tailwind": "p-3.5 · m-3.5 · gap-3.5 · size-3.5"
+      }
+    },
+    {
+      "token": "space.scale.5-25",
+      "tier": "semantic",
+      "cssVar": "--space-scale-5-25",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.5-25}"
+      },
+      "value": {
+        "light": "1.3125rem"
+      },
+      "description": "Spacing step 5.25 (21px): the `5.25` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the chip of `Combobox` (`h-5.25`), as shadcn/ui draws it.",
+      "docs": {
+        "tailwind": "p-5.25 · m-5.25 · gap-5.25 · size-5.25"
+      }
+    },
+    {
+      "token": "space.container.3xs",
+      "tier": "semantic",
+      "cssVar": "--space-container-3xs",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.3xs}"
+      },
+      "value": {
+        "light": "16rem"
+      },
+      "description": "Container width 3xs (256px): the value Tailwind compiles into `max-w-3xs` and `@3xs:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-3xs · w-3xs"
+      }
+    },
+    {
+      "token": "space.container.2xs",
+      "tier": "semantic",
+      "cssVar": "--space-container-2xs",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.2xs}"
+      },
+      "value": {
+        "light": "18rem"
+      },
+      "description": "Container width 2xs (288px): the value Tailwind compiles into `max-w-2xs` and `@2xs:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-2xs · w-2xs"
+      }
+    },
+    {
+      "token": "space.container.xs",
+      "tier": "semantic",
+      "cssVar": "--space-container-xs",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.xs}"
+      },
+      "value": {
+        "light": "20rem"
+      },
+      "description": "Container width xs (320px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-xs` and `@xs:` itself; lint-theme-bridge checks it equals the token.",
+      "docs": {
+        "tailwind": "max-w-xs · w-xs"
+      }
+    },
+    {
+      "token": "space.container.sm",
+      "tier": "semantic",
+      "cssVar": "--space-container-sm",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.sm}"
+      },
+      "value": {
+        "light": "24rem"
+      },
+      "description": "Container width sm (384px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-sm` and `@sm:` itself; lint-theme-bridge checks it equals the token.",
+      "docs": {
+        "tailwind": "max-w-sm · w-sm"
+      }
+    },
+    {
+      "token": "space.container.md",
+      "tier": "semantic",
+      "cssVar": "--space-container-md",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.md}"
+      },
+      "value": {
+        "light": "28rem"
+      },
+      "description": "Container width md (448px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-md` and `@md:` itself; lint-theme-bridge checks it equals the token.",
+      "docs": {
+        "tailwind": "max-w-md · w-md"
+      }
+    },
+    {
+      "token": "space.container.lg",
+      "tier": "semantic",
+      "cssVar": "--space-container-lg",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.lg}"
+      },
+      "value": {
+        "light": "32rem"
+      },
+      "description": "Container width lg (512px): the value Tailwind compiles into `max-w-lg` and `@lg:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-lg · w-lg"
+      }
+    },
+    {
+      "token": "space.container.xl",
+      "tier": "semantic",
+      "cssVar": "--space-container-xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.xl}"
+      },
+      "value": {
+        "light": "36rem"
+      },
+      "description": "Container width xl (576px): the value Tailwind compiles into `max-w-xl` and `@xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-xl · w-xl"
+      }
+    },
+    {
+      "token": "space.container.2xl",
+      "tier": "semantic",
+      "cssVar": "--space-container-2xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.2xl}"
+      },
+      "value": {
+        "light": "42rem"
+      },
+      "description": "Container width 2xl (672px): the value Tailwind compiles into `max-w-2xl` and `@2xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-2xl · w-2xl"
+      }
+    },
+    {
+      "token": "space.container.3xl",
+      "tier": "semantic",
+      "cssVar": "--space-container-3xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.3xl}"
+      },
+      "value": {
+        "light": "48rem"
+      },
+      "description": "Container width 3xl (768px): the value Tailwind compiles into `max-w-3xl` and `@3xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-3xl · w-3xl"
+      }
+    },
+    {
+      "token": "space.container.4xl",
+      "tier": "semantic",
+      "cssVar": "--space-container-4xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.4xl}"
+      },
+      "value": {
+        "light": "56rem"
+      },
+      "description": "Container width 4xl (896px): the value Tailwind compiles into `max-w-4xl` and `@4xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-4xl · w-4xl"
+      }
+    },
+    {
+      "token": "space.container.5xl",
+      "tier": "semantic",
+      "cssVar": "--space-container-5xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.5xl}"
+      },
+      "value": {
+        "light": "64rem"
+      },
+      "description": "Container width 5xl (1024px): the value Tailwind compiles into `max-w-5xl` and `@5xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-5xl · w-5xl"
+      }
+    },
+    {
+      "token": "space.container.6xl",
+      "tier": "semantic",
+      "cssVar": "--space-container-6xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.6xl}"
+      },
+      "value": {
+        "light": "72rem"
+      },
+      "description": "Container width 6xl (1152px): the value Tailwind compiles into `max-w-6xl` and `@6xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-6xl · w-6xl"
+      }
+    },
+    {
+      "token": "space.container.7xl",
+      "tier": "semantic",
+      "cssVar": "--space-container-7xl",
+      "type": "dimension",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.container.7xl}"
+      },
+      "value": {
+        "light": "80rem"
+      },
+      "description": "Container width 7xl (1280px): the value Tailwind compiles into `max-w-7xl` and `@7xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+      "docs": {
+        "tailwind": "max-w-7xl · w-7xl"
+      }
+    },
+    {
       "token": "space.focus-ring-width",
       "tier": "semantic",
       "cssVar": "--space-focus-ring-width",
@@ -3902,6 +5538,150 @@
       }
     },
     {
+      "token": "typography.size-line-height.xs",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-xs",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.xs}"
+      },
+      "value": {
+        "light": "1.33334"
+      },
+      "description": "Line height that `text-xs` sets with its size. `leading-*` or `text-xs/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-xs"
+      }
+    },
+    {
+      "token": "typography.size-line-height.sm",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-sm",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.sm}"
+      },
+      "value": {
+        "light": "1.42858"
+      },
+      "description": "Line height that `text-sm` sets with its size. `leading-*` or `text-sm/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-sm"
+      }
+    },
+    {
+      "token": "typography.size-line-height.base",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-base",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.base}"
+      },
+      "value": {
+        "light": "1.5"
+      },
+      "description": "Line height that `text-base` sets with its size. `leading-*` or `text-base/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-base"
+      }
+    },
+    {
+      "token": "typography.size-line-height.lg",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-lg",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.lg}"
+      },
+      "value": {
+        "light": "1.55556"
+      },
+      "description": "Line height that `text-lg` sets with its size. `leading-*` or `text-lg/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-lg"
+      }
+    },
+    {
+      "token": "typography.size-line-height.xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.xl}"
+      },
+      "value": {
+        "light": "1.4"
+      },
+      "description": "Line height that `text-xl` sets with its size. `leading-*` or `text-xl/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-xl"
+      }
+    },
+    {
+      "token": "typography.size-line-height.2xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-2xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.2xl}"
+      },
+      "value": {
+        "light": "1.33334"
+      },
+      "description": "Line height that `text-2xl` sets with its size. `leading-*` or `text-2xl/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-2xl"
+      }
+    },
+    {
+      "token": "typography.size-line-height.3xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-3xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.3xl}"
+      },
+      "value": {
+        "light": "1.2"
+      },
+      "description": "Line height that `text-3xl` sets with its size. `leading-*` or `text-3xl/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-3xl"
+      }
+    },
+    {
+      "token": "typography.size-line-height.4xl",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-4xl",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.4xl}"
+      },
+      "value": {
+        "light": "1.11112"
+      },
+      "description": "Line height that `text-4xl` sets with its size. `leading-*` or `text-4xl/<leading>` overrides it.",
+      "docs": {
+        "tailwind": "text-4xl"
+      }
+    },
+    {
       "token": "typography.line-height.tight",
       "tier": "semantic",
       "cssVar": "--typography-line-height-tight",
@@ -4061,6 +5841,24 @@
       "description": "Wider letter spacing for all-caps or overline text.",
       "docs": {
         "tailwind": "tracking-wider"
+      }
+    },
+    {
+      "token": "typography.letter-spacing.widest",
+      "tier": "semantic",
+      "cssVar": "--typography-letter-spacing-widest",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.letter-spacing.widest}"
+      },
+      "value": {
+        "light": "0.1em"
+      },
+      "description": "Widest letter spacing, for the keyboard shortcuts of menus and the command palette.",
+      "docs": {
+        "tailwind": "tracking-widest"
       }
     },
     {

@@ -68,14 +68,21 @@ A blocking modal that stops the user to confirm or cancel a critical action.
 | `color.text.default`             | `ring-foreground/10` · `text-foreground` · `text-popover-foreground` | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogDescription`                                   |
 | `color.text.subtle`              | `text-muted-foreground`                                              | `AlertDialogDescription`                                                                                                      |
 | `motion.duration.fast`           | `duration-fast`                                                      | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogOverlay`                                       |
+| `space.scale.0`                  | `inset-0`                                                            | `AlertDialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                                    |
+| `space.scale.1-5`                | `gap-1.5`                                                            | `AlertDialogHeader`                                                                                                           |
+| `space.scale.10`                 | `size-10`                                                            | `AlertDialogMedia`                                                                                                            |
+| `space.scale.2`                  | `gap-2` · `mb-2`                                                     | `AlertDialogFooter` · `AlertDialogMedia`                                                                                      |
+| `space.scale.4`                  | `gap-4` · `gap-x-4` · `p-4`                                          | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogHeader`                                        |
+| `space.scale.6`                  | `size-6`                                                             | `AlertDialogMedia`                                                                                                            |
 | `typography.font-family.mono`    | `font-heading`                                                       | `AlertDialogTitle`                                                                                                            |
 | `typography.font-weight.medium`  | `font-medium`                                                        | `AlertDialogTitle`                                                                                                            |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                                    | `AlertDialogDescription`                                                                                                      |
+| `typography.size-line-height.sm` | `text-sm`                                                            | `AlertDialogTitle`                                                                                                            |
 | `typography.size.sm`             | `text-sm`                                                            | `AlertDialogTitle`                                                                                                            |
 | `typography.size.xs`             | `text-xs/relaxed`                                                    | `AlertDialogDescription`                                                                                                      |
 | `zindex.modal`                   | `z-modal`                                                            | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
 
-Collected from `components/ui/alert-dialog.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/alert-dialog.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 Composes `Button` — its tokens are listed in its own spec.
 

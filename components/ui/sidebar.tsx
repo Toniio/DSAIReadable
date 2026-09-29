@@ -231,7 +231,7 @@ function Sidebar({
             ? // allow-raw: sidebar-icon-gutter — the floating and inset variants sit inside a
               // padded shell, so the collapsed rail is its own width plus that padding. The
               // sum belongs to the variant, not to the scale.
-              "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
+              "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+var(--space-scale-4))]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
         )}
       />
@@ -245,7 +245,7 @@ function Sidebar({
           "fixed inset-y-0 z-fixed hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-normal ease-linear data-[side=left]:left-0 data-[side=left]:group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)] data-[side=right]:right-0 data-[side=right]:group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)] md:flex",
           // Adjust the padding for floating and inset variants.
           variant === "floating" || variant === "inset"
-            ? /* allow-raw: subpixel-offset — +2px compensates for the floating variant border width */ "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
+            ? /* allow-raw: subpixel-offset — +2px compensates for the floating variant border width */ "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+var(--space-scale-4)+2px)]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
           className
         )}

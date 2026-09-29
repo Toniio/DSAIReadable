@@ -57,11 +57,13 @@ A floating preview card that appears when the pointer rests on an element and sh
 | `color.text.default`             | `ring-foreground/10` · `text-popover-foreground` | `HoverCardContent`                                          |
 | `elevation.md`                   | `shadow-md`                                      | `HoverCardContent`                                          |
 | `motion.duration.fast`           | `duration-fast`                                  | `HoverCardContent`                                          |
+| `space.scale.2-5`                | `p-2.5`                                          | `HoverCardContent`                                          |
+| `space.scale.64`                 | `w-64`                                           | `HoverCardContent`                                          |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                | `HoverCardContent`                                          |
 | `typography.size.xs`             | `text-xs/relaxed`                                | `HoverCardContent`                                          |
 | `zindex.popover`                 | `z-popover`                                      | `HoverCardContent`                                          |
 
-Collected from `components/ui/hover-card.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/hover-card.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

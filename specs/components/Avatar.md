@@ -59,11 +59,22 @@ A visual stand-in for a person or an entity — a photo, initials or an icon —
 | `color.background.subtle`            | `bg-muted`                                | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
 | `color.border.default`               | `border-border`                           | `Avatar`                                                                                                                             |
 | `color.text.subtle`                  | `text-muted-foreground`                   | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
+| `space.scale.0`                      | `bottom-0` · `inset-0` · `right-0`        | `AvatarBadge` · `Avatar`                                                                                                             |
+| `space.scale.10`                     | `size-10`                                 | `AvatarGroupCount` · `Avatar`                                                                                                        |
+| `space.scale.2`                      | `-space-x-2` · `size-2`                   | `AvatarBadge` · `AvatarGroup`                                                                                                        |
+| `space.scale.2-5`                    | `size-2.5`                                | `AvatarBadge`                                                                                                                        |
+| `space.scale.3`                      | `size-3`                                  | `AvatarBadge` · `AvatarGroupCount`                                                                                                   |
+| `space.scale.4`                      | `size-4`                                  | `AvatarGroupCount`                                                                                                                   |
+| `space.scale.5`                      | `size-5`                                  | `AvatarGroupCount`                                                                                                                   |
+| `space.scale.6`                      | `size-6`                                  | `AvatarGroupCount` · `Avatar`                                                                                                        |
+| `space.scale.8`                      | `size-8`                                  | `AvatarGroupCount` · `Avatar`                                                                                                        |
+| `typography.size-line-height.sm`     | `text-sm`                                 | `AvatarFallback`                                                                                                                     |
+| `typography.size-line-height.xs`     | `text-xs`                                 | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
 | `typography.size.sm`                 | `text-sm`                                 | `AvatarFallback`                                                                                                                     |
 | `typography.size.xs`                 | `text-xs`                                 | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
 | `zindex.dropdown`                    | `z-dropdown`                              | `AvatarBadge`                                                                                                                        |
 
-Collected from `components/ui/avatar.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/avatar.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

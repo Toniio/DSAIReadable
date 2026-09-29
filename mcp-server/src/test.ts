@@ -629,8 +629,8 @@ assert(
   "Every served token is a bare DTCG path (no backticks, no header row)"
 )
 assert(
-  tokenSpecs.Pagination?.tokens.length === 0 &&
-    tokenSpecs.Pagination.tokens_from.includes("Button"),
+  tokenSpecs.PasswordInput?.tokens.length === 0 &&
+    tokenSpecs.PasswordInput.tokens_from.includes("InputGroup"),
   "A component with no token of its own points to the specs it composes"
 )
 

@@ -49,8 +49,9 @@ A placeholder for illustrations and decorative images, used in split-screen layo
 | ------------------------- | ---------------------------------------------------- | -------------- |
 | `color.background.subtle` | `bg-muted`                                           | `Illustration` |
 | `color.text.subtle`       | `text-muted-foreground` · `text-muted-foreground/20` | `Illustration` |
+| `space.scale.48`          | `size-48`                                            | `Illustration` |
 
-Collected from `components/ui/illustration.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/illustration.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

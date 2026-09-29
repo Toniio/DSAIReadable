@@ -108,6 +108,11 @@ const PRESENT = [
   "font-sans",
   "rounded-lg",
   "shadow-md",
+  "p-2",
+  "h-9",
+  "text-xs",
+  "tracking-widest",
+  "max-w-sm",
 ]
 /** Tailwind defaults and CLI side effects the lockdown must remove. */
 const ABSENT = [
@@ -116,6 +121,10 @@ const ABSENT = [
   "shadow-2xs",
   "bg-color-primary",
   "bg-ds-prim-color-mist-0",
+  "p-13",
+  "text-7xl",
+  "font-serif",
+  "tracking-tighter",
 ]
 
 const work = mkdtempSync(join(tmpdir(), "dsaireadable-registry-"))
@@ -315,6 +324,10 @@ try {
   if (/@media[^{]*var\(/.test(built))
     failures.push(
       "a media query reads var(): responsive variants (sm:, md:…) never match"
+    )
+  if (!/--spacing:\s*var\(--space-scale-1\)/.test(built))
+    failures.push(
+      "--spacing is not set at runtime: tw-animate-css slides (slide-in-from-top-2) lose their offset"
     )
   if (!/:where\(\[data-state="open"\]\)/.test(built))
     failures.push('data-open: does not match Radix\'s data-state="open"')

@@ -492,12 +492,12 @@ function isExempt(lines: string[], index: number): boolean {
  * An arbitrary value is free only when it *reads* a design decision without
  * making one.
  *
- * Reading is free: `[var(--sidebar-width)]`, `[--spacing(4)]`, `[50%]`. The
+ * Reading is free: `[var(--sidebar-width)]`, `[var(--space-scale-4)]`, `[50%]`. The
  * value comes from the token layer, and changing the token changes the
  * component.
  *
  * Arithmetic is a decision: `calc(var(--x) + 2px)`, `calc(100% - var(--y))`,
- * `calc(--spacing(72) - --spacing(9))` all encode a relationship invented in
+ * `calc(var(--space-scale-72) - var(--space-scale-9))` all encode a relationship invented in
  * the component, which no token can express and no agent can discover. Those
  * must be justified by a registered `allow-raw`, whatever they are built from.
  *
@@ -515,9 +515,9 @@ function isPureTokenRead(bracketContent: string): boolean {
   if (/[+*/]/.test(value)) return false
   if (/\S\s*-\s+|\s+-\s*\S/.test(value)) return false
 
-  // A single token read, possibly wrapped in Tailwind's --spacing() helper.
-  const tokenRead =
-    /^(?:var\(--[\w-]+\)|--spacing\((?:[\d.]+|var\(--[\w-]+\))\))$/
+  // A single token read. Tailwind's --spacing() helper no longer compiles:
+  // the spacing scale is locked (styles/globals.css).
+  const tokenRead = /^var\(--[\w-]+\)$/
   if (tokenRead.test(value)) return true
 
   // A bare percentage is relative to the parent box, not a design value.

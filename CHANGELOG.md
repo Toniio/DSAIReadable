@@ -76,6 +76,18 @@ section that fits.
 
 ### Changed
 
+- The spacing and type scales are locked, like colors, radii and shadows:
+  `styles/globals.css` resets Tailwind's `--spacing`, `--text-*`, `--font-*`,
+  `--font-weight-*`, `--leading-*` and `--tracking-*` and declares only the
+  design system's steps, each read from a token. `p-13`, `text-7xl`,
+  `font-serif` and `tracking-tighter` generate no CSS and ESLint rejects them.
+  The spacing scale is Tailwind v3's plus `1.25`, `5.25` and `18`
+  (`space.scale.*`); container widths (`max-w-sm`) keep Tailwind's values,
+  checked equal to `space.container.*`. New tokens:
+  `typography.letter-spacing.widest` and `typography.size-line-height.*`.
+  Nothing moves on screen. `--spacing()` no longer compiles in an arbitrary
+  value: read the step's token, `var(--space-scale-7)`.
+
 - ToggleGroup: the items are spaced out by default (`spacing` 2, shadcn/ui's
   default); pass `spacing={0}` for a segmented control with merged borders.
 - Combobox: `Combobox` is Base UI's `Combobox.Root`, as in shadcn/ui, so it

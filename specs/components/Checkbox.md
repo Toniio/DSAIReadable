@@ -61,8 +61,12 @@ A two-state (or indeterminate) checkbox for selecting an option in a form, built
 | `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `Checkbox`                                                |
 | `opacity.disabled`                   | `opacity-disabled`                                                                             | `Checkbox`                                                |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `Checkbox` · `Checkbox` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.scale.2`                      | `-inset-y-2`                                                                                   | `Checkbox`                                                |
+| `space.scale.3`                      | `-inset-x-3`                                                                                   | `Checkbox`                                                |
+| `space.scale.3-5`                    | `size-3.5`                                                                                     | `Checkbox`                                                |
+| `space.scale.4`                      | `size-4`                                                                                       | `Checkbox`                                                |
 
-Collected from `components/ui/checkbox.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/checkbox.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

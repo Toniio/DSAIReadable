@@ -69,14 +69,19 @@ A general-purpose modal window that shows interactive content — a form, detail
 | `color.text.subtle`              | `text-muted-foreground`                                              | `DialogDescription`                                                                                                 |
 | `motion.duration.fast`           | `duration-fast`                                                      | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogOverlay`                                       |
 | `space.component.lg`             | `max-w-[calc(100%-var(--space-component-lg))]`                       | `DialogContent`                                                                                                     |
+| `space.scale.0`                  | `inset-0`                                                            | `DialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                               |
+| `space.scale.1`                  | `gap-1`                                                              | `DialogHeader`                                                                                                      |
+| `space.scale.2`                  | `gap-2` · `right-2` · `top-2`                                        | `DialogContent` · `DialogFooter`                                                                                    |
+| `space.scale.4`                  | `gap-4` · `p-4`                                                      | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                         |
 | `typography.font-family.mono`    | `font-heading`                                                       | `DialogTitle`                                                                                                       |
 | `typography.font-weight.medium`  | `font-medium`                                                        | `DialogTitle`                                                                                                       |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                                    | `DialogContent` · `DialogDescription`                                                                               |
+| `typography.size-line-height.sm` | `text-sm`                                                            | `DialogTitle`                                                                                                       |
 | `typography.size.sm`             | `text-sm`                                                            | `DialogTitle`                                                                                                       |
 | `typography.size.xs`             | `text-xs/relaxed`                                                    | `DialogContent` · `DialogDescription`                                                                               |
 | `zindex.modal`                   | `z-modal`                                                            | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`) |
 
-Collected from `components/ui/dialog.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/dialog.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 Composes `Button` — its tokens are listed in its own spec.
 

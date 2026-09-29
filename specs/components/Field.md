@@ -69,15 +69,26 @@ A layout system for form fields: it ties a label to its control, carries the inv
 | `color.text.destructive.default`  | `text-destructive`                                                                            | `FieldError` · `fieldVariants`                                                      |
 | `color.text.subtle`               | `text-muted-foreground`                                                                       | `FieldDescription` · `FieldSeparator`                                               |
 | `opacity.disabled`                | `opacity-disabled`                                                                            | `FieldLabel` · `FieldTitle`                                                         |
+| `space.scale.0`                   | `inset-0` · `mt-0`                                                                            | `FieldDescription` · `FieldSeparator`                                               |
+| `space.scale.0-5`                 | `gap-0.5`                                                                                     | `FieldContent`                                                                      |
+| `space.scale.1`                   | `-mt-1` · `gap-1`                                                                             | `FieldDescription` · `FieldError`                                                   |
+| `space.scale.1-5`                 | `-mt-1.5`                                                                                     | `FieldDescription`                                                                  |
+| `space.scale.2`                   | `-mb-2` · `-my-2` · `gap-2` · `p-2` · `px-2`                                                  | `FieldLabel` · `FieldSeparator` · `FieldTitle` · `fieldVariants`                    |
+| `space.scale.2-5`                 | `mb-2.5`                                                                                      | `FieldLegend`                                                                       |
+| `space.scale.3`                   | `gap-3`                                                                                       | `FieldGroup` · `FieldSet`                                                           |
+| `space.scale.4`                   | `gap-4` · `ml-4`                                                                              | `FieldError` · `FieldGroup` · `FieldSet`                                            |
+| `space.scale.5`                   | `gap-5` · `h-5`                                                                               | `FieldGroup` · `FieldSeparator`                                                     |
 | `typography.font-weight.medium`   | `font-medium`                                                                                 | `FieldLegend`                                                                       |
 | `typography.font-weight.normal`   | `font-normal`                                                                                 | `FieldDescription` · `FieldError`                                                   |
 | `typography.line-height.normal`   | `leading-normal`                                                                              | `FieldDescription`                                                                  |
 | `typography.line-height.relaxed`  | `text-xs/relaxed`                                                                             | `FieldDescription` · `FieldTitle`                                                   |
 | `typography.line-height.snug`     | `leading-snug`                                                                                | `FieldContent` · `FieldLabel`                                                       |
+| `typography.size-line-height.sm`  | `text-sm`                                                                                     | `FieldLegend`                                                                       |
+| `typography.size-line-height.xs`  | `text-xs`                                                                                     | `FieldError` · `FieldLegend` · `FieldSeparator`                                     |
 | `typography.size.sm`              | `text-sm`                                                                                     | `FieldLegend`                                                                       |
 | `typography.size.xs`              | `text-xs` · `text-xs/relaxed`                                                                 | `FieldDescription` · `FieldError` · `FieldLegend` · `FieldSeparator` · `FieldTitle` |
 
-Collected from `components/ui/field.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/field.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 Composes `Label`, `Separator` — their tokens are listed in their own specs.
 

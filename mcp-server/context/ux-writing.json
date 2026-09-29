@@ -401,7 +401,7 @@
       "source": "typography.md"
     },
     {
-      "rule": "**`tracking-wider` is for all-caps only** — never use it on regular lowercase text.",
+      "rule": "**`tracking-wider` is for all-caps only** — never use it on regular lowercase text. `tracking-widest` is for keyboard shortcuts only.",
       "source": "typography.md"
     },
     {

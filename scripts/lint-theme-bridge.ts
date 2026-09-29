@@ -23,12 +23,13 @@
  *      declarations, thirty-two dead class usages, and three components left
  *      with no visible focus indicator. A reference that resolves is not a
  *      utility that exists.
- *   ⑤ breakpoints are the one namespace the bridge cannot map: Tailwind
- *      compiles `sm:` into a media query at build time, and a media query
- *      cannot read var(). So the breakpoint.* tokens and the values Tailwind
- *      compiles with (its theme.css defaults, or a literal @theme override)
- *      must name the same breakpoints with the same values — otherwise the
- *      tokens document one layout while the build ships another.
+ *   ⑤ breakpoints and container widths are the namespaces the bridge cannot
+ *      map: Tailwind compiles `sm:` into a media query and `@md/field-group:`
+ *      into a container query at build time, and neither query can read
+ *      var(). So the breakpoint.* and space.container.* tokens and the values
+ *      Tailwind compiles with (its theme.css defaults, or a literal @theme
+ *      override) must name the same steps with the same values — otherwise
+ *      the tokens document one layout while the build ships another.
  *
  *   npx tsx scripts/lint-theme-bridge.ts
  */
@@ -154,10 +155,11 @@ function shadcnAliases(): Map<string, string> {
 
 const aliases = shadcnAliases()
 
-/** Declarations of the `@theme` block, in source order. */
+/** Declarations of the `@theme` block, in source order. A name may carry an
+ * escaped dot, as in `--spacing-0\.5` (the class `p-0.5`). */
 const declarations: Array<{ name: string; value: string }> = []
 for (const line of body.split("\n")) {
-  const decl = line.match(/^\s*(--[\w-]+)\s*:\s*(.+?);/)
+  const decl = line.match(/^\s*(--(?:[\w-]|\\.)+)\s*:\s*(.+?);/)
   if (decl) declarations.push({ name: decl[1], value: decl[2] })
 }
 
@@ -218,8 +220,10 @@ for (const { name, value } of declarations) {
   }
 }
 
-// ④ A name outside every utility namespace generates no class.
-for (const { name } of declarations) {
+// ④ A name outside every utility namespace generates no class. A reset
+// (`--spacing: initial`) removes Tailwind's default instead of declaring one.
+for (const { name, value } of declarations) {
+  if (value === "initial") continue
   if (UTILITY_NAMESPACES.some((ns) => name.startsWith(ns))) continue
   if (NON_UTILITY_ALLOWLIST.has(name)) continue
   integrity.push({
@@ -247,7 +251,8 @@ for (const [alias, expected] of aliases) {
   })
 }
 
-// ⑤ Breakpoints: the tokens and the values Tailwind compiles with agree.
+// ⑤ Breakpoints and container widths: the tokens and the values Tailwind
+// compiles with agree.
 {
   const decls = (css: string) =>
     new Map(
@@ -264,51 +269,72 @@ for (const [alias, expected] of aliases) {
       : value
   }
 
-  const tailwindTheme = readFileSync(
-    createRequire(import.meta.url).resolve("tailwindcss/theme.css"),
-    "utf-8"
-  )
-  const compiled = new Map(
-    [...decls(tailwindTheme)].filter(([name]) =>
-      /^--breakpoint-[\w-]+$/.test(name)
+  const tailwindTheme = decls(
+    readFileSync(
+      createRequire(import.meta.url).resolve("tailwindcss/theme.css"),
+      "utf-8"
     )
   )
-  for (const [name, value] of decls(globals)) {
-    if (name === "--breakpoint-*" && value === "initial") compiled.clear()
-    else if (name.startsWith("--breakpoint-")) {
-      if (/var\(/.test(value))
+  const LITERAL_NAMESPACES = [
+    {
+      theme: "--breakpoint-",
+      token: "--breakpoint-",
+      what: "breakpoint",
+      query: "a media query",
+      uses: (key: string) => `the \`${key}:\` variant`,
+    },
+    {
+      theme: "--container-",
+      token: "--space-container-",
+      what: "container width",
+      query: "a container query (`@md/field-group:`)",
+      uses: (key: string) => `\`max-w-${key}\` and the \`@${key}:\` variant`,
+    },
+  ]
+  for (const ns of LITERAL_NAMESPACES) {
+    const own = (name: string) => new RegExp(`^${ns.theme}[\\w-]+$`).test(name)
+    const compiled = new Map([...tailwindTheme].filter(([name]) => own(name)))
+    for (const [name, value] of decls(globals)) {
+      if (name === `${ns.theme}*` && value === "initial") compiled.clear()
+      else if (own(name)) {
+        if (/var\(/.test(value))
+          integrity.push({
+            name,
+            detail: `reads var() — ${ns.query} cannot, so Tailwind would emit an invalid ${ns.what}. Declare the literal value, equal to the ${ns.token.slice(2, -1).replace(/-/g, ".")}.* token.`,
+          })
+        compiled.set(name, value)
+      }
+    }
+
+    const fromTokens = new Map(
+      [...tokenDecls]
+        .filter(([name]) => new RegExp(`^${ns.token}[\\w-]+$`).test(name))
+        .map(([name, value]) => [
+          ns.theme + name.slice(ns.token.length),
+          resolveToken(value),
+        ])
+    )
+    for (const [name, value] of fromTokens) {
+      const built = compiled.get(name)
+      const key = name.slice(ns.theme.length)
+      if (built === undefined)
         integrity.push({
           name,
-          detail: `reads var() — a media query cannot, so Tailwind would emit an invalid breakpoint. Declare the literal value, equal to the breakpoint token.`,
+          detail: `is a ${ns.what} token, but Tailwind compiles no such ${ns.what} — ${ns.uses(key)} does not exist.`,
         })
-      compiled.set(name, value)
+      else if (built !== value)
+        integrity.push({
+          name,
+          detail: `is ${value} in the tokens but Tailwind compiles ${built}. Align tokens/*.json, or override ${ns.theme}* with the literal token value in globals.css.`,
+        })
     }
+    for (const name of compiled.keys())
+      if (!fromTokens.has(name))
+        integrity.push({
+          name,
+          detail: `is a ${ns.what} Tailwind compiles, with no ${ns.token.slice(2, -1).replace(/-/g, ".")}.* token behind it.`,
+        })
   }
-
-  const fromTokens = new Map(
-    [...tokenDecls]
-      .filter(([name]) => /^--breakpoint-[\w-]+$/.test(name))
-      .map(([name, value]) => [name, resolveToken(value)])
-  )
-  for (const [name, value] of fromTokens) {
-    const built = compiled.get(name)
-    if (built === undefined)
-      integrity.push({
-        name,
-        detail: `is a breakpoint token, but Tailwind compiles no such breakpoint — the \`${name.slice(13)}:\` variant does not exist.`,
-      })
-    else if (built !== value)
-      integrity.push({
-        name,
-        detail: `is ${value} in the tokens but Tailwind compiles ${built}. Align tokens/*.json, or override --breakpoint-* with the literal token value in globals.css.`,
-      })
-  }
-  for (const name of compiled.keys())
-    if (!fromTokens.has(name))
-      integrity.push({
-        name,
-        detail: `is a breakpoint Tailwind compiles, with no breakpoint.* token behind it.`,
-      })
 }
 
 if (integrity.length > 0) {
@@ -340,5 +366,5 @@ if (integrity.length > 0) process.exit(1)
 
 console.log(
   `✅ lint-theme-bridge: ${declaredInTheme.size} @theme declarations, all references resolve; ` +
-    `no private-tier leak, no calc(), every name in a utility namespace, ${aliases.size} shadcn alias(es) consistent with Tier 3, breakpoints equal to the tokens.`
+    `no private-tier leak, no calc(), every name in a utility namespace, ${aliases.size} shadcn alias(es) consistent with Tier 3, breakpoints and container widths equal to the tokens.`
 )

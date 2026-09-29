@@ -51,9 +51,11 @@ A group of toggle buttons — exclusive or multi-select — built on Radix Toggl
 | Token                  | Classes and variables   | Where             |
 | ---------------------- | ----------------------- | ----------------- |
 | `border-width.default` | `border-l` · `border-t` | `ToggleGroupItem` |
+| `space.scale.1-5`      | `pl-1.5` · `pr-1.5`     | `ToggleGroupItem` |
+| `space.scale.2`        | `px-2`                  | `ToggleGroupItem` |
 | `zindex.dropdown`      | `z-dropdown`            | `ToggleGroupItem` |
 
-Collected from `components/ui/toggle-group.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/toggle-group.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 Composes `Toggle` — its tokens are listed in its own spec.
 

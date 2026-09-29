@@ -59,8 +59,11 @@ A group of radio buttons for picking exactly one option out of several.
 | `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40` | `RadioGroupItem`                                                      |
 | `opacity.disabled`                   | `opacity-disabled`                                                                             | `RadioGroupItem`                                                      |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `RadioGroupItem` · `RadioGroupItem` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.scale.2`                      | `-inset-y-2` · `gap-2` · `size-2`                                                              | `RadioGroupItem` · `RadioGroup`                                       |
+| `space.scale.3`                      | `-inset-x-3`                                                                                   | `RadioGroupItem`                                                      |
+| `space.scale.4`                      | `size-4`                                                                                       | `RadioGroupItem`                                                      |
 
-Collected from `components/ui/radio-group.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/radio-group.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 
