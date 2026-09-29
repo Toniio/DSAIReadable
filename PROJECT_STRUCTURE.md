@@ -248,7 +248,7 @@ violations on the WCAG A and AA rules.
 | `tests/axe.ts`                | Runs axe-core on the whole document (popups are portalled) and returns one line per violation                     |
 | `tests/setup.ts`              | Unmounts after each test; stubs the layout APIs jsdom lacks (`ResizeObserver`, `scrollIntoView`, pointer capture) |
 
-Colour contrast is left to `npm run tokens:lint-contrast`: jsdom computes no colours.
+Color contrast is left to `npm run tokens:lint-contrast`: jsdom computes no colors.
 The tests live outside `components/ui/` so that the linters and the registry,
 which read that folder, only see distributed code.
 
@@ -377,4 +377,4 @@ npm run format              # Prettier on every .ts/.tsx/.md
 - **Exception**: `// allow-raw: <reason>` allows an unavoidable raw value on a case-by-case basis (for example CSS attribute selectors that target Recharts SVGs).
 - **Naming grammar**: `foundation.property[.role][.emphasis][.state]`. Role and state are never merged into a single segment.
 - **Tier 1 (primitive) is private** — components and the outside world never use it directly.
-- **Everything in English** — code, comments, docs, specs and demo copy.
+- **Everything in American English** — code, comments, docs, specs and demo copy.

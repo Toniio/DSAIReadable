@@ -44,6 +44,7 @@ A semantic heading (h1–h4) with four visual sizes, set in the heading typeface
 
 | Token                             | Classes and variables | Where                     |
 | --------------------------------- | --------------------- | ------------------------- |
+| `typography.font-family.mono`     | `font-heading`        | `headingVariants`         |
 | `typography.font-weight.semibold` | `font-semibold`       | `headingVariants`         |
 | `typography.letter-spacing.tight` | `tracking-tight`      | `headingVariants`         |
 | `typography.size.2xl`             | `text-2xl`            | `headingVariants.level.1` |

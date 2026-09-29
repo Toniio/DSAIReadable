@@ -161,13 +161,13 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 ## States
 
-| State    | Description                                                                             |
-| -------- | --------------------------------------------------------------------------------------- |
-| default  | Triggers at rest, text in the standard color                                            |
-| hover    | `bg-muted` background on the hovered trigger or link                                    |
-| focus    | `bg-muted` background, `ring-1 ring-ring/50` ring and an outline on the trigger or link |
-| active   | `bg-muted/50` background on the active trigger or link; content panel open              |
-| disabled | `pointer-events-none`, `opacity-disabled` — no interaction                              |
+| State    | Description                                                                                                                                                                                    |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| default  | Triggers at rest, text in the standard color                                                                                                                                                   |
+| hover    | `bg-muted` background on the hovered trigger or link                                                                                                                                           |
+| focus    | `bg-muted` background and `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the trigger or link; no outline (`outline-hidden`) |
+| active   | `bg-muted/50` background on the active trigger or link; content panel open                                                                                                                     |
+| disabled | `pointer-events-none`, `opacity-disabled` — no interaction                                                                                                                                     |
 
 ## Accessibility
 

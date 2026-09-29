@@ -109,7 +109,7 @@ if (mode === "http") {
       res.end(
         JSON.stringify({
           error: "Forbidden origin",
-          message: `Origin "${origin}" is not allowed. Set MCP_ALLOWED_ORIGINS to authorise it.`,
+          message: `Origin "${origin}" is not allowed. Set MCP_ALLOWED_ORIGINS to authorize it.`,
         })
       )
       return

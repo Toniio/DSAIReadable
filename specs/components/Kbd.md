@@ -48,6 +48,7 @@ An inline label that shows a keyboard key or a key combination.
 | `color.background.default`      | `bg-background/10` · `bg-background/20` · `text-background` | `Kbd` |
 | `color.background.subtle`       | `bg-muted`                                                  | `Kbd` |
 | `color.text.subtle`             | `text-muted-foreground`                                     | `Kbd` |
+| `typography.font-family.sans`   | `font-sans`                                                 | `Kbd` |
 | `typography.font-weight.medium` | `font-medium`                                               | `Kbd` |
 | `typography.size.xs`            | `text-xs`                                                   | `Kbd` |
 

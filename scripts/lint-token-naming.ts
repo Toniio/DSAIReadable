@@ -73,13 +73,13 @@ const ENUMS: Record<string, string[]> = {
   emphasis: ["default", "subtle", "bold", "elevated", "inverse"],
   /** Closed state enum. A state is never fused into a role segment. */
   state: ["hover", "active", "focus", "disabled", "selected"],
-  /** Foreground relationship: the colour that sits *on* a surface. */
+  /** Foreground relationship: the color that sits *on* a surface. */
   onSurface: ["default", "on", "foreground"],
   textRole: ["action", "destructive"],
   borderRole: ["default", "subtle", "input", "focus"],
   iconRole: ["default", "subtle", "action"],
   feedbackRole: ["error", "success", "warning", "info"],
-  /** Colours that ignore the mode — shadcn's bg-white / bg-black. */
+  /** Colors that ignore the mode — shadcn's bg-white / bg-black. */
   staticColor: ["white", "black"],
   sidebarSurface: ["background", "foreground", "border", "ring"],
   sidebarRole: ["primary", "accent"],

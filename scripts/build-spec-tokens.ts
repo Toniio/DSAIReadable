@@ -15,7 +15,9 @@
  * uses — and the `var(--…)` its CSS reads is looked up in tokens.manifest.json.
  * Because the bridge is `@theme inline`, a class resolves straight to the
  * semantic token: `bg-primary` → `--color-action-background-default`. A
- * `var(--…)` written in the code itself is looked up the same way.
+ * `var(--…)` written in the code itself is looked up the same way. A font
+ * class reads the variable next/font sets (`font-mono` → `--font-mono`), which
+ * leads to the typography token that describes the family.
  *
  * Only semantic tokens are listed. Classes that read no token — Tailwind's
  * spacing scale (`p-2`), sizes, layout — are left out on purpose.
@@ -29,6 +31,7 @@ import { fileURLToPath } from "node:url"
 import { __unstable__loadDesignSystem } from "@tailwindcss/node"
 import { format, resolveConfig } from "prettier"
 import ts from "typescript"
+import { nextFontsOf } from "./lib/next-fonts.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -52,8 +55,28 @@ const manifest = (
 const byCssVar = new Map(manifest.map((t) => [t.cssVar, t]))
 const byPath = new Map(manifest.map((t) => [t.token, t]))
 
-/** Semantic token behind a CSS variable, following a Tier 3 alias to it. */
+/**
+ * next/font sets `--font-<key>` on <html>, and `typography.font-family.<key>`
+ * describes the family it loads (lint-font-tokens holds the two together). No
+ * token reads `--font-mono`, so the link is made here: `font-mono` draws with
+ * `typography.font-family.mono`.
+ */
+const fontTokenOf = new Map(
+  nextFontsOf(ROOT)
+    .loaded.flatMap((f) => (f.variable ? [f.variable] : []))
+    .map((v) => [v, `typography.font-family.${v.slice("--font-".length)}`])
+    .filter(([, token]) =>
+      manifest.some((t) => t.token === token && t.tier === "semantic")
+    ) as [string, string][]
+)
+
+/**
+ * Semantic token behind a CSS variable, following a Tier 3 alias to it, or
+ * the font-family token behind a next/font variable.
+ */
 function semanticToken(cssVar: string): string | undefined {
+  const font = fontTokenOf.get(cssVar)
+  if (font) return font
   const t = byCssVar.get(cssVar)
   if (!t) return undefined
   if (t.tier === "semantic") return t.token

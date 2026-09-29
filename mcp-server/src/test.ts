@@ -5,7 +5,11 @@ import { registerDatavizTools } from "./tools/dataviz.js"
 import { registerUxWritingTools } from "./tools/ux-writing.js"
 import { registerAdminTools } from "./tools/admin.js"
 import { registerPrompts } from "./prompts/index.js"
-import { validateScreen, SCREEN_RULES } from "./lib/validate-screen.js"
+import {
+  validateScreen,
+  SCREEN_RULES,
+  SCREEN_WIDE_RULES,
+} from "./lib/validate-screen.js"
 import {
   compositionRulesFor,
   type CompositionRule,
@@ -477,10 +481,18 @@ const NEGATIVE_FIXTURES: Array<{ rule: string; label: string; code: string }> =
       label: "UI import from a foreign origin",
       code: `import { Button } from "@dsaireadable/make-kit/components/ui/button"`,
     },
+    {
+      rule: "ds-imports",
+      label: "a screen that imports nothing from @/components/ui",
+      code: `import { useState } from "react"
+export const C = () => <div>{useState(0)[0]}</div>`,
+    },
   ]
 
-const declaredRules = new Set(SCREEN_RULES.map((r) => r.rule))
-declaredRules.add("ui-import-origin")
+const declaredRules = new Set([
+  ...SCREEN_RULES.map((r) => r.rule),
+  ...SCREEN_WIDE_RULES,
+])
 const coveredRules = new Set(NEGATIVE_FIXTURES.map((f) => f.rule))
 
 for (const fixture of NEGATIVE_FIXTURES) {
@@ -1294,7 +1306,7 @@ const TOOL_CASES: Record<string, ToolCase> = {
           t.path === "color.background.default" &&
           t.css_var === "--color-background-default"
       ),
-    errorArgs: { category: "colour" },
+    errorArgs: { category: "colors" },
     errorNames: "color",
   },
   get_typography: {

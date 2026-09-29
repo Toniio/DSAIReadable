@@ -13,6 +13,13 @@ section that fits.
 
 ### Added
 
+- Checks extended: `lint:language` refuses British spellings (the repository
+  writes American English), `lint-spec-wording` reads prop descriptions,
+  `lint-sizes` follows sizes borrowed from another component (ToggleGroup,
+  Pagination, Carousel now declare theirs; AlertDialog and Sidebar list
+  Button's), `specs:tokens` lists `typography.font-family.*` behind `font-mono`
+  / `font-sans` / `font-heading`, and `validate_screen`'s `ds-imports` rule has
+  a failing fixture.
 - Sidebar: `mobileTitle` and `mobileDescription` on `Sidebar`, `toggleLabel` on
   `SidebarTrigger` and `SidebarRail`, so every string it renders can be
   translated; `ChartTooltipProps` and `ChartLegendProps` exported. ESLint
@@ -93,6 +100,11 @@ section that fits.
 
 ### Fixed
 
+- Specs, index and docs brought in line with the code: seven specs described a
+  `ring-1` / `ring-2` focus the components no longer draw; README called the
+  MCP server's npm package published (it is not) and listed no Dataviz or Admin
+  tool; `styles/globals.css` pointed to a lockdown rationale the foundations
+  did not have (now in `spacing.md` and `typography.md`).
 - Accessibility: each Combobox chip's remove button names its item instead of
   a bare `Remove`. `/banking`: the budget bars take their series color — the
   class was built at runtime, so Tailwind never generated it and all four

@@ -232,7 +232,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-1 ring-ring/50` ring and `border-ring` border on the trigger"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the trigger"
       },
       {
         "state": "active",
@@ -243,7 +243,7 @@
         "behavior": "`pointer-events-none`, `opacity-disabled` — no interaction"
       }
     ],
-    "accessibility": "**Pattern**: [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) (Radix Accordion)\n\n**Role**: Each trigger is a `button` inside a heading, with `aria-expanded` and `aria-controls`; each panel is a `region` labelled by its trigger.\n\n**Keyboard**:\n\n| Key                     | Action                                             |\n| ----------------------- | -------------------------------------------------- |\n| `Enter` / `Space`       | Opens or closes the focused trigger's panel        |\n| `ArrowDown` / `ArrowUp` | Next / previous trigger                            |\n| `Home` / `End`          | First / last trigger                               |\n| `Tab`                   | Leaves the triggers for the next focusable content |\n\n**Accessible name**: The `AccordionTrigger` text names the button and labels the panel: it must describe the content, not say \"See more\".\n\n**Pitfalls**:\n\n- Do not put an interactive element inside `AccordionTrigger`: a button cannot contain another one.\n- The heading level that wraps the trigger must fit the page's heading hierarchy.",
+    "accessibility": "**Pattern**: [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) (Radix Accordion)\n\n**Role**: Each trigger is a `button` inside a heading, with `aria-expanded` and `aria-controls`; each panel is a `region` labeled by its trigger.\n\n**Keyboard**:\n\n| Key                     | Action                                             |\n| ----------------------- | -------------------------------------------------- |\n| `Enter` / `Space`       | Opens or closes the focused trigger's panel        |\n| `ArrowDown` / `ArrowUp` | Next / previous trigger                            |\n| `Home` / `End`          | First / last trigger                               |\n| `Tab`                   | Leaves the triggers for the next focusable content |\n\n**Accessible name**: The `AccordionTrigger` text names the button and labels the panel: it must describe the content, not say \"See more\".\n\n**Pitfalls**:\n\n- Do not put an interactive element inside `AccordionTrigger`: a button cannot contain another one.\n- The heading level that wraps the trigger must fit the page's heading hierarchy.",
     "code_example": "import {\n  Accordion,\n  AccordionItem,\n  AccordionTrigger,\n  AccordionContent,\n} from \"@/components/ui/accordion\"\n\nexport default function Example() {\n  return (\n    <Accordion type=\"single\" collapsible>\n      <AccordionItem value=\"item-1\">\n        <AccordionTrigger>Section 1</AccordionTrigger>\n        <AccordionContent>Content of the first section.</AccordionContent>\n      </AccordionItem>\n      <AccordionItem value=\"item-2\">\n        <AccordionTrigger>Section 2</AccordionTrigger>\n        <AccordionContent>Content of the second section.</AccordionContent>\n      </AccordionItem>\n    </Accordion>\n  )\n}",
     "cross_references": [
       "Tabs",
@@ -637,6 +637,15 @@
         ]
       },
       {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "AlertDialogTitle"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -893,7 +902,7 @@
         "behavior": "The Action and Cancel buttons can each be disabled with `disabled`"
       }
     ],
-    "accessibility": "**Pattern**: [Alert Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) (Radix AlertDialog)\n\n**Role**: `role=\"alertdialog\"`; labelled by `AlertDialogTitle`, described by `AlertDialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the dialog |\n| `Escape`            | Closes the dialog (same as Cancel)                          |\n| `Enter` / `Space`   | Activates the focused button                                |\n\n**Accessible name**: `AlertDialogTitle` is required; `AlertDialogDescription` must state what the action will do.\n\n**Pitfalls**:\n\n- On open, focus goes to `AlertDialogCancel`: the destructive action must never be the default choice.\n- On close, focus returns to the trigger.\n- Clicking outside does not close the dialog. That is deliberate: the decision must be explicit.",
+    "accessibility": "**Pattern**: [Alert Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) (Radix AlertDialog)\n\n**Role**: `role=\"alertdialog\"`; labeled by `AlertDialogTitle`, described by `AlertDialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the dialog |\n| `Escape`            | Closes the dialog (same as Cancel)                          |\n| `Enter` / `Space`   | Activates the focused button                                |\n\n**Accessible name**: `AlertDialogTitle` is required; `AlertDialogDescription` must state what the action will do.\n\n**Pitfalls**:\n\n- On open, focus goes to `AlertDialogCancel`: the destructive action must never be the default choice.\n- On close, focus returns to the trigger.\n- Clicking outside does not close the dialog. That is deliberate: the decision must be explicit.",
     "code_example": "import {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n} from \"@/components/ui/alert-dialog\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Example() {\n  return (\n    <AlertDialog>\n      <AlertDialogTrigger asChild>\n        <Button variant=\"destructive\">Delete</Button>\n      </AlertDialogTrigger>\n      <AlertDialogContent>\n        <AlertDialogHeader>\n          <AlertDialogTitle>Delete this item?</AlertDialogTitle>\n          <AlertDialogDescription>\n            This cannot be undone. The data will be permanently deleted.\n          </AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogCancel>Cancel</AlertDialogCancel>\n          <AlertDialogAction variant=\"destructive\">Delete</AlertDialogAction>\n        </AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>\n  )\n}",
     "cross_references": [
       "Dialog",
@@ -1756,7 +1765,7 @@
         "behavior": "`BreadcrumbPage` carries `aria-disabled=\"true\"` and is not clickable"
       }
     ],
-    "accessibility": "**Pattern**: [Breadcrumb](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)\n\n**Role**: A `nav` labelled `UI_STRINGS.breadcrumb.landmark` that holds an `ol`; `BreadcrumbPage` carries `aria-current=\"page\"`.\n\n**Keyboard**:\n\nNo interaction of its own: links behave natively (`Tab`, `Enter`).\n\n**Accessible name**: The `nav` landmark is named \"breadcrumb\" by default; translate it through the prop provided. The ellipsis announces `UI_STRINGS.breadcrumb.ellipsis`.\n\n**Pitfalls**:\n\n- Separators are hidden (`role=\"presentation\"`, `aria-hidden`): never put meaningful text in them.\n- The current page is not a link: do not make it clickable.",
+    "accessibility": "**Pattern**: [Breadcrumb](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)\n\n**Role**: A `nav` labeled `UI_STRINGS.breadcrumb.landmark` that holds an `ol`; `BreadcrumbPage` carries `aria-current=\"page\"`.\n\n**Keyboard**:\n\nNo interaction of its own: links behave natively (`Tab`, `Enter`).\n\n**Accessible name**: The `nav` landmark is named \"breadcrumb\" by default; translate it through the prop provided. The ellipsis announces `UI_STRINGS.breadcrumb.ellipsis`.\n\n**Pitfalls**:\n\n- Separators are hidden (`role=\"presentation\"`, `aria-hidden`): never put meaningful text in them.\n- The current page is not a link: do not make it clickable.",
     "code_example": "import {\n  Breadcrumb,\n  BreadcrumbList,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbSeparator,\n  BreadcrumbPage,\n} from \"@/components/ui/breadcrumb\"\n\nexport default function Example() {\n  return (\n    <Breadcrumb>\n      <BreadcrumbList>\n        <BreadcrumbItem>\n          <BreadcrumbLink href=\"/\">Home</BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbLink href=\"/products\">Products</BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbPage>Product details</BreadcrumbPage>\n        </BreadcrumbItem>\n      </BreadcrumbList>\n    </Breadcrumb>\n  )\n}",
     "cross_references": [
       "NavigationMenu",
@@ -2015,7 +2024,7 @@
       },
       {
         "state": "`focus`",
-        "behavior": "`ring-1 ring-ring/50` ring and `border-ring` border"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
       },
       {
         "state": "`active`",
@@ -2650,6 +2659,15 @@
         ]
       },
       {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "CardTitle"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -3235,6 +3253,15 @@
         ]
       },
       {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-mono"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -3666,7 +3693,7 @@
       },
       {
         "state": "`focus`",
-        "behavior": "`border-ring` and `ring-1 ring-ring/50`"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
       },
       {
         "state": "`active`",
@@ -5363,6 +5390,15 @@
         ]
       },
       {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "DialogTitle"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -5592,7 +5628,7 @@
         "behavior": "N/A — the controls inside handle their own disabled state"
       }
     ],
-    "accessibility": "**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)\n\n**Role**: `role=\"dialog\"`; labelled by `DialogTitle`, described by `DialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the dialog |\n| `Escape`            | Closes the dialog                                           |\n\n**Accessible name**: `DialogTitle` is required (Radix warns when it is missing); hide it visually if you must, never remove it. The close button is named by `closeLabel` (`UI_STRINGS.dialog.close`).\n\n**Pitfalls**:\n\n- On close, focus returns to the trigger: do not unmount the trigger while the dialog is open.\n- The surface itself shows no focus ring (`focus-managed`): focus goes to a control inside it.",
+    "accessibility": "**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)\n\n**Role**: `role=\"dialog\"`; labeled by `DialogTitle`, described by `DialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the dialog |\n| `Escape`            | Closes the dialog                                           |\n\n**Accessible name**: `DialogTitle` is required (Radix warns when it is missing); hide it visually if you must, never remove it. The close button is named by `closeLabel` (`UI_STRINGS.dialog.close`).\n\n**Pitfalls**:\n\n- On close, focus returns to the trigger: do not unmount the trigger while the dialog is open.\n- The surface itself shows no focus ring (`focus-managed`): focus goes to a control inside it.",
     "code_example": "import {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/components/ui/dialog\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Example() {\n  return (\n    <Dialog>\n      <DialogTrigger asChild>\n        <Button>Edit profile</Button>\n      </DialogTrigger>\n      <DialogContent>\n        <DialogHeader>\n          <DialogTitle>Edit profile</DialogTitle>\n          <DialogDescription>\n            Update your personal details below.\n          </DialogDescription>\n        </DialogHeader>\n        {/* Form fields */}\n        <DialogFooter>\n          <Button type=\"submit\">Save changes</Button>\n        </DialogFooter>\n      </DialogContent>\n    </Dialog>\n  )\n}",
     "cross_references": [
       "AlertDialog",
@@ -5831,6 +5867,15 @@
         ]
       },
       {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "DrawerTitle"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -6048,7 +6093,7 @@
         "behavior": "N/A — the controls inside handle their own state"
       }
     ],
-    "accessibility": "**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (vaul, on top of Radix Dialog)\n\n**Role**: `role=\"dialog\"`; labelled by `DrawerTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the drawer |\n| `Escape`            | Closes the drawer                                           |\n\n**Accessible name**: `DrawerTitle` is required, even when visually hidden.\n\n**Pitfalls**:\n\n- Swipe-to-close does not exist for keyboard users, nor for every user: provide a visible close button (`DrawerClose`).\n- On close, focus returns to the trigger.",
+    "accessibility": "**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (vaul, on top of Radix Dialog)\n\n**Role**: `role=\"dialog\"`; labeled by `DrawerTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the drawer |\n| `Escape`            | Closes the drawer                                           |\n\n**Accessible name**: `DrawerTitle` is required, even when visually hidden.\n\n**Pitfalls**:\n\n- Swipe-to-close does not exist for keyboard users, nor for every user: provide a visible close button (`DrawerClose`).\n- On close, focus returns to the trigger.",
     "code_example": "import {\n  Drawer,\n  DrawerClose,\n  DrawerContent,\n  DrawerDescription,\n  DrawerFooter,\n  DrawerHeader,\n  DrawerTitle,\n  DrawerTrigger,\n} from \"@/components/ui/drawer\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Example() {\n  return (\n    <Drawer>\n      <DrawerTrigger asChild>\n        <Button variant=\"outline\">Open filters</Button>\n      </DrawerTrigger>\n      <DrawerContent>\n        <DrawerHeader>\n          <DrawerTitle>Filters</DrawerTitle>\n          <DrawerDescription>\n            Narrow down your search with the filters below.\n          </DrawerDescription>\n        </DrawerHeader>\n        {/* Filter controls */}\n        <DrawerFooter>\n          <Button>Apply</Button>\n          <DrawerClose asChild>\n            <Button variant=\"outline\">Cancel</Button>\n          </DrawerClose>\n        </DrawerFooter>\n      </DrawerContent>\n    </Drawer>\n  )\n}",
     "cross_references": [
       "Sheet",
@@ -6639,6 +6684,15 @@
         ],
         "where": [
           "EmptyDescription"
+        ]
+      },
+      {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "EmptyTitle"
         ]
       },
       {
@@ -7347,6 +7401,15 @@
     ],
     "tokens": [
       {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "headingVariants"
+        ]
+      },
+      {
         "token": "typography.font-weight.semibold",
         "classes": [
           "font-semibold"
@@ -7980,7 +8043,7 @@
       },
       {
         "state": "`focus`",
-        "behavior": "`border-ring` and `ring-1 ring-ring/50`"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
       },
       {
         "state": "`active`",
@@ -7996,7 +8059,7 @@
       },
       {
         "state": "`error`",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive` and `ring-1 ring-destructive/20` (dark: `border-destructive/50`)"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border and a `ring-destructive/20` ring `--space-focus-ring-width` wide (dark: `border-destructive/50`, `ring-destructive/40`)"
       }
     ],
     "accessibility": "**Pattern**: Native `input` field\n\n**Role**: Native `input`; its type (`email`, `tel`…) sets the virtual keyboard and the semantics.\n\n**Keyboard**:\n\nThe field's native behavior.\n\n**Accessible name**: Required: a tied `Label` (`htmlFor` / `id`) or an `aria-label`. A `placeholder` is not a name.\n\n**Pitfalls**:\n\n- Set `autocomplete` for personal data (WCAG 1.3.5).\n- `aria-invalid` styles the error; link the message through `aria-describedby`.",
@@ -8301,7 +8364,7 @@
         "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid` on the input"
       }
     ],
-    "accessibility": "**Pattern**: A group (`role=\"group\"`) around a field\n\n**Role**: `role=\"group\"`; the field keeps its semantics; clicking an add-on moves focus to the field.\n\n**Keyboard**:\n\nNo interaction of its own; the field and the `InputGroupButton`s receive focus as usual.\n\n**Accessible name**: The field must be labelled like an `Input`. An icon-only `InputGroupButton` needs an `aria-label` (\"Clear search\").\n\n**Pitfalls**:\n\n- **MUST** — when an add-on's text (\"https://\", \"$\") carries meaning, repeat it in the label or the description: it is not read as part of the label.\n- The error is styled on the group through the field's `aria-invalid`; the message still has to be linked.",
+    "accessibility": "**Pattern**: A group (`role=\"group\"`) around a field\n\n**Role**: `role=\"group\"`; the field keeps its semantics; clicking an add-on moves focus to the field.\n\n**Keyboard**:\n\nNo interaction of its own; the field and the `InputGroupButton`s receive focus as usual.\n\n**Accessible name**: The field must be labeled like an `Input`. An icon-only `InputGroupButton` needs an `aria-label` (\"Clear search\").\n\n**Pitfalls**:\n\n- **MUST** — when an add-on's text (\"https://\", \"$\") carries meaning, repeat it in the label or the description: it is not read as part of the label.\n- The error is styled on the group through the field's `aria-invalid`; the message still has to be linked.",
     "code_example": "import {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupButton,\n  InputGroupInput,\n  InputGroupText,\n} from \"@/components/ui/input-group\"\nimport { MagnifyingGlassIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <InputGroup>\n      <InputGroupAddon align=\"inline-start\">\n        <InputGroupText>\n          <MagnifyingGlassIcon />\n        </InputGroupText>\n      </InputGroupAddon>\n      <InputGroupInput placeholder=\"Search…\" />\n    </InputGroup>\n  )\n}",
     "cross_references": [
       "Input",
@@ -9082,6 +9145,15 @@
         ]
       },
       {
+        "token": "typography.font-family.sans",
+        "classes": [
+          "font-sans"
+        ],
+        "where": [
+          "Kbd"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -9338,6 +9410,15 @@
         "token": "color.action.background.foreground",
         "classes": [
           "text-primary-foreground"
+        ],
+        "where": [
+          "Logo"
+        ]
+      },
+      {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
         ],
         "where": [
           "Logo"
@@ -10612,7 +10693,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`bg-muted` background, `ring-1 ring-ring/50` ring and an outline on the trigger or link"
+        "behavior": "`bg-muted` background and `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the trigger or link; no outline (`outline-hidden`)"
       },
       {
         "state": "active",
@@ -10853,7 +10934,7 @@
         "behavior": "Handled by the underlying `Button` component"
       }
     ],
-    "accessibility": "**Pattern**: Navigation (`nav`) with a list of links\n\n**Role**: A `nav` labelled `UI_STRINGS.pagination.landmark`; a `ul` of links; the current page carries `aria-current=\"page\"`.\n\n**Keyboard**:\n\nNo interaction of its own: native links (`Tab`, `Enter`).\n\n**Accessible name**: Previous / next are named by `UI_STRINGS.pagination.previousLabel` / `nextLabel`; the ellipsis by `UI_STRINGS.pagination.ellipsis`.\n\n**Pitfalls**:\n\n- Each page link must be explicit for a screen reader (\"Page 3\"), not just \"3\", when the context is not enough.\n- After a page change, move focus to the start of the results.",
+    "accessibility": "**Pattern**: Navigation (`nav`) with a list of links\n\n**Role**: A `nav` labeled `UI_STRINGS.pagination.landmark`; a `ul` of links; the current page carries `aria-current=\"page\"`.\n\n**Keyboard**:\n\nNo interaction of its own: native links (`Tab`, `Enter`).\n\n**Accessible name**: Previous / next are named by `UI_STRINGS.pagination.previousLabel` / `nextLabel`; the ellipsis by `UI_STRINGS.pagination.ellipsis`.\n\n**Pitfalls**:\n\n- Each page link must be explicit for a screen reader (\"Page 3\"), not just \"3\", when the context is not enough.\n- After a page change, move focus to the start of the results.",
     "code_example": "import {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n  PaginationPrevious,\n  PaginationNext,\n  PaginationEllipsis,\n} from \"@/components/ui/pagination\"\n\nexport default function Example() {\n  return (\n    <Pagination>\n      <PaginationContent>\n        <PaginationItem>\n          <PaginationPrevious href=\"/page/1\" />\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href=\"/page/1\">1</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href=\"/page/2\" isActive>\n            2\n          </PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href=\"/page/3\">3</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationEllipsis />\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationNext href=\"/page/3\" />\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}",
     "cross_references": [
       "Button",
@@ -10980,7 +11061,7 @@
         "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
       }
     ],
-    "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labelled like an `Input`. The button is named by `UI_STRINGS.passwordInput.show` / `.hide`, depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Show the password rules before the user types, linked through `aria-describedby`.",
+    "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `UI_STRINGS.passwordInput.show` / `.hide`, depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Show the password rules before the user types, linked through `aria-describedby`.",
     "code_example": "import { Field, FieldLabel } from \"@/components/ui/field\"\nimport { PasswordInput } from \"@/components/ui/password-input\"\n\nexport default function Example() {\n  return (\n    <Field>\n      <FieldLabel htmlFor=\"password\">Password</FieldLabel>\n      <PasswordInput id=\"password\" autoComplete=\"current-password\" />\n    </Field>\n  )\n}",
     "cross_references": [
       "Field",
@@ -11819,7 +11900,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-1 ring-ring` ring on the handle through `focus-visible`"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the handle"
       },
       {
         "state": "active",
@@ -12392,7 +12473,7 @@
         "prop": "`children`",
         "type": "`React.ReactNode`",
         "default": "—",
-        "description": "Content of the trigger (usually `<SelectValue>`)"
+        "description": "Content of the trigger: a `<SelectValue>`, which shows the selected item"
       },
       {
         "component": "SelectTrigger",
@@ -12704,6 +12785,15 @@
         ]
       },
       {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "SheetTitle"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
@@ -12906,7 +12996,7 @@
         "behavior": "N/A — the controls inside handle their own disabled state"
       }
     ],
-    "accessibility": "**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)\n\n**Role**: `role=\"dialog\"`; labelled by `SheetTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                     |\n| ------------------- | ---------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the panel |\n| `Escape`            | Closes the panel                                           |\n\n**Accessible name**: `SheetTitle` is required, even when visually hidden. The close button is named by `closeLabel` (`UI_STRINGS.sheet.close`).\n\n**Pitfalls**:\n\n- On close, focus returns to the trigger.\n- **SHOULD** — for side navigation on large screens (`lg` and up), use a permanent `Sidebar`: a `Sheet` is still a modal dialog; **unless** the navigation must stay hidden by default.",
+    "accessibility": "**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)\n\n**Role**: `role=\"dialog\"`; labeled by `SheetTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                     |\n| ------------------- | ---------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the panel |\n| `Escape`            | Closes the panel                                           |\n\n**Accessible name**: `SheetTitle` is required, even when visually hidden. The close button is named by `closeLabel` (`UI_STRINGS.sheet.close`).\n\n**Pitfalls**:\n\n- On close, focus returns to the trigger.\n- **SHOULD** — for side navigation on large screens (`lg` and up), use a permanent `Sidebar`: a `Sheet` is still a modal dialog; **unless** the navigation must stay hidden by default.",
     "code_example": "import {\n  Sheet,\n  SheetContent,\n  SheetDescription,\n  SheetFooter,\n  SheetHeader,\n  SheetTitle,\n  SheetTrigger,\n} from \"@/components/ui/sheet\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Example() {\n  return (\n    <Sheet>\n      <SheetTrigger asChild>\n        <Button variant=\"outline\">Open panel</Button>\n      </SheetTrigger>\n      <SheetContent side=\"right\">\n        <SheetHeader>\n          <SheetTitle>Account details</SheetTitle>\n          <SheetDescription>\n            Review and update your account information.\n          </SheetDescription>\n        </SheetHeader>\n        {/* Panel content */}\n        <SheetFooter>\n          <Button type=\"submit\">Save changes</Button>\n        </SheetFooter>\n      </SheetContent>\n    </Sheet>\n  )\n}",
     "cross_references": [
       "Drawer",
@@ -13752,7 +13842,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-2 ring-sidebar-ring` ring on interactive elements"
+        "behavior": "`ring-sidebar-ring` ring `--space-focus-ring-width` wide (`FOCUS_RING_WIDTH`, `lib/focus.ts`) on interactive elements"
       },
       {
         "state": "active",

@@ -16,7 +16,7 @@
   `design-system.index.json`, `specs/tokens/token-reference.md`, `tokens.manifest.json`,
   `registry.json`, `llms.txt` —
   these files are generated.
-- **Write everything in English**, natively: code, comments, docs, specs.
+- **Write everything in American English**, natively: code, comments, docs, specs.
 
 ## Before suggesting a commit
 

@@ -48,6 +48,7 @@ The application's brand mark. The component renders the pictogram alone; it is a
 | ------------------------------------ | ------------------------- | ------ |
 | `color.action.background.default`    | `bg-primary`              | `Logo` |
 | `color.action.background.foreground` | `text-primary-foreground` | `Logo` |
+| `typography.font-family.mono`        | `font-heading`            | `Logo` |
 | `typography.font-weight.bold`        | `font-bold`               | `Logo` |
 | `typography.letter-spacing.tight`    | `tracking-tight`          | `Logo` |
 | `typography.size.2xl`                | `text-2xl`                | `Logo` |

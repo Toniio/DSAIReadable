@@ -102,7 +102,7 @@ function typeText(checker: ts.TypeChecker, type: ts.Type, at: ts.Node) {
   return texts.join(" | ")
 }
 
-/** Distinct member types joined; a function type is parenthesised first. */
+/** Distinct member types joined; a function type is parenthesized first. */
 function unionText(texts: string[]): string {
   const distinct = [...new Set(texts)]
   if (distinct.length === 1) return distinct[0]

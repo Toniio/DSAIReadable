@@ -1,5 +1,5 @@
 /**
- * Colour difference as people see it, including with a colour vision
+ * Color difference as people see it, including with a color vision
  * deficiency. A module, not a script: it runs nothing when imported.
  *
  *   · OKLab (Björn Ottosson, 2020) — a perceptual space where Euclidean
@@ -49,7 +49,7 @@ const MACHADO: Record<"protanopia" | "deuteranopia", number[][]> = {
 export type Vision = "normal" | keyof typeof MACHADO
 export const VISIONS: Vision[] = ["normal", "protanopia", "deuteranopia"]
 
-/** How a colour appears to someone with the given vision. */
+/** How a color appears to someone with the given vision. */
 export function simulate(rgb: Rgb, vision: Vision): Rgb {
   if (vision === "normal") return rgb
   const m = MACHADO[vision]

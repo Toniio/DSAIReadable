@@ -5,8 +5,8 @@ import axe from "axe-core"
  * failing assertion names the rule and the offending element.
  *
  * Scope: the WCAG 2.x A and AA rules. Page-level best practices (landmarks, a
- * single `h1`) do not apply to a component rendered on its own. Colour contrast
- * is off: jsdom computes no colours, and `npm run tokens:lint-contrast` already
+ * single `h1`) do not apply to a component rendered on its own. Color contrast
+ * is off: jsdom computes no colors, and `npm run tokens:lint-contrast` already
  * checks every foreground/background token pair.
  *
  * The whole document is scanned, not the render container: dialogs, selects and

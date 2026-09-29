@@ -105,7 +105,7 @@ function MenubarItem({
       data-variant={variant}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
-        // the current one with focus/data-highlighted, which the background colour
+        // the current one with focus/data-highlighted, which the background color
         // below renders. A ring here would double an indicator that already exists.
         "group/menubar-item relative flex cursor-default items-center gap-2 rounded-none px-2 py-2 text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-inset:pl-8 data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-[variant=destructive]:*:[svg]:text-destructive!",
         className
@@ -130,7 +130,7 @@ function MenubarCheckboxItem({
       data-inset={inset}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
-        // the current one with focus/data-highlighted, which the background colour
+        // the current one with focus/data-highlighted, which the background color
         // below renders. A ring here would double an indicator that already exists.
         "relative flex cursor-default items-center gap-2 rounded-none py-2 pr-28 pl-8 text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-8 data-disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
@@ -162,7 +162,7 @@ function MenubarRadioItem({
       data-inset={inset}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
-        // the current one with focus/data-highlighted, which the background colour
+        // the current one with focus/data-highlighted, which the background color
         // below renders. A ring here would double an indicator that already exists.
         "relative flex cursor-default items-center gap-2 rounded-none py-2 pr-2 pl-8 text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-8 data-disabled:pointer-events-none data-disabled:opacity-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className

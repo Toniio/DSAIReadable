@@ -109,9 +109,9 @@ request with an origin that is not allowed receives a `403`.
 | Category       | Tools                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **DS Core**    | `get_design_system_overview`, `get_components`, `get_component_specs`, `get_component_variants`, `get_tokens`, `get_typography`, `get_icons`, `get_design_rules`, `get_page_patterns` |
-| **Dataviz**    | Chart-specific tools (Recharts + design system tokens)                                                                                                                                |
+| **Dataviz**    | `get_dataviz_recommendation` (chart types for an objective), `get_dataviz_specs` (a chart type's tokens, anatomy and library)                                                         |
 | **UX Writing** | `get_ux_writing_rules` (default strings, overriding, language), `get_glossary`, `get_content_library`                                                                                 |
-| **Admin**      | Tools to manage and inspect the design system                                                                                                                                         |
+| **Admin**      | `get_stats` (component, token and spec counts), `validate_screen` (checks generated code against the design system's rules)                                                           |
 
 Every tool is annotated as read-only (`readOnlyHint`, `openWorldHint: false`): a client does not need
 to confirm its calls. `get_component_specs`, `get_design_rules` and `get_ux_writing_rules` take
@@ -149,16 +149,16 @@ Add to `.vscode/mcp.json` or `~/.copilot/mcp-config.json`:
 One name, adapted to the constraint of each channel. Any future publication
 follows it — do not reintroduce a capitalized variant.
 
-| Channel               | Identifier                   | Why this form                                                                    |
-| --------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
-| GitHub repository     | `Toniio/DSAIReadable`        | The project's original name; the only place where casing is free                 |
-| shadcn registry       | `dsaireadable`               | A registry name only allows alphanumerics, hyphens and underscores               |
-| A component's item    | `Toniio/DSAIReadable/<item>` | The full GitHub address: a bare name would point to the official shadcn registry |
-| npm scope             | `@dsaireadable`              | npm forbids capitals in a scope                                                  |
-| Published npm package | `@dsaireadable/mcp-server`   | The only package published so far                                                |
+| Channel                | Identifier                   | Why this form                                                                    |
+| ---------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
+| GitHub repository      | `Toniio/DSAIReadable`        | The project's original name; the only place where casing is free                 |
+| shadcn registry        | `dsaireadable`               | A registry name only allows alphanumerics, hyphens and underscores               |
+| A component's item     | `Toniio/DSAIReadable/<item>` | The full GitHub address: a bare name would point to the official shadcn registry |
+| npm scope              | `@dsaireadable`              | npm forbids capitals in a scope                                                  |
+| MCP server npm package | `@dsaireadable/mcp-server`   | Not published yet: for now the server runs from a clone of this repository       |
 
-The `@dsaireadable` scope is **not reserved** on npm: it will only be once a second
-package is actually published. The former `@DSAIReadable` scope could not be
+The `@dsaireadable` scope is **not reserved** on npm: it will only be once its first
+package is published. The former `@DSAIReadable` scope could not be
 published — it only survives in archived documents, flagged as obsolete.
 
 ---
@@ -284,7 +284,7 @@ npm run typecheck    # tsc --noEmit
 - **Phosphor icons only** — `@phosphor-icons/react`. No Lucide, no Heroicons.
 - **Class-based dark mode** — the `.dark` class on `<html>`. No `prefers-color-scheme`.
 - **Read the spec** before writing or changing a component (`specs/components/<component>.md`).
-- **Everything in English** — code, comments, docs, specs and demo copy.
+- **Everything in American English** — code, comments, docs, specs and demo copy.
 
 ---
 

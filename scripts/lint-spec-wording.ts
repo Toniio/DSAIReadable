@@ -15,7 +15,10 @@
  *      `**unless**`;
  *   ② every bullet of Constraints opens with `**MUST**`, `**MUST NOT**`,
  *      `**SHOULD**` or, for a fact that implies no rule, `**Note**` — so an
- *      agent tells what it must do from what it should know.
+ *      agent tells what it must do from what it should know;
+ *   ③ no prop description in Props / API hedges either: "usually
+ *      `<SelectValue>`" leaves the agent to guess what else goes there. The
+ *      rest of a props row is generated from the types (specs:api).
  *
  *   npx tsx scripts/lint-spec-wording.ts
  */
@@ -37,6 +40,14 @@ const HEDGES =
   /(?<![\p{L}])(avoid|prefer|preferably|preferred|ideally|generally|usually|typically|normally|recommended|consider|try to|if possible|where possible|when possible|whenever possible|as much as possible|as far as possible|if needed|when needed|as needed|if necessary|where necessary|when necessary|limit (?:it|them|to|the)|rather than|better to|best to|too (?:many|much|few|long|short|large|small|wide|narrow|big|dense)|very|appropriate|suitable|reasonable)(?![\p{L}])/iu
 const SHOULD_WITH_EXCEPTION = /\*\*SHOULD\*\*.*\*\*unless\*\*/
 const KEYWORD = /^- \*\*(MUST|MUST NOT|SHOULD|Note)\*\* — /
+const PROPS_SECTION = "Props / API"
+
+/** Description cell of a props table row; undefined for any other line. */
+const propDescription = (line: string): string | undefined => {
+  if (!line.startsWith("|") || /^\|[\s|:-]+$/.test(line)) return undefined
+  const cells = line.split(/(?<!\\)\|/).slice(1, -1)
+  return cells.length >= 4 ? cells.at(-1)!.trim() : undefined
+}
 
 const findings: string[] = []
 let checked = 0
@@ -47,6 +58,17 @@ for (const file of readdirSync(SPECS_DIR).filter((f) => f.endsWith(".md"))) {
     .split("\n")
     .forEach((line, i) => {
       if (line.startsWith("## ")) section = line.slice(3).trim()
+      if (section === PROPS_SECTION) {
+        const description = propDescription(line)
+        if (description === undefined) return
+        checked++
+        const hedge = description.match(HEDGES)
+        if (hedge)
+          findings.push(
+            `${file}:${i + 1} [${PROPS_SECTION}] "${hedge[1]}" — ${description.slice(0, 100)}`
+          )
+        return
+      }
       if (!RULE_SECTIONS.has(section) || line.startsWith("#")) return
       checked++
       if (
@@ -72,5 +94,5 @@ if (findings.length > 0) {
   process.exit(1)
 }
 console.log(
-  `✅ lint-spec-wording: ${checked} line(s) of rule sections, none left to the reader's judgement.`
+  `✅ lint-spec-wording: ${checked} line(s) of rule sections and prop descriptions, none left to the reader's judgment.`
 )

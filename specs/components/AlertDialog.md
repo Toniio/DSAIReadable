@@ -67,6 +67,7 @@ A blocking modal that stops the user to confirm or cancel a critical action.
 | `color.text.default`             | `ring-foreground/10` · `text-foreground` · `text-popover-foreground` | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogDescription`                                   |
 | `color.text.subtle`              | `text-muted-foreground`                                              | `AlertDialogDescription`                                                                                                      |
 | `motion.duration.fast`           | `duration-fast`                                                      | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `AlertDialogOverlay`                                       |
+| `typography.font-family.mono`    | `font-heading`                                                       | `AlertDialogTitle`                                                                                                            |
 | `typography.font-weight.medium`  | `font-medium`                                                        | `AlertDialogTitle`                                                                                                            |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                                    | `AlertDialogDescription`                                                                                                      |
 | `typography.size.sm`             | `text-sm`                                                            | `AlertDialogTitle`                                                                                                            |
@@ -206,7 +207,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Alert Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) (Radix AlertDialog)
 
-**Role**: `role="alertdialog"`; labelled by `AlertDialogTitle`, described by `AlertDialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
+**Role**: `role="alertdialog"`; labeled by `AlertDialogTitle`, described by `AlertDialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
 
 **Keyboard**:
 

@@ -156,12 +156,12 @@ Renders `SelectPrimitive.Separator`.
 
 Renders `SelectPrimitive.Trigger`.
 
-| Prop        | Type                                                   | Default     | Description                                      |
-| ----------- | ------------------------------------------------------ | ----------- | ------------------------------------------------ |
-| `size`      | `"sm" \| "default"`                                    | `"default"` | Size of the trigger (`h-8` default, `h-7` sm)    |
-| `className` | `string`                                               | —           | Additional CSS classes                           |
-| `children`  | `React.ReactNode`                                      | —           | Content of the trigger (usually `<SelectValue>`) |
-| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Trigger>` | —           | `SelectPrimitive.Trigger` props                  |
+| Prop        | Type                                                   | Default     | Description                                                              |
+| ----------- | ------------------------------------------------------ | ----------- | ------------------------------------------------------------------------ |
+| `size`      | `"sm" \| "default"`                                    | `"default"` | Size of the trigger (`h-8` default, `h-7` sm)                            |
+| `className` | `string`                                               | —           | Additional CSS classes                                                   |
+| `children`  | `React.ReactNode`                                      | —           | Content of the trigger: a `<SelectValue>`, which shows the selected item |
+| `...props`  | `React.ComponentProps<typeof SelectPrimitive.Trigger>` | —           | `SelectPrimitive.Trigger` props                                          |
 
 ### `SelectValue`
 

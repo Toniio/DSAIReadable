@@ -68,6 +68,7 @@ A general-purpose modal window that shows interactive content — a form, detail
 | `color.text.subtle`              | `text-muted-foreground`                                              | `DialogDescription`                                                                                                 |
 | `motion.duration.fast`           | `duration-fast`                                                      | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogOverlay`                                       |
 | `space.component.lg`             | `max-w-[calc(100%-var(--space-component-lg))]`                       | `DialogContent`                                                                                                     |
+| `typography.font-family.mono`    | `font-heading`                                                       | `DialogTitle`                                                                                                       |
 | `typography.font-weight.medium`  | `font-medium`                                                        | `DialogTitle`                                                                                                       |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                                    | `DialogContent` · `DialogDescription`                                                                               |
 | `typography.size.sm`             | `text-sm`                                                            | `DialogTitle`                                                                                                       |
@@ -190,7 +191,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)
 
-**Role**: `role="dialog"`; labelled by `DialogTitle`, described by `DialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
+**Role**: `role="dialog"`; labeled by `DialogTitle`, described by `DialogDescription`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
 
 **Keyboard**:
 

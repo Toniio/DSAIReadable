@@ -698,7 +698,7 @@
     },
     {
       "id": "rule-15",
-      "rule": "Run npm run tokens-validate before every commit. Zero errors are required to merge. If a needed Semantic token does not exist, open a GitHub issue labelled design-system instead of creating an ad-hoc token."
+      "rule": "Run npm run tokens-validate before every commit. Zero errors are required to merge. If a needed Semantic token does not exist, open a GitHub issue labeled design-system instead of creating an ad-hoc token."
     },
     {
       "id": "rule-16",

@@ -103,15 +103,15 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 ## States
 
-| State      | Visual behavior                                                                   |
-| ---------- | --------------------------------------------------------------------------------- |
-| `default`  | `action-background-default` background, `action-background-foreground` text       |
-| `hover`    | Background dims slightly (90 % opacity), depending on the variant                 |
-| `focus`    | `ring-1 ring-ring/50` ring and `border-ring` border                               |
-| `active`   | Shifts down by `translate-y-px` as tactile feedback (except with `aria-haspopup`) |
-| `disabled` | `pointer-events-none`, `opacity-disabled` — no interaction                        |
-| `loading`  | Render a `<Spinner>` as a child; the consumer sets `aria-busy="true"`             |
-| `error`    | `aria-invalid="true"`: `destructive` border and ring                              |
+| State      | Visual behavior                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `default`  | `action-background-default` background, `action-background-foreground` text                                   |
+| `hover`    | Background dims slightly (90 % opacity), depending on the variant                                             |
+| `focus`    | `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide |
+| `active`   | Shifts down by `translate-y-px` as tactile feedback (except with `aria-haspopup`)                             |
+| `disabled` | `pointer-events-none`, `opacity-disabled` — no interaction                                                    |
+| `loading`  | Render a `<Spinner>` as a child; the consumer sets `aria-busy="true"`                                         |
+| `error`    | `aria-invalid="true"`: `destructive` border and ring                                                          |
 
 ## Accessibility
 

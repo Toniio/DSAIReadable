@@ -32,7 +32,7 @@ for (const file of files) {
   if (exempt) continue
   findings.push(
     `components/ui/${file} renders no data-slot, so nothing can target or ` +
-      `recognise it. Add data-slot="<kebab-name>" to the root element, or ` +
+      `recognize it. Add data-slot="<kebab-name>" to the root element, or ` +
       `declare why it renders no element with "// no-data-slot: <reason>".`
   )
 }

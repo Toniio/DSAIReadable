@@ -15,7 +15,7 @@ export const TAILWIND_RULE = {
   description: [
     "ALWAYS use the Tailwind utility classes the design system maps to its tokens.",
     "styles/globals.css imports tokens.css and bridges each token into Tailwind with an @theme inline block: bg-primary reads --color-action-background-default, a semantic token.",
-    "Tailwind's default colours, radii and shadows are removed: bg-red-500 generates no CSS, and ESLint refuses it.",
+    "Tailwind's default colors, radii and shadows are removed: bg-red-500 generates no CSS, and ESLint refuses it.",
     "Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.",
     "For spacing, use standard Tailwind spacing: p-4, gap-6, m-2, space-y-4, etc.",
     "For radius, use: rounded-xs … rounded-4xl (mapped to --radius-*).",

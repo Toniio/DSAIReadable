@@ -15,8 +15,8 @@
 
 /**
  * Ring thickness alone. Use directly only when the element supplies its own
- * ring colour — Sidebar does, through `ring-sidebar-ring`. Everywhere else
- * prefer FOCUS_RING, which carries the colour too.
+ * ring color — Sidebar does, through `ring-sidebar-ring`. Everywhere else
+ * prefer FOCUS_RING, which carries the color too.
  */
 export const FOCUS_RING_WIDTH =
   "focus-visible:ring-(length:--space-focus-ring-width)"
@@ -25,8 +25,8 @@ export const FOCUS_RING_WIDTH =
 export const FOCUS_RING = `focus-visible:border-ring ${FOCUS_RING_WIDTH} focus-visible:ring-ring/50`
 
 /**
- * Colour override for elements in an invalid or destructive state. Compose it
- * after FOCUS_RING: the width stays shared, only the colour changes.
+ * Color override for elements in an invalid or destructive state. Compose it
+ * after FOCUS_RING: the width stays shared, only the color changes.
  */
 export const FOCUS_RING_DESTRUCTIVE =
   "focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40"
