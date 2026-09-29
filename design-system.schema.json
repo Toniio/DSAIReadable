@@ -34,7 +34,7 @@
           },
           "sizes": {
             "type": "array",
-            "description": "Sizes the component's size prop accepts, in ascending order. Absent means the component takes no size prop. Enforced against the source by scripts/lint-sizes.ts.",
+            "description": "Every size a size prop of the component accepts, across its exports and including sizes borrowed from another component (ToggleGroup takes Toggle's, PaginationLink takes Button's), in the order of the canonical scale. The spec's props tables give each export's own scale. Absent means the component takes no size prop. Enforced against the source by scripts/lint-sizes.ts.",
             "items": {
               "type": "string",
               "enum": [

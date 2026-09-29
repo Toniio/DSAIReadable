@@ -15,8 +15,14 @@
       "name": "AlertDialog",
       "code_path": "components/ui/alert-dialog.tsx",
       "sizes": [
+        "xs",
+        "sm",
         "default",
-        "sm"
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
       ],
       "status": "stable"
     },
@@ -82,6 +88,16 @@
     {
       "name": "Carousel",
       "code_path": "components/ui/carousel.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
+      ],
       "status": "stable"
     },
     {
@@ -232,6 +248,16 @@
     {
       "name": "Pagination",
       "code_path": "components/ui/pagination.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
+      ],
       "status": "stable"
     },
     {
@@ -287,9 +313,14 @@
       "name": "Sidebar",
       "code_path": "components/ui/sidebar.tsx",
       "sizes": [
+        "xs",
         "sm",
         "default",
-        "lg"
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
       ],
       "status": "stable"
     },
@@ -350,6 +381,11 @@
     {
       "name": "ToggleGroup",
       "code_path": "components/ui/toggle-group.tsx",
+      "sizes": [
+        "sm",
+        "default",
+        "lg"
+      ],
       "status": "stable"
     },
     {
@@ -417,7 +453,7 @@
     },
     {
       "id": "rule-15",
-      "rule": "Run npm run tokens-validate before every commit. Zero errors are required to merge. If a needed Semantic token does not exist, open a GitHub issue labelled design-system instead of creating an ad-hoc token."
+      "rule": "Run npm run tokens-validate before every commit. Zero errors are required to merge. If a needed Semantic token does not exist, open a GitHub issue labeled design-system instead of creating an ad-hoc token."
     },
     {
       "id": "rule-16",
@@ -491,7 +527,7 @@
     "deprecated": "A component that will be removed in a future release. Migrate to the suggested replacement.",
     "variant-axis": "The meaning carried by a `variant` prop. Three axes exist, and a component's variant prop uses exactly one of them: appearance (how prominent the element is drawn), intent (what the action means), and media (what kind of content a slot holds). Read the component's entry before assuming which axis applies.",
     "appearance": "The appearance axis: default, secondary, outline, ghost, muted, link, line. Purely visual prominence. Swapping one for another never changes what the element does. This is the axis of Button, Badge, Item and TabsList.",
-    "intent": "The intent axis: destructive. It declares that the action is irreversible or damaging, and the red styling follows from that. It is not a way to obtain a red button; an element that merely looks dangerous but is not must use the appearance axis and its own colour. Historically it shares the `variant` prop with the appearance axis on Button and Badge.",
+    "intent": "The intent axis: destructive. It declares that the action is irreversible or damaging, and the red styling follows from that. It is not a way to obtain a red button; an element that merely looks dangerous but is not must use the appearance axis and its own color. Historically it shares the `variant` prop with the appearance axis on Button and Badge.",
     "media": "The media axis: default, icon, image. It declares the kind of content a media slot holds so the slot can size and clip it. It belongs to the *Media sub-components — ItemMedia, EmptyMedia — never to their parent. `<Item variant=\"icon\">` is not valid.",
     "sub-component": "A component exported from the same file as its parent and styled by its own cva, such as ItemMedia, EmptyMedia, TabsList, SidebarMenuButton, InputGroupAddon and InputGroupButton. It has its own variants, listed under its own name in component-variants.json, and those variants do not apply to the parent."
   }

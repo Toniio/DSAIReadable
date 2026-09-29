@@ -346,15 +346,15 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 ## States
 
-| State     | Description                                                                      |
-| --------- | -------------------------------------------------------------------------------- |
-| default   | Sidebar open (`data-state="expanded"`), full width                               |
-| hover     | Menu items change background (`bg-sidebar-accent`)                               |
-| focus     | `ring-2 ring-sidebar-ring` ring on interactive elements                          |
-| active    | Menu item marked active (`data-active`): accented background, medium-weight text |
-| disabled  | Disabled items: `pointer-events-none`, `opacity-disabled`                        |
-| collapsed | Sidebar reduced to icons, or moved off-screen, depending on `collapsible`        |
-| mobile    | Sidebar rendered as an overlay `Sheet` on mobile viewports                       |
+| State     | Description                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------- |
+| default   | Sidebar open (`data-state="expanded"`), full width                                                                    |
+| hover     | Menu items change background (`bg-sidebar-accent`)                                                                    |
+| focus     | `ring-sidebar-ring` ring `--space-focus-ring-width` wide (`FOCUS_RING_WIDTH`, `lib/focus.ts`) on interactive elements |
+| active    | Menu item marked active (`data-active`): accented background, medium-weight text                                      |
+| disabled  | Disabled items: `pointer-events-none`, `opacity-disabled`                                                             |
+| collapsed | Sidebar reduced to icons, or moved off-screen, depending on `collapsible`                                             |
+| mobile    | Sidebar rendered as an overlay `Sheet` on mobile viewports                                                            |
 
 ## Accessibility
 

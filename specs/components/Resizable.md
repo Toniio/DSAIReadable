@@ -102,13 +102,13 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 ## States
 
-| State    | Description                                                    |
-| -------- | -------------------------------------------------------------- |
-| default  | Panels at their default size; the handle is visible            |
-| hover    | The handle's area is visually widened (a 4px `after` hit area) |
-| focus    | `ring-1 ring-ring` ring on the handle through `focus-visible`  |
-| active   | Resizing in progress — the resize cursor is active             |
-| disabled | — (not handled natively; disable it through the group's props) |
+| State    | Description                                                                                                                  |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| default  | Panels at their default size; the handle is visible                                                                          |
+| hover    | The handle's area is visually widened (a 4px `after` hit area)                                                               |
+| focus    | `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the handle |
+| active   | Resizing in progress — the resize cursor is active                                                                           |
+| disabled | — (not handled natively; disable it through the group's props)                                                               |
 
 ## Accessibility
 

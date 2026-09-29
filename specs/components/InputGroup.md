@@ -160,7 +160,7 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 No interaction of its own; the field and the `InputGroupButton`s receive focus as usual.
 
-**Accessible name**: The field must be labelled like an `Input`. An icon-only `InputGroupButton` needs an `aria-label` ("Clear search").
+**Accessible name**: The field must be labeled like an `Input`. An icon-only `InputGroupButton` needs an `aria-label` ("Clear search").
 
 **Pitfalls**:
 

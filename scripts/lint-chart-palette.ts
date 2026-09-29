@@ -15,7 +15,7 @@
  *      vision and simulated protanopia and deuteranopia. All pairs, not only
  *      neighbours: a legend or two distant lines put any two side by side.
  *
- * Why not 3:1 *between* series: five colours pairwise 3:1 apart need an 81:1
+ * Why not 3:1 *between* series: five colors pairwise 3:1 apart need an 81:1
  * spread, and a series dark enough for 3:1 on a light surface leaves at most
  * 6.3:1. Categorical palettes separate series by hue, so that is what ② measures.
  *
@@ -37,7 +37,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
  * Floor for ② in OKLab units. The adopted palette's worst pair is 0.19 in
  * every vision; IBM Carbon's categorical palette falls to 0.06 under
  * deuteranopia. 0.15 leaves the current palette a margin and rejects any
- * pair that collapses for a colour-blind reader.
+ * pair that collapses for a color-blind reader.
  */
 const MIN_DELTA_E = 0.15
 const MIN_CONTRAST = 3
@@ -65,7 +65,7 @@ const at = (tree: Record<string, unknown>, path: string) =>
       tree
     ) as Node | undefined
 
-/** Hex value of a semantic colour in a mode (semantic → primitive). */
+/** Hex value of a semantic color in a mode (semantic → primitive). */
 function hexOf(path: string, mode: (typeof MODES)[number]): string {
   const node = at(semantic, path)
   if (!node?.$value) throw new Error(`Unknown semantic token ${path}`)
@@ -73,7 +73,7 @@ function hexOf(path: string, mode: (typeof MODES)[number]): string {
     (mode === "dark" && node.$extensions?.modes?.dark?.$value) || node.$value
   const target = at(primitive, ref.replace(/^\{|\}$/g, ""))?.$value
   if (!target || !/^#[0-9a-f]{6}$/i.test(target))
-    throw new Error(`${path} (${mode}) does not resolve to a hex colour`)
+    throw new Error(`${path} (${mode}) does not resolve to a hex color`)
   return target
 }
 

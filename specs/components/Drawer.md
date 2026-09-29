@@ -64,6 +64,7 @@ A panel that slides in from an edge of the screen and follows the user's swipe �
 | `color.static.black`             | `bg-black/10`                                     | `DrawerOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                                    |
 | `color.text.default`             | `text-foreground` · `text-popover-foreground`     | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerTitle`                                         |
 | `color.text.subtle`              | `text-muted-foreground`                           | `DrawerDescription`                                                                                                      |
+| `typography.font-family.mono`    | `font-heading`                                    | `DrawerTitle`                                                                                                            |
 | `typography.font-weight.medium`  | `font-medium`                                     | `DrawerTitle`                                                                                                            |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                 | `DrawerContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `DrawerDescription`                                   |
 | `typography.size.sm`             | `text-sm`                                         | `DrawerTitle`                                                                                                            |
@@ -183,7 +184,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (vaul, on top of Radix Dialog)
 
-**Role**: `role="dialog"`; labelled by `DrawerTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
+**Role**: `role="dialog"`; labeled by `DrawerTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
 
 **Keyboard**:
 

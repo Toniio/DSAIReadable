@@ -71,6 +71,7 @@ A panel that slides in from the side (or from the top or bottom) over the interf
 | `elevation.lg`                   | `shadow-lg`                                       | `SheetContent`                                                                                                         |
 | `motion.duration.fast`           | `duration-fast`                                   | `SheetOverlay`                                                                                                         |
 | `motion.duration.normal`         | `duration-normal`                                 | `SheetContent`                                                                                                         |
+| `typography.font-family.mono`    | `font-heading`                                    | `SheetTitle`                                                                                                           |
 | `typography.font-weight.medium`  | `font-medium`                                     | `SheetTitle`                                                                                                           |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                 | `SheetContent` via `SIDE_PANEL_CONTENT_BASE` (`lib/overlay.ts`) · `SheetDescription` · `SheetOverlay`                  |
 | `typography.size.sm`             | `text-sm`                                         | `SheetTitle`                                                                                                           |
@@ -176,7 +177,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Dialog)
 
-**Role**: `role="dialog"`; labelled by `SheetTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
+**Role**: `role="dialog"`; labeled by `SheetTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).
 
 **Keyboard**:
 

@@ -102,7 +102,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 | `Tab`             | From the field to the visibility button |
 | `Enter` / `Space` | Shows / hides the password              |
 
-**Accessible name**: The field is labelled like an `Input`. The button is named by `UI_STRINGS.passwordInput.show` / `.hide`, depending on the state.
+**Accessible name**: The field is labeled like an `Input`. The button is named by `UI_STRINGS.passwordInput.show` / `.hide`, depending on the state.
 
 **Pitfalls**:
 

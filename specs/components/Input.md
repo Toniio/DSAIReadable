@@ -83,15 +83,15 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 ## States
 
-| State      | Visual behavior                                                                                              |
-| ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `default`  | Transparent background, `border-input` border, `foreground` text                                             |
-| `hover`    | No visual change defined (focus handles it)                                                                  |
-| `focus`    | `border-ring` and `ring-1 ring-ring/50`                                                                      |
-| `active`   | Same as `focus`                                                                                              |
-| `disabled` | `pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-disabled` (dark: `bg-input/80`)         |
-| `loading`  | Not defined natively — handle it through a parent state                                                      |
-| `error`    | `aria-invalid="true"`: `border-destructive` and `ring-1 ring-destructive/20` (dark: `border-destructive/50`) |
+| State      | Visual behavior                                                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `default`  | Transparent background, `border-input` border, `foreground` text                                                                                                           |
+| `hover`    | No visual change defined (focus handles it)                                                                                                                                |
+| `focus`    | `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide                                                              |
+| `active`   | Same as `focus`                                                                                                                                                            |
+| `disabled` | `pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-disabled` (dark: `bg-input/80`)                                                                       |
+| `loading`  | Not defined natively — handle it through a parent state                                                                                                                    |
+| `error`    | `aria-invalid="true"`: `border-destructive` border and a `ring-destructive/20` ring `--space-focus-ring-width` wide (dark: `border-destructive/50`, `ring-destructive/40`) |
 
 ## Accessibility
 

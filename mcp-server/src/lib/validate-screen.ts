@@ -37,6 +37,13 @@ interface LineRule {
   message: (match: string) => string
 }
 
+/**
+ * Rules checked on the screen as a whole rather than line by line, below
+ * SCREEN_RULES. Listed here so the test suite asks a failing fixture of each,
+ * as it does of every line rule.
+ */
+export const SCREEN_WIDE_RULES = ["ui-import-origin", "ds-imports"]
+
 /** Tailwind's default palette — none of it is part of this design system. */
 const TAILWIND_PALETTE =
   "slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose"

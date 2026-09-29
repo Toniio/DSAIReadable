@@ -56,6 +56,7 @@ A composable empty state, shown when a view, a list or a section has no data.
 | `color.background.subtle`         | `bg-muted`                    | `emptyMediaVariants.variant.icon`   |
 | `color.text.default`              | `text-foreground`             | `emptyMediaVariants.variant.icon`   |
 | `color.text.subtle`               | `text-muted-foreground`       | `EmptyDescription`                  |
+| `typography.font-family.mono`     | `font-heading`                | `EmptyTitle`                        |
 | `typography.font-weight.medium`   | `font-medium`                 | `EmptyTitle`                        |
 | `typography.line-height.relaxed`  | `text-xs/relaxed`             | `EmptyDescription`                  |
 | `typography.size.sm`              | `text-sm`                     | `EmptyTitle`                        |

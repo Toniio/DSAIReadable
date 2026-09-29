@@ -174,6 +174,22 @@ These combinations define the design system's canonical text styles.
 
 ---
 
+## Why the type scale is wired but not locked
+
+Sizes, weights, line heights and letter spacings are bridged: `text-xs`,
+`font-medium`, `leading-snug` and `tracking-wide` read their token through the
+`@theme` bridge in `styles/globals.css`, with the same values as Tailwind's
+defaults. Unlike colors, radii and shadows, their Tailwind namespaces are not
+reset: each `text-*` keeps the line height Tailwind pairs with it
+(`--text-xs--line-height`), which a reset would drop, and the scale is not closed
+yet.
+
+So `text-7xl`, `font-serif` and `tracking-widest` still compile. Until the scale
+is closed and the namespaces are locked, the Usage Rules below and review are
+what keep them out.
+
+---
+
 ## Usage Rules
 
 1. **JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.

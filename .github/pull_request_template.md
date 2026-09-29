@@ -35,4 +35,4 @@ PR title in Conventional Commits format — it becomes the commit message on
 - [ ] No raw value (hex, px, rem) added outside `tokens/primitive.json`
 - [ ] The component's spec was read before the change, and updated if the API changed
 - [ ] Phosphor icons only
-- [ ] Everything written in English
+- [ ] Everything written in American English

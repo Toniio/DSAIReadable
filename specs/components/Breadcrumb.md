@@ -146,7 +146,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Breadcrumb](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)
 
-**Role**: A `nav` labelled `UI_STRINGS.breadcrumb.landmark` that holds an `ol`; `BreadcrumbPage` carries `aria-current="page"`.
+**Role**: A `nav` labeled `UI_STRINGS.breadcrumb.landmark` that holds an `ol`; `BreadcrumbPage` carries `aria-current="page"`.
 
 **Keyboard**:
 

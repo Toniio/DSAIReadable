@@ -6,10 +6,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Lockdown: Tailwind's default colours, radii and shadows are removed, so
+  /* Lockdown: Tailwind's default colors, radii and shadows are removed, so
      bg-red-500, rounded-[default] or shadow-2xs generate no CSS at all. Only
      the names declared below exist. Spacing and typography keep Tailwind's
-     scale: see specs/foundations for why they are wired but not locked. */
+     scale: specs/foundations/spacing.md and typography.md say why they are
+     wired but not locked. */
   --color-*: initial;
   --radius-*: initial;
   --shadow-*: initial;

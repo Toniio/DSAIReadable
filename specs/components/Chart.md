@@ -57,6 +57,7 @@ A container and a set of helpers for data visualization, built on `recharts`: th
 | `color.text.subtle`             | `fill-muted-foreground` · `text-muted-foreground`         | `ChartContainer` · `ChartLegendContent` · `ChartTooltipContent` |
 | `elevation.xl`                  | `shadow-xl`                                               | `ChartTooltipContent`                                           |
 | `radius.xs`                     | `rounded-xs`                                              | `ChartLegendContent` · `ChartTooltipContent`                    |
+| `typography.font-family.mono`   | `font-mono`                                               | `ChartTooltipContent`                                           |
 | `typography.font-weight.medium` | `font-medium`                                             | `ChartTooltipContent`                                           |
 | `typography.size.xs`            | `text-xs`                                                 | `ChartContainer` · `ChartTooltipContent`                        |
 

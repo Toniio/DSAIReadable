@@ -1,16 +1,16 @@
 /**
- * Palette monotonicity lint — a higher step is always a darker colour.
+ * Palette monotonicity lint — a higher step is always a darker color.
  *
  * Agents read a palette the way its names suggest: `violet.650` sits between
  * 600 and 700, so it must be darker than 600. It was not — luminance 0.112
  * against 0.080 — and nothing said so. A step that breaks the order teaches
- * an agent the wrong mental model of the scale, and every colour it picks
+ * an agent the wrong mental model of the scale, and every color it picks
  * "one step darker" from there is wrong.
  *
- * Rule: in every colour palette of tokens/primitive.json whose steps are
+ * Rule: in every color palette of tokens/primitive.json whose steps are
  * numbered, WCAG relative luminance strictly decreases as the number grows.
- * Steps that are not opaque hex colours (the `white-alpha` overlays) carry no
- * lightness order and are skipped, as are single colours such as `black`.
+ * Steps that are not opaque hex colors (the `white-alpha` overlays) carry no
+ * lightness order and are skipped, as are single colors such as `black`.
  *
  *   npx tsx scripts/lint-palette-monotonic.ts
  */
@@ -34,7 +34,7 @@ const findings: string[] = []
 const checked: string[] = []
 
 for (const [palette, steps] of Object.entries(colors)) {
-  if ("$value" in steps) continue // a single colour, not a scale
+  if ("$value" in steps) continue // a single color, not a scale
   const scale = Object.entries(steps as Record<string, Leaf>)
     .filter(
       ([step, leaf]) =>

@@ -77,7 +77,7 @@
   },
   {
     "term": "intent",
-    "definition": "The intent axis: destructive. It declares that the action is irreversible or damaging, and the red styling follows from that. It is not a way to obtain a red button; an element that merely looks dangerous but is not must use the appearance axis and its own colour. Historically it shares the `variant` prop with the appearance axis on Button and Badge."
+    "definition": "The intent axis: destructive. It declares that the action is irreversible or damaging, and the red styling follows from that. It is not a way to obtain a red button; an element that merely looks dangerous but is not must use the appearance axis and its own color. Historically it shares the `variant` prop with the appearance axis on Button and Badge."
   },
   {
     "term": "media",

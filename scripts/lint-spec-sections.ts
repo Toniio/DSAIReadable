@@ -2,7 +2,7 @@
  * Component spec section linter — every spec in `specs/components/` must
  * expose the thirteen canonical sections, in order, and nothing else.
  *
- * These specs are the behavioural source of truth served to agents by the
+ * These specs are the behavioral source of truth served to agents by the
  * MCP server. An agent asking "what are this component's states?" gets
  * whatever the spec happens to contain: a missing section is not an empty
  * answer, it is a silently absent constraint the agent will generate past.

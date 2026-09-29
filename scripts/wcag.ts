@@ -1,9 +1,9 @@
 /**
- * WCAG colour maths shared by the token lints. A module, not a script: it
+ * WCAG color math shared by the token lints. A module, not a script: it
  * runs nothing when imported.
  */
 
-/** WCAG 2.x relative luminance of a `#rrggbb` colour. */
+/** WCAG 2.x relative luminance of a `#rrggbb` color. */
 export function luminance(hex: string): number {
   const h = hex.replace("#", "")
   const channels = [0, 2, 4]

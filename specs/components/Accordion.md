@@ -115,19 +115,19 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 ## States
 
-| State    | Description                                                        |
-| -------- | ------------------------------------------------------------------ |
-| default  | Panel closed, caret pointing down                                  |
-| hover    | Trigger text underlined                                            |
-| focus    | `ring-1 ring-ring/50` ring and `border-ring` border on the trigger |
-| active   | Panel open, caret pointing up, content sliding down                |
-| disabled | `pointer-events-none`, `opacity-disabled` — no interaction         |
+| State    | Description                                                                                                                   |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| default  | Panel closed, caret pointing down                                                                                             |
+| hover    | Trigger text underlined                                                                                                       |
+| focus    | `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the trigger |
+| active   | Panel open, caret pointing up, content sliding down                                                                           |
+| disabled | `pointer-events-none`, `opacity-disabled` — no interaction                                                                    |
 
 ## Accessibility
 
 **Pattern**: [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) (Radix Accordion)
 
-**Role**: Each trigger is a `button` inside a heading, with `aria-expanded` and `aria-controls`; each panel is a `region` labelled by its trigger.
+**Role**: Each trigger is a `button` inside a heading, with `aria-expanded` and `aria-controls`; each panel is a `region` labeled by its trigger.
 
 **Keyboard**:
 

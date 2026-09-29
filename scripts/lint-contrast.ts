@@ -247,7 +247,7 @@ const PAIRS: Pair[] = [
   // Text on a tint of its own role — the inventory of every `text-<role>` set
   // on a `bg-<role>/<n>` across components/ui. Tints of another role (a
   // neutral label on `bg-muted/50` or `bg-input/30`) are not listed: those
-  // only move a neutral surface one step, never towards the label's colour.
+  // only move a neutral surface one step, never toward the label's color.
   //   Button   destructive  /10 → /20 on hover, dark /20 → /30
   ...tinted(
     "destructive Button label",

@@ -94,16 +94,16 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 ## States
 
-| State                 | Visual behavior                                                               |
-| --------------------- | ----------------------------------------------------------------------------- |
-| `default` (unchecked) | Transparent background, `border-input` border                                 |
-| `hover`               | No dedicated style (native focus handles it)                                  |
-| `focus`               | `border-ring` and `ring-1 ring-ring/50`                                       |
-| `active`              | No dedicated style                                                            |
-| `disabled`            | `cursor-not-allowed opacity-disabled`, `pointer-events-none`                  |
-| `checked`             | `border-primary bg-primary text-primary-foreground`, `CheckIcon` visible      |
-| `indeterminate`       | Radix sets `data-state="indeterminate"` — the consumer provides a `MinusIcon` |
-| `error`               | `aria-invalid="true"`: `border-destructive ring-destructive/20`               |
+| State                 | Visual behavior                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `default` (unchecked) | Transparent background, `border-input` border                                                                 |
+| `hover`               | No dedicated style (native focus handles it)                                                                  |
+| `focus`               | `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide |
+| `active`              | No dedicated style                                                                                            |
+| `disabled`            | `cursor-not-allowed opacity-disabled`, `pointer-events-none`                                                  |
+| `checked`             | `border-primary bg-primary text-primary-foreground`, `CheckIcon` visible                                      |
+| `indeterminate`       | Radix sets `data-state="indeterminate"` — the consumer provides a `MinusIcon`                                 |
+| `error`               | `aria-invalid="true"`: `border-destructive ring-destructive/20`                                               |
 
 ## Accessibility
 

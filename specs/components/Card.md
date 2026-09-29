@@ -60,6 +60,7 @@ A surface that brings a title, a description, content and a footer together in o
 | `color.background.subtle`        | `bg-card`                                     | `Card`                     |
 | `color.text.default`             | `ring-foreground/10` · `text-card-foreground` | `Card`                     |
 | `color.text.subtle`              | `text-muted-foreground`                       | `CardDescription`          |
+| `typography.font-family.mono`    | `font-heading`                                | `CardTitle`                |
 | `typography.font-weight.medium`  | `font-medium`                                 | `CardTitle`                |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                             | `CardDescription` · `Card` |
 | `typography.size.sm`             | `text-sm`                                     | `CardTitle`                |

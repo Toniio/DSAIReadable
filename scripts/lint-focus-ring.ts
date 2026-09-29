@@ -104,7 +104,7 @@ for (const abs of files) {
         detail:
           `sets a focus ring to a raw width ("${m[0]}"). Widths belong to ` +
           `--space-focus-ring-width: write "${prefix}${TOKEN}", or import ` +
-          `FOCUS_RING from @/lib/focus when the colour is standard too.`,
+          `FOCUS_RING from @/lib/focus when the color is standard too.`,
       })
     }
 

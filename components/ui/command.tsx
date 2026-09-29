@@ -160,7 +160,7 @@ function CommandItem({
       data-slot="command-item"
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
-        // the current one with focus/data-highlighted, which the background colour
+        // the current one with focus/data-highlighted, which the background color
         // below renders. A ring here would double an indicator that already exists.
         "group/command-item relative flex cursor-default items-center gap-2 rounded-none px-2 py-2 text-xs outline-hidden select-none in-data-[slot=dialog-content]:rounded-none! data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-disabled data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
         className

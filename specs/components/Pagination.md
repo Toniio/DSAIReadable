@@ -145,7 +145,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: Navigation (`nav`) with a list of links
 
-**Role**: A `nav` labelled `UI_STRINGS.pagination.landmark`; a `ul` of links; the current page carries `aria-current="page"`.
+**Role**: A `nav` labeled `UI_STRINGS.pagination.landmark`; a `ul` of links; the current page carries `aria-current="page"`.
 
 **Keyboard**:
 

@@ -102,7 +102,7 @@
     {
       "id": "anchor-relative-height",
       "file": "components/ui/combobox.tsx",
-      "reason": "max-h-[min(calc(--spacing(72)---spacing(9)),calc(var(--available-height)---spacing(9)))] — the list stops at the shorter of a fixed ceiling and the space Base UI measured below the trigger, both less the sticky input. The comparison is the behaviour, not a size.",
+      "reason": "max-h-[min(calc(--spacing(72)---spacing(9)),calc(var(--available-height)---spacing(9)))] — the list stops at the shorter of a fixed ceiling and the space Base UI measured below the trigger, both less the sticky input. The comparison is the behavior, not a size.",
       "token_candidate": null,
       "review_after": "2027-09-22"
     }

@@ -124,8 +124,8 @@ quotes, no semicolons, `trailingComma: es5`. A single configuration for the whol
 repository (`.ts`, `.tsx`, `.md`), `mcp-server/` included. Never reorder
 Tailwind classes by hand — `prettier-plugin-tailwindcss` takes care of it.
 
-Everything committed is written in English, natively — code, comments, docs,
-specs and demo copy.
+Everything committed is written in American English, natively — code, comments,
+docs, specs and demo copy: `color`, `behavior`, `labeled`, `-ize`.
 
 ## Reporting a vulnerability
 

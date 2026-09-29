@@ -117,6 +117,22 @@ section-gap   ██████████████████████
 
 ---
 
+## Why spacing is wired but not locked
+
+Colors, radii and shadows are locked: `styles/globals.css` resets their Tailwind
+namespaces (`--color-*: initial`…), so only the names the design system declares
+generate CSS. Spacing is not reset, on purpose. Components draw with Tailwind's
+multiplier scale (`p-2`, `gap-1.5`, `--spacing(9)`), and the tokens above name
+only a few of its steps; the layout tokens are bridged by name (`p-page`,
+`gap-section`, `w-sidebar`). Resetting `--spacing` today would remove every class
+of that scale before a canonical scale exists to replace it.
+
+So `p-13` still compiles. Until the canonical spacing scale is decided and the
+namespace is locked, the Usage Rules below and review are what keep off-scale
+steps out.
+
+---
+
 ## Usage Rules
 
 1. **Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.
