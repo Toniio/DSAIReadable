@@ -12,7 +12,9 @@
       "entry": [
         "components/ui/*.tsx",
         "hooks/*.ts",
-        "lib/{focus,overlay,surface,ui-strings,utils}.ts"
+        "lib/{focus,overlay,surface,ui-strings,utils}.ts",
+        // Read by `tz check` (tokens:lint-dtcg); knip has no Terrazzo plugin.
+        "terrazzo.config.ts"
       ],
       "project": [
         "{app,components,hooks,lib,scripts,tests}/**/*.{ts,tsx}",

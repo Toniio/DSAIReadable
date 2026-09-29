@@ -20,11 +20,21 @@
  * checked here; that each alias resolves to a real semantic token is checked
  * from the other side by `lint-theme-bridge.ts`.
  *
+ * Every tier is also held to the DTCG 2025.10 vocabulary that `tz check` lets
+ * through: a `$type` outside the Format Module (`font-weight` for
+ * `fontWeight`), or a `$`-property it does not define (`$private`), is an
+ * error — Terrazzo accepts both silently.
+ *
  * Exit 1 on any invalid key.
  */
 
 import fs from "fs"
 import path from "path"
+import {
+  DTCG_TYPES,
+  PRIMITIVE_ROOT,
+  primitiveGroups,
+} from "../mcp-server/src/lib/dtcg.js"
 
 // ---------------------------------------------------------------------------
 // Closed enums — a variable segment may only take one of these values
@@ -281,13 +291,18 @@ function describeShape(shape: string): string {
 // ---------------------------------------------------------------------------
 // Flatten nested JSON to dot-notation keys (skip DTCG meta-keys)
 // ---------------------------------------------------------------------------
+/** The `$`-properties the DTCG Format Module 2025.10 defines on a token. */
 const DTCG_META_KEYS = new Set([
   "$value",
   "$type",
   "$description",
-  "$private",
   "$extensions",
+  "$deprecated",
 ])
+/** On a group, `$value` excepted. */
+const DTCG_GROUP_KEYS = new Set(
+  [...DTCG_META_KEYS].filter((key) => key !== "$value")
+)
 
 function flattenKeys(obj: Record<string, unknown>, prefix = ""): string[] {
   const keys: string[] = []
@@ -362,6 +377,44 @@ function checkReferencePurity(
   return errors
 }
 
+/**
+ * DTCG 2025.10 vocabulary: every `$`-property is one the Format Module
+ * defines, and every `$type` one of its types.
+ */
+function checkDtcgVocabulary(
+  obj: Record<string, unknown>,
+  prefix = ""
+): KeyError[] {
+  const errors: KeyError[] = []
+  const isToken = "$value" in obj
+  const allowed = isToken ? DTCG_META_KEYS : DTCG_GROUP_KEYS
+  const where = prefix || "(root)"
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (key.startsWith("$")) {
+      if (!allowed.has(key))
+        errors.push({
+          key: where,
+          reason: `"${key}" is not a DTCG 2025.10 ${isToken ? "token" : "group"} property. Allowed: ${[...allowed].join(", ")}; anything else goes under $extensions.`,
+        })
+      if (key === "$type" && !DTCG_TYPES.has(value as string))
+        errors.push({
+          key: where,
+          reason: `$type "${String(value)}" is not a DTCG 2025.10 type. Expected one of: ${[...DTCG_TYPES].join(", ")}.`,
+        })
+      continue
+    }
+    if (!isToken && value && typeof value === "object" && !Array.isArray(value))
+      errors.push(
+        ...checkDtcgVocabulary(
+          value as Record<string, unknown>,
+          prefix ? `${prefix}.${key}` : key
+        )
+      )
+  }
+  return errors
+}
+
 function validateKey(key: string, grammar: Grammar): KeyError | null {
   const segments = key.split(".")
   const foundation = segments[0]
@@ -415,6 +468,8 @@ interface TierSpec {
   label: string
   /** Tiers above the primitive layer may only hold `{…}` references. */
   referencesOnly: boolean
+  /** Tier 1 nests its foundations under the `primitive` group. */
+  primitiveRoot?: boolean
 }
 
 function main() {
@@ -425,6 +480,7 @@ function main() {
       grammar: PRIMITIVE_GRAMMAR,
       label: "Tier 1 — primitive, private",
       referencesOnly: false,
+      primitiveRoot: true,
     },
     {
       file: path.join(root, "tokens", "semantic.json"),
@@ -450,14 +506,25 @@ function main() {
       continue
     }
 
-    const data = JSON.parse(fs.readFileSync(tier.file, "utf-8")) as Record<
+    const file = JSON.parse(fs.readFileSync(tier.file, "utf-8")) as Record<
       string,
       unknown
     >
+    // The primitives sit under one `primitive` group; the grammar starts
+    // below it, at the foundation.
+    const data = tier.primitiveRoot ? primitiveGroups(file) : file
     const keys = flattenKeys(data)
     const errors = keys
       .map((key) => validateKey(key, tier.grammar))
       .filter((e): e is KeyError => e !== null)
+    errors.push(...checkDtcgVocabulary(file))
+    if (tier.primitiveRoot)
+      for (const key of Object.keys(file))
+        if (!key.startsWith("$") && key !== PRIMITIVE_ROOT)
+          errors.push({
+            key,
+            reason: `tokens/primitive.json holds a single "${PRIMITIVE_ROOT}" group; move "${key}" under it.`,
+          })
 
     if (tier.referencesOnly) errors.push(...checkReferencePurity(data))
 

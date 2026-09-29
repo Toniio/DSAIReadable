@@ -12,6 +12,11 @@
 import { readFileSync, writeFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import {
+  cssValue,
+  PRIMITIVE_ROOT,
+  primitiveGroups,
+} from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const OUT = resolve(ROOT, "tokens.css")
@@ -30,7 +35,9 @@ const readTokens = (name: string) =>
     unknown
   >
 
-const primitive = readTokens("primitive.json")
+// Walked without its `primitive` root group: --ds-prim-color-mist-0, not
+// --ds-prim-primitive-color-mist-0.
+const primitive = primitiveGroups(readTokens("primitive.json"))
 const semantic = readTokens("semantic.json")
 const component = readTokens("component.json")
 
@@ -46,14 +53,15 @@ function* walk(
     if ("$value" in obj) {
       const modes = (
         obj.$extensions as
-          { modes?: Record<string, { $value?: string }> } | undefined
+          { modes?: Record<string, { $value?: unknown }> } | undefined
       )?.modes
+      const type = obj.$type as string | undefined
       yield {
         path: [...path, key],
-        value: String(obj.$value),
+        value: cssValue(obj.$value, type),
         dark:
           modes?.dark?.$value !== undefined
-            ? String(modes.dark.$value)
+            ? cssValue(modes.dark.$value, type)
             : undefined,
       }
     } else {
@@ -77,8 +85,9 @@ function hasPath(tree: Record<string, unknown>, dotted: string): boolean {
 }
 
 /**
- * Turn a DTCG value into CSS. `{color.mist.0}` becomes a var() pointing at the
- * tier below: semantic resolves against primitives, component against semantics.
+ * Turn a DTCG value into CSS. A reference becomes a var() pointing at the tier
+ * below: `{primitive.color.mist.0}` in the semantic tier, `{color.text.default}`
+ * in the component tier.
  */
 function toCss(
   value: string,
@@ -86,12 +95,19 @@ function toCss(
 ): string {
   return value.replace(/\{([^}]+)\}/g, (_, ref: string) => {
     const name = ref.replace(/\./g, "-")
-    if (tier === "semantic") return `var(--ds-prim-${name})`
+    if (tier === "semantic") {
+      const [root, ...rest] = ref.split(".")
+      if (root !== PRIMITIVE_ROOT || !hasPath(primitive, rest.join(".")))
+        throw new Error(
+          `Semantic token references "{${ref}}": Tier 2 may only reference a primitive, as {${PRIMITIVE_ROOT}.…}.`
+        )
+      return `var(--ds-prim-${rest.join("-")})`
+    }
     if (tier === "component") {
       // Tier 3 aliases Tier 2 only (AGENTS.md § 2). A primitive reached from
       // here would skip the semantic decision, and its light/dark mode.
       if (hasPath(semantic, ref)) return `var(--${name})`
-      if (hasPath(primitive, ref))
+      if (ref.startsWith(`${PRIMITIVE_ROOT}.`))
         throw new Error(
           `Component token references the primitive "{${ref}}": Tier 3 may only reference Tier 2 (tokens/semantic.json).`
         )

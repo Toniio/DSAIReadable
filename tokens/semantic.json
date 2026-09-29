@@ -2,13 +2,13 @@
   "color": {
     "background": {
       "default": {
-        "$value": "{color.mist.0}",
+        "$value": "{primitive.color.mist.0}",
         "$type": "color",
         "$description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.950}"
+              "$value": "{primitive.color.mist.950}"
             }
           },
           "docs": {
@@ -20,13 +20,13 @@
         }
       },
       "subtle": {
-        "$value": "{color.mist.100}",
+        "$value": "{primitive.color.mist.100}",
         "$type": "color",
         "$description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.800}"
+              "$value": "{primitive.color.mist.800}"
             }
           },
           "docs": {
@@ -38,13 +38,13 @@
         }
       },
       "elevated": {
-        "$value": "{color.mist.0}",
+        "$value": "{primitive.color.mist.0}",
         "$type": "color",
         "$description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.900}"
+              "$value": "{primitive.color.mist.900}"
             }
           },
           "docs": {
@@ -56,13 +56,13 @@
         }
       },
       "inverse": {
-        "$value": "{color.mist.950}",
+        "$value": "{primitive.color.mist.950}",
         "$type": "color",
         "$description": "Inverted surface for contrast callouts. Not for general-purpose backgrounds.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.0}"
+              "$value": "{primitive.color.mist.0}"
             }
           },
           "docs": {
@@ -76,13 +76,13 @@
     },
     "text": {
       "default": {
-        "$value": "{color.mist.950}",
+        "$value": "{primitive.color.mist.950}",
         "$type": "color",
         "$description": "Primary body and heading text. Not for secondary, placeholder, or disabled text.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.50}"
+              "$value": "{primitive.color.mist.50}"
             }
           },
           "docs": {
@@ -94,13 +94,13 @@
         }
       },
       "subtle": {
-        "$value": "{color.mist.600}",
+        "$value": "{primitive.color.mist.600}",
         "$type": "color",
         "$description": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.400}"
+              "$value": "{primitive.color.mist.400}"
             }
           },
           "docs": {
@@ -112,13 +112,13 @@
         }
       },
       "bold": {
-        "$value": "{color.mist.950}",
+        "$value": "{primitive.color.mist.950}",
         "$type": "color",
         "$description": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.50}"
+              "$value": "{primitive.color.mist.50}"
             }
           },
           "docs": {
@@ -130,13 +130,13 @@
         }
       },
       "inverse": {
-        "$value": "{color.mist.0}",
+        "$value": "{primitive.color.mist.0}",
         "$type": "color",
         "$description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.950}"
+              "$value": "{primitive.color.mist.950}"
             }
           },
           "docs": {
@@ -149,13 +149,13 @@
       },
       "action": {
         "default": {
-          "$value": "{color.violet.600}",
+          "$value": "{primitive.color.violet.600}",
           "$type": "color",
           "$description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.violet.400}"
+                "$value": "{primitive.color.violet.400}"
               }
             },
             "docs": {
@@ -167,13 +167,13 @@
           }
         },
         "on": {
-          "$value": "{color.violet.50}",
+          "$value": "{primitive.color.violet.50}",
           "$type": "color",
           "$description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.violet.50}"
+                "$value": "{primitive.color.violet.50}"
               }
             },
             "docs": {
@@ -187,13 +187,13 @@
       },
       "destructive": {
         "default": {
-          "$value": "{color.red.800}",
+          "$value": "{primitive.color.red.800}",
           "$type": "color",
           "$description": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.red.300}"
+                "$value": "{primitive.color.red.300}"
               }
             },
             "docs": {
@@ -208,13 +208,13 @@
     },
     "border": {
       "default": {
-        "$value": "{color.mist.200}",
+        "$value": "{primitive.color.mist.200}",
         "$type": "color",
         "$description": "Standard dividers and component outlines. Not for input fields or focus rings.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.white-alpha.10}"
+              "$value": "{primitive.color.white-alpha.10}"
             }
           },
           "docs": {
@@ -226,13 +226,13 @@
         }
       },
       "subtle": {
-        "$value": "{color.mist.200}",
+        "$value": "{primitive.color.mist.200}",
         "$type": "color",
         "$description": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.white-alpha.10}"
+              "$value": "{primitive.color.white-alpha.10}"
             }
           },
           "docs": {
@@ -244,13 +244,13 @@
         }
       },
       "input": {
-        "$value": "{color.mist.200}",
+        "$value": "{primitive.color.mist.200}",
         "$type": "color",
         "$description": "Border for form input fields. Not for decorative dividers or layout borders.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.white-alpha.15}"
+              "$value": "{primitive.color.white-alpha.15}"
             }
           },
           "docs": {
@@ -262,13 +262,13 @@
         }
       },
       "focus": {
-        "$value": "{color.mist.500}",
+        "$value": "{primitive.color.mist.500}",
         "$type": "color",
         "$description": "Focus ring outline for keyboard accessibility. Not for resting or hover states.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.500}"
+              "$value": "{primitive.color.mist.500}"
             }
           },
           "docs": {
@@ -282,13 +282,13 @@
     },
     "icon": {
       "default": {
-        "$value": "{color.mist.950}",
+        "$value": "{primitive.color.mist.950}",
         "$type": "color",
         "$description": "Standard icon fill. Not for icons in branded or destructive contexts.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.50}"
+              "$value": "{primitive.color.mist.50}"
             }
           },
           "docs": {
@@ -300,13 +300,13 @@
         }
       },
       "subtle": {
-        "$value": "{color.mist.500}",
+        "$value": "{primitive.color.mist.500}",
         "$type": "color",
         "$description": "Muted/secondary icon fill. Not for primary interactive icons.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.400}"
+              "$value": "{primitive.color.mist.400}"
             }
           },
           "docs": {
@@ -318,13 +318,13 @@
         }
       },
       "action": {
-        "$value": "{color.violet.50}",
+        "$value": "{primitive.color.violet.50}",
         "$type": "color",
         "$description": "Icon on a primary action background. Not for icons on neutral surfaces.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.violet.50}"
+              "$value": "{primitive.color.violet.50}"
             }
           },
           "docs": {
@@ -339,13 +339,13 @@
     "action": {
       "background": {
         "default": {
-          "$value": "{color.violet.600}",
+          "$value": "{primitive.color.violet.600}",
           "$type": "color",
           "$description": "Primary call-to-action button/element background. Not for secondary or ghost variants.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.violet.700}"
+                "$value": "{primitive.color.violet.700}"
               }
             },
             "docs": {
@@ -357,13 +357,13 @@
           }
         },
         "foreground": {
-          "$value": "{color.violet.50}",
+          "$value": "{primitive.color.violet.50}",
           "$type": "color",
           "$description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.violet.50}"
+                "$value": "{primitive.color.violet.50}"
               }
             },
             "docs": {
@@ -379,13 +379,13 @@
     "feedback": {
       "error": {
         "default": {
-          "$value": "{color.red.600}",
+          "$value": "{primitive.color.red.600}",
           "$type": "color",
           "$description": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.red.500}"
+                "$value": "{primitive.color.red.500}"
               }
             },
             "docs": {
@@ -397,13 +397,13 @@
           }
         },
         "foreground": {
-          "$value": "{color.mist.0}",
+          "$value": "{primitive.color.mist.0}",
           "$type": "color",
           "$description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.mist.950}"
+                "$value": "{primitive.color.mist.950}"
               }
             },
             "docs": {
@@ -418,65 +418,65 @@
     },
     "chart": {
       "1": {
-        "$value": "{color.violet.600}",
+        "$value": "{primitive.color.violet.600}",
         "$type": "color",
         "$description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.violet.400}"
+              "$value": "{primitive.color.violet.400}"
             }
           },
           "status": "active"
         }
       },
       "2": {
-        "$value": "{color.blue.600}",
+        "$value": "{primitive.color.blue.600}",
         "$type": "color",
         "$description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.blue.300}"
+              "$value": "{primitive.color.blue.300}"
             }
           },
           "status": "active"
         }
       },
       "3": {
-        "$value": "{color.amber.600}",
+        "$value": "{primitive.color.amber.600}",
         "$type": "color",
         "$description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.yellow.200}"
+              "$value": "{primitive.color.yellow.200}"
             }
           },
           "status": "active"
         }
       },
       "4": {
-        "$value": "{color.plum.800}",
+        "$value": "{primitive.color.plum.800}",
         "$type": "color",
         "$description": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.plum.500}"
+              "$value": "{primitive.color.plum.500}"
             }
           },
           "status": "active"
         }
       },
       "5": {
-        "$value": "{color.amber.800}",
+        "$value": "{primitive.color.amber.800}",
         "$type": "color",
         "$description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.amber.500}"
+              "$value": "{primitive.color.amber.500}"
             }
           },
           "status": "active"
@@ -491,7 +491,7 @@
       },
       "sequential": {
         "1": {
-          "$value": "{color.green.200}",
+          "$value": "{primitive.color.green.200}",
           "$type": "color",
           "$description": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
           "$extensions": {
@@ -499,7 +499,7 @@
           }
         },
         "2": {
-          "$value": "{color.green.300}",
+          "$value": "{primitive.color.green.300}",
           "$type": "color",
           "$description": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
           "$extensions": {
@@ -507,7 +507,7 @@
           }
         },
         "3": {
-          "$value": "{color.green.400}",
+          "$value": "{primitive.color.green.400}",
           "$type": "color",
           "$description": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
           "$extensions": {
@@ -515,7 +515,7 @@
           }
         },
         "4": {
-          "$value": "{color.green.500}",
+          "$value": "{primitive.color.green.500}",
           "$type": "color",
           "$description": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
           "$extensions": {
@@ -523,7 +523,7 @@
           }
         },
         "5": {
-          "$value": "{color.green.600}",
+          "$value": "{primitive.color.green.600}",
           "$type": "color",
           "$description": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
           "$extensions": {
@@ -534,13 +534,13 @@
     },
     "sidebar": {
       "background": {
-        "$value": "{color.mist.50}",
+        "$value": "{primitive.color.mist.50}",
         "$type": "color",
         "$description": "Sidebar panel surface. Not for the main content area or popovers.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.900}"
+              "$value": "{primitive.color.mist.900}"
             }
           },
           "docs": {
@@ -550,13 +550,13 @@
         }
       },
       "foreground": {
-        "$value": "{color.mist.950}",
+        "$value": "{primitive.color.mist.950}",
         "$type": "color",
         "$description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.50}"
+              "$value": "{primitive.color.mist.50}"
             }
           },
           "docs": {
@@ -566,13 +566,13 @@
         }
       },
       "border": {
-        "$value": "{color.mist.200}",
+        "$value": "{primitive.color.mist.200}",
         "$type": "color",
         "$description": "Sidebar internal divider/border. Not for content-area borders.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.white-alpha.10}"
+              "$value": "{primitive.color.white-alpha.10}"
             }
           },
           "docs": {
@@ -582,13 +582,13 @@
         }
       },
       "ring": {
-        "$value": "{color.mist.500}",
+        "$value": "{primitive.color.mist.500}",
         "$type": "color",
         "$description": "Focus ring within the sidebar. Not for main content focus rings.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.500}"
+              "$value": "{primitive.color.mist.500}"
             }
           },
           "docs": {
@@ -599,13 +599,13 @@
       },
       "primary": {
         "default": {
-          "$value": "{color.violet.550}",
+          "$value": "{primitive.color.violet.550}",
           "$type": "color",
           "$description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.violet.500}"
+                "$value": "{primitive.color.violet.500}"
               }
             },
             "docs": {
@@ -615,13 +615,13 @@
           }
         },
         "on": {
-          "$value": "{color.violet.50}",
+          "$value": "{primitive.color.violet.50}",
           "$type": "color",
           "$description": "Text on top of the sidebar primary active item. Not for inactive item text.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.mist.0}"
+                "$value": "{primitive.color.mist.0}"
               }
             },
             "docs": {
@@ -633,13 +633,13 @@
       },
       "accent": {
         "default": {
-          "$value": "{color.mist.100}",
+          "$value": "{primitive.color.mist.100}",
           "$type": "color",
           "$description": "Hovered or secondary sidebar item background. Not for the active primary item.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.mist.800}"
+                "$value": "{primitive.color.mist.800}"
               }
             },
             "docs": {
@@ -649,13 +649,13 @@
           }
         },
         "foreground": {
-          "$value": "{color.mist.900}",
+          "$value": "{primitive.color.mist.900}",
           "$type": "color",
           "$description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.mist.50}"
+                "$value": "{primitive.color.mist.50}"
               }
             },
             "docs": {
@@ -674,13 +674,13 @@
     },
     "static": {
       "white": {
-        "$value": "{color.mist.0}",
+        "$value": "{primitive.color.mist.0}",
         "$type": "color",
         "$description": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.mist.0}"
+              "$value": "{primitive.color.mist.0}"
             }
           },
           "docs": {
@@ -690,13 +690,13 @@
         }
       },
       "black": {
-        "$value": "{color.black}",
+        "$value": "{primitive.color.black}",
         "$type": "color",
         "$description": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces.",
         "$extensions": {
           "modes": {
             "dark": {
-              "$value": "{color.black}"
+              "$value": "{primitive.color.black}"
             }
           },
           "docs": {
@@ -710,7 +710,7 @@
   "space": {
     "component": {
       "xs": {
-        "$value": "{space.1}",
+        "$value": "{primitive.space.1}",
         "$type": "dimension",
         "$description": "Extra-small component padding/gap (4px). Not for layout or section spacing.",
         "$extensions": {
@@ -722,7 +722,7 @@
         }
       },
       "sm": {
-        "$value": "{space.2}",
+        "$value": "{primitive.space.2}",
         "$type": "dimension",
         "$description": "Small component padding/gap (8px). Not for layout or section spacing.",
         "$extensions": {
@@ -734,7 +734,7 @@
         }
       },
       "md": {
-        "$value": "{space.4}",
+        "$value": "{primitive.space.4}",
         "$type": "dimension",
         "$description": "Medium component padding/gap (16px). Not for layout or section spacing.",
         "$extensions": {
@@ -746,7 +746,7 @@
         }
       },
       "lg": {
-        "$value": "{space.6}",
+        "$value": "{primitive.space.6}",
         "$type": "dimension",
         "$description": "Large component padding/gap (24px). Not for layout or section spacing.",
         "$extensions": {
@@ -758,7 +758,7 @@
         }
       },
       "xl": {
-        "$value": "{space.8}",
+        "$value": "{primitive.space.8}",
         "$type": "dimension",
         "$description": "Extra-large component padding/gap (32px). Not for layout or section spacing.",
         "$extensions": {
@@ -771,7 +771,7 @@
       }
     },
     "focus-ring-width": {
-      "$value": "{space.focus-ring-width}",
+      "$value": "{primitive.space.focus-ring-width}",
       "$type": "dimension",
       "$description": "Width of the focus ring indicator (2px). Use for all focus-visible ring styles.",
       "$extensions": {
@@ -780,7 +780,7 @@
     },
     "layout": {
       "page-padding": {
-        "$value": "{space.page}",
+        "$value": "{primitive.space.page}",
         "$type": "dimension",
         "$description": "Horizontal padding for the main page container. Not for component-level spacing.",
         "$extensions": {
@@ -792,7 +792,7 @@
         }
       },
       "section-gap": {
-        "$value": "{space.section}",
+        "$value": "{primitive.space.section}",
         "$type": "dimension",
         "$description": "Vertical gap between major page sections. Not for component-level spacing.",
         "$extensions": {
@@ -804,7 +804,7 @@
         }
       },
       "content-sm": {
-        "$value": "{space.content-sm}",
+        "$value": "{primitive.space.content-sm}",
         "$type": "dimension",
         "$description": "Narrow content column max-width (42rem). Not for full-width or wide layouts.",
         "$extensions": {
@@ -816,7 +816,7 @@
         }
       },
       "content-default": {
-        "$value": "{space.content}",
+        "$value": "{primitive.space.content}",
         "$type": "dimension",
         "$description": "Default content column max-width (64rem). Not for narrow or wide layouts.",
         "$extensions": {
@@ -828,7 +828,7 @@
         }
       },
       "content-lg": {
-        "$value": "{space.content-lg}",
+        "$value": "{primitive.space.content-lg}",
         "$type": "dimension",
         "$description": "Wide content column max-width (80rem). Not for narrow or default layouts.",
         "$extensions": {
@@ -840,7 +840,7 @@
         }
       },
       "sidebar": {
-        "$value": "{space.sidebar}",
+        "$value": "{primitive.space.sidebar}",
         "$type": "dimension",
         "$description": "Default sidebar width (16rem). Use for the main navigation sidebar.",
         "$extensions": {
@@ -848,7 +848,7 @@
         }
       },
       "sidebar-mobile": {
-        "$value": "{space.sidebar-mobile}",
+        "$value": "{primitive.space.sidebar-mobile}",
         "$type": "dimension",
         "$description": "Sidebar width on mobile viewports (18rem). Slightly wider for touch targets.",
         "$extensions": {
@@ -856,7 +856,7 @@
         }
       },
       "sidebar-icon": {
-        "$value": "{space.12}",
+        "$value": "{primitive.space.12}",
         "$type": "dimension",
         "$description": "Sidebar width in icon-only/collapsed mode (3rem).",
         "$extensions": {
@@ -868,7 +868,7 @@
   "typography": {
     "size": {
       "xs": {
-        "$value": "{typography.size.xs}",
+        "$value": "{primitive.typography.size.xs}",
         "$type": "dimension",
         "$description": "Extra-small text size (12px). Use for labels, badges, captions.",
         "$extensions": {
@@ -879,7 +879,7 @@
         }
       },
       "sm": {
-        "$value": "{typography.size.sm}",
+        "$value": "{primitive.typography.size.sm}",
         "$type": "dimension",
         "$description": "Small text size (14px). Use for secondary content and UI labels.",
         "$extensions": {
@@ -890,7 +890,7 @@
         }
       },
       "base": {
-        "$value": "{typography.size.base}",
+        "$value": "{primitive.typography.size.base}",
         "$type": "dimension",
         "$description": "Default body text size (16px). Use for main readable content.",
         "$extensions": {
@@ -901,7 +901,7 @@
         }
       },
       "lg": {
-        "$value": "{typography.size.lg}",
+        "$value": "{primitive.typography.size.lg}",
         "$type": "dimension",
         "$description": "Large text size (18px). Use for featured body text.",
         "$extensions": {
@@ -912,7 +912,7 @@
         }
       },
       "xl": {
-        "$value": "{typography.size.xl}",
+        "$value": "{primitive.typography.size.xl}",
         "$type": "dimension",
         "$description": "XL text (20px). Use for section headings.",
         "$extensions": {
@@ -923,7 +923,7 @@
         }
       },
       "2xl": {
-        "$value": "{typography.size.2xl}",
+        "$value": "{primitive.typography.size.2xl}",
         "$type": "dimension",
         "$description": "2XL text (24px). Use for page-level headings.",
         "$extensions": {
@@ -934,7 +934,7 @@
         }
       },
       "3xl": {
-        "$value": "{typography.size.3xl}",
+        "$value": "{primitive.typography.size.3xl}",
         "$type": "dimension",
         "$description": "3XL text (30px). Use for hero or primary headings.",
         "$extensions": {
@@ -945,7 +945,7 @@
         }
       },
       "4xl": {
-        "$value": "{typography.size.4xl}",
+        "$value": "{primitive.typography.size.4xl}",
         "$type": "dimension",
         "$description": "4XL text (36px). Use for display headings only.",
         "$extensions": {
@@ -958,7 +958,7 @@
     },
     "line-height": {
       "tight": {
-        "$value": "{typography.line-height.tight}",
+        "$value": "{primitive.typography.line-height.tight}",
         "$type": "number",
         "$description": "Tight line height for headings. Not for paragraph text.",
         "$extensions": {
@@ -969,7 +969,7 @@
         }
       },
       "snug": {
-        "$value": "{typography.line-height.snug}",
+        "$value": "{primitive.typography.line-height.snug}",
         "$type": "number",
         "$description": "Snug line height. Not for long-form reading content.",
         "$extensions": {
@@ -980,7 +980,7 @@
         }
       },
       "normal": {
-        "$value": "{typography.line-height.normal}",
+        "$value": "{primitive.typography.line-height.normal}",
         "$type": "number",
         "$description": "Default line height for body text.",
         "$extensions": {
@@ -991,7 +991,7 @@
         }
       },
       "relaxed": {
-        "$value": "{typography.line-height.relaxed}",
+        "$value": "{primitive.typography.line-height.relaxed}",
         "$type": "number",
         "$description": "Relaxed line height for improved readability in long-form content.",
         "$extensions": {
@@ -1002,7 +1002,7 @@
         }
       },
       "loose": {
-        "$value": "{typography.line-height.loose}",
+        "$value": "{primitive.typography.line-height.loose}",
         "$type": "number",
         "$description": "Loose line height for highly spaced text. Not for dense UIs.",
         "$extensions": {
@@ -1015,7 +1015,7 @@
     },
     "letter-spacing": {
       "tight": {
-        "$value": "{typography.letter-spacing.tight}",
+        "$value": "{primitive.typography.letter-spacing.tight}",
         "$type": "dimension",
         "$description": "Tight letter spacing for large headings. Not for body text.",
         "$extensions": {
@@ -1026,7 +1026,7 @@
         }
       },
       "normal": {
-        "$value": "{typography.letter-spacing.normal}",
+        "$value": "{primitive.typography.letter-spacing.normal}",
         "$type": "dimension",
         "$description": "Default letter spacing. Use as baseline.",
         "$extensions": {
@@ -1037,7 +1037,7 @@
         }
       },
       "wide": {
-        "$value": "{typography.letter-spacing.wide}",
+        "$value": "{primitive.typography.letter-spacing.wide}",
         "$type": "dimension",
         "$description": "Wide letter spacing for small UI labels.",
         "$extensions": {
@@ -1048,7 +1048,7 @@
         }
       },
       "wider": {
-        "$value": "{typography.letter-spacing.wider}",
+        "$value": "{primitive.typography.letter-spacing.wider}",
         "$type": "dimension",
         "$description": "Wider letter spacing for all-caps or overline text.",
         "$extensions": {
@@ -1061,8 +1061,8 @@
     },
     "font-weight": {
       "normal": {
-        "$value": "{typography.font-weight.normal}",
-        "$type": "font-weight",
+        "$value": "{primitive.typography.font-weight.normal}",
+        "$type": "fontWeight",
         "$description": "Normal weight for body text.",
         "$extensions": {
           "docs": {
@@ -1072,8 +1072,8 @@
         }
       },
       "medium": {
-        "$value": "{typography.font-weight.medium}",
-        "$type": "font-weight",
+        "$value": "{primitive.typography.font-weight.medium}",
+        "$type": "fontWeight",
         "$description": "Medium weight for UI labels and buttons.",
         "$extensions": {
           "docs": {
@@ -1083,8 +1083,8 @@
         }
       },
       "semibold": {
-        "$value": "{typography.font-weight.semibold}",
-        "$type": "font-weight",
+        "$value": "{primitive.typography.font-weight.semibold}",
+        "$type": "fontWeight",
         "$description": "Semibold for sub-headings and emphasis.",
         "$extensions": {
           "docs": {
@@ -1094,8 +1094,8 @@
         }
       },
       "bold": {
-        "$value": "{typography.font-weight.bold}",
-        "$type": "font-weight",
+        "$value": "{primitive.typography.font-weight.bold}",
+        "$type": "fontWeight",
         "$description": "Bold for headings and strong emphasis.",
         "$extensions": {
           "docs": {
@@ -1107,8 +1107,8 @@
     },
     "font-family": {
       "sans": {
-        "$value": "{typography.font-family.sans}",
-        "$type": "font-family",
+        "$value": "{primitive.typography.font-family.sans}",
+        "$type": "fontFamily",
         "$description": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in lib/fonts.ts under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens).",
         "$extensions": {
           "docs": {
@@ -1119,8 +1119,8 @@
         }
       },
       "mono": {
-        "$value": "{typography.font-family.mono}",
-        "$type": "font-family",
+        "$value": "{primitive.typography.font-family.mono}",
+        "$type": "fontFamily",
         "$description": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in lib/fonts.ts under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens).",
         "$extensions": {
           "docs": {
@@ -1134,7 +1134,7 @@
   },
   "radius": {
     "none": {
-      "$value": "{radius.none}",
+      "$value": "{primitive.radius.none}",
       "$type": "dimension",
       "$description": "Zero radius — square corners. Use for full-bleed or table elements.",
       "$extensions": {
@@ -1145,7 +1145,7 @@
       }
     },
     "xs": {
-      "$value": "{radius.xs}",
+      "$value": "{primitive.radius.xs}",
       "$type": "dimension",
       "$description": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips.",
       "$extensions": {
@@ -1156,7 +1156,7 @@
       }
     },
     "sm": {
-      "$value": "{radius.sm}",
+      "$value": "{primitive.radius.sm}",
       "$type": "dimension",
       "$description": "Small rounding (0.6× base). Use for inputs, small buttons.",
       "$extensions": {
@@ -1167,7 +1167,7 @@
       }
     },
     "md": {
-      "$value": "{radius.md}",
+      "$value": "{primitive.radius.md}",
       "$type": "dimension",
       "$description": "Medium rounding (0.8× base). Use for default buttons and form controls.",
       "$extensions": {
@@ -1178,7 +1178,7 @@
       }
     },
     "lg": {
-      "$value": "{radius.lg}",
+      "$value": "{primitive.radius.lg}",
       "$type": "dimension",
       "$description": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius.",
       "$extensions": {
@@ -1189,7 +1189,7 @@
       }
     },
     "xl": {
-      "$value": "{radius.xl}",
+      "$value": "{primitive.radius.xl}",
       "$type": "dimension",
       "$description": "Larger rounding (1.4× base). Use for modals and prominent containers.",
       "$extensions": {
@@ -1200,7 +1200,7 @@
       }
     },
     "2xl": {
-      "$value": "{radius.2xl}",
+      "$value": "{primitive.radius.2xl}",
       "$type": "dimension",
       "$description": "Extra-large rounding (1.8× base). Use for floating panels.",
       "$extensions": {
@@ -1211,7 +1211,7 @@
       }
     },
     "3xl": {
-      "$value": "{radius.3xl}",
+      "$value": "{primitive.radius.3xl}",
       "$type": "dimension",
       "$description": "Very large rounding (2.2× base). Use sparingly for decorative containers.",
       "$extensions": {
@@ -1222,7 +1222,7 @@
       }
     },
     "4xl": {
-      "$value": "{radius.4xl}",
+      "$value": "{primitive.radius.4xl}",
       "$type": "dimension",
       "$description": "Maximum rounding (2.6× base). Use only for hero cards or large chips.",
       "$extensions": {
@@ -1233,7 +1233,7 @@
       }
     },
     "full": {
-      "$value": "{radius.full}",
+      "$value": "{primitive.radius.full}",
       "$type": "dimension",
       "$description": "Pill/full rounding. Use for pills, avatars, toggles.",
       "$extensions": {
@@ -1252,13 +1252,13 @@
   },
   "elevation": {
     "xs": {
-      "$value": "{elevation.light.xs}",
+      "$value": "{primitive.elevation.light.xs}",
       "$type": "shadow",
       "$description": "Minimal lift for interactive elements. Not for decorative purposes.",
       "$extensions": {
         "modes": {
           "dark": {
-            "$value": "{elevation.dark.xs}"
+            "$value": "{primitive.elevation.dark.xs}"
           }
         },
         "docs": {
@@ -1268,13 +1268,13 @@
       }
     },
     "sm": {
-      "$value": "{elevation.light.sm}",
+      "$value": "{primitive.elevation.light.sm}",
       "$type": "shadow",
       "$description": "Small lift for cards and hover states. Not for fixed navigation.",
       "$extensions": {
         "modes": {
           "dark": {
-            "$value": "{elevation.dark.sm}"
+            "$value": "{primitive.elevation.dark.sm}"
           }
         },
         "docs": {
@@ -1284,13 +1284,13 @@
       }
     },
     "md": {
-      "$value": "{elevation.light.md}",
+      "$value": "{primitive.elevation.light.md}",
       "$type": "shadow",
       "$description": "Medium elevation for dropdowns and context menus. Not for inline content.",
       "$extensions": {
         "modes": {
           "dark": {
-            "$value": "{elevation.dark.md}"
+            "$value": "{primitive.elevation.dark.md}"
           }
         },
         "docs": {
@@ -1300,13 +1300,13 @@
       }
     },
     "lg": {
-      "$value": "{elevation.light.lg}",
+      "$value": "{primitive.elevation.light.lg}",
       "$type": "shadow",
       "$description": "Large elevation for modals and side panels. Not for standard cards.",
       "$extensions": {
         "modes": {
           "dark": {
-            "$value": "{elevation.dark.lg}"
+            "$value": "{primitive.elevation.dark.lg}"
           }
         },
         "docs": {
@@ -1316,13 +1316,13 @@
       }
     },
     "xl": {
-      "$value": "{elevation.light.xl}",
+      "$value": "{primitive.elevation.light.xl}",
       "$type": "shadow",
       "$description": "Extra-large elevation for full overlay panels. Not for inline components.",
       "$extensions": {
         "modes": {
           "dark": {
-            "$value": "{elevation.dark.xl}"
+            "$value": "{primitive.elevation.dark.xl}"
           }
         },
         "docs": {
@@ -1332,13 +1332,13 @@
       }
     },
     "2xl": {
-      "$value": "{elevation.light.2xl}",
+      "$value": "{primitive.elevation.light.2xl}",
       "$type": "shadow",
       "$description": "Maximum elevation for toasts and high-priority overlays. Use sparingly.",
       "$extensions": {
         "modes": {
           "dark": {
-            "$value": "{elevation.dark.2xl}"
+            "$value": "{primitive.elevation.dark.2xl}"
           }
         },
         "docs": {
@@ -1348,13 +1348,13 @@
       }
     },
     "inner": {
-      "$value": "{elevation.light.inner}",
+      "$value": "{primitive.elevation.light.inner}",
       "$type": "shadow",
       "$description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements.",
       "$extensions": {
         "modes": {
           "dark": {
-            "$value": "{elevation.dark.inner}"
+            "$value": "{primitive.elevation.dark.inner}"
           }
         },
         "docs": {
@@ -1373,7 +1373,7 @@
   "motion": {
     "duration": {
       "instant": {
-        "$value": "{motion.duration.instant}",
+        "$value": "{primitive.motion.duration.instant}",
         "$type": "duration",
         "$description": "No duration — for immediate state changes. Not for visual transitions.",
         "$extensions": {
@@ -1381,7 +1381,7 @@
         }
       },
       "fast": {
-        "$value": "{motion.duration.fast}",
+        "$value": "{primitive.motion.duration.fast}",
         "$type": "duration",
         "$description": "Fast micro-interactions (100ms). Use for hover/focus feedback.",
         "$extensions": {
@@ -1392,7 +1392,7 @@
         }
       },
       "normal": {
-        "$value": "{motion.duration.normal}",
+        "$value": "{primitive.motion.duration.normal}",
         "$type": "duration",
         "$description": "Standard transition duration (200ms). Default for most transitions.",
         "$extensions": {
@@ -1403,7 +1403,7 @@
         }
       },
       "slow": {
-        "$value": "{motion.duration.slow}",
+        "$value": "{primitive.motion.duration.slow}",
         "$type": "duration",
         "$description": "Slow, deliberate transitions (300ms). Use for modals and drawers.",
         "$extensions": {
@@ -1414,7 +1414,7 @@
         }
       },
       "slower": {
-        "$value": "{motion.duration.slower}",
+        "$value": "{primitive.motion.duration.slower}",
         "$type": "duration",
         "$description": "Slowest transitions (500ms). Use only for complex animations.",
         "$extensions": {
@@ -1425,7 +1425,7 @@
         }
       },
       "extra-slow": {
-        "$value": "{motion.duration.extra-slow}",
+        "$value": "{primitive.motion.duration.extra-slow}",
         "$type": "duration",
         "$description": "Extra-slow duration (1000ms). Use for blink/pulse animations like caret blink.",
         "$extensions": {
@@ -1435,7 +1435,7 @@
     },
     "easing": {
       "default": {
-        "$value": "{motion.easing.default}",
+        "$value": "{primitive.motion.easing.default}",
         "$type": "cubicBezier",
         "$description": "Standard ease-in-out. Default for all UI transitions.",
         "$extensions": {
@@ -1446,7 +1446,7 @@
         }
       },
       "in": {
-        "$value": "{motion.easing.in}",
+        "$value": "{primitive.motion.easing.in}",
         "$type": "cubicBezier",
         "$description": "Ease-in curve. Use for elements exiting the screen.",
         "$extensions": {
@@ -1457,7 +1457,7 @@
         }
       },
       "out": {
-        "$value": "{motion.easing.out}",
+        "$value": "{primitive.motion.easing.out}",
         "$type": "cubicBezier",
         "$description": "Ease-out curve. Use for elements entering the screen.",
         "$extensions": {
@@ -1468,7 +1468,7 @@
         }
       },
       "spring": {
-        "$value": "{motion.easing.spring}",
+        "$value": "{primitive.motion.easing.spring}",
         "$type": "cubicBezier",
         "$description": "Spring overshoot. Use for playful or bouncy interactions only.",
         "$extensions": {
@@ -1488,7 +1488,7 @@
   },
   "opacity": {
     "disabled": {
-      "$value": "{opacity.0-50}",
+      "$value": "{primitive.opacity.0-50}",
       "$type": "number",
       "$description": "Opacity for disabled interactive elements. Not for placeholder or overlay use.",
       "$extensions": {
@@ -1500,7 +1500,7 @@
       }
     },
     "placeholder": {
-      "$value": "{opacity.0-50}",
+      "$value": "{primitive.opacity.0-50}",
       "$type": "number",
       "$description": "Opacity for placeholder text. Not for disabled or overlay use.",
       "$extensions": {
@@ -1512,7 +1512,7 @@
       }
     },
     "overlay": {
-      "$value": "{opacity.0-80}",
+      "$value": "{primitive.opacity.0-80}",
       "$type": "number",
       "$description": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency.",
       "$extensions": {
@@ -1526,7 +1526,7 @@
   },
   "zindex": {
     "dropdown": {
-      "$value": "{zindex.dropdown}",
+      "$value": "{primitive.zindex.dropdown}",
       "$type": "number",
       "$description": "Dropdown menus. Renders above page content.",
       "$extensions": {
@@ -1537,7 +1537,7 @@
       }
     },
     "sticky": {
-      "$value": "{zindex.sticky}",
+      "$value": "{primitive.zindex.sticky}",
       "$type": "number",
       "$description": "Sticky headers/footers. Renders above dropdowns.",
       "$extensions": {
@@ -1548,7 +1548,7 @@
       }
     },
     "fixed": {
-      "$value": "{zindex.fixed}",
+      "$value": "{primitive.zindex.fixed}",
       "$type": "number",
       "$description": "Fixed position elements. Renders above sticky.",
       "$extensions": {
@@ -1559,7 +1559,7 @@
       }
     },
     "overlay": {
-      "$value": "{zindex.overlay}",
+      "$value": "{primitive.zindex.overlay}",
       "$type": "number",
       "$description": "Overlay/backdrop. Renders above fixed elements.",
       "$extensions": {
@@ -1570,7 +1570,7 @@
       }
     },
     "modal": {
-      "$value": "{zindex.modal}",
+      "$value": "{primitive.zindex.modal}",
       "$type": "number",
       "$description": "Modal dialogs. Renders above overlays.",
       "$extensions": {
@@ -1581,7 +1581,7 @@
       }
     },
     "popover": {
-      "$value": "{zindex.popover}",
+      "$value": "{primitive.zindex.popover}",
       "$type": "number",
       "$description": "Popovers and tooltips of high priority. Renders above modals.",
       "$extensions": {
@@ -1592,7 +1592,7 @@
       }
     },
     "toast": {
-      "$value": "{zindex.toast}",
+      "$value": "{primitive.zindex.toast}",
       "$type": "number",
       "$description": "Toast notifications. Always visible above other layers.",
       "$extensions": {
@@ -1603,7 +1603,7 @@
       }
     },
     "tooltip": {
-      "$value": "{zindex.tooltip}",
+      "$value": "{primitive.zindex.tooltip}",
       "$type": "number",
       "$description": "Tooltips. Highest z-index to always appear on top.",
       "$extensions": {
@@ -1622,7 +1622,7 @@
   },
   "breakpoint": {
     "sm": {
-      "$value": "{breakpoint.sm}",
+      "$value": "{primitive.breakpoint.sm}",
       "$type": "dimension",
       "$description": "Viewport width from which the `sm:` variant applies (mobile-first, min-width). Not a container width.",
       "$extensions": {
@@ -1633,7 +1633,7 @@
       }
     },
     "md": {
-      "$value": "{breakpoint.md}",
+      "$value": "{primitive.breakpoint.md}",
       "$type": "dimension",
       "$description": "Viewport width from which the `md:` variant applies (mobile-first, min-width). Not a container width.",
       "$extensions": {
@@ -1644,7 +1644,7 @@
       }
     },
     "lg": {
-      "$value": "{breakpoint.lg}",
+      "$value": "{primitive.breakpoint.lg}",
       "$type": "dimension",
       "$description": "Viewport width from which the `lg:` variant applies (mobile-first, min-width). Not a container width.",
       "$extensions": {
@@ -1655,7 +1655,7 @@
       }
     },
     "xl": {
-      "$value": "{breakpoint.xl}",
+      "$value": "{primitive.breakpoint.xl}",
       "$type": "dimension",
       "$description": "Viewport width from which the `xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts.",
       "$extensions": {
@@ -1666,7 +1666,7 @@
       }
     },
     "2xl": {
-      "$value": "{breakpoint.2xl}",
+      "$value": "{primitive.breakpoint.2xl}",
       "$type": "dimension",
       "$description": "Viewport width from which the `2xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts.",
       "$extensions": {
@@ -1679,7 +1679,7 @@
   },
   "border-width": {
     "default": {
-      "$value": "{border-width.1}",
+      "$value": "{primitive.border-width.1}",
       "$type": "dimension",
       "$description": "Width of every plain border: `border`, `border-t`, `divide-x`… Not for focus rings, which use space.focus-ring-width.",
       "$extensions": {
@@ -1690,7 +1690,7 @@
       }
     },
     "chart-indicator": {
-      "$value": "{border-width.1-5}",
+      "$value": "{primitive.border-width.1-5}",
       "$type": "dimension",
       "$description": "Stroke of the dashed series indicator in chart tooltips. Not for component borders.",
       "$extensions": {
@@ -1701,7 +1701,7 @@
       }
     },
     "separation": {
-      "$value": "{border-width.2}",
+      "$value": "{primitive.border-width.2}",
       "$type": "dimension",
       "$description": "Ring painted in the background color around an element that overlaps another, cutting it out: stacked avatars, an avatar's badge. Not for borders or focus rings.",
       "$extensions": {

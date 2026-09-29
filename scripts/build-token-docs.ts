@@ -22,6 +22,7 @@ import { readFileSync, writeFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { format, resolveConfig } from "prettier"
+import { cssValue } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -39,12 +40,12 @@ interface Docs {
 }
 
 interface RawNode {
-  $value?: string
+  $value?: unknown
   $type?: string
   $description?: string
   $deprecated?: boolean | string
   $extensions?: {
-    modes?: Record<string, { $value?: string }>
+    modes?: Record<string, { $value?: unknown }>
     docs?: Docs
     status?: "active" | "reserved"
   }
@@ -172,14 +173,17 @@ function resolveValue(raw: string, tier: Tier, mode: "light" | "dark"): string {
       if (!node) continue
       const override = node.$extensions?.modes?.[mode]?.$value
       const next = mode === "dark" && override ? override : node.$value
-      return next ? resolveValue(next, below, mode) : whole
+      return next
+        ? resolveValue(cssValue(next, node.$type), below, mode)
+        : whole
     }
     return whole
   })
 }
 
 function cssVarFor(tier: Tier, path: string[]): string {
-  if (tier === "primitive") return `--ds-prim-${path.join("-")}`
+  // Tier 1 drops its "primitive" root group, as build-tokens does.
+  if (tier === "primitive") return `--ds-prim-${path.slice(1).join("-")}`
   // Tier 3 drops the "shadcn" namespace: the name is what shadcn expects.
   if (tier === "component") return `--${path.slice(1).join("-")}`
   return `--${path.join("-")}`
@@ -193,7 +197,9 @@ function hasDark(raw: string, tier: Tier): boolean {
       const node = nodeAt(trees[below], ref)
       if (!node) return false
       if (node.$extensions?.modes?.dark) return true
-      return node.$value ? hasDark(node.$value, below) : false
+      return node.$value
+        ? hasDark(cssValue(node.$value, node.$type), below)
+        : false
     })
   )
 }
@@ -202,8 +208,10 @@ const entries: Entry[] = []
 for (const { tier, file } of TIERS) {
   for (const { path, node } of leaves(trees[tier])) {
     const token = path.join(".")
-    const lightRef = node.$value ?? ""
-    const darkRef = node.$extensions?.modes?.dark?.$value
+    const lightRef = cssValue(node.$value ?? "", node.$type)
+    const darkValue = node.$extensions?.modes?.dark?.$value
+    const darkRef =
+      darkValue === undefined ? undefined : cssValue(darkValue, node.$type)
     const dark = darkRef || hasDark(lightRef, tier) ? lightRef : undefined
     const docs = { ...inheritedDocs(trees[tier], path) }
 

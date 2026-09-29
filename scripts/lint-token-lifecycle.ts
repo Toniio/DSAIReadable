@@ -38,6 +38,7 @@ import { readFileSync, readdirSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { fontVariableOf, nextFontsOf } from "./lib/next-fonts.js"
+import { PRIMITIVE_ROOT } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const STATUSES = ["active", "reserved"] as const
@@ -77,19 +78,17 @@ const primitives = leaves(tier("tokens/primitive.json"))
 const semantic = leaves(tier("tokens/semantic.json"))
 const component = leaves(tier("tokens/component.json"))
 
-// A reference names a path, and the same path often exists in two tiers
-// (`radius.sm`, `breakpoint.sm`…). Resolve it the way build-tokens does:
-// the semantic tier references primitives only; the component tier prefers a
-// semantic token and falls back to a primitive. Matching on the bare path
-// would let a semantic token count its own primitive as a consumer.
+// The three tiers form one DTCG document, so a reference names its full path:
+// `{primitive.radius.sm}` is the primitive, `{radius.sm}` the semantic token.
 const semanticPaths = new Set(semantic.map((t) => t.path))
 const componentRefs = component.flatMap((t) => referencesOf(t.node))
 
 /** Primitives some token resolves to. */
-const referencedPrimitives = new Set([
-  ...semantic.flatMap((t) => referencesOf(t.node)),
-  ...componentRefs.filter((ref) => !semanticPaths.has(ref)),
-])
+const referencedPrimitives = new Set(
+  [...semantic, ...component]
+    .flatMap((t) => referencesOf(t.node))
+    .filter((ref) => ref.startsWith(`${PRIMITIVE_ROOT}.`))
+)
 /** Semantic tokens the component tier resolves to. */
 const referencedByComponent = new Set(
   componentRefs.filter((ref) => semanticPaths.has(ref))

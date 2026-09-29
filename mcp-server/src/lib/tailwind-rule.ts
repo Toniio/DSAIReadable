@@ -26,7 +26,7 @@ export const TAILWIND_RULE = {
     description:
       "A class resolves, through the @theme bridge, to a semantic token that references a primitive. Values in light and dark: get_tokens.",
     example:
-      "bg-primary → --color-primary (@theme) → --color-action-background-default (semantic) → {color.violet.600} (primitive, private)",
+      "bg-primary → --color-primary (@theme) → --color-action-background-default (semantic) → {primitive.color.violet.600} (primitive, private)",
     mapping: {
       "bg-background": "--color-background → --color-background-default",
       "bg-primary": "--color-primary → --color-action-background-default",

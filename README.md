@@ -231,7 +231,7 @@ With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the reque
 
 ## Tokens
 
-Three-tier architecture in the [W3C DTCG](https://design-tokens.github.io/community-group/format/) format:
+Three-tier architecture in the [W3C DTCG](https://www.designtokens.org/TR/2025.10/format/) format (Format Module 2025.10, checked by `tz check`):
 
 ```
 tokens/primitive.json   → raw values (hex, rem, ms) — never referenced directly

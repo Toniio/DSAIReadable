@@ -1,7 +1,7 @@
 [
   {
     "term": "primitive",
-    "definition": "A raw, named design value in tokens/primitive.json. Marked $private: true. Never referenced directly in component or application code — only Semantic tokens may reference primitives."
+    "definition": "A raw, named design value in tokens/primitive.json, under its `primitive` group. Private: never referenced directly in component or application code — only Semantic tokens may reference primitives, by full path ({primitive.color.mist.100})."
   },
   {
     "term": "semantic",
@@ -13,7 +13,7 @@
   },
   {
     "term": "DTCG",
-    "definition": "Design Token Community Group — the open standard format for design tokens. Each token carries $value, $type, and $description keys."
+    "definition": "Design Token Community Group — the open standard format for design tokens, Format Module 2025.10 (checked by `tz check`). Each token carries $value, $type, and $description keys; values use the 2025.10 object forms ({ colorSpace, components }, { value, unit })."
   },
   {
     "term": "cva",

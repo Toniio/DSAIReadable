@@ -2,7 +2,7 @@
   "tokenCount": 305,
   "tokens": [
     {
-      "token": "color.mist.0",
+      "token": "primitive.color.mist.0",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-0",
       "type": "color",
@@ -18,7 +18,7 @@
       "private": true
     },
     {
-      "token": "color.mist.50",
+      "token": "primitive.color.mist.50",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-50",
       "type": "color",
@@ -34,7 +34,7 @@
       "private": true
     },
     {
-      "token": "color.mist.100",
+      "token": "primitive.color.mist.100",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-100",
       "type": "color",
@@ -50,7 +50,7 @@
       "private": true
     },
     {
-      "token": "color.mist.200",
+      "token": "primitive.color.mist.200",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-200",
       "type": "color",
@@ -66,7 +66,7 @@
       "private": true
     },
     {
-      "token": "color.mist.400",
+      "token": "primitive.color.mist.400",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-400",
       "type": "color",
@@ -82,7 +82,7 @@
       "private": true
     },
     {
-      "token": "color.mist.500",
+      "token": "primitive.color.mist.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-500",
       "type": "color",
@@ -98,7 +98,7 @@
       "private": true
     },
     {
-      "token": "color.mist.600",
+      "token": "primitive.color.mist.600",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-600",
       "type": "color",
@@ -114,7 +114,7 @@
       "private": true
     },
     {
-      "token": "color.mist.700",
+      "token": "primitive.color.mist.700",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-700",
       "type": "color",
@@ -130,7 +130,7 @@
       "private": true
     },
     {
-      "token": "color.mist.800",
+      "token": "primitive.color.mist.800",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-800",
       "type": "color",
@@ -146,7 +146,7 @@
       "private": true
     },
     {
-      "token": "color.mist.900",
+      "token": "primitive.color.mist.900",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-900",
       "type": "color",
@@ -162,7 +162,7 @@
       "private": true
     },
     {
-      "token": "color.mist.950",
+      "token": "primitive.color.mist.950",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-950",
       "type": "color",
@@ -178,7 +178,7 @@
       "private": true
     },
     {
-      "token": "color.violet.50",
+      "token": "primitive.color.violet.50",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-50",
       "type": "color",
@@ -194,7 +194,7 @@
       "private": true
     },
     {
-      "token": "color.violet.400",
+      "token": "primitive.color.violet.400",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-400",
       "type": "color",
@@ -210,7 +210,7 @@
       "private": true
     },
     {
-      "token": "color.violet.500",
+      "token": "primitive.color.violet.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-500",
       "type": "color",
@@ -226,7 +226,7 @@
       "private": true
     },
     {
-      "token": "color.violet.550",
+      "token": "primitive.color.violet.550",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-550",
       "type": "color",
@@ -242,7 +242,7 @@
       "private": true
     },
     {
-      "token": "color.violet.600",
+      "token": "primitive.color.violet.600",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-600",
       "type": "color",
@@ -258,7 +258,7 @@
       "private": true
     },
     {
-      "token": "color.violet.700",
+      "token": "primitive.color.violet.700",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-700",
       "type": "color",
@@ -274,7 +274,7 @@
       "private": true
     },
     {
-      "token": "color.red.300",
+      "token": "primitive.color.red.300",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-300",
       "type": "color",
@@ -290,7 +290,7 @@
       "private": true
     },
     {
-      "token": "color.red.500",
+      "token": "primitive.color.red.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-500",
       "type": "color",
@@ -306,7 +306,7 @@
       "private": true
     },
     {
-      "token": "color.red.600",
+      "token": "primitive.color.red.600",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-600",
       "type": "color",
@@ -322,7 +322,7 @@
       "private": true
     },
     {
-      "token": "color.red.800",
+      "token": "primitive.color.red.800",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-800",
       "type": "color",
@@ -338,7 +338,7 @@
       "private": true
     },
     {
-      "token": "color.green.200",
+      "token": "primitive.color.green.200",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-green-200",
       "type": "color",
@@ -354,7 +354,7 @@
       "private": true
     },
     {
-      "token": "color.green.300",
+      "token": "primitive.color.green.300",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-green-300",
       "type": "color",
@@ -370,7 +370,7 @@
       "private": true
     },
     {
-      "token": "color.green.400",
+      "token": "primitive.color.green.400",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-green-400",
       "type": "color",
@@ -386,7 +386,7 @@
       "private": true
     },
     {
-      "token": "color.green.500",
+      "token": "primitive.color.green.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-green-500",
       "type": "color",
@@ -402,7 +402,7 @@
       "private": true
     },
     {
-      "token": "color.green.600",
+      "token": "primitive.color.green.600",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-green-600",
       "type": "color",
@@ -418,7 +418,7 @@
       "private": true
     },
     {
-      "token": "color.blue.300",
+      "token": "primitive.color.blue.300",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-300",
       "type": "color",
@@ -434,7 +434,7 @@
       "private": true
     },
     {
-      "token": "color.blue.600",
+      "token": "primitive.color.blue.600",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-600",
       "type": "color",
@@ -450,7 +450,7 @@
       "private": true
     },
     {
-      "token": "color.yellow.200",
+      "token": "primitive.color.yellow.200",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-yellow-200",
       "type": "color",
@@ -466,7 +466,7 @@
       "private": true
     },
     {
-      "token": "color.amber.500",
+      "token": "primitive.color.amber.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-amber-500",
       "type": "color",
@@ -482,7 +482,7 @@
       "private": true
     },
     {
-      "token": "color.amber.600",
+      "token": "primitive.color.amber.600",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-amber-600",
       "type": "color",
@@ -498,7 +498,7 @@
       "private": true
     },
     {
-      "token": "color.amber.800",
+      "token": "primitive.color.amber.800",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-amber-800",
       "type": "color",
@@ -514,7 +514,7 @@
       "private": true
     },
     {
-      "token": "color.plum.500",
+      "token": "primitive.color.plum.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-plum-500",
       "type": "color",
@@ -530,7 +530,7 @@
       "private": true
     },
     {
-      "token": "color.plum.800",
+      "token": "primitive.color.plum.800",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-plum-800",
       "type": "color",
@@ -546,7 +546,7 @@
       "private": true
     },
     {
-      "token": "color.black",
+      "token": "primitive.color.black",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-black",
       "type": "color",
@@ -562,7 +562,7 @@
       "private": true
     },
     {
-      "token": "color.white-alpha.10",
+      "token": "primitive.color.white-alpha.10",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-white-alpha-10",
       "type": "color",
@@ -578,7 +578,7 @@
       "private": true
     },
     {
-      "token": "color.white-alpha.15",
+      "token": "primitive.color.white-alpha.15",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-white-alpha-15",
       "type": "color",
@@ -594,7 +594,7 @@
       "private": true
     },
     {
-      "token": "space.1",
+      "token": "primitive.space.1",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-1",
       "type": "dimension",
@@ -610,7 +610,7 @@
       "private": true
     },
     {
-      "token": "space.2",
+      "token": "primitive.space.2",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-2",
       "type": "dimension",
@@ -626,7 +626,7 @@
       "private": true
     },
     {
-      "token": "space.3",
+      "token": "primitive.space.3",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-3",
       "type": "dimension",
@@ -642,7 +642,7 @@
       "private": true
     },
     {
-      "token": "space.4",
+      "token": "primitive.space.4",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-4",
       "type": "dimension",
@@ -658,7 +658,7 @@
       "private": true
     },
     {
-      "token": "space.5",
+      "token": "primitive.space.5",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-5",
       "type": "dimension",
@@ -674,7 +674,7 @@
       "private": true
     },
     {
-      "token": "space.6",
+      "token": "primitive.space.6",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-6",
       "type": "dimension",
@@ -690,7 +690,7 @@
       "private": true
     },
     {
-      "token": "space.8",
+      "token": "primitive.space.8",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-8",
       "type": "dimension",
@@ -706,7 +706,7 @@
       "private": true
     },
     {
-      "token": "space.10",
+      "token": "primitive.space.10",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-10",
       "type": "dimension",
@@ -722,7 +722,7 @@
       "private": true
     },
     {
-      "token": "space.12",
+      "token": "primitive.space.12",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-12",
       "type": "dimension",
@@ -738,7 +738,7 @@
       "private": true
     },
     {
-      "token": "space.16",
+      "token": "primitive.space.16",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-16",
       "type": "dimension",
@@ -754,7 +754,7 @@
       "private": true
     },
     {
-      "token": "space.24",
+      "token": "primitive.space.24",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-24",
       "type": "dimension",
@@ -770,7 +770,7 @@
       "private": true
     },
     {
-      "token": "space.32",
+      "token": "primitive.space.32",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-32",
       "type": "dimension",
@@ -786,7 +786,7 @@
       "private": true
     },
     {
-      "token": "space.0-5",
+      "token": "primitive.space.0-5",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-0-5",
       "type": "dimension",
@@ -802,7 +802,7 @@
       "private": true
     },
     {
-      "token": "space.page",
+      "token": "primitive.space.page",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-page",
       "type": "dimension",
@@ -818,7 +818,7 @@
       "private": true
     },
     {
-      "token": "space.section",
+      "token": "primitive.space.section",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-section",
       "type": "dimension",
@@ -834,7 +834,7 @@
       "private": true
     },
     {
-      "token": "space.content-sm",
+      "token": "primitive.space.content-sm",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-content-sm",
       "type": "dimension",
@@ -850,7 +850,7 @@
       "private": true
     },
     {
-      "token": "space.content",
+      "token": "primitive.space.content",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-content",
       "type": "dimension",
@@ -866,7 +866,7 @@
       "private": true
     },
     {
-      "token": "space.content-lg",
+      "token": "primitive.space.content-lg",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-content-lg",
       "type": "dimension",
@@ -882,7 +882,7 @@
       "private": true
     },
     {
-      "token": "space.sidebar",
+      "token": "primitive.space.sidebar",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-sidebar",
       "type": "dimension",
@@ -898,7 +898,7 @@
       "private": true
     },
     {
-      "token": "space.sidebar-mobile",
+      "token": "primitive.space.sidebar-mobile",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-sidebar-mobile",
       "type": "dimension",
@@ -914,7 +914,7 @@
       "private": true
     },
     {
-      "token": "space.focus-ring-width",
+      "token": "primitive.space.focus-ring-width",
       "tier": "primitive",
       "cssVar": "--ds-prim-space-focus-ring-width",
       "type": "dimension",
@@ -930,7 +930,7 @@
       "private": true
     },
     {
-      "token": "radius.none",
+      "token": "primitive.radius.none",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-none",
       "type": "dimension",
@@ -946,7 +946,7 @@
       "private": true
     },
     {
-      "token": "radius.base",
+      "token": "primitive.radius.base",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-base",
       "type": "dimension",
@@ -962,7 +962,7 @@
       "private": true
     },
     {
-      "token": "radius.xs",
+      "token": "primitive.radius.xs",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-xs",
       "type": "dimension",
@@ -978,7 +978,7 @@
       "private": true
     },
     {
-      "token": "radius.sm",
+      "token": "primitive.radius.sm",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-sm",
       "type": "dimension",
@@ -994,7 +994,7 @@
       "private": true
     },
     {
-      "token": "radius.md",
+      "token": "primitive.radius.md",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-md",
       "type": "dimension",
@@ -1010,7 +1010,7 @@
       "private": true
     },
     {
-      "token": "radius.lg",
+      "token": "primitive.radius.lg",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-lg",
       "type": "dimension",
@@ -1026,7 +1026,7 @@
       "private": true
     },
     {
-      "token": "radius.xl",
+      "token": "primitive.radius.xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-xl",
       "type": "dimension",
@@ -1042,7 +1042,7 @@
       "private": true
     },
     {
-      "token": "radius.2xl",
+      "token": "primitive.radius.2xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-2xl",
       "type": "dimension",
@@ -1058,7 +1058,7 @@
       "private": true
     },
     {
-      "token": "radius.3xl",
+      "token": "primitive.radius.3xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-3xl",
       "type": "dimension",
@@ -1074,7 +1074,7 @@
       "private": true
     },
     {
-      "token": "radius.4xl",
+      "token": "primitive.radius.4xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-4xl",
       "type": "dimension",
@@ -1090,7 +1090,7 @@
       "private": true
     },
     {
-      "token": "radius.full",
+      "token": "primitive.radius.full",
       "tier": "primitive",
       "cssVar": "--ds-prim-radius-full",
       "type": "dimension",
@@ -1106,7 +1106,7 @@
       "private": true
     },
     {
-      "token": "typography.size.xs",
+      "token": "primitive.typography.size.xs",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-xs",
       "type": "dimension",
@@ -1122,7 +1122,7 @@
       "private": true
     },
     {
-      "token": "typography.size.sm",
+      "token": "primitive.typography.size.sm",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-sm",
       "type": "dimension",
@@ -1138,7 +1138,7 @@
       "private": true
     },
     {
-      "token": "typography.size.base",
+      "token": "primitive.typography.size.base",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-base",
       "type": "dimension",
@@ -1154,7 +1154,7 @@
       "private": true
     },
     {
-      "token": "typography.size.lg",
+      "token": "primitive.typography.size.lg",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-lg",
       "type": "dimension",
@@ -1170,7 +1170,7 @@
       "private": true
     },
     {
-      "token": "typography.size.xl",
+      "token": "primitive.typography.size.xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-xl",
       "type": "dimension",
@@ -1186,7 +1186,7 @@
       "private": true
     },
     {
-      "token": "typography.size.2xl",
+      "token": "primitive.typography.size.2xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-2xl",
       "type": "dimension",
@@ -1202,7 +1202,7 @@
       "private": true
     },
     {
-      "token": "typography.size.3xl",
+      "token": "primitive.typography.size.3xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-3xl",
       "type": "dimension",
@@ -1218,7 +1218,7 @@
       "private": true
     },
     {
-      "token": "typography.size.4xl",
+      "token": "primitive.typography.size.4xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-4xl",
       "type": "dimension",
@@ -1234,7 +1234,7 @@
       "private": true
     },
     {
-      "token": "typography.line-height.tight",
+      "token": "primitive.typography.line-height.tight",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-line-height-tight",
       "type": "number",
@@ -1250,7 +1250,7 @@
       "private": true
     },
     {
-      "token": "typography.line-height.snug",
+      "token": "primitive.typography.line-height.snug",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-line-height-snug",
       "type": "number",
@@ -1266,7 +1266,7 @@
       "private": true
     },
     {
-      "token": "typography.line-height.normal",
+      "token": "primitive.typography.line-height.normal",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-line-height-normal",
       "type": "number",
@@ -1282,7 +1282,7 @@
       "private": true
     },
     {
-      "token": "typography.line-height.relaxed",
+      "token": "primitive.typography.line-height.relaxed",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-line-height-relaxed",
       "type": "number",
@@ -1298,7 +1298,7 @@
       "private": true
     },
     {
-      "token": "typography.line-height.loose",
+      "token": "primitive.typography.line-height.loose",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-line-height-loose",
       "type": "number",
@@ -1314,7 +1314,7 @@
       "private": true
     },
     {
-      "token": "typography.letter-spacing.tight",
+      "token": "primitive.typography.letter-spacing.tight",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-letter-spacing-tight",
       "type": "dimension",
@@ -1330,7 +1330,7 @@
       "private": true
     },
     {
-      "token": "typography.letter-spacing.normal",
+      "token": "primitive.typography.letter-spacing.normal",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-letter-spacing-normal",
       "type": "dimension",
@@ -1346,7 +1346,7 @@
       "private": true
     },
     {
-      "token": "typography.letter-spacing.wide",
+      "token": "primitive.typography.letter-spacing.wide",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-letter-spacing-wide",
       "type": "dimension",
@@ -1362,7 +1362,7 @@
       "private": true
     },
     {
-      "token": "typography.letter-spacing.wider",
+      "token": "primitive.typography.letter-spacing.wider",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-letter-spacing-wider",
       "type": "dimension",
@@ -1378,10 +1378,10 @@
       "private": true
     },
     {
-      "token": "typography.font-weight.normal",
+      "token": "primitive.typography.font-weight.normal",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-font-weight-normal",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
@@ -1394,10 +1394,10 @@
       "private": true
     },
     {
-      "token": "typography.font-weight.medium",
+      "token": "primitive.typography.font-weight.medium",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-font-weight-medium",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
@@ -1410,10 +1410,10 @@
       "private": true
     },
     {
-      "token": "typography.font-weight.semibold",
+      "token": "primitive.typography.font-weight.semibold",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-font-weight-semibold",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
@@ -1426,10 +1426,10 @@
       "private": true
     },
     {
-      "token": "typography.font-weight.bold",
+      "token": "primitive.typography.font-weight.bold",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-font-weight-bold",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
@@ -1442,10 +1442,10 @@
       "private": true
     },
     {
-      "token": "typography.font-family.sans",
+      "token": "primitive.typography.font-family.sans",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-font-family-sans",
-      "type": "font-family",
+      "type": "fontFamily",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
@@ -1458,10 +1458,10 @@
       "private": true
     },
     {
-      "token": "typography.font-family.mono",
+      "token": "primitive.typography.font-family.mono",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-font-family-mono",
-      "type": "font-family",
+      "type": "fontFamily",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
@@ -1474,7 +1474,7 @@
       "private": true
     },
     {
-      "token": "elevation.light.xs",
+      "token": "primitive.elevation.light.xs",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-light-xs",
       "type": "shadow",
@@ -1490,7 +1490,7 @@
       "private": true
     },
     {
-      "token": "elevation.light.sm",
+      "token": "primitive.elevation.light.sm",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-light-sm",
       "type": "shadow",
@@ -1506,7 +1506,7 @@
       "private": true
     },
     {
-      "token": "elevation.light.md",
+      "token": "primitive.elevation.light.md",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-light-md",
       "type": "shadow",
@@ -1522,7 +1522,7 @@
       "private": true
     },
     {
-      "token": "elevation.light.lg",
+      "token": "primitive.elevation.light.lg",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-light-lg",
       "type": "shadow",
@@ -1538,7 +1538,7 @@
       "private": true
     },
     {
-      "token": "elevation.light.xl",
+      "token": "primitive.elevation.light.xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-light-xl",
       "type": "shadow",
@@ -1554,7 +1554,7 @@
       "private": true
     },
     {
-      "token": "elevation.light.2xl",
+      "token": "primitive.elevation.light.2xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-light-2xl",
       "type": "shadow",
@@ -1570,7 +1570,7 @@
       "private": true
     },
     {
-      "token": "elevation.light.inner",
+      "token": "primitive.elevation.light.inner",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-light-inner",
       "type": "shadow",
@@ -1586,7 +1586,7 @@
       "private": true
     },
     {
-      "token": "elevation.dark.xs",
+      "token": "primitive.elevation.dark.xs",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-dark-xs",
       "type": "shadow",
@@ -1602,7 +1602,7 @@
       "private": true
     },
     {
-      "token": "elevation.dark.sm",
+      "token": "primitive.elevation.dark.sm",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-dark-sm",
       "type": "shadow",
@@ -1618,7 +1618,7 @@
       "private": true
     },
     {
-      "token": "elevation.dark.md",
+      "token": "primitive.elevation.dark.md",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-dark-md",
       "type": "shadow",
@@ -1634,7 +1634,7 @@
       "private": true
     },
     {
-      "token": "elevation.dark.lg",
+      "token": "primitive.elevation.dark.lg",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-dark-lg",
       "type": "shadow",
@@ -1650,7 +1650,7 @@
       "private": true
     },
     {
-      "token": "elevation.dark.xl",
+      "token": "primitive.elevation.dark.xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-dark-xl",
       "type": "shadow",
@@ -1666,7 +1666,7 @@
       "private": true
     },
     {
-      "token": "elevation.dark.2xl",
+      "token": "primitive.elevation.dark.2xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-dark-2xl",
       "type": "shadow",
@@ -1682,7 +1682,7 @@
       "private": true
     },
     {
-      "token": "elevation.dark.inner",
+      "token": "primitive.elevation.dark.inner",
       "tier": "primitive",
       "cssVar": "--ds-prim-elevation-dark-inner",
       "type": "shadow",
@@ -1698,7 +1698,7 @@
       "private": true
     },
     {
-      "token": "motion.duration.instant",
+      "token": "primitive.motion.duration.instant",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-duration-instant",
       "type": "duration",
@@ -1714,7 +1714,7 @@
       "private": true
     },
     {
-      "token": "motion.duration.fast",
+      "token": "primitive.motion.duration.fast",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-duration-fast",
       "type": "duration",
@@ -1730,7 +1730,7 @@
       "private": true
     },
     {
-      "token": "motion.duration.normal",
+      "token": "primitive.motion.duration.normal",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-duration-normal",
       "type": "duration",
@@ -1746,7 +1746,7 @@
       "private": true
     },
     {
-      "token": "motion.duration.slow",
+      "token": "primitive.motion.duration.slow",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-duration-slow",
       "type": "duration",
@@ -1762,7 +1762,7 @@
       "private": true
     },
     {
-      "token": "motion.duration.slower",
+      "token": "primitive.motion.duration.slower",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-duration-slower",
       "type": "duration",
@@ -1778,7 +1778,7 @@
       "private": true
     },
     {
-      "token": "motion.duration.extra-slow",
+      "token": "primitive.motion.duration.extra-slow",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-duration-extra-slow",
       "type": "duration",
@@ -1794,7 +1794,7 @@
       "private": true
     },
     {
-      "token": "motion.easing.default",
+      "token": "primitive.motion.easing.default",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-easing-default",
       "type": "cubicBezier",
@@ -1810,7 +1810,7 @@
       "private": true
     },
     {
-      "token": "motion.easing.in",
+      "token": "primitive.motion.easing.in",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-easing-in",
       "type": "cubicBezier",
@@ -1826,7 +1826,7 @@
       "private": true
     },
     {
-      "token": "motion.easing.out",
+      "token": "primitive.motion.easing.out",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-easing-out",
       "type": "cubicBezier",
@@ -1842,7 +1842,7 @@
       "private": true
     },
     {
-      "token": "motion.easing.spring",
+      "token": "primitive.motion.easing.spring",
       "tier": "primitive",
       "cssVar": "--ds-prim-motion-easing-spring",
       "type": "cubicBezier",
@@ -1858,7 +1858,7 @@
       "private": true
     },
     {
-      "token": "opacity.0-03",
+      "token": "primitive.opacity.0-03",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-03",
       "type": "number",
@@ -1874,7 +1874,7 @@
       "private": true
     },
     {
-      "token": "opacity.0-04",
+      "token": "primitive.opacity.0-04",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-04",
       "type": "number",
@@ -1890,7 +1890,7 @@
       "private": true
     },
     {
-      "token": "opacity.0-05",
+      "token": "primitive.opacity.0-05",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-05",
       "type": "number",
@@ -1906,7 +1906,7 @@
       "private": true
     },
     {
-      "token": "opacity.0-07",
+      "token": "primitive.opacity.0-07",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-07",
       "type": "number",
@@ -1922,7 +1922,7 @@
       "private": true
     },
     {
-      "token": "opacity.0-08",
+      "token": "primitive.opacity.0-08",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-08",
       "type": "number",
@@ -1938,23 +1938,23 @@
       "private": true
     },
     {
-      "token": "opacity.0-10",
+      "token": "primitive.opacity.0-10",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-10",
       "type": "number",
       "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0.10"
+        "light": "0.1"
       },
       "value": {
-        "light": "0.10"
+        "light": "0.1"
       },
       "description": "10% opacity. Embedded literally in color.white-alpha.10 today. Reserved for a white-alpha token that would reference it instead of embedding the value.",
       "private": true
     },
     {
-      "token": "opacity.0-12",
+      "token": "primitive.opacity.0-12",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-12",
       "type": "number",
@@ -1970,7 +1970,7 @@
       "private": true
     },
     {
-      "token": "opacity.0-15",
+      "token": "primitive.opacity.0-15",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-15",
       "type": "number",
@@ -1986,7 +1986,7 @@
       "private": true
     },
     {
-      "token": "opacity.0-18",
+      "token": "primitive.opacity.0-18",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-18",
       "type": "number",
@@ -2002,23 +2002,23 @@
       "private": true
     },
     {
-      "token": "opacity.0-20",
+      "token": "primitive.opacity.0-20",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-20",
       "type": "number",
       "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0.20"
+        "light": "0.2"
       },
       "value": {
-        "light": "0.20"
+        "light": "0.2"
       },
       "description": "20% opacity. Embedded literally in the shadow-xs/sm/lg/xl dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
       "private": true
     },
     {
-      "token": "opacity.0-25",
+      "token": "primitive.opacity.0-25",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-25",
       "type": "number",
@@ -2034,23 +2034,23 @@
       "private": true
     },
     {
-      "token": "opacity.0-30",
+      "token": "primitive.opacity.0-30",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-30",
       "type": "number",
       "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0.30"
+        "light": "0.3"
       },
       "value": {
-        "light": "0.30"
+        "light": "0.3"
       },
       "description": "30% opacity. Embedded literally in the shadow-sm/lg/inner dark elevation value today. Reserved for composite shadow tokens, which would reference it instead of embedding the value.",
       "private": true
     },
     {
-      "token": "opacity.0-35",
+      "token": "primitive.opacity.0-35",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-35",
       "type": "number",
@@ -2066,39 +2066,39 @@
       "private": true
     },
     {
-      "token": "opacity.0-50",
+      "token": "primitive.opacity.0-50",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-50",
       "type": "number",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0.50"
+        "light": "0.5"
       },
       "value": {
-        "light": "0.50"
+        "light": "0.5"
       },
       "description": "50% opacity, used in shadow-2xl dark and disabled states.",
       "private": true
     },
     {
-      "token": "opacity.0-80",
+      "token": "primitive.opacity.0-80",
       "tier": "primitive",
       "cssVar": "--ds-prim-opacity-0-80",
       "type": "number",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0.80"
+        "light": "0.8"
       },
       "value": {
-        "light": "0.80"
+        "light": "0.8"
       },
       "description": "80% opacity, used for overlay backdrop.",
       "private": true
     },
     {
-      "token": "zindex.dropdown",
+      "token": "primitive.zindex.dropdown",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-dropdown",
       "type": "number",
@@ -2114,7 +2114,7 @@
       "private": true
     },
     {
-      "token": "zindex.sticky",
+      "token": "primitive.zindex.sticky",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-sticky",
       "type": "number",
@@ -2130,7 +2130,7 @@
       "private": true
     },
     {
-      "token": "zindex.fixed",
+      "token": "primitive.zindex.fixed",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-fixed",
       "type": "number",
@@ -2146,7 +2146,7 @@
       "private": true
     },
     {
-      "token": "zindex.overlay",
+      "token": "primitive.zindex.overlay",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-overlay",
       "type": "number",
@@ -2162,7 +2162,7 @@
       "private": true
     },
     {
-      "token": "zindex.modal",
+      "token": "primitive.zindex.modal",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-modal",
       "type": "number",
@@ -2178,7 +2178,7 @@
       "private": true
     },
     {
-      "token": "zindex.popover",
+      "token": "primitive.zindex.popover",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-popover",
       "type": "number",
@@ -2194,7 +2194,7 @@
       "private": true
     },
     {
-      "token": "zindex.toast",
+      "token": "primitive.zindex.toast",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-toast",
       "type": "number",
@@ -2210,7 +2210,7 @@
       "private": true
     },
     {
-      "token": "zindex.tooltip",
+      "token": "primitive.zindex.tooltip",
       "tier": "primitive",
       "cssVar": "--ds-prim-zindex-tooltip",
       "type": "number",
@@ -2226,7 +2226,7 @@
       "private": true
     },
     {
-      "token": "breakpoint.sm",
+      "token": "primitive.breakpoint.sm",
       "tier": "primitive",
       "cssVar": "--ds-prim-breakpoint-sm",
       "type": "dimension",
@@ -2242,7 +2242,7 @@
       "private": true
     },
     {
-      "token": "breakpoint.md",
+      "token": "primitive.breakpoint.md",
       "tier": "primitive",
       "cssVar": "--ds-prim-breakpoint-md",
       "type": "dimension",
@@ -2258,7 +2258,7 @@
       "private": true
     },
     {
-      "token": "breakpoint.lg",
+      "token": "primitive.breakpoint.lg",
       "tier": "primitive",
       "cssVar": "--ds-prim-breakpoint-lg",
       "type": "dimension",
@@ -2274,7 +2274,7 @@
       "private": true
     },
     {
-      "token": "breakpoint.xl",
+      "token": "primitive.breakpoint.xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-breakpoint-xl",
       "type": "dimension",
@@ -2290,7 +2290,7 @@
       "private": true
     },
     {
-      "token": "breakpoint.2xl",
+      "token": "primitive.breakpoint.2xl",
       "tier": "primitive",
       "cssVar": "--ds-prim-breakpoint-2xl",
       "type": "dimension",
@@ -2306,7 +2306,7 @@
       "private": true
     },
     {
-      "token": "border-width.1",
+      "token": "primitive.border-width.1",
       "tier": "primitive",
       "cssVar": "--ds-prim-border-width-1",
       "type": "dimension",
@@ -2322,7 +2322,7 @@
       "private": true
     },
     {
-      "token": "border-width.2",
+      "token": "primitive.border-width.2",
       "tier": "primitive",
       "cssVar": "--ds-prim-border-width-2",
       "type": "dimension",
@@ -2338,7 +2338,7 @@
       "private": true
     },
     {
-      "token": "border-width.1-5",
+      "token": "primitive.border-width.1-5",
       "tier": "primitive",
       "cssVar": "--ds-prim-border-width-1-5",
       "type": "dimension",
@@ -2361,8 +2361,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.0}",
-        "dark": "{color.mist.950}"
+        "light": "{primitive.color.mist.0}",
+        "dark": "{primitive.color.mist.950}"
       },
       "value": {
         "light": "#ffffff",
@@ -2383,8 +2383,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.100}",
-        "dark": "{color.mist.800}"
+        "light": "{primitive.color.mist.100}",
+        "dark": "{primitive.color.mist.800}"
       },
       "value": {
         "light": "#f1f3f3",
@@ -2405,8 +2405,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.0}",
-        "dark": "{color.mist.900}"
+        "light": "{primitive.color.mist.0}",
+        "dark": "{primitive.color.mist.900}"
       },
       "value": {
         "light": "#ffffff",
@@ -2427,8 +2427,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.950}",
-        "dark": "{color.mist.0}"
+        "light": "{primitive.color.mist.950}",
+        "dark": "{primitive.color.mist.0}"
       },
       "value": {
         "light": "#090b0c",
@@ -2449,8 +2449,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.950}",
-        "dark": "{color.mist.50}"
+        "light": "{primitive.color.mist.950}",
+        "dark": "{primitive.color.mist.50}"
       },
       "value": {
         "light": "#090b0c",
@@ -2471,8 +2471,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.600}",
-        "dark": "{color.mist.400}"
+        "light": "{primitive.color.mist.600}",
+        "dark": "{primitive.color.mist.400}"
       },
       "value": {
         "light": "#607175",
@@ -2493,8 +2493,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.950}",
-        "dark": "{color.mist.50}"
+        "light": "{primitive.color.mist.950}",
+        "dark": "{primitive.color.mist.50}"
       },
       "value": {
         "light": "#090b0c",
@@ -2515,8 +2515,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.0}",
-        "dark": "{color.mist.950}"
+        "light": "{primitive.color.mist.0}",
+        "dark": "{primitive.color.mist.950}"
       },
       "value": {
         "light": "#ffffff",
@@ -2537,8 +2537,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.600}",
-        "dark": "{color.violet.400}"
+        "light": "{primitive.color.violet.600}",
+        "dark": "{primitive.color.violet.400}"
       },
       "value": {
         "light": "#432dd7",
@@ -2559,8 +2559,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.50}",
-        "dark": "{color.violet.50}"
+        "light": "{primitive.color.violet.50}",
+        "dark": "{primitive.color.violet.50}"
       },
       "value": {
         "light": "#eef2ff",
@@ -2581,8 +2581,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.red.800}",
-        "dark": "{color.red.300}"
+        "light": "{primitive.color.red.800}",
+        "dark": "{primitive.color.red.300}"
       },
       "value": {
         "light": "#9f0712",
@@ -2603,8 +2603,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.200}",
-        "dark": "{color.white-alpha.10}"
+        "light": "{primitive.color.mist.200}",
+        "dark": "{primitive.color.white-alpha.10}"
       },
       "value": {
         "light": "#e3e7e8",
@@ -2625,8 +2625,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.200}",
-        "dark": "{color.white-alpha.10}"
+        "light": "{primitive.color.mist.200}",
+        "dark": "{primitive.color.white-alpha.10}"
       },
       "value": {
         "light": "#e3e7e8",
@@ -2647,8 +2647,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.200}",
-        "dark": "{color.white-alpha.15}"
+        "light": "{primitive.color.mist.200}",
+        "dark": "{primitive.color.white-alpha.15}"
       },
       "value": {
         "light": "#e3e7e8",
@@ -2669,8 +2669,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.500}",
-        "dark": "{color.mist.500}"
+        "light": "{primitive.color.mist.500}",
+        "dark": "{primitive.color.mist.500}"
       },
       "value": {
         "light": "#67787c",
@@ -2691,8 +2691,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.950}",
-        "dark": "{color.mist.50}"
+        "light": "{primitive.color.mist.950}",
+        "dark": "{primitive.color.mist.50}"
       },
       "value": {
         "light": "#090b0c",
@@ -2713,8 +2713,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.500}",
-        "dark": "{color.mist.400}"
+        "light": "{primitive.color.mist.500}",
+        "dark": "{primitive.color.mist.400}"
       },
       "value": {
         "light": "#67787c",
@@ -2735,8 +2735,8 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.50}",
-        "dark": "{color.violet.50}"
+        "light": "{primitive.color.violet.50}",
+        "dark": "{primitive.color.violet.50}"
       },
       "value": {
         "light": "#eef2ff",
@@ -2757,8 +2757,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.600}",
-        "dark": "{color.violet.700}"
+        "light": "{primitive.color.violet.600}",
+        "dark": "{primitive.color.violet.700}"
       },
       "value": {
         "light": "#432dd7",
@@ -2779,8 +2779,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.50}",
-        "dark": "{color.violet.50}"
+        "light": "{primitive.color.violet.50}",
+        "dark": "{primitive.color.violet.50}"
       },
       "value": {
         "light": "#eef2ff",
@@ -2801,8 +2801,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.red.600}",
-        "dark": "{color.red.500}"
+        "light": "{primitive.color.red.600}",
+        "dark": "{primitive.color.red.500}"
       },
       "value": {
         "light": "#e7000b",
@@ -2823,8 +2823,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.0}",
-        "dark": "{color.mist.950}"
+        "light": "{primitive.color.mist.0}",
+        "dark": "{primitive.color.mist.950}"
       },
       "value": {
         "light": "#ffffff",
@@ -2845,8 +2845,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.600}",
-        "dark": "{color.violet.400}"
+        "light": "{primitive.color.violet.600}",
+        "dark": "{primitive.color.violet.400}"
       },
       "value": {
         "light": "#432dd7",
@@ -2867,8 +2867,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.blue.600}",
-        "dark": "{color.blue.300}"
+        "light": "{primitive.color.blue.600}",
+        "dark": "{primitive.color.blue.300}"
       },
       "value": {
         "light": "#438fbd",
@@ -2889,8 +2889,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.amber.600}",
-        "dark": "{color.yellow.200}"
+        "light": "{primitive.color.amber.600}",
+        "dark": "{primitive.color.yellow.200}"
       },
       "value": {
         "light": "#af8526",
@@ -2911,8 +2911,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.plum.800}",
-        "dark": "{color.plum.500}"
+        "light": "{primitive.color.plum.800}",
+        "dark": "{primitive.color.plum.500}"
       },
       "value": {
         "light": "#4d2761",
@@ -2933,8 +2933,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.amber.800}",
-        "dark": "{color.amber.500}"
+        "light": "{primitive.color.amber.800}",
+        "dark": "{primitive.color.amber.500}"
       },
       "value": {
         "light": "#734e00",
@@ -2955,7 +2955,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.green.200}"
+        "light": "{primitive.color.green.200}"
       },
       "value": {
         "light": "#bbf451"
@@ -2975,7 +2975,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.green.300}"
+        "light": "{primitive.color.green.300}"
       },
       "value": {
         "light": "#7ccf00"
@@ -2995,7 +2995,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.green.400}"
+        "light": "{primitive.color.green.400}"
       },
       "value": {
         "light": "#5ea500"
@@ -3015,7 +3015,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.green.500}"
+        "light": "{primitive.color.green.500}"
       },
       "value": {
         "light": "#497d00"
@@ -3035,7 +3035,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.green.600}"
+        "light": "{primitive.color.green.600}"
       },
       "value": {
         "light": "#3c6300"
@@ -3055,8 +3055,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.50}",
-        "dark": "{color.mist.900}"
+        "light": "{primitive.color.mist.50}",
+        "dark": "{primitive.color.mist.900}"
       },
       "value": {
         "light": "#f9fbfb",
@@ -3077,8 +3077,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.950}",
-        "dark": "{color.mist.50}"
+        "light": "{primitive.color.mist.950}",
+        "dark": "{primitive.color.mist.50}"
       },
       "value": {
         "light": "#090b0c",
@@ -3099,8 +3099,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.200}",
-        "dark": "{color.white-alpha.10}"
+        "light": "{primitive.color.mist.200}",
+        "dark": "{primitive.color.white-alpha.10}"
       },
       "value": {
         "light": "#e3e7e8",
@@ -3121,8 +3121,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.500}",
-        "dark": "{color.mist.500}"
+        "light": "{primitive.color.mist.500}",
+        "dark": "{primitive.color.mist.500}"
       },
       "value": {
         "light": "#67787c",
@@ -3143,8 +3143,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.550}",
-        "dark": "{color.violet.500}"
+        "light": "{primitive.color.violet.550}",
+        "dark": "{primitive.color.violet.500}"
       },
       "value": {
         "light": "#4f39f6",
@@ -3165,8 +3165,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.violet.50}",
-        "dark": "{color.mist.0}"
+        "light": "{primitive.color.violet.50}",
+        "dark": "{primitive.color.mist.0}"
       },
       "value": {
         "light": "#eef2ff",
@@ -3187,8 +3187,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.100}",
-        "dark": "{color.mist.800}"
+        "light": "{primitive.color.mist.100}",
+        "dark": "{primitive.color.mist.800}"
       },
       "value": {
         "light": "#f1f3f3",
@@ -3209,8 +3209,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.900}",
-        "dark": "{color.mist.50}"
+        "light": "{primitive.color.mist.900}",
+        "dark": "{primitive.color.mist.50}"
       },
       "value": {
         "light": "#161b1d",
@@ -3231,8 +3231,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.mist.0}",
-        "dark": "{color.mist.0}"
+        "light": "{primitive.color.mist.0}",
+        "dark": "{primitive.color.mist.0}"
       },
       "value": {
         "light": "#ffffff",
@@ -3251,8 +3251,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.black}",
-        "dark": "{color.black}"
+        "light": "{primitive.color.black}",
+        "dark": "{primitive.color.black}"
       },
       "value": {
         "light": "#000000",
@@ -3271,7 +3271,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.1}"
+        "light": "{primitive.space.1}"
       },
       "value": {
         "light": "0.25rem"
@@ -3290,7 +3290,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.2}"
+        "light": "{primitive.space.2}"
       },
       "value": {
         "light": "0.5rem"
@@ -3309,7 +3309,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.4}"
+        "light": "{primitive.space.4}"
       },
       "value": {
         "light": "1rem"
@@ -3328,7 +3328,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.6}"
+        "light": "{primitive.space.6}"
       },
       "value": {
         "light": "1.5rem"
@@ -3347,7 +3347,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.8}"
+        "light": "{primitive.space.8}"
       },
       "value": {
         "light": "2rem"
@@ -3366,7 +3366,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.focus-ring-width}"
+        "light": "{primitive.space.focus-ring-width}"
       },
       "value": {
         "light": "2px"
@@ -3381,7 +3381,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.page}"
+        "light": "{primitive.space.page}"
       },
       "value": {
         "light": "1.5rem"
@@ -3400,7 +3400,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.section}"
+        "light": "{primitive.space.section}"
       },
       "value": {
         "light": "4rem"
@@ -3419,7 +3419,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.content-sm}"
+        "light": "{primitive.space.content-sm}"
       },
       "value": {
         "light": "42rem"
@@ -3438,7 +3438,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.content}"
+        "light": "{primitive.space.content}"
       },
       "value": {
         "light": "64rem"
@@ -3457,7 +3457,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.content-lg}"
+        "light": "{primitive.space.content-lg}"
       },
       "value": {
         "light": "80rem"
@@ -3476,7 +3476,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.sidebar}"
+        "light": "{primitive.space.sidebar}"
       },
       "value": {
         "light": "16rem"
@@ -3491,7 +3491,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.sidebar-mobile}"
+        "light": "{primitive.space.sidebar-mobile}"
       },
       "value": {
         "light": "18rem"
@@ -3506,7 +3506,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{space.12}"
+        "light": "{primitive.space.12}"
       },
       "value": {
         "light": "3rem"
@@ -3521,7 +3521,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.xs}"
+        "light": "{primitive.typography.size.xs}"
       },
       "value": {
         "light": "0.75rem"
@@ -3539,7 +3539,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.sm}"
+        "light": "{primitive.typography.size.sm}"
       },
       "value": {
         "light": "0.875rem"
@@ -3557,7 +3557,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.base}"
+        "light": "{primitive.typography.size.base}"
       },
       "value": {
         "light": "1rem"
@@ -3575,7 +3575,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.lg}"
+        "light": "{primitive.typography.size.lg}"
       },
       "value": {
         "light": "1.125rem"
@@ -3593,7 +3593,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.xl}"
+        "light": "{primitive.typography.size.xl}"
       },
       "value": {
         "light": "1.25rem"
@@ -3611,7 +3611,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.2xl}"
+        "light": "{primitive.typography.size.2xl}"
       },
       "value": {
         "light": "1.5rem"
@@ -3629,7 +3629,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.3xl}"
+        "light": "{primitive.typography.size.3xl}"
       },
       "value": {
         "light": "1.875rem"
@@ -3647,7 +3647,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.size.4xl}"
+        "light": "{primitive.typography.size.4xl}"
       },
       "value": {
         "light": "2.25rem"
@@ -3665,7 +3665,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.line-height.tight}"
+        "light": "{primitive.typography.line-height.tight}"
       },
       "value": {
         "light": "1.25"
@@ -3683,7 +3683,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.line-height.snug}"
+        "light": "{primitive.typography.line-height.snug}"
       },
       "value": {
         "light": "1.375"
@@ -3701,7 +3701,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.line-height.normal}"
+        "light": "{primitive.typography.line-height.normal}"
       },
       "value": {
         "light": "1.5"
@@ -3719,7 +3719,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.line-height.relaxed}"
+        "light": "{primitive.typography.line-height.relaxed}"
       },
       "value": {
         "light": "1.625"
@@ -3737,7 +3737,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.line-height.loose}"
+        "light": "{primitive.typography.line-height.loose}"
       },
       "value": {
         "light": "2"
@@ -3755,7 +3755,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.letter-spacing.tight}"
+        "light": "{primitive.typography.letter-spacing.tight}"
       },
       "value": {
         "light": "-0.025em"
@@ -3773,7 +3773,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.letter-spacing.normal}"
+        "light": "{primitive.typography.letter-spacing.normal}"
       },
       "value": {
         "light": "0em"
@@ -3791,7 +3791,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.letter-spacing.wide}"
+        "light": "{primitive.typography.letter-spacing.wide}"
       },
       "value": {
         "light": "0.025em"
@@ -3809,7 +3809,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.letter-spacing.wider}"
+        "light": "{primitive.typography.letter-spacing.wider}"
       },
       "value": {
         "light": "0.05em"
@@ -3823,11 +3823,11 @@
       "token": "typography.font-weight.normal",
       "tier": "semantic",
       "cssVar": "--typography-font-weight-normal",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.font-weight.normal}"
+        "light": "{primitive.typography.font-weight.normal}"
       },
       "value": {
         "light": "400"
@@ -3841,11 +3841,11 @@
       "token": "typography.font-weight.medium",
       "tier": "semantic",
       "cssVar": "--typography-font-weight-medium",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.font-weight.medium}"
+        "light": "{primitive.typography.font-weight.medium}"
       },
       "value": {
         "light": "500"
@@ -3859,11 +3859,11 @@
       "token": "typography.font-weight.semibold",
       "tier": "semantic",
       "cssVar": "--typography-font-weight-semibold",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.font-weight.semibold}"
+        "light": "{primitive.typography.font-weight.semibold}"
       },
       "value": {
         "light": "600"
@@ -3877,11 +3877,11 @@
       "token": "typography.font-weight.bold",
       "tier": "semantic",
       "cssVar": "--typography-font-weight-bold",
-      "type": "font-weight",
+      "type": "fontWeight",
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.font-weight.bold}"
+        "light": "{primitive.typography.font-weight.bold}"
       },
       "value": {
         "light": "700"
@@ -3895,11 +3895,11 @@
       "token": "typography.font-family.sans",
       "tier": "semantic",
       "cssVar": "--typography-font-family-sans",
-      "type": "font-family",
+      "type": "fontFamily",
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.font-family.sans}"
+        "light": "{primitive.typography.font-family.sans}"
       },
       "value": {
         "light": "Geist, sans-serif"
@@ -3914,11 +3914,11 @@
       "token": "typography.font-family.mono",
       "tier": "semantic",
       "cssVar": "--typography-font-family-mono",
-      "type": "font-family",
+      "type": "fontFamily",
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{typography.font-family.mono}"
+        "light": "{primitive.typography.font-family.mono}"
       },
       "value": {
         "light": "JetBrains Mono, monospace"
@@ -3937,7 +3937,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.none}"
+        "light": "{primitive.radius.none}"
       },
       "value": {
         "light": "0rem"
@@ -3957,7 +3957,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.xs}"
+        "light": "{primitive.radius.xs}"
       },
       "value": {
         "light": "0.25rem"
@@ -3977,7 +3977,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.sm}"
+        "light": "{primitive.radius.sm}"
       },
       "value": {
         "light": "0.375rem"
@@ -3997,7 +3997,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.md}"
+        "light": "{primitive.radius.md}"
       },
       "value": {
         "light": "0.5rem"
@@ -4017,7 +4017,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.lg}"
+        "light": "{primitive.radius.lg}"
       },
       "value": {
         "light": "0.625rem"
@@ -4037,7 +4037,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.xl}"
+        "light": "{primitive.radius.xl}"
       },
       "value": {
         "light": "0.875rem"
@@ -4057,7 +4057,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.2xl}"
+        "light": "{primitive.radius.2xl}"
       },
       "value": {
         "light": "1.125rem"
@@ -4077,7 +4077,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.3xl}"
+        "light": "{primitive.radius.3xl}"
       },
       "value": {
         "light": "1.375rem"
@@ -4097,7 +4097,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.4xl}"
+        "light": "{primitive.radius.4xl}"
       },
       "value": {
         "light": "1.625rem"
@@ -4117,7 +4117,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{radius.full}"
+        "light": "{primitive.radius.full}"
       },
       "value": {
         "light": "9999px"
@@ -4137,8 +4137,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{elevation.light.xs}",
-        "dark": "{elevation.dark.xs}"
+        "light": "{primitive.elevation.light.xs}",
+        "dark": "{primitive.elevation.dark.xs}"
       },
       "value": {
         "light": "0 1px 2px rgba(0, 0, 0, 0.04)",
@@ -4159,8 +4159,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{elevation.light.sm}",
-        "dark": "{elevation.dark.sm}"
+        "light": "{primitive.elevation.light.sm}",
+        "dark": "{primitive.elevation.dark.sm}"
       },
       "value": {
         "light": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)",
@@ -4181,8 +4181,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{elevation.light.md}",
-        "dark": "{elevation.dark.md}"
+        "light": "{primitive.elevation.light.md}",
+        "dark": "{primitive.elevation.dark.md}"
       },
       "value": {
         "light": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)",
@@ -4203,8 +4203,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{elevation.light.lg}",
-        "dark": "{elevation.dark.lg}"
+        "light": "{primitive.elevation.light.lg}",
+        "dark": "{primitive.elevation.dark.lg}"
       },
       "value": {
         "light": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)",
@@ -4225,8 +4225,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{elevation.light.xl}",
-        "dark": "{elevation.dark.xl}"
+        "light": "{primitive.elevation.light.xl}",
+        "dark": "{primitive.elevation.dark.xl}"
       },
       "value": {
         "light": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)",
@@ -4247,8 +4247,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{elevation.light.2xl}",
-        "dark": "{elevation.dark.2xl}"
+        "light": "{primitive.elevation.light.2xl}",
+        "dark": "{primitive.elevation.dark.2xl}"
       },
       "value": {
         "light": "0 25px 50px rgba(0, 0, 0, 0.12)",
@@ -4269,8 +4269,8 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{elevation.light.inner}",
-        "dark": "{elevation.dark.inner}"
+        "light": "{primitive.elevation.light.inner}",
+        "dark": "{primitive.elevation.dark.inner}"
       },
       "value": {
         "light": "inset 0 2px 4px rgba(0, 0, 0, 0.05)",
@@ -4291,7 +4291,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.duration.instant}"
+        "light": "{primitive.motion.duration.instant}"
       },
       "value": {
         "light": "0ms"
@@ -4310,7 +4310,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.duration.fast}"
+        "light": "{primitive.motion.duration.fast}"
       },
       "value": {
         "light": "100ms"
@@ -4330,7 +4330,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.duration.normal}"
+        "light": "{primitive.motion.duration.normal}"
       },
       "value": {
         "light": "200ms"
@@ -4350,7 +4350,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.duration.slow}"
+        "light": "{primitive.motion.duration.slow}"
       },
       "value": {
         "light": "300ms"
@@ -4370,7 +4370,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.duration.slower}"
+        "light": "{primitive.motion.duration.slower}"
       },
       "value": {
         "light": "500ms"
@@ -4390,7 +4390,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.duration.extra-slow}"
+        "light": "{primitive.motion.duration.extra-slow}"
       },
       "value": {
         "light": "1000ms"
@@ -4409,7 +4409,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.easing.default}"
+        "light": "{primitive.motion.easing.default}"
       },
       "value": {
         "light": "cubic-bezier(0.4, 0, 0.2, 1)"
@@ -4429,7 +4429,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.easing.in}"
+        "light": "{primitive.motion.easing.in}"
       },
       "value": {
         "light": "cubic-bezier(0.4, 0, 1, 1)"
@@ -4449,7 +4449,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.easing.out}"
+        "light": "{primitive.motion.easing.out}"
       },
       "value": {
         "light": "cubic-bezier(0, 0, 0.2, 1)"
@@ -4469,7 +4469,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{motion.easing.spring}"
+        "light": "{primitive.motion.easing.spring}"
       },
       "value": {
         "light": "cubic-bezier(0.175, 0.885, 0.32, 1.275)"
@@ -4489,10 +4489,10 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{opacity.0-50}"
+        "light": "{primitive.opacity.0-50}"
       },
       "value": {
-        "light": "0.50"
+        "light": "0.5"
       },
       "description": "Opacity for disabled interactive elements. Not for placeholder or overlay use.",
       "docs": {
@@ -4508,10 +4508,10 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{opacity.0-50}"
+        "light": "{primitive.opacity.0-50}"
       },
       "value": {
-        "light": "0.50"
+        "light": "0.5"
       },
       "description": "Opacity for placeholder text. Not for disabled or overlay use.",
       "docs": {
@@ -4527,10 +4527,10 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{opacity.0-80}"
+        "light": "{primitive.opacity.0-80}"
       },
       "value": {
-        "light": "0.80"
+        "light": "0.8"
       },
       "description": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency.",
       "docs": {
@@ -4546,7 +4546,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.dropdown}"
+        "light": "{primitive.zindex.dropdown}"
       },
       "value": {
         "light": "1000"
@@ -4566,7 +4566,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.sticky}"
+        "light": "{primitive.zindex.sticky}"
       },
       "value": {
         "light": "1100"
@@ -4586,7 +4586,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.fixed}"
+        "light": "{primitive.zindex.fixed}"
       },
       "value": {
         "light": "1200"
@@ -4606,7 +4606,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.overlay}"
+        "light": "{primitive.zindex.overlay}"
       },
       "value": {
         "light": "1300"
@@ -4626,7 +4626,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.modal}"
+        "light": "{primitive.zindex.modal}"
       },
       "value": {
         "light": "1400"
@@ -4646,7 +4646,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.popover}"
+        "light": "{primitive.zindex.popover}"
       },
       "value": {
         "light": "1500"
@@ -4666,7 +4666,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.toast}"
+        "light": "{primitive.zindex.toast}"
       },
       "value": {
         "light": "1600"
@@ -4686,7 +4686,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{zindex.tooltip}"
+        "light": "{primitive.zindex.tooltip}"
       },
       "value": {
         "light": "1700"
@@ -4706,7 +4706,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{breakpoint.sm}"
+        "light": "{primitive.breakpoint.sm}"
       },
       "value": {
         "light": "40rem"
@@ -4724,7 +4724,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{breakpoint.md}"
+        "light": "{primitive.breakpoint.md}"
       },
       "value": {
         "light": "48rem"
@@ -4742,7 +4742,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{breakpoint.lg}"
+        "light": "{primitive.breakpoint.lg}"
       },
       "value": {
         "light": "64rem"
@@ -4760,7 +4760,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{breakpoint.xl}"
+        "light": "{primitive.breakpoint.xl}"
       },
       "value": {
         "light": "80rem"
@@ -4778,7 +4778,7 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{breakpoint.2xl}"
+        "light": "{primitive.breakpoint.2xl}"
       },
       "value": {
         "light": "96rem"
@@ -4796,7 +4796,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{border-width.1}"
+        "light": "{primitive.border-width.1}"
       },
       "value": {
         "light": "1px"
@@ -4814,7 +4814,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{border-width.1-5}"
+        "light": "{primitive.border-width.1-5}"
       },
       "value": {
         "light": "1.5px"
@@ -4832,7 +4832,7 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{border-width.2}"
+        "light": "{primitive.border-width.2}"
       },
       "value": {
         "light": "2px"
