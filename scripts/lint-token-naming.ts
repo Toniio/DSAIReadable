@@ -413,20 +413,23 @@ function checkNoExtensionModes(
 function checkOverrides(tokens: Tokens): KeyError[] {
   const semantic = tokens.tiers.semantic.tree
   const errors: KeyError[] = []
-  const typeOf = (path: string) => {
+  const lookup = (path: string) => {
     let node: unknown = semantic
     for (const seg of path.split(".")) {
       if (!node || typeof node !== "object") return undefined
       node = (node as Record<string, unknown>)[seg]
     }
     return node && typeof node === "object" && "$value" in node
-      ? { $type: (node as Record<string, unknown>).$type }
+      ? {
+          $type: (node as Record<string, unknown>).$type,
+          $value: (node as Record<string, unknown>).$value,
+        }
       : undefined
   }
   for (const mode of MODES)
     for (const [key, override] of tokens.overrides[mode]) {
       const where = `${override.file} → ${key}`
-      const target = typeOf(key)
+      const target = lookup(key)
       if (!target) {
         errors.push({
           key: where,
@@ -441,6 +444,18 @@ function checkOverrides(tokens: Tokens): KeyError[] {
         })
       const error = literalError(where, `mode "${mode}"`, override.$value)
       if (error) errors.push(error)
+      if (key.startsWith("color.static."))
+        errors.push({
+          key: where,
+          reason: `color.static.* never has an override: these colors ignore the mode by definition. Remove it.`,
+        })
+      else if (
+        JSON.stringify(override.$value) === JSON.stringify(target.$value)
+      )
+        errors.push({
+          key: where,
+          reason: `The ${mode} context repeats the value of tokens/semantic.json. Remove it: the mode already inherits the default value, and a frozen copy diverges when that value changes.`,
+        })
     }
   return errors
 }

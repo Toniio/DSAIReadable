@@ -2559,12 +2559,10 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.50}",
-        "dark": "{primitive.color.violet.50}"
+        "light": "{primitive.color.violet.50}"
       },
       "value": {
-        "light": "#eef2ff",
-        "dark": "#eef2ff"
+        "light": "#eef2ff"
       },
       "description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
@@ -2669,12 +2667,10 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.500}",
-        "dark": "{primitive.color.mist.500}"
+        "light": "{primitive.color.mist.500}"
       },
       "value": {
-        "light": "#67787c",
-        "dark": "#67787c"
+        "light": "#67787c"
       },
       "description": "Focus ring outline for keyboard accessibility. Not for resting or hover states.",
       "docs": {
@@ -2735,12 +2731,10 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.50}",
-        "dark": "{primitive.color.violet.50}"
+        "light": "{primitive.color.violet.50}"
       },
       "value": {
-        "light": "#eef2ff",
-        "dark": "#eef2ff"
+        "light": "#eef2ff"
       },
       "description": "Icon on a primary action background. Not for icons on neutral surfaces.",
       "docs": {
@@ -2779,12 +2773,10 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.50}",
-        "dark": "{primitive.color.violet.50}"
+        "light": "{primitive.color.violet.50}"
       },
       "value": {
-        "light": "#eef2ff",
-        "dark": "#eef2ff"
+        "light": "#eef2ff"
       },
       "description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
@@ -3121,12 +3113,10 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.500}",
-        "dark": "{primitive.color.mist.500}"
+        "light": "{primitive.color.mist.500}"
       },
       "value": {
-        "light": "#67787c",
-        "dark": "#67787c"
+        "light": "#67787c"
       },
       "description": "Focus ring within the sidebar. Not for main content focus rings.",
       "docs": {
@@ -3231,12 +3221,10 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.0}",
-        "dark": "{primitive.color.mist.0}"
+        "light": "{primitive.color.mist.0}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#ffffff"
+        "light": "#ffffff"
       },
       "description": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies.",
       "docs": {
@@ -3251,12 +3239,10 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.black}",
-        "dark": "{primitive.color.black}"
+        "light": "{primitive.color.black}"
       },
       "value": {
-        "light": "#000000",
-        "dark": "#000000"
+        "light": "#000000"
       },
       "description": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces.",
       "docs": {
@@ -4965,8 +4951,7 @@
         "light": "{color.action.background.foreground}"
       },
       "value": {
-        "light": "#eef2ff",
-        "dark": "#eef2ff"
+        "light": "#eef2ff"
       },
       "description": "shadcn --primary-foreground compatibility alias. Maps the on-action foreground to the shadcn primary-foreground slot."
     },
@@ -5141,8 +5126,7 @@
         "light": "{color.border.focus}"
       },
       "value": {
-        "light": "#67787c",
-        "dark": "#67787c"
+        "light": "#67787c"
       },
       "description": "shadcn --ring compatibility alias. Maps the semantic focus ring to the shadcn ring slot."
     },
@@ -5364,8 +5348,7 @@
         "light": "{color.sidebar.ring}"
       },
       "value": {
-        "light": "#67787c",
-        "dark": "#67787c"
+        "light": "#67787c"
       },
       "description": "shadcn --sidebar-ring compatibility alias. Maps the sidebar focus ring token."
     }
