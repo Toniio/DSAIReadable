@@ -15,7 +15,7 @@ import { resolve } from "node:path"
 
 export const FONTS = "lib/fonts.ts"
 
-export interface LoadedFont {
+interface LoadedFont {
   /** next/font loader, e.g. `JetBrains_Mono`. */
   loader: string
   /** Family it loads: the loader's name with spaces, e.g. `JetBrains Mono`. */

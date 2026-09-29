@@ -82,7 +82,7 @@ The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-a
 | ------------------- | ---------------------------------------------------------------------------- |
 | `tokens-validate`   | `npm run tokens-validate`                                                    |
 | `typecheck`         | `npm run typecheck:all`                                                      |
-| `lint`              | `npm run lint` + `prettier --check`                                          |
+| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `npm run knip`          |
 | `build`             | `npm run build`                                                              |
 | `index-schema`      | `npm run index:validate`                                                     |
 | `spec-sections`     | `npm run specs:validate`                                                     |

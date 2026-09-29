@@ -66,6 +66,7 @@ const STEPS: [string, () => Result][] = [
   ["lint", () => run("npm run -s lint")],
   ["lint:language", () => run("npm run -s lint:language")],
   ["prettier --check", () => run('npx prettier --check "**/*.{ts,tsx,md}"')],
+  ["knip", () => run("npm run -s knip")],
   ["index:validate", () => run("npm run -s index:validate")],
   ["specs:validate", () => run("npm run -s specs:validate")],
   ["registry:check", () => run("npm run -s registry:check")],

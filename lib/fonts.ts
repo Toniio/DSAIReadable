@@ -5,12 +5,12 @@ import { Geist, JetBrains_Mono } from "next/font/google"
  * `--font-<key>`, which `typography.font-family.<key>` describes
  * (tokens:lint-fonts). The root layout puts `fontVariables` on <html>.
  */
-export const fontSans = Geist({
+const fontSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
 })
 
-export const fontMono = JetBrains_Mono({
+const fontMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 })

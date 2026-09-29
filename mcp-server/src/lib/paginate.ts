@@ -1,7 +1,7 @@
 import { z } from "zod"
 
-export const DEFAULT_PAGE_SIZE = 100
-export const MAX_PAGE_SIZE = 200
+const DEFAULT_PAGE_SIZE = 100
+const MAX_PAGE_SIZE = 200
 
 /** The `limit` and `cursor` arguments of a paginated tool. */
 export const pageParams = {

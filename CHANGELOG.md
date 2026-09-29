@@ -13,6 +13,10 @@ section that fits.
 
 ### Added
 
+- `npm run knip`, in `npm run check` and the CI `lint` job: no unused file,
+  export or dependency in the app or in `mcp-server/`. The registry items are
+  its entry points, since consumers install them even when the demo app does
+  not import them.
 - Checks extended: `lint:language` refuses British spellings (the repository
   writes American English), `lint-spec-wording` reads prop descriptions,
   `lint-sizes` follows sizes borrowed from another component (ToggleGroup,
@@ -149,6 +153,8 @@ section that fits.
 
 ### Removed
 
+- The unused `dotenv` dev dependency, the dead `sourceOf` script helper, and
+  the `export` of eleven symbols only their own file uses.
 - The Railway deployment: the MCP server runs locally only
   ([#25](https://github.com/Toniio/DSAIReadable/pull/25)).
 

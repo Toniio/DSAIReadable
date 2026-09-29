@@ -6,11 +6,10 @@
  * writes them.
  */
 
-import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import ts from "typescript"
 
-export interface ApiProp {
+interface ApiProp {
   name: string
   type: string
   /** Default written in the code (destructuring initialiser), if any. */
@@ -21,7 +20,7 @@ export interface ApiProp {
   from?: string
 }
 
-export interface Rendered {
+interface Rendered {
   /** The element that receives the rest props: `<div>`, `SliderPrimitive.Root`… */
   element: string
   /** The prop that swaps the element: `asChild` (Slot) or `as` (tag). */
@@ -399,6 +398,3 @@ export function apiOf(program: ts.Program, file: string): ApiExport[] {
     }
   })
 }
-
-export const sourceOf = (root: string, file: string) =>
-  readFileSync(resolve(root, file), "utf-8")

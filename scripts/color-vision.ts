@@ -15,7 +15,7 @@ const toLinear = (c: number) =>
   c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
 
 /** `#rrggbb` → linear sRGB channels in [0, 1]. */
-export function linearRgb(hex: string): Rgb {
+function linearRgb(hex: string): Rgb {
   const h = hex.replace("#", "")
   return [0, 2, 4].map((i) =>
     toLinear(parseInt(h.slice(i, i + 2), 16) / 255)
@@ -50,7 +50,7 @@ export type Vision = "normal" | keyof typeof MACHADO
 export const VISIONS: Vision[] = ["normal", "protanopia", "deuteranopia"]
 
 /** How a color appears to someone with the given vision. */
-export function simulate(rgb: Rgb, vision: Vision): Rgb {
+function simulate(rgb: Rgb, vision: Vision): Rgb {
   if (vision === "normal") return rgb
   const m = MACHADO[vision]
   return m.map((row) =>
