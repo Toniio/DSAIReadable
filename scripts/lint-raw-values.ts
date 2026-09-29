@@ -2,10 +2,10 @@
 //
 // lint-raw-values.ts
 // Scans components/, app/, src/, hooks/ and lib/ for raw CSS values AND Tailwind utility misuses.
-// Errors:   raw colors, raw layout spacing, raw border-radius, raw durations, raw TW utilities (z-N, duration-N, duration-[X], ease-[X], ring-[X], rounded-[X], text-[size], shadow-[X], arbitrary spacing)
+// Errors:   raw colors, raw layout spacing, raw border-radius, raw durations, raw TW utilities (z-N, duration-N, duration-[X], ease-[X], ring-N, ring, ring-[X], rounded-[X], text-[size], shadow-[X], arbitrary spacing)
 // Warnings: unusual opacity values
 // Respects: allow-raw comments (block or inline) as opt-outs
-// Never exempt: a Primitive token (--ds-prim-*) and a prefers-color-scheme query, whatever the comment says
+// Never exempt: a Primitive token (--ds-prim-*), a prefers-color-scheme query and a raw ring width (ring-N, ring), whatever the comment says
 // Exit 1 on any ERROR.
 //
 
@@ -171,7 +171,18 @@ interface TwRuleDefinition {
   suggest: (match: string) => string
   /** If true, skip matches that use var() or calc() with var() inside brackets */
   allowVarCalc?: boolean
+  /** If true, skip comment lines: the pattern is also an ordinary word */
+  skipComments?: boolean
+  /**
+   * If true, an allow-raw comment does not excuse it: a token form always
+   * exists, and an exemption granted for another value on the same line must
+   * not hide it.
+   */
+  neverExempt?: boolean
 }
+
+const RING_WIDTH_SUGGESTION =
+  "a token width: SURFACE_OUTLINE or SEPARATION_RING (@/lib/surface), FOCUS_RING (@/lib/focus), or ring-(length:--border-width-*) under a variant"
 
 const TW_RULES: TwRuleDefinition[] = [
   // z-index with raw numeric values (z-0 and z-1 are fine for local stacking, z-10/z-20/z-50 etc. are not)
@@ -217,8 +228,27 @@ const TW_RULES: TwRuleDefinition[] = [
     pattern: /\bring-\[([^\]]+)\]/g,
     level: "error",
     category: "tw-ring-arbitrary",
-    suggest: () => "ring-focus (--ring-focus token)",
+    suggest: () => RING_WIDTH_SUGGESTION,
     allowVarCalc: true,
+  },
+  // ring-1, ring-2 … and a bare `ring` — Tailwind compiles them to fixed
+  // pixel widths, so a surface outlined with one ignores border-width.default
+  // when a field's border follows it. ring-0 is a reset and stays allowed.
+  {
+    pattern: /(?<![\w-])ring-([1-9]\d*)(?![\w.-])/g,
+    level: "error",
+    category: "tw-ring-width-raw",
+    suggest: () => RING_WIDTH_SUGGESTION,
+    skipComments: true,
+    neverExempt: true,
+  },
+  {
+    pattern: /(?<=^|[\s"'`:])ring(?=[\s"'`]|$)/g,
+    level: "error",
+    category: "tw-ring-width-raw",
+    suggest: () => RING_WIDTH_SUGGESTION,
+    skipComments: true,
+    neverExempt: true,
   },
   // min-[600px]:, max-[900px]: — arbitrary viewport breakpoints. The
   // responsive prefixes are the contract (specs/foundations/breakpoints.md);
@@ -512,10 +542,10 @@ function scanFile(filePath: string): {
       }
     }
 
-    if (isExempt(lines, i)) continue
+    const exempt = isExempt(lines, i)
 
     // CSS property rules — apply everywhere
-    for (const rule of CSS_RULES) {
+    for (const rule of exempt ? [] : CSS_RULES) {
       const regex = new RegExp(rule.pattern.source, rule.pattern.flags)
       let match: RegExpExecArray | null
       while ((match = regex.exec(line)) !== null) {
@@ -533,6 +563,7 @@ function scanFile(filePath: string): {
 
     // Tailwind utility rules — only in className-like contexts
     for (const rule of TW_RULES) {
+      if (!rule.neverExempt && exempt) continue
       const regex = new RegExp(rule.pattern.source, rule.pattern.flags)
       let match: RegExpExecArray | null
       while ((match = regex.exec(line)) !== null) {
@@ -547,6 +578,8 @@ function scanFile(filePath: string): {
           const num = parseInt(match[1], 10)
           if (num === 0) continue
         }
+
+        if (rule.skipComments && isCommentLine(line)) continue
 
         // Skip when the bracket only reads a token, makes no arithmetic
         if (rule.allowVarCalc && match[1] && isPureTokenRead(match[1])) continue

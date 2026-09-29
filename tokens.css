@@ -199,6 +199,7 @@
 
   /* border-width */
   --ds-prim-border-width-1:   1px;
+  --ds-prim-border-width-2:   2px;
   --ds-prim-border-width-1-5: 1.5px;
 }
 
@@ -371,6 +372,7 @@
   /* border-width */
   --border-width-default:         var(--ds-prim-border-width-1);
   --border-width-chart-indicator: var(--ds-prim-border-width-1-5);
+  --border-width-separation:      var(--ds-prim-border-width-2);
 }
 
 /* ── Layer 2 · Semantic — dark mode overrides ─────────────── */

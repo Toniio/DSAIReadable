@@ -992,6 +992,14 @@
     "status": "active"
   },
   {
+    "path": "border-width.separation",
+    "value_light": "{border-width.2}",
+    "value_dark": "{border-width.2}",
+    "css_variable": "--border-width-separation",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
     "path": "shadcn.background",
     "value_light": "{color.background.default}",
     "value_dark": "{color.background.default}",

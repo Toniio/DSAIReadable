@@ -62,6 +62,7 @@ A general-purpose modal window that shows interactive content — a form, detail
 
 | Token                            | Classes and variables                                                | Where                                                                                                               |
 | -------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`           | `ring-(length:--border-width-default)`                               | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                         |
 | `color.background.elevated`      | `bg-popover`                                                         | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                         |
 | `color.static.black`             | `bg-black/10`                                                        | `DialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                               |
 | `color.text.default`             | `ring-foreground/10` · `text-foreground` · `text-popover-foreground` | `DialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`) · `DialogDescription`                                   |

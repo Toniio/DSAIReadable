@@ -13,7 +13,11 @@
       "source": "border-width.md"
     },
     {
-      "rule": "❌ Never hard-code a width: `border-2`, `border-[1.5px]`, `border-(length:3px)` — `npm run tokens:lint-values` rejects them",
+      "rule": "✅ Outline a surface with `SURFACE_OUTLINE`, and write `ring-(length:--border-width-default)` under a variant (`group-data-[variant=floating]:`)",
+      "source": "border-width.md"
+    },
+    {
+      "rule": "❌ Never hard-code a width: `border-2`, `border-[1.5px]`, `border-(length:3px)`, `ring-1`, `ring` — `npm run tokens:lint-values` rejects them",
       "source": "border-width.md"
     },
     {

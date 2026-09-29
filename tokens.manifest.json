@@ -1,5 +1,5 @@
 {
-  "tokenCount": 303,
+  "tokenCount": 305,
   "tokens": [
     {
       "token": "color.mist.0",
@@ -2319,6 +2319,22 @@
         "light": "1px"
       },
       "description": "Hairline border width.",
+      "private": true
+    },
+    {
+      "token": "border-width.2",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-border-width-2",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "2px"
+      },
+      "value": {
+        "light": "2px"
+      },
+      "description": "Double hairline; wide enough to read as a gap between overlapping elements.",
       "private": true
     },
     {
@@ -4806,6 +4822,24 @@
       "description": "Stroke of the dashed series indicator in chart tooltips. Not for component borders.",
       "docs": {
         "tailwind": "border-chart-indicator"
+      }
+    },
+    {
+      "token": "border-width.separation",
+      "tier": "semantic",
+      "cssVar": "--border-width-separation",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{border-width.2}"
+      },
+      "value": {
+        "light": "2px"
+      },
+      "description": "Ring painted in the background color around an element that overlaps another, cutting it out: stacked avatars, an avatar's badge. Not for borders or focus rings.",
+      "docs": {
+        "tailwind": "ring-(length:--border-width-separation)"
       }
     },
     {

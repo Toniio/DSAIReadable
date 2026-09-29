@@ -1,3 +1,5 @@
+import { SURFACE_OUTLINE } from "@/lib/surface"
+
 /**
  * Class bases shared by the modal surfaces.
  *
@@ -18,8 +20,7 @@ export const OVERLAY_BASE =
   "fixed inset-0 z-modal bg-black/10 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0"
 
 /** A surface centered in the viewport that zooms in: Dialog, AlertDialog. */
-export const MODAL_CONTENT_BASE =
-  "fixed top-1/2 left-1/2 z-modal grid w-full -translate-x-1/2 -translate-y-1/2 gap-4 rounded-none bg-popover p-4 text-popover-foreground ring-1 ring-foreground/10 duration-fast data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95"
+export const MODAL_CONTENT_BASE = `fixed top-1/2 left-1/2 z-modal grid w-full -translate-x-1/2 -translate-y-1/2 gap-4 rounded-none bg-popover p-4 text-popover-foreground ${SURFACE_OUTLINE} ring-foreground/10 duration-fast data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95`
 
 /** A panel pinned to one edge of the viewport: Sheet, Drawer. */
 export const SIDE_PANEL_CONTENT_BASE =

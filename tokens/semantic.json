@@ -1699,6 +1699,17 @@
         },
         "status": "active"
       }
+    },
+    "separation": {
+      "$value": "{border-width.2}",
+      "$type": "dimension",
+      "$description": "Ring painted in the background color around an element that overlaps another, cutting it out: stacked avatars, an avatar's badge. Not for borders or focus rings.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "ring-(length:--border-width-separation)"
+        },
+        "status": "active"
+      }
     }
   }
 }

@@ -61,6 +61,7 @@ A blocking modal that stops the user to confirm or cancel a critical action.
 
 | Token                            | Classes and variables                                                | Where                                                                                                                         |
 | -------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`           | `ring-(length:--border-width-default)`                               | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                              |
 | `color.background.elevated`      | `bg-popover`                                                         | `AlertDialogContent` via `MODAL_CONTENT_BASE` (`lib/overlay.ts`)                                                              |
 | `color.background.subtle`        | `bg-muted`                                                           | `AlertDialogMedia`                                                                                                            |
 | `color.static.black`             | `bg-black/10`                                                        | `AlertDialogOverlay` via `OVERLAY_BASE` (`lib/overlay.ts`)                                                                    |

@@ -995,6 +995,12 @@
       "$type": "dimension",
       "$private": true,
       "$description": "Between hairline and 2px; reads as a solid stroke on small marks."
+    },
+    "2": {
+      "$value": "2px",
+      "$type": "dimension",
+      "$private": true,
+      "$description": "Double hairline; wide enough to read as a gap between overlapping elements."
     }
   }
 }

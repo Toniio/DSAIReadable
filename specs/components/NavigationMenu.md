@@ -55,6 +55,7 @@ Primary navigation that organizes the site's links into categories, with drop-do
 
 | Token                           | Classes and variables                            | Where                                                                                                                   |
 | ------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `border-width.default`          | `ring-(length:--border-width-default)`           | `NavigationMenuContent` · `NavigationMenuViewport` via `SURFACE_OUTLINE` (`lib/surface.ts`)                             |
 | `color.background.elevated`     | `bg-popover`                                     | `NavigationMenuContent` · `NavigationMenuViewport`                                                                      |
 | `color.background.subtle`       | `bg-muted` · `bg-muted/50`                       | `NavigationMenuLink` · `navigationMenuTriggerStyle`                                                                     |
 | `color.border.default`          | `bg-border`                                      | `NavigationMenuIndicator`                                                                                               |
