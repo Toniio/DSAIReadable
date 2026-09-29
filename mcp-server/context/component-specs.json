@@ -2465,7 +2465,7 @@
       {
         "component": "Calendar",
         "prop": "`classNames`",
-        "type": "`Partial<ClassNames> & Partial<DeprecatedUI<string>>`",
+        "type": "`Partial<ClassNames>`",
         "default": "—",
         "description": "Overrides `react-day-picker`'s internal classes"
       },

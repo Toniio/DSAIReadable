@@ -84,7 +84,7 @@ Renders `DayPicker`.
 | `showOutsideDays` | `boolean`                                                                     | `true`    | Shows the days of the previous and next months         |
 | `buttonVariant`   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"ghost"` | Visual variant of the navigation buttons               |
 | `className`       | `string`                                                                      | —         | Additional CSS classes on the container                |
-| `classNames`      | `Partial<ClassNames> & Partial<DeprecatedUI<string>>`                         | —         | Overrides `react-day-picker`'s internal classes        |
+| `classNames`      | `Partial<ClassNames>`                                                         | —         | Overrides `react-day-picker`'s internal classes        |
 | `locale`          | `Partial<DayPickerLocale>`                                                    | —         | Locale used to format dates and months                 |
 | `formatters`      | `Partial<Formatters>`                                                         | —         | Custom formatting functions                            |
 | `components`      | `Partial<CustomComponents>`                                                   | —         | Overrides the internal sub-components                  |

@@ -43,6 +43,15 @@ section that fits.
 - Tooling: ESLint 10. `eslint-plugin-react` reads the installed React version
   instead of detecting it, which relies on an API ESLint 10 removed; the unused
   `@eslint/eslintrc` is removed.
+- **Breaking** — `Calendar` runs on react-day-picker 10. Its own props and its
+  rendering are unchanged, but it passes every `DayPicker` prop through, so the
+  props react-day-picker 10 removed are gone from `Calendar` too: `fromDate`,
+  `toDate`, `fromMonth`, `toMonth`, `fromYear`, `toYear` (use `startMonth`,
+  `endMonth` and `hidden`), `initialFocus` (use `autoFocus`),
+  `onWeekNumberClick`, the `onDayKeyUp`/`onDayKeyPress`/`onDayPointer*`/
+  `onDayTouch*` handlers, the `formatMonthCaption`/`formatYearCaption`
+  formatters, the `labelDay` label, `components.Button` and the deprecated
+  `classNames` keys. See the [upgrade guide](https://daypicker.dev/upgrading).
 - The whole repository is written in native English
   ([#21](https://github.com/Toniio/DSAIReadable/pull/21),
   [#22](https://github.com/Toniio/DSAIReadable/pull/22),
