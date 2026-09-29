@@ -8,13 +8,18 @@
  * has to be declared here explicitly — it cannot be derived from the token
  * files alone.
  *
+ * A pair is checked as it renders, not as two tokens: a `bg-<role>/<n>` tint
+ * is composited onto the surface under it, and a `text-<role>/<n>` label onto
+ * that result. Checking only the solid pair let `text-destructive` on
+ * `bg-destructive/10` ship at 3.99:1 while this lint was green (P3-17).
+ *
  *   npx tsx scripts/lint-contrast.ts
  */
 
 import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { luminance } from "./wcag.js"
+import { blend, luminance } from "./wcag.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -88,7 +93,49 @@ type Pair = {
   /** 4.5 for body text, 3.0 for UI components and graphical objects (WCAG 1.4.11). */
   threshold: 3 | 4.5
   modes?: Mode[]
+  /** A translucent layer painted over `bg`, as Tailwind's `bg-<role>/<n>`. */
+  tint?: { color: string; alpha: number }
+  /** The opacity of the foreground itself, as Tailwind's `text-<role>/<n>`. */
+  fgAlpha?: number
 }
+
+/** The surfaces a component may be placed on: page, card, popover. */
+const SURFACES = [
+  ["color.background.default", "default surface"],
+  ["color.background.subtle", "card"],
+  ["color.background.elevated", "popover"],
+] as const
+
+type Surface = (typeof SURFACES)[number][0]
+
+/**
+ * One pair per surface and per tint opacity, for a label painted on a tint of
+ * its own role. `alphas` lists the opacities each mode renders — rest, then
+ * hover or focus — because the `dark:` classes use heavier tints.
+ */
+function tinted(
+  label: string,
+  fg: string,
+  tint: string,
+  alphas: Record<Mode, number[]>,
+  surfaces: readonly Surface[] = SURFACES.map(([path]) => path)
+): Pair[] {
+  return SURFACES.filter(([path]) => surfaces.includes(path)).flatMap(
+    ([bg, surface]) =>
+      MODES.flatMap((mode) =>
+        alphas[mode].map((alpha) => ({
+          label: `${label} on a ${Math.round(alpha * 100)}% tint over the ${surface}`,
+          fg,
+          bg,
+          tint: { color: tint, alpha },
+          threshold: 4.5 as const,
+          modes: [mode],
+        }))
+      )
+  )
+}
+
+const MODES: Mode[] = ["light", "dark"]
 
 const PAIRS: Pair[] = [
   // Focus indicators — non-text contrast against the surface they sit on.
@@ -180,9 +227,64 @@ const PAIRS: Pair[] = [
     bg: "color.sidebar.background",
     threshold: 4.5,
   },
-]
 
-const MODES: Mode[] = ["light", "dark"]
+  // Destructive text (`text-destructive`) on neutral surfaces: FieldError, an
+  // invalid field label, the destructive Alert, a menu item at rest.
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `destructive text on the ${surface}`,
+    fg: "color.text.destructive.default",
+    bg,
+    threshold: 4.5 as const,
+  })),
+  {
+    label: "destructive Alert description (text-destructive/90) on the card",
+    fg: "color.text.destructive.default",
+    fgAlpha: 0.9,
+    bg: "color.background.subtle",
+    threshold: 4.5,
+  },
+
+  // Text on a tint of its own role — the inventory of every `text-<role>` set
+  // on a `bg-<role>/<n>` across components/ui. Tints of another role (a
+  // neutral label on `bg-muted/50` or `bg-input/30`) are not listed: those
+  // only move a neutral surface one step, never towards the label's colour.
+  //   Button   destructive  /10 → /20 on hover, dark /20 → /30
+  ...tinted(
+    "destructive Button label",
+    "color.text.destructive.default",
+    "color.feedback.error.default",
+    { light: [0.1, 0.2], dark: [0.2, 0.3] }
+  ),
+  //   Badge    destructive  /10 → /20 as a hovered link, dark /20
+  ...tinted(
+    "destructive Badge label",
+    "color.text.destructive.default",
+    "color.feedback.error.default",
+    { light: [0.1, 0.2], dark: [0.2] }
+  ),
+  //   DropdownMenuItem, ContextMenuItem, MenubarItem  destructive, focused:
+  //   /10, dark /20, inside a popover
+  ...tinted(
+    "focused destructive menu item",
+    "color.text.destructive.default",
+    "color.feedback.error.default",
+    { light: [0.1], dark: [0.2] },
+    ["color.background.elevated"]
+  ),
+  //   Kbd inside a Tooltip  `text-background` on `bg-background/20`, dark /10,
+  //   over the tooltip's `bg-foreground`
+  ...MODES.map((mode) => ({
+    label: "Kbd inside a Tooltip",
+    fg: "color.background.default",
+    bg: "color.text.default",
+    tint: {
+      color: "color.background.default",
+      alpha: mode === "light" ? 0.2 : 0.1,
+    },
+    threshold: 4.5 as const,
+    modes: [mode],
+  })),
+]
 
 let failures = 0
 let checked = 0
@@ -190,15 +292,22 @@ let checked = 0
 for (const pair of PAIRS) {
   for (const mode of pair.modes ?? MODES) {
     checked++
-    const fg = resolveColor(pair.fg, mode)
-    const bg = resolveColor(pair.bg, mode)
+    const surface = resolveColor(pair.bg, mode)
+    const bg = pair.tint
+      ? blend(resolveColor(pair.tint.color, mode), pair.tint.alpha, surface)
+      : surface
+    const solid = resolveColor(pair.fg, mode)
+    const fg = pair.fgAlpha ? blend(solid, pair.fgAlpha, bg) : solid
     const value = ratio(fg, bg)
     const pass = value >= pair.threshold
     if (!pass) failures++
     const mark = pass ? "✅" : "❌"
     const line = `${mark} ${mode.padEnd(5)} ${value.toFixed(2).padStart(5)} / ${pair.threshold}  ${pair.label}`
+    const under = pair.tint
+      ? `${pair.tint.color} at ${pair.tint.alpha} over ${pair.bg} = ${bg}`
+      : `${pair.bg} = ${bg}`
     if (pass) console.log(line)
-    else console.error(`${line}\n     ${pair.fg} = ${fg} on ${pair.bg} = ${bg}`)
+    else console.error(`${line}\n     ${pair.fg} = ${fg} on ${under}`)
   }
 }
 

@@ -29,8 +29,10 @@
   --ds-prim-color-violet-700: #372aac;
 
   /* color · red */
+  --ds-prim-color-red-300: #ffa2a2;
   --ds-prim-color-red-500: #ff6467;
   --ds-prim-color-red-600: #e7000b;
+  --ds-prim-color-red-800: #9f0712;
 
   /* color · green */
   --ds-prim-color-green-200: #bbf451;
@@ -215,7 +217,7 @@
   --color-text-inverse:             var(--ds-prim-color-mist-0);
   --color-text-action-default:      var(--ds-prim-color-violet-600);
   --color-text-action-on:           var(--ds-prim-color-violet-50);
-  --color-text-destructive-default: var(--ds-prim-color-red-600);
+  --color-text-destructive-default: var(--ds-prim-color-red-800);
 
   /* color · border */
   --color-border-default: var(--ds-prim-color-mist-200);
@@ -384,7 +386,7 @@
   --color-text-inverse:             var(--ds-prim-color-mist-950);
   --color-text-action-default:      var(--ds-prim-color-violet-400);
   --color-text-action-on:           var(--ds-prim-color-violet-50);
-  --color-text-destructive-default: var(--ds-prim-color-red-500);
+  --color-text-destructive-default: var(--ds-prim-color-red-300);
 
   --color-border-default: var(--ds-prim-color-white-alpha-10);
   --color-border-subtle:  var(--ds-prim-color-white-alpha-10);

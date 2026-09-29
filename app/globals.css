@@ -36,6 +36,10 @@
   --color-accent-foreground: var(--color-text-default);
   --color-destructive: var(--color-feedback-error-default);
   --color-destructive-foreground: var(--color-feedback-error-foreground);
+  /* text-destructive reads the text token, not the fill: Tailwind looks up
+     --text-color-* before --color-*, so bg-destructive and border-destructive
+     keep the error fill while every destructive label stays at 4.5:1. */
+  --text-color-destructive: var(--color-text-destructive-default);
   --color-border: var(--color-border-default);
   --color-input: var(--color-border-input);
   --color-ring: var(--color-border-focus);

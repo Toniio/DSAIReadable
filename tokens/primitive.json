@@ -110,6 +110,12 @@
       }
     },
     "red": {
+      "300": {
+        "$value": "#ffa2a2",
+        "$type": "color",
+        "$private": true,
+        "$description": "Light red, destructive text in dark mode, legible on a destructive tint."
+      },
       "500": {
         "$value": "#ff6467",
         "$type": "color",
@@ -121,6 +127,12 @@
         "$type": "color",
         "$private": true,
         "$description": "Deep red, destructive in light mode."
+      },
+      "800": {
+        "$value": "#9f0712",
+        "$type": "color",
+        "$private": true,
+        "$description": "Dark red, destructive text in light mode, legible on a destructive tint."
       }
     },
     "green": {

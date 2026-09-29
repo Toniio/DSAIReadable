@@ -187,21 +187,21 @@
       },
       "destructive": {
         "default": {
-          "$value": "{color.red.600}",
+          "$value": "{color.red.800}",
           "$type": "color",
-          "$description": "Error, danger, or destructive action text. Not for general warning or informational text.",
+          "$description": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text.",
           "$extensions": {
             "modes": {
               "dark": {
-                "$value": "{color.red.500}"
+                "$value": "{color.red.300}"
               }
             },
             "docs": {
-              "description": "Destructive or error-state text.",
-              "do": "Use for error validation messages and deletion confirmations.",
-              "dont": "Do not use for warnings or information — it is reserved for critical errors."
+              "description": "Destructive or error-state text and icons — the class `text-destructive`. Darker than `color.feedback.error.default` in light mode and lighter in dark mode, so it stays at 4.5:1 or more on every surface and on the `bg-destructive/10`–`/30` tints.",
+              "do": "Use for error validation messages, destructive button and badge labels, and destructive menu items.",
+              "dont": "Do not use for warnings or information — it is reserved for critical errors. Do not use `color.feedback.error.default` for text: on a card or a destructive tint it falls below 4.5:1."
             },
-            "status": "reserved"
+            "status": "active"
           }
         }
       }
@@ -381,7 +381,7 @@
         "default": {
           "$value": "{color.red.600}",
           "$type": "color",
-          "$description": "Error state color for backgrounds, icons, and borders. Not for warnings or success states.",
+          "$description": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states.",
           "$extensions": {
             "modes": {
               "dark": {
@@ -389,9 +389,9 @@
               }
             },
             "docs": {
-              "description": "Error-state color — background, icon, border.",
-              "do": "Use for validation messages, the borders of invalid fields and error icons.",
-              "dont": "Do not use for warnings or success states."
+              "description": "Error-state fill — solid or tinted background, border, focus ring.",
+              "do": "Use for the borders and rings of invalid fields and for the `bg-destructive/10`–`/30` tints.",
+              "dont": "Do not use for text or icons — use `color.text.destructive.default` (`text-destructive`). Do not use for warnings or success states."
             },
             "status": "active"
           }

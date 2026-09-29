@@ -73,6 +73,10 @@
       "source": "color.md"
     },
     {
+      "rule": "✅ `text.destructive.default` for every destructive label, including on a `bg-destructive/10`–`/30` tint: it is darker than the error fill in light mode and lighter in dark mode, so it stays at 4.5:1 or more on the page, a card and a popover.",
+      "source": "color.md"
+    },
+    {
       "rule": "✅ `border.input` for every `<input>`, `<select>` and `<textarea>` border.",
       "source": "color.md"
     },
@@ -105,7 +109,11 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ Use them for validation error messages and for the borders of invalid fields.",
+      "rule": "✅ Use `feedback.error.default` for the borders and rings of invalid fields and for the `bg-destructive/10`–`/30` tints.",
+      "source": "color.md"
+    },
+    {
+      "rule": "❌ Do not use `feedback.error.default` for text or icons: on a card it drops to 4.28:1, and to 3.00:1 on a card under a 20% tint. Text goes through `text.destructive.default` (`text-destructive`).",
       "source": "color.md"
     },
     {

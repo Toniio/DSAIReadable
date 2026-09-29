@@ -34,7 +34,7 @@
 | `color.text.inverse`             | `--color-text-inverse`             | mist.0     | mist.950   | Text on an inverse surface (a dark background in light mode) |
 | `color.text.action.default`      | `--color-text-action-default`      | violet.600 | violet.400 | Links, primary action labels                                 |
 | `color.text.action.on`           | `--color-text-action-on`           | violet.50  | violet.50  | Text on an `action.background.default` background            |
-| `color.text.destructive.default` | `--color-text-destructive-default` | red.600    | red.500    | Error messages, destructive actions                          |
+| `color.text.destructive.default` | `--color-text-destructive-default` | red.800    | red.300    | Error messages, destructive labels, on a surface or a tint   |
 
 **Do / Don't:**
 
@@ -42,6 +42,7 @@
 - ❌ Do not dim `text.default` with opacity to fake `text.subtle` — use the dedicated token.
 - ✅ `text.action.on` only on a `color.action.background.default` background.
 - ❌ Do not use `text.destructive.default` for warnings — it is reserved for errors.
+- ✅ `text.destructive.default` for every destructive label, including on a `bg-destructive/10`–`/30` tint: it is darker than the error fill in light mode and lighter in dark mode, so it stays at 4.5:1 or more on the page, a card and a popover.
 
 ---
 
@@ -96,12 +97,13 @@
 
 | Token                             | CSS Variable                        | Light   | Dark     | Usage                                            |
 | --------------------------------- | ----------------------------------- | ------- | -------- | ------------------------------------------------ |
-| `color.feedback.error.default`    | `--color-feedback-error-default`    | red.600 | red.500  | Background, icon or border of an error state     |
+| `color.feedback.error.default`    | `--color-feedback-error-default`    | red.600 | red.500  | Fill, tint, border or ring of an error state     |
 | `color.feedback.error.foreground` | `--color-feedback-error-foreground` | mist.0  | mist.950 | Text or icon placed **on** a solid error surface |
 
 **Do / Don't:**
 
-- ✅ Use them for validation error messages and for the borders of invalid fields.
+- ✅ Use `feedback.error.default` for the borders and rings of invalid fields and for the `bg-destructive/10`–`/30` tints.
+- ❌ Do not use `feedback.error.default` for text or icons: on a card it drops to 4.28:1, and to 3.00:1 on a card under a 20% tint. Text goes through `text.destructive.default` (`text-destructive`).
 - ✅ On a solid error background, always use `color.feedback.error.foreground` (shadcn alias `--destructive-foreground`).
 - ❌ Do not use them for warnings or successes — dedicated tokens will be added.
 - ❌ Never put hard-coded white on an error surface: in dark mode, white on red.500 drops to 2.89:1.
@@ -210,6 +212,7 @@ these utility classes:
 | `text-muted-foreground` | `color.text.subtle`                                      |
 | `text-primary`          | `color.text.action.default` (through the shadcn mapping) |
 | `text-destructive`      | `color.text.destructive.default`                         |
+| `bg-destructive`        | `color.feedback.error.default`                           |
 | `border-border`         | `color.border.default`                                   |
 | `border-input`          | `color.border.input`                                     |
 | `ring-ring`             | `color.border.focus`                                     |
@@ -223,7 +226,7 @@ these utility classes:
 3. **Follow the surface hierarchy**: `default` → `subtle` → `elevated`. A card is `subtle`, a popover is `elevated`.
 4. **Always test both modes** — every component must be checked in light AND dark before it ships.
 5. **Accessibility first** — the minimum contrast ratio is 4.5:1 (WCAG AA) for body text, and 3:1 for large text and UI components.
-6. **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lint-contrast.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. Fix the token, never the threshold.
+6. **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lint-contrast.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.
 
 ## Measured contrast
 
@@ -241,7 +244,13 @@ WCAG 2.x ratios of the pairs under watch, as of the fix of the 6 failures on 202
 | `action.background.foreground` on `action.background.default` | 7.24  | 8.99  | 4.5       |
 | `feedback.error.foreground` on `feedback.error.default`       | 4.77  | 6.83  | 4.5       |
 | `sidebar.primary.on` on `sidebar.primary.default`             | 5.78  | 4.58  | 4.5       |
+| `text.destructive.default` on the card                        | 7.50  | 7.71  | 4.5       |
+| `text.destructive.default` on the weakest destructive tint    | 5.25  | 4.90  | 4.5       |
 
 Primitive steps added to get there: **`mist.600`** (`#607175`), **`mist.700`**
 (`#424f52`, which fills the 500 → 800 gap and keeps the scale monotonic) and
-**`violet.400`** (`#6e6cff`).
+**`violet.400`** (`#6e6cff`). The destructive rows date from 2026-09-29: the
+labels had been measured only against the solid fill, and read at 3.00:1 on a
+card under the hover tint. **`red.800`** (`#9f0712`) and **`red.300`**
+(`#ffa2a2`) keep the hue and give the text its own token; the weakest tint is
+the 20% hover tint over a card in light mode and the 30% one in dark mode.
