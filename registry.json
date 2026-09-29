@@ -696,7 +696,7 @@
       "description": "An interactive date picker built on `react-day-picker`: single, multiple or range selection, with month-by-month navigation.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "react-day-picker@^9.14.0"
+        "react-day-picker@^10.0.1"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/button",
