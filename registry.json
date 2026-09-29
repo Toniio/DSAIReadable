@@ -10,7 +10,7 @@
       "description": "Tokens, dark mode and the shared helpers (cn(), focus ring, UI strings, modal surface classes) every component in this registry expects. Install it first.",
       "dependencies": [
         "clsx@^2.1.1",
-        "tailwind-merge@^3.5.0"
+        "tailwind-merge@^3.7.0"
       ],
       "files": [
         {
@@ -503,7 +503,7 @@
       "description": "A vertical stack of collapsible panels that shows and hides sections of content.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -524,7 +524,7 @@
       "title": "AlertDialog",
       "description": "A blocking modal that stops the user to confirm or cancel a critical action.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/button",
@@ -567,7 +567,7 @@
       "title": "AspectRatio",
       "description": "A container that locks its content — an image, a video, an embedded map — to a fixed width-to-height ratio.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "files": [
         {
@@ -585,7 +585,7 @@
       "title": "Avatar",
       "description": "A visual stand-in for a person or an entity — a photo, initials or an icon — with support for groups and status badges.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -607,7 +607,7 @@
       "description": "A compact label that categorizes an element, marks its status or highlights a piece of metadata.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -629,7 +629,7 @@
       "description": "Secondary navigation that shows the path to the current page, so the user can climb back up the hierarchy.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -651,7 +651,7 @@
       "description": "A container that visually joins adjacent buttons, inputs or selects by merging their borders and corners.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system",
@@ -674,7 +674,7 @@
       "description": "Triggers a primary or secondary action; comes in several visual variants and sizes.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -759,7 +759,7 @@
       "title": "Chart",
       "description": "A container and a set of helpers for data visualization, built on `recharts`: theming, tooltips and a legend, all configured through a `ChartConfig` object.",
       "dependencies": [
-        "recharts@^3.8.0"
+        "recharts@^3.10.1"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -781,7 +781,7 @@
       "description": "A two-state (or indeterminate) checkbox for selecting an option in a form, built on Radix `Checkbox.Root`.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -802,7 +802,7 @@
       "title": "Collapsible",
       "description": "A disclosure: a trigger that shows or hides one section of content.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "files": [
         {
@@ -820,7 +820,7 @@
       "title": "Combobox",
       "description": "A text input with autocomplete that picks from a filterable list of options; supports single and multiple selection (chips).",
       "dependencies": [
-        "@base-ui/react@^1.4.1",
+        "@base-ui/react@^1.8.0",
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
@@ -869,7 +869,7 @@
       "description": "A menu opened with a right-click that lists the actions relevant to the element under the pointer.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -891,7 +891,7 @@
       "description": "A general-purpose modal window that shows interactive content — a form, details, a confirmation — above the main interface.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/button",
@@ -913,7 +913,7 @@
       "title": "Direction",
       "description": "A context provider that passes the reading direction (LTR / RTL) down to every child component.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "files": [
         {
@@ -953,7 +953,7 @@
       "description": "A menu opened by clicking a button, listing actions or selection options.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1039,7 +1039,7 @@
       "title": "HoverCard",
       "description": "A floating preview card that appears when the pointer rests on an element and shows extra information without a click.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1103,7 +1103,7 @@
       "description": "A segmented input for one-time passcodes (OTP), with automatic movement between slots and an animated caret.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "input-otp@^1.4.2"
+        "input-otp@^1.5.0"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1143,7 +1143,7 @@
       "description": "A composable row that stands for one entry in a list, with slots for media, a title, a description, actions, and header and footer sections.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system",
@@ -1183,7 +1183,7 @@
       "title": "Label",
       "description": "An accessible label tied to a form control, built on Radix `Label.Root`.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1223,7 +1223,7 @@
       "description": "A horizontal bar of drop-down menus, with submenus, checkable items, radio groups and keyboard shortcuts.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1267,7 +1267,7 @@
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1332,7 +1332,7 @@
       "title": "Popover",
       "description": "An interactive floating container opened by a click, for rich content — a form, a picker, a preview — without leaving the current context.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1353,7 +1353,7 @@
       "title": "Progress",
       "description": "A linear progress bar that shows how far an operation or a process has gone, built on the Radix UI `Progress` primitive.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1374,7 +1374,7 @@
       "title": "RadioGroup",
       "description": "A group of radio buttons for picking exactly one option out of several.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1395,7 +1395,7 @@
       "title": "Resizable",
       "description": "Resizable panels: an area split into sections the user adjusts by dragging the handles between them.",
       "dependencies": [
-        "react-resizable-panels@^4.10.0"
+        "react-resizable-panels@^4.13.3"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1416,7 +1416,7 @@
       "title": "ScrollArea",
       "description": "A scroll container with styled scrollbars that replace the browser's native ones.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1438,7 +1438,7 @@
       "description": "A styled drop-down built on Radix for picking one option from a list, with automatic positioning and option groups.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1459,7 +1459,7 @@
       "title": "Separator",
       "description": "A horizontal or vertical rule that divides sections of content, built on Radix `Separator`.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1481,7 +1481,7 @@
       "description": "A panel that slides in from the side (or from the top or bottom) over the interface, built on Radix Dialog, to show longer content without leaving the page.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/button",
@@ -1505,7 +1505,7 @@
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/button",
@@ -1554,7 +1554,7 @@
       "title": "Slider",
       "description": "A slider that picks a numeric value (or a range) within set bounds, horizontally or vertically.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1577,7 +1577,7 @@
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "next-themes@^0.4.6",
-        "sonner@^2.0.7"
+        "sonner@^2.0.8"
       ],
       "files": [
         {
@@ -1616,7 +1616,7 @@
       "title": "Switch",
       "description": "A toggle switch that turns a two-state setting on or off, with immediate visual feedback.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1656,7 +1656,7 @@
       "description": "Tabbed navigation that switches between mutually exclusive content panels; horizontal or vertical, in a default or a line style.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1696,7 +1696,7 @@
       "description": "A group of toggle buttons — exclusive or multi-select — built on Radix ToggleGroup, sharing one variant and size through context.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system",
@@ -1719,7 +1719,7 @@
       "description": "A two-state (pressed / not pressed) toggle button in several variants and sizes; its variants are exported for reuse (by `ToggleGroup`, for example).",
       "dependencies": [
         "class-variance-authority@^0.7.1",
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
@@ -1740,7 +1740,7 @@
       "title": "Tooltip",
       "description": "A small contextual label that appears when a trigger is hovered or focused, built on Radix Tooltip.",
       "dependencies": [
-        "radix-ui@^1.4.3"
+        "radix-ui@^1.6.7"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"

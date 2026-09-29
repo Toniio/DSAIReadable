@@ -46,8 +46,7 @@ function* walk(
     if ("$value" in obj) {
       const modes = (
         obj.$extensions as
-          | { modes?: Record<string, { $value?: string }> }
-          | undefined
+          { modes?: Record<string, { $value?: string }> } | undefined
       )?.modes
       yield {
         path: [...path, key],
