@@ -234,7 +234,7 @@ function blockVars(css: string, selector: RegExp): Record<string, string> {
 }
 
 const tokensCss = stripComments(read("tokens.css"))
-const globalsCss = stripComments(read("app/globals.css"))
+const globalsCss = stripComments(read("styles/globals.css"))
 
 /** tokens.css declares :root twice per tier; merge them all, in order. */
 function allRootVars(css: string): Record<string, string> {

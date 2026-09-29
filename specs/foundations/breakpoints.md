@@ -45,4 +45,4 @@ for wide layouts.
 - ✅ Pick the first breakpoint at which the layout breaks, not a specific device
 - ❌ Never write an arbitrary breakpoint (`min-[600px]:`, `max-[900px]:`) — only the prefixes in the table exist
 - ❌ Never read `var(--breakpoint-*)` inside a media query: media queries do not resolve variables
-- ❌ Do not change a `breakpoint.*` value without declaring the same value, as a literal, in the `@theme` of `app/globals.css` — the bridge lint will remind you
+- ❌ Do not change a `breakpoint.*` value without declaring the same value, as a literal, in the `@theme` of `styles/globals.css` — the bridge lint will remind you

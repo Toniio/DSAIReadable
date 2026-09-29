@@ -12,7 +12,7 @@
  * `$deprecated` property instead.
  *
  *   active     consumed — aliased by the component tier, bridged by
- *              app/globals.css, read with var() in components/, app/, lib/
+ *              styles/globals.css, read with var() in components/, app/, lib/
  *              or hooks/, for a breakpoint used as its `sm:` variant, or,
  *              for a font family, loaded by next/font under its variable
  *              (lint-font-tokens checks it names that font)
@@ -96,7 +96,7 @@ const referencedByComponent = new Set(
 )
 
 // Code that can read a token: the components, the demo app, the shared
-// helpers — and app/globals.css, whose @theme bridge is what turns a token
+// helpers — and styles/globals.css, whose @theme bridge is what turns a token
 // into a Tailwind utility for every consumer of the registry.
 const walk = (dir: string): string[] =>
   readdirSync(resolve(ROOT, dir), { withFileTypes: true }).flatMap((e) => {
@@ -105,7 +105,7 @@ const walk = (dir: string): string[] =>
     return /\.(tsx?|css)$/.test(e.name) ? [p] : []
   })
 // Block comments are dropped: a comment that names a token is not a use.
-const corpus = ["components", "app", "lib", "hooks"]
+const corpus = ["components", "app", "lib", "hooks", "styles"]
   .flatMap(walk)
   .map((file) => read(file).replace(/\/\*[\s\S]*?\*\//g, ""))
   .join("\n")

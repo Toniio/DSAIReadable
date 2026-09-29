@@ -262,7 +262,7 @@ npm run tokens-validate      # Every check in sequence (required before any comm
 
 - **`lint-token-naming.ts`** — checks the **3 tiers** against a declarative grammar: each foundation declares its allowed shapes, and each variable segment is resolved against a **closed enum** (states: `hover|active|focus|disabled|selected`) or an explicit numeric pattern. Adding a role or a state is therefore a deliberate change to the grammar table at the top of `scripts/lint-token-naming.ts`.
 - **`lint-raw-values.ts`** — forbids any hex, rgb, px or ms in components. Exception: `// allow-raw: <reason>`.
-- **`lint-theme-bridge.ts`** — checks that the `@theme` bridge in `app/globals.css` stays aligned with the tokens.
+- **`lint-theme-bridge.ts`** — checks that the `@theme` bridge in `styles/globals.css` stays aligned with the tokens.
 
 ### Development
 

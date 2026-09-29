@@ -674,12 +674,12 @@ assert(
 )
 
 // The styling rule served with every get_design_rules answer: each link of
-// its token chain must be the one app/globals.css declares, and it quotes no
+// its token chain must be the one styles/globals.css declares, and it quotes no
 // value — values drift, get_tokens serves them from the tokens.
 const bridge = new Map(
   [
     ...readFileSync(
-      resolve(__dirname, "../../app/globals.css"),
+      resolve(__dirname, "../../styles/globals.css"),
       "utf-8"
     ).matchAll(/^\s*(--color-[\w-]+):\s*var\((--[\w-]+)\);/gm),
   ].map((m) => [m[1], m[2]])
@@ -699,7 +699,7 @@ const brokenLinks = Object.entries(
 })
 assert(
   brokenLinks.length === 0,
-  `Every token chain of the styling rule matches app/globals.css (${brokenLinks.map(([c]) => c).join(", ") || "all"})`
+  `Every token chain of the styling rule matches styles/globals.css (${brokenLinks.map(([c]) => c).join(", ") || "all"})`
 )
 const ruleText = JSON.stringify(TAILWIND_RULE)
 assert(
@@ -707,7 +707,7 @@ assert(
     !/#[0-9a-f]{6}\b/i.test(
       JSON.stringify(TAILWIND_RULE.token_chain_explanation)
     ),
-  "The styling rule names app/globals.css as the bridge and quotes no hex value"
+  "The styling rule names styles/globals.css as the bridge and quotes no hex value"
 )
 
 const uxRules = (

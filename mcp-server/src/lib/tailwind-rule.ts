@@ -2,11 +2,11 @@
  * The critical styling rule get_design_rules serves with every answer.
  *
  * Written once by hand, it had drifted: it named theme.css as the bridge (it
- * is app/globals.css), said the bridge read the shadcn aliases (`--primary`:
+ * is styles/globals.css), said the bridge read the shadcn aliases (`--primary`:
  * it reads the semantic tokens), and quoted hex values from before the
  * contrast fixes (`text-muted-foreground` as #67787c). The chain now stops at
  * the semantic token, whose values get_tokens serves from the tokens
- * themselves, and a test holds each link to app/globals.css.
+ * themselves, and a test holds each link to styles/globals.css.
  */
 export const TAILWIND_RULE = {
   id: "tailwind-tokens",
@@ -14,7 +14,7 @@ export const TAILWIND_RULE = {
   title: "Always use standard Tailwind CSS classes mapped to DS tokens",
   description: [
     "ALWAYS use the Tailwind utility classes the design system maps to its tokens.",
-    "app/globals.css imports tokens.css and bridges each token into Tailwind with an @theme inline block: bg-primary reads --color-action-background-default, a semantic token.",
+    "styles/globals.css imports tokens.css and bridges each token into Tailwind with an @theme inline block: bg-primary reads --color-action-background-default, a semantic token.",
     "Tailwind's default colours, radii and shadows are removed: bg-red-500 generates no CSS, and ESLint refuses it.",
     "Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.",
     "For spacing, use standard Tailwind spacing: p-4, gap-6, m-2, space-y-4, etc.",

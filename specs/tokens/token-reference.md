@@ -162,10 +162,10 @@ the status says what the code does.
 
 **Usage rules**
 
-| Scope                         | ✅ Do                                                            | ❌ Don't                                                                                                                                     |
-| ----------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `typography.font-family.sans` | Keep it for `Kbd` keys and long editorial content (`font-sans`). | Do not use it for the interface: all UI text is set in `font-mono`.                                                                          |
-| `typography.font-family.mono` | The default typeface of every UI component, set on `<html>`.     | Do not change the typeface here alone: it is loaded by `next/font` in `app/layout.tsx`, which `tokens:lint-fonts` checks against this token. |
+| Scope                         | ✅ Do                                                            | ❌ Don't                                                                                                                                   |
+| ----------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `typography.font-family.sans` | Keep it for `Kbd` keys and long editorial content (`font-sans`). | Do not use it for the interface: all UI text is set in `font-mono`.                                                                        |
+| `typography.font-family.mono` | The default typeface of every UI component, set on `<html>`.     | Do not change the typeface here alone: it is loaded by `next/font` in `lib/fonts.ts`, which `tokens:lint-fonts` checks against this token. |
 
 ---
 

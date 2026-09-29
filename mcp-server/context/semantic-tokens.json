@@ -699,7 +699,7 @@
     "dark": "{typography.font-family.sans}",
     "type": "font-family",
     "status": "active",
-    "usage": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in app/layout.tsx under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens)."
+    "usage": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in lib/fonts.ts under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens)."
   },
   {
     "path": "typography.font-family.mono",
@@ -708,7 +708,7 @@
     "dark": "{typography.font-family.mono}",
     "type": "font-family",
     "status": "active",
-    "usage": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in app/layout.tsx under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens)."
+    "usage": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in lib/fonts.ts under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens)."
   },
   {
     "path": "radius.none",

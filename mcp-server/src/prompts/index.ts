@@ -64,7 +64,7 @@ Color mode: ${mode}
 Requirements:
 - MANDATORY: Import each component from its own module, e.g. \`import { Button } from "@/components/ui/button"\` and \`import { Card, CardContent } from "@/components/ui/card"\`
 - Import the \`cn\` helper from \`@/lib/utils\` when you need to merge classes
-- NEVER import a stylesheet: \`app/globals.css\` already imports \`tokens.css\` and bridges it into Tailwind v4
+- NEVER import a stylesheet: \`styles/globals.css\` already imports \`tokens.css\` and bridges it into Tailwind v4
 - Use DS components for every element they cover — never a raw <button>, <input>, <select>, <textarea>, <table>, <dialog>, <a>, <label>, <h1>–<h6> or <svg>. A <div> is fine for layout (flex, grid); a content section is a <Card>
 - Use ONLY DS tokens via Tailwind classes (no raw hex colors, no arbitrary Tailwind values)
 - Follow the composition rules (step 3) and the constraints of each retained spec (step 4)

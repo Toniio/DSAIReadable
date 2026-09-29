@@ -2,11 +2,11 @@
  * Font token lint — the typography.font-family tokens say which typefaces
  * the design system loads, and they say it truly.
  *
- * The fonts are loaded by next/font in app/layout.tsx, which self-hosts them
+ * The fonts are loaded by next/font in lib/fonts.ts, which self-hosts them
  * and adjusts their fallback metrics; the tokens describe that choice rather
  * than drive it (decision P3-14). Descriptions drift silently: the `sans`
  * token presented Geist as the typeface "for UI text" while the whole
- * interface is set in JetBrains Mono, and layout.tsx imported a third font,
+ * interface is set in JetBrains Mono, and the layout imported a third font,
  * Geist Mono, that nothing loaded.
  *
  * Rules:
@@ -22,7 +22,7 @@ import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import {
-  LAYOUT,
+  FONTS,
   firstFamily,
   fontVariableOf,
   nextFontsOf,
@@ -64,11 +64,11 @@ for (const path of tokens) {
   const font = loaded.find((f) => f.variable === variable)
   if (!font)
     findings.push(
-      `① ${path} has no font behind it — ${LAYOUT} loads nothing under ${variable}`
+      `① ${path} has no font behind it — ${FONTS} loads nothing under ${variable}`
     )
   else if (!stack || firstFamily(stack) !== font.family)
     findings.push(
-      `① ${path} names "${stack ? firstFamily(stack) : "?"}" but ${LAYOUT} loads ${font.family} (${font.loader}) under ${variable}`
+      `① ${path} names "${stack ? firstFamily(stack) : "?"}" but ${FONTS} loads ${font.family} (${font.loader}) under ${variable}`
     )
 }
 
@@ -82,7 +82,7 @@ for (const font of loaded) {
 
 for (const loader of unused)
   findings.push(
-    `③ ${loader} is imported from next/font/google in ${LAYOUT} but never loaded — remove the import`
+    `③ ${loader} is imported from next/font/google in ${FONTS} but never loaded — remove the import`
   )
 
 if (findings.length > 0) {

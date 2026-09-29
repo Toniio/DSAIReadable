@@ -4,7 +4,7 @@
 
 > ⚠️ **Key point:** this project uses **JetBrains Mono** (`typography.font-family.mono`) as the **default** typeface on `<html>`, through `@apply font-mono`. Geist Sans is available but secondary.
 >
-> **Who picks the typeface:** `next/font`, in `app/layout.tsx`, which self-hosts it and adjusts its fallback metrics. The `typography.font-family.*` tokens **describe** that choice; they do not drive it: `font-mono` and `font-sans` read `--font-mono` and `--font-sans`, which `next/font` sets. `npm run tokens:lint-fonts` checks that each token names the family loaded under its variable. Changing the typeface means changing the loader in `layout.tsx` **and** the token.
+> **Who picks the typeface:** `next/font`, in `lib/fonts.ts`, which self-hosts it and adjusts its fallback metrics. The `typography.font-family.*` tokens **describe** that choice; they do not drive it: `font-mono` and `font-sans` read `--font-mono` and `--font-sans`, which `next/font` sets. `npm run tokens:lint-fonts` checks that each token names the family loaded under its variable. Changing the typeface means changing the loader in `layout.tsx` **and** the token.
 
 ---
 

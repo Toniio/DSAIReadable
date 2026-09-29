@@ -1,5 +1,5 @@
 /**
- * The fonts app/layout.tsx loads with next/font, and the typography tokens
+ * The fonts lib/fonts.ts loads with next/font, and the typography tokens
  * that describe them.
  *
  * The typefaces are loaded by next/font, not by the tokens: it self-hosts
@@ -13,7 +13,7 @@
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 
-export const LAYOUT = "app/layout.tsx"
+export const FONTS = "lib/fonts.ts"
 
 export interface LoadedFont {
   /** next/font loader, e.g. `JetBrains_Mono`. */
@@ -31,7 +31,7 @@ export interface NextFonts {
 }
 
 export function nextFontsOf(root: string): NextFonts {
-  const source = readFileSync(resolve(root, LAYOUT), "utf-8")
+  const source = readFileSync(resolve(root, FONTS), "utf-8")
   const imported = [
     ...(
       source.match(/import\s*\{([^}]*)\}\s*from\s*"next\/font\/google"/)?.[1] ??

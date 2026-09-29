@@ -99,7 +99,7 @@ export function registerDsCoreTools(server: McpServer): void {
             'import { Button } from "@/components/ui/button"  // one import per component',
           utils_import: 'import { cn } from "@/lib/utils"',
           css_setup:
-            'app/globals.css already does `@import "../tokens.css"` and bridges the tokens into Tailwind v4 with `@theme inline`.',
+            'styles/globals.css already does `@import "../tokens.css"` and bridges the tokens into Tailwind v4 with `@theme inline`.',
           explanation:
             "Tokens are loaded once by the application stylesheet. Generated files must never import a stylesheet themselves, and must never reference a token variable directly in JSX.",
           full_example: `// components/example.tsx

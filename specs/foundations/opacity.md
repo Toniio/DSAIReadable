@@ -24,7 +24,7 @@ Apply it to every interactive element in the `disabled` state: buttons, inputs, 
 
 ### The `opacity-disabled` class
 
-The `@theme` bridge in `app/globals.css` turns the token into a Tailwind class: `opacity-disabled` reads `--opacity-disabled`. It goes under the disabled-state variant, whatever form that variant takes:
+The `@theme` bridge in `styles/globals.css` turns the token into a Tailwind class: `opacity-disabled` reads `--opacity-disabled`. It goes under the disabled-state variant, whatever form that variant takes:
 
 ```tsx
 // ✅ The token, under the state's variant
