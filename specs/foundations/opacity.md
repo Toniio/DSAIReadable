@@ -2,17 +2,19 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
-The opacity system defines **three semantic tokens** for the main use cases: disabled elements, placeholders and overlay backdrops. Outside those three cases, **opacity must not be used** as a substitute for the dedicated color tokens.
+The opacity system has **one active semantic token**: `opacity.disabled`, for disabled elements. Opacity is for **binary states** only — disabled, shown or hidden. A placeholder is colored and a modal backdrop is a tint; neither uses an opacity. Outside those cases, **opacity must not be used** as a substitute for the dedicated color tokens.
 
 ---
 
 ## Semantic Tokens
 
-| Token                 | CSS Variable            | Value | Tailwind Class                                                 | Usage                           |
-| --------------------- | ----------------------- | ----- | -------------------------------------------------------------- | ------------------------------- |
-| `opacity.disabled`    | `--opacity-disabled`    | `0.5` | `disabled:opacity-disabled` (and every disabled-state variant) | Disabled interactive elements   |
-| `opacity.placeholder` | `--opacity-placeholder` | `0.5` | `placeholder:opacity-50`                                       | Placeholder text in form fields |
-| `opacity.overlay`     | `--opacity-overlay`     | `0.8` | `opacity-80`                                                   | Backdrop of modals and dialogs  |
+| Token                 | CSS Variable            | Value | Tailwind Class                                                 | Status                                         |
+| --------------------- | ----------------------- | ----- | -------------------------------------------------------------- | ---------------------------------------------- |
+| `opacity.disabled`    | `--opacity-disabled`    | `0.5` | `disabled:opacity-disabled` (and every disabled-state variant) | active — disabled interactive elements         |
+| `opacity.placeholder` | `--opacity-placeholder` | `0.5` | —                                                              | deprecated — use `color.text.subtle`           |
+| `opacity.overlay`     | `--opacity-overlay`     | `0.8` | —                                                              | deprecated — use the scrim of `lib/overlay.ts` |
+
+The two deprecated tokens stay resolvable in `tokens.css` but nothing reads them, and `tokens:lint-lifecycle` fails if something starts to.
 
 ---
 
@@ -49,41 +51,39 @@ The `@theme` bridge in `styles/globals.css` turns the token into a Tailwind clas
 
 ---
 
-## `opacity.placeholder` — placeholder text
+## Placeholder text — a color, not an opacity
 
-Applied to the `::placeholder` pseudo-element of form fields:
+Input, Textarea, Select and NativeSelect color their placeholder with the subtle text token:
 
 ```tsx
-// ✅ Through Tailwind
-<input
-  className="placeholder:opacity-50 placeholder:text-foreground"
-  placeholder="Enter a value..."
-/>
+// ✅ What the fields do: color.text.subtle, 5.10:1 on white
+<input className="placeholder:text-muted-foreground" placeholder="Search accounts…" />
 
-// ✅ Through CSS
-input::placeholder {
-  opacity: var(--opacity-placeholder);
-}
+// ❌ Faded default text: 3.70:1 on white, below 4.5:1 — and ESLint rejects the class
+<input className="placeholder:text-foreground placeholder:opacity-50" placeholder="Search accounts…" />
 ```
+
+`opacity.placeholder` is deprecated for that reason.
 
 ---
 
-## `opacity.overlay` — modal backdrops
+## Modal backdrops — a tint, not an opacity
 
-Applied to the semi-transparent backdrop behind modals, drawers and dialogs:
+Dialog, AlertDialog, Sheet and Drawer build their backdrop on `OVERLAY_BASE` in `lib/overlay.ts`: a 10% static-black tint with a backdrop blur, shadcn/ui v4's scrim.
 
 ```tsx
-// ✅ Modal backdrop
-<div
-  className="fixed inset-0 bg-background-inverse opacity-80 z-overlay"
-  aria-hidden="true"
-/>
+import { OVERLAY_BASE } from "@/lib/overlay"
 
-// Or with a Tailwind class directly
-<div className="fixed inset-0 bg-black/80 z-overlay" aria-hidden="true" />
+// ✅ What the modal surfaces do
+<div className={cn(OVERLAY_BASE, className)} />
+// OVERLAY_BASE = "fixed inset-0 z-modal bg-black/10 supports-backdrop-filter:backdrop-blur-xs …"
+
+// ❌ A backdrop darkened with an opacity: the page behind disappears,
+// and ESLint rejects opacity-80
+<div className="fixed inset-0 z-modal bg-black opacity-80" />
 ```
 
-> A value of `0.8` darkens enough for the modal's content to stay readable, without hiding the visual context underneath entirely.
+The `/10` is an alpha on the color (`color.static.black`), not an opacity on the node: the dialog above it is not affected. `opacity.overlay`, at `0.8`, was never read by a component and is deprecated.
 
 ---
 
@@ -100,9 +100,9 @@ Global opacity changes **the whole** component (text, background, border, icon).
 | `<div class="bg-primary opacity-70">Muted area</div>` | `<div class="bg-secondary">Muted area</div>`           |
 | `<Icon class="opacity-50" />`                         | `<Icon class="text-muted-foreground" />`               |
 
-**Rule:** when the intent is to reduce the **visual prominence** of a text or an icon, use the `subtle` / `muted-foreground` color tokens. Opacity is reserved for **binary states** (disabled, overlay).
+**Rule:** when the intent is to reduce the **visual prominence** of a text or an icon, use the `subtle` / `muted-foreground` color tokens. Opacity is reserved for **binary states** (disabled, shown / hidden).
 
-> **Guard:** a second `better-tailwindcss/no-restricted-classes` rule rejects every `opacity-<n>` except the binary ones: `opacity-0` and `opacity-100` (show / hide), `opacity-disabled`, `placeholder:opacity-50` and `opacity-80` (backdrop). It found four decorative uses, now colors: Command's search icon and Combobox's chip remove button (`text-muted-foreground`), Illustration's strokes and Calendar's secondary day line (`text-muted-foreground/20`, `text-current/70` — an alpha on the color, which leaves the rest of the node untouched).
+> **Guard:** a second `better-tailwindcss/no-restricted-classes` rule rejects every `opacity-<n>` except the binary ones: `opacity-0` and `opacity-100` (show / hide) and `opacity-disabled`. It found four decorative uses, now colors: Command's search icon and Combobox's chip remove button (`text-muted-foreground`), Illustration's strokes and Calendar's secondary day line (`text-muted-foreground/20`, `text-current/70` — an alpha on the color, which leaves the rest of the node untouched).
 
 ---
 
@@ -112,8 +112,9 @@ Global opacity changes **the whole** component (text, background, border, icon).
 Need                                   → Solution
 ──────────────────────────────────────────────────────────────────
 Disable a button / input               → disabled:opacity-disabled
-A field's placeholder                  → placeholder:opacity-50
-A modal / dialog backdrop              → opacity-80 (bg-black/80)
+Show / hide (with a transition)        → opacity-0 / opacity-100
+A field's placeholder                  → placeholder:text-muted-foreground
+A modal / dialog backdrop              → OVERLAY_BASE (bg-black/10 + backdrop-blur-xs)
 Secondary / muted text                 → text-muted-foreground
 Secondary icon                         → text-muted-foreground
 Muted background                       → bg-card / bg-secondary
@@ -124,8 +125,8 @@ Desaturate an image                    → CSS filter (outside the tokens)
 
 ## Usage Rules
 
-1. **Three cases, three tokens** — `disabled`, `placeholder` and `overlay` are the only legitimate contexts for global opacity.
+1. **One token, one case** — `opacity.disabled` is the only active opacity token; `opacity-0` and `opacity-100` show and hide.
 2. **A disabled state is written `opacity-disabled`** under its variant (`disabled:opacity-disabled`) — never `opacity-50`, which ESLint rejects: the value is the token's, not a step of Tailwind's scale.
-3. **Never use opacity to fake a subtle color** — always use `color.text.subtle` / `text-muted-foreground`.
-4. **Opacity is not selective** — it applies to the whole DOM subtree. When only part of it should change, use targeted color tokens.
-5. **`opacity.overlay` at `0.8` is the reference value** — do not lower it for standard modals: it hurts the readability of the main content.
+3. **Never use opacity to fake a subtle color** — always use `color.text.subtle` / `text-muted-foreground`, placeholders included.
+4. **Opacity is not selective** — it applies to the whole DOM subtree. When only part of it should change, use a color, or an alpha on a color (`bg-black/10`, `text-current/70`).
+5. **A modal backdrop comes from `OVERLAY_BASE`** — do not write a backdrop of your own, and do not darken it: the page behind stays visible under the blur.

@@ -247,6 +247,44 @@
           "$description": "Darkest green data viz, chart-5."
         }
       },
+      "emerald": {
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.3686, 0.9137, 0.7098],
+            "hex": "#5ee9b5"
+          },
+          "$type": "color",
+          "$description": "Light emerald, success text in dark mode, legible on a success tint."
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0, 0.8314, 0.5725],
+            "hex": "#00d492"
+          },
+          "$type": "color",
+          "$description": "Bright emerald, success in dark mode."
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0, 0.4784, 0.3333],
+            "hex": "#007a55"
+          },
+          "$type": "color",
+          "$description": "Deep emerald, success in light mode; white text on it reaches 5.36:1."
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0, 0.3765, 0.2706],
+            "hex": "#006045"
+          },
+          "$type": "color",
+          "$description": "Dark emerald, success text in light mode, legible on a success tint."
+        }
+      },
       "blue": {
         "300": {
           "$value": {
@@ -279,6 +317,33 @@
         }
       },
       "amber": {
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 0.8235, 0.1882],
+            "hex": "#ffd230"
+          },
+          "$type": "color",
+          "$description": "Light amber, warning text in dark mode, legible on a warning tint."
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 0.7255, 0],
+            "hex": "#ffb900"
+          },
+          "$type": "color",
+          "$description": "Bright amber, warning in dark mode."
+        },
+        "450": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9961, 0.6039, 0],
+            "hex": "#fe9a00"
+          },
+          "$type": "color",
+          "$description": "Orange amber, warning in light mode; for tints and solid fills with dark text, never a border on its own (1.92:1 on white)."
+        },
         "500": {
           "$value": {
             "colorSpace": "srgb",
@@ -296,6 +361,15 @@
           },
           "$type": "color",
           "$description": "Ochre, categorical chart series 3 in light mode."
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.5922, 0.2353, 0.0314],
+            "hex": "#973c08"
+          },
+          "$type": "color",
+          "$description": "Burnt amber, warning text in light mode, legible on a warning tint."
         },
         "800": {
           "$value": {

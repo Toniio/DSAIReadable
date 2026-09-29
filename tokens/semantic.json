@@ -149,6 +149,36 @@
             "status": "active"
           }
         }
+      },
+      "success": {
+        "default": {
+          "$value": "{primitive.color.emerald.800}",
+          "$type": "color",
+          "$description": "Success text and icons, on a neutral surface or on a success tint. Not for warnings, errors or neutral information.",
+          "$extensions": {
+            "docs": {
+              "description": "Success-state text and icons — the class `text-success`. Darker than `color.feedback.success.default` in light mode and lighter in dark mode, so it stays at 4.5:1 or more on every surface and on the `bg-success/10`–`/30` tints.",
+              "do": "Use for the success Alert and Badge, and for a confirmation message next to its field.",
+              "dont": "Do not carry the meaning by color alone: a success and an error are hard to tell apart for a red-green color-blind reader, so an icon or a word says it too. Do not use `color.feedback.success.default` for text."
+            },
+            "status": "active"
+          }
+        }
+      },
+      "warning": {
+        "default": {
+          "$value": "{primitive.color.amber.700}",
+          "$type": "color",
+          "$description": "Warning text and icons, on a neutral surface or on a warning tint. Not for errors, successes or neutral information.",
+          "$extensions": {
+            "docs": {
+              "description": "Warning-state text and icons — the class `text-warning`. It stays at 4.5:1 or more on every surface and on the `bg-warning/10`–`/30` tints, where the warning fill itself does not reach 3:1 on a light surface.",
+              "do": "Use for the warning Alert and Badge, and for the icon of any warning: the fill is too light to stand alone.",
+              "dont": "Do not use for errors — a blocking problem is destructive. Do not use `color.feedback.warning.default` for text, borders or icons."
+            },
+            "status": "active"
+          }
+        }
       }
     },
     "border": {
@@ -300,6 +330,62 @@
               "description": "Text and icons placed **on** a solid error surface.",
               "do": "Use whenever a solid `bg-destructive` background carries text or an icon.",
               "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.500 drops to 2.89:1."
+            },
+            "status": "active"
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{primitive.color.emerald.700}",
+          "$type": "color",
+          "$description": "Success state color for backgrounds, tints and borders. Not for text, warnings or errors.",
+          "$extensions": {
+            "docs": {
+              "description": "Success-state fill — solid or tinted background, border.",
+              "do": "Use for the `bg-success/10`–`/30` tints and for a solid `bg-success` surface with `text-success-foreground`.",
+              "dont": "Do not use for text or icons — use `color.text.success.default` (`text-success`). Do not use for warnings or errors."
+            },
+            "status": "active"
+          }
+        },
+        "foreground": {
+          "$value": "{primitive.color.mist.0}",
+          "$type": "color",
+          "$description": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface.",
+          "$extensions": {
+            "docs": {
+              "description": "Text and icons placed **on** a solid success surface.",
+              "do": "Use whenever a solid `bg-success` background carries text or an icon.",
+              "dont": "Never put `text-white` on a success surface — in dark mode the fill is light and needs dark text."
+            },
+            "status": "active"
+          }
+        }
+      },
+      "warning": {
+        "default": {
+          "$value": "{primitive.color.amber.450}",
+          "$type": "color",
+          "$description": "Warning state color for backgrounds and tints. Not for text, borders or icons, not for errors or successes.",
+          "$extensions": {
+            "docs": {
+              "description": "Warning-state fill — solid or tinted background. At 1.92:1 on white in light mode, it never stands alone as a border or an icon.",
+              "do": "Use for the `bg-warning/10`–`/30` tints and for a solid `bg-warning` surface with `text-warning-foreground`.",
+              "dont": "Do not use for text, icons or a lone border — use `color.text.warning.default` (`text-warning`). Do not use for errors."
+            },
+            "status": "active"
+          }
+        },
+        "foreground": {
+          "$value": "{primitive.color.mist.950}",
+          "$type": "color",
+          "$description": "Text and icons placed on color.feedback.warning.default, dark in both modes. Never use white on a warning surface.",
+          "$extensions": {
+            "docs": {
+              "description": "Text and icons placed **on** a solid warning surface — dark in both modes.",
+              "do": "Use whenever a solid `bg-warning` background carries text or an icon.",
+              "dont": "Never put `text-white` on a warning surface: white on the light-mode fill is below 2:1."
             },
             "status": "active"
           }
@@ -1282,26 +1368,26 @@
     "placeholder": {
       "$value": "{primitive.opacity.0-50}",
       "$type": "number",
-      "$description": "Opacity for placeholder text. Not for disabled or overlay use.",
+      "$description": "Deprecated: placeholder text was never faded. Form fields color it with color.text.subtle.",
       "$extensions": {
         "docs": {
-          "do": "Apply to the `::placeholder` of form fields.",
-          "dont": "Do not confuse with `opacity.disabled` — they serve different purposes."
-        },
-        "status": "reserved"
-      }
+          "do": "Write `placeholder:text-muted-foreground`, as Input, Textarea, Select and NativeSelect do.",
+          "dont": "Do not fade the placeholder with an opacity: default text at 0.5 is 3.70:1 on white, below 4.5:1."
+        }
+      },
+      "$deprecated": "Form fields color their placeholder instead of fading it: use `placeholder:text-muted-foreground` (color.text.subtle). Faded default text drops to 3.70:1 on white."
     },
     "overlay": {
       "$value": "{primitive.opacity.0-80}",
       "$type": "number",
-      "$description": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency.",
+      "$description": "Deprecated: modal backdrops never read it. They use a 10% static-black scrim with a backdrop blur.",
       "$extensions": {
         "docs": {
-          "do": "Use for the backdrops of modals and dialogs.",
-          "dont": "Do not go below `0.7` — the contrast becomes too low."
-        },
-        "status": "reserved"
-      }
+          "do": "Build a modal backdrop on `OVERLAY_BASE` (lib/overlay.ts): `bg-black/10` with `backdrop-blur-xs`, as Dialog, AlertDialog, Sheet and Drawer do.",
+          "dont": "Do not darken the backdrop to `bg-black/80`: the page behind disappears, and the result drifts from the shadcn/ui v4 look agents reproduce."
+        }
+      },
+      "$deprecated": "Modal backdrops use shadcn/ui v4's scrim, `bg-black/10` with `backdrop-blur-xs` (OVERLAY_BASE in lib/overlay.ts); no opacity token drives it. At 0.8 the backdrop hid the page."
     }
   },
   "zindex": {

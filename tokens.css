@@ -42,6 +42,12 @@
   --ds-prim-color-green-500: #497d00;
   --ds-prim-color-green-600: #3c6300;
 
+  /* color · emerald */
+  --ds-prim-color-emerald-300: #5ee9b5;
+  --ds-prim-color-emerald-400: #00d492;
+  --ds-prim-color-emerald-700: #007a55;
+  --ds-prim-color-emerald-800: #006045;
+
   /* color · blue */
   --ds-prim-color-blue-300: #8fd6fa;
   --ds-prim-color-blue-600: #438fbd;
@@ -50,8 +56,12 @@
   --ds-prim-color-yellow-200: #e5e747;
 
   /* color · amber */
+  --ds-prim-color-amber-300: #ffd230;
+  --ds-prim-color-amber-400: #ffb900;
+  --ds-prim-color-amber-450: #fe9a00;
   --ds-prim-color-amber-500: #c89005;
   --ds-prim-color-amber-600: #af8526;
+  --ds-prim-color-amber-700: #973c08;
   --ds-prim-color-amber-800: #734e00;
 
   /* color · plum */
@@ -220,6 +230,8 @@
   --color-text-action-default:      var(--ds-prim-color-violet-600);
   --color-text-action-on:           var(--ds-prim-color-violet-50);
   --color-text-destructive-default: var(--ds-prim-color-red-800);
+  --color-text-success-default:     var(--ds-prim-color-emerald-800);
+  --color-text-warning-default:     var(--ds-prim-color-amber-700);
 
   /* color · border */
   --color-border-default: var(--ds-prim-color-mist-200);
@@ -237,8 +249,12 @@
   --color-action-background-foreground: var(--ds-prim-color-violet-50);
 
   /* color · feedback */
-  --color-feedback-error-default:    var(--ds-prim-color-red-600);
-  --color-feedback-error-foreground: var(--ds-prim-color-mist-0);
+  --color-feedback-error-default:      var(--ds-prim-color-red-600);
+  --color-feedback-error-foreground:   var(--ds-prim-color-mist-0);
+  --color-feedback-success-default:    var(--ds-prim-color-emerald-700);
+  --color-feedback-success-foreground: var(--ds-prim-color-mist-0);
+  --color-feedback-warning-default:    var(--ds-prim-color-amber-450);
+  --color-feedback-warning-foreground: var(--ds-prim-color-mist-950);
 
   /* color · chart */
   --color-chart-1:            var(--ds-prim-color-violet-600);
@@ -389,6 +405,8 @@
   --color-text-inverse:             var(--ds-prim-color-mist-950);
   --color-text-action-default:      var(--ds-prim-color-violet-400);
   --color-text-destructive-default: var(--ds-prim-color-red-300);
+  --color-text-success-default:     var(--ds-prim-color-emerald-300);
+  --color-text-warning-default:     var(--ds-prim-color-amber-300);
 
   --color-border-default: var(--ds-prim-color-white-alpha-10);
   --color-border-subtle:  var(--ds-prim-color-white-alpha-10);
@@ -399,8 +417,11 @@
 
   --color-action-background-default: var(--ds-prim-color-violet-700);
 
-  --color-feedback-error-default:    var(--ds-prim-color-red-500);
-  --color-feedback-error-foreground: var(--ds-prim-color-mist-950);
+  --color-feedback-error-default:      var(--ds-prim-color-red-500);
+  --color-feedback-error-foreground:   var(--ds-prim-color-mist-950);
+  --color-feedback-success-default:    var(--ds-prim-color-emerald-400);
+  --color-feedback-success-foreground: var(--ds-prim-color-mist-950);
+  --color-feedback-warning-default:    var(--ds-prim-color-amber-400);
 
   --color-chart-1: var(--ds-prim-color-violet-400);
   --color-chart-2: var(--ds-prim-color-blue-300);

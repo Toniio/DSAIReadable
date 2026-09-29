@@ -74,12 +74,13 @@ const eslintConfig = defineConfig([
               fix: "$1opacity-disabled",
             },
             // specs/foundations/opacity.md: opacity is for binary states. What
-            // is left once disabled is handled: show / hide (0, 100), a
-            // placeholder (placeholder:opacity-50) and a modal backdrop
-            // (opacity-80). Dimming a text or an icon is a color token's job.
+            // is left once disabled is handled: show / hide (0, 100). A
+            // placeholder is colored (placeholder:text-muted-foreground) and a
+            // modal backdrop is a tint (bg-black/10), so neither needs one.
+            // Dimming a text or an icon is a color token's job.
             {
               pattern:
-                "^(?!(?:.*:)?opacity-(?:0|100|80|disabled)$)(?!placeholder:opacity-50$).*opacity-\\d+$",
+                "^(?!(?:.*:)?opacity-(?:0|100|disabled)$).*opacity-\\d+$",
               message:
                 "Opacity is for binary states (specs/foundations/opacity.md): show / hide with opacity-0 and opacity-100, or a color token such as text-muted-foreground to dim a text or an icon.",
             },

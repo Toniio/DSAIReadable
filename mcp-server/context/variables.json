@@ -88,6 +88,22 @@
     "status": "active"
   },
   {
+    "path": "color.text.success.default",
+    "value_light": "{primitive.color.emerald.800}",
+    "value_dark": "{primitive.color.emerald.300}",
+    "css_variable": "--color-text-success-default",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "color.text.warning.default",
+    "value_light": "{primitive.color.amber.700}",
+    "value_dark": "{primitive.color.amber.300}",
+    "css_variable": "--color-text-warning-default",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
     "path": "color.border.default",
     "value_light": "{primitive.color.mist.200}",
     "value_dark": "{primitive.color.white-alpha.10}",
@@ -172,6 +188,38 @@
     "value_light": "{primitive.color.mist.0}",
     "value_dark": "{primitive.color.mist.950}",
     "css_variable": "--color-feedback-error-foreground",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "color.feedback.success.default",
+    "value_light": "{primitive.color.emerald.700}",
+    "value_dark": "{primitive.color.emerald.400}",
+    "css_variable": "--color-feedback-success-default",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "color.feedback.success.foreground",
+    "value_light": "{primitive.color.mist.0}",
+    "value_dark": "{primitive.color.mist.950}",
+    "css_variable": "--color-feedback-success-foreground",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "color.feedback.warning.default",
+    "value_light": "{primitive.color.amber.450}",
+    "value_dark": "{primitive.color.amber.400}",
+    "css_variable": "--color-feedback-warning-default",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "color.feedback.warning.foreground",
+    "value_light": "{primitive.color.mist.950}",
+    "value_dark": "{primitive.color.mist.950}",
+    "css_variable": "--color-feedback-warning-foreground",
     "tier": "semantic",
     "status": "active"
   },
@@ -861,7 +909,7 @@
     "value_dark": "{primitive.opacity.0-50}",
     "css_variable": "--opacity-placeholder",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "deprecated"
   },
   {
     "path": "opacity.overlay",
@@ -869,7 +917,7 @@
     "value_dark": "{primitive.opacity.0-80}",
     "css_variable": "--opacity-overlay",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "deprecated"
   },
   {
     "path": "zindex.dropdown",

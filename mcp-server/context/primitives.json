@@ -130,6 +130,26 @@
     "type": "color"
   },
   {
+    "path": "primitive.color.emerald.300",
+    "value": "#5ee9b5",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.400",
+    "value": "#00d492",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.700",
+    "value": "#007a55",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.800",
+    "value": "#006045",
+    "type": "color"
+  },
+  {
     "path": "primitive.color.blue.300",
     "value": "#8fd6fa",
     "type": "color"
@@ -145,6 +165,21 @@
     "type": "color"
   },
   {
+    "path": "primitive.color.amber.300",
+    "value": "#ffd230",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.400",
+    "value": "#ffb900",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.450",
+    "value": "#fe9a00",
+    "type": "color"
+  },
+  {
     "path": "primitive.color.amber.500",
     "value": "#c89005",
     "type": "color"
@@ -152,6 +187,11 @@
   {
     "path": "primitive.color.amber.600",
     "value": "#af8526",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.700",
+    "value": "#973c08",
     "type": "color"
   },
   {
