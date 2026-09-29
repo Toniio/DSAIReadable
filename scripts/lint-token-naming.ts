@@ -54,6 +54,7 @@ const ENUMS: Record<string, string[]> = {
     "mist",
     "violet",
     "green",
+    "emerald",
     "blue",
     "yellow",
     "amber",
@@ -94,7 +95,7 @@ const ENUMS: Record<string, string[]> = {
   state: ["hover", "active", "focus", "disabled", "selected"],
   /** Foreground relationship: the color that sits *on* a surface. */
   onSurface: ["default", "on", "foreground"],
-  textRole: ["action", "destructive"],
+  textRole: ["action", "destructive", "success", "warning"],
   borderRole: ["default", "subtle", "input", "focus"],
   iconRole: ["default", "subtle", "action"],
   feedbackRole: ["error", "success", "warning", "info"],

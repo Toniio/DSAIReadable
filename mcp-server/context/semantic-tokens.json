@@ -99,6 +99,24 @@
     "usage": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text."
   },
   {
+    "path": "color.text.success.default",
+    "css_var": "--color-text-success-default",
+    "light": "{primitive.color.emerald.800}",
+    "dark": "{primitive.color.emerald.300}",
+    "type": "color",
+    "status": "active",
+    "usage": "Success text and icons, on a neutral surface or on a success tint. Not for warnings, errors or neutral information."
+  },
+  {
+    "path": "color.text.warning.default",
+    "css_var": "--color-text-warning-default",
+    "light": "{primitive.color.amber.700}",
+    "dark": "{primitive.color.amber.300}",
+    "type": "color",
+    "status": "active",
+    "usage": "Warning text and icons, on a neutral surface or on a warning tint. Not for errors, successes or neutral information."
+  },
+  {
     "path": "color.border.default",
     "css_var": "--color-border-default",
     "light": "{primitive.color.mist.200}",
@@ -196,6 +214,42 @@
     "type": "color",
     "status": "active",
     "usage": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface."
+  },
+  {
+    "path": "color.feedback.success.default",
+    "css_var": "--color-feedback-success-default",
+    "light": "{primitive.color.emerald.700}",
+    "dark": "{primitive.color.emerald.400}",
+    "type": "color",
+    "status": "active",
+    "usage": "Success state color for backgrounds, tints and borders. Not for text, warnings or errors."
+  },
+  {
+    "path": "color.feedback.success.foreground",
+    "css_var": "--color-feedback-success-foreground",
+    "light": "{primitive.color.mist.0}",
+    "dark": "{primitive.color.mist.950}",
+    "type": "color",
+    "status": "active",
+    "usage": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface."
+  },
+  {
+    "path": "color.feedback.warning.default",
+    "css_var": "--color-feedback-warning-default",
+    "light": "{primitive.color.amber.450}",
+    "dark": "{primitive.color.amber.400}",
+    "type": "color",
+    "status": "active",
+    "usage": "Warning state color for backgrounds and tints. Not for text, borders or icons, not for errors or successes."
+  },
+  {
+    "path": "color.feedback.warning.foreground",
+    "css_var": "--color-feedback-warning-foreground",
+    "light": "{primitive.color.mist.950}",
+    "dark": "{primitive.color.mist.950}",
+    "type": "color",
+    "status": "active",
+    "usage": "Text and icons placed on color.feedback.warning.default, dark in both modes. Never use white on a warning surface."
   },
   {
     "path": "color.chart.1",
@@ -968,8 +1022,8 @@
     "light": "{primitive.opacity.0-50}",
     "dark": "{primitive.opacity.0-50}",
     "type": "number",
-    "status": "reserved",
-    "usage": "Opacity for placeholder text. Not for disabled or overlay use."
+    "status": "deprecated",
+    "usage": "Deprecated: placeholder text was never faded. Form fields color it with color.text.subtle."
   },
   {
     "path": "opacity.overlay",
@@ -977,8 +1031,8 @@
     "light": "{primitive.opacity.0-80}",
     "dark": "{primitive.opacity.0-80}",
     "type": "number",
-    "status": "reserved",
-    "usage": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency."
+    "status": "deprecated",
+    "usage": "Deprecated: modal backdrops never read it. They use a 10% static-black scrim with a backdrop blur."
   },
   {
     "path": "zindex.dropdown",

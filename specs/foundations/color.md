@@ -26,22 +26,24 @@
 
 ### Text
 
-| Token                            | CSS Variable                       | Light      | Dark       | Usage                                                        |
-| -------------------------------- | ---------------------------------- | ---------- | ---------- | ------------------------------------------------------------ |
-| `color.text.default`             | `--color-text-default`             | mist.950   | mist.50    | Main body text, headings                                     |
-| `color.text.subtle`              | `--color-text-subtle`              | mist.600   | mist.400   | Secondary text — captions, helper text, metadata             |
-| `color.text.bold`                | `--color-text-bold`                | mist.950   | mist.50    | High-contrast emphasized text                                |
-| `color.text.inverse`             | `--color-text-inverse`             | mist.0     | mist.950   | Text on an inverse surface (a dark background in light mode) |
-| `color.text.action.default`      | `--color-text-action-default`      | violet.600 | violet.400 | Links, primary action labels                                 |
-| `color.text.action.on`           | `--color-text-action-on`           | violet.50  | violet.50  | Text on an `action.background.default` background            |
-| `color.text.destructive.default` | `--color-text-destructive-default` | red.800    | red.300    | Error messages, destructive labels, on a surface or a tint   |
+| Token                            | CSS Variable                       | Light       | Dark        | Usage                                                                  |
+| -------------------------------- | ---------------------------------- | ----------- | ----------- | ---------------------------------------------------------------------- |
+| `color.text.default`             | `--color-text-default`             | mist.950    | mist.50     | Main body text, headings                                               |
+| `color.text.subtle`              | `--color-text-subtle`              | mist.600    | mist.400    | Secondary text — captions, helper text, metadata                       |
+| `color.text.bold`                | `--color-text-bold`                | mist.950    | mist.50     | High-contrast emphasized text                                          |
+| `color.text.inverse`             | `--color-text-inverse`             | mist.0      | mist.950    | Text on an inverse surface (a dark background in light mode)           |
+| `color.text.action.default`      | `--color-text-action-default`      | violet.600  | violet.400  | Links, primary action labels                                           |
+| `color.text.action.on`           | `--color-text-action-on`           | violet.50   | violet.50   | Text on an `action.background.default` background                      |
+| `color.text.destructive.default` | `--color-text-destructive-default` | red.800     | red.300     | Error messages, destructive labels, on a surface or a tint             |
+| `color.text.success.default`     | `--color-text-success-default`     | emerald.800 | emerald.300 | Success messages and labels, on a surface or a tint                    |
+| `color.text.warning.default`     | `--color-text-warning-default`     | amber.700   | amber.300   | Warning messages and labels, and warning icons, on a surface or a tint |
 
 **Do / Don't:**
 
 - ✅ `text.subtle` for field labels, visible placeholders, metadata.
 - ❌ Do not dim `text.default` with opacity to fake `text.subtle` — use the dedicated token.
 - ✅ `text.action.on` only on a `color.action.background.default` background.
-- ❌ Do not use `text.destructive.default` for warnings — it is reserved for errors.
+- ❌ Do not use `text.destructive.default` for warnings — it is reserved for errors. A warning is `text.warning.default` (`text-warning`), a success `text.success.default` (`text-success`).
 - ✅ `text.destructive.default` for every destructive label, including on a `bg-destructive/10`–`/30` tint: it is darker than the error fill in light mode and lighter in dark mode, so it stays at 4.5:1 or more on the page, a card and a popover.
 
 ---
@@ -95,17 +97,25 @@
 
 ### Feedback
 
-| Token                             | CSS Variable                        | Light   | Dark     | Usage                                            |
-| --------------------------------- | ----------------------------------- | ------- | -------- | ------------------------------------------------ |
-| `color.feedback.error.default`    | `--color-feedback-error-default`    | red.600 | red.500  | Fill, tint, border or ring of an error state     |
-| `color.feedback.error.foreground` | `--color-feedback-error-foreground` | mist.0  | mist.950 | Text or icon placed **on** a solid error surface |
+| Token                               | CSS Variable                          | Light       | Dark        | Usage                                                                  |
+| ----------------------------------- | ------------------------------------- | ----------- | ----------- | ---------------------------------------------------------------------- |
+| `color.feedback.error.default`      | `--color-feedback-error-default`      | red.600     | red.500     | Fill, tint, border or ring of an error state                           |
+| `color.feedback.error.foreground`   | `--color-feedback-error-foreground`   | mist.0      | mist.950    | Text or icon placed **on** a solid error surface                       |
+| `color.feedback.success.default`    | `--color-feedback-success-default`    | emerald.700 | emerald.400 | Fill, tint or border of a success state                                |
+| `color.feedback.success.foreground` | `--color-feedback-success-foreground` | mist.0      | mist.950    | Text or icon placed **on** a solid success surface                     |
+| `color.feedback.warning.default`    | `--color-feedback-warning-default`    | amber.450   | amber.400   | Fill or tint of a warning state — never a border or an icon on its own |
+| `color.feedback.warning.foreground` | `--color-feedback-warning-foreground` | mist.950    | mist.950    | Text or icon placed **on** a solid warning surface, dark in both modes |
 
 **Do / Don't:**
 
 - ✅ Use `feedback.error.default` for the borders and rings of invalid fields and for the `bg-destructive/10`–`/30` tints.
 - ❌ Do not use `feedback.error.default` for text or icons: on a card it drops to 4.28:1, and to 3.00:1 on a card under a 20% tint. Text goes through `text.destructive.default` (`text-destructive`).
 - ✅ On a solid error background, always use `color.feedback.error.foreground` (shadcn alias `--destructive-foreground`).
-- ❌ Do not use them for warnings or successes — dedicated tokens will be added.
+- ❌ Do not use the error tokens for warnings or successes: each state has its own fill, foreground and text token. The Alert and Badge `success` and `warning` variants use them.
+- ✅ Success and warning follow the error's split: the fill (`bg-success`, `bg-warning`, their `/10`–`/30` tints) and a text token (`text-success`, `text-warning`) that stays at 4.5:1 on every surface and tint.
+- ❌ Do not use `feedback.warning.default` as a border or an icon: in light mode it reaches 1.92:1 on white. The icon of a warning takes `text-warning`.
+- ❌ Never carry a state by color alone: success green and error red look alike to a red-green color-blind reader. An icon or a word says it too.
+- ✅ There is no `info` state: a neutral message is the `default` Alert. The naming grammar keeps the `info` role free for the day a component needs one.
 - ❌ Never put hard-coded white on an error surface: in dark mode, white on red.500 drops to 2.89:1.
 
 ---
@@ -203,19 +213,25 @@ Turned on by the `.dark` class on `<html>`. Every override is defined in
 The tokens are exposed through `@theme inline` in `globals.css`, which generates
 these utility classes:
 
-| Class                   | Token                                                    |
-| ----------------------- | -------------------------------------------------------- |
-| `bg-background`         | `color.background.default`                               |
-| `bg-card`               | `color.background.subtle`                                |
-| `bg-popover`            | `color.background.elevated`                              |
-| `text-foreground`       | `color.text.default`                                     |
-| `text-muted-foreground` | `color.text.subtle`                                      |
-| `text-primary`          | `color.text.action.default` (through the shadcn mapping) |
-| `text-destructive`      | `color.text.destructive.default`                         |
-| `bg-destructive`        | `color.feedback.error.default`                           |
-| `border-border`         | `color.border.default`                                   |
-| `border-input`          | `color.border.input`                                     |
-| `ring-ring`             | `color.border.focus`                                     |
+| Class                     | Token                                                    |
+| ------------------------- | -------------------------------------------------------- |
+| `bg-background`           | `color.background.default`                               |
+| `bg-card`                 | `color.background.subtle`                                |
+| `bg-popover`              | `color.background.elevated`                              |
+| `text-foreground`         | `color.text.default`                                     |
+| `text-muted-foreground`   | `color.text.subtle`                                      |
+| `text-primary`            | `color.text.action.default` (through the shadcn mapping) |
+| `text-destructive`        | `color.text.destructive.default`                         |
+| `bg-destructive`          | `color.feedback.error.default`                           |
+| `text-success`            | `color.text.success.default`                             |
+| `bg-success`              | `color.feedback.success.default`                         |
+| `text-success-foreground` | `color.feedback.success.foreground`                      |
+| `text-warning`            | `color.text.warning.default`                             |
+| `bg-warning`              | `color.feedback.warning.default`                         |
+| `text-warning-foreground` | `color.feedback.warning.foreground`                      |
+| `border-border`           | `color.border.default`                                   |
+| `border-input`            | `color.border.input`                                     |
+| `ring-ring`               | `color.border.focus`                                     |
 
 ---
 
@@ -246,6 +262,12 @@ WCAG 2.x ratios of the pairs under watch, as of the fix of the 6 failures on 202
 | `sidebar.primary.on` on `sidebar.primary.default`             | 5.78  | 4.58  | 4.5       |
 | `text.destructive.default` on the card                        | 7.50  | 7.71  | 4.5       |
 | `text.destructive.default` on the weakest destructive tint    | 5.25  | 4.90  | 4.5       |
+| `feedback.success.foreground` on `feedback.success.default`   | 5.36  | 10.17 | 4.5       |
+| `text.success.default` on the card                            | 6.83  | 9.72  | 4.5       |
+| `text.success.default` on the weakest success tint            | 5.20  | 6.49  | 4.5       |
+| `feedback.warning.foreground` on `feedback.warning.default`   | 9.24  | 11.45 | 4.5       |
+| `text.warning.default` on the card                            | 6.36  | 10.22 | 4.5       |
+| `text.warning.default` on the weakest warning tint            | 5.53  | 6.53  | 4.5       |
 
 Primitive steps added to get there: **`mist.600`** (`#607175`), **`mist.700`**
 (`#424f52`, which fills the 500 → 800 gap and keeps the scale monotonic) and
@@ -254,3 +276,7 @@ labels had been measured only against the solid fill, and read at 3.00:1 on a
 card under the hover tint. **`red.800`** (`#9f0712`) and **`red.300`**
 (`#ffa2a2`) keep the hue and give the text its own token; the weakest tint is
 the 20% hover tint over a card in light mode and the 30% one in dark mode.
+The success and warning rows date from the same day (P4-19): new primitives
+**`emerald.300`**, **`.400`**, **`.700`**, **`.800`** and **`amber.300`**,
+**`.400`**, **`.450`**, **`.700`**, taken from Tailwind v4's palette like the
+red steps; their weakest tint is the 20% one over a card in both modes.

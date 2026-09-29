@@ -196,6 +196,8 @@ if (!existsSync(variantsPath)) {
           "default",
           "secondary",
           "destructive",
+          "success",
+          "warning",
           "outline",
           "ghost",
           "link",
@@ -204,7 +206,10 @@ if (!existsSync(variantsPath)) {
       },
     },
     Alert: {
-      variant: { values: ["default", "destructive"], default: "default" },
+      variant: {
+        values: ["default", "destructive", "success", "warning"],
+        default: "default",
+      },
     },
     // Sub-components own their cva, and their values are theirs alone. These
     // three used to be folded into Item, Empty and Tabs, which advertised

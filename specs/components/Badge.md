@@ -16,7 +16,7 @@ A compact label that categorizes an element, marks its status or highlights a pi
 
 ## Usage
 
-- Show a status (active, pending, error) next to a title
+- Show a status next to a title: `success` for a positive one (Paid, Active), `warning` for one that needs attention (Pending review), `destructive` for an error
 - Categorize an entry in a list or a table
 - Display a notification count
 - Flag something new or experimental
@@ -27,6 +27,7 @@ A compact label that categorizes an element, marks its status or highlights a pi
 - **MUST NOT** — act as an action button → use `Button` with `size="xs"`
 - **MUST NOT** — exceed three words of text
 - **MUST** — keep the `destructive` variant for error or critical-alert statuses
+- **MUST** — keep `success` and `warning` for statuses of that meaning, never to decorate a badge with green or amber
 - **MUST NOT** — contain an interactive element
 - **MUST** — check the contrast of the background-less `ghost` and `link` variants on every surface they appear on
 
@@ -55,9 +56,13 @@ A compact label that categorizes an element, marks its status or highlights a pi
 | `color.border.default`               | `border-border`                                                                                                                            | `badgeVariants.variant.outline`                                                                                                           |
 | `color.border.focus`                 | `border-ring` · `ring-ring/50`                                                                                                             | `badgeVariants` via `FOCUS_RING` (`lib/focus.ts`)                                                                                         |
 | `color.feedback.error.default`       | `bg-destructive/10` · `bg-destructive/20` · `border-destructive` · `border-destructive/40` · `ring-destructive/20` · `ring-destructive/40` | `badgeVariants.variant.destructive` · `badgeVariants.variant.destructive` via `FOCUS_RING_DESTRUCTIVE` (`lib/focus.ts`) · `badgeVariants` |
+| `color.feedback.success.default`     | `bg-success/10` · `bg-success/20`                                                                                                          | `badgeVariants.variant.success`                                                                                                           |
+| `color.feedback.warning.default`     | `bg-warning/10` · `bg-warning/20`                                                                                                          | `badgeVariants.variant.warning`                                                                                                           |
 | `color.text.default`                 | `text-foreground` · `text-secondary-foreground`                                                                                            | `badgeVariants.variant.outline` · `badgeVariants.variant.secondary`                                                                       |
 | `color.text.destructive.default`     | `text-destructive`                                                                                                                         | `badgeVariants.variant.destructive`                                                                                                       |
 | `color.text.subtle`                  | `text-muted-foreground`                                                                                                                    | `badgeVariants.variant.ghost` · `badgeVariants.variant.outline`                                                                           |
+| `color.text.success.default`         | `text-success`                                                                                                                             | `badgeVariants.variant.success`                                                                                                           |
+| `color.text.warning.default`         | `text-warning`                                                                                                                             | `badgeVariants.variant.warning`                                                                                                           |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                                                                   | `badgeVariants` via `FOCUS_RING` (`lib/focus.ts`)                                                                                         |
 | `typography.font-weight.medium`      | `font-medium`                                                                                                                              | `badgeVariants`                                                                                                                           |
 | `typography.size.xs`                 | `text-xs`                                                                                                                                  | `badgeVariants`                                                                                                                           |
@@ -72,12 +77,12 @@ Collected from `components/ui/badge.tsx` and the `lib/` constants it imports; Ta
 
 Renders `<span>`, or its child with `asChild`.
 
-| Prop        | Type                                                                          | Default     | Description                                         |
-| ----------- | ----------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
-| `variant`   | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"` | `"default"` | How the badge looks                                 |
-| `asChild`   | `boolean`                                                                     | `false`     | Renders the first child instead, through Radix Slot |
-| `className` | `string`                                                                      | —           | Additional CSS classes                              |
-| `...props`  | `React.ComponentProps<"span">`                                                | —           | Native `<span>` props                               |
+| Prop        | Type                                                                                                    | Default     | Description                                         |
+| ----------- | ------------------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| `variant`   | `"default" \| "secondary" \| "destructive" \| "success" \| "warning" \| "outline" \| "ghost" \| "link"` | `"default"` | How the badge looks, or the status it announces     |
+| `asChild`   | `boolean`                                                                                               | `false`     | Renders the first child instead, through Radix Slot |
+| `className` | `string`                                                                                                | —           | Additional CSS classes                              |
+| `...props`  | `React.ComponentProps<"span">`                                                                          | —           | Native `<span>` props                               |
 
 ### `badgeVariants`
 
@@ -85,15 +90,15 @@ A `cva` function: returns the classes for a combination of its axes (see **Varia
 
 <!-- End of the generated part. -->
 
-> **Variant axes** — `variant` describes **appearance**: `default`, `secondary`, `outline`, `ghost` and `link` change nothing but visual prominence. Only `destructive` is about **intent**: it announces an error state or dangerous data. Never use it to get red — a badge that is merely colored uses `outline` and a color token.
+> **Variant axes** — `variant` mixes two things. `default`, `secondary`, `outline`, `ghost` and `link` describe **appearance**: they change nothing but visual prominence. `destructive`, `success` and `warning` describe **intent**: an error or dangerous data, a positive outcome, a status that needs attention. Never pick one for its color — a badge that is merely categorized uses `secondary` or `outline`.
 
 ## Variants
 
 <!-- Generated by scripts/build-spec-variants.ts from mcp-server/context/component-variants.json — do not edit by hand. -->
 
-| Component | Axis      | Values                                                                 | Default   |
-| --------- | --------- | ---------------------------------------------------------------------- | --------- |
-| `Badge`   | `variant` | `default` · `secondary` · `destructive` · `outline` · `ghost` · `link` | `default` |
+| Component | Axis      | Values                                                                                         | Default   |
+| --------- | --------- | ---------------------------------------------------------------------------------------------- | --------- |
+| `Badge`   | `variant` | `default` · `secondary` · `destructive` · `success` · `warning` · `outline` · `ghost` · `link` | `default` |
 
 What each axis means (appearance, intent, size…) is stated under **Props / API**.
 
@@ -122,8 +127,8 @@ No keyboard interaction of its own; a badge rendered as a link behaves like a na
 
 **Pitfalls**:
 
-- Color never carries the meaning on its own (`destructive` says "Error" in words, it is not just red).
-- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.
+- Color never carries the meaning on its own (`destructive` says "Error" in words, it is not just red; `success` says "Paid", not just green). Success green and error red look alike to a red-green color-blind reader.
+- **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`) or a raw color: `text-destructive`, `text-success` and `text-warning` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.
 - A count ("3") must be tied to what it counts — in the name of the neighboring button, for example.
 
 ## Code example
@@ -135,7 +140,9 @@ export default function Example() {
   return (
     <div className="flex gap-2">
       <Badge variant="default">Active</Badge>
-      <Badge variant="secondary">Pending</Badge>
+      <Badge variant="secondary">Draft</Badge>
+      <Badge variant="success">Paid</Badge>
+      <Badge variant="warning">Pending review</Badge>
       <Badge variant="destructive">Error</Badge>
       <Badge variant="outline">v2.1.0</Badge>
     </div>

@@ -210,6 +210,12 @@ const PAIRS: Pair[] = [
     bg: "color.feedback.error.default",
     threshold: 4.5,
   },
+  ...(["success", "warning"] as const).map((role) => ({
+    label: `${role} foreground on ${role} surface`,
+    fg: `color.feedback.${role}.foreground`,
+    bg: `color.feedback.${role}.default`,
+    threshold: 4.5 as const,
+  })),
   {
     label: "sidebar active item text on sidebar active item",
     fg: "color.sidebar.primary.on",
@@ -239,6 +245,24 @@ const PAIRS: Pair[] = [
     threshold: 4.5,
   },
 
+  // Success and warning text (`text-success`, `text-warning`) on neutral
+  // surfaces: the success and warning Alerts, a status line next to a field.
+  ...(["success", "warning"] as const).flatMap((role) => [
+    ...SURFACES.map(([bg, surface]) => ({
+      label: `${role} text on the ${surface}`,
+      fg: `color.text.${role}.default`,
+      bg,
+      threshold: 4.5 as const,
+    })),
+    {
+      label: `${role} Alert description (text-${role}/90) on the card`,
+      fg: `color.text.${role}.default`,
+      fgAlpha: 0.9,
+      bg: "color.background.subtle",
+      threshold: 4.5 as const,
+    },
+  ]),
+
   // Text on a tint of its own role — the inventory of every `text-<role>` set
   // on a `bg-<role>/<n>` across components/ui. Tints of another role (a
   // neutral label on `bg-muted/50` or `bg-input/30`) are not listed: those
@@ -256,6 +280,15 @@ const PAIRS: Pair[] = [
     "color.text.destructive.default",
     "color.feedback.error.default",
     { light: [0.1, 0.2], dark: [0.2] }
+  ),
+  //   Badge    success, warning  /10 → /20 as a hovered link, dark /20
+  ...(["success", "warning"] as const).flatMap((role) =>
+    tinted(
+      `${role} Badge label`,
+      `color.text.${role}.default`,
+      `color.feedback.${role}.default`,
+      { light: [0.1, 0.2], dark: [0.2] }
+    )
   ),
   //   DropdownMenuItem, ContextMenuItem, MenubarItem  destructive, focused:
   //   /10, dark /20, inside a popover

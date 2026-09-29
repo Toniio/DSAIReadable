@@ -16,7 +16,9 @@
       "variant": {
         "values": [
           "default",
-          "destructive"
+          "destructive",
+          "success",
+          "warning"
         ],
         "default": "default"
       }
@@ -46,6 +48,8 @@
           "default",
           "secondary",
           "destructive",
+          "success",
+          "warning",
           "outline",
           "ghost",
           "link"

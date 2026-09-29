@@ -1,5 +1,5 @@
 {
-  "tokenCount": 305,
+  "tokenCount": 319,
   "tokens": [
     {
       "token": "primitive.color.mist.0",
@@ -418,6 +418,70 @@
       "private": true
     },
     {
+      "token": "primitive.color.emerald.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#5ee9b5"
+      },
+      "value": {
+        "light": "#5ee9b5"
+      },
+      "description": "Light emerald, success text in dark mode, legible on a success tint.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#00d492"
+      },
+      "value": {
+        "light": "#00d492"
+      },
+      "description": "Bright emerald, success in dark mode.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-700",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#007a55"
+      },
+      "value": {
+        "light": "#007a55"
+      },
+      "description": "Deep emerald, success in light mode; white text on it reaches 5.36:1.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-800",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#006045"
+      },
+      "value": {
+        "light": "#006045"
+      },
+      "description": "Dark emerald, success text in light mode, legible on a success tint.",
+      "private": true
+    },
+    {
       "token": "primitive.color.blue.300",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-300",
@@ -466,6 +530,54 @@
       "private": true
     },
     {
+      "token": "primitive.color.amber.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#ffd230"
+      },
+      "value": {
+        "light": "#ffd230"
+      },
+      "description": "Light amber, warning text in dark mode, legible on a warning tint.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#ffb900"
+      },
+      "value": {
+        "light": "#ffb900"
+      },
+      "description": "Bright amber, warning in dark mode.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.450",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-450",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#fe9a00"
+      },
+      "value": {
+        "light": "#fe9a00"
+      },
+      "description": "Orange amber, warning in light mode; for tints and solid fills with dark text, never a border on its own (1.92:1 on white).",
+      "private": true
+    },
+    {
       "token": "primitive.color.amber.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-amber-500",
@@ -495,6 +607,22 @@
         "light": "#af8526"
       },
       "description": "Ochre, categorical chart series 3 in light mode.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-700",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#973c08"
+      },
+      "value": {
+        "light": "#973c08"
+      },
+      "description": "Burnt amber, warning text in light mode, legible on a warning tint.",
       "private": true
     },
     {
@@ -2594,6 +2722,50 @@
       }
     },
     {
+      "token": "color.text.success.default",
+      "tier": "semantic",
+      "cssVar": "--color-text-success-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.emerald.800}",
+        "dark": "{primitive.color.emerald.300}"
+      },
+      "value": {
+        "light": "#006045",
+        "dark": "#5ee9b5"
+      },
+      "description": "Success text and icons, on a neutral surface or on a success tint. Not for warnings, errors or neutral information.",
+      "docs": {
+        "description": "Success-state text and icons — the class `text-success`. Darker than `color.feedback.success.default` in light mode and lighter in dark mode, so it stays at 4.5:1 or more on every surface and on the `bg-success/10`–`/30` tints.",
+        "do": "Use for the success Alert and Badge, and for a confirmation message next to its field.",
+        "dont": "Do not carry the meaning by color alone: a success and an error are hard to tell apart for a red-green color-blind reader, so an icon or a word says it too. Do not use `color.feedback.success.default` for text."
+      }
+    },
+    {
+      "token": "color.text.warning.default",
+      "tier": "semantic",
+      "cssVar": "--color-text-warning-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.amber.700}",
+        "dark": "{primitive.color.amber.300}"
+      },
+      "value": {
+        "light": "#973c08",
+        "dark": "#ffd230"
+      },
+      "description": "Warning text and icons, on a neutral surface or on a warning tint. Not for errors, successes or neutral information.",
+      "docs": {
+        "description": "Warning-state text and icons — the class `text-warning`. It stays at 4.5:1 or more on every surface and on the `bg-warning/10`–`/30` tints, where the warning fill itself does not reach 3:1 on a light surface.",
+        "do": "Use for the warning Alert and Badge, and for the icon of any warning: the fill is too light to stand alone.",
+        "dont": "Do not use for errors — a blocking problem is destructive. Do not use `color.feedback.warning.default` for text, borders or icons."
+      }
+    },
+    {
       "token": "color.border.default",
       "tier": "semantic",
       "cssVar": "--color-border-default",
@@ -2827,6 +2999,92 @@
         "description": "Text and icons placed **on** a solid error surface.",
         "do": "Use whenever a solid `bg-destructive` background carries text or an icon.",
         "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.500 drops to 2.89:1."
+      }
+    },
+    {
+      "token": "color.feedback.success.default",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-success-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.emerald.700}",
+        "dark": "{primitive.color.emerald.400}"
+      },
+      "value": {
+        "light": "#007a55",
+        "dark": "#00d492"
+      },
+      "description": "Success state color for backgrounds, tints and borders. Not for text, warnings or errors.",
+      "docs": {
+        "description": "Success-state fill — solid or tinted background, border.",
+        "do": "Use for the `bg-success/10`–`/30` tints and for a solid `bg-success` surface with `text-success-foreground`.",
+        "dont": "Do not use for text or icons — use `color.text.success.default` (`text-success`). Do not use for warnings or errors."
+      }
+    },
+    {
+      "token": "color.feedback.success.foreground",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-success-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.mist.0}",
+        "dark": "{primitive.color.mist.950}"
+      },
+      "value": {
+        "light": "#ffffff",
+        "dark": "#090b0c"
+      },
+      "description": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface.",
+      "docs": {
+        "description": "Text and icons placed **on** a solid success surface.",
+        "do": "Use whenever a solid `bg-success` background carries text or an icon.",
+        "dont": "Never put `text-white` on a success surface — in dark mode the fill is light and needs dark text."
+      }
+    },
+    {
+      "token": "color.feedback.warning.default",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-warning-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.amber.450}",
+        "dark": "{primitive.color.amber.400}"
+      },
+      "value": {
+        "light": "#fe9a00",
+        "dark": "#ffb900"
+      },
+      "description": "Warning state color for backgrounds and tints. Not for text, borders or icons, not for errors or successes.",
+      "docs": {
+        "description": "Warning-state fill — solid or tinted background. At 1.92:1 on white in light mode, it never stands alone as a border or an icon.",
+        "do": "Use for the `bg-warning/10`–`/30` tints and for a solid `bg-warning` surface with `text-warning-foreground`.",
+        "dont": "Do not use for text, icons or a lone border — use `color.text.warning.default` (`text-warning`). Do not use for errors."
+      }
+    },
+    {
+      "token": "color.feedback.warning.foreground",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-warning-foreground",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.mist.950}"
+      },
+      "value": {
+        "light": "#090b0c"
+      },
+      "description": "Text and icons placed on color.feedback.warning.default, dark in both modes. Never use white on a warning surface.",
+      "docs": {
+        "description": "Text and icons placed **on** a solid warning surface — dark in both modes.",
+        "do": "Use whenever a solid `bg-warning` background carries text or an icon.",
+        "dont": "Never put `text-white` on a warning surface: white on the light-mode fill is below 2:1."
       }
     },
     {
@@ -4491,7 +4749,7 @@
       "tier": "semantic",
       "cssVar": "--opacity-placeholder",
       "type": "number",
-      "status": "reserved",
+      "status": "deprecated",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.opacity.0-50}"
@@ -4499,10 +4757,10 @@
       "value": {
         "light": "0.5"
       },
-      "description": "Opacity for placeholder text. Not for disabled or overlay use.",
+      "description": "Deprecated: placeholder text was never faded. Form fields color it with color.text.subtle.",
       "docs": {
-        "do": "Apply to the `::placeholder` of form fields.",
-        "dont": "Do not confuse with `opacity.disabled` — they serve different purposes."
+        "do": "Write `placeholder:text-muted-foreground`, as Input, Textarea, Select and NativeSelect do.",
+        "dont": "Do not fade the placeholder with an opacity: default text at 0.5 is 3.70:1 on white, below 4.5:1."
       }
     },
     {
@@ -4510,7 +4768,7 @@
       "tier": "semantic",
       "cssVar": "--opacity-overlay",
       "type": "number",
-      "status": "reserved",
+      "status": "deprecated",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.opacity.0-80}"
@@ -4518,10 +4776,10 @@
       "value": {
         "light": "0.8"
       },
-      "description": "Opacity for modal/dialog overlay backdrops. Not for component-level transparency.",
+      "description": "Deprecated: modal backdrops never read it. They use a 10% static-black scrim with a backdrop blur.",
       "docs": {
-        "do": "Use for the backdrops of modals and dialogs.",
-        "dont": "Do not go below `0.7` — the contrast becomes too low."
+        "do": "Build a modal backdrop on `OVERLAY_BASE` (lib/overlay.ts): `bg-black/10` with `backdrop-blur-xs`, as Dialog, AlertDialog, Sheet and Drawer do.",
+        "dont": "Do not darken the backdrop to `bg-black/80`: the page behind disappears, and the result drifts from the shadcn/ui v4 look agents reproduce."
       }
     },
     {

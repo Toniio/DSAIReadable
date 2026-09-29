@@ -36,7 +36,7 @@ Code written with this design system uses its components, never a native element
 ## Component specs
 
 - [Accordion](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Accordion.md): Navigation — A vertical stack of collapsible panels that shows and hides sections of content.
-- [Alert](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Alert.md): Feedback — A non-modal banner that delivers a contextual message — informational or an error — with a title, a description and an optional action.
+- [Alert](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Alert.md): Feedback — A non-modal banner that delivers a contextual message — informational, a success, a warning or an error — with a title, a description and an optional action.
 - [AlertDialog](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/AlertDialog.md): Overlay — A blocking modal that stops the user to confirm or cancel a critical action.
 - [AspectRatio](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/AspectRatio.md): Layout — A container that locks its content — an image, a video, an embedded map — to a fixed width-to-height ratio.
 - [Avatar](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/components/Avatar.md): Misc — A visual stand-in for a person or an entity — a photo, initials or an icon — with support for groups and status badges.

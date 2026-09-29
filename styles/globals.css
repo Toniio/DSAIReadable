@@ -41,6 +41,15 @@
      --text-color-* before --color-*, so bg-destructive and border-destructive
      keep the error fill while every destructive label stays at 4.5:1. */
   --text-color-destructive: var(--color-text-destructive-default);
+  /* Success and warning follow the same split: bg-success / bg-warning take
+     the fill, text-success / text-warning the text token that stays at 4.5:1
+     on every surface and tint. */
+  --color-success: var(--color-feedback-success-default);
+  --color-success-foreground: var(--color-feedback-success-foreground);
+  --text-color-success: var(--color-text-success-default);
+  --color-warning: var(--color-feedback-warning-default);
+  --color-warning-foreground: var(--color-feedback-warning-foreground);
+  --text-color-warning: var(--color-text-warning-default);
   --color-border: var(--color-border-default);
   --color-input: var(--color-border-input);
   --color-ring: var(--color-border-focus);

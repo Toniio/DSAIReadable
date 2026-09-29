@@ -73,7 +73,7 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not use `text.destructive.default` for warnings — it is reserved for errors.",
+      "rule": "❌ Do not use `text.destructive.default` for warnings — it is reserved for errors. A warning is `text.warning.default` (`text-warning`), a success `text.success.default` (`text-success`).",
       "source": "color.md"
     },
     {
@@ -125,7 +125,23 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not use them for warnings or successes — dedicated tokens will be added.",
+      "rule": "❌ Do not use the error tokens for warnings or successes: each state has its own fill, foreground and text token. The Alert and Badge `success` and `warning` variants use them.",
+      "source": "color.md"
+    },
+    {
+      "rule": "✅ Success and warning follow the error's split: the fill (`bg-success`, `bg-warning`, their `/10`–`/30` tints) and a text token (`text-success`, `text-warning`) that stays at 4.5:1 on every surface and tint.",
+      "source": "color.md"
+    },
+    {
+      "rule": "❌ Do not use `feedback.warning.default` as a border or an icon: in light mode it reaches 1.92:1 on white. The icon of a warning takes `text-warning`.",
+      "source": "color.md"
+    },
+    {
+      "rule": "❌ Never carry a state by color alone: success green and error red look alike to a red-green color-blind reader. An icon or a word says it too.",
+      "source": "color.md"
+    },
+    {
+      "rule": "✅ There is no `info` state: a neutral message is the `default` Alert. The naming grammar keeps the `info` role free for the day a component needs one.",
       "source": "color.md"
     },
     {
@@ -277,19 +293,23 @@
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Through Tailwind",
+      "rule": "✅ What the fields do: color.text.subtle, 5.10:1 on white",
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Through CSS",
+      "rule": "❌ Faded default text: 3.70:1 on white, below 4.5:1 — and ESLint rejects the class",
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Modal backdrop",
+      "rule": "✅ What the modal surfaces do",
       "source": "opacity.md"
     },
     {
-      "rule": "**Three cases, three tokens** — `disabled`, `placeholder` and `overlay` are the only legitimate contexts for global opacity.",
+      "rule": "❌ A backdrop darkened with an opacity: the page behind disappears,",
+      "source": "opacity.md"
+    },
+    {
+      "rule": "**One token, one case** — `opacity.disabled` is the only active opacity token; `opacity-0` and `opacity-100` show and hide.",
       "source": "opacity.md"
     },
     {
@@ -297,15 +317,15 @@
       "source": "opacity.md"
     },
     {
-      "rule": "**Never use opacity to fake a subtle color** — always use `color.text.subtle` / `text-muted-foreground`.",
+      "rule": "**Never use opacity to fake a subtle color** — always use `color.text.subtle` / `text-muted-foreground`, placeholders included.",
       "source": "opacity.md"
     },
     {
-      "rule": "**Opacity is not selective** — it applies to the whole DOM subtree. When only part of it should change, use targeted color tokens.",
+      "rule": "**Opacity is not selective** — it applies to the whole DOM subtree. When only part of it should change, use a color, or an alpha on a color (`bg-black/10`, `text-current/70`).",
       "source": "opacity.md"
     },
     {
-      "rule": "**`opacity.overlay` at `0.8` is the reference value** — do not lower it for standard modals: it hurts the readability of the main content.",
+      "rule": "**A modal backdrop comes from `OVERLAY_BASE`** — do not write a backdrop of your own, and do not darken it: the page behind stays visible under the blur.",
       "source": "opacity.md"
     },
     {
@@ -426,6 +446,7 @@
       "**MUST NOT** — act as an action button → use `Button` with `size=\"xs\"`",
       "**MUST NOT** — exceed three words of text",
       "**MUST** — keep the `destructive` variant for error or critical-alert statuses",
+      "**MUST** — keep `success` and `warning` for statuses of that meaning, never to decorate a badge with green or amber",
       "**MUST NOT** — contain an interactive element",
       "**MUST** — check the contrast of the background-less `ghost` and `link` variants on every surface they appear on"
     ],
