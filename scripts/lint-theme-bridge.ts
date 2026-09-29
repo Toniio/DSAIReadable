@@ -139,8 +139,7 @@ const declaredInTheme = declaredVars(body)
 function shadcnAliases(): Map<string, string> {
   const raw = readFileSync(resolve(ROOT, "tokens/component.json"), "utf-8")
   const shadcn = (JSON.parse(raw) as Record<string, unknown>).shadcn as
-    | Record<string, { $value?: string }>
-    | undefined
+    Record<string, { $value?: string }> | undefined
   const out = new Map<string, string>()
   for (const [alias, node] of Object.entries(shadcn ?? {})) {
     const ref = node?.$value?.match(/^\{(.+)\}$/)?.[1]
