@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
-    "tsx": "^4.19.4",
+    "tsx": "^4.23.15",
     "zod": "^3.25.1"
   },
   "devDependencies": {
