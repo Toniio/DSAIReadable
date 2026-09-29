@@ -26,13 +26,15 @@ below exists because breaking it produces non-conforming generated code.
 ## 2. Token architecture
 
 Three tiers in the [W3C DTCG](https://www.designtokens.org/TR/2025.10/format/)
-format — Format Module 2025.10, checked by `tz check` (`terrazzo.config.ts`) —
-in this strict order of reference:
+format — Format Module 2025.10 and Resolver Module 2025.10, checked by Terrazzo
+(`npm run tokens:lint-dtcg`, `terrazzo.config.ts`) — in this strict order of reference:
 
 ```
-tokens/primitive.json   Tier 1 — raw values                PRIVATE, never referenced outside Tier 2
-tokens/semantic.json    Tier 2 — decisions, light/dark modes
-tokens/component.json   Tier 3 — shadcn/ui aliases (--background, --primary, --ring…)
+tokens/tokens.resolver.json  the three sets below, in this order, then the color-scheme modifier
+tokens/primitive.json        Tier 1 — raw values                PRIVATE, never referenced outside Tier 2
+tokens/semantic.json         Tier 2 — decisions, light values
+tokens/semantic.dark.json    Tier 2 — the dark context: the semantic tokens dark changes
+tokens/component.json        Tier 3 — shadcn/ui aliases (--background, --primary, --ring…)
         ↓ npm run tokens:build
 tokens.css              generated CSS custom properties — NEVER EDIT BY HAND
         ↓ @theme bridge
@@ -45,8 +47,16 @@ The three files form one DTCG document: the primitives sit under the
 `{primitive.radius.md}`. Values take the 2025.10 object forms
 (`{ "colorSpace": "srgb", "components": […] }`, `{ "value": 1, "unit": "rem" }`),
 and `mcp-server/src/lib/dtcg.ts` prints them as CSS. One declared divergence:
-letter spacing stays in `em`, which the Format Module does not list. Light/dark
-modes stay in `$extensions.modes` until they move to a DTCG Resolver.
+letter spacing stays in `em`, which the Format Module does not list.
+
+Modes follow the Resolver Module: the `color-scheme` modifier of
+`tokens/tokens.resolver.json` defaults to `light` (the values of
+`semantic.json`), and its `dark` context is `semantic.dark.json`. An override
+there redefines an existing semantic token with its `$type` and a `{…}`
+reference, nothing else; its description, status and docs stay in
+`semantic.json`. `loadTokens` in `mcp-server/src/lib/dtcg.ts` is the only
+reader of the resolver: a script that needs a value in a mode asks it.
+`$extensions.modes` is rejected by `tokens:lint-naming`.
 `tokens.css` is generated: any direct edit is overwritten by the next build and
 caught by `npm run tokens:check`.
 

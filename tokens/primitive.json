@@ -1,6 +1,6 @@
 {
   "primitive": {
-    "$description": "Tier 1 — raw values. Private: only tokens/semantic.json references them, as {primitive.…}; nothing outside the token build reads them.",
+    "$description": "Tier 1 — raw values. Private: only the semantic tier (tokens/semantic.json and its dark overrides) references them, as {primitive.…}; nothing outside the token build reads them.",
     "color": {
       "mist": {
         "0": {

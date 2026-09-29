@@ -13,7 +13,7 @@
   },
   {
     "term": "DTCG",
-    "definition": "Design Token Community Group — the open standard format for design tokens, Format Module 2025.10 (checked by `tz check`). Each token carries $value, $type, and $description keys; values use the 2025.10 object forms ({ colorSpace, components }, { value, unit })."
+    "definition": "Design Token Community Group — the open standard format for design tokens, Format Module 2025.10 (checked by Terrazzo, npm run tokens:lint-dtcg). Each token carries $value, $type, and $description keys; values use the 2025.10 object forms ({ colorSpace, components }, { value, unit }). The light and dark modes follow the Resolver Module 2025.10: tokens/tokens.resolver.json, whose dark context is tokens/semantic.dark.json."
   },
   {
     "term": "cva",

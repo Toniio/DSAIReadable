@@ -15,7 +15,7 @@ import {
 import path from "path"
 import ts from "typescript"
 
-import { cssValue } from "../lib/dtcg.js"
+import { cssValue, loadTokens } from "../lib/dtcg.js"
 
 // ── Paths ───────────────────────────────────────────────────────────
 /** Structural type for the arbitrary JSON we read from tokens/ and specs/. */
@@ -145,18 +145,6 @@ function isJsonObject(val: Json): val is { [key: string]: Json } {
   return typeof val === "object" && val !== null && !Array.isArray(val)
 }
 
-/** Read the dark-mode override of a DTCG leaf, if it declares one. */
-function darkValue(leaf: { [k: string]: Json }): string | undefined {
-  const ext = leaf.$extensions
-  if (!isJsonObject(ext)) return undefined
-  const modes = ext.modes
-  if (!isJsonObject(modes)) return undefined
-  const dark = modes.dark
-  if (!isJsonObject(dark)) return undefined
-  const value = dark.$value
-  return typeof value === "string" ? value : undefined
-}
-
 /** Flatten DTCG nested tokens to a list of {path, ...leaf} */
 function flattenDTCG(
   obj: JsonObject,
@@ -198,9 +186,17 @@ const inventory: Array<{
   shadcn: { item: string | null; divergences: JsonObject[] }
 }> = dsIndex.inventory
 
-const semanticTokens = readJSON("tokens/semantic.json")
-const componentTokens = readJSON("tokens/component.json")
-const primitiveTokens = readJSON("tokens/primitive.json")
+// The tiers and the dark context, as tokens/tokens.resolver.json declares them.
+const tokens = loadTokens(ROOT)
+const semanticTokens = tokens.tiers.semantic.tree as JsonObject
+const componentTokens = tokens.tiers.component.tree as JsonObject
+const primitiveTokens = tokens.tiers.primitive.tree as JsonObject
+
+/** The dark value of a semantic token, when the dark context overrides it. */
+function darkValue(leaf: { path: string }): string | undefined {
+  const value = tokens.override(leaf.path, "dark")
+  return typeof value === "string" ? value : undefined
+}
 
 const specDir = path.join(ROOT, "specs/components")
 const specFiles = readdirSync(specDir).filter((f) => f.endsWith(".md"))

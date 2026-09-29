@@ -92,13 +92,15 @@ A `next-themes` wrapper that sets the `dark` class on `<html>` and lets the user
 
 ## `tokens/` — Source of truth for the design tokens
 
-A **three-tier** architecture (in the [W3C DTCG](https://design-tokens.github.io/community-group/format/) format):
+A **three-tier** architecture (in the [W3C DTCG](https://www.designtokens.org/TR/2025.10/format/) format), assembled by a [DTCG resolver](https://www.designtokens.org/TR/2025.10/resolver/):
 
 ```
 tokens/
-├── primitive.json    # Tier 1: raw values (private)
-├── semantic.json     # Tier 2: semantic tokens (public)
-└── component.json    # Tier 3: shadcn/ui aliases (public)
+├── tokens.resolver.json  # The three tiers in order, then the light / dark modifier
+├── primitive.json        # Tier 1: raw values (private)
+├── semantic.json         # Tier 2: semantic tokens (public), light values
+├── semantic.dark.json    # Tier 2: the dark context — the semantic tokens dark changes
+└── component.json        # Tier 3: shadcn/ui aliases (public)
 ```
 
 ### `tokens/primitive.json` — Tier 1, Primitive
@@ -110,7 +112,7 @@ Examples: `primitive.color.mist.100`, `primitive.space.4`, `primitive.radius.md`
 ### `tokens/semantic.json` — Tier 2, Semantic
 
 Tokens that carry meaning — they reference the primitives by full path, `{primitive.color.mist.100}`.  
-Holds the light / dark **modes** in `$extensions.modes`.  
+Its values are the light mode, the resolver's default. The dark **mode** is `tokens/semantic.dark.json`, the `dark` context of the `color-scheme` modifier: each override names a semantic token and gives its `$type` and dark `$value`.  
 Examples: `color.background.default`, `color.text.subtle`, `space.component.md`.
 
 This is the layer the components read: the `@theme` bridge in `styles/globals.css` ties each Tailwind class (`bg-background`) to a semantic token (`--color-background-default`).
@@ -145,20 +147,20 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Tokens — `npm run tokens-validate`
 
-| Script                      | npm command                         | Role                                                                                                                                             |
-| --------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `build-tokens.ts`           | `tokens:build` / `tokens:check`     | Generates `tokens.css` from the DTCG sources; `--check` fails on drift                                                                           |
-| `terrazzo.config.ts` (root) | `tokens:lint-dtcg`                  | DTCG Format Module 2025.10 conformance (Terrazzo `tz check`): value forms, units, sRGB colors, descriptions, kebab-case names                    |
-| `lint-token-naming.ts`      | `tokens:lint-naming`                | Key grammar (`foundation.property[.role][.emphasis][.state]`); tiers 2 and 3 hold only references; DTCG 2025.10 `$type`s and `$`-properties only |
-| `lint-raw-values.ts`        | `tokens:lint-values`                | Detects raw values (hex, px, rem…) in components. Exception: `// allow-raw: <reason>`                                                            |
-| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | The `@theme` bridge in `styles/globals.css`: references resolve, no private tier, every name in a Tailwind namespace                             |
-| `lint-focus-ring.ts`        | `tokens:lint-focus`                 | A single focus ring (`lib/focus.ts`) for every focusable component                                                                               |
-| `lint-contrast.ts`          | `tokens:lint-contrast`              | WCAG contrast of the text / background pairs, in light and dark                                                                                  |
-| `lint-palette-monotonic.ts` | `tokens:lint-monotonic`             | In every palette, luminance strictly decreases as the step goes up                                                                               |
-| `lint-chart-palette.ts`     | `tokens:lint-chart`                 | Every `color.chart.*` series at 3:1 on its backgrounds; pairs distinct in OKLab under normal vision, protanopia and deuteranopia                 |
-| `lint-font-tokens.ts`       | `tokens:lint-fonts`                 | Every `typography.font-family.*` token names the font `next/font` loads under its variable                                                       |
-| `lint-token-lifecycle.ts`   | `tokens:lint-lifecycle`             | Every semantic token declares `active`, `reserved` or `$deprecated`, and the status matches the code                                             |
-| `build-token-docs.ts`       | `docs:tokens` / `docs:tokens:check` | Generates `specs/tokens/token-reference.md` and `tokens.manifest.json`                                                                           |
+| Script                      | npm command                         | Role                                                                                                                                                                                            |
+| --------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build-tokens.ts`           | `tokens:build` / `tokens:check`     | Generates `tokens.css` from the DTCG sources; `--check` fails on drift                                                                                                                          |
+| `lint-dtcg.ts`              | `tokens:lint-dtcg`                  | DTCG 2025.10 conformance of every resolver permutation (Terrazzo, `terrazzo.config.ts`): value forms, units, sRGB colors, descriptions, kebab-case names                                        |
+| `lint-token-naming.ts`      | `tokens:lint-naming`                | Key grammar (`foundation.property[.role][.emphasis][.state]`); tiers 2 and 3 and the dark overrides hold only references; DTCG 2025.10 `$type`s and `$`-properties only; no `$extensions.modes` |
+| `lint-raw-values.ts`        | `tokens:lint-values`                | Detects raw values (hex, px, rem…) in components. Exception: `// allow-raw: <reason>`                                                                                                           |
+| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | The `@theme` bridge in `styles/globals.css`: references resolve, no private tier, every name in a Tailwind namespace                                                                            |
+| `lint-focus-ring.ts`        | `tokens:lint-focus`                 | A single focus ring (`lib/focus.ts`) for every focusable component                                                                                                                              |
+| `lint-contrast.ts`          | `tokens:lint-contrast`              | WCAG contrast of the text / background pairs, in light and dark                                                                                                                                 |
+| `lint-palette-monotonic.ts` | `tokens:lint-monotonic`             | In every palette, luminance strictly decreases as the step goes up                                                                                                                              |
+| `lint-chart-palette.ts`     | `tokens:lint-chart`                 | Every `color.chart.*` series at 3:1 on its backgrounds; pairs distinct in OKLab under normal vision, protanopia and deuteranopia                                                                |
+| `lint-font-tokens.ts`       | `tokens:lint-fonts`                 | Every `typography.font-family.*` token names the font `next/font` loads under its variable                                                                                                      |
+| `lint-token-lifecycle.ts`   | `tokens:lint-lifecycle`             | Every semantic token declares `active`, `reserved` or `$deprecated`, and the status matches the code                                                                                            |
+| `build-token-docs.ts`       | `docs:tokens` / `docs:tokens:check` | Generates `specs/tokens/token-reference.md` and `tokens.manifest.json`                                                                                                                          |
 
 ### Specs — `npm run specs:validate`
 

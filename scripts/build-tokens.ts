@@ -14,6 +14,7 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import {
   cssValue,
+  loadTokens,
   PRIMITIVE_ROOT,
   primitiveGroups,
 } from "../mcp-server/src/lib/dtcg.js"
@@ -29,19 +30,18 @@ type Leaf = {
 
 type Group = { label: string | null; leaves: Leaf[] }
 
-const readTokens = (name: string) =>
-  JSON.parse(readFileSync(resolve(ROOT, "tokens", name), "utf-8")) as Record<
-    string,
-    unknown
-  >
-
+// The tiers and the dark context, as tokens/tokens.resolver.json declares them.
+const tokens = loadTokens(ROOT)
 // Walked without its `primitive` root group: --ds-prim-color-mist-0, not
 // --ds-prim-primitive-color-mist-0.
-const primitive = primitiveGroups(readTokens("primitive.json"))
-const semantic = readTokens("semantic.json")
-const component = readTokens("component.json")
+const primitive = primitiveGroups(tokens.tiers.primitive.tree)
+const semantic = tokens.tiers.semantic.tree
+const component = tokens.tiers.component.tree
 
-/** Depth-first walk yielding every DTCG leaf (a node carrying $value). */
+/**
+ * Depth-first walk yielding every DTCG leaf (a node carrying $value), with
+ * its dark value when the dark context overrides it.
+ */
 function* walk(
   node: Record<string, unknown>,
   path: string[] = []
@@ -51,18 +51,12 @@ function* walk(
       continue
     const obj = child as Record<string, unknown>
     if ("$value" in obj) {
-      const modes = (
-        obj.$extensions as
-          { modes?: Record<string, { $value?: unknown }> } | undefined
-      )?.modes
       const type = obj.$type as string | undefined
+      const dark = tokens.override([...path, key].join("."), "dark")
       yield {
         path: [...path, key],
         value: cssValue(obj.$value, type),
-        dark:
-          modes?.dark?.$value !== undefined
-            ? cssValue(modes.dark.$value, type)
-            : undefined,
+        dark: dark !== undefined ? cssValue(dark, type) : undefined,
       }
     } else {
       yield* walk(obj, [...path, key])
@@ -245,7 +239,8 @@ function buildComponent(): string[] {
 
 const header = `/* ============================================================
    DS Tokens — 3-Tier CSS Output
-   Generated from tokens/primitive.json + tokens/semantic.json + tokens/component.json
+   Generated from tokens/tokens.resolver.json: primitive.json + semantic.json
+   (+ semantic.dark.json under .dark) + component.json
    DO NOT EDIT DIRECTLY — edit the source JSON files instead.
    Regenerate with: npm run tokens:build
    ============================================================ */`

@@ -6,11 +6,6 @@
         "$type": "color",
         "$description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.950}"
-            }
-          },
           "docs": {
             "description": "Main surface of the page — the background of `<html>` and root containers.",
             "do": "Use as the background of the root page and the main containers (`<body>`, `<main>`).",
@@ -24,11 +19,6 @@
         "$type": "color",
         "$description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.800}"
-            }
-          },
           "docs": {
             "description": "A slightly muted secondary surface that creates visual hierarchy.",
             "do": "Use for cards, muted areas, secondary sidebars, inner panels.",
@@ -42,11 +32,6 @@
         "$type": "color",
         "$description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.900}"
-            }
-          },
           "docs": {
             "description": "A floating surface above the main content.",
             "do": "Use for popovers, drop-downs, dialogs, light tooltips.",
@@ -60,11 +45,6 @@
         "$type": "color",
         "$description": "Inverted surface for contrast callouts. Not for general-purpose backgrounds.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.0}"
-            }
-          },
           "docs": {
             "description": "An inverted surface that contrasts strongly with the main background.",
             "do": "Use for dark tooltips, inverted badges, alert banners.",
@@ -80,11 +60,6 @@
         "$type": "color",
         "$description": "Primary body and heading text. Not for secondary, placeholder, or disabled text.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.50}"
-            }
-          },
           "docs": {
             "description": "Main text color for body text and headings.",
             "do": "Use for all main content text, titles and important labels.",
@@ -98,11 +73,6 @@
         "$type": "color",
         "$description": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.400}"
-            }
-          },
           "docs": {
             "description": "Secondary text, captions, helper text, metadata.",
             "do": "Use for field labels, form descriptions, timestamps.",
@@ -116,11 +86,6 @@
         "$type": "color",
         "$description": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.50}"
-            }
-          },
           "docs": {
             "description": "High-contrast emphasized text — for emphasis where `text.default` is not enough.",
             "do": "Use for emphasis in areas with a busy visual context.",
@@ -134,11 +99,6 @@
         "$type": "color",
         "$description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.950}"
-            }
-          },
           "docs": {
             "description": "Text on an inverse surface (a dark background in light mode, a light one in dark mode).",
             "do": "Use only on `color.background.inverse`.",
@@ -153,11 +113,6 @@
           "$type": "color",
           "$description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.violet.400}"
-              }
-            },
             "docs": {
               "description": "Primary action text — links, active navigation labels.",
               "do": "Use for text links and labels that express a clickable action.",
@@ -171,11 +126,6 @@
           "$type": "color",
           "$description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.violet.50}"
-              }
-            },
             "docs": {
               "description": "Text on a `color.action.background.default` background.",
               "do": "Use for the label of a primary button.",
@@ -191,11 +141,6 @@
           "$type": "color",
           "$description": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.red.300}"
-              }
-            },
             "docs": {
               "description": "Destructive or error-state text and icons — the class `text-destructive`. Darker than `color.feedback.error.default` in light mode and lighter in dark mode, so it stays at 4.5:1 or more on every surface and on the `bg-destructive/10`–`/30` tints.",
               "do": "Use for error validation messages, destructive button and badge labels, and destructive menu items.",
@@ -212,11 +157,6 @@
         "$type": "color",
         "$description": "Standard dividers and component outlines. Not for input fields or focus rings.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.white-alpha.10}"
-            }
-          },
           "docs": {
             "description": "Standard border for separators and component outlines.",
             "do": "Use for dividers between sections and card outlines.",
@@ -230,11 +170,6 @@
         "$type": "color",
         "$description": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.white-alpha.10}"
-            }
-          },
           "docs": {
             "description": "A discreet, low-weight border.",
             "do": "Use for inner list separators and light divisions.",
@@ -248,11 +183,6 @@
         "$type": "color",
         "$description": "Border for form input fields. Not for decorative dividers or layout borders.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.white-alpha.15}"
-            }
-          },
           "docs": {
             "description": "The border of form fields.",
             "do": "Use for every `<input>`, `<select>`, `<textarea>` and `<checkbox>` border.",
@@ -266,11 +196,6 @@
         "$type": "color",
         "$description": "Focus ring outline for keyboard accessibility. Not for resting or hover states.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.500}"
-            }
-          },
           "docs": {
             "description": "Focus ring for keyboard accessibility (`:focus-visible`).",
             "do": "Use only for the `:focus-visible` state of interactive elements.",
@@ -286,11 +211,6 @@
         "$type": "color",
         "$description": "Standard icon fill. Not for icons in branded or destructive contexts.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.50}"
-            }
-          },
           "docs": {
             "description": "Standard icon color in a neutral context.",
             "do": "Use for navigation, standard action and content icons.",
@@ -304,11 +224,6 @@
         "$type": "color",
         "$description": "Muted/secondary icon fill. Not for primary interactive icons.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.400}"
-            }
-          },
           "docs": {
             "description": "A secondary, decorative or muted icon.",
             "do": "Use for status icons, loading indicators and metadata icons.",
@@ -322,11 +237,6 @@
         "$type": "color",
         "$description": "Icon on a primary action background. Not for icons on neutral surfaces.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.violet.50}"
-            }
-          },
           "docs": {
             "description": "An icon on a primary action background.",
             "do": "Use for icons inside primary buttons or action badges.",
@@ -343,11 +253,6 @@
           "$type": "color",
           "$description": "Primary call-to-action button/element background. Not for secondary or ghost variants.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.violet.700}"
-              }
-            },
             "docs": {
               "description": "Background of the primary CTA component.",
               "do": "Use for the background of primary buttons and CTA elements.",
@@ -361,11 +266,6 @@
           "$type": "color",
           "$description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.violet.50}"
-              }
-            },
             "docs": {
               "description": "Text or icon on a primary action background.",
               "do": "Always pair with `color.action.background.default` for the text of a primary button.",
@@ -383,11 +283,6 @@
           "$type": "color",
           "$description": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.red.500}"
-              }
-            },
             "docs": {
               "description": "Error-state fill — solid or tinted background, border, focus ring.",
               "do": "Use for the borders and rings of invalid fields and for the `bg-destructive/10`–`/30` tints.",
@@ -401,11 +296,6 @@
           "$type": "color",
           "$description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.mist.950}"
-              }
-            },
             "docs": {
               "description": "Text and icons placed **on** a solid error surface.",
               "do": "Use whenever a solid `bg-destructive` background carries text or an icon.",
@@ -422,11 +312,6 @@
         "$type": "color",
         "$description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.violet.400}"
-            }
-          },
           "status": "active"
         }
       },
@@ -435,11 +320,6 @@
         "$type": "color",
         "$description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.blue.300}"
-            }
-          },
           "status": "active"
         }
       },
@@ -448,11 +328,6 @@
         "$type": "color",
         "$description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.yellow.200}"
-            }
-          },
           "status": "active"
         }
       },
@@ -461,11 +336,6 @@
         "$type": "color",
         "$description": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.plum.500}"
-            }
-          },
           "status": "active"
         }
       },
@@ -474,11 +344,6 @@
         "$type": "color",
         "$description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.amber.500}"
-            }
-          },
           "status": "active"
         }
       },
@@ -538,11 +403,6 @@
         "$type": "color",
         "$description": "Sidebar panel surface. Not for the main content area or popovers.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.900}"
-            }
-          },
           "docs": {
             "tailwind": "mist.900"
           },
@@ -554,11 +414,6 @@
         "$type": "color",
         "$description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.50}"
-            }
-          },
           "docs": {
             "tailwind": "mist.50"
           },
@@ -570,11 +425,6 @@
         "$type": "color",
         "$description": "Sidebar internal divider/border. Not for content-area borders.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.white-alpha.10}"
-            }
-          },
           "docs": {
             "tailwind": "white-alpha.10"
           },
@@ -586,11 +436,6 @@
         "$type": "color",
         "$description": "Focus ring within the sidebar. Not for main content focus rings.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.500}"
-            }
-          },
           "docs": {
             "tailwind": "mist.500"
           },
@@ -603,11 +448,6 @@
           "$type": "color",
           "$description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.violet.500}"
-              }
-            },
             "docs": {
               "tailwind": "violet.500"
             },
@@ -619,11 +459,6 @@
           "$type": "color",
           "$description": "Text on top of the sidebar primary active item. Not for inactive item text.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.mist.0}"
-              }
-            },
             "docs": {
               "tailwind": "mist.0"
             },
@@ -637,11 +472,6 @@
           "$type": "color",
           "$description": "Hovered or secondary sidebar item background. Not for the active primary item.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.mist.800}"
-              }
-            },
             "docs": {
               "tailwind": "mist.800"
             },
@@ -653,11 +483,6 @@
           "$type": "color",
           "$description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
           "$extensions": {
-            "modes": {
-              "dark": {
-                "$value": "{primitive.color.mist.50}"
-              }
-            },
             "docs": {
               "tailwind": "mist.50"
             },
@@ -678,11 +503,6 @@
         "$type": "color",
         "$description": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.mist.0}"
-            }
-          },
           "docs": {
             "tailwind": "bg-white, text-white"
           },
@@ -694,11 +514,6 @@
         "$type": "color",
         "$description": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces.",
         "$extensions": {
-          "modes": {
-            "dark": {
-              "$value": "{primitive.color.black}"
-            }
-          },
           "docs": {
             "tailwind": "bg-black/10"
           },
@@ -1256,11 +1071,6 @@
       "$type": "shadow",
       "$description": "Minimal lift for interactive elements. Not for decorative purposes.",
       "$extensions": {
-        "modes": {
-          "dark": {
-            "$value": "{primitive.elevation.dark.xs}"
-          }
-        },
         "docs": {
           "tailwind": "shadow-xs"
         },
@@ -1272,11 +1082,6 @@
       "$type": "shadow",
       "$description": "Small lift for cards and hover states. Not for fixed navigation.",
       "$extensions": {
-        "modes": {
-          "dark": {
-            "$value": "{primitive.elevation.dark.sm}"
-          }
-        },
         "docs": {
           "tailwind": "shadow-sm"
         },
@@ -1288,11 +1093,6 @@
       "$type": "shadow",
       "$description": "Medium elevation for dropdowns and context menus. Not for inline content.",
       "$extensions": {
-        "modes": {
-          "dark": {
-            "$value": "{primitive.elevation.dark.md}"
-          }
-        },
         "docs": {
           "tailwind": "shadow-md"
         },
@@ -1304,11 +1104,6 @@
       "$type": "shadow",
       "$description": "Large elevation for modals and side panels. Not for standard cards.",
       "$extensions": {
-        "modes": {
-          "dark": {
-            "$value": "{primitive.elevation.dark.lg}"
-          }
-        },
         "docs": {
           "tailwind": "shadow-lg"
         },
@@ -1320,11 +1115,6 @@
       "$type": "shadow",
       "$description": "Extra-large elevation for full overlay panels. Not for inline components.",
       "$extensions": {
-        "modes": {
-          "dark": {
-            "$value": "{primitive.elevation.dark.xl}"
-          }
-        },
         "docs": {
           "tailwind": "shadow-xl"
         },
@@ -1336,11 +1126,6 @@
       "$type": "shadow",
       "$description": "Maximum elevation for toasts and high-priority overlays. Use sparingly.",
       "$extensions": {
-        "modes": {
-          "dark": {
-            "$value": "{primitive.elevation.dark.2xl}"
-          }
-        },
         "docs": {
           "tailwind": "shadow-2xl"
         },
@@ -1352,11 +1137,6 @@
       "$type": "shadow",
       "$description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements.",
       "$extensions": {
-        "modes": {
-          "dark": {
-            "$value": "{primitive.elevation.dark.inner}"
-          }
-        },
         "docs": {
           "tailwind": "shadow-inner"
         },
