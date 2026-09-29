@@ -55,8 +55,12 @@ A slider that picks a numeric value (or a range) within set bounds, horizontally
 | `color.static.white`              | `bg-white`                               | `Slider`                                                    |
 | `opacity.disabled`                | `opacity-disabled`                       | `Slider`                                                    |
 | `space.focus-ring-width`          | `ring-(length:--space-focus-ring-width)` | `Slider` · `Slider` via `FOCUS_RING_WIDTH` (`lib/focus.ts`) |
+| `space.scale.1`                   | `h-1` · `w-1`                            | `Slider`                                                    |
+| `space.scale.2`                   | `-inset-2`                               | `Slider`                                                    |
+| `space.scale.3`                   | `size-3`                                 | `Slider`                                                    |
+| `space.scale.40`                  | `min-h-40`                               | `Slider`                                                    |
 
-Collected from `components/ui/slider.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/slider.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

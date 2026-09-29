@@ -424,6 +424,406 @@
     "status": "reserved"
   },
   {
+    "path": "space.scale.0",
+    "value_light": "{primitive.space.0}",
+    "value_dark": "{primitive.space.0}",
+    "css_variable": "--space-scale-0",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.1",
+    "value_light": "{primitive.space.1}",
+    "value_dark": "{primitive.space.1}",
+    "css_variable": "--space-scale-1",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.2",
+    "value_light": "{primitive.space.2}",
+    "value_dark": "{primitive.space.2}",
+    "css_variable": "--space-scale-2",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.3",
+    "value_light": "{primitive.space.3}",
+    "value_dark": "{primitive.space.3}",
+    "css_variable": "--space-scale-3",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.4",
+    "value_light": "{primitive.space.4}",
+    "value_dark": "{primitive.space.4}",
+    "css_variable": "--space-scale-4",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.5",
+    "value_light": "{primitive.space.5}",
+    "value_dark": "{primitive.space.5}",
+    "css_variable": "--space-scale-5",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.6",
+    "value_light": "{primitive.space.6}",
+    "value_dark": "{primitive.space.6}",
+    "css_variable": "--space-scale-6",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.7",
+    "value_light": "{primitive.space.7}",
+    "value_dark": "{primitive.space.7}",
+    "css_variable": "--space-scale-7",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.8",
+    "value_light": "{primitive.space.8}",
+    "value_dark": "{primitive.space.8}",
+    "css_variable": "--space-scale-8",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.9",
+    "value_light": "{primitive.space.9}",
+    "value_dark": "{primitive.space.9}",
+    "css_variable": "--space-scale-9",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.10",
+    "value_light": "{primitive.space.10}",
+    "value_dark": "{primitive.space.10}",
+    "css_variable": "--space-scale-10",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.11",
+    "value_light": "{primitive.space.11}",
+    "value_dark": "{primitive.space.11}",
+    "css_variable": "--space-scale-11",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.12",
+    "value_light": "{primitive.space.12}",
+    "value_dark": "{primitive.space.12}",
+    "css_variable": "--space-scale-12",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.14",
+    "value_light": "{primitive.space.14}",
+    "value_dark": "{primitive.space.14}",
+    "css_variable": "--space-scale-14",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.16",
+    "value_light": "{primitive.space.16}",
+    "value_dark": "{primitive.space.16}",
+    "css_variable": "--space-scale-16",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.18",
+    "value_light": "{primitive.space.18}",
+    "value_dark": "{primitive.space.18}",
+    "css_variable": "--space-scale-18",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.20",
+    "value_light": "{primitive.space.20}",
+    "value_dark": "{primitive.space.20}",
+    "css_variable": "--space-scale-20",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.24",
+    "value_light": "{primitive.space.24}",
+    "value_dark": "{primitive.space.24}",
+    "css_variable": "--space-scale-24",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.28",
+    "value_light": "{primitive.space.28}",
+    "value_dark": "{primitive.space.28}",
+    "css_variable": "--space-scale-28",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.32",
+    "value_light": "{primitive.space.32}",
+    "value_dark": "{primitive.space.32}",
+    "css_variable": "--space-scale-32",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.36",
+    "value_light": "{primitive.space.36}",
+    "value_dark": "{primitive.space.36}",
+    "css_variable": "--space-scale-36",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.40",
+    "value_light": "{primitive.space.40}",
+    "value_dark": "{primitive.space.40}",
+    "css_variable": "--space-scale-40",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.44",
+    "value_light": "{primitive.space.44}",
+    "value_dark": "{primitive.space.44}",
+    "css_variable": "--space-scale-44",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.48",
+    "value_light": "{primitive.space.48}",
+    "value_dark": "{primitive.space.48}",
+    "css_variable": "--space-scale-48",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.52",
+    "value_light": "{primitive.space.52}",
+    "value_dark": "{primitive.space.52}",
+    "css_variable": "--space-scale-52",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.56",
+    "value_light": "{primitive.space.56}",
+    "value_dark": "{primitive.space.56}",
+    "css_variable": "--space-scale-56",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.60",
+    "value_light": "{primitive.space.60}",
+    "value_dark": "{primitive.space.60}",
+    "css_variable": "--space-scale-60",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.64",
+    "value_light": "{primitive.space.64}",
+    "value_dark": "{primitive.space.64}",
+    "css_variable": "--space-scale-64",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.72",
+    "value_light": "{primitive.space.72}",
+    "value_dark": "{primitive.space.72}",
+    "css_variable": "--space-scale-72",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.80",
+    "value_light": "{primitive.space.80}",
+    "value_dark": "{primitive.space.80}",
+    "css_variable": "--space-scale-80",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.96",
+    "value_light": "{primitive.space.96}",
+    "value_dark": "{primitive.space.96}",
+    "css_variable": "--space-scale-96",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.0-5",
+    "value_light": "{primitive.space.0-5}",
+    "value_dark": "{primitive.space.0-5}",
+    "css_variable": "--space-scale-0-5",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.1-25",
+    "value_light": "{primitive.space.1-25}",
+    "value_dark": "{primitive.space.1-25}",
+    "css_variable": "--space-scale-1-25",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.1-5",
+    "value_light": "{primitive.space.1-5}",
+    "value_dark": "{primitive.space.1-5}",
+    "css_variable": "--space-scale-1-5",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.2-5",
+    "value_light": "{primitive.space.2-5}",
+    "value_dark": "{primitive.space.2-5}",
+    "css_variable": "--space-scale-2-5",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.3-5",
+    "value_light": "{primitive.space.3-5}",
+    "value_dark": "{primitive.space.3-5}",
+    "css_variable": "--space-scale-3-5",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.scale.5-25",
+    "value_light": "{primitive.space.5-25}",
+    "value_dark": "{primitive.space.5-25}",
+    "css_variable": "--space-scale-5-25",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.container.3xs",
+    "value_light": "{primitive.space.container.3xs}",
+    "value_dark": "{primitive.space.container.3xs}",
+    "css_variable": "--space-container-3xs",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.2xs",
+    "value_light": "{primitive.space.container.2xs}",
+    "value_dark": "{primitive.space.container.2xs}",
+    "css_variable": "--space-container-2xs",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.xs",
+    "value_light": "{primitive.space.container.xs}",
+    "value_dark": "{primitive.space.container.xs}",
+    "css_variable": "--space-container-xs",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.container.sm",
+    "value_light": "{primitive.space.container.sm}",
+    "value_dark": "{primitive.space.container.sm}",
+    "css_variable": "--space-container-sm",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.container.md",
+    "value_light": "{primitive.space.container.md}",
+    "value_dark": "{primitive.space.container.md}",
+    "css_variable": "--space-container-md",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.container.lg",
+    "value_light": "{primitive.space.container.lg}",
+    "value_dark": "{primitive.space.container.lg}",
+    "css_variable": "--space-container-lg",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.xl",
+    "value_light": "{primitive.space.container.xl}",
+    "value_dark": "{primitive.space.container.xl}",
+    "css_variable": "--space-container-xl",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.2xl",
+    "value_light": "{primitive.space.container.2xl}",
+    "value_dark": "{primitive.space.container.2xl}",
+    "css_variable": "--space-container-2xl",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.3xl",
+    "value_light": "{primitive.space.container.3xl}",
+    "value_dark": "{primitive.space.container.3xl}",
+    "css_variable": "--space-container-3xl",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.4xl",
+    "value_light": "{primitive.space.container.4xl}",
+    "value_dark": "{primitive.space.container.4xl}",
+    "css_variable": "--space-container-4xl",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.5xl",
+    "value_light": "{primitive.space.container.5xl}",
+    "value_dark": "{primitive.space.container.5xl}",
+    "css_variable": "--space-container-5xl",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
+    "path": "space.container.6xl",
+    "value_light": "{primitive.space.container.6xl}",
+    "value_dark": "{primitive.space.container.6xl}",
+    "css_variable": "--space-container-6xl",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "space.container.7xl",
+    "value_light": "{primitive.space.container.7xl}",
+    "value_dark": "{primitive.space.container.7xl}",
+    "css_variable": "--space-container-7xl",
+    "tier": "semantic",
+    "status": "reserved"
+  },
+  {
     "path": "space.focus-ring-width",
     "value_light": "{primitive.space.focus-ring-width}",
     "value_dark": "{primitive.space.focus-ring-width}",
@@ -560,6 +960,70 @@
     "status": "active"
   },
   {
+    "path": "typography.size-line-height.xs",
+    "value_light": "{primitive.typography.size-line-height.xs}",
+    "value_dark": "{primitive.typography.size-line-height.xs}",
+    "css_variable": "--typography-size-line-height-xs",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.sm",
+    "value_light": "{primitive.typography.size-line-height.sm}",
+    "value_dark": "{primitive.typography.size-line-height.sm}",
+    "css_variable": "--typography-size-line-height-sm",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.base",
+    "value_light": "{primitive.typography.size-line-height.base}",
+    "value_dark": "{primitive.typography.size-line-height.base}",
+    "css_variable": "--typography-size-line-height-base",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.lg",
+    "value_light": "{primitive.typography.size-line-height.lg}",
+    "value_dark": "{primitive.typography.size-line-height.lg}",
+    "css_variable": "--typography-size-line-height-lg",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.xl",
+    "value_light": "{primitive.typography.size-line-height.xl}",
+    "value_dark": "{primitive.typography.size-line-height.xl}",
+    "css_variable": "--typography-size-line-height-xl",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.2xl",
+    "value_light": "{primitive.typography.size-line-height.2xl}",
+    "value_dark": "{primitive.typography.size-line-height.2xl}",
+    "css_variable": "--typography-size-line-height-2xl",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.3xl",
+    "value_light": "{primitive.typography.size-line-height.3xl}",
+    "value_dark": "{primitive.typography.size-line-height.3xl}",
+    "css_variable": "--typography-size-line-height-3xl",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.4xl",
+    "value_light": "{primitive.typography.size-line-height.4xl}",
+    "value_dark": "{primitive.typography.size-line-height.4xl}",
+    "css_variable": "--typography-size-line-height-4xl",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
     "path": "typography.line-height.tight",
     "value_light": "{primitive.typography.line-height.tight}",
     "value_dark": "{primitive.typography.line-height.tight}",
@@ -628,6 +1092,14 @@
     "value_light": "{primitive.typography.letter-spacing.wider}",
     "value_dark": "{primitive.typography.letter-spacing.wider}",
     "css_variable": "--typography-letter-spacing-wider",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.letter-spacing.widest",
+    "value_light": "{primitive.typography.letter-spacing.widest}",
+    "value_dark": "{primitive.typography.letter-spacing.widest}",
+    "css_variable": "--typography-letter-spacing-widest",
     "tier": "semantic",
     "status": "active"
   },

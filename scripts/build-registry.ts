@@ -419,7 +419,7 @@ for (const ns of lockedNamespaces)
   for (const m of tailwindTheme.matchAll(
     new RegExp(`--(${ns}-[\\w-]+)\\s*:`, "g")
   ))
-    theme[m[1]] ??= "initial"
+    if (!fontVariables.has(`--${m[1]}`)) theme[m[1]] ??= "initial"
 
 /**
  * The CLI also mirrors every theme key whose value mentions `--color-` as

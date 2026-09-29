@@ -13,7 +13,9 @@
  *
  *   active     consumed — aliased by the component tier, bridged by
  *              styles/globals.css, read with var() in components/, app/, lib/
- *              or hooks/, for a breakpoint used as its `sm:` variant, or,
+ *              or hooks/, for a breakpoint used as its `sm:` variant, for a
+ *              container width used as its class (`max-w-sm`) or its `@sm:`
+ *              container-query variant, or,
  *              for a font family, loaded by next/font under its variable
  *              (lint-font-tokens checks it names that font)
  *   reserved   a deliberate decision nothing consumes yet; its $description
@@ -135,10 +137,23 @@ const loadedFont = (path: string) => {
   return variable !== undefined && fontVariables.has(variable)
 }
 
+// A container width is consumed the same way: Tailwind compiles its own value
+// into `max-w-sm` and `@sm:` (lint-theme-bridge checks it equals the token).
+const usesContainer = (path: string) => {
+  const size = path.match(/^space\.container\.([\w-]+)$/)?.[1]
+  return (
+    size !== undefined &&
+    new RegExp(
+      `(?<![\\w-])(?:(?:max-w|min-w|w|basis)-${size}(?![\\w-])|@${size}[:/])`
+    ).test(corpus)
+  )
+}
+
 const consumed = (path: string) =>
   referencedByComponent.has(path) ||
   readByCode(path) ||
   usesVariant(path) ||
+  usesContainer(path) ||
   loadedFont(path)
 
 const findings: string[] = []

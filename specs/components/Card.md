@@ -60,13 +60,19 @@ A surface that brings a title, a description, content and a footer together in o
 | `color.background.subtle`        | `bg-card`                                           | `Card`                                                         |
 | `color.text.default`             | `ring-foreground/10` · `text-card-foreground`       | `Card`                                                         |
 | `color.text.subtle`              | `text-muted-foreground`                             | `CardDescription`                                              |
+| `space.scale.0`                  | `pb-0` · `pt-0`                                     | `Card`                                                         |
+| `space.scale.1`                  | `gap-1`                                             | `CardHeader`                                                   |
+| `space.scale.2`                  | `gap-2`                                             | `Card`                                                         |
+| `space.scale.3`                  | `p-3` · `pb-3` · `px-3` · `py-3`                    | `CardContent` · `CardFooter` · `CardHeader` · `Card`           |
+| `space.scale.4`                  | `gap-4` · `p-4` · `pb-4` · `px-4` · `py-4`          | `CardContent` · `CardFooter` · `CardHeader` · `Card`           |
 | `typography.font-family.mono`    | `font-heading`                                      | `CardTitle`                                                    |
 | `typography.font-weight.medium`  | `font-medium`                                       | `CardTitle`                                                    |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                   | `CardDescription` · `Card`                                     |
+| `typography.size-line-height.sm` | `text-sm`                                           | `CardTitle`                                                    |
 | `typography.size.sm`             | `text-sm`                                           | `CardTitle`                                                    |
 | `typography.size.xs`             | `text-xs/relaxed`                                   | `CardDescription` · `Card`                                     |
 
-Collected from `components/ui/card.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/card.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

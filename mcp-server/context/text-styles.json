@@ -176,13 +176,20 @@
       "value": "0.05em",
       "tailwind_class": "tracking-wider",
       "usage": "All-caps text, overlines"
+    },
+    {
+      "token": "typography.letter-spacing.widest",
+      "css_variable": "--typography-letter-spacing-widest",
+      "value": "0.1em",
+      "tailwind_class": "tracking-widest",
+      "usage": "Keyboard shortcuts in menus"
     }
   ],
   "usage_rules": [
     "**JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.",
     "**Always pair `size` with `lineHeight`** — a heading without `leading-tight` looks too loose; body text without `leading-normal` is hard to read.",
     "**`tracking-tight` only from `text-3xl` up** — on small text, negative spacing hurts readability.",
-    "**`tracking-wider` is for all-caps only** — never use it on regular lowercase text.",
+    "**`tracking-wider` is for all-caps only** — never use it on regular lowercase text. `tracking-widest` is for keyboard shortcuts only.",
     "**A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels."
   ]
 }

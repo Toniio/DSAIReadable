@@ -61,9 +61,17 @@ The browser's native drop-down: a light, accessible way to pick one option from 
 | `color.text.subtle`                  | `text-muted-foreground`                                                                        | `NativeSelect`                                                    |
 | `opacity.disabled`                   | `opacity-disabled`                                                                             | `NativeSelect`                                                    |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `NativeSelect` · `NativeSelect` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.scale.0`                      | `min-w-0`                                                                                      | `NativeSelect`                                                    |
+| `space.scale.0-5`                    | `py-0.5`                                                                                       | `NativeSelect`                                                    |
+| `space.scale.1`                      | `py-1`                                                                                         | `NativeSelect`                                                    |
+| `space.scale.2-5`                    | `pl-2.5` · `right-2.5`                                                                         | `NativeSelect`                                                    |
+| `space.scale.4`                      | `size-4`                                                                                       | `NativeSelect`                                                    |
+| `space.scale.7`                      | `h-7`                                                                                          | `NativeSelect`                                                    |
+| `space.scale.8`                      | `h-8` · `pr-8`                                                                                 | `NativeSelect`                                                    |
+| `typography.size-line-height.xs`     | `text-xs`                                                                                      | `NativeSelect`                                                    |
 | `typography.size.xs`                 | `text-xs`                                                                                      | `NativeSelect`                                                    |
 
-Collected from `components/ui/native-select.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/native-select.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

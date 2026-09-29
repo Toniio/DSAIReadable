@@ -60,11 +60,19 @@ A non-modal banner that delivers a contextual message — informational, a succe
 | `color.text.subtle`              | `text-muted-foreground`                    | `AlertDescription`                                                                                                                        |
 | `color.text.success.default`     | `text-success` · `text-success/90`         | `alertVariants.variant.success`                                                                                                           |
 | `color.text.warning.default`     | `text-warning` · `text-warning/90`         | `alertVariants.variant.warning`                                                                                                           |
+| `space.scale.0`                  | `translate-y-0`                            | `alertVariants`                                                                                                                           |
+| `space.scale.0-5`                | `gap-0.5`                                  | `alertVariants`                                                                                                                           |
+| `space.scale.1-25`               | `right-1.25` · `top-1.25`                  | `AlertAction`                                                                                                                             |
+| `space.scale.18`                 | `pr-18`                                    | `alertVariants`                                                                                                                           |
+| `space.scale.2`                  | `gap-x-2` · `mb-2` · `py-2`                | `AlertDescription` · `alertVariants`                                                                                                      |
+| `space.scale.2-5`                | `px-2.5`                                   | `alertVariants`                                                                                                                           |
+| `space.scale.4`                  | `size-4`                                   | `alertVariants`                                                                                                                           |
 | `typography.font-weight.medium`  | `font-medium`                              | `AlertTitle`                                                                                                                              |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                          | `AlertDescription`                                                                                                                        |
+| `typography.size-line-height.xs` | `text-xs`                                  | `alertVariants`                                                                                                                           |
 | `typography.size.xs`             | `text-xs` · `text-xs/relaxed`              | `AlertDescription` · `alertVariants`                                                                                                      |
 
-Collected from `components/ui/alert.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/alert.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

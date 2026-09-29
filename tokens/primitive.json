@@ -434,16 +434,21 @@
       }
     },
     "space": {
+      "0": {
+        "$value": {
+          "value": 0,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "0px equivalent spacing step."
+      },
       "0-5": {
         "$value": {
           "value": 0.125,
           "unit": "rem"
         },
         "$type": "dimension",
-        "$description": "2px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
-        "$extensions": {
-          "status": "reserved"
-        }
+        "$description": "2px equivalent spacing step."
       },
       "1": {
         "$value": {
@@ -453,6 +458,22 @@
         "$type": "dimension",
         "$description": "4px equivalent spacing step."
       },
+      "1-25": {
+        "$value": {
+          "value": 0.3125,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "5px equivalent spacing step."
+      },
+      "1-5": {
+        "$value": {
+          "value": 0.375,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "6px equivalent spacing step."
+      },
       "2": {
         "$value": {
           "value": 0.5,
@@ -461,16 +482,29 @@
         "$type": "dimension",
         "$description": "8px equivalent spacing step."
       },
+      "2-5": {
+        "$value": {
+          "value": 0.625,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "10px equivalent spacing step."
+      },
       "3": {
         "$value": {
           "value": 0.75,
           "unit": "rem"
         },
         "$type": "dimension",
-        "$description": "12px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
-        "$extensions": {
-          "status": "reserved"
-        }
+        "$description": "12px equivalent spacing step."
+      },
+      "3-5": {
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "14px equivalent spacing step."
       },
       "4": {
         "$value": {
@@ -486,10 +520,15 @@
           "unit": "rem"
         },
         "$type": "dimension",
-        "$description": "20px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
-        "$extensions": {
-          "status": "reserved"
-        }
+        "$description": "20px equivalent spacing step."
+      },
+      "5-25": {
+        "$value": {
+          "value": 1.3125,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "21px equivalent spacing step."
       },
       "6": {
         "$value": {
@@ -499,6 +538,14 @@
         "$type": "dimension",
         "$description": "24px equivalent spacing step."
       },
+      "7": {
+        "$value": {
+          "value": 1.75,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "28px equivalent spacing step."
+      },
       "8": {
         "$value": {
           "value": 2,
@@ -507,16 +554,29 @@
         "$type": "dimension",
         "$description": "32px equivalent spacing step."
       },
+      "9": {
+        "$value": {
+          "value": 2.25,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "36px equivalent spacing step."
+      },
       "10": {
         "$value": {
           "value": 2.5,
           "unit": "rem"
         },
         "$type": "dimension",
-        "$description": "40px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
-        "$extensions": {
-          "status": "reserved"
-        }
+        "$description": "40px equivalent spacing step."
+      },
+      "11": {
+        "$value": {
+          "value": 2.75,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "44px equivalent spacing step."
       },
       "12": {
         "$value": {
@@ -526,16 +586,37 @@
         "$type": "dimension",
         "$description": "48px equivalent spacing step."
       },
+      "14": {
+        "$value": {
+          "value": 3.5,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "56px equivalent spacing step."
+      },
       "16": {
         "$value": {
           "value": 4,
           "unit": "rem"
         },
         "$type": "dimension",
-        "$description": "64px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
-        "$extensions": {
-          "status": "reserved"
-        }
+        "$description": "64px equivalent spacing step."
+      },
+      "18": {
+        "$value": {
+          "value": 4.5,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "72px equivalent spacing step."
+      },
+      "20": {
+        "$value": {
+          "value": 5,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "80px equivalent spacing step."
       },
       "24": {
         "$value": {
@@ -543,10 +624,15 @@
           "unit": "rem"
         },
         "$type": "dimension",
-        "$description": "96px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
-        "$extensions": {
-          "status": "reserved"
-        }
+        "$description": "96px equivalent spacing step."
+      },
+      "28": {
+        "$value": {
+          "value": 7,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "112px equivalent spacing step."
       },
       "32": {
         "$value": {
@@ -554,10 +640,95 @@
           "unit": "rem"
         },
         "$type": "dimension",
-        "$description": "128px equivalent spacing step. Components reach this size through Tailwind's native spacing scale today. Reserved for a spacing scale locked to design-system tokens.",
-        "$extensions": {
-          "status": "reserved"
-        }
+        "$description": "128px equivalent spacing step."
+      },
+      "36": {
+        "$value": {
+          "value": 9,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "144px equivalent spacing step."
+      },
+      "40": {
+        "$value": {
+          "value": 10,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "160px equivalent spacing step."
+      },
+      "44": {
+        "$value": {
+          "value": 11,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "176px equivalent spacing step."
+      },
+      "48": {
+        "$value": {
+          "value": 12,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "192px equivalent spacing step."
+      },
+      "52": {
+        "$value": {
+          "value": 13,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "208px equivalent spacing step."
+      },
+      "56": {
+        "$value": {
+          "value": 14,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "224px equivalent spacing step."
+      },
+      "60": {
+        "$value": {
+          "value": 15,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "240px equivalent spacing step."
+      },
+      "64": {
+        "$value": {
+          "value": 16,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "256px equivalent spacing step."
+      },
+      "72": {
+        "$value": {
+          "value": 18,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "288px equivalent spacing step."
+      },
+      "80": {
+        "$value": {
+          "value": 20,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "320px equivalent spacing step."
+      },
+      "96": {
+        "$value": {
+          "value": 24,
+          "unit": "rem"
+        },
+        "$type": "dimension",
+        "$description": "384px equivalent spacing step."
       },
       "page": {
         "$value": {
@@ -622,6 +793,112 @@
         },
         "$type": "dimension",
         "$description": "Default focus ring outline width."
+      },
+      "container": {
+        "3xs": {
+          "$value": {
+            "value": 16,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "256px container width."
+        },
+        "2xs": {
+          "$value": {
+            "value": 18,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "288px container width."
+        },
+        "xs": {
+          "$value": {
+            "value": 20,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "320px container width."
+        },
+        "sm": {
+          "$value": {
+            "value": 24,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "384px container width."
+        },
+        "md": {
+          "$value": {
+            "value": 28,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "448px container width."
+        },
+        "lg": {
+          "$value": {
+            "value": 32,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "512px container width."
+        },
+        "xl": {
+          "$value": {
+            "value": 36,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "576px container width."
+        },
+        "2xl": {
+          "$value": {
+            "value": 42,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "672px container width."
+        },
+        "3xl": {
+          "$value": {
+            "value": 48,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "768px container width."
+        },
+        "4xl": {
+          "$value": {
+            "value": 56,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "896px container width."
+        },
+        "5xl": {
+          "$value": {
+            "value": 64,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "1024px container width."
+        },
+        "6xl": {
+          "$value": {
+            "value": 72,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "1152px container width."
+        },
+        "7xl": {
+          "$value": {
+            "value": 80,
+            "unit": "rem"
+          },
+          "$type": "dimension",
+          "$description": "1280px container width."
+        }
       }
     },
     "radius": {
@@ -843,6 +1120,14 @@
           },
           "$type": "dimension",
           "$description": "Wider tracking for all-caps or labels."
+        },
+        "widest": {
+          "$value": {
+            "value": 0.1,
+            "unit": "em"
+          },
+          "$type": "dimension",
+          "$description": "Widest tracking, for keyboard shortcuts."
         }
       },
       "font-weight": {
@@ -877,6 +1162,48 @@
           "$value": "JetBrains Mono, monospace",
           "$type": "fontFamily",
           "$description": "Monospace typeface for code and numeric data."
+        }
+      },
+      "size-line-height": {
+        "xs": {
+          "$value": 1.33334,
+          "$type": "number",
+          "$description": "Line height paired with the xs font size (1 / 0.75), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel."
+        },
+        "sm": {
+          "$value": 1.42858,
+          "$type": "number",
+          "$description": "Line height paired with the sm font size (1.25 / 0.875), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel."
+        },
+        "base": {
+          "$value": 1.5,
+          "$type": "number",
+          "$description": "Line height paired with the base font size (1.5 / 1)."
+        },
+        "lg": {
+          "$value": 1.55556,
+          "$type": "number",
+          "$description": "Line height paired with the lg font size (1.75 / 1.125), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel."
+        },
+        "xl": {
+          "$value": 1.4,
+          "$type": "number",
+          "$description": "Line height paired with the xl font size (1.75 / 1.25)."
+        },
+        "2xl": {
+          "$value": 1.33334,
+          "$type": "number",
+          "$description": "Line height paired with the 2xl font size (2 / 1.5), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel."
+        },
+        "3xl": {
+          "$value": 1.2,
+          "$type": "number",
+          "$description": "Line height paired with the 3xl font size (2.25 / 1.875)."
+        },
+        "4xl": {
+          "$value": 1.11112,
+          "$type": "number",
+          "$description": "Line height paired with the 4xl font size (2.5 / 2.25), rounded up at the fifth decimal: the minified CSS keeps five, and the line then lands on a whole pixel."
         }
       }
     },

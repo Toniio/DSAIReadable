@@ -62,6 +62,7 @@ html {
 | `typography.letter-spacing.normal` | `--typography-letter-spacing-normal` | `0em`      | `tracking-normal` | Running text — the default                       |
 | `typography.letter-spacing.wide`   | `--typography-letter-spacing-wide`   | `0.025em`  | `tracking-wide`   | Small UI labels (xs, sm)                         |
 | `typography.letter-spacing.wider`  | `--typography-letter-spacing-wider`  | `0.05em`   | `tracking-wider`  | All-caps text, overlines                         |
+| `typography.letter-spacing.widest` | `--typography-letter-spacing-widest` | `0.1em`    | `tracking-widest` | Keyboard shortcuts in menus                      |
 
 ---
 
@@ -174,19 +175,22 @@ These combinations define the design system's canonical text styles.
 
 ---
 
-## Why the type scale is wired but not locked
+## The Lock
 
-Sizes, weights, line heights and letter spacings are bridged: `text-xs`,
-`font-medium`, `leading-snug` and `tracking-wide` read their token through the
-`@theme` bridge in `styles/globals.css`, with the same values as Tailwind's
-defaults. Unlike colors, radii and shadows, their Tailwind namespaces are not
-reset: each `text-*` keeps the line height Tailwind pairs with it
-(`--text-xs--line-height`), which a reset would drop, and the scale is not closed
-yet.
+`styles/globals.css` resets Tailwind's type namespaces (`--text-*`, `--font-*`,
+`--font-weight-*`, `--leading-*`, `--tracking-*: initial`) and declares only the
+tokens above. So `text-7xl`, `font-serif`, `font-thin` and `tracking-tighter`
+generate no CSS, and ESLint (`better-tailwindcss/no-unknown-classes`) rejects
+them.
 
-So `text-7xl`, `font-serif` and `tracking-widest` still compile. Until the scale
-is closed and the namespaces are locked, the Usage Rules below and review are
-what keep them out.
+- **Each `text-*` sets its paired line height**, as in Tailwind:
+  `typography.size-line-height.*` holds it (`text-xs` → 16px on 12px), with
+  Tailwind's values. `leading-*` or `text-xs/relaxed` overrides it.
+- **Three families**: `font-sans` (Geist), `font-mono` (JetBrains Mono, the whole
+  interface) and `font-heading` (the mono family). next/font sets `--font-sans`
+  and `--font-mono` on `<html>`.
+- **`leading-none` stays**: it is a static Tailwind class (`line-height: 1`), not
+  a theme value. A numeric `leading-6` reads the spacing scale.
 
 ---
 
@@ -195,5 +199,5 @@ what keep them out.
 1. **JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.
 2. **Always pair `size` with `lineHeight`** — a heading without `leading-tight` looks too loose; body text without `leading-normal` is hard to read.
 3. **`tracking-tight` only from `text-3xl` up** — on small text, negative spacing hurts readability.
-4. **`tracking-wider` is for all-caps only** — never use it on regular lowercase text.
+4. **`tracking-wider` is for all-caps only** — never use it on regular lowercase text. `tracking-widest` is for keyboard shortcuts only.
 5. **A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels.

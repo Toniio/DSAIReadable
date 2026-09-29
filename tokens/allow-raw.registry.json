@@ -74,7 +74,7 @@
     {
       "id": "sidebar-icon-gutter",
       "file": "components/ui/sidebar.tsx",
-      "reason": "w-[calc(var(--sidebar-width-icon)+(--spacing(4)))] — the floating and inset variants sit inside a padded shell, so the collapsed rail measures its own width plus that padding. The sum is a property of the variant, not a value of the spacing scale.",
+      "reason": "w-[calc(var(--sidebar-width-icon)+var(--space-scale-4))] — the floating and inset variants sit inside a padded shell, so the collapsed rail measures its own width plus that padding. The sum is a property of the variant, not a value of the spacing scale.",
       "token_candidate": null,
       "review_after": "2027-09-22"
     },
@@ -95,16 +95,23 @@
     {
       "id": "anchor-relative-width",
       "file": "components/ui/combobox.tsx",
-      "reason": "min-w-[calc(var(--anchor-width)+--spacing(7))] — --anchor-width is measured by Base UI when the popup opens. The popup must clear the trigger plus room for the clear and chevron buttons; only that room is a token.",
+      "reason": "min-w-[calc(var(--anchor-width)+var(--space-scale-7))] — --anchor-width is measured by Base UI when the popup opens. The popup must clear the trigger plus room for the clear and chevron buttons; only that room is a token.",
       "token_candidate": null,
       "review_after": "2027-09-22"
     },
     {
       "id": "anchor-relative-height",
       "file": "components/ui/combobox.tsx",
-      "reason": "max-h-[min(calc(--spacing(72)---spacing(9)),calc(var(--available-height)---spacing(9)))] — the list stops at the shorter of a fixed ceiling and the space Base UI measured below the trigger, both less the sticky input. The comparison is the behavior, not a size.",
+      "reason": "max-h-[min(calc(var(--space-scale-72)-var(--space-scale-9)),calc(var(--available-height)-var(--space-scale-9)))] — the list stops at the shorter of a fixed ceiling and the space Base UI measured below the trigger, both less the sticky input. The comparison is the behavior, not a size.",
       "token_candidate": null,
       "review_after": "2027-09-22"
+    },
+    {
+      "id": "toggle-group-spacing",
+      "file": "components/ui/toggle-group.tsx",
+      "reason": "gap-[calc(var(--spacing)*var(--gap))] — shadcn/ui's `spacing` prop is a number of scale units, set as --gap on the root. The product of that runtime number and the scale unit cannot be a class of the locked spacing scale.",
+      "token_candidate": null,
+      "review_after": "2027-09-29"
     }
   ]
 }

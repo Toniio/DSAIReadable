@@ -6,15 +6,26 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Lockdown: Tailwind's default colors, radii and shadows are removed, so
-     bg-red-500, rounded-[default] or shadow-2xs generate no CSS at all. Only
-     the names declared below exist. Spacing and typography keep Tailwind's
-     scale: specs/foundations/spacing.md and typography.md say why they are
-     wired but not locked. */
+  /* Lockdown: Tailwind's default scales are removed, so bg-red-500,
+     rounded-[default], shadow-2xs, p-13, text-7xl, font-serif or
+     tracking-tighter generate no CSS at all. Only the names declared below
+     exist, each read from a token. --spacing goes too: while it is defined,
+     Tailwind accepts any multiple of it (p-13, gap-17); without it, only the
+     steps declared under "Spacing scale" resolve. */
   --color-*: initial;
   --radius-*: initial;
   --shadow-*: initial;
+  --spacing: initial;
+  --spacing-*: initial;
+  --text-*: initial;
+  --font-*: initial;
+  --font-weight-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
 
+  /* Font families → font-sans, font-mono, font-heading. next/font sets
+     --font-sans and --font-mono on <html> (lib/fonts.ts). */
+  --font-sans: var(--font-sans);
   --font-heading: var(--font-mono);
   --font-mono: var(--font-mono);
 
@@ -79,16 +90,25 @@
 
   /* Typography → text-xs … text-4xl, font-medium, leading-snug, tracking-wide.
      The values equal Tailwind's defaults, so nothing moves on screen; what
-     changes is that the tokens now decide them. Each text-* keeps Tailwind's
-     paired line-height, which is why this namespace is not reset. */
+     changes is that the tokens now decide them. Each text-* sets its paired
+     line height (--text-*--line-height), which leading-* or text-xs/relaxed
+     overrides. */
   --text-xs: var(--typography-size-xs);
+  --text-xs--line-height: var(--typography-size-line-height-xs);
   --text-sm: var(--typography-size-sm);
+  --text-sm--line-height: var(--typography-size-line-height-sm);
   --text-base: var(--typography-size-base);
+  --text-base--line-height: var(--typography-size-line-height-base);
   --text-lg: var(--typography-size-lg);
+  --text-lg--line-height: var(--typography-size-line-height-lg);
   --text-xl: var(--typography-size-xl);
+  --text-xl--line-height: var(--typography-size-line-height-xl);
   --text-2xl: var(--typography-size-2xl);
+  --text-2xl--line-height: var(--typography-size-line-height-2xl);
   --text-3xl: var(--typography-size-3xl);
+  --text-3xl--line-height: var(--typography-size-line-height-3xl);
   --text-4xl: var(--typography-size-4xl);
+  --text-4xl--line-height: var(--typography-size-line-height-4xl);
   --font-weight-normal: var(--typography-font-weight-normal);
   --font-weight-medium: var(--typography-font-weight-medium);
   --font-weight-semibold: var(--typography-font-weight-semibold);
@@ -102,6 +122,7 @@
   --tracking-normal: var(--typography-letter-spacing-normal);
   --tracking-wide: var(--typography-letter-spacing-wide);
   --tracking-wider: var(--typography-letter-spacing-wider);
+  --tracking-widest: var(--typography-letter-spacing-widest);
 
   /* Shadows → shadow-xs … shadow-inner */
   --shadow-xs: var(--elevation-xs);
@@ -128,6 +149,48 @@
      opacity-50 there: the token, not Tailwind's scale, sets the value. */
   --opacity-disabled: var(--opacity-disabled);
 
+  /* Spacing scale → p-2, gap-1.5, -mx-1, size-9, w-72, translate-x-2…
+     Tailwind v3's scale, plus 1.25, 5.25 and 18, which shadcn/ui draws with
+     (specs/foundations/spacing.md). Width, height and size read these steps
+     too: Tailwind shares one namespace between spacing and sizing. */
+  --spacing-0: var(--space-scale-0);
+  --spacing-0\.5: var(--space-scale-0-5);
+  --spacing-1: var(--space-scale-1);
+  --spacing-1\.25: var(--space-scale-1-25);
+  --spacing-1\.5: var(--space-scale-1-5);
+  --spacing-2: var(--space-scale-2);
+  --spacing-2\.5: var(--space-scale-2-5);
+  --spacing-3: var(--space-scale-3);
+  --spacing-3\.5: var(--space-scale-3-5);
+  --spacing-4: var(--space-scale-4);
+  --spacing-5: var(--space-scale-5);
+  --spacing-5\.25: var(--space-scale-5-25);
+  --spacing-6: var(--space-scale-6);
+  --spacing-7: var(--space-scale-7);
+  --spacing-8: var(--space-scale-8);
+  --spacing-9: var(--space-scale-9);
+  --spacing-10: var(--space-scale-10);
+  --spacing-11: var(--space-scale-11);
+  --spacing-12: var(--space-scale-12);
+  --spacing-14: var(--space-scale-14);
+  --spacing-16: var(--space-scale-16);
+  --spacing-18: var(--space-scale-18);
+  --spacing-20: var(--space-scale-20);
+  --spacing-24: var(--space-scale-24);
+  --spacing-28: var(--space-scale-28);
+  --spacing-32: var(--space-scale-32);
+  --spacing-36: var(--space-scale-36);
+  --spacing-40: var(--space-scale-40);
+  --spacing-44: var(--space-scale-44);
+  --spacing-48: var(--space-scale-48);
+  --spacing-52: var(--space-scale-52);
+  --spacing-56: var(--space-scale-56);
+  --spacing-60: var(--space-scale-60);
+  --spacing-64: var(--space-scale-64);
+  --spacing-72: var(--space-scale-72);
+  --spacing-80: var(--space-scale-80);
+  --spacing-96: var(--space-scale-96);
+
   /* Layout spacing */
   --spacing-page: var(--space-layout-page-padding);
   --spacing-section: var(--space-layout-section-gap);
@@ -140,9 +203,11 @@
   --default-border-width: var(--border-width-default);
   --border-width-chart-indicator: var(--border-width-chart-indicator);
 
-  /* Breakpoints are not bridged: Tailwind compiles `sm:` into a media query
-     at build time, and a media query cannot read var(). Its defaults are the
-     breakpoint.* tokens; lint-theme-bridge checks the two stay equal. */
+  /* Breakpoints and container widths are not bridged: Tailwind compiles
+     `sm:` into a media query and `@md/field-group:` into a container query
+     at build time, and neither query can read var(). Its defaults are the
+     breakpoint.* and space.container.* tokens (max-w-sm reads the same
+     value); lint-theme-bridge checks the two stay equal. */
 }
 
 /* Z-index utilities.
@@ -176,6 +241,12 @@
 }
 
 @layer base {
+  /* tw-animate-css (slide-in-from-top-2…) and shadcn/tailwind.css (the scroll
+     fade) read var(--spacing) at runtime, so the variable stays defined even
+     though the theme key is removed above: it generates no class. */
+  :root {
+    --spacing: var(--space-scale-1);
+  }
   * {
     @apply border-border outline-ring/50;
   }

@@ -671,6 +671,560 @@
         }
       }
     },
+    "scale": {
+      "0": {
+        "$value": "{primitive.space.0}",
+        "$type": "dimension",
+        "$description": "Spacing step 0 (0px): the `0` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-0 · m-0 · gap-0 · size-0"
+          },
+          "status": "active"
+        }
+      },
+      "0-5": {
+        "$value": "{primitive.space.0-5}",
+        "$type": "dimension",
+        "$description": "Spacing step 0.5 (2px): the `0.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-0.5 · m-0.5 · gap-0.5 · size-0.5"
+          },
+          "status": "active"
+        }
+      },
+      "1": {
+        "$value": "{primitive.space.1}",
+        "$type": "dimension",
+        "$description": "Spacing step 1 (4px): the `1` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-1 · m-1 · gap-1 · size-1"
+          },
+          "status": "active"
+        }
+      },
+      "1-25": {
+        "$value": "{primitive.space.1-25}",
+        "$type": "dimension",
+        "$description": "Spacing step 1.25 (5px): the `1.25` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the close button of `Alert` (`top-1.25 right-1.25`), as shadcn/ui draws it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-1.25 · m-1.25 · gap-1.25 · size-1.25"
+          },
+          "status": "active"
+        }
+      },
+      "1-5": {
+        "$value": "{primitive.space.1-5}",
+        "$type": "dimension",
+        "$description": "Spacing step 1.5 (6px): the `1.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-1.5 · m-1.5 · gap-1.5 · size-1.5"
+          },
+          "status": "active"
+        }
+      },
+      "2": {
+        "$value": "{primitive.space.2}",
+        "$type": "dimension",
+        "$description": "Spacing step 2 (8px): the `2` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-2 · m-2 · gap-2 · size-2"
+          },
+          "status": "active"
+        }
+      },
+      "2-5": {
+        "$value": "{primitive.space.2-5}",
+        "$type": "dimension",
+        "$description": "Spacing step 2.5 (10px): the `2.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-2.5 · m-2.5 · gap-2.5 · size-2.5"
+          },
+          "status": "active"
+        }
+      },
+      "3": {
+        "$value": "{primitive.space.3}",
+        "$type": "dimension",
+        "$description": "Spacing step 3 (12px): the `3` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-3 · m-3 · gap-3 · size-3"
+          },
+          "status": "active"
+        }
+      },
+      "3-5": {
+        "$value": "{primitive.space.3-5}",
+        "$type": "dimension",
+        "$description": "Spacing step 3.5 (14px): the `3.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-3.5 · m-3.5 · gap-3.5 · size-3.5"
+          },
+          "status": "active"
+        }
+      },
+      "4": {
+        "$value": "{primitive.space.4}",
+        "$type": "dimension",
+        "$description": "Spacing step 4 (16px): the `4` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-4 · m-4 · gap-4 · size-4"
+          },
+          "status": "active"
+        }
+      },
+      "5": {
+        "$value": "{primitive.space.5}",
+        "$type": "dimension",
+        "$description": "Spacing step 5 (20px): the `5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-5 · m-5 · gap-5 · size-5"
+          },
+          "status": "active"
+        }
+      },
+      "5-25": {
+        "$value": "{primitive.space.5-25}",
+        "$type": "dimension",
+        "$description": "Spacing step 5.25 (21px): the `5.25` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the chip of `Combobox` (`h-5.25`), as shadcn/ui draws it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-5.25 · m-5.25 · gap-5.25 · size-5.25"
+          },
+          "status": "active"
+        }
+      },
+      "6": {
+        "$value": "{primitive.space.6}",
+        "$type": "dimension",
+        "$description": "Spacing step 6 (24px): the `6` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-6 · m-6 · gap-6 · size-6"
+          },
+          "status": "active"
+        }
+      },
+      "7": {
+        "$value": "{primitive.space.7}",
+        "$type": "dimension",
+        "$description": "Spacing step 7 (28px): the `7` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-7 · m-7 · gap-7 · size-7"
+          },
+          "status": "active"
+        }
+      },
+      "8": {
+        "$value": "{primitive.space.8}",
+        "$type": "dimension",
+        "$description": "Spacing step 8 (32px): the `8` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-8 · m-8 · gap-8 · size-8"
+          },
+          "status": "active"
+        }
+      },
+      "9": {
+        "$value": "{primitive.space.9}",
+        "$type": "dimension",
+        "$description": "Spacing step 9 (36px): the `9` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-9 · m-9 · gap-9 · size-9"
+          },
+          "status": "active"
+        }
+      },
+      "10": {
+        "$value": "{primitive.space.10}",
+        "$type": "dimension",
+        "$description": "Spacing step 10 (40px): the `10` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-10 · m-10 · gap-10 · size-10"
+          },
+          "status": "active"
+        }
+      },
+      "11": {
+        "$value": "{primitive.space.11}",
+        "$type": "dimension",
+        "$description": "Spacing step 11 (44px): the `11` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-11 · m-11 · gap-11 · size-11"
+          },
+          "status": "active"
+        }
+      },
+      "12": {
+        "$value": "{primitive.space.12}",
+        "$type": "dimension",
+        "$description": "Spacing step 12 (48px): the `12` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-12 · m-12 · gap-12 · size-12"
+          },
+          "status": "active"
+        }
+      },
+      "14": {
+        "$value": "{primitive.space.14}",
+        "$type": "dimension",
+        "$description": "Spacing step 14 (56px): the `14` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-14 · m-14 · gap-14 · size-14"
+          },
+          "status": "active"
+        }
+      },
+      "16": {
+        "$value": "{primitive.space.16}",
+        "$type": "dimension",
+        "$description": "Spacing step 16 (64px): the `16` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-16 · m-16 · gap-16 · size-16"
+          },
+          "status": "active"
+        }
+      },
+      "18": {
+        "$value": "{primitive.space.18}",
+        "$type": "dimension",
+        "$description": "Spacing step 18 (72px): the `18` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the room `Alert` leaves for its action (`pr-18`), as shadcn/ui draws it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-18 · m-18 · gap-18 · size-18"
+          },
+          "status": "active"
+        }
+      },
+      "20": {
+        "$value": "{primitive.space.20}",
+        "$type": "dimension",
+        "$description": "Spacing step 20 (80px): the `20` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-20 · m-20 · gap-20 · size-20"
+          },
+          "status": "active"
+        }
+      },
+      "24": {
+        "$value": "{primitive.space.24}",
+        "$type": "dimension",
+        "$description": "Spacing step 24 (96px): the `24` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-24 · m-24 · gap-24 · size-24"
+          },
+          "status": "active"
+        }
+      },
+      "28": {
+        "$value": "{primitive.space.28}",
+        "$type": "dimension",
+        "$description": "Spacing step 28 (112px): the `28` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-28 · m-28 · gap-28 · size-28"
+          },
+          "status": "active"
+        }
+      },
+      "32": {
+        "$value": "{primitive.space.32}",
+        "$type": "dimension",
+        "$description": "Spacing step 32 (128px): the `32` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-32 · m-32 · gap-32 · size-32"
+          },
+          "status": "active"
+        }
+      },
+      "36": {
+        "$value": "{primitive.space.36}",
+        "$type": "dimension",
+        "$description": "Spacing step 36 (144px): the `36` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-36 · m-36 · gap-36 · size-36"
+          },
+          "status": "active"
+        }
+      },
+      "40": {
+        "$value": "{primitive.space.40}",
+        "$type": "dimension",
+        "$description": "Spacing step 40 (160px): the `40` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-40 · m-40 · gap-40 · size-40"
+          },
+          "status": "active"
+        }
+      },
+      "44": {
+        "$value": "{primitive.space.44}",
+        "$type": "dimension",
+        "$description": "Spacing step 44 (176px): the `44` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-44 · m-44 · gap-44 · size-44"
+          },
+          "status": "active"
+        }
+      },
+      "48": {
+        "$value": "{primitive.space.48}",
+        "$type": "dimension",
+        "$description": "Spacing step 48 (192px): the `48` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-48 · m-48 · gap-48 · size-48"
+          },
+          "status": "active"
+        }
+      },
+      "52": {
+        "$value": "{primitive.space.52}",
+        "$type": "dimension",
+        "$description": "Spacing step 52 (208px): the `52` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-52 · m-52 · gap-52 · size-52"
+          },
+          "status": "active"
+        }
+      },
+      "56": {
+        "$value": "{primitive.space.56}",
+        "$type": "dimension",
+        "$description": "Spacing step 56 (224px): the `56` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-56 · m-56 · gap-56 · size-56"
+          },
+          "status": "active"
+        }
+      },
+      "60": {
+        "$value": "{primitive.space.60}",
+        "$type": "dimension",
+        "$description": "Spacing step 60 (240px): the `60` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-60 · m-60 · gap-60 · size-60"
+          },
+          "status": "active"
+        }
+      },
+      "64": {
+        "$value": "{primitive.space.64}",
+        "$type": "dimension",
+        "$description": "Spacing step 64 (256px): the `64` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-64 · m-64 · gap-64 · size-64"
+          },
+          "status": "active"
+        }
+      },
+      "72": {
+        "$value": "{primitive.space.72}",
+        "$type": "dimension",
+        "$description": "Spacing step 72 (288px): the `72` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-72 · m-72 · gap-72 · size-72"
+          },
+          "status": "active"
+        }
+      },
+      "80": {
+        "$value": "{primitive.space.80}",
+        "$type": "dimension",
+        "$description": "Spacing step 80 (320px): the `80` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-80 · m-80 · gap-80 · size-80"
+          },
+          "status": "active"
+        }
+      },
+      "96": {
+        "$value": "{primitive.space.96}",
+        "$type": "dimension",
+        "$description": "Spacing step 96 (384px): the `96` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "p-96 · m-96 · gap-96 · size-96"
+          },
+          "status": "active"
+        }
+      }
+    },
+    "container": {
+      "3xs": {
+        "$value": "{primitive.space.container.3xs}",
+        "$type": "dimension",
+        "$description": "Container width 3xs (256px): the value Tailwind compiles into `max-w-3xs` and `@3xs:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-3xs · w-3xs"
+          },
+          "status": "reserved"
+        }
+      },
+      "2xs": {
+        "$value": "{primitive.space.container.2xs}",
+        "$type": "dimension",
+        "$description": "Container width 2xs (288px): the value Tailwind compiles into `max-w-2xs` and `@2xs:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-2xs · w-2xs"
+          },
+          "status": "reserved"
+        }
+      },
+      "xs": {
+        "$value": "{primitive.space.container.xs}",
+        "$type": "dimension",
+        "$description": "Container width xs (320px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-xs` and `@xs:` itself; lint-theme-bridge checks it equals the token.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-xs · w-xs"
+          },
+          "status": "active"
+        }
+      },
+      "sm": {
+        "$value": "{primitive.space.container.sm}",
+        "$type": "dimension",
+        "$description": "Container width sm (384px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-sm` and `@sm:` itself; lint-theme-bridge checks it equals the token.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-sm · w-sm"
+          },
+          "status": "active"
+        }
+      },
+      "md": {
+        "$value": "{primitive.space.container.md}",
+        "$type": "dimension",
+        "$description": "Container width md (448px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-md` and `@md:` itself; lint-theme-bridge checks it equals the token.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-md · w-md"
+          },
+          "status": "active"
+        }
+      },
+      "lg": {
+        "$value": "{primitive.space.container.lg}",
+        "$type": "dimension",
+        "$description": "Container width lg (512px): the value Tailwind compiles into `max-w-lg` and `@lg:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-lg · w-lg"
+          },
+          "status": "reserved"
+        }
+      },
+      "xl": {
+        "$value": "{primitive.space.container.xl}",
+        "$type": "dimension",
+        "$description": "Container width xl (576px): the value Tailwind compiles into `max-w-xl` and `@xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-xl · w-xl"
+          },
+          "status": "reserved"
+        }
+      },
+      "2xl": {
+        "$value": "{primitive.space.container.2xl}",
+        "$type": "dimension",
+        "$description": "Container width 2xl (672px): the value Tailwind compiles into `max-w-2xl` and `@2xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-2xl · w-2xl"
+          },
+          "status": "reserved"
+        }
+      },
+      "3xl": {
+        "$value": "{primitive.space.container.3xl}",
+        "$type": "dimension",
+        "$description": "Container width 3xl (768px): the value Tailwind compiles into `max-w-3xl` and `@3xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-3xl · w-3xl"
+          },
+          "status": "reserved"
+        }
+      },
+      "4xl": {
+        "$value": "{primitive.space.container.4xl}",
+        "$type": "dimension",
+        "$description": "Container width 4xl (896px): the value Tailwind compiles into `max-w-4xl` and `@4xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-4xl · w-4xl"
+          },
+          "status": "reserved"
+        }
+      },
+      "5xl": {
+        "$value": "{primitive.space.container.5xl}",
+        "$type": "dimension",
+        "$description": "Container width 5xl (1024px): the value Tailwind compiles into `max-w-5xl` and `@5xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-5xl · w-5xl"
+          },
+          "status": "reserved"
+        }
+      },
+      "6xl": {
+        "$value": "{primitive.space.container.6xl}",
+        "$type": "dimension",
+        "$description": "Container width 6xl (1152px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-6xl` and `@6xl:` itself; lint-theme-bridge checks it equals the token.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-6xl · w-6xl"
+          },
+          "status": "active"
+        }
+      },
+      "7xl": {
+        "$value": "{primitive.space.container.7xl}",
+        "$type": "dimension",
+        "$description": "Container width 7xl (1280px): the value Tailwind compiles into `max-w-7xl` and `@7xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "max-w-7xl · w-7xl"
+          },
+          "status": "reserved"
+        }
+      }
+    },
     "focus-ring-width": {
       "$value": "{primitive.space.focus-ring-width}",
       "$type": "dimension",
@@ -857,6 +1411,96 @@
         }
       }
     },
+    "size-line-height": {
+      "xs": {
+        "$value": "{primitive.typography.size-line-height.xs}",
+        "$type": "number",
+        "$description": "Line height that `text-xs` sets with its size. `leading-*` or `text-xs/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-xs"
+          },
+          "status": "active"
+        }
+      },
+      "sm": {
+        "$value": "{primitive.typography.size-line-height.sm}",
+        "$type": "number",
+        "$description": "Line height that `text-sm` sets with its size. `leading-*` or `text-sm/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-sm"
+          },
+          "status": "active"
+        }
+      },
+      "base": {
+        "$value": "{primitive.typography.size-line-height.base}",
+        "$type": "number",
+        "$description": "Line height that `text-base` sets with its size. `leading-*` or `text-base/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-base"
+          },
+          "status": "active"
+        }
+      },
+      "lg": {
+        "$value": "{primitive.typography.size-line-height.lg}",
+        "$type": "number",
+        "$description": "Line height that `text-lg` sets with its size. `leading-*` or `text-lg/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-lg"
+          },
+          "status": "active"
+        }
+      },
+      "xl": {
+        "$value": "{primitive.typography.size-line-height.xl}",
+        "$type": "number",
+        "$description": "Line height that `text-xl` sets with its size. `leading-*` or `text-xl/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-xl"
+          },
+          "status": "active"
+        }
+      },
+      "2xl": {
+        "$value": "{primitive.typography.size-line-height.2xl}",
+        "$type": "number",
+        "$description": "Line height that `text-2xl` sets with its size. `leading-*` or `text-2xl/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-2xl"
+          },
+          "status": "active"
+        }
+      },
+      "3xl": {
+        "$value": "{primitive.typography.size-line-height.3xl}",
+        "$type": "number",
+        "$description": "Line height that `text-3xl` sets with its size. `leading-*` or `text-3xl/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-3xl"
+          },
+          "status": "active"
+        }
+      },
+      "4xl": {
+        "$value": "{primitive.typography.size-line-height.4xl}",
+        "$type": "number",
+        "$description": "Line height that `text-4xl` sets with its size. `leading-*` or `text-4xl/<leading>` overrides it.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-4xl"
+          },
+          "status": "active"
+        }
+      }
+    },
     "line-height": {
       "tight": {
         "$value": "{primitive.typography.line-height.tight}",
@@ -955,6 +1599,17 @@
         "$extensions": {
           "docs": {
             "tailwind": "tracking-wider"
+          },
+          "status": "active"
+        }
+      },
+      "widest": {
+        "$value": "{primitive.typography.letter-spacing.widest}",
+        "$type": "dimension",
+        "$description": "Widest letter spacing, for the keyboard shortcuts of menus and the command palette.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "tracking-widest"
           },
           "status": "active"
         }

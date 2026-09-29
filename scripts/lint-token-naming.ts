@@ -117,6 +117,22 @@ const ENUMS: Record<string, string[]> = {
     "full",
   ],
   componentSize: ["xs", "sm", "md", "lg", "xl"],
+  /** Tailwind's container scale: `max-w-sm`, `w-2xl`. */
+  containerSize: [
+    "3xs",
+    "2xs",
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "xl",
+    "2xl",
+    "3xl",
+    "4xl",
+    "5xl",
+    "6xl",
+    "7xl",
+  ],
   layoutName: [
     "page-padding",
     "section-gap",
@@ -147,7 +163,7 @@ const ENUMS: Record<string, string[]> = {
   easingName: ["default", "in", "out", "spring"],
   fontFamily: ["sans", "mono", "serif"],
   fontWeight: ["normal", "medium", "semibold", "bold"],
-  letterSpacing: ["tight", "normal", "wide", "wider"],
+  letterSpacing: ["tight", "normal", "wide", "wider", "widest"],
   lineHeight: ["tight", "snug", "normal", "relaxed", "loose"],
   typeScale: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl"],
 }
@@ -159,7 +175,7 @@ const PATTERNS: Record<string, { pattern: RegExp; label: string }> = {
   paletteStep: { pattern: /^\d{1,3}$/, label: "numeric step 0–950" },
   spaceStep: {
     pattern: /^\d+(?:-\d+)?$/,
-    label: "numeric step, halves written with a dash (0-5, 1, 24)",
+    label: "numeric step, fractions written with a dash (0-5, 1-25, 24)",
   },
   widthStep: {
     pattern: /^\d+(?:-\d+)?$/,
@@ -190,6 +206,7 @@ const TYPOGRAPHY_SHAPES = [
   "typography.letter-spacing.<letterSpacing>",
   "typography.line-height.<lineHeight>",
   "typography.size.<typeScale>",
+  "typography.size-line-height.<typeScale>",
 ]
 
 const MOTION_SHAPES = [
@@ -205,7 +222,11 @@ const PRIMITIVE_GRAMMAR: Grammar = {
   motion: MOTION_SHAPES,
   opacity: ["opacity.<opacityStep>"],
   radius: ["radius.<radiusPrimitive>"],
-  space: ["space.<spaceStep>", "space.<spaceAlias>"],
+  space: [
+    "space.<spaceStep>",
+    "space.<spaceAlias>",
+    "space.container.<containerSize>",
+  ],
   typography: TYPOGRAPHY_SHAPES,
   zindex: ["zindex.<zLayer>"],
 }
@@ -235,6 +256,8 @@ const SEMANTIC_GRAMMAR: Grammar = {
   radius: ["radius.<radiusSize>"],
   space: [
     "space.component.<componentSize>",
+    "space.scale.<spaceStep>",
+    "space.container.<containerSize>",
     "space.layout.<layoutName>",
     "space.focus-ring-width",
   ],

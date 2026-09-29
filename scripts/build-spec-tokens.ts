@@ -19,8 +19,9 @@
  * class reads the variable next/font sets (`font-mono` → `--font-mono`), which
  * leads to the typography token that describes the family.
  *
- * Only semantic tokens are listed. Classes that read no token — Tailwind's
- * spacing scale (`p-2`), sizes, layout — are left out on purpose.
+ * Only semantic tokens are listed. Since the spacing scale is locked, `p-2`
+ * resolves to `space.scale.2` like any other class; classes that read no
+ * token (`w-full`, `flex`, layout) are left out on purpose.
  *
  * Tailwind is driven through `__unstable__loadDesignSystem` from
  * `@tailwindcss/node`: a private, unversioned API, the only one that resolves
@@ -309,7 +310,7 @@ async function sectionFor(
             `| ${code(token)} | ${list(forms, code)} | ${list(where)} |`
         ),
       "",
-      `Collected from ${code(codePath)} and the \`lib/\` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the \`cva\` variant path or the constant the class comes from. Classes that read no token (spacing such as \`p-2\`, sizes, layout) are left out.`
+      `Collected from ${code(codePath)} and the \`lib/\` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the \`cva\` variant path or the constant the class comes from. Classes that read no token (\`w-full\`, \`flex\`, layout) are left out.`
     )
     if (composes) lines.push("", composes)
   }

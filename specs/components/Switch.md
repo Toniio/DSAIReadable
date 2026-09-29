@@ -60,8 +60,16 @@ A toggle switch that turns a two-state setting on or off, with immediate visual 
 | `color.text.default`                 | `bg-foreground`                                                                                | `Switch`                                              |
 | `opacity.disabled`                   | `opacity-disabled`                                                                             | `Switch`                                              |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `Switch` · `Switch` via `FOCUS_RING` (`lib/focus.ts`) |
+| `space.scale.0`                      | `translate-x-0`                                                                                | `Switch`                                              |
+| `space.scale.2`                      | `-inset-y-2`                                                                                   | `Switch`                                              |
+| `space.scale.3`                      | `-inset-x-3` · `size-3`                                                                        | `Switch`                                              |
+| `space.scale.3-5`                    | `h-3.5`                                                                                        | `Switch`                                              |
+| `space.scale.4`                      | `size-4`                                                                                       | `Switch`                                              |
+| `space.scale.5`                      | `h-5`                                                                                          | `Switch`                                              |
+| `space.scale.6`                      | `w-6`                                                                                          | `Switch`                                              |
+| `space.scale.8`                      | `w-8`                                                                                          | `Switch`                                              |
 
-Collected from `components/ui/switch.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (spacing such as `p-2`, sizes, layout) are left out.
+Collected from `components/ui/switch.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
 ## Props / API
 

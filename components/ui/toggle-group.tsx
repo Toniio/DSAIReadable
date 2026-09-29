@@ -41,7 +41,9 @@ function ToggleGroup({
       data-orientation={orientation}
       style={{ "--gap": spacing } as React.CSSProperties}
       className={cn(
-        "group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-none data-[size=sm]:rounded-none data-vertical:flex-col data-vertical:items-stretch",
+        // allow-raw: toggle-group-spacing — `spacing` is a multiple of the scale unit,
+        // shadcn/ui's prop; the product is computed at runtime from --spacing.
+        "group/toggle-group flex w-fit flex-row items-center gap-[calc(var(--spacing)*var(--gap))] rounded-none data-[size=sm]:rounded-none data-vertical:flex-col data-vertical:items-stretch",
         className
       )}
       {...props}
