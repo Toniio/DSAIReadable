@@ -23,22 +23,31 @@ UI_STRINGS.pagination.nextLabel // "Go to next page"
 language the components are distributed in, just like their prop names. Any
 other locale is supplied by the caller.
 
+A string that names something only the caller knows is a function of it:
+`UI_STRINGS.combobox.remove("Apple")` returns `"Remove Apple"`. A translation
+supplies the whole sentence, so each language puts the name where its grammar
+wants it.
+
 ## Overriding
 
 Every string can be reached through a prop, never through a fork of the
 component.
 
-| Component                               | Prop                  | Default                            |
-| --------------------------------------- | --------------------- | ---------------------------------- |
-| `BreadcrumbEllipsis`                    | `srLabel`             | `More`                             |
-| `CarouselPrevious` / `CarouselNext`     | `srLabel`             | `Previous slide` / `Next slide`    |
-| `DialogContent` / `DialogFooter`        | `closeLabel`          | `Close`                            |
-| `SheetContent`                          | `closeLabel`          | `Close`                            |
-| `Illustration`                          | `alt`                 | `Illustration`                     |
-| `PaginationPrevious` / `PaginationNext` | `text`, `label`       | `Previous` / `Go to previous page` |
-| `PaginationEllipsis`                    | `srLabel`             | `More pages`                       |
-| `Spinner`                               | `aria-label`          | `Loading`                          |
-| `PasswordInput`, `SidebarTrigger`       | — (read `UI_STRINGS`) |                                    |
+| Component                               | Prop                               | Default                                    |
+| --------------------------------------- | ---------------------------------- | ------------------------------------------ |
+| `BreadcrumbEllipsis`                    | `srLabel`                          | `More`                                     |
+| `CarouselPrevious` / `CarouselNext`     | `srLabel`                          | `Previous slide` / `Next slide`            |
+| `DialogContent` / `DialogFooter`        | `closeLabel`                       | `Close`                                    |
+| `SheetContent`                          | `closeLabel`                       | `Close`                                    |
+| `Illustration`                          | `alt`                              | `Illustration`                             |
+| `PaginationPrevious` / `PaginationNext` | `text`, `label`                    | `Previous` / `Go to previous page`         |
+| `PaginationEllipsis`                    | `srLabel`                          | `More pages`                               |
+| `Spinner`                               | `aria-label`                       | `Loading`                                  |
+| `ComboboxTrigger` / `ComboboxClear`     | `triggerLabel` / `clearLabel`      | `Open list` / `Clear selection`            |
+| `ComboboxChip`                          | `removeLabel`                      | `Remove <item>`                            |
+| `Sidebar` (mobile Sheet)                | `mobileTitle`, `mobileDescription` | `Sidebar` / `Displays the mobile sidebar.` |
+| `SidebarTrigger` / `SidebarRail`        | `toggleLabel`                      | `Toggle Sidebar`                           |
+| `PasswordInput`                         | — (read `UI_STRINGS`)              |                                            |
 
 To translate a whole application, pass the props from the application's own
 i18n layer. `UI_STRINGS` reads no locale and is not reactive: it is a set of
@@ -56,5 +65,6 @@ defaults, not a translation system.
 
 `scripts/lint-ui-strings.ts` (`npm run index:strings`) fails on any
 `aria-label`, `title`, `alt` or `sr-only` text written as a literal in
-`components/ui/`. Values that belong to the ARIA grammar
+`components/ui/`, and on any literal text inside a `*Title` or `*Description`
+element there. Values that belong to the ARIA grammar
 (`aria-label="true"`, `aria-live="polite"`…) are not text and are not flagged.

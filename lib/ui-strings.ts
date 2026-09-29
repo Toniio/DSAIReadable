@@ -9,7 +9,9 @@
  *
  * The defaults are English. Any other locale is supplied by the caller through
  * the override prop each component exposes; nothing here reads a locale, and
- * nothing here is reactive.
+ * nothing here is reactive. A string that names something only the caller
+ * knows is a function of it, so that each language can put the name where its
+ * grammar wants it.
  */
 export const UI_STRINGS = Object.freeze({
   breadcrumb: Object.freeze({
@@ -26,8 +28,8 @@ export const UI_STRINGS = Object.freeze({
     /** The caret button that opens the list. */
     trigger: "Open list",
     clear: "Clear selection",
-    /** The button that removes a chip from a multiple selection. */
-    remove: "Remove",
+    /** The button that removes a chip from a multiple selection: it names the item. */
+    remove: (item: string) => `Remove ${item}`,
   }),
   dialog: Object.freeze({
     close: "Close",
@@ -55,6 +57,10 @@ export const UI_STRINGS = Object.freeze({
   }),
   sidebar: Object.freeze({
     toggle: "Toggle Sidebar",
+    /** Title of the sheet the sidebar becomes on mobile; screen readers only. */
+    mobileTitle: "Sidebar",
+    /** Description of that sheet; screen readers only. */
+    mobileDescription: "Displays the mobile sidebar.",
   }),
   spinner: Object.freeze({
     /** Name of the role="status" region. */

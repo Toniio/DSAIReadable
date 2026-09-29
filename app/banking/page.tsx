@@ -92,12 +92,21 @@ const transactions = [
   },
 ]
 
+// Complete class names, one per series: Tailwind only generates what it can
+// read in the source, so the bar color is never assembled at runtime.
+const SERIES_BAR = {
+  1: "[&>*]:bg-chart-1",
+  2: "[&>*]:bg-chart-2",
+  3: "[&>*]:bg-chart-3",
+  4: "[&>*]:bg-chart-4",
+} as const
+
 const budgets = [
-  { label: "Groceries", spent: 320, limit: 450, color: "bg-chart-1" },
-  { label: "Transportation", spent: 85, limit: 120, color: "bg-chart-2" },
-  { label: "Entertainment", spent: 190, limit: 200, color: "bg-chart-3" },
-  { label: "Subscriptions", spent: 62, limit: 80, color: "bg-chart-4" },
-]
+  { label: "Groceries", spent: 320, limit: 450, series: 1 },
+  { label: "Transportation", spent: 85, limit: 120, series: 2 },
+  { label: "Entertainment", spent: 190, limit: 200, series: 3 },
+  { label: "Subscriptions", spent: 62, limit: 80, series: 4 },
+] as const
 
 function formatCurrency(amount: number) {
   return new Intl.NumberFormat("en-US", {
@@ -250,7 +259,7 @@ export default function BankingHomePage() {
                 <CardContent>
                   <Progress
                     value={Math.round((budget.spent / budget.limit) * 100)}
-                    className={`h-2 [&>*]:${budget.color}`}
+                    className={`h-2 ${SERIES_BAR[budget.series]}`}
                   />
                   <p className="mt-1 text-xs text-muted-foreground">
                     {Math.round(

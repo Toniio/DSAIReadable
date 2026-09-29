@@ -25,6 +25,12 @@ function exportedComponents(source: string): string[] {
     /^(?:export\s+)?const ([A-Z]\w*)\s*=\s*(?:React\.forwardRef|\()/gm
   ))
     declared.add(m[1])
+  // An alias of a library part (`const ChartTooltip = RechartsPrimitive.Tooltip`)
+  // is a component too: consumers render it and need its props.
+  for (const m of source.matchAll(
+    /^(?:export\s+)?const ([A-Z]\w*)\s*=\s*[A-Z]\w*(?:\.[A-Z]\w*)+\s*$/gm
+  ))
+    declared.add(m[1])
 
   const exported = new Set<string>()
   for (const m of source.matchAll(
