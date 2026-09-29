@@ -1,5 +1,5 @@
 {
-  "tokenCount": 301,
+  "tokenCount": 303,
   "tokens": [
     {
       "token": "color.mist.0",
@@ -274,6 +274,22 @@
       "private": true
     },
     {
+      "token": "color.red.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#ffa2a2"
+      },
+      "value": {
+        "light": "#ffa2a2"
+      },
+      "description": "Light red, destructive text in dark mode, legible on a destructive tint.",
+      "private": true
+    },
+    {
       "token": "color.red.500",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-500",
@@ -303,6 +319,22 @@
         "light": "#e7000b"
       },
       "description": "Deep red, destructive in light mode.",
+      "private": true
+    },
+    {
+      "token": "color.red.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-800",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#9f0712"
+      },
+      "value": {
+        "light": "#9f0712"
+      },
+      "description": "Dark red, destructive text in light mode, legible on a destructive tint.",
       "private": true
     },
     {
@@ -2530,21 +2562,21 @@
       "tier": "semantic",
       "cssVar": "--color-text-destructive-default",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{color.red.600}",
-        "dark": "{color.red.500}"
+        "light": "{color.red.800}",
+        "dark": "{color.red.300}"
       },
       "value": {
-        "light": "#e7000b",
-        "dark": "#ff6467"
+        "light": "#9f0712",
+        "dark": "#ffa2a2"
       },
-      "description": "Error, danger, or destructive action text. Not for general warning or informational text.",
+      "description": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text.",
       "docs": {
-        "description": "Destructive or error-state text.",
-        "do": "Use for error validation messages and deletion confirmations.",
-        "dont": "Do not use for warnings or information — it is reserved for critical errors."
+        "description": "Destructive or error-state text and icons — the class `text-destructive`. Darker than `color.feedback.error.default` in light mode and lighter in dark mode, so it stays at 4.5:1 or more on every surface and on the `bg-destructive/10`–`/30` tints.",
+        "do": "Use for error validation messages, destructive button and badge labels, and destructive menu items.",
+        "dont": "Do not use for warnings or information — it is reserved for critical errors. Do not use `color.feedback.error.default` for text: on a card or a destructive tint it falls below 4.5:1."
       }
     },
     {
@@ -2760,11 +2792,11 @@
         "light": "#e7000b",
         "dark": "#ff6467"
       },
-      "description": "Error state color for backgrounds, icons, and borders. Not for warnings or success states.",
+      "description": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states.",
       "docs": {
-        "description": "Error-state color — background, icon, border.",
-        "do": "Use for validation messages, the borders of invalid fields and error icons.",
-        "dont": "Do not use for warnings or success states."
+        "description": "Error-state fill — solid or tinted background, border, focus ring.",
+        "do": "Use for the borders and rings of invalid fields and for the `bg-destructive/10`–`/30` tints.",
+        "dont": "Do not use for text or icons — use `color.text.destructive.default` (`text-destructive`). Do not use for warnings or success states."
       }
     },
     {

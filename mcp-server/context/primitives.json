@@ -85,6 +85,11 @@
     "type": "color"
   },
   {
+    "path": "color.red.300",
+    "value": "#ffa2a2",
+    "type": "color"
+  },
+  {
     "path": "color.red.500",
     "value": "#ff6467",
     "type": "color"
@@ -92,6 +97,11 @@
   {
     "path": "color.red.600",
     "value": "#e7000b",
+    "type": "color"
+  },
+  {
+    "path": "color.red.800",
+    "value": "#9f0712",
     "type": "color"
   },
   {

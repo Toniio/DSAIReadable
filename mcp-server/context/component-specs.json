@@ -317,16 +317,6 @@
         ]
       },
       {
-        "token": "color.feedback.error.default",
-        "classes": [
-          "text-destructive",
-          "text-destructive/90"
-        ],
-        "where": [
-          "alertVariants.variant.destructive"
-        ]
-      },
-      {
         "token": "color.text.default",
         "classes": [
           "text-card-foreground",
@@ -336,6 +326,16 @@
           "AlertDescription",
           "AlertTitle",
           "alertVariants.variant.default"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive",
+          "text-destructive/90"
+        ],
+        "where": [
+          "alertVariants.variant.destructive"
         ]
       },
       {
@@ -1391,8 +1391,7 @@
           "border-destructive",
           "border-destructive/40",
           "ring-destructive/20",
-          "ring-destructive/40",
-          "text-destructive"
+          "ring-destructive/40"
         ],
         "where": [
           "badgeVariants.variant.destructive",
@@ -1409,6 +1408,15 @@
         "where": [
           "badgeVariants.variant.outline",
           "badgeVariants.variant.secondary"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "badgeVariants.variant.destructive"
         ]
       },
       {
@@ -1516,7 +1524,7 @@
         "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
       }
     ],
-    "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red).\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.",
+    "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red).\n- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.",
     "code_example": "import { Badge } from \"@/components/ui/badge\"\n\nexport default function Example() {\n  return (\n    <div className=\"flex gap-2\">\n      <Badge variant=\"default\">Active</Badge>\n      <Badge variant=\"secondary\">Pending</Badge>\n      <Badge variant=\"destructive\">Error</Badge>\n      <Badge variant=\"outline\">v2.1.0</Badge>\n    </div>\n  )\n}",
     "cross_references": [
       "Button",
@@ -1880,8 +1888,7 @@
           "border-destructive/40",
           "border-destructive/50",
           "ring-destructive/20",
-          "ring-destructive/40",
-          "text-destructive"
+          "ring-destructive/40"
         ],
         "where": [
           "buttonVariants.variant.destructive",
@@ -1899,6 +1906,15 @@
           "buttonVariants.variant.ghost",
           "buttonVariants.variant.outline",
           "buttonVariants.variant.secondary"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "buttonVariants.variant.destructive"
         ]
       },
       {
@@ -2018,7 +2034,7 @@
         "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
       }
     ],
-    "accessibility": "**Pattern**: [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) — native `button` element\n\n**Role**: Native `button` (or the element passed through `asChild`, such as a link).\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Enter` / `Space` | Activates the button            |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.\n\n**Pitfalls**:\n\n- **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.\n- A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.\n- `variant=\"destructive\"` must come with an explicit label.",
+    "accessibility": "**Pattern**: [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) — native `button` element\n\n**Role**: Native `button` (or the element passed through `asChild`, such as a link).\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Enter` / `Space` | Activates the button            |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.\n\n**Pitfalls**:\n\n- **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.\n- A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.\n- `variant=\"destructive\"` must come with an explicit label.\n- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 3.00:1 on a hovered button inside a card.",
     "code_example": "import { Button } from \"@/components/ui/button\"\n\nexport default function Example() {\n  return (\n    <Button variant=\"default\" size=\"default\" type=\"submit\">\n      Sign in\n    </Button>\n  )\n}",
     "cross_references": [
       "Field",
@@ -4854,8 +4870,7 @@
         "token": "color.feedback.error.default",
         "classes": [
           "bg-destructive/10",
-          "bg-destructive/20",
-          "text-destructive"
+          "bg-destructive/20"
         ],
         "where": [
           "ContextMenuItem"
@@ -4876,6 +4891,15 @@
           "ContextMenuShortcut",
           "ContextMenuSubContent",
           "ContextMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "ContextMenuItem"
         ]
       },
       {
@@ -6159,8 +6183,7 @@
         "token": "color.feedback.error.default",
         "classes": [
           "bg-destructive/10",
-          "bg-destructive/20",
-          "text-destructive"
+          "bg-destructive/20"
         ],
         "where": [
           "DropdownMenuItem"
@@ -6181,6 +6204,15 @@
           "DropdownMenuShortcut",
           "DropdownMenuSubContent",
           "DropdownMenuSubTrigger"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "DropdownMenuItem"
         ]
       },
       {
@@ -6907,7 +6939,7 @@
         ]
       },
       {
-        "token": "color.feedback.error.default",
+        "token": "color.text.destructive.default",
         "classes": [
           "text-destructive"
         ],
@@ -9567,8 +9599,7 @@
         "token": "color.feedback.error.default",
         "classes": [
           "bg-destructive/10",
-          "bg-destructive/20",
-          "text-destructive"
+          "bg-destructive/20"
         ],
         "where": [
           "MenubarItem"
@@ -9589,6 +9620,15 @@
           "MenubarShortcut",
           "MenubarSubContent",
           "MenubarSubTrigger"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "MenubarItem"
         ]
       },
       {

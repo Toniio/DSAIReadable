@@ -81,11 +81,11 @@
   },
   {
     "path": "color.text.destructive.default",
-    "value_light": "{color.red.600}",
-    "value_dark": "{color.red.500}",
+    "value_light": "{color.red.800}",
+    "value_dark": "{color.red.300}",
     "css_variable": "--color-text-destructive-default",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "active"
   },
   {
     "path": "color.border.default",

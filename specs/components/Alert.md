@@ -53,8 +53,8 @@ A non-modal banner that delivers a contextual message — informational or an er
 | -------------------------------- | ------------------------------------------ | --------------------------------------------------------------------- |
 | `border-width.default`           | `border`                                   | `alertVariants`                                                       |
 | `color.background.subtle`        | `bg-card`                                  | `alertVariants.variant.default` · `alertVariants.variant.destructive` |
-| `color.feedback.error.default`   | `text-destructive` · `text-destructive/90` | `alertVariants.variant.destructive`                                   |
 | `color.text.default`             | `text-card-foreground` · `text-foreground` | `AlertDescription` · `AlertTitle` · `alertVariants.variant.default`   |
+| `color.text.destructive.default` | `text-destructive` · `text-destructive/90` | `alertVariants.variant.destructive`                                   |
 | `color.text.subtle`              | `text-muted-foreground`                    | `AlertDescription`                                                    |
 | `typography.font-weight.medium`  | `font-medium`                              | `AlertTitle`                                                          |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                          | `AlertDescription`                                                    |

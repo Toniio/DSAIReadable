@@ -92,11 +92,11 @@
   {
     "path": "color.text.destructive.default",
     "css_var": "--color-text-destructive-default",
-    "light": "{color.red.600}",
-    "dark": "{color.red.500}",
+    "light": "{color.red.800}",
+    "dark": "{color.red.300}",
     "type": "color",
-    "status": "reserved",
-    "usage": "Error, danger, or destructive action text. Not for general warning or informational text."
+    "status": "active",
+    "usage": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text."
   },
   {
     "path": "color.border.default",
@@ -186,7 +186,7 @@
     "dark": "{color.red.500}",
     "type": "color",
     "status": "active",
-    "usage": "Error state color for backgrounds, icons, and borders. Not for warnings or success states."
+    "usage": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states."
   },
   {
     "path": "color.feedback.error.foreground",

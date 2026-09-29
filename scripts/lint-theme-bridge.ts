@@ -56,7 +56,8 @@ const PRIVATE_PREFIX = "--ds-prim-"
  * with no class behind it. Verified against compiled output, not from memory:
  * `--transition-duration-*` is here because `.duration-fast` is emitted, while
  * `--transition-timing-function-*` is absent because `.ease-spring` was not;
- * `--opacity-*` because `.opacity-disabled` is (P3-15).
+ * `--opacity-*` because `.opacity-disabled` is (P3-15); `--text-color-*`
+ * because `.text-destructive` reads it before `--color-*` (P3-17).
  *
  * A name outside this set is not necessarily wrong — it just has to earn its
  * place in NON_UTILITY_ALLOWLIST with a reason.
@@ -82,6 +83,7 @@ const UTILITY_NAMESPACES = [
   "--shadow-",
   "--spacing-",
   "--text-",
+  "--text-color-",
   "--text-shadow-",
   "--tracking-",
   "--transition-duration-",
