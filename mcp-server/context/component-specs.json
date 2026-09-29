@@ -3856,7 +3856,8 @@
       "**MUST** — in multiple selection, provide an `anchor` (`useComboboxAnchor`) so the popup opens below the chips",
       "**MUST** — give each `ComboboxItem` a unique value",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
-      "**MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they default to the English `UI_STRINGS.combobox`"
+      "**MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they default to the English `UI_STRINGS.combobox`",
+      "**MUST** — pass `removeLabel` to a `ComboboxChip` whose children are not the item's text: the default name is built from the chip's rendered text, so each remove button says which item it removes"
     ],
     "dependencies": [
       "`@base-ui/react` — the `Combobox` primitive (Root, Value, Trigger, Clear, Input, Popup, Positioner, Portal, List, Item, ItemIndicator, Group, GroupLabel, Collection, Empty, Separator, Chips, Chip, ChipRemove)",
@@ -4331,8 +4332,8 @@
         "component": "ComboboxChip",
         "prop": "`removeLabel`",
         "type": "`string`",
-        "default": "`UI_STRINGS.combobox.remove`",
-        "description": "`aria-label` of the chip's remove button"
+        "default": "—",
+        "description": "`aria-label` of the chip's remove button; by default `UI_STRINGS.combobox.remove(item)`, where `item` is the chip's text"
       },
       {
         "component": "ComboboxChip",
@@ -4396,7 +4397,7 @@
         "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
       }
     ],
-    "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)\n\n**Role**: An input with `role=\"combobox\"` linked to a `listbox`; `aria-expanded` on the input, `aria-selected` on the active option.\n\n**Keyboard**:\n\n| Key                     | Action                                 |\n| ----------------------- | -------------------------------------- |\n| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |\n| `Enter`                 | Selects the active option              |\n| `Escape`                | Closes the list                        |\n| Typing                  | Filters the options                    |\n\n**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`).\n\n**Pitfalls**:\n\n- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.",
+    "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)\n\n**Role**: An input with `role=\"combobox\"` linked to a `listbox`; `aria-expanded` on the input, `aria-selected` on the active option.\n\n**Keyboard**:\n\n| Key                     | Action                                 |\n| ----------------------- | -------------------------------------- |\n| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |\n| `Enter`                 | Selects the active option              |\n| `Escape`                | Closes the list                        |\n| Typing                  | Filters the options                    |\n\n**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`). Each chip's remove button names its item — `Remove Apple`, `Remove Cherry` — never a bare `Remove`.\n\n**Pitfalls**:\n\n- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.",
     "code_example": "import {\n  Combobox,\n  ComboboxInput,\n  ComboboxContent,\n  ComboboxList,\n  ComboboxItem,\n  ComboboxEmpty,\n} from \"@/components/ui/combobox\"\n\nconst fruits = [\n  { value: \"apple\", label: \"Apple\" },\n  { value: \"banana\", label: \"Banana\" },\n  { value: \"cherry\", label: \"Cherry\" },\n]\n\nexport default function Example() {\n  return (\n    <Combobox>\n      <ComboboxInput placeholder=\"Search for a fruit…\" />\n      <ComboboxContent>\n        <ComboboxList>\n          <ComboboxEmpty>No results</ComboboxEmpty>\n          {fruits.map((fruit) => (\n            <ComboboxItem key={fruit.value} value={fruit.value}>\n              {fruit.label}\n            </ComboboxItem>\n          ))}\n        </ComboboxList>\n      </ComboboxContent>\n    </Combobox>\n  )\n}",
     "cross_references": [
       "InputGroup",
@@ -12932,7 +12933,7 @@
       "**MUST** — check that a nested layout copes with the margins and shadows of the `floating` and `inset` variants",
       "**MUST** — give a `tooltip` to every `SidebarMenuButton` collapsed to its icon",
       "**MUST NOT** — bind `Ctrl+B` / `⌘+B` to another action: `SidebarProvider` registers it to collapse the bar",
-      "**MUST** — in an interface that is not in English, translate the label of `SidebarTrigger` and `SidebarRail` (`UI_STRINGS.sidebar`)"
+      "**MUST** — in an interface that is not in English, translate the strings the sidebar renders for screen readers: `toggleLabel` on `SidebarTrigger` and `SidebarRail`, `mobileTitle` and `mobileDescription` on `Sidebar` (defaults in `UI_STRINGS.sidebar`)"
     ],
     "dependencies": [
       "`Slot.Root` from `radix-ui` (for `asChild`)",
@@ -13405,6 +13406,20 @@
       },
       {
         "component": "Sidebar",
+        "prop": "`mobileTitle`",
+        "type": "`string`",
+        "default": "`UI_STRINGS.sidebar.mobileTitle`",
+        "description": "Title of the mobile Sheet, read by screen readers only"
+      },
+      {
+        "component": "Sidebar",
+        "prop": "`mobileDescription`",
+        "type": "`string`",
+        "default": "`UI_STRINGS.sidebar.mobileDescription`",
+        "description": "Description of the mobile Sheet, read by screen readers only"
+      },
+      {
+        "component": "Sidebar",
         "prop": "`dir`",
         "type": "`string`",
         "default": "—",
@@ -13685,6 +13700,13 @@
       },
       {
         "component": "SidebarRail",
+        "prop": "`toggleLabel`",
+        "type": "`string`",
+        "default": "`UI_STRINGS.sidebar.toggle`",
+        "description": "Accessible name and `title` of the rail"
+      },
+      {
+        "component": "SidebarRail",
         "prop": "`...props`",
         "type": "`React.ComponentProps<\"button\">`",
         "default": "—",
@@ -13696,6 +13718,13 @@
         "type": "`React.ComponentProps<typeof Separator>`",
         "default": "—",
         "description": "`Separator` props"
+      },
+      {
+        "component": "SidebarTrigger",
+        "prop": "`toggleLabel`",
+        "type": "`string`",
+        "default": "`UI_STRINGS.sidebar.toggle`",
+        "description": "Text read by screen readers"
       },
       {
         "component": "SidebarTrigger",
@@ -13742,7 +13771,7 @@
         "behavior": "Sidebar rendered as an overlay `Sheet` on mobile viewports"
       }
     ],
-    "accessibility": "**Pattern**: Side navigation (a composition); a `Sheet` on mobile\n\n**Role**: Menus are `ul` / `li` lists of buttons or links; on mobile, the bar opens in a `Sheet` (a modal dialog).\n\n**Keyboard**:\n\n| Key                | Action                        |\n| ------------------ | ----------------------------- |\n| `Ctrl+B` / `Cmd+B` | Opens / collapses the sidebar |\n| `Tab`              | Moves through the menu items  |\n| `Enter` / `Space`  | Activates the item            |\n\n**Accessible name**: `SidebarTrigger` is named by `UI_STRINGS.sidebar.toggle`. Wrap navigation menus in a named `nav`.\n\n**Pitfalls**:\n\n- `SidebarRail` is not focusable (`tabIndex={-1}`): it is a mouse shortcut; the trigger remains the keyboard path.\n- Collapsed to icons, every button must keep a name (hidden text or a `tooltip`).\n- The `Ctrl/Cmd+B` shortcut can clash with an editor's bold command: turn it off in that context.",
+    "accessibility": "**Pattern**: Side navigation (a composition); a `Sheet` on mobile\n\n**Role**: Menus are `ul` / `li` lists of buttons or links; on mobile, the bar opens in a `Sheet` (a modal dialog).\n\n**Keyboard**:\n\n| Key                | Action                        |\n| ------------------ | ----------------------------- |\n| `Ctrl+B` / `Cmd+B` | Opens / collapses the sidebar |\n| `Tab`              | Moves through the menu items  |\n| `Enter` / `Space`  | Activates the item            |\n\n**Accessible name**: `SidebarTrigger` and `SidebarRail` are named by `toggleLabel`; on mobile, the Sheet is named by `mobileTitle` and described by `mobileDescription` (defaults in `UI_STRINGS.sidebar`). Wrap navigation menus in a named `nav`.\n\n**Pitfalls**:\n\n- `SidebarRail` is not focusable (`tabIndex={-1}`): it is a mouse shortcut; the trigger remains the keyboard path.\n- Collapsed to icons, every button must keep a name (hidden text or a `tooltip`).\n- The `Ctrl/Cmd+B` shortcut can clash with an editor's bold command: turn it off in that context.",
     "code_example": "import {\n  Sidebar,\n  SidebarContent,\n  SidebarGroup,\n  SidebarGroupLabel,\n  SidebarMenu,\n  SidebarMenuButton,\n  SidebarMenuItem,\n  SidebarProvider,\n  SidebarTrigger,\n} from \"@/components/ui/sidebar\"\n\nexport default function Example() {\n  return (\n    <SidebarProvider>\n      <Sidebar>\n        <SidebarContent>\n          <SidebarGroup>\n            <SidebarGroupLabel>Navigation</SidebarGroupLabel>\n            <SidebarMenu>\n              <SidebarMenuItem>\n                <SidebarMenuButton isActive>Dashboard</SidebarMenuButton>\n              </SidebarMenuItem>\n              <SidebarMenuItem>\n                <SidebarMenuButton>Settings</SidebarMenuButton>\n              </SidebarMenuItem>\n            </SidebarMenu>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <main className=\"flex-1 p-4\">\n        <SidebarTrigger />\n        <p>Main content</p>\n      </main>\n    </SidebarProvider>\n  )\n}",
     "cross_references": [
       "Sheet",

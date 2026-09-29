@@ -34,6 +34,7 @@ A text input with autocomplete that picks from a filterable list of options; sup
 - **MUST** — give each `ComboboxItem` a unique value
 - **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
 - **MUST** — in an interface that is not in English, translate the accessible names of the three icon-only buttons (trigger, clear, chip remove) through `triggerLabel`, `clearLabel` and `removeLabel`: they default to the English `UI_STRINGS.combobox`
+- **MUST** — pass `removeLabel` to a `ComboboxChip` whose children are not the item's text: the default name is built from the chip's rendered text, so each remove button says which item it removes
 
 ## Dependencies
 
@@ -196,11 +197,11 @@ Renders `ComboboxPrimitive.Chips`.
 
 Renders `ComboboxPrimitive.Chip`.
 
-| Prop          | Type                           | Default                      | Description                              |
-| ------------- | ------------------------------ | ---------------------------- | ---------------------------------------- |
-| `showRemove`  | `boolean`                      | `true`                       | Shows the chip's remove button           |
-| `removeLabel` | `string`                       | `UI_STRINGS.combobox.remove` | `aria-label` of the chip's remove button |
-| `...props`    | `ComboboxPrimitive.Chip.Props` | —                            | `ComboboxPrimitive.Chip` props           |
+| Prop          | Type                           | Default | Description                                                                                                              |
+| ------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `showRemove`  | `boolean`                      | `true`  | Shows the chip's remove button                                                                                           |
+| `removeLabel` | `string`                       | —       | `aria-label` of the chip's remove button; by default `UI_STRINGS.combobox.remove(item)`, where `item` is the chip's text |
+| `...props`    | `ComboboxPrimitive.Chip.Props` | —       | `ComboboxPrimitive.Chip` props                                                                                           |
 
 ### `ComboboxChipsInput`
 
@@ -265,7 +266,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 | `Escape`                | Closes the list                        |
 | Typing                  | Filters the options                    |
 
-**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`).
+**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`). Each chip's remove button names its item — `Remove Apple`, `Remove Cherry` — never a bare `Remove`.
 
 **Pitfalls**:
 

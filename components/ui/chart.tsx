@@ -378,10 +378,12 @@ export {
 }
 
 export type ChartContainerProps = React.ComponentProps<typeof ChartContainer>
+export type ChartLegendProps = React.ComponentProps<typeof ChartLegend>
 export type ChartLegendContentProps = React.ComponentProps<
   typeof ChartLegendContent
 >
 export type ChartStyleProps = React.ComponentProps<typeof ChartStyle>
+export type ChartTooltipProps = React.ComponentProps<typeof ChartTooltip>
 export type ChartTooltipContentProps = React.ComponentProps<
   typeof ChartTooltipContent
 >

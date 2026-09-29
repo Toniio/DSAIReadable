@@ -157,11 +157,15 @@ function Sidebar({
   className,
   children,
   dir,
+  mobileTitle = UI_STRINGS.sidebar.mobileTitle,
+  mobileDescription = UI_STRINGS.sidebar.mobileDescription,
   ...props
 }: React.ComponentProps<"div"> & {
   side?: "left" | "right"
   variant?: "sidebar" | "floating" | "inset"
   collapsible?: "offcanvas" | "icon" | "none"
+  mobileTitle?: string
+  mobileDescription?: string
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 
@@ -197,8 +201,8 @@ function Sidebar({
           side={side}
         >
           <SheetHeader className="sr-only">
-            <SheetTitle>Sidebar</SheetTitle>
-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+            <SheetTitle>{mobileTitle}</SheetTitle>
+            <SheetDescription>{mobileDescription}</SheetDescription>
           </SheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
@@ -261,8 +265,9 @@ function Sidebar({
 function SidebarTrigger({
   className,
   onClick,
+  toggleLabel = UI_STRINGS.sidebar.toggle,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & { toggleLabel?: string }) {
   const { toggleSidebar } = useSidebar()
 
   return (
@@ -279,22 +284,26 @@ function SidebarTrigger({
       {...props}
     >
       <SidebarIcon />
-      <span className="sr-only">{UI_STRINGS.sidebar.toggle}</span>
+      <span className="sr-only">{toggleLabel}</span>
     </Button>
   )
 }
 
-function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
+function SidebarRail({
+  className,
+  toggleLabel = UI_STRINGS.sidebar.toggle,
+  ...props
+}: React.ComponentProps<"button"> & { toggleLabel?: string }) {
   const { toggleSidebar } = useSidebar()
 
   return (
     <button
       data-sidebar="rail"
       data-slot="sidebar-rail"
-      aria-label={UI_STRINGS.sidebar.toggle}
+      aria-label={toggleLabel}
       tabIndex={-1}
       onClick={toggleSidebar}
-      title={UI_STRINGS.sidebar.toggle}
+      title={toggleLabel}
       className={cn(
         "absolute inset-y-0 z-sticky hidden w-4 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:start-1/2 after:w-0.5 hover:after:bg-sidebar-border sm:flex ltr:-translate-x-1/2 rtl:-translate-x-1/2",
         "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",

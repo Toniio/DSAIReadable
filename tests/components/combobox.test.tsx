@@ -1,14 +1,19 @@
+import type { ReactNode } from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
 import {
   Combobox,
+  ComboboxChip,
+  ComboboxChips,
+  ComboboxChipsInput,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
+  ComboboxValue,
 } from "@/components/ui/combobox"
 import { Label } from "@/components/ui/label"
 
@@ -44,6 +49,32 @@ function Example({
         </ComboboxContent>
       </Combobox>
     </>
+  )
+}
+
+function MultipleExample({ chip }: { chip: (fruit: string) => ReactNode }) {
+  return (
+    <Combobox items={fruits} multiple defaultValue={["Apple", "Cherry"]}>
+      <ComboboxChips>
+        <ComboboxValue>
+          {(values: string[]) => (
+            <>
+              {values.map(chip)}
+              <ComboboxChipsInput aria-label="Fruits" />
+            </>
+          )}
+        </ComboboxValue>
+      </ComboboxChips>
+      <ComboboxContent>
+        <ComboboxList>
+          {(fruit: string) => (
+            <ComboboxItem key={fruit} value={fruit}>
+              {fruit}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
   )
 }
 
@@ -131,6 +162,43 @@ describe("Combobox", () => {
     await user.keyboard("{ArrowDown}")
     await user.keyboard("{Escape}")
     expect(input().getAttribute("aria-expanded")).toBe("false")
+  })
+
+  // Regression guard for P3-19: every chip's remove button was named
+  // "Remove", so a screen reader could not tell them apart.
+  it("names each chip's remove button after its item, and removes it", async () => {
+    const user = userEvent.setup()
+    render(
+      <MultipleExample
+        chip={(fruit) => <ComboboxChip key={fruit}>{fruit}</ComboboxChip>}
+      />
+    )
+    expect(
+      screen.getAllByRole("button").map((b) => b.getAttribute("aria-label"))
+    ).toEqual(["Remove Apple", "Remove Cherry"])
+
+    await user.click(screen.getByRole("button", { name: "Remove Apple" }))
+    expect(screen.queryByRole("button", { name: "Remove Apple" })).toBeNull()
+    expect(screen.getByRole("button", { name: "Remove Cherry" })).toBeTruthy()
+  })
+
+  it("names the remove button from rendered children, or from removeLabel", async () => {
+    render(
+      <MultipleExample
+        chip={(fruit) => (
+          <ComboboxChip
+            key={fruit}
+            removeLabel={fruit === "Cherry" ? "Take Cherry off" : undefined}
+          >
+            <strong>{fruit}</strong>
+          </ComboboxChip>
+        )}
+      />
+    )
+    expect(
+      await screen.findByRole("button", { name: "Remove Apple" })
+    ).toBeTruthy()
+    expect(screen.getByRole("button", { name: "Take Cherry off" })).toBeTruthy()
   })
 
   it("has no axe violations, closed and open", async () => {

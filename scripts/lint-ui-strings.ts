@@ -2,7 +2,8 @@
  * A component must not invent the words it renders.
  *
  * Accessible names that never appear on screen - aria-label, title, sr-only
- * text, the default of a `label` or `*Label` prop - are the ones that quietly
+ * text, the default of a `label` or `*Label` prop, the text of a dialog title
+ * a component writes for itself - are the ones that quietly
  * drift: nobody sees them, so nobody notices when one is English and the next
  * is French, or when a translator misses one because it is buried in JSX. They all come from lib/ui-strings.ts, so there
  * is a single place to read the product's voice and a single place to replace
@@ -92,6 +93,15 @@ for (const name of readdirSync(DIR)
     const srOnly = line.match(/className="sr-only"\s*>\s*([^<{][^<]*)</)
     if (srOnly && srOnly[1].trim() !== "") {
       findings.push({ ...at, text: srOnly[1].trim(), kind: "sr-only" })
+    }
+
+    // A title or description a component writes for itself - the sheet the
+    // Sidebar becomes on mobile names itself - is announced like any label.
+    const heading = line.match(
+      /<(\w*(?:Title|Description))\b[^>]*>\s*([^<{\s][^<]*)<\/\1>/
+    )
+    if (heading) {
+      findings.push({ ...at, text: heading[2].trim(), kind: heading[1] })
     }
   })
 }

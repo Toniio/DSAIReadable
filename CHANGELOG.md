@@ -13,6 +13,12 @@ section that fits.
 
 ### Added
 
+- Sidebar: `mobileTitle` and `mobileDescription` on `Sidebar`, `toggleLabel` on
+  `SidebarTrigger` and `SidebarRail`, so every string it renders can be
+  translated; `ChartTooltipProps` and `ChartLegendProps` exported. ESLint
+  refuses a class assembled by interpolation (`bg-${color}`), and
+  `lint-ui-strings` a literal `*Title` or `*Description` text
+  ([#51](https://github.com/Toniio/DSAIReadable/pull/51)).
 - A check for every rule of `AGENTS.md` § 1, each named in § 5: `lint:language`
   (English only), Primitive tokens and `prefers-color-scheme` refused in app
   code, other icon kits and inline `<svg>` refused by ESLint, raw `ms` and
@@ -47,6 +53,9 @@ section that fits.
 
 ### Changed
 
+- **Breaking**: `UI_STRINGS.combobox.remove` is a function of the item,
+  `remove("Apple")` → `"Remove Apple"`; `Combobox` no longer passes a
+  `data-slot` to a Root that renders no element ([#51](https://github.com/Toniio/DSAIReadable/pull/51)).
 - ButtonGroup, Combobox, Direction, Empty, Field, InputGroup, Item, Kbd and
   Spinner are `beta` in their specs, as in the index; Command's search icon and
   Combobox's chip remove button are dimmed with `text-muted-foreground` instead
@@ -80,6 +89,10 @@ section that fits.
 
 ### Fixed
 
+- Accessibility: each Combobox chip's remove button names its item instead of
+  a bare `Remove`. `/banking`: the budget bars take their series color — the
+  class was built at runtime, so Tailwind never generated it and all four
+  stayed `bg-primary` ([#51](https://github.com/Toniio/DSAIReadable/pull/51)).
 - Accessibility: NavigationMenu links show the focus ring again — the content
   removed it from every link with `**:data-[slot=navigation-menu-link]:focus:ring-0`
   ([#50](https://github.com/Toniio/DSAIReadable/pull/50)).

@@ -16,10 +16,12 @@ import { CaretDownIcon, XIcon, CheckIcon } from "@phosphor-icons/react"
 
 import { UI_STRINGS } from "@/lib/ui-strings"
 
+// The Root renders no element of its own - it is a context provider, like
+// DirectionProvider - so a data-slot on it lands nowhere. Its parts carry theirs.
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   ...props
 }: ComboboxPrimitive.Root.Props<Value, Multiple>) {
-  return <ComboboxPrimitive.Root data-slot="combobox" {...props} />
+  return <ComboboxPrimitive.Root {...props} />
 }
 
 function ComboboxValue({ ...props }: ComboboxPrimitive.Value.Props) {
@@ -267,12 +269,28 @@ function ComboboxChip({
   className,
   children,
   showRemove = true,
-  removeLabel = UI_STRINGS.combobox.remove,
+  removeLabel,
   ...props
 }: ComboboxPrimitive.Chip.Props & {
   showRemove?: boolean
   removeLabel?: string
 }) {
+  // Every chip's button has to say which item it removes, or a screen reader
+  // hears a row of identical "Remove" buttons. Text children name it from the
+  // first render; any other children are read from the rendered chip.
+  const removeRef = React.useRef<HTMLButtonElement>(null)
+  const [renderedText, setRenderedText] = React.useState<string>()
+  const text =
+    typeof children === "string" || typeof children === "number"
+      ? String(children)
+      : undefined
+  React.useEffect(() => {
+    if (text !== undefined) return
+    setRenderedText(
+      removeRef.current?.parentElement?.textContent?.trim() || undefined
+    )
+  }, [text, children])
+  const item = text ?? renderedText
   return (
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
@@ -285,8 +303,12 @@ function ComboboxChip({
       {children}
       {showRemove && (
         <ComboboxPrimitive.ChipRemove
+          ref={removeRef}
           render={<Button variant="ghost" size="icon-xs" />}
-          aria-label={removeLabel}
+          aria-label={
+            removeLabel ??
+            (item === undefined ? undefined : UI_STRINGS.combobox.remove(item))
+          }
           className="-ml-1 text-muted-foreground"
           data-slot="combobox-chip-remove"
         >
