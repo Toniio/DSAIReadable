@@ -99,9 +99,7 @@ const referencedByComponent = new Set(
 
 // Code that can read a token: the components, the shared helpers — and
 // styles/globals.css, whose @theme bridge is what turns a token into a
-// Tailwind utility for every consumer of the registry. app/ is left out: its
-// pages are a test area, never part of the design system, so a token only
-// they use is not consumed.
+// Tailwind utility for every consumer of the registry.
 const walk = (dir: string): string[] =>
   readdirSync(resolve(ROOT, dir), { withFileTypes: true }).flatMap((e) => {
     const p = `${dir}/${e.name}`

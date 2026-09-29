@@ -3,8 +3,8 @@
  *
  * Every step runs even after a failure, so one run reports everything. A
  * passing step prints one line; a failing step prints the tail of its output.
- * Left to CI because they are slow or networked: `build`,
- * `shadcn registry validate` and `registry:test-install`.
+ * Left to CI because they are slow or networked: `shadcn registry validate`
+ * and `registry:test-install`.
  *
  *   npx tsx scripts/check.ts
  */

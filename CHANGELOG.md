@@ -185,6 +185,14 @@ section that fits.
   the `export` of eleven symbols only their own file uses.
 - The Railway deployment: the MCP server runs locally only
   ([#25](https://github.com/Toniio/DSAIReadable/pull/25)).
+- The test pages in `app/` (home, banking, four sign-in layouts), the Next.js
+  app shell around them (`next.config.mjs`, `postcss.config.mjs`, the `dev`,
+  `build` and `start` scripts, the CI `build` job) and
+  `components/theme-provider.tsx`, which only they used. Nothing in the
+  design system, its checks or the MCP server reads a page any more.
+- The `get_page_patterns` MCP tool: it described two test pages. Page patterns
+  come back as hand-written guidance keyed by task. `get_content_library` now
+  draws only on the specs' code examples and the common strings.
 
 ### Security
 
