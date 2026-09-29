@@ -5,7 +5,8 @@ The rules that apply to AI agents and humans alike are in
 
 ## Prerequisites
 
-- Node.js 24 (`.nvmrc`); the component tests need at least 22.12
+- Node.js 24 (`.nvmrc`); `engines` accepts 22.12 or later, the minimum the
+  component tests need
 - `npm ci` at the root **and** `npm ci --prefix mcp-server`
 
 The git hooks are installed automatically by the `prepare` script (husky).
