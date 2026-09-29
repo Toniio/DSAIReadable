@@ -57,18 +57,6 @@ jobs:
       # mcp-server/ (knip.jsonc lists the entry points and why).
       - run: npm run knip
 
-  build:
-    name: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-
   index-schema:
     name: index-schema
     runs-on: ubuntu-latest

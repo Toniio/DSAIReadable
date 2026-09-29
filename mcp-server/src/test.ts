@@ -64,7 +64,7 @@ assert(server !== null, "McpServer instantiated")
 console.log("\n2. Tool registration")
 try {
   registerDsCoreTools(server)
-  assert(true, "DS Core tools registered (9 tools)")
+  assert(true, "DS Core tools registered (8 tools)")
 } catch (e) {
   assert(false, `DS Core tools registration failed: ${e}`)
 }
@@ -116,7 +116,6 @@ const expectedFiles = [
   "content-library.json",
   "dataviz-decision-tree.json",
   "dataviz-catalog.json",
-  "page-patterns.json",
   "ds-metadata.json",
 ]
 
@@ -890,7 +889,7 @@ const unannotated = tools.filter(
     t.annotations?.openWorldHint !== false
 )
 assert(
-  tools.length === 16 && unannotated.length === 0,
+  tools.length === 15 && unannotated.length === 0,
   `Every tool is annotated read-only and closed-world (${tools.length} tools${unannotated.length ? `; missing: ${unannotated.map((t) => t.name).join(", ")}` : ""})`
 )
 
@@ -1513,14 +1512,6 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { category: "no-such-category" },
     errorNames: "color",
   },
-  get_page_patterns: {
-    args: {},
-    content: (p) =>
-      p.length > 0 &&
-      p.every((pattern: Json) =>
-        existsSync(resolve(__dirname, "../..", pattern.source))
-      ),
-  },
   get_dataviz_recommendation: {
     args: { objective: "evolution" },
     content: (p) => p.recommended_charts.some((c: Json) => c.type === "line"),
@@ -1615,7 +1606,7 @@ setContextDir(contextDir)
 rmSync(emptyContextDir, { recursive: true })
 assert(
   silentOnMissingCache.length === 0 && servedContextDir === contextDir,
-  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "15 tools"})`
+  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "14 tools"})`
 )
 
 await toolClient.close()

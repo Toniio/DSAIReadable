@@ -44,7 +44,6 @@ The project started from one observation: for an LLM to generate code that confo
 
 ```
 dsaireadable/
-├── app/                        # Next.js app (component demos)
 ├── components/ui/              # The design system's 59 React components (customized shadcn/ui)
 ├── lib/                        # Shared modules: utils, focus, ui-strings, overlay
 ├── tokens/                     # Source of truth for the tokens (three-tier DTCG JSON)
@@ -109,12 +108,12 @@ request with an origin that is not allowed receives a `403`.
 
 ### Available tools
 
-| Category       | Tools                                                                                                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **DS Core**    | `get_design_system_overview`, `get_components`, `get_component_specs`, `get_component_variants`, `get_tokens`, `get_typography`, `get_icons`, `get_design_rules`, `get_page_patterns` |
-| **Dataviz**    | `get_dataviz_recommendation` (chart types for an objective), `get_dataviz_specs` (a chart type's tokens, anatomy and library)                                                         |
-| **UX Writing** | `get_ux_writing_rules` (default strings, overriding, language), `get_glossary`, `get_content_library`                                                                                 |
-| **Admin**      | `get_stats` (component, token and spec counts), `validate_screen` (checks generated code against the design system's rules)                                                           |
+| Category       | Tools                                                                                                                                                            |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **DS Core**    | `get_design_system_overview`, `get_components`, `get_component_specs`, `get_component_variants`, `get_tokens`, `get_typography`, `get_icons`, `get_design_rules` |
+| **Dataviz**    | `get_dataviz_recommendation` (chart types for an objective), `get_dataviz_specs` (a chart type's tokens, anatomy and library)                                    |
+| **UX Writing** | `get_ux_writing_rules` (default strings, overriding, language), `get_glossary`, `get_content_library`                                                            |
+| **Admin**      | `get_stats` (component, token and spec counts), `validate_screen` (checks generated code against the design system's rules)                                      |
 
 Every tool is annotated as read-only (`readOnlyHint`, `openWorldHint: false`): a client does not need
 to confirm its calls. `get_component_specs`, `get_design_rules` and `get_ux_writing_rules` take
@@ -203,7 +202,7 @@ The base item changes more than the project's components folder:
 - **The stylesheet** (`tailwind.css` in `components.json`) receives the tokens (`:root`, `.dark`), the `@theme inline` bridge, `tw-animate-css` and `shadcn/tailwind.css` (animations, `data-open:` and the other state variants), the `z-modal`… utilities and a `@layer base` that sets `<html>` in `font-mono`.
 - **The lockdown**: every Tailwind default color, radius, shadow, spacing step and type style the design system does not redefine is reset to `initial`. `bg-red-500`, `shadow-2xs`, `p-13` or `text-7xl` then generate no CSS, in the consumer's project as in this repository. The spacing scale is Tailwind v3's (`p-2`, `gap-1.5`, `h-9`).
 - **The fonts**: JetBrains Mono (`font-mono`, the whole interface) and Geist (`font-sans`, `Kbd` keys) come as `registry:font` items. In a Next.js app, the CLI adds their `next/font/google` loaders to the root layout; elsewhere (Vite…), it installs `@fontsource-variable/jetbrains-mono` and `@fontsource-variable/geist` and imports them.
-- **Dark mode is the `.dark` class on `<html>`** — never `prefers-color-scheme`. The `dark:` variant is declared; toggling the class is the application's job. With `next-themes`: `<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>`, as this repository's [`components/theme-provider.tsx`](./components/theme-provider.tsx) does.
+- **Dark mode is the `.dark` class on `<html>`** — never `prefers-color-scheme`. The `dark:` variant is declared; toggling the class is the application's job. With `next-themes`: `<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>`.
 
 ### Explore
 
@@ -281,8 +280,6 @@ npm run tokens-validate      # Every check in sequence (required before any comm
 ### Development
 
 ```bash
-npm run dev          # Next.js with Turbopack
-npm run build        # Production build
 npm run lint         # ESLint
 npm run format       # Prettier (sorts Tailwind classes automatically)
 npm run typecheck    # tsc --noEmit
@@ -298,7 +295,7 @@ npm run typecheck    # tsc --noEmit
 - **Phosphor icons only** — `@phosphor-icons/react`. No Lucide, no Heroicons.
 - **Class-based dark mode** — the `.dark` class on `<html>`. No `prefers-color-scheme`.
 - **Read the spec** before writing or changing a component (`specs/components/<component>.md`).
-- **Everything in American English** — code, comments, docs, specs and demo copy.
+- **Everything in American English** — code, comments, docs, specs and UI copy.
 
 ---
 

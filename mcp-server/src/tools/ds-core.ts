@@ -409,18 +409,4 @@ import { cn } from "@/lib/utils"`,
       )
     }
   )
-
-  // 9. get_page_patterns
-  server.registerTool(
-    "get_page_patterns",
-    {
-      title: "Page patterns",
-      description: "Returns all page layout patterns",
-      annotations: READ_ONLY,
-    },
-    async () => {
-      const patterns = loadContext("page-patterns.json")
-      return text(patterns)
-    }
-  )
 }

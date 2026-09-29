@@ -21,7 +21,7 @@ below exists because breaking it produces non-conforming generated code.
 | **Read `specs/components/<Component>.md` before writing or changing a component**                                                                                                      | The spec is the behavioral source of truth, in 13 sections                                                                                                                                                                                                                                                                                          |
 | **The shadcn/ui API is the contract** — a divergence is additive (a new optional prop, a new component); renaming or removing a prop, export or value takes a reason and a declaration | Models write the shadcn/ui API from their training data. An undeclared divergence is code that does not compile, or that behaves differently. Every divergence is declared in `design-system.index.json` (`shadcn.divergences`, with the reason), which the MCP server serves with each spec                                                        |
 | **`npm run tokens-validate` before every commit**                                                                                                                                      | Zero errors required                                                                                                                                                                                                                                                                                                                                |
-| **Everything committed is written in American English** — code, comments, docs, specs, token descriptions, demo copy                                                                   | The repository is public and read by people and agents who may not speak any other language. Write natively, do not translate; one spelling per word (`color`, `behavior`, `labeled`, `-ize`), so a search finds every occurrence                                                                                                                   |
+| **Everything committed is written in American English** — code, comments, docs, specs, token descriptions, UI copy                                                                     | The repository is public and read by people and agents who may not speak any other language. Write natively, do not translate; one spelling per word (`color`, `behavior`, `labeled`, `-ize`), so a search finds every occurrence                                                                                                                   |
 
 ## 2. Token architecture
 
@@ -89,14 +89,13 @@ npm run registry:test-install  # installs the 63 items in a blank app, builds it
 npm run generate-context  # regenerates the MCP cache — must produce zero diff
 npm run mcp:test          # the MCP server's test suite
 npm run test:components   # component tests: roles, names, keyboard, variants, axe-core
-npm run build             # Next.js production build
 ```
 
 After any token or TypeScript change:
 `npm run tokens-validate && npm run typecheck:all`.
 
 Before a commit, `npm run check` runs every CI check above in one call except
-`build`, `registry:test-install` and the networked `shadcn registry validate`,
+`registry:test-install` and the networked `shadcn registry validate`,
 and prints only what failed. Prefer it to running the checks one by one: each
 separate run is one more agent turn and more output in the context.
 
@@ -120,21 +119,21 @@ problem: fix it, do not disable it.
 
 ## 5. Guards in place
 
-| Guard                                         | What it blocks                                                                                                                                            |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.husky/pre-commit` → lint-staged             | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                                     |
-| `.husky/commit-msg` → commitlint              | A non-conforming commit message                                                                                                                           |
-| `.husky/pre-push`                             | A direct push to `main`                                                                                                                                   |
-| `.github/workflows/ci.yml`                    | 10 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
-| `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                                 |
-| `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result                    |
+| Guard                                         | What it blocks                                                                                                                                  |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.husky/pre-commit` → lint-staged             | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                           |
+| `.husky/commit-msg` → commitlint              | A non-conforming commit message                                                                                                                 |
+| `.husky/pre-push`                             | A direct push to `main`                                                                                                                         |
+| `.github/workflows/ci.yml`                    | 9 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
+| `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                       |
+| `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result          |
 
 Each § 1 rule, and the check that enforces it:
 
 | § 1 rule                                 | Enforced by                                                                                                                                                                                                                                                                                                                                                                 |
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Never a raw value                        | `tokens:lint-values` — hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`, arbitrary Tailwind values (`duration-[…]`, `ease-[…]`, `p-[…]`…), pixel ring and outline widths (`ring-1`, bare `ring`, `outline-1`, bare `outline`, `outline-offset-2`, never exemptable), each `allow-raw` checked against `tokens/allow-raw.registry.json`; `tokens:lint-focus` for focus-ring widths |
-| Never reference a Primitive token        | `tokens:lint-values` (`--ds-prim-*` in `app/`, `components/`, `lib/`, `hooks/`, no `allow-raw` opt-out), `tokens:lint-bridge` (the `@theme` bridge), `tokens:build` (Tier 3 may reference Tier 2 only)                                                                                                                                                                      |
+| Never reference a Primitive token        | `tokens:lint-values` (`--ds-prim-*` in `components/`, `lib/`, `hooks/`, `styles/`, no `allow-raw` opt-out), `tokens:lint-bridge` (the `@theme` bridge), `tokens:build` (Tier 3 may reference Tier 2 only)                                                                                                                                                                   |
 | Phosphor icons only                      | ESLint `no-restricted-imports` (other icon kits) and `no-restricted-syntax` (inline `<svg>`; `logo.tsx` and `illustration.tsx` declared as artwork in `eslint.config.mjs`)                                                                                                                                                                                                  |
 | Only the design system's classes         | ESLint `better-tailwindcss/no-unknown-classes`, and `no-restricted-classes` for opacity outside binary states                                                                                                                                                                                                                                                               |
 | Class-based dark mode                    | `tokens:lint-values` (`prefers-color-scheme`, no `allow-raw` opt-out)                                                                                                                                                                                                                                                                                                       |

@@ -64,10 +64,7 @@ const walk = (dir: string): string[] =>
     return e.isFile() && p.endsWith(".tsx") ? [p] : []
   })
 
-const files = [
-  ...walk(resolve(ROOT, "components")),
-  ...walk(resolve(ROOT, "app")),
-]
+const files = walk(resolve(ROOT, "components"))
 
 for (const abs of files) {
   const file = relative(ROOT, abs)

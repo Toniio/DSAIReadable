@@ -3,7 +3,7 @@
  * (AGENTS.md § 1).
  *
  * The repository was moved to native English in one pass; nothing stopped a
- * French comment, spec line or demo string from coming back afterwards. This
+ * French comment, spec line or UI string from coming back afterwards. This
  * scans every tracked text file for three signals:
  *   ① French function words, matched as whole words;
  *   ② letters with French diacritics;

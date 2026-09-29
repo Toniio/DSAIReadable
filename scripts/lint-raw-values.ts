@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 //
 // lint-raw-values.ts
-// Scans components/, app/, src/, hooks/ and lib/ for raw CSS values AND Tailwind utility misuses.
+// Scans components/, src/, hooks/, lib/ and styles/ for raw CSS values AND Tailwind utility misuses.
 // Errors:   raw colors, raw layout spacing, raw border-radius, raw durations, raw TW utilities (z-N, duration-N, duration-[X], ease-[X], ring-N, ring, ring-[X], outline-N, outline, outline-offset-N, outline-[X], rounded-[X], text-[size], shadow-[X], arbitrary spacing)
 // Warnings: unusual opacity values
 // Respects: allow-raw comments (block or inline) as opt-outs
@@ -650,7 +650,6 @@ async function main() {
   const patterns = [
     "components/**/*.{css,scss,ts,tsx}",
     "src/**/*.{css,scss,ts,tsx}",
-    "app/**/*.{css,scss,ts,tsx}",
     "hooks/**/*.{css,scss,ts,tsx}",
     "lib/**/*.{css,scss,ts,tsx}",
     "styles/**/*.{css,scss,ts,tsx}",
@@ -662,7 +661,6 @@ async function main() {
   // only produce exemptions on rule text.
   const ignorePatterns = [
     "**/node_modules/**",
-    "**/.next/**",
     "**/dist/**",
     "**/build/**",
     "**/*.d.ts",

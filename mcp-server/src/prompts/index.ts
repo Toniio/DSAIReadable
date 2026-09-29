@@ -157,8 +157,7 @@ ${CRITICAL_RULES_TEXT}`,
 **BEFORE generating ideas, you MUST call these tools:**
 1. \`get_components\` — to see all available components
 2. \`get_design_rules\` — to understand design constraints
-3. \`get_page_patterns\` — to see established layout patterns
-4. \`get_design_system_overview\` — to understand the DS capabilities
+3. \`get_design_system_overview\` — to understand the DS capabilities
 
 **Only after gathering this information, generate the idea.**
 ${expLine}${indLine}
@@ -198,7 +197,6 @@ ${CRITICAL_RULES_TEXT}`,
 1. \`get_components\` — to see all available components
 2. \`get_content_library\` — for standard content patterns
 3. \`get_ux_writing_rules\` — for writing guidelines
-4. \`get_page_patterns\` — for established layout patterns
 
 **Only after gathering this information, suggest next steps.**
 

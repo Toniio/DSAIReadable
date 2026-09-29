@@ -12,7 +12,6 @@ This repository is a **code-first design system**: the React components, the tok
 
 ```
 dsaireadable/
-├── app/                        # Test pages (demo): home, sign-in (4 layouts), banking — not part of the design system
 ├── components/ui/              # The design system's 59 React components
 ├── styles/globals.css          # Tailwind entry point: the @theme bridge from the tokens to the classes
 ├── lib/                        # Shared modules: utils, focus, ui-strings, overlay, fonts
@@ -36,30 +35,11 @@ dsaireadable/
 
 ## `styles/globals.css` and `lib/fonts.ts` — what every page loads
 
-`styles/globals.css` imports Tailwind and `tokens.css`, removes Tailwind's default colors, radii and shadows, and its `@theme inline` bridge turns the tokens into Tailwind classes. `lib/fonts.ts` loads the typefaces with `next/font` (Geist, JetBrains Mono) under the `--font-*` variables the `typography.font-family.*` tokens describe. Neither lives in `app/`: the tooling reads them whether the demo pages exist or not.
-
-## `app/` — Test pages
-
-The demo pages. No business screens — they only exist to check that the components fit together, and are not part of the design system.
-
-| File                              | Role                                                                                                                                                         |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `app/layout.tsx`                  | Root layout: imports `styles/globals.css`, puts the `lib/fonts.ts` variables on `<html>`, wraps the app in `ThemeProvider` (dark mode) and `TooltipProvider` |
-| `app/page.tsx`                    | Minimal demo page — renders a `<Button>` to check that the setup works                                                                                       |
-| `app/banking/page.tsx`            | Banking demo screen: cards, tabs, a transactions table, budget bars (`Progress`)                                                                             |
-| `app/login/page.tsx`              | Index of the 4 sign-in layouts (links to the sub-routes)                                                                                                     |
-| `app/login/split-screen/page.tsx` | Split-screen sign-in: illustration on the left, form on the right                                                                                            |
-| `app/login/centered/page.tsx`     | Centered sign-in: the form in a `<Card>` centered on the page                                                                                                |
-| `app/login/fullscreen/page.tsx`   | Full-screen sign-in: the form fills the window's height                                                                                                      |
-| `app/login/secure/page.tsx`       | Secure sign-in: dark background with a dot pattern, back link                                                                                                |
+`styles/globals.css` imports Tailwind and `tokens.css`, removes Tailwind's default colors, radii and shadows, and its `@theme inline` bridge turns the tokens into Tailwind classes. `lib/fonts.ts` loads the typefaces with `next/font` (Geist, JetBrains Mono) under the `--font-*` variables the `typography.font-family.*` tokens describe.
 
 ---
 
 ## `components/` — React components
-
-### `components/theme-provider.tsx`
-
-A `next-themes` wrapper that sets the `dark` class on `<html>` and lets the user switch between light and dark.
 
 ### `components/ui/` — Component library
 
@@ -296,7 +276,6 @@ registry is **consumable**, not just consistent.
 | `design-system.schema.json` | JSON Schema that validates the structure of `design-system.index.json`                                                                                                                            |
 | `components.json`           | shadcn CLI config: `radix-lyra` style, `mist` base color, Phosphor icons, alias paths                                                                                                             |
 | `tokens.css`                | The tokens' CSS variables (imported by `globals.css`)                                                                                                                                             |
-| `next.config.mjs`           | Standard Next.js config                                                                                                                                                                           |
 | `tsconfig.json`             | Strict TypeScript for the app; `scripts/` and `mcp-server/` have their own projects                                                                                                               |
 | `eslint.config.mjs`         | ESLint: Next.js rules, and `better-tailwindcss`, which rejects classes outside the design system and `opacity-N` on a disabled state                                                              |
 | `lint-staged.config.mjs`    | Pre-commit hook: Prettier and ESLint on the staged files, `typecheck:all`                                                                                                                         |
@@ -307,7 +286,6 @@ registry is **consumable**, not just consistent.
 | `CHANGELOG.md`              | Notable changes, in the Keep a Changelog format; a PR that changes behavior adds its line under **Unreleased**                                                                                    |
 | `SECURITY.md`               | How to report a vulnerability privately, and what is in scope                                                                                                                                     |
 | `vitest.config.ts`          | Vitest for the component tests: jsdom, the `@/` alias, `tests/setup.ts`                                                                                                                           |
-| `postcss.config.mjs`        | PostCSS with `@tailwindcss/postcss`                                                                                                                                                               |
 
 ---
 
@@ -318,7 +296,7 @@ registry is **consumable**, not just consistent.
 | File              | Role                                                                                                                                                         |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `.prettierrc`     | Format: 2 spaces, double quotes, no semicolons, `trailingComma: es5`, the tailwindcss plugin to sort classes. A single configuration, `mcp-server/` included |
-| `.prettierignore` | Keeps `dist/`, `node_modules/`, `.next/`, `*.tsbuildinfo`, `package-lock.json`, `next-env.d.ts` out of Prettier                                              |
+| `.prettierignore` | Keeps `dist/`, `node_modules/`, `*.tsbuildinfo`, `package-lock.json` out of Prettier                                                                         |
 | `.nvmrc`          | Node.js 24, the version CI runs                                                                                                                              |
 | `.gitignore`      | Keeps `.next/`, `node_modules/`, `tsconfig.tsbuildinfo`… out of version control                                                                              |
 
@@ -364,7 +342,6 @@ index · specs · components/ ──▶ registry.json               (registry:bu
 ## Key commands
 
 ```bash
-npm run dev               # Start Next.js (demo)
 npm run tokens:lint-values  # Check that components hold no raw values
 npm run tokens:lint-naming  # Check the tokens' DTCG grammar
 npm run tokens:lint-bridge  # Check Tailwind's @theme bridge
@@ -383,4 +360,4 @@ npm run format              # Prettier on every .ts/.tsx/.md
 - **Exception**: `// allow-raw: <reason>` allows an unavoidable raw value on a case-by-case basis (for example CSS attribute selectors that target Recharts SVGs).
 - **Naming grammar**: `foundation.property[.role][.emphasis][.state]`. Role and state are never merged into a single segment.
 - **Tier 1 (primitive) is private** — components and the outside world never use it directly.
-- **Everything in American English** — code, comments, docs, specs and demo copy.
+- **Everything in American English** — code, comments, docs, specs and UI copy.

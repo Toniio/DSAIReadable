@@ -931,41 +931,6 @@ function generateContentLibrary() {
   const placeholders: Record<string, string> = {}
   const messages: Record<string, string> = {}
 
-  // Extract from page sources
-  const pageFiles = ["app/banking/page.tsx", "app/login/fullscreen/page.tsx"]
-  for (const pf of pageFiles) {
-    try {
-      const code = read(pf)
-      // Capitalized string literals and JSX text
-      const stringRegex = /["'>]([A-Z][a-z\s,'·—\-…]+)["'<]/g
-      let m
-      while ((m = stringRegex.exec(code)) !== null) {
-        const val = m[1].trim()
-        if (val.length > 2 && val.length < 80) {
-          const key = val
-            .toLowerCase()
-            .replace(/\s+/g, "_")
-            .replace(/[^a-z0-9_]/g, "")
-            .slice(0, 30)
-          labels[key] = val
-        }
-      }
-      // Placeholders from placeholder="..."
-      const phRegex = /placeholder=["']([^"']+)["']/g
-      while ((m = phRegex.exec(code)) !== null) {
-        const key = m[1]
-          .toLowerCase()
-          .replace(/[^a-z0-9]/g, "_")
-          .slice(0, 30)
-        placeholders[key] = m[1]
-      }
-    } catch (err) {
-      console.warn(
-        `  ⚠️  ux-writing: could not read ${pf} — ${(err as Error).message}`
-      )
-    }
-  }
-
   // Extract from specs code examples
   for (const f of specFiles) {
     const md = readFileSync(path.join(specDir, f), "utf-8")
@@ -999,8 +964,6 @@ function generateContentLibrary() {
     next: "Next",
     previous: "Previous",
     search: "Search",
-    transfer: "Transfer",
-    payment: "Payment",
   })
 
   Object.assign(placeholders, {
@@ -1316,100 +1279,7 @@ function generateDatavizCatalog() {
   return write("dataviz-catalog.json", catalog)
 }
 
-// ── 15. page-patterns.json ──────────────────────────────────────────
-function generatePagePatterns() {
-  const pages: JsonObject[] = []
-
-  // Banking Dashboard
-  try {
-    const code = read("app/banking/page.tsx")
-    const importRegex =
-      /import\s+\{([^}]+)\}\s+from\s+["']@\/components\/ui\/[^"']+["']/g
-    const components: string[] = []
-    let m
-    while ((m = importRegex.exec(code)) !== null) {
-      const names = m[1]
-        .split(",")
-        .map((n) => n.trim())
-        .filter(Boolean)
-      // Keep only PascalCase root component names (not sub-components like TableRow)
-      for (const n of names) {
-        // Include the component
-        components.push(n)
-      }
-    }
-    // Deduplicate keeping unique root names
-    const uniqueComponents = [...new Set(components)]
-
-    pages.push({
-      name: "Banking Dashboard",
-      description:
-        "Home page of a banking app with a header, account cards, quick actions and transactions / budget tabs",
-      source: "app/banking/page.tsx",
-      structure: [
-        "Header with logo, app name, notifications, and avatar",
-        "Welcome section with greeting and date",
-        "Account cards grid (3 columns)",
-        "Quick actions bar (Transfer, Pay, Account details, Limits)",
-        "Tabs: Recent transactions / Monthly budget",
-        "Transactions table with status badges",
-        "Budget cards with progress bars",
-        "Footer with copyright",
-      ],
-      components_used: uniqueComponents,
-    })
-  } catch (err) {
-    console.warn(
-      `  ⚠️  page-patterns: skipped "Banking Dashboard" (app/banking/page.tsx) — ${(err as Error).message}`
-    )
-  }
-
-  // Login Fullscreen
-  try {
-    const code = read("app/login/fullscreen/page.tsx")
-    const importRegex =
-      /import\s+\{([^}]+)\}\s+from\s+["']@\/components\/ui\/[^"']+["']/g
-    const components: string[] = []
-    let m
-    while ((m = importRegex.exec(code)) !== null) {
-      const names = m[1]
-        .split(",")
-        .map((n) => n.trim())
-        .filter(Boolean)
-      for (const n of names) {
-        components.push(n)
-      }
-    }
-    const uniqueComponents = [...new Set(components)]
-
-    pages.push({
-      name: "Login Fullscreen",
-      description:
-        "Full-screen sign-in page with an inverted dark background, a dot pattern and a centered form",
-      source: "app/login/fullscreen/page.tsx",
-      structure: [
-        "Dark inverse background with dot pattern",
-        "Centered form container (max-w-sm)",
-        "Logo",
-        "Heading and description",
-        "Email field with label",
-        "Password field with label",
-        "Remember me checkbox + Forgot password link",
-        "Submit button (full width, inverse colors)",
-        "Sign up link",
-      ],
-      components_used: uniqueComponents,
-    })
-  } catch (err) {
-    console.warn(
-      `  ⚠️  page-patterns: skipped "Login Fullscreen" (app/login/fullscreen/page.tsx) — ${(err as Error).message}`
-    )
-  }
-
-  return write("page-patterns.json", pages)
-}
-
-// ── 16. ds-metadata.json ────────────────────────────────────────────
+// ── 15. ds-metadata.json ────────────────────────────────────────────
 /**
  * Single source of truth for versions and identity, so no tool has to
  * hardcode them. Each field is read from the file `sources` names:
@@ -1521,7 +1391,6 @@ const generators: Array<[string, () => string]> = [
   ["content-library.json", generateContentLibrary],
   ["dataviz-decision-tree.json", generateDatavizDecisionTree],
   ["dataviz-catalog.json", generateDatavizCatalog],
-  ["page-patterns.json", generatePagePatterns],
   ["ds-metadata.json", generateDsMetadata],
 ]
 

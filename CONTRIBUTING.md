@@ -101,7 +101,6 @@ The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-a
 | `tokens-validate`   | `npm run tokens-validate`                                                    |
 | `typecheck`         | `npm run typecheck:all`                                                      |
 | `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `npm run knip`          |
-| `build`             | `npm run build`                                                              |
 | `index-schema`      | `npm run index:validate`                                                     |
 | `spec-sections`     | `npm run specs:validate`                                                     |
 | `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                  |
@@ -151,7 +150,7 @@ repository (`.ts`, `.tsx`, `.md`), `mcp-server/` included. Never reorder
 Tailwind classes by hand — `prettier-plugin-tailwindcss` takes care of it.
 
 Everything committed is written in American English, natively — code, comments,
-docs, specs and demo copy: `color`, `behavior`, `labeled`, `-ize`.
+docs, specs and UI copy: `color`, `behavior`, `labeled`, `-ize`.
 
 ## Reporting a vulnerability
 

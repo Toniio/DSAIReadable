@@ -5,19 +5,25 @@
   "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
   "workspaces": {
     ".": {
-      // The Next app and the package.json scripts are found by knip's plugins.
-      // The registry items are entry points on top of that: consumers install
-      // them with the shadcn CLI, so every file and export they ship is public
-      // API even when the demo app never imports it.
+      // The package.json scripts are found by knip's plugins. The registry
+      // items are entry points on top of that: consumers install them with the
+      // shadcn CLI, so every file and export they ship is public API even when
+      // nothing in this repository imports it.
       "entry": [
         "components/ui/*.tsx",
         "hooks/*.ts",
         "lib/{focus,overlay,surface,ui-strings,utils}.ts",
+        // The source of the registry:font items and of tokens:lint-fonts, both
+        // of which read it as text.
+        "lib/fonts.ts",
+        // The base item's stylesheet: the tokens, the @theme bridge and the
+        // lockdown. Consumers import it; nothing here does.
+        "styles/globals.css",
         // Loaded by Terrazzo in scripts/lint-dtcg.ts; knip has no Terrazzo plugin.
         "terrazzo.config.ts",
       ],
       "project": [
-        "{app,components,hooks,lib,scripts,tests}/**/*.{ts,tsx}",
+        "{components,hooks,lib,scripts,tests}/**/*.{ts,tsx}",
         "styles/*.css",
         "*.{ts,mjs}",
       ],

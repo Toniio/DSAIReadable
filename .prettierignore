@@ -1,9 +1,7 @@
 node_modules/
-.next/
 dist/
 *.tsbuildinfo
 package-lock.json
-next-env.d.ts
 
 # Generated JSON: its generator owns the format, and the freshness checks
 # (registry:check, generate-context, index:validate, shadcn:baseline) compare it byte for byte.
