@@ -21,27 +21,49 @@ Requirements:
 - Use ONLY DS tokens via Tailwind classes (no raw hex colors, no arbitrary Tailwind values)
 - Follow the composition rules (step 3) and the constraints of each retained spec (step 4)
 - Ensure the layout is responsive for desktop
-- Use light mode color tokens
+- One semantic class serves both color modes: it resolves to its light value when `<html>` has no `.dark` class. Never pick a color per mode
 - Include all necessary imports
 - Generate complete, production-ready TSX code
 
-**CRITICAL STYLING RULE — Tailwind CSS + DS Tokens:**
-- ALWAYS use standard Tailwind CSS utility classes mapped to the design system tokens.
-- Use semantic color classes: bg-background, text-foreground, bg-primary, text-primary-foreground, bg-muted, text-muted-foreground, border-border, bg-card, bg-destructive, etc.
-- Use standard Tailwind spacing (p-4, gap-6, m-2), radius (rounded-lg, rounded-md), shadows (shadow-sm, shadow-md), and typography (text-sm, font-medium).
-- NEVER use arbitrary values like bg-[#432dd7], p-[1.5rem], or rounded-[0.625rem].
-- NEVER use Tailwind's default color palette (bg-violet-600, text-slate-500) — always use the DS semantic classes.
-- NEVER use inline styles or direct CSS variable references in JSX.
+**CRITICAL STYLING RULE — Always use standard Tailwind CSS classes mapped to DS tokens:**
+- ALWAYS use the Tailwind utility classes the design system maps to its tokens.
+- styles/globals.css imports tokens.css and bridges each token into Tailwind with an @theme inline block: bg-primary reads --color-action-background-default, a semantic token.
+- Tailwind's default colors, radii and shadows are removed: bg-red-500 generates no CSS, and ESLint refuses it.
+- Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.
+- For spacing, use standard Tailwind spacing: p-4, gap-6, m-2, space-y-4, etc.
+- For radius, use: rounded-xs … rounded-4xl (mapped to --radius-*).
+- For shadows, use: shadow-xs … shadow-2xl (mapped to --elevation-*).
+- For a disabled state, use opacity-disabled under its variant: disabled:opacity-disabled.
+- Do: bg-background text-foreground · bg-primary text-primary-foreground · bg-muted text-muted-foreground · border-border · bg-card text-card-foreground · bg-destructive · p-4 gap-6 m-2 space-y-4 (standard Tailwind spacing) · rounded-lg rounded-md (ALWAYS specify a size) · shadow-sm shadow-md · text-sm text-base text-lg font-medium font-semibold · disabled:opacity-disabled
+- Don't: bg-[#432dd7] — NEVER use arbitrary hex colors
+- Don't: text-[var(--ds-prim-color-violet-600)] — NEVER reference primitive tokens directly
+- Don't: style={{ color: 'var(--color-text-default)' }} — NEVER use inline styles with CSS variables
+- Don't: bg-violet-600 — NEVER use Tailwind's default palette: it is removed, use DS semantic classes
+- Don't: p-[1.5rem] — NEVER use arbitrary spacing values, use standard Tailwind scale
+- Don't: rounded-[0.625rem] — NEVER use arbitrary radius values
+- Don't: disabled:opacity-50 — NEVER: a disabled state uses opacity-disabled
+- Don't: rounded (without size) — ALWAYS specify size: rounded-md, rounded-lg, etc.
 
-**CRITICAL COMPONENT RULE — Use DS Components, NOT raw HTML:**
-- ALWAYS use DS React components, imported one per module from @/components/ui/<name>.
-- Use <Card> for content sections — NOT raw <div> with border/shadow.
-- Use <Heading> for titles — NOT raw <h1>/<h2>/<h3>.
-- Use <Button> for actions/CTAs — NOT raw <button> or styled <a>.
-- Use <Input>, <Label>, <Checkbox>, <Select> for forms — NOT raw form elements.
-- Use <Field>, <FieldLabel>, <FieldError> for form groups — NOT raw <div> + <label>.
-- Use <Separator> — NOT <hr> or border classes.
-- Use <Item> for list items, <Badge> for status indicators, <Avatar> for user pictures.
-- Use <Empty> for empty states, <Skeleton>/<Spinner> for loading.
-- Use @phosphor-icons/react for icons — NOT raw <svg>.
-- Root container MUST always have: className="min-h-screen bg-background text-foreground"
+**CRITICAL COMPONENT RULE — ALWAYS use DS React components — NEVER use raw HTML elements:**
+- The design system provides pre-built React components that enforce tokens, accessibility, and visual consistency.
+- ALWAYS prefer DS components over raw HTML elements. Every visual element should come from @/components/ui/<name>.
+- Content sections / containers: Use <Card>, <CardHeader>, <CardContent>, <CardFooter> — NOT a raw <div> with a border or a shadow (a <div> for layout, flex or grid, is fine)
+- Titles / headings: Use <Heading> component — NOT raw <h1>, <h2>, <h3>
+- Buttons / CTAs: Use <Button> component with variant prop — NOT raw <button> or <a> styled as button
+- Form fields: Use <Input>, <Label>, <Checkbox>, <Select>, <Textarea>, <RadioGroup> — NOT raw <input>
+- Form groups: Use <Field>, <FieldLabel>, <FieldDescription>, <FieldError> — NOT raw <div> + <label>
+- Links with icon: Use <Button variant='link'> or <Button variant='ghost'> — NOT raw <a>
+- Separators: Use <Separator> — NOT raw <hr> or border-b
+- Loading / empty states: Use <Skeleton>, <Spinner>, <Empty> — NOT custom loading divs
+- Modals / dialogs: Use <Dialog> or <AlertDialog> — NOT custom overlay divs
+- Icons: Use @phosphor-icons/react — NOT raw <svg> elements
+- Navigation: Use <NavigationMenu>, <Breadcrumb>, <Tabs> — NOT raw <nav> + <a>
+- Tooltips: Use <Tooltip> — NOT title attribute
+- Lists of items: Use <Item>, <ItemHeader>, <ItemContent> — NOT raw <li> or <div>
+- Data display: Use <Table>, <Badge>, <Avatar> — NOT custom layouts
+- Notifications: Use <Alert>, Toaster (sonner) — NOT custom notification divs
+- Root container MUST have: className='min-h-screen bg-background text-foreground'
+- Every page MUST set bg-background and text-foreground on the outermost element
+- Wrap content sections in <Card> components for visual grouping
+- Use <Heading> for all titles with proper level (1-4)
+- All interactive elements MUST be DS components (Button, Input, etc.)

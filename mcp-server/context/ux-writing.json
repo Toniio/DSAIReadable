@@ -157,6 +157,30 @@
       "source": "color.md"
     },
     {
+      "rule": "**Always use the semantic tokens** — never the `mist.X` or `violet.X` primitive values directly in components. Primitives are private (`--ds-prim-*`).",
+      "source": "color.md"
+    },
+    {
+      "rule": "**Never fake subtlety with opacity** — use `color.text.subtle`, not `color.text.default` with `opacity-50`.",
+      "source": "color.md"
+    },
+    {
+      "rule": "**Follow the surface hierarchy**: `default` → `subtle` → `elevated`. A card is `subtle`, a popover is `elevated`.",
+      "source": "color.md"
+    },
+    {
+      "rule": "**Always test both modes** — every component must be checked in light AND dark before it ships.",
+      "source": "color.md"
+    },
+    {
+      "rule": "**Accessibility first** — the minimum contrast ratio is 4.5:1 (WCAG AA) for body text, and 3:1 for large text and UI components.",
+      "source": "color.md"
+    },
+    {
+      "rule": "**Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lint-contrast.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.",
+      "source": "color.md"
+    },
+    {
       "rule": "✅ Read every default string from `UI_STRINGS`, never as a literal in the JSX",
       "source": "content.md"
     },
@@ -175,6 +199,66 @@
     {
       "rule": "❌ Never mix two languages in the defaults — `npm run index:strings` fails on any literal",
       "source": "content.md"
+    },
+    {
+      "rule": "**Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.",
+      "source": "elevation.md"
+    },
+    {
+      "rule": "**Always test in dark mode** — light-mode shadows vanish in dark mode unless adjusted. The tokens handle this automatically.",
+      "source": "elevation.md"
+    },
+    {
+      "rule": "**Elevation transitions** — use `transition-shadow` with `duration-normal` (200ms) on state changes (hover, focus).",
+      "source": "elevation.md"
+    },
+    {
+      "rule": "**`shadow-inner` stands alone** — never pair it with an outer shadow on the same element.",
+      "source": "elevation.md"
+    },
+    {
+      "rule": "**No decorative shadows** — elevation expresses structure, not style. Do not add `shadow-lg` to a card just to make it look nice.",
+      "source": "elevation.md"
+    },
+    {
+      "rule": "**Never hard-code a ring width on a focus state** — `ring-1`, `ring-2` and `ring-3` are pixels, forbidden by the repository's first rule. The linter rejects them under any `focus`, `focus-visible`, `focus-within`, `data-[active=true]`, `data-[focused=true]` or `aria-invalid` prefix.",
+      "source": "focus.md"
+    },
+    {
+      "rule": "**Never `outline-none`** — use `FOCUS_OUTLINE_RESET` (`outline-hidden`). In forced-colors mode, `box-shadow`s are not painted: `outline-none` leaves the element with no indicator at all, whereas `outline-hidden` keeps a transparent outline that the mode makes visible. On top of that, `outline-none` poisons `--tw-outline-style`, which silently disabled the `outline-1` of ScrollArea and NavigationMenu.",
+      "source": "focus.md"
+    },
+    {
+      "rule": "**The invalid-state ring follows the focus ring's width** — both can apply at once on a field that is invalid and focused. Two different widths give a result that depends on the order of the utilities in the compiled stylesheet.",
+      "source": "focus.md"
+    },
+    {
+      "rule": "**A bare `ring-0` is a legitimate removal** — it is how a wrapper such as InputGroup takes over the indicator of its inner control. Under a focus state (`focus-visible:ring-0`) it removes the indicator, and counts as a reset under rule 5.",
+      "source": "focus.md"
+    },
+    {
+      "rule": "**Hiding the outline requires drawing a ring — checked occurrence by occurrence, and target by target.** The ring must appear in the _same_ class string, on the _same_ target: a reset written under `**:`, `*:`, `[&_x]:` or `before:` hides the indicator of other nodes, and only a ring under the same variant answers it. A component that neutralizes the outline in ten places and draws a ring in one does not meet the rule, and neither did NavigationMenu, whose `**:data-[slot=navigation-menu-link]:focus:outline-none` hid every link's ring while the menu drew its own.",
+      "source": "focus.md"
+    },
+    {
+      "rule": "**A universal starting point** — `motion.duration.normal` (200ms) with `motion.easing.default` is the default combination for any new transition.",
+      "source": "motion.md"
+    },
+    {
+      "rule": "**Always use the CSS tokens** — never hard-code a duration or an easing in the code.",
+      "source": "motion.md"
+    },
+    {
+      "rule": "**`ease-in` for exits, `ease-out` for entrances** — a universal UX convention that matches natural physical motion.",
+      "source": "motion.md"
+    },
+    {
+      "rule": "**`ease-spring` sparingly** — only for expressive, deliberate interactions (positive feedback, gamification). Never on basic state transitions.",
+      "source": "motion.md"
+    },
+    {
+      "rule": "**Never work around the tokens** — no hard-coded values and no `!important` on transition properties.",
+      "source": "motion.md"
     },
     {
       "rule": "✅ The token, under the state's variant",
@@ -201,6 +285,26 @@
       "source": "opacity.md"
     },
     {
+      "rule": "**Three cases, three tokens** — `disabled`, `placeholder` and `overlay` are the only legitimate contexts for global opacity.",
+      "source": "opacity.md"
+    },
+    {
+      "rule": "**A disabled state is written `opacity-disabled`** under its variant (`disabled:opacity-disabled`) — never `opacity-50`, which ESLint rejects: the value is the token's, not a step of Tailwind's scale.",
+      "source": "opacity.md"
+    },
+    {
+      "rule": "**Never use opacity to fake a subtle color** — always use `color.text.subtle` / `text-muted-foreground`.",
+      "source": "opacity.md"
+    },
+    {
+      "rule": "**Opacity is not selective** — it applies to the whole DOM subtree. When only part of it should change, use targeted color tokens.",
+      "source": "opacity.md"
+    },
+    {
+      "rule": "**`opacity.overlay` at `0.8` is the reference value** — do not lower it for standard modals: it hurts the readability of the main content.",
+      "source": "opacity.md"
+    },
+    {
       "rule": "✅ Standard card",
       "source": "radius.md"
     },
@@ -219,6 +323,66 @@
     {
       "rule": "✅ Modal",
       "source": "radius.md"
+    },
+    {
+      "rule": "**Always use the tokens** — no arbitrary values such as `rounded-[7px]`. When no token fits, escalate to the design team.",
+      "source": "radius.md"
+    },
+    {
+      "rule": "**Consistency within a component** — every corner of a component uses the same token, unless there is a stated reason (an element that attaches to an edge of the screen, for example).",
+      "source": "radius.md"
+    },
+    {
+      "rule": "**`radius.lg` is shadcn's default** — it is the starting point for any card-like component.",
+      "source": "radius.md"
+    },
+    {
+      "rule": "**`radius.full` only for pill shapes** — avatars, toggles, rounded badges. Do not use it on standard buttons.",
+      "source": "radius.md"
+    },
+    {
+      "rule": "**`radius.none` is a deliberate choice** — use it only for full-bleed components or data-grid elements, not as a default.",
+      "source": "radius.md"
+    },
+    {
+      "rule": "**Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.",
+      "source": "spacing.md"
+    },
+    {
+      "rule": "**No arbitrary values** — use the tokens only. When an in-between value is needed, discuss it with the design team first.",
+      "source": "spacing.md"
+    },
+    {
+      "rule": "**Stay on the component axis** — a form uses `lg` (24px) between its fields and `md` (16px) for inner padding. Keep to that axis throughout the same component.",
+      "source": "spacing.md"
+    },
+    {
+      "rule": "**`page-padding` is applied once** — on the page's root container, not on each section.",
+      "source": "spacing.md"
+    },
+    {
+      "rule": "**`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center.",
+      "source": "spacing.md"
+    },
+    {
+      "rule": "**JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.",
+      "source": "typography.md"
+    },
+    {
+      "rule": "**Always pair `size` with `lineHeight`** — a heading without `leading-tight` looks too loose; body text without `leading-normal` is hard to read.",
+      "source": "typography.md"
+    },
+    {
+      "rule": "**`tracking-tight` only from `text-3xl` up** — on small text, negative spacing hurts readability.",
+      "source": "typography.md"
+    },
+    {
+      "rule": "**`tracking-wider` is for all-caps only** — never use it on regular lowercase text.",
+      "source": "typography.md"
+    },
+    {
+      "rule": "**A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels.",
+      "source": "typography.md"
     }
   ],
   "component_rules": {

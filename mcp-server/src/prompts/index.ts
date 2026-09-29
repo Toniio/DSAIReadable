@@ -1,28 +1,27 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 
-const TAILWIND_RULE = `
-**CRITICAL STYLING RULE — Tailwind CSS + DS Tokens:**
-- ALWAYS use standard Tailwind CSS utility classes mapped to the design system tokens.
-- Use semantic color classes: bg-background, text-foreground, bg-primary, text-primary-foreground, bg-muted, text-muted-foreground, border-border, bg-card, bg-destructive, etc.
-- Use standard Tailwind spacing (p-4, gap-6, m-2), radius (rounded-lg, rounded-md), shadows (shadow-sm, shadow-md), and typography (text-sm, font-medium).
-- NEVER use arbitrary values like bg-[#432dd7], p-[1.5rem], or rounded-[0.625rem].
-- NEVER use Tailwind's default color palette (bg-violet-600, text-slate-500) — always use the DS semantic classes.
-- NEVER use inline styles or direct CSS variable references in JSX.
+import { COMPONENT_RULE } from "../lib/component-rule.js"
+import { TAILWIND_RULE } from "../lib/tailwind-rule.js"
 
-**CRITICAL COMPONENT RULE — Use DS Components, NOT raw HTML:**
-- ALWAYS use DS React components, imported one per module from @/components/ui/<name>.
-- Use <Card> for content sections — NOT raw <div> with border/shadow.
-- Use <Heading> for titles — NOT raw <h1>/<h2>/<h3>.
-- Use <Button> for actions/CTAs — NOT raw <button> or styled <a>.
-- Use <Input>, <Label>, <Checkbox>, <Select> for forms — NOT raw form elements.
-- Use <Field>, <FieldLabel>, <FieldError> for form groups — NOT raw <div> + <label>.
-- Use <Separator> — NOT <hr> or border classes.
-- Use <Item> for list items, <Badge> for status indicators, <Avatar> for user pictures.
-- Use <Empty> for empty states, <Skeleton>/<Spinner> for loading.
-- Use @phosphor-icons/react for icons — NOT raw <svg>.
-- Root container MUST always have: className="min-h-screen bg-background text-foreground"
-`
+/**
+ * The critical rules every prompt ends with, rendered from the objects
+ * get_design_rules serves. A hand-written copy lived here and had drifted
+ * from them: one source, two renderings.
+ */
+const CRITICAL_RULES_TEXT = [
+  `**CRITICAL STYLING RULE — ${TAILWIND_RULE.title}:**`,
+  ...TAILWIND_RULE.description.map((d) => `- ${d}`),
+  `- Do: ${TAILWIND_RULE.do.join(" · ")}`,
+  ...TAILWIND_RULE.dont.map((d) => `- Don't: ${d}`),
+  "",
+  `**CRITICAL COMPONENT RULE — ${COMPONENT_RULE.title}:**`,
+  ...COMPONENT_RULE.description.map((d) => `- ${d}`),
+  ...Object.entries(COMPONENT_RULE.mandatory_mappings).map(
+    ([element, rule]) => `- ${element}: ${rule}`
+  ),
+  ...COMPONENT_RULE.page_structure.map((d) => `- ${d}`),
+].join("\n")
 
 export function registerPrompts(server: McpServer): void {
   // 1. build_screen
@@ -69,10 +68,11 @@ Requirements:
 - Use ONLY DS tokens via Tailwind classes (no raw hex colors, no arbitrary Tailwind values)
 - Follow the composition rules (step 3) and the constraints of each retained spec (step 4)
 - Ensure the layout is responsive for ${device}
-- Use ${mode} mode color tokens
+- One semantic class serves both color modes: it resolves to its ${mode} value ${mode === "dark" ? "under the `.dark` class on `<html>`" : "when `<html>` has no `.dark` class"}. Never pick a color per mode
 - Include all necessary imports
 - Generate complete, production-ready TSX code
-${TAILWIND_RULE}`,
+
+${CRITICAL_RULES_TEXT}`,
             },
           },
         ],
@@ -119,7 +119,8 @@ Requirements:
 - Show the before/after diff clearly
 - Explain why the change is correct per the DS rules
 - If the requested change violates DS rules, explain what to do instead
-${TAILWIND_RULE}`,
+
+${CRITICAL_RULES_TEXT}`,
             },
           },
         ],
@@ -168,7 +169,8 @@ Generate a creative but DS-compliant screen or feature idea that:
 - Respects all design rules and constraints
 - Includes a description, wireframe sketch (in text/ASCII), and a list of DS components used
 - Suggests specific component variants and token usage
-${TAILWIND_RULE}`,
+
+${CRITICAL_RULES_TEXT}`,
             },
           },
         ],
@@ -208,7 +210,8 @@ Suggest 3-5 logical next steps or screens that:
 - Include specific component recommendations for each suggestion
 - Consider UX writing rules for all CTAs and labels
 - Provide a brief rationale for each suggestion
-${TAILWIND_RULE}`,
+
+${CRITICAL_RULES_TEXT}`,
             },
           },
         ],
@@ -263,7 +266,8 @@ Generate a complete React page that showcases each component with:
 - Code snippets for each variant
 - Layout optimized for ${device}
 - Only DS components and tokens used
-${TAILWIND_RULE}`,
+
+${CRITICAL_RULES_TEXT}`,
             },
           },
         ],
