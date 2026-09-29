@@ -260,11 +260,12 @@ There is no npm package: the repository **is** the distribution channel. The
 `registry.json` at the root is enough — no server, no per-item JSON to host.
 Full consumer guide: [README → _Consuming the design system_](./README.md#consuming-the-design-system).
 
-| Item                                | Content                                                                                                                   |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `Toniio/DSAIReadable/design-system` | Base item: the tokens' CSS variables, `lib/utils`, `lib/focus`, `lib/ui-strings`, `lib/overlay` — follows every component |
-| `Toniio/DSAIReadable/<component>`   | One item per component in `components/ui/`                                                                                |
-| `Toniio/DSAIReadable/conventions`   | `registry/conventions/dsaireadable.md`, dropped as Cursor, Claude Code and Copilot rules                                  |
+| Item                                | Content                                                                                                                                                                                               |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Toniio/DSAIReadable/design-system` | Base item: the stylesheet (tokens, `@theme inline` bridge, lockdown, `z-*` utilities, base layer), `lib/utils`, `lib/focus`, `lib/ui-strings`, `lib/overlay`, `lib/surface` — follows every component |
+| `Toniio/DSAIReadable/font-<family>` | One `registry:font` item per font `lib/fonts.ts` loads (`font-jetbrains-mono`, `font-geist`) — follows the base item                                                                                  |
+| `Toniio/DSAIReadable/<component>`   | One item per component in `components/ui/`                                                                                                                                                            |
+| `Toniio/DSAIReadable/conventions`   | `registry/conventions/dsaireadable.md`, dropped as Cursor, Claude Code and Copilot rules                                                                                                              |
 
 `registry.json` is **generated** by `npm run registry:build` from
 `design-system.index.json`, the specs and the components' actual imports — do
