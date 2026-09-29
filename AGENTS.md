@@ -54,8 +54,10 @@ Modes follow the Resolver Module: the `color-scheme` modifier of
 `semantic.json`), and its `dark` context is `semantic.dark.json`. An override
 there redefines an existing semantic token with its `$type` and a `{…}`
 reference, nothing else; its description, status and docs stay in
-`semantic.json`. `loadTokens` in `mcp-server/src/lib/dtcg.ts` is the only
-reader of the resolver: a script that needs a value in a mode asks it.
+`semantic.json`. An override exists only if it changes the value: one that
+repeats the light value is an error, and `color.static.*` never has one.
+`loadTokens` in `mcp-server/src/lib/dtcg.ts` is the only reader of the
+resolver: a script that needs a value in a mode asks it.
 `$extensions.modes` is rejected by `tokens:lint-naming`.
 `tokens.css` is generated: any direct edit is overwritten by the next build and
 caught by `npm run tokens:check`.

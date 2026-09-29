@@ -31,17 +31,17 @@ the status says what the code does.
 | `color.text.bold`                    | `--color-text-bold`                    | color | reserved | `#090b0c` | `#f9fbfb`                   | —                      |
 | `color.text.inverse`                 | `--color-text-inverse`                 | color | reserved | `#ffffff` | `#090b0c`                   | —                      |
 | `color.text.action.default`          | `--color-text-action-default`          | color | reserved | `#432dd7` | `#6e6cff`                   | —                      |
-| `color.text.action.on`               | `--color-text-action-on`               | color | reserved | `#eef2ff` | `#eef2ff`                   | —                      |
+| `color.text.action.on`               | `--color-text-action-on`               | color | reserved | `#eef2ff` | —                           | —                      |
 | `color.text.destructive.default`     | `--color-text-destructive-default`     | color | active   | `#9f0712` | `#ffa2a2`                   | —                      |
 | `color.border.default`               | `--color-border-default`               | color | active   | `#e3e7e8` | `rgba(255, 255, 255, 0.1)`  | —                      |
 | `color.border.subtle`                | `--color-border-subtle`                | color | reserved | `#e3e7e8` | `rgba(255, 255, 255, 0.1)`  | —                      |
 | `color.border.input`                 | `--color-border-input`                 | color | active   | `#e3e7e8` | `rgba(255, 255, 255, 0.15)` | —                      |
-| `color.border.focus`                 | `--color-border-focus`                 | color | active   | `#67787c` | `#67787c`                   | —                      |
+| `color.border.focus`                 | `--color-border-focus`                 | color | active   | `#67787c` | —                           | —                      |
 | `color.icon.default`                 | `--color-icon-default`                 | color | reserved | `#090b0c` | `#f9fbfb`                   | —                      |
 | `color.icon.subtle`                  | `--color-icon-subtle`                  | color | reserved | `#67787c` | `#9ca8ab`                   | —                      |
-| `color.icon.action`                  | `--color-icon-action`                  | color | reserved | `#eef2ff` | `#eef2ff`                   | —                      |
+| `color.icon.action`                  | `--color-icon-action`                  | color | reserved | `#eef2ff` | —                           | —                      |
 | `color.action.background.default`    | `--color-action-background-default`    | color | active   | `#432dd7` | `#372aac`                   | —                      |
-| `color.action.background.foreground` | `--color-action-background-foreground` | color | active   | `#eef2ff` | `#eef2ff`                   | —                      |
+| `color.action.background.foreground` | `--color-action-background-foreground` | color | active   | `#eef2ff` | —                           | —                      |
 | `color.feedback.error.default`       | `--color-feedback-error-default`       | color | active   | `#e7000b` | `#ff6467`                   | —                      |
 | `color.feedback.error.foreground`    | `--color-feedback-error-foreground`    | color | active   | `#ffffff` | `#090b0c`                   | —                      |
 | `color.chart.1`                      | `--color-chart-1`                      | color | active   | `#432dd7` | `#6e6cff`                   | —                      |
@@ -57,13 +57,13 @@ the status says what the code does.
 | `color.sidebar.background`           | `--color-sidebar-background`           | color | active   | `#f9fbfb` | `#161b1d`                   | `mist.900`             |
 | `color.sidebar.foreground`           | `--color-sidebar-foreground`           | color | active   | `#090b0c` | `#f9fbfb`                   | `mist.50`              |
 | `color.sidebar.border`               | `--color-sidebar-border`               | color | active   | `#e3e7e8` | `rgba(255, 255, 255, 0.1)`  | `white-alpha.10`       |
-| `color.sidebar.ring`                 | `--color-sidebar-ring`                 | color | active   | `#67787c` | `#67787c`                   | `mist.500`             |
+| `color.sidebar.ring`                 | `--color-sidebar-ring`                 | color | active   | `#67787c` | —                           | `mist.500`             |
 | `color.sidebar.primary.default`      | `--color-sidebar-primary-default`      | color | active   | `#4f39f6` | `#615fff`                   | `violet.500`           |
 | `color.sidebar.primary.on`           | `--color-sidebar-primary-on`           | color | active   | `#eef2ff` | `#ffffff`                   | `mist.0`               |
 | `color.sidebar.accent.default`       | `--color-sidebar-accent-default`       | color | active   | `#f1f3f3` | `#22292b`                   | `mist.800`             |
 | `color.sidebar.accent.foreground`    | `--color-sidebar-accent-foreground`    | color | active   | `#161b1d` | `#f9fbfb`                   | `mist.50`              |
-| `color.static.white`                 | `--color-static-white`                 | color | active   | `#ffffff` | `#ffffff`                   | `bg-white, text-white` |
-| `color.static.black`                 | `--color-static-black`                 | color | active   | `#000000` | `#000000`                   | `bg-black/10`          |
+| `color.static.white`                 | `--color-static-white`                 | color | active   | `#ffffff` | —                           | `bg-white, text-white` |
+| `color.static.black`                 | `--color-static-black`                 | color | active   | `#000000` | —                           | `bg-black/10`          |
 
 **Usage rules**
 
@@ -307,7 +307,7 @@ the status says what the code does.
 | `shadcn.popover`                    | `--popover`                    | color     | active | `#ffffff`  | `#161b1d`                   | —        |
 | `shadcn.popover-foreground`         | `--popover-foreground`         | color     | active | `#090b0c`  | `#f9fbfb`                   | —        |
 | `shadcn.primary`                    | `--primary`                    | color     | active | `#432dd7`  | `#372aac`                   | —        |
-| `shadcn.primary-foreground`         | `--primary-foreground`         | color     | active | `#eef2ff`  | `#eef2ff`                   | —        |
+| `shadcn.primary-foreground`         | `--primary-foreground`         | color     | active | `#eef2ff`  | —                           | —        |
 | `shadcn.secondary`                  | `--secondary`                  | color     | active | `#f1f3f3`  | `#22292b`                   | —        |
 | `shadcn.secondary-foreground`       | `--secondary-foreground`       | color     | active | `#090b0c`  | `#f9fbfb`                   | —        |
 | `shadcn.muted`                      | `--muted`                      | color     | active | `#f1f3f3`  | `#22292b`                   | —        |
@@ -318,7 +318,7 @@ the status says what the code does.
 | `shadcn.destructive-foreground`     | `--destructive-foreground`     | color     | active | `#ffffff`  | `#090b0c`                   | —        |
 | `shadcn.border`                     | `--border`                     | color     | active | `#e3e7e8`  | `rgba(255, 255, 255, 0.1)`  | —        |
 | `shadcn.input`                      | `--input`                      | color     | active | `#e3e7e8`  | `rgba(255, 255, 255, 0.15)` | —        |
-| `shadcn.ring`                       | `--ring`                       | color     | active | `#67787c`  | `#67787c`                   | —        |
+| `shadcn.ring`                       | `--ring`                       | color     | active | `#67787c`  | —                           | —        |
 | `shadcn.radius`                     | `--radius`                     | dimension | active | `0.625rem` | —                           | —        |
 | `shadcn.chart-1`                    | `--chart-1`                    | color     | active | `#432dd7`  | `#6e6cff`                   | —        |
 | `shadcn.chart-2`                    | `--chart-2`                    | color     | active | `#438fbd`  | `#8fd6fa`                   | —        |
@@ -332,7 +332,7 @@ the status says what the code does.
 | `shadcn.sidebar-accent`             | `--sidebar-accent`             | color     | active | `#f1f3f3`  | `#22292b`                   | —        |
 | `shadcn.sidebar-accent-foreground`  | `--sidebar-accent-foreground`  | color     | active | `#161b1d`  | `#f9fbfb`                   | —        |
 | `shadcn.sidebar-border`             | `--sidebar-border`             | color     | active | `#e3e7e8`  | `rgba(255, 255, 255, 0.1)`  | —        |
-| `shadcn.sidebar-ring`               | `--sidebar-ring`               | color     | active | `#67787c`  | `#67787c`                   | —        |
+| `shadcn.sidebar-ring`               | `--sidebar-ring`               | color     | active | `#67787c`  | —                           | —        |
 
 ---
 
