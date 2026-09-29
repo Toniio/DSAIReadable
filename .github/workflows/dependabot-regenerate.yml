@@ -1,0 +1,113 @@
+name: Dependabot regenerate
+
+# `registry.json` and `mcp-server/context/ds-metadata.json` copy dependency
+# versions from `package.json`, and a Prettier bump can reformat code.
+# Dependabot runs none of the generators, so each such update would turn
+# `registry`, `context-freshness`, `mcp-test` and `lint` red. This workflow
+# regenerates those files on Dependabot PRs and pushes the result.
+#
+# Two jobs, on purpose:
+# - `regenerate` runs the PR's code (npm ci, the generators, Prettier) with a
+#   read-only token and no secret; it only hands a patch over.
+# - `push` runs none of the PR's code: it applies that patch and pushes it
+#   with a GitHub App token. A push made with GITHUB_TOKEN would not trigger
+#   the required checks again, and the PR could not be merged.
+#
+# `pull_request`, never `pull_request_target`: the PR's code never runs with
+# write access. The App secrets are Dependabot secrets (Settings → Secrets and
+# variables → Dependabot): a Dependabot-triggered run cannot read Actions
+# secrets.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  regenerate:
+    name: regenerate
+    # Only a Dependabot push to a Dependabot PR of this repository. The App's
+    # own push is made by another actor, so it does not trigger a second run.
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm ci --prefix mcp-server
+      - run: npm run registry:build
+      - run: npm run generate-context
+      - run: npm run format
+      # Staged first so that a newly generated, untracked file is in the patch.
+      - name: Build the patch
+        id: diff
+        run: |
+          git add --all
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git diff --cached --binary > regenerate.patch
+            git diff --cached --stat
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.diff.outputs.changed == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: regenerate-patch
+          path: regenerate.patch
+          retention-days: 1
+
+  push:
+    name: push
+    needs: regenerate
+    if: needs.regenerate.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create the App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.REGENERATE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.REGENERATE_APP_PRIVATE_KEY }}
+          permission-contents: write
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ steps.app-token.outputs.token }}
+      # Dependabot may have rebased the branch since the patch was built: the
+      # run for its new head builds a fresh patch, this one stops.
+      - name: Stop if the branch moved
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "$(git rev-parse HEAD)" != "$EXPECTED_SHA" ]; then
+            echo "The branch moved since the patch was built; nothing pushed."
+            exit 0
+          fi
+          echo "BRANCH_CURRENT=true" >> "$GITHUB_ENV"
+      - if: env.BRANCH_CURRENT == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: regenerate-patch
+      - if: env.BRANCH_CURRENT == 'true'
+        name: Commit and push
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: |
+          user_id="$(gh api "/users/${APP_SLUG}[bot]" --jq .id)"
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${user_id}+${APP_SLUG}[bot]@users.noreply.github.com"
+          git apply --index regenerate.patch
+          git commit -m "chore(deps): regenerate the files that copy dependency versions"
+          git push origin "HEAD:${GITHUB_HEAD_REF}"

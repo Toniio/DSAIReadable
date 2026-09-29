@@ -91,6 +91,32 @@ The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-a
 | `component-tests`   | `npm run test:components`                                                    |
 | `registry`          | `npm run registry:check`, shadcn validation, `npm run registry:test-install` |
 
+## Dependabot pull requests
+
+`registry.json` and `mcp-server/context/ds-metadata.json` copy dependency
+versions, and a Prettier update can reformat code. Dependabot runs none of the
+generators, so the `dependabot-regenerate` workflow does it on each Dependabot
+PR: a read-only job runs `registry:build`, `generate-context` and `format`, and
+a second job, which runs none of the PR's code, pushes the result as one
+`chore(deps)` commit. CI then runs again on that commit.
+
+The push uses a GitHub App token: a push made with `GITHUB_TOKEN` does not
+trigger any workflow, so the required checks would never report on the new
+commit. The App needs a single repository permission, **Contents: read and
+write**, and is installed on this repository only. Its credentials are
+**Dependabot** secrets (Settings → Secrets and variables → Dependabot), because a
+Dependabot-triggered run cannot read Actions secrets:
+
+| Secret                       | Value                          |
+| ---------------------------- | ------------------------------ |
+| `REGENERATE_APP_CLIENT_ID`   | the App's client ID            |
+| `REGENERATE_APP_PRIVATE_KEY` | a private key generated for it |
+
+Once someone else has pushed to its branch, Dependabot stops rebasing the PR on
+its own; comment `@dependabot recreate` to start it again from `main`. A PR that
+needs code changes (a major version with breaking changes) is still fixed by
+hand.
+
 ## Code style
 
 Enforced by `.prettierrc` and applied by the pre-commit hook: 2 spaces, double

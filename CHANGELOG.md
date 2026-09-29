@@ -13,6 +13,9 @@ section that fits.
 
 ### Added
 
+- `dependabot-regenerate` workflow: on a Dependabot PR, reruns
+  `registry:build`, `generate-context` and Prettier, and pushes the result with
+  a GitHub App token so that the required checks run again.
 - Component tests: `npm run test:components` (Vitest, Testing Library, axe-core)
   covers Button, Field, Progress, Combobox, Dialog, Tabs and Select — roles,
   accessible names, keyboard, variants and zero axe violations — and runs in CI
