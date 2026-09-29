@@ -62,7 +62,7 @@ npm run index:validate    # 5 checks: JSON Schema, sizes, data-slot, UI strings,
 npm run specs:validate    # the 59 specs against the 13 canonical sections + Variants, Tokens, Props / API and choice rules up to date + no hedged wording + llms.txt up to date
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
 npm run registry:check    # registry.json freshness + internal dependencies
-npm run registry:test-install  # installs the 61 items in a blank app and builds it
+npm run registry:test-install  # installs the 63 items in a blank app, builds it and its CSS
 npm run generate-context  # regenerates the MCP cache — must produce zero diff
 npm run mcp:test          # the MCP server's test suite
 npm run test:components   # component tests: roles, names, keyboard, variants, axe-core

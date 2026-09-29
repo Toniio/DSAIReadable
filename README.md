@@ -172,7 +172,7 @@ What the consumer needs: a React + Tailwind CSS v4 project with a `components.js
 ### Install
 
 ```bash
-# A component — the base item (tokens, dark mode, cn(), focus, labels, modal surfaces) comes along automatically
+# A component — the base item (tokens, lockdown, dark mode, fonts, cn(), focus, labels, modal surfaces) comes along automatically
 npx shadcn@latest add Toniio/DSAIReadable/button
 
 # The design system's rules for the project's agents
@@ -192,6 +192,15 @@ import { cn } from "@/lib/utils"
 ```
 
 Tokens are not imported into TSX: the base item merges their CSS variables into the project's stylesheet, `@theme inline` bridge included. Classes are therefore written with the semantic names (`bg-primary`, `text-muted-foreground`, `rounded-lg`).
+
+### After install
+
+The base item changes more than the project's components folder:
+
+- **The stylesheet** (`tailwind.css` in `components.json`) receives the tokens (`:root`, `.dark`), the `@theme inline` bridge, `tw-animate-css` and `shadcn/tailwind.css` (animations, `data-open:` and the other state variants), the `z-modal`… utilities and a `@layer base` that sets `<html>` in `font-mono`.
+- **The lockdown**: every Tailwind default color, radius and shadow the design system does not redefine is reset to `initial`. `bg-red-500`, `text-slate-900` or `shadow-2xs` then generate no CSS, in the consumer's project as in this repository. Spacing and typography keep Tailwind's scale.
+- **The fonts**: JetBrains Mono (`font-mono`, the whole interface) and Geist (`font-sans`, `Kbd` keys) come as `registry:font` items. In a Next.js app, the CLI adds their `next/font/google` loaders to the root layout; elsewhere (Vite…), it installs `@fontsource-variable/jetbrains-mono` and `@fontsource-variable/geist` and imports them.
+- **Dark mode is the `.dark` class on `<html>`** — never `prefers-color-scheme`. The `dark:` variant is declared; toggling the class is the application's job. With `next-themes`: `<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>`, as this repository's [`components/theme-provider.tsx`](./components/theme-provider.tsx) does.
 
 ### Explore
 
@@ -215,7 +224,7 @@ With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the reque
 
 ### Guarantees
 
-`registry.json` is **generated** — `npm run registry:build` derives it from the inventory, the specs and the actual imports. CI rejects a registry that is out of sync, an internal dependency written as a bare name and, above all, an **unusable** registry: `npm run registry:test-install` installs the 61 items in a blank app with non-standard aliases, then builds it. On a PR, it tests the registry built by the branch; after each merge, the published addresses.
+`registry.json` is **generated** — `npm run registry:build` derives it from the inventory, the specs and the actual imports. CI rejects a registry that is out of sync, an internal dependency written as a bare name and, above all, an **unusable** registry: `npm run registry:test-install` installs the 63 items in a blank app with non-standard aliases, type-checks it, then builds its stylesheet and checks what Tailwind emits: the lockdown holds, both fonts resolve to a declared `@font-face`, `dark:`, `sm:`, `data-open:` and `z-modal` compile. On a PR, it tests the registry built by the branch; after each merge, the published addresses.
 
 ---
 

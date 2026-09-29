@@ -8,6 +8,11 @@
  * unpinned react-day-picker that jumped a major). This installs every item
  * into a blank app, the way a consumer would, and type-checks the result.
  *
+ * Compiling is not rendering: an app can build while every `sm:` is dead or
+ * `bg-red-500` still works. So it also builds the app's stylesheet and checks
+ * what Tailwind emitted — the lockdown, the fonts, `dark:`, the z-index and
+ * animation utilities, the breakpoints.
+ *
  * The app uses non-default aliases (`~/ui`, `~/lib`, `src/`) so that an import
  * the CLI fails to rewrite cannot resolve by luck.
  *
@@ -36,6 +41,7 @@ import type { AddressInfo } from "node:net"
 import { tmpdir } from "node:os"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+import { nextFontsOf } from "./lib/next-fonts.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const args = process.argv.slice(2)
@@ -89,6 +95,29 @@ function run(cmd: string, argv: string[], cwd: string): Promise<string> {
   })
 }
 
+/** Utilities the design system's components rely on: each must compile. */
+const PRESENT = [
+  "bg-primary",
+  "bg-chart-1",
+  "dark:bg-primary",
+  "sm:flex",
+  "data-open:flex",
+  "animate-in",
+  "z-modal",
+  "font-mono",
+  "font-sans",
+  "rounded-lg",
+  "shadow-md",
+]
+/** Tailwind defaults and CLI side effects the lockdown must remove. */
+const ABSENT = [
+  "bg-red-500",
+  "text-slate-900",
+  "shadow-2xs",
+  "bg-color-primary",
+  "bg-ds-prim-color-mist-0",
+]
+
 const work = mkdtempSync(join(tmpdir(), "dsaireadable-registry-"))
 const app = join(work, "app")
 const failures: string[] = []
@@ -135,12 +164,16 @@ try {
     dependencies: Object.fromEntries(
       ["react", "react-dom", "tailwindcss"].map((n) => [n, version(n)])
     ),
-    devDependencies: Object.fromEntries(
-      ["typescript", "@types/react", "@types/react-dom"].map((n) => [
-        n,
-        version(n),
-      ])
-    ),
+    devDependencies: {
+      ...Object.fromEntries(
+        ["typescript", "@types/react", "@types/react-dom"].map((n) => [
+          n,
+          version(n),
+        ])
+      ),
+      // Released in lockstep with tailwindcss, so the same range applies.
+      "@tailwindcss/cli": version("tailwindcss"),
+    },
   })
   json("tsconfig.json", {
     compilerOptions: {
@@ -251,6 +284,89 @@ try {
     if (!css.includes(needle))
       failures.push(`src/app.css lacks ${needle} — tokens were not merged`)
 
+  // -------------------------------------------------------------------------
+  // 5. What Tailwind builds from it
+  // -------------------------------------------------------------------------
+  writeFileSync(
+    join(app, "src/probe.tsx"),
+    `export const Probe = () => <div className="${[...PRESENT, ...ABSENT].join(
+      " "
+    )}" />\n`
+  )
+  await run(
+    join(app, "node_modules/.bin/tailwindcss"),
+    ["-i", "src/app.css", "-o", "built.css"],
+    app
+  )
+  const built = readFileSync(join(app, "built.css"), "utf-8")
+  const emits = (utility: string) =>
+    new RegExp(
+      `\\.${utility.replace(/[:/]/g, (c) => `\\\\${c}`)}(?![\\w-])`
+    ).test(built)
+
+  for (const utility of PRESENT)
+    if (!emits(utility))
+      failures.push(`${utility} generates no CSS in the consumer's app`)
+  for (const utility of ABSENT)
+    if (emits(utility))
+      failures.push(
+        `${utility} generates CSS in the consumer's app — the lockdown leaks`
+      )
+  if (/@media[^{]*var\(/.test(built))
+    failures.push(
+      "a media query reads var(): responsive variants (sm:, md:…) never match"
+    )
+  if (!/:where\(\[data-state="open"\]\)/.test(built))
+    failures.push('data-open: does not match Radix\'s data-state="open"')
+
+  const faces = new Set(
+    [...built.matchAll(/@font-face\s*\{[^}]*font-family:\s*([^;]+);/g)].map(
+      (m) => m[1].trim().replace(/^["']|["']$/g, "")
+    )
+  )
+  /** A declaration's value in the built CSS, through any var() chain; a
+   * cycle (`--font-mono: var(--font-mono)`) resolves to nothing, as in CSS. */
+  const resolveValue = (
+    value: string | undefined,
+    seen = new Set<string>()
+  ): string | undefined => {
+    const ref = value?.match(/^var\((--[\w-]+)\)$/)?.[1]
+    if (!ref) return value
+    if (seen.has(ref)) return undefined
+    seen.add(ref)
+    return resolveValue(
+      built.match(new RegExp(`${ref}:\\s*([^;]+);`))?.[1],
+      seen
+    )
+  }
+  const familyOf = (utility: string) =>
+    resolveValue(
+      built.match(
+        new RegExp(`\\.${utility}\\s*\\{\\s*font-family:\\s*([^;]+);`)
+      )?.[1]
+    )
+  // From lib/fonts.ts, not from the registry under test: a registry that
+  // ships no font at all must fail here too.
+  for (const font of nextFontsOf(ROOT).loaded) {
+    const utility = font.variable!.slice(2)
+    const value = familyOf(utility)
+    const family = value
+      ?.split(",")[0]
+      .trim()
+      .replace(/^["']|["']$/g, "")
+    if (!family || !faces.has(family))
+      failures.push(
+        `${utility} sets font-family to ${value ?? "nothing"}, which no @font-face declares (${[...faces].join(", ") || "none"})`
+      )
+  }
+  const htmlFont = resolveValue(
+    built.match(/(?:^|\n)\s*html\s*\{[^}]*font-family:\s*([^;]+);/)?.[1]
+  )
+  if (!htmlFont || htmlFont !== familyOf("font-mono"))
+    failures.push(
+      `<html> is set in ${htmlFont ?? "the browser default"}, not in font-mono`
+    )
+
   try {
     await run(join(app, "node_modules/.bin/tsc"), ["-p", "."], app)
   } catch (e) {
@@ -266,7 +382,7 @@ try {
   } else {
     console.log(
       `✅ test-registry-install (${SOURCE}): ${names.length} items installed into a blank app, ` +
-        `${expected.length} files, imports rewritten, tokens merged, tsc clean.`
+        `${expected.length} files, imports rewritten, tokens merged, lockdown, fonts and variants built, tsc clean.`
     )
   }
 } catch (e) {

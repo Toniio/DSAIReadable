@@ -100,6 +100,18 @@ section that fits.
 
 ### Fixed
 
+- Registry consumers get the design system as it renders here. The base item
+  now ships the lockdown (Tailwind's default colors, radii and shadows reset:
+  `bg-red-500` generated CSS in every consumer's app), the `z-modal`…
+  utilities (overlays had no z-index), `tw-animate-css` and
+  `shadcn/tailwind.css`, and the base layer. The tokens moved from `cssVars` to
+  `css`: the CLI mirrored each variable into `@theme`, which compiled `sm:` into
+  `@media (width >= var(--breakpoint-sm))` — every responsive variant was dead —
+  and turned each primitive into a class. The fonts are two new `registry:font`
+  items, `font-jetbrains-mono` and `font-geist`: `--font-mono` referred to
+  itself, so the whole interface fell back to the browser's font. README
+  _After install_; `registry:test-install` builds the consumer's stylesheet
+  and checks it.
 - Specs, index and docs brought in line with the code: seven specs described a
   `ring-1` / `ring-2` focus the components no longer draw; README called the
   MCP server's npm package published (it is not) and listed no Dataviz or Admin

@@ -22,6 +22,8 @@ export interface LoadedFont {
   family: string
   /** CSS variable it sets, e.g. `--font-mono`; undefined when it sets none. */
   variable?: string
+  /** Character subsets it loads, e.g. `["latin"]`. */
+  subsets: string[]
 }
 
 export interface NextFonts {
@@ -51,6 +53,11 @@ export function nextFontsOf(root: string): NextFonts {
       loader,
       family: loader.replace(/_/g, " "),
       variable: call[1].match(/variable:\s*"([^"]+)"/)?.[1],
+      subsets: [
+        ...(call[1].match(/subsets:\s*\[([^\]]*)\]/)?.[1] ?? "").matchAll(
+          /"([^"]+)"/g
+        ),
+      ].map((m) => m[1]),
     })
   }
   return {

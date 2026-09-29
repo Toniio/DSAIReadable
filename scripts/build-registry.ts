@@ -10,7 +10,8 @@
  *   · design-system.index.json  — the 59 components and their code paths
  *   · specs/components/*.md     — human titles and the one-line role
  *   · components/ui/*.tsx       — real imports, for npm and internal deps
- *   · tokens.css + globals.css  — the css variables shipped by the base item
+ *   · tokens.css + globals.css  — the stylesheet shipped by the base item
+ *   · lib/fonts.ts              — the fonts, one registry:font item each
  *
  *   npx tsx scripts/build-registry.ts [--check]
  */
@@ -18,6 +19,7 @@
 import { readFileSync, writeFileSync, readdirSync } from "node:fs"
 import { resolve, dirname, basename } from "node:path"
 import { fileURLToPath } from "node:url"
+import { firstFamily, nextFontsOf } from "./lib/next-fonts.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -98,9 +100,11 @@ function packageOf(specifier: string): string {
   return specifier.startsWith("@") ? parts.slice(0, 2).join("/") : parts[0]
 }
 
-const declaredDeps = (
-  JSON.parse(read("package.json")) as { dependencies: Record<string, string> }
-).dependencies
+const manifest = JSON.parse(read("package.json")) as {
+  dependencies: Record<string, string>
+  devDependencies: Record<string, string>
+}
+const declaredDeps = manifest.dependencies
 
 /**
  * A bare package name installs whatever version is latest on the day the
@@ -119,6 +123,11 @@ interface RegistryFile {
   target?: string
 }
 
+/** A stylesheet in the shape the shadcn CLI merges: rule → declarations. */
+interface CssObject {
+  [key: string]: CssObject | string
+}
+
 interface RegistryItem {
   name: string
   type: string
@@ -128,6 +137,8 @@ interface RegistryItem {
   registryDependencies?: string[]
   files?: RegistryFile[]
   cssVars?: Record<string, Record<string, string>>
+  css?: CssObject
+  font?: Record<string, unknown>
   meta?: Record<string, unknown>
 }
 
@@ -208,60 +219,266 @@ if (unknownPackages.length > 0) {
 }
 
 // ---------------------------------------------------------------------------
-// The base item — tokens, in the form shadcn merges into a consumer project
+// The base item — the stylesheet, in the form shadcn merges into a consumer's
 // ---------------------------------------------------------------------------
 const stripComments = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, "")
 
-/** Declarations of the first block matching `selector`, as name -> value. */
-function blockVars(css: string, selector: RegExp): Record<string, string> {
+/** Body of the first block matching `selector`, braces excluded. */
+function blockBody(css: string, selector: RegExp): string {
   const start = css.search(selector)
   if (start === -1) throw new Error(`No block matching ${selector}`)
   const open = css.indexOf("{", start)
   let depth = 0
-  let end = css.length
   for (let i = open; i < css.length; i++) {
     if (css[i] === "{") depth++
-    else if (css[i] === "}" && --depth === 0) {
-      end = i
-      break
-    }
+    else if (css[i] === "}" && --depth === 0) return css.slice(open + 1, i)
   }
+  throw new Error(`Unclosed block matching ${selector}`)
+}
+
+/** Declarations of the first block matching `selector`, as --name -> value. */
+function blockVars(css: string, selector: RegExp): Record<string, string> {
   const vars: Record<string, string> = {}
-  for (const m of css
-    .slice(open + 1, end)
-    .matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g))
-    vars[m[1].slice(2)] = m[2].trim()
+  for (const m of blockBody(css, selector).matchAll(
+    /(--[\w-]+)\s*:\s*([^;]+);/g
+  ))
+    vars[m[1]] = m[2].trim()
   return vars
 }
 
-const tokensCss = stripComments(read("tokens.css"))
-const globalsCss = stripComments(read("styles/globals.css"))
+type CssNode =
+  | { kind: "statement"; text: string }
+  | { kind: "declaration"; prop: string; value: string }
+  | { kind: "block"; selector: string; children: CssNode[] }
 
-/** tokens.css declares :root twice per tier; merge them all, in order. */
+/** Just enough of a CSS parser for styles/globals.css: statements
+ * (`@import`, `@apply`), declarations and nested blocks. */
+function parseCss(css: string): CssNode[] {
+  const stack: CssNode[][] = [[]]
+  const selectors: string[] = []
+  let buffer = ""
+  for (const char of css) {
+    if (char === "{") {
+      selectors.push(buffer.trim())
+      stack.push([])
+      buffer = ""
+    } else if (char === "}") {
+      const children = stack.pop()!
+      stack
+        .at(-1)!
+        .push({ kind: "block", selector: selectors.pop()!, children })
+      buffer = ""
+    } else if (char === ";") {
+      const text = buffer.trim()
+      const colon = text.indexOf(":")
+      stack.at(-1)!.push(
+        text.startsWith("@") || colon === -1
+          ? { kind: "statement", text }
+          : {
+              kind: "declaration",
+              prop: text.slice(0, colon).trim(),
+              value: text.slice(colon + 1).trim(),
+            }
+      )
+      buffer = ""
+    } else buffer += char
+  }
+  return stack[0]
+}
+
+const toCssObject = (nodes: CssNode[]): CssObject =>
+  Object.fromEntries(
+    nodes.map((n) =>
+      n.kind === "statement"
+        ? [n.text, {}]
+        : n.kind === "declaration"
+          ? [n.prop, n.value]
+          : [n.selector, toCssObject(n.children)]
+    )
+  )
+
+const tokensSource = read("tokens.css")
+const tokensCss = stripComments(tokensSource)
+const globals = parseCss(stripComments(read("styles/globals.css")))
+
+/** tokens.css declares :root once per tier; merge them all, in order. */
 function allRootVars(css: string): Record<string, string> {
   const vars: Record<string, string> = {}
-  for (const m of css.matchAll(/(?:^|\n):root\s*\{/g)) {
+  for (const m of css.matchAll(/(?:^|\n):root\s*\{/g))
     Object.assign(vars, blockVars(css.slice(m.index ?? 0), /:root\s*\{/))
-  }
   return vars
 }
+
+/**
+ * The tokens travel in the `css` field, not in `cssVars`: for every cssVars
+ * key the CLI (4.21) also writes a mirror into `@theme inline`. That mirror
+ * turned each primitive into a class (`bg-ds-prim-color-mist-0`) and compiled
+ * `sm:` into `@media (width >= var(--breakpoint-sm))`, a query no browser
+ * matches — every responsive variant was dead in the consumer's app.
+ *
+ * `.dark` also re-declares the Layer 3 aliases (`--background`, `--primary`…):
+ * `shadcn init` writes its own dark values for those names, which would
+ * otherwise outlive ours.
+ */
+const layer3At = tokensSource.search(/Layer 3\b/)
+if (layer3At === -1) throw new Error("build-registry: no Layer 3 in tokens.css")
+const layer3 = blockVars(
+  stripComments(tokensSource.slice(layer3At)),
+  /:root\s*\{/
+)
+const rootVars = allRootVars(tokensCss)
+const darkVars = { ...blockVars(tokensCss, /\.dark\s*\{/), ...layer3 }
+
+// --- The fonts: one registry:font item per font lib/fonts.ts loads ---------
+/** `var(--typography-font-family-mono)` → the primitive stack it resolves to. */
+function stackOf(variable: string): string {
+  let value = rootVars[variable]
+  while (value?.startsWith("var(")) value = rootVars[value.slice(4, -1)]
+  if (!value) throw new Error(`build-registry: ${variable} resolves to nothing`)
+  return value
+}
+
+/**
+ * Next.js consumers get the font through next/font, exactly as lib/fonts.ts
+ * loads it: the CLI adds the loader to their root layout. Everyone else gets
+ * `@fontsource-variable/<name>`, whose family is the token's name plus
+ * " Variable" — test-registry-install checks that against the @font-face the
+ * package actually declares. tokens:lint-fonts keeps the token and
+ * lib/fonts.ts in step, so the family below is never written by hand.
+ *
+ * The empty `selector` stops the CLI from writing `@apply font-<key>` on
+ * <html> for each font (it stacked `font-mono font-sans font-mono`): which
+ * font <html> gets is globals.css's `@layer base`, shipped below.
+ */
+const fonts: RegistryItem[] = nextFontsOf(ROOT).loaded.map((font) => {
+  if (!font.variable)
+    throw new Error(`build-registry: ${font.loader} sets no --font-* variable`)
+  const key = font.variable.replace(/^--font-/, "")
+  const [first, ...fallbacks] = stackOf(
+    `--typography-font-family-${key}`
+  ).split(",")
+  const family = firstFamily(first)
+  const slug = family.toLowerCase().replace(/\s+/g, "-")
+  return {
+    name: `font-${slug}`,
+    type: "registry:font",
+    title: family,
+    description: `The ${family} typeface behind font-${key}: next/font in a Next.js app, @fontsource-variable elsewhere.`,
+    font: {
+      family: [`'${family} Variable'`, ...fallbacks.map((f) => f.trim())].join(
+        ", "
+      ),
+      provider: "google",
+      import: font.loader,
+      variable: font.variable,
+      subsets: font.subsets,
+      dependency: `@fontsource-variable/${slug}`,
+      selector: "",
+    },
+  }
+})
+
+// --- The @theme bridge, and the lockdown --------------------------------------
+const themeBlock = globals.find(
+  (n): n is Extract<CssNode, { kind: "block" }> =>
+    n.kind === "block" && /^@theme\s+inline$/.test(n.selector)
+)
+if (!themeBlock) throw new Error("build-registry: no @theme inline block")
+const themeDecls = themeBlock.children.filter(
+  (n): n is Extract<CssNode, { kind: "declaration" }> =>
+    n.kind === "declaration"
+)
+
+/** `--color-*: initial` → `color`: the namespaces globals.css locks. */
+const lockedNamespaces = themeDecls
+  .filter((d) => d.value === "initial" && d.prop.endsWith("-*"))
+  .map((d) => d.prop.slice(2, -2))
+
+const fontVariables = new Set(
+  fonts.map((f) => (f.font as { variable: string }).variable)
+)
+const theme: Record<string, string> = {}
+for (const d of themeDecls) {
+  if (d.value === "initial" && d.prop.endsWith("-*")) continue
+  // A font item sets its own variable: next/font's, or the @fontsource family.
+  if (fontVariables.has(d.prop)) continue
+  theme[d.prop.slice(2)] = d.value
+}
+
+/**
+ * The lockdown. `--color-*: initial` only clears what comes before it, and the
+ * CLI appends new theme keys after the ones a consumer already has — the
+ * wildcard would erase the design system's own colors. Each Tailwind default
+ * the design system does not redefine is reset by name instead, read from the
+ * installed Tailwind so a new default cannot slip through.
+ */
+const tailwindTheme = stripComments(
+  readFileSync(resolve(ROOT, "node_modules/tailwindcss/theme.css"), "utf-8")
+)
+for (const ns of lockedNamespaces)
+  for (const m of tailwindTheme.matchAll(
+    new RegExp(`--(${ns}-[\\w-]+)\\s*:`, "g")
+  ))
+    theme[m[1]] ??= "initial"
+
+/**
+ * The CLI also mirrors every theme key whose value mentions `--color-` as
+ * `--color-<key>`: `color-primary` would bring a `bg-color-primary` class.
+ * Declaring the mirror first, as `initial`, stops it.
+ */
+for (const [key, value] of Object.entries(theme))
+  if (value.includes("--color-")) theme[`color-${key}`] ??= "initial"
+
+// --- Everything else in globals.css --------------------------------------------
+const css: CssObject = {}
+const cssDependencies: string[] = []
+for (const node of globals) {
+  if (node === themeBlock) continue
+  if (node.kind === "statement" && node.text.startsWith("@import")) {
+    const target = node.text.match(/^@import\s+"([^"]+)"$/)?.[1]
+    if (!target) throw new Error(`build-registry: cannot read ${node.text}`)
+    // Tailwind is the consumer's own; tokens.css travels as :root below.
+    if (target === "tailwindcss" || target.startsWith(".")) continue
+    css[node.text] = {}
+    const pkg = packageOf(target)
+    cssDependencies.push(
+      `${pkg}@${declaredDeps[pkg] ?? manifest.devDependencies[pkg]}`
+    )
+  } else if (
+    node.kind === "statement" &&
+    node.text.startsWith("@custom-variant")
+  )
+    css[node.text] = {}
+  else if (node.kind === "block" && /^@(utility|layer)\s/.test(node.selector))
+    continue
+  else
+    throw new Error(
+      `build-registry: styles/globals.css has "${node.kind === "block" ? node.selector : node.kind === "statement" ? node.text : node.prop}", which the base item does not know how to ship`
+    )
+}
+css[":root"] = rootVars
+css[".dark"] = darkVars
+for (const node of globals)
+  if (node.kind === "block" && /^@(utility|layer)\s/.test(node.selector))
+    css[node.selector] = toCssObject(node.children)
 
 const base: RegistryItem = {
   name: "design-system",
   type: "registry:base",
   title: "DSAIReadable design system",
   description:
-    "Tokens, dark mode and the shared helpers (cn(), focus ring, UI strings, modal surface classes) every component in this registry expects. Install it first.",
-  dependencies: ["clsx", "tailwind-merge"].map(withRange),
+    "Tokens, the Tailwind lockdown, dark mode, the fonts and the shared helpers (cn(), focus ring, UI strings, modal surface classes) every component in this registry expects. Install it first.",
+  dependencies: [
+    ...["clsx", "tailwind-merge"].map(withRange),
+    ...cssDependencies,
+  ],
+  registryDependencies: fonts.map((f) => selfRef(f.name)),
   files: [...BASE_MODULES.values()].map((path) => ({
     path,
     type: "registry:lib",
   })),
-  cssVars: {
-    theme: blockVars(globalsCss, /@theme\s+inline\s*\{/),
-    light: allRootVars(tokensCss),
-    dark: blockVars(tokensCss, /\.dark\s*\{/),
-  },
+  cssVars: { theme },
+  css,
 }
 
 // ---------------------------------------------------------------------------
@@ -339,12 +556,13 @@ const SELF_PREFIX = `${OWNER}/${REPO}/`
 const knownItems = new Set([
   base.name,
   conventions.name,
+  ...fonts.map((f) => f.name),
   ...items.map((i) => i.name),
 ])
 const danglingDeps: string[] = []
 const bareDeps: string[] = []
 
-for (const item of items) {
+for (const item of [base, ...items]) {
   for (const dep of item.registryDependencies ?? []) {
     if (dep.startsWith(SELF_PREFIX)) {
       if (!knownItems.has(dep.slice(SELF_PREFIX.length)))
@@ -374,7 +592,7 @@ const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: REGISTRY_NAME,
   homepage: HOMEPAGE,
-  items: [base, conventions, ...items],
+  items: [base, ...fonts, conventions, ...items],
 }
 
 const content = JSON.stringify(registry, null, 2) + "\n"
@@ -394,12 +612,12 @@ if (CHECK) {
     process.exit(1)
   }
   console.log(
-    `✅ build-registry: registry.json up to date — ${items.length} components + base and conventions items.`
+    `✅ build-registry: registry.json up to date — ${items.length} components + base, ${fonts.length} font and conventions items.`
   )
   process.exit(0)
 }
 
 writeFileSync(OUT, content)
 console.log(
-  `✅ build-registry: registry.json — ${items.length} components + base and conventions items.`
+  `✅ build-registry: registry.json — ${items.length} components + base, ${fonts.length} font and conventions items.`
 )
