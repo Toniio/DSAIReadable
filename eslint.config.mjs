@@ -2,10 +2,20 @@ import { defineConfig, globalIgnores } from "eslint/config"
 import nextVitals from "eslint-config-next/core-web-vitals"
 import nextTs from "eslint-config-next/typescript"
 import betterTailwindcss from "eslint-plugin-better-tailwindcss"
+import { createRequire } from "node:module"
+
+// eslint-plugin-react 7.37 detects the React version through
+// context.getFilename(), which ESLint 10 removed: `version: "detect"` crashes
+// every react/* rule. Reading the installed version gives the same answer
+// without the removed API.
+const reactVersion = createRequire(import.meta.url)(
+  "react/package.json"
+).version
 
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  { settings: { react: { version: reactVersion } } },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
