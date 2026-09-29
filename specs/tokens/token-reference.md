@@ -165,7 +165,7 @@ the status says what the code does.
 | `space.container.3xl`          | `--space-container-3xl`          | dimension | reserved | `48rem`     | `max-w-3xl · w-3xl`                      |
 | `space.container.4xl`          | `--space-container-4xl`          | dimension | reserved | `56rem`     | `max-w-4xl · w-4xl`                      |
 | `space.container.5xl`          | `--space-container-5xl`          | dimension | reserved | `64rem`     | `max-w-5xl · w-5xl`                      |
-| `space.container.6xl`          | `--space-container-6xl`          | dimension | active   | `72rem`     | `max-w-6xl · w-6xl`                      |
+| `space.container.6xl`          | `--space-container-6xl`          | dimension | reserved | `72rem`     | `max-w-6xl · w-6xl`                      |
 | `space.container.7xl`          | `--space-container-7xl`          | dimension | reserved | `80rem`     | `max-w-7xl · w-7xl`                      |
 | `space.focus-ring-width`       | `--space-focus-ring-width`       | dimension | active   | `2px`       | —                                        |
 | `space.layout.page-padding`    | `--space-layout-page-padding`    | dimension | active   | `1.5rem`    | —                                        |

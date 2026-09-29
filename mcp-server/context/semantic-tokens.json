@@ -914,8 +914,8 @@
     "light": "{primitive.space.container.6xl}",
     "dark": "{primitive.space.container.6xl}",
     "type": "dimension",
-    "status": "active",
-    "usage": "Container width 6xl (1152px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-6xl` and `@6xl:` itself; lint-theme-bridge checks it equals the token."
+    "status": "reserved",
+    "usage": "Container width 6xl (1152px): the value Tailwind compiles into `max-w-6xl` and `@6xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
   },
   {
     "path": "space.container.7xl",

@@ -813,7 +813,7 @@
     "value_dark": "{primitive.space.container.6xl}",
     "css_variable": "--space-container-6xl",
     "tier": "semantic",
-    "status": "active"
+    "status": "reserved"
   },
   {
     "path": "space.container.7xl",
