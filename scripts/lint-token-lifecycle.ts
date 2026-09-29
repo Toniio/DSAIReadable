@@ -38,7 +38,7 @@ import { readFileSync, readdirSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { fontVariableOf, nextFontsOf } from "./lib/next-fonts.js"
-import { PRIMITIVE_ROOT } from "../mcp-server/src/lib/dtcg.js"
+import { loadTokens, PRIMITIVE_ROOT } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const STATUSES = ["active", "reserved"] as const
@@ -51,7 +51,6 @@ interface Node {
 }
 
 const read = (rel: string) => readFileSync(resolve(ROOT, rel), "utf-8")
-const tier = (file: string) => JSON.parse(read(file)) as Record<string, unknown>
 
 function leaves(
   tree: Record<string, unknown>,
@@ -66,17 +65,19 @@ function leaves(
   })
 }
 
-/** `{a.b.c}` references in a token's value and in its mode overrides. */
+/** `{a.b.c}` references in a token's value. */
 const referencesOf = (node: Node) =>
-  [
-    ...JSON.stringify([node.$value, node.$extensions ?? null]).matchAll(
-      /\{([A-Za-z0-9.-]+)\}/g
-    ),
-  ].map((m) => m[1])
+  [...JSON.stringify(node.$value).matchAll(/\{([A-Za-z0-9.-]+)\}/g)].map(
+    (m) => m[1]
+  )
 
-const primitives = leaves(tier("tokens/primitive.json"))
-const semantic = leaves(tier("tokens/semantic.json"))
-const component = leaves(tier("tokens/component.json"))
+// The tiers, and the dark context whose overrides reference primitives too
+// (tokens/tokens.resolver.json).
+const tokens = loadTokens(ROOT)
+const primitives = leaves(tokens.tiers.primitive.tree)
+const semantic = leaves(tokens.tiers.semantic.tree)
+const component = leaves(tokens.tiers.component.tree)
+const darkOverrides = [...tokens.overrides.dark.values()]
 
 // The three tiers form one DTCG document, so a reference names its full path:
 // `{primitive.radius.sm}` is the primitive, `{radius.sm}` the semantic token.
@@ -85,7 +86,7 @@ const componentRefs = component.flatMap((t) => referencesOf(t.node))
 
 /** Primitives some token resolves to. */
 const referencedPrimitives = new Set(
-  [...semantic, ...component]
+  [...semantic, ...component, ...darkOverrides.map((node) => ({ node }))]
     .flatMap((t) => referencesOf(t.node))
     .filter((ref) => ref.startsWith(`${PRIMITIVE_ROOT}.`))
 )

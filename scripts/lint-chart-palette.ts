@@ -25,12 +25,11 @@
  *   npx tsx scripts/lint-chart-palette.ts
  */
 
-import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { luminance } from "./wcag.js"
 import { deltaE, VISIONS } from "./color-vision.js"
-import { cssValue } from "../mcp-server/src/lib/dtcg.js"
+import { cssValue, loadTokens, MODES } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -44,20 +43,10 @@ const MIN_DELTA_E = 0.15
 const MIN_CONTRAST = 3
 const SERIES = ["1", "2", "3", "4", "5"]
 const SURFACES = ["default", "subtle", "elevated"]
-const MODES = ["light", "dark"] as const
-
-type Node = {
-  $value?: unknown
-  $type?: string
-  $extensions?: { modes?: { dark?: { $value?: unknown } } }
-}
-const read = (file: string) =>
-  JSON.parse(readFileSync(resolve(ROOT, file), "utf-8")) as Record<
-    string,
-    unknown
-  >
-const primitive = read("tokens/primitive.json")
-const semantic = read("tokens/semantic.json")
+type Node = { $value?: unknown; $type?: string }
+const tokens = loadTokens(ROOT)
+const primitive = tokens.tiers.primitive.tree
+const semantic = tokens.tiers.semantic.tree
 
 const at = (tree: Record<string, unknown>, path: string) =>
   path
@@ -71,9 +60,7 @@ const at = (tree: Record<string, unknown>, path: string) =>
 function hexOf(path: string, mode: (typeof MODES)[number]): string {
   const node = at(semantic, path)
   if (!node?.$value) throw new Error(`Unknown semantic token ${path}`)
-  const ref = String(
-    (mode === "dark" && node.$extensions?.modes?.dark?.$value) || node.$value
-  )
+  const ref = String(tokens.override(path, mode) ?? node.$value)
   const leaf = at(primitive, ref.replace(/^\{|\}$/g, ""))
   const target =
     leaf?.$value === undefined ? undefined : cssValue(leaf.$value, leaf.$type)

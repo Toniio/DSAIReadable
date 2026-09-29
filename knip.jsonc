@@ -13,18 +13,18 @@
         "components/ui/*.tsx",
         "hooks/*.ts",
         "lib/{focus,overlay,surface,ui-strings,utils}.ts",
-        // Read by `tz check` (tokens:lint-dtcg); knip has no Terrazzo plugin.
-        "terrazzo.config.ts"
+        // Loaded by Terrazzo in scripts/lint-dtcg.ts; knip has no Terrazzo plugin.
+        "terrazzo.config.ts",
       ],
       "project": [
         "{app,components,hooks,lib,scripts,tests}/**/*.{ts,tsx}",
         "styles/*.css",
-        "*.{ts,mjs}"
-      ]
+        "*.{ts,mjs}",
+      ],
     },
     "mcp-server": {
       // `bin` (src/index.ts) and the package.json scripts are found by knip.
-      "project": ["src/**/*.ts"]
-    }
-  }
+      "project": ["src/**/*.ts"],
+    },
+  },
 }

@@ -802,6 +802,56 @@ assert(
   `Every component-tier variable is the one tokens.css declares (${componentVars.length}${undeclared.length ? `; wrong: ${undeclared.map((v) => v.css_variable).join(", ")}` : ""})`
 )
 
+// tokens/primitive.json holds DTCG 2025.10 objects ({ colorSpace, components },
+// shadow layers); get_primitives serves the CSS tokens.css declares.
+const primitives =
+  readContext<Array<{ path: string; value: unknown; type: string }>>(
+    "primitives.json"
+  )
+const shadow = primitives.find((p) => p.path === "primitive.elevation.light.xs")
+assert(
+  primitives.every((p) => typeof p.value === "string") &&
+    primitives.find((p) => p.path === "primitive.color.mist.0")?.value ===
+      "#ffffff" &&
+    shadow?.value === "0 1px 2px rgba(0, 0, 0, 0.04)",
+  `Every primitive is served as CSS (${primitives.filter((p) => typeof p.value !== "string").length} objects)`
+)
+
+// The dark values come from the resolver's dark context
+// (tokens/semantic.dark.json), not from $extensions.modes.
+type DarkLeaf = [string, unknown]
+const darkLeaves = (node: object, path: string[] = []): DarkLeaf[] =>
+  Object.entries(node).flatMap(([key, child]): DarkLeaf[] =>
+    "$value" in child
+      ? [[[...path, key].join("."), child.$value]]
+      : darkLeaves(child, [...path, key])
+  )
+const overrides = darkLeaves(
+  JSON.parse(
+    readFileSync(resolve(__dirname, "../../tokens/semantic.dark.json"), "utf-8")
+  ) as object
+)
+const servedDark = new Map(
+  readContext<Array<{ path: string; dark: string }>>(
+    "semantic-tokens.json"
+  ).map((t) => [t.path, t.dark])
+)
+const variablesDark = new Map(
+  readContext<Array<{ path: string; value_dark: string }>>(
+    "variables.json"
+  ).map((t) => [t.path, t.value_dark])
+)
+const wrongDark = overrides.filter(
+  ([path, value]) =>
+    servedDark.get(path) !== value || variablesDark.get(path) !== value
+)
+assert(
+  overrides.length > 0 &&
+    wrongDark.length === 0 &&
+    servedDark.get("color.background.default") === "{primitive.color.mist.950}",
+  `Every dark override is served as the token's dark value (${overrides.length - wrongDark.length}/${overrides.length})`
+)
+
 // --- Test 8: annotations, resources, response_format, pagination (P3-06) ---
 // Called through a real client, as an agent calls them.
 console.log("\n8. Annotations, resources, response_format, pagination")

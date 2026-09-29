@@ -5,7 +5,7 @@
 
 # Token Reference
 
-> 305 tokens · source `tokens/primitive.json` · `tokens/semantic.json` · `tokens/component.json`
+> 305 tokens · source `tokens/tokens.resolver.json`: `primitive.json` · `semantic.json` · `semantic.dark.json` · `component.json`
 > Machine-readable counterpart: `tokens.manifest.json`
 
 The public tokens are the Semantic and Component tiers. The Primitive tier is private:

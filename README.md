@@ -48,8 +48,10 @@ dsaireadable/
 ├── components/ui/              # The design system's 59 React components (customized shadcn/ui)
 ├── lib/                        # Shared modules: utils, focus, ui-strings, overlay
 ├── tokens/                     # Source of truth for the tokens (three-tier DTCG JSON)
+│   ├── tokens.resolver.json    # DTCG resolver: the three tiers, then light / dark
 │   ├── primitive.json          # Tier 1 — raw values (private)
-│   ├── semantic.json           # Tier 2 — semantic tokens (public)
+│   ├── semantic.json           # Tier 2 — semantic tokens (public), light values
+│   ├── semantic.dark.json      # Tier 2 — dark overrides
 │   └── component.json          # Tier 3 — shadcn/ui aliases (public)
 ├── tokens.css                  # Generated CSS custom properties — do not edit
 ├── specs/                      # The design system's Markdown documentation
@@ -231,12 +233,14 @@ With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the reque
 
 ## Tokens
 
-Three-tier architecture in the [W3C DTCG](https://www.designtokens.org/TR/2025.10/format/) format (Format Module 2025.10, checked by `tz check`):
+Three-tier architecture in the [W3C DTCG](https://www.designtokens.org/TR/2025.10/format/) format (Format and Resolver Modules 2025.10, checked by Terrazzo):
 
 ```
-tokens/primitive.json   → raw values (hex, rem, ms) — never referenced directly
-tokens/semantic.json    → design decisions, with light/dark modes
-tokens/component.json   → shadcn/ui aliases (--background, --primary, --ring…)
+tokens/tokens.resolver.json → the three tiers, then the color-scheme modifier (light by default, dark)
+tokens/primitive.json       → raw values (hex, rem, ms) — never referenced directly
+tokens/semantic.json        → design decisions, light values
+tokens/semantic.dark.json   → the dark values of the semantic tokens that change
+tokens/component.json       → shadcn/ui aliases (--background, --primary, --ring…)
 ```
 
 The tokens are exported as CSS custom properties in `tokens.css`.

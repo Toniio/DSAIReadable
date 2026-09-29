@@ -284,7 +284,7 @@ File: `scripts/figma-push-variables.py` (~19 KB, Python 3, standard library only
 
 ### Behavior
 
-1. reads `tokens/primitive.json`, `tokens/semantic.json`, `tokens/component.json` (DTCG format);
+1. reads the tiers through `tokens/tokens.resolver.json` (DTCG format): `primitive.json`, `semantic.json`, `component.json`, and the dark values from `semantic.dark.json`;
 2. creates or updates **3** Figma Variables **collections**:
    - `Primitive` — a collection **hidden** from publishing (`hiddenFromPublishing: true`),
    - `Semantic` — **2 modes**: `light` + `dark`,

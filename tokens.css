@@ -1,6 +1,7 @@
 /* ============================================================
    DS Tokens — 3-Tier CSS Output
-   Generated from tokens/primitive.json + tokens/semantic.json + tokens/component.json
+   Generated from tokens/tokens.resolver.json: primitive.json + semantic.json
+   (+ semantic.dark.json under .dark) + component.json
    DO NOT EDIT DIRECTLY — edit the source JSON files instead.
    Regenerate with: npm run tokens:build
    ============================================================ */

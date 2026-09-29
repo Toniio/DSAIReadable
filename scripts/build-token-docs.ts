@@ -22,7 +22,7 @@ import { readFileSync, writeFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { format, resolveConfig } from "prettier"
-import { cssValue } from "../mcp-server/src/lib/dtcg.js"
+import { cssValue, loadTokens, type Mode } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -45,7 +45,6 @@ interface RawNode {
   $description?: string
   $deprecated?: boolean | string
   $extensions?: {
-    modes?: Record<string, { $value?: unknown }>
     docs?: Docs
     status?: "active" | "reserved"
   }
@@ -71,23 +70,18 @@ interface Entry {
 }
 
 // ---------------------------------------------------------------------------
-// Load the three tiers
+// Load the three tiers and the dark context (tokens/tokens.resolver.json)
 // ---------------------------------------------------------------------------
-const read = (file: string) =>
-  JSON.parse(readFileSync(resolve(ROOT, file), "utf-8")) as Record<
-    string,
-    unknown
-  >
+const tokens = loadTokens(ROOT)
 
 const TIERS: Array<{
   tier: Tier
   file: string
   tree: Record<string, unknown>
-}> = [
-  { tier: "primitive", file: "tokens/primitive.json", tree: {} },
-  { tier: "semantic", file: "tokens/semantic.json", tree: {} },
-  { tier: "component", file: "tokens/component.json", tree: {} },
-].map((t) => ({ ...t, tree: read(t.file) })) as never
+}> = (["primitive", "semantic", "component"] as const).map((tier) => ({
+  tier,
+  ...tokens.tiers[tier],
+}))
 
 const trees = Object.fromEntries(TIERS.map((t) => [t.tier, t.tree])) as Record<
   Tier,
@@ -166,13 +160,12 @@ const BELOW: Record<Tier, Tier[]> = {
   component: ["semantic", "primitive"],
 }
 
-function resolveValue(raw: string, tier: Tier, mode: "light" | "dark"): string {
+function resolveValue(raw: string, tier: Tier, mode: Mode): string {
   return raw.replace(/\{([^}]+)\}/g, (whole, ref: string) => {
     for (const below of BELOW[tier]) {
       const node = nodeAt(trees[below], ref)
       if (!node) continue
-      const override = node.$extensions?.modes?.[mode]?.$value
-      const next = mode === "dark" && override ? override : node.$value
+      const next = tokens.override(ref, mode) ?? node.$value
       return next
         ? resolveValue(cssValue(next, node.$type), below, mode)
         : whole
@@ -196,7 +189,7 @@ function hasDark(raw: string, tier: Tier): boolean {
     BELOW[tier].some((below) => {
       const node = nodeAt(trees[below], ref)
       if (!node) return false
-      if (node.$extensions?.modes?.dark) return true
+      if (tokens.override(ref, "dark") !== undefined) return true
       return node.$value
         ? hasDark(cssValue(node.$value, node.$type), below)
         : false
@@ -209,7 +202,7 @@ for (const { tier, file } of TIERS) {
   for (const { path, node } of leaves(trees[tier])) {
     const token = path.join(".")
     const lightRef = cssValue(node.$value ?? "", node.$type)
-    const darkValue = node.$extensions?.modes?.dark?.$value
+    const darkValue = tokens.override(token, "dark")
     const darkRef =
       darkValue === undefined ? undefined : cssValue(darkValue, node.$type)
     const dark = darkRef || hasDark(lightRef, tier) ? lightRef : undefined
@@ -346,7 +339,7 @@ const md: string[] = [
   "",
   "# Token Reference",
   "",
-  `> ${entries.length} tokens · source \`tokens/primitive.json\` · \`tokens/semantic.json\` · \`tokens/component.json\``,
+  `> ${entries.length} tokens · source \`tokens/tokens.resolver.json\`: \`primitive.json\` · \`semantic.json\` · \`semantic.dark.json\` · \`component.json\``,
   "> Machine-readable counterpart: `tokens.manifest.json`",
   "",
   "The public tokens are the Semantic and Component tiers. The Primitive tier is private:",

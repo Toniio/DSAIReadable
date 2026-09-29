@@ -20,10 +20,16 @@
  * checked here; that each alias resolves to a real semantic token is checked
  * from the other side by `lint-theme-bridge.ts`.
  *
- * Every tier is also held to the DTCG 2025.10 vocabulary that `tz check` lets
+ * Every tier is also held to the DTCG 2025.10 vocabulary that Terrazzo lets
  * through: a `$type` outside the Format Module (`font-weight` for
  * `fontWeight`), or a `$`-property it does not define (`$private`), is an
  * error — Terrazzo accepts both silently.
+ *
+ * The dark context (tokens/tokens.resolver.json) is held to the semantic
+ * tier's rules: each override names an existing semantic token, keeps its
+ * `$type`, carries nothing but `$type` and `$value`, and is a `{…}` reference.
+ * A mode left in `$extensions.modes`, the convention the resolver replaced,
+ * is an error: no DTCG tool reads it.
  *
  * Exit 1 on any invalid key.
  */
@@ -32,8 +38,11 @@ import fs from "fs"
 import path from "path"
 import {
   DTCG_TYPES,
+  loadTokens,
+  MODES,
   PRIMITIVE_ROOT,
   primitiveGroups,
+  type Tokens,
 } from "../mcp-server/src/lib/dtcg.js"
 
 // ---------------------------------------------------------------------------
@@ -330,24 +339,30 @@ interface KeyError {
 }
 
 /**
- * Tiers 2 and 3 are alias layers: every value, including each mode override,
- * must be a `{…}` reference. A literal there means a design decision was
- * duplicated instead of pointing at the tier below.
+ * A value of Tiers 2 and 3, or of a mode override, that is not a `{…}`
+ * reference. A literal there means a design decision was duplicated instead
+ * of pointing at the tier below.
  */
+function literalError(
+  key: string,
+  label: string,
+  value: unknown
+): KeyError | null {
+  if (typeof value === "string" && /^\{[^{}]+\}$/.test(value.trim()))
+    return null
+  const literal = typeof value === "string" ? value : JSON.stringify(value)
+  return {
+    key,
+    reason: `${label} is the literal ${literal}, not a {…} reference. Move the value into tokens/primitive.json and alias it here.`,
+  }
+}
+
+/** Tiers 2 and 3 are alias layers: every value must be a `{…}` reference. */
 function checkReferencePurity(
   obj: Record<string, unknown>,
   prefix = ""
 ): KeyError[] {
   const errors: KeyError[] = []
-
-  const report = (key: string, label: string, value: unknown) => {
-    const literal = typeof value === "string" ? value : JSON.stringify(value)
-    if (typeof value === "string" && /^\{[^{}]+\}$/.test(value.trim())) return
-    errors.push({
-      key,
-      reason: `${label} is the literal ${literal}, not a {…} reference. Move the value into tokens/primitive.json and alias it here.`,
-    })
-  }
 
   for (const [key, value] of Object.entries(obj)) {
     if (DTCG_META_KEYS.has(key)) continue
@@ -361,19 +376,99 @@ function checkReferencePurity(
       continue
     }
 
-    report(fullKey, "$value", child.$value)
-
-    const modes = (child.$extensions as Record<string, unknown> | undefined)
-      ?.modes as Record<string, unknown> | undefined
-    for (const [mode, override] of Object.entries(modes ?? {})) {
-      const raw =
-        override && typeof override === "object" && "$value" in override
-          ? (override as Record<string, unknown>).$value
-          : override
-      report(fullKey, `mode "${mode}"`, raw)
-    }
+    const error = literalError(fullKey, "$value", child.$value)
+    if (error) errors.push(error)
   }
 
+  return errors
+}
+
+/**
+ * Modes belong to tokens/tokens.resolver.json. `$extensions.modes`, on a
+ * token or a group, is the house convention it replaced.
+ */
+function checkNoExtensionModes(
+  obj: Record<string, unknown>,
+  prefix = ""
+): KeyError[] {
+  const errors: KeyError[] = []
+  const ext = obj.$extensions as Record<string, unknown> | undefined
+  if (ext && "modes" in ext)
+    errors.push({
+      key: prefix || "(root)",
+      reason: `$extensions.modes is not read any more: a mode's value goes in the file its context names in tokens/tokens.resolver.json (dark: tokens/semantic.dark.json).`,
+    })
+  for (const [key, value] of Object.entries(obj))
+    if (!key.startsWith("$") && value && typeof value === "object")
+      errors.push(
+        ...checkNoExtensionModes(
+          value as Record<string, unknown>,
+          prefix ? `${prefix}.${key}` : key
+        )
+      )
+  return errors
+}
+
+/** Each override of a mode context redefines the value of a semantic token. */
+function checkOverrides(tokens: Tokens): KeyError[] {
+  const semantic = tokens.tiers.semantic.tree
+  const errors: KeyError[] = []
+  const typeOf = (path: string) => {
+    let node: unknown = semantic
+    for (const seg of path.split(".")) {
+      if (!node || typeof node !== "object") return undefined
+      node = (node as Record<string, unknown>)[seg]
+    }
+    return node && typeof node === "object" && "$value" in node
+      ? { $type: (node as Record<string, unknown>).$type }
+      : undefined
+  }
+  for (const mode of MODES)
+    for (const [key, override] of tokens.overrides[mode]) {
+      const where = `${override.file} → ${key}`
+      const target = typeOf(key)
+      if (!target) {
+        errors.push({
+          key: where,
+          reason: `The ${mode} context overrides a token tokens/semantic.json does not define. A mode changes the value of a semantic token; it never adds one.`,
+        })
+        continue
+      }
+      if (override.$type !== target.$type)
+        errors.push({
+          key: where,
+          reason: `$type "${String(override.$type)}" differs from the semantic token's "${String(target.$type)}".`,
+        })
+      const error = literalError(where, `mode "${mode}"`, override.$value)
+      if (error) errors.push(error)
+    }
+  return errors
+}
+
+/** The keys of an override file: `$type` and `$value` on each token, no more. */
+function checkOverrideKeys(
+  obj: Record<string, unknown>,
+  prefix = ""
+): KeyError[] {
+  const errors: KeyError[] = []
+  const isToken = "$value" in obj
+  for (const [key, value] of Object.entries(obj)) {
+    if (key.startsWith("$")) {
+      if (!isToken || (key !== "$type" && key !== "$value"))
+        errors.push({
+          key: prefix || "(root)",
+          reason: `"${key}" does not belong in an override: it carries $type and $value only; the description, status and docs stay on the token in tokens/semantic.json.`,
+        })
+      continue
+    }
+    if (!isToken && value && typeof value === "object" && !Array.isArray(value))
+      errors.push(
+        ...checkOverrideKeys(
+          value as Record<string, unknown>,
+          prefix ? `${prefix}.${key}` : key
+        )
+      )
+  }
   return errors
 }
 
@@ -472,6 +567,23 @@ interface TierSpec {
   primitiveRoot?: boolean
 }
 
+function report(
+  rel: string,
+  errors: KeyError[],
+  keyCount: number,
+  label: string
+) {
+  if (errors.length === 0) {
+    console.log(`✅ ${rel} — ${keyCount} keys, all valid (${label})`)
+    return
+  }
+  console.log(`❌ ${rel} — ${errors.length} problem(s) in ${keyCount} keys`)
+  for (const e of errors) {
+    console.log(`   • ${e.key}`)
+    console.log(`     ${e.reason}`)
+  }
+}
+
 function main() {
   const root = process.cwd()
   const tiers: TierSpec[] = [
@@ -527,26 +639,43 @@ function main() {
           })
 
     if (tier.referencesOnly) errors.push(...checkReferencePurity(data))
+    errors.push(...checkNoExtensionModes(file))
 
     totalKeys += keys.length
     totalErrors += errors.length
 
-    const rel = path.relative(root, tier.file)
-    if (errors.length === 0) {
-      console.log(`✅ ${rel} — ${keys.length} keys, all valid (${tier.label})`)
-    } else {
-      console.log(
-        `❌ ${rel} — ${errors.length} problem(s) in ${keys.length} keys`
-      )
-      for (const e of errors) {
-        console.log(`   • ${e.key}`)
-        console.log(`     ${e.reason}`)
-      }
-    }
+    report(path.relative(root, tier.file), errors, keys.length, tier.label)
   }
 
+  // The mode contexts of tokens/tokens.resolver.json.
+  const tokens = loadTokens(root)
+  const overrideFiles = new Set(
+    MODES.flatMap((mode) =>
+      [...tokens.overrides[mode].values()].map((o) => o.file)
+    )
+  )
+  for (const file of overrideFiles) {
+    const data = JSON.parse(
+      fs.readFileSync(path.join(root, file), "utf-8")
+    ) as Record<string, unknown>
+    const keys = flattenKeys(data)
+    const errors = [
+      ...keys
+        .map((key) => validateKey(key, SEMANTIC_GRAMMAR))
+        .filter((e): e is KeyError => e !== null),
+      ...checkOverrideKeys(data),
+      ...checkNoExtensionModes(data),
+    ]
+    totalKeys += keys.length
+    totalErrors += errors.length
+    report(file, errors, keys.length, "Tier 2 — mode overrides")
+  }
+  const overrideErrors = checkOverrides(tokens)
+  totalErrors += overrideErrors.length
+  if (overrideErrors.length > 0) report("mode overrides", overrideErrors, 0, "")
+
   console.log(
-    `\n📊 Summary: ${totalErrors} error(s) in ${totalKeys} keys across ${tiers.length} tier(s).`
+    `\n📊 Summary: ${totalErrors} error(s) in ${totalKeys} keys across ${tiers.length} tier(s) and ${overrideFiles.size} mode file(s).`
   )
 
   if (totalErrors > 0) {

@@ -16,27 +16,25 @@
  *   npx tsx scripts/lint-contrast.ts
  */
 
-import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { blend, luminance } from "./wcag.js"
-import { cssValue } from "../mcp-server/src/lib/dtcg.js"
+import {
+  cssValue,
+  loadTokens,
+  MODES,
+  type Mode,
+} from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
-type Mode = "light" | "dark"
 type Json = Record<string, unknown>
 
-const read = (name: string): Json =>
-  JSON.parse(readFileSync(resolve(ROOT, "tokens", name), "utf-8")) as Json
-
 // The three tiers form one DTCG document: `{primitive.color.mist.500}` lives in
-// primitive.json, `{color.text.default}` in semantic.json.
-const TIERS = [
-  read("primitive.json"),
-  read("semantic.json"),
-  read("component.json"),
-]
+// primitive.json, `{color.text.default}` in semantic.json. The dark context
+// comes from tokens/tokens.resolver.json.
+const tokens = loadTokens(ROOT)
+const TIERS = Object.values(tokens.tiers).map((t) => t.tree)
 
 function lookup(path: string): Json | undefined {
   for (const tier of TIERS) {
@@ -71,11 +69,7 @@ function resolveColor(
   const node = lookup(path)
   if (!node) throw new Error(`Unknown token: ${path}`)
 
-  const override = (
-    (node.$extensions as Json | undefined)?.modes as Json | undefined
-  )?.[mode] as Json | undefined
-
-  const value = override?.$value ?? node.$value
+  const value = tokens.override(path, mode) ?? node.$value
   if (value === undefined) throw new Error(`Token ${path} has no $value`)
 
   const ref = typeof value === "string" ? REF.exec(value) : null
@@ -137,8 +131,6 @@ function tinted(
       )
   )
 }
-
-const MODES: Mode[] = ["light", "dark"]
 
 const PAIRS: Pair[] = [
   // Focus indicators — non-text contrast against the surface they sit on.
