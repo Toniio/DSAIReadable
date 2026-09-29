@@ -96,13 +96,14 @@ problem: fix it, do not disable it.
 
 ## 5. Guards in place
 
-| Guard                             | What it blocks                                                                                                                                            |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.husky/pre-commit` → lint-staged | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                                     |
-| `.husky/commit-msg` → commitlint  | A non-conforming commit message                                                                                                                           |
-| `.husky/pre-push`                 | A direct push to `main`                                                                                                                                   |
-| `.github/workflows/ci.yml`        | 10 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
-| `.github/workflows/pr-lint.yml`   | A non-conforming PR title                                                                                                                                 |
+| Guard                                         | What it blocks                                                                                                                                            |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.husky/pre-commit` → lint-staged             | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                                     |
+| `.husky/commit-msg` → commitlint              | A non-conforming commit message                                                                                                                           |
+| `.husky/pre-push`                             | A direct push to `main`                                                                                                                                   |
+| `.github/workflows/ci.yml`                    | 10 jobs: `tokens-validate`, `typecheck`, `lint`, `build`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
+| `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                                 |
+| `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result                    |
 
 ## 6. Publishing identity
 
