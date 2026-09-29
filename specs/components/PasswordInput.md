@@ -26,7 +26,7 @@ A password field with a button that toggles visibility (open eye / slashed eye).
 - **MUST NOT** — be used for non-sensitive text → use `Input`
 - **MUST NOT** — pass `type`: the component controls it
 - **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
-- **MUST** — in an interface that is not in English, translate the toggle's labels (`UI_STRINGS.passwordInput`)
+- **MUST** — in an interface that is not in English, translate the toggle's labels through `showLabel` / `hideLabel`
 
 ## Dependencies
 
@@ -61,13 +61,15 @@ Composes `InputGroup` — its tokens are listed in its own spec.
 
 Renders `InputGroupInput`.
 
-| Prop           | Type                                          | Default | Description                                         |
-| -------------- | --------------------------------------------- | ------- | --------------------------------------------------- |
-| `id`           | `string`                                      | —       | ID used to tie the field to its label               |
-| `placeholder`  | `string`                                      | —       | Hint text                                           |
-| `autoComplete` | `React.HTMLInputAutoCompleteAttribute`        | —       | Browser hint (`current-password`, `new-password`)   |
-| `className`    | `string`                                      | —       | Additional CSS classes, applied to the `InputGroup` |
-| `...props`     | `Omit<React.ComponentProps<"input">, "type">` | —       | Props passed to the rendered element                |
+| Prop           | Type                                          | Default                         | Description                                                                                  |
+| -------------- | --------------------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------- |
+| `showLabel`    | `string`                                      | `UI_STRINGS.passwordInput.show` | Accessible name of the toggle while the password is hidden; overrides the `UI_STRINGS` value |
+| `hideLabel`    | `string`                                      | `UI_STRINGS.passwordInput.hide` | Accessible name of the toggle while the password is shown; overrides the `UI_STRINGS` value  |
+| `id`           | `string`                                      | —                               | ID used to tie the field to its label                                                        |
+| `placeholder`  | `string`                                      | —                               | Hint text                                                                                    |
+| `autoComplete` | `React.HTMLInputAutoCompleteAttribute`        | —                               | Browser hint (`current-password`, `new-password`)                                            |
+| `className`    | `string`                                      | —                               | Additional CSS classes, applied to the `InputGroup`                                          |
+| `...props`     | `Omit<React.ComponentProps<"input">, "type">` | —                               | Props passed to the rendered element                                                         |
 
 <!-- End of the generated part. -->
 
@@ -102,7 +104,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 | `Tab`             | From the field to the visibility button |
 | `Enter` / `Space` | Shows / hides the password              |
 
-**Accessible name**: The field is labeled like an `Input`. The button is named by `UI_STRINGS.passwordInput.show` / `.hide`, depending on the state.
+**Accessible name**: The field is labeled like an `Input`. The button is named by `showLabel` / `hideLabel` (defaults `UI_STRINGS.passwordInput.show` / `.hide`), depending on the state.
 
 **Pitfalls**:
 

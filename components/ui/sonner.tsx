@@ -12,7 +12,6 @@ import {
   SpinnerIcon,
 } from "@phosphor-icons/react"
 
-import type { ComponentProps } from "react"
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()
 

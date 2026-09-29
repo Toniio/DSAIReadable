@@ -31,7 +31,7 @@ A composable row that stands for one entry in a list, with slots for media, a ti
 - **MUST** — render an `ItemTitle` in every `Item`
 - **MUST NOT** — combine the `outline` and `muted` variants
 - **MUST** — keep the `xs` size for context menus, never a main list
-- **MUST NOT** — place more than 3 actions in `ItemActions`
+- **MUST NOT** — place more than 3 actions in `ItemActions` → put the others in a `DropdownMenu`
 - **MUST** — place each `Item` of an `ItemGroup` as a direct child (or through `.map()`): `ItemGroup` gives it `role="listitem"`. An `Item` rendered by an intermediate component is not detected — pass it `role="listitem"` explicitly
 
 ## Dependencies

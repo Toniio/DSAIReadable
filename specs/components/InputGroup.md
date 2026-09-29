@@ -39,12 +39,13 @@ A container that arranges an input with add-ons — icons, buttons, text, labels
 
 ## Anatomy
 
-| Slot                              | Role                                                                                              |
-| --------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `data-slot="input-group"`         | Group root, a bordered flex container                                                             |
-| `data-slot="input-group-addon"`   | Add-on area (icon, text, button), positioned through `data-align`                                 |
-| `data-slot="input-group-control"` | Child input or textarea (its focus and validation state show on the group)                        |
-| `data-slot="input-group-button"`  | Inline button that inherits the `data-size` prop — set through `Button`, not declared on the slot |
+| Slot                              | Role                                                                       |
+| --------------------------------- | -------------------------------------------------------------------------- |
+| `data-slot="input-group"`         | Group root, a bordered flex container                                      |
+| `data-slot="input-group-addon"`   | Add-on area (icon, text, button), positioned through `data-align`          |
+| `data-slot="input-group-control"` | Child input or textarea (its focus and validation state show on the group) |
+| `data-slot="input-group-button"`  | Inline button; carries `data-size`, set through `Button`                   |
+| `data-slot="input-group-text"`    | Static text inside an add-on (unit, prefix)                                |
 
 ## Tokens
 

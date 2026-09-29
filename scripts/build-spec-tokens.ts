@@ -22,6 +22,14 @@
  * Only semantic tokens are listed. Classes that read no token — Tailwind's
  * spacing scale (`p-2`), sizes, layout — are left out on purpose.
  *
+ * Tailwind is driven through `__unstable__loadDesignSystem` from
+ * `@tailwindcss/node`: a private, unversioned API, the only one that resolves
+ * a class to its CSS against a full stylesheet. It must come from the same
+ * release as `tailwindcss` — Dependabot bumps the `tailwind` group together.
+ * When a Tailwind upgrade breaks it, the symptom is here, not in the build:
+ * this script throws on import or on `candidatesToCss`, or every Tokens
+ * section comes out empty, and `specs:validate` fails with it.
+ *
  *   npx tsx scripts/build-spec-tokens.ts [--check]
  */
 

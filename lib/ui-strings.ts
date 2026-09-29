@@ -31,6 +31,11 @@ export const UI_STRINGS = Object.freeze({
     /** The button that removes a chip from a multiple selection: it names the item. */
     remove: (item: string) => `Remove ${item}`,
   }),
+  command: Object.freeze({
+    /** Visually hidden title and description of CommandDialog: they name the dialog. */
+    dialogTitle: "Command Palette",
+    dialogDescription: "Search for a command to run...",
+  }),
   dialog: Object.freeze({
     close: "Close",
   }),

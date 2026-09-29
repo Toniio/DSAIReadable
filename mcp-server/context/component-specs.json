@@ -2104,6 +2104,10 @@
       {
         "slot": "`data-slot=\"button-group-separator\"`",
         "role": "Visual separator between the group's items"
+      },
+      {
+        "slot": "`data-slot=\"button-group-text\"`",
+        "role": "Text block (label, prefix, unit) shown as one of the group's items"
       }
     ],
     "tokens": [
@@ -2310,6 +2314,10 @@
       {
         "slot": "`data-slot=\"calendar\"`",
         "role": "Root (the main container)"
+      },
+      {
+        "slot": "`data-slot=\"calendar-day-button\"`",
+        "role": "Button of a single day; carries `data-day` and the `data-range-*` / `data-selected-single` state"
       }
     ],
     "tokens": [
@@ -3183,6 +3191,14 @@
       {
         "slot": "`data-slot=\"chart\"`",
         "role": "Container root; carries `data-chart` so CSS can target the colors"
+      },
+      {
+        "slot": "`data-slot=\"chart-tooltip-content\"`",
+        "role": "Tooltip panel rendered inside Recharts' tooltip"
+      },
+      {
+        "slot": "`data-slot=\"chart-legend-content\"`",
+        "role": "Legend row rendered inside Recharts' legend"
       }
     ],
     "tokens": [
@@ -4676,15 +4692,15 @@
         "component": "CommandDialog",
         "prop": "`title`",
         "type": "`string`",
-        "default": "`\"Command Palette\"`",
-        "description": "Accessible title of the dialog (`sr-only`)"
+        "default": "`UI_STRINGS.command.dialogTitle`",
+        "description": "Accessible title of the dialog (`sr-only`); overrides the `UI_STRINGS` value"
       },
       {
         "component": "CommandDialog",
         "prop": "`description`",
         "type": "`string`",
-        "default": "`\"Search for a command to run...\"`",
-        "description": "Accessible description of the dialog (`sr-only`)"
+        "default": "`UI_STRINGS.command.dialogDescription`",
+        "description": "Accessible description of the dialog (`sr-only`); overrides the `UI_STRINGS` value"
       },
       {
         "component": "CommandDialog",
@@ -8165,7 +8181,11 @@
       },
       {
         "slot": "`data-slot=\"input-group-button\"`",
-        "role": "Inline button that inherits the `data-size` prop — set through `Button`, not declared on the slot"
+        "role": "Inline button; carries `data-size`, set through `Button`"
+      },
+      {
+        "slot": "`data-slot=\"input-group-text\"`",
+        "role": "Static text inside an add-on (unit, prefix)"
       }
     ],
     "tokens": [
@@ -8716,7 +8736,7 @@
       "**MUST** — render an `ItemTitle` in every `Item`",
       "**MUST NOT** — combine the `outline` and `muted` variants",
       "**MUST** — keep the `xs` size for context menus, never a main list",
-      "**MUST NOT** — place more than 3 actions in `ItemActions`",
+      "**MUST NOT** — place more than 3 actions in `ItemActions` → put the others in a `DropdownMenu`",
       "**MUST** — place each `Item` of an `ItemGroup` as a direct child (or through `.map()`): `ItemGroup` gives it `role=\"listitem\"`. An `Item` rendered by an intermediate component is not detected — pass it `role=\"listitem\"` explicitly"
     ],
     "dependencies": [
@@ -10820,6 +10840,14 @@
         "role": "`<a>` link to a page; carries `data-active`"
       },
       {
+        "slot": "`data-slot=\"pagination-previous\"`",
+        "role": "Link to the previous page (a `pagination-link` renamed)"
+      },
+      {
+        "slot": "`data-slot=\"pagination-next\"`",
+        "role": "Link to the next page (a `pagination-link` renamed)"
+      },
+      {
         "slot": "`data-slot=\"pagination-ellipsis\"`",
         "role": "Marks where page numbers have been collapsed"
       }
@@ -11024,7 +11052,7 @@
       "**MUST NOT** — be used for non-sensitive text → use `Input`",
       "**MUST NOT** — pass `type`: the component controls it",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
-      "**MUST** — in an interface that is not in English, translate the toggle's labels (`UI_STRINGS.passwordInput`)"
+      "**MUST** — in an interface that is not in English, translate the toggle's labels through `showLabel` / `hideLabel`"
     ],
     "dependencies": [
       "`InputGroup` — the structuring container",
@@ -11062,6 +11090,20 @@
       }
     ],
     "props": [
+      {
+        "component": "PasswordInput",
+        "prop": "`showLabel`",
+        "type": "`string`",
+        "default": "`UI_STRINGS.passwordInput.show`",
+        "description": "Accessible name of the toggle while the password is hidden; overrides the `UI_STRINGS` value"
+      },
+      {
+        "component": "PasswordInput",
+        "prop": "`hideLabel`",
+        "type": "`string`",
+        "default": "`UI_STRINGS.passwordInput.hide`",
+        "description": "Accessible name of the toggle while the password is shown; overrides the `UI_STRINGS` value"
+      },
       {
         "component": "PasswordInput",
         "prop": "`id`",
@@ -11128,7 +11170,7 @@
         "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
       }
     ],
-    "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `UI_STRINGS.passwordInput.show` / `.hide`, depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Show the password rules before the user types, linked through `aria-describedby`.",
+    "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `showLabel` / `hideLabel` (defaults `UI_STRINGS.passwordInput.show` / `.hide`), depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Show the password rules before the user types, linked through `aria-describedby`.",
     "code_example": "import { Field, FieldLabel } from \"@/components/ui/field\"\nimport { PasswordInput } from \"@/components/ui/password-input\"\n\nexport default function Example() {\n  return (\n    <Field>\n      <FieldLabel htmlFor=\"password\">Password</FieldLabel>\n      <PasswordInput id=\"password\" autoComplete=\"current-password\" />\n    </Field>\n  )\n}",
     "cross_references": [
       "Field",
@@ -15059,7 +15101,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "TabsTrigger"

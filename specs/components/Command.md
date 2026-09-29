@@ -88,13 +88,13 @@ Renders `CommandPrimitive`.
 
 Renders `Dialog`.
 
-| Prop              | Type                                  | Default                            | Description                                      |
-| ----------------- | ------------------------------------- | ---------------------------------- | ------------------------------------------------ |
-| `title`           | `string`                              | `"Command Palette"`                | Accessible title of the dialog (`sr-only`)       |
-| `description`     | `string`                              | `"Search for a command to run..."` | Accessible description of the dialog (`sr-only`) |
-| `className`       | `string`                              | —                                  | Additional CSS classes on the content            |
-| `showCloseButton` | `boolean`                             | `false`                            | Shows the dialog's close button                  |
-| `...props`        | `React.ComponentProps<typeof Dialog>` | —                                  | `Dialog` props                                   |
+| Prop              | Type                                  | Default                                | Description                                                                        |
+| ----------------- | ------------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------- |
+| `title`           | `string`                              | `UI_STRINGS.command.dialogTitle`       | Accessible title of the dialog (`sr-only`); overrides the `UI_STRINGS` value       |
+| `description`     | `string`                              | `UI_STRINGS.command.dialogDescription` | Accessible description of the dialog (`sr-only`); overrides the `UI_STRINGS` value |
+| `className`       | `string`                              | —                                      | Additional CSS classes on the content                                              |
+| `showCloseButton` | `boolean`                             | `false`                                | Shows the dialog's close button                                                    |
+| `...props`        | `React.ComponentProps<typeof Dialog>` | —                                      | `Dialog` props                                                                     |
 
 ### `CommandInput`
 

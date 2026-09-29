@@ -92,6 +92,7 @@ function InputGroupButton({
   VariantProps<typeof inputGroupButtonVariants>) {
   return (
     <Button
+      data-slot="input-group-button"
       type={type}
       data-size={size}
       variant={variant}
@@ -104,6 +105,7 @@ function InputGroupButton({
 function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
+      data-slot="input-group-text"
       className={cn(
         "flex items-center gap-2 text-xs text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className

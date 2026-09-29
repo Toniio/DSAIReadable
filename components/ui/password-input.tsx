@@ -12,10 +12,16 @@ import {
 } from "@/components/ui/input-group"
 
 import { UI_STRINGS } from "@/lib/ui-strings"
+
 function PasswordInput({
   className,
+  showLabel = UI_STRINGS.passwordInput.show,
+  hideLabel = UI_STRINGS.passwordInput.hide,
   ...props
-}: Omit<React.ComponentProps<"input">, "type">) {
+}: Omit<React.ComponentProps<"input">, "type"> & {
+  showLabel?: string
+  hideLabel?: string
+}) {
   const [visible, setVisible] = React.useState(false)
 
   return (
@@ -25,11 +31,7 @@ function PasswordInput({
         <InputGroupButton
           size="icon-xs"
           variant="ghost"
-          aria-label={
-            visible
-              ? UI_STRINGS.passwordInput.hide
-              : UI_STRINGS.passwordInput.show
-          }
+          aria-label={visible ? hideLabel : showLabel}
           onClick={() => setVisible((v) => !v)}
         >
           {visible ? <EyeSlash /> : <Eye />}

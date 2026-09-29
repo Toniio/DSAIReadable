@@ -49,6 +49,7 @@ function ButtonGroupText({
 
   return (
     <Comp
+      data-slot="button-group-text"
       className={cn(
         "flex items-center gap-2 rounded-none border bg-muted px-2.5 text-xs font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className

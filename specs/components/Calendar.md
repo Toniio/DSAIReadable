@@ -40,9 +40,10 @@ An interactive date picker built on `react-day-picker`: single, multiple or rang
 
 ## Anatomy
 
-| Slot                   | Role                      |
-| ---------------------- | ------------------------- |
-| `data-slot="calendar"` | Root (the main container) |
+| Slot                              | Role                                                                                             |
+| --------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `data-slot="calendar"`            | Root (the main container)                                                                        |
+| `data-slot="calendar-day-button"` | Button of a single day; carries `data-day` and the `data-range-*` / `data-selected-single` state |
 
 ## Tokens
 

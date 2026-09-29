@@ -86,6 +86,8 @@ function ChartContainer({
   )
 }
 
+// no-data-slot: ChartStyle renders a <style> element, which holds CSS and is
+// never painted, so there is nothing on screen to recognize.
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
     ([, config]) => config.theme ?? config.color
@@ -119,6 +121,8 @@ ${colorConfig
   )
 }
 
+// no-data-slot: ChartTooltip is Recharts' own Tooltip, re-exported as is: its
+// wrapper element belongs to Recharts. ChartTooltipContent carries the slot.
 const ChartTooltip = RechartsPrimitive.Tooltip
 
 function ChartTooltipContent({
@@ -195,6 +199,7 @@ function ChartTooltipContent({
 
   return (
     <div
+      data-slot="chart-tooltip-content"
       className={cn(
         "grid min-w-32 items-start gap-1.5 rounded-none border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
         className
@@ -275,6 +280,8 @@ function ChartTooltipContent({
   )
 }
 
+// no-data-slot: ChartLegend is Recharts' own Legend, re-exported as is: its
+// wrapper element belongs to Recharts. ChartLegendContent carries the slot.
 const ChartLegend = RechartsPrimitive.Legend
 
 function ChartLegendContent({
@@ -295,6 +302,7 @@ function ChartLegendContent({
 
   return (
     <div
+      data-slot="chart-legend-content"
       className={cn(
         "flex items-center justify-center gap-4",
         verticalAlign === "top" ? "pb-3" : "pt-3",

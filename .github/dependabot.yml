@@ -9,10 +9,33 @@ updates:
     schedule:
       interval: weekly
     groups:
+      # Listed first: a dependency joins the first group it matches. Tailwind's
+      # packages move together, majors included: scripts/build-spec-tokens.ts
+      # calls a private API of @tailwindcss/node that must match tailwindcss.
+      tailwind:
+        patterns:
+          - tailwindcss
+          - "@tailwindcss/*"
       npm-minor-and-patch:
         update-types:
           - minor
           - patch
+    ignore:
+      # Ignored on 2026-09-29 (Toniio/DSAIReadable#43 and #46, closed).
+      # TypeScript 7 ships no JavaScript compiler API: generate-context,
+      # specs:api, specs:tokens and index:data-slot all read the code through
+      # it (`ts.ScriptTarget` is undefined). typescript-eslint does not support
+      # it yet either. Lift this once both have a path forward.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
+      # Ignored on 2026-09-28 (Toniio/DSAIReadable#37, closed). The code runs
+      # on Node 24 (.nvmrc, the workflows) and the types are already one major
+      # ahead: each further major accepts more APIs the runtime lacks. Raise it
+      # with the Node version, not alone.
+      - dependency-name: "@types/node"
+        update-types:
+          - version-update:semver-major
     commit-message:
       prefix: chore
       include: scope

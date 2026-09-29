@@ -38,9 +38,11 @@ A container and a set of helpers for data visualization, built on `recharts`: th
 
 ## Anatomy
 
-| Slot                | Role                                                              |
-| ------------------- | ----------------------------------------------------------------- |
-| `data-slot="chart"` | Container root; carries `data-chart` so CSS can target the colors |
+| Slot                                | Role                                                              |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| `data-slot="chart"`                 | Container root; carries `data-chart` so CSS can target the colors |
+| `data-slot="chart-tooltip-content"` | Tooltip panel rendered inside Recharts' tooltip                   |
+| `data-slot="chart-legend-content"`  | Legend row rendered inside Recharts' legend                       |
 
 ## Tokens
 

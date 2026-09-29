@@ -607,7 +607,7 @@
       "**MUST** — render an `ItemTitle` in every `Item`",
       "**MUST NOT** — combine the `outline` and `muted` variants",
       "**MUST** — keep the `xs` size for context menus, never a main list",
-      "**MUST NOT** — place more than 3 actions in `ItemActions`",
+      "**MUST NOT** — place more than 3 actions in `ItemActions` → put the others in a `DropdownMenu`",
       "**MUST** — place each `Item` of an `ItemGroup` as a direct child (or through `.map()`): `ItemGroup` gives it `role=\"listitem\"`. An `Item` rendered by an intermediate component is not detected — pass it `role=\"listitem\"` explicitly"
     ],
     "Kbd": [
@@ -662,7 +662,7 @@
       "**MUST NOT** — be used for non-sensitive text → use `Input`",
       "**MUST NOT** — pass `type`: the component controls it",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
-      "**MUST** — in an interface that is not in English, translate the toggle's labels (`UI_STRINGS.passwordInput`)"
+      "**MUST** — in an interface that is not in English, translate the toggle's labels through `showLabel` / `hideLabel`"
     ],
     "Popover": [
       "**MUST NOT** — show plain help text → use `Tooltip` or `HoverCard`",

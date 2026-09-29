@@ -3,14 +3,6 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { loadContext, notFound, text } from "../lib/context.js"
 import { READ_ONLY } from "../lib/annotations.js"
 
-interface ChartEntry {
-  type?: string
-  name?: string
-  objective?: string
-  objectives?: string[]
-  [key: string]: unknown
-}
-
 export function registerDatavizTools(server: McpServer): void {
   // 1. get_dataviz_recommendation
   server.registerTool(

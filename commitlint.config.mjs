@@ -1,11 +1,23 @@
-export default {
+const config = {
   extends: ["@commitlint/config-conventional"],
   rules: {
     // Allowed types = the branch prefixes of the trunk-based workflow.
     "type-enum": [
       2,
       "always",
-      ["feat", "fix", "chore", "docs", "ci", "refactor", "test", "style", "perf", "build", "revert"],
+      [
+        "feat",
+        "fix",
+        "chore",
+        "docs",
+        "ci",
+        "refactor",
+        "test",
+        "style",
+        "perf",
+        "build",
+        "revert",
+      ],
     ],
     // With squash merges, the PR title becomes the commit message: it must
     // stay readable in a changelog.
@@ -13,3 +25,5 @@ export default {
     "body-max-line-length": [0],
   },
 }
+
+export default config
