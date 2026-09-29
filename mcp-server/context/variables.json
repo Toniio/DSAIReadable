@@ -992,234 +992,234 @@
     "status": "active"
   },
   {
-    "path": "shadcn.shadcn.background",
+    "path": "shadcn.background",
     "value_light": "{color.background.default}",
     "value_dark": "{color.background.default}",
-    "css_variable": "--shadcn-background",
+    "css_variable": "--background",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.foreground",
+    "path": "shadcn.foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
-    "css_variable": "--shadcn-foreground",
+    "css_variable": "--foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.card",
+    "path": "shadcn.card",
     "value_light": "{color.background.subtle}",
     "value_dark": "{color.background.subtle}",
-    "css_variable": "--shadcn-card",
+    "css_variable": "--card",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.card-foreground",
+    "path": "shadcn.card-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
-    "css_variable": "--shadcn-card-foreground",
+    "css_variable": "--card-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.popover",
+    "path": "shadcn.popover",
     "value_light": "{color.background.elevated}",
     "value_dark": "{color.background.elevated}",
-    "css_variable": "--shadcn-popover",
+    "css_variable": "--popover",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.popover-foreground",
+    "path": "shadcn.popover-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
-    "css_variable": "--shadcn-popover-foreground",
+    "css_variable": "--popover-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.primary",
+    "path": "shadcn.primary",
     "value_light": "{color.action.background.default}",
     "value_dark": "{color.action.background.default}",
-    "css_variable": "--shadcn-primary",
+    "css_variable": "--primary",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.primary-foreground",
+    "path": "shadcn.primary-foreground",
     "value_light": "{color.action.background.foreground}",
     "value_dark": "{color.action.background.foreground}",
-    "css_variable": "--shadcn-primary-foreground",
+    "css_variable": "--primary-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.secondary",
+    "path": "shadcn.secondary",
     "value_light": "{color.background.subtle}",
     "value_dark": "{color.background.subtle}",
-    "css_variable": "--shadcn-secondary",
+    "css_variable": "--secondary",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.secondary-foreground",
+    "path": "shadcn.secondary-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
-    "css_variable": "--shadcn-secondary-foreground",
+    "css_variable": "--secondary-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.muted",
+    "path": "shadcn.muted",
     "value_light": "{color.background.subtle}",
     "value_dark": "{color.background.subtle}",
-    "css_variable": "--shadcn-muted",
+    "css_variable": "--muted",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.muted-foreground",
+    "path": "shadcn.muted-foreground",
     "value_light": "{color.text.subtle}",
     "value_dark": "{color.text.subtle}",
-    "css_variable": "--shadcn-muted-foreground",
+    "css_variable": "--muted-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.accent",
+    "path": "shadcn.accent",
     "value_light": "{color.background.subtle}",
     "value_dark": "{color.background.subtle}",
-    "css_variable": "--shadcn-accent",
+    "css_variable": "--accent",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.accent-foreground",
+    "path": "shadcn.accent-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
-    "css_variable": "--shadcn-accent-foreground",
+    "css_variable": "--accent-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.destructive",
+    "path": "shadcn.destructive",
     "value_light": "{color.feedback.error.default}",
     "value_dark": "{color.feedback.error.default}",
-    "css_variable": "--shadcn-destructive",
+    "css_variable": "--destructive",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.destructive-foreground",
+    "path": "shadcn.destructive-foreground",
     "value_light": "{color.feedback.error.foreground}",
     "value_dark": "{color.feedback.error.foreground}",
-    "css_variable": "--shadcn-destructive-foreground",
+    "css_variable": "--destructive-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.border",
+    "path": "shadcn.border",
     "value_light": "{color.border.default}",
     "value_dark": "{color.border.default}",
-    "css_variable": "--shadcn-border",
+    "css_variable": "--border",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.input",
+    "path": "shadcn.input",
     "value_light": "{color.border.input}",
     "value_dark": "{color.border.input}",
-    "css_variable": "--shadcn-input",
+    "css_variable": "--input",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.ring",
+    "path": "shadcn.ring",
     "value_light": "{color.border.focus}",
     "value_dark": "{color.border.focus}",
-    "css_variable": "--shadcn-ring",
+    "css_variable": "--ring",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.radius",
+    "path": "shadcn.radius",
     "value_light": "{radius.lg}",
     "value_dark": "{radius.lg}",
-    "css_variable": "--shadcn-radius",
+    "css_variable": "--radius",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.chart-1",
+    "path": "shadcn.chart-1",
     "value_light": "{color.chart.1}",
     "value_dark": "{color.chart.1}",
-    "css_variable": "--shadcn-chart-1",
+    "css_variable": "--chart-1",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.chart-2",
+    "path": "shadcn.chart-2",
     "value_light": "{color.chart.2}",
     "value_dark": "{color.chart.2}",
-    "css_variable": "--shadcn-chart-2",
+    "css_variable": "--chart-2",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.chart-3",
+    "path": "shadcn.chart-3",
     "value_light": "{color.chart.3}",
     "value_dark": "{color.chart.3}",
-    "css_variable": "--shadcn-chart-3",
+    "css_variable": "--chart-3",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.chart-4",
+    "path": "shadcn.chart-4",
     "value_light": "{color.chart.4}",
     "value_dark": "{color.chart.4}",
-    "css_variable": "--shadcn-chart-4",
+    "css_variable": "--chart-4",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.chart-5",
+    "path": "shadcn.chart-5",
     "value_light": "{color.chart.5}",
     "value_dark": "{color.chart.5}",
-    "css_variable": "--shadcn-chart-5",
+    "css_variable": "--chart-5",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar",
+    "path": "shadcn.sidebar",
     "value_light": "{color.sidebar.background}",
     "value_dark": "{color.sidebar.background}",
-    "css_variable": "--shadcn-sidebar",
+    "css_variable": "--sidebar",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar-foreground",
+    "path": "shadcn.sidebar-foreground",
     "value_light": "{color.sidebar.foreground}",
     "value_dark": "{color.sidebar.foreground}",
-    "css_variable": "--shadcn-sidebar-foreground",
+    "css_variable": "--sidebar-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar-primary",
+    "path": "shadcn.sidebar-primary",
     "value_light": "{color.sidebar.primary.default}",
     "value_dark": "{color.sidebar.primary.default}",
-    "css_variable": "--shadcn-sidebar-primary",
+    "css_variable": "--sidebar-primary",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar-primary-foreground",
+    "path": "shadcn.sidebar-primary-foreground",
     "value_light": "{color.sidebar.primary.on}",
     "value_dark": "{color.sidebar.primary.on}",
-    "css_variable": "--shadcn-sidebar-primary-foreground",
+    "css_variable": "--sidebar-primary-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar-accent",
+    "path": "shadcn.sidebar-accent",
     "value_light": "{color.sidebar.accent.default}",
     "value_dark": "{color.sidebar.accent.default}",
-    "css_variable": "--shadcn-sidebar-accent",
+    "css_variable": "--sidebar-accent",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar-accent-foreground",
+    "path": "shadcn.sidebar-accent-foreground",
     "value_light": "{color.sidebar.accent.foreground}",
     "value_dark": "{color.sidebar.accent.foreground}",
-    "css_variable": "--shadcn-sidebar-accent-foreground",
+    "css_variable": "--sidebar-accent-foreground",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar-border",
+    "path": "shadcn.sidebar-border",
     "value_light": "{color.sidebar.border}",
     "value_dark": "{color.sidebar.border}",
-    "css_variable": "--shadcn-sidebar-border",
+    "css_variable": "--sidebar-border",
     "tier": "component"
   },
   {
-    "path": "shadcn.shadcn.sidebar-ring",
+    "path": "shadcn.sidebar-ring",
     "value_light": "{color.sidebar.ring}",
     "value_dark": "{color.sidebar.ring}",
-    "css_variable": "--shadcn-sidebar-ring",
+    "css_variable": "--sidebar-ring",
     "tier": "component"
   }
 ]

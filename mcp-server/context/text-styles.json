@@ -1,182 +1,188 @@
 {
   "font_families": [
     {
-      "token": "`typography.font-family.mono`",
-      "css_variable": "`--typography-font-family-mono`",
+      "token": "typography.font-family.mono",
+      "css_variable": "--typography-font-family-mono",
       "family": "JetBrains Mono",
-      "tailwind_class": "`font-mono`",
-      "usage": "**The application's default typeface** — all UI text"
+      "tailwind_class": "font-mono",
+      "usage": "The application's default typeface — all UI text"
     },
     {
-      "token": "`typography.font-family.sans`",
-      "css_variable": "`--typography-font-family-sans`",
+      "token": "typography.font-family.sans",
+      "css_variable": "--typography-font-family-sans",
       "family": "Geist Sans",
-      "tailwind_class": "`font-sans`",
-      "usage": "`Kbd` keys and long editorial content; never for the interface"
+      "tailwind_class": "font-sans",
+      "usage": "Kbd keys and long editorial content; never for the interface"
     }
   ],
   "type_scale": [
     {
-      "token": "`typography.size.xs`",
-      "css_variable": "`--typography-size-xs`",
-      "rem": "`0.75rem`",
+      "token": "typography.size.xs",
+      "css_variable": "--typography-size-xs",
+      "rem": "0.75rem",
       "px": "12 px",
-      "tailwind_class": "`text-xs`",
+      "tailwind_class": "text-xs",
       "usage": "Labels, badges, chart legends"
     },
     {
-      "token": "`typography.size.sm`",
-      "css_variable": "`--typography-size-sm`",
-      "rem": "`0.875rem`",
+      "token": "typography.size.sm",
+      "css_variable": "--typography-size-sm",
+      "rem": "0.875rem",
       "px": "14 px",
-      "tailwind_class": "`text-sm`",
+      "tailwind_class": "text-sm",
       "usage": "Secondary text, field labels, helper text"
     },
     {
-      "token": "`typography.size.base`",
-      "css_variable": "`--typography-size-base`",
-      "rem": "`1rem`",
+      "token": "typography.size.base",
+      "css_variable": "--typography-size-base",
+      "rem": "1rem",
       "px": "16 px",
-      "tailwind_class": "`text-base`",
+      "tailwind_class": "text-base",
       "usage": "Main body text"
     },
     {
-      "token": "`typography.size.lg`",
-      "css_variable": "`--typography-size-lg`",
-      "rem": "`1.125rem`",
+      "token": "typography.size.lg",
+      "css_variable": "--typography-size-lg",
+      "rem": "1.125rem",
       "px": "18 px",
-      "tailwind_class": "`text-lg`",
+      "tailwind_class": "text-lg",
       "usage": "Emphasized body text, introductions"
     },
     {
-      "token": "`typography.size.xl`",
-      "css_variable": "`--typography-size-xl`",
-      "rem": "`1.25rem`",
+      "token": "typography.size.xl",
+      "css_variable": "--typography-size-xl",
+      "rem": "1.25rem",
       "px": "20 px",
-      "tailwind_class": "`text-xl`",
+      "tailwind_class": "text-xl",
       "usage": "Section headings (h3, h4)"
     },
     {
-      "token": "`typography.size.2xl`",
-      "css_variable": "`--typography-size-2xl`",
-      "rem": "`1.5rem`",
+      "token": "typography.size.2xl",
+      "css_variable": "--typography-size-2xl",
+      "rem": "1.5rem",
       "px": "24 px",
-      "tailwind_class": "`text-2xl`",
+      "tailwind_class": "text-2xl",
       "usage": "Page headings (h2)"
     },
     {
-      "token": "`typography.size.3xl`",
-      "css_variable": "`--typography-size-3xl`",
-      "rem": "`1.875rem`",
+      "token": "typography.size.3xl",
+      "css_variable": "--typography-size-3xl",
+      "rem": "1.875rem",
       "px": "30 px",
-      "tailwind_class": "`text-3xl`",
+      "tailwind_class": "text-3xl",
       "usage": "Hero headings (h1)"
     },
     {
-      "token": "`typography.size.4xl`",
-      "css_variable": "`--typography-size-4xl`",
-      "rem": "`2.25rem`",
+      "token": "typography.size.4xl",
+      "css_variable": "--typography-size-4xl",
+      "rem": "2.25rem",
       "px": "36 px",
-      "tailwind_class": "`text-4xl`",
+      "tailwind_class": "text-4xl",
       "usage": "Display headings — rare"
     }
   ],
   "line_heights": [
     {
-      "token": "`typography.line-height.tight`",
-      "css_variable": "`--typography-line-height-tight`",
-      "value": "`1.25`",
-      "tailwind_class": "`leading-tight`",
+      "token": "typography.line-height.tight",
+      "css_variable": "--typography-line-height-tight",
+      "value": "1.25",
+      "tailwind_class": "leading-tight",
       "usage": "Headings — short text on 1 or 2 lines"
     },
     {
-      "token": "`typography.line-height.snug`",
-      "css_variable": "`--typography-line-height-snug`",
-      "value": "`1.375`",
-      "tailwind_class": "`leading-snug`",
+      "token": "typography.line-height.snug",
+      "css_variable": "--typography-line-height-snug",
+      "value": "1.375",
+      "tailwind_class": "leading-snug",
       "usage": "Subheadings, multi-line labels"
     },
     {
-      "token": "`typography.line-height.normal`",
-      "css_variable": "`--typography-line-height-normal`",
-      "value": "`1.5`",
-      "tailwind_class": "`leading-normal`",
+      "token": "typography.line-height.normal",
+      "css_variable": "--typography-line-height-normal",
+      "value": "1.5",
+      "tailwind_class": "leading-normal",
       "usage": "Default body text"
     },
     {
-      "token": "`typography.line-height.relaxed`",
-      "css_variable": "`--typography-line-height-relaxed`",
-      "value": "`1.625`",
-      "tailwind_class": "`leading-relaxed`",
+      "token": "typography.line-height.relaxed",
+      "css_variable": "--typography-line-height-relaxed",
+      "value": "1.625",
+      "tailwind_class": "leading-relaxed",
       "usage": "Long-form text, articles"
     },
     {
-      "token": "`typography.line-height.loose`",
-      "css_variable": "`--typography-line-height-loose`",
-      "value": "`2`",
-      "tailwind_class": "`leading-loose`",
+      "token": "typography.line-height.loose",
+      "css_variable": "--typography-line-height-loose",
+      "value": "2",
+      "tailwind_class": "leading-loose",
       "usage": "Very airy text — seldom used"
     }
   ],
   "font_weights": [
     {
-      "token": "`typography.font-weight.normal`",
-      "css_variable": "`--typography-font-weight-normal`",
-      "value": "`400`",
-      "tailwind_class": "`font-normal`",
+      "token": "typography.font-weight.normal",
+      "css_variable": "--typography-font-weight-normal",
+      "value": "400",
+      "tailwind_class": "font-normal",
       "usage": "Standard body text"
     },
     {
-      "token": "`typography.font-weight.medium`",
-      "css_variable": "`--typography-font-weight-medium`",
-      "value": "`500`",
-      "tailwind_class": "`font-medium`",
+      "token": "typography.font-weight.medium",
+      "css_variable": "--typography-font-weight-medium",
+      "value": "500",
+      "tailwind_class": "font-medium",
       "usage": "UI labels, buttons, navigation items"
     },
     {
-      "token": "`typography.font-weight.semibold`",
-      "css_variable": "`--typography-font-weight-semibold`",
-      "value": "`600`",
-      "tailwind_class": "`font-semibold`",
+      "token": "typography.font-weight.semibold",
+      "css_variable": "--typography-font-weight-semibold",
+      "value": "600",
+      "tailwind_class": "font-semibold",
       "usage": "Subheadings, emphasis in the UI"
     },
     {
-      "token": "`typography.font-weight.bold`",
-      "css_variable": "`--typography-font-weight-bold`",
-      "value": "`700`",
-      "tailwind_class": "`font-bold`",
+      "token": "typography.font-weight.bold",
+      "css_variable": "--typography-font-weight-bold",
+      "value": "700",
+      "tailwind_class": "font-bold",
       "usage": "Main headings, strong emphasis"
     }
   ],
   "letter_spacings": [
     {
-      "token": "`typography.letter-spacing.tight`",
-      "css_variable": "`--typography-letter-spacing-tight`",
-      "value": "`-0.025em`",
-      "tailwind_class": "`tracking-tight`",
+      "token": "typography.letter-spacing.tight",
+      "css_variable": "--typography-letter-spacing-tight",
+      "value": "-0.025em",
+      "tailwind_class": "tracking-tight",
       "usage": "Large headings (3xl, 4xl) — tightens the letters"
     },
     {
-      "token": "`typography.letter-spacing.normal`",
-      "css_variable": "`--typography-letter-spacing-normal`",
-      "value": "`0em`",
-      "tailwind_class": "`tracking-normal`",
+      "token": "typography.letter-spacing.normal",
+      "css_variable": "--typography-letter-spacing-normal",
+      "value": "0em",
+      "tailwind_class": "tracking-normal",
       "usage": "Running text — the default"
     },
     {
-      "token": "`typography.letter-spacing.wide`",
-      "css_variable": "`--typography-letter-spacing-wide`",
-      "value": "`0.025em`",
-      "tailwind_class": "`tracking-wide`",
+      "token": "typography.letter-spacing.wide",
+      "css_variable": "--typography-letter-spacing-wide",
+      "value": "0.025em",
+      "tailwind_class": "tracking-wide",
       "usage": "Small UI labels (xs, sm)"
     },
     {
-      "token": "`typography.letter-spacing.wider`",
-      "css_variable": "`--typography-letter-spacing-wider`",
-      "value": "`0.05em`",
-      "tailwind_class": "`tracking-wider`",
+      "token": "typography.letter-spacing.wider",
+      "css_variable": "--typography-letter-spacing-wider",
+      "value": "0.05em",
+      "tailwind_class": "tracking-wider",
       "usage": "All-caps text, overlines"
     }
   ],
-  "usage_rules": []
+  "usage_rules": [
+    "**JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.",
+    "**Always pair `size` with `lineHeight`** — a heading without `leading-tight` looks too loose; body text without `leading-normal` is hard to read.",
+    "**`tracking-tight` only from `text-3xl` up** — on small text, negative spacing hurts readability.",
+    "**`tracking-wider` is for all-caps only** — never use it on regular lowercase text.",
+    "**A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels."
+  ]
 }

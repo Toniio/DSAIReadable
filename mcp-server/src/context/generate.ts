@@ -99,12 +99,37 @@ function mdTable(section: string): string[][] {
   return mdTables(section).flatMap((t) => t.rows)
 }
 
-/** Parse bullet-list items from a section */
-function mdBullets(section: string): string[] {
-  return section
-    .split("\n")
-    .filter((l) => /^\s*-\s/.test(l))
-    .map((l) => l.replace(/^\s*-\s+/, "").trim())
+/**
+ * Parse the list items of a section: bullets (`- `) and numbered items
+ * (`1. `). Reading bullets alone left the five foundations whose rules are
+ * numbered with no rule at all. An item wrapped over several lines is joined
+ * back into one; it ends at a blank line, so a paragraph or a table nested
+ * under an item is not part of the rule.
+ */
+function mdListItems(section: string): string[] {
+  const items: string[][] = []
+  let open = false
+  for (const line of section.split("\n")) {
+    const item = line.match(/^\s*(?:-|\d+\.)\s+(.*)$/)
+    if (item) {
+      items.push([item[1].trim()])
+      open = true
+    } else if (open && /^\s+\S/.test(line)) {
+      items[items.length - 1].push(line.trim())
+    } else {
+      open = false
+    }
+  }
+  return items.map((lines) => lines.join(" "))
+}
+
+/**
+ * A table cell as a plain value: `typography.size.xs` served with its
+ * backticks, or a usage note with its bold markers, is Markdown an agent
+ * copies verbatim into code.
+ */
+function mdPlain(cell: string): string {
+  return cell.replace(/`/g, "").replace(/\*\*(.+?)\*\*/g, "$1")
 }
 
 /** Extract fenced code block content */
@@ -251,13 +276,13 @@ function generateComponentSpecs() {
     const role = mdSection(md, "Role")
 
     // Usage
-    const usage = mdBullets(mdSection(md, "Usage"))
+    const usage = mdListItems(mdSection(md, "Usage"))
 
     // Constraints
-    const constraints = mdBullets(mdSection(md, "Constraints"))
+    const constraints = mdListItems(mdSection(md, "Constraints"))
 
     // Dependencies
-    const dependencies = mdBullets(mdSection(md, "Dependencies"))
+    const dependencies = mdListItems(mdSection(md, "Dependencies"))
 
     // Anatomy
     const anatomyRows = mdTable(mdSection(md, "Anatomy"))
@@ -349,7 +374,7 @@ function generateComponentSpecs() {
 
     // Cross-references
     const crossRefSection = mdSection(md, "Cross-references")
-    const crossRefBullets = mdBullets(crossRefSection)
+    const crossRefBullets = mdListItems(crossRefSection)
     const crossReferences = crossRefBullets.map((b) => {
       const m = b.match(/^`(\w+)`/)
       return m ? m[1] : b.split("—")[0].split("–")[0].trim()
@@ -626,11 +651,13 @@ function generateVariables() {
       tier: "semantic",
       status: statusOf(t),
     })),
+    // The path already starts with its "shadcn" group; the variable drops
+    // it, as scripts/build-tokens.ts does: shadcn.background is --background.
     ...compFlat.map((t) => ({
-      path: `shadcn.${t.path}`,
+      path: t.path,
       value_light: t.$value,
       value_dark: t.$value,
-      css_variable: toVar(t.path, ""),
+      css_variable: toVar(t.path.split(".").slice(1).join("."), ""),
       tier: "component",
     })),
   ]
@@ -682,9 +709,9 @@ function generateLayoutTokens() {
       type: t.$type ?? "",
       description: t.$description ?? "",
     })),
-    spacing_rules: mdBullets(mdSection(spacingMd, "Usage Rules")),
-    radius_rules: mdBullets(mdSection(radiusMd, "Usage Rules")),
-    elevation_rules: mdBullets(mdSection(elevationMd, "Usage Rules")),
+    spacing_rules: mdListItems(mdSection(spacingMd, "Usage Rules")),
+    radius_rules: mdListItems(mdSection(radiusMd, "Usage Rules")),
+    elevation_rules: mdListItems(mdSection(elevationMd, "Usage Rules")),
   }
   return write("layout-tokens.json", result)
 }
@@ -707,8 +734,12 @@ function generateTextStyles() {
     "utf-8"
   )
 
+  // Served as plain values: get_typography answers with these cells.
+  const rowsOf = (heading: string) =>
+    mdTable(mdSection(typoMd, heading)).map((r) => r.map(mdPlain))
+
   // Font families
-  const familyRows = mdTable(mdSection(typoMd, "Font Families"))
+  const familyRows = rowsOf("Font Families")
   const fontFamilies = familyRows.map((r) => ({
     token: r[0] ?? "",
     css_variable: r[1] ?? "",
@@ -718,7 +749,7 @@ function generateTextStyles() {
   }))
 
   // Type scale
-  const scaleRows = mdTable(mdSection(typoMd, "Type Scale (Sizes)"))
+  const scaleRows = rowsOf("Type Scale (Sizes)")
   const typeScale = scaleRows.map((r) => ({
     token: r[0] ?? "",
     css_variable: r[1] ?? "",
@@ -729,7 +760,7 @@ function generateTextStyles() {
   }))
 
   // Line heights
-  const lhRows = mdTable(mdSection(typoMd, "Line Heights"))
+  const lhRows = rowsOf("Line Heights")
   const lineHeights = lhRows.map((r) => ({
     token: r[0] ?? "",
     css_variable: r[1] ?? "",
@@ -739,7 +770,7 @@ function generateTextStyles() {
   }))
 
   // Font weights
-  const fwRows = mdTable(mdSection(typoMd, "Font Weights"))
+  const fwRows = rowsOf("Font Weights")
   const fontWeights = fwRows.map((r) => ({
     token: r[0] ?? "",
     css_variable: r[1] ?? "",
@@ -749,7 +780,7 @@ function generateTextStyles() {
   }))
 
   // Letter spacings
-  const lsRows = mdTable(mdSection(typoMd, "Letter Spacings"))
+  const lsRows = rowsOf("Letter Spacings")
   const letterSpacings = lsRows.map((r) => ({
     token: r[0] ?? "",
     css_variable: r[1] ?? "",
@@ -759,7 +790,7 @@ function generateTextStyles() {
   }))
 
   // Usage rules
-  const usageRules = mdBullets(mdSection(typoMd, "Usage Rules"))
+  const usageRules = mdListItems(mdSection(typoMd, "Usage Rules"))
 
   return write("text-styles.json", {
     font_families: fontFamilies,
@@ -814,7 +845,7 @@ function generateUxWriting() {
 
     // Usage rules — a bullet written "- ✅ …" was already taken above as a
     // Do/Don't line; keep it once.
-    const usageRules = mdBullets(mdSection(md, "Usage Rules"))
+    const usageRules = mdListItems(mdSection(md, "Usage Rules"))
     for (const r of usageRules) {
       const taken = generalRules.some(
         (g) => g.source === `${source}.md` && g.rule === r
@@ -828,7 +859,7 @@ function generateUxWriting() {
   for (const f of specFiles) {
     const md = readFileSync(path.join(specDir, f), "utf-8")
     const name = f.replace(".md", "")
-    const constraints = mdBullets(mdSection(md, "Constraints"))
+    const constraints = mdListItems(mdSection(md, "Constraints"))
     if (constraints.length > 0) {
       componentRules[name] = constraints
     }

@@ -15,6 +15,7 @@ import {
   type CompositionRule,
 } from "./lib/composition-rules.js"
 import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
+import { COMPONENT_RULE } from "./lib/component-rule.js"
 import { registerResources } from "./resources/index.js"
 import { Client } from "@modelcontextprotocol/sdk/client/index.js"
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
@@ -732,6 +733,73 @@ assert(
   "No table header served as a UX writing rule"
 )
 
+// --- Test 7b: the served context says what the sources say (P3-21) ---
+console.log("\n7b. Served context exactness")
+const readContext = <T>(file: string): T =>
+  JSON.parse(readFileSync(resolve(contextDir, file), "utf-8")) as T
+
+// Five foundations number their rules: a bullet-only parser served none.
+const foundations = readdirSync(resolve(__dirname, "../../specs/foundations"))
+  .filter((f) => f.endsWith(".md"))
+  .sort()
+const generalRules = readContext<{
+  general_rules: Array<{ rule: string; source: string }>
+}>("ux-writing.json").general_rules
+const ruleSources = new Set(generalRules.map((r) => r.source))
+const ruleless = foundations.filter((f) => !ruleSources.has(f))
+assert(
+  foundations.length === 11 && ruleless.length === 0,
+  `Every foundation serves its rules (${foundations.length - ruleless.length}/${foundations.length}${ruleless.length ? `; none for ${ruleless.join(", ")}` : ""})`
+)
+
+// A numbered rule wrapped over several lines is served whole, and the
+// paragraph or table nested under an item is not part of it.
+const layoutRules = readContext<{ spacing_rules: string[] }>(
+  "layout-tokens.json"
+).spacing_rules
+const focusRule = generalRules.find(
+  (r) =>
+    r.source === "focus.md" &&
+    r.rule.startsWith("**Never hard-code a ring width")
+)
+assert(
+  layoutRules.length === 5 &&
+    focusRule?.rule.endsWith("`aria-invalid` prefix.") === true &&
+    generalRules.every((r) => !r.rule.includes("| Mechanism")),
+  "A wrapped numbered rule is served whole, without what is nested under it"
+)
+
+// get_typography serves values an agent copies: no Markdown around them.
+// Its usage_rules are prose, whose inline code stays, as in every rule.
+const { usage_rules: _prose, ...typeTables } =
+  readContext<Record<string, unknown>>("text-styles.json")
+const markedCells = JSON.stringify(typeTables).match(/`|\*\*/g)
+assert(
+  markedCells === null,
+  `get_typography serves plain values (${markedCells?.length ?? 0} Markdown markers)`
+)
+
+// The component tier is the shadcn alias layer: its variables are the names
+// tokens.css declares (--background), not --shadcn-background.
+const declaredVars = new Set(
+  [
+    ...readFileSync(resolve(__dirname, "../../tokens.css"), "utf-8").matchAll(
+      /^\s*(--[\w-]+):/gm
+    ),
+  ].map((m) => m[1])
+)
+const componentVars = readContext<
+  Array<{ path: string; css_variable: string; tier: string }>
+>("variables.json").filter((v) => v.tier === "component")
+const undeclared = componentVars.filter(
+  (v) =>
+    !declaredVars.has(v.css_variable) || v.path.startsWith("shadcn.shadcn.")
+)
+assert(
+  componentVars.length > 0 && undeclared.length === 0,
+  `Every component-tier variable is the one tokens.css declares (${componentVars.length}${undeclared.length ? `; wrong: ${undeclared.map((v) => v.css_variable).join(", ")}` : ""})`
+)
+
 // --- Test 8: annotations, resources, response_format, pagination (P3-06) ---
 // Called through a real client, as an agent calls them.
 console.log("\n8. Annotations, resources, response_format, pagination")
@@ -1046,6 +1114,25 @@ assert(
   existsSync(snapshotPath) &&
     readFileSync(snapshotPath, "utf-8") === buildScreen,
   "build_screen matches its snapshot (UPDATE_SNAPSHOTS=1 npm run mcp:test to accept a change)"
+)
+
+// The prompts render the rules get_design_rules serves: no second copy.
+const promptTexts = await Promise.all(
+  prompts.map(({ name }) => promptText(name))
+)
+const missingRuleLines = [
+  ...TAILWIND_RULE.description,
+  ...TAILWIND_RULE.dont,
+  ...COMPONENT_RULE.page_structure,
+].filter((line) => promptTexts.some((t) => !t.includes(line)))
+assert(
+  missingRuleLines.length === 0,
+  `Every prompt carries the critical rules from their source (${missingRuleLines.length} line(s) missing)`
+)
+assert(
+  !/mode color tokens/.test(buildScreen) &&
+    /One semantic class serves both color modes/.test(buildScreen),
+  "build_screen does not suggest per-mode color tokens"
 )
 
 await promptClient.close()

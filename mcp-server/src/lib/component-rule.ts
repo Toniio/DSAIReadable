@@ -13,7 +13,7 @@ export const COMPONENT_RULE = {
   ],
   mandatory_mappings: {
     "Content sections / containers":
-      "Use <Card>, <CardHeader>, <CardContent>, <CardFooter> — NOT raw <div>",
+      "Use <Card>, <CardHeader>, <CardContent>, <CardFooter> — NOT a raw <div> with a border or a shadow (a <div> for layout, flex or grid, is fine)",
     "Titles / headings": "Use <Heading> component — NOT raw <h1>, <h2>, <h3>",
     "Buttons / CTAs":
       "Use <Button> component with variant prop — NOT raw <button> or <a> styled as button",

@@ -225,7 +225,25 @@
       "description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements."
     }
   ],
-  "spacing_rules": [],
-  "radius_rules": [],
-  "elevation_rules": []
+  "spacing_rules": [
+    "**Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.",
+    "**No arbitrary values** — use the tokens only. When an in-between value is needed, discuss it with the design team first.",
+    "**Stay on the component axis** — a form uses `lg` (24px) between its fields and `md` (16px) for inner padding. Keep to that axis throughout the same component.",
+    "**`page-padding` is applied once** — on the page's root container, not on each section.",
+    "**`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center."
+  ],
+  "radius_rules": [
+    "**Always use the tokens** — no arbitrary values such as `rounded-[7px]`. When no token fits, escalate to the design team.",
+    "**Consistency within a component** — every corner of a component uses the same token, unless there is a stated reason (an element that attaches to an edge of the screen, for example).",
+    "**`radius.lg` is shadcn's default** — it is the starting point for any card-like component.",
+    "**`radius.full` only for pill shapes** — avatars, toggles, rounded badges. Do not use it on standard buttons.",
+    "**`radius.none` is a deliberate choice** — use it only for full-bleed components or data-grid elements, not as a default."
+  ],
+  "elevation_rules": [
+    "**Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.",
+    "**Always test in dark mode** — light-mode shadows vanish in dark mode unless adjusted. The tokens handle this automatically.",
+    "**Elevation transitions** — use `transition-shadow` with `duration-normal` (200ms) on state changes (hover, focus).",
+    "**`shadow-inner` stands alone** — never pair it with an outer shadow on the same element.",
+    "**No decorative shadows** — elevation expresses structure, not style. Do not add `shadow-lg` to a card just to make it look nice."
+  ]
 }
