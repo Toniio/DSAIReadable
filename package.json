@@ -11,6 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:language": "tsx scripts/lint-language.ts",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "typecheck": "tsc --noEmit",
     "typecheck:scripts": "tsc --noEmit -p tsconfig.scripts.json",

@@ -6,7 +6,7 @@
 | ------------- | -------------------------- |
 | Name          | Combobox                   |
 | Category      | Forms                      |
-| Status        | stable                     |
+| Status        | beta                       |
 | figma_node_id |                            |
 | code_path     | components/ui/combobox.tsx |
 
@@ -76,7 +76,7 @@ A text input with autocomplete that picks from a filterable list of options; sup
 | `color.border.input`            | `bg-input/30` · `border-input` · `border-input/30`                                              | `ComboboxChips` · `ComboboxContent`                                                   |
 | `color.feedback.error.default`  | `border-destructive` · `border-destructive/50` · `ring-destructive/20` · `ring-destructive/40`  | `ComboboxChips`                                                                       |
 | `color.text.default`            | `ring-foreground/10` · `text-accent-foreground` · `text-foreground` · `text-popover-foreground` | `ComboboxChip` · `ComboboxContent` · `ComboboxItem`                                   |
-| `color.text.subtle`             | `text-muted-foreground`                                                                         | `ComboboxEmpty` · `ComboboxLabel` · `ComboboxTrigger`                                 |
+| `color.text.subtle`             | `text-muted-foreground`                                                                         | `ComboboxChip` · `ComboboxEmpty` · `ComboboxLabel` · `ComboboxTrigger`                |
 | `elevation.md`                  | `shadow-md`                                                                                     | `ComboboxContent`                                                                     |
 | `motion.duration.fast`          | `duration-fast`                                                                                 | `ComboboxContent`                                                                     |
 | `opacity.disabled`              | `opacity-disabled`                                                                              | `ComboboxChip` · `ComboboxItem`                                                       |

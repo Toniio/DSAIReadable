@@ -13,6 +13,13 @@ section that fits.
 
 ### Added
 
+- A check for every rule of `AGENTS.md` § 1, each named in § 5: `lint:language`
+  (English only), Primitive tokens and `prefers-color-scheme` refused in app
+  code, other icon kits and inline `<svg>` refused by ESLint, raw `ms` and
+  `duration-[…]` / `ease-[…]` values refused, decorative `opacity-<n>` refused,
+  Tier 3 tokens held to Tier 2, and the index's status and code path held to
+  each spec's Metadata ([#50](https://github.com/Toniio/DSAIReadable/pull/50)).
+
 - `dependabot-regenerate` workflow: on a Dependabot PR, reruns
   `registry:build`, `generate-context` and Prettier, and pushes the result with
   a GitHub App token so that the required checks run again.
@@ -39,6 +46,11 @@ section that fits.
   to the fonts `next/font` loads ([#7](https://github.com/Toniio/DSAIReadable/pull/7)).
 
 ### Changed
+
+- ButtonGroup, Combobox, Direction, Empty, Field, InputGroup, Item, Kbd and
+  Spinner are `beta` in their specs, as in the index; Command's search icon and
+  Combobox's chip remove button are dimmed with `text-muted-foreground` instead
+  of `opacity-50`; NavigationMenu content eases with `ease-out` ([#50](https://github.com/Toniio/DSAIReadable/pull/50)).
 
 - Tooling: ESLint 10. `eslint-plugin-react` reads the installed React version
   instead of detecting it, which relies on an API ESLint 10 removed; the unused
@@ -67,6 +79,10 @@ section that fits.
   generated JSON ([#29](https://github.com/Toniio/DSAIReadable/pull/29)).
 
 ### Fixed
+
+- Accessibility: NavigationMenu links show the focus ring again — the content
+  removed it from every link with `**:data-[slot=navigation-menu-link]:focus:ring-0`
+  ([#50](https://github.com/Toniio/DSAIReadable/pull/50)).
 
 - Specs: Dialog, AlertDialog, Drawer and Sheet no longer claim
   `aria-modal="true"`; Radix hides the rest of the page with `aria-hidden`

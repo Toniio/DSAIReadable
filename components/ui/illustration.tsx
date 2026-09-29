@@ -21,7 +21,7 @@ function Illustration({
       <svg
         viewBox="0 0 400 400"
         fill="none"
-        className="size-48 opacity-20"
+        className="size-48 text-muted-foreground/20"
         aria-hidden="true"
       >
         <rect

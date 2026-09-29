@@ -2045,7 +2045,7 @@
   "ButtonGroup": {
     "name": "ButtonGroup",
     "category": "Misc",
-    "status": "stable",
+    "status": "beta",
     "role": "A container that visually joins adjacent buttons, inputs or selects by merging their borders and corners.",
     "usage": [
       "Group related actions (for example \"Previous / Next\")",
@@ -3840,7 +3840,7 @@
   "Combobox": {
     "name": "Combobox",
     "category": "Forms",
-    "status": "stable",
+    "status": "beta",
     "role": "A text input with autocomplete that picks from a filterable list of options; supports single and multiple selection (chips).",
     "usage": [
       "Pick a value from a long list (countries, cities)",
@@ -4019,6 +4019,7 @@
           "text-muted-foreground"
         ],
         "where": [
+          "ComboboxChip",
           "ComboboxEmpty",
           "ComboboxLabel",
           "ComboboxTrigger"
@@ -4534,6 +4535,7 @@
         ],
         "where": [
           "CommandGroup",
+          "CommandInput",
           "CommandShortcut"
         ]
       },
@@ -5601,7 +5603,7 @@
   "Direction": {
     "name": "Direction",
     "category": "Layout",
-    "status": "stable",
+    "status": "beta",
     "role": "A context provider that passes the reading direction (LTR / RTL) down to every child component.",
     "usage": [
       "Wrap the app or a section to support right-to-left languages (Arabic, Hebrew…)",
@@ -6555,7 +6557,7 @@
   "Empty": {
     "name": "Empty",
     "category": "Feedback",
-    "status": "stable",
+    "status": "beta",
     "role": "A composable empty state, shown when a view, a list or a section has no data.",
     "usage": [
       "Say that a list or a table has no results",
@@ -6836,7 +6838,7 @@
   "Field": {
     "name": "Field",
     "category": "Forms",
-    "status": "stable",
+    "status": "beta",
     "role": "A layout system for form fields: it ties a label to its control, carries the invalid state, and holds help text and error messages.",
     "usage": [
       "Wrap each `FieldLabel` and control pair in a `<Field>` for consistency and error handling",
@@ -7722,7 +7724,7 @@
       },
       {
         "slot": "Placeholder SVG",
-        "role": "Dashed frame and pictogram, `aria-hidden`, `opacity-20`"
+        "role": "Dashed frame and pictogram, `aria-hidden`, `text-muted-foreground/20`"
       }
     ],
     "tokens": [
@@ -7738,7 +7740,8 @@
       {
         "token": "color.text.subtle",
         "classes": [
-          "text-muted-foreground"
+          "text-muted-foreground",
+          "text-muted-foreground/20"
         ],
         "where": [
           "Illustration"
@@ -7778,7 +7781,7 @@
     "states": [
       {
         "state": "`default`",
-        "behavior": "`bg-muted` background, placeholder SVG centered at `opacity-20`"
+        "behavior": "`bg-muted` background, placeholder SVG centered, strokes in `text-muted-foreground/20`"
       },
       {
         "state": "`hover`",
@@ -8007,7 +8010,7 @@
   "InputGroup": {
     "name": "InputGroup",
     "category": "Forms",
-    "status": "stable",
+    "status": "beta",
     "role": "A container that arranges an input with add-ons — icons, buttons, text, labels — around it.",
     "usage": [
       "Add an icon or a label to the left or right of an input",
@@ -8581,7 +8584,7 @@
   "Item": {
     "name": "Item",
     "category": "Misc",
-    "status": "stable",
+    "status": "beta",
     "role": "A composable row that stands for one entry in a list, with slots for media, a title, a description, actions, and header and footer sections.",
     "usage": [
       "Show an entry in a list of results or a feed",
@@ -9020,7 +9023,7 @@
   "Kbd": {
     "name": "Kbd",
     "category": "Misc",
-    "status": "stable",
+    "status": "beta",
     "role": "An inline label that shows a keyboard key or a key combination.",
     "usage": [
       "Show a keyboard shortcut next to an action (`⌘K` for search, say)",
@@ -10399,6 +10402,15 @@
         "where": [
           "NavigationMenuContent",
           "NavigationMenuTrigger"
+        ]
+      },
+      {
+        "token": "motion.easing.out",
+        "classes": [
+          "ease-out"
+        ],
+        "where": [
+          "NavigationMenuContent"
         ]
       },
       {
@@ -14175,7 +14187,7 @@
   "Spinner": {
     "name": "Spinner",
     "category": "Feedback",
-    "status": "stable",
+    "status": "beta",
     "role": "An animated loading indicator that signals an asynchronous operation is in progress.",
     "usage": [
       "Show a `Button`'s `loading` state while a form submits",

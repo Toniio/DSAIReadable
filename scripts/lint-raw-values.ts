@@ -2,9 +2,10 @@
 //
 // lint-raw-values.ts
 // Scans components/, app/, src/, hooks/ and lib/ for raw CSS values AND Tailwind utility misuses.
-// Errors:   raw colors, raw layout spacing, raw border-radius, raw TW utilities (z-N, duration-N, ring-[X], rounded-[X], text-[size], shadow-[X], spacing arbitraires)
-// Warnings: raw durations in CSS, unusual opacity values
+// Errors:   raw colors, raw layout spacing, raw border-radius, raw durations, raw TW utilities (z-N, duration-N, duration-[X], ease-[X], ring-[X], rounded-[X], text-[size], shadow-[X], arbitrary spacing)
+// Warnings: unusual opacity values
 // Respects: allow-raw comments (block or inline) as opt-outs
+// Never exempt: a Primitive token (--ds-prim-*) and a prefers-color-scheme query, whatever the comment says
 // Exit 1 on any ERROR.
 //
 
@@ -120,10 +121,10 @@ const CSS_RULES: RuleDefinition[] = [
     category: "border-radius",
     suggest: () => "--radius-* (check semantic.json)",
   },
-  // --- Durations (warning) --------------------------------------------------
+  // --- Durations (error) ----------------------------------------------------
   {
     pattern: /\b[0-9]+ms\b/g,
-    level: "warning",
+    level: "error",
     category: "duration",
     suggest: () => "--duration-* (check semantic.json)",
   },
@@ -133,6 +134,30 @@ const CSS_RULES: RuleDefinition[] = [
     level: "warning",
     category: "opacity",
     suggest: () => "--opacity-* (check semantic.json)",
+  },
+]
+
+// ---------------------------------------------------------------------------
+// Tier and theming rules — AGENTS.md § 1, no allow-raw opt-out
+// ---------------------------------------------------------------------------
+// An allow-raw comment excuses a value the token layer cannot express yet.
+// These two are not values: a Primitive reference skips the tier that owns
+// light and dark, and a prefers-color-scheme query builds a second dark mode
+// beside the `.dark` class. Neither has a legitimate exception.
+const STRICT_RULES: RuleDefinition[] = [
+  {
+    pattern: /--ds-prim-[\w-]*/g,
+    level: "error",
+    category: "primitive-token",
+    suggest: () =>
+      "the Semantic token that references it (tokens/semantic.json) — Tier 1 is private",
+  },
+  {
+    pattern: /prefers-color-scheme/g,
+    level: "error",
+    category: "dark-mode-media",
+    suggest: () =>
+      "the `dark:` variant — dark mode is the `.dark` class on <html>",
   },
 ]
 
@@ -174,6 +199,18 @@ const TW_RULES: TwRuleDefinition[] = [
       if (n <= 300) return "duration-slow"
       return "duration-extra-slow"
     },
+  },
+  // duration-[250ms], ease-[cubic-bezier(…)], delay-[…] — arbitrary motion.
+  // Reading a token stays free: ease-(--motion-easing-out) is not matched.
+  {
+    pattern: /\b(?:duration|ease|delay)-\[([^\]]+)\]/g,
+    level: "error",
+    category: "tw-motion-arbitrary",
+    suggest: (m) =>
+      m.startsWith("ease")
+        ? "ease-default / ease-in / ease-out / ease-spring"
+        : "duration-fast / duration-normal / duration-slow / duration-slower",
+    allowVarCalc: true,
   },
   // ring-[Xpx] arbitrary ring widths
   {
@@ -459,6 +496,20 @@ function scanFile(filePath: string): {
 
     if (hasAllowRaw(line)) {
       uses.push({ id: allowRawId(line), file: filePath, line: i + 1 })
+    }
+
+    for (const rule of STRICT_RULES) {
+      for (const match of line.matchAll(rule.pattern)) {
+        violations.push({
+          file: filePath,
+          line: i + 1,
+          column: match.index + 1,
+          level: rule.level,
+          category: rule.category,
+          raw: match[0],
+          suggestion: rule.suggest(match[0]),
+        })
+      }
     }
 
     if (isExempt(lines, i)) continue

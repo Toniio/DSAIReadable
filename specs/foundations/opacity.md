@@ -102,6 +102,8 @@ Global opacity changes **the whole** component (text, background, border, icon).
 
 **Rule:** when the intent is to reduce the **visual prominence** of a text or an icon, use the `subtle` / `muted-foreground` color tokens. Opacity is reserved for **binary states** (disabled, overlay).
 
+> **Guard:** a second `better-tailwindcss/no-restricted-classes` rule rejects every `opacity-<n>` except the binary ones: `opacity-0` and `opacity-100` (show / hide), `opacity-disabled`, `placeholder:opacity-50` and `opacity-80` (backdrop). It found four decorative uses, now colors: Command's search icon and Combobox's chip remove button (`text-muted-foreground`), Illustration's strokes and Calendar's secondary day line (`text-muted-foreground/20`, `text-current/70` — an alpha on the color, which leaves the rest of the node untouched).
+
 ---
 
 ## Decision summary

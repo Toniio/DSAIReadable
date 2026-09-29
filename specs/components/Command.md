@@ -63,7 +63,7 @@ A command palette with built-in search, for quickly filtering and picking an act
 | `color.border.default`      | `bg-border`                                   | `CommandSeparator`                                                                   |
 | `color.border.input`        | `bg-input/30` · `border-input/30`             | `CommandInput`                                                                       |
 | `color.text.default`        | `text-foreground` · `text-popover-foreground` | `CommandGroup` · `CommandItem` · `CommandShortcut` · `Command`                       |
-| `color.text.subtle`         | `text-muted-foreground`                       | `CommandGroup` · `CommandShortcut`                                                   |
+| `color.text.subtle`         | `text-muted-foreground`                       | `CommandGroup` · `CommandInput` · `CommandShortcut`                                  |
 | `opacity.disabled`          | `opacity-disabled`                            | `CommandInput` · `CommandItem`                                                       |
 | `typography.size.xs`        | `text-xs`                                     | `CommandEmpty` · `CommandGroup` · `CommandInput` · `CommandItem` · `CommandShortcut` |
 

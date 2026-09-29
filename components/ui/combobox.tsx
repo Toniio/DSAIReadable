@@ -287,7 +287,7 @@ function ComboboxChip({
         <ComboboxPrimitive.ChipRemove
           render={<Button variant="ghost" size="icon-xs" />}
           aria-label={removeLabel}
-          className="-ml-1 opacity-50 hover:opacity-100"
+          className="-ml-1 text-muted-foreground"
           data-slot="combobox-chip-remove"
         >
           <XIcon className="pointer-events-none" />

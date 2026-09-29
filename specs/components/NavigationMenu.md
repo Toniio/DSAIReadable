@@ -64,6 +64,7 @@ Primary navigation that organizes the site's links into categories, with drop-do
 | `elevation.sm`                  | `shadow-sm`                                      | `NavigationMenuContent` · `NavigationMenuViewport`                                                                      |
 | `motion.duration.fast`          | `duration-fast`                                  | `NavigationMenuViewport`                                                                                                |
 | `motion.duration.slow`          | `duration-slow`                                  | `NavigationMenuContent` · `NavigationMenuTrigger`                                                                       |
+| `motion.easing.out`             | `ease-out`                                       | `NavigationMenuContent`                                                                                                 |
 | `opacity.disabled`              | `opacity-disabled`                               | `navigationMenuTriggerStyle`                                                                                            |
 | `space.focus-ring-width`        | `ring-(length:--space-focus-ring-width)`         | `NavigationMenuLink` via `FOCUS_RING` (`lib/focus.ts`) · `navigationMenuTriggerStyle` via `FOCUS_RING` (`lib/focus.ts`) |
 | `typography.font-weight.medium` | `font-medium`                                    | `navigationMenuTriggerStyle`                                                                                            |

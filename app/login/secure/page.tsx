@@ -15,7 +15,7 @@ export default function LoginSecure() {
     <div className="relative flex min-h-svh items-center justify-center overflow-hidden bg-foreground px-4 py-12">
       {/* Background dot pattern */}
       <div
-        className="absolute inset-0 opacity-5"
+        className="absolute inset-0 text-background/5"
         aria-hidden="true"
         style={{
           backgroundImage:
