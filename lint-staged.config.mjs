@@ -2,7 +2,7 @@
  * Pre-commit checks. Each entry returns its command as a string, which tells
  * lint-staged not to append the staged filenames (npm scripts take no args).
  */
-export default {
+const config = {
   "*.{ts,tsx}": (files) => [
     `prettier --write ${files.map((f) => JSON.stringify(f)).join(" ")}`,
     `eslint --fix ${files.map((f) => JSON.stringify(f)).join(" ")}`,
@@ -29,3 +29,5 @@ export default {
   // The @theme bridge breaks silently, so check it whenever it is touched.
   "styles/globals.css": () => "npm run tokens:lint-bridge",
 }
+
+export default config

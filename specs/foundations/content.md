@@ -47,7 +47,7 @@ component.
 | `ComboboxChip`                          | `removeLabel`                      | `Remove <item>`                            |
 | `Sidebar` (mobile Sheet)                | `mobileTitle`, `mobileDescription` | `Sidebar` / `Displays the mobile sidebar.` |
 | `SidebarTrigger` / `SidebarRail`        | `toggleLabel`                      | `Toggle Sidebar`                           |
-| `PasswordInput`                         | — (read `UI_STRINGS`)              |                                            |
+| `PasswordInput`                         | `showLabel` / `hideLabel`          | `Show password` / `Hide password`          |
 
 To translate a whole application, pass the props from the application's own
 i18n layer. `UI_STRINGS` reads no locale and is not reactive: it is a set of

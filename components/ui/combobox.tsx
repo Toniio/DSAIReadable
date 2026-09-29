@@ -17,8 +17,8 @@ import { CaretDownIcon, XIcon, CheckIcon } from "@phosphor-icons/react"
 import { UI_STRINGS } from "@/lib/ui-strings"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 
-// The Root renders no element of its own - it is a context provider, like
-// DirectionProvider - so a data-slot on it lands nowhere. Its parts carry theirs.
+// no-data-slot: Combobox is the Root, which renders no element of its own - it
+// is a context provider, like DirectionProvider. Its parts carry theirs.
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   ...props
 }: ComboboxPrimitive.Root.Props<Value, Multiple>) {

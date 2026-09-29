@@ -2,10 +2,10 @@
 //
 // lint-raw-values.ts
 // Scans components/, app/, src/, hooks/ and lib/ for raw CSS values AND Tailwind utility misuses.
-// Errors:   raw colors, raw layout spacing, raw border-radius, raw durations, raw TW utilities (z-N, duration-N, duration-[X], ease-[X], ring-N, ring, ring-[X], rounded-[X], text-[size], shadow-[X], arbitrary spacing)
+// Errors:   raw colors, raw layout spacing, raw border-radius, raw durations, raw TW utilities (z-N, duration-N, duration-[X], ease-[X], ring-N, ring, ring-[X], outline-N, outline, outline-offset-N, outline-[X], rounded-[X], text-[size], shadow-[X], arbitrary spacing)
 // Warnings: unusual opacity values
 // Respects: allow-raw comments (block or inline) as opt-outs
-// Never exempt: a Primitive token (--ds-prim-*), a prefers-color-scheme query and a raw ring width (ring-N, ring), whatever the comment says
+// Never exempt: a Primitive token (--ds-prim-*), a prefers-color-scheme query and a raw ring or outline width (ring-N, ring, outline-N, outline, outline-offset-N), whatever the comment says
 // Exit 1 on any ERROR.
 //
 
@@ -184,6 +184,9 @@ interface TwRuleDefinition {
 const RING_WIDTH_SUGGESTION =
   "a token width: SURFACE_OUTLINE or SEPARATION_RING (@/lib/surface), FOCUS_RING (@/lib/focus), or ring-(length:--border-width-*) under a variant"
 
+const OUTLINE_WIDTH_SUGGESTION =
+  "outline-(length:--border-width-*) — a token width, as the Tabs trigger does; an offset needs a token too"
+
 const TW_RULES: TwRuleDefinition[] = [
   // z-index with raw numeric values (z-0 and z-1 are fine for local stacking, z-10/z-20/z-50 etc. are not)
   {
@@ -249,6 +252,35 @@ const TW_RULES: TwRuleDefinition[] = [
     suggest: () => RING_WIDTH_SUGGESTION,
     skipComments: true,
     neverExempt: true,
+  },
+  // outline-1, outline-2 …, a bare `outline` (1px in v4) and outline-offset-N:
+  // the same fixed pixel widths as ring-N, drawn by the focus indicator of a
+  // component that paints its own outline. outline-0 and outline-offset-0 are
+  // resets and stay allowed; `"outline"` alone in quotes is a variant name
+  // (variant="outline"), not the utility, and is not matched.
+  {
+    pattern: /(?<![\w-])outline-(?:offset-)?([1-9]\d*)(?![\w.-])/g,
+    level: "error",
+    category: "tw-outline-width-raw",
+    suggest: () => OUTLINE_WIDTH_SUGGESTION,
+    skipComments: true,
+    neverExempt: true,
+  },
+  {
+    pattern: /(?<=[\s:])outline(?=[\s"'`]|$)|(?<=["'`])outline(?=\s)/g,
+    level: "error",
+    category: "tw-outline-width-raw",
+    suggest: () => OUTLINE_WIDTH_SUGGESTION,
+    skipComments: true,
+    neverExempt: true,
+  },
+  // outline-[2px], outline-offset-[3px] — arbitrary outline widths
+  {
+    pattern: /\boutline-(?:offset-)?\[([^\]]+)\]/g,
+    level: "error",
+    category: "tw-outline-arbitrary",
+    suggest: () => OUTLINE_WIDTH_SUGGESTION,
+    allowVarCalc: true,
   },
   // min-[600px]:, max-[900px]: — arbitrary viewport breakpoints. The
   // responsive prefixes are the contract (specs/foundations/breakpoints.md);

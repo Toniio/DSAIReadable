@@ -39,10 +39,11 @@ A container that visually joins adjacent buttons, inputs or selects by merging t
 
 ## Anatomy
 
-| Slot                                 | Role                                                      |
-| ------------------------------------ | --------------------------------------------------------- |
-| `data-slot="button-group"`           | Group root; carries `data-orientation` and `role="group"` |
-| `data-slot="button-group-separator"` | Visual separator between the group's items                |
+| Slot                                 | Role                                                               |
+| ------------------------------------ | ------------------------------------------------------------------ |
+| `data-slot="button-group"`           | Group root; carries `data-orientation` and `role="group"`          |
+| `data-slot="button-group-separator"` | Visual separator between the group's items                         |
+| `data-slot="button-group-text"`      | Text block (label, prefix, unit) shown as one of the group's items |
 
 ## Tokens
 

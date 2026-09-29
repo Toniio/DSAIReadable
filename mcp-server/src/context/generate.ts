@@ -187,22 +187,6 @@ function statusOf(leaf: { [k: string]: Json }): string {
     : "active"
 }
 
-/** Resolve primitive reference like {color.mist.0} to its actual value */
-function resolvePrimRef(ref: string, primitives: JsonObject): string {
-  const m = ref.match(/^\{(.+)\}$/)
-  if (!m) return ref
-  let cur: Json = primitives
-  for (const p of m[1].split(".")) {
-    if (!isJsonObject(cur)) return ref
-    cur = cur[p]
-  }
-  if (!isJsonObject(cur)) return ref
-  const value = cur.$value
-  return typeof value === "string" || typeof value === "number"
-    ? String(value)
-    : ref
-}
-
 // ── Data loading ────────────────────────────────────────────────────
 const dsIndex = readJSON("design-system.index.json")
 const inventory: Array<{

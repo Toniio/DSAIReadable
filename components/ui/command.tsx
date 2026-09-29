@@ -31,6 +31,8 @@ function Command({
   )
 }
 
+// no-data-slot: CommandDialog renders a Dialog, whose surface keeps its own
+// dialog-content slot: CommandItem styles itself in-data-[slot=dialog-content].
 function CommandDialog({
   title = "Command Palette",
   description = "Search for a command to run...",

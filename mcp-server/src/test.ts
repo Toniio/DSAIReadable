@@ -771,8 +771,10 @@ assert(
 
 // get_typography serves values an agent copies: no Markdown around them.
 // Its usage_rules are prose, whose inline code stays, as in every rule.
-const { usage_rules: _prose, ...typeTables } =
-  readContext<Record<string, unknown>>("text-styles.json")
+const typeTables = {
+  ...readContext<Record<string, unknown>>("text-styles.json"),
+  usage_rules: undefined,
+}
 const markedCells = JSON.stringify(typeTables).match(/`|\*\*/g)
 assert(
   markedCells === null,

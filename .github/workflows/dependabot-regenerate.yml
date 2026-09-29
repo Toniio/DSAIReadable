@@ -1,7 +1,8 @@
 name: Dependabot regenerate
 
 # `registry.json` and `mcp-server/context/ds-metadata.json` copy dependency
-# versions from `package.json`, and a Prettier bump can reformat code.
+# versions from `package.json`, a Prettier bump can reformat code, and a
+# Tailwind bump can change the generated Tokens sections of the specs.
 # Dependabot runs none of the generators, so each such update would turn
 # `registry`, `context-freshness`, `mcp-test` and `lint` red. This workflow
 # regenerates those files on Dependabot PRs and pushes the result.
@@ -47,6 +48,8 @@ jobs:
       - run: npm ci --prefix mcp-server
       - run: npm run registry:build
       - run: npm run generate-context
+      # A Tailwind bump can change how a class resolves to a token.
+      - run: npm run specs:tokens
       - run: npm run format
       # Staged first so that a newly generated, untracked file is in the patch.
       - name: Build the patch

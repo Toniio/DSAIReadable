@@ -77,6 +77,7 @@ function PaginationPrevious({
 }) {
   return (
     <PaginationLink
+      data-slot="pagination-previous"
       aria-label={label}
       size="default"
       className={cn("pl-1.5!", className)}
@@ -99,6 +100,7 @@ function PaginationNext({
 }) {
   return (
     <PaginationLink
+      data-slot="pagination-next"
       aria-label={label}
       size="default"
       className={cn("pr-1.5!", className)}

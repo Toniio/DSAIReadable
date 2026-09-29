@@ -43,6 +43,8 @@ Sequential navigation through paged result sets, with numbered links, previous /
 | `data-slot="pagination-content"`  | `<ul>` list that holds the pagination items                         |
 | `data-slot="pagination-item"`     | A single `<li>`                                                     |
 | `data-slot="pagination-link"`     | `<a>` link to a page; carries `data-active`                         |
+| `data-slot="pagination-previous"` | Link to the previous page (a `pagination-link` renamed)             |
+| `data-slot="pagination-next"`     | Link to the next page (a `pagination-link` renamed)                 |
 | `data-slot="pagination-ellipsis"` | Marks where page numbers have been collapsed                        |
 
 ## Tokens

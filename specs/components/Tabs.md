@@ -50,7 +50,7 @@ Tabbed navigation that switches between mutually exclusive content panels; horiz
 
 | Token                            | Classes and variables                                      | Where                                                                                                   |
 | -------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `border-width.default`           | `border`                                                   | `TabsTrigger`                                                                                           |
+| `border-width.default`           | `border` · `outline-(length:--border-width-default)`       | `TabsTrigger`                                                                                           |
 | `color.background.default`       | `bg-background`                                            | `TabsTrigger`                                                                                           |
 | `color.background.subtle`        | `bg-muted`                                                 | `tabsListVariants.variant.default`                                                                      |
 | `color.border.focus`             | `border-ring` · `outline-ring` · `ring-ring/50`            | `TabsContent` via `FOCUS_RING` (`lib/focus.ts`) · `TabsTrigger`                                         |

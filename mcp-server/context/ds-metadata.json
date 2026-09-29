@@ -11,7 +11,7 @@
   "stack": {
     "react": "^19.3.0",
     "next": "16.3.6",
-    "tailwindcss": "^4.2.1"
+    "tailwindcss": "^4.3.3"
   },
   "framework": "React 19 / Next.js 16 / Tailwind CSS v4 / shadcn-ui",
   "sources": {

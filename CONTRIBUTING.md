@@ -94,9 +94,11 @@ The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-a
 ## Dependabot pull requests
 
 `registry.json` and `mcp-server/context/ds-metadata.json` copy dependency
-versions, and a Prettier update can reformat code. Dependabot runs none of the
+versions, a Prettier update can reformat code, and a Tailwind update can change
+the generated Tokens sections of the specs. Dependabot runs none of the
 generators, so the `dependabot-regenerate` workflow does it on each Dependabot
-PR: a read-only job runs `registry:build`, `generate-context` and `format`, and
+PR: a read-only job runs `registry:build`, `generate-context`, `specs:tokens`
+and `format`, and
 a second job, which runs none of the PR's code, pushes the result as one
 `chore(deps)` commit. CI then runs again on that commit.
 
@@ -116,6 +118,12 @@ Once someone else has pushed to its branch, Dependabot stops rebasing the PR on
 its own; comment `@dependabot recreate` to start it again from `main`. A PR that
 needs code changes (a major version with breaking changes) is still fixed by
 hand.
+
+`tailwindcss` and `@tailwindcss/*` form their own group and always move
+together: `specs:tokens` calls a private API of `@tailwindcss/node`. Majors
+that cannot be taken yet are ignored in `.github/dependabot.yml`, each with the
+date and the reason — TypeScript 7 (no JavaScript compiler API) and
+`@types/node` beyond the Node runtime.
 
 ## Code style
 
