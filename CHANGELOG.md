@@ -13,6 +13,10 @@ section that fits.
 
 ### Added
 
+- MCP server: protocol revision 2026-07-28, on the v2 SDK
+  (`@modelcontextprotocol/server`). A client opens with `server/discover`;
+  2025-era clients are still served, over stdio and HTTP. `tools/list` comes
+  back in one order every time.
 - Page patterns, on Primer's model: 12 hand-written pages in
   `specs/patterns/`, the tasks a screen carries out (`create`, `edit`,
   `delete`, `filter`, `search`, `sign-in`, `settings`) then the UI patterns
@@ -208,6 +212,9 @@ section that fits.
 
 ### Removed
 
+- MCP server: HTTP sessions. Every request is served on its own, so
+  `Mcp-Session-Id`, `MCP_SESSION_TTL_MS` and `MCP_MAX_SESSIONS` are gone, and
+  `GET` or `DELETE` on `/mcp` receives a `405`.
 - The unused `dotenv` dev dependency, the dead `sourceOf` script helper, and
   the `export` of eleven symbols only their own file uses.
 - The Railway deployment: the MCP server runs locally only

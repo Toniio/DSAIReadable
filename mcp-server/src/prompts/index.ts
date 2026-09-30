@@ -1,5 +1,5 @@
 import { z } from "zod"
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import type { McpServer } from "@modelcontextprotocol/server"
 
 import { COMPONENT_RULE } from "../lib/component-rule.js"
 import { TAILWIND_RULE } from "../lib/tailwind-rule.js"
@@ -25,17 +25,22 @@ const CRITICAL_RULES_TEXT = [
 
 export function registerPrompts(server: McpServer): void {
   // 1. build_screen
-  server.prompt(
+  server.registerPrompt(
     "build_screen",
-    "Generate a complete React screen using only DS components and tokens",
     {
-      task: z.string().describe("Description of the screen to build"),
-      context: z
-        .string()
-        .optional()
-        .describe("Additional context about the screen"),
-      device: z.enum(["desktop", "mobile", "tablet"]).describe("Target device"),
-      mode: z.enum(["light", "dark"]).describe("Color mode"),
+      description:
+        "Generate a complete React screen using only DS components and tokens",
+      argsSchema: z.object({
+        task: z.string().describe("Description of the screen to build"),
+        context: z
+          .string()
+          .optional()
+          .describe("Additional context about the screen"),
+        device: z
+          .enum(["desktop", "mobile", "tablet"])
+          .describe("Target device"),
+        mode: z.enum(["light", "dark"]).describe("Color mode"),
+      }),
     },
     async ({ task, context, device, mode }) => {
       const contextLine = context ? `\nAdditional context: ${context}` : ""
@@ -83,12 +88,15 @@ ${CRITICAL_RULES_TEXT}`,
   )
 
   // 2. revise_design
-  server.prompt(
+  server.registerPrompt(
     "revise_design",
-    "Revise a specific component or element in the current design",
     {
-      target: z.string().describe("The component or element to change"),
-      change: z.string().describe("What to change about it"),
+      description:
+        "Revise a specific component or element in the current design",
+      argsSchema: z.object({
+        target: z.string().describe("The component or element to change"),
+        change: z.string().describe("What to change about it"),
+      }),
     },
     async ({ target, change }) => {
       const isTextChange =
@@ -131,18 +139,21 @@ ${CRITICAL_RULES_TEXT}`,
   )
 
   // 3. generate_idea
-  server.prompt(
+  server.registerPrompt(
     "generate_idea",
-    "Generate a screen/feature idea using DS components and patterns",
     {
-      experience: z
-        .string()
-        .optional()
-        .describe("Type of experience (e.g. onboarding, dashboard, form)"),
-      industry: z
-        .string()
-        .optional()
-        .describe("Industry context (e.g. energy, utilities)"),
+      description:
+        "Generate a screen/feature idea using DS components and patterns",
+      argsSchema: z.object({
+        experience: z
+          .string()
+          .optional()
+          .describe("Type of experience (e.g. onboarding, dashboard, form)"),
+        industry: z
+          .string()
+          .optional()
+          .describe("Industry context (e.g. energy, utilities)"),
+      }),
     },
     async ({ experience, industry }) => {
       const expLine = experience ? `\nExperience type: ${experience}` : ""
@@ -181,11 +192,16 @@ ${CRITICAL_RULES_TEXT}`,
   )
 
   // 4. suggest_next_steps
-  server.prompt(
+  server.registerPrompt(
     "suggest_next_steps",
-    "Suggest next steps or screens based on the current screen context",
     {
-      current_screen: z.string().describe("Description of the current screen"),
+      description:
+        "Suggest next steps or screens based on the current screen context",
+      argsSchema: z.object({
+        current_screen: z
+          .string()
+          .describe("Description of the current screen"),
+      }),
     },
     async ({ current_screen }) => {
       return {
@@ -221,17 +237,19 @@ ${CRITICAL_RULES_TEXT}`,
   )
 
   // 5. showcase_components
-  server.prompt(
+  server.registerPrompt(
     "showcase_components",
-    "Generate a showcase/storybook-like view of DS components",
     {
-      category: z
-        .string()
-        .optional()
-        .describe("Component category to showcase (or all if omitted)"),
-      device: z
-        .enum(["desktop", "mobile", "tablet"])
-        .describe("Target device for the showcase"),
+      description: "Generate a showcase/storybook-like view of DS components",
+      argsSchema: z.object({
+        category: z
+          .string()
+          .optional()
+          .describe("Component category to showcase (or all if omitted)"),
+        device: z
+          .enum(["desktop", "mobile", "tablet"])
+          .describe("Target device for the showcase"),
+      }),
     },
     async ({ category, device }) => {
       const categoryLine = category

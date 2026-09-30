@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js"
+import { createMcpHandler, McpServer } from "@modelcontextprotocol/server"
+import { serveStdio } from "@modelcontextprotocol/server/stdio"
+import { toNodeHandler } from "@modelcontextprotocol/node"
 import { createServer } from "node:http"
 import { registerDsCoreTools } from "./tools/ds-core.js"
 import { registerDatavizTools } from "./tools/dataviz.js"
@@ -43,10 +43,6 @@ const allowedOrigins = new Set(
     .filter(Boolean) ?? DEFAULT_ALLOWED_ORIGINS
 )
 
-// Idle sessions are evicted so a long-running server cannot grow without bound.
-const SESSION_TTL_MS = parseInt(process.env.MCP_SESSION_TTL_MS ?? "1800000", 10) // 30 min
-const MAX_SESSIONS = parseInt(process.env.MCP_MAX_SESSIONS ?? "100", 10)
-
 function serverDescription(): string {
   try {
     const components = loadContext<unknown[]>("components.json")
@@ -80,24 +76,10 @@ function createMcpServer() {
 }
 
 if (mode === "http") {
-  // Session management: keep transport instances alive across requests
-  const sessions = new Map<
-    string,
-    { transport: StreamableHTTPServerTransport; lastSeen: number }
-  >()
-
-  function sweepSessions(): void {
-    const now = Date.now()
-    for (const [sid, entry] of sessions) {
-      if (now - entry.lastSeen > SESSION_TTL_MS) {
-        sessions.delete(sid)
-        void entry.transport.close?.()
-      }
-    }
-  }
-
-  const sweeper = setInterval(sweepSessions, 60_000)
-  sweeper.unref?.()
+  // Stateless: each request is served by a fresh instance from the factory,
+  // for the 2026-07-28 revision and for 2025-era clients alike. No session is
+  // kept, so there is nothing to expire or to cap.
+  const mcpHandler = toNodeHandler(createMcpHandler(createMcpServer))
 
   const httpServer = createServer(async (req, res) => {
     const origin = req.headers.origin
@@ -119,12 +101,12 @@ if (mode === "http") {
       res.setHeader("Access-Control-Allow-Origin", origin)
       res.setHeader("Vary", "Origin")
     }
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
+    // The 2026-07-28 standard headers (SEP-2243) travel on every request.
     res.setHeader(
       "Access-Control-Allow-Headers",
-      "Content-Type, Accept, Authorization, Mcp-Session-Id"
+      "Content-Type, Accept, Authorization, MCP-Protocol-Version, Mcp-Method, Mcp-Name"
     )
-    res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id")
 
     if (req.method === "OPTIONS") {
       res.writeHead(204)
@@ -135,64 +117,7 @@ if (mode === "http") {
     const url = new URL(req.url ?? "/", `http://${host}:${port}`)
 
     if (url.pathname === "/mcp") {
-      const sessionId = req.headers["mcp-session-id"] as string | undefined
-
-      if (sessionId !== undefined) {
-        // A session idle past its TTL is expired now, not at the next sweep:
-        // served, it would come back to life with a fresh lastSeen.
-        sweepSessions()
-        const existing = sessions.get(sessionId)
-        if (!existing) {
-          // Unknown, expired or closed. The spec answers 404, the signal for
-          // the client to initialize a new session.
-          res.writeHead(404, { "Content-Type": "application/json" })
-          res.end(
-            JSON.stringify({
-              jsonrpc: "2.0",
-              error: {
-                code: -32001,
-                message:
-                  "Session not found or expired. Send a new initialize request, without an Mcp-Session-Id header.",
-              },
-              id: null,
-            })
-          )
-          return
-        }
-        existing.lastSeen = Date.now()
-        await existing.transport.handleRequest(req, res)
-        return
-      }
-
-      sweepSessions()
-      if (sessions.size >= MAX_SESSIONS) {
-        res.writeHead(503, { "Content-Type": "application/json" })
-        res.end(
-          JSON.stringify({
-            error: "Too many sessions",
-            message: `Session limit of ${MAX_SESSIONS} reached. Retry later or raise MCP_MAX_SESSIONS.`,
-          })
-        )
-        return
-      }
-
-      // New session (initialize request). Only the SDK's public API is used:
-      // the session is stored once initialized and dropped when the transport
-      // closes (DELETE from the client, or eviction by the sweep).
-      const transport = new StreamableHTTPServerTransport({
-        sessionIdGenerator: () => crypto.randomUUID(),
-        onsessioninitialized: (sid) => {
-          sessions.set(sid, { transport, lastSeen: Date.now() })
-        },
-      })
-
-      transport.onclose = () => {
-        if (transport.sessionId) sessions.delete(transport.sessionId)
-      }
-
-      const server = createMcpServer()
-      await server.connect(transport)
-      await transport.handleRequest(req, res)
+      await mcpHandler(req, res)
     } else if (url.pathname === "/health") {
       res.writeHead(200, { "Content-Type": "application/json" })
       res.end(
@@ -200,7 +125,6 @@ if (mode === "http") {
           status: "ok",
           name: "DSAIReadable",
           version: mcpServerVersion,
-          sessions: sessions.size,
         })
       )
     } else {
@@ -217,7 +141,7 @@ if (mode === "http") {
     console.log(`   Allowed origins: ${[...allowedOrigins].join(", ")}`)
   })
 } else {
-  const server = createMcpServer()
-  const transport = new StdioServerTransport()
-  await server.connect(transport)
+  // The opening exchange of the connection picks the protocol revision:
+  // 2026-07-28 (server/discover) or 2025-era (initialize).
+  serveStdio(createMcpServer)
 }

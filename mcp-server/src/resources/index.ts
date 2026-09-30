@@ -1,7 +1,4 @@
-import {
-  ResourceTemplate,
-  type McpServer,
-} from "@modelcontextprotocol/sdk/server/mcp.js"
+import { ResourceTemplate, type McpServer } from "@modelcontextprotocol/server"
 import { loadContext } from "../lib/context.js"
 import { CRITICAL_RULES, type RuleSet } from "../lib/response-format.js"
 
