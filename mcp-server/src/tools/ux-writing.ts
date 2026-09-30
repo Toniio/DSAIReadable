@@ -7,11 +7,7 @@ import {
   glossaryOutput,
   uxWritingRulesOutput,
 } from "../lib/output-schemas.js"
-import {
-  conciseUxWriting,
-  responseFormat,
-  type RuleSet,
-} from "../lib/response-format.js"
+import { uxWritingRules, type RuleSet } from "../lib/response-format.js"
 
 interface GlossaryEntry {
   term: string
@@ -19,32 +15,22 @@ interface GlossaryEntry {
 }
 
 export function registerUxWritingTools(server: McpServer): void {
-  // 1. get_ux_writing_rules
+  // 1. dsaireadable_get_ux_writing_rules
   server.registerTool(
-    "get_ux_writing_rules",
+    "dsaireadable_get_ux_writing_rules",
     {
       title: "UX writing rules",
       description:
-        'Returns the rules for the text a UI renders. "concise" (default): the voice and tone rules (sentence case, verb-first buttons, errors that say what happened and how to fix it, word list) and the content rules (default strings from UI_STRINGS, one override prop per string, language of the defaults). "detailed": the whole rule set — foundation rules, component constraints, composition rules — which get_design_rules also serves',
-      inputSchema: z.object({
-        response_format: responseFormat(
-          "every foundation rule, the component constraints and the composition rules"
-        ),
-      }),
+        "Returns the rules for the text a UI renders: the voice and tone rules (sentence case, verb-first buttons, errors that say what happened and how to fix it, word list) and the content rules (default strings from UI_STRINGS, one override prop per string, language of the defaults). The other rules — foundations, component constraints, composition — are served by dsaireadable_get_design_rules",
       outputSchema: uxWritingRulesOutput,
       annotations: READ_ONLY,
     },
-    async ({ response_format }) => {
-      const rules = loadContext<RuleSet>("ux-writing.json")
-      return result(
-        response_format === "detailed" ? rules : conciseUxWriting(rules)
-      )
-    }
+    async () => result(uxWritingRules(loadContext<RuleSet>("ux-writing.json")))
   )
 
-  // 2. get_glossary
+  // 2. dsaireadable_get_glossary
   server.registerTool(
-    "get_glossary",
+    "dsaireadable_get_glossary",
     {
       title: "Glossary",
       description: "Returns the full glossary or a specific term definition",
@@ -77,9 +63,9 @@ export function registerUxWritingTools(server: McpServer): void {
     }
   )
 
-  // 3. get_content_library
+  // 3. dsaireadable_get_content_library
   server.registerTool(
-    "get_content_library",
+    "dsaireadable_get_content_library",
     {
       title: "Content library",
       description:

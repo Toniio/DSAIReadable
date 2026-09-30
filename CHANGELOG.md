@@ -111,6 +111,14 @@ section that fits.
 
 ### Changed
 
+- MCP server: every tool name starts with `dsaireadable_`
+  (`dsaireadable_get_component_specs`, `dsaireadable_validate_screen`…), so it
+  stays distinct among the tools of other servers. `get_component_specs` in
+  `detailed` answers everything needed to write a component in one call: the
+  full spec, its cva variants with their defaults, the sizes its size prop
+  accepts (from `design-system.index.json`, served nowhere before) and the
+  composition rules that cover it; `get_components` lists the sizes too.
+  `get_ux_writing_rules` serves the voice and tone and content rules only.
 - MCP server: `get_glossary` without a term answers `{ terms }` rather than a
   bare list; `get_dataviz_recommendation` answers an objective missing from
   the decision tree with an error rather than every objective.
@@ -219,6 +227,9 @@ section that fits.
 
 ### Removed
 
+- MCP server: `get_component_variants`, served by `get_component_specs` in
+  `detailed`; the `detailed` form of `get_ux_writing_rules`, which repeated
+  `get_design_rules`.
 - MCP server: HTTP sessions. Every request is served on its own, so
   `Mcp-Session-Id`, `MCP_SESSION_TTL_MS` and `MCP_MAX_SESSIONS` are gone, and
   `GET` or `DELETE` on `/mcp` receives a `405`.

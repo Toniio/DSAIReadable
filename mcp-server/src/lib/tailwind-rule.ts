@@ -1,11 +1,11 @@
 /**
- * The critical styling rule get_design_rules serves with every answer.
+ * The critical styling rule dsaireadable_get_design_rules serves with every answer.
  *
  * Written once by hand, it had drifted: it named theme.css as the bridge (it
  * is styles/globals.css), said the bridge read the shadcn aliases (`--primary`:
  * it reads the semantic tokens), and quoted hex values from before the
  * contrast fixes (`text-muted-foreground` as #67787c). The chain now stops at
- * the semantic token, whose values get_tokens serves from the tokens
+ * the semantic token, whose values dsaireadable_get_tokens serves from the tokens
  * themselves, and a test holds each link to styles/globals.css.
  */
 export const TAILWIND_RULE = {
@@ -26,7 +26,7 @@ export const TAILWIND_RULE = {
   ],
   token_chain_explanation: {
     description:
-      "A class resolves, through the @theme bridge, to a semantic token that references a primitive. Values in light and dark: get_tokens.",
+      "A class resolves, through the @theme bridge, to a semantic token that references a primitive. Values in light and dark: dsaireadable_get_tokens.",
     example:
       "bg-primary → --color-primary (@theme) → --color-action-background-default (semantic) → {primitive.color.violet.600} (primitive, private)",
     mapping: {

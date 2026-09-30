@@ -21,7 +21,7 @@
  *      rest of a props row is generated from the types (specs:api).
  *
  * The page patterns of `specs/patterns/` follow ① and ②: their Usage and
- * Spacing bullets are the rules `get_pattern` serves.
+ * Spacing bullets are the rules `dsaireadable_get_pattern` serves.
  *
  *   npx tsx scripts/lint-spec-wording.ts
  */

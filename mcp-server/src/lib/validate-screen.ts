@@ -1,7 +1,7 @@
 /**
  * Screen validation rules.
  *
- * Extracted from the `validate_screen` tool so every rule can be exercised
+ * Extracted from the `dsaireadable_validate_screen` tool so every rule can be exercised
  * directly by the test suite: a rule with no failing fixture is a rule that
  * quietly stops working, and this tool answers "passed" to agents.
  *

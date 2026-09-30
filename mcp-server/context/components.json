@@ -4,454 +4,628 @@
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/accordion.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Alert",
     "category": "Feedback",
     "status": "stable",
     "code_path": "components/ui/alert.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "AlertDialog",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/alert-dialog.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "AspectRatio",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/aspect-ratio.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Attachment",
     "category": "Conversation",
     "status": "beta",
     "code_path": "components/ui/attachment.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "Avatar",
     "category": "Misc",
     "status": "stable",
     "code_path": "components/ui/avatar.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "default",
+      "sm",
+      "lg"
+    ]
   },
   {
     "name": "Badge",
     "category": "Misc",
     "status": "stable",
     "code_path": "components/ui/badge.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Breadcrumb",
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/breadcrumb.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Bubble",
     "category": "Conversation",
     "status": "beta",
     "code_path": "components/ui/bubble.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Button",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/button.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "ButtonGroup",
     "category": "Misc",
     "status": "beta",
     "code_path": "components/ui/button-group.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Calendar",
     "category": "Data",
     "status": "stable",
     "code_path": "components/ui/calendar.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Card",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/card.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "default",
+      "sm"
+    ]
   },
   {
     "name": "Carousel",
     "category": "Data",
     "status": "stable",
     "code_path": "components/ui/carousel.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "Chart",
     "category": "Data",
     "status": "stable",
     "code_path": "components/ui/chart.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Checkbox",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/checkbox.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Collapsible",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/collapsible.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Combobox",
     "category": "Forms",
     "status": "beta",
     "code_path": "components/ui/combobox.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Command",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/command.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "ContextMenu",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/context-menu.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Dialog",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/dialog.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Direction",
     "category": "Layout",
     "status": "beta",
     "code_path": "components/ui/direction.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Drawer",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/drawer.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "DropdownMenu",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/dropdown-menu.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Empty",
     "category": "Feedback",
     "status": "beta",
     "code_path": "components/ui/empty.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Field",
     "category": "Forms",
     "status": "beta",
     "code_path": "components/ui/field.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Heading",
     "category": "Typography",
     "status": "stable",
     "code_path": "components/ui/heading.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "HoverCard",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/hover-card.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Illustration",
     "category": "Media",
     "status": "stable",
     "code_path": "components/ui/illustration.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Input",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/input.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "InputGroup",
     "category": "Forms",
     "status": "beta",
     "code_path": "components/ui/input-group.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "icon-xs",
+      "icon-sm"
+    ]
   },
   {
     "name": "InputOtp",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/input-otp.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Item",
     "category": "Misc",
     "status": "beta",
     "code_path": "components/ui/item.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default"
+    ]
   },
   {
     "name": "Kbd",
     "category": "Misc",
     "status": "beta",
     "code_path": "components/ui/kbd.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Label",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/label.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Logo",
     "category": "Brand",
     "status": "stable",
     "code_path": "components/ui/logo.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "sm",
+      "default",
+      "lg"
+    ]
   },
   {
     "name": "Marker",
     "category": "Conversation",
     "status": "beta",
     "code_path": "components/ui/marker.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Menubar",
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/menubar.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Message",
     "category": "Conversation",
     "status": "beta",
     "code_path": "components/ui/message.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "MessageScroller",
     "category": "Conversation",
     "status": "beta",
     "code_path": "components/ui/message-scroller.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "NativeSelect",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/native-select.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "sm",
+      "default"
+    ]
   },
   {
     "name": "NavigationMenu",
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/navigation-menu.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Pagination",
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/pagination.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "PasswordInput",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/password-input.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Popover",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/popover.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Progress",
     "category": "Data",
     "status": "stable",
     "code_path": "components/ui/progress.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Questionnaire",
     "category": "Conversation",
     "status": "beta",
     "code_path": "components/ui/questionnaire.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "RadioGroup",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/radio-group.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Resizable",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/resizable.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "ScrollArea",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/scroll-area.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Select",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/select.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "sm",
+      "default"
+    ]
   },
   {
     "name": "Separator",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/separator.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Sheet",
     "category": "Overlay",
     "status": "stable",
     "code_path": "components/ui/sheet.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Sidebar",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/sidebar.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
   },
   {
     "name": "Skeleton",
     "category": "Layout",
     "status": "stable",
     "code_path": "components/ui/skeleton.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Slider",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/slider.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Sonner",
     "category": "Feedback",
     "status": "stable",
     "code_path": "components/ui/sonner.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Spinner",
     "category": "Feedback",
     "status": "beta",
     "code_path": "components/ui/spinner.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Switch",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/switch.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "sm",
+      "default"
+    ]
   },
   {
     "name": "Table",
     "category": "Data",
     "status": "stable",
     "code_path": "components/ui/table.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Tabs",
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/tabs.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Textarea",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/textarea.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   },
   {
     "name": "Toggle",
     "category": "Forms",
     "status": "stable",
     "code_path": "components/ui/toggle.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "sm",
+      "default",
+      "lg"
+    ]
   },
   {
     "name": "ToggleGroup",
     "category": "Misc",
     "status": "stable",
     "code_path": "components/ui/toggle-group.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": [
+      "sm",
+      "default",
+      "lg"
+    ]
   },
   {
     "name": "Tooltip",
     "category": "Feedback",
     "status": "stable",
     "code_path": "components/ui/tooltip.tsx",
-    "has_spec": true
+    "has_spec": true,
+    "sizes": []
   }
 ]

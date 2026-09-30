@@ -183,6 +183,8 @@ const inventory: Array<{
   name: string
   code_path: string
   status: string
+  /** Every size a size prop accepts; absent when there is no size prop. */
+  sizes?: string[]
   shadcn: { item: string | null; divergences: JsonObject[] }
 }> = dsIndex.inventory
 
@@ -231,6 +233,7 @@ function generateComponents() {
       status: c.status,
       code_path: c.code_path,
       has_spec: specNames.has(c.name),
+      sizes: c.sizes ?? [],
     }
   })
   return write("components.json", result)
@@ -721,7 +724,7 @@ function generateTextStyles() {
     "utf-8"
   )
 
-  // Served as plain values: get_typography answers with these cells.
+  // Served as plain values: dsaireadable_get_typography answers with these cells.
   const rowsOf = (heading: string) =>
     mdTable(mdSection(typoMd, heading)).map((r) => r.map(mdPlain))
 
@@ -852,7 +855,7 @@ function generateUxWriting() {
     }
   }
 
-  // Composition rules of design-system.index.json, served by get_design_rules:
+  // Composition rules of design-system.index.json, served by dsaireadable_get_design_rules:
   // without them, the context cache carried rule-05 alone (in icons.json).
   const compositionRules = (
     dsIndex.composition_rules as Array<{

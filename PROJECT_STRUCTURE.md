@@ -221,8 +221,8 @@ One file per pattern, in 9 sections:
 Usage and Spacing bullets open with a keyword, as a component's Constraints do;
 every component of the Components table must be an export a component spec
 documents (`generate-context` fails otherwise); every code example passes
-`validate_screen` with no issue (`mcp:test`). The MCP server serves them through
-`list_patterns` and `get_pattern`.
+`dsaireadable_validate_screen` with no issue (`mcp:test`). The MCP server serves them through
+`dsaireadable_list_patterns` and `dsaireadable_get_pattern`.
 
 ### `specs/tokens/token-reference.md` · `tokens.manifest.json` — generated
 

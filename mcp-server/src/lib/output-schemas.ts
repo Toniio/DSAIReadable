@@ -32,6 +32,12 @@ function page<T extends z.ZodType>(item: T) {
   })
 }
 
+const compositionRule = z.strictObject({
+  id: z.string(),
+  rule: z.string(),
+  applies_to: strings.optional(),
+})
+
 const detail = z
   .string()
   .describe('What response_format: "detailed" adds to this answer')
@@ -92,6 +98,7 @@ export const componentsOutput = page(
     status: z.string(),
     code_path: z.string(),
     has_spec: z.boolean(),
+    sizes: strings,
   })
 )
 
@@ -147,19 +154,16 @@ export const componentSpecOutput = forms(
     ),
     accessibility: z.string(),
     code_example: z.string(),
+    variants: z.record(
+      z.string(),
+      z.strictObject({ values: strings, default: z.string().nullable() })
+    ),
+    variant_sources: strings,
+    part_of: z.string().nullable(),
+    sizes: strings,
+    composition_rules: z.array(compositionRule),
   })
 )
-
-export const componentVariantsOutput = z.strictObject({
-  component: z.string(),
-  variants: z.record(
-    z.string(),
-    z.strictObject({ values: strings, default: z.string().nullable() })
-  ),
-  sources: strings,
-  part_of: z.string().nullable(),
-  has_variants: z.boolean(),
-})
 
 export const tokensOutput = page(
   z.strictObject({
@@ -205,11 +209,6 @@ export const iconsOutput = z.strictObject({
 // --- Rules ---
 
 const generalRule = z.strictObject({ rule: z.string(), source: z.string() })
-const compositionRule = z.strictObject({
-  id: z.string(),
-  rule: z.string(),
-  applies_to: strings.optional(),
-})
 const criticalTitle = z.strictObject({
   id: z.string(),
   severity: z.string(),
@@ -264,10 +263,9 @@ export const designRulesOutput = forms(
   })
 )
 
-export const uxWritingRulesOutput = forms(
-  z.strictObject({ rules: z.array(generalRule), detail: z.string() }),
-  z.strictObject(ruleSet)
-)
+export const uxWritingRulesOutput = z.strictObject({
+  rules: z.array(generalRule),
+})
 
 // --- Patterns ---
 

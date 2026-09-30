@@ -61,7 +61,7 @@ dsaireadable/
 │   ├── src/
 │   │   ├── tools/              # MCP tools (ds-core, dataviz, ux-writing, admin)
 │   │   ├── prompts/            # MCP prompts
-│   │   ├── lib/                # Cache loading, validate_screen, composition rules
+│   │   ├── lib/                # Cache loading, dsaireadable_validate_screen, composition rules
 │   │   └── context/            # generate.ts: builds the cache
 │   └── context/                # Precompiled JSON files (the design system cache) — generated
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
@@ -111,21 +111,22 @@ request is served on its own, no `Mcp-Session-Id` is issued, and `GET` or
 
 ### Available tools
 
-| Category       | Tools                                                                                                                                                            |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **DS Core**    | `get_design_system_overview`, `get_components`, `get_component_specs`, `get_component_variants`, `get_tokens`, `get_typography`, `get_icons`, `get_design_rules` |
-| **Patterns**   | `list_patterns` (the page patterns, by task and by UI concern), `get_pattern` (one pattern: usage, structure, components, spacing, content, code example)        |
-| **Dataviz**    | `get_dataviz_recommendation` (chart types for an objective), `get_dataviz_specs` (a chart type's tokens, anatomy and library)                                    |
-| **UX Writing** | `get_ux_writing_rules` (default strings, overriding, language), `get_glossary`, `get_content_library`                                                            |
-| **Admin**      | `get_stats` (component, token and spec counts), `validate_screen` (checks generated code against the design system's rules)                                      |
+| Category       | Tools                                                                                                                                                                                                                                                                                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **DS Core**    | `dsaireadable_get_design_system_overview`, `dsaireadable_get_components` (with the sizes each accepts), `dsaireadable_get_component_specs` (concise, or `detailed`: the full spec with its cva variants, sizes and composition rules), `dsaireadable_get_tokens`, `dsaireadable_get_typography`, `dsaireadable_get_icons`, `dsaireadable_get_design_rules` |
+| **Patterns**   | `dsaireadable_list_patterns` (the page patterns, by task and by UI concern), `dsaireadable_get_pattern` (one pattern: usage, structure, components, spacing, content, code example)                                                                                                                                                                        |
+| **Dataviz**    | `dsaireadable_get_dataviz_recommendation` (chart types for an objective), `dsaireadable_get_dataviz_specs` (a chart type's tokens, anatomy and library)                                                                                                                                                                                                    |
+| **UX Writing** | `dsaireadable_get_ux_writing_rules` (voice and tone, default strings, overriding, language), `dsaireadable_get_glossary`, `dsaireadable_get_content_library`                                                                                                                                                                                               |
+| **Admin**      | `dsaireadable_get_stats` (component, token and spec counts), `dsaireadable_validate_screen` (checks generated code against the design system's rules)                                                                                                                                                                                                      |
 
 Every tool is annotated as read-only (`readOnlyHint`, `openWorldHint: false`): a client does not need
 to confirm its calls. Every tool declares an `outputSchema` and answers with `structuredContent` that
 conforms to it, plus the same JSON as text. An argument outside a tool's input schema is a tool
 execution error that names it. Lists and resources carry a one-hour, `public` cache hint (`ttlMs`,
-`cacheScope`) for 2026-07-28 clients. `get_component_specs`, `get_design_rules`, `get_ux_writing_rules` and `get_pattern` take
+`cacheScope`) for 2026-07-28 clients. Every tool name starts with `dsaireadable_`, so it stays distinct among the tools of other servers.
+`dsaireadable_get_component_specs`, `dsaireadable_get_design_rules` and `dsaireadable_get_pattern` take
 `response_format`: `concise` by default (under 20 % of the volume), `detailed` for everything.
-`get_components` and `get_tokens` paginate: `limit` (100 by default) and `cursor`, with a
+`dsaireadable_get_components` and `dsaireadable_get_tokens` paginate: `limit` (100 by default) and `cursor`, with a
 `{ total, items, next_cursor }` response.
 
 ### Resources
@@ -261,7 +262,7 @@ Every component has a spec in `specs/components/<component>.md`, in 13 sections:
 
 **Variants** is generated from the code's `cva()` calls (`npm run specs:variants`), **Tokens** from its classes, resolved by Tailwind down to the semantic token (`npm run specs:tokens`), and **Props / API** from its TypeScript exports, where only the descriptions are edited by hand (`npm run specs:api`); `specs:validate` checks all three. The rules for choosing between sibling components (selection, surfaces, collections) live once in `composition_rules` and are copied into the **Usage** of the specs they concern (`npm run specs:choices`). Rules (**Constraints**, **Accessibility**…) are written **MUST** / **MUST NOT** with a threshold or an observable criterion, or **SHOULD** with its exception (**unless**); every **Constraints** line opens with one of these keywords, or with **Note** for a fact that imposes nothing; `specs:validate` rejects wording that leaves the decision to the reader ("avoid", "prefer", "if needed"…). **Accessibility** gives, in a fixed structure, the ARIA pattern, the role, the keys, the accessible-name requirement and the pitfalls — known defects included — against the WCAG 2.2 AA target.
 
-The MCP server ingests these specs through `get_component_specs`; they are the components' behavioral source of truth.
+The MCP server ingests these specs through `dsaireadable_get_component_specs`; they are the components' behavioral source of truth.
 
 ---
 
