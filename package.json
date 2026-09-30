@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
+  "workspaces": [
+    ".",
+    "packages/*",
+    "mcp-server"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=22.12"
@@ -15,7 +20,8 @@
     "typecheck": "tsc --noEmit",
     "typecheck:scripts": "tsc --noEmit -p tsconfig.scripts.json",
     "typecheck:mcp": "tsc --noEmit -p mcp-server",
-    "typecheck:all": "npm run typecheck && npm run typecheck:scripts && npm run typecheck:mcp",
+    "typecheck:plugin": "tsc --noEmit -p packages/eslint-plugin",
+    "typecheck:all": "npm run typecheck && npm run typecheck:scripts && npm run typecheck:plugin && npm run typecheck:mcp",
     "tokens:build": "tsx scripts/build-tokens.ts",
     "tokens:check": "tsx scripts/build-tokens.ts --check",
     "tokens:lint-values": "tsx scripts/lint-raw-values.ts",
@@ -51,8 +57,9 @@
     "mcp:test": "npm --prefix mcp-server run test",
     "mcp:test-package": "npm --prefix mcp-server run test:package",
     "generate-context": "npm --prefix mcp-server run generate-context",
+    "plugin:test": "npm run test -w @dsaireadable/eslint-plugin",
     "test:components": "vitest run",
-    "test": "npm run test:components && npm run mcp:test",
+    "test": "npm run test:components && npm run plugin:test && npm run mcp:test",
     "check": "tsx scripts/check.ts",
     "prepare": "husky",
     "index:strings": "tsx scripts/lint-ui-strings.ts",

@@ -94,7 +94,6 @@ const DIACRITIC = /[àâçéèêëîïôùûœ]/giu
 
 const SKIPPED_FILES = new Set([
   "package-lock.json",
-  "mcp-server/package-lock.json",
   // This file: its word lists are the French and British it looks for.
   "scripts/lint-language.ts",
 ])

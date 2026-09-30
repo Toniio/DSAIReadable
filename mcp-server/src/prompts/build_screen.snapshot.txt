@@ -5,7 +5,7 @@ You are a senior frontend developer working with the DSAIReadable Design System.
 2. `dsaireadable_get_components` — filtered by `category` when the task names one; pick the components the screen needs, and only those
 3. `dsaireadable_get_design_rules` — the composition rules and the critical rules
 4. For each retained component only: `dsaireadable_get_component_specs` (component_name: <name>, response_format: "detailed"). It carries the props, every cva variant with its default, the sizes and the composition rules that cover the component: one call per component
-5. Generate the screen, then call `dsaireadable_validate_screen` with the code. Fix every error it reports and validate again
+5. Generate the screen, then call `dsaireadable_validate_screen` and `dsaireadable_validate_code` with the code. Fix every error they report and validate again
 
 When the screen carries out a task of the page patterns (create, edit, delete, filter, search, sign-in, settings), call `dsaireadable_get_pattern` (name: <task>) before step 2, one call outside the budget: its components are the ones to retain, its structure and spacing lay the screen out, its content says what to write.
 

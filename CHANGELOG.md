@@ -15,6 +15,22 @@ Until then, a pull request that changes behavior adds its line under
 
 ### Added
 
+- ESLint plugin: `@dsaireadable/eslint-plugin` (`packages/eslint-plugin/`) puts
+  the design system's rules in a project's own lint. Six rules
+  (`no-native-interactive-elements`, `no-external-ui-imports`, `no-inline-svg`,
+  `no-class-interpolation`, `no-raw-values`, `no-deprecated-imports`) in
+  `configs.core`, which reads the code alone, and `configs.recommended`, which
+  adds the Tailwind lockdown through `eslint-plugin-better-tailwindcss` (an
+  unknown class is an error, a disabled state reads `opacity-disabled`).
+  `components/ui/` is left alone, and `createConfig({ ignores, tailwind })`
+  narrows that for a project whose own components live there. `npm run plugin:test` runs each rule against
+  a failing and a conforming fixture. It is not published yet: publishing is a
+  maintainer's step.
+- MCP server: `dsaireadable_validate_code` lints and type-checks TSX with the
+  plugin's `core` rules, in memory, and answers with structured diagnostics
+  (rule, severity, line, column). TypeScript adds syntax errors and names that
+  are not defined. `build_screen` asks for it after `validate_screen`, and
+  `mcp:test` runs every component and pattern example through it.
 - License: the repository and the MCP server package are released under the MIT
   License (`LICENSE`, `license` in both `package.json`). `NOTICE.md` reproduces the
   shadcn/ui copyright notice, which the components derived from it must keep.
@@ -138,6 +154,16 @@ Until then, a pull request that changes behavior adds its line under
 
 ### Changed
 
+- The repository is an npm workspace (`packages/eslint-plugin/`, `mcp-server/`,
+  and the root, which Changesets versions): `npm ci` at the root installs all of
+  it, with one lockfile. The version is now also the plugin's, which the server
+  pins exactly; `versions:sync` and `versions:check` cover both. The MCP server
+  needs Node.js 20.19 or later (ESLint 10) and ships `typescript`, `eslint` and
+  `@typescript-eslint/parser` as runtime dependencies. `mcp:test-package` installs
+  the server's tarball with the plugin's.
+- The code examples of `Chart`, `Resizable` and `Skeleton` no longer teach an
+  arbitrary value (`min-h-[200px]`, `w-[200px]`): they use the spacing scale
+  (`min-h-52`, `w-52`, `w-36`).
 - The design system, its inventory and the MCP server now share one version,
   `0.0.1`, until the first release. They were `1.1.0` (`design-system.index.json`,
   served as `design_system_version`) and `1.0.0` (`mcp-server/package.json`,

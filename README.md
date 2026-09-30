@@ -61,9 +61,10 @@ dsaireadable/
 │   ├── src/
 │   │   ├── tools/              # MCP tools (ds-core, dataviz, ux-writing, admin)
 │   │   ├── prompts/            # MCP prompts
-│   │   ├── lib/                # Cache loading, dsaireadable_validate_screen, composition rules
+│   │   ├── lib/                # Cache loading, dsaireadable_validate_screen and _validate_code, composition rules
 │   │   └── context/            # generate.ts: builds the cache
 │   └── context/                # Precompiled JSON files (the design system cache) — generated
+├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
 ├── registry/                   # Sources of the registry items that are not components
 ├── registry.json               # shadcn registry — generated
@@ -147,7 +148,7 @@ request is served on its own, no `Mcp-Session-Id` is issued, and `GET` or
 | **Patterns**   | `dsaireadable_list_patterns` (the page patterns, by task and by UI concern), `dsaireadable_get_pattern` (one pattern: usage, structure, components, spacing, content, code example)                                                                                                                                                                        |
 | **Dataviz**    | `dsaireadable_get_dataviz_recommendation` (chart types for an objective), `dsaireadable_get_dataviz_specs` (a chart type's tokens, anatomy and library)                                                                                                                                                                                                    |
 | **UX Writing** | `dsaireadable_get_ux_writing_rules` (voice and tone, default strings, overriding, language), `dsaireadable_get_glossary`, `dsaireadable_get_content_library`                                                                                                                                                                                               |
-| **Admin**      | `dsaireadable_get_stats` (component, token and spec counts), `dsaireadable_validate_screen` (checks generated code against the design system's rules)                                                                                                                                                                                                      |
+| **Admin**      | `dsaireadable_get_stats` (component, token and spec counts), `dsaireadable_validate_screen` (checks generated code against the design system's rules, as text), `dsaireadable_validate_code` (lints and type-checks TSX with the ESLint plugin's rules)                                                                                                    |
 
 Every tool is annotated as read-only (`readOnlyHint`, `openWorldHint: false`): a client does not need
 to confirm its calls. Every tool declares an `outputSchema` and answers with `structuredContent` that
@@ -196,19 +197,54 @@ From a clone, `"args": ["tsx", "./mcp-server/src/index.ts"]` runs the sources.
 
 ---
 
+## ESLint plugin
+
+`@dsaireadable/eslint-plugin` (`packages/eslint-plugin/`) gives a project's own lint
+the design system's rules, so an agent, or a person, sees a violation where it
+writes the code instead of in review. It is **not published yet**
+(see [Publishing identity](#publishing-identity)); the MCP server's
+`dsaireadable_validate_code` tool runs the same rules.
+
+```js
+// eslint.config.mjs
+import dsaireadable from "@dsaireadable/eslint-plugin"
+
+export default [...dsaireadable.configs.recommended]
+```
+
+| Rule                                          | Flags                                                                                                                                      |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dsaireadable/no-native-interactive-elements` | `<button>`, `<input>`, `<select>`, `<textarea>`, `<label>`, `<table>`, `<dialog>` and `<a>` (outside a `Button` with `asChild`)            |
+| `dsaireadable/no-external-ui-imports`         | Other icon kits, UI libraries and primitives imported directly (Radix, Base UI, MUI…), a component imported from outside `@/components/ui` |
+| `dsaireadable/no-inline-svg`                  | An inline `<svg>`: icons come from `@phosphor-icons/react`                                                                                 |
+| `dsaireadable/no-class-interpolation`         | A Tailwind class built by interpolation (`` `text-${tone}` ``): Tailwind never generates it                                                |
+| `dsaireadable/no-raw-values`                  | Raw hex and color functions, arbitrary Tailwind values, the default palette, primitive tokens, `prefers-color-scheme`                      |
+| `dsaireadable/no-deprecated-imports`          | What the design system has deprecated (the list is an option; empty until the first deprecation)                                           |
+
+`configs.core` holds those six rules and reads the code alone. `configs.recommended`
+adds the Tailwind half of the lockdown through `eslint-plugin-better-tailwindcss`: a class the real
+stylesheet does not generate (`bg-red-500`, `p-13`) is an error, and a disabled state must read
+`opacity-disabled`. Point `settings["better-tailwindcss"].entryPoint` at your stylesheet if it is not
+`styles/globals.css`. Neither config lints `components/ui/`: what the registry installs there is the
+design system's own code. If your own components live there, `dsaireadable.createConfig({ ignores })`
+narrows the exclusion to the files the registry installed.
+
+---
+
 ## Publishing identity
 
 One name, adapted to the constraint of each channel. Any future publication
 follows it — do not reintroduce a capitalized variant.
 
-| Channel                | Identifier                   | Why this form                                                                    |
-| ---------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
-| GitHub repository      | `Toniio/DSAIReadable`        | The project's original name; the only place where casing is free                 |
-| shadcn registry        | `dsaireadable`               | A registry name only allows alphanumerics, hyphens and underscores               |
-| A component's item     | `Toniio/DSAIReadable/<item>` | The full GitHub address: a bare name would point to the official shadcn registry |
-| npm scope              | `@dsaireadable`              | npm forbids capitals in a scope                                                  |
-| MCP server npm package | `@dsaireadable/mcp-server`   | Not published yet: for now the server runs from a clone of this repository       |
-| Release tag            | `vX.Y.Z`                     | One version for the tokens, components, registry and MCP server (`package.json`) |
+| Channel                | Identifier                    | Why this form                                                                    |
+| ---------------------- | ----------------------------- | -------------------------------------------------------------------------------- |
+| GitHub repository      | `Toniio/DSAIReadable`         | The project's original name; the only place where casing is free                 |
+| shadcn registry        | `dsaireadable`                | A registry name only allows alphanumerics, hyphens and underscores               |
+| A component's item     | `Toniio/DSAIReadable/<item>`  | The full GitHub address: a bare name would point to the official shadcn registry |
+| npm scope              | `@dsaireadable`               | npm forbids capitals in a scope                                                  |
+| MCP server npm package | `@dsaireadable/mcp-server`    | Not published yet: for now the server runs from a clone of this repository       |
+| ESLint plugin package  | `@dsaireadable/eslint-plugin` | Not published yet: the server depends on it, and both are published together     |
+| Release tag            | `vX.Y.Z`                      | One version for the tokens, components, registry, MCP server and ESLint plugin   |
 
 A release tag pins the item you name, not what it depends on:
 `npx shadcn add Toniio/DSAIReadable/button#v0.1.0` reads `button` at the tag, but

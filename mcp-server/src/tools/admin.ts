@@ -2,8 +2,13 @@ import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/server"
 import { loadContext, result } from "../lib/context.js"
 import { validateScreen } from "../lib/validate-screen.js"
+import { validateCode } from "../lib/validate-code.js"
 import { READ_ONLY } from "../lib/annotations.js"
-import { screenReportOutput, statsOutput } from "../lib/output-schemas.js"
+import {
+  codeReportOutput,
+  screenReportOutput,
+  statsOutput,
+} from "../lib/output-schemas.js"
 
 interface ComponentEntry {
   name: string
@@ -92,6 +97,26 @@ export function registerAdminTools(server: McpServer): void {
       annotations: READ_ONLY,
     },
     async ({ code }) => result(validateScreen(code))
+  )
+
+  // 3. dsaireadable_validate_code
+  server.registerTool(
+    "dsaireadable_validate_code",
+    {
+      title: "Validate code with the ESLint rules",
+      description:
+        "Lints and type-checks TSX with the design system's own ESLint rules (@dsaireadable/eslint-plugin, the same a project runs): native elements instead of components, other UI or icon libraries, raw colors, default-palette and arbitrary Tailwind values, primitive tokens, deprecated imports, plus syntax and undefined names from TypeScript. Reads the syntax tree where dsaireadable_validate_screen reads text, so run it on the final code. Unknown Tailwind classes are checked by the project's own lint, which reads its stylesheet",
+      inputSchema: z.object({
+        code: z
+          .string()
+          .describe(
+            "TSX code to validate, as it would be saved in a .tsx file"
+          ),
+      }),
+      outputSchema: codeReportOutput,
+      annotations: READ_ONLY,
+    },
+    async ({ code }) => result(validateCode(code))
   )
 }
 

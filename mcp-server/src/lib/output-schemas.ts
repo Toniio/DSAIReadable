@@ -394,3 +394,20 @@ export const screenReportOutput = z.strictObject({
     })
   ),
 })
+
+export const codeReportOutput = z.strictObject({
+  total_issues: z.number().int(),
+  errors: z.number().int(),
+  warnings: z.number().int(),
+  passed: z.boolean(),
+  issues: z.array(
+    z.strictObject({
+      source: z.enum(["eslint", "typescript"]),
+      severity: z.enum(["error", "warning"]),
+      rule: z.string(),
+      message: z.string(),
+      line: z.number().int(),
+      column: z.number().int(),
+    })
+  ),
+})

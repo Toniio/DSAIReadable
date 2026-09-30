@@ -4,7 +4,7 @@ Complements the [root `AGENTS.md`](../AGENTS.md), which remains the reference:
 this file only adds what is specific to `mcp-server/` and never contradicts it.
 A contradiction between the two is a bug to report.
 
-The server exposes the design system to agents: **16 tools** (`src/tools/`, each named `dsaireadable_*`),
+The server exposes the design system to agents: **17 tools** (`src/tools/`, each named `dsaireadable_*`),
 **3 resources** (`src/resources/index.ts`) and **5 prompts**
 (`src/prompts/index.ts`). It never reads the sources on the fly: it serves a
 precompiled JSON cache, `context/*.json`.
@@ -46,17 +46,17 @@ npm run mcp:start:http     # HTTP server, 127.0.0.1:3100 by default
 npm run mcp:test-package   # packs the package and runs the tarball through npx from an empty folder (network)
 ```
 
-⚠️ `npm ci` at the root **does not install** `mcp-server/`. After cloning or
-copying the repository: `npm ci --prefix mcp-server`. A `node_modules` copied
-from another machine breaks `generate-context` (an esbuild binary built for
-another platform): delete it and reinstall.
+`mcp-server/` is an npm workspace of the root (with `packages/eslint-plugin/`):
+`npm ci` at the root installs it, and there is one lockfile, the root's. A
+`node_modules` copied from another machine breaks `generate-context` (an esbuild
+binary built for another platform): delete it and reinstall.
 
 ## 3. Server-specific rules
 
 | Rule                                                                                                                                                                                                                                                                                                                            | Why                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Every fix to the generator or to a tool adds a test to `src/test.ts`, and that test must fail without the fix**                                                                                                                                                                                                               | Parser bugs (cva variants, spec tables) served wrong data while no check turned red                                                                                                                 |
-| **Every `dsaireadable_validate_screen` rule has its negative fixture** (`NEGATIVE_FIXTURES` in `src/test.ts`)                                                                                                                                                                                                                   | A rule never seen failing may detect nothing                                                                                                                                                        |
+| **Every `dsaireadable_validate_screen` rule has its negative fixture** (`NEGATIVE_FIXTURES` in `src/test.ts`), **and so does every rule of `@dsaireadable/eslint-plugin`** (`CODE_FIXTURES`, for `dsaireadable_validate_code`)                                                                                                  | A rule never seen failing may detect nothing                                                                                                                                                        |
 | **Parse Markdown by structure, not by position**: tables by header, escaped `\|` respected                                                                                                                                                                                                                                      | The specs are formatted by Prettier and hold several tables per section                                                                                                                             |
 | **Versions and identity come from `ds-metadata.json`**, which names the source of each field (`sources`): `design_system_version` ← `design-system.index.json`, `mcp_server_version` ← `mcp-server/package.json`, `registry_source` ← `registry.json`, `stack` ← `package.json`; no literal version in the served code (tested) | A hard-coded version is wrong from the first bump                                                                                                                                                   |
 | **Every tool is declared with `registerTool`, `annotations: READ_ONLY` and an `outputSchema`** (`src/lib/output-schemas.ts`, strict objects), **and answers with `result()`** (`structuredContent` plus the same JSON as text)                                                                                                  | Without annotations, the MCP spec assumes a destructive, open-world tool; the output schema is the contract the server validates each answer against, and test 13 calls every tool with every input |
@@ -70,15 +70,25 @@ not the sources, is what has to work:
 
 - **The runtime is compiled JavaScript.** `npm run build` (`tsconfig.build.json`)
   writes `dist/`, and `bin` points at `dist/index.js` with a `node` shebang. `tsx`
-  and `typescript` are dev dependencies: no runtime code may need them.
+  is a dev dependency: no runtime code may need it. `typescript`, `eslint` and
+  `@typescript-eslint/parser` are runtime dependencies, for
+  `dsaireadable_validate_code`.
+- **`@dsaireadable/eslint-plugin` is a workspace package, pinned to the exact
+  version of the server** (`versions:sync` keeps the pin). While developing,
+  `tsconfig.json` maps it to `../packages/eslint-plugin/src`, so no build is
+  needed to run or type-check the server; `tsconfig.build.json` clears the
+  mapping, so the package is built against the plugin's own build (`prebuild`).
+  Both tarballs are installed together by `mcp:test-package` until the plugin
+  is on the registry.
 - **`files` is `dist` and `context`.** A file the server reads at run time from
   somewhere else (the repository, `specs/`) is a bug: it will not be in the package.
   `tsconfig.build.json` leaves out what only the repository uses: `src/test.ts`,
   `src/test-package.ts`, `src/context/generate.ts` and `src/lib/dtcg.ts`. A
   runtime module must not import them.
 - **`npm run mcp:test-package`** builds, packs, checks the file list and runs the
-  tarball through `npx` from an empty folder, then calls `initialize`,
-  `tools/list` and a tool that reads the cache. Run it after any change to the
+  tarball, with the plugin's, through `npx` from an empty folder, then calls
+  `initialize`, `tools/list`, a tool that reads the cache and
+  `dsaireadable_validate_code`. Run it after any change to the
   build, `package.json` or the files `loadContext()` reads.
 - **The one thing read from outside the package** is the consumer project's
   `design/patterns/*.md` (`src/lib/patterns.ts`), through the same parser the

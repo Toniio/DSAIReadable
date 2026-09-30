@@ -4,10 +4,12 @@
  * Changesets versions the root `package.json` and nothing else. The same number
  * is also the design system's version served to agents (`version` in
  * `design-system.index.json`, then `design_system_version` in `ds-metadata.json`)
- * and the MCP server's (`mcp-server/package.json`, then `mcp_server_version`):
- * one release tag, `vX.Y.Z`, names all of it. This script copies the root
- * version to every place that carries it, lockfiles included, and its `--check`
- * mode fails when one of them has drifted.
+ * and the MCP server's (`mcp-server/package.json`, then `mcp_server_version`),
+ * and the ESLint plugin's (`packages/eslint-plugin/package.json`), which the
+ * server pins to the exact version it ships with: one release tag, `vX.Y.Z`,
+ * names all of it. This script copies the root version to every place that
+ * carries it, the workspace lockfile included, and its `--check` mode fails
+ * when one of them has drifted.
  *
  *   npx tsx scripts/sync-versions.ts            copy the root version everywhere
  *   npx tsx scripts/sync-versions.ts --check    fail on a place that differs
@@ -28,21 +30,68 @@ const ROOT = args.includes("--root")
 const TOP = /^( {2}"version": ")[^"]*(")/m
 /** In a lockfile, `packages[""]` is the first entry: its `"version"` is the first one indented by six spaces. */
 const LOCK_ROOT = /^( {6}"version": ")[^"]*(")/m
+/** The `"version"` of a workspace's entry in the lockfile (`packages["mcp-server"]`). */
+const lockWorkspace = (key: string) =>
+  new RegExp(
+    `(^ {4}"${key}": \\{\\n {6}"name": "[^"]+",\\n {6}"version": ")[^"]*(")`,
+    "m"
+  )
+/** The server pins the plugin to the exact version it ships with. */
+const PLUGIN_PIN = /("@dsaireadable\/eslint-plugin": ")[^"]*(")/
 
 type Json = {
   version?: string
-  packages?: Record<string, { version?: string }>
+  dependencies?: Record<string, string>
+  packages?: Record<
+    string,
+    { version?: string; dependencies?: Record<string, string> }
+  >
 }
 
-/** Each file that carries the version, the regular expressions that rewrite it, how to read it back. */
-const TARGETS: { file: string; patterns: RegExp[]; lock: boolean }[] = [
-  { file: "design-system.index.json", patterns: [TOP], lock: false },
-  { file: "mcp-server/package.json", patterns: [TOP], lock: false },
-  { file: "package-lock.json", patterns: [TOP, LOCK_ROOT], lock: true },
+/** One place that carries the version: how to rewrite it in the text, how to read it back. */
+interface Slot {
+  file: string
+  /** Named in the drift report. */
+  label: string
+  pattern: RegExp
+  read: (json: Json) => string | undefined
+}
+
+const fileVersion = (file: string): Slot => ({
+  file,
+  label: "version",
+  pattern: TOP,
+  read: (json) => json.version,
+})
+const lockEntry = (key: string, pattern: RegExp): Slot => ({
+  file: "package-lock.json",
+  label: `packages["${key}"]`,
+  pattern,
+  read: (json) => json.packages?.[key]?.version,
+})
+
+const SLOTS: Slot[] = [
+  fileVersion("design-system.index.json"),
+  fileVersion("mcp-server/package.json"),
+  fileVersion("packages/eslint-plugin/package.json"),
   {
-    file: "mcp-server/package-lock.json",
-    patterns: [TOP, LOCK_ROOT],
-    lock: true,
+    file: "mcp-server/package.json",
+    label: "plugin pin",
+    pattern: PLUGIN_PIN,
+    read: (json) => json.dependencies?.["@dsaireadable/eslint-plugin"],
+  },
+  fileVersion("package-lock.json"),
+  lockEntry("", LOCK_ROOT),
+  lockEntry("mcp-server", lockWorkspace("mcp-server")),
+  lockEntry("packages/eslint-plugin", lockWorkspace("packages/eslint-plugin")),
+  {
+    file: "package-lock.json",
+    label: "plugin pin",
+    pattern: PLUGIN_PIN,
+    read: (json) =>
+      json.packages?.["mcp-server"]?.dependencies?.[
+        "@dsaireadable/eslint-plugin"
+      ],
   },
 ]
 
@@ -56,32 +105,33 @@ if (!source || !/^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/.test(source)) {
   process.exit(1)
 }
 
-/** The versions a file carries, in the order of its patterns. */
-function versionsOf(file: string, lock: boolean): (string | undefined)[] {
-  const json = JSON.parse(read(file)) as Json
-  return lock ? [json.version, json.packages?.[""]?.version] : [json.version]
-}
+const found = ({ file, read }: Slot) =>
+  read(JSON.parse(readFileSync(resolve(ROOT, file), "utf-8")) as Json)
 
 const drifted: string[] = []
-for (const { file, patterns, lock } of TARGETS) {
-  const found = versionsOf(file, lock)
-  if (found.every((version) => version === source)) continue
+const rewritten = new Set<string>()
+for (const slot of SLOTS) {
+  const before = found(slot)
+  if (before === source) continue
   if (CHECK) {
-    drifted.push(`${file}: ${found.join(", ")} (package.json: ${source})`)
+    drifted.push(
+      `${slot.file} ${slot.label}: ${before} (package.json: ${source})`
+    )
     continue
   }
-  let text = read(file)
-  for (const pattern of patterns) text = text.replace(pattern, `$1${source}$2`)
-  writeFileSync(resolve(ROOT, file), text)
-  const after = versionsOf(file, lock)
-  if (!after.every((version) => version === source)) {
+  writeFileSync(
+    resolve(ROOT, slot.file),
+    read(slot.file).replace(slot.pattern, `$1${source}$2`)
+  )
+  if (found(slot) !== source) {
     console.error(
-      `❌ sync-versions: could not rewrite the version in ${file} (${after.join(", ")})`
+      `❌ sync-versions: could not rewrite the version in ${slot.file} (${found(slot)})`
     )
     process.exit(1)
   }
-  console.log(`sync-versions: ${file} → ${source}`)
+  rewritten.add(slot.file)
 }
+for (const file of rewritten) console.log(`sync-versions: ${file} → ${source}`)
 
 if (drifted.length > 0) {
   console.error(

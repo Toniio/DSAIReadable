@@ -25,12 +25,13 @@
     "context"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=20.19"
   },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
+    "prebuild": "npm run build -w @dsaireadable/eslint-plugin",
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "prepack": "npm run build",
     "start": "tsx src/index.ts",
@@ -41,13 +42,16 @@
     "test:package": "tsx src/test-package.ts"
   },
   "dependencies": {
+    "@dsaireadable/eslint-plugin": "0.0.1",
     "@modelcontextprotocol/node": "^2.1.0",
     "@modelcontextprotocol/server": "^2.2.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^10.11.0",
+    "typescript": "^5.9.3",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@modelcontextprotocol/client": "^2.2.0",
-    "tsx": "^4.23.15",
-    "typescript": "^5.8.3"
+    "tsx": "^4.23.15"
   }
 }
