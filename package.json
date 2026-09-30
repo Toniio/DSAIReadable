@@ -56,7 +56,13 @@
     "index:strings": "tsx scripts/lint-ui-strings.ts",
     "index:props": "tsx scripts/lint-props-types.ts",
     "index:shadcn": "tsx scripts/lint-shadcn-api.ts",
-    "shadcn:baseline": "tsx scripts/lint-shadcn-api.ts --update"
+    "shadcn:baseline": "tsx scripts/lint-shadcn-api.ts --update",
+    "versions:sync": "tsx scripts/sync-versions.ts",
+    "versions:check": "tsx scripts/sync-versions.ts --check",
+    "changesets:lint": "tsx scripts/lint-changesets.ts",
+    "release:check": "npm run versions:check && npm run changesets:lint",
+    "release:version": "changeset version && npm run versions:sync && npm run generate-context && prettier --write CHANGELOG.md",
+    "release:test": "tsx scripts/test-release.ts && tsx scripts/test-pinned-install.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -82,6 +88,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@tailwindcss/node": "^4.3.3",

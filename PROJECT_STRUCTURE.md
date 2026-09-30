@@ -172,6 +172,18 @@ Each script explains at the top of the file what it checks and why. They all run
 | `build-registry.ts`        | `registry:build` / `registry:check` | Generates `registry.json` from the inventory, the specs and the imports |
 | `test-registry-install.ts` | `registry:test-install`             | Installs every item in a blank app and builds it                        |
 
+### Versioning and release
+
+| Script                   | npm command                        | Role                                                                                    |
+| ------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------- |
+| `sync-versions.ts`       | `versions:sync` / `versions:check` | The root `package.json` version copied to the index, the MCP server and both lockfiles  |
+| `lint-changesets.ts`     | `changesets:lint`                  | Each pending `.changeset/*.md` has a known category and the bump that category takes    |
+| `test-release.ts`        | `release:test`                     | A changeset becomes a version and a CHANGELOG entry, on a copy of the files             |
+| `test-pinned-install.ts` | `release:test`                     | What the shadcn CLI pins when an item is installed at a tag, against a local git remote |
+
+`release:check` runs the first two; `release:version` is what a release pull request runs
+([`CONTRIBUTING.md`](./CONTRIBUTING.md#versioning-and-releases)).
+
 Shared modules: `scripts/lib/` (component API, `next/font` fonts), `wcag.ts`, `color-vision.ts`.
 
 ---
