@@ -20,6 +20,9 @@
  *      `<SelectValue>`" leaves the agent to guess what else goes there. The
  *      rest of a props row is generated from the types (specs:api).
  *
+ * The page patterns of `specs/patterns/` follow ① and ②: their Usage and
+ * Spacing bullets are the rules `get_pattern` serves.
+ *
  *   npx tsx scripts/lint-spec-wording.ts
  */
 
@@ -28,14 +31,26 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-const SPECS_DIR = resolve(ROOT, "specs/components")
-const RULE_SECTIONS = new Set([
-  "Usage",
-  "Constraints",
-  "Dependencies",
-  "Accessibility",
-  "Cross-references",
-])
+
+/** Per kind of spec: the sections that state rules, and those whose bullets open with a keyword. */
+const KINDS = [
+  {
+    dir: "specs/components",
+    ruleSections: new Set([
+      "Usage",
+      "Constraints",
+      "Dependencies",
+      "Accessibility",
+      "Cross-references",
+    ]),
+    keywordSections: new Set(["Constraints"]),
+  },
+  {
+    dir: "specs/patterns",
+    ruleSections: new Set(["Usage", "Spacing", "Cross-references"]),
+    keywordSections: new Set(["Usage", "Spacing"]),
+  },
+]
 const HEDGES =
   /(?<![\p{L}])(avoid|prefer|preferably|preferred|ideally|generally|usually|typically|normally|recommended|consider|try to|if possible|where possible|when possible|whenever possible|as much as possible|as far as possible|if needed|when needed|as needed|if necessary|where necessary|when necessary|limit (?:it|them|to|the)|rather than|better to|best to|too (?:many|much|few|long|short|large|small|wide|narrow|big|dense)|very|appropriate|suitable|reasonable)(?![\p{L}])/iu
 const SHOULD_WITH_EXCEPTION = /\*\*SHOULD\*\*.*\*\*unless\*\*/
@@ -52,44 +67,48 @@ const propDescription = (line: string): string | undefined => {
 const findings: string[] = []
 let checked = 0
 
-for (const file of readdirSync(SPECS_DIR).filter((f) => f.endsWith(".md"))) {
-  let section = ""
-  readFileSync(resolve(SPECS_DIR, file), "utf-8")
-    .split("\n")
-    .forEach((line, i) => {
-      if (line.startsWith("## ")) section = line.slice(3).trim()
-      if (section === PROPS_SECTION) {
-        const description = propDescription(line)
-        if (description === undefined) return
+for (const { dir, ruleSections, keywordSections } of KINDS) {
+  const specsDir = resolve(ROOT, dir)
+  for (const file of readdirSync(specsDir).filter((f) => f.endsWith(".md"))) {
+    const where = `${dir}/${file}`
+    let section = ""
+    readFileSync(resolve(specsDir, file), "utf-8")
+      .split("\n")
+      .forEach((line, i) => {
+        if (line.startsWith("## ")) section = line.slice(3).trim()
+        if (section === PROPS_SECTION) {
+          const description = propDescription(line)
+          if (description === undefined) return
+          checked++
+          const hedge = description.match(HEDGES)
+          if (hedge)
+            findings.push(
+              `${where}:${i + 1} [${PROPS_SECTION}] "${hedge[1]}" — ${description.slice(0, 100)}`
+            )
+          return
+        }
+        if (!ruleSections.has(section) || line.startsWith("#")) return
         checked++
-        const hedge = description.match(HEDGES)
-        if (hedge)
+        if (
+          keywordSections.has(section) &&
+          line.startsWith("- ") &&
+          !KEYWORD.test(line)
+        )
           findings.push(
-            `${file}:${i + 1} [${PROPS_SECTION}] "${hedge[1]}" — ${description.slice(0, 100)}`
+            `${where}:${i + 1} [${section}] no keyword — ${line.trim().slice(0, 100)}`
           )
-        return
-      }
-      if (!RULE_SECTIONS.has(section) || line.startsWith("#")) return
-      checked++
-      if (
-        section === "Constraints" &&
-        line.startsWith("- ") &&
-        !KEYWORD.test(line)
-      )
-        findings.push(
-          `${file}:${i + 1} [Constraints] no keyword — ${line.trim().slice(0, 100)}`
-        )
-      const hedge = line.match(HEDGES)
-      if (hedge && !SHOULD_WITH_EXCEPTION.test(line))
-        findings.push(
-          `${file}:${i + 1} [${section}] "${hedge[1]}" — ${line.trim().slice(0, 100)}`
-        )
-    })
+        const hedge = line.match(HEDGES)
+        if (hedge && !SHOULD_WITH_EXCEPTION.test(line))
+          findings.push(
+            `${where}:${i + 1} [${section}] "${hedge[1]}" — ${line.trim().slice(0, 100)}`
+          )
+      })
+  }
 }
 
 if (findings.length > 0) {
   console.error(
-    `❌ lint-spec-wording: ${findings.length} finding(s). Open each Constraints bullet with **MUST** / **MUST NOT** (threshold or observable criterion), **SHOULD** … **unless** <exception>, or **Note** for a fact; leave no hedge.\n\n   ${findings.join("\n   ")}\n`
+    `❌ lint-spec-wording: ${findings.length} finding(s). Open each Constraints bullet (Usage and Spacing in a pattern) with **MUST** / **MUST NOT** (threshold or observable criterion), **SHOULD** … **unless** <exception>, or **Note** for a fact; leave no hedge.\n\n   ${findings.join("\n   ")}\n`
   )
   process.exit(1)
 }

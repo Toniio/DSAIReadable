@@ -4,7 +4,7 @@ Complements the [root `AGENTS.md`](../AGENTS.md), which remains the reference:
 this file only adds what is specific to `mcp-server/` and never contradicts it.
 A contradiction between the two is a bug to report.
 
-The server exposes the design system to agents: **15 tools** (`src/tools/`),
+The server exposes the design system to agents: **17 tools** (`src/tools/`),
 **3 resources** (`src/resources/index.ts`) and **5 prompts**
 (`src/prompts/index.ts`). It never reads the sources on the fly: it serves a
 precompiled JSON cache, `context/*.json`.
@@ -14,11 +14,11 @@ precompiled JSON cache, `context/*.json`.
 ## 1. The context cache is generated
 
 ```
-specs/components/*.md  specs/foundations/*.md  tokens/*.json
-design-system.index.json  components/ui/*.tsx
+specs/components/*.md  specs/foundations/*.md  specs/patterns/*.md
+tokens/*.json  design-system.index.json  components/ui/*.tsx
 package.json  mcp-server/package.json  registry.json
         ↓ npm run generate-context   (src/context/generate.ts)
-mcp-server/context/*.json            15 files — NEVER EDIT BY HAND
+mcp-server/context/*.json            16 files — NEVER EDIT BY HAND
         ↓ loadContext()              (src/lib/context.ts)
 tools and prompts
 ```

@@ -1,8 +1,8 @@
 /**
- * The `response_format` argument of the three tools whose answers are large:
+ * The `response_format` argument of the tools whose answers are large:
  * get_component_specs (up to 25 K characters for one spec),
  * get_design_rules and get_ux_writing_rules (about 50 K each without a
- * filter).
+ * filter), and get_pattern (a pattern and its code example).
  *
  * `concise`, the default, keeps what an agent needs to choose and to stay
  * within the rules, and names what `detailed` would add. The acceptance
@@ -70,6 +70,36 @@ export function conciseSpec(spec: ComponentSpec) {
     cross_references: spec.cross_references ?? [],
     shadcn: spec.shadcn ?? null,
     detail: `response_format: "detailed" adds ${omitted.join(", ")}`,
+  }
+}
+
+/** A page pattern of specs/patterns/, as src/context/generate.ts serves it. */
+export interface Pattern {
+  name: string
+  title: string
+  kind: "task" | "ui"
+  role: string
+  usage: string[]
+  components: Array<{ component: string }>
+  [section: string]: unknown
+}
+
+/**
+ * A pattern reduced to when and how to use it, and the components to fetch
+ * the specs of: enough to plan a screen before calling get_component_specs.
+ */
+export function concisePattern(pattern: Pattern) {
+  const kept = ["name", "title", "kind", "role", "usage", "components"]
+  return {
+    name: pattern.name,
+    title: pattern.title,
+    kind: pattern.kind,
+    role: pattern.role,
+    usage: pattern.usage,
+    components: [...new Set(pattern.components.map((c) => c.component))],
+    detail: `response_format: "detailed" adds ${Object.keys(pattern)
+      .filter((k) => !kept.includes(k))
+      .join(", ")}`,
   }
 }
 
