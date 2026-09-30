@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import { McpServer } from "@modelcontextprotocol/server"
 import { registerDsCoreTools } from "./tools/ds-core.js"
 import { registerDatavizTools } from "./tools/dataviz.js"
 import { registerUxWritingTools } from "./tools/ux-writing.js"
@@ -17,8 +17,12 @@ import {
 import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
 import { COMPONENT_RULE } from "./lib/component-rule.js"
 import { registerResources } from "./resources/index.js"
-import { Client } from "@modelcontextprotocol/sdk/client/index.js"
-import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
+import {
+  Client,
+  InMemoryTransport,
+  StreamableHTTPClientTransport,
+} from "@modelcontextprotocol/client"
+import { StdioClientTransport } from "@modelcontextprotocol/client/stdio"
 import {
   readdirSync,
   existsSync,
@@ -1196,6 +1200,8 @@ assert(
   "A cursor the server did not issue is an error that says what to pass"
 )
 
+// The order of tools/list, compared with the real transports in test 10.
+const memoryToolNames = (await client.listTools()).tools.map((t) => t.name)
 await client.close()
 
 // --- Test 9: prompts (P3-07) ---
@@ -1346,11 +1352,14 @@ assert(
 
 await promptClient.close()
 
-// --- Test 10: HTTP transport ---
-// The real server, started as a subprocess on a free port with a short TTL.
-console.log("\n10. HTTP transport")
+// --- Test 10: transports and protocol revisions (P4-03) ---
+// The real server, started as a subprocess: over HTTP on a free port, then
+// over stdio. Both serve the 2026-07-28 revision and 2025-era clients.
+console.log("\n10. Transports and protocol revisions")
 
-const SESSION_TTL_MS = 300
+const MODERN = { versionNegotiation: { mode: { pin: "2026-07-28" } } } as const
+const sameOrder = (names: string[]) => names.join() === memoryToolNames.join()
+
 const freePort = await new Promise<number>((done) => {
   const probe = createNetServer().listen(0, "127.0.0.1", () => {
     const { port } = probe.address() as { port: number }
@@ -1361,11 +1370,7 @@ const httpServer = spawn(
   process.execPath,
   ["--import", "tsx", resolve(__dirname, "index.ts"), "--http"],
   {
-    env: {
-      ...process.env,
-      MCP_PORT: String(freePort),
-      MCP_SESSION_TTL_MS: String(SESSION_TTL_MS),
-    },
+    env: { ...process.env, MCP_PORT: String(freePort) },
     stdio: ["ignore", "pipe", "inherit"],
   }
 )
@@ -1387,13 +1392,40 @@ try {
   })
 
   const mcpUrl = `http://127.0.0.1:${freePort}/mcp`
-  const post = (body: unknown, sessionId?: string) =>
+
+  // 2026-07-28: server/discover opens the connection, no session exists.
+  const modern = new Client(
+    { name: "DSAIReadable-test-client", version: "1.0.0" },
+    MODERN
+  )
+  await modern.connect(new StreamableHTTPClientTransport(new URL(mcpUrl)))
+  const modernTools = (await modern.listTools()).tools.map((t) => t.name)
+  const modernCall = (await modern.callTool({
+    name: "get_component_specs",
+    arguments: { component_name: "Button" },
+  })) as ToolText
+  assert(
+    modern.getProtocolEra() === "modern" &&
+      modern.getServerVersion()?.name === "DSAIReadable" &&
+      !modernCall.isError,
+    `A 2026-07-28 client negotiates through server/discover and calls a tool (era ${modern.getProtocolEra()})`
+  )
+  // Each stateless request is served by a fresh instance: tools/list must
+  // come back in the same order every time, or a client's prompt cache misses.
+  const again = (await modern.listTools()).tools.map((t) => t.name)
+  assert(
+    sameOrder(modernTools) && sameOrder(again),
+    `tools/list comes back in one deterministic order (${modernTools.length} tools)`
+  )
+  await modern.close()
+
+  const post = (body: unknown, headers: Record<string, string> = {}) =>
     fetch(mcpUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json, text/event-stream",
-        ...(sessionId ? { "Mcp-Session-Id": sessionId } : {}),
+        ...headers,
       },
       body: JSON.stringify(body),
     })
@@ -1407,48 +1439,33 @@ try {
       clientInfo: { name: "DSAIReadable-test", version: "1.0.0" },
     },
   }
+
+  // 2025-era clients are still served, statelessly: no Mcp-Session-Id is
+  // issued, and a request needs none.
   const init = await post(initialize)
-  const sessionId = init.headers.get("mcp-session-id") ?? ""
   await init.text()
-  await (
-    await post(
-      { jsonrpc: "2.0", method: "notifications/initialized" },
-      sessionId
-    )
-  ).text()
-  const listTools = { jsonrpc: "2.0", id: 2, method: "tools/list" }
-
-  const live = await post(listTools, sessionId)
-  await live.text()
+  const listed = await post({ jsonrpc: "2.0", id: 2, method: "tools/list" })
+  const listedBody = await listed.text()
   assert(
-    init.status === 200 && sessionId !== "" && live.status === 200,
-    "A session answers within its TTL"
+    init.status === 200 &&
+      init.headers.get("mcp-session-id") === null &&
+      listed.status === 200 &&
+      listedBody.includes("get_component_specs"),
+    `A 2025-era client is served without a session (${init.status}, ${listed.status})`
   )
-
-  // Expired, the session must be refused at once — not at the next sweep,
-  // 60 s later, and not revived by the request.
-  await new Promise((wait) => setTimeout(wait, SESSION_TTL_MS * 2))
-  const expired = await post(listTools, sessionId)
-  const expiredBody = await expired.text()
+  const deleted = await fetch(mcpUrl, { method: "DELETE" })
+  await deleted.text()
   assert(
-    expired.status === 404 && expiredBody.includes("initialize"),
-    `An expired session is refused with 404 and told to initialize (got ${expired.status})`
+    deleted.status === 405,
+    `DELETE, a session operation, is not allowed (got ${deleted.status})`
   )
 
   // MCP spec: the Origin header is validated against DNS rebinding.
-  const fromOrigin = (origin: string) =>
-    fetch(mcpUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/event-stream",
-        Origin: origin,
-      },
-      body: JSON.stringify(initialize),
-    })
-  const hostile = await fromOrigin("http://attacker.example")
+  const hostile = await post(initialize, { Origin: "http://attacker.example" })
   const hostileBody = await hostile.text()
-  const allowed = await fromOrigin(`http://localhost:${freePort}`)
+  const allowed = await post(initialize, {
+    Origin: `http://localhost:${freePort}`,
+  })
   await allowed.text()
   assert(
     hostile.status === 403 &&
@@ -1456,48 +1473,39 @@ try {
       allowed.status === 200,
     `A hostile Origin is refused with 403, an allowed one is served (${hostile.status}, ${allowed.status})`
   )
-
-  const unknown = await post(listTools, "00000000-0000-0000-0000-000000000000")
-  await unknown.text()
-  assert(
-    unknown.status === 404,
-    `An unknown session is refused with 404, the spec's signal to initialize (got ${unknown.status})`
-  )
-
-  // A session the client closes (DELETE) leaves the server at once. Kept, it
-  // is routed to its closed transport, which never answers, and counts
-  // against MCP_MAX_SESSIONS until the TTL sweep.
-  const closing = await post(initialize)
-  const closingId = closing.headers.get("mcp-session-id") ?? ""
-  await closing.text()
-  const deleted = await fetch(mcpUrl, {
-    method: "DELETE",
-    headers: { "Mcp-Session-Id": closingId },
-  })
-  await deleted.text()
-  const afterDelete = await fetch(mcpUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json, text/event-stream",
-      "Mcp-Session-Id": closingId,
-    },
-    body: JSON.stringify(listTools),
-    signal: AbortSignal.timeout(5_000),
-  })
-    .then(async (res) => {
-      await res.text()
-      return String(res.status)
-    })
-    .catch((e: Error) => e.name)
-  assert(
-    closingId !== "" && deleted.status === 200 && afterDelete === "404",
-    `A session closed by the client is refused with 404 (DELETE ${deleted.status}, then ${afterDelete})`
-  )
 } catch (e) {
   assert(false, `HTTP transport: ${e}`)
 } finally {
   httpServer.kill()
+}
+
+// stdio, the transport of a local install (npx), serves both eras too.
+for (const [era, options] of [
+  ["modern", MODERN],
+  ["legacy", {}],
+] as const) {
+  const stdioClient = new Client(
+    { name: "DSAIReadable-test-client", version: "1.0.0" },
+    options
+  )
+  try {
+    await stdioClient.connect(
+      new StdioClientTransport({
+        command: process.execPath,
+        args: ["--import", "tsx", resolve(__dirname, "index.ts")],
+        stderr: "ignore",
+      })
+    )
+    const names = (await stdioClient.listTools()).tools.map((t) => t.name)
+    assert(
+      stdioClient.getProtocolEra() === era && sameOrder(names),
+      `stdio serves a ${era} client (${names.length} tools)`
+    )
+  } catch (e) {
+    assert(false, `stdio (${era}): ${e}`)
+  } finally {
+    await stdioClient.close()
+  }
 }
 
 // --- Test 11: every tool, called as an agent calls it (P3-08) ---

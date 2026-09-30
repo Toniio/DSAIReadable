@@ -1,5 +1,5 @@
 import { z } from "zod"
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import type { McpServer } from "@modelcontextprotocol/server"
 import { loadContext, text } from "../lib/context.js"
 import { validateScreen } from "../lib/validate-screen.js"
 import { READ_ONLY } from "../lib/annotations.js"
@@ -79,13 +79,13 @@ export function registerAdminTools(server: McpServer): void {
       title: "Validate a screen",
       description:
         "Analyzes code against DS rules: checks DS component usage, token usage, composition rules. Returns a list of issues/warnings",
-      inputSchema: {
+      inputSchema: z.object({
         code: z
           .string()
           .describe(
             "React/TSX code to validate against the design system rules"
           ),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ code }) => text(validateScreen(code))

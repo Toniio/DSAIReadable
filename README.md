@@ -98,13 +98,16 @@ The server only listens on the loopback interface and **validates the `Origin`
 header** (a requirement of the MCP spec, against DNS rebinding attacks). A
 request with an origin that is not allowed receives a `403`.
 
-| Variable              | Default                                         | Role                                                                    |
-| --------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
-| `MCP_HOST`            | `127.0.0.1`                                     | Listening interface. Only widen it deliberately                         |
-| `PORT` / `MCP_PORT`   | `3100`                                          | Listening port                                                          |
-| `MCP_ALLOWED_ORIGINS` | `localhost` + `127.0.0.1` on the listening port | Comma-separated list of origins                                         |
-| `MCP_SESSION_TTL_MS`  | `1800000` (30 min)                              | Expiry of idle sessions; an expired or unknown session receives a `404` |
-| `MCP_MAX_SESSIONS`    | `100`                                           | Maximum number of concurrent sessions                                   |
+The server speaks MCP protocol revision **2026-07-28** and still serves
+2025-era clients, over stdio and HTTP alike. HTTP mode is **stateless**: each
+request is served on its own, no `Mcp-Session-Id` is issued, and `GET` or
+`DELETE` on `/mcp` receives a `405`.
+
+| Variable              | Default                                         | Role                                            |
+| --------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `MCP_HOST`            | `127.0.0.1`                                     | Listening interface. Only widen it deliberately |
+| `PORT` / `MCP_PORT`   | `3100`                                          | Listening port                                  |
+| `MCP_ALLOWED_ORIGINS` | `localhost` + `127.0.0.1` on the listening port | Comma-separated list of origins                 |
 
 ### Available tools
 

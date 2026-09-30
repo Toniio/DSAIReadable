@@ -1,5 +1,5 @@
 import { z } from "zod"
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import type { McpServer } from "@modelcontextprotocol/server"
 import { loadContext, notFound, text } from "../lib/context.js"
 import { READ_ONLY } from "../lib/annotations.js"
 import {
@@ -28,11 +28,11 @@ export function registerUxWritingTools(server: McpServer): void {
       title: "UX writing rules",
       description:
         'Returns the rules for the text a UI renders. "concise" (default): the voice and tone rules (sentence case, verb-first buttons, errors that say what happened and how to fix it, word list) and the content rules (default strings from UI_STRINGS, one override prop per string, language of the defaults). "detailed": the whole rule set — foundation rules, component constraints, composition rules — which get_design_rules also serves',
-      inputSchema: {
+      inputSchema: z.object({
         response_format: responseFormat(
           "every foundation rule, the component constraints and the composition rules"
         ),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ response_format }) => {
@@ -49,9 +49,9 @@ export function registerUxWritingTools(server: McpServer): void {
     {
       title: "Glossary",
       description: "Returns the full glossary or a specific term definition",
-      inputSchema: {
+      inputSchema: z.object({
         term: z.string().optional().describe("Specific term to look up"),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ term }) => {
@@ -89,12 +89,12 @@ export function registerUxWritingTools(server: McpServer): void {
       title: "Content library",
       description:
         "Returns content examples (labels, placeholders, messages), optionally filtered by category",
-      inputSchema: {
+      inputSchema: z.object({
         category: z
           .enum(["labels", "placeholders", "messages"])
           .optional()
           .describe("Content category to filter by"),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ category }) => {

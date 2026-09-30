@@ -1,6 +1,6 @@
 import { readdirSync } from "node:fs"
 import { z } from "zod"
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import type { McpServer } from "@modelcontextprotocol/server"
 import { contextDir, loadContext, notFound, text } from "../lib/context.js"
 import {
   compositionRulesFor,
@@ -164,7 +164,7 @@ import { cn } from "@/lib/utils"`,
       title: "Components",
       description:
         "Returns the list of components, optionally filtered by category, one page at a time: { total, items, next_cursor }",
-      inputSchema: {
+      inputSchema: z.object({
         category: z
           .string()
           .optional()
@@ -172,7 +172,7 @@ import { cn } from "@/lib/utils"`,
             "Filter by category (Brand, Conversation, Data, Feedback, Forms, Layout, Media, Misc, Navigation, Overlay, Typography)"
           ),
         ...pageParams,
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ category, limit, cursor }) => {
@@ -193,14 +193,14 @@ import { cn } from "@/lib/utils"`,
       title: "Component spec",
       description:
         'Returns the spec of one component. "concise" (default): role, MUST / MUST NOT constraints, exported names, cross-references, and how its API departs from shadcn/ui (shadcn: the registry item it derives from, and each divergence — added, removed, renamed or changed — with the reason; write the shadcn/ui API everywhere else). "detailed": the full spec — usage, anatomy, tokens, props, states, accessibility (ARIA pattern, keyboard, accessible name, known pitfalls), code example. The full spec is also the resource ds://component/{name}/spec',
-      inputSchema: {
+      inputSchema: z.object({
         component_name: z
           .string()
           .describe("Component name (e.g. Button, Card, Dialog)"),
         response_format: responseFormat(
           "usage, anatomy, tokens, props, states, accessibility and the code example"
         ),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ component_name, response_format }) => {
@@ -247,11 +247,11 @@ import { cn } from "@/lib/utils"`,
       title: "Component variants",
       description:
         "Returns the variants/props extracted from cva() for a component",
-      inputSchema: {
+      inputSchema: z.object({
         component_name: z
           .string()
           .describe("Component name to look up variants for"),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ component_name }) => {
@@ -292,7 +292,7 @@ import { cn } from "@/lib/utils"`,
       title: "Semantic tokens",
       description:
         "Returns the semantic design tokens, filtered by category or all of them, one page at a time: { total, items, next_cursor }. One token is also the resource ds://token/{path}",
-      inputSchema: {
+      inputSchema: z.object({
         category: z
           .enum([
             "color",
@@ -310,7 +310,7 @@ import { cn } from "@/lib/utils"`,
           .optional()
           .describe("Token category to filter by"),
         ...pageParams,
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ category, limit, cursor }) => {
@@ -361,7 +361,7 @@ import { cn } from "@/lib/utils"`,
       title: "Design rules",
       description:
         'Returns design rules: foundation do/don\'t, component constraints and the composition rules of design-system.index.json. Filter by category: a foundation (color, typography…), a component name (its constraints and the composition rules that cover it), "composition" for every composition rule, or "tailwind" for the critical rules in full. Without a category, "concise" (default) returns the composition rules, the titles of the critical rules and the categories; "detailed" returns every rule. With a category, "concise" reduces the critical rules to their titles',
-      inputSchema: {
+      inputSchema: z.object({
         category: z
           .string()
           .optional()
@@ -369,7 +369,7 @@ import { cn } from "@/lib/utils"`,
         response_format: responseFormat(
           "every rule without a category, and the critical rules in full with one"
         ),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ category, response_format }) => {
@@ -455,12 +455,12 @@ import { cn } from "@/lib/utils"`,
       title: "Page patterns",
       description:
         "Lists the page patterns: tasks a screen carries out (create, edit, delete, filter, search, sign-in, settings) and UI patterns they share (empty-state, form, loading, navigation, saving), each with its name, title, kind and role. Pass a name to get_pattern for the whole pattern",
-      inputSchema: {
+      inputSchema: z.object({
         kind: z
           .enum(["task", "ui"])
           .optional()
           .describe('"task" or "ui"; omit for every pattern'),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ kind }) => {
@@ -486,7 +486,7 @@ import { cn } from "@/lib/utils"`,
       title: "Page pattern",
       description:
         'Returns one page pattern by name (list_patterns lists them). "concise" (default): role, usage rules and the components it takes. "detailed": the whole pattern — structure (regions and their components), components with their variants, spacing rules, content (what to write, what not to), code example and cross-references',
-      inputSchema: {
+      inputSchema: z.object({
         name: z
           .string()
           .describe(
@@ -495,7 +495,7 @@ import { cn } from "@/lib/utils"`,
         response_format: responseFormat(
           "the structure, spacing and content rules, and the code example"
         ),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ name, response_format }) => {

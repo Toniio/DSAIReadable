@@ -1,5 +1,5 @@
 import { z } from "zod"
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import type { McpServer } from "@modelcontextprotocol/server"
 import { loadContext, notFound, text } from "../lib/context.js"
 import { READ_ONLY } from "../lib/annotations.js"
 
@@ -11,7 +11,7 @@ export function registerDatavizTools(server: McpServer): void {
       title: "Chart recommendation",
       description:
         "Returns recommended chart types for a given data visualization objective",
-      inputSchema: {
+      inputSchema: z.object({
         objective: z
           .enum([
             "evolution",
@@ -22,7 +22,7 @@ export function registerDatavizTools(server: McpServer): void {
             "kpi",
           ])
           .describe("The data visualization objective"),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ objective }) => {
@@ -69,13 +69,13 @@ export function registerDatavizTools(server: McpServer): void {
       title: "Chart spec",
       description:
         "Returns full specs for a chart type (tokens, anatomy, do/don't, library, variants)",
-      inputSchema: {
+      inputSchema: z.object({
         chart_type: z
           .string()
           .describe(
             "The chart type to get specs for (e.g. 'bar', 'line', 'pie')"
           ),
-      },
+      }),
       annotations: READ_ONLY,
     },
     async ({ chart_type }) => {
