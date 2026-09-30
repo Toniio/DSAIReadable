@@ -22,6 +22,7 @@ import { readFileSync, writeFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { format, resolveConfig } from "prettier"
+import { replacementOf } from "../mcp-server/src/lib/deprecations.js"
 import { cssValue, loadTokens, type Mode } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -47,7 +48,7 @@ interface RawNode {
   $extensions?: {
     docs?: Docs
     status?: "active" | "reserved"
-  }
+  } & Record<string, unknown>
 }
 
 interface Entry {
@@ -61,6 +62,8 @@ interface Entry {
    * component tier, and primitives some token references.
    */
   status: "active" | "reserved" | "deprecated"
+  /** On a deprecated token, the token to use instead (`$extensions["design.dsaireadable"].replacement`). */
+  replacement?: string
   source: string
   reference: { light: string; dark?: string }
   value: { light: string; dark?: string }
@@ -217,6 +220,9 @@ for (const { tier, file } of TIERS) {
         node.$deprecated !== undefined
           ? "deprecated"
           : (node.$extensions?.status ?? "active"),
+      ...(node.$deprecated !== undefined && replacementOf(node)
+        ? { replacement: replacementOf(node) as string }
+        : {}),
       source: file,
       reference: { light: lightRef, ...(darkRef ? { dark: darkRef } : {}) },
       value: {
@@ -278,6 +284,10 @@ const FOUNDATION_TITLES: Record<string, string> = {
   shadcn: "shadcn aliases",
 }
 
+/** A deprecated token says what replaces it, right where an agent reads its status. */
+const statusCell = (e: Entry) =>
+  e.replacement ? `${e.status} → ${code(e.replacement)}` : e.status
+
 function foundationTable(rows: Entry[], showDark: boolean): string[] {
   const head = showDark
     ? "| Token | CSS variable | Type | Status | Light | Dark | Tailwind |"
@@ -292,7 +302,7 @@ function foundationTable(rows: Entry[], showDark: boolean): string[] {
           code(e.token),
           code(e.cssVar),
           e.type,
-          e.status,
+          statusCell(e),
           code(e.value.light),
           code(e.value.dark),
           code(e.docs?.tailwind),
@@ -301,7 +311,7 @@ function foundationTable(rows: Entry[], showDark: boolean): string[] {
           code(e.token),
           code(e.cssVar),
           e.type,
-          e.status,
+          statusCell(e),
           code(e.value.light),
           code(e.docs?.tailwind),
         ]
@@ -348,7 +358,8 @@ const md: string[] = [
   "",
   "**Status** column: `active` — consumed by a component, the `@theme` bridge or another token;",
   "`reserved` — a valid decision nothing consumes yet, usable when its role matches the need",
-  "exactly; `deprecated` — do not use any more. `npm run tokens:lint-lifecycle` makes sure",
+  "exactly; `deprecated` — do not use any more, with the token that replaces it after the",
+  "arrow when there is one. `npm run tokens:lint-lifecycle` makes sure",
   "the status says what the code does.",
   "",
   "---",

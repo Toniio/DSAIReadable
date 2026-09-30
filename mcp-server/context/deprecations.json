@@ -1,0 +1,22 @@
+{
+  "tokens": [
+    {
+      "token": "opacity.placeholder",
+      "css_var": "--opacity-placeholder",
+      "tailwind": null,
+      "message": "Form fields color their placeholder instead of fading it: use `placeholder:text-muted-foreground` (color.text.subtle). Faded default text drops to 3.70:1 on white.",
+      "replacement": {
+        "token": "color.text.subtle",
+        "css_var": "--color-text-subtle"
+      }
+    },
+    {
+      "token": "opacity.overlay",
+      "css_var": "--opacity-overlay",
+      "tailwind": null,
+      "message": "Modal backdrops use shadcn/ui v4's scrim, `bg-black/10` with `backdrop-blur-xs` (OVERLAY_BASE in lib/overlay.ts); no opacity token drives it. At 0.8 the backdrop hid the page.",
+      "replacement": null
+    }
+  ],
+  "exports": []
+}

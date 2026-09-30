@@ -9,8 +9,10 @@ import {
 import { READ_ONLY } from "../lib/annotations.js"
 import { loadProjectPatterns } from "../lib/patterns.js"
 import {
+  changelogOutput,
   componentSpecOutput,
   componentsOutput,
+  deprecationsOutput,
   designRulesOutput,
   iconsOutput,
   overviewOutput,
@@ -346,6 +348,88 @@ import { cn } from "@/lib/utils"`,
         ? all.filter((t) => t.path.startsWith(category + "."))
         : all
       return result(paginate(filtered, limit, cursor))
+    }
+  )
+
+  // 4 bis. dsaireadable_get_deprecations
+  server.registerTool(
+    "dsaireadable_get_deprecations",
+    {
+      title: "Deprecations",
+      description:
+        "Returns everything the design system has deprecated: tokens (with the token that replaces them) and component exports (with the export to use instead). Check it before using a token or an export you know from an earlier version. @dsaireadable/eslint-plugin lints the same list",
+      inputSchema: z.object({
+        kind: z
+          .enum(["token", "export"])
+          .optional()
+          .describe("Only the deprecated tokens, or only the exports"),
+      }),
+      outputSchema: deprecationsOutput,
+      annotations: READ_ONLY,
+    },
+    async ({ kind }) => {
+      const all = loadContext<{
+        tokens: unknown[]
+        exports: unknown[]
+      }>("deprecations.json")
+      const tokens = kind === "export" ? [] : all.tokens
+      const exports = kind === "token" ? [] : all.exports
+      return result({
+        total: tokens.length + exports.length,
+        tokens,
+        exports,
+      })
+    }
+  )
+
+  // 4 ter. dsaireadable_get_changelog
+  server.registerTool(
+    "dsaireadable_get_changelog",
+    {
+      title: "Changelog",
+      description:
+        "Returns the changelog, one entry per change, newest release first: { total, items, next_cursor }. Filter by version (`Unreleased`, or a release number from the `version` of an earlier answer) or by category (`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`). Read it to see what moved between the version you know and the current one",
+      inputSchema: z.object({
+        version: z
+          .string()
+          .optional()
+          .describe("A release number, or `Unreleased`"),
+        category: z
+          .string()
+          .optional()
+          .describe("A heading of the changelog, such as `Deprecated`"),
+        ...pageParams,
+      }),
+      outputSchema: changelogOutput,
+      annotations: READ_ONLY,
+    },
+    async ({ version, category, limit, cursor }) => {
+      const all = loadContext<
+        Array<{
+          version: string
+          date: string | null
+          category: string
+          text: string
+        }>
+      >("changelog.json")
+      const versions = [...new Set(all.map((e) => e.version))]
+      if (version !== undefined && !versions.includes(version))
+        return notFound(
+          `Version "${version}" is not in the changelog. Pass one of the available versions.`,
+          versions
+        )
+      const categories = [...new Set(all.map((e) => e.category))]
+      if (category !== undefined && !categories.includes(category))
+        return notFound(
+          `Category "${category}" is not in the changelog. Pass one of the available categories.`,
+          categories
+        )
+      const items = all.filter(
+        (e) =>
+          (version === undefined || e.version === version) &&
+          (category === undefined || e.category === category)
+      )
+      return result(paginate(items, limit, cursor))
     }
   )
 

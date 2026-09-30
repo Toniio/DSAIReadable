@@ -1,8 +1,9 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 import betterTailwindcss from "eslint-plugin-better-tailwindcss"
-import { DEPRECATED_IMPORTS } from "./deprecations.js"
+import { DEPRECATED_IMPORTS, DEPRECATED_TOKENS } from "./deprecations.js"
 import noClassInterpolation from "./rules/no-class-interpolation.js"
 import noDeprecatedImports from "./rules/no-deprecated-imports.js"
+import noDeprecatedToken from "./rules/no-deprecated-token.js"
 import noExternalUiImports from "./rules/no-external-ui-imports.js"
 import noInlineSvg from "./rules/no-inline-svg.js"
 import noNativeInteractiveElements from "./rules/no-native-interactive-elements.js"
@@ -11,6 +12,7 @@ import noRawValues from "./rules/no-raw-values.js"
 const rules = {
   "no-class-interpolation": noClassInterpolation,
   "no-deprecated-imports": noDeprecatedImports,
+  "no-deprecated-token": noDeprecatedToken,
   "no-external-ui-imports": noExternalUiImports,
   "no-inline-svg": noInlineSvg,
   "no-native-interactive-elements": noNativeInteractiveElements,
@@ -62,6 +64,10 @@ const core = (ignores: string[]): TSESLint.FlatConfig.Config => ({
     "dsaireadable/no-deprecated-imports": [
       "error",
       { modules: DEPRECATED_IMPORTS },
+    ],
+    "dsaireadable/no-deprecated-token": [
+      "error",
+      { tokens: DEPRECATED_TOKENS },
     ],
   },
 })

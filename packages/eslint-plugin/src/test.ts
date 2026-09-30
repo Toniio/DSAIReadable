@@ -11,6 +11,7 @@ import { describe, it } from "node:test"
 import plugin from "./index.js"
 import noClassInterpolation from "./rules/no-class-interpolation.js"
 import noDeprecatedImports from "./rules/no-deprecated-imports.js"
+import noDeprecatedToken from "./rules/no-deprecated-token.js"
 import noExternalUiImports from "./rules/no-external-ui-imports.js"
 import noInlineSvg from "./rules/no-inline-svg.js"
 import noNativeInteractiveElements from "./rules/no-native-interactive-elements.js"
@@ -253,6 +254,65 @@ tester.run("no-raw-values", asEslint(noRawValues), {
     {
       code: `const a = matchMedia("(prefers-color-scheme: dark)")`,
       errors: [{ messageId: "mediaDark" }],
+    },
+  ],
+})
+
+tester.run("no-deprecated-token", asEslint(noDeprecatedToken), {
+  valid: [
+    // No list, nothing deprecated.
+    `const a = "var(--opacity-placeholder)"`,
+    {
+      code: `const a = "var(--color-text-subtle)"`,
+      options: [
+        { tokens: { "--opacity-placeholder": "use color.text.subtle" } },
+      ],
+    },
+    // A longer name is another token.
+    {
+      code: `const a = "var(--opacity-placeholder-strong) opacity-placeholder-2"`,
+      options: [
+        {
+          tokens: {
+            "--opacity-placeholder": "use color.text.subtle",
+            "opacity-placeholder": "use color.text.subtle",
+          },
+        },
+      ],
+    },
+  ],
+  invalid: [
+    {
+      code: `const a = "var(--opacity-placeholder)"`,
+      options: [
+        { tokens: { "--opacity-placeholder": "use color.text.subtle" } },
+      ],
+      errors: [
+        {
+          messageId: "deprecated",
+          data: {
+            name: "--opacity-placeholder",
+            reason: "use color.text.subtle",
+          },
+        },
+      ],
+    },
+    // Tailwind's shorthand, and a template fragment.
+    {
+      code: "const a = `opacity-(--opacity-overlay) ${x}`",
+      options: [{ tokens: { "--opacity-overlay": "no token drives it" } }],
+      errors: [{ messageId: "deprecated" }],
+    },
+    // A class, through its variants, important flag and opacity modifier.
+    {
+      code: `const a = <div className="p-4 hover:md:!bg-legacy/50" />`,
+      options: [{ tokens: { "bg-legacy": "use bg-muted" } }],
+      errors: [
+        {
+          messageId: "deprecated",
+          data: { name: "bg-legacy", reason: "use bg-muted" },
+        },
+      ],
     },
   ],
 })

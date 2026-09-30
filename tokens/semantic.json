@@ -2028,6 +2028,9 @@
         "docs": {
           "do": "Write `placeholder:text-muted-foreground`, as Input, Textarea, Select and NativeSelect do.",
           "dont": "Do not fade the placeholder with an opacity: default text at 0.5 is 3.70:1 on white, below 4.5:1."
+        },
+        "design.dsaireadable": {
+          "replacement": "color.text.subtle"
         }
       },
       "$deprecated": "Form fields color their placeholder instead of fading it: use `placeholder:text-muted-foreground` (color.text.subtle). Faded default text drops to 3.70:1 on white."

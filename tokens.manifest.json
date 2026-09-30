@@ -6548,6 +6548,7 @@
       "cssVar": "--opacity-placeholder",
       "type": "number",
       "status": "deprecated",
+      "replacement": "color.text.subtle",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.opacity.0-50}"

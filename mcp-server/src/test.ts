@@ -12,6 +12,14 @@ import {
 } from "./lib/validate-screen.js"
 import { validateCode } from "./lib/validate-code.js"
 import plugin from "@dsaireadable/eslint-plugin"
+import tsParser from "@typescript-eslint/parser"
+import { Linter } from "eslint"
+import { parseChangelog } from "./lib/changelog.js"
+import {
+  exportDeprecations,
+  lintLists,
+  tokenDeprecations,
+} from "./lib/deprecations.js"
 import {
   compositionRulesFor,
   type CompositionRule,
@@ -125,6 +133,8 @@ const expectedFiles = [
   "dataviz-decision-tree.json",
   "dataviz-catalog.json",
   "ds-metadata.json",
+  "deprecations.json",
+  "changelog.json",
 ]
 
 assert(existsSync(contextDir), `Context directory exists: ${contextDir}`)
@@ -577,6 +587,7 @@ const CODE_FIXTURES: Record<string, string> = {
     "export const C = ({ tone }: { tone: string }) => <div className={`bg-${tone}`} />",
   "no-raw-values": `export const C = () => <div className="bg-[#432dd7] text-red-500" />`,
   "no-deprecated-imports": "",
+  "no-deprecated-token": `export const C = () => <div className="p-4" style={{ opacity: "var(--opacity-placeholder)" }} />`,
 }
 const codeRules = Object.keys(plugin.rules)
 const missingCodeFixtures = codeRules.filter(
@@ -587,8 +598,8 @@ assert(
   `Every rule of the plugin has a failing fixture (${codeRules.length} rules${missingCodeFixtures.length ? `; missing: ${missingCodeFixtures.join(", ")}` : ""})`
 )
 for (const [rule, code] of Object.entries(CODE_FIXTURES)) {
-  // The deprecation list is empty until the first deprecation: its rule is
-  // exercised with a list of its own in the plugin's tests.
+  // The import list is empty until a component export is deprecated: that
+  // rule is exercised with a list of its own (11c and the plugin's tests).
   if (!code) continue
   const caught = validateCode(code).issues.some(
     (i) => i.source === "eslint" && i.rule === `dsaireadable/${rule}`
@@ -1083,7 +1094,7 @@ const unannotated = tools.filter(
     t.annotations?.openWorldHint !== false
 )
 assert(
-  tools.length === 17 && unannotated.length === 0,
+  tools.length === 19 && unannotated.length === 0,
   `Every tool is annotated read-only and closed-world (${tools.length} tools${unannotated.length ? `; missing: ${unannotated.map((t) => t.name).join(", ")}` : ""})`
 )
 
@@ -1772,6 +1783,34 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { category: "colors" },
     errorNames: "color",
   },
+  dsaireadable_get_deprecations: {
+    args: {},
+    content: (p) =>
+      p.total === p.tokens.length + p.exports.length &&
+      p.tokens.some(
+        (t: Json) =>
+          t.token === "opacity.placeholder" &&
+          t.css_var === "--opacity-placeholder" &&
+          t.replacement.token === "color.text.subtle" &&
+          t.replacement.css_var === "--color-text-subtle"
+      ) &&
+      p.tokens.every((t: Json) => semanticPaths.has(t.token)),
+    errorArgs: { kind: "component" },
+    errorNames: "kind",
+  },
+  dsaireadable_get_changelog: {
+    args: { version: "Unreleased", category: "Added" },
+    content: (p) =>
+      p.total > 0 &&
+      p.items.every(
+        (e: Json) =>
+          e.version === "Unreleased" &&
+          e.category === "Added" &&
+          e.text.length > 0
+      ),
+    errorArgs: { version: "9.9.9" },
+    errorNames: "Unreleased",
+  },
   dsaireadable_get_typography: {
     args: {},
     content: (p) =>
@@ -1917,7 +1956,233 @@ setContextDir(contextDir)
 rmSync(emptyContextDir, { recursive: true })
 assert(
   silentOnMissingCache.length === 0 && servedContextDir === contextDir,
-  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "17 tools"})`
+  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "19 tools"})`
+)
+
+// --- Test 11c: the deprecation chain (P4-08) ---
+console.log("\n11c. Deprecation chain")
+
+// A token and a component export that do not exist, deprecated the way the
+// sources do it: the four channels (token data, JSDoc, lint, MCP) must all see
+// them, and none may see them once the deprecation is gone.
+const legacyTree = (deprecated: boolean) => ({
+  color: {
+    background: {
+      subtle: {
+        $value: "{primitive.color.mist.100}",
+        $type: "color",
+        $extensions: { status: "active" },
+      },
+    },
+    legacy: {
+      $value: "{primitive.color.mist.100}",
+      $type: "color",
+      $description: "Deprecated: the old surface.",
+      ...(deprecated
+        ? { $deprecated: "The old surface is gone: use the subtle surface." }
+        : {}),
+      $extensions: {
+        docs: { tailwind: "bg-legacy" },
+        ...(deprecated
+          ? {
+              "design.dsaireadable": { replacement: "color.background.subtle" },
+            }
+          : {}),
+      },
+    },
+  },
+})
+const legacyChip = (deprecated: boolean) => `
+${deprecated ? "/** @deprecated Use {@link Badge} instead: a chip is a badge you can remove. */" : ""}
+function Chip() {}
+function Badge() {}
+export { Chip, Badge }
+`
+const chain = {
+  tokens: tokenDeprecations(legacyTree(true)),
+  exports: exportDeprecations(legacyChip(true), "@/components/ui/chip"),
+}
+assert(
+  chain.tokens.length === 1 &&
+    chain.tokens[0].token === "color.legacy" &&
+    chain.tokens[0].css_var === "--color-legacy" &&
+    chain.tokens[0].tailwind === "bg-legacy" &&
+    chain.tokens[0].replacement?.css_var === "--color-background-subtle",
+  "a $deprecated token is listed with its CSS variable, Tailwind class and replacement, and an active one is not"
+)
+assert(
+  chain.exports.length === 1 &&
+    chain.exports[0].name === "Chip" &&
+    chain.exports[0].replacement === "Badge" &&
+    chain.exports[0].message.startsWith("Use Badge instead"),
+  "a JSDoc @deprecated on an exported component names its replacement from {@link}"
+)
+assert(
+  exportDeprecations(
+    `/** @deprecated Use {@link Badge}. */\nexport function Chip() {}`,
+    "@/components/ui/chip"
+  ).length === 1 &&
+    exportDeprecations(
+      `/** @deprecated Use {@link Badge}. */\nfunction Chip() {}`,
+      "@/components/ui/chip"
+    ).length === 0,
+  "a @deprecated declaration counts when it is exported, inline or in `export { … }`, and not when it is private"
+)
+let bareTag = ""
+try {
+  exportDeprecations(
+    `/** @deprecated */\nexport function Chip() {}`,
+    "@/components/ui/chip"
+  )
+} catch (e) {
+  bareTag = String(e)
+}
+assert(
+  bareTag.includes("without a message"),
+  "a @deprecated tag with no guidance is an error"
+)
+
+// The lint: the same lists, read by the plugin's two rules.
+const lists = lintLists(chain)
+const lintDeprecated = (code: string, l = lists) =>
+  new Linter()
+    .verify(
+      code,
+      [
+        {
+          files: ["**/*.tsx"],
+          languageOptions: {
+            parser: tsParser as Linter.Parser,
+            parserOptions: { ecmaFeatures: { jsx: true } },
+          },
+          plugins: { dsaireadable: plugin as never },
+          rules: {
+            "dsaireadable/no-deprecated-token": ["error", { tokens: l.tokens }],
+            "dsaireadable/no-deprecated-imports": [
+              "error",
+              { modules: l.imports },
+            ],
+          },
+        },
+      ],
+      { filename: "screen.tsx" }
+    )
+    .map((m) => m.ruleId)
+assert(
+  lintDeprecated(
+    `export const C = () => <div className="bg-legacy p-4" />`
+  ).join() === "dsaireadable/no-deprecated-token" &&
+    lintDeprecated(`const c = "hover:bg-legacy/50"`).length === 1 &&
+    lintDeprecated(`const c = "var(--color-legacy)"`).length === 1 &&
+    lintDeprecated(`const c = "bg-legacy-2 var(--color-legacy-2)"`).length ===
+      0,
+  "no-deprecated-token flags the CSS variable and the class of a deprecated token, variants and modifiers included, and only those"
+)
+assert(
+  lintDeprecated(`import { Chip } from "@/components/ui/chip"`).join() ===
+    "dsaireadable/no-deprecated-imports" &&
+    lintDeprecated(`import { Badge } from "@/components/ui/chip"`).length === 0,
+  "no-deprecated-imports flags a deprecated export and leaves its sibling"
+)
+
+// The MCP tool: a cache holding the chain answers with it.
+const chainContext = mkdtempSync(resolve(tmpdir(), "dsaireadable-chain-"))
+for (const f of readdirSync(contextDir))
+  writeFileSync(
+    resolve(chainContext, f),
+    f === "deprecations.json"
+      ? JSON.stringify(chain)
+      : readFileSync(resolve(contextDir, f))
+  )
+setContextDir(chainContext)
+const served = JSON.parse(
+  (await callTool("dsaireadable_get_deprecations", {})).text
+)
+const servedExports = JSON.parse(
+  (await callTool("dsaireadable_get_deprecations", { kind: "export" })).text
+)
+setContextDir(contextDir)
+rmSync(chainContext, { recursive: true })
+assert(
+  served.total === 2 &&
+    served.tokens[0].token === "color.legacy" &&
+    served.exports[0].replacement === "Badge" &&
+    servedExports.tokens.length === 0 &&
+    servedExports.total === 1,
+  "dsaireadable_get_deprecations serves the token and the export, and kind narrows them"
+)
+
+// Removing the deprecation removes it from every channel.
+const gone = {
+  tokens: tokenDeprecations(legacyTree(false)),
+  exports: exportDeprecations(legacyChip(false), "@/components/ui/chip"),
+}
+const goneLists = lintDeprecated(
+  `const c = "bg-legacy"\nimport { Chip } from "@/components/ui/chip"`,
+  lintLists(gone)
+)
+assert(
+  gone.tokens.length === 0 &&
+    gone.exports.length === 0 &&
+    goneLists.length === 0,
+  "once the deprecation is removed, the token, the export and the lint all forget it"
+)
+
+// What the repository itself has deprecated reaches the manifest and the docs.
+const manifest = JSON.parse(
+  readFileSync(resolve(contextDir, "../../tokens.manifest.json"), "utf-8")
+) as { tokens: { token: string; status: string; replacement?: string }[] }
+const placeholder = manifest.tokens.find(
+  (t) => t.token === "opacity.placeholder"
+)
+assert(
+  placeholder?.status === "deprecated" &&
+    placeholder.replacement === "color.text.subtle" &&
+    plugin.configs.core.some(
+      (c) => c.rules?.["dsaireadable/no-deprecated-token"]
+    ),
+  "the repository's own deprecation reaches the manifest, and the plugin's core config lints it"
+)
+
+// The changelog, in both shapes it is written in.
+const log = parseChangelog(`# Changelog
+
+Intro paragraph.
+
+## [Unreleased]
+
+### Added
+
+- One change
+  that wraps.
+- Another change.
+
+### Deprecated
+
+- A token.
+
+## [0.1.0] - 2026-10-01
+
+### Removed
+
+- Gone.
+
+## 0.0.9
+
+### Patch Changes
+
+- abc1234: docs: A changeset line.
+`)
+assert(
+  log.length === 5 &&
+    log[0].version === "Unreleased" &&
+    log[0].text === "One change that wraps." &&
+    log[2].category === "Deprecated" &&
+    log[3].version === "0.1.0" &&
+    log[3].date === "2026-10-01" &&
+    log[4].version === "0.0.9" &&
+    log[4].category === "Patch Changes",
+  "parseChangelog reads Keep a Changelog and Changesets headings, and joins a wrapped bullet"
 )
 
 // --- Test 11b: page patterns (P4-26) ---
@@ -2110,6 +2375,12 @@ const inputs: [string, Record<string, unknown>][] = [
   ),
   ["dsaireadable_get_tokens", {}],
   ["dsaireadable_get_tokens", { category: "color", limit: 3 }],
+  ["dsaireadable_get_deprecations", {}],
+  ["dsaireadable_get_deprecations", { kind: "token" }],
+  ["dsaireadable_get_deprecations", { kind: "export" }],
+  ["dsaireadable_get_changelog", {}],
+  ["dsaireadable_get_changelog", { version: "Unreleased", limit: 2 }],
+  ["dsaireadable_get_changelog", { category: "Added" }],
   ["dsaireadable_get_typography", {}],
   ["dsaireadable_get_icons", {}],
   ...[undefined, ...ruleCategories].flatMap((category) =>

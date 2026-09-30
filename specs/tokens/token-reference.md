@@ -13,7 +13,8 @@ it is listed at the end of this document only to trace where the values come fro
 
 **Status** column: `active` — consumed by a component, the `@theme` bridge or another token;
 `reserved` — a valid decision nothing consumes yet, usable when its role matches the need
-exactly; `deprecated` — do not use any more. `npm run tokens:lint-lifecycle` makes sure
+exactly; `deprecated` — do not use any more, with the token that replaces it after the
+arrow when there is one. `npm run tokens:lint-lifecycle` makes sure
 the status says what the code does.
 
 ---
@@ -308,11 +309,11 @@ the status says what the code does.
 
 ## Opacity
 
-| Token                 | CSS variable            | Type   | Status     | Value | Tailwind |
-| --------------------- | ----------------------- | ------ | ---------- | ----- | -------- |
-| `opacity.disabled`    | `--opacity-disabled`    | number | active     | `0.5` | —        |
-| `opacity.placeholder` | `--opacity-placeholder` | number | deprecated | `0.5` | —        |
-| `opacity.overlay`     | `--opacity-overlay`     | number | deprecated | `0.8` | —        |
+| Token                 | CSS variable            | Type   | Status                           | Value | Tailwind |
+| --------------------- | ----------------------- | ------ | -------------------------------- | ----- | -------- |
+| `opacity.disabled`    | `--opacity-disabled`    | number | active                           | `0.5` | —        |
+| `opacity.placeholder` | `--opacity-placeholder` | number | deprecated → `color.text.subtle` | `0.5` | —        |
+| `opacity.overlay`     | `--opacity-overlay`     | number | deprecated                       | `0.8` | —        |
 
 **Usage rules**
 

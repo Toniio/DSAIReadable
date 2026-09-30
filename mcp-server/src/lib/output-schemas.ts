@@ -173,7 +173,41 @@ export const tokensOutput = page(
     dark: z.string(),
     type: z.string(),
     status: z.string(),
+    /** The token to use instead, on a deprecated token that has one. */
+    replacement: z.string().optional(),
     usage: z.string(),
+  })
+)
+
+export const deprecationsOutput = z.strictObject({
+  total: z.number().int(),
+  tokens: z.array(
+    z.strictObject({
+      token: z.string(),
+      css_var: z.string(),
+      tailwind: z.string().nullable(),
+      message: z.string(),
+      replacement: z
+        .strictObject({ token: z.string(), css_var: z.string() })
+        .nullable(),
+    })
+  ),
+  exports: z.array(
+    z.strictObject({
+      name: z.string(),
+      import_path: z.string(),
+      message: z.string(),
+      replacement: z.string().nullable(),
+    })
+  ),
+})
+
+export const changelogOutput = page(
+  z.strictObject({
+    version: z.string(),
+    date: z.string().nullable(),
+    category: z.string(),
+    text: z.string(),
   })
 )
 

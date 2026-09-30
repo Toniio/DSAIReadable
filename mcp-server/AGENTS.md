@@ -4,7 +4,7 @@ Complements the [root `AGENTS.md`](../AGENTS.md), which remains the reference:
 this file only adds what is specific to `mcp-server/` and never contradicts it.
 A contradiction between the two is a bug to report.
 
-The server exposes the design system to agents: **17 tools** (`src/tools/`, each named `dsaireadable_*`),
+The server exposes the design system to agents: **19 tools** (`src/tools/`, each named `dsaireadable_*`),
 **3 resources** (`src/resources/index.ts`) and **5 prompts**
 (`src/prompts/index.ts`). It never reads the sources on the fly: it serves a
 precompiled JSON cache, `context/*.json`.
@@ -17,8 +17,9 @@ precompiled JSON cache, `context/*.json`.
 specs/components/*.md  specs/foundations/*.md  specs/patterns/*.md
 tokens/*.json  design-system.index.json  components/ui/*.tsx
 package.json  mcp-server/package.json  registry.json
-        ↓ npm run generate-context   (src/context/generate.ts)
-mcp-server/context/*.json            16 files — NEVER EDIT BY HAND
+        ↓ npm run generate-context   (src/context/generate.ts, then
+                                      scripts/build-plugin-deprecations.ts)
+mcp-server/context/*.json            18 files — NEVER EDIT BY HAND
         ↓ loadContext()              (src/lib/context.ts)
 tools and prompts
 ```
@@ -83,8 +84,9 @@ not the sources, is what has to work:
 - **`files` is `dist` and `context`.** A file the server reads at run time from
   somewhere else (the repository, `specs/`) is a bug: it will not be in the package.
   `tsconfig.build.json` leaves out what only the repository uses: `src/test.ts`,
-  `src/test-package.ts`, `src/context/generate.ts` and `src/lib/dtcg.ts`. A
-  runtime module must not import them.
+  `src/test-package.ts`, `src/context/generate.ts`, `src/lib/dtcg.ts`,
+  `src/lib/deprecations.ts` and `src/lib/changelog.ts` (the generator and the
+  tests use them, the server does not). A runtime module must not import them.
 - **`npm run mcp:test-package`** builds, packs, checks the file list and runs the
   tarball, with the plugin's, through `npx` from an empty folder, then calls
   `initialize`, `tools/list`, a tool that reads the cache and
