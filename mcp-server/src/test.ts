@@ -857,6 +857,97 @@ assert(
   `Every dark override is served as the token's dark value (${overrides.length - wrongDark.length}/${overrides.length})`
 )
 
+// --- Test 7c: the content library speaks in the foundation's voice ---
+// The generator served "Something went wrong", word for word in the "Not"
+// column of voice-and-tone.md: agents copied it into the screens they built.
+console.log("\n7c. Content library voice")
+{
+  const tablesOf = (md: string) =>
+    md.split("\n\n").map((block) =>
+      block
+        .split("\n")
+        .filter((line) => line.startsWith("|"))
+        .map((row) =>
+          row
+            .split("|")
+            .slice(1, -1)
+            .map((cell) => cell.trim())
+        )
+    )
+  const column = (tables: string[][][], header: string) =>
+    tables.flatMap((rows) => {
+      const i = rows[0]?.indexOf(header) ?? -1
+      return i < 0 ? [] : rows.slice(2).map((row) => row[i])
+    })
+  const quoted = (cell: string) =>
+    [...cell.matchAll(/`([^`]+)`/g)].map((m) => m[1])
+
+  const specsDir = resolve(__dirname, "../../specs")
+  const voiceTables = tablesOf(
+    readFileSync(resolve(specsDir, "foundations/voice-and-tone.md"), "utf-8")
+  )
+  const patternTables = readdirSync(resolve(specsDir, "patterns"))
+    .filter((f) => f.endsWith(".md"))
+    .flatMap((f) =>
+      tablesOf(readFileSync(resolve(specsDir, "patterns", f), "utf-8"))
+    )
+
+  // Each rejected phrase, its closing punctuation dropped so that "Something
+  // went wrong" matches "Something went wrong.", matched on word boundaries.
+  // Only the foundation's: a pattern's "Not" belongs to one element.
+  const rejected = column(voiceTables, "Not").flatMap((cell) =>
+    quoted(cell).map((p) => p.replace(/(?<=\w)[.!…]+$/, ""))
+  )
+  const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  const matches = (phrase: string, served: string) =>
+    new RegExp(
+      `${/^\w/.test(phrase) ? "\\b" : ""}${escape(phrase)}${/\w$/.test(phrase) ? "\\b" : ""}`,
+      "i"
+    ).test(served)
+
+  const library = readContext<{
+    placeholders: Record<string, string>
+    messages: Record<string, string>
+  }>("content-library.json")
+  const served = Object.entries({
+    ...library.placeholders,
+    ...library.messages,
+  })
+  const offending = served.flatMap(([key, value]) =>
+    rejected
+      .filter((phrase) => matches(phrase, value))
+      .map((p) => `${key}: "${p}"`)
+  )
+  assert(
+    rejected.includes("Something went wrong") &&
+      rejected.includes("please") &&
+      offending.length === 0,
+    `No served message or placeholder uses a phrase of the "Not" columns (${rejected.length} phrases${offending.length ? `; ${offending.join(", ")}` : ""})`
+  )
+
+  // Every message is a phrase of a "Write" column, word for word; {name} and
+  // {query} stand for the object the caller names ("Q3 launch").
+  const written = column([...voiceTables, ...patternTables], "Write").flatMap(
+    quoted
+  )
+  const canonical = (message: string) =>
+    new RegExp(`^${escape(message).replace(/\\\{\w+\\\}/g, ".+")}$`)
+  const unwritten = Object.entries(library.messages).filter(
+    ([, m]) => !written.some((w) => canonical(m).test(w))
+  )
+  assert(
+    patternTables.length > 0 && unwritten.length === 0,
+    `Every served message is the canonical wording of a pattern or of the foundation (${unwritten.map(([k]) => k).join(", ") || "all"})`
+  )
+  const unexampled = Object.entries(library.placeholders).filter(
+    ([, p]) => !/\p{L}/u.test(p) || !written.some((w) => w.includes(p))
+  )
+  assert(
+    unexampled.length === 0,
+    `Every placeholder is an example value a "Write" column gives, never a row of dots (${unexampled.map(([k]) => k).join(", ") || "all"})`
+  )
+}
+
 // --- Test 8: annotations, resources, response_format, pagination (P3-06) ---
 // Called through a real client, as an agent calls them.
 console.log("\n8. Annotations, resources, response_format, pagination")

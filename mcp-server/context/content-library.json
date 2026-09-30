@@ -69,7 +69,6 @@
     "account_details": "Account details",
     "navigation": "Navigation",
     "main_content": "Main content",
-    "save": "Save",
     "notifications": "Notifications",
     "recent_invoices": "Recent invoices",
     "reference": "Reference",
@@ -80,19 +79,30 @@
     "code": "Code",
     "bold": "Bold",
     "confirm": "Confirm",
+    "save": "Save",
     "close": "Close"
   },
   "placeholders": {
-    "email": "name@company.com",
-    "password": "••••••••",
-    "search": "Search…"
+    "email": "name@example.com",
+    "search": "Search projects…"
   },
   "messages": {
-    "error_generic": "Something went wrong",
-    "error_network": "Couldn't reach the server",
-    "success_saved": "Changes saved",
-    "empty_state": "No results found",
-    "loading": "Loading…",
-    "confirm_delete": "Delete this item? This can't be undone."
+    "saving": "Saving…",
+    "success_saved": "All set! Your changes are saved.",
+    "error_save": "We couldn't save your changes. Check your connection and try again.",
+    "leave_guard": "Leave without saving?",
+    "success_created": "Your project \"{name}\" is ready.",
+    "error_create": "We couldn't create the project. Check your connection and try again.",
+    "confirm_delete_title": "Delete \"{name}\"?",
+    "confirm_delete": "Its tasks and files go with it. You won't be able to get them back.",
+    "confirm_delete_action": "Delete project",
+    "success_deleted": "\"{name}\" is deleted.",
+    "empty_state_title": "No projects yet",
+    "empty_state": "Create your first project to get started.",
+    "empty_search_title": "No results for \"{query}\"",
+    "empty_search": "Check the spelling or try another word.",
+    "loading": "Loading your projects…",
+    "error_sign_in": "That email and password don't match. Check them and try again.",
+    "error_email": "Enter an email address, like name@example.com."
   }
 }

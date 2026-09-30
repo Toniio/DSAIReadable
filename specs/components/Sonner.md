@@ -109,6 +109,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 ## Code example
 
 ```tsx
+import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/sonner"
 import { toast } from "sonner"
 
@@ -131,7 +132,9 @@ export default function RootLayout({
 // Triggering a toast
 function SaveButton() {
   return (
-    <button onClick={() => toast.success("Saved successfully")}>Save</button>
+    <Button onClick={() => toast.success("All set! Your changes are saved.")}>
+      Save changes
+    </Button>
   )
 }
 ```
