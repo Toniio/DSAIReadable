@@ -56,6 +56,9 @@ jobs:
       # Zero-base: no unused file, export or dependency, in the app or in
       # mcp-server/ (knip.jsonc lists the entry points and why).
       - run: npm run knip
+      # One version everywhere it is served, and each pending changeset
+      # follows the semver policy of CONTRIBUTING.md.
+      - run: npm run release:check
 
   index-schema:
     name: index-schema
@@ -147,3 +150,7 @@ jobs:
       # installed into a blank app, then type-checked. A pull request tests the
       # registry it builds; a push to main tests the published addresses.
       - run: npm run registry:test-install -- --source ${{ github.event_name == 'push' && 'github' || 'local' }}
+      # The release pipeline (a changeset becomes a version, a CHANGELOG entry
+      # and one number everywhere) and what a pinned install pins. Both run on
+      # throwaway copies and a local git remote: no network.
+      - run: npm run release:test

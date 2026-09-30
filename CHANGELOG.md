@@ -2,17 +2,28 @@
 
 Every notable change, in the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 format. Nothing has been released yet: registry items install from `main`, so
-every change below is live as soon as it is merged. Versions will follow
-[Semantic Versioning](https://semver.org/) once the MCP server is published to
-npm.
+every change below is live as soon as it is merged. One version, following
+[Semantic Versioning](https://semver.org/), names the whole design system
+(CONTRIBUTING, _Versioning and releases_). From the first release on, each
+release's entry is written by Changesets from the changesets that pull requests
+carry.
 
-A pull request that changes behavior adds its line under **Unreleased**, in the
-section that fits.
+Until then, a pull request that changes behavior adds its line under
+**Unreleased**, in the section that fits.
 
 ## [Unreleased]
 
 ### Added
 
+- Versioning: [Changesets](https://github.com/changesets/changesets) and a
+  semver policy (`CONTRIBUTING.md`, _Versioning and releases_). One version
+  names the tokens, the components, the registry, the inventory and the MCP
+  server; `versions:sync` copies the root `package.json` version everywhere it
+  is served and `versions:check` fails CI when one differs. A changeset starts
+  with a category (`token-breaking`, `component-api`, `mcp`, `visual`, `docs`)
+  and `changesets:lint` checks the bump it takes. `release:test` runs the
+  pipeline on a copy of the files, and states what the shadcn CLI pins when
+  a consumer installs an item at a tag: the item, not its dependencies.
 - MCP server: protocol revision 2026-07-28, on the v2 SDK
   (`@modelcontextprotocol/server`). A client opens with `server/discover`;
   2025-era clients are still served, over stdio and HTTP. `tools/list` comes
@@ -111,6 +122,10 @@ section that fits.
 
 ### Changed
 
+- The design system, its inventory and the MCP server now share one version,
+  `0.0.1`, until the first release. They were `1.1.0` (`design-system.index.json`,
+  served as `design_system_version`) and `1.0.0` (`mcp-server/package.json`,
+  served as `mcp_server_version`), two numbers for nothing that had been released.
 - MCP server: every tool name starts with `dsaireadable_`
   (`dsaireadable_get_component_specs`, `dsaireadable_validate_screen`…), so it
   stays distinct among the tools of other servers. `get_component_specs` in

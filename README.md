@@ -166,6 +166,15 @@ follows it — do not reintroduce a capitalized variant.
 | A component's item     | `Toniio/DSAIReadable/<item>` | The full GitHub address: a bare name would point to the official shadcn registry |
 | npm scope              | `@dsaireadable`              | npm forbids capitals in a scope                                                  |
 | MCP server npm package | `@dsaireadable/mcp-server`   | Not published yet: for now the server runs from a clone of this repository       |
+| Release tag            | `vX.Y.Z`                     | One version for the tokens, components, registry and MCP server (`package.json`) |
+
+A release tag pins the item you name, not what it depends on:
+`npx shadcn add Toniio/DSAIReadable/button#v0.1.0` reads `button` at the tag, but
+the shared base item it depends on is read from the default branch, and pinning
+that one too does not change it. That is how the shadcn CLI resolves an item's
+dependencies, and `npm run release:test` checks it. To reproduce a release exactly,
+commit what the CLI copied into your project
+([CONTRIBUTING → Versioning and releases](./CONTRIBUTING.md#versioning-and-releases)).
 
 The `@dsaireadable` scope is **not reserved** on npm: it will only be once its first
 package is published. The former `@DSAIReadable` scope could not be
