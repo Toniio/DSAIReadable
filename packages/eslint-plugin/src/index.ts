@@ -26,20 +26,32 @@ const SOURCE_FILES = ["**/*.{js,jsx,mjs,ts,tsx}"]
  */
 const INSTALLED_COMPONENTS = ["**/components/ui/**"]
 
+interface ConfigOptions {
+  /**
+   * Glob patterns of the files the rules leave alone. Defaults to what the
+   * registry installs, the `components/ui` folders; `[]` lints everything, and
+   * a narrower list keeps your own components in `components/ui` linted.
+   */
+  ignores?: string[]
+  /** Add the Tailwind half (`eslint-plugin-better-tailwindcss`). Defaults to `true`. */
+  tailwind?: boolean
+}
+
 const plugin = {
   meta: { name: "@dsaireadable/eslint-plugin" },
   rules,
   configs: {} as Record<string, TSESLint.FlatConfig.Config[]>,
-} satisfies TSESLint.FlatConfig.Plugin
+  createConfig,
+}
 
 /**
  * The rules that read the code alone: no stylesheet, no Tailwind, no disk.
  * `dsaireadable_validate_code` runs exactly these.
  */
-const core: TSESLint.FlatConfig.Config = {
+const core = (ignores: string[]): TSESLint.FlatConfig.Config => ({
   name: "dsaireadable/core",
   files: SOURCE_FILES,
-  ignores: INSTALLED_COMPONENTS,
+  ignores,
   plugins: { dsaireadable: plugin },
   rules: {
     "dsaireadable/no-native-interactive-elements": "error",
@@ -52,7 +64,7 @@ const core: TSESLint.FlatConfig.Config = {
       { modules: DEPRECATED_IMPORTS },
     ],
   },
-}
+})
 
 /**
  * The Tailwind half of the lockdown, which does read the real stylesheet:
@@ -62,10 +74,10 @@ const core: TSESLint.FlatConfig.Config = {
  * `settings["better-tailwindcss"].entryPoint` at your stylesheet if it is not
  * `styles/globals.css`.
  */
-const tailwind: TSESLint.FlatConfig.Config = {
+const tailwind = (ignores: string[]): TSESLint.FlatConfig.Config => ({
   name: "dsaireadable/tailwind",
   files: SOURCE_FILES,
-  ignores: INSTALLED_COMPONENTS,
+  ignores,
   plugins: {
     "better-tailwindcss":
       betterTailwindcss as unknown as TSESLint.FlatConfig.Plugin,
@@ -92,12 +104,23 @@ const tailwind: TSESLint.FlatConfig.Config = {
       },
     ],
   },
+})
+
+/**
+ * The configs, with the choices `configs.*` fixes made by you:
+ * `createConfig({ ignores: ["src/components/ui/vendor/**"] })`.
+ */
+function createConfig({
+  ignores = INSTALLED_COMPONENTS,
+  tailwind: withTailwind = true,
+}: ConfigOptions = {}): TSESLint.FlatConfig.Config[] {
+  return withTailwind ? [core(ignores), tailwind(ignores)] : [core(ignores)]
 }
 
 plugin.configs = {
-  core: [core],
-  tailwind: [tailwind],
-  recommended: [core, tailwind],
+  core: createConfig({ tailwind: false }),
+  tailwind: [tailwind(INSTALLED_COMPONENTS)],
+  recommended: createConfig(),
 }
 
 export default plugin

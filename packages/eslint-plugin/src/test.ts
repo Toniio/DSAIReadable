@@ -350,6 +350,27 @@ export const A = () => <Button className="bg-primary p-4"><Plus /></Button>`,
     assert.deepEqual(messages, [])
   })
 
+  it("lints your own files in components/ui once ignores says so", () => {
+    const lintWith = (ignores: string[]) =>
+      new Linter().verify(
+        `export const B = () => <button />`,
+        [
+          {
+            files: ["**/*.tsx"],
+            languageOptions: {
+              parser: tsParser,
+              parserOptions: { ecmaFeatures: { jsx: true } },
+            },
+          },
+          ...(plugin.createConfig({ ignores, tailwind: false }) as never[]),
+        ],
+        { filename: "components/ui/mine/card.tsx" }
+      )
+    assert.equal(lintWith(["**/components/ui/vendor/**"]).length, 1)
+    assert.equal(lintWith(["**/components/ui/mine/**"]).length, 0)
+    assert.equal(lintWith([]).length, 1)
+  })
+
   it("leaves the installed components alone", () => {
     const messages = lint(
       `export const B = () => <button className="bg-[#fff]" />`,

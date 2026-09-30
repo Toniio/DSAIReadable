@@ -22,7 +22,8 @@ Until then, a pull request that changes behavior adds its line under
   `configs.core`, which reads the code alone, and `configs.recommended`, which
   adds the Tailwind lockdown through `eslint-plugin-better-tailwindcss` (an
   unknown class is an error, a disabled state reads `opacity-disabled`).
-  `components/ui/` is left alone. `npm run plugin:test` runs each rule against
+  `components/ui/` is left alone, and `createConfig({ ignores, tailwind })`
+  narrows that for a project whose own components live there. `npm run plugin:test` runs each rule against
   a failing and a conforming fixture. It is not published yet: publishing is a
   maintainer's step.
 - MCP server: `dsaireadable_validate_code` lints and type-checks TSX with the

@@ -226,7 +226,8 @@ adds the Tailwind half of the lockdown through `eslint-plugin-better-tailwindcss
 stylesheet does not generate (`bg-red-500`, `p-13`) is an error, and a disabled state must read
 `opacity-disabled`. Point `settings["better-tailwindcss"].entryPoint` at your stylesheet if it is not
 `styles/globals.css`. Neither config lints `components/ui/`: what the registry installs there is the
-design system's own code.
+design system's own code. If your own components live there, `dsaireadable.createConfig({ ignores })`
+narrows the exclusion to the files the registry installed.
 
 ---
 

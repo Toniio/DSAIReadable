@@ -26,7 +26,21 @@ export default [...dsaireadable.configs.recommended]
 
 None of them lints `components/ui/`: what the registry installs there is the
 design system's own code, which renders native elements and wraps the
-primitives on purpose.
+primitives on purpose. If your own components live in that folder, narrow the
+exclusion with `createConfig`:
+
+```js
+export default [
+  ...dsaireadable.createConfig({
+    // Only what the registry installed; src/components/ui/mine/ is linted.
+    ignores: ["src/components/ui/button.tsx", "src/components/ui/card.tsx"],
+  }),
+]
+```
+
+`createConfig({ ignores, tailwind })` builds the same configs: `ignores` lists the
+globs left alone (`[]` lints everything), `tailwind: false` leaves out the
+Tailwind half.
 
 ## Rules
 
