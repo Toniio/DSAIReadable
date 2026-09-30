@@ -69,7 +69,6 @@
     "account_details": "Account details",
     "navigation": "Navigation",
     "main_content": "Main content",
-    "save": "Save",
     "notifications": "Notifications",
     "recent_invoices": "Recent invoices",
     "reference": "Reference",
@@ -80,19 +79,21 @@
     "code": "Code",
     "bold": "Bold",
     "confirm": "Confirm",
+    "save": "Save",
     "close": "Close"
   },
   "placeholders": {
-    "email": "name@company.com",
-    "password": "••••••••",
+    "email": "you@example.com",
     "search": "Search…"
   },
   "messages": {
-    "error_generic": "Something went wrong",
-    "error_network": "Couldn't reach the server",
-    "success_saved": "Changes saved",
-    "empty_state": "No results found",
-    "loading": "Loading…",
-    "confirm_delete": "Delete this item? This can't be undone."
+    "error_generic": "We couldn't complete your request. Try again in a moment.",
+    "error_network": "We couldn't reach the server. Check your connection and try again.",
+    "success_saved": "All set! Your changes are saved.",
+    "empty_state": "Nothing here yet — create your first project to get started.",
+    "empty_search": "We couldn't find anything that matches. Try a different search.",
+    "loading": "Loading your projects…",
+    "confirm_delete": "Delete this project? You won't be able to get it back.",
+    "confirm_delete_action": "Delete project"
   }
 }

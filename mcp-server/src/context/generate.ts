@@ -966,19 +966,27 @@ function generateContentLibrary() {
     search: "Search",
   })
 
+  // A placeholder is an example value, never a label or a fake one: a password
+  // field takes none, since a row of dots reads as a field already filled in.
   Object.assign(placeholders, {
-    email: "name@company.com",
-    password: "••••••••",
+    email: "you@example.com",
     search: "Search…",
   })
 
+  // Written in the voice of specs/foundations/voice-and-tone.md: an error says
+  // what happened, then how to fix it; a destructive confirmation names what is
+  // lost, and its button repeats the verb.
   Object.assign(messages, {
-    error_generic: "Something went wrong",
-    error_network: "Couldn't reach the server",
-    success_saved: "Changes saved",
-    empty_state: "No results found",
-    loading: "Loading…",
-    confirm_delete: "Delete this item? This can't be undone.",
+    error_generic: "We couldn't complete your request. Try again in a moment.",
+    error_network:
+      "We couldn't reach the server. Check your connection and try again.",
+    success_saved: "All set! Your changes are saved.",
+    empty_state: "Nothing here yet — create your first project to get started.",
+    empty_search:
+      "We couldn't find anything that matches. Try a different search.",
+    loading: "Loading your projects…",
+    confirm_delete: "Delete this project? You won't be able to get it back.",
+    confirm_delete_action: "Delete project",
   })
 
   return write("content-library.json", { labels, placeholders, messages })

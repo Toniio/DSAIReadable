@@ -856,6 +856,89 @@ assert(
   `Every dark override is served as the token's dark value (${overrides.length - wrongDark.length}/${overrides.length})`
 )
 
+// --- Test 7c: the content library speaks in the foundation's voice ---
+// The generator served "Something went wrong", word for word in the "Not"
+// column of voice-and-tone.md: agents copied it into the screens they built.
+console.log("\n7c. Content library voice")
+{
+  const voice = readFileSync(
+    resolve(__dirname, "../../specs/foundations/voice-and-tone.md"),
+    "utf-8"
+  )
+  const tables = voice.split("\n\n").map((block) =>
+    block
+      .split("\n")
+      .filter((line) => line.startsWith("|"))
+      .map((row) =>
+        row
+          .split("|")
+          .slice(1, -1)
+          .map((cell) => cell.trim())
+      )
+  )
+  const column = (header: string) =>
+    tables.flatMap((rows) => {
+      const i = rows[0]?.indexOf(header) ?? -1
+      return i < 0 ? [] : rows.slice(2).map((row) => [row[0], row[i]])
+    })
+  const quoted = (cell: string) =>
+    [...cell.matchAll(/`([^`]+)`/g)].map((m) => m[1])
+
+  // Each rejected phrase, its closing punctuation dropped so that "Something
+  // went wrong" matches "Something went wrong.", matched on word boundaries.
+  const rejected = column("Not").flatMap(([, cell]) =>
+    quoted(cell).map((p) => p.replace(/(?<=\w)[.!…]+$/, ""))
+  )
+  const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  const matches = (phrase: string, served: string) =>
+    new RegExp(
+      `${/^\w/.test(phrase) ? "\\b" : ""}${escape(phrase)}${/\w$/.test(phrase) ? "\\b" : ""}`,
+      "i"
+    ).test(served)
+
+  const library = readContext<{
+    placeholders: Record<string, string>
+    messages: Record<string, string>
+  }>("content-library.json")
+  const served = Object.entries({
+    ...library.placeholders,
+    ...library.messages,
+  })
+  const offending = served.flatMap(([key, value]) =>
+    rejected
+      .filter((phrase) => matches(phrase, value))
+      .map((p) => `${key}: "${p}"`)
+  )
+  assert(
+    rejected.includes("Something went wrong") &&
+      rejected.includes("please") &&
+      offending.length === 0,
+    `No served message or placeholder uses a phrase of the "Not" columns (${rejected.length} phrases${offending.length ? `; ${offending.join(", ")}` : ""})`
+  )
+
+  const success = quoted(
+    column("Write").find(([situation]) => situation === "Success")?.[1] ?? ""
+  )[0]
+  const { messages } = library
+  const errors = Object.entries(messages).filter(([k]) =>
+    k.startsWith("error_")
+  )
+  assert(
+    success !== undefined &&
+      messages.success_saved === success &&
+      errors.length > 0 &&
+      errors.every(([, m]) => /^[^!]+\. [^!]+\.$/.test(m)) &&
+      /won't be able to get/.test(messages.confirm_delete) &&
+      messages.confirm_delete_action.split(" ")[0] ===
+        messages.confirm_delete.split(" ")[0],
+    "Messages follow the tone table: the foundation's success, errors that say what happened then how to fix it, a destructive confirmation whose button repeats its verb"
+  )
+  assert(
+    Object.values(library.placeholders).every((p) => /\p{L}/u.test(p)),
+    "No placeholder is a fake value (a password's row of dots)"
+  )
+}
+
 // --- Test 8: annotations, resources, response_format, pagination (P3-06) ---
 // Called through a real client, as an agent calls them.
 console.log("\n8. Annotations, resources, response_format, pagination")
