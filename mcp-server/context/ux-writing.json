@@ -435,6 +435,38 @@
     {
       "rule": "**A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels.",
       "source": "typography.md"
+    },
+    {
+      "rule": "✅ Write every interface text in sentence case, accessible names included",
+      "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "✅ Start a button with a verb that names its result, and repeat that verb on the confirmation button of a destructive action",
+      "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "✅ Say what happened, then how to fix it, in every error message",
+      "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "✅ Use contractions and \"you\"; let the product say \"we\" when it acts or fails",
+      "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "✅ Write `…` as one character, and numbers as numerals",
+      "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "❌ Never write \"please\", \"oops\" or \"whoops\", and never an exclamation mark in an error",
+      "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "❌ Never blame the reader (\"You entered an invalid date\"): describe the problem and the fix",
+      "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "❌ Never use a term from the \"Not\" column of the word list",
+      "source": "voice-and-tone.md"
     }
   ],
   "component_rules": {

@@ -293,7 +293,22 @@
       "status": "stable",
       "shadcn": {
         "item": "command",
-        "divergences": []
+        "divergences": [
+          {
+            "export": "CommandDialog",
+            "prop": "title",
+            "type": "changed",
+            "upstream": "= \"Command Palette\"",
+            "note": "The default, UI_STRINGS.command.dialogTitle, is written in sentence case like every default string (voice-and-tone.md): \"Command palette\". Screen readers only; pass title to change it."
+          },
+          {
+            "export": "CommandDialog",
+            "prop": "description",
+            "type": "changed",
+            "upstream": "= \"Search for a command to run...\"",
+            "note": "The default, UI_STRINGS.command.dialogDescription, ends with an ellipsis character, not three periods (voice-and-tone.md): \"Search for a command to run…\". Screen readers only; pass description to change it."
+          }
+        ]
       }
     },
     {
@@ -793,13 +808,13 @@
             "export": "SidebarTrigger",
             "prop": "toggleLabel",
             "type": "added",
-            "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md)."
+            "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md). The default reads \"Show or hide the sidebar\", not upstream's \"Toggle Sidebar\": sentence case and plain words (voice-and-tone.md)."
           },
           {
             "export": "SidebarRail",
             "prop": "toggleLabel",
             "type": "added",
-            "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md)."
+            "note": "Overrides its default accessible name, UI_STRINGS.sidebar.toggle, so the string can be translated (content.md). The default reads \"Show or hide the sidebar\", not upstream's \"Toggle Sidebar\": sentence case and plain words (voice-and-tone.md)."
           },
           {
             "export": "SidebarMenuSubButton",

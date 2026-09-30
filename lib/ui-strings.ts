@@ -16,7 +16,7 @@
 export const UI_STRINGS = Object.freeze({
   breadcrumb: Object.freeze({
     /** Name of the <nav> landmark. */
-    landmark: "breadcrumb",
+    landmark: "Breadcrumb",
     /** Announced for the collapsed middle of the trail. */
     ellipsis: "More",
   }),
@@ -33,8 +33,8 @@ export const UI_STRINGS = Object.freeze({
   }),
   command: Object.freeze({
     /** Visually hidden title and description of CommandDialog: they name the dialog. */
-    dialogTitle: "Command Palette",
-    dialogDescription: "Search for a command to run...",
+    dialogTitle: "Command palette",
+    dialogDescription: "Search for a command to run…",
   }),
   dialog: Object.freeze({
     close: "Close",
@@ -53,7 +53,7 @@ export const UI_STRINGS = Object.freeze({
   }),
   pagination: Object.freeze({
     /** Name of the <nav> landmark. */
-    landmark: "pagination",
+    landmark: "Pagination",
     previousText: "Previous",
     previousLabel: "Go to previous page",
     nextText: "Next",
@@ -77,7 +77,7 @@ export const UI_STRINGS = Object.freeze({
     close: "Close",
   }),
   sidebar: Object.freeze({
-    toggle: "Toggle Sidebar",
+    toggle: "Show or hide the sidebar",
     /** Title of the sheet the sidebar becomes on mobile; screen readers only. */
     mobileTitle: "Sidebar",
     /** Description of that sheet; screen readers only. */

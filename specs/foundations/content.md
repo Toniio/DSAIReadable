@@ -8,7 +8,8 @@ no visible label — a `Dialog`'s close cross, a `Carousel`'s arrows, a
 `PasswordInput`'s toggle — plus the names of the two landmarks (`Breadcrumb`,
 `Pagination`).
 
-They all live in `lib/ui-strings.ts`, in a frozen `UI_STRINGS` object.
+They all live in `lib/ui-strings.ts`, in a frozen `UI_STRINGS` object, and
+follow the voice of [voice-and-tone.md](./voice-and-tone.md).
 
 ```ts
 import { UI_STRINGS } from "@/lib/ui-strings"
@@ -33,22 +34,22 @@ wants it.
 Every string can be reached through a prop, never through a fork of the
 component.
 
-| Component                               | Prop                               | Default                                              |
-| --------------------------------------- | ---------------------------------- | ---------------------------------------------------- |
-| `BreadcrumbEllipsis`                    | `srLabel`                          | `More`                                               |
-| `CarouselPrevious` / `CarouselNext`     | `srLabel`                          | `Previous slide` / `Next slide`                      |
-| `DialogContent` / `DialogFooter`        | `closeLabel`                       | `Close`                                              |
-| `SheetContent`                          | `closeLabel`                       | `Close`                                              |
-| `Illustration`                          | `alt`                              | `Illustration`                                       |
-| `PaginationPrevious` / `PaginationNext` | `text`, `label`                    | `Previous` / `Go to previous page`                   |
-| `PaginationEllipsis`                    | `srLabel`                          | `More pages`                                         |
-| `Spinner`                               | `aria-label`                       | `Loading`                                            |
-| `CommandDialog`                         | `title`, `description`             | `Command Palette` / `Search for a command to run...` |
-| `ComboboxTrigger` / `ComboboxClear`     | `triggerLabel` / `clearLabel`      | `Open list` / `Clear selection`                      |
-| `ComboboxChip`                          | `removeLabel`                      | `Remove <item>`                                      |
-| `Sidebar` (mobile Sheet)                | `mobileTitle`, `mobileDescription` | `Sidebar` / `Displays the mobile sidebar.`           |
-| `SidebarTrigger` / `SidebarRail`        | `toggleLabel`                      | `Toggle Sidebar`                                     |
-| `PasswordInput`                         | `showLabel` / `hideLabel`          | `Show password` / `Hide password`                    |
+| Component                               | Prop                               | Default                                            |
+| --------------------------------------- | ---------------------------------- | -------------------------------------------------- |
+| `BreadcrumbEllipsis`                    | `srLabel`                          | `More`                                             |
+| `CarouselPrevious` / `CarouselNext`     | `srLabel`                          | `Previous slide` / `Next slide`                    |
+| `DialogContent` / `DialogFooter`        | `closeLabel`                       | `Close`                                            |
+| `SheetContent`                          | `closeLabel`                       | `Close`                                            |
+| `Illustration`                          | `alt`                              | `Illustration`                                     |
+| `PaginationPrevious` / `PaginationNext` | `text`, `label`                    | `Previous` / `Go to previous page`                 |
+| `PaginationEllipsis`                    | `srLabel`                          | `More pages`                                       |
+| `Spinner`                               | `aria-label`                       | `Loading`                                          |
+| `CommandDialog`                         | `title`, `description`             | `Command palette` / `Search for a command to run…` |
+| `ComboboxTrigger` / `ComboboxClear`     | `triggerLabel` / `clearLabel`      | `Open list` / `Clear selection`                    |
+| `ComboboxChip`                          | `removeLabel`                      | `Remove <item>`                                    |
+| `Sidebar` (mobile Sheet)                | `mobileTitle`, `mobileDescription` | `Sidebar` / `Displays the mobile sidebar.`         |
+| `SidebarTrigger` / `SidebarRail`        | `toggleLabel`                      | `Show or hide the sidebar`                         |
+| `PasswordInput`                         | `showLabel` / `hideLabel`          | `Show password` / `Hide password`                  |
 
 To translate a whole application, pass the props from the application's own
 i18n layer. `UI_STRINGS` reads no locale and is not reactive: it is a set of

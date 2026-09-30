@@ -194,20 +194,21 @@ the rules for choosing between sibling components (the index's `composition_rule
 
 ### `specs/foundations/` — Foundation specs
 
-| File              | Holds                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------- |
-| `border-width.md` | The two border widths and how they are wired into Tailwind                                  |
-| `breakpoints.md`  | The responsive prefixes as a contract; the values of the `breakpoint.*` tokens              |
-| `color.md`        | The full table of light / dark color tokens + Do / Don't, the WCAG 2 / APCA contrast levels |
-| `content.md`      | Default strings (`UI_STRINGS`) and how to override them for another locale                  |
-| `elevation.md`    | Shadows and depth levels                                                                    |
-| `focus.md`        | The single focus ring and its presets (`lib/focus.ts`)                                      |
-| `motion.md`       | Animation durations and easings                                                             |
-| `opacity.md`      | The three semantic opacity levels                                                           |
-| `radius.md`       | Border-radius values                                                                        |
-| `size.md`         | The 24px minimum target size (WCAG 2.2 SC 2.5.8) and the audit of every control             |
-| `spacing.md`      | Component spacing (4px → 32px) and layout spacing                                           |
-| `typography.md`   | Type scale, families, weights                                                               |
+| File                | Holds                                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------------------ |
+| `border-width.md`   | The two border widths and how they are wired into Tailwind                                       |
+| `breakpoints.md`    | The responsive prefixes as a contract; the values of the `breakpoint.*` tokens                   |
+| `color.md`          | The full table of light / dark color tokens + Do / Don't, the WCAG 2 / APCA contrast levels      |
+| `content.md`        | Default strings (`UI_STRINGS`) and how to override them for another locale                       |
+| `elevation.md`      | Shadows and depth levels                                                                         |
+| `focus.md`          | The single focus ring and its presets (`lib/focus.ts`)                                           |
+| `motion.md`         | Animation durations and easings                                                                  |
+| `opacity.md`        | The three semantic opacity levels                                                                |
+| `radius.md`         | Border-radius values                                                                             |
+| `size.md`           | The 24px minimum target size (WCAG 2.2 SC 2.5.8) and the audit of every control                  |
+| `spacing.md`        | Component spacing (4px → 32px) and layout spacing                                                |
+| `typography.md`     | Type scale, families, weights                                                                    |
+| `voice-and-tone.md` | The voice, the tone by situation, grammar and mechanics, the word list — checked on `UI_STRINGS` |
 
 ### `specs/tokens/token-reference.md` · `tokens.manifest.json` — generated
 

@@ -33,6 +33,7 @@ Code written with this design system uses its components, never a native element
 - [Size](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/size.md)
 - [Spacing](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/spacing.md)
 - [Typography](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/typography.md)
+- [Voice and Tone — how the interface speaks](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/voice-and-tone.md)
 
 ## Component specs
 
