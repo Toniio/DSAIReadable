@@ -251,7 +251,7 @@ Copy `.vscode/mcp.json.example` to `.vscode/mcp.json` (not committed). It starts
 the published package with `npx`; until the package is published, or to run your
 own changes, point it at the sources with `"args": ["tsx", "./mcp-server/src/index.ts"]`.
 
-To try the package a consumer would get, `npm --prefix mcp-server pack` builds
+To try the package a consumer would get, `npm pack`, run in `mcp-server/`, builds
 and packs it, and `npm run mcp:test-package` runs that tarball through `npx`
 from an empty folder. Publishing `@dsaireadable/mcp-server` (`npm publish` from
 `mcp-server/`, after the release tag) is a maintainer's step, never an agent's.

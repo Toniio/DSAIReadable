@@ -15,6 +15,9 @@ Until then, a pull request that changes behavior adds its line under
 
 ### Added
 
+- License: the repository and the MCP server package are released under the MIT
+  License (`LICENSE`, `license` in both `package.json`). `NOTICE.md` reproduces the
+  shadcn/ui copyright notice, which the components derived from it must keep.
 - MCP server: `@dsaireadable/mcp-server` is a package a client runs with
   `npx -y @dsaireadable/mcp-server`, over stdio. The server is compiled to
   JavaScript (`dist/`, a `node` shebang, `tsx` and `typescript` as dev
