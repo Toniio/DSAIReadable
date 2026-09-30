@@ -319,7 +319,7 @@ if (!existsSync(variantsPath)) {
   // Every component must be present, so agents get an explicit answer
   // instead of a lookup error.
   assert(
-    Object.keys(variants).length >= 59,
+    Object.keys(variants).length >= 65,
     `All components emitted (${Object.keys(variants).length} entries)`
   )
 }
@@ -1045,6 +1045,28 @@ assert(
       ) &&
       heading.shadcn.item === null,
     "get_component_specs serves each component's divergences from shadcn/ui, concise included"
+  )
+}
+
+// A shadcn/ui component excluded from the design system: the lookup fails,
+// says why and names the component to use, and the overview lists it.
+{
+  const form = await call("get_component_specs", { component_name: "Form" })
+  const formVariants = await call("get_component_variants", {
+    component_name: "form",
+  })
+  const overview = JSON.parse(await payload("get_design_system_overview")) as {
+    shadcn_excluded: { item: string; instead?: string }[]
+  }
+  assert(
+    form.isError === true &&
+      form.content[0].text.includes("Use Field instead") &&
+      formVariants.isError === true &&
+      formVariants.content[0].text.includes("Use Field instead") &&
+      overview.shadcn_excluded.some(
+        (x) => x.item === "form" && x.instead === "Field"
+      ),
+    "an excluded shadcn/ui component (Form) answers with its reason and Field"
   )
 }
 

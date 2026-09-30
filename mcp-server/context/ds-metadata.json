@@ -14,10 +14,18 @@
     "tailwindcss": "^4.3.3"
   },
   "framework": "React 19 / Next.js 16 / Tailwind CSS v4 / shadcn-ui",
+  "shadcn_excluded": [
+    {
+      "item": "form",
+      "reason": "shadcn/ui's former form layer, built on react-hook-form. shadcn/ui now builds its forms on Field, which the design system ships: Field lays out the label, the control, the description and the error, and leaves the form state to whichever library the app uses.",
+      "instead": "Field"
+    }
+  ],
   "sources": {
     "design_system_version": "design-system.index.json#version",
     "mcp_server_version": "mcp-server/package.json#version",
     "registry_source": "registry.json#homepage,name",
-    "stack": "package.json#dependencies"
+    "stack": "package.json#dependencies",
+    "shadcn_excluded": "design-system.index.json#shadcn.excluded"
   }
 }

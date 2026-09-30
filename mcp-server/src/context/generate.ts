@@ -1290,6 +1290,8 @@ function generateDatavizCatalog() {
  *   Toniio/DSAIReadable/button carries none, and the shadcn CLI reads the
  *   repository's default branch.
  * - stack, framework:      the root package.json dependencies
+ * - shadcn_excluded:       design-system.index.json, the shadcn/ui components
+ *   the design system does not ship, with the reason and what to use
  */
 function generateDsMetadata() {
   const mcpPkg = JSON.parse(
@@ -1327,11 +1329,13 @@ function generateDsMetadata() {
       tailwindcss: range("tailwindcss"),
     },
     framework: `React ${major("react")} / Next.js ${major("next")} / Tailwind CSS v${major("tailwindcss")} / shadcn-ui`,
+    shadcn_excluded: dsIndex.shadcn.excluded,
     sources: {
       design_system_version: "design-system.index.json#version",
       mcp_server_version: "mcp-server/package.json#version",
       registry_source: "registry.json#homepage,name",
       stack: "package.json#dependencies",
+      shadcn_excluded: "design-system.index.json#shadcn.excluded",
     },
   })
 }

@@ -1224,6 +1224,29 @@
       }
     },
     {
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "A tile that stands for one file sent or received — its icon or preview, its name, its size — with its upload state and its actions.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "registryDependencies": [
+        "Toniio/DSAIReadable/button",
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/attachment.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
+      }
+    },
+    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
@@ -1286,6 +1309,28 @@
       ],
       "meta": {
         "status": "stable"
+      }
+    },
+    {
+      "name": "bubble",
+      "type": "registry:ui",
+      "title": "Bubble",
+      "description": "The colored block that holds the text of a conversation turn, with optional reactions pinned to its edge.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "registryDependencies": [
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/bubble.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
       }
     },
     {
@@ -1861,6 +1906,28 @@
       }
     },
     {
+      "name": "marker",
+      "type": "registry:ui",
+      "title": "Marker",
+      "description": "A line of muted text that marks an event in a conversation nobody said: a date, a tool call, a resumed session.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "registryDependencies": [
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/marker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
+      }
+    },
+    {
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",
@@ -1880,6 +1947,47 @@
       ],
       "meta": {
         "status": "stable"
+      }
+    },
+    {
+      "name": "message-scroller",
+      "type": "registry:ui",
+      "title": "MessageScroller",
+      "description": "The scrolling thread of a conversation: it keeps the latest message in view as messages arrive, announces them, and offers buttons to jump to either end.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10",
+        "@shadcn/react@^0.3.1"
+      ],
+      "registryDependencies": [
+        "Toniio/DSAIReadable/button",
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/message-scroller.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
+      }
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "One turn of a conversation: who speaks, with an optional avatar, a header, the content and a footer, aligned to the start or the end of the thread.",
+      "registryDependencies": [
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/message.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
       }
     },
     {
@@ -2010,6 +2118,29 @@
       ],
       "meta": {
         "status": "stable"
+      }
+    },
+    {
+      "name": "questionnaire",
+      "type": "registry:ui",
+      "title": "Questionnaire",
+      "description": "A form that asks one question at a time — single or multiple choice, or a free answer — with its progress and the controls to go back, skip, go on and submit.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10",
+        "@shadcn/react@^0.3.1"
+      ],
+      "registryDependencies": [
+        "Toniio/DSAIReadable/button",
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/questionnaire.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
       }
     },
     {

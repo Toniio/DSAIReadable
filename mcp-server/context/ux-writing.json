@@ -436,6 +436,15 @@
       "**MUST** — fill the frame with an `absolute` child (`size-full`) or an `object-cover` media element",
       "**MUST** — pass a single direct child; wrap several elements in a container"
     ],
+    "Attachment": [
+      "**MUST** — set `state` from the real upload: `uploading` while bytes are sent, `processing` while the server reads the file, `error` when it failed, `done` when it is usable",
+      "**MUST** — show the file name in `AttachmentTitle` and its size or type in `AttachmentDescription`; on `error`, say what failed in `AttachmentDescription`",
+      "**MUST** — give every `AttachmentAction` an `aria-label` that names the action and the file (\"Remove report.pdf\")",
+      "**MUST NOT** — put more than 2 `AttachmentAction`s in a tile → open a `DropdownMenu` from one of them",
+      "**MUST** — place `AttachmentTrigger` as the last child of the tile, with the file name as its accessible name, when the tile opens the file",
+      "**Note** — the `size` of `Attachment` takes `default`, `sm` and `xs`; the `size` of `AttachmentAction` takes the `Button` scale and defaults to `icon-xs`",
+      "**Note** — the tile orders its own parts with raw z-index values: `AttachmentTrigger` (`z-10`) lies over the media and the content, `AttachmentActions` (`z-20`) over the trigger. They are internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
+    ],
     "Avatar": [
       "**MUST** — provide an `AvatarFallback`, shown when the image is missing",
       "**MUST NOT** — use `AvatarBadge` without an `aria-label` that says what it signals",
@@ -458,6 +467,15 @@
       "**MUST NOT** — replace the root's `aria-label=\"breadcrumb\"`, **unless** to translate it",
       "**MUST** — in an interface that is not in English, translate the `UI_STRINGS.breadcrumb` strings (`srLabel` on `BreadcrumbEllipsis`)"
     ],
+    "Bubble": [
+      "**MUST** — put the text in a `BubbleContent`: the variant colors the `BubbleContent`, not the `Bubble`",
+      "**MUST** — use one variant per side of the conversation, the same for every turn of that side",
+      "**MUST NOT** — use `destructive` for anything but an error on that message",
+      "**MUST** — render `BubbleContent` as a `button` or an `a` (`asChild`) when the bubble reacts to a click; a `div` with a click handler is not reachable by keyboard",
+      "**MUST NOT** — place more than 5 reactions in one `BubbleReactions` → show a count for the rest",
+      "**Note** — a bubble takes at most 4/5 of the thread width, a `ghost` bubble the whole width",
+      "**Note** — `BubbleReactions` is lifted over the bubble it overlaps with a raw `z-10`, internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
+    ],
     "Button": [
       "**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look",
       "**MUST NOT** — place more than 2 `variant=\"default\"` (primary) buttons in the same view",
@@ -477,7 +495,8 @@
       "**MUST NOT** — show more than one `Calendar` per view, **unless** comparing two date ranges",
       "**MUST** — place the `Calendar` inside a container (`Popover`, `Card`…): it does not position itself",
       "**MUST** — keep disabled days visible (`opacity-disabled`, `aria-disabled`)",
-      "**MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)"
+      "**MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)",
+      "**Note** — the first and last days of a range take a raw `z-0` with `isolate`, so their highlight pseudo-elements paint under the day cells; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
     ],
     "Card": [
       "**MUST NOT** — nest `Card`s more than one level deep: show hierarchy with a different background",
@@ -649,12 +668,35 @@
       "**MUST** — place the brand name next to the `Logo`: it does not render its children",
       "**MUST** — replace this placeholder with the real brand assets as soon as they exist"
     ],
+    "Marker": [
+      "**MUST** — put the text in a `MarkerContent` and the icon in a `MarkerIcon`",
+      "**MUST NOT** — use a `Marker` for what a speaker says: that is a `Message` with a `Bubble`",
+      "**MUST NOT** — use a `Marker` for an error the user must act on → `Alert`",
+      "**MUST** — keep the text to one line of 60 characters or less",
+      "**Note** — `MarkerIcon` is hidden from screen readers (`aria-hidden`): the text carries the meaning"
+    ],
     "Menubar": [
       "**MUST NOT** — serve as site navigation → use `NavigationMenu`",
       "**MUST NOT** — nest submenus more than 2 levels deep",
       "**Note** — a `disabled` item is dimmed (`opacity-disabled`) and inert (`pointer-events-none`)",
       "**MUST** — keep `variant=\"destructive\"` on `MenubarItem` for irreversible actions",
       "**MUST** — wire a real handler for every shortcut `MenubarShortcut` displays"
+    ],
+    "Message": [
+      "**MUST** — put the text of a turn in a `Bubble` inside `MessageContent`, never directly in `Message`",
+      "**MUST** — give every turn of the same speaker the same `align`: `start` for the others, `end` for the user",
+      "**MUST** — name the speaker in `MessageHeader` or with an `Avatar` that has a text fallback when more than two people take part",
+      "**MUST NOT** — nest a `Message` in another `Message`",
+      "**Note** — `MessageAvatar` sits at the bottom of the turn and moves up above a `MessageFooter`; it holds an `Avatar`, it does not replace it"
+    ],
+    "MessageScroller": [
+      "**MUST** — wrap the scroller in a `MessageScrollerProvider`, which holds the scroll state its parts and hooks read",
+      "**MUST** — nest the parts in this order: `MessageScroller` > `MessageScrollerViewport` > `MessageScrollerContent` > `MessageScrollerItem`",
+      "**MUST** — give the scroller a bounded height (its parent sets it): it fills its parent and scrolls inside it",
+      "**MUST** — give each `MessageScrollerItem` a stable `messageId` when code scrolls to a message or reads visibility",
+      "**MUST** — place `MessageScrollerButton`s inside `MessageScroller`, next to the viewport: they are positioned over it",
+      "**MUST NOT** — nest a `ScrollArea` in a `MessageScroller`, or a `MessageScroller` in a `ScrollArea`",
+      "**Note** — `@shadcn/react` provides the behavior (following, anchors, keyboard, the `log` role); this file styles it"
     ],
     "NativeSelect": [
       "**MUST NOT** — be used when the list has to be filtered by typing → use `Combobox`",
@@ -668,7 +710,8 @@
       "**MUST NOT** — exceed 7 top-level triggers",
       "**Note** — `viewport={false}` renders the content inline, without a viewport",
       "**MUST** — render every link with `NavigationMenuLink`, which handles `data-active`",
-      "**MUST** — give the parent of `NavigationMenuIndicator` relative positioning"
+      "**MUST** — give the parent of `NavigationMenuIndicator` relative positioning",
+      "**Note** — `NavigationMenuIndicator` takes a raw `z-1` to sit above the menu bar border; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
     ],
     "Pagination": [
       "**MUST NOT** — serve as hierarchical navigation → use `Breadcrumb`",
@@ -699,6 +742,17 @@
       "**MUST** — name the bar (`aria-label` or a tied `<label>`)",
       "**MUST** — keep `value` between 0 and `max` (100 by default): out-of-range values are not handled",
       "**MUST NOT** — serve as a data gauge (temperature, stock…): `Progress` expresses how far a task has gone"
+    ],
+    "Questionnaire": [
+      "**MUST** — give each `QuestionnaireItem` a unique `name`: it is the answer's field name in the submitted form",
+      "**MUST** — give each question a `QuestionnaireTitle`, the question itself",
+      "**MUST** — place `QuestionnairePrevious`, `QuestionnaireSkip`, `QuestionnaireNext` and `QuestionnaireSubmit` in one `QuestionnaireActions`, after the items",
+      "**MUST NOT** — ask more than 7 questions in one questionnaire → split the task, or use a page with `Field`s",
+      "**MUST NOT** — offer more than 9 choices with `shortcuts=\"numbers\"`: the digits stop at 9",
+      "**MUST** — mark a question `required` when it cannot be skipped: `QuestionnaireSkip` then stays hidden for it",
+      "**MUST NOT** — use a `Questionnaire` for a form whose fields are all read at once → `Field`s in a `form`",
+      "**Note** — `@shadcn/react` provides the behavior (the current question, the keyboard, validation, the progress bar); this file styles it",
+      "**Note** — the transparent native input of each choice lies over its indicator and label with a raw `z-10`, internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
     ],
     "RadioGroup": [
       "**MUST NOT** — be used for more than 5 options → `Select` from 6 to 15, `Combobox` beyond (`rule-20`)",
@@ -938,6 +992,18 @@
         "Card",
         "Table",
         "DropdownMenu"
+      ]
+    },
+    {
+      "id": "rule-23",
+      "rule": "Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.",
+      "applies_to": [
+        "MessageScroller",
+        "Message",
+        "Bubble",
+        "Marker",
+        "Attachment",
+        "Questionnaire"
       ]
     }
   ]

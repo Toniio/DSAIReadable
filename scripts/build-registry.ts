@@ -7,7 +7,7 @@
  * describe a component that was renamed, deleted, or given a new dependency.
  *
  * Inputs:
- *   · design-system.index.json  — the 59 components and their code paths
+ *   · design-system.index.json  — the components and their code paths
  *   · specs/components/*.md     — human titles and the one-line role
  *   · components/ui/*.tsx       — real imports, for npm and internal deps
  *   · tokens.css + globals.css  — the stylesheet shipped by the base item

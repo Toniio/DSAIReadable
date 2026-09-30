@@ -1,6 +1,6 @@
 {
   "source": "https://ui.shadcn.com/r/styles/radix-lyra",
-  "fetched": "2026-09-29",
+  "fetched": "2026-09-30",
   "dom": {
     "common": [
       "about",
@@ -344,6 +344,21 @@
       "1a0a77747a": {
         "drop": [
           "aria-label"
+        ]
+      },
+      "1e4f75c7c3": {
+        "add": [
+          "acceptCharset",
+          "action",
+          "autoComplete",
+          "encType",
+          "method",
+          "name",
+          "noValidate",
+          "target"
+        ],
+        "drop": [
+          "defaultValue"
         ]
       },
       "2641d43839": {
@@ -1040,9 +1055,50 @@
           "htmlFor"
         ]
       },
+      "7b7ab90f8a": {
+        "add": [
+          "accept",
+          "alt",
+          "autoComplete",
+          "capture",
+          "checked",
+          "disabled",
+          "formAction",
+          "formEncType",
+          "formMethod",
+          "formNoValidate",
+          "formTarget",
+          "height",
+          "list",
+          "max",
+          "maxLength",
+          "min",
+          "minLength",
+          "multiple",
+          "pattern",
+          "placeholder",
+          "readOnly",
+          "required",
+          "size",
+          "src",
+          "step",
+          "value",
+          "width"
+        ]
+      },
       "7e43299827": {
         "drop": [
           "onSelect"
+        ]
+      },
+      "80ea145520": {
+        "add": [
+          "form",
+          "htmlFor"
+        ],
+        "drop": [
+          "defaultChecked",
+          "onChange"
         ]
       },
       "881252f70e": {
@@ -1171,6 +1227,12 @@
           "formNoValidate",
           "formTarget",
           "type"
+        ]
+      },
+      "c9e0252f99": {
+        "add": [
+          "disabled",
+          "form"
         ]
       },
       "d452ecae52": {
@@ -1778,6 +1840,109 @@
         }
       }
     ],
+    "attachment": [
+      {
+        "name": "Attachment",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "orientation": {
+            "type": "\"horizontal\" | \"vertical\"",
+            "default": "\"horizontal\""
+          },
+          "size": {
+            "type": "\"default\" | \"xs\" | \"sm\"",
+            "default": "\"default\""
+          },
+          "state": {
+            "type": "\"idle\" | \"uploading\" | \"processing\" | \"error\" | \"done\"",
+            "default": "\"done\""
+          }
+        }
+      },
+      {
+        "name": "AttachmentGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AttachmentMedia",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "variant": {
+            "type": "\"image\" | \"icon\"",
+            "default": "\"icon\""
+          }
+        }
+      },
+      {
+        "name": "AttachmentContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AttachmentTitle",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AttachmentDescription",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AttachmentActions",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "AttachmentAction",
+        "kind": "component",
+        "element": "Button",
+        "base": "React.ComponentProps<typeof Button>",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {},
+          "size": {
+            "default": "\"icon-xs\""
+          },
+          "variant": {}
+        }
+      },
+      {
+        "name": "AttachmentTrigger",
+        "kind": "component",
+        "element": "<button>",
+        "base": "React.ComponentProps<\"button\">",
+        "dom": "5df36366d3",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      }
+    ],
     "avatar": [
       {
         "name": "Avatar",
@@ -1923,6 +2088,63 @@
         "base": "React.ComponentProps<\"span\">",
         "dom": "3a72cf30cf",
         "props": {}
+      }
+    ],
+    "bubble": [
+      {
+        "name": "BubbleGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "Bubble",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "align": {
+            "type": "\"start\" | \"end\"",
+            "default": "\"start\""
+          },
+          "variant": {
+            "type": "\"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\" | \"muted\" | \"tinted\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "BubbleContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "BubbleReactions",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "align": {
+            "type": "\"start\" | \"end\"",
+            "default": "\"end\""
+          },
+          "side": {
+            "type": "\"top\" | \"bottom\"",
+            "default": "\"bottom\""
+          }
+        }
       }
     ],
     "button": [
@@ -4154,6 +4376,45 @@
         }
       }
     ],
+    "marker": [
+      {
+        "name": "Marker",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "asChild": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "variant": {
+            "type": "\"separator\" | \"default\" | \"border\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "MarkerIcon",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "MarkerContent",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "kind": "variants",
+        "name": "markerVariants"
+      }
+    ],
     "menubar": [
       {
         "name": "Menubar",
@@ -4399,6 +4660,154 @@
           "sticky": {},
           "updatePositionStrategy": {}
         }
+      }
+    ],
+    "message": [
+      {
+        "name": "MessageGroup",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "Message",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "align": {
+            "type": "\"start\" | \"end\"",
+            "default": "\"start\""
+          }
+        }
+      },
+      {
+        "name": "MessageAvatar",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "MessageContent",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "MessageFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "MessageHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
+    "message-scroller": [
+      {
+        "name": "MessageScrollerProvider",
+        "kind": "component",
+        "element": "MessageScrollerPrimitive.Provider",
+        "base": "React.ComponentProps<typeof MessageScrollerPrimitive.Provider>",
+        "dom": "da39a3ee5e",
+        "props": {
+          "autoScroll": {},
+          "children": {},
+          "defaultScrollPosition": {},
+          "scrollEdgeThreshold": {},
+          "scrollMargin": {},
+          "scrollPreviousItemPeek": {}
+        }
+      },
+      {
+        "name": "MessageScroller",
+        "kind": "component",
+        "element": "MessageScrollerPrimitive.Root",
+        "base": "React.ComponentProps<typeof MessageScrollerPrimitive.Root>",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "MessageScrollerViewport",
+        "kind": "component",
+        "element": "MessageScrollerPrimitive.Viewport",
+        "base": "React.ComponentProps<typeof MessageScrollerPrimitive.Viewport>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "preserveScrollOnPrepend": {}
+        }
+      },
+      {
+        "name": "MessageScrollerContent",
+        "kind": "component",
+        "element": "MessageScrollerPrimitive.Content",
+        "base": "React.ComponentProps<typeof MessageScrollerPrimitive.Content>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "spacerClassName": {}
+        }
+      },
+      {
+        "name": "MessageScrollerItem",
+        "kind": "component",
+        "element": "MessageScrollerPrimitive.Item",
+        "base": "React.ComponentProps<typeof MessageScrollerPrimitive.Item>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "messageId": {},
+          "scrollAnchor": {
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "MessageScrollerButton",
+        "kind": "component",
+        "element": "MessageScrollerPrimitive.Button",
+        "base": "React.ComponentProps<typeof MessageScrollerPrimitive.Button> & Pick<React.ComponentProps<typeof Button>, \"variant\" | \"size\">",
+        "dom": "5df36366d3",
+        "props": {
+          "behavior": {},
+          "direction": {
+            "default": "\"end\""
+          },
+          "render": {},
+          "size": {
+            "default": "\"icon-sm\""
+          },
+          "variant": {
+            "default": "\"secondary\""
+          }
+        }
+      },
+      {
+        "name": "useMessageScroller",
+        "kind": "hook",
+        "signature": "useMessageScroller(): { scrollToEnd: (options?: MessageScrollerScrollOptions) => boolean; scrollToMessage: (messageId: string, options?: MessageScrollerScrollOptions) => boolean; scrollToStart: (options?: MessageScrollerScrollOptions) => boolean; }"
+      },
+      {
+        "name": "useMessageScrollerScrollable",
+        "kind": "hook",
+        "signature": "useMessageScrollerScrollable(): MessageScrollerScrollable"
+      },
+      {
+        "name": "useMessageScrollerVisibility",
+        "kind": "hook",
+        "signature": "useMessageScrollerVisibility(): MessageScrollerVisibilityState"
       }
     ],
     "native-select": [
@@ -4729,6 +5138,192 @@
           "getValueLabel": {},
           "max": {},
           "value": {}
+        }
+      }
+    ],
+    "questionnaire": [
+      {
+        "name": "Questionnaire",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Root",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Root>",
+        "dom": "1e4f75c7c3",
+        "props": {
+          "defaultItem": {},
+          "item": {},
+          "items": {},
+          "onItemChange": {},
+          "shortcuts": {}
+        }
+      },
+      {
+        "name": "QuestionnaireActions",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "QuestionnaireChoice",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Choice",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Choice>",
+        "dom": "80ea145520",
+        "props": {
+          "checked": {},
+          "defaultChecked": {},
+          "disabled": {},
+          "onChange": {},
+          "render": {},
+          "value": {}
+        }
+      },
+      {
+        "name": "QuestionnaireChoiceDescription",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "QuestionnaireChoices",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Choices",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Choices>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "render": {}
+        }
+      },
+      {
+        "name": "QuestionnaireDescription",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Description",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Description>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "render": {}
+        }
+      },
+      {
+        "name": "QuestionnaireError",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Error",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Error>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "render": {}
+        }
+      },
+      {
+        "name": "QuestionnaireInput",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Input",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Input>",
+        "dom": "7b7ab90f8a",
+        "props": {
+          "render": {},
+          "type": {}
+        }
+      },
+      {
+        "name": "QuestionnaireItem",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Item",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Item>",
+        "dom": "c9e0252f99",
+        "props": {
+          "invalid": {},
+          "multiple": {},
+          "name": {},
+          "onStatusChange": {},
+          "required": {}
+        }
+      },
+      {
+        "name": "QuestionnaireNext",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Next",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Next> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">",
+        "dom": "5df36366d3",
+        "props": {
+          "render": {},
+          "size": {
+            "default": "\"default\""
+          },
+          "variant": {
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "QuestionnairePrevious",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Previous",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Previous> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">",
+        "dom": "5df36366d3",
+        "props": {
+          "render": {},
+          "size": {
+            "default": "\"default\""
+          },
+          "variant": {
+            "default": "\"outline\""
+          }
+        }
+      },
+      {
+        "name": "QuestionnaireProgress",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Progress",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Progress>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "render": {}
+        }
+      },
+      {
+        "name": "QuestionnaireSkip",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Skip",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Skip> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">",
+        "dom": "5df36366d3",
+        "props": {
+          "render": {},
+          "size": {
+            "default": "\"default\""
+          },
+          "variant": {
+            "default": "\"outline\""
+          }
+        }
+      },
+      {
+        "name": "QuestionnaireSubmit",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Submit",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Submit> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">",
+        "dom": "5df36366d3",
+        "props": {
+          "render": {},
+          "size": {
+            "default": "\"default\""
+          },
+          "variant": {
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "QuestionnaireTitle",
+        "kind": "component",
+        "element": "QuestionnairePrimitive.Title",
+        "base": "React.ComponentProps<typeof QuestionnairePrimitive.Title>",
+        "dom": "3a72cf30cf",
+        "props": {
+          "render": {}
         }
       }
     ],
@@ -5790,5 +6385,69 @@
     "illustration",
     "logo",
     "password-input"
+  ],
+  "upstream": [
+    "accordion",
+    "alert",
+    "alert-dialog",
+    "aspect-ratio",
+    "attachment",
+    "avatar",
+    "badge",
+    "breadcrumb",
+    "bubble",
+    "button",
+    "button-group",
+    "calendar",
+    "card",
+    "carousel",
+    "chart",
+    "checkbox",
+    "collapsible",
+    "combobox",
+    "command",
+    "context-menu",
+    "dialog",
+    "direction",
+    "drawer",
+    "dropdown-menu",
+    "empty",
+    "field",
+    "form",
+    "hover-card",
+    "input",
+    "input-group",
+    "input-otp",
+    "item",
+    "kbd",
+    "label",
+    "marker",
+    "menubar",
+    "message",
+    "message-scroller",
+    "native-select",
+    "navigation-menu",
+    "pagination",
+    "popover",
+    "progress",
+    "questionnaire",
+    "radio-group",
+    "resizable",
+    "scroll-area",
+    "select",
+    "separator",
+    "sheet",
+    "sidebar",
+    "skeleton",
+    "slider",
+    "sonner",
+    "spinner",
+    "switch",
+    "table",
+    "tabs",
+    "textarea",
+    "toggle",
+    "toggle-group",
+    "tooltip"
   ]
 }

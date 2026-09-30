@@ -63,6 +63,25 @@
       }
     },
     {
+      "name": "Attachment",
+      "code_path": "components/ui/attachment.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
+      ],
+      "status": "beta",
+      "shadcn": {
+        "item": "attachment",
+        "divergences": []
+      }
+    },
+    {
       "name": "Avatar",
       "code_path": "components/ui/avatar.tsx",
       "sizes": [
@@ -114,6 +133,15 @@
             "note": "Overrides its default screen reader text, UI_STRINGS.breadcrumb.ellipsis, so the string can be translated (content.md)."
           }
         ]
+      }
+    },
+    {
+      "name": "Bubble",
+      "code_path": "components/ui/bubble.tsx",
+      "status": "beta",
+      "shadcn": {
+        "item": "bubble",
+        "divergences": []
       }
     },
     {
@@ -498,11 +526,48 @@
       }
     },
     {
+      "name": "Marker",
+      "code_path": "components/ui/marker.tsx",
+      "status": "beta",
+      "shadcn": {
+        "item": "marker",
+        "divergences": []
+      }
+    },
+    {
       "name": "Menubar",
       "code_path": "components/ui/menubar.tsx",
       "status": "stable",
       "shadcn": {
         "item": "menubar",
+        "divergences": []
+      }
+    },
+    {
+      "name": "Message",
+      "code_path": "components/ui/message.tsx",
+      "status": "beta",
+      "shadcn": {
+        "item": "message",
+        "divergences": []
+      }
+    },
+    {
+      "name": "MessageScroller",
+      "code_path": "components/ui/message-scroller.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
+      ],
+      "status": "beta",
+      "shadcn": {
+        "item": "message-scroller",
         "divergences": []
       }
     },
@@ -608,6 +673,25 @@
       "status": "stable",
       "shadcn": {
         "item": "progress",
+        "divergences": []
+      }
+    },
+    {
+      "name": "Questionnaire",
+      "code_path": "components/ui/questionnaire.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
+      ],
+      "status": "beta",
+      "shadcn": {
+        "item": "questionnaire",
         "divergences": []
       }
     },
@@ -849,6 +933,15 @@
       }
     }
   ],
+  "shadcn": {
+    "excluded": [
+      {
+        "item": "form",
+        "reason": "shadcn/ui's former form layer, built on react-hook-form. shadcn/ui now builds its forms on Field, which the design system ships: Field lays out the label, the control, the description and the error, and leaves the form state to whichever library the app uses.",
+        "instead": "Field"
+      }
+    ]
+  },
   "composition_rules": [
     {
       "id": "rule-01",
@@ -960,6 +1053,18 @@
         "DropdownMenu"
       ],
       "rule": "Pick how to present a collection from the nature of its content. Short-lived actions opened from a trigger: `DropdownMenuItem`. Rows to compare that share the same attributes, 3 or more per row: `Table`. A vertical list of entries (media, title, description, actions): `Item` inside an `ItemGroup`. A self-contained block with a header, body and footer, alone or in a grid: `Card`."
+    },
+    {
+      "id": "rule-23",
+      "applies_to": [
+        "MessageScroller",
+        "Message",
+        "Bubble",
+        "Marker",
+        "Attachment",
+        "Questionnaire"
+      ],
+      "rule": "Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
     }
   ],
   "glossary": {

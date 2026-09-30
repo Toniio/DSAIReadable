@@ -7,6 +7,7 @@
   "required": [
     "version",
     "inventory",
+    "shadcn",
     "composition_rules",
     "glossary"
   ],
@@ -107,6 +108,38 @@
         }
       }
     },
+    "shadcn": {
+      "type": "object",
+      "description": "The shadcn/ui registry beyond the inventory. Enforced by scripts/lint-shadcn-api.ts against the registry:ui items listed in shadcn-api.baseline.json: each one is in the inventory (shadcn.item) or excluded here, and each exclusion names an upstream item.",
+      "required": ["excluded"],
+      "additionalProperties": false,
+      "properties": {
+        "excluded": {
+          "type": "array",
+          "description": "shadcn/ui components the design system does not ship. The MCP server answers a request for one with its reason and the component to use instead.",
+          "items": {
+            "type": "object",
+            "required": ["item", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "item": {
+                "type": "string",
+                "description": "The shadcn/ui registry item, in the style of components.json."
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Why the design system does not ship it."
+              },
+              "instead": {
+                "type": "string",
+                "description": "The inventory component to use in its place."
+              }
+            }
+          }
+        }
+      }
+    },
     "composition_rules": {
       "type": "array",
       "description": "Rules an AI must follow when composing UI using this design system.",
@@ -124,7 +157,9 @@
             "type": "array",
             "description": "Components whose spec repeats this rule in its Usage section (scripts/build-spec-choices.ts).",
             "minItems": 1,
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           },
           "rule": {
             "type": "string"

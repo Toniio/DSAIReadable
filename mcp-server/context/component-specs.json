@@ -1252,6 +1252,569 @@
       "divergences": []
     }
   },
+  "Attachment": {
+    "name": "Attachment",
+    "category": "Conversation",
+    "status": "beta",
+    "role": "A tile that stands for one file sent or received — its icon or preview, its name, its size — with its upload state and its actions.",
+    "usage": [
+      "Show a file attached to a message, or queued in a composer before it is sent",
+      "Show the progress of an upload with `state=\"uploading\"` or `state=\"processing\"`, and a failed one with `state=\"error\"`",
+      "Show an empty slot waiting for a file with `state=\"idle\"` (dashed border)",
+      "Show an image preview with `AttachmentMedia variant=\"image\"`, a file type icon with the default `variant=\"icon\"`",
+      "Lay tiles out as a card with `orientation=\"vertical\"`, or as a row (default)",
+      "Open the file on click with an `AttachmentTrigger` stretched over the tile",
+      "Remove or retry the file with `AttachmentAction` buttons in `AttachmentActions`",
+      "Scroll several tiles horizontally in an `AttachmentGroup`",
+      "**Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
+    ],
+    "constraints": [
+      "**MUST** — set `state` from the real upload: `uploading` while bytes are sent, `processing` while the server reads the file, `error` when it failed, `done` when it is usable",
+      "**MUST** — show the file name in `AttachmentTitle` and its size or type in `AttachmentDescription`; on `error`, say what failed in `AttachmentDescription`",
+      "**MUST** — give every `AttachmentAction` an `aria-label` that names the action and the file (\"Remove report.pdf\")",
+      "**MUST NOT** — put more than 2 `AttachmentAction`s in a tile → open a `DropdownMenu` from one of them",
+      "**MUST** — place `AttachmentTrigger` as the last child of the tile, with the file name as its accessible name, when the tile opens the file",
+      "**Note** — the `size` of `Attachment` takes `default`, `sm` and `xs`; the `size` of `AttachmentAction` takes the `Button` scale and defaults to `icon-xs`",
+      "**Note** — the tile orders its own parts with raw z-index values: `AttachmentTrigger` (`z-10`) lies over the media and the content, `AttachmentActions` (`z-20`) over the trigger. They are internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
+    ],
+    "dependencies": [
+      "`class-variance-authority` for the `Attachment` and `AttachmentMedia` variants",
+      "`Slot.Root` from `radix-ui` (used by `AttachmentTrigger` when `asChild={true}`)",
+      "`Button` from `@/components/ui/button` (rendered by `AttachmentAction`)",
+      "The focus ring from `@/lib/focus`",
+      "The `shimmer`, `scroll-fade-x` and `no-scrollbar` utilities of `shadcn/tailwind.css`, imported by `styles/globals.css`",
+      "The `cn` utility from `@/lib/utils`"
+    ],
+    "anatomy": [
+      {
+        "slot": "`data-slot=\"attachment-group\"`",
+        "role": "Horizontal scroller of tiles, snapping to each"
+      },
+      {
+        "slot": "`data-slot=\"attachment\"`",
+        "role": "The tile; carries `data-state`, `data-size`, `data-orientation`; draws the focus ring"
+      },
+      {
+        "slot": "`data-slot=\"attachment-media\"`",
+        "role": "Square frame for an icon, an image or a `Spinner`; carries `data-variant`"
+      },
+      {
+        "slot": "`data-slot=\"attachment-content\"`",
+        "role": "Column of the title and the description"
+      },
+      {
+        "slot": "`data-slot=\"attachment-title\"`",
+        "role": "File name, truncated; shimmers while `uploading` or `processing`"
+      },
+      {
+        "slot": "`data-slot=\"attachment-description\"`",
+        "role": "Size, type or error; turns to `text-destructive` on `error`"
+      },
+      {
+        "slot": "`data-slot=\"attachment-actions\"`",
+        "role": "Buttons above the trigger; in the top corner of a vertical tile"
+      },
+      {
+        "slot": "`data-slot=\"attachment-action\"`",
+        "role": "A `Button`, `ghost` and `icon-xs` by default"
+      },
+      {
+        "slot": "`data-slot=\"attachment-trigger\"`",
+        "role": "A `button` (or its child with `asChild`) stretched over the tile"
+      }
+    ],
+    "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "attachmentVariants"
+        ]
+      },
+      {
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-card",
+          "bg-muted",
+          "bg-muted/50"
+        ],
+        "where": [
+          "attachmentMediaVariants",
+          "attachmentVariants"
+        ]
+      },
+      {
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "attachmentVariants via FOCUS_RING_WITHIN (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "color.feedback.error.default",
+        "classes": [
+          "bg-destructive/10",
+          "border-destructive/30"
+        ],
+        "where": [
+          "attachmentMediaVariants",
+          "attachmentVariants"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "text-card-foreground",
+          "text-foreground"
+        ],
+        "where": [
+          "attachmentMediaVariants",
+          "attachmentVariants"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "AttachmentDescription",
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "AttachmentDescription"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "attachmentVariants via FOCUS_RING_WITHIN (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-0",
+          "min-w-0"
+        ],
+        "where": [
+          "AttachmentContent",
+          "AttachmentDescription",
+          "AttachmentGroup",
+          "AttachmentTitle",
+          "AttachmentTrigger",
+          "attachmentVariants"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "mt-0.5"
+        ],
+        "where": [
+          "AttachmentDescription"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1",
+          "p-1",
+          "px-1",
+          "py-1",
+          "scroll-px-1"
+        ],
+        "where": [
+          "AttachmentActions",
+          "AttachmentContent",
+          "AttachmentGroup",
+          "attachmentVariants.size.sm",
+          "attachmentVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5",
+          "p-1.5",
+          "px-1.5",
+          "py-1.5"
+        ],
+        "where": [
+          "attachmentVariants.size.default",
+          "attachmentVariants.size.sm",
+          "attachmentVariants.size.xs"
+        ]
+      },
+      {
+        "token": "space.scale.10",
+        "classes": [
+          "w-10"
+        ],
+        "where": [
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "px-2"
+        ],
+        "where": [
+          "attachmentVariants.size.default"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "gap-2.5"
+        ],
+        "where": [
+          "attachmentVariants.size.sm"
+        ]
+      },
+      {
+        "token": "space.scale.24",
+        "classes": [
+          "w-24"
+        ],
+        "where": [
+          "attachmentVariants.orientation.vertical"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "gap-3",
+          "right-3",
+          "top-3"
+        ],
+        "where": [
+          "AttachmentActions",
+          "AttachmentGroup"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "space.scale.32",
+        "classes": [
+          "w-32"
+        ],
+        "where": [
+          "attachmentVariants.orientation.vertical"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "space.scale.40",
+        "classes": [
+          "min-w-40"
+        ],
+        "where": [
+          "attachmentVariants.orientation.horizontal"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "size-6"
+        ],
+        "where": [
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "space.scale.7",
+        "classes": [
+          "w-7"
+        ],
+        "where": [
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "w-8"
+        ],
+        "where": [
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "AttachmentTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.tight",
+        "classes": [
+          "leading-tight"
+        ],
+        "where": [
+          "AttachmentContent"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "AttachmentDescription",
+          "attachmentVariants.size.default",
+          "attachmentVariants.size.sm",
+          "attachmentVariants.size.xs"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "AttachmentDescription",
+          "attachmentVariants.size.default",
+          "attachmentVariants.size.sm",
+          "attachmentVariants.size.xs"
+        ]
+      }
+    ],
+    "tokens_from": [
+      "Button"
+    ],
+    "exports": [
+      {
+        "name": "Attachment",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "AttachmentGroup",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "AttachmentMedia",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "AttachmentContent",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "AttachmentTitle",
+        "summary": "Renders `<span>`."
+      },
+      {
+        "name": "AttachmentDescription",
+        "summary": "Renders `<span>`."
+      },
+      {
+        "name": "AttachmentActions",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "AttachmentAction",
+        "summary": "Renders `Button`."
+      },
+      {
+        "name": "AttachmentTrigger",
+        "summary": "Renders `<button>`, or its child with `asChild`."
+      }
+    ],
+    "props": [
+      {
+        "component": "Attachment",
+        "prop": "`size`",
+        "type": "`\"default\" | \"sm\" | \"xs\"`",
+        "default": "`\"default\"`",
+        "description": "See **Variants**"
+      },
+      {
+        "component": "Attachment",
+        "prop": "`orientation`",
+        "type": "`\"horizontal\" | \"vertical\"`",
+        "default": "`\"horizontal\"`",
+        "description": "See **Variants**"
+      },
+      {
+        "component": "Attachment",
+        "prop": "`state`",
+        "type": "`\"idle\" | \"uploading\" | \"processing\" | \"error\" | \"done\"`",
+        "default": "`\"done\"`",
+        "description": "Upload state of the file: sets the border, the media color and the title shimmer (see **States**)"
+      },
+      {
+        "component": "Attachment",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "AttachmentGroup",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "AttachmentMedia",
+        "prop": "`variant`",
+        "type": "`\"icon\" | \"image\"`",
+        "default": "`\"icon\"`",
+        "description": "See **Variants**"
+      },
+      {
+        "component": "AttachmentMedia",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "AttachmentContent",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "AttachmentTitle",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"span\">`",
+        "default": "—",
+        "description": "Native `<span>` props"
+      },
+      {
+        "component": "AttachmentDescription",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"span\">`",
+        "default": "—",
+        "description": "Native `<span>` props"
+      },
+      {
+        "component": "AttachmentActions",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "AttachmentAction",
+        "prop": "`size`",
+        "type": "`\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"`",
+        "default": "`\"icon-xs\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "AttachmentAction",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof Button>`",
+        "default": "—",
+        "description": "`Button` props"
+      },
+      {
+        "component": "AttachmentTrigger",
+        "prop": "`asChild`",
+        "type": "`boolean`",
+        "default": "`false`",
+        "description": "Renders the first child instead, passing it the props and classes (Radix `Slot`)"
+      },
+      {
+        "component": "AttachmentTrigger",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"button\">`",
+        "default": "—",
+        "description": "Native `<button>` props"
+      }
+    ],
+    "states": [
+      {
+        "state": "done",
+        "behavior": "Default: solid border, image preview in color"
+      },
+      {
+        "state": "idle",
+        "behavior": "Dashed border: an empty slot waiting for a file"
+      },
+      {
+        "state": "uploading",
+        "behavior": "The title shimmers; an image preview stays in grayscale"
+      },
+      {
+        "state": "processing",
+        "behavior": "Same as `uploading`, while the server reads the file"
+      },
+      {
+        "state": "error",
+        "behavior": "Border, media and description take the error color (`destructive`)"
+      },
+      {
+        "state": "hover",
+        "behavior": "A tile holding a trigger or a link takes a `bg-muted/50` background"
+      },
+      {
+        "state": "focus",
+        "behavior": "The tile draws the focus ring when its trigger or an action has focus (`focus-within`)"
+      },
+      {
+        "state": "active",
+        "behavior": "Not applicable"
+      },
+      {
+        "state": "disabled",
+        "behavior": "Not applicable; a disabled `AttachmentAction` follows `Button`"
+      }
+    ],
+    "accessibility": "**Pattern**: A button (the trigger) and its secondary buttons (the actions), in a group\n\n**Role**: `Attachment` is a `div` with no role. `AttachmentTrigger` is a native `button`, or a link through `asChild`. Each `AttachmentAction` is a `Button`.\n\n**Keyboard**:\n\n| Key             | Action                                              |\n| --------------- | --------------------------------------------------- |\n| `Tab`           | Moves to each action, then to the trigger           |\n| `Enter`/`Space` | Opens the file (trigger) or runs the action         |\n| `Shift+Arrow`   | Scrolls an `AttachmentGroup` horizontally, natively |\n\n**Accessible name**: The trigger is stretched over the tile and holds no text: name it with `aria-label` (the file name, \"Open report.pdf\"). Each action is named by its `aria-label`.\n\n**Pitfalls**:\n\n- The upload state is shown by a shimmer and a color only: announce it in `AttachmentDescription` (\"Uploading, 40%\") or through a `role=\"status\"` region.\n- An image preview needs `alt` text; a type icon is decorative.\n- The trigger covers the tile: an action outside `AttachmentActions` sits under it and cannot be clicked.",
+    "code_example": "import {\n  Attachment,\n  AttachmentAction,\n  AttachmentActions,\n  AttachmentContent,\n  AttachmentDescription,\n  AttachmentGroup,\n  AttachmentMedia,\n  AttachmentTitle,\n  AttachmentTrigger,\n} from \"@/components/ui/attachment\"\nimport { Spinner } from \"@/components/ui/spinner\"\nimport { FilePdfIcon, XIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <AttachmentGroup>\n      <Attachment>\n        <AttachmentMedia>\n          <FilePdfIcon />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>report.pdf</AttachmentTitle>\n          <AttachmentDescription>2.4 MB</AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label=\"Remove report.pdf\">\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n        <AttachmentTrigger aria-label=\"Open report.pdf\" />\n      </Attachment>\n      <Attachment state=\"uploading\">\n        <AttachmentMedia>\n          <Spinner />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>photo.jpg</AttachmentTitle>\n          <AttachmentDescription>Uploading, 40%</AttachmentDescription>\n        </AttachmentContent>\n      </Attachment>\n    </AttachmentGroup>\n  )\n}",
+    "cross_references": [
+      "Message",
+      "Button",
+      "Spinner",
+      "Item",
+      "Progress"
+    ],
+    "shadcn": {
+      "item": "attachment",
+      "divergences": []
+    }
+  },
   "Avatar": {
     "name": "Avatar",
     "category": "Misc",
@@ -2341,6 +2904,414 @@
       ]
     }
   },
+  "Bubble": {
+    "name": "Bubble",
+    "category": "Conversation",
+    "status": "beta",
+    "role": "The colored block that holds the text of a conversation turn, with optional reactions pinned to its edge.",
+    "usage": [
+      "Show the text of a turn inside `MessageContent`",
+      "Tell the speakers apart by variant: `default` (primary fill) for the user, `secondary` or `muted` for the other side",
+      "Show an assistant answer that reads as a document (headings, lists, code) with `variant=\"ghost\"`: no fill, no padding, full width",
+      "Show a failed or refused message with `variant=\"destructive\"`",
+      "Make a bubble a link or a button (open a quoted message, retry) with `asChild` on `BubbleContent`",
+      "Pin emoji reactions or a count to the bubble with `BubbleReactions`",
+      "Stack several bubbles of one turn in a `BubbleGroup`",
+      "**Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
+    ],
+    "constraints": [
+      "**MUST** — put the text in a `BubbleContent`: the variant colors the `BubbleContent`, not the `Bubble`",
+      "**MUST** — use one variant per side of the conversation, the same for every turn of that side",
+      "**MUST NOT** — use `destructive` for anything but an error on that message",
+      "**MUST** — render `BubbleContent` as a `button` or an `a` (`asChild`) when the bubble reacts to a click; a `div` with a click handler is not reachable by keyboard",
+      "**MUST NOT** — place more than 5 reactions in one `BubbleReactions` → show a count for the rest",
+      "**Note** — a bubble takes at most 4/5 of the thread width, a `ghost` bubble the whole width",
+      "**Note** — `BubbleReactions` is lifted over the bubble it overlaps with a raw `z-10`, internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
+    ],
+    "dependencies": [
+      "`class-variance-authority` for the `Bubble` variants and the `BubbleReactions` position",
+      "`Slot.Root` from `radix-ui` (used by `BubbleContent` when `asChild={true}`)",
+      "The `cn` utility from `@/lib/utils`"
+    ],
+    "anatomy": [
+      {
+        "slot": "`data-slot=\"bubble-group\"`",
+        "role": "Column of consecutive bubbles"
+      },
+      {
+        "slot": "`data-slot=\"bubble\"`",
+        "role": "Bubble frame; carries `data-variant` and `data-align`, colors its content"
+      },
+      {
+        "slot": "`data-slot=\"bubble-content\"`",
+        "role": "The block of text: fill, padding, border; a `button` or an `a` with `asChild`"
+      },
+      {
+        "slot": "`data-slot=\"bubble-reactions\"`",
+        "role": "Reactions pinned over the top or bottom edge; carries `data-side`, `data-align`"
+      }
+    ],
+    "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "BubbleContent"
+        ]
+      },
+      {
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary",
+          "bg-primary/10",
+          "bg-primary/20",
+          "bg-primary/30",
+          "bg-primary/80"
+        ],
+        "where": [
+          "bubbleVariants.variant.default",
+          "bubbleVariants.variant.tinted"
+        ]
+      },
+      {
+        "token": "color.action.background.foreground",
+        "classes": [
+          "text-primary-foreground"
+        ],
+        "where": [
+          "bubbleVariants.variant.default"
+        ]
+      },
+      {
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "bubbleVariants.variant.outline"
+        ]
+      },
+      {
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted",
+          "bg-muted/50",
+          "bg-muted/80",
+          "bg-secondary",
+          "bg-secondary/80",
+          "ring-card"
+        ],
+        "where": [
+          "bubbleReactionsVariants",
+          "bubbleVariants.variant.ghost",
+          "bubbleVariants.variant.muted",
+          "bubbleVariants.variant.outline",
+          "bubbleVariants.variant.secondary"
+        ]
+      },
+      {
+        "token": "color.border.default",
+        "classes": [
+          "border-border"
+        ],
+        "where": [
+          "bubbleVariants.variant.outline"
+        ]
+      },
+      {
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "BubbleContent"
+        ]
+      },
+      {
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30"
+        ],
+        "where": [
+          "bubbleVariants.variant.outline"
+        ]
+      },
+      {
+        "token": "color.feedback.error.default",
+        "classes": [
+          "bg-destructive/10",
+          "bg-destructive/20",
+          "bg-destructive/30"
+        ],
+        "where": [
+          "bubbleVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground",
+          "text-secondary-foreground"
+        ],
+        "where": [
+          "bubbleVariants.variant.ghost",
+          "bubbleVariants.variant.outline",
+          "bubbleVariants.variant.secondary",
+          "bubbleVariants.variant.tinted"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "bubbleVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "BubbleContent",
+          "bubbleReactionsVariants"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "bottom-0",
+          "min-w-0",
+          "p-0",
+          "top-0"
+        ],
+        "where": [
+          "BubbleContent",
+          "BubbleGroup",
+          "bubbleReactionsVariants.side.bottom",
+          "bubbleReactionsVariants.side.top",
+          "bubbleReactionsVariants",
+          "bubbleVariants.variant.ghost",
+          "bubbleVariants"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "py-0.5"
+        ],
+        "where": [
+          "bubbleReactionsVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "bubbleReactionsVariants",
+          "bubbleVariants"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "px-1.5"
+        ],
+        "where": [
+          "bubbleReactionsVariants"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "py-2"
+        ],
+        "where": [
+          "BubbleContent",
+          "BubbleGroup"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "BubbleContent"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "left-3",
+          "right-3"
+        ],
+        "where": [
+          "bubbleReactionsVariants.align.end",
+          "bubbleReactionsVariants.align.start"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "leading-relaxed"
+        ],
+        "where": [
+          "BubbleContent"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "BubbleContent",
+          "bubbleReactionsVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "BubbleContent",
+          "bubbleReactionsVariants"
+        ]
+      }
+    ],
+    "tokens_from": [],
+    "exports": [
+      {
+        "name": "BubbleGroup",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "Bubble",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "BubbleContent",
+        "summary": "Renders `<div>`, or its child with `asChild`."
+      },
+      {
+        "name": "BubbleReactions",
+        "summary": "Renders `<div>`."
+      }
+    ],
+    "props": [
+      {
+        "component": "BubbleGroup",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "Bubble",
+        "prop": "`variant`",
+        "type": "`\"default\" | \"secondary\" | \"muted\" | \"tinted\" | \"outline\" | \"ghost\" | \"destructive\"`",
+        "default": "`\"default\"`",
+        "description": "See **Variants**"
+      },
+      {
+        "component": "Bubble",
+        "prop": "`align`",
+        "type": "`\"start\" | \"end\"`",
+        "default": "`\"start\"`",
+        "description": "Moves the bubble to the end of the thread; inside a `Message` with `align=\"end\"` it moves there without it"
+      },
+      {
+        "component": "Bubble",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "BubbleContent",
+        "prop": "`asChild`",
+        "type": "`boolean`",
+        "default": "`false`",
+        "description": "Renders the first child instead, passing it the props and classes (Radix `Slot`)"
+      },
+      {
+        "component": "BubbleContent",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "BubbleReactions",
+        "prop": "`align`",
+        "type": "`\"start\" | \"end\"`",
+        "default": "`\"end\"`",
+        "description": "See **Variants**"
+      },
+      {
+        "component": "BubbleReactions",
+        "prop": "`side`",
+        "type": "`\"top\" | \"bottom\"`",
+        "default": "`\"bottom\"`",
+        "description": "See **Variants**"
+      },
+      {
+        "component": "BubbleReactions",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      }
+    ],
+    "states": [
+      {
+        "state": "default",
+        "behavior": "`BubbleContent` filled with the variant's background and text colors"
+      },
+      {
+        "state": "end",
+        "behavior": "`align=\"end\"`, or inside a `Message` with `align=\"end\"`: the bubble moves to the end"
+      },
+      {
+        "state": "hover",
+        "behavior": "A `BubbleContent` rendered as a `button` or an `a` takes the variant's hover fill"
+      },
+      {
+        "state": "focus",
+        "behavior": "A `BubbleContent` rendered as a `button` or an `a` draws the focus ring (`ring-ring/50`)"
+      },
+      {
+        "state": "active",
+        "behavior": "Not applicable"
+      },
+      {
+        "state": "disabled",
+        "behavior": "Not applicable; a disabled `button` rendered through `asChild` keeps its native behavior"
+      }
+    ],
+    "accessibility": "**Pattern**: Plain content; a link or a button when `BubbleContent` is rendered through `asChild`\n\n**Role**: `div` elements with no role. `BubbleContent` takes the role of the element it renders with `asChild` (`button`, `a`).\n\n**Keyboard**:\n\n| Key             | Action                                                                        |\n| --------------- | ----------------------------------------------------------------------------- |\n| `Tab`           | Moves to a `BubbleContent` rendered as a `button` or an `a`, and to reactions |\n| `Enter`/`Space` | Activates it, natively                                                        |\n\n**Accessible name**: The text of a clickable `BubbleContent`. A reaction button showing only an emoji or a count takes an `aria-label` (\"3 people reacted with thumbs up\").\n\n**Pitfalls**:\n\n- The variant tells the speakers apart by color only: name the speaker in `MessageHeader` (see `Message`).\n- `tinted` and `destructive` fills are tints of the primary and error colors: their text keeps the 4.5:1 contrast of `text-foreground` and `text-destructive`; a custom `className` color on them does not.",
+    "code_example": "import {\n  Bubble,\n  BubbleContent,\n  BubbleGroup,\n  BubbleReactions,\n} from \"@/components/ui/bubble\"\nimport { Message, MessageContent } from \"@/components/ui/message\"\n\nexport default function Example() {\n  return (\n    <Message align=\"end\">\n      <MessageContent>\n        <BubbleGroup>\n          <Bubble>\n            <BubbleContent>Is the meeting still at 3?</BubbleContent>\n          </Bubble>\n          <Bubble>\n            <BubbleContent>I can move it to 4.</BubbleContent>\n            <BubbleReactions aria-label=\"1 reaction: thumbs up\">\n              👍\n            </BubbleReactions>\n          </Bubble>\n        </BubbleGroup>\n      </MessageContent>\n    </Message>\n  )\n}",
+    "cross_references": [
+      "Message",
+      "Marker",
+      "Attachment",
+      "Button"
+    ],
+    "shadcn": {
+      "item": "bubble",
+      "divergences": []
+    }
+  },
   "Button": {
     "name": "Button",
     "category": "Forms",
@@ -3024,7 +3995,8 @@
       "**MUST NOT** — show more than one `Calendar` per view, **unless** comparing two date ranges",
       "**MUST** — place the `Calendar` inside a container (`Popover`, `Card`…): it does not position itself",
       "**MUST** — keep disabled days visible (`opacity-disabled`, `aria-disabled`)",
-      "**MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)"
+      "**MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)",
+      "**Note** — the first and last days of a range take a raw `z-0` with `isolate`, so their highlight pseudo-elements paint under the day cells; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
     ],
     "dependencies": [
       "`react-day-picker` — the calendar engine and its types (`DayPicker`, `DayButton`, `Locale`)",
@@ -12219,6 +13191,244 @@
       ]
     }
   },
+  "Marker": {
+    "name": "Marker",
+    "category": "Conversation",
+    "status": "beta",
+    "role": "A line of muted text that marks an event in a conversation nobody said: a date, a tool call, a resumed session.",
+    "usage": [
+      "Separate the days of a thread with `variant=\"separator\"` (\"Today\", \"Monday 12 May\")",
+      "Record an event in the thread: \"Searched 4 sources\", \"Conversation resumed\", \"Ana joined\"",
+      "Close a section of the thread with `variant=\"border\"`",
+      "Make the marker a link or a button (open the tool call's details) with `asChild`",
+      "Put a Phosphor icon in front of the text with `MarkerIcon`",
+      "**Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
+    ],
+    "constraints": [
+      "**MUST** — put the text in a `MarkerContent` and the icon in a `MarkerIcon`",
+      "**MUST NOT** — use a `Marker` for what a speaker says: that is a `Message` with a `Bubble`",
+      "**MUST NOT** — use a `Marker` for an error the user must act on → `Alert`",
+      "**MUST** — keep the text to one line of 60 characters or less",
+      "**Note** — `MarkerIcon` is hidden from screen readers (`aria-hidden`): the text carries the meaning"
+    ],
+    "dependencies": [
+      "`class-variance-authority` for the `Marker` variants",
+      "`Slot.Root` from `radix-ui` (used by `Marker` when `asChild={true}`)",
+      "The `cn` utility from `@/lib/utils`"
+    ],
+    "anatomy": [
+      {
+        "slot": "`data-slot=\"marker\"`",
+        "role": "Marker row; carries `data-variant`; draws the separator rules"
+      },
+      {
+        "slot": "`data-slot=\"marker-icon\"`",
+        "role": "Icon in front of the text, hidden from screen readers"
+      },
+      {
+        "slot": "`data-slot=\"marker-content\"`",
+        "role": "The text; centered between the two rules with `variant=\"separator\"`"
+      }
+    ],
+    "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "border-b"
+        ],
+        "where": [
+          "markerVariants.variant.border"
+        ]
+      },
+      {
+        "token": "color.border.default",
+        "classes": [
+          "bg-border",
+          "border-border"
+        ],
+        "where": [
+          "markerVariants.variant.border",
+          "markerVariants.variant.separator"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "MarkerContent",
+          "markerVariants"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "markerVariants"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "min-w-0"
+        ],
+        "where": [
+          "MarkerContent",
+          "markerVariants.variant.separator"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "ml-1",
+          "mr-1"
+        ],
+        "where": [
+          "markerVariants.variant.separator"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "pb-2"
+        ],
+        "where": [
+          "markerVariants.variant.border",
+          "markerVariants"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "MarkerIcon",
+          "markerVariants"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "min-h-4"
+        ],
+        "where": [
+          "markerVariants"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "markerVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "markerVariants"
+        ]
+      }
+    ],
+    "tokens_from": [],
+    "exports": [
+      {
+        "name": "Marker",
+        "summary": "Renders `<div>`, or its child with `asChild`."
+      },
+      {
+        "name": "MarkerIcon",
+        "summary": "Renders `<span>`."
+      },
+      {
+        "name": "MarkerContent",
+        "summary": "Renders `<span>`."
+      },
+      {
+        "name": "markerVariants",
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+      }
+    ],
+    "props": [
+      {
+        "component": "Marker",
+        "prop": "`variant`",
+        "type": "`\"default\" | \"separator\" | \"border\"`",
+        "default": "`\"default\"`",
+        "description": "See **Variants**"
+      },
+      {
+        "component": "Marker",
+        "prop": "`asChild`",
+        "type": "`boolean`",
+        "default": "`false`",
+        "description": "Renders the first child instead, passing it the props and classes (Radix `Slot`)"
+      },
+      {
+        "component": "Marker",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "MarkerIcon",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"span\">`",
+        "default": "—",
+        "description": "Native `<span>` props"
+      },
+      {
+        "component": "MarkerContent",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"span\">`",
+        "default": "—",
+        "description": "Native `<span>` props"
+      }
+    ],
+    "states": [
+      {
+        "state": "default",
+        "behavior": "Muted text (`text-muted-foreground`) with its icon, aligned to the start"
+      },
+      {
+        "state": "hover",
+        "behavior": "A link inside, or a `Marker` rendered as a link, turns to `text-foreground`"
+      },
+      {
+        "state": "focus",
+        "behavior": "A `Marker` rendered as a link or a button through `asChild` keeps its own ring"
+      },
+      {
+        "state": "active",
+        "behavior": "Not applicable"
+      },
+      {
+        "state": "disabled",
+        "behavior": "Not applicable"
+      }
+    ],
+    "accessibility": "**Pattern**: Plain content inside the conversation log; a link or a button through `asChild`\n\n**Role**: A `div` with no role; with `asChild`, the role of the element it renders.\n\n**Keyboard**:\n\nNo interaction of its own; a `Marker` rendered as a link or a button behaves natively.\n\n**Accessible name**: The text of `MarkerContent`.\n\n**Pitfalls**:\n\n- The separator rules are drawn with pseudo-elements: they are not announced, and the text alone must say what the marker separates (\"Today\", not \"—\").",
+    "code_example": "import { Marker, MarkerContent, MarkerIcon } from \"@/components/ui/marker\"\nimport { MagnifyingGlassIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <Marker variant=\"separator\">\n        <MarkerContent>Today</MarkerContent>\n      </Marker>\n      <Marker>\n        <MarkerIcon>\n          <MagnifyingGlassIcon />\n        </MarkerIcon>\n        <MarkerContent>Searched 4 sources</MarkerContent>\n      </Marker>\n    </div>\n  )\n}",
+    "cross_references": [
+      "Message",
+      "Separator",
+      "Alert"
+    ],
+    "shadcn": {
+      "item": "marker",
+      "divergences": []
+    }
+  },
   "Menubar": {
     "name": "Menubar",
     "category": "Navigation",
@@ -12912,6 +14122,607 @@
       "divergences": []
     }
   },
+  "Message": {
+    "name": "Message",
+    "category": "Conversation",
+    "status": "beta",
+    "role": "One turn of a conversation: who speaks, with an optional avatar, a header, the content and a footer, aligned to the start or the end of the thread.",
+    "usage": [
+      "Show one turn of a chat between a user and an assistant, or between people",
+      "Put the user's own turns on the other side with `align=\"end\"`",
+      "Hold the speaker's `Bubble`s in `MessageContent`",
+      "Show the speaker's name or the time in `MessageHeader`, and a status (\"Read\", \"Edited\") or actions in `MessageFooter`",
+      "Group consecutive turns of one speaker in a `MessageGroup`",
+      "**Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
+    ],
+    "constraints": [
+      "**MUST** — put the text of a turn in a `Bubble` inside `MessageContent`, never directly in `Message`",
+      "**MUST** — give every turn of the same speaker the same `align`: `start` for the others, `end` for the user",
+      "**MUST** — name the speaker in `MessageHeader` or with an `Avatar` that has a text fallback when more than two people take part",
+      "**MUST NOT** — nest a `Message` in another `Message`",
+      "**Note** — `MessageAvatar` sits at the bottom of the turn and moves up above a `MessageFooter`; it holds an `Avatar`, it does not replace it"
+    ],
+    "dependencies": [
+      "The `cn` utility from `@/lib/utils`"
+    ],
+    "anatomy": [
+      {
+        "slot": "`data-slot=\"message-group\"`",
+        "role": "Column of consecutive turns"
+      },
+      {
+        "slot": "`data-slot=\"message\"`",
+        "role": "One turn; carries `data-align`, reversed when `end`"
+      },
+      {
+        "slot": "`data-slot=\"message-avatar\"`",
+        "role": "Round frame for the speaker's `Avatar`, at the bottom of the turn"
+      },
+      {
+        "slot": "`data-slot=\"message-content\"`",
+        "role": "Column of the turn's `Bubble`s, `Attachment`s and other content"
+      },
+      {
+        "slot": "`data-slot=\"message-header\"`",
+        "role": "Line above the content: speaker, time"
+      },
+      {
+        "slot": "`data-slot=\"message-footer\"`",
+        "role": "Line below the content: status, actions; aligned to the end with `align=end`"
+      }
+    ],
+    "tokens": [
+      {
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "MessageAvatar"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "MessageFooter",
+          "MessageHeader"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "min-w-0",
+          "px-0"
+        ],
+        "where": [
+          "MessageContent",
+          "MessageFooter",
+          "MessageGroup",
+          "MessageHeader",
+          "Message"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5"
+        ],
+        "where": [
+          "MessageGroup",
+          "Message"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2"
+        ],
+        "where": [
+          "MessageContent"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "MessageFooter",
+          "MessageHeader"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "-translate-y-8",
+          "min-w-8"
+        ],
+        "where": [
+          "MessageAvatar"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "MessageFooter",
+          "MessageHeader"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "MessageFooter",
+          "MessageHeader",
+          "Message"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "MessageFooter",
+          "MessageHeader",
+          "Message"
+        ]
+      }
+    ],
+    "tokens_from": [],
+    "exports": [
+      {
+        "name": "MessageGroup",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "Message",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "MessageAvatar",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "MessageContent",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "MessageFooter",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "MessageHeader",
+        "summary": "Renders `<div>`."
+      }
+    ],
+    "props": [
+      {
+        "component": "MessageGroup",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "Message",
+        "prop": "`align`",
+        "type": "`\"start\" | \"end\"`",
+        "default": "`\"start\"`",
+        "description": "Side of the thread the turn sits on: `end` for the user's own turns, which reverses the row"
+      },
+      {
+        "component": "Message",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "MessageAvatar",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "MessageContent",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "MessageFooter",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "MessageHeader",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      }
+    ],
+    "states": [
+      {
+        "state": "default",
+        "behavior": "`align=\"start\"`: avatar, then content, aligned to the start of the thread"
+      },
+      {
+        "state": "end",
+        "behavior": "`align=\"end\"`: the row is reversed and the content aligned to the end"
+      },
+      {
+        "state": "ghost",
+        "behavior": "A `Bubble` with `variant=\"ghost\"` inside: header and footer drop their padding"
+      },
+      {
+        "state": "hover",
+        "behavior": "Not applicable (the component is not interactive)"
+      },
+      {
+        "state": "focus",
+        "behavior": "Not applicable (the component is not interactive)"
+      },
+      {
+        "state": "active",
+        "behavior": "Not applicable"
+      },
+      {
+        "state": "disabled",
+        "behavior": "Not applicable"
+      }
+    ],
+    "accessibility": "**Pattern**: Plain content inside the conversation log (`MessageScrollerContent`, `role=\"log\"`)\n\n**Role**: `div` elements with no role; the log that holds them announces each new turn.\n\n**Keyboard**:\n\nNo interaction of its own; the controls it holds (a `Button` in `MessageFooter`, a link in a `Bubble`) behave natively.\n\n**Accessible name**: None. The speaker is read from `MessageHeader` or from the `Avatar` text fallback; a turn whose speaker is shown only by its side (`align`) is not identified for a screen reader.\n\n**Pitfalls**:\n\n- The side of a turn (`align`) is visual only: a screen reader does not tell the user's turns from the assistant's. Name the speaker in `MessageHeader`, or with visually hidden text (`sr-only`) at the start of `MessageContent`.\n- An avatar image without `AvatarFallback` text names nobody.",
+    "code_example": "import {\n  Message,\n  MessageAvatar,\n  MessageContent,\n  MessageFooter,\n  MessageHeader,\n} from \"@/components/ui/message\"\nimport { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\nimport { Bubble, BubbleContent } from \"@/components/ui/bubble\"\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <Message>\n        <MessageAvatar>\n          <Avatar>\n            <AvatarFallback>AI</AvatarFallback>\n          </Avatar>\n        </MessageAvatar>\n        <MessageContent>\n          <MessageHeader>Assistant</MessageHeader>\n          <Bubble variant=\"secondary\">\n            <BubbleContent>Your order ships tomorrow.</BubbleContent>\n          </Bubble>\n        </MessageContent>\n      </Message>\n      <Message align=\"end\">\n        <MessageContent>\n          <MessageHeader>You</MessageHeader>\n          <Bubble>\n            <BubbleContent>Thanks, can I change the address?</BubbleContent>\n          </Bubble>\n          <MessageFooter>Read</MessageFooter>\n        </MessageContent>\n      </Message>\n    </div>\n  )\n}",
+    "cross_references": [
+      "Bubble",
+      "MessageScroller",
+      "Marker",
+      "Attachment",
+      "Avatar"
+    ],
+    "shadcn": {
+      "item": "message",
+      "divergences": []
+    }
+  },
+  "MessageScroller": {
+    "name": "MessageScroller",
+    "category": "Conversation",
+    "status": "beta",
+    "role": "The scrolling thread of a conversation: it keeps the latest message in view as messages arrive, announces them, and offers buttons to jump to either end.",
+    "usage": [
+      "Hold the turns of a chat, one `MessageScrollerItem` per message, in a panel of fixed height",
+      "Follow the conversation as it streams: the viewport stays at the end while the reader is there, and stops following when they scroll up",
+      "Open a long thread at its end (default), its start, or its last anchored message (`defaultScrollPosition` on `MessageScrollerProvider`)",
+      "Jump to the latest message with a `MessageScrollerButton` (`direction=\"end\"`), to the first with `direction=\"start\"`",
+      "Scroll to a given message from code with `useMessageScroller().scrollToMessage(id)`, and read which messages are visible with `useMessageScrollerVisibility()`",
+      "**Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
+    ],
+    "constraints": [
+      "**MUST** — wrap the scroller in a `MessageScrollerProvider`, which holds the scroll state its parts and hooks read",
+      "**MUST** — nest the parts in this order: `MessageScroller` > `MessageScrollerViewport` > `MessageScrollerContent` > `MessageScrollerItem`",
+      "**MUST** — give the scroller a bounded height (its parent sets it): it fills its parent and scrolls inside it",
+      "**MUST** — give each `MessageScrollerItem` a stable `messageId` when code scrolls to a message or reads visibility",
+      "**MUST** — place `MessageScrollerButton`s inside `MessageScroller`, next to the viewport: they are positioned over it",
+      "**MUST NOT** — nest a `ScrollArea` in a `MessageScroller`, or a `MessageScroller` in a `ScrollArea`",
+      "**Note** — `@shadcn/react` provides the behavior (following, anchors, keyboard, the `log` role); this file styles it"
+    ],
+    "dependencies": [
+      "`@shadcn/react/message-scroller` for the primitive and the three hooks",
+      "`Button` from `@/components/ui/button` (rendered by `MessageScrollerButton`)",
+      "`ArrowDownIcon` from `@phosphor-icons/react`",
+      "`UI_STRINGS.messageScroller` from `@/lib/ui-strings` for the region name and the button text",
+      "The `scroll-fade-b` utility of `shadcn/tailwind.css`, imported by `styles/globals.css`",
+      "The `cn` utility from `@/lib/utils`"
+    ],
+    "anatomy": [
+      {
+        "slot": "`data-slot=\"message-scroller\"`",
+        "role": "Frame that fills its parent and positions the buttons"
+      },
+      {
+        "slot": "`data-slot=\"message-scroller-viewport\"`",
+        "role": "The scrolling region (`role=\"region\"`, focusable); fades out at the bottom"
+      },
+      {
+        "slot": "`data-slot=\"message-scroller-content\"`",
+        "role": "The log of messages (`role=\"log\"`, `aria-relevant=\"additions\"`)"
+      },
+      {
+        "slot": "`data-slot=\"message-scroller-item\"`",
+        "role": "One message; rendered only once near the view (`content-visibility: auto`)"
+      },
+      {
+        "slot": "`data-slot=\"message-scroller-button\"`",
+        "role": "A `Button` pinned to the bottom (`end`) or top (`start`), shown only when there is somewhere to go"
+      }
+    ],
+    "tokens": [
+      {
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "color.border.default",
+        "classes": [
+          "border-border"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "motion.duration.normal",
+        "classes": [
+          "duration-normal"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "motion.duration.slow",
+        "classes": [
+          "duration-slow"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "motion.easing.in",
+        "classes": [
+          "ease-in"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "motion.easing.out",
+        "classes": [
+          "ease-out"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "min-h-0",
+          "min-w-0",
+          "translate-y-0"
+        ],
+        "where": [
+          "MessageScrollerButton",
+          "MessageScrollerItem",
+          "MessageScrollerViewport",
+          "MessageScroller"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "bottom-4",
+          "top-4"
+        ],
+        "where": [
+          "MessageScrollerButton"
+        ]
+      },
+      {
+        "token": "space.scale.40",
+        "classes": [
+          "[contain-intrinsic-size:auto_var(--space-scale-40)]"
+        ],
+        "where": [
+          "MessageScrollerItem"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "gap-6"
+        ],
+        "where": [
+          "MessageScrollerContent"
+        ]
+      }
+    ],
+    "tokens_from": [
+      "Button"
+    ],
+    "exports": [
+      {
+        "name": "MessageScrollerProvider",
+        "summary": "Renders `MessageScrollerPrimitive.Provider`."
+      },
+      {
+        "name": "MessageScroller",
+        "summary": "Renders `MessageScrollerPrimitive.Root`."
+      },
+      {
+        "name": "MessageScrollerViewport",
+        "summary": "Renders `MessageScrollerPrimitive.Viewport`."
+      },
+      {
+        "name": "MessageScrollerContent",
+        "summary": "Renders `MessageScrollerPrimitive.Content`."
+      },
+      {
+        "name": "MessageScrollerItem",
+        "summary": "Renders `MessageScrollerPrimitive.Item`."
+      },
+      {
+        "name": "MessageScrollerButton",
+        "summary": "Renders `MessageScrollerPrimitive.Button`."
+      },
+      {
+        "name": "useMessageScroller()",
+        "summary": "Returns `{ scrollToEnd: (options?: MessageScrollerScrollOptions) => boolean; scrollToMessage: (messageId: string, options?: MessageScrollerScrollOptions) => boolean; scrollToStart: (options?: MessageScrollerScrollOptions) => boolean; }`."
+      },
+      {
+        "name": "useMessageScrollerScrollable()",
+        "summary": "Returns `MessageScrollerScrollable`."
+      },
+      {
+        "name": "useMessageScrollerVisibility()",
+        "summary": "Returns `MessageScrollerVisibilityState`."
+      }
+    ],
+    "props": [
+      {
+        "component": "MessageScrollerProvider",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof MessageScrollerPrimitive.Provider>`",
+        "default": "—",
+        "description": "`MessageScrollerPrimitive.Provider` props"
+      },
+      {
+        "component": "MessageScroller",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof MessageScrollerPrimitive.Root>`",
+        "default": "—",
+        "description": "`MessageScrollerPrimitive.Root` props"
+      },
+      {
+        "component": "MessageScrollerViewport",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof MessageScrollerPrimitive.Viewport>`",
+        "default": "—",
+        "description": "`MessageScrollerPrimitive.Viewport` props"
+      },
+      {
+        "component": "MessageScrollerContent",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof MessageScrollerPrimitive.Content>`",
+        "default": "—",
+        "description": "`MessageScrollerPrimitive.Content` props"
+      },
+      {
+        "component": "MessageScrollerItem",
+        "prop": "`scrollAnchor`",
+        "type": "`boolean`",
+        "default": "`false`",
+        "description": "Marks the message as a scroll anchor, such as the user's question: `defaultScrollPosition=\"last-anchor\"` on `MessageScrollerProvider` opens the thread on the last one"
+      },
+      {
+        "component": "MessageScrollerItem",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof MessageScrollerPrimitive.Item>`",
+        "default": "—",
+        "description": "`MessageScrollerPrimitive.Item` props"
+      },
+      {
+        "component": "MessageScrollerButton",
+        "prop": "`direction`",
+        "type": "`MessageScrollerButtonDirection`",
+        "default": "`\"end\"`",
+        "description": "The end it scrolls to: `end` (pinned to the bottom, the latest message) or `start` (pinned to the top, arrow turned up)"
+      },
+      {
+        "component": "MessageScrollerButton",
+        "prop": "`variant`",
+        "type": "`\"link\" | \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"`",
+        "default": "`\"secondary\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "MessageScrollerButton",
+        "prop": "`size`",
+        "type": "`\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"`",
+        "default": "`\"icon-sm\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "MessageScrollerButton",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof MessageScrollerPrimitive.Button> & Pick<React.ComponentProps<typeof Button>, \"variant\" | \"size\">`",
+        "default": "—",
+        "description": "`MessageScrollerPrimitive.Button` props"
+      }
+    ],
+    "states": [
+      {
+        "state": "default",
+        "behavior": "The viewport follows the last message while the reader is at the end"
+      },
+      {
+        "state": "scrolled",
+        "behavior": "The reader scrolled up: following stops, and the `end` button slides in"
+      },
+      {
+        "state": "pending",
+        "behavior": "`data-pending-scroll`: the viewport stays invisible until its first scroll position is applied"
+      },
+      {
+        "state": "hover",
+        "behavior": "The button takes `bg-muted`"
+      },
+      {
+        "state": "focus",
+        "behavior": "The viewport and the button draw the focus ring of `Button` and of the browser"
+      },
+      {
+        "state": "active",
+        "behavior": "`data-active=true` on a button that has somewhere to go; `false` hides it (scaled down, transparent)"
+      },
+      {
+        "state": "disabled",
+        "behavior": "Not applicable"
+      }
+    ],
+    "accessibility": "**Pattern**: A named scrollable region holding a live log ([WAI-ARIA `log` role](https://www.w3.org/TR/wai-aria-1.2/#log))\n\n**Role**: The viewport is a `region` named \"Messages\" (`UI_STRINGS.messageScroller.viewport`) and takes focus (`tabIndex=0`). The content is a `log`: a screen reader announces each message added to it, not the ones already there.\n\n**Keyboard**:\n\n| Key                   | Action                                                  |\n| --------------------- | ------------------------------------------------------- |\n| `Tab`                 | Moves to the viewport, then into the messages' controls |\n| `ArrowUp`/`ArrowDown` | Scrolls the viewport by a line                          |\n| `PageUp`/`PageDown`   | Scrolls the viewport by a page                          |\n| `Home`/`End`          | Scrolls to the first or the last message                |\n| `Enter`/`Space`       | On a `MessageScrollerButton`: jumps to its end          |\n\n**Accessible name**: The viewport is named by `UI_STRINGS.messageScroller.viewport`; pass `aria-label` to name it after the conversation. The button's visually hidden text is `UI_STRINGS.messageScroller.scrollToEnd` or `scrollToStart`; `children` replace it.\n\n**Pitfalls**:\n\n- A streamed answer is added to the log once and then grows: the log announces the first words only. Announce the finished answer through a `role=\"status\"` region when it matters.\n- An inactive button stays mounted: the styles hide it (`opacity-0`, `pointer-events-none`) and `@shadcn/react` takes it out of the tab order (`tabIndex=-1`). An element passed through `render` must forward the `tabIndex` it receives, or a hidden button takes focus.",
+    "code_example": "import {\n  MessageScroller,\n  MessageScrollerButton,\n  MessageScrollerContent,\n  MessageScrollerItem,\n  MessageScrollerProvider,\n  MessageScrollerViewport,\n} from \"@/components/ui/message-scroller\"\nimport { Bubble, BubbleContent } from \"@/components/ui/bubble\"\nimport { Message, MessageContent } from \"@/components/ui/message\"\n\nconst messages = [\n  { id: \"1\", from: \"assistant\", text: \"How can I help?\" },\n  { id: \"2\", from: \"user\", text: \"Where is my order?\" },\n] as const\n\nexport default function Example() {\n  return (\n    <div className=\"h-96\">\n      <MessageScrollerProvider>\n        <MessageScroller>\n          <MessageScrollerViewport>\n            <MessageScrollerContent>\n              {messages.map((m) => (\n                <MessageScrollerItem key={m.id} messageId={m.id}>\n                  <Message align={m.from === \"user\" ? \"end\" : \"start\"}>\n                    <MessageContent>\n                      <Bubble\n                        variant={m.from === \"user\" ? \"default\" : \"secondary\"}\n                      >\n                        <BubbleContent>{m.text}</BubbleContent>\n                      </Bubble>\n                    </MessageContent>\n                  </Message>\n                </MessageScrollerItem>\n              ))}\n            </MessageScrollerContent>\n          </MessageScrollerViewport>\n          <MessageScrollerButton />\n        </MessageScroller>\n      </MessageScrollerProvider>\n    </div>\n  )\n}",
+    "cross_references": [
+      "Message",
+      "ScrollArea",
+      "Marker",
+      "Button"
+    ],
+    "shadcn": {
+      "item": "message-scroller",
+      "divergences": []
+    }
+  },
   "NativeSelect": {
     "name": "NativeSelect",
     "category": "Forms",
@@ -13249,7 +15060,8 @@
       "**MUST NOT** — exceed 7 top-level triggers",
       "**Note** — `viewport={false}` renders the content inline, without a viewport",
       "**MUST** — render every link with `NavigationMenuLink`, which handles `data-active`",
-      "**MUST** — give the parent of `NavigationMenuIndicator` relative positioning"
+      "**MUST** — give the parent of `NavigationMenuIndicator` relative positioning",
+      "**Note** — `NavigationMenuIndicator` takes a raw `z-1` to sit above the menu bar border; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
     ],
     "dependencies": [
       "`NavigationMenu` (Root, List, Item, Trigger, Content, Link, Indicator, Viewport) from `radix-ui`",
@@ -14669,6 +16481,736 @@
     ],
     "shadcn": {
       "item": "progress",
+      "divergences": []
+    }
+  },
+  "Questionnaire": {
+    "name": "Questionnaire",
+    "category": "Conversation",
+    "status": "beta",
+    "role": "A form that asks one question at a time — single or multiple choice, or a free answer — with its progress and the controls to go back, skip, go on and submit.",
+    "usage": [
+      "Ask the user a few questions inside a conversation before the assistant acts (the trip's dates, the report's audience)",
+      "Offer single choices (radio) or, with `multiple` on `QuestionnaireItem`, several choices (checkbox)",
+      "Take a free answer with a `QuestionnaireInput`, alone or under the choices",
+      "Let the user answer with the keyboard: `shortcuts=\"letters\"` or `\"numbers\"` on `Questionnaire` labels the choices A, B, C… or 1, 2, 3…",
+      "Show where the user is with `QuestionnaireProgress` (\"Question 2 of 5\")",
+      "Read the answers from the `onSubmit` of the form, as with any `form`",
+      "**Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
+    ],
+    "constraints": [
+      "**MUST** — give each `QuestionnaireItem` a unique `name`: it is the answer's field name in the submitted form",
+      "**MUST** — give each question a `QuestionnaireTitle`, the question itself",
+      "**MUST** — place `QuestionnairePrevious`, `QuestionnaireSkip`, `QuestionnaireNext` and `QuestionnaireSubmit` in one `QuestionnaireActions`, after the items",
+      "**MUST NOT** — ask more than 7 questions in one questionnaire → split the task, or use a page with `Field`s",
+      "**MUST NOT** — offer more than 9 choices with `shortcuts=\"numbers\"`: the digits stop at 9",
+      "**MUST** — mark a question `required` when it cannot be skipped: `QuestionnaireSkip` then stays hidden for it",
+      "**MUST NOT** — use a `Questionnaire` for a form whose fields are all read at once → `Field`s in a `form`",
+      "**Note** — `@shadcn/react` provides the behavior (the current question, the keyboard, validation, the progress bar); this file styles it",
+      "**Note** — the transparent native input of each choice lies over its indicator and label with a raw `z-10`, internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
+    ],
+    "dependencies": [
+      "`@shadcn/react/questionnaire` for the primitive",
+      "`buttonVariants` from `@/components/ui/button` (the look of the four navigation buttons)",
+      "`CheckIcon` from `@phosphor-icons/react`",
+      "`UI_STRINGS.questionnaire` from `@/lib/ui-strings` for the progress name and the button labels",
+      "The focus ring from `@/lib/focus`",
+      "The `cn` utility from `@/lib/utils`"
+    ],
+    "anatomy": [
+      {
+        "slot": "`data-slot=\"questionnaire\"`",
+        "role": "The `form`"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-progress\"`",
+        "role": "Progress bar (`role=\"progressbar\"`) whose text is \"Question 2 of 5\""
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-item\"`",
+        "role": "One question, a `fieldset`; only the current one is shown"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-title\"`",
+        "role": "The question, the `legend` of the `fieldset`"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-description\"`",
+        "role": "A hint under the question"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choices\"`",
+        "role": "Grid of the choices"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choice\"`",
+        "role": "One choice, a `label` over a transparent native `input`; carries `data-checked`"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choice-indicator\"`",
+        "role": "Radio dot or checkbox check, drawn from the choice's state"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choice-label\"`",
+        "role": "The choice's text"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choice-shortcut\"`",
+        "role": "The key that picks the choice (A, 1), shown with `shortcuts`"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choice-description\"`",
+        "role": "A second line under the choice's text"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-input\"`",
+        "role": "A free answer, styled as `Input`"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-error\"`",
+        "role": "The error of the current question"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-actions\"`",
+        "role": "Row of the navigation buttons: previous at the start, skip and next or submit at the end"
+      }
+    ],
+    "tokens": [
+      {
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "color.action.background.default",
+        "classes": [
+          "bg-primary",
+          "border-primary"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "color.action.background.foreground",
+        "classes": [
+          "bg-primary-foreground",
+          "text-primary-foreground"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "color.background.default",
+        "classes": [
+          "bg-background"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted",
+          "bg-muted/50"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "color.border.input",
+        "classes": [
+          "bg-input/30",
+          "bg-input/50",
+          "bg-input/80",
+          "border-input"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "border-destructive/50",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "border-foreground/30"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "color.text.destructive.default",
+        "classes": [
+          "text-destructive"
+        ],
+        "where": [
+          "QuestionnaireError"
+        ]
+      },
+      {
+        "token": "color.text.subtle",
+        "classes": [
+          "text-muted-foreground"
+        ],
+        "where": [
+          "QuestionnaireChoiceDescription",
+          "QuestionnaireChoice",
+          "QuestionnaireDescription",
+          "QuestionnaireInput",
+          "QuestionnaireProgress"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput",
+          "QuestionnaireInput via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.0",
+        "classes": [
+          "inset-0",
+          "min-h-0",
+          "min-w-0",
+          "p-0"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireChoices",
+          "QuestionnaireInput",
+          "QuestionnaireItem",
+          "QuestionnaireNext",
+          "QuestionnairePrevious",
+          "QuestionnaireSkip",
+          "QuestionnaireSubmit",
+          "Questionnaire"
+        ]
+      },
+      {
+        "token": "space.scale.0-5",
+        "classes": [
+          "gap-0.5",
+          "translate-y-0.5"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "py-1"
+        ],
+        "where": [
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "space.scale.1-5",
+        "classes": [
+          "gap-1.5"
+        ],
+        "where": [
+          "QuestionnaireActions"
+        ]
+      },
+      {
+        "token": "space.scale.11",
+        "classes": [
+          "min-h-11"
+        ],
+        "where": [
+          "QuestionnaireActions",
+          "QuestionnaireChoice",
+          "QuestionnaireInput",
+          "QuestionnaireNext",
+          "QuestionnairePrevious",
+          "QuestionnaireSkip",
+          "QuestionnaireSubmit"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-2",
+          "mt-2",
+          "size-2"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireChoices",
+          "QuestionnaireError"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "gap-2.5",
+          "px-2.5",
+          "py-2.5"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "space.scale.28",
+        "classes": [
+          "min-w-28"
+        ],
+        "where": [
+          "QuestionnaireProgress"
+        ]
+      },
+      {
+        "token": "space.scale.3",
+        "classes": [
+          "px-3"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "space.scale.3-5",
+        "classes": [
+          "size-3.5"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "gap-4",
+          "mb-4",
+          "size-4"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireItem",
+          "QuestionnaireTitle",
+          "Questionnaire"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "min-h-8"
+        ],
+        "where": [
+          "QuestionnaireActions",
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "font-heading",
+          "font-mono"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireTitle"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireProgress",
+          "QuestionnaireTitle"
+        ]
+      },
+      {
+        "token": "typography.line-height.relaxed",
+        "classes": [
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "QuestionnaireDescription"
+        ]
+      },
+      {
+        "token": "typography.line-height.snug",
+        "classes": [
+          "leading-snug"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "QuestionnaireTitle"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireError",
+          "QuestionnaireInput",
+          "QuestionnaireProgress"
+        ]
+      },
+      {
+        "token": "typography.size.sm",
+        "classes": [
+          "text-sm"
+        ],
+        "where": [
+          "QuestionnaireTitle"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs",
+          "text-xs/relaxed"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireDescription",
+          "QuestionnaireError",
+          "QuestionnaireInput",
+          "QuestionnaireProgress"
+        ]
+      }
+    ],
+    "tokens_from": [
+      "Button"
+    ],
+    "exports": [
+      {
+        "name": "Questionnaire",
+        "summary": "Renders `QuestionnairePrimitive.Root`."
+      },
+      {
+        "name": "QuestionnaireActions",
+        "summary": "Renders `<div>`."
+      },
+      {
+        "name": "QuestionnaireChoice",
+        "summary": "Renders `QuestionnairePrimitive.Choice`."
+      },
+      {
+        "name": "QuestionnaireChoiceDescription",
+        "summary": "Renders `<span>`."
+      },
+      {
+        "name": "QuestionnaireChoices",
+        "summary": "Renders `QuestionnairePrimitive.Choices`."
+      },
+      {
+        "name": "QuestionnaireDescription",
+        "summary": "Renders `QuestionnairePrimitive.Description`."
+      },
+      {
+        "name": "QuestionnaireError",
+        "summary": "Renders `QuestionnairePrimitive.Error`."
+      },
+      {
+        "name": "QuestionnaireInput",
+        "summary": "Renders `QuestionnairePrimitive.Input`, inside a `<div>`."
+      },
+      {
+        "name": "QuestionnaireItem",
+        "summary": "Renders `QuestionnairePrimitive.Item`."
+      },
+      {
+        "name": "QuestionnaireNext",
+        "summary": "Renders `QuestionnairePrimitive.Next`."
+      },
+      {
+        "name": "QuestionnairePrevious",
+        "summary": "Renders `QuestionnairePrimitive.Previous`."
+      },
+      {
+        "name": "QuestionnaireProgress",
+        "summary": "Renders `QuestionnairePrimitive.Progress`."
+      },
+      {
+        "name": "QuestionnaireSkip",
+        "summary": "Renders `QuestionnairePrimitive.Skip`."
+      },
+      {
+        "name": "QuestionnaireSubmit",
+        "summary": "Renders `QuestionnairePrimitive.Submit`."
+      },
+      {
+        "name": "QuestionnaireTitle",
+        "summary": "Renders `QuestionnairePrimitive.Title`."
+      }
+    ],
+    "props": [
+      {
+        "component": "Questionnaire",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Root>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Root` props"
+      },
+      {
+        "component": "QuestionnaireActions",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"div\">`",
+        "default": "—",
+        "description": "Native `<div>` props"
+      },
+      {
+        "component": "QuestionnaireChoice",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Choice>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Choice` props"
+      },
+      {
+        "component": "QuestionnaireChoiceDescription",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<\"span\">`",
+        "default": "—",
+        "description": "Native `<span>` props"
+      },
+      {
+        "component": "QuestionnaireChoices",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Choices>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Choices` props"
+      },
+      {
+        "component": "QuestionnaireDescription",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Description>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Description` props"
+      },
+      {
+        "component": "QuestionnaireError",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Error>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Error` props"
+      },
+      {
+        "component": "QuestionnaireInput",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Input>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Input` props"
+      },
+      {
+        "component": "QuestionnaireItem",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Item>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Item` props"
+      },
+      {
+        "component": "QuestionnaireNext",
+        "prop": "`variant`",
+        "type": "`\"link\" | \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"`",
+        "default": "`\"default\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnaireNext",
+        "prop": "`size`",
+        "type": "`\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"`",
+        "default": "`\"default\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnaireNext",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Next> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Next` props"
+      },
+      {
+        "component": "QuestionnairePrevious",
+        "prop": "`variant`",
+        "type": "`\"link\" | \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"`",
+        "default": "`\"outline\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnairePrevious",
+        "prop": "`size`",
+        "type": "`\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"`",
+        "default": "`\"default\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnairePrevious",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Previous> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Previous` props"
+      },
+      {
+        "component": "QuestionnaireProgress",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Progress>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Progress` props"
+      },
+      {
+        "component": "QuestionnaireSkip",
+        "prop": "`variant`",
+        "type": "`\"link\" | \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"`",
+        "default": "`\"outline\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnaireSkip",
+        "prop": "`size`",
+        "type": "`\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"`",
+        "default": "`\"default\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnaireSkip",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Skip> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Skip` props"
+      },
+      {
+        "component": "QuestionnaireSubmit",
+        "prop": "`variant`",
+        "type": "`\"link\" | \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"`",
+        "default": "`\"default\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnaireSubmit",
+        "prop": "`size`",
+        "type": "`\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"`",
+        "default": "`\"default\"`",
+        "description": "`Button` prop — see its spec"
+      },
+      {
+        "component": "QuestionnaireSubmit",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Submit> & Pick<React.ComponentProps<typeof Button>, \"size\" | \"variant\">`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Submit` props"
+      },
+      {
+        "component": "QuestionnaireTitle",
+        "prop": "`...props`",
+        "type": "`React.ComponentProps<typeof QuestionnairePrimitive.Title>`",
+        "default": "—",
+        "description": "`QuestionnairePrimitive.Title` props"
+      }
+    ],
+    "states": [
+      {
+        "state": "default",
+        "behavior": "Choices with an `input` border and a transparent background"
+      },
+      {
+        "state": "checked",
+        "behavior": "`data-checked`: the choice takes `bg-muted`, the indicator the primary fill"
+      },
+      {
+        "state": "invalid",
+        "behavior": "`data-invalid` on a choice, `aria-invalid` on the input: error border; `QuestionnaireError` shows why"
+      },
+      {
+        "state": "hover",
+        "behavior": "A choice takes `bg-muted/50`"
+      },
+      {
+        "state": "focus",
+        "behavior": "The choice draws the focus ring when its hidden input has focus; the input draws its own"
+      },
+      {
+        "state": "active",
+        "behavior": "Not applicable"
+      },
+      {
+        "state": "disabled",
+        "behavior": "`data-disabled` on a choice, `disabled` on the input: `opacity-disabled`, not clickable"
+      }
+    ],
+    "accessibility": "**Pattern**: A form of `fieldset`s with native radio buttons or checkboxes, and a [progress bar](https://www.w3.org/TR/wai-aria-1.2/#progressbar)\n\n**Role**: `Questionnaire` is a `form`; each `QuestionnaireItem` is a `fieldset` named by its `legend` (`QuestionnaireTitle`); each choice is a native `radio` or `checkbox` labeled by its text. `QuestionnaireProgress` is a `progressbar` with `aria-valuetext` \"Question 2 of 5\".\n\n**Keyboard**:\n\n| Key                    | Action                                                      |\n| ---------------------- | ----------------------------------------------------------- |\n| `ArrowUp`/`ArrowDown`  | Moves between the choices of the current question           |\n| `Space`                | Checks the focused choice                                   |\n| `Enter`                | On a choice: checks it and goes to the next question        |\n| `ArrowLeft`            | Goes back to the previous question                          |\n| `ArrowRight`           | Goes to the next question, once the current one is answered |\n| `A`…`Z` / `1`…`9`      | With `shortcuts`: checks the choice labeled with that key   |\n| `Ctrl+Enter`/`⌘+Enter` | Goes on, or submits on the last question                    |\n\n**Accessible name**: The progress bar is named by `UI_STRINGS.questionnaire.progress`; pass `aria-label` to name it otherwise. The navigation buttons read `UI_STRINGS.questionnaire.previous`, `skip`, `next` and `submit`; `children` replace them.\n\n**Pitfalls**:\n\n- The value text of the progress bar, \"Question 2 of 5\", is written in English by `@shadcn/react`; pass `children` to `QuestionnaireProgress` for another language, and the `aria-valuetext` stays English.\n- A choice's shortcut key is announced through `aria-keyshortcuts`; a letter shortcut clashes with typing in a `QuestionnaireInput` of the same question, which `@shadcn/react` ignores keys from.",
+    "code_example": "import {\n  Questionnaire,\n  QuestionnaireActions,\n  QuestionnaireChoice,\n  QuestionnaireChoices,\n  QuestionnaireItem,\n  QuestionnaireNext,\n  QuestionnairePrevious,\n  QuestionnaireProgress,\n  QuestionnaireSubmit,\n  QuestionnaireTitle,\n} from \"@/components/ui/questionnaire\"\n\nexport default function Example() {\n  return (\n    <Questionnaire\n      shortcuts=\"letters\"\n      onSubmit={(event) => {\n        event.preventDefault()\n        const answers = new FormData(event.currentTarget)\n        console.log(Object.fromEntries(answers))\n      }}\n    >\n      <QuestionnaireProgress />\n      <QuestionnaireItem name=\"audience\" required>\n        <QuestionnaireTitle>Who is the report for?</QuestionnaireTitle>\n        <QuestionnaireChoices>\n          <QuestionnaireChoice value=\"team\">My team</QuestionnaireChoice>\n          <QuestionnaireChoice value=\"board\">The board</QuestionnaireChoice>\n        </QuestionnaireChoices>\n      </QuestionnaireItem>\n      <QuestionnaireItem name=\"length\" required>\n        <QuestionnaireTitle>How long should it be?</QuestionnaireTitle>\n        <QuestionnaireChoices>\n          <QuestionnaireChoice value=\"page\">One page</QuestionnaireChoice>\n          <QuestionnaireChoice value=\"full\">Full report</QuestionnaireChoice>\n        </QuestionnaireChoices>\n      </QuestionnaireItem>\n      <QuestionnaireActions>\n        <QuestionnairePrevious />\n        <QuestionnaireNext />\n        <QuestionnaireSubmit />\n      </QuestionnaireActions>\n    </Questionnaire>\n  )\n}",
+    "cross_references": [
+      "Field",
+      "RadioGroup",
+      "Checkbox",
+      "Input",
+      "Button",
+      "Message"
+    ],
+    "shadcn": {
+      "item": "questionnaire",
       "divergences": []
     }
   },

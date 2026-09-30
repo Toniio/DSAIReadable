@@ -29,6 +29,7 @@ An interactive date picker built on `react-day-picker`: single, multiple or rang
 - **MUST** — place the `Calendar` inside a container (`Popover`, `Card`…): it does not position itself
 - **MUST** — keep disabled days visible (`opacity-disabled`, `aria-disabled`)
 - **MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)
+- **Note** — the first and last days of a range take a raw `z-0` with `isolate`, so their highlight pseudo-elements paint under the day cells; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`
 
 ## Dependencies
 

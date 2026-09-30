@@ -349,8 +349,20 @@ export function apiOf(program: ts.Program, file: string): ApiExport[] {
       st.exportClause &&
       ts.isNamedExports(st.exportClause)
     )
-      for (const e of st.exportClause.elements)
-        if (!e.isTypeOnly) names.push(e.name.text)
+      for (const e of st.exportClause.elements) {
+        if (e.isTypeOnly) continue
+        names.push(e.name.text)
+        // Re-exported from a package (the hooks of @shadcn/react): its
+        // declaration is the package's.
+        if (declarations.has((e.propertyName ?? e.name).text)) continue
+        const local = checker.getExportSpecifierLocalTargetSymbol(e)
+        const target =
+          local && local.flags & ts.SymbolFlags.Alias
+            ? checker.getAliasedSymbol(local)
+            : local
+        const decl = target?.declarations?.[0]
+        if (decl) declarations.set(e.name.text, decl)
+      }
     const exported = ts.canHaveModifiers(st)
       ? ts.getModifiers(st)?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
       : false

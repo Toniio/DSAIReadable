@@ -112,6 +112,27 @@
       "reason": "gap-[calc(var(--spacing)*var(--gap))] — shadcn/ui's `spacing` prop is a number of scale units, set as --gap on the root. The product of that runtime number and the scale unit cannot be a class of the locked spacing scale.",
       "token_candidate": null,
       "review_after": "2027-09-29"
+    },
+    {
+      "id": "local-stacking",
+      "file": "components/ui/attachment.tsx",
+      "reason": "z-10 lays the stretched AttachmentTrigger over the media and the content so the whole attachment is one click target, and z-20 keeps AttachmentActions above it. Two occurrences, local ordering inside the attachment; the z-index scale addresses global layers (dropdown, modal, tooltip).",
+      "token_candidate": null,
+      "review_after": "2027-09-30"
+    },
+    {
+      "id": "local-stacking",
+      "file": "components/ui/bubble.tsx",
+      "reason": "z-10 lifts BubbleReactions over the bubble they overlap, inside the bubble. Local ordering; the z-index scale addresses global layers (dropdown, modal, tooltip).",
+      "token_candidate": null,
+      "review_after": "2027-09-30"
+    },
+    {
+      "id": "local-stacking",
+      "file": "components/ui/questionnaire.tsx",
+      "reason": "z-10 lays the transparent native input of a QuestionnaireChoice over its indicator and label, so the whole choice is the click target. Local ordering; the z-index scale addresses global layers (dropdown, modal, tooltip).",
+      "token_candidate": null,
+      "review_after": "2027-09-30"
     }
   ]
 }
