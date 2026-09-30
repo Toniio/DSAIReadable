@@ -2580,7 +2580,7 @@
         "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
       }
     ],
-    "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red; `success` says \"Paid\", not just green). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`) or a raw color: `text-destructive`, `text-success` and `text-warning` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.",
+    "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red; `success` says \"Paid\", not just green). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`) or a raw color: `text-destructive`, `text-success` and `text-warning` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.\n- **MUST** — keep 4px of clear space above and below a Badge rendered as a link (`asChild`): it is 20px tall, and only the spacing exception of WCAG 2.2 SC 2.5.8 (Target Size) makes it conform (`specs/foundations/size.md`).",
     "code_example": "import { Badge } from \"@/components/ui/badge\"\n\nexport default function Example() {\n  return (\n    <div className=\"flex gap-2\">\n      <Badge variant=\"default\">Active</Badge>\n      <Badge variant=\"secondary\">Draft</Badge>\n      <Badge variant=\"success\">Paid</Badge>\n      <Badge variant=\"warning\">Pending review</Badge>\n      <Badge variant=\"destructive\">Error</Badge>\n      <Badge variant=\"outline\">v2.1.0</Badge>\n    </div>\n  )\n}",
     "cross_references": [
       "Button",
@@ -2692,7 +2692,16 @@
       {
         "token": "space.scale.1-5",
         "classes": [
-          "gap-1.5"
+          "gap-x-1.5"
+        ],
+        "where": [
+          "BreadcrumbList"
+        ]
+      },
+      {
+        "token": "space.scale.2",
+        "classes": [
+          "gap-y-2"
         ],
         "where": [
           "BreadcrumbList"
@@ -11340,6 +11349,15 @@
         ]
       },
       {
+        "token": "size.target.min",
+        "classes": [
+          "min-w-target"
+        ],
+        "where": [
+          "inputGroupButtonVariants.size.xs"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -17881,7 +17899,7 @@
         "behavior": "— (not applicable directly)"
       }
     ],
-    "accessibility": "**Pattern**: Scrolling region (Radix ScrollArea)\n\n**Role**: A natively scrolling `viewport`; the custom scrollbars are decorative.\n\n**Keyboard**:\n\nNative scrolling with the wheel, touch, and the keyboard when a focusable element is inside.\n\n**Accessible name**: When the area holds nothing focusable, give it `tabIndex={0}`, `role=\"region\"` and an `aria-label`.\n\n**Pitfalls**:\n\n- A scrolling area with no focusable element cannot be reached from the keyboard (WCAG 2.1.1) — see above.\n- Never nest scrolling areas on the same axis.",
+    "accessibility": "**Pattern**: Scrolling region (Radix ScrollArea)\n\n**Role**: A natively scrolling `viewport`; the custom scrollbars are decorative.\n\n**Keyboard**:\n\nNative scrolling with the wheel, touch, and the keyboard when a focusable element is inside.\n\n**Accessible name**: When the area holds nothing focusable, give it `tabIndex={0}`, `role=\"region\"` and an `aria-label`.\n\n**Pitfalls**:\n\n- A scrolling area with no focusable element cannot be reached from the keyboard (WCAG 2.1.1) — see above.\n- Never nest scrolling areas on the same axis.\n- The `ScrollBar` is 10px wide, below the 24px of WCAG 2.2 SC 2.5.8 (Target Size), and no exception covers it: a known gap, listed in `specs/foundations/size.md`. Wheel, touch and keyboard scroll the same area.",
     "code_example": "import { ScrollArea, ScrollBar } from \"@/components/ui/scroll-area\"\n\nexport default function Example() {\n  return (\n    <ScrollArea className=\"h-72 w-48 rounded-none border\">\n      <div className=\"p-4\">\n        {Array.from({ length: 50 }, (_, i) => (\n          <p key={i} className=\"text-sm\">\n            Item {i + 1}\n          </p>\n        ))}\n      </div>\n      <ScrollBar orientation=\"vertical\" />\n    </ScrollArea>\n  )\n}",
     "cross_references": [
       "ResizablePanel",
@@ -19352,10 +19370,13 @@
       {
         "token": "space.scale.0-5",
         "classes": [
+          "-inset-0.5",
           "py-0.5",
           "w-0.5"
         ],
         "where": [
+          "SidebarGroupAction",
+          "SidebarMenuAction",
           "SidebarMenuSub",
           "SidebarRail"
         ]

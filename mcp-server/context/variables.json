@@ -1520,6 +1520,14 @@
     "status": "active"
   },
   {
+    "path": "size.target.min",
+    "value_light": "{primitive.space.6}",
+    "value_dark": "{primitive.space.6}",
+    "css_variable": "--size-target-min",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
     "path": "shadcn.background",
     "value_light": "{color.background.default}",
     "value_dark": "{color.background.default}",

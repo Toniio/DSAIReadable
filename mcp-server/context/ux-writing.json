@@ -193,11 +193,15 @@
       "source": "color.md"
     },
     {
-      "rule": "**Accessibility first** — the minimum contrast ratio is 4.5:1 (WCAG AA) for body text, and 3:1 for large text and UI components.",
+      "rule": "**Accessibility first** — the conformance target is WCAG 2.2 AA: the minimum contrast ratio is 4.5:1 for body text (SC 1.4.3), and 3:1 for large text and UI components (SC 1.4.11).",
       "source": "color.md"
     },
     {
       "rule": "**Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lint-contrast.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.",
+      "source": "color.md"
+    },
+    {
+      "rule": "**APCA is advisory, WCAG 2 decides** — the same lint prints a second level: the APCA lightness contrast (Lc) of every pair, against Lc 60 for text and Lc 45 for non-text (APCA Bronze Simple Mode), tagged as WCAG 3 preparation. WCAG 3 is a Working Draft and regulations cite WCAG 2.x, so an APCA warning never fails the build and never justifies a token change that lowers a WCAG 2 ratio below its threshold. Weigh the warnings when a palette step changes for another reason, and keep the change only if both levels hold or improve.",
       "source": "color.md"
     },
     {
@@ -367,6 +371,30 @@
     {
       "rule": "**`radius.none` is a deliberate choice** — use it only for full-bleed components or data-grid elements, not as a default.",
       "source": "radius.md"
+    },
+    {
+      "rule": "✅ Give every control you build a clickable area of at least 24 × 24px: `min-h-target min-w-target`, or a hit area on a pseudo-element",
+      "source": "size.md"
+    },
+    {
+      "rule": "✅ Draw a control smaller than 24px only with a hit area that reaches `size.target.min` and stays inside its own row or cell",
+      "source": "size.md"
+    },
+    {
+      "rule": "✅ Keep 4px of clear space around a Badge rendered as a link, and render `SidebarTrigger` wherever `SidebarRail` is rendered",
+      "source": "size.md"
+    },
+    {
+      "rule": "❌ Never shrink a `Button` below size `xs` / `icon-xs`, or add a hit area that overlaps another target",
+      "source": "size.md"
+    },
+    {
+      "rule": "❌ Do not use `size.target.min` as a spacing value or an icon size",
+      "source": "size.md"
+    },
+    {
+      "rule": "Inline links in a sentence are exempt (SC 2.5.8 \"inline\"): their size follows the line height of the text",
+      "source": "size.md"
     },
     {
       "rule": "**Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.",

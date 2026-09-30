@@ -13,12 +13,21 @@
  * that result. Checking only the solid pair let `text-destructive` on
  * `bg-destructive/10` ship at 3.99:1 while this lint was green (P3-17).
  *
+ * Two levels, in a strict hierarchy:
+ *   1. WCAG 2.2 AA ratios — blocking. The design system's conformance target,
+ *      and the only contrast measure regulations cite today.
+ *   2. APCA lightness contrast (Lc) — advisory, never blocking. WCAG 3 is a
+ *      Working Draft; APCA is reported to prepare for it, not to replace
+ *      WCAG 2. A pair below its Lc level is a warning to weigh the next time
+ *      the tokens change, never a reason to move a token that would break a
+ *      level 1 ratio.
+ *
  *   npx tsx scripts/lint-contrast.ts
  */
 
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { blend, luminance } from "./wcag.js"
+import { apcaContrast, blend, luminance } from "./wcag.js"
 import {
   cssValue,
   loadTokens,
@@ -82,6 +91,13 @@ function ratio(a: string, b: string): number {
   const [x, y] = [luminance(a), luminance(b)]
   return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05)
 }
+
+/**
+ * APCA Bronze Simple Mode levels matched to each WCAG 2 threshold: Lc 60 is
+ * the minimum for content text, Lc 45 for large text and the solid
+ * non-text elements 1.4.11 covers (a focus ring, an icon).
+ */
+const APCA_LEVEL = { 4.5: 60, 3: 45 } as const
 
 type Pair = {
   label: string
@@ -316,6 +332,7 @@ const PAIRS: Pair[] = [
 
 let failures = 0
 let checked = 0
+const advisories: string[] = []
 
 for (const pair of PAIRS) {
   for (const mode of pair.modes ?? MODES) {
@@ -336,10 +353,28 @@ for (const pair of PAIRS) {
       : `${pair.bg} = ${bg}`
     if (pass) console.log(line)
     else console.error(`${line}\n     ${pair.fg} = ${fg} on ${under}`)
+
+    const lc = Math.abs(apcaContrast(fg, bg))
+    const level = APCA_LEVEL[pair.threshold]
+    if (lc < level) {
+      advisories.push(
+        `⚠️  ${mode.padEnd(5)} Lc ${lc.toFixed(1).padStart(5)} / ${level}  ${pair.label}`
+      )
+    }
   }
 }
 
 console.log(`\n📊 ${checked} pair(s) checked, ${failures} failure(s).`)
+
+console.log(
+  "\n── Level 2 — APCA advisory (WCAG 3 preparation, non-blocking) ──\n" +
+    "   WCAG 2.2 AA above stays the blocking level: never move a token to\n" +
+    "   clear an APCA warning if it lowers a WCAG 2 ratio below its threshold."
+)
+for (const advisory of advisories) console.log(advisory)
+console.log(
+  `📊 ${checked - advisories.length}/${checked} pair(s) at or above their APCA level (Lc 60 text, Lc 45 non-text), ${advisories.length} advisory warning(s).`
+)
 
 if (failures > 0) {
   console.error(
@@ -349,4 +384,4 @@ if (failures > 0) {
   process.exit(1)
 }
 
-console.log("✅ lint-contrast: all pairs meet their WCAG 2.2 threshold.")
+console.log("\n✅ lint-contrast: all pairs meet their WCAG 2.2 AA threshold.")

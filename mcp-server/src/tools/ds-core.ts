@@ -303,6 +303,7 @@ import { cn } from "@/lib/utils"`,
             "zindex",
             "breakpoint",
             "border-width",
+            "size",
           ])
           .optional()
           .describe("Token category to filter by"),

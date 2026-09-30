@@ -30,6 +30,7 @@ Code written with this design system uses its components, never a native element
 - [Motion](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/motion.md)
 - [Opacity](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/opacity.md)
 - [Radius](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/radius.md)
+- [Size](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/size.md)
 - [Spacing](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/spacing.md)
 - [Typography](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/typography.md)
 

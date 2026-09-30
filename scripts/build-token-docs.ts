@@ -274,6 +274,7 @@ const FOUNDATION_TITLES: Record<string, string> = {
   motion: "Motion",
   opacity: "Opacity",
   zindex: "Z-Index",
+  size: "Size",
   shadcn: "shadcn aliases",
 }
 

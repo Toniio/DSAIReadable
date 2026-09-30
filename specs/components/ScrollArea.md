@@ -115,6 +115,7 @@ Native scrolling with the wheel, touch, and the keyboard when a focusable elemen
 
 - A scrolling area with no focusable element cannot be reached from the keyboard (WCAG 2.1.1) — see above.
 - Never nest scrolling areas on the same axis.
+- The `ScrollBar` is 10px wide, below the 24px of WCAG 2.2 SC 2.5.8 (Target Size), and no exception covers it: a known gap, listed in `specs/foundations/size.md`. Wheel, touch and keyboard scroll the same area.
 
 ## Code example
 

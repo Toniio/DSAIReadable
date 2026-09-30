@@ -2232,5 +2232,22 @@
         "status": "active"
       }
     }
+  },
+  "size": {
+    "target": {
+      "min": {
+        "$value": "{primitive.space.6}",
+        "$type": "dimension",
+        "$description": "Minimum pointer target (24px): WCAG 2.2 SC 2.5.8 Target Size (Minimum), level AA. The clickable area of every control reaches it, or the control meets one of the exceptions listed in specs/foundations/size.md.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "min-h-target min-w-target",
+            "do": "Give a control drawn smaller than 24px a hit area of this size: `after:absolute after:inset-0 after:m-auto after:size-target` on a `relative` control, or `min-h-target min-w-target`.",
+            "dont": "Do not use it as a spacing value or to size an icon."
+          },
+          "status": "active"
+        }
+      }
+    }
   }
 }
