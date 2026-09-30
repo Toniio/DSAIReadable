@@ -43,6 +43,7 @@ UPDATE_SNAPSHOTS=1 npm run mcp:test  # accepts a change to the build_screen prom
 npm run typecheck:mcp      # tsc on mcp-server/ (part of typecheck:all)
 npm run mcp:start          # stdio server
 npm run mcp:start:http     # HTTP server, 127.0.0.1:3100 by default
+npm run mcp:test-package   # packs the package and runs the tarball through npx from an empty folder (network)
 ```
 
 ⚠️ `npm ci` at the root **does not install** `mcp-server/`. After cloning or
@@ -62,7 +63,30 @@ another platform): delete it and reinstall.
 | **A tool that finds nothing returns `notFound()`** (`isError: true` plus the accepted values); **every tool has its case in `TOOL_CASES`** (`src/test.ts`): one content assertion, one error case                                                                                                                               | An `{ error }` without `isError` reads as a successful answer; a tool added without a case is checked by nothing                                                                                    |
 | **HTTP bound to `127.0.0.1` by default**; `MCP_HOST` and `MCP_ALLOWED_ORIGINS` are only widened deliberately                                                                                                                                                                                                                    | The server has no authentication                                                                                                                                                                    |
 
-## 4. Style
+## 4. The npm package
+
+`@dsaireadable/mcp-server` is what a consumer runs with `npx`, so the package,
+not the sources, is what has to work:
+
+- **The runtime is compiled JavaScript.** `npm run build` (`tsconfig.build.json`)
+  writes `dist/`, and `bin` points at `dist/index.js` with a `node` shebang. `tsx`
+  and `typescript` are dev dependencies: no runtime code may need them.
+- **`files` is `dist` and `context`.** A file the server reads at run time from
+  somewhere else (the repository, `specs/`) is a bug: it will not be in the package.
+  `tsconfig.build.json` leaves out what only the repository uses: `src/test.ts`,
+  `src/test-package.ts`, `src/context/generate.ts` and `src/lib/dtcg.ts`. A
+  runtime module must not import them.
+- **`npm run mcp:test-package`** builds, packs, checks the file list and runs the
+  tarball through `npx` from an empty folder, then calls `initialize`,
+  `tools/list` and a tool that reads the cache. Run it after any change to the
+  build, `package.json` or the files `loadContext()` reads.
+- **The one thing read from outside the package** is the consumer project's
+  `design/patterns/*.md` (`src/lib/patterns.ts`), through the same parser the
+  generator uses for `specs/patterns/`.
+- **Publishing is a maintainer's step** (`npm publish` from `mcp-server/`, after
+  the release tag): an agent never runs it.
+
+## 5. Style
 
 The same Prettier configuration as the root (§ 7 of the root `AGENTS.md`): no
 local `.prettierrc`; do not add one.

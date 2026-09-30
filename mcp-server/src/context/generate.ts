@@ -16,6 +16,15 @@ import path from "path"
 import ts from "typescript"
 
 import { cssValue, loadTokens } from "../lib/dtcg.js"
+import {
+  mdCode,
+  mdListItems,
+  mdPlain,
+  mdSection,
+  mdTable,
+  mdTables,
+} from "../lib/markdown.js"
+import { parsePattern, patternFiles } from "../lib/patterns.js"
 
 // ── Paths ───────────────────────────────────────────────────────────
 /** Structural type for the arbitrary JSON we read from tokens/ and specs/. */
@@ -34,111 +43,8 @@ const write = (name: string, data: unknown) => {
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────
-
-/**
- * Extract a markdown section by heading (## Title). The section ends at the
- * next `## ` or at the end of the input — `(?![\s\S])`, since JavaScript has
- * no `\Z`: written `\Z`, it matched a literal "Z", so every section stopped at
- * its first capital Z and the last section of a spec was never found at all.
- */
-function mdSection(md: string, heading: string): string {
-  const escaped = heading.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")
-  const re = new RegExp(
-    `^## ${escaped}\\s*\\n([\\s\\S]*?)(?=^## |(?![\\s\\S]))`,
-    "m"
-  )
-  const m = md.match(re)
-  return m ? m[1].trim() : ""
-}
-
-/** A table's `|---|:--:|` delimiter row */
-const TABLE_DELIMITER = /^\|(\s*:?-+:?\s*\|)+\s*$/
-
-/** Split a table row into cells; an escaped `\|` stays inside its cell */
-function mdCells(line: string): string[] {
-  return line
-    .trim()
-    .replace(/^\||\|$/g, "")
-    .split(/(?<!\\)\|/)
-    .map((c) => c.trim().replace(/\\\|/g, "|"))
-}
-
-interface MdTable {
-  /** Nearest `###` heading above the table, backticks stripped ("" if none) */
-  heading: string
-  header: string[]
-  rows: string[][]
-}
-
-/**
- * Parse every markdown table of a section, wherever it sits: each table keeps
- * its header apart from its body rows, and the delimiter row is dropped.
- */
-function mdTables(section: string): MdTable[] {
-  const tables: MdTable[] = []
-  const lines = section.split("\n").map((l) => l.trim())
-  let heading = ""
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-    if (line.startsWith("### ")) {
-      heading = line.slice(4).replace(/`/g, "").trim()
-    } else if (TABLE_DELIMITER.test(line)) {
-      continue
-    } else if (line.startsWith("|")) {
-      // A header row is the one right above its delimiter.
-      if (TABLE_DELIMITER.test(lines[i + 1] ?? "")) {
-        tables.push({ heading, header: mdCells(line), rows: [] })
-      } else if (tables.length > 0) {
-        tables[tables.length - 1].rows.push(mdCells(line))
-      }
-    }
-  }
-  return tables
-}
-
-/** Parse the body rows of every markdown table of a section */
-function mdTable(section: string): string[][] {
-  return mdTables(section).flatMap((t) => t.rows)
-}
-
-/**
- * Parse the list items of a section: bullets (`- `) and numbered items
- * (`1. `). Reading bullets alone left the five foundations whose rules are
- * numbered with no rule at all. An item wrapped over several lines is joined
- * back into one; it ends at a blank line, so a paragraph or a table nested
- * under an item is not part of the rule.
- */
-function mdListItems(section: string): string[] {
-  const items: string[][] = []
-  let open = false
-  for (const line of section.split("\n")) {
-    const item = line.match(/^\s*(?:-|\d+\.)\s+(.*)$/)
-    if (item) {
-      items.push([item[1].trim()])
-      open = true
-    } else if (open && /^\s+\S/.test(line)) {
-      items[items.length - 1].push(line.trim())
-    } else {
-      open = false
-    }
-  }
-  return items.map((lines) => lines.join(" "))
-}
-
-/**
- * A table cell as a plain value: `typography.size.xs` served with its
- * backticks, or a usage note with its bold markers, is Markdown an agent
- * copies verbatim into code.
- */
-function mdPlain(cell: string): string {
-  return cell.replace(/`/g, "").replace(/\*\*(.+?)\*\*/g, "$1")
-}
-
-/** Extract fenced code block content */
-function mdCode(section: string): string {
-  const m = section.match(/```[\w]*\n([\s\S]*?)```/)
-  return m ? m[1].trim() : ""
-}
+// The Markdown readers (mdSection, mdTables, …) are shared with the server at
+// run time: src/lib/markdown.ts.
 
 /** Narrow an arbitrary JSON value to a plain object (arrays and null excluded). */
 function isJsonObject(val: Json): val is { [key: string]: Json } {
@@ -1008,21 +914,6 @@ function generateContentLibrary() {
 
 // ── 12 bis. patterns.json ───────────────────────────────────────────
 const patternsDir = path.join(ROOT, "specs/patterns")
-const PATTERN_KINDS: Record<string, string> = { Task: "task", UI: "ui" }
-
-/** A table's rows as objects keyed by its header: "Variant / props" → variant_props. */
-function mdRecords(section: string): Record<string, string>[] {
-  return mdTables(section).flatMap(({ header, rows }) =>
-    rows.map((row) =>
-      Object.fromEntries(
-        header.map((h, i) => [
-          h.toLowerCase().replace(/[^a-z]+/g, "_"),
-          mdPlain(row[i] ?? ""),
-        ])
-      )
-    )
-  )
-}
 
 /**
  * The page patterns of specs/patterns/, by name. A pattern names components
@@ -1042,45 +933,16 @@ function generatePatterns() {
   )
 
   const result: JsonObject = {}
-  for (const f of readdirSync(patternsDir)
-    .filter((f) => f.endsWith(".md"))
-    .sort()) {
-    const md = readFileSync(path.join(patternsDir, f), "utf-8")
-    const meta = mdTable(mdSection(md, "Metadata"))
-    const get = (label: string) =>
-      meta.find((r) => r[0]?.toLowerCase() === label)?.[1] ?? ""
-    const name = f.replace(/\.md$/, "")
-    const kind = PATTERN_KINDS[get("kind")]
-    if (get("name") !== name)
-      throw new Error(`specs/patterns/${f}: Name is not "${name}"`)
-    if (!kind)
-      throw new Error(
-        `specs/patterns/${f}: Kind "${get("kind")}" is not one of ${Object.keys(PATTERN_KINDS).join(", ")}`
-      )
-
-    const components = mdRecords(mdSection(md, "Components"))
-    const unknown = components
+  for (const [f, md] of patternFiles(patternsDir)) {
+    const pattern = parsePattern(md, f, `specs/patterns/${f}`)
+    const unknown = pattern.components
       .map((c) => c.component)
       .filter((c) => !documented.has(c))
     if (unknown.length)
       throw new Error(
         `specs/patterns/${f}: Components names ${unknown.join(", ")}, which no component spec documents`
       )
-
-    result[name] = {
-      name,
-      title: /^# (.+)$/m.exec(md)?.[1] ?? name,
-      kind,
-      role: mdSection(md, "Role"),
-      usage: mdListItems(mdSection(md, "Usage")),
-      structure: mdRecords(mdSection(md, "Structure")),
-      components,
-      spacing: mdListItems(mdSection(md, "Spacing")),
-      content: mdRecords(mdSection(md, "Content")),
-      code_example: mdCode(mdSection(md, "Code example")),
-      cross_references: mdListItems(mdSection(md, "Cross-references")),
-      source: `specs/patterns/${f}`,
-    }
+    result[pattern.name] = pattern as unknown as JsonObject
   }
   return write("patterns.json", result)
 }

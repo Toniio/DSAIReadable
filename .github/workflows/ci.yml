@@ -119,6 +119,9 @@ jobs:
       - run: npm ci
       - run: npm ci --prefix mcp-server
       - run: npm run mcp:test
+      # The package a consumer installs, not the sources: built, packed, then
+      # run through npx from an empty folder. It installs from the npm registry.
+      - run: npm run mcp:test-package
 
   component-tests:
     name: component-tests

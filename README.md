@@ -81,6 +81,36 @@ The MCP server (`mcp-server/`) exposes the design system as tools AI agents can 
 
 ### Getting started
 
+The server runs on your machine, over stdio: nothing is hosted. Once
+`@dsaireadable/mcp-server` is published, a client starts it with `npx`, with no
+clone:
+
+```bash
+npx -y @dsaireadable/mcp-server
+```
+
+It needs Node.js 20 or later. Claude Code:
+
+```bash
+claude mcp add dsaireadable -- npx -y @dsaireadable/mcp-server
+```
+
+Claude Desktop, in `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "dsaireadable": {
+      "command": "npx",
+      "args": ["-y", "@dsaireadable/mcp-server"]
+    }
+  }
+}
+```
+
+The package is **not published yet** (see [Publishing identity](#publishing-identity)):
+until then, run the server from a clone.
+
 ```bash
 cd mcp-server
 npm run start          # stdio mode (Copilot CLI, Claude Desktop)
@@ -137,6 +167,16 @@ execution error that names it. Lists and resources carry a one-hour, `public` ca
 | `ds://token/{path}`          | A semantic token (`ds://token/color.background.default`); `{path}` autocompletes |
 | `ds://guidelines`            | Critical rules, foundation rules, composition rules                              |
 
+### Your project's own patterns
+
+Run inside a project that uses the design system, the server also reads
+`design/patterns/*.md` from its working directory (or from the folder named by
+`DSAIREADABLE_PROJECT_DIR`). A file there has the same nine sections as a file
+of `specs/patterns/`, and `dsaireadable_list_patterns` and
+`dsaireadable_get_pattern` serve it beside the design system's, with its own
+`source`. When both define the same name, the project's wins. A file that does
+not parse is an error that names it, not a pattern silently left out.
+
 ### Connecting from VS Code / Copilot
 
 Add to `.vscode/mcp.json` or `~/.copilot/mcp-config.json`:
@@ -146,11 +186,13 @@ Add to `.vscode/mcp.json` or `~/.copilot/mcp-config.json`:
   "mcpServers": {
     "dsaireadable": {
       "command": "npx",
-      "args": ["tsx", "./mcp-server/src/index.ts"]
+      "args": ["-y", "@dsaireadable/mcp-server"]
     }
   }
 }
 ```
+
+From a clone, `"args": ["tsx", "./mcp-server/src/index.ts"]` runs the sources.
 
 ---
 

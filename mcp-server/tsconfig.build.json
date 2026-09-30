@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "declaration": false
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "src/test.ts",
+    "src/test-package.ts",
+    "src/context/generate.ts",
+    "src/lib/dtcg.ts"
+  ]
+}
