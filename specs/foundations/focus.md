@@ -84,9 +84,13 @@ const buttonVariants = cva(
    transparent outline that the mode makes visible. On top of that,
    `outline-none` poisons `--tw-outline-style`, which silently disabled the
    `outline-1` of ScrollArea and NavigationMenu.
-3. **The invalid-state ring follows the focus ring's width** — both can apply at
-   once on a field that is invalid and focused. Two different widths give a
-   result that depends on the order of the utilities in the compiled stylesheet.
+3. **The invalid state colors the ring, never sizes it** — a control's
+   `aria-invalid:` utilities set the border and the ring color; the width
+   comes from the focus state only. A ring always on for an invalid field
+   looks the same with and without focus, and keyboard focus disappears on it
+   (WCAG 2.4.7) — caught by `tests/examples.test.tsx`. A group that wraps
+   several controls (InputOTP, the Combobox chips) may keep a ring on
+   `has-aria-invalid:`: focus shows on the control inside it.
 4. **A bare `ring-0` is a legitimate removal** — it is how a wrapper such as
    InputGroup takes over the indicator of its inner control. Under a focus
    state (`focus-visible:ring-0`) it removes the indicator, and counts as a

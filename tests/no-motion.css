@@ -1,0 +1,9 @@
+/* Tests assert end states. Without this, axe reads colors halfway through a
+   fade or a theme transition, and Radix keeps a closing popup mounted until
+   its exit animation ends. With no animation, Radix unmounts it at once. */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}

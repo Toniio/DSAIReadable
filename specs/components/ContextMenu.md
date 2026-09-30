@@ -244,21 +244,21 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Keyboard**:
 
-| Key                                | Action                                              |
-| ---------------------------------- | --------------------------------------------------- |
-| Right-click, `Shift+F10`, Menu key | Opens the menu on the area                          |
-| `ArrowDown` / `ArrowUp`            | Next / previous item                                |
-| `ArrowRight` / `ArrowLeft`         | Opens / closes a submenu                            |
-| `Enter` / `Space`                  | Activates the item                                  |
-| `Escape`                           | Closes the menu                                     |
-| Typing                             | Moves to the item that starts with the typed letter |
+| Key                        | Action                                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Right-click, Menu key      | Opens the menu on the area; `Shift+F10` too where the browser maps it to the context menu (Windows, Linux), not on macOS |
+| `ArrowDown` / `ArrowUp`    | Next / previous item                                                                                                     |
+| `ArrowRight` / `ArrowLeft` | Opens / closes a submenu                                                                                                 |
+| `Enter` / `Space`          | Activates the item                                                                                                       |
+| `Escape`                   | Closes the menu                                                                                                          |
+| Typing                     | Moves to the item that starts with the typed letter                                                                      |
 
 **Accessible name**: Each item's text; an icon-only item needs an `aria-label`.
 
 **Pitfalls**:
 
 - A context menu stays invisible until someone looks for it: every action it offers must also exist somewhere else (a button, a visible menu).
-- The trigger area must be focusable so `Shift+F10` can reach it.
+- The trigger area must be focusable so the Menu key (and `Shift+F10` on Windows and Linux) can reach it.
 
 ## Code example
 

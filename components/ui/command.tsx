@@ -50,10 +50,12 @@ function Command({
  *
  * @example
  * <CommandDialog open={open} onOpenChange={setOpen} title="Command palette">
- *   <CommandInput placeholder="Search actions" />
- *   <CommandList>
- *     <CommandEmpty>No results found.</CommandEmpty>
- *   </CommandList>
+ *   <Command>
+ *     <CommandInput placeholder="Search actions" />
+ *     <CommandList>
+ *       <CommandEmpty>No results found.</CommandEmpty>
+ *     </CommandList>
+ *   </Command>
  * </CommandDialog>
  */
 function CommandDialog({
@@ -100,13 +102,16 @@ function CommandInput({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="border-b pb-0">
-      <InputGroup className="h-8 border-none border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+      {/* The group draws the ring of its input, as it does for its own
+          input-group-control, which this input is not: it keeps the
+          command-input slot of shadcn/ui. */}
+      <InputGroup className="h-8 border-none border-input/30 bg-input/30 shadow-none! has-[[data-slot=command-input]:focus-visible]:ring-(length:--space-focus-ring-width) has-[[data-slot=command-input]:focus-visible]:ring-ring/50 *:data-[slot=input-group-addon]:pl-2!">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(
             // focus-managed: this control sits inside an InputGroup, whose
-            // has-[[data-slot=input-group-control]:focus-visible] rule draws the ring
-            // around the whole group. A second ring would nest inside the first.
+            // has-[[data-slot=command-input]:focus-visible] rule (above) draws the
+            // ring around the whole group. A second ring would nest inside the first.
             "w-full text-xs outline-hidden disabled:cursor-not-allowed disabled:opacity-disabled",
             className
           )}
@@ -209,8 +214,12 @@ function CommandSeparator({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Separator>) {
   return (
+    // A listbox may own only options and groups: cmdk's role="separator"
+    // breaks that (axe aria-required-children), and the groups already mark
+    // the division for assistive technology. The line stays visual.
     <CommandPrimitive.Separator
       data-slot="command-separator"
+      aria-hidden
       className={cn("-mx-1 h-px bg-border", className)}
       {...props}
     />

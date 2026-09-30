@@ -292,7 +292,7 @@
         "behavior": "`pointer-events-none`, `opacity-disabled` — no interaction"
       }
     ],
-    "accessibility": "**Pattern**: [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) (Radix Accordion)\n\n**Role**: Each trigger is a `button` inside a heading, with `aria-expanded` and `aria-controls`; each panel is a `region` labeled by its trigger.\n\n**Keyboard**:\n\n| Key                     | Action                                             |\n| ----------------------- | -------------------------------------------------- |\n| `Enter` / `Space`       | Opens or closes the focused trigger's panel        |\n| `ArrowDown` / `ArrowUp` | Next / previous trigger                            |\n| `Home` / `End`          | First / last trigger                               |\n| `Tab`                   | Leaves the triggers for the next focusable content |\n\n**Accessible name**: The `AccordionTrigger` text names the button and labels the panel: it must describe the content, not say \"See more\".\n\n**Pitfalls**:\n\n- Do not put an interactive element inside `AccordionTrigger`: a button cannot contain another one.\n- The heading level that wraps the trigger must fit the page's heading hierarchy.",
+    "accessibility": "**Pattern**: [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) (Radix Accordion)\n\n**Role**: Each trigger is a `button` inside a heading, with `aria-expanded` and `aria-controls`; each panel is a `region` labeled by its trigger.\n\n**Keyboard**:\n\n| Key                     | Action                                                                           |\n| ----------------------- | -------------------------------------------------------------------------------- |\n| `Enter` / `Space`       | Opens or closes the focused trigger's panel                                      |\n| `ArrowDown` / `ArrowUp` | Next / previous trigger                                                          |\n| `Home` / `End`          | First / last trigger                                                             |\n| `Tab`                   | Moves to the next trigger, then past the accordion to the next focusable content |\n\n**Accessible name**: The `AccordionTrigger` text names the button and labels the panel: it must describe the content, not say \"See more\".\n\n**Pitfalls**:\n\n- Do not put an interactive element inside `AccordionTrigger`: a button cannot contain another one.\n- The heading level that wraps the trigger must fit the page's heading hierarchy.",
     "code_example": "import {\n  Accordion,\n  AccordionItem,\n  AccordionTrigger,\n  AccordionContent,\n} from \"@/components/ui/accordion\"\n\nexport default function Example() {\n  return (\n    <Accordion type=\"single\" collapsible>\n      <AccordionItem value=\"item-1\">\n        <AccordionTrigger>Section 1</AccordionTrigger>\n        <AccordionContent>Content of the first section.</AccordionContent>\n      </AccordionItem>\n      <AccordionItem value=\"item-2\">\n        <AccordionTrigger>Section 2</AccordionTrigger>\n        <AccordionContent>Content of the second section.</AccordionContent>\n      </AccordionItem>\n    </Accordion>\n  )\n}",
     "cross_references": [
       "Tabs",
@@ -1861,7 +1861,7 @@
         "behavior": "Not applicable; a disabled `AttachmentAction` follows `Button`"
       }
     ],
-    "accessibility": "**Pattern**: A button (the trigger) and its secondary buttons (the actions), in a group\n\n**Role**: `Attachment` is a `div` with no role. `AttachmentTrigger` is a native `button`, or a link through `asChild`. Each `AttachmentAction` is a `Button`.\n\n**Keyboard**:\n\n| Key             | Action                                              |\n| --------------- | --------------------------------------------------- |\n| `Tab`           | Moves to each action, then to the trigger           |\n| `Enter`/`Space` | Opens the file (trigger) or runs the action         |\n| `Shift+Arrow`   | Scrolls an `AttachmentGroup` horizontally, natively |\n\n**Accessible name**: The trigger is stretched over the tile and holds no text: name it with `aria-label` (the file name, \"Open report.pdf\"). Each action is named by its `aria-label`.\n\n**Pitfalls**:\n\n- The upload state is shown by a shimmer and a color only: announce it in `AttachmentDescription` (\"Uploading, 40%\") or through a `role=\"status\"` region.\n- An image preview needs `alt` text; a type icon is decorative.\n- The trigger covers the tile: an action outside `AttachmentActions` sits under it and cannot be clicked.",
+    "accessibility": "**Pattern**: A button (the trigger) and its secondary buttons (the actions), in a group\n\n**Role**: `Attachment` is a `div` with no role. `AttachmentTrigger` is a native `button`, or a link through `asChild`. Each `AttachmentAction` is a `Button`.\n\n**Keyboard**:\n\n| Key                        | Action                                              |\n| -------------------------- | --------------------------------------------------- |\n| `Tab`                      | Moves to each action, then to the trigger           |\n| `Enter`/`Space`            | Opens the file (trigger) or runs the action         |\n| `ArrowLeft` / `ArrowRight` | Scrolls an `AttachmentGroup` horizontally, natively |\n\n**Accessible name**: The trigger is stretched over the tile and holds no text: name it with `aria-label` (the file name, \"Open report.pdf\"). Each action is named by its `aria-label`.\n\n**Pitfalls**:\n\n- The upload state is shown by a shimmer and a color only: announce it in `AttachmentDescription` (\"Uploading, 40%\") or through a `role=\"status\"` region.\n- An image preview needs `alt` text; a type icon is decorative.\n- The trigger covers the tile: an action outside `AttachmentActions` sits under it and cannot be clicked.",
     "code_example": "import {\n  Attachment,\n  AttachmentAction,\n  AttachmentActions,\n  AttachmentContent,\n  AttachmentDescription,\n  AttachmentGroup,\n  AttachmentMedia,\n  AttachmentTitle,\n  AttachmentTrigger,\n} from \"@/components/ui/attachment\"\nimport { Spinner } from \"@/components/ui/spinner\"\nimport { FilePdfIcon, XIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <AttachmentGroup>\n      <Attachment>\n        <AttachmentMedia>\n          <FilePdfIcon />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>report.pdf</AttachmentTitle>\n          <AttachmentDescription>2.4 MB</AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label=\"Remove report.pdf\">\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n        <AttachmentTrigger aria-label=\"Open report.pdf\" />\n      </Attachment>\n      <Attachment state=\"uploading\">\n        <AttachmentMedia>\n          <Spinner />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>photo.jpg</AttachmentTitle>\n          <AttachmentDescription>Uploading, 40%</AttachmentDescription>\n        </AttachmentContent>\n      </Attachment>\n    </AttachmentGroup>\n  )\n}",
     "cross_references": [
       "Message",
@@ -3587,7 +3587,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "buttonVariants",
           "buttonVariants via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -3820,7 +3819,7 @@
       },
       {
         "state": "`error`",
-        "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
+        "behavior": "`aria-invalid=\"true\"`: `destructive` border; on focus, a `destructive` ring"
       }
     ],
     "accessibility": "**Pattern**: [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) — native `button` element\n\n**Role**: Native `button` (or the element passed through `asChild`, such as a link).\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Enter` / `Space` | Activates the button            |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.\n\n**Pitfalls**:\n\n- **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.\n- A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.\n- `variant=\"destructive\"` must come with an explicit label.\n- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 3.00:1 on a hovered button inside a card.",
@@ -4511,7 +4510,7 @@
         "behavior": "Day cannot be selected: `opacity-disabled` and `aria-disabled`, `muted-foreground` text"
       }
     ],
-    "accessibility": "**Pattern**: A date [grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (react-day-picker)\n\n**Role**: A grid of dates; the selected day carries `aria-selected`, unavailable days `aria-disabled`.\n\n**Keyboard**:\n\n| Key                               | Action                            |\n| --------------------------------- | --------------------------------- |\n| `ArrowLeft` / `ArrowRight`        | Previous / next day               |\n| `ArrowUp` / `ArrowDown`           | Same day the previous / next week |\n| `Home` / `End`                    | Start / end of the week           |\n| `PageUp` / `PageDown`             | Previous / next month             |\n| `Shift+PageUp` / `Shift+PageDown` | Previous / next year              |\n| `Enter` / `Space`                 | Selects the focused day           |\n\n**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop.\n\n**Pitfalls**:\n\n- A calendar alone is not enough to enter a date the user already knows: offer a text input as well.\n- Mark unavailable days by something other than color.",
+    "accessibility": "**Pattern**: A date [grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (react-day-picker)\n\n**Role**: A grid of dates; the selected day carries `aria-selected`; an unavailable day is a `disabled` button.\n\n**Keyboard**:\n\n| Key                               | Action                            |\n| --------------------------------- | --------------------------------- |\n| `ArrowLeft` / `ArrowRight`        | Previous / next day               |\n| `ArrowUp` / `ArrowDown`           | Same day the previous / next week |\n| `Home` / `End`                    | Start / end of the week           |\n| `PageUp` / `PageDown`             | Previous / next month             |\n| `Shift+PageUp` / `Shift+PageDown` | Previous / next year              |\n| `Enter` / `Space`                 | Selects the focused day           |\n\n**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop.\n\n**Pitfalls**:\n\n- A calendar alone is not enough to enter a date the user already knows: offer a text input as well.\n- Mark unavailable days by something other than color.",
     "code_example": "import { Calendar } from \"@/components/ui/calendar\"\nimport { useState } from \"react\"\n\nexport default function Example() {\n  const [date, setDate] = useState<Date | undefined>(new Date())\n\n  return (\n    <Calendar\n      mode=\"single\"\n      selected={date}\n      onSelect={setDate}\n      showOutsideDays\n    />\n  )\n}",
     "cross_references": [
       "Popover",
@@ -5839,7 +5838,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "Checkbox",
           "Checkbox via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -5985,7 +5983,7 @@
       },
       {
         "state": "`error`",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive ring-destructive/20`"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive`; on focus, a `ring-destructive/20` ring"
       }
     ],
     "accessibility": "**Pattern**: [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) (Radix Checkbox)\n\n**Role**: `role=\"checkbox\"` on a `button`, with `aria-checked`: `true`, `false` or `mixed` (indeterminate).\n\n**Keyboard**:\n\n| Key     | Action                          |\n| ------- | ------------------------------- |\n| `Space` | Checks / unchecks the box       |\n| `Tab`   | Moves focus to the next element |\n\n**Accessible name**: Required: a `Label` tied through `htmlFor` / `id`, or an `aria-label`. Clicking the label toggles the box.\n\n**Pitfalls**:\n\n- `Enter` does not toggle the box (native behavior): do not add it.\n- `aria-invalid` styles the error; the message must be linked through `aria-describedby`.",
@@ -6883,7 +6881,7 @@
         "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
       }
     ],
-    "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)\n\n**Role**: An input with `role=\"combobox\"` linked to a `listbox`; `aria-expanded` on the input, `aria-selected` on the active option.\n\n**Keyboard**:\n\n| Key                     | Action                                 |\n| ----------------------- | -------------------------------------- |\n| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |\n| `Enter`                 | Selects the active option              |\n| `Escape`                | Closes the list                        |\n| Typing                  | Filters the options                    |\n\n**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`). Each chip's remove button names its item — `Remove Apple`, `Remove Cherry` — never a bare `Remove`.\n\n**Pitfalls**:\n\n- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.",
+    "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)\n\n**Role**: An input with `role=\"combobox\"` linked to a `listbox`; `aria-expanded` on the input, `aria-activedescendant` pointing at the highlighted option, `aria-selected` on the chosen one.\n\n**Keyboard**:\n\n| Key                     | Action                                 |\n| ----------------------- | -------------------------------------- |\n| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |\n| `Enter`                 | Selects the active option              |\n| `Escape`                | Closes the list                        |\n| Typing                  | Filters the options                    |\n\n**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`). Each chip's remove button names its item — `Remove Apple`, `Remove Cherry` — never a bare `Remove`.\n\n**Pitfalls**:\n\n- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.",
     "code_example": "import {\n  Combobox,\n  ComboboxInput,\n  ComboboxContent,\n  ComboboxList,\n  ComboboxItem,\n  ComboboxEmpty,\n} from \"@/components/ui/combobox\"\n\nconst fruits = [\n  { value: \"apple\", label: \"Apple\" },\n  { value: \"banana\", label: \"Banana\" },\n  { value: \"cherry\", label: \"Cherry\" },\n]\n\nexport default function Example() {\n  return (\n    <Combobox>\n      <ComboboxInput placeholder=\"Search for a fruit…\" />\n      <ComboboxContent>\n        <ComboboxList>\n          <ComboboxEmpty>No results</ComboboxEmpty>\n          {fruits.map((fruit) => (\n            <ComboboxItem key={fruit.value} value={fruit.value}>\n              {fruit.label}\n            </ComboboxItem>\n          ))}\n        </ComboboxList>\n      </ComboboxContent>\n    </Combobox>\n  )\n}",
     "cross_references": [
       "InputGroup",
@@ -6981,7 +6979,7 @@
       },
       {
         "slot": "`data-slot=\"command-separator\"`",
-        "role": "Visual separator between groups"
+        "role": "Visual separator between groups, `aria-hidden`: a listbox owns only options and groups"
       }
     ],
     "tokens": [
@@ -7019,6 +7017,15 @@
         ],
         "where": [
           "CommandSeparator"
+        ]
+      },
+      {
+        "token": "color.border.focus",
+        "classes": [
+          "ring-ring/50"
+        ],
+        "where": [
+          "CommandInput"
         ]
       },
       {
@@ -7063,6 +7070,15 @@
         "where": [
           "CommandInput",
           "CommandItem"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "CommandInput"
         ]
       },
       {
@@ -7199,7 +7215,7 @@
         "name": "CommandDialog",
         "summary": "Renders `Dialog`.",
         "description": "A `Command` inside a modal, for a command palette opened with a keyboard shortcut; set `title` and `description` to name it.",
-        "example": "<CommandDialog open={open} onOpenChange={setOpen} title=\"Command palette\">\n  <CommandInput placeholder=\"Search actions\" />\n  <CommandList>\n    <CommandEmpty>No results found.</CommandEmpty>\n  </CommandList>\n</CommandDialog>"
+        "example": "<CommandDialog open={open} onOpenChange={setOpen} title=\"Command palette\">\n  <Command>\n    <CommandInput placeholder=\"Search actions\" />\n    <CommandList>\n      <CommandEmpty>No results found.</CommandEmpty>\n    </CommandList>\n  </Command>\n</CommandDialog>"
       },
       {
         "name": "CommandInput",
@@ -8018,7 +8034,7 @@
         "behavior": "Grayed-out item (`opacity-disabled`, `pointer-events-none`)"
       }
     ],
-    "accessibility": "**Pattern**: Context [menu](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix ContextMenu)\n\n**Role**: `role=\"menu\"`, with `menuitem` / `menuitemcheckbox` / `menuitemradio` items.\n\n**Keyboard**:\n\n| Key                                | Action                                              |\n| ---------------------------------- | --------------------------------------------------- |\n| Right-click, `Shift+F10`, Menu key | Opens the menu on the area                          |\n| `ArrowDown` / `ArrowUp`            | Next / previous item                                |\n| `ArrowRight` / `ArrowLeft`         | Opens / closes a submenu                            |\n| `Enter` / `Space`                  | Activates the item                                  |\n| `Escape`                           | Closes the menu                                     |\n| Typing                             | Moves to the item that starts with the typed letter |\n\n**Accessible name**: Each item's text; an icon-only item needs an `aria-label`.\n\n**Pitfalls**:\n\n- A context menu stays invisible until someone looks for it: every action it offers must also exist somewhere else (a button, a visible menu).\n- The trigger area must be focusable so `Shift+F10` can reach it.",
+    "accessibility": "**Pattern**: Context [menu](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix ContextMenu)\n\n**Role**: `role=\"menu\"`, with `menuitem` / `menuitemcheckbox` / `menuitemradio` items.\n\n**Keyboard**:\n\n| Key                        | Action                                                                                                                   |\n| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |\n| Right-click, Menu key      | Opens the menu on the area; `Shift+F10` too where the browser maps it to the context menu (Windows, Linux), not on macOS |\n| `ArrowDown` / `ArrowUp`    | Next / previous item                                                                                                     |\n| `ArrowRight` / `ArrowLeft` | Opens / closes a submenu                                                                                                 |\n| `Enter` / `Space`          | Activates the item                                                                                                       |\n| `Escape`                   | Closes the menu                                                                                                          |\n| Typing                     | Moves to the item that starts with the typed letter                                                                      |\n\n**Accessible name**: Each item's text; an icon-only item needs an `aria-label`.\n\n**Pitfalls**:\n\n- A context menu stays invisible until someone looks for it: every action it offers must also exist somewhere else (a button, a visible menu).\n- The trigger area must be focusable so the Menu key (and `Shift+F10` on Windows and Linux) can reach it.",
     "code_example": "import {\n  ContextMenu,\n  ContextMenuContent,\n  ContextMenuItem,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n  ContextMenuTrigger,\n} from \"@/components/ui/context-menu\"\n\nexport default function Example() {\n  return (\n    <ContextMenu>\n      <ContextMenuTrigger className=\"flex h-36 w-64 items-center justify-center rounded-xs border border-dashed\">\n        Right-click here\n      </ContextMenuTrigger>\n      <ContextMenuContent>\n        <ContextMenuItem>\n          Copy <ContextMenuShortcut>⌘C</ContextMenuShortcut>\n        </ContextMenuItem>\n        <ContextMenuItem>\n          Paste <ContextMenuShortcut>⌘V</ContextMenuShortcut>\n        </ContextMenuItem>\n        <ContextMenuSeparator />\n        <ContextMenuItem variant=\"destructive\">Delete</ContextMenuItem>\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}",
     "cross_references": [
       "DropdownMenu",
@@ -8603,7 +8619,7 @@
       }
     ],
     "accessibility": "**Pattern**: None — a context provider\n\n**Role**: Renders nothing: passes `dir` (`ltr` / `rtl`) to the Radix primitives.\n\n**Keyboard**:\n\nNo interaction; in `rtl`, the primitives reverse the horizontal arrow keys.\n\n**Accessible name**: Not applicable.\n\n**Pitfalls**:\n\n- Set the `dir` (and `lang`) attribute on the document too: the provider only informs Radix components, not screen readers.",
-    "code_example": "import { DirectionProvider } from \"@/components/ui/direction\"\n\nexport default function App({ children }: { children: React.ReactNode }) {\n  return <DirectionProvider direction=\"ltr\">{children}</DirectionProvider>\n}",
+    "code_example": "import { DirectionProvider } from \"@/components/ui/direction\"\n\nexport default function App() {\n  return (\n    <DirectionProvider direction=\"rtl\">\n      <div dir=\"rtl\" lang=\"ar\">\n        {/* The application */}\n        <p>Right-to-left content</p>\n      </div>\n    </DirectionProvider>\n  )\n}",
     "cross_references": [
       "Sidebar",
       "Tooltip"
@@ -11468,7 +11484,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "Input",
           "Input via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -11597,7 +11612,7 @@
       },
       {
         "state": "`error`",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border and a `ring-destructive/20` ring `--space-focus-ring-width` wide (dark: `border-destructive/50`, `ring-destructive/40`)"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border (dark: `border-destructive/50`); on focus, the ring turns `ring-destructive/20` (dark: `ring-destructive/40`)"
       }
     ],
     "accessibility": "**Pattern**: Native `input` field\n\n**Role**: Native `input`; its type (`email`, `tel`…) sets the virtual keyboard and the semantics.\n\n**Keyboard**:\n\nThe field's native behavior.\n\n**Accessible name**: Required: a tied `Label` (`htmlFor` / `id`) or an `aria-label`. A `placeholder` is not a name.\n\n**Pitfalls**:\n\n- Set `autocomplete` for personal data (WCAG 1.3.5).\n- `aria-invalid` styles the error; link the message through `aria-describedby`.",
@@ -12407,7 +12422,7 @@
       }
     ],
     "accessibility": "**Pattern**: A single text input (input-otp) displayed as slots\n\n**Role**: One real `input` takes the typing; the slots are visual; `InputOTPSeparator` carries `role=\"separator\"`.\n\n**Keyboard**:\n\n| Key                        | Action                         |\n| -------------------------- | ------------------------------ |\n| Digits / letters           | Fill in the code slot by slot  |\n| `Backspace`                | Deletes the previous character |\n| `ArrowLeft` / `ArrowRight` | Moves the cursor               |\n| Paste                      | Fills every slot               |\n\n**Accessible name**: Required: a `Label` or an `aria-label` (\"Verification code\") on the input.\n\n**Pitfalls**:\n\n- Set `autoComplete=\"one-time-code\"` so the code can be filled in automatically.\n- Announce the error (an invalid code) with a linked message, not only through the slots' color.",
-    "code_example": "import {\n  InputOTP,\n  InputOTPGroup,\n  InputOTPSlot,\n  InputOTPSeparator,\n} from \"@/components/ui/input-otp\"\n\nexport default function Example() {\n  return (\n    <InputOTP maxLength={6}>\n      <InputOTPGroup>\n        <InputOTPSlot index={0} />\n        <InputOTPSlot index={1} />\n        <InputOTPSlot index={2} />\n      </InputOTPGroup>\n      <InputOTPSeparator />\n      <InputOTPGroup>\n        <InputOTPSlot index={3} />\n        <InputOTPSlot index={4} />\n        <InputOTPSlot index={5} />\n      </InputOTPGroup>\n    </InputOTP>\n  )\n}",
+    "code_example": "import {\n  InputOTP,\n  InputOTPGroup,\n  InputOTPSlot,\n  InputOTPSeparator,\n} from \"@/components/ui/input-otp\"\n\nexport default function Example() {\n  return (\n    <InputOTP maxLength={6} aria-label=\"Verification code\">\n      <InputOTPGroup>\n        <InputOTPSlot index={0} />\n        <InputOTPSlot index={1} />\n        <InputOTPSlot index={2} />\n      </InputOTPGroup>\n      <InputOTPSeparator />\n      <InputOTPGroup>\n        <InputOTPSlot index={3} />\n        <InputOTPSlot index={4} />\n        <InputOTPSlot index={5} />\n      </InputOTPGroup>\n    </InputOTP>\n  )\n}",
     "cross_references": [
       "Input",
       "Field"
@@ -15362,7 +15377,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "NativeSelect",
           "NativeSelect via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -15545,11 +15559,11 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
       }
     ],
     "accessibility": "**Pattern**: Native `select` element\n\n**Role**: Native `select`; the caret icon is hidden (`aria-hidden`).\n\n**Keyboard**:\n\nThe native `select` behavior (arrows, typing, `Space` / `Enter` depending on the platform).\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`.\n\n**Pitfalls**:\n\n- The system picker is the most accessible one on mobile: that is why `rule-20` picks `NativeSelect` below `md`, **unless** the options need rich rendering (icons, descriptions) that an `<option>` cannot show.",
-    "code_example": "import { NativeSelect, NativeSelectOption } from \"@/components/ui/native-select\"\n\nexport default function Example() {\n  return (\n    <NativeSelect size=\"default\">\n      <NativeSelectOption value=\"\">Choose a city…</NativeSelectOption>\n      <NativeSelectOption value=\"boston\">Boston</NativeSelectOption>\n      <NativeSelectOption value=\"chicago\">Chicago</NativeSelectOption>\n      <NativeSelectOption value=\"seattle\">Seattle</NativeSelectOption>\n    </NativeSelect>\n  )\n}",
+    "code_example": "import { NativeSelect, NativeSelectOption } from \"@/components/ui/native-select\"\nimport { Label } from \"@/components/ui/label\"\n\nexport default function Example() {\n  return (\n    <>\n      <Label htmlFor=\"city\">City</Label>\n      <NativeSelect id=\"city\" size=\"default\">\n        <NativeSelectOption value=\"\">Choose a city…</NativeSelectOption>\n        <NativeSelectOption value=\"boston\">Boston</NativeSelectOption>\n        <NativeSelectOption value=\"chicago\">Chicago</NativeSelectOption>\n        <NativeSelectOption value=\"seattle\">Seattle</NativeSelectOption>\n      </NativeSelect>\n    </>\n  )\n}",
     "cross_references": [
       "Select",
       "Combobox",
@@ -16890,7 +16904,7 @@
         "behavior": "N/A — handled at the parent trigger"
       }
     ],
-    "accessibility": "**Pattern**: [Dialog (non-modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Popover)\n\n**Role**: The content carries `role=\"dialog\"`; the trigger carries `aria-haspopup=\"dialog\"` and `aria-expanded`.\n\n**Keyboard**:\n\n| Key               | Action                                           |\n| ----------------- | ------------------------------------------------ |\n| `Enter` / `Space` | Opens the popover                                |\n| `Tab`             | Moves through the content (focus is not trapped) |\n| `Escape`          | Closes it and returns focus to the trigger       |\n\n**Accessible name**: The trigger must be named; give the content a title or an `aria-label` when its purpose is not obvious.\n\n**Pitfalls**:\n\n- Non-modal: the rest of the page stays reachable. For a blocking decision, use `Dialog`.",
+    "accessibility": "**Pattern**: [Dialog (non-modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (Radix Popover)\n\n**Role**: The content carries `role=\"dialog\"`; the trigger carries `aria-haspopup=\"dialog\"` and `aria-expanded`.\n\n**Keyboard**:\n\n| Key               | Action                                                                                                    |\n| ----------------- | --------------------------------------------------------------------------------------------------------- |\n| `Enter` / `Space` | Opens the popover                                                                                         |\n| `Tab`             | Moves through the content, from the last element back to the first; `Escape` or a click outside leaves it |\n| `Escape`          | Closes it and returns focus to the trigger                                                                |\n\n**Accessible name**: The trigger must be named; give the content a title or an `aria-label` when its purpose is not obvious.\n\n**Pitfalls**:\n\n- Non-modal: the rest of the page stays reachable. For a blocking decision, use `Dialog`.",
     "code_example": "import {\n  Popover,\n  PopoverContent,\n  PopoverDescription,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Example() {\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <Button variant=\"outline\">Settings</Button>\n      </PopoverTrigger>\n      <PopoverContent>\n        <PopoverHeader>\n          <PopoverTitle>Dimensions</PopoverTitle>\n          <PopoverDescription>\n            Set the dimensions of the component.\n          </PopoverDescription>\n        </PopoverHeader>\n        {/* Interactive content (inputs, sliders…) */}\n      </PopoverContent>\n    </Popover>\n  )\n}",
     "cross_references": [
       "HoverCard",
@@ -17279,7 +17293,6 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput",
           "QuestionnaireInput via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -17796,7 +17809,7 @@
         "behavior": "`data-disabled` on a choice, `disabled` on the input: `opacity-disabled`, not clickable"
       }
     ],
-    "accessibility": "**Pattern**: A form of `fieldset`s with native radio buttons or checkboxes, and a [progress bar](https://www.w3.org/TR/wai-aria-1.2/#progressbar)\n\n**Role**: `Questionnaire` is a `form`; each `QuestionnaireItem` is a `fieldset` named by its `legend` (`QuestionnaireTitle`); each choice is a native `radio` or `checkbox` labeled by its text. `QuestionnaireProgress` is a `progressbar` with `aria-valuetext` \"Question 2 of 5\".\n\n**Keyboard**:\n\n| Key                    | Action                                                      |\n| ---------------------- | ----------------------------------------------------------- |\n| `ArrowUp`/`ArrowDown`  | Moves between the choices of the current question           |\n| `Space`                | Checks the focused choice                                   |\n| `Enter`                | On a choice: checks it and goes to the next question        |\n| `ArrowLeft`            | Goes back to the previous question                          |\n| `ArrowRight`           | Goes to the next question, once the current one is answered |\n| `A`…`Z` / `1`…`9`      | With `shortcuts`: checks the choice labeled with that key   |\n| `Ctrl+Enter`/`⌘+Enter` | Goes on, or submits on the last question                    |\n\n**Accessible name**: The progress bar is named by `UI_STRINGS.questionnaire.progress`; pass `aria-label` to name it otherwise. The navigation buttons read `UI_STRINGS.questionnaire.previous`, `skip`, `next` and `submit`; `children` replace them.\n\n**Pitfalls**:\n\n- The value text of the progress bar, \"Question 2 of 5\", is written in English by `@shadcn/react`; pass `children` to `QuestionnaireProgress` for another language, and the `aria-valuetext` stays English.\n- A choice's shortcut key is announced through `aria-keyshortcuts`; a letter shortcut clashes with typing in a `QuestionnaireInput` of the same question, which `@shadcn/react` ignores keys from.",
+    "accessibility": "**Pattern**: A form of `fieldset`s with native radio buttons or checkboxes, and a [progress bar](https://www.w3.org/TR/wai-aria-1.2/#progressbar)\n\n**Role**: `Questionnaire` is a `form`; each `QuestionnaireItem` is a `fieldset` named by its `legend` (`QuestionnaireTitle`); each choice is a native `radio` or `checkbox` labeled by its text. `QuestionnaireProgress` is a `progressbar` with `aria-valuetext` \"Question 2 of 5\".\n\n**Keyboard**:\n\n| Key                    | Action                                                             |\n| ---------------------- | ------------------------------------------------------------------ |\n| `ArrowUp`/`ArrowDown`  | Moves between the choices of the current question                  |\n| `Space`                | Checks the focused choice                                          |\n| `Enter`                | On a checked choice: goes to the next question (`Space` checks it) |\n| `ArrowLeft`            | Goes back to the previous question                                 |\n| `ArrowRight`           | Goes to the next question, once the current one is answered        |\n| `A`…`Z` / `1`…`9`      | With `shortcuts`: checks the choice labeled with that key          |\n| `Ctrl+Enter`/`⌘+Enter` | Goes on, or submits on the last question                           |\n\n**Accessible name**: The progress bar is named by `UI_STRINGS.questionnaire.progress`; pass `aria-label` to name it otherwise. The navigation buttons read `UI_STRINGS.questionnaire.previous`, `skip`, `next` and `submit`; `children` replace them.\n\n**Pitfalls**:\n\n- The value text of the progress bar, \"Question 2 of 5\", is written in English by `@shadcn/react`; pass `children` to `QuestionnaireProgress` for another language, and the `aria-valuetext` stays English.\n- A choice's shortcut key is announced through `aria-keyshortcuts`; a letter shortcut clashes with typing in a `QuestionnaireInput` of the same question, which `@shadcn/react` ignores keys from.",
     "code_example": "import {\n  Questionnaire,\n  QuestionnaireActions,\n  QuestionnaireChoice,\n  QuestionnaireChoices,\n  QuestionnaireItem,\n  QuestionnaireNext,\n  QuestionnairePrevious,\n  QuestionnaireProgress,\n  QuestionnaireSubmit,\n  QuestionnaireTitle,\n} from \"@/components/ui/questionnaire\"\n\nexport default function Example() {\n  return (\n    <Questionnaire\n      shortcuts=\"letters\"\n      onSubmit={(event) => {\n        event.preventDefault()\n        const answers = new FormData(event.currentTarget)\n        console.log(Object.fromEntries(answers))\n      }}\n    >\n      <QuestionnaireProgress />\n      <QuestionnaireItem name=\"audience\" required>\n        <QuestionnaireTitle>Who is the report for?</QuestionnaireTitle>\n        <QuestionnaireChoices>\n          <QuestionnaireChoice value=\"team\">My team</QuestionnaireChoice>\n          <QuestionnaireChoice value=\"board\">The board</QuestionnaireChoice>\n        </QuestionnaireChoices>\n      </QuestionnaireItem>\n      <QuestionnaireItem name=\"length\" required>\n        <QuestionnaireTitle>How long should it be?</QuestionnaireTitle>\n        <QuestionnaireChoices>\n          <QuestionnaireChoice value=\"page\">One page</QuestionnaireChoice>\n          <QuestionnaireChoice value=\"full\">Full report</QuestionnaireChoice>\n        </QuestionnaireChoices>\n      </QuestionnaireItem>\n      <QuestionnaireActions>\n        <QuestionnairePrevious />\n        <QuestionnaireNext />\n        <QuestionnaireSubmit />\n      </QuestionnaireActions>\n    </Questionnaire>\n  )\n}",
     "cross_references": [
       "Field",
@@ -17924,7 +17937,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "RadioGroupItem",
           "RadioGroupItem via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -18062,7 +18074,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring (3px) through `aria-invalid`"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
       }
     ],
     "accessibility": "**Pattern**: [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) (Radix RadioGroup)\n\n**Role**: `role=\"radiogroup\"`; each option is a `role=\"radio\"` with `aria-checked`.\n\n**Keyboard**:\n\n| Key                        | Action                                     |\n| -------------------------- | ------------------------------------------ |\n| `Tab`                      | Enters the group on the checked option     |\n| `ArrowDown` / `ArrowRight` | Moves to the next option and checks it     |\n| `ArrowUp` / `ArrowLeft`    | Moves to the previous option and checks it |\n| `Space`                    | Checks the focused option                  |\n\n**Accessible name**: Each option has a tied `Label`; the group is named by a legend (`FieldLegend`) or an `aria-label`.\n\n**Pitfalls**:\n\n- The whole group is a single tab stop: `Tab` skipping the other options is expected behavior.",
@@ -18200,19 +18212,19 @@
         "name": "ResizableHandle",
         "summary": "Renders `ResizablePrimitive.Separator`.",
         "description": "The draggable divider between two `ResizablePanel`s, reachable by keyboard; set `withHandle` to show a grip.",
-        "example": "<ResizablePanelGroup orientation=\"horizontal\">\n  <ResizablePanel minSize={20}>Navigation</ResizablePanel>\n  <ResizableHandle withHandle />\n  <ResizablePanel minSize={20}>Content</ResizablePanel>\n</ResizablePanelGroup>"
+        "example": "<ResizablePanelGroup orientation=\"horizontal\">\n  <ResizablePanel minSize=\"20%\">Navigation</ResizablePanel>\n  <ResizableHandle withHandle />\n  <ResizablePanel minSize=\"20%\">Content</ResizablePanel>\n</ResizablePanelGroup>"
       },
       {
         "name": "ResizablePanel",
         "summary": "Renders `ResizablePrimitive.Panel`.",
         "description": "One section of a `ResizablePanelGroup` that the user grows or shrinks; give it a `minSize` so its content is never crushed.",
-        "example": "<ResizablePanel defaultSize={25} minSize={15}>\n  Sidebar\n</ResizablePanel>"
+        "example": "<ResizablePanel defaultSize=\"25%\" minSize=\"15%\">\n  Sidebar\n</ResizablePanel>"
       },
       {
         "name": "ResizablePanelGroup",
         "summary": "Renders `ResizablePrimitive.Group`.",
         "description": "The container that lays out `ResizablePanel`s in a row or a column; set `orientation` to choose the direction.",
-        "example": "<ResizablePanelGroup orientation=\"horizontal\">\n  <ResizablePanel defaultSize={30} minSize={20}>Files</ResizablePanel>\n  <ResizableHandle />\n  <ResizablePanel minSize={30}>Editor</ResizablePanel>\n</ResizablePanelGroup>"
+        "example": "<ResizablePanelGroup orientation=\"horizontal\">\n  <ResizablePanel defaultSize=\"30%\" minSize=\"20%\">Files</ResizablePanel>\n  <ResizableHandle />\n  <ResizablePanel minSize=\"30%\">Editor</ResizablePanel>\n</ResizablePanelGroup>"
       }
     ],
     "props": [
@@ -18242,21 +18254,21 @@
         "prop": "`defaultSize`",
         "type": "`string | number`",
         "default": "—",
-        "description": "Initial size, as a percentage"
+        "description": "Initial size: a number is in pixels, a string without a unit in percent (`\"50%\"`)"
       },
       {
         "component": "ResizablePanel",
         "prop": "`minSize`",
         "type": "`string | number`",
         "default": "—",
-        "description": "Minimum size, as a percentage"
+        "description": "Minimum size, same units as `defaultSize`"
       },
       {
         "component": "ResizablePanel",
         "prop": "`maxSize`",
         "type": "`string | number`",
         "default": "—",
-        "description": "Maximum size, as a percentage"
+        "description": "Maximum size, same units as `defaultSize`"
       },
       {
         "component": "ResizablePanel",
@@ -18310,7 +18322,7 @@
       }
     ],
     "accessibility": "**Pattern**: [Window Splitter](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/) (react-resizable-panels)\n\n**Role**: Each handle carries `role=\"separator\"`, is focusable and exposes its current value.\n\n**Keyboard**:\n\n| Key                                                     | Action                              |\n| ------------------------------------------------------- | ----------------------------------- |\n| `ArrowLeft` / `ArrowRight` (or `ArrowUp` / `ArrowDown`) | Resizes along the orientation       |\n| `Home` / `End`                                          | Minimum / maximum size of the panel |\n\n**Accessible name**: Give the handles an `aria-label` when there are several (\"Sidebar width\").\n\n**Pitfalls**:\n\n- Resizing must not be required to read the content: every panel must stay usable at its default size.",
-    "code_example": "import {\n  ResizableHandle,\n  ResizablePanel,\n  ResizablePanelGroup,\n} from \"@/components/ui/resizable\"\n\nexport default function Example() {\n  return (\n    <ResizablePanelGroup orientation=\"horizontal\" className=\"min-h-52\">\n      <ResizablePanel defaultSize={50} minSize={20}>\n        <div className=\"p-4\">Left panel</div>\n      </ResizablePanel>\n      <ResizableHandle withHandle />\n      <ResizablePanel defaultSize={50} minSize={20}>\n        <div className=\"p-4\">Right panel</div>\n      </ResizablePanel>\n    </ResizablePanelGroup>\n  )\n}",
+    "code_example": "import {\n  ResizableHandle,\n  ResizablePanel,\n  ResizablePanelGroup,\n} from \"@/components/ui/resizable\"\n\nexport default function Example() {\n  return (\n    <ResizablePanelGroup orientation=\"horizontal\" className=\"min-h-52\">\n      <ResizablePanel defaultSize=\"50%\" minSize=\"20%\">\n        <div className=\"p-4\">Left panel</div>\n      </ResizablePanel>\n      <ResizableHandle withHandle />\n      <ResizablePanel defaultSize=\"50%\" minSize=\"20%\">\n        <div className=\"p-4\">Right panel</div>\n      </ResizablePanel>\n    </ResizablePanelGroup>\n  )\n}",
     "cross_references": [
       "Sidebar",
       "Separator",
@@ -18492,8 +18504,8 @@
         "behavior": "— (not applicable directly)"
       }
     ],
-    "accessibility": "**Pattern**: Scrolling region (Radix ScrollArea)\n\n**Role**: A natively scrolling `viewport`; the custom scrollbars are decorative.\n\n**Keyboard**:\n\nNative scrolling with the wheel, touch, and the keyboard when a focusable element is inside.\n\n**Accessible name**: When the area holds nothing focusable, give it `tabIndex={0}`, `role=\"region\"` and an `aria-label`.\n\n**Pitfalls**:\n\n- A scrolling area with no focusable element cannot be reached from the keyboard (WCAG 2.1.1) — see above.\n- Never nest scrolling areas on the same axis.\n- The `ScrollBar` is 10px wide, below the 24px of WCAG 2.2 SC 2.5.8 (Target Size), and no exception covers it: a known gap, listed in `specs/foundations/size.md`. Wheel, touch and keyboard scroll the same area.",
-    "code_example": "import { ScrollArea, ScrollBar } from \"@/components/ui/scroll-area\"\n\nexport default function Example() {\n  return (\n    <ScrollArea className=\"h-72 w-48 rounded-none border\">\n      <div className=\"p-4\">\n        {Array.from({ length: 50 }, (_, i) => (\n          <p key={i} className=\"text-sm\">\n            Item {i + 1}\n          </p>\n        ))}\n      </div>\n      <ScrollBar orientation=\"vertical\" />\n    </ScrollArea>\n  )\n}",
+    "accessibility": "**Pattern**: Scrolling region (Radix ScrollArea)\n\n**Role**: A natively scrolling `viewport`; the custom scrollbars are decorative.\n\n**Keyboard**:\n\nThe viewport is in the tab order (`tabIndex={0}`, with the focus ring): once it has focus, the arrow keys, `PageUp` / `PageDown`, `Home` / `End` and `Space` scroll it natively. Wheel and touch scroll it too.\n\n**Accessible name**: Name the area: `role=\"region\"` and an `aria-label` on `ScrollArea`, so the region the keyboard lands in is announced.\n\n**Pitfalls**:\n\n- The viewport is a tab stop even when its content holds links or buttons: Safari puts no scrolling area in the tab order by itself, so the component always does (WCAG 2.1.1).\n- Never nest scrolling areas on the same axis.\n- The `ScrollBar` is 10px wide, below the 24px of WCAG 2.2 SC 2.5.8 (Target Size), and no exception covers it: a known gap, listed in `specs/foundations/size.md`. Wheel, touch and keyboard scroll the same area.",
+    "code_example": "import { ScrollArea, ScrollBar } from \"@/components/ui/scroll-area\"\n\nexport default function Example() {\n  return (\n    <ScrollArea\n      role=\"region\"\n      aria-label=\"Tags\"\n      className=\"h-72 w-48 rounded-none border\"\n    >\n      <div className=\"p-4\">\n        {Array.from({ length: 50 }, (_, i) => (\n          <p key={i} className=\"text-sm\">\n            Item {i + 1}\n          </p>\n        ))}\n      </div>\n      <ScrollBar orientation=\"vertical\" />\n    </ScrollArea>\n  )\n}",
     "cross_references": [
       "ResizablePanel",
       "Sidebar",
@@ -18699,7 +18711,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "SelectTrigger",
           "SelectTrigger via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -19060,11 +19071,11 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
       }
     ],
     "accessibility": "**Pattern**: [Select-Only Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) (Radix Select)\n\n**Role**: A trigger with `role=\"combobox\"` and `aria-expanded`; a `listbox` of `option`s.\n\n**Keyboard**:\n\n| Key                                         | Action                                                |\n| ------------------------------------------- | ----------------------------------------------------- |\n| `Enter` / `Space` / `ArrowDown` / `ArrowUp` | Opens the list                                        |\n| `ArrowDown` / `ArrowUp`                     | Next / previous option                                |\n| `Home` / `End`                              | First / last option                                   |\n| `Enter` / `Space`                           | Selects the option                                    |\n| `Escape`                                    | Closes without changing anything                      |\n| Typing                                      | Moves to the option that starts with the typed letter |\n\n**Accessible name**: Required: a `Label` tied to the trigger, or an `aria-label`.\n\n**Pitfalls**:\n\n- For a long list or on mobile, `NativeSelect` is more accessible.\n- The displayed value (`SelectValue`) must stay readable when no option is chosen (a placeholder).",
-    "code_example": "import {\n  Select,\n  SelectTrigger,\n  SelectValue,\n  SelectContent,\n  SelectGroup,\n  SelectLabel,\n  SelectItem,\n} from \"@/components/ui/select\"\n\nexport default function Example() {\n  return (\n    <Select>\n      <SelectTrigger>\n        <SelectValue placeholder=\"Choose a fruit\" />\n      </SelectTrigger>\n      <SelectContent>\n        <SelectGroup>\n          <SelectLabel>Fruits</SelectLabel>\n          <SelectItem value=\"apple\">Apple</SelectItem>\n          <SelectItem value=\"banana\">Banana</SelectItem>\n          <SelectItem value=\"cherry\">Cherry</SelectItem>\n        </SelectGroup>\n      </SelectContent>\n    </Select>\n  )\n}",
+    "code_example": "import {\n  Select,\n  SelectTrigger,\n  SelectValue,\n  SelectContent,\n  SelectGroup,\n  SelectLabel,\n  SelectItem,\n} from \"@/components/ui/select\"\nimport { Label } from \"@/components/ui/label\"\n\nexport default function Example() {\n  return (\n    <>\n      <Label htmlFor=\"fruit\">Fruit</Label>\n      <Select>\n        <SelectTrigger id=\"fruit\">\n          <SelectValue placeholder=\"Choose a fruit\" />\n        </SelectTrigger>\n        <SelectContent>\n          <SelectGroup>\n            <SelectLabel>Fruits</SelectLabel>\n            <SelectItem value=\"apple\">Apple</SelectItem>\n            <SelectItem value=\"banana\">Banana</SelectItem>\n            <SelectItem value=\"cherry\">Cherry</SelectItem>\n          </SelectGroup>\n        </SelectContent>\n      </Select>\n    </>\n  )\n}",
     "cross_references": [
       "NativeSelect",
       "Combobox",
@@ -21314,7 +21325,7 @@
       }
     ],
     "accessibility": "**Pattern**: Notifications (sonner)\n\n**Role**: A `section` region named \"Notifications\"; a list of toasts in `aria-live=\"polite\"`.\n\n**Keyboard**:\n\n| Key     | Action                                |\n| ------- | ------------------------------------- |\n| `Alt+T` | Moves focus to the notifications area |\n| `Tab`   | Moves through the toasts' actions     |\n\n**Accessible name**: The toast text is announced politely, without interrupting.\n\n**Pitfalls**:\n\n- A toast disappears on its own: never make it the only way to perform an action (undo must exist elsewhere), and leave it on screen long enough.\n- For a blocking error, use an `Alert` or a form message, not a toast.",
-    "code_example": "import { Button } from \"@/components/ui/button\"\nimport { Toaster } from \"@/components/ui/sonner\"\nimport { toast } from \"sonner\"\n\n// In the root layout\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html>\n      <body>\n        {children}\n        <Toaster />\n      </body>\n    </html>\n  )\n}\n\n// Triggering a toast\nfunction SaveButton() {\n  return (\n    <Button onClick={() => toast.success(\"All set! Your changes are saved.\")}>\n      Save changes\n    </Button>\n  )\n}",
+    "code_example": "import { Button } from \"@/components/ui/button\"\nimport { Toaster } from \"@/components/ui/sonner\"\nimport { toast } from \"sonner\"\n\nexport default function Example() {\n  return (\n    <>\n      <Button onClick={() => toast.success(\"All set! Your changes are saved.\")}>\n        Save changes\n      </Button>\n      {/* Mount the Toaster once, in the root layout, next to {children} */}\n      <Toaster />\n    </>\n  )\n}",
     "cross_references": [
       "AlertDialog",
       "Tooltip"
@@ -21563,7 +21574,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "Switch",
           "Switch via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -21728,7 +21738,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
       }
     ],
     "accessibility": "**Pattern**: [Switch](https://www.w3.org/WAI/ARIA/apg/patterns/switch/) (Radix Switch)\n\n**Role**: `role=\"switch\"` on a `button`, with `aria-checked`.\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Space` / `Enter` | Toggles the state               |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`. The label names the setting, not its state (\"Notifications\", not \"On\").\n\n**Pitfalls**:\n\n- A switch acts immediately; when the setting only applies once a form is submitted, use a `Checkbox`.",
@@ -22607,7 +22617,6 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "Textarea",
           "Textarea via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -22726,7 +22735,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
       }
     ],
     "accessibility": "**Pattern**: Native `textarea` field\n\n**Role**: Native `textarea`.\n\n**Keyboard**:\n\nNative behavior; `Tab` leaves the field (it does not insert a tab character).\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`.\n\n**Pitfalls**:\n\n- Announce a character limit before it is reached, with a counter linked through `aria-describedby`.",
@@ -23294,8 +23303,8 @@
         "behavior": "Items stacked vertically"
       }
     ],
-    "accessibility": "**Pattern**: [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) (`type=\"single\"`) or a group of toggle buttons (`type=\"multiple\"`) — Radix ToggleGroup\n\n**Role**: `role=\"group\"`; in `single` mode, each item carries `role=\"radio\"` and `aria-checked`; in `multiple` mode, `aria-pressed`.\n\n**Keyboard**:\n\n| Key                                                     | Action                               |\n| ------------------------------------------------------- | ------------------------------------ |\n| `Tab`                                                   | Enters the group (a single tab stop) |\n| `ArrowRight` / `ArrowLeft` (or `ArrowDown` / `ArrowUp`) | Next / previous item                 |\n| `Home` / `End`                                          | First / last item                    |\n| `Enter` / `Space`                                       | Turns the item on or off             |\n\n**Accessible name**: Name the group (`aria-label`: \"Text alignment\"); every icon-only item needs an `aria-label`.\n\n**Pitfalls**:\n\n- For an exclusive choice presented as buttons, `type=\"single\"` gives the expected radio semantics.",
-    "code_example": "import { ToggleGroup, ToggleGroupItem } from \"@/components/ui/toggle-group\"\nimport { ListIcon, GridIcon, TableIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <ToggleGroup\n      type=\"single\"\n      defaultValue=\"list\"\n      variant=\"outline\"\n      size=\"default\"\n      aria-label=\"View\"\n    >\n      <ToggleGroupItem value=\"list\" aria-label=\"List view\">\n        <ListIcon />\n      </ToggleGroupItem>\n      <ToggleGroupItem value=\"grid\" aria-label=\"Grid view\">\n        <GridIcon />\n      </ToggleGroupItem>\n      <ToggleGroupItem value=\"table\" aria-label=\"Table view\">\n        <TableIcon />\n      </ToggleGroupItem>\n    </ToggleGroup>\n  )\n}",
+    "accessibility": "**Pattern**: [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) (`type=\"single\"`) or a group of toggle buttons (`type=\"multiple\"`) — Radix ToggleGroup\n\n**Role**: in `single` mode, `role=\"radiogroup\"`, each item `role=\"radio\"` with `aria-checked`; in `multiple` mode, `role=\"toolbar\"`, each item a button with `aria-pressed` (Radix ToggleGroup).\n\n**Keyboard**:\n\n| Key                                                     | Action                               |\n| ------------------------------------------------------- | ------------------------------------ |\n| `Tab`                                                   | Enters the group (a single tab stop) |\n| `ArrowRight` / `ArrowLeft` (or `ArrowDown` / `ArrowUp`) | Next / previous item                 |\n| `Home` / `End`                                          | First / last item                    |\n| `Enter` / `Space`                                       | Turns the item on or off             |\n\n**Accessible name**: Name the group (`aria-label`: \"Text alignment\"); every icon-only item needs an `aria-label`.\n\n**Pitfalls**:\n\n- For an exclusive choice presented as buttons, `type=\"single\"` gives the expected radio semantics.",
+    "code_example": "import { ToggleGroup, ToggleGroupItem } from \"@/components/ui/toggle-group\"\nimport { ListIcon, GridFourIcon, TableIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <ToggleGroup\n      type=\"single\"\n      defaultValue=\"list\"\n      variant=\"outline\"\n      size=\"default\"\n      aria-label=\"View\"\n    >\n      <ToggleGroupItem value=\"list\" aria-label=\"List view\">\n        <ListIcon />\n      </ToggleGroupItem>\n      <ToggleGroupItem value=\"grid\" aria-label=\"Grid view\">\n        <GridFourIcon />\n      </ToggleGroupItem>\n      <ToggleGroupItem value=\"table\" aria-label=\"Table view\">\n        <TableIcon />\n      </ToggleGroupItem>\n    </ToggleGroup>\n  )\n}",
     "cross_references": [
       "Toggle",
       "ButtonGroup",

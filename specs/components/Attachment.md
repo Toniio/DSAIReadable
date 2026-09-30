@@ -219,11 +219,11 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 **Keyboard**:
 
-| Key             | Action                                              |
-| --------------- | --------------------------------------------------- |
-| `Tab`           | Moves to each action, then to the trigger           |
-| `Enter`/`Space` | Opens the file (trigger) or runs the action         |
-| `Shift+Arrow`   | Scrolls an `AttachmentGroup` horizontally, natively |
+| Key                        | Action                                              |
+| -------------------------- | --------------------------------------------------- |
+| `Tab`                      | Moves to each action, then to the trigger           |
+| `Enter`/`Space`            | Opens the file (trigger) or runs the action         |
+| `ArrowLeft` / `ArrowRight` | Scrolls an `AttachmentGroup` horizontally, natively |
 
 **Accessible name**: The trigger is stretched over the tile and holds no text: name it with `aria-label` (the file name, "Open report.pdf"). Each action is named by its `aria-label`.
 

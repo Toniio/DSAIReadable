@@ -121,7 +121,7 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 **Pattern**: [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) (`type="single"`) or a group of toggle buttons (`type="multiple"`) — Radix ToggleGroup
 
-**Role**: `role="group"`; in `single` mode, each item carries `role="radio"` and `aria-checked`; in `multiple` mode, `aria-pressed`.
+**Role**: in `single` mode, `role="radiogroup"`, each item `role="radio"` with `aria-checked`; in `multiple` mode, `role="toolbar"`, each item a button with `aria-pressed` (Radix ToggleGroup).
 
 **Keyboard**:
 
@@ -142,7 +142,7 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 ```tsx
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { ListIcon, GridIcon, TableIcon } from "@phosphor-icons/react"
+import { ListIcon, GridFourIcon, TableIcon } from "@phosphor-icons/react"
 
 export default function Example() {
   return (
@@ -157,7 +157,7 @@ export default function Example() {
         <ListIcon />
       </ToggleGroupItem>
       <ToggleGroupItem value="grid" aria-label="Grid view">
-        <GridIcon />
+        <GridFourIcon />
       </ToggleGroupItem>
       <ToggleGroupItem value="table" aria-label="Table view">
         <TableIcon />

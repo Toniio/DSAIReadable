@@ -133,6 +133,20 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
       - run: npm ci
+      # Every component rendered from its spec, every documented key tested.
+      - run: npm run test:lint-coverage
+      # The tests run in headless Chromium: cached by Playwright version.
+      - id: playwright
+        run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v6
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+      - if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps --only-shell chromium
+      - if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - run: npm run test:components
 
   registry:

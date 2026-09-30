@@ -109,8 +109,15 @@ No interaction; in `rtl`, the primitives reverse the horizontal arrow keys.
 ```tsx
 import { DirectionProvider } from "@/components/ui/direction"
 
-export default function App({ children }: { children: React.ReactNode }) {
-  return <DirectionProvider direction="ltr">{children}</DirectionProvider>
+export default function App() {
+  return (
+    <DirectionProvider direction="rtl">
+      <div dir="rtl" lang="ar">
+        {/* The application */}
+        <p>Right-to-left content</p>
+      </div>
+    </DirectionProvider>
+  )
 }
 ```
 

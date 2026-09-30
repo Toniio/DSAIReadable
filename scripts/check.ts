@@ -75,6 +75,7 @@ const STEPS: [string, () => Result][] = [
   ["context freshness", contextFreshness],
   ["plugin:test", () => run("npm run -s plugin:test")],
   ["mcp:test", () => run("npm run -s mcp:test")],
+  ["test:lint-coverage", () => run("npm run -s test:lint-coverage")],
   ["test:components", () => run("npm run -s test:components")],
 ]
 

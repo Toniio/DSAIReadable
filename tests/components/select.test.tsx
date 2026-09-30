@@ -41,6 +41,11 @@ function trigger() {
   return screen.getByRole("combobox", { name: "Fruit" })
 }
 
+// Radix Select moves DOM focus onto the highlighted option.
+function active() {
+  return document.activeElement?.textContent
+}
+
 // Radix Select is modal: while the list is open, everything outside it is
 // aria-hidden, the trigger included. Tests take the trigger before opening.
 async function openWithKeyboard(props: Parameters<typeof Example>[0] = {}) {
@@ -53,7 +58,7 @@ async function openWithKeyboard(props: Parameters<typeof Example>[0] = {}) {
 }
 
 describe("Select", () => {
-  it("exposes a collapsed combobox named by its label, showing the placeholder", () => {
+  it("accessible name: a combobox named by its Label, collapsed, showing the placeholder", () => {
     render(<Example />)
     expect(trigger().getAttribute("aria-expanded")).toBe("false")
     expect(trigger().textContent).toBe("Pick a fruit")
@@ -69,7 +74,7 @@ describe("Select", () => {
     expect(trigger().dataset.size).toBe("sm")
   })
 
-  it("opens a listbox of options from the keyboard", async () => {
+  it("role: a combobox trigger with aria-expanded, controlling a listbox of options", async () => {
     const { button } = await openWithKeyboard()
     expect(button.getAttribute("aria-expanded")).toBe("true")
     const listbox = screen.getByRole("listbox")
@@ -79,22 +84,72 @@ describe("Select", () => {
     ).toEqual(["Apple", "Banana", "Cherry"])
   })
 
-  it("selects an option with the arrow keys and Enter", async () => {
+  it("Enter / Space / ArrowDown / ArrowUp: opens the list", async () => {
+    const user = userEvent.setup()
+    render(<Example />)
+    const button = trigger()
+    for (const key of ["{Enter}", " ", "{ArrowDown}", "{ArrowUp}"]) {
+      button.focus()
+      await user.keyboard(key)
+      expect(screen.getByRole("listbox")).toBeTruthy()
+      expect(button.getAttribute("aria-expanded")).toBe("true")
+      await user.keyboard("{Escape}")
+      expect(screen.queryByRole("listbox")).toBeNull()
+    }
+  })
+
+  it("ArrowDown / ArrowUp: next / previous option", async () => {
+    const { user } = await openWithKeyboard()
+    expect(active()).toBe("Apple")
+    await user.keyboard("{ArrowDown}")
+    expect(active()).toBe("Banana")
+    await user.keyboard("{ArrowDown}")
+    expect(active()).toBe("Cherry")
+    await user.keyboard("{ArrowUp}")
+    expect(active()).toBe("Banana")
+  })
+
+  it("Home / End: first / last option", async () => {
+    const { user } = await openWithKeyboard()
+    await user.keyboard("{End}")
+    expect(active()).toBe("Cherry")
+    await user.keyboard("{Home}")
+    expect(active()).toBe("Apple")
+  })
+
+  it("Enter / Space: selects the option", async () => {
     const onValueChange = vi.fn()
-    const { user } = await openWithKeyboard({ onValueChange })
+    const { user, button } = await openWithKeyboard({ onValueChange })
     await user.keyboard("{ArrowDown}{Enter}")
 
     expect(onValueChange).toHaveBeenCalledWith("banana")
     expect(screen.queryByRole("listbox")).toBeNull()
     expect(trigger().textContent).toBe("Banana")
     expect(document.activeElement).toBe(trigger())
+
+    await user.keyboard("{Enter}")
+    expect(active()).toBe("Banana")
+    await user.keyboard("{ArrowDown}")
+    await user.keyboard(" ")
+    expect(onValueChange).toHaveBeenLastCalledWith("cherry")
+    expect(screen.queryByRole("listbox")).toBeNull()
+    expect(button.textContent).toBe("Cherry")
   })
 
-  it("closes with Escape without changing the value", async () => {
-    const { user } = await openWithKeyboard()
+  it("Escape: closes without changing anything", async () => {
+    const onValueChange = vi.fn()
+    const { user } = await openWithKeyboard({ onValueChange })
     await user.keyboard("{ArrowDown}{Escape}")
     expect(screen.queryByRole("listbox")).toBeNull()
     expect(trigger().textContent).toBe("Pick a fruit")
+    expect(onValueChange).not.toHaveBeenCalled()
+    expect(document.activeElement).toBe(trigger())
+  })
+
+  it("Typing: moves to the option that starts with the typed letter", async () => {
+    const { user } = await openWithKeyboard()
+    await user.keyboard("c")
+    expect(active()).toBe("Cherry")
   })
 
   it("has no axe violations, closed and open", async () => {

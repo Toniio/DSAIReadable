@@ -94,8 +94,13 @@ npm run generate-context  # regenerates the MCP cache — must produce zero diff
 npm run mcp:test-package  # packs the MCP server and runs the tarball through npx from an empty folder (network)
 npm run plugin:test       # the ESLint plugin's rules, each against a failing and a conforming fixture
 npm run mcp:test          # the MCP server's test suite
-npm run test:components   # component tests: roles, names, keyboard, variants, axe-core
+npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
+npm run test:components   # headless Chromium: the 65 spec examples (axe light + dark, focus ring), roles, names, keyboard
 ```
+
+A new or changed component arrives with its test: its spec example must pass
+`tests/examples.test.tsx`, and each key of its spec's Keyboard table needs its
+test (`test:lint-coverage`) — [CONTRIBUTING → Where a change goes](./CONTRIBUTING.md#where-a-change-goes).
 
 After any token or TypeScript change:
 `npm run tokens-validate && npm run typecheck:all`.
@@ -143,7 +148,7 @@ Each § 1 rule, and the check that enforces it:
 | Phosphor icons only                      | ESLint `no-restricted-imports` (other icon kits) and `no-restricted-syntax` (inline `<svg>`; `logo.tsx` and `illustration.tsx` declared as artwork in `eslint.config.mjs`)                                                                                                                                                                                                  |
 | Only the design system's classes         | ESLint `better-tailwindcss/no-unknown-classes`, and `no-restricted-classes` for opacity outside binary states                                                                                                                                                                                                                                                               |
 | Class-based dark mode                    | `tokens:lint-values` (`prefers-color-scheme`, no `allow-raw` opt-out)                                                                                                                                                                                                                                                                                                       |
-| WCAG 2.2 AA                              | `tokens:lint-contrast` level 1 (4.5:1 text, 3:1 non-text, blocking; level 2 APCA is advisory), `tokens:lint-focus`, axe-core in `test:components`; target size is audited by hand in `specs/foundations/size.md`                                                                                                                                                            |
+| WCAG 2.2 AA                              | `tokens:lint-contrast` level 1 (4.5:1 text, 3:1 non-text, blocking; level 2 APCA is advisory), `tokens:lint-focus`, axe-core in `test:components` (headless Chromium, light and dark: contrast and target size computed on the rendered page, a focus indicator on every tab stop); target size is also audited by hand in `specs/foundations/size.md`                      |
 | Read the spec first                      | Not checkable; `specs:validate` keeps each spec in step with its code (Variants, Tokens, Props / API) and `index:schema` keeps its Metadata in step with the index, so what the spec says is true                                                                                                                                                                           |
 | The shadcn/ui API is the contract        | `index:shadcn` — each component's exports, rendered element, props, union values and defaults against `shadcn-api.baseline.json` (the upstream API, extracted from the registry of the `components.json` style): every difference is declared in `shadcn.divergences`, and every declaration matches a difference                                                           |
 | `tokens-validate` before every commit    | The required `tokens-validate` CI job, and `npm run check`                                                                                                                                                                                                                                                                                                                  |

@@ -78,12 +78,12 @@ Renders `ResizablePrimitive.Separator`.
 
 Renders `ResizablePrimitive.Panel`.
 
-| Prop          | Type                            | Default | Description                      |
-| ------------- | ------------------------------- | ------- | -------------------------------- |
-| `defaultSize` | `string \| number`              | —       | Initial size, as a percentage    |
-| `minSize`     | `string \| number`              | —       | Minimum size, as a percentage    |
-| `maxSize`     | `string \| number`              | —       | Maximum size, as a percentage    |
-| `...props`    | `ResizablePrimitive.PanelProps` | —       | `ResizablePrimitive.Panel` props |
+| Prop          | Type                            | Default | Description                                                                       |
+| ------------- | ------------------------------- | ------- | --------------------------------------------------------------------------------- |
+| `defaultSize` | `string \| number`              | —       | Initial size: a number is in pixels, a string without a unit in percent (`"50%"`) |
+| `minSize`     | `string \| number`              | —       | Minimum size, same units as `defaultSize`                                         |
+| `maxSize`     | `string \| number`              | —       | Maximum size, same units as `defaultSize`                                         |
+| `...props`    | `ResizablePrimitive.PanelProps` | —       | `ResizablePrimitive.Panel` props                                                  |
 
 ### `ResizablePanelGroup`
 
@@ -144,11 +144,11 @@ import {
 export default function Example() {
   return (
     <ResizablePanelGroup orientation="horizontal" className="min-h-52">
-      <ResizablePanel defaultSize={50} minSize={20}>
+      <ResizablePanel defaultSize="50%" minSize="20%">
         <div className="p-4">Left panel</div>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={50} minSize={20}>
+      <ResizablePanel defaultSize="50%" minSize="20%">
         <div className="p-4">Right panel</div>
       </ResizablePanel>
     </ResizablePanelGroup>
