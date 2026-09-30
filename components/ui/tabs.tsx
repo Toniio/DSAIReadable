@@ -7,6 +7,18 @@ import { Tabs as TabsPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING, FOCUS_RING_WIDTH } from "@/lib/focus"
 
+/**
+ * The root that switches between mutually exclusive panels; use `orientation` for a horizontal or a vertical list of triggers.
+ *
+ * @example
+ * <Tabs defaultValue="preview">
+ *   <TabsList>
+ *     <TabsTrigger value="preview">Preview</TabsTrigger>
+ *     <TabsTrigger value="code">Code</TabsTrigger>
+ *   </TabsList>
+ *   <TabsContent value="preview">Your changes appear here.</TabsContent>
+ * </Tabs>
+ */
 function Tabs({
   className,
   orientation = "horizontal",
@@ -25,6 +37,12 @@ function Tabs({
   )
 }
 
+/**
+ * Applies the `TabsList` styles to another element through `variant`, for example a custom tab strip.
+ *
+ * @example
+ * <div className={cn(tabsListVariants({ variant: "line" }))}>…</div>
+ */
 const tabsListVariants = cva(
   "group/tabs-list inline-flex w-fit items-center justify-center rounded-none p-1 text-muted-foreground group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none",
   {
@@ -40,6 +58,15 @@ const tabsListVariants = cva(
   }
 )
 
+/**
+ * The row of `TabsTrigger`s; use `variant` to choose a filled background or an underline on the active tab.
+ *
+ * @example
+ * <TabsList variant="line">
+ *   <TabsTrigger value="preview">Preview</TabsTrigger>
+ *   <TabsTrigger value="code">Code</TabsTrigger>
+ * </TabsList>
+ */
 function TabsList({
   className,
   variant = "default",
@@ -56,6 +83,15 @@ function TabsList({
   )
 }
 
+/**
+ * The control that selects one panel; its `value` matches the `value` of a `TabsContent`.
+ *
+ * @example
+ * <TabsList>
+ *   <TabsTrigger value="preview">Preview</TabsTrigger>
+ *   <TabsTrigger value="code" disabled>Code</TabsTrigger>
+ * </TabsList>
+ */
 function TabsTrigger({
   className,
   ...props
@@ -77,6 +113,14 @@ function TabsTrigger({
   )
 }
 
+/**
+ * The panel shown when the `TabsTrigger` with the same `value` is selected.
+ *
+ * @example
+ * <TabsContent value="preview">
+ *   <p>Your changes appear here.</p>
+ * </TabsContent>
+ */
 function TabsContent({
   className,
   ...props

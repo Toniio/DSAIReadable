@@ -18,6 +18,8 @@ import { readdirSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import ts from "typescript"
 
+import { exportedDeclarations, parseComponentFile, plainText } from "./jsdoc.js"
+
 /** The `$extensions` key this design system's own properties live under. */
 const EXTENSION = "design.dsaireadable"
 
@@ -110,22 +112,6 @@ export function tokenDeprecations(
   })
 }
 
-/** A JSDoc comment as plain text: `{@link Name}` reads as `Name`. */
-function plainText(comment: ts.JSDocTag["comment"]): string {
-  if (comment === undefined) return ""
-  if (typeof comment === "string") return comment.trim()
-  return comment
-    .map((part) =>
-      ts.isJSDocLink(part) ||
-      ts.isJSDocLinkCode(part) ||
-      ts.isJSDocLinkPlain(part)
-        ? (part.name?.getText() ?? part.text)
-        : part.text
-    )
-    .join("")
-    .trim()
-}
-
 /**
  * The exports of one component file that carry a JSDoc `@deprecated` tag. The
  * tag sits on the declaration, which shadcn/ui components export either inline
@@ -137,49 +123,9 @@ export function exportDeprecations(
   code: string,
   importPath: string
 ): ExportDeprecation[] {
-  const file = ts.createSourceFile(
-    `${importPath}.tsx`,
-    code,
-    ts.ScriptTarget.Latest,
-    true,
-    ts.ScriptKind.TSX
+  const { exported, declared } = exportedDeclarations(
+    parseComponentFile(code, importPath)
   )
-
-  const exported = new Set<string>()
-  const declared = new Map<string, ts.Node>()
-  for (const statement of file.statements) {
-    const inline =
-      ts.canHaveModifiers(statement) &&
-      ts
-        .getModifiers(statement)
-        ?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
-    const names: string[] = []
-    if (ts.isVariableStatement(statement)) {
-      for (const decl of statement.declarationList.declarations)
-        if (ts.isIdentifier(decl.name)) names.push(decl.name.text)
-    } else if (
-      (ts.isFunctionDeclaration(statement) ||
-        ts.isClassDeclaration(statement) ||
-        ts.isInterfaceDeclaration(statement) ||
-        ts.isTypeAliasDeclaration(statement)) &&
-      statement.name
-    ) {
-      names.push(statement.name.text)
-    }
-    for (const name of names) {
-      declared.set(name, statement)
-      if (inline) exported.add(name)
-    }
-    if (
-      ts.isExportDeclaration(statement) &&
-      !statement.moduleSpecifier &&
-      statement.exportClause &&
-      ts.isNamedExports(statement.exportClause)
-    )
-      for (const spec of statement.exportClause.elements)
-        // `export { local as public }` exposes `public`; the tag is on `local`.
-        exported.add((spec.propertyName ?? spec.name).text)
-  }
 
   const found: ExportDeprecation[] = []
   for (const [name, node] of declared) {

@@ -13,6 +13,15 @@ import {
 
 import { UI_STRINGS } from "@/lib/ui-strings"
 
+/**
+ * A password field with a button that shows or hides the text; translate its labels with `showLabel` and `hideLabel`.
+ *
+ * @example
+ * <Field>
+ *   <FieldLabel htmlFor="password">Password</FieldLabel>
+ *   <PasswordInput id="password" autoComplete="current-password" />
+ * </Field>
+ */
 function PasswordInput({
   className,
   showLabel = UI_STRINGS.passwordInput.show,

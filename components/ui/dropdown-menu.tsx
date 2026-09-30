@@ -7,12 +7,38 @@ import { cn } from "@/lib/utils"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CheckIcon, CaretRightIcon } from "@phosphor-icons/react"
 
+/**
+ * The root of a menu that opens from a button and lists actions or choices; use `ContextMenu` for right-click menus.
+ *
+ * @example
+ * <DropdownMenu>
+ *   <DropdownMenuTrigger asChild>
+ *     <Button variant="outline">Options</Button>
+ *   </DropdownMenuTrigger>
+ *   <DropdownMenuContent>
+ *     <DropdownMenuItem>Rename</DropdownMenuItem>
+ *   </DropdownMenuContent>
+ * </DropdownMenu>
+ */
 function DropdownMenu({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />
 }
 
+/**
+ * Mounts its children outside the current DOM tree for a custom layer; `DropdownMenuContent` already wraps itself in one.
+ *
+ * @example
+ * <DropdownMenu>
+ *   <DropdownMenuTrigger>Options</DropdownMenuTrigger>
+ *   <DropdownMenuPortal>
+ *     <DropdownMenuContent>
+ *       <DropdownMenuItem>Rename</DropdownMenuItem>
+ *     </DropdownMenuContent>
+ *   </DropdownMenuPortal>
+ * </DropdownMenu>
+ */
 function DropdownMenuPortal({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Portal>) {
@@ -21,6 +47,16 @@ function DropdownMenuPortal({
   )
 }
 
+/**
+ * The element that opens the `DropdownMenu`; set `asChild` to make your own `Button` the trigger.
+ *
+ * @example
+ * <DropdownMenu>
+ *   <DropdownMenuTrigger asChild>
+ *     <Button variant="outline">Options</Button>
+ *   </DropdownMenuTrigger>
+ * </DropdownMenu>
+ */
 function DropdownMenuTrigger({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
@@ -32,6 +68,15 @@ function DropdownMenuTrigger({
   )
 }
 
+/**
+ * The floating panel that holds the menu's items, aligned to its trigger and matching the trigger's width by default.
+ *
+ * @example
+ * <DropdownMenuContent align="end">
+ *   <DropdownMenuItem>Rename</DropdownMenuItem>
+ *   <DropdownMenuItem>Duplicate</DropdownMenuItem>
+ * </DropdownMenuContent>
+ */
 function DropdownMenuContent({
   className,
   align = "start",
@@ -54,6 +99,15 @@ function DropdownMenuContent({
   )
 }
 
+/**
+ * Groups related items inside `DropdownMenuContent` so assistive technology announces them as one set.
+ *
+ * @example
+ * <DropdownMenuGroup>
+ *   <DropdownMenuItem>Profile</DropdownMenuItem>
+ *   <DropdownMenuItem>Settings</DropdownMenuItem>
+ * </DropdownMenuGroup>
+ */
 function DropdownMenuGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Group>) {
@@ -62,6 +116,15 @@ function DropdownMenuGroup({
   )
 }
 
+/**
+ * One action in the menu; set `variant` to `destructive` for an action that removes something, and `inset` to align it with checkable items.
+ *
+ * @example
+ * <DropdownMenuContent>
+ *   <DropdownMenuItem>Rename</DropdownMenuItem>
+ *   <DropdownMenuItem variant="destructive">Delete project</DropdownMenuItem>
+ * </DropdownMenuContent>
+ */
 function DropdownMenuItem({
   className,
   inset,
@@ -88,6 +151,14 @@ function DropdownMenuItem({
   )
 }
 
+/**
+ * A menu item that toggles one option on or off through `checked`, for choices that can combine.
+ *
+ * @example
+ * <DropdownMenuCheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>
+ *   Show grid
+ * </DropdownMenuCheckboxItem>
+ */
 function DropdownMenuCheckboxItem({
   className,
   children,
@@ -124,6 +195,15 @@ function DropdownMenuCheckboxItem({
   )
 }
 
+/**
+ * Holds `DropdownMenuRadioItem`s so exactly one is selected; bind it with `value` and `onValueChange`.
+ *
+ * @example
+ * <DropdownMenuRadioGroup value={sort} onValueChange={setSort}>
+ *   <DropdownMenuRadioItem value="newest">Newest first</DropdownMenuRadioItem>
+ *   <DropdownMenuRadioItem value="oldest">Oldest first</DropdownMenuRadioItem>
+ * </DropdownMenuRadioGroup>
+ */
 function DropdownMenuRadioGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>) {
@@ -135,6 +215,14 @@ function DropdownMenuRadioGroup({
   )
 }
 
+/**
+ * A menu item for one exclusive choice inside a `DropdownMenuRadioGroup`, marked with a check when selected.
+ *
+ * @example
+ * <DropdownMenuRadioGroup value="newest">
+ *   <DropdownMenuRadioItem value="newest">Newest first</DropdownMenuRadioItem>
+ * </DropdownMenuRadioGroup>
+ */
 function DropdownMenuRadioItem({
   className,
   children,
@@ -169,6 +257,15 @@ function DropdownMenuRadioItem({
   )
 }
 
+/**
+ * A non-interactive heading that names the group of items below it.
+ *
+ * @example
+ * <DropdownMenuContent>
+ *   <DropdownMenuLabel>My account</DropdownMenuLabel>
+ *   <DropdownMenuItem>Profile</DropdownMenuItem>
+ * </DropdownMenuContent>
+ */
 function DropdownMenuLabel({
   className,
   inset,
@@ -189,6 +286,16 @@ function DropdownMenuLabel({
   )
 }
 
+/**
+ * A thin line that splits the menu into sets of related items.
+ *
+ * @example
+ * <DropdownMenuContent>
+ *   <DropdownMenuItem>Profile</DropdownMenuItem>
+ *   <DropdownMenuSeparator />
+ *   <DropdownMenuItem>Sign out</DropdownMenuItem>
+ * </DropdownMenuContent>
+ */
 function DropdownMenuSeparator({
   className,
   ...props
@@ -202,6 +309,15 @@ function DropdownMenuSeparator({
   )
 }
 
+/**
+ * Shows the keyboard shortcut of an item at its end; it is a hint only and does not bind the keys.
+ *
+ * @example
+ * <DropdownMenuItem>
+ *   New project
+ *   <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+ * </DropdownMenuItem>
+ */
 function DropdownMenuShortcut({
   className,
   ...props
@@ -218,12 +334,34 @@ function DropdownMenuShortcut({
   )
 }
 
+/**
+ * The root of a nested menu that opens from an item; pair it with `DropdownMenuSubTrigger` and `DropdownMenuSubContent`.
+ *
+ * @example
+ * <DropdownMenuSub>
+ *   <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+ *   <DropdownMenuSubContent>
+ *     <DropdownMenuItem>Copy link</DropdownMenuItem>
+ *   </DropdownMenuSubContent>
+ * </DropdownMenuSub>
+ */
 function DropdownMenuSub({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Sub>) {
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />
 }
 
+/**
+ * The item that opens a nested `DropdownMenuSub`; a caret at its end tells the user more choices follow.
+ *
+ * @example
+ * <DropdownMenuSub>
+ *   <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+ *   <DropdownMenuSubContent>
+ *     <DropdownMenuItem>Email</DropdownMenuItem>
+ *   </DropdownMenuSubContent>
+ * </DropdownMenuSub>
+ */
 function DropdownMenuSubTrigger({
   className,
   inset,
@@ -251,6 +389,18 @@ function DropdownMenuSubTrigger({
   )
 }
 
+/**
+ * The floating panel of a nested menu, holding the items a `DropdownMenuSubTrigger` opens.
+ *
+ * @example
+ * <DropdownMenuSub>
+ *   <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+ *   <DropdownMenuSubContent>
+ *     <DropdownMenuItem>Copy link</DropdownMenuItem>
+ *     <DropdownMenuItem>Email</DropdownMenuItem>
+ *   </DropdownMenuSubContent>
+ * </DropdownMenuSub>
+ */
 function DropdownMenuSubContent({
   className,
   ...props

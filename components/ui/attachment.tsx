@@ -24,6 +24,20 @@ const attachmentVariants = cva(
   }
 )
 
+/**
+ * The tile for one file sent or received; set `state` from the real upload and `orientation` to lay it out as a row or a card.
+ *
+ * @example
+ * <Attachment state="uploading">
+ *   <AttachmentMedia>
+ *     <FilePdfIcon />
+ *   </AttachmentMedia>
+ *   <AttachmentContent>
+ *     <AttachmentTitle>report.pdf</AttachmentTitle>
+ *     <AttachmentDescription>2.4 MB</AttachmentDescription>
+ *   </AttachmentContent>
+ * </Attachment>
+ */
 function Attachment({
   className,
   state = "done",
@@ -64,6 +78,16 @@ const attachmentMediaVariants = cva(
   }
 )
 
+/**
+ * The icon or preview at the start of an attachment; use `variant="image"` for a thumbnail and the default for a file type icon.
+ *
+ * @example
+ * <Attachment>
+ *   <AttachmentMedia variant="image">
+ *     <img src="/previews/report.png" alt="" />
+ *   </AttachmentMedia>
+ * </Attachment>
+ */
 function AttachmentMedia({
   className,
   variant = "icon",
@@ -79,6 +103,16 @@ function AttachmentMedia({
   )
 }
 
+/**
+ * The wrapper for an attachment's name and details, which truncates long text inside the tile.
+ *
+ * @example
+ * <Attachment>
+ *   <AttachmentContent>
+ *     <AttachmentTitle>report.pdf</AttachmentTitle>
+ *   </AttachmentContent>
+ * </Attachment>
+ */
 function AttachmentContent({
   className,
   ...props
@@ -95,6 +129,16 @@ function AttachmentContent({
   )
 }
 
+/**
+ * The file name of an attachment, which truncates and shimmers while the file uploads or processes.
+ *
+ * @example
+ * <Attachment state="processing">
+ *   <AttachmentContent>
+ *     <AttachmentTitle>budget-2026.xlsx</AttachmentTitle>
+ *   </AttachmentContent>
+ * </Attachment>
+ */
 function AttachmentTitle({
   className,
   ...props
@@ -111,6 +155,17 @@ function AttachmentTitle({
   )
 }
 
+/**
+ * The size, type or failure message under an attachment's name; on `error`, say what failed here.
+ *
+ * @example
+ * <Attachment state="error">
+ *   <AttachmentContent>
+ *     <AttachmentTitle>photo.png</AttachmentTitle>
+ *     <AttachmentDescription>The upload failed. Try again.</AttachmentDescription>
+ *   </AttachmentContent>
+ * </Attachment>
+ */
 function AttachmentDescription({
   className,
   ...props
@@ -128,6 +183,18 @@ function AttachmentDescription({
   )
 }
 
+/**
+ * The row that holds an attachment's action buttons above `AttachmentTrigger`, with at most two actions in it.
+ *
+ * @example
+ * <Attachment>
+ *   <AttachmentActions>
+ *     <AttachmentAction aria-label="Remove report.pdf">
+ *       <XIcon />
+ *     </AttachmentAction>
+ *   </AttachmentActions>
+ * </Attachment>
+ */
 function AttachmentActions({
   className,
   ...props
@@ -145,6 +212,16 @@ function AttachmentActions({
   )
 }
 
+/**
+ * An icon button that removes or retries an attachment, named by an `aria-label` that says the action and the file.
+ *
+ * @example
+ * <AttachmentActions>
+ *   <AttachmentAction aria-label="Retry upload of photo.png" onClick={retry}>
+ *     <ArrowClockwiseIcon />
+ *   </AttachmentAction>
+ * </AttachmentActions>
+ */
 function AttachmentAction({
   className,
   variant,
@@ -163,6 +240,17 @@ function AttachmentAction({
 }
 
 // Stretched over the whole attachment, which draws the focus ring.
+/**
+ * The button stretched over a whole attachment to open the file, placed last and named with the file name.
+ *
+ * @example
+ * <Attachment>
+ *   <AttachmentContent>
+ *     <AttachmentTitle>report.pdf</AttachmentTitle>
+ *   </AttachmentContent>
+ *   <AttachmentTrigger aria-label="Open report.pdf" onClick={openFile} />
+ * </Attachment>
+ */
 function AttachmentTrigger({
   className,
   asChild = false,
@@ -185,6 +273,18 @@ function AttachmentTrigger({
   )
 }
 
+/**
+ * A horizontally scrolling row that lays out several attachments from one message or composer.
+ *
+ * @example
+ * <AttachmentGroup>
+ *   <Attachment>
+ *     <AttachmentContent>
+ *       <AttachmentTitle>report.pdf</AttachmentTitle>
+ *     </AttachmentContent>
+ *   </Attachment>
+ * </AttachmentGroup>
+ */
 function AttachmentGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

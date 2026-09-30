@@ -6,18 +6,52 @@ import { Popover as PopoverPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 
+/**
+ * The root of a floating panel opened by a click, for rich content such as a form or a picker that keeps the user in context.
+ *
+ * @example
+ * <Popover>
+ *   <PopoverTrigger asChild>
+ *     <Button variant="outline">Rename</Button>
+ *   </PopoverTrigger>
+ *   <PopoverContent>
+ *     <PopoverTitle>Rename project</PopoverTitle>
+ *   </PopoverContent>
+ * </Popover>
+ */
 function Popover({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Root>) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />
 }
 
+/**
+ * The element that opens the `Popover` on click; pass `asChild` to use your own `Button`.
+ *
+ * @example
+ * <Popover>
+ *   <PopoverTrigger asChild>
+ *     <Button variant="outline">Add a note</Button>
+ *   </PopoverTrigger>
+ *   <PopoverContent>Write a note for your team.</PopoverContent>
+ * </Popover>
+ */
 function PopoverTrigger({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />
 }
 
+/**
+ * The floating surface of a `Popover`, placed beside its trigger with `align` and `sideOffset`.
+ *
+ * @example
+ * <PopoverContent align="start">
+ *   <PopoverHeader>
+ *     <PopoverTitle>Add a note</PopoverTitle>
+ *   </PopoverHeader>
+ * </PopoverContent>
+ */
 function PopoverContent({
   className,
   align = "center",
@@ -43,12 +77,35 @@ function PopoverContent({
   )
 }
 
+/**
+ * Anchors the `PopoverContent` to an element other than its trigger.
+ *
+ * @example
+ * <Popover>
+ *   <PopoverAnchor asChild>
+ *     <div>Invoice 1042</div>
+ *   </PopoverAnchor>
+ *   <PopoverTrigger asChild>
+ *     <Button size="sm">Details</Button>
+ *   </PopoverTrigger>
+ *   <PopoverContent>Paid on March 3.</PopoverContent>
+ * </Popover>
+ */
 function PopoverAnchor({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {
   return <PopoverPrimitive.Anchor data-slot="popover-anchor" {...props} />
 }
 
+/**
+ * Groups the `PopoverTitle` and `PopoverDescription` at the top of the panel.
+ *
+ * @example
+ * <PopoverHeader>
+ *   <PopoverTitle>Dimensions</PopoverTitle>
+ *   <PopoverDescription>Set the size of the layer.</PopoverDescription>
+ * </PopoverHeader>
+ */
 function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -61,6 +118,12 @@ function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
 
 // A real heading, so screen readers list it; the level follows the page
 // outline, the look does not.
+/**
+ * The heading of a `Popover`; set `as` from the real heading hierarchy, because it renders an `h2` by default.
+ *
+ * @example
+ * <PopoverTitle as="h3">Share this file</PopoverTitle>
+ */
 function PopoverTitle({
   className,
   as: Comp = "h2",
@@ -77,6 +140,12 @@ function PopoverTitle({
   )
 }
 
+/**
+ * A supporting sentence under the `PopoverTitle` that says what the panel is for.
+ *
+ * @example
+ * <PopoverDescription>Anyone with the link can view this file.</PopoverDescription>
+ */
 function PopoverDescription({
   className,
   ...props

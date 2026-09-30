@@ -12,6 +12,13 @@ import {
   SpinnerIcon,
 } from "@phosphor-icons/react"
 
+/**
+ * The single mount point for toast notifications, placed once at the root of the layout; call `toast()` from `sonner` to show one.
+ *
+ * @example
+ * <Toaster />
+ * // elsewhere: toast("Changes saved")
+ */
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()
 

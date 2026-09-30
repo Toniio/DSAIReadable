@@ -16,6 +16,17 @@ import {
 import { InputGroup, InputGroupAddon } from "@/components/ui/input-group"
 import { MagnifyingGlassIcon, CheckIcon } from "@phosphor-icons/react"
 
+/**
+ * A searchable list that filters as the user types, for picking an action or an item from structured options.
+ *
+ * @example
+ * <Command>
+ *   <CommandInput placeholder="Search actions" />
+ *   <CommandList>
+ *     <CommandEmpty>No results found.</CommandEmpty>
+ *   </CommandList>
+ * </Command>
+ */
 function Command({
   className,
   ...props
@@ -34,6 +45,17 @@ function Command({
 
 // no-data-slot: CommandDialog renders a Dialog, whose surface keeps its own
 // dialog-content slot: CommandItem styles itself in-data-[slot=dialog-content].
+/**
+ * A `Command` inside a modal, for a command palette opened with a keyboard shortcut; set `title` and `description` to name it.
+ *
+ * @example
+ * <CommandDialog open={open} onOpenChange={setOpen} title="Command palette">
+ *   <CommandInput placeholder="Search actions" />
+ *   <CommandList>
+ *     <CommandEmpty>No results found.</CommandEmpty>
+ *   </CommandList>
+ * </CommandDialog>
+ */
 function CommandDialog({
   title = UI_STRINGS.command.dialogTitle,
   description = UI_STRINGS.command.dialogDescription,
@@ -66,6 +88,12 @@ function CommandDialog({
   )
 }
 
+/**
+ * The search field of a `Command`; its text filters the items below it.
+ *
+ * @example
+ * <CommandInput placeholder="Search actions" />
+ */
 function CommandInput({
   className,
   ...props
@@ -92,6 +120,17 @@ function CommandInput({
   )
 }
 
+/**
+ * The scrollable region of a `Command` that holds the groups, the items and the empty state.
+ *
+ * @example
+ * <CommandList>
+ *   <CommandEmpty>No results found.</CommandEmpty>
+ *   <CommandGroup heading="Actions">
+ *     <CommandItem>New project</CommandItem>
+ *   </CommandGroup>
+ * </CommandList>
+ */
 function CommandList({
   className,
   ...props
@@ -111,6 +150,12 @@ function CommandList({
   )
 }
 
+/**
+ * The message a `Command` shows when no item matches the search; every `Command` renders one.
+ *
+ * @example
+ * <CommandEmpty>No results found.</CommandEmpty>
+ */
 function CommandEmpty({
   className,
   ...props
@@ -124,6 +169,15 @@ function CommandEmpty({
   )
 }
 
+/**
+ * Gathers related `CommandItem`s under a `heading` so the user can scan the results by category.
+ *
+ * @example
+ * <CommandGroup heading="Actions">
+ *   <CommandItem>New project</CommandItem>
+ *   <CommandItem>Invite a teammate</CommandItem>
+ * </CommandGroup>
+ */
 function CommandGroup({
   className,
   ...props
@@ -140,6 +194,16 @@ function CommandGroup({
   )
 }
 
+/**
+ * A divider between two `CommandGroup`s that marks a change of category.
+ *
+ * @example
+ * <CommandList>
+ *   <CommandGroup heading="Actions">…</CommandGroup>
+ *   <CommandSeparator />
+ *   <CommandGroup heading="Settings">…</CommandGroup>
+ * </CommandList>
+ */
 function CommandSeparator({
   className,
   ...props
@@ -153,6 +217,15 @@ function CommandSeparator({
   )
 }
 
+/**
+ * One selectable result of a `Command`; `onSelect` runs when the user picks it by keyboard or pointer.
+ *
+ * @example
+ * <CommandItem onSelect={() => setOpen(false)}>
+ *   New project
+ *   <CommandShortcut>⌘N</CommandShortcut>
+ * </CommandItem>
+ */
 function CommandItem({
   className,
   children,
@@ -176,6 +249,15 @@ function CommandItem({
   )
 }
 
+/**
+ * A label that shows the keyboard shortcut of a `CommandItem`; it displays the keys and does not bind them.
+ *
+ * @example
+ * <CommandItem>
+ *   Invite a teammate
+ *   <CommandShortcut>⌘I</CommandShortcut>
+ * </CommandItem>
+ */
 function CommandShortcut({
   className,
   ...props

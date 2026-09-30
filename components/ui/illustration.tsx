@@ -2,6 +2,12 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 import { UI_STRINGS } from "@/lib/ui-strings"
+/**
+ * A placeholder panel for split-screen pages, empty states and error pages, described to assistive technology through `alt`.
+ *
+ * @example
+ * <Illustration alt="A dashed frame waiting for an image" className="h-64 w-full" />
+ */
 function Illustration({
   className,
   alt = UI_STRINGS.illustration.alt,

@@ -4,6 +4,21 @@ import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Stacks the consecutive bubbles of one turn in a column, inside a `MessageContent`.
+ *
+ * @example
+ * <MessageContent>
+ *   <BubbleGroup>
+ *     <Bubble>
+ *       <BubbleContent>Here is the summary you asked for.</BubbleContent>
+ *     </Bubble>
+ *     <Bubble>
+ *       <BubbleContent>I can also turn it into a checklist.</BubbleContent>
+ *     </Bubble>
+ *   </BubbleGroup>
+ * </MessageContent>
+ */
 function BubbleGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -16,6 +31,14 @@ function BubbleGroup({ className, ...props }: React.ComponentProps<"div">) {
 
 // A BubbleContent rendered as a button or a link (asChild) takes the hover of
 // its variant; a plain one is text and does not react.
+/**
+ * Returns the classes of a `Bubble` frame for a `variant`, for an element that has to look like a bubble without being one.
+ *
+ * @example
+ * <div data-slot="bubble" className={bubbleVariants({ variant: "secondary" })}>
+ *   <div data-slot="bubble-content">Your export is ready.</div>
+ * </div>
+ */
 const bubbleVariants = cva(
   "group/bubble relative flex w-fit max-w-4/5 min-w-0 flex-col gap-1 group-data-[align=end]/message:self-end data-[align=end]:self-end data-[variant=ghost]:max-w-full",
   {
@@ -43,6 +66,14 @@ const bubbleVariants = cva(
   }
 )
 
+/**
+ * Frames one bubble of a turn and sets, through `variant`, which side of the conversation it speaks for.
+ *
+ * @example
+ * <Bubble variant="secondary">
+ *   <BubbleContent>Your export is ready to download.</BubbleContent>
+ * </Bubble>
+ */
 function Bubble({
   variant = "default",
   align = "start",
@@ -63,6 +94,16 @@ function Bubble({
   )
 }
 
+/**
+ * Holds the text of a `Bubble` and takes its variant colors; use `asChild` to make the bubble a button or a link.
+ *
+ * @example
+ * <Bubble variant="muted">
+ *   <BubbleContent asChild>
+ *     <button type="button">Retry sending</button>
+ *   </BubbleContent>
+ * </Bubble>
+ */
 function BubbleContent({
   asChild = false,
   className,
@@ -87,6 +128,14 @@ function BubbleContent({
 // The ring cuts the reactions out of the bubble they overlap: the color of the
 // surface the conversation sits on, at the width of the focus ring — the
 // design system's only ring width, where shadcn/ui draws a raw ring-2.
+/**
+ * Returns the classes that pin a reactions bar to a `side` and an `align` of its bubble, for a custom reactions element.
+ *
+ * @example
+ * <div data-slot="bubble-reactions" className={bubbleReactionsVariants({ side: "top", align: "start" })}>
+ *   👍 3
+ * </div>
+ */
 const bubbleReactionsVariants = cva(
   // allow-raw: local-stacking — z-10 lifts the reactions over the bubble they overlap
   "absolute z-10 flex w-fit shrink-0 items-center justify-center gap-1 rounded-none bg-muted px-1.5 py-0.5 text-xs ring-(length:--space-focus-ring-width) ring-card has-[button]:p-0",
@@ -108,6 +157,17 @@ const bubbleReactionsVariants = cva(
   }
 )
 
+/**
+ * Pins emoji reactions or a count to an edge of a `Bubble`, five at most.
+ *
+ * @example
+ * <Bubble>
+ *   <BubbleContent>Lunch at noon?</BubbleContent>
+ *   <BubbleReactions side="bottom" align="end">
+ *     👍 3
+ *   </BubbleReactions>
+ * </Bubble>
+ */
 function BubbleReactions({
   side = "bottom",
   align = "end",

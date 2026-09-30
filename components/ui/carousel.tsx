@@ -33,6 +33,12 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
+/**
+ * Reads the carousel state, the Embla `api` and the scroll handlers, from a component rendered inside a `Carousel`.
+ *
+ * @example
+ * const { scrollNext, canScrollNext } = useCarousel()
+ */
 function useCarousel() {
   const context = React.useContext(CarouselContext)
 
@@ -43,6 +49,19 @@ function useCarousel() {
   return context
 }
 
+/**
+ * A scroller that moves between slides with buttons or the arrow keys; set `orientation` for a horizontal or vertical track.
+ *
+ * @example
+ * <Carousel aria-label="Featured products">
+ *   <CarouselContent>
+ *     <CarouselItem>Trail shoes</CarouselItem>
+ *     <CarouselItem>Rain jacket</CarouselItem>
+ *   </CarouselContent>
+ *   <CarouselPrevious />
+ *   <CarouselNext />
+ * </Carousel>
+ */
 function Carousel({
   orientation = "horizontal",
   opts,
@@ -136,6 +155,16 @@ function Carousel({
   )
 }
 
+/**
+ * The scrolling track of a `Carousel` that holds every `CarouselItem`.
+ *
+ * @example
+ * <Carousel aria-label="Customer stories">
+ *   <CarouselContent>
+ *     <CarouselItem>Story one</CarouselItem>
+ *   </CarouselContent>
+ * </Carousel>
+ */
 function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel()
 
@@ -157,6 +186,14 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * One slide of a `Carousel`, announced to screen readers as a slide of the carousel.
+ *
+ * @example
+ * <CarouselContent>
+ *   <CarouselItem>Our first customer story</CarouselItem>
+ * </CarouselContent>
+ */
 function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   const { orientation } = useCarousel()
 
@@ -175,6 +212,17 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The button that scrolls a `Carousel` back one slide; it disables itself at the first slide.
+ *
+ * @example
+ * <Carousel aria-label="Photos">
+ *   <CarouselContent>
+ *     <CarouselItem>Photo one</CarouselItem>
+ *   </CarouselContent>
+ *   <CarouselPrevious />
+ * </Carousel>
+ */
 function CarouselPrevious({
   className,
   srLabel = UI_STRINGS.carousel.previous,
@@ -206,6 +254,17 @@ function CarouselPrevious({
   )
 }
 
+/**
+ * The button that scrolls a `Carousel` forward one slide; it disables itself at the last slide.
+ *
+ * @example
+ * <Carousel aria-label="Photos">
+ *   <CarouselContent>
+ *     <CarouselItem>Photo one</CarouselItem>
+ *   </CarouselContent>
+ *   <CarouselNext />
+ * </Carousel>
+ */
 function CarouselNext({
   className,
   srLabel = UI_STRINGS.carousel.next,

@@ -5,6 +5,16 @@ import { Separator as SeparatorPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A thin rule that divides two groups of content; keep `decorative` unless the division carries meaning.
+ *
+ * @example
+ * <Card>
+ *   <CardContent>Account details</CardContent>
+ *   <Separator />
+ *   <CardContent>Billing details</CardContent>
+ * </Card>
+ */
 function Separator({
   className,
   orientation = "horizontal",

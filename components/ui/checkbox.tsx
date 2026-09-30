@@ -7,6 +7,15 @@ import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { CheckIcon } from "@phosphor-icons/react"
 
+/**
+ * A two-state or indeterminate choice in a form; pair it with a visible label and never use it for mutually exclusive options.
+ *
+ * @example
+ * <div className="flex items-center gap-2">
+ *   <Checkbox id="terms" />
+ *   <Label htmlFor="terms">Accept the terms of use</Label>
+ * </div>
+ */
 function Checkbox({
   className,
   ...props

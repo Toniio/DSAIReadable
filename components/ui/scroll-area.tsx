@@ -6,6 +6,14 @@ import { ScrollArea as ScrollAreaPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 
+/**
+ * A container with styled scrollbars for content that outgrows a parent of defined height, such as a menu or a side panel.
+ *
+ * @example
+ * <ScrollArea className="h-72">
+ *   <p>Release notes go here.</p>
+ * </ScrollArea>
+ */
 function ScrollArea({
   className,
   children,
@@ -29,6 +37,15 @@ function ScrollArea({
   )
 }
 
+/**
+ * The scrollbar of a `ScrollArea`; add one with `orientation="horizontal"` to let wide content scroll sideways.
+ *
+ * @example
+ * <ScrollArea className="w-96">
+ *   <div>Wide content</div>
+ *   <ScrollBar orientation="horizontal" />
+ * </ScrollArea>
+ */
 function ScrollBar({
   className,
   orientation = "vertical",

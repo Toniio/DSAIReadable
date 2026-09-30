@@ -19,6 +19,15 @@ const ToggleGroupContext = React.createContext<
   orientation: "horizontal",
 })
 
+/**
+ * A set of toggle buttons that share one `variant` and `size`; use `type="single"` for an exclusive choice and `type="multiple"` otherwise.
+ *
+ * @example
+ * <ToggleGroup type="single" variant="outline" aria-label="View">
+ *   <ToggleGroupItem value="list">List</ToggleGroupItem>
+ *   <ToggleGroupItem value="grid">Grid</ToggleGroupItem>
+ * </ToggleGroup>
+ */
 function ToggleGroup({
   className,
   variant,
@@ -57,6 +66,16 @@ function ToggleGroup({
   )
 }
 
+/**
+ * One toggle button of a `ToggleGroup`, which passes down its `variant` and `size`; `value` identifies it.
+ *
+ * @example
+ * <ToggleGroup type="multiple" aria-label="Text formatting">
+ *   <ToggleGroupItem value="bold" aria-label="Bold">
+ *     <TextBIcon />
+ *   </ToggleGroupItem>
+ * </ToggleGroup>
+ */
 function ToggleGroupItem({
   className,
   children,

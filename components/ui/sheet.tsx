@@ -9,16 +9,49 @@ import { Button } from "@/components/ui/button"
 import { XIcon } from "@phosphor-icons/react"
 
 import { UI_STRINGS } from "@/lib/ui-strings"
+/**
+ * The root of a panel that slides in over the page for long content or side context, such as an edit form or a cart.
+ *
+ * @example
+ * <Sheet>
+ *   <SheetTrigger asChild>
+ *     <Button variant="outline">Edit profile</Button>
+ *   </SheetTrigger>
+ *   <SheetContent>
+ *     <SheetTitle>Edit profile</SheetTitle>
+ *   </SheetContent>
+ * </Sheet>
+ */
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
 }
 
+/**
+ * The control that opens the sheet, usually a `Button` wrapped with `asChild`.
+ *
+ * @example
+ * <Sheet>
+ *   <SheetTrigger asChild>
+ *     <Button>Open filters</Button>
+ *   </SheetTrigger>
+ * </Sheet>
+ */
 function SheetTrigger({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Trigger>) {
   return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
 }
 
+/**
+ * A control that closes the sheet from inside its content, such as a cancel button in the footer.
+ *
+ * @example
+ * <SheetFooter>
+ *   <SheetClose asChild>
+ *     <Button variant="outline">Cancel</Button>
+ *   </SheetClose>
+ * </SheetFooter>
+ */
 function SheetClose({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Close>) {
@@ -44,6 +77,16 @@ function SheetOverlay({
   )
 }
 
+/**
+ * The panel itself; use `side` to choose the edge it slides from and `closeLabel` to translate its close button.
+ *
+ * @example
+ * <Sheet>
+ *   <SheetContent side="left">
+ *     <SheetTitle>Navigation</SheetTitle>
+ *   </SheetContent>
+ * </Sheet>
+ */
 function SheetContent({
   className,
   children,
@@ -87,6 +130,15 @@ function SheetContent({
   )
 }
 
+/**
+ * The top block of a sheet that groups its title and description.
+ *
+ * @example
+ * <SheetHeader>
+ *   <SheetTitle>Order details</SheetTitle>
+ *   <SheetDescription>Review the items before you check out.</SheetDescription>
+ * </SheetHeader>
+ */
 function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -97,6 +149,14 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The bottom block of a sheet, pushed to its end, that holds the actions of the task.
+ *
+ * @example
+ * <SheetFooter>
+ *   <Button>Save changes</Button>
+ * </SheetFooter>
+ */
 function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -107,6 +167,14 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The name of the sheet that screen readers announce, so every sheet renders one.
+ *
+ * @example
+ * <SheetHeader>
+ *   <SheetTitle>Notifications</SheetTitle>
+ * </SheetHeader>
+ */
 function SheetTitle({
   className,
   ...props
@@ -123,6 +191,15 @@ function SheetTitle({
   )
 }
 
+/**
+ * The supporting sentence under the title that says what the sheet is for.
+ *
+ * @example
+ * <SheetHeader>
+ *   <SheetTitle>Notifications</SheetTitle>
+ *   <SheetDescription>Choose what we email you about.</SheetDescription>
+ * </SheetHeader>
+ */
 function SheetDescription({
   className,
   ...props

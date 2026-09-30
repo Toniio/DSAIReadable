@@ -5,6 +5,12 @@ import { Progress as ProgressPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A linear bar that shows how far a task has gone; `value` runs from 0 to 100, and it needs an `aria-label` for its name.
+ *
+ * @example
+ * <Progress value={66} aria-label="Upload progress" />
+ */
 function Progress({
   className,
   value,

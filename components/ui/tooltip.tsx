@@ -5,6 +5,14 @@ import { Tooltip as TooltipPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Sets the shared hover delay for every `Tooltip` below it; mount it once high in the tree, such as the root layout.
+ *
+ * @example
+ * <TooltipProvider delayDuration={300}>
+ *   <App />
+ * </TooltipProvider>
+ */
 function TooltipProvider({
   delayDuration = 0,
   ...props
@@ -18,18 +26,51 @@ function TooltipProvider({
   )
 }
 
+/**
+ * A small label that appears when its trigger is hovered or focused, to name an icon button or show a shortcut.
+ *
+ * @example
+ * <Tooltip>
+ *   <TooltipTrigger asChild>
+ *     <Button size="icon" aria-label="Copy link">
+ *       <CopyIcon />
+ *     </Button>
+ *   </TooltipTrigger>
+ *   <TooltipContent>Copy link</TooltipContent>
+ * </Tooltip>
+ */
 function Tooltip({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
   return <TooltipPrimitive.Root data-slot="tooltip" {...props} />
 }
 
+/**
+ * The element that shows its `Tooltip` on hover or focus; use `asChild` to keep your own button or link.
+ *
+ * @example
+ * <Tooltip>
+ *   <TooltipTrigger asChild>
+ *     <Button variant="ghost">Help</Button>
+ *   </TooltipTrigger>
+ *   <TooltipContent>Open the help center</TooltipContent>
+ * </Tooltip>
+ */
 function TooltipTrigger({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
   return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
 }
 
+/**
+ * The one-line text bubble of a `Tooltip`, which carries no interactive element.
+ *
+ * @example
+ * <Tooltip>
+ *   <TooltipTrigger>Plan</TooltipTrigger>
+ *   <TooltipContent>Your plan renews on the first of each month.</TooltipContent>
+ * </Tooltip>
+ */
 function TooltipContent({
   className,
   sideOffset = 0,

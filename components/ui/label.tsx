@@ -5,6 +5,15 @@ import { Label as LabelPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Names a form control through `htmlFor`; every field needs a visible one, a `placeholder` does not replace it.
+ *
+ * @example
+ * <>
+ *   <Label htmlFor="name">Full name</Label>
+ *   <Input id="name" />
+ * </>
+ */
 function Label({
   className,
   ...props

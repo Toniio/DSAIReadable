@@ -5,6 +5,15 @@ import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 
 import type { ComponentProps } from "react"
+/**
+ * The classes that merge the borders and corners of adjacent controls for an `orientation`, to join the children of another container.
+ *
+ * @example
+ * <div role="group" className={buttonGroupVariants({ orientation: "vertical" })}>
+ *   <Button variant="outline">Zoom in</Button>
+ *   <Button variant="outline">Zoom out</Button>
+ * </div>
+ */
 const buttonGroupVariants = cva(
   "group/button-group flex w-fit items-stretch rounded-none *:focus-visible:relative *:focus-visible:z-dropdown has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-none [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
   {
@@ -22,6 +31,15 @@ const buttonGroupVariants = cva(
   }
 )
 
+/**
+ * Joins related buttons, inputs or selects into one control; set `orientation="vertical"` to stack them in a column.
+ *
+ * @example
+ * <ButtonGroup>
+ *   <Button variant="outline">Previous</Button>
+ *   <Button variant="outline">Next</Button>
+ * </ButtonGroup>
+ */
 function ButtonGroup({
   className,
   orientation,
@@ -38,6 +56,15 @@ function ButtonGroup({
   )
 }
 
+/**
+ * A static label joined to the controls of a group, such as a prefix or a unit next to an input.
+ *
+ * @example
+ * <ButtonGroup>
+ *   <ButtonGroupText>https://</ButtonGroupText>
+ *   <Input placeholder="example.com" />
+ * </ButtonGroup>
+ */
 function ButtonGroupText({
   className,
   asChild = false,
@@ -59,6 +86,16 @@ function ButtonGroupText({
   )
 }
 
+/**
+ * A divider that splits a button group into sub-groups of related actions.
+ *
+ * @example
+ * <ButtonGroup>
+ *   <Button variant="secondary">Archive</Button>
+ *   <ButtonGroupSeparator />
+ *   <Button variant="secondary">Report</Button>
+ * </ButtonGroup>
+ */
 function ButtonGroupSeparator({
   className,
   orientation = "vertical",

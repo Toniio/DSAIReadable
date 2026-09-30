@@ -6,30 +6,79 @@ import { Drawer as DrawerPrimitive } from "vaul"
 import { cn } from "@/lib/utils"
 import { OVERLAY_BASE, SIDE_PANEL_CONTENT_BASE } from "@/lib/overlay"
 
+/**
+ * A panel that slides in from a screen edge and follows the user's swipe; use it below `md`, and pick the edge with `direction`.
+ *
+ * @example
+ * <Drawer>
+ *   <DrawerTrigger asChild>
+ *     <Button>Filters</Button>
+ *   </DrawerTrigger>
+ *   <DrawerContent>
+ *     <DrawerTitle>Filters</DrawerTitle>
+ *   </DrawerContent>
+ * </Drawer>
+ */
 function Drawer({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
   return <DrawerPrimitive.Root data-slot="drawer" {...props} />
 }
 
+/**
+ * The element that opens its `Drawer` when the user activates it.
+ *
+ * @example
+ * <Drawer>
+ *   <DrawerTrigger asChild>
+ *     <Button>Open settings</Button>
+ *   </DrawerTrigger>
+ * </Drawer>
+ */
 function DrawerTrigger({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Trigger>) {
   return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
 }
 
+/**
+ * Mounts the drawer layers at the end of the document body, outside the parent's layout.
+ *
+ * @example
+ * <DrawerPortal>
+ *   <DrawerOverlay />
+ * </DrawerPortal>
+ */
 function DrawerPortal({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Portal>) {
   return <DrawerPrimitive.Portal data-slot="drawer-portal" {...props} />
 }
 
+/**
+ * The element that closes its `Drawer` when the user activates it, such as a cancel or done button.
+ *
+ * @example
+ * <DrawerFooter>
+ *   <DrawerClose asChild>
+ *     <Button variant="outline">Cancel</Button>
+ *   </DrawerClose>
+ * </DrawerFooter>
+ */
 function DrawerClose({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Close>) {
   return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
 }
 
+/**
+ * The dimmed backdrop behind an open `Drawer` that keeps the page underneath out of reach.
+ *
+ * @example
+ * <DrawerPortal>
+ *   <DrawerOverlay />
+ * </DrawerPortal>
+ */
 function DrawerOverlay({
   className,
   ...props
@@ -43,6 +92,18 @@ function DrawerOverlay({
   )
 }
 
+/**
+ * The sliding panel of a `Drawer`, which brings its own portal and overlay and holds the header, body and footer.
+ *
+ * @example
+ * <Drawer>
+ *   <DrawerContent>
+ *     <DrawerHeader>
+ *       <DrawerTitle>Sort results</DrawerTitle>
+ *     </DrawerHeader>
+ *   </DrawerContent>
+ * </Drawer>
+ */
 function DrawerContent({
   className,
   children,
@@ -67,6 +128,15 @@ function DrawerContent({
   )
 }
 
+/**
+ * The top of a `DrawerContent`: groups the `DrawerTitle` and the `DrawerDescription`.
+ *
+ * @example
+ * <DrawerHeader>
+ *   <DrawerTitle>Notifications</DrawerTitle>
+ *   <DrawerDescription>Choose what we send to your phone.</DrawerDescription>
+ * </DrawerHeader>
+ */
 function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -80,6 +150,17 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The bottom of a `DrawerContent`: stacks the actions that confirm or dismiss the drawer.
+ *
+ * @example
+ * <DrawerFooter>
+ *   <Button>Apply filters</Button>
+ *   <DrawerClose asChild>
+ *     <Button variant="outline">Cancel</Button>
+ *   </DrawerClose>
+ * </DrawerFooter>
+ */
 function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -90,6 +171,14 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The name of a `Drawer`, which screen readers announce when it opens.
+ *
+ * @example
+ * <DrawerHeader>
+ *   <DrawerTitle>Edit profile</DrawerTitle>
+ * </DrawerHeader>
+ */
 function DrawerTitle({
   className,
   ...props
@@ -106,6 +195,15 @@ function DrawerTitle({
   )
 }
 
+/**
+ * The supporting line under a `DrawerTitle` that says what the drawer is for.
+ *
+ * @example
+ * <DrawerHeader>
+ *   <DrawerTitle>Edit profile</DrawerTitle>
+ *   <DrawerDescription>Update how your name appears to others.</DrawerDescription>
+ * </DrawerHeader>
+ */
 function DrawerDescription({
   className,
   ...props

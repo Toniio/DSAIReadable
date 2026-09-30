@@ -19,12 +19,44 @@ import { SURFACE_OUTLINE } from "@/lib/surface"
 
 // no-data-slot: Combobox is the Root, which renders no element of its own - it
 // is a context provider, like DirectionProvider. Its parts carry theirs.
+/**
+ * The root that holds the state of a searchable list, for more than 15 options or when the user needs to search.
+ *
+ * @example
+ * <Combobox items={countries}>
+ *   <ComboboxInput placeholder="Select a country" />
+ *   <ComboboxContent>
+ *     <ComboboxEmpty>No countries found.</ComboboxEmpty>
+ *     <ComboboxList>
+ *       {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+ *     </ComboboxList>
+ *   </ComboboxContent>
+ * </Combobox>
+ */
 const Combobox = ComboboxPrimitive.Root
 
+/**
+ * Shows the selected value inside a custom trigger, when the list opens from a button instead of the input.
+ *
+ * @example
+ * <Combobox items={countries}>
+ *   <ComboboxTrigger>
+ *     <ComboboxValue />
+ *   </ComboboxTrigger>
+ * </Combobox>
+ */
 function ComboboxValue({ ...props }: ComboboxPrimitive.Value.Props) {
   return <ComboboxPrimitive.Value data-slot="combobox-value" {...props} />
 }
 
+/**
+ * The button that opens the list when the input is not the way in; it names itself through `triggerLabel` when it has no text.
+ *
+ * @example
+ * <Combobox items={countries}>
+ *   <ComboboxTrigger triggerLabel="Show countries" />
+ * </Combobox>
+ */
 function ComboboxTrigger({
   className,
   children,
@@ -62,6 +94,14 @@ function ComboboxClear({
   )
 }
 
+/**
+ * The text field that filters the list as the user types; set `showClear` when a single value may be emptied.
+ *
+ * @example
+ * <Combobox items={countries}>
+ *   <ComboboxInput placeholder="Select a country" showClear />
+ * </Combobox>
+ */
 function ComboboxInput({
   className,
   children,
@@ -105,6 +145,18 @@ function ComboboxInput({
   )
 }
 
+/**
+ * The popup that holds the list, placed against its anchor; pass `anchor` from `useComboboxAnchor` when chips are the input.
+ *
+ * @example
+ * <Combobox multiple items={countries}>
+ *   <ComboboxContent anchor={anchor}>
+ *     <ComboboxList>
+ *       {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+ *     </ComboboxList>
+ *   </ComboboxContent>
+ * </Combobox>
+ */
 function ComboboxContent({
   className,
   side = "bottom",
@@ -145,6 +197,16 @@ function ComboboxContent({
   )
 }
 
+/**
+ * The scrolling list of options inside the popup, which takes a render function that maps the items of the `Combobox`.
+ *
+ * @example
+ * <ComboboxContent>
+ *   <ComboboxList>
+ *     {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+ *   </ComboboxList>
+ * </ComboboxContent>
+ */
 function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
   return (
     <ComboboxPrimitive.List
@@ -161,6 +223,14 @@ function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
   )
 }
 
+/**
+ * One selectable option in the list, with a check mark when it is selected; give each a unique `value`.
+ *
+ * @example
+ * <ComboboxList>
+ *   {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+ * </ComboboxList>
+ */
 function ComboboxItem({
   className,
   children,
@@ -190,6 +260,18 @@ function ComboboxItem({
   )
 }
 
+/**
+ * Gathers related options of the list under one `ComboboxLabel`, so a long list reads in sections.
+ *
+ * @example
+ * <ComboboxList>
+ *   {(group) => (
+ *     <ComboboxGroup key={group.label} items={group.items}>
+ *       <ComboboxLabel>{group.label}</ComboboxLabel>
+ *     </ComboboxGroup>
+ *   )}
+ * </ComboboxList>
+ */
 function ComboboxGroup({ className, ...props }: ComboboxPrimitive.Group.Props) {
   return (
     <ComboboxPrimitive.Group
@@ -200,6 +282,14 @@ function ComboboxGroup({ className, ...props }: ComboboxPrimitive.Group.Props) {
   )
 }
 
+/**
+ * The heading that names the `ComboboxGroup` of options below it.
+ *
+ * @example
+ * <ComboboxGroup items={group.items}>
+ *   <ComboboxLabel>Europe</ComboboxLabel>
+ * </ComboboxGroup>
+ */
 function ComboboxLabel({
   className,
   ...props
@@ -213,12 +303,31 @@ function ComboboxLabel({
   )
 }
 
+/**
+ * Renders the options of one `ComboboxGroup` from its own items, when the list is grouped.
+ *
+ * @example
+ * <ComboboxGroup items={group.items}>
+ *   <ComboboxLabel>{group.label}</ComboboxLabel>
+ *   <ComboboxCollection>
+ *     {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+ *   </ComboboxCollection>
+ * </ComboboxGroup>
+ */
 function ComboboxCollection({ ...props }: ComboboxPrimitive.Collection.Props) {
   return (
     <ComboboxPrimitive.Collection data-slot="combobox-collection" {...props} />
   )
 }
 
+/**
+ * The message shown when the filter matches no option; render one in every `Combobox`.
+ *
+ * @example
+ * <ComboboxContent>
+ *   <ComboboxEmpty>No countries found.</ComboboxEmpty>
+ * </ComboboxContent>
+ */
 function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props) {
   return (
     <ComboboxPrimitive.Empty
@@ -232,6 +341,16 @@ function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props) {
   )
 }
 
+/**
+ * A rule between two groups of options in the list.
+ *
+ * @example
+ * <ComboboxList>
+ *   <ComboboxGroup items={first}>{renderFirst}</ComboboxGroup>
+ *   <ComboboxSeparator />
+ *   <ComboboxGroup items={second}>{renderSecond}</ComboboxGroup>
+ * </ComboboxList>
+ */
 function ComboboxSeparator({
   className,
   ...props
@@ -245,6 +364,16 @@ function ComboboxSeparator({
   )
 }
 
+/**
+ * The field that holds the chips of a multiple selection and their input; give its ref to `useComboboxAnchor`.
+ *
+ * @example
+ * <Combobox multiple items={countries}>
+ *   <ComboboxChips ref={anchor}>
+ *     <ComboboxChipsInput placeholder="Add a country" />
+ *   </ComboboxChips>
+ * </Combobox>
+ */
 function ComboboxChips({
   className,
   ...props
@@ -262,6 +391,15 @@ function ComboboxChips({
   )
 }
 
+/**
+ * One selected value of a multiple selection, with a button that removes it; pass `removeLabel` when its children are not the item's text.
+ *
+ * @example
+ * <ComboboxChips ref={anchor}>
+ *   <ComboboxChip>Canada</ComboboxChip>
+ *   <ComboboxChipsInput />
+ * </ComboboxChips>
+ */
 function ComboboxChip({
   className,
   children,
@@ -316,6 +454,14 @@ function ComboboxChip({
   )
 }
 
+/**
+ * The text field inside `ComboboxChips` that filters the list while chips are shown.
+ *
+ * @example
+ * <ComboboxChips ref={anchor}>
+ *   <ComboboxChipsInput placeholder="Add a country" />
+ * </ComboboxChips>
+ */
 function ComboboxChipsInput({
   className,
   ...props
@@ -332,6 +478,12 @@ function ComboboxChipsInput({
   )
 }
 
+/**
+ * Returns the ref that ties the popup of a multiple selection to its chips, so the list opens below them.
+ *
+ * @example
+ * const anchor = useComboboxAnchor()
+ */
 function useComboboxAnchor() {
   return React.useRef<HTMLDivElement | null>(null)
 }
