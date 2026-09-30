@@ -252,7 +252,7 @@ Every component has a spec in `specs/components/<component>.md`, in 13 sections:
 
 > **Metadata** · **Role** · **Usage** · **Constraints** · **Dependencies** · **Anatomy** · **Tokens** · **Props / API** · **Variants** · **States** · **Accessibility** · **Code example** · **Cross-references**
 
-**Variants** is generated from the code's `cva()` calls (`npm run specs:variants`), **Tokens** from its classes, resolved by Tailwind down to the semantic token (`npm run specs:tokens`), and **Props / API** from its TypeScript exports, where only the descriptions are edited by hand (`npm run specs:api`); `specs:validate` checks all three. The rules for choosing between sibling components (selection, surfaces, collections) live once in `composition_rules` and are copied into the **Usage** of the specs they concern (`npm run specs:choices`). Rules (**Constraints**, **Accessibility**…) are written **MUST** / **MUST NOT** with a threshold or an observable criterion, or **SHOULD** with its exception (**unless**); every **Constraints** line opens with one of these keywords, or with **Note** for a fact that imposes nothing; `specs:validate` rejects wording that leaves the decision to the reader ("avoid", "prefer", "if needed"…). **Accessibility** gives, in a fixed structure, the ARIA pattern, the role, the keys, the accessible-name requirement and the pitfalls — known defects included.
+**Variants** is generated from the code's `cva()` calls (`npm run specs:variants`), **Tokens** from its classes, resolved by Tailwind down to the semantic token (`npm run specs:tokens`), and **Props / API** from its TypeScript exports, where only the descriptions are edited by hand (`npm run specs:api`); `specs:validate` checks all three. The rules for choosing between sibling components (selection, surfaces, collections) live once in `composition_rules` and are copied into the **Usage** of the specs they concern (`npm run specs:choices`). Rules (**Constraints**, **Accessibility**…) are written **MUST** / **MUST NOT** with a threshold or an observable criterion, or **SHOULD** with its exception (**unless**); every **Constraints** line opens with one of these keywords, or with **Note** for a fact that imposes nothing; `specs:validate` rejects wording that leaves the decision to the reader ("avoid", "prefer", "if needed"…). **Accessibility** gives, in a fixed structure, the ARIA pattern, the role, the keys, the accessible-name requirement and the pitfalls — known defects included — against the WCAG 2.2 AA target.
 
 The MCP server ingests these specs through `get_component_specs`; they are the components' behavioral source of truth.
 
@@ -294,6 +294,7 @@ npm run typecheck    # tsc --noEmit
 - **`npm run tokens-validate` before every commit** — zero errors required to merge.
 - **Phosphor icons only** — `@phosphor-icons/react`. No Lucide, no Heroicons.
 - **Class-based dark mode** — the `.dark` class on `<html>`. No `prefers-color-scheme`.
+- **WCAG 2.2 AA** — contrast (checked in both modes), 24px minimum pointer targets (`size.target.min`), visible focus. APCA is reported as an advisory level only.
 - **Read the spec** before writing or changing a component (`specs/components/<component>.md`).
 - **Everything in American English** — code, comments, docs, specs and UI copy.
 

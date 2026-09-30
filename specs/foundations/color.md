@@ -241,8 +241,9 @@ these utility classes:
 2. **Never fake subtlety with opacity** — use `color.text.subtle`, not `color.text.default` with `opacity-50`.
 3. **Follow the surface hierarchy**: `default` → `subtle` → `elevated`. A card is `subtle`, a popover is `elevated`.
 4. **Always test both modes** — every component must be checked in light AND dark before it ships.
-5. **Accessibility first** — the minimum contrast ratio is 4.5:1 (WCAG AA) for body text, and 3:1 for large text and UI components.
+5. **Accessibility first** — the conformance target is WCAG 2.2 AA: the minimum contrast ratio is 4.5:1 for body text (SC 1.4.3), and 3:1 for large text and UI components (SC 1.4.11).
 6. **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lint-contrast.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.
+7. **APCA is advisory, WCAG 2 decides** — the same lint prints a second level: the APCA lightness contrast (Lc) of every pair, against Lc 60 for text and Lc 45 for non-text (APCA Bronze Simple Mode), tagged as WCAG 3 preparation. WCAG 3 is a Working Draft and regulations cite WCAG 2.x, so an APCA warning never fails the build and never justifies a token change that lowers a WCAG 2 ratio below its threshold. Weigh the warnings when a palette step changes for another reason, and keep the change only if both levels hold or improve.
 
 ## Measured contrast
 

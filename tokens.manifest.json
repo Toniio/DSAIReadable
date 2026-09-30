@@ -1,5 +1,5 @@
 {
-  "tokenCount": 424,
+  "tokenCount": 425,
   "tokens": [
     {
       "token": "primitive.color.mist.0",
@@ -6882,6 +6882,26 @@
       "description": "Ring painted in the background color around an element that overlaps another, cutting it out: stacked avatars, an avatar's badge. Not for borders or focus rings.",
       "docs": {
         "tailwind": "ring-(length:--border-width-separation)"
+      }
+    },
+    {
+      "token": "size.target.min",
+      "tier": "semantic",
+      "cssVar": "--size-target-min",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.space.6}"
+      },
+      "value": {
+        "light": "1.5rem"
+      },
+      "description": "Minimum pointer target (24px): WCAG 2.2 SC 2.5.8 Target Size (Minimum), level AA. The clickable area of every control reaches it, or the control meets one of the exceptions listed in specs/foundations/size.md.",
+      "docs": {
+        "tailwind": "min-h-target min-w-target",
+        "do": "Give a control drawn smaller than 24px a hit area of this size: `after:absolute after:inset-0 after:m-auto after:size-target` on a `relative` control, or `min-h-target min-w-target`.",
+        "dont": "Do not use it as a spacing value or to size an icon."
       }
     },
     {

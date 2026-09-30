@@ -499,6 +499,9 @@
   --border-width-default:         var(--ds-prim-border-width-1);
   --border-width-chart-indicator: var(--ds-prim-border-width-1-5);
   --border-width-separation:      var(--ds-prim-border-width-2);
+
+  /* size */
+  --size-target-min: var(--ds-prim-space-6);
 }
 
 /* ── Layer 2 · Semantic — dark mode overrides ─────────────── */

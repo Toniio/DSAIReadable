@@ -752,7 +752,7 @@ const generalRules = readContext<{
 const ruleSources = new Set(generalRules.map((r) => r.source))
 const ruleless = foundations.filter((f) => !ruleSources.has(f))
 assert(
-  foundations.length === 11 && ruleless.length === 0,
+  foundations.length === 12 && ruleless.length === 0,
   `Every foundation serves its rules (${foundations.length - ruleless.length}/${foundations.length}${ruleless.length ? `; none for ${ruleless.join(", ")}` : ""})`
 )
 

@@ -261,6 +261,7 @@ const SEMANTIC_GRAMMAR: Grammar = {
     "space.layout.<layoutName>",
     "space.focus-ring-width",
   ],
+  size: ["size.target.min"],
   typography: TYPOGRAPHY_SHAPES,
   zindex: ["zindex.<zLayer>"],
 }

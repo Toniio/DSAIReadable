@@ -137,6 +137,7 @@ No keyboard interaction of its own; a badge rendered as a link behaves like a na
 - Color never carries the meaning on its own (`destructive` says "Error" in words, it is not just red; `success` says "Paid", not just green). Success green and error red look alike to a red-green color-blind reader.
 - **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`) or a raw color: `text-destructive`, `text-success` and `text-warning` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.
 - A count ("3") must be tied to what it counts — in the name of the neighboring button, for example.
+- **MUST** — keep 4px of clear space above and below a Badge rendered as a link (`asChild`): it is 20px tall, and only the spacing exception of WCAG 2.2 SC 2.5.8 (Target Size) makes it conform (`specs/foundations/size.md`).
 
 ## Code example
 

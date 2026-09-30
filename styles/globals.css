@@ -198,6 +198,10 @@
   --spacing-sidebar-mobile: var(--space-layout-sidebar-mobile);
   --spacing-sidebar-icon: var(--space-layout-sidebar-icon);
 
+  /* Minimum pointer target (WCAG 2.2 SC 2.5.8) → min-h-target, min-w-target,
+     after:size-target for a hit area wider than the control's drawing. */
+  --spacing-target: var(--size-target-min);
+
   /* Border widths → border, border-t, divide-x… and border-chart-indicator.
      --default-border-width is what a bare `border` reads. */
   --default-border-width: var(--border-width-default);

@@ -190,23 +190,24 @@ One spec per component, in 13 sections:
 rules are written **MUST** / **MUST NOT** or **SHOULD** … **unless** (**Note** for a fact, in Constraints); `lint-spec-wording` rejects "avoid", "prefer", "if needed"… and any Constraints line without a keyword;
 the rules for choosing between sibling components (the index's `composition_rules`, `applies_to` field) are copied as the last bullet of their `Usage` (`npm run specs:choices`);
 `Props / API` is generated from the TypeScript exports — one block per export, types and defaults taken from the code; only the descriptions are edited by hand (`npm run specs:api`);
-`Accessibility` follows a fixed structure — Pattern, Role, Keyboard, Accessible name, Pitfalls.
+`Accessibility` follows a fixed structure — Pattern, Role, Keyboard, Accessible name, Pitfalls — and targets WCAG 2.2 AA.
 
 ### `specs/foundations/` — Foundation specs
 
-| File              | Holds                                                                          |
-| ----------------- | ------------------------------------------------------------------------------ |
-| `border-width.md` | The two border widths and how they are wired into Tailwind                     |
-| `breakpoints.md`  | The responsive prefixes as a contract; the values of the `breakpoint.*` tokens |
-| `color.md`        | The full table of light / dark color tokens + Do / Don't                       |
-| `content.md`      | Default strings (`UI_STRINGS`) and how to override them for another locale     |
-| `elevation.md`    | Shadows and depth levels                                                       |
-| `focus.md`        | The single focus ring and its presets (`lib/focus.ts`)                         |
-| `motion.md`       | Animation durations and easings                                                |
-| `opacity.md`      | The three semantic opacity levels                                              |
-| `radius.md`       | Border-radius values                                                           |
-| `spacing.md`      | Component spacing (4px → 32px) and layout spacing                              |
-| `typography.md`   | Type scale, families, weights                                                  |
+| File              | Holds                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| `border-width.md` | The two border widths and how they are wired into Tailwind                                  |
+| `breakpoints.md`  | The responsive prefixes as a contract; the values of the `breakpoint.*` tokens              |
+| `color.md`        | The full table of light / dark color tokens + Do / Don't, the WCAG 2 / APCA contrast levels |
+| `content.md`      | Default strings (`UI_STRINGS`) and how to override them for another locale                  |
+| `elevation.md`    | Shadows and depth levels                                                                    |
+| `focus.md`        | The single focus ring and its presets (`lib/focus.ts`)                                      |
+| `motion.md`       | Animation durations and easings                                                             |
+| `opacity.md`      | The three semantic opacity levels                                                           |
+| `radius.md`       | Border-radius values                                                                        |
+| `size.md`         | The 24px minimum target size (WCAG 2.2 SC 2.5.8) and the audit of every control             |
+| `spacing.md`      | Component spacing (4px → 32px) and layout spacing                                           |
+| `typography.md`   | Type scale, families, weights                                                               |
 
 ### `specs/tokens/token-reference.md` · `tokens.manifest.json` — generated
 

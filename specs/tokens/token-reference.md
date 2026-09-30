@@ -5,7 +5,7 @@
 
 # Token Reference
 
-> 424 tokens · source `tokens/tokens.resolver.json`: `primitive.json` · `semantic.json` · `semantic.dark.json` · `component.json`
+> 425 tokens · source `tokens/tokens.resolver.json`: `primitive.json` · `semantic.json` · `semantic.dark.json` · `component.json`
 > Machine-readable counterpart: `tokens.manifest.json`
 
 The public tokens are the Semantic and Component tiers. The Primitive tier is private:
@@ -364,6 +364,20 @@ the status says what the code does.
 | `border-width.default`         | `--border-width-default`         | dimension | active | `1px`   | `border`                                  |
 | `border-width.chart-indicator` | `--border-width-chart-indicator` | dimension | active | `1.5px` | `border-chart-indicator`                  |
 | `border-width.separation`      | `--border-width-separation`      | dimension | active | `2px`   | `ring-(length:--border-width-separation)` |
+
+---
+
+## Size
+
+| Token             | CSS variable        | Type      | Status | Value    | Tailwind                    |
+| ----------------- | ------------------- | --------- | ------ | -------- | --------------------------- |
+| `size.target.min` | `--size-target-min` | dimension | active | `1.5rem` | `min-h-target min-w-target` |
+
+**Usage rules**
+
+| Scope             | ✅ Do                                                                                                                                                                                  | ❌ Don't                                             |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `size.target.min` | Give a control drawn smaller than 24px a hit area of this size: `after:absolute after:inset-0 after:m-auto after:size-target` on a `relative` control, or `min-h-target min-w-target`. | Do not use it as a spacing value or to size an icon. |
 
 ---
 

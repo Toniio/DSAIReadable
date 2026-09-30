@@ -133,6 +133,13 @@
       "reason": "z-10 lays the transparent native input of a QuestionnaireChoice over its indicator and label, so the whole choice is the click target. Local ordering; the z-index scale addresses global layers (dropdown, modal, tooltip).",
       "token_candidate": null,
       "review_after": "2027-09-30"
+    },
+    {
+      "id": "resize-hit-target",
+      "file": "components/ui/resizable.tsx",
+      "reason": "react-resizable-panels takes the minimum hit area of a handle as a number of px (resizeTargetMinimumSize) and measures it in JavaScript, where a CSS custom property does not apply. Its defaults (fine 10, coarse 20) are below WCAG 2.2 SC 2.5.8, so the group sets both to 24, the value of size.target.min.",
+      "token_candidate": "size.target.min",
+      "review_after": "2027-09-30"
     }
   ]
 }
