@@ -36,6 +36,7 @@ The colored block that holds the text of a conversation turn, with optional reac
 - **MUST** — render `BubbleContent` as a `button` or an `a` (`asChild`) when the bubble reacts to a click; a `div` with a click handler is not reachable by keyboard
 - **MUST NOT** — place more than 5 reactions in one `BubbleReactions` → show a count for the rest
 - **Note** — a bubble takes at most 4/5 of the thread width, a `ghost` bubble the whole width
+- **Note** — `BubbleReactions` is lifted over the bubble it overlaps with a raw `z-10`, internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`
 
 ## Dependencies
 

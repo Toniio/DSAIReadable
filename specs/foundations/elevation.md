@@ -64,6 +64,28 @@ xs    ░      Micro-interactions, subtle hover   —
 inner ▼      Sunken inputs, pressed state       —
 ```
 
+### Local stacking inside a component
+
+The `z-dropdown` … `z-tooltip` layers (1000 to 1700) place a surface above the
+page. A few components also order **their own parts** — a stretched click
+target under its buttons, a badge over the block it overlaps. That order is
+internal to the component: it takes a small raw z-index, far below the global
+layers, and needs no token.
+
+| Component        | Class          | What it orders                                                                   |
+| ---------------- | -------------- | -------------------------------------------------------------------------------- |
+| `Attachment`     | `z-10`, `z-20` | `AttachmentTrigger` over the media and the content, `AttachmentActions` above it |
+| `Bubble`         | `z-10`         | `BubbleReactions` over the bubble it overlaps                                    |
+| `Questionnaire`  | `z-10`         | The transparent native input of a choice over its indicator and label            |
+| `NavigationMenu` | `z-1`          | `NavigationMenuIndicator` above the menu bar border                              |
+| `Calendar`       | `z-0`          | The ends of a range, isolated so their highlight paints under the day cells      |
+
+These values are reserved to the component files that use them: each one is
+declared `allow-raw: local-stacking` in `tokens/allow-raw.registry.json`, with
+its reason, and `npm run tokens:lint-values` rejects any other. Code built
+with the design system never writes a z-index of its own: it composes the
+components, and places a surface above the page with a global layer.
+
 ---
 
 ## Examples

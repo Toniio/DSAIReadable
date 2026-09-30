@@ -37,6 +37,7 @@ A tile that stands for one file sent or received — its icon or preview, its na
 - **MUST NOT** — put more than 2 `AttachmentAction`s in a tile → open a `DropdownMenu` from one of them
 - **MUST** — place `AttachmentTrigger` as the last child of the tile, with the file name as its accessible name, when the tile opens the file
 - **Note** — the `size` of `Attachment` takes `default`, `sm` and `xs`; the `size` of `AttachmentAction` takes the `Button` scale and defaults to `icon-xs`
+- **Note** — the tile orders its own parts with raw z-index values: `AttachmentTrigger` (`z-10`) lies over the media and the content, `AttachmentActions` (`z-20`) over the trigger. They are internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`
 
 ## Dependencies
 

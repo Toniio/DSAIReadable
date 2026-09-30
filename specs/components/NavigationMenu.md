@@ -29,6 +29,7 @@ Primary navigation that organizes the site's links into categories, with drop-do
 - **Note** — `viewport={false}` renders the content inline, without a viewport
 - **MUST** — render every link with `NavigationMenuLink`, which handles `data-active`
 - **MUST** — give the parent of `NavigationMenuIndicator` relative positioning
+- **Note** — `NavigationMenuIndicator` takes a raw `z-1` to sit above the menu bar border; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`
 
 ## Dependencies
 

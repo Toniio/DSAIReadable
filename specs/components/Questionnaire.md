@@ -37,6 +37,7 @@ A form that asks one question at a time — single or multiple choice, or a free
 - **MUST** — mark a question `required` when it cannot be skipped: `QuestionnaireSkip` then stays hidden for it
 - **MUST NOT** — use a `Questionnaire` for a form whose fields are all read at once → `Field`s in a `form`
 - **Note** — `@shadcn/react` provides the behavior (the current question, the keyboard, validation, the progress bar); this file styles it
+- **Note** — the transparent native input of each choice lies over its indicator and label with a raw `z-10`, internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`
 
 ## Dependencies
 
