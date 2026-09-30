@@ -14,6 +14,7 @@
     "url": "git+https://github.com/Toniio/DSAIReadable.git",
     "directory": "mcp-server"
   },
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

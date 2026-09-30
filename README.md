@@ -367,3 +367,9 @@ the design system **code-first** and driven by AI agents only.
 
 The full reintegration spec — node-id mapping, script behavior, dependencies and
 configuration — is kept in [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).
+
+---
+
+## License
+
+[MIT](./LICENSE). The components are derived from shadcn/ui, also MIT: see [`NOTICE.md`](./NOTICE.md).
