@@ -752,7 +752,7 @@ const generalRules = readContext<{
 const ruleSources = new Set(generalRules.map((r) => r.source))
 const ruleless = foundations.filter((f) => !ruleSources.has(f))
 assert(
-  foundations.length === 12 && ruleless.length === 0,
+  foundations.length === 13 && ruleless.length === 0,
   `Every foundation serves its rules (${foundations.length - ruleless.length}/${foundations.length}${ruleless.length ? `; none for ${ruleless.join(", ")}` : ""})`
 )
 
@@ -1449,8 +1449,10 @@ const semanticPaths = new Set(
 const meta = JSON.parse(
   readFileSync(resolve(contextDir, "ds-metadata.json"), "utf-8")
 )
-const contentRuleCount = uxRules.filter(
-  (r) => (r as { source?: string }).source === "content.md"
+const contentRuleCount = uxRules.filter((r) =>
+  ["voice-and-tone.md", "content.md"].includes(
+    (r as { source?: string }).source ?? ""
+  )
 ).length
 
 interface ToolCase {
@@ -1551,7 +1553,11 @@ const TOOL_CASES: Record<string, ToolCase> = {
     content: (p) =>
       Object.keys(p).join() === "rules,detail" &&
       p.rules.length === contentRuleCount &&
-      p.rules.every((r: Json) => r.source === "content.md"),
+      p.rules.some((r: Json) => r.source === "voice-and-tone.md") &&
+      p.rules.some((r: Json) => r.source === "content.md") &&
+      p.rules.every((r: Json) =>
+        ["voice-and-tone.md", "content.md"].includes(r.source)
+      ),
     errorArgs: { response_format: "verbose" },
     errorNames: "detailed",
   },

@@ -27,7 +27,7 @@ export function registerUxWritingTools(server: McpServer): void {
     {
       title: "UX writing rules",
       description:
-        'Returns the rules for the text a UI renders. "concise" (default): the content foundation rules — default strings from UI_STRINGS, one override prop per string, language of the defaults. "detailed": the whole rule set — foundation rules, component constraints, composition rules — which get_design_rules also serves',
+        'Returns the rules for the text a UI renders. "concise" (default): the voice and tone rules (sentence case, verb-first buttons, errors that say what happened and how to fix it, word list) and the content rules (default strings from UI_STRINGS, one override prop per string, language of the defaults). "detailed": the whole rule set — foundation rules, component constraints, composition rules — which get_design_rules also serves',
       inputSchema: {
         response_format: responseFormat(
           "every foundation rule, the component constraints and the composition rules"

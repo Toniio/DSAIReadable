@@ -11,9 +11,14 @@
  *
  * Values that are not copy - ARIA tokens like aria-label="true", data
  * attributes, empty strings - are not flagged.
+ *
+ * The strings themselves follow the voice (specs/foundations/voice-and-tone.md):
+ * sentence case, `…` as one character, no word the word list rejects, and no
+ * final period or exclamation mark on an accessible name.
  */
 import { readFileSync, readdirSync } from "node:fs"
 import { join } from "node:path"
+import { UI_STRINGS } from "../lib/ui-strings.js"
 
 const DIR = "components/ui"
 const SOURCE = "@/lib/ui-strings"
@@ -106,6 +111,65 @@ for (const name of readdirSync(DIR)
   })
 }
 
+/**
+ * The word list of voice-and-tone.md: each term the interface does not use,
+ * with the one it uses instead.
+ */
+const REJECTED: [RegExp, string][] = [
+  [/\b(please|oops|whoops)\b/i, "nothing: drop the word"],
+  [/\b(log ?in|log on)\b/i, "sign in"],
+  [/\be-mail\b/i, "email"],
+  [/\b(click|tap|hit)\b/i, "select"],
+]
+
+/**
+ * Proper nouns the defaults may capitalize past the first word. Empty today:
+ * add a name only when a default string needs it.
+ */
+const PROPER_NOUNS = new Set<string>()
+
+/** Every default string, keyed by its path; a function is called on a sample. */
+function strings(node: object, path: string[] = []): [string, string][] {
+  return Object.entries(node).flatMap(([key, value]) => {
+    const at = [...path, key]
+    if (typeof value === "string") return [[at.join("."), value]]
+    if (typeof value === "function") return [[at.join("."), value("item")]]
+    return strings(value as object, at)
+  }) as [string, string][]
+}
+
+const voice: string[] = []
+
+for (const [path, value] of strings(UI_STRINGS)) {
+  const fail = (why: string) =>
+    voice.push(`UI_STRINGS.${path} "${value}": ${why}`)
+  const [first, ...rest] = value.split(/\s+/)
+  if (!/^\p{Lu}/u.test(first)) fail("starts in lowercase (sentence case)")
+  const capitalized = rest.filter(
+    (word) => /\p{Lu}/u.test(word) && !PROPER_NOUNS.has(word)
+  )
+  if (capitalized.length > 0) {
+    fail(`capitalizes ${capitalized.join(", ")} (sentence case)`)
+  }
+  if (value.includes("...")) fail("three periods: write … as one character")
+  for (const [pattern, instead] of REJECTED) {
+    const word = value.match(pattern)
+    if (word) fail(`"${word[0]}" is on the word list, write ${instead}`)
+  }
+  if (!path.endsWith("Description") && /[.!]$/.test(value)) {
+    fail("an accessible name takes no final period or exclamation mark")
+  }
+}
+
+if (voice.length > 0) {
+  console.error(
+    `❌ lint-ui-strings: ${voice.length} default string(s) break the voice.\n`
+  )
+  for (const v of voice) console.error(`   ${v}`)
+  console.error(`\n   See specs/foundations/voice-and-tone.md.`)
+  process.exit(1)
+}
+
 if (findings.length > 0) {
   console.error(`❌ lint-ui-strings: ${findings.length} hardcoded string(s).\n`)
   for (const f of findings) {
@@ -124,5 +188,5 @@ const consumers = modules.filter((f) =>
 ).length
 
 console.log(
-  `✅ lint-ui-strings: no hardcoded accessible name, ${consumers} component(s) read lib/ui-strings.ts.`
+  `✅ lint-ui-strings: no hardcoded accessible name, ${consumers} component(s) read lib/ui-strings.ts, ${strings(UI_STRINGS).length} default strings follow the voice.`
 )

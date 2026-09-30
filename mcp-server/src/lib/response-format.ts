@@ -103,9 +103,14 @@ export function conciseRuleSet(data: RuleSet) {
 }
 
 /** The rules about the text a UI renders: those of the content foundation. */
+/** The foundations about text: the voice it is written in, the strings a component ships. */
+const UX_WRITING_SOURCES = ["voice-and-tone.md", "content.md"]
+
 export function conciseUxWriting(data: RuleSet) {
   return {
-    rules: (data.general_rules ?? []).filter((r) => r.source === "content.md"),
+    rules: (data.general_rules ?? []).filter((r) =>
+      UX_WRITING_SOURCES.includes(r.source ?? "")
+    ),
     detail:
       'response_format: "detailed" returns the whole rule set — foundation rules, component constraints, composition rules — the same rules get_design_rules serves',
   }
