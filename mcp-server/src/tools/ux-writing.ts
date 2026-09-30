@@ -1,7 +1,12 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/server"
-import { loadContext, notFound, text } from "../lib/context.js"
+import { loadContext, notFound, result } from "../lib/context.js"
 import { READ_ONLY } from "../lib/annotations.js"
+import {
+  contentLibraryOutput,
+  glossaryOutput,
+  uxWritingRulesOutput,
+} from "../lib/output-schemas.js"
 import {
   conciseUxWriting,
   responseFormat,
@@ -9,15 +14,8 @@ import {
 } from "../lib/response-format.js"
 
 interface GlossaryEntry {
-  term?: string
-  name?: string
-  [key: string]: unknown
-}
-
-interface ContentEntry {
-  category?: string
-  type?: string
-  [key: string]: unknown
+  term: string
+  definition: string
 }
 
 export function registerUxWritingTools(server: McpServer): void {
@@ -33,11 +31,12 @@ export function registerUxWritingTools(server: McpServer): void {
           "every foundation rule, the component constraints and the composition rules"
         ),
       }),
+      outputSchema: uxWritingRulesOutput,
       annotations: READ_ONLY,
     },
     async ({ response_format }) => {
       const rules = loadContext<RuleSet>("ux-writing.json")
-      return text(
+      return result(
         response_format === "detailed" ? rules : conciseUxWriting(rules)
       )
     }
@@ -52,33 +51,29 @@ export function registerUxWritingTools(server: McpServer): void {
       inputSchema: z.object({
         term: z.string().optional().describe("Specific term to look up"),
       }),
+      outputSchema: glossaryOutput,
       annotations: READ_ONLY,
     },
     async ({ term }) => {
-      const data = loadContext<
-        { terms?: GlossaryEntry[] } & Record<string, unknown>
-      >("glossary.json")
-
-      if (!term) return text(data)
+      const terms = loadContext<GlossaryEntry[]>("glossary.json")
+      // An object at the root, as structuredContent requires.
+      if (!term) return result({ terms })
 
       const needle = term.toLowerCase()
-      const terms =
-        data.terms ?? (Array.isArray(data) ? (data as GlossaryEntry[]) : [])
-
       const match = terms.find(
         (t) =>
-          (t.term ?? t.name ?? "").toLowerCase() === needle ||
-          (t.term ?? t.name ?? "").toLowerCase().includes(needle)
+          t.term.toLowerCase() === needle ||
+          t.term.toLowerCase().includes(needle)
       )
 
       if (!match) {
         return notFound(
           `Term "${term}" not found. Pass one of the available terms, or omit term for the whole glossary.`,
-          terms.map((t) => t.term ?? t.name ?? "").filter(Boolean)
+          terms.map((t) => t.term)
         )
       }
 
-      return text(match)
+      return result(match)
     }
   )
 
@@ -95,29 +90,15 @@ export function registerUxWritingTools(server: McpServer): void {
           .optional()
           .describe("Content category to filter by"),
       }),
+      outputSchema: contentLibraryOutput,
       annotations: READ_ONLY,
     },
     async ({ category }) => {
-      const data = loadContext<
-        { entries?: ContentEntry[] } & Record<string, unknown>
-      >("content-library.json")
-
-      if (!category) return text(data)
-
-      // Support both flat array and categorized object structures
-      if (data.entries && Array.isArray(data.entries)) {
-        const filtered = data.entries.filter(
-          (e) =>
-            (e.category ?? e.type ?? "").toLowerCase() ===
-            category.toLowerCase()
-        )
-        return text(filtered)
-      }
-
-      const categoryData = (data as Record<string, unknown>)[category]
-      if (categoryData) return text({ [category]: categoryData })
-
-      return text({ category, entries: [] })
+      const data = loadContext<Record<string, Record<string, string>>>(
+        "content-library.json"
+      )
+      if (!category) return result(data)
+      return result({ [category]: data[category] ?? {} })
     }
   )
 }

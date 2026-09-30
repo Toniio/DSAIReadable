@@ -1,12 +1,24 @@
 import { readdirSync } from "node:fs"
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/server"
-import { contextDir, loadContext, notFound, text } from "../lib/context.js"
+import { contextDir, loadContext, notFound, result } from "../lib/context.js"
 import {
   compositionRulesFor,
   type CompositionRule,
 } from "../lib/composition-rules.js"
 import { READ_ONLY } from "../lib/annotations.js"
+import {
+  componentSpecOutput,
+  componentVariantsOutput,
+  componentsOutput,
+  designRulesOutput,
+  iconsOutput,
+  overviewOutput,
+  patternListOutput,
+  patternOutput,
+  tokensOutput,
+  typographyOutput,
+} from "../lib/output-schemas.js"
 import { pageParams, paginate } from "../lib/paginate.js"
 import {
   conciseRuleSet,
@@ -80,6 +92,7 @@ export function registerDsCoreTools(server: McpServer): void {
       title: "Design system overview",
       description:
         "Returns DS version, library info, stats summary (components, tokens, spec coverage)",
+      outputSchema: overviewOutput,
       annotations: READ_ONLY,
     },
     async () => {
@@ -104,7 +117,7 @@ export function registerDsCoreTools(server: McpServer): void {
       const pct = (n: number) =>
         components.length > 0 ? Math.round((n / components.length) * 100) : 0
 
-      return text({
+      return result({
         name: meta.name,
         description: meta.description,
         // Two versions, never one ambiguous "version": each is read from the
@@ -173,6 +186,7 @@ import { cn } from "@/lib/utils"`,
           ),
         ...pageParams,
       }),
+      outputSchema: componentsOutput,
       annotations: READ_ONLY,
     },
     async ({ category, limit, cursor }) => {
@@ -182,7 +196,7 @@ import { cn } from "@/lib/utils"`,
         const cat = category.toLowerCase()
         components = components.filter((c) => c.category?.toLowerCase() === cat)
       }
-      return text(paginate(components, limit, cursor))
+      return result(paginate(components, limit, cursor))
     }
   )
 
@@ -201,6 +215,7 @@ import { cn } from "@/lib/utils"`,
           "usage, anatomy, tokens, props, states, accessibility and the code example"
         ),
       }),
+      outputSchema: componentSpecOutput,
       annotations: READ_ONLY,
     },
     async ({ component_name, response_format }) => {
@@ -209,7 +224,7 @@ import { cn } from "@/lib/utils"`,
       )
       const needle = component_name.toLowerCase().replace(/[\s-_]/g, "")
       const answer = (spec: ComponentSpec) =>
-        text(response_format === "detailed" ? spec : conciseSpec(spec))
+        result(response_format === "detailed" ? spec : conciseSpec(spec))
 
       // Exact match first
       for (const [key, value] of Object.entries(specs)) {
@@ -252,6 +267,7 @@ import { cn } from "@/lib/utils"`,
           .string()
           .describe("Component name to look up variants for"),
       }),
+      outputSchema: componentVariantsOutput,
       annotations: READ_ONLY,
     },
     async ({ component_name }) => {
@@ -262,7 +278,7 @@ import { cn } from "@/lib/utils"`,
 
       for (const [key, value] of Object.entries(variants)) {
         if (key.toLowerCase().replace(/[\s-_]/g, "") === needle) {
-          return text({ component: key, ...(value as object) })
+          return result({ component: key, ...(value as object) })
         }
       }
       const excluded = excludedAnswer(component_name, Object.keys(variants))
@@ -274,7 +290,7 @@ import { cn } from "@/lib/utils"`,
             .replace(/[\s-_]/g, "")
             .includes(needle)
         ) {
-          return text({ component: key, ...(value as object) })
+          return result({ component: key, ...(value as object) })
         }
       }
 
@@ -311,6 +327,7 @@ import { cn } from "@/lib/utils"`,
           .describe("Token category to filter by"),
         ...pageParams,
       }),
+      outputSchema: tokensOutput,
       annotations: READ_ONLY,
     },
     async ({ category, limit, cursor }) => {
@@ -321,7 +338,7 @@ import { cn } from "@/lib/utils"`,
       const filtered = category
         ? all.filter((t) => t.path.startsWith(category + "."))
         : all
-      return text(paginate(filtered, limit, cursor))
+      return result(paginate(filtered, limit, cursor))
     }
   )
 
@@ -332,11 +349,12 @@ import { cn } from "@/lib/utils"`,
       title: "Typography",
       description:
         "Returns the full typography system (families, scale, weights, line-heights)",
+      outputSchema: typographyOutput,
       annotations: READ_ONLY,
     },
     async () => {
-      const typo = loadContext("text-styles.json")
-      return text(typo)
+      const typo = loadContext<object>("text-styles.json")
+      return result(typo)
     }
   )
 
@@ -346,11 +364,12 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Icons",
       description: "Returns the icon catalog and recommendations",
+      outputSchema: iconsOutput,
       annotations: READ_ONLY,
     },
     async () => {
-      const icons = loadContext("icons.json")
-      return text(icons)
+      const icons = loadContext<object>("icons.json")
+      return result(icons)
     }
   )
 
@@ -370,6 +389,7 @@ import { cn } from "@/lib/utils"`,
           "every rule without a category, and the critical rules in full with one"
         ),
       }),
+      outputSchema: designRulesOutput,
       annotations: READ_ONLY,
     },
     async ({ category, response_format }) => {
@@ -378,7 +398,7 @@ import { cn } from "@/lib/utils"`,
         format === "detailed" ? CRITICAL_RULES : criticalRuleTitles()
 
       if (!category) {
-        return text(
+        return result(
           response_format === "detailed"
             ? { ...data, critical_rules: CRITICAL_RULES }
             : conciseRuleSet(data)
@@ -391,10 +411,10 @@ import { cn } from "@/lib/utils"`,
         category
       )
       if (["composition", "composition_rules", "rules"].includes(cat))
-        return text({ category, composition_rules: composition })
+        return result({ category, composition_rules: composition })
 
       if (cat === "tailwind" || cat === "css" || cat === "styling") {
-        return text({ category, rules: CRITICAL_RULES })
+        return result({ category, rules: CRITICAL_RULES })
       }
 
       // Check general_rules and component_rules
@@ -410,7 +430,7 @@ import { cn } from "@/lib/utils"`,
             r.category?.toLowerCase().includes(cat)
         )
         if (filtered.length > 0)
-          return text({
+          return result({
             category,
             rules: filtered,
             composition_rules: composition,
@@ -423,7 +443,7 @@ import { cn } from "@/lib/utils"`,
           componentRules as Record<string, unknown>
         ).find(([name]) => name.toLowerCase() === cat)?.[1]
         if (match)
-          return text({
+          return result({
             category,
             rules: match,
             composition_rules: composition,
@@ -432,7 +452,7 @@ import { cn } from "@/lib/utils"`,
       }
 
       if (composition.length > 0)
-        return text({
+        return result({
           category,
           rules: [],
           composition_rules: composition,
@@ -461,13 +481,14 @@ import { cn } from "@/lib/utils"`,
           .optional()
           .describe('"task" or "ui"; omit for every pattern'),
       }),
+      outputSchema: patternListOutput,
       annotations: READ_ONLY,
     },
     async ({ kind }) => {
       const patterns = Object.values(
         loadContext<Record<string, Pattern>>("patterns.json")
       ).filter((p) => !kind || p.kind === kind)
-      return text({
+      return result({
         total: patterns.length,
         patterns: patterns.map(({ name, title, kind, role }) => ({
           name,
@@ -496,6 +517,7 @@ import { cn } from "@/lib/utils"`,
           "the structure, spacing and content rules, and the code example"
         ),
       }),
+      outputSchema: patternOutput,
       annotations: READ_ONLY,
     },
     async ({ name, response_format }) => {
@@ -510,7 +532,7 @@ import { cn } from "@/lib/utils"`,
           `Pattern "${name}" not found. Pass one of the available names.`,
           Object.keys(patterns)
         )
-      return text(
+      return result(
         response_format === "detailed" ? pattern : concisePattern(pattern)
       )
     }

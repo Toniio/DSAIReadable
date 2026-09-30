@@ -120,7 +120,10 @@ request is served on its own, no `Mcp-Session-Id` is issued, and `GET` or
 | **Admin**      | `get_stats` (component, token and spec counts), `validate_screen` (checks generated code against the design system's rules)                                      |
 
 Every tool is annotated as read-only (`readOnlyHint`, `openWorldHint: false`): a client does not need
-to confirm its calls. `get_component_specs`, `get_design_rules`, `get_ux_writing_rules` and `get_pattern` take
+to confirm its calls. Every tool declares an `outputSchema` and answers with `structuredContent` that
+conforms to it, plus the same JSON as text. An argument outside a tool's input schema is a tool
+execution error that names it. Lists and resources carry a one-hour, `public` cache hint (`ttlMs`,
+`cacheScope`) for 2026-07-28 clients. `get_component_specs`, `get_design_rules`, `get_ux_writing_rules` and `get_pattern` take
 `response_format`: `concise` by default (under 20 % of the volume), `detailed` for everything.
 `get_components` and `get_tokens` paginate: `limit` (100 by default) and `cursor`, with a
 `{ total, items, next_cursor }` response.

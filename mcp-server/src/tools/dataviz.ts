@@ -1,7 +1,11 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/server"
-import { loadContext, notFound, text } from "../lib/context.js"
+import { loadContext, notFound, result } from "../lib/context.js"
 import { READ_ONLY } from "../lib/annotations.js"
+import {
+  chartRecommendationOutput,
+  chartSpecOutput,
+} from "../lib/output-schemas.js"
 
 export function registerDatavizTools(server: McpServer): void {
   // 1. get_dataviz_recommendation
@@ -23,6 +27,7 @@ export function registerDatavizTools(server: McpServer): void {
           ])
           .describe("The data visualization objective"),
       }),
+      outputSchema: chartRecommendationOutput,
       annotations: READ_ONLY,
     },
     async ({ objective }) => {
@@ -38,13 +43,11 @@ export function registerDatavizTools(server: McpServer): void {
       const match = objectives.find((o) => o.name.toLowerCase() === obj)
 
       if (!match) {
-        return text({
-          objective,
-          note: "No exact match found. Showing all objectives.",
-          objectives,
-        })
+        return notFound(
+          `The decision tree has no objective "${objective}". Pass one of the available objectives.`,
+          objectives.map((o) => o.name)
+        )
       }
-
       // Enrich with specs from catalog
       const catalog = loadContext<Record<string, unknown>>(
         "dataviz-catalog.json"
@@ -54,7 +57,7 @@ export function registerDatavizTools(server: McpServer): void {
         ...((catalog[ct] as object) ?? {}),
       }))
 
-      return text({
+      return result({
         objective: match.name,
         description: match.description,
         recommended_charts: charts,
@@ -76,6 +79,7 @@ export function registerDatavizTools(server: McpServer): void {
             "The chart type to get specs for (e.g. 'bar', 'line', 'pie')"
           ),
       }),
+      outputSchema: chartSpecOutput,
       annotations: READ_ONLY,
     },
     async ({ chart_type }) => {
@@ -87,7 +91,7 @@ export function registerDatavizTools(server: McpServer): void {
 
       for (const [key, value] of Object.entries(catalog)) {
         if (key.toLowerCase().replace(/[\s-_]/g, "") === needle) {
-          return text({ type: key, ...(value as object) })
+          return result({ type: key, ...(value as object) })
         }
       }
       // Fuzzy
@@ -98,7 +102,7 @@ export function registerDatavizTools(server: McpServer): void {
             .replace(/[\s-_]/g, "")
             .includes(needle)
         ) {
-          return text({ type: key, ...(value as object) })
+          return result({ type: key, ...(value as object) })
         }
       }
 
