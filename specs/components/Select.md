@@ -71,7 +71,7 @@ A styled drop-down built on Radix for picking one option from a list, with autom
 | `elevation.md`                   | `shadow-md`                                                                                                | `SelectContent`                                                                                         |
 | `motion.duration.fast`           | `duration-fast`                                                                                            | `SelectContent`                                                                                         |
 | `opacity.disabled`               | `opacity-disabled`                                                                                         | `SelectItem` · `SelectTrigger`                                                                          |
-| `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                                                                   | `SelectTrigger` · `SelectTrigger` via `FOCUS_RING` (`lib/focus.ts`)                                     |
+| `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                                                                   | `SelectTrigger` via `FOCUS_RING` (`lib/focus.ts`)                                                       |
 | `space.scale.1`                  | `-mx-1` · `-translate-x-1` · `-translate-y-1` · `py-1` · `scroll-my-1` · `translate-x-1` · `translate-y-1` | `SelectContent` · `SelectGroup` · `SelectScrollDownButton` · `SelectScrollUpButton` · `SelectSeparator` |
 | `space.scale.1-5`                | `gap-1.5`                                                                                                  | `SelectTrigger`                                                                                         |
 | `space.scale.2`                  | `gap-2` · `pl-2` · `pr-2` · `px-2` · `py-2` · `right-2`                                                    | `SelectItem` · `SelectLabel` · `SelectTrigger`                                                          |
@@ -197,7 +197,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 | focus    | `ring` border and `ring-ring/50` ring through `focus-visible` on the trigger          |
 | active   | Popup open, animated with `fade-in` and `zoom-in-95`; the focused item in `accent`    |
 | disabled | `cursor-not-allowed`, reduced opacity (`opacity-disabled`) on the trigger or the item |
-| error    | `destructive` border and `ring-destructive/20` ring through `aria-invalid`            |
+| error    | `destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring   |
 
 ## Accessibility
 
@@ -235,22 +235,26 @@ import {
   SelectLabel,
   SelectItem,
 } from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 
 export default function Example() {
   return (
-    <Select>
-      <SelectTrigger>
-        <SelectValue placeholder="Choose a fruit" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="cherry">Cherry</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <>
+      <Label htmlFor="fruit">Fruit</Label>
+      <Select>
+        <SelectTrigger id="fruit">
+          <SelectValue placeholder="Choose a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Fruits</SelectLabel>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+            <SelectItem value="cherry">Cherry</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </>
   )
 }
 ```

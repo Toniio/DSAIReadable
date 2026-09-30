@@ -36,7 +36,7 @@ describe("Progress", () => {
     const bar = screen.getByRole("progressbar")
     expect(bar.getAttribute("aria-valuenow")).toBe("100")
     expect(bar.dataset.state).toBe("complete")
-    expect(indicator().style.transform).toBe("translateX(-0%)")
+    expect(indicator().style.transform).toBe("translateX(0%)")
   })
 
   it("is indeterminate without a value", () => {
@@ -54,7 +54,8 @@ describe("Progress", () => {
   it("is flagged by axe without an accessible name", async () => {
     render(<Progress value={45} />)
     expect(await axeViolations()).toEqual([
-      expect.stringMatching(/^aria-progressbar-name: /),
+      expect.stringMatching(/^light aria-progressbar-name: /),
+      expect.stringMatching(/^dark aria-progressbar-name: /),
     ])
   })
 })

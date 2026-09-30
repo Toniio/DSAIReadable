@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
+import userEvent, { PointerEventsCheckLevel } from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
 import { Button } from "@/components/ui/button"
@@ -8,7 +8,7 @@ import { PlusIcon } from "@phosphor-icons/react"
 import { axeViolations } from "../axe"
 
 describe("Button", () => {
-  it("renders a native button named by its text", () => {
+  it("role: a native button element", () => {
     render(<Button>Save</Button>)
     const button = screen.getByRole("button", { name: "Save" })
     expect(button.tagName).toBe("BUTTON")
@@ -57,19 +57,55 @@ describe("Button", () => {
     expect(button.classList).toContain(expected)
   })
 
-  it("activates with a click, Enter and Space", async () => {
+  it("Enter / Space: activates the button", async () => {
     const user = userEvent.setup()
     const onClick = vi.fn()
     render(<Button onClick={onClick}>Save</Button>)
 
     await user.click(screen.getByRole("button"))
+    expect(onClick).toHaveBeenCalledTimes(1)
     await user.keyboard("{Enter}")
+    expect(onClick).toHaveBeenCalledTimes(2)
     await user.keyboard(" ")
     expect(onClick).toHaveBeenCalledTimes(3)
   })
 
-  it("leaves the tab order and ignores clicks when disabled", async () => {
+  it("Tab: moves focus to the next element", async () => {
     const user = userEvent.setup()
+    render(
+      <>
+        <Button>Save</Button>
+        <Button variant="outline">Cancel</Button>
+      </>
+    )
+    const save = screen.getByRole("button", { name: "Save" })
+    save.focus()
+    await user.tab()
+    expect(document.activeElement).toBe(
+      screen.getByRole("button", { name: "Cancel" })
+    )
+  })
+
+  it("accessible name: the button text, or aria-label on the icon sizes", () => {
+    render(
+      <>
+        <Button>Sign in</Button>
+        <Button size="icon" aria-label="Add">
+          <PlusIcon />
+        </Button>
+      </>
+    )
+    expect(screen.getByRole("button", { name: "Sign in" })).toBeTruthy()
+    const icon = screen.getByRole("button", { name: "Add" })
+    expect(icon.textContent).toBe("")
+  })
+
+  it("leaves the tab order and ignores clicks when disabled", async () => {
+    // The disabled style sets pointer-events: none, which user-event refuses
+    // to click through; the click is still sent, to prove nothing handles it.
+    const user = userEvent.setup({
+      pointerEventsCheck: PointerEventsCheckLevel.Never,
+    })
     const onClick = vi.fn()
     render(
       <Button disabled onClick={onClick}>
@@ -117,7 +153,8 @@ describe("Button", () => {
       </Button>
     )
     expect(await axeViolations()).toEqual([
-      expect.stringMatching(/^button-name: /),
+      expect.stringMatching(/^light button-name: /),
+      expect.stringMatching(/^dark button-name: /),
     ])
   })
 })

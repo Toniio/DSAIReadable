@@ -39,17 +39,17 @@ A command palette with built-in search, for quickly filtering and picking an act
 
 ## Anatomy
 
-| Slot                                | Role                                              |
-| ----------------------------------- | ------------------------------------------------- |
-| `data-slot="command"`               | Root of the command palette                       |
-| `data-slot="command-input-wrapper"` | Wrapper of the search input, with a bottom border |
-| `data-slot="command-input"`         | Search input                                      |
-| `data-slot="command-list"`          | Scrolling list of results                         |
-| `data-slot="command-empty"`         | Message shown when nothing matches                |
-| `data-slot="command-group"`         | A logical group of commands                       |
-| `data-slot="command-item"`          | A single command                                  |
-| `data-slot="command-shortcut"`      | Keyboard shortcut shown at the right of the item  |
-| `data-slot="command-separator"`     | Visual separator between groups                   |
+| Slot                                | Role                                                                                   |
+| ----------------------------------- | -------------------------------------------------------------------------------------- |
+| `data-slot="command"`               | Root of the command palette                                                            |
+| `data-slot="command-input-wrapper"` | Wrapper of the search input, with a bottom border                                      |
+| `data-slot="command-input"`         | Search input                                                                           |
+| `data-slot="command-list"`          | Scrolling list of results                                                              |
+| `data-slot="command-empty"`         | Message shown when nothing matches                                                     |
+| `data-slot="command-group"`         | A logical group of commands                                                            |
+| `data-slot="command-item"`          | A single command                                                                       |
+| `data-slot="command-shortcut"`      | Keyboard shortcut shown at the right of the item                                       |
+| `data-slot="command-separator"`     | Visual separator between groups, `aria-hidden`: a listbox owns only options and groups |
 
 ## Tokens
 
@@ -61,10 +61,12 @@ A command palette with built-in search, for quickly filtering and picking an act
 | `color.background.elevated`        | `bg-popover`                                     | `Command`                                                                            |
 | `color.background.subtle`          | `bg-muted`                                       | `CommandItem`                                                                        |
 | `color.border.default`             | `bg-border`                                      | `CommandSeparator`                                                                   |
+| `color.border.focus`               | `ring-ring/50`                                   | `CommandInput`                                                                       |
 | `color.border.input`               | `bg-input/30` · `border-input/30`                | `CommandInput`                                                                       |
 | `color.text.default`               | `text-foreground` · `text-popover-foreground`    | `CommandGroup` · `CommandItem` · `CommandShortcut` · `Command`                       |
 | `color.text.subtle`                | `text-muted-foreground`                          | `CommandGroup` · `CommandInput` · `CommandShortcut`                                  |
 | `opacity.disabled`                 | `opacity-disabled`                               | `CommandInput` · `CommandItem`                                                       |
+| `space.focus-ring-width`           | `ring-(length:--space-focus-ring-width)`         | `CommandInput`                                                                       |
 | `space.scale.0`                    | `p-0` · `pb-0` · `scroll-py-0` · `translate-y-0` | `CommandDialog` · `CommandInput` · `CommandList`                                     |
 | `space.scale.1`                    | `-mx-1`                                          | `CommandSeparator`                                                                   |
 | `space.scale.1-5`                  | `py-1.5`                                         | `CommandGroup`                                                                       |

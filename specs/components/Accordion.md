@@ -135,12 +135,12 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Keyboard**:
 
-| Key                     | Action                                             |
-| ----------------------- | -------------------------------------------------- |
-| `Enter` / `Space`       | Opens or closes the focused trigger's panel        |
-| `ArrowDown` / `ArrowUp` | Next / previous trigger                            |
-| `Home` / `End`          | First / last trigger                               |
-| `Tab`                   | Leaves the triggers for the next focusable content |
+| Key                     | Action                                                                           |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| `Enter` / `Space`       | Opens or closes the focused trigger's panel                                      |
+| `ArrowDown` / `ArrowUp` | Next / previous trigger                                                          |
+| `Home` / `End`          | First / last trigger                                                             |
+| `Tab`                   | Moves to the next trigger, then past the accordion to the next focusable content |
 
 **Accessible name**: The `AccordionTrigger` text names the button and labels the panel: it must describe the content, not say "See more".
 

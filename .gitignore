@@ -30,3 +30,6 @@ validation-report.md
 
 # Upstream shadcn/ui sources, written and deleted by scripts/lint-shadcn-api.ts --update
 .shadcn-upstream/
+
+# Vitest browser mode: failure screenshots
+.vitest/

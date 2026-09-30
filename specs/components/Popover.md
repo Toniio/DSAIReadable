@@ -167,11 +167,11 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Keyboard**:
 
-| Key               | Action                                           |
-| ----------------- | ------------------------------------------------ |
-| `Enter` / `Space` | Opens the popover                                |
-| `Tab`             | Moves through the content (focus is not trapped) |
-| `Escape`          | Closes it and returns focus to the trigger       |
+| Key               | Action                                                                                                    |
+| ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `Enter` / `Space` | Opens the popover                                                                                         |
+| `Tab`             | Moves through the content, from the last element back to the first; `Escape` or a click outside leaves it |
+| `Escape`          | Closes it and returns focus to the trigger                                                                |
 
 **Accessible name**: The trigger must be named; give the content a title or an `aria-label` when its purpose is not obvious.
 

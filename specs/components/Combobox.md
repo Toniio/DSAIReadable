@@ -264,7 +264,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)
 
-**Role**: An input with `role="combobox"` linked to a `listbox`; `aria-expanded` on the input, `aria-selected` on the active option.
+**Role**: An input with `role="combobox"` linked to a `listbox`; `aria-expanded` on the input, `aria-activedescendant` pointing at the highlighted option, `aria-selected` on the chosen one.
 
 **Keyboard**:
 

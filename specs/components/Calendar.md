@@ -136,7 +136,7 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 **Pattern**: A date [grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (react-day-picker)
 
-**Role**: A grid of dates; the selected day carries `aria-selected`, unavailable days `aria-disabled`.
+**Role**: A grid of dates; the selected day carries `aria-selected`; an unavailable day is a `disabled` button.
 
 **Keyboard**:
 

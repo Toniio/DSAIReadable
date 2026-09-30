@@ -113,28 +113,15 @@ import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/sonner"
 import { toast } from "sonner"
 
-// In the root layout
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Example() {
   return (
-    <html>
-      <body>
-        {children}
-        <Toaster />
-      </body>
-    </html>
-  )
-}
-
-// Triggering a toast
-function SaveButton() {
-  return (
-    <Button onClick={() => toast.success("All set! Your changes are saved.")}>
-      Save changes
-    </Button>
+    <>
+      <Button onClick={() => toast.success("All set! Your changes are saved.")}>
+        Save changes
+      </Button>
+      {/* Mount the Toaster once, in the root layout, next to {children} */}
+      <Toaster />
+    </>
   )
 }
 ```

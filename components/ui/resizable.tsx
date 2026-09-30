@@ -11,9 +11,9 @@ import type { ComponentProps } from "react"
  *
  * @example
  * <ResizablePanelGroup orientation="horizontal">
- *   <ResizablePanel defaultSize={30} minSize={20}>Files</ResizablePanel>
+ *   <ResizablePanel defaultSize="30%" minSize="20%">Files</ResizablePanel>
  *   <ResizableHandle />
- *   <ResizablePanel minSize={30}>Editor</ResizablePanel>
+ *   <ResizablePanel minSize="30%">Editor</ResizablePanel>
  * </ResizablePanelGroup>
  */
 function ResizablePanelGroup({
@@ -38,7 +38,7 @@ function ResizablePanelGroup({
  * One section of a `ResizablePanelGroup` that the user grows or shrinks; give it a `minSize` so its content is never crushed.
  *
  * @example
- * <ResizablePanel defaultSize={25} minSize={15}>
+ * <ResizablePanel defaultSize="25%" minSize="15%">
  *   Sidebar
  * </ResizablePanel>
  */
@@ -51,9 +51,9 @@ function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps) {
  *
  * @example
  * <ResizablePanelGroup orientation="horizontal">
- *   <ResizablePanel minSize={20}>Navigation</ResizablePanel>
+ *   <ResizablePanel minSize="20%">Navigation</ResizablePanel>
  *   <ResizableHandle withHandle />
- *   <ResizablePanel minSize={20}>Content</ResizablePanel>
+ *   <ResizablePanel minSize="20%">Content</ResizablePanel>
  * </ResizablePanelGroup>
  */
 function ResizableHandle({

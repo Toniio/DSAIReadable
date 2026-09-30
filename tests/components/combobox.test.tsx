@@ -16,6 +16,7 @@ import {
   ComboboxValue,
 } from "@/components/ui/combobox"
 import { Label } from "@/components/ui/label"
+import { UI_STRINGS } from "@/lib/ui-strings"
 
 import { axeViolations } from "../axe"
 
@@ -87,6 +88,12 @@ function input() {
   return screen.getByRole("combobox")
 }
 
+// The option aria-activedescendant points at.
+function activeOption() {
+  const id = input().getAttribute("aria-activedescendant")
+  return id ? document.getElementById(id)?.textContent : undefined
+}
+
 function options() {
   return screen.getAllByRole("option").map((option) => option.textContent)
 }
@@ -94,12 +101,14 @@ function options() {
 describe("Combobox", () => {
   // Regression guard for P0-07: the input and its icon buttons had no
   // accessible name.
-  it("names the input by its label and the trigger by its label", () => {
+  it("accessible name: the input is named by its Label, the icon button by UI_STRINGS.combobox", () => {
     render(<Example />)
     const named = screen.getByRole("combobox", { name: "Fruit" })
     expect(named.tagName).toBe("INPUT")
     expect(named.getAttribute("aria-expanded")).toBe("false")
-    expect(screen.getByRole("button", { name: "Open list" })).toBeTruthy()
+    expect(
+      screen.getByRole("button", { name: UI_STRINGS.combobox.trigger })
+    ).toBeTruthy()
   })
 
   it("shows a named clear button once a value is chosen, and clears it", async () => {
@@ -115,9 +124,10 @@ describe("Combobox", () => {
     expect(input()).toHaveProperty("value", "")
   })
 
-  it("opens a listbox with ArrowDown", async () => {
+  it("role: an input combobox with aria-expanded, linked to a listbox, aria-activedescendant on the highlighted option, aria-selected on the chosen one", async () => {
     const user = userEvent.setup()
     render(<Example />)
+    expect(input().tagName).toBe("INPUT")
     await user.click(input())
     await user.keyboard("{ArrowDown}")
 
@@ -125,9 +135,44 @@ describe("Combobox", () => {
     const listbox = screen.getByRole("listbox")
     expect(input().getAttribute("aria-controls")).toBe(listbox.id)
     expect(options()).toEqual(fruits)
+
+    await user.keyboard("{ArrowDown}")
+    const active = screen.getByRole("option", { name: "Banana" })
+    expect(input().getAttribute("aria-activedescendant")).toBe(active.id)
+    expect(active.getAttribute("aria-selected")).toBe("false")
+
+    await user.keyboard("{Enter}")
+    await user.keyboard("{ArrowDown}")
+    expect(
+      screen
+        .getByRole("option", { name: "Banana" })
+        .getAttribute("aria-selected")
+    ).toBe("true")
   })
 
-  it("filters the options as the user types", async () => {
+  it("ArrowDown / ArrowUp: opens the list; next / previous option", async () => {
+    const user = userEvent.setup()
+    render(<Example />)
+    await user.click(input())
+    await user.keyboard("{Escape}")
+    expect(input().getAttribute("aria-expanded")).toBe("false")
+
+    await user.keyboard("{ArrowDown}")
+    expect(input().getAttribute("aria-expanded")).toBe("true")
+    expect(activeOption()).toBe("Apple")
+    await user.keyboard("{ArrowDown}")
+    expect(activeOption()).toBe("Banana")
+    await user.keyboard("{ArrowUp}")
+    expect(activeOption()).toBe("Apple")
+
+    await user.keyboard("{Escape}")
+    expect(input().getAttribute("aria-expanded")).toBe("false")
+    await user.keyboard("{ArrowUp}")
+    expect(input().getAttribute("aria-expanded")).toBe("true")
+    expect(options()).toEqual(fruits)
+  })
+
+  it("Typing: filters the options", async () => {
     const user = userEvent.setup()
     render(<Example />)
     await user.type(input(), "an")
@@ -139,7 +184,7 @@ describe("Combobox", () => {
     expect(screen.getByText("No results")).toBeTruthy()
   })
 
-  it("selects the highlighted option with Enter", async () => {
+  it("Enter: selects the active option", async () => {
     const onValueChange = vi.fn()
     const user = userEvent.setup()
     render(<Example onValueChange={onValueChange} />)
@@ -155,13 +200,14 @@ describe("Combobox", () => {
     expect(input().getAttribute("aria-expanded")).toBe("false")
   })
 
-  it("closes with Escape", async () => {
+  it("Escape: closes the list", async () => {
     const user = userEvent.setup()
     render(<Example />)
     await user.click(input())
     await user.keyboard("{ArrowDown}")
     await user.keyboard("{Escape}")
     expect(input().getAttribute("aria-expanded")).toBe("false")
+    expect(screen.queryByRole("listbox")).toBeNull()
   })
 
   // Regression guard for P3-19: every chip's remove button was named

@@ -8,6 +8,7 @@ The rules that apply to AI agents and humans alike are in
 - Node.js 24 (`.nvmrc`); `engines` accepts 22.12 or later, the minimum the
   component tests need
 - `npm ci` at the root: it installs the workspaces too (`mcp-server/`, `packages/eslint-plugin/`)
+- `npx playwright install chromium` once: the component tests run in headless Chromium
 
 The git hooks are installed automatically by the `prepare` script (husky).
 If `.husky/_` is missing, run `npm install`.
@@ -76,6 +77,15 @@ source.
 | Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                            |
 | A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                              |
 | A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                |
+
+**A new or changed component arrives with its test.** `tests/examples.test.tsx`
+renders every spec's `## Code example` in headless Chromium, light and dark:
+zero axe violation (contrast and target size included) and a visible focus
+indicator on every tab stop. An example that fails is fixed in the spec, which
+is what agents copy. Each row of a spec's Accessibility › Keyboard table has its
+test in `tests/components/<file>.test.tsx`, titled with the row's keys
+(`it("Home / End: …")`), next to a `role: …` and an `accessible name: …` test;
+`npm run test:lint-coverage` fails on a key without its test.
 
 ### The shadcn/ui API is the contract
 
@@ -221,7 +231,7 @@ and the README's are removed together.
 | `spec-sections`     | `npm run specs:validate`                                                     |
 | `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                  |
 | `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                       |
-| `component-tests`   | `npm run test:components`                                                    |
+| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached)           |
 | `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `release:test` |
 
 ## Dependabot pull requests

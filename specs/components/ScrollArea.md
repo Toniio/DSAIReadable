@@ -107,13 +107,13 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Keyboard**:
 
-Native scrolling with the wheel, touch, and the keyboard when a focusable element is inside.
+The viewport is in the tab order (`tabIndex={0}`, with the focus ring): once it has focus, the arrow keys, `PageUp` / `PageDown`, `Home` / `End` and `Space` scroll it natively. Wheel and touch scroll it too.
 
-**Accessible name**: When the area holds nothing focusable, give it `tabIndex={0}`, `role="region"` and an `aria-label`.
+**Accessible name**: Name the area: `role="region"` and an `aria-label` on `ScrollArea`, so the region the keyboard lands in is announced.
 
 **Pitfalls**:
 
-- A scrolling area with no focusable element cannot be reached from the keyboard (WCAG 2.1.1) — see above.
+- The viewport is a tab stop even when its content holds links or buttons: Safari puts no scrolling area in the tab order by itself, so the component always does (WCAG 2.1.1).
 - Never nest scrolling areas on the same axis.
 - The `ScrollBar` is 10px wide, below the 24px of WCAG 2.2 SC 2.5.8 (Target Size), and no exception covers it: a known gap, listed in `specs/foundations/size.md`. Wheel, touch and keyboard scroll the same area.
 
@@ -124,7 +124,11 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export default function Example() {
   return (
-    <ScrollArea className="h-72 w-48 rounded-none border">
+    <ScrollArea
+      role="region"
+      aria-label="Tags"
+      className="h-72 w-48 rounded-none border"
+    >
       <div className="p-4">
         {Array.from({ length: 50 }, (_, i) => (
           <p key={i} className="text-sm">

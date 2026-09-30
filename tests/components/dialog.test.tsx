@@ -55,7 +55,7 @@ describe("Dialog", () => {
     expect(screen.queryByRole("dialog")).toBeNull()
   })
 
-  it("opens a modal dialog named by its title and described by its description", async () => {
+  it("accessible name: the dialog is named by its title and described by its description", async () => {
     await open()
     const dialog = screen.getByRole("dialog", {
       name: "Edit profile",
@@ -65,7 +65,7 @@ describe("Dialog", () => {
     expect(dialog.contains(document.activeElement)).toBe(true)
   })
 
-  it("hides the rest of the page from assistive technology while open", async () => {
+  it("role: a dialog, modal — the rest of the page is aria-hidden while it is open", async () => {
     const user = await open()
     expect(screen.queryByRole("button", { name: "Edit profile" })).toBeNull()
     await user.keyboard("{Escape}")
@@ -80,16 +80,20 @@ describe("Dialog", () => {
     ).toHaveLength(2)
   })
 
-  it("traps focus inside the dialog", async () => {
+  it("Tab / Shift+Tab: moves through the focusable elements, trapped in the dialog", async () => {
     const user = await open()
     const dialog = screen.getByRole("dialog")
     for (let i = 0; i < 6; i++) {
       await user.tab()
       expect(dialog.contains(document.activeElement)).toBe(true)
     }
+    for (let i = 0; i < 6; i++) {
+      await user.tab({ shift: true })
+      expect(dialog.contains(document.activeElement)).toBe(true)
+    }
   })
 
-  it("closes with Escape and returns focus to the trigger", async () => {
+  it("Escape: closes the dialog and returns focus to the trigger", async () => {
     const user = await open()
     await user.keyboard("{Escape}")
     expect(screen.queryByRole("dialog")).toBeNull()

@@ -25,8 +25,12 @@ function ScrollArea({
       className={cn("relative", className)}
       {...props}
     >
+      {/* The viewport is what scrolls: in the tab order, the keyboard reaches
+          it even when it holds nothing focusable (WCAG 2.1.1). Chromium and
+          Firefox do this on their own; Safari does not. */}
       <ScrollAreaPrimitive.Viewport
         data-slot="scroll-area-viewport"
+        tabIndex={0}
         className={`size-full rounded-[inherit] transition-[color,box-shadow] ${FOCUS_OUTLINE_RESET} ${FOCUS_RING}`}
       >
         {children}

@@ -162,7 +162,7 @@ import {
 
 export default function Example() {
   return (
-    <InputOTP maxLength={6}>
+    <InputOTP maxLength={6} aria-label="Verification code">
       <InputOTPGroup>
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />

@@ -85,7 +85,7 @@ A form that asks one question at a time — single or multiple choice, or a free
 | `color.text.destructive.default`     | `text-destructive`                                                                             | `QuestionnaireError`                                                                                                                                                                                        |
 | `color.text.subtle`                  | `text-muted-foreground`                                                                        | `QuestionnaireChoiceDescription` · `QuestionnaireChoice` · `QuestionnaireDescription` · `QuestionnaireInput` · `QuestionnaireProgress`                                                                      |
 | `opacity.disabled`                   | `opacity-disabled`                                                                             | `QuestionnaireChoice` · `QuestionnaireInput`                                                                                                                                                                |
-| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `QuestionnaireChoice` · `QuestionnaireInput` · `QuestionnaireInput` via `FOCUS_RING` (`lib/focus.ts`)                                                                                                       |
+| `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                       | `QuestionnaireChoice` · `QuestionnaireInput` via `FOCUS_RING` (`lib/focus.ts`)                                                                                                                              |
 | `space.scale.0`                      | `inset-0` · `min-h-0` · `min-w-0` · `p-0`                                                      | `QuestionnaireChoice` · `QuestionnaireChoices` · `QuestionnaireInput` · `QuestionnaireItem` · `QuestionnaireNext` · `QuestionnairePrevious` · `QuestionnaireSkip` · `QuestionnaireSubmit` · `Questionnaire` |
 | `space.scale.0-5`                    | `gap-0.5` · `translate-y-0.5`                                                                  | `QuestionnaireChoice`                                                                                                                                                                                       |
 | `space.scale.1`                      | `py-1`                                                                                         | `QuestionnaireInput`                                                                                                                                                                                        |
@@ -271,15 +271,15 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 **Keyboard**:
 
-| Key                    | Action                                                      |
-| ---------------------- | ----------------------------------------------------------- |
-| `ArrowUp`/`ArrowDown`  | Moves between the choices of the current question           |
-| `Space`                | Checks the focused choice                                   |
-| `Enter`                | On a choice: checks it and goes to the next question        |
-| `ArrowLeft`            | Goes back to the previous question                          |
-| `ArrowRight`           | Goes to the next question, once the current one is answered |
-| `A`…`Z` / `1`…`9`      | With `shortcuts`: checks the choice labeled with that key   |
-| `Ctrl+Enter`/`⌘+Enter` | Goes on, or submits on the last question                    |
+| Key                    | Action                                                             |
+| ---------------------- | ------------------------------------------------------------------ |
+| `ArrowUp`/`ArrowDown`  | Moves between the choices of the current question                  |
+| `Space`                | Checks the focused choice                                          |
+| `Enter`                | On a checked choice: goes to the next question (`Space` checks it) |
+| `ArrowLeft`            | Goes back to the previous question                                 |
+| `ArrowRight`           | Goes to the next question, once the current one is answered        |
+| `A`…`Z` / `1`…`9`      | With `shortcuts`: checks the choice labeled with that key          |
+| `Ctrl+Enter`/`⌘+Enter` | Goes on, or submits on the last question                           |
 
 **Accessible name**: The progress bar is named by `UI_STRINGS.questionnaire.progress`; pass `aria-label` to name it otherwise. The navigation buttons read `UI_STRINGS.questionnaire.previous`, `skip`, `next` and `submit`; `children` replace them.
 
