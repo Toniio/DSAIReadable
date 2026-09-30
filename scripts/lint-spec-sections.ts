@@ -1,6 +1,7 @@
 /**
- * Component spec section linter — every spec in `specs/components/` must
- * expose the thirteen canonical sections, in order, and nothing else.
+ * Spec section linter — every component spec in `specs/components/` must
+ * expose the thirteen canonical sections, in order, and nothing else; every
+ * page pattern in `specs/patterns/`, its nine.
  *
  * These specs are the behavioral source of truth served to agents by the
  * MCP server. An agent asking "what are this component's states?" gets
@@ -17,14 +18,13 @@ import { resolve, dirname, basename } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-const SPECS_DIR = resolve(ROOT, "specs/components")
 
 /**
  * The canonical order. Changing this list is a deliberate act: it rewrites
  * the contract for all specs at once, so every spec must be migrated in the
  * same commit or this linter fails.
  */
-const CANONICAL_SECTIONS = [
+const COMPONENT_SECTIONS = [
   "Metadata",
   "Role",
   "Usage",
@@ -38,7 +38,24 @@ const CANONICAL_SECTIONS = [
   "Accessibility",
   "Code example",
   "Cross-references",
-] as const
+]
+
+/**
+ * A page pattern, the Primer model: when to use it, its regions, the
+ * components that fill them, their spacing, their text, and a screen that
+ * shows it all (`get_pattern` serves each section by name).
+ */
+const PATTERN_SECTIONS = [
+  "Metadata",
+  "Role",
+  "Usage",
+  "Structure",
+  "Components",
+  "Spacing",
+  "Content",
+  "Code example",
+  "Cross-references",
+]
 
 /** Fenced code blocks may contain `## ` lines that are not spec sections. */
 function sectionsOf(markdown: string): string[] {
@@ -59,8 +76,7 @@ function sectionsOf(markdown: string): string[] {
   return sections
 }
 
-function diagnose(found: string[]): string[] {
-  const canonical = CANONICAL_SECTIONS as readonly string[]
+function diagnose(found: string[], canonical: string[]): string[] {
   const problems: string[] = []
 
   const missing = canonical.filter((s) => !found.includes(s))
@@ -78,15 +94,6 @@ function diagnose(found: string[]): string[] {
     problems.push(`out of order: got ${found.join(" · ")}`)
 
   return problems
-}
-
-const specs = readdirSync(SPECS_DIR)
-  .filter((f) => f.endsWith(".md"))
-  .sort()
-
-if (specs.length === 0) {
-  console.error(`❌ No component spec found in ${SPECS_DIR}`)
-  process.exit(1)
 }
 
 /**
@@ -110,28 +117,60 @@ function a11yProblems(markdown: string): string[] {
   return missing.length ? [`Accessibility lacks ${missing.join(", ")}`] : []
 }
 
-const failures: string[] = []
+const KINDS = [
+  {
+    kind: "component spec",
+    dir: "specs/components",
+    sections: COMPONENT_SECTIONS,
+    extra: a11yProblems,
+  },
+  {
+    kind: "page pattern",
+    dir: "specs/patterns",
+    sections: PATTERN_SECTIONS,
+    extra: () => [],
+  },
+]
 
-for (const file of specs) {
-  const markdown = readFileSync(resolve(SPECS_DIR, file), "utf-8")
-  const found = sectionsOf(markdown)
-  const problems = [...diagnose(found), ...a11yProblems(markdown)]
+let failed = false
 
-  if (problems.length)
-    failures.push(`   ${basename(file)} — ${problems.join("; ")}`)
+for (const { kind, dir, sections, extra } of KINDS) {
+  const specs = readdirSync(resolve(ROOT, dir))
+    .filter((f) => f.endsWith(".md"))
+    .sort()
+
+  if (specs.length === 0) {
+    console.error(`❌ No ${kind} found in ${dir}`)
+    failed = true
+    continue
+  }
+
+  const failures: string[] = []
+  for (const file of specs) {
+    const markdown = readFileSync(resolve(ROOT, dir, file), "utf-8")
+    const problems = [
+      ...diagnose(sectionsOf(markdown), sections),
+      ...extra(markdown),
+    ]
+    if (problems.length)
+      failures.push(`   ${basename(file)} — ${problems.join("; ")}`)
+  }
+
+  if (failures.length) {
+    console.error(
+      `❌ ${failures.length}/${specs.length} ${kind}(s) deviate from the canonical section list:\n`
+    )
+    console.error(failures.join("\n"))
+    console.error(
+      `\n   Canonical order (${sections.length} sections):\n   ${sections.join(" · ")}`
+    )
+    failed = true
+    continue
+  }
+
+  console.log(
+    `✅ Spec sections: ${specs.length}/${specs.length} ${kind}s expose the ${sections.length} canonical sections in order.`
+  )
 }
 
-if (failures.length) {
-  console.error(
-    `❌ ${failures.length}/${specs.length} component spec(s) deviate from the canonical section list:\n`
-  )
-  console.error(failures.join("\n"))
-  console.error(
-    `\n   Canonical order (${CANONICAL_SECTIONS.length} sections):\n   ${CANONICAL_SECTIONS.join(" · ")}`
-  )
-  process.exit(1)
-}
-
-console.log(
-  `✅ Spec sections: ${specs.length}/${specs.length} specs expose the ${CANONICAL_SECTIONS.length} canonical sections in order.`
-)
+if (failed) process.exit(1)

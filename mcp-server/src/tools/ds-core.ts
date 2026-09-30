@@ -10,11 +10,13 @@ import { READ_ONLY } from "../lib/annotations.js"
 import { pageParams, paginate } from "../lib/paginate.js"
 import {
   conciseRuleSet,
+  concisePattern,
   conciseSpec,
   CRITICAL_RULES,
   criticalRuleTitles,
   responseFormat,
   type ComponentSpec,
+  type Pattern,
   type ResponseFormat,
   type RuleSet,
 } from "../lib/response-format.js"
@@ -442,6 +444,74 @@ import { cn } from "@/lib/utils"`,
       return notFound(
         `No rules for category "${category}". Pass a foundation or a component name below, "composition", or "tailwind".`,
         [...foundations, ...components] as string[]
+      )
+    }
+  )
+
+  // 9. list_patterns
+  server.registerTool(
+    "list_patterns",
+    {
+      title: "Page patterns",
+      description:
+        "Lists the page patterns: tasks a screen carries out (create, edit, delete, filter, search, sign-in, settings) and UI patterns they share (empty-state, form, loading, navigation, saving), each with its name, title, kind and role. Pass a name to get_pattern for the whole pattern",
+      inputSchema: {
+        kind: z
+          .enum(["task", "ui"])
+          .optional()
+          .describe('"task" or "ui"; omit for every pattern'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ kind }) => {
+      const patterns = Object.values(
+        loadContext<Record<string, Pattern>>("patterns.json")
+      ).filter((p) => !kind || p.kind === kind)
+      return text({
+        total: patterns.length,
+        patterns: patterns.map(({ name, title, kind, role }) => ({
+          name,
+          title,
+          kind,
+          role,
+        })),
+      })
+    }
+  )
+
+  // 10. get_pattern
+  server.registerTool(
+    "get_pattern",
+    {
+      title: "Page pattern",
+      description:
+        'Returns one page pattern by name (list_patterns lists them). "concise" (default): role, usage rules and the components it takes. "detailed": the whole pattern — structure (regions and their components), components with their variants, spacing rules, content (what to write, what not to), code example and cross-references',
+      inputSchema: {
+        name: z
+          .string()
+          .describe(
+            'Pattern name or title (e.g. "create", "sign-in", "Empty state")'
+          ),
+        response_format: responseFormat(
+          "the structure, spacing and content rules, and the code example"
+        ),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ name, response_format }) => {
+      const patterns = loadContext<Record<string, Pattern>>("patterns.json")
+      const needle = normalize(name)
+      const all = Object.values(patterns)
+      const pattern =
+        all.find((p) => [p.name, p.title].map(normalize).includes(needle)) ??
+        all.find((p) => normalize(p.name).includes(needle))
+      if (!pattern)
+        return notFound(
+          `Pattern "${name}" not found. Pass one of the available names.`,
+          Object.keys(patterns)
+        )
+      return text(
+        response_format === "detailed" ? pattern : concisePattern(pattern)
       )
     }
   )

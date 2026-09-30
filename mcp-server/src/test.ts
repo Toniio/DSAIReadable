@@ -114,6 +114,7 @@ const expectedFiles = [
   "ux-writing.json",
   "glossary.json",
   "content-library.json",
+  "patterns.json",
   "dataviz-decision-tree.json",
   "dataviz-catalog.json",
   "ds-metadata.json",
@@ -972,7 +973,7 @@ const unannotated = tools.filter(
     t.annotations?.openWorldHint !== false
 )
 assert(
-  tools.length === 15 && unannotated.length === 0,
+  tools.length === 17 && unannotated.length === 0,
   `Every tool is annotated read-only and closed-world (${tools.length} tools${unannotated.length ? `; missing: ${unannotated.map((t) => t.name).join(", ")}` : ""})`
 )
 
@@ -1235,7 +1236,7 @@ const { prompts } = await promptClient.listPrompts()
 const unknownTools: string[] = []
 for (const { name } of prompts) {
   for (const [, tool] of (await promptText(name)).matchAll(
-    /`((?:get|validate)_[a-z_]+)`/g
+    /`((?:get|list|validate)_[a-z_]+)`/g
   )) {
     if (!toolNames.has(tool)) unknownTools.push(`${name} → ${tool}`)
   }
@@ -1538,6 +1539,13 @@ const contentRuleCount = uxRules.filter((r) =>
   )
 ).length
 
+const patterns = JSON.parse(
+  readFileSync(resolve(contextDir, "patterns.json"), "utf-8")
+) as Record<
+  string,
+  { name: string; title: string; kind: string; code_example: string }
+>
+
 interface ToolCase {
   args: Record<string, unknown>
   content: (payload: Json) => boolean
@@ -1657,6 +1665,25 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { category: "buttons" },
     errorNames: "labels",
   },
+  list_patterns: {
+    args: { kind: "task" },
+    content: (p) =>
+      p.total > 0 &&
+      p.patterns.every((x: Json) => x.kind === "task") &&
+      p.patterns.some((x: Json) => x.name === "sign-in"),
+    errorArgs: { kind: "page" },
+    errorNames: "task",
+  },
+  get_pattern: {
+    args: { name: "Sign in", response_format: "detailed" },
+    content: (p) =>
+      p.name === "sign-in" &&
+      p.kind === "task" &&
+      p.components.some((c: Json) => c.component === "PasswordInput") &&
+      p.code_example.includes("<PasswordInput"),
+    errorArgs: { name: "checkout" },
+    errorNames: "sign-in",
+  },
   get_stats: {
     args: {},
     content: (p) =>
@@ -1717,7 +1744,67 @@ setContextDir(contextDir)
 rmSync(emptyContextDir, { recursive: true })
 assert(
   silentOnMissingCache.length === 0 && servedContextDir === contextDir,
-  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "14 tools"})`
+  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "16 tools"})`
+)
+
+// --- Test 11b: page patterns (P4-26) ---
+console.log("\n11b. Page patterns")
+
+// Every pattern is served by its name and by its title, and its code example
+// is a screen validate_screen accepts without a single issue: a pattern is
+// the example agents copy first.
+const patternNames = Object.keys(patterns)
+const unserved: string[] = []
+for (const p of Object.values(patterns)) {
+  for (const name of [p.name, p.title]) {
+    const served = await callTool("get_pattern", {
+      name,
+      response_format: "detailed",
+    })
+    if (served.isError || JSON.parse(served.text).name !== p.name)
+      unserved.push(name)
+  }
+}
+assert(
+  patternNames.length === 12 && unserved.length === 0,
+  `get_pattern serves each of the ${patternNames.length} patterns by name and title${unserved.length ? ` (not: ${unserved.join(", ")})` : ""}`
+)
+const listed = JSON.parse((await callTool("list_patterns", {})).text)
+assert(
+  listed.total === patternNames.length &&
+    JSON.parse((await callTool("list_patterns", { kind: "task" })).text).total +
+      JSON.parse((await callTool("list_patterns", { kind: "ui" })).text)
+        .total ===
+      patternNames.length,
+  `list_patterns lists every pattern, split into task and ui (${listed.total})`
+)
+const invalidExamples = Object.values(patterns).flatMap((p) => {
+  const report = validateScreen(p.code_example)
+  return report.total_issues > 0 || !p.code_example
+    ? [`${p.name} (${report.issues.map((i) => i.rule).join(", ") || "empty"})`]
+    : []
+})
+assert(
+  invalidExamples.length === 0,
+  `Every pattern's code example passes validate_screen with no issue${invalidExamples.length ? ` (${invalidExamples.join("; ")})` : ""}`
+)
+// app/ held test pages only and is gone (P4-25): no pattern points at it.
+const citingApp = Object.values(patterns)
+  .filter((p) => /(?:^|[\s`"(/])app\//.test(JSON.stringify(p)))
+  .map((p) => p.name)
+assert(
+  citingApp.length === 0,
+  `No pattern cites a test page under app/${citingApp.length ? ` (${citingApp.join(", ")})` : ""}`
+)
+const concise = JSON.parse(
+  (await callTool("get_pattern", { name: "create" })).text
+)
+assert(
+  Object.keys(concise).join() ===
+    "name,title,kind,role,usage,components,detail" &&
+    concise.components.includes("Dialog") &&
+    concise.detail.includes("code_example"),
+  "get_pattern concise keeps role, usage and components, and names what detailed adds"
 )
 
 await toolClient.close()

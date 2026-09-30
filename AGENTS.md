@@ -83,7 +83,7 @@ npm run lint:language     # American English only: French words, diacritics and 
 npm run knip              # zero-base: no unused file, export or dependency (knip.jsonc says why each entry point stays)
 npm run index:validate    # 6 checks: JSON Schema, sizes, data-slot, UI strings, Props types, shadcn/ui API
 npm run shadcn:baseline   # refetches the shadcn/ui API into shadcn-api.baseline.json (network)
-npm run specs:validate    # the 65 specs against the 13 canonical sections + Variants, Tokens, Props / API and choice rules up to date + no hedged wording + llms.txt up to date
+npm run specs:validate    # the 65 specs against the 13 canonical sections, the 12 page patterns against their 9 + Variants, Tokens, Props / API and choice rules up to date + no hedged wording + llms.txt up to date
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
 npm run registry:check    # registry.json freshness + internal dependencies
 npm run registry:test-install  # installs the 69 items in a blank app, builds it and its CSS

@@ -18,7 +18,7 @@ dsaireadable/
 ├── hooks/                      # Shared hooks (use-mobile)
 ├── tokens/                     # Source of truth for the tokens (DTCG JSON)
 ├── tokens.css                  # Generated CSS custom properties — do not edit
-├── specs/                      # The design system's Markdown documentation (components, foundations, tokens)
+├── specs/                      # The design system's Markdown documentation (components, foundations, patterns, tokens)
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
 ├── tests/                      # Component tests (Vitest, Testing Library, axe-core)
 ├── mcp-server/                 # MCP server that serves the design system to agents (its own rules: its AGENTS.md)
@@ -144,15 +144,15 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Specs — `npm run specs:validate`
 
-| Script                   | npm command      | Role                                                                                    |
-| ------------------------ | ---------------- | --------------------------------------------------------------------------------------- |
-| `build-spec-variants.ts` | `specs:variants` | The `Variants` section, from the code's `cva()` calls                                   |
-| `build-spec-tokens.ts`   | `specs:tokens`   | The `Tokens` section, classes resolved by Tailwind down to the token                    |
-| `build-spec-api.ts`      | `specs:api`      | The `Props / API` section, from the TypeScript exports (`scripts/lib/component-api.ts`) |
-| `build-spec-choices.ts`  | `specs:choices`  | The index's choice rules, copied into the `Usage` of the specs they concern             |
-| `lint-spec-sections.ts`  | —                | The 13 canonical sections, in order                                                     |
-| `lint-spec-wording.ts`   | —                | No hedged wording; every Constraints line opens with a keyword                          |
-| `build-llms-txt.ts`      | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role        |
+| Script                   | npm command      | Role                                                                                            |
+| ------------------------ | ---------------- | ----------------------------------------------------------------------------------------------- |
+| `build-spec-variants.ts` | `specs:variants` | The `Variants` section, from the code's `cva()` calls                                           |
+| `build-spec-tokens.ts`   | `specs:tokens`   | The `Tokens` section, classes resolved by Tailwind down to the token                            |
+| `build-spec-api.ts`      | `specs:api`      | The `Props / API` section, from the TypeScript exports (`scripts/lib/component-api.ts`)         |
+| `build-spec-choices.ts`  | `specs:choices`  | The index's choice rules, copied into the `Usage` of the specs they concern                     |
+| `lint-spec-sections.ts`  | —                | The 13 canonical sections of a component spec, the 9 of a page pattern, in order                |
+| `lint-spec-wording.ts`   | —                | No hedged wording; every Constraints line (Usage and Spacing in a pattern) opens with a keyword |
+| `build-llms-txt.ts`      | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role                |
 
 ### Index — `npm run index:validate`
 
@@ -209,6 +209,20 @@ the rules for choosing between sibling components (the index's `composition_rule
 | `spacing.md`        | Component spacing (4px → 32px) and layout spacing                                                |
 | `typography.md`     | Type scale, families, weights                                                                    |
 | `voice-and-tone.md` | The voice, the tone by situation, grammar and mechanics, the word list — checked on `UI_STRINGS` |
+
+### `specs/patterns/` — Page patterns (12 files)
+
+Written by hand, on Primer's model: the tasks a screen carries out (`create`,
+`edit`, `delete`, `filter`, `search`, `sign-in`, `settings`), then the UI
+patterns they share (`empty-state`, `form`, `loading`, `navigation`, `saving`).
+One file per pattern, in 9 sections:
+`Metadata` · `Role` · `Usage` · `Structure` · `Components` · `Spacing` · `Content` · `Code example` · `Cross-references`
+
+Usage and Spacing bullets open with a keyword, as a component's Constraints do;
+every component of the Components table must be an export a component spec
+documents (`generate-context` fails otherwise); every code example passes
+`validate_screen` with no issue (`mcp:test`). The MCP server serves them through
+`list_patterns` and `get_pattern`.
 
 ### `specs/tokens/token-reference.md` · `tokens.manifest.json` — generated
 

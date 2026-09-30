@@ -1,6 +1,6 @@
 /**
  * Context generation script — reads all design system data sources
- * and produces 15 JSON files in mcp-server/context/.
+ * and produces 16 JSON files in mcp-server/context/.
  *
  * Run: tsx src/context/generate.ts
  */
@@ -992,6 +992,85 @@ function generateContentLibrary() {
   return write("content-library.json", { labels, placeholders, messages })
 }
 
+// ── 12 bis. patterns.json ───────────────────────────────────────────
+const patternsDir = path.join(ROOT, "specs/patterns")
+const PATTERN_KINDS: Record<string, string> = { Task: "task", UI: "ui" }
+
+/** A table's rows as objects keyed by its header: "Variant / props" → variant_props. */
+function mdRecords(section: string): Record<string, string>[] {
+  return mdTables(section).flatMap(({ header, rows }) =>
+    rows.map((row) =>
+      Object.fromEntries(
+        header.map((h, i) => [
+          h.toLowerCase().replace(/[^a-z]+/g, "_"),
+          mdPlain(row[i] ?? ""),
+        ])
+      )
+    )
+  )
+}
+
+/**
+ * The page patterns of specs/patterns/, by name. A pattern names components
+ * in its Components table: each one must be an export a component spec
+ * documents, or the pattern points agents at a component that does not exist.
+ */
+function generatePatterns() {
+  const documented = new Set(
+    specFiles.flatMap((f) =>
+      [
+        ...mdSection(
+          readFileSync(path.join(specDir, f), "utf-8"),
+          "Props / API"
+        ).matchAll(/^### `(.+)`$/gm),
+      ].map((m) => m[1])
+    )
+  )
+
+  const result: JsonObject = {}
+  for (const f of readdirSync(patternsDir)
+    .filter((f) => f.endsWith(".md"))
+    .sort()) {
+    const md = readFileSync(path.join(patternsDir, f), "utf-8")
+    const meta = mdTable(mdSection(md, "Metadata"))
+    const get = (label: string) =>
+      meta.find((r) => r[0]?.toLowerCase() === label)?.[1] ?? ""
+    const name = f.replace(/\.md$/, "")
+    const kind = PATTERN_KINDS[get("kind")]
+    if (get("name") !== name)
+      throw new Error(`specs/patterns/${f}: Name is not "${name}"`)
+    if (!kind)
+      throw new Error(
+        `specs/patterns/${f}: Kind "${get("kind")}" is not one of ${Object.keys(PATTERN_KINDS).join(", ")}`
+      )
+
+    const components = mdRecords(mdSection(md, "Components"))
+    const unknown = components
+      .map((c) => c.component)
+      .filter((c) => !documented.has(c))
+    if (unknown.length)
+      throw new Error(
+        `specs/patterns/${f}: Components names ${unknown.join(", ")}, which no component spec documents`
+      )
+
+    result[name] = {
+      name,
+      title: /^# (.+)$/m.exec(md)?.[1] ?? name,
+      kind,
+      role: mdSection(md, "Role"),
+      usage: mdListItems(mdSection(md, "Usage")),
+      structure: mdRecords(mdSection(md, "Structure")),
+      components,
+      spacing: mdListItems(mdSection(md, "Spacing")),
+      content: mdRecords(mdSection(md, "Content")),
+      code_example: mdCode(mdSection(md, "Code example")),
+      cross_references: mdListItems(mdSection(md, "Cross-references")),
+      source: `specs/patterns/${f}`,
+    }
+  }
+  return write("patterns.json", result)
+}
+
 // ── 13. dataviz-decision-tree.json ──────────────────────────────────
 function generateDatavizDecisionTree() {
   const result = {
@@ -1401,6 +1480,7 @@ const generators: Array<[string, () => string]> = [
   ["ux-writing.json", generateUxWriting],
   ["glossary.json", generateGlossary],
   ["content-library.json", generateContentLibrary],
+  ["patterns.json", generatePatterns],
   ["dataviz-decision-tree.json", generateDatavizDecisionTree],
   ["dataviz-catalog.json", generateDatavizCatalog],
   ["ds-metadata.json", generateDsMetadata],
