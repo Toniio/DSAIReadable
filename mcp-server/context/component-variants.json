@@ -35,6 +35,45 @@
     "part_of": null,
     "has_variants": false
   },
+  "Attachment": {
+    "variants": {
+      "size": {
+        "values": [
+          "default",
+          "sm",
+          "xs"
+        ],
+        "default": null
+      },
+      "orientation": {
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": null
+      }
+    },
+    "sources": [
+      "attachmentVariants",
+      "attachmentMediaVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "AttachmentMedia": {
+    "variants": {
+      "variant": {
+        "values": [
+          "icon",
+          "image"
+        ],
+        "default": "icon"
+      }
+    },
+    "sources": [],
+    "part_of": "Attachment",
+    "has_variants": true
+  },
   "Avatar": {
     "variants": {},
     "sources": [],
@@ -68,6 +107,49 @@
     "sources": [],
     "part_of": null,
     "has_variants": false
+  },
+  "Bubble": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "secondary",
+          "muted",
+          "tinted",
+          "outline",
+          "ghost",
+          "destructive"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "bubbleVariants",
+      "bubbleReactionsVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "BubbleReactions": {
+    "variants": {
+      "side": {
+        "values": [
+          "top",
+          "bottom"
+        ],
+        "default": "bottom"
+      },
+      "align": {
+        "values": [
+          "start",
+          "end"
+        ],
+        "default": "end"
+      }
+    },
+    "sources": [],
+    "part_of": "Bubble",
+    "has_variants": true
   },
   "ButtonGroup": {
     "variants": {
@@ -389,7 +471,36 @@
     "part_of": null,
     "has_variants": false
   },
+  "Marker": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "separator",
+          "border"
+        ],
+        "default": null
+      }
+    },
+    "sources": [
+      "markerVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
   "Menubar": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "MessageScroller": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Message": {
     "variants": {},
     "sources": [],
     "part_of": null,
@@ -426,6 +537,12 @@
     "has_variants": false
   },
   "Progress": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Questionnaire": {
     "variants": {},
     "sources": [],
     "part_of": null,

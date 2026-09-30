@@ -24,6 +24,12 @@
  * Each difference must match one `shadcn.divergences` entry of the index, and
  * each entry one difference: a declaration the code no longer needs fails too.
  *
+ * Coverage: the baseline also lists every `registry:ui` item of the upstream
+ * registry. Each one is either in the inventory or excluded, with its reason,
+ * in the index's `shadcn.excluded` — so a component shadcn/ui adds later fails
+ * the first check after the baseline is refetched, instead of going unseen
+ * while agents import it from memory.
+ *
  *   npx tsx scripts/lint-shadcn-api.ts            # the check (offline)
  *   npx tsx scripts/lint-shadcn-api.ts --update   # refetch the upstream API (network)
  */
@@ -51,6 +57,13 @@ interface Divergence {
   type: DivergenceType
   upstream?: string
   note: string
+}
+
+/** A shadcn/ui item the design system does not ship, and what to use. */
+interface Exclusion {
+  item: string
+  reason: string
+  instead?: string
 }
 
 interface Entry {
@@ -101,13 +114,19 @@ interface Baseline {
   items: Record<string, BaselineExport[]>
   /** Items looked up and not found upstream. */
   absent: string[]
+  /** Every `registry:ui` item of the upstream registry, by name. */
+  upstream: string[]
 }
 
 const readJson = <T>(file: string): T =>
   JSON.parse(readFileSync(resolve(ROOT, file), "utf-8")) as T
 
-const index = readJson<{ inventory: Entry[] }>("design-system.index.json")
+const index = readJson<{
+  inventory: Entry[]
+  shadcn: { excluded: Exclusion[] }
+}>("design-system.index.json")
 const inventory = index.inventory
+const excluded = index.shadcn.excluded
 const itemOf = (entry: Entry) => basename(entry.code_path, ".tsx")
 
 /** A default as the reader sees it: `UI_STRINGS.dialog.close` is its text. */
@@ -172,6 +191,16 @@ async function update() {
   )
 
   try {
+    const registry = await fetch(`${source}/registry.json`)
+    if (!registry.ok)
+      throw new Error(`${source}/registry.json: HTTP ${registry.status}`)
+    const upstream = (
+      (await registry.json()) as { items: { name: string; type: string }[] }
+    ).items
+      .filter((i) => i.type === "registry:ui")
+      .map((i) => i.name)
+      .sort()
+
     const items = [
       ...new Set(
         inventory.flatMap((e) =>
@@ -241,6 +270,7 @@ async function update() {
       dom: { common: [], sets: {} },
       items: {},
       absent: absent.sort(),
+      upstream,
     }
     for (const item of found.sort())
       baseline.items[item] = snapshot(
@@ -274,7 +304,7 @@ async function update() {
       JSON.stringify(baseline, null, 2) + "\n"
     )
     console.log(
-      `✅ ${BASELINE_FILE}: ${found.length} items from ${source}, ${absent.length} absent upstream (${absent.join(", ")}).`
+      `✅ ${BASELINE_FILE}: ${found.length} items from ${source}, ${absent.length} absent upstream (${absent.join(", ")}), ${upstream.length} registry:ui items upstream.`
     )
   } finally {
     rmSync(dir, { recursive: true, force: true })
@@ -540,6 +570,30 @@ function check() {
     }
   }
 
+  // Coverage: every upstream component is shipped or excluded, once.
+  const adopted = new Set(
+    inventory.flatMap((e) => (e.shadcn?.item ? [e.shadcn.item] : []))
+  )
+  for (const item of baseline.upstream)
+    if (!adopted.has(item) && !excluded.some((x) => x.item === item))
+      problems.push(
+        `shadcn/ui item "${item}" is neither in the inventory nor excluded — adopt it (a component whose "shadcn.item" is "${item}") or declare it in "shadcn.excluded" with its reason`
+      )
+  for (const x of excluded) {
+    if (!baseline.upstream.includes(x.item))
+      problems.push(
+        `"shadcn.excluded" lists "${x.item}", which is not a registry:ui item of ${baseline.source} — remove it`
+      )
+    if (adopted.has(x.item))
+      problems.push(
+        `"shadcn.excluded" lists "${x.item}", which a component of the inventory derives from — remove one of the two`
+      )
+    if (x.instead && !inventory.some((e) => e.name === x.instead))
+      problems.push(
+        `"shadcn.excluded" sends "${x.item}" to "${x.instead}", which is not a component of the inventory`
+      )
+  }
+
   if (problems.length > 0) {
     console.error(
       `❌ shadcn/ui API compatibility: ${problems.length} problem(s) (baseline ${baseline.source}, ${baseline.fetched}).\n`
@@ -552,7 +606,7 @@ function check() {
   }
   const outside = inventory.filter((e) => e.shadcn.item === null).length
   console.log(
-    `✅ shadcn/ui API compatibility: ${inventory.length - outside} components match ${baseline.source} (${baseline.fetched}) up to their ${declared - outside} declared divergence(s); ${outside} components are outside shadcn/ui.`
+    `✅ shadcn/ui API compatibility: ${inventory.length - outside} components match ${baseline.source} (${baseline.fetched}) up to their ${declared - outside} declared divergence(s); ${outside} components are outside shadcn/ui. Upstream coverage: ${baseline.upstream.length}/${baseline.upstream.length} registry:ui items, ${adopted.size} shipped and ${excluded.length} excluded.`
   )
 }
 

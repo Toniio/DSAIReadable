@@ -43,6 +43,14 @@ export const UI_STRINGS = Object.freeze({
     /** Fallback alternative text; a decorative image should pass alt="". */
     alt: "Illustration",
   }),
+  messageScroller: Object.freeze({
+    /** Name of the scrollable region that holds the conversation. */
+    viewport: "Messages",
+    /** Screen-reader text of the button that jumps to the latest message. */
+    scrollToEnd: "Scroll to end",
+    /** Screen-reader text of the button that jumps to the first message. */
+    scrollToStart: "Scroll to start",
+  }),
   pagination: Object.freeze({
     /** Name of the <nav> landmark. */
     landmark: "pagination",
@@ -56,6 +64,14 @@ export const UI_STRINGS = Object.freeze({
   passwordInput: Object.freeze({
     show: "Show password",
     hide: "Hide password",
+  }),
+  questionnaire: Object.freeze({
+    /** Name of the progress bar ("Question 2 of 5" is its value text). */
+    progress: "Questionnaire progress",
+    previous: "Previous",
+    skip: "Skip",
+    next: "Next",
+    submit: "Submit",
   }),
   sheet: Object.freeze({
     close: "Close",

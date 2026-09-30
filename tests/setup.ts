@@ -17,6 +17,21 @@ class ResizeObserverStub {
 }
 globalThis.ResizeObserver ??= ResizeObserverStub
 
+// MessageScroller (@shadcn/react) watches which messages are in view.
+class IntersectionObserverStub {
+  readonly root = null
+  readonly rootMargin = ""
+  readonly thresholds = []
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return []
+  }
+}
+globalThis.IntersectionObserver ??= IntersectionObserverStub
+Element.prototype.scrollTo ??= function scrollTo() {}
+
 Element.prototype.scrollIntoView ??= function scrollIntoView() {}
 Element.prototype.hasPointerCapture ??= function hasPointerCapture() {
   return false

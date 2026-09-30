@@ -32,7 +32,34 @@ interface DsMetadata {
   }
   stack: Record<string, string>
   framework: string
+  shadcn_excluded: ShadcnExclusion[]
   sources: Record<string, string>
+}
+
+/** A shadcn/ui component the design system does not ship. */
+interface ShadcnExclusion {
+  item: string
+  reason: string
+  instead?: string
+}
+
+const normalize = (name: string) => name.toLowerCase().replace(/[\s-_]/g, "")
+
+/**
+ * The answer to a request for a shadcn/ui component the design system leaves
+ * out on purpose (Form): an agent that knows it from shadcn/ui learns it is not
+ * here, why, and what to write instead, rather than a bare "not found".
+ */
+function excludedAnswer(name: string, available: string[]) {
+  const needle = normalize(name)
+  const excluded = loadContext<DsMetadata>(
+    "ds-metadata.json"
+  ).shadcn_excluded.find((x) => normalize(x.item) === needle)
+  if (!excluded) return undefined
+  return notFound(
+    `"${name}" is a shadcn/ui component this design system does not ship: ${excluded.reason}${excluded.instead ? ` Use ${excluded.instead} instead.` : ""}`,
+    available
+  )
 }
 
 interface ComponentEntry {
@@ -92,6 +119,8 @@ export function registerDsCoreTools(server: McpServer): void {
           component_location: "components/ui/<name>.tsx",
         },
         sources: meta.sources,
+        // shadcn/ui components left out on purpose, and what to use instead.
+        shadcn_excluded: meta.shadcn_excluded,
         required_setup: {
           description:
             "MANDATORY: Every generated file MUST import each component from its own module inside the consuming project.",
@@ -138,7 +167,7 @@ import { cn } from "@/lib/utils"`,
           .string()
           .optional()
           .describe(
-            "Filter by category (Forms, Overlay, Navigation, Data, Layout, Feedback, Misc)"
+            "Filter by category (Brand, Conversation, Data, Feedback, Forms, Layout, Media, Misc, Navigation, Overlay, Typography)"
           ),
         ...pageParams,
       },
@@ -186,6 +215,10 @@ import { cn } from "@/lib/utils"`,
           return answer(value)
         }
       }
+      // A shadcn/ui component left out on purpose, before a fuzzy match
+      // answers with a component whose name merely contains it.
+      const excluded = excludedAnswer(component_name, Object.keys(specs))
+      if (excluded) return excluded
       // Fuzzy match
       for (const [key, value] of Object.entries(specs)) {
         if (
@@ -230,6 +263,8 @@ import { cn } from "@/lib/utils"`,
           return text({ component: key, ...(value as object) })
         }
       }
+      const excluded = excludedAnswer(component_name, Object.keys(variants))
+      if (excluded) return excluded
       for (const [key, value] of Object.entries(variants)) {
         if (
           key

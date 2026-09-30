@@ -28,6 +28,13 @@
     "has_spec": true
   },
   {
+    "name": "Attachment",
+    "category": "Conversation",
+    "status": "beta",
+    "code_path": "components/ui/attachment.tsx",
+    "has_spec": true
+  },
+  {
     "name": "Avatar",
     "category": "Misc",
     "status": "stable",
@@ -46,6 +53,13 @@
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/breadcrumb.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Bubble",
+    "category": "Conversation",
+    "status": "beta",
+    "code_path": "components/ui/bubble.tsx",
     "has_spec": true
   },
   {
@@ -238,10 +252,31 @@
     "has_spec": true
   },
   {
+    "name": "Marker",
+    "category": "Conversation",
+    "status": "beta",
+    "code_path": "components/ui/marker.tsx",
+    "has_spec": true
+  },
+  {
     "name": "Menubar",
     "category": "Navigation",
     "status": "stable",
     "code_path": "components/ui/menubar.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Message",
+    "category": "Conversation",
+    "status": "beta",
+    "code_path": "components/ui/message.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "MessageScroller",
+    "category": "Conversation",
+    "status": "beta",
+    "code_path": "components/ui/message-scroller.tsx",
     "has_spec": true
   },
   {
@@ -284,6 +319,13 @@
     "category": "Data",
     "status": "stable",
     "code_path": "components/ui/progress.tsx",
+    "has_spec": true
+  },
+  {
+    "name": "Questionnaire",
+    "category": "Conversation",
+    "status": "beta",
+    "code_path": "components/ui/questionnaire.tsx",
     "has_spec": true
   },
   {

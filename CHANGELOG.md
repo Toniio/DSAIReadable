@@ -13,6 +13,21 @@ section that fits.
 
 ### Added
 
+- Six conversation components from shadcn/ui, in a new `Conversation`
+  category: `Message`, `Bubble`, `Marker`, `Attachment`, `MessageScroller` and
+  `Questionnaire`, with their specs, registry items and tests, and a
+  composition rule (`rule-23`) that says which one does which job. They keep
+  the shadcn/ui API with no divergence; their classes read the design system's
+  tokens (focus ring, `opacity-disabled`, motion durations and easings, a
+  `tinted` bubble built from `bg-primary/10`). `MessageScroller` and
+  `Questionnaire` depend on `@shadcn/react`.
+- shadcn/ui coverage: `shadcn-api.baseline.json` lists every `registry:ui`
+  item upstream, and `npm run index:shadcn` fails when one is neither in the
+  inventory nor excluded in `design-system.index.json` (`shadcn.excluded`, with
+  its reason and what to use). 62/62 are covered: 61 shipped, `form` excluded
+  for `Field`. `get_component_specs` and `get_component_variants` answer a
+  request for an excluded component with its reason and replacement, and
+  `get_design_system_overview` lists the exclusions.
 - The shadcn/ui API is the contract (AGENTS.md § 1): `npm run index:shadcn`, in
   `index:validate`, compares every component with the upstream API
   (`shadcn-api.baseline.json`, refetched by `npm run shadcn:baseline`) and
