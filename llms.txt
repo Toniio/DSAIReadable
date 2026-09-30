@@ -2,7 +2,7 @@
 
 > An AI-readable design system for React 19, Next.js 16 and Tailwind CSS v4, built on shadcn/ui. Components install from a shadcn registry as source code; tokens, specs and composition rules are published as structured files an agent can read, and a local MCP server serves them as tools.
 
-Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes or `var(--…)` tokens, never a raw value (hex, `px`, `rem`, `ms`); and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections.
+Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes or `var(--…)` tokens, never a raw value (hex, `px`, `rem`, `ms`); and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections. A screen that carries out a common task (create, edit, delete, filter, search, sign in, settings) starts from its page pattern.
 
 ## Start here
 
@@ -34,6 +34,21 @@ Code written with this design system uses its components, never a native element
 - [Spacing](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/spacing.md)
 - [Typography](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/typography.md)
 - [Voice and Tone — how the interface speaks](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/foundations/voice-and-tone.md)
+
+## Page patterns
+
+- [Create](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/create.md): Task — Adds one new object — a project, an invoice, a member — to a collection, and shows it there once it exists.
+- [Delete](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/delete.md): Task — Destroys an object for good, once the person has confirmed they mean it.
+- [Edit](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/edit.md): Task — Changes the details of an object that already exists, and saves them only when the person asks to.
+- [Empty state](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/empty-state.md): UI — Fills a view that has nothing to show with what happened and the next step, instead of a blank space.
+- [Filter](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/filter.md): Task — Narrows a collection to the entries whose attributes match what the person picks, and says how many are left.
+- [Form](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/form.md): UI — Lays out the fields a person fills in, tells them what each one expects, and points to what to fix when a value is wrong.
+- [Loading](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/loading.md): UI — Shows that content or an action is on its way, with the indicator that matches what the person is waiting for and how long.
+- [Navigation](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/navigation.md): UI — Frames every page of an application in the same shell, and tells the person where they are and where they can go next.
+- [Saving](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/saving.md): UI — Tells the person that their changes are on their way, that they are saved, or that they are not and what to do — and keeps them from losing unsaved work.
+- [Search](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/search.md): Task — Finds the entries of a collection that match a text query, and says plainly when nothing does.
+- [Settings](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/settings.md): Task — Gathers the preferences of a person, a workspace or an object on one page, in sections the person can scan, and saves each change the way it is made.
+- [Sign in](https://raw.githubusercontent.com/Toniio/DSAIReadable/main/specs/patterns/sign-in.md): Task — Lets a person with an account prove who they are with their email and password, and recovers from a failed attempt without making them start over.
 
 ## Component specs
 

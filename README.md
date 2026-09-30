@@ -111,12 +111,13 @@ request with an origin that is not allowed receives a `403`.
 | Category       | Tools                                                                                                                                                            |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **DS Core**    | `get_design_system_overview`, `get_components`, `get_component_specs`, `get_component_variants`, `get_tokens`, `get_typography`, `get_icons`, `get_design_rules` |
+| **Patterns**   | `list_patterns` (the page patterns, by task and by UI concern), `get_pattern` (one pattern: usage, structure, components, spacing, content, code example)        |
 | **Dataviz**    | `get_dataviz_recommendation` (chart types for an objective), `get_dataviz_specs` (a chart type's tokens, anatomy and library)                                    |
 | **UX Writing** | `get_ux_writing_rules` (default strings, overriding, language), `get_glossary`, `get_content_library`                                                            |
 | **Admin**      | `get_stats` (component, token and spec counts), `validate_screen` (checks generated code against the design system's rules)                                      |
 
 Every tool is annotated as read-only (`readOnlyHint`, `openWorldHint: false`): a client does not need
-to confirm its calls. `get_component_specs`, `get_design_rules` and `get_ux_writing_rules` take
+to confirm its calls. `get_component_specs`, `get_design_rules`, `get_ux_writing_rules` and `get_pattern` take
 `response_format`: `concise` by default (under 20 % of the volume), `detailed` for everything.
 `get_components` and `get_tokens` paginate: `limit` (100 by default) and `cursor`, with a
 `{ total, items, next_cursor }` response.

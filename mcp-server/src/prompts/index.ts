@@ -54,7 +54,9 @@ export function registerPrompts(server: McpServer): void {
 4. For each retained component only: \`get_component_specs\` (component_name: <name>, response_format: "detailed"), or read the resource \`ds://component/<name>/spec\`. Its props list every variant value: no \`get_component_variants\` call is needed
 5. Generate the screen, then call \`validate_screen\` with the code. Fix every error it reports and validate again
 
-On demand only, outside the budget: \`get_tokens\` (category) for a token the rules do not name, \`get_content_library\` for label, placeholder and message examples, \`get_glossary\` for a domain term.
+When the screen carries out a task of the page patterns (create, edit, delete, filter, search, sign-in, settings), call \`get_pattern\` (name: <task>) before step 2, one call outside the budget: its components are the ones to retain, its structure and spacing lay the screen out, its content says what to write.
+
+On demand only, outside the budget: \`list_patterns\` for the UI patterns (empty-state, form, loading, navigation, saving), \`get_tokens\` (category) for a token the rules do not name, \`get_content_library\` for label, placeholder and message examples, \`get_glossary\` for a domain term.
 
 Task: ${task}${contextLine}
 Target device: ${device}
@@ -158,13 +160,14 @@ ${CRITICAL_RULES_TEXT}`,
 1. \`get_components\` — to see all available components
 2. \`get_design_rules\` — to understand design constraints
 3. \`get_design_system_overview\` — to understand the DS capabilities
+4. \`list_patterns\` — the page patterns, by task and by UI concern
 
 **Only after gathering this information, generate the idea.**
 ${expLine}${indLine}
 
 Generate a creative but DS-compliant screen or feature idea that:
 - Uses only components available in the DS
-- Follows the established page layout patterns
+- Follows the page pattern of each task it involves (\`get_pattern\`)
 - Respects all design rules and constraints
 - Includes a description, wireframe sketch (in text/ASCII), and a list of DS components used
 - Suggests specific component variants and token usage

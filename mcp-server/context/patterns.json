@@ -1,0 +1,1266 @@
+{
+  "create": {
+    "name": "create",
+    "title": "Create",
+    "kind": "task",
+    "role": "Adds one new object — a project, an invoice, a member — to a collection, and shows it there once it exists.",
+    "usage": [
+      "**MUST** — open a `Dialog` when the object takes at most 6 fields and no inner scrolling; beyond that, or with a field that needs room (rich text, a file list), use a full page at `/<collection>/new`",
+      "**MUST** — start from a `Button` `variant=\"default\"` in the header of the collection it adds to, labeled with the verb and the object: `Create project`",
+      "**MUST** — ask only for what creation needs; every other field waits for the [edit](./edit.md) page",
+      "**MUST** — on success, close the surface, show the new object in its collection and confirm with one `toast.success`",
+      "**MUST NOT** — clear what the person typed when creation fails: keep every value and show the error as [saving](./saving.md) describes",
+      "**Note** — an empty collection offers the same action from its [empty state](./empty-state.md)"
+    ],
+    "structure": [
+      {
+        "region": "Trigger",
+        "content": "The create action, in the header of the collection",
+        "components": "Button"
+      },
+      {
+        "region": "Surface",
+        "content": "A dialog, or a page for a long form",
+        "components": "Dialog, or the page layout of [navigation](./navigation.md)"
+      },
+      {
+        "region": "Header",
+        "content": "What is being created, and one sentence on what comes next",
+        "components": "DialogTitle, DialogDescription"
+      },
+      {
+        "region": "Fields",
+        "content": "The required fields, in the order the person thinks of them",
+        "components": "FieldGroup, Field, Input, Textarea, Select"
+      },
+      {
+        "region": "Actions",
+        "content": "Cancel, then the create action",
+        "components": "DialogFooter, DialogClose, Button"
+      },
+      {
+        "region": "Confirmation",
+        "content": "One line that names the new object",
+        "components": "toast.success from sonner"
+      }
+    ],
+    "components": [
+      {
+        "component": "Button",
+        "variant_props": "variant=\"default\" with a PlusIcon",
+        "job": "The trigger, and the submit button"
+      },
+      {
+        "component": "Button",
+        "variant_props": "variant=\"outline\", type=\"button\"",
+        "job": "Cancel, inside DialogClose asChild"
+      },
+      {
+        "component": "Dialog",
+        "variant_props": "controlled through open/onOpenChange",
+        "job": "Closes itself once the object is created"
+      },
+      {
+        "component": "FieldGroup",
+        "variant_props": "—",
+        "job": "Spaces the fields and ties labels to inputs"
+      },
+      {
+        "component": "Toaster",
+        "variant_props": "once, at the layout root",
+        "job": "Shows the confirmation (toast of sonner)"
+      }
+    ],
+    "spacing": [
+      "**MUST** — let `FieldGroup` space the fields (`gap-6`, `space.component.lg`); a `Field` takes no margin",
+      "**MUST** — put the `form` inside `DialogContent` with `flex flex-col gap-6`, so header, fields and footer keep the dialog's rhythm",
+      "**MUST** — on a full page, set the form column to `max-w-2xl` (`space.layout.content-sm`) inside the page container of [navigation](./navigation.md)"
+    ],
+    "content": [
+      {
+        "element": "Trigger",
+        "write": "Create project",
+        "not": "New, Add +, Create"
+      },
+      {
+        "element": "Title",
+        "write": "Create a project",
+        "not": "New project form"
+      },
+      {
+        "element": "Submit",
+        "write": "Create project",
+        "not": "Submit, OK"
+      },
+      {
+        "element": "Success",
+        "write": "Your project \"Q3 launch\" is ready.",
+        "not": "Success! Project created successfully!"
+      },
+      {
+        "element": "Error",
+        "write": "We couldn't create the project. Check your connection and try again.",
+        "not": "Error 500"
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport * as React from \"react\"\nimport { PlusIcon } from \"@phosphor-icons/react\"\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/components/ui/dialog\"\nimport { Field, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\nexport function CreateProject() {\n  const [open, setOpen] = React.useState(false)\n\n  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    const name = new FormData(event.currentTarget).get(\"name\")\n    setOpen(false)\n    toast.success(`Your project \"${name}\" is ready.`)\n  }\n\n  return (\n    <Dialog open={open} onOpenChange={setOpen}>\n      <DialogTrigger asChild>\n        <Button>\n          <PlusIcon />\n          Create project\n        </Button>\n      </DialogTrigger>\n      <DialogContent>\n        <form onSubmit={handleSubmit} className=\"flex flex-col gap-6\">\n          <DialogHeader>\n            <DialogTitle>Create a project</DialogTitle>\n            <DialogDescription>\n              Give it a name now. You can add the details later.\n            </DialogDescription>\n          </DialogHeader>\n          <FieldGroup>\n            <Field>\n              <FieldLabel htmlFor=\"project-name\">Name</FieldLabel>\n              <Input id=\"project-name\" name=\"name\" required />\n            </Field>\n            <Field>\n              <FieldLabel htmlFor=\"project-summary\">\n                Summary (optional)\n              </FieldLabel>\n              <Textarea id=\"project-summary\" name=\"summary\" />\n            </Field>\n          </FieldGroup>\n          <DialogFooter>\n            <DialogClose asChild>\n              <Button type=\"button\" variant=\"outline\">\n                Cancel\n              </Button>\n            </DialogClose>\n            <Button type=\"submit\">Create project</Button>\n          </DialogFooter>\n        </form>\n      </DialogContent>\n    </Dialog>\n  )\n}",
+    "cross_references": [
+      "[edit](./edit.md) — changes the object once it exists, with the fields creation leaves out",
+      "[form](./form.md) — the layout, labels and validation of the fields",
+      "[saving](./saving.md) — the pending state of the submit button and the error when creation fails",
+      "[empty-state](./empty-state.md) — the same action, offered by an empty collection",
+      "[`Dialog`](../components/Dialog.md), [`Field`](../components/Field.md), [`Sonner`](../components/Sonner.md) — the component specs"
+    ],
+    "source": "specs/patterns/create.md"
+  },
+  "delete": {
+    "name": "delete",
+    "title": "Delete",
+    "kind": "task",
+    "role": "Destroys an object for good, once the person has confirmed they mean it.",
+    "usage": [
+      "**MUST** — confirm a permanent deletion in an `AlertDialog` whose title asks the question with the object's name or count, and whose description says what is lost",
+      "**MUST** — label the confirm button with the verb of the question and the object, `variant=\"destructive\"`: `Delete project`, never `Yes` or `OK`",
+      "**MUST NOT** — ask for confirmation when the action can be undone: remove the object at once and offer `Undo` in the toast — the word is then `remove`, not `delete` ([voice and tone](../foundations/voice-and-tone.md))",
+      "**MUST** — keep the delete action away from the primary action: in the object's row menu (`DropdownMenuItem` `variant=\"destructive\"`) or in a last `Card` of its [settings](./settings.md)",
+      "**MUST** — once the object is deleted, return to its collection and confirm with one `toast.success`",
+      "**MUST** — ask the person to type the object's name in the dialog when the deletion takes other objects with it (a workspace and its projects)"
+    ],
+    "structure": [
+      {
+        "region": "Trigger",
+        "content": "The delete action, away from the primary action",
+        "components": "Button variant=\"destructive\", or DropdownMenuItem"
+      },
+      {
+        "region": "Question",
+        "content": "What will be deleted, by name or count",
+        "components": "AlertDialogTitle"
+      },
+      {
+        "region": "Consequence",
+        "content": "What the person loses, and that it cannot come back",
+        "components": "AlertDialogDescription"
+      },
+      {
+        "region": "Actions",
+        "content": "Cancel, then the destructive action",
+        "components": "AlertDialogFooter, AlertDialogCancel, AlertDialogAction"
+      },
+      {
+        "region": "Confirmation",
+        "content": "One line that names what was deleted",
+        "components": "toast.success from sonner"
+      }
+    ],
+    "components": [
+      {
+        "component": "AlertDialog",
+        "variant_props": "—",
+        "job": "Blocks the page until the person decides (rule-21)"
+      },
+      {
+        "component": "AlertDialogAction",
+        "variant_props": "variant=\"destructive\"",
+        "job": "Deletes; repeats the verb of the question"
+      },
+      {
+        "component": "AlertDialogCancel",
+        "variant_props": "—",
+        "job": "Takes the focus when the dialog opens"
+      },
+      {
+        "component": "Button",
+        "variant_props": "variant=\"destructive\"",
+        "job": "The trigger, in a danger zone"
+      },
+      {
+        "component": "DropdownMenuItem",
+        "variant_props": "variant=\"destructive\"",
+        "job": "The trigger, in a row menu"
+      }
+    ],
+    "spacing": [
+      "**MUST** — keep the `AlertDialog`'s own layout: no class on its header, description or footer",
+      "**MUST** — put a danger-zone `Card` last on the page, `gap-6` below the card before it"
+    ],
+    "content": [
+      {
+        "element": "Title",
+        "write": "Delete \"Q3 launch\"? · Delete 3 projects?",
+        "not": "Are you sure?"
+      },
+      {
+        "element": "Description",
+        "write": "Its tasks and files go with it. You won't be able to get them back.",
+        "not": "This action is irreversible."
+      },
+      {
+        "element": "Action",
+        "write": "Delete project",
+        "not": "Yes, OK, Confirm"
+      },
+      {
+        "element": "Cancel",
+        "write": "Cancel",
+        "not": "No, Go back"
+      },
+      {
+        "element": "Success",
+        "write": "\"Q3 launch\" is deleted.",
+        "not": "Deletion successful!"
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport { toast } from \"sonner\"\n\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n} from \"@/components/ui/alert-dialog\"\nimport { Button } from \"@/components/ui/button\"\n\nexport function DeleteProject({ name }: { name: string }) {\n  return (\n    <AlertDialog>\n      <AlertDialogTrigger asChild>\n        <Button variant=\"destructive\">Delete project</Button>\n      </AlertDialogTrigger>\n      <AlertDialogContent>\n        <AlertDialogHeader>\n          <AlertDialogTitle>Delete \"{name}\"?</AlertDialogTitle>\n          <AlertDialogDescription>\n            Its tasks and files go with it. You won't be able to get them back.\n          </AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogCancel>Cancel</AlertDialogCancel>\n          <AlertDialogAction\n            variant=\"destructive\"\n            onClick={() => toast.success(`\"${name}\" is deleted.`)}\n          >\n            Delete project\n          </AlertDialogAction>\n        </AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>\n  )\n}",
+    "cross_references": [
+      "[settings](./settings.md) — the danger zone that holds the delete action of an object",
+      "[saving](./saving.md) — the error when the deletion fails",
+      "[voice and tone](../foundations/voice-and-tone.md) — `delete` destroys, `remove` can be undone",
+      "[`AlertDialog`](../components/AlertDialog.md), [`DropdownMenu`](../components/DropdownMenu.md), [`Sonner`](../components/Sonner.md) — the component specs"
+    ],
+    "source": "specs/patterns/delete.md"
+  },
+  "edit": {
+    "name": "edit",
+    "title": "Edit",
+    "kind": "task",
+    "role": "Changes the details of an object that already exists, and saves them only when the person asks to.",
+    "usage": [
+      "**MUST** — edit on the object's own page, one `Card` per group of related fields, each with its own `Save changes`; an object of at most 6 fields edits in the same `Dialog` as [create](./create.md)",
+      "**MUST** — fill every field with its current value (`defaultValue`), so the person changes only what they came for",
+      "**MUST** — save through an explicit `Save changes` button; a `Switch` that takes effect at once is the only exception, as [settings](./settings.md) describes",
+      "**MUST** — offer `Discard changes` (`type=\"reset\"`) next to the save button, which puts the saved values back",
+      "**MUST** — warn before the person leaves with unsaved changes, as [saving](./saving.md) describes",
+      "**MUST NOT** — reuse the create wording: the object exists, so the button says `Save changes`, never `Create`"
+    ],
+    "structure": [
+      {
+        "region": "Header",
+        "content": "The object's name, as the page title",
+        "components": "Heading level={1}"
+      },
+      {
+        "region": "Section",
+        "content": "One group of related fields, with a title and a line",
+        "components": "Card, CardHeader, CardTitle, CardDescription"
+      },
+      {
+        "region": "Fields",
+        "content": "The fields of the group, filled with the saved values",
+        "components": "FieldGroup, Field, Input, Textarea, Select"
+      },
+      {
+        "region": "Actions",
+        "content": "Save, then discard, at the bottom of the section",
+        "components": "CardFooter, Button"
+      }
+    ],
+    "components": [
+      {
+        "component": "Card",
+        "variant_props": "one per group of fields",
+        "job": "Holds one form and its own save action"
+      },
+      {
+        "component": "FieldGroup",
+        "variant_props": "—",
+        "job": "Spaces the fields"
+      },
+      {
+        "component": "Button",
+        "variant_props": "type=\"submit\", variant=\"default\"",
+        "job": "Saves the section"
+      },
+      {
+        "component": "Button",
+        "variant_props": "type=\"reset\", variant=\"ghost\"",
+        "job": "Puts the saved values back"
+      },
+      {
+        "component": "Heading",
+        "variant_props": "level={1}",
+        "job": "The name of the object, once per page"
+      }
+    ],
+    "spacing": [
+      "**MUST** — stack the section cards in a `flex flex-col gap-6` column of `max-w-2xl` (`space.layout.content-sm`)",
+      "**MUST** — let `CardContent` and `CardFooter` pad the form; a `Field` takes no margin",
+      "**MUST** — keep the page title and the first card `gap-section` apart, inside the page container of [navigation](./navigation.md)"
+    ],
+    "content": [
+      {
+        "element": "Section title",
+        "write": "Project details",
+        "not": "Edit form, Details"
+      },
+      {
+        "element": "Save",
+        "write": "Save changes",
+        "not": "Submit, Update, OK"
+      },
+      {
+        "element": "Discard",
+        "write": "Discard changes",
+        "not": "Reset, Cancel"
+      },
+      {
+        "element": "Success",
+        "write": "All set! Your changes are saved.",
+        "not": "Update successful!!"
+      },
+      {
+        "element": "Error",
+        "write": "We couldn't save your changes. Check your connection and try again.",
+        "not": "Something went wrong."
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport { Field, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\nexport function ProjectDetails() {\n  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    toast.success(\"All set! Your changes are saved.\")\n  }\n\n  return (\n    <Card>\n      <form onSubmit={handleSubmit}>\n        <CardHeader>\n          <CardTitle>Project details</CardTitle>\n          <CardDescription>\n            Everyone on the project sees these details.\n          </CardDescription>\n        </CardHeader>\n        <CardContent>\n          <FieldGroup>\n            <Field>\n              <FieldLabel htmlFor=\"project-name\">Name</FieldLabel>\n              <Input id=\"project-name\" name=\"name\" defaultValue=\"Q3 launch\" />\n            </Field>\n            <Field>\n              <FieldLabel htmlFor=\"project-summary\">Summary</FieldLabel>\n              <Textarea\n                id=\"project-summary\"\n                name=\"summary\"\n                defaultValue=\"The campaign for the new pricing.\"\n              />\n            </Field>\n          </FieldGroup>\n        </CardContent>\n        <CardFooter className=\"gap-2\">\n          <Button type=\"submit\">Save changes</Button>\n          <Button type=\"reset\" variant=\"ghost\">\n            Discard changes\n          </Button>\n        </CardFooter>\n      </form>\n    </Card>\n  )\n}",
+    "cross_references": [
+      "[create](./create.md) — the same fields, before the object exists",
+      "[saving](./saving.md) — the pending state, the error and the unsaved-changes warning",
+      "[settings](./settings.md) — the settings that take effect at once, without a save button",
+      "[form](./form.md) — the layout, labels and validation of the fields",
+      "[`Card`](../components/Card.md), [`Field`](../components/Field.md) — the component specs"
+    ],
+    "source": "specs/patterns/edit.md"
+  },
+  "empty-state": {
+    "name": "empty-state",
+    "title": "Empty state",
+    "kind": "ui",
+    "role": "Fills a view that has nothing to show with what happened and the next step, instead of a blank space.",
+    "usage": [
+      "**MUST** — pick the message and the action from why the view is empty (see Content): a first use offers the create action, a search or a filter offers to clear it, a finished list offers nothing, a missing permission names who can give access",
+      "**MUST NOT** — use an `Empty` for a failure to load: that is an `Alert` `variant=\"destructive\"` that says how to fix it",
+      "**MUST** — show one `Empty` per view, in place of the collection it stands for — the header and the create action of the page stay",
+      "**MUST** — keep the description to two sentences, framed around the action to take",
+      "**MUST** — pass `EmptyTitle` the heading level below the section that holds it (`as=\"h3\"` under an `h2`)",
+      "**MUST NOT** — put information in `EmptyMedia`: the icon is decorative"
+    ],
+    "structure": [
+      {
+        "region": "Media",
+        "content": "One Phosphor icon that names the collection",
+        "components": "EmptyMedia variant=\"icon\""
+      },
+      {
+        "region": "Title",
+        "content": "What is empty, in a few words",
+        "components": "EmptyTitle"
+      },
+      {
+        "region": "Description",
+        "content": "Why, and what to do, in one or two sentences",
+        "components": "EmptyDescription"
+      },
+      {
+        "region": "Action",
+        "content": "One primary action, and at most one other",
+        "components": "EmptyContent, Button"
+      }
+    ],
+    "components": [
+      {
+        "component": "Empty",
+        "variant_props": "—",
+        "job": "Holds the empty state, centered"
+      },
+      {
+        "component": "EmptyMedia",
+        "variant_props": "variant=\"icon\"",
+        "job": "The decorative icon"
+      },
+      {
+        "component": "EmptyTitle",
+        "variant_props": "as one level below its section",
+        "job": "The heading of the empty state"
+      },
+      {
+        "component": "Button",
+        "variant_props": "variant=\"default\"",
+        "job": "The first-use action"
+      },
+      {
+        "component": "Button",
+        "variant_props": "variant=\"outline\"",
+        "job": "Clear search, Clear filters"
+      }
+    ],
+    "spacing": [
+      "**MUST** — let `Empty` lay out its own parts: no class on its header, title or description",
+      "**MUST** — give the `Empty` the place of the collection it replaces, inside the same column, so the page does not jump when the first entry arrives"
+    ],
+    "content": [
+      {
+        "situation": "First use",
+        "write": "No projects yet · Create your first project to get started.",
+        "not": "No data."
+      },
+      {
+        "situation": "No match",
+        "write": "No results for \"lanch\" · Check the spelling or try another word.",
+        "not": "0 results."
+      },
+      {
+        "situation": "All done",
+        "write": "You're all caught up · New invoices show up here.",
+        "not": "Empty list!"
+      },
+      {
+        "situation": "Access",
+        "write": "You don't have access to this project · Ask its owner to invite you.",
+        "not": "403 Forbidden"
+      }
+    ],
+    "code_example": "import { FolderIcon, PlusIcon } from \"@phosphor-icons/react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n} from \"@/components/ui/empty\"\n\nexport function NoProjects({ onCreate }: { onCreate: () => void }) {\n  return (\n    <Empty>\n      <EmptyHeader>\n        <EmptyMedia variant=\"icon\">\n          <FolderIcon />\n        </EmptyMedia>\n        <EmptyTitle as=\"h3\">No projects yet</EmptyTitle>\n        <EmptyDescription>\n          Create your first project to get started.\n        </EmptyDescription>\n      </EmptyHeader>\n      <EmptyContent>\n        <Button onClick={onCreate}>\n          <PlusIcon />\n          Create project\n        </Button>\n      </EmptyContent>\n    </Empty>\n  )\n}",
+    "cross_references": [
+      "[create](./create.md) — the action a first-use empty state offers",
+      "[search](./search.md), [filter](./filter.md) — the empty state when nothing matches",
+      "[loading](./loading.md) — what shows before the view knows it is empty",
+      "[`Empty`](../components/Empty.md), [`Alert`](../components/Alert.md) — the component specs"
+    ],
+    "source": "specs/patterns/empty-state.md"
+  },
+  "filter": {
+    "name": "filter",
+    "title": "Filter",
+    "kind": "task",
+    "role": "Narrows a collection to the entries whose attributes match what the person picks, and says how many are left.",
+    "usage": [
+      "**MUST** — place the filters in a bar right above the collection they narrow, never in a separate page",
+      "**MUST** — apply a filter as soon as its value changes: no `Apply` button",
+      "**MUST** — pick each control from its number of values (rule-20): a `ToggleGroup` `type=\"single\"` for 2 to 5 exclusive views of the same list (`All`, `Active`, `Archived`), a `Select` for 6 to 15 values, a `Combobox` beyond 15",
+      "**MUST** — keep the active filters in the URL query string, so a filtered view survives a reload and can be shared",
+      "**MUST** — show the number of results in a `aria-live=\"polite\"` region, so a screen reader hears the effect of each change",
+      "**MUST** — show `Clear filters` only while at least one filter is active, and the same action in the [empty state](./empty-state.md) when nothing matches",
+      "**Note** — a text query belongs to [search](./search.md); both can sit in the same bar, the search field first"
+    ],
+    "structure": [
+      {
+        "region": "Filter bar",
+        "content": "One control per attribute, then Clear filters",
+        "components": "ToggleGroup, Select, Combobox, Button"
+      },
+      {
+        "region": "Count",
+        "content": "The number of entries left, with the collection's noun",
+        "components": "a <p> with aria-live=\"polite\""
+      },
+      {
+        "region": "Collection",
+        "content": "The entries that match",
+        "components": "Table, or Item inside an ItemGroup"
+      },
+      {
+        "region": "No results",
+        "content": "What matched nothing, and how to widen the view",
+        "components": "Empty"
+      }
+    ],
+    "components": [
+      {
+        "component": "ToggleGroup",
+        "variant_props": "type=\"single\", variant=\"outline\", aria-label",
+        "job": "2 to 5 exclusive views of the list"
+      },
+      {
+        "component": "Select",
+        "variant_props": "a SelectTrigger with an aria-label",
+        "job": "One value out of 6 to 15"
+      },
+      {
+        "component": "Combobox",
+        "variant_props": "—",
+        "job": "One value out of more than 15, or searchable"
+      },
+      {
+        "component": "Button",
+        "variant_props": "variant=\"ghost\"",
+        "job": "Clear filters"
+      },
+      {
+        "component": "Empty",
+        "variant_props": "—",
+        "job": "No entry matches the filters"
+      }
+    ],
+    "spacing": [
+      "**MUST** — lay the bar out as `flex flex-wrap items-center gap-2`, so it wraps on a narrow screen instead of scrolling",
+      "**MUST** — keep the bar, the count and the collection in one `flex flex-col gap-4` column"
+    ],
+    "content": [
+      {
+        "element": "Control",
+        "write": "Status · Owner (the attribute's name)",
+        "not": "Filter by status:"
+      },
+      {
+        "element": "Clear",
+        "write": "Clear filters",
+        "not": "Reset, X"
+      },
+      {
+        "element": "Count",
+        "write": "12 projects · 1 project",
+        "not": "Showing 12 results, 12 item(s)"
+      },
+      {
+        "element": "No results",
+        "write": "No projects match these filters · Clear filters",
+        "not": "No data."
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@/components/ui/select\"\nimport { ToggleGroup, ToggleGroupItem } from \"@/components/ui/toggle-group\"\n\nconst OWNERS = [\"Ana\", \"Ben\", \"Chloe\", \"Dev\", \"Eli\", \"Femi\"]\n\nexport function ProjectFilters({ count }: { count: number }) {\n  const [status, setStatus] = React.useState(\"all\")\n  const [owner, setOwner] = React.useState(\"\")\n  const active = status !== \"all\" || owner !== \"\"\n\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <div className=\"flex flex-wrap items-center gap-2\">\n        <ToggleGroup\n          type=\"single\"\n          variant=\"outline\"\n          value={status}\n          onValueChange={(value) => setStatus(value || \"all\")}\n          aria-label=\"Status\"\n        >\n          <ToggleGroupItem value=\"all\">All</ToggleGroupItem>\n          <ToggleGroupItem value=\"active\">Active</ToggleGroupItem>\n          <ToggleGroupItem value=\"archived\">Archived</ToggleGroupItem>\n        </ToggleGroup>\n        <Select value={owner} onValueChange={setOwner}>\n          <SelectTrigger aria-label=\"Owner\">\n            <SelectValue placeholder=\"Owner\" />\n          </SelectTrigger>\n          <SelectContent>\n            {OWNERS.map((name) => (\n              <SelectItem key={name} value={name}>\n                {name}\n              </SelectItem>\n            ))}\n          </SelectContent>\n        </Select>\n        {active && (\n          <Button\n            variant=\"ghost\"\n            onClick={() => {\n              setStatus(\"all\")\n              setOwner(\"\")\n            }}\n          >\n            Clear filters\n          </Button>\n        )}\n      </div>\n      <p aria-live=\"polite\" className=\"text-sm text-muted-foreground\">\n        {count} {count === 1 ? \"project\" : \"projects\"}\n      </p>\n      {/* The collection: a Table, or an ItemGroup */}\n    </div>\n  )\n}",
+    "cross_references": [
+      "[search](./search.md) — narrows the same collection by a text query",
+      "[empty-state](./empty-state.md) — the view when no entry matches",
+      "[navigation](./navigation.md) — `Pagination` below a filtered collection",
+      "[`ToggleGroup`](../components/ToggleGroup.md), [`Select`](../components/Select.md), [`Combobox`](../components/Combobox.md) — the component specs; rule-20 of `design-system.index.json` picks between them"
+    ],
+    "source": "specs/patterns/filter.md"
+  },
+  "form": {
+    "name": "form",
+    "title": "Form",
+    "kind": "ui",
+    "role": "Lays out the fields a person fills in, tells them what each one expects, and points to what to fix when a value is wrong.",
+    "usage": [
+      "**MUST** — lay the fields out in one column, each control under its visible `FieldLabel` (rule-09); a placeholder never stands in for the label",
+      "**MUST** — group related fields in a `FieldSet` with a `FieldLegend`, at most 2 levels deep",
+      "**MUST** — pick each selection control from its number of options (rule-20): `RadioGroup` for 2 to 5, `Select` for 6 to 15, `Combobox` beyond, `Checkbox` for several values",
+      "**MUST** — mark the optional fields with `(optional)` in their label, and leave the required ones unmarked",
+      "**MUST** — validate on submit, then check a field again on each change once it shows an error; move the focus to the first field in error",
+      "**MUST** — show an error in a `FieldError` under its field, with `data-invalid` on the `Field` and `aria-invalid` on the control",
+      "**MUST NOT** — disable the submit button to signal a missing value: let the person submit, then say what is missing",
+      "**MUST** — place the actions after the last field: the submit button, then `Cancel` when the form can be left"
+    ],
+    "structure": [
+      {
+        "region": "Group",
+        "content": "Related fields under a legend",
+        "components": "FieldSet, FieldLegend"
+      },
+      {
+        "region": "Field",
+        "content": "A label, the control, a help line, an error when there is one",
+        "components": "Field, FieldLabel, FieldDescription, FieldError"
+      },
+      {
+        "region": "Controls",
+        "content": "Text, choice and toggle controls",
+        "components": "Input, Textarea, RadioGroup, Select, Checkbox"
+      },
+      {
+        "region": "Actions",
+        "content": "Submit, then cancel",
+        "components": "Button"
+      }
+    ],
+    "components": [
+      {
+        "component": "FieldGroup",
+        "variant_props": "—",
+        "job": "Spaces the fields and groups (gap-6)"
+      },
+      {
+        "component": "FieldSet",
+        "variant_props": "with a FieldLegend variant=\"legend\"",
+        "job": "A named group of fields"
+      },
+      {
+        "component": "Field",
+        "variant_props": "data-invalid when its value is wrong",
+        "job": "One label, one control, its help and its error"
+      },
+      {
+        "component": "FieldError",
+        "variant_props": "—",
+        "job": "What is wrong and how to fix it"
+      },
+      {
+        "component": "RadioGroup",
+        "variant_props": "inside a FieldSet, one Field per option",
+        "job": "One value out of 2 to 5"
+      },
+      {
+        "component": "Button",
+        "variant_props": "type=\"submit\"",
+        "job": "Sends the form"
+      }
+    ],
+    "spacing": [
+      "**MUST** — cap the form at `max-w-2xl` (`space.layout.content-sm`); a field takes the width of the column",
+      "**MUST** — let `FieldGroup` space the fields and groups (`gap-6`, `space.component.lg`); a `Field` takes no margin",
+      "**MUST** — lay the actions out as `flex gap-2`, after the last group"
+    ],
+    "content": [
+      {
+        "element": "Label",
+        "write": "Email · Company (optional)",
+        "not": "Email:, Enter your email, Email*"
+      },
+      {
+        "element": "Help",
+        "write": "We only use it to send receipts.",
+        "not": "Required field"
+      },
+      {
+        "element": "Error",
+        "write": "Enter an email address, like name@example.com.",
+        "not": "Invalid input, Error"
+      },
+      {
+        "element": "Submit",
+        "write": "The verb of the task: Create account, Send invoice",
+        "not": "Submit, OK"
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Field,\n  FieldError,\n  FieldGroup,\n  FieldLabel,\n  FieldLegend,\n  FieldSet,\n} from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\"\n\nexport function AccountForm() {\n  const [emailError, setEmailError] = React.useState(\"\")\n\n  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    const email = String(new FormData(event.currentTarget).get(\"email\"))\n    setEmailError(\n      email.includes(\"@\")\n        ? \"\"\n        : \"Enter an email address, like name@example.com.\"\n    )\n  }\n\n  return (\n    <form onSubmit={handleSubmit} noValidate className=\"max-w-2xl\">\n      <FieldGroup>\n        <FieldSet>\n          <FieldLegend>Contact</FieldLegend>\n          <FieldGroup>\n            <Field data-invalid={emailError ? \"true\" : undefined}>\n              <FieldLabel htmlFor=\"email\">Email</FieldLabel>\n              <Input\n                id=\"email\"\n                name=\"email\"\n                type=\"email\"\n                autoComplete=\"email\"\n                aria-invalid={emailError ? true : undefined}\n              />\n              <FieldError>{emailError}</FieldError>\n            </Field>\n            <Field>\n              <FieldLabel htmlFor=\"company\">Company (optional)</FieldLabel>\n              <Input id=\"company\" name=\"company\" autoComplete=\"organization\" />\n            </Field>\n          </FieldGroup>\n        </FieldSet>\n        <FieldSet>\n          <FieldLegend>Plan</FieldLegend>\n          <RadioGroup name=\"plan\" defaultValue=\"starter\">\n            <Field orientation=\"horizontal\">\n              <RadioGroupItem value=\"starter\" id=\"plan-starter\" />\n              <FieldLabel htmlFor=\"plan-starter\">Starter</FieldLabel>\n            </Field>\n            <Field orientation=\"horizontal\">\n              <RadioGroupItem value=\"team\" id=\"plan-team\" />\n              <FieldLabel htmlFor=\"plan-team\">Team</FieldLabel>\n            </Field>\n          </RadioGroup>\n        </FieldSet>\n        <div className=\"flex gap-2\">\n          <Button type=\"submit\">Create account</Button>\n        </div>\n      </FieldGroup>\n    </form>\n  )\n}",
+    "cross_references": [
+      "[create](./create.md), [edit](./edit.md), [sign-in](./sign-in.md) — the tasks a form serves",
+      "[saving](./saving.md) — what the submit button shows while the form is sent",
+      "[`Field`](../components/Field.md), [`RadioGroup`](../components/RadioGroup.md), [`Select`](../components/Select.md), [`Combobox`](../components/Combobox.md) — the component specs; rule-09 and rule-20 of `design-system.index.json`"
+    ],
+    "source": "specs/patterns/form.md"
+  },
+  "loading": {
+    "name": "loading",
+    "title": "Loading",
+    "kind": "ui",
+    "role": "Shows that content or an action is on its way, with the indicator that matches what the person is waiting for and how long.",
+    "usage": [
+      "**MUST** — pick the indicator from what is loading:",
+      "content whose shape is known (a list, a card, a table): `Skeleton`s in its place, as many as the entries expected",
+      "an action the person started (a button, a form): a `Spinner` inside the button that started it",
+      "a task whose progress can be measured, or that lasts more than 10 s: `Progress`, with a label that says what is happening",
+      "**MUST NOT** — show an indicator for a wait under 300 ms: it flashes and reads as a glitch",
+      "**MUST** — match each `Skeleton` to the size of the content it stands for, so its arrival does not shift the layout",
+      "**MUST** — set `aria-busy=\"true\"` on the region that is loading, and name every `Spinner` and `Progress` after the action (`aria-label=\"Loading projects\"`)",
+      "**MUST NOT** — block the whole page with a spinner: the header and the navigation stay usable while a region loads",
+      "**MUST** — replace the indicator with the content, an [empty state](./empty-state.md) or an `Alert` `variant=\"destructive\"` — never leave it on screen after the request ends"
+    ],
+    "structure": [
+      {
+        "region": "Content",
+        "content": "Placeholders in the shape of the entries to come",
+        "components": "Skeleton"
+      },
+      {
+        "region": "Action",
+        "content": "The button that started the action, with its spinner",
+        "components": "Button, Spinner"
+      },
+      {
+        "region": "Long task",
+        "content": "How far the task has gone, and what it is doing",
+        "components": "Progress, a label"
+      }
+    ],
+    "components": [
+      {
+        "component": "Skeleton",
+        "variant_props": "the size classes of the content it replaces (h-4 w-48)",
+        "job": "Holds the place of content that is coming"
+      },
+      {
+        "component": "Spinner",
+        "variant_props": "aria-label naming the action",
+        "job": "An action under 10 s, inside its button"
+      },
+      {
+        "component": "Progress",
+        "variant_props": "value, aria-label",
+        "job": "A measured task, or one that lasts over 10 s"
+      },
+      {
+        "component": "Button",
+        "variant_props": "disabled, aria-busy while pending",
+        "job": "The action that is running"
+      }
+    ],
+    "spacing": [
+      "**MUST** — give the skeletons the same container, gaps and paddings as the content they stand for: a skeleton row is a real row with `Skeleton`s in its cells",
+      "**MUST** — keep a `Spinner` inside its `Button`, before the label, with the button's own gap"
+    ],
+    "content": [
+      {
+        "element": "Pending button",
+        "write": "Saving… · Signing in…",
+        "not": "Loading..., Please wait"
+      },
+      {
+        "element": "Region label",
+        "write": "Loading your projects…",
+        "not": "Loading…"
+      },
+      {
+        "element": "Long task",
+        "write": "Importing 120 of 480 contacts…",
+        "not": "Processing, please wait"
+      }
+    ],
+    "code_example": "import { Card, CardContent, CardHeader } from \"@/components/ui/card\"\nimport { Skeleton } from \"@/components/ui/skeleton\"\n\nexport function ProjectCardsLoading() {\n  return (\n    <div\n      aria-busy=\"true\"\n      aria-label=\"Loading your projects…\"\n      className=\"grid gap-4 md:grid-cols-3\"\n    >\n      {Array.from({ length: 3 }, (_, index) => (\n        <Card key={index}>\n          <CardHeader>\n            <Skeleton className=\"h-5 w-32\" />\n          </CardHeader>\n          <CardContent className=\"flex flex-col gap-2\">\n            <Skeleton className=\"h-4 w-full\" />\n            <Skeleton className=\"h-4 w-48\" />\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  )\n}",
+    "cross_references": [
+      "[saving](./saving.md) — the pending state of a save button",
+      "[empty-state](./empty-state.md) — what replaces the indicator when there is nothing to show",
+      "[`Skeleton`](../components/Skeleton.md), [`Spinner`](../components/Spinner.md), [`Progress`](../components/Progress.md) — the component specs"
+    ],
+    "source": "specs/patterns/loading.md"
+  },
+  "navigation": {
+    "name": "navigation",
+    "title": "Navigation",
+    "kind": "ui",
+    "role": "Frames every page of an application in the same shell, and tells the person where they are and where they can go next.",
+    "usage": [
+      "**MUST** — put the application's sections in a `Sidebar`, the current one marked with `isActive`; below `md` it opens as a `Sheet` from `SidebarTrigger`",
+      "**MUST** — show a `Breadcrumb` above the page title once a page sits 3 levels deep or more; its last item is the current page, in `BreadcrumbPage`",
+      "**MUST** — switch between views of the same object with `Tabs` (at most 7); separate pages are links, never tabs",
+      "**MUST** — split a collection of more than 50 entries into pages with `Pagination` below it, or load more on demand",
+      "**MUST** — give each page one `Heading` `level={1}`, and put the page's primary action beside it",
+      "**MUST** — keep one page container for every page, so the content does not jump from one page to the next"
+    ],
+    "structure": [
+      {
+        "region": "Shell",
+        "content": "The sidebar and the page beside it",
+        "components": "SidebarProvider, Sidebar, SidebarInset"
+      },
+      {
+        "region": "Sections",
+        "content": "The application's sections, the current one active",
+        "components": "SidebarMenu, SidebarMenuItem, SidebarMenuButton"
+      },
+      {
+        "region": "Top bar",
+        "content": "The sidebar toggle and the breadcrumb",
+        "components": "SidebarTrigger, Breadcrumb"
+      },
+      {
+        "region": "Page header",
+        "content": "The page title and its primary action",
+        "components": "Heading, Button"
+      },
+      {
+        "region": "Views",
+        "content": "Sibling views of the same object",
+        "components": "Tabs"
+      },
+      {
+        "region": "Content",
+        "content": "The page itself",
+        "components": "—"
+      },
+      {
+        "region": "Pages",
+        "content": "The pages of a long collection",
+        "components": "Pagination"
+      }
+    ],
+    "components": [
+      {
+        "component": "SidebarMenuButton",
+        "variant_props": "asChild around a Link, isActive on the current section",
+        "job": "One section of the application"
+      },
+      {
+        "component": "SidebarInset",
+        "variant_props": "—",
+        "job": "The page next to the sidebar"
+      },
+      {
+        "component": "SidebarTrigger",
+        "variant_props": "—",
+        "job": "Opens and closes the sidebar"
+      },
+      {
+        "component": "Breadcrumb",
+        "variant_props": "from 3 levels deep",
+        "job": "Where the page sits"
+      },
+      {
+        "component": "Tabs",
+        "variant_props": "at most 7 TabsTriggers",
+        "job": "Views of the same object"
+      },
+      {
+        "component": "Pagination",
+        "variant_props": "below the collection",
+        "job": "The pages of a long collection"
+      }
+    ],
+    "spacing": [
+      "**MUST** — wrap the page content in `mx-auto flex w-full max-w-5xl flex-col gap-section px-page py-section` (`space.layout.content-default`, `page-padding`, `section-gap`); a dashboard widens it to `max-w-7xl` (`content-lg`), an article narrows it to `max-w-2xl` (`content-sm`)",
+      "**MUST** — apply `px-page` once, on the page container, never on each section",
+      "**MUST** — lay the page header out as `flex flex-wrap items-center justify-between gap-4`, so the action wraps under the title on a narrow screen"
+    ],
+    "content": [
+      {
+        "element": "Section",
+        "write": "Projects · Invoices (a noun)",
+        "not": "Manage projects, My Stuff"
+      },
+      {
+        "element": "Page title",
+        "write": "The section or the object's name",
+        "not": "Welcome to the projects page!"
+      },
+      {
+        "element": "Sidebar toggle",
+        "write": "Show or hide the sidebar (its default name)",
+        "not": "Toggle Sidebar"
+      }
+    ],
+    "code_example": "import Link from \"next/link\"\nimport { FolderIcon, GearIcon, PlusIcon } from \"@phosphor-icons/react\"\n\nimport {\n  Breadcrumb,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbList,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n} from \"@/components/ui/breadcrumb\"\nimport { Button } from \"@/components/ui/button\"\nimport { Heading } from \"@/components/ui/heading\"\nimport {\n  Sidebar,\n  SidebarContent,\n  SidebarGroup,\n  SidebarInset,\n  SidebarMenu,\n  SidebarMenuButton,\n  SidebarMenuItem,\n  SidebarProvider,\n  SidebarTrigger,\n} from \"@/components/ui/sidebar\"\n\nexport default function ProjectsLayout() {\n  return (\n    <SidebarProvider>\n      <Sidebar>\n        <SidebarContent>\n          <SidebarGroup>\n            <SidebarMenu>\n              <SidebarMenuItem>\n                <SidebarMenuButton asChild isActive>\n                  <Link href=\"/projects\">\n                    <FolderIcon />\n                    Projects\n                  </Link>\n                </SidebarMenuButton>\n              </SidebarMenuItem>\n              <SidebarMenuItem>\n                <SidebarMenuButton asChild>\n                  <Link href=\"/settings\">\n                    <GearIcon />\n                    Settings\n                  </Link>\n                </SidebarMenuButton>\n              </SidebarMenuItem>\n            </SidebarMenu>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <SidebarInset className=\"bg-background text-foreground\">\n        <div className=\"flex items-center gap-2 px-page py-4\">\n          <SidebarTrigger />\n          <Breadcrumb>\n            <BreadcrumbList>\n              <BreadcrumbItem>\n                <BreadcrumbLink href=\"/\">Home</BreadcrumbLink>\n              </BreadcrumbItem>\n              <BreadcrumbSeparator />\n              <BreadcrumbItem>\n                <BreadcrumbLink href=\"/workspace\">Workspace</BreadcrumbLink>\n              </BreadcrumbItem>\n              <BreadcrumbSeparator />\n              <BreadcrumbItem>\n                <BreadcrumbPage>Projects</BreadcrumbPage>\n              </BreadcrumbItem>\n            </BreadcrumbList>\n          </Breadcrumb>\n        </div>\n        <main className=\"mx-auto flex w-full max-w-5xl flex-col gap-section px-page py-section\">\n          <div className=\"flex flex-wrap items-center justify-between gap-4\">\n            <Heading level={1}>Projects</Heading>\n            <Button>\n              <PlusIcon />\n              Create project\n            </Button>\n          </div>\n          {/* The page content */}\n        </main>\n      </SidebarInset>\n    </SidebarProvider>\n  )\n}",
+    "cross_references": [
+      "[settings](./settings.md) — a page that splits its sections with `Tabs` or a `Sidebar` group",
+      "[filter](./filter.md), [search](./search.md) — what sits above a paginated collection",
+      "[spacing](../foundations/spacing.md) — the `space.layout.*` tokens of the page container",
+      "[`Sidebar`](../components/Sidebar.md), [`Breadcrumb`](../components/Breadcrumb.md), [`Tabs`](../components/Tabs.md), [`Pagination`](../components/Pagination.md), [`NavigationMenu`](../components/NavigationMenu.md) — the component specs"
+    ],
+    "source": "specs/patterns/navigation.md"
+  },
+  "saving": {
+    "name": "saving",
+    "title": "Saving",
+    "kind": "ui",
+    "role": "Tells the person that their changes are on their way, that they are saved, or that they are not and what to do — and keeps them from losing unsaved work.",
+    "usage": [
+      "**MUST** — while a save runs, keep the button in place with a `Spinner` and a present-tense label (`Saving…`), `disabled` and `aria-busy`, so it cannot send twice",
+      "**MUST** — confirm a save the person asked for with one `toast.success`; a `Switch` that applies at once confirms nothing, its new position is the confirmation",
+      "**MUST** — report a failed save where it happened: a `FieldError` for a value the server refused, an `Alert` `variant=\"destructive\"` above the form for anything else — and keep every value the person typed",
+      "**MUST** — say what happened, then how to fix it, in every error ([voice and tone](../foundations/voice-and-tone.md))",
+      "**MUST** — ask before the person leaves a form with unsaved changes, in an `AlertDialog`: `Leave without saving?`, with `Keep editing` and `Leave page`",
+      "**MUST** — show the state of an autosaved document in a `aria-live=\"polite\"` line next to its title: `Saving…`, then `Saved`",
+      "**MUST NOT** — use a toast for an error that needs an action: the toast disappears before the person can act on it"
+    ],
+    "structure": [
+      {
+        "region": "Save action",
+        "content": "The button, then its pending state",
+        "components": "Button, Spinner"
+      },
+      {
+        "region": "Confirmation",
+        "content": "One line once the save succeeded",
+        "components": "toast.success from sonner"
+      },
+      {
+        "region": "Failure",
+        "content": "What failed and how to fix it, above the form",
+        "components": "Alert variant=\"destructive\", FieldError"
+      },
+      {
+        "region": "Leave guard",
+        "content": "The question before unsaved changes are lost",
+        "components": "AlertDialog"
+      },
+      {
+        "region": "Autosave",
+        "content": "The state of the last save, next to the title",
+        "components": "a <p> with aria-live=\"polite\""
+      }
+    ],
+    "components": [
+      {
+        "component": "Button",
+        "variant_props": "type=\"submit\", disabled and aria-busy while pending",
+        "job": "The save action"
+      },
+      {
+        "component": "Spinner",
+        "variant_props": "aria-label=\"Saving changes\"",
+        "job": "The pending state, inside the button"
+      },
+      {
+        "component": "Alert",
+        "variant_props": "variant=\"destructive\"",
+        "job": "A failed save"
+      },
+      {
+        "component": "AlertDialog",
+        "variant_props": "—",
+        "job": "The unsaved-changes question"
+      },
+      {
+        "component": "Toaster",
+        "variant_props": "once, at the layout root",
+        "job": "Shows the confirmation"
+      }
+    ],
+    "spacing": [
+      "**MUST** — keep the save button in the same place in every state: the `Spinner` goes inside it, before the label, with the button's own gap",
+      "**MUST** — place the failure `Alert` first in the form's `FieldGroup`, so it takes the group's spacing"
+    ],
+    "content": [
+      {
+        "element": "Pending",
+        "write": "Saving…",
+        "not": "Please wait..., Processing"
+      },
+      {
+        "element": "Success",
+        "write": "All set! Your changes are saved.",
+        "not": "Success! Operation completed successfully!!"
+      },
+      {
+        "element": "Failure",
+        "write": "We couldn't save your changes. Check your connection and try again.",
+        "not": "Oops! Save failed!"
+      },
+      {
+        "element": "Leave guard",
+        "write": "Leave without saving? · Keep editing · Leave page",
+        "not": "Are you sure? · Yes · No"
+      },
+      {
+        "element": "Autosave",
+        "write": "Saving… · Saved",
+        "not": "Autosave in progress"
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport * as React from \"react\"\nimport { WarningCircleIcon } from \"@phosphor-icons/react\"\nimport { toast } from \"sonner\"\n\nimport { Alert, AlertDescription, AlertTitle } from \"@/components/ui/alert\"\nimport { Button } from \"@/components/ui/button\"\nimport { Field, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { Spinner } from \"@/components/ui/spinner\"\n\nexport function ProfileForm({\n  save,\n}: {\n  save: (data: FormData) => Promise<void>\n}) {\n  const [pending, setPending] = React.useState(false)\n  const [failed, setFailed] = React.useState(false)\n\n  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    setPending(true)\n    setFailed(false)\n    try {\n      await save(new FormData(event.currentTarget))\n      toast.success(\"All set! Your changes are saved.\")\n    } catch {\n      setFailed(true)\n    } finally {\n      setPending(false)\n    }\n  }\n\n  return (\n    <form onSubmit={handleSubmit} className=\"max-w-2xl\">\n      <FieldGroup>\n        {failed && (\n          <Alert variant=\"destructive\">\n            <WarningCircleIcon />\n            <AlertTitle>We couldn't save your changes</AlertTitle>\n            <AlertDescription>\n              Check your connection and try again.\n            </AlertDescription>\n          </Alert>\n        )}\n        <Field>\n          <FieldLabel htmlFor=\"display-name\">Display name</FieldLabel>\n          <Input id=\"display-name\" name=\"displayName\" defaultValue=\"Ana\" />\n        </Field>\n        <div className=\"flex gap-2\">\n          <Button type=\"submit\" disabled={pending} aria-busy={pending}>\n            {pending ? (\n              <>\n                <Spinner aria-label=\"Saving changes\" />\n                Saving…\n              </>\n            ) : (\n              \"Save changes\"\n            )}\n          </Button>\n        </div>\n      </FieldGroup>\n    </form>\n  )\n}",
+    "cross_references": [
+      "[edit](./edit.md), [settings](./settings.md) — the pages whose changes are saved",
+      "[loading](./loading.md) — the other waits, and when a `Progress` replaces the `Spinner`",
+      "[form](./form.md) — the `FieldError` of a value the server refused",
+      "[`Button`](../components/Button.md), [`Spinner`](../components/Spinner.md), [`Alert`](../components/Alert.md), [`AlertDialog`](../components/AlertDialog.md), [`Sonner`](../components/Sonner.md) — the component specs"
+    ],
+    "source": "specs/patterns/saving.md"
+  },
+  "search": {
+    "name": "search",
+    "title": "Search",
+    "kind": "task",
+    "role": "Finds the entries of a collection that match a text query, and says plainly when nothing does.",
+    "usage": [
+      "**MUST** — build the field from `InputGroup`: a leading `MagnifyingGlassIcon`, an `InputGroupInput` with `type=\"search\"`, and a clear button once the field holds text",
+      "**MUST** — give the field an accessible name that names the collection: `aria-label=\"Search projects\"`; the placeholder never stands in for it",
+      "**MUST** — update the results as the person types, 300 ms after the last keystroke, and at once on `Enter`",
+      "**MUST** — show the results in the collection's own presentation (`Table` or `ItemGroup`), with their count in a `aria-live=\"polite\"` region",
+      "**MUST** — when nothing matches, show an `Empty` that repeats the query and offers `Clear search`",
+      "**MUST** — keep the query in the URL query string (`?q=`), so the results survive a reload",
+      "**Note** — a search across the whole product, opened from anywhere with a shortcut, is a `CommandDialog`: see the [`Command`](../components/Command.md) spec"
+    ],
+    "structure": [
+      {
+        "region": "Field",
+        "content": "The query, its icon and its clear button",
+        "components": "InputGroup, InputGroupAddon, InputGroupInput, InputGroupButton"
+      },
+      {
+        "region": "Count",
+        "content": "The number of results",
+        "components": "a <p> with aria-live=\"polite\""
+      },
+      {
+        "region": "Results",
+        "content": "The entries that match",
+        "components": "Item inside an ItemGroup, or Table"
+      },
+      {
+        "region": "No results",
+        "content": "The query that matched nothing, and a way out",
+        "components": "Empty"
+      }
+    ],
+    "components": [
+      {
+        "component": "InputGroup",
+        "variant_props": "—",
+        "job": "Holds the icon, the field and the clear button"
+      },
+      {
+        "component": "InputGroupInput",
+        "variant_props": "type=\"search\", aria-label",
+        "job": "The query"
+      },
+      {
+        "component": "InputGroupButton",
+        "variant_props": "size=\"icon-xs\", aria-label=\"Clear search\"",
+        "job": "Empties the field and puts the focus back in it"
+      },
+      {
+        "component": "ItemGroup",
+        "variant_props": "—",
+        "job": "The results"
+      },
+      {
+        "component": "Empty",
+        "variant_props": "—",
+        "job": "Nothing matches the query"
+      }
+    ],
+    "spacing": [
+      "**MUST** — cap the field at `max-w-sm` above a collection; it takes the full width inside a `Sheet` or a narrow column",
+      "**MUST** — keep the field, the count and the results in one `flex flex-col gap-4` column"
+    ],
+    "content": [
+      {
+        "element": "Placeholder",
+        "write": "Search projects…",
+        "not": "Search..., Type here"
+      },
+      {
+        "element": "Count",
+        "write": "3 results for \"launch\"",
+        "not": "Results: 3"
+      },
+      {
+        "element": "No results",
+        "write": "No results for \"lanch\" · Check the spelling or try another word.",
+        "not": "0 results found."
+      },
+      {
+        "element": "Clear",
+        "write": "Clear search",
+        "not": "Reset"
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport * as React from \"react\"\nimport { MagnifyingGlassIcon, XIcon } from \"@phosphor-icons/react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyHeader,\n  EmptyTitle,\n} from \"@/components/ui/empty\"\nimport {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupButton,\n  InputGroupInput,\n} from \"@/components/ui/input-group\"\nimport { Item, ItemContent, ItemGroup, ItemTitle } from \"@/components/ui/item\"\n\nexport function ProjectSearch({ projects }: { projects: string[] }) {\n  const [query, setQuery] = React.useState(\"\")\n  const results = projects.filter((name) =>\n    name.toLowerCase().includes(query.trim().toLowerCase())\n  )\n\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <InputGroup className=\"max-w-sm\">\n        <InputGroupAddon>\n          <MagnifyingGlassIcon />\n        </InputGroupAddon>\n        <InputGroupInput\n          type=\"search\"\n          aria-label=\"Search projects\"\n          placeholder=\"Search projects…\"\n          value={query}\n          onChange={(event) => setQuery(event.target.value)}\n        />\n        {query && (\n          <InputGroupAddon align=\"inline-end\">\n            <InputGroupButton\n              size=\"icon-xs\"\n              aria-label=\"Clear search\"\n              onClick={() => setQuery(\"\")}\n            >\n              <XIcon />\n            </InputGroupButton>\n          </InputGroupAddon>\n        )}\n      </InputGroup>\n      {query && (\n        <p aria-live=\"polite\" className=\"text-sm text-muted-foreground\">\n          {results.length} {results.length === 1 ? \"result\" : \"results\"} for \"\n          {query}\"\n        </p>\n      )}\n      {results.length > 0 ? (\n        <ItemGroup>\n          {results.map((name) => (\n            <Item key={name} variant=\"outline\">\n              <ItemContent>\n                <ItemTitle>{name}</ItemTitle>\n              </ItemContent>\n            </Item>\n          ))}\n        </ItemGroup>\n      ) : (\n        <Empty>\n          <EmptyHeader>\n            <EmptyTitle>No results for \"{query}\"</EmptyTitle>\n            <EmptyDescription>\n              Check the spelling or try another word.\n            </EmptyDescription>\n          </EmptyHeader>\n          <EmptyContent>\n            <Button variant=\"outline\" onClick={() => setQuery(\"\")}>\n              Clear search\n            </Button>\n          </EmptyContent>\n        </Empty>\n      )}\n    </div>\n  )\n}",
+    "cross_references": [
+      "[filter](./filter.md) — narrows the same collection by its attributes",
+      "[empty-state](./empty-state.md) — the view when nothing matches",
+      "[loading](./loading.md) — the results while the query runs on the server",
+      "[`InputGroup`](../components/InputGroup.md), [`Item`](../components/Item.md), [`Empty`](../components/Empty.md), [`Command`](../components/Command.md) — the component specs"
+    ],
+    "source": "specs/patterns/search.md"
+  },
+  "settings": {
+    "name": "settings",
+    "title": "Settings",
+    "kind": "task",
+    "role": "Gathers the preferences of a person, a workspace or an object on one page, in sections the person can scan, and saves each change the way it is made.",
+    "usage": [
+      "**MUST** — give each group of settings its own `Card`, with a title and one line that says what the group controls",
+      "**MUST** — split more than 4 cards into sections: `Tabs` for up to 7 sections, a `Sidebar` group beyond that",
+      "**MUST** — apply an on/off setting at once with a `Switch`: no save button, no toast; if saving it fails, switch it back and show a `toast.error`",
+      "**MUST** — save a group of text fields through its own `Save changes` in the `CardFooter`, as [edit](./edit.md) does",
+      "**MUST** — put the actions that destroy or reset in a last card, titled `Danger zone`, each confirmed as [delete](./delete.md) describes",
+      "**MUST NOT** — mix a `Switch` and text fields that need saving in the same card: the person cannot tell which changes are already saved"
+    ],
+    "structure": [
+      {
+        "region": "Header",
+        "content": "The page title",
+        "components": "Heading level={1}"
+      },
+      {
+        "region": "Sections",
+        "content": "Up to 7 sections of settings, when there are more than 4 cards",
+        "components": "Tabs, or a Sidebar group"
+      },
+      {
+        "region": "Group",
+        "content": "One group of settings, with a title and a line",
+        "components": "Card, CardHeader, CardTitle, CardDescription"
+      },
+      {
+        "region": "Toggles",
+        "content": "On/off settings, applied at once",
+        "components": "FieldGroup, Field, Switch"
+      },
+      {
+        "region": "Fields",
+        "content": "Text settings and their save action",
+        "components": "Field, Input, CardFooter, Button"
+      },
+      {
+        "region": "Danger zone",
+        "content": "Delete or reset, last on the page",
+        "components": "Card, Button variant=\"destructive\", AlertDialog"
+      }
+    ],
+    "components": [
+      {
+        "component": "Card",
+        "variant_props": "one per group",
+        "job": "Groups related settings"
+      },
+      {
+        "component": "Field",
+        "variant_props": "orientation=\"responsive\", label and description in a FieldContent",
+        "job": "A toggle row that stacks on a narrow screen"
+      },
+      {
+        "component": "Switch",
+        "variant_props": "id tied to the FieldLabel",
+        "job": "An on/off setting, applied at once"
+      },
+      {
+        "component": "Tabs",
+        "variant_props": "at most 7 TabsTriggers",
+        "job": "The sections of a long settings page"
+      },
+      {
+        "component": "Button",
+        "variant_props": "variant=\"destructive\"",
+        "job": "The danger zone's actions"
+      }
+    ],
+    "spacing": [
+      "**MUST** — stack the cards in a `flex flex-col gap-6` column of `max-w-2xl` (`space.layout.content-sm`), below the title",
+      "**MUST** — keep the title and the first card `gap-section` apart, inside the page container of [navigation](./navigation.md)",
+      "**MUST** — let `FieldGroup` space the toggle rows; a `Field` takes no margin"
+    ],
+    "content": [
+      {
+        "element": "Group title",
+        "write": "Notifications",
+        "not": "Notification settings"
+      },
+      {
+        "element": "Toggle label",
+        "write": "Weekly summary (the thing it turns on)",
+        "not": "Enable weekly summary"
+      },
+      {
+        "element": "Toggle help",
+        "write": "A digest of your projects, every Monday.",
+        "not": "Check to receive emails."
+      },
+      {
+        "element": "Toggle error",
+        "write": "We couldn't turn on the weekly summary. Try again.",
+        "not": "Update failed."
+      },
+      {
+        "element": "Danger zone title",
+        "write": "Danger zone",
+        "not": "Advanced"
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport {\n  Field,\n  FieldContent,\n  FieldDescription,\n  FieldGroup,\n  FieldLabel,\n} from \"@/components/ui/field\"\nimport { Heading } from \"@/components/ui/heading\"\nimport { Input } from \"@/components/ui/input\"\nimport { Switch } from \"@/components/ui/switch\"\n\nexport default function SettingsPage() {\n  return (\n    <main className=\"mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-section bg-background px-page py-section text-foreground\">\n      <Heading level={1}>Settings</Heading>\n      <div className=\"flex flex-col gap-6\">\n        <Card>\n          <CardHeader>\n            <CardTitle>Notifications</CardTitle>\n            <CardDescription>Changes here apply right away.</CardDescription>\n          </CardHeader>\n          <CardContent>\n            <FieldGroup>\n              <Field orientation=\"responsive\">\n                <FieldContent>\n                  <FieldLabel htmlFor=\"weekly-summary\">\n                    Weekly summary\n                  </FieldLabel>\n                  <FieldDescription>\n                    A digest of your projects, every Monday.\n                  </FieldDescription>\n                </FieldContent>\n                <Switch id=\"weekly-summary\" defaultChecked />\n              </Field>\n              <Field orientation=\"responsive\">\n                <FieldContent>\n                  <FieldLabel htmlFor=\"mentions\">Mentions</FieldLabel>\n                  <FieldDescription>\n                    An email when someone mentions you.\n                  </FieldDescription>\n                </FieldContent>\n                <Switch id=\"mentions\" />\n              </Field>\n            </FieldGroup>\n          </CardContent>\n        </Card>\n        <Card>\n          <form>\n            <CardHeader>\n              <CardTitle>Profile</CardTitle>\n              <CardDescription>How your teammates see you.</CardDescription>\n            </CardHeader>\n            <CardContent>\n              <FieldGroup>\n                <Field>\n                  <FieldLabel htmlFor=\"display-name\">Display name</FieldLabel>\n                  <Input\n                    id=\"display-name\"\n                    name=\"displayName\"\n                    defaultValue=\"Ana\"\n                  />\n                </Field>\n              </FieldGroup>\n            </CardContent>\n            <CardFooter>\n              <Button type=\"submit\">Save changes</Button>\n            </CardFooter>\n          </form>\n        </Card>\n      </div>\n    </main>\n  )\n}",
+    "cross_references": [
+      "[edit](./edit.md) — the save action of a group of fields",
+      "[delete](./delete.md) — the confirmation of a danger-zone action",
+      "[navigation](./navigation.md) — the page container, and a `Sidebar` for many sections",
+      "[`Switch`](../components/Switch.md), [`Field`](../components/Field.md), [`Tabs`](../components/Tabs.md), [`Card`](../components/Card.md) — the component specs; rule-20 of `design-system.index.json` picks the `Switch`"
+    ],
+    "source": "specs/patterns/settings.md"
+  },
+  "sign-in": {
+    "name": "sign-in",
+    "title": "Sign in",
+    "kind": "task",
+    "role": "Lets a person with an account prove who they are with their email and password, and recovers from a failed attempt without making them start over.",
+    "usage": [
+      "**MUST** — center one `Card` of `max-w-sm` on an otherwise empty page: no navigation, no sidebar",
+      "**MUST** — ask for the email in an `Input` `type=\"email\"` `autoComplete=\"email\"` and the password in a `PasswordInput` `autoComplete=\"current-password\"`, so password managers fill both",
+      "**MUST** — on a failed attempt, show one `Alert` `variant=\"destructive\"` above the fields, keep the email, empty the password and move the focus to the password field",
+      "**MUST NOT** — say which of the two was wrong: the message covers both, so it does not reveal whether an account exists",
+      "**MUST** — show a `Spinner` in the submit button while the request runs, and keep the button from sending twice",
+      "**MUST** — link to password recovery right under the password field, and to sign-up under the card",
+      "**MUST** — write `sign in`, `sign up` and `sign out`, never `log in` or `login` ([voice and tone](../foundations/voice-and-tone.md))"
+    ],
+    "structure": [
+      {
+        "region": "Page",
+        "content": "A full-height page that centers the card",
+        "components": "a <main>"
+      },
+      {
+        "region": "Header",
+        "content": "The page title and one line on what it opens",
+        "components": "CardHeader, Heading, CardDescription"
+      },
+      {
+        "region": "Error",
+        "content": "What failed and what to do, after a failed attempt",
+        "components": "Alert variant=\"destructive\""
+      },
+      {
+        "region": "Fields",
+        "content": "Email, then password and its recovery link",
+        "components": "FieldGroup, Field, Input, PasswordInput"
+      },
+      {
+        "region": "Action",
+        "content": "The submit button, full width",
+        "components": "Button, Spinner"
+      },
+      {
+        "region": "Sign-up",
+        "content": "One line and a link, below the card",
+        "components": "Button variant=\"link\" with asChild"
+      }
+    ],
+    "components": [
+      {
+        "component": "Card",
+        "variant_props": "className=\"w-full max-w-sm\"",
+        "job": "Holds the whole form"
+      },
+      {
+        "component": "Heading",
+        "variant_props": "level={3} as=\"h1\"",
+        "job": "The page's only h1, at card size"
+      },
+      {
+        "component": "PasswordInput",
+        "variant_props": "autoComplete=\"current-password\"",
+        "job": "The password, with its show/hide button"
+      },
+      {
+        "component": "Alert",
+        "variant_props": "variant=\"destructive\"",
+        "job": "The failed attempt"
+      },
+      {
+        "component": "Button",
+        "variant_props": "type=\"submit\", className=\"w-full\", aria-busy",
+        "job": "Sends the form"
+      },
+      {
+        "component": "Button",
+        "variant_props": "variant=\"link\", asChild around a Link",
+        "job": "Password recovery and sign-up"
+      },
+      {
+        "component": "Spinner",
+        "variant_props": "aria-label=\"Signing in\"",
+        "job": "The pending state of the submit button"
+      }
+    ],
+    "spacing": [
+      "**MUST** — center the card with `flex min-h-screen items-center justify-center px-page` on the page",
+      "**MUST** — let `FieldGroup` space the fields (`gap-6`); the `Alert` sits first inside it",
+      "**MUST** — keep the card and the sign-up line in one `flex w-full max-w-sm flex-col gap-4` column"
+    ],
+    "content": [
+      {
+        "element": "Title",
+        "write": "Sign in",
+        "not": "Login, Welcome back!!"
+      },
+      {
+        "element": "Submit",
+        "write": "Sign in · Signing in… while pending",
+        "not": "Submit, Log in"
+      },
+      {
+        "element": "Error",
+        "write": "That email and password don't match. Check them and try again.",
+        "not": "Invalid password., User not found."
+      },
+      {
+        "element": "Recovery",
+        "write": "Forgot your password?",
+        "not": "Reset password here"
+      },
+      {
+        "element": "Sign-up",
+        "write": "New here? Create an account",
+        "not": "No account? Register now!"
+      }
+    ],
+    "code_example": "\"use client\"\n\nimport * as React from \"react\"\nimport Link from \"next/link\"\nimport { WarningCircleIcon } from \"@phosphor-icons/react\"\n\nimport { Alert, AlertDescription, AlertTitle } from \"@/components/ui/alert\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n} from \"@/components/ui/card\"\nimport { Field, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Heading } from \"@/components/ui/heading\"\nimport { Input } from \"@/components/ui/input\"\nimport { PasswordInput } from \"@/components/ui/password-input\"\nimport { Spinner } from \"@/components/ui/spinner\"\n\nexport default function SignInPage() {\n  const [pending, setPending] = React.useState(false)\n  const [failed, setFailed] = React.useState(false)\n\n  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    setPending(true)\n    // Send the form; on a failure:\n    setFailed(true)\n    setPending(false)\n  }\n\n  return (\n    <main className=\"flex min-h-screen items-center justify-center bg-background px-page text-foreground\">\n      <div className=\"flex w-full max-w-sm flex-col gap-4\">\n        <Card>\n          <CardHeader>\n            <Heading level={3} as=\"h1\">\n              Sign in\n            </Heading>\n            <CardDescription>Pick up where you left off.</CardDescription>\n          </CardHeader>\n          <CardContent>\n            <form onSubmit={handleSubmit}>\n              <FieldGroup>\n                {failed && (\n                  <Alert variant=\"destructive\">\n                    <WarningCircleIcon />\n                    <AlertTitle>We couldn't sign you in</AlertTitle>\n                    <AlertDescription>\n                      That email and password don't match. Check them and try\n                      again.\n                    </AlertDescription>\n                  </Alert>\n                )}\n                <Field>\n                  <FieldLabel htmlFor=\"email\">Email</FieldLabel>\n                  <Input\n                    id=\"email\"\n                    name=\"email\"\n                    type=\"email\"\n                    autoComplete=\"email\"\n                    required\n                  />\n                </Field>\n                <Field>\n                  <FieldLabel htmlFor=\"password\">Password</FieldLabel>\n                  <PasswordInput\n                    id=\"password\"\n                    name=\"password\"\n                    autoComplete=\"current-password\"\n                    required\n                  />\n                  <Button variant=\"link\" asChild className=\"self-start\">\n                    <Link href=\"/forgot-password\">Forgot your password?</Link>\n                  </Button>\n                </Field>\n                <Button\n                  type=\"submit\"\n                  className=\"w-full\"\n                  disabled={pending}\n                  aria-busy={pending}\n                >\n                  {pending ? (\n                    <>\n                      <Spinner aria-label=\"Signing in\" />\n                      Signing in…\n                    </>\n                  ) : (\n                    \"Sign in\"\n                  )}\n                </Button>\n              </FieldGroup>\n            </form>\n          </CardContent>\n        </Card>\n        <p className=\"text-center text-sm text-muted-foreground\">\n          New here?{\" \"}\n          <Button variant=\"link\" asChild>\n            <Link href=\"/sign-up\">Create an account</Link>\n          </Button>\n        </p>\n      </div>\n    </main>\n  )\n}",
+    "cross_references": [
+      "[form](./form.md) — the labels, validation and error messages of the fields",
+      "[saving](./saving.md) — the pending state of a submit button",
+      "[voice and tone](../foundations/voice-and-tone.md) — `sign in`, never `log in`",
+      "[`Card`](../components/Card.md), [`PasswordInput`](../components/PasswordInput.md), [`Alert`](../components/Alert.md), [`Spinner`](../components/Spinner.md) — the component specs"
+    ],
+    "source": "specs/patterns/sign-in.md"
+  }
+}

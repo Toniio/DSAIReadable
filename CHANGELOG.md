@@ -13,6 +13,18 @@ section that fits.
 
 ### Added
 
+- Page patterns, on Primer's model: 12 hand-written pages in
+  `specs/patterns/`, the tasks a screen carries out (`create`, `edit`,
+  `delete`, `filter`, `search`, `sign-in`, `settings`) then the UI patterns
+  they share (`empty-state`, `form`, `loading`, `navigation`, `saving`). Each
+  says when to use it, its regions, its components and their variants, its
+  spacing, what to write in the design system's voice, and a code example.
+  The MCP server serves them with `list_patterns` and `get_pattern`
+  (`response_format` concise or detailed), `build_screen` calls `get_pattern`
+  for a screen that carries out one of the tasks, and `llms.txt` lists them.
+  `specs:validate` checks their 9 sections and their wording;
+  `generate-context` fails on a component no spec documents; `mcp:test` runs
+  every code example through `validate_screen`.
 - Six conversation components from shadcn/ui, in a new `Conversation`
   category: `Message`, `Bubble`, `Marker`, `Attachment`, `MessageScroller` and
   `Questionnaire`, with their specs, registry items and tests, and a

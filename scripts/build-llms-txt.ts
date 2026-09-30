@@ -3,9 +3,10 @@
  * agents, in the llms.txt v2 format (llmstxt.org) — an H1, a summary in a
  * blockquote, then H2 sections of `- [name](url): notes` links.
  *
- * The entry points are listed below by hand; the foundations and the
- * component specs are read from specs/, each component with its category and
- * the one sentence of its Role section. A spec added, renamed or re-worded
+ * The entry points are listed below by hand; the foundations, the page
+ * patterns and the component specs are read from specs/, each pattern with its
+ * kind and each component with its category, both with the one sentence of
+ * their Role section. A spec added, renamed or re-worded
  * therefore changes llms.txt, and `--check` fails until it is regenerated.
  * Every link is an absolute URL to the raw file on `main`, so the map works
  * whether the agent reads the clone or fetches it from GitHub; the script
@@ -121,10 +122,22 @@ const components: Link[] = specFiles("specs/components").map((path) => {
   return { path, name, notes: `${category} — ${role}` }
 })
 
+/** A page pattern carries its kind (Metadata) and its Role sentence. */
+const patterns: Link[] = specFiles("specs/patterns").map((path) => {
+  const spec = read(path)
+  const name = /^# (.+)$/m.exec(spec)?.[1]
+  const kind = /^\| Kind +\| (.+?) +\|$/m.exec(spec)?.[1]
+  const role = /^## Role\n\n(.+)$/m.exec(spec)?.[1]
+  if (!name || !kind || !role)
+    throw new Error(`${path}: no H1, Kind or one-line Role`)
+  return { path, name, notes: `${kind} — ${role}` }
+})
+
 const sections: [string, Link[]][] = [
   ["Start here", START],
   ["Machine-readable sources", MACHINE],
   ["Foundations", foundations],
+  ["Page patterns", patterns],
   ["Component specs", components],
   ["Optional", OPTIONAL],
 ]
@@ -148,7 +161,7 @@ const text = [
   "",
   "> An AI-readable design system for React 19, Next.js 16 and Tailwind CSS v4, built on shadcn/ui. Components install from a shadcn registry as source code; tokens, specs and composition rules are published as structured files an agent can read, and a local MCP server serves them as tools.",
   "",
-  "Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes or `var(--…)` tokens, never a raw value (hex, `px`, `rem`, `ms`); and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections.",
+  "Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes or `var(--…)` tokens, never a raw value (hex, `px`, `rem`, `ms`); and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections. A screen that carries out a common task (create, edit, delete, filter, search, sign in, settings) starts from its page pattern.",
   "",
   ...sections.flatMap(([title, links]) => [
     `## ${title}`,
@@ -170,5 +183,5 @@ if (CHECK) {
 } else if (current !== text) writeFileSync(OUTPUT, text)
 
 console.log(
-  `✅ build-llms-txt: ${components.length} component specs and ${foundations.length} foundations ${CHECK ? "listed in" : "written to"} llms.txt.`
+  `✅ build-llms-txt: ${components.length} component specs, ${patterns.length} page patterns and ${foundations.length} foundations ${CHECK ? "listed in" : "written to"} llms.txt.`
 )
