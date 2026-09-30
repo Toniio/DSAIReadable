@@ -25,9 +25,9 @@ function coverage(count: number, total: number): string {
 }
 
 export function registerAdminTools(server: McpServer): void {
-  // 1. get_stats
+  // 1. dsaireadable_get_stats
   server.registerTool(
-    "get_stats",
+    "dsaireadable_get_stats",
     {
       title: "Design system stats",
       description:
@@ -74,9 +74,9 @@ export function registerAdminTools(server: McpServer): void {
     }
   )
 
-  // 2. validate_screen
+  // 2. dsaireadable_validate_screen
   server.registerTool(
-    "validate_screen",
+    "dsaireadable_validate_screen",
     {
       title: "Validate a screen",
       description:

@@ -1,8 +1,8 @@
 /**
  * The `response_format` argument of the tools whose answers are large:
- * get_component_specs (up to 25 K characters for one spec),
- * get_design_rules and get_ux_writing_rules (about 50 K each without a
- * filter), and get_pattern (a pattern and its code example).
+ * dsaireadable_get_component_specs (up to 25 K characters for one spec),
+ * dsaireadable_get_design_rules (about 50 K without a filter), and dsaireadable_get_pattern (a
+ * pattern and its code example).
  *
  * `concise`, the default, keeps what an agent needs to choose and to stay
  * within the rules, and names what `detailed` would add. The acceptance
@@ -86,7 +86,7 @@ export interface Pattern {
 
 /**
  * A pattern reduced to when and how to use it, and the components to fetch
- * the specs of: enough to plan a screen before calling get_component_specs.
+ * the specs of: enough to plan a screen before calling dsaireadable_get_component_specs.
  */
 export function concisePattern(pattern: Pattern) {
   const kept = ["name", "title", "kind", "role", "usage", "components"]
@@ -111,7 +111,7 @@ export interface RuleSet {
 }
 
 /**
- * The unfiltered answer of get_design_rules, reduced to the composition rules,
+ * The unfiltered answer of dsaireadable_get_design_rules, reduced to the composition rules,
  * the titles of the critical rules and the categories to filter by.
  */
 export function conciseRuleSet(data: RuleSet) {
@@ -132,16 +132,13 @@ export function conciseRuleSet(data: RuleSet) {
   }
 }
 
-/** The rules about the text a UI renders: those of the content foundation. */
 /** The foundations about text: the voice it is written in, the strings a component ships. */
 const UX_WRITING_SOURCES = ["voice-and-tone.md", "content.md"]
 
-export function conciseUxWriting(data: RuleSet) {
+export function uxWritingRules(data: RuleSet) {
   return {
     rules: (data.general_rules ?? []).filter((r) =>
       UX_WRITING_SOURCES.includes(r.source ?? "")
     ),
-    detail:
-      'response_format: "detailed" returns the whole rule set — foundation rules, component constraints, composition rules — the same rules get_design_rules serves',
   }
 }

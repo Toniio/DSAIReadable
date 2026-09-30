@@ -43,7 +43,7 @@ const COMPONENT_SECTIONS = [
 /**
  * A page pattern, the Primer model: when to use it, its regions, the
  * components that fill them, their spacing, their text, and a screen that
- * shows it all (`get_pattern` serves each section by name).
+ * shows it all (`dsaireadable_get_pattern` serves each section by name).
  */
 const PATTERN_SECTIONS = [
   "Metadata",

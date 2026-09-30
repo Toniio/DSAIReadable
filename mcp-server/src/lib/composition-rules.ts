@@ -1,5 +1,5 @@
 /**
- * The composition rules of design-system.index.json, as get_design_rules
+ * The composition rules of design-system.index.json, as dsaireadable_get_design_rules
  * serves them.
  *
  * Until they were served here, no MCP agent saw them: the context cache
@@ -16,7 +16,7 @@ export interface CompositionRule {
 const ALL = new Set(["composition", "composition_rules", "rules"])
 
 /**
- * Rules for a get_design_rules category: every rule for "composition", the
+ * Rules for a dsaireadable_get_design_rules category: every rule for "composition", the
  * rules that cover a component for its name (`Select` → rule-09, rule-20),
  * none otherwise.
  */

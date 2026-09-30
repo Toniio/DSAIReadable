@@ -68,7 +68,7 @@ assert(server !== null, "McpServer instantiated")
 console.log("\n2. Tool registration")
 try {
   registerDsCoreTools(server)
-  assert(true, "DS Core tools registered (8 tools)")
+  assert(true, "DS Core tools registered (9 tools)")
 } catch (e) {
   assert(false, `DS Core tools registration failed: ${e}`)
 }
@@ -419,10 +419,10 @@ console.log("\n5d. Spec accessibility section")
   )
 }
 
-// --- Test 6: validate_screen rules ---
+// --- Test 6: dsaireadable_validate_screen rules ---
 // One failing fixture per rule. Without them a rule can rot silently and the
 // tool answers "passed" to an agent that is about to ship a violation.
-console.log("\n6. validate_screen rules")
+console.log("\n6. dsaireadable_validate_screen rules")
 
 const NEGATIVE_FIXTURES: Array<{ rule: string; label: string; code: string }> =
   [
@@ -662,7 +662,7 @@ assert(
 )
 
 // Composition rules (design-system.index.json) reach MCP agents through
-// get_design_rules. Before, the context cache carried rule-05 alone.
+// dsaireadable_get_design_rules. Before, the context cache carried rule-05 alone.
 const indexRules = (
   JSON.parse(
     readFileSync(resolve(__dirname, "../../design-system.index.json"), "utf-8")
@@ -695,9 +695,9 @@ assert(
   '"composition" gets every rule; a component gets only rules that cover it'
 )
 
-// The styling rule served with every get_design_rules answer: each link of
+// The styling rule served with every dsaireadable_get_design_rules answer: each link of
 // its token chain must be the one styles/globals.css declares, and it quotes no
-// value — values drift, get_tokens serves them from the tokens.
+// value — values drift, dsaireadable_get_tokens serves them from the tokens.
 const bridge = new Map(
   [
     ...readFileSync(
@@ -778,7 +778,7 @@ assert(
   "A wrapped numbered rule is served whole, without what is nested under it"
 )
 
-// get_typography serves values an agent copies: no Markdown around them.
+// dsaireadable_get_typography serves values an agent copies: no Markdown around them.
 // Its usage_rules are prose, whose inline code stays, as in every rule.
 const typeTables = {
   ...readContext<Record<string, unknown>>("text-styles.json"),
@@ -787,7 +787,7 @@ const typeTables = {
 const markedCells = JSON.stringify(typeTables).match(/`|\*\*/g)
 assert(
   markedCells === null,
-  `get_typography serves plain values (${markedCells?.length ?? 0} Markdown markers)`
+  `dsaireadable_get_typography serves plain values (${markedCells?.length ?? 0} Markdown markers)`
 )
 
 // The component tier is the shadcn alias layer: its variables are the names
@@ -986,7 +986,7 @@ const unannotated = tools.filter(
     t.annotations?.openWorldHint !== false
 )
 assert(
-  tools.length === 17 && unannotated.length === 0,
+  tools.length === 16 && unannotated.length === 0,
   `Every tool is annotated read-only and closed-world (${tools.length} tools${unannotated.length ? `; missing: ${unannotated.map((t) => t.name).join(", ")}` : ""})`
 )
 
@@ -1056,29 +1056,29 @@ assert(
 )
 
 // concise is the default and stays ≤ 20 % of detailed: summed over every
-// spec for get_component_specs, unfiltered for the two rule tools.
+// spec for dsaireadable_get_component_specs, unfiltered for the two rule tools.
 let conciseTotal = 0
 let detailedTotal = 0
 for (const name of specNames) {
   conciseTotal += (
-    await payload("get_component_specs", { component_name: name })
+    await payload("dsaireadable_get_component_specs", { component_name: name })
   ).length
   detailedTotal += (
-    await payload("get_component_specs", {
+    await payload("dsaireadable_get_component_specs", {
       component_name: name,
       response_format: "detailed",
     })
   ).length
 }
 const ratios = {
-  get_component_specs: conciseTotal / detailedTotal,
-  get_design_rules:
-    (await payload("get_design_rules")).length /
-    (await payload("get_design_rules", { response_format: "detailed" })).length,
-  get_ux_writing_rules:
-    (await payload("get_ux_writing_rules")).length /
-    (await payload("get_ux_writing_rules", { response_format: "detailed" }))
-      .length,
+  dsaireadable_get_component_specs: conciseTotal / detailedTotal,
+  dsaireadable_get_design_rules:
+    (await payload("dsaireadable_get_design_rules")).length /
+    (
+      await payload("dsaireadable_get_design_rules", {
+        response_format: "detailed",
+      })
+    ).length,
 }
 for (const [tool, ratio] of Object.entries(ratios)) {
   assert(
@@ -1087,7 +1087,9 @@ for (const [tool, ratio] of Object.entries(ratios)) {
   )
 }
 const conciseButton = JSON.parse(
-  await payload("get_component_specs", { component_name: "Button" })
+  await payload("dsaireadable_get_component_specs", {
+    component_name: "Button",
+  })
 )
 assert(
   JSON.stringify(conciseButton.constraints) ===
@@ -1096,9 +1098,44 @@ assert(
     conciseButton.detail.includes("props"),
   "concise keeps every constraint and names what detailed adds"
 )
+
+// detailed answers everything needed to write the component in one call:
+// its cva variants, the sizes of its size prop (design-system.index.json,
+// served nowhere else before) and the composition rules that cover it.
+{
+  const detailed = async (component_name: string) =>
+    JSON.parse(
+      await payload("dsaireadable_get_component_specs", {
+        component_name,
+        response_format: "detailed",
+      })
+    )
+  const button = await detailed("Button")
+  const select = await detailed("Select")
+  const index = JSON.parse(
+    readFileSync(resolve(__dirname, "../../design-system.index.json"), "utf-8")
+  ) as { inventory: { name: string; sizes?: string[] }[] }
+  const buttonSizes = index.inventory.find((c) => c.name === "Button")?.sizes
+  const listed = JSON.parse(
+    await payload("dsaireadable_get_components", { category: "Forms" })
+  ) as { items: { name: string; sizes: string[] }[] }
+  assert(
+    button.variants.variant.values.join() ===
+      "default,outline,secondary,ghost,destructive,link" &&
+      button.variants.variant.default === "default" &&
+      buttonSizes !== undefined &&
+      button.sizes.join() === buttonSizes.join() &&
+      listed.items.find((c) => c.name === "Button")?.sizes.join() ===
+        buttonSizes.join() &&
+      select.composition_rules.some((r: CompositionRule) =>
+        r.applies_to?.includes("Select")
+      ),
+    "detailed serves the variants, the sizes and the composition rules; dsaireadable_get_components serves the sizes"
+  )
+}
 assert(
   JSON.parse(
-    await payload("get_component_specs", {
+    await payload("dsaireadable_get_component_specs", {
       component_name: "Button",
       response_format: "detailed",
     })
@@ -1118,7 +1155,9 @@ assert(
     ) as { inventory: { name: string; shadcn: unknown }[] }
   ).inventory
   const sidebar = JSON.parse(
-    await payload("get_component_specs", { component_name: "Sidebar" })
+    await payload("dsaireadable_get_component_specs", {
+      component_name: "Sidebar",
+    })
   ) as {
     shadcn: {
       item: string
@@ -1126,7 +1165,9 @@ assert(
     }
   }
   const heading = JSON.parse(
-    await payload("get_component_specs", { component_name: "Heading" })
+    await payload("dsaireadable_get_component_specs", {
+      component_name: "Heading",
+    })
   ) as { shadcn: { item: string | null } }
   assert(
     inventory.every(
@@ -1141,25 +1182,24 @@ assert(
           d.type === "renamed"
       ) &&
       heading.shadcn.item === null,
-    "get_component_specs serves each component's divergences from shadcn/ui, concise included"
+    "dsaireadable_get_component_specs serves each component's divergences from shadcn/ui, concise included"
   )
 }
 
 // A shadcn/ui component excluded from the design system: the lookup fails,
 // says why and names the component to use, and the overview lists it.
 {
-  const form = await call("get_component_specs", { component_name: "Form" })
-  const formVariants = await call("get_component_variants", {
-    component_name: "form",
+  const form = await call("dsaireadable_get_component_specs", {
+    component_name: "Form",
   })
-  const overview = JSON.parse(await payload("get_design_system_overview")) as {
+  const overview = JSON.parse(
+    await payload("dsaireadable_get_design_system_overview")
+  ) as {
     shadcn_excluded: { item: string; instead?: string }[]
   }
   assert(
     form.isError === true &&
       form.content[0].text.includes("Use Field instead") &&
-      formVariants.isError === true &&
-      formVariants.content[0].text.includes("Use Field instead") &&
       overview.shadcn_excluded.some(
         (x) => x.item === "form" && x.instead === "Field"
       ),
@@ -1174,7 +1214,10 @@ let pages = 0
 let total = 0
 do {
   const page = JSON.parse(
-    await payload("get_tokens", { limit: 50, ...(cursor ? { cursor } : {}) })
+    await payload("dsaireadable_get_tokens", {
+      limit: 50,
+      ...(cursor ? { cursor } : {}),
+    })
   ) as { total: number; items: { path: string }[]; next_cursor?: string }
   tokenPaths.push(...(page.items ?? []).map((t) => t.path))
   total = page.total
@@ -1185,16 +1228,18 @@ assert(
   pages === Math.ceil(total / 50) &&
     tokenPaths.length === total &&
     new Set(tokenPaths).size === total,
-  `get_tokens pages cover the ${total} tokens once each (${pages} pages of 50)`
+  `dsaireadable_get_tokens pages cover the ${total} tokens once each (${pages} pages of 50)`
 )
-const components = JSON.parse(await payload("get_components"))
+const components = JSON.parse(await payload("dsaireadable_get_components"))
 assert(
   components.total === specNames.length &&
     components.items.length === specNames.length &&
     components.next_cursor === undefined,
-  `get_components fits the ${specNames.length} components in one default page`
+  `dsaireadable_get_components fits the ${specNames.length} components in one default page`
 )
-const badCursor = await call("get_tokens", { cursor: "not-a-cursor" })
+const badCursor = await call("dsaireadable_get_tokens", {
+  cursor: "not-a-cursor",
+})
 assert(
   badCursor.isError === true &&
     badCursor.content[0].text.includes("next_cursor"),
@@ -1208,7 +1253,7 @@ await client.close()
 // --- Test 9: prompts (P3-07) ---
 // build_screen used to mandate 9 calls, specs and variants included, before
 // any code: the protocol an agent is likely to drop. It now asks for 4 calls
-// plus one per retained component, and ends with validate_screen.
+// plus one per retained component, and ends with dsaireadable_validate_screen.
 console.log("\n9. Prompts")
 
 const promptServer = new McpServer({
@@ -1251,7 +1296,7 @@ const { prompts } = await promptClient.listPrompts()
 const unknownTools: string[] = []
 for (const { name } of prompts) {
   for (const [, tool] of (await promptText(name)).matchAll(
-    /`((?:get|list|validate)_[a-z_]+)`/g
+    /`(dsaireadable_[a-z_]+)`/g
   )) {
     if (!toolNames.has(tool)) unknownTools.push(`${name} → ${tool}`)
   }
@@ -1265,20 +1310,20 @@ assert(
 const buildScreen = await promptText("build_screen")
 const steps = [...buildScreen.matchAll(/^\d+\. .*$/gm)].map((m) => m[0])
 const stepTools = steps.map((step) =>
-  [...step.matchAll(/`((?:get|validate)_[a-z_]+)`/g)].map((m) => m[1])
+  [...step.matchAll(/`(dsaireadable_[a-z_]+)`/g)].map((m) => m[1])
 )
 assert(
   JSON.stringify(stepTools) ===
     JSON.stringify([
-      ["get_design_system_overview"],
-      ["get_components"],
-      ["get_design_rules"],
-      ["get_component_specs", "get_component_variants"],
-      ["validate_screen"],
+      ["dsaireadable_get_design_system_overview"],
+      ["dsaireadable_get_components"],
+      ["dsaireadable_get_design_rules"],
+      ["dsaireadable_get_component_specs"],
+      ["dsaireadable_validate_screen"],
     ]) &&
     /For each retained component only/.test(steps[3]) &&
-    /no `get_component_variants` call is needed/.test(steps[3]),
-  "build_screen: overview, components, rules, one spec per retained component, validate_screen"
+    /every cva variant with its default, the sizes/.test(steps[3]),
+  "build_screen: overview, components, rules, one spec per retained component, dsaireadable_validate_screen"
 )
 assert(
   /call budget: 4 calls \+ 1 per component you retain/.test(buildScreen) &&
@@ -1286,8 +1331,8 @@ assert(
   "build_screen states its call budget and allows a layout <div>"
 )
 
-// build_screen skips get_component_variants because the detailed spec's props
-// carry every cva axis and value (sub-components live in their parent spec).
+// The detailed spec's props carry every cva axis and value, sub-components
+// in their parent spec: they agree with the variants it serves.
 const cvaVariants = JSON.parse(
   readFileSync(resolve(contextDir, "component-variants.json"), "utf-8")
 ) as Record<
@@ -1332,7 +1377,7 @@ assert(
   "build_screen matches its snapshot (UPDATE_SNAPSHOTS=1 npm run mcp:test to accept a change)"
 )
 
-// The prompts render the rules get_design_rules serves: no second copy.
+// The prompts render the rules dsaireadable_get_design_rules serves: no second copy.
 const promptTexts = await Promise.all(
   prompts.map(({ name }) => promptText(name))
 )
@@ -1413,7 +1458,7 @@ try {
   )
   const modernTools = (await modern.listTools()).tools.map((t) => t.name)
   const modernCall = (await modern.callTool({
-    name: "get_component_specs",
+    name: "dsaireadable_get_component_specs",
     arguments: { component_name: "Button" },
   })) as ToolText
   assert(
@@ -1467,7 +1512,7 @@ try {
     init.status === 200 &&
       init.headers.get("mcp-session-id") === null &&
       listed.status === 200 &&
-      listedBody.includes("get_component_specs"),
+      listedBody.includes("dsaireadable_get_component_specs"),
     `A 2025-era client is served without a session (${init.status}, ${listed.status})`
   )
   const deleted = await fetch(mcpUrl, { method: "DELETE" })
@@ -1588,7 +1633,7 @@ interface ToolCase {
 }
 
 const TOOL_CASES: Record<string, ToolCase> = {
-  get_design_system_overview: {
+  dsaireadable_get_design_system_overview: {
     args: {},
     content: (p) =>
       p.name === "DSAIReadable" &&
@@ -1599,7 +1644,7 @@ const TOOL_CASES: Record<string, ToolCase> = {
         `npx shadcn@latest add ${meta.registry_source.item_address}` &&
       p.stats.total_components === specNames.length,
   },
-  get_components: {
+  dsaireadable_get_components: {
     args: { category: "Forms" },
     content: (p) =>
       p.items.length > 0 &&
@@ -1608,7 +1653,7 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { cursor: "not-a-cursor" },
     errorNames: "next_cursor",
   },
-  get_component_specs: {
+  dsaireadable_get_component_specs: {
     args: { component_name: "Button" },
     // Minimal snapshot of the concise payload: its fields, in order.
     content: (p) =>
@@ -1618,15 +1663,7 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { component_name: "NoSuchThing" },
     errorNames: "Button",
   },
-  get_component_variants: {
-    args: { component_name: "Button" },
-    content: (p) =>
-      p.variants.variant.values.join() ===
-      "default,outline,secondary,ghost,destructive,link",
-    errorArgs: { component_name: "NoSuchThing" },
-    errorNames: "Button",
-  },
-  get_tokens: {
+  dsaireadable_get_tokens: {
     args: { category: "color" },
     content: (p) =>
       p.items.every((t: Json) => t.path.startsWith("color.")) &&
@@ -1638,7 +1675,7 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { category: "colors" },
     errorNames: "color",
   },
-  get_typography: {
+  dsaireadable_get_typography: {
     args: {},
     content: (p) =>
       p.font_families.length > 0 &&
@@ -1646,11 +1683,11 @@ const TOOL_CASES: Record<string, ToolCase> = {
         semanticPaths.has(f.token.replace(/`/g, ""))
       ),
   },
-  get_icons: {
+  dsaireadable_get_icons: {
     args: {},
     content: (p) => p.library === "@phosphor-icons/react",
   },
-  get_design_rules: {
+  dsaireadable_get_design_rules: {
     args: { category: "Select" },
     content: (p) => {
       const ids = p.composition_rules.map((r: Json) => r.id)
@@ -1659,45 +1696,43 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { category: "no-such-category" },
     errorNames: "color",
   },
-  get_dataviz_recommendation: {
+  dsaireadable_get_dataviz_recommendation: {
     args: { objective: "evolution" },
     content: (p) => p.recommended_charts.some((c: Json) => c.type === "line"),
     errorArgs: { objective: "trend" },
     errorNames: "evolution",
   },
-  get_dataviz_specs: {
+  dsaireadable_get_dataviz_specs: {
     args: { chart_type: "bar" },
     content: (p) => p.library === "recharts" && p.component === "BarChart",
     errorArgs: { chart_type: "no-such-chart" },
     errorNames: "bar",
   },
-  get_ux_writing_rules: {
+  dsaireadable_get_ux_writing_rules: {
     args: {},
     content: (p) =>
-      Object.keys(p).join() === "rules,detail" &&
+      Object.keys(p).join() === "rules" &&
       p.rules.length === contentRuleCount &&
       p.rules.some((r: Json) => r.source === "voice-and-tone.md") &&
       p.rules.some((r: Json) => r.source === "content.md") &&
       p.rules.every((r: Json) =>
         ["voice-and-tone.md", "content.md"].includes(r.source)
       ),
-    errorArgs: { response_format: "verbose" },
-    errorNames: "detailed",
   },
-  get_glossary: {
+  dsaireadable_get_glossary: {
     args: { term: "primitive" },
     content: (p) =>
       p.term === "primitive" && p.definition.includes("primitive.json"),
     errorArgs: { term: "no-such-term" },
     errorNames: "semantic",
   },
-  get_content_library: {
+  dsaireadable_get_content_library: {
     args: { category: "labels" },
     content: (p) => Object.keys(p.labels).length > 0,
     errorArgs: { category: "buttons" },
     errorNames: "labels",
   },
-  list_patterns: {
+  dsaireadable_list_patterns: {
     args: { kind: "task" },
     content: (p) =>
       p.total > 0 &&
@@ -1706,7 +1741,7 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { kind: "page" },
     errorNames: "task",
   },
-  get_pattern: {
+  dsaireadable_get_pattern: {
     args: { name: "Sign in", response_format: "detailed" },
     content: (p) =>
       p.name === "sign-in" &&
@@ -1716,13 +1751,13 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: { name: "checkout" },
     errorNames: "sign-in",
   },
-  get_stats: {
+  dsaireadable_get_stats: {
     args: {},
     content: (p) =>
       p.total_components === specNames.length &&
       p.total_tokens.semantic === semanticPaths.size,
   },
-  validate_screen: {
+  dsaireadable_validate_screen: {
     args: { code: CLEAN_SCREEN },
     content: (p) =>
       p.passed === true &&
@@ -1759,7 +1794,7 @@ for (const [tool, c] of Object.entries(TOOL_CASES)) {
 }
 
 // A missing cache must fail the call and say how to rebuild it — never
-// answer as an empty design system. validate_screen reads no cache.
+// answer as an empty design system. dsaireadable_validate_screen reads no cache.
 const emptyContextDir = mkdtempSync(
   resolve(tmpdir(), "dsaireadable-no-context-")
 )
@@ -1767,7 +1802,7 @@ setContextDir(emptyContextDir)
 console.log("  (the [mcp] errors below are expected: one per tool)")
 const silentOnMissingCache: string[] = []
 for (const [tool, c] of Object.entries(TOOL_CASES)) {
-  if (tool === "validate_screen") continue
+  if (tool === "dsaireadable_validate_screen") continue
   const result = await callTool(tool, c.args)
   if (!result.isError || !result.text.includes("generate-context"))
     silentOnMissingCache.push(tool)
@@ -1783,13 +1818,13 @@ assert(
 console.log("\n11b. Page patterns")
 
 // Every pattern is served by its name and by its title, and its code example
-// is a screen validate_screen accepts without a single issue: a pattern is
+// is a screen dsaireadable_validate_screen accepts without a single issue: a pattern is
 // the example agents copy first.
 const patternNames = Object.keys(patterns)
 const unserved: string[] = []
 for (const p of Object.values(patterns)) {
   for (const name of [p.name, p.title]) {
-    const served = await callTool("get_pattern", {
+    const served = await callTool("dsaireadable_get_pattern", {
       name,
       response_format: "detailed",
     })
@@ -1799,16 +1834,21 @@ for (const p of Object.values(patterns)) {
 }
 assert(
   patternNames.length === 12 && unserved.length === 0,
-  `get_pattern serves each of the ${patternNames.length} patterns by name and title${unserved.length ? ` (not: ${unserved.join(", ")})` : ""}`
+  `dsaireadable_get_pattern serves each of the ${patternNames.length} patterns by name and title${unserved.length ? ` (not: ${unserved.join(", ")})` : ""}`
 )
-const listed = JSON.parse((await callTool("list_patterns", {})).text)
+const listed = JSON.parse(
+  (await callTool("dsaireadable_list_patterns", {})).text
+)
 assert(
   listed.total === patternNames.length &&
-    JSON.parse((await callTool("list_patterns", { kind: "task" })).text).total +
-      JSON.parse((await callTool("list_patterns", { kind: "ui" })).text)
-        .total ===
+    JSON.parse(
+      (await callTool("dsaireadable_list_patterns", { kind: "task" })).text
+    ).total +
+      JSON.parse(
+        (await callTool("dsaireadable_list_patterns", { kind: "ui" })).text
+      ).total ===
       patternNames.length,
-  `list_patterns lists every pattern, split into task and ui (${listed.total})`
+  `dsaireadable_list_patterns lists every pattern, split into task and ui (${listed.total})`
 )
 const invalidExamples = Object.values(patterns).flatMap((p) => {
   const report = validateScreen(p.code_example)
@@ -1818,7 +1858,7 @@ const invalidExamples = Object.values(patterns).flatMap((p) => {
 })
 assert(
   invalidExamples.length === 0,
-  `Every pattern's code example passes validate_screen with no issue${invalidExamples.length ? ` (${invalidExamples.join("; ")})` : ""}`
+  `Every pattern's code example passes dsaireadable_validate_screen with no issue${invalidExamples.length ? ` (${invalidExamples.join("; ")})` : ""}`
 )
 // app/ held test pages only and is gone (P4-25): no pattern points at it.
 const citingApp = Object.values(patterns)
@@ -1829,14 +1869,14 @@ assert(
   `No pattern cites a test page under app/${citingApp.length ? ` (${citingApp.join(", ")})` : ""}`
 )
 const concise = JSON.parse(
-  (await callTool("get_pattern", { name: "create" })).text
+  (await callTool("dsaireadable_get_pattern", { name: "create" })).text
 )
 assert(
   Object.keys(concise).join() ===
     "name,title,kind,role,usage,components,detail" &&
     concise.components.includes("Dialog") &&
     concise.detail.includes("code_example"),
-  "get_pattern concise keeps role, usage and components, and names what detailed adds"
+  "dsaireadable_get_pattern concise keeps role, usage and components, and names what detailed adds"
 )
 
 await toolClient.close()
@@ -1950,44 +1990,37 @@ const ruleCategories = [
   "tailwind",
 ]
 const inputs: [string, Record<string, unknown>][] = [
-  ["get_design_system_overview", {}],
-  ["get_components", {}],
-  ["get_components", { category: "Forms", limit: 2 }],
+  ["dsaireadable_get_design_system_overview", {}],
+  ["dsaireadable_get_components", {}],
+  ["dsaireadable_get_components", { category: "Forms", limit: 2 }],
   ...allSpecNames.flatMap((component_name) =>
     formats.map(
       (response_format) =>
-        ["get_component_specs", { component_name, response_format }] as [
-          string,
-          Record<string, unknown>,
-        ]
+        [
+          "dsaireadable_get_component_specs",
+          { component_name, response_format },
+        ] as [string, Record<string, unknown>]
     )
   ),
-  ...Object.keys(context("component-variants.json")).map(
-    (component_name) =>
-      ["get_component_variants", { component_name }] as [
-        string,
-        Record<string, unknown>,
-      ]
-  ),
-  ["get_tokens", {}],
-  ["get_tokens", { category: "color", limit: 3 }],
-  ["get_typography", {}],
-  ["get_icons", {}],
+  ["dsaireadable_get_tokens", {}],
+  ["dsaireadable_get_tokens", { category: "color", limit: 3 }],
+  ["dsaireadable_get_typography", {}],
+  ["dsaireadable_get_icons", {}],
   ...[undefined, ...ruleCategories].flatMap((category) =>
     formats.map(
       (response_format) =>
-        ["get_design_rules", { category, response_format }] as [
+        ["dsaireadable_get_design_rules", { category, response_format }] as [
           string,
           Record<string, unknown>,
         ]
     )
   ),
-  ["list_patterns", {}],
-  ["list_patterns", { kind: "ui" }],
+  ["dsaireadable_list_patterns", {}],
+  ["dsaireadable_list_patterns", { kind: "ui" }],
   ...Object.keys(patterns).flatMap((name) =>
     formats.map(
       (response_format) =>
-        ["get_pattern", { name, response_format }] as [
+        ["dsaireadable_get_pattern", { name, response_format }] as [
           string,
           Record<string, unknown>,
         ]
@@ -1997,32 +2030,32 @@ const inputs: [string, Record<string, unknown>][] = [
     context("dataviz-decision-tree.json").objectives as { name: string }[]
   ).map(
     ({ name }) =>
-      ["get_dataviz_recommendation", { objective: name.toLowerCase() }] as [
-        string,
-        Record<string, unknown>,
-      ]
+      [
+        "dsaireadable_get_dataviz_recommendation",
+        { objective: name.toLowerCase() },
+      ] as [string, Record<string, unknown>]
   ),
   ...Object.keys(context("dataviz-catalog.json")).map(
     (chart_type) =>
-      ["get_dataviz_specs", { chart_type }] as [string, Record<string, unknown>]
-  ),
-  ...formats.map(
-    (response_format) =>
-      ["get_ux_writing_rules", { response_format }] as [
+      ["dsaireadable_get_dataviz_specs", { chart_type }] as [
         string,
         Record<string, unknown>,
       ]
   ),
-  ["get_glossary", {}],
-  ["get_glossary", { term: "primitive" }],
-  ["get_content_library", {}],
+  ["dsaireadable_get_ux_writing_rules", {}],
+  ["dsaireadable_get_glossary", {}],
+  ["dsaireadable_get_glossary", { term: "primitive" }],
+  ["dsaireadable_get_content_library", {}],
   ...["labels", "placeholders", "messages"].map(
     (category) =>
-      ["get_content_library", { category }] as [string, Record<string, unknown>]
+      ["dsaireadable_get_content_library", { category }] as [
+        string,
+        Record<string, unknown>,
+      ]
   ),
-  ["get_stats", {}],
-  ["validate_screen", { code: CLEAN_SCREEN }],
-  ["validate_screen", { code: "<button>Save</button>" }],
+  ["dsaireadable_get_stats", {}],
+  ["dsaireadable_validate_screen", { code: CLEAN_SCREEN }],
+  ["dsaireadable_validate_screen", { code: "<button>Save</button>" }],
 ]
 const nonConforming: string[] = []
 const calledTools = new Set<string>()
@@ -2051,7 +2084,7 @@ assert(
 // An argument outside the input schema is a tool execution error, which the
 // agent reads and corrects, not a protocol error that ends the call.
 const outOfSchema = (await schemaClient.callTool({
-  name: "get_tokens",
+  name: "dsaireadable_get_tokens",
   arguments: { category: "hue" },
 })) as ToolText
 assert(

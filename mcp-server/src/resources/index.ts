@@ -44,7 +44,7 @@ const tokens = () =>
  *
  * - ds://component/{name}/spec — the full spec of a component, listed
  * - ds://token/{path}          — one semantic token, found by completion
- * - ds://guidelines            — every rule, as get_design_rules serves them
+ * - ds://guidelines            — every rule, as dsaireadable_get_design_rules serves them
  */
 export function registerResources(server: McpServer): void {
   server.registerResource(
@@ -104,7 +104,7 @@ export function registerResources(server: McpServer): void {
       const token = tokens().find((t) => t.path === path)
       if (!token) {
         throw new Error(
-          `No semantic token "${path}". Complete {path}, or call get_tokens, for the valid paths.`
+          `No semantic token "${path}". Complete {path}, or call dsaireadable_get_tokens, for the valid paths.`
         )
       }
       return json(uri, token)

@@ -2,7 +2,7 @@
  * data-slot lint — every component must be findable in rendered markup.
  *
  * `data-slot` is how this design system is introspected: it is what
- * `validate_screen` matches on, what the CSS targets across component
+ * `dsaireadable_validate_screen` matches on, what the CSS targets across component
  * boundaries (`has-[[data-slot=input-group-control]:focus-visible]`), and what
  * lets a reviewer tell a Button from a div that looks like one. Four components
  * shipped without it, so they were invisible to all three.

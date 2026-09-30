@@ -9,7 +9,6 @@ import {
 import { READ_ONLY } from "../lib/annotations.js"
 import {
   componentSpecOutput,
-  componentVariantsOutput,
   componentsOutput,
   designRulesOutput,
   iconsOutput,
@@ -82,12 +81,46 @@ interface ComponentEntry {
   status?: string
   code_path?: string
   has_spec?: boolean
+  sizes?: string[]
+}
+
+/** The cva axes of a component, as src/context/generate.ts extracts them. */
+interface VariantEntry {
+  variants: Record<string, { values: string[]; default: string | null }>
+  sources: string[]
+  part_of: string | null
+}
+
+/**
+ * The detailed answer of dsaireadable_get_component_specs: the full spec, plus what an
+ * agent needs to write the component in one call — its cva variants, the
+ * sizes its size prop accepts, and the composition rules that cover it.
+ */
+function componentContext(spec: ComponentSpec) {
+  const variants = loadContext<Record<string, VariantEntry>>(
+    "component-variants.json"
+  )[spec.name]
+  const entry = loadContext<ComponentEntry[]>("components.json").find(
+    (c) => c.name === spec.name
+  )
+  const rules = loadContext<RuleSet>("ux-writing.json").composition_rules
+  return {
+    ...spec,
+    variants: variants?.variants ?? {},
+    variant_sources: variants?.sources ?? [],
+    part_of: variants?.part_of ?? null,
+    sizes: entry?.sizes ?? [],
+    composition_rules: compositionRulesFor(
+      (rules as CompositionRule[] | undefined) ?? [],
+      spec.name
+    ),
+  }
 }
 
 export function registerDsCoreTools(server: McpServer): void {
-  // 1. get_design_system_overview
+  // 1. dsaireadable_get_design_system_overview
   server.registerTool(
-    "get_design_system_overview",
+    "dsaireadable_get_design_system_overview",
     {
       title: "Design system overview",
       description:
@@ -170,9 +203,9 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 2. get_components
+  // 2. dsaireadable_get_components
   server.registerTool(
-    "get_components",
+    "dsaireadable_get_components",
     {
       title: "Components",
       description:
@@ -200,19 +233,19 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 3. get_component_specs
+  // 3. dsaireadable_get_component_specs
   server.registerTool(
-    "get_component_specs",
+    "dsaireadable_get_component_specs",
     {
       title: "Component spec",
       description:
-        'Returns the spec of one component. "concise" (default): role, MUST / MUST NOT constraints, exported names, cross-references, and how its API departs from shadcn/ui (shadcn: the registry item it derives from, and each divergence — added, removed, renamed or changed — with the reason; write the shadcn/ui API everywhere else). "detailed": the full spec — usage, anatomy, tokens, props, states, accessibility (ARIA pattern, keyboard, accessible name, known pitfalls), code example. The full spec is also the resource ds://component/{name}/spec',
+        'Returns the spec of one component. "concise" (default): role, MUST / MUST NOT constraints, exported names, cross-references, and how its API departs from shadcn/ui (shadcn: the registry item it derives from, and each divergence — added, removed, renamed or changed — with the reason; write the shadcn/ui API everywhere else). "detailed": everything needed to write the component in one call — the full spec (usage, anatomy, tokens, props, states, accessibility: ARIA pattern, keyboard, accessible name, known pitfalls; code example), its cva variants with their defaults, the sizes its size prop accepts, and the composition rules that cover it. The spec alone is also the resource ds://component/{name}/spec',
       inputSchema: z.object({
         component_name: z
           .string()
           .describe("Component name (e.g. Button, Card, Dialog)"),
         response_format: responseFormat(
-          "usage, anatomy, tokens, props, states, accessibility and the code example"
+          "the full spec, the cva variants, the sizes and the composition rules"
         ),
       }),
       outputSchema: componentSpecOutput,
@@ -224,7 +257,11 @@ import { cn } from "@/lib/utils"`,
       )
       const needle = component_name.toLowerCase().replace(/[\s-_]/g, "")
       const answer = (spec: ComponentSpec) =>
-        result(response_format === "detailed" ? spec : conciseSpec(spec))
+        result(
+          response_format === "detailed"
+            ? componentContext(spec)
+            : conciseSpec(spec)
+        )
 
       // Exact match first
       for (const [key, value] of Object.entries(specs)) {
@@ -255,55 +292,9 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 4. get_component_variants
+  // 4. dsaireadable_get_tokens
   server.registerTool(
-    "get_component_variants",
-    {
-      title: "Component variants",
-      description:
-        "Returns the variants/props extracted from cva() for a component",
-      inputSchema: z.object({
-        component_name: z
-          .string()
-          .describe("Component name to look up variants for"),
-      }),
-      outputSchema: componentVariantsOutput,
-      annotations: READ_ONLY,
-    },
-    async ({ component_name }) => {
-      const variants = loadContext<Record<string, unknown>>(
-        "component-variants.json"
-      )
-      const needle = component_name.toLowerCase().replace(/[\s-_]/g, "")
-
-      for (const [key, value] of Object.entries(variants)) {
-        if (key.toLowerCase().replace(/[\s-_]/g, "") === needle) {
-          return result({ component: key, ...(value as object) })
-        }
-      }
-      const excluded = excludedAnswer(component_name, Object.keys(variants))
-      if (excluded) return excluded
-      for (const [key, value] of Object.entries(variants)) {
-        if (
-          key
-            .toLowerCase()
-            .replace(/[\s-_]/g, "")
-            .includes(needle)
-        ) {
-          return result({ component: key, ...(value as object) })
-        }
-      }
-
-      return notFound(
-        `No variants found for "${component_name}". Pass one of the available names; a component absent from this list has no cva variants.`,
-        Object.keys(variants)
-      )
-    }
-  )
-
-  // 5. get_tokens
-  server.registerTool(
-    "get_tokens",
+    "dsaireadable_get_tokens",
     {
       title: "Semantic tokens",
       description:
@@ -342,9 +333,9 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 6. get_typography
+  // 5. dsaireadable_get_typography
   server.registerTool(
-    "get_typography",
+    "dsaireadable_get_typography",
     {
       title: "Typography",
       description:
@@ -358,9 +349,9 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 7. get_icons
+  // 6. dsaireadable_get_icons
   server.registerTool(
-    "get_icons",
+    "dsaireadable_get_icons",
     {
       title: "Icons",
       description: "Returns the icon catalog and recommendations",
@@ -373,9 +364,9 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 8. get_design_rules
+  // 7. dsaireadable_get_design_rules
   server.registerTool(
-    "get_design_rules",
+    "dsaireadable_get_design_rules",
     {
       title: "Design rules",
       description:
@@ -468,13 +459,13 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 9. list_patterns
+  // 8. dsaireadable_list_patterns
   server.registerTool(
-    "list_patterns",
+    "dsaireadable_list_patterns",
     {
       title: "Page patterns",
       description:
-        "Lists the page patterns: tasks a screen carries out (create, edit, delete, filter, search, sign-in, settings) and UI patterns they share (empty-state, form, loading, navigation, saving), each with its name, title, kind and role. Pass a name to get_pattern for the whole pattern",
+        "Lists the page patterns: tasks a screen carries out (create, edit, delete, filter, search, sign-in, settings) and UI patterns they share (empty-state, form, loading, navigation, saving), each with its name, title, kind and role. Pass a name to dsaireadable_get_pattern for the whole pattern",
       inputSchema: z.object({
         kind: z
           .enum(["task", "ui"])
@@ -500,13 +491,13 @@ import { cn } from "@/lib/utils"`,
     }
   )
 
-  // 10. get_pattern
+  // 9. dsaireadable_get_pattern
   server.registerTool(
-    "get_pattern",
+    "dsaireadable_get_pattern",
     {
       title: "Page pattern",
       description:
-        'Returns one page pattern by name (list_patterns lists them). "concise" (default): role, usage rules and the components it takes. "detailed": the whole pattern — structure (regions and their components), components with their variants, spacing rules, content (what to write, what not to), code example and cross-references',
+        'Returns one page pattern by name (dsaireadable_list_patterns lists them). "concise" (default): role, usage rules and the components it takes. "detailed": the whole pattern — structure (regions and their components), components with their variants, spacing rules, content (what to write, what not to), code example and cross-references',
       inputSchema: z.object({
         name: z
           .string()

@@ -1,5 +1,5 @@
 /**
- * The critical rule get_design_rules serves with every answer, beside
+ * The critical rule dsaireadable_get_design_rules serves with every answer, beside
  * TAILWIND_RULE: build a screen from the design system's components, never
  * from raw HTML elements.
  */

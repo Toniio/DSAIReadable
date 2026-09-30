@@ -6,7 +6,7 @@ import { TAILWIND_RULE } from "../lib/tailwind-rule.js"
 
 /**
  * The critical rules every prompt ends with, rendered from the objects
- * get_design_rules serves. A hand-written copy lived here and had drifted
+ * dsaireadable_get_design_rules serves. A hand-written copy lived here and had drifted
  * from them: one source, two renderings.
  */
 const CRITICAL_RULES_TEXT = [
@@ -53,15 +53,15 @@ export function registerPrompts(server: McpServer): void {
               text: `You are a senior frontend developer working with the DSAIReadable Design System.
 
 **Protocol — call budget: 4 calls + 1 per component you retain:**
-1. \`get_design_system_overview\` — setup, imports, categories
-2. \`get_components\` — filtered by \`category\` when the task names one; pick the components the screen needs, and only those
-3. \`get_design_rules\` — the composition rules and the critical rules
-4. For each retained component only: \`get_component_specs\` (component_name: <name>, response_format: "detailed"), or read the resource \`ds://component/<name>/spec\`. Its props list every variant value: no \`get_component_variants\` call is needed
-5. Generate the screen, then call \`validate_screen\` with the code. Fix every error it reports and validate again
+1. \`dsaireadable_get_design_system_overview\` — setup, imports, categories
+2. \`dsaireadable_get_components\` — filtered by \`category\` when the task names one; pick the components the screen needs, and only those
+3. \`dsaireadable_get_design_rules\` — the composition rules and the critical rules
+4. For each retained component only: \`dsaireadable_get_component_specs\` (component_name: <name>, response_format: "detailed"). It carries the props, every cva variant with its default, the sizes and the composition rules that cover the component: one call per component
+5. Generate the screen, then call \`dsaireadable_validate_screen\` with the code. Fix every error it reports and validate again
 
-When the screen carries out a task of the page patterns (create, edit, delete, filter, search, sign-in, settings), call \`get_pattern\` (name: <task>) before step 2, one call outside the budget: its components are the ones to retain, its structure and spacing lay the screen out, its content says what to write.
+When the screen carries out a task of the page patterns (create, edit, delete, filter, search, sign-in, settings), call \`dsaireadable_get_pattern\` (name: <task>) before step 2, one call outside the budget: its components are the ones to retain, its structure and spacing lay the screen out, its content says what to write.
 
-On demand only, outside the budget: \`list_patterns\` for the UI patterns (empty-state, form, loading, navigation, saving), \`get_tokens\` (category) for a token the rules do not name, \`get_content_library\` for label, placeholder and message examples, \`get_glossary\` for a domain term.
+On demand only, outside the budget: \`dsaireadable_list_patterns\` for the UI patterns (empty-state, form, loading, navigation, saving), \`dsaireadable_get_tokens\` (category) for a token the rules do not name, \`dsaireadable_get_content_library\` for label, placeholder and message examples, \`dsaireadable_get_glossary\` for a domain term.
 
 Task: ${task}${contextLine}
 Target device: ${device}
@@ -104,7 +104,7 @@ ${CRITICAL_RULES_TEXT}`,
           change
         )
       const uxWritingInstruction = isTextChange
-        ? "\n3. `get_ux_writing_rules` — since this involves text changes"
+        ? "\n2. `dsaireadable_get_ux_writing_rules` — since this involves text changes"
         : ""
 
       return {
@@ -116,8 +116,7 @@ ${CRITICAL_RULES_TEXT}`,
               text: `You are a senior frontend developer working with the DSAIReadable Design System.
 
 **BEFORE making any changes, you MUST call these tools:**
-1. \`get_component_specs\` (component_name: "${target}", response_format: "detailed") — to understand the component's full spec
-2. \`get_component_variants\` (component_name: "${target}") — to understand available variants${uxWritingInstruction}
+1. \`dsaireadable_get_component_specs\` (component_name: "${target}", response_format: "detailed") — its full spec, variants, sizes and composition rules${uxWritingInstruction}
 
 **Only after gathering this information, suggest the revision.**
 
@@ -168,17 +167,17 @@ ${CRITICAL_RULES_TEXT}`,
               text: `You are a senior Product Designer working with the DSAIReadable Design System.
 
 **BEFORE generating ideas, you MUST call these tools:**
-1. \`get_components\` — to see all available components
-2. \`get_design_rules\` — to understand design constraints
-3. \`get_design_system_overview\` — to understand the DS capabilities
-4. \`list_patterns\` — the page patterns, by task and by UI concern
+1. \`dsaireadable_get_components\` — to see all available components
+2. \`dsaireadable_get_design_rules\` — to understand design constraints
+3. \`dsaireadable_get_design_system_overview\` — to understand the DS capabilities
+4. \`dsaireadable_list_patterns\` — the page patterns, by task and by UI concern
 
 **Only after gathering this information, generate the idea.**
 ${expLine}${indLine}
 
 Generate a creative but DS-compliant screen or feature idea that:
 - Uses only components available in the DS
-- Follows the page pattern of each task it involves (\`get_pattern\`)
+- Follows the page pattern of each task it involves (\`dsaireadable_get_pattern\`)
 - Respects all design rules and constraints
 - Includes a description, wireframe sketch (in text/ASCII), and a list of DS components used
 - Suggests specific component variants and token usage
@@ -213,9 +212,9 @@ ${CRITICAL_RULES_TEXT}`,
               text: `You are a senior Product Designer and UX strategist working with the DSAIReadable Design System.
 
 **BEFORE suggesting next steps, you MUST call these tools:**
-1. \`get_components\` — to see all available components
-2. \`get_content_library\` — for standard content patterns
-3. \`get_ux_writing_rules\` — for writing guidelines
+1. \`dsaireadable_get_components\` — to see all available components
+2. \`dsaireadable_get_content_library\` — for standard content patterns
+3. \`dsaireadable_get_ux_writing_rules\` — for writing guidelines
 
 **Only after gathering this information, suggest next steps.**
 
@@ -265,13 +264,12 @@ ${CRITICAL_RULES_TEXT}`,
               text: `You are a senior frontend developer creating a component showcase for the DSAIReadable Design System.
 
 **BEFORE generating the showcase, you MUST call these tools:**
-1. \`get_design_system_overview\` — to understand the DS scope
-2. \`get_components\`${category ? ` (category: "${category}")` : ""} — to get the component list
+1. \`dsaireadable_get_design_system_overview\` — to understand the DS scope
+2. \`dsaireadable_get_components\`${category ? ` (category: "${category}")` : ""} — to get the component list
 3. For each component found, call:
-   - \`get_component_specs\` (component_name: <name>, response_format: "detailed") — full specs
-   - \`get_component_variants\` (component_name: <name>) — all variants
-4. \`get_tokens\` — to get all design tokens
-5. \`get_design_rules\` — to ensure showcase follows rules
+   - \`dsaireadable_get_component_specs\` (component_name: <name>, response_format: "detailed") — full spec, variants and sizes
+4. \`dsaireadable_get_tokens\` — to get all design tokens
+5. \`dsaireadable_get_design_rules\` — to ensure showcase follows rules
 
 **Only after gathering all this information, generate the showcase.**
 ${categoryLine}

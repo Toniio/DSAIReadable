@@ -8,9 +8,9 @@ import {
 } from "../lib/output-schemas.js"
 
 export function registerDatavizTools(server: McpServer): void {
-  // 1. get_dataviz_recommendation
+  // 1. dsaireadable_get_dataviz_recommendation
   server.registerTool(
-    "get_dataviz_recommendation",
+    "dsaireadable_get_dataviz_recommendation",
     {
       title: "Chart recommendation",
       description:
@@ -65,9 +65,9 @@ export function registerDatavizTools(server: McpServer): void {
     }
   )
 
-  // 2. get_dataviz_specs
+  // 2. dsaireadable_get_dataviz_specs
   server.registerTool(
-    "get_dataviz_specs",
+    "dsaireadable_get_dataviz_specs",
     {
       title: "Chart spec",
       description:
