@@ -17,6 +17,10 @@ section that fits.
   (`@modelcontextprotocol/server`). A client opens with `server/discover`;
   2025-era clients are still served, over stdio and HTTP. `tools/list` comes
   back in one order every time.
+- MCP server: every tool declares an output schema and answers with
+  `structuredContent` that the server validates against it, with the same JSON
+  as text. Lists and resources carry a one-hour `public` cache hint for
+  2026-07-28 clients.
 - Page patterns, on Primer's model: 12 hand-written pages in
   `specs/patterns/`, the tasks a screen carries out (`create`, `edit`,
   `delete`, `filter`, `search`, `sign-in`, `settings`) then the UI patterns
@@ -107,6 +111,9 @@ section that fits.
 
 ### Changed
 
+- MCP server: `get_glossary` without a term answers `{ terms }` rather than a
+  bare list; `get_dataviz_recommendation` answers an objective missing from
+  the decision tree with an error rather than every objective.
 - The spacing and type scales are locked, like colors, radii and shadows:
   `styles/globals.css` resets Tailwind's `--spacing`, `--text-*`, `--font-*`,
   `--font-weight-*`, `--leading-*` and `--tracking-*` and declares only the

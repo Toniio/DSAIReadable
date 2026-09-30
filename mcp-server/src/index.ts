@@ -58,12 +58,31 @@ function serverDescription(): string {
   }
 }
 
+/**
+ * Every answer comes from the context cache, compiled before the server
+ * starts and the same for every client: lists and resources can be cached
+ * for an hour, by shared caches too (2026-07-28 revision, ttlMs/cacheScope).
+ */
+const CACHE_HINT = { ttlMs: 3_600_000, cacheScope: "public" } as const
+
 function createMcpServer() {
-  const server = new McpServer({
-    name: "DSAIReadable",
-    version: mcpServerVersion,
-    description: serverDescription(),
-  })
+  const server = new McpServer(
+    {
+      name: "DSAIReadable",
+      version: mcpServerVersion,
+      description: serverDescription(),
+    },
+    {
+      cacheHints: {
+        "server/discover": CACHE_HINT,
+        "tools/list": CACHE_HINT,
+        "prompts/list": CACHE_HINT,
+        "resources/list": CACHE_HINT,
+        "resources/templates/list": CACHE_HINT,
+        "resources/read": CACHE_HINT,
+      },
+    }
+  )
 
   registerDsCoreTools(server)
   registerDatavizTools(server)

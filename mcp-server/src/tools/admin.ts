@@ -1,8 +1,9 @@
 import { z } from "zod"
 import type { McpServer } from "@modelcontextprotocol/server"
-import { loadContext, text } from "../lib/context.js"
+import { loadContext, result } from "../lib/context.js"
 import { validateScreen } from "../lib/validate-screen.js"
 import { READ_ONLY } from "../lib/annotations.js"
+import { screenReportOutput, statsOutput } from "../lib/output-schemas.js"
 
 interface ComponentEntry {
   name: string
@@ -31,6 +32,7 @@ export function registerAdminTools(server: McpServer): void {
       title: "Design system stats",
       description:
         "Returns design system stats: total components, tokens per tier, spec coverage",
+      outputSchema: statsOutput,
       annotations: READ_ONLY,
     },
     async () => {
@@ -68,7 +70,7 @@ export function registerAdminTools(server: McpServer): void {
         components_by_category: groupBy(comps, "category"),
       }
 
-      return text(stats)
+      return result(stats)
     }
   )
 
@@ -86,9 +88,10 @@ export function registerAdminTools(server: McpServer): void {
             "React/TSX code to validate against the design system rules"
           ),
       }),
+      outputSchema: screenReportOutput,
       annotations: READ_ONLY,
     },
-    async ({ code }) => text(validateScreen(code))
+    async ({ code }) => result(validateScreen(code))
   )
 }
 

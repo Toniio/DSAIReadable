@@ -52,12 +52,18 @@ export function loadContext<T = unknown>(filename: string): T {
   return data
 }
 
-/** Wrap a JSON-serialisable payload as an MCP text result. */
-export function text(data: unknown): {
+/**
+ * Wrap a payload as a tool result: `structuredContent`, which the server
+ * validates against the tool's output schema, and the same JSON as text for
+ * clients that read only the text.
+ */
+export function result(data: object): {
   content: { type: "text"; text: string }[]
+  structuredContent: Record<string, unknown>
 } {
   return {
     content: [{ type: "text" as const, text: JSON.stringify(data, null, 2) }],
+    structuredContent: data as Record<string, unknown>,
   }
 }
 
@@ -73,7 +79,15 @@ export function notFound(
   content: { type: "text"; text: string }[]
   isError: true
 } {
-  return { ...text({ error, available }), isError: true }
+  return {
+    content: [
+      {
+        type: "text" as const,
+        text: JSON.stringify({ error, available }, null, 2),
+      },
+    ],
+    isError: true,
+  }
 }
 
 /**

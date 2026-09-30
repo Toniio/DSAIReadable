@@ -970,6 +970,7 @@ const [serverSide, clientSide] = InMemoryTransport.createLinkedPair()
 await Promise.all([live.connect(serverSide), client.connect(clientSide)])
 
 type ToolText = { content: { text: string }[]; isError?: boolean }
+type Json = any // eslint-disable-line @typescript-eslint/no-explicit-any
 async function call(name: string, args: Record<string, unknown> = {}) {
   return (await client.callTool({ name, arguments: args })) as ToolText
 }
@@ -1398,7 +1399,18 @@ try {
     { name: "DSAIReadable-test-client", version: "1.0.0" },
     MODERN
   )
-  await modern.connect(new StreamableHTTPClientTransport(new URL(mcpUrl)))
+  // The raw answers, for the cache fields the client consumes.
+  const answers: Json[] = []
+  await modern.connect(
+    new StreamableHTTPClientTransport(new URL(mcpUrl), {
+      fetch: async (url, init) => {
+        const response = await fetch(url, init)
+        const body = await response.clone().text()
+        if (body.startsWith("{")) answers.push(JSON.parse(body))
+        return response
+      },
+    })
+  )
   const modernTools = (await modern.listTools()).tools.map((t) => t.name)
   const modernCall = (await modern.callTool({
     name: "get_component_specs",
@@ -1416,6 +1428,11 @@ try {
   assert(
     sameOrder(modernTools) && sameOrder(again),
     `tools/list comes back in one deterministic order (${modernTools.length} tools)`
+  )
+  const toolList = answers.find((a) => Array.isArray(a.result?.tools))?.result
+  assert(
+    toolList?.ttlMs === 3_600_000 && toolList?.cacheScope === "public",
+    `tools/list carries its cache hint (ttlMs ${toolList?.ttlMs}, cacheScope ${toolList?.cacheScope})`
   )
   await modern.close()
 
@@ -1538,7 +1555,6 @@ async function callTool(name: string, args: Record<string, unknown>) {
   return { isError: result.isError === true, text: result.content[0].text }
 }
 
-type Json = any // eslint-disable-line @typescript-eslint/no-explicit-any
 const semanticPaths = new Set(
   (
     JSON.parse(
@@ -1882,6 +1898,168 @@ assert(
   versionLiterals.length === 0,
   `No version literal in the served code (${servedSources.length} files${versionLiterals.length ? `; ${versionLiterals.join(", ")}` : ""})`
 )
+
+// --- Test 13: output schemas (P4-03) ---
+// Every tool declares an output schema and its answers conform to it, for
+// every input an agent can pass: the server validates each answer before
+// sending it and turns a mismatch into an error, so one call per input finds
+// a field served but not declared, or declared but no longer served.
+console.log("\n13. Output schemas")
+
+const schemaServer = new McpServer({
+  name: "DSAIReadable-schemas",
+  version: "1.0.0",
+})
+registerDsCoreTools(schemaServer)
+registerDatavizTools(schemaServer)
+registerUxWritingTools(schemaServer)
+registerAdminTools(schemaServer)
+const schemaClient = new Client({
+  name: "DSAIReadable-test-client",
+  version: "1.0.0",
+})
+const [schemaServerSide, schemaClientSide] =
+  InMemoryTransport.createLinkedPair()
+await Promise.all([
+  schemaServer.connect(schemaServerSide),
+  schemaClient.connect(schemaClientSide),
+])
+
+const declared = (await schemaClient.listTools()).tools
+const withoutSchema = declared
+  .filter((t) => t.outputSchema?.type !== "object")
+  .map((t) => t.name)
+assert(
+  withoutSchema.length === 0,
+  `Every tool declares an output schema with an object root${withoutSchema.length ? ` (missing: ${withoutSchema.join(", ")})` : ""}`
+)
+
+const context = (file: string) =>
+  JSON.parse(readFileSync(resolve(contextDir, file), "utf-8")) as Json
+const formats = ["concise", "detailed"]
+const allSpecNames = Object.keys(context("component-specs.json"))
+const ruleSet = context("ux-writing.json")
+const ruleCategories = [
+  ...new Set(
+    (ruleSet.general_rules as { source: string }[]).map((r) =>
+      r.source.replace(/\.md$/, "")
+    )
+  ),
+  ...Object.keys(ruleSet.component_rules),
+  "composition",
+  "tailwind",
+]
+const inputs: [string, Record<string, unknown>][] = [
+  ["get_design_system_overview", {}],
+  ["get_components", {}],
+  ["get_components", { category: "Forms", limit: 2 }],
+  ...allSpecNames.flatMap((component_name) =>
+    formats.map(
+      (response_format) =>
+        ["get_component_specs", { component_name, response_format }] as [
+          string,
+          Record<string, unknown>,
+        ]
+    )
+  ),
+  ...Object.keys(context("component-variants.json")).map(
+    (component_name) =>
+      ["get_component_variants", { component_name }] as [
+        string,
+        Record<string, unknown>,
+      ]
+  ),
+  ["get_tokens", {}],
+  ["get_tokens", { category: "color", limit: 3 }],
+  ["get_typography", {}],
+  ["get_icons", {}],
+  ...[undefined, ...ruleCategories].flatMap((category) =>
+    formats.map(
+      (response_format) =>
+        ["get_design_rules", { category, response_format }] as [
+          string,
+          Record<string, unknown>,
+        ]
+    )
+  ),
+  ["list_patterns", {}],
+  ["list_patterns", { kind: "ui" }],
+  ...Object.keys(patterns).flatMap((name) =>
+    formats.map(
+      (response_format) =>
+        ["get_pattern", { name, response_format }] as [
+          string,
+          Record<string, unknown>,
+        ]
+    )
+  ),
+  ...(
+    context("dataviz-decision-tree.json").objectives as { name: string }[]
+  ).map(
+    ({ name }) =>
+      ["get_dataviz_recommendation", { objective: name.toLowerCase() }] as [
+        string,
+        Record<string, unknown>,
+      ]
+  ),
+  ...Object.keys(context("dataviz-catalog.json")).map(
+    (chart_type) =>
+      ["get_dataviz_specs", { chart_type }] as [string, Record<string, unknown>]
+  ),
+  ...formats.map(
+    (response_format) =>
+      ["get_ux_writing_rules", { response_format }] as [
+        string,
+        Record<string, unknown>,
+      ]
+  ),
+  ["get_glossary", {}],
+  ["get_glossary", { term: "primitive" }],
+  ["get_content_library", {}],
+  ...["labels", "placeholders", "messages"].map(
+    (category) =>
+      ["get_content_library", { category }] as [string, Record<string, unknown>]
+  ),
+  ["get_stats", {}],
+  ["validate_screen", { code: CLEAN_SCREEN }],
+  ["validate_screen", { code: "<button>Save</button>" }],
+]
+const nonConforming: string[] = []
+const calledTools = new Set<string>()
+for (const [name, args] of inputs) {
+  calledTools.add(name)
+  const answer = (await schemaClient.callTool({ name, arguments: args })) as {
+    content: { text: string }[]
+    structuredContent?: unknown
+    isError?: boolean
+  }
+  // The text is the same JSON, for clients that read only the text.
+  if (
+    answer.isError ||
+    JSON.stringify(answer.structuredContent) !==
+      JSON.stringify(JSON.parse(answer.content[0].text))
+  )
+    nonConforming.push(
+      `${name} ${JSON.stringify(args)}: ${answer.content[0].text.slice(0, 200)}`
+    )
+}
+assert(
+  nonConforming.length === 0 && declared.every((t) => calledTools.has(t.name)),
+  `${inputs.length} calls over the ${calledTools.size} tools conform to their output schema, text and structuredContent alike${nonConforming.length ? `:\n    ${nonConforming.join("\n    ")}` : ""}`
+)
+
+// An argument outside the input schema is a tool execution error, which the
+// agent reads and corrects, not a protocol error that ends the call.
+const outOfSchema = (await schemaClient.callTool({
+  name: "get_tokens",
+  arguments: { category: "hue" },
+})) as ToolText
+assert(
+  outOfSchema.isError === true &&
+    outOfSchema.content[0].text.includes("category"),
+  "An argument outside the input schema is a tool execution error naming it"
+)
+await schemaClient.close()
 
 // --- Summary ---
 console.log("\n" + "=".repeat(50))
