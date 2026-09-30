@@ -969,24 +969,35 @@ function generateContentLibrary() {
   // A placeholder is an example value, never a label or a fake one: a password
   // field takes none, since a row of dots reads as a field already filled in.
   Object.assign(placeholders, {
-    email: "you@example.com",
-    search: "Search…",
+    email: "name@example.com",
+    search: "Search projects…",
   })
 
-  // Written in the voice of specs/foundations/voice-and-tone.md: an error says
-  // what happened, then how to fix it; a destructive confirmation names what is
-  // lost, and its button repeats the verb.
+  // The wording of the Content tables of specs/patterns/*.md, in the voice of
+  // specs/foundations/voice-and-tone.md. No generic error: an error says what
+  // failed, then how to fix it. {name} and {query} are filled by the caller.
   Object.assign(messages, {
-    error_generic: "We couldn't complete your request. Try again in a moment.",
-    error_network:
-      "We couldn't reach the server. Check your connection and try again.",
+    saving: "Saving…",
     success_saved: "All set! Your changes are saved.",
-    empty_state: "Nothing here yet — create your first project to get started.",
-    empty_search:
-      "We couldn't find anything that matches. Try a different search.",
-    loading: "Loading your projects…",
-    confirm_delete: "Delete this project? You won't be able to get it back.",
+    error_save:
+      "We couldn't save your changes. Check your connection and try again.",
+    leave_guard: "Leave without saving?",
+    success_created: 'Your project "{name}" is ready.',
+    error_create:
+      "We couldn't create the project. Check your connection and try again.",
+    confirm_delete_title: 'Delete "{name}"?',
+    confirm_delete:
+      "Its tasks and files go with it. You won't be able to get them back.",
     confirm_delete_action: "Delete project",
+    success_deleted: '"{name}" is deleted.',
+    empty_state_title: "No projects yet",
+    empty_state: "Create your first project to get started.",
+    empty_search_title: 'No results for "{query}"',
+    empty_search: "Check the spelling or try another word.",
+    loading: "Loading your projects…",
+    error_sign_in:
+      "That email and password don't match. Check them and try again.",
+    error_email: "Enter an email address, like name@example.com.",
   })
 
   return write("content-library.json", { labels, placeholders, messages })

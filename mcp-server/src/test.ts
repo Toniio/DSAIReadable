@@ -862,32 +862,40 @@ assert(
 // column of voice-and-tone.md: agents copied it into the screens they built.
 console.log("\n7c. Content library voice")
 {
-  const voice = readFileSync(
-    resolve(__dirname, "../../specs/foundations/voice-and-tone.md"),
-    "utf-8"
-  )
-  const tables = voice.split("\n\n").map((block) =>
-    block
-      .split("\n")
-      .filter((line) => line.startsWith("|"))
-      .map((row) =>
-        row
-          .split("|")
-          .slice(1, -1)
-          .map((cell) => cell.trim())
-      )
-  )
-  const column = (header: string) =>
+  const tablesOf = (md: string) =>
+    md.split("\n\n").map((block) =>
+      block
+        .split("\n")
+        .filter((line) => line.startsWith("|"))
+        .map((row) =>
+          row
+            .split("|")
+            .slice(1, -1)
+            .map((cell) => cell.trim())
+        )
+    )
+  const column = (tables: string[][][], header: string) =>
     tables.flatMap((rows) => {
       const i = rows[0]?.indexOf(header) ?? -1
-      return i < 0 ? [] : rows.slice(2).map((row) => [row[0], row[i]])
+      return i < 0 ? [] : rows.slice(2).map((row) => row[i])
     })
   const quoted = (cell: string) =>
     [...cell.matchAll(/`([^`]+)`/g)].map((m) => m[1])
 
+  const specsDir = resolve(__dirname, "../../specs")
+  const voiceTables = tablesOf(
+    readFileSync(resolve(specsDir, "foundations/voice-and-tone.md"), "utf-8")
+  )
+  const patternTables = readdirSync(resolve(specsDir, "patterns"))
+    .filter((f) => f.endsWith(".md"))
+    .flatMap((f) =>
+      tablesOf(readFileSync(resolve(specsDir, "patterns", f), "utf-8"))
+    )
+
   // Each rejected phrase, its closing punctuation dropped so that "Something
   // went wrong" matches "Something went wrong.", matched on word boundaries.
-  const rejected = column("Not").flatMap(([, cell]) =>
+  // Only the foundation's: a pattern's "Not" belongs to one element.
+  const rejected = column(voiceTables, "Not").flatMap((cell) =>
     quoted(cell).map((p) => p.replace(/(?<=\w)[.!…]+$/, ""))
   )
   const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
@@ -917,26 +925,26 @@ console.log("\n7c. Content library voice")
     `No served message or placeholder uses a phrase of the "Not" columns (${rejected.length} phrases${offending.length ? `; ${offending.join(", ")}` : ""})`
   )
 
-  const success = quoted(
-    column("Write").find(([situation]) => situation === "Success")?.[1] ?? ""
-  )[0]
-  const { messages } = library
-  const errors = Object.entries(messages).filter(([k]) =>
-    k.startsWith("error_")
+  // Every message is a phrase of a "Write" column, word for word; {name} and
+  // {query} stand for the object the caller names ("Q3 launch").
+  const written = column([...voiceTables, ...patternTables], "Write").flatMap(
+    quoted
+  )
+  const canonical = (message: string) =>
+    new RegExp(`^${escape(message).replace(/\\\{\w+\\\}/g, ".+")}$`)
+  const unwritten = Object.entries(library.messages).filter(
+    ([, m]) => !written.some((w) => canonical(m).test(w))
   )
   assert(
-    success !== undefined &&
-      messages.success_saved === success &&
-      errors.length > 0 &&
-      errors.every(([, m]) => /^[^!]+\. [^!]+\.$/.test(m)) &&
-      /won't be able to get/.test(messages.confirm_delete) &&
-      messages.confirm_delete_action.split(" ")[0] ===
-        messages.confirm_delete.split(" ")[0],
-    "Messages follow the tone table: the foundation's success, errors that say what happened then how to fix it, a destructive confirmation whose button repeats its verb"
+    patternTables.length > 0 && unwritten.length === 0,
+    `Every served message is the canonical wording of a pattern or of the foundation (${unwritten.map(([k]) => k).join(", ") || "all"})`
+  )
+  const unexampled = Object.entries(library.placeholders).filter(
+    ([, p]) => !/\p{L}/u.test(p) || !written.some((w) => w.includes(p))
   )
   assert(
-    Object.values(library.placeholders).every((p) => /\p{L}/u.test(p)),
-    "No placeholder is a fake value (a password's row of dots)"
+    unexampled.length === 0,
+    `Every placeholder is an example value a "Write" column gives, never a row of dots (${unexampled.map(([k]) => k).join(", ") || "all"})`
   )
 }
 
