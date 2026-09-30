@@ -1,10 +1,10 @@
 {
-  "// ": "Copy this file to .vscode/mcp.json (not committed). Put NO secrets in it.",
+  "// ": "Copy this file to .vscode/mcp.json (not committed). Put NO secrets in it. Until @dsaireadable/mcp-server is published, run the sources instead: \"args\": [\"tsx\", \"./mcp-server/src/index.ts\"].",
   "servers": {
     "dsaireadable": {
       "type": "stdio",
       "command": "npx",
-      "args": ["tsx", "./mcp-server/src/index.ts"]
+      "args": ["-y", "@dsaireadable/mcp-server"]
     }
   }
 }

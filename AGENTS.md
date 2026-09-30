@@ -91,6 +91,7 @@ npm run registry:test-install  # installs the 69 items in a blank app, builds it
 npm run release:check     # one version everywhere it is served + each pending changeset follows the semver policy
 npm run release:test      # a changeset becomes a version and a CHANGELOG entry (on a copy of the files) + what a pinned install pins
 npm run generate-context  # regenerates the MCP cache — must produce zero diff
+npm run mcp:test-package  # packs the MCP server and runs the tarball through npx from an empty folder (network)
 npm run mcp:test          # the MCP server's test suite
 npm run test:components   # component tests: roles, names, keyboard, variants, axe-core
 ```
@@ -99,7 +100,7 @@ After any token or TypeScript change:
 `npm run tokens-validate && npm run typecheck:all`.
 
 Before a commit, `npm run check` runs every CI check above in one call except
-`registry:test-install` and the networked `shadcn registry validate`,
+`registry:test-install`, `mcp:test-package` and the networked `shadcn registry validate`,
 and prints only what failed. Prefer it to running the checks one by one: each
 separate run is one more agent turn and more output in the context.
 

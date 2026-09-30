@@ -2,26 +2,51 @@
   "name": "@dsaireadable/mcp-server",
   "version": "0.0.1",
   "description": "MCP Server for the DSAIReadable Design System",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "design-system",
+    "shadcn"
+  ],
+  "homepage": "https://github.com/Toniio/DSAIReadable",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toniio/DSAIReadable.git",
+    "directory": "mcp-server"
+  },
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "bin": {
-    "dsaireadable-mcp": "src/index.ts"
+    "dsaireadable-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "context"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "prepack": "npm run build",
     "start": "tsx src/index.ts",
     "start:http": "tsx src/index.ts --http",
     "generate-context": "tsx src/context/generate.ts",
     "dev": "tsx watch src/index.ts",
-    "test": "tsx src/test.ts"
+    "test": "tsx src/test.ts",
+    "test:package": "tsx src/test-package.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/node": "^2.1.0",
     "@modelcontextprotocol/server": "^2.2.0",
-    "tsx": "^4.23.15",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@modelcontextprotocol/client": "^2.2.0",
+    "tsx": "^4.23.15",
     "typescript": "^5.8.3"
   }
 }

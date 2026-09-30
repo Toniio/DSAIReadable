@@ -193,7 +193,7 @@ and the README's are removed together.
 | `index-schema`      | `npm run index:validate`                                                     |
 | `spec-sections`     | `npm run specs:validate`                                                     |
 | `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                  |
-| `mcp-test`          | `npm run mcp:test`                                                           |
+| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                       |
 | `component-tests`   | `npm run test:components`                                                    |
 | `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `release:test` |
 
@@ -247,4 +247,11 @@ Privately, never in a public issue — see [`SECURITY.md`](./SECURITY.md).
 
 ## Running the MCP server locally
 
-Copy `.vscode/mcp.json.example` to `.vscode/mcp.json` (not committed).
+Copy `.vscode/mcp.json.example` to `.vscode/mcp.json` (not committed). It starts
+the published package with `npx`; until the package is published, or to run your
+own changes, point it at the sources with `"args": ["tsx", "./mcp-server/src/index.ts"]`.
+
+To try the package a consumer would get, `npm --prefix mcp-server pack` builds
+and packs it, and `npm run mcp:test-package` runs that tarball through `npx`
+from an empty folder. Publishing `@dsaireadable/mcp-server` (`npm publish` from
+`mcp-server/`, after the release tag) is a maintainer's step, never an agent's.

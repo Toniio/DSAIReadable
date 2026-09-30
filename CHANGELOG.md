@@ -15,6 +15,19 @@ Until then, a pull request that changes behavior adds its line under
 
 ### Added
 
+- MCP server: `@dsaireadable/mcp-server` is a package a client runs with
+  `npx -y @dsaireadable/mcp-server`, over stdio. The server is compiled to
+  JavaScript (`dist/`, a `node` shebang, `tsx` and `typescript` as dev
+  dependencies), and the package holds `dist/` and `context/` only: no test, no
+  generator, no agent file. `npm run mcp:test-package` packs it and runs the
+  tarball through `npx` from an empty folder. It is not published yet:
+  publishing is a maintainer's step.
+- MCP server: run inside a project, `dsaireadable_list_patterns` and
+  `dsaireadable_get_pattern` also serve that project's `design/patterns/*.md`
+  (the working directory, or `DSAIREADABLE_PROJECT_DIR`): the same nine
+  sections as a file of `specs/patterns/`, read with the same parser. The
+  project's pattern wins when both share a name, and a file that does not parse
+  is an error that names it.
 - Versioning: [Changesets](https://github.com/changesets/changesets) and a
   semver policy (`CONTRIBUTING.md`, _Versioning and releases_). One version
   names the tokens, the components, the registry, the inventory and the MCP

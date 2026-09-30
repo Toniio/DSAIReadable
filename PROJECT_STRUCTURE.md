@@ -376,6 +376,7 @@ npm run tokens:lint-bridge  # Check Tailwind's @theme bridge
 npm run tokens-validate     # Every token check in sequence
 npm run specs:validate      # Specs: sections, generated parts, wording
 npm run typecheck:all       # TypeScript: app, scripts, mcp-server
+npm run mcp:test-package    # Pack the MCP server and run the tarball through npx from an empty folder
 npm run test:components     # Component tests (Vitest + axe-core)
 npm run format              # Prettier on every .ts/.tsx/.md
 ```

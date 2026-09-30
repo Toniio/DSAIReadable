@@ -7,6 +7,7 @@ import {
   type CompositionRule,
 } from "../lib/composition-rules.js"
 import { READ_ONLY } from "../lib/annotations.js"
+import { loadProjectPatterns } from "../lib/patterns.js"
 import {
   componentSpecOutput,
   componentsOutput,
@@ -57,6 +58,21 @@ interface ShadcnExclusion {
 }
 
 const normalize = (name: string) => name.toLowerCase().replace(/[\s-_]/g, "")
+
+/**
+ * The design system's patterns, then those of the project the server runs in
+ * (`design/patterns/*.md` under `DSAIREADABLE_PROJECT_DIR`, or under the working
+ * directory a client starts the server in). The project's wins on a shared name.
+ * Read on each call: the project's files change while the server runs.
+ */
+function allPatterns(): Record<string, Pattern> {
+  return {
+    ...loadContext<Record<string, Pattern>>("patterns.json"),
+    ...loadProjectPatterns(
+      process.env.DSAIREADABLE_PROJECT_DIR ?? process.cwd()
+    ),
+  }
+}
 
 /**
  * The answer to a request for a shadcn/ui component the design system leaves
@@ -476,9 +492,9 @@ import { cn } from "@/lib/utils"`,
       annotations: READ_ONLY,
     },
     async ({ kind }) => {
-      const patterns = Object.values(
-        loadContext<Record<string, Pattern>>("patterns.json")
-      ).filter((p) => !kind || p.kind === kind)
+      const patterns = Object.values(allPatterns()).filter(
+        (p) => !kind || p.kind === kind
+      )
       return result({
         total: patterns.length,
         patterns: patterns.map(({ name, title, kind, role }) => ({
@@ -512,7 +528,7 @@ import { cn } from "@/lib/utils"`,
       annotations: READ_ONLY,
     },
     async ({ name, response_format }) => {
-      const patterns = loadContext<Record<string, Pattern>>("patterns.json")
+      const patterns = allPatterns()
       const needle = normalize(name)
       const all = Object.values(patterns)
       const pattern =

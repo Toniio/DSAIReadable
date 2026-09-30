@@ -48,6 +48,7 @@
     "mcp:start": "npm --prefix mcp-server run start",
     "mcp:start:http": "npm --prefix mcp-server run start:http",
     "mcp:test": "npm --prefix mcp-server run test",
+    "mcp:test-package": "npm --prefix mcp-server run test:package",
     "generate-context": "npm --prefix mcp-server run generate-context",
     "test:components": "vitest run",
     "test": "npm run test:components && npm run mcp:test",

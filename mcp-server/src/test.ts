@@ -28,6 +28,7 @@ import {
   existsSync,
   readFileSync,
   writeFileSync,
+  mkdirSync,
   mkdtempSync,
   rmSync,
 } from "node:fs"
@@ -2091,6 +2092,136 @@ assert(
   outOfSchema.isError === true &&
     outOfSchema.content[0].text.includes("category"),
   "An argument outside the input schema is a tool execution error naming it"
+)
+// --- A consumer project's own patterns (design/patterns/) ---
+console.log("\n14. Project patterns")
+const projectPattern = (
+  name: string,
+  kind: string,
+  role: string
+) => `# ${name} (project)
+
+## Metadata
+
+| Field | Value  |
+| ----- | ------ |
+| Name  | ${name} |
+| Kind  | ${kind} |
+
+## Role
+
+${role}
+
+## Usage
+
+- **MUST** — keep it to one screen
+
+## Structure
+
+| Region | Content | Components |
+| ------ | ------- | ---------- |
+| Body   | The form | \`Field\`   |
+
+## Components
+
+| Component | Variant / props | Job            |
+| --------- | --------------- | -------------- |
+| \`Field\`   | —               | Holds an input |
+
+## Spacing
+
+- **MUST** — use \`gap-4\`
+
+## Content
+
+| Situation | Write  | Not |
+| --------- | ------ | --- |
+| Title     | Welcome | Hi  |
+
+## Code example
+
+\`\`\`tsx
+export const Screen = () => null
+\`\`\`
+
+## Cross-references
+
+- \`form\`
+`
+const projectDir = mkdtempSync(resolve(tmpdir(), "dsai-project-"))
+const projectPatternsDir = resolve(projectDir, "design/patterns")
+mkdirSync(projectPatternsDir, { recursive: true })
+writeFileSync(
+  resolve(projectPatternsDir, "onboarding.md"),
+  projectPattern(
+    "onboarding",
+    "Task",
+    "Walks a new member through their first steps."
+  )
+)
+writeFileSync(
+  resolve(projectPatternsDir, "create.md"),
+  projectPattern("create", "Task", "The project's own way to create a thing.")
+)
+type PatternListed = { patterns: { name: string; role: string }[] }
+const patternsOf = async (args: Record<string, unknown>) =>
+  (await schemaClient.callTool({
+    name: "dsaireadable_list_patterns",
+    arguments: args,
+  })) as ToolText
+
+process.env.DSAIREADABLE_PROJECT_DIR = projectDir
+try {
+  const listed = JSON.parse(
+    (await patternsOf({})).content[0].text
+  ) as PatternListed
+  const names = listed.patterns.map((p) => p.name)
+  assert(
+    names.includes("onboarding"),
+    "A pattern of design/patterns/ is listed with the design system's"
+  )
+  assert(
+    names.length === new Set(names).size &&
+      listed.patterns.find((p) => p.name === "create")?.role ===
+        "The project's own way to create a thing.",
+    "The project's pattern wins when it shares a name with the design system's"
+  )
+  const detailed = JSON.parse(
+    (
+      (await schemaClient.callTool({
+        name: "dsaireadable_get_pattern",
+        arguments: { name: "onboarding", response_format: "detailed" },
+      })) as ToolText
+    ).content[0].text
+  ) as { source: string; kind: string }
+  assert(
+    detailed.source === "design/patterns/onboarding.md" &&
+      detailed.kind === "task",
+    "A project pattern is served whole, with its own source"
+  )
+
+  writeFileSync(
+    resolve(projectPatternsDir, "broken.md"),
+    projectPattern("broken", "Nonsense", "Not a pattern kind.")
+  )
+  const broken = await patternsOf({})
+  assert(
+    broken.isError === true &&
+      broken.content[0].text.includes("design/patterns/broken.md") &&
+      broken.content[0].text.includes("Kind"),
+    "A project pattern that does not parse is an error naming its file, not a silent omission"
+  )
+} finally {
+  delete process.env.DSAIREADABLE_PROJECT_DIR
+  rmSync(projectDir, { recursive: true, force: true })
+}
+const withoutProject = JSON.parse(
+  (await patternsOf({})).content[0].text
+) as PatternListed
+assert(
+  !withoutProject.patterns.some((p) => p.name === "onboarding") &&
+    withoutProject.patterns.length === Object.keys(patterns).length,
+  "Without a project folder, only the design system's patterns are served"
 )
 await schemaClient.close()
 
