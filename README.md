@@ -145,6 +145,7 @@ request is served on its own, no `Mcp-Session-Id` is issued, and `GET` or
 | Category       | Tools                                                                                                                                                                                                                                                                                                                                                      |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **DS Core**    | `dsaireadable_get_design_system_overview`, `dsaireadable_get_components` (with the sizes each accepts), `dsaireadable_get_component_specs` (concise, or `detailed`: the full spec with its cva variants, sizes and composition rules), `dsaireadable_get_tokens`, `dsaireadable_get_typography`, `dsaireadable_get_icons`, `dsaireadable_get_design_rules` |
+| **Lifecycle**  | `dsaireadable_get_deprecations` (the tokens and component exports to stop using, each with what replaces it), `dsaireadable_get_changelog` (one entry per change, by version or category)                                                                                                                                                                  |
 | **Patterns**   | `dsaireadable_list_patterns` (the page patterns, by task and by UI concern), `dsaireadable_get_pattern` (one pattern: usage, structure, components, spacing, content, code example)                                                                                                                                                                        |
 | **Dataviz**    | `dsaireadable_get_dataviz_recommendation` (chart types for an objective), `dsaireadable_get_dataviz_specs` (a chart type's tokens, anatomy and library)                                                                                                                                                                                                    |
 | **UX Writing** | `dsaireadable_get_ux_writing_rules` (voice and tone, default strings, overriding, language), `dsaireadable_get_glossary`, `dsaireadable_get_content_library`                                                                                                                                                                                               |
@@ -157,7 +158,7 @@ execution error that names it. Lists and resources carry a one-hour, `public` ca
 `cacheScope`) for 2026-07-28 clients. Every tool name starts with `dsaireadable_`, so it stays distinct among the tools of other servers.
 `dsaireadable_get_component_specs`, `dsaireadable_get_design_rules` and `dsaireadable_get_pattern` take
 `response_format`: `concise` by default (under 20 % of the volume), `detailed` for everything.
-`dsaireadable_get_components` and `dsaireadable_get_tokens` paginate: `limit` (100 by default) and `cursor`, with a
+`dsaireadable_get_components`, `dsaireadable_get_tokens` and `dsaireadable_get_changelog` paginate: `limit` (100 by default) and `cursor`, with a
 `{ total, items, next_cursor }` response.
 
 ### Resources
@@ -219,9 +220,10 @@ export default [...dsaireadable.configs.recommended]
 | `dsaireadable/no-inline-svg`                  | An inline `<svg>`: icons come from `@phosphor-icons/react`                                                                                 |
 | `dsaireadable/no-class-interpolation`         | A Tailwind class built by interpolation (`` `text-${tone}` ``): Tailwind never generates it                                                |
 | `dsaireadable/no-raw-values`                  | Raw hex and color functions, arbitrary Tailwind values, the default palette, primitive tokens, `prefers-color-scheme`                      |
-| `dsaireadable/no-deprecated-imports`          | What the design system has deprecated (the list is an option; empty until the first deprecation)                                           |
+| `dsaireadable/no-deprecated-imports`          | A component export the design system has deprecated (JSDoc `@deprecated`); the list is generated and empty until the first one             |
+| `dsaireadable/no-deprecated-token`            | A token the design system has deprecated (`$deprecated`), by its CSS variable or its Tailwind class                                        |
 
-`configs.core` holds those six rules and reads the code alone. `configs.recommended`
+`configs.core` holds those seven rules and reads the code alone. `configs.recommended`
 adds the Tailwind half of the lockdown through `eslint-plugin-better-tailwindcss`: a class the real
 stylesheet does not generate (`bg-red-500`, `p-13`) is an error, and a disabled state must read
 `opacity-disabled`. Point `settings["better-tailwindcss"].entryPoint` at your stylesheet if it is not

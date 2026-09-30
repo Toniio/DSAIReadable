@@ -56,7 +56,7 @@
     "mcp:start:http": "npm --prefix mcp-server run start:http",
     "mcp:test": "npm --prefix mcp-server run test",
     "mcp:test-package": "npm --prefix mcp-server run test:package",
-    "generate-context": "npm --prefix mcp-server run generate-context",
+    "generate-context": "npm --prefix mcp-server run generate-context && tsx scripts/build-plugin-deprecations.ts",
     "plugin:test": "npm run test -w @dsaireadable/eslint-plugin",
     "test:components": "vitest run",
     "test": "npm run test:components && npm run plugin:test && npm run mcp:test",

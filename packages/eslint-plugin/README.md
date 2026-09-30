@@ -14,7 +14,7 @@ export default [...dsaireadable.configs.recommended]
 
 ## Configs
 
-- `configs.core` — the six rules below. They read the code alone: no stylesheet,
+- `configs.core` — the seven rules below. They read the code alone: no stylesheet,
   no Tailwind. The `dsaireadable_validate_code` tool of the MCP server runs
   exactly this.
 - `configs.tailwind` — `eslint-plugin-better-tailwindcss` set up for the design
@@ -77,10 +77,21 @@ the default palette (`bg-violet-600`). In `style` props: raw colors and `px`,
 
 ### `no-deprecated-imports`
 
-Flags what the design system has deprecated. Option `modules` maps an import
-source (`@/components/ui/foo`), or one of its named exports
+Flags a component export the design system has deprecated with a JSDoc
+`@deprecated` tag. Option `modules` maps an import source
+(`@/components/ui/foo`), or one of its named exports
 (`@/components/ui/foo#Bar`), to what to use instead. `configs.core` passes the
-design system's own list, empty until its first deprecation.
+design system's own list, generated from those tags (empty until the first
+deprecation), so it is always the one the release was cut with.
+
+### `no-deprecated-token`
+
+Flags a design token the design system has deprecated (`$deprecated` in
+`tokens/semantic.json`). Option `tokens` maps a CSS variable
+(`--opacity-placeholder`, found in `var(--opacity-placeholder)` or Tailwind's
+`bg-(--opacity-placeholder)`) or a Tailwind class (found through its variants,
+`!` and opacity modifier) to why and what replaces it. `configs.core` passes the
+design system's own list.
 
 ## License
 

@@ -84,8 +84,8 @@ try {
   )
   expect(
     paths.includes(manifest.bin["dsaireadable-mcp"]) &&
-      paths.filter((path) => /^context\/.+\.json$/.test(path)).length >= 16,
-    "the bin and the 16 context files are in the tarball"
+      paths.filter((path) => /^context\/.+\.json$/.test(path)).length >= 18,
+    "the bin and the 18 context files are in the tarball"
   )
   expect(!("tsx" in manifest.dependencies), "tsx is not a runtime dependency")
 

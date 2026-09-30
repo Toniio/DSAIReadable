@@ -96,6 +96,32 @@ without being told. Keep it:
 
 The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-areas-not-to-touch-without-an-explicit-instruction).
 
+### Deprecating a token or a component export
+
+An agent has four ways to learn that something is deprecated, and one edit
+feeds all of them:
+
+- **A token**: set `$deprecated` on it in `tokens/semantic.json` (a message that
+  says why and what to use instead) and name the token that takes its place in
+  `$extensions["design.dsaireadable"].replacement`. The token docs, the manifest
+  and `dsaireadable_get_tokens` carry it; `npm run tokens:lint-lifecycle` checks
+  the replacement exists, is not deprecated itself, and that nothing still
+  consumes the deprecated token.
+- **A component export**: put `@deprecated Use {@link Replacement} instead, …`
+  in the JSDoc of the function, component or type in `components/ui/*.tsx`. It
+  ships with the source the registry distributes. A tag without a message fails
+  `npm run generate-context`.
+- **Lint and MCP**: `npm run generate-context` turns both into
+  `dsaireadable_get_deprecations` and into the plugin's lists
+  (`no-deprecated-token`, `no-deprecated-imports`), so a project's lint flags the
+  old name. Commit the regenerated files.
+
+Deprecating a name that still works is not breaking; removing it later is the
+breaking bump. Announce both under
+**Deprecated** and **Removed** in the changelog, which `dsaireadable_get_changelog`
+serves. Once a version that contains a removal is published,
+`npm deprecate` the published versions that still have it.
+
 ## Versioning and releases
 
 One version names the whole design system: the tokens, the components, the

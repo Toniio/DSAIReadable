@@ -28,7 +28,11 @@
  *      must not be — a reserved token that gains a consumer is promoted;
  *   ③ a `$deprecated` token has no consumer left;
  *   ④ every primitive is referenced by the tiers above, or declared
- *      `reserved` — so a dead primitive cannot come back unnoticed.
+ *      `reserved` — so a dead primitive cannot come back unnoticed;
+ *   ⑤ a token's `replacement` (`$extensions["design.dsaireadable"]`) names a
+ *      semantic token that is not deprecated itself, and only a deprecated
+ *      token has one: a pointer to a token that is gone, or to another
+ *      deprecation, sends an agent nowhere.
  *
  * The component tier is left out: its aliases exist to be bridged, and the
  * bridge lint already checks each one.
@@ -41,6 +45,7 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { fontVariableOf, nextFontsOf } from "./lib/next-fonts.js"
 import { loadTokens, PRIMITIVE_ROOT } from "../mcp-server/src/lib/dtcg.js"
+import { replacementOf } from "../mcp-server/src/lib/deprecations.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const STATUSES = ["active", "reserved"] as const
@@ -162,6 +167,22 @@ const count = { active: 0, reserved: 0, deprecated: 0 }
 for (const { path, node } of semantic) {
   const status = node.$extensions?.status
   const used = consumed(path)
+  const replacement = replacementOf(node)
+  if (replacement !== null) {
+    const target = semantic.find((t) => t.path === replacement)
+    if (node.$deprecated === undefined)
+      findings.push(
+        `⑤ ${path} names a replacement but is not $deprecated — a replacement says what takes the place of a deprecated token`
+      )
+    else if (!target)
+      findings.push(
+        `⑤ ${path} names the replacement ${replacement}, which is not a semantic token`
+      )
+    else if (target.node.$deprecated !== undefined)
+      findings.push(
+        `⑤ ${path} names the replacement ${replacement}, which is deprecated too — point at what replaces that one`
+      )
+  }
   if (node.$deprecated !== undefined) {
     count.deprecated++
     if (used)

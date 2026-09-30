@@ -1554,6 +1554,7 @@
     "dark": "{primitive.opacity.0-50}",
     "type": "number",
     "status": "deprecated",
+    "replacement": "color.text.subtle",
     "usage": "Deprecated: placeholder text was never faded. Form fields color it with color.text.subtle."
   },
   {

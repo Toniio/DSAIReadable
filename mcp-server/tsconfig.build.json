@@ -14,6 +14,8 @@
     "src/test.ts",
     "src/test-package.ts",
     "src/context/generate.ts",
-    "src/lib/dtcg.ts"
+    "src/lib/dtcg.ts",
+    "src/lib/deprecations.ts",
+    "src/lib/changelog.ts"
   ]
 }

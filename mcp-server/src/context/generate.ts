@@ -1,6 +1,6 @@
 /**
  * Context generation script — reads all design system data sources
- * and produces 16 JSON files in mcp-server/context/.
+ * and produces 18 JSON files in mcp-server/context/.
  *
  * Run: tsx src/context/generate.ts
  */
@@ -15,6 +15,8 @@ import {
 import path from "path"
 import ts from "typescript"
 
+import { parseChangelog } from "../lib/changelog.js"
+import { collectDeprecations, tokenDeprecations } from "../lib/deprecations.js"
 import { cssValue, loadTokens } from "../lib/dtcg.js"
 import {
   mdCode,
@@ -563,6 +565,11 @@ function generateVariables() {
 // ── 5. semantic-tokens.json ─────────────────────────────────────────
 function generateSemanticTokens() {
   const flat = flattenDTCG(semanticTokens)
+  const replacements = new Map(
+    tokenDeprecations(semanticTokens).flatMap((d) =>
+      d.replacement ? [[d.token, d.replacement.token] as const] : []
+    )
+  )
   const result = flat.map((t) => ({
     path: t.path,
     css_var: `--${t.path.replace(/\./g, "-")}`,
@@ -570,6 +577,10 @@ function generateSemanticTokens() {
     dark: darkValue(t) ?? t.$value,
     type: t.$type ?? "",
     status: statusOf(t),
+    // What to use instead, on a deprecated token that names one.
+    ...(replacements.has(t.path)
+      ? { replacement: replacements.get(t.path) }
+      : {}),
     usage: t.$description ?? "",
   }))
   return write("semantic-tokens.json", result)
@@ -1303,6 +1314,22 @@ function generateDsMetadata() {
   })
 }
 
+// ── 16. deprecations.json ───────────────────────────────────────────
+/**
+ * Every token and component export the design system has deprecated, with what
+ * replaces it (`dsaireadable_get_deprecations`). The plugin's lint lists come
+ * from the same data: scripts/build-plugin-deprecations.ts.
+ */
+function generateDeprecations() {
+  return write("deprecations.json", collectDeprecations(ROOT, semanticTokens))
+}
+
+// ── 17. changelog.json ──────────────────────────────────────────────
+/** CHANGELOG.md, one entry per change (`dsaireadable_get_changelog`). */
+function generateChangelog() {
+  return write("changelog.json", parseChangelog(read("CHANGELOG.md")))
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 console.log("🔧 Generating context files...\n")
 
@@ -1360,6 +1387,8 @@ const generators: Array<[string, () => string]> = [
   ["dataviz-decision-tree.json", generateDatavizDecisionTree],
   ["dataviz-catalog.json", generateDatavizCatalog],
   ["ds-metadata.json", generateDsMetadata],
+  ["deprecations.json", generateDeprecations],
+  ["changelog.json", generateChangelog],
 ]
 
 const results: Array<{ file: string; size: string }> = []
