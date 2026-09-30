@@ -8,6 +8,16 @@ export type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
   size?: "sm" | "default"
 }
 
+/**
+ * The browser's own drop-down, the light choice for picking one value out of a short list, especially below `md`.
+ *
+ * @example
+ * <NativeSelect aria-label="Country" defaultValue="">
+ *   <NativeSelectOption value="">Select a country</NativeSelectOption>
+ *   <NativeSelectOption value="fr">France</NativeSelectOption>
+ *   <NativeSelectOption value="us">United States</NativeSelectOption>
+ * </NativeSelect>
+ */
 function NativeSelect({
   className,
   size = "default",
@@ -37,6 +47,15 @@ function NativeSelect({
   )
 }
 
+/**
+ * One choice of a `NativeSelect`; an empty `value` makes it the placeholder.
+ *
+ * @example
+ * <NativeSelect aria-label="Role">
+ *   <NativeSelectOption value="">Select a role</NativeSelectOption>
+ *   <NativeSelectOption value="editor">Editor</NativeSelectOption>
+ * </NativeSelect>
+ */
 function NativeSelectOption({
   className,
   ...props
@@ -51,6 +70,16 @@ function NativeSelectOption({
   )
 }
 
+/**
+ * Groups related `NativeSelectOption`s under a label inside a `NativeSelect`.
+ *
+ * @example
+ * <NativeSelect aria-label="Time zone">
+ *   <NativeSelectOptGroup label="Europe">
+ *     <NativeSelectOption value="paris">Paris</NativeSelectOption>
+ *   </NativeSelectOptGroup>
+ * </NativeSelect>
+ */
 function NativeSelectOptGroup({
   className,
   ...props

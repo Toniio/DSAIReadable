@@ -46,6 +46,12 @@ type SidebarContextProps = {
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null)
 
+/**
+ * Reads the sidebar state and its `toggleSidebar`, `setOpen` and mobile controls from inside a `SidebarProvider`.
+ *
+ * @example
+ * const { state, toggleSidebar } = useSidebar()
+ */
 function useSidebar() {
   const context = React.useContext(SidebarContext)
   if (!context) {
@@ -55,6 +61,15 @@ function useSidebar() {
   return context
 }
 
+/**
+ * Holds the open state, the mobile state and the keyboard shortcut for every sidebar part below it; place it at the root of the layout.
+ *
+ * @example
+ * <SidebarProvider defaultOpen>
+ *   <Sidebar />
+ *   <SidebarInset>Dashboard</SidebarInset>
+ * </SidebarProvider>
+ */
 function SidebarProvider({
   defaultOpen = true,
   open: openProp,
@@ -151,6 +166,14 @@ function SidebarProvider({
   )
 }
 
+/**
+ * The side navigation panel of an app: a sheet on mobile, collapsible on desktop through `collapsible`, on the `side` you choose.
+ *
+ * @example
+ * <Sidebar side="left" collapsible="icon">
+ *   <SidebarContent />
+ * </Sidebar>
+ */
 function Sidebar({
   side = "left",
   variant = "sidebar",
@@ -263,6 +286,12 @@ function Sidebar({
   )
 }
 
+/**
+ * A button that opens and closes the sidebar; translate its `toggleLabel` in an interface that is not in English.
+ *
+ * @example
+ * <SidebarTrigger toggleLabel="Toggle sidebar" />
+ */
 function SidebarTrigger({
   className,
   onClick,
@@ -290,6 +319,15 @@ function SidebarTrigger({
   )
 }
 
+/**
+ * A thin strip on the edge of the sidebar that toggles it when pressed.
+ *
+ * @example
+ * <Sidebar>
+ *   <SidebarContent />
+ *   <SidebarRail />
+ * </Sidebar>
+ */
 function SidebarRail({
   className,
   toggleLabel = UI_STRINGS.sidebar.toggle,
@@ -319,6 +357,15 @@ function SidebarRail({
   )
 }
 
+/**
+ * The main content area next to the `Sidebar`, adapted to its `inset` variant.
+ *
+ * @example
+ * <SidebarProvider>
+ *   <Sidebar variant="inset" />
+ *   <SidebarInset>Your projects</SidebarInset>
+ * </SidebarProvider>
+ */
 function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
   return (
     <main
@@ -332,6 +379,14 @@ function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
   )
 }
 
+/**
+ * A search or filter field inside the sidebar, styled for the sidebar background.
+ *
+ * @example
+ * <SidebarHeader>
+ *   <SidebarInput placeholder="Search projects" />
+ * </SidebarHeader>
+ */
 function SidebarInput({
   className,
   ...props
@@ -346,6 +401,14 @@ function SidebarInput({
   )
 }
 
+/**
+ * The top of the sidebar: holds a logo, a workspace switcher or a search field.
+ *
+ * @example
+ * <Sidebar>
+ *   <SidebarHeader>Acme workspace</SidebarHeader>
+ * </Sidebar>
+ */
 function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -357,6 +420,14 @@ function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The bottom of the sidebar: holds the account menu or secondary actions.
+ *
+ * @example
+ * <Sidebar>
+ *   <SidebarFooter>Maya Johnson</SidebarFooter>
+ * </Sidebar>
+ */
 function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -368,6 +439,16 @@ function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * A divider that sets apart two groups of the sidebar.
+ *
+ * @example
+ * <SidebarContent>
+ *   <SidebarGroup />
+ *   <SidebarSeparator />
+ *   <SidebarGroup />
+ * </SidebarContent>
+ */
 function SidebarSeparator({
   className,
   ...props
@@ -382,6 +463,16 @@ function SidebarSeparator({
   )
 }
 
+/**
+ * The scrollable middle of the sidebar, holding its `SidebarGroup`s.
+ *
+ * @example
+ * <Sidebar>
+ *   <SidebarContent>
+ *     <SidebarGroup />
+ *   </SidebarContent>
+ * </Sidebar>
+ */
 function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -396,6 +487,15 @@ function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * A titled section of the sidebar: a `SidebarGroupLabel` above a `SidebarGroupContent`.
+ *
+ * @example
+ * <SidebarGroup>
+ *   <SidebarGroupLabel>Projects</SidebarGroupLabel>
+ *   <SidebarGroupContent />
+ * </SidebarGroup>
+ */
 function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -407,6 +507,14 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The title of a `SidebarGroup`, hidden when the sidebar collapses to its icons.
+ *
+ * @example
+ * <SidebarGroup>
+ *   <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+ * </SidebarGroup>
+ */
 function SidebarGroupLabel({
   className,
   asChild = false,
@@ -427,6 +535,15 @@ function SidebarGroupLabel({
   )
 }
 
+/**
+ * A button in the corner of a `SidebarGroup` that acts on the whole group, such as creating an item in it.
+ *
+ * @example
+ * <SidebarGroup>
+ *   <SidebarGroupLabel>Projects</SidebarGroupLabel>
+ *   <SidebarGroupAction aria-label="Add project">+</SidebarGroupAction>
+ * </SidebarGroup>
+ */
 function SidebarGroupAction({
   className,
   asChild = false,
@@ -447,6 +564,16 @@ function SidebarGroupAction({
   )
 }
 
+/**
+ * The body of a `SidebarGroup`, wrapping its `SidebarMenu`.
+ *
+ * @example
+ * <SidebarGroup>
+ *   <SidebarGroupContent>
+ *     <SidebarMenu />
+ *   </SidebarGroupContent>
+ * </SidebarGroup>
+ */
 function SidebarGroupContent({
   className,
   ...props
@@ -461,6 +588,16 @@ function SidebarGroupContent({
   )
 }
 
+/**
+ * The list of entries of a `SidebarGroup`, with one `SidebarMenuItem` per entry.
+ *
+ * @example
+ * <SidebarMenu>
+ *   <SidebarMenuItem>
+ *     <SidebarMenuButton>Dashboard</SidebarMenuButton>
+ *   </SidebarMenuItem>
+ * </SidebarMenu>
+ */
 function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
   return (
     <ul
@@ -472,6 +609,15 @@ function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
   )
 }
 
+/**
+ * One entry of a `SidebarMenu`: a `SidebarMenuButton` with an optional action, badge or submenu.
+ *
+ * @example
+ * <SidebarMenuItem>
+ *   <SidebarMenuButton>Inbox</SidebarMenuButton>
+ *   <SidebarMenuBadge>12</SidebarMenuBadge>
+ * </SidebarMenuItem>
+ */
 function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
@@ -504,6 +650,16 @@ const sidebarMenuButtonVariants = cva(
   }
 )
 
+/**
+ * The button or link of a menu entry; set `isActive` on the current page and `tooltip` to name it when the sidebar shows icons only.
+ *
+ * @example
+ * <SidebarMenuItem>
+ *   <SidebarMenuButton isActive tooltip="Dashboard">
+ *     Dashboard
+ *   </SidebarMenuButton>
+ * </SidebarMenuItem>
+ */
 function SidebarMenuButton({
   asChild = false,
   isActive = false,
@@ -554,6 +710,17 @@ function SidebarMenuButton({
   )
 }
 
+/**
+ * A secondary button on a menu entry, shown only on hover when `showOnHover` is set.
+ *
+ * @example
+ * <SidebarMenuItem>
+ *   <SidebarMenuButton>Design review</SidebarMenuButton>
+ *   <SidebarMenuAction showOnHover aria-label="More options">
+ *     ...
+ *   </SidebarMenuAction>
+ * </SidebarMenuItem>
+ */
 function SidebarMenuAction({
   className,
   asChild = false,
@@ -580,6 +747,15 @@ function SidebarMenuAction({
   )
 }
 
+/**
+ * A count or status pinned to the end of a menu entry.
+ *
+ * @example
+ * <SidebarMenuItem>
+ *   <SidebarMenuButton>Notifications</SidebarMenuButton>
+ *   <SidebarMenuBadge>3</SidebarMenuBadge>
+ * </SidebarMenuItem>
+ */
 function SidebarMenuBadge({
   className,
   ...props
@@ -597,6 +773,16 @@ function SidebarMenuBadge({
   )
 }
 
+/**
+ * A placeholder for a menu entry while the list loads; `showIcon` adds an icon block.
+ *
+ * @example
+ * <SidebarMenu>
+ *   <SidebarMenuItem>
+ *     <SidebarMenuSkeleton showIcon />
+ *   </SidebarMenuItem>
+ * </SidebarMenu>
+ */
 function SidebarMenuSkeleton({
   className,
   showIcon = false,
@@ -635,6 +821,17 @@ function SidebarMenuSkeleton({
   )
 }
 
+/**
+ * A nested list of links under a `SidebarMenuItem`, hidden when the sidebar shows icons only.
+ *
+ * @example
+ * <SidebarMenuItem>
+ *   <SidebarMenuButton>Settings</SidebarMenuButton>
+ *   <SidebarMenuSub>
+ *     <SidebarMenuSubItem />
+ *   </SidebarMenuSub>
+ * </SidebarMenuItem>
+ */
 function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
   return (
     <ul
@@ -649,6 +846,16 @@ function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
   )
 }
 
+/**
+ * One entry of a `SidebarMenuSub`, wrapping its `SidebarMenuSubButton`.
+ *
+ * @example
+ * <SidebarMenuSub>
+ *   <SidebarMenuSubItem>
+ *     <SidebarMenuSubButton href="/settings/team">Team</SidebarMenuSubButton>
+ *   </SidebarMenuSubItem>
+ * </SidebarMenuSub>
+ */
 function SidebarMenuSubItem({
   className,
   ...props
@@ -663,6 +870,16 @@ function SidebarMenuSubItem({
   )
 }
 
+/**
+ * The link of a nested entry; set `isActive` on the current page and `size` to `sm` for a denser row.
+ *
+ * @example
+ * <SidebarMenuSubItem>
+ *   <SidebarMenuSubButton href="/settings/billing" isActive>
+ *     Billing
+ *   </SidebarMenuSubButton>
+ * </SidebarMenuSubItem>
+ */
 function SidebarMenuSubButton({
   asChild = false,
   size = "default",

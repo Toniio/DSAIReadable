@@ -3,6 +3,15 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 
+/**
+ * A multi-line text field that grows with its content, for comments, messages and other free-form text.
+ *
+ * @example
+ * <Field>
+ *   <FieldLabel htmlFor="comment">Comment</FieldLabel>
+ *   <Textarea id="comment" placeholder="Share what you think." />
+ * </Field>
+ */
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (
     <textarea

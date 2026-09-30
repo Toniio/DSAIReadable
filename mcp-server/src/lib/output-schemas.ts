@@ -139,7 +139,14 @@ export const componentSpecOutput = forms(
       z.strictObject({ token: z.string(), classes: strings, where: strings })
     ),
     tokens_from: strings,
-    exports: z.array(z.strictObject({ name: z.string(), summary: z.string() })),
+    exports: z.array(
+      z.strictObject({
+        name: z.string(),
+        summary: z.string(),
+        description: z.string(),
+        example: z.string(),
+      })
+    ),
     props: z.array(
       z.strictObject({
         component: z.string(),

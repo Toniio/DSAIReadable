@@ -6,6 +6,24 @@ import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { Separator } from "@/components/ui/separator"
 
+/**
+ * The list container for several `Item`s; it gives each direct `Item` child the list item role.
+ *
+ * @example
+ * <ItemGroup>
+ *   <Item>
+ *     <ItemContent>
+ *       <ItemTitle>Ada Lovelace</ItemTitle>
+ *     </ItemContent>
+ *   </Item>
+ *   <ItemSeparator />
+ *   <Item>
+ *     <ItemContent>
+ *       <ItemTitle>Grace Hopper</ItemTitle>
+ *     </ItemContent>
+ *   </Item>
+ * </ItemGroup>
+ */
 function ItemGroup({
   className,
   children,
@@ -38,6 +56,24 @@ function asListItem(child: React.ReactNode) {
   return React.cloneElement(child, { role: "listitem" })
 }
 
+/**
+ * A horizontal rule between two `Item`s of an `ItemGroup` that marks where one entry ends.
+ *
+ * @example
+ * <ItemGroup>
+ *   <Item>
+ *     <ItemContent>
+ *       <ItemTitle>Inbox</ItemTitle>
+ *     </ItemContent>
+ *   </Item>
+ *   <ItemSeparator />
+ *   <Item>
+ *     <ItemContent>
+ *       <ItemTitle>Drafts</ItemTitle>
+ *     </ItemContent>
+ *   </Item>
+ * </ItemGroup>
+ */
 function ItemSeparator({
   className,
   ...props
@@ -74,6 +110,17 @@ const itemVariants = cva(
   }
 )
 
+/**
+ * One entry of a list, composed of media, content, actions, a header and a footer; use `variant` to frame it and `size` to set its density.
+ *
+ * @example
+ * <Item variant="outline">
+ *   <ItemContent>
+ *     <ItemTitle>Invoice 1042</ItemTitle>
+ *     <ItemDescription>Paid on March 3.</ItemDescription>
+ *   </ItemContent>
+ * </Item>
+ */
 function Item({
   className,
   variant = "default",
@@ -111,6 +158,19 @@ const itemMediaVariants = cva(
   }
 )
 
+/**
+ * The leading visual of an `Item`: an icon or an image that helps people recognize the entry; set `variant` to match.
+ *
+ * @example
+ * <Item>
+ *   <ItemMedia variant="icon">
+ *     <FileTextIcon />
+ *   </ItemMedia>
+ *   <ItemContent>
+ *     <ItemTitle>Quarterly report</ItemTitle>
+ *   </ItemContent>
+ * </Item>
+ */
 function ItemMedia({
   className,
   variant = "default",
@@ -126,6 +186,17 @@ function ItemMedia({
   )
 }
 
+/**
+ * The main column of an `Item` that stacks its `ItemTitle` and `ItemDescription`.
+ *
+ * @example
+ * <Item>
+ *   <ItemContent>
+ *     <ItemTitle>Weekly digest</ItemTitle>
+ *     <ItemDescription>Sent every Monday morning.</ItemDescription>
+ *   </ItemContent>
+ * </Item>
+ */
 function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -139,6 +210,16 @@ function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The name of an `Item`, required in every entry so people and screen readers can tell it apart.
+ *
+ * @example
+ * <Item>
+ *   <ItemContent>
+ *     <ItemTitle>Workspace backup</ItemTitle>
+ *   </ItemContent>
+ * </Item>
+ */
 function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -152,6 +233,15 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The secondary line under an `ItemTitle` that adds a detail, clamped to two lines.
+ *
+ * @example
+ * <ItemContent>
+ *   <ItemTitle>Workspace backup</ItemTitle>
+ *   <ItemDescription>Last saved two hours ago.</ItemDescription>
+ * </ItemContent>
+ */
 function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
@@ -165,6 +255,19 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
+/**
+ * The trailing area of an `Item` for its buttons or badges, limited to three so the row stays scannable.
+ *
+ * @example
+ * <Item>
+ *   <ItemContent>
+ *     <ItemTitle>Design review</ItemTitle>
+ *   </ItemContent>
+ *   <ItemActions>
+ *     <Button size="sm">Open</Button>
+ *   </ItemActions>
+ * </Item>
+ */
 function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -175,6 +278,16 @@ function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * A full-width row above the content of an `Item`, for an image or a label that spans the entry.
+ *
+ * @example
+ * <Item>
+ *   <ItemHeader>
+ *     <ItemTitle>Launch checklist</ItemTitle>
+ *   </ItemHeader>
+ * </Item>
+ */
 function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -188,6 +301,17 @@ function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * A full-width row below the content of an `Item`, for a summary or a secondary action that spans the entry.
+ *
+ * @example
+ * <Item>
+ *   <ItemContent>
+ *     <ItemTitle>Launch checklist</ItemTitle>
+ *   </ItemContent>
+ *   <ItemFooter>3 of 5 tasks done</ItemFooter>
+ * </Item>
+ */
 function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

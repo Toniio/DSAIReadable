@@ -9,6 +9,18 @@ import {
 } from "@phosphor-icons/react"
 
 import { UI_STRINGS } from "@/lib/ui-strings"
+/**
+ * The navigation landmark for a paged result set; it holds no state, so you manage the current page and its URLs.
+ *
+ * @example
+ * <Pagination>
+ *   <PaginationContent>
+ *     <PaginationItem>
+ *       <PaginationLink href="?page=1" isActive>1</PaginationLink>
+ *     </PaginationItem>
+ *   </PaginationContent>
+ * </Pagination>
+ */
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
@@ -21,6 +33,18 @@ function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   )
 }
 
+/**
+ * The list inside a `Pagination` that lines up its items in a row.
+ *
+ * @example
+ * <Pagination>
+ *   <PaginationContent>
+ *     <PaginationItem>
+ *       <PaginationPrevious href="?page=1" />
+ *     </PaginationItem>
+ *   </PaginationContent>
+ * </Pagination>
+ */
 function PaginationContent({
   className,
   ...props
@@ -34,6 +58,16 @@ function PaginationContent({
   )
 }
 
+/**
+ * One entry of the `PaginationContent` list, which wraps a link, a previous or next link, or an ellipsis.
+ *
+ * @example
+ * <PaginationContent>
+ *   <PaginationItem>
+ *     <PaginationLink href="?page=2">2</PaginationLink>
+ *   </PaginationItem>
+ * </PaginationContent>
+ */
 function PaginationItem({ ...props }: React.ComponentProps<"li">) {
   return <li data-slot="pagination-item" {...props} />
 }
@@ -43,6 +77,14 @@ export type PaginationLinkProps = {
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
   React.ComponentProps<"a">
 
+/**
+ * A link to one numbered page; set `isActive` on the current page to mark it with `aria-current`.
+ *
+ * @example
+ * <PaginationItem>
+ *   <PaginationLink href="?page=3" isActive>3</PaginationLink>
+ * </PaginationItem>
+ */
 function PaginationLink({
   className,
   isActive,
@@ -66,6 +108,14 @@ function PaginationLink({
   )
 }
 
+/**
+ * The link to the page before the current one; `text` and `label` translate its visible text and its accessible name.
+ *
+ * @example
+ * <PaginationItem>
+ *   <PaginationPrevious href="?page=2" />
+ * </PaginationItem>
+ */
 function PaginationPrevious({
   className,
   text = UI_STRINGS.pagination.previousText,
@@ -89,6 +139,14 @@ function PaginationPrevious({
   )
 }
 
+/**
+ * The link to the page after the current one; `text` and `label` translate its visible text and its accessible name.
+ *
+ * @example
+ * <PaginationItem>
+ *   <PaginationNext href="?page=4" />
+ * </PaginationItem>
+ */
 function PaginationNext({
   className,
   text = UI_STRINGS.pagination.nextText,
@@ -112,6 +170,14 @@ function PaginationNext({
   )
 }
 
+/**
+ * A marker for the page numbers left out of a long range; `srLabel` translates its hidden text.
+ *
+ * @example
+ * <PaginationItem>
+ *   <PaginationEllipsis />
+ * </PaginationItem>
+ */
 function PaginationEllipsis({
   className,
   srLabel = UI_STRINGS.pagination.ellipsis,

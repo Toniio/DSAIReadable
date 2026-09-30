@@ -168,19 +168,27 @@
     "exports": [
       {
         "name": "Accordion",
-        "summary": "Renders `AccordionPrimitive.Root`."
+        "summary": "Renders `AccordionPrimitive.Root`.",
+        "description": "The root of a stack of collapsible sections; set `type` to `single` or `multiple` to decide how many stay open.",
+        "example": "<Accordion type=\"single\" collapsible>\n  <AccordionItem value=\"shipping\">\n    <AccordionTrigger>Shipping</AccordionTrigger>\n    <AccordionContent>Orders leave our warehouse within two days.</AccordionContent>\n  </AccordionItem>\n</Accordion>"
       },
       {
         "name": "AccordionItem",
-        "summary": "Renders `AccordionPrimitive.Item`."
+        "summary": "Renders `AccordionPrimitive.Item`.",
+        "description": "One section of an `Accordion`, pairing a trigger with its content through a unique `value`.",
+        "example": "<Accordion type=\"single\" collapsible>\n  <AccordionItem value=\"returns\">\n    <AccordionTrigger>Returns</AccordionTrigger>\n    <AccordionContent>You can return any item within 30 days.</AccordionContent>\n  </AccordionItem>\n</Accordion>"
       },
       {
         "name": "AccordionTrigger",
-        "summary": "Renders `AccordionPrimitive.Trigger`."
+        "summary": "Renders `AccordionPrimitive.Trigger`.",
+        "description": "The text button that expands or collapses its `AccordionItem`; always give it a visible label, never an icon alone.",
+        "example": "<Accordion type=\"single\" collapsible>\n  <AccordionItem value=\"billing\">\n    <AccordionTrigger>How does billing work?</AccordionTrigger>\n    <AccordionContent>You are billed on the first of each month.</AccordionContent>\n  </AccordionItem>\n</Accordion>"
       },
       {
         "name": "AccordionContent",
-        "summary": "Renders `AccordionPrimitive.Content`."
+        "summary": "Renders `AccordionPrimitive.Content`.",
+        "description": "The panel an `AccordionTrigger` reveals, holding the detail a reader opens on demand.",
+        "example": "<Accordion type=\"single\" collapsible>\n  <AccordionItem value=\"privacy\">\n    <AccordionTrigger>Who can see my data?</AccordionTrigger>\n    <AccordionContent>Only the people you invite to your workspace.</AccordionContent>\n  </AccordionItem>\n</Accordion>"
       }
     ],
     "props": [
@@ -526,19 +534,27 @@
     "exports": [
       {
         "name": "Alert",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A non-modal banner that tells the user about a state they should notice; `variant` sets its tone: default, destructive, success or warning.",
+        "example": "<Alert variant=\"success\">\n  <AlertTitle>Settings saved</AlertTitle>\n  <AlertDescription>Your changes are live for the whole team.</AlertDescription>\n</Alert>"
       },
       {
         "name": "AlertTitle",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The short headline of an `Alert`, which says what happened in a few words.",
+        "example": "<Alert>\n  <AlertTitle>Session expired</AlertTitle>\n</Alert>"
       },
       {
         "name": "AlertDescription",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The supporting text of an `Alert`, which explains the cause and what the user can do next.",
+        "example": "<Alert variant=\"destructive\">\n  <AlertTitle>Payment failed</AlertTitle>\n  <AlertDescription>Check your card details and try again.</AlertDescription>\n</Alert>"
       },
       {
         "name": "AlertAction",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A slot pinned to the top right of an `Alert` for one compact action, such as a dismiss or undo button.",
+        "example": "<Alert>\n  <AlertTitle>New version available</AlertTitle>\n  <AlertAction>\n    <Button size=\"xs\">Refresh</Button>\n  </AlertAction>\n</Alert>"
       }
     ],
     "props": [
@@ -947,51 +963,75 @@
     "exports": [
       {
         "name": "AlertDialog",
-        "summary": "Renders `AlertDialogPrimitive.Root`."
+        "summary": "Renders `AlertDialogPrimitive.Root`.",
+        "description": "The root of a blocking confirmation: it owns the open state and stops the user until they answer a critical action.",
+        "example": "<AlertDialog>\n  <AlertDialogTrigger asChild>\n    <Button variant=\"destructive\">Delete project</Button>\n  </AlertDialogTrigger>\n  <AlertDialogContent>…</AlertDialogContent>\n</AlertDialog>"
       },
       {
         "name": "AlertDialogAction",
-        "summary": "Renders `AlertDialogPrimitive.Action`."
+        "summary": "Renders `AlertDialogPrimitive.Action`.",
+        "description": "The button that confirms the action and closes the dialog; use `variant` to mark a destructive confirmation.",
+        "example": "<AlertDialogAction variant=\"destructive\">Delete project</AlertDialogAction>"
       },
       {
         "name": "AlertDialogCancel",
-        "summary": "Renders `AlertDialogPrimitive.Cancel`."
+        "summary": "Renders `AlertDialogPrimitive.Cancel`.",
+        "description": "The button that dismisses the dialog without acting; every `AlertDialog` offers one.",
+        "example": "<AlertDialogCancel>Keep project</AlertDialogCancel>"
       },
       {
         "name": "AlertDialogContent",
-        "summary": "Renders `AlertDialogPrimitive.Content`."
+        "summary": "Renders `AlertDialogPrimitive.Content`.",
+        "description": "The modal surface of an `AlertDialog`; use `size` to choose a compact or a standard width.",
+        "example": "<AlertDialogContent size=\"sm\">\n  <AlertDialogHeader>\n    <AlertDialogTitle>Delete this project?</AlertDialogTitle>\n  </AlertDialogHeader>\n</AlertDialogContent>"
       },
       {
         "name": "AlertDialogDescription",
-        "summary": "Renders `AlertDialogPrimitive.Description`."
+        "summary": "Renders `AlertDialogPrimitive.Description`.",
+        "description": "The consequence of the action, in one or two sentences, read after the `AlertDialogTitle`.",
+        "example": "<AlertDialogDescription>\n  The project and its files are removed for everyone on your team.\n</AlertDialogDescription>"
       },
       {
         "name": "AlertDialogFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Holds the `AlertDialogCancel` and `AlertDialogAction` buttons that let the user answer the dialog.",
+        "example": "<AlertDialogFooter>\n  <AlertDialogCancel>Keep project</AlertDialogCancel>\n  <AlertDialogAction>Delete project</AlertDialogAction>\n</AlertDialogFooter>"
       },
       {
         "name": "AlertDialogHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Groups the `AlertDialogTitle`, the `AlertDialogDescription` and an optional `AlertDialogMedia` at the top of the dialog.",
+        "example": "<AlertDialogHeader>\n  <AlertDialogTitle>Delete this project?</AlertDialogTitle>\n  <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>\n</AlertDialogHeader>"
       },
       {
         "name": "AlertDialogMedia",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "An icon or illustration slot in the header that signals the kind of decision, such as a warning.",
+        "example": "<AlertDialogHeader>\n  <AlertDialogMedia>\n    <WarningIcon />\n  </AlertDialogMedia>\n  <AlertDialogTitle>Delete this project?</AlertDialogTitle>\n</AlertDialogHeader>"
       },
       {
         "name": "AlertDialogOverlay",
-        "summary": "Renders `AlertDialogPrimitive.Overlay`."
+        "summary": "Renders `AlertDialogPrimitive.Overlay`.",
+        "description": "The dimmed layer behind an `AlertDialog` that blocks the rest of the interface; `AlertDialogContent` already renders it.",
+        "example": "<AlertDialogPortal>\n  <AlertDialogOverlay />\n</AlertDialogPortal>"
       },
       {
         "name": "AlertDialogPortal",
-        "summary": "Renders `AlertDialogPrimitive.Portal`."
+        "summary": "Renders `AlertDialogPrimitive.Portal`.",
+        "description": "Mounts the dialog outside the page flow; `AlertDialogContent` already includes it, so reach for it only to build a custom surface.",
+        "example": "<AlertDialogPortal>\n  <AlertDialogOverlay />\n</AlertDialogPortal>"
       },
       {
         "name": "AlertDialogTitle",
-        "summary": "Renders `AlertDialogPrimitive.Title`."
+        "summary": "Renders `AlertDialogPrimitive.Title`.",
+        "description": "The name of the `AlertDialog`, announced by screen readers: state the decision as a question.",
+        "example": "<AlertDialogTitle>Delete this project?</AlertDialogTitle>"
       },
       {
         "name": "AlertDialogTrigger",
-        "summary": "Renders `AlertDialogPrimitive.Trigger`."
+        "summary": "Renders `AlertDialogPrimitive.Trigger`.",
+        "description": "The control that opens the `AlertDialog`; pass `asChild` to use your own `Button`.",
+        "example": "<AlertDialogTrigger asChild>\n  <Button variant=\"destructive\">Delete project</Button>\n</AlertDialogTrigger>"
       }
     ],
     "props": [
@@ -1193,7 +1233,9 @@
     "exports": [
       {
         "name": "AspectRatio",
-        "summary": "Renders `AspectRatioPrimitive.Root`."
+        "summary": "Renders `AspectRatioPrimitive.Root`.",
+        "description": "Locks a single media child, such as an image, video or map, to a fixed width-to-height `ratio` so the layout does not shift as it loads.",
+        "example": "<AspectRatio ratio={16 / 9}>\n  <img src=\"/cover.jpg\" alt=\"A mountain lake at sunrise\" className=\"size-full object-cover\" />\n</AspectRatio>"
       }
     ],
     "props": [
@@ -1621,39 +1663,57 @@
     "exports": [
       {
         "name": "Attachment",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The tile for one file sent or received; set `state` from the real upload and `orientation` to lay it out as a row or a card.",
+        "example": "<Attachment state=\"uploading\">\n  <AttachmentMedia>\n    <FilePdfIcon />\n  </AttachmentMedia>\n  <AttachmentContent>\n    <AttachmentTitle>report.pdf</AttachmentTitle>\n    <AttachmentDescription>2.4 MB</AttachmentDescription>\n  </AttachmentContent>\n</Attachment>"
       },
       {
         "name": "AttachmentGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A horizontally scrolling row that lays out several attachments from one message or composer.",
+        "example": "<AttachmentGroup>\n  <Attachment>\n    <AttachmentContent>\n      <AttachmentTitle>report.pdf</AttachmentTitle>\n    </AttachmentContent>\n  </Attachment>\n</AttachmentGroup>"
       },
       {
         "name": "AttachmentMedia",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The icon or preview at the start of an attachment; use `variant=\"image\"` for a thumbnail and the default for a file type icon.",
+        "example": "<Attachment>\n  <AttachmentMedia variant=\"image\">\n    <img src=\"/previews/report.png\" alt=\"\" />\n  </AttachmentMedia>\n</Attachment>"
       },
       {
         "name": "AttachmentContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The wrapper for an attachment's name and details, which truncates long text inside the tile.",
+        "example": "<Attachment>\n  <AttachmentContent>\n    <AttachmentTitle>report.pdf</AttachmentTitle>\n  </AttachmentContent>\n</Attachment>"
       },
       {
         "name": "AttachmentTitle",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "The file name of an attachment, which truncates and shimmers while the file uploads or processes.",
+        "example": "<Attachment state=\"processing\">\n  <AttachmentContent>\n    <AttachmentTitle>budget-2026.xlsx</AttachmentTitle>\n  </AttachmentContent>\n</Attachment>"
       },
       {
         "name": "AttachmentDescription",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "The size, type or failure message under an attachment's name; on `error`, say what failed here.",
+        "example": "<Attachment state=\"error\">\n  <AttachmentContent>\n    <AttachmentTitle>photo.png</AttachmentTitle>\n    <AttachmentDescription>The upload failed. Try again.</AttachmentDescription>\n  </AttachmentContent>\n</Attachment>"
       },
       {
         "name": "AttachmentActions",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The row that holds an attachment's action buttons above `AttachmentTrigger`, with at most two actions in it.",
+        "example": "<Attachment>\n  <AttachmentActions>\n    <AttachmentAction aria-label=\"Remove report.pdf\">\n      <XIcon />\n    </AttachmentAction>\n  </AttachmentActions>\n</Attachment>"
       },
       {
         "name": "AttachmentAction",
-        "summary": "Renders `Button`."
+        "summary": "Renders `Button`.",
+        "description": "An icon button that removes or retries an attachment, named by an `aria-label` that says the action and the file.",
+        "example": "<AttachmentActions>\n  <AttachmentAction aria-label=\"Retry upload of photo.png\" onClick={retry}>\n    <ArrowClockwiseIcon />\n  </AttachmentAction>\n</AttachmentActions>"
       },
       {
         "name": "AttachmentTrigger",
-        "summary": "Renders `<button>`, or its child with `asChild`."
+        "summary": "Renders `<button>`, or its child with `asChild`.",
+        "description": "The button stretched over a whole attachment to open the file, placed last and named with the file name.",
+        "example": "<Attachment>\n  <AttachmentContent>\n    <AttachmentTitle>report.pdf</AttachmentTitle>\n  </AttachmentContent>\n  <AttachmentTrigger aria-label=\"Open report.pdf\" onClick={openFile} />\n</Attachment>"
       }
     ],
     "props": [
@@ -2084,27 +2144,39 @@
     "exports": [
       {
         "name": "Avatar",
-        "summary": "Renders `AvatarPrimitive.Root`."
+        "summary": "Renders `AvatarPrimitive.Root`.",
+        "description": "The stand-in for a person or an entity; use `size` to fit the context, small in lists and large on profiles.",
+        "example": "<Avatar size=\"lg\">\n  <AvatarImage src=\"/team/maria.jpg\" alt=\"Maria Lopez\" />\n  <AvatarFallback>ML</AvatarFallback>\n</Avatar>"
       },
       {
         "name": "AvatarImage",
-        "summary": "Renders `AvatarPrimitive.Image`."
+        "summary": "Renders `AvatarPrimitive.Image`.",
+        "description": "The photo inside an `Avatar`; always give it an `alt` that names the person.",
+        "example": "<Avatar>\n  <AvatarImage src=\"/team/maria.jpg\" alt=\"Maria Lopez\" />\n  <AvatarFallback>ML</AvatarFallback>\n</Avatar>"
       },
       {
         "name": "AvatarFallback",
-        "summary": "Renders `AvatarPrimitive.Fallback`."
+        "summary": "Renders `AvatarPrimitive.Fallback`.",
+        "description": "The initials or icon an `Avatar` shows while the image loads or when it is missing.",
+        "example": "<Avatar>\n  <AvatarFallback>ML</AvatarFallback>\n</Avatar>"
       },
       {
         "name": "AvatarGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Stacks overlapping `Avatar`s to list the participants of a conversation or a project.",
+        "example": "<AvatarGroup>\n  <Avatar>\n    <AvatarFallback>ML</AvatarFallback>\n  </Avatar>\n  <Avatar>\n    <AvatarFallback>JK</AvatarFallback>\n  </Avatar>\n  <AvatarGroupCount>+3</AvatarGroupCount>\n</AvatarGroup>"
       },
       {
         "name": "AvatarGroupCount",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The overflow bubble at the end of an `AvatarGroup` that counts the people who are not shown.",
+        "example": "<AvatarGroup>\n  <Avatar>\n    <AvatarFallback>ML</AvatarFallback>\n  </Avatar>\n  <AvatarGroupCount>+3</AvatarGroupCount>\n</AvatarGroup>"
       },
       {
         "name": "AvatarBadge",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "A small status dot on an `Avatar`, such as online or new activity; label it with `aria-label`.",
+        "example": "<Avatar>\n  <AvatarFallback>ML</AvatarFallback>\n  <AvatarBadge aria-label=\"Online\" />\n</Avatar>"
       }
     ],
     "props": [
@@ -2517,11 +2589,15 @@
     "exports": [
       {
         "name": "Badge",
-        "summary": "Renders `<span>`, or its child with `asChild`."
+        "summary": "Renders `<span>`, or its child with `asChild`.",
+        "description": "A compact label that marks the status or category of an element; use `variant` to say what kind of status it is.",
+        "example": "<Badge variant=\"success\">Paid</Badge>"
       },
       {
         "name": "badgeVariants",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "The classes of a `Badge` for a `variant`, to give another element the same look.",
+        "example": "<a href=\"/changelog\" className={badgeVariants({ variant: \"secondary\" })}>What's new</a>"
       }
     ],
     "props": [
@@ -2766,31 +2842,45 @@
     "exports": [
       {
         "name": "Breadcrumb",
-        "summary": "Renders `<nav>`."
+        "summary": "Renders `<nav>`.",
+        "description": "The navigation landmark for the path to the current page; use one per page, at the top of the main content.",
+        "example": "<Breadcrumb>\n  <BreadcrumbList>\n    <BreadcrumbItem>\n      <BreadcrumbPage>Products</BreadcrumbPage>\n    </BreadcrumbItem>\n  </BreadcrumbList>\n</Breadcrumb>"
       },
       {
         "name": "BreadcrumbList",
-        "summary": "Renders `<ol>`."
+        "summary": "Renders `<ol>`.",
+        "description": "The ordered list inside a `Breadcrumb` that lays out its items and separators in a wrapping row.",
+        "example": "<Breadcrumb>\n  <BreadcrumbList>\n    <BreadcrumbItem>\n      <BreadcrumbLink href=\"/\">Home</BreadcrumbLink>\n    </BreadcrumbItem>\n    <BreadcrumbSeparator />\n    <BreadcrumbItem>\n      <BreadcrumbPage>Products</BreadcrumbPage>\n    </BreadcrumbItem>\n  </BreadcrumbList>\n</Breadcrumb>"
       },
       {
         "name": "BreadcrumbItem",
-        "summary": "Renders `<li>`."
+        "summary": "Renders `<li>`.",
+        "description": "One step of the trail, wrapping a `BreadcrumbLink`, a `BreadcrumbPage` or a `BreadcrumbEllipsis`.",
+        "example": "<BreadcrumbList>\n  <BreadcrumbItem>\n    <BreadcrumbLink href=\"/\">Home</BreadcrumbLink>\n  </BreadcrumbItem>\n</BreadcrumbList>"
       },
       {
         "name": "BreadcrumbLink",
-        "summary": "Renders `<a>`, or its child with `asChild`."
+        "summary": "Renders `<a>`, or its child with `asChild`.",
+        "description": "A link to a parent page in the trail; set `asChild` to render your router's link component instead of an anchor.",
+        "example": "<BreadcrumbItem>\n  <BreadcrumbLink href=\"/products\">Products</BreadcrumbLink>\n</BreadcrumbItem>"
       },
       {
         "name": "BreadcrumbPage",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "The current page, the last step of the trail: it marks the location and is never clickable.",
+        "example": "<BreadcrumbItem>\n  <BreadcrumbPage>Product details</BreadcrumbPage>\n</BreadcrumbItem>"
       },
       {
         "name": "BreadcrumbSeparator",
-        "summary": "Renders `<li>`."
+        "summary": "Renders `<li>`.",
+        "description": "The divider between two steps of the trail; pass `children` to replace the default chevron, and it stays hidden from screen readers.",
+        "example": "<BreadcrumbList>\n  <BreadcrumbItem>\n    <BreadcrumbLink href=\"/\">Home</BreadcrumbLink>\n  </BreadcrumbItem>\n  <BreadcrumbSeparator />\n  <BreadcrumbItem>\n    <BreadcrumbPage>Products</BreadcrumbPage>\n  </BreadcrumbItem>\n</BreadcrumbList>"
       },
       {
         "name": "BreadcrumbEllipsis",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "Stands in for the middle steps of a long trail; `srLabel` sets the text a screen reader announces for it.",
+        "example": "<BreadcrumbItem>\n  <BreadcrumbEllipsis />\n</BreadcrumbItem>"
       }
     ],
     "props": [
@@ -3202,19 +3292,27 @@
     "exports": [
       {
         "name": "BubbleGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Stacks the consecutive bubbles of one turn in a column, inside a `MessageContent`.",
+        "example": "<MessageContent>\n  <BubbleGroup>\n    <Bubble>\n      <BubbleContent>Here is the summary you asked for.</BubbleContent>\n    </Bubble>\n    <Bubble>\n      <BubbleContent>I can also turn it into a checklist.</BubbleContent>\n    </Bubble>\n  </BubbleGroup>\n</MessageContent>"
       },
       {
         "name": "Bubble",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Frames one bubble of a turn and sets, through `variant`, which side of the conversation it speaks for.",
+        "example": "<Bubble variant=\"secondary\">\n  <BubbleContent>Your export is ready to download.</BubbleContent>\n</Bubble>"
       },
       {
         "name": "BubbleContent",
-        "summary": "Renders `<div>`, or its child with `asChild`."
+        "summary": "Renders `<div>`, or its child with `asChild`.",
+        "description": "Holds the text of a `Bubble` and takes its variant colors; use `asChild` to make the bubble a button or a link.",
+        "example": "<Bubble variant=\"muted\">\n  <BubbleContent asChild>\n    <button type=\"button\">Retry sending</button>\n  </BubbleContent>\n</Bubble>"
       },
       {
         "name": "BubbleReactions",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Pins emoji reactions or a count to an edge of a `Bubble`, five at most.",
+        "example": "<Bubble>\n  <BubbleContent>Lunch at noon?</BubbleContent>\n  <BubbleReactions side=\"bottom\" align=\"end\">\n    👍 3\n  </BubbleReactions>\n</Bubble>"
       }
     ],
     "props": [
@@ -3647,11 +3745,15 @@
     "exports": [
       {
         "name": "Button",
-        "summary": "Renders `<button>`, or its child with `asChild`."
+        "summary": "Renders `<button>`, or its child with `asChild`.",
+        "description": "The control that starts an action. Use `variant` to rank it among the actions around it.",
+        "example": "<Button variant=\"outline\" onClick={save}>Save draft</Button>"
       },
       {
         "name": "buttonVariants",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "The classes of a `Button` for a combination of `variant` and `size`, to give another element the same look.",
+        "example": "<a href=\"/pricing\" className={buttonVariants({ variant: \"outline\" })}>See pricing</a>"
       }
     ],
     "props": [
@@ -3871,19 +3973,27 @@
     "exports": [
       {
         "name": "ButtonGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Joins related buttons, inputs or selects into one control; set `orientation=\"vertical\"` to stack them in a column.",
+        "example": "<ButtonGroup>\n  <Button variant=\"outline\">Previous</Button>\n  <Button variant=\"outline\">Next</Button>\n</ButtonGroup>"
       },
       {
         "name": "ButtonGroupSeparator",
-        "summary": "Renders `Separator`."
+        "summary": "Renders `Separator`.",
+        "description": "A divider that splits a button group into sub-groups of related actions.",
+        "example": "<ButtonGroup>\n  <Button variant=\"secondary\">Archive</Button>\n  <ButtonGroupSeparator />\n  <Button variant=\"secondary\">Report</Button>\n</ButtonGroup>"
       },
       {
         "name": "ButtonGroupText",
-        "summary": "Renders `<div>`, or its child with `asChild`."
+        "summary": "Renders `<div>`, or its child with `asChild`.",
+        "description": "A static label joined to the controls of a group, such as a prefix or a unit next to an input.",
+        "example": "<ButtonGroup>\n  <ButtonGroupText>https://</ButtonGroupText>\n  <Input placeholder=\"example.com\" />\n</ButtonGroup>"
       },
       {
         "name": "buttonGroupVariants",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "The classes that merge the borders and corners of adjacent controls for an `orientation`, to join the children of another container.",
+        "example": "<div role=\"group\" className={buttonGroupVariants({ orientation: \"vertical\" })}>\n  <Button variant=\"outline\">Zoom in</Button>\n  <Button variant=\"outline\">Zoom out</Button>\n</div>"
       }
     ],
     "props": [
@@ -4289,11 +4399,15 @@
     "exports": [
       {
         "name": "Calendar",
-        "summary": "Renders `DayPicker`."
+        "summary": "Renders `DayPicker`.",
+        "description": "Picks a date or a date range with month navigation; place it in a `Popover` or a `Card`, it does not position itself.",
+        "example": "<Calendar mode=\"single\" selected={date} onSelect={setDate} />"
       },
       {
         "name": "CalendarDayButton",
-        "summary": "Renders `Button`."
+        "summary": "Renders `Button`.",
+        "description": "The button `Calendar` renders for each day, carrying its selected and range state; wrap it in `components.DayButton` to adjust one day cell.",
+        "example": "<Calendar\n  mode=\"range\"\n  components={{ DayButton: (props) => <CalendarDayButton {...props} /> }}\n/>"
       }
     ],
     "props": [
@@ -4622,31 +4736,45 @@
     "exports": [
       {
         "name": "Card",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A bordered surface that groups one topic: a title, some content and its actions.",
+        "example": "<Card>\n  <CardHeader>\n    <CardTitle>Team settings</CardTitle>\n  </CardHeader>\n  <CardContent>Manage who can edit this project.</CardContent>\n</Card>"
       },
       {
         "name": "CardHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The top of a `Card`: holds the `CardTitle`, the `CardDescription` and an optional `CardAction`.",
+        "example": "<CardHeader>\n  <CardTitle>Billing</CardTitle>\n  <CardDescription>Your plan renews on the first of each month.</CardDescription>\n</CardHeader>"
       },
       {
         "name": "CardFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The bottom of a `Card`: holds the actions that finish its task.",
+        "example": "<CardFooter>\n  <Button>Save changes</Button>\n</CardFooter>"
       },
       {
         "name": "CardTitle",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The heading of a `Card`, inside its `CardHeader`.",
+        "example": "<CardTitle>Team settings</CardTitle>"
       },
       {
         "name": "CardAction",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A control aligned to the end of the `CardHeader`, such as a menu button.",
+        "example": "<CardAction>\n  <Button variant=\"outline\" size=\"sm\">Edit</Button>\n</CardAction>"
       },
       {
         "name": "CardDescription",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A supporting sentence under the `CardTitle`.",
+        "example": "<CardDescription>Choose who can see this project.</CardDescription>"
       },
       {
         "name": "CardContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The body of a `Card`.",
+        "example": "<CardContent>\n  <p>Three people have access to this project.</p>\n</CardContent>"
       }
     ],
     "props": [
@@ -4890,27 +5018,39 @@
     "exports": [
       {
         "name": "Carousel",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A scroller that moves between slides with buttons or the arrow keys; set `orientation` for a horizontal or vertical track.",
+        "example": "<Carousel aria-label=\"Featured products\">\n  <CarouselContent>\n    <CarouselItem>Trail shoes</CarouselItem>\n    <CarouselItem>Rain jacket</CarouselItem>\n  </CarouselContent>\n  <CarouselPrevious />\n  <CarouselNext />\n</Carousel>"
       },
       {
         "name": "CarouselContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The scrolling track of a `Carousel` that holds every `CarouselItem`.",
+        "example": "<Carousel aria-label=\"Customer stories\">\n  <CarouselContent>\n    <CarouselItem>Story one</CarouselItem>\n  </CarouselContent>\n</Carousel>"
       },
       {
         "name": "CarouselItem",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "One slide of a `Carousel`, announced to screen readers as a slide of the carousel.",
+        "example": "<CarouselContent>\n  <CarouselItem>Our first customer story</CarouselItem>\n</CarouselContent>"
       },
       {
         "name": "CarouselPrevious",
-        "summary": "Renders `Button`."
+        "summary": "Renders `Button`.",
+        "description": "The button that scrolls a `Carousel` back one slide; it disables itself at the first slide.",
+        "example": "<Carousel aria-label=\"Photos\">\n  <CarouselContent>\n    <CarouselItem>Photo one</CarouselItem>\n  </CarouselContent>\n  <CarouselPrevious />\n</Carousel>"
       },
       {
         "name": "CarouselNext",
-        "summary": "Renders `Button`."
+        "summary": "Renders `Button`.",
+        "description": "The button that scrolls a `Carousel` forward one slide; it disables itself at the last slide.",
+        "example": "<Carousel aria-label=\"Photos\">\n  <CarouselContent>\n    <CarouselItem>Photo one</CarouselItem>\n  </CarouselContent>\n  <CarouselNext />\n</Carousel>"
       },
       {
         "name": "useCarousel()",
-        "summary": "Returns `CarouselContextProps`."
+        "summary": "Returns `CarouselContextProps`.",
+        "description": "Reads the carousel state, the Embla `api` and the scroll handlers, from a component rendered inside a `Carousel`.",
+        "example": "const { scrollNext, canScrollNext } = useCarousel()"
       }
     ],
     "props": [
@@ -5363,27 +5503,39 @@
     "exports": [
       {
         "name": "ChartContainer",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The responsive frame for one Recharts chart; its `config` names each series and sets the `--color-<key>` colors the chart reads.",
+        "example": "<ChartContainer config={{ revenue: { label: \"Revenue\", color: \"var(--chart-1)\" } }} className=\"min-h-52 w-full\">\n  <BarChart data={[{ month: \"Jan\", revenue: 186 }]}>\n    <Bar dataKey=\"revenue\" fill=\"var(--color-revenue)\" />\n  </BarChart>\n</ChartContainer>"
       },
       {
         "name": "ChartTooltip",
-        "summary": "Type: `(outsideProps: RechartsPrimitive.TooltipProps<RechartsPrimitive.TooltipValueType, NameType>) => React.JSX.Element \\| null`."
+        "summary": "Type: `(outsideProps: RechartsPrimitive.TooltipProps<RechartsPrimitive.TooltipValueType, NameType>) => React.JSX.Element \\| null`.",
+        "description": "The Recharts `Tooltip`, re-exported so a chart shows a card on hover; pass `ChartTooltipContent` as its `content`.",
+        "example": "<ChartTooltip content={<ChartTooltipContent />} />"
       },
       {
         "name": "ChartTooltipContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The themed card `ChartTooltip` shows on hover: it lists each series with its `config` label, color and value.",
+        "example": "<ChartTooltip content={<ChartTooltipContent indicator=\"line\" />} />"
       },
       {
         "name": "ChartLegend",
-        "summary": "Type: `React.MemoExoticComponent<(outsideProps: RechartsPrimitive.LegendProps) => React.ReactPortal \\| null>`."
+        "summary": "Type: `React.MemoExoticComponent<(outsideProps: RechartsPrimitive.LegendProps) => React.ReactPortal \\| null>`.",
+        "description": "The Recharts `Legend`, re-exported so a chart names its series; pass `ChartLegendContent` as its `content`.",
+        "example": "<ChartLegend content={<ChartLegendContent />} />"
       },
       {
         "name": "ChartLegendContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The themed row of `config` labels and color swatches that `ChartLegend` shows to name each series.",
+        "example": "<ChartLegend content={<ChartLegendContent nameKey=\"month\" />} verticalAlign=\"top\" />"
       },
       {
         "name": "ChartStyle",
-        "summary": "Renders `<style>`."
+        "summary": "Renders `<style>`.",
+        "description": "Writes the `--color-<key>` variables for each `config` entry, light and dark; `ChartContainer` renders it, so you rarely use it directly.",
+        "example": "<ChartStyle id=\"chart-revenue\" config={{ revenue: { label: \"Revenue\", color: \"var(--chart-1)\" } }} />"
       }
     ],
     "props": [
@@ -5732,7 +5884,9 @@
     "exports": [
       {
         "name": "Checkbox",
-        "summary": "Renders `CheckboxPrimitive.Root`."
+        "summary": "Renders `CheckboxPrimitive.Root`.",
+        "description": "A two-state or indeterminate choice in a form; pair it with a visible label and never use it for mutually exclusive options.",
+        "example": "<div className=\"flex items-center gap-2\">\n  <Checkbox id=\"terms\" />\n  <Label htmlFor=\"terms\">Accept the terms of use</Label>\n</div>"
       }
     ],
     "props": [
@@ -5887,15 +6041,21 @@
     "exports": [
       {
         "name": "Collapsible",
-        "summary": "Renders `CollapsiblePrimitive.Root`."
+        "summary": "Renders `CollapsiblePrimitive.Root`.",
+        "description": "The root of a single disclosure that shows or hides one section; use `Accordion` when several sections belong together.",
+        "example": "<Collapsible>\n  <CollapsibleTrigger>Show advanced options</CollapsibleTrigger>\n  <CollapsibleContent>Choose how often we sync your data.</CollapsibleContent>\n</Collapsible>"
       },
       {
         "name": "CollapsibleTrigger",
-        "summary": "Renders `CollapsiblePrimitive.CollapsibleTrigger`."
+        "summary": "Renders `CollapsiblePrimitive.CollapsibleTrigger`.",
+        "description": "The control that opens and closes its `Collapsible`; Radix sets `aria-expanded`, so do not manage it yourself.",
+        "example": "<Collapsible>\n  <CollapsibleTrigger>Show details</CollapsibleTrigger>\n  <CollapsibleContent>Your export is ready to download.</CollapsibleContent>\n</Collapsible>"
       },
       {
         "name": "CollapsibleContent",
-        "summary": "Renders `CollapsiblePrimitive.CollapsibleContent`."
+        "summary": "Renders `CollapsiblePrimitive.CollapsibleContent`.",
+        "description": "The section a `CollapsibleTrigger` reveals; keep out of it anything the page needs to be understood at a glance.",
+        "example": "<Collapsible>\n  <CollapsibleTrigger>More options</CollapsibleTrigger>\n  <CollapsibleContent>Send me a summary every Monday.</CollapsibleContent>\n</Collapsible>"
       }
     ],
     "props": [
@@ -6404,67 +6564,99 @@
     "exports": [
       {
         "name": "Combobox",
-        "summary": "Type: `<Value, Multiple extends boolean \\| undefined = false, Item = Value>(props: ComboboxPrimitive.Root.Props<Value, Multiple, Item>) => React.JSX.Element`."
+        "summary": "Type: `<Value, Multiple extends boolean \\| undefined = false, Item = Value>(props: ComboboxPrimitive.Root.Props<Value, Multiple, Item>) => React.JSX.Element`.",
+        "description": "The root that holds the state of a searchable list, for more than 15 options or when the user needs to search.",
+        "example": "<Combobox items={countries}>\n  <ComboboxInput placeholder=\"Select a country\" />\n  <ComboboxContent>\n    <ComboboxEmpty>No countries found.</ComboboxEmpty>\n    <ComboboxList>\n      {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}\n    </ComboboxList>\n  </ComboboxContent>\n</Combobox>"
       },
       {
         "name": "ComboboxInput",
-        "summary": "Renders `ComboboxPrimitive.Input`."
+        "summary": "Renders `ComboboxPrimitive.Input`.",
+        "description": "The text field that filters the list as the user types; set `showClear` when a single value may be emptied.",
+        "example": "<Combobox items={countries}>\n  <ComboboxInput placeholder=\"Select a country\" showClear />\n</Combobox>"
       },
       {
         "name": "ComboboxContent",
-        "summary": "Renders `ComboboxPrimitive.Popup`."
+        "summary": "Renders `ComboboxPrimitive.Popup`.",
+        "description": "The popup that holds the list, placed against its anchor; pass `anchor` from `useComboboxAnchor` when chips are the input.",
+        "example": "<Combobox multiple items={countries}>\n  <ComboboxContent anchor={anchor}>\n    <ComboboxList>\n      {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}\n    </ComboboxList>\n  </ComboboxContent>\n</Combobox>"
       },
       {
         "name": "ComboboxList",
-        "summary": "Renders `ComboboxPrimitive.List`."
+        "summary": "Renders `ComboboxPrimitive.List`.",
+        "description": "The scrolling list of options inside the popup, which takes a render function that maps the items of the `Combobox`.",
+        "example": "<ComboboxContent>\n  <ComboboxList>\n    {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}\n  </ComboboxList>\n</ComboboxContent>"
       },
       {
         "name": "ComboboxItem",
-        "summary": "Renders `ComboboxPrimitive.Item`."
+        "summary": "Renders `ComboboxPrimitive.Item`.",
+        "description": "One selectable option in the list, with a check mark when it is selected; give each a unique `value`.",
+        "example": "<ComboboxList>\n  {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}\n</ComboboxList>"
       },
       {
         "name": "ComboboxGroup",
-        "summary": "Renders `ComboboxPrimitive.Group`."
+        "summary": "Renders `ComboboxPrimitive.Group`.",
+        "description": "Gathers related options of the list under one `ComboboxLabel`, so a long list reads in sections.",
+        "example": "<ComboboxList>\n  {(group) => (\n    <ComboboxGroup key={group.label} items={group.items}>\n      <ComboboxLabel>{group.label}</ComboboxLabel>\n    </ComboboxGroup>\n  )}\n</ComboboxList>"
       },
       {
         "name": "ComboboxLabel",
-        "summary": "Renders `ComboboxPrimitive.GroupLabel`."
+        "summary": "Renders `ComboboxPrimitive.GroupLabel`.",
+        "description": "The heading that names the `ComboboxGroup` of options below it.",
+        "example": "<ComboboxGroup items={group.items}>\n  <ComboboxLabel>Europe</ComboboxLabel>\n</ComboboxGroup>"
       },
       {
         "name": "ComboboxCollection",
-        "summary": "Renders `ComboboxPrimitive.Collection`."
+        "summary": "Renders `ComboboxPrimitive.Collection`.",
+        "description": "Renders the options of one `ComboboxGroup` from its own items, when the list is grouped.",
+        "example": "<ComboboxGroup items={group.items}>\n  <ComboboxLabel>{group.label}</ComboboxLabel>\n  <ComboboxCollection>\n    {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}\n  </ComboboxCollection>\n</ComboboxGroup>"
       },
       {
         "name": "ComboboxEmpty",
-        "summary": "Renders `ComboboxPrimitive.Empty`."
+        "summary": "Renders `ComboboxPrimitive.Empty`.",
+        "description": "The message shown when the filter matches no option; render one in every `Combobox`.",
+        "example": "<ComboboxContent>\n  <ComboboxEmpty>No countries found.</ComboboxEmpty>\n</ComboboxContent>"
       },
       {
         "name": "ComboboxSeparator",
-        "summary": "Renders `ComboboxPrimitive.Separator`."
+        "summary": "Renders `ComboboxPrimitive.Separator`.",
+        "description": "A rule between two groups of options in the list.",
+        "example": "<ComboboxList>\n  <ComboboxGroup items={first}>{renderFirst}</ComboboxGroup>\n  <ComboboxSeparator />\n  <ComboboxGroup items={second}>{renderSecond}</ComboboxGroup>\n</ComboboxList>"
       },
       {
         "name": "ComboboxChips",
-        "summary": "Renders `ComboboxPrimitive.Chips`."
+        "summary": "Renders `ComboboxPrimitive.Chips`.",
+        "description": "The field that holds the chips of a multiple selection and their input; give its ref to `useComboboxAnchor`.",
+        "example": "<Combobox multiple items={countries}>\n  <ComboboxChips ref={anchor}>\n    <ComboboxChipsInput placeholder=\"Add a country\" />\n  </ComboboxChips>\n</Combobox>"
       },
       {
         "name": "ComboboxChip",
-        "summary": "Renders `ComboboxPrimitive.Chip`."
+        "summary": "Renders `ComboboxPrimitive.Chip`.",
+        "description": "One selected value of a multiple selection, with a button that removes it; pass `removeLabel` when its children are not the item's text.",
+        "example": "<ComboboxChips ref={anchor}>\n  <ComboboxChip>Canada</ComboboxChip>\n  <ComboboxChipsInput />\n</ComboboxChips>"
       },
       {
         "name": "ComboboxChipsInput",
-        "summary": "Renders `ComboboxPrimitive.Input`."
+        "summary": "Renders `ComboboxPrimitive.Input`.",
+        "description": "The text field inside `ComboboxChips` that filters the list while chips are shown.",
+        "example": "<ComboboxChips ref={anchor}>\n  <ComboboxChipsInput placeholder=\"Add a country\" />\n</ComboboxChips>"
       },
       {
         "name": "ComboboxTrigger",
-        "summary": "Renders `ComboboxPrimitive.Trigger`."
+        "summary": "Renders `ComboboxPrimitive.Trigger`.",
+        "description": "The button that opens the list when the input is not the way in; it names itself through `triggerLabel` when it has no text.",
+        "example": "<Combobox items={countries}>\n  <ComboboxTrigger triggerLabel=\"Show countries\" />\n</Combobox>"
       },
       {
         "name": "ComboboxValue",
-        "summary": "Renders `ComboboxPrimitive.Value`."
+        "summary": "Renders `ComboboxPrimitive.Value`.",
+        "description": "Shows the selected value inside a custom trigger, when the list opens from a button instead of the input.",
+        "example": "<Combobox items={countries}>\n  <ComboboxTrigger>\n    <ComboboxValue />\n  </ComboboxTrigger>\n</Combobox>"
       },
       {
         "name": "useComboboxAnchor()",
-        "summary": "Returns `React.RefObject<HTMLDivElement \\| null>`."
+        "summary": "Returns `React.RefObject<HTMLDivElement \\| null>`.",
+        "description": "Returns the ref that ties the popup of a multiple selection to its chips, so the list opens below them.",
+        "example": "const anchor = useComboboxAnchor()"
       }
     ],
     "props": [
@@ -6999,39 +7191,57 @@
     "exports": [
       {
         "name": "Command",
-        "summary": "Renders `CommandPrimitive`."
+        "summary": "Renders `CommandPrimitive`.",
+        "description": "A searchable list that filters as the user types, for picking an action or an item from structured options.",
+        "example": "<Command>\n  <CommandInput placeholder=\"Search actions\" />\n  <CommandList>\n    <CommandEmpty>No results found.</CommandEmpty>\n  </CommandList>\n</Command>"
       },
       {
         "name": "CommandDialog",
-        "summary": "Renders `Dialog`."
+        "summary": "Renders `Dialog`.",
+        "description": "A `Command` inside a modal, for a command palette opened with a keyboard shortcut; set `title` and `description` to name it.",
+        "example": "<CommandDialog open={open} onOpenChange={setOpen} title=\"Command palette\">\n  <CommandInput placeholder=\"Search actions\" />\n  <CommandList>\n    <CommandEmpty>No results found.</CommandEmpty>\n  </CommandList>\n</CommandDialog>"
       },
       {
         "name": "CommandInput",
-        "summary": "Renders `CommandPrimitive.Input`, inside a `<div>`."
+        "summary": "Renders `CommandPrimitive.Input`, inside a `<div>`.",
+        "description": "The search field of a `Command`; its text filters the items below it.",
+        "example": "<CommandInput placeholder=\"Search actions\" />"
       },
       {
         "name": "CommandList",
-        "summary": "Renders `CommandPrimitive.List`."
+        "summary": "Renders `CommandPrimitive.List`.",
+        "description": "The scrollable region of a `Command` that holds the groups, the items and the empty state.",
+        "example": "<CommandList>\n  <CommandEmpty>No results found.</CommandEmpty>\n  <CommandGroup heading=\"Actions\">\n    <CommandItem>New project</CommandItem>\n  </CommandGroup>\n</CommandList>"
       },
       {
         "name": "CommandEmpty",
-        "summary": "Renders `CommandPrimitive.Empty`."
+        "summary": "Renders `CommandPrimitive.Empty`.",
+        "description": "The message a `Command` shows when no item matches the search; every `Command` renders one.",
+        "example": "<CommandEmpty>No results found.</CommandEmpty>"
       },
       {
         "name": "CommandGroup",
-        "summary": "Renders `CommandPrimitive.Group`."
+        "summary": "Renders `CommandPrimitive.Group`.",
+        "description": "Gathers related `CommandItem`s under a `heading` so the user can scan the results by category.",
+        "example": "<CommandGroup heading=\"Actions\">\n  <CommandItem>New project</CommandItem>\n  <CommandItem>Invite a teammate</CommandItem>\n</CommandGroup>"
       },
       {
         "name": "CommandItem",
-        "summary": "Renders `CommandPrimitive.Item`."
+        "summary": "Renders `CommandPrimitive.Item`.",
+        "description": "One selectable result of a `Command`; `onSelect` runs when the user picks it by keyboard or pointer.",
+        "example": "<CommandItem onSelect={() => setOpen(false)}>\n  New project\n  <CommandShortcut>⌘N</CommandShortcut>\n</CommandItem>"
       },
       {
         "name": "CommandShortcut",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "A label that shows the keyboard shortcut of a `CommandItem`; it displays the keys and does not bind them.",
+        "example": "<CommandItem>\n  Invite a teammate\n  <CommandShortcut>⌘I</CommandShortcut>\n</CommandItem>"
       },
       {
         "name": "CommandSeparator",
-        "summary": "Renders `CommandPrimitive.Separator`."
+        "summary": "Renders `CommandPrimitive.Separator`.",
+        "description": "A divider between two `CommandGroup`s that marks a change of category.",
+        "example": "<CommandList>\n  <CommandGroup heading=\"Actions\">…</CommandGroup>\n  <CommandSeparator />\n  <CommandGroup heading=\"Settings\">…</CommandGroup>\n</CommandList>"
       }
     ],
     "props": [
@@ -7534,63 +7744,93 @@
     "exports": [
       {
         "name": "ContextMenu",
-        "summary": "Renders `ContextMenuPrimitive.Root`."
+        "summary": "Renders `ContextMenuPrimitive.Root`.",
+        "description": "The root of a right-click menu: wraps a `ContextMenuTrigger` and a `ContextMenuContent` and holds their open state.",
+        "example": "<ContextMenu>\n  <ContextMenuTrigger>Right-click this card</ContextMenuTrigger>\n  <ContextMenuContent>\n    <ContextMenuItem>Copy link</ContextMenuItem>\n  </ContextMenuContent>\n</ContextMenu>"
       },
       {
         "name": "ContextMenuTrigger",
-        "summary": "Renders `ContextMenuPrimitive.Trigger`."
+        "summary": "Renders `ContextMenuPrimitive.Trigger`.",
+        "description": "The area that opens the `ContextMenu` on a right-click, which is the element the menu's actions apply to.",
+        "example": "<ContextMenu>\n  <ContextMenuTrigger>Project notes</ContextMenuTrigger>\n  <ContextMenuContent>\n    <ContextMenuItem>Rename</ContextMenuItem>\n  </ContextMenuContent>\n</ContextMenu>"
       },
       {
         "name": "ContextMenuContent",
-        "summary": "Renders `ContextMenuPrimitive.Content`."
+        "summary": "Renders `ContextMenuPrimitive.Content`.",
+        "description": "The floating panel of a `ContextMenu` that lists the actions for the targeted element.",
+        "example": "<ContextMenuContent>\n  <ContextMenuItem>Copy</ContextMenuItem>\n  <ContextMenuItem>Paste</ContextMenuItem>\n</ContextMenuContent>"
       },
       {
         "name": "ContextMenuItem",
-        "summary": "Renders `ContextMenuPrimitive.Item`."
+        "summary": "Renders `ContextMenuPrimitive.Item`.",
+        "description": "A plain action in a `ContextMenu`; use `variant=\"destructive\"` for an action that removes something.",
+        "example": "<ContextMenuItem variant=\"destructive\">Delete file</ContextMenuItem>"
       },
       {
         "name": "ContextMenuCheckboxItem",
-        "summary": "Renders `ContextMenuPrimitive.CheckboxItem`."
+        "summary": "Renders `ContextMenuPrimitive.CheckboxItem`.",
+        "description": "An item in a `ContextMenu` that turns one option on or off and shows a check while it is on.",
+        "example": "<ContextMenuCheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>\n  Show grid\n</ContextMenuCheckboxItem>"
       },
       {
         "name": "ContextMenuRadioItem",
-        "summary": "Renders `ContextMenuPrimitive.RadioItem`."
+        "summary": "Renders `ContextMenuPrimitive.RadioItem`.",
+        "description": "One choice among several exclusive options in a `ContextMenuRadioGroup`, marked with a check when selected.",
+        "example": "<ContextMenuRadioGroup value=\"name\">\n  <ContextMenuRadioItem value=\"name\">Sort by name</ContextMenuRadioItem>\n  <ContextMenuRadioItem value=\"date\">Sort by date</ContextMenuRadioItem>\n</ContextMenuRadioGroup>"
       },
       {
         "name": "ContextMenuLabel",
-        "summary": "Renders `ContextMenuPrimitive.Label`."
+        "summary": "Renders `ContextMenuPrimitive.Label`.",
+        "description": "A non-interactive heading that names the section of items below it in a `ContextMenu`.",
+        "example": "<ContextMenuLabel>Arrange</ContextMenuLabel>"
       },
       {
         "name": "ContextMenuSeparator",
-        "summary": "Renders `ContextMenuPrimitive.Separator`."
+        "summary": "Renders `ContextMenuPrimitive.Separator`.",
+        "description": "A thin rule that splits a `ContextMenu` into groups of related actions.",
+        "example": "<ContextMenuItem>Duplicate</ContextMenuItem>\n<ContextMenuSeparator />\n<ContextMenuItem variant=\"destructive\">Delete</ContextMenuItem>"
       },
       {
         "name": "ContextMenuShortcut",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "The keyboard shortcut of an item, pushed to the end of its row so people learn the faster route.",
+        "example": "<ContextMenuItem>\n  Copy\n  <ContextMenuShortcut>⌘C</ContextMenuShortcut>\n</ContextMenuItem>"
       },
       {
         "name": "ContextMenuGroup",
-        "summary": "Renders `ContextMenuPrimitive.Group`."
+        "summary": "Renders `ContextMenuPrimitive.Group`.",
+        "description": "Groups related items of a `ContextMenu` so assistive technology announces them together.",
+        "example": "<ContextMenuGroup>\n  <ContextMenuItem>Cut</ContextMenuItem>\n  <ContextMenuItem>Copy</ContextMenuItem>\n</ContextMenuGroup>"
       },
       {
         "name": "ContextMenuPortal",
-        "summary": "Renders `ContextMenuPrimitive.Portal`."
+        "summary": "Renders `ContextMenuPrimitive.Portal`.",
+        "description": "Renders its children outside the DOM hierarchy of the menu, for content that must escape a clipping ancestor.",
+        "example": "<ContextMenuPortal>\n  <ContextMenuSubContent>\n    <ContextMenuItem>Share by email</ContextMenuItem>\n  </ContextMenuSubContent>\n</ContextMenuPortal>"
       },
       {
         "name": "ContextMenuSub",
-        "summary": "Renders `ContextMenuPrimitive.Sub`."
+        "summary": "Renders `ContextMenuPrimitive.Sub`.",
+        "description": "The root of a nested menu inside a `ContextMenu`: pairs a `ContextMenuSubTrigger` with a `ContextMenuSubContent`.",
+        "example": "<ContextMenuSub>\n  <ContextMenuSubTrigger>Share</ContextMenuSubTrigger>\n  <ContextMenuSubContent>\n    <ContextMenuItem>Copy link</ContextMenuItem>\n  </ContextMenuSubContent>\n</ContextMenuSub>"
       },
       {
         "name": "ContextMenuSubContent",
-        "summary": "Renders `ContextMenuPrimitive.SubContent`."
+        "summary": "Renders `ContextMenuPrimitive.SubContent`.",
+        "description": "The panel of a submenu, opened by its `ContextMenuSubTrigger`, that lists the nested actions.",
+        "example": "<ContextMenuSubContent>\n  <ContextMenuItem>Export as PDF</ContextMenuItem>\n  <ContextMenuItem>Export as CSV</ContextMenuItem>\n</ContextMenuSubContent>"
       },
       {
         "name": "ContextMenuSubTrigger",
-        "summary": "Renders `ContextMenuPrimitive.SubTrigger`."
+        "summary": "Renders `ContextMenuPrimitive.SubTrigger`.",
+        "description": "The item that opens a submenu, shown with an arrow at its end; use it to keep a long list of actions short.",
+        "example": "<ContextMenuSub>\n  <ContextMenuSubTrigger>Move to</ContextMenuSubTrigger>\n  <ContextMenuSubContent>\n    <ContextMenuItem>Archive</ContextMenuItem>\n  </ContextMenuSubContent>\n</ContextMenuSub>"
       },
       {
         "name": "ContextMenuRadioGroup",
-        "summary": "Renders `ContextMenuPrimitive.RadioGroup`."
+        "summary": "Renders `ContextMenuPrimitive.RadioGroup`.",
+        "description": "Holds the `value` of a set of `ContextMenuRadioItem`s so that exactly one option is selected.",
+        "example": "<ContextMenuRadioGroup value={view} onValueChange={setView}>\n  <ContextMenuRadioItem value=\"list\">List view</ContextMenuRadioItem>\n  <ContextMenuRadioItem value=\"grid\">Grid view</ContextMenuRadioItem>\n</ContextMenuRadioGroup>"
       }
     ],
     "props": [
@@ -8039,43 +8279,63 @@
     "exports": [
       {
         "name": "Dialog",
-        "summary": "Renders `DialogPrimitive.Root`."
+        "summary": "Renders `DialogPrimitive.Root`.",
+        "description": "The root of a modal window for a form, details or a confirmation; it owns the open state.",
+        "example": "<Dialog>\n  <DialogTrigger asChild>\n    <Button>Edit profile</Button>\n  </DialogTrigger>\n  <DialogContent>…</DialogContent>\n</Dialog>"
       },
       {
         "name": "DialogClose",
-        "summary": "Renders `DialogPrimitive.Close`."
+        "summary": "Renders `DialogPrimitive.Close`.",
+        "description": "A control that closes the `Dialog` when pressed, such as a cancel button in the footer.",
+        "example": "<DialogClose asChild>\n  <Button variant=\"outline\">Cancel</Button>\n</DialogClose>"
       },
       {
         "name": "DialogContent",
-        "summary": "Renders `DialogPrimitive.Content`."
+        "summary": "Renders `DialogPrimitive.Content`.",
+        "description": "The modal surface of a `Dialog`; it shows a close button unless `showCloseButton` is false, and `closeLabel` names it.",
+        "example": "<DialogContent closeLabel=\"Close\">\n  <DialogHeader>\n    <DialogTitle>Edit profile</DialogTitle>\n  </DialogHeader>\n</DialogContent>"
       },
       {
         "name": "DialogDescription",
-        "summary": "Renders `DialogPrimitive.Description`."
+        "summary": "Renders `DialogPrimitive.Description`.",
+        "description": "A supporting sentence under the `DialogTitle` that explains what the dialog asks of the user.",
+        "example": "<DialogDescription>\n  Update how your name appears to your team.\n</DialogDescription>"
       },
       {
         "name": "DialogFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Holds the actions that finish the dialog's task; set `showCloseButton` to add a cancel button.",
+        "example": "<DialogFooter showCloseButton>\n  <Button>Save changes</Button>\n</DialogFooter>"
       },
       {
         "name": "DialogHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Groups the `DialogTitle` and the `DialogDescription` at the top of the dialog.",
+        "example": "<DialogHeader>\n  <DialogTitle>Edit profile</DialogTitle>\n  <DialogDescription>Update how your name appears to your team.</DialogDescription>\n</DialogHeader>"
       },
       {
         "name": "DialogOverlay",
-        "summary": "Renders `DialogPrimitive.Overlay`."
+        "summary": "Renders `DialogPrimitive.Overlay`.",
+        "description": "The dimmed layer behind a `Dialog` that separates it from the page; `DialogContent` already renders it.",
+        "example": "<DialogPortal>\n  <DialogOverlay />\n</DialogPortal>"
       },
       {
         "name": "DialogPortal",
-        "summary": "Renders `DialogPrimitive.Portal`."
+        "summary": "Renders `DialogPrimitive.Portal`.",
+        "description": "Mounts the dialog outside the page flow; `DialogContent` already includes it, so reach for it only to build a custom surface.",
+        "example": "<DialogPortal>\n  <DialogOverlay />\n</DialogPortal>"
       },
       {
         "name": "DialogTitle",
-        "summary": "Renders `DialogPrimitive.Title`."
+        "summary": "Renders `DialogPrimitive.Title`.",
+        "description": "The name of the `Dialog`, announced by screen readers; every `Dialog` renders one.",
+        "example": "<DialogTitle>Edit profile</DialogTitle>"
       },
       {
         "name": "DialogTrigger",
-        "summary": "Renders `DialogPrimitive.Trigger`."
+        "summary": "Renders `DialogPrimitive.Trigger`.",
+        "description": "The control that opens the `Dialog`; pass `asChild` to use your own `Button`.",
+        "example": "<DialogTrigger asChild>\n  <Button>Edit profile</Button>\n</DialogTrigger>"
       }
     ],
     "props": [
@@ -8272,11 +8532,15 @@
     "exports": [
       {
         "name": "DirectionProvider",
-        "summary": "Renders `Direction.DirectionProvider`."
+        "summary": "Renders `Direction.DirectionProvider`.",
+        "description": "Passes the reading direction to every Radix component below it; wrap the app or a section with it to support right-to-left languages.",
+        "example": "<DirectionProvider direction=\"rtl\">\n  <App />\n</DirectionProvider>"
       },
       {
         "name": "useDirection",
-        "summary": "Type: `(localDir?: Direction) => Direction`."
+        "summary": "Type: `(localDir?: Direction) => Direction`.",
+        "description": "Reads the reading direction from the nearest `DirectionProvider`, for a component that mirrors its own layout.",
+        "example": "const direction = useDirection()"
       }
     ],
     "props": [
@@ -8610,43 +8874,63 @@
     "exports": [
       {
         "name": "Drawer",
-        "summary": "Renders `DrawerPrimitive.Root`."
+        "summary": "Renders `DrawerPrimitive.Root`.",
+        "description": "A panel that slides in from a screen edge and follows the user's swipe; use it below `md`, and pick the edge with `direction`.",
+        "example": "<Drawer>\n  <DrawerTrigger asChild>\n    <Button>Filters</Button>\n  </DrawerTrigger>\n  <DrawerContent>\n    <DrawerTitle>Filters</DrawerTitle>\n  </DrawerContent>\n</Drawer>"
       },
       {
         "name": "DrawerPortal",
-        "summary": "Renders `DrawerPrimitive.Portal`."
+        "summary": "Renders `DrawerPrimitive.Portal`.",
+        "description": "Mounts the drawer layers at the end of the document body, outside the parent's layout.",
+        "example": "<DrawerPortal>\n  <DrawerOverlay />\n</DrawerPortal>"
       },
       {
         "name": "DrawerOverlay",
-        "summary": "Renders `DrawerPrimitive.Overlay`."
+        "summary": "Renders `DrawerPrimitive.Overlay`.",
+        "description": "The dimmed backdrop behind an open `Drawer` that keeps the page underneath out of reach.",
+        "example": "<DrawerPortal>\n  <DrawerOverlay />\n</DrawerPortal>"
       },
       {
         "name": "DrawerTrigger",
-        "summary": "Renders `DrawerPrimitive.Trigger`."
+        "summary": "Renders `DrawerPrimitive.Trigger`.",
+        "description": "The element that opens its `Drawer` when the user activates it.",
+        "example": "<Drawer>\n  <DrawerTrigger asChild>\n    <Button>Open settings</Button>\n  </DrawerTrigger>\n</Drawer>"
       },
       {
         "name": "DrawerClose",
-        "summary": "Renders `DrawerPrimitive.Close`."
+        "summary": "Renders `DrawerPrimitive.Close`.",
+        "description": "The element that closes its `Drawer` when the user activates it, such as a cancel or done button.",
+        "example": "<DrawerFooter>\n  <DrawerClose asChild>\n    <Button variant=\"outline\">Cancel</Button>\n  </DrawerClose>\n</DrawerFooter>"
       },
       {
         "name": "DrawerContent",
-        "summary": "Renders `DrawerPrimitive.Content`."
+        "summary": "Renders `DrawerPrimitive.Content`.",
+        "description": "The sliding panel of a `Drawer`, which brings its own portal and overlay and holds the header, body and footer.",
+        "example": "<Drawer>\n  <DrawerContent>\n    <DrawerHeader>\n      <DrawerTitle>Sort results</DrawerTitle>\n    </DrawerHeader>\n  </DrawerContent>\n</Drawer>"
       },
       {
         "name": "DrawerHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The top of a `DrawerContent`: groups the `DrawerTitle` and the `DrawerDescription`.",
+        "example": "<DrawerHeader>\n  <DrawerTitle>Notifications</DrawerTitle>\n  <DrawerDescription>Choose what we send to your phone.</DrawerDescription>\n</DrawerHeader>"
       },
       {
         "name": "DrawerFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The bottom of a `DrawerContent`: stacks the actions that confirm or dismiss the drawer.",
+        "example": "<DrawerFooter>\n  <Button>Apply filters</Button>\n  <DrawerClose asChild>\n    <Button variant=\"outline\">Cancel</Button>\n  </DrawerClose>\n</DrawerFooter>"
       },
       {
         "name": "DrawerTitle",
-        "summary": "Renders `DrawerPrimitive.Title`."
+        "summary": "Renders `DrawerPrimitive.Title`.",
+        "description": "The name of a `Drawer`, which screen readers announce when it opens.",
+        "example": "<DrawerHeader>\n  <DrawerTitle>Edit profile</DrawerTitle>\n</DrawerHeader>"
       },
       {
         "name": "DrawerDescription",
-        "summary": "Renders `DrawerPrimitive.Description`."
+        "summary": "Renders `DrawerPrimitive.Description`.",
+        "description": "The supporting line under a `DrawerTitle` that says what the drawer is for.",
+        "example": "<DrawerHeader>\n  <DrawerTitle>Edit profile</DrawerTitle>\n  <DrawerDescription>Update how your name appears to others.</DrawerDescription>\n</DrawerHeader>"
       }
     ],
     "props": [
@@ -9139,63 +9423,93 @@
     "exports": [
       {
         "name": "DropdownMenu",
-        "summary": "Renders `DropdownMenuPrimitive.Root`."
+        "summary": "Renders `DropdownMenuPrimitive.Root`.",
+        "description": "The root of a menu that opens from a button and lists actions or choices; use `ContextMenu` for right-click menus.",
+        "example": "<DropdownMenu>\n  <DropdownMenuTrigger asChild>\n    <Button variant=\"outline\">Options</Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuItem>Rename</DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>"
       },
       {
         "name": "DropdownMenuPortal",
-        "summary": "Renders `DropdownMenuPrimitive.Portal`."
+        "summary": "Renders `DropdownMenuPrimitive.Portal`.",
+        "description": "Mounts its children outside the current DOM tree for a custom layer; `DropdownMenuContent` already wraps itself in one.",
+        "example": "<DropdownMenu>\n  <DropdownMenuTrigger>Options</DropdownMenuTrigger>\n  <DropdownMenuPortal>\n    <DropdownMenuContent>\n      <DropdownMenuItem>Rename</DropdownMenuItem>\n    </DropdownMenuContent>\n  </DropdownMenuPortal>\n</DropdownMenu>"
       },
       {
         "name": "DropdownMenuTrigger",
-        "summary": "Renders `DropdownMenuPrimitive.Trigger`."
+        "summary": "Renders `DropdownMenuPrimitive.Trigger`.",
+        "description": "The element that opens the `DropdownMenu`; set `asChild` to make your own `Button` the trigger.",
+        "example": "<DropdownMenu>\n  <DropdownMenuTrigger asChild>\n    <Button variant=\"outline\">Options</Button>\n  </DropdownMenuTrigger>\n</DropdownMenu>"
       },
       {
         "name": "DropdownMenuContent",
-        "summary": "Renders `DropdownMenuPrimitive.Content`."
+        "summary": "Renders `DropdownMenuPrimitive.Content`.",
+        "description": "The floating panel that holds the menu's items, aligned to its trigger and matching the trigger's width by default.",
+        "example": "<DropdownMenuContent align=\"end\">\n  <DropdownMenuItem>Rename</DropdownMenuItem>\n  <DropdownMenuItem>Duplicate</DropdownMenuItem>\n</DropdownMenuContent>"
       },
       {
         "name": "DropdownMenuGroup",
-        "summary": "Renders `DropdownMenuPrimitive.Group`."
+        "summary": "Renders `DropdownMenuPrimitive.Group`.",
+        "description": "Groups related items inside `DropdownMenuContent` so assistive technology announces them as one set.",
+        "example": "<DropdownMenuGroup>\n  <DropdownMenuItem>Profile</DropdownMenuItem>\n  <DropdownMenuItem>Settings</DropdownMenuItem>\n</DropdownMenuGroup>"
       },
       {
         "name": "DropdownMenuLabel",
-        "summary": "Renders `DropdownMenuPrimitive.Label`."
+        "summary": "Renders `DropdownMenuPrimitive.Label`.",
+        "description": "A non-interactive heading that names the group of items below it.",
+        "example": "<DropdownMenuContent>\n  <DropdownMenuLabel>My account</DropdownMenuLabel>\n  <DropdownMenuItem>Profile</DropdownMenuItem>\n</DropdownMenuContent>"
       },
       {
         "name": "DropdownMenuItem",
-        "summary": "Renders `DropdownMenuPrimitive.Item`."
+        "summary": "Renders `DropdownMenuPrimitive.Item`.",
+        "description": "One action in the menu; set `variant` to `destructive` for an action that removes something, and `inset` to align it with checkable items.",
+        "example": "<DropdownMenuContent>\n  <DropdownMenuItem>Rename</DropdownMenuItem>\n  <DropdownMenuItem variant=\"destructive\">Delete project</DropdownMenuItem>\n</DropdownMenuContent>"
       },
       {
         "name": "DropdownMenuCheckboxItem",
-        "summary": "Renders `DropdownMenuPrimitive.CheckboxItem`."
+        "summary": "Renders `DropdownMenuPrimitive.CheckboxItem`.",
+        "description": "A menu item that toggles one option on or off through `checked`, for choices that can combine.",
+        "example": "<DropdownMenuCheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>\n  Show grid\n</DropdownMenuCheckboxItem>"
       },
       {
         "name": "DropdownMenuRadioGroup",
-        "summary": "Renders `DropdownMenuPrimitive.RadioGroup`."
+        "summary": "Renders `DropdownMenuPrimitive.RadioGroup`.",
+        "description": "Holds `DropdownMenuRadioItem`s so exactly one is selected; bind it with `value` and `onValueChange`.",
+        "example": "<DropdownMenuRadioGroup value={sort} onValueChange={setSort}>\n  <DropdownMenuRadioItem value=\"newest\">Newest first</DropdownMenuRadioItem>\n  <DropdownMenuRadioItem value=\"oldest\">Oldest first</DropdownMenuRadioItem>\n</DropdownMenuRadioGroup>"
       },
       {
         "name": "DropdownMenuRadioItem",
-        "summary": "Renders `DropdownMenuPrimitive.RadioItem`."
+        "summary": "Renders `DropdownMenuPrimitive.RadioItem`.",
+        "description": "A menu item for one exclusive choice inside a `DropdownMenuRadioGroup`, marked with a check when selected.",
+        "example": "<DropdownMenuRadioGroup value=\"newest\">\n  <DropdownMenuRadioItem value=\"newest\">Newest first</DropdownMenuRadioItem>\n</DropdownMenuRadioGroup>"
       },
       {
         "name": "DropdownMenuSeparator",
-        "summary": "Renders `DropdownMenuPrimitive.Separator`."
+        "summary": "Renders `DropdownMenuPrimitive.Separator`.",
+        "description": "A thin line that splits the menu into sets of related items.",
+        "example": "<DropdownMenuContent>\n  <DropdownMenuItem>Profile</DropdownMenuItem>\n  <DropdownMenuSeparator />\n  <DropdownMenuItem>Sign out</DropdownMenuItem>\n</DropdownMenuContent>"
       },
       {
         "name": "DropdownMenuShortcut",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "Shows the keyboard shortcut of an item at its end; it is a hint only and does not bind the keys.",
+        "example": "<DropdownMenuItem>\n  New project\n  <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>\n</DropdownMenuItem>"
       },
       {
         "name": "DropdownMenuSub",
-        "summary": "Renders `DropdownMenuPrimitive.Sub`."
+        "summary": "Renders `DropdownMenuPrimitive.Sub`.",
+        "description": "The root of a nested menu that opens from an item; pair it with `DropdownMenuSubTrigger` and `DropdownMenuSubContent`.",
+        "example": "<DropdownMenuSub>\n  <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>\n  <DropdownMenuSubContent>\n    <DropdownMenuItem>Copy link</DropdownMenuItem>\n  </DropdownMenuSubContent>\n</DropdownMenuSub>"
       },
       {
         "name": "DropdownMenuSubTrigger",
-        "summary": "Renders `DropdownMenuPrimitive.SubTrigger`."
+        "summary": "Renders `DropdownMenuPrimitive.SubTrigger`.",
+        "description": "The item that opens a nested `DropdownMenuSub`; a caret at its end tells the user more choices follow.",
+        "example": "<DropdownMenuSub>\n  <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>\n  <DropdownMenuSubContent>\n    <DropdownMenuItem>Email</DropdownMenuItem>\n  </DropdownMenuSubContent>\n</DropdownMenuSub>"
       },
       {
         "name": "DropdownMenuSubContent",
-        "summary": "Renders `DropdownMenuPrimitive.SubContent`."
+        "summary": "Renders `DropdownMenuPrimitive.SubContent`.",
+        "description": "The floating panel of a nested menu, holding the items a `DropdownMenuSubTrigger` opens.",
+        "example": "<DropdownMenuSub>\n  <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>\n  <DropdownMenuSubContent>\n    <DropdownMenuItem>Copy link</DropdownMenuItem>\n    <DropdownMenuItem>Email</DropdownMenuItem>\n  </DropdownMenuSubContent>\n</DropdownMenuSub>"
       }
     ],
     "props": [
@@ -9617,27 +9931,39 @@
     "exports": [
       {
         "name": "Empty",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The root of an empty state: use it once per view when a list, table or section has no data yet.",
+        "example": "<Empty>\n  <EmptyHeader>\n    <EmptyTitle>No projects yet</EmptyTitle>\n    <EmptyDescription>Create your first project to get started.</EmptyDescription>\n  </EmptyHeader>\n</Empty>"
       },
       {
         "name": "EmptyHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Groups the `EmptyMedia`, `EmptyTitle` and `EmptyDescription` that say what is missing and why.",
+        "example": "<Empty>\n  <EmptyHeader>\n    <EmptyTitle>No results found</EmptyTitle>\n    <EmptyDescription>Try a different search term.</EmptyDescription>\n  </EmptyHeader>\n</Empty>"
       },
       {
         "name": "EmptyTitle",
-        "summary": "Renders `<h2>`, or the element chosen with `as`."
+        "summary": "Renders `<h2>`, or the element chosen with `as`.",
+        "description": "The heading of an empty state; set `as` so its level follows the heading of the section that holds it.",
+        "example": "<EmptyTitle as=\"h3\">No messages yet</EmptyTitle>"
       },
       {
         "name": "EmptyDescription",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "One or two sentences under the `EmptyTitle` that frame the action the user can take next.",
+        "example": "<EmptyDescription>Invite a teammate to start a conversation.</EmptyDescription>"
       },
       {
         "name": "EmptyContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Holds the actions of an empty state, such as a create `Button` or a link to the documentation.",
+        "example": "<EmptyContent>\n  <Button>Create a project</Button>\n</EmptyContent>"
       },
       {
         "name": "EmptyMedia",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A decorative visual for an empty state; use `variant=\"icon\"` to set a Phosphor icon on a muted square.",
+        "example": "<EmptyMedia variant=\"icon\">\n  <FolderOpenIcon />\n</EmptyMedia>"
       }
     ],
     "props": [
@@ -10130,43 +10456,63 @@
     "exports": [
       {
         "name": "Field",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Ties one label to its control and carries the invalid state; set `data-invalid` from your validation and `orientation` to choose the layout.",
+        "example": "<Field data-invalid=\"true\">\n  <FieldLabel htmlFor=\"email\">Email address</FieldLabel>\n  <Input id=\"email\" type=\"email\" aria-invalid=\"true\" />\n  <FieldError>Enter a valid email address.</FieldError>\n</Field>"
       },
       {
         "name": "FieldLabel",
-        "summary": "Renders `Label`."
+        "summary": "Renders `Label`.",
+        "description": "The label of a `Field`: use it, not `FieldTitle`, to tie text to a control through `htmlFor`.",
+        "example": "<Field>\n  <FieldLabel htmlFor=\"name\">Full name</FieldLabel>\n  <Input id=\"name\" />\n</Field>"
       },
       {
         "name": "FieldDescription",
-        "summary": "Renders `<p>`."
+        "summary": "Renders `<p>`.",
+        "description": "Standing help text under a control that explains what to enter; use `FieldError` for a validation message.",
+        "example": "<Field>\n  <FieldLabel htmlFor=\"email\">Email address</FieldLabel>\n  <Input id=\"email\" type=\"email\" />\n  <FieldDescription>We only use it to send receipts.</FieldDescription>\n</Field>"
       },
       {
         "name": "FieldError",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A validation message announced as an alert; pass `children` or an `errors` list, and it renders nothing when both are empty.",
+        "example": "<Field data-invalid=\"true\">\n  <FieldLabel htmlFor=\"password\">Password</FieldLabel>\n  <Input id=\"password\" type=\"password\" aria-invalid=\"true\" />\n  <FieldError errors={[{ message: \"Use at least 8 characters.\" }]} />\n</Field>"
       },
       {
         "name": "FieldGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Stacks several `Field`s with even spacing and supplies the container width that `responsive` fields read.",
+        "example": "<FieldGroup>\n  <Field>\n    <FieldLabel htmlFor=\"first-name\">First name</FieldLabel>\n    <Input id=\"first-name\" />\n  </Field>\n  <Field>\n    <FieldLabel htmlFor=\"last-name\">Last name</FieldLabel>\n    <Input id=\"last-name\" />\n  </Field>\n</FieldGroup>"
       },
       {
         "name": "FieldLegend",
-        "summary": "Renders `<legend>`."
+        "summary": "Renders `<legend>`.",
+        "description": "The caption of a `FieldSet`; use `variant` `legend` for a fieldset and `label` everywhere else.",
+        "example": "<FieldSet>\n  <FieldLegend>Shipping method</FieldLegend>\n</FieldSet>"
       },
       {
         "name": "FieldSeparator",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A rule that splits a `FieldGroup` into parts; pass `children` to print a short label, such as `Or`, on it.",
+        "example": "<FieldGroup>\n  <Field>\n    <Button>Continue with email</Button>\n  </Field>\n  <FieldSeparator>Or</FieldSeparator>\n  <Field>\n    <Button variant=\"outline\">Continue with Google</Button>\n  </Field>\n</FieldGroup>"
       },
       {
         "name": "FieldSet",
-        "summary": "Renders `<fieldset>`."
+        "summary": "Renders `<fieldset>`.",
+        "description": "Groups related controls in a semantic `fieldset`, such as the options of one multiple choice; nest it at most two levels deep.",
+        "example": "<FieldSet>\n  <FieldLegend>Notifications</FieldLegend>\n  <FieldGroup>\n    <Field orientation=\"horizontal\">\n      <Checkbox id=\"email\" />\n      <FieldLabel htmlFor=\"email\">Email me about new replies</FieldLabel>\n    </Field>\n  </FieldGroup>\n</FieldSet>"
       },
       {
         "name": "FieldContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Wraps an option's title and description in one column when the control sits beside them.",
+        "example": "<Field orientation=\"horizontal\">\n  <Checkbox id=\"updates\" />\n  <FieldContent>\n    <FieldLabel htmlFor=\"updates\">Product updates</FieldLabel>\n    <FieldDescription>Hear about new features once a month.</FieldDescription>\n  </FieldContent>\n</Field>"
       },
       {
         "name": "FieldTitle",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Titles an option inside a `FieldLabel` or `FieldContent`; it is not a `label` and ties to no control.",
+        "example": "<FieldLabel htmlFor=\"plan-pro\">\n  <Field orientation=\"horizontal\">\n    <FieldContent>\n      <FieldTitle>Pro plan</FieldTitle>\n      <FieldDescription>Unlimited projects for your team.</FieldDescription>\n    </FieldContent>\n    <RadioGroupItem value=\"pro\" id=\"plan-pro\" />\n  </Field>\n</FieldLabel>"
       }
     ],
     "props": [
@@ -10534,11 +10880,15 @@
     "exports": [
       {
         "name": "Heading",
-        "summary": "Renders `<h{level}>`, or the element chosen with `as`."
+        "summary": "Renders `<h{level}>`, or the element chosen with `as`.",
+        "description": "A semantic heading in the heading typeface, where `level` sets both the tag and the size and `as` changes only the tag.",
+        "example": "<Heading level={2}>Team settings</Heading>"
       },
       {
         "name": "headingVariants",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "The classes of a `Heading` for a `level`, to give another element a heading's size and typeface.",
+        "example": "<p className={headingVariants({ level: 3 })}>Recent activity</p>"
       }
     ],
     "props": [
@@ -10755,15 +11105,21 @@
     "exports": [
       {
         "name": "HoverCard",
-        "summary": "Renders `HoverCardPrimitive.Root`."
+        "summary": "Renders `HoverCardPrimitive.Root`.",
+        "description": "The root of a preview that appears when the pointer rests on a trigger, for extra information the user can do without.",
+        "example": "<HoverCard>\n  <HoverCardTrigger asChild>\n    <a href=\"/team/maria\">Maria Lopez</a>\n  </HoverCardTrigger>\n  <HoverCardContent>…</HoverCardContent>\n</HoverCard>"
       },
       {
         "name": "HoverCardTrigger",
-        "summary": "Renders `HoverCardPrimitive.Trigger`."
+        "summary": "Renders `HoverCardPrimitive.Trigger`.",
+        "description": "The element whose hover or focus opens the `HoverCard`; pass `asChild` to keep your own link.",
+        "example": "<HoverCardTrigger asChild>\n  <a href=\"/team/maria\">Maria Lopez</a>\n</HoverCardTrigger>"
       },
       {
         "name": "HoverCardContent",
-        "summary": "Renders `HoverCardPrimitive.Content`."
+        "summary": "Renders `HoverCardPrimitive.Content`.",
+        "description": "The floating preview of a `HoverCard`; it holds read-only supplementary content, and `align` and `sideOffset` place it.",
+        "example": "<HoverCardContent align=\"start\">\n  <p>Maria leads the design team and joined in 2021.</p>\n</HoverCardContent>"
       }
     ],
     "props": [
@@ -10931,7 +11287,9 @@
     "exports": [
       {
         "name": "Illustration",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A placeholder panel for split-screen pages, empty states and error pages, described to assistive technology through `alt`.",
+        "example": "<Illustration alt=\"A dashed frame waiting for an image\" className=\"h-64 w-full\" />"
       }
     ],
     "props": [
@@ -11191,7 +11549,9 @@
     "exports": [
       {
         "name": "Input",
-        "summary": "Renders `<input>`."
+        "summary": "Renders `<input>`.",
+        "description": "Takes a single line of text or a file; pair it with a `Label` through `id` and set `aria-invalid` to show an error.",
+        "example": "<>\n  <Label htmlFor=\"email\">Email address</Label>\n  <Input id=\"email\" type=\"email\" placeholder=\"you@example.com\" />\n</>"
       }
     ],
     "props": [
@@ -11561,27 +11921,39 @@
     "exports": [
       {
         "name": "InputGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A bordered field that joins an input or textarea with add-ons (icons, text, buttons) so they read as one control.",
+        "example": "<InputGroup>\n  <InputGroupAddon>\n    <InputGroupText>https://</InputGroupText>\n  </InputGroupAddon>\n  <InputGroupInput placeholder=\"example.com\" />\n</InputGroup>"
       },
       {
         "name": "InputGroupAddon",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Places an icon, text or button beside or above the field of an `InputGroup`; use `align` to choose the side.",
+        "example": "<InputGroup>\n  <InputGroupInput placeholder=\"Search projects\" />\n  <InputGroupAddon align=\"inline-end\">12 results</InputGroupAddon>\n</InputGroup>"
       },
       {
         "name": "InputGroupButton",
-        "summary": "Renders `Button`."
+        "summary": "Renders `Button`.",
+        "description": "A compact button for an action inside an `InputGroupAddon`, such as clearing the field or showing a password.",
+        "example": "<InputGroup>\n  <InputGroupInput type=\"password\" aria-label=\"Password\" />\n  <InputGroupAddon align=\"inline-end\">\n    <InputGroupButton>Show</InputGroupButton>\n  </InputGroupAddon>\n</InputGroup>"
       },
       {
         "name": "InputGroupText",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "Static text inside an `InputGroupAddon`, such as a prefix, a unit or a character count.",
+        "example": "<InputGroupAddon align=\"inline-end\">\n  <InputGroupText>USD</InputGroupText>\n</InputGroupAddon>"
       },
       {
         "name": "InputGroupInput",
-        "summary": "Renders `Input`."
+        "summary": "Renders `Input`.",
+        "description": "The single-line field of an `InputGroup`; the group draws its focus and invalid state.",
+        "example": "<InputGroup>\n  <InputGroupInput type=\"email\" placeholder=\"you@example.com\" aria-label=\"Email address\" />\n</InputGroup>"
       },
       {
         "name": "InputGroupTextarea",
-        "summary": "Renders `Textarea`."
+        "summary": "Renders `Textarea`.",
+        "description": "The multi-line field of an `InputGroup`, for add-ons placed above or below a longer message.",
+        "example": "<InputGroup>\n  <InputGroupTextarea placeholder=\"Write a reply\" aria-label=\"Reply\" />\n  <InputGroupAddon align=\"block-end\">\n    <InputGroupButton>Send reply</InputGroupButton>\n  </InputGroupAddon>\n</InputGroup>"
       }
     ],
     "props": [
@@ -11906,19 +12278,27 @@
     "exports": [
       {
         "name": "InputOTP",
-        "summary": "Renders `OTPInput`."
+        "summary": "Renders `OTPInput`.",
+        "description": "A segmented field for a one-time passcode of a fixed length; set `maxLength` to the number of characters.",
+        "example": "<InputOTP maxLength={6} aria-label=\"Verification code\">\n  <InputOTPGroup>\n    <InputOTPSlot index={0} />\n    <InputOTPSlot index={1} />\n    <InputOTPSlot index={2} />\n  </InputOTPGroup>\n</InputOTP>"
       },
       {
         "name": "InputOTPGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Joins adjacent `InputOTPSlot`s into one visual block, so a long code reads as short runs of characters.",
+        "example": "<InputOTP maxLength={4} aria-label=\"PIN\">\n  <InputOTPGroup>\n    <InputOTPSlot index={0} />\n    <InputOTPSlot index={1} />\n    <InputOTPSlot index={2} />\n    <InputOTPSlot index={3} />\n  </InputOTPGroup>\n</InputOTP>"
       },
       {
         "name": "InputOTPSlot",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Shows one character of the code at the position given by `index`, with the caret and the active highlight.",
+        "example": "<InputOTPGroup>\n  <InputOTPSlot index={0} />\n  <InputOTPSlot index={1} />\n</InputOTPGroup>"
       },
       {
         "name": "InputOTPSeparator",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A dash between two `InputOTPGroup`s that splits a code into runs, like 3 + 3.",
+        "example": "<InputOTP maxLength={6} aria-label=\"Verification code\">\n  <InputOTPGroup>\n    <InputOTPSlot index={0} />\n    <InputOTPSlot index={1} />\n    <InputOTPSlot index={2} />\n  </InputOTPGroup>\n  <InputOTPSeparator />\n  <InputOTPGroup>\n    <InputOTPSlot index={3} />\n    <InputOTPSlot index={4} />\n    <InputOTPSlot index={5} />\n  </InputOTPGroup>\n</InputOTP>"
       }
     ],
     "props": [
@@ -12346,43 +12726,63 @@
     "exports": [
       {
         "name": "Item",
-        "summary": "Renders `<div>`, or its child with `asChild`."
+        "summary": "Renders `<div>`, or its child with `asChild`.",
+        "description": "One entry of a list, composed of media, content, actions, a header and a footer; use `variant` to frame it and `size` to set its density.",
+        "example": "<Item variant=\"outline\">\n  <ItemContent>\n    <ItemTitle>Invoice 1042</ItemTitle>\n    <ItemDescription>Paid on March 3.</ItemDescription>\n  </ItemContent>\n</Item>"
       },
       {
         "name": "ItemMedia",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The leading visual of an `Item`: an icon or an image that helps people recognize the entry; set `variant` to match.",
+        "example": "<Item>\n  <ItemMedia variant=\"icon\">\n    <FileTextIcon />\n  </ItemMedia>\n  <ItemContent>\n    <ItemTitle>Quarterly report</ItemTitle>\n  </ItemContent>\n</Item>"
       },
       {
         "name": "ItemContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The main column of an `Item` that stacks its `ItemTitle` and `ItemDescription`.",
+        "example": "<Item>\n  <ItemContent>\n    <ItemTitle>Weekly digest</ItemTitle>\n    <ItemDescription>Sent every Monday morning.</ItemDescription>\n  </ItemContent>\n</Item>"
       },
       {
         "name": "ItemActions",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The trailing area of an `Item` for its buttons or badges, limited to three so the row stays scannable.",
+        "example": "<Item>\n  <ItemContent>\n    <ItemTitle>Design review</ItemTitle>\n  </ItemContent>\n  <ItemActions>\n    <Button size=\"sm\">Open</Button>\n  </ItemActions>\n</Item>"
       },
       {
         "name": "ItemGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The list container for several `Item`s; it gives each direct `Item` child the list item role.",
+        "example": "<ItemGroup>\n  <Item>\n    <ItemContent>\n      <ItemTitle>Ada Lovelace</ItemTitle>\n    </ItemContent>\n  </Item>\n  <ItemSeparator />\n  <Item>\n    <ItemContent>\n      <ItemTitle>Grace Hopper</ItemTitle>\n    </ItemContent>\n  </Item>\n</ItemGroup>"
       },
       {
         "name": "ItemSeparator",
-        "summary": "Renders `Separator`."
+        "summary": "Renders `Separator`.",
+        "description": "A horizontal rule between two `Item`s of an `ItemGroup` that marks where one entry ends.",
+        "example": "<ItemGroup>\n  <Item>\n    <ItemContent>\n      <ItemTitle>Inbox</ItemTitle>\n    </ItemContent>\n  </Item>\n  <ItemSeparator />\n  <Item>\n    <ItemContent>\n      <ItemTitle>Drafts</ItemTitle>\n    </ItemContent>\n  </Item>\n</ItemGroup>"
       },
       {
         "name": "ItemTitle",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The name of an `Item`, required in every entry so people and screen readers can tell it apart.",
+        "example": "<Item>\n  <ItemContent>\n    <ItemTitle>Workspace backup</ItemTitle>\n  </ItemContent>\n</Item>"
       },
       {
         "name": "ItemDescription",
-        "summary": "Renders `<p>`."
+        "summary": "Renders `<p>`.",
+        "description": "The secondary line under an `ItemTitle` that adds a detail, clamped to two lines.",
+        "example": "<ItemContent>\n  <ItemTitle>Workspace backup</ItemTitle>\n  <ItemDescription>Last saved two hours ago.</ItemDescription>\n</ItemContent>"
       },
       {
         "name": "ItemHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A full-width row above the content of an `Item`, for an image or a label that spans the entry.",
+        "example": "<Item>\n  <ItemHeader>\n    <ItemTitle>Launch checklist</ItemTitle>\n  </ItemHeader>\n</Item>"
       },
       {
         "name": "ItemFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A full-width row below the content of an `Item`, for a summary or a secondary action that spans the entry.",
+        "example": "<Item>\n  <ItemContent>\n    <ItemTitle>Launch checklist</ItemTitle>\n  </ItemContent>\n  <ItemFooter>3 of 5 tasks done</ItemFooter>\n</Item>"
       }
     ],
     "props": [
@@ -12730,11 +13130,15 @@
     "exports": [
       {
         "name": "Kbd",
-        "summary": "Renders `<kbd>`."
+        "summary": "Renders `<kbd>`.",
+        "description": "An inline label for a single keyboard key, shown next to an action or inside a `Tooltip`.",
+        "example": "<p>\n  Search with <Kbd>⌘</Kbd>\n</p>"
       },
       {
         "name": "KbdGroup",
-        "summary": "Renders `<kbd>`."
+        "summary": "Renders `<kbd>`.",
+        "description": "Joins several `Kbd` keys into one shortcut, such as a modifier plus a letter.",
+        "example": "<KbdGroup>\n  <Kbd>⌘</Kbd>\n  <Kbd>Shift</Kbd>\n  <Kbd>P</Kbd>\n</KbdGroup>"
       }
     ],
     "props": [
@@ -12880,7 +13284,9 @@
     "exports": [
       {
         "name": "Label",
-        "summary": "Renders `LabelPrimitive.Root`."
+        "summary": "Renders `LabelPrimitive.Root`.",
+        "description": "Names a form control through `htmlFor`; every field needs a visible one, a `placeholder` does not replace it.",
+        "example": "<>\n  <Label htmlFor=\"name\">Full name</Label>\n  <Input id=\"name\" />\n</>"
       }
     ],
     "props": [
@@ -13151,7 +13557,9 @@
     "exports": [
       {
         "name": "Logo",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The brand mark pictogram, a placeholder until the real brand assets exist; set `size` to fit its surroundings.",
+        "example": "<Logo size=\"lg\" />"
       }
     ],
     "props": [
@@ -13376,19 +13784,27 @@
     "exports": [
       {
         "name": "Marker",
-        "summary": "Renders `<div>`, or its child with `asChild`."
+        "summary": "Renders `<div>`, or its child with `asChild`.",
+        "description": "A muted line that marks an event in a conversation, such as a date or a resumed session; `variant` picks the plain, separator or border line.",
+        "example": "<Marker variant=\"separator\">\n  <MarkerContent>Today</MarkerContent>\n</Marker>"
       },
       {
         "name": "MarkerIcon",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "A Phosphor icon placed before the `MarkerContent`, hidden from screen readers because the text carries the meaning.",
+        "example": "<Marker>\n  <MarkerIcon>\n    <MagnifyingGlassIcon />\n  </MarkerIcon>\n  <MarkerContent>Searched 4 sources</MarkerContent>\n</Marker>"
       },
       {
         "name": "MarkerContent",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "The one-line text of a `Marker`, and the only part a screen reader announces.",
+        "example": "<Marker>\n  <MarkerContent>Conversation resumed</MarkerContent>\n</Marker>"
       },
       {
         "name": "markerVariants",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "Returns the class names of a `Marker` line, to give another element the plain, separator or border look.",
+        "example": "<div className={markerVariants({ variant: \"border\" })}>Conversation resumed</div>"
       }
     ],
     "props": [
@@ -13867,67 +14283,99 @@
     "exports": [
       {
         "name": "Menubar",
-        "summary": "Renders `MenubarPrimitive.Root`."
+        "summary": "Renders `MenubarPrimitive.Root`.",
+        "description": "A horizontal bar of drop-down menus for the commands of a desktop-style application, such as File, Edit and View.",
+        "example": "<Menubar>\n  <MenubarMenu>\n    <MenubarTrigger>File</MenubarTrigger>\n    <MenubarContent>\n      <MenubarItem>New file</MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n</Menubar>"
       },
       {
         "name": "MenubarPortal",
-        "summary": "Renders `MenubarPrimitive.Portal`."
+        "summary": "Renders `MenubarPrimitive.Portal`.",
+        "description": "Renders menu content in a portal outside its parent, which `MenubarContent` already does for you.",
+        "example": "<MenubarPortal>\n  <MenubarContent>\n    <MenubarItem>Open recent</MenubarItem>\n  </MenubarContent>\n</MenubarPortal>"
       },
       {
         "name": "MenubarMenu",
-        "summary": "Renders `MenubarPrimitive.Menu`."
+        "summary": "Renders `MenubarPrimitive.Menu`.",
+        "description": "One menu of the bar: it pairs a `MenubarTrigger` with the `MenubarContent` that the trigger opens.",
+        "example": "<MenubarMenu>\n  <MenubarTrigger>Edit</MenubarTrigger>\n  <MenubarContent>\n    <MenubarItem>Undo</MenubarItem>\n  </MenubarContent>\n</MenubarMenu>"
       },
       {
         "name": "MenubarTrigger",
-        "summary": "Renders `MenubarPrimitive.Trigger`."
+        "summary": "Renders `MenubarPrimitive.Trigger`.",
+        "description": "The button in the bar that opens its menu; its label names the set of commands, such as File.",
+        "example": "<MenubarMenu>\n  <MenubarTrigger>View</MenubarTrigger>\n  <MenubarContent>\n    <MenubarItem>Zoom in</MenubarItem>\n  </MenubarContent>\n</MenubarMenu>"
       },
       {
         "name": "MenubarContent",
-        "summary": "Renders `MenubarPrimitive.Content`."
+        "summary": "Renders `MenubarPrimitive.Content`.",
+        "description": "The floating list of a menu, which holds its items, groups, labels and separators.",
+        "example": "<MenubarContent>\n  <MenubarItem>Save</MenubarItem>\n  <MenubarItem>Save as</MenubarItem>\n</MenubarContent>"
       },
       {
         "name": "MenubarGroup",
-        "summary": "Renders `MenubarPrimitive.Group`."
+        "summary": "Renders `MenubarPrimitive.Group`.",
+        "description": "Groups related `MenubarItem`s inside a menu so that assistive technology reads them together.",
+        "example": "<MenubarGroup>\n  <MenubarItem>Cut</MenubarItem>\n  <MenubarItem>Copy</MenubarItem>\n  <MenubarItem>Paste</MenubarItem>\n</MenubarGroup>"
       },
       {
         "name": "MenubarSeparator",
-        "summary": "Renders `MenubarPrimitive.Separator`."
+        "summary": "Renders `MenubarPrimitive.Separator`.",
+        "description": "A thin line that divides sets of unrelated commands inside a menu.",
+        "example": "<MenubarContent>\n  <MenubarItem>Save</MenubarItem>\n  <MenubarSeparator />\n  <MenubarItem>Close window</MenubarItem>\n</MenubarContent>"
       },
       {
         "name": "MenubarLabel",
-        "summary": "Renders `MenubarPrimitive.Label`."
+        "summary": "Renders `MenubarPrimitive.Label`.",
+        "description": "A non-interactive caption that names the section of items below it.",
+        "example": "<MenubarContent>\n  <MenubarLabel>Recent files</MenubarLabel>\n  <MenubarItem>Quarterly report</MenubarItem>\n</MenubarContent>"
       },
       {
         "name": "MenubarItem",
-        "summary": "Renders `MenubarPrimitive.Item`."
+        "summary": "Renders `MenubarPrimitive.Item`.",
+        "description": "A command in a menu; set `variant=\"destructive\"` for an irreversible action.",
+        "example": "<MenubarItem variant=\"destructive\">Delete project</MenubarItem>"
       },
       {
         "name": "MenubarShortcut",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "Shows the keyboard shortcut of a `MenubarItem`; wire a real handler for every shortcut it displays.",
+        "example": "<MenubarItem>\n  New window\n  <MenubarShortcut>⌘N</MenubarShortcut>\n</MenubarItem>"
       },
       {
         "name": "MenubarCheckboxItem",
-        "summary": "Renders `MenubarPrimitive.CheckboxItem`."
+        "summary": "Renders `MenubarPrimitive.CheckboxItem`.",
+        "description": "A menu item that turns an option on or off and shows a check mark while it is on.",
+        "example": "<MenubarCheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>\n  Show grid\n</MenubarCheckboxItem>"
       },
       {
         "name": "MenubarRadioGroup",
-        "summary": "Renders `MenubarPrimitive.RadioGroup`."
+        "summary": "Renders `MenubarPrimitive.RadioGroup`.",
+        "description": "Groups `MenubarRadioItem`s into one exclusive choice, controlled through `value` and `onValueChange`.",
+        "example": "<MenubarRadioGroup value={zoom} onValueChange={setZoom}>\n  <MenubarRadioItem value=\"fit\">Fit to window</MenubarRadioItem>\n  <MenubarRadioItem value=\"full\">Actual size</MenubarRadioItem>\n</MenubarRadioGroup>"
       },
       {
         "name": "MenubarRadioItem",
-        "summary": "Renders `MenubarPrimitive.RadioItem`."
+        "summary": "Renders `MenubarPrimitive.RadioItem`.",
+        "description": "One option of a `MenubarRadioGroup`, marked with a check when it is the selected one.",
+        "example": "<MenubarRadioGroup value=\"fit\">\n  <MenubarRadioItem value=\"fit\">Fit to window</MenubarRadioItem>\n</MenubarRadioGroup>"
       },
       {
         "name": "MenubarSub",
-        "summary": "Renders `MenubarPrimitive.Sub`."
+        "summary": "Renders `MenubarPrimitive.Sub`.",
+        "description": "Wraps a nested submenu: it pairs a `MenubarSubTrigger` with the `MenubarSubContent` it opens.",
+        "example": "<MenubarSub>\n  <MenubarSubTrigger>Share</MenubarSubTrigger>\n  <MenubarSubContent>\n    <MenubarItem>Email link</MenubarItem>\n  </MenubarSubContent>\n</MenubarSub>"
       },
       {
         "name": "MenubarSubTrigger",
-        "summary": "Renders `MenubarPrimitive.SubTrigger`."
+        "summary": "Renders `MenubarPrimitive.SubTrigger`.",
+        "description": "The menu item that opens a submenu and shows a caret; keep nesting to two levels at most.",
+        "example": "<MenubarSub>\n  <MenubarSubTrigger>Export</MenubarSubTrigger>\n  <MenubarSubContent>\n    <MenubarItem>As PDF</MenubarItem>\n  </MenubarSubContent>\n</MenubarSub>"
       },
       {
         "name": "MenubarSubContent",
-        "summary": "Renders `MenubarPrimitive.SubContent`."
+        "summary": "Renders `MenubarPrimitive.SubContent`.",
+        "description": "The floating list of a submenu, opened by its `MenubarSubTrigger`.",
+        "example": "<MenubarSubContent>\n  <MenubarItem>As PDF</MenubarItem>\n  <MenubarItem>As image</MenubarItem>\n</MenubarSubContent>"
       }
     ],
     "props": [
@@ -14314,27 +14762,39 @@
     "exports": [
       {
         "name": "MessageGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Stacks the consecutive turns of one speaker in a column.",
+        "example": "<MessageGroup>\n  <Message>\n    <MessageContent>\n      <Bubble variant=\"secondary\">\n        <BubbleContent>Your report is ready.</BubbleContent>\n      </Bubble>\n    </MessageContent>\n  </Message>\n</MessageGroup>"
       },
       {
         "name": "Message",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Lays out one turn of a conversation and aligns it to the start, or to the end with `align` for the user's own turns.",
+        "example": "<Message align=\"end\">\n  <MessageContent>\n    <Bubble>\n      <BubbleContent>Can you send me the latest numbers?</BubbleContent>\n    </Bubble>\n  </MessageContent>\n</Message>"
       },
       {
         "name": "MessageAvatar",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Frames the speaker's `Avatar` at the bottom of a turn, lifted above the `MessageFooter` when there is one.",
+        "example": "<Message>\n  <MessageAvatar>\n    <Avatar>\n      <AvatarFallback>MJ</AvatarFallback>\n    </Avatar>\n  </MessageAvatar>\n</Message>"
       },
       {
         "name": "MessageContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Holds the `Bubble`s, attachments and other content of a turn, inside its `Message`.",
+        "example": "<Message>\n  <MessageContent>\n    <Bubble variant=\"secondary\">\n      <BubbleContent>Your plan renews on the first of each month.</BubbleContent>\n    </Bubble>\n  </MessageContent>\n</Message>"
       },
       {
         "name": "MessageFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Shows a status or actions below the content of a turn, such as whether it was read or edited.",
+        "example": "<Message align=\"end\">\n  <MessageContent>\n    <Bubble>\n      <BubbleContent>See you tomorrow.</BubbleContent>\n    </Bubble>\n    <MessageFooter>Read</MessageFooter>\n  </MessageContent>\n</Message>"
       },
       {
         "name": "MessageHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Names the speaker or shows the time above the content of a turn.",
+        "example": "<Message>\n  <MessageContent>\n    <MessageHeader>Maya Johnson, 9:41 AM</MessageHeader>\n    <Bubble variant=\"secondary\">\n      <BubbleContent>Good morning, the draft is ready.</BubbleContent>\n    </Bubble>\n  </MessageContent>\n</Message>"
       }
     ],
     "props": [
@@ -14606,39 +15066,57 @@
     "exports": [
       {
         "name": "MessageScrollerProvider",
-        "summary": "Renders `MessageScrollerPrimitive.Provider`."
+        "summary": "Renders `MessageScrollerPrimitive.Provider`.",
+        "description": "Holds the scroll state that the scroller's parts and hooks read, so wrap the whole scroller in it.",
+        "example": "<MessageScrollerProvider>\n  <MessageScroller>\n    <MessageScrollerViewport>\n      <MessageScrollerContent>{messages}</MessageScrollerContent>\n    </MessageScrollerViewport>\n  </MessageScroller>\n</MessageScrollerProvider>"
       },
       {
         "name": "MessageScroller",
-        "summary": "Renders `MessageScrollerPrimitive.Root`."
+        "summary": "Renders `MessageScrollerPrimitive.Root`.",
+        "description": "The bounded panel that fills its parent, follows new messages and positions the jump buttons over the viewport.",
+        "example": "<MessageScroller>\n  <MessageScrollerViewport>\n    <MessageScrollerContent>{messages}</MessageScrollerContent>\n  </MessageScrollerViewport>\n  <MessageScrollerButton />\n</MessageScroller>"
       },
       {
         "name": "MessageScrollerViewport",
-        "summary": "Renders `MessageScrollerPrimitive.Viewport`."
+        "summary": "Renders `MessageScrollerPrimitive.Viewport`.",
+        "description": "The scrolling region of a thread, named for assistive technology, which stays at the end while the reader is there.",
+        "example": "<MessageScroller>\n  <MessageScrollerViewport>\n    <MessageScrollerContent>{messages}</MessageScrollerContent>\n  </MessageScrollerViewport>\n</MessageScroller>"
       },
       {
         "name": "MessageScrollerContent",
-        "summary": "Renders `MessageScrollerPrimitive.Content`."
+        "summary": "Renders `MessageScrollerPrimitive.Content`.",
+        "description": "The column that stacks the messages of a thread with a gap between them, inside the viewport.",
+        "example": "<MessageScrollerViewport>\n  <MessageScrollerContent>\n    <MessageScrollerItem messageId=\"m1\">Welcome back.</MessageScrollerItem>\n  </MessageScrollerContent>\n</MessageScrollerViewport>"
       },
       {
         "name": "MessageScrollerItem",
-        "summary": "Renders `MessageScrollerPrimitive.Item`."
+        "summary": "Renders `MessageScrollerPrimitive.Item`.",
+        "description": "One message of a thread; give it a stable `messageId` when code scrolls to it or reads its visibility.",
+        "example": "<MessageScrollerContent>\n  <MessageScrollerItem messageId=\"m42\" scrollAnchor>\n    Your export is ready.\n  </MessageScrollerItem>\n</MessageScrollerContent>"
       },
       {
         "name": "MessageScrollerButton",
-        "summary": "Renders `MessageScrollerPrimitive.Button`."
+        "summary": "Renders `MessageScrollerPrimitive.Button`.",
+        "description": "The button that jumps to the latest message, or to the first with `direction=\"start\"`, and hides while that end is in view.",
+        "example": "<MessageScroller>\n  <MessageScrollerViewport>\n    <MessageScrollerContent>{messages}</MessageScrollerContent>\n  </MessageScrollerViewport>\n  <MessageScrollerButton direction=\"end\" />\n</MessageScroller>"
       },
       {
         "name": "useMessageScroller()",
-        "summary": "Returns `{ scrollToEnd: (options?: MessageScrollerScrollOptions) => boolean; scrollToMessage: (messageId: string, options?: MessageScrollerScrollOptions) => boolean; scrollToStart: (options?: MessageScrollerScrollOptions) => boolean; }`."
+        "summary": "Returns `{ scrollToEnd: (options?: MessageScrollerScrollOptions) => boolean; scrollToMessage: (messageId: string, options?: MessageScrollerScrollOptions) => boolean; scrollToStart: (options?: MessageScrollerScrollOptions) => boolean; }`.",
+        "description": "Scrolls the nearest `MessageScroller` from code: to its end, its start or a message by id.",
+        "example": "const { scrollToMessage } = useMessageScroller()\nscrollToMessage(\"message-42\")"
       },
       {
         "name": "useMessageScrollerScrollable()",
-        "summary": "Returns `MessageScrollerScrollable`."
+        "summary": "Returns `MessageScrollerScrollable`.",
+        "description": "Tells whether there is more to scroll toward the start or the end, to show or hide your own controls.",
+        "example": "const { start, end } = useMessageScrollerScrollable()"
       },
       {
         "name": "useMessageScrollerVisibility()",
-        "summary": "Returns `MessageScrollerVisibilityState`."
+        "summary": "Returns `MessageScrollerVisibilityState`.",
+        "description": "Tells which messages are in view and which one is the current anchor.",
+        "example": "const { visibleMessageIds, currentAnchorId } = useMessageScrollerVisibility()"
       }
     ],
     "props": [
@@ -14976,15 +15454,21 @@
     "exports": [
       {
         "name": "NativeSelect",
-        "summary": "Renders `<select>`, inside a `<div>`."
+        "summary": "Renders `<select>`, inside a `<div>`.",
+        "description": "The browser's own drop-down, the light choice for picking one value out of a short list, especially below `md`.",
+        "example": "<NativeSelect aria-label=\"Country\" defaultValue=\"\">\n  <NativeSelectOption value=\"\">Select a country</NativeSelectOption>\n  <NativeSelectOption value=\"fr\">France</NativeSelectOption>\n  <NativeSelectOption value=\"us\">United States</NativeSelectOption>\n</NativeSelect>"
       },
       {
         "name": "NativeSelectOptGroup",
-        "summary": "Renders `<optgroup>`."
+        "summary": "Renders `<optgroup>`.",
+        "description": "Groups related `NativeSelectOption`s under a label inside a `NativeSelect`.",
+        "example": "<NativeSelect aria-label=\"Time zone\">\n  <NativeSelectOptGroup label=\"Europe\">\n    <NativeSelectOption value=\"paris\">Paris</NativeSelectOption>\n  </NativeSelectOptGroup>\n</NativeSelect>"
       },
       {
         "name": "NativeSelectOption",
-        "summary": "Renders `<option>`."
+        "summary": "Renders `<option>`.",
+        "description": "One choice of a `NativeSelect`; an empty `value` makes it the placeholder.",
+        "example": "<NativeSelect aria-label=\"Role\">\n  <NativeSelectOption value=\"\">Select a role</NativeSelectOption>\n  <NativeSelectOption value=\"editor\">Editor</NativeSelectOption>\n</NativeSelect>"
       }
     ],
     "props": [
@@ -15394,39 +15878,57 @@
     "exports": [
       {
         "name": "NavigationMenu",
-        "summary": "Renders `NavigationMenuPrimitive.Root`."
+        "summary": "Renders `NavigationMenuPrimitive.Root`.",
+        "description": "The primary navigation of a site or app: links grouped by category with drop-down panels, inline when `viewport` is false.",
+        "example": "<NavigationMenu>\n  <NavigationMenuList>\n    <NavigationMenuItem>\n      <NavigationMenuLink href=\"/pricing\">Pricing</NavigationMenuLink>\n    </NavigationMenuItem>\n  </NavigationMenuList>\n</NavigationMenu>"
       },
       {
         "name": "NavigationMenuList",
-        "summary": "Renders `NavigationMenuPrimitive.List`."
+        "summary": "Renders `NavigationMenuPrimitive.List`.",
+        "description": "Lays the top-level items of a `NavigationMenu` out in a horizontal row.",
+        "example": "<NavigationMenuList>\n  <NavigationMenuItem>\n    <NavigationMenuLink href=\"/docs\">Documentation</NavigationMenuLink>\n  </NavigationMenuItem>\n  <NavigationMenuItem>\n    <NavigationMenuLink href=\"/pricing\">Pricing</NavigationMenuLink>\n  </NavigationMenuItem>\n</NavigationMenuList>"
       },
       {
         "name": "NavigationMenuItem",
-        "summary": "Renders `NavigationMenuPrimitive.Item`."
+        "summary": "Renders `NavigationMenuPrimitive.Item`.",
+        "description": "Wraps one top-level entry of the menu: a `NavigationMenuTrigger` with its `NavigationMenuContent`, or a single `NavigationMenuLink`.",
+        "example": "<NavigationMenuItem>\n  <NavigationMenuTrigger>Products</NavigationMenuTrigger>\n  <NavigationMenuContent>\n    <NavigationMenuLink href=\"/analytics\">Analytics</NavigationMenuLink>\n  </NavigationMenuContent>\n</NavigationMenuItem>"
       },
       {
         "name": "NavigationMenuContent",
-        "summary": "Renders `NavigationMenuPrimitive.Content`."
+        "summary": "Renders `NavigationMenuPrimitive.Content`.",
+        "description": "The panel of links that a `NavigationMenuTrigger` opens, animated by the direction of the move between items.",
+        "example": "<NavigationMenuItem>\n  <NavigationMenuTrigger>Company</NavigationMenuTrigger>\n  <NavigationMenuContent>\n    <NavigationMenuLink href=\"/about\">About us</NavigationMenuLink>\n    <NavigationMenuLink href=\"/careers\">Careers</NavigationMenuLink>\n  </NavigationMenuContent>\n</NavigationMenuItem>"
       },
       {
         "name": "NavigationMenuTrigger",
-        "summary": "Renders `NavigationMenuPrimitive.Trigger`."
+        "summary": "Renders `NavigationMenuPrimitive.Trigger`.",
+        "description": "Opens the content panel of its item and shows a caret that turns while the panel is open.",
+        "example": "<NavigationMenuItem>\n  <NavigationMenuTrigger>Resources</NavigationMenuTrigger>\n  <NavigationMenuContent>\n    <NavigationMenuLink href=\"/guides\">Guides</NavigationMenuLink>\n  </NavigationMenuContent>\n</NavigationMenuItem>"
       },
       {
         "name": "NavigationMenuLink",
-        "summary": "Renders `NavigationMenuPrimitive.Link`."
+        "summary": "Renders `NavigationMenuPrimitive.Link`.",
+        "description": "One navigation link; set `active` on the link to the current page so it shows the active state.",
+        "example": "<NavigationMenuLink href=\"/pricing\" active>\n  Pricing\n</NavigationMenuLink>"
       },
       {
         "name": "NavigationMenuIndicator",
-        "summary": "Renders `NavigationMenuPrimitive.Indicator`."
+        "summary": "Renders `NavigationMenuPrimitive.Indicator`.",
+        "description": "Marks the active trigger with an arrow below it, placed after the items inside a `NavigationMenuList`.",
+        "example": "<NavigationMenuList>\n  <NavigationMenuItem>\n    <NavigationMenuTrigger>Products</NavigationMenuTrigger>\n  </NavigationMenuItem>\n  <NavigationMenuIndicator />\n</NavigationMenuList>"
       },
       {
         "name": "NavigationMenuViewport",
-        "summary": "Renders `NavigationMenuPrimitive.Viewport`, inside a `<div>`."
+        "summary": "Renders `NavigationMenuPrimitive.Viewport`, inside a `<div>`.",
+        "description": "The shared area that renders the active `NavigationMenuContent`; `NavigationMenu` adds it unless `viewport` is false.",
+        "example": "<NavigationMenu viewport={false}>\n  <NavigationMenuList />\n</NavigationMenu>"
       },
       {
         "name": "navigationMenuTriggerStyle",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "Gives a direct link the look of a `NavigationMenuTrigger`, so it lines up with the triggers around it.",
+        "example": "<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>\n  <a href=\"/pricing\">Pricing</a>\n</NavigationMenuLink>"
       }
     ],
     "props": [
@@ -15662,31 +16164,45 @@
     "exports": [
       {
         "name": "Pagination",
-        "summary": "Renders `<nav>`."
+        "summary": "Renders `<nav>`.",
+        "description": "The navigation landmark for a paged result set; it holds no state, so you manage the current page and its URLs.",
+        "example": "<Pagination>\n  <PaginationContent>\n    <PaginationItem>\n      <PaginationLink href=\"?page=1\" isActive>1</PaginationLink>\n    </PaginationItem>\n  </PaginationContent>\n</Pagination>"
       },
       {
         "name": "PaginationContent",
-        "summary": "Renders `<ul>`."
+        "summary": "Renders `<ul>`.",
+        "description": "The list inside a `Pagination` that lines up its items in a row.",
+        "example": "<Pagination>\n  <PaginationContent>\n    <PaginationItem>\n      <PaginationPrevious href=\"?page=1\" />\n    </PaginationItem>\n  </PaginationContent>\n</Pagination>"
       },
       {
         "name": "PaginationEllipsis",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "A marker for the page numbers left out of a long range; `srLabel` translates its hidden text.",
+        "example": "<PaginationItem>\n  <PaginationEllipsis />\n</PaginationItem>"
       },
       {
         "name": "PaginationItem",
-        "summary": "Renders `<li>`."
+        "summary": "Renders `<li>`.",
+        "description": "One entry of the `PaginationContent` list, which wraps a link, a previous or next link, or an ellipsis.",
+        "example": "<PaginationContent>\n  <PaginationItem>\n    <PaginationLink href=\"?page=2\">2</PaginationLink>\n  </PaginationItem>\n</PaginationContent>"
       },
       {
         "name": "PaginationLink",
-        "summary": "Renders `<a>`."
+        "summary": "Renders `<a>`.",
+        "description": "A link to one numbered page; set `isActive` on the current page to mark it with `aria-current`.",
+        "example": "<PaginationItem>\n  <PaginationLink href=\"?page=3\" isActive>3</PaginationLink>\n</PaginationItem>"
       },
       {
         "name": "PaginationNext",
-        "summary": "Renders `PaginationLink`."
+        "summary": "Renders `PaginationLink`.",
+        "description": "The link to the page after the current one; `text` and `label` translate its visible text and its accessible name.",
+        "example": "<PaginationItem>\n  <PaginationNext href=\"?page=4\" />\n</PaginationItem>"
       },
       {
         "name": "PaginationPrevious",
-        "summary": "Renders `PaginationLink`."
+        "summary": "Renders `PaginationLink`.",
+        "description": "The link to the page before the current one; `text` and `label` translate its visible text and its accessible name.",
+        "example": "<PaginationItem>\n  <PaginationPrevious href=\"?page=2\" />\n</PaginationItem>"
       }
     ],
     "props": [
@@ -15912,7 +16428,9 @@
     "exports": [
       {
         "name": "PasswordInput",
-        "summary": "Renders `InputGroupInput`."
+        "summary": "Renders `InputGroupInput`.",
+        "description": "A password field with a button that shows or hides the text; translate its labels with `showLabel` and `hideLabel`.",
+        "example": "<Field>\n  <FieldLabel htmlFor=\"password\">Password</FieldLabel>\n  <PasswordInput id=\"password\" autoComplete=\"current-password\" />\n</Field>"
       }
     ],
     "props": [
@@ -16223,31 +16741,45 @@
     "exports": [
       {
         "name": "Popover",
-        "summary": "Renders `PopoverPrimitive.Root`."
+        "summary": "Renders `PopoverPrimitive.Root`.",
+        "description": "The root of a floating panel opened by a click, for rich content such as a form or a picker that keeps the user in context.",
+        "example": "<Popover>\n  <PopoverTrigger asChild>\n    <Button variant=\"outline\">Rename</Button>\n  </PopoverTrigger>\n  <PopoverContent>\n    <PopoverTitle>Rename project</PopoverTitle>\n  </PopoverContent>\n</Popover>"
       },
       {
         "name": "PopoverAnchor",
-        "summary": "Renders `PopoverPrimitive.Anchor`."
+        "summary": "Renders `PopoverPrimitive.Anchor`.",
+        "description": "Anchors the `PopoverContent` to an element other than its trigger.",
+        "example": "<Popover>\n  <PopoverAnchor asChild>\n    <div>Invoice 1042</div>\n  </PopoverAnchor>\n  <PopoverTrigger asChild>\n    <Button size=\"sm\">Details</Button>\n  </PopoverTrigger>\n  <PopoverContent>Paid on March 3.</PopoverContent>\n</Popover>"
       },
       {
         "name": "PopoverContent",
-        "summary": "Renders `PopoverPrimitive.Content`."
+        "summary": "Renders `PopoverPrimitive.Content`.",
+        "description": "The floating surface of a `Popover`, placed beside its trigger with `align` and `sideOffset`.",
+        "example": "<PopoverContent align=\"start\">\n  <PopoverHeader>\n    <PopoverTitle>Add a note</PopoverTitle>\n  </PopoverHeader>\n</PopoverContent>"
       },
       {
         "name": "PopoverDescription",
-        "summary": "Renders `<p>`."
+        "summary": "Renders `<p>`.",
+        "description": "A supporting sentence under the `PopoverTitle` that says what the panel is for.",
+        "example": "<PopoverDescription>Anyone with the link can view this file.</PopoverDescription>"
       },
       {
         "name": "PopoverHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Groups the `PopoverTitle` and `PopoverDescription` at the top of the panel.",
+        "example": "<PopoverHeader>\n  <PopoverTitle>Dimensions</PopoverTitle>\n  <PopoverDescription>Set the size of the layer.</PopoverDescription>\n</PopoverHeader>"
       },
       {
         "name": "PopoverTitle",
-        "summary": "Renders `<h2>`, or the element chosen with `as`."
+        "summary": "Renders `<h2>`, or the element chosen with `as`.",
+        "description": "The heading of a `Popover`; set `as` from the real heading hierarchy, because it renders an `h2` by default.",
+        "example": "<PopoverTitle as=\"h3\">Share this file</PopoverTitle>"
       },
       {
         "name": "PopoverTrigger",
-        "summary": "Renders `PopoverPrimitive.Trigger`."
+        "summary": "Renders `PopoverPrimitive.Trigger`.",
+        "description": "The element that opens the `Popover` on click; pass `asChild` to use your own `Button`.",
+        "example": "<Popover>\n  <PopoverTrigger asChild>\n    <Button variant=\"outline\">Add a note</Button>\n  </PopoverTrigger>\n  <PopoverContent>Write a note for your team.</PopoverContent>\n</Popover>"
       }
     ],
     "props": [
@@ -16450,7 +16982,9 @@
     "exports": [
       {
         "name": "Progress",
-        "summary": "Renders `ProgressPrimitive.Root`."
+        "summary": "Renders `ProgressPrimitive.Root`.",
+        "description": "A linear bar that shows how far a task has gone; `value` runs from 0 to 100, and it needs an `aria-label` for its name.",
+        "example": "<Progress value={66} aria-label=\"Upload progress\" />"
       }
     ],
     "props": [
@@ -16980,63 +17514,93 @@
     "exports": [
       {
         "name": "Questionnaire",
-        "summary": "Renders `QuestionnairePrimitive.Root`."
+        "summary": "Renders `QuestionnairePrimitive.Root`.",
+        "description": "A form that asks one question at a time; set `shortcuts` to label the choices with letters or numbers.",
+        "example": "<Questionnaire onSubmit={handleSubmit}>\n  <QuestionnaireProgress />\n  <QuestionnaireItem name=\"audience\">\n    <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>\n  </QuestionnaireItem>\n  <QuestionnaireActions>\n    <QuestionnaireNext />\n  </QuestionnaireActions>\n</Questionnaire>"
       },
       {
         "name": "QuestionnaireActions",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The row that holds the previous, skip, next and submit controls, placed after the questions.",
+        "example": "<QuestionnaireActions>\n  <QuestionnairePrevious />\n  <QuestionnaireSkip />\n  <QuestionnaireNext />\n</QuestionnaireActions>"
       },
       {
         "name": "QuestionnaireChoice",
-        "summary": "Renders `QuestionnairePrimitive.Choice`."
+        "summary": "Renders `QuestionnairePrimitive.Choice`.",
+        "description": "One selectable answer of a question: a radio for a single choice, a checkbox when the item is `multiple`.",
+        "example": "<QuestionnaireChoices>\n  <QuestionnaireChoice value=\"team\">My team</QuestionnaireChoice>\n</QuestionnaireChoices>"
       },
       {
         "name": "QuestionnaireChoiceDescription",
-        "summary": "Renders `<span>`."
+        "summary": "Renders `<span>`.",
+        "description": "A muted second line inside a `QuestionnaireChoice` that adds detail to the answer.",
+        "example": "<QuestionnaireChoice value=\"weekly\">\n  Weekly summary\n  <QuestionnaireChoiceDescription>One email every Monday morning.</QuestionnaireChoiceDescription>\n</QuestionnaireChoice>"
       },
       {
         "name": "QuestionnaireChoices",
-        "summary": "Renders `QuestionnairePrimitive.Choices`."
+        "summary": "Renders `QuestionnairePrimitive.Choices`.",
+        "description": "The group that lays out the `QuestionnaireChoice` options of one question.",
+        "example": "<QuestionnaireChoices>\n  <QuestionnaireChoice value=\"team\">My team</QuestionnaireChoice>\n  <QuestionnaireChoice value=\"board\">The board</QuestionnaireChoice>\n</QuestionnaireChoices>"
       },
       {
         "name": "QuestionnaireDescription",
-        "summary": "Renders `QuestionnairePrimitive.Description`."
+        "summary": "Renders `QuestionnairePrimitive.Description`.",
+        "description": "The supporting line under a `QuestionnaireTitle` that explains what kind of answer helps.",
+        "example": "<QuestionnaireItem name=\"audience\">\n  <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>\n  <QuestionnaireDescription>Pick the group that reads it most.</QuestionnaireDescription>\n</QuestionnaireItem>"
       },
       {
         "name": "QuestionnaireError",
-        "summary": "Renders `QuestionnairePrimitive.Error`."
+        "summary": "Renders `QuestionnairePrimitive.Error`.",
+        "description": "The message that explains why a question cannot move on, such as a required answer left empty.",
+        "example": "<QuestionnaireItem name=\"audience\" required>\n  <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>\n  <QuestionnaireError />\n</QuestionnaireItem>"
       },
       {
         "name": "QuestionnaireInput",
-        "summary": "Renders `QuestionnairePrimitive.Input`, inside a `<div>`."
+        "summary": "Renders `QuestionnairePrimitive.Input`, inside a `<div>`.",
+        "description": "A free-text answer field for a question, used alone or under the choices.",
+        "example": "<QuestionnaireItem name=\"other\">\n  <QuestionnaireTitle>Anything else we should know?</QuestionnaireTitle>\n  <QuestionnaireInput />\n</QuestionnaireItem>"
       },
       {
         "name": "QuestionnaireItem",
-        "summary": "Renders `QuestionnairePrimitive.Item`."
+        "summary": "Renders `QuestionnairePrimitive.Item`.",
+        "description": "One question of a `Questionnaire`; its unique `name` is the answer's field name, and `multiple` allows several choices.",
+        "example": "<QuestionnaireItem name=\"trip-dates\">\n  <QuestionnaireTitle>When do you want to travel?</QuestionnaireTitle>\n</QuestionnaireItem>"
       },
       {
         "name": "QuestionnaireNext",
-        "summary": "Renders `QuestionnairePrimitive.Next`."
+        "summary": "Renders `QuestionnairePrimitive.Next`.",
+        "description": "The button that validates the current answer and moves to the next question.",
+        "example": "<QuestionnaireActions>\n  <QuestionnaireNext>Continue</QuestionnaireNext>\n</QuestionnaireActions>"
       },
       {
         "name": "QuestionnairePrevious",
-        "summary": "Renders `QuestionnairePrimitive.Previous`."
+        "summary": "Renders `QuestionnairePrimitive.Previous`.",
+        "description": "The button that returns to the question before the current one.",
+        "example": "<QuestionnaireActions>\n  <QuestionnairePrevious />\n</QuestionnaireActions>"
       },
       {
         "name": "QuestionnaireProgress",
-        "summary": "Renders `QuestionnairePrimitive.Progress`."
+        "summary": "Renders `QuestionnairePrimitive.Progress`.",
+        "description": "The line that tells the user where they are in a `Questionnaire`, such as \"Question 2 of 5\".",
+        "example": "<Questionnaire>\n  <QuestionnaireProgress />\n</Questionnaire>"
       },
       {
         "name": "QuestionnaireSkip",
-        "summary": "Renders `QuestionnairePrimitive.Skip`."
+        "summary": "Renders `QuestionnairePrimitive.Skip`.",
+        "description": "The button that moves past the current question without an answer; it stays hidden for a `required` question.",
+        "example": "<QuestionnaireActions>\n  <QuestionnaireSkip />\n</QuestionnaireActions>"
       },
       {
         "name": "QuestionnaireSubmit",
-        "summary": "Renders `QuestionnairePrimitive.Submit`."
+        "summary": "Renders `QuestionnairePrimitive.Submit`.",
+        "description": "The button that sends every answer through the form's `onSubmit` on the last question.",
+        "example": "<QuestionnaireActions>\n  <QuestionnaireSubmit>Send answers</QuestionnaireSubmit>\n</QuestionnaireActions>"
       },
       {
         "name": "QuestionnaireTitle",
-        "summary": "Renders `QuestionnairePrimitive.Title`."
+        "summary": "Renders `QuestionnairePrimitive.Title`.",
+        "description": "The question itself, shown at the top of a `QuestionnaireItem`.",
+        "example": "<QuestionnaireItem name=\"audience\">\n  <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>\n</QuestionnaireItem>"
       }
     ],
     "props": [
@@ -17399,11 +17963,15 @@
     "exports": [
       {
         "name": "RadioGroup",
-        "summary": "Renders `RadioGroupPrimitive.Root`."
+        "summary": "Renders `RadioGroupPrimitive.Root`.",
+        "description": "A set of radio buttons for picking exactly one of two to five options, all visible at once; use `Select` beyond that.",
+        "example": "<RadioGroup defaultValue=\"standard\">\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"standard\" id=\"standard\" />\n    <Label htmlFor=\"standard\">Standard delivery</Label>\n  </div>\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"express\" id=\"express\" />\n    <Label htmlFor=\"express\">Express delivery</Label>\n  </div>\n</RadioGroup>"
       },
       {
         "name": "RadioGroupItem",
-        "summary": "Renders `RadioGroupPrimitive.Item`."
+        "summary": "Renders `RadioGroupPrimitive.Item`.",
+        "description": "One option of a `RadioGroup`, identified by its `value`; tie it to a `Label` so its name is announced.",
+        "example": "<RadioGroup defaultValue=\"monthly\">\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"monthly\" id=\"monthly\" />\n    <Label htmlFor=\"monthly\">Billed monthly</Label>\n  </div>\n</RadioGroup>"
       }
     ],
     "props": [
@@ -17630,15 +18198,21 @@
     "exports": [
       {
         "name": "ResizableHandle",
-        "summary": "Renders `ResizablePrimitive.Separator`."
+        "summary": "Renders `ResizablePrimitive.Separator`.",
+        "description": "The draggable divider between two `ResizablePanel`s, reachable by keyboard; set `withHandle` to show a grip.",
+        "example": "<ResizablePanelGroup orientation=\"horizontal\">\n  <ResizablePanel minSize={20}>Navigation</ResizablePanel>\n  <ResizableHandle withHandle />\n  <ResizablePanel minSize={20}>Content</ResizablePanel>\n</ResizablePanelGroup>"
       },
       {
         "name": "ResizablePanel",
-        "summary": "Renders `ResizablePrimitive.Panel`."
+        "summary": "Renders `ResizablePrimitive.Panel`.",
+        "description": "One section of a `ResizablePanelGroup` that the user grows or shrinks; give it a `minSize` so its content is never crushed.",
+        "example": "<ResizablePanel defaultSize={25} minSize={15}>\n  Sidebar\n</ResizablePanel>"
       },
       {
         "name": "ResizablePanelGroup",
-        "summary": "Renders `ResizablePrimitive.Group`."
+        "summary": "Renders `ResizablePrimitive.Group`.",
+        "description": "The container that lays out `ResizablePanel`s in a row or a column; set `orientation` to choose the direction.",
+        "example": "<ResizablePanelGroup orientation=\"horizontal\">\n  <ResizablePanel defaultSize={30} minSize={20}>Files</ResizablePanel>\n  <ResizableHandle />\n  <ResizablePanel minSize={30}>Editor</ResizablePanel>\n</ResizablePanelGroup>"
       }
     ],
     "props": [
@@ -17841,11 +18415,15 @@
     "exports": [
       {
         "name": "ScrollArea",
-        "summary": "Renders `ScrollAreaPrimitive.Root`."
+        "summary": "Renders `ScrollAreaPrimitive.Root`.",
+        "description": "A container with styled scrollbars for content that outgrows a parent of defined height, such as a menu or a side panel.",
+        "example": "<ScrollArea className=\"h-72\">\n  <p>Release notes go here.</p>\n</ScrollArea>"
       },
       {
         "name": "ScrollBar",
-        "summary": "Renders `ScrollAreaPrimitive.ScrollAreaScrollbar`."
+        "summary": "Renders `ScrollAreaPrimitive.ScrollAreaScrollbar`.",
+        "description": "The scrollbar of a `ScrollArea`; add one with `orientation=\"horizontal\"` to let wide content scroll sideways.",
+        "example": "<ScrollArea className=\"w-96\">\n  <div>Wide content</div>\n  <ScrollBar orientation=\"horizontal\" />\n</ScrollArea>"
       }
     ],
     "props": [
@@ -18265,43 +18843,63 @@
     "exports": [
       {
         "name": "Select",
-        "summary": "Renders `SelectPrimitive.Root`."
+        "summary": "Renders `SelectPrimitive.Root`.",
+        "description": "The root of a styled drop-down for picking one option from a list, with groups and rich item content.",
+        "example": "<Select>\n  <SelectTrigger aria-label=\"Role\">\n    <SelectValue placeholder=\"Select a role\" />\n  </SelectTrigger>\n  <SelectContent>\n    <SelectItem value=\"editor\">Editor</SelectItem>\n  </SelectContent>\n</Select>"
       },
       {
         "name": "SelectContent",
-        "summary": "Renders `SelectPrimitive.Content`."
+        "summary": "Renders `SelectPrimitive.Content`.",
+        "description": "The floating list of a `Select`, rendered in a portal; set `position=\"popper\"` to place it under the trigger.",
+        "example": "<SelectContent position=\"popper\">\n  <SelectItem value=\"draft\">Draft</SelectItem>\n  <SelectItem value=\"published\">Published</SelectItem>\n</SelectContent>"
       },
       {
         "name": "SelectGroup",
-        "summary": "Renders `SelectPrimitive.Group`."
+        "summary": "Renders `SelectPrimitive.Group`.",
+        "description": "Groups related `SelectItem`s under a `SelectLabel` inside the `SelectContent`.",
+        "example": "<SelectGroup>\n  <SelectLabel>Fruits</SelectLabel>\n  <SelectItem value=\"apple\">Apple</SelectItem>\n</SelectGroup>"
       },
       {
         "name": "SelectItem",
-        "summary": "Renders `SelectPrimitive.Item`."
+        "summary": "Renders `SelectPrimitive.Item`.",
+        "description": "One option of the list; give it a unique `value`, and rich children such as an icon if the choice needs them.",
+        "example": "<SelectItem value=\"admin\">Administrator</SelectItem>"
       },
       {
         "name": "SelectLabel",
-        "summary": "Renders `SelectPrimitive.Label`."
+        "summary": "Renders `SelectPrimitive.Label`.",
+        "description": "A non-interactive caption that names the `SelectGroup` it sits in.",
+        "example": "<SelectGroup>\n  <SelectLabel>Vegetables</SelectLabel>\n  <SelectItem value=\"carrot\">Carrot</SelectItem>\n</SelectGroup>"
       },
       {
         "name": "SelectScrollDownButton",
-        "summary": "Renders `SelectPrimitive.ScrollDownButton`."
+        "summary": "Renders `SelectPrimitive.ScrollDownButton`.",
+        "description": "The arrow shown at the bottom of a long list that scrolls it down while the pointer rests on it.",
+        "example": "<SelectContent>\n  <SelectItem value=\"december\">December</SelectItem>\n  <SelectScrollDownButton />\n</SelectContent>"
       },
       {
         "name": "SelectScrollUpButton",
-        "summary": "Renders `SelectPrimitive.ScrollUpButton`."
+        "summary": "Renders `SelectPrimitive.ScrollUpButton`.",
+        "description": "The arrow shown at the top of a long list that scrolls it up while the pointer rests on it.",
+        "example": "<SelectContent>\n  <SelectScrollUpButton />\n  <SelectItem value=\"january\">January</SelectItem>\n</SelectContent>"
       },
       {
         "name": "SelectSeparator",
-        "summary": "Renders `SelectPrimitive.Separator`."
+        "summary": "Renders `SelectPrimitive.Separator`.",
+        "description": "A thin line that divides sets of options inside the `SelectContent`.",
+        "example": "<SelectContent>\n  <SelectItem value=\"all\">All projects</SelectItem>\n  <SelectSeparator />\n  <SelectItem value=\"archived\">Archived</SelectItem>\n</SelectContent>"
       },
       {
         "name": "SelectTrigger",
-        "summary": "Renders `SelectPrimitive.Trigger`."
+        "summary": "Renders `SelectPrimitive.Trigger`.",
+        "description": "The button that opens the list and shows the current choice; use `size=\"sm\"` for a denser row.",
+        "example": "<SelectTrigger size=\"sm\" aria-label=\"Status\">\n  <SelectValue placeholder=\"Select a status\" />\n</SelectTrigger>"
       },
       {
         "name": "SelectValue",
-        "summary": "Renders `SelectPrimitive.Value`."
+        "summary": "Renders `SelectPrimitive.Value`.",
+        "description": "Shows the selected option inside the `SelectTrigger`, or its `placeholder` while nothing is chosen.",
+        "example": "<SelectTrigger aria-label=\"Status\">\n  <SelectValue placeholder=\"Select a status\" />\n</SelectTrigger>"
       }
     ],
     "props": [
@@ -18519,7 +19117,9 @@
     "exports": [
       {
         "name": "Separator",
-        "summary": "Renders `SeparatorPrimitive.Root`."
+        "summary": "Renders `SeparatorPrimitive.Root`.",
+        "description": "A thin rule that divides two groups of content; keep `decorative` unless the division carries meaning.",
+        "example": "<Card>\n  <CardContent>Account details</CardContent>\n  <Separator />\n  <CardContent>Billing details</CardContent>\n</Card>"
       }
     ],
     "props": [
@@ -18870,35 +19470,51 @@
     "exports": [
       {
         "name": "Sheet",
-        "summary": "Renders `SheetPrimitive.Root`."
+        "summary": "Renders `SheetPrimitive.Root`.",
+        "description": "The root of a panel that slides in over the page for long content or side context, such as an edit form or a cart.",
+        "example": "<Sheet>\n  <SheetTrigger asChild>\n    <Button variant=\"outline\">Edit profile</Button>\n  </SheetTrigger>\n  <SheetContent>\n    <SheetTitle>Edit profile</SheetTitle>\n  </SheetContent>\n</Sheet>"
       },
       {
         "name": "SheetTrigger",
-        "summary": "Renders `SheetPrimitive.Trigger`."
+        "summary": "Renders `SheetPrimitive.Trigger`.",
+        "description": "The control that opens the sheet, usually a `Button` wrapped with `asChild`.",
+        "example": "<Sheet>\n  <SheetTrigger asChild>\n    <Button>Open filters</Button>\n  </SheetTrigger>\n</Sheet>"
       },
       {
         "name": "SheetClose",
-        "summary": "Renders `SheetPrimitive.Close`."
+        "summary": "Renders `SheetPrimitive.Close`.",
+        "description": "A control that closes the sheet from inside its content, such as a cancel button in the footer.",
+        "example": "<SheetFooter>\n  <SheetClose asChild>\n    <Button variant=\"outline\">Cancel</Button>\n  </SheetClose>\n</SheetFooter>"
       },
       {
         "name": "SheetContent",
-        "summary": "Renders `SheetPrimitive.Content`."
+        "summary": "Renders `SheetPrimitive.Content`.",
+        "description": "The panel itself; use `side` to choose the edge it slides from and `closeLabel` to translate its close button.",
+        "example": "<Sheet>\n  <SheetContent side=\"left\">\n    <SheetTitle>Navigation</SheetTitle>\n  </SheetContent>\n</Sheet>"
       },
       {
         "name": "SheetHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The top block of a sheet that groups its title and description.",
+        "example": "<SheetHeader>\n  <SheetTitle>Order details</SheetTitle>\n  <SheetDescription>Review the items before you check out.</SheetDescription>\n</SheetHeader>"
       },
       {
         "name": "SheetFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The bottom block of a sheet, pushed to its end, that holds the actions of the task.",
+        "example": "<SheetFooter>\n  <Button>Save changes</Button>\n</SheetFooter>"
       },
       {
         "name": "SheetTitle",
-        "summary": "Renders `SheetPrimitive.Title`."
+        "summary": "Renders `SheetPrimitive.Title`.",
+        "description": "The name of the sheet that screen readers announce, so every sheet renders one.",
+        "example": "<SheetHeader>\n  <SheetTitle>Notifications</SheetTitle>\n</SheetHeader>"
       },
       {
         "name": "SheetDescription",
-        "summary": "Renders `SheetPrimitive.Description`."
+        "summary": "Renders `SheetPrimitive.Description`.",
+        "description": "The supporting sentence under the title that says what the sheet is for.",
+        "example": "<SheetHeader>\n  <SheetTitle>Notifications</SheetTitle>\n  <SheetDescription>Choose what we email you about.</SheetDescription>\n</SheetHeader>"
       }
     ],
     "props": [
@@ -19622,99 +20238,147 @@
     "exports": [
       {
         "name": "Sidebar",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The side navigation panel of an app: a sheet on mobile, collapsible on desktop through `collapsible`, on the `side` you choose.",
+        "example": "<Sidebar side=\"left\" collapsible=\"icon\">\n  <SidebarContent />\n</Sidebar>"
       },
       {
         "name": "SidebarContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The scrollable middle of the sidebar, holding its `SidebarGroup`s.",
+        "example": "<Sidebar>\n  <SidebarContent>\n    <SidebarGroup />\n  </SidebarContent>\n</Sidebar>"
       },
       {
         "name": "SidebarFooter",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The bottom of the sidebar: holds the account menu or secondary actions.",
+        "example": "<Sidebar>\n  <SidebarFooter>Maya Johnson</SidebarFooter>\n</Sidebar>"
       },
       {
         "name": "SidebarGroup",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A titled section of the sidebar: a `SidebarGroupLabel` above a `SidebarGroupContent`.",
+        "example": "<SidebarGroup>\n  <SidebarGroupLabel>Projects</SidebarGroupLabel>\n  <SidebarGroupContent />\n</SidebarGroup>"
       },
       {
         "name": "SidebarGroupAction",
-        "summary": "Renders `<button>`, or its child with `asChild`."
+        "summary": "Renders `<button>`, or its child with `asChild`.",
+        "description": "A button in the corner of a `SidebarGroup` that acts on the whole group, such as creating an item in it.",
+        "example": "<SidebarGroup>\n  <SidebarGroupLabel>Projects</SidebarGroupLabel>\n  <SidebarGroupAction aria-label=\"Add project\">+</SidebarGroupAction>\n</SidebarGroup>"
       },
       {
         "name": "SidebarGroupContent",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The body of a `SidebarGroup`, wrapping its `SidebarMenu`.",
+        "example": "<SidebarGroup>\n  <SidebarGroupContent>\n    <SidebarMenu />\n  </SidebarGroupContent>\n</SidebarGroup>"
       },
       {
         "name": "SidebarGroupLabel",
-        "summary": "Renders `<div>`, or its child with `asChild`."
+        "summary": "Renders `<div>`, or its child with `asChild`.",
+        "description": "The title of a `SidebarGroup`, hidden when the sidebar collapses to its icons.",
+        "example": "<SidebarGroup>\n  <SidebarGroupLabel>Workspace</SidebarGroupLabel>\n</SidebarGroup>"
       },
       {
         "name": "SidebarHeader",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "The top of the sidebar: holds a logo, a workspace switcher or a search field.",
+        "example": "<Sidebar>\n  <SidebarHeader>Acme workspace</SidebarHeader>\n</Sidebar>"
       },
       {
         "name": "SidebarInput",
-        "summary": "Renders `Input`."
+        "summary": "Renders `Input`.",
+        "description": "A search or filter field inside the sidebar, styled for the sidebar background.",
+        "example": "<SidebarHeader>\n  <SidebarInput placeholder=\"Search projects\" />\n</SidebarHeader>"
       },
       {
         "name": "SidebarInset",
-        "summary": "Renders `<main>`."
+        "summary": "Renders `<main>`.",
+        "description": "The main content area next to the `Sidebar`, adapted to its `inset` variant.",
+        "example": "<SidebarProvider>\n  <Sidebar variant=\"inset\" />\n  <SidebarInset>Your projects</SidebarInset>\n</SidebarProvider>"
       },
       {
         "name": "SidebarMenu",
-        "summary": "Renders `<ul>`."
+        "summary": "Renders `<ul>`.",
+        "description": "The list of entries of a `SidebarGroup`, with one `SidebarMenuItem` per entry.",
+        "example": "<SidebarMenu>\n  <SidebarMenuItem>\n    <SidebarMenuButton>Dashboard</SidebarMenuButton>\n  </SidebarMenuItem>\n</SidebarMenu>"
       },
       {
         "name": "SidebarMenuAction",
-        "summary": "Renders `<button>`, or its child with `asChild`."
+        "summary": "Renders `<button>`, or its child with `asChild`.",
+        "description": "A secondary button on a menu entry, shown only on hover when `showOnHover` is set.",
+        "example": "<SidebarMenuItem>\n  <SidebarMenuButton>Design review</SidebarMenuButton>\n  <SidebarMenuAction showOnHover aria-label=\"More options\">\n    ...\n  </SidebarMenuAction>\n</SidebarMenuItem>"
       },
       {
         "name": "SidebarMenuBadge",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A count or status pinned to the end of a menu entry.",
+        "example": "<SidebarMenuItem>\n  <SidebarMenuButton>Notifications</SidebarMenuButton>\n  <SidebarMenuBadge>3</SidebarMenuBadge>\n</SidebarMenuItem>"
       },
       {
         "name": "SidebarMenuButton",
-        "summary": "Renders `<button>`, or its child with `asChild`."
+        "summary": "Renders `<button>`, or its child with `asChild`.",
+        "description": "The button or link of a menu entry; set `isActive` on the current page and `tooltip` to name it when the sidebar shows icons only.",
+        "example": "<SidebarMenuItem>\n  <SidebarMenuButton isActive tooltip=\"Dashboard\">\n    Dashboard\n  </SidebarMenuButton>\n</SidebarMenuItem>"
       },
       {
         "name": "SidebarMenuItem",
-        "summary": "Renders `<li>`."
+        "summary": "Renders `<li>`.",
+        "description": "One entry of a `SidebarMenu`: a `SidebarMenuButton` with an optional action, badge or submenu.",
+        "example": "<SidebarMenuItem>\n  <SidebarMenuButton>Inbox</SidebarMenuButton>\n  <SidebarMenuBadge>12</SidebarMenuBadge>\n</SidebarMenuItem>"
       },
       {
         "name": "SidebarMenuSkeleton",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A placeholder for a menu entry while the list loads; `showIcon` adds an icon block.",
+        "example": "<SidebarMenu>\n  <SidebarMenuItem>\n    <SidebarMenuSkeleton showIcon />\n  </SidebarMenuItem>\n</SidebarMenu>"
       },
       {
         "name": "SidebarMenuSub",
-        "summary": "Renders `<ul>`."
+        "summary": "Renders `<ul>`.",
+        "description": "A nested list of links under a `SidebarMenuItem`, hidden when the sidebar shows icons only.",
+        "example": "<SidebarMenuItem>\n  <SidebarMenuButton>Settings</SidebarMenuButton>\n  <SidebarMenuSub>\n    <SidebarMenuSubItem />\n  </SidebarMenuSub>\n</SidebarMenuItem>"
       },
       {
         "name": "SidebarMenuSubButton",
-        "summary": "Renders `<a>`, or its child with `asChild`."
+        "summary": "Renders `<a>`, or its child with `asChild`.",
+        "description": "The link of a nested entry; set `isActive` on the current page and `size` to `sm` for a denser row.",
+        "example": "<SidebarMenuSubItem>\n  <SidebarMenuSubButton href=\"/settings/billing\" isActive>\n    Billing\n  </SidebarMenuSubButton>\n</SidebarMenuSubItem>"
       },
       {
         "name": "SidebarMenuSubItem",
-        "summary": "Renders `<li>`."
+        "summary": "Renders `<li>`.",
+        "description": "One entry of a `SidebarMenuSub`, wrapping its `SidebarMenuSubButton`.",
+        "example": "<SidebarMenuSub>\n  <SidebarMenuSubItem>\n    <SidebarMenuSubButton href=\"/settings/team\">Team</SidebarMenuSubButton>\n  </SidebarMenuSubItem>\n</SidebarMenuSub>"
       },
       {
         "name": "SidebarProvider",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "Holds the open state, the mobile state and the keyboard shortcut for every sidebar part below it; place it at the root of the layout.",
+        "example": "<SidebarProvider defaultOpen>\n  <Sidebar />\n  <SidebarInset>Dashboard</SidebarInset>\n</SidebarProvider>"
       },
       {
         "name": "SidebarRail",
-        "summary": "Renders `<button>`."
+        "summary": "Renders `<button>`.",
+        "description": "A thin strip on the edge of the sidebar that toggles it when pressed.",
+        "example": "<Sidebar>\n  <SidebarContent />\n  <SidebarRail />\n</Sidebar>"
       },
       {
         "name": "SidebarSeparator",
-        "summary": "Renders `Separator`."
+        "summary": "Renders `Separator`.",
+        "description": "A divider that sets apart two groups of the sidebar.",
+        "example": "<SidebarContent>\n  <SidebarGroup />\n  <SidebarSeparator />\n  <SidebarGroup />\n</SidebarContent>"
       },
       {
         "name": "SidebarTrigger",
-        "summary": "Renders `Button`."
+        "summary": "Renders `Button`.",
+        "description": "A button that opens and closes the sidebar; translate its `toggleLabel` in an interface that is not in English.",
+        "example": "<SidebarTrigger toggleLabel=\"Toggle sidebar\" />"
       },
       {
         "name": "useSidebar()",
-        "summary": "Returns `SidebarContextProps`."
+        "summary": "Returns `SidebarContextProps`.",
+        "description": "Reads the sidebar state and its `toggleSidebar`, `setOpen` and mobile controls from inside a `SidebarProvider`.",
+        "example": "const { state, toggleSidebar } = useSidebar()"
       }
     ],
     "props": [
@@ -20199,7 +20863,9 @@
     "exports": [
       {
         "name": "Skeleton",
-        "summary": "Renders `<div>`."
+        "summary": "Renders `<div>`.",
+        "description": "A loading placeholder that holds the place of content to come; size it to the final content so nothing shifts on arrival.",
+        "example": "<div className=\"flex items-center gap-3\">\n  <Skeleton className=\"size-10\" />\n  <Skeleton className=\"h-4 w-48\" />\n</div>"
       }
     ],
     "props": [
@@ -20400,7 +21066,9 @@
     "exports": [
       {
         "name": "Slider",
-        "summary": "Renders `SliderPrimitive.Root`."
+        "summary": "Renders `SliderPrimitive.Root`.",
+        "description": "Picks a number, or a range with two values, between `min` and `max`; always name it and name each thumb of a range.",
+        "example": "<Slider\n  defaultValue={[20, 80]}\n  min={0}\n  max={100}\n  step={5}\n  aria-label=\"Price range\"\n  thumbLabels={[\"Minimum price\", \"Maximum price\"]}\n/>"
       }
     ],
     "props": [
@@ -20598,7 +21266,9 @@
     "exports": [
       {
         "name": "Toaster",
-        "summary": "Renders `Sonner`."
+        "summary": "Renders `Sonner`.",
+        "description": "The single mount point for toast notifications, placed once at the root of the layout; call `toast()` from `sonner` to show one.",
+        "example": "<Toaster />\n// elsewhere: toast(\"Changes saved\")"
       }
     ],
     "props": [
@@ -20698,7 +21368,9 @@
     "exports": [
       {
         "name": "Spinner",
-        "summary": "Renders `SpinnerIcon`."
+        "summary": "Renders `SpinnerIcon`.",
+        "description": "An indicator that an operation is in progress; replace its default `aria-label` with one that names the action.",
+        "example": "<Spinner aria-label=\"Signing in\" />"
       }
     ],
     "props": [
@@ -20973,7 +21645,9 @@
     "exports": [
       {
         "name": "Switch",
-        "summary": "Renders `SwitchPrimitive.Root`."
+        "summary": "Renders `SwitchPrimitive.Root`.",
+        "description": "A two-state control for a setting whose effect is immediate; pair it with a visible `Label`.",
+        "example": "<div className=\"flex items-center gap-2\">\n  <Switch id=\"notifications\" defaultChecked />\n  <Label htmlFor=\"notifications\">Email notifications</Label>\n</div>"
       }
     ],
     "props": [
@@ -21249,35 +21923,51 @@
     "exports": [
       {
         "name": "Table",
-        "summary": "Renders `<table>`, inside a `<div>`."
+        "summary": "Renders `<table>`, inside a `<div>`.",
+        "description": "The root of a semantic data table that scrolls sideways inside its container; use it for rows that share the same columns.",
+        "example": "<Table>\n  <TableCaption>Recent invoices</TableCaption>\n  <TableBody>\n    <TableRow>\n      <TableCell>Invoice 1042</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>"
       },
       {
         "name": "TableHeader",
-        "summary": "Renders `<thead>`."
+        "summary": "Renders `<thead>`.",
+        "description": "The group of header rows of a `Table`, which lets assistive technology tell the column names from the data.",
+        "example": "<TableHeader>\n  <TableRow>\n    <TableHead>Customer</TableHead>\n    <TableHead>Amount</TableHead>\n  </TableRow>\n</TableHeader>"
       },
       {
         "name": "TableBody",
-        "summary": "Renders `<tbody>`."
+        "summary": "Renders `<tbody>`.",
+        "description": "The group that holds the data rows of a `Table`.",
+        "example": "<TableBody>\n  <TableRow>\n    <TableCell>Ada Lovelace</TableCell>\n    <TableCell>$250.00</TableCell>\n  </TableRow>\n</TableBody>"
       },
       {
         "name": "TableFooter",
-        "summary": "Renders `<tfoot>`."
+        "summary": "Renders `<tfoot>`.",
+        "description": "The summary rows at the end of a `Table`, such as totals or averages, set apart from the data rows.",
+        "example": "<TableFooter>\n  <TableRow>\n    <TableCell>Total</TableCell>\n    <TableCell>$250.00</TableCell>\n  </TableRow>\n</TableFooter>"
       },
       {
         "name": "TableHead",
-        "summary": "Renders `<th>`."
+        "summary": "Renders `<th>`.",
+        "description": "A column or row header cell of a `Table` that names the data it labels.",
+        "example": "<TableRow>\n  <TableHead>Customer</TableHead>\n  <TableHead>Amount</TableHead>\n</TableRow>"
       },
       {
         "name": "TableRow",
-        "summary": "Renders `<tr>`."
+        "summary": "Renders `<tr>`.",
+        "description": "One row of a `Table`; it highlights on hover and when `data-state=\"selected\"`.",
+        "example": "<TableRow data-state=\"selected\">\n  <TableCell>Ada Lovelace</TableCell>\n  <TableCell>$250.00</TableCell>\n</TableRow>"
       },
       {
         "name": "TableCell",
-        "summary": "Renders `<td>`."
+        "summary": "Renders `<td>`.",
+        "description": "A data cell of a `Table` row that holds one value.",
+        "example": "<TableRow>\n  <TableCell>Ada Lovelace</TableCell>\n  <TableCell>$250.00</TableCell>\n</TableRow>"
       },
       {
         "name": "TableCaption",
-        "summary": "Renders `<caption>`."
+        "summary": "Renders `<caption>`.",
+        "description": "The visible title of a `Table` that names it for everyone, including screen reader users.",
+        "example": "<Table>\n  <TableCaption>A list of your recent invoices.</TableCaption>\n  <TableBody>\n    <TableRow>\n      <TableCell>Invoice 1042</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>"
       }
     ],
     "props": [
@@ -21687,23 +22377,33 @@
     "exports": [
       {
         "name": "Tabs",
-        "summary": "Renders `TabsPrimitive.Root`."
+        "summary": "Renders `TabsPrimitive.Root`.",
+        "description": "The root that switches between mutually exclusive panels; use `orientation` for a horizontal or a vertical list of triggers.",
+        "example": "<Tabs defaultValue=\"preview\">\n  <TabsList>\n    <TabsTrigger value=\"preview\">Preview</TabsTrigger>\n    <TabsTrigger value=\"code\">Code</TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"preview\">Your changes appear here.</TabsContent>\n</Tabs>"
       },
       {
         "name": "TabsList",
-        "summary": "Renders `TabsPrimitive.List`."
+        "summary": "Renders `TabsPrimitive.List`.",
+        "description": "The row of `TabsTrigger`s; use `variant` to choose a filled background or an underline on the active tab.",
+        "example": "<TabsList variant=\"line\">\n  <TabsTrigger value=\"preview\">Preview</TabsTrigger>\n  <TabsTrigger value=\"code\">Code</TabsTrigger>\n</TabsList>"
       },
       {
         "name": "TabsTrigger",
-        "summary": "Renders `TabsPrimitive.Trigger`."
+        "summary": "Renders `TabsPrimitive.Trigger`.",
+        "description": "The control that selects one panel; its `value` matches the `value` of a `TabsContent`.",
+        "example": "<TabsList>\n  <TabsTrigger value=\"preview\">Preview</TabsTrigger>\n  <TabsTrigger value=\"code\" disabled>Code</TabsTrigger>\n</TabsList>"
       },
       {
         "name": "TabsContent",
-        "summary": "Renders `TabsPrimitive.Content`."
+        "summary": "Renders `TabsPrimitive.Content`.",
+        "description": "The panel shown when the `TabsTrigger` with the same `value` is selected.",
+        "example": "<TabsContent value=\"preview\">\n  <p>Your changes appear here.</p>\n</TabsContent>"
       },
       {
         "name": "tabsListVariants",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "Applies the `TabsList` styles to another element through `variant`, for example a custom tab strip.",
+        "example": "<div className={cn(tabsListVariants({ variant: \"line\" }))}>…</div>"
       }
     ],
     "props": [
@@ -21961,7 +22661,9 @@
     "exports": [
       {
         "name": "Textarea",
-        "summary": "Renders `<textarea>`."
+        "summary": "Renders `<textarea>`.",
+        "description": "A multi-line text field that grows with its content, for comments, messages and other free-form text.",
+        "example": "<Field>\n  <FieldLabel htmlFor=\"comment\">Comment</FieldLabel>\n  <Textarea id=\"comment\" placeholder=\"Share what you think.\" />\n</Field>"
       }
     ],
     "props": [
@@ -22256,11 +22958,15 @@
     "exports": [
       {
         "name": "Toggle",
-        "summary": "Renders `TogglePrimitive.Root`."
+        "summary": "Renders `TogglePrimitive.Root`.",
+        "description": "A button that switches one option on or off while the user works, such as bold text or a filter.",
+        "example": "<Toggle aria-label=\"Bold\" variant=\"outline\">\n  <TextBIcon />\n</Toggle>"
       },
       {
         "name": "toggleVariants",
-        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style."
+        "summary": "A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.",
+        "description": "Use `toggleVariants` to give another element the `Toggle` look, as `ToggleGroup` does for its items.",
+        "example": "<button className={toggleVariants({ variant: \"outline\", size: \"sm\" })}>Bold</button>"
       }
     ],
     "props": [
@@ -22440,11 +23146,15 @@
     "exports": [
       {
         "name": "ToggleGroup",
-        "summary": "Renders `ToggleGroupPrimitive.Root`."
+        "summary": "Renders `ToggleGroupPrimitive.Root`.",
+        "description": "A set of toggle buttons that share one `variant` and `size`; use `type=\"single\"` for an exclusive choice and `type=\"multiple\"` otherwise.",
+        "example": "<ToggleGroup type=\"single\" variant=\"outline\" aria-label=\"View\">\n  <ToggleGroupItem value=\"list\">List</ToggleGroupItem>\n  <ToggleGroupItem value=\"grid\">Grid</ToggleGroupItem>\n</ToggleGroup>"
       },
       {
         "name": "ToggleGroupItem",
-        "summary": "Renders `ToggleGroupPrimitive.Item`."
+        "summary": "Renders `ToggleGroupPrimitive.Item`.",
+        "description": "One toggle button of a `ToggleGroup`, which passes down its `variant` and `size`; `value` identifies it.",
+        "example": "<ToggleGroup type=\"multiple\" aria-label=\"Text formatting\">\n  <ToggleGroupItem value=\"bold\" aria-label=\"Bold\">\n    <TextBIcon />\n  </ToggleGroupItem>\n</ToggleGroup>"
       }
     ],
     "props": [
@@ -22719,19 +23429,27 @@
     "exports": [
       {
         "name": "Tooltip",
-        "summary": "Renders `TooltipPrimitive.Root`."
+        "summary": "Renders `TooltipPrimitive.Root`.",
+        "description": "A small label that appears when its trigger is hovered or focused, to name an icon button or show a shortcut.",
+        "example": "<Tooltip>\n  <TooltipTrigger asChild>\n    <Button size=\"icon\" aria-label=\"Copy link\">\n      <CopyIcon />\n    </Button>\n  </TooltipTrigger>\n  <TooltipContent>Copy link</TooltipContent>\n</Tooltip>"
       },
       {
         "name": "TooltipContent",
-        "summary": "Renders `TooltipPrimitive.Content`."
+        "summary": "Renders `TooltipPrimitive.Content`.",
+        "description": "The one-line text bubble of a `Tooltip`, which carries no interactive element.",
+        "example": "<Tooltip>\n  <TooltipTrigger>Plan</TooltipTrigger>\n  <TooltipContent>Your plan renews on the first of each month.</TooltipContent>\n</Tooltip>"
       },
       {
         "name": "TooltipProvider",
-        "summary": "Renders `TooltipPrimitive.Provider`."
+        "summary": "Renders `TooltipPrimitive.Provider`.",
+        "description": "Sets the shared hover delay for every `Tooltip` below it; mount it once high in the tree, such as the root layout.",
+        "example": "<TooltipProvider delayDuration={300}>\n  <App />\n</TooltipProvider>"
       },
       {
         "name": "TooltipTrigger",
-        "summary": "Renders `TooltipPrimitive.Trigger`."
+        "summary": "Renders `TooltipPrimitive.Trigger`.",
+        "description": "The element that shows its `Tooltip` on hover or focus; use `asChild` to keep your own button or link.",
+        "example": "<Tooltip>\n  <TooltipTrigger asChild>\n    <Button variant=\"ghost\">Help</Button>\n  </TooltipTrigger>\n  <TooltipContent>Open the help center</TooltipContent>\n</Tooltip>"
       }
     ],
     "props": [

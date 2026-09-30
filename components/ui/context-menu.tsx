@@ -7,12 +7,34 @@ import { cn } from "@/lib/utils"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CaretRightIcon, CheckIcon } from "@phosphor-icons/react"
 
+/**
+ * The root of a right-click menu: wraps a `ContextMenuTrigger` and a `ContextMenuContent` and holds their open state.
+ *
+ * @example
+ * <ContextMenu>
+ *   <ContextMenuTrigger>Right-click this card</ContextMenuTrigger>
+ *   <ContextMenuContent>
+ *     <ContextMenuItem>Copy link</ContextMenuItem>
+ *   </ContextMenuContent>
+ * </ContextMenu>
+ */
 function ContextMenu({
   ...props
 }: React.ComponentProps<typeof ContextMenuPrimitive.Root>) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />
 }
 
+/**
+ * The area that opens the `ContextMenu` on a right-click, which is the element the menu's actions apply to.
+ *
+ * @example
+ * <ContextMenu>
+ *   <ContextMenuTrigger>Project notes</ContextMenuTrigger>
+ *   <ContextMenuContent>
+ *     <ContextMenuItem>Rename</ContextMenuItem>
+ *   </ContextMenuContent>
+ * </ContextMenu>
+ */
 function ContextMenuTrigger({
   className,
   ...props
@@ -26,6 +48,15 @@ function ContextMenuTrigger({
   )
 }
 
+/**
+ * Groups related items of a `ContextMenu` so assistive technology announces them together.
+ *
+ * @example
+ * <ContextMenuGroup>
+ *   <ContextMenuItem>Cut</ContextMenuItem>
+ *   <ContextMenuItem>Copy</ContextMenuItem>
+ * </ContextMenuGroup>
+ */
 function ContextMenuGroup({
   ...props
 }: React.ComponentProps<typeof ContextMenuPrimitive.Group>) {
@@ -34,6 +65,16 @@ function ContextMenuGroup({
   )
 }
 
+/**
+ * Renders its children outside the DOM hierarchy of the menu, for content that must escape a clipping ancestor.
+ *
+ * @example
+ * <ContextMenuPortal>
+ *   <ContextMenuSubContent>
+ *     <ContextMenuItem>Share by email</ContextMenuItem>
+ *   </ContextMenuSubContent>
+ * </ContextMenuPortal>
+ */
 function ContextMenuPortal({
   ...props
 }: React.ComponentProps<typeof ContextMenuPrimitive.Portal>) {
@@ -42,12 +83,32 @@ function ContextMenuPortal({
   )
 }
 
+/**
+ * The root of a nested menu inside a `ContextMenu`: pairs a `ContextMenuSubTrigger` with a `ContextMenuSubContent`.
+ *
+ * @example
+ * <ContextMenuSub>
+ *   <ContextMenuSubTrigger>Share</ContextMenuSubTrigger>
+ *   <ContextMenuSubContent>
+ *     <ContextMenuItem>Copy link</ContextMenuItem>
+ *   </ContextMenuSubContent>
+ * </ContextMenuSub>
+ */
 function ContextMenuSub({
   ...props
 }: React.ComponentProps<typeof ContextMenuPrimitive.Sub>) {
   return <ContextMenuPrimitive.Sub data-slot="context-menu-sub" {...props} />
 }
 
+/**
+ * Holds the `value` of a set of `ContextMenuRadioItem`s so that exactly one option is selected.
+ *
+ * @example
+ * <ContextMenuRadioGroup value={view} onValueChange={setView}>
+ *   <ContextMenuRadioItem value="list">List view</ContextMenuRadioItem>
+ *   <ContextMenuRadioItem value="grid">Grid view</ContextMenuRadioItem>
+ * </ContextMenuRadioGroup>
+ */
 function ContextMenuRadioGroup({
   ...props
 }: React.ComponentProps<typeof ContextMenuPrimitive.RadioGroup>) {
@@ -59,6 +120,15 @@ function ContextMenuRadioGroup({
   )
 }
 
+/**
+ * The floating panel of a `ContextMenu` that lists the actions for the targeted element.
+ *
+ * @example
+ * <ContextMenuContent>
+ *   <ContextMenuItem>Copy</ContextMenuItem>
+ *   <ContextMenuItem>Paste</ContextMenuItem>
+ * </ContextMenuContent>
+ */
 function ContextMenuContent({
   className,
   ...props
@@ -79,6 +149,12 @@ function ContextMenuContent({
   )
 }
 
+/**
+ * A plain action in a `ContextMenu`; use `variant="destructive"` for an action that removes something.
+ *
+ * @example
+ * <ContextMenuItem variant="destructive">Delete file</ContextMenuItem>
+ */
 function ContextMenuItem({
   className,
   inset,
@@ -105,6 +181,17 @@ function ContextMenuItem({
   )
 }
 
+/**
+ * The item that opens a submenu, shown with an arrow at its end; use it to keep a long list of actions short.
+ *
+ * @example
+ * <ContextMenuSub>
+ *   <ContextMenuSubTrigger>Move to</ContextMenuSubTrigger>
+ *   <ContextMenuSubContent>
+ *     <ContextMenuItem>Archive</ContextMenuItem>
+ *   </ContextMenuSubContent>
+ * </ContextMenuSub>
+ */
 function ContextMenuSubTrigger({
   className,
   inset,
@@ -132,6 +219,15 @@ function ContextMenuSubTrigger({
   )
 }
 
+/**
+ * The panel of a submenu, opened by its `ContextMenuSubTrigger`, that lists the nested actions.
+ *
+ * @example
+ * <ContextMenuSubContent>
+ *   <ContextMenuItem>Export as PDF</ContextMenuItem>
+ *   <ContextMenuItem>Export as CSV</ContextMenuItem>
+ * </ContextMenuSubContent>
+ */
 function ContextMenuSubContent({
   className,
   ...props
@@ -148,6 +244,14 @@ function ContextMenuSubContent({
   )
 }
 
+/**
+ * An item in a `ContextMenu` that turns one option on or off and shows a check while it is on.
+ *
+ * @example
+ * <ContextMenuCheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>
+ *   Show grid
+ * </ContextMenuCheckboxItem>
+ */
 function ContextMenuCheckboxItem({
   className,
   children,
@@ -181,6 +285,15 @@ function ContextMenuCheckboxItem({
   )
 }
 
+/**
+ * One choice among several exclusive options in a `ContextMenuRadioGroup`, marked with a check when selected.
+ *
+ * @example
+ * <ContextMenuRadioGroup value="name">
+ *   <ContextMenuRadioItem value="name">Sort by name</ContextMenuRadioItem>
+ *   <ContextMenuRadioItem value="date">Sort by date</ContextMenuRadioItem>
+ * </ContextMenuRadioGroup>
+ */
 function ContextMenuRadioItem({
   className,
   children,
@@ -212,6 +325,12 @@ function ContextMenuRadioItem({
   )
 }
 
+/**
+ * A non-interactive heading that names the section of items below it in a `ContextMenu`.
+ *
+ * @example
+ * <ContextMenuLabel>Arrange</ContextMenuLabel>
+ */
 function ContextMenuLabel({
   className,
   inset,
@@ -232,6 +351,14 @@ function ContextMenuLabel({
   )
 }
 
+/**
+ * A thin rule that splits a `ContextMenu` into groups of related actions.
+ *
+ * @example
+ * <ContextMenuItem>Duplicate</ContextMenuItem>
+ * <ContextMenuSeparator />
+ * <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+ */
 function ContextMenuSeparator({
   className,
   ...props
@@ -245,6 +372,15 @@ function ContextMenuSeparator({
   )
 }
 
+/**
+ * The keyboard shortcut of an item, pushed to the end of its row so people learn the faster route.
+ *
+ * @example
+ * <ContextMenuItem>
+ *   Copy
+ *   <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+ * </ContextMenuItem>
+ */
 function ContextMenuShortcut({
   className,
   ...props

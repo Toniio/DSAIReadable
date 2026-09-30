@@ -8,12 +8,34 @@ import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CaretDownIcon, CheckIcon, CaretUpIcon } from "@phosphor-icons/react"
 
+/**
+ * The root of a styled drop-down for picking one option from a list, with groups and rich item content.
+ *
+ * @example
+ * <Select>
+ *   <SelectTrigger aria-label="Role">
+ *     <SelectValue placeholder="Select a role" />
+ *   </SelectTrigger>
+ *   <SelectContent>
+ *     <SelectItem value="editor">Editor</SelectItem>
+ *   </SelectContent>
+ * </Select>
+ */
 function Select({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />
 }
 
+/**
+ * Groups related `SelectItem`s under a `SelectLabel` inside the `SelectContent`.
+ *
+ * @example
+ * <SelectGroup>
+ *   <SelectLabel>Fruits</SelectLabel>
+ *   <SelectItem value="apple">Apple</SelectItem>
+ * </SelectGroup>
+ */
 function SelectGroup({
   className,
   ...props
@@ -27,12 +49,28 @@ function SelectGroup({
   )
 }
 
+/**
+ * Shows the selected option inside the `SelectTrigger`, or its `placeholder` while nothing is chosen.
+ *
+ * @example
+ * <SelectTrigger aria-label="Status">
+ *   <SelectValue placeholder="Select a status" />
+ * </SelectTrigger>
+ */
 function SelectValue({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Value>) {
   return <SelectPrimitive.Value data-slot="select-value" {...props} />
 }
 
+/**
+ * The button that opens the list and shows the current choice; use `size="sm"` for a denser row.
+ *
+ * @example
+ * <SelectTrigger size="sm" aria-label="Status">
+ *   <SelectValue placeholder="Select a status" />
+ * </SelectTrigger>
+ */
 function SelectTrigger({
   className,
   size = "default",
@@ -59,6 +97,15 @@ function SelectTrigger({
   )
 }
 
+/**
+ * The floating list of a `Select`, rendered in a portal; set `position="popper"` to place it under the trigger.
+ *
+ * @example
+ * <SelectContent position="popper">
+ *   <SelectItem value="draft">Draft</SelectItem>
+ *   <SelectItem value="published">Published</SelectItem>
+ * </SelectContent>
+ */
 function SelectContent({
   className,
   children,
@@ -97,6 +144,15 @@ function SelectContent({
   )
 }
 
+/**
+ * A non-interactive caption that names the `SelectGroup` it sits in.
+ *
+ * @example
+ * <SelectGroup>
+ *   <SelectLabel>Vegetables</SelectLabel>
+ *   <SelectItem value="carrot">Carrot</SelectItem>
+ * </SelectGroup>
+ */
 function SelectLabel({
   className,
   ...props
@@ -110,6 +166,12 @@ function SelectLabel({
   )
 }
 
+/**
+ * One option of the list; give it a unique `value`, and rich children such as an icon if the choice needs them.
+ *
+ * @example
+ * <SelectItem value="admin">Administrator</SelectItem>
+ */
 function SelectItem({
   className,
   children,
@@ -137,6 +199,16 @@ function SelectItem({
   )
 }
 
+/**
+ * A thin line that divides sets of options inside the `SelectContent`.
+ *
+ * @example
+ * <SelectContent>
+ *   <SelectItem value="all">All projects</SelectItem>
+ *   <SelectSeparator />
+ *   <SelectItem value="archived">Archived</SelectItem>
+ * </SelectContent>
+ */
 function SelectSeparator({
   className,
   ...props
@@ -150,6 +222,15 @@ function SelectSeparator({
   )
 }
 
+/**
+ * The arrow shown at the top of a long list that scrolls it up while the pointer rests on it.
+ *
+ * @example
+ * <SelectContent>
+ *   <SelectScrollUpButton />
+ *   <SelectItem value="january">January</SelectItem>
+ * </SelectContent>
+ */
 function SelectScrollUpButton({
   className,
   ...props
@@ -168,6 +249,15 @@ function SelectScrollUpButton({
   )
 }
 
+/**
+ * The arrow shown at the bottom of a long list that scrolls it down while the pointer rests on it.
+ *
+ * @example
+ * <SelectContent>
+ *   <SelectItem value="december">December</SelectItem>
+ *   <SelectScrollDownButton />
+ * </SelectContent>
+ */
 function SelectScrollDownButton({
   className,
   ...props

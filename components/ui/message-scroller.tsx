@@ -14,12 +14,35 @@ import { Button } from "@/components/ui/button"
 import { ArrowDownIcon } from "@phosphor-icons/react"
 
 // no-data-slot: MessageScrollerProvider renders no element, it holds the scroll state for the scroller below it
+/**
+ * Holds the scroll state that the scroller's parts and hooks read, so wrap the whole scroller in it.
+ *
+ * @example
+ * <MessageScrollerProvider>
+ *   <MessageScroller>
+ *     <MessageScrollerViewport>
+ *       <MessageScrollerContent>{messages}</MessageScrollerContent>
+ *     </MessageScrollerViewport>
+ *   </MessageScroller>
+ * </MessageScrollerProvider>
+ */
 function MessageScrollerProvider(
   props: React.ComponentProps<typeof MessageScrollerPrimitive.Provider>
 ) {
   return <MessageScrollerPrimitive.Provider {...props} />
 }
 
+/**
+ * The bounded panel that fills its parent, follows new messages and positions the jump buttons over the viewport.
+ *
+ * @example
+ * <MessageScroller>
+ *   <MessageScrollerViewport>
+ *     <MessageScrollerContent>{messages}</MessageScrollerContent>
+ *   </MessageScrollerViewport>
+ *   <MessageScrollerButton />
+ * </MessageScroller>
+ */
 function MessageScroller({
   className,
   ...props
@@ -36,6 +59,16 @@ function MessageScroller({
   )
 }
 
+/**
+ * The scrolling region of a thread, named for assistive technology, which stays at the end while the reader is there.
+ *
+ * @example
+ * <MessageScroller>
+ *   <MessageScrollerViewport>
+ *     <MessageScrollerContent>{messages}</MessageScrollerContent>
+ *   </MessageScrollerViewport>
+ * </MessageScroller>
+ */
 function MessageScrollerViewport({
   className,
   ...props
@@ -53,6 +86,16 @@ function MessageScrollerViewport({
   )
 }
 
+/**
+ * The column that stacks the messages of a thread with a gap between them, inside the viewport.
+ *
+ * @example
+ * <MessageScrollerViewport>
+ *   <MessageScrollerContent>
+ *     <MessageScrollerItem messageId="m1">Welcome back.</MessageScrollerItem>
+ *   </MessageScrollerContent>
+ * </MessageScrollerViewport>
+ */
 function MessageScrollerContent({
   className,
   ...props
@@ -68,6 +111,16 @@ function MessageScrollerContent({
 
 // content-visibility skips the layout of the messages out of view; the
 // intrinsic size keeps the scrollbar stable until they render.
+/**
+ * One message of a thread; give it a stable `messageId` when code scrolls to it or reads its visibility.
+ *
+ * @example
+ * <MessageScrollerContent>
+ *   <MessageScrollerItem messageId="m42" scrollAnchor>
+ *     Your export is ready.
+ *   </MessageScrollerItem>
+ * </MessageScrollerContent>
+ */
 function MessageScrollerItem({
   className,
   scrollAnchor = false,
@@ -86,6 +139,17 @@ function MessageScrollerItem({
   )
 }
 
+/**
+ * The button that jumps to the latest message, or to the first with `direction="start"`, and hides while that end is in view.
+ *
+ * @example
+ * <MessageScroller>
+ *   <MessageScrollerViewport>
+ *     <MessageScrollerContent>{messages}</MessageScrollerContent>
+ *   </MessageScrollerViewport>
+ *   <MessageScrollerButton direction="end" />
+ * </MessageScroller>
+ */
 function MessageScrollerButton({
   direction = "end",
   className,
@@ -131,8 +195,27 @@ export {
   MessageScrollerContent,
   MessageScrollerItem,
   MessageScrollerButton,
+  /**
+   * Scrolls the nearest `MessageScroller` from code: to its end, its start or a message by id.
+   *
+   * @example
+   * const { scrollToMessage } = useMessageScroller()
+   * scrollToMessage("message-42")
+   */
   useMessageScroller,
+  /**
+   * Tells whether there is more to scroll toward the start or the end, to show or hide your own controls.
+   *
+   * @example
+   * const { start, end } = useMessageScrollerScrollable()
+   */
   useMessageScrollerScrollable,
+  /**
+   * Tells which messages are in view and which one is the current anchor.
+   *
+   * @example
+   * const { visibleMessageIds, currentAnchorId } = useMessageScrollerVisibility()
+   */
   useMessageScrollerVisibility,
 }
 

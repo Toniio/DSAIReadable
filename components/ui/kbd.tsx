@@ -1,6 +1,14 @@
 import { cn } from "@/lib/utils"
 
 import type { ComponentProps } from "react"
+/**
+ * An inline label for a single keyboard key, shown next to an action or inside a `Tooltip`.
+ *
+ * @example
+ * <p>
+ *   Search with <Kbd>⌘</Kbd>
+ * </p>
+ */
 function Kbd({ className, ...props }: React.ComponentProps<"kbd">) {
   return (
     <kbd
@@ -14,6 +22,16 @@ function Kbd({ className, ...props }: React.ComponentProps<"kbd">) {
   )
 }
 
+/**
+ * Joins several `Kbd` keys into one shortcut, such as a modifier plus a letter.
+ *
+ * @example
+ * <KbdGroup>
+ *   <Kbd>⌘</Kbd>
+ *   <Kbd>Shift</Kbd>
+ *   <Kbd>P</Kbd>
+ * </KbdGroup>
+ */
 function KbdGroup({ className, ...props }: React.ComponentProps<"kbd">) {
   return (
     <kbd

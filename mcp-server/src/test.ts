@@ -15,6 +15,7 @@ import plugin from "@dsaireadable/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
 import { Linter } from "eslint"
 import { parseChangelog } from "./lib/changelog.js"
+import { exportDocs } from "./lib/jsdoc.js"
 import {
   exportDeprecations,
   lintLists,
@@ -750,7 +751,15 @@ assert(
 // block per runtime export, opening with what it renders or returns.
 const apiSpecs = specs as unknown as Record<
   string,
-  { exports: { name: string; summary: string }[]; props: PropRow[] }
+  {
+    exports: {
+      name: string
+      summary: string
+      description: string
+      example: string
+    }[]
+    props: PropRow[]
+  }
 >
 const sidebarExports = apiSpecs.Sidebar?.exports ?? []
 assert(
@@ -761,6 +770,71 @@ assert(
       (e) => e.name === "SidebarMenuAction" && e.summary.startsWith("Renders ")
     ),
   "Every export is served with its summary (Sidebar: a hook and a component)"
+)
+
+// The description and the example of an export are its JSDoc, and only there
+// (src/lib/jsdoc.ts). An invented file covers what the reader must get right.
+const documented = exportDocs(
+  [
+    "/**",
+    " * A panel that holds one thing.",
+    " * It wraps on two lines.",
+    " *",
+    " * @example",
+    " * <Panel>",
+    " *   <PanelTitle>Hi</PanelTitle>",
+    " * </Panel>",
+    " */",
+    "function Panel() { return null }",
+    "const Bare = () => null",
+    "/** Inline, with a description and no example. */",
+    "export const Inline = () => null",
+    "function Hidden() { return null }",
+    'import { useThing } from "pkg"',
+    "export type PanelProps = {}",
+    "export {",
+    "  Panel,",
+    "  Bare,",
+    "  /**",
+    "   * Reads the thing.",
+    "   *",
+    "   * @example",
+    "   * const thing = useThing()",
+    "   */",
+    "  useThing,",
+    "}",
+  ].join("\n"),
+  "@/components/ui/panel"
+)
+assert(
+  documented.map((d) => d.name).join() === "Panel,Bare,Inline,useThing" &&
+    documented[0].description ===
+      "A panel that holds one thing. It wraps on two lines." &&
+    documented[0].example ===
+      "<Panel>\n  <PanelTitle>Hi</PanelTitle>\n</Panel>",
+  "exportDocs reads the description and the example of each runtime export — on its declaration, or on its specifier when it is imported and re-exported — and leaves types and private functions out"
+)
+assert(
+  documented[3].description === "Reads the thing." &&
+    documented[3].example === "const thing = useThing()" &&
+    documented[1].description === "" &&
+    documented[1].example === "" &&
+    documented[2].description !== "" &&
+    documented[2].example === "",
+  "exportDocs lists an export with no JSDoc, or no example, with an empty string instead of skipping it"
+)
+
+// Every export of every component spec is served with both, so an agent never
+// has to open the file to learn what an export is for or how it is written.
+const undocumented = Object.entries(apiSpecs).flatMap(([name, spec]) =>
+  spec.exports.flatMap((e) => [
+    ...(e.description === "" ? [`${name}.${e.name}: description`] : []),
+    ...(e.example === "" ? [`${name}.${e.name}: @example`] : []),
+  ])
+)
+assert(
+  undocumented.length === 0,
+  `Every export of the ${Object.keys(apiSpecs).length} component specs has a JSDoc description and @example — missing: ${undocumented.slice(0, 12).join(", ")}${undocumented.length > 12 ? ` … (${undocumented.length} in all)` : ""}`
 )
 assert(
   apiSpecs.Sidebar?.props.some(

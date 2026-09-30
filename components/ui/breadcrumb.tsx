@@ -5,6 +5,18 @@ import { cn } from "@/lib/utils"
 import { CaretRightIcon, DotsThreeIcon } from "@phosphor-icons/react"
 
 import { UI_STRINGS } from "@/lib/ui-strings"
+/**
+ * The navigation landmark for the path to the current page; use one per page, at the top of the main content.
+ *
+ * @example
+ * <Breadcrumb>
+ *   <BreadcrumbList>
+ *     <BreadcrumbItem>
+ *       <BreadcrumbPage>Products</BreadcrumbPage>
+ *     </BreadcrumbItem>
+ *   </BreadcrumbList>
+ * </Breadcrumb>
+ */
 function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
@@ -16,6 +28,22 @@ function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
   )
 }
 
+/**
+ * The ordered list inside a `Breadcrumb` that lays out its items and separators in a wrapping row.
+ *
+ * @example
+ * <Breadcrumb>
+ *   <BreadcrumbList>
+ *     <BreadcrumbItem>
+ *       <BreadcrumbLink href="/">Home</BreadcrumbLink>
+ *     </BreadcrumbItem>
+ *     <BreadcrumbSeparator />
+ *     <BreadcrumbItem>
+ *       <BreadcrumbPage>Products</BreadcrumbPage>
+ *     </BreadcrumbItem>
+ *   </BreadcrumbList>
+ * </Breadcrumb>
+ */
 function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
   return (
     <ol
@@ -29,6 +57,16 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
   )
 }
 
+/**
+ * One step of the trail, wrapping a `BreadcrumbLink`, a `BreadcrumbPage` or a `BreadcrumbEllipsis`.
+ *
+ * @example
+ * <BreadcrumbList>
+ *   <BreadcrumbItem>
+ *     <BreadcrumbLink href="/">Home</BreadcrumbLink>
+ *   </BreadcrumbItem>
+ * </BreadcrumbList>
+ */
 function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
@@ -39,6 +77,14 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   )
 }
 
+/**
+ * A link to a parent page in the trail; set `asChild` to render your router's link component instead of an anchor.
+ *
+ * @example
+ * <BreadcrumbItem>
+ *   <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+ * </BreadcrumbItem>
+ */
 function BreadcrumbLink({
   asChild,
   className,
@@ -57,6 +103,14 @@ function BreadcrumbLink({
   )
 }
 
+/**
+ * The current page, the last step of the trail: it marks the location and is never clickable.
+ *
+ * @example
+ * <BreadcrumbItem>
+ *   <BreadcrumbPage>Product details</BreadcrumbPage>
+ * </BreadcrumbItem>
+ */
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
@@ -70,6 +124,20 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   )
 }
 
+/**
+ * The divider between two steps of the trail; pass `children` to replace the default chevron, and it stays hidden from screen readers.
+ *
+ * @example
+ * <BreadcrumbList>
+ *   <BreadcrumbItem>
+ *     <BreadcrumbLink href="/">Home</BreadcrumbLink>
+ *   </BreadcrumbItem>
+ *   <BreadcrumbSeparator />
+ *   <BreadcrumbItem>
+ *     <BreadcrumbPage>Products</BreadcrumbPage>
+ *   </BreadcrumbItem>
+ * </BreadcrumbList>
+ */
 function BreadcrumbSeparator({
   children,
   className,
@@ -88,6 +156,14 @@ function BreadcrumbSeparator({
   )
 }
 
+/**
+ * Stands in for the middle steps of a long trail; `srLabel` sets the text a screen reader announces for it.
+ *
+ * @example
+ * <BreadcrumbItem>
+ *   <BreadcrumbEllipsis />
+ * </BreadcrumbItem>
+ */
 function BreadcrumbEllipsis({
   className,
   srLabel = UI_STRINGS.breadcrumb.ellipsis,

@@ -8,6 +8,20 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
 import type { ComponentProps } from "react"
+/**
+ * Groups related controls in a semantic `fieldset`, such as the options of one multiple choice; nest it at most two levels deep.
+ *
+ * @example
+ * <FieldSet>
+ *   <FieldLegend>Notifications</FieldLegend>
+ *   <FieldGroup>
+ *     <Field orientation="horizontal">
+ *       <Checkbox id="email" />
+ *       <FieldLabel htmlFor="email">Email me about new replies</FieldLabel>
+ *     </Field>
+ *   </FieldGroup>
+ * </FieldSet>
+ */
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
     <fieldset
@@ -21,6 +35,14 @@ function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   )
 }
 
+/**
+ * The caption of a `FieldSet`; use `variant` `legend` for a fieldset and `label` everywhere else.
+ *
+ * @example
+ * <FieldSet>
+ *   <FieldLegend>Shipping method</FieldLegend>
+ * </FieldSet>
+ */
 function FieldLegend({
   className,
   variant = "legend",
@@ -39,6 +61,21 @@ function FieldLegend({
   )
 }
 
+/**
+ * Stacks several `Field`s with even spacing and supplies the container width that `responsive` fields read.
+ *
+ * @example
+ * <FieldGroup>
+ *   <Field>
+ *     <FieldLabel htmlFor="first-name">First name</FieldLabel>
+ *     <Input id="first-name" />
+ *   </Field>
+ *   <Field>
+ *     <FieldLabel htmlFor="last-name">Last name</FieldLabel>
+ *     <Input id="last-name" />
+ *   </Field>
+ * </FieldGroup>
+ */
 function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -70,6 +107,16 @@ const fieldVariants = cva(
   }
 )
 
+/**
+ * Ties one label to its control and carries the invalid state; set `data-invalid` from your validation and `orientation` to choose the layout.
+ *
+ * @example
+ * <Field data-invalid="true">
+ *   <FieldLabel htmlFor="email">Email address</FieldLabel>
+ *   <Input id="email" type="email" aria-invalid="true" />
+ *   <FieldError>Enter a valid email address.</FieldError>
+ * </Field>
+ */
 function Field({
   className,
   orientation = "vertical",
@@ -86,6 +133,18 @@ function Field({
   )
 }
 
+/**
+ * Wraps an option's title and description in one column when the control sits beside them.
+ *
+ * @example
+ * <Field orientation="horizontal">
+ *   <Checkbox id="updates" />
+ *   <FieldContent>
+ *     <FieldLabel htmlFor="updates">Product updates</FieldLabel>
+ *     <FieldDescription>Hear about new features once a month.</FieldDescription>
+ *   </FieldContent>
+ * </Field>
+ */
 function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -99,6 +158,15 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The label of a `Field`: use it, not `FieldTitle`, to tie text to a control through `htmlFor`.
+ *
+ * @example
+ * <Field>
+ *   <FieldLabel htmlFor="name">Full name</FieldLabel>
+ *   <Input id="name" />
+ * </Field>
+ */
 function FieldLabel({
   className,
   ...props
@@ -116,6 +184,20 @@ function FieldLabel({
   )
 }
 
+/**
+ * Titles an option inside a `FieldLabel` or `FieldContent`; it is not a `label` and ties to no control.
+ *
+ * @example
+ * <FieldLabel htmlFor="plan-pro">
+ *   <Field orientation="horizontal">
+ *     <FieldContent>
+ *       <FieldTitle>Pro plan</FieldTitle>
+ *       <FieldDescription>Unlimited projects for your team.</FieldDescription>
+ *     </FieldContent>
+ *     <RadioGroupItem value="pro" id="plan-pro" />
+ *   </Field>
+ * </FieldLabel>
+ */
 function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -129,6 +211,16 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Standing help text under a control that explains what to enter; use `FieldError` for a validation message.
+ *
+ * @example
+ * <Field>
+ *   <FieldLabel htmlFor="email">Email address</FieldLabel>
+ *   <Input id="email" type="email" />
+ *   <FieldDescription>We only use it to send receipts.</FieldDescription>
+ * </Field>
+ */
 function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
@@ -144,6 +236,20 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
+/**
+ * A rule that splits a `FieldGroup` into parts; pass `children` to print a short label, such as `Or`, on it.
+ *
+ * @example
+ * <FieldGroup>
+ *   <Field>
+ *     <Button>Continue with email</Button>
+ *   </Field>
+ *   <FieldSeparator>Or</FieldSeparator>
+ *   <Field>
+ *     <Button variant="outline">Continue with Google</Button>
+ *   </Field>
+ * </FieldGroup>
+ */
 function FieldSeparator({
   children,
   className,
@@ -174,6 +280,16 @@ function FieldSeparator({
   )
 }
 
+/**
+ * A validation message announced as an alert; pass `children` or an `errors` list, and it renders nothing when both are empty.
+ *
+ * @example
+ * <Field data-invalid="true">
+ *   <FieldLabel htmlFor="password">Password</FieldLabel>
+ *   <Input id="password" type="password" aria-invalid="true" />
+ *   <FieldError errors={[{ message: "Use at least 8 characters." }]} />
+ * </Field>
+ */
 function FieldError({
   className,
   children,

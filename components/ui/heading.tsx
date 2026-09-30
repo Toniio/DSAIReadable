@@ -3,6 +3,12 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * The classes of a `Heading` for a `level`, to give another element a heading's size and typeface.
+ *
+ * @example
+ * <p className={headingVariants({ level: 3 })}>Recent activity</p>
+ */
 const headingVariants = cva("font-heading font-semibold tracking-tight", {
   variants: {
     level: {
@@ -19,6 +25,12 @@ const headingVariants = cva("font-heading font-semibold tracking-tight", {
 
 type HeadingLevel = 1 | 2 | 3 | 4
 
+/**
+ * A semantic heading in the heading typeface, where `level` sets both the tag and the size and `as` changes only the tag.
+ *
+ * @example
+ * <Heading level={2}>Team settings</Heading>
+ */
 function Heading({
   className,
   level = 1,

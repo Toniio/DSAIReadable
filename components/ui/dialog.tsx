@@ -10,30 +10,73 @@ import { Button } from "@/components/ui/button"
 import { XIcon } from "@phosphor-icons/react"
 
 import { UI_STRINGS } from "@/lib/ui-strings"
+/**
+ * The root of a modal window for a form, details or a confirmation; it owns the open state.
+ *
+ * @example
+ * <Dialog>
+ *   <DialogTrigger asChild>
+ *     <Button>Edit profile</Button>
+ *   </DialogTrigger>
+ *   <DialogContent>…</DialogContent>
+ * </Dialog>
+ */
 function Dialog({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
 
+/**
+ * The control that opens the `Dialog`; pass `asChild` to use your own `Button`.
+ *
+ * @example
+ * <DialogTrigger asChild>
+ *   <Button>Edit profile</Button>
+ * </DialogTrigger>
+ */
 function DialogTrigger({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
+/**
+ * Mounts the dialog outside the page flow; `DialogContent` already includes it, so reach for it only to build a custom surface.
+ *
+ * @example
+ * <DialogPortal>
+ *   <DialogOverlay />
+ * </DialogPortal>
+ */
 function DialogPortal({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
+/**
+ * A control that closes the `Dialog` when pressed, such as a cancel button in the footer.
+ *
+ * @example
+ * <DialogClose asChild>
+ *   <Button variant="outline">Cancel</Button>
+ * </DialogClose>
+ */
 function DialogClose({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Close>) {
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
 }
 
+/**
+ * The dimmed layer behind a `Dialog` that separates it from the page; `DialogContent` already renders it.
+ *
+ * @example
+ * <DialogPortal>
+ *   <DialogOverlay />
+ * </DialogPortal>
+ */
 function DialogOverlay({
   className,
   ...props
@@ -47,6 +90,16 @@ function DialogOverlay({
   )
 }
 
+/**
+ * The modal surface of a `Dialog`; it shows a close button unless `showCloseButton` is false, and `closeLabel` names it.
+ *
+ * @example
+ * <DialogContent closeLabel="Close">
+ *   <DialogHeader>
+ *     <DialogTitle>Edit profile</DialogTitle>
+ *   </DialogHeader>
+ * </DialogContent>
+ */
 function DialogContent({
   className,
   children,
@@ -93,6 +146,15 @@ function DialogContent({
   )
 }
 
+/**
+ * Groups the `DialogTitle` and the `DialogDescription` at the top of the dialog.
+ *
+ * @example
+ * <DialogHeader>
+ *   <DialogTitle>Edit profile</DialogTitle>
+ *   <DialogDescription>Update how your name appears to your team.</DialogDescription>
+ * </DialogHeader>
+ */
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -103,6 +165,14 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Holds the actions that finish the dialog's task; set `showCloseButton` to add a cancel button.
+ *
+ * @example
+ * <DialogFooter showCloseButton>
+ *   <Button>Save changes</Button>
+ * </DialogFooter>
+ */
 function DialogFooter({
   className,
   showCloseButton = false,
@@ -132,6 +202,12 @@ function DialogFooter({
   )
 }
 
+/**
+ * The name of the `Dialog`, announced by screen readers; every `Dialog` renders one.
+ *
+ * @example
+ * <DialogTitle>Edit profile</DialogTitle>
+ */
 function DialogTitle({
   className,
   ...props
@@ -145,6 +221,14 @@ function DialogTitle({
   )
 }
 
+/**
+ * A supporting sentence under the `DialogTitle` that explains what the dialog asks of the user.
+ *
+ * @example
+ * <DialogDescription>
+ *   Update how your name appears to your team.
+ * </DialogDescription>
+ */
 function DialogDescription({
   className,
   ...props

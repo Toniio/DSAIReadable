@@ -6,6 +6,16 @@ import { cn } from "@/lib/utils"
 import { FOCUS_RING } from "@/lib/focus"
 
 import type { ComponentProps } from "react"
+/**
+ * The container that lays out `ResizablePanel`s in a row or a column; set `orientation` to choose the direction.
+ *
+ * @example
+ * <ResizablePanelGroup orientation="horizontal">
+ *   <ResizablePanel defaultSize={30} minSize={20}>Files</ResizablePanel>
+ *   <ResizableHandle />
+ *   <ResizablePanel minSize={30}>Editor</ResizablePanel>
+ * </ResizablePanelGroup>
+ */
 function ResizablePanelGroup({
   className,
   ...props
@@ -24,10 +34,28 @@ function ResizablePanelGroup({
   )
 }
 
+/**
+ * One section of a `ResizablePanelGroup` that the user grows or shrinks; give it a `minSize` so its content is never crushed.
+ *
+ * @example
+ * <ResizablePanel defaultSize={25} minSize={15}>
+ *   Sidebar
+ * </ResizablePanel>
+ */
 function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps) {
   return <ResizablePrimitive.Panel data-slot="resizable-panel" {...props} />
 }
 
+/**
+ * The draggable divider between two `ResizablePanel`s, reachable by keyboard; set `withHandle` to show a grip.
+ *
+ * @example
+ * <ResizablePanelGroup orientation="horizontal">
+ *   <ResizablePanel minSize={20}>Navigation</ResizablePanel>
+ *   <ResizableHandle withHandle />
+ *   <ResizablePanel minSize={20}>Content</ResizablePanel>
+ * </ResizablePanelGroup>
+ */
 function ResizableHandle({
   withHandle,
   className,

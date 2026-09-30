@@ -6,6 +6,15 @@ import { Switch as SwitchPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 
+/**
+ * A two-state control for a setting whose effect is immediate; pair it with a visible `Label`.
+ *
+ * @example
+ * <div className="flex items-center gap-2">
+ *   <Switch id="notifications" defaultChecked />
+ *   <Label htmlFor="notifications">Email notifications</Label>
+ * </div>
+ */
 function Switch({
   className,
   size = "default",

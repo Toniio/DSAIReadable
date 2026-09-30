@@ -64,6 +64,9 @@ for (const name of readdirSync(DIR)
   const lines = readFileSync(file, "utf8").split("\n")
 
   lines.forEach((line, index) => {
+    // A JSDoc line is documentation, never rendered: the `@example` of an
+    // export is JSX with wording of its own.
+    if (/^\s*(\/\*\*|\*)/.test(line)) return
     const at = { file, line: index + 1 }
 
     for (const attr of ["aria-label", "title", "alt", "aria-description"]) {

@@ -3,6 +3,17 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 
+/**
+ * A bordered surface that groups one topic: a title, some content and its actions.
+ *
+ * @example
+ * <Card>
+ *   <CardHeader>
+ *     <CardTitle>Team settings</CardTitle>
+ *   </CardHeader>
+ *   <CardContent>Manage who can edit this project.</CardContent>
+ * </Card>
+ */
 function Card({
   className,
   size = "default",
@@ -21,6 +32,15 @@ function Card({
   )
 }
 
+/**
+ * The top of a `Card`: holds the `CardTitle`, the `CardDescription` and an optional `CardAction`.
+ *
+ * @example
+ * <CardHeader>
+ *   <CardTitle>Billing</CardTitle>
+ *   <CardDescription>Your plan renews on the first of each month.</CardDescription>
+ * </CardHeader>
+ */
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -34,6 +54,12 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The heading of a `Card`, inside its `CardHeader`.
+ *
+ * @example
+ * <CardTitle>Team settings</CardTitle>
+ */
 function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -47,6 +73,12 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * A supporting sentence under the `CardTitle`.
+ *
+ * @example
+ * <CardDescription>Choose who can see this project.</CardDescription>
+ */
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -57,6 +89,14 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * A control aligned to the end of the `CardHeader`, such as a menu button.
+ *
+ * @example
+ * <CardAction>
+ *   <Button variant="outline" size="sm">Edit</Button>
+ * </CardAction>
+ */
 function CardAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -70,6 +110,14 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The body of a `Card`.
+ *
+ * @example
+ * <CardContent>
+ *   <p>Three people have access to this project.</p>
+ * </CardContent>
+ */
 function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -80,6 +128,14 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The bottom of a `Card`: holds the actions that finish its task.
+ *
+ * @example
+ * <CardFooter>
+ *   <Button>Save changes</Button>
+ * </CardFooter>
+ */
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

@@ -7,6 +7,18 @@ import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
 import { MinusIcon } from "@phosphor-icons/react"
 
+/**
+ * A segmented field for a one-time passcode of a fixed length; set `maxLength` to the number of characters.
+ *
+ * @example
+ * <InputOTP maxLength={6} aria-label="Verification code">
+ *   <InputOTPGroup>
+ *     <InputOTPSlot index={0} />
+ *     <InputOTPSlot index={1} />
+ *     <InputOTPSlot index={2} />
+ *   </InputOTPGroup>
+ * </InputOTP>
+ */
 function InputOTP({
   className,
   containerClassName,
@@ -28,6 +40,19 @@ function InputOTP({
   )
 }
 
+/**
+ * Joins adjacent `InputOTPSlot`s into one visual block, so a long code reads as short runs of characters.
+ *
+ * @example
+ * <InputOTP maxLength={4} aria-label="PIN">
+ *   <InputOTPGroup>
+ *     <InputOTPSlot index={0} />
+ *     <InputOTPSlot index={1} />
+ *     <InputOTPSlot index={2} />
+ *     <InputOTPSlot index={3} />
+ *   </InputOTPGroup>
+ * </InputOTP>
+ */
 function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -41,6 +66,15 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Shows one character of the code at the position given by `index`, with the caret and the active highlight.
+ *
+ * @example
+ * <InputOTPGroup>
+ *   <InputOTPSlot index={0} />
+ *   <InputOTPSlot index={1} />
+ * </InputOTPGroup>
+ */
 function InputOTPSlot({
   index,
   className,
@@ -71,6 +105,24 @@ function InputOTPSlot({
   )
 }
 
+/**
+ * A dash between two `InputOTPGroup`s that splits a code into runs, like 3 + 3.
+ *
+ * @example
+ * <InputOTP maxLength={6} aria-label="Verification code">
+ *   <InputOTPGroup>
+ *     <InputOTPSlot index={0} />
+ *     <InputOTPSlot index={1} />
+ *     <InputOTPSlot index={2} />
+ *   </InputOTPGroup>
+ *   <InputOTPSeparator />
+ *   <InputOTPGroup>
+ *     <InputOTPSlot index={3} />
+ *     <InputOTPSlot index={4} />
+ *     <InputOTPSlot index={5} />
+ *   </InputOTPGroup>
+ * </InputOTP>
+ */
 function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
   return (
     <div

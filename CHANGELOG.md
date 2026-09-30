@@ -15,6 +15,12 @@ Until then, a pull request that changes behavior adds its line under
 
 ### Added
 
+- Component manifest from JSDoc: every runtime export of the 65 components
+  carries a one-sentence description and an `@example` in its JSDoc, the single
+  place they are written. `component-specs.json` serves both next to each
+  export, so `dsaireadable_get_component_specs` (detailed) returns
+  `description` and `example` with each `exports` entry, and an MCP test fails
+  naming any export that misses one. `lint-ui-strings` ignores JSDoc lines.
 - Deprecation chain: one edit tells an agent four ways. A token's
   `$deprecated`, with its `replacement` in `$extensions["design.dsaireadable"]`,
   or a JSDoc `@deprecated {@link Replacement}` on a component export, reaches

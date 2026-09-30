@@ -3,6 +3,14 @@
 import * as React from "react"
 import { Direction } from "radix-ui"
 
+/**
+ * Passes the reading direction to every Radix component below it; wrap the app or a section with it to support right-to-left languages.
+ *
+ * @example
+ * <DirectionProvider direction="rtl">
+ *   <App />
+ * </DirectionProvider>
+ */
 function DirectionProvider({
   dir,
   direction,
@@ -21,6 +29,12 @@ function DirectionProvider({
   )
 }
 
+/**
+ * Reads the reading direction from the nearest `DirectionProvider`, for a component that mirrors its own layout.
+ *
+ * @example
+ * const direction = useDirection()
+ */
 const useDirection = Direction.useDirection
 
 export { DirectionProvider, useDirection }

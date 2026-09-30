@@ -6,6 +6,19 @@ import { Slider as SliderPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { FOCUS_RING_WIDTH } from "@/lib/focus"
 
+/**
+ * Picks a number, or a range with two values, between `min` and `max`; always name it and name each thumb of a range.
+ *
+ * @example
+ * <Slider
+ *   defaultValue={[20, 80]}
+ *   min={0}
+ *   max={100}
+ *   step={5}
+ *   aria-label="Price range"
+ *   thumbLabels={["Minimum price", "Maximum price"]}
+ * />
+ */
 function Slider({
   className,
   defaultValue,

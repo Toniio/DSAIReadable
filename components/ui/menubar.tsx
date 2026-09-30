@@ -8,6 +8,19 @@ import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CheckIcon, CaretRightIcon } from "@phosphor-icons/react"
 
+/**
+ * A horizontal bar of drop-down menus for the commands of a desktop-style application, such as File, Edit and View.
+ *
+ * @example
+ * <Menubar>
+ *   <MenubarMenu>
+ *     <MenubarTrigger>File</MenubarTrigger>
+ *     <MenubarContent>
+ *       <MenubarItem>New file</MenubarItem>
+ *     </MenubarContent>
+ *   </MenubarMenu>
+ * </Menubar>
+ */
 function Menubar({
   className,
   ...props
@@ -24,24 +37,64 @@ function Menubar({
   )
 }
 
+/**
+ * One menu of the bar: it pairs a `MenubarTrigger` with the `MenubarContent` that the trigger opens.
+ *
+ * @example
+ * <MenubarMenu>
+ *   <MenubarTrigger>Edit</MenubarTrigger>
+ *   <MenubarContent>
+ *     <MenubarItem>Undo</MenubarItem>
+ *   </MenubarContent>
+ * </MenubarMenu>
+ */
 function MenubarMenu({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Menu>) {
   return <MenubarPrimitive.Menu data-slot="menubar-menu" {...props} />
 }
 
+/**
+ * Groups related `MenubarItem`s inside a menu so that assistive technology reads them together.
+ *
+ * @example
+ * <MenubarGroup>
+ *   <MenubarItem>Cut</MenubarItem>
+ *   <MenubarItem>Copy</MenubarItem>
+ *   <MenubarItem>Paste</MenubarItem>
+ * </MenubarGroup>
+ */
 function MenubarGroup({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Group>) {
   return <MenubarPrimitive.Group data-slot="menubar-group" {...props} />
 }
 
+/**
+ * Renders menu content in a portal outside its parent, which `MenubarContent` already does for you.
+ *
+ * @example
+ * <MenubarPortal>
+ *   <MenubarContent>
+ *     <MenubarItem>Open recent</MenubarItem>
+ *   </MenubarContent>
+ * </MenubarPortal>
+ */
 function MenubarPortal({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Portal>) {
   return <MenubarPrimitive.Portal data-slot="menubar-portal" {...props} />
 }
 
+/**
+ * Groups `MenubarRadioItem`s into one exclusive choice, controlled through `value` and `onValueChange`.
+ *
+ * @example
+ * <MenubarRadioGroup value={zoom} onValueChange={setZoom}>
+ *   <MenubarRadioItem value="fit">Fit to window</MenubarRadioItem>
+ *   <MenubarRadioItem value="full">Actual size</MenubarRadioItem>
+ * </MenubarRadioGroup>
+ */
 function MenubarRadioGroup({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.RadioGroup>) {
@@ -50,6 +103,17 @@ function MenubarRadioGroup({
   )
 }
 
+/**
+ * The button in the bar that opens its menu; its label names the set of commands, such as File.
+ *
+ * @example
+ * <MenubarMenu>
+ *   <MenubarTrigger>View</MenubarTrigger>
+ *   <MenubarContent>
+ *     <MenubarItem>Zoom in</MenubarItem>
+ *   </MenubarContent>
+ * </MenubarMenu>
+ */
 function MenubarTrigger({
   className,
   ...props
@@ -66,6 +130,15 @@ function MenubarTrigger({
   )
 }
 
+/**
+ * The floating list of a menu, which holds its items, groups, labels and separators.
+ *
+ * @example
+ * <MenubarContent>
+ *   <MenubarItem>Save</MenubarItem>
+ *   <MenubarItem>Save as</MenubarItem>
+ * </MenubarContent>
+ */
 function MenubarContent({
   className,
   align = "start",
@@ -90,6 +163,12 @@ function MenubarContent({
   )
 }
 
+/**
+ * A command in a menu; set `variant="destructive"` for an irreversible action.
+ *
+ * @example
+ * <MenubarItem variant="destructive">Delete project</MenubarItem>
+ */
 function MenubarItem({
   className,
   inset,
@@ -116,6 +195,14 @@ function MenubarItem({
   )
 }
 
+/**
+ * A menu item that turns an option on or off and shows a check mark while it is on.
+ *
+ * @example
+ * <MenubarCheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>
+ *   Show grid
+ * </MenubarCheckboxItem>
+ */
 function MenubarCheckboxItem({
   className,
   children,
@@ -149,6 +236,14 @@ function MenubarCheckboxItem({
   )
 }
 
+/**
+ * One option of a `MenubarRadioGroup`, marked with a check when it is the selected one.
+ *
+ * @example
+ * <MenubarRadioGroup value="fit">
+ *   <MenubarRadioItem value="fit">Fit to window</MenubarRadioItem>
+ * </MenubarRadioGroup>
+ */
 function MenubarRadioItem({
   className,
   children,
@@ -180,6 +275,15 @@ function MenubarRadioItem({
   )
 }
 
+/**
+ * A non-interactive caption that names the section of items below it.
+ *
+ * @example
+ * <MenubarContent>
+ *   <MenubarLabel>Recent files</MenubarLabel>
+ *   <MenubarItem>Quarterly report</MenubarItem>
+ * </MenubarContent>
+ */
 function MenubarLabel({
   className,
   inset,
@@ -197,6 +301,16 @@ function MenubarLabel({
   )
 }
 
+/**
+ * A thin line that divides sets of unrelated commands inside a menu.
+ *
+ * @example
+ * <MenubarContent>
+ *   <MenubarItem>Save</MenubarItem>
+ *   <MenubarSeparator />
+ *   <MenubarItem>Close window</MenubarItem>
+ * </MenubarContent>
+ */
 function MenubarSeparator({
   className,
   ...props
@@ -210,6 +324,15 @@ function MenubarSeparator({
   )
 }
 
+/**
+ * Shows the keyboard shortcut of a `MenubarItem`; wire a real handler for every shortcut it displays.
+ *
+ * @example
+ * <MenubarItem>
+ *   New window
+ *   <MenubarShortcut>⌘N</MenubarShortcut>
+ * </MenubarItem>
+ */
 function MenubarShortcut({
   className,
   ...props
@@ -226,12 +349,34 @@ function MenubarShortcut({
   )
 }
 
+/**
+ * Wraps a nested submenu: it pairs a `MenubarSubTrigger` with the `MenubarSubContent` it opens.
+ *
+ * @example
+ * <MenubarSub>
+ *   <MenubarSubTrigger>Share</MenubarSubTrigger>
+ *   <MenubarSubContent>
+ *     <MenubarItem>Email link</MenubarItem>
+ *   </MenubarSubContent>
+ * </MenubarSub>
+ */
 function MenubarSub({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Sub>) {
   return <MenubarPrimitive.Sub data-slot="menubar-sub" {...props} />
 }
 
+/**
+ * The menu item that opens a submenu and shows a caret; keep nesting to two levels at most.
+ *
+ * @example
+ * <MenubarSub>
+ *   <MenubarSubTrigger>Export</MenubarSubTrigger>
+ *   <MenubarSubContent>
+ *     <MenubarItem>As PDF</MenubarItem>
+ *   </MenubarSubContent>
+ * </MenubarSub>
+ */
 function MenubarSubTrigger({
   className,
   inset,
@@ -259,6 +404,15 @@ function MenubarSubTrigger({
   )
 }
 
+/**
+ * The floating list of a submenu, opened by its `MenubarSubTrigger`.
+ *
+ * @example
+ * <MenubarSubContent>
+ *   <MenubarItem>As PDF</MenubarItem>
+ *   <MenubarItem>As image</MenubarItem>
+ * </MenubarSubContent>
+ */
 function MenubarSubContent({
   className,
   ...props

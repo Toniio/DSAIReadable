@@ -3,6 +3,15 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 
+/**
+ * Takes a single line of text or a file; pair it with a `Label` through `id` and set `aria-invalid` to show an error.
+ *
+ * @example
+ * <>
+ *   <Label htmlFor="email">Email address</Label>
+ *   <Input id="email" type="email" placeholder="you@example.com" />
+ * </>
+ */
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input

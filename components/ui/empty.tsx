@@ -3,6 +3,17 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 import type { ComponentProps } from "react"
+/**
+ * The root of an empty state: use it once per view when a list, table or section has no data yet.
+ *
+ * @example
+ * <Empty>
+ *   <EmptyHeader>
+ *     <EmptyTitle>No projects yet</EmptyTitle>
+ *     <EmptyDescription>Create your first project to get started.</EmptyDescription>
+ *   </EmptyHeader>
+ * </Empty>
+ */
 function Empty({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -16,6 +27,17 @@ function Empty({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Groups the `EmptyMedia`, `EmptyTitle` and `EmptyDescription` that say what is missing and why.
+ *
+ * @example
+ * <Empty>
+ *   <EmptyHeader>
+ *     <EmptyTitle>No results found</EmptyTitle>
+ *     <EmptyDescription>Try a different search term.</EmptyDescription>
+ *   </EmptyHeader>
+ * </Empty>
+ */
 function EmptyHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -41,6 +63,14 @@ const emptyMediaVariants = cva(
   }
 )
 
+/**
+ * A decorative visual for an empty state; use `variant="icon"` to set a Phosphor icon on a muted square.
+ *
+ * @example
+ * <EmptyMedia variant="icon">
+ *   <FolderOpenIcon />
+ * </EmptyMedia>
+ */
 function EmptyMedia({
   className,
   variant = "default",
@@ -58,6 +88,12 @@ function EmptyMedia({
 
 // A real heading, so screen readers list it; the level follows the page
 // outline, the look does not.
+/**
+ * The heading of an empty state; set `as` so its level follows the heading of the section that holds it.
+ *
+ * @example
+ * <EmptyTitle as="h3">No messages yet</EmptyTitle>
+ */
 function EmptyTitle({
   className,
   as: Comp = "h2",
@@ -74,6 +110,12 @@ function EmptyTitle({
   )
 }
 
+/**
+ * One or two sentences under the `EmptyTitle` that frame the action the user can take next.
+ *
+ * @example
+ * <EmptyDescription>Invite a teammate to start a conversation.</EmptyDescription>
+ */
 function EmptyDescription({
   className,
   ...props
@@ -90,6 +132,14 @@ function EmptyDescription({
   )
 }
 
+/**
+ * Holds the actions of an empty state, such as a create `Button` or a link to the documentation.
+ *
+ * @example
+ * <EmptyContent>
+ *   <Button>Create a project</Button>
+ * </EmptyContent>
+ */
 function EmptyContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

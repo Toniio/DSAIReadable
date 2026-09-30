@@ -2,6 +2,20 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Stacks the consecutive turns of one speaker in a column.
+ *
+ * @example
+ * <MessageGroup>
+ *   <Message>
+ *     <MessageContent>
+ *       <Bubble variant="secondary">
+ *         <BubbleContent>Your report is ready.</BubbleContent>
+ *       </Bubble>
+ *     </MessageContent>
+ *   </Message>
+ * </MessageGroup>
+ */
 function MessageGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -12,6 +26,18 @@ function MessageGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Lays out one turn of a conversation and aligns it to the start, or to the end with `align` for the user's own turns.
+ *
+ * @example
+ * <Message align="end">
+ *   <MessageContent>
+ *     <Bubble>
+ *       <BubbleContent>Can you send me the latest numbers?</BubbleContent>
+ *     </Bubble>
+ *   </MessageContent>
+ * </Message>
+ */
 function Message({
   className,
   align = "start",
@@ -30,6 +56,18 @@ function Message({
   )
 }
 
+/**
+ * Frames the speaker's `Avatar` at the bottom of a turn, lifted above the `MessageFooter` when there is one.
+ *
+ * @example
+ * <Message>
+ *   <MessageAvatar>
+ *     <Avatar>
+ *       <AvatarFallback>MJ</AvatarFallback>
+ *     </Avatar>
+ *   </MessageAvatar>
+ * </Message>
+ */
 function MessageAvatar({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -43,6 +81,18 @@ function MessageAvatar({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Holds the `Bubble`s, attachments and other content of a turn, inside its `Message`.
+ *
+ * @example
+ * <Message>
+ *   <MessageContent>
+ *     <Bubble variant="secondary">
+ *       <BubbleContent>Your plan renews on the first of each month.</BubbleContent>
+ *     </Bubble>
+ *   </MessageContent>
+ * </Message>
+ */
 function MessageContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -56,6 +106,19 @@ function MessageContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Names the speaker or shows the time above the content of a turn.
+ *
+ * @example
+ * <Message>
+ *   <MessageContent>
+ *     <MessageHeader>Maya Johnson, 9:41 AM</MessageHeader>
+ *     <Bubble variant="secondary">
+ *       <BubbleContent>Good morning, the draft is ready.</BubbleContent>
+ *     </Bubble>
+ *   </MessageContent>
+ * </Message>
+ */
 function MessageHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -69,6 +132,19 @@ function MessageHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Shows a status or actions below the content of a turn, such as whether it was read or edited.
+ *
+ * @example
+ * <Message align="end">
+ *   <MessageContent>
+ *     <Bubble>
+ *       <BubbleContent>See you tomorrow.</BubbleContent>
+ *     </Bubble>
+ *     <MessageFooter>Read</MessageFooter>
+ *   </MessageContent>
+ * </Message>
+ */
 function MessageFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

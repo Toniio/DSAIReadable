@@ -4,6 +4,19 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * The root of a semantic data table that scrolls sideways inside its container; use it for rows that share the same columns.
+ *
+ * @example
+ * <Table>
+ *   <TableCaption>Recent invoices</TableCaption>
+ *   <TableBody>
+ *     <TableRow>
+ *       <TableCell>Invoice 1042</TableCell>
+ *     </TableRow>
+ *   </TableBody>
+ * </Table>
+ */
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
@@ -19,6 +32,17 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
   )
 }
 
+/**
+ * The group of header rows of a `Table`, which lets assistive technology tell the column names from the data.
+ *
+ * @example
+ * <TableHeader>
+ *   <TableRow>
+ *     <TableHead>Customer</TableHead>
+ *     <TableHead>Amount</TableHead>
+ *   </TableRow>
+ * </TableHeader>
+ */
 function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
   return (
     <thead
@@ -29,6 +53,17 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
   )
 }
 
+/**
+ * The group that holds the data rows of a `Table`.
+ *
+ * @example
+ * <TableBody>
+ *   <TableRow>
+ *     <TableCell>Ada Lovelace</TableCell>
+ *     <TableCell>$250.00</TableCell>
+ *   </TableRow>
+ * </TableBody>
+ */
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   return (
     <tbody
@@ -39,6 +74,17 @@ function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   )
 }
 
+/**
+ * The summary rows at the end of a `Table`, such as totals or averages, set apart from the data rows.
+ *
+ * @example
+ * <TableFooter>
+ *   <TableRow>
+ *     <TableCell>Total</TableCell>
+ *     <TableCell>$250.00</TableCell>
+ *   </TableRow>
+ * </TableFooter>
+ */
 function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   return (
     <tfoot
@@ -52,6 +98,15 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   )
 }
 
+/**
+ * One row of a `Table`; it highlights on hover and when `data-state="selected"`.
+ *
+ * @example
+ * <TableRow data-state="selected">
+ *   <TableCell>Ada Lovelace</TableCell>
+ *   <TableCell>$250.00</TableCell>
+ * </TableRow>
+ */
 function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr
@@ -65,6 +120,15 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   )
 }
 
+/**
+ * A column or row header cell of a `Table` that names the data it labels.
+ *
+ * @example
+ * <TableRow>
+ *   <TableHead>Customer</TableHead>
+ *   <TableHead>Amount</TableHead>
+ * </TableRow>
+ */
 function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
@@ -78,6 +142,15 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   )
 }
 
+/**
+ * A data cell of a `Table` row that holds one value.
+ *
+ * @example
+ * <TableRow>
+ *   <TableCell>Ada Lovelace</TableCell>
+ *   <TableCell>$250.00</TableCell>
+ * </TableRow>
+ */
 function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   return (
     <td
@@ -91,6 +164,19 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   )
 }
 
+/**
+ * The visible title of a `Table` that names it for everyone, including screen reader users.
+ *
+ * @example
+ * <Table>
+ *   <TableCaption>A list of your recent invoices.</TableCaption>
+ *   <TableBody>
+ *     <TableRow>
+ *       <TableCell>Invoice 1042</TableCell>
+ *     </TableRow>
+ *   </TableBody>
+ * </Table>
+ */
 function TableCaption({
   className,
   ...props

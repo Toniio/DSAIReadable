@@ -9,6 +9,20 @@ import { UI_STRINGS } from "@/lib/ui-strings"
 import { buttonVariants, type Button } from "@/components/ui/button"
 import { CheckIcon } from "@phosphor-icons/react"
 
+/**
+ * A form that asks one question at a time; set `shortcuts` to label the choices with letters or numbers.
+ *
+ * @example
+ * <Questionnaire onSubmit={handleSubmit}>
+ *   <QuestionnaireProgress />
+ *   <QuestionnaireItem name="audience">
+ *     <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>
+ *   </QuestionnaireItem>
+ *   <QuestionnaireActions>
+ *     <QuestionnaireNext />
+ *   </QuestionnaireActions>
+ * </Questionnaire>
+ */
 function Questionnaire({
   className,
   ...props
@@ -24,6 +38,14 @@ function Questionnaire({
 
 // The primitive renders a progress bar whose text is "Question 2 of 5"; the
 // minimum width keeps the line from shifting as the numbers grow.
+/**
+ * The line that tells the user where they are in a `Questionnaire`, such as "Question 2 of 5".
+ *
+ * @example
+ * <Questionnaire>
+ *   <QuestionnaireProgress />
+ * </Questionnaire>
+ */
 function QuestionnaireProgress({
   className,
   ...props
@@ -41,6 +63,14 @@ function QuestionnaireProgress({
   )
 }
 
+/**
+ * One question of a `Questionnaire`; its unique `name` is the answer's field name, and `multiple` allows several choices.
+ *
+ * @example
+ * <QuestionnaireItem name="trip-dates">
+ *   <QuestionnaireTitle>When do you want to travel?</QuestionnaireTitle>
+ * </QuestionnaireItem>
+ */
 function QuestionnaireItem({
   className,
   ...props
@@ -58,6 +88,14 @@ function QuestionnaireItem({
   )
 }
 
+/**
+ * The question itself, shown at the top of a `QuestionnaireItem`.
+ *
+ * @example
+ * <QuestionnaireItem name="audience">
+ *   <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>
+ * </QuestionnaireItem>
+ */
 function QuestionnaireTitle({
   className,
   ...props
@@ -74,6 +112,15 @@ function QuestionnaireTitle({
   )
 }
 
+/**
+ * The supporting line under a `QuestionnaireTitle` that explains what kind of answer helps.
+ *
+ * @example
+ * <QuestionnaireItem name="audience">
+ *   <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>
+ *   <QuestionnaireDescription>Pick the group that reads it most.</QuestionnaireDescription>
+ * </QuestionnaireItem>
+ */
 function QuestionnaireDescription({
   className,
   ...props
@@ -90,6 +137,15 @@ function QuestionnaireDescription({
   )
 }
 
+/**
+ * The group that lays out the `QuestionnaireChoice` options of one question.
+ *
+ * @example
+ * <QuestionnaireChoices>
+ *   <QuestionnaireChoice value="team">My team</QuestionnaireChoice>
+ *   <QuestionnaireChoice value="board">The board</QuestionnaireChoice>
+ * </QuestionnaireChoices>
+ */
 function QuestionnaireChoices({
   className,
   ...props
@@ -108,6 +164,14 @@ function QuestionnaireChoices({
 
 // The native input is stretched, transparent, over the whole choice: the
 // choice draws its focus ring when the input has it.
+/**
+ * One selectable answer of a question: a radio for a single choice, a checkbox when the item is `multiple`.
+ *
+ * @example
+ * <QuestionnaireChoices>
+ *   <QuestionnaireChoice value="team">My team</QuestionnaireChoice>
+ * </QuestionnaireChoices>
+ */
 function QuestionnaireChoice({
   children,
   className,
@@ -156,6 +220,15 @@ function QuestionnaireChoice({
   )
 }
 
+/**
+ * A muted second line inside a `QuestionnaireChoice` that adds detail to the answer.
+ *
+ * @example
+ * <QuestionnaireChoice value="weekly">
+ *   Weekly summary
+ *   <QuestionnaireChoiceDescription>One email every Monday morning.</QuestionnaireChoiceDescription>
+ * </QuestionnaireChoice>
+ */
 function QuestionnaireChoiceDescription({
   className,
   ...props
@@ -169,6 +242,15 @@ function QuestionnaireChoiceDescription({
   )
 }
 
+/**
+ * A free-text answer field for a question, used alone or under the choices.
+ *
+ * @example
+ * <QuestionnaireItem name="other">
+ *   <QuestionnaireTitle>Anything else we should know?</QuestionnaireTitle>
+ *   <QuestionnaireInput />
+ * </QuestionnaireItem>
+ */
 function QuestionnaireInput({
   className,
   ...props
@@ -191,6 +273,15 @@ function QuestionnaireInput({
   )
 }
 
+/**
+ * The message that explains why a question cannot move on, such as a required answer left empty.
+ *
+ * @example
+ * <QuestionnaireItem name="audience" required>
+ *   <QuestionnaireTitle>Who is this report for?</QuestionnaireTitle>
+ *   <QuestionnaireError />
+ * </QuestionnaireItem>
+ */
 function QuestionnaireError({
   className,
   ...props
@@ -204,6 +295,16 @@ function QuestionnaireError({
   )
 }
 
+/**
+ * The row that holds the previous, skip, next and submit controls, placed after the questions.
+ *
+ * @example
+ * <QuestionnaireActions>
+ *   <QuestionnairePrevious />
+ *   <QuestionnaireSkip />
+ *   <QuestionnaireNext />
+ * </QuestionnaireActions>
+ */
 function QuestionnaireActions({
   className,
   ...props
@@ -220,6 +321,14 @@ function QuestionnaireActions({
   )
 }
 
+/**
+ * The button that returns to the question before the current one.
+ *
+ * @example
+ * <QuestionnaireActions>
+ *   <QuestionnairePrevious />
+ * </QuestionnaireActions>
+ */
 function QuestionnairePrevious({
   children,
   className,
@@ -245,6 +354,14 @@ function QuestionnairePrevious({
   )
 }
 
+/**
+ * The button that moves past the current question without an answer; it stays hidden for a `required` question.
+ *
+ * @example
+ * <QuestionnaireActions>
+ *   <QuestionnaireSkip />
+ * </QuestionnaireActions>
+ */
 function QuestionnaireSkip({
   children,
   className,
@@ -270,6 +387,14 @@ function QuestionnaireSkip({
   )
 }
 
+/**
+ * The button that validates the current answer and moves to the next question.
+ *
+ * @example
+ * <QuestionnaireActions>
+ *   <QuestionnaireNext>Continue</QuestionnaireNext>
+ * </QuestionnaireActions>
+ */
 function QuestionnaireNext({
   children,
   className,
@@ -295,6 +420,14 @@ function QuestionnaireNext({
   )
 }
 
+/**
+ * The button that sends every answer through the form's `onSubmit` on the last question.
+ *
+ * @example
+ * <QuestionnaireActions>
+ *   <QuestionnaireSubmit>Send answers</QuestionnaireSubmit>
+ * </QuestionnaireActions>
+ */
 function QuestionnaireSubmit({
   children,
   className,

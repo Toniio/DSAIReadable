@@ -6,12 +6,31 @@ import { HoverCard as HoverCardPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 
+/**
+ * The root of a preview that appears when the pointer rests on a trigger, for extra information the user can do without.
+ *
+ * @example
+ * <HoverCard>
+ *   <HoverCardTrigger asChild>
+ *     <a href="/team/maria">Maria Lopez</a>
+ *   </HoverCardTrigger>
+ *   <HoverCardContent>…</HoverCardContent>
+ * </HoverCard>
+ */
 function HoverCard({
   ...props
 }: React.ComponentProps<typeof HoverCardPrimitive.Root>) {
   return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />
 }
 
+/**
+ * The element whose hover or focus opens the `HoverCard`; pass `asChild` to keep your own link.
+ *
+ * @example
+ * <HoverCardTrigger asChild>
+ *   <a href="/team/maria">Maria Lopez</a>
+ * </HoverCardTrigger>
+ */
 function HoverCardTrigger({
   ...props
 }: React.ComponentProps<typeof HoverCardPrimitive.Trigger>) {
@@ -20,6 +39,14 @@ function HoverCardTrigger({
   )
 }
 
+/**
+ * The floating preview of a `HoverCard`; it holds read-only supplementary content, and `align` and `sideOffset` place it.
+ *
+ * @example
+ * <HoverCardContent align="start">
+ *   <p>Maria leads the design team and joined in 2021.</p>
+ * </HoverCardContent>
+ */
 function HoverCardContent({
   className,
   align = "center",

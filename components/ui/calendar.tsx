@@ -16,6 +16,12 @@ import {
   CaretDownIcon,
 } from "@phosphor-icons/react"
 
+/**
+ * Picks a date or a date range with month navigation; place it in a `Popover` or a `Card`, it does not position itself.
+ *
+ * @example
+ * <Calendar mode="single" selected={date} onSelect={setDate} />
+ */
 function Calendar({
   className,
   classNames,
@@ -186,6 +192,15 @@ function Calendar({
   )
 }
 
+/**
+ * The button `Calendar` renders for each day, carrying its selected and range state; wrap it in `components.DayButton` to adjust one day cell.
+ *
+ * @example
+ * <Calendar
+ *   mode="range"
+ *   components={{ DayButton: (props) => <CalendarDayButton {...props} /> }}
+ * />
+ */
 function CalendarDayButton({
   className,
   day,

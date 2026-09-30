@@ -18,6 +18,7 @@ import ts from "typescript"
 import { parseChangelog } from "../lib/changelog.js"
 import { collectDeprecations, tokenDeprecations } from "../lib/deprecations.js"
 import { cssValue, loadTokens } from "../lib/dtcg.js"
+import { exportDocs } from "../lib/jsdoc.js"
 import {
   mdCode,
   mdListItems,
@@ -223,7 +224,21 @@ function generateComponentSpecs() {
     // API and stays out of `props`.
     // Each export's block (scripts/build-spec-api.ts) opens with a one-line
     // summary: what a component renders, what a hook returns.
-    const exports: { name: string; summary: string }[] = []
+    // The description and the example of each export are its JSDoc
+    // (src/lib/jsdoc.ts), the one place they are written.
+    const codePath = inventory.find((c) => c.name === name)?.code_path
+    const docs = new Map(
+      (codePath
+        ? exportDocs(read(codePath), `@/${codePath.replace(/\.tsx$/, "")}`)
+        : []
+      ).map((d) => [d.name, d])
+    )
+    const exports: {
+      name: string
+      summary: string
+      description: string
+      example: string
+    }[] = []
     const apiLines = propsSection.split("\n").map((l) => l.trim())
     apiLines.forEach((line, i) => {
       const heading = line.match(/^### `(.+)`$/)
@@ -231,9 +246,13 @@ function generateComponentSpecs() {
       const summary = apiLines
         .slice(i + 1)
         .find((l) => l !== "" && !l.startsWith("|"))
+      // A hook is titled `useX()`; the code exports `useX`.
+      const doc = docs.get(heading[1].replace(/\(\)$/, ""))
       exports.push({
         name: heading[1],
         summary: summary && !summary.startsWith("#") ? summary : "",
+        description: doc?.description ?? "",
+        example: doc?.example ?? "",
       })
     })
     const props = mdTables(propsSection).flatMap((t) => {
@@ -481,7 +500,12 @@ function generateComponentVariants() {
         }
       | undefined
   for (const f of uiFiles) {
-    const code = readFileSync(path.join(uiDir, f), "utf-8")
+    // Block comments out: a JSDoc `@example` is JSX with props of its own, and
+    // these patterns read the code, not the documentation.
+    const code = readFileSync(path.join(uiDir, f), "utf-8").replace(
+      /\/\*[\s\S]*?\*\//g,
+      ""
+    )
     const owner = f
       .replace(".tsx", "")
       .split("-")

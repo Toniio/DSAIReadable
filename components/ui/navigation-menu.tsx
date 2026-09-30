@@ -7,6 +7,18 @@ import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CaretDownIcon } from "@phosphor-icons/react"
 
+/**
+ * The primary navigation of a site or app: links grouped by category with drop-down panels, inline when `viewport` is false.
+ *
+ * @example
+ * <NavigationMenu>
+ *   <NavigationMenuList>
+ *     <NavigationMenuItem>
+ *       <NavigationMenuLink href="/pricing">Pricing</NavigationMenuLink>
+ *     </NavigationMenuItem>
+ *   </NavigationMenuList>
+ * </NavigationMenu>
+ */
 function NavigationMenu({
   className,
   children,
@@ -31,6 +43,19 @@ function NavigationMenu({
   )
 }
 
+/**
+ * Lays the top-level items of a `NavigationMenu` out in a horizontal row.
+ *
+ * @example
+ * <NavigationMenuList>
+ *   <NavigationMenuItem>
+ *     <NavigationMenuLink href="/docs">Documentation</NavigationMenuLink>
+ *   </NavigationMenuItem>
+ *   <NavigationMenuItem>
+ *     <NavigationMenuLink href="/pricing">Pricing</NavigationMenuLink>
+ *   </NavigationMenuItem>
+ * </NavigationMenuList>
+ */
 function NavigationMenuList({
   className,
   ...props
@@ -47,6 +72,17 @@ function NavigationMenuList({
   )
 }
 
+/**
+ * Wraps one top-level entry of the menu: a `NavigationMenuTrigger` with its `NavigationMenuContent`, or a single `NavigationMenuLink`.
+ *
+ * @example
+ * <NavigationMenuItem>
+ *   <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+ *   <NavigationMenuContent>
+ *     <NavigationMenuLink href="/analytics">Analytics</NavigationMenuLink>
+ *   </NavigationMenuContent>
+ * </NavigationMenuItem>
+ */
 function NavigationMenuItem({
   className,
   ...props
@@ -60,10 +96,29 @@ function NavigationMenuItem({
   )
 }
 
+/**
+ * Gives a direct link the look of a `NavigationMenuTrigger`, so it lines up with the triggers around it.
+ *
+ * @example
+ * <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+ *   <a href="/pricing">Pricing</a>
+ * </NavigationMenuLink>
+ */
 const navigationMenuTriggerStyle = cva(
   `group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-none px-2.5 py-1.5 text-xs font-medium transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted focus:bg-muted ${FOCUS_RING} disabled:pointer-events-none disabled:opacity-disabled data-popup-open:bg-muted/50 data-popup-open:hover:bg-muted data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted`
 )
 
+/**
+ * Opens the content panel of its item and shows a caret that turns while the panel is open.
+ *
+ * @example
+ * <NavigationMenuItem>
+ *   <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+ *   <NavigationMenuContent>
+ *     <NavigationMenuLink href="/guides">Guides</NavigationMenuLink>
+ *   </NavigationMenuContent>
+ * </NavigationMenuItem>
+ */
 function NavigationMenuTrigger({
   className,
   children,
@@ -84,6 +139,18 @@ function NavigationMenuTrigger({
   )
 }
 
+/**
+ * The panel of links that a `NavigationMenuTrigger` opens, animated by the direction of the move between items.
+ *
+ * @example
+ * <NavigationMenuItem>
+ *   <NavigationMenuTrigger>Company</NavigationMenuTrigger>
+ *   <NavigationMenuContent>
+ *     <NavigationMenuLink href="/about">About us</NavigationMenuLink>
+ *     <NavigationMenuLink href="/careers">Careers</NavigationMenuLink>
+ *   </NavigationMenuContent>
+ * </NavigationMenuItem>
+ */
 function NavigationMenuContent({
   className,
   ...props
@@ -100,6 +167,14 @@ function NavigationMenuContent({
   )
 }
 
+/**
+ * The shared area that renders the active `NavigationMenuContent`; `NavigationMenu` adds it unless `viewport` is false.
+ *
+ * @example
+ * <NavigationMenu viewport={false}>
+ *   <NavigationMenuList />
+ * </NavigationMenu>
+ */
 function NavigationMenuViewport({
   className,
   ...props
@@ -122,6 +197,14 @@ function NavigationMenuViewport({
   )
 }
 
+/**
+ * One navigation link; set `active` on the link to the current page so it shows the active state.
+ *
+ * @example
+ * <NavigationMenuLink href="/pricing" active>
+ *   Pricing
+ * </NavigationMenuLink>
+ */
 function NavigationMenuLink({
   className,
   ...props
@@ -138,6 +221,17 @@ function NavigationMenuLink({
   )
 }
 
+/**
+ * Marks the active trigger with an arrow below it, placed after the items inside a `NavigationMenuList`.
+ *
+ * @example
+ * <NavigationMenuList>
+ *   <NavigationMenuItem>
+ *     <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+ *   </NavigationMenuItem>
+ *   <NavigationMenuIndicator />
+ * </NavigationMenuList>
+ */
 function NavigationMenuIndicator({
   className,
   ...props

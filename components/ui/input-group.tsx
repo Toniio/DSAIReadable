@@ -9,6 +9,17 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
+/**
+ * A bordered field that joins an input or textarea with add-ons (icons, text, buttons) so they read as one control.
+ *
+ * @example
+ * <InputGroup>
+ *   <InputGroupAddon>
+ *     <InputGroupText>https://</InputGroupText>
+ *   </InputGroupAddon>
+ *   <InputGroupInput placeholder="example.com" />
+ * </InputGroup>
+ */
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -43,6 +54,15 @@ const inputGroupAddonVariants = cva(
   }
 )
 
+/**
+ * Places an icon, text or button beside or above the field of an `InputGroup`; use `align` to choose the side.
+ *
+ * @example
+ * <InputGroup>
+ *   <InputGroupInput placeholder="Search projects" />
+ *   <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
+ * </InputGroup>
+ */
 function InputGroupAddon({
   className,
   align = "inline-start",
@@ -82,6 +102,17 @@ const inputGroupButtonVariants = cva(
   }
 )
 
+/**
+ * A compact button for an action inside an `InputGroupAddon`, such as clearing the field or showing a password.
+ *
+ * @example
+ * <InputGroup>
+ *   <InputGroupInput type="password" aria-label="Password" />
+ *   <InputGroupAddon align="inline-end">
+ *     <InputGroupButton>Show</InputGroupButton>
+ *   </InputGroupAddon>
+ * </InputGroup>
+ */
 function InputGroupButton({
   className,
   type = "button",
@@ -102,6 +133,14 @@ function InputGroupButton({
   )
 }
 
+/**
+ * Static text inside an `InputGroupAddon`, such as a prefix, a unit or a character count.
+ *
+ * @example
+ * <InputGroupAddon align="inline-end">
+ *   <InputGroupText>USD</InputGroupText>
+ * </InputGroupAddon>
+ */
 function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
@@ -115,6 +154,14 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   )
 }
 
+/**
+ * The single-line field of an `InputGroup`; the group draws its focus and invalid state.
+ *
+ * @example
+ * <InputGroup>
+ *   <InputGroupInput type="email" placeholder="you@example.com" aria-label="Email address" />
+ * </InputGroup>
+ */
 function InputGroupInput({
   className,
   ...props
@@ -132,6 +179,17 @@ function InputGroupInput({
   )
 }
 
+/**
+ * The multi-line field of an `InputGroup`, for add-ons placed above or below a longer message.
+ *
+ * @example
+ * <InputGroup>
+ *   <InputGroupTextarea placeholder="Write a reply" aria-label="Reply" />
+ *   <InputGroupAddon align="block-end">
+ *     <InputGroupButton>Send reply</InputGroupButton>
+ *   </InputGroupAddon>
+ * </InputGroup>
+ */
 function InputGroupTextarea({
   className,
   ...props

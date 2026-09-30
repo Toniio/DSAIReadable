@@ -6,6 +6,15 @@ import { Avatar as AvatarPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { SEPARATION_RING } from "@/lib/surface"
 
+/**
+ * The stand-in for a person or an entity; use `size` to fit the context, small in lists and large on profiles.
+ *
+ * @example
+ * <Avatar size="lg">
+ *   <AvatarImage src="/team/maria.jpg" alt="Maria Lopez" />
+ *   <AvatarFallback>ML</AvatarFallback>
+ * </Avatar>
+ */
 function Avatar({
   className,
   size = "default",
@@ -26,6 +35,15 @@ function Avatar({
   )
 }
 
+/**
+ * The photo inside an `Avatar`; always give it an `alt` that names the person.
+ *
+ * @example
+ * <Avatar>
+ *   <AvatarImage src="/team/maria.jpg" alt="Maria Lopez" />
+ *   <AvatarFallback>ML</AvatarFallback>
+ * </Avatar>
+ */
 function AvatarImage({
   className,
   ...props
@@ -42,6 +60,14 @@ function AvatarImage({
   )
 }
 
+/**
+ * The initials or icon an `Avatar` shows while the image loads or when it is missing.
+ *
+ * @example
+ * <Avatar>
+ *   <AvatarFallback>ML</AvatarFallback>
+ * </Avatar>
+ */
 function AvatarFallback({
   className,
   ...props
@@ -58,6 +84,15 @@ function AvatarFallback({
   )
 }
 
+/**
+ * A small status dot on an `Avatar`, such as online or new activity; label it with `aria-label`.
+ *
+ * @example
+ * <Avatar>
+ *   <AvatarFallback>ML</AvatarFallback>
+ *   <AvatarBadge aria-label="Online" />
+ * </Avatar>
+ */
 function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
@@ -74,6 +109,20 @@ function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
   )
 }
 
+/**
+ * Stacks overlapping `Avatar`s to list the participants of a conversation or a project.
+ *
+ * @example
+ * <AvatarGroup>
+ *   <Avatar>
+ *     <AvatarFallback>ML</AvatarFallback>
+ *   </Avatar>
+ *   <Avatar>
+ *     <AvatarFallback>JK</AvatarFallback>
+ *   </Avatar>
+ *   <AvatarGroupCount>+3</AvatarGroupCount>
+ * </AvatarGroup>
+ */
 function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -87,6 +136,17 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * The overflow bubble at the end of an `AvatarGroup` that counts the people who are not shown.
+ *
+ * @example
+ * <AvatarGroup>
+ *   <Avatar>
+ *     <AvatarFallback>ML</AvatarFallback>
+ *   </Avatar>
+ *   <AvatarGroupCount>+3</AvatarGroupCount>
+ * </AvatarGroup>
+ */
 function AvatarGroupCount({
   className,
   ...props

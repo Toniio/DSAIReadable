@@ -7,6 +7,17 @@ import { cn } from "@/lib/utils"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react"
 
+/**
+ * The root of a stack of collapsible sections; set `type` to `single` or `multiple` to decide how many stay open.
+ *
+ * @example
+ * <Accordion type="single" collapsible>
+ *   <AccordionItem value="shipping">
+ *     <AccordionTrigger>Shipping</AccordionTrigger>
+ *     <AccordionContent>Orders leave our warehouse within two days.</AccordionContent>
+ *   </AccordionItem>
+ * </Accordion>
+ */
 function Accordion({
   className,
   ...props
@@ -20,6 +31,17 @@ function Accordion({
   )
 }
 
+/**
+ * One section of an `Accordion`, pairing a trigger with its content through a unique `value`.
+ *
+ * @example
+ * <Accordion type="single" collapsible>
+ *   <AccordionItem value="returns">
+ *     <AccordionTrigger>Returns</AccordionTrigger>
+ *     <AccordionContent>You can return any item within 30 days.</AccordionContent>
+ *   </AccordionItem>
+ * </Accordion>
+ */
 function AccordionItem({
   className,
   ...props
@@ -33,6 +55,17 @@ function AccordionItem({
   )
 }
 
+/**
+ * The text button that expands or collapses its `AccordionItem`; always give it a visible label, never an icon alone.
+ *
+ * @example
+ * <Accordion type="single" collapsible>
+ *   <AccordionItem value="billing">
+ *     <AccordionTrigger>How does billing work?</AccordionTrigger>
+ *     <AccordionContent>You are billed on the first of each month.</AccordionContent>
+ *   </AccordionItem>
+ * </Accordion>
+ */
 function AccordionTrigger({
   className,
   children,
@@ -62,6 +95,17 @@ function AccordionTrigger({
   )
 }
 
+/**
+ * The panel an `AccordionTrigger` reveals, holding the detail a reader opens on demand.
+ *
+ * @example
+ * <Accordion type="single" collapsible>
+ *   <AccordionItem value="privacy">
+ *     <AccordionTrigger>Who can see my data?</AccordionTrigger>
+ *     <AccordionContent>Only the people you invite to your workspace.</AccordionContent>
+ *   </AccordionItem>
+ * </Accordion>
+ */
 function AccordionContent({
   className,
   children,

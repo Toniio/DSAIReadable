@@ -39,6 +39,16 @@ function useChart() {
   return context
 }
 
+/**
+ * The responsive frame for one Recharts chart; its `config` names each series and sets the `--color-<key>` colors the chart reads.
+ *
+ * @example
+ * <ChartContainer config={{ revenue: { label: "Revenue", color: "var(--chart-1)" } }} className="min-h-52 w-full">
+ *   <BarChart data={[{ month: "Jan", revenue: 186 }]}>
+ *     <Bar dataKey="revenue" fill="var(--color-revenue)" />
+ *   </BarChart>
+ * </ChartContainer>
+ */
 function ChartContainer({
   id,
   className,
@@ -88,6 +98,12 @@ function ChartContainer({
 
 // no-data-slot: ChartStyle renders a <style> element, which holds CSS and is
 // never painted, so there is nothing on screen to recognize.
+/**
+ * Writes the `--color-<key>` variables for each `config` entry, light and dark; `ChartContainer` renders it, so you rarely use it directly.
+ *
+ * @example
+ * <ChartStyle id="chart-revenue" config={{ revenue: { label: "Revenue", color: "var(--chart-1)" } }} />
+ */
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
     ([, config]) => config.theme ?? config.color
@@ -123,8 +139,20 @@ ${colorConfig
 
 // no-data-slot: ChartTooltip is Recharts' own Tooltip, re-exported as is: its
 // wrapper element belongs to Recharts. ChartTooltipContent carries the slot.
+/**
+ * The Recharts `Tooltip`, re-exported so a chart shows a card on hover; pass `ChartTooltipContent` as its `content`.
+ *
+ * @example
+ * <ChartTooltip content={<ChartTooltipContent />} />
+ */
 const ChartTooltip = RechartsPrimitive.Tooltip
 
+/**
+ * The themed card `ChartTooltip` shows on hover: it lists each series with its `config` label, color and value.
+ *
+ * @example
+ * <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+ */
 function ChartTooltipContent({
   active,
   payload,
@@ -282,8 +310,20 @@ function ChartTooltipContent({
 
 // no-data-slot: ChartLegend is Recharts' own Legend, re-exported as is: its
 // wrapper element belongs to Recharts. ChartLegendContent carries the slot.
+/**
+ * The Recharts `Legend`, re-exported so a chart names its series; pass `ChartLegendContent` as its `content`.
+ *
+ * @example
+ * <ChartLegend content={<ChartLegendContent />} />
+ */
 const ChartLegend = RechartsPrimitive.Legend
 
+/**
+ * The themed row of `config` labels and color swatches that `ChartLegend` shows to name each series.
+ *
+ * @example
+ * <ChartLegend content={<ChartLegendContent nameKey="month" />} verticalAlign="top" />
+ */
 function ChartLegendContent({
   className,
   hideIcon = false,

@@ -8,12 +8,31 @@ import { MODAL_CONTENT_BASE, OVERLAY_BASE } from "@/lib/overlay"
 import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
 import { Button } from "@/components/ui/button"
 
+/**
+ * The root of a blocking confirmation: it owns the open state and stops the user until they answer a critical action.
+ *
+ * @example
+ * <AlertDialog>
+ *   <AlertDialogTrigger asChild>
+ *     <Button variant="destructive">Delete project</Button>
+ *   </AlertDialogTrigger>
+ *   <AlertDialogContent>…</AlertDialogContent>
+ * </AlertDialog>
+ */
 function AlertDialog({
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
   return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />
 }
 
+/**
+ * The control that opens the `AlertDialog`; pass `asChild` to use your own `Button`.
+ *
+ * @example
+ * <AlertDialogTrigger asChild>
+ *   <Button variant="destructive">Delete project</Button>
+ * </AlertDialogTrigger>
+ */
 function AlertDialogTrigger({
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>) {
@@ -22,6 +41,14 @@ function AlertDialogTrigger({
   )
 }
 
+/**
+ * Mounts the dialog outside the page flow; `AlertDialogContent` already includes it, so reach for it only to build a custom surface.
+ *
+ * @example
+ * <AlertDialogPortal>
+ *   <AlertDialogOverlay />
+ * </AlertDialogPortal>
+ */
 function AlertDialogPortal({
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Portal>) {
@@ -30,6 +57,14 @@ function AlertDialogPortal({
   )
 }
 
+/**
+ * The dimmed layer behind an `AlertDialog` that blocks the rest of the interface; `AlertDialogContent` already renders it.
+ *
+ * @example
+ * <AlertDialogPortal>
+ *   <AlertDialogOverlay />
+ * </AlertDialogPortal>
+ */
 function AlertDialogOverlay({
   className,
   ...props
@@ -43,6 +78,16 @@ function AlertDialogOverlay({
   )
 }
 
+/**
+ * The modal surface of an `AlertDialog`; use `size` to choose a compact or a standard width.
+ *
+ * @example
+ * <AlertDialogContent size="sm">
+ *   <AlertDialogHeader>
+ *     <AlertDialogTitle>Delete this project?</AlertDialogTitle>
+ *   </AlertDialogHeader>
+ * </AlertDialogContent>
+ */
 function AlertDialogContent({
   className,
   size = "default",
@@ -70,6 +115,15 @@ function AlertDialogContent({
   )
 }
 
+/**
+ * Groups the `AlertDialogTitle`, the `AlertDialogDescription` and an optional `AlertDialogMedia` at the top of the dialog.
+ *
+ * @example
+ * <AlertDialogHeader>
+ *   <AlertDialogTitle>Delete this project?</AlertDialogTitle>
+ *   <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+ * </AlertDialogHeader>
+ */
 function AlertDialogHeader({
   className,
   ...props
@@ -86,6 +140,15 @@ function AlertDialogHeader({
   )
 }
 
+/**
+ * Holds the `AlertDialogCancel` and `AlertDialogAction` buttons that let the user answer the dialog.
+ *
+ * @example
+ * <AlertDialogFooter>
+ *   <AlertDialogCancel>Keep project</AlertDialogCancel>
+ *   <AlertDialogAction>Delete project</AlertDialogAction>
+ * </AlertDialogFooter>
+ */
 function AlertDialogFooter({
   className,
   ...props
@@ -102,6 +165,17 @@ function AlertDialogFooter({
   )
 }
 
+/**
+ * An icon or illustration slot in the header that signals the kind of decision, such as a warning.
+ *
+ * @example
+ * <AlertDialogHeader>
+ *   <AlertDialogMedia>
+ *     <WarningIcon />
+ *   </AlertDialogMedia>
+ *   <AlertDialogTitle>Delete this project?</AlertDialogTitle>
+ * </AlertDialogHeader>
+ */
 function AlertDialogMedia({
   className,
   ...props
@@ -118,6 +192,12 @@ function AlertDialogMedia({
   )
 }
 
+/**
+ * The name of the `AlertDialog`, announced by screen readers: state the decision as a question.
+ *
+ * @example
+ * <AlertDialogTitle>Delete this project?</AlertDialogTitle>
+ */
 function AlertDialogTitle({
   className,
   ...props
@@ -134,6 +214,14 @@ function AlertDialogTitle({
   )
 }
 
+/**
+ * The consequence of the action, in one or two sentences, read after the `AlertDialogTitle`.
+ *
+ * @example
+ * <AlertDialogDescription>
+ *   The project and its files are removed for everyone on your team.
+ * </AlertDialogDescription>
+ */
 function AlertDialogDescription({
   className,
   ...props
@@ -150,6 +238,12 @@ function AlertDialogDescription({
   )
 }
 
+/**
+ * The button that confirms the action and closes the dialog; use `variant` to mark a destructive confirmation.
+ *
+ * @example
+ * <AlertDialogAction variant="destructive">Delete project</AlertDialogAction>
+ */
 function AlertDialogAction({
   className,
   variant = "default",
@@ -168,6 +262,12 @@ function AlertDialogAction({
   )
 }
 
+/**
+ * The button that dismisses the dialog without acting; every `AlertDialog` offers one.
+ *
+ * @example
+ * <AlertDialogCancel>Keep project</AlertDialogCancel>
+ */
 function AlertDialogCancel({
   className,
   variant = "outline",
