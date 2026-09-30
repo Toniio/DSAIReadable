@@ -1,0 +1,53 @@
+{
+  "name": "@dsaireadable/eslint-plugin",
+  "version": "0.0.1",
+  "description": "ESLint rules that keep code on the DSAIReadable design system",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "design-system",
+    "shadcn"
+  ],
+  "homepage": "https://github.com/Toniio/DSAIReadable",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toniio/DSAIReadable.git",
+    "directory": "packages/eslint-plugin"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "prepack": "npm run build",
+    "test": "tsx src/test.ts"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^8.0.0",
+    "eslint-plugin-better-tailwindcss": "^4.7.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0 || ^10.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^10.11.0"
+  }
+}

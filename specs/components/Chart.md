@@ -203,7 +203,7 @@ const data = [
 
 export default function Example() {
   return (
-    <ChartContainer config={config} className="min-h-[200px] w-full">
+    <ChartContainer config={config} className="min-h-52 w-full">
       <BarChart data={data}>
         <XAxis dataKey="month" />
         <Bar dataKey="revenue" fill="var(--color-revenue)" />

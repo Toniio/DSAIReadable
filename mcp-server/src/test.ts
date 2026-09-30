@@ -10,6 +10,8 @@ import {
   SCREEN_RULES,
   SCREEN_WIDE_RULES,
 } from "./lib/validate-screen.js"
+import { validateCode } from "./lib/validate-code.js"
+import plugin from "@dsaireadable/eslint-plugin"
 import {
   compositionRulesFor,
   type CompositionRule,
@@ -562,6 +564,100 @@ assert(
         .join(", ")}`
 )
 
+// --- Test 6b: dsaireadable_validate_code (P4-05) ---
+// The design system's ESLint rules, run on the syntax tree. One failing
+// fixture per rule of the plugin's `core` config, as for validate_screen.
+console.log("\n6b. dsaireadable_validate_code")
+
+const CODE_FIXTURES: Record<string, string> = {
+  "no-native-interactive-elements": `export const C = () => <button>Save</button>`,
+  "no-external-ui-imports": `import { Plus } from "lucide-react"\nexport const C = () => <Plus />`,
+  "no-inline-svg": `export const C = () => <svg viewBox="0 0 1 1" />`,
+  "no-class-interpolation":
+    "export const C = ({ tone }: { tone: string }) => <div className={`bg-${tone}`} />",
+  "no-raw-values": `export const C = () => <div className="bg-[#432dd7] text-red-500" />`,
+  "no-deprecated-imports": "",
+}
+const codeRules = Object.keys(plugin.rules)
+const missingCodeFixtures = codeRules.filter(
+  (r) => r !== "no-deprecated-imports" && !CODE_FIXTURES[r]
+)
+assert(
+  missingCodeFixtures.length === 0,
+  `Every rule of the plugin has a failing fixture (${codeRules.length} rules${missingCodeFixtures.length ? `; missing: ${missingCodeFixtures.join(", ")}` : ""})`
+)
+for (const [rule, code] of Object.entries(CODE_FIXTURES)) {
+  // The deprecation list is empty until the first deprecation: its rule is
+  // exercised with a list of its own in the plugin's tests.
+  if (!code) continue
+  const caught = validateCode(code).issues.some(
+    (i) => i.source === "eslint" && i.rule === `dsaireadable/${rule}`
+  )
+  assert(caught, `dsaireadable/${rule} flags its fixture`)
+}
+
+const codeClean = validateCode(CLEAN_SCREEN)
+assert(
+  codeClean.passed && codeClean.total_issues === 0,
+  "validate_code: the compliant screen passes with zero issues"
+)
+const syntaxError = validateCode(`export const C = () => <div`)
+assert(
+  !syntaxError.passed &&
+    syntaxError.issues.every((i) => i.source === "typescript") &&
+    syntaxError.issues.length === 1,
+  "validate_code: code that does not parse is reported once, by TypeScript"
+)
+const undefinedName = validateCode(
+  `export const C = () => <div>{useCounter()}</div>`
+)
+assert(
+  undefinedName.issues.some(
+    (i) => i.source === "typescript" && i.rule === "TS2304" && i.line === 1
+  ),
+  "validate_code: a name that is not defined is reported (TS2304)"
+)
+// TypeScript sees one file: what lives in other modules is not its finding.
+const unresolved = validateCode(
+  `import { Thing } from "@/components/ui/thing"\nexport const C = () => <Thing tone={Math.max("a")} />`
+)
+assert(
+  unresolved.issues.every((i) => i.source !== "typescript"),
+  "validate_code: unresolved imports and untyped calls are not reported"
+)
+const located = validateCode(
+  `import { Button } from "@/components/ui/button"\n\nexport const C = () => <button>Save</button>`
+).issues[0]
+assert(
+  located?.line === 3 && located.column > 1,
+  "validate_code: an issue carries its line and column"
+)
+
+// Every example the design system serves is code an agent copies: each must
+// pass the rules the project's own lint will run on it.
+const exampleSpecs = JSON.parse(
+  readFileSync(resolve(contextDir, "component-specs.json"), "utf-8")
+) as Record<string, { code_example?: string }>
+const exampleFailures = [
+  ...Object.entries(exampleSpecs).map(
+    ([name, spec]) => [name, spec.code_example ?? ""] as const
+  ),
+  ...Object.values(
+    JSON.parse(
+      readFileSync(resolve(contextDir, "patterns.json"), "utf-8")
+    ) as Record<string, { name: string; code_example: string }>
+  ).map((p) => [p.name, p.code_example] as const),
+].flatMap(([name, code]) => {
+  const issues = validateCode(code).issues
+  return issues.length > 0
+    ? [`${name} (${issues.map((i) => `${i.rule}@${i.line}`).join(", ")})`]
+    : []
+})
+assert(
+  exampleFailures.length === 0,
+  `Every component and pattern example passes dsaireadable_validate_code${exampleFailures.length ? ` (${exampleFailures.join("; ")})` : ""}`
+)
+
 // --- Test 7: spec table parsing (non-regression) ---
 // Guards against the table parser that only skipped a section's first two
 // lines: every later table leaked its header and delimiter rows into `props`,
@@ -987,7 +1083,7 @@ const unannotated = tools.filter(
     t.annotations?.openWorldHint !== false
 )
 assert(
-  tools.length === 16 && unannotated.length === 0,
+  tools.length === 17 && unannotated.length === 0,
   `Every tool is annotated read-only and closed-world (${tools.length} tools${unannotated.length ? `; missing: ${unannotated.map((t) => t.name).join(", ")}` : ""})`
 )
 
@@ -1320,11 +1416,11 @@ assert(
       ["dsaireadable_get_components"],
       ["dsaireadable_get_design_rules"],
       ["dsaireadable_get_component_specs"],
-      ["dsaireadable_validate_screen"],
+      ["dsaireadable_validate_screen", "dsaireadable_validate_code"],
     ]) &&
     /For each retained component only/.test(steps[3]) &&
     /every cva variant with its default, the sizes/.test(steps[3]),
-  "build_screen: overview, components, rules, one spec per retained component, dsaireadable_validate_screen"
+  "build_screen: overview, components, rules, one spec per retained component, dsaireadable_validate_screen and dsaireadable_validate_code"
 )
 assert(
   /call budget: 4 calls \+ 1 per component you retain/.test(buildScreen) &&
@@ -1766,6 +1862,14 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorArgs: {},
     errorNames: "code",
   },
+  dsaireadable_validate_code: {
+    args: { code: CLEAN_SCREEN },
+    content: (p) =>
+      p.passed === true &&
+      validateCode("export const C = () => <button />").passed === false,
+    errorArgs: {},
+    errorNames: "code",
+  },
 }
 
 const listedTools = (await toolClient.listTools()).tools.map((t) => t.name)
@@ -1795,7 +1899,7 @@ for (const [tool, c] of Object.entries(TOOL_CASES)) {
 }
 
 // A missing cache must fail the call and say how to rebuild it — never
-// answer as an empty design system. dsaireadable_validate_screen reads no cache.
+// answer as an empty design system. dsaireadable_validate_screen and dsaireadable_validate_code read no cache.
 const emptyContextDir = mkdtempSync(
   resolve(tmpdir(), "dsaireadable-no-context-")
 )
@@ -1804,6 +1908,7 @@ console.log("  (the [mcp] errors below are expected: one per tool)")
 const silentOnMissingCache: string[] = []
 for (const [tool, c] of Object.entries(TOOL_CASES)) {
   if (tool === "dsaireadable_validate_screen") continue
+  if (tool === "dsaireadable_validate_code") continue
   const result = await callTool(tool, c.args)
   if (!result.isError || !result.text.includes("generate-context"))
     silentOnMissingCache.push(tool)
@@ -1812,7 +1917,7 @@ setContextDir(contextDir)
 rmSync(emptyContextDir, { recursive: true })
 assert(
   silentOnMissingCache.length === 0 && servedContextDir === contextDir,
-  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "16 tools"})`
+  `Without a cache, every tool fails and says to run generate-context (${silentOnMissingCache.join(", ") || "17 tools"})`
 )
 
 // --- Test 11b: page patterns (P4-26) ---
@@ -2057,6 +2162,8 @@ const inputs: [string, Record<string, unknown>][] = [
   ["dsaireadable_get_stats", {}],
   ["dsaireadable_validate_screen", { code: CLEAN_SCREEN }],
   ["dsaireadable_validate_screen", { code: "<button>Save</button>" }],
+  ["dsaireadable_validate_code", { code: CLEAN_SCREEN }],
+  ["dsaireadable_validate_code", { code: "<button>Save</button>" }],
 ]
 const nonConforming: string[] = []
 const calledTools = new Set<string>()

@@ -143,7 +143,7 @@ import {
 
 export default function Example() {
   return (
-    <ResizablePanelGroup orientation="horizontal" className="min-h-[200px]">
+    <ResizablePanelGroup orientation="horizontal" className="min-h-52">
       <ResizablePanel defaultSize={50} minSize={20}>
         <div className="p-4">Left panel</div>
       </ResizablePanel>

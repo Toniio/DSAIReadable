@@ -22,6 +22,7 @@ dsaireadable/
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
 ├── tests/                      # Component tests (Vitest, Testing Library, axe-core)
 ├── mcp-server/                 # MCP server that serves the design system to agents (its own rules: its AGENTS.md)
+├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
 ├── registry/                   # Sources of the registry items that are not components (conventions)
 ├── registry.json               # shadcn registry — generated
 ├── design-system.index.json    # Machine-readable inventory of the design system
@@ -304,7 +305,7 @@ registry is **consumable**, not just consistent.
 | `design-system.schema.json` | JSON Schema that validates the structure of `design-system.index.json`                                                                                                                                                                                   |
 | `components.json`           | shadcn CLI config: `radix-lyra` style, `mist` base color, Phosphor icons, alias paths                                                                                                                                                                    |
 | `tokens.css`                | The tokens' CSS variables (imported by `globals.css`)                                                                                                                                                                                                    |
-| `tsconfig.json`             | Strict TypeScript for the app; `scripts/` and `mcp-server/` have their own projects                                                                                                                                                                      |
+| `tsconfig.json`             | Strict TypeScript for the app; `scripts/`, `packages/eslint-plugin/` and `mcp-server/` have their own projects                                                                                                                                           |
 | `eslint.config.mjs`         | ESLint: Next.js rules, and `better-tailwindcss`, which rejects classes outside the design system and `opacity-N` on a disabled state                                                                                                                     |
 | `lint-staged.config.mjs`    | Pre-commit hook: Prettier and ESLint on the staged files, `typecheck:all`                                                                                                                                                                                |
 | `commitlint.config.mjs`     | Commit-msg hook: Conventional Commits                                                                                                                                                                                                                    |
@@ -375,7 +376,7 @@ npm run tokens:lint-naming  # Check the tokens' DTCG grammar
 npm run tokens:lint-bridge  # Check Tailwind's @theme bridge
 npm run tokens-validate     # Every token check in sequence
 npm run specs:validate      # Specs: sections, generated parts, wording
-npm run typecheck:all       # TypeScript: app, scripts, mcp-server
+npm run typecheck:all       # TypeScript: app, scripts, eslint-plugin, mcp-server
 npm run mcp:test-package    # Pack the MCP server and run the tarball through npx from an empty folder
 npm run test:components     # Component tests (Vitest + axe-core)
 npm run format              # Prettier on every .ts/.tsx/.md

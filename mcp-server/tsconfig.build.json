@@ -3,9 +3,13 @@
   "compilerOptions": {
     "noEmit": false,
     "allowImportingTsExtensions": false,
-    "declaration": false
+    "declaration": false,
+    "paths": {},
+    "rootDir": "src"
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "src/test.ts",
     "src/test-package.ts",

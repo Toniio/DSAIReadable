@@ -7,7 +7,7 @@ The rules that apply to AI agents and humans alike are in
 
 - Node.js 24 (`.nvmrc`); `engines` accepts 22.12 or later, the minimum the
   component tests need
-- `npm ci` at the root **and** `npm ci --prefix mcp-server`
+- `npm ci` at the root: it installs the workspaces too (`mcp-server/`, `packages/eslint-plugin/`)
 
 The git hooks are installed automatically by the `prepare` script (husky).
 If `.husky/_` is missing, run `npm install`.
@@ -102,8 +102,9 @@ One version names the whole design system: the tokens, the components, the
 registry, the inventory the MCP server serves and the MCP server itself. It is
 the `version` of the root `package.json`, which
 [Changesets](https://github.com/changesets/changesets) bumps. `npm run versions:sync`
-copies it to `design-system.index.json`, `mcp-server/package.json` and both
-lockfiles, and `npm run versions:check` fails CI when one of them differs. The
+copies it to `design-system.index.json`, `mcp-server/package.json`,
+`packages/eslint-plugin/package.json` (and the server's pin of the plugin) and
+the lockfile, and `npm run versions:check` fails CI when one of them differs. The
 release tag is `vX.Y.Z`.
 
 ### What a change bumps
@@ -252,6 +253,7 @@ the published package with `npx`; until the package is published, or to run your
 own changes, point it at the sources with `"args": ["tsx", "./mcp-server/src/index.ts"]`.
 
 To try the package a consumer would get, `npm pack`, run in `mcp-server/`, builds
-and packs it, and `npm run mcp:test-package` runs that tarball through `npx`
-from an empty folder. Publishing `@dsaireadable/mcp-server` (`npm publish` from
+and packs it, and `npm run mcp:test-package` runs that tarball, with the ESLint
+plugin's, through `npx` from an empty folder. Publishing `@dsaireadable/eslint-plugin`, then
+`@dsaireadable/mcp-server` (`npm publish` from `packages/eslint-plugin/`, then
 `mcp-server/`, after the release tag) is a maintainer's step, never an agent's.

@@ -45,7 +45,6 @@ jobs:
           node-version: "24"
           cache: npm
       - run: npm ci
-      - run: npm ci --prefix mcp-server
       - run: npm run registry:build
       - run: npm run generate-context
       # A Tailwind bump can change how a class resolves to a token.

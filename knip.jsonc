@@ -28,6 +28,11 @@
         "*.{ts,mjs}",
       ],
     },
+    "packages/eslint-plugin": {
+      // The package.json scripts (build, test) are found by knip; `main` and
+      // `exports` point at dist/, which knip maps back to src/index.ts.
+      "project": ["src/**/*.ts"],
+    },
     "mcp-server": {
       // `bin` (src/index.ts) and the package.json scripts are found by knip.
       "project": ["src/**/*.ts"],

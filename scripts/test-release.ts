@@ -53,6 +53,7 @@ const script = (name: string, ...args: string[]) =>
 const readJson = (file: string) =>
   JSON.parse(readFileSync(join(tmp, file), "utf-8")) as {
     version: string
+    dependencies: Record<string, string>
     packages?: Record<string, { version: string }>
   }
 
@@ -65,12 +66,13 @@ const changeset = (name: string, bump: string, summary: string) =>
 try {
   mkdirSync(join(tmp, ".changeset"))
   mkdirSync(join(tmp, "mcp-server"))
+  mkdirSync(join(tmp, "packages/eslint-plugin"), { recursive: true })
   for (const file of [
     "package.json",
     "package-lock.json",
     "design-system.index.json",
     "mcp-server/package.json",
-    "mcp-server/package-lock.json",
+    "packages/eslint-plugin/package.json",
     ".changeset/config.json",
   ]) {
     cpSync(resolve(ROOT, file), join(tmp, file))
@@ -130,6 +132,7 @@ try {
       [
         "design-system.index.json",
         "mcp-server/package.json",
+        "packages/eslint-plugin/package.json",
         "package-lock.json",
       ].every((file) => drift.output.includes(file)),
     "versions:check catches every copy that did not follow"
@@ -142,10 +145,15 @@ try {
   expect(
     readJson("design-system.index.json").version === "0.1.0" &&
       readJson("mcp-server/package.json").version === "0.1.0" &&
-      readJson("package-lock.json").packages?.[""].version === "0.1.0" &&
-      readJson("mcp-server/package-lock.json").packages?.[""].version ===
-        "0.1.0",
-    "the index, the server and both lockfiles carry 0.1.0"
+      readJson("packages/eslint-plugin/package.json").version === "0.1.0" &&
+      readJson("mcp-server/package.json").dependencies[
+        "@dsaireadable/eslint-plugin"
+      ] === "0.1.0" &&
+      ["", "mcp-server", "packages/eslint-plugin"].every(
+        (key) =>
+          readJson("package-lock.json").packages?.[key].version === "0.1.0"
+      ),
+    "the index, the server, the plugin (and the server's pin of it) and every lockfile entry carry 0.1.0"
   )
 } finally {
   rmSync(tmp, { recursive: true, force: true })

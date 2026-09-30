@@ -3,9 +3,8 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directories:
-      - /
-      - /mcp-server
+    # One lockfile, at the root, covers the workspaces (packages/*, mcp-server).
+    directory: /
     schedule:
       interval: weekly
     groups:
