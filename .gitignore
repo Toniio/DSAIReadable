@@ -34,5 +34,8 @@ validation-report.md
 # The retokenized upstream components, written by scripts/retokenize-codemod.ts --drift for review
 .shadcn-vanilla/
 
+# The runs of the conformance harness (evals/README.md); a kept report goes to evals/history/
+evals/.work/
+
 # Vitest browser mode: failure screenshots
 .vitest/

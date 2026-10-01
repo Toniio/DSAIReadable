@@ -2359,12 +2359,10 @@
         "token": "color.action.background.default",
         "classes": [
           "bg-primary",
-          "bg-primary/80",
-          "text-primary"
+          "bg-primary/80"
         ],
         "where": [
-          "badgeVariants.variant.default",
-          "badgeVariants.variant.link"
+          "badgeVariants.variant.default"
         ]
       },
       {
@@ -2443,6 +2441,15 @@
         ],
         "where": [
           "badgeVariants.variant.warning"
+        ]
+      },
+      {
+        "token": "color.text.action.default",
+        "classes": [
+          "text-primary"
+        ],
+        "where": [
+          "badgeVariants.variant.link"
         ]
       },
       {
@@ -3471,12 +3478,10 @@
         "token": "color.action.background.default",
         "classes": [
           "bg-primary",
-          "bg-primary/80",
-          "text-primary"
+          "bg-primary/80"
         ],
         "where": [
-          "buttonVariants.variant.default",
-          "buttonVariants.variant.link"
+          "buttonVariants.variant.default"
         ]
       },
       {
@@ -3557,6 +3562,15 @@
           "buttonVariants.variant.destructive",
           "buttonVariants.variant.destructive via FOCUS_RING_DESTRUCTIVE (lib/focus.ts)",
           "buttonVariants"
+        ]
+      },
+      {
+        "token": "color.text.action.default",
+        "classes": [
+          "text-primary"
+        ],
+        "where": [
+          "buttonVariants.variant.link"
         ]
       },
       {
@@ -9772,21 +9786,21 @@
     ],
     "tokens": [
       {
-        "token": "color.action.background.default",
-        "classes": [
-          "text-primary"
-        ],
-        "where": [
-          "EmptyDescription"
-        ]
-      },
-      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted"
         ],
         "where": [
           "emptyMediaVariants.variant.icon"
+        ]
+      },
+      {
+        "token": "color.text.action.default",
+        "classes": [
+          "text-primary"
+        ],
+        "where": [
+          "EmptyDescription"
         ]
       },
       {
@@ -10217,11 +10231,9 @@
           "bg-primary/10",
           "bg-primary/5",
           "border-primary/20",
-          "border-primary/30",
-          "text-primary"
+          "border-primary/30"
         ],
         "where": [
-          "FieldDescription",
           "FieldLabel"
         ]
       },
@@ -10251,6 +10263,15 @@
         ],
         "where": [
           "FieldLabel"
+        ]
+      },
+      {
+        "token": "color.text.action.default",
+        "classes": [
+          "text-primary"
+        ],
+        "where": [
+          "FieldDescription"
         ]
       },
       {
@@ -12528,15 +12549,6 @@
         ]
       },
       {
-        "token": "color.action.background.default",
-        "classes": [
-          "text-primary"
-        ],
-        "where": [
-          "ItemDescription"
-        ]
-      },
-      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
@@ -12564,6 +12576,15 @@
         ],
         "where": [
           "itemVariants via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "color.text.action.default",
+        "classes": [
+          "text-primary"
+        ],
+        "where": [
+          "ItemDescription"
         ]
       },
       {

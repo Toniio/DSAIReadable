@@ -24,6 +24,11 @@
     "scripts",
     "packages",
     "mcp-server",
-    ".shadcn-vanilla"
+    ".shadcn-vanilla",
+    "evals/run.ts",
+    "evals/lib",
+    "evals/a11y/vitest.config.ts",
+    "evals/fixtures",
+    "evals/.work"
   ]
 }

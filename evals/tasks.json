@@ -1,0 +1,137 @@
+{
+  "$comment": "The reference tasks of the conformance harness (evals/README.md). Each prompt is written the way a product team asks for a screen: it names the need, never a component. `gold` points at the code that answers it in the design system: the `## Code example` of a page pattern or of a component spec. `render` is the JSX that mounts a pattern example whose export takes props.",
+  "tasks": [
+    {
+      "id": "sign-in",
+      "prompt": "Build the sign-in page of our web app: email and password, a link to recover a forgotten password, and a way to create an account for people who don't have one. Show a clear message when the email and password don't match.",
+      "gold": { "pattern": "sign-in" }
+    },
+    {
+      "id": "create-project",
+      "prompt": "Add a way to create a new project from the projects page: a button that opens a short form with the project name and an optional description, and confirms once the project exists.",
+      "gold": { "pattern": "create", "render": "<CreateProject />" }
+    },
+    {
+      "id": "delete-project",
+      "prompt": "Add a delete action for a project called \"Website redesign\". Deleting can't be undone, so the person must confirm it first, and they should be told once it's done.",
+      "gold": {
+        "pattern": "delete",
+        "render": "<DeleteProject name=\"Website redesign\" />"
+      }
+    },
+    {
+      "id": "edit-project",
+      "prompt": "Build the project details screen where someone can change the project's name, description and visibility, and save the changes only when they choose to.",
+      "gold": { "pattern": "edit", "render": "<ProjectDetails />" }
+    },
+    {
+      "id": "empty-projects",
+      "prompt": "Our projects list is empty for new users. Design what they see instead of a blank page, with a way to create their first project.",
+      "gold": {
+        "pattern": "empty-state",
+        "render": "<NoProjects onCreate={() => {}} />"
+      }
+    },
+    {
+      "id": "filter-projects",
+      "prompt": "Add filters above the projects list: by status (active, paused, archived) and by owner, with a way to clear them, and show how many projects match. There are 12 matching projects right now.",
+      "gold": { "pattern": "filter", "render": "<ProjectFilters count={12} />" }
+    },
+    {
+      "id": "account-form",
+      "prompt": "Build the form where a new user sets up their account: full name, email, role, and a short bio. Tell them what each field expects and what to fix when a value is wrong.",
+      "gold": { "pattern": "form", "render": "<AccountForm />" }
+    },
+    {
+      "id": "loading-cards",
+      "prompt": "Show what the projects grid looks like while the project cards are still loading.",
+      "gold": { "pattern": "loading", "render": "<ProjectCardsLoading />" }
+    },
+    {
+      "id": "app-navigation",
+      "prompt": "Build the layout of the projects area of our app: a side navigation with the main sections, the current page highlighted, and a header that says where the person is.",
+      "gold": { "pattern": "navigation" }
+    },
+    {
+      "id": "save-profile",
+      "prompt": "Build the profile form (name and email) with a save button that tells the person while it's saving, when it's saved, and what to do if saving fails.",
+      "gold": {
+        "pattern": "saving",
+        "render": "<ProfileForm save={async () => {}} />"
+      }
+    },
+    {
+      "id": "search-projects",
+      "prompt": "Add a search box over a list of projects (Apollo, Borealis, Cassini, Discovery) that narrows the list as the person types, and says so plainly when nothing matches.",
+      "gold": {
+        "pattern": "search",
+        "render": "<ProjectSearch projects={[\"Apollo\", \"Borealis\", \"Cassini\", \"Discovery\"]} />"
+      }
+    },
+    {
+      "id": "settings-page",
+      "prompt": "Build the settings page of our app, with sections for the profile, notifications and appearance (light or dark theme).",
+      "gold": { "pattern": "settings" }
+    },
+    {
+      "id": "invoices-table",
+      "prompt": "Show the list of recent invoices — number, status, payment method and amount — with a total at the bottom.",
+      "gold": { "component": "Table" }
+    },
+    {
+      "id": "results-pagination",
+      "prompt": "Add page navigation under a long list of search results: previous and next, the page numbers around the current one, and a gap for the pages in between.",
+      "gold": { "component": "Pagination" }
+    },
+    {
+      "id": "visitors-chart",
+      "prompt": "Add a chart to the dashboard that compares desktop and mobile visitors over the last six months.",
+      "gold": { "component": "Chart" }
+    },
+    {
+      "id": "app-sidebar",
+      "prompt": "Build the app shell: a collapsible side navigation with the main sections and the signed-in user at the bottom, next to the page content.",
+      "gold": { "component": "Sidebar" }
+    },
+    {
+      "id": "command-palette",
+      "prompt": "Add a quick-actions palette where people type to find a page or an action and run it from the keyboard.",
+      "gold": { "component": "Command" }
+    },
+    {
+      "id": "account-tabs",
+      "prompt": "Split the account screen into two views, account details and password, that the person switches between without leaving the page.",
+      "gold": { "component": "Tabs" }
+    },
+    {
+      "id": "date-picker",
+      "prompt": "Let the person pick a delivery date on a month calendar.",
+      "gold": { "component": "Calendar" }
+    },
+    {
+      "id": "attachments",
+      "prompt": "Show the files attached to a message — their names, sizes and upload progress — and let the person remove one.",
+      "gold": { "component": "Attachment" }
+    },
+    {
+      "id": "chat-thread",
+      "prompt": "Build the conversation view of a support chat: the messages from both sides, kept scrolled to the latest one as new messages arrive.",
+      "gold": { "component": "MessageScroller" }
+    },
+    {
+      "id": "faq",
+      "prompt": "Add a FAQ section where each question opens to show its answer.",
+      "gold": { "component": "Accordion" }
+    },
+    {
+      "id": "user-menu",
+      "prompt": "Add the menu that opens from the user's avatar in the header, with their profile, settings and a way to sign out.",
+      "gold": { "component": "DropdownMenu" }
+    },
+    {
+      "id": "verification-code",
+      "prompt": "Build the step where the person types the six-digit code we sent them by text message.",
+      "gold": { "component": "InputOtp" }
+    }
+  ]
+}

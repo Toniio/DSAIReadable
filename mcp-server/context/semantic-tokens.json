@@ -75,9 +75,9 @@
     "path": "color.text.action.default",
     "css_var": "--color-text-action-default",
     "light": "{primitive.color.violet.600}",
-    "dark": "{primitive.color.violet.400}",
+    "dark": "{primitive.color.violet.300}",
     "type": "color",
-    "status": "reserved",
+    "status": "active",
     "usage": "Text conveying a primary action (links, active button labels). Not for generic body text."
   },
   {

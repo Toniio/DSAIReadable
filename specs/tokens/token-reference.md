@@ -5,7 +5,7 @@
 
 # Token Reference
 
-> 425 tokens · source `tokens/tokens.resolver.json`: `primitive.json` · `semantic.json` · `semantic.dark.json` · `component.json`
+> 426 tokens · source `tokens/tokens.resolver.json`: `primitive.json` · `semantic.json` · `semantic.dark.json` · `component.json`
 > Machine-readable counterpart: `tokens.manifest.json`
 
 The public tokens are the Semantic and Component tiers. The Primitive tier is private:
@@ -31,7 +31,7 @@ the status says what the code does.
 | `color.text.subtle`                  | `--color-text-subtle`                  | color | active   | `#607175` | `#9ca8ab`                   | —                      |
 | `color.text.bold`                    | `--color-text-bold`                    | color | reserved | `#090b0c` | `#f9fbfb`                   | —                      |
 | `color.text.inverse`                 | `--color-text-inverse`                 | color | reserved | `#ffffff` | `#090b0c`                   | —                      |
-| `color.text.action.default`          | `--color-text-action-default`          | color | reserved | `#432dd7` | `#6e6cff`                   | —                      |
+| `color.text.action.default`          | `--color-text-action-default`          | color | active   | `#432dd7` | `#a3b3ff`                   | —                      |
 | `color.text.action.on`               | `--color-text-action-on`               | color | reserved | `#eef2ff` | —                           | —                      |
 | `color.text.destructive.default`     | `--color-text-destructive-default`     | color | active   | `#9f0712` | `#ffa2a2`                   | —                      |
 | `color.text.success.default`         | `--color-text-success-default`         | color | active   | `#006045` | `#5ee9b5`                   | —                      |
@@ -442,6 +442,7 @@ These variables are tier 1. Referencing them from a component, a spec or
 | `primitive.color.mist.900`                   | `--ds-prim-color-mist-900`                   | color       | active   | `#161b1d`                                                          | —        |
 | `primitive.color.mist.950`                   | `--ds-prim-color-mist-950`                   | color       | active   | `#090b0c`                                                          | —        |
 | `primitive.color.violet.50`                  | `--ds-prim-color-violet-50`                  | color       | active   | `#eef2ff`                                                          | —        |
+| `primitive.color.violet.300`                 | `--ds-prim-color-violet-300`                 | color       | active   | `#a3b3ff`                                                          | —        |
 | `primitive.color.violet.400`                 | `--ds-prim-color-violet-400`                 | color       | active   | `#6e6cff`                                                          | —        |
 | `primitive.color.violet.500`                 | `--ds-prim-color-violet-500`                 | color       | active   | `#615fff`                                                          | —        |
 | `primitive.color.violet.550`                 | `--ds-prim-color-violet-550`                 | color       | active   | `#4f39f6`                                                          | —        |

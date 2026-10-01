@@ -116,6 +116,15 @@
           "$type": "color",
           "$description": "Lightest violet, primary foreground."
         },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.6392, 0.702, 1],
+            "hex": "#a3b3ff"
+          },
+          "$type": "color",
+          "$description": "Light violet for action text and links in dark mode — 4.5:1 or more on every dark surface, popover included."
+        },
         "400": {
           "$value": {
             "colorSpace": "srgb",
@@ -123,7 +132,7 @@
             "hex": "#6e6cff"
           },
           "$type": "color",
-          "$description": "Light violet for action text in dark mode — 4.93:1 on mist.950."
+          "$description": "Light violet, the first chart series in dark mode."
         },
         "500": {
           "$value": {

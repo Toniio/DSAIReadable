@@ -60,6 +60,11 @@
     "type": "color"
   },
   {
+    "path": "primitive.color.violet.300",
+    "value": "#a3b3ff",
+    "type": "color"
+  },
+  {
     "path": "primitive.color.violet.400",
     "value": "#6e6cff",
     "type": "color"

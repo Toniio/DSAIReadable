@@ -59,6 +59,8 @@
     "generate-context": "npm --prefix mcp-server run generate-context && tsx scripts/build-plugin-deprecations.ts",
     "plugin:test": "npm run test -w @dsaireadable/eslint-plugin",
     "test:components": "vitest run",
+    "evals": "tsx evals/run.ts",
+    "evals:test": "tsx evals/run.ts --self-test",
     "test:lint-coverage": "tsx scripts/lint-test-coverage.ts",
     "test": "npm run test:components && npm run plugin:test && npm run mcp:test",
     "check": "tsx scripts/check.ts",
@@ -100,9 +102,11 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
     "@changesets/cli": "^3.0.3",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
+    "@modelcontextprotocol/client": "^2.2.0",
     "@tailwindcss/node": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "@terrazzo/cli": "^2.7.1",
@@ -113,6 +117,7 @@
     "@types/node": "^25.9.8",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@typescript-eslint/parser": "^8.71.0",
     "@vitest/browser-playwright": "^5.0.3",
     "ajv": "^8.20.0",
     "axe-core": "^4.13.0",

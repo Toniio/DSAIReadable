@@ -1,3 +1,5 @@
+import { userEvent } from "vitest/browser"
+
 type Snapshot = { rings: Map<Element, string>; elements: number }
 
 /**
@@ -32,7 +34,7 @@ function ringOf(element: Element): string {
  * The rings painted in the document — each element drawing an outline or a
  * visible box-shadow (the `ring-*` utilities) — and the number of elements.
  */
-export function snapshot(): Snapshot {
+function snapshot(): Snapshot {
   const rings = new Map<Element, string>()
   const elements = document.body.querySelectorAll("*")
   for (const element of elements) {
@@ -53,7 +55,7 @@ export function snapshot(): Snapshot {
  * - or new content appeared: a `focus-managed` component like Chart shows its
  *   tooltip on focus.
  */
-export function focusShown(
+function focusShown(
   focused: Element,
   before: Snapshot,
   after: Snapshot
@@ -67,4 +69,50 @@ export function focusShown(
     if (ringGone && after.rings.has(e)) return true
   }
   return false
+}
+
+function describeElement(element: Element): string {
+  const slot = element.getAttribute("data-slot")
+  const role = element.getAttribute("role")
+  return [
+    element.tagName.toLowerCase(),
+    slot && `[data-slot=${slot}]`,
+    role && `[role=${role}]`,
+  ]
+    .filter(Boolean)
+    .join("")
+}
+
+/**
+ * Walks the tab order of what is rendered with real Tab key presses and
+ * returns each tab stop that shows no focus indicator. `max` bounds the walk:
+ * enough to cross the largest example and come back to `<body>`.
+ */
+export async function unmarkedTabStops(max = 40): Promise<string[]> {
+  // The tests run in an iframe: past the last tab stop, focus leaves it for
+  // the runner's page. An anchor out of the tab order, focused first, brings
+  // it back and starts the sequence before what is rendered.
+  const anchor = document.createElement("span")
+  anchor.tabIndex = -1
+  document.body.prepend(anchor)
+  anchor.focus()
+  const unmarked: string[] = []
+  const seen = new Set<Element>()
+  try {
+    for (let i = 0; i < max; i++) {
+      const before = snapshot()
+      // A real Tab key press from Playwright, so :focus-visible matches.
+      await userEvent.keyboard("{Tab}")
+      await new Promise(requestAnimationFrame)
+      const focused = document.activeElement
+      if (!focused || focused === document.body || seen.has(focused)) break
+      seen.add(focused)
+      if (!focusShown(focused, before, snapshot())) {
+        unmarked.push(describeElement(focused))
+      }
+    }
+  } finally {
+    anchor.remove()
+  }
+  return unmarked
 }

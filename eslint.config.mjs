@@ -48,6 +48,9 @@ const eslintConfig = defineConfig([
     "mcp-server/node_modules/**",
     // The retokenized upstream components of `npm run shadcn:drift`, for review.
     ".shadcn-vanilla/**",
+    // The harness's screens: generated (.work) or wrong on purpose (fixtures).
+    "evals/.work/**",
+    "evals/fixtures/**",
   ]),
   {
     // Tailwind lockdown, second half: styles/globals.css removes the default

@@ -1,0 +1,65 @@
+name: Evals
+
+# The conformance harness (evals/README.md) against a model: run by hand, or
+# every Monday so a drift in the design system, its MCP server or the model
+# shows up within a week. Costs API credits: it never runs on a pull request.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Claude model that generates the screens
+        default: claude-opus-5-5
+      context:
+        description: "mcp: connected to the design system's MCP server; none: the baseline without it; both"
+        default: both
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "24"
+
+jobs:
+  evals:
+    name: evals
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MODEL: ${{ inputs.model || 'claude-opus-5-5' }}
+      CONTEXT: ${{ inputs.context || 'both' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - id: playwright
+        run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v6
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+      - if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps --only-shell chromium
+      - if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+      # The scorer first: a run is only worth its credits if gold still passes.
+      - run: npm run evals:test
+      - if: env.ANTHROPIC_API_KEY == ''
+        run: |
+          echo "::error::The ANTHROPIC_API_KEY repository secret is not set (evals/README.md)."
+          exit 1
+      - if: env.CONTEXT != 'none'
+        run: npm run evals -- --generator claude --model "$MODEL" --context mcp
+      - if: env.CONTEXT != 'mcp'
+        run: npm run evals -- --generator claude --model "$MODEL" --context none
+      - if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: evals-reports
+          path: evals/.work/*/report.*
+          if-no-files-found: ignore

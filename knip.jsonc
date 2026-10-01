@@ -21,9 +21,15 @@
         "styles/globals.css",
         // Loaded by Terrazzo in scripts/lint-dtcg.ts; knip has no Terrazzo plugin.
         "terrazzo.config.ts",
+        // Stage B of the conformance harness: run by evals/run.ts through
+        // `vitest --config`, which knip's Vitest plugin does not follow.
+        "evals/a11y/vitest.config.ts",
+        "evals/a11y/screens.test.tsx",
       ],
+      // Screens wrong on purpose, replayed by `npm run evals:test`.
+      "ignore": ["evals/fixtures/**"],
       "project": [
-        "{components,hooks,lib,scripts,tests}/**/*.{ts,tsx}",
+        "{components,hooks,lib,scripts,tests,evals}/**/*.{ts,tsx}",
         "styles/*.css",
         "*.{ts,mjs}",
       ],

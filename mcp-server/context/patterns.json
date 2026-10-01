@@ -699,7 +699,7 @@
         "not": "Processing, please wait"
       }
     ],
-    "code_example": "import { Card, CardContent, CardHeader } from \"@/components/ui/card\"\nimport { Skeleton } from \"@/components/ui/skeleton\"\n\nexport function ProjectCardsLoading() {\n  return (\n    <div\n      aria-busy=\"true\"\n      aria-label=\"Loading your projects…\"\n      className=\"grid gap-4 md:grid-cols-3\"\n    >\n      {Array.from({ length: 3 }, (_, index) => (\n        <Card key={index}>\n          <CardHeader>\n            <Skeleton className=\"h-5 w-32\" />\n          </CardHeader>\n          <CardContent className=\"flex flex-col gap-2\">\n            <Skeleton className=\"h-4 w-full\" />\n            <Skeleton className=\"h-4 w-48\" />\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  )\n}",
+    "code_example": "import { Card, CardContent, CardHeader } from \"@/components/ui/card\"\nimport { Skeleton } from \"@/components/ui/skeleton\"\n\nexport function ProjectCardsLoading() {\n  return (\n    <div\n      role=\"status\"\n      aria-busy=\"true\"\n      aria-label=\"Loading your projects…\"\n      className=\"grid gap-4 md:grid-cols-3\"\n    >\n      {Array.from({ length: 3 }, (_, index) => (\n        <Card key={index}>\n          <CardHeader>\n            <Skeleton className=\"h-5 w-32\" />\n          </CardHeader>\n          <CardContent className=\"flex flex-col gap-2\">\n            <Skeleton className=\"h-4 w-full\" />\n            <Skeleton className=\"h-4 w-48\" />\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  )\n}",
     "cross_references": [
       "[saving](./saving.md) — the pending state of a save button",
       "[empty-state](./empty-state.md) — what replaces the indicator when there is nothing to show",
