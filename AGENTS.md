@@ -142,7 +142,7 @@ problem: fix it, do not disable it.
 | `.husky/pre-push`                             | A direct push to `main`                                                                                                                         |
 | `.github/workflows/ci.yml`                    | 9 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
 | `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                       |
-| `.github/workflows/evals.yml`                 | Nothing: it measures. By hand or weekly, the conformance harness runs a Claude agent with and without the MCP server (`evals/README.md`)        |
+| `.github/workflows/evals.yml`                 | Nothing: it measures. By hand only, the conformance harness runs a Claude agent with and without the MCP server (`evals/README.md`)             |
 | `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result          |
 
 Each § 1 rule, and the check that enforces it:

@@ -60,8 +60,8 @@ conversation or a file of this repository:
 - **in a Claude Code cloud session**: add it to the environment's secrets;
 - **in CI**: add the `ANTHROPIC_API_KEY` repository secret, then run the
   [Evals workflow](../.github/workflows/evals.yml) by hand (Actions → Evals →
-  Run workflow). It also runs every Monday, and uploads the reports as an
-  artifact.
+  Run workflow). It runs only when started by hand, since each run costs API
+  credits, and uploads the reports as an artifact.
 
 The rubric of stage C uses the same key; `EVALS_JUDGE_MODEL` changes its model.
 

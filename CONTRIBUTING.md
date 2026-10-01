@@ -285,7 +285,7 @@ and the README's are removed together.
 | `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`             |
 | `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test` |
 
-The `Evals` workflow runs apart, by hand or every Monday, never on a pull request: the conformance harness with a Claude agent, with and without the MCP server, its reports uploaded as an artifact ([`evals/README.md`](./evals/README.md)).
+The `Evals` workflow runs apart, only when started by hand (each run costs API credits), never on a pull request: the conformance harness with a Claude agent, with and without the MCP server, its reports uploaded as an artifact ([`evals/README.md`](./evals/README.md)).
 
 ## Dependabot pull requests
 
