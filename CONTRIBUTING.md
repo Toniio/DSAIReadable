@@ -286,7 +286,7 @@ and the README's are removed together.
 | `typecheck`         | `npm run typecheck:all`                                                                      |
 | `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                 |
 | `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                |
-| `spec-sections`     | `npm run specs:validate`, `skills:validate`                                                  |
+| `spec-sections`     | `npm run specs:validate`, `skills:validate`, `agentskills validate` (`skills-ref` 0.1.1)     |
 | `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                  |
 | `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                       |
 | `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`             |

@@ -84,6 +84,12 @@ jobs:
       - run: npm ci
       - run: npm run specs:validate
       - run: npm run skills:validate
+      # The Agent Skills format's own validator, pinned; skills:validate repeats
+      # its checks and adds the repository's (citations, tools).
+      - run: |
+          python3 -m venv "$RUNNER_TEMP/skills-ref"
+          "$RUNNER_TEMP/skills-ref/bin/pip" install --quiet skills-ref==0.1.1
+          for skill in skills/*/; do "$RUNNER_TEMP/skills-ref/bin/agentskills" validate "$skill"; done
 
   context-freshness:
     name: context-freshness
