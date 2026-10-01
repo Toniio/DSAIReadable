@@ -3061,6 +3061,15 @@
         ]
       },
       {
+        "token": "border-width.separation",
+        "classes": [
+          "ring-(length:--border-width-separation)"
+        ],
+        "where": [
+          "bubbleReactionsVariants"
+        ]
+      },
+      {
         "token": "color.action.background.default",
         "classes": [
           "bg-primary",
@@ -3177,8 +3186,7 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
-          "BubbleContent",
-          "bubbleReactionsVariants"
+          "BubbleContent"
         ]
       },
       {
@@ -4635,42 +4643,20 @@
         ]
       },
       {
-        "token": "space.scale.2",
-        "classes": [
-          "gap-2"
-        ],
-        "where": [
-          "Card"
-        ]
-      },
-      {
         "token": "space.scale.3",
         "classes": [
-          "p-3",
-          "pb-3",
-          "px-3",
-          "py-3"
+          "[--card-spacing:var(--space-scale-3)]"
         ],
         "where": [
-          "CardContent",
-          "CardFooter",
-          "CardHeader",
           "Card"
         ]
       },
       {
         "token": "space.scale.4",
         "classes": [
-          "gap-4",
-          "p-4",
-          "pb-4",
-          "px-4",
-          "py-4"
+          "[--card-spacing:var(--space-scale-4)]"
         ],
         "where": [
-          "CardContent",
-          "CardFooter",
-          "CardHeader",
           "Card"
         ]
       },
@@ -4782,7 +4768,7 @@
         "prop": "`size`",
         "type": "`\"default\" | \"sm\"`",
         "default": "`\"default\"`",
-        "description": "Card size: `gap-4 py-4` or `gap-2 py-3`. Rendered as `data-size` on the root"
+        "description": "Card size: sets `--card-spacing` to `space.scale.4` or `space.scale.3`, the gap and padding of the card and its parts. Rendered as `data-size` on the root"
       },
       {
         "component": "Card",
@@ -4978,10 +4964,13 @@
       {
         "token": "space.scale.0",
         "classes": [
+          "inset-y-0",
           "min-w-0"
         ],
         "where": [
-          "CarouselItem"
+          "CarouselItem",
+          "CarouselNext",
+          "CarouselPrevious"
         ]
       },
       {
@@ -10246,6 +10235,25 @@
         ]
       },
       {
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted/50"
+        ],
+        "where": [
+          "FieldLabel"
+        ]
+      },
+      {
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "FieldLabel"
+        ]
+      },
+      {
         "token": "color.text.destructive.default",
         "classes": [
           "text-destructive"
@@ -10273,6 +10281,15 @@
         "where": [
           "FieldLabel",
           "FieldTitle"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "FieldLabel"
         ]
       },
       {

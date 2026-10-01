@@ -138,7 +138,7 @@ function BubbleContent({
  */
 const bubbleReactionsVariants = cva(
   // allow-raw: local-stacking — z-10 lifts the reactions over the bubble they overlap
-  "absolute z-10 flex w-fit shrink-0 items-center justify-center gap-1 rounded-none bg-muted px-1.5 py-0.5 text-xs ring-(length:--space-focus-ring-width) ring-card has-[button]:p-0",
+  "absolute z-10 flex w-fit shrink-0 items-center justify-center gap-1 rounded-none bg-muted px-1.5 py-0.5 text-xs ring-(length:--border-width-separation) ring-card has-[button]:p-0",
   {
     variants: {
       side: {

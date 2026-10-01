@@ -104,6 +104,57 @@ without being told. Keep it:
   to add for an undeclared divergence. To follow a newer shadcn/ui, run
   `npm run shadcn:baseline` (network) and review the diff.
 
+### Re-anchoring on shadcn/ui
+
+The components are shadcn/ui's, with the design system's classes. The
+difference is mechanical, so it is written once, as a table, and not in 65
+hand-made forks. `shadcn-upstream.json` holds:
+
+- `upstream`: the shadcn/ui tag the components are anchored to, its base
+  (`radix`) and its style (`lyra`, the `radix-lyra` of `components.json`);
+- `map`: the re-tokenization table, the single source of truth for "a shadcn/ui
+  class → the design system's". `classes` maps a whole class, variants
+  included (`aria-invalid:ring-1` → nothing: the invalid ring shows on focus
+  only); `utilities` maps a utility and keeps its variants (`opacity-50` →
+  `opacity-disabled`, so `disabled:opacity-50` → `disabled:opacity-disabled`);
+  `patterns` rewrites inside arbitrary values (`--spacing(7)` →
+  `var(--space-scale-7)`); `files` holds the rules of one component (`z-50` →
+  `z-popover` in a popover, `z-modal` in a dialog); `constants` groups classes
+  into the shared constants of `lib/` (`FOCUS_RING`, `OVERLAY_BASE`…); `values`
+  maps the CSS values of a `style` attribute;
+- `components`: each of the 65, `reanchored` (its classes are its upstream's
+  run through the table, plus the `added` classes it declares, with the
+  `reason`) or `outside` (no shadcn/ui item: Heading, Illustration, Logo,
+  PasswordInput). A `fork`, which drops upstream classes, declares them in
+  `removed`; none is needed today.
+
+`npm run shadcn:retokenize` (in `npm run check`) proves the table is a
+fixpoint: the components go through the codemod unchanged, so a raw class the
+table maps cannot come back. `npm run shadcn:drift` (network, CI) rebuilds the
+upstream components as `shadcn add` writes them (the base sources and the style
+sheet of the anchored tag, read from the shadcn/ui repository, then the
+installed shadcn CLI and every transform it runs), applies the codemod, writes
+the result to `.shadcn-vanilla/<tag>/` and compares each component, class by
+class: a difference that is neither mapped nor declared fails, with the classes
+to adopt, map or declare.
+
+When you change a component's classes, keep it re-anchored: take the upstream
+class (in `.shadcn-vanilla/`), map a systematic difference in `map`, or declare
+an addition with its reason.
+
+To follow a newer shadcn/ui:
+
+1. Update the `shadcn` devDependency, then run
+   `npx tsx scripts/retokenize-codemod.ts --update shadcn@<version>`: it
+   rebuilds both tags, re-tokenizes them, and three-way merges the upstream
+   change of each component into `components/ui` (`git merge-file`), leaving
+   conflict markers where a line changed on both sides.
+2. Resolve the conflicts, set `upstream.ref` to the new tag, then run
+   `npm run shadcn:drift`: a new raw class upstream is mapped in `map`, or
+   adopted.
+3. Run `npm run shadcn:baseline` for the API, `npm run check`, and add a
+   `visual` changeset that says what moved.
+
 The files never to edit by hand are listed in [`AGENTS.md` § 8](./AGENTS.md#8-areas-not-to-touch-without-an-explicit-instruction).
 
 ### Deprecating a token or a component export
@@ -222,17 +273,17 @@ and the README's are removed together.
 
 ## What CI checks
 
-| Job                 | Command                                                                      |
-| ------------------- | ---------------------------------------------------------------------------- |
-| `tokens-validate`   | `npm run tokens-validate`                                                    |
-| `typecheck`         | `npm run typecheck:all`                                                      |
-| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check` |
-| `index-schema`      | `npm run index:validate`                                                     |
-| `spec-sections`     | `npm run specs:validate`                                                     |
-| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                  |
-| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                       |
-| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached)           |
-| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `release:test` |
+| Job                 | Command                                                                                      |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| `tokens-validate`   | `npm run tokens-validate`                                                                    |
+| `typecheck`         | `npm run typecheck:all`                                                                      |
+| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                 |
+| `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                |
+| `spec-sections`     | `npm run specs:validate`                                                                     |
+| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                  |
+| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                       |
+| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached)                           |
+| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test` |
 
 ## Dependabot pull requests
 

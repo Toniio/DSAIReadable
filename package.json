@@ -67,6 +67,8 @@
     "index:props": "tsx scripts/lint-props-types.ts",
     "index:shadcn": "tsx scripts/lint-shadcn-api.ts",
     "shadcn:baseline": "tsx scripts/lint-shadcn-api.ts --update",
+    "shadcn:retokenize": "tsx scripts/retokenize-codemod.ts",
+    "shadcn:drift": "tsx scripts/retokenize-codemod.ts --drift",
     "versions:sync": "tsx scripts/sync-versions.ts",
     "versions:check": "tsx scripts/sync-versions.ts --check",
     "changesets:lint": "tsx scripts/lint-changesets.ts",
@@ -126,6 +128,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "shadcn": "^4.21.0",
     "tailwindcss": "^4.3.3",
+    "ts-morph": "^26.0.0",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vitest": "^5.0.2"
