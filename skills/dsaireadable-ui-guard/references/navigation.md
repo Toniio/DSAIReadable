@@ -8,7 +8,8 @@ here, how do I get back.
   orientation: the same place, every time._ `pattern:navigation`
   `spec:Sidebar`
 - **MUST** show a `Breadcrumb` above the title on a page nested as deep as the
-  navigation pattern says, its last item the current page and not a link.
+  navigation pattern and the Breadcrumb spec say, its last item the current
+  page and not a link.
   _Wayfinding: the path back is visible._ `pattern:navigation`
   `spec:Breadcrumb`
 - **MUST** give every view a way back or onward — a breadcrumb, a back link, a
