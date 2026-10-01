@@ -31,6 +31,8 @@ import {
 import { join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
+import * as prettier from "prettier"
+
 import { scoreA11y } from "./lib/a11y"
 import {
   passesA,
@@ -296,7 +298,12 @@ async function main() {
     const base = join(ROOT, "evals/history", `${report.date}-${label}`)
     mkdirSync(join(ROOT, "evals/history"), { recursive: true })
     writeFileSync(`${base}.json`, JSON.stringify(report, null, 2) + "\n")
-    writeFileSync(`${base}.md`, markdown)
+    // Committed: formatted as Prettier checks every Markdown file.
+    const options = (await prettier.resolveConfig(`${base}.md`)) ?? {}
+    writeFileSync(
+      `${base}.md`,
+      await prettier.format(markdown, { ...options, parser: "markdown" })
+    )
     console.log(`Recorded: evals/history/${report.date}-${label}.{json,md}`)
   }
 }
