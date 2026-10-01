@@ -1,17 +1,24 @@
 # Changelog
 
-Every notable change, in the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
-format. Nothing has been released yet: registry items install from `main`, so
-every change below is live as soon as it is merged. One version, following
-[Semantic Versioning](https://semver.org/), names the whole design system
-(CONTRIBUTING, _Versioning and releases_). From the first release on, each
-release's entry is written by Changesets from the changesets that pull requests
-carry.
+## 0.1.0
 
-Until then, a pull request that changes behavior adds its line under
-**Unreleased**, in the section that fits.
+### Minor Changes
 
-## [Unreleased]
+- 24d5c6f: skills: Add two agent skills in `skills/`, installable with `npx skills add Toniio/DSAIReadable` or as the `dsaireadable` Claude Code plugin (`.claude-plugin/marketplace.json`), which also starts the MCP server. `dsaireadable-build` builds or changes a screen MCP-first: the page pattern, one detailed spec per component, then `dsaireadable_validate_code` and `dsaireadable_validate_screen` until both report zero errors. `dsaireadable-ui-guard` reviews every screen it builds or changes for basic UI and UX errors before handing it back: a checklist in eight domains (hierarchy, forms, states, destructive actions, navigation, accessibility, microcopy, restraint), then a `file:line — severity — rule — fix` review that ends in pass or fail. Each of its rules cites the spec, pattern or foundation that writes it.
+- 24d5c6f: mcp: The `generate_idea` and `suggest_next_steps` prompts drop the "senior Product Designer" persona and point at the `dsaireadable-ui-guard` skill instead, with its four questions (the main action, every state designed, irreversible actions confirmed, a way back from every view) for the clients that load no skills.
+
+### Patch Changes
+
+- 24d5c6f: docs: The Breadcrumb spec now shows the trail from 3 levels deep, like the navigation pattern; it said two or more.
+- 4b1a98f: visual: Focus shows on invalid controls. Button, Checkbox, Input, NativeSelect, Questionnaire, RadioGroup, Select, Switch and Textarea with `aria-invalid`: the destructive ring is no longer drawn at rest (it was identical with and without focus, so keyboard focus was invisible, WCAG 2.4.7); at rest the destructive border alone marks the error, and the ring (`ring-destructive/20`, dark `/40`, `--space-focus-ring-width` wide) appears on focus, as in shadcn/ui. CommandInput: its InputGroup now draws the focus ring (none before, its selector never matched `data-slot="command-input"`).
+- 4b1a98f: visual: ScrollArea's viewport is in the tab order (`tabIndex={0}`, with its focus ring), so the keyboard reaches and scrolls an area that holds nothing focusable in every browser, Safari included (WCAG 2.1.1); name the area with `role="region"` and an `aria-label`. CommandSeparator is `aria-hidden`: a listbox may own only options and groups.
+- d852e1a: visual: Link text reaches 4.5:1 in dark mode. `text-primary` now reads the action text token `color.text.action.default` (active, it was reserved), and `bg-primary` keeps the action fill, as `text-destructive`, `text-success` and `text-warning` already do. Button and Badge `variant="link"`, and a hovered link in EmptyDescription, FieldDescription and ItemDescription: in dark mode, from the action fill (1.5:1 on the card) to the new `primitive.color.violet.300` (7.4:1 on the card, 8.7:1 on a popover); light mode is unchanged (`violet.600`).
+- d852e1a: docs: The loading pattern's example gives its skeleton grid `role="status"`: an `aria-label` on a `div` with no role is ignored by assistive technology, and axe reports it (`aria-prohibited-attr`).
+- 24d5c6f: docs: Two rules against dark patterns, which the `dsaireadable-ui-guard` skill cites: the form pattern forbids pre-checking a consent, a subscription or a paid option, and the voice and tone foundation forbids shaming a refusal (the way out reads `Not now` or `Cancel`).
+- 7428fc3: visual: The components are re-anchored on shadcn/ui 4.21.0 (`radix-lyra`) and take its fixes. Button default: the hover color (`bg-primary/80`) shows on every button, not only on a link. Card: the gap and padding come from `--card-spacing` like upstream; a `sm` card's gap goes from `space.scale.2` to `space.scale.3`. CarouselPrevious and CarouselNext: centered with `inset-y-0 my-auto` instead of a `-translate-y-1/2`, which the Button's pressed `translate-y-px` overrode. Checkbox, RadioGroup and Switch inside a choice-card `FieldLabel`: the label draws the focus ring and the hover background, the control draws none. BubbleReactions: its ring takes `border-width.separation`, not the focus-ring width. Marker: links underline at offset 3 like every other link.
+- 4b1a98f: docs: Every spec's code example now renders as written, with no axe violation. Select, NativeSelect and InputOtp examples name their control; ToggleGroup imports `GridFourIcon` (`GridIcon` does not exist); Direction and Sonner examples are components that render (no `<html>` layout, no required children); ScrollArea names its region.
+- 4b1a98f: docs: Specs now describe what the components do, replayed in a real browser. ToggleGroup's role is `radiogroup` (single) or `toolbar` (multiple), not `group`; Calendar marks an unavailable day as a `disabled` button; Combobox points `aria-activedescendant` at the highlighted option and `aria-selected` at the chosen one; ContextMenu opens with right-click and the Menu key, `Shift+F10` only where the OS maps it (not macOS); Popover's `Tab` loops through its content; Questionnaire's `Enter` moves on from a checked choice and does not check it; Attachment's group scrolls with `ArrowLeft` / `ArrowRight`; Accordion's `Tab` visits each trigger. Resizable sizes: a number is in pixels, so the examples use percent strings (`defaultSize="50%"`). The CommandDialog example wraps its content in `Command`.
+- 4b1a98f: visual: Tabs passes `orientation` to Radix. With `orientation="vertical"`, the list now carries `aria-orientation="vertical"` and `ArrowDown` / `ArrowUp` move between tabs; before, the list stayed horizontal for assistive technology and the vertical arrows did nothing.
 
 ### Added
 
@@ -42,8 +49,7 @@ Until then, a pull request that changes behavior adds its line under
   unknown class is an error, a disabled state reads `opacity-disabled`).
   `components/ui/` is left alone, and `createConfig({ ignores, tailwind })`
   narrows that for a project whose own components live there. `npm run plugin:test` runs each rule against
-  a failing and a conforming fixture. It is not published yet: publishing is a
-  maintainer's step.
+  a failing and a conforming fixture.
 - MCP server: `dsaireadable_validate_code` lints and type-checks TSX with the
   plugin's `core` rules, in memory, and answers with structured diagnostics
   (rule, severity, line, column). TypeScript adds syntax errors and names that
@@ -57,8 +63,7 @@ Until then, a pull request that changes behavior adds its line under
   JavaScript (`dist/`, a `node` shebang, `tsx` and `typescript` as dev
   dependencies), and the package holds `dist/` and `context/` only: no test, no
   generator, no agent file. `npm run mcp:test-package` packs it and runs the
-  tarball through `npx` from an empty folder. It is not published yet:
-  publishing is a maintainer's step.
+  tarball through `npx` from an empty folder.
 - MCP server: run inside a project, `dsaireadable_list_patterns` and
   `dsaireadable_get_pattern` also serve that project's `design/patterns/*.md`
   (the working directory, or `DSAIREADABLE_PROJECT_DIR`): the same nine

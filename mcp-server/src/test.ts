@@ -1882,17 +1882,15 @@ const TOOL_CASES: Record<string, ToolCase> = {
     errorNames: "kind",
   },
   dsaireadable_get_changelog: {
-    args: { version: "Unreleased", category: "Added" },
+    args: { version: "0.1.0", category: "Added" },
     content: (p) =>
       p.total > 0 &&
       p.items.every(
         (e: Json) =>
-          e.version === "Unreleased" &&
-          e.category === "Added" &&
-          e.text.length > 0
+          e.version === "0.1.0" && e.category === "Added" && e.text.length > 0
       ),
     errorArgs: { version: "9.9.9" },
-    errorNames: "Unreleased",
+    errorNames: "0.1.0",
   },
   dsaireadable_get_typography: {
     args: {},
@@ -2462,7 +2460,7 @@ const inputs: [string, Record<string, unknown>][] = [
   ["dsaireadable_get_deprecations", { kind: "token" }],
   ["dsaireadable_get_deprecations", { kind: "export" }],
   ["dsaireadable_get_changelog", {}],
-  ["dsaireadable_get_changelog", { version: "Unreleased", limit: 2 }],
+  ["dsaireadable_get_changelog", { version: "0.1.0", limit: 2 }],
   ["dsaireadable_get_changelog", { category: "Added" }],
   ["dsaireadable_get_typography", {}],
   ["dsaireadable_get_icons", {}],

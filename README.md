@@ -84,9 +84,8 @@ The MCP server (`mcp-server/`) exposes the design system as tools AI agents can 
 
 ### Getting started
 
-The server runs on your machine, over stdio: nothing is hosted. Once
-`@dsaireadable/mcp-server` is published, a client starts it with `npx`, with no
-clone:
+The server runs on your machine, over stdio: nothing is hosted. A client starts
+`@dsaireadable/mcp-server` with `npx`, with no clone:
 
 ```bash
 npx -y @dsaireadable/mcp-server
@@ -111,8 +110,7 @@ Claude Desktop, in `claude_desktop_config.json`:
 }
 ```
 
-The package is **not published yet** (see [Publishing identity](#publishing-identity)):
-until then, run the server from a clone.
+To run your own changes, start the server from a clone:
 
 ```bash
 cd mcp-server
@@ -204,8 +202,8 @@ From a clone, `"args": ["tsx", "./mcp-server/src/index.ts"]` runs the sources.
 
 `@dsaireadable/eslint-plugin` (`packages/eslint-plugin/`) gives a project's own lint
 the design system's rules, so an agent, or a person, sees a violation where it
-writes the code instead of in review. It is **not published yet**
-(see [Publishing identity](#publishing-identity)); the MCP server's
+writes the code instead of in review. It is published with the server, at the
+same version (`npm install -D @dsaireadable/eslint-plugin`); the MCP server's
 `dsaireadable_validate_code` tool runs the same rules.
 
 ```js
@@ -261,8 +259,8 @@ claude plugin marketplace add Toniio/DSAIReadable
 claude plugin install dsaireadable@dsaireadable
 ```
 
-The plugin starts the MCP server with `npx`, so it waits for the package's first
-publication, like the server itself. Its gain is measured on the conformance
+The plugin starts the MCP server with `npx`, pinned to the release the plugin
+ships with. Its gain is measured on the conformance
 harness, with and without the skills: `npm run evals -- --generator claude
 --suite skills --skills all` ([`evals/README.md`](./evals/README.md)).
 
@@ -279,8 +277,8 @@ follows it — do not reintroduce a capitalized variant.
 | shadcn registry        | `dsaireadable`                | A registry name only allows alphanumerics, hyphens and underscores               |
 | A component's item     | `Toniio/DSAIReadable/<item>`  | The full GitHub address: a bare name would point to the official shadcn registry |
 | npm scope              | `@dsaireadable`               | npm forbids capitals in a scope                                                  |
-| MCP server npm package | `@dsaireadable/mcp-server`    | Not published yet: for now the server runs from a clone of this repository       |
-| ESLint plugin package  | `@dsaireadable/eslint-plugin` | Not published yet: the server depends on it, and both are published together     |
+| MCP server npm package | `@dsaireadable/mcp-server`    | A client runs it with `npx -y @dsaireadable/mcp-server`, with no clone           |
+| ESLint plugin package  | `@dsaireadable/eslint-plugin` | Published with the server, at the same version: the server pins it               |
 | Release tag            | `vX.Y.Z`                      | One version for the tokens, components, registry, MCP server and ESLint plugin   |
 
 A release tag pins the item you name, not what it depends on:
@@ -291,9 +289,9 @@ dependencies, and `npm run release:test` checks it. To reproduce a release exact
 commit what the CLI copied into your project
 ([CONTRIBUTING → Versioning and releases](./CONTRIBUTING.md#versioning-and-releases)).
 
-The `@dsaireadable` scope is **not reserved** on npm: it will only be once its first
-package is published. The former `@DSAIReadable` scope could not be
-published — it only survives in archived documents, flagged as obsolete.
+The `@dsaireadable` scope is the `dsaireadable` organization on npm. The former
+`@DSAIReadable` scope could not be published — it only survives in archived
+documents, flagged as obsolete.
 
 ---
 

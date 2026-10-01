@@ -95,8 +95,9 @@ not the sources, is what has to work:
 - **The one thing read from outside the package** is the consumer project's
   `design/patterns/*.md` (`src/lib/patterns.ts`), through the same parser the
   generator uses for `specs/patterns/`.
-- **Publishing is a maintainer's step** (`npm publish` from `mcp-server/`, after
-  the release tag): an agent never runs it.
+- **Publishing is a maintainer's step** (`npm publish` from
+  `packages/eslint-plugin/`, then from `mcp-server/`, after the release tag): an
+  agent never runs it.
 
 ## 5. Style
 

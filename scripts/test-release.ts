@@ -83,6 +83,9 @@ try {
   // changesets finds its root through git
   run("git", ["init", "-q"], tmp)
   const before = readJson("package.json").version
+  // A minor changeset: the next minor of whatever the repository is at.
+  const [major, minor] = before.split(".").map(Number)
+  const next = `${major}.${minor + 1}.0`
   expect(
     before === readJson("design-system.index.json").version,
     `every file starts at ${before}`
@@ -114,12 +117,12 @@ try {
   expect(versioned.ok, "changeset version runs")
   const after = readJson("package.json").version
   expect(
-    after === "0.1.0",
-    `a minor changeset takes ${before} to 0.1.0 (got ${after})`
+    after === next,
+    `a minor changeset takes ${before} to ${next} (got ${after})`
   )
   const changelog = readFileSync(join(tmp, "CHANGELOG.md"), "utf-8")
   expect(
-    changelog.includes(`## 0.1.0\n\n### Minor Changes\n\n- ${SUMMARY}\n`),
+    changelog.includes(`## ${next}\n\n### Minor Changes\n\n- ${SUMMARY}\n`),
     "the CHANGELOG gets the entry, under the version and its bump"
   )
   expect(
@@ -146,26 +149,25 @@ try {
     "versions:check passes after the sync"
   )
   expect(
-    readJson("design-system.index.json").version === "0.1.0" &&
-      readJson("mcp-server/package.json").version === "0.1.0" &&
-      readJson("packages/eslint-plugin/package.json").version === "0.1.0" &&
+    readJson("design-system.index.json").version === next &&
+      readJson("mcp-server/package.json").version === next &&
+      readJson("packages/eslint-plugin/package.json").version === next &&
       readJson("mcp-server/package.json").dependencies[
         "@dsaireadable/eslint-plugin"
-      ] === "0.1.0" &&
+      ] === next &&
       ["", "mcp-server", "packages/eslint-plugin"].every(
-        (key) =>
-          readJson("package-lock.json").packages?.[key].version === "0.1.0"
+        (key) => readJson("package-lock.json").packages?.[key].version === next
       ),
-    "the index, the server, the plugin (and the server's pin of it) and every lockfile entry carry 0.1.0"
+    `the index, the server, the plugin (and the server's pin of it) and every lockfile entry carry ${next}`
   )
   const marketplace = readFileSync(
     join(tmp, ".claude-plugin/marketplace.json"),
     "utf-8"
   )
   expect(
-    marketplace.includes('"version": "0.1.0"') &&
-      marketplace.includes('"@dsaireadable/mcp-server@0.1.0"'),
-    "the Claude Code plugin and the server it starts carry 0.1.0"
+    marketplace.includes(`"version": "${next}"`) &&
+      marketplace.includes(`"@dsaireadable/mcp-server@${next}"`),
+    `the Claude Code plugin and the server it starts carry ${next}`
   )
 } finally {
   rmSync(tmp, { recursive: true, force: true })

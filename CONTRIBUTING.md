@@ -58,9 +58,7 @@ with `--no-verify`.**
 - **Green CI required.** `main` is protected; no direct push is possible.
 - Squash merge, then delete the branch.
 - A change to the public surface is declared as
-  [Versioning and releases](#versioning-and-releases) says: a line under
-  **Unreleased** in [`CHANGELOG.md`](./CHANGELOG.md) until the first release, a
-  changeset after it.
+  [Versioning and releases](#versioning-and-releases) says: a changeset.
 
 ## Where a change goes
 
@@ -239,24 +237,26 @@ Run `npx changeset`, or write the file in `.changeset/` by hand:
 component-api: Add the `xs` size to Button.
 ```
 
-Commit it with the pull request. Until the first release there is no changeset:
-the line goes under **Unreleased** in `CHANGELOG.md`, as it always has.
+Commit it with the pull request.
 
 ### Releasing
 
-The first release, `0.1.0`, is cut by hand, because its content is already
-written under **Unreleased**: rename that heading to `0.1.0`, delete the
-paragraph under the `# Changelog` title (Changesets writes each new entry right
-under the title, so prose there would end up below the newest release), set the
-version in `package.json`, run `npm run versions:sync && npm run generate-context`,
-open the pull request and tag it as in step 2 below. Every release after it
-comes from the changesets:
+Every release comes from the changesets:
 
 1. A release pull request runs `npm run release:version`: it consumes the
    changesets, writes the CHANGELOG entry, bumps the version, copies it
    everywhere and regenerates the MCP context.
 2. After the merge, `npx changeset tag` creates `vX.Y.Z` on the merge commit;
    push it with `git push origin vX.Y.Z`.
+3. A maintainer publishes the two packages, the ESLint plugin first since the
+   server pins it: `npm publish --access public --dry-run`, then without
+   `--dry-run`, in `packages/eslint-plugin/`, then in `mcp-server/`. A published
+   version cannot be replaced: a mistake is fixed by the next version. An agent
+   never publishes.
+
+`0.1.0` went through the same steps, and also carries the changes written by
+hand before the changesets existed: they sit under its `Added`, `Changed`,
+`Fixed`, `Removed` and `Security` headings.
 
 `npm run release:test` runs that pipeline on a copy of the files, with a test
 changeset, and checks the version and the CHANGELOG entry it produces.
@@ -341,8 +341,8 @@ Privately, never in a public issue — see [`SECURITY.md`](./SECURITY.md).
 ## Running the MCP server locally
 
 Copy `.vscode/mcp.json.example` to `.vscode/mcp.json` (not committed). It starts
-the published package with `npx`; until the package is published, or to run your
-own changes, point it at the sources with `"args": ["tsx", "./mcp-server/src/index.ts"]`.
+the published package with `npx`; to run your own changes, point it at the
+sources with `"args": ["tsx", "./mcp-server/src/index.ts"]`.
 
 To try the package a consumer would get, `npm pack`, run in `mcp-server/`, builds
 and packs it, and `npm run mcp:test-package` runs that tarball, with the ESLint
