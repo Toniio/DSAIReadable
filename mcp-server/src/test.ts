@@ -1489,6 +1489,15 @@ assert(
   `Every tool a prompt names exists (${prompts.length} prompts${unknownTools.length ? `; unknown: ${unknownTools.join(", ")}` : ""})`
 )
 
+for (const name of ["generate_idea", "suggest_next_steps"]) {
+  const text = await promptText(name)
+  assert(
+    text.includes("`dsaireadable-ui-guard`") &&
+      !/senior Product Designer/.test(text),
+    `${name} points at the dsaireadable-ui-guard skill instead of a persona`
+  )
+}
+
 const buildScreen = await promptText("build_screen")
 const steps = [...buildScreen.matchAll(/^\d+\. .*$/gm)].map((m) => m[0])
 const stepTools = steps.map((step) =>

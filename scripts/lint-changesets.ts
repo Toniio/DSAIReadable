@@ -9,6 +9,8 @@
  *   component-api    a prop, export, variant, component, registry item or new
  *                    token added, or one renamed or removed: minor or major
  *   mcp              the MCP server's tools and served content: minor or major
+ *   skills           the agent skills of skills/ and the Claude Code plugin
+ *                    that ships them: minor or major
  *   visual           appearance only, described in full: patch
  *   docs             specs and guidance only: patch
  *
@@ -46,6 +48,7 @@ const CATEGORIES: Record<string, Bump[]> = {
   "token-breaking": [breaking],
   "component-api": ["minor", "major"],
   mcp: ["minor", "major"],
+  skills: ["minor", "major"],
   visual: ["patch"],
   docs: ["patch"],
 }

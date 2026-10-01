@@ -26,8 +26,9 @@
         "evals/a11y/vitest.config.ts",
         "evals/a11y/screens.test.tsx",
       ],
-      // Screens wrong on purpose, replayed by `npm run evals:test`.
-      "ignore": ["evals/fixtures/**"],
+      // Screens wrong on purpose, replayed by `npm run evals:test`, and the
+      // screens the change tasks start from, read as text by evals/lib/tasks.ts.
+      "ignore": ["evals/fixtures/**", "evals/bases/**"],
       "project": [
         "{components,hooks,lib,scripts,tests,evals}/**/*.{ts,tsx}",
         "styles/*.css",

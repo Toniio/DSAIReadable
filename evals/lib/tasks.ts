@@ -14,16 +14,53 @@ export interface Task {
   id: string
   prompt: string
   gold: { pattern?: string; component?: string; render?: string }
+  /**
+   * A change to an existing screen: the file the generator starts from, given
+   * with the prompt. The gold is the screen once changed.
+   */
+  base?: string
 }
 
-export function loadTasks(root: string, only?: string[]): Task[] {
-  const { tasks } = JSON.parse(
+interface TaskFile {
+  tasks: Task[]
+  /** Named subsets of the tasks: `--suite skills`. */
+  suites: Record<string, string[]>
+}
+
+function readTasks(root: string): TaskFile {
+  return JSON.parse(
     readFileSync(resolve(root, "evals/tasks.json"), "utf-8")
-  ) as { tasks: Task[] }
+  ) as TaskFile
+}
+
+/** The tasks, all of them, the ids of `only`, or those of a suite. */
+export function loadTasks(
+  root: string,
+  only?: string[],
+  suite?: string
+): Task[] {
+  const { tasks, suites } = readTasks(root)
+  if (suite && !suites[suite])
+    throw new Error(
+      `evals/tasks.json has no suite "${suite}": ${Object.keys(suites).join(", ")}`
+    )
   const ids = new Set(tasks.map((t) => t.id))
-  for (const id of only ?? [])
+  const wanted = only?.length ? only : suite ? suites[suite] : undefined
+  for (const id of wanted ?? [])
     if (!ids.has(id)) throw new Error(`evals/tasks.json has no task "${id}"`)
-  return only?.length ? tasks.filter((t) => only.includes(t.id)) : tasks
+  return wanted ? tasks.filter((t) => wanted.includes(t.id)) : tasks
+}
+
+/** Every suite's ids, to check they name tasks that exist. */
+export function suiteIds(root: string): Record<string, string[]> {
+  return readTasks(root).suites
+}
+
+/** What the generator receives: the request, and the screen to change if any. */
+export function taskMessage(root: string, task: Task): string {
+  if (!task.base) return task.prompt
+  const code = readFileSync(resolve(root, task.base), "utf-8")
+  return `${task.prompt}\n\nThe current screen:\n\n\`\`\`tsx\n${code}\`\`\``
 }
 
 /** Where a task's gold standard is written. */

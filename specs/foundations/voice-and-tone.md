@@ -71,6 +71,7 @@ system log.
 - ❌ Never write "please", "oops" or "whoops", and never an exclamation mark in an error
 - ❌ Never blame the reader ("You entered an invalid date"): describe the problem and the fix
 - ❌ Never use a term from the "Not" column of the word list
+- ❌ Never shame a refusal: the way out reads `Not now` or `Cancel`, never `No thanks, I prefer paying more`
 
 ## Guard
 

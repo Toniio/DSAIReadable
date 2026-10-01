@@ -2,20 +2,22 @@
  * The model side of the harness: a Claude agent that answers a task with one
  * screen, connected to the design system's MCP server (`--context mcp`) or
  * with no context at all (`--context none`, the baseline the server is
- * measured against), and the rubric of stage C.
+ * measured against), with or without the agent skills of `skills/`
+ * (`--skills`), and the rubric of stage C.
  *
  * Needs ANTHROPIC_API_KEY. The measured model is the one named: no fallback to
  * another model, so a refusal counts as a task with no output.
  */
 
-import { resolve } from "node:path"
+import { readdirSync, readFileSync } from "node:fs"
+import { relative, resolve } from "node:path"
 
 import Anthropic from "@anthropic-ai/sdk"
 import { Client } from "@modelcontextprotocol/client"
 import { StdioClientTransport } from "@modelcontextprotocol/client/stdio"
 
 import type { GenerationMetrics, RubricResult } from "./report"
-import type { Task } from "./tasks"
+import { taskMessage, type Task } from "./tasks"
 
 const MAX_TURNS = 25
 const JUDGE_MODEL = "claude-opus-5-5"
@@ -25,6 +27,59 @@ const SYSTEM = `You build screens for a React and Next.js app that uses the DSAI
 Answer with exactly one \`\`\`tsx code block: a complete module whose default export renders the screen and takes no props. Put sample data inline.`
 
 const WITH_MCP = `\n\nThe dsaireadable MCP server describes the design system: its components, page patterns, tokens and rules, and validates code. Use it before and after you write the screen.`
+
+/**
+ * The skills as an agent meets them: their name and description up front, the
+ * rest read on demand — SKILL.md first, then the files it names. That is the
+ * progressive disclosure of the Agent Skills format, which Claude Code and
+ * the other clients follow; the tool stands in for their file reads.
+ */
+const READ_SKILL = "read_skill_file"
+
+function skillCatalog(root: string, names: string[]) {
+  const all = readdirSync(resolve(root, "skills"))
+  const chosen = names.includes("all") ? all : names
+  for (const name of chosen)
+    if (!all.includes(name))
+      throw new Error(
+        `--skills: no skill "${name}" in skills/ (${all.join(", ")})`
+      )
+  const entries = chosen.map((name) => {
+    const text = readFileSync(
+      resolve(root, "skills", name, "SKILL.md"),
+      "utf-8"
+    )
+    const description = /^description: (.+)$/m.exec(text)?.[1] ?? ""
+    return { name, description }
+  })
+  const system = `\n\nSkills are available. When a skill's description matches the work, read its SKILL.md with \`${READ_SKILL}\` before you start, then follow it; read the other files it names when it tells you to.\n${entries.map((e) => `- ${e.name}: ${e.description}`).join("\n")}`
+  const tool: Anthropic.Tool = {
+    name: READ_SKILL,
+    description:
+      "Reads a file of an agent skill: its SKILL.md, or a file SKILL.md names (references/forms.md)",
+    input_schema: {
+      type: "object",
+      properties: {
+        skill: { type: "string", enum: chosen },
+        path: {
+          type: "string",
+          description: "Path inside the skill; SKILL.md when omitted",
+        },
+      },
+      required: ["skill"],
+    },
+  }
+  const read = (input: { skill?: string; path?: string }) => {
+    if (!input.skill || !chosen.includes(input.skill))
+      throw new Error(`no skill "${input.skill}"`)
+    const dir = resolve(root, "skills", input.skill)
+    const file = resolve(dir, input.path ?? "SKILL.md")
+    if (relative(dir, file).startsWith(".."))
+      throw new Error(`"${input.path}" is outside the skill`)
+    return readFileSync(file, "utf-8")
+  }
+  return { system, tool, read }
+}
 
 function client(): Anthropic {
   if (!process.env.ANTHROPIC_API_KEY)
@@ -65,9 +120,13 @@ export function claudeGenerator(options: {
   root: string
   model: string
   context: "mcp" | "none"
+  skills: string[]
 }) {
   const anthropic = client()
   let server: Awaited<ReturnType<typeof connectMcp>> | undefined
+  const skills = options.skills.length
+    ? skillCatalog(options.root, options.skills)
+    : undefined
 
   return async (task: Task) => {
     if (options.context === "mcp" && !server)
@@ -81,7 +140,11 @@ export function claudeGenerator(options: {
       tools: {},
     }
     const messages: Anthropic.MessageParam[] = [
-      { role: "user", content: task.prompt },
+      { role: "user", content: taskMessage(options.root, task) },
+    ]
+    const tools = [
+      ...(server?.definitions ?? []),
+      ...(skills ? [skills.tool] : []),
     ]
     let text = ""
     while (metrics.turns < MAX_TURNS) {
@@ -89,9 +152,9 @@ export function claudeGenerator(options: {
       const response = await anthropic.messages.create({
         model: options.model,
         max_tokens: 16000,
-        system: SYSTEM + (server ? WITH_MCP : ""),
+        system: SYSTEM + (server ? WITH_MCP : "") + (skills?.system ?? ""),
         output_config: { effort: "high" },
-        ...(server && { tools: server.definitions }),
+        ...(tools.length > 0 && { tools }),
         messages,
       })
       metrics.inputTokens +=
@@ -111,7 +174,7 @@ export function claudeGenerator(options: {
       const calls = response.content.filter(
         (b): b is Anthropic.ToolUseBlock => b.type === "tool_use"
       )
-      if (calls.length === 0 || !server) break
+      if (calls.length === 0) break
       if (response.stop_reason === "max_tokens") break
 
       messages.push({ role: "assistant", content: response.content })
@@ -120,7 +183,26 @@ export function claudeGenerator(options: {
       for (const call of calls) {
         metrics.toolCalls++
         metrics.tools[call.name] = (metrics.tools[call.name] ?? 0) + 1
+        if (call.name === READ_SKILL && skills) {
+          try {
+            results.push({
+              type: "tool_result",
+              tool_use_id: call.id,
+              content: skills.read(call.input as { skill?: string }),
+            })
+          } catch (error) {
+            metrics.toolErrors++
+            results.push({
+              type: "tool_result",
+              tool_use_id: call.id,
+              content: String(error),
+              is_error: true,
+            })
+          }
+          continue
+        }
         try {
+          if (!server) throw new Error(`no tool "${call.name}"`)
           const result = await server.mcp.callTool({
             name: call.name,
             arguments: call.input as Record<string, unknown>,

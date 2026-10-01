@@ -12,11 +12,12 @@
  *
  *   npm run evals                                   # gold calibration: the scorer against the specs' own examples
  *   npm run evals -- --generator replay --from <dir> # score screens written elsewhere (<dir>/<task>.tsx)
- *   npm run evals -- --generator claude --model claude-opus-5-5 [--context mcp|none]
+ *   npm run evals -- --generator claude --model claude-opus-5-5 [--context mcp|none] [--skills all]
  *   npm run evals:test                              # the harness's own test: gold passes, fixtures fail
  *
- * Options: --tasks a,b · --label name · --record (keeps the report in
- * evals/history/) · --no-a11y · --no-rubric.
+ * Options: --tasks a,b · --suite skills (a named subset of tasks.json) ·
+ * --label name · --record (keeps the report in evals/history/) · --no-a11y ·
+ * --no-rubric.
  */
 
 import { execSync } from "node:child_process"
@@ -47,6 +48,7 @@ import {
   designSystemImports,
   goldScreen,
   loadTasks,
+  suiteIds,
   type Task,
 } from "./lib/tasks"
 
@@ -58,6 +60,8 @@ function option(name: string): string | undefined {
   return i < 0 ? undefined : process.argv[i + 1]
 }
 const flag = (name: string) => process.argv.includes(`--${name}`)
+/** The skills the claude generator can load: `--skills all` or `--skills a,b`. */
+const skillsOption = () => option("skills")?.split(",") ?? []
 
 interface Generated {
   code: string | null
@@ -90,6 +94,7 @@ async function generatorFor(name: string): Promise<Generator> {
       root: ROOT,
       model: option("model") ?? "claude-opus-5-5",
       context: option("context") === "none" ? "none" : "mcp",
+      skills: skillsOption(),
     })
   }
   throw new Error(`unknown generator "${name}": gold, replay or claude`)
@@ -167,6 +172,8 @@ async function run(options: {
     generator: options.generator,
     ...(options.generator === "claude" && {
       model: option("model") ?? "claude-opus-5-5",
+      context: option("context") === "none" ? "none" : "mcp",
+      skills: skillsOption(),
     }),
     designSystem: {
       version: (
@@ -250,6 +257,13 @@ async function selfTest() {
         `fixture ${t.id}: declares it fails [${want.join(", ")}], fails [${failed.join(", ")}]`
       )
   }
+  for (const task of tasks)
+    if (task.base && !existsSync(join(ROOT, task.base)))
+      errors.push(`${task.id}: its base ${task.base} does not exist`)
+  for (const [suite, ids] of Object.entries(suiteIds(ROOT)))
+    for (const id of ids)
+      if (!tasks.some((t) => t.id === id))
+        errors.push(`suite "${suite}" names "${id}", not a task`)
   for (const id of declared.keys())
     if (!tasks.some((t) => t.id === id))
       errors.push(
@@ -274,11 +288,11 @@ async function main() {
     return selfTest()
   }
   const generator = option("generator") ?? "gold"
-  const tasks = loadTasks(ROOT, option("tasks")?.split(","))
+  const tasks = loadTasks(ROOT, option("tasks")?.split(","), option("suite"))
   const label =
     option("label") ??
     (generator === "claude"
-      ? `${option("model") ?? "claude-opus-5-5"}-${option("context") ?? "mcp"}`
+      ? `${option("model") ?? "claude-opus-5-5"}-${option("context") ?? "mcp"}${skillsOption().length ? "-skills" : ""}`
       : generator)
   const rubric =
     !flag("no-rubric") &&

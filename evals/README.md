@@ -32,10 +32,11 @@ npm run evals                                       # the gold standard through 
 npm run evals -- --generator replay --from <dir>    # score screens written elsewhere, <dir>/<task-id>.tsx
 npm run evals -- --generator claude --model claude-opus-5-5 --context mcp   # an agent connected to the MCP server
 npm run evals -- --generator claude --model claude-opus-5-5 --context none  # the same agent with no context: the baseline
+npm run evals -- --generator claude --suite skills --skills all              # the agent skills of skills/, on their suite
 npm run evals:test                                  # the harness's own test, in npm run check and CI
 ```
 
-Options: `--tasks sign-in,faq` runs a subset, `--label <name>` names the run,
+Options: `--tasks sign-in,faq` runs a subset, `--suite skills` a named one, `--label <name>` names the run,
 `--record` keeps its report in [`history/`](./history/), `--no-a11y` skips
 stage B, `--no-rubric` skips stage C.
 
@@ -65,6 +66,27 @@ conversation or a file of this repository:
 
 The rubric of stage C uses the same key; `EVALS_JUDGE_MODEL` changes its model.
 
+## Measuring the agent skills
+
+`--skills all` (or `--skills dsaireadable-build,dsaireadable-ui-guard`) gives
+the agent the skills of [`skills/`](../skills/) the way a client does: each
+skill's name and description in the system prompt, and a `read_skill_file`
+tool that reads its `SKILL.md`, then the files it names. The report counts
+those reads like the MCP calls, so a run shows whether the skill triggered.
+
+The `skills` suite of `tasks.json` holds the twelve tasks the skills are
+measured on: ten screens to build from the page patterns, and two changes to an
+existing screen (`base`: the file the agent starts from, given with the
+prompt). A measurement compares the same model and context with and without
+the skills, on at least two models:
+
+```bash
+npm run evals -- --generator claude --model claude-sonnet-5-5 --suite skills --record
+npm run evals -- --generator claude --model claude-sonnet-5-5 --suite skills --skills all --record
+```
+
+In CI, the Evals workflow takes `skills` (`none`, `with`, `both`) and `suite`.
+
 ## The harness's own test
 
 `npm run evals:test` proves the scorer, without a model:
@@ -79,5 +101,7 @@ The rubric of stage C uses the same key; `EVALS_JUDGE_MODEL` changes its model.
 
 Add it to `tasks.json`: an `id`, the `prompt` as a product team would write it,
 and the `gold` it is scored against (`pattern` or `component`; `render` mounts
-a pattern example whose export takes props). Then `npm run evals:test`: the
+a pattern example whose export takes props). A change to an existing screen
+also names its `base`, a file of [`bases/`](./bases/): the gold minus what the
+prompt asks to add. Then `npm run evals:test`: the
 gold must pass, which also proves the example works.

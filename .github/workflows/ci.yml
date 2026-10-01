@@ -83,6 +83,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run specs:validate
+      - run: npm run skills:validate
 
   context-freshness:
     name: context-freshness

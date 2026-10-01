@@ -532,6 +532,7 @@
       "**MUST** — validate on submit, then check a field again on each change once it shows an error; move the focus to the first field in error",
       "**MUST** — show an error in a `FieldError` under its field, with `data-invalid` on the `Field` and `aria-invalid` on the control",
       "**MUST NOT** — disable the submit button to signal a missing value: let the person submit, then say what is missing",
+      "**MUST NOT** — pre-check a consent, a subscription or a paid option: the person opts in themselves",
       "**MUST** — place the actions after the last field: the submit button, then `Cancel` when the form can be left"
     ],
     "structure": [
