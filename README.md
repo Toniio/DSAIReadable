@@ -45,7 +45,11 @@ The project started from one observation: for an LLM to generate code that confo
 ```
 dsaireadable/
 ├── components/ui/              # The design system's 65 React components (customized shadcn/ui)
-├── lib/                        # Shared modules: utils, focus, ui-strings, overlay
+├── lib/                        # Shared modules: utils, focus, ui-strings, overlay, surface, fonts
+├── hooks/                      # Shared hooks (use-mobile)
+├── styles/                     # globals.css: the @theme bridge from the tokens to Tailwind
+├── tests/                      # Component tests: every spec example rendered in headless Chromium, with axe
+├── evals/                      # The conformance harness: reference tasks, scoring, history of the scores
 ├── tokens/                     # Source of truth for the tokens (three-tier DTCG JSON)
 │   ├── tokens.resolver.json    # DTCG resolver: the three tiers, then light / dark
 │   ├── primitive.json          # Tier 1 — raw values (private)
@@ -56,7 +60,7 @@ dsaireadable/
 ├── specs/                      # The design system's Markdown documentation
 │   ├── components/             # 65 component specs (13 sections each)
 │   ├── foundations/            # Color, typography, spacing, motion, radius… specs
-│   └── tokens/token-reference.md  # Reference of the 301 tokens (generated)
+│   └── tokens/token-reference.md  # Reference of the 426 tokens (generated)
 ├── mcp-server/                 # MCP server @dsaireadable/mcp-server
 │   ├── src/
 │   │   ├── tools/              # MCP tools (ds-core, dataviz, ux-writing, admin)
@@ -66,6 +70,7 @@ dsaireadable/
 │   └── context/                # Precompiled JSON files (the design system cache) — generated
 ├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
 ├── skills/                     # Agent skills: dsaireadable-build and dsaireadable-ui-guard
+├── .changeset/                 # Pending changesets: the semver intent of each change
 ├── .claude-plugin/             # Claude Code plugin marketplace: the skills and the MCP server in one install
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
 ├── registry/                   # Sources of the registry items that are not components
@@ -260,7 +265,7 @@ claude plugin install dsaireadable@dsaireadable
 ```
 
 The plugin starts the MCP server with `npx`, pinned to the release the plugin
-ships with. Its gain is measured on the conformance
+ships with. Their gain can be measured on the conformance
 harness, with and without the skills: `npm run evals -- --generator claude
 --suite skills --skills all` ([`evals/README.md`](./evals/README.md)).
 
@@ -297,7 +302,7 @@ documents, flagged as obsolete.
 
 ## Consuming the design system
 
-The distribution channel is the **shadcn registry** carried by this public repository: there is no npm package to install. The `registry.json` at the root is enough — the CLI reads the repository directly, with no server and no per-component JSON to host.
+The distribution channel is the **shadcn registry** carried by this public repository: there is no npm package to install for the components (the MCP server and the ESLint plugin are on npm). The `registry.json` at the root is enough — the CLI reads the repository directly, with no server and no per-component JSON to host.
 
 What the consumer needs: a React + Tailwind CSS v4 project with a `components.json` (`npx shadcn@latest init`). The project's aliases are respected: the CLI rewrites the `@/…` imports to its own.
 
@@ -353,7 +358,7 @@ Every component has its spec — props, variants, states, accessibility — in [
 
 ### Versions
 
-With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the requested item only**: its internal dependencies (`design-system`, another component) are still resolved on `main` — checked with CLI 4.21. Full pinning will wait for published versions.
+With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the requested item only**: its internal dependencies (`design-system`, another component) are still resolved on `main` — checked with CLI 4.21. The shadcn CLI resolves an item's dependencies on the default branch, and `npm run release:test` checks that limit.
 
 ### Guarantees
 
@@ -411,9 +416,12 @@ npm run tokens-validate      # Every check in sequence (required before any comm
 ### Development
 
 ```bash
+npm run check        # Every CI check that needs no network or API key, in one call; prints only failures
 npm run lint         # ESLint
 npm run format       # Prettier (sorts Tailwind classes automatically)
-npm run typecheck    # tsc --noEmit
+npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP server
+npm run test:components  # Every spec example in headless Chromium: axe light and dark, focus, keyboard
+npm run evals:test   # The conformance harness scores its gold examples, with no model
 ```
 
 ---

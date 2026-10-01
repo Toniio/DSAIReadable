@@ -5,7 +5,7 @@ benchmark measures that: Design2Code and WebGen-Bench score visual and
 functional fidelity, not the respect of a given system. This harness does, in
 one command.
 
-A **generator** answers the 24 reference tasks of [`tasks.json`](./tasks.json)
+A **generator** answers the 26 reference tasks of [`tasks.json`](./tasks.json)
 with one screen each: a TSX module whose default export renders the screen.
 Each prompt asks for a screen the way a product team would, and names no
 component. Each task points at its **gold standard**, the `## Code example` of a
@@ -91,7 +91,7 @@ In CI, the Evals workflow takes `skills` (`none`, `with`, `both`) and `suite`.
 
 `npm run evals:test` proves the scorer, without a model:
 
-- the 24 gold screens pass stages A and B — otherwise the scorer is wrong, or a
+- the 26 gold screens pass stages A and B — otherwise the scorer is wrong, or a
   spec example is, and the example is fixed in its spec;
 - each screen of [`fixtures/`](./fixtures/) fails exactly the checks its first
   line declares (`// fails: compiles, lint:external-imports, renders`), so a

@@ -79,8 +79,8 @@ not the sources, is what has to work:
   `tsconfig.json` maps it to `../packages/eslint-plugin/src`, so no build is
   needed to run or type-check the server; `tsconfig.build.json` clears the
   mapping, so the package is built against the plugin's own build (`prebuild`).
-  Both tarballs are installed together by `mcp:test-package` until the plugin
-  is on the registry.
+  Both tarballs are installed together by `mcp:test-package`, so the server is
+  tested with the plugin build it ships with.
 - **`files` is `dist` and `context`.** A file the server reads at run time from
   somewhere else (the repository, `specs/`) is a bug: it will not be in the package.
   `tsconfig.build.json` leaves out what only the repository uses: `src/test.ts`,

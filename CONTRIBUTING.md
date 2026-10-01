@@ -20,7 +20,7 @@ One contribution = **one backlog item**.
 ```bash
 git switch -c fix/p0-03-destructive-foreground
 # … changes …
-npm run check   # every CI check except build and registry:test-install, prints only failures
+npm run check   # every CI check that needs no network or API key, prints only failures
 git commit -m "fix(tokens): add destructive-foreground token"
 git push -u origin fix/p0-03-destructive-foreground
 gh pr create
