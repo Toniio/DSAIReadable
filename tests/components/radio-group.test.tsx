@@ -28,6 +28,17 @@ function radio(name: string) {
   return screen.getByRole("radio", { name })
 }
 
+// Radix checks the option that an arrow key focuses only if the key is still
+// down when the focus lands, and it moves the focus in a timeout. A key
+// released at once (`{ArrowDown}`) loses that race on a slow runner: the focus
+// moves and the option stays unchecked. So hold the key until the check shows.
+async function holdArrow(key: string, name: string, value: string) {
+  await userEvent.keyboard(`{${key}>}`)
+  await expect.poll(() => document.activeElement).toBe(radio(name))
+  await expect.poll(checked).toEqual([value])
+  await userEvent.keyboard(`{/${key}}`)
+}
+
 function checked() {
   return screen
     .getAllByRole("radio")
@@ -67,27 +78,17 @@ describe("RadioGroup", () => {
   })
 
   it("ArrowDown / ArrowRight: moves to the next option and checks it", async () => {
-    // Radix moves the focus, then checks the focused option, in a timeout:
-    // one key at a time, polled.
     render(<Example defaultValue="standard" />)
     await userEvent.tab()
-    await userEvent.keyboard("{ArrowDown}")
-    await expect.poll(() => document.activeElement).toBe(radio("Express"))
-    await expect.poll(checked).toEqual(["express"])
-    await userEvent.keyboard("{ArrowRight}")
-    await expect.poll(() => document.activeElement).toBe(radio("Priority"))
-    await expect.poll(checked).toEqual(["priority"])
+    await holdArrow("ArrowDown", "Express", "express")
+    await holdArrow("ArrowRight", "Priority", "priority")
   })
 
   it("ArrowUp / ArrowLeft: moves to the previous option and checks it", async () => {
     render(<Example defaultValue="priority" />)
     await userEvent.tab()
-    await userEvent.keyboard("{ArrowUp}")
-    await expect.poll(() => document.activeElement).toBe(radio("Express"))
-    await expect.poll(checked).toEqual(["express"])
-    await userEvent.keyboard("{ArrowLeft}")
-    await expect.poll(() => document.activeElement).toBe(radio("Standard"))
-    await expect.poll(checked).toEqual(["standard"])
+    await holdArrow("ArrowUp", "Express", "express")
+    await holdArrow("ArrowLeft", "Standard", "standard")
   })
 
   it("Space: checks the focused option", async () => {
