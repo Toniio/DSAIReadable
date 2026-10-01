@@ -70,6 +70,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run index:validate
+      - run: npm run shadcn:retokenize
 
   spec-sections:
     name: spec-sections
@@ -167,6 +168,10 @@ jobs:
       # installed into a blank app, then type-checked. A pull request tests the
       # registry it builds; a push to main tests the published addresses.
       - run: npm run registry:test-install -- --source ${{ github.event_name == 'push' && 'github' || 'local' }}
+      # Each component against its shadcn/ui upstream at the anchored tag, run
+      # through the re-tokenization codemod: re-anchored components match it,
+      # every difference is declared in shadcn-upstream.json.
+      - run: npm run shadcn:drift
       # The release pipeline (a changeset becomes a version, a CHANGELOG entry
       # and one number everywhere) and what a pinned install pins. Both run on
       # throwaway copies and a local git remote: no network.

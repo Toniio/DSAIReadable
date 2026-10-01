@@ -4,7 +4,7 @@
  * Every step runs even after a failure, so one run reports everything. A
  * passing step prints one line; a failing step prints the tail of its output.
  * Left to CI because they are slow or networked: `shadcn registry validate`,
- * `registry:test-install` and `mcp:test-package`.
+ * `registry:test-install`, `shadcn:drift` and `mcp:test-package`.
  *
  *   npx tsx scripts/check.ts
  */
@@ -69,6 +69,7 @@ const STEPS: [string, () => Result][] = [
   ["knip", () => run("npm run -s knip")],
   ["release:check", () => run("npm run -s release:check")],
   ["index:validate", () => run("npm run -s index:validate")],
+  ["shadcn:retokenize", () => run("npm run -s shadcn:retokenize")],
   ["specs:validate", () => run("npm run -s specs:validate")],
   ["registry:check", () => run("npm run -s registry:check")],
   ["release:test", () => run("npm run -s release:test")],

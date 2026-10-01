@@ -62,9 +62,8 @@ A surface that brings a title, a description, content and a footer together in o
 | `color.text.subtle`              | `text-muted-foreground`                             | `CardDescription`                                              |
 | `space.scale.0`                  | `pb-0` · `pt-0`                                     | `Card`                                                         |
 | `space.scale.1`                  | `gap-1`                                             | `CardHeader`                                                   |
-| `space.scale.2`                  | `gap-2`                                             | `Card`                                                         |
-| `space.scale.3`                  | `p-3` · `pb-3` · `px-3` · `py-3`                    | `CardContent` · `CardFooter` · `CardHeader` · `Card`           |
-| `space.scale.4`                  | `gap-4` · `p-4` · `pb-4` · `px-4` · `py-4`          | `CardContent` · `CardFooter` · `CardHeader` · `Card`           |
+| `space.scale.3`                  | `[--card-spacing:var(--space-scale-3)]`             | `Card`                                                         |
+| `space.scale.4`                  | `[--card-spacing:var(--space-scale-4)]`             | `Card`                                                         |
 | `typography.font-family.mono`    | `font-heading`                                      | `CardTitle`                                                    |
 | `typography.font-weight.medium`  | `font-medium`                                       | `CardTitle`                                                    |
 | `typography.line-height.relaxed` | `text-xs/relaxed`                                   | `CardDescription` · `Card`                                     |
@@ -82,11 +81,11 @@ Collected from `components/ui/card.tsx` and the `lib/` constants it imports; Tai
 
 Renders `<div>`.
 
-| Prop        | Type                          | Default     | Description                                                                  |
-| ----------- | ----------------------------- | ----------- | ---------------------------------------------------------------------------- |
-| `size`      | `"default" \| "sm"`           | `"default"` | Card size: `gap-4 py-4` or `gap-2 py-3`. Rendered as `data-size` on the root |
-| `className` | `string`                      | —           | Additional CSS classes                                                       |
-| `...props`  | `React.ComponentProps<"div">` | —           | Native `<div>` props                                                         |
+| Prop        | Type                          | Default     | Description                                                                                                                                                |
+| ----------- | ----------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `size`      | `"default" \| "sm"`           | `"default"` | Card size: sets `--card-spacing` to `space.scale.4` or `space.scale.3`, the gap and padding of the card and its parts. Rendered as `data-size` on the root |
+| `className` | `string`                      | —           | Additional CSS classes                                                                                                                                     |
+| `...props`  | `React.ComponentProps<"div">` | —           | Native `<div>` props                                                                                                                                       |
 
 ### `CardHeader`
 

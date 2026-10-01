@@ -1,0 +1,549 @@
+{
+  "$comment": "Re-anchoring on shadcn/ui: the upstream release, the re-tokenization table and the classification of the components. Read by scripts/retokenize-codemod.ts; the process is in CONTRIBUTING.md.",
+  "upstream": {
+    "repository": "shadcn-ui/ui",
+    "ref": "shadcn@4.21.0",
+    "base": "radix",
+    "style": "lyra"
+  },
+  "map": {
+    "classes": {
+      "focus-visible:ring-1": "focus-visible:ring-(length:--space-focus-ring-width)",
+      "focus-visible:ring-2": "focus-visible:ring-(length:--space-focus-ring-width)",
+      "focus-visible:ring-3": "focus-visible:ring-(length:--space-focus-ring-width)",
+      "focus-visible:ring-[3px]": "focus-visible:ring-(length:--space-focus-ring-width)",
+      "focus-within:ring-1": "focus-within:ring-(length:--space-focus-ring-width)",
+      "aria-invalid:ring-1": "",
+      "aria-invalid:ring-3": "",
+      "has-aria-invalid:ring-1": "has-aria-invalid:ring-(length:--space-focus-ring-width)",
+      "has-[[data-slot][aria-invalid=true]]:ring-1": "has-[[data-slot][aria-invalid=true]]:ring-(length:--space-focus-ring-width)",
+      "has-[[data-slot=input-group-control]:focus-visible]:ring-1": "has-[[data-slot=input-group-control]:focus-visible]:ring-(length:--space-focus-ring-width)",
+      "has-[>input:focus-visible]:ring-1": "has-[>input:focus-visible]:ring-(length:--space-focus-ring-width)",
+      "has-[>[data-slot=field]]:has-[:focus-visible]:ring-1": "has-[>[data-slot=field]]:has-[:focus-visible]:ring-(length:--space-focus-ring-width)",
+      "data-[active=true]:ring-1": "data-[active=true]:ring-(length:--space-focus-ring-width)",
+      "[button,a]:focus-visible:ring-1": "[button,a]:focus-visible:ring-(length:--space-focus-ring-width)",
+      "group-data-[focused=true]/day:ring-[3px]": "group-data-[focused=true]/day:ring-(length:--space-focus-ring-width)",
+      "focus-visible:outline-1": "focus-visible:border-ring",
+      "hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": "hover:bg-secondary/80",
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-secondary/80",
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_5%)]": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-muted/80",
+      "*:data-[slot=bubble-content]:bg-[oklch(from_var(--primary)_0.93_calc(c*0.4)_h)]": "*:data-[slot=bubble-content]:bg-primary/10",
+      "dark:*:data-[slot=bubble-content]:bg-[oklch(from_var(--primary)_0.3_calc(c*0.4)_h)]": "dark:*:data-[slot=bubble-content]:bg-primary/20",
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.88_calc(c*0.5)_h)]": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/20",
+      "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.35_calc(c*0.5)_h)]": "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/30",
+      "[&>span]:opacity-70": "[&>span]:text-current/70",
+      "gap-[--spacing(var(--gap))]": "gap-[calc(var(--spacing)*var(--gap))]",
+      "[contain-intrinsic-size:auto_10rem]": "[contain-intrinsic-size:auto_var(--space-scale-40)]",
+      "max-w-[calc(100%-2rem)]": "max-w-[calc(100%-var(--space-component-lg))]",
+      "**:data-[slot=navigation-menu-link]:focus:ring-0": "",
+      "**:data-[slot=navigation-menu-link]:focus:outline-none": ""
+    },
+    "utilities": {
+      "opacity-50": "opacity-disabled",
+      "duration-100": "duration-fast",
+      "duration-200": "duration-normal",
+      "duration-300": "duration-slow",
+      "duration-1000": "duration-extra-slow",
+      "outline-none": "outline-hidden",
+      "ring-1": "ring-(length:--border-width-default)",
+      "ring-2": "ring-(length:--border-width-separation)",
+      "w-[100px]": "w-24",
+      "min-w-[96px]": "min-w-24",
+      "rounded-[2px]": "rounded-xs",
+      "duration-400": "duration-slow",
+      "ease-[cubic-bezier(0.22,1,0.36,1)]": "ease-out",
+      "ease-[cubic-bezier(0.23,1,0.32,1)]": "ease-out",
+      "ease-[cubic-bezier(0.7,0,0.84,0)]": "ease-in",
+      "shadow": "shadow-sm",
+      "origin-top-center": "origin-top",
+      "scrollbar-none": "no-scrollbar",
+      "scrollbar-thin": "",
+      "scrollbar-gutter-stable": "",
+      "scrollbar-thumb-transparent": "",
+      "scrollbar-track-transparent": "",
+      "inset-s-1/2": "start-1/2",
+      "max-w-[80%]": "max-w-4/5",
+      "py-[calc(--spacing(0.8))]": "py-1",
+      "translate-y-[--spacing(0.45)]": "translate-y-0.5",
+      "min-h-[1lh]": "min-h-lh",
+      "min-w-[14ch]": "min-w-28",
+      "text-[0.625rem]": "text-xs",
+      "text-[0.8rem]": "text-xs",
+      "transition-[color,box-shadow,background-color]": "transition-colors",
+      "grid-cols-[minmax(0,1fr)_auto_auto]": "grid-cols-[1fr_auto_auto]",
+      "p-[3px]": "p-1",
+      "bottom-[-5px]": "-bottom-1",
+      "ml-[-0.3rem]": "-ml-1",
+      "mr-[-0.3rem]": "-mr-1",
+      "ml-[-0.15rem]": "-ml-0.5",
+      "mr-[-0.15rem]": "-mr-0.5",
+      "w-[2px]": "w-0.5",
+      "ring-[3px]": "ring-(length:--space-focus-ring-width)"
+    },
+    "patterns": [
+      [
+        "-\\[calc\\(--spacing\\(([\\d.]+)\\)\\)\\]$",
+        "-$1"
+      ],
+      [
+        "\\(--spacing\\(([\\d.]+)\\)\\)",
+        "var(--space-scale-$1)"
+      ],
+      [
+        "--spacing\\(([\\d.]+)\\)",
+        "var(--space-scale-$1)"
+      ]
+    ],
+    "values": {
+      "var(--popover)": "var(--color-popover)",
+      "var(--popover-foreground)": "var(--color-popover-foreground)",
+      "var(--border)": "var(--color-border)",
+      "var(--radius)": "var(--radius-md)"
+    },
+    "files": {
+      "popover": {
+        "utilities": {
+          "z-50": "z-popover"
+        }
+      },
+      "hover-card": {
+        "utilities": {
+          "z-50": "z-popover"
+        }
+      },
+      "dropdown-menu": {
+        "utilities": {
+          "z-50": "z-popover"
+        }
+      },
+      "context-menu": {
+        "utilities": {
+          "z-50": "z-popover"
+        }
+      },
+      "menubar": {
+        "utilities": {
+          "z-50": "z-popover"
+        }
+      },
+      "combobox": {
+        "utilities": {
+          "z-50": "z-popover"
+        },
+        "classes": {
+          "opacity-50": "text-muted-foreground",
+          "hover:opacity-100": ""
+        }
+      },
+      "navigation-menu": {
+        "utilities": {
+          "z-50": "z-popover"
+        }
+      },
+      "dialog": {
+        "utilities": {
+          "z-50": "z-modal"
+        }
+      },
+      "alert-dialog": {
+        "utilities": {
+          "z-50": "z-modal"
+        }
+      },
+      "sheet": {
+        "utilities": {
+          "z-50": "z-modal"
+        }
+      },
+      "drawer": {
+        "utilities": {
+          "z-50": "z-modal"
+        }
+      },
+      "tooltip": {
+        "utilities": {
+          "z-50": "z-tooltip"
+        }
+      },
+      "select": {
+        "utilities": {
+          "z-50": "z-popover",
+          "z-10": "z-dropdown"
+        }
+      },
+      "avatar": {
+        "utilities": {
+          "z-10": "z-dropdown"
+        }
+      },
+      "button-group": {
+        "utilities": {
+          "z-10": "z-dropdown"
+        }
+      },
+      "calendar": {
+        "utilities": {
+          "z-10": "z-dropdown"
+        }
+      },
+      "input-otp": {
+        "utilities": {
+          "z-10": "z-dropdown"
+        }
+      },
+      "toggle-group": {
+        "utilities": {
+          "z-10": "z-dropdown"
+        }
+      },
+      "resizable": {
+        "utilities": {
+          "z-10": "z-dropdown"
+        },
+        "classes": {
+          "focus-visible:ring-ring": "focus-visible:border-ring focus-visible:ring-ring/50"
+        }
+      },
+      "sidebar": {
+        "utilities": {
+          "z-10": "z-fixed",
+          "z-20": "z-sticky",
+          "shadow-[0_0_0_1px_var(--sidebar-border)]": "ring-(length:--border-width-default) ring-sidebar-border"
+        },
+        "classes": {
+          "hover:shadow-[0_0_0_1px_var(--sidebar-accent)]": "hover:ring-sidebar-accent",
+          "md:after:hidden": "md:after:-inset-0.5",
+          "data-[size=md]:text-xs": "data-[size=default]:text-xs"
+        }
+      },
+      "slider": {
+        "classes": {
+          "hover:ring-1": "hover:ring-(length:--space-focus-ring-width)",
+          "active:ring-1": "active:ring-(length:--space-focus-ring-width)"
+        }
+      },
+      "switch": {
+        "utilities": {
+          "h-[18.4px]": "h-5",
+          "w-[32px]": "w-8",
+          "h-[14px]": "h-3.5",
+          "w-[24px]": "w-6"
+        }
+      },
+      "tabs": {
+        "classes": {
+          "focus-visible:outline-1": "focus-visible:outline-(length:--border-width-default)"
+        }
+      },
+      "command": {
+        "classes": {
+          "opacity-50": "text-muted-foreground"
+        }
+      },
+      "attachment": {
+        "utilities": {
+          "w-30": "w-32",
+          "opacity-60": "grayscale",
+          "opacity-100": "grayscale-0",
+          "text-destructive/80": "text-destructive"
+        }
+      },
+      "breadcrumb": {
+        "classes": {
+          "gap-1.5": "gap-x-1.5 gap-y-2"
+        }
+      }
+    },
+    "constants": [
+      {
+        "name": "MODAL_CONTENT_BASE",
+        "module": "@/lib/overlay"
+      },
+      {
+        "name": "SIDE_PANEL_CONTENT_BASE",
+        "module": "@/lib/overlay"
+      },
+      {
+        "name": "OVERLAY_BASE",
+        "module": "@/lib/overlay"
+      },
+      {
+        "name": "FOCUS_RING",
+        "module": "@/lib/focus"
+      },
+      {
+        "name": "FOCUS_RING_WIDTH",
+        "module": "@/lib/focus"
+      },
+      {
+        "name": "FOCUS_RING_DESTRUCTIVE",
+        "module": "@/lib/focus"
+      },
+      {
+        "name": "FOCUS_RING_WITHIN",
+        "module": "@/lib/focus"
+      },
+      {
+        "name": "FOCUS_OUTLINE_RESET",
+        "module": "@/lib/focus"
+      },
+      {
+        "name": "SURFACE_OUTLINE",
+        "module": "@/lib/surface"
+      },
+      {
+        "name": "SEPARATION_RING",
+        "module": "@/lib/surface"
+      }
+    ]
+  },
+  "components": {
+    "accordion": {
+      "status": "reanchored"
+    },
+    "alert": {
+      "status": "reanchored",
+      "reason": "The success and warning variants (declared in shadcn.divergences): their colors, and the icon and description following the variant's color.",
+      "added": [
+        "*:[svg]:text-current",
+        "*:[svg]:text-current",
+        "*:data-[slot=alert-description]:text-success/90",
+        "*:data-[slot=alert-description]:text-warning/90",
+        "bg-card",
+        "bg-card",
+        "text-success",
+        "text-warning"
+      ]
+    },
+    "alert-dialog": {
+      "status": "reanchored"
+    },
+    "aspect-ratio": {
+      "status": "reanchored"
+    },
+    "attachment": {
+      "status": "reanchored",
+      "reason": "The focus-within ring is FOCUS_RING_WITHIN, with its border color: every focus indicator of the design system has both.",
+      "added": [
+        "focus-within:border-ring"
+      ]
+    },
+    "avatar": {
+      "status": "reanchored"
+    },
+    "badge": {
+      "status": "reanchored",
+      "reason": "The success and warning variants (declared in shadcn.divergences), and the destructive variant's focus border of FOCUS_RING_DESTRUCTIVE.",
+      "added": [
+        "[a]:hover:bg-success/20",
+        "[a]:hover:bg-warning/20",
+        "bg-success/10",
+        "bg-warning/10",
+        "dark:bg-success/20",
+        "dark:bg-warning/20",
+        "focus-visible:border-destructive/40",
+        "text-success",
+        "text-warning"
+      ]
+    },
+    "breadcrumb": {
+      "status": "reanchored"
+    },
+    "bubble": {
+      "status": "reanchored"
+    },
+    "button": {
+      "status": "reanchored"
+    },
+    "button-group": {
+      "status": "reanchored"
+    },
+    "calendar": {
+      "status": "reanchored"
+    },
+    "card": {
+      "status": "reanchored"
+    },
+    "carousel": {
+      "status": "reanchored"
+    },
+    "chart": {
+      "status": "reanchored"
+    },
+    "checkbox": {
+      "status": "reanchored"
+    },
+    "collapsible": {
+      "status": "reanchored"
+    },
+    "combobox": {
+      "status": "reanchored"
+    },
+    "command": {
+      "status": "reanchored",
+      "reason": "The input's InputGroup draws the focus ring (WCAG 2.4.7): upstream's input-group rule never matches the command-input slot.",
+      "added": [
+        "has-[[data-slot=command-input]:focus-visible]:ring-(length:--space-focus-ring-width)",
+        "has-[[data-slot=command-input]:focus-visible]:ring-ring/50"
+      ]
+    },
+    "context-menu": {
+      "status": "reanchored"
+    },
+    "dialog": {
+      "status": "reanchored"
+    },
+    "direction": {
+      "status": "reanchored"
+    },
+    "drawer": {
+      "status": "reanchored"
+    },
+    "dropdown-menu": {
+      "status": "reanchored"
+    },
+    "empty": {
+      "status": "reanchored"
+    },
+    "field": {
+      "status": "reanchored"
+    },
+    "heading": {
+      "status": "outside",
+      "reason": "No shadcn/ui item: a design-system component."
+    },
+    "hover-card": {
+      "status": "reanchored"
+    },
+    "illustration": {
+      "status": "outside",
+      "reason": "No shadcn/ui item: a design-system component."
+    },
+    "input": {
+      "status": "reanchored"
+    },
+    "input-group": {
+      "status": "reanchored",
+      "reason": "An icon-only InputGroupButton is at least size.target.min wide (WCAG 2.5.8).",
+      "added": [
+        "min-w-target"
+      ]
+    },
+    "input-otp": {
+      "status": "reanchored"
+    },
+    "item": {
+      "status": "reanchored"
+    },
+    "kbd": {
+      "status": "reanchored"
+    },
+    "label": {
+      "status": "reanchored"
+    },
+    "logo": {
+      "status": "outside",
+      "reason": "No shadcn/ui item: a design-system component."
+    },
+    "marker": {
+      "status": "reanchored"
+    },
+    "menubar": {
+      "status": "reanchored",
+      "reason": "The menubar trigger draws FOCUS_RING: upstream shows no focus indicator on it (WCAG 2.4.7).",
+      "added": [
+        "focus-visible:border-ring",
+        "focus-visible:ring-(length:--space-focus-ring-width)",
+        "focus-visible:ring-ring/50"
+      ]
+    },
+    "message": {
+      "status": "reanchored"
+    },
+    "message-scroller": {
+      "status": "reanchored"
+    },
+    "native-select": {
+      "status": "reanchored"
+    },
+    "navigation-menu": {
+      "status": "reanchored"
+    },
+    "pagination": {
+      "status": "reanchored"
+    },
+    "password-input": {
+      "status": "outside",
+      "reason": "No shadcn/ui item: a design-system component."
+    },
+    "popover": {
+      "status": "reanchored"
+    },
+    "progress": {
+      "status": "reanchored"
+    },
+    "questionnaire": {
+      "status": "reanchored"
+    },
+    "radio-group": {
+      "status": "reanchored"
+    },
+    "resizable": {
+      "status": "reanchored"
+    },
+    "scroll-area": {
+      "status": "reanchored"
+    },
+    "select": {
+      "status": "reanchored"
+    },
+    "separator": {
+      "status": "reanchored"
+    },
+    "sheet": {
+      "status": "reanchored"
+    },
+    "sidebar": {
+      "status": "reanchored"
+    },
+    "skeleton": {
+      "status": "reanchored"
+    },
+    "slider": {
+      "status": "reanchored"
+    },
+    "sonner": {
+      "status": "reanchored"
+    },
+    "spinner": {
+      "status": "reanchored"
+    },
+    "switch": {
+      "status": "reanchored"
+    },
+    "table": {
+      "status": "reanchored"
+    },
+    "tabs": {
+      "status": "reanchored",
+      "reason": "TabsContent, a tab stop, draws FOCUS_RING (WCAG 2.4.7); upstream resets its outline and draws nothing.",
+      "added": [
+        "focus-visible:border-ring",
+        "focus-visible:ring-(length:--space-focus-ring-width)",
+        "focus-visible:ring-ring/50"
+      ]
+    },
+    "textarea": {
+      "status": "reanchored"
+    },
+    "toggle": {
+      "status": "reanchored"
+    },
+    "toggle-group": {
+      "status": "reanchored"
+    },
+    "tooltip": {
+      "status": "reanchored"
+    }
+  }
+}

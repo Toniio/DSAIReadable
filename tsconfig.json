@@ -19,5 +19,11 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "scripts", "packages", "mcp-server"]
+  "exclude": [
+    "node_modules",
+    "scripts",
+    "packages",
+    "mcp-server",
+    ".shadcn-vanilla"
+  ]
 }

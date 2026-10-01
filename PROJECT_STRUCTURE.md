@@ -28,6 +28,7 @@ dsaireadable/
 ├── design-system.index.json    # Machine-readable inventory of the design system
 ├── design-system.schema.json   # JSON Schema that validates the index
 ├── shadcn-api.baseline.json    # The upstream shadcn/ui API the components are checked against — generated
+├── shadcn-upstream.json        # Re-anchoring on shadcn/ui: the anchored tag, the re-tokenization table, the 65 components classified
 ├── llms.txt                    # Documentation map for agents (llms.txt format) — generated
 └── .husky/                     # Git hooks: pre-commit, commit-msg, pre-push
 ```
@@ -157,14 +158,15 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Index — `npm run index:validate`
 
-| Script                | npm command                                                   | Role                                                                                                                                                                          |
-| --------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `validate-index.ts`   | `index:schema`                                                | `design-system.index.json` matches its JSON Schema                                                                                                                            |
-| `lint-sizes.ts`       | `index:sizes`                                                 | Inventory sizes = code sizes = spec sizes                                                                                                                                     |
-| `lint-data-slot.ts`   | `index:data-slot`                                             | Every component exposes a `data-slot`                                                                                                                                         |
-| `lint-ui-strings.ts`  | `index:strings`                                               | Default accessible names (aria-label, sr-only) come from `lib/ui-strings.ts`, never hard-coded                                                                                |
-| `lint-props-types.ts` | `index:props`                                                 | Every exported component exports the type of its props                                                                                                                        |
-| `lint-shadcn-api.ts`  | `index:shadcn` (`shadcn:baseline` refetches the upstream API) | Every divergence from the shadcn/ui API is declared in the index, and every declaration is real; every upstream `registry:ui` item is shipped or excluded (`shadcn.excluded`) |
+| Script                  | npm command                                                   | Role                                                                                                                                                                                                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `validate-index.ts`     | `index:schema`                                                | `design-system.index.json` matches its JSON Schema                                                                                                                                                                                                                                                     |
+| `lint-sizes.ts`         | `index:sizes`                                                 | Inventory sizes = code sizes = spec sizes                                                                                                                                                                                                                                                              |
+| `lint-data-slot.ts`     | `index:data-slot`                                             | Every component exposes a `data-slot`                                                                                                                                                                                                                                                                  |
+| `lint-ui-strings.ts`    | `index:strings`                                               | Default accessible names (aria-label, sr-only) come from `lib/ui-strings.ts`, never hard-coded                                                                                                                                                                                                         |
+| `lint-props-types.ts`   | `index:props`                                                 | Every exported component exports the type of its props                                                                                                                                                                                                                                                 |
+| `lint-shadcn-api.ts`    | `index:shadcn` (`shadcn:baseline` refetches the upstream API) | Every divergence from the shadcn/ui API is declared in the index, and every declaration is real; every upstream `registry:ui` item is shipped or excluded (`shadcn.excluded`)                                                                                                                          |
+| `retokenize-codemod.ts` | `shadcn:retokenize` (`shadcn:drift`, network)                 | The re-tokenization codemod of `shadcn-upstream.json` (`scripts/lib/retokenize.ts`) leaves the components unchanged; with `--drift`, each re-anchored component has the classes of its retokenized upstream, up to the ones it declares; `--update <tag>` merges a newer shadcn/ui into the components |
 
 ### Registry
 
@@ -185,7 +187,7 @@ Each script explains at the top of the file what it checks and why. They all run
 `release:check` runs the first two; `release:version` is what a release pull request runs
 ([`CONTRIBUTING.md`](./CONTRIBUTING.md#versioning-and-releases)).
 
-Shared modules: `scripts/lib/` (component API, `next/font` fonts), `wcag.ts`, `color-vision.ts`.
+Shared modules: `scripts/lib/` (component API, `next/font` fonts, the re-tokenization codemod), `wcag.ts`, `color-vision.ts`.
 
 ---
 
