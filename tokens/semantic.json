@@ -118,7 +118,7 @@
               "do": "Use for text links and labels that express a clickable action.",
               "dont": "Do not use for generic body text — it is reserved for actionable elements."
             },
-            "status": "reserved"
+            "status": "active"
           }
         },
         "on": {

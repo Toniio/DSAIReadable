@@ -201,12 +201,6 @@ const PAIRS: Pair[] = [
     threshold: 4.5,
   },
   {
-    label: "action text on default surface",
-    fg: "color.text.action.default",
-    bg: "color.background.default",
-    threshold: 4.5,
-  },
-  {
     label: "inverse text on inverse surface",
     fg: "color.text.inverse",
     bg: "color.background.inverse",
@@ -260,6 +254,15 @@ const PAIRS: Pair[] = [
     bg: "color.background.subtle",
     threshold: 4.5,
   },
+
+  // Action text (`text-primary`) on neutral surfaces: the link variants of
+  // Button and Badge, a link hovered in EmptyDescription or FieldDescription.
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `action text on the ${surface}`,
+    fg: "color.text.action.default",
+    bg,
+    threshold: 4.5 as const,
+  })),
 
   // Success and warning text (`text-success`, `text-warning`) on neutral
   // surfaces: the success and warning Alerts, a status line next to a field.

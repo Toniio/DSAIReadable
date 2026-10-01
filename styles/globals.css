@@ -61,6 +61,10 @@
   --color-warning: var(--color-feedback-warning-default);
   --color-warning-foreground: var(--color-feedback-warning-foreground);
   --text-color-warning: var(--color-text-warning-default);
+  /* Primary follows the same split: bg-primary takes the action fill, and
+     text-primary (a link, a hovered link) the action text token, which stays
+     at 4.5:1 on every surface in both modes. */
+  --text-color-primary: var(--color-text-action-default);
   --color-border: var(--color-border-default);
   --color-input: var(--color-border-input);
   --color-ring: var(--color-border-focus);

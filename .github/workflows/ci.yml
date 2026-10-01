@@ -149,6 +149,9 @@ jobs:
       - if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
       - run: npm run test:components
+      # The conformance harness scores the specs' own examples and its
+      # fixtures: gold passes stages A and B, each fixture fails what it declares.
+      - run: npm run evals:test
 
   registry:
     name: registry

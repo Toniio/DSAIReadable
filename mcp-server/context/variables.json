@@ -66,10 +66,10 @@
   {
     "path": "color.text.action.default",
     "value_light": "{primitive.color.violet.600}",
-    "value_dark": "{primitive.color.violet.400}",
+    "value_dark": "{primitive.color.violet.300}",
     "css_variable": "--color-text-action-default",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "active"
   },
   {
     "path": "color.text.action.on",

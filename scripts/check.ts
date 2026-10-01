@@ -78,6 +78,7 @@ const STEPS: [string, () => Result][] = [
   ["mcp:test", () => run("npm run -s mcp:test")],
   ["test:lint-coverage", () => run("npm run -s test:lint-coverage")],
   ["test:components", () => run("npm run -s test:components")],
+  ["evals:test", () => run("npm run -s evals:test")],
 ]
 
 const failed: string[] = []

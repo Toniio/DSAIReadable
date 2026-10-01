@@ -38,7 +38,7 @@
       "action": {
         "default": {
           "$type": "color",
-          "$value": "{primitive.color.violet.400}"
+          "$value": "{primitive.color.violet.300}"
         }
       },
       "destructive": {

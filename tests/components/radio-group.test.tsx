@@ -67,25 +67,27 @@ describe("RadioGroup", () => {
   })
 
   it("ArrowDown / ArrowRight: moves to the next option and checks it", async () => {
+    // Radix moves the focus, then checks the focused option, in a timeout:
+    // one key at a time, polled.
     render(<Example defaultValue="standard" />)
     await userEvent.tab()
     await userEvent.keyboard("{ArrowDown}")
-    expect(document.activeElement).toBe(radio("Express"))
-    expect(checked()).toEqual(["express"])
+    await expect.poll(() => document.activeElement).toBe(radio("Express"))
+    await expect.poll(checked).toEqual(["express"])
     await userEvent.keyboard("{ArrowRight}")
-    expect(document.activeElement).toBe(radio("Priority"))
-    expect(checked()).toEqual(["priority"])
+    await expect.poll(() => document.activeElement).toBe(radio("Priority"))
+    await expect.poll(checked).toEqual(["priority"])
   })
 
   it("ArrowUp / ArrowLeft: moves to the previous option and checks it", async () => {
     render(<Example defaultValue="priority" />)
     await userEvent.tab()
     await userEvent.keyboard("{ArrowUp}")
-    expect(document.activeElement).toBe(radio("Express"))
-    expect(checked()).toEqual(["express"])
+    await expect.poll(() => document.activeElement).toBe(radio("Express"))
+    await expect.poll(checked).toEqual(["express"])
     await userEvent.keyboard("{ArrowLeft}")
-    expect(document.activeElement).toBe(radio("Standard"))
-    expect(checked()).toEqual(["standard"])
+    await expect.poll(() => document.activeElement).toBe(radio("Standard"))
+    await expect.poll(checked).toEqual(["standard"])
   })
 
   it("Space: checks the focused option", async () => {

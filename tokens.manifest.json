@@ -1,5 +1,5 @@
 {
-  "tokenCount": 425,
+  "tokenCount": 426,
   "tokens": [
     {
       "token": "primitive.color.mist.0",
@@ -194,6 +194,22 @@
       "private": true
     },
     {
+      "token": "primitive.color.violet.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "#a3b3ff"
+      },
+      "value": {
+        "light": "#a3b3ff"
+      },
+      "description": "Light violet for action text and links in dark mode — 4.5:1 or more on every dark surface, popover included.",
+      "private": true
+    },
+    {
       "token": "primitive.color.violet.400",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-400",
@@ -206,7 +222,7 @@
       "value": {
         "light": "#6e6cff"
       },
-      "description": "Light violet for action text in dark mode — 4.93:1 on mist.950.",
+      "description": "Light violet, the first chart series in dark mode.",
       "private": true
     },
     {
@@ -3398,15 +3414,15 @@
       "tier": "semantic",
       "cssVar": "--color-text-action-default",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.600}",
-        "dark": "{primitive.color.violet.400}"
+        "dark": "{primitive.color.violet.300}"
       },
       "value": {
         "light": "#432dd7",
-        "dark": "#6e6cff"
+        "dark": "#a3b3ff"
       },
       "description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
       "docs": {

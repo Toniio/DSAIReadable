@@ -64,6 +64,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 export function ProjectCardsLoading() {
   return (
     <div
+      role="status"
       aria-busy="true"
       aria-label="Loading your projects…"
       className="grid gap-4 md:grid-cols-3"

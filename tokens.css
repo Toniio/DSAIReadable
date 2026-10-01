@@ -23,6 +23,7 @@
 
   /* color · violet */
   --ds-prim-color-violet-50:  #eef2ff;
+  --ds-prim-color-violet-300: #a3b3ff;
   --ds-prim-color-violet-400: #6e6cff;
   --ds-prim-color-violet-500: #615fff;
   --ds-prim-color-violet-550: #4f39f6;
@@ -515,7 +516,7 @@
   --color-text-subtle:              var(--ds-prim-color-mist-400);
   --color-text-bold:                var(--ds-prim-color-mist-50);
   --color-text-inverse:             var(--ds-prim-color-mist-950);
-  --color-text-action-default:      var(--ds-prim-color-violet-400);
+  --color-text-action-default:      var(--ds-prim-color-violet-300);
   --color-text-destructive-default: var(--ds-prim-color-red-300);
   --color-text-success-default:     var(--ds-prim-color-emerald-300);
   --color-text-warning-default:     var(--ds-prim-color-amber-300);

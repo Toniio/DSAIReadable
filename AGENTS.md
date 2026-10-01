@@ -98,6 +98,8 @@ npm run plugin:test       # the ESLint plugin's rules, each against a failing an
 npm run mcp:test          # the MCP server's test suite
 npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
 npm run test:components   # headless Chromium: the 65 spec examples (axe light + dark, focus ring), roles, names, keyboard
+npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
+npm run evals             # the conformance harness: a generator answers 24 tasks, scored deterministic + a11y + rubric (evals/README.md)
 ```
 
 A new or changed component arrives with its test: its spec example must pass
@@ -108,7 +110,8 @@ After any token or TypeScript change:
 `npm run tokens-validate && npm run typecheck:all`.
 
 Before a commit, `npm run check` runs every CI check above in one call except
-`registry:test-install`, `mcp:test-package`, `shadcn:drift` and the networked `shadcn registry validate`,
+`registry:test-install`, `mcp:test-package`, `shadcn:drift`, the networked `shadcn registry validate`
+and the model runs of `evals` (they need an API key),
 and prints only what failed. Prefer it to running the checks one by one: each
 separate run is one more agent turn and more output in the context.
 
@@ -139,6 +142,7 @@ problem: fix it, do not disable it.
 | `.husky/pre-push`                             | A direct push to `main`                                                                                                                         |
 | `.github/workflows/ci.yml`                    | 9 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
 | `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                       |
+| `.github/workflows/evals.yml`                 | Nothing: it measures. By hand only, the conformance harness runs a Claude agent with and without the MCP server (`evals/README.md`)             |
 | `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result          |
 
 Each § 1 rule, and the check that enforces it:

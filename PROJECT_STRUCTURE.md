@@ -29,6 +29,7 @@ dsaireadable/
 ├── design-system.schema.json   # JSON Schema that validates the index
 ├── shadcn-api.baseline.json    # The upstream shadcn/ui API the components are checked against — generated
 ├── shadcn-upstream.json        # Re-anchoring on shadcn/ui: the anchored tag, the re-tokenization table, the 65 components classified
+├── evals/                      # The conformance harness: reference tasks, scoring, the history of the scores (evals/README.md)
 ├── llms.txt                    # Documentation map for agents (llms.txt format) — generated
 └── .husky/                     # Git hooks: pre-commit, commit-msg, pre-push
 ```
