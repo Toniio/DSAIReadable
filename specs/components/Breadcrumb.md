@@ -16,7 +16,7 @@ Secondary navigation that shows the path to the current page, so the user can cl
 
 ## Usage
 
-- Show the trail on pages two or more levels deep
+- Show the trail on pages 3 levels deep or more, as the navigation pattern sets it
 - Let the user jump back to a parent page
 - Show where the user stands in the site's hierarchy
 - Collapse long paths behind an ellipsis in deep hierarchies

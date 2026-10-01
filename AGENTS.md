@@ -87,6 +87,7 @@ npm run shadcn:baseline   # refetches the shadcn/ui API into shadcn-api.baseline
 npm run shadcn:retokenize # the re-tokenization codemod is a fixpoint on the 65 components + each one is classified in shadcn-upstream.json
 npm run shadcn:drift      # each component against its shadcn/ui upstream run through the codemod: re-anchored, or every difference declared (network)
 npm run specs:validate    # the 65 specs against the 13 canonical sections, the 12 page patterns against their 9 + Variants, Tokens, Props / API and choice rules up to date + no hedged wording + llms.txt up to date
+npm run skills:validate   # the agent skills of skills/: Agent Skills format + every rule cites a spec, pattern or foundation that exists + every tool it names exists
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
 npm run registry:check    # registry.json freshness + internal dependencies
 npm run registry:test-install  # installs the 69 items in a blank app, builds it and its CSS
@@ -205,12 +206,13 @@ agents generate.
 
 ## 10. Agent instruction files
 
-| File                                | Role                                                                          |
-| ----------------------------------- | ----------------------------------------------------------------------------- |
-| `AGENTS.md`                         | This file: rules for the whole repository, the single reference               |
-| `mcp-server/AGENTS.md`              | Rules specific to the MCP server; complements this file, never contradicts it |
-| `CLAUDE.md`, `mcp-server/CLAUDE.md` | Symlinks to the `AGENTS.md` of the same folder, for Claude Code — do not edit |
-| `.github/copilot-instructions.md`   | A short reminder for Copilot, pointing here                                   |
+| File                                | Role                                                                                                                                    |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `AGENTS.md`                         | This file: rules for the whole repository, the single reference                                                                         |
+| `mcp-server/AGENTS.md`              | Rules specific to the MCP server; complements this file, never contradicts it                                                           |
+| `CLAUDE.md`, `mcp-server/CLAUDE.md` | Symlinks to the `AGENTS.md` of the same folder, for Claude Code — do not edit                                                           |
+| `.github/copilot-instructions.md`   | A short reminder for Copilot, pointing here                                                                                             |
+| `skills/*/SKILL.md`                 | Agent skills for the projects that build with the design system, not rules for this repository; each rule cites the spec that writes it |
 
 A rule is written **once**, in the `AGENTS.md` closest to the code it governs.
 Never list a `CLAUDE.md` in a shadcn registry item: symlinks are not

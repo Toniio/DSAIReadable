@@ -6,8 +6,9 @@
  * `design-system.index.json`, then `design_system_version` in `ds-metadata.json`)
  * and the MCP server's (`mcp-server/package.json`, then `mcp_server_version`),
  * and the ESLint plugin's (`packages/eslint-plugin/package.json`), which the
- * server pins to the exact version it ships with: one release tag, `vX.Y.Z`,
- * names all of it. This script copies the root version to every place that
+ * server pins to the exact version it ships with, and the Claude Code plugin's
+ * (`.claude-plugin/marketplace.json`), which pins the server the same way: one
+ * release tag, `vX.Y.Z`, names all of it. This script copies the root version to every place that
  * carries it, the workspace lockfile included, and its `--check` mode fails
  * when one of them has drifted.
  *
@@ -38,9 +39,16 @@ const lockWorkspace = (key: string) =>
   )
 /** The server pins the plugin to the exact version it ships with. */
 const PLUGIN_PIN = /("@dsaireadable\/eslint-plugin": ")[^"]*(")/
+/** The Claude Code plugin's entry: its one `"version"`, and the server it starts. */
+const MARKETPLACE_VERSION = /("version": ")[^"]*(")/
+const SERVER_PIN = /("@dsaireadable\/mcp-server@)[^"]*(")/
 
 type Json = {
   version?: string
+  plugins?: {
+    version?: string
+    mcpServers?: Record<string, { args?: string[] }>
+  }[]
   dependencies?: Record<string, string>
   packages?: Record<
     string,
@@ -92,6 +100,22 @@ const SLOTS: Slot[] = [
       json.packages?.["mcp-server"]?.dependencies?.[
         "@dsaireadable/eslint-plugin"
       ],
+  },
+  {
+    file: ".claude-plugin/marketplace.json",
+    label: "plugin version",
+    pattern: MARKETPLACE_VERSION,
+    read: (json) => json.plugins?.[0]?.version,
+  },
+  {
+    file: ".claude-plugin/marketplace.json",
+    label: "server pin",
+    pattern: SERVER_PIN,
+    read: (json) =>
+      json.plugins?.[0]?.mcpServers?.dsaireadable?.args
+        ?.find((arg) => arg.startsWith("@dsaireadable/mcp-server@"))
+        ?.split("@")
+        .at(-1),
   },
 ]
 

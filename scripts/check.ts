@@ -71,6 +71,7 @@ const STEPS: [string, () => Result][] = [
   ["index:validate", () => run("npm run -s index:validate")],
   ["shadcn:retokenize", () => run("npm run -s shadcn:retokenize")],
   ["specs:validate", () => run("npm run -s specs:validate")],
+  ["skills:validate", () => run("npm run -s skills:validate")],
   ["registry:check", () => run("npm run -s registry:check")],
   ["release:test", () => run("npm run -s release:test")],
   ["context freshness", contextFreshness],

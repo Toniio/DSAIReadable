@@ -67,12 +67,14 @@ try {
   mkdirSync(join(tmp, ".changeset"))
   mkdirSync(join(tmp, "mcp-server"))
   mkdirSync(join(tmp, "packages/eslint-plugin"), { recursive: true })
+  mkdirSync(join(tmp, ".claude-plugin"))
   for (const file of [
     "package.json",
     "package-lock.json",
     "design-system.index.json",
     "mcp-server/package.json",
     "packages/eslint-plugin/package.json",
+    ".claude-plugin/marketplace.json",
     ".changeset/config.json",
   ]) {
     cpSync(resolve(ROOT, file), join(tmp, file))
@@ -134,6 +136,7 @@ try {
         "mcp-server/package.json",
         "packages/eslint-plugin/package.json",
         "package-lock.json",
+        ".claude-plugin/marketplace.json",
       ].every((file) => drift.output.includes(file)),
     "versions:check catches every copy that did not follow"
   )
@@ -154,6 +157,15 @@ try {
           readJson("package-lock.json").packages?.[key].version === "0.1.0"
       ),
     "the index, the server, the plugin (and the server's pin of it) and every lockfile entry carry 0.1.0"
+  )
+  const marketplace = readFileSync(
+    join(tmp, ".claude-plugin/marketplace.json"),
+    "utf-8"
+  )
+  expect(
+    marketplace.includes('"version": "0.1.0"') &&
+      marketplace.includes('"@dsaireadable/mcp-server@0.1.0"'),
+    "the Claude Code plugin and the server it starts carry 0.1.0"
   )
 } finally {
   rmSync(tmp, { recursive: true, force: true })

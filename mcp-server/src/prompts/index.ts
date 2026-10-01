@@ -9,6 +9,18 @@ import { TAILWIND_RULE } from "../lib/tailwind-rule.js"
  * dsaireadable_get_design_rules serves. A hand-written copy lived here and had drifted
  * from them: one source, two renderings.
  */
+
+/**
+ * The design judgment the senior Product Designer persona used to carry lives
+ * in the dsaireadable-ui-guard skill, where each rule cites its spec. The
+ * prompts keep a short pointer to it, and its four questions for the clients
+ * that load no skills.
+ */
+const UI_GUARD_TEXT = `**Judge it as the UI guard does** — the \`dsaireadable-ui-guard\` agent skill (\`npx skills add Toniio/DSAIReadable\`), each rule cited to its spec. Without the skill, answer at least:
+- Is the main action obvious, and are the primary buttons within the Button spec's limit?
+- Is every state designed: empty, loading, error and success?
+- Is an irreversible action confirmed, and a reversible one undoable?
+- Can the person tell where they are, and go back from every view?`
 const CRITICAL_RULES_TEXT = [
   `**CRITICAL STYLING RULE — ${TAILWIND_RULE.title}:**`,
   ...TAILWIND_RULE.description.map((d) => `- ${d}`),
@@ -164,7 +176,7 @@ ${CRITICAL_RULES_TEXT}`,
             role: "user" as const,
             content: {
               type: "text" as const,
-              text: `You are a senior Product Designer working with the DSAIReadable Design System.
+              text: `You design a screen or a feature with the DSAIReadable Design System.
 
 **BEFORE generating ideas, you MUST call these tools:**
 1. \`dsaireadable_get_components\` — to see all available components
@@ -181,6 +193,8 @@ Generate a creative but DS-compliant screen or feature idea that:
 - Respects all design rules and constraints
 - Includes a description, wireframe sketch (in text/ASCII), and a list of DS components used
 - Suggests specific component variants and token usage
+
+${UI_GUARD_TEXT}
 
 ${CRITICAL_RULES_TEXT}`,
             },
@@ -209,7 +223,7 @@ ${CRITICAL_RULES_TEXT}`,
             role: "user" as const,
             content: {
               type: "text" as const,
-              text: `You are a senior Product Designer and UX strategist working with the DSAIReadable Design System.
+              text: `You plan what comes after a screen built with the DSAIReadable Design System.
 
 **BEFORE suggesting next steps, you MUST call these tools:**
 1. \`dsaireadable_get_components\` — to see all available components
@@ -226,6 +240,8 @@ Suggest 3-5 logical next steps or screens that:
 - Include specific component recommendations for each suggestion
 - Consider UX writing rules for all CTAs and labels
 - Provide a brief rationale for each suggestion
+
+${UI_GUARD_TEXT}
 
 ${CRITICAL_RULES_TEXT}`,
             },

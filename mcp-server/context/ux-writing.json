@@ -467,6 +467,10 @@
     {
       "rule": "❌ Never use a term from the \"Not\" column of the word list",
       "source": "voice-and-tone.md"
+    },
+    {
+      "rule": "❌ Never shame a refusal: the way out reads `Not now` or `Cancel`, never `No thanks, I prefer paying more`",
+      "source": "voice-and-tone.md"
     }
   ],
   "component_rules": {

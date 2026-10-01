@@ -77,6 +77,7 @@ source.
 | Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                            |
 | A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                              |
 | A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                |
+| A rule agents follow when they build UI        | the spec or pattern it cites, then the skill in `skills/` that points at it      | `npm run skills:validate`                                             |
 
 **A new or changed component arrives with its test.** `tests/examples.test.tsx`
 renders every spec's `## Code example` in headless Chromium, light and dark:
@@ -190,14 +191,15 @@ registry, the inventory the MCP server serves and the MCP server itself. It is
 the `version` of the root `package.json`, which
 [Changesets](https://github.com/changesets/changesets) bumps. `npm run versions:sync`
 copies it to `design-system.index.json`, `mcp-server/package.json`,
-`packages/eslint-plugin/package.json` (and the server's pin of the plugin) and
-the lockfile, and `npm run versions:check` fails CI when one of them differs. The
+`packages/eslint-plugin/package.json` (and the server's pin of the plugin),
+`.claude-plugin/marketplace.json` (and the plugin's pin of the server) and the
+lockfile, and `npm run versions:check` fails CI when one of them differs. The
 release tag is `vX.Y.Z`.
 
 ### What a change bumps
 
-The public surface is the tokens, the components' API, the registry items and
-the MCP server's tools. Every changeset starts its summary with the category
+The public surface is the tokens, the components' API, the registry items, the
+MCP server's tools and the agent skills. Every changeset starts its summary with the category
 that says what changed, and the bump follows from it:
 
 | Category         | The change                                                                                              | Bump                      |
@@ -205,6 +207,7 @@ that says what changed, and the bump follows from it:
 | `token-breaking` | A token renamed, removed or repurposed                                                                  | major                     |
 | `component-api`  | A prop, export, variant, component, registry item or new token added, or one of them renamed or removed | minor; major if it breaks |
 | `mcp`            | A tool, a schema or the content the MCP server serves: added, renamed or removed                        | minor; major if it breaks |
+| `skills`         | A skill of `skills/`, one of its rules, or the Claude Code plugin that ships them                       | minor; major if it breaks |
 | `visual`         | Appearance only: a value, a spacing, a radius                                                           | patch                     |
 | `docs`           | Specs and guidance, no code                                                                             | patch                     |
 
@@ -279,7 +282,7 @@ and the README's are removed together.
 | `typecheck`         | `npm run typecheck:all`                                                                      |
 | `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                 |
 | `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                |
-| `spec-sections`     | `npm run specs:validate`                                                                     |
+| `spec-sections`     | `npm run specs:validate`, `skills:validate`                                                  |
 | `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                  |
 | `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                       |
 | `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`             |

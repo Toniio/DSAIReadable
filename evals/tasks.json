@@ -1,5 +1,5 @@
 {
-  "$comment": "The reference tasks of the conformance harness (evals/README.md). Each prompt is written the way a product team asks for a screen: it names the need, never a component. `gold` points at the code that answers it in the design system: the `## Code example` of a page pattern or of a component spec. `render` is the JSX that mounts a pattern example whose export takes props.",
+  "$comment": "The reference tasks of the conformance harness (evals/README.md). Each prompt is written the way a product team asks for a screen: it names the need, never a component. `gold` points at the code that answers it in the design system: the `## Code example` of a page pattern or of a component spec. `render` is the JSX that mounts a pattern example whose export takes props. `base` makes a task a change to an existing screen: the generator receives that file with the prompt, and the gold is the screen once changed. `suites` names subsets of the tasks: `skills` is the one the agent skills are measured on (`--suite skills`).",
   "tasks": [
     {
       "id": "sign-in",
@@ -132,6 +132,34 @@
       "id": "verification-code",
       "prompt": "Build the step where the person types the six-digit code we sent them by text message.",
       "gold": { "component": "InputOtp" }
+    },
+    {
+      "id": "add-plan-choice",
+      "prompt": "People should pick a plan when they set up their account: Starter or Team, with Starter chosen by default. Add that choice to this form.",
+      "gold": { "pattern": "form", "render": "<AccountForm />" },
+      "base": "evals/bases/add-plan-choice.tsx"
+    },
+    {
+      "id": "add-notifications",
+      "prompt": "Add notification preferences to this settings page: a weekly summary of their projects every Monday, on by default, and an email when someone mentions them. Each preference should take effect as soon as it's changed.",
+      "gold": { "pattern": "settings" },
+      "base": "evals/bases/add-notifications.tsx"
     }
-  ]
+  ],
+  "suites": {
+    "skills": [
+      "sign-in",
+      "create-project",
+      "delete-project",
+      "edit-project",
+      "empty-projects",
+      "filter-projects",
+      "account-form",
+      "loading-cards",
+      "save-profile",
+      "settings-page",
+      "add-plan-choice",
+      "add-notifications"
+    ]
+  }
 }

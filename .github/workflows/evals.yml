@@ -12,6 +12,12 @@ on:
       context:
         description: "mcp: connected to the design system's MCP server; none: the baseline without it; both"
         default: both
+      skills:
+        description: "none: no agent skill; with: the skills of skills/ loadable; both: each context run without, then with them"
+        default: none
+      suite:
+        description: "A suite of evals/tasks.json (skills), or empty for every task"
+        default: ""
 
 permissions:
   contents: read
@@ -27,6 +33,8 @@ jobs:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MODEL: ${{ inputs.model }}
       CONTEXT: ${{ inputs.context }}
+      SKILLS: ${{ inputs.skills }}
+      SUITE: ${{ inputs.suite }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -51,10 +59,14 @@ jobs:
         run: |
           echo "::error::The ANTHROPIC_API_KEY repository secret is not set (evals/README.md)."
           exit 1
-      - if: env.CONTEXT != 'none'
-        run: npm run evals -- --generator claude --model "$MODEL" --context mcp
-      - if: env.CONTEXT != 'mcp'
-        run: npm run evals -- --generator claude --model "$MODEL" --context none
+      - if: env.CONTEXT != 'none' && env.SKILLS != 'with'
+        run: npm run evals -- --generator claude --model "$MODEL" --context mcp ${SUITE:+--suite "$SUITE"}
+      - if: env.CONTEXT != 'mcp' && env.SKILLS != 'with'
+        run: npm run evals -- --generator claude --model "$MODEL" --context none ${SUITE:+--suite "$SUITE"}
+      - if: env.CONTEXT != 'none' && env.SKILLS != 'none'
+        run: npm run evals -- --generator claude --model "$MODEL" --context mcp --skills all ${SUITE:+--suite "$SUITE"}
+      - if: env.CONTEXT != 'mcp' && env.SKILLS != 'none'
+        run: npm run evals -- --generator claude --model "$MODEL" --context none --skills all ${SUITE:+--suite "$SUITE"}
       - if: always()
         uses: actions/upload-artifact@v7
         with:
