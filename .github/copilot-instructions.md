@@ -21,8 +21,11 @@
 ## Before suggesting a commit
 
 ```bash
-npm run tokens-validate && npm run typecheck:all && npm run lint
+npm run check
 ```
+
+It runs every CI check that needs no network or API key, and prints only what
+failed (`AGENTS.md` § 3).
 
 ## Git workflow
 

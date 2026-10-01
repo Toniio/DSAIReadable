@@ -78,7 +78,7 @@ the reason why.
 
 ```bash
 npm run tokens-validate   # DTCG 2025.10 conformance + naming + raw values + @theme bridge + focus + contrast + palette monotonicity + chart palette + fonts + lifecycle + freshness
-npm run typecheck:all     # app + scripts + eslint-plugin + mcp-server
+npm run typecheck:all     # components + tests + evals, scripts, eslint-plugin, mcp-server
 npm run lint              # ESLint, zero warnings
 npm run lint:language     # American English only: French words, diacritics and British spellings
 npm run knip              # zero-base: no unused file, export or dependency (knip.jsonc says why each entry point stays)
@@ -100,7 +100,7 @@ npm run mcp:test          # the MCP server's test suite
 npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
 npm run test:components   # headless Chromium: the 65 spec examples (axe light + dark, focus ring), roles, names, keyboard
 npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
-npm run evals             # the conformance harness: a generator answers 24 tasks, scored deterministic + a11y + rubric (evals/README.md)
+npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
 ```
 
 A new or changed component arrives with its test: its spec example must pass

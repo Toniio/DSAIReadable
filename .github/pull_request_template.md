@@ -28,6 +28,8 @@ PR title in Conventional Commits format — it becomes the commit message on
 
 ## Checklist
 
+- [ ] `npm run check` passes
+- [ ] A changeset declares the semver intent of a public-surface change (or none is needed: CONTRIBUTING → Versioning and releases)
 - [ ] `npm run tokens-validate` passes (if tokens were touched)
 - [ ] `npm run typecheck:all` passes
 - [ ] `npm run lint` reports no error
