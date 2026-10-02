@@ -1,0 +1,804 @@
+{
+  "label": "0.1.1-sonnet-none",
+  "date": "2026-10-02",
+  "generator": "replay",
+  "model": "claude-sonnet-5-5",
+  "context": "none",
+  "skills": [],
+  "via": "claude-code 2.1.285",
+  "designSystem": {
+    "version": "0.1.0",
+    "commit": "5e83303c0d979529560e44a211f98947709544c3"
+  },
+  "summary": {
+    "tasks": 26,
+    "generated": 26,
+    "stageA": {
+      "compiles": 1,
+      "lint": 0.885,
+      "coverage": 0.771,
+      "pass": 0.885,
+      "lintByFamily": {
+        "native-elements": 2,
+        "off-system-classes": 2
+      }
+    },
+    "stageB": {
+      "renders": 0.923,
+      "axe": 0.885,
+      "focus": 0.923,
+      "pass": 0.885
+    },
+    "stageC": null,
+    "conformance": 0.885,
+    "generation": {
+      "turns": 26,
+      "toolCalls": 0,
+      "toolErrors": 0,
+      "inputTokens": 50116,
+      "outputTokens": 84943
+    }
+  },
+  "tasks": [
+    {
+      "id": "sign-in",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1904,
+        "outputTokens": 3010,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.5,
+        "missing": [
+          "field",
+          "heading",
+          "password-input",
+          "spinner"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "create-project",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1890,
+        "outputTokens": 3635,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.8,
+        "missing": [
+          "field"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "delete-project",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1892,
+        "outputTokens": 2486,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "edit-project",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1881,
+        "outputTokens": 3970,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.8,
+        "missing": [
+          "field"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "empty-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1880,
+        "outputTokens": 3656,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "132:21 dsaireadable/no-native-interactive-elements Use Button (`@/components/ui/button`) instead of a native <button>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 0.5,
+        "missing": [
+          "empty"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "filter-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1899,
+        "outputTokens": 3562,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.6666666666666666,
+        "missing": [
+          "toggle-group"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-form",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1896,
+        "outputTokens": 4964,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.5,
+        "missing": [
+          "field",
+          "radio-group"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "loading-cards",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1867,
+        "outputTokens": 1772,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-navigation",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1888,
+        "outputTokens": 3552,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.75,
+        "missing": [
+          "heading"
+        ]
+      },
+      "a11y": {
+        "renders": false,
+        "axe": false,
+        "focus": false,
+        "failures": [
+          "renders: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
+          "axe: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
+          "focus: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)"
+        ]
+      }
+    },
+    {
+      "id": "save-profile",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1887,
+        "outputTokens": 3831,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.6,
+        "missing": [
+          "field",
+          "spinner"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "search-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1903,
+        "outputTokens": 1841,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.25,
+        "missing": [
+          "empty",
+          "input-group",
+          "item"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "settings-page",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1879,
+        "outputTokens": 4229,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.6666666666666666,
+        "missing": [
+          "field",
+          "heading"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "invoices-table",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1876,
+        "outputTokens": 2021,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "results-pagination",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1886,
+        "outputTokens": 3769,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "98:17 dsaireadable/no-native-interactive-elements Use Button with `asChild` (`@/components/ui/button`), which keeps the look of the design system instead of a native <a>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "visitors-chart",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1876,
+        "outputTokens": 2797,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-sidebar",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1885,
+        "outputTokens": 4843,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": false,
+        "axe": false,
+        "focus": false,
+        "failures": [
+          "renders: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
+          "axe: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
+          "focus: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)"
+        ]
+      }
+    },
+    {
+      "id": "command-palette",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1874,
+        "outputTokens": 6225,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-tabs",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1874,
+        "outputTokens": 4240,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "date-picker",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1864,
+        "outputTokens": 2549,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "attachments",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1876,
+        "outputTokens": 3271,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0,
+        "missing": [
+          "attachment",
+          "spinner"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "chat-thread",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1885,
+        "outputTokens": 4997,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "173:32 better-tailwindcss/no-unknown-classes Unknown class detected: max-h-200",
+          "222:35 dsaireadable/no-raw-values Arbitrary Tailwind value \"max-w-[75%]\". Use a class the design system maps to a token (p-4, rounded-md, duration-fast…)."
+        ],
+        "lintByFamily": {
+          "off-system-classes": 2
+        },
+        "coverage": 0,
+        "missing": [
+          "bubble",
+          "message",
+          "message-scroller"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": false,
+        "focus": true,
+        "failures": [
+          "axe: AssertionError: light scrollable-region-focusable: .overflow-y-auto\ndark scrollable-region-focusable: .overflow-y-auto: expected [ …(2) ] to deeply equal []\n    at http://localhost:63315/Users/anthony.besnault/DSAIReadable/.claude/worktrees/dsa-readable-0-1-1-8fae61/evals/a11y/screens.test.tsx?import&browserv=1790957375691:33:45\n    at async http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/plugins.D2ut1V9b-DDzazuHB.js?v=4a2b27ac:5211:20"
+        ]
+      }
+    },
+    {
+      "id": "faq",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1865,
+        "outputTokens": 1122,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "user-menu",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1881,
+        "outputTokens": 1962,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "verification-code",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 1867,
+        "outputTokens": 2965,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-plan-choice",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2514,
+        "outputTokens": 1440,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-notifications",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2427,
+        "outputTokens": 2234,
+        "tools": {}
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    }
+  ]
+}
