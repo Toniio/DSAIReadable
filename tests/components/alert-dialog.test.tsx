@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { describe, expect, it, vi } from "vitest"
-import { userEvent } from "vitest/browser"
+import { page, userEvent } from "vitest/browser"
 
 import {
   AlertDialog,
@@ -122,5 +122,37 @@ describe("AlertDialog", () => {
     await userEvent.keyboard(" ")
     await expect.poll(() => screen.queryByRole("alertdialog")).toBeNull()
     expect(onDelete).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe("AlertDialog, viewport gutter", () => {
+  // The viewport goes back to the desktop size of vitest.config.ts whatever
+  // the outcome.
+  async function openAt(width: number, check: () => void) {
+    await page.viewport(width, 812)
+    try {
+      render(<Example />)
+      await userEvent.click(screen.getByRole("button", { name: "Delete" }))
+      check()
+    } finally {
+      await page.viewport(1280, 800)
+    }
+  }
+
+  it("stays 16px from each edge of a 320px viewport", async () => {
+    await openAt(320, () => {
+      const { left, right } = screen
+        .getByRole("alertdialog")
+        .getBoundingClientRect()
+      expect(left).toBeCloseTo(16, 1)
+      expect(document.documentElement.clientWidth - right).toBeCloseTo(16, 1)
+    })
+  })
+
+  it("keeps its own width, 320px, where the gutter leaves room for it", async () => {
+    await openAt(375, () => {
+      const { width } = screen.getByRole("alertdialog").getBoundingClientRect()
+      expect(width).toBeCloseTo(320, 1)
+    })
   })
 })

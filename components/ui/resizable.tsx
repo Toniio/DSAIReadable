@@ -23,10 +23,7 @@ function ResizablePanelGroup({
   return (
     <ResizablePrimitive.Group
       data-slot="resizable-panel-group"
-      className={cn(
-        "flex h-full w-full aria-[orientation=vertical]:flex-col",
-        className
-      )}
+      className={cn("flex h-full w-full", className)}
       // allow-raw: resize-hit-target — the library sizes the handle's hit area in px, not CSS: 24 is size.target.min
       resizeTargetMinimumSize={{ coarse: 24, fine: 24 }}
       {...props}

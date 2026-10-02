@@ -106,7 +106,9 @@ function AlertDialogContent({
           // focus-managed: Radix mounts this surface with tabIndex={-1} and moves
           // focus to a control inside it, so a ring on the surface itself would mark
           // something the user cannot act on.
-          `group/alert-dialog-content ${FOCUS_OUTLINE_RESET} data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm`,
+          // allow-raw: alert-dialog-viewport-gutter — the content is as wide as the
+          // viewport minus one gutter on each side, up to its max width.
+          `group/alert-dialog-content ${FOCUS_OUTLINE_RESET} w-[calc(100%-var(--space-scale-8))] data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm`,
           className
         )}
         {...props}

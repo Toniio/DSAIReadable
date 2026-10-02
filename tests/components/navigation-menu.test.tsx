@@ -147,3 +147,22 @@ describe("NavigationMenu", () => {
     expect(document.activeElement).toBe(products)
   })
 })
+
+describe("NavigationMenu, open trigger", () => {
+  it("draws its open look from data-state, not from a Base UI attribute", async () => {
+    const products = await openProducts()
+    expect(products.getAttribute("data-state")).toBe("open")
+    expect(products.hasAttribute("data-popup-open")).toBe(false)
+    // Radix never sets data-popup-open: no class of the trigger may wait for it.
+    expect(products.className).not.toContain("popup-open")
+    expect(products.querySelector("svg")!.getAttribute("class")).not.toContain(
+      "popup-open"
+    )
+    // The open look survives: a filled trigger and a caret turned upside down.
+    const style = getComputedStyle(products)
+    expect(style.backgroundColor).not.toBe("rgba(0, 0, 0, 0)")
+    expect(getComputedStyle(products.querySelector("svg")!).rotate).toBe(
+      "180deg"
+    )
+  })
+})

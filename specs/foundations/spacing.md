@@ -42,7 +42,7 @@ Space **inside** a component (`padding`, `gap`) or **between nearby components**
 
 `DialogContent` already pads and spaces its parts (`p-4`, `gap-4`): do not add padding to it.
 
-> **The `space.component.*` tokens draw no class.** `xs`, `sm`, `md` and `xl` are reserved: no component reads them, and `p-component-md` generates no CSS. `space.component.lg` has a single use, the viewport gutter of `DialogContent` (`max-w-[calc(100%-var(--space-component-lg))]`). Reach for the steps of the scale.
+> **The `space.component.*` tokens draw no class.** All five are reserved: no component reads them, and `p-component-md` generates no CSS. `DialogContent` keeps its viewport gutter through the scale (`max-w-[calc(100%-var(--space-scale-8))]`, 16px on each side). Reach for the steps of the scale.
 
 ---
 

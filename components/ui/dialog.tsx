@@ -123,7 +123,7 @@ function DialogContent({
           // allow-raw: viewport-gutter — the dialog is capped at the viewport minus one
           // gutter on each side. A token can hold the gutter; it cannot hold the
           // subtraction from a width the component does not know.
-          `max-w-[calc(100%-var(--space-component-lg))] text-xs/relaxed ${FOCUS_OUTLINE_RESET} sm:max-w-sm`,
+          `max-w-[calc(100%-var(--space-scale-8))] text-xs/relaxed ${FOCUS_OUTLINE_RESET} sm:max-w-sm`,
           className
         )}
         {...props}

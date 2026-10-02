@@ -4323,7 +4323,7 @@
       "tier": "semantic",
       "cssVar": "--space-component-lg",
       "type": "dimension",
-      "status": "active",
+      "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.space.6}"
@@ -4331,9 +4331,9 @@
       "value": {
         "light": "1.5rem"
       },
-      "description": "Large component spacing (24px), read through var(): the viewport gutter of DialogContent. Not for layout or section spacing.",
+      "description": "Large component spacing (24px). Reserved: nothing reads it. DialogContent keeps its viewport gutter through the spacing scale (32px in all, `space.scale.8`). Not for layout or section spacing.",
       "docs": {
-        "do": "The room DialogContent keeps from the viewport edges (`max-w-[calc(100%-var(--space-component-lg))]`); it has no class.",
+        "do": "Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`p-6`, 24px).",
         "dont": "Do not confuse with `space.layout.page-padding` (same value, different context)."
       }
     },

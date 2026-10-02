@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it } from "vitest"
+import { page } from "vitest/browser"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -115,4 +116,26 @@ describe("Dialog", () => {
     await open()
     expect(await axeViolations()).toEqual([])
   })
+})
+
+describe("Dialog, viewport gutter", () => {
+  // Below `sm` the dialog is as wide as the viewport minus one gutter on each
+  // side. The viewport goes back to the desktop size of vitest.config.ts
+  // whatever the outcome.
+  it.each([320, 375])(
+    "stays 16px from each edge of a %ipx viewport",
+    async (width) => {
+      await page.viewport(width, 812)
+      try {
+        await open()
+        const { left, right } = screen
+          .getByRole("dialog")
+          .getBoundingClientRect()
+        expect(left).toBeCloseTo(16, 1)
+        expect(document.documentElement.clientWidth - right).toBeCloseTo(16, 1)
+      } finally {
+        await page.viewport(1280, 800)
+      }
+    }
+  )
 })

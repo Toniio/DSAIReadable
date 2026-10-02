@@ -106,10 +106,7 @@
         "reason": "gap-[--spacing(n)] no longer compiles (the --spacing() function is removed), so it draws nothing. The calc form multiplies the runtime --spacing (4px) by the spacing prop, as before."
       },
       "[contain-intrinsic-size:auto_10rem]": "[contain-intrinsic-size:auto_var(--space-scale-40)]",
-      "max-w-[calc(100%-2rem)]": {
-        "to": "max-w-[calc(100%-var(--space-component-lg))]",
-        "reason": "DialogContent's max width, the viewport minus 2rem (32px), becomes the viewport minus space.component.lg (24px). The gutter is a token, not a raw rem."
-      },
+      "max-w-[calc(100%-2rem)]": "max-w-[calc(100%-var(--space-scale-8))]",
       "**:data-[slot=navigation-menu-link]:focus:ring-0": {
         "to": "",
         "reason": "The ring reset on every NavigationMenu link under focus is removed, so a focused link keeps its own focus ring. A reset under **: hides the indicator of other nodes."
@@ -360,6 +357,18 @@
           "focus-visible:outline-1": {
             "to": "focus-visible:border-ring focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
             "reason": "Upstream's 1px focus outline on the trigger and the link drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
+          },
+          "data-popup-open:bg-muted/50": {
+            "to": "",
+            "reason": "data-popup-open is a Base UI attribute that Radix never sets; the data-open twin (data-state=open) draws the same open trigger. Dropped so the source says what draws it."
+          },
+          "data-popup-open:hover:bg-muted": {
+            "to": "",
+            "reason": "Base UI-only twin of data-open:hover:bg-muted, which draws the hovered open trigger on Radix."
+          },
+          "group-data-popup-open/navigation-menu-trigger:rotate-180": {
+            "to": "",
+            "reason": "Base UI-only twin of group-data-open/navigation-menu-trigger:rotate-180, which turns the caret of an open trigger on Radix."
           }
         }
       },
@@ -400,6 +409,20 @@
           "z-50": {
             "to": "z-tooltip",
             "reason": "z-50 is 50; z-tooltip is 1700, the highest layer, so a tooltip stays above dialogs and popovers. Layers come from the zindex tokens, never hard-coded numbers."
+          }
+        },
+        "classes": {
+          "data-open:animate-in": {
+            "to": "data-[state=instant-open]:animate-in",
+            "reason": "Radix never writes data-state=\"open\" on a tooltip: it writes delayed-open after the hover delay and instant-open for keyboard focus, for a hover right after another tooltip closed and for a controlled open. data-open: compiles to data-state=open (or the Base UI attribute data-open), so the entrance classes never matched an instant-open tooltip, which appeared at once and left with fade-out and zoom-out. It enters like a hover open."
+          },
+          "data-open:fade-in-0": {
+            "to": "data-[state=instant-open]:fade-in-0",
+            "reason": "Same as data-open:animate-in: the fade-in of an instant-open tooltip (keyboard focus, a hover soon after another tooltip closed)."
+          },
+          "data-open:zoom-in-95": {
+            "to": "data-[state=instant-open]:zoom-in-95",
+            "reason": "Same as data-open:animate-in: the zoom-in of an instant-open tooltip (keyboard focus, a hover soon after another tooltip closed)."
           }
         }
       },
@@ -480,6 +503,10 @@
           "focus-visible:outline-hidden": {
             "to": "focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
             "reason": "The handle hid its outline at focus and drew FOCUS_RING, whose border-ring paints nothing on a 1px line with no border: focus showed the halo alone. The outline is drawn instead: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators)."
+          },
+          "aria-[orientation=vertical]:flex-col": {
+            "to": "",
+            "reason": "react-resizable-panels v4 renders no aria-orientation on the group (only on the separator), so the class never matched; the group's inline flex-direction already stacks a vertical group."
           }
         }
       },
@@ -700,7 +727,11 @@
       ]
     },
     "alert-dialog": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "Upstream sizes the content with max-w-xs (20rem) alone, so it is flush with the viewport at 320px. It takes the gutter DialogContent keeps, 2rem in all (space.scale.8), as a width: min(100% minus the gutter, 20rem) is 288px at 320px and still 320px from 352px. A second max-width cannot cap it: the data-[size] max-width is more specific.",
+      "added": [
+        "w-[calc(100%-var(--space-scale-8))]"
+      ]
     },
     "aspect-ratio": {
       "status": "reanchored"

@@ -896,6 +896,15 @@
         ]
       },
       {
+        "token": "space.scale.8",
+        "classes": [
+          "w-[calc(100%-var(--space-scale-8))]"
+        ],
+        "where": [
+          "AlertDialogContent"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
           "font-heading"
@@ -8291,15 +8300,6 @@
         ]
       },
       {
-        "token": "space.component.lg",
-        "classes": [
-          "max-w-[calc(100%-var(--space-component-lg))]"
-        ],
-        "where": [
-          "DialogContent"
-        ]
-      },
-      {
         "token": "space.scale.0",
         "classes": [
           "inset-0"
@@ -8337,6 +8337,15 @@
         ],
         "where": [
           "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "max-w-[calc(100%-var(--space-scale-8))]"
+        ],
+        "where": [
+          "DialogContent"
         ]
       },
       {
@@ -23781,7 +23790,7 @@
       },
       {
         "state": "focus",
-        "behavior": "Opens the tooltip at once, with no delay and no entry animation (Radix sets `instant-open`); blur closes it"
+        "behavior": "Opens the tooltip at once, with no delay (Radix sets `instant-open`); it enters like a hover open; blur closes it"
       },
       {
         "state": "active",
@@ -23789,7 +23798,7 @@
       },
       {
         "state": "open",
-        "behavior": "`bg-foreground` bubble and arrow with `text-background` text; a hover open (`delayed-open`) enters with `fade-in-0`, `zoom-in-95` and a `slide-in-from-*` from the trigger's side; an `instant-open` (keyboard focus, or a hover right after another tooltip closed) shows with no animation"
+        "behavior": "`bg-foreground` bubble and arrow with `text-background` text; a hover open (`delayed-open`) and an `instant-open` (keyboard focus, or a hover right after another tooltip closed) both enter with `fade-in-0`, `zoom-in-95` and a `slide-in-from-*` from the trigger's side"
       },
       {
         "state": "closing",

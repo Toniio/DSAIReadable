@@ -44,6 +44,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -205,6 +212,20 @@ function TooltipExample() {
   )
 }
 
+function SelectExample({ position }: { position?: "popper" }) {
+  return (
+    <Select>
+      <SelectTrigger aria-label="Fruit">
+        <SelectValue placeholder="Pick a fruit" />
+      </SelectTrigger>
+      <SelectContent position={position}>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+
 function DrawerExample() {
   return (
     <Drawer>
@@ -279,7 +300,6 @@ describe("Reduced motion: overlays", () => {
 
   it("Tooltip: enters with a fade only, no zoom or slide", async () => {
     render(<TooltipExample />)
-    // Hover, not focus: focus opens the tooltip instantly, with no animation.
     await userEvent.hover(screen.getByRole("button", { name: "Copy" }))
     await screen.findByRole("tooltip")
     const content = document.querySelector<HTMLElement>(
@@ -287,6 +307,42 @@ describe("Reduced motion: overlays", () => {
     )!
     expect(content.dataset.state).toBe("delayed-open")
     expect(motion(content, "enter")).toEqual(fadeOnly("enter"))
+  })
+
+  it("Tooltip: opened by keyboard focus, enters with a fade only too", async () => {
+    render(<TooltipExample />)
+    // Focus opens the tooltip at once (Radix `instant-open`): it animates
+    // like a hover open.
+    await userEvent.keyboard("{Tab}")
+    await screen.findByRole("tooltip")
+    const content = document.querySelector<HTMLElement>(
+      '[data-slot="tooltip-content"]'
+    )!
+    expect(content.dataset.state).toBe("instant-open")
+    expect(motion(content, "enter")).toEqual(fadeOnly("enter"))
+  })
+
+  it("Select: the default item-aligned list opens with no animation", async () => {
+    // By design, as shadcn/ui draws it: the list is placed so that the
+    // selected option sits on the trigger's value, and a zoom around the
+    // list's center would move it off while it runs.
+    render(<SelectExample />)
+    await userEvent.click(screen.getByRole("combobox", { name: "Fruit" }))
+    const list = document.querySelector<HTMLElement>(
+      '[data-slot="select-content"]'
+    )!
+    expect(list.dataset.alignTrigger).toBe("true")
+    expect(getComputedStyle(list).animationName).toBe("none")
+  })
+
+  it('Select: position="popper" enters with a fade only', async () => {
+    render(<SelectExample position="popper" />)
+    await userEvent.click(screen.getByRole("combobox", { name: "Fruit" }))
+    const list = document.querySelector<HTMLElement>(
+      '[data-slot="select-content"]'
+    )!
+    expect(list.dataset.alignTrigger).toBe("false")
+    expect(motion(list, "enter")).toEqual(fadeOnly("enter"))
   })
 
   it("Drawer: fades in and out instead of sliding", async () => {

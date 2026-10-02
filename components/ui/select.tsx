@@ -181,9 +181,10 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        // focus-managed: Radix moves a roving tabindex across these items and marks
-        // the current one with focus/data-highlighted, which the background color
-        // below renders. A ring here would double an indicator that already exists.
+        // focus-managed: Radix Select moves DOM focus onto the highlighted option
+        // (tabIndex={-1}, focus() on pointer move and arrow keys) and marks it with
+        // data-highlighted, which the focus background color below renders. A ring
+        // here would double an indicator that already exists.
         "relative flex w-full cursor-default items-center gap-2 rounded-none py-2 pr-8 pl-2 text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         className
       )}
