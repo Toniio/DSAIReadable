@@ -257,15 +257,17 @@ checks the format and that every cited source exists.
 
 ```bash
 # Any agent that reads skills/ from a repository
-npx skills add Toniio/DSAIReadable
+npx skills add Toniio/DSAIReadable#v0.1.1
 
 # Claude Code: the two skills and the MCP server in one plugin
 claude plugin marketplace add Toniio/DSAIReadable
 claude plugin install dsaireadable@dsaireadable
 ```
 
-The plugin starts the MCP server with `npx`, pinned to the release the plugin
-ships with. Their gain can be measured on the conformance
+The plugin installs its skills from the release tag and starts the MCP server
+with `npx`, pinned to the same release, so the skills and the tools they name
+always agree. The `#vX.Y.Z` of `npx skills add` does the same for the first
+command. Their gain can be measured on the conformance
 harness, with and without the skills: `npm run evals -- --generator claude
 --suite skills --skills all` ([`evals/README.md`](./evals/README.md)).
 

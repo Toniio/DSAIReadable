@@ -284,14 +284,22 @@ Every release comes from the changesets:
 1. A release pull request runs `npm run release:version`: it consumes the
    changesets, writes the CHANGELOG entry, bumps the version, copies it
    everywhere and regenerates `llms.txt`, whose links then name the new tag,
-   and the MCP context.
+   and the MCP context. "Everywhere" includes what names the tag: the install
+   line and the spec link of the `conventions` item, the link in the server's
+   README, the `npx skills add` of the root README and the `ref` of the Claude
+   Code plugin. The ESLint plugin's docs links read its own `package.json`.
+   `npm run versions:check` also fails on a link to `main` in anything a
+   package or a registry item distributes.
 2. After the merge, tag the merge commit and push the tag:
    `git tag -a vX.Y.Z -m vX.Y.Z <merge commit>`, then
    `git push origin vX.Y.Z`. Not `npx changeset tag`: in this workspace it
    tags each package (`dsaireadable@X.Y.Z`, `@dsaireadable/mcp-server@X.Y.Z`,
    `@dsaireadable/eslint-plugin@X.Y.Z`), never `vX.Y.Z`, the tag a pinned
    install names (`Toniio/DSAIReadable/button#vX.Y.Z`). Push it right after
-   the merge: until the tag exists, every link of `llms.txt` returns a 404.
+   the merge: until the tag exists, every link of `llms.txt`, of the
+   `conventions` item, of the READMEs and of the ESLint plugin's rule docs
+   returns a 404, and installing the Claude Code plugin or running
+   `npx skills add Toniio/DSAIReadable#vX.Y.Z` fails.
 3. A maintainer publishes the two packages, the ESLint plugin first since the
    server pins it: `npm publish --access public --dry-run`, then without
    `--dry-run`, in `packages/eslint-plugin/`, then in `mcp-server/`. A published

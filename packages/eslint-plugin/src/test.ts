@@ -7,6 +7,7 @@
 import tsParser from "@typescript-eslint/parser"
 import { ESLint, Linter, RuleTester } from "eslint"
 import assert from "node:assert/strict"
+import { readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { describe, it } from "node:test"
 import { fileURLToPath } from "node:url"
@@ -423,6 +424,31 @@ describe("the configs", () => {
       ],
       { filename }
     )
+
+  it("links each rule to the README of the release it ships in", () => {
+    const { version } = JSON.parse(
+      readFileSync(
+        resolve(dirname(fileURLToPath(import.meta.url)), "../package.json"),
+        "utf-8"
+      )
+    ) as { version: string }
+    const readme = readFileSync(
+      resolve(dirname(fileURLToPath(import.meta.url)), "../README.md"),
+      "utf-8"
+    )
+    assert.equal(plugin.meta.version, version)
+    for (const [name, rule] of Object.entries(plugin.rules)) {
+      assert.equal(
+        rule.meta.docs?.url,
+        `https://github.com/Toniio/DSAIReadable/blob/v${version}/packages/eslint-plugin/README.md#${name}`
+      )
+      // GitHub anchors a heading by its text.
+      assert.ok(
+        readme.includes(`\n### \`${name}\`\n`),
+        `the README has no heading for ${name}, so its docs link has no anchor`
+      )
+    }
+  })
 
   it("lists every rule in core, as an error", () => {
     const core = plugin.configs.core[0]
