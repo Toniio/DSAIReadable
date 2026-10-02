@@ -30,12 +30,13 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs"
+import { homedir } from "node:os"
 import { join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import * as prettier from "prettier"
 
-import { scoreA11y } from "./lib/a11y"
+import { scoreA11y, scrubFailure } from "./lib/a11y"
 import {
   passesA,
   passesB,
@@ -43,6 +44,7 @@ import {
   toMarkdown,
   type GenerationMetrics,
   type RunReport,
+  type SessionOutcome,
   type TaskReport,
 } from "./lib/report"
 import { scoreStatic } from "./lib/static"
@@ -68,6 +70,7 @@ const skillsOption = () => option("skills")?.split(",") ?? []
 interface Generated {
   code: string | null
   metrics?: TaskReport["metrics"]
+  session?: SessionOutcome
 }
 
 type Generator = (task: Task) => Promise<Generated>
@@ -76,15 +79,40 @@ function goldGenerator(): Generator {
   return async (task) => ({ code: goldScreen(ROOT, task) })
 }
 
+/** What evals/generate-claude-code.ts writes in `<dir>/run.json`; a run recorded before a field existed lacks it. */
+interface RunFile {
+  model: string
+  modelOption?: string
+  context: string
+  skills: string[]
+  claudeCode: string
+  sessionPlugins?: string[]
+  maxTurns?: number
+  effort?: string
+  sources?: string
+  designSystem?: { version: string; commit: string; dirty: boolean }
+  tasks?: Record<string, Partial<SessionOutcome>>
+}
+
+function readRunFile(dir: string): RunFile | undefined {
+  const file = resolve(dir, "run.json")
+  return existsSync(file)
+    ? (JSON.parse(readFileSync(file, "utf-8")) as RunFile)
+    : undefined
+}
+
 /**
  * Screens written elsewhere: `<dir>/<task>.tsx`, with the metrics of the
- * session that wrote it when there is a `<dir>/<task>.metrics.json`
- * (evals/generate-claude-code.ts writes both).
+ * session that wrote it when there is a `<dir>/<task>.metrics.json`, and how
+ * that session ended when `<dir>/run.json` says (evals/generate-claude-code.ts
+ * writes all three).
  */
 function replayGenerator(dir: string): Generator {
+  const outcomes = readRunFile(dir)?.tasks ?? {}
   return async (task) => {
     const file = resolve(dir, `${task.id}.tsx`)
     const metrics = resolve(dir, `${task.id}.metrics.json`)
+    const outcome = outcomes[task.id]
     return {
       code: existsSync(file) ? readFileSync(file, "utf-8") : null,
       ...(existsSync(metrics) && {
@@ -92,27 +120,49 @@ function replayGenerator(dir: string): Generator {
           readFileSync(metrics, "utf-8")
         ) as GenerationMetrics,
       }),
+      ...(outcome?.subtype && {
+        session: {
+          subtype: outcome.subtype,
+          numTurns: outcome.numTurns,
+          stopReason: outcome.stopReason ?? null,
+        },
+      }),
     }
   }
 }
 
-/** What evals/generate-claude-code.ts says of the screens it wrote: `<dir>/run.json`. */
+/**
+ * What evals/generate-claude-code.ts says of the screens it wrote, and of the
+ * sessions that wrote them: the model, the context, and where they were
+ * generated. The local path of the Claude Code install stays in run.json.
+ */
 function replayAbout(
   dir: string
-): Pick<RunReport, "model" | "context" | "skills" | "via"> {
-  const file = resolve(dir, "run.json")
-  if (!existsSync(file)) return {}
-  const about = JSON.parse(readFileSync(file, "utf-8")) as {
-    model: string
-    context: string
-    skills: string[]
-    claudeCode: string
-  }
+): Pick<RunReport, "model" | "context" | "skills" | "via" | "generated"> {
+  const about = readRunFile(dir)
+  if (!about) return {}
+  const { designSystem: ds } = about
   return {
     model: about.model,
     context: about.context,
     skills: about.skills,
     via: `claude-code ${about.claudeCode}`,
+    ...(ds &&
+      about.sources &&
+      about.effort &&
+      about.maxTurns !== undefined && {
+        generated: {
+          commit: ds.commit,
+          version: ds.version,
+          dirty: ds.dirty,
+          sources: about.sources,
+          effort: about.effort,
+          maxTurns: about.maxTurns,
+          modelOption: about.modelOption ?? about.model,
+          claudeCode: about.claudeCode,
+          sessionPlugins: about.sessionPlugins ?? [],
+        },
+      }),
   }
 }
 
@@ -164,9 +214,14 @@ async function run(options: {
     golds.set(task.id, gold)
     expected.set(task.id, designSystemImports(gold))
     process.stdout.write(`  ${task.id}… `)
-    const { code, metrics } = await generate(task)
+    const { code, metrics, session } = await generate(task)
     console.log(code === null ? "no output" : "written")
-    reports.set(task.id, { id: task.id, generated: code !== null, metrics })
+    reports.set(task.id, {
+      id: task.id,
+      generated: code !== null,
+      metrics,
+      session,
+    })
     if (code === null) continue
     const file = join(screensDir, `${task.id}.tsx`)
     writeFileSync(file, code)
@@ -206,6 +261,7 @@ async function run(options: {
   }
 
   const tasks = options.tasks.map((t) => reports.get(t.id)!)
+  const about = from ? replayAbout(from) : {}
   const report: RunReport = {
     label: options.label,
     date: new Date().toISOString().slice(0, 10),
@@ -215,7 +271,7 @@ async function run(options: {
       context: option("context") === "none" ? "none" : "mcp",
       skills: skillsOption(),
     }),
-    ...(from && replayAbout(from)),
+    ...about,
     designSystem: {
       version: (
         JSON.parse(readFileSync(join(ROOT, "package.json"), "utf-8")) as {
@@ -227,7 +283,7 @@ async function run(options: {
         encoding: "utf-8",
       }).trim(),
     },
-    summary: summarize(tasks, options.a11y),
+    summary: summarize(tasks, options.a11y, about.generated?.maxTurns),
     tasks,
   }
   writeFileSync(
@@ -303,6 +359,90 @@ async function selfTest() {
     errors.push(
       "evals/fixtures/faq.metrics.json: the replay generator did not read it"
     )
+  // evals/fixtures/run.json stands for what evals:generate writes next to them:
+  // where the screens were generated, and how each session ended.
+  const generated = fixtureRun.generated
+  if (
+    generated?.commit !== "abcdef1234567890abcdef1234567890abcdef12" ||
+    generated.version !== "0.0.0-fixture" ||
+    generated.dirty !== false ||
+    generated.sources !== "0123456789abcdef" ||
+    generated.effort !== "high" ||
+    generated.maxTurns !== 25 ||
+    generated.modelOption !== "sonnet" ||
+    generated.claudeCode !== "2.1.285" ||
+    generated.sessionPlugins.join() !== "cc-plugin-agents-md@builtin"
+  )
+    errors.push(
+      `evals/fixtures/run.json: the report did not carry its provenance (generated: ${JSON.stringify(generated)})`
+    )
+  const faqSession = fixtureRun.tasks.find((t) => t.id === "faq")?.session
+  if (
+    faqSession?.subtype !== "success" ||
+    faqSession.numTurns !== 7 ||
+    faqSession.stopReason !== "end_turn"
+  )
+    errors.push(
+      `evals/fixtures/run.json: the faq task did not carry how its session ended (${JSON.stringify(faqSession)})`
+    )
+  // faq.metrics.json holds two MCP calls and one Skill call.
+  const generation = fixtureRun.summary.generation
+  if (generation?.mcpCalls !== 2 || generation.otherCalls !== 1)
+    errors.push(
+      `the report counts ${generation?.mcpCalls} MCP and ${generation?.otherCalls} other tool calls, not 2 and 1: only dsaireadable_* tools are MCP calls`
+    )
+  // sign-in used its 25 turns and delete-project stopped on error_max_turns.
+  if (generation?.turnCapReached !== 2)
+    errors.push(
+      `the report counts ${generation?.turnCapReached} tasks at the turn cap, not 2`
+    )
+  const markdown = toMarkdown(fixtureRun)
+  for (const text of [
+    "generated at `abcdef1`",
+    "sources `0123456789abcdef`",
+    "effort high",
+    "25 turns max",
+    "2 MCP tool calls",
+    "1 other tool call",
+    "2 tasks reached the 25-turn cap",
+  ])
+    if (!markdown.includes(text))
+      errors.push(`the report header or generation line lacks "${text}"`)
+  // A failure message keeps its assertion, not the path of the machine that ran it.
+  const failures = JSON.stringify(fixtureRun.tasks.map((t) => t.a11y))
+  for (const [what, found] of [
+    ["the repository path", failures.includes(ROOT)],
+    ["a home folder", failures.includes(homedir())],
+    ["a stack frame", /\\n\s+at /.test(failures)],
+    ["a dev server port", /localhost:\d/.test(failures)],
+    ["a Vite cache token", /browserv=|[?&]v=/.test(failures)],
+  ] as const)
+    if (found) errors.push(`a stage B failure of the fixtures holds ${what}`)
+  const scrubbed = scrubFailure(
+    [
+      "AssertionError: dark color-contrast: button",
+      `    at http://localhost:5173${ROOT}evals/a11y/screens.test.tsx?import&browserv=1790966891861:33:45`,
+      `Failed to fetch http://localhost:5173/evals/.work/x/screens/a.tsx?v=dff84207 in ${homedir()}/notes`,
+    ].join("\n"),
+    ROOT
+  )
+  if (
+    scrubbed !==
+    [
+      "AssertionError: dark color-contrast: button",
+      "Failed to fetch http://localhost/evals/.work/x/screens/a.tsx in ~/notes",
+    ].join("\n")
+  )
+    errors.push(`scrubFailure leaves "${scrubbed}"`)
+  // The history is public: no recorded report may name the local user.
+  for (const file of readdirSync(join(ROOT, "evals/history"))) {
+    const text = readFileSync(join(ROOT, "evals/history", file), "utf-8")
+    if (
+      text.includes(homedir()) ||
+      /\/Users\/[^\s/]+\/|[A-Za-z]:\\Users\\/.test(text)
+    )
+      errors.push(`evals/history/${file} holds a local path`)
+  }
   for (const task of tasks)
     if (task.base && !existsSync(join(ROOT, task.base)))
       errors.push(`${task.id}: its base ${task.base} does not exist`)

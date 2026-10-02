@@ -6,9 +6,25 @@
   "context": "mcp",
   "skills": [],
   "via": "claude-code 2.1.285",
-  "designSystem": {
+  "generated": {
+    "commit": "bd2ae4aae42c9ced816d095a94ca80da3e95d0e1",
     "version": "0.1.0",
-    "commit": "5e83303c0d979529560e44a211f98947709544c3"
+    "dirty": false,
+    "sources": "2bdeaa526a7b7a93",
+    "effort": "high",
+    "maxTurns": 25,
+    "modelOption": "sonnet",
+    "claudeCode": "2.1.285",
+    "sessionPlugins": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-sec-default@builtin",
+      "cc-plugin-telemetry@builtin"
+    ]
+  },
+  "designSystem": {
+    "version": "0.1.1",
+    "commit": "78a5bf811c7cb0a7a3d98517ea9c2b92676592a9"
   },
   "summary": {
     "tasks": 26,
@@ -30,10 +46,12 @@
     "conformance": 0.981,
     "generation": {
       "turns": 124,
-      "toolCalls": 297,
+      "mcpCalls": 297,
+      "otherCalls": 0,
       "toolErrors": 1,
       "inputTokens": 2785694,
-      "outputTokens": 175649
+      "outputTokens": 175649,
+      "turnCapReached": 0
     }
   },
   "tasks": [
@@ -54,6 +72,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 8,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -90,6 +113,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -123,6 +151,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 12,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -159,6 +192,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 13,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -192,6 +230,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 12,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -227,6 +270,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -264,6 +312,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -298,6 +351,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 12,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -335,6 +393,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 12,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -369,6 +432,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 16,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -405,6 +473,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 13,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -440,6 +513,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -474,6 +552,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 10,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -507,6 +590,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 10,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -545,6 +633,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -559,7 +652,7 @@
         "axe": false,
         "focus": true,
         "failures": [
-          "axe: AssertionError: light scrollable-region-focusable: .relative\ndark scrollable-region-focusable: .relative: expected [ …(2) ] to deeply equal []\n    at http://localhost:63315/Users/anthony.besnault/DSAIReadable/.claude/worktrees/dsa-readable-0-1-1-8fae61/evals/a11y/screens.test.tsx?import&browserv=1790957394623:33:45\n    at async http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/plugins.D2ut1V9b-DDzazuHB.js?v=4a2b27ac:5211:20"
+          "axe: AssertionError: light scrollable-region-focusable: .relative\ndark scrollable-region-focusable: .relative: expected [ …(2) ] to deeply equal []"
         ]
       }
     },
@@ -583,6 +676,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -620,6 +718,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -655,6 +758,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 16,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -689,6 +797,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 10,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -726,6 +839,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 16,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -761,6 +879,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 12,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -794,6 +917,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 9,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -831,6 +959,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 11,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -867,6 +1000,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 11,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -898,6 +1036,11 @@
           "dsaireadable_get_design_rules": 1,
           "dsaireadable_validate_code": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 5,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -932,6 +1075,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 8,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
