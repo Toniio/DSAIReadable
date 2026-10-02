@@ -290,14 +290,6 @@
     [data-slot="accordion-content"], [data-slot="skeleton"], [data-slot="input-otp-slot"] * {
       animation-name: none !important;
     }
-    /* shadcn/tailwind.css stops the bare shimmer class only, not the
-       group-data variants of the Attachment title: the same values as its
-       shimmer-none utility. */
-    [data-slot="attachment-title"] {
-      --shimmer-image: none !important;
-      --shimmer-text-fill: currentColor !important;
-      animation-name: none !important;
-    }
     /* vaul slides the Drawer with its own keyframes and reads no media query:
        its own fadeIn and fadeOut take their place. */
     [data-vaul-drawer][data-vaul-snap-points="false"][data-state="open"]:not([data-vaul-animate="false"]) {
