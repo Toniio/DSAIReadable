@@ -39,6 +39,8 @@ export interface RunReport {
   /** The claude generator's context: the MCP server or none, and the skills it could load. */
   context?: string
   skills?: string[]
+  /** Where a replayed run was generated: `claude-code 2.1.76` for evals/generate-claude-code.ts. */
+  via?: string
   designSystem: { version: string; commit: string }
   summary: Summary
   tasks: TaskReport[]
@@ -159,7 +161,7 @@ export function toMarkdown(report: RunReport): string {
   const lines = [
     `# Conformance run — ${report.label}`,
     "",
-    `${report.date} · generator \`${report.generator}\`${report.model ? ` · model \`${report.model}\`` : ""}${report.context ? ` · context \`${report.context}\`` : ""}${report.skills?.length ? ` · skills ${report.skills.map((name) => `\`${name}\``).join(", ")}` : ""} · design system ${report.designSystem.version} (\`${report.designSystem.commit.slice(0, 7)}\`) · ${s.generated}/${s.tasks} tasks answered`,
+    `${report.date} · generator \`${report.generator}\`${report.via ? ` via \`${report.via}\`` : ""}${report.model ? ` · model \`${report.model}\`` : ""}${report.context ? ` · context \`${report.context}\`` : ""}${report.skills?.length ? ` · skills ${report.skills.map((name) => `\`${name}\``).join(", ")}` : ""} · design system ${report.designSystem.version} (\`${report.designSystem.commit.slice(0, 7)}\`) · ${s.generated}/${s.tasks} tasks answered`,
     "",
     `**Conformance: ${pct(s.conformance)}** (the mean of the stages that ran)`,
     "",

@@ -101,6 +101,7 @@ npm run test:lint-coverage  # every component rendered from its spec example, ev
 npm run test:components   # headless Chromium: the 65 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard, reduced motion
 npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
+npm run evals:generate    # screens from Claude Code in print mode, on a subscription (no API key), for the replay generator (evals/README.md)
 ```
 
 A new or changed component arrives with its test: its spec example must pass

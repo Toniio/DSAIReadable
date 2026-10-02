@@ -409,6 +409,7 @@ npm run test:lint-coverage  # Every component rendered from its spec, every docu
 npm run test:components     # Component tests in headless Chromium (Vitest + axe-core)
 npm run skills:validate     # The agent skills: format, and every rule cites a source that exists
 npm run evals:test          # The conformance harness scores its gold examples and fixtures, with no model
+npm run evals:generate      # Screens from Claude Code on a subscription, no API key (evals/README.md)
 npm run format              # Prettier on every .ts/.tsx/.md
 ```
 

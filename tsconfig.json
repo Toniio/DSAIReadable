@@ -26,6 +26,7 @@
     "mcp-server",
     ".shadcn-vanilla",
     "evals/run.ts",
+    "evals/generate-claude-code.ts",
     "evals/lib",
     "evals/a11y/vitest.config.ts",
     "evals/fixtures",
