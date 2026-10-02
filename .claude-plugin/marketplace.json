@@ -10,7 +10,7 @@
       "name": "dsaireadable",
       "source": ".",
       "description": "Builds React screens with the DSAIReadable design system and reviews them for basic UI and UX errors: the dsaireadable-build and dsaireadable-ui-guard skills, and the design system's MCP server.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "license": "MIT",
       "homepage": "https://github.com/Toniio/DSAIReadable",
       "repository": "https://github.com/Toniio/DSAIReadable",
@@ -18,7 +18,7 @@
       "mcpServers": {
         "dsaireadable": {
           "command": "npx",
-          "args": ["-y", "@dsaireadable/mcp-server@0.1.0"]
+          "args": ["-y", "@dsaireadable/mcp-server@0.1.1"]
         }
       }
     }
