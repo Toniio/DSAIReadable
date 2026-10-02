@@ -85,7 +85,7 @@ A blocking modal that stops the user to confirm or cancel a critical action.
 
 Collected from `components/ui/alert-dialog.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
-Composes `Button` — its tokens are listed in its own spec.
+Composes `Button` — Button in AlertDialogAction: variant default, size default; Button in AlertDialogCancel: variant outline, size default; its tokens are listed in its own spec.
 
 ## Props / API
 
@@ -217,7 +217,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 Collected from `components/ui/alert-dialog.tsx` and the `lib/` constants it imports. **Classes**: each class whose variants name the state, as written (`dark:` included); a class that stacks two states is listed under both. `—`: no class of its own — `default` is what the other states change.
 
-Composes `Button` — its states are listed in its own spec.
+Composes `Button` — Button in AlertDialogAction: variant default, size default; Button in AlertDialogCancel: variant outline, size default; its states are listed in its own spec.
 
 <!-- End of the generated part. -->
 

@@ -747,6 +747,15 @@ assert(
     tokenSpecs.PasswordInput.tokens_from.includes("InputGroup"),
   "A component with no token of its own points to the specs it composes"
 )
+// The Composes line names the variant of each part after its " — " ("Button
+// in DialogContent: variant ghost, …"): a name before it would be served as a
+// composed spec.
+assert(
+  Object.values(tokenSpecs).every((s) =>
+    s.tokens_from.every((name) => name in specs)
+  ) && tokenSpecs.Dialog?.tokens_from.join() === "Button",
+  "Every tokens_from entry is a spec that exists, not a variant name"
+)
 
 // States is generated (scripts/build-spec-states.ts) with columns
 // State | Classes | Description. Read by position, `behavior` would be the

@@ -43,7 +43,7 @@
     "specs:api": "tsx scripts/build-spec-api.ts",
     "specs:states": "tsx scripts/build-spec-states.ts",
     "specs:choices": "tsx scripts/build-spec-choices.ts",
-    "specs:validate": "tsx scripts/build-spec-variants.ts --check && tsx scripts/build-spec-tokens.ts --check && tsx scripts/build-spec-api.ts --check && tsx scripts/build-spec-states.ts --check && tsx scripts/build-spec-choices.ts --check && tsx scripts/lint-spec-sections.ts && tsx scripts/lint-spec-wording.ts && tsx scripts/lint-foundation-examples.ts && tsx scripts/build-llms-txt.ts --check",
+    "specs:validate": "tsx scripts/test-spec-classes.ts && tsx scripts/build-spec-variants.ts --check && tsx scripts/build-spec-tokens.ts --check && tsx scripts/build-spec-api.ts --check && tsx scripts/build-spec-states.ts --check && tsx scripts/build-spec-choices.ts --check && tsx scripts/lint-spec-sections.ts && tsx scripts/lint-spec-wording.ts && tsx scripts/lint-foundation-examples.ts && tsx scripts/build-llms-txt.ts --check",
     "skills:validate": "tsx scripts/validate-skills.ts",
     "docs:tokens": "tsx scripts/build-token-docs.ts",
     "registry:build": "tsx scripts/build-registry.ts",

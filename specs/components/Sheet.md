@@ -87,7 +87,7 @@ A panel that slides in from the side (or from the top or bottom) over the interf
 
 Collected from `components/ui/sheet.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
-Composes `Button` — its tokens are listed in its own spec.
+Composes `Button` — Button in SheetContent: variant ghost, size icon-sm; its tokens are listed in its own spec.
 
 ## Props / API
 
@@ -184,7 +184,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 Collected from `components/ui/sheet.tsx` and the `lib/` constants it imports. **Classes**: each class whose variants name the state, as written (`dark:` included); a class that stacks two states is listed under both. `—`: no class of its own — `default` is what the other states change.
 
-Composes `Button` — its states are listed in its own spec.
+Composes `Button` — Button in SheetContent: variant ghost, size icon-sm; its states are listed in its own spec.
 
 <!-- End of the generated part. -->
 

@@ -10,7 +10,8 @@
  * tokens a component really draws with, nor where they come from.
  *
  * Each string of the component's file, plus the value of each constant it
- * imports from `@/lib/*`, is split into class candidates. Tailwind resolves
+ * imports from `@/lib/*` and the classes of each `*Variants` function it
+ * calls from another component, is split into class candidates. Tailwind resolves
  * every candidate against styles/globals.css — the same design system the build
  * uses — and the `var(--…)` its CSS reads is looked up in tokens.manifest.json.
  * Because the bridge is `@theme inline`, a class resolves straight to the
@@ -18,6 +19,10 @@
  * `var(--…)` written in the code itself is looked up the same way. A font
  * class reads the variable next/font sets (`font-mono` → `--font-mono`), which
  * leads to the typography token that describes the family.
+ *
+ * A class that comes through another component's `*Variants` function is
+ * left out when it waits for a state the spec's States section declares the
+ * component never enters through it ("Not entered through `buttonVariants`").
  *
  * Only semantic tokens are listed. Since the spacing scale is locked, `p-2`
  * resolves to `space.scale.2` like any other class; classes that read no
@@ -35,11 +40,17 @@ import { fileURLToPath } from "node:url"
 import { format, resolveConfig } from "prettier"
 import { nextFontsOf } from "./lib/next-fonts.js"
 import {
+  appliedText,
   classResolver,
   codePathsOf,
   composedOf,
+  composesLine,
+  neverEntered,
+  notEnteredOf,
   stringsOf,
   utilityOf,
+  variantsAppliedBy,
+  type NotEntered,
 } from "./lib/spec-classes.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -109,7 +120,10 @@ interface Row {
   where: Set<string>
 }
 
-async function tokensOf(file: string): Promise<Map<string, Row>> {
+async function tokensOf(
+  file: string,
+  notEntered: NotEntered[]
+): Promise<Map<string, Row>> {
   const rows = new Map<string, Row>()
   const add = (token: string, form: string, where: string) => {
     const row = rows.get(token) ?? { forms: new Set(), where: new Set() }
@@ -118,9 +132,10 @@ async function tokensOf(file: string): Promise<Map<string, Row>> {
     rows.set(token, row)
   }
 
-  for (const { text, where } of await stringsOf(ROOT, file)) {
+  for (const { text, where, via } of await stringsOf(ROOT, file)) {
     const candidates = text.split(/\s+/).filter(Boolean)
     cssOf(candidates).forEach((css, i) => {
+      if (neverEntered(candidates[i], via, notEntered, file)) return
       // A class: the token is what its CSS reads. Anything else (a style
       // value, a calc) is read for the var(--…) written in it.
       const [source, form] = css
@@ -140,14 +155,13 @@ const list = (values: Set<string>, show = (s: string) => s) =>
 
 async function sectionFor(
   codePath: string,
+  markdown: string,
   specOf: Map<string, string>
 ): Promise<string> {
-  const rows = await tokensOf(codePath)
-  const composed = composedOf(ROOT, codePath, specOf)
-  const composes =
-    composed.length > 0
-      ? `Composes ${composed.map(code).join(", ")} — ${composed.length > 1 ? "their tokens are listed in their own specs" : "its tokens are listed in its own spec"}.`
-      : undefined
+  const notEntered = notEnteredOf(markdown)
+  const rows = await tokensOf(codePath, notEntered)
+  const applied = variantsAppliedBy(ROOT, codePath)
+  const composes = composesLine(composedOf(ROOT, codePath, specOf), "tokens")
   const lines = [
     HEADING,
     "",
@@ -170,7 +184,9 @@ async function sectionFor(
             `| ${code(token)} | ${list(forms, code)} | ${list(where)} |`
         ),
       "",
-      `Collected from ${code(codePath)} and the \`lib/\` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the \`cva\` variant path or the constant the class comes from. Classes that read no token (\`w-full\`, \`flex\`, layout) are left out.`
+      applied.size > 0
+        ? `Collected from ${code(codePath)}, the \`lib/\` constants it imports and ${appliedText(applied)}; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the \`cva\` variant path or the constant the class comes from; for a class it applies through another component's \`cva\`, the part that applies it, then where the class sits there. Classes that read no token (\`w-full\`, \`flex\`, layout)${notEntered.length > 0 ? " and those of a state the States section declares not entered" : ""} are left out.`
+        : `Collected from ${code(codePath)} and the \`lib/\` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the \`cva\` variant path or the constant the class comes from. Classes that read no token (\`w-full\`, \`flex\`, layout) are left out.`
     )
     if (composes) lines.push("", composes)
   }
@@ -198,7 +214,10 @@ for (const file of specFiles) {
   const path = resolve(SPECS_DIR, file)
   const current = readFileSync(path, "utf-8")
   const next = await format(
-    withSection(current, await sectionFor(codePathOf.get(file)!, specOf)),
+    withSection(
+      current,
+      await sectionFor(codePathOf.get(file)!, current, specOf)
+    ),
     { ...(await resolveConfig(path)), filepath: path }
   )
   if (next === current) continue

@@ -86,7 +86,7 @@ npm run index:validate    # 6 checks: JSON Schema, sizes, data-slot, UI strings,
 npm run shadcn:baseline   # refetches the shadcn/ui API into shadcn-api.baseline.json (network)
 npm run shadcn:retokenize # the re-tokenization codemod is a fixpoint on the 65 components + each one is classified in shadcn-upstream.json
 npm run shadcn:drift      # each component against its shadcn/ui upstream run through the codemod: re-anchored, or every difference declared (network)
-npm run specs:validate    # the 65 specs against the 13 canonical sections, the 12 page patterns against their 9 + Variants, Tokens, Props / API, States and choice rules up to date + no hedged wording + the foundations' tsx and ts examples pass the ESLint plugin + llms.txt up to date
+npm run specs:validate    # the class collector's fixture test + the 65 specs against the 13 canonical sections, the 12 page patterns against their 9 + Variants, Tokens, Props / API, States and choice rules up to date + no hedged wording + the foundations' tsx and ts examples pass the ESLint plugin + llms.txt up to date
 npm run skills:validate   # the agent skills of skills/: Agent Skills format + every rule cites a spec, pattern or foundation that exists + every tool it names exists
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
 npm run registry:check    # registry.json freshness + internal dependencies
