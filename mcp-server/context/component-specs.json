@@ -63,7 +63,6 @@
           "ring-ring/50"
         ],
         "where": [
-          "AccordionTrigger",
           "AccordionTrigger via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -3544,6 +3543,7 @@
           "ring-ring/50"
         ],
         "where": [
+          "buttonVariants.variant.outline",
           "buttonVariants via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -3837,7 +3837,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide; the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20`"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, in light and dark mode (the `outline` variant restores `border-ring` in dark with `dark:focus-visible:border-ring`, over its `dark:border-input`); the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20`"
       },
       {
         "state": "active",
@@ -3845,7 +3845,7 @@
       },
       {
         "state": "open",
-        "behavior": "While the popup it controls is open (`aria-expanded`), `ghost` takes `bg-muted` with `text-foreground`, and so does `outline` in light mode (in dark mode its `dark:bg-input/30` fill stays, with `text-foreground`); `secondary` holds `bg-secondary` with `text-secondary-foreground`, without its hover fill"
+        "behavior": "While the popup it controls is open (`aria-expanded`), `ghost` takes `bg-muted` with `text-foreground`, and so does `outline`, in light and in dark mode (`dark:aria-expanded:bg-muted` replaces its `dark:bg-input/30` fill); `secondary` holds `bg-secondary` with `text-secondary-foreground`, without its hover fill"
       },
       {
         "state": "disabled",
@@ -4173,6 +4173,15 @@
     ],
     "tokens": [
       {
+        "token": "border-width.default",
+        "classes": [
+          "border"
+        ],
+        "where": [
+          "Calendar.dropdown_root"
+        ]
+      },
+      {
         "token": "color.action.background.default",
         "classes": [
           "bg-primary"
@@ -4227,7 +4236,17 @@
           "ring-ring/50"
         ],
         "where": [
+          "Calendar.dropdown_root",
           "CalendarDayButton"
+        ]
+      },
+      {
+        "token": "color.border.input",
+        "classes": [
+          "border-input"
+        ],
+        "where": [
+          "Calendar.dropdown_root"
         ]
       },
       {
@@ -4270,6 +4289,7 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
+          "Calendar.dropdown_root",
           "CalendarDayButton"
         ]
       },
@@ -4297,7 +4317,8 @@
       {
         "token": "space.scale.1",
         "classes": [
-          "gap-1"
+          "gap-1",
+          "pr-1"
         ],
         "where": [
           "Calendar.caption_label",
@@ -4308,9 +4329,11 @@
       {
         "token": "space.scale.1-5",
         "classes": [
-          "gap-1.5"
+          "gap-1.5",
+          "pl-1.5"
         ],
         "where": [
+          "Calendar.caption_label",
           "Calendar.dropdowns"
         ]
       },
@@ -4347,6 +4370,15 @@
           "Calendar.months",
           "Calendar.range_end",
           "Calendar.range_start"
+        ]
+      },
+      {
+        "token": "space.scale.6",
+        "classes": [
+          "h-6"
+        ],
+        "where": [
+          "Calendar.caption_label"
         ]
       },
       {
@@ -4533,11 +4565,11 @@
       },
       {
         "state": "hover",
-        "behavior": "An unselected day takes the hover of the `Button` `ghost` variant, a muted fill (listed in its spec), with `dark:hover:text-foreground` in dark mode; the previous and next buttons take the hover of `buttonVariant`"
+        "behavior": "An unselected day takes the hover of the `Button` `ghost` variant, a muted fill (listed in its spec), with `dark:hover:text-foreground` in dark mode; a selected day, a range's first and last day and the days between keep their fill and text color under the pointer in both modes (each selected state has a `dark:hover:` twin that outranks the ghost variant's dark hover fill); the previous and next buttons take the hover of `buttonVariant`"
       },
       {
         "state": "focus",
-        "behavior": "Visible focus ring on the focused day: `ring-ring/50`, `--space-focus-ring-width` wide (the day button is `border-0`, so `border-ring` draws nothing)"
+        "behavior": "Visible focus ring on the focused day: `ring-ring/50`, `--space-focus-ring-width` wide (the day button is `border-0`, so `border-ring` draws nothing); with `captionLayout=\"dropdown\"`, the root of the month and year dropdowns, which rests on a `border-input` border, takes `border-ring` and the same ring while its invisible `select` has focus (`has-focus`)"
       },
       {
         "state": "selected",
@@ -4545,7 +4577,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "A disabled day cannot be selected: its cell takes `text-muted-foreground` and `opacity-disabled`, and its `disabled` button adds the `Button` disabled state on top; a previous or next button with no month to reach (`aria-disabled`) also takes `opacity-disabled`"
+        "behavior": "A disabled day cannot be selected: its cell takes `text-muted-foreground` and `opacity-disabled` (0.5) once, whether the day has a button or not: the cell dims itself only when its button is not disabled, since a disabled button dims itself; a previous or next button with no month to reach (`aria-disabled`) also takes `opacity-disabled`"
       }
     ],
     "accessibility": "**Pattern**: A date [grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (react-day-picker)\n\n**Role**: A grid of dates; the selected day carries `aria-selected`; an unavailable day is a `disabled` button.\n\n**Keyboard**:\n\n| Key                               | Action                            |\n| --------------------------------- | --------------------------------- |\n| `ArrowLeft` / `ArrowRight`        | Previous / next day               |\n| `ArrowUp` / `ArrowDown`           | Same day the previous / next week |\n| `Home` / `End`                    | Start / end of the week           |\n| `PageUp` / `PageDown`             | Previous / next month             |\n| `Shift+PageUp` / `Shift+PageDown` | Previous / next year              |\n| `Enter` / `Space`                 | Selects the focused day           |\n\n**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop.\n\n**Pitfalls**:\n\n- A calendar alone is not enough to enter a date the user already knows: offer a text input as well.\n- Mark unavailable days by something other than color.",
@@ -14225,6 +14257,7 @@
           "opacity-disabled"
         ],
         "where": [
+          "MenubarCheckboxItem",
           "MenubarItem",
           "MenubarRadioItem"
         ]
@@ -14287,15 +14320,6 @@
           "MenubarLabel",
           "MenubarRadioItem",
           "MenubarSubTrigger"
-        ]
-      },
-      {
-        "token": "space.scale.28",
-        "classes": [
-          "pr-28"
-        ],
-        "where": [
-          "MenubarCheckboxItem"
         ]
       },
       {
@@ -14715,7 +14739,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none` and `opacity-disabled` on a disabled `MenubarItem` or `MenubarRadioItem`; a disabled `MenubarCheckboxItem` takes `pointer-events-none` only, and a disabled trigger or sub-trigger has no style of its own"
+        "behavior": "`pointer-events-none` and `opacity-disabled` on a disabled `MenubarItem`, `MenubarCheckboxItem` or `MenubarRadioItem`; a disabled trigger or sub-trigger has no style of its own"
       }
     ],
     "accessibility": "**Pattern**: [Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix Menubar)\n\n**Role**: `role=\"menubar\"`; each menu is a `menu` with its `menuitem`s.\n\n**Keyboard**:\n\n| Key                             | Action                                              |\n| ------------------------------- | --------------------------------------------------- |\n| `ArrowRight` / `ArrowLeft`      | Next / previous menu in the bar                     |\n| `Enter` / `Space` / `ArrowDown` | Opens the focused menu                              |\n| `ArrowDown` / `ArrowUp`         | Next / previous item in an open menu                |\n| `Escape`                        | Closes the menu                                     |\n| Typing                          | Moves to the item that starts with the typed letter |\n\n**Accessible name**: The text of each menu and item.\n\n**Pitfalls**:\n\n- An application menu bar is not site navigation: for links, use `NavigationMenu`.\n- The whole bar is a single tab stop: the arrow keys do the rest.",

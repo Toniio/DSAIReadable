@@ -38,6 +38,9 @@ function snapshot(): Snapshot {
   const rings = new Map<Element, string>()
   const elements = document.body.querySelectorAll("*")
   for (const element of elements) {
+    // A ring on an element that paints nothing (an invisible control laid over
+    // its own visible stand-in, like Calendar's dropdown) marks nothing.
+    if (!element.checkVisibility({ opacityProperty: true })) continue
     const ring = ringOf(element)
     if (ring) rings.set(element, ring)
   }
@@ -84,11 +87,30 @@ function describeElement(element: Element): string {
 }
 
 /**
- * Walks the tab order of what is rendered with real Tab key presses and
- * returns each tab stop that shows no focus indicator. `max` bounds the walk:
- * enough to cross the largest example and come back to `<body>`.
+ * Walks the tab order of what is rendered with real Tab key presses, in the
+ * light theme and then in the dark one (the `.dark` class on `<html>`), and
+ * returns each tab stop that shows no focus indicator, prefixed with its theme.
+ * `max` bounds each walk: enough to cross the largest example and come back to
+ * `<body>`.
  */
 export async function unmarkedTabStops(max = 40): Promise<string[]> {
+  const root = document.documentElement
+  const initiallyDark = root.classList.contains("dark")
+  const unmarked: string[] = []
+  try {
+    for (const theme of ["light", "dark"] as const) {
+      root.classList.toggle("dark", theme === "dark")
+      for (const stop of await walkTabStops(max)) {
+        unmarked.push(`${theme} ${stop}`)
+      }
+    }
+  } finally {
+    root.classList.toggle("dark", initiallyDark)
+  }
+  return unmarked
+}
+
+async function walkTabStops(max: number): Promise<string[]> {
   // The tests run in an iframe: past the last tab stop, focus leaves it for
   // the runner's page. An anchor out of the tab order, focused first, brings
   // it back and starts the sequence before what is rendered.

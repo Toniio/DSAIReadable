@@ -4,9 +4,12 @@ import { userEvent } from "vitest/browser"
 
 import {
   Menubar,
+  MenubarCheckboxItem,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
@@ -130,5 +133,53 @@ describe("Menubar", () => {
     await openFile()
     await userEvent.keyboard("p")
     expect(document.activeElement).toBe(menu("Print"))
+  })
+})
+
+describe("MenubarCheckboxItem", () => {
+  it("a disabled item is dimmed like a disabled item or radio item, and sized like a radio item", async () => {
+    render(
+      <Menubar>
+        <MenubarMenu>
+          <MenubarTrigger>View</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem>Reload</MenubarItem>
+            <MenubarItem disabled>Print</MenubarItem>
+            <MenubarCheckboxItem checked disabled>
+              Show grid
+            </MenubarCheckboxItem>
+            <MenubarCheckboxItem checked>Show ruler</MenubarCheckboxItem>
+            <MenubarRadioGroup value="fit">
+              <MenubarRadioItem value="fit">Fit to window</MenubarRadioItem>
+            </MenubarRadioGroup>
+          </MenubarContent>
+        </MenubarMenu>
+      </Menubar>
+    )
+    screen.getByRole("menuitem", { name: "View" }).focus()
+    await userEvent.keyboard("{ArrowDown}")
+    await expect.poll(() => screen.queryByRole("menu")).not.toBeNull()
+
+    const item = getComputedStyle(
+      screen.getByRole("menuitem", { name: "Print" })
+    )
+    const disabledCheckbox = screen.getByRole("menuitemcheckbox", {
+      name: "Show grid",
+    })
+    expect(disabledCheckbox.getAttribute("aria-disabled")).toBe("true")
+    expect(getComputedStyle(disabledCheckbox).opacity).toBe(item.opacity)
+    expect(item.opacity).not.toBe("1")
+
+    const checkbox = screen.getByRole("menuitemcheckbox", {
+      name: "Show ruler",
+    })
+    const radio = screen.getByRole("menuitemradio", { name: "Fit to window" })
+    expect(getComputedStyle(checkbox).paddingRight).toBe(
+      getComputedStyle(radio).paddingRight
+    )
+    const icon = (el: HTMLElement) =>
+      getComputedStyle(el.querySelector("svg") as SVGElement).width
+    expect(icon(checkbox)).toBe(icon(radio))
+    expect(icon(checkbox)).toBe("16px")
   })
 })

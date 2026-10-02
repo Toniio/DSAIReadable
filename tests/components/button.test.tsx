@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import userEvent, { PointerEventsCheckLevel } from "@testing-library/user-event"
-import { describe, expect, it, vi } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
+import { userEvent as browserUser } from "vitest/browser"
 
 import { Button } from "@/components/ui/button"
 import { PlusIcon } from "@phosphor-icons/react"
@@ -157,4 +158,64 @@ describe("Button", () => {
       expect.stringMatching(/^dark button-name: /),
     ])
   })
+})
+
+/** What a class paints, read off a reference element in the current theme. */
+function paint(
+  className: string,
+  property: "backgroundColor" | "borderTopColor"
+) {
+  const ref = document.createElement("span")
+  ref.className = className
+  document.body.append(ref)
+  const value = getComputedStyle(ref)[property]
+  ref.remove()
+  return value
+}
+
+describe("Button outline, dark states", () => {
+  afterEach(() => document.documentElement.classList.remove("dark"))
+
+  it.each(["light", "dark"] as const)(
+    "outline: the open state takes bg-muted in %s too",
+    (theme) => {
+      document.documentElement.classList.toggle("dark", theme === "dark")
+      render(
+        <>
+          <Button variant="outline">Rest</Button>
+          <Button variant="outline" aria-expanded="true">
+            Open
+          </Button>
+        </>
+      )
+      const rest = getComputedStyle(
+        screen.getByRole("button", { name: "Rest" })
+      )
+      const open = getComputedStyle(
+        screen.getByRole("button", { name: "Open" })
+      )
+      expect(open.backgroundColor).toBe(paint("bg-muted", "backgroundColor"))
+      expect(open.backgroundColor).not.toBe(rest.backgroundColor)
+    }
+  )
+
+  it.each(["light", "dark"] as const)(
+    "outline: keyboard focus draws border-ring in %s",
+    async (theme) => {
+      document.documentElement.classList.toggle("dark", theme === "dark")
+      render(
+        <>
+          <a href="#top">before</a>
+          <Button variant="outline">Save</Button>
+        </>
+      )
+      screen.getByRole("link", { name: "before" }).focus()
+      await browserUser.keyboard("{Tab}")
+      const button = screen.getByRole("button", { name: "Save" })
+      expect(document.activeElement).toBe(button)
+      expect(getComputedStyle(button).borderTopColor).toBe(
+        paint("border-ring", "borderTopColor")
+      )
+    }
+  )
 })
