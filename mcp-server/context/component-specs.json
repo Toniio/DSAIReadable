@@ -5821,7 +5821,7 @@
       "Accept terms of use or a privacy policy",
       "Turn a preference on or off (for example \"Remember me\")",
       "Select several entries in a list",
-      "Use the `indeterminate` state for a partially selected group",
+      "Use the `indeterminate` state for a partially selected group: the box is filled and shows a minus",
       "**Choice** (`rule-20`) — Pick the selection control from the number of options and the screen width. One value out of 2 to 5 options: `RadioGroup`, with every option visible. Out of 6 to 15: `Select` from `md` up; below `md`, `NativeSelect`, **unless** the options need rich rendering (icons, descriptions) → `Select`. More than 15 options, or search required: `Combobox`. Several values: `Checkbox` up to 5 options, `Combobox` in multiple mode beyond that. An on/off toggle that takes effect immediately: `Switch`."
     ],
     "constraints": [
@@ -5833,7 +5833,7 @@
     ],
     "dependencies": [
       "`Checkbox.Root` and `Checkbox.Indicator` from `radix-ui`",
-      "`CheckIcon` from `@phosphor-icons/react` (sized `size-3.5`)",
+      "`CheckIcon` and `MinusIcon` from `@phosphor-icons/react` (sized `size-3.5`): the root's `data-state` shows `MinusIcon` when the box is indeterminate and `CheckIcon` otherwise",
       "`Label` — required for accessibility",
       "`Field` — required as soon as the checkbox has a description or an error message (`rule-09`)"
     ],
@@ -5844,7 +5844,7 @@
       },
       {
         "slot": "`data-slot=\"checkbox-indicator\"`",
-        "role": "Radix `Checkbox.Indicator`, holds the `CheckIcon`"
+        "role": "Radix `Checkbox.Indicator`, holds the `CheckIcon` and the `MinusIcon`, of which the root's `data-state` shows one"
       }
     ],
     "tokens": [
@@ -5884,6 +5884,7 @@
           "ring-ring/50"
         ],
         "where": [
+          "Checkbox",
           "Checkbox via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -6050,7 +6051,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide. In a choice card (a `FieldLabel` that wraps a `Field`) the card draws the only ring: the box draws none and keeps its resting border. A box in a `FieldLabel` with no `Field` in it keeps its own ring"
       },
       {
         "state": "active",
@@ -6061,16 +6062,20 @@
         "behavior": "`border-primary bg-primary text-primary-foreground`, `CheckIcon` visible"
       },
       {
+        "state": "unchecked",
+        "behavior": "In a choice card, a focused unchecked box keeps `border-input`: the card draws the focus ring, not the box, and an invalid box keeps its `error` border. Elsewhere the resting look is `default`"
+      },
+      {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed` and `opacity-disabled`; a `Field` that holds a disabled control dims the box the same way (`group-has-disabled/field:opacity-disabled`)"
+        "behavior": "`cursor-not-allowed` and `opacity-disabled`; a `Field` that holds a disabled `Checkbox` dims the box the same way (`group-has-[[data-slot=checkbox]:disabled]/field:opacity-disabled`); a disabled input next to an enabled box does not dim it"
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive` (`border-destructive/50` in dark mode); on focus, a `ring-destructive/20` ring (`ring-destructive/40` in dark mode) and a solid `outline-destructive` outline `--border-width-default` wide; in light mode, a checked box keeps `border-primary`"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` (`border-destructive/50` in dark mode); on focus, a `ring-destructive/20` ring (`ring-destructive/40` in dark mode) and a solid `outline-destructive` outline `--border-width-default` wide; a checked or indeterminate box keeps `border-primary`, in light and dark mode"
       },
       {
         "state": "indeterminate",
-        "behavior": "`checked=\"indeterminate\"`: Radix sets `data-state=\"indeterminate\"` and no class styles it, so the box keeps its unchecked look and the indicator shows the `CheckIcon`"
+        "behavior": "`checked=\"indeterminate\"`: Radix sets `data-state=\"indeterminate\"`, which fills the box like a checked one (`border-primary bg-primary text-primary-foreground`) and swaps the icon in CSS: the `MinusIcon` shows in place of the `CheckIcon`, and a click on an uncontrolled box shows the check again. At focus it takes `border-ring` like a checked box, and keeps `border-primary` in a choice card"
       }
     ],
     "accessibility": "**Pattern**: [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) (Radix Checkbox)\n\n**Role**: `role=\"checkbox\"` on a `button`, with `aria-checked`: `true`, `false` or `mixed` (indeterminate).\n\n**Keyboard**:\n\n| Key     | Action                          |\n| ------- | ------------------------------- |\n| `Space` | Checks / unchecks the box       |\n| `Tab`   | Moves focus to the next element |\n\n**Accessible name**: Required: a `Label` tied through `htmlFor` / `id`, or an `aria-label`. Clicking the label toggles the box.\n\n**Pitfalls**:\n\n- `Enter` does not toggle the box (native behavior): do not add it.\n- `aria-invalid` styles the error; the message must be linked through `aria-describedby`.",
@@ -10683,7 +10688,7 @@
         "name": "FieldTitle",
         "summary": "Renders `<div>`.",
         "description": "Titles an option inside a `FieldLabel` or `FieldContent`; it is not a `label` and ties to no control.",
-        "example": "<FieldLabel htmlFor=\"plan-pro\">\n  <Field orientation=\"horizontal\">\n    <FieldContent>\n      <FieldTitle>Pro plan</FieldTitle>\n      <FieldDescription>Unlimited projects for your team.</FieldDescription>\n    </FieldContent>\n    <RadioGroupItem value=\"pro\" id=\"plan-pro\" />\n  </Field>\n</FieldLabel>"
+        "example": "<RadioGroup defaultValue=\"pro\" aria-label=\"Plan\">\n  <FieldLabel htmlFor=\"plan-pro\">\n    <Field orientation=\"horizontal\">\n      <FieldContent>\n        <FieldTitle>Pro plan</FieldTitle>\n        <FieldDescription>Unlimited projects for your team.</FieldDescription>\n      </FieldContent>\n      <RadioGroupItem value=\"pro\" id=\"plan-pro\" />\n    </Field>\n  </FieldLabel>\n  <FieldLabel htmlFor=\"plan-free\">\n    <Field orientation=\"horizontal\">\n      <FieldContent>\n        <FieldTitle>Free plan</FieldTitle>\n        <FieldDescription>Up to three projects.</FieldDescription>\n      </FieldContent>\n      <RadioGroupItem value=\"free\" id=\"plan-free\" />\n    </Field>\n  </FieldLabel>\n</RadioGroup>"
       }
     ],
     "props": [
@@ -10888,7 +10893,7 @@
       },
       {
         "state": "focus",
-        "behavior": "The control draws its own ring; a `FieldLabel` card wrapping a `Field` draws `border-ring` and a `ring-ring/50` ring `--space-focus-ring-width` wide while its control has keyboard focus"
+        "behavior": "A `FieldLabel` card wrapping a `Field` draws `border-ring` and a `ring-ring/50` ring `--space-focus-ring-width` wide while its control has keyboard focus, and is the only ring of a choice card: `Checkbox`, `RadioGroupItem` and `Switch` draw none of their own there. A control outside a card (a `FieldLabel` with no `Field` in it, or no label) draws its own ring"
       },
       {
         "state": "checked",
@@ -18249,11 +18254,15 @@
       },
       {
         "state": "focus",
-        "behavior": "`border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`; inside a `FieldLabel` the item keeps that ring and border, because `ring-0` and `border-input` lose to the focus classes, a checked item keeps `border-primary`, and a choice-card label draws a second ring around the card"
+        "behavior": "`border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`. In a choice card (a `FieldLabel` that wraps a `Field`) the card draws the only ring: the item draws none and keeps its resting border (`border-input` unchecked, `border-primary` checked). An item in a `FieldLabel` with no `Field` in it keeps its own ring"
       },
       {
         "state": "checked",
         "behavior": "Selected: `primary` background, `primary` border, `primary-foreground` center dot; the border stays `border-primary` when invalid"
+      },
+      {
+        "state": "unchecked",
+        "behavior": "In a choice card, a focused unchecked item keeps `border-input`: the card draws the focus ring, not the item, and an invalid item keeps its `error` border. Elsewhere the resting look is `default`"
       },
       {
         "state": "disabled",
@@ -21942,7 +21951,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`; inside a focused `FieldLabel` the switch drops its own ring (`ring-0`, `border-transparent`) and the choice card draws it"
+        "behavior": "`border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`. In a choice card (a `FieldLabel` that wraps a `Field`) the card draws the only ring: the switch draws none and keeps its transparent border (`ring-0`, `border-transparent`; an invalid switch keeps its destructive border). A switch in a `FieldLabel` with no `Field` in it keeps its own ring"
       },
       {
         "state": "active",

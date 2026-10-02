@@ -188,15 +188,26 @@ function FieldLabel({
  * Titles an option inside a `FieldLabel` or `FieldContent`; it is not a `label` and ties to no control.
  *
  * @example
- * <FieldLabel htmlFor="plan-pro">
- *   <Field orientation="horizontal">
- *     <FieldContent>
- *       <FieldTitle>Pro plan</FieldTitle>
- *       <FieldDescription>Unlimited projects for your team.</FieldDescription>
- *     </FieldContent>
- *     <RadioGroupItem value="pro" id="plan-pro" />
- *   </Field>
- * </FieldLabel>
+ * <RadioGroup defaultValue="pro" aria-label="Plan">
+ *   <FieldLabel htmlFor="plan-pro">
+ *     <Field orientation="horizontal">
+ *       <FieldContent>
+ *         <FieldTitle>Pro plan</FieldTitle>
+ *         <FieldDescription>Unlimited projects for your team.</FieldDescription>
+ *       </FieldContent>
+ *       <RadioGroupItem value="pro" id="plan-pro" />
+ *     </Field>
+ *   </FieldLabel>
+ *   <FieldLabel htmlFor="plan-free">
+ *     <Field orientation="horizontal">
+ *       <FieldContent>
+ *         <FieldTitle>Free plan</FieldTitle>
+ *         <FieldDescription>Up to three projects.</FieldDescription>
+ *       </FieldContent>
+ *       <RadioGroupItem value="free" id="plan-free" />
+ *     </Field>
+ *   </FieldLabel>
+ * </RadioGroup>
  */
 function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (

@@ -20,6 +20,12 @@
  * about 1.9:1 it is never an indicator on its own, and `tests/focus.ts` fails
  * any tab stop whose indicator has no solid part.
  *
+ * The resting border of a field, checkbox or radio (`border-input`) is the
+ * boundary of the control, which WCAG 1.4.11 asks 3:1 for. It sits at about
+ * 1.25:1 in light and 1.5:1 in dark, so it is reported for information, not
+ * blocking: raising it is a change of token value, a decision of the
+ * maintainer (the 0.2.0 backlog), not of a patch.
+ *
  * Two levels, in a strict hierarchy:
  *   1. WCAG 2.2 AA ratios — blocking. The design system's conformance target,
  *      and the only contrast measure regulations cite today.
@@ -120,6 +126,8 @@ type Pair = {
   fgAlpha?: number
   /** Measured and printed, never blocking: a part that is not the indicator. */
   informative?: boolean
+  /** Which printed list an informative pair belongs to; the halo by default. */
+  section?: "halo" | "border"
 }
 
 /** The surfaces a component may be placed on: page, card, popover. */
@@ -211,6 +219,15 @@ const PAIRS: Pair[] = [
     tint: { color: "color.border.input", alpha: 0.3 },
     threshold: 3 as const,
     modes: ["dark" as Mode],
+  })),
+  // The resting border of a form control against what it sits on.
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `resting border of a field, checkbox or radio (border-input) on the ${surface}`,
+    fg: "color.border.input",
+    bg,
+    threshold: 3 as const,
+    informative: true,
+    section: "border" as const,
   })),
   {
     label: "sidebar focus ring on sidebar surface",
@@ -424,13 +441,14 @@ let failures = 0
 let checked = 0
 const advisories: string[] = []
 const informative: string[] = []
+const restingBorders: string[] = []
 
 for (const pair of PAIRS) {
   for (const mode of pair.modes ?? MODES) {
     if (pair.informative) {
       const bg = resolveColor(pair.bg, mode)
-      const fg = blend(resolveColor(pair.fg, mode), pair.fgAlpha ?? 1, bg)
-      informative.push(
+      const fg = tint(resolveColor(pair.fg, mode), pair.fgAlpha ?? 1, bg)
+      ;(pair.section === "border" ? restingBorders : informative).push(
         `ℹ️  ${mode.padEnd(5)} ${ratio(fg, bg).toFixed(2).padStart(5)}      ${pair.label}`
       )
       continue
@@ -471,6 +489,13 @@ console.log(
     "   It never marks focus alone: tests/focus.ts requires the solid part."
 )
 for (const line of informative) console.log(line)
+
+console.log(
+  "\n── The resting border of a control (information, non-blocking) ──\n" +
+    "   `border-input` against the surface under it: the boundary WCAG 1.4.11\n" +
+    "   asks 3:1 for. Below it, and a token value to decide, not to patch."
+)
+for (const line of restingBorders) console.log(line)
 
 console.log(
   "\n── Level 2 — APCA advisory (WCAG 3 preparation, non-blocking) ──\n" +

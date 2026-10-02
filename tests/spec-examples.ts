@@ -3,10 +3,18 @@ import path from "node:path"
 
 import type { Plugin } from "vite"
 
+import { exportDocs } from "../mcp-server/src/lib/jsdoc"
+
 const SPECS_DIR = "specs/components"
 const FOUNDATIONS_DIR = "specs/foundations"
 const VIRTUAL_ID = "virtual:spec-examples"
 const EXAMPLE_SUFFIX = ".example.tsx"
+const COMPONENTS_DIR = "components/ui"
+const JSDOC_VIRTUAL_ID = "virtual:jsdoc-examples"
+/** `components/ui/<file>.jsdoc.example.tsx`: the `@example` of each export of the file. */
+const JSDOC_SUFFIX = ".jsdoc.example.tsx"
+/** What the `@example` of a chart uses besides the design system. */
+const RECHARTS = ["Bar", "BarChart"]
 /** `specs/foundations/<name>.L<line>.example.tsx`: the block whose fence opens at `<line>`. */
 const FOUNDATION_EXAMPLE =
   /\/specs\/foundations\/([^/]+?)\.L(\d+)\.example\.tsx$/
@@ -83,6 +91,75 @@ export function isCompleteModule(code: string): boolean {
   return /^import /m.test(code) && /^export default /m.test(code)
 }
 
+interface JsdocExamples {
+  /** The runtime exports of each component file whose `@example` is JSX. */
+  exported: Map<string, string[]>
+  /** Where each runtime export lives: `field` for `FieldLabel`. */
+  home: Map<string, string>
+  /** The `@example` of those exports, by file then name. */
+  examples: Map<string, Map<string, string>>
+}
+
+/** Every `@example` of `components/ui/*.tsx` written as JSX, read from its JSDoc. */
+function readJsdocExamples(root: string): JsdocExamples {
+  const dir = path.join(root, COMPONENTS_DIR)
+  const exported = new Map<string, string[]>()
+  const home = new Map<string, string>()
+  const examples = new Map<string, Map<string, string>>()
+  for (const file of readdirSync(dir).filter((f) => f.endsWith(".tsx"))) {
+    const name = file.slice(0, -".tsx".length)
+    const docs = exportDocs(
+      readFileSync(path.join(dir, file), "utf8"),
+      `@/${COMPONENTS_DIR}/${name}`
+    )
+    const jsx = new Map<string, string>()
+    for (const doc of docs) {
+      home.set(doc.name, name)
+      if (doc.example.trimStart().startsWith("<"))
+        jsx.set(doc.name, doc.example)
+    }
+    exported.set(name, [...jsx.keys()])
+    examples.set(name, jsx)
+  }
+  return { exported, home, examples }
+}
+
+/** The module of one component file's `@example`s: a component per export. */
+function jsdocModule(file: string, found: JsdocExamples): string {
+  const jsx = found.examples.get(file)
+  if (!jsx) throw new Error(`${COMPONENTS_DIR}/${file}.tsx: no such file`)
+  const used = new Set(
+    [...jsx.values()].flatMap((code) => code.match(/\b[A-Za-z_]\w*\b/g) ?? [])
+  )
+  const byFile = new Map<string, string[]>()
+  const icons: string[] = []
+  const charts: string[] = []
+  for (const identifier of used) {
+    const home = found.home.get(identifier)
+    if (home) byFile.set(home, [...(byFile.get(home) ?? []), identifier])
+    else if (/^[A-Z]\w*Icon$/.test(identifier)) icons.push(identifier)
+    else if (RECHARTS.includes(identifier)) charts.push(identifier)
+  }
+  const imports = [
+    ...[...byFile].map(
+      ([home, names]) =>
+        `import { ${names.join(", ")} } from "@/${COMPONENTS_DIR}/${home}"`
+    ),
+    ...(icons.length
+      ? [`import { ${icons.join(", ")} } from "@phosphor-icons/react"`]
+      : []),
+    ...(charts.length
+      ? [`import { ${charts.join(", ")} } from "recharts"`]
+      : []),
+  ]
+  // A free variable (`{countries}`, `{retry}`) is a ReferenceError when the
+  // example renders: the test skips it by name instead of inventing its data.
+  const components = [...jsx].map(
+    ([name, code]) => `  ${JSON.stringify(name)}: () => (\n<>\n${code}\n</>\n),`
+  )
+  return `${imports.join("\n")}\nexport const examples = {\n${components.join("\n")}\n}\n`
+}
+
 /**
  * Serves each spec's code example as a module. `virtual:spec-examples`
  * exports `examples`, one loader per spec, keyed by component name; each
@@ -101,10 +178,30 @@ export function specExamples(): Plugin {
     },
     resolveId(id) {
       if (id === VIRTUAL_ID) return `\0${VIRTUAL_ID}`
+      if (id === JSDOC_VIRTUAL_ID) return `\0${JSDOC_VIRTUAL_ID}`
       const file = id.startsWith(root) ? id : path.join(root, id)
       if (file.endsWith(EXAMPLE_SUFFIX)) return file
     },
     load(id) {
+      if (id === `\0${JSDOC_VIRTUAL_ID}`) {
+        const found = readJsdocExamples(root)
+        const loaders = [...found.exported]
+          .filter(([, names]) => names.length > 0)
+          .map(
+            ([file, names]) =>
+              `  ${JSON.stringify(file)}: { names: ${JSON.stringify(names)}, load: () => import(${JSON.stringify(
+                `/${COMPONENTS_DIR}/${file}${JSDOC_SUFFIX}`
+              )}) },`
+          )
+        for (const file of found.exported.keys())
+          this.addWatchFile(path.join(root, COMPONENTS_DIR, `${file}.tsx`))
+        return `export const jsdocExamples = {\n${loaders.join("\n")}\n}\n`
+      }
+      if (id.endsWith(JSDOC_SUFFIX)) {
+        const file = path.basename(id).slice(0, -JSDOC_SUFFIX.length)
+        this.addWatchFile(path.join(root, COMPONENTS_DIR, `${file}.tsx`))
+        return jsdocModule(file, readJsdocExamples(root))
+      }
       if (id === `\0${VIRTUAL_ID}`) {
         const names = readdirSync(path.join(root, SPECS_DIR))
           .filter((file) => file.endsWith(".md"))

@@ -79,6 +79,12 @@ const states: Record<string, ReactNode> = {
   "Checkbox, checked and invalid": (
     <Checkbox aria-label="Accept" aria-invalid defaultChecked />
   ),
+  "Checkbox, indeterminate": (
+    <Checkbox aria-label="Select all" checked="indeterminate" />
+  ),
+  "Checkbox, indeterminate and invalid": (
+    <Checkbox aria-label="Select all" checked="indeterminate" aria-invalid />
+  ),
   "RadioGroupItem, invalid": (
     <RadioGroup aria-label="Plan">
       <RadioGroupItem value="pro" aria-label="Pro" aria-invalid />
