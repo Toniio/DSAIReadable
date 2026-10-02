@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it } from "vitest"
 import { userEvent } from "vitest/browser"
 
 import { Label } from "@/components/ui/label"
@@ -99,4 +99,27 @@ describe("RadioGroup", () => {
     await userEvent.keyboard(" ")
     expect(checked()).toEqual(["standard"])
   })
+})
+
+describe("RadioGroupItem, checked and invalid", () => {
+  afterEach(() => document.documentElement.classList.remove("dark"))
+
+  it.each(["light", "dark"] as const)(
+    "keeps the border of a checked item in %s",
+    (theme) => {
+      document.documentElement.classList.toggle("dark", theme === "dark")
+      render(
+        <>
+          <RadioGroup defaultValue="plain" aria-label="Plain plan">
+            <RadioGroupItem value="plain" aria-label="Plain" />
+          </RadioGroup>
+          <RadioGroup defaultValue="invalid" aria-label="Invalid plan">
+            <RadioGroupItem value="invalid" aria-label="Invalid" aria-invalid />
+          </RadioGroup>
+        </>
+      )
+      const plain = getComputedStyle(radio("Plain")).borderTopColor
+      expect(getComputedStyle(radio("Invalid")).borderTopColor).toBe(plain)
+    }
+  )
 })

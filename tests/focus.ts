@@ -163,6 +163,15 @@ const same = (a: Part, b: Part) =>
 const isRing = (part: Part) => part.kind.endsWith("ring")
 
 /**
+ * The width, in px, of the widest ring (a `box-shadow` layer with no offset
+ * and no blur) the element paints on its own; 0 when it paints none.
+ */
+export function ringOf(element: Element): number {
+  const rings = paintOf(element)?.parts.filter(isRing) ?? []
+  return Math.max(0, ...rings.map((ring) => ring.width))
+}
+
+/**
  * The contrast of the indicator that moving focus to `focused` showed,
  * comparing the document before and after the move: the best part that
  * appeared or changed — on the focused element, on the group that wraps it

@@ -117,6 +117,22 @@
       "**:data-[slot=navigation-menu-link]:focus:outline-none": {
         "to": "",
         "reason": "The outline-none reset on every NavigationMenu link under focus is removed, so a focused link keeps its own focus ring. A reset under **: hides the indicator of other nodes."
+      },
+      "group-has-[:focus-visible]/field-label:ring-0": {
+        "to": "group-has-[>[data-slot=field]]/field-label:focus-visible:ring-0",
+        "reason": "Never took effect: it compiles to a selector of specificity (0,2,0), the same as FOCUS_RING's ring, and loses on Tailwind's emission order, so a control in a choice card drew its own 2px ring inside the card's ring. It is scoped to a card, a FieldLabel that wraps a Field, the condition under which FieldLabel draws its ring (has-[>[data-slot=field]]), and written with focus-visible so it outranks FOCUS_RING (0,3,0). A control in a FieldLabel with no Field in it is not in a card and keeps its ring (WCAG 2.4.7)."
+      },
+      "group-has-[:focus-visible]/field-label:not-data-checked:border-input": {
+        "to": "group-has-[>[data-slot=field]]/field-label:focus-visible:not-aria-invalid:data-unchecked:border-input",
+        "reason": "Never took effect, for the same reason as the ring: in a choice card an unchecked control's border turned border-ring at focus, next to the card's own. It keeps border-input in a card (data-unchecked, not not-data-checked, so an indeterminate box keeps its fill; not-aria-invalid, so an invalid control keeps its destructive border)."
+      },
+      "group-has-[:focus-visible]/field-label:border-transparent": {
+        "to": "group-has-[>[data-slot=field]]/field-label:focus-visible:not-aria-invalid:border-transparent",
+        "reason": "Never took effect, for the same reason as the ring: in a choice card the switch's border turned border-ring at focus, next to the card's own. It stays transparent in a card; an invalid switch keeps its destructive border (not-aria-invalid)."
+      },
+      "group-has-[:focus-visible]/field-label:data-checked:border-primary": {
+        "to": "group-has-[>[data-slot=field]]/field-label:focus-visible:data-checked:border-primary",
+        "reason": "It applied to any FieldLabel, so a focused checked control in a plain label kept border-primary where it turns border-ring everywhere else (FOCUS_RING). It is scoped to a choice card, where the card draws the focus ring and the checked control keeps its border."
       }
     },
     "utilities": {
@@ -612,6 +628,14 @@
             "reason": "Upstream's 1px focus outline on the viewport drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
           }
         }
+      },
+      "checkbox": {
+        "classes": {
+          "group-has-disabled/field:opacity-50": {
+            "to": "group-has-[[data-slot=checkbox]:disabled]/field:opacity-disabled",
+            "reason": "group-has-disabled matches any disabled control of the Field, so an enabled Checkbox next to a disabled input (\"Other: [text]\") was dimmed to 0.5. The checkbox mirrors a disabled checkbox of its Field only, [data-slot=checkbox]; its own disabled state is drawn by disabled:opacity-disabled. opacity-50 is opacity-disabled, as everywhere."
+          }
+        }
       }
     },
     "constants": [
@@ -774,11 +798,24 @@
     },
     "checkbox": {
       "status": "reanchored",
-      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators). A checked and invalid box keeps border-primary in dark mode too (upstream's light-only aria-invalid:aria-checked:border-primary lost to dark:aria-invalid:border-destructive/50 on emission order, so dark drew destructive/50 on the primary fill). The indeterminate state is drawn: upstream styles only data-checked, so checked=\"indeterminate\" drew an empty box with a check mark while assistive technology announced \"mixed\". It is filled like a checked box (primary fill, border and icon color) and shows MinusIcon instead of CheckIcon, swapped in CSS on the root's data-state so an uncontrolled box shows the check again once clicked; it takes border-ring at focus like a checked box, except in a choice card, where it keeps border-primary under the card's ring.",
       "added": [
         "aria-invalid:focus-visible:outline-solid",
         "aria-invalid:focus-visible:outline-(length:--border-width-default)",
-        "aria-invalid:focus-visible:outline-destructive"
+        "aria-invalid:focus-visible:outline-destructive",
+        "dark:aria-invalid:aria-checked:border-primary",
+        "group/checkbox",
+        "data-[state=indeterminate]:border-primary",
+        "data-[state=indeterminate]:bg-primary",
+        "data-[state=indeterminate]:text-primary-foreground",
+        "dark:data-[state=indeterminate]:bg-primary",
+        "aria-invalid:data-[state=indeterminate]:border-primary",
+        "dark:aria-invalid:data-[state=indeterminate]:border-primary",
+        "focus-visible:data-[state=indeterminate]:border-ring",
+        "group-has-[>[data-slot=field]]/field-label:focus-visible:data-[state=indeterminate]:border-primary",
+        "group-data-[state=indeterminate]/checkbox:hidden",
+        "hidden",
+        "group-data-[state=indeterminate]/checkbox:block"
       ]
     },
     "collapsible": {
@@ -931,11 +968,12 @@
     },
     "radio-group": {
       "status": "reanchored",
-      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators). A checked and invalid item keeps border-primary in dark mode too (upstream's light-only aria-invalid:aria-checked:border-primary lost to dark:aria-invalid:border-destructive/50 on emission order).",
       "added": [
         "aria-invalid:focus-visible:outline-solid",
         "aria-invalid:focus-visible:outline-(length:--border-width-default)",
-        "aria-invalid:focus-visible:outline-destructive"
+        "aria-invalid:focus-visible:outline-destructive",
+        "dark:aria-invalid:aria-checked:border-primary"
       ]
     },
     "resizable": {

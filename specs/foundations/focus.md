@@ -100,9 +100,14 @@ const buttonVariants = cva(
    several controls (InputOTP, the Combobox chips) may keep a ring on
    `has-aria-invalid:`: focus shows on the control inside it.
 4. **A bare `ring-0` is a legitimate removal** — it is how a wrapper such as
-   InputGroup takes over the indicator of its inner control. Under a focus
-   state (`focus-visible:ring-0`) it removes the indicator, and counts as a
-   reset under rule 5.
+   InputGroup takes over the indicator of its inner control, and how a choice
+   card (a `FieldLabel` that wraps a `Field`) takes over the ring of the
+   Checkbox, RadioGroupItem or Switch inside it: one ring, the card's, and the
+   control keeps its resting border. Under a focus state
+   (`focus-visible:ring-0`) it removes the indicator, and counts as a reset
+   under rule 5. Scope it to the wrapper that draws the ring
+   (`group-has-[>[data-slot=field]]/field-label:`): a control in a plain
+   `FieldLabel` keeps its own.
 5. **Hiding the outline requires drawing a ring — checked occurrence by
    occurrence, and target by target.** The ring must appear in the _same_ class
    string, on the _same_ target: a reset written under `**:`, `*:`,
