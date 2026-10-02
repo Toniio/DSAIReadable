@@ -66,17 +66,17 @@ Most of what an agent reads is generated: change the source, run its command,
 and commit both. CI fails on a generated file that is out of step with its
 source.
 
-| To change                                      | Edit                                                                             | Then run                                                               |
-| ---------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| A token value or decision                      | `tokens/*.json`                                                                  | `npm run tokens:build && npm run docs:tokens`                          |
-| A component                                    | `components/ui/<component>.tsx`, after reading its spec                          | `npm run specs:variants && npm run specs:tokens && npm run specs:api`  |
-| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections                    | `npm run docs:llms` when the Role changed                              |
-| A foundation's guidance or example             | `specs/foundations/<name>.md`                                                    | `npm run specs:validate`: its tsx and ts blocks pass the ESLint plugin |
-| A choice between sibling components            | `composition_rules` in `design-system.index.json`                                | `npm run specs:choices`                                                |
-| Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                             |
-| A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                               |
-| A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                 |
-| A rule agents follow when they build UI        | the spec or pattern it cites, then the skill in `skills/` that points at it      | `npm run skills:validate`                                              |
+| To change                                      | Edit                                                                             | Then run                                                                                      |
+| ---------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| A token value or decision                      | `tokens/*.json`                                                                  | `npm run tokens:build && npm run docs:tokens`                                                 |
+| A component                                    | `components/ui/<component>.tsx`, after reading its spec                          | `npm run specs:variants && npm run specs:tokens && npm run specs:api && npm run specs:states` |
+| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections                    | `npm run docs:llms` when the Role changed                                                     |
+| A foundation's guidance or example             | `specs/foundations/<name>.md`                                                    | `npm run specs:validate`: its tsx and ts blocks pass the ESLint plugin                        |
+| A choice between sibling components            | `composition_rules` in `design-system.index.json`                                | `npm run specs:choices`                                                                       |
+| Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                                                    |
+| A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                                                      |
+| A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                                        |
+| A rule agents follow when they build UI        | the spec or pattern it cites, then the skill in `skills/` that points at it      | `npm run skills:validate`                                                                     |
 
 **A new or changed component arrives with its test.** `tests/examples.test.tsx`
 renders every spec's `## Code example`, and every foundation example written as
@@ -300,10 +300,10 @@ The `Evals` workflow runs apart, only when started by hand (each run costs API c
 
 `registry.json` and `mcp-server/context/ds-metadata.json` copy dependency
 versions, a Prettier update can reformat code, and a Tailwind update can change
-the generated Tokens sections of the specs. Dependabot runs none of the
+the generated Tokens and States sections of the specs. Dependabot runs none of the
 generators, so the `dependabot-regenerate` workflow does it on each Dependabot
-PR: a read-only job runs `registry:build`, `generate-context`, `specs:tokens`
-and `format`, and
+PR: a read-only job runs `registry:build`, `generate-context`, `specs:tokens`,
+`specs:states` and `format`, and
 a second job, which runs none of the PR's code, pushes the result as one
 `chore(deps)` commit. CI then runs again on that commit.
 
@@ -325,7 +325,7 @@ needs code changes (a major version with breaking changes) is still fixed by
 hand.
 
 `tailwindcss` and `@tailwindcss/*` form their own group and always move
-together: `specs:tokens` calls a private API of `@tailwindcss/node`. Majors
+together: `specs:tokens` and `specs:states` call a private API of `@tailwindcss/node`. Majors
 that cannot be taken yet are ignored in `.github/dependabot.yml`, each with the
 date and the reason — TypeScript 7 (no JavaScript compiler API) and
 `@types/node` beyond the Node runtime.

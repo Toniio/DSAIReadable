@@ -47,8 +47,10 @@ jobs:
       - run: npm ci
       - run: npm run registry:build
       - run: npm run generate-context
-      # A Tailwind bump can change how a class resolves to a token.
+      # A Tailwind bump can change how a class resolves to a token, or which
+      # strings are classes.
       - run: npm run specs:tokens
+      - run: npm run specs:states
       - run: npm run format
       # Staged first so that a newly generated, untracked file is in the patch.
       - name: Build the patch

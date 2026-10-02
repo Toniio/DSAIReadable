@@ -747,6 +747,27 @@ assert(
   "A component with no token of its own points to the specs it composes"
 )
 
+// States is generated (scripts/build-spec-states.ts) with columns
+// State | Classes | Description. Read by position, `behavior` would be the
+// class list: it is the description, and the state is a bare name.
+const stateSpecs = specs as unknown as Record<
+  string,
+  { states: { state: string; behavior: string }[] }
+>
+// The Classes cell joins its classes with " · "; no description does.
+assert(
+  Object.values(stateSpecs).every((s) =>
+    s.states.every((r) => !r.behavior.includes(" · "))
+  ) && stateSpecs.Button?.states.some((s) => s.state === "hover") === true,
+  "State rows read by header: the description is served, not the classes"
+)
+assert(
+  Object.values(stateSpecs).every((s) =>
+    s.states.every((r) => !r.state.includes("`") && r.behavior.length > 0)
+  ),
+  "Every served state is a bare name with a description"
+)
+
 // Props / API is generated (scripts/build-spec-api.ts): one `### \`Export\``
 // block per runtime export, opening with what it renders or returns.
 const apiSpecs = specs as unknown as Record<

@@ -277,15 +277,19 @@
       },
       {
         "state": "hover",
-        "behavior": "Trigger text underlined"
+        "behavior": "Trigger text underlined (`hover:underline`); a link in the panel turns `text-foreground`"
       },
       {
         "state": "focus",
         "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the trigger"
       },
       {
-        "state": "active",
-        "behavior": "Panel open, caret pointing up, content sliding down"
+        "state": "open",
+        "behavior": "Panel open, content sliding down with `data-open:animate-accordion-down`; the caret points up (`CaretUpIcon` shown, `CaretDownIcon` hidden)"
+      },
+      {
+        "state": "closing",
+        "behavior": "Panel sliding up with `data-closed:animate-accordion-up`; the caret points down again"
       },
       {
         "state": "disabled",
@@ -624,44 +628,44 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "`bg-card` background, `text-card-foreground` text, subtle border"
       },
       {
-        "state": "`destructive`",
-        "behavior": "`text-destructive` text, description at `text-destructive/90`; the icon inherits the current color"
+        "state": "hover",
+        "behavior": "The alert itself does not react; a link in the title or description turns `text-foreground`"
       },
       {
-        "state": "`success`",
-        "behavior": "`text-success` text, description at `text-success/90`; the icon inherits the current color"
-      },
-      {
-        "state": "`warning`",
-        "behavior": "`text-warning` text, description at `text-warning/90`; the icon inherits the current color"
-      },
-      {
-        "state": "`hover`",
-        "behavior": "Not applicable (the component is not interactive)"
-      },
-      {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Not applicable (unless `AlertAction` holds a `Button`)"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "Not applicable"
       },
       {
-        "state": "`loading`",
-        "behavior": "Not applicable"
-      },
-      {
-        "state": "`error`",
+        "state": "error",
         "behavior": "Use `variant=\"destructive\"`"
+      },
+      {
+        "state": "destructive",
+        "behavior": "`text-destructive` text, description at `text-destructive/90`; the icon inherits the current color"
+      },
+      {
+        "state": "success",
+        "behavior": "`text-success` text, description at `text-success/90`; the icon inherits the current color"
+      },
+      {
+        "state": "warning",
+        "behavior": "`text-warning` text, description at `text-warning/90`; the icon inherits the current color"
+      },
+      {
+        "state": "loading",
+        "behavior": "Not applicable"
       }
     ],
     "accessibility": "**Pattern**: `alert` role (assertive live region)\n\n**Role**: `role=\"alert\"` on the root: screen readers announce the content as soon as it is inserted.\n\n**Keyboard**:\n\nNo keyboard interaction of its own; only the interactive elements placed inside receive focus.\n\n**Accessible name**: The title (`AlertTitle`) and the description (`AlertDescription`) make up the announced message.\n\n**Pitfalls**:\n\n- `role=\"alert\"` interrupts whatever is being read: keep `Alert` for important messages that appear in response to the user, not for a static notice present on page load.\n- The `destructive`, `success` and `warning` variants do not carry the meaning on their own: the text must say what happened (icon plus words, never color alone). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — color an alert with a raw green or amber, or with `color.feedback.success.default` / `color.feedback.warning.default`: `text-success` and `text-warning` read the text tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the card in both modes.",
@@ -1175,16 +1179,20 @@
         "behavior": "Dialog closed, no overlay"
       },
       {
-        "state": "open",
-        "behavior": "Overlay shown, content centered, animated with `fade-in` and `zoom-in-95`"
-      },
-      {
-        "state": "closing",
-        "behavior": "Exit animation: `fade-out` and `zoom-out-95`"
+        "state": "hover",
+        "behavior": "The dialog itself does not react; a link in the description turns `text-foreground`"
       },
       {
         "state": "focus",
         "behavior": "Focus trapped inside the dialog (Radix focus trap)"
+      },
+      {
+        "state": "open",
+        "behavior": "Overlay shown, content centered, entering with `fade-in-0` and `zoom-in-95` over `duration-fast`"
+      },
+      {
+        "state": "closing",
+        "behavior": "Exit animation: `fade-out-0` and `zoom-out-95`"
       },
       {
         "state": "disabled",
@@ -1825,24 +1833,8 @@
     ],
     "states": [
       {
-        "state": "done",
-        "behavior": "Default: solid border, image preview in color"
-      },
-      {
-        "state": "idle",
-        "behavior": "Dashed border: an empty slot waiting for a file"
-      },
-      {
-        "state": "uploading",
-        "behavior": "The title shimmers; an image preview stays in grayscale"
-      },
-      {
-        "state": "processing",
-        "behavior": "Same as `uploading`, while the server reads the file"
-      },
-      {
-        "state": "error",
-        "behavior": "Border, media and description take the error color (`destructive`)"
+        "state": "default",
+        "behavior": "A `bg-card` tile with a solid border and `text-card-foreground` text; `state` defaults to `done`"
       },
       {
         "state": "hover",
@@ -1859,6 +1851,26 @@
       {
         "state": "disabled",
         "behavior": "Not applicable; a disabled `AttachmentAction` follows `Button`"
+      },
+      {
+        "state": "error",
+        "behavior": "Border, media and description take the error color (`destructive`)"
+      },
+      {
+        "state": "idle",
+        "behavior": "Dashed border: an empty slot waiting for a file"
+      },
+      {
+        "state": "done",
+        "behavior": "Default: solid border, image preview in color"
+      },
+      {
+        "state": "processing",
+        "behavior": "Same as `uploading`, while the server reads the file"
+      },
+      {
+        "state": "uploading",
+        "behavior": "The title shimmers; an image preview stays in grayscale"
       }
     ],
     "accessibility": "**Pattern**: A button (the trigger) and its secondary buttons (the actions), in a group\n\n**Role**: `Attachment` is a `div` with no role. `AttachmentTrigger` is a native `button`, or a link through `asChild`. Each `AttachmentAction` is a `Button`.\n\n**Keyboard**:\n\n| Key                        | Action                                              |\n| -------------------------- | --------------------------------------------------- |\n| `Tab`                      | Moves to each action, then to the trigger           |\n| `Enter`/`Space`            | Opens the file (trigger) or runs the action         |\n| `ArrowLeft` / `ArrowRight` | Scrolls an `AttachmentGroup` horizontally, natively |\n\n**Accessible name**: The trigger is stretched over the tile and holds no text: name it with `aria-label` (the file name, \"Open report.pdf\"). Each action is named by its `aria-label`.\n\n**Pitfalls**:\n\n- The upload state is shown by a shimmer and a color only: announce it in `AttachmentDescription` (\"Uploading, 40%\") or through a `role=\"status\"` region.\n- An image preview needs `alt` text; a type icon is decorative.\n- The trigger covers the tile: an action outside `AttachmentActions` sits under it and cannot be clicked.",
@@ -2278,14 +2290,6 @@
         "behavior": "Avatar shown with its image or fallback, at `size-8`"
       },
       {
-        "state": "image-loaded",
-        "behavior": "The image has loaded; the fallback is hidden"
-      },
-      {
-        "state": "image-error",
-        "behavior": "The image failed; the fallback (initials) is shown"
-      },
-      {
         "state": "hover",
         "behavior": "Not applicable directly (left to interactive parents)"
       },
@@ -2300,6 +2304,14 @@
       {
         "state": "disabled",
         "behavior": "Not applicable"
+      },
+      {
+        "state": "image-loaded",
+        "behavior": "The image has loaded; the fallback is hidden"
+      },
+      {
+        "state": "image-error",
+        "behavior": "The image failed; the fallback (initials) is shown"
       }
     ],
     "accessibility": "**Pattern**: Image (`img`) with a text fallback (Radix Avatar)\n\n**Role**: `AvatarImage` renders an `img`; `AvatarFallback` only shows when the image fails or is missing.\n\n**Keyboard**:\n\nNo keyboard interaction of its own.\n\n**Accessible name**: `alt` is required on `AvatarImage` (the person's name), or `alt=\"\"` when the name is already written next to it.\n\n**Pitfalls**:\n\n- When the name is shown next to the avatar, the fallback initials repeat it: hide them with `aria-hidden`.\n- A clickable avatar must be wrapped in a named link or button, not made clickable itself.",
@@ -2644,11 +2656,11 @@
       },
       {
         "state": "hover",
-        "behavior": "Background opacity shifts, depending on the variant (links and ghost)"
+        "behavior": "As a link, `default` and `secondary` take `bg-primary/80` and `bg-secondary/80`, `destructive`, `success` and `warning` take `bg-destructive/20`, `bg-success/20` and `bg-warning/20` (deeper in light mode, unchanged in dark mode, where it is already the fill), `outline` takes `bg-muted` with `text-muted-foreground`; `ghost` takes `bg-muted` (`dark:hover:bg-muted/50`) with `text-muted-foreground` on any hover, and `link` underlines"
       },
       {
         "state": "focus",
-        "behavior": "`ring-ring/50` ring and `border-ring` border"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide; the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20`"
       },
       {
         "state": "active",
@@ -2660,7 +2672,7 @@
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border; on focus, a `ring-destructive/20` ring (`dark:aria-invalid:ring-destructive/40`)"
       }
     ],
     "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red; `success` says \"Paid\", not just green). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`) or a raw color: `text-destructive`, `text-success` and `text-warning` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.\n- **MUST** — keep 4px of clear space above and below a Badge rendered as a link (`asChild`): it is 20px tall, and only the spacing exception of WCAG 2.2 SC 2.5.8 (Target Size) makes it conform (`specs/foundations/size.md`).",
@@ -3401,10 +3413,6 @@
         "behavior": "`BubbleContent` filled with the variant's background and text colors"
       },
       {
-        "state": "end",
-        "behavior": "`align=\"end\"`, or inside a `Message` with `align=\"end\"`: the bubble moves to the end"
-      },
-      {
         "state": "hover",
         "behavior": "A `BubbleContent` rendered as a `button` or an `a` takes the variant's hover fill"
       },
@@ -3419,6 +3427,10 @@
       {
         "state": "disabled",
         "behavior": "Not applicable; a disabled `button` rendered through `asChild` keeps its native behavior"
+      },
+      {
+        "state": "end",
+        "behavior": "`align=\"end\"`, or inside a `Message` with `align=\"end\"`: the bubble moves to the end"
       }
     ],
     "accessibility": "**Pattern**: Plain content; a link or a button when `BubbleContent` is rendered through `asChild`\n\n**Role**: `div` elements with no role. `BubbleContent` takes the role of the element it renders with `asChild` (`button`, `a`).\n\n**Keyboard**:\n\n| Key             | Action                                                                        |\n| --------------- | ----------------------------------------------------------------------------- |\n| `Tab`           | Moves to a `BubbleContent` rendered as a `button` or an `a`, and to reactions |\n| `Enter`/`Space` | Activates it, natively                                                        |\n\n**Accessible name**: The text of a clickable `BubbleContent`. A reaction button showing only an emoji or a count takes an `aria-label` (\"3 people reacted with thumbs up\").\n\n**Pitfalls**:\n\n- The variant tells the speakers apart by color only: name the speaker in `MessageHeader` (see `Message`).\n- `tinted` and `destructive` fills are tints of the primary and error colors: their text keeps the 4.5:1 contrast of `text-foreground` and `text-destructive`; a custom `className` color on them does not.",
@@ -3816,32 +3828,36 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "`action-background-default` background, `action-background-foreground` text"
       },
       {
-        "state": "`hover`",
-        "behavior": "The background changes, depending on the variant; outline and ghost also take the foreground text color, and link underlines instead"
+        "state": "hover",
+        "behavior": "`default` takes `bg-primary/80`, `secondary` `bg-secondary/80`, `destructive` `bg-destructive/20` (`dark:hover:bg-destructive/30`); `outline` and `ghost` take `bg-muted` with `text-foreground` (`dark:hover:bg-input/50` and `dark:hover:bg-muted/50` in dark mode); `link` underlines instead"
       },
       {
-        "state": "`focus`",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
+        "state": "focus",
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide; the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20`"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Shifts down by `translate-y-px` as tactile feedback (except with `aria-haspopup`)"
       },
       {
-        "state": "`disabled`",
+        "state": "open",
+        "behavior": "While the popup it controls is open (`aria-expanded`), `ghost` takes `bg-muted` with `text-foreground`, and so does `outline` in light mode (in dark mode its `dark:bg-input/30` fill stays, with `text-foreground`); `secondary` holds `bg-secondary` with `text-secondary-foreground`, without its hover fill"
+      },
+      {
+        "state": "disabled",
         "behavior": "`pointer-events-none`, `opacity-disabled` — no interaction"
       },
       {
-        "state": "`loading`",
-        "behavior": "Render a `<Spinner>` as a child; the consumer sets `aria-busy=\"true\"`"
+        "state": "error",
+        "behavior": "`aria-invalid=\"true\"`: `destructive` border; on focus, a `destructive` ring"
       },
       {
-        "state": "`error`",
-        "behavior": "`aria-invalid=\"true\"`: `destructive` border; on focus, a `destructive` ring"
+        "state": "loading",
+        "behavior": "Render a `<Spinner>` as a child; the consumer sets `aria-busy=\"true\"`"
       }
     ],
     "accessibility": "**Pattern**: [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) — native `button` element\n\n**Role**: Native `button` (or the element passed through `asChild`, such as a link).\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Enter` / `Space` | Activates the button            |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.\n\n**Pitfalls**:\n\n- **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.\n- A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.\n- `variant=\"destructive\"` must come with an explicit label.\n- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 3.00:1 on a hovered button inside a card.",
@@ -4085,23 +4101,23 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Horizontal group, merged borders, rounded ends"
-      },
-      {
-        "state": "vertical",
-        "behavior": "Stacked vertically; top and bottom borders merge"
-      },
-      {
-        "state": "focus-within",
-        "behavior": "The focused child moves to `z-dropdown` so its focus ring shows above its neighbors"
+        "behavior": "Horizontal group, merged borders; the inner corners are squared, the ends keep their child's corners"
       },
       {
         "state": "hover",
         "behavior": "Left to the child components (Button, Select…)"
       },
       {
+        "state": "focus",
+        "behavior": "The focused child moves to `z-dropdown` (with `relative`) so its focus ring shows above its neighbors"
+      },
+      {
         "state": "disabled",
         "behavior": "Left to the child components"
+      },
+      {
+        "state": "vertical",
+        "behavior": "Stacked vertically; top and bottom borders merge"
       }
     ],
     "accessibility": "**Pattern**: Group (`role=\"group\"`)\n\n**Role**: `role=\"group\"` on the root; each button keeps its own semantics.\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves from one button to the next (no arrow-key navigation) |\n\n**Accessible name**: Give the group an `aria-label` when its purpose is not obvious (\"Text formatting\").\n\n**Pitfalls**:\n\n- For an exclusive choice between options, use `ToggleGroup`, which carries the selected state; `ButtonGroup` only groups things visually.",
@@ -4517,19 +4533,19 @@
       },
       {
         "state": "hover",
-        "behavior": "Hovered day with a dimmed background (through the `Button`'s `ghost` variant)"
+        "behavior": "An unselected day takes the hover of the `Button` `ghost` variant, a muted fill (listed in its spec), with `dark:hover:text-foreground` in dark mode; the previous and next buttons take the hover of `buttonVariant`"
       },
       {
         "state": "focus",
-        "behavior": "Visible focus ring (`ring-ring/50`, `border-ring`) on the focused day"
+        "behavior": "Visible focus ring on the focused day: `ring-ring/50`, `--space-focus-ring-width` wide (the day button is `border-0`, so `border-ring` draws nothing)"
       },
       {
-        "state": "active",
-        "behavior": "Selected day in `bg-primary` / `text-primary-foreground`"
+        "state": "selected",
+        "behavior": "A single selected day, and a range's first and last day, in `bg-primary` with `text-primary-foreground`; the days between in `bg-muted` with `text-foreground`; a selected outside day takes the same colors, its button's color covering the cell's `aria-selected:text-muted-foreground`"
       },
       {
         "state": "disabled",
-        "behavior": "Day cannot be selected: `opacity-disabled` and `aria-disabled`, `muted-foreground` text"
+        "behavior": "A disabled day cannot be selected: its cell takes `text-muted-foreground` and `opacity-disabled`, and its `disabled` button adds the `Button` disabled state on top; a previous or next button with no month to reach (`aria-disabled`) also takes `opacity-disabled`"
       }
     ],
     "accessibility": "**Pattern**: A date [grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (react-day-picker)\n\n**Role**: A grid of dates; the selected day carries `aria-selected`; an unavailable day is a `disabled` button.\n\n**Keyboard**:\n\n| Key                               | Action                            |\n| --------------------------------- | --------------------------------- |\n| `ArrowLeft` / `ArrowRight`        | Previous / next day               |\n| `ArrowUp` / `ArrowDown`           | Same day the previous / next week |\n| `Home` / `End`                    | Start / end of the week           |\n| `PageUp` / `PageDown`             | Previous / next month             |\n| `Shift+PageUp` / `Shift+PageDown` | Previous / next year              |\n| `Enter` / `Space`                 | Selects the focused day           |\n\n**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop.\n\n**Pitfalls**:\n\n- A calendar alone is not enough to enter a date the user already knows: offer a text input as well.\n- Mark unavailable days by something other than color.",
@@ -4885,32 +4901,32 @@
     ],
     "states": [
       {
-        "state": "`default`",
-        "behavior": "`bg-card` background, `ring-1 ring-foreground/10` ring, square corners (`rounded-none`)"
+        "state": "default",
+        "behavior": "`bg-card` background, a `ring-foreground/10` ring `--border-width-default` wide (`SURFACE_OUTLINE`), square corners (`rounded-none`)"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "No dedicated style (a Card is not interactive by default)"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Not applicable"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "Not applicable"
       },
       {
-        "state": "`loading`",
-        "behavior": "Handle it with a skeleton inside `CardContent`"
-      },
-      {
-        "state": "`error`",
+        "state": "error",
         "behavior": "Not applicable — use an `Alert` inside `CardContent`"
+      },
+      {
+        "state": "loading",
+        "behavior": "Handle it with a skeleton inside `CardContent`"
       }
     ],
     "accessibility": "**Pattern**: None — a layout container\n\n**Role**: No role: plain `div`s. `CardTitle` is not a heading element.\n\n**Keyboard**:\n\nNo keyboard interaction of its own.\n\n**Accessible name**: Not applicable. When the card is a section of the page, wrap its title in a heading of the right level (`Heading`).\n\n**Pitfalls**:\n\n- A fully clickable card must contain a real link (whose hit area can be stretched), not an `onClick` on the container.\n- `CardTitle` is a `div`, so it does not appear in a screen reader's list of headings.",
@@ -5200,7 +5216,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "First slide visible; navigation buttons shown according to the position"
+        "behavior": "The first slide fills the track (`basis-full`); the previous and next buttons sit outside it, each disabled at its end of the track"
       },
       {
         "state": "hover",
@@ -5208,7 +5224,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`ArrowLeft` / `ArrowRight` change slides from the keyboard"
+        "behavior": "While focus is inside the carousel, `ArrowLeft` / `ArrowRight` change slides; the focused button shows the `Button` focus ring"
       },
       {
         "state": "active",
@@ -5707,7 +5723,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`recharts`' inner elements expose no native focus; the parent container handles it"
+        "behavior": "Recharts' accessibility layer: focus on the chart surface shows the tooltip and cursor on the first data point, and the arrow keys move them; the surface draws no outline (`[&_.recharts-surface]:outline-hidden`)"
       },
       {
         "state": "active",
@@ -5957,36 +5973,36 @@
     ],
     "states": [
       {
-        "state": "`default` (unchecked)",
-        "behavior": "Transparent background, `border-input` border"
+        "state": "default",
+        "behavior": "Unchecked: transparent background (`dark:bg-input/30` in dark mode), `border-input` border, no icon"
       },
       {
-        "state": "`hover`",
-        "behavior": "No dedicated style (native focus handles it)"
-      },
-      {
-        "state": "`focus`",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
-      },
-      {
-        "state": "`active`",
+        "state": "hover",
         "behavior": "No dedicated style"
       },
       {
-        "state": "`disabled`",
-        "behavior": "`cursor-not-allowed opacity-disabled`, `pointer-events-none`"
+        "state": "focus",
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
       },
       {
-        "state": "`checked`",
+        "state": "active",
+        "behavior": "No dedicated style"
+      },
+      {
+        "state": "checked",
         "behavior": "`border-primary bg-primary text-primary-foreground`, `CheckIcon` visible"
       },
       {
-        "state": "`indeterminate`",
-        "behavior": "Radix sets `data-state=\"indeterminate\"` — the consumer provides a `MinusIcon`"
+        "state": "disabled",
+        "behavior": "`cursor-not-allowed` and `opacity-disabled`; a `Field` that holds a disabled control dims the box the same way (`group-has-disabled/field:opacity-disabled`)"
       },
       {
-        "state": "`error`",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive`; on focus, a `ring-destructive/20` ring"
+        "state": "error",
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` (`border-destructive/50` in dark mode); on focus, a `ring-destructive/20` ring (`ring-destructive/40` in dark mode); in light mode, a checked box keeps `border-primary`"
+      },
+      {
+        "state": "indeterminate",
+        "behavior": "`checked=\"indeterminate\"`: Radix sets `data-state=\"indeterminate\"` and no class styles it, so the box keeps its unchecked look and the indicator shows the `CheckIcon`"
       }
     ],
     "accessibility": "**Pattern**: [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) (Radix Checkbox)\n\n**Role**: `role=\"checkbox\"` on a `button`, with `aria-checked`: `true`, `false` or `mixed` (indeterminate).\n\n**Keyboard**:\n\n| Key     | Action                          |\n| ------- | ------------------------------- |\n| `Space` | Checks / unchecks the box       |\n| `Tab`   | Moves focus to the next element |\n\n**Accessible name**: Required: a `Label` tied through `htmlFor` / `id`, or an `aria-label`. Clicking the label toggles the box.\n\n**Pitfalls**:\n\n- `Enter` does not toggle the box (native behavior): do not add it.\n- `aria-invalid` styles the error; the message must be linked through `aria-describedby`.",
@@ -6128,7 +6144,7 @@
       },
       {
         "state": "focus",
-        "behavior": "Keyboard focus on the trigger, with a focus ring"
+        "behavior": "No ring of its own: the bare trigger shows the browser outline, or the ring of the `Button` it renders through `asChild`"
       },
       {
         "state": "active",
@@ -6864,16 +6880,24 @@
         "behavior": "Input with an `input` border and a transparent background"
       },
       {
-        "state": "hover",
-        "behavior": "The candidate option's background turns `accent`"
-      },
-      {
         "state": "focus",
         "behavior": "`ring-ring/50` ring and `border-ring` border on the chips / input container"
       },
       {
-        "state": "active",
-        "behavior": "Popup open, animated with `fade-in` and `zoom-in-95`"
+        "state": "pressed",
+        "behavior": "While the popup is open, Base UI marks the trigger `data-pressed`, and the trigger button keeps a transparent background (`data-pressed:bg-transparent`)"
+      },
+      {
+        "state": "highlighted",
+        "behavior": "The option under the pointer or the arrow keys gets `bg-accent` and `text-accent-foreground`, its icons included"
+      },
+      {
+        "state": "open",
+        "behavior": "The popup enters with `animate-in`, `fade-in-0` and `zoom-in-95` over `duration-fast`, sliding in from its anchor (`slide-in-from-top-2` when below it)"
+      },
+      {
+        "state": "closing",
+        "behavior": "The popup leaves with `animate-out`, `fade-out-0` and `zoom-out-95`"
       },
       {
         "state": "disabled",
@@ -6882,6 +6906,10 @@
       {
         "state": "error",
         "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+      },
+      {
+        "state": "empty",
+        "behavior": "No option matches: the list drops its padding (`data-empty:p-0`) and `ComboboxEmpty`, hidden otherwise, shows its centered `text-muted-foreground` message"
       }
     ],
     "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a list (Base UI)\n\n**Role**: An input with `role=\"combobox\"` linked to a `listbox`; `aria-expanded` on the input, `aria-activedescendant` pointing at the highlighted option, `aria-selected` on the chosen one.\n\n**Keyboard**:\n\n| Key                     | Action                                 |\n| ----------------------- | -------------------------------------- |\n| `ArrowDown` / `ArrowUp` | Opens the list; next / previous option |\n| `Enter`                 | Selects the active option              |\n| `Escape`                | Closes the list                        |\n| Typing                  | Filters the options                    |\n\n**Accessible name**: A `Label` tied to the input is required. The icon buttons (open the list, clear, remove a chip) are named by `triggerLabel` / `clearLabel` / `removeLabel` (defaults in `UI_STRINGS.combobox`). Each chip's remove button names its item — `Remove Apple`, `Remove Cherry` — never a bare `Remove`.\n\n**Pitfalls**:\n\n- The number of results is not announced automatically: add an `aria-live` message when the filtered list changes a lot.",
@@ -7376,20 +7404,20 @@
         "behavior": "`popover` background, `popover-foreground` text, scrolling list"
       },
       {
-        "state": "hover",
-        "behavior": "— (keyboard navigation comes first)"
-      },
-      {
         "state": "focus",
-        "behavior": "Search input active; items reachable from the keyboard"
+        "behavior": "While the search input has focus, the search field draws a `ring-ring/50` ring `--space-focus-ring-width` wide; the arrow keys move the selection through the items"
       },
       {
-        "state": "active",
-        "behavior": "Selected item with a `muted` background and `foreground` text"
+        "state": "selected",
+        "behavior": "The item under the arrow keys or the pointer gets `bg-muted` and `text-foreground`, its icons and `CommandShortcut` included"
+      },
+      {
+        "state": "checked",
+        "behavior": "An item with `data-checked=\"true\"` shows its trailing `CheckIcon` (`group-data-[checked=true]/command-item:opacity-100`); an item with a `CommandShortcut` hides the check"
       },
       {
         "state": "disabled",
-        "behavior": "Grayed-out item (`opacity-disabled`, `pointer-events-none`) through `data-[disabled=true]`"
+        "behavior": "Grayed-out item (`opacity-disabled`, `pointer-events-none`) through `data-[disabled=true]`; a disabled search input shows `cursor-not-allowed` and `opacity-disabled`"
       }
     ],
     "accessibility": "**Pattern**: [Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) with a listbox (cmdk)\n\n**Role**: `CommandInput` carries `role=\"combobox\"`; `CommandList` is a `listbox` of options (`role=\"option\"`, `aria-selected`).\n\n**Keyboard**:\n\n| Key                     | Action                 |\n| ----------------------- | ---------------------- |\n| `ArrowDown` / `ArrowUp` | Next / previous option |\n| `Home` / `End`          | First / last option    |\n| `Enter`                 | Runs the active option |\n| Typing                  | Filters                |\n\n**Accessible name**: Give the input an explicit `placeholder` and `aria-label`; `CommandDialog` carries a visually hidden title that names the dialog.\n\n**Pitfalls**:\n\n- `CommandEmpty` must stay text: it is what the user hears when nothing matches.\n- In `CommandDialog`, `Escape` closes the dialog and returns focus to the trigger.",
@@ -8021,16 +8049,20 @@
         "behavior": "Menu closed; the trigger waits for a right-click"
       },
       {
-        "state": "open",
-        "behavior": "Menu shown, animated with `fade-in` and `zoom-in-95`"
-      },
-      {
         "state": "focus",
-        "behavior": "Item highlighted with `bg-accent` and `text-accent-foreground`"
+        "behavior": "The item under the pointer or the arrow keys gets `bg-accent` and `text-accent-foreground`, its icons and shortcut included; a `destructive` item gets `bg-destructive/10` (`bg-destructive/20` in dark mode) and keeps `text-destructive`"
       },
       {
         "state": "active",
-        "behavior": "Item being selected"
+        "behavior": "— (no active style of its own)"
+      },
+      {
+        "state": "open",
+        "behavior": "The menu enters with `animate-in`, `fade-in-0` and `zoom-in-95`, sliding in from the pointer or the sub-trigger it opens from (`slide-in-from-left-2` when it opens to the right); a sub-trigger whose submenu is open keeps `bg-accent` and `text-accent-foreground`"
+      },
+      {
+        "state": "closing",
+        "behavior": "The menu leaves with `animate-out`, `fade-out-0` and `zoom-out-95`"
       },
       {
         "state": "disabled",
@@ -8477,16 +8509,20 @@
         "behavior": "Dialog closed, no overlay"
       },
       {
-        "state": "open",
-        "behavior": "Overlay shown, content centered, animated with `fade-in` and `zoom-in-95`"
-      },
-      {
-        "state": "closing",
-        "behavior": "Exit animation: `fade-out` and `zoom-out-95`"
+        "state": "hover",
+        "behavior": "A link in `DialogDescription`, underlined at rest, turns `text-foreground` on hover"
       },
       {
         "state": "focus",
         "behavior": "Focus trapped inside the dialog (Radix focus trap)"
+      },
+      {
+        "state": "open",
+        "behavior": "The overlay fades in (`bg-black/10` with `backdrop-blur-xs`) and the centered content enters with `animate-in`, `fade-in-0` and `zoom-in-95`"
+      },
+      {
+        "state": "closing",
+        "behavior": "The content leaves with `animate-out`, `fade-out-0` and `zoom-out-95`; the overlay fades out with it"
       },
       {
         "state": "disabled",
@@ -9058,24 +9094,24 @@
         "behavior": "Drawer closed, no overlay"
       },
       {
-        "state": "open",
-        "behavior": "Overlay shown; the panel slides in from its edge"
-      },
-      {
-        "state": "dragging",
-        "behavior": "The user is dragging the panel (touch gesture)"
-      },
-      {
-        "state": "closing",
-        "behavior": "Closing animation, after a swipe or a click on the overlay"
-      },
-      {
         "state": "focus",
         "behavior": "Focus trapped inside the panel"
       },
       {
+        "state": "open",
+        "behavior": "The overlay fades in (`animate-in`, `fade-in-0`); vaul slides the panel in from its edge"
+      },
+      {
+        "state": "closing",
+        "behavior": "After a swipe, `Escape` or a click on the overlay, the overlay fades out (`animate-out`, `fade-out-0`) and vaul slides the panel back to its edge"
+      },
+      {
         "state": "disabled",
         "behavior": "N/A — the controls inside handle their own state"
+      },
+      {
+        "state": "dragging",
+        "behavior": "The panel follows the finger or pointer that drags it (vaul's own transform); released past vaul's threshold, it closes"
       }
     ],
     "accessibility": "**Pattern**: [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) (vaul, on top of Radix Dialog)\n\n**Role**: `role=\"dialog\"`; labeled by `DrawerTitle`. Modal: while it is open, the rest of the page is `aria-hidden` (Radix sets no `aria-modal`).\n\n**Keyboard**:\n\n| Key                 | Action                                                      |\n| ------------------- | ----------------------------------------------------------- |\n| `Tab` / `Shift+Tab` | Moves through the focusable elements, trapped in the drawer |\n| `Escape`            | Closes the drawer                                           |\n\n**Accessible name**: `DrawerTitle` is required, even when visually hidden.\n\n**Pitfalls**:\n\n- Swipe-to-close does not exist for keyboard users, nor for every user: provide a visible close button (`DrawerClose`).\n- On close, focus returns to the trigger.",
@@ -9707,16 +9743,20 @@
         "behavior": "Menu closed; the trigger waits for a click"
       },
       {
-        "state": "open",
-        "behavior": "Menu shown, animated with `fade-in`, `zoom-in-95` and a directional slide"
-      },
-      {
         "state": "focus",
-        "behavior": "Item highlighted with `bg-accent` and `text-accent-foreground`"
+        "behavior": "The item under the pointer or the arrow keys gets `bg-accent` and `text-accent-foreground`, its icons and shortcut included; a `destructive` item gets `bg-destructive/10` (`bg-destructive/20` in dark mode) and keeps `text-destructive`"
       },
       {
         "state": "active",
-        "behavior": "Item being selected"
+        "behavior": "— (no active style of its own)"
+      },
+      {
+        "state": "open",
+        "behavior": "The menu enters with `animate-in`, `fade-in-0` and `zoom-in-95`, sliding in from its trigger (`slide-in-from-top-2` when it opens below); a sub-trigger whose submenu is open keeps `bg-accent` and `text-accent-foreground`"
+      },
+      {
+        "state": "closing",
+        "behavior": "The menu leaves with `animate-out`, `fade-out-0` and `zoom-out-95`, its overflow clipped (`data-[state=closed]:overflow-hidden`)"
       },
       {
         "state": "disabled",
@@ -10088,11 +10128,11 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Centered container with a dashed border and balanced text"
+        "behavior": "Centered column of balanced text, with no border until a `border` class is added, which then draws dashed (`border-dashed`)"
       },
       {
         "state": "hover",
-        "behavior": "Not applicable (passive component)"
+        "behavior": "A link in `EmptyDescription`, underlined at rest, turns `text-primary` on hover"
       },
       {
         "state": "focus",
@@ -10762,32 +10802,32 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "Label and control in their default colors; `FieldDescription` in `text-muted-foreground`"
       },
       {
-        "state": "`hover`",
-        "behavior": "No dedicated style on the Field; links inside `FieldDescription` take the action color"
+        "state": "hover",
+        "behavior": "A `FieldLabel` card wrapping a `Field` turns `bg-muted/50` unless its control is disabled; a link in `FieldDescription` turns `text-primary`"
       },
       {
-        "state": "`focus`",
-        "behavior": "Handled by the child control"
+        "state": "focus",
+        "behavior": "The control draws its own ring; a `FieldLabel` card wrapping a `Field` draws `border-ring` and a `ring-ring/50` ring `--space-focus-ring-width` wide while its control has keyboard focus"
       },
       {
-        "state": "`active`",
-        "behavior": "A `FieldLabel` wrapping a checked control (`has-data-checked`) gets a tinted border and background"
+        "state": "checked",
+        "behavior": "A `FieldLabel` holding a checked control gets a `bg-primary/5` background and, as a card, a `border-primary/30` border (`bg-primary/10` and `border-primary/20` in dark mode)"
       },
       {
-        "state": "`disabled`",
-        "behavior": "`data-disabled=\"true\"` on `<Field>`: `FieldLabel` and `FieldTitle` drop to 50 % opacity"
+        "state": "disabled",
+        "behavior": "`data-disabled=\"true\"` on `<Field>`: `FieldLabel` and `FieldTitle` dim to `opacity-disabled`"
       },
       {
-        "state": "`loading`",
-        "behavior": "Not applicable at the Field level"
-      },
-      {
-        "state": "`error`",
+        "state": "error",
         "behavior": "`data-invalid=\"true\"` on `<Field>`: the field turns `text-destructive`; `FieldError` renders a `role=\"alert\"`; set `aria-invalid` on the control"
+      },
+      {
+        "state": "loading",
+        "behavior": "Not applicable at the Field level"
       }
     ],
     "accessibility": "**Pattern**: Form field group\n\n**Role**: `Field` carries `role=\"group\"`; `FieldSet` / `FieldLegend` render `fieldset` / `legend`; `FieldError` carries `role=\"alert\"`.\n\n**Keyboard**:\n\nNo interaction of its own; the control inside keeps its keyboard behavior.\n\n**Accessible name**: `FieldLabel` must be tied to the control (`htmlFor` / `id`). A group of checkboxes or radios is named by its `FieldLegend`.\n\n**Pitfalls**:\n\n- Link `FieldDescription` and `FieldError` to the control through `aria-describedby`: the component does not do it for you.\n- Set `aria-invalid` on the control in error; `FieldError` announces the message when it appears.\n- Never replace the label with the `placeholder`.",
@@ -10977,31 +11017,31 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "`font-heading font-semibold tracking-tight` text at the `level`'s size"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "Not applicable"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Not applicable — the element is not focusable"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "Not applicable"
       },
       {
-        "state": "`loading`",
+        "state": "error",
         "behavior": "Not applicable"
       },
       {
-        "state": "`error`",
+        "state": "loading",
         "behavior": "Not applicable"
       }
     ],
@@ -11247,20 +11287,20 @@
         "behavior": "Card hidden; the trigger waits for a hover"
       },
       {
-        "state": "hover",
-        "behavior": "Card shown after the delay, animated with `fade-in` and `zoom-in-95`"
+        "state": "focus",
+        "behavior": "No class of its own: focusing the trigger opens the card, as a hover does, and the trigger keeps its own focus style"
+      },
+      {
+        "state": "open",
+        "behavior": "Shown once the trigger is hovered or focused, after the `openDelay`: enters with `fade-in-0` and `zoom-in-95`, sliding in from the trigger's side"
       },
       {
         "state": "closing",
-        "behavior": "Exit animation, `fade-out` and `zoom-out-95`, once the pointer leaves"
-      },
-      {
-        "state": "focus",
-        "behavior": "N/A — the card reacts to hover, not to keyboard focus by default"
+        "behavior": "Exit animation, `fade-out-0` and `zoom-out-95`, once the pointer leaves or the trigger loses focus"
       },
       {
         "state": "disabled",
-        "behavior": "N/A — handled at the parent trigger"
+        "behavior": "Not applicable: `HoverCard` has no disabled state; the trigger element carries its own"
       }
     ],
     "accessibility": "**Pattern**: Hover preview (Radix HoverCard) — no APG pattern\n\n**Role**: Floating content opened on hover or on focus of the trigger.\n\n**Keyboard**:\n\n| Key                          | Action             |\n| ---------------------------- | ------------------ |\n| `Tab` (focus on the trigger) | Opens the preview  |\n| Focus leaves                 | Closes the preview |\n\n**Accessible name**: The trigger's, most often a link named by its text.\n\n**Pitfalls**:\n\n- The content cannot be reached reliably from the keyboard, nor is it announced: only put information there that is already available elsewhere (the link's target page).\n- Never put an action in it; for interactive content, use `Popover`.",
@@ -11371,31 +11411,31 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "`bg-muted` background, placeholder SVG centered, strokes in `text-muted-foreground/20`"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "Not applicable"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Not applicable — the element is not focusable"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "Not applicable"
       },
       {
-        "state": "`loading`",
+        "state": "error",
         "behavior": "Not applicable"
       },
       {
-        "state": "`error`",
+        "state": "loading",
         "behavior": "Not applicable"
       }
     ],
@@ -11625,32 +11665,36 @@
     ],
     "states": [
       {
-        "state": "`default`",
-        "behavior": "Transparent background, `border-input` border, `foreground` text"
+        "state": "default",
+        "behavior": "Transparent background (dark: `bg-input/30`), `border-input` border, `foreground` text"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "No visual change defined (focus handles it)"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Same as `focus`"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "`pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-disabled` (dark: `bg-input/80`)"
       },
       {
-        "state": "`loading`",
-        "behavior": "Not defined natively — handle it through a parent state"
+        "state": "error",
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border (dark: `border-destructive/50`); on focus, the ring turns `ring-destructive/20` (dark: `ring-destructive/40`)"
       },
       {
-        "state": "`error`",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border (dark: `border-destructive/50`); on focus, the ring turns `ring-destructive/20` (dark: `ring-destructive/40`)"
+        "state": "placeholder",
+        "behavior": "Placeholder text in `text-muted-foreground`"
+      },
+      {
+        "state": "loading",
+        "behavior": "Not defined natively — handle it through a parent state"
       }
     ],
     "accessibility": "**Pattern**: Native `input` field\n\n**Role**: Native `input`; its type (`email`, `tel`…) sets the virtual keyboard and the semantics.\n\n**Keyboard**:\n\nThe field's native behavior.\n\n**Accessible name**: Required: a tied `Label` (`htmlFor` / `id`) or an `aria-label`. A `placeholder` is not a name.\n\n**Pitfalls**:\n\n- Set `autocomplete` for personal data (WCAG 1.3.5).\n- `aria-invalid` styles the error; link the message through `aria-describedby`.",
@@ -12112,7 +12156,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "`input` border, transparent background, `h-8` high"
+        "behavior": "`input` border, transparent background (dark: `bg-input/30`), `h-8` high"
       },
       {
         "state": "hover",
@@ -12120,19 +12164,19 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring` border and `ring-ring/50` ring through `focus-visible` on the child input"
+        "behavior": "`border-ring` border and `ring-ring/50` ring on the group when its control is `focus-visible`, which drops its own ring (`focus-visible:ring-0`); inside a `Combobox` popup too, since the `has-[…]` rule outranks `in-data-[slot=combobox-content]:focus-within:ring-0`"
       },
       {
         "state": "active",
-        "behavior": "—"
+        "behavior": "— (no specific active style on the group)"
       },
       {
         "state": "disabled",
-        "behavior": "`bg-input/50` background, reduced opacity (`opacity-disabled`) through `has-disabled`"
+        "behavior": "`bg-input/50` background (dark: `bg-input/80`) and `opacity-disabled` on the whole group as soon as any element inside it is disabled (`has-disabled`), a disabled `InputGroupButton` included"
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid` on the input"
+        "behavior": "`destructive` border and `ring-destructive/20` ring (dark: `ring-destructive/40`), focused or not, through `aria-invalid` on the control, which drops its own ring (`aria-invalid:ring-0`)"
       }
     ],
     "accessibility": "**Pattern**: A group (`role=\"group\"`) around a field\n\n**Role**: `role=\"group\"`; the field keeps its semantics; clicking an add-on moves focus to the field.\n\n**Keyboard**:\n\nNo interaction of its own; the field and the `InputGroupButton`s receive focus as usual.\n\n**Accessible name**: The field must be labeled like an `Input`. An icon-only `InputGroupButton` needs an `aria-label` (\"Clear search\").\n\n**Pitfalls**:\n\n- **MUST** — when an add-on's text (\"https://\", \"$\") carries meaning, repeat it in the label or the description: it is not read as part of the label.\n- The error is styled on the group through the field's `aria-invalid`; the message still has to be linked.",
@@ -12443,12 +12487,8 @@
         "behavior": "— (no specific hover style)"
       },
       {
-        "state": "focus",
-        "behavior": "Active slot: `ring` border, `ring-ring/50` ring, raised z-index, animated caret"
-      },
-      {
         "state": "active",
-        "behavior": "Blinking caret (`animate-caret-blink`) in the active slot"
+        "behavior": "The slot that takes the next character while the input has focus: `border-ring` border, `ring-ring/50` ring, raised to `z-dropdown`, and a blinking caret (`animate-caret-blink`) while it is empty"
       },
       {
         "state": "disabled",
@@ -12456,7 +12496,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+        "behavior": "`aria-invalid` on an `InputOTPSlot` turns its border `border-destructive` and its active ring `ring-destructive/20`, and rings its `InputOTPGroup` in `ring-destructive/20` (dark: `ring-destructive/40`); set on `InputOTP` itself, it draws nothing"
       }
     ],
     "accessibility": "**Pattern**: A single text input (input-otp) displayed as slots\n\n**Role**: One real `input` takes the typing; the slots are visual; `InputOTPSeparator` carries `role=\"separator\"`.\n\n**Keyboard**:\n\n| Key                        | Action                         |\n| -------------------------- | ------------------------------ |\n| Digits / letters           | Fill in the code slot by slot  |\n| `Backspace`                | Deletes the previous character |\n| `ArrowLeft` / `ArrowRight` | Moves the cursor               |\n| Paste                      | Fills every slot               |\n\n**Accessible name**: Required: a `Label` or an `aria-label` (\"Verification code\") on the input.\n\n**Pitfalls**:\n\n- Set `autoComplete=\"one-time-code\"` so the code can be filled in automatically.\n- Announce the error (an invalid code) with a linked message, not only through the slots' color.",
@@ -13014,16 +13054,8 @@
         "behavior": "Transparent border, standard spacing"
       },
       {
-        "state": "outline",
-        "behavior": "Visible `border-border` border"
-      },
-      {
-        "state": "muted",
-        "behavior": "`bg-muted/50` background, transparent border"
-      },
-      {
         "state": "hover",
-        "behavior": "`bg-muted` background on child links (`[a]:hover`)"
+        "behavior": "An `Item` rendered as a link (`asChild`) takes a `bg-muted` background; a link inside `ItemDescription` turns `text-primary`"
       },
       {
         "state": "focus",
@@ -13036,6 +13068,14 @@
       {
         "state": "disabled",
         "behavior": "Not applicable directly"
+      },
+      {
+        "state": "outline",
+        "behavior": "Visible `border-border` border"
+      },
+      {
+        "state": "muted",
+        "behavior": "`bg-muted/50` background, transparent border"
       }
     ],
     "accessibility": "**Pattern**: A list (`role=\"list\"`) of entries\n\n**Role**: `ItemGroup` carries `role=\"list\"` and gives `role=\"listitem\"` to each direct `Item` child. An `Item` rendered with `asChild` (a link, a button) keeps its native role: `ItemGroup` wraps it in a `div role=\"listitem\"`. A `role` passed explicitly to the `Item` is kept. Outside an `ItemGroup`, `Item` is a `div` with no role.\n\n**Keyboard**:\n\nNo interaction of its own; an `Item` rendered as a link or a button behaves natively.\n\n**Accessible name**: The content of `ItemTitle`; a clickable `Item` must be a named link or button.\n\n**Pitfalls**:\n\n- Only direct children of `ItemGroup` are recognized: an `Item` rendered by an intermediate component (a `<Row />` that returns an `Item`) or inside a fragment does not get `role=\"listitem\"` — pass it explicitly.\n- Any direct child of `ItemGroup` other than `Item` or `ItemSeparator` breaks the ARIA list.\n- A fully clickable `Item` must not contain another interactive element.",
@@ -13230,10 +13270,6 @@
         "behavior": "`muted` background, `muted-foreground` text, fixed `h-5` height"
       },
       {
-        "state": "in-tooltip",
-        "behavior": "Background and text adjusted to the tooltip's dark surface (`in-data-[slot=tooltip-content]`)"
-      },
-      {
         "state": "hover",
         "behavior": "Not applicable (the component is not interactive)"
       },
@@ -13248,6 +13284,10 @@
       {
         "state": "disabled",
         "behavior": "Not applicable"
+      },
+      {
+        "state": "in-tooltip",
+        "behavior": "Inside a `Tooltip`, on its inverted surface: `bg-background/20` background (dark: `bg-background/10`) and `text-background` text"
       }
     ],
     "accessibility": "**Pattern**: Native `kbd` element\n\n**Role**: Native `kbd`: marks a key or keyboard input.\n\n**Keyboard**:\n\nNo interaction; purely informational.\n\n**Accessible name**: The text. Screen readers read a symbol (`⌘`, `⇧`) inconsistently: spell the key out (\"Cmd\") or add `sr-only` text.\n\n**Pitfalls**:\n\n- The documented shortcut must actually exist, and must not clash with the browser's or the screen reader's own shortcuts.",
@@ -13367,32 +13407,32 @@
     ],
     "states": [
       {
-        "state": "`default`",
-        "behavior": "`text-xs leading-none` text, `text-default` color"
+        "state": "default",
+        "behavior": "`text-xs leading-none` text with no color class of its own: it inherits the surrounding text color"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "No dedicated style"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "No dedicated style (focus is on the control)"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "No dedicated style"
       },
       {
-        "state": "`disabled`",
-        "behavior": "`peer-disabled: cursor-not-allowed opacity-disabled` — when the associated control is `disabled`"
+        "state": "disabled",
+        "behavior": "`cursor-not-allowed` and `opacity-disabled` when the `peer` control before it is `disabled`; `pointer-events-none` and `opacity-disabled` inside a `group` with `data-disabled=\"true\"`"
       },
       {
-        "state": "`loading`",
+        "state": "error",
+        "behavior": "No style of its own: inside a `Field` with `data-invalid=\"true\"` it inherits the field's destructive text color"
+      },
+      {
+        "state": "loading",
         "behavior": "Not applicable"
-      },
-      {
-        "state": "`error`",
-        "behavior": "No style of its own — `FieldError` carries the error color"
       }
     ],
     "accessibility": "**Pattern**: Native `label` element (Radix Label)\n\n**Role**: A native `label` tied to a control through `htmlFor`; clicking the label activates the control.\n\n**Keyboard**:\n\nNo keyboard interaction of its own.\n\n**Accessible name**: The label text names the associated control.\n\n**Pitfalls**:\n\n- `htmlFor` must match the control's `id`; a label that is not tied to anything names nothing.\n- The label stays visible: never replace it with a `placeholder`.",
@@ -13640,31 +13680,31 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "`bg-primary` pictogram at the requested size, `select-none`"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "Not applicable"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Not applicable — the element is not focusable"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "Not applicable"
       },
       {
-        "state": "`loading`",
+        "state": "error",
         "behavior": "Not applicable"
       },
       {
-        "state": "`error`",
+        "state": "loading",
         "behavior": "Not applicable"
       }
     ],
@@ -13908,7 +13948,7 @@
       },
       {
         "state": "focus",
-        "behavior": "A `Marker` rendered as a link or a button through `asChild` keeps its own ring"
+        "behavior": "No class of its own: a `Marker` rendered as a link or a button through `asChild` shows that element's focus indicator, the browser outline for a plain link"
       },
       {
         "state": "active",
@@ -14633,15 +14673,19 @@
       },
       {
         "state": "focus",
-        "behavior": "`bg-accent` background, `accent-foreground` text on the focused item"
+        "behavior": "Focused item: `bg-accent` background and `accent-foreground` text (destructive item: `bg-destructive/10`, dark: `bg-destructive/20`, and `text-destructive`); a trigger focused from the keyboard: `ring-ring/50` ring"
       },
       {
-        "state": "active",
-        "behavior": "Expanded trigger with a `bg-muted` background; the menu opens animated"
+        "state": "open",
+        "behavior": "Expanded trigger with a `bg-muted` background; the menu enters with `fade-in-0` and `zoom-in-95`, sliding in from the trigger's side; an open submenu keeps its trigger in `bg-accent` and `text-accent-foreground`"
+      },
+      {
+        "state": "closing",
+        "behavior": "A submenu leaves with `fade-out-0` and `zoom-out-95`; the top-level menu has no exit animation and disappears at once"
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, `opacity-disabled` on disabled items"
+        "behavior": "`pointer-events-none` and `opacity-disabled` on a disabled `MenubarItem` or `MenubarRadioItem`; a disabled `MenubarCheckboxItem` takes `pointer-events-none` only, and a disabled trigger or sub-trigger has no style of its own"
       }
     ],
     "accessibility": "**Pattern**: [Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) (Radix Menubar)\n\n**Role**: `role=\"menubar\"`; each menu is a `menu` with its `menuitem`s.\n\n**Keyboard**:\n\n| Key                             | Action                                              |\n| ------------------------------- | --------------------------------------------------- |\n| `ArrowRight` / `ArrowLeft`      | Next / previous menu in the bar                     |\n| `Enter` / `Space` / `ArrowDown` | Opens the focused menu                              |\n| `ArrowDown` / `ArrowUp`         | Next / previous item in an open menu                |\n| `Escape`                        | Closes the menu                                     |\n| Typing                          | Moves to the item that starts with the typed letter |\n\n**Accessible name**: The text of each menu and item.\n\n**Pitfalls**:\n\n- An application menu bar is not site navigation: for links, use `NavigationMenu`.\n- The whole bar is a single tab stop: the arrow keys do the rest.",
@@ -14907,14 +14951,6 @@
         "behavior": "`align=\"start\"`: avatar, then content, aligned to the start of the thread"
       },
       {
-        "state": "end",
-        "behavior": "`align=\"end\"`: the row is reversed and the content aligned to the end"
-      },
-      {
-        "state": "ghost",
-        "behavior": "A `Bubble` with `variant=\"ghost\"` inside: header and footer drop their padding"
-      },
-      {
         "state": "hover",
         "behavior": "Not applicable (the component is not interactive)"
       },
@@ -14929,6 +14965,14 @@
       {
         "state": "disabled",
         "behavior": "Not applicable"
+      },
+      {
+        "state": "end",
+        "behavior": "`align=\"end\"`: the row is reversed and the content aligned to the end"
+      },
+      {
+        "state": "ghost",
+        "behavior": "A `Bubble` with `variant=\"ghost\"` inside: header and footer drop their padding"
       }
     ],
     "accessibility": "**Pattern**: Plain content inside the conversation log (`MessageScrollerContent`, `role=\"log\"`)\n\n**Role**: `div` elements with no role; the log that holds them announces each new turn.\n\n**Keyboard**:\n\nNo interaction of its own; the controls it holds (a `Button` in `MessageFooter`, a link in a `Bubble`) behave natively.\n\n**Accessible name**: None. The speaker is read from `MessageHeader` or from the `Avatar` text fallback; a turn whose speaker is shown only by its side (`align`) is not identified for a screen reader.\n\n**Pitfalls**:\n\n- The side of a turn (`align`) is visual only: a screen reader does not tell the user's turns from the assistant's. Name the speaker in `MessageHeader`, or with visually hidden text (`sr-only`) at the start of `MessageContent`.\n- An avatar image without `AvatarFallback` text names nobody.",
@@ -15250,14 +15294,6 @@
         "behavior": "The viewport follows the last message while the reader is at the end"
       },
       {
-        "state": "scrolled",
-        "behavior": "The reader scrolled up: following stops, and the `end` button slides in"
-      },
-      {
-        "state": "pending",
-        "behavior": "`data-pending-scroll`: the viewport stays invisible until its first scroll position is applied"
-      },
-      {
         "state": "hover",
         "behavior": "The button takes `bg-muted`"
       },
@@ -15272,6 +15308,14 @@
       {
         "state": "disabled",
         "behavior": "Not applicable"
+      },
+      {
+        "state": "pending",
+        "behavior": "`data-pending-scroll`: the viewport stays invisible until its first scroll position is applied"
+      },
+      {
+        "state": "scrolled",
+        "behavior": "The reader scrolled up: following stops, and the `end` button slides in"
       }
     ],
     "accessibility": "**Pattern**: A named scrollable region holding a live log ([WAI-ARIA `log` role](https://www.w3.org/TR/wai-aria-1.2/#log))\n\n**Role**: The viewport is a `region` named \"Messages\" (`UI_STRINGS.messageScroller.viewport`) and takes focus (`tabIndex=0`). The content is a `log`: a screen reader announces each message added to it, not the ones already there.\n\n**Keyboard**:\n\n| Key                   | Action                                                  |\n| --------------------- | ------------------------------------------------------- |\n| `Tab`                 | Moves to the viewport, then into the messages' controls |\n| `ArrowUp`/`ArrowDown` | Scrolls the viewport by a line                          |\n| `PageUp`/`PageDown`   | Scrolls the viewport by a page                          |\n| `Home`/`End`          | Scrolls to the first or the last message                |\n| `Enter`/`Space`       | On a `MessageScrollerButton`: jumps to its end          |\n\n**Accessible name**: The viewport is named by `UI_STRINGS.messageScroller.viewport`; pass `aria-label` to name it after the conversation. The button's visually hidden text is `UI_STRINGS.messageScroller.scrollToEnd` or `scrollToStart`; `children` replace it.\n\n**Pitfalls**:\n\n- A streamed answer is added to the log once and then grows: the log announces the first words only. Announce the finished answer through a `role=\"status\"` region when it matters.\n- An inactive button stays mounted: the styles hide it (`opacity-0`, `pointer-events-none`) and `@shadcn/react` takes it out of the tab order (`tabIndex=-1`). An element passed through `render` must forward the `tabIndex` it receives, or a hidden button takes focus.",
@@ -15588,7 +15632,7 @@
         "behavior": "`ring` border and `ring-ring/50` ring through `focus-visible`"
       },
       {
-        "state": "active",
+        "state": "open",
         "behavior": "The browser's native drop-down is open"
       },
       {
@@ -15598,6 +15642,10 @@
       {
         "state": "error",
         "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+      },
+      {
+        "state": "placeholder",
+        "behavior": "No visible effect: a `<select>` has no placeholder text, so `placeholder:text-muted-foreground` does not apply; an empty-value option shows in the text color"
       }
     ],
     "accessibility": "**Pattern**: Native `select` element\n\n**Role**: Native `select`; the caret icon is hidden (`aria-hidden`).\n\n**Keyboard**:\n\nThe native `select` behavior (arrows, typing, `Space` / `Enter` depending on the platform).\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`.\n\n**Pitfalls**:\n\n- The system picker is the most accessible one on mobile: that is why `rule-20` picks `NativeSelect` below `md`, **unless** the options need rich rendering (icons, descriptions) that an `<option>` cannot show.",
@@ -16094,11 +16142,19 @@
       },
       {
         "state": "focus",
-        "behavior": "`bg-muted` background and `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the trigger or link; no outline (`outline-hidden`)"
+        "behavior": "`bg-muted` background and `FOCUS_RING` (`lib/focus.ts`) on the trigger or link: a `ring-ring/50` ring `--space-focus-ring-width` wide, no outline (`outline-hidden`); neither has a border, so `border-ring` draws nothing"
       },
       {
         "state": "active",
-        "behavior": "`bg-muted/50` background on the active trigger or link; content panel open"
+        "behavior": "A link marked `active` (the current page): `bg-muted/50` background, `bg-muted` on hover and focus"
+      },
+      {
+        "state": "open",
+        "behavior": "The open trigger takes `bg-muted/50` (`bg-muted` on hover and focus) and its caret turns (`rotate-180`); the viewport zooms in (`zoom-in-90`), or with `viewport={false}` the content fades and zooms in (`fade-in-0`, `zoom-in-95`); the indicator fades in"
+      },
+      {
+        "state": "closing",
+        "behavior": "The viewport zooms out (`zoom-out-90`), or with `viewport={false}` the content fades and zooms out (`fade-out-0`, `zoom-out-95`); the indicator fades out"
       },
       {
         "state": "disabled",
@@ -16397,7 +16453,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "Handled by the underlying `Button` component"
+        "behavior": "— (not supported: `PaginationLink` is an `<a>`, which `:disabled` never matches)"
       }
     ],
     "accessibility": "**Pattern**: Navigation (`nav`) with a list of links\n\n**Role**: A `nav` labeled `UI_STRINGS.pagination.landmark`; a `ul` of links; the current page carries `aria-current=\"page\"`.\n\n**Keyboard**:\n\nNo interaction of its own: native links (`Tab`, `Enter`).\n\n**Accessible name**: Previous / next are named by `UI_STRINGS.pagination.previousLabel` / `nextLabel`; the ellipsis by `UI_STRINGS.pagination.ellipsis`.\n\n**Pitfalls**:\n\n- Each page link must be explicit for a screen reader (\"Page 3\"), not just \"3\", when the context is not enough.\n- After a page change, move focus to the start of the results.",
@@ -16538,32 +16594,32 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "Password hidden, `Eye` icon, \"Show password\" label"
       },
       {
-        "state": "`visible`",
-        "behavior": "Password shown in plain text (`type=\"text\"`), `EyeSlash` icon, \"Hide password\" label"
-      },
-      {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "Ghost hover on the toggle button"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Focus ring on the container, inherited from `InputGroup`"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Clicking toggles visibility, without submitting the form"
       },
       {
-        "state": "`disabled`",
-        "behavior": "Reduced opacity and blocked interaction, inherited from `InputGroup`"
+        "state": "disabled",
+        "behavior": "`disabled` on the input: the group takes the disabled background and reduced opacity of `InputGroup`; the field takes no input, but the toggle button stays clickable"
       },
       {
-        "state": "`error`",
+        "state": "error",
         "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
+      },
+      {
+        "state": "visible",
+        "behavior": "Password shown in plain text (`type=\"text\"`), `EyeSlash` icon, \"Hide password\" label"
       }
     ],
     "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `showLabel` / `hideLabel` (defaults `UI_STRINGS.passwordInput.show` / `.hide`), depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Show the password rules before the user types, linked through `aria-describedby`.",
@@ -16926,16 +16982,16 @@
         "behavior": "Popover closed; the trigger waits for a click"
       },
       {
+        "state": "focus",
+        "behavior": "Focus can move through the popover's content"
+      },
+      {
         "state": "open",
-        "behavior": "Content shown, animated with `fade-in`, `zoom-in-95` and a directional slide"
+        "behavior": "Content shown, animated with `fade-in-0`, `zoom-in-95` and a directional slide"
       },
       {
         "state": "closing",
-        "behavior": "Exit animation: `fade-out` and `zoom-out-95`"
-      },
-      {
-        "state": "focus",
-        "behavior": "Focus can move through the popover's content"
+        "behavior": "Exit animation: `fade-out-0` and `zoom-out-95`"
       },
       {
         "state": "disabled",
@@ -17823,14 +17879,6 @@
         "behavior": "Choices with an `input` border and a transparent background"
       },
       {
-        "state": "checked",
-        "behavior": "`data-checked`: the choice takes `bg-muted`, the indicator the primary fill"
-      },
-      {
-        "state": "invalid",
-        "behavior": "`data-invalid` on a choice, `aria-invalid` on the input: error border; `QuestionnaireError` shows why"
-      },
-      {
         "state": "hover",
         "behavior": "A choice takes `bg-muted/50`"
       },
@@ -17843,8 +17891,20 @@
         "behavior": "Not applicable"
       },
       {
+        "state": "checked",
+        "behavior": "`data-checked`: the choice takes `bg-muted` and a `border-foreground/30` border; the indicator takes the primary fill (`bg-primary`, `border-primary`) and shows its dot or check"
+      },
+      {
         "state": "disabled",
-        "behavior": "`data-disabled` on a choice, `disabled` on the input: `opacity-disabled`, not clickable"
+        "behavior": "`data-disabled` on a choice, `disabled` on the text input: `opacity-disabled`, not clickable; the text input also takes `bg-input/50`"
+      },
+      {
+        "state": "error",
+        "behavior": "`data-invalid` on a choice, `aria-invalid` on the input: `border-destructive` border, and a `ring-destructive/20` ring on the focused input; `QuestionnaireError` shows why"
+      },
+      {
+        "state": "placeholder",
+        "behavior": "The text input's placeholder in `text-muted-foreground`"
       }
     ],
     "accessibility": "**Pattern**: A form of `fieldset`s with native radio buttons or checkboxes, and a [progress bar](https://www.w3.org/TR/wai-aria-1.2/#progressbar)\n\n**Role**: `Questionnaire` is a `form`; each `QuestionnaireItem` is a `fieldset` named by its `legend` (`QuestionnaireTitle`); each choice is a native `radio` or `checkbox` labeled by its text. `QuestionnaireProgress` is a `progressbar` with `aria-valuetext` \"Question 2 of 5\".\n\n**Keyboard**:\n\n| Key                    | Action                                                             |\n| ---------------------- | ------------------------------------------------------------------ |\n| `ArrowUp`/`ArrowDown`  | Moves between the choices of the current question                  |\n| `Space`                | Checks the focused choice                                          |\n| `Enter`                | On a checked choice: goes to the next question (`Space` checks it) |\n| `ArrowLeft`            | Goes back to the previous question                                 |\n| `ArrowRight`           | Goes to the next question, once the current one is answered        |\n| `A`…`Z` / `1`…`9`      | With `shortcuts`: checks the choice labeled with that key          |\n| `Ctrl+Enter`/`⌘+Enter` | Goes on, or submits on the last question                           |\n\n**Accessible name**: The progress bar is named by `UI_STRINGS.questionnaire.progress`; pass `aria-label` to name it otherwise. The navigation buttons read `UI_STRINGS.questionnaire.previous`, `skip`, `next` and `submit`; `children` replace them.\n\n**Pitfalls**:\n\n- The value text of the progress bar, \"Question 2 of 5\", is written in English by `@shadcn/react`; pass `children` to `QuestionnaireProgress` for another language, and the `aria-valuetext` stays English.\n- A choice's shortcut key is announced through `aria-keyshortcuts`; a letter shortcut clashes with typing in a `QuestionnaireInput` of the same question, which `@shadcn/react` ignores keys from.",
@@ -18100,11 +18160,11 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring` border and `ring-ring/50` ring (3px) through `focus-visible`"
+        "behavior": "`border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`; inside a `FieldLabel` the item keeps that ring and border, because `ring-0` and `border-input` lose to the focus classes, a checked item keeps `border-primary`, and a choice-card label draws a second ring around the card"
       },
       {
-        "state": "active",
-        "behavior": "Selected: `primary` background, `primary` border, `primary-foreground` center dot"
+        "state": "checked",
+        "behavior": "Selected: `primary` background, `primary` border, `primary-foreground` center dot; the border stays `border-primary` when invalid"
       },
       {
         "state": "disabled",
@@ -18344,11 +18404,11 @@
       },
       {
         "state": "hover",
-        "behavior": "The handle's area is visually widened (a 4px `after` hit area)"
+        "behavior": "— (no class of its own: the library shows the resize cursor; the hit area spans `size.target.min` at all times)"
       },
       {
         "state": "focus",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, on the handle"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): a `ring-ring/50` ring `--space-focus-ring-width` wide on the handle, no outline (`outline-hidden`); the handle has no border, so `border-ring` draws nothing"
       },
       {
         "state": "active",
@@ -18356,7 +18416,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "— (not handled natively; disable it through the group's props)"
+        "behavior": "— (no class of its own: `disabled` on the handle stops resizing and sets `aria-disabled`; on a panel or the group, it stops resizing too)"
       }
     ],
     "accessibility": "**Pattern**: [Window Splitter](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/) (react-resizable-panels)\n\n**Role**: Each handle carries `role=\"separator\"`, is focusable and exposes its current value.\n\n**Keyboard**:\n\n| Key                                                     | Action                              |\n| ------------------------------------------------------- | ----------------------------------- |\n| `ArrowLeft` / `ArrowRight` (or `ArrowUp` / `ArrowDown`) | Resizes along the orientation       |\n| `Home` / `End`                                          | Minimum / maximum size of the panel |\n\n**Accessible name**: Give the handles an `aria-label` when there are several (\"Sidebar width\").\n\n**Pitfalls**:\n\n- Resizing must not be required to read the content: every panel must stay usable at its default size.",
@@ -18527,7 +18587,7 @@
       },
       {
         "state": "hover",
-        "behavior": "Scrollbar visible, with a color transition"
+        "behavior": "Scrollbar visible: a `bg-border` thumb, with no color change"
       },
       {
         "state": "focus",
@@ -18535,7 +18595,7 @@
       },
       {
         "state": "active",
-        "behavior": "Thumb being dragged"
+        "behavior": "Thumb being dragged; it keeps its `bg-border` color"
       },
       {
         "state": "disabled",
@@ -19097,19 +19157,27 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring` border and `ring-ring/50` ring through `focus-visible` on the trigger"
+        "behavior": "`ring` border and `ring-ring/50` ring through `focus-visible` on the trigger; the focused item takes `bg-accent` and `text-accent-foreground`"
       },
       {
-        "state": "active",
-        "behavior": "Popup open, animated with `fade-in` and `zoom-in-95`; the focused item in `accent`"
+        "state": "open",
+        "behavior": "With `position=\"popper\"`, the popup fades and zooms in (`fade-in-0`, `zoom-in-95`) with a slide from the trigger's side; the default `item-aligned` popup opens over the trigger without animation (`animate-none`)"
+      },
+      {
+        "state": "closing",
+        "behavior": "With `position=\"popper\"`, the popup fades and zooms out (`fade-out-0`, `zoom-out-95`); the `item-aligned` popup closes without animation"
       },
       {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed`, reduced opacity (`opacity-disabled`) on the trigger or the item"
+        "behavior": "Reduced opacity (`opacity-disabled`) on the trigger or the item; `cursor-not-allowed` on the trigger, `pointer-events-none` on the item"
       },
       {
         "state": "error",
         "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+      },
+      {
+        "state": "placeholder",
+        "behavior": "While no value is chosen, the trigger shows the placeholder in `text-muted-foreground`"
       }
     ],
     "accessibility": "**Pattern**: [Select-Only Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) (Radix Select)\n\n**Role**: A trigger with `role=\"combobox\"` and `aria-expanded`; a `listbox` of `option`s.\n\n**Keyboard**:\n\n| Key                                         | Action                                                |\n| ------------------------------------------- | ----------------------------------------------------- |\n| `Enter` / `Space` / `ArrowDown` / `ArrowUp` | Opens the list                                        |\n| `ArrowDown` / `ArrowUp`                     | Next / previous option                                |\n| `Home` / `End`                              | First / last option                                   |\n| `Enter` / `Space`                           | Selects the option                                    |\n| `Escape`                                    | Closes without changing anything                      |\n| Typing                                      | Moves to the option that starts with the typed letter |\n\n**Accessible name**: Required: a `Label` tied to the trigger, or an `aria-label`.\n\n**Pitfalls**:\n\n- For a long list or on mobile, `NativeSelect` is more accessible.\n- The displayed value (`SelectValue`) must stay readable when no option is chosen (a placeholder).",
@@ -19203,31 +19271,31 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "A `bg-border` line: `h-px w-full` (horizontal) or `w-px self-stretch` (vertical)"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "Not applicable"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Not applicable"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "Not applicable"
       },
       {
-        "state": "`loading`",
+        "state": "error",
         "behavior": "Not applicable"
       },
       {
-        "state": "`error`",
+        "state": "loading",
         "behavior": "Not applicable"
       }
     ],
@@ -19665,16 +19733,16 @@
         "behavior": "Panel closed, no overlay"
       },
       {
+        "state": "focus",
+        "behavior": "Focus trapped inside the panel (Radix focus trap)"
+      },
+      {
         "state": "open",
-        "behavior": "Overlay shown; the panel slides in from its edge with `fade-in` and `slide-in-from-*`"
+        "behavior": "Overlay shown and fading in; the panel slides in from its edge with `fade-in-0` and `slide-in-from-*`"
       },
       {
         "state": "closing",
-        "behavior": "Exit animation: `fade-out` and `slide-out-to-*`"
-      },
-      {
-        "state": "focus",
-        "behavior": "Focus trapped inside the panel (Radix focus trap)"
+        "behavior": "Exit animation: `fade-out-0` and `slide-out-to-*`; the overlay fades out with the panel"
       },
       {
         "state": "disabled",
@@ -20796,23 +20864,27 @@
       },
       {
         "state": "hover",
-        "behavior": "Menu items change background (`bg-sidebar-accent`)"
+        "behavior": "Menu items take the accent background and text (`bg-sidebar-accent`, `text-sidebar-accent-foreground`); a `showOnHover` action appears; the rail shows its `bg-sidebar-border` line"
       },
       {
         "state": "focus",
-        "behavior": "`ring-sidebar-ring` ring `--space-focus-ring-width` wide (`FOCUS_RING_WIDTH`, `lib/focus.ts`) on interactive elements"
+        "behavior": "`ring-sidebar-ring` ring `--space-focus-ring-width` wide (`FOCUS_RING_WIDTH`, `lib/focus.ts`) on interactive elements; a `showOnHover` action appears while its item holds the focus"
       },
       {
         "state": "active",
-        "behavior": "Menu item marked active (`data-active`): accented background, medium-weight text"
+        "behavior": "Menu item marked active (`data-active`): accent background and text, in medium weight on a `SidebarMenuButton` (`font-medium`); a pressed item also takes `bg-sidebar-accent`"
       },
       {
-        "state": "disabled",
-        "behavior": "Disabled items: `pointer-events-none`, `opacity-disabled`"
+        "state": "open",
+        "behavior": "A menu button whose menu is open has no style of its own and takes the accent background and text only on hover (`bg-sidebar-accent`, `text-sidebar-accent-foreground`); a `showOnHover` action stays visible while its menu is open (`aria-expanded:opacity-100`)"
       },
       {
         "state": "collapsed",
         "behavior": "Sidebar reduced to icons, or moved off-screen, depending on `collapsible`"
+      },
+      {
+        "state": "disabled",
+        "behavior": "Disabled items: `pointer-events-none`, `opacity-disabled`"
       },
       {
         "state": "mobile",
@@ -21220,15 +21292,15 @@
       },
       {
         "state": "hover",
-        "behavior": "`ring-ring/50` ring (1px) on the thumb"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide on the thumb"
       },
       {
         "state": "focus",
-        "behavior": "`ring-ring/50` ring (1px) and a hidden outline on the thumb"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide and a hidden outline on the thumb"
       },
       {
         "state": "active",
-        "behavior": "`ring-ring/50` ring (1px) on the thumb while dragging"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide on the thumb while dragging"
       },
       {
         "state": "disabled",
@@ -21342,6 +21414,10 @@
         "behavior": "No toast shown"
       },
       {
+        "state": "error",
+        "behavior": "Toast with an `XCircleIcon` — reports an error"
+      },
+      {
         "state": "success",
         "behavior": "Toast with a `CheckCircleIcon` — confirms a successful action"
       },
@@ -21352,10 +21428,6 @@
       {
         "state": "warning",
         "behavior": "Toast with a `WarningIcon` — a warning"
-      },
-      {
-        "state": "error",
-        "behavior": "Toast with an `XCircleIcon` — reports an error"
       },
       {
         "state": "loading",
@@ -21447,32 +21519,32 @@
     ],
     "states": [
       {
-        "state": "`default`",
+        "state": "default",
         "behavior": "A `size-4` SVG spinning continuously (`animate-spin`), in the inherited color (`currentColor`)"
       },
       {
-        "state": "`hover`",
+        "state": "hover",
         "behavior": "Not applicable"
       },
       {
-        "state": "`focus`",
+        "state": "focus",
         "behavior": "Not applicable"
       },
       {
-        "state": "`active`",
+        "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "`disabled`",
+        "state": "disabled",
         "behavior": "Not applicable — hide the Spinner once the operation is over"
       },
       {
-        "state": "`loading`",
-        "behavior": "The component's one and only state"
+        "state": "error",
+        "behavior": "Not applicable — hide it and show an `Alert` or a `FieldError`"
       },
       {
-        "state": "`error`",
-        "behavior": "Not applicable — hide it and show an `Alert` or a `FieldError`"
+        "state": "loading",
+        "behavior": "The component's one and only state"
       }
     ],
     "accessibility": "**Pattern**: Status (`role=\"status\"`)\n\n**Role**: `role=\"status\"` with `aria-label` = `UI_STRINGS.spinner.label`: announced politely.\n\n**Keyboard**:\n\nNo interaction.\n\n**Accessible name**: The default label (\"Loading\") is generic: replace it through `aria-label`, which takes precedence, and make it specific when that helps (\"Loading transactions\").\n\n**Pitfalls**:\n\n- A spinner inside a button does not replace the button's name: keep the button text, or set `aria-busy` on the button.",
@@ -21751,12 +21823,8 @@
     ],
     "states": [
       {
-        "state": "default (off)",
-        "behavior": "`input` background, thumb on the left (`translate-x-0`), transparent border"
-      },
-      {
-        "state": "default (on)",
-        "behavior": "`primary` background, thumb on the right (`translate-x-[calc(100%-2px)]`)"
+        "state": "default",
+        "behavior": "Pill-shaped track (`rounded-full`) with a transparent border and a round `bg-background` thumb; the track color and thumb position follow `checked` or `unchecked`"
       },
       {
         "state": "hover",
@@ -21764,11 +21832,19 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring` border and `ring-ring/50` ring through `focus-visible`"
+        "behavior": "`ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`; inside a focused `FieldLabel` the switch drops its own ring (`ring-0`, `border-transparent`) and the choice card draws it"
       },
       {
         "state": "active",
-        "behavior": "The thumb slides between its positions"
+        "behavior": "— (no pressed style; on toggle the thumb slides with `transition-transform`)"
+      },
+      {
+        "state": "checked",
+        "behavior": "`primary` background, thumb on the right (`translate-x-[calc(100%-2px)]`); in dark mode the thumb turns `bg-primary-foreground`"
+      },
+      {
+        "state": "unchecked",
+        "behavior": "`input` background, thumb on the left (`translate-x-0`); in dark mode a `bg-input/80` track and a `bg-foreground` thumb"
       },
       {
         "state": "disabled",
@@ -21776,7 +21852,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring; in dark mode `border-destructive/50` and `ring-destructive/40`"
       }
     ],
     "accessibility": "**Pattern**: [Switch](https://www.w3.org/WAI/ARIA/apg/patterns/switch/) (Radix Switch)\n\n**Role**: `role=\"switch\"` on a `button`, with `aria-checked`.\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Space` / `Enter` | Toggles the state               |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`. The label names the setting, not its state (\"Notifications\", not \"On\").\n\n**Pitfalls**:\n\n- A switch acts immediately; when the setting only applies once a form is submitted, use a `Checkbox`.",
@@ -22135,7 +22211,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Table shown with a bottom border on each row"
+        "behavior": "Table shown with a bottom border on each row but the last row of the body"
       },
       {
         "state": "hover",
@@ -22146,8 +22222,12 @@
         "behavior": "Not handled at the table level — focus is on the interactive elements inside (checkboxes, buttons)"
       },
       {
-        "state": "active",
-        "behavior": "A row with `aria-expanded` gets a `bg-muted/50` background; `data-[state=selected]` applies `bg-muted`"
+        "state": "selected",
+        "behavior": "A row with `data-state=\"selected\"` gets a `bg-muted` background"
+      },
+      {
+        "state": "open",
+        "behavior": "A row that holds an expanded control (`aria-expanded`) gets a `bg-muted/50` background"
       },
       {
         "state": "disabled",
@@ -22537,11 +22617,11 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-focus ring-ring/50` ring, `border-ring` border and an outline"
+        "behavior": "On the trigger: `ring-ring/50` ring `--space-focus-ring-width` wide, `border-ring` border and an `outline-ring` outline `--border-width-default` wide; the content panel, which has no border, draws only the ring"
       },
       {
         "state": "active",
-        "behavior": "`bg-background` background, `text-foreground` text, indicator bar visible (`line` variant)"
+        "behavior": "Selected trigger: `bg-background` background, `text-foreground` text (dark: `bg-input/30`, `border-input`); in the `line` variant the background stays transparent and the indicator bar shows (`opacity-100`)"
       },
       {
         "state": "disabled",
@@ -22765,7 +22845,7 @@
       },
       {
         "state": "active",
-        "behavior": "—"
+        "behavior": "— (no specific active style)"
       },
       {
         "state": "disabled",
@@ -22774,6 +22854,10 @@
       {
         "state": "error",
         "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+      },
+      {
+        "state": "placeholder",
+        "behavior": "Placeholder text in `text-muted-foreground`"
       }
     ],
     "accessibility": "**Pattern**: Native `textarea` field\n\n**Role**: Native `textarea`.\n\n**Keyboard**:\n\nNative behavior; `Tab` leaves the field (it does not insert a tab character).\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`.\n\n**Pitfalls**:\n\n- Announce a character limit before it is reached, with a counter linked through `aria-describedby`.",
@@ -23085,10 +23169,10 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring` border and `ring-ring/50` ring through `focus-visible`"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`, and a `ring` border on the `outline` variant (the default variant has no border width)"
       },
       {
-        "state": "active (pressed)",
+        "state": "pressed",
         "behavior": "`muted` background, through `aria-pressed` / `data-[state=on]`"
       },
       {
@@ -23097,7 +23181,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+        "behavior": "`destructive` border on the `outline` variant through `aria-invalid`; on focus, a `ring-destructive/20` ring"
       }
     ],
     "accessibility": "**Pattern**: Toggle [button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)\n\n**Role**: A `button` with `aria-pressed`.\n\n**Keyboard**:\n\n| Key               | Action            |\n| ----------------- | ----------------- |\n| `Enter` / `Space` | Toggles the state |\n\n**Accessible name**: The button text; an icon-only toggle needs an `aria-label` that names the action (\"Bold\"), not the state.\n\n**Pitfalls**:\n\n- The label must not change with the state: `aria-pressed` carries the state.",
@@ -23318,7 +23402,7 @@
       },
       {
         "state": "hover",
-        "behavior": "Background dims, depending on the variant (from `toggleVariants`)"
+        "behavior": "`muted` background and `foreground` text (from `toggleVariants`)"
       },
       {
         "state": "focus",
@@ -23326,7 +23410,7 @@
       },
       {
         "state": "pressed",
-        "behavior": "Selected item (`data-state=\"on\"`), with the active background and text"
+        "behavior": "Selected item (`data-state=\"on\"`), with the `muted` background of `toggleVariants`"
       },
       {
         "state": "disabled",
@@ -23334,7 +23418,7 @@
       },
       {
         "state": "spacing-0",
-        "behavior": "Merged borders; inner corners are square"
+        "behavior": "Items touch with no gap; `outline` items share their borders (`border-l-0`, or `border-t-0` when vertical)"
       },
       {
         "state": "vertical",
@@ -23564,23 +23648,27 @@
       },
       {
         "state": "hover",
-        "behavior": "Appears after the configured delay (`fade-in` and `zoom-in-95` animation)"
+        "behavior": "Opens the tooltip after the `delayDuration` of the `Tooltip` or its `TooltipProvider`, zero by default (see `open`)"
       },
       {
         "state": "focus",
-        "behavior": "Same behavior as hover, triggered by keyboard navigation"
+        "behavior": "Opens the tooltip at once, with no delay and no entry animation (Radix sets `instant-open`); blur closes it"
       },
       {
         "state": "active",
         "behavior": "Not applicable"
       },
       {
-        "state": "disabled",
-        "behavior": "Not applicable — the trigger must not be disabled"
+        "state": "open",
+        "behavior": "`bg-foreground` bubble and arrow with `text-background` text; a hover open (`delayed-open`) enters with `fade-in-0`, `zoom-in-95` and a `slide-in-from-*` from the trigger's side; an `instant-open` (keyboard focus, or a hover right after another tooltip closed) shows with no animation"
       },
       {
         "state": "closing",
-        "behavior": "Exit animation: `fade-out` and `zoom-out-95`"
+        "behavior": "Exit animation: `fade-out-0` and `zoom-out-95`"
+      },
+      {
+        "state": "disabled",
+        "behavior": "Not applicable — the trigger must not be disabled"
       }
     ],
     "accessibility": "**Pattern**: [Tooltip](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) (Radix Tooltip)\n\n**Role**: `role=\"tooltip\"`; the tooltip describes the trigger (`aria-describedby`).\n\n**Keyboard**:\n\n| Key                  | Action            |\n| -------------------- | ----------------- |\n| Focus on the trigger | Shows the tooltip |\n| `Escape`             | Hides it          |\n\n**Accessible name**: A tooltip describes; it does not name: an icon-only button keeps its `aria-label` even with a tooltip.\n\n**Pitfalls**:\n\n- No essential information and no interactive content in a tooltip.\n- A `disabled` button does not receive focus: its tooltip is out of keyboard reach.\n- The content must stay visible while the pointer is over the tooltip itself (WCAG 1.4.13): do not shorten the delays.",

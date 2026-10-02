@@ -23,24 +23,24 @@
  * resolves to `space.scale.2` like any other class; classes that read no
  * token (`w-full`, `flex`, layout) are left out on purpose.
  *
- * Tailwind is driven through `__unstable__loadDesignSystem` from
- * `@tailwindcss/node`: a private, unversioned API, the only one that resolves
- * a class to its CSS against a full stylesheet. It must come from the same
- * release as `tailwindcss` — Dependabot bumps the `tailwind` group together.
- * When a Tailwind upgrade breaks it, the symptom is here, not in the build:
- * this script throws on import or on `candidatesToCss`, or every Tokens
- * section comes out empty, and `specs:validate` fails with it.
+ * The strings and the Tailwind resolver come from scripts/lib/spec-classes.ts,
+ * which says what to do when a Tailwind upgrade breaks them.
  *
  *   npx tsx scripts/build-spec-tokens.ts [--check]
  */
 
-import { readFileSync, readdirSync, writeFileSync } from "node:fs"
+import { readFileSync, writeFileSync } from "node:fs"
 import { resolve, dirname, basename } from "node:path"
 import { fileURLToPath } from "node:url"
-import { __unstable__loadDesignSystem } from "@tailwindcss/node"
 import { format, resolveConfig } from "prettier"
-import ts from "typescript"
 import { nextFontsOf } from "./lib/next-fonts.js"
+import {
+  classResolver,
+  codePathsOf,
+  composedOf,
+  stringsOf,
+  utilityOf,
+} from "./lib/spec-classes.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -96,141 +96,10 @@ function semanticToken(cssVar: string): string | undefined {
   return undefined
 }
 
-const designSystem = await __unstable__loadDesignSystem(
-  readFileSync(resolve(ROOT, "styles/globals.css"), "utf-8"),
-  { base: resolve(ROOT, "styles") }
-)
-
 const VAR = /var\((--[\w-]+)/g
-const cssCache = new Map<string, string | null>()
-function cssOf(candidates: string[]): (string | null)[] {
-  const unknown = [...new Set(candidates)].filter((c) => !cssCache.has(c))
-  if (unknown.length > 0) {
-    const css = designSystem.candidatesToCss(unknown)
-    unknown.forEach((c, i) => cssCache.set(c, css[i] ?? null))
-  }
-  return candidates.map((c) => cssCache.get(c) ?? null)
-}
+const cssOf = await classResolver(ROOT)
 
-/** `dark:hover:bg-primary/80` → `bg-primary/80`: the utility, without its variants. */
-function utilityOf(candidate: string): string {
-  let depth = 0
-  let start = 0
-  for (let i = 0; i < candidate.length; i++) {
-    const ch = candidate[i]
-    if (ch === "[" || ch === "(") depth++
-    else if (ch === "]" || ch === ")") depth--
-    else if (ch === ":" && depth === 0) start = i + 1
-  }
-  return candidate.slice(start).replace(/^!|!$/g, "")
-}
-
-// ---------------------------------------------------------------------------
-// Strings of a component file, with where each one sits
-// ---------------------------------------------------------------------------
 const code = (s: string) => `\`${s}\``
-
-interface Found {
-  text: string
-  where: string
-}
-
-/**
- * Where a node sits: the top-level declaration that holds it, then the object
- * keys down to it — `buttonVariants.variant.destructive` for a cva variant,
- * `Button` for a class in the component's JSX. The `variants` key of a cva
- * config is dropped: every variant path goes through it.
- */
-function whereOf(node: ts.Node): string {
-  const keys: string[] = []
-  let name = "?"
-  let child: ts.Node = node
-  for (let n: ts.Node | undefined = node; n; child = n, n = n.parent) {
-    // A key of a cn({ "classes": condition }) object is a class list, not a
-    // place; so is a key that is the string itself.
-    if (ts.isPropertyAssignment(n) && n.name !== child && !isCnArgument(n)) {
-      const key = n.name
-      keys.unshift(
-        ts.isIdentifier(key) ||
-          ts.isStringLiteral(key) ||
-          ts.isNumericLiteral(key)
-          ? key.text
-          : "?"
-      )
-    }
-    if (ts.isSourceFile(n.parent)) {
-      if (ts.isFunctionDeclaration(n) && n.name) name = n.name.text
-      else if (ts.isVariableStatement(n))
-        name = n.declarationList.declarations[0].name.getText()
-      break
-    }
-  }
-  if (keys[0] === "variants") keys.shift()
-  return [name, ...keys].join(".")
-}
-
-function isCnArgument(assignment: ts.PropertyAssignment): boolean {
-  const call = assignment.parent.parent
-  return (
-    ts.isCallExpression(call) &&
-    ts.isIdentifier(call.expression) &&
-    call.expression.text === "cn"
-  )
-}
-
-async function stringsOf(file: string): Promise<Found[]> {
-  const source = readFileSync(resolve(ROOT, file), "utf-8")
-  const sf = ts.createSourceFile(
-    file,
-    source,
-    ts.ScriptTarget.Latest,
-    true,
-    ts.ScriptKind.TSX
-  )
-
-  // Constants imported from @/lib/*, by local name → their runtime value.
-  const libValues = new Map<string, { value: string; libFile: string }>()
-  for (const stmt of sf.statements) {
-    if (!ts.isImportDeclaration(stmt)) continue
-    const spec = (stmt.moduleSpecifier as ts.StringLiteral).text
-    if (!spec.startsWith("@/lib/") || spec === "@/lib/utils") continue
-    const bindings = stmt.importClause?.namedBindings
-    if (!bindings || !ts.isNamedImports(bindings)) continue
-    const libFile = `${spec.slice(2)}.ts`
-    const exports = (await import(resolve(ROOT, libFile))) as Record<
-      string,
-      unknown
-    >
-    for (const el of bindings.elements) {
-      const value = exports[(el.propertyName ?? el.name).text]
-      if (typeof value === "string")
-        libValues.set(el.name.text, { value, libFile })
-    }
-  }
-
-  const found: Found[] = []
-  const visit = (node: ts.Node) => {
-    if (ts.isImportDeclaration(node)) return
-    if (
-      ts.isStringLiteral(node) ||
-      ts.isNoSubstitutionTemplateLiteral(node) ||
-      ts.isTemplateHead(node) ||
-      ts.isTemplateMiddle(node) ||
-      ts.isTemplateTail(node)
-    )
-      found.push({ text: node.text, where: code(whereOf(node)) })
-    else if (ts.isIdentifier(node) && libValues.has(node.text)) {
-      const { value, libFile } = libValues.get(node.text)!
-      found.push({
-        text: value,
-        where: `${code(whereOf(node))} via ${code(node.text)} (${code(libFile)})`,
-      })
-    }
-    ts.forEachChild(node, visit)
-  }
-  visit(sf)
-  return found
-}
 
 // ---------------------------------------------------------------------------
 // Section
@@ -249,7 +118,7 @@ async function tokensOf(file: string): Promise<Map<string, Row>> {
     rows.set(token, row)
   }
 
-  for (const { text, where } of await stringsOf(file)) {
+  for (const { text, where } of await stringsOf(ROOT, file)) {
     const candidates = text.split(/\s+/).filter(Boolean)
     cssOf(candidates).forEach((css, i) => {
       // A class: the token is what its CSS reads. Anything else (a style
@@ -266,15 +135,6 @@ async function tokensOf(file: string): Promise<Map<string, Row>> {
   return rows
 }
 
-/** Specs of the design-system components a file imports, e.g. `Button`. */
-function composedOf(file: string, specOf: Map<string, string>): string[] {
-  const source = readFileSync(resolve(ROOT, file), "utf-8")
-  return [...source.matchAll(/from "@\/components\/ui\/([\w-]+)"/g)]
-    .map(([, file]) => specOf.get(`components/ui/${file}.tsx`))
-    .filter((spec): spec is string => spec !== undefined)
-    .sort()
-}
-
 const list = (values: Set<string>, show = (s: string) => s) =>
   [...values].sort().map(show).join(" · ")
 
@@ -283,7 +143,7 @@ async function sectionFor(
   specOf: Map<string, string>
 ): Promise<string> {
   const rows = await tokensOf(codePath)
-  const composed = composedOf(codePath, specOf)
+  const composed = composedOf(ROOT, codePath, specOf)
   const composes =
     composed.length > 0
       ? `Composes ${composed.map(code).join(", ")} — ${composed.length > 1 ? "their tokens are listed in their own specs" : "its tokens are listed in its own spec"}.`
@@ -327,15 +187,8 @@ function withSection(markdown: string, section: string): string {
   )
 }
 
-const specFiles = readdirSync(SPECS_DIR).filter((f) => f.endsWith(".md"))
-const codePathOf = new Map(
-  specFiles.map((file) => {
-    const md = readFileSync(resolve(SPECS_DIR, file), "utf-8")
-    const codePath = md.match(/^\| code_path\s*\|\s*(\S+)/m)?.[1]
-    if (!codePath) throw new Error(`${file}: no code_path in Metadata`)
-    return [file, codePath]
-  })
-)
+const codePathOf = codePathsOf(SPECS_DIR)
+const specFiles = [...codePathOf.keys()]
 const specOf = new Map(
   [...codePathOf].map(([file, codePath]) => [codePath, basename(file, ".md")])
 )

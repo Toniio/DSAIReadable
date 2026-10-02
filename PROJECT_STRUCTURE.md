@@ -153,16 +153,17 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Specs — `npm run specs:validate`
 
-| Script                        | npm command      | Role                                                                                                                                                                         |
-| ----------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build-spec-variants.ts`      | `specs:variants` | The `Variants` section, from the code's `cva()` calls                                                                                                                        |
-| `build-spec-tokens.ts`        | `specs:tokens`   | The `Tokens` section, classes resolved by Tailwind down to the token                                                                                                         |
-| `build-spec-api.ts`           | `specs:api`      | The `Props / API` section, from the TypeScript exports (`scripts/lib/component-api.ts`)                                                                                      |
-| `build-spec-choices.ts`       | `specs:choices`  | The index's choice rules, copied into the `Usage` of the specs they concern                                                                                                  |
-| `lint-spec-sections.ts`       | —                | The 13 canonical sections of a component spec, the 9 of a page pattern, in order                                                                                             |
-| `lint-spec-wording.ts`        | —                | No hedged wording; every Constraints line (Usage and Spacing in a pattern) opens with a keyword                                                                              |
-| `lint-foundation-examples.ts` | —                | Every tsx and ts block of `specs/foundations/` passes the ESLint plugin's `recommended` config; a `// ❌` counter-example may break a class rule, never use a native element |
-| `build-llms-txt.ts`           | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role                                                                                             |
+| Script                        | npm command      | Role                                                                                                                                                                                    |
+| ----------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build-spec-variants.ts`      | `specs:variants` | The `Variants` section, from the code's `cva()` calls                                                                                                                                   |
+| `build-spec-tokens.ts`        | `specs:tokens`   | The `Tokens` section, classes resolved by Tailwind down to the token                                                                                                                    |
+| `build-spec-api.ts`           | `specs:api`      | The `Props / API` section, from the TypeScript exports (`scripts/lib/component-api.ts`)                                                                                                 |
+| `build-spec-states.ts`        | `specs:states`   | The `States` section: the component's classes grouped by the state their variants name (`scripts/lib/spec-classes.ts`); the descriptions are kept, and one the classes contradict fails |
+| `build-spec-choices.ts`       | `specs:choices`  | The index's choice rules, copied into the `Usage` of the specs they concern                                                                                                             |
+| `lint-spec-sections.ts`       | —                | The 13 canonical sections of a component spec, the 9 of a page pattern, in order                                                                                                        |
+| `lint-spec-wording.ts`        | —                | No hedged wording; every Constraints line (Usage and Spacing in a pattern) opens with a keyword                                                                                         |
+| `lint-foundation-examples.ts` | —                | Every tsx and ts block of `specs/foundations/` passes the ESLint plugin's `recommended` config; a `// ❌` counter-example may break a class rule, never use a native element            |
+| `build-llms-txt.ts`           | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role                                                                                                        |
 
 ### Index — `npm run index:validate`
 
@@ -213,6 +214,7 @@ One spec per component, in 13 sections:
 rules are written **MUST** / **MUST NOT** or **SHOULD** … **unless** (**Note** for a fact, in Constraints); `lint-spec-wording` rejects "avoid", "prefer", "if needed"… and any Constraints line without a keyword;
 the rules for choosing between sibling components (the index's `composition_rules`, `applies_to` field) are copied as the last bullet of their `Usage` (`npm run specs:choices`);
 `Props / API` is generated from the TypeScript exports — one block per export, types and defaults taken from the code; only the descriptions are edited by hand (`npm run specs:api`);
+`States` is generated from the code's classes, grouped by the state their variants name (`hover:`, `data-open:`, `aria-invalid:`…); only the descriptions are edited by hand, and one that names a percentage, a px value or a class the component does not draw fails (`npm run specs:states`);
 `Accessibility` follows a fixed structure — Pattern, Role, Keyboard, Accessible name, Pitfalls — and targets WCAG 2.2 AA.
 
 ### `specs/foundations/` — Foundation specs
@@ -380,7 +382,7 @@ tokens/*.json
     ├──▶ tokens.css ──▶ styles/globals.css (@theme inline) ──▶ Tailwind classes ──▶ components/ui/
     └──▶ token-reference.md · tokens.manifest.json          (docs:tokens)
 
-components/ui/*.tsx ──▶ specs/components/*.md               (Variants, Tokens, Props / API)
+components/ui/*.tsx ──▶ specs/components/*.md               (Variants, Tokens, Props / API, States)
 design-system.index.json ──▶ specs/components/*.md          (choice rules, Usage)
 specs/ ──▶ llms.txt                                         (docs:llms)
 
