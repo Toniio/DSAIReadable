@@ -1,8 +1,18 @@
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils"
+import { createRequire } from "node:module"
 
+/**
+ * The version of this package, read where it runs: `versions:sync` writes it in
+ * `package.json`, which sits two folders above both `src/rules` and `dist/rules`.
+ */
+export const { version } = createRequire(import.meta.url)(
+  "../../package.json"
+) as { version: string }
+
+/** A rule's docs are the README of the release it ships in, not of `main`, which can be ahead of it. */
 export const createRule = ESLintUtils.RuleCreator(
   (name) =>
-    `https://github.com/Toniio/DSAIReadable/blob/main/packages/eslint-plugin/README.md#${name}`
+    `https://github.com/Toniio/DSAIReadable/blob/v${version}/packages/eslint-plugin/README.md#${name}`
 )
 
 /** Functions whose arguments are class names. */

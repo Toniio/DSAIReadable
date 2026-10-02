@@ -8,7 +8,11 @@
   "plugins": [
     {
       "name": "dsaireadable",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "Toniio/DSAIReadable",
+        "ref": "v0.1.1"
+      },
       "description": "Builds React screens with the DSAIReadable design system and reviews them for basic UI and UX errors: the dsaireadable-build and dsaireadable-ui-guard skills, and the design system's MCP server.",
       "version": "0.1.1",
       "license": "MIT",

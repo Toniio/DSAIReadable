@@ -8,6 +8,7 @@ import noExternalUiImports from "./rules/no-external-ui-imports.js"
 import noInlineSvg from "./rules/no-inline-svg.js"
 import noNativeInteractiveElements from "./rules/no-native-interactive-elements.js"
 import noRawValues from "./rules/no-raw-values.js"
+import { version } from "./rules/utils.js"
 
 const rules = {
   "no-class-interpolation": noClassInterpolation,
@@ -40,7 +41,7 @@ interface ConfigOptions {
 }
 
 const plugin = {
-  meta: { name: "@dsaireadable/eslint-plugin" },
+  meta: { name: "@dsaireadable/eslint-plugin", version },
   rules,
   configs: {} as Record<string, TSESLint.FlatConfig.Config[]>,
   createConfig,

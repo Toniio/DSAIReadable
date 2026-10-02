@@ -13,7 +13,10 @@
  *   ② `changeset version` bumps package.json and writes the expected
  *      CHANGELOG entry, then consumes the changeset;
  *   ③ `versions:check` catches the copies that did not follow, and
- *      `versions:sync` brings them along, lockfiles included;
+ *      `versions:sync` brings them along, lockfiles included, and the links
+ *      and install commands that name the release tag (the `conventions`
+ *      item, the server's README, `npx skills add`, the Claude Code plugin's
+ *      `ref`); it also refuses a distributed file that links to `main`;
  *   ④ `docs:llms:check` passes on the copy at the old version, fails once the
  *      version moves, and `docs:llms` takes every link of llms.txt to the new
  *      tag.
@@ -76,6 +79,7 @@ try {
   mkdirSync(join(tmp, "mcp-server"))
   mkdirSync(join(tmp, "packages/eslint-plugin"), { recursive: true })
   mkdirSync(join(tmp, ".claude-plugin"))
+  mkdirSync(join(tmp, "registry/conventions"), { recursive: true })
   for (const file of [
     "package.json",
     "package-lock.json",
@@ -83,6 +87,9 @@ try {
     "mcp-server/package.json",
     "packages/eslint-plugin/package.json",
     ".claude-plugin/marketplace.json",
+    "registry/conventions/dsaireadable.md",
+    "mcp-server/README.md",
+    "README.md",
     ".changeset/config.json",
     "llms.txt",
   ]) {
@@ -185,6 +192,9 @@ try {
         "packages/eslint-plugin/package.json",
         "package-lock.json",
         ".claude-plugin/marketplace.json",
+        "registry/conventions/dsaireadable.md",
+        "mcp-server/README.md",
+        "README.md",
       ].every((file) => drift.output.includes(file)),
     "versions:check catches every copy that did not follow"
   )
@@ -213,6 +223,52 @@ try {
     marketplace.includes(`"version": "${next}"`) &&
       marketplace.includes(`"@dsaireadable/mcp-server@${next}"`),
     `the Claude Code plugin and the server it starts carry ${next}`
+  )
+
+  const text = (file: string) => readFileSync(join(tmp, file), "utf-8")
+  const marketplaceRef = (
+    JSON.parse(marketplace) as {
+      plugins: { source: { ref: string } }[]
+    }
+  ).plugins[0].source.ref
+  expect(
+    marketplaceRef === `v${next}`,
+    `the Claude Code plugin installs its skills from the tag v${next}`
+  )
+  const conventions = text("registry/conventions/dsaireadable.md")
+  expect(
+    conventions.includes(`Toniio/DSAIReadable/<item>#v${next}`) &&
+      conventions.includes(
+        `DSAIReadable/blob/v${next}/specs/components/<Component>.md`
+      ),
+    `the conventions item installs and links its specs at the tag v${next}`
+  )
+  expect(
+    text("mcp-server/README.md").includes(
+      `DSAIReadable/blob/v${next}/README.md#mcp-server`
+    ) &&
+      text("README.md").includes(`npx skills add Toniio/DSAIReadable#v${next}`),
+    `the server's README and \`npx skills add\` name the tag v${next}`
+  )
+  // A link to the moving `main`, wherever it hides in what is distributed.
+  mkdirSync(join(tmp, "skills"), { recursive: true })
+  for (const link of [
+    "https://github.com/Toniio/DSAIReadable/blob/main/specs/components/Button.md",
+    "https://github.com/Toniio/DSAIReadable/tree/main/skills",
+    "https://raw.githubusercontent.com/Toniio/DSAIReadable/main/llms.txt",
+    "https://github.com/Toniio/DSAIReadable#mcp-server",
+  ]) {
+    writeFileSync(join(tmp, "skills/leak.md"), `See ${link}\n`)
+    const leak = script("sync-versions", "--check")
+    expect(
+      !leak.ok && leak.output.includes("skills/leak.md:1"),
+      `versions:check refuses a distributed file that links to ${link.replace("https://", "")}`
+    )
+  }
+  rmSync(join(tmp, "skills/leak.md"))
+  expect(
+    script("sync-versions", "--check").ok,
+    "versions:check passes again once the link is gone"
   )
 
   // ④ llms.txt, whose links name the release tag
