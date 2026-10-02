@@ -105,7 +105,7 @@ function NavigationMenuItem({
  * </NavigationMenuLink>
  */
 const navigationMenuTriggerStyle = cva(
-  `group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-none px-2.5 py-1.5 text-xs font-medium transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted focus:bg-muted ${FOCUS_RING} disabled:pointer-events-none disabled:opacity-disabled data-popup-open:bg-muted/50 data-popup-open:hover:bg-muted data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted`
+  `group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-none px-2.5 py-1.5 text-xs font-medium transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted focus:bg-muted ${FOCUS_RING} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid disabled:pointer-events-none disabled:opacity-disabled data-popup-open:bg-muted/50 data-popup-open:hover:bg-muted data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted`
 )
 
 /**
@@ -213,7 +213,7 @@ function NavigationMenuLink({
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
       className={cn(
-        `flex items-center gap-2 rounded-none p-2 text-xs transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted focus:bg-muted ${FOCUS_RING} in-data-[slot=navigation-menu-content]:rounded-none data-active:bg-muted/50 data-active:hover:bg-muted data-active:focus:bg-muted [&_svg:not([class*='size-'])]:size-4`,
+        `flex items-center gap-2 rounded-none p-2 text-xs transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted focus:bg-muted ${FOCUS_RING} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid in-data-[slot=navigation-menu-content]:rounded-none data-active:bg-muted/50 data-active:hover:bg-muted data-active:focus:bg-muted [&_svg:not([class*='size-'])]:size-4`,
         className
       )}
       {...props}

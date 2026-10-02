@@ -255,8 +255,11 @@
   :root {
     --spacing: var(--space-scale-1);
   }
+  /* The browser's own focus outline, on what draws no focus style of its own
+     (a link, an unstyled trigger, a scroll viewport), takes the focus ring
+     color at full alpha: at 50% it measured about 1.9:1 (WCAG 1.4.11). */
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring;
   }
   body {
     @apply bg-background text-foreground;

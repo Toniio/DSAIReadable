@@ -41,7 +41,8 @@ export const FOCUS_RING_WITHIN =
 /**
  * Suppresses the native outline. Prefer this over `outline-none`, which drops
  * the outline in forced-colors mode where box-shadow rings are not painted,
- * leaving no indicator at all. It also poisons `--tw-outline-style`, which is
- * what silently disabled ScrollArea's and NavigationMenu's own `outline-1`.
+ * leaving no indicator at all. Both set `--tw-outline-style` to none, which is
+ * what silently disabled ScrollArea's and NavigationMenu's own `outline-1`: an
+ * element that resets its outline and draws one at focus adds `outline-solid`.
  */
 export const FOCUS_OUTLINE_RESET = "outline-hidden"

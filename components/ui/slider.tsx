@@ -83,7 +83,7 @@ function Slider({
             ariaLabel,
             ariaLabelledBy
           )}
-          className={`relative block size-3 shrink-0 rounded-none border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-(length:--space-focus-ring-width) ${FOCUS_RING_WIDTH} focus-visible:outline-hidden active:ring-(length:--space-focus-ring-width) disabled:pointer-events-none disabled:opacity-disabled`}
+          className={`relative block size-3 shrink-0 rounded-none border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-(length:--space-focus-ring-width) ${FOCUS_RING_WIDTH} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid active:ring-(length:--space-focus-ring-width) disabled:pointer-events-none disabled:opacity-disabled`}
         />
       ))}
     </SliderPrimitive.Root>

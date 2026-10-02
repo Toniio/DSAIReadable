@@ -147,10 +147,10 @@
     "path": "color.border.focus",
     "css_var": "--color-border-focus",
     "light": "{primitive.color.mist.500}",
-    "dark": "{primitive.color.mist.500}",
+    "dark": "{primitive.color.mist.400}",
     "type": "color",
     "status": "active",
-    "usage": "Focus ring outline for keyboard accessibility. Not for resting or hover states."
+    "usage": "Focus ring outline for keyboard accessibility. Lighter in dark mode, so the solid part of an indicator keeps 3:1 on the dark card and on a field's fill. Not for resting or hover states."
   },
   {
     "path": "color.icon.default",
@@ -1690,7 +1690,7 @@
     "dark": "{primitive.border-width.1}",
     "type": "dimension",
     "status": "active",
-    "usage": "Width of every plain border: `border`, `border-t`, `divide-x`… Not for focus rings, which use space.focus-ring-width."
+    "usage": "Width of every plain border: `border`, `border-t`, `divide-x`… and of the solid outline a focus indicator draws on an element without a border (`outline-(length:--border-width-default)`). Not for focus rings, which use space.focus-ring-width."
   },
   {
     "path": "border-width.chart-indicator",

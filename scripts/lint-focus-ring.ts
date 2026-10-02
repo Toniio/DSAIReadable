@@ -13,9 +13,8 @@
  *      are pixel values, forbidden by the repository's first rule, and they
  *      are how the system drifted to three different focus widths;
  *   ③ no `outline-none` — it removes the outline in forced-colors mode, where
- *      box-shadow rings are not painted, leaving no indicator at all; it also
- *      poisons `--tw-outline-style`, which silently disabled ScrollArea's and
- *      NavigationMenu's own `outline-1`. Use `outline-hidden`;
+ *      box-shadow rings are not painted, leaving no indicator at all. Use
+ *      `outline-hidden`;
  *   ④ every single outline reset must be answered, on the spot, by a ring in
  *      the same class string or by a "focus-managed: <mechanism>" comment
  *      naming what draws the indicator instead. Checked per occurrence, not
@@ -161,8 +160,7 @@ for (const abs of files) {
         detail:
           `uses "${c.prefix}outline-none". Forced-colors mode does not paint ` +
           `box-shadow rings, so the element is left with no focus indicator ` +
-          `at all, and "outline-none" also poisons --tw-outline-style for any ` +
-          `later "outline-<n>". Use FOCUS_OUTLINE_RESET from @/lib/focus.`,
+          `at all. Use FOCUS_OUTLINE_RESET from @/lib/focus.`,
       })
   })
 }

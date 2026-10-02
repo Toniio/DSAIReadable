@@ -31,7 +31,7 @@ function ScrollArea({
       <ScrollAreaPrimitive.Viewport
         data-slot="scroll-area-viewport"
         tabIndex={0}
-        className={`size-full rounded-[inherit] transition-[color,box-shadow] ${FOCUS_OUTLINE_RESET} ${FOCUS_RING}`}
+        className={`size-full rounded-[inherit] transition-[color,box-shadow] ${FOCUS_OUTLINE_RESET} ${FOCUS_RING} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid`}
       >
         {children}
       </ScrollAreaPrimitive.Viewport>

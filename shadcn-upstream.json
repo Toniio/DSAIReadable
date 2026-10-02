@@ -339,6 +339,12 @@
             "to": "z-popover",
             "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a navigation menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "classes": {
+          "focus-visible:outline-1": {
+            "to": "focus-visible:border-ring focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
+            "reason": "Upstream's 1px focus outline on the trigger and the link drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
+          }
         }
       },
       "dialog": {
@@ -420,6 +426,10 @@
           "opacity-50": {
             "to": "not-has-[button:disabled]:opacity-disabled",
             "reason": "A disabled day dimmed twice: the cell took opacity-50 and its button, disabled whenever it is not focused, took Button's own disabled opacity, 0.25 in all (0.5 x 0.5), and the muted text fell to about 1.4:1. The cell now dims only when its button does not (a day with no button, or a focused disabled day, which is aria-disabled and not :disabled): 0.5 in every case, once."
+          },
+          "group-data-[focused=true]/day:border-ring": {
+            "to": "group-data-[focused=true]/day:outline-solid group-data-[focused=true]/day:outline-(length:--border-width-default) group-data-[focused=true]/day:outline-ring",
+            "reason": "The focused day's border-ring drew nothing: the day button is border-0, so its indicator was the ring-ring/50 halo alone. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators), the treatment of every focusable element without a border."
           }
         }
       },
@@ -450,6 +460,10 @@
           "focus-visible:ring-ring": {
             "to": "focus-visible:border-ring focus-visible:ring-ring/50",
             "reason": "The resizable handle's focus indicator, a full-color 1px ring, becomes the shared focus ring: border-ring plus a 2px ring at 50% alpha (ring-ring/50). Every focusable element draws that ring."
+          },
+          "focus-visible:outline-hidden": {
+            "to": "focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
+            "reason": "The handle hid its outline at focus and drew FOCUS_RING, whose border-ring paints nothing on a 1px line with no border: focus showed the halo alone. The outline is drawn instead: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators)."
           }
         }
       },
@@ -492,6 +506,10 @@
           "active:ring-1": {
             "to": "active:ring-(length:--space-focus-ring-width)",
             "reason": "The ring on a Slider thumb while dragging goes from 1px to 2px (space.focus-ring-width). ring-1 is a raw pixel width, forbidden; the Slider spec lists the focus ring token for hover and active."
+          },
+          "focus-visible:outline-hidden": {
+            "to": "focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
+            "reason": "The thumb's border-ring border is there at rest, so focus only added the ring-ring/50 halo, which hover and drag draw too. The outline is drawn instead of hidden: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators)."
           }
         }
       },
@@ -586,6 +604,14 @@
             "reason": "Dead class: it colors the border of the trigger's ::after, which has no box (no content, size or border width), so it drew nothing. The trigger's focus indicator is FOCUS_RING; the class is dropped so the States table does not list a style that does nothing."
           }
         }
+      },
+      "scroll-area": {
+        "classes": {
+          "focus-visible:outline-1": {
+            "to": "focus-visible:border-ring focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
+            "reason": "Upstream's 1px focus outline on the viewport drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
+          }
+        }
       }
     },
     "constants": [
@@ -667,7 +693,7 @@
     },
     "badge": {
       "status": "reanchored",
-      "reason": "The success and warning variants (declared in shadcn.divergences), and the destructive variant's focus border of FOCUS_RING_DESTRUCTIVE.",
+      "reason": "The success and warning variants (declared in shadcn.divergences), and the destructive variant's focus border of FOCUS_RING_DESTRUCTIVE. A destructive badge link's focus border is border-destructive/40 and an invalid badge keeps its destructive border, so focus showed a halo alone, about 2.4:1 and 1.4:1: both draw a solid 1px outline-destructive at focus (border-width.default, outline-solid), 4.77:1 light and 6.83:1 dark.",
       "added": [
         "[a]:hover:bg-success/20",
         "[a]:hover:bg-warning/20",
@@ -677,7 +703,13 @@
         "dark:bg-warning/20",
         "focus-visible:border-destructive/40",
         "text-success",
-        "text-warning"
+        "text-warning",
+        "focus-visible:outline-solid",
+        "focus-visible:outline-(length:--border-width-default)",
+        "focus-visible:outline-destructive",
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
       ]
     },
     "breadcrumb": {
@@ -688,11 +720,17 @@
     },
     "button": {
       "status": "reanchored",
+      "reason": "The outline variant's bare dark:border-input and dark:bg-input/30 tie in specificity with focus-visible:border-ring and aria-expanded:bg-muted and win on emission order, so in dark an open outline button looked closed and its focused border was border-input (WCAG 1.4.11 part of the indicator). Each gets a dark twin. The destructive variant's focus border is border-destructive/40 and an invalid button keeps its destructive border, so focus showed a halo alone, about 2.1:1 and 1.4:1: both draw a solid 1px outline-destructive at focus (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark.",
       "added": [
         "dark:aria-expanded:bg-muted",
-        "dark:focus-visible:border-ring"
-      ],
-      "reason": "The outline variant's bare dark:border-input and dark:bg-input/30 tie in specificity with focus-visible:border-ring and aria-expanded:bg-muted and win on emission order, so in dark an open outline button looked closed and its focused border was border-input (WCAG 1.4.11 part of the indicator). Each gets a dark twin."
+        "dark:focus-visible:border-ring",
+        "focus-visible:outline-solid",
+        "focus-visible:outline-(length:--border-width-default)",
+        "focus-visible:outline-destructive",
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "button-group": {
       "status": "reanchored"
@@ -735,24 +773,36 @@
       "reason": "The chart surface is a tab stop (Recharts' accessibility layer) whose outline upstream hides, counting on the tooltip to mark focus. Recharts shows the tooltip on the first focus only and never without ChartTooltip (WCAG 2.4.7), so ChartContainer draws the ring and a 1px outline of border-ring while anything inside it is :focus-visible; has-focus-visible, not .recharts-surface, also covers a Pie layer and a Brush."
     },
     "checkbox": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "collapsible": {
       "status": "reanchored"
     },
     "combobox": {
       "status": "reanchored",
+      "reason": "ComboboxChipsInput's placeholder took Tailwind's default (currentColor at 50%, 3.70:1); it takes text-muted-foreground (color.text.subtle), as Input and ComboboxInput do. ComboboxChips holding an invalid input shows its destructive border and ring at rest, so focusing the input changed nothing (WCAG 2.4.7): while focus is within, it draws a solid 1px outline-destructive (border-width.default, outline-solid), 4.77:1 light and 6.83:1 dark.",
       "added": [
-        "placeholder:text-muted-foreground"
-      ],
-      "reason": "ComboboxChipsInput's placeholder took Tailwind's default (currentColor at 50%, 3.70:1); it takes text-muted-foreground (color.text.subtle), as Input and ComboboxInput do."
+        "placeholder:text-muted-foreground",
+        "has-aria-invalid:focus-within:outline-solid",
+        "has-aria-invalid:focus-within:outline-(length:--border-width-default)",
+        "has-aria-invalid:focus-within:outline-destructive"
+      ]
     },
     "command": {
       "status": "reanchored",
-      "reason": "The input's InputGroup draws the focus ring (WCAG 2.4.7): upstream's input-group rule never matches the command-input slot.",
+      "reason": "The input's InputGroup draws the focus ring (WCAG 2.4.7): upstream's input-group rule never matches the command-input slot. The group has no border (border-none), so that halo alone, about 1.9:1, was the indicator: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.33:1 light and 6.35:1 dark on the popover as painted.",
       "added": [
         "has-[[data-slot=command-input]:focus-visible]:ring-(length:--space-focus-ring-width)",
-        "has-[[data-slot=command-input]:focus-visible]:ring-ring/50"
+        "has-[[data-slot=command-input]:focus-visible]:ring-ring/50",
+        "has-[[data-slot=command-input]:focus-visible]:outline-solid",
+        "has-[[data-slot=command-input]:focus-visible]:outline-(length:--border-width-default)",
+        "has-[[data-slot=command-input]:focus-visible]:outline-ring"
       ]
     },
     "context-menu": {
@@ -788,17 +838,32 @@
       "reason": "No shadcn/ui item: a design-system component."
     },
     "input": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "input-group": {
       "status": "reanchored",
-      "reason": "An icon-only InputGroupButton is at least size.target.min wide (WCAG 2.5.8).",
+      "reason": "An icon-only InputGroupButton is at least size.target.min wide (WCAG 2.5.8). A group holding an invalid control shows its destructive border and ring at rest, so focusing the control changed nothing (WCAG 2.4.7): while its invalid control has focus-visible, the group draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark.",
       "added": [
-        "min-w-target"
+        "min-w-target",
+        "has-[[data-slot=input-group-control][aria-invalid=true]:focus-visible]:outline-solid",
+        "has-[[data-slot=input-group-control][aria-invalid=true]:focus-visible]:outline-(length:--border-width-default)",
+        "has-[[data-slot=input-group-control][aria-invalid=true]:focus-visible]:outline-destructive"
       ]
     },
     "input-otp": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "The active slot of an invalid code keeps its destructive border, so the slot showed the ring-destructive/20 halo alone, about 1.4:1 light and 1.9:1 dark: it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark.",
+      "added": [
+        "data-[active=true]:aria-invalid:outline-solid",
+        "data-[active=true]:aria-invalid:outline-(length:--border-width-default)",
+        "data-[active=true]:aria-invalid:outline-destructive"
+      ]
     },
     "item": {
       "status": "reanchored"
@@ -818,13 +883,16 @@
     },
     "menubar": {
       "status": "reanchored",
-      "reason": "The menubar trigger draws FOCUS_RING: upstream shows no focus indicator on it (WCAG 2.4.7). MenubarCheckboxItem takes data-disabled:opacity-disabled and a size-4 icon, as its siblings do: every shadcn style omits both on the checkbox item alone.",
+      "reason": "The menubar trigger draws FOCUS_RING: upstream shows no focus indicator on it (WCAG 2.4.7). MenubarCheckboxItem takes data-disabled:opacity-disabled and a size-4 icon, as its siblings do: every shadcn style omits both on the checkbox item alone. The trigger has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark.",
       "added": [
         "focus-visible:border-ring",
         "focus-visible:ring-(length:--space-focus-ring-width)",
         "focus-visible:ring-ring/50",
         "data-disabled:opacity-disabled",
-        "[&_svg:not([class*='size-'])]:size-4"
+        "[&_svg:not([class*='size-'])]:size-4",
+        "focus-visible:outline-solid",
+        "focus-visible:outline-(length:--border-width-default)",
+        "focus-visible:outline-ring"
       ]
     },
     "message": {
@@ -834,7 +902,13 @@
       "status": "reanchored"
     },
     "native-select": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "navigation-menu": {
       "status": "reanchored"
@@ -856,7 +930,13 @@
       "status": "reanchored"
     },
     "radio-group": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "resizable": {
       "status": "reanchored"
@@ -865,7 +945,13 @@
       "status": "reanchored"
     },
     "select": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "separator": {
       "status": "reanchored"
@@ -889,25 +975,49 @@
       "status": "reanchored"
     },
     "switch": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "table": {
       "status": "reanchored"
     },
     "tabs": {
       "status": "reanchored",
-      "reason": "TabsContent, a tab stop, draws FOCUS_RING (WCAG 2.4.7); upstream resets its outline and draws nothing.",
+      "reason": "TabsContent, a tab stop, draws FOCUS_RING (WCAG 2.4.7); upstream resets its outline and draws nothing. TabsContent has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark, as TabsTrigger does.",
       "added": [
         "focus-visible:border-ring",
         "focus-visible:ring-(length:--space-focus-ring-width)",
-        "focus-visible:ring-ring/50"
+        "focus-visible:ring-ring/50",
+        "focus-visible:outline-solid",
+        "focus-visible:outline-(length:--border-width-default)",
+        "focus-visible:outline-ring"
       ]
     },
     "textarea": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "An invalid control keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "toggle": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "The default variant has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark. An invalid toggle keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "added": [
+        "focus-visible:outline-solid",
+        "focus-visible:outline-(length:--border-width-default)",
+        "focus-visible:outline-ring",
+        "aria-invalid:focus-visible:outline-solid",
+        "aria-invalid:focus-visible:outline-(length:--border-width-default)",
+        "aria-invalid:focus-visible:outline-destructive"
+      ]
     },
     "toggle-group": {
       "status": "reanchored"

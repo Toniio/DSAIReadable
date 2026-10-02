@@ -72,6 +72,10 @@
       "input": {
         "$type": "color",
         "$value": "{primitive.color.white-alpha.15}"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{primitive.color.mist.400}"
       }
     },
     "icon": {

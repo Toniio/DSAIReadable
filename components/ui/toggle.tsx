@@ -14,11 +14,12 @@ import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
  * <button className={toggleVariants({ variant: "outline", size: "sm" })}>Bold</button>
  */
 const toggleVariants = cva(
-  `group/toggle inline-flex items-center justify-center gap-1 rounded-none text-xs font-medium whitespace-nowrap transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted hover:text-foreground ${FOCUS_RING} disabled:pointer-events-none disabled:opacity-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
+  `group/toggle inline-flex items-center justify-center gap-1 rounded-none text-xs font-medium whitespace-nowrap transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted hover:text-foreground ${FOCUS_RING} disabled:pointer-events-none disabled:opacity-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:focus-visible:outline-(length:--border-width-default) aria-invalid:focus-visible:outline-destructive aria-invalid:focus-visible:outline-solid aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
   {
     variants: {
       variant: {
-        default: "bg-transparent",
+        default:
+          "bg-transparent focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid",
         outline: "border border-input bg-transparent hover:bg-muted",
       },
       size: {

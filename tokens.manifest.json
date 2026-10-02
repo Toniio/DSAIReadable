@@ -3591,12 +3591,14 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.500}"
+        "light": "{primitive.color.mist.500}",
+        "dark": "{primitive.color.mist.400}"
       },
       "value": {
-        "light": "#67787c"
+        "light": "#67787c",
+        "dark": "#9ca8ab"
       },
-      "description": "Focus ring outline for keyboard accessibility. Not for resting or hover states.",
+      "description": "Focus ring outline for keyboard accessibility. Lighter in dark mode, so the solid part of an indicator keeps 3:1 on the dark card and on a field's fill. Not for resting or hover states.",
       "docs": {
         "description": "Focus ring for keyboard accessibility (`:focus-visible`).",
         "do": "Use only for the `:focus-visible` state of interactive elements.",
@@ -6860,7 +6862,7 @@
       "value": {
         "light": "1px"
       },
-      "description": "Width of every plain border: `border`, `border-t`, `divide-x`… Not for focus rings, which use space.focus-ring-width.",
+      "description": "Width of every plain border: `border`, `border-t`, `divide-x`… and of the solid outline a focus indicator draws on an element without a border (`outline-(length:--border-width-default)`). Not for focus rings, which use space.focus-ring-width.",
       "docs": {
         "tailwind": "border"
       }
@@ -7219,7 +7221,8 @@
         "light": "{color.border.focus}"
       },
       "value": {
-        "light": "#67787c"
+        "light": "#67787c",
+        "dark": "#9ca8ab"
       },
       "description": "shadcn --ring compatibility alias. Maps the semantic focus ring to the shadcn ring slot."
     },

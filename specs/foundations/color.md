@@ -247,12 +247,12 @@ these utility classes:
 
 ## Measured contrast
 
-WCAG 2.x ratios of the pairs under watch, as of the fix of the 6 failures on 2026-09-17.
+WCAG 2.x ratios of the pairs under watch, as of the fix of the 6 failures on 2026-09-17; the focus rows as of the dark `color.border.focus` of 0.1.2.
 
 | Pair                                                          | Light | Dark  | Threshold |
 | ------------------------------------------------------------- | ----- | ----- | --------- |
-| focus ring on the `default` surface                           | 4.61  | 4.28  | 3.0       |
-| focus ring on the `subtle` surface                            | 4.14  | 3.21  | 3.0       |
+| focus indicator's solid part on the `default` surface         | 4.61  | 8.08  | 3.0       |
+| focus indicator's solid part on the `subtle` surface          | 4.14  | 6.06  | 3.0       |
 | sidebar focus ring on the sidebar surface                     | 4.44  | 3.77  | 3.0       |
 | `text.default` on `background.default`                        | 19.72 | 18.99 | 4.5       |
 | `text.subtle` on `background.default`                         | 5.10  | 8.08  | 4.5       |

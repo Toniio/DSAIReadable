@@ -39,7 +39,7 @@ the status says what the code does.
 | `color.border.default`               | `--color-border-default`               | color | active   | `#e3e7e8` | `rgba(255, 255, 255, 0.1)`  | —                      |
 | `color.border.subtle`                | `--color-border-subtle`                | color | reserved | `#e3e7e8` | `rgba(255, 255, 255, 0.1)`  | —                      |
 | `color.border.input`                 | `--color-border-input`                 | color | active   | `#e3e7e8` | `rgba(255, 255, 255, 0.15)` | —                      |
-| `color.border.focus`                 | `--color-border-focus`                 | color | active   | `#67787c` | —                           | —                      |
+| `color.border.focus`                 | `--color-border-focus`                 | color | active   | `#67787c` | `#9ca8ab`                   | —                      |
 | `color.icon.default`                 | `--color-icon-default`                 | color | reserved | `#090b0c` | `#f9fbfb`                   | —                      |
 | `color.icon.subtle`                  | `--color-icon-subtle`                  | color | reserved | `#67787c` | `#9ca8ab`                   | —                      |
 | `color.icon.action`                  | `--color-icon-action`                  | color | reserved | `#eef2ff` | —                           | —                      |
@@ -404,7 +404,7 @@ the status says what the code does.
 | `shadcn.destructive-foreground`     | `--destructive-foreground`     | color     | active | `#ffffff`  | `#090b0c`                   | —        |
 | `shadcn.border`                     | `--border`                     | color     | active | `#e3e7e8`  | `rgba(255, 255, 255, 0.1)`  | —        |
 | `shadcn.input`                      | `--input`                      | color     | active | `#e3e7e8`  | `rgba(255, 255, 255, 0.15)` | —        |
-| `shadcn.ring`                       | `--ring`                       | color     | active | `#67787c`  | —                           | —        |
+| `shadcn.ring`                       | `--ring`                       | color     | active | `#67787c`  | `#9ca8ab`                   | —        |
 | `shadcn.radius`                     | `--radius`                     | dimension | active | `0.625rem` | —                           | —        |
 | `shadcn.chart-1`                    | `--chart-1`                    | color     | active | `#432dd7`  | `#6e6cff`                   | —        |
 | `shadcn.chart-2`                    | `--chart-2`                    | color     | active | `#438fbd`  | `#8fd6fa`                   | —        |
