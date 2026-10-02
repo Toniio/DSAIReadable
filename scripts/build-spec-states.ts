@@ -103,11 +103,16 @@ const ORDER = ["default", ...STATES.map(([state]) => state)]
 
 /** What an arbitrary selector (`[&:hover]`, `has-[:focus-visible]`) tests, by state. */
 const SELECTOR_STATES: [string, RegExp][] = [
+  // A <select>'s placeholder is its selected empty-value option: not `checked`.
+  ["placeholder", /\[value=(?:''|"")\]:checked\b/],
   ["hover", /:hover\b/],
   ["focus", /:focus(?:-visible|-within)?\b|\[data-focused=true\]/],
   ["active", /:active\b|\[data-active(?:=true)?\]/],
   ["selected", /\[data-selected=true\]|\[aria-selected=true\]/],
-  ["checked", /:checked\b|\[data-checked\]|\[data-state=checked\]/],
+  [
+    "checked",
+    /:checked\b(?<!\[value=(?:''|"")\]:checked)|\[data-checked\]|\[data-state=checked\]/,
+  ],
   ["open", /\[aria-expanded=true\]|\[data-state=open\]|\[data-open\]/],
   [
     "collapsed",

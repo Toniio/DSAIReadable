@@ -6353,6 +6353,7 @@
         ],
         "where": [
           "ComboboxChip",
+          "ComboboxChipsInput",
           "ComboboxEmpty",
           "ComboboxLabel",
           "ComboboxTrigger"
@@ -6906,6 +6907,10 @@
       {
         "state": "error",
         "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+      },
+      {
+        "state": "placeholder",
+        "behavior": "`ComboboxChipsInput`: the placeholder takes `text-muted-foreground` (`color.text.subtle`), as `Input` does; without the class it fell back to Tailwind's faded default (3.70:1 on white, below 4.5:1)"
       },
       {
         "state": "empty",
@@ -11725,7 +11730,7 @@
     "constraints": [
       "**MUST NOT** — be used without an `InputGroupInput` or `InputGroupTextarea` as a direct child",
       "**MUST NOT** — mix `block-*` and `inline-*` add-ons in the same group: `block-*` add-ons switch the layout to a column",
-      "**MUST** — set `disabled` on the child field: the group only mirrors its appearance (`has-disabled`)",
+      "**MUST** — set `disabled` on the child field (`InputGroupInput` or `InputGroupTextarea`): the group only mirrors its appearance, through `has-[[data-slot=input-group-control]:disabled]`. A disabled `InputGroupButton` leaves the group and its field as they are",
       "**MUST** — use `InputGroupButton` for a button inside an add-on",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],
@@ -12164,7 +12169,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`border-ring` border and `ring-ring/50` ring on the group when its control is `focus-visible`, which drops its own ring (`focus-visible:ring-0`); inside a `Combobox` popup too, since the `has-[…]` rule outranks `in-data-[slot=combobox-content]:focus-within:ring-0`"
+        "behavior": "`border-ring` border and `ring-ring/50` ring on the group when its control is `focus-visible`, which drops its own ring (`focus-visible:ring-0`); the field of a `Combobox` popup draws the same ring"
       },
       {
         "state": "active",
@@ -12172,7 +12177,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`bg-input/50` background (dark: `bg-input/80`) and `opacity-disabled` on the whole group as soon as any element inside it is disabled (`has-disabled`), a disabled `InputGroupButton` included"
+        "behavior": "`bg-input/50` background (dark: `bg-input/80`) and `opacity-disabled` on the whole group while its field (the `input-group-control` slot) is disabled, a field inside a `<fieldset disabled>` included; a disabled `InputGroupButton` alone leaves the group as it is. The field dims again through its own disabled style (`Input` and `Textarea` carry `opacity-disabled`), so its content renders at `opacity-disabled` applied twice (0.25 effective), and so does a disabled `ComboboxInput` or `PasswordInput` toggle; a disabled `CommandInput` dims only its input. `group-data-[disabled=true]/input-group` dims an add-on when the group carries `data-disabled=\"true\"`"
       },
       {
         "state": "error",
@@ -15645,7 +15650,7 @@
       },
       {
         "state": "placeholder",
-        "behavior": "No visible effect: a `<select>` has no placeholder text, so `placeholder:text-muted-foreground` does not apply; an empty-value option shows in the text color"
+        "behavior": "The selected empty-value option is the placeholder: the select takes `text-muted-foreground` through `has-[option[value='']:checked]` while it is selected and returns to the text color once a real option is chosen. A `<select>` has no `::placeholder`, which is why the class `placeholder:` cannot be used"
       }
     ],
     "accessibility": "**Pattern**: Native `select` element\n\n**Role**: Native `select`; the caret icon is hidden (`aria-hidden`).\n\n**Keyboard**:\n\nThe native `select` behavior (arrows, typing, `Space` / `Enter` depending on the platform).\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`.\n\n**Pitfalls**:\n\n- The system picker is the most accessible one on mobile: that is why `rule-20` picks `NativeSelect` below `md`, **unless** the options need rich rendering (icons, descriptions) that an `<option>` cannot show.",
@@ -16513,8 +16518,8 @@
     ],
     "anatomy": [
       {
-        "slot": "`data-slot=\"input-group\"`",
-        "role": "Root container"
+        "slot": "`data-slot=\"password-input\"`",
+        "role": "Root container: an `InputGroup` whose slot is replaced, so `[data-slot=input-group]` selectors do not match it"
       },
       {
         "slot": "`data-slot=\"input-group-control\"`",
@@ -16611,7 +16616,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`disabled` on the input: the group takes the disabled background and reduced opacity of `InputGroup`; the field takes no input, but the toggle button stays clickable"
+        "behavior": "`disabled`: the group takes the disabled background and reduced opacity of `InputGroup`, the field takes no input, the toggle is disabled with it (out of the tab order, no hover, no click) and the value is masked again whatever the visibility state. `readOnly` keeps the toggle usable: showing a value is a read"
       },
       {
         "state": "error",
@@ -16622,7 +16627,7 @@
         "behavior": "Password shown in plain text (`type=\"text\"`), `EyeSlash` icon, \"Hide password\" label"
       }
     ],
-    "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `showLabel` / `hideLabel` (defaults `UI_STRINGS.passwordInput.show` / `.hide`), depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Show the password rules before the user types, linked through `aria-describedby`.",
+    "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `showLabel` / `hideLabel` (defaults `UI_STRINGS.passwordInput.show` / `.hide`), depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Disable the field with the `disabled` prop, not only through a `<fieldset disabled>`: the fieldset disables the toggle too, but a value already shown stays shown.\n- Show the password rules before the user types, linked through `aria-describedby`.",
     "code_example": "import { Field, FieldLabel } from \"@/components/ui/field\"\nimport { PasswordInput } from \"@/components/ui/password-input\"\n\nexport default function Example() {\n  return (\n    <Field>\n      <FieldLabel htmlFor=\"password\">Password</FieldLabel>\n      <PasswordInput id=\"password\" autoComplete=\"current-password\" />\n    </Field>\n  )\n}",
     "cross_references": [
       "Field",

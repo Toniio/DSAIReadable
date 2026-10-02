@@ -6574,7 +6574,7 @@
       },
       "description": "Deprecated: placeholder text was never faded. Form fields color it with color.text.subtle.",
       "docs": {
-        "do": "Write `placeholder:text-muted-foreground`, as Input, Textarea, Select and NativeSelect do.",
+        "do": "Color the placeholder with `text-muted-foreground`, through the class its element answers to: `placeholder:text-muted-foreground` on an input or textarea, `data-placeholder:` on Select, `has-[option[value='']:checked]:` on NativeSelect.",
         "dont": "Do not fade the placeholder with an opacity: default text at 0.5 is 3.70:1 on white, below 4.5:1."
       }
     },

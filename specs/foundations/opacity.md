@@ -54,7 +54,7 @@ The `@theme` bridge in `styles/globals.css` turns the token into a Tailwind clas
 
 ## Placeholder text — a color, not an opacity
 
-Input, Textarea, Select and NativeSelect color their placeholder with the subtle text token:
+Input, Textarea, Select, NativeSelect and ComboboxChipsInput color their placeholder with the subtle text token, each through the class its element answers to: `placeholder:text-muted-foreground` on an `<input>` or `<textarea>`, `data-placeholder:text-muted-foreground` on Select (Radix marks its empty trigger), `has-[option[value='']:checked]:text-muted-foreground` on NativeSelect (a `<select>` has no `::placeholder`; its empty-value option is the placeholder):
 
 ```tsx
 // ✅ What the fields do: color.text.subtle, 5.10:1 on white
@@ -115,7 +115,7 @@ Need                                   → Solution
 ──────────────────────────────────────────────────────────────────
 Disable a button / input               → disabled:opacity-disabled
 Show / hide (with a transition)        → opacity-0 / opacity-100
-A field's placeholder                  → placeholder:text-muted-foreground
+A text field's placeholder             → placeholder:text-muted-foreground
 A modal / dialog backdrop              → OVERLAY_BASE (bg-black/10 + backdrop-blur-xs)
 Secondary / muted text                 → text-muted-foreground
 Secondary icon                         → text-muted-foreground

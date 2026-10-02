@@ -260,4 +260,22 @@ describe("Combobox", () => {
     await user.keyboard("{ArrowDown}")
     expect(await axeViolations()).toEqual([])
   })
+
+  it("draws the placeholder of ComboboxChipsInput in text-muted-foreground", () => {
+    render(
+      <Combobox items={fruits} multiple>
+        <ComboboxChips>
+          <ComboboxChipsInput aria-label="Fruits" placeholder="Add a fruit" />
+        </ComboboxChips>
+      </Combobox>
+    )
+    const ref = document.createElement("span")
+    ref.className = "text-muted-foreground"
+    document.body.append(ref)
+    const muted = getComputedStyle(ref).color
+    ref.remove()
+    expect(
+      getComputedStyle(screen.getByLabelText("Fruits"), "::placeholder").color
+    ).toBe(muted)
+  })
 })
