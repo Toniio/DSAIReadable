@@ -682,7 +682,14 @@
       "status": "reanchored"
     },
     "chart": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "added": [
+        "has-focus-visible:ring-(length:--space-focus-ring-width)",
+        "has-focus-visible:ring-ring/50",
+        "has-focus-visible:outline-(length:--border-width-default)",
+        "has-focus-visible:outline-ring"
+      ],
+      "reason": "The chart surface is a tab stop (Recharts' accessibility layer) whose outline upstream hides, counting on the tooltip to mark focus. Recharts shows the tooltip on the first focus only and never without ChartTooltip (WCAG 2.4.7), so ChartContainer draws the ring and a 1px outline of border-ring while anything inside it is :focus-visible; has-focus-visible, not .recharts-surface, also covers a Pie layer and a Brush."
     },
     "checkbox": {
       "status": "reanchored"

@@ -582,7 +582,11 @@
       "**Note** — in `ChartConfig`, `theme` takes precedence over `color`",
       "**MUST** — read a series' color from the `--color-<key>` variable that `ChartStyle` injects for each `config` key (`fill=\"var(--color-revenue)\"`); it is not a token: its value comes from `config`",
       "**MUST NOT** — nest `ChartContainer`s: one container per chart",
-      "**MUST** — pair the chart with alternative text or a data table: screen readers do not read the SVG"
+      "**MUST** — name the chart on the Recharts element, not on `ChartContainer`: `<BarChart accessibilityLayer aria-label=\"Revenue by month\">`. The label reaches the focusable `<svg role=\"application\">`; on `ChartContainer`, a `div` with no role, `aria-label` names nothing",
+      "**MUST** — give the chart a visible text summary of what it shows (its takeaway); give its data as a visible `Table` too when readers need the values, under a disclosure such as `Collapsible` if the screen is short on room",
+      "**MUST NOT** — hide a `Table` in `sr-only`: its scroll container then scrolls with nothing focusable in it (axe `scrollable-region-focusable`). Use a visible `Table`, or no table and the text summary",
+      "**MUST** — set `rootTabIndex={-1}` on a `<Pie>`: its layer is a second tab stop, and the chart surface already is one",
+      "**MUST NOT** — remove `ChartContainer`'s focus ring, or draw the focus of the chart another way: the container draws it while the chart has keyboard focus"
     ],
     "Checkbox": [
       "**MUST** — pair the checkbox with a visible label: `Label` (`id` / `htmlFor`), or `Field` with a `FieldLabel`; inside a `Field` as soon as it has a description or an error message (`rule-09`)",
