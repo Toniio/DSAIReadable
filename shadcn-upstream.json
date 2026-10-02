@@ -2,7 +2,7 @@
   "$comment": "Re-anchoring on shadcn/ui: the upstream release, the re-tokenization table and the classification of the components. Read by scripts/retokenize-codemod.ts; the process is in CONTRIBUTING.md.",
   "upstream": {
     "repository": "shadcn-ui/ui",
-    "ref": "shadcn@4.21.0",
+    "ref": "shadcn@4.21.1",
     "base": "radix",
     "style": "lyra"
   },
