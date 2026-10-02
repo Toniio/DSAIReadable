@@ -321,17 +321,17 @@ and the README's are removed together.
 
 ## What CI checks
 
-| Job                 | Command                                                                                      |
-| ------------------- | -------------------------------------------------------------------------------------------- |
-| `tokens-validate`   | `npm run tokens-validate`                                                                    |
-| `typecheck`         | `npm run typecheck:all`                                                                      |
-| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                 |
-| `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                |
-| `spec-sections`     | `npm run specs:validate`, `skills:validate`, `agentskills validate` (`skills-ref` 0.1.1)     |
-| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                  |
-| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                       |
-| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`             |
-| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test` |
+| Job                 | Command                                                                                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens-validate`   | `npm run tokens-validate`                                                                                                                               |
+| `typecheck`         | `npm run typecheck:all`                                                                                                                                 |
+| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                                                                            |
+| `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                                                                           |
+| `spec-sections`     | `npm run specs:validate`, `skills:validate`, `agentskills validate` (`skills-ref` 0.1.1)                                                                |
+| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                                                                             |
+| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                                                                                  |
+| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`, and the keyboard stress run on a Dependabot PR that bumps a primitive |
+| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test`                                                            |
 
 The `Evals` workflow runs apart, only when started by hand (each run costs API credits), never on a pull request: the conformance harness with a Claude agent, with and without the MCP server, its reports uploaded as an artifact ([`evals/README.md`](./evals/README.md)).
 
@@ -362,6 +362,24 @@ Once someone else has pushed to its branch, Dependabot stops rebasing the PR on
 its own; comment `@dependabot recreate` to start it again from `main`. A PR that
 needs code changes (a major version with breaking changes) is still fixed by
 hand.
+
+When a Dependabot PR moves `radix-ui`, a `@radix-ui/*` package, `@base-ui/react` or
+`input-otp` in `package-lock.json` (compared with the PR's base, nested copies
+included), `component-tests` also repeats each test of `combobox`, `input-otp` and
+`radio-group` 50 times, about 40 s more. Their keyboard tests wait for timers the
+primitives own (Base UI unmounts a popup one frame after Escape, input-otp re-reads
+the selection up to 50 ms after a value change, Radix moves the focus in a
+timeout), and a single run rarely catches a race a bump introduces. The command is
+the one CI runs; run it by hand after bumping one of them yourself:
+
+```bash
+npx vitest run --project components --repeats 49 tests/components/combobox.test.tsx tests/components/input-otp.test.tsx tests/components/radio-group.test.tsx
+```
+
+A failure there is a test that asserts a state the primitive now reaches later:
+make it wait for the observable end state, as #90 did, and never loosen the
+assertion. The `input-otp` test waits 50 ms, the last delay of input-otp 1.5.0's
+`syncTimeouts`: recheck that number when the package changes.
 
 `tailwindcss` and `@tailwindcss/*` form their own group and always move
 together: `specs:tokens` and `specs:states` call a private API of `@tailwindcss/node`. Majors

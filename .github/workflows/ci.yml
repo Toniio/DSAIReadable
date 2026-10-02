@@ -156,6 +156,37 @@ jobs:
       - if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
       - run: npm run test:components
+      # The keyboard tests wait for timers the primitives own: Base UI unmounts
+      # a popup one frame after Escape, input-otp re-reads the selection 0, 10
+      # and 50 ms after a value change, Radix moves the focus in a timeout. A
+      # single run rarely catches a new race (before #90, 2 full runs in 30
+      # failed), so when a Dependabot PR moves one of those packages in the
+      # lockfile, each keyboard test runs 50 times (about 40 s).
+      - name: Find the primitives a Dependabot PR bumps
+        id: primitives
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          # checkout fetched one commit: the base is not there yet
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          primitives() {
+            git show "$1:package-lock.json" | jq -r '
+              .packages | to_entries[]
+              | select(.key | test("(^|/)node_modules/(radix-ui|@radix-ui/[^/]+|@base-ui/react|input-otp)$"))
+              | "\(.key) \(.value.version)"' | sort
+          }
+          bumped="$(diff <(primitives "$BASE_SHA") <(primitives HEAD) || true)"
+          if [ -n "$bumped" ]; then
+            echo "$bumped"
+            echo "bumped=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No keyboard primitive moves in package-lock.json."
+          fi
+      - name: Stress the keyboard tests
+        if: steps.primitives.outputs.bumped == 'true'
+        run: npx vitest run --project components --repeats 49 tests/components/combobox.test.tsx tests/components/input-otp.test.tsx tests/components/radio-group.test.tsx
       # The conformance harness scores the specs' own examples and its
       # fixtures: gold passes stages A and B, each fixture fails what it declares.
       - run: npm run evals:test
