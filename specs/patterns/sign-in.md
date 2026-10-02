@@ -47,7 +47,7 @@ Lets a person with an account prove who they are with their email and password, 
 ## Spacing
 
 - **MUST** — center the card with `flex min-h-screen items-center justify-center px-page` on the page
-- **MUST** — let `FieldGroup` space the fields (`gap-6`); the `Alert` sits first inside it
+- **MUST** — let `FieldGroup` space the fields (`gap-5`); the `Alert` sits first inside it
 - **MUST** — keep the card and the sign-up line in one `flex w-full max-w-sm flex-col gap-4` column
 
 ## Content

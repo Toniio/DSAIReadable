@@ -397,15 +397,15 @@
       "source": "size.md"
     },
     {
-      "rule": "**Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.",
+      "rule": "**Two axes, two vocabularies** — the steps of the spacing scale (`gap-2`, `px-2.5`, `p-4`) inside and between components; `space.layout.*` (`px-page`, `gap-section`) for the overall layout. Never swap them.",
       "source": "spacing.md"
     },
     {
-      "rule": "**No arbitrary values** — use the tokens only. When an in-between value is needed, discuss it with the design team first.",
+      "rule": "**No arbitrary values** — use the steps of the scale only. When an in-between value is needed, discuss it with the design team first.",
       "source": "spacing.md"
     },
     {
-      "rule": "**Stay on the component axis** — a form uses `lg` (24px) between its fields and `md` (16px) for inner padding. Keep to that axis throughout the same component.",
+      "rule": "**Keep the component's rhythm** — a form lets `FieldGroup` space its fields (`gap-5`), and a card spaces its content with `--card-spacing` (`space.scale.4`, `space.scale.3` at `size=\"sm\"`). Keep to those steps throughout the same component.",
       "source": "spacing.md"
     },
     {
@@ -993,7 +993,7 @@
     },
     {
       "id": "rule-12",
-      "rule": "Spacing between components must use Semantic space tokens: space-component-xs/sm/md/lg/xl for intra-component gaps, space-layout-page-padding for page edges, space-layout-section-gap for section breaks."
+      "rule": "Spacing inside and between components uses the steps of the spacing scale (gap-1.5, px-2.5, p-4), each read from a space.scale.* token; a step outside the scale (p-13) generates no CSS. Page edges use px-page (space.layout.page-padding), section breaks gap-section or py-section (space.layout.section-gap). A screen writes no arbitrary spacing value such as p-[13px]: @dsaireadable/eslint-plugin rejects it. The space.component.* tokens have no class: xs, sm, md and xl are reserved, and lg only sets the viewport gutter of DialogContent."
     },
     {
       "id": "rule-13",

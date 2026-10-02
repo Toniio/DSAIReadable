@@ -180,18 +180,18 @@ the status says what the code does.
 
 **Usage rules**
 
-| Scope                          | ✅ Do                                                                           | ❌ Don't                                                                         |
-| ------------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `space.component.xs`           | Gap between an icon and its label in a compact button, a badge's inner padding. | Do not use for layout spacing.                                                   |
-| `space.component.sm`           | Padding of a compact button, gap of a tight list.                               | Do not use to space out page sections.                                           |
-| `space.component.md`           | Standard card padding, gap between the buttons of a group.                      | Do not use for the gap between page sections.                                    |
-| `space.component.lg`           | A dialog's inner padding, gap between form fields.                              | Do not confuse with `space.layout.page-padding` (same value, different context). |
-| `space.component.xl`           | Padding of a large card section, spacing between groups of form fields.         | Do not use between nearby inline elements.                                       |
-| `space.layout.page-padding`    | Horizontal padding of the root page container.                                  | Do not apply to inner components.                                                |
-| `space.layout.section-gap`     | Vertical space between the major sections of a page.                            | Do not use between components of the same section.                               |
-| `space.layout.content-sm`      | `max-w-[var(--space-layout-content-sm)]` for editorial pages.                   | Do not use as a padding value.                                                   |
-| `space.layout.content-default` | The main content container of most pages.                                       | Do not exceed it for standard content layouts.                                   |
-| `space.layout.content-lg`      | Dashboards, data tables, multi-column layouts.                                  | Do not use for editorial content pages.                                          |
+| Scope                          | ✅ Do                                                                                                                   | ❌ Don't                                                                         |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `space.component.xs`           | Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`gap-1`, 4px).              | Do not use for layout spacing.                                                   |
+| `space.component.sm`           | Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`gap-2`, 8px).              | Do not use to space out page sections.                                           |
+| `space.component.md`           | Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`p-4`, 16px).               | Do not use for the gap between page sections.                                    |
+| `space.component.lg`           | The room DialogContent keeps from the viewport edges (`max-w-[calc(100%-var(--space-component-lg))]`); it has no class. | Do not confuse with `space.layout.page-padding` (same value, different context). |
+| `space.component.xl`           | Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`p-8`, 32px).               | Do not use between nearby inline elements.                                       |
+| `space.layout.page-padding`    | Horizontal padding of the root page container.                                                                          | Do not apply to inner components.                                                |
+| `space.layout.section-gap`     | Vertical space between the major sections of a page.                                                                    | Do not use between components of the same section.                               |
+| `space.layout.content-sm`      | `max-w-[var(--space-layout-content-sm)]` for editorial pages.                                                           | Do not use as a padding value.                                                   |
+| `space.layout.content-default` | The main content container of most pages.                                                                               | Do not exceed it for standard content layouts.                                   |
+| `space.layout.content-lg`      | Dashboards, data tables, multi-column layouts.                                                                          | Do not use for editorial content pages.                                          |
 
 ---
 

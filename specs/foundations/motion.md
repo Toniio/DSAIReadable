@@ -8,15 +8,16 @@ The motion system defines consistent **durations** and **easing curves** for eve
 
 ## Durations
 
-| Token                     | CSS Variable                | Value   | Tailwind Class    | Typical use                                                      |
-| ------------------------- | --------------------------- | ------- | ----------------- | ---------------------------------------------------------------- |
-| `motion.duration.instant` | `--motion-duration-instant` | `0ms`   | —                 | State changes with no transition (hiding an element)             |
-| `motion.duration.fast`    | `--motion-duration-fast`    | `100ms` | `duration-fast`   | Hover and focus — immediate feedback on interactive elements     |
-| `motion.duration.normal`  | `--motion-duration-normal`  | `200ms` | `duration-normal` | **The default** — color, border and opacity transitions          |
-| `motion.duration.slow`    | `--motion-duration-slow`    | `300ms` | `duration-slow`   | Modals, drawers, accordions — large elements entering or leaving |
-| `motion.duration.slower`  | `--motion-duration-slower`  | `500ms` | `duration-slower` | Complex animations — only for deliberate effects                 |
+| Token                        | CSS Variable                   | Value    | Tailwind Class        | Typical use                                                                                     |
+| ---------------------------- | ------------------------------ | -------- | --------------------- | ----------------------------------------------------------------------------------------------- |
+| `motion.duration.instant`    | `--motion-duration-instant`    | `0ms`    | —                     | State changes with no transition (hiding an element)                                            |
+| `motion.duration.fast`       | `--motion-duration-fast`       | `100ms`  | `duration-fast`       | Hover and focus — immediate feedback on interactive elements                                    |
+| `motion.duration.normal`     | `--motion-duration-normal`     | `200ms`  | `duration-normal`     | **The default** — color, border and opacity transitions                                         |
+| `motion.duration.slow`       | `--motion-duration-slow`       | `300ms`  | `duration-slow`       | Modals, drawers, accordions — large elements entering or leaving                                |
+| `motion.duration.slower`     | `--motion-duration-slower`     | `500ms`  | `duration-slower`     | Complex animations — only for deliberate effects                                                |
+| `motion.duration.extra-slow` | `--motion-duration-extra-slow` | `1000ms` | `duration-extra-slow` | A one-second transition, `animate-in` or `animate-out` — the `InputOTP` caret carries the class |
 
-> **Tailwind:** the `duration-fast`, `duration-normal`, `duration-slow` and `duration-slower` classes are generated through `@theme inline` (`--transition-duration-*`).
+> **Tailwind:** the `duration-fast`, `duration-normal`, `duration-slow`, `duration-slower` and `duration-extra-slow` classes are generated through `@theme inline` (`--transition-duration-*`). Each one sets `transition-duration` and the `--tw-duration` that the `animate-in` and `animate-out` animations of tw-animate-css read. A keyframe animation that sets its own timing ignores them: `animate-caret-blink` blinks at its own pace, whatever `duration-*` class sits beside it.
 
 ---
 
@@ -46,10 +47,18 @@ Playful interaction/feedback  → ease-spring   (a button "pop", an added badge)
 
 ### Standard hover (color / opacity)
 
+`Button`, `Toggle` and the menu items already carry their hover transition: these classes go on a surface the screen draws itself.
+
 ```tsx
-<button className="transition-colors duration-fast ease-default hover:bg-accent">
-  Button
-</button>
+import { Card, CardContent } from "@/components/ui/card"
+
+export default function Example() {
+  return (
+    <Card className="transition-colors duration-fast ease-default hover:bg-muted">
+      <CardContent>Recent activity</CardContent>
+    </Card>
+  )
+}
 ```
 
 ### Fading an element
@@ -62,11 +71,7 @@ Playful interaction/feedback  → ease-spring   (a button "pop", an added badge)
 
 ### A modal entering
 
-```tsx
-<dialog className="transition-all duration-slow ease-out">
-  Dialog content
-</dialog>
-```
+A screen does not animate a modal surface itself: `Dialog`, `AlertDialog`, `Sheet` and `Drawer` enter and leave on their own. Their backdrop fades with `OVERLAY_BASE` (`lib/overlay.ts`), `Dialog` and `AlertDialog` zoom in with `MODAL_CONTENT_BASE`, `Sheet` slides in from its side, and `Drawer` moves with vaul. Use the component as it is, and do not re-time it.
 
 ### A drop-down leaving
 

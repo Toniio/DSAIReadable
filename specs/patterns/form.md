@@ -36,7 +36,7 @@ Lays out the fields a person fills in, tells them what each one expects, and poi
 
 | Component    | Variant / props                             | Job                                            |
 | ------------ | ------------------------------------------- | ---------------------------------------------- |
-| `FieldGroup` | —                                           | Spaces the fields and groups (`gap-6`)         |
+| `FieldGroup` | —                                           | Spaces the fields and groups (`gap-5`)         |
 | `FieldSet`   | with a `FieldLegend` `variant="legend"`     | A named group of fields                        |
 | `Field`      | `data-invalid` when its value is wrong      | One label, one control, its help and its error |
 | `FieldError` | —                                           | What is wrong and how to fix it                |
@@ -46,7 +46,7 @@ Lays out the fields a person fills in, tells them what each one expects, and poi
 ## Spacing
 
 - **MUST** — cap the form at `max-w-2xl` (`space.layout.content-sm`); a field takes the width of the column
-- **MUST** — let `FieldGroup` space the fields and groups (`gap-6`, `space.component.lg`); a `Field` takes no margin
+- **MUST** — let `FieldGroup` space the fields and groups (`gap-5`, `space.scale.5`); a `Field` takes no margin
 - **MUST** — lay the actions out as `flex gap-2`, after the last group
 
 ## Content

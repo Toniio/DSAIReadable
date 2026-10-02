@@ -3821,7 +3821,7 @@
       },
       {
         "state": "`hover`",
-        "behavior": "Background dims slightly (90 % opacity), depending on the variant"
+        "behavior": "The background changes, depending on the variant; outline and ghost also take the foreground text color, and link underlines instead"
       },
       {
         "state": "`focus`",

@@ -116,15 +116,15 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 ## States
 
-| State      | Visual behavior                                                                                               |
-| ---------- | ------------------------------------------------------------------------------------------------------------- |
-| `default`  | `action-background-default` background, `action-background-foreground` text                                   |
-| `hover`    | Background dims slightly (90 % opacity), depending on the variant                                             |
-| `focus`    | `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide |
-| `active`   | Shifts down by `translate-y-px` as tactile feedback (except with `aria-haspopup`)                             |
-| `disabled` | `pointer-events-none`, `opacity-disabled` — no interaction                                                    |
-| `loading`  | Render a `<Spinner>` as a child; the consumer sets `aria-busy="true"`                                         |
-| `error`    | `aria-invalid="true"`: `destructive` border; on focus, a `destructive` ring                                   |
+| State      | Visual behavior                                                                                                                      |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `default`  | `action-background-default` background, `action-background-foreground` text                                                          |
+| `hover`    | The background changes, depending on the variant; outline and ghost also take the foreground text color, and link underlines instead |
+| `focus`    | `FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide                        |
+| `active`   | Shifts down by `translate-y-px` as tactile feedback (except with `aria-haspopup`)                                                    |
+| `disabled` | `pointer-events-none`, `opacity-disabled` — no interaction                                                                           |
+| `loading`  | Render a `<Spinner>` as a child; the consumer sets `aria-busy="true"`                                                                |
+| `error`    | `aria-invalid="true"`: `destructive` border; on focus, a `destructive` ring                                                          |
 
 ## Accessibility
 

@@ -61,12 +61,16 @@ them.
 | `FOCUS_RING_WITHIN`      | The same ring, triggered by the focus of a descendant — InputGroup, Combobox                             |
 | `FOCUS_OUTLINE_RESET`    | Neutralizes the native outline. **Always instead of `outline-none`**                                     |
 
-```tsx
+```ts
 import { FOCUS_RING, FOCUS_OUTLINE_RESET } from "@/lib/focus"
 
 const buttonVariants = cva(
   `inline-flex items-center ${FOCUS_OUTLINE_RESET} ${FOCUS_RING}`,
-  { variants: { … } }
+  {
+    variants: {
+      // …
+    },
+  }
 )
 ```
 

@@ -465,7 +465,7 @@
     "dark": "{primitive.space.6}",
     "type": "dimension",
     "status": "active",
-    "usage": "Large component padding/gap (24px). Not for layout or section spacing."
+    "usage": "Large component spacing (24px), read through var(): the viewport gutter of DialogContent. Not for layout or section spacing."
   },
   {
     "path": "space.component.xl",

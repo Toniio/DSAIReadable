@@ -72,8 +72,8 @@
       }
     ],
     "spacing": [
-      "**MUST** — let `FieldGroup` space the fields (`gap-6`, `space.component.lg`); a `Field` takes no margin",
-      "**MUST** — put the `form` inside `DialogContent` with `flex flex-col gap-6`, so header, fields and footer keep the dialog's rhythm",
+      "**MUST** — let `FieldGroup` space the fields (`gap-5`, `space.scale.5`); a `Field` takes no margin",
+      "**MUST** — put the `form` inside `DialogContent` with `flex flex-col gap-4`, so header, fields and footer keep the dialog's rhythm (`DialogContent` spaces its parts with `gap-4`)",
       "**MUST** — on a full page, set the form column to `max-w-2xl` (`space.layout.content-sm`) inside the page container of [navigation](./navigation.md)"
     ],
     "content": [
@@ -103,7 +103,7 @@
         "not": "Error 500"
       }
     ],
-    "code_example": "\"use client\"\n\nimport * as React from \"react\"\nimport { PlusIcon } from \"@phosphor-icons/react\"\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/components/ui/dialog\"\nimport { Field, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\nexport function CreateProject() {\n  const [open, setOpen] = React.useState(false)\n\n  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    const name = new FormData(event.currentTarget).get(\"name\")\n    setOpen(false)\n    toast.success(`Your project \"${name}\" is ready.`)\n  }\n\n  return (\n    <Dialog open={open} onOpenChange={setOpen}>\n      <DialogTrigger asChild>\n        <Button>\n          <PlusIcon />\n          Create project\n        </Button>\n      </DialogTrigger>\n      <DialogContent>\n        <form onSubmit={handleSubmit} className=\"flex flex-col gap-6\">\n          <DialogHeader>\n            <DialogTitle>Create a project</DialogTitle>\n            <DialogDescription>\n              Give it a name now. You can add the details later.\n            </DialogDescription>\n          </DialogHeader>\n          <FieldGroup>\n            <Field>\n              <FieldLabel htmlFor=\"project-name\">Name</FieldLabel>\n              <Input id=\"project-name\" name=\"name\" required />\n            </Field>\n            <Field>\n              <FieldLabel htmlFor=\"project-summary\">\n                Summary (optional)\n              </FieldLabel>\n              <Textarea id=\"project-summary\" name=\"summary\" />\n            </Field>\n          </FieldGroup>\n          <DialogFooter>\n            <DialogClose asChild>\n              <Button type=\"button\" variant=\"outline\">\n                Cancel\n              </Button>\n            </DialogClose>\n            <Button type=\"submit\">Create project</Button>\n          </DialogFooter>\n        </form>\n      </DialogContent>\n    </Dialog>\n  )\n}",
+    "code_example": "\"use client\"\n\nimport * as React from \"react\"\nimport { PlusIcon } from \"@phosphor-icons/react\"\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/components/ui/dialog\"\nimport { Field, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\nexport function CreateProject() {\n  const [open, setOpen] = React.useState(false)\n\n  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    const name = new FormData(event.currentTarget).get(\"name\")\n    setOpen(false)\n    toast.success(`Your project \"${name}\" is ready.`)\n  }\n\n  return (\n    <Dialog open={open} onOpenChange={setOpen}>\n      <DialogTrigger asChild>\n        <Button>\n          <PlusIcon />\n          Create project\n        </Button>\n      </DialogTrigger>\n      <DialogContent>\n        <form onSubmit={handleSubmit} className=\"flex flex-col gap-4\">\n          <DialogHeader>\n            <DialogTitle>Create a project</DialogTitle>\n            <DialogDescription>\n              Give it a name now. You can add the details later.\n            </DialogDescription>\n          </DialogHeader>\n          <FieldGroup>\n            <Field>\n              <FieldLabel htmlFor=\"project-name\">Name</FieldLabel>\n              <Input id=\"project-name\" name=\"name\" required />\n            </Field>\n            <Field>\n              <FieldLabel htmlFor=\"project-summary\">\n                Summary (optional)\n              </FieldLabel>\n              <Textarea id=\"project-summary\" name=\"summary\" />\n            </Field>\n          </FieldGroup>\n          <DialogFooter>\n            <DialogClose asChild>\n              <Button type=\"button\" variant=\"outline\">\n                Cancel\n              </Button>\n            </DialogClose>\n            <Button type=\"submit\">Create project</Button>\n          </DialogFooter>\n        </form>\n      </DialogContent>\n    </Dialog>\n  )\n}",
     "cross_references": [
       "[edit](./edit.md) — changes the object once it exists, with the fields creation leaves out",
       "[form](./form.md) — the layout, labels and validation of the fields",
@@ -561,7 +561,7 @@
       {
         "component": "FieldGroup",
         "variant_props": "—",
-        "job": "Spaces the fields and groups (gap-6)"
+        "job": "Spaces the fields and groups (gap-5)"
       },
       {
         "component": "FieldSet",
@@ -591,7 +591,7 @@
     ],
     "spacing": [
       "**MUST** — cap the form at `max-w-2xl` (`space.layout.content-sm`); a field takes the width of the column",
-      "**MUST** — let `FieldGroup` space the fields and groups (`gap-6`, `space.component.lg`); a `Field` takes no margin",
+      "**MUST** — let `FieldGroup` space the fields and groups (`gap-5`, `space.scale.5`); a `Field` takes no margin",
       "**MUST** — lay the actions out as `flex gap-2`, after the last group"
     ],
     "content": [
@@ -1225,7 +1225,7 @@
     ],
     "spacing": [
       "**MUST** — center the card with `flex min-h-screen items-center justify-center px-page` on the page",
-      "**MUST** — let `FieldGroup` space the fields (`gap-6`); the `Alert` sits first inside it",
+      "**MUST** — let `FieldGroup` space the fields (`gap-5`); the `Alert` sits first inside it",
       "**MUST** — keep the card and the sign-up line in one `flex w-full max-w-sm flex-col gap-4` column"
     ],
     "content": [

@@ -99,23 +99,17 @@ components, and places a surface above the page with a global layer.
   ...
 </div>
 
-// Drop-down menu
-<div className="shadow-md rounded-lg bg-popover p-2">
-  <MenuItem />
-</div>
+// Drop-down menu level — DropdownMenuContent and PopoverContent already draw it
+<div className="shadow-md rounded-lg bg-popover p-2">...</div>
 
-// Dialog / modal
-<div className="shadow-lg rounded-xl bg-card p-6">
-  <DialogContent />
-</div>
+// Modal level — Sheet already draws it
+<div className="shadow-lg rounded-xl bg-card p-6">...</div>
 
-// Toast
-<div className="shadow-2xl rounded-lg bg-card p-4">
-  <ToastContent />
-</div>
+// Toast level
+<div className="shadow-2xl rounded-lg bg-card p-4">...</div>
 
 // Input with an inner shadow (focus or inset state)
-<input className="shadow-inner border-input rounded-sm px-3 py-2" />
+<Input className="shadow-inner" />
 ```
 
 ---
@@ -130,10 +124,10 @@ components, and places a surface above the page with a global layer.
 
 ```tsx
 // Pressed button
-<button className="shadow-inner active:shadow-inner">Click</button>
+<Button variant="outline" className="active:shadow-inner">Click</Button>
 
 // Sunken input (focus)
-<input className="focus:shadow-inner focus:border-ring" />
+<Input className="focus:shadow-inner focus:border-ring" />
 ```
 
 > **Important:** never combine `shadow-inner` with an outer shadow. The two clash visually.

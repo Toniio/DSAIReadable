@@ -1004,7 +1004,7 @@
     },
     {
       "id": "rule-12",
-      "rule": "Spacing between components must use Semantic space tokens: space-component-xs/sm/md/lg/xl for intra-component gaps, space-layout-page-padding for page edges, space-layout-section-gap for section breaks."
+      "rule": "Spacing inside and between components uses the steps of the spacing scale (gap-1.5, px-2.5, p-4), each read from a space.scale.* token; a step outside the scale (p-13) generates no CSS. Page edges use px-page (space.layout.page-padding), section breaks gap-section or py-section (space.layout.section-gap). A screen writes no arbitrary spacing value such as p-[13px]: @dsaireadable/eslint-plugin rejects it. The space.component.* tokens have no class: xs, sm, md and xl are reserved, and lg only sets the viewport gutter of DialogContent."
     },
     {
       "id": "rule-13",

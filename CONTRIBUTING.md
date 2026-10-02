@@ -66,19 +66,21 @@ Most of what an agent reads is generated: change the source, run its command,
 and commit both. CI fails on a generated file that is out of step with its
 source.
 
-| To change                                      | Edit                                                                             | Then run                                                              |
-| ---------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| A token value or decision                      | `tokens/*.json`                                                                  | `npm run tokens:build && npm run docs:tokens`                         |
-| A component                                    | `components/ui/<component>.tsx`, after reading its spec                          | `npm run specs:variants && npm run specs:tokens && npm run specs:api` |
-| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections                    | `npm run docs:llms` when the Role changed                             |
-| A choice between sibling components            | `composition_rules` in `design-system.index.json`                                | `npm run specs:choices`                                               |
-| Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                            |
-| A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                              |
-| A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                |
-| A rule agents follow when they build UI        | the spec or pattern it cites, then the skill in `skills/` that points at it      | `npm run skills:validate`                                             |
+| To change                                      | Edit                                                                             | Then run                                                               |
+| ---------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| A token value or decision                      | `tokens/*.json`                                                                  | `npm run tokens:build && npm run docs:tokens`                          |
+| A component                                    | `components/ui/<component>.tsx`, after reading its spec                          | `npm run specs:variants && npm run specs:tokens && npm run specs:api`  |
+| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections                    | `npm run docs:llms` when the Role changed                              |
+| A foundation's guidance or example             | `specs/foundations/<name>.md`                                                    | `npm run specs:validate`: its tsx and ts blocks pass the ESLint plugin |
+| A choice between sibling components            | `composition_rules` in `design-system.index.json`                                | `npm run specs:choices`                                                |
+| Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                             |
+| A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                               |
+| A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                 |
+| A rule agents follow when they build UI        | the spec or pattern it cites, then the skill in `skills/` that points at it      | `npm run skills:validate`                                              |
 
 **A new or changed component arrives with its test.** `tests/examples.test.tsx`
-renders every spec's `## Code example` in headless Chromium, light and dark:
+renders every spec's `## Code example`, and every foundation example written as
+a complete module (imports and a default export), in headless Chromium, light and dark:
 zero axe violation (contrast and target size included) and a visible focus
 indicator on every tab stop. An example that fails is fixed in the spec, which
 is what agents copy. Each row of a spec's Accessibility › Keyboard table has its

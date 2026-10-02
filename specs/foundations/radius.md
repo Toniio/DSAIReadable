@@ -82,7 +82,7 @@ If the component is decorative or expressive (a hero, an illustration card)
 <div className="rounded-lg bg-card p-4">...</div>
 
 // ✅ Default button
-<button className="rounded-md px-4 py-2">...</button>
+<Button className="rounded-md">...</Button>
 
 // ✅ Pill badge
 <span className="rounded-full px-2 py-0.5 text-xs">Active</span>

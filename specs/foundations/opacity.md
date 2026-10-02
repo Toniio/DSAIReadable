@@ -30,21 +30,22 @@ The `@theme` bridge in `styles/globals.css` turns the token into a Tailwind clas
 
 ```tsx
 // ✅ The token, under the state's variant
-<button disabled className="disabled:opacity-disabled disabled:cursor-not-allowed">
-  Disabled button
-</button>
-// Same rule for data-disabled:, aria-disabled:, has-disabled:, peer-disabled:,
+<Card data-disabled className="data-disabled:opacity-disabled">
+  Unavailable plan
+</Card>
+// Button, Input and most other controls already carry disabled:opacity-disabled.
+// Same rule for disabled:, aria-disabled:, has-disabled:, peer-disabled:,
 // group-data-[disabled=true]/…:
 
 // ❌ Same rendering, but the token is gone: ESLint rejects it
-<button disabled className="disabled:opacity-50">
-  Disabled button
-</button>
+<Card data-disabled className="data-disabled:opacity-50">
+  Unavailable plan
+</Card>
 
 // ❌ Hard-coded value
-<button disabled style={{ opacity: 0.5 }}>
-  Disabled button
-</button>
+<Card data-disabled style={{ opacity: 0.5 }}>
+  Unavailable plan
+</Card>
 ```
 
 > **Guard:** the `better-tailwindcss/no-restricted-classes` rule rejects `opacity-<n>` under any variant that contains `disabled`, and `eslint --fix` replaces it with `opacity-disabled`. It cannot see a bare class whose state lives elsewhere — the `disabled` key of `Calendar`'s `classNames`, for example: write it there by hand.
@@ -57,10 +58,11 @@ Input, Textarea, Select and NativeSelect color their placeholder with the subtle
 
 ```tsx
 // ✅ What the fields do: color.text.subtle, 5.10:1 on white
-<input className="placeholder:text-muted-foreground" placeholder="Search accounts…" />
+// Input draws its placeholder with placeholder:text-muted-foreground
+<Input placeholder="Search accounts…" />
 
 // ❌ Faded default text: 3.70:1 on white, below 4.5:1 — and ESLint rejects the class
-<input className="placeholder:text-foreground placeholder:opacity-50" placeholder="Search accounts…" />
+<Input className="placeholder:text-foreground placeholder:opacity-50" placeholder="Search accounts…" />
 ```
 
 `opacity.placeholder` is deprecated for that reason.

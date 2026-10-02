@@ -207,7 +207,8 @@ describe("Combobox", () => {
     await user.keyboard("{ArrowDown}")
     await user.keyboard("{Escape}")
     expect(input().getAttribute("aria-expanded")).toBe("false")
-    expect(screen.queryByRole("listbox")).toBeNull()
+    // Base UI unmounts the popup on a later frame, even with no exit animation.
+    await expect.poll(() => screen.queryByRole("listbox")).toBeNull()
   })
 
   // Regression guard for P3-19: every chip's remove button was named
