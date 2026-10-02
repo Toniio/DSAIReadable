@@ -163,7 +163,7 @@ Each script explains at the top of the file what it checks and why. They all run
 | `lint-spec-sections.ts`       | —                | The 13 canonical sections of a component spec, the 9 of a page pattern, in order                                                                                                        |
 | `lint-spec-wording.ts`        | —                | No hedged wording; every Constraints line (Usage and Spacing in a pattern) opens with a keyword                                                                                         |
 | `lint-foundation-examples.ts` | —                | Every tsx and ts block of `specs/foundations/` passes the ESLint plugin's `recommended` config; a `// ❌` counter-example may break a class rule, never use a native element            |
-| `build-llms-txt.ts`           | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role                                                                                                        |
+| `build-llms-txt.ts`           | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role, every link at the release tag                                                                         |
 
 ### Index — `npm run index:validate`
 
@@ -186,12 +186,12 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Versioning and release
 
-| Script                   | npm command                        | Role                                                                                    |
-| ------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------- |
-| `sync-versions.ts`       | `versions:sync` / `versions:check` | The root `package.json` version copied to the index, the MCP server and both lockfiles  |
-| `lint-changesets.ts`     | `changesets:lint`                  | Each pending `.changeset/*.md` has a known category and the bump that category takes    |
-| `test-release.ts`        | `release:test`                     | A changeset becomes a version and a CHANGELOG entry, on a copy of the files             |
-| `test-pinned-install.ts` | `release:test`                     | What the shadcn CLI pins when an item is installed at a tag, against a local git remote |
+| Script                   | npm command                        | Role                                                                                                         |
+| ------------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `sync-versions.ts`       | `versions:sync` / `versions:check` | The root `package.json` version copied to the index, the MCP server and both lockfiles                       |
+| `lint-changesets.ts`     | `changesets:lint`                  | Each pending `.changeset/*.md` has a known category and the bump that category takes                         |
+| `test-release.ts`        | `release:test`                     | A changeset becomes a version, a CHANGELOG entry and `llms.txt` links on the new tag, on a copy of the files |
+| `test-pinned-install.ts` | `release:test`                     | What the shadcn CLI pins when an item is installed at a tag, against a local git remote                      |
 
 `release:check` runs the first two; `release:version` is what a release pull request runs
 ([`CONTRIBUTING.md`](./CONTRIBUTING.md#versioning-and-releases)).

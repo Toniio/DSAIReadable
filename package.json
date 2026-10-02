@@ -77,7 +77,7 @@
     "versions:check": "tsx scripts/sync-versions.ts --check",
     "changesets:lint": "tsx scripts/lint-changesets.ts",
     "release:check": "npm run versions:check && npm run changesets:lint",
-    "release:version": "changeset version && npm run versions:sync && npm run generate-context && prettier --write CHANGELOG.md",
+    "release:version": "changeset version && npm run versions:sync && npm run docs:llms && npm run generate-context && prettier --write CHANGELOG.md",
     "release:test": "tsx scripts/test-release.ts && tsx scripts/test-pinned-install.ts"
   },
   "dependencies": {

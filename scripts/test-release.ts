@@ -1,6 +1,6 @@
 /**
  * Release pipeline test: a changeset becomes a version, a CHANGELOG entry and
- * one number everywhere the design system serves it.
+ * one number everywhere the design system serves it, llms.txt links included.
  *
  * It runs the real `changeset version` and the real version scripts on a copy
  * of the files that carry the version, in a temporary directory, so the working
@@ -11,7 +11,10 @@
  *   ② `changeset version` bumps package.json and writes the expected
  *      CHANGELOG entry, then consumes the changeset;
  *   ③ `versions:check` catches the copies that did not follow, and
- *      `versions:sync` brings them along, lockfiles included.
+ *      `versions:sync` brings them along, lockfiles included;
+ *   ④ `docs:llms:check` passes on the copy at the old version, fails once the
+ *      version moves, and `docs:llms` takes every link of llms.txt to the new
+ *      tag.
  *
  *   npx tsx scripts/test-release.ts
  */
@@ -33,6 +36,9 @@ import { fileURLToPath } from "node:url"
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHANGESET_CLI = resolve(ROOT, "node_modules/@changesets/cli/bin.js")
 const SUMMARY = "component-api: Add the `xs` size to Button."
+/** A link of llms.txt: the path of the file it opens at the release tag. */
+const LINKED =
+  /\]\(https:\/\/raw\.githubusercontent\.com\/Toniio\/DSAIReadable\/[^/)]+\/([^)]+)\)/g
 
 const tmp = mkdtempSync(join(tmpdir(), "dsai-release-"))
 const failures: string[] = []
@@ -76,8 +82,17 @@ try {
     "packages/eslint-plugin/package.json",
     ".claude-plugin/marketplace.json",
     ".changeset/config.json",
+    "llms.txt",
   ]) {
     cpSync(resolve(ROOT, file), join(tmp, file))
+  }
+  // llms.txt refuses a link to a file that does not exist: copy each one, and
+  // the specs it is built from. CHANGELOG.md is one; the test's own replaces it.
+  for (const [, path] of readFileSync(join(tmp, "llms.txt"), "utf-8").matchAll(
+    LINKED
+  )) {
+    mkdirSync(join(tmp, dirname(path)), { recursive: true })
+    cpSync(resolve(ROOT, path), join(tmp, path))
   }
   writeFileSync(join(tmp, "CHANGELOG.md"), "# Changelog\n")
   // changesets finds its root through git
@@ -89,6 +104,10 @@ try {
   expect(
     before === readJson("design-system.index.json").version,
     `every file starts at ${before}`
+  )
+  expect(
+    script("build-llms-txt", "--check").ok,
+    `llms.txt starts on the tag v${before}`
   )
 
   // ① the policy
@@ -168,6 +187,31 @@ try {
     marketplace.includes(`"version": "${next}"`) &&
       marketplace.includes(`"@dsaireadable/mcp-server@${next}"`),
     `the Claude Code plugin and the server it starts carry ${next}`
+  )
+
+  // ④ llms.txt, whose links name the release tag
+  expect(
+    !script("build-llms-txt", "--check").ok,
+    "docs:llms:check catches llms.txt still on the previous tag"
+  )
+  expect(script("build-llms-txt").ok, "docs:llms runs")
+  const links = [
+    ...readFileSync(join(tmp, "llms.txt"), "utf-8").matchAll(
+      /\]\((https:[^)]+)\)/g
+    ),
+  ].map(([, url]) => url)
+  expect(
+    links.length > 0 &&
+      links.every((url) =>
+        url.startsWith(
+          `https://raw.githubusercontent.com/Toniio/DSAIReadable/v${next}/`
+        )
+      ),
+    `every link of llms.txt names the tag v${next}`
+  )
+  expect(
+    script("build-llms-txt", "--check").ok,
+    "docs:llms:check passes once llms.txt is regenerated"
   )
 } finally {
   rmSync(tmp, { recursive: true, force: true })
