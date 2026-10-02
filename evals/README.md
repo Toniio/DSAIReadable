@@ -144,6 +144,20 @@ the turns, the MCP calls by tool, the tool errors and the tokens, the model and
 `via claude-code <version>`. These runs compare with each other, not with the
 claude generator's: the system prompt and the tools differ.
 
+The report also says where the screens were generated, because the checkout
+that scores a run is rarely the one that generated it. `design system <version>
+(<commit>)` in its header is the scoring checkout; `generated at <commit> ·
+sources <hash> · effort · turns max` is the one the sessions ran from (the
+`generated` field of `report.json`, with the Claude Code version, the `--model`
+option and the plugins the sessions listed), and each task keeps how its
+session ended (`session`: `subtype`, `numTurns`, `stopReason`). The Generation
+line counts the calls to the `dsaireadable_*` MCP tools apart from the others
+(`Skill`, `Read`, `read_skill_file`), and the tasks whose session used all its
+turns or stopped on the cap. A failure of stage B keeps its assertion only: no
+stack frame, no local path, no port, so a recorded report names nobody and two
+runs of one screen read the same. `npm run evals:test` fails on a recorded
+report that holds a local path.
+
 ## The harness's own test
 
 `npm run evals:test` proves the scorer, without a model:

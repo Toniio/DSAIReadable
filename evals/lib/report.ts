@@ -16,6 +16,33 @@ export interface GenerationMetrics {
   tools: Record<string, number>
 }
 
+/** The tools of the design system's MCP server are named `dsaireadable_*`: any other call (Skill, Read, read_skill_file) is not one. */
+const MCP_TOOL_PREFIX = "dsaireadable_"
+
+/** Where the screens of a replayed run were generated: what `evals/generate-claude-code.ts` wrote in its run.json. */
+interface GenerationProvenance {
+  /** The checkout the sessions ran from, which is not always the one that scores. */
+  commit: string
+  version: string
+  dirty: boolean
+  /** A hash of what the sessions read: the MCP server, its context, the skills, the instructions. */
+  sources: string
+  effort: string
+  maxTurns: number
+  /** The `--model` the sessions were given (`sonnet`); the report's `model` is the id it resolved to. */
+  modelOption: string
+  claudeCode: string
+  sessionPlugins: string[]
+}
+
+/** How the session of one task ended, from the result line of its stream. */
+export interface SessionOutcome {
+  /** `success`, or `error_max_turns` when the session stopped on its turn cap. */
+  subtype: string
+  numTurns?: number
+  stopReason: string | null
+}
+
 export interface RubricResult {
   /** Each criterion from 1 (wrong) to 5 (what the design system asks). */
   scores: Record<string, number>
@@ -29,6 +56,7 @@ export interface TaskReport {
   a11y?: A11yResult
   rubric?: RubricResult
   metrics?: GenerationMetrics
+  session?: SessionOutcome
 }
 
 export interface RunReport {
@@ -41,6 +69,9 @@ export interface RunReport {
   skills?: string[]
   /** Where a replayed run was generated: `claude-code 2.1.76` for evals/generate-claude-code.ts. */
   via?: string
+  /** Where a replayed run was generated, when its run.json says. */
+  generated?: GenerationProvenance
+  /** The checkout that scored the run. */
   designSystem: { version: string; commit: string }
   summary: Summary
   tasks: TaskReport[]
@@ -63,7 +94,16 @@ interface Summary {
   stageC: { score: number; byCriterion: Record<string, number> } | null
   /** The mean of the stages that ran. */
   conformance: number
-  generation: Omit<GenerationMetrics, "tools"> | null
+  generation:
+    | (Omit<GenerationMetrics, "tools" | "toolCalls"> & {
+        /** Calls to the design system's MCP tools. */
+        mcpCalls: number
+        /** Calls to any other tool: Skill, Read, read_skill_file. */
+        otherCalls: number
+        /** Tasks whose session used all its turns or stopped on the cap; null when no session outcome is known. */
+        turnCapReached: number | null
+      })
+    | null
 }
 
 const share = (values: boolean[]) =>
@@ -76,7 +116,11 @@ const round = (n: number) => Math.round(n * 1000) / 1000
 export const passesA = (s?: StaticResult) => !!s && s.compiles && s.lint
 export const passesB = (a?: A11yResult) => !!a && a.renders && a.axe && a.focus
 
-export function summarize(tasks: TaskReport[], ranB: boolean): Summary {
+export function summarize(
+  tasks: TaskReport[],
+  ranB: boolean,
+  maxTurns?: number
+): Summary {
   const lintByFamily: Partial<Record<LintFamily, number>> = {}
   for (const t of tasks)
     for (const [family, n] of Object.entries(t.static?.lintByFamily ?? {}))
@@ -125,8 +169,13 @@ export function summarize(tasks: TaskReport[], ranB: boolean): Summary {
         }
       : null
   const metrics = tasks.flatMap((t) => (t.metrics ? [t.metrics] : []))
-  const sum = (key: keyof Omit<GenerationMetrics, "tools">) =>
+  const sum = (key: keyof Omit<GenerationMetrics, "tools" | "toolCalls">) =>
     metrics.reduce((a, m) => a + m[key], 0)
+  const calls = metrics.flatMap((m) => Object.entries(m.tools))
+  const mcpCalls = calls
+    .filter(([name]) => name.startsWith(MCP_TOOL_PREFIX))
+    .reduce((a, [, n]) => a + n, 0)
+  const sessions = tasks.flatMap((t) => (t.session ? [t.session] : []))
   return {
     tasks: tasks.length,
     generated: tasks.filter((t) => t.generated).length,
@@ -144,16 +193,26 @@ export function summarize(tasks: TaskReport[], ranB: boolean): Summary {
       metrics.length > 0
         ? {
             turns: sum("turns"),
-            toolCalls: sum("toolCalls"),
+            mcpCalls,
+            otherCalls: calls.reduce((a, [, n]) => a + n, 0) - mcpCalls,
             toolErrors: sum("toolErrors"),
             inputTokens: sum("inputTokens"),
             outputTokens: sum("outputTokens"),
+            turnCapReached:
+              sessions.length > 0
+                ? sessions.filter(
+                    (s) =>
+                      s.subtype === "error_max_turns" ||
+                      (maxTurns !== undefined && (s.numTurns ?? 0) >= maxTurns)
+                  ).length
+                : null,
           }
         : null,
   }
 }
 
 const pct = (n: number) => `${Math.round(n * 100)} %`
+const count = (n: number, noun: string) => `${n} ${noun}${n === 1 ? "" : "s"}`
 const mark = (ok: boolean | undefined) => (ok ? "✅" : "❌")
 
 export function toMarkdown(report: RunReport): string {
@@ -161,7 +220,7 @@ export function toMarkdown(report: RunReport): string {
   const lines = [
     `# Conformance run — ${report.label}`,
     "",
-    `${report.date} · generator \`${report.generator}\`${report.via ? ` via \`${report.via}\`` : ""}${report.model ? ` · model \`${report.model}\`` : ""}${report.context ? ` · context \`${report.context}\`` : ""}${report.skills?.length ? ` · skills ${report.skills.map((name) => `\`${name}\``).join(", ")}` : ""} · design system ${report.designSystem.version} (\`${report.designSystem.commit.slice(0, 7)}\`) · ${s.generated}/${s.tasks} tasks answered`,
+    `${report.date} · generator \`${report.generator}\`${report.via ? ` via \`${report.via}\`` : ""}${report.model ? ` · model \`${report.model}\`` : ""}${report.context ? ` · context \`${report.context}\`` : ""}${report.skills?.length ? ` · skills ${report.skills.map((name) => `\`${name}\``).join(", ")}` : ""} · design system ${report.designSystem.version} (\`${report.designSystem.commit.slice(0, 7)}\`)${report.generated ? ` · generated at \`${report.generated.commit.slice(0, 7)}\`${report.generated.dirty ? " (dirty)" : ""} · sources \`${report.generated.sources}\` · effort ${report.generated.effort} · ${report.generated.maxTurns} turns max` : ""} · ${s.generated}/${s.tasks} tasks answered`,
     "",
     `**Conformance: ${pct(s.conformance)}** (the mean of the stages that ran)`,
     "",
@@ -186,11 +245,14 @@ export function toMarkdown(report: RunReport): string {
       `Lint findings by family: ${families.map(([f, n]) => `${f} ${n}`).join(" · ")}`,
       ""
     )
-  if (s.generation)
+  if (s.generation) {
+    const g = s.generation
+    const cap = g.turnCapReached
     lines.push(
-      `Generation: ${s.generation.turns} turns · ${s.generation.toolCalls} MCP tool calls (${s.generation.toolErrors} errors) · ${s.generation.inputTokens} input and ${s.generation.outputTokens} output tokens`,
+      `Generation: ${g.turns} turns · ${count(g.mcpCalls, "MCP tool call")} · ${count(g.otherCalls, "other tool call")} · ${count(g.toolErrors, "tool error")} · ${g.inputTokens} input and ${g.outputTokens} output tokens${cap === null ? "" : ` · ${count(cap, "task")} reached the ${report.generated ? `${report.generated.maxTurns}-turn` : "turn"} cap`}`,
       ""
     )
+  }
   lines.push(
     "| Task | Compiles | Lint | Coverage | Renders | Axe | Focus | Rubric |",
     "| --- | --- | --- | --- | --- | --- | --- | --- |"

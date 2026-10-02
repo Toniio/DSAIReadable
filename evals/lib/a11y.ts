@@ -6,6 +6,7 @@
 
 import { spawnSync } from "node:child_process"
 import { existsSync, readFileSync } from "node:fs"
+import { homedir } from "node:os"
 import { join, resolve } from "node:path"
 
 export interface A11yResult {
@@ -33,6 +34,25 @@ interface VitestReport {
  * fault, and a second run, on the optimized dependencies, renders it.
  */
 const REACT_TWICE = /Cannot read properties of null \(reading 'use[A-Z]\w*'\)/
+
+/**
+ * A failure message as the history keeps it: the assertion, not the machine
+ * that ran it. Drops the stack frames, which name the repository's folder and
+ * the dev server's port, and the cache tokens Vite appends to a module's URL
+ * (`?v=`, `browserv=`); the repository's path goes, and the home folder
+ * becomes `~`. Two runs of the same screen give the same message.
+ */
+export function scrubFailure(message: string, root: string): string {
+  return message
+    .split("\n")
+    .filter((line) => !/^\s+at /.test(line))
+    .join("\n")
+    .replaceAll(resolve(root) + "/", "")
+    .replaceAll(resolve(root), "")
+    .replaceAll(homedir(), "~")
+    .replace(/(localhost):\d+/g, "$1")
+    .replace(/[?&](?:browser)?v=[\w.-]+/g, "")
+}
 
 export function scoreA11y(
   root: string,
@@ -91,7 +111,13 @@ function runA11y(
       if (test.title === "focus") result.focus = passed
       if (!passed)
         result.failures.push(
-          `${test.title}: ${(test.failureMessages[0] ?? test.status).split("\n").slice(0, 12).join("\n")}`
+          `${test.title}: ${scrubFailure(
+            test.failureMessages[0] ?? test.status,
+            root
+          )
+            .split("\n")
+            .slice(0, 12)
+            .join("\n")}`
         )
     }
   return out

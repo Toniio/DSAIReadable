@@ -9,9 +9,23 @@
     "dsaireadable-ui-guard"
   ],
   "via": "claude-code 2.1.285",
-  "designSystem": {
+  "generated": {
+    "commit": "bd2ae4aae42c9ced816d095a94ca80da3e95d0e1",
     "version": "0.1.0",
-    "commit": "5e83303c0d979529560e44a211f98947709544c3"
+    "dirty": false,
+    "sources": "2bdeaa526a7b7a93",
+    "effort": "high",
+    "maxTurns": 25,
+    "modelOption": "sonnet",
+    "claudeCode": "2.1.285",
+    "sessionPlugins": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-telemetry@builtin"
+    ]
+  },
+  "designSystem": {
+    "version": "0.1.1",
+    "commit": "78a5bf811c7cb0a7a3d98517ea9c2b92676592a9"
   },
   "summary": {
     "tasks": 26,
@@ -35,10 +49,12 @@
     "conformance": 0.904,
     "generation": {
       "turns": 208,
-      "toolCalls": 429,
+      "mcpCalls": 377,
+      "otherCalls": 52,
       "toolErrors": 0,
       "inputTokens": 6972616,
-      "outputTokens": 271945
+      "outputTokens": 271945,
+      "turnCapReached": 2
     }
   },
   "tasks": [
@@ -60,6 +76,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -97,6 +118,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 25,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -131,6 +157,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -167,6 +198,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 23,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -201,6 +237,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -239,6 +280,11 @@
           "dsaireadable_validate_screen": 2
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 22,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -276,6 +322,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 25,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -311,6 +362,11 @@
           "dsaireadable_validate_code": 2,
           "dsaireadable_validate_screen": 2
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -350,6 +406,11 @@
           "Read": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 22,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -364,9 +425,9 @@
         "axe": false,
         "focus": false,
         "failures": [
-          "renders: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
-          "axe: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
-          "focus: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)"
+          "renders: Error: `Tooltip` must be used within `TooltipProvider`",
+          "axe: Error: `Tooltip` must be used within `TooltipProvider`",
+          "focus: Error: `Tooltip` must be used within `TooltipProvider`"
         ]
       }
     },
@@ -388,6 +449,11 @@
           "dsaireadable_validate_code": 2,
           "dsaireadable_validate_screen": 2
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 22,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -423,6 +489,11 @@
           "dsaireadable_validate_code": 2,
           "dsaireadable_validate_screen": 2
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 20,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -461,6 +532,11 @@
           "dsaireadable_validate_screen": 2
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -496,6 +572,11 @@
           "dsaireadable_validate_code": 2,
           "dsaireadable_validate_screen": 2
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -534,6 +615,11 @@
           "dsaireadable_get_components": 1,
           "Read": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -578,6 +664,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 16,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -592,7 +683,7 @@
         "axe": false,
         "focus": true,
         "failures": [
-          "axe: AssertionError: light scrollable-region-focusable: .relative\ndark scrollable-region-focusable: .relative: expected [ …(2) ] to deeply equal []\n    at http://localhost:63315/Users/anthony.besnault/DSAIReadable/.claude/worktrees/dsa-readable-0-1-1-8fae61/evals/a11y/screens.test.tsx?import&browserv=1790957414341:33:45\n    at async http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/plugins.D2ut1V9b-DDzazuHB.js?v=4a2b27ac:5211:20"
+          "axe: AssertionError: light scrollable-region-focusable: .relative\ndark scrollable-region-focusable: .relative: expected [ …(2) ] to deeply equal []"
         ]
       }
     },
@@ -617,6 +708,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -656,6 +752,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 20,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -692,6 +793,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 24,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -727,6 +833,11 @@
           "dsaireadable_validate_code": 2,
           "dsaireadable_validate_screen": 2
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -765,6 +876,11 @@
           "Read": 2
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 22,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -800,6 +916,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 2
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -837,6 +958,11 @@
           "dsaireadable_validate_screen": 2,
           "dsaireadable_get_tokens": 2
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -880,6 +1006,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -917,6 +1048,11 @@
           "dsaireadable_validate_screen": 2
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -951,6 +1087,11 @@
           "dsaireadable_validate_screen": 1
         }
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 11,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -965,7 +1106,7 @@
         "axe": false,
         "focus": true,
         "failures": [
-          "axe: AssertionError: light button-name: #plan-starter\nlight button-name: #plan-team\ndark button-name: #plan-starter\ndark button-name: #plan-team: expected [ …(4) ] to deeply equal []\n    at http://localhost:63315/Users/anthony.besnault/DSAIReadable/.claude/worktrees/dsa-readable-0-1-1-8fae61/evals/a11y/screens.test.tsx?import&browserv=1790957414341:33:45\n    at async http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/plugins.D2ut1V9b-DDzazuHB.js?v=4a2b27ac:5211:20"
+          "axe: AssertionError: light button-name: #plan-starter\nlight button-name: #plan-team\ndark button-name: #plan-starter\ndark button-name: #plan-team: expected [ …(4) ] to deeply equal []"
         ]
       }
     },
@@ -987,6 +1128,11 @@
           "dsaireadable_validate_code": 1,
           "dsaireadable_validate_screen": 1
         }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,

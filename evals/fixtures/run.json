@@ -1,0 +1,37 @@
+{
+  "generator": "claude-code",
+  "claudeCode": "2.1.285",
+  "claudePath": "claude",
+  "model": "claude-sonnet-5-5",
+  "modelOption": "sonnet",
+  "condition": "mcp-skills",
+  "context": "mcp",
+  "skills": ["dsaireadable-build", "dsaireadable-ui-guard"],
+  "sessionSkills": ["dsaireadable-build", "dsaireadable-ui-guard", "loop"],
+  "sessionPlugins": ["cc-plugin-agents-md@builtin"],
+  "maxTurns": 25,
+  "effort": "high",
+  "sources": "0123456789abcdef",
+  "designSystem": {
+    "version": "0.0.0-fixture",
+    "commit": "abcdef1234567890abcdef1234567890abcdef12",
+    "dirty": false
+  },
+  "tasks": {
+    "faq": {
+      "subtype": "success",
+      "stopReason": "end_turn",
+      "numTurns": 7
+    },
+    "sign-in": {
+      "subtype": "success",
+      "stopReason": "end_turn",
+      "numTurns": 25
+    },
+    "delete-project": {
+      "subtype": "error_max_turns",
+      "stopReason": null,
+      "numTurns": 26
+    }
+  }
+}

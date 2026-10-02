@@ -6,9 +6,23 @@
   "context": "none",
   "skills": [],
   "via": "claude-code 2.1.285",
-  "designSystem": {
+  "generated": {
+    "commit": "bd2ae4aae42c9ced816d095a94ca80da3e95d0e1",
     "version": "0.1.0",
-    "commit": "5e83303c0d979529560e44a211f98947709544c3"
+    "dirty": false,
+    "sources": "2bdeaa526a7b7a93",
+    "effort": "high",
+    "maxTurns": 25,
+    "modelOption": "sonnet",
+    "claudeCode": "2.1.285",
+    "sessionPlugins": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-telemetry@builtin"
+    ]
+  },
+  "designSystem": {
+    "version": "0.1.1",
+    "commit": "78a5bf811c7cb0a7a3d98517ea9c2b92676592a9"
   },
   "summary": {
     "tasks": 26,
@@ -33,10 +47,12 @@
     "conformance": 0.885,
     "generation": {
       "turns": 26,
-      "toolCalls": 0,
+      "mcpCalls": 0,
+      "otherCalls": 0,
       "toolErrors": 0,
       "inputTokens": 50116,
-      "outputTokens": 84943
+      "outputTokens": 84943,
+      "turnCapReached": 0
     }
   },
   "tasks": [
@@ -50,6 +66,11 @@
         "inputTokens": 1904,
         "outputTokens": 3010,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -83,6 +104,11 @@
         "outputTokens": 3635,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -112,6 +138,11 @@
         "outputTokens": 2486,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -138,6 +169,11 @@
         "inputTokens": 1881,
         "outputTokens": 3970,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -167,6 +203,11 @@
         "inputTokens": 1880,
         "outputTokens": 3656,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -201,6 +242,11 @@
         "outputTokens": 3562,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -229,6 +275,11 @@
         "inputTokens": 1896,
         "outputTokens": 4964,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -260,6 +311,11 @@
         "outputTokens": 1772,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -287,6 +343,11 @@
         "outputTokens": 3552,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -303,9 +364,9 @@
         "axe": false,
         "focus": false,
         "failures": [
-          "renders: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
-          "axe: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
-          "focus: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)"
+          "renders: Error: `Tooltip` must be used within `TooltipProvider`",
+          "axe: Error: `Tooltip` must be used within `TooltipProvider`",
+          "focus: Error: `Tooltip` must be used within `TooltipProvider`"
         ]
       }
     },
@@ -319,6 +380,11 @@
         "inputTokens": 1887,
         "outputTokens": 3831,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -349,6 +415,11 @@
         "inputTokens": 1903,
         "outputTokens": 1841,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -381,6 +452,11 @@
         "outputTokens": 4229,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -411,6 +487,11 @@
         "outputTokens": 2021,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -437,6 +518,11 @@
         "inputTokens": 1886,
         "outputTokens": 3769,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -469,6 +555,11 @@
         "outputTokens": 2797,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -496,6 +587,11 @@
         "outputTokens": 4843,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -510,9 +606,9 @@
         "axe": false,
         "focus": false,
         "failures": [
-          "renders: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
-          "axe: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)",
-          "focus: Error: `Tooltip` must be used within `TooltipProvider`\n    at useContext (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/dist-DU41xnLA.js?v=4a2b27ac:140:10)\n    at Tooltip (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/radix-ui.js?v=4a2b27ac:10335:26)\n    at Object.react_stack_bottom_frame (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:25039:12)\n    at renderWithHooks (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:15297:19)\n    at updateFunctionComponent (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:16672:16)\n    at beginWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:17288:20)\n    at runWithFiberInDEV (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:11841:66)\n    at performUnitOfWork (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:20045:92)\n    at workLoopSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19941:37)\n    at renderRootSync (http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/@testing-library_react.js?v=4a2b27ac:19925:6)"
+          "renders: Error: `Tooltip` must be used within `TooltipProvider`",
+          "axe: Error: `Tooltip` must be used within `TooltipProvider`",
+          "focus: Error: `Tooltip` must be used within `TooltipProvider`"
         ]
       }
     },
@@ -526,6 +622,11 @@
         "inputTokens": 1874,
         "outputTokens": 6225,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -554,6 +655,11 @@
         "outputTokens": 4240,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -581,6 +687,11 @@
         "outputTokens": 2549,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -607,6 +718,11 @@
         "inputTokens": 1876,
         "outputTokens": 3271,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -638,6 +754,11 @@
         "outputTokens": 4997,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -661,7 +782,7 @@
         "axe": false,
         "focus": true,
         "failures": [
-          "axe: AssertionError: light scrollable-region-focusable: .overflow-y-auto\ndark scrollable-region-focusable: .overflow-y-auto: expected [ …(2) ] to deeply equal []\n    at http://localhost:63315/Users/anthony.besnault/DSAIReadable/.claude/worktrees/dsa-readable-0-1-1-8fae61/evals/a11y/screens.test.tsx?import&browserv=1790957375691:33:45\n    at async http://localhost:63315/node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/deps/plugins.D2ut1V9b-DDzazuHB.js?v=4a2b27ac:5211:20"
+          "axe: AssertionError: light scrollable-region-focusable: .overflow-y-auto\ndark scrollable-region-focusable: .overflow-y-auto: expected [ …(2) ] to deeply equal []"
         ]
       }
     },
@@ -675,6 +796,11 @@
         "inputTokens": 1865,
         "outputTokens": 1122,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -703,6 +829,11 @@
         "outputTokens": 1962,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -729,6 +860,11 @@
         "inputTokens": 1867,
         "outputTokens": 2965,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
@@ -757,6 +893,11 @@
         "outputTokens": 1440,
         "tools": {}
       },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
+      },
       "static": {
         "compiles": true,
         "typeErrors": [],
@@ -783,6 +924,11 @@
         "inputTokens": 2427,
         "outputTokens": 2234,
         "tools": {}
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn"
       },
       "static": {
         "compiles": true,
