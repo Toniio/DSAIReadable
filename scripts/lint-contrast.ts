@@ -13,6 +13,13 @@
  * that result. Checking only the solid pair let `text-destructive` on
  * `bg-destructive/10` ship at 3.99:1 while this lint was green (P3-17).
  *
+ * A focus indicator is checked as it is painted, too. Its solid part (the
+ * `border-ring` border of FOCUS_RING, or the `outline-ring` outline of an
+ * element without a border) carries the 3:1; the 2px `ring-ring/50` halo
+ * around it is painted at its alpha and reported for information only: at
+ * about 1.9:1 it is never an indicator on its own, and `tests/focus.ts` fails
+ * any tab stop whose indicator has no solid part.
+ *
  * Two levels, in a strict hierarchy:
  *   1. WCAG 2.2 AA ratios — blocking. The design system's conformance target,
  *      and the only contrast measure regulations cite today.
@@ -27,6 +34,7 @@
 
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { FOCUS_RING, FOCUS_RING_DESTRUCTIVE } from "../lib/focus.js"
 import { apcaContrast, blend, luminance } from "./wcag.js"
 import {
   cssValue,
@@ -110,6 +118,8 @@ type Pair = {
   tint?: { color: string; alpha: number }
   /** The opacity of the foreground itself, as Tailwind's `text-<role>/<n>`. */
   fgAlpha?: number
+  /** Measured and printed, never blocking: a part that is not the indicator. */
+  informative?: boolean
 }
 
 /** The surfaces a component may be placed on: page, card, popover. */
@@ -148,26 +158,89 @@ function tinted(
   )
 }
 
+/**
+ * The ring color class of a focus preset in a mode, and its alpha:
+ * `focus-visible:ring-ring/50` paints the ring color at 0.5. A `dark:` class
+ * of the preset wins in dark.
+ */
+function halo(preset: string, role: string, mode: Mode) {
+  const ring = new RegExp(`^(dark:)?focus-visible:ring-${role}(?:/(\\d+))?$`)
+  const classes = preset.split(/\s+/).flatMap((c) => {
+    const m = ring.exec(c)
+    return m
+      ? [
+          {
+            dark: !!m[1],
+            class: `ring-${role}${m[2] ? `/${m[2]}` : ""}`,
+            alpha: m[2] ? Number(m[2]) / 100 : 1,
+          },
+        ]
+      : []
+  })
+  const found =
+    (mode === "dark" && classes.find((c) => c.dark)) ||
+    classes.find((c) => !c.dark)
+  if (!found)
+    throw new Error(`No focus-visible:ring-${role} class in "${preset}"`)
+  return found
+}
+
 const PAIRS: Pair[] = [
   // Focus indicators — non-text contrast against the surface they sit on.
-  {
-    label: "focus ring on default surface",
+  // The solid part, at full alpha: `border-ring` or `outline-ring`, and
+  // `border-destructive` or `outline-destructive` on an invalid control or a
+  // destructive variant.
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `focus indicator (border-ring, outline-ring) on the ${surface}`,
     fg: "color.border.focus",
-    bg: "color.background.default",
-    threshold: 3,
-  },
-  {
-    label: "focus ring on subtle surface",
+    bg,
+    threshold: 3 as const,
+  })),
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `invalid or destructive focus indicator (border-destructive, outline-destructive) on the ${surface}`,
+    fg: "color.feedback.error.default",
+    bg,
+    threshold: 3 as const,
+  })),
+  // A control inside a field (an InputGroupButton) draws its indicator on the
+  // field's fill, `dark:bg-input/30`.
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `focus indicator on a field's dark:bg-input/30 fill over the ${surface}`,
     fg: "color.border.focus",
-    bg: "color.background.subtle",
-    threshold: 3,
-  },
+    bg,
+    tint: { color: "color.border.input", alpha: 0.3 },
+    threshold: 3 as const,
+    modes: ["dark" as Mode],
+  })),
   {
     label: "sidebar focus ring on sidebar surface",
     fg: "color.sidebar.ring",
     bg: "color.sidebar.background",
     threshold: 3,
   },
+  // The halo around the solid part, painted at the alpha of lib/focus.ts.
+  ...SURFACES.flatMap(([bg, surface]) =>
+    MODES.flatMap((mode) => [
+      {
+        label: `focus halo (${halo(FOCUS_RING, "ring", mode).class}) on the ${surface}`,
+        fg: "color.border.focus",
+        fgAlpha: halo(FOCUS_RING, "ring", mode).alpha,
+        bg,
+        threshold: 3 as const,
+        modes: [mode],
+        informative: true,
+      },
+      {
+        label: `destructive focus halo (${halo(FOCUS_RING_DESTRUCTIVE, "destructive", mode).class}) on the ${surface}`,
+        fg: "color.feedback.error.default",
+        fgAlpha: halo(FOCUS_RING_DESTRUCTIVE, "destructive", mode).alpha,
+        bg,
+        threshold: 3 as const,
+        modes: [mode],
+        informative: true,
+      },
+    ])
+  ),
 
   // Body text on every surface it is allowed to sit on.
   {
@@ -333,16 +406,39 @@ const PAIRS: Pair[] = [
   })),
 ]
 
+/**
+ * A `bg-<role>/<n>` tint over `surface`. A role that is itself translucent
+ * (`color.border.input` is white at 15% in dark) multiplies the two alphas.
+ */
+function tint(color: string, alpha: number, surface: string): string {
+  const rgba = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)$/.exec(color)
+  if (!rgba) return blend(color, alpha, surface)
+  const hex = `#${rgba
+    .slice(1, 4)
+    .map((v) => Number(v).toString(16).padStart(2, "0"))
+    .join("")}`
+  return blend(hex, alpha * Number(rgba[4]), surface)
+}
+
 let failures = 0
 let checked = 0
 const advisories: string[] = []
+const informative: string[] = []
 
 for (const pair of PAIRS) {
   for (const mode of pair.modes ?? MODES) {
+    if (pair.informative) {
+      const bg = resolveColor(pair.bg, mode)
+      const fg = blend(resolveColor(pair.fg, mode), pair.fgAlpha ?? 1, bg)
+      informative.push(
+        `ℹ️  ${mode.padEnd(5)} ${ratio(fg, bg).toFixed(2).padStart(5)}      ${pair.label}`
+      )
+      continue
+    }
     checked++
     const surface = resolveColor(pair.bg, mode)
     const bg = pair.tint
-      ? blend(resolveColor(pair.tint.color, mode), pair.tint.alpha, surface)
+      ? tint(resolveColor(pair.tint.color, mode), pair.tint.alpha, surface)
       : surface
     const solid = resolveColor(pair.fg, mode)
     const fg = pair.fgAlpha ? blend(solid, pair.fgAlpha, bg) : solid
@@ -368,6 +464,13 @@ for (const pair of PAIRS) {
 }
 
 console.log(`\n📊 ${checked} pair(s) checked, ${failures} failure(s).`)
+
+console.log(
+  "\n── The focus halo as painted (information, non-blocking) ──\n" +
+    "   The 2px ring around a focus indicator's solid part, at its alpha.\n" +
+    "   It never marks focus alone: tests/focus.ts requires the solid part."
+)
+for (const line of informative) console.log(line)
 
 console.log(
   "\n── Level 2 — APCA advisory (WCAG 3 preparation, non-blocking) ──\n" +

@@ -249,7 +249,7 @@
       "source": "focus.md"
     },
     {
-      "rule": "**Never `outline-none`** — use `FOCUS_OUTLINE_RESET` (`outline-hidden`). In forced-colors mode, `box-shadow`s are not painted: `outline-none` leaves the element with no indicator at all, whereas `outline-hidden` keeps a transparent outline that the mode makes visible. On top of that, `outline-none` poisons `--tw-outline-style`, which silently disabled the `outline-1` of ScrollArea and NavigationMenu.",
+      "rule": "**Never `outline-none`** — use `FOCUS_OUTLINE_RESET` (`outline-hidden`). In forced-colors mode, `box-shadow`s are not painted: `outline-none` leaves the element with no indicator at all, whereas `outline-hidden` keeps a transparent outline that the mode makes visible. Both set `--tw-outline-style` to none, which silently disabled the `outline-1` of ScrollArea and NavigationMenu: an outline drawn at focus after a reset takes `outline-solid` (rule 6).",
       "source": "focus.md"
     },
     {
@@ -262,6 +262,10 @@
     },
     {
       "rule": "**Hiding the outline requires drawing a ring — checked occurrence by occurrence, and target by target.** The ring must appear in the _same_ class string, on the _same_ target: a reset written under `**:`, `*:`, `[&_x]:` or `before:` hides the indicator of other nodes, and only a ring under the same variant answers it. A component that neutralizes the outline in ten places and draws a ring in one does not meet the rule, and neither did NavigationMenu, whose `**:data-[slot=navigation-menu-link]:focus:outline-none` hid every link's ring while the menu drew its own.",
+      "source": "focus.md"
+    },
+    {
+      "rule": "**Every indicator has a solid part at 3:1.** The 2px halo is painted at 50% (`ring-ring/50`, `ring-destructive/20`): about 1.9:1, and 1.4:1 for the destructive one, never enough on its own ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast) read for focus indicators). The solid part is the element's border when it has one (`focus-visible:border-ring`). Without a border, `focus-visible:border-ring` paints nothing: the element adds a 1px outline, `focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring` (Toggle's default variant, MenubarTrigger, NavigationMenu's trigger and link, TabsContent, the ScrollArea viewport, the Resizable handle, the Slider thumb, a focused Calendar day). `outline-solid` is required: `outline-hidden` sets the outline style to none, and a width alone would draw nothing. A state that keeps its border at focus draws the outline in its own color: an invalid control (`aria-invalid:focus-visible:outline-destructive`) and the destructive variants of Button and Badge (`outline-destructive`). An element that draws no focus style at all, a link or an unstyled trigger, keeps the browser's own outline, colored `outline-ring` at full alpha by the base layer of `styles/globals.css`. `tests/focus.ts` walks every tab stop of every spec example, light and dark, and fails one whose indicator has no part at 3:1, the color composited over what is under it.",
       "source": "focus.md"
     },
     {

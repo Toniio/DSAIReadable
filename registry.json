@@ -987,6 +987,7 @@
           "--color-border-default": "var(--ds-prim-color-white-alpha-10)",
           "--color-border-subtle": "var(--ds-prim-color-white-alpha-10)",
           "--color-border-input": "var(--ds-prim-color-white-alpha-15)",
+          "--color-border-focus": "var(--ds-prim-color-mist-400)",
           "--color-icon-default": "var(--ds-prim-color-mist-50)",
           "--color-icon-subtle": "var(--ds-prim-color-mist-400)",
           "--color-action-background-default": "var(--ds-prim-color-violet-700)",
@@ -1077,7 +1078,7 @@
             "--spacing": "var(--space-scale-1)"
           },
           "*": {
-            "@apply border-border outline-ring/50": {}
+            "@apply border-border outline-ring": {}
           },
           "body": {
             "@apply bg-background text-foreground": {}

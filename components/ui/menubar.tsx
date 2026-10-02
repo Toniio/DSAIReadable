@@ -122,7 +122,7 @@ function MenubarTrigger({
     <MenubarPrimitive.Trigger
       data-slot="menubar-trigger"
       className={cn(
-        `flex items-center rounded-none px-1.5 py-1 text-xs font-medium ${FOCUS_OUTLINE_RESET} ${FOCUS_RING} select-none hover:bg-muted aria-expanded:bg-muted`,
+        `flex items-center rounded-none px-1.5 py-1 text-xs font-medium ${FOCUS_OUTLINE_RESET} ${FOCUS_RING} select-none hover:bg-muted focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid aria-expanded:bg-muted`,
         className
       )}
       {...props}

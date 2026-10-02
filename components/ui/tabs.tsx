@@ -130,7 +130,7 @@ function TabsContent({
     <TabsPrimitive.Content
       data-slot="tabs-content"
       className={cn(
-        `flex-1 text-xs/relaxed ${FOCUS_OUTLINE_RESET} ${FOCUS_RING}`,
+        `flex-1 text-xs/relaxed ${FOCUS_OUTLINE_RESET} ${FOCUS_RING} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid`,
         className
       )}
       {...props}

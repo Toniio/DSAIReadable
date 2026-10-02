@@ -524,6 +524,7 @@
   --color-border-default: var(--ds-prim-color-white-alpha-10);
   --color-border-subtle:  var(--ds-prim-color-white-alpha-10);
   --color-border-input:   var(--ds-prim-color-white-alpha-15);
+  --color-border-focus:   var(--ds-prim-color-mist-400);
 
   --color-icon-default: var(--ds-prim-color-mist-50);
   --color-icon-subtle:  var(--ds-prim-color-mist-400);

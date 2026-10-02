@@ -2360,9 +2360,11 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
+          "badgeVariants.variant.destructive",
           "badgeVariants"
         ]
       },
@@ -2425,6 +2427,7 @@
           "bg-destructive/20",
           "border-destructive",
           "border-destructive/40",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -2659,7 +2662,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide; the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20`"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide; the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20` and draws a solid `outline-destructive` outline `--border-width-default` wide"
       },
       {
         "state": "active",
@@ -2671,7 +2674,7 @@
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border; on focus, a `ring-destructive/20` ring (`dark:aria-invalid:ring-destructive/40`)"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border; on focus, a `ring-destructive/20` ring (`dark:aria-invalid:ring-destructive/40`) and a solid `outline-destructive` outline"
       }
     ],
     "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red; `success` says \"Paid\", not just green). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`) or a raw color: `text-destructive`, `text-success` and `text-warning` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.\n- **MUST** — keep 4px of clear space above and below a Badge rendered as a link (`asChild`): it is 20px tall, and only the spacing exception of WCAG 2.2 SC 2.5.8 (Target Size) makes it conform (`specs/foundations/size.md`).",
@@ -2991,7 +2994,7 @@
       },
       {
         "state": "focus",
-        "behavior": "The browser's native focus style on links (no custom ring)"
+        "behavior": "The browser's native focus style on links (no custom ring), in the focus ring color at full alpha"
       },
       {
         "state": "active",
@@ -3479,9 +3482,11 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
+          "buttonVariants.variant.destructive",
           "buttonVariants"
         ]
       },
@@ -3567,6 +3572,7 @@
           "border-destructive",
           "border-destructive/40",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -3837,7 +3843,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, in light and dark mode (the `outline` variant restores `border-ring` in dark with `dark:focus-visible:border-ring`, over its `dark:border-input`); the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20`"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`): `border-ring` border and a `ring-ring/50` ring `--space-focus-ring-width` wide, in light and dark mode (the `outline` variant restores `border-ring` in dark with `dark:focus-visible:border-ring`, over its `dark:border-input`); the `destructive` variant switches to `border-destructive/40` and `ring-destructive/20` and draws a solid `outline-destructive` outline `--border-width-default` wide, as an invalid button does"
       },
       {
         "state": "active",
@@ -3853,7 +3859,7 @@
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid=\"true\"`: `destructive` border; on focus, a `destructive` ring"
+        "behavior": "`aria-invalid=\"true\"`: `destructive` border; on focus, a `destructive` ring and a solid `outline-destructive` outline"
       },
       {
         "state": "loading",
@@ -4175,10 +4181,12 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
-          "Calendar.dropdown_root"
+          "Calendar.dropdown_root",
+          "CalendarDayButton"
         ]
       },
       {
@@ -4233,6 +4241,7 @@
         "token": "color.border.focus",
         "classes": [
           "border-ring",
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
@@ -4569,7 +4578,7 @@
       },
       {
         "state": "focus",
-        "behavior": "Visible focus ring on the focused day: `ring-ring/50`, `--space-focus-ring-width` wide (the day button is `border-0`, so `border-ring` draws nothing); with `captionLayout=\"dropdown\"`, the root of the month and year dropdowns, which rests on a `border-input` border, takes `border-ring` and the same ring while its invisible `select` has focus (`has-focus`)"
+        "behavior": "Focus indicator on the focused day: a solid `outline-ring` outline `--border-width-default` wide (`outline-solid`) inside a `ring-ring/50` ring `--space-focus-ring-width` wide (the day button is `border-0`, so the outline is the solid part); with `captionLayout=\"dropdown\"`, the root of the month and year dropdowns, which rests on a `border-input` border, takes `border-ring` and the same ring while its invisible `select` has focus (`has-focus`)"
       },
       {
         "state": "selected",
@@ -5842,7 +5851,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "Checkbox"
@@ -5892,6 +5902,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -6055,7 +6066,7 @@
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive` (`border-destructive/50` in dark mode); on focus, a `ring-destructive/20` ring (`ring-destructive/40` in dark mode); in light mode, a checked box keeps `border-primary`"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` (`border-destructive/50` in dark mode); on focus, a `ring-destructive/20` ring (`ring-destructive/40` in dark mode) and a solid `outline-destructive` outline `--border-width-default` wide; in light mode, a checked box keeps `border-primary`"
       },
       {
         "state": "indeterminate",
@@ -6319,6 +6330,7 @@
         "token": "border-width.default",
         "classes": [
           "border",
+          "outline-(length:--border-width-default)",
           "ring-(length:--border-width-default)"
         ],
         "where": [
@@ -6382,6 +6394,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -6963,7 +6976,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`"
+        "behavior": "`destructive` border and `ring-destructive/20` ring through `aria-invalid`; while focus is within, a solid `outline-destructive` outline `--border-width-default` wide"
       },
       {
         "state": "placeholder",
@@ -7079,7 +7092,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border-b"
+          "border-b",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "CommandInput"
@@ -7115,6 +7129,7 @@
       {
         "token": "color.border.focus",
         "classes": [
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
@@ -7467,7 +7482,7 @@
       },
       {
         "state": "focus",
-        "behavior": "While the search input has focus, the search field draws a `ring-ring/50` ring `--space-focus-ring-width` wide; the arrow keys move the selection through the items"
+        "behavior": "While the search input has focus, the search field draws a `ring-ring/50` ring `--space-focus-ring-width` wide and a solid `outline-ring` outline `--border-width-default` wide, since it has no border; the arrow keys move the selection through the items"
       },
       {
         "state": "selected",
@@ -11551,7 +11566,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "Input"
@@ -11584,6 +11600,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -11748,7 +11765,7 @@
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border (dark: `border-destructive/50`); on focus, the ring turns `ring-destructive/20` (dark: `ring-destructive/40`)"
+        "behavior": "`aria-invalid=\"true\"`: `border-destructive` border (dark: `border-destructive/50`); on focus, the ring turns `ring-destructive/20` (dark: `ring-destructive/40`) and a solid `outline-destructive` outline `--border-width-default` wide marks it, as the border keeps its color"
       },
       {
         "state": "placeholder",
@@ -11823,7 +11840,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "InputGroup"
@@ -11855,6 +11873,7 @@
         "token": "color.feedback.error.default",
         "classes": [
           "border-destructive",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -12238,7 +12257,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border and `ring-destructive/20` ring (dark: `ring-destructive/40`), focused or not, through `aria-invalid` on the control, which drops its own ring (`aria-invalid:ring-0`)"
+        "behavior": "`destructive` border and `ring-destructive/20` ring (dark: `ring-destructive/40`), focused or not, through `aria-invalid` on the control, which drops its own ring (`aria-invalid:ring-0`); while that control has `focus-visible`, the group adds a solid `outline-destructive` outline `--border-width-default` wide"
       }
     ],
     "accessibility": "**Pattern**: A group (`role=\"group\"`) around a field\n\n**Role**: `role=\"group\"`; the field keeps its semantics; clicking an add-on moves focus to the field.\n\n**Keyboard**:\n\nNo interaction of its own; the field and the `InputGroupButton`s receive focus as usual.\n\n**Accessible name**: The field must be labeled like an `Input`. An icon-only `InputGroupButton` needs an `aria-label` (\"Clear search\").\n\n**Pitfalls**:\n\n- **MUST** — when an add-on's text (\"https://\", \"$\") carries meaning, repeat it in the label or the description: it is not read as part of the label.\n- The error is styled on the group through the field's `aria-invalid`; the message still has to be linked.",
@@ -12301,7 +12320,8 @@
         "classes": [
           "border-l",
           "border-r",
-          "border-y"
+          "border-y",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "InputOTPSlot"
@@ -12331,6 +12351,7 @@
         "token": "color.feedback.error.default",
         "classes": [
           "border-destructive",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -12558,7 +12579,7 @@
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid` on an `InputOTPSlot` turns its border `border-destructive` and its active ring `ring-destructive/20`, and rings its `InputOTPGroup` in `ring-destructive/20` (dark: `ring-destructive/40`); set on `InputOTP` itself, it draws nothing"
+        "behavior": "`aria-invalid` on an `InputOTPSlot` turns its border `border-destructive` and its active ring `ring-destructive/20`, with a solid `outline-destructive` outline `--border-width-default` wide on the active slot, and rings its `InputOTPGroup` in `ring-destructive/20` (dark: `ring-destructive/40`); set on `InputOTP` itself, it draws nothing"
       }
     ],
     "accessibility": "**Pattern**: A single text input (input-otp) displayed as slots\n\n**Role**: One real `input` takes the typing; the slots are visual; `InputOTPSeparator` carries `role=\"separator\"`.\n\n**Keyboard**:\n\n| Key                        | Action                         |\n| -------------------------- | ------------------------------ |\n| Digits / letters           | Fill in the code slot by slot  |\n| `Backspace`                | Deletes the previous character |\n| `ArrowLeft` / `ArrowRight` | Moves the cursor               |\n| Paste                      | Fills every slot               |\n\n**Accessible name**: Required: a `Label` or an `aria-label` (\"Verification code\") on the input.\n\n**Pitfalls**:\n\n- Set `autoComplete=\"one-time-code\"` so the code can be filled in automatically.\n- Announce the error (an invalid code) with a linked message, not only through the slots' color.",
@@ -14127,11 +14148,13 @@
         "token": "border-width.default",
         "classes": [
           "border",
+          "outline-(length:--border-width-default)",
           "ring-(length:--border-width-default)"
         ],
         "where": [
           "MenubarContent via SURFACE_OUTLINE (lib/surface.ts)",
           "MenubarSubContent via SURFACE_OUTLINE (lib/surface.ts)",
+          "MenubarTrigger",
           "Menubar"
         ]
       },
@@ -14172,9 +14195,11 @@
         "token": "color.border.focus",
         "classes": [
           "border-ring",
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
+          "MenubarTrigger",
           "MenubarTrigger via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -14727,7 +14752,7 @@
       },
       {
         "state": "focus",
-        "behavior": "Focused item: `bg-accent` background and `accent-foreground` text (destructive item: `bg-destructive/10`, dark: `bg-destructive/20`, and `text-destructive`); a trigger focused from the keyboard: `ring-ring/50` ring"
+        "behavior": "Focused item: `bg-accent` background and `accent-foreground` text (destructive item: `bg-destructive/10`, dark: `bg-destructive/20`, and `text-destructive`); a trigger focused from the keyboard: `ring-ring/50` ring and a solid `outline-ring` outline `--border-width-default` wide, since the trigger has no border"
       },
       {
         "state": "open",
@@ -15353,7 +15378,7 @@
       },
       {
         "state": "focus",
-        "behavior": "The viewport and the button draw the focus ring of `Button` and of the browser"
+        "behavior": "The button draws the focus indicator of `Button`; the viewport, the browser's own outline in the focus ring color, at full alpha"
       },
       {
         "state": "active",
@@ -15432,7 +15457,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "NativeSelect"
@@ -15482,6 +15508,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -15695,7 +15722,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
       },
       {
         "state": "placeholder",
@@ -15777,11 +15804,14 @@
       {
         "token": "border-width.default",
         "classes": [
+          "outline-(length:--border-width-default)",
           "ring-(length:--border-width-default)"
         ],
         "where": [
           "NavigationMenuContent",
-          "NavigationMenuViewport via SURFACE_OUTLINE (lib/surface.ts)"
+          "NavigationMenuLink",
+          "NavigationMenuViewport via SURFACE_OUTLINE (lib/surface.ts)",
+          "navigationMenuTriggerStyle"
         ]
       },
       {
@@ -15818,10 +15848,13 @@
         "token": "color.border.focus",
         "classes": [
           "border-ring",
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
+          "NavigationMenuLink",
           "NavigationMenuLink via FOCUS_RING (lib/focus.ts)",
+          "navigationMenuTriggerStyle",
           "navigationMenuTriggerStyle via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -16196,7 +16229,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`bg-muted` background and `FOCUS_RING` (`lib/focus.ts`) on the trigger or link: a `ring-ring/50` ring `--space-focus-ring-width` wide, no outline (`outline-hidden`); neither has a border, so `border-ring` draws nothing"
+        "behavior": "`bg-muted` background and `FOCUS_RING` (`lib/focus.ts`) on the trigger or link, with a solid `outline-ring` outline `--border-width-default` wide (`outline-solid`, over `outline-hidden`): neither has a border, so `border-ring` draws nothing and the outline is the solid part next to the `ring-ring/50` ring"
       },
       {
         "state": "active",
@@ -16669,7 +16702,7 @@
       },
       {
         "state": "error",
-        "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring"
+        "behavior": "`aria-invalid=\"true\"`: `destructive` border and ring, and a solid outline at focus, inherited from `InputGroup`"
       },
       {
         "state": "visible",
@@ -18016,7 +18049,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "RadioGroupItem"
@@ -18067,6 +18101,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -18226,7 +18261,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
       }
     ],
     "accessibility": "**Pattern**: [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) (Radix RadioGroup)\n\n**Role**: `role=\"radiogroup\"`; each option is a `role=\"radio\"` with `aria-checked`.\n\n**Keyboard**:\n\n| Key                        | Action                                     |\n| -------------------------- | ------------------------------------------ |\n| `Tab`                      | Enters the group on the checked option     |\n| `ArrowDown` / `ArrowRight` | Moves to the next option and checks it     |\n| `ArrowUp` / `ArrowLeft`    | Moves to the previous option and checks it |\n| `Space`                    | Checks the focused option                  |\n\n**Accessible name**: Each option has a tied `Label`; the group is named by a legend (`FieldLegend`) or an `aria-label`.\n\n**Pitfalls**:\n\n- The whole group is a single tab stop: `Tab` skipping the other options is expected behavior.",
@@ -18282,6 +18317,15 @@
     ],
     "tokens": [
       {
+        "token": "border-width.default",
+        "classes": [
+          "outline-(length:--border-width-default)"
+        ],
+        "where": [
+          "ResizableHandle"
+        ]
+      },
+      {
         "token": "color.background.default",
         "classes": [
           "ring-offset-background"
@@ -18303,9 +18347,11 @@
         "token": "color.border.focus",
         "classes": [
           "border-ring",
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
+          "ResizableHandle",
           "ResizableHandle via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -18462,7 +18508,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`FOCUS_RING` (`lib/focus.ts`): a `ring-ring/50` ring `--space-focus-ring-width` wide on the handle, no outline (`outline-hidden`); the handle has no border, so `border-ring` draws nothing"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`) and a solid `outline-ring` outline `--border-width-default` wide (`outline-solid`) around the handle: it has no border, so `border-ring` draws nothing and the outline is the solid part next to the `ring-ring/50` ring"
       },
       {
         "state": "active",
@@ -18530,9 +18576,11 @@
         "token": "border-width.default",
         "classes": [
           "border-l",
-          "border-t"
+          "border-t",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
+          "ScrollArea",
           "ScrollBar"
         ]
       },
@@ -18549,9 +18597,11 @@
         "token": "color.border.focus",
         "classes": [
           "border-ring",
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
+          "ScrollArea",
           "ScrollArea via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -18645,7 +18695,7 @@
       },
       {
         "state": "focus",
-        "behavior": "Focus ring on the viewport during keyboard navigation"
+        "behavior": "`FOCUS_RING` (`lib/focus.ts`) on the viewport during keyboard navigation, with a solid `outline-ring` outline `--border-width-default` wide (`outline-solid`): the viewport has no border, so the outline is the solid part next to the `ring-ring/50` ring"
       },
       {
         "state": "active",
@@ -18738,6 +18788,7 @@
         "token": "border-width.default",
         "classes": [
           "border",
+          "outline-(length:--border-width-default)",
           "ring-(length:--border-width-default)"
         ],
         "where": [
@@ -18800,6 +18851,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -19227,7 +19279,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
       },
       {
         "state": "placeholder",
@@ -21137,7 +21189,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "Slider"
@@ -21165,6 +21218,7 @@
         "token": "color.border.focus",
         "classes": [
           "border-ring",
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
@@ -21350,7 +21404,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide and a hidden outline on the thumb"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide and a solid `outline-ring` outline `--border-width-default` wide (`outline-solid`) around the thumb; hover and drag draw the ring only"
       },
       {
         "state": "active",
@@ -21649,7 +21703,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "Switch"
@@ -21707,6 +21762,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -21906,7 +21962,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring; in dark mode `border-destructive/50` and `ring-destructive/40`"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide; in dark mode `border-destructive/50` and `ring-destructive/40`"
       }
     ],
     "accessibility": "**Pattern**: [Switch](https://www.w3.org/WAI/ARIA/apg/patterns/switch/) (Radix Switch)\n\n**Role**: `role=\"switch\"` on a `button`, with `aria-checked`.\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Space` / `Enter` | Toggles the state               |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: Required: a tied `Label` or an `aria-label`. The label names the setting, not its state (\"Notifications\", not \"On\").\n\n**Pitfalls**:\n\n- A switch acts immediately; when the setting only applies once a form is submitted, use a `Checkbox`.",
@@ -22350,6 +22406,7 @@
           "outline-(length:--border-width-default)"
         ],
         "where": [
+          "TabsContent",
           "TabsTrigger"
         ]
       },
@@ -22379,6 +22436,7 @@
           "ring-ring/50"
         ],
         "where": [
+          "TabsContent",
           "TabsContent via FOCUS_RING (lib/focus.ts)",
           "TabsTrigger"
         ]
@@ -22671,7 +22729,7 @@
       },
       {
         "state": "focus",
-        "behavior": "On the trigger: `ring-ring/50` ring `--space-focus-ring-width` wide, `border-ring` border and an `outline-ring` outline `--border-width-default` wide; the content panel, which has no border, draws only the ring"
+        "behavior": "On the trigger: `ring-ring/50` ring `--space-focus-ring-width` wide, `border-ring` border and an `outline-ring` outline `--border-width-default` wide; the content panel, which has no border, draws the ring and the same outline (`outline-solid`)"
       },
       {
         "state": "active",
@@ -22725,7 +22783,8 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "Textarea"
@@ -22758,6 +22817,7 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -22907,7 +22967,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+        "behavior": "`destructive` border through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
       },
       {
         "state": "placeholder",
@@ -22958,10 +23018,13 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
-          "toggleVariants.variant.outline"
+          "toggleVariants.variant.default",
+          "toggleVariants.variant.outline",
+          "toggleVariants"
         ]
       },
       {
@@ -22978,9 +23041,11 @@
         "token": "color.border.focus",
         "classes": [
           "border-ring",
+          "outline-ring",
           "ring-ring/50"
         ],
         "where": [
+          "toggleVariants.variant.default",
           "toggleVariants via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -22997,6 +23062,7 @@
         "token": "color.feedback.error.default",
         "classes": [
           "border-destructive",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
@@ -23223,7 +23289,7 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`, and a `ring` border on the `outline` variant (the default variant has no border width)"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`, around a solid part: a `ring` border on the `outline` variant, and an `outline-ring` outline `--border-width-default` wide on the default variant, which has no border width; an invalid toggle's outline is `outline-destructive`"
       },
       {
         "state": "pressed",
@@ -23235,7 +23301,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border on the `outline` variant through `aria-invalid`; on focus, a `ring-destructive/20` ring"
+        "behavior": "`destructive` border on the `outline` variant through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
       }
     ],
     "accessibility": "**Pattern**: Toggle [button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)\n\n**Role**: A `button` with `aria-pressed`.\n\n**Keyboard**:\n\n| Key               | Action            |\n| ----------------- | ----------------- |\n| `Enter` / `Space` | Toggles the state |\n\n**Accessible name**: The button text; an icon-only toggle needs an `aria-label` that names the action (\"Bold\"), not the state.\n\n**Pitfalls**:\n\n- The label must not change with the state: `aria-pressed` carries the state.",

@@ -130,7 +130,7 @@
   {
     "path": "color.border.focus",
     "value_light": "{primitive.color.mist.500}",
-    "value_dark": "{primitive.color.mist.500}",
+    "value_dark": "{primitive.color.mist.400}",
     "css_variable": "--color-border-focus",
     "tier": "semantic",
     "status": "active"
