@@ -307,6 +307,12 @@
             "to": "z-popover",
             "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a menu bar menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "classes": {
+          "pr-28": {
+            "to": "pr-2",
+            "reason": "pr-28 is 112px, a typo of radix-lyra's .cn-menubar-checkbox-item (vega: pr-2, nova: pr-1.5, maia and luma: pr-3): it padded a checkbox item 112px on the right and made every menu holding one about 100px wider than its content. pr-2 is the padding of MenubarRadioItem, 8px."
+          }
         }
       },
       "combobox": {
@@ -408,6 +414,12 @@
           "z-10": {
             "to": "z-dropdown",
             "reason": "z-10 is 10; z-dropdown is 1000. A focused calendar day, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
+        },
+        "classes": {
+          "opacity-50": {
+            "to": "not-has-[button:disabled]:opacity-disabled",
+            "reason": "A disabled day dimmed twice: the cell took opacity-50 and its button, disabled whenever it is not focused, took Button's own disabled opacity, 0.25 in all (0.5 x 0.5), and the muted text fell to about 1.4:1. The cell now dims only when its button does not (a day with no button, or a focused disabled day, which is aria-disabled and not :disabled): 0.5 in every case, once."
           }
         }
       },
@@ -566,6 +578,14 @@
             "reason": "A <select> has no ::placeholder, so the class drew nothing and the \"Choose a city\" option read as a chosen value (text-foreground). The selected empty-value option is a select's placeholder: the select takes text-muted-foreground (color.text.subtle) while it is selected, as Select does with data-placeholder."
           }
         }
+      },
+      "accordion": {
+        "classes": {
+          "focus-visible:after:border-ring": {
+            "to": "",
+            "reason": "Dead class: it colors the border of the trigger's ::after, which has no box (no content, size or border width), so it drew nothing. The trigger's focus indicator is FOCUS_RING; the class is dropped so the States table does not list a style that does nothing."
+          }
+        }
       }
     },
     "constants": [
@@ -667,13 +687,36 @@
       "status": "reanchored"
     },
     "button": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "added": [
+        "dark:aria-expanded:bg-muted",
+        "dark:focus-visible:border-ring"
+      ],
+      "reason": "The outline variant's bare dark:border-input and dark:bg-input/30 tie in specificity with focus-visible:border-ring and aria-expanded:bg-muted and win on emission order, so in dark an open outline button looked closed and its focused border was border-input (WCAG 1.4.11 part of the indicator). Each gets a dark twin."
     },
     "button-group": {
       "status": "reanchored"
     },
     "calendar": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "added": [
+        "border",
+        "border-input",
+        "has-focus:border-ring",
+        "has-focus:ring-(length:--space-focus-ring-width)",
+        "has-focus:ring-ring/50",
+        "h-6",
+        "pr-1",
+        "pl-1.5",
+        "dark:hover:data-[selected-single=true]:bg-primary",
+        "dark:hover:data-[selected-single=true]:text-primary-foreground",
+        "dark:hover:data-[range-start=true]:bg-primary",
+        "dark:hover:data-[range-start=true]:text-primary-foreground",
+        "dark:hover:data-[range-end=true]:bg-primary",
+        "dark:hover:data-[range-end=true]:text-primary-foreground",
+        "dark:hover:data-[range-middle=true]:bg-muted"
+      ],
+      "reason": "(1) shadcn's style transform skips the classNames object of DayPicker, so lyra's look of the dropdown root (border-input, border-ring and a ring on focus) and of the dropdown caption label (h-6 pr-1 pl-1.5) never reached the install: the invisible select was a tab stop that showed nothing (WCAG 2.4.7). (2) Ghost's dark:hover:bg-muted/50 (.dark and :hover, one class more) outranks the day's data-[selected-single=true]:bg-primary, so a hovered selected day lost its fill in dark; each selected state gets a dark hover twin, and the range middle keeps bg-muted."
     },
     "card": {
       "status": "reanchored"
@@ -775,11 +818,13 @@
     },
     "menubar": {
       "status": "reanchored",
-      "reason": "The menubar trigger draws FOCUS_RING: upstream shows no focus indicator on it (WCAG 2.4.7).",
+      "reason": "The menubar trigger draws FOCUS_RING: upstream shows no focus indicator on it (WCAG 2.4.7). MenubarCheckboxItem takes data-disabled:opacity-disabled and a size-4 icon, as its siblings do: every shadcn style omits both on the checkbox item alone.",
       "added": [
         "focus-visible:border-ring",
         "focus-visible:ring-(length:--space-focus-ring-width)",
-        "focus-visible:ring-ring/50"
+        "focus-visible:ring-ring/50",
+        "data-disabled:opacity-disabled",
+        "[&_svg:not([class*='size-'])]:size-4"
       ]
     },
     "message": {
