@@ -469,10 +469,13 @@ function ComboboxChipsInput({
   return (
     <ComboboxPrimitive.Input
       data-slot="combobox-chip-input"
-      // focus-managed: this control sits inside an InputGroup, whose
-      // has-[[data-slot=input-group-control]:focus-visible] rule draws the ring
-      // around the whole group. A second ring would nest inside the first.
-      className={cn(`min-w-16 flex-1 ${FOCUS_OUTLINE_RESET}`, className)}
+      className={cn(
+        // focus-managed: this control sits inside an InputGroup, whose
+        // has-[[data-slot=input-group-control]:focus-visible] rule draws the
+        // ring around the whole group. A second ring would nest inside the first.
+        `min-w-16 flex-1 ${FOCUS_OUTLINE_RESET} placeholder:text-muted-foreground`,
+        className
+      )}
       {...props}
     />
   )

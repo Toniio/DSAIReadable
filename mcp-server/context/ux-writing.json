@@ -696,7 +696,7 @@
     "InputGroup": [
       "**MUST NOT** — be used without an `InputGroupInput` or `InputGroupTextarea` as a direct child",
       "**MUST NOT** — mix `block-*` and `inline-*` add-ons in the same group: `block-*` add-ons switch the layout to a column",
-      "**MUST** — set `disabled` on the child field: the group only mirrors its appearance (`has-disabled`)",
+      "**MUST** — set `disabled` on the child field (`InputGroupInput` or `InputGroupTextarea`): the group only mirrors its appearance, through `has-[[data-slot=input-group-control]:disabled]`. A disabled `InputGroupButton` leaves the group and its field as they are",
       "**MUST** — use `InputGroupButton` for a button inside an add-on",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
     ],

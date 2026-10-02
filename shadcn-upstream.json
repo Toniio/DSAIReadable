@@ -534,6 +534,38 @@
             "reason": "The gap of the breadcrumb list is 6px both ways; it becomes 6px between items and 8px between wrapped rows (gap-x-1.5 gap-y-2), so rows are 8px apart and the target size spacing exception holds."
           }
         }
+      },
+      "input-group": {
+        "classes": {
+          "in-data-[slot=combobox-content]:focus-within:border-inherit": {
+            "to": "",
+            "reason": "Never took effect: it compiles to a :where() selector of specificity (0,2,0), and the has-[[data-slot=input-group-control]:focus-visible] border rule it meant to cancel is (0,3,0). A search field in a popup draws the standard border, as every focusable element does (lib/focus.ts); the class is dropped so the source says so."
+          },
+          "in-data-[slot=combobox-content]:focus-within:ring-0": {
+            "to": "",
+            "reason": "Never took effect, for the same reason as its border twin: the has-[[data-slot=input-group-control]:focus-visible] ring rule outranks it. A search field in a popup draws the standard 2px ring; the class is dropped so the source says so."
+          },
+          "has-disabled:bg-input/50": {
+            "to": "has-[[data-slot=input-group-control]:disabled]:bg-input/50",
+            "reason": "has-disabled matches any disabled descendant, so a disabled InputGroupButton (a Send button) dimmed the whole group and the enabled field in it (text at 3.51:1, WCAG 1.4.3). The group now mirrors its own field only, [data-slot=input-group-control]."
+          },
+          "has-disabled:opacity-50": {
+            "to": "has-[[data-slot=input-group-control]:disabled]:opacity-disabled",
+            "reason": "has-disabled matches any disabled descendant: a disabled InputGroupButton dimmed the whole group to 0.5 with the field enabled. The group now mirrors its own field only, [data-slot=input-group-control]; opacity-50 is opacity-disabled, as everywhere."
+          },
+          "dark:has-disabled:bg-input/80": {
+            "to": "dark:has-[[data-slot=input-group-control]:disabled]:bg-input/80",
+            "reason": "Same selector as has-disabled:bg-input/50, in dark: the group takes the disabled background from its own field only, not from a disabled button."
+          }
+        }
+      },
+      "native-select": {
+        "classes": {
+          "placeholder:text-muted-foreground": {
+            "to": "has-[option[value='']:checked]:text-muted-foreground",
+            "reason": "A <select> has no ::placeholder, so the class drew nothing and the \"Choose a city\" option read as a chosen value (text-foreground). The selected empty-value option is a select's placeholder: the select takes text-muted-foreground (color.text.subtle) while it is selected, as Select does with data-placeholder."
+          }
+        }
       }
     },
     "constants": [
@@ -659,7 +691,11 @@
       "status": "reanchored"
     },
     "combobox": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "added": [
+        "placeholder:text-muted-foreground"
+      ],
+      "reason": "ComboboxChipsInput's placeholder took Tailwind's default (currentColor at 50%, 3.70:1); it takes text-muted-foreground (color.text.subtle), as Input and ComboboxInput do."
     },
     "command": {
       "status": "reanchored",

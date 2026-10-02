@@ -85,6 +85,64 @@ describe("PasswordInput", () => {
     ).toBeTruthy()
   })
 
+  it("disabled: the toggle is disabled with the field, leaves the tab order and masks the value again", async () => {
+    const user = userEvent.setup()
+    const { rerender } = render(
+      <>
+        <button>before</button>
+        <PasswordInput aria-label="Password" />
+        <button>after</button>
+      </>
+    )
+    const input = screen.getByLabelText("Password")
+    await user.click(
+      screen.getByRole("button", { name: UI_STRINGS.passwordInput.show })
+    )
+    expect(input.getAttribute("type")).toBe("text")
+
+    rerender(
+      <>
+        <button>before</button>
+        <PasswordInput aria-label="Password" disabled />
+        <button>after</button>
+      </>
+    )
+    expect(input.getAttribute("type")).toBe("password")
+    const toggle = screen.getByRole("button", {
+      name: UI_STRINGS.passwordInput.show,
+    })
+    expect(toggle).toHaveProperty("disabled", true)
+
+    // A native click, not user.click: user-event refuses to click an element
+    // with pointer-events: none, which is what a disabled Button has.
+    toggle.click()
+    expect(input.getAttribute("type")).toBe("password")
+
+    screen.getByRole("button", { name: "before" }).focus()
+    await user.tab()
+    expect(document.activeElement).toBe(
+      screen.getByRole("button", { name: "after" })
+    )
+  })
+
+  it("readOnly: the toggle still reveals the value", async () => {
+    const user = userEvent.setup()
+    render(<PasswordInput aria-label="Password" readOnly defaultValue="x" />)
+    const toggle = screen.getByRole("button", {
+      name: UI_STRINGS.passwordInput.show,
+    })
+    expect(toggle).toHaveProperty("disabled", false)
+    await user.click(toggle)
+    expect(screen.getByLabelText("Password").getAttribute("type")).toBe("text")
+  })
+
+  it("anatomy: the root carries data-slot=password-input", () => {
+    const { container } = render(<PasswordInput aria-label="Password" />)
+    expect(container.firstElementChild?.getAttribute("data-slot")).toBe(
+      "password-input"
+    )
+  })
+
   it("has no axe violation inside a labeled Field", async () => {
     render(
       <Field>

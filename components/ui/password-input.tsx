@@ -26,24 +26,33 @@ function PasswordInput({
   className,
   showLabel = UI_STRINGS.passwordInput.show,
   hideLabel = UI_STRINGS.passwordInput.hide,
+  disabled,
   ...props
 }: Omit<React.ComponentProps<"input">, "type"> & {
   showLabel?: string
   hideLabel?: string
 }) {
   const [visible, setVisible] = React.useState(false)
+  // A disabled field masks its value and takes its toggle with it; readOnly
+  // keeps the toggle, since showing a value is a read.
+  const shown = visible && !disabled
 
   return (
     <InputGroup data-slot="password-input" className={cn(className)}>
-      <InputGroupInput type={visible ? "text" : "password"} {...props} />
+      <InputGroupInput
+        type={shown ? "text" : "password"}
+        disabled={disabled}
+        {...props}
+      />
       <InputGroupAddon align="inline-end">
         <InputGroupButton
           size="icon-xs"
           variant="ghost"
-          aria-label={visible ? hideLabel : showLabel}
+          aria-label={shown ? hideLabel : showLabel}
+          disabled={disabled}
           onClick={() => setVisible((v) => !v)}
         >
-          {visible ? <EyeSlash /> : <Eye />}
+          {shown ? <EyeSlash /> : <Eye />}
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
