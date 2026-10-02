@@ -143,6 +143,32 @@ const DATA_STATE = /^data-\[state=([\w-]+)\]$/
 
 const unclassified = new Set<string>()
 
+/**
+ * The variants a Radix component can never match. The radix-lyra style sheet is
+ * written once for Radix and Base UI, so a class that waits for a Base UI
+ * attribute (`data-popup-open`, `data-starting-style`, `data-ending-style`,
+ * `data-instant`) comes along into a Radix component, where it draws nothing
+ * and the States table lists it as if it did. A Radix tooltip never writes
+ * `data-state="open"` (Base UI's `data-open`, bridged to it): it writes
+ * `delayed-open` or `instant-open`, so a bare `data-open` never matches.
+ */
+const BASE_UI_ONLY =
+  /^data-(?:popup-open|starting-style|ending-style|instant)$|^data-\[(?:starting-style|ending-style|instant)(?:=[^\]]*)?\]$/
+const neverMatching = new Set<string>()
+
+function neverMatchesOnRadix(
+  variant: string,
+  file: string,
+  radix: boolean
+): boolean {
+  const v = variant
+    .replace(/^(?:group|peer)-/, "")
+    .replace(/\/[\w-]+$/, "")
+    .replace(/^has-/, "")
+  if (radix && BASE_UI_ONLY.test(v)) return true
+  return /(?:^|\/)tooltip\.tsx$/.test(file) && v === "data-open"
+}
+
 /** The states a variant names; none for a layout variant, a negation or a context. */
 function statesOf(variant: string, file: string): string[] {
   let v = variant.replace(/^(?:group|peer)-/, "").replace(/\/[\w-]+$/, "")
@@ -175,11 +201,20 @@ interface Classes {
 async function classesOf(codePath: string): Promise<Classes> {
   const byState = new Map<string, Set<string>>()
   const base = new Set<string>()
+  const radix = /from\s+["'](?:radix-ui|@radix-ui\/)/.test(
+    readFileSync(resolve(ROOT, codePath), "utf-8")
+  )
   for (const { text } of await stringsOf(ROOT, codePath)) {
     const candidates = text.split(/\s+/).filter(Boolean)
     cssOf(candidates).forEach((css, i) => {
       if (!css) return
       const candidate = candidates[i]
+      if (
+        variantsOf(candidate).some((v) =>
+          neverMatchesOnRadix(v, codePath, radix)
+        )
+      )
+        neverMatching.add(`${candidate} (${codePath})`)
       const states = new Set(
         variantsOf(candidate).flatMap((v) => statesOf(v, codePath))
       )
@@ -392,6 +427,11 @@ if (unclassified.size > 0)
   failures.push(
     `${unclassified.size} variant(s) in neither STATES nor LAYOUT — classify each one in scripts/build-spec-states.ts:\n` +
       [...unclassified].map((v) => `   - ${v}`).join("\n")
+  )
+if (neverMatching.size > 0)
+  failures.push(
+    `${neverMatching.size} class(es) a Radix component can never match — a Base UI attribute, or a bare data-open on a tooltip (it writes delayed-open or instant-open). Map it to the Radix attribute, or out, in shadcn-upstream.json:\n` +
+      [...neverMatching].map((c) => `   - ${c}`).join("\n")
   )
 if (undocumented.length > 0)
   failures.push(

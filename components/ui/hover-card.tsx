@@ -60,9 +60,10 @@ function HoverCardContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          // focus-managed: Radix mounts this surface with tabIndex={-1} and moves
-          // focus to a control inside it, so a ring on the surface itself would mark
-          // something the user cannot act on.
+          // focus-managed: Radix HoverCard mounts no focus scope: the card opens from
+          // its trigger (hover or focus) and takes no focus itself, so there is no
+          // focused surface to mark. A control inside it is reached with Tab and
+          // draws its own ring.
           `z-popover w-64 origin-(--radix-hover-card-content-transform-origin) rounded-none bg-popover p-2.5 text-xs/relaxed text-popover-foreground shadow-md ${SURFACE_OUTLINE} ring-foreground/10 outline-hidden duration-fast data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95`,
           className
         )}

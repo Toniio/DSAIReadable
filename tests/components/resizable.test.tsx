@@ -84,3 +84,15 @@ describe("Resizable", () => {
     await expect.poll(() => valueOf(handle)).toBe(80)
   })
 })
+
+describe("ResizablePanelGroup, vertical", () => {
+  it("stacks its panels from the library's inline flex-direction, not from aria-orientation", () => {
+    render(<Example orientation="vertical" />)
+    const group = document.querySelector<HTMLElement>(
+      "[data-slot=resizable-panel-group]"
+    )!
+    expect(group.hasAttribute("aria-orientation")).toBe(false)
+    expect(group.className).not.toContain("aria-[orientation=vertical]")
+    expect(getComputedStyle(group).flexDirection).toBe("column")
+  })
+})

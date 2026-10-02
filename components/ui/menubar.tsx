@@ -181,7 +181,7 @@ function MenubarItem({
   return (
     <MenubarPrimitive.Item
       data-slot="menubar-item"
-      data-inset={inset}
+      data-inset={inset || undefined}
       data-variant={variant}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
@@ -215,7 +215,7 @@ function MenubarCheckboxItem({
   return (
     <MenubarPrimitive.CheckboxItem
       data-slot="menubar-checkbox-item"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
         // the current one with focus/data-highlighted, which the background color
@@ -255,7 +255,7 @@ function MenubarRadioItem({
   return (
     <MenubarPrimitive.RadioItem
       data-slot="menubar-radio-item"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
         // the current one with focus/data-highlighted, which the background color
@@ -294,7 +294,7 @@ function MenubarLabel({
   return (
     <MenubarPrimitive.Label
       data-slot="menubar-label"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn("px-2 py-2 text-xs data-inset:pl-8", className)}
       {...props}
     />
@@ -388,11 +388,12 @@ function MenubarSubTrigger({
   return (
     <MenubarPrimitive.SubTrigger
       data-slot="menubar-sub-trigger"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn(
-        // focus-managed: Radix mounts this surface with tabIndex={-1} and moves
-        // focus to a control inside it, so a ring on the surface itself would mark
-        // something the user cannot act on.
+        // focus-managed: Radix moves a roving tabindex across the items of the menu
+        // and marks the focused one with data-highlighted, which the background
+        // color below renders. A ring here would double an indicator that already
+        // exists.
         `flex cursor-default items-center gap-2 rounded-none px-2 py-2 text-xs ${FOCUS_OUTLINE_RESET} select-none focus:bg-accent focus:text-accent-foreground data-inset:pl-8 data-open:bg-accent data-open:text-accent-foreground [&_svg:not([class*='size-'])]:size-4`,
         className
       )}

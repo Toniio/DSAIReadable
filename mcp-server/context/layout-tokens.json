@@ -26,7 +26,7 @@
       "css_var": "--space-component-lg",
       "value": "{primitive.space.6}",
       "type": "dimension",
-      "description": "Large component spacing (24px), read through var(): the viewport gutter of DialogContent. Not for layout or section spacing."
+      "description": "Large component spacing (24px). Reserved: nothing reads it. DialogContent keeps its viewport gutter through the spacing scale (32px in all, `space.scale.8`). Not for layout or section spacing."
     },
     {
       "path": "space.component.xl",

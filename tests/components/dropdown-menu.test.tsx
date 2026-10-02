@@ -217,3 +217,76 @@ describe("DropdownMenu", () => {
     expect(document.activeElement).toBe(item("Invite users"))
   })
 })
+
+/**
+ * `inset` is a boolean: `inset={false}` draws what no `inset` prop draws, and
+ * `inset` the left padding that lines the text up with an item that has an
+ * icon. React writes a false data attribute as the string "false", which a
+ * `data-inset:` class matches like a presence selector.
+ */
+describe("DropdownMenu, inset", () => {
+  function InsetMenu() {
+    return (
+      <DropdownMenu open>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline">Options</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Label plain</DropdownMenuLabel>
+          <DropdownMenuLabel inset={false}>Label off</DropdownMenuLabel>
+          <DropdownMenuLabel inset>Label on</DropdownMenuLabel>
+          <DropdownMenuItem>Item plain</DropdownMenuItem>
+          <DropdownMenuItem inset={false}>Item off</DropdownMenuItem>
+          <DropdownMenuItem inset>Item on</DropdownMenuItem>
+          <DropdownMenuCheckboxItem checked>
+            Check plain
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem checked inset={false}>
+            Check off
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem checked inset>
+            Check on
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuRadioGroup value="a">
+            <DropdownMenuRadioItem value="a">Radio plain</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="b" inset={false}>
+              Radio off
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="c" inset>
+              Radio on
+            </DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>Sub plain</DropdownMenuSubTrigger>
+          </DropdownMenuSub>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger inset={false}>
+              Sub off
+            </DropdownMenuSubTrigger>
+          </DropdownMenuSub>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger inset>Sub on</DropdownMenuSubTrigger>
+          </DropdownMenuSub>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+  }
+
+  it.each(["Label", "Item", "Check", "Radio", "Sub"])(
+    "%s: inset={false} takes the padding of no inset, and inset takes more",
+    (kind) => {
+      render(<InsetMenu />)
+      const part = (variant: string) =>
+        screen.getByText(`${kind} ${variant}`).closest("[data-slot]")!
+      const [plain, off, on] = ["plain", "off", "on"].map(part)
+      expect(off.hasAttribute("data-inset")).toBe(false)
+      expect(on.getAttribute("data-inset")).toBe("true")
+      expect(getComputedStyle(off).paddingLeft).toBe(
+        getComputedStyle(plain).paddingLeft
+      )
+      expect(
+        Number.parseFloat(getComputedStyle(on).paddingLeft)
+      ).toBeGreaterThan(Number.parseFloat(getComputedStyle(plain).paddingLeft))
+    }
+  )
+})

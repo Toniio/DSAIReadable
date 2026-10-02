@@ -167,12 +167,13 @@ function ContextMenuItem({
   return (
     <ContextMenuPrimitive.Item
       data-slot="context-menu-item"
-      data-inset={inset}
+      data-inset={inset || undefined}
       data-variant={variant}
       className={cn(
-        // focus-managed: Radix mounts this surface with tabIndex={-1} and moves
-        // focus to a control inside it, so a ring on the surface itself would mark
-        // something the user cannot act on.
+        // focus-managed: Radix moves a roving tabindex across the items of the menu
+        // and marks the focused one with data-highlighted, which the background
+        // color below renders. A ring here would double an indicator that already
+        // exists.
         "group/context-menu-item relative flex cursor-default items-center gap-2 rounded-none px-2 py-2 text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 focus:*:[svg]:text-accent-foreground data-[variant=destructive]:*:[svg]:text-destructive",
         className
       )}
@@ -203,7 +204,7 @@ function ContextMenuSubTrigger({
   return (
     <ContextMenuPrimitive.SubTrigger
       data-slot="context-menu-sub-trigger"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
         // the current one with focus/data-highlighted, which the background color
@@ -264,7 +265,7 @@ function ContextMenuCheckboxItem({
   return (
     <ContextMenuPrimitive.CheckboxItem
       data-slot="context-menu-checkbox-item"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
         // the current one with focus/data-highlighted, which the background color
@@ -305,7 +306,7 @@ function ContextMenuRadioItem({
   return (
     <ContextMenuPrimitive.RadioItem
       data-slot="context-menu-radio-item"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn(
         // focus-managed: Radix moves a roving tabindex across these items and marks
         // the current one with focus/data-highlighted, which the background color
@@ -341,7 +342,7 @@ function ContextMenuLabel({
   return (
     <ContextMenuPrimitive.Label
       data-slot="context-menu-label"
-      data-inset={inset}
+      data-inset={inset || undefined}
       className={cn(
         "px-2 py-2 text-xs text-muted-foreground data-inset:pl-7",
         className

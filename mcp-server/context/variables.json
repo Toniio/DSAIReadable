@@ -413,7 +413,7 @@
     "value_dark": "{primitive.space.6}",
     "css_variable": "--space-component-lg",
     "tier": "semantic",
-    "status": "active"
+    "status": "reserved"
   },
   {
     "path": "space.component.xl",

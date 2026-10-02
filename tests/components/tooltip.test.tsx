@@ -68,3 +68,35 @@ describe("Tooltip", () => {
     expect(document.activeElement).toBe(trigger())
   })
 })
+
+describe("Tooltip, opened by keyboard focus", () => {
+  // Radix writes `instant-open` when focus (or a hover soon after another
+  // tooltip closed) opens it, and `delayed-open` after the hover delay. The
+  // tests project turns animations off, so the test reads what the classes
+  // set: the variables tw-animate-css's `enter` keyframes start from.
+  function enter(content: Element) {
+    const style = getComputedStyle(content)
+    return {
+      opacity: style.getPropertyValue("--tw-enter-opacity").trim(),
+      scale: Number.parseFloat(style.getPropertyValue("--tw-enter-scale")),
+    }
+  }
+
+  it("enters like a hover open: it fades and zooms in", async () => {
+    render(<Example />)
+    await userEvent.tab()
+    const tooltip = await screen.findByRole("tooltip")
+    const content = tooltip.closest("[data-slot=tooltip-content]")!
+    expect(content.getAttribute("data-state")).toBe("instant-open")
+    expect(enter(content)).toEqual({ opacity: "0", scale: 0.95 })
+  })
+
+  it("enters the same after the hover delay", async () => {
+    render(<Example />)
+    await userEvent.hover(trigger())
+    const tooltip = await screen.findByRole("tooltip")
+    const content = tooltip.closest("[data-slot=tooltip-content]")!
+    expect(content.getAttribute("data-state")).toBe("delayed-open")
+    expect(enter(content)).toEqual({ opacity: "0", scale: 0.95 })
+  })
+})

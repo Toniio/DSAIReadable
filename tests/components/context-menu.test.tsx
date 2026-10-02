@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import { useState } from "react"
 import { describe, expect, it, vi } from "vitest"
 import { userEvent } from "vitest/browser"
@@ -9,6 +9,7 @@ import {
   ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuLabel,
   ContextMenuRadioGroup,
   ContextMenuRadioItem,
   ContextMenuSeparator,
@@ -185,4 +186,65 @@ describe("ContextMenu", () => {
     await userEvent.keyboard("s")
     expect(document.activeElement).toBe(item("Share"))
   })
+})
+
+describe("ContextMenu, inset", () => {
+  it.each(["Label", "Item", "Check", "Radio", "Sub"])(
+    "%s: inset={false} takes the padding of no inset, and inset takes more",
+    (kind) => {
+      render(
+        <ContextMenu>
+          <ContextMenuTrigger>Right-click here</ContextMenuTrigger>
+          <ContextMenuContent>
+            <ContextMenuLabel>Label plain</ContextMenuLabel>
+            <ContextMenuLabel inset={false}>Label off</ContextMenuLabel>
+            <ContextMenuLabel inset>Label on</ContextMenuLabel>
+            <ContextMenuItem>Item plain</ContextMenuItem>
+            <ContextMenuItem inset={false}>Item off</ContextMenuItem>
+            <ContextMenuItem inset>Item on</ContextMenuItem>
+            <ContextMenuCheckboxItem checked>
+              Check plain
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem checked inset={false}>
+              Check off
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem checked inset>
+              Check on
+            </ContextMenuCheckboxItem>
+            <ContextMenuRadioGroup value="a">
+              <ContextMenuRadioItem value="a">Radio plain</ContextMenuRadioItem>
+              <ContextMenuRadioItem value="b" inset={false}>
+                Radio off
+              </ContextMenuRadioItem>
+              <ContextMenuRadioItem value="c" inset>
+                Radio on
+              </ContextMenuRadioItem>
+            </ContextMenuRadioGroup>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>Sub plain</ContextMenuSubTrigger>
+            </ContextMenuSub>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger inset={false}>
+                Sub off
+              </ContextMenuSubTrigger>
+            </ContextMenuSub>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger inset>Sub on</ContextMenuSubTrigger>
+            </ContextMenuSub>
+          </ContextMenuContent>
+        </ContextMenu>
+      )
+      fireEvent.contextMenu(screen.getByText("Right-click here"))
+      const part = (variant: string) =>
+        screen.getByText(`${kind} ${variant}`).closest("[data-slot]")!
+      const [plain, off, on] = ["plain", "off", "on"].map(part)
+      expect(off.hasAttribute("data-inset")).toBe(false)
+      expect(getComputedStyle(off).paddingLeft).toBe(
+        getComputedStyle(plain).paddingLeft
+      )
+      expect(
+        Number.parseFloat(getComputedStyle(on).paddingLeft)
+      ).toBeGreaterThan(Number.parseFloat(getComputedStyle(plain).paddingLeft))
+    }
+  )
 })

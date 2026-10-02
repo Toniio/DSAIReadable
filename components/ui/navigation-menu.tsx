@@ -105,7 +105,7 @@ function NavigationMenuItem({
  * </NavigationMenuLink>
  */
 const navigationMenuTriggerStyle = cva(
-  `group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-none px-2.5 py-1.5 text-xs font-medium transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted focus:bg-muted ${FOCUS_RING} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid disabled:pointer-events-none disabled:opacity-disabled data-popup-open:bg-muted/50 data-popup-open:hover:bg-muted data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted`
+  `group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-none px-2.5 py-1.5 text-xs font-medium transition-all ${FOCUS_OUTLINE_RESET} hover:bg-muted focus:bg-muted ${FOCUS_RING} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid disabled:pointer-events-none disabled:opacity-disabled data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted`
 )
 
 /**
@@ -132,7 +132,7 @@ function NavigationMenuTrigger({
     >
       {children}{" "}
       <CaretDownIcon
-        className="relative top-px ml-1 size-3 transition duration-slow group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180"
+        className="relative top-px ml-1 size-3 transition duration-slow group-data-open/navigation-menu-trigger:rotate-180"
         aria-hidden="true"
       />
     </NavigationMenuPrimitive.Trigger>

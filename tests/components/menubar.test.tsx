@@ -7,11 +7,14 @@ import {
   MenubarCheckboxItem,
   MenubarContent,
   MenubarItem,
+  MenubarLabel,
   MenubarMenu,
   MenubarRadioGroup,
   MenubarRadioItem,
   MenubarSeparator,
   MenubarShortcut,
+  MenubarSub,
+  MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar"
 
@@ -182,4 +185,46 @@ describe("MenubarCheckboxItem", () => {
     expect(icon(checkbox)).toBe(icon(radio))
     expect(icon(checkbox)).toBe("16px")
   })
+})
+
+describe("Menubar, inset", () => {
+  it.each(["Label", "Item", "Sub"])(
+    "%s: inset={false} takes the padding of no inset, and inset takes more",
+    (kind) => {
+      render(
+        <Menubar value="file">
+          <MenubarMenu value="file">
+            <MenubarTrigger>File</MenubarTrigger>
+            <MenubarContent>
+              <MenubarLabel>Label plain</MenubarLabel>
+              <MenubarLabel inset={false}>Label off</MenubarLabel>
+              <MenubarLabel inset>Label on</MenubarLabel>
+              <MenubarItem>Item plain</MenubarItem>
+              <MenubarItem inset={false}>Item off</MenubarItem>
+              <MenubarItem inset>Item on</MenubarItem>
+              <MenubarSub>
+                <MenubarSubTrigger>Sub plain</MenubarSubTrigger>
+              </MenubarSub>
+              <MenubarSub>
+                <MenubarSubTrigger inset={false}>Sub off</MenubarSubTrigger>
+              </MenubarSub>
+              <MenubarSub>
+                <MenubarSubTrigger inset>Sub on</MenubarSubTrigger>
+              </MenubarSub>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
+      )
+      const part = (variant: string) =>
+        screen.getByText(`${kind} ${variant}`).closest("[data-slot]")!
+      const [plain, off, on] = ["plain", "off", "on"].map(part)
+      expect(off.hasAttribute("data-inset")).toBe(false)
+      expect(getComputedStyle(off).paddingLeft).toBe(
+        getComputedStyle(plain).paddingLeft
+      )
+      expect(
+        Number.parseFloat(getComputedStyle(on).paddingLeft)
+      ).toBeGreaterThan(Number.parseFloat(getComputedStyle(plain).paddingLeft))
+    }
+  )
 })

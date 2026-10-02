@@ -88,7 +88,14 @@
     {
       "id": "viewport-gutter",
       "file": "components/ui/dialog.tsx",
-      "reason": "max-w-[calc(100%-var(--space-component-lg))] — the dialog is capped at the viewport minus one gutter on each side. The gutter is already a token; the subtraction from a width the component does not know cannot be one.",
+      "reason": "max-w-[calc(100%-var(--space-scale-8))] — the dialog is capped at the viewport minus one gutter on each side. The gutter is already a token; the subtraction from a width the component does not know cannot be one.",
+      "token_candidate": null,
+      "review_after": "2027-09-22"
+    },
+    {
+      "id": "alert-dialog-viewport-gutter",
+      "file": "components/ui/alert-dialog.tsx",
+      "reason": "w-[calc(100%-var(--space-scale-8))] — the alert dialog is as wide as the viewport minus one gutter on each side, up to its max width. The gutter is a token; the subtraction from a width the component does not know cannot be one.",
       "token_candidate": null,
       "review_after": "2027-09-22"
     },

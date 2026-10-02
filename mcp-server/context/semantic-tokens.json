@@ -464,8 +464,8 @@
     "light": "{primitive.space.6}",
     "dark": "{primitive.space.6}",
     "type": "dimension",
-    "status": "active",
-    "usage": "Large component spacing (24px), read through var(): the viewport gutter of DialogContent. Not for layout or section spacing."
+    "status": "reserved",
+    "usage": "Large component spacing (24px). Reserved: nothing reads it. DialogContent keeps its viewport gutter through the spacing scale (32px in all, `space.scale.8`). Not for layout or section spacing."
   },
   {
     "path": "space.component.xl",
