@@ -156,6 +156,9 @@ describe("Combobox", () => {
     await user.click(input())
     await user.keyboard("{Escape}")
     expect(input().getAttribute("aria-expanded")).toBe("false")
+    // Base UI unmounts the popup on a later frame. An arrow key pressed before
+    // then reopens the closing popup with no option highlighted.
+    await expect.poll(() => screen.queryByRole("listbox")).toBeNull()
 
     await user.keyboard("{ArrowDown}")
     expect(input().getAttribute("aria-expanded")).toBe("true")
@@ -167,6 +170,7 @@ describe("Combobox", () => {
 
     await user.keyboard("{Escape}")
     expect(input().getAttribute("aria-expanded")).toBe("false")
+    await expect.poll(() => screen.queryByRole("listbox")).toBeNull()
     await user.keyboard("{ArrowUp}")
     expect(input().getAttribute("aria-expanded")).toBe("true")
     expect(options()).toEqual(fruits)
