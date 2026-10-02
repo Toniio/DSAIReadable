@@ -109,6 +109,12 @@ describe("InputOtp", () => {
     const input = focusInput()
     await userEvent.keyboard("123")
     await expect.poll(activeSlots).toEqual([3])
+    // input-otp re-reads the selection 0, 10 and 50 ms after each value change
+    // and keeps it as the previous one, from which its selectionchange handler
+    // tells which way an arrow moved. A re-read between an ArrowLeft's caret
+    // move and its selectionchange reads the move as forward: the cursor stays
+    // on its slot. A 50 ms timer set now fires after input-otp's last one.
+    await new Promise((resolve) => setTimeout(resolve, 50))
     await userEvent.keyboard("{ArrowLeft}")
     await expect.poll(activeSlots).toEqual([2])
     await userEvent.keyboard("{ArrowLeft}")
