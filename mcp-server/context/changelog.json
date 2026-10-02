@@ -1,5 +1,233 @@
 [
   {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "b7037f4: docs: Accordion: the dead class `focus-visible:after:border-ring`, which drew nothing, is dropped from the trigger and from its States table; the focus indicator is unchanged."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "b7037f4: visual: Button `outline` in dark mode: the open state (`aria-expanded`) moves from the rest fill `dark:bg-input/30` to `bg-muted`, as in light mode, and the keyboard focus border moves from `border-input` to `border-ring` (the solid part of the focus indicator was missing)."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "b7037f4: visual: Calendar: a hovered selected day (single, range start and end) keeps `bg-primary` with `text-primary-foreground` in dark mode, and a hovered range middle keeps `bg-muted`, instead of `bg-muted/50` with `text-foreground`; a disabled day moves from opacity 0.25 (`opacity-disabled` on the cell and on its button) to `opacity-disabled` once (0.5); with `captionLayout=\"dropdown\"` the month and year dropdowns take a `border-input` border, and `border-ring` with a `ring-ring/50` ring on focus, where focusing them showed nothing (WCAG 2.4.7)."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "3032d72: visual: Chart: keyboard focus draws a `ring-ring/50` ring and a `border-ring` outline (`outline-ring`, `border-width.default`) around ChartContainer on every focus, a Pie layer and a Brush included; before, the surface had no outline and only the tooltip of the first focus showed it, so a returning focus, or a chart with no ChartTooltip, showed nothing (WCAG 2.4.7)."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "3032d72: docs: The Chart spec names the chart on the Recharts element (`aria-label` on `BarChart`, not on `ChartContainer`), asks for a visible text summary and a visible Table when readers need the values, never a Table in `sr-only`, and documents its keys (Tab, ArrowLeft / ArrowRight, Enter) and `<Pie rootTabIndex={-1}>`; the focus foundation no longer counts the Recharts tooltip as a focus indicator."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "29d0307: visual: Checkbox: an enabled box in a `Field` that also holds a disabled control (the \"Other: [text input]\" pattern) is no longer dimmed to `opacity-disabled` (0.5); `group-has-disabled/field` matched any disabled control of the Field, and it now matches a disabled Checkbox only. A disabled Checkbox keeps its own `disabled:opacity-disabled`."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "29d0307: visual: Checkbox `checked=\"indeterminate\"`: from an unfilled box (`border-input`, no fill) with a `CheckIcon`, which read as checked while assistive technology announced \"mixed\", to a box filled like a checked one (`border-primary bg-primary text-primary-foreground`, `dark:bg-primary`) with a `MinusIcon`. The icons swap in CSS on the root's `data-state`, so an uncontrolled box shows the check again once clicked. At keyboard focus it takes `border-ring` like a checked box, and keeps `border-primary` in a choice card."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "29d0307: visual: Checkbox and RadioGroupItem, checked and invalid, in dark mode: border from `border-destructive/50` to `border-primary`, as in light mode (upstream's `aria-invalid:aria-checked:border-primary` had no dark counterpart and lost to `dark:aria-invalid:border-destructive/50` on emission order)."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "29d0307: visual: Choice card (a `FieldLabel` that wraps a `Field`): Checkbox, RadioGroupItem and Switch no longer draw their own `ring-ring/50` ring and `border-ring` border inside the card's ring; the card draws the only one. A focused unchecked box or radio keeps `border-input` (Switch: transparent) instead of turning `border-ring`; an invalid one keeps `border-destructive` and its solid `outline-destructive` focus outline (it draws no halo of its own, only the card's). The classes upstream wrote for this never took effect (they tied FOCUS_RING on specificity and lost on emission order), and applied to any FieldLabel: they are scoped to a card, so a control in a `FieldLabel` with no `Field` keeps its ring, and a focused checked Checkbox or RadioGroupItem there turns `border-ring` like anywhere else, where it kept `border-primary`."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "29d0307: docs: The Checkbox, RadioGroup, Switch and Field specs describe focus in a choice card (the card draws the only ring; a control in a plain `FieldLabel` keeps its own) and the unchecked, error and indeterminate states as drawn; the Switch spec no longer claims a switch drops its ring in any focused `FieldLabel`; the focus foundation names the choice card among the legitimate `ring-0` removals; FieldTitle's `@example`, served by the MCP, wraps its RadioGroupItem in a RadioGroup, as it threw at render without one."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "0fd70f3: docs: The States and Tokens sections of Calendar, Questionnaire and ToggleGroup list the classes they draw through `buttonVariants` and `toggleVariants`, and the Composes line names the variant each part uses."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "9f9365a: visual: Transitions with no duration class (the hover and focus color changes of Button, Input, Textarea, Tabs, Switch, Checkbox, Badge, Toggle, the Sidebar buttons and rail…): from 150ms, Tailwind's default, to 100ms (`motion.duration.fast`); their curve now reads `motion.easing.default`, which holds the same `cubic-bezier(0.4, 0, 0.2, 1)`. `styles/globals.css` bridges `--default-transition-duration` and `--default-transition-timing-function` in `@theme inline`, so a consumer's `transition-colors` follows. Overlays, the Sheet, the Accordion and the Tooltip keep their own timing."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "4d78a24: visual: The browser's own focus outline, on what draws no focus style of its own (a Breadcrumb link, a HoverCard trigger link, a bare CollapsibleTrigger, the MessageScroller viewport, any plain link or control of a screen), moves from `outline-ring/50` (about 1.9:1) to `outline-ring` (4.61:1 light, 8.08:1 dark): the base layer of `styles/globals.css` colors it."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "4d78a24: docs: The focus foundation requires a solid part at 3:1 on every focus indicator (rule 6): the border, or a 1px `outline-ring` outline on an element with no border, `outline-destructive` on an invalid control or a destructive variant, with `outline-solid` after `outline-hidden`; its contrast table gives the values as painted, the halo included. `border-width.default` describes that outline, the color foundation names the pair it measures, and `FOCUS_OUTLINE_RESET` says `outline-hidden`, like `outline-none`, sets the outline style to none."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "4d78a24: visual: `color.border.focus` in dark mode: from `mist.500` (the light value) to `mist.400`, so every focus indicator is lighter in dark: its solid part goes from 4.28:1 to 8.08:1 on the page, 3.21:1 to 6.06:1 on a card and 3.77:1 to 7.12:1 on a popover, and an InputGroupButton (PasswordInput's \"Show password\") on a field's `dark:bg-input/30` fill over a card from 2.80:1, below 3:1, to 5.27:1. The `ring-ring/50` halo follows (about 1.9:1 to 2.8:1). `--ring` and every `ring`, `border-ring` and `outline-ring` class read it; light mode is unchanged."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "4d78a24: visual: Focus indicator of the elements with no border: Toggle and ToggleGroupItem (`default` variant), MenubarTrigger, the NavigationMenu trigger and link, TabsContent, the ScrollArea viewport, the Resizable handle, the Slider thumb, a focused Calendar day and the CommandInput field. From a `ring-ring/50` halo alone (about 1.9:1, below the 3:1 of WCAG 1.4.11) to a solid 1px `outline-ring` outline (`outline-solid`, `border-width.default`: 4.61:1 light, 8.08:1 dark) inside the same 2px halo. On the Calendar day it replaces `border-ring`, which drew nothing on a `border-0` button; on the Resizable handle and the Slider thumb it replaces `focus-visible:outline-hidden`."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "4d78a24: visual: Button and Badge `destructive` variants: keyboard focus keeps `border-destructive/40` and the `ring-destructive/20` halo (about 2.1:1 and 2.4:1) and adds a solid 1px `outline-destructive` outline (`border-width.default`: 4.77:1 light, 6.83:1 dark)."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "4d78a24: visual: Focus indicator of an invalid control (`aria-invalid`): Input, Textarea, NativeSelect, SelectTrigger, Checkbox, RadioGroupItem, Switch, Toggle, Button, Badge and the active InputOTPSlot. They keep their border at focus (`destructive`; `primary` on a checked or indeterminate Checkbox or RadioGroupItem), so focus only added a `ring-destructive/20` halo (dark `/40`), about 1.4:1 light and 1.9:1 dark; it now also draws a solid 1px `outline-destructive` outline (`border-width.default`: 4.77:1 light, 6.83:1 dark). An InputGroup (PasswordInput included) or a ComboboxChips holding an invalid control showed no change at all on focus (WCAG 2.4.7): it draws the same outline while the control has focus."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "9f9365a: docs: The typography, radius and motion foundations describe what the radix-lyra components draw, where they described shadcn's new-york look. Typography: a field label is what `FieldLabel` draws (12px, regular, `leading-snug`), not `text-sm font-medium tracking-wide`; the headings are `<Heading level>` (24, 20, 18 and 16px, semibold, `tracking-tight`), and the Display style is gone; the type-scale, weight and letter-spacing usages follow, and Field.md forbids `text-*`, `font-*`, `tracking-*` and `leading-*` on `FieldLabel`. Radius: the components are square (`rounded-none`) except Avatar, RadioGroup and Switch (`rounded-full`) and the chart indicators (`rounded-xs`), and a surface a screen draws next to them stays square; elevation.md and the ContextMenu example drop their `rounded-*` classes. Motion: a \"What the components draw\" table (overlays 100ms `ease`, Sheet 200ms, Accordion 200ms, Tooltip 150ms, Drawer vaul's 500ms) replaces the 300ms modal combinations, which now apply to a transition a screen draws itself. The token descriptions of `typography.size.*`, `typography.letter-spacing.*`, `typography.font-weight.*`, `radius.*`, `motion.duration.*` and the radius and motion groups follow; `radius.none` is `active` (the Sonner toast reads it) and `motion.duration.extra-slow` is documented as drawn by no component. InputOTP's dead `duration-extra-slow` class (its caret blinks at `animate-caret-blink`'s own 1.25s) and Sonner's dead `cn-toast` marker are removed from the components and their specs."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "fd9e174: docs: PasswordInput's root carries `data-slot=\"password-input\"` in its spec; InputGroup documents its double disabled opacity; the `opacity.placeholder` guidance and the opacity foundation name the class each field really uses for its placeholder."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "fd9e174: visual: InputGroup takes its disabled look (`opacity-disabled`, `bg-input/50`, dark `bg-input/80`) from its field only (`has-[[data-slot=input-group-control]:disabled]`, was `has-disabled`): a disabled `InputGroupButton` no longer dims the whole group and the enabled field in it (text at 3.51:1, below WCAG 1.4.3). The two inert `in-data-[slot=combobox-content]:focus-within` classes are dropped, with no rendering change."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "10f286e: visual: DropdownMenu, ContextMenu and Menubar: an item, label, sub-trigger or checkbox or radio item with `inset={false}` no longer takes the inset left padding (`pl-7`, Menubar `pl-8`). React wrote `data-inset=\"false\"`, which the presence selector `data-inset:` matched; the attribute is now left out when `inset` is false, so `inset={false}` and no `inset` draw the same."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "b7037f4: visual: MenubarCheckboxItem: a disabled item takes `opacity-disabled` (0.5, was full opacity), its right padding goes from `pr-28` (112px) to `pr-2` (8px) so menus holding one are no longer about 100px wider than their content, and its check icon is `size-4`, like the neighboring items."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "10f286e: visual: Viewport gutter of the centered modals: DialogContent (and CommandDialog) below 640px, from 12px to 16px on each side (`max-w-[calc(100%-var(--space-component-lg))]` becomes `max-w-[calc(100%-var(--space-scale-8))]`, the 2rem shadcn/ui draws); AlertDialogContent below 352px, from flush with the viewport edges to 16px on each side (`w-[calc(100%-var(--space-scale-8))]`), still 320px wide from 352px. `space.component.lg` (24px) has no reader left and becomes `reserved`, so all five `space.component.*` tokens are reserved; rule-12 says so."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "fd9e174: visual: NativeSelect draws its selected empty-value option (its placeholder) in `text-muted-foreground` (`color.text.subtle`) instead of `text-foreground`, as Select does; ComboboxChipsInput's placeholder takes `text-muted-foreground` instead of Tailwind's faded default (3.70:1 on white)."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "10f286e: docs: NavigationMenu: the trigger drops `data-popup-open:bg-muted/50`, `data-popup-open:hover:bg-muted` and the caret's `group-data-popup-open:rotate-180`, Base UI attributes Radix never sets, and Resizable drops `aria-[orientation=vertical]:flex-col`, which never matched; the `data-open` classes keep drawing the open trigger and nothing changes on screen. The Tooltip spec describes the animated keyboard open, the motion foundation names the default Select, which opens with no animation by design, as the exception, the focus foundation lists the mechanisms the `focus-managed` comments name as the primitives really work (roving tabindex, active descendant, no focus scope on HoverCard), and `specs:states` refuses a Base UI-only variant on a Radix component."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "fd9e174: visual: PasswordInput disables its visibility toggle with the field and masks the value again: a disabled PasswordInput's toggle leaves the tab order and no longer responds to hover or click (its icon was at 1.91:1, below WCAG 1.4.11). With `readOnly` the toggle still works."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "252df9f: docs: The `conventions` registry item installs and links at the release tag, not at `main`: its install line reads `npx shadcn add Toniio/DSAIReadable/<item>#vX.Y.Z` and its spec link `blob/vX.Y.Z/specs/components/<Component>.md`, so an agent reads the specs of the release these rules were written for (a pinned install still reads the items it depends on from the default branch). The link of the MCP server's README to the repository README names the tag too, and `versions:sync` writes all of them. `versions:check` now fails on a link to `main` in anything a package or a registry item distributes."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "252df9f: lint: The documentation link of every rule of `@dsaireadable/eslint-plugin` (`meta.docs.url`, shown by editors and by `eslint --format`) points to the README of the plugin version installed, `blob/vX.Y.Z/packages/eslint-plugin/README.md#<rule>`, not to `main`, which can describe rules the installed version does not have; the plugin reads its own version at run time and exposes it as `meta.version`."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "252df9f: skills: The `dsaireadable` Claude Code plugin installs its skills from the release tag (`ref: vX.Y.Z` of a `github` source in `.claude-plugin/marketplace.json`), the version of the MCP server it starts, instead of a snapshot of `main` frozen at install time; `npx skills add Toniio/DSAIReadable#vX.Y.Z` in the README pins the skills the same way. Until the tag is pushed after a release, installing the plugin fails."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "9f9365a: mcp: The critical styling rule served with every prompt and `dsaireadable_get_design_rules` no longer recommends `rounded-lg rounded-md` and a `font-medium` label: it says the components are square, that `rounded-full` is for a round shape, and that `Label`, `FieldLabel` and `Heading` take no `text-*`, `font-*`, `tracking-*` or `leading-*` class; the `validate_screen` message for a raw radius says the same. The `ux-writing` context no longer serves the `// ✅` and `// ❌` titles of the radius and opacity code examples as rules without their code."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "e5678f5: visual: The base registry item no longer carries its own `prefers-reduced-motion` rule for the Attachment title shimmer (`[data-slot=\"attachment-title\"]`): `shadcn/tailwind.css` 4.21.1 stops the shimmer itself, and the item now depends on `shadcn@^4.21.1` (was `^4.21.0`). The title still stays static, in the text color, under reduced motion."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "9f9365a: visual: Sonner toast radius: from 8px (`radius.md`) to 0 (`radius.none`), square like every radix-lyra surface. The table of `shadcn-upstream.json` mapped the `var(--radius)` of the toast's `--border-radius` to `var(--radius-md)` for every component; it now maps it to `var(--radius-none)` for Sonner alone (a `values` entry per component)."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "8da9b04: docs: How to read a token in a class. `spacing.md` says a screen takes a class first, then Tailwind's shorthand `utility-(--variable)` (`w-(--radix-popover-trigger-width)`) for a variable with no class, never `w-[var(--…)]` or `w-[--…]`, and that a `style` prop may read a token; its components/ui table writes `w-(--sidebar-width)`, the form `sidebar.tsx` uses. `color.md` reads the sequential chart colors through `bg-(--color-chart-sequential-N)`. `llms.txt` no longer says to style \"through `var(--…)` tokens\"."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "8da9b04: lint: `no-raw-values` answers a bracketed CSS variable (`hover:w-[var(--x)]`, and the Tailwind v3 `w-[--x]`) with a new message, `variableShorthand`, that names the corrected class with its variants (`hover:w-(--x)`), where it named only `w-[var(--x)]` as an arbitrary value, variants dropped. `configs.tailwind` turns on `better-tailwindcss/enforce-consistent-variable-syntax`, so `eslint --fix` writes the shorthand (a bracketed variable is now reported by both rules in `recommended`, and the one `--fix` clears both; `core` reports it once): measured on `components/`, `lib/`, `hooks/` and on 106 tsx and ts blocks of the specs, foundations, page patterns, harness examples and skills, it adds no error to code that passes today."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "8da9b04: mcp: The critical styling rule served with every prompt and `dsaireadable_get_design_rules` agrees with the ESLint plugin on variables: it teaches Tailwind's shorthand for a token with no class (`w-(--radix-popover-trigger-width)`, never `w-[var(--…)]`) and no longer forbids an inline `style` that reads a token, which the plugin has always accepted (`style={{ width: 'var(--sidebar-width)' }}`; a raw value in a style stays refused). The `dataviz` heatmap entry says to read the sequential steps through `bg-(--color-chart-sequential-N)`. `dsaireadable_validate_code` returns the new `no-raw-values` message."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "8da9b04: skills: `dsaireadable-build` no longer says arbitrary values \"generate nothing\": `p-[13px]` generates `padding: 13px`, and the ESLint plugin and `dsaireadable_validate_code` are what refuse it. It names Tailwind's `(--…)` shorthand for a variable with no class."
+  },
+  {
+    "version": "0.1.2",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "10f286e: visual: Tooltip: a tooltip opened by keyboard focus, or by a hover right after another tooltip closed (Radix `instant-open`), now enters like a hover open, with `fade-in-0`, `zoom-in-95` and a `slide-in-from-*` from its side (the fade alone under reduced motion). It used to appear at once and leave with `fade-out-0` and `zoom-out-95`: the entrance classes waited for `data-state=\"open\"`, which Radix never writes on a tooltip."
+  },
+  {
     "version": "0.1.1",
     "date": null,
     "category": "Patch Changes",
