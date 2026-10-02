@@ -4302,6 +4302,8 @@
           "outline-(length:--border-width-default)"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants",
           "Calendar.dropdown_root",
           "CalendarDayButton"
         ]
@@ -4345,9 +4347,12 @@
       {
         "token": "color.background.subtle",
         "classes": [
-          "bg-muted"
+          "bg-muted",
+          "bg-muted/50"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants.variant.ghost",
+          "Calendar.button_previous via buttonVariants.variant.ghost",
           "Calendar.range_end",
           "Calendar.range_start",
           "Calendar.today",
@@ -4362,6 +4367,8 @@
           "ring-ring/50"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "Calendar.button_previous via buttonVariants via FOCUS_RING (lib/focus.ts)",
           "Calendar.dropdown_root",
           "CalendarDayButton"
         ]
@@ -4381,6 +4388,8 @@
           "text-foreground"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants.variant.ghost",
+          "Calendar.button_previous via buttonVariants.variant.ghost",
           "Calendar.today",
           "CalendarDayButton"
         ]
@@ -4396,6 +4405,26 @@
           "Calendar.outside",
           "Calendar.week_number",
           "Calendar.weekday"
+        ]
+      },
+      {
+        "token": "motion.duration.fast",
+        "classes": [
+          "transition-all"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants"
+        ]
+      },
+      {
+        "token": "motion.easing.default",
+        "classes": [
+          "transition-all"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants"
         ]
       },
       {
@@ -4415,6 +4444,8 @@
           "ring-(length:--space-focus-ring-width)"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "Calendar.button_previous via buttonVariants via FOCUS_RING (lib/focus.ts)",
           "Calendar.dropdown_root",
           "CalendarDayButton"
         ]
@@ -4459,6 +4490,8 @@
           "pl-1.5"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants.size.default",
+          "Calendar.button_previous via buttonVariants.size.default",
           "Calendar.caption_label",
           "Calendar.dropdowns"
         ]
@@ -4467,11 +4500,25 @@
         "token": "space.scale.2",
         "classes": [
           "mt-2",
-          "p-2"
+          "p-2",
+          "pl-2",
+          "pr-2"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants.size.default",
+          "Calendar.button_previous via buttonVariants.size.default",
           "Calendar.week",
           "Calendar"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants.size.default",
+          "Calendar.button_previous via buttonVariants.size.default"
         ]
       },
       {
@@ -4492,6 +4539,8 @@
         ],
         "where": [
           "Calendar.Chevron",
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants",
           "Calendar.month",
           "Calendar.months",
           "Calendar.range_end",
@@ -4517,11 +4566,23 @@
         ]
       },
       {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants.size.default",
+          "Calendar.button_previous via buttonVariants.size.default"
+        ]
+      },
+      {
         "token": "typography.font-weight.medium",
         "classes": [
           "font-medium"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants",
           "Calendar.caption_label",
           "Calendar.dropdowns"
         ]
@@ -4552,6 +4613,8 @@
           "text-xs"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants",
           "Calendar.week_number",
           "Calendar.weekday",
           "CalendarDayButton"
@@ -4573,6 +4636,8 @@
           "text-xs"
         ],
         "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants",
           "Calendar.week_number",
           "Calendar.weekday",
           "CalendarDayButton"
@@ -4691,11 +4756,15 @@
       },
       {
         "state": "hover",
-        "behavior": "An unselected day takes the hover of the `Button` `ghost` variant, a muted fill (listed in its spec), with `dark:hover:text-foreground` in dark mode; a selected day, a range's first and last day and the days between keep their fill and text color under the pointer in both modes (each selected state has a `dark:hover:` twin that outranks the ghost variant's dark hover fill); the previous and next buttons take the hover of `buttonVariant`"
+        "behavior": "An unselected day takes the hover of its `ghost` `Button` (listed in Button's spec), with `dark:hover:text-foreground` in dark mode; a selected day, a range's first and last day and the days between keep their fill and text color under the pointer in both modes (each selected state has a `dark:hover:` twin that outranks the ghost variant's dark hover fill); the previous and next buttons, `ghost` unless `buttonVariant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants`, and `dark:hover:bg-muted/50` in dark mode"
       },
       {
         "state": "focus",
-        "behavior": "Focus indicator on the focused day: a solid `outline-ring` outline `--border-width-default` wide (`outline-solid`) inside a `ring-ring/50` ring `--space-focus-ring-width` wide (the day button is `border-0`, so the outline is the solid part); with `captionLayout=\"dropdown\"`, the root of the month and year dropdowns, which rests on a `border-input` border, takes `border-ring` and the same ring while its invisible `select` has focus (`has-focus`)"
+        "behavior": "Focus indicator on the focused day: a solid `outline-ring` outline `--border-width-default` wide (`outline-solid`) inside a `ring-ring/50` ring `--space-focus-ring-width` wide (the day button is `border-0`, so the outline is the solid part); with `captionLayout=\"dropdown\"`, the root of the month and year dropdowns, which rests on a `border-input` border, takes `border-ring` and the same ring while its invisible `select` has focus (`has-focus`); the previous and next buttons draw the focus ring of `buttonVariants`: a `focus-visible:border-ring` border inside a `focus-visible:ring-ring/50` ring"
+      },
+      {
+        "state": "active",
+        "behavior": "The previous and next buttons shift down while pressed (`active:not-aria-[haspopup]:translate-y-px`, from `buttonVariants`)"
       },
       {
         "state": "selected",
@@ -17619,22 +17688,30 @@
       {
         "token": "border-width.default",
         "classes": [
-          "border"
+          "border",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       },
       {
         "token": "color.action.background.default",
         "classes": [
           "bg-primary",
+          "bg-primary/80",
           "border-primary"
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants.variant.default",
+          "QuestionnaireSubmit via buttonVariants.variant.default"
         ]
       },
       {
@@ -17645,7 +17722,9 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants.variant.default",
+          "QuestionnaireSubmit via buttonVariants.variant.default"
         ]
       },
       {
@@ -17654,7 +17733,9 @@
           "bg-background"
         ],
         "where": [
-          "QuestionnaireChoice"
+          "QuestionnaireChoice",
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants.variant.outline"
         ]
       },
       {
@@ -17664,7 +17745,19 @@
           "bg-muted/50"
         ],
         "where": [
-          "QuestionnaireChoice"
+          "QuestionnaireChoice",
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants.variant.outline"
+        ]
+      },
+      {
+        "token": "color.border.default",
+        "classes": [
+          "border-border"
+        ],
+        "where": [
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants.variant.outline"
         ]
       },
       {
@@ -17675,7 +17768,13 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput via FOCUS_RING (lib/focus.ts)"
+          "QuestionnaireInput via FOCUS_RING (lib/focus.ts)",
+          "QuestionnaireNext via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnairePrevious via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "QuestionnaireSkip via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "QuestionnaireSubmit via buttonVariants via FOCUS_RING (lib/focus.ts)"
         ]
       },
       {
@@ -17688,7 +17787,9 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants.variant.outline"
         ]
       },
       {
@@ -17696,21 +17797,29 @@
         "classes": [
           "border-destructive",
           "border-destructive/50",
+          "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       },
       {
         "token": "color.text.default",
         "classes": [
-          "border-foreground/30"
+          "border-foreground/30",
+          "text-foreground"
         ],
         "where": [
-          "QuestionnaireChoice"
+          "QuestionnaireChoice",
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants.variant.outline"
         ]
       },
       {
@@ -17738,21 +17847,31 @@
       {
         "token": "motion.duration.fast",
         "classes": [
+          "transition-all",
           "transition-colors"
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       },
       {
         "token": "motion.easing.default",
         "classes": [
+          "transition-all",
           "transition-colors"
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       },
       {
@@ -17762,7 +17881,11 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       },
       {
@@ -17772,7 +17895,11 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput via FOCUS_RING (lib/focus.ts)"
+          "QuestionnaireInput via FOCUS_RING (lib/focus.ts)",
+          "QuestionnaireNext via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "QuestionnairePrevious via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "QuestionnaireSkip via buttonVariants via FOCUS_RING (lib/focus.ts)",
+          "QuestionnaireSubmit via buttonVariants via FOCUS_RING (lib/focus.ts)"
         ]
       },
       {
@@ -17820,7 +17947,11 @@
           "gap-1.5"
         ],
         "where": [
-          "QuestionnaireActions"
+          "QuestionnaireActions",
+          "QuestionnaireNext via buttonVariants.size.default",
+          "QuestionnairePrevious via buttonVariants.size.default",
+          "QuestionnaireSkip via buttonVariants.size.default",
+          "QuestionnaireSubmit via buttonVariants.size.default"
         ]
       },
       {
@@ -17843,12 +17974,18 @@
         "classes": [
           "gap-2",
           "mt-2",
+          "pl-2",
+          "pr-2",
           "size-2"
         ],
         "where": [
           "QuestionnaireChoice",
           "QuestionnaireChoices",
-          "QuestionnaireError"
+          "QuestionnaireError",
+          "QuestionnaireNext via buttonVariants.size.default",
+          "QuestionnairePrevious via buttonVariants.size.default",
+          "QuestionnaireSkip via buttonVariants.size.default",
+          "QuestionnaireSubmit via buttonVariants.size.default"
         ]
       },
       {
@@ -17860,7 +17997,11 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants.size.default",
+          "QuestionnairePrevious via buttonVariants.size.default",
+          "QuestionnaireSkip via buttonVariants.size.default",
+          "QuestionnaireSubmit via buttonVariants.size.default"
         ]
       },
       {
@@ -17900,6 +18041,10 @@
         "where": [
           "QuestionnaireChoice",
           "QuestionnaireItem",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants",
           "QuestionnaireTitle",
           "Questionnaire"
         ]
@@ -17912,7 +18057,11 @@
         ],
         "where": [
           "QuestionnaireActions",
-          "QuestionnaireInput"
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants.size.default",
+          "QuestionnairePrevious via buttonVariants.size.default",
+          "QuestionnaireSkip via buttonVariants.size.default",
+          "QuestionnaireSubmit via buttonVariants.size.default"
         ]
       },
       {
@@ -17933,7 +18082,11 @@
         ],
         "where": [
           "QuestionnaireChoice",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
           "QuestionnaireProgress",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants",
           "QuestionnaireTitle"
         ]
       },
@@ -17973,7 +18126,11 @@
           "QuestionnaireChoice",
           "QuestionnaireError",
           "QuestionnaireInput",
-          "QuestionnaireProgress"
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireProgress",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       },
       {
@@ -17996,7 +18153,11 @@
           "QuestionnaireDescription",
           "QuestionnaireError",
           "QuestionnaireInput",
-          "QuestionnaireProgress"
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireProgress",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       }
     ],
@@ -18265,27 +18426,31 @@
       },
       {
         "state": "hover",
-        "behavior": "A choice takes `bg-muted/50`"
+        "behavior": "A choice takes `hover:bg-muted/50`; `QuestionnairePrevious` and `QuestionnaireSkip`, `outline` unless `variant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants` (`dark:hover:bg-input/50` in dark mode), and `QuestionnaireNext` and `QuestionnaireSubmit`, on the `default` variant, take `hover:bg-primary/80`"
       },
       {
         "state": "focus",
-        "behavior": "The choice draws the focus ring when its hidden input has focus; the input draws its own"
+        "behavior": "The choice draws the focus ring when its hidden input has focus; the input draws its own, and so do the four buttons, through `buttonVariants`"
       },
       {
         "state": "active",
-        "behavior": "Not applicable"
+        "behavior": "The four buttons shift down while pressed (`active:not-aria-[haspopup]:translate-y-px`, from `buttonVariants`)"
       },
       {
         "state": "checked",
         "behavior": "`data-checked`: the choice takes `bg-muted` and a `border-foreground/30` border; the indicator takes the primary fill (`bg-primary`, `border-primary`) and shows its dot or check"
       },
       {
+        "state": "open",
+        "behavior": "`QuestionnairePrevious` and `QuestionnaireSkip`, on the `outline` variant, take `aria-expanded:bg-muted` and `aria-expanded:text-foreground` from `buttonVariants` when given `aria-expanded`, which the questionnaire never sets itself"
+      },
+      {
         "state": "disabled",
-        "behavior": "`data-disabled` on a choice, `disabled` on the text input: `opacity-disabled`, not clickable; the text input also takes `bg-input/50`"
+        "behavior": "`data-disabled` on a choice, `disabled` on the text input: `opacity-disabled`, not clickable; the text input also takes `bg-input/50`; a button given `disabled` takes `disabled:opacity-disabled` and `disabled:pointer-events-none` from `buttonVariants`"
       },
       {
         "state": "error",
-        "behavior": "`data-invalid` on a choice, `aria-invalid` on the input: `border-destructive` border, and a `ring-destructive/20` ring on the focused input; `QuestionnaireError` shows why"
+        "behavior": "`data-invalid` on a choice, `aria-invalid` on the input: `border-destructive` border, and a `ring-destructive/20` ring on the focused input; `QuestionnaireError` shows why; a button given `aria-invalid`, which the questionnaire never sets on one, takes the same classes from `buttonVariants`"
       },
       {
         "state": "placeholder",
@@ -23849,10 +24014,100 @@
         "token": "border-width.default",
         "classes": [
           "border-l",
-          "border-t"
+          "border-t",
+          "outline-(length:--border-width-default)"
         ],
         "where": [
-          "ToggleGroupItem"
+          "ToggleGroupItem",
+          "ToggleGroupItem via toggleVariants.variant.default",
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "color.background.subtle",
+        "classes": [
+          "bg-muted"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "color.border.focus",
+        "classes": [
+          "border-ring",
+          "outline-ring",
+          "ring-ring/50"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants.variant.default",
+          "ToggleGroupItem via toggleVariants via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "color.feedback.error.default",
+        "classes": [
+          "border-destructive",
+          "outline-destructive",
+          "ring-destructive/20",
+          "ring-destructive/40"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "color.text.default",
+        "classes": [
+          "text-foreground"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "motion.duration.fast",
+        "classes": [
+          "transition-all"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "motion.easing.default",
+        "classes": [
+          "transition-all"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "opacity.disabled",
+        "classes": [
+          "opacity-disabled"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "space.focus-ring-width",
+        "classes": [
+          "ring-(length:--space-focus-ring-width)"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "space.scale.1",
+        "classes": [
+          "gap-1"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
         ]
       },
       {
@@ -23868,10 +24123,68 @@
       {
         "token": "space.scale.2",
         "classes": [
+          "pl-2",
+          "pr-2",
           "px-2"
         ],
         "where": [
-          "ToggleGroupItem"
+          "ToggleGroupItem",
+          "ToggleGroupItem via toggleVariants.size.default"
+        ]
+      },
+      {
+        "token": "space.scale.2-5",
+        "classes": [
+          "px-2.5"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants.size.default"
+        ]
+      },
+      {
+        "token": "space.scale.4",
+        "classes": [
+          "size-4"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "space.scale.8",
+        "classes": [
+          "h-8",
+          "min-w-8"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants.size.default"
+        ]
+      },
+      {
+        "token": "typography.font-weight.medium",
+        "classes": [
+          "font-medium"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "ToggleGroupItem via toggleVariants"
         ]
       },
       {
@@ -24015,19 +24328,23 @@
       },
       {
         "state": "hover",
-        "behavior": "`muted` background and `foreground` text (from `toggleVariants`)"
+        "behavior": "`hover:bg-muted` background and `hover:text-foreground` text, from `toggleVariants`"
       },
       {
         "state": "focus",
-        "behavior": "`z-dropdown` z-index, visible focus ring"
+        "behavior": "The focused item rises above its neighbors (`focus:z-dropdown`) and draws the focus ring of `toggleVariants`: a `focus-visible:ring-ring/50` ring around a solid part, the `focus-visible:outline-ring` outline of the `default` variant or the `focus-visible:border-ring` border of the `outline` variant"
       },
       {
         "state": "pressed",
-        "behavior": "Selected item (`data-state=\"on\"`), with the `muted` background of `toggleVariants`"
+        "behavior": "A pressed item takes `data-[state=on]:bg-muted` from `toggleVariants`: Radix writes `data-state=\"on\"` in both kinds of group, and `aria-pressed` only in a `multiple` one, whose items are buttons (a `single` group's items are radios with `aria-checked`)"
       },
       {
         "state": "disabled",
-        "behavior": "Reduced opacity, no interaction (`data-disabled`)"
+        "behavior": "An item disabled on its own or through the group (`disabled`) takes `disabled:opacity-disabled` and `disabled:pointer-events-none` from `toggleVariants`"
+      },
+      {
+        "state": "error",
+        "behavior": "An item given `aria-invalid`, which the group never sets, takes it from `toggleVariants`: on focus, a solid `aria-invalid:focus-visible:outline-destructive` outline and an `aria-invalid:ring-destructive/20` ring; an `outline` item also takes the `aria-invalid:border-destructive` border"
       },
       {
         "state": "spacing-0",

@@ -102,7 +102,7 @@ A text input with autocomplete that picks from a filterable list of options; sup
 
 Collected from `components/ui/combobox.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
-Composes `Button`, `InputGroup` — their tokens are listed in their own specs.
+Composes `Button`, `InputGroup` — InputGroupButton in ComboboxClear: variant ghost, size icon-xs; InputGroupButton in ComboboxInput: variant ghost, size icon-xs; Button in ComboboxChip: variant ghost, size icon-xs; their tokens are listed in their own specs.
 
 ## Props / API
 
@@ -269,7 +269,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 Collected from `components/ui/combobox.tsx` and the `lib/` constants it imports. **Classes**: each class whose variants name the state, as written (`dark:` included); a class that stacks two states is listed under both. `—`: no class of its own — `default` is what the other states change.
 
-Composes `Button`, `InputGroup` — their states are listed in their own specs.
+Composes `Button`, `InputGroup` — InputGroupButton in ComboboxClear: variant ghost, size icon-xs; InputGroupButton in ComboboxInput: variant ghost, size icon-xs; Button in ComboboxChip: variant ghost, size icon-xs; their states are listed in their own specs.
 
 <!-- End of the generated part. -->
 

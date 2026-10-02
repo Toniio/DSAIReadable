@@ -101,7 +101,7 @@ A tile that stands for one file sent or received — its icon or preview, its na
 
 Collected from `components/ui/attachment.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
-Composes `Button` — its tokens are listed in its own spec.
+Composes `Button` — Button in AttachmentAction: variant ghost, size icon-xs; its tokens are listed in its own spec.
 
 ## Props / API
 
@@ -218,7 +218,7 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 Collected from `components/ui/attachment.tsx` and the `lib/` constants it imports. **Classes**: each class whose variants name the state, as written (`dark:` included); a class that stacks two states is listed under both. `—`: no class of its own — `default` is what the other states change.
 
-Composes `Button` — its states are listed in its own spec.
+Composes `Button` — Button in AttachmentAction: variant ghost, size icon-xs; its states are listed in its own spec.
 
 <!-- End of the generated part. -->
 

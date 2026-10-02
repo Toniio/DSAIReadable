@@ -81,7 +81,7 @@ A container that arranges an input with add-ons — icons, buttons, text, labels
 
 Collected from `components/ui/input-group.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
-Composes `Button`, `Input`, `Textarea` — their tokens are listed in their own specs.
+Composes `Button`, `Input`, `Textarea` — Button in InputGroupButton: variant ghost; their tokens are listed in their own specs.
 
 ## Props / API
 
@@ -171,7 +171,7 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 Collected from `components/ui/input-group.tsx` and the `lib/` constants it imports. **Classes**: each class whose variants name the state, as written (`dark:` included); a class that stacks two states is listed under both. `—`: no class of its own — `default` is what the other states change.
 
-Composes `Button`, `Input`, `Textarea` — their states are listed in their own specs.
+Composes `Button`, `Input`, `Textarea` — Button in InputGroupButton: variant ghost; their states are listed in their own specs.
 
 <!-- End of the generated part. -->
 

@@ -9,13 +9,21 @@
  * states a component draws and the classes that draw each one; people write
  * the descriptions, which are read back from the spec and kept.
  *
- * - Each class of the component's file, and of the `@/lib/*` constants it
- *   imports (scripts/lib/spec-classes.ts), goes under the state its variants
- *   name: `hover:`, `focus-visible:`, `data-open:`, `aria-invalid:`… (STATES).
- *   A class that stacks two states (`data-open:hover:`) is listed under both,
- *   as written. Layout variants (`dark:`, `sm:`, `data-[size=sm]:`, `*:`)
- *   name no state (LAYOUT). A variant in neither table fails the run, so a new
- *   one is classified, never dropped.
+ * - Each class of the component's file, of the `@/lib/*` constants it
+ *   imports and of the `*Variants` functions it calls from another component
+ *   (scripts/lib/spec-classes.ts), goes under the state its variants name:
+ *   `hover:`, `focus-visible:`, `data-open:`, `aria-invalid:`… (STATES, in
+ *   scripts/lib/spec-states.ts). A class that stacks two states
+ *   (`data-open:hover:`) is listed under both, as written. Layout variants
+ *   (`dark:`, `sm:`, `data-[size=sm]:`, `*:`) name no state (LAYOUT). A
+ *   variant in neither table fails the run, so a new one is classified, never
+ *   dropped.
+ * - A state the component never enters through a `*Variants` function it
+ *   applies is declared, not listed: a hand-written line of the section,
+ *   "Not entered through `buttonVariants`: `disabled` — why", kept like a
+ *   description, drops the classes of that state that come through it. A
+ *   declaration that names a state the function draws no class for fails the
+ *   run.
  * - A row is kept from the spec by its state, with its description. A state
  *   the code draws and the spec does not describe gets `_To document._`, and
  *   the run fails until it is written. A row the code has no class for
@@ -35,13 +43,20 @@ import { resolve, dirname, basename } from "node:path"
 import { fileURLToPath } from "node:url"
 import { format, resolveConfig } from "prettier"
 import {
+  appliedText,
   classResolver,
   codePathsOf,
   composedOf,
+  composesLine,
+  neverEntered,
+  notEnteredOf,
   stringsOf,
   utilityOf,
+  variantsAppliedBy,
   variantsOf,
+  type NotEntered,
 } from "./lib/spec-classes.js"
+import { ORDER, statesOf, unclassified } from "./lib/spec-states.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -54,95 +69,8 @@ const END = "<!-- End of the generated part. -->"
 const PLACEHOLDER = "_To document._"
 
 // ---------------------------------------------------------------------------
-// Which state a variant names
+// Variants a Radix component never matches
 // ---------------------------------------------------------------------------
-
-/**
- * The states, in the order their rows are written, and the variants that
- * name each one. A variant is matched once `group-` or `peer-` (and its
- * `/name`) and `has-` are taken off: `group-data-[disabled=true]/field` and
- * `has-disabled` name `disabled`, like `disabled` itself.
- */
-const STATES: [string, RegExp][] = [
-  ["hover", /^hover$/],
-  ["focus", /^(?:focus|focus-visible|focus-within)$|^data-\[focused=true\]$/],
-  ["active", /^(?:active|data-active)$|^data-\[active=true\]$/],
-  ["pressed", /^(?:aria-pressed|data-pressed)$|^data-\[state=on\]$/],
-  [
-    "selected",
-    /^(?:aria-selected|data-selected)$|^data-\[(?:selected|selected-single|range-start|range-middle|range-end)=true\]$|^data-\[state=selected\]$/,
-  ],
-  [
-    "checked",
-    /^(?:checked|aria-checked|data-checked)$|^data-\[checked=true\]$|^data-\[state=checked\]$/,
-  ],
-  ["unchecked", /^data-unchecked$|^data-\[state=unchecked\]$/],
-  ["highlighted", /^data-highlighted$/],
-  [
-    "open",
-    /^(?:open|aria-expanded|data-open|data-popup-open)$|^data-\[state=(?:open|delayed-open|instant-open|visible|expanded)\]$/,
-  ],
-  ["closing", /^data-closed$|^data-\[state=(?:closed|hidden)\]$/],
-  [
-    "collapsed",
-    /^data-\[state=collapsed\]$|^data-\[collapsible=(?:icon|offcanvas)\]$/,
-  ],
-  [
-    "disabled",
-    /^(?:disabled|aria-disabled|data-disabled)$|^data-\[disabled=true\]$/,
-  ],
-  [
-    "error",
-    /^(?:invalid|aria-invalid|data-invalid)$|^data-\[invalid=true\]$|^data-\[state=error\]$/,
-  ],
-  ["placeholder", /^(?:placeholder|placeholder-shown|data-placeholder)$/],
-  ["empty", /^data-empty$/],
-  ["pending", /^data-pending-scroll$/],
-]
-const ORDER = ["default", ...STATES.map(([state]) => state)]
-
-/** What an arbitrary selector (`[&:hover]`, `has-[:focus-visible]`) tests, by state. */
-const SELECTOR_STATES: [string, RegExp][] = [
-  // A <select>'s placeholder is its selected empty-value option: not `checked`.
-  ["placeholder", /\[value=(?:''|"")\]:checked\b/],
-  ["hover", /:hover\b/],
-  ["focus", /:focus(?:-visible|-within)?\b|\[data-focused=true\]/],
-  ["active", /:active\b|\[data-active(?:=true)?\]/],
-  ["selected", /\[data-selected=true\]|\[aria-selected=true\]/],
-  [
-    "checked",
-    /:checked\b(?<!\[value=(?:''|"")\]:checked)|\[data-checked\]|\[data-state=checked\]/,
-  ],
-  ["open", /\[aria-expanded=true\]|\[data-state=open\]|\[data-open\]/],
-  [
-    "collapsed",
-    /\[data-state=collapsed\]|\[data-collapsible=(?:icon|offcanvas)\]/,
-  ],
-  [
-    "disabled",
-    /:disabled\b|\[data-disabled(?:=true)?\]|\[aria-disabled=true\]/,
-  ],
-  ["error", /\[aria-invalid(?:=true)?\]/],
-]
-
-/** Variants that name no state: themes, breakpoints, pseudo-elements, structure, a component's variant or slot. */
-const LAYOUT: RegExp[] = [
-  /^(?:dark|light|rtl|ltr|print|forced-colors|motion-safe|motion-reduce|portrait|landscape|contrast-more|contrast-less)$/,
-  /^(?:sm|md|lg|xl|2xl|max-sm|max-md|max-lg|max-xl|max-2xl|min-\[[^\]]+\]|max-\[[^\]]+\])$/,
-  /^@[\w-]*(?:\/[\w-]+)?$|^@\[[^\]]+\](?:\/[\w-]+)?$/,
-  /^supports-[\w-]+$|^supports-\[[^\]]+\]$/,
-  /^(?:after|before|file|selection|marker|backdrop|first-letter|first-line)$/,
-  /^(?:\*|\*\*|first|last|only|odd|even|first-of-type|last-of-type|only-of-type|nth-[\w-]+|nth-\[[^\]]+\]|nth-last-[\w-]+|nth-last-\[[^\]]+\])$/,
-  /^(?:data|aria)-\[(?:slot|size|side|variant|orientation|align|align-trigger|spacing|direction|position|vaul-drawer-direction|motion|chips|viewport|type|shortcut|icon|sidebar|inset|level|sizing|haspopup|panel-group-direction|swipe|swipe-direction|starting-style|ending-style|separator|sorted|layout|mobile|nav|disabled=false|active=false|selected=false|state=inactive)(?:\^?=[^\]]*)?\]$/,
-  /^data-(?:slot|vertical|horizontal|inset|side|align|orientation|starting-style|ending-style)$/,
-  /^aria-(?:haspopup|orientation)$/,
-]
-
-/** Any `data-[state=…]` value the tables above do not name is a state of its own (Attachment's `uploading`, `done`). */
-const DATA_STATE = /^data-\[state=([\w-]+)\]$/
-
-const unclassified = new Set<string>()
-
 /**
  * The variants a Radix component can never match. The radix-lyra style sheet is
  * written once for Radix and Base UI, so a class that waits for a Base UI
@@ -169,23 +97,6 @@ function neverMatchesOnRadix(
   return /(?:^|\/)tooltip\.tsx$/.test(file) && v === "data-open"
 }
 
-/** The states a variant names; none for a layout variant, a negation or a context. */
-function statesOf(variant: string, file: string): string[] {
-  let v = variant.replace(/^(?:group|peer)-/, "").replace(/\/[\w-]+$/, "")
-  if (/^(?:not|in)-/.test(v)) return []
-  if (v.startsWith("has-")) v = v.slice("has-".length)
-  if (v.startsWith("[") || v.startsWith("&")) {
-    return SELECTOR_STATES.filter(([, re]) => re.test(v)).map(([s]) => s)
-  }
-  const states = STATES.filter(([, re]) => re.test(v)).map(([s]) => s)
-  if (states.length > 0) return states
-  const dataState = DATA_STATE.exec(v)?.[1]
-  if (dataState) return [dataState]
-  if (LAYOUT.some((re) => re.test(v))) return []
-  unclassified.add(`${variant} (${file})`)
-  return []
-}
-
 // ---------------------------------------------------------------------------
 // The classes of a component, by state
 // ---------------------------------------------------------------------------
@@ -196,19 +107,32 @@ interface Classes {
   byState: Map<string, Set<string>>
   /** The classes with no state variant: the component at rest. */
   base: Set<string>
+  /** `*Variants` function → the states its classes name, before any is declared not entered. */
+  composedStates: Map<string, Set<string>>
 }
 
-async function classesOf(codePath: string): Promise<Classes> {
+async function classesOf(
+  codePath: string,
+  notEntered: NotEntered[]
+): Promise<Classes> {
   const byState = new Map<string, Set<string>>()
   const base = new Set<string>()
+  const composedStates = new Map<string, Set<string>>()
   const radix = /from\s+["'](?:radix-ui|@radix-ui\/)/.test(
     readFileSync(resolve(ROOT, codePath), "utf-8")
   )
-  for (const { text } of await stringsOf(ROOT, codePath)) {
+  for (const { text, via } of await stringsOf(ROOT, codePath)) {
     const candidates = text.split(/\s+/).filter(Boolean)
     cssOf(candidates).forEach((css, i) => {
       if (!css) return
       const candidate = candidates[i]
+      if (via) {
+        const named = composedStates.get(via) ?? new Set()
+        for (const v of variantsOf(candidate))
+          for (const state of statesOf(v, codePath)) named.add(state)
+        composedStates.set(via, named)
+        if (neverEntered(candidate, via, notEntered, codePath)) return
+      }
       if (
         variantsOf(candidate).some((v) =>
           neverMatchesOnRadix(v, codePath, radix)
@@ -226,7 +150,7 @@ async function classesOf(codePath: string): Promise<Classes> {
       }
     })
   }
-  return { byState, base }
+  return { byState, base, composedStates }
 }
 
 // ---------------------------------------------------------------------------
@@ -330,6 +254,7 @@ function problemsOf(description: string, allowed: Set<string>): string[] {
 // ---------------------------------------------------------------------------
 const rejected: string[] = []
 const undocumented: string[] = []
+const misdeclared: string[] = []
 
 async function sectionFor(
   spec: string,
@@ -337,8 +262,21 @@ async function sectionFor(
   section: string,
   specOf: Map<string, string>
 ): Promise<string> {
-  const { byState, base } = await classesOf(codePath)
+  const notEntered = notEnteredOf(section.split(END)[0])
+  const { byState, base, composedStates } = await classesOf(
+    codePath,
+    notEntered
+  )
   const { rows: written, tail } = readExisting(section, spec)
+  for (const { fn, states } of notEntered) {
+    const named = composedStates.get(fn)
+    if (!named) misdeclared.push(`${spec}: ${code(codePath)} applies no ${fn}`)
+    else if (states.length === 0)
+      misdeclared.push(`${spec}: the ${fn} declaration names no state`)
+    for (const state of states)
+      if (named && !named.has(state))
+        misdeclared.push(`${spec}: ${fn} draws no \`${state}\` class`)
+  }
 
   const drawn = (state: string) => byState.get(state) ?? new Set<string>()
   const states = [
@@ -370,16 +308,14 @@ async function sectionFor(
     lines.push(`| ${code(state)} | ${cell} | ${description} |`)
   }
 
-  const composed = composedOf(ROOT, codePath, specOf)
+  const applied = variantsAppliedBy(ROOT, codePath)
+  const composes = composesLine(composedOf(ROOT, codePath, specOf), "states")
   lines.push(
     "",
-    `Collected from ${code(codePath)} and the \`lib/\` constants it imports. **Classes**: each class whose variants name the state, as written (\`dark:\` included); a class that stacks two states is listed under both. \`—\`: no class of its own — \`default\` is what the other states change.`
+    `Collected from ${code(codePath)}${applied.size > 0 ? `, the \`lib/\` constants it imports and ${appliedText(applied)}` : " and the `lib/` constants it imports"}. **Classes**: each class whose variants name the state, as written (\`dark:\` included); a class that stacks two states is listed under both. \`—\`: no class of its own — \`default\` is what the other states change.`
   )
-  if (composed.length > 0)
-    lines.push(
-      "",
-      `Composes ${composed.map(code).join(", ")} — ${composed.length > 1 ? "their states are listed in their own specs" : "its states are listed in its own spec"}.`
-    )
+  for (const { line } of notEntered) lines.push("", line)
+  if (composes) lines.push("", composes)
   lines.push("", END)
   if (tail) lines.push("", tail)
   return lines.join("\n") + "\n"
@@ -425,7 +361,7 @@ for (const [file, codePath] of codePathOf) {
 const failures: string[] = []
 if (unclassified.size > 0)
   failures.push(
-    `${unclassified.size} variant(s) in neither STATES nor LAYOUT — classify each one in scripts/build-spec-states.ts:\n` +
+    `${unclassified.size} variant(s) in neither STATES nor LAYOUT — classify each one in scripts/lib/spec-states.ts:\n` +
       [...unclassified].map((v) => `   - ${v}`).join("\n")
   )
 if (neverMatching.size > 0)
@@ -442,6 +378,11 @@ if (rejected.length > 0)
   failures.push(
     `${rejected.length} description(s) the Classes column contradicts:\n` +
       rejected.map((s) => `   - ${s}`).join("\n")
+  )
+if (misdeclared.length > 0)
+  failures.push(
+    `${misdeclared.length} "Not entered through" declaration(s) the code does not bear out — remove the state, or the line:\n` +
+      misdeclared.map((s) => `   - ${s}`).join("\n")
   )
 if (CHECK && stale.length > 0)
   failures.push(

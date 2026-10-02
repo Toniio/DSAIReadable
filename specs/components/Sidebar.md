@@ -120,7 +120,7 @@ A complete side navigation panel: responsive (a Sheet on mobile), collapsible, w
 
 Collected from `components/ui/sidebar.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
-Composes `Button`, `Input`, `Separator`, `Sheet`, `Skeleton`, `Tooltip` — their tokens are listed in their own specs.
+Composes `Button`, `Input`, `Separator`, `Sheet`, `Skeleton`, `Tooltip` — Button in SidebarTrigger: variant ghost, size icon-sm; their tokens are listed in their own specs.
 
 ## Props / API
 
@@ -377,7 +377,7 @@ What each axis means (appearance, intent, size…) is stated under **Props / API
 
 Collected from `components/ui/sidebar.tsx` and the `lib/` constants it imports. **Classes**: each class whose variants name the state, as written (`dark:` included); a class that stacks two states is listed under both. `—`: no class of its own — `default` is what the other states change.
 
-Composes `Button`, `Input`, `Separator`, `Sheet`, `Skeleton`, `Tooltip` — their states are listed in their own specs.
+Composes `Button`, `Input`, `Separator`, `Sheet`, `Skeleton`, `Tooltip` — Button in SidebarTrigger: variant ghost, size icon-sm; their states are listed in their own specs.
 
 <!-- End of the generated part. -->
 
