@@ -60,7 +60,15 @@ export default defineConfig({
         : []),
     ],
   },
-  resolve: { alias: { "@": ROOT } },
+  resolve: {
+    alias: {
+      "@": ROOT,
+      // A screen can navigate (useRouter) without an app router mounted.
+      "next/navigation": fileURLToPath(
+        new URL("./next-navigation.ts", import.meta.url)
+      ),
+    },
+  },
   // A screen is written for a Next.js app: `next/link` reads `process.env`,
   // which Next defines at build time.
   define: { "process.env": "{}" },
