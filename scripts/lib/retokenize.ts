@@ -15,7 +15,12 @@
  * 3. `patterns`: regular expressions applied in turn to the utility
  *    (`--spacing(7)` → `var(--space-scale-7)` inside an arbitrary value).
  *
- * An empty replacement removes the class. Then each shared class constant of
+ * The values of a `style` attribute (`"--border-radius": "var(--radius)"`) go
+ * through `files[item].values`, then `values`.
+ *
+ * An empty replacement removes the class; a class string that this empties
+ * (`classNames: { toast: "cn-toast" }`) takes its property with it, and an
+ * object or an attribute left empty goes too. Then each shared class constant of
  * `constants` (`FOCUS_RING`, `OVERLAY_BASE`…) whose classes all sit in one
  * string replaces them, imported from its module; a one-class constant is
  * only read, when two files are compared.
@@ -47,6 +52,8 @@ export const replacementOf = (replacement: Replacement) =>
 interface RetokenizeRules {
   classes?: Record<string, Replacement>
   utilities?: Record<string, Replacement>
+  /** The CSS values of one component's `style` attributes, which win over the global `values`. */
+  values?: Record<string, Replacement>
 }
 
 export interface RetokenizeMap extends Required<RetokenizeRules> {
@@ -231,8 +238,10 @@ export function retokenize(
   })
   const imports = new Map<string, Set<string>>()
 
+  const local = map.files[item]?.values ?? {}
   for (const node of styleValues(sourceFile)) {
-    const value = map.values[node.getLiteralValue()]
+    const value =
+      local[node.getLiteralValue()] ?? map.values[node.getLiteralValue()]
     if (value !== undefined) node.setLiteralValue(replacementOf(value))
   }
 
@@ -270,6 +279,7 @@ export function retokenize(
     }
 
     if (after.join(" ") === before.join(" ")) continue
+    if (after.length === 0 && removeEmptied(node)) continue
     replaceClassString(node, after)
   }
 
@@ -293,6 +303,51 @@ export function retokenize(
   }
 
   return sourceFile.getFullText()
+}
+
+/**
+ * A class string the table emptied, as the value of a `classNames` entry
+ * (`toast: "cn-toast"`), leaves nothing to keep: the entry goes, then the
+ * object that held only it, then the attribute (`toastOptions={{…}}`) or the
+ * property that held only that object. Any other string (a `cva` variant, say,
+ * whose key a type reads) stays, empty. Returns false for those.
+ */
+function removeEmptied(node: ClassString): boolean {
+  const property = node.getParent()
+  if (!property || !Node.isPropertyAssignment(property)) return false
+  const object = property.getParent()
+  const owner = object.getParent()
+  if (
+    !Node.isObjectLiteralExpression(object) ||
+    !owner ||
+    !Node.isPropertyAssignment(owner) ||
+    !CLASS_PROPERTIES.has(owner.getName())
+  )
+    return false
+  property.remove()
+  let current: Node | undefined = object
+  while (
+    current &&
+    Node.isObjectLiteralExpression(current) &&
+    current.getProperties().length === 0
+  ) {
+    const holder: Node | undefined = current.getParent()
+    if (holder && Node.isPropertyAssignment(holder)) {
+      current = holder.getParent()
+      holder.remove()
+    } else {
+      const attribute = holder?.getParent()
+      if (
+        holder &&
+        Node.isJsxExpression(holder) &&
+        attribute &&
+        Node.isJsxAttribute(attribute)
+      )
+        attribute.remove()
+      break
+    }
+  }
+  return true
 }
 
 /** Writes the words back: a string, a template, or `cn()` arguments. */

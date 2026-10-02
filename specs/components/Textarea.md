@@ -50,6 +50,8 @@ A multi-line text field that grows with its content (`field-sizing-content`), fo
 | `color.border.input`             | `bg-input/30` · `bg-input/50` · `bg-input/80` · `border-input`                                                         | `Textarea`                                   |
 | `color.feedback.error.default`   | `border-destructive` · `border-destructive/50` · `outline-destructive` · `ring-destructive/20` · `ring-destructive/40` | `Textarea`                                   |
 | `color.text.subtle`              | `text-muted-foreground`                                                                                                | `Textarea`                                   |
+| `motion.duration.fast`           | `transition-colors`                                                                                                    | `Textarea`                                   |
+| `motion.easing.default`          | `transition-colors`                                                                                                    | `Textarea`                                   |
 | `opacity.disabled`               | `opacity-disabled`                                                                                                     | `Textarea`                                   |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                                                                               | `Textarea` via `FOCUS_RING` (`lib/focus.ts`) |
 | `space.scale.16`                 | `min-h-16`                                                                                                             | `Textarea`                                   |

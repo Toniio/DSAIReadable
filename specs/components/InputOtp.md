@@ -54,7 +54,8 @@ A segmented input for one-time passcodes (OTP), with automatic movement between 
 | `color.border.input`             | `bg-input/30` · `border-input`                                                               | `InputOTPSlot`                       |
 | `color.feedback.error.default`   | `border-destructive` · `outline-destructive` · `ring-destructive/20` · `ring-destructive/40` | `InputOTPGroup` · `InputOTPSlot`     |
 | `color.text.default`             | `bg-foreground`                                                                              | `InputOTPSlot`                       |
-| `motion.duration.extra-slow`     | `duration-extra-slow`                                                                        | `InputOTPSlot`                       |
+| `motion.duration.fast`           | `transition-all`                                                                             | `InputOTPSlot`                       |
+| `motion.easing.default`          | `transition-all`                                                                             | `InputOTPSlot`                       |
 | `opacity.disabled`               | `opacity-disabled`                                                                           | `InputOTP`                           |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                                                     | `InputOTPGroup` · `InputOTPSlot`     |
 | `space.scale.0`                  | `inset-0`                                                                                    | `InputOTPSlot`                       |

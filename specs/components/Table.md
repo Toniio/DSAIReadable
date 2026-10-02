@@ -63,6 +63,8 @@ A set of components for building semantic data tables — header, body, footer a
 | `color.background.subtle`        | `bg-muted` · `bg-muted/50` | `TableFooter` · `TableRow`                 |
 | `color.text.default`             | `text-foreground`          | `TableHead`                                |
 | `color.text.subtle`              | `text-muted-foreground`    | `TableCaption`                             |
+| `motion.duration.fast`           | `transition-colors`        | `TableRow`                                 |
+| `motion.easing.default`          | `transition-colors`        | `TableRow`                                 |
 | `space.scale.0`                  | `pr-0`                     | `TableCell` · `TableHead`                  |
 | `space.scale.10`                 | `h-10`                     | `TableHead`                                |
 | `space.scale.2`                  | `p-2` · `px-2`             | `TableCell` · `TableHead`                  |

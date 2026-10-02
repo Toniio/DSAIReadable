@@ -57,6 +57,8 @@ Tabbed navigation that switches between mutually exclusive content panels; horiz
 | `color.border.input`             | `bg-input/30` · `border-input`                               | `TabsTrigger`                                                                                           |
 | `color.text.default`             | `bg-foreground` · `text-foreground` · `text-foreground/60`   | `TabsTrigger`                                                                                           |
 | `color.text.subtle`              | `text-muted-foreground`                                      | `TabsTrigger` · `tabsListVariants`                                                                      |
+| `motion.duration.fast`           | `transition-all` · `transition-opacity`                      | `TabsTrigger`                                                                                           |
+| `motion.easing.default`          | `transition-all` · `transition-opacity`                      | `TabsTrigger`                                                                                           |
 | `opacity.disabled`               | `opacity-disabled`                                           | `TabsTrigger`                                                                                           |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                     | `TabsContent` via `FOCUS_RING` (`lib/focus.ts`) · `TabsTrigger` via `FOCUS_RING_WIDTH` (`lib/focus.ts`) |
 | `space.scale.0`                  | `inset-x-0` · `inset-y-0`                                    | `TabsTrigger`                                                                                           |

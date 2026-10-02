@@ -64,9 +64,8 @@ const eslintConfig = defineConfig([
       "better-tailwindcss/no-unknown-classes": [
         "error",
         {
-          // Hooks, not utilities: sonner styles `.toaster`, and shadcn's
-          // input-otp targets `.cn-input-otp` from its own stylesheet.
-          ignore: ["^toaster$", "^cn-input-otp$"],
+          // A hook, not a utility: sonner styles `.toaster`.
+          ignore: ["^toaster$"],
         },
       ],
       // A disabled state reads opacity.disabled, not Tailwind's opacity

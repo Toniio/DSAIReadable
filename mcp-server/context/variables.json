@@ -1157,7 +1157,7 @@
     "value_dark": "{primitive.radius.none}",
     "css_variable": "--radius-none",
     "tier": "semantic",
-    "status": "reserved"
+    "status": "active"
   },
   {
     "path": "radius.xs",

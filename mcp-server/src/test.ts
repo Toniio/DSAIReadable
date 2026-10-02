@@ -26,6 +26,7 @@ import {
   type CompositionRule,
 } from "./lib/composition-rules.js"
 import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
+import { mdWithoutCode } from "./lib/markdown.js"
 import { COMPONENT_RULE } from "./lib/component-rule.js"
 import { registerResources } from "./resources/index.js"
 import {
@@ -935,6 +936,23 @@ assert(
   "The styling rule names styles/globals.css as the bridge and quotes no hex value"
 )
 
+// The critical rule is served in every prompt, so it says what the components
+// draw: square (rounded-none), a label and a heading with a text style of
+// their own. It recommended rounded-lg rounded-md and a 14px medium label.
+assert(
+  !TAILWIND_RULE.do.some((line) =>
+    /\brounded-(?:sm|md|lg|xl|2xl)\b/.test(line)
+  ) &&
+    TAILWIND_RULE.do.some((line) => /\brounded-none\b/.test(line)) &&
+    TAILWIND_RULE.description.some(
+      (line) => /square/.test(line) && /\brounded-/.test(line)
+    ) &&
+    TAILWIND_RULE.description.some((line) =>
+      /FieldLabel[^.]*no text-\*, font-\*, tracking-\* or leading-\*/.test(line)
+    ),
+  "The styling rule says the components are square and a label draws its own text style"
+)
+
 const uxRules = (
   JSON.parse(readFileSync(resolve(contextDir, "ux-writing.json"), "utf-8")) as {
     general_rules: Array<{ rule: string }>
@@ -962,6 +980,30 @@ const ruleless = foundations.filter((f) => !ruleSources.has(f))
 assert(
   foundations.length === 13 && ruleless.length === 0,
   `Every foundation serves its rules (${foundations.length - ruleless.length}/${foundations.length}${ruleless.length ? `; none for ${ruleless.join(", ")}` : ""})`
+)
+
+// A ✅/❌ comment inside a code example titles the code under it: served as a
+// rule on its own ("✅ Standard card"), it names nothing.
+const exampleTitles = foundations.flatMap((f) =>
+  [
+    ...readFileSync(
+      resolve(__dirname, "../../specs/foundations", f),
+      "utf-8"
+    ).matchAll(/^\s*\/\/ ([✅❌].*)$/gm),
+  ].map((m) => ({ source: f, title: m[1].trim() }))
+)
+const servedTitles = exampleTitles.filter((t) =>
+  generalRules.some((r) => r.source === t.source && r.rule.startsWith(t.title))
+)
+assert(
+  exampleTitles.length > 0 && servedTitles.length === 0,
+  `No ✅/❌ title of a code example is served as a rule (${exampleTitles.length} in the foundations${servedTitles.length ? `; served: ${servedTitles.map((t) => t.title).join(" | ")}` : ""})`
+)
+assert(
+  mdWithoutCode("- ✅ a rule\n```tsx\n// ✅ a title\n```\n- ❌ another")
+    .split("\n")
+    .filter((line) => /[✅❌]/.test(line)).length === 2,
+  "mdWithoutCode drops the lines of a fenced code block, the fences included"
 )
 
 // A numbered rule wrapped over several lines is served whole, and the

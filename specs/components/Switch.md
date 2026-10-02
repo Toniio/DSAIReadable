@@ -58,6 +58,8 @@ A toggle switch that turns a two-state setting on or off, with immediate visual 
 | `color.border.input`                 | `bg-input` · `bg-input/80`                                                                                             | `Switch`                                   |
 | `color.feedback.error.default`       | `border-destructive` · `border-destructive/50` · `outline-destructive` · `ring-destructive/20` · `ring-destructive/40` | `Switch`                                   |
 | `color.text.default`                 | `bg-foreground`                                                                                                        | `Switch`                                   |
+| `motion.duration.fast`               | `transition-all` · `transition-transform`                                                                              | `Switch`                                   |
+| `motion.easing.default`              | `transition-all` · `transition-transform`                                                                              | `Switch`                                   |
 | `opacity.disabled`                   | `opacity-disabled`                                                                                                     | `Switch`                                   |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                                               | `Switch` via `FOCUS_RING` (`lib/focus.ts`) |
 | `space.scale.0`                      | `translate-x-0`                                                                                                        | `Switch`                                   |

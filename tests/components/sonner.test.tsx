@@ -60,6 +60,21 @@ describe("Sonner", () => {
     ).toBeTruthy()
   })
 
+  it.each(["light", "dark"])(
+    "a toast is square, like every surface of the system (%s)",
+    async (theme) => {
+      document.documentElement.classList.toggle("dark", theme === "dark")
+      await showToast()
+      // Sonner's own unlayered rule reads --border-radius: the Toaster sets it
+      // to radius.none, where it set radius.md (8px) before.
+      const toastElement = document.querySelector<HTMLElement>(
+        "[data-sonner-toast]"
+      )!
+      expect(toastElement.dataset.styled).toBe("true")
+      expect(getComputedStyle(toastElement).borderRadius).toBe("0px")
+    }
+  )
+
   it("Alt+T: moves focus to the notifications area", async () => {
     await showToast()
     screen.getByRole("button", { name: "Save changes" }).focus()

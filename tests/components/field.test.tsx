@@ -50,6 +50,21 @@ describe("Field", () => {
     expect(input.getAttribute("aria-invalid")).toBeNull()
   })
 
+  it("draws the field label at 12px, regular, with a snug line height: typography.md's Field label", () => {
+    // The numbers typography.md gives for FieldLabel; a label that grows or
+    // bolds because a class was added would no longer match the page.
+    render(<EmailField />)
+    const label = screen.getByText("Email")
+    const style = getComputedStyle(label)
+    expect(label.dataset.slot).toBe("field-label")
+    expect(style.fontSize).toBe("12px")
+    expect(style.fontWeight).toBe("400")
+    expect(style.letterSpacing).toBe("normal")
+    expect(
+      parseFloat(style.lineHeight) / parseFloat(style.fontSize)
+    ).toBeCloseTo(1.375)
+  })
+
   it("applies the orientation variant", () => {
     render(<Field orientation="horizontal">content</Field>)
     const field = screen.getByRole("group")

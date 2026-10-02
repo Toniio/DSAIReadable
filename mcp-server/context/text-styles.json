@@ -22,7 +22,7 @@
       "rem": "0.75rem",
       "px": "12 px",
       "tailwind_class": "text-xs",
-      "usage": "Labels, badges, chart legends"
+      "usage": "Component text: labels (Label, FieldLabel), buttons, inputs, badges, menu items, descriptions, chart legends"
     },
     {
       "token": "typography.size.sm",
@@ -30,7 +30,7 @@
       "rem": "0.875rem",
       "px": "14 px",
       "tailwind_class": "text-sm",
-      "usage": "Secondary text, field labels, helper text"
+      "usage": "Titles inside a component (CardTitle, DialogTitle…), the FieldLegend legend, a screen's secondary text"
     },
     {
       "token": "typography.size.base",
@@ -38,7 +38,7 @@
       "rem": "1rem",
       "px": "16 px",
       "tailwind_class": "text-base",
-      "usage": "Main body text"
+      "usage": "Main body text; Heading level 4"
     },
     {
       "token": "typography.size.lg",
@@ -46,7 +46,7 @@
       "rem": "1.125rem",
       "px": "18 px",
       "tailwind_class": "text-lg",
-      "usage": "Emphasized body text, introductions"
+      "usage": "Emphasized body text, introductions; Heading level 3"
     },
     {
       "token": "typography.size.xl",
@@ -54,7 +54,7 @@
       "rem": "1.25rem",
       "px": "20 px",
       "tailwind_class": "text-xl",
-      "usage": "Section headings (h3, h4)"
+      "usage": "Heading level 2: section headings"
     },
     {
       "token": "typography.size.2xl",
@@ -62,7 +62,7 @@
       "rem": "1.5rem",
       "px": "24 px",
       "tailwind_class": "text-2xl",
-      "usage": "Page headings (h2)"
+      "usage": "Heading level 1: the page title"
     },
     {
       "token": "typography.size.3xl",
@@ -70,7 +70,7 @@
       "rem": "1.875rem",
       "px": "30 px",
       "tailwind_class": "text-3xl",
-      "usage": "Hero headings (h1)"
+      "usage": "Hero text a screen draws; no component uses it"
     },
     {
       "token": "typography.size.4xl",
@@ -78,7 +78,7 @@
       "rem": "2.25rem",
       "px": "36 px",
       "tailwind_class": "text-4xl",
-      "usage": "Display headings — rare"
+      "usage": "Display text a screen draws, rare; no component uses it"
     }
   ],
   "line_heights": [
@@ -87,14 +87,14 @@
       "css_variable": "--typography-line-height-tight",
       "value": "1.25",
       "tailwind_class": "leading-tight",
-      "usage": "Headings — short text on 1 or 2 lines"
+      "usage": "Short text on 1 or 2 lines"
     },
     {
       "token": "typography.line-height.snug",
       "css_variable": "--typography-line-height-snug",
       "value": "1.375",
       "tailwind_class": "leading-snug",
-      "usage": "Subheadings, multi-line labels"
+      "usage": "Multi-line labels: FieldLabel draws it"
     },
     {
       "token": "typography.line-height.normal",
@@ -124,28 +124,28 @@
       "css_variable": "--typography-font-weight-normal",
       "value": "400",
       "tailwind_class": "font-normal",
-      "usage": "Standard body text"
+      "usage": "Body text, labels (Label, FieldLabel), descriptions"
     },
     {
       "token": "typography.font-weight.medium",
       "css_variable": "--typography-font-weight-medium",
       "value": "500",
       "tailwind_class": "font-medium",
-      "usage": "UI labels, buttons, navigation items"
+      "usage": "Buttons, tabs, badges, component titles (CardTitle, DialogTitle…), table headers"
     },
     {
       "token": "typography.font-weight.semibold",
       "css_variable": "--typography-font-weight-semibold",
       "value": "600",
       "tailwind_class": "font-semibold",
-      "usage": "Subheadings, emphasis in the UI"
+      "usage": "Headings — Heading draws it at every level"
     },
     {
       "token": "typography.font-weight.bold",
       "css_variable": "--typography-font-weight-bold",
       "value": "700",
       "tailwind_class": "font-bold",
-      "usage": "Main headings, strong emphasis"
+      "usage": "Strong emphasis a screen draws; the Logo"
     }
   ],
   "letter_spacings": [
@@ -154,7 +154,7 @@
       "css_variable": "--typography-letter-spacing-tight",
       "value": "-0.025em",
       "tailwind_class": "tracking-tight",
-      "usage": "Large headings (3xl, 4xl) — tightens the letters"
+      "usage": "Headings — Heading draws it at every level"
     },
     {
       "token": "typography.letter-spacing.normal",
@@ -168,28 +168,28 @@
       "css_variable": "--typography-letter-spacing-wide",
       "value": "0.025em",
       "tailwind_class": "tracking-wide",
-      "usage": "Small UI labels (xs, sm)"
+      "usage": "Captions a screen draws; no component uses it"
     },
     {
       "token": "typography.letter-spacing.wider",
       "css_variable": "--typography-letter-spacing-wider",
       "value": "0.05em",
       "tailwind_class": "tracking-wider",
-      "usage": "All-caps text, overlines"
+      "usage": "All-caps text, overlines; no component uses it"
     },
     {
       "token": "typography.letter-spacing.widest",
       "css_variable": "--typography-letter-spacing-widest",
       "value": "0.1em",
       "tailwind_class": "tracking-widest",
-      "usage": "Keyboard shortcuts in menus"
+      "usage": "Keyboard shortcuts in menus and Command"
     }
   ],
   "usage_rules": [
     "**JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.",
-    "**Always pair `size` with `lineHeight`** — a heading without `leading-tight` looks too loose; body text without `leading-normal` is hard to read.",
-    "**`tracking-tight` only from `text-3xl` up** — on small text, negative spacing hurts readability.",
+    "**A heading is a `Heading`, a field label a `FieldLabel`** — each draws its own size, weight, tracking and line height, so pass it no `text-*`, `font-*`, `tracking-*` or `leading-*` class. For text a screen draws itself, a `text-*` class already carries its paired line height: add `leading-*` only to change it.",
+    "**`tracking-tight` belongs to headings** — `Heading` draws it at every level; on running text, negative spacing hurts readability.",
     "**`tracking-wider` is for all-caps only** — never use it on regular lowercase text. `tracking-widest` is for keyboard shortcuts only.",
-    "**A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels."
+    "**A strict weight hierarchy** — `normal` → body text, labels and descriptions, `medium` → buttons, tabs, badges and component titles, `semibold` → headings, `bold` → strong emphasis a screen draws. A field label stays `normal`."
   ]
 }

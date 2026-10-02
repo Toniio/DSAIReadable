@@ -55,6 +55,8 @@ A vertical stack of collapsible panels that shows and hides sections of content.
 | `color.border.focus`             | `border-ring` · `ring-ring/50`           | `AccordionTrigger` via `FOCUS_RING` (`lib/focus.ts`) |
 | `color.text.default`             | `text-foreground`                        | `AccordionContent`                                   |
 | `color.text.subtle`              | `text-muted-foreground`                  | `AccordionTrigger`                                   |
+| `motion.duration.fast`           | `transition-all`                         | `AccordionTrigger`                                   |
+| `motion.easing.default`          | `transition-all`                         | `AccordionTrigger`                                   |
 | `opacity.disabled`               | `opacity-disabled`                       | `AccordionTrigger`                                   |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)` | `AccordionTrigger` via `FOCUS_RING` (`lib/focus.ts`) |
 | `space.scale.0`                  | `pt-0`                                   | `AccordionContent`                                   |

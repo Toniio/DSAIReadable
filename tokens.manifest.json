@@ -5424,7 +5424,7 @@
       "value": {
         "light": "0.75rem"
       },
-      "description": "Extra-small text size (12px). Use for labels, badges, captions.",
+      "description": "Extra-small text size (12px). The text of components: labels, buttons, inputs, badges, menu items, descriptions.",
       "docs": {
         "tailwind": "text-xs"
       }
@@ -5442,7 +5442,7 @@
       "value": {
         "light": "0.875rem"
       },
-      "description": "Small text size (14px). Use for secondary content and UI labels.",
+      "description": "Small text size (14px). Use for titles inside components (CardTitle, DialogTitle) and a screen's secondary content. A field label stays text-xs.",
       "docs": {
         "tailwind": "text-sm"
       }
@@ -5478,7 +5478,7 @@
       "value": {
         "light": "1.125rem"
       },
-      "description": "Large text size (18px). Use for featured body text.",
+      "description": "Large text size (18px). Use for featured body text; Heading level 3.",
       "docs": {
         "tailwind": "text-lg"
       }
@@ -5496,7 +5496,7 @@
       "value": {
         "light": "1.25rem"
       },
-      "description": "XL text (20px). Use for section headings.",
+      "description": "XL text (20px). Heading level 2: section headings.",
       "docs": {
         "tailwind": "text-xl"
       }
@@ -5514,7 +5514,7 @@
       "value": {
         "light": "1.5rem"
       },
-      "description": "2XL text (24px). Use for page-level headings.",
+      "description": "2XL text (24px). Heading level 1: the page title.",
       "docs": {
         "tailwind": "text-2xl"
       }
@@ -5532,7 +5532,7 @@
       "value": {
         "light": "1.875rem"
       },
-      "description": "3XL text (30px). Use for hero or primary headings.",
+      "description": "3XL text (30px). Hero text a screen draws; no component uses it.",
       "docs": {
         "tailwind": "text-3xl"
       }
@@ -5550,7 +5550,7 @@
       "value": {
         "light": "2.25rem"
       },
-      "description": "4XL text (36px). Use for display headings only.",
+      "description": "4XL text (36px). Display text a screen draws, rarely; no component uses it.",
       "docs": {
         "tailwind": "text-4xl"
       }
@@ -5712,7 +5712,7 @@
       "value": {
         "light": "1.25"
       },
-      "description": "Tight line height for headings. Not for paragraph text.",
+      "description": "Tight line height for short text on one or two lines. Not for paragraph text.",
       "docs": {
         "tailwind": "leading-tight"
       }
@@ -5730,7 +5730,7 @@
       "value": {
         "light": "1.375"
       },
-      "description": "Snug line height. Not for long-form reading content.",
+      "description": "Snug line height: FieldLabel draws it. Not for long-form reading content.",
       "docs": {
         "tailwind": "leading-snug"
       }
@@ -5802,7 +5802,7 @@
       "value": {
         "light": "-0.025em"
       },
-      "description": "Tight letter spacing for large headings. Not for body text.",
+      "description": "Tight letter spacing for headings: Heading draws it at every level. Not for body text.",
       "docs": {
         "tailwind": "tracking-tight"
       }
@@ -5838,7 +5838,7 @@
       "value": {
         "light": "0.025em"
       },
-      "description": "Wide letter spacing for small UI labels.",
+      "description": "Wide letter spacing for captions. No component draws it.",
       "docs": {
         "tailwind": "tracking-wide"
       }
@@ -5892,7 +5892,7 @@
       "value": {
         "light": "400"
       },
-      "description": "Normal weight for body text.",
+      "description": "Normal weight for body text, labels and descriptions.",
       "docs": {
         "tailwind": "font-normal"
       }
@@ -5910,7 +5910,7 @@
       "value": {
         "light": "500"
       },
-      "description": "Medium weight for UI labels and buttons.",
+      "description": "Medium weight for buttons, tabs, badges and component titles. A field label stays normal.",
       "docs": {
         "tailwind": "font-medium"
       }
@@ -5928,7 +5928,7 @@
       "value": {
         "light": "600"
       },
-      "description": "Semibold for sub-headings and emphasis.",
+      "description": "Semibold for headings: Heading draws it at every level.",
       "docs": {
         "tailwind": "font-semibold"
       }
@@ -5946,7 +5946,7 @@
       "value": {
         "light": "700"
       },
-      "description": "Bold for headings and strong emphasis.",
+      "description": "Bold for strong emphasis a screen draws, and the logo.",
       "docs": {
         "tailwind": "font-bold"
       }
@@ -5994,7 +5994,7 @@
       "tier": "semantic",
       "cssVar": "--radius-none",
       "type": "dimension",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.radius.none}"
@@ -6002,10 +6002,10 @@
       "value": {
         "light": "0rem"
       },
-      "description": "Zero radius — square corners. Use for full-bleed or table elements.",
+      "description": "Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-none"
       }
     },
@@ -6022,10 +6022,10 @@
       "value": {
         "light": "0.25rem"
       },
-      "description": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips.",
+      "description": "Minimal rounding (0.4× base). The legend and tooltip indicators of a chart.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-xs"
       }
     },
@@ -6042,10 +6042,10 @@
       "value": {
         "light": "0.375rem"
       },
-      "description": "Small rounding (0.6× base). Use for inputs, small buttons.",
+      "description": "Small rounding (0.6× base). For content a screen draws itself; no component uses it.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-sm"
       }
     },
@@ -6062,10 +6062,10 @@
       "value": {
         "light": "0.5rem"
       },
-      "description": "Medium rounding (0.8× base). Use for default buttons and form controls.",
+      "description": "Medium rounding (0.8× base). For content a screen draws itself; no component uses it.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-md"
       }
     },
@@ -6082,10 +6082,10 @@
       "value": {
         "light": "0.625rem"
       },
-      "description": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius.",
+      "description": "Base rounding (1× = 0.625rem). For content a screen draws itself, and the shadcn --radius alias; no component reads it.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-lg"
       }
     },
@@ -6102,10 +6102,10 @@
       "value": {
         "light": "0.875rem"
       },
-      "description": "Larger rounding (1.4× base). Use for modals and prominent containers.",
+      "description": "Larger rounding (1.4× base). For content a screen draws itself; no component uses it.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-xl"
       }
     },
@@ -6122,10 +6122,10 @@
       "value": {
         "light": "1.125rem"
       },
-      "description": "Extra-large rounding (1.8× base). Use for floating panels.",
+      "description": "Extra-large rounding (1.8× base). For content a screen draws itself (a hero); no component uses it.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-2xl"
       }
     },
@@ -6142,10 +6142,10 @@
       "value": {
         "light": "1.375rem"
       },
-      "description": "Very large rounding (2.2× base). Use sparingly for decorative containers.",
+      "description": "Very large rounding (2.2× base). Use sparingly for decorative content; no component uses it.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-3xl"
       }
     },
@@ -6162,10 +6162,10 @@
       "value": {
         "light": "1.625rem"
       },
-      "description": "Maximum rounding (2.6× base). Use only for hero cards or large chips.",
+      "description": "Maximum rounding (2.6× base). Use only for hero content; no component uses it.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-4xl"
       }
     },
@@ -6182,10 +6182,10 @@
       "value": {
         "light": "9999px"
       },
-      "description": "Pill/full rounding. Use for pills, avatars, toggles.",
+      "description": "Pill/full rounding. A round shape: Avatar, RadioGroup and Switch draw rounded-full, a static class that reads no token.",
       "docs": {
-        "do": "`radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges.",
-        "dont": "No arbitrary values — always a token from the system.",
+        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-full"
       }
     },
@@ -6358,7 +6358,7 @@
       },
       "description": "No duration — for immediate state changes. Not for visual transitions.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens."
       }
     },
@@ -6375,9 +6375,9 @@
       "value": {
         "light": "100ms"
       },
-      "description": "Fast micro-interactions (100ms). Use for hover/focus feedback.",
+      "description": "Fast micro-interactions (100ms). The default of a transition with no duration class: hover and focus feedback, and most overlays the components draw.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-fast"
       }
@@ -6395,9 +6395,9 @@
       "value": {
         "light": "200ms"
       },
-      "description": "Standard transition duration (200ms). Default for most transitions.",
+      "description": "Standard transition duration (200ms). For a fade or a move a screen draws itself, and the Sheet's slide.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-normal"
       }
@@ -6415,9 +6415,9 @@
       "value": {
         "light": "300ms"
       },
-      "description": "Slow, deliberate transitions (300ms). Use for modals and drawers.",
+      "description": "Slow, deliberate transitions (300ms). The NavigationMenu content without a viewport and its chevron, the MessageScrollerButton's exit; no modal or drawer uses it.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-slow"
       }
@@ -6435,9 +6435,9 @@
       "value": {
         "light": "500ms"
       },
-      "description": "Slowest transitions (500ms). Use only for complex animations.",
+      "description": "Slowest transitions (500ms). Use only for complex animations; no component uses it (the Drawer's own 500ms is vaul's).",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "duration-slower"
       }
@@ -6455,10 +6455,11 @@
       "value": {
         "light": "1000ms"
       },
-      "description": "Extra-slow duration (1000ms). Use for blink/pulse animations like caret blink.",
+      "description": "Extra-slow duration (1000ms), for a transition or animate-in and animate-out. No component uses it: a keyframe loop (caret-blink, pulse, spin) sets its own duration.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
-        "dont": "Never hard-code durations or easings — always use the CSS tokens."
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
+        "dont": "Never hard-code durations or easings — always use the CSS tokens.",
+        "tailwind": "duration-extra-slow"
       }
     },
     {
@@ -6476,7 +6477,7 @@
       },
       "description": "Standard ease-in-out. Default for all UI transitions.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-default"
       }
@@ -6496,7 +6497,7 @@
       },
       "description": "Ease-in curve. Use for elements exiting the screen.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-in"
       }
@@ -6516,7 +6517,7 @@
       },
       "description": "Ease-out curve. Use for elements entering the screen.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-out"
       }
@@ -6536,7 +6537,7 @@
       },
       "description": "Spring overshoot. Use for playful or bouncy interactions only.",
       "docs": {
-        "do": "`duration-normal` with `ease-default` as the universal starting point.",
+        "do": "A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself.",
         "dont": "Never hard-code durations or easings — always use the CSS tokens.",
         "tailwind": "ease-spring"
       }
@@ -7239,7 +7240,7 @@
       "value": {
         "light": "0.625rem"
       },
-      "description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem), the canonical border-radius used across shadcn components."
+      "description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem). No component reads it: radix-lyra draws every component with rounded-none."
     },
     {
       "token": "shadcn.chart-1",

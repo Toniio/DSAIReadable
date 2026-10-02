@@ -50,6 +50,8 @@ A linear progress bar that shows how far an operation or a process has gone, bui
 | --------------------------------- | --------------------- | ---------- |
 | `color.action.background.default` | `bg-primary`          | `Progress` |
 | `color.background.subtle`         | `bg-muted`            | `Progress` |
+| `motion.duration.fast`            | `transition-all`      | `Progress` |
+| `motion.easing.default`           | `transition-all`      | `Progress` |
 | `space.scale.1`                   | `h-1`                 | `Progress` |
 
 Collected from `components/ui/progress.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
