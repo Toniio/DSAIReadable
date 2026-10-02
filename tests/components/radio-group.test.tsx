@@ -66,28 +66,29 @@ describe("RadioGroup", () => {
     expect(document.activeElement).toBe(document.body)
   })
 
+  // Radix moves the focus in a timeout (RovingFocus), and checks the option it
+  // lands on only while an arrow key is still down: a keyup sent before that
+  // timeout, as a loaded CI runner does, moves the focus and checks nothing.
+  // Each arrow is held until the option is checked, as a keystroke lasts.
+  async function arrow(key: string, name: string) {
+    await userEvent.keyboard(`{${key}>}`)
+    await expect.poll(() => document.activeElement).toBe(radio(name))
+    await expect.poll(checked).toEqual([name.toLowerCase()])
+    await userEvent.keyboard(`{/${key}}`)
+  }
+
   it("ArrowDown / ArrowRight: moves to the next option and checks it", async () => {
-    // Radix moves the focus, then checks the focused option, in a timeout:
-    // one key at a time, polled.
     render(<Example defaultValue="standard" />)
     await userEvent.tab()
-    await userEvent.keyboard("{ArrowDown}")
-    await expect.poll(() => document.activeElement).toBe(radio("Express"))
-    await expect.poll(checked).toEqual(["express"])
-    await userEvent.keyboard("{ArrowRight}")
-    await expect.poll(() => document.activeElement).toBe(radio("Priority"))
-    await expect.poll(checked).toEqual(["priority"])
+    await arrow("ArrowDown", "Express")
+    await arrow("ArrowRight", "Priority")
   })
 
   it("ArrowUp / ArrowLeft: moves to the previous option and checks it", async () => {
     render(<Example defaultValue="priority" />)
     await userEvent.tab()
-    await userEvent.keyboard("{ArrowUp}")
-    await expect.poll(() => document.activeElement).toBe(radio("Express"))
-    await expect.poll(checked).toEqual(["express"])
-    await userEvent.keyboard("{ArrowLeft}")
-    await expect.poll(() => document.activeElement).toBe(radio("Standard"))
-    await expect.poll(checked).toEqual(["standard"])
+    await arrow("ArrowUp", "Express")
+    await arrow("ArrowLeft", "Standard")
   })
 
   it("Space: checks the focused option", async () => {
