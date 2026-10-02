@@ -453,70 +453,70 @@
       "css_var": "--radius-none",
       "value": "{primitive.radius.none}",
       "type": "dimension",
-      "description": "Zero radius — square corners. Use for full-bleed or table elements."
+      "description": "Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one."
     },
     {
       "path": "radius.xs",
       "css_var": "--radius-xs",
       "value": "{primitive.radius.xs}",
       "type": "dimension",
-      "description": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips."
+      "description": "Minimal rounding (0.4× base). The legend and tooltip indicators of a chart."
     },
     {
       "path": "radius.sm",
       "css_var": "--radius-sm",
       "value": "{primitive.radius.sm}",
       "type": "dimension",
-      "description": "Small rounding (0.6× base). Use for inputs, small buttons."
+      "description": "Small rounding (0.6× base). For content a screen draws itself; no component uses it."
     },
     {
       "path": "radius.md",
       "css_var": "--radius-md",
       "value": "{primitive.radius.md}",
       "type": "dimension",
-      "description": "Medium rounding (0.8× base). Use for default buttons and form controls."
+      "description": "Medium rounding (0.8× base). For content a screen draws itself; no component uses it."
     },
     {
       "path": "radius.lg",
       "css_var": "--radius-lg",
       "value": "{primitive.radius.lg}",
       "type": "dimension",
-      "description": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius."
+      "description": "Base rounding (1× = 0.625rem). For content a screen draws itself, and the shadcn --radius alias; no component reads it."
     },
     {
       "path": "radius.xl",
       "css_var": "--radius-xl",
       "value": "{primitive.radius.xl}",
       "type": "dimension",
-      "description": "Larger rounding (1.4× base). Use for modals and prominent containers."
+      "description": "Larger rounding (1.4× base). For content a screen draws itself; no component uses it."
     },
     {
       "path": "radius.2xl",
       "css_var": "--radius-2xl",
       "value": "{primitive.radius.2xl}",
       "type": "dimension",
-      "description": "Extra-large rounding (1.8× base). Use for floating panels."
+      "description": "Extra-large rounding (1.8× base). For content a screen draws itself (a hero); no component uses it."
     },
     {
       "path": "radius.3xl",
       "css_var": "--radius-3xl",
       "value": "{primitive.radius.3xl}",
       "type": "dimension",
-      "description": "Very large rounding (2.2× base). Use sparingly for decorative containers."
+      "description": "Very large rounding (2.2× base). Use sparingly for decorative content; no component uses it."
     },
     {
       "path": "radius.4xl",
       "css_var": "--radius-4xl",
       "value": "{primitive.radius.4xl}",
       "type": "dimension",
-      "description": "Maximum rounding (2.6× base). Use only for hero cards or large chips."
+      "description": "Maximum rounding (2.6× base). Use only for hero content; no component uses it."
     },
     {
       "path": "radius.full",
       "css_var": "--radius-full",
       "value": "{primitive.radius.full}",
       "type": "dimension",
-      "description": "Pill/full rounding. Use for pills, avatars, toggles."
+      "description": "Pill/full rounding. A round shape: Avatar, RadioGroup and Switch draw rounded-full, a static class that reads no token."
     },
     {
       "path": "elevation.xs",
@@ -584,10 +584,10 @@
   ],
   "radius_rules": [
     "**Always use the tokens** — no arbitrary values such as `rounded-[7px]`. When no token fits, escalate to the design team.",
-    "**Consistency within a component** — every corner of a component uses the same token, unless there is a stated reason (an element that attaches to an edge of the screen, for example).",
-    "**`radius.lg` is shadcn's default** — it is the starting point for any card-like component.",
-    "**`radius.full` only for pill shapes** — avatars, toggles, rounded badges. Do not use it on standard buttons.",
-    "**`radius.none` is a deliberate choice** — use it only for full-bleed components or data-grid elements, not as a default."
+    "**Consistency across the interface** — every system surface is square, so a surface a screen draws next to them stays square. A rounded one among them is the mixed look the system does not have.",
+    "**A component draws its own corners** — add no `rounded-*` class to a `Button`, `Input`, `Card`, `Dialog` or any other component.",
+    "**`rounded-full` only for a round shape** — an avatar, a dot. Do not use it on a button, a badge or a card.",
+    "**The `radius.sm` to `radius.4xl` scale is for content** — an image, an illustration, a hero. `rounded-none` and `rounded-full` are static Tailwind classes that read no radius token, which is why `radius.full` is `reserved`."
   ],
   "elevation_rules": [
     "**Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.",

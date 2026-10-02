@@ -53,6 +53,8 @@ A slider that picks a numeric value (or a range) within set bounds, horizontally
 | `color.background.subtle`         | `bg-muted`                                           | `Slider`                                                    |
 | `color.border.focus`              | `border-ring` · `outline-ring` · `ring-ring/50`      | `Slider`                                                    |
 | `color.static.white`              | `bg-white`                                           | `Slider`                                                    |
+| `motion.duration.fast`            | `transition-[color,box-shadow]`                      | `Slider`                                                    |
+| `motion.easing.default`           | `transition-[color,box-shadow]`                      | `Slider`                                                    |
 | `opacity.disabled`                | `opacity-disabled`                                   | `Slider`                                                    |
 | `space.focus-ring-width`          | `ring-(length:--space-focus-ring-width)`             | `Slider` · `Slider` via `FOCUS_RING_WIDTH` (`lib/focus.ts`) |
 | `space.scale.1`                   | `h-1` · `w-1`                                        | `Slider`                                                    |

@@ -30,7 +30,7 @@ function InputOTP({
     <OTPInput
       data-slot="input-otp"
       containerClassName={cn(
-        "cn-input-otp flex items-center has-disabled:opacity-disabled",
+        "flex items-center has-disabled:opacity-disabled",
         containerClassName
       )}
       spellCheck={false}
@@ -98,7 +98,7 @@ function InputOTPSlot({
       {char}
       {hasFakeCaret && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-4 w-px animate-caret-blink bg-foreground duration-extra-slow" />
+          <div className="h-4 w-px animate-caret-blink bg-foreground" />
         </div>
       )}
     </div>

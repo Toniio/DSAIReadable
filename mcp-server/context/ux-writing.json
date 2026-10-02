@@ -269,7 +269,7 @@
       "source": "focus.md"
     },
     {
-      "rule": "**A universal starting point** — `motion.duration.normal` (200ms) with `motion.easing.default` is the default combination for any new transition.",
+      "rule": "**A transition with no duration class is already right** — it runs at `motion.duration.fast` (100ms) with `motion.easing.default`. Add a `duration-*` class only to a transition a screen draws itself that has to be slower: `motion.duration.normal` (200ms) with `motion.easing.default` for a fade.",
       "source": "motion.md"
     },
     {
@@ -289,32 +289,8 @@
       "source": "motion.md"
     },
     {
-      "rule": "✅ The token, under the state's variant",
-      "source": "opacity.md"
-    },
-    {
-      "rule": "❌ Same rendering, but the token is gone: ESLint rejects it",
-      "source": "opacity.md"
-    },
-    {
-      "rule": "❌ Hard-coded value",
-      "source": "opacity.md"
-    },
-    {
-      "rule": "✅ What the fields do: color.text.subtle, 5.10:1 on white",
-      "source": "opacity.md"
-    },
-    {
-      "rule": "❌ Faded default text: 3.70:1 on white, below 4.5:1 — and ESLint rejects the class",
-      "source": "opacity.md"
-    },
-    {
-      "rule": "✅ What the modal surfaces do",
-      "source": "opacity.md"
-    },
-    {
-      "rule": "❌ A backdrop darkened with an opacity: the page behind disappears,",
-      "source": "opacity.md"
+      "rule": "**Do not re-time a component** — its overlays and panels enter and leave on their own timing; a `duration-*` class on `DialogContent` or `SheetContent` does not make them slower, it makes this page's table wrong for that screen.",
+      "source": "motion.md"
     },
     {
       "rule": "**One token, one case** — `opacity.disabled` is the only active opacity token; `opacity-0` and `opacity-100` show and hide.",
@@ -337,43 +313,23 @@
       "source": "opacity.md"
     },
     {
-      "rule": "✅ Standard card",
-      "source": "radius.md"
-    },
-    {
-      "rule": "✅ Default button",
-      "source": "radius.md"
-    },
-    {
-      "rule": "✅ Pill badge",
-      "source": "radius.md"
-    },
-    {
-      "rule": "✅ Table cell — no radius",
-      "source": "radius.md"
-    },
-    {
-      "rule": "✅ Modal",
-      "source": "radius.md"
-    },
-    {
       "rule": "**Always use the tokens** — no arbitrary values such as `rounded-[7px]`. When no token fits, escalate to the design team.",
       "source": "radius.md"
     },
     {
-      "rule": "**Consistency within a component** — every corner of a component uses the same token, unless there is a stated reason (an element that attaches to an edge of the screen, for example).",
+      "rule": "**Consistency across the interface** — every system surface is square, so a surface a screen draws next to them stays square. A rounded one among them is the mixed look the system does not have.",
       "source": "radius.md"
     },
     {
-      "rule": "**`radius.lg` is shadcn's default** — it is the starting point for any card-like component.",
+      "rule": "**A component draws its own corners** — add no `rounded-*` class to a `Button`, `Input`, `Card`, `Dialog` or any other component.",
       "source": "radius.md"
     },
     {
-      "rule": "**`radius.full` only for pill shapes** — avatars, toggles, rounded badges. Do not use it on standard buttons.",
+      "rule": "**`rounded-full` only for a round shape** — an avatar, a dot. Do not use it on a button, a badge or a card.",
       "source": "radius.md"
     },
     {
-      "rule": "**`radius.none` is a deliberate choice** — use it only for full-bleed components or data-grid elements, not as a default.",
+      "rule": "**The `radius.sm` to `radius.4xl` scale is for content** — an image, an illustration, a hero. `rounded-none` and `rounded-full` are static Tailwind classes that read no radius token, which is why `radius.full` is `reserved`.",
       "source": "radius.md"
     },
     {
@@ -425,11 +381,11 @@
       "source": "typography.md"
     },
     {
-      "rule": "**Always pair `size` with `lineHeight`** — a heading without `leading-tight` looks too loose; body text without `leading-normal` is hard to read.",
+      "rule": "**A heading is a `Heading`, a field label a `FieldLabel`** — each draws its own size, weight, tracking and line height, so pass it no `text-*`, `font-*`, `tracking-*` or `leading-*` class. For text a screen draws itself, a `text-*` class already carries its paired line height: add `leading-*` only to change it.",
       "source": "typography.md"
     },
     {
-      "rule": "**`tracking-tight` only from `text-3xl` up** — on small text, negative spacing hurts readability.",
+      "rule": "**`tracking-tight` belongs to headings** — `Heading` draws it at every level; on running text, negative spacing hurts readability.",
       "source": "typography.md"
     },
     {
@@ -437,7 +393,7 @@
       "source": "typography.md"
     },
     {
-      "rule": "**A strict weight hierarchy** — `normal` → body, `medium` → labels and navigation, `semibold` → subheadings, `bold` → main headings. Do not skip levels.",
+      "rule": "**A strict weight hierarchy** — `normal` → body text, labels and descriptions, `medium` → buttons, tabs, badges and component titles, `semibold` → headings, `bold` → strong emphasis a screen draws. A field label stays `normal`.",
       "source": "typography.md"
     },
     {
@@ -672,7 +628,8 @@
       "**MUST** — place a `Field` with `orientation=\"responsive\"` inside a `FieldGroup`, whose width it reads (`@container/field-group`)",
       "**MUST** — keep `FieldLegend variant=\"legend\"` for `<fieldset>`s; everywhere else, `variant=\"label\"`",
       "**Note** — `FieldError` renders nothing without `children` or a non-empty `errors`",
-      "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`"
+      "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`",
+      "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)"
     ],
     "Heading": [
       "**MUST NOT** — skip a heading level (an `h3` under an `h1`)",
@@ -894,7 +851,8 @@
       "**MUST** — place a single `<Toaster />`, at the root of the layout",
       "**MUST NOT** — show more than 3 toasts at once",
       "**MUST NOT** — exceed two sentences",
-      "**Note** — `sonner` announces toasts to screen readers (`aria-live`)"
+      "**Note** — `sonner` announces toasts to screen readers (`aria-live`)",
+      "**Note** — a toast is square, like every surface of the system: `Toaster` sets `--border-radius` to `var(--radius-none)`, the one lever `sonner`'s own stylesheet leaves"
     ],
     "Spinner": [
       "**MUST** — replace the default `aria-label` (`\"Loading\"`) with a label that describes the action (\"Signing in\")",

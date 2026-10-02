@@ -29,6 +29,7 @@ The provider for short-lived toast notifications, built on the `sonner` library,
 - **MUST NOT** — show more than 3 toasts at once
 - **MUST NOT** — exceed two sentences
 - **Note** — `sonner` announces toasts to screen readers (`aria-live`)
+- **Note** — a toast is square, like every surface of the system: `Toaster` sets `--border-radius` to `var(--radius-none)`, the one lever `sonner`'s own stylesheet leaves
 
 ## Dependencies
 
@@ -38,10 +39,9 @@ The provider for short-lived toast notifications, built on the `sonner` library,
 
 ## Anatomy
 
-| Slot                   | Role                                                         |
-| ---------------------- | ------------------------------------------------------------ |
-| `<Sonner>` (root)      | Mount point of the toasts; carries the `toaster group` class |
-| `cn-toast` (className) | Class applied to each toast                                  |
+| Slot              | Role                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| `<Sonner>` (root) | Mount point of the toasts; carries the `toaster group` class |
 
 ## Tokens
 
@@ -49,7 +49,7 @@ The provider for short-lived toast notifications, built on the `sonner` library,
 
 | Token           | Classes and variables | Where                                                                                        |
 | --------------- | --------------------- | -------------------------------------------------------------------------------------------- |
-| `radius.md`     | `var(--radius-md)`    | `Toaster.--border-radius`                                                                    |
+| `radius.none`   | `var(--radius-none)`  | `Toaster.--border-radius`                                                                    |
 | `space.scale.4` | `size-4`              | `Toaster.error` · `Toaster.info` · `Toaster.loading` · `Toaster.success` · `Toaster.warning` |
 
 Collected from `components/ui/sonner.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.

@@ -92,21 +92,21 @@ components, and places a surface above the page with a global layer.
 
 ```tsx
 // Card at rest
-<div className="shadow-sm rounded-lg bg-card p-4">...</div>
+<div className="shadow-sm bg-card p-4">...</div>
 
 // Card on hover — raised elevation
-<div className="shadow-sm hover:shadow-md transition-shadow duration-normal rounded-lg bg-card p-4">
+<div className="shadow-sm hover:shadow-md transition-shadow duration-normal bg-card p-4">
   ...
 </div>
 
 // Drop-down menu level — DropdownMenuContent and PopoverContent already draw it
-<div className="shadow-md rounded-lg bg-popover p-2">...</div>
+<div className="shadow-md bg-popover p-2">...</div>
 
 // Modal level — Sheet already draws it
-<div className="shadow-lg rounded-xl bg-card p-6">...</div>
+<div className="shadow-lg bg-card p-6">...</div>
 
 // Toast level
-<div className="shadow-2xl rounded-lg bg-card p-4">...</div>
+<div className="shadow-2xl bg-card p-4">...</div>
 
 // Input with an inner shadow (focus or inset state)
 <Input className="shadow-inner" />

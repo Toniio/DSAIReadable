@@ -53,6 +53,8 @@ A single-line text (or file) input: the basic building block of every form.
 | `color.feedback.error.default`   | `border-destructive` · `border-destructive/50` · `outline-destructive` · `ring-destructive/20` · `ring-destructive/40` | `Input`                                   |
 | `color.text.default`             | `text-foreground`                                                                                                      | `Input`                                   |
 | `color.text.subtle`              | `text-muted-foreground`                                                                                                | `Input`                                   |
+| `motion.duration.fast`           | `transition-colors`                                                                                                    | `Input`                                   |
+| `motion.easing.default`          | `transition-colors`                                                                                                    | `Input`                                   |
 | `opacity.disabled`               | `opacity-disabled`                                                                                                     | `Input`                                   |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                                                                               | `Input` via `FOCUS_RING` (`lib/focus.ts`) |
 | `space.scale.0`                  | `min-w-0`                                                                                                              | `Input`                                   |

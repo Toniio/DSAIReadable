@@ -1014,7 +1014,7 @@
     "dark": "{primitive.typography.size.xs}",
     "type": "dimension",
     "status": "active",
-    "usage": "Extra-small text size (12px). Use for labels, badges, captions."
+    "usage": "Extra-small text size (12px). The text of components: labels, buttons, inputs, badges, menu items, descriptions."
   },
   {
     "path": "typography.size.sm",
@@ -1023,7 +1023,7 @@
     "dark": "{primitive.typography.size.sm}",
     "type": "dimension",
     "status": "active",
-    "usage": "Small text size (14px). Use for secondary content and UI labels."
+    "usage": "Small text size (14px). Use for titles inside components (CardTitle, DialogTitle) and a screen's secondary content. A field label stays text-xs."
   },
   {
     "path": "typography.size.base",
@@ -1041,7 +1041,7 @@
     "dark": "{primitive.typography.size.lg}",
     "type": "dimension",
     "status": "active",
-    "usage": "Large text size (18px). Use for featured body text."
+    "usage": "Large text size (18px). Use for featured body text; Heading level 3."
   },
   {
     "path": "typography.size.xl",
@@ -1050,7 +1050,7 @@
     "dark": "{primitive.typography.size.xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "XL text (20px). Use for section headings."
+    "usage": "XL text (20px). Heading level 2: section headings."
   },
   {
     "path": "typography.size.2xl",
@@ -1059,7 +1059,7 @@
     "dark": "{primitive.typography.size.2xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "2XL text (24px). Use for page-level headings."
+    "usage": "2XL text (24px). Heading level 1: the page title."
   },
   {
     "path": "typography.size.3xl",
@@ -1068,7 +1068,7 @@
     "dark": "{primitive.typography.size.3xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "3XL text (30px). Use for hero or primary headings."
+    "usage": "3XL text (30px). Hero text a screen draws; no component uses it."
   },
   {
     "path": "typography.size.4xl",
@@ -1077,7 +1077,7 @@
     "dark": "{primitive.typography.size.4xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "4XL text (36px). Use for display headings only."
+    "usage": "4XL text (36px). Display text a screen draws, rarely; no component uses it."
   },
   {
     "path": "typography.size-line-height.xs",
@@ -1158,7 +1158,7 @@
     "dark": "{primitive.typography.line-height.tight}",
     "type": "number",
     "status": "active",
-    "usage": "Tight line height for headings. Not for paragraph text."
+    "usage": "Tight line height for short text on one or two lines. Not for paragraph text."
   },
   {
     "path": "typography.line-height.snug",
@@ -1167,7 +1167,7 @@
     "dark": "{primitive.typography.line-height.snug}",
     "type": "number",
     "status": "active",
-    "usage": "Snug line height. Not for long-form reading content."
+    "usage": "Snug line height: FieldLabel draws it. Not for long-form reading content."
   },
   {
     "path": "typography.line-height.normal",
@@ -1203,7 +1203,7 @@
     "dark": "{primitive.typography.letter-spacing.tight}",
     "type": "dimension",
     "status": "active",
-    "usage": "Tight letter spacing for large headings. Not for body text."
+    "usage": "Tight letter spacing for headings: Heading draws it at every level. Not for body text."
   },
   {
     "path": "typography.letter-spacing.normal",
@@ -1221,7 +1221,7 @@
     "dark": "{primitive.typography.letter-spacing.wide}",
     "type": "dimension",
     "status": "active",
-    "usage": "Wide letter spacing for small UI labels."
+    "usage": "Wide letter spacing for captions. No component draws it."
   },
   {
     "path": "typography.letter-spacing.wider",
@@ -1248,7 +1248,7 @@
     "dark": "{primitive.typography.font-weight.normal}",
     "type": "fontWeight",
     "status": "active",
-    "usage": "Normal weight for body text."
+    "usage": "Normal weight for body text, labels and descriptions."
   },
   {
     "path": "typography.font-weight.medium",
@@ -1257,7 +1257,7 @@
     "dark": "{primitive.typography.font-weight.medium}",
     "type": "fontWeight",
     "status": "active",
-    "usage": "Medium weight for UI labels and buttons."
+    "usage": "Medium weight for buttons, tabs, badges and component titles. A field label stays normal."
   },
   {
     "path": "typography.font-weight.semibold",
@@ -1266,7 +1266,7 @@
     "dark": "{primitive.typography.font-weight.semibold}",
     "type": "fontWeight",
     "status": "active",
-    "usage": "Semibold for sub-headings and emphasis."
+    "usage": "Semibold for headings: Heading draws it at every level."
   },
   {
     "path": "typography.font-weight.bold",
@@ -1275,7 +1275,7 @@
     "dark": "{primitive.typography.font-weight.bold}",
     "type": "fontWeight",
     "status": "active",
-    "usage": "Bold for headings and strong emphasis."
+    "usage": "Bold for strong emphasis a screen draws, and the logo."
   },
   {
     "path": "typography.font-family.sans",
@@ -1301,8 +1301,8 @@
     "light": "{primitive.radius.none}",
     "dark": "{primitive.radius.none}",
     "type": "dimension",
-    "status": "reserved",
-    "usage": "Zero radius — square corners. Use for full-bleed or table elements."
+    "status": "active",
+    "usage": "Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one."
   },
   {
     "path": "radius.xs",
@@ -1311,7 +1311,7 @@
     "dark": "{primitive.radius.xs}",
     "type": "dimension",
     "status": "active",
-    "usage": "Minimal rounding (0.4× base). Use for tags, badges, or tight UI chips."
+    "usage": "Minimal rounding (0.4× base). The legend and tooltip indicators of a chart."
   },
   {
     "path": "radius.sm",
@@ -1320,7 +1320,7 @@
     "dark": "{primitive.radius.sm}",
     "type": "dimension",
     "status": "active",
-    "usage": "Small rounding (0.6× base). Use for inputs, small buttons."
+    "usage": "Small rounding (0.6× base). For content a screen draws itself; no component uses it."
   },
   {
     "path": "radius.md",
@@ -1329,7 +1329,7 @@
     "dark": "{primitive.radius.md}",
     "type": "dimension",
     "status": "active",
-    "usage": "Medium rounding (0.8× base). Use for default buttons and form controls."
+    "usage": "Medium rounding (0.8× base). For content a screen draws itself; no component uses it."
   },
   {
     "path": "radius.lg",
@@ -1338,7 +1338,7 @@
     "dark": "{primitive.radius.lg}",
     "type": "dimension",
     "status": "active",
-    "usage": "Base rounding (1× = 0.625rem). Default for cards, panels, and shadcn --radius."
+    "usage": "Base rounding (1× = 0.625rem). For content a screen draws itself, and the shadcn --radius alias; no component reads it."
   },
   {
     "path": "radius.xl",
@@ -1347,7 +1347,7 @@
     "dark": "{primitive.radius.xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "Larger rounding (1.4× base). Use for modals and prominent containers."
+    "usage": "Larger rounding (1.4× base). For content a screen draws itself; no component uses it."
   },
   {
     "path": "radius.2xl",
@@ -1356,7 +1356,7 @@
     "dark": "{primitive.radius.2xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "Extra-large rounding (1.8× base). Use for floating panels."
+    "usage": "Extra-large rounding (1.8× base). For content a screen draws itself (a hero); no component uses it."
   },
   {
     "path": "radius.3xl",
@@ -1365,7 +1365,7 @@
     "dark": "{primitive.radius.3xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "Very large rounding (2.2× base). Use sparingly for decorative containers."
+    "usage": "Very large rounding (2.2× base). Use sparingly for decorative content; no component uses it."
   },
   {
     "path": "radius.4xl",
@@ -1374,7 +1374,7 @@
     "dark": "{primitive.radius.4xl}",
     "type": "dimension",
     "status": "active",
-    "usage": "Maximum rounding (2.6× base). Use only for hero cards or large chips."
+    "usage": "Maximum rounding (2.6× base). Use only for hero content; no component uses it."
   },
   {
     "path": "radius.full",
@@ -1383,7 +1383,7 @@
     "dark": "{primitive.radius.full}",
     "type": "dimension",
     "status": "reserved",
-    "usage": "Pill/full rounding. Use for pills, avatars, toggles."
+    "usage": "Pill/full rounding. A round shape: Avatar, RadioGroup and Switch draw rounded-full, a static class that reads no token."
   },
   {
     "path": "elevation.xs",
@@ -1464,7 +1464,7 @@
     "dark": "{primitive.motion.duration.fast}",
     "type": "duration",
     "status": "active",
-    "usage": "Fast micro-interactions (100ms). Use for hover/focus feedback."
+    "usage": "Fast micro-interactions (100ms). The default of a transition with no duration class: hover and focus feedback, and most overlays the components draw."
   },
   {
     "path": "motion.duration.normal",
@@ -1473,7 +1473,7 @@
     "dark": "{primitive.motion.duration.normal}",
     "type": "duration",
     "status": "active",
-    "usage": "Standard transition duration (200ms). Default for most transitions."
+    "usage": "Standard transition duration (200ms). For a fade or a move a screen draws itself, and the Sheet's slide."
   },
   {
     "path": "motion.duration.slow",
@@ -1482,7 +1482,7 @@
     "dark": "{primitive.motion.duration.slow}",
     "type": "duration",
     "status": "active",
-    "usage": "Slow, deliberate transitions (300ms). Use for modals and drawers."
+    "usage": "Slow, deliberate transitions (300ms). The NavigationMenu content without a viewport and its chevron, the MessageScrollerButton's exit; no modal or drawer uses it."
   },
   {
     "path": "motion.duration.slower",
@@ -1491,7 +1491,7 @@
     "dark": "{primitive.motion.duration.slower}",
     "type": "duration",
     "status": "active",
-    "usage": "Slowest transitions (500ms). Use only for complex animations."
+    "usage": "Slowest transitions (500ms). Use only for complex animations; no component uses it (the Drawer's own 500ms is vaul's)."
   },
   {
     "path": "motion.duration.extra-slow",
@@ -1500,7 +1500,7 @@
     "dark": "{primitive.motion.duration.extra-slow}",
     "type": "duration",
     "status": "active",
-    "usage": "Extra-slow duration (1000ms). Use for blink/pulse animations like caret blink."
+    "usage": "Extra-slow duration (1000ms), for a transition or animate-in and animate-out. No component uses it: a keyframe loop (caret-blink, pulse, spin) sets its own duration."
   },
   {
     "path": "motion.easing.default",

@@ -96,6 +96,18 @@ describe("InputOtp", () => {
     await expect.poll(activeSlots).toEqual([3])
   })
 
+  it("the fake caret blinks on its own timing, so it carries no duration class", async () => {
+    // animate-caret-blink sets its own 1.25s and reads neither
+    // transition-duration nor --tw-duration: a duration-* class beside it is
+    // dead, and motion.duration.extra-slow documents no component.
+    await userEvent.click(focusInput())
+    const caret = document.querySelector<HTMLElement>(".animate-caret-blink")
+    expect(caret).not.toBeNull()
+    expect(
+      [...caret!.classList].filter((c) => c.startsWith("duration-"))
+    ).toEqual([])
+  })
+
   it("Backspace: deletes the previous character", async () => {
     const input = focusInput()
     await userEvent.keyboard("123")

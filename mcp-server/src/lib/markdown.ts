@@ -109,6 +109,26 @@ export function mdCode(section: string): string {
   return m ? m[1].trim() : ""
 }
 
+/**
+ * The text with each line of a fenced code block emptied, the fence lines
+ * included, so a pattern matched on the rest never reads code. A `// ✅`
+ * comment inside an example titles the code under it: served alone, as a rule,
+ * it names nothing.
+ */
+export function mdWithoutCode(md: string): string {
+  let fenced = false
+  return md
+    .split("\n")
+    .map((line) => {
+      if (/^\s*(?:`{3,}|~{3,})/.test(line)) {
+        fenced = !fenced
+        return ""
+      }
+      return fenced ? "" : line
+    })
+    .join("\n")
+}
+
 /** A table's rows as objects keyed by its header: "Variant / props" → variant_props. */
 export function mdRecords(section: string): Record<string, string>[] {
   return mdTables(section).flatMap(({ header, rows }) =>

@@ -65,8 +65,10 @@ The scrolling thread of a conversation: it keeps the latest message in view as m
 | `color.background.subtle`  | `bg-muted`                                            | `MessageScrollerButton`                                                                         |
 | `color.border.default`     | `border-border`                                       | `MessageScrollerButton`                                                                         |
 | `color.text.default`       | `text-foreground`                                     | `MessageScrollerButton`                                                                         |
+| `motion.duration.fast`     | `transition-[translate,scale,opacity]`                | `MessageScrollerButton`                                                                         |
 | `motion.duration.normal`   | `duration-normal`                                     | `MessageScrollerButton`                                                                         |
 | `motion.duration.slow`     | `duration-slow`                                       | `MessageScrollerButton`                                                                         |
+| `motion.easing.default`    | `transition-[translate,scale,opacity]`                | `MessageScrollerButton`                                                                         |
 | `motion.easing.in`         | `ease-in`                                             | `MessageScrollerButton`                                                                         |
 | `motion.easing.out`        | `ease-out`                                            | `MessageScrollerButton`                                                                         |
 | `space.scale.0`            | `min-h-0` · `min-w-0` · `translate-y-0`               | `MessageScrollerButton` · `MessageScrollerItem` · `MessageScrollerViewport` · `MessageScroller` |

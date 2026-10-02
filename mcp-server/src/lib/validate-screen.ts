@@ -124,7 +124,7 @@ export const SCREEN_RULES: LineRule[] = [
     severity: "warning",
     pattern: /border-radius\s*:\s*\d/,
     message: () =>
-      "Raw border-radius found. Use DS radius tokens (rounded-sm, rounded-md, rounded-lg, etc.)",
+      "Raw border-radius found. The components are square: draw yours square too (no radius class), use rounded-full for a round shape, or a DS radius token (rounded-lg, rounded-xl…) for content such as an image",
   },
   {
     rule: "no-raw-duration",

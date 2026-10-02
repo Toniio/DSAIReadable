@@ -74,6 +74,7 @@ const UTILITY_NAMESPACES = [
   "--color-",
   "--container-",
   "--default-border-width",
+  "--default-transition-",
   "--drop-shadow-",
   "--ease-",
   "--font-",

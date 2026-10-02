@@ -26,6 +26,7 @@ import {
   mdSection,
   mdTable,
   mdTables,
+  mdWithoutCode,
 } from "../lib/markdown.js"
 import { parsePattern, patternFiles } from "../lib/patterns.js"
 
@@ -770,13 +771,15 @@ function generateUxWriting() {
     const md = readFileSync(path.join(foundationsDir, f), "utf-8")
     const source = f.replace(".md", "")
 
-    // Extract Do/Don't lines
+    // Extract Do/Don't lines. A ✅/❌ comment inside a code example titles the
+    // code under it ("✅ Standard card"): served alone it is no rule.
+    const prose = mdWithoutCode(md)
     const doRegex = /[✅❌]\s*(.+)/g
     let m
-    while ((m = doRegex.exec(md)) !== null) {
+    while ((m = doRegex.exec(prose)) !== null) {
       // A ✅/❌ inside a table row is a column header, not a rule.
-      const lineStart = md.lastIndexOf("\n", m.index) + 1
-      if (md.startsWith("|", lineStart)) continue
+      const lineStart = prose.lastIndexOf("\n", m.index) + 1
+      if (prose.startsWith("|", lineStart)) continue
       generalRules.push({ rule: m[0].trim(), source: `${source}.md` })
     }
 

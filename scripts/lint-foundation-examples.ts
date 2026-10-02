@@ -18,6 +18,11 @@
  *   A fragment holds JSX only: a statement there would become JSX text, which
  *   no rule reads, so it is an error;
  * - a block that does not parse is an error at its line;
+ * - `Label`, `FieldLabel` and `Heading` draw their own text style (12px
+ *   regular, and the size of the level), so a size, font, tracking or leading
+ *   class on one is an error, and so is a raw `<h1>` to `<h6>`, which is
+ *   `<Heading level>` (typography.md): a foundation that wrote a style by hand
+ *   put it in every screen built from it;
  * - a counter-example, from a `// ❌` line to the next blank line or `// ✅` /
  *   `// ❌` line, may break a class rule (the one it illustrates), never use a
  *   native element, an external UI kit or an inline SVG.
@@ -28,6 +33,8 @@
 import { readdirSync, readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+
+import ts from "typescript"
 
 import { designSystemLinter } from "../evals/lib/static"
 import { foundationBlocks, isCompleteModule } from "../tests/spec-examples"
@@ -116,6 +123,86 @@ function counterExampleLines(code: string): Set<number> {
   return lines
 }
 
+/** The components that draw their own text style: they take no class that sets one. */
+const SELF_STYLED = new Set(["Label", "FieldLabel", "Heading"])
+/** A class that sets a text style: a size (not a color: `text-muted-foreground`), a font, a tracking or a leading. */
+const TEXT_STYLE_CLASS =
+  /^(?:text-(?:xs|sm|base|lg|xl|[2-9]xl)(?:\/.+)?|font-.+|tracking-.+|leading-.+)$/
+
+/** The utility of a class once its variants (`md:`, `data-[x=y]:`) are set aside. */
+function utilityOf(token: string) {
+  let depth = 0
+  let last = -1
+  for (let i = 0; i < token.length; i++) {
+    const c = token[i]
+    if (c === "[" || c === "(") depth++
+    else if (c === "]" || c === ")") depth--
+    else if (c === ":" && depth === 0) last = i
+  }
+  return token.slice(last + 1).replace(/^!|!$/g, "")
+}
+
+interface TextStyleFinding {
+  /** The line of `source`, from 1. */
+  line: number
+  message: string
+}
+
+/** The text style set by hand on a self-styled component, and the raw headings, of a module. */
+function textStyleFindings(source: string): TextStyleFinding[] {
+  const file = ts.createSourceFile(
+    "block.tsx",
+    source,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX
+  )
+  const found: TextStyleFinding[] = []
+  const lineOf = (node: ts.Node) =>
+    file.getLineAndCharacterOfPosition(node.getStart(file)).line + 1
+  const visit = (node: ts.Node) => {
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const tag = node.tagName.getText(file)
+      if (/^h[1-6]$/.test(tag))
+        found.push({
+          line: lineOf(node),
+          message: `a raw <${tag}>: write <Heading level={${tag[1]}}>, which draws the heading's size, weight and tracking`,
+        })
+      if (SELF_STYLED.has(tag))
+        for (const attribute of node.attributes.properties) {
+          if (
+            !ts.isJsxAttribute(attribute) ||
+            attribute.name.getText(file) !== "className" ||
+            !attribute.initializer
+          )
+            continue
+          const strings: string[] = []
+          const collect = (child: ts.Node) => {
+            if (
+              ts.isStringLiteral(child) ||
+              ts.isNoSubstitutionTemplateLiteral(child) ||
+              ts.isTemplateHead(child) ||
+              ts.isTemplateMiddle(child) ||
+              ts.isTemplateTail(child)
+            )
+              strings.push(child.text)
+            ts.forEachChild(child, collect)
+          }
+          collect(attribute.initializer)
+          for (const token of strings.flatMap((text) => text.split(/\s+/)))
+            if (token && TEXT_STYLE_CLASS.test(utilityOf(token)))
+              found.push({
+                line: lineOf(attribute),
+                message: `<${tag}> draws its own text style: remove "${token}" (typography.md, Usage Rules 2)`,
+              })
+        }
+    }
+    ts.forEachChild(node, visit)
+  }
+  visit(file)
+  return found
+}
+
 const eslint = designSystemLinter(ROOT, { allowInlineConfig: false })
 const errors: string[] = []
 const files = readdirSync(resolve(ROOT, DIR))
@@ -148,6 +235,14 @@ for (const file of files) {
     const [result] = await eslint.lintText(source, {
       filePath: resolve(ROOT, DIR, `${file}.${block.line}.tsx`),
     })
+    for (const finding of textStyleFindings(source)) {
+      const line = origin[finding.line - 1] || last + 1
+      if (counter.has(line)) {
+        allowed++
+        continue
+      }
+      errors.push(`${DIR}/${file}:${block.line + line} ${finding.message}`)
+    }
     for (const message of result.messages) {
       // A warning with no rule is ESLint saying the file was ignored: nothing was checked.
       if (message.severity !== 2 && message.ruleId !== null) continue

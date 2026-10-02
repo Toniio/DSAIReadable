@@ -98,7 +98,7 @@
     "radius": {
       "$value": "{radius.lg}",
       "$type": "dimension",
-      "$description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem), the canonical border-radius used across shadcn components."
+      "$description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem). No component reads it: radix-lyra draws every component with rounded-none."
     },
     "chart-1": {
       "$value": "{color.chart.1}",

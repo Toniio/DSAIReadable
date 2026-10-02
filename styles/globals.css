@@ -147,6 +147,11 @@
   --ease-in: var(--motion-easing-in);
   --ease-out: var(--motion-easing-out);
   --ease-spring: var(--motion-easing-spring);
+  /* A transition with no duration class (transition-colors, transition-all…)
+     takes Tailwind's own default duration and curve, which no token holds:
+     here it reads motion.duration.fast and motion.easing.default instead. */
+  --default-transition-duration: var(--motion-duration-fast);
+  --default-transition-timing-function: var(--motion-easing-default);
 
   /* Opacity → opacity-disabled, for every disabled state
      (disabled:, data-disabled:, aria-disabled:…). ESLint refuses

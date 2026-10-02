@@ -182,13 +182,21 @@ function unexplained(map: RetokenizeMap, same: Equivalence): string[] {
     rules(`map.files.${item}.classes`, rule.classes)
     rules(`map.files.${item}.utilities`, rule.utilities)
   }
-  for (const [from, replacement] of Object.entries(map.values))
-    check(
-      "map.values",
-      from,
-      replacement,
-      same.sameValue(from, replacementOf(replacement))
-    )
+  const values = (
+    where: string,
+    entries: Record<string, Replacement> | undefined
+  ) => {
+    for (const [from, replacement] of Object.entries(entries ?? {}))
+      check(
+        where,
+        from,
+        replacement,
+        same.sameValue(from, replacementOf(replacement))
+      )
+  }
+  values("map.values", map.values)
+  for (const [item, rule] of Object.entries(map.files))
+    values(`map.files.${item}.values`, rule.values)
   return out
 }
 

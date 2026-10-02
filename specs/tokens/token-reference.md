@@ -245,7 +245,7 @@ the status says what the code does.
 
 | Token         | CSS variable    | Type      | Status   | Value      | Tailwind       |
 | ------------- | --------------- | --------- | -------- | ---------- | -------------- |
-| `radius.none` | `--radius-none` | dimension | reserved | `0rem`     | `rounded-none` |
+| `radius.none` | `--radius-none` | dimension | active   | `0rem`     | `rounded-none` |
 | `radius.xs`   | `--radius-xs`   | dimension | active   | `0.25rem`  | `rounded-xs`   |
 | `radius.sm`   | `--radius-sm`   | dimension | active   | `0.375rem` | `rounded-sm`   |
 | `radius.md`   | `--radius-md`   | dimension | active   | `0.5rem`   | `rounded-md`   |
@@ -258,9 +258,9 @@ the status says what the code does.
 
 **Usage rules**
 
-| Scope      | ✅ Do                                                                                      | ❌ Don't                                              |
-| ---------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
-| `radius.*` | `radius.lg` for cards; `radius.md` for buttons; `radius.full` for avatars and pill badges. | No arbitrary values — always a token from the system. |
+| Scope      | ✅ Do                                                                                                                                                   | ❌ Don't                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `radius.*` | Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero). | No arbitrary values, always a token from the system; no `rounded-*` class on a component. |
 
 ---
 
@@ -286,24 +286,24 @@ the status says what the code does.
 
 ## Motion
 
-| Token                        | CSS variable                   | Type        | Status   | Value                                     | Tailwind          |
-| ---------------------------- | ------------------------------ | ----------- | -------- | ----------------------------------------- | ----------------- |
-| `motion.duration.instant`    | `--motion-duration-instant`    | duration    | reserved | `0ms`                                     | —                 |
-| `motion.duration.fast`       | `--motion-duration-fast`       | duration    | active   | `100ms`                                   | `duration-fast`   |
-| `motion.duration.normal`     | `--motion-duration-normal`     | duration    | active   | `200ms`                                   | `duration-normal` |
-| `motion.duration.slow`       | `--motion-duration-slow`       | duration    | active   | `300ms`                                   | `duration-slow`   |
-| `motion.duration.slower`     | `--motion-duration-slower`     | duration    | active   | `500ms`                                   | `duration-slower` |
-| `motion.duration.extra-slow` | `--motion-duration-extra-slow` | duration    | active   | `1000ms`                                  | —                 |
-| `motion.easing.default`      | `--motion-easing-default`      | cubicBezier | active   | `cubic-bezier(0.4, 0, 0.2, 1)`            | `ease-default`    |
-| `motion.easing.in`           | `--motion-easing-in`           | cubicBezier | active   | `cubic-bezier(0.4, 0, 1, 1)`              | `ease-in`         |
-| `motion.easing.out`          | `--motion-easing-out`          | cubicBezier | active   | `cubic-bezier(0, 0, 0.2, 1)`              | `ease-out`        |
-| `motion.easing.spring`       | `--motion-easing-spring`       | cubicBezier | active   | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | `ease-spring`     |
+| Token                        | CSS variable                   | Type        | Status   | Value                                     | Tailwind              |
+| ---------------------------- | ------------------------------ | ----------- | -------- | ----------------------------------------- | --------------------- |
+| `motion.duration.instant`    | `--motion-duration-instant`    | duration    | reserved | `0ms`                                     | —                     |
+| `motion.duration.fast`       | `--motion-duration-fast`       | duration    | active   | `100ms`                                   | `duration-fast`       |
+| `motion.duration.normal`     | `--motion-duration-normal`     | duration    | active   | `200ms`                                   | `duration-normal`     |
+| `motion.duration.slow`       | `--motion-duration-slow`       | duration    | active   | `300ms`                                   | `duration-slow`       |
+| `motion.duration.slower`     | `--motion-duration-slower`     | duration    | active   | `500ms`                                   | `duration-slower`     |
+| `motion.duration.extra-slow` | `--motion-duration-extra-slow` | duration    | active   | `1000ms`                                  | `duration-extra-slow` |
+| `motion.easing.default`      | `--motion-easing-default`      | cubicBezier | active   | `cubic-bezier(0.4, 0, 0.2, 1)`            | `ease-default`        |
+| `motion.easing.in`           | `--motion-easing-in`           | cubicBezier | active   | `cubic-bezier(0.4, 0, 1, 1)`              | `ease-in`             |
+| `motion.easing.out`          | `--motion-easing-out`          | cubicBezier | active   | `cubic-bezier(0, 0, 0.2, 1)`              | `ease-out`            |
+| `motion.easing.spring`       | `--motion-easing-spring`       | cubicBezier | active   | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | `ease-spring`         |
 
 **Usage rules**
 
-| Scope      | ✅ Do                                                                  | ❌ Don't                                                          |
-| ---------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `motion.*` | `duration-normal` with `ease-default` as the universal starting point. | Never hard-code durations or easings — always use the CSS tokens. |
+| Scope      | ✅ Do                                                                                                                                                  | ❌ Don't                                                          |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| `motion.*` | A transition with no duration class runs at `duration-fast` with `ease-default`; add `duration-normal` only to a fade or a move a screen draws itself. | Never hard-code durations or easings — always use the CSS tokens. |
 
 ---
 

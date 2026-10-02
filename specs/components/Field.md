@@ -34,6 +34,7 @@ A layout system for form fields: it ties a label to its control, carries the inv
 - **MUST** — keep `FieldLegend variant="legend"` for `<fieldset>`s; everywhere else, `variant="label"`
 - **Note** — `FieldError` renders nothing without `children` or a non-empty `errors`
 - **MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`
+- **MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)
 
 ## Dependencies
 

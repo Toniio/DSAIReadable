@@ -140,6 +140,8 @@
           "ease-in": "var(--motion-easing-in)",
           "ease-out": "var(--motion-easing-out)",
           "ease-spring": "var(--motion-easing-spring)",
+          "default-transition-duration": "var(--motion-duration-fast)",
+          "default-transition-timing-function": "var(--motion-easing-default)",
           "opacity-disabled": "var(--opacity-disabled)",
           "spacing-0": "var(--space-scale-0)",
           "spacing-0\\.5": "var(--space-scale-0-5)",

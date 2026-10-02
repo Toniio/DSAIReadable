@@ -275,11 +275,7 @@
     "values": {
       "var(--popover)": "var(--color-popover)",
       "var(--popover-foreground)": "var(--color-popover-foreground)",
-      "var(--border)": "var(--color-border)",
-      "var(--radius)": {
-        "to": "var(--radius-md)",
-        "reason": "The Sonner toast radius var(--radius), which is radius.lg (10px), becomes var(--radius-md), radius.md (8px). Sonner's spec lists radius.md for it; the reason for 8px over 10px is not recorded."
-      }
+      "var(--border)": "var(--color-border)"
     },
     "files": {
       "popover": {
@@ -477,6 +473,16 @@
           "z-10": {
             "to": "z-dropdown",
             "reason": "z-10 is 10; z-dropdown is 1000. The active OTP slot, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          },
+          "duration-1000": {
+            "to": "",
+            "reason": "radix-lyra's caret carries animate-caret-blink and duration-1000 together, but animate-caret-blink sets its own 1.25s and never reads transition-duration or --tw-duration, so the class timed nothing. It is dropped; the caret blinks as before."
+          }
+        },
+        "classes": {
+          "cn-input-otp": {
+            "to": "",
+            "reason": "A marker class of shadcn's style sheet: the shadcn CLI replaces it with the style's rules when it installs the component, and the design system has no such rule, so it draws nothing. input-otp targets .cn-input-otp from its own stylesheet; nothing here does."
           }
         }
       },
@@ -661,6 +667,20 @@
           "group-has-disabled/field:opacity-50": {
             "to": "group-has-[[data-slot=checkbox]:disabled]/field:opacity-disabled",
             "reason": "group-has-disabled matches any disabled control of the Field, so an enabled Checkbox next to a disabled input (\"Other: [text]\") was dimmed to 0.5. The checkbox mirrors a disabled checkbox of its Field only, [data-slot=checkbox]; its own disabled state is drawn by disabled:opacity-disabled. opacity-50 is opacity-disabled, as everywhere."
+          }
+        }
+      },
+      "sonner": {
+        "classes": {
+          "cn-toast": {
+            "to": "",
+            "reason": "A marker class of shadcn's style sheet (.cn-toast { rounded-none } in radix-lyra), which the CLI does not resolve inside toastOptions.classNames: it survives as a class that draws nothing. The toast's square corners are drawn by --border-radius below, the only lever Sonner's own unlayered border-radius rule leaves."
+          }
+        },
+        "values": {
+          "var(--radius)": {
+            "to": "var(--radius-none)",
+            "reason": "The Sonner toast radius var(--radius), which is radius.lg (10px), becomes var(--radius-none), 0: radix-lyra's style sheet makes every surface square, the toast included (.cn-toast { rounded-none }), but its marker class is never resolved, so upstream's installed toast is rounded. Square, like Card, Popover and Dialog."
           }
         }
       }

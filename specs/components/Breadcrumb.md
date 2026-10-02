@@ -55,6 +55,8 @@ Secondary navigation that shows the path to the current page, so the user can cl
 | -------------------------------- | ----------------------- | ----------------------------------- |
 | `color.text.default`             | `text-foreground`       | `BreadcrumbLink` · `BreadcrumbPage` |
 | `color.text.subtle`              | `text-muted-foreground` | `BreadcrumbList`                    |
+| `motion.duration.fast`           | `transition-colors`     | `BreadcrumbLink`                    |
+| `motion.easing.default`          | `transition-colors`     | `BreadcrumbLink`                    |
 | `space.scale.1`                  | `gap-1`                 | `BreadcrumbItem`                    |
 | `space.scale.1-5`                | `gap-x-1.5`             | `BreadcrumbList`                    |
 | `space.scale.2`                  | `gap-y-2`               | `BreadcrumbList`                    |
