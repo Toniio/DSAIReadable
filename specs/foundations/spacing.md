@@ -196,14 +196,18 @@ token.
 
 ### Arbitrary values: reading a token is free, computing one is not
 
-**In a screen, there is no arbitrary value at all**: `@dsaireadable/eslint-plugin` (`dsaireadable/no-raw-values`) rejects every `x-[…]` class. Use a step of the scale or a class of the design system. The rule below applies to the design system's own components, in `components/ui/`.
+**In a screen, there is no arbitrary value at all**: `@dsaireadable/eslint-plugin` (`dsaireadable/no-raw-values`) rejects every `x-[…]` class, `top-[50%]` and `grid-cols-[auto_1fr]` included. Use a step of the scale or a class of the design system (`w-sidebar`, `max-w-5xl`, `top-1/2`, `grid-cols-2`).
+
+When no class reads a token or a runtime variable (`--radix-popover-trigger-width`, `--color-chart-sequential-3`), write Tailwind's shorthand, `utility-(--variable)`: `w-(--radix-popover-trigger-width)`, `bg-(--color-chart-sequential-3)`, and `text-(length:--x)` where the utility could read a color or a size. Never `w-[var(--…)]`, which the plugin rejects and answers with the shorthand, and never `w-[--…]`, which compiles to the invalid `width: --…`. The shorthand is for a variable with no class: where a class exists, `p-(--space-scale-4)` is a spelling you did not need, write `p-4`. A `style` prop may read a token too (`style={{ width: "var(--sidebar-width)" }}`), after a class has been ruled out.
+
+The rule below applies to the design system's own components, in `components/ui/`.
 
 A Tailwind arbitrary value (`w-[…]`, `gap-[…]`, `grid-cols-[…]`…) is allowed
 without justification as long as it **reads** a decision without making one:
 
 | Allowed without justification        | Why                                                     |
 | ------------------------------------ | ------------------------------------------------------- |
-| `w-[var(--sidebar-width)]`           | reads a token; changing the token changes the component |
+| `w-(--sidebar-width)`                | reads a token; changing the token changes the component |
 | `[--cell-size:var(--space-scale-7)]` | reads a step of the spacing scale                       |
 | `top-[50%]`                          | relative to the parent box, not a design value          |
 | `grid-cols-[auto_1fr]`               | describes a structure, not a size                       |

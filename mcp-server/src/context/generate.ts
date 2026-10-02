@@ -1185,6 +1185,7 @@ function generateDatavizCatalog() {
       anatomy: ["grid", "cells", "color_scale", "tooltip", "axes"],
       do: [
         "Use the sequential palette color.chart.sequential.1 to 5 (lightest to darkest)",
+        "Read each step through Tailwind's shorthand, bg-(--color-chart-sequential-N): the sequential palette has no Tailwind class, and bg-[var(--…)] is rejected",
         "Add labels inside the cells when there is room",
       ],
       dont: [

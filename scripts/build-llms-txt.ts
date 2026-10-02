@@ -182,7 +182,7 @@ const text = [
   "",
   "> An AI-readable design system for React 19, Next.js 16 and Tailwind CSS v4, built on shadcn/ui. Components install from a shadcn registry as source code; tokens, specs and composition rules are published as structured files an agent can read, and a local MCP server serves them as tools.",
   "",
-  "Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes or `var(--…)` tokens, never a raw value (hex, `px`, `rem`, `ms`); and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections. A screen that carries out a common task (create, edit, delete, filter, search, sign in, settings) starts from its page pattern.",
+  "Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes, and reads a token that has no class through Tailwind's `(--…)` shorthand (`w-(--sidebar-width)`), never a raw value (hex, `px`, `rem`, `ms`) or a `[var(--…)]` arbitrary class; and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections. A screen that carries out a common task (create, edit, delete, filter, search, sign in, settings) starts from its page pattern.",
   "",
   `Every link points to the release tag \`${TAG}\`, the published version, not to \`main\`, which can be ahead of it.`,
   "",

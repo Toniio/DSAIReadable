@@ -13,7 +13,7 @@ import {
 import { validateCode } from "./lib/validate-code.js"
 import plugin from "@dsaireadable/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
-import { Linter } from "eslint"
+import { ESLint, Linter } from "eslint"
 import { parseChangelog } from "./lib/changelog.js"
 import { exportDocs } from "./lib/jsdoc.js"
 import {
@@ -951,6 +951,82 @@ assert(
       /FieldLabel[^.]*no text-\*, font-\*, tracking-\* or leading-\*/.test(line)
     ),
   "The styling rule says the components are square and a label draws its own text style"
+)
+
+// The styling rule is served in every prompt and by get_design_rules, and it
+// had drifted from the plugin more than once (an inline style it forbade and
+// the plugin allows, a class it called valid and no stylesheet generates).
+// Every `do` goes through the plugin's `recommended` config, the one a project
+// runs, with styles/globals.css as the entry point of its Tailwind half: it
+// must lint clean. Every `dont` that names a class or a value must fail it.
+// A `dont` that is a convention, valid on purpose, is listed here by name.
+const CONVENTION_DONTS: Record<string, string> = {
+  "rounded-md on a Button, rounded-lg on a Card or rounded-xl on a Dialog":
+    "valid classes: the components are square by convention, which no stylesheet or lint rule enforces",
+}
+const ruleLinter = new ESLint({
+  cwd: resolve(__dirname, "../.."),
+  overrideConfigFile: true,
+  overrideConfig: [
+    {
+      files: ["**/*.tsx"],
+      languageOptions: {
+        parser: tsParser as Linter.Parser,
+        parserOptions: { ecmaFeatures: { jsx: true } },
+      },
+    },
+    ...(plugin.configs.recommended as unknown as Linter.Config[]),
+  ],
+})
+/** The code of a rule line: what precedes " — " (a `dont`), then a trailing "(…)" explanation. */
+const codeOfRuleLine = (line: string) =>
+  line
+    .split(" — ")[0]
+    .replace(/\s\([^)]*\).*$/, "")
+    .trim()
+const lintRuleLine = async (code: string) => {
+  const attribute = code.startsWith("style=")
+    ? code
+    : `className=${JSON.stringify(code)}`
+  const [result] = await ruleLinter.lintText(
+    `export default function Example() { return <div ${attribute} /> }\n`,
+    { filePath: resolve(__dirname, "../../screens/tailwind-rule.tsx") }
+  )
+  return result.messages.filter((m) => m.severity === 2 || m.fatal)
+}
+const doesNotLint: string[] = []
+for (const line of TAILWIND_RULE.do) {
+  const messages = await lintRuleLine(codeOfRuleLine(line))
+  if (messages.length > 0)
+    doesNotLint.push(`${line} (${messages.map((m) => m.message).join("; ")})`)
+}
+assert(
+  doesNotLint.length === 0,
+  `Every "do" of the styling rule passes the plugin's recommended config (${doesNotLint.join(" | ") || "all"})`
+)
+const lintsClean: string[] = []
+const exempted = new Set<string>()
+for (const line of TAILWIND_RULE.dont) {
+  const code = codeOfRuleLine(line)
+  if (CONVENTION_DONTS[code]) {
+    exempted.add(code)
+    continue
+  }
+  if ((await lintRuleLine(code)).length === 0) lintsClean.push(line)
+}
+assert(
+  lintsClean.length === 0,
+  `Every "dont" of the styling rule fails the plugin's recommended config, bar the conventions listed (${lintsClean.join(" | ") || "all"})`
+)
+assert(
+  Object.keys(CONVENTION_DONTS).every((code) => exempted.has(code)),
+  "Every exempted convention is still a line of the styling rule"
+)
+assert(
+  (await lintRuleLine("w-[var(--sidebar-width)]")).some((m) =>
+    m.message.includes("w-(--sidebar-width)")
+  ),
+  "The plugin answers a bracketed variable with the shorthand the styling rule teaches"
 )
 
 const uxRules = (

@@ -23,6 +23,7 @@ export const TAILWIND_RULE = {
     "Every component is square and draws its own corners: add no rounded-* class to one, and keep a surface you draw yourself square too. rounded-full is for a round shape; rounded-xs … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero.",
     "For shadows, use: shadow-xs … shadow-2xl (mapped to --elevation-*).",
     "For a disabled state, use opacity-disabled under its variant: disabled:opacity-disabled.",
+    "A class comes first. For a token or a runtime variable that has no class, use Tailwind's shorthand utility-(--variable): w-(--radix-popover-trigger-width), bg-(--color-chart-sequential-3); never a bracket, w-[var(--…)]. An inline style may read a token too, style={{ width: 'var(--sidebar-width)' }}, but never a raw value.",
   ],
   token_chain_explanation: {
     description:
@@ -54,11 +55,14 @@ export const TAILWIND_RULE = {
     "shadow-sm shadow-md",
     "text-xs text-sm text-base font-normal font-medium (FieldLabel, Button and Heading need none)",
     "disabled:opacity-disabled",
+    "w-(--radix-popover-trigger-width) bg-(--color-chart-sequential-3) (a variable with no class: the shorthand)",
+    "style={{ width: 'var(--sidebar-width)' }} (a token read in an inline style)",
   ],
   dont: [
     "bg-[#432dd7] — NEVER use arbitrary hex colors",
     "text-[var(--ds-prim-color-violet-600)] — NEVER reference primitive tokens directly",
-    "style={{ color: 'var(--color-text-default)' }} — NEVER use inline styles with CSS variables",
+    "w-[var(--sidebar-width)] — NEVER bracket a variable: write w-(--sidebar-width)",
+    "style={{ padding: '12px' }} — NEVER use a raw value in an inline style",
     "bg-violet-600 — NEVER use Tailwind's default palette: it is removed, use DS semantic classes",
     "p-[1.5rem] — NEVER use arbitrary spacing values, use the spacing scale",
     "p-13 text-7xl font-serif — NEVER: off-scale classes generate no CSS",
