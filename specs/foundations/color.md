@@ -142,7 +142,8 @@ and every pair stays distinct under normal vision, protanopia and deuteranopia
 **Sequential** — **ordered** data (intensity, density, heatmaps). The steps
 differ only in lightness, from lightest to darkest; they do not separate
 categories. Status `reserved`: no component uses it yet, and it has no Tailwind
-class — read it through `var(--color-chart-sequential-N)`.
+class — read it through Tailwind's shorthand, `bg-(--color-chart-sequential-N)`
+(`fill-(--color-chart-sequential-N)` in an SVG), never `bg-[var(--…)]`.
 
 | Token                      | CSS Variable                 | Value (both modes)  |
 | -------------------------- | ---------------------------- | ------------------- |

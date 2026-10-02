@@ -9,6 +9,14 @@ const PALETTE_CLASS = new RegExp(
   `^!?-?(?:bg|text|border|ring|fill|stroke|from|via|to|outline|divide|accent|caret|decoration|shadow)-(?:${PALETTE})-\\d{2,3}(?:/.+)?$`
 )
 const ARBITRARY_VALUE = /^!?-?[a-z][\w-]*-\[/
+/**
+ * An arbitrary value that holds one CSS variable and nothing else, written
+ * `[var(--x)]` or, from Tailwind v3, `[--x]` (which compiles to the invalid
+ * `width: --x`): the utility before it, an optional type hint, the variable,
+ * and what follows (an opacity modifier).
+ */
+const VARIABLE_BRACKET =
+  /^(!?-?[a-z][\w-]*-)\[(?:([a-z][\w-]*):)?(?:var\((--[\w-]+)\)|(--[\w-]+))\](.*)$/
 const HEX = /#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![\w-])/
 const COLOR_FUNCTION = /\b(?:rgba?|hsla?|oklch|oklab|lab|lch|color-mix)\s*\(/
 const RAW_UNIT = /(?<![\w.-])\d*\.?\d+(?:px|rem|ms)\b/
@@ -26,11 +34,26 @@ function utilityOf(token: string): string {
   return token.slice(start)
 }
 
+/**
+ * The shorthand for a utility that reads a variable (`w-[var(--x)]` →
+ * `w-(--x)`), or `undefined` when the bracket holds more than a variable, or a
+ * private primitive token, which the shorthand would not make public.
+ */
+function shorthandOf(utility: string): string | undefined {
+  const match = VARIABLE_BRACKET.exec(utility)
+  if (!match) return undefined
+  const [, utilityName, hint, fromVar, bare, rest] = match
+  const variable = fromVar ?? bare
+  if (variable.startsWith("--ds-prim-")) return undefined
+  return `${utilityName}(${hint ? `${hint}:` : ""}${variable})${rest}`
+}
+
 type MessageId =
   | "hex"
   | "colorFunction"
   | "palette"
   | "arbitrary"
+  | "variableShorthand"
   | "unit"
   | "primitive"
   | "mediaDark"
@@ -51,6 +74,8 @@ export default createRule<[], MessageId>({
         'Tailwind default palette class "{{value}}": the palette is removed from this design system. Use a semantic class (bg-primary, text-muted-foreground…).',
       arbitrary:
         'Arbitrary Tailwind value "{{value}}". Use a class the design system maps to a token (p-4, rounded-md, duration-fast…).',
+      variableShorthand:
+        'Tailwind reads a CSS variable in parentheses: write "{{fix}}", not "{{value}}". Use a class of the design system where one exists (p-4, w-sidebar, bg-primary), and this shorthand only for a variable that has none.',
       unit: 'Raw value "{{value}}" in an inline style. Use a token class instead of px, rem or ms.',
       primitive:
         "Primitive tokens are private (Tier 1): use a semantic token (var(--color-…)) or its Tailwind class.",
@@ -64,8 +89,8 @@ export default createRule<[], MessageId>({
     const check = (node: TSESTree.Node) => {
       const text = textOf(node)
       if (text === undefined) return
-      const report = (messageId: MessageId, value = "") =>
-        context.report({ node, messageId, data: { value } })
+      const report = (messageId: MessageId, value = "", fix = "") =>
+        context.report({ node, messageId, data: { value, fix } })
 
       // Wherever they are written.
       if (text.includes("--ds-prim-")) report("primitive")
@@ -90,7 +115,17 @@ export default createRule<[], MessageId>({
         if (hex) report("hex", hex[0])
         else if (fn) report("colorFunction", fn[0].replace(/\s*\($/, "()"))
         else if (PALETTE_CLASS.test(utility)) report("palette", utility)
-        else if (ARBITRARY_VALUE.test(utility)) report("arbitrary", utility)
+        else if (ARBITRARY_VALUE.test(utility)) {
+          const shorthand = shorthandOf(utility)
+          // The variants stay: `hover:w-[var(--x)]` → `hover:w-(--x)`.
+          if (shorthand)
+            report(
+              "variableShorthand",
+              token,
+              token.slice(0, token.length - utility.length) + shorthand
+            )
+          else report("arbitrary", utility)
+        }
       }
     }
     return { Literal: check, TemplateElement: check }

@@ -60,8 +60,12 @@ Call `dsaireadable_get_tokens` only for a token no rule names.
   `@phosphor-icons/react`, nothing else. Never import a stylesheet.
 - Style only with the design system's Tailwind classes, which map to its
   semantic tokens. Tailwind's default palette, spacing and type scale are
-  removed: `bg-blue-500`, `p-13`, `text-7xl` and arbitrary values (`p-[13px]`)
-  generate nothing. Never write a raw color, length or duration.
+  removed: `bg-blue-500`, `p-13` and `text-7xl` generate nothing. An arbitrary
+  value (`p-[13px]`) is not removed: it generates its raw value, and the ESLint
+  plugin and `dsaireadable_validate_code` are what refuse it. A token or a
+  runtime variable with no class is read through Tailwind's shorthand,
+  `w-(--radix-popover-trigger-width)`, never `w-[var(--…)]`. Never write a raw
+  color, length or duration.
 - One class serves both color modes: dark mode is the `.dark` class on
   `<html>`, and each semantic class already resolves to its dark value under
   it. Never pick a color per mode.

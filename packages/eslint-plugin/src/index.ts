@@ -76,7 +76,8 @@ const core = (ignores: string[]): TSESLint.FlatConfig.Config => ({
  * The Tailwind half of the lockdown, which does read the real stylesheet:
  * `styles/globals.css` removes Tailwind's default colors, radii, shadows,
  * spacing and type scale, so `bg-red-500` or `p-13` generate no CSS, and this
- * turns the same class into an error before it ships. Point
+ * turns the same class into an error before it ships, and `--fix` writes a
+ * CSS variable in Tailwind's shorthand, `w-(--x)`. Point
  * `settings["better-tailwindcss"].entryPoint` at your stylesheet if it is not
  * `styles/globals.css`.
  */
@@ -91,6 +92,8 @@ const tailwind = (ignores: string[]): TSESLint.FlatConfig.Config => ({
   settings: { "better-tailwindcss": { entryPoint: "styles/globals.css" } },
   rules: {
     "better-tailwindcss/no-unknown-classes": "error",
+    // `w-[var(--x)]` and the v3 `w-[--x]` become `w-(--x)`, variants kept.
+    "better-tailwindcss/enforce-consistent-variable-syntax": "error",
     "better-tailwindcss/no-restricted-classes": [
       "error",
       {

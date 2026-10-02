@@ -5,9 +5,11 @@
  *   npm test -w @dsaireadable/eslint-plugin
  */
 import tsParser from "@typescript-eslint/parser"
-import { Linter, RuleTester } from "eslint"
+import { ESLint, Linter, RuleTester } from "eslint"
 import assert from "node:assert/strict"
+import { dirname, resolve } from "node:path"
 import { describe, it } from "node:test"
+import { fileURLToPath } from "node:url"
 import plugin from "./index.js"
 import noClassInterpolation from "./rules/no-class-interpolation.js"
 import noDeprecatedImports from "./rules/no-deprecated-imports.js"
@@ -194,6 +196,8 @@ tester.run("no-raw-values", asEslint(noRawValues), {
     `const a = <div className="bg-primary text-primary-foreground p-4 dark:bg-muted" />`,
     `const a = <div className="data-[state=open]:bg-accent [&>svg]:size-4" />`,
     `const a = <div className="w-(--anchor-width) bg-black/10 bg-white" />`,
+    `const a = <div className="hover:w-(--sidebar-width) bg-(color:--x) -mt-(--x)" />`,
+    `const a = <div className="[--cell-size:var(--space-scale-7)]" />`,
     `const a = cn("rounded-md", open && "opacity-disabled")`,
     // A hex-looking string that is not written as a style.
     `const a = <a href="#add">Add</a>`,
@@ -239,6 +243,44 @@ tester.run("no-raw-values", asEslint(noRawValues), {
       code: `const a = <div className="duration-[300ms]" />`,
       errors: [{ messageId: "arbitrary" }],
     },
+    // A variable in brackets: the message names the shorthand, variants kept.
+    {
+      code: `const a = <div className="hover:w-[var(--x)]" />`,
+      errors: [
+        {
+          messageId: "variableShorthand",
+          data: { value: "hover:w-[var(--x)]", fix: "hover:w-(--x)" },
+        },
+      ],
+    },
+    {
+      code: `const a = <div className="w-[--radix-popover-trigger-width] dark:-mt-[var(--x)]/50 md:bg-[color:var(--y)]" />`,
+      errors: [
+        {
+          messageId: "variableShorthand",
+          data: {
+            value: "w-[--radix-popover-trigger-width]",
+            fix: "w-(--radix-popover-trigger-width)",
+          },
+        },
+        {
+          messageId: "variableShorthand",
+          data: { value: "dark:-mt-[var(--x)]/50", fix: "dark:-mt-(--x)/50" },
+        },
+        {
+          messageId: "variableShorthand",
+          data: {
+            value: "md:bg-[color:var(--y)]",
+            fix: "md:bg-(color:--y)",
+          },
+        },
+      ],
+    },
+    // More than a variable stays an arbitrary value.
+    {
+      code: `const a = <div className="w-[calc(var(--x)+1px)] w-[var(--x,10px)]" />`,
+      errors: [{ messageId: "arbitrary" }, { messageId: "arbitrary" }],
+    },
     {
       code: `const a = <div style={{ padding: "12px" }} />`,
       errors: [{ messageId: "unit", data: { value: "12px" } }],
@@ -250,6 +292,11 @@ tester.run("no-raw-values", asEslint(noRawValues), {
     {
       code: `const a = "text-[var(--ds-prim-color-violet-600)]"`,
       errors: [{ messageId: "primitive" }],
+    },
+    // A private token in brackets stays an arbitrary value: the shorthand would not make it public.
+    {
+      code: `const a = <div className="text-[var(--ds-prim-color-violet-600)]" />`,
+      errors: [{ messageId: "primitive" }, { messageId: "arbitrary" }],
     },
     {
       code: `const a = matchMedia("(prefers-color-scheme: dark)")`,
@@ -429,6 +476,33 @@ export const A = () => <Button className="bg-primary p-4"><Plus /></Button>`,
     assert.equal(lintWith(["**/components/ui/vendor/**"]).length, 1)
     assert.equal(lintWith(["**/components/ui/mine/**"]).length, 0)
     assert.equal(lintWith([]).length, 1)
+  })
+
+  it("rewrites a bracketed variable to the shorthand, variants kept", async () => {
+    const eslint = new ESLint({
+      cwd: resolve(dirname(fileURLToPath(import.meta.url)), "../../.."),
+      overrideConfigFile: true,
+      fix: true,
+      overrideConfig: [
+        {
+          files: ["**/*.tsx"],
+          languageOptions: {
+            parser: tsParser,
+            parserOptions: { ecmaFeatures: { jsx: true } },
+          },
+        },
+        ...(plugin.configs.recommended as never[]),
+      ],
+    })
+    const [result] = await eslint.lintText(
+      `export const A = () => <div className="w-[--radix-popover-trigger-width] hover:w-[var(--sidebar-width)] bg-[var(--color-chart-sequential-3)]/50" />`,
+      { filePath: "src/screen.tsx" }
+    )
+    assert.match(
+      result.output ?? "",
+      /className="w-\(--radix-popover-trigger-width\) hover:w-\(--sidebar-width\) bg-\(--color-chart-sequential-3\)\/50"/
+    )
+    assert.deepEqual(result.messages, [])
   })
 
   it("leaves the installed components alone", () => {

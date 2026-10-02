@@ -19,7 +19,9 @@ export default [...dsaireadable.configs.recommended]
   exactly this.
 - `configs.tailwind` — `eslint-plugin-better-tailwindcss` set up for the design
   system: a class its stylesheet does not generate (`bg-red-500`, `p-13`) is an
-  error, and a disabled state reads `opacity-disabled`. The stylesheet is
+  error, a disabled state reads `opacity-disabled`, and `--fix` writes a CSS
+  variable in Tailwind's shorthand (`w-[var(--x)]` becomes `w-(--x)`). The
+  stylesheet is
   `styles/globals.css`; point `settings["better-tailwindcss"].entryPoint` at
   yours if it is elsewhere.
 - `configs.recommended` — both.
@@ -74,6 +76,13 @@ In class strings: raw hex and color functions, arbitrary values (`p-[13px]`),
 the default palette (`bg-violet-600`). In `style` props: raw colors and `px`,
 `rem` and `ms` values. Anywhere: primitive tokens (`--ds-prim-*`) and
 `prefers-color-scheme`.
+
+To read a token or a runtime variable that has no class (`--radix-popover-trigger-width`,
+`--color-chart-sequential-3`), write Tailwind's shorthand, `w-(--radix-popover-trigger-width)`
+or `bg-(--color-chart-sequential-3)`, never `w-[var(--…)]`: the rule names the
+shorthand, with the variants kept (`hover:w-[var(--x)]` → `hover:w-(--x)`). A
+class of the design system comes first (`p-4`, `w-sidebar`). A `style` prop may
+also read a token: `style={{ width: "var(--sidebar-width)" }}`.
 
 ### `no-deprecated-imports`
 
