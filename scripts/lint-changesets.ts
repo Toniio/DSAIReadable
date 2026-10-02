@@ -8,17 +8,24 @@
  *   token-breaking   a token renamed, removed or repurposed: the breaking bump
  *   component-api    a prop, export, variant, component, registry item or new
  *                    token added, or one renamed or removed: minor or major
- *   mcp              the MCP server's tools and served content: minor or major
+ *   mcp              the MCP server's tools and served content: minor or major;
+ *                    patch for a correction that adds, renames or removes nothing
  *   skills           the agent skills of skills/ and the Claude Code plugin
- *                    that ships them: minor or major
- *   visual           appearance only, described in full: patch
+ *                    that ships them: the same as mcp
+ *   lint             a rule or config of @dsaireadable/eslint-plugin: patch for
+ *                    a message, a link or a fix that reports less; minor or
+ *                    major for one that reports more
+ *   visual           appearance or behavior with no change of API, described in
+ *                    full: patch
  *   docs             specs and guidance only: patch
  *
  * The breaking bump is `major` from 1.0.0 on and `minor` before it (SemVer § 4:
  * in 0.x, minor carries both breaking and additive changes, patch the rest).
+ * The lint cannot tell an addition from a correction under `mcp`, `skills` or
+ * `lint`, nor a breaking change from one that is not: the reviewer does.
  *
- * Changes nothing outside the repository can observe (CI, lint, tests, a
- * refactor) need no changeset at all.
+ * Changes nothing outside the repository can observe (CI, the repository's own
+ * lint, tests, a refactor) need no changeset at all.
  *
  *   npx tsx scripts/lint-changesets.ts [--root <dir>]
  */
@@ -47,8 +54,9 @@ const breaking: Bump =
 const CATEGORIES: Record<string, Bump[]> = {
   "token-breaking": [breaking],
   "component-api": ["minor", "major"],
-  mcp: ["minor", "major"],
-  skills: ["minor", "major"],
+  mcp: ["patch", "minor", "major"],
+  skills: ["patch", "minor", "major"],
+  lint: ["patch", "minor", "major"],
   visual: ["patch"],
   docs: ["patch"],
 }
