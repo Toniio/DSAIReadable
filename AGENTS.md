@@ -98,7 +98,7 @@ npm run mcp:test-package  # packs the MCP server and runs the tarball through np
 npm run plugin:test       # the ESLint plugin's rules, each against a failing and a conforming fixture
 npm run mcp:test          # the MCP server's test suite
 npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
-npm run test:components   # headless Chromium: the 65 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard
+npm run test:components   # headless Chromium: the 65 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard, reduced motion
 npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
 ```

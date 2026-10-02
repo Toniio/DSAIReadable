@@ -264,4 +264,55 @@
   html {
     @apply font-mono;
   }
+
+  /* Reduced motion (specs/foundations/motion.md, Reduced motion): under the
+     query, an entrance or an exit keeps its fade and loses its movement.
+     tw-animate-css draws the zoom, slide, spin and blur of animate-in and
+     animate-out from the --tw-enter-* and --tw-exit-* variables, and registers
+     each one with a neutral initial value, which initial restores; the two
+     opacity variables stay. The rules after it stop what moves without those
+     variables. A base rule needs !important to win over the utilities: this
+     block is the only place the design system writes one. */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      --tw-enter-translate-x: initial !important;
+      --tw-enter-translate-y: initial !important;
+      --tw-enter-scale: initial !important;
+      --tw-enter-rotate: initial !important;
+      --tw-enter-blur: initial !important;
+      --tw-exit-translate-x: initial !important;
+      --tw-exit-translate-y: initial !important;
+      --tw-exit-scale: initial !important;
+      --tw-exit-rotate: initial !important;
+      --tw-exit-blur: initial !important;
+    }
+    /* Accordion opens and closes at once; Skeleton and the InputOTP caret hold still. */
+    [data-slot="accordion-content"], [data-slot="skeleton"], [data-slot="input-otp-slot"] * {
+      animation-name: none !important;
+    }
+    /* shadcn/tailwind.css stops the bare shimmer class only, not the
+       group-data variants of the Attachment title: the same values as its
+       shimmer-none utility. */
+    [data-slot="attachment-title"] {
+      --shimmer-image: none !important;
+      --shimmer-text-fill: currentColor !important;
+      animation-name: none !important;
+    }
+    /* vaul slides the Drawer with its own keyframes and reads no media query:
+       its own fadeIn and fadeOut take their place. */
+    [data-vaul-drawer][data-vaul-snap-points="false"][data-state="open"]:not([data-vaul-animate="false"]) {
+      animation-name: fadeIn !important;
+    }
+    [data-vaul-drawer][data-vaul-snap-points="false"][data-state="closed"]:not([data-vaul-animate="false"]) {
+      animation-name: fadeOut !important;
+    }
+    /* The MessageScroller button fades instead of sliding and scaling. */
+    [data-slot="message-scroller-button"] {
+      transition-property: opacity !important;
+    }
+    /* The desktop Sidebar collapses and expands at once. */
+    [data-slot="sidebar-gap"], [data-slot="sidebar-container"], [data-slot="sidebar-group-label"], [data-slot="sidebar-menu-button"] {
+      transition-property: none !important;
+    }
+  }
 }

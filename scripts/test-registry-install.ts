@@ -331,6 +331,14 @@ try {
     )
   if (!/:where\(\[data-state="open"\]\)/.test(built))
     failures.push('data-open: does not match Radix\'s data-state="open"')
+  if (
+    !/@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*--tw-enter-scale:\s*initial\s*!important/.test(
+      built
+    )
+  )
+    failures.push(
+      "the reduced-motion block of globals.css did not reach the consumer's app: entrances and exits still zoom and slide"
+    )
 
   const faces = new Set(
     [...built.matchAll(/@font-face\s*\{[^}]*font-family:\s*([^;]+);/g)].map(

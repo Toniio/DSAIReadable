@@ -273,14 +273,16 @@ stop; then, per component, the **Accessibility** section replayed: role,
 accessible name and each key of the Keyboard table. `npm run test:lint-coverage`
 fails when a component has no renderable example or a documented key has no test.
 
-| File                          | Role                                                                                                                                                                   |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tests/examples.test.tsx`     | The 65 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)              |
-| `tests/components/*.test.tsx` | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                                         |
-| `tests/spec-examples.ts`      | Vite plugin: serves each spec's code example, and each complete module of the foundations, as a module (`virtual:spec-examples`), so the tests render what agents copy |
-| `tests/axe.ts`                | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                                                        |
-| `tests/focus.ts`              | Reads the rings painted before and after a focus move: the indicator may sit on the control, its wrapping group or the part standing for it                            |
-| `tests/setup.ts`              | Loads `styles/globals.css` and `tests/no-motion.css` (no animation, so axe reads final colors); unmounts and resets the theme after each test                          |
+| File                              | Role                                                                                                                                                                                                                           |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tests/examples.test.tsx`         | The 65 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                                                      |
+| `tests/components/*.test.tsx`     | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                                                                                                 |
+| `tests/spec-examples.ts`          | Vite plugin: serves each spec's code example, and each complete module of the foundations, as a module (`virtual:spec-examples`), so the tests render what agents copy                                                         |
+| `tests/axe.ts`                    | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                                                                                                                |
+| `tests/focus.ts`                  | Reads the rings painted before and after a focus move: the indicator may sit on the control, its wrapping group or the part standing for it                                                                                    |
+| `tests/reduced-motion/*.test.tsx` | The `reduced-motion` project: in a browser that reports `prefers-reduced-motion: reduce`, with the animations on, the overlays enter and leave with a fade only and the loops and slides of `specs/foundations/motion.md` stop |
+| `tests/reduced-motion/setup.ts`   | The stylesheet without `tests/no-motion.css`, for that project                                                                                                                                                                 |
+| `tests/setup.ts`                  | Loads `styles/globals.css` and `tests/no-motion.css` (no animation, so axe reads final colors); unmounts and resets the theme after each test                                                                                  |
 
 The tests live outside `components/ui/` so that the linters and the registry,
 which read that folder, only see distributed code.
