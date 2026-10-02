@@ -86,21 +86,22 @@ npm run index:validate    # 6 checks: JSON Schema, sizes, data-slot, UI strings,
 npm run shadcn:baseline   # refetches the shadcn/ui API into shadcn-api.baseline.json (network)
 npm run shadcn:retokenize # the re-tokenization codemod is a fixpoint on the 65 components + each one is classified in shadcn-upstream.json
 npm run shadcn:drift      # each component against its shadcn/ui upstream run through the codemod: re-anchored, or every difference declared (network)
-npm run specs:validate    # the 65 specs against the 13 canonical sections, the 12 page patterns against their 9 + Variants, Tokens, Props / API and choice rules up to date + no hedged wording + llms.txt up to date
+npm run specs:validate    # the 65 specs against the 13 canonical sections, the 12 page patterns against their 9 + Variants, Tokens, Props / API, States and choice rules up to date + no hedged wording + the foundations' tsx and ts examples pass the ESLint plugin + llms.txt up to date
 npm run skills:validate   # the agent skills of skills/: Agent Skills format + every rule cites a spec, pattern or foundation that exists + every tool it names exists
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
 npm run registry:check    # registry.json freshness + internal dependencies
 npm run registry:test-install  # installs the 69 items in a blank app, builds it and its CSS
 npm run release:check     # one version everywhere it is served + each pending changeset follows the semver policy
-npm run release:test      # a changeset becomes a version and a CHANGELOG entry (on a copy of the files) + what a pinned install pins
+npm run release:test      # a changeset becomes a version, a CHANGELOG entry and llms.txt links on the new tag (on a copy of the files) + what a pinned install pins
 npm run generate-context  # regenerates the MCP cache — must produce zero diff
 npm run mcp:test-package  # packs the MCP server and runs the tarball through npx from an empty folder (network)
 npm run plugin:test       # the ESLint plugin's rules, each against a failing and a conforming fixture
 npm run mcp:test          # the MCP server's test suite
 npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
-npm run test:components   # headless Chromium: the 65 spec examples (axe light + dark, focus ring), roles, names, keyboard
+npm run test:components   # headless Chromium: the 65 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard, reduced motion
 npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
+npm run evals:generate    # screens from Claude Code in print mode, on a subscription (no API key), for the replay generator (evals/README.md)
 ```
 
 A new or changed component arrives with its test: its spec example must pass
@@ -156,7 +157,7 @@ Each § 1 rule, and the check that enforces it:
 | Only the design system's classes         | ESLint `better-tailwindcss/no-unknown-classes`, and `no-restricted-classes` for opacity outside binary states                                                                                                                                                                                                                                                                                                                          |
 | Class-based dark mode                    | `tokens:lint-values` (`prefers-color-scheme`, no `allow-raw` opt-out)                                                                                                                                                                                                                                                                                                                                                                  |
 | WCAG 2.2 AA                              | `tokens:lint-contrast` level 1 (4.5:1 text, 3:1 non-text, blocking; level 2 APCA is advisory), `tokens:lint-focus`, axe-core in `test:components` (headless Chromium, light and dark: contrast and target size computed on the rendered page, a focus indicator on every tab stop); target size is also audited by hand in `specs/foundations/size.md`                                                                                 |
-| Read the spec first                      | Not checkable; `specs:validate` keeps each spec in step with its code (Variants, Tokens, Props / API) and `index:schema` keeps its Metadata in step with the index, so what the spec says is true                                                                                                                                                                                                                                      |
+| Read the spec first                      | Not checkable; `specs:validate` keeps each spec in step with its code (Variants, Tokens, Props / API, States) and `index:schema` keeps its Metadata in step with the index, so what the spec says is true                                                                                                                                                                                                                              |
 | The shadcn/ui API is the contract        | `index:shadcn` — each component's exports, rendered element, props, union values and defaults against `shadcn-api.baseline.json` (the upstream API, extracted from the registry of the `components.json` style): every difference is declared in `shadcn.divergences`, and every declaration matches a difference; `shadcn:drift` — each component's classes against its upstream, re-tokenized by the table of `shadcn-upstream.json` |
 | `tokens-validate` before every commit    | The required `tokens-validate` CI job, and `npm run check`                                                                                                                                                                                                                                                                                                                                                                             |
 | Everything committed in American English | `lint:language`, in `npm run check` and the CI `lint` job                                                                                                                                                                                                                                                                                                                                                                              |
@@ -190,8 +191,8 @@ reorder them by hand.
 - `shadcn-api.baseline.json` — the upstream shadcn/ui API, generated by `npm run shadcn:baseline`
 - `specs/tokens/token-reference.md` and `tokens.manifest.json` — generated by `npm run docs:tokens`
   (edit the editorial prose in the `$extensions.docs` of `tokens/*.json`)
-- `llms.txt` — generated by `npm run docs:llms` from the specs (edit a spec's Role, or the entry
-  points listed in `scripts/build-llms-txt.ts`)
+- `llms.txt` — generated by `npm run docs:llms` from the specs and the root version, its links at the
+  release tag (edit a spec's Role, or the entry points listed in `scripts/build-llms-txt.ts`)
 - The `version` of `design-system.index.json`, `mcp-server/package.json`, `packages/eslint-plugin/package.json` and the lockfile — written by
   `npm run versions:sync` from the root `package.json`, which only `changeset version` bumps
 - `.changeset/*.md` are consumed by `changeset version`, and the version sections of `CHANGELOG.md` are written

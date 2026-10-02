@@ -27,7 +27,30 @@ interface VitestReport {
   }[]
 }
 
+/**
+ * Hooks read from a null dispatcher: React loaded twice, when Vite optimizes a
+ * dependency it found mid-run and reloads the page. The screen is not at
+ * fault, and a second run, on the optimized dependencies, renders it.
+ */
+const REACT_TWICE = /Cannot read properties of null \(reading 'use[A-Z]\w*'\)/
+
 export function scoreA11y(
+  root: string,
+  screensDir: string,
+  ids: string[]
+): Map<string, A11yResult> {
+  const first = runA11y(root, screensDir, ids)
+  const twice = [...first].filter(([, r]) =>
+    r.failures.some((f) => REACT_TWICE.test(f))
+  )
+  if (twice.length === 0) return first
+  console.log(
+    `  React loaded twice for ${twice.map(([id]) => id).join(", ")}: stage B runs again`
+  )
+  return runA11y(root, screensDir, ids)
+}
+
+function runA11y(
   root: string,
   screensDir: string,
   ids: string[]

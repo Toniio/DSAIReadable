@@ -11,7 +11,8 @@
  *      against the gold standard (needs ANTHROPIC_API_KEY).
  *
  *   npm run evals                                   # gold calibration: the scorer against the specs' own examples
- *   npm run evals -- --generator replay --from <dir> # score screens written elsewhere (<dir>/<task>.tsx)
+ *   npm run evals -- --generator replay --from <dir> # score screens written elsewhere (<dir>/<task>.tsx, and
+ *                                                   # <task>.metrics.json and run.json when evals:generate wrote them)
  *   npm run evals -- --generator claude --model claude-opus-5-5 [--context mcp|none] [--skills all]
  *   npm run evals:test                              # the harness's own test: gold passes, fixtures fail
  *
@@ -29,7 +30,7 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs"
-import { join, resolve } from "node:path"
+import { join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import * as prettier from "prettier"
@@ -40,6 +41,7 @@ import {
   passesB,
   summarize,
   toMarkdown,
+  type GenerationMetrics,
   type RunReport,
   type TaskReport,
 } from "./lib/report"
@@ -74,10 +76,43 @@ function goldGenerator(): Generator {
   return async (task) => ({ code: goldScreen(ROOT, task) })
 }
 
+/**
+ * Screens written elsewhere: `<dir>/<task>.tsx`, with the metrics of the
+ * session that wrote it when there is a `<dir>/<task>.metrics.json`
+ * (evals/generate-claude-code.ts writes both).
+ */
 function replayGenerator(dir: string): Generator {
   return async (task) => {
     const file = resolve(dir, `${task.id}.tsx`)
-    return { code: existsSync(file) ? readFileSync(file, "utf-8") : null }
+    const metrics = resolve(dir, `${task.id}.metrics.json`)
+    return {
+      code: existsSync(file) ? readFileSync(file, "utf-8") : null,
+      ...(existsSync(metrics) && {
+        metrics: JSON.parse(
+          readFileSync(metrics, "utf-8")
+        ) as GenerationMetrics,
+      }),
+    }
+  }
+}
+
+/** What evals/generate-claude-code.ts says of the screens it wrote: `<dir>/run.json`. */
+function replayAbout(
+  dir: string
+): Pick<RunReport, "model" | "context" | "skills" | "via"> {
+  const file = resolve(dir, "run.json")
+  if (!existsSync(file)) return {}
+  const about = JSON.parse(readFileSync(file, "utf-8")) as {
+    model: string
+    context: string
+    skills: string[]
+    claudeCode: string
+  }
+  return {
+    model: about.model,
+    context: about.context,
+    skills: about.skills,
+    via: `claude-code ${about.claudeCode}`,
   }
 }
 
@@ -111,6 +146,11 @@ async function run(options: {
   const generate = await generatorFor(options.generator)
   const dir = join(WORK, options.label)
   const screensDir = join(dir, "screens")
+  const from = options.generator === "replay" ? option("from") : undefined
+  if (from && !relative(dir, resolve(from)).startsWith(".."))
+    throw new Error(
+      `--from ${from} is inside evals/.work/${options.label}, which the run deletes first: give the run another --label`
+    )
   rmSync(dir, { recursive: true, force: true })
   mkdirSync(screensDir, { recursive: true })
 
@@ -175,6 +215,7 @@ async function run(options: {
       context: option("context") === "none" ? "none" : "mcp",
       skills: skillsOption(),
     }),
+    ...(from && replayAbout(from)),
     designSystem: {
       version: (
         JSON.parse(readFileSync(join(ROOT, "package.json"), "utf-8")) as {
@@ -257,6 +298,11 @@ async function selfTest() {
         `fixture ${t.id}: declares it fails [${want.join(", ")}], fails [${failed.join(", ")}]`
       )
   }
+  // evals/fixtures/faq.metrics.json stands for what evals:generate writes.
+  if (fixtureRun.tasks.find((t) => t.id === "faq")?.metrics?.turns !== 3)
+    errors.push(
+      "evals/fixtures/faq.metrics.json: the replay generator did not read it"
+    )
   for (const task of tasks)
     if (task.base && !existsSync(join(ROOT, task.base)))
       errors.push(`${task.id}: its base ${task.base} does not exist`)

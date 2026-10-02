@@ -43,8 +43,8 @@ Adds one new object — a project, an invoice, a member — to a collection, and
 
 ## Spacing
 
-- **MUST** — let `FieldGroup` space the fields (`gap-6`, `space.component.lg`); a `Field` takes no margin
-- **MUST** — put the `form` inside `DialogContent` with `flex flex-col gap-6`, so header, fields and footer keep the dialog's rhythm
+- **MUST** — let `FieldGroup` space the fields (`gap-5`, `space.scale.5`); a `Field` takes no margin
+- **MUST** — put the `form` inside `DialogContent` with `flex flex-col gap-4`, so header, fields and footer keep the dialog's rhythm (`DialogContent` spaces its parts with `gap-4`)
 - **MUST** — on a full page, set the form column to `max-w-2xl` (`space.layout.content-sm`) inside the page container of [navigation](./navigation.md)
 
 ## Content
@@ -100,7 +100,7 @@ export function CreateProject() {
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <DialogHeader>
             <DialogTitle>Create a project</DialogTitle>
             <DialogDescription>

@@ -1,6 +1,6 @@
 {
   "name": "dsaireadable",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "private": true,
   "workspaces": [
@@ -41,8 +41,9 @@
     "specs:variants": "tsx scripts/build-spec-variants.ts",
     "specs:tokens": "tsx scripts/build-spec-tokens.ts",
     "specs:api": "tsx scripts/build-spec-api.ts",
+    "specs:states": "tsx scripts/build-spec-states.ts",
     "specs:choices": "tsx scripts/build-spec-choices.ts",
-    "specs:validate": "tsx scripts/build-spec-variants.ts --check && tsx scripts/build-spec-tokens.ts --check && tsx scripts/build-spec-api.ts --check && tsx scripts/build-spec-choices.ts --check && tsx scripts/lint-spec-sections.ts && tsx scripts/lint-spec-wording.ts && tsx scripts/build-llms-txt.ts --check",
+    "specs:validate": "tsx scripts/build-spec-variants.ts --check && tsx scripts/build-spec-tokens.ts --check && tsx scripts/build-spec-api.ts --check && tsx scripts/build-spec-states.ts --check && tsx scripts/build-spec-choices.ts --check && tsx scripts/lint-spec-sections.ts && tsx scripts/lint-spec-wording.ts && tsx scripts/lint-foundation-examples.ts && tsx scripts/build-llms-txt.ts --check",
     "skills:validate": "tsx scripts/validate-skills.ts",
     "docs:tokens": "tsx scripts/build-token-docs.ts",
     "registry:build": "tsx scripts/build-registry.ts",
@@ -62,6 +63,7 @@
     "test:components": "vitest run",
     "evals": "tsx evals/run.ts",
     "evals:test": "tsx evals/run.ts --self-test",
+    "evals:generate": "tsx evals/generate-claude-code.ts",
     "test:lint-coverage": "tsx scripts/lint-test-coverage.ts",
     "test": "npm run test:components && npm run plugin:test && npm run mcp:test",
     "check": "tsx scripts/check.ts",
@@ -76,7 +78,7 @@
     "versions:check": "tsx scripts/sync-versions.ts --check",
     "changesets:lint": "tsx scripts/lint-changesets.ts",
     "release:check": "npm run versions:check && npm run changesets:lint",
-    "release:version": "changeset version && npm run versions:sync && npm run generate-context && prettier --write CHANGELOG.md",
+    "release:version": "changeset version && npm run versions:sync && npm run docs:llms && npm run generate-context && prettier --write CHANGELOG.md",
     "release:test": "tsx scripts/test-release.ts && tsx scripts/test-pinned-install.ts"
   },
   "dependencies": {

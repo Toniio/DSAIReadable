@@ -33,6 +33,7 @@ npm run evals -- --generator replay --from <dir>    # score screens written else
 npm run evals -- --generator claude --model claude-opus-5-5 --context mcp   # an agent connected to the MCP server
 npm run evals -- --generator claude --model claude-opus-5-5 --context none  # the same agent with no context: the baseline
 npm run evals -- --generator claude --suite skills --skills all              # the agent skills of skills/, on their suite
+npm run evals:generate -- --model sonnet --condition mcp --label <label>   # screens from Claude Code on a subscription: no API key
 npm run evals:test                                  # the harness's own test, in npm run check and CI
 ```
 
@@ -87,6 +88,62 @@ npm run evals -- --generator claude --model claude-sonnet-5-5 --suite skills --s
 
 In CI, the Evals workflow takes `skills` (`none`, `with`, `both`) and `suite`.
 
+## Measuring without an API key
+
+`npm run evals:generate` has Claude Code answer the tasks in print mode
+(`claude -p`), on the subscription it is logged in with, with the claude
+generator's instructions appended to Claude Code's own system prompt. The
+replay generator then scores the screens on stages A and B; stage C needs the
+API and does not run.
+
+| `--condition` | MCP server                                 | Skills                                                 |
+| ------------- | ------------------------------------------ | ------------------------------------------------------ |
+| `none`        | no                                         | no                                                     |
+| `mcp`         | `dsaireadable`, started from this checkout | no                                                     |
+| `mcp-skills`  | `dsaireadable`, started from this checkout | the skills of `skills/`, copied into `.claude/skills/` |
+
+Each task runs in an empty folder outside the repository. The session has no
+built-in tool except `Skill` and `Read` under `mcp-skills`, and 25 turns at
+most. It loads none of your own Claude Code configuration (user settings,
+plugins, hooks, `CLAUDE.md`, auto memory, MCP servers, claude.ai connectors)
+and starts from an environment built from an allowlist, without
+`ANTHROPIC_*` variables; managed settings still apply. Before a task counts,
+the script checks the session's init message — no API key, no plugin, the
+expected server, tools and skills — and stops the run otherwise. Run it from a
+plain terminal, not from inside a Claude Code session, and start with one
+task:
+
+```bash
+npm run evals:generate -- --model sonnet --condition mcp-skills --tasks sign-in --label smoke
+```
+
+`--dry-run` prints the command and starts the MCP server through the same
+launch, with no session. The script was checked against Claude Code 2.1.285
+(`--max-turns` is hidden from its `--help`, but defined) and warns on another
+version; `--claude <path>` picks the install. Under `mcp-skills`, Claude Code's
+bundled skills are listed next to the two of `skills/`: no flag hides them
+alone, so `run.json` records the skills the sessions saw, and the plugins built
+into Claude Code (`cc-plugin-diff@builtin`…), which the check accepts while it
+refuses any other plugin.
+
+The output is `evals/.work/claude-code/<label>/`: per task `<task>.tsx`,
+`<task>.metrics.json` and the session's stream `<task>.jsonl`, plus `run.json`
+with the exact model id and Claude Code version. A task already measured is
+skipped, so after a usage limit the same command resumes: it exits with 2 when
+it stops on one, and with 3 when a task is left to rerun (a timeout, an error of
+the session). It refuses to resume when the model, Claude Code, or the sources
+the sessions read (the MCP server, its context, the skills, the instructions)
+changed since the run started. Then score and record the run:
+
+```bash
+npm run evals -- --generator replay --from evals/.work/claude-code/<label> --label <label> --no-rubric --record
+```
+
+The replay reads `<task>.metrics.json` and `run.json`, so the report carries
+the turns, the MCP calls by tool, the tool errors and the tokens, the model and
+`via claude-code <version>`. These runs compare with each other, not with the
+claude generator's: the system prompt and the tools differ.
+
 ## The harness's own test
 
 `npm run evals:test` proves the scorer, without a model:
@@ -95,7 +152,9 @@ In CI, the Evals workflow takes `skills` (`none`, `with`, `both`) and `suite`.
   spec example is, and the example is fixed in its spec;
 - each screen of [`fixtures/`](./fixtures/) fails exactly the checks its first
   line declares (`// fails: compiles, lint:external-imports, renders`), so a
-  check that stops catching anything fails here.
+  check that stops catching anything fails here;
+- the replay generator reads the metrics written next to a screen
+  (`fixtures/faq.metrics.json`).
 
 ## Adding a task
 

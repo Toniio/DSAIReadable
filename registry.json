@@ -1084,6 +1084,40 @@
           },
           "html": {
             "@apply font-mono": {}
+          },
+          "@media (prefers-reduced-motion: reduce)": {
+            "*, ::before, ::after": {
+              "--tw-enter-translate-x": "initial !important",
+              "--tw-enter-translate-y": "initial !important",
+              "--tw-enter-scale": "initial !important",
+              "--tw-enter-rotate": "initial !important",
+              "--tw-enter-blur": "initial !important",
+              "--tw-exit-translate-x": "initial !important",
+              "--tw-exit-translate-y": "initial !important",
+              "--tw-exit-scale": "initial !important",
+              "--tw-exit-rotate": "initial !important",
+              "--tw-exit-blur": "initial !important"
+            },
+            "[data-slot=\"accordion-content\"], [data-slot=\"skeleton\"], [data-slot=\"input-otp-slot\"] *": {
+              "animation-name": "none !important"
+            },
+            "[data-slot=\"attachment-title\"]": {
+              "--shimmer-image": "none !important",
+              "--shimmer-text-fill": "currentColor !important",
+              "animation-name": "none !important"
+            },
+            "[data-vaul-drawer][data-vaul-snap-points=\"false\"][data-state=\"open\"]:not([data-vaul-animate=\"false\"])": {
+              "animation-name": "fadeIn !important"
+            },
+            "[data-vaul-drawer][data-vaul-snap-points=\"false\"][data-state=\"closed\"]:not([data-vaul-animate=\"false\"])": {
+              "animation-name": "fadeOut !important"
+            },
+            "[data-slot=\"message-scroller-button\"]": {
+              "transition-property": "opacity !important"
+            },
+            "[data-slot=\"sidebar-gap\"], [data-slot=\"sidebar-container\"], [data-slot=\"sidebar-group-label\"], [data-slot=\"sidebar-menu-button\"]": {
+              "transition-property": "none !important"
+            }
           }
         }
       }

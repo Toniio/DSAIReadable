@@ -1,0 +1,8 @@
+{
+  "turns": 3,
+  "toolCalls": 2,
+  "toolErrors": 0,
+  "inputTokens": 1200,
+  "outputTokens": 800,
+  "tools": { "dsaireadable_get_component_specs": 2 }
+}

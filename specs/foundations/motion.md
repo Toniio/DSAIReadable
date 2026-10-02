@@ -8,15 +8,16 @@ The motion system defines consistent **durations** and **easing curves** for eve
 
 ## Durations
 
-| Token                     | CSS Variable                | Value   | Tailwind Class    | Typical use                                                      |
-| ------------------------- | --------------------------- | ------- | ----------------- | ---------------------------------------------------------------- |
-| `motion.duration.instant` | `--motion-duration-instant` | `0ms`   | —                 | State changes with no transition (hiding an element)             |
-| `motion.duration.fast`    | `--motion-duration-fast`    | `100ms` | `duration-fast`   | Hover and focus — immediate feedback on interactive elements     |
-| `motion.duration.normal`  | `--motion-duration-normal`  | `200ms` | `duration-normal` | **The default** — color, border and opacity transitions          |
-| `motion.duration.slow`    | `--motion-duration-slow`    | `300ms` | `duration-slow`   | Modals, drawers, accordions — large elements entering or leaving |
-| `motion.duration.slower`  | `--motion-duration-slower`  | `500ms` | `duration-slower` | Complex animations — only for deliberate effects                 |
+| Token                        | CSS Variable                   | Value    | Tailwind Class        | Typical use                                                                                     |
+| ---------------------------- | ------------------------------ | -------- | --------------------- | ----------------------------------------------------------------------------------------------- |
+| `motion.duration.instant`    | `--motion-duration-instant`    | `0ms`    | —                     | State changes with no transition (hiding an element)                                            |
+| `motion.duration.fast`       | `--motion-duration-fast`       | `100ms`  | `duration-fast`       | Hover and focus — immediate feedback on interactive elements                                    |
+| `motion.duration.normal`     | `--motion-duration-normal`     | `200ms`  | `duration-normal`     | **The default** — color, border and opacity transitions                                         |
+| `motion.duration.slow`       | `--motion-duration-slow`       | `300ms`  | `duration-slow`       | Modals, drawers, accordions — large elements entering or leaving                                |
+| `motion.duration.slower`     | `--motion-duration-slower`     | `500ms`  | `duration-slower`     | Complex animations — only for deliberate effects                                                |
+| `motion.duration.extra-slow` | `--motion-duration-extra-slow` | `1000ms` | `duration-extra-slow` | A one-second transition, `animate-in` or `animate-out` — the `InputOTP` caret carries the class |
 
-> **Tailwind:** the `duration-fast`, `duration-normal`, `duration-slow` and `duration-slower` classes are generated through `@theme inline` (`--transition-duration-*`).
+> **Tailwind:** the `duration-fast`, `duration-normal`, `duration-slow`, `duration-slower` and `duration-extra-slow` classes are generated through `@theme inline` (`--transition-duration-*`). Each one sets `transition-duration` and the `--tw-duration` that the `animate-in` and `animate-out` animations of tw-animate-css read. A keyframe animation that sets its own timing ignores them: `animate-caret-blink` blinks at its own pace, whatever `duration-*` class sits beside it.
 
 ---
 
@@ -46,10 +47,18 @@ Playful interaction/feedback  → ease-spring   (a button "pop", an added badge)
 
 ### Standard hover (color / opacity)
 
+`Button`, `Toggle` and the menu items already carry their hover transition: these classes go on a surface the screen draws itself.
+
 ```tsx
-<button className="transition-colors duration-fast ease-default hover:bg-accent">
-  Button
-</button>
+import { Card, CardContent } from "@/components/ui/card"
+
+export default function Example() {
+  return (
+    <Card className="transition-colors duration-fast ease-default hover:bg-muted">
+      <CardContent>Recent activity</CardContent>
+    </Card>
+  )
+}
 ```
 
 ### Fading an element
@@ -62,11 +71,7 @@ Playful interaction/feedback  → ease-spring   (a button "pop", an added badge)
 
 ### A modal entering
 
-```tsx
-<dialog className="transition-all duration-slow ease-out">
-  Dialog content
-</dialog>
-```
+A screen does not animate a modal surface itself: `Dialog`, `AlertDialog`, `Sheet` and `Drawer` enter and leave on their own. Their backdrop fades with `OVERLAY_BASE` (`lib/overlay.ts`), `Dialog` and `AlertDialog` zoom in with `MODAL_CONTENT_BASE`, `Sheet` slides in from its side, and `Drawer` moves with vaul. Use the component as it is, and do not re-time it.
 
 ### A drop-down leaving
 
@@ -97,6 +102,29 @@ Playful interaction/feedback  → ease-spring   (a button "pop", an added badge)
 | An accordion expanding        | `slow` (300ms)   | `ease-out`     |
 | A playful micro-animation     | `normal` (200ms) | `ease-spring`  |
 | A chart animation             | `slower` (500ms) | `ease-out`     |
+
+---
+
+## Reduced motion
+
+When the user asks the system for less motion (`prefers-reduced-motion: reduce`), an entrance or an exit fades instead of moving: nothing zooms, slides, spins or blurs in or out. One block in the `@layer base` of `styles/globals.css` does it for every component. A component adds no `motion-reduce:` class, and that block is the only `!important` the design system writes.
+
+| Source                                                                                                                                                                      | Default motion                                                   | Under `reduce`                                                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tw-animate-css (`animate-in`, `animate-out`): Dialog, AlertDialog, Sheet, Popover, HoverCard, Tooltip, DropdownMenu, ContextMenu, Menubar, Select, Combobox, NavigationMenu | A fade with a zoom (`zoom-in-95`) or a slide (`slide-in-from-*`) | The fade alone: the translation, scale, rotation and blur variables (`--tw-enter-*`, `--tw-exit-*`) return to `initial`, their neutral value. NavigationMenu's viewport, which zooms without a fade, appears at once |
+| Accordion (`animate-accordion-down`, `animate-accordion-up`)                                                                                                                | The panel's height grows or shrinks                              | The panel opens and closes at once                                                                                                                                                                                   |
+| Skeleton (`animate-pulse`)                                                                                                                                                  | A pulse                                                          | Static                                                                                                                                                                                                               |
+| Attachment title (`shimmer`)                                                                                                                                                | A shimmer while the file uploads or is processed                 | Static, in the text color                                                                                                                                                                                            |
+| InputOTP caret (`animate-caret-blink`)                                                                                                                                      | A blink                                                          | Static, always shown                                                                                                                                                                                                 |
+| Drawer (vaul)                                                                                                                                                               | The panel slides in from its edge                                | The panel fades, with vaul's own `fadeIn` and `fadeOut`. A drawer with `snapPoints` still moves to its snap points                                                                                                   |
+| Carousel (Embla)                                                                                                                                                            | A scroll to the next slide                                       | A jump to it: Embla's `duration` is `0` under the query. A drag still follows the pointer                                                                                                                            |
+| MessageScroller button                                                                                                                                                      | Slides and scales in and out                                     | Fades. The scroll it starts stays smooth; pass `behavior="auto"` to make it instant                                                                                                                                  |
+| Sidebar, on the desktop                                                                                                                                                     | Slides and resizes as it collapses                               | Collapses and expands at once. Below `md` it is a Sheet: the fade alone                                                                                                                                              |
+| Sonner                                                                                                                                                                      | Toasts slide in and swipe out                                    | Sonner's own rule: no animation and no transition on the toast                                                                                                                                                       |
+| Spinner (`animate-spin`), Sonner's loading icon                                                                                                                             | Spins                                                            | Kept: it is the only sign that work is in progress                                                                                                                                                                   |
+| Button (`active:translate-y-px`), the Switch thumb, the Progress bar, a chevron that turns                                                                                  | A shift of a pixel, or a movement inside the control             | Kept: the movement stays inside the control and shows its state                                                                                                                                                      |
+
+A new entrance or exit uses the tw-animate-css classes, which this block already reduces. Any other movement (a loop, or a transition of position or size) adds its `data-slot` to the block in the same change, with a test in `tests/reduced-motion/`.
 
 ---
 

@@ -14,19 +14,28 @@ import { relative, resolve } from "node:path"
 
 import Anthropic from "@anthropic-ai/sdk"
 import { Client } from "@modelcontextprotocol/client"
-import { StdioClientTransport } from "@modelcontextprotocol/client/stdio"
+import {
+  getDefaultEnvironment,
+  StdioClientTransport,
+} from "@modelcontextprotocol/client/stdio"
 
 import type { GenerationMetrics, RubricResult } from "./report"
 import { taskMessage, type Task } from "./tasks"
 
-const MAX_TURNS = 25
+/** The turns a generator gives an agent to answer one task. */
+export const MAX_TURNS = 25
 const JUDGE_MODEL = "claude-opus-5-5"
 
-const SYSTEM = `You build screens for a React and Next.js app that uses the DSAIReadable design system: shadcn/ui components in @/components/ui/<name>, Tailwind CSS v4 classes limited to the design system's tokens, and Phosphor icons from @phosphor-icons/react.
+/**
+ * The instructions of every generator, so the claude generator and
+ * evals/generate-claude-code.ts measure the same request.
+ */
+export const SYSTEM = `You build screens for a React and Next.js app that uses the DSAIReadable design system: shadcn/ui components in @/components/ui/<name>, Tailwind CSS v4 classes limited to the design system's tokens, and Phosphor icons from @phosphor-icons/react.
 
 Answer with exactly one \`\`\`tsx code block: a complete module whose default export renders the screen and takes no props. Put sample data inline.`
 
-const WITH_MCP = `\n\nThe dsaireadable MCP server describes the design system: its components, page patterns, tokens and rules, and validates code. Use it before and after you write the screen.`
+/** Added to SYSTEM when the agent has the MCP server. */
+export const WITH_MCP = `\n\nThe dsaireadable MCP server describes the design system: its components, page patterns, tokens and rules, and validates code. Use it before and after you write the screen.`
 
 /**
  * The skills as an agent meets them: their name and description up front, the
@@ -89,13 +98,33 @@ function client(): Anthropic {
   return new Anthropic()
 }
 
+/**
+ * How to start the design system's MCP server from the sources of this
+ * checkout, from any working directory: tsx by its absolute URL (a bare
+ * `--import tsx` resolves from the working directory), and mcp-server's
+ * tsconfig, which maps `@dsaireadable/eslint-plugin` to its sources, so the
+ * plugin needs no build.
+ */
+export function mcpServerLaunch(root: string) {
+  return {
+    command: process.execPath,
+    args: [
+      "--import",
+      import.meta.resolve("tsx"),
+      resolve(root, "mcp-server/src/index.ts"),
+    ],
+    env: { TSX_TSCONFIG_PATH: resolve(root, "mcp-server/tsconfig.json") },
+  }
+}
+
 /** The design system's MCP server over stdio, as a local install runs it. */
-async function connectMcp(root: string) {
+export async function connectMcp(root: string) {
   const mcp = new Client({ name: "dsaireadable-evals", version: "1.0.0" })
+  const launch = mcpServerLaunch(root)
   await mcp.connect(
     new StdioClientTransport({
-      command: process.execPath,
-      args: ["--import", "tsx", resolve(root, "mcp-server/src/index.ts")],
+      ...launch,
+      env: { ...getDefaultEnvironment(), ...launch.env },
       stderr: "ignore",
     })
   )
@@ -109,7 +138,7 @@ async function connectMcp(root: string) {
 }
 
 /** The last ```tsx block of the answer, or null. */
-function screenOf(text: string): string | null {
+export function screenOf(text: string): string | null {
   const blocks = [
     ...text.matchAll(/```(?:tsx|jsx|typescript)?\n([\s\S]*?)```/g),
   ]

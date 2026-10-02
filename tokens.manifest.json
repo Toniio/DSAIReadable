@@ -4274,7 +4274,7 @@
       },
       "description": "Extra-small component padding/gap (4px). Not for layout or section spacing.",
       "docs": {
-        "do": "Gap between an icon and its label in a compact button, a badge's inner padding.",
+        "do": "Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`gap-1`, 4px).",
         "dont": "Do not use for layout spacing."
       }
     },
@@ -4293,7 +4293,7 @@
       },
       "description": "Small component padding/gap (8px). Not for layout or section spacing.",
       "docs": {
-        "do": "Padding of a compact button, gap of a tight list.",
+        "do": "Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`gap-2`, 8px).",
         "dont": "Do not use to space out page sections."
       }
     },
@@ -4312,7 +4312,7 @@
       },
       "description": "Medium component padding/gap (16px). Not for layout or section spacing.",
       "docs": {
-        "do": "Standard card padding, gap between the buttons of a group.",
+        "do": "Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`p-4`, 16px).",
         "dont": "Do not use for the gap between page sections."
       }
     },
@@ -4329,9 +4329,9 @@
       "value": {
         "light": "1.5rem"
       },
-      "description": "Large component padding/gap (24px). Not for layout or section spacing.",
+      "description": "Large component spacing (24px), read through var(): the viewport gutter of DialogContent. Not for layout or section spacing.",
       "docs": {
-        "do": "A dialog's inner padding, gap between form fields.",
+        "do": "The room DialogContent keeps from the viewport edges (`max-w-[calc(100%-var(--space-component-lg))]`); it has no class.",
         "dont": "Do not confuse with `space.layout.page-padding` (same value, different context)."
       }
     },
@@ -4350,7 +4350,7 @@
       },
       "description": "Extra-large component padding/gap (32px). Not for layout or section spacing.",
       "docs": {
-        "do": "Padding of a large card section, spacing between groups of form fields.",
+        "do": "Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`p-8`, 32px).",
         "dont": "Do not use between nearby inline elements."
       }
     },

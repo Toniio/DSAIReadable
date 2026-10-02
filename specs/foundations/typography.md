@@ -104,9 +104,15 @@ These combinations define the design system's canonical text styles.
 ### Label — field or button label
 
 ```tsx
-<label className="text-sm leading-snug font-medium tracking-wide text-foreground">
-  Field name
-</label>
+<Field>
+  <FieldLabel
+    htmlFor="field-name"
+    className="text-sm leading-snug font-medium tracking-wide"
+  >
+    Field name
+  </FieldLabel>
+  <Input id="field-name" />
+</Field>
 ```
 
 `size: sm (14px)` · `lineHeight: snug (1.375)` · `weight: medium (500)` · `tracking: wide`

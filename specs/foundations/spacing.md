@@ -2,44 +2,47 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
-The spacing system has two separate axes: **component** spacing (micro) and **layout** spacing (macro). Never use a layout token for spacing inside a component, and vice versa.
+The spacing system has two separate axes: **component** spacing (micro), drawn with the steps of the spacing scale, and **layout** spacing (macro), drawn with the `space.layout.*` tokens. Never use a layout class for spacing inside a component, and vice versa.
 
 ---
 
 ## Component Spacing
 
-Space **inside** a component (`padding`, `gap`) or **between nearby components**. Range: 4 px → 32 px.
+Space **inside** a component (`padding`, `gap`) or **between nearby components** comes from the steps of [the spacing scale](#the-spacing-scale). Among the steps the components draw with:
 
-| Token                | CSS Variable           | rem value | px value | Typical use                                                            |
-| -------------------- | ---------------------- | --------- | -------- | ---------------------------------------------------------------------- |
-| `space.component.xs` | `--space-component-xs` | `0.25rem` | 4 px     | Gap between an icon and its label, a badge's inner padding             |
-| `space.component.sm` | `--space-component-sm` | `0.5rem`  | 8 px     | Padding of a compact button, gap between tight list items              |
-| `space.component.md` | `--space-component-md` | `1rem`    | 16 px    | Standard card padding, gap between the buttons of a group              |
-| `space.component.lg` | `--space-component-lg` | `1.5rem`  | 24 px    | A dialog's inner padding, gap between the fields of a form             |
-| `space.component.xl` | `--space-component-xl` | `2rem`    | 32 px    | Padding of a large card section, spacing between groups of form fields |
+| Class           | Token             | Value | Where the components use it                                                                                                         |
+| --------------- | ----------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `gap-1`         | `space.scale.1`   | 4px   | Between a dialog's title and its description, a compact button's icon and label                                                     |
+| `gap-1.5`       | `space.scale.1-5` | 6px   | Between a button's icon and its label                                                                                               |
+| `gap-2`         | `space.scale.2`   | 8px   | Between the buttons of a dialog's footer                                                                                            |
+| `px-2.5`        | `space.scale.2-5` | 10px  | A button's horizontal padding                                                                                                       |
+| `p-4` · `gap-4` | `space.scale.4`   | 16px  | A dialog's padding and the gap between its parts; the same step through `--card-spacing` in a card (`space.scale.3` at `size="sm"`) |
+| `gap-5`         | `space.scale.5`   | 20px  | Between the fields of a `FieldGroup`                                                                                                |
 
 ### Tailwind examples
 
 ```tsx
-// Compact button — xs gap between the icon and the label
-<button className="flex items-center gap-1 px-3 py-1.5">
-  <Icon /> Label
-</button>
+// Compact button — size="sm" puts gap-1 (4px) between the icon and the label
+<Button size="sm">
+  <PlusIcon /> Label
+</Button>
 
-// Standard card — md padding
-<div className="p-4 flex flex-col gap-4">
-  <h2>Title</h2>
-  <p>Content</p>
-</div>
-
-// Dialog — lg padding
-<div className="p-6 flex flex-col gap-6">
-  <DialogHeader />
-  <DialogContent />
-</div>
+// A card — gap-4 (16px) between the blocks of its content, gap-2 (8px) between its actions
+<Card>
+  <CardContent className="flex flex-col gap-4">
+    <p>Summary</p>
+    <p>Details</p>
+  </CardContent>
+  <CardFooter className="gap-2">
+    <Button variant="outline">Cancel</Button>
+    <Button>Save</Button>
+  </CardFooter>
+</Card>
 ```
 
-> **Tailwind note:** the numeric classes (`gap-1` = 4px, `gap-2` = 8px, `gap-4` = 16px, `gap-6` = 24px, `gap-8` = 32px) read the steps of the spacing scale below, and land on the same values as the component tokens. Reach for these classes first.
+`DialogContent` already pads and spaces its parts (`p-4`, `gap-4`): do not add padding to it.
+
+> **The `space.component.*` tokens draw no class.** `xs`, `sm`, `md` and `xl` are reserved: no component reads them, and `p-component-md` generates no CSS. `space.component.lg` has a single use, the viewport gutter of `DialogContent` (`max-w-[calc(100%-var(--space-component-lg))]`). Reach for the steps of the scale.
 
 ---
 
@@ -93,11 +96,11 @@ breakpoints, they are not bridged: Tailwind's own values are the
 
 ### Generated Tailwind classes
 
-Through `@theme inline` in `globals.css`, the layout tokens are available as:
+Through `@theme inline` in `globals.css`, `px-page`, `py-section` and `gap-section` read the layout tokens. The content widths have no class of their own: use the container steps they equal (see Container widths):
 
 ```tsx
 // Page container — px-page = 1.5rem of horizontal padding
-<main className="px-page mx-auto max-w-[var(--space-layout-content-default)]">
+<main className="px-page mx-auto max-w-5xl">
   ...
 </main>
 
@@ -108,12 +111,12 @@ Through `@theme inline` in `globals.css`, the layout tokens are available as:
   <CTASection />
 </div>
 
-// Content container — maximum widths
-<article className="mx-auto w-full max-w-[var(--space-layout-content-sm)]">
+// Content container — max-w-2xl, max-w-5xl and max-w-7xl are content-sm, content-default and content-lg
+<article className="mx-auto w-full max-w-2xl">
   {/* prose / narrow article */}
 </article>
 
-<div className="mx-auto w-full max-w-[var(--space-layout-content-lg)]">
+<div className="mx-auto w-full max-w-7xl">
   {/* wide dashboard */}
 </div>
 ```
@@ -141,11 +144,11 @@ export default function Layout({ children }) {
 ## Visual scale
 
 ```
-xs  ▌ 4px
-sm  ▌▌ 8px
-md  ▌▌▌▌ 16px
-lg  ▌▌▌▌▌▌ 24px
-xl  ▌▌▌▌▌▌▌▌ 32px
+1   ▌ 4px
+2   ▌▌ 8px
+4   ▌▌▌▌ 16px
+6   ▌▌▌▌▌▌ 24px
+8   ▌▌▌▌▌▌▌▌ 32px
 ─────────────────────────────
 page-padding  ████████████████████ 24px (1.5rem)
 section-gap   ████████████████████████████████████████████████████████████████ 64px (4rem)
@@ -185,13 +188,15 @@ token.
 
 ## Usage Rules
 
-1. **Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.
-2. **No arbitrary values** — use the tokens only. When an in-between value is needed, discuss it with the design team first.
-3. **Stay on the component axis** — a form uses `lg` (24px) between its fields and `md` (16px) for inner padding. Keep to that axis throughout the same component.
+1. **Two axes, two vocabularies** — the steps of the spacing scale (`gap-2`, `px-2.5`, `p-4`) inside and between components; `space.layout.*` (`px-page`, `gap-section`) for the overall layout. Never swap them.
+2. **No arbitrary values** — use the steps of the scale only. When an in-between value is needed, discuss it with the design team first.
+3. **Keep the component's rhythm** — a form lets `FieldGroup` space its fields (`gap-5`), and a card spaces its content with `--card-spacing` (`space.scale.4`, `space.scale.3` at `size="sm"`). Keep to those steps throughout the same component.
 4. **`page-padding` is applied once** — on the page's root container, not on each section.
 5. **`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center.
 
 ### Arbitrary values: reading a token is free, computing one is not
+
+**In a screen, there is no arbitrary value at all**: `@dsaireadable/eslint-plugin` (`dsaireadable/no-raw-values`) rejects every `x-[…]` class. Use a step of the scale or a class of the design system. The rule below applies to the design system's own components, in `components/ui/`.
 
 A Tailwind arbitrary value (`w-[…]`, `gap-[…]`, `grid-cols-[…]`…) is allowed
 without justification as long as it **reads** a decision without making one:

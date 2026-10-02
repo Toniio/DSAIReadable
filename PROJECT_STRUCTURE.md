@@ -153,15 +153,17 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Specs — `npm run specs:validate`
 
-| Script                   | npm command      | Role                                                                                            |
-| ------------------------ | ---------------- | ----------------------------------------------------------------------------------------------- |
-| `build-spec-variants.ts` | `specs:variants` | The `Variants` section, from the code's `cva()` calls                                           |
-| `build-spec-tokens.ts`   | `specs:tokens`   | The `Tokens` section, classes resolved by Tailwind down to the token                            |
-| `build-spec-api.ts`      | `specs:api`      | The `Props / API` section, from the TypeScript exports (`scripts/lib/component-api.ts`)         |
-| `build-spec-choices.ts`  | `specs:choices`  | The index's choice rules, copied into the `Usage` of the specs they concern                     |
-| `lint-spec-sections.ts`  | —                | The 13 canonical sections of a component spec, the 9 of a page pattern, in order                |
-| `lint-spec-wording.ts`   | —                | No hedged wording; every Constraints line (Usage and Spacing in a pattern) opens with a keyword |
-| `build-llms-txt.ts`      | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role                |
+| Script                        | npm command      | Role                                                                                                                                                                                    |
+| ----------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build-spec-variants.ts`      | `specs:variants` | The `Variants` section, from the code's `cva()` calls                                                                                                                                   |
+| `build-spec-tokens.ts`        | `specs:tokens`   | The `Tokens` section, classes resolved by Tailwind down to the token                                                                                                                    |
+| `build-spec-api.ts`           | `specs:api`      | The `Props / API` section, from the TypeScript exports (`scripts/lib/component-api.ts`)                                                                                                 |
+| `build-spec-states.ts`        | `specs:states`   | The `States` section: the component's classes grouped by the state their variants name (`scripts/lib/spec-classes.ts`); the descriptions are kept, and one the classes contradict fails |
+| `build-spec-choices.ts`       | `specs:choices`  | The index's choice rules, copied into the `Usage` of the specs they concern                                                                                                             |
+| `lint-spec-sections.ts`       | —                | The 13 canonical sections of a component spec, the 9 of a page pattern, in order                                                                                                        |
+| `lint-spec-wording.ts`        | —                | No hedged wording; every Constraints line (Usage and Spacing in a pattern) opens with a keyword                                                                                         |
+| `lint-foundation-examples.ts` | —                | Every tsx and ts block of `specs/foundations/` passes the ESLint plugin's `recommended` config; a `// ❌` counter-example may break a class rule, never use a native element            |
+| `build-llms-txt.ts`           | `docs:llms`      | `llms.txt`, from the entry points it lists and each spec's H1, Category and Role, every link at the release tag                                                                         |
 
 ### Index — `npm run index:validate`
 
@@ -184,12 +186,12 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Versioning and release
 
-| Script                   | npm command                        | Role                                                                                    |
-| ------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------- |
-| `sync-versions.ts`       | `versions:sync` / `versions:check` | The root `package.json` version copied to the index, the MCP server and both lockfiles  |
-| `lint-changesets.ts`     | `changesets:lint`                  | Each pending `.changeset/*.md` has a known category and the bump that category takes    |
-| `test-release.ts`        | `release:test`                     | A changeset becomes a version and a CHANGELOG entry, on a copy of the files             |
-| `test-pinned-install.ts` | `release:test`                     | What the shadcn CLI pins when an item is installed at a tag, against a local git remote |
+| Script                   | npm command                        | Role                                                                                                         |
+| ------------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `sync-versions.ts`       | `versions:sync` / `versions:check` | The root `package.json` version copied to the index, the MCP server and both lockfiles                       |
+| `lint-changesets.ts`     | `changesets:lint`                  | Each pending `.changeset/*.md` has a known category and the bump that category takes                         |
+| `test-release.ts`        | `release:test`                     | A changeset becomes a version, a CHANGELOG entry and `llms.txt` links on the new tag, on a copy of the files |
+| `test-pinned-install.ts` | `release:test`                     | What the shadcn CLI pins when an item is installed at a tag, against a local git remote                      |
 
 `release:check` runs the first two; `release:version` is what a release pull request runs
 ([`CONTRIBUTING.md`](./CONTRIBUTING.md#versioning-and-releases)).
@@ -212,6 +214,7 @@ One spec per component, in 13 sections:
 rules are written **MUST** / **MUST NOT** or **SHOULD** … **unless** (**Note** for a fact, in Constraints); `lint-spec-wording` rejects "avoid", "prefer", "if needed"… and any Constraints line without a keyword;
 the rules for choosing between sibling components (the index's `composition_rules`, `applies_to` field) are copied as the last bullet of their `Usage` (`npm run specs:choices`);
 `Props / API` is generated from the TypeScript exports — one block per export, types and defaults taken from the code; only the descriptions are edited by hand (`npm run specs:api`);
+`States` is generated from the code's classes, grouped by the state their variants name (`hover:`, `data-open:`, `aria-invalid:`…); only the descriptions are edited by hand, and one that names a percentage, a px value or a class the component does not draw fails (`npm run specs:states`);
 `Accessibility` follows a fixed structure — Pattern, Role, Keyboard, Accessible name, Pitfalls — and targets WCAG 2.2 AA.
 
 ### `specs/foundations/` — Foundation specs
@@ -228,7 +231,7 @@ the rules for choosing between sibling components (the index's `composition_rule
 | `opacity.md`        | The three semantic opacity levels                                                                |
 | `radius.md`         | Border-radius values                                                                             |
 | `size.md`           | The 24px minimum target size (WCAG 2.2 SC 2.5.8) and the audit of every control                  |
-| `spacing.md`        | Component spacing (4px → 32px) and layout spacing                                                |
+| `spacing.md`        | The spacing scale (`space.scale.*`), container widths and layout spacing                         |
 | `typography.md`     | Type scale, families, weights                                                                    |
 | `voice-and-tone.md` | The voice, the tone by situation, grammar and mechanics, the word list — checked on `UI_STRINGS` |
 
@@ -262,21 +265,24 @@ fails on drift.
 
 `npm run test:components` renders components in headless Chromium (Vitest
 browser mode, Playwright) with the design system's stylesheet, and checks them
-against their spec: every spec's `## Code example` rendered as written, with
+against their spec: every spec's `## Code example`, and every complete module
+(imports and a default export) among the foundations' examples, rendered as written, with
 zero axe-core violation on the WCAG 2.2 A and AA rules in the light and the dark
 theme (contrast and target size included) and a focus indicator on every tab
 stop; then, per component, the **Accessibility** section replayed: role,
 accessible name and each key of the Keyboard table. `npm run test:lint-coverage`
 fails when a component has no renderable example or a documented key has no test.
 
-| File                          | Role                                                                                                                                          |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tests/examples.test.tsx`     | The 65 spec examples: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                 |
-| `tests/components/*.test.tsx` | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                |
-| `tests/spec-examples.ts`      | Vite plugin: serves each spec's code example as a module (`virtual:spec-examples`), so the tests render what agents copy                      |
-| `tests/axe.ts`                | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                               |
-| `tests/focus.ts`              | Reads the rings painted before and after a focus move: the indicator may sit on the control, its wrapping group or the part standing for it   |
-| `tests/setup.ts`              | Loads `styles/globals.css` and `tests/no-motion.css` (no animation, so axe reads final colors); unmounts and resets the theme after each test |
+| File                              | Role                                                                                                                                                                                                                           |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tests/examples.test.tsx`         | The 65 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                                                      |
+| `tests/components/*.test.tsx`     | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                                                                                                 |
+| `tests/spec-examples.ts`          | Vite plugin: serves each spec's code example, and each complete module of the foundations, as a module (`virtual:spec-examples`), so the tests render what agents copy                                                         |
+| `tests/axe.ts`                    | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                                                                                                                |
+| `tests/focus.ts`                  | Reads the rings painted before and after a focus move: the indicator may sit on the control, its wrapping group or the part standing for it                                                                                    |
+| `tests/reduced-motion/*.test.tsx` | The `reduced-motion` project: in a browser that reports `prefers-reduced-motion: reduce`, with the animations on, the overlays enter and leave with a fade only and the loops and slides of `specs/foundations/motion.md` stop |
+| `tests/reduced-motion/setup.ts`   | The stylesheet without `tests/no-motion.css`, for that project                                                                                                                                                                 |
+| `tests/setup.ts`                  | Loads `styles/globals.css` and `tests/no-motion.css` (no animation, so axe reads final colors); unmounts and resets the theme after each test                                                                                  |
 
 The tests live outside `components/ui/` so that the linters and the registry,
 which read that folder, only see distributed code.
@@ -378,7 +384,7 @@ tokens/*.json
     ├──▶ tokens.css ──▶ styles/globals.css (@theme inline) ──▶ Tailwind classes ──▶ components/ui/
     └──▶ token-reference.md · tokens.manifest.json          (docs:tokens)
 
-components/ui/*.tsx ──▶ specs/components/*.md               (Variants, Tokens, Props / API)
+components/ui/*.tsx ──▶ specs/components/*.md               (Variants, Tokens, Props / API, States)
 design-system.index.json ──▶ specs/components/*.md          (choice rules, Usage)
 specs/ ──▶ llms.txt                                         (docs:llms)
 
@@ -403,6 +409,7 @@ npm run test:lint-coverage  # Every component rendered from its spec, every docu
 npm run test:components     # Component tests in headless Chromium (Vitest + axe-core)
 npm run skills:validate     # The agent skills: format, and every rule cites a source that exists
 npm run evals:test          # The conformance harness scores its gold examples and fixtures, with no model
+npm run evals:generate      # Screens from Claude Code on a subscription, no API key (evals/README.md)
 npm run format              # Prettier on every .ts/.tsx/.md
 ```
 

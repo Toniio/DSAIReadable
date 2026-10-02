@@ -66,19 +66,21 @@ Most of what an agent reads is generated: change the source, run its command,
 and commit both. CI fails on a generated file that is out of step with its
 source.
 
-| To change                                      | Edit                                                                             | Then run                                                              |
-| ---------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| A token value or decision                      | `tokens/*.json`                                                                  | `npm run tokens:build && npm run docs:tokens`                         |
-| A component                                    | `components/ui/<component>.tsx`, after reading its spec                          | `npm run specs:variants && npm run specs:tokens && npm run specs:api` |
-| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections                    | `npm run docs:llms` when the Role changed                             |
-| A choice between sibling components            | `composition_rules` in `design-system.index.json`                                | `npm run specs:choices`                                               |
-| Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                            |
-| A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                              |
-| A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                |
-| A rule agents follow when they build UI        | the spec or pattern it cites, then the skill in `skills/` that points at it      | `npm run skills:validate`                                             |
+| To change                                      | Edit                                                                             | Then run                                                                                      |
+| ---------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| A token value or decision                      | `tokens/*.json`                                                                  | `npm run tokens:build && npm run docs:tokens`                                                 |
+| A component                                    | `components/ui/<component>.tsx`, after reading its spec                          | `npm run specs:variants && npm run specs:tokens && npm run specs:api && npm run specs:states` |
+| A component's behavior, usage or accessibility | `specs/components/<Component>.md`, outside generated sections                    | `npm run docs:llms` when the Role changed                                                     |
+| A foundation's guidance or example             | `specs/foundations/<name>.md`                                                    | `npm run specs:validate`: its tsx and ts blocks pass the ESLint plugin                        |
+| A choice between sibling components            | `composition_rules` in `design-system.index.json`                                | `npm run specs:choices`                                                                       |
+| Anything the MCP server serves                 | its source above                                                                 | `npm run generate-context`                                                                    |
+| A registry item                                | the component or `registry/`                                                     | `npm run registry:build`                                                                      |
+| A component's API (a prop, an export, a value) | the component, then its `shadcn.divergences` entry in `design-system.index.json` | `npm run index:shadcn`                                                                        |
+| A rule agents follow when they build UI        | the spec or pattern it cites, then the skill in `skills/` that points at it      | `npm run skills:validate`                                                                     |
 
 **A new or changed component arrives with its test.** `tests/examples.test.tsx`
-renders every spec's `## Code example` in headless Chromium, light and dark:
+renders every spec's `## Code example`, and every foundation example written as
+a complete module (imports and a default export), in headless Chromium, light and dark:
 zero axe violation (contrast and target size included) and a visible focus
 indicator on every tab stop. An example that fails is fixed in the spec, which
 is what agents copy. Each row of a spec's Accessibility › Keyboard table has its
@@ -245,13 +247,15 @@ Every release comes from the changesets:
 
 1. A release pull request runs `npm run release:version`: it consumes the
    changesets, writes the CHANGELOG entry, bumps the version, copies it
-   everywhere and regenerates the MCP context.
+   everywhere and regenerates `llms.txt`, whose links then name the new tag,
+   and the MCP context.
 2. After the merge, tag the merge commit and push the tag:
    `git tag -a vX.Y.Z -m vX.Y.Z <merge commit>`, then
    `git push origin vX.Y.Z`. Not `npx changeset tag`: in this workspace it
    tags each package (`dsaireadable@X.Y.Z`, `@dsaireadable/mcp-server@X.Y.Z`,
    `@dsaireadable/eslint-plugin@X.Y.Z`), never `vX.Y.Z`, the tag a pinned
-   install names (`Toniio/DSAIReadable/button#vX.Y.Z`).
+   install names (`Toniio/DSAIReadable/button#vX.Y.Z`). Push it right after
+   the merge: until the tag exists, every link of `llms.txt` returns a 404.
 3. A maintainer publishes the two packages, the ESLint plugin first since the
    server pins it: `npm publish --access public --dry-run`, then without
    `--dry-run`, in `packages/eslint-plugin/`, then in `mcp-server/`. A published
@@ -263,7 +267,8 @@ hand before the changesets existed: they sit under its `Added`, `Changed`,
 `Fixed`, `Removed` and `Security` headings.
 
 `npm run release:test` runs that pipeline on a copy of the files, with a test
-changeset, and checks the version and the CHANGELOG entry it produces.
+changeset, and checks the version, the CHANGELOG entry and the `llms.txt` links
+it produces.
 
 ### A pinned install pins one item
 
@@ -298,10 +303,10 @@ The `Evals` workflow runs apart, only when started by hand (each run costs API c
 
 `registry.json` and `mcp-server/context/ds-metadata.json` copy dependency
 versions, a Prettier update can reformat code, and a Tailwind update can change
-the generated Tokens sections of the specs. Dependabot runs none of the
+the generated Tokens and States sections of the specs. Dependabot runs none of the
 generators, so the `dependabot-regenerate` workflow does it on each Dependabot
-PR: a read-only job runs `registry:build`, `generate-context`, `specs:tokens`
-and `format`, and
+PR: a read-only job runs `registry:build`, `generate-context`, `specs:tokens`,
+`specs:states` and `format`, and
 a second job, which runs none of the PR's code, pushes the result as one
 `chore(deps)` commit. CI then runs again on that commit.
 
@@ -323,7 +328,7 @@ needs code changes (a major version with breaking changes) is still fixed by
 hand.
 
 `tailwindcss` and `@tailwindcss/*` form their own group and always move
-together: `specs:tokens` calls a private API of `@tailwindcss/node`. Majors
+together: `specs:tokens` and `specs:states` call a private API of `@tailwindcss/node`. Majors
 that cannot be taken yet are ignored in `.github/dependabot.yml`, each with the
 date and the reason — TypeScript 7 (no JavaScript compiler API) and
 `@types/node` beyond the Node runtime.

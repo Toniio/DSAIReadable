@@ -75,6 +75,12 @@ function Carousel({
     {
       ...opts,
       axis: orientation === "horizontal" ? "x" : "y",
+      // Under prefers-reduced-motion, the buttons and the arrow keys jump to
+      // the slide instead of scrolling to it (specs/foundations/motion.md).
+      breakpoints: {
+        "(prefers-reduced-motion: reduce)": { duration: 0 },
+        ...opts?.breakpoints,
+      },
     },
     plugins
   )

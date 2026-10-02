@@ -80,8 +80,19 @@ function typeErrors(root: string, files: string[]): Map<string, string[]> {
   return out
 }
 
-async function lintResults(root: string, files: string[]) {
-  const eslint = new ESLint({
+/**
+ * ESLint with `@dsaireadable/eslint-plugin`'s `recommended` config, the one a
+ * consuming project runs, from `root` so its Tailwind half reads
+ * `styles/globals.css`. Stage A lints the screens with it, and
+ * scripts/lint-foundation-examples.ts the examples of the foundations, with
+ * `allowInlineConfig: false` so an `eslint-disable` comment cannot hide a finding.
+ */
+export function designSystemLinter(
+  root: string,
+  options: Pick<ESLint.Options, "allowInlineConfig"> = {}
+): ESLint {
+  return new ESLint({
+    ...options,
     cwd: root,
     overrideConfigFile: true,
     overrideConfig: [
@@ -95,6 +106,10 @@ async function lintResults(root: string, files: string[]) {
       ...(plugin.configs.recommended as unknown as Linter.Config[]),
     ],
   })
+}
+
+async function lintResults(root: string, files: string[]) {
+  const eslint = designSystemLinter(root)
   const out = new Map<string, Linter.LintMessage[]>()
   for (const result of await eslint.lintFiles(files))
     out.set(

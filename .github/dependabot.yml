@@ -22,9 +22,9 @@ updates:
     ignore:
       # Ignored on 2026-09-29 (Toniio/DSAIReadable#43 and #46, closed).
       # TypeScript 7 ships no JavaScript compiler API: generate-context,
-      # specs:api, specs:tokens and index:data-slot all read the code through
-      # it (`ts.ScriptTarget` is undefined). typescript-eslint does not support
-      # it yet either. Lift this once both have a path forward.
+      # specs:api, specs:tokens, specs:states and index:data-slot all read the
+      # code through it (`ts.ScriptTarget` is undefined). typescript-eslint does
+      # not support it yet either. Lift this once both have a path forward.
       - dependency-name: typescript
         update-types:
           - version-update:semver-major

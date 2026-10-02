@@ -7,6 +7,7 @@
   "include": [
     "scripts/*.ts",
     "evals/run.ts",
+    "evals/generate-claude-code.ts",
     "evals/lib/*.ts",
     "evals/a11y/vitest.config.ts"
   ],

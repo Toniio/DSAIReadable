@@ -8,21 +8,43 @@
  * kind and each component with its category, both with the one sentence of
  * their Role section. A spec added, renamed or re-worded
  * therefore changes llms.txt, and `--check` fails until it is regenerated.
- * Every link is an absolute URL to the raw file on `main`, so the map works
- * whether the agent reads the clone or fetches it from GitHub; the script
- * refuses a link whose file does not exist.
+ * Every link is an absolute URL to the raw file at the release tag (`v` and
+ * the version of the root package.json), not on `main`: an agent reads the
+ * files of the published version, whether it reads the clone or fetches them
+ * from GitHub. `release:version` regenerates the map once `changeset version`
+ * has bumped the version, and `--check` fails until then. The script refuses a
+ * link whose file does not exist in the working tree; a file added since the
+ * last release is linked at a tag that does not have it yet, until the next
+ * release.
  *
- *   npx tsx scripts/build-llms-txt.ts [--check]
+ *   npx tsx scripts/build-llms-txt.ts [--check] [--root <dir>]
+ *   --root <dir>    act on another checkout (the release test)
  */
 
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-const CHECK = process.argv.includes("--check")
+const args = process.argv.slice(2)
+const CHECK = args.includes("--check")
+const ROOT = args.includes("--root")
+  ? resolve(args[args.indexOf("--root") + 1])
+  : resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const OUTPUT = resolve(ROOT, "llms.txt")
-const RAW = "https://raw.githubusercontent.com/Toniio/DSAIReadable/main"
+
+const read = (path: string) => readFileSync(resolve(ROOT, path), "utf-8")
+
+/** The links name the release tag of the root version, which `changeset version` bumps. */
+const VERSION = (JSON.parse(read("package.json")) as { version?: string })
+  .version
+if (!VERSION || !/^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/.test(VERSION)) {
+  console.error(
+    `❌ build-llms-txt: package.json has no valid version ("${VERSION}")`
+  )
+  process.exit(1)
+}
+const TAG = `v${VERSION}`
+const RAW = `https://raw.githubusercontent.com/Toniio/DSAIReadable/${TAG}`
 
 type Link = { path: string; name: string; notes?: string }
 
@@ -97,7 +119,6 @@ const OPTIONAL: Link[] = [
   { path: "SECURITY.md", name: "Security policy" },
 ]
 
-const read = (path: string) => readFileSync(resolve(ROOT, path), "utf-8")
 const specFiles = (dir: string) =>
   readdirSync(resolve(ROOT, dir))
     .filter((file) => file.endsWith(".md"))
@@ -163,6 +184,8 @@ const text = [
   "",
   "Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes or `var(--…)` tokens, never a raw value (hex, `px`, `rem`, `ms`); and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections. A screen that carries out a common task (create, edit, delete, filter, search, sign in, settings) starts from its page pattern.",
   "",
+  `Every link points to the release tag \`${TAG}\`, the published version, not to \`main\`, which can be ahead of it.`,
+  "",
   ...sections.flatMap(([title, links]) => [
     `## ${title}`,
     "",
@@ -175,7 +198,7 @@ const current = existsSync(OUTPUT) ? readFileSync(OUTPUT, "utf-8") : ""
 if (CHECK) {
   if (current !== text) {
     console.error(
-      "❌ build-llms-txt: llms.txt is out of step with specs/.\n" +
+      "❌ build-llms-txt: llms.txt is out of step with specs/ or the package.json version.\n" +
         "   Run `npm run docs:llms` and commit the result."
     )
     process.exit(1)

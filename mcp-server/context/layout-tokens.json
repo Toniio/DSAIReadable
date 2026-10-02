@@ -26,7 +26,7 @@
       "css_var": "--space-component-lg",
       "value": "{primitive.space.6}",
       "type": "dimension",
-      "description": "Large component padding/gap (24px). Not for layout or section spacing."
+      "description": "Large component spacing (24px), read through var(): the viewport gutter of DialogContent. Not for layout or section spacing."
     },
     {
       "path": "space.component.xl",
@@ -576,9 +576,9 @@
     }
   ],
   "spacing_rules": [
-    "**Two axes, two vocabularies** — `space.component.*` inside components; `space.layout.*` for the overall layout. Never swap them.",
-    "**No arbitrary values** — use the tokens only. When an in-between value is needed, discuss it with the design team first.",
-    "**Stay on the component axis** — a form uses `lg` (24px) between its fields and `md` (16px) for inner padding. Keep to that axis throughout the same component.",
+    "**Two axes, two vocabularies** — the steps of the spacing scale (`gap-2`, `px-2.5`, `p-4`) inside and between components; `space.layout.*` (`px-page`, `gap-section`) for the overall layout. Never swap them.",
+    "**No arbitrary values** — use the steps of the scale only. When an in-between value is needed, discuss it with the design team first.",
+    "**Keep the component's rhythm** — a form lets `FieldGroup` space its fields (`gap-5`), and a card spaces its content with `--card-spacing` (`space.scale.4`, `space.scale.3` at `size=\"sm\"`). Keep to those steps throughout the same component.",
     "**`page-padding` is applied once** — on the page's root container, not on each section.",
     "**`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center."
   ],

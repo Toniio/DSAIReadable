@@ -1,5 +1,29 @@
 [
   {
+    "version": "0.1.1",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "59bf59d: docs: Fix the drifts between specs and code: Button's hover state no longer claims 90% opacity, the foundation examples use the design system's components instead of native interactive elements (button, input, label, dialog) and pass its ESLint config, the motion foundation lists motion.duration.extra-slow, rule-12 and the spacing foundation name the spacing scale the components draw with (the space.component.* tokens draw no class, and their token docs now say so), the form, create and sign-in patterns give FieldGroup's real gap, gap-5, and the create pattern spaces its dialog form with DialogContent's own gap-4."
+  },
+  {
+    "version": "0.1.1",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "7d1bba6: docs: The States section of the 65 component specs is generated from the code: each state lists the classes that draw it, and its description can no longer contradict them. The descriptions that did are fixed (overlays enter with `fade-in-0`, not `fade-in`; Slider, RadioGroup and Field name their ring and opacity tokens instead of px and percentage values), the states the code draws without a row are described, and rows filed under the wrong state (an open popup under `active`) moved to the right one."
+  },
+  {
+    "version": "0.1.1",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "9a7c36e: docs: The links of `llms.txt` point to the release tag instead of `main`, so an agent reads the specs of the published version, the one the MCP server of the same version serves, rather than changes not yet released."
+  },
+  {
+    "version": "0.1.1",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "4e2de49: visual: Under `prefers-reduced-motion: reduce`, entrances and exits fade instead of moving. Dialog, AlertDialog, Sheet, Popover, HoverCard, Tooltip, DropdownMenu, ContextMenu, Menubar, Select, Combobox and NavigationMenu: zoom and slide to fade only. Drawer: slide to fade. Accordion: height animation to instant. Skeleton pulse, Attachment title shimmer and InputOTP caret blink: animated to static. Carousel: smooth scroll to instant jump. MessageScroller button: slide and scale to fade. Sidebar on the desktop: collapse transition to instant. Spinner keeps turning."
+  },
+  {
     "version": "0.1.0",
     "date": null,
     "category": "Minor Changes",
