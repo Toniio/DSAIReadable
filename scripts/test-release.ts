@@ -7,7 +7,9 @@
  * tree is never touched:
  *
  *   ① the changeset lint accepts a changeset that follows the policy and
- *      refuses one that does not (a visual change declared as minor);
+ *      refuses one that does not (a visual change declared as minor, a
+ *      category the policy does not know); `lint` and a corrective `mcp` or
+ *      `skills` are patches;
  *   ② `changeset version` bumps package.json and writes the expected
  *      CHANGELOG entry, then consumes the changeset;
  *   ③ `versions:check` catches the copies that did not follow, and
@@ -124,6 +126,30 @@ try {
     "the lint refuses a summary with no category"
   )
   rmSync(join(tmp, ".changeset/uncategorized.md"))
+  changeset("unknown.md", "patch", "chore: Tidy the scripts.")
+  expect(
+    !script("lint-changesets").ok,
+    "the lint refuses a category the policy does not know"
+  )
+  rmSync(join(tmp, ".changeset/unknown.md"))
+  for (const [name, summary] of [
+    ["lint-patch.md", "lint: Name the corrected class in a message."],
+    ["mcp-patch.md", "mcp: Correct a served rule that named a class wrongly."],
+    ["skills-patch.md", "skills: Correct a sentence of a skill."],
+  ])
+    changeset(name, "patch", summary)
+  expect(
+    script("lint-changesets").ok,
+    "the lint accepts a patch for lint, and for a correction under mcp or skills"
+  )
+  for (const name of ["lint-patch.md", "mcp-patch.md", "skills-patch.md"])
+    rmSync(join(tmp, ".changeset", name))
+  changeset("api-patch.md", "patch", "component-api: Add the `xs` size.")
+  expect(
+    !script("lint-changesets").ok,
+    "the lint still refuses a component-api change declared as patch"
+  )
+  rmSync(join(tmp, ".changeset/api-patch.md"))
 
   changeset("button-xs.md", "minor", SUMMARY)
   expect(

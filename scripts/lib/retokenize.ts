@@ -33,14 +33,25 @@ import {
   type SourceFile,
 } from "ts-morph"
 
+/**
+ * What a class becomes: the replacement alone when it spells the same value
+ * another way, or with the `reason` it changes a value or a behavior
+ * (scripts/lib/class-equivalence.ts proves which one it is).
+ */
+export type Replacement = string | { to: string; reason: string }
+
+/** The replacement itself, with or without its reason. */
+export const replacementOf = (replacement: Replacement) =>
+  typeof replacement === "string" ? replacement : replacement.to
+
 interface RetokenizeRules {
-  classes?: Record<string, string>
-  utilities?: Record<string, string>
+  classes?: Record<string, Replacement>
+  utilities?: Record<string, Replacement>
 }
 
 export interface RetokenizeMap extends Required<RetokenizeRules> {
   patterns: [string, string][]
-  values: Record<string, string>
+  values: Record<string, Replacement>
   files: Record<string, RetokenizeRules>
   constants: { name: string; module: string }[]
 }
@@ -74,9 +85,11 @@ function splitVariants(token: string): [string, string] {
 export function mapClass(token: string, item: string, map: RetokenizeMap) {
   const local = map.files[item] ?? {}
   const exact = local.classes?.[token] ?? map.classes[token]
-  if (exact !== undefined) return exact
+  if (exact !== undefined) return replacementOf(exact)
   const [variants, utility] = splitVariants(token)
-  let mapped = local.utilities?.[utility] ?? map.utilities[utility]
+  const utilityRule = local.utilities?.[utility] ?? map.utilities[utility]
+  let mapped =
+    utilityRule === undefined ? undefined : replacementOf(utilityRule)
   if (mapped === undefined) {
     let current = utility
     for (const [pattern, replacement] of map.patterns)
@@ -220,7 +233,7 @@ export function retokenize(
 
   for (const node of styleValues(sourceFile)) {
     const value = map.values[node.getLiteralValue()]
-    if (value !== undefined) node.setLiteralValue(value)
+    if (value !== undefined) node.setLiteralValue(replacementOf(value))
   }
 
   // Innermost first: replacing an outer string would forget the inner ones.

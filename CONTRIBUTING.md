@@ -114,7 +114,7 @@ hand-made forks. `shadcn-upstream.json` holds:
 - `upstream`: the shadcn/ui tag the components are anchored to, its base
   (`radix`) and its style (`lyra`, the `radix-lyra` of `components.json`);
 - `map`: the re-tokenization table, the single source of truth for "a shadcn/ui
-  class → the design system's". `classes` maps a whole class, variants
+  class → the design system's" (an entry is spelled out below). `classes` maps a whole class, variants
   included (`aria-invalid:ring-1` → nothing: the invalid ring shows on focus
   only); `utilities` maps a utility and keeps its variants (`opacity-50` →
   `opacity-disabled`, so `disabled:opacity-50` → `disabled:opacity-disabled`);
@@ -129,6 +129,25 @@ hand-made forks. `shadcn-upstream.json` holds:
   PasswordInput). A `fork`, which drops upstream classes, declares them in
   `removed`; none is needed today.
 
+An entry of `map` is either `"upstream": "replacement"`, when the replacement
+draws the same CSS (`min-w-[96px]` → `min-w-24`, `opacity-50` →
+`opacity-disabled`), or `"upstream": { "to": "replacement", "reason": "…" }`,
+when it changes a value or a behavior (`w-[100px]` → `w-24` is 96px; a class
+dropped). The reason says what changes, with the values, and why. `npm run
+shadcn:retokenize` draws both sides: Tailwind compiles each class against
+`styles/globals.css`, the custom properties are read from `tokens.css`, `rem` is
+brought to `px` and `calc()` is evaluated. A bare entry that draws something
+else fails the check; a reason on an entry that draws the same is harmless. The
+check also proves, on arbitrary values, that it still tells the two apart.
+`patterns` rewrite inside arbitrary values and are not drawn.
+
+A class of upstream that is dead (it draws nothing, or never matches),
+unreachable or wrong is corrected the same way: in `map`, in
+`map.files.<component>` when it is one component's, with its `reason`. The
+component stays re-anchored (the sidebar and the combobox of #82 are
+precedents). `fork` is for a design choice that drops upstream classes on
+purpose, not for a correction.
+
 `npm run shadcn:retokenize` (in `npm run check`) proves the table is a
 fixpoint: the components go through the codemod unchanged, so a raw class the
 table maps cannot come back. `npm run shadcn:drift` (network, CI) rebuilds the
@@ -140,8 +159,8 @@ class: a difference that is neither mapped nor declared fails, with the classes
 to adopt, map or declare.
 
 When you change a component's classes, keep it re-anchored: take the upstream
-class (in `.shadcn-vanilla/`), map a systematic difference in `map`, or declare
-an addition with its reason.
+class (in `.shadcn-vanilla/`), map a difference in `map` with its reason when
+it changes a value, or declare an addition with its reason.
 
 To follow a newer shadcn/ui:
 
@@ -199,33 +218,50 @@ release tag is `vX.Y.Z`.
 ### What a change bumps
 
 The public surface is the tokens, the components' API, the registry items, the
-MCP server's tools and the agent skills. Every changeset starts its summary with the category
+MCP server's tools, the agent skills and the rules of the ESLint plugin that
+consumers run in their CI. Every changeset starts its summary with the category
 that says what changed, and the bump follows from it:
 
-| Category         | The change                                                                                              | Bump                      |
-| ---------------- | ------------------------------------------------------------------------------------------------------- | ------------------------- |
-| `token-breaking` | A token renamed, removed or repurposed                                                                  | major                     |
-| `component-api`  | A prop, export, variant, component, registry item or new token added, or one of them renamed or removed | minor; major if it breaks |
-| `mcp`            | A tool, a schema or the content the MCP server serves: added, renamed or removed                        | minor; major if it breaks |
-| `skills`         | A skill of `skills/`, one of its rules, or the Claude Code plugin that ships them                       | minor; major if it breaks |
-| `visual`         | Appearance only: a value, a spacing, a radius                                                           | patch                     |
-| `docs`           | Specs and guidance, no code                                                                             | patch                     |
+| Category         | The change                                                                                              | Bump                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `token-breaking` | A token renamed, removed or repurposed                                                                  | major                                                                     |
+| `component-api`  | A prop, export, variant, component, registry item or new token added, or one of them renamed or removed | minor; major if it breaks                                                 |
+| `mcp`            | A tool, a schema or the content the MCP server serves: added, renamed or removed, or corrected          | minor; major if it breaks; patch for a correction                         |
+| `skills`         | A skill of `skills/`, one of its rules, or the Claude Code plugin that ships them: the same             | minor; major if it breaks; patch for a correction                         |
+| `lint`           | A rule or config of `@dsaireadable/eslint-plugin`                                                       | patch; minor if it reports more; major if it adds errors to `recommended` |
+| `visual`         | Appearance, or a behavior fixed with no change of API: a value, a spacing, a radius, a state            | patch                                                                     |
+| `docs`           | Specs and guidance, no code                                                                             | patch                                                                     |
 
 - **Breaking is major.** Renaming or removing a token, a prop, an export, a
   union value, a registry item or an MCP tool is always the breaking bump, and
   for a component it is also a declared divergence from shadcn/ui.
+- **A correction is a patch under `mcp` and `skills`.** A served rule that named
+  a class which generates nothing, a skill sentence that was wrong, the ref a
+  plugin installs from: put right, with no tool, schema, skill or rule added,
+  renamed or removed. What an agent has to learn again is a minor.
+- **`lint` follows ESLint's own policy.** A message, an autofix, a docs link or
+  a fix that reports fewer errors is a patch. A fix that reports more errors
+  may break a consumer's lint build: minor. A rule or an option added to
+  `recommended` that adds errors is a major, which the 0.x versions write as
+  minor.
 - **Visual is patch, and says so in full.** An agent cannot see a visual change,
   so the changeset states what moves and from what to what (`Card radius: md to
-lg`), not "polish".
+lg`), not "polish". A fix of behavior with no change of API (a state that did
+  not work, a ring that was drawn twice) is `visual` too, as ScrollArea and Tabs
+  (0.1.0) and reduced motion (0.1.1) were.
+- **A dead class is not a change of the public surface.** Removing one that
+  generates no CSS or never matches is `docs` when a spec changes (its States
+  table lists it), and needs no changeset when none does.
 - **While the version is 0.x**, `minor` is the breaking bump and also carries
   additions, and `patch` carries the rest (SemVer § 4). A `major` changeset
   releases 1.0.0: write one only to declare the design system stable.
 - **No changeset** for a change nothing outside the repository can observe: CI,
-  lint, tests, a refactor, an internal script.
+  the repository's internal lint, tests, a refactor, an internal script.
 
 `npm run changesets:lint` checks the category and the bump of each pending
 changeset. It cannot tell an addition from a breaking change under
-`component-api` or `mcp`: the reviewer does.
+`component-api`, `mcp`, `skills` or `lint`, nor a correction from an addition
+under `mcp` and `skills`: the reviewer does.
 
 ### Declaring a change
 

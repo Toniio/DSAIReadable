@@ -47,11 +47,14 @@ import { fileURLToPath, pathToFileURL } from "node:url"
 import { promisify } from "node:util"
 import * as prettier from "prettier"
 import { createStyleMap, transformStyle } from "shadcn/utils"
+import { equivalence, type Equivalence } from "./lib/class-equivalence"
 import {
   classesOf,
   mapClass,
+  replacementOf,
   retokenize,
   type ClassConstant,
+  type Replacement,
   type RetokenizeMap,
 } from "./lib/retokenize"
 
@@ -123,7 +126,7 @@ function checkTable() {
       ...Object.values(r.classes ?? {}),
       ...Object.values(r.utilities ?? {}),
     ]),
-  ]
+  ].map(replacementOf)
   for (const replacement of replacements)
     for (const token of replacement.split(/\s+/).filter(Boolean)) {
       const again = mapClass(token, "", config.map)
@@ -138,6 +141,93 @@ function checkTable() {
     } catch {
       errors.push(`map.patterns: invalid regular expression ${pattern}`)
     }
+}
+
+/**
+ * Every entry of the table that does not draw what its upstream class drew
+ * says why. `map` is checked as it is: a bare string must be provably the same
+ * CSS, an entry with a `reason` is taken as the declaration of the change.
+ */
+function unexplained(map: RetokenizeMap, same: Equivalence): string[] {
+  const out: string[] = []
+  const check = (
+    where: string,
+    from: string,
+    replacement: Replacement,
+    equal: boolean
+  ) => {
+    if (typeof replacement === "string") {
+      if (!equal)
+        out.push(
+          `${where}["${from}"] → "${replacement}" does not draw what "${from}" draws, and gives no reason: write {"to": "${replacement}", "reason": "…"}`
+        )
+    } else if (!replacement.reason.trim())
+      out.push(`${where}["${from}"]: an empty reason`)
+  }
+  const rules = (
+    where: string,
+    entries: Record<string, Replacement> | undefined
+  ) => {
+    for (const [from, replacement] of Object.entries(entries ?? {}))
+      check(
+        where,
+        from,
+        replacement,
+        same.sameClasses(from, replacementOf(replacement))
+      )
+  }
+  rules("map.classes", map.classes)
+  rules("map.utilities", map.utilities)
+  for (const [item, rule] of Object.entries(map.files)) {
+    rules(`map.files.${item}.classes`, rule.classes)
+    rules(`map.files.${item}.utilities`, rule.utilities)
+  }
+  for (const [from, replacement] of Object.entries(map.values))
+    check(
+      "map.values",
+      from,
+      replacement,
+      same.sameValue(from, replacementOf(replacement))
+    )
+  return out
+}
+
+/** The table's reasons, and the proof that this check still catches a change. */
+async function checkReasons() {
+  const same = await equivalence(ROOT)
+  errors.push(...unexplained(config.map, same))
+
+  // Canaries on arbitrary values, which no token change can move: a changed
+  // value, a removed class and a class swallowed by the design system must be
+  // told from the same value spelled another way.
+  const canary = (entries: Record<string, string>): string[] =>
+    unexplained(
+      {
+        classes: entries,
+        utilities: {},
+        patterns: [],
+        values: {},
+        files: {},
+        constants: [],
+      },
+      same
+    )
+  const flagged = canary({
+    "w-[100px]": "w-[96px]",
+    "w-[6rem]": "w-[96px]",
+    "duration-[1s]": "duration-[1000ms]",
+    "gap-[calc(1rem+8px)]": "gap-[24px]",
+    "min-w-[1px]": "",
+    "opacity-[50%]": "opacity-[0.5]",
+  })
+  const want = ['"w-[100px]"', '"min-w-[1px]"']
+  if (
+    flagged.length !== want.length ||
+    !want.every((key, i) => flagged[i]?.includes(key))
+  )
+    errors.push(
+      `map: the check of reasons no longer tells a changed value from the same value spelled another way; it flagged:\n${flagged.join("\n") || "(nothing)"}`
+    )
 }
 
 function checkClassification() {
@@ -454,6 +544,7 @@ async function update(to: string, constants: ClassConstant[]) {
 
 const constants = await loadConstants()
 checkTable()
+await checkReasons()
 checkClassification()
 await checkFixpoint(constants)
 if (UPDATE_TO) await update(UPDATE_TO, constants)

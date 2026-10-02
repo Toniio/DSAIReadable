@@ -8,35 +8,116 @@
   },
   "map": {
     "classes": {
-      "focus-visible:ring-1": "focus-visible:ring-(length:--space-focus-ring-width)",
+      "focus-visible:ring-1": {
+        "to": "focus-visible:ring-(length:--space-focus-ring-width)",
+        "reason": "A 1px focus ring becomes 2px (space.focus-ring-width). Every focusable element draws one ring width from one token, and ring-1 is a raw pixel width, which is forbidden."
+      },
       "focus-visible:ring-2": "focus-visible:ring-(length:--space-focus-ring-width)",
-      "focus-visible:ring-3": "focus-visible:ring-(length:--space-focus-ring-width)",
-      "focus-visible:ring-[3px]": "focus-visible:ring-(length:--space-focus-ring-width)",
-      "focus-within:ring-1": "focus-within:ring-(length:--space-focus-ring-width)",
-      "aria-invalid:ring-1": "",
-      "aria-invalid:ring-3": "",
-      "has-aria-invalid:ring-1": "has-aria-invalid:ring-(length:--space-focus-ring-width)",
-      "has-[[data-slot][aria-invalid=true]]:ring-1": "has-[[data-slot][aria-invalid=true]]:ring-(length:--space-focus-ring-width)",
-      "has-[[data-slot=input-group-control]:focus-visible]:ring-1": "has-[[data-slot=input-group-control]:focus-visible]:ring-(length:--space-focus-ring-width)",
-      "has-[>input:focus-visible]:ring-1": "has-[>input:focus-visible]:ring-(length:--space-focus-ring-width)",
-      "has-[>[data-slot=field]]:has-[:focus-visible]:ring-1": "has-[>[data-slot=field]]:has-[:focus-visible]:ring-(length:--space-focus-ring-width)",
-      "data-[active=true]:ring-1": "data-[active=true]:ring-(length:--space-focus-ring-width)",
-      "[button,a]:focus-visible:ring-1": "[button,a]:focus-visible:ring-(length:--space-focus-ring-width)",
-      "group-data-[focused=true]/day:ring-[3px]": "group-data-[focused=true]/day:ring-(length:--space-focus-ring-width)",
-      "focus-visible:outline-1": "focus-visible:border-ring",
-      "hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": "hover:bg-secondary/80",
-      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-secondary/80",
-      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_5%)]": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-muted/80",
-      "*:data-[slot=bubble-content]:bg-[oklch(from_var(--primary)_0.93_calc(c*0.4)_h)]": "*:data-[slot=bubble-content]:bg-primary/10",
-      "dark:*:data-[slot=bubble-content]:bg-[oklch(from_var(--primary)_0.3_calc(c*0.4)_h)]": "dark:*:data-[slot=bubble-content]:bg-primary/20",
-      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.88_calc(c*0.5)_h)]": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/20",
-      "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.35_calc(c*0.5)_h)]": "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/30",
-      "[&>span]:opacity-70": "[&>span]:text-current/70",
-      "gap-[--spacing(var(--gap))]": "gap-[calc(var(--spacing)*var(--gap))]",
+      "focus-visible:ring-3": {
+        "to": "focus-visible:ring-(length:--space-focus-ring-width)",
+        "reason": "A 3px focus ring becomes 2px (space.focus-ring-width), the middle ground between the original 3px, unusually thick, and the 1px used most in the code, too thin to stay visible."
+      },
+      "focus-visible:ring-[3px]": {
+        "to": "focus-visible:ring-(length:--space-focus-ring-width)",
+        "reason": "A 3px focus ring becomes 2px (space.focus-ring-width): the token is a middle ground between the original 3px, unusually thick, and a 1px ring too thin to stay visible."
+      },
+      "focus-within:ring-1": {
+        "to": "focus-within:ring-(length:--space-focus-ring-width)",
+        "reason": "A 1px ring shown when a descendant has focus becomes 2px (space.focus-ring-width), as FOCUS_RING_WITHIN draws it. Every focus indicator shares one width token; ring-1 is a raw pixel width."
+      },
+      "aria-invalid:ring-1": {
+        "to": "",
+        "reason": "The 1px ring an invalid control showed at all times is removed: aria-invalid sets the border and ring color only, and the 2px ring appears with focus. A ring always on hides keyboard focus (WCAG 2.4.7)."
+      },
+      "aria-invalid:ring-3": {
+        "to": "",
+        "reason": "The 3px ring an invalid radio showed at all times is removed: aria-invalid sets the border and ring color only, and the 2px ring appears with focus. A ring always on hides keyboard focus (WCAG 2.4.7)."
+      },
+      "has-aria-invalid:ring-1": {
+        "to": "has-aria-invalid:ring-(length:--space-focus-ring-width)",
+        "reason": "A group holding invalid controls keeps its ring, 2px (space.focus-ring-width) instead of 1px. Only a group may keep a ring on has-aria-invalid, because focus still shows on the control inside it."
+      },
+      "has-[[data-slot][aria-invalid=true]]:ring-1": {
+        "to": "has-[[data-slot][aria-invalid=true]]:ring-(length:--space-focus-ring-width)",
+        "reason": "InputGroup keeps its ring while a control inside is invalid, 2px (space.focus-ring-width) instead of 1px. A wrapper of several controls may keep it, because focus shows on the control inside."
+      },
+      "has-[[data-slot=input-group-control]:focus-visible]:ring-1": {
+        "to": "has-[[data-slot=input-group-control]:focus-visible]:ring-(length:--space-focus-ring-width)",
+        "reason": "The ring InputGroup draws when its control has focus-visible goes from 1px to 2px (space.focus-ring-width). The wrapper takes over the control's indicator, so it draws the shared focus ring width."
+      },
+      "has-[>input:focus-visible]:ring-1": {
+        "to": "has-[>input:focus-visible]:ring-(length:--space-focus-ring-width)",
+        "reason": "The ring a Questionnaire choice draws when its input has focus-visible goes from 1px to 2px (space.focus-ring-width), the shared focus ring width. ring-1 is a raw pixel width."
+      },
+      "has-[>[data-slot=field]]:has-[:focus-visible]:ring-1": {
+        "to": "has-[>[data-slot=field]]:has-[:focus-visible]:ring-(length:--space-focus-ring-width)",
+        "reason": "The ring a Field draws when a control inside has focus-visible goes from 1px to 2px (space.focus-ring-width), the shared focus ring width. ring-1 is a raw pixel width."
+      },
+      "data-[active=true]:ring-1": {
+        "to": "data-[active=true]:ring-(length:--space-focus-ring-width)",
+        "reason": "The ring of the active InputOTP slot goes from 1px to 2px (space.focus-ring-width). The linter checks data-[active=true] like a focus state, so it uses the shared focus ring width."
+      },
+      "[button,a]:focus-visible:ring-1": {
+        "to": "[button,a]:focus-visible:ring-(length:--space-focus-ring-width)",
+        "reason": "The ring of a focused Bubble button or link goes from 1px to 2px (space.focus-ring-width), the shared focus ring width. ring-1 is a raw pixel width."
+      },
+      "group-data-[focused=true]/day:ring-[3px]": {
+        "to": "group-data-[focused=true]/day:ring-(length:--space-focus-ring-width)",
+        "reason": "The ring of a focused Calendar day goes from 3px to 2px (space.focus-ring-width). The linter checks data-[focused=true] like a focus state, so it uses the shared focus ring width."
+      },
+      "focus-visible:outline-1": {
+        "to": "focus-visible:border-ring",
+        "reason": "A 1px focus outline is replaced by the border color change that goes with the 2px ring (border-ring). outline-1 is a raw pixel outline width, rejected by tokens:lint-values; Tabs keeps a token-width outline instead."
+      },
+      "hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": {
+        "to": "hover:bg-secondary/80",
+        "reason": "Hover on a secondary Button mixes 5% foreground into secondary in oklch; it becomes secondary at 80% alpha, the same /80 hover as Badge. The color-mix arbitrary value is dropped."
+      },
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": {
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-secondary/80",
+        "reason": "Hover on a secondary Bubble mixes 5% foreground into secondary in oklch; it becomes secondary at 80% alpha. The color-mix arbitrary value is dropped."
+      },
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_5%)]": {
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-muted/80",
+        "reason": "Hover on a muted Bubble mixes 5% foreground into muted in oklch; it becomes muted at 80% alpha. The color-mix arbitrary value is dropped."
+      },
+      "*:data-[slot=bubble-content]:bg-[oklch(from_var(--primary)_0.93_calc(c*0.4)_h)]": {
+        "to": "*:data-[slot=bubble-content]:bg-primary/10",
+        "reason": "The tinted Bubble background, a relative oklch color (lightness 0.93, chroma times 0.4) derived from primary, becomes primary at 10% alpha. Relative-color arbitrary values are replaced by token alphas."
+      },
+      "dark:*:data-[slot=bubble-content]:bg-[oklch(from_var(--primary)_0.3_calc(c*0.4)_h)]": {
+        "to": "dark:*:data-[slot=bubble-content]:bg-primary/20",
+        "reason": "The tinted Bubble background in dark mode, a relative oklch color (lightness 0.3) derived from primary, becomes primary at 20% alpha. Relative-color arbitrary values are replaced by token alphas."
+      },
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.88_calc(c*0.5)_h)]": {
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/20",
+        "reason": "Hover on a tinted Bubble button or link, a relative oklch color (lightness 0.88) derived from primary, becomes primary at 20% alpha. Relative-color arbitrary values are replaced by token alphas."
+      },
+      "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.35_calc(c*0.5)_h)]": {
+        "to": "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/30",
+        "reason": "Dark-mode hover on a tinted Bubble button or link, a relative oklch color (lightness 0.35) derived from primary, becomes primary at 30% alpha. Relative-color arbitrary values are replaced by token alphas."
+      },
+      "[&>span]:opacity-70": {
+        "to": "[&>span]:text-current/70",
+        "reason": "A secondary line at 70% opacity (it faded the whole node) becomes text color at 70% alpha (text-current/70), which leaves the rest of the node untouched. Opacity is reserved for binary states."
+      },
+      "gap-[--spacing(var(--gap))]": {
+        "to": "gap-[calc(var(--spacing)*var(--gap))]",
+        "reason": "gap-[--spacing(n)] no longer compiles (the --spacing() function is removed), so it draws nothing. The calc form multiplies the runtime --spacing (4px) by the spacing prop, as before."
+      },
       "[contain-intrinsic-size:auto_10rem]": "[contain-intrinsic-size:auto_var(--space-scale-40)]",
-      "max-w-[calc(100%-2rem)]": "max-w-[calc(100%-var(--space-component-lg))]",
-      "**:data-[slot=navigation-menu-link]:focus:ring-0": "",
-      "**:data-[slot=navigation-menu-link]:focus:outline-none": ""
+      "max-w-[calc(100%-2rem)]": {
+        "to": "max-w-[calc(100%-var(--space-component-lg))]",
+        "reason": "DialogContent's max width, the viewport minus 2rem (32px), becomes the viewport minus space.component.lg (24px). The gutter is a token, not a raw rem."
+      },
+      "**:data-[slot=navigation-menu-link]:focus:ring-0": {
+        "to": "",
+        "reason": "The ring reset on every NavigationMenu link under focus is removed, so a focused link keeps its own focus ring. A reset under **: hides the indicator of other nodes."
+      },
+      "**:data-[slot=navigation-menu-link]:focus:outline-none": {
+        "to": "",
+        "reason": "The outline-none reset on every NavigationMenu link under focus is removed, so a focused link keeps its own focus ring. A reset under **: hides the indicator of other nodes."
+      }
     },
     "utilities": {
       "opacity-50": "opacity-disabled",
@@ -44,41 +125,125 @@
       "duration-200": "duration-normal",
       "duration-300": "duration-slow",
       "duration-1000": "duration-extra-slow",
-      "outline-none": "outline-hidden",
+      "outline-none": {
+        "to": "outline-hidden",
+        "reason": "outline-none (outline-style none) becomes outline-hidden, which also keeps a transparent 2px outline in forced-colors mode. outline-none would leave no focus indicator there, where box-shadow rings are not painted."
+      },
       "ring-1": "ring-(length:--border-width-default)",
       "ring-2": "ring-(length:--border-width-separation)",
-      "w-[100px]": "w-24",
+      "w-[100px]": {
+        "to": "w-24",
+        "reason": "The Drawer handle is 96px (w-24) instead of 100px. A raw pixel width is replaced by the nearest step of the locked spacing scale."
+      },
       "min-w-[96px]": "min-w-24",
-      "rounded-[2px]": "rounded-xs",
-      "duration-400": "duration-slow",
-      "ease-[cubic-bezier(0.22,1,0.36,1)]": "ease-out",
-      "ease-[cubic-bezier(0.23,1,0.32,1)]": "ease-out",
-      "ease-[cubic-bezier(0.7,0,0.84,0)]": "ease-in",
-      "shadow": "shadow-sm",
-      "origin-top-center": "origin-top",
-      "scrollbar-none": "no-scrollbar",
-      "scrollbar-thin": "",
-      "scrollbar-gutter-stable": "",
-      "scrollbar-thumb-transparent": "",
-      "scrollbar-track-transparent": "",
+      "rounded-[2px]": {
+        "to": "rounded-xs",
+        "reason": "A 2px radius becomes rounded-xs, 4px (radius.xs). Chart legend swatches use a radius token, not an arbitrary value."
+      },
+      "duration-400": {
+        "to": "duration-slow",
+        "reason": "A 400ms duration becomes duration-slow, 300ms (motion.duration.slow). Durations come from the motion tokens, never hard-coded values."
+      },
+      "ease-[cubic-bezier(0.22,1,0.36,1)]": {
+        "to": "ease-out",
+        "reason": "The ease-out-quint curve (0.22, 1, 0.36, 1) becomes the ease-out token, cubic-bezier(0, 0, 0.2, 1) (motion.easing.out). Easings come from the motion tokens, never hard-coded curves."
+      },
+      "ease-[cubic-bezier(0.23,1,0.32,1)]": {
+        "to": "ease-out",
+        "reason": "The curve (0.23, 1, 0.32, 1) becomes the ease-out token, cubic-bezier(0, 0, 0.2, 1) (motion.easing.out). Easings come from the motion tokens, never hard-coded curves."
+      },
+      "ease-[cubic-bezier(0.7,0,0.84,0)]": {
+        "to": "ease-in",
+        "reason": "The curve (0.7, 0, 0.84, 0) becomes the ease-in token, cubic-bezier(0.4, 0, 1, 1) (motion.easing.in), used for leaving the screen. Easings come from the motion tokens, never hard-coded curves."
+      },
+      "shadow": {
+        "to": "shadow-sm",
+        "reason": "A bare shadow, which the elevation scale does not define (xs, sm, md, lg, xl, 2xl, inner), draws nothing here. It becomes shadow-sm (elevation.sm), the same two-layer shadow as Tailwind's default shadow."
+      },
+      "origin-top-center": {
+        "to": "origin-top",
+        "reason": "origin-top-center is not a Tailwind utility and draws nothing; it becomes origin-top, which sets the transform origin to top center. Whether upstream meant this is not recorded."
+      },
+      "scrollbar-none": {
+        "to": "no-scrollbar",
+        "reason": "scrollbar-none becomes no-scrollbar, the utility of shadcn/tailwind.css, which also hides the scrollbar in WebKit (::-webkit-scrollbar) and legacy Edge."
+      },
+      "scrollbar-thin": {
+        "to": "",
+        "reason": "scrollbar-thin (thin scrollbar width) is dropped, so MessageScroller's viewport keeps the default scrollbar. It was removed as a utility missing from the stack then; the installed Tailwind now compiles it."
+      },
+      "scrollbar-gutter-stable": {
+        "to": "",
+        "reason": "scrollbar-gutter-stable (reserved scrollbar gutter) is dropped, so the MessageScroller viewport's layout can shift when its scrollbar appears. It was removed as a utility missing from the stack then; Tailwind now compiles it."
+      },
+      "scrollbar-thumb-transparent": {
+        "to": "",
+        "reason": "scrollbar-thumb-transparent (transparent scrollbar thumb while autoscrolling) is dropped. Dropped with the other scrollbar utilities; the installed Tailwind now compiles it."
+      },
+      "scrollbar-track-transparent": {
+        "to": "",
+        "reason": "scrollbar-track-transparent (transparent scrollbar track while autoscrolling) is dropped. Dropped with the other scrollbar utilities; the installed Tailwind now compiles it."
+      },
       "inset-s-1/2": "start-1/2",
       "max-w-[80%]": "max-w-4/5",
-      "py-[calc(--spacing(0.8))]": "py-1",
-      "translate-y-[--spacing(0.45)]": "translate-y-0.5",
+      "py-[calc(--spacing(0.8))]": {
+        "to": "py-1",
+        "reason": "py-[calc(--spacing(0.8))] (3.2px) draws nothing, as --spacing() no longer compiles; it becomes py-1 (4px), a step of the locked spacing scale."
+      },
+      "translate-y-[--spacing(0.45)]": {
+        "to": "translate-y-0.5",
+        "reason": "translate-y-[--spacing(0.45)] (1.8px) draws nothing, as --spacing() no longer compiles; it becomes translate-y-0.5 (2px), a step of the locked spacing scale."
+      },
       "min-h-[1lh]": "min-h-lh",
-      "min-w-[14ch]": "min-w-28",
-      "text-[0.625rem]": "text-xs",
-      "text-[0.8rem]": "text-xs",
-      "transition-[color,box-shadow,background-color]": "transition-colors",
-      "grid-cols-[minmax(0,1fr)_auto_auto]": "grid-cols-[1fr_auto_auto]",
-      "p-[3px]": "p-1",
-      "bottom-[-5px]": "-bottom-1",
-      "ml-[-0.3rem]": "-ml-1",
-      "mr-[-0.3rem]": "-mr-1",
-      "ml-[-0.15rem]": "-ml-0.5",
-      "mr-[-0.15rem]": "-mr-0.5",
+      "min-w-[14ch]": {
+        "to": "min-w-28",
+        "reason": "A minimum width of 14ch becomes min-w-28 (112px). A font-relative width becomes a step of the locked spacing scale."
+      },
+      "text-[0.625rem]": {
+        "to": "text-xs",
+        "reason": "Text of 0.625rem (10px) becomes text-xs, 12px with a 1.33334 line height. The type scale has no step under 12px."
+      },
+      "text-[0.8rem]": {
+        "to": "text-xs",
+        "reason": "Text of 0.8rem (12.8px) becomes text-xs, 12px with a 1.33334 line height. The type scale has no arbitrary sizes."
+      },
+      "transition-[color,box-shadow,background-color]": {
+        "to": "transition-colors",
+        "reason": "A transition on color, box-shadow and background-color becomes transition-colors, which animates the color properties but not box-shadow. The design system's Input and Textarea use it; no reason is recorded."
+      },
+      "grid-cols-[minmax(0,1fr)_auto_auto]": {
+        "to": "grid-cols-[1fr_auto_auto]",
+        "reason": "minmax(0, 1fr) becomes 1fr for the first column of the Questionnaire actions grid, so the column can no longer shrink below its content width. No reason is recorded."
+      },
+      "p-[3px]": {
+        "to": "p-1",
+        "reason": "A 3px padding becomes p-1 (4px). An arbitrary pixel value becomes a step of the locked spacing scale."
+      },
+      "bottom-[-5px]": {
+        "to": "-bottom-1",
+        "reason": "An offset of -5px becomes -bottom-1 (-4px). An arbitrary pixel offset becomes a step of the locked spacing scale (the scale also has a 5px step, 1.25)."
+      },
+      "ml-[-0.3rem]": {
+        "to": "-ml-1",
+        "reason": "A margin of -0.3rem (-4.8px) becomes -ml-1 (-4px). An arbitrary rem value becomes a step of the locked spacing scale."
+      },
+      "mr-[-0.3rem]": {
+        "to": "-mr-1",
+        "reason": "A margin of -0.3rem (-4.8px) becomes -mr-1 (-4px). An arbitrary rem value becomes a step of the locked spacing scale."
+      },
+      "ml-[-0.15rem]": {
+        "to": "-ml-0.5",
+        "reason": "A margin of -0.15rem (-2.4px) becomes -ml-0.5 (-2px). An arbitrary rem value becomes a step of the locked spacing scale."
+      },
+      "mr-[-0.15rem]": {
+        "to": "-mr-0.5",
+        "reason": "A margin of -0.15rem (-2.4px) becomes -mr-0.5 (-2px). An arbitrary rem value becomes a step of the locked spacing scale."
+      },
       "w-[2px]": "w-0.5",
-      "ring-[3px]": "ring-(length:--space-focus-ring-width)"
+      "ring-[3px]": {
+        "to": "ring-(length:--space-focus-ring-width)",
+        "reason": "A 3px ring becomes 2px (space.focus-ring-width), the middle ground between the original 3px, unusually thick, and a 1px ring too thin to stay visible. ring-[3px] is a raw pixel width."
+      }
     },
     "patterns": [
       [
@@ -98,133 +263,232 @@
       "var(--popover)": "var(--color-popover)",
       "var(--popover-foreground)": "var(--color-popover-foreground)",
       "var(--border)": "var(--color-border)",
-      "var(--radius)": "var(--radius-md)"
+      "var(--radius)": {
+        "to": "var(--radius-md)",
+        "reason": "The Sonner toast radius var(--radius), which is radius.lg (10px), becomes var(--radius-md), radius.md (8px). Sonner's spec lists radius.md for it; the reason for 8px over 10px is not recorded."
+      }
     },
     "files": {
       "popover": {
         "utilities": {
-          "z-50": "z-popover"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a popover opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "hover-card": {
         "utilities": {
-          "z-50": "z-popover"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a hover card opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "dropdown-menu": {
         "utilities": {
-          "z-50": "z-popover"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "context-menu": {
         "utilities": {
-          "z-50": "z-popover"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a context menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "menubar": {
         "utilities": {
-          "z-50": "z-popover"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a menu bar menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "combobox": {
         "utilities": {
-          "z-50": "z-popover"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a combobox list opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         },
         "classes": {
-          "opacity-50": "text-muted-foreground",
-          "hover:opacity-100": ""
+          "opacity-50": {
+            "to": "text-muted-foreground",
+            "reason": "A combobox chip's remove button faded to 50% opacity; it is now text-muted-foreground (a color, not an opacity). Opacity is reserved for binary states."
+          },
+          "hover:opacity-100": {
+            "to": "",
+            "reason": "The chip remove button no longer fades from 50% to 100% opacity on hover: its color is the static text-muted-foreground, and the hover step is dropped."
+          }
         }
       },
       "navigation-menu": {
         "utilities": {
-          "z-50": "z-popover"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a navigation menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "dialog": {
         "utilities": {
-          "z-50": "z-modal"
+          "z-50": {
+            "to": "z-modal",
+            "reason": "z-50 is 50; z-modal is 1400. Dialog layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "alert-dialog": {
         "utilities": {
-          "z-50": "z-modal"
+          "z-50": {
+            "to": "z-modal",
+            "reason": "z-50 is 50; z-modal is 1400. Alert dialog layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "sheet": {
         "utilities": {
-          "z-50": "z-modal"
+          "z-50": {
+            "to": "z-modal",
+            "reason": "z-50 is 50; z-modal is 1400. Sheet layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "drawer": {
         "utilities": {
-          "z-50": "z-modal"
+          "z-50": {
+            "to": "z-modal",
+            "reason": "z-50 is 50; z-modal is 1400. Drawer layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "tooltip": {
         "utilities": {
-          "z-50": "z-tooltip"
+          "z-50": {
+            "to": "z-tooltip",
+            "reason": "z-50 is 50; z-tooltip is 1700, the highest layer, so a tooltip stays above dialogs and popovers. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "select": {
         "utilities": {
-          "z-50": "z-popover",
-          "z-10": "z-dropdown"
+          "z-50": {
+            "to": "z-popover",
+            "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a select list opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          },
+          "z-10": {
+            "to": "z-dropdown",
+            "reason": "z-10 is 10; z-dropdown is 1000. The select's scroll buttons, a local ordering, now sit on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "avatar": {
         "utilities": {
-          "z-10": "z-dropdown"
+          "z-10": {
+            "to": "z-dropdown",
+            "reason": "z-10 is 10; z-dropdown is 1000. An avatar's badge, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "button-group": {
         "utilities": {
-          "z-10": "z-dropdown"
+          "z-10": {
+            "to": "z-dropdown",
+            "reason": "z-10 is 10; z-dropdown is 1000. A focused button of a group, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "calendar": {
         "utilities": {
-          "z-10": "z-dropdown"
+          "z-10": {
+            "to": "z-dropdown",
+            "reason": "z-10 is 10; z-dropdown is 1000. A focused calendar day, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "input-otp": {
         "utilities": {
-          "z-10": "z-dropdown"
+          "z-10": {
+            "to": "z-dropdown",
+            "reason": "z-10 is 10; z-dropdown is 1000. The active OTP slot, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "toggle-group": {
         "utilities": {
-          "z-10": "z-dropdown"
+          "z-10": {
+            "to": "z-dropdown",
+            "reason": "z-10 is 10; z-dropdown is 1000. A focused toggle of a group, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         }
       },
       "resizable": {
         "utilities": {
-          "z-10": "z-dropdown"
+          "z-10": {
+            "to": "z-dropdown",
+            "reason": "z-10 is 10; z-dropdown is 1000. The resizable handle grip, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
         },
         "classes": {
-          "focus-visible:ring-ring": "focus-visible:border-ring focus-visible:ring-ring/50"
+          "focus-visible:ring-ring": {
+            "to": "focus-visible:border-ring focus-visible:ring-ring/50",
+            "reason": "The resizable handle's focus indicator, a full-color 1px ring, becomes the shared focus ring: border-ring plus a 2px ring at 50% alpha (ring-ring/50). Every focusable element draws that ring."
+          }
         }
       },
       "sidebar": {
         "utilities": {
-          "z-10": "z-fixed",
-          "z-20": "z-sticky",
-          "shadow-[0_0_0_1px_var(--sidebar-border)]": "ring-(length:--border-width-default) ring-sidebar-border"
+          "z-10": {
+            "to": "z-fixed",
+            "reason": "z-10 is 10; z-fixed is 1200 for the fixed sidebar container. Layers come from the zindex tokens, never hard-coded numbers."
+          },
+          "z-20": {
+            "to": "z-sticky",
+            "reason": "z-20 is 20; z-sticky is 1100 for the sidebar rail. Layers come from the zindex tokens, never hard-coded numbers."
+          },
+          "shadow-[0_0_0_1px_var(--sidebar-border)]": {
+            "to": "ring-(length:--border-width-default) ring-sidebar-border",
+            "reason": "The floating Sidebar's outline, a raw 1px box-shadow, becomes a ring whose width reads border-width.default (1px) and whose color is sidebar-border. Same 1px; changing the token now moves surface outlines too."
+          }
         },
         "classes": {
-          "hover:shadow-[0_0_0_1px_var(--sidebar-accent)]": "hover:ring-sidebar-accent",
-          "md:after:hidden": "md:after:-inset-0.5",
-          "data-[size=md]:text-xs": "data-[size=default]:text-xs"
+          "hover:shadow-[0_0_0_1px_var(--sidebar-accent)]": {
+            "to": "hover:ring-sidebar-accent",
+            "reason": "On the outline Sidebar button, the hover outline (a raw 1px box-shadow) becomes hover:ring-sidebar-accent. Only the color changes on hover; the width is the base ring, border-width.default (1px)."
+          },
+          "md:after:hidden": {
+            "to": "md:after:-inset-0.5",
+            "reason": "The hit area of a sidebar action button is no longer hidden from md up: after:-inset-0.5 extends it 2px past the button, so the target is 24x24 (WCAG 2.5.8, size.target.min)."
+          },
+          "data-[size=md]:text-xs": {
+            "to": "data-[size=default]:text-xs",
+            "reason": "data-size=\"md\" becomes data-size=\"default\" on SidebarMenuSubButton: the size scale names the base size default and has no md. The text size is unchanged (text-xs)."
+          }
         }
       },
       "slider": {
         "classes": {
-          "hover:ring-1": "hover:ring-(length:--space-focus-ring-width)",
-          "active:ring-1": "active:ring-(length:--space-focus-ring-width)"
+          "hover:ring-1": {
+            "to": "hover:ring-(length:--space-focus-ring-width)",
+            "reason": "The ring on a hovered Slider thumb goes from 1px to 2px (space.focus-ring-width). ring-1 is a raw pixel width, forbidden; the Slider spec lists the focus ring token for hover and active."
+          },
+          "active:ring-1": {
+            "to": "active:ring-(length:--space-focus-ring-width)",
+            "reason": "The ring on a Slider thumb while dragging goes from 1px to 2px (space.focus-ring-width). ring-1 is a raw pixel width, forbidden; the Slider spec lists the focus ring token for hover and active."
+          }
         }
       },
       "switch": {
         "utilities": {
-          "h-[18.4px]": "h-5",
+          "h-[18.4px]": {
+            "to": "h-5",
+            "reason": "The default Switch track is 20px high (h-5) instead of 18.4px. A raw pixel height becomes a step of the locked spacing scale."
+          },
           "w-[32px]": "w-8",
           "h-[14px]": "h-3.5",
           "w-[24px]": "w-6"
@@ -237,20 +501,38 @@
       },
       "command": {
         "classes": {
-          "opacity-50": "text-muted-foreground"
+          "opacity-50": {
+            "to": "text-muted-foreground",
+            "reason": "The Command search icon faded to 50% opacity; it is now text-muted-foreground (a color, not an opacity). Opacity is reserved for binary states."
+          }
         }
       },
       "attachment": {
         "utilities": {
-          "w-30": "w-32",
-          "opacity-60": "grayscale",
-          "opacity-100": "grayscale-0",
-          "text-destructive/80": "text-destructive"
+          "w-30": {
+            "to": "w-32",
+            "reason": "A vertical attachment with content is 128px wide (w-32) instead of 120px (w-30, which the spacing scale lacks and which draws nothing here)."
+          },
+          "opacity-60": {
+            "to": "grayscale",
+            "reason": "An attachment image while uploading or processing is 60% opaque; it is now grayscale, because opacity is reserved for binary states. A filter desaturates it instead of fading it."
+          },
+          "opacity-100": {
+            "to": "grayscale-0",
+            "reason": "The attachment image once done or idle is fully opaque (opacity-100); it is now grayscale-0, the counterpart of grayscale while uploading. Opacity is reserved for binary states."
+          },
+          "text-destructive/80": {
+            "to": "text-destructive",
+            "reason": "The error description of an attachment is destructive text at 80% alpha; it becomes full text-destructive, the token measured for contrast. The reason is not recorded."
+          }
         }
       },
       "breadcrumb": {
         "classes": {
-          "gap-1.5": "gap-x-1.5 gap-y-2"
+          "gap-1.5": {
+            "to": "gap-x-1.5 gap-y-2",
+            "reason": "The gap of the breadcrumb list is 6px both ways; it becomes 6px between items and 8px between wrapped rows (gap-x-1.5 gap-y-2), so rows are 8px apart and the target size spacing exception holds."
+          }
         }
       }
     },
