@@ -1,0 +1,28 @@
+@import "../../styles/globals.css" source(none);
+
+/* The design system's sources and the site's own: automatic detection is off,
+   so Tailwind scans exactly these folders (paths relative to this file). */
+@source "../../components";
+@source "../../lib";
+@source "../../hooks";
+@source "..";
+
+/* Forced states for the playground. A preview canvas that carries
+   data-force-state draws every control inside it as if it were hovered,
+   focused or pressed: the built-in variants are redefined here, for the site
+   build only, so the design system's own stylesheet stays untouched. The
+   compound variants (group-hover, peer-hover, has-, aria-, data-) follow. */
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &:is([data-force-state="hover"] *) {
+    @slot;
+  }
+}
+@custom-variant focus (&:focus, &:is([data-force-state="focus"] *));
+@custom-variant focus-visible (&:focus-visible, &:is([data-force-state="focus"] *));
+@custom-variant focus-within (&:focus-within, &:is([data-force-state="focus"] *));
+@custom-variant active (&:active, &:is([data-force-state="active"] *));

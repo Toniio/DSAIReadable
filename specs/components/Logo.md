@@ -134,7 +134,11 @@ No interaction of its own.
 ```tsx
 import { Logo } from "@/components/ui/logo"
 
-export default function Example({ brandName }: { brandName: string }) {
+export default function Example({
+  brandName = "Acme",
+}: {
+  brandName?: string
+}) {
   return (
     <header className="flex items-center gap-3">
       <Logo size="lg" />

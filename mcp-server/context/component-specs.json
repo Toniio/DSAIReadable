@@ -8955,7 +8955,7 @@
       }
     ],
     "accessibility": "**Pattern**: None — a context provider\n\n**Role**: Renders nothing: passes `dir` (`ltr` / `rtl`) to the Radix primitives.\n\n**Keyboard**:\n\nNo interaction; in `rtl`, the primitives reverse the horizontal arrow keys.\n\n**Accessible name**: Not applicable.\n\n**Pitfalls**:\n\n- Set the `dir` (and `lang`) attribute on the document too: the provider only informs Radix components, not screen readers.",
-    "code_example": "import { DirectionProvider } from \"@/components/ui/direction\"\n\nexport default function App() {\n  return (\n    <DirectionProvider direction=\"rtl\">\n      <div dir=\"rtl\" lang=\"ar\">\n        {/* The application */}\n        <p>Right-to-left content</p>\n      </div>\n    </DirectionProvider>\n  )\n}",
+    "code_example": "import { DirectionProvider } from \"@/components/ui/direction\"\n\nexport default function App() {\n  return (\n    <DirectionProvider dir=\"rtl\">\n      <div dir=\"rtl\" lang=\"ar\">\n        {/* The application */}\n        <p>Right-to-left content</p>\n      </div>\n    </DirectionProvider>\n  )\n}",
     "cross_references": [
       "Sidebar",
       "Tooltip"
@@ -14068,7 +14068,7 @@
       }
     ],
     "accessibility": "**Pattern**: Decorative image\n\n**Role**: The SVG pictogram carries `aria-hidden=\"true\"`.\n\n**Keyboard**:\n\nNo interaction of its own.\n\n**Accessible name**: None: the logo is decorative. The brand name must come from nearby text, or from the `aria-label` of the link that wraps it (\"Home — BankApp\").\n\n**Pitfalls**:\n\n- A logo alone in an unnamed link produces an empty link: always name the link.",
-    "code_example": "import { Logo } from \"@/components/ui/logo\"\n\nexport default function Example({ brandName }: { brandName: string }) {\n  return (\n    <header className=\"flex items-center gap-3\">\n      <Logo size=\"lg\" />\n      <span className=\"font-heading text-xl font-bold\">{brandName}</span>\n    </header>\n  )\n}",
+    "code_example": "import { Logo } from \"@/components/ui/logo\"\n\nexport default function Example({\n  brandName = \"Acme\",\n}: {\n  brandName?: string\n}) {\n  return (\n    <header className=\"flex items-center gap-3\">\n      <Logo size=\"lg\" />\n      <span className=\"font-heading text-xl font-bold\">{brandName}</span>\n    </header>\n  )\n}",
     "cross_references": [
       "Heading",
       "Sidebar",
