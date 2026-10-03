@@ -9,7 +9,7 @@ interface ComponentRow {
   has_spec: boolean
 }
 
-export interface Divergence {
+interface Divergence {
   export?: string
   prop?: string
   value?: string
@@ -194,7 +194,7 @@ export function stateRows(name: string): StateRow[] {
 }
 
 /** The registry item that ships a component. */
-export function registryItem(slug: string): RegistryItem | undefined {
+function registryItem(slug: string): RegistryItem | undefined {
   return readJson<{ items: RegistryItem[] }>("registry.json").items.find(
     (item) => item.name === slug
   )

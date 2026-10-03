@@ -102,6 +102,8 @@ npm run test:components   # headless Chromium: the 65 spec examples and the foun
 npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
 npm run evals:generate    # screens from Claude Code in print mode, on a subscription (no API key), for the replay generator (evals/README.md)
+npm run site:check        # the documentation site: the examples copied into site/generated/ match the specs + site/ passes the consumer ESLint config
+npm run site:build        # the documentation site, statically exported to site/out/ (networked: next/font)
 ```
 
 A new or changed component arrives with its test: its spec example must pass
@@ -112,7 +114,7 @@ After any token or TypeScript change:
 `npm run tokens-validate && npm run typecheck:all`.
 
 Before a commit, `npm run check` runs every CI check above in one call except
-`registry:test-install`, `mcp:test-package`, `shadcn:drift`, the networked `shadcn registry validate`
+`registry:test-install`, `mcp:test-package`, `shadcn:drift`, `site:build`, the networked `shadcn registry validate`
 and the model runs of `evals` (they need an API key),
 and prints only what failed. Prefer it to running the checks one by one: each
 separate run is one more agent turn and more output in the context.
@@ -137,15 +139,15 @@ problem: fix it, do not disable it.
 
 ## 5. Guards in place
 
-| Guard                                         | What it blocks                                                                                                                                  |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.husky/pre-commit` → lint-staged             | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                           |
-| `.husky/commit-msg` → commitlint              | A non-conforming commit message                                                                                                                 |
-| `.husky/pre-push`                             | A direct push to `main`                                                                                                                         |
-| `.github/workflows/ci.yml`                    | 9 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
-| `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                       |
-| `.github/workflows/evals.yml`                 | Nothing: it measures. By hand only, the conformance harness runs a Claude agent with and without the MCP server (`evals/README.md`)             |
-| `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result          |
+| Guard                                         | What it blocks                                                                                                                                           |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.husky/pre-commit` → lint-staged             | Prettier + ESLint on the touched files, `typecheck:all` on everything                                                                                    |
+| `.husky/commit-msg` → commitlint              | A non-conforming commit message                                                                                                                          |
+| `.husky/pre-push`                             | A direct push to `main`                                                                                                                                  |
+| `.github/workflows/ci.yml`                    | 10 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry`, `site` |
+| `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                                |
+| `.github/workflows/evals.yml`                 | Nothing: it measures. By hand only, the conformance harness runs a Claude agent with and without the MCP server (`evals/README.md`)                      |
+| `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result                   |
 
 Each § 1 rule, and the check that enforces it:
 
@@ -191,6 +193,7 @@ reorder them by hand.
 - `shadcn-api.baseline.json` — the upstream shadcn/ui API, generated by `npm run shadcn:baseline`
 - `specs/tokens/token-reference.md` and `tokens.manifest.json` — generated by `npm run docs:tokens`
   (edit the editorial prose in the `$extensions.docs` of `tokens/*.json`)
+- `site/generated/` — the specs' code examples, copied by `npm run site:examples` (edit the spec)
 - `llms.txt` — generated by `npm run docs:llms` from the specs and the root version, its links at the
   release tag (edit a spec's Role, or the entry points listed in `scripts/build-llms-txt.ts`)
 - The `version` of `design-system.index.json`, `mcp-server/package.json`, `packages/eslint-plugin/package.json` and the lockfile — written by

@@ -31,7 +31,9 @@ export function SectionNav({
           ) : null}
           <ul className="flex flex-col">
             {group.items.map((item) => {
-              const current = pathname === item.href.split("#")[0]
+              // An anchor of the page is not a page: "On this page" marks the
+              // section in view, the navigation marks pages only.
+              const current = !item.href.includes("#") && pathname === item.href
               return (
                 <li key={item.href}>
                   <Link

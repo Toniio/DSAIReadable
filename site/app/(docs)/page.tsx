@@ -1,10 +1,203 @@
-import { DocsPage } from "@/site/ui/docs-page"
+import Link from "next/link"
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  GithubLogoIcon,
+} from "@phosphor-icons/react/ssr"
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
+import { cn } from "@/lib/utils"
+import { SECTIONS } from "@/site/lib/nav"
+import { GITHUB_URL, META, sourceUrl, VERSION } from "@/site/lib/site"
+import {
+  divergences,
+  glossary,
+  install,
+  intro,
+  sectionFacts,
+  ships,
+  stats,
+  targetSize,
+} from "@/site/overview/data"
+import { GetStarted } from "@/site/overview/get-started"
+import { OverviewFrame } from "@/site/overview/overview-frame"
+import { Rules } from "@/site/overview/rules"
+import { DocSection } from "@/site/ui/doc-section"
+import { InlineMarkdown } from "@/site/ui/markdown"
 import { PageHeader } from "@/site/ui/page-header"
 
+const TOC = [
+  { id: "at-a-glance", label: "At a glance" },
+  { id: "get-started", label: "Get started" },
+  { id: "rules", label: "Rules" },
+  { id: "sections", label: "Sections" },
+  { id: "glossary", label: "Glossary" },
+]
+
+/** One line for each section of the site, under its card. */
+const SECTION_LINES: Record<string, string> = {
+  "/foundations/":
+    "The tokens by family, with their light and dark values, and the guidelines for focus, icons and content.",
+  "/components/":
+    "Each component with a live playground, its anatomy, properties, states, tokens and accessibility.",
+  "/patterns/":
+    "Screens that do one job, composed from the components: the rules, the structure and the code.",
+  "/changes/":
+    "Every release, newest first, each change with its category and its commit.",
+  "/audits/":
+    "What the checks measure: eval conformance, contrast, and the declared shadcn/ui divergences.",
+}
+
 export default function OverviewPage() {
+  const facts = sectionFacts()
+  const terms = glossary()
+
   return (
-    <DocsPage nav={[]} navLabel="Overview">
-      <PageHeader title="DSAIReadable" lead="Overview placeholder." />
-    </DocsPage>
+    <OverviewFrame toc={TOC}>
+      <PageHeader
+        eyebrow={
+          <span className="flex flex-wrap items-center gap-2">
+            <Badge variant="outline">v{VERSION}</Badge>
+            <span>{META.framework}</span>
+          </span>
+        }
+        title={META.name}
+        lead={<InlineMarkdown>{intro()}</InlineMarkdown>}
+      >
+        <ul className="flex max-w-3xl list-disc flex-col gap-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+          {ships().map((item) => (
+            <li key={item}>
+              <InlineMarkdown from="README.md">{item}</InlineMarkdown>
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild>
+            <Link href="#get-started">
+              Get started
+              <ArrowRightIcon aria-hidden="true" />
+            </Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/components/">Browse the components</Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href={GITHUB_URL}>
+              <GithubLogoIcon aria-hidden="true" />
+              Source on GitHub
+            </Link>
+          </Button>
+        </div>
+      </PageHeader>
+
+      <DocSection
+        id="at-a-glance"
+        title="At a glance"
+        description="Counted from the repository at build time."
+      >
+        <dl className="grid grid-cols-2 gap-px border bg-border lg:grid-cols-4">
+          {stats().map((stat) => (
+            <div
+              key={stat.label}
+              className="flex flex-col gap-1 bg-background p-4"
+            >
+              <dt className="text-xs text-muted-foreground">{stat.label}</dt>
+              <dd className="font-heading text-3xl font-semibold tracking-tight">
+                {stat.value}
+              </dd>
+              <dd className="text-xs text-muted-foreground">{stat.detail}</dd>
+            </div>
+          ))}
+        </dl>
+      </DocSection>
+
+      <DocSection
+        id="get-started"
+        title="Get started"
+        description="Four channels, one version. Use the registry for the components, then give your agent the MCP server, the skills and the lint rules."
+      >
+        <GetStarted install={install()} />
+      </DocSection>
+
+      <DocSection
+        id="rules"
+        title="Rules"
+        description="What every screen built with the design system follows. The ESLint plugin and the MCP server check them."
+      >
+        <Rules targetSize={targetSize()} divergences={divergences()} />
+      </DocSection>
+
+      <DocSection id="sections" title="Sections">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {SECTIONS.filter((item) => item.href !== "/").map((item) => (
+            <li key={item.href} className="flex">
+              <Link
+                href={item.href}
+                className={cn(
+                  "group flex flex-1 flex-col gap-2 border p-5 transition-colors hover:bg-muted",
+                  FOCUS_OUTLINE_RESET,
+                  FOCUS_RING
+                )}
+              >
+                <span className="flex items-center justify-between gap-2 font-heading text-base font-semibold">
+                  {item.label}
+                  <ArrowRightIcon
+                    aria-hidden="true"
+                    className="size-4 text-muted-foreground transition-colors group-hover:text-foreground"
+                  />
+                </span>
+                <span className="flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {SECTION_LINES[item.href]}
+                </span>
+                {facts[item.href] ? (
+                  <span className="text-xs text-muted-foreground">
+                    {facts[item.href]}
+                  </span>
+                ) : null}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </DocSection>
+
+      <DocSection
+        id="glossary"
+        title="Glossary"
+        description={
+          <>
+            The terms the specs use, as the MCP server serves them (
+            <code className="font-mono text-xs">dsaireadable_get_glossary</code>
+            ).
+          </>
+        }
+      >
+        <dl className="grid gap-x-8 gap-y-4 border-t pt-4 md:grid-cols-2">
+          {terms.map((entry) => (
+            <div key={entry.term} className="flex flex-col gap-1">
+              <dt className="font-mono text-sm font-medium">{entry.term}</dt>
+              <dd className="text-sm leading-relaxed text-muted-foreground">
+                <InlineMarkdown>{entry.definition}</InlineMarkdown>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className="text-xs text-muted-foreground">
+          <Link
+            href={sourceUrl("design-system.index.json")}
+            className={cn(
+              "inline-flex items-center gap-1 text-primary underline underline-offset-4",
+              FOCUS_OUTLINE_RESET,
+              FOCUS_RING
+            )}
+          >
+            design-system.index.json
+            <ArrowUpRightIcon aria-hidden="true" />
+          </Link>{" "}
+          holds the source of most terms.
+        </p>
+      </DocSection>
+    </OverviewFrame>
   )
 }

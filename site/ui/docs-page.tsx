@@ -3,6 +3,7 @@ import type { ReactNode } from "react"
 import type { NavGroup } from "@/site/lib/nav"
 import { MobileNav } from "@/site/ui/mobile-nav"
 import { PageToc, type TocItem } from "@/site/ui/page-toc"
+import { ScrollRegions } from "@/site/ui/scroll-regions"
 import { SectionNav } from "@/site/ui/section-nav"
 
 /**
@@ -42,7 +43,7 @@ export function DocsPage({
           <div className="lg:hidden">
             <MobileNav groups={nav} label={navLabel} />
           </div>
-          {children}
+          <ScrollRegions>{children}</ScrollRegions>
         </div>
       </main>
     </div>

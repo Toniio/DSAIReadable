@@ -23,11 +23,8 @@ import {
   useSiteTheme,
   type Viewport,
 } from "@/site/playground/canvas"
-import {
-  ControlPanel,
-  defaultArgs,
-  resolveArgs,
-} from "@/site/playground/control-panel"
+import { defaultArgs, resolveArgs } from "@/site/playground/args"
+import { ControlPanel } from "@/site/playground/control-panel"
 import { changedArgs, element, snippet } from "@/site/playground/jsx"
 import type { FrameState } from "@/site/playground/protocol"
 import { SCENARIOS } from "@/site/playground/scenarios"
@@ -65,6 +62,11 @@ export function useStoryControls(
     code,
     loaded: Boolean(auto) || scenario !== undefined,
     tall: scenario?.layout === "fullscreen",
+    gridable:
+      Boolean(auto) ||
+      (scenario !== undefined &&
+        scenario.grid !== false &&
+        scenario.layout !== "fullscreen"),
   }
 }
 

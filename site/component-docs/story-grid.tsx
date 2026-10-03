@@ -3,7 +3,7 @@
 import { useMemo } from "react"
 
 import { Canvas, useSiteTheme } from "@/site/playground/canvas"
-import { defaultArgs, resolveArgs } from "@/site/playground/control-panel"
+import { defaultArgs, resolveArgs } from "@/site/playground/args"
 import { useStoryControls } from "@/site/playground/playground"
 import type { FrameState, GridCell } from "@/site/playground/protocol"
 import {
@@ -71,12 +71,19 @@ export function StoryGrid({
   /** For `axes`: the props that are variant axes (`variant`, `size`). */
   axes?: string[]
 }) {
-  const { controls, loaded } = useStoryControls(name, slug, autoControls)
+  const { controls, loaded, gridable } = useStoryControls(
+    name,
+    slug,
+    autoControls
+  )
   const theme = useSiteTheme()
 
   const grids = useMemo(() => {
-    if (mode === "states")
-      return [{ title: "States", cells: stateCells(controls, states) }]
+    if (mode === "states") {
+      const cells = stateCells(controls, states)
+      // Rest alone is the playground's own canvas: no grid for it.
+      return cells.length > 1 ? [{ title: "States", cells }] : []
+    }
     return controls
       .filter((control) => axes.includes(control.name))
       .map((control) => ({
@@ -85,7 +92,8 @@ export function StoryGrid({
       }))
   }, [mode, controls, states, axes])
 
-  if (!loaded || controls.length === 0) return null
+  if (!loaded || !gridable || controls.length === 0 || grids.length === 0)
+    return null
 
   return (
     <div className="flex flex-col gap-6">

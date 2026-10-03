@@ -19,13 +19,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { cn } from "@/lib/utils"
 import { componentByName } from "@/site/lib/components"
 import { anchor, stripComments } from "@/site/lib/markdown"
 import { FOUNDATION_GROUPS } from "@/site/lib/nav"
 import { sourceUrl } from "@/site/lib/site"
 import { CodeBlock } from "@/site/ui/code-block"
+import { LINK } from "@/site/ui/link"
 
 const FOUNDATIONS = new Set(
   FOUNDATION_GROUPS.flatMap((group) => group.items.map((item) => item.slug))
@@ -36,7 +36,7 @@ const FOUNDATIONS = new Set(
  * `/components/field/`, `./create.md` → `/patterns/create/`. A link to any
  * other repository file opens it on GitHub at the release tag.
  */
-export function siteHref(href: string, from?: string): string {
+function siteHref(href: string, from?: string): string {
   if (/^[a-z]+:/i.test(href) || href.startsWith("#") || !from) return href
   const [file, hash] = href.split("#")
   const target = path.posix.join(path.posix.dirname(from), file)
@@ -108,14 +108,7 @@ function components(from: string | undefined, shift: number): Components {
       <strong className="font-semibold text-foreground">{children}</strong>
     ),
     a: ({ href = "", children }) => (
-      <Link
-        href={siteHref(href, from)}
-        className={cn(
-          "text-primary underline underline-offset-4",
-          FOCUS_OUTLINE_RESET,
-          FOCUS_RING
-        )}
-      >
+      <Link href={siteHref(href, from)} className={LINK}>
         {children}
       </Link>
     ),

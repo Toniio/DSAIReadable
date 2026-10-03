@@ -36,6 +36,7 @@ dsaireadable/
 ├── shadcn-api.baseline.json    # The upstream shadcn/ui API the components are checked against — generated
 ├── shadcn-upstream.json        # Re-anchoring on shadcn/ui: the anchored tag, the re-tokenization table, the 65 components classified
 ├── evals/                      # The conformance harness: reference tasks, scoring, the history of the scores (evals/README.md)
+├── site/                       # The documentation site: foundations, components with a live playground, patterns, changes, audits
 ├── llms.txt                    # Documentation map for agents (llms.txt format) — generated
 └── .husky/                     # Git hooks: pre-commit, commit-msg, pre-push
 ```
@@ -261,6 +262,31 @@ fails on drift.
 
 ---
 
+## `site/` — The documentation site
+
+A Next.js app (App Router, static export) that documents the design system
+with the design system itself: every page is built at build time from the
+repository's files, and every component shown is the real one from
+`components/ui/`. `npm run site:dev` serves it locally; `npm run site:build`
+writes the static site to `site/out/` (`SITE_BASE_PATH` sets the base path a
+host such as GitHub Pages serves it under).
+
+| Path                       | Role                                                                                                                                                                                                                     |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `site/app/(docs)/`         | The pages: Overview, Foundations, Components, Patterns, Changes, Audits                                                                                                                                                  |
+| `site/app/preview/`        | The preview canvases, one document per component and pattern: the pages show them in iframes, so an overlay portaled to `<body>` takes the preview's theme and a fixed layout stays inside it                            |
+| `site/app/site.css`        | Imports `styles/globals.css`, lists the folders Tailwind scans, and redefines `hover`, `focus`, `focus-visible`, `focus-within` and `active` so a canvas can force a state (`data-force-state`), for the site build only |
+| `site/lib/`                | Build-time readers of the specs, the MCP context, `tokens.manifest.json` and the changelog                                                                                                                               |
+| `site/ui/`                 | The site's frame: header, navigation, "On this page", Markdown rendered with the design system's parts                                                                                                                   |
+| `site/playground/`         | The playground: controls derived from the cva axes and the specs' Props / API (`auto.ts`), hand-written scenarios for compound components (`scenarios/`), the canvas and its postMessage protocol                        |
+| `site/generated/examples/` | The specs' code examples, copied by `npm run site:examples` — generated, do not edit                                                                                                                                     |
+
+The site follows the repository's rules: ESLint, `tokens:lint-values` and knip
+cover `site/`, and `npm run site:check` lints it with the config a consuming
+project runs (`@dsaireadable/eslint-plugin`), the copied examples included.
+
+---
+
 ## `tests/` — Component tests
 
 `npm run test:components` renders components in headless Chromium (Vitest
@@ -354,16 +380,16 @@ registry is **consumable**, not just consistent.
 
 ### `.github/`
 
-| File                                          | Role                                                                                                                                                               |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `.github/copilot-instructions.md`             | Points to `AGENTS.md`, the single source of truth for agent rules                                                                                                  |
-| `.github/pull_request_template.md`            | PR template                                                                                                                                                        |
-| `.github/CODEOWNERS`                          | Names the maintainer as reviewer of every path; the `main` ruleset does not require code-owner review                                                              |
-| `.github/workflows/ci.yml`                    | GitHub Actions CI, 9 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry` |
-| `.github/workflows/evals.yml`                 | The conformance harness with a Claude agent, started by hand only (each run costs API credits)                                                                     |
-| `.github/workflows/dependabot-regenerate.yml` | Regenerates the generated files on a Dependabot PR and pushes the result                                                                                           |
-| `.github/dependabot.yml`                      | Weekly grouped dependency updates                                                                                                                                  |
-| `.github/workflows/pr-lint.yml`               | Checks that the PR title follows Conventional Commits                                                                                                              |
+| File                                          | Role                                                                                                                                                                        |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.github/copilot-instructions.md`             | Points to `AGENTS.md`, the single source of truth for agent rules                                                                                                           |
+| `.github/pull_request_template.md`            | PR template                                                                                                                                                                 |
+| `.github/CODEOWNERS`                          | Names the maintainer as reviewer of every path; the `main` ruleset does not require code-owner review                                                                       |
+| `.github/workflows/ci.yml`                    | GitHub Actions CI, 10 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry`, `site` |
+| `.github/workflows/evals.yml`                 | The conformance harness with a Claude agent, started by hand only (each run costs API credits)                                                                              |
+| `.github/workflows/dependabot-regenerate.yml` | Regenerates the generated files on a Dependabot PR and pushes the result                                                                                                    |
+| `.github/dependabot.yml`                      | Weekly grouped dependency updates                                                                                                                                           |
+| `.github/workflows/pr-lint.yml`               | Checks that the PR title follows Conventional Commits                                                                                                                       |
 
 ### `.vscode/`
 
@@ -410,6 +436,9 @@ npm run test:components     # Component tests in headless Chromium (Vitest + axe
 npm run skills:validate     # The agent skills: format, and every rule cites a source that exists
 npm run evals:test          # The conformance harness scores its gold examples and fixtures, with no model
 npm run evals:generate      # Screens from Claude Code on a subscription, no API key (evals/README.md)
+npm run site:dev            # The documentation site, locally (Next.js dev server)
+npm run site:check          # The site: examples copied from the specs are fresh, the consumer lint passes
+npm run site:build          # The static documentation site, in site/out/
 npm run format              # Prettier on every .ts/.tsx/.md
 ```
 

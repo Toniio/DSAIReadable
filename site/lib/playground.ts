@@ -85,7 +85,3 @@ export function forcedStates(name: string): ForcedState[] {
     ),
   ]
 }
-
-export function isAuto(name: string): boolean {
-  return name in AUTO
-}

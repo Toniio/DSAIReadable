@@ -62,38 +62,40 @@ export function Anatomy({
           part the example does not render has no marker.
         </p>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-12">#</TableHead>
-            <TableHead>Slot</TableHead>
-            <TableHead>Role</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {parts.map((part, index) => (
-            <TableRow
-              key={part.slot}
-              onMouseEnter={() => setHighlight(index + 1)}
-              onMouseLeave={() => setHighlight(0)}
-            >
-              <TableCell className="align-top">
-                <span className="flex size-5 items-center justify-center rounded-full border border-primary text-xs font-medium text-primary">
-                  {index + 1}
-                </span>
-              </TableCell>
-              <TableCell className="align-top">
-                <code className="bg-muted px-1 py-0.5 font-mono text-xs">
-                  data-slot=&quot;{part.slot}&quot;
-                </code>
-              </TableCell>
-              <TableCell className="align-top whitespace-normal">
-                {part.role}
-              </TableCell>
+      <div className="min-w-0">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-12">#</TableHead>
+              <TableHead>Slot</TableHead>
+              <TableHead>Role</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {parts.map((part, index) => (
+              <TableRow
+                key={part.slot}
+                onMouseEnter={() => setHighlight(index + 1)}
+                onMouseLeave={() => setHighlight(0)}
+              >
+                <TableCell className="align-top">
+                  <span className="flex size-5 items-center justify-center rounded-full border border-primary text-xs font-medium text-primary">
+                    {index + 1}
+                  </span>
+                </TableCell>
+                <TableCell className="align-top">
+                  <code className="bg-muted px-1 py-0.5 font-mono text-xs">
+                    data-slot=&quot;{part.slot}&quot;
+                  </code>
+                </TableCell>
+                <TableCell className="align-top whitespace-normal">
+                  {part.role}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   )
 }

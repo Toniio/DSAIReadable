@@ -11,27 +11,41 @@ export interface TocItem {
   label: string
 }
 
-/** "On this page": the sections of the page, the one in view marked. */
+/**
+ * The section being read: the last one whose top has passed under the
+ * header, or the last of the page once the bottom is reached.
+ */
+function current(items: TocItem[]): string | undefined {
+  const line = window.innerHeight * 0.25
+  let found = items[0]?.id
+  for (const item of items) {
+    const element = document.getElementById(item.id)
+    if (element && element.getBoundingClientRect().top <= line) found = item.id
+  }
+  const bottom =
+    window.innerHeight + window.scrollY >=
+    document.documentElement.scrollHeight - 2
+  return bottom ? items.at(-1)?.id : found
+}
+
+/** "On this page": the sections of the page, the one being read marked. */
 export function PageToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState<string | undefined>(items[0]?.id)
 
   useEffect(() => {
-    const sections = items
-      .map((item) => document.getElementById(item.id))
-      .filter((element): element is HTMLElement => element !== null)
-    if (sections.length === 0) return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-        if (visible[0]) setActive(visible[0].target.id)
-      },
-      // A section is current once its heading passes under the header.
-      { rootMargin: "0px 0px -70% 0px" }
-    )
-    for (const element of sections) observer.observe(element)
-    return () => observer.disconnect()
+    let frame = 0
+    const update = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => setActive(current(items)))
+    }
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("resize", update)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener("scroll", update)
+      window.removeEventListener("resize", update)
+    }
   }, [items])
 
   if (items.length === 0) return null

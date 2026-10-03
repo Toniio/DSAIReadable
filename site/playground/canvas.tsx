@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { useTheme } from "next-themes"
 
 import { cn } from "@/lib/utils"
@@ -9,6 +9,7 @@ import {
   type FrameState,
   type FromFrame,
   isMessage,
+  type PreviewKind,
   toFrame,
   withBasePath,
 } from "@/site/playground/protocol"
@@ -22,14 +23,19 @@ const VIEWPORT: Record<Viewport, string> = {
   mobile: "w-sm max-w-full",
 }
 
+const FOLDER: Record<PreviewKind, string> = {
+  component: "components",
+  pattern: "patterns",
+  foundation: "foundations",
+}
+
 /** The address of a preview: its route, and its first state in the hash. */
 export function previewUrl(
-  kind: "component" | "pattern",
+  kind: PreviewKind,
   slug: string,
   state: FrameState
 ): string {
-  const folder = kind === "pattern" ? "patterns" : "components"
-  return withBasePath(`/preview/${folder}/${slug}/#${encodeState(state)}`)
+  return withBasePath(`/preview/${FOLDER[kind]}/${slug}/#${encodeState(state)}`)
 }
 
 /** The site's own theme, once the browser knows it. */
@@ -53,7 +59,7 @@ export function Canvas({
   tall = false,
   className,
 }: {
-  kind?: "component" | "pattern"
+  kind?: PreviewKind
   slug: string
   state: FrameState
   /** The iframe's accessible name: "Button preview". */
@@ -66,17 +72,19 @@ export function Canvas({
   const frame = useRef<HTMLIFrameElement>(null)
   const latest = useRef(state)
   const [height, setHeight] = useState<number>()
-  const [ready, setReady] = useState(false)
   const [src] = useState(() => previewUrl(kind, slug, state))
+  // The frame keeps its theme under this name, apart from the other frames.
+  const name = useId()
 
+  // Every state goes to the frame. One sent before the frame listens is lost:
+  // the frame then says "ready" again, and gets the latest.
   useEffect(() => {
     latest.current = state
-    if (ready)
-      frame.current?.contentWindow?.postMessage(
-        toFrame(state),
-        window.location.origin
-      )
-  }, [ready, state])
+    frame.current?.contentWindow?.postMessage(
+      toFrame(state),
+      window.location.origin
+    )
+  }, [state])
 
   useEffect(() => {
     const listen = (event: MessageEvent) => {
@@ -87,12 +95,9 @@ export function Canvas({
         !isMessage<FromFrame>(event.data)
       )
         return
-      if (event.data.type === "ready") {
-        setReady(true)
+      if (event.data.type === "ready")
         target.postMessage(toFrame(latest.current), window.location.origin)
-      } else {
-        setHeight(event.data.height)
-      }
+      else setHeight(event.data.height)
     }
     window.addEventListener("message", listen)
     return () => window.removeEventListener("message", listen)
@@ -102,6 +107,7 @@ export function Canvas({
     <div className={cn("flex justify-center overflow-hidden", className)}>
       <iframe
         ref={frame}
+        name={name}
         title={title}
         src={src}
         loading="lazy"

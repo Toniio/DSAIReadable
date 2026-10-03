@@ -23,7 +23,8 @@ export function ThemeSwitch() {
       variant="outline"
       size="sm"
       aria-label="Color theme"
-      value={mounted ? theme : undefined}
+      // Controlled from the first render: no value until the stored theme is known.
+      value={mounted ? (theme ?? "system") : ""}
       onValueChange={(value) => {
         if (value) setTheme(value)
       }}

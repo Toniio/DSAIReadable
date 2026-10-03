@@ -42,6 +42,12 @@ export interface Story {
   /** The code of what `render` draws for these args; the spec's example when absent. */
   code?: (args: Args) => string
   layout?: StoryLayout
+  /**
+   * Whether the component page may draw the story once per state and per
+   * variant value. False for what covers the page or portals out of a cell:
+   * a dialog, a menu, a toast. A `fullscreen` story never is.
+   */
+  grid?: boolean
 }
 
 /** The interaction states a canvas can force: Rest is none. */

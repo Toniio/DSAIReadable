@@ -64,7 +64,14 @@ export const AUTO: Record<string, AutoStory> = {
   Illustration: {
     export: "Illustration",
     load: () => import("@/components/ui/illustration"),
-    props: ["alt"],
+    // The component's own default is a UI string the data cannot give.
+    controls: [
+      {
+        kind: "text",
+        name: "alt",
+        default: "A dashed frame waiting for an image",
+      },
+    ],
   },
   Input: {
     export: "Input",

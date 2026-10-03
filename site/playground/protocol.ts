@@ -8,7 +8,7 @@ import type { Args, ForcedState } from "@/site/playground/types"
  * The page sends this state to the frame with postMessage; the frame's URL
  * hash carries the first one, so a preview also opens on its own.
  */
-export type View =
+type View =
   /** The spec's code example, as written. */
   | "example"
   /** The playground story, with the args of the controls. */
@@ -17,6 +17,9 @@ export type View =
   | "grid"
   /** The example, with a numbered marker on each part of the anatomy. */
   | "anatomy"
+
+/** What a preview shows: a component, a pattern, or a foundation's example. */
+export type PreviewKind = "component" | "pattern" | "foundation"
 
 export interface GridCell {
   label: string

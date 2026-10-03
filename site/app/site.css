@@ -26,3 +26,16 @@
 @custom-variant focus-visible (&:focus-visible, &:is([data-force-state="focus"] *));
 @custom-variant focus-within (&:focus-within, &:is([data-force-state="focus"] *));
 @custom-variant active (&:active, &:is([data-force-state="active"] *));
+
+/* Three components draw their focus through an arbitrary has-[…:focus-visible]
+   variant, which the redefinitions above do not reach: the group of an
+   InputGroup, a Questionnaire choice, a Field choice card. Under a forced
+   focus they draw it here, with the classes the components write. */
+@layer utilities {
+  [data-force-state="focus"] [data-slot="input-group"],
+  [data-force-state="focus"] [data-slot="questionnaire-choice"],
+  [data-force-state="focus"]
+    [data-slot="field-label"]:has(> [data-slot="field"]) {
+    @apply border-ring ring-(length:--space-focus-ring-width) ring-ring/50;
+  }
+}
