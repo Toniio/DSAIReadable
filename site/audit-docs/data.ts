@@ -184,6 +184,15 @@ export function evalRuns(): EvalRun[] {
     )
 }
 
+/** The runs of the most recent version measured; the others stay in evals/history/. */
+export function latestVersionRuns(runs: EvalRun[]): EvalRun[] {
+  const last = runs
+    .map((run) => run.version)
+    .sort(compareVersions)
+    .at(-1)
+  return runs.filter((run) => run.version === last)
+}
+
 /**
  * The model runs of the most recent date: the conditions measured together.
  * A gold run calibrates the scorer, it measures no model.
