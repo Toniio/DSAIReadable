@@ -16,7 +16,7 @@ export default function Example() {
       <Avatar size="default">
         <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         <AvatarFallback>CN</AvatarFallback>
-        <AvatarBadge />
+        <AvatarBadge aria-label="Online" />
       </Avatar>
       <Avatar size="default">
         <AvatarImage

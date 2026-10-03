@@ -1,3 +1,4 @@
+import { DotsThreeIcon } from "@phosphor-icons/react"
 import { render, screen, within } from "@testing-library/react"
 import { describe, expect, it, vi } from "vitest"
 import { page, userEvent } from "vitest/browser"
@@ -8,6 +9,7 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
@@ -15,6 +17,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { UI_STRINGS } from "@/lib/ui-strings"
+
+import { axeViolations } from "../axe"
 
 function Example({ onSettings }: { onSettings?: () => void }) {
   return (
@@ -43,6 +47,36 @@ function Example({ onSettings }: { onSettings?: () => void }) {
         <SidebarTrigger />
         <p>Main content</p>
       </main>
+    </SidebarProvider>
+  )
+}
+
+function WithAction({
+  size,
+  showOnHover,
+}: {
+  size: "sm" | "default" | "lg"
+  showOnHover: boolean
+}) {
+  return (
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton size={size}>Projects</SidebarMenuButton>
+                <SidebarMenuAction
+                  showOnHover={showOnHover}
+                  aria-label="More options for Projects"
+                >
+                  <DotsThreeIcon />
+                </SidebarMenuAction>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
     </SidebarProvider>
   )
 }
@@ -141,5 +175,28 @@ describe("Sidebar", () => {
     expect(onSettings).toHaveBeenCalledTimes(1)
     await userEvent.keyboard(" ")
     expect(onSettings).toHaveBeenCalledTimes(2)
+  })
+
+  it("target size: SidebarMenuAction is 24 × 24, centered on its menu button, axe clean in both themes", async () => {
+    for (const size of ["sm", "default", "lg"] as const)
+      for (const showOnHover of [false, true]) {
+        const { unmount } = render(
+          <WithAction size={size} showOnHover={showOnHover} />
+        )
+        const button = screen.getByRole("button", { name: "Projects" })
+        await userEvent.hover(button)
+        const action = screen
+          .getByRole("button", { name: "More options for Projects" })
+          .getBoundingClientRect()
+        const host = button.getBoundingClientRect()
+        const where = `size ${size}, showOnHover ${showOnHover}`
+        expect([action.width, action.height], where).toEqual([24, 24])
+        expect(
+          action.top + action.height / 2 - (host.top + host.height / 2),
+          where
+        ).toBe(size === "lg" ? -4 : 0)
+        expect(await axeViolations(), where).toEqual([])
+        unmount()
+      }
   })
 })

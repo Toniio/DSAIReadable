@@ -2358,8 +2358,8 @@
         "behavior": "The image failed; the fallback (initials) is shown"
       }
     ],
-    "accessibility": "**Pattern**: Image (`img`) with a text fallback (Radix Avatar)\n\n**Role**: `AvatarImage` renders an `img`; `AvatarFallback` only shows when the image fails or is missing.\n\n**Keyboard**:\n\nNo keyboard interaction of its own.\n\n**Accessible name**: `alt` is required on `AvatarImage` (the person's name), or `alt=\"\"` when the name is already written next to it.\n\n**Pitfalls**:\n\n- When the name is shown next to the avatar, the fallback initials repeat it: hide them with `aria-hidden`.\n- A clickable avatar must be wrapped in a named link or button, not made clickable itself.",
-    "code_example": "import {\n  Avatar,\n  AvatarImage,\n  AvatarFallback,\n  AvatarBadge,\n  AvatarGroup,\n  AvatarGroupCount,\n} from \"@/components/ui/avatar\"\n\nexport default function Example() {\n  return (\n    <AvatarGroup>\n      <Avatar size=\"default\">\n        <AvatarImage src=\"https://github.com/shadcn.png\" alt=\"@shadcn\" />\n        <AvatarFallback>CN</AvatarFallback>\n        <AvatarBadge />\n      </Avatar>\n      <Avatar size=\"default\">\n        <AvatarImage\n          src=\"https://github.com/evilrabbit.png\"\n          alt=\"@evilrabbit\"\n        />\n        <AvatarFallback>ER</AvatarFallback>\n      </Avatar>\n      <AvatarGroupCount>+3</AvatarGroupCount>\n    </AvatarGroup>\n  )\n}",
+    "accessibility": "**Pattern**: Image (`img`) with a text fallback (Radix Avatar)\n\n**Role**: `AvatarImage` renders an `img`; `AvatarFallback` only shows when the image fails or is missing. An `AvatarBadge` given an `aria-label` (or `aria-labelledby`) renders `role=\"img\"`, which the label names; a `span` with no role cannot carry one.\n\n**Keyboard**:\n\nNo keyboard interaction of its own.\n\n**Accessible name**: `alt` is required on `AvatarImage` (the person's name), or `alt=\"\"` when the name is already written next to it.\n\n**Pitfalls**:\n\n- When the name is shown next to the avatar, the fallback initials repeat it: hide them with `aria-hidden`.\n- A clickable avatar must be wrapped in a named link or button, not made clickable itself.",
+    "code_example": "import {\n  Avatar,\n  AvatarImage,\n  AvatarFallback,\n  AvatarBadge,\n  AvatarGroup,\n  AvatarGroupCount,\n} from \"@/components/ui/avatar\"\n\nexport default function Example() {\n  return (\n    <AvatarGroup>\n      <Avatar size=\"default\">\n        <AvatarImage src=\"https://github.com/shadcn.png\" alt=\"@shadcn\" />\n        <AvatarFallback>CN</AvatarFallback>\n        <AvatarBadge aria-label=\"Online\" />\n      </Avatar>\n      <Avatar size=\"default\">\n        <AvatarImage\n          src=\"https://github.com/evilrabbit.png\"\n          alt=\"@evilrabbit\"\n        />\n        <AvatarFallback>ER</AvatarFallback>\n      </Avatar>\n      <AvatarGroupCount>+3</AvatarGroupCount>\n    </AvatarGroup>\n  )\n}",
     "cross_references": [
       "Item",
       "DropdownMenu",
@@ -2782,7 +2782,7 @@
       "**MUST NOT** — serve as primary navigation: it is a contextual landmark",
       "**MUST** — place a single `Breadcrumb` per page, at the top of the main content",
       "**MUST NOT** — make the last item (`BreadcrumbPage`) clickable",
-      "**Note** — separators and the ellipsis are hidden from screen readers (`aria-hidden`)",
+      "**Note** — separators are hidden from screen readers (`aria-hidden`); the ellipsis hides its icon only and announces its `srLabel`",
       "**MUST NOT** — replace the root's `aria-label=\"breadcrumb\"`, **unless** to translate it",
       "**MUST** — in an interface that is not in English, translate the `UI_STRINGS.breadcrumb` strings (`srLabel` on `BreadcrumbEllipsis`)"
     ],
@@ -16944,7 +16944,7 @@
       "`InputGroupInput` — the underlying input",
       "`InputGroupAddon` — the area that holds the toggle button",
       "`InputGroupButton` — a ghost `icon-xs` button",
-      "`@phosphor-icons/react` (`Eye`, `EyeSlash`) — the only icons"
+      "`@phosphor-icons/react` (`EyeIcon`, `EyeSlashIcon`) — the only icons"
     ],
     "anatomy": [
       {
@@ -17030,7 +17030,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Password hidden, `Eye` icon, \"Show password\" label"
+        "behavior": "Password hidden, `EyeIcon`, \"Show password\" label"
       },
       {
         "state": "hover",
@@ -17054,7 +17054,7 @@
       },
       {
         "state": "visible",
-        "behavior": "Password shown in plain text (`type=\"text\"`), `EyeSlash` icon, \"Hide password\" label"
+        "behavior": "Password shown in plain text (`type=\"text\"`), `EyeSlashIcon`, \"Hide password\" label"
       }
     ],
     "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `showLabel` / `hideLabel` (defaults `UI_STRINGS.passwordInput.show` / `.hide`), depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Disable the field with the `disabled` prop, not only through a `<fieldset disabled>`: the fieldset disables the toggle too, but a value already shown stays shown.\n- Show the password rules before the user types, linked through `aria-describedby`.",
@@ -20754,6 +20754,15 @@
         ]
       },
       {
+        "token": "size.target.min",
+        "classes": [
+          "min-w-target"
+        ],
+        "where": [
+          "SidebarMenuAction"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -20825,6 +20834,7 @@
         "token": "space.scale.0-5",
         "classes": [
           "-inset-0.5",
+          "-m-0.5",
           "py-0.5",
           "w-0.5"
         ],
@@ -22103,6 +22113,15 @@
           "Toaster.loading",
           "Toaster.success",
           "Toaster.warning"
+        ]
+      },
+      {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "var(--font-mono)"
+        ],
+        "where": [
+          "Toaster.fontFamily"
         ]
       }
     ],
@@ -23737,6 +23756,7 @@
         ],
         "where": [
           "toggleVariants.variant.default",
+          "toggleVariants.variant.outline",
           "toggleVariants via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -23764,6 +23784,7 @@
       {
         "token": "color.text.default",
         "classes": [
+          "border-foreground",
           "text-foreground"
         ],
         "where": [
@@ -23990,7 +24011,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Transparent background, inherited text"
+        "behavior": "Transparent background, inherited text; the `default` variant draws a transparent border (`border border-transparent`), so the on-state frame moves nothing"
       },
       {
         "state": "hover",
@@ -23998,11 +24019,11 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`, around a solid part: a `ring` border on the `outline` variant, and an `outline-ring` outline `--border-width-default` wide on the default variant, which has no border width; an invalid toggle's outline is `outline-destructive`"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`, around a solid part: a `ring` border on the `outline` variant, and an `outline-ring` outline `--border-width-default` wide on the default variant, whose border stays transparent at focus (`focus-visible:border-transparent`); a pressed toggle keeps its on-state frame at focus on the default variant, and turns its border `border-ring` on the `outline` variant (`focus-visible:data-[state=on]:border-ring`); an invalid toggle's outline is `outline-destructive`"
       },
       {
         "state": "pressed",
-        "behavior": "`muted` background, through `aria-pressed` / `data-[state=on]`"
+        "behavior": "`muted` background, the hover fill, and a solid `border-foreground` frame that hover does not draw (19.72:1 on the page in light mode, 18.99:1 in dark), through `aria-pressed` / `data-[state=on]`; the frame wins over the invalid border color, and over the focus border color on the default variant"
       },
       {
         "state": "disabled",
@@ -24010,7 +24031,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border on the `outline` variant through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
+        "behavior": "`destructive` border through `aria-invalid`, on both variants, unless the toggle is pressed, where its frame shows; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
       }
     ],
     "accessibility": "**Pattern**: Toggle [button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)\n\n**Role**: A `button` with `aria-pressed`.\n\n**Keyboard**:\n\n| Key               | Action            |\n| ----------------- | ----------------- |\n| `Enter` / `Space` | Toggles the state |\n\n**Accessible name**: The button text; an icon-only toggle needs an `aria-label` that names the action (\"Bold\"), not the state.\n\n**Pitfalls**:\n\n- The label must not change with the state: `aria-pressed` carries the state.",
@@ -24064,6 +24085,7 @@
       {
         "token": "border-width.default",
         "classes": [
+          "border",
           "border-l",
           "border-t",
           "outline-(length:--border-width-default)"
@@ -24110,6 +24132,7 @@
       {
         "token": "color.text.default",
         "classes": [
+          "border-foreground",
           "text-foreground"
         ],
         "where": [
@@ -24375,7 +24398,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Unselected item, styled by `toggleVariants`"
+        "behavior": "Unselected item, styled by `toggleVariants`; a `default` item draws a transparent border (`border border-transparent`), so the on-state frame moves nothing"
       },
       {
         "state": "hover",
@@ -24383,11 +24406,11 @@
       },
       {
         "state": "focus",
-        "behavior": "The focused item rises above its neighbors (`focus:z-dropdown`) and draws the focus ring of `toggleVariants`: a `focus-visible:ring-ring/50` ring around a solid part, the `focus-visible:outline-ring` outline of the `default` variant or the `focus-visible:border-ring` border of the `outline` variant"
+        "behavior": "The focused item rises above its neighbors (`focus:z-dropdown`) and draws the focus ring of `toggleVariants`: a `focus-visible:ring-ring/50` ring around a solid part, the `focus-visible:outline-ring` outline of the `default` variant, whose border stays transparent at focus, or the `focus-visible:border-ring` border of the `outline` variant; a pressed `default` item keeps its on-state frame, and a pressed `outline` item takes the `focus-visible:border-ring` border in its place"
       },
       {
         "state": "pressed",
-        "behavior": "A pressed item takes `data-[state=on]:bg-muted` from `toggleVariants`: Radix writes `data-state=\"on\"` in both kinds of group, and `aria-pressed` only in a `multiple` one, whose items are buttons (a `single` group's items are radios with `aria-checked`)"
+        "behavior": "A pressed item takes `data-[state=on]:bg-muted`, the hover fill, and a solid `data-[state=on]:border-foreground` frame that hover does not draw, from `toggleVariants`: Radix writes `data-state=\"on\"` in both kinds of group, and `aria-pressed` only in a `multiple` one, whose items are buttons (a `single` group's items are radios with `aria-checked`). In a joined `outline` group (`spacing={0}`), an item's leading border is its neighbor's (`border-l-0`, `border-t-0` when vertical), so the frame shows on three sides"
       },
       {
         "state": "disabled",
@@ -24395,7 +24418,7 @@
       },
       {
         "state": "error",
-        "behavior": "An item given `aria-invalid`, which the group never sets, takes it from `toggleVariants`: on focus, a solid `aria-invalid:focus-visible:outline-destructive` outline and an `aria-invalid:ring-destructive/20` ring; an `outline` item also takes the `aria-invalid:border-destructive` border"
+        "behavior": "An item given `aria-invalid`, which the group never sets, takes it from `toggleVariants`: the `aria-invalid:border-destructive` border, unless the item is pressed, where its frame shows; on focus, a solid `aria-invalid:focus-visible:outline-destructive` outline and an `aria-invalid:ring-destructive/20` ring"
       },
       {
         "state": "spacing-0",

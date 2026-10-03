@@ -106,4 +106,13 @@ describe("Sonner", () => {
     await userEvent.keyboard("{Enter}")
     expect(onUndo).toHaveBeenCalledTimes(1)
   })
+
+  it("typeface: a toast is set in the page's font, not in sonner's system stack", async () => {
+    await showToast()
+    const toastFont = getComputedStyle(
+      region().querySelector("[data-sonner-toast]")!
+    ).fontFamily
+    expect(toastFont).toBe(getComputedStyle(document.body).fontFamily)
+    expect(toastFont).not.toMatch(/ui-sans-serif/)
+  })
 })

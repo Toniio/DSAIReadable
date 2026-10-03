@@ -40,6 +40,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--normal-text": "var(--color-popover-foreground)",
           "--normal-border": "var(--color-border)",
           "--border-radius": "var(--radius-none)",
+          // sonner sets its own system font stack on the list; the toasts
+          // take the design system's, as every other component does.
+          fontFamily: "var(--font-mono)",
         } as React.CSSProperties
       }
       {...props}

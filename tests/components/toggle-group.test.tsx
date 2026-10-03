@@ -2,8 +2,11 @@ import { GridFourIcon, ListIcon, TableIcon } from "@phosphor-icons/react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it } from "vitest"
+import { userEvent as pointer } from "vitest/browser"
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+
+import { borderPaint } from "../focus"
 
 function Example() {
   return (
@@ -35,6 +38,28 @@ function MultipleExample() {
     <ToggleGroup type="multiple" defaultValue={["bold"]} aria-label="Format">
       <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
       <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
+    </ToggleGroup>
+  )
+}
+
+function Joined({
+  variant,
+  spacing,
+}: {
+  variant: "default" | "outline"
+  spacing: number
+}) {
+  return (
+    <ToggleGroup
+      type="single"
+      defaultValue="grid"
+      variant={variant}
+      spacing={spacing}
+      aria-label="View"
+    >
+      <ToggleGroupItem value="list">List</ToggleGroupItem>
+      <ToggleGroupItem value="grid">Grid</ToggleGroupItem>
+      <ToggleGroupItem value="table">Table</ToggleGroupItem>
     </ToggleGroup>
   )
 }
@@ -125,5 +150,28 @@ describe("ToggleGroup", () => {
     expect(item("List view").getAttribute("aria-checked")).toBe("false")
     await user.keyboard(" ")
     expect(item("Grid view").getAttribute("aria-checked")).toBe("false")
+  })
+
+  it("pressed: the on item draws a solid frame at 3:1 or more on the page, which hover does not draw, light and dark", async () => {
+    const root = document.documentElement
+    for (const variant of ["default", "outline"] as const)
+      for (const spacing of [0, 2]) {
+        const { unmount } = render(
+          <Joined variant={variant} spacing={spacing} />
+        )
+        await pointer.hover(item("Table"))
+        try {
+          for (const theme of ["light", "dark"] as const) {
+            root.classList.toggle("dark", theme === "dark")
+            const where = `${variant}, spacing ${spacing}, ${theme}`
+            const frame = borderPaint(item("Grid"))
+            expect(frame.contrast, where).toBeGreaterThanOrEqual(3)
+            expect(frame.key, where).not.toBe(borderPaint(item("Table")).key)
+          }
+        } finally {
+          root.classList.remove("dark")
+          unmount()
+        }
+      }
   })
 })
