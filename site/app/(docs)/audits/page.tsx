@@ -30,6 +30,7 @@ import {
   evalRuns,
   exemptions,
   latestRuns,
+  latestVersionRuns,
   percent,
   shadcnAudit,
   SPEC_SECTIONS,
@@ -66,7 +67,7 @@ const TOC: TocItem[] = [
 
 /** How a run's condition reads in a sentence. */
 const CONDITION_PHRASE: Record<string, string> = {
-  Gold: "as the gold standard",
+  "Gold (calibration)": "as the gold standard",
   "No context": "with no context",
   MCP: "with the MCP server",
   "MCP + skills": "with the MCP server and the skills",
@@ -96,7 +97,7 @@ function evalSummary(runs: EvalRun[], latest: EvalRun[]): string {
   }
   if (gold.length && gold.every((run) => run.conformance === 1)) {
     sentences.push(
-      `The ${gold.length} gold runs score 100%: the scorer passes the design system's own examples.`
+      `${gold.length === 1 ? "The gold run scores" : `The ${gold.length} gold runs score`} 100%: the scorer passes the design system's own examples.`
     )
   }
   return sentences.join(" ")
@@ -125,7 +126,7 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
 }
 
 export default function AuditsPage() {
-  const runs = evalRuns()
+  const runs = latestVersionRuns(evalRuns())
   const latest = latestRuns(runs)
   const best = [...latest].sort((a, b) => b.conformance - a.conformance)[0]
   const contrast = contrastRows()
@@ -287,7 +288,9 @@ export default function AuditsPage() {
             components and lints clean with the design system&apos;s ESLint
             plugin. Stage B renders it in headless Chromium: no axe violation
             and a visible focus indicator on every tab stop, in light and dark.
-            Conformance is the mean of the stages that ran.
+            Conformance is the mean of the stages that ran. The page shows the
+            runs of the latest version measured; the earlier ones stay in{" "}
+            <code className="font-mono">evals/history/</code>.
           </>
         }
       >
@@ -328,7 +331,7 @@ export default function AuditsPage() {
                   <TableCell className="font-mono">{run.version}</TableCell>
                   <TableCell className="min-w-44 whitespace-normal">
                     {run.generator === "gold" ? (
-                      "Gold standard"
+                      "Gold (calibration)"
                     ) : (
                       <span className="flex flex-col gap-0.5">
                         <span className="font-mono">
