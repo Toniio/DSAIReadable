@@ -27,8 +27,8 @@ import type {
   PrimitiveStep,
   SemanticColor,
   Surfaces,
-} from "@/site/foundation-docs/a/color-data"
-import { FilterInput } from "@/site/foundation-docs/a/filter-input"
+} from "@/site/foundation-docs/tokens/color-data"
+import { FilterInput } from "@/site/foundation-docs/tokens/filter-input"
 import {
   Code,
   CopyCode,
@@ -37,7 +37,7 @@ import {
   Fill,
   StatusBadge,
   Ticks,
-} from "@/site/foundation-docs/a/token-ui"
+} from "@/site/foundation-docs/tokens/token-ui"
 import { DocSection } from "@/site/ui/doc-section"
 
 type View = "swatches" | "table"

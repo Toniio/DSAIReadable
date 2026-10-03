@@ -329,6 +329,12 @@ const story: Story = {
   render: (args) => <Example a={read(args)} />,
   code,
   layout: "padded",
+  // Measured in Chromium: an input draws focus only, a choice card draws
+  // hover and focus, and neither draws a press.
+  states: (args) =>
+    args.control === "choice-card"
+      ? ["rest", "hover", "focus"]
+      : ["rest", "focus"],
 }
 
 export default story

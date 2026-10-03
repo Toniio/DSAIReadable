@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
 import {
   Code,
   ModePanels,
   shortName,
-} from "@/site/foundation-docs/b/token-bits"
+} from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { darkValue, tailwindClasses, tokenGroup } from "@/site/lib/tokens"
 import { DocSection } from "@/site/ui/doc-section"

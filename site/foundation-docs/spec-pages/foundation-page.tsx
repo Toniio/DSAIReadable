@@ -3,10 +3,16 @@ import Link from "next/link"
 import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr"
 
 import { cn } from "@/lib/utils"
-import { DoDont, NumberedRules } from "@/site/foundation-docs/b/do-dont"
-import { LiveExample } from "@/site/foundation-docs/b/live-example"
+import {
+  DoDont,
+  NumberedRules,
+} from "@/site/foundation-docs/spec-pages/do-dont"
+import { LiveExample } from "@/site/foundation-docs/spec-pages/live-example"
 import { LINK } from "@/site/ui/link"
-import { foundationDoc, foundationRules } from "@/site/foundation-docs/b/spec"
+import {
+  foundationDoc,
+  foundationRules,
+} from "@/site/foundation-docs/spec-pages/spec"
 import {
   foundationExampleCode,
   foundationExampleKeys,

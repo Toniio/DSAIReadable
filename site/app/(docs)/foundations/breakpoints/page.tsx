@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
 
 import { Badge } from "@/components/ui/badge"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
-import { remToPx } from "@/site/foundation-docs/b/spec"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
+import { remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import {
   Code,
   Dimension,
   shortName,
   StatusBadge,
-} from "@/site/foundation-docs/b/token-bits"
+} from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { tokenGroup, type Token } from "@/site/lib/tokens"
 import { DocSection } from "@/site/ui/doc-section"

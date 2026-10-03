@@ -279,15 +279,16 @@ harness, with and without the skills: `npm run evals -- --generator claude
 One name, adapted to the constraint of each channel. Any future publication
 follows it — do not reintroduce a capitalized variant.
 
-| Channel                | Identifier                    | Why this form                                                                    |
-| ---------------------- | ----------------------------- | -------------------------------------------------------------------------------- |
-| GitHub repository      | `Toniio/DSAIReadable`         | The project's original name; the only place where casing is free                 |
-| shadcn registry        | `dsaireadable`                | A registry name only allows alphanumerics, hyphens and underscores               |
-| A component's item     | `Toniio/DSAIReadable/<item>`  | The full GitHub address: a bare name would point to the official shadcn registry |
-| npm scope              | `@dsaireadable`               | npm forbids capitals in a scope                                                  |
-| MCP server npm package | `@dsaireadable/mcp-server`    | A client runs it with `npx -y @dsaireadable/mcp-server`, with no clone           |
-| ESLint plugin package  | `@dsaireadable/eslint-plugin` | Published with the server, at the same version: the server pins it               |
-| Release tag            | `vX.Y.Z`                      | One version for the tokens, components, registry, MCP server and ESLint plugin   |
+| Channel                | Identifier                               | Why this form                                                                           |
+| ---------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------- |
+| GitHub repository      | `Toniio/DSAIReadable`                    | The project's original name; the only place where casing is free                        |
+| shadcn registry        | `dsaireadable`                           | A registry name only allows alphanumerics, hyphens and underscores                      |
+| A component's item     | `Toniio/DSAIReadable/<item>`             | The full GitHub address: a bare name would point to the official shadcn registry        |
+| npm scope              | `@dsaireadable`                          | npm forbids capitals in a scope                                                         |
+| MCP server npm package | `@dsaireadable/mcp-server`               | A client runs it with `npx -y @dsaireadable/mcp-server`, with no clone                  |
+| ESLint plugin package  | `@dsaireadable/eslint-plugin`            | Published with the server, at the same version: the server pins it                      |
+| Release tag            | `vX.Y.Z`                                 | One version for the tokens, components, registry, MCP server and ESLint plugin          |
+| Documentation site     | `https://toniio.github.io/DSAIReadable/` | GitHub Pages serves a project site under `/<repository>/`; deployed at each release tag |
 
 A release tag pins the item you name, not what it depends on:
 `npx shadcn add Toniio/DSAIReadable/button#v0.1.0` reads `button` at the tag, but
@@ -349,6 +350,8 @@ npx shadcn@latest search Toniio/DSAIReadable -q card   # search
 npx shadcn@latest view Toniio/DSAIReadable/card        # view an item and its source
 npx shadcn@latest add Toniio/DSAIReadable/card --dry-run
 ```
+
+The [documentation site](https://toniio.github.io/DSAIReadable/) browses the design system: the foundations, every component with a live playground (variants, sizes, forced states, light and dark), the page patterns and the changes. It is rebuilt from the repository at each release tag, so it documents the published version.
 
 Every component has its spec — props, variants, states, accessibility — in [`specs/components/`](./specs/components/). [`llms.txt`](./llms.txt) lists every spec with its role, the entry points and the machine-readable sources, in the [llms.txt](https://llmstxt.org/) format.
 
@@ -426,6 +429,7 @@ npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP ser
 npm run test:components  # Every spec example, and the foundations' complete modules, in headless Chromium: axe light and dark, focus, keyboard
 npm run evals:test   # The conformance harness scores its gold examples, with no model
 npm run site:dev     # The documentation site: foundations, components with a live playground, patterns, changes, audits
+npm run site:build && npm run site:test  # The built site, loaded in headless Chromium: axe, page errors and a focus indicator on every tab stop, light and dark
 ```
 
 ---

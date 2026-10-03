@@ -7,12 +7,12 @@ import {
   AvatarGroupCount,
 } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
 import {
   ClassList,
   Dimension,
   shortName,
-} from "@/site/foundation-docs/b/token-bits"
+} from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { tailwindClasses, tokenGroup, type Token } from "@/site/lib/tokens"
 import { DocSection } from "@/site/ui/doc-section"

@@ -17,15 +17,18 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { cn } from "@/lib/utils"
-import { FilterInput } from "@/site/foundation-docs/a/filter-input"
+import { FilterInput } from "@/site/foundation-docs/tokens/filter-input"
 import {
   Code,
   CopyCode,
   DottedName,
   Fill,
   StatusBadge,
-} from "@/site/foundation-docs/a/token-ui"
-import type { TokenRow, TokensData } from "@/site/foundation-docs/a/tokens-data"
+} from "@/site/foundation-docs/tokens/token-ui"
+import type {
+  TokenRow,
+  TokensData,
+} from "@/site/foundation-docs/tokens/tokens-data"
 
 /** How many rows a page shows, and how many more each "Show more" adds. */
 const PAGE = 100

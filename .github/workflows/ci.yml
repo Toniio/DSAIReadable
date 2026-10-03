@@ -221,6 +221,11 @@ jobs:
   site:
     name: site
     runs-on: ubuntu-latest
+    env:
+      # The site as GitHub Pages serves it, under /<repository>/ (the Site
+      # workflow builds it the same way): every link and preview iframe is
+      # prefixed, so that is the build to test.
+      SITE_BASE_PATH: /DSAIReadable
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -236,3 +241,20 @@ jobs:
       # files: a spec, a token or a context file it cannot read fails here.
       # Networked: next/font downloads the typefaces.
       - run: npm run site:build
+      # The built site served as GitHub Pages serves it, in headless Chromium:
+      # every page and every preview, light and dark, with no axe violation
+      # (WCAG 2.2 AA), page error or unexpected response, and a focus
+      # indicator on every tab stop. Chromium is cached by Playwright version,
+      # as in component-tests.
+      - id: playwright
+        run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v6
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+      - if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps --only-shell chromium
+      - if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+      - run: npm run site:test

@@ -1,9 +1,12 @@
 import type { Metadata } from "next"
 
-import { ExampleCards } from "@/site/foundation-docs/b/example-cards"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
-import { foundationDoc, splitTable } from "@/site/foundation-docs/b/spec"
-import { Code } from "@/site/foundation-docs/b/token-bits"
+import { ExampleCards } from "@/site/foundation-docs/spec-pages/example-cards"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
+import {
+  foundationDoc,
+  splitTable,
+} from "@/site/foundation-docs/spec-pages/spec"
+import { Code } from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { readJson } from "@/site/lib/repo"
 import { DocSection } from "@/site/ui/doc-section"

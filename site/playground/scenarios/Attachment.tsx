@@ -20,6 +20,7 @@ import {
   AttachmentTrigger,
 } from "@/components/ui/attachment"
 import { Spinner } from "@/components/ui/spinner"
+import { text } from "@/site/playground/jsx"
 import type { Args, Story } from "@/site/playground/types"
 
 type UploadState = "idle" | "uploading" | "processing" | "error" | "done"
@@ -76,11 +77,6 @@ function resolve(args: Args) {
     showActions: Boolean(args.showActions),
     showTrigger: Boolean(args.showTrigger),
   }
-}
-
-/** Text as a JSX child: braces and angle brackets go in an expression. */
-function text(value: string): string {
-  return /[{}<>]/.test(value) ? `{${JSON.stringify(value)}}` : value
 }
 
 /** Attachment: one file tile, its size, layout and upload state as controls. */

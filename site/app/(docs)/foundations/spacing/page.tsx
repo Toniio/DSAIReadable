@@ -2,16 +2,16 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
 import { LINK } from "@/site/ui/link"
-import { remToPx } from "@/site/foundation-docs/b/spec"
+import { remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import {
   ClassList,
   Code,
   Dimension,
   shortName,
   StatusBadge,
-} from "@/site/foundation-docs/b/token-bits"
+} from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { tailwindClasses, tokenGroup, type Token } from "@/site/lib/tokens"
 import { DocSection } from "@/site/ui/doc-section"

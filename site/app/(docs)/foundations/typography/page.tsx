@@ -4,13 +4,13 @@ import { FoundationExample } from "@/site/ui/foundation-example"
 import {
   FoundationEyebrow,
   withoutTitle,
-} from "@/site/foundation-docs/a/page-bits"
+} from "@/site/foundation-docs/tokens/page-bits"
 import {
   COMBINATIONS,
   foundationExamples,
   typeData,
-} from "@/site/foundation-docs/a/type-data"
-import { TypeStyles } from "@/site/foundation-docs/a/type-styles"
+} from "@/site/foundation-docs/tokens/type-data"
+import { TypeStyles } from "@/site/foundation-docs/tokens/type-styles"
 import { foundation, foundationsNav } from "@/site/lib/nav"
 import { readText } from "@/site/lib/repo"
 import { CodeBlock } from "@/site/ui/code-block"

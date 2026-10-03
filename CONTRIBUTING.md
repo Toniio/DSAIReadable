@@ -66,20 +66,20 @@ Most of what an agent reads is generated: change the source, run its command,
 and commit both. CI fails on a generated file that is out of step with its
 source.
 
-| To change                                                               | Edit                                                                                                                              | Then run                                                                                        |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| A token value or decision                                               | `tokens/*.json`                                                                                                                   | `npm run tokens:build && npm run docs:tokens`                                                   |
-| A component                                                             | `components/ui/<component>.tsx`, after reading its spec                                                                           | `npm run specs:variants && npm run specs:tokens && npm run specs:api && npm run specs:states`   |
-| A state a component never enters through another component's `cva` call | a "Not entered through" line in its spec's States section, its reason read from the dependency's source (Calendar's is the model) | `npm run specs:states && npm run specs:tokens`                                                  |
-| A component's behavior, usage or accessibility                          | `specs/components/<Component>.md`, outside generated sections                                                                     | `npm run docs:llms` when the Role changed                                                       |
-| A foundation's guidance or example                                      | `specs/foundations/<name>.md`                                                                                                     | `npm run specs:validate`: its tsx and ts blocks pass the ESLint plugin                          |
-| A choice between sibling components                                     | `composition_rules` in `design-system.index.json`                                                                                 | `npm run specs:choices`                                                                         |
-| Anything the MCP server serves                                          | its source above                                                                                                                  | `npm run generate-context`                                                                      |
-| A registry item                                                         | the component or `registry/`                                                                                                      | `npm run registry:build`                                                                        |
-| A component's API (a prop, an export, a value)                          | the component, then its `shadcn.divergences` entry in `design-system.index.json`                                                  | `npm run index:shadcn`                                                                          |
-| A rule agents follow when they build UI                                 | the spec or pattern it cites, then the skill in `skills/` that points at it                                                       | `npm run skills:validate`                                                                       |
-| A code example of a spec, a pattern or a foundation                     | the spec                                                                                                                          | `npm run site:examples`: the documentation site renders the copy it writes in `site/generated/` |
-| A page of the documentation site                                        | `site/` (never `site/generated/`)                                                                                                 | `npm run site:dev`, then `npm run site:check`                                                   |
+| To change                                                               | Edit                                                                                                                              | Then run                                                                                                                              |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| A token value or decision                                               | `tokens/*.json`                                                                                                                   | `npm run tokens:build && npm run docs:tokens`                                                                                         |
+| A component                                                             | `components/ui/<component>.tsx`, after reading its spec                                                                           | `npm run specs:variants && npm run specs:tokens && npm run specs:api && npm run specs:states`                                         |
+| A state a component never enters through another component's `cva` call | a "Not entered through" line in its spec's States section, its reason read from the dependency's source (Calendar's is the model) | `npm run specs:states && npm run specs:tokens`                                                                                        |
+| A component's behavior, usage or accessibility                          | `specs/components/<Component>.md`, outside generated sections                                                                     | `npm run docs:llms` when the Role changed                                                                                             |
+| A foundation's guidance or example                                      | `specs/foundations/<name>.md`                                                                                                     | `npm run specs:validate`: its tsx and ts blocks pass the ESLint plugin                                                                |
+| A choice between sibling components                                     | `composition_rules` in `design-system.index.json`                                                                                 | `npm run specs:choices`                                                                                                               |
+| Anything the MCP server serves                                          | its source above                                                                                                                  | `npm run generate-context`                                                                                                            |
+| A registry item                                                         | the component or `registry/`                                                                                                      | `npm run registry:build`                                                                                                              |
+| A component's API (a prop, an export, a value)                          | the component, then its `shadcn.divergences` entry in `design-system.index.json`                                                  | `npm run index:shadcn`                                                                                                                |
+| A rule agents follow when they build UI                                 | the spec or pattern it cites, then the skill in `skills/` that points at it                                                       | `npm run skills:validate`                                                                                                             |
+| A code example of a spec, a pattern or a foundation                     | the spec                                                                                                                          | `npm run site:examples`: the documentation site renders the copy it writes in `site/generated/`                                       |
+| A page of the documentation site                                        | `site/` (never `site/generated/`)                                                                                                 | `npm run site:dev`, then `npm run site:check`; `npm run site:build && npm run site:test` before a PR that changes what a visitor sees |
 
 **A new or changed component arrives with its test.** `tests/examples.test.tsx`
 renders every spec's `## Code example`, and every foundation example written as
@@ -302,7 +302,9 @@ Every release comes from the changesets:
    the merge: until the tag exists, every link of `llms.txt`, of the
    `conventions` item, of the READMEs and of the ESLint plugin's rule docs
    returns a 404, and installing the Claude Code plugin or running
-   `npx skills add Toniio/DSAIReadable#vX.Y.Z` fails.
+   `npx skills add Toniio/DSAIReadable#vX.Y.Z` fails. Pushing the tag also
+   starts the `Site` workflow, which deploys the documentation site at that
+   version ([The documentation site](#the-documentation-site)).
 3. A maintainer publishes the two packages, the ESLint plugin first since the
    server pins it: `npm publish --access public --dry-run`, then without
    `--dry-run`, in `packages/eslint-plugin/`, then in `mcp-server/`. A published
@@ -332,20 +334,57 @@ and the README's are removed together.
 
 ## What CI checks
 
-| Job                 | Command                                                                                                                                                                                       |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens-validate`   | `npm run tokens-validate`                                                                                                                                                                     |
-| `typecheck`         | `npm run typecheck:all`                                                                                                                                                                       |
-| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                                                                                                                  |
-| `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                                                                                                                 |
-| `spec-sections`     | `npm run specs:validate`, `skills:validate`, `agentskills validate` (`skills-ref` 0.1.1)                                                                                                      |
-| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                                                                                                                   |
-| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                                                                                                                        |
-| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`, and the keyboard stress run on a Dependabot PR that bumps a primitive                                       |
-| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test`                                                                                                  |
-| `site`              | `npm run site:check` (the examples copied from the specs are fresh, the consumer lint passes on `site/`, every focus ring it composes has a solid part), `site:build` (every page prerenders) |
+| Job                 | Command                                                                                                                                                                                                                                                                                                                      |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens-validate`   | `npm run tokens-validate`                                                                                                                                                                                                                                                                                                    |
+| `typecheck`         | `npm run typecheck:all`                                                                                                                                                                                                                                                                                                      |
+| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                                                                                                                                                                                                                                                 |
+| `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                                                                                                                                                                                                                                                |
+| `spec-sections`     | `npm run specs:validate`, `skills:validate`, `agentskills validate` (`skills-ref` 0.1.1)                                                                                                                                                                                                                                     |
+| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                                                                                                                                                                                                                                                  |
+| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                                                                                                                                                                                                                                                       |
+| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`, and the keyboard stress run on a Dependabot PR that bumps a primitive                                                                                                                                                                      |
+| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test`                                                                                                                                                                                                                                 |
+| `site`              | `npm run site:check` (the examples copied from the specs are fresh, the consumer lint passes on `site/`, every focus ring it composes has a solid part), `site:build` (every page prerenders), `site:test` (the build served under GitHub Pages' base path and loaded in Chromium: axe, page errors, focus; Chromium cached) |
 
 The `Evals` workflow runs apart, only when started by hand (each run costs API credits), never on a pull request: the conformance harness with a Claude agent, with and without the MCP server, its reports uploaded as an artifact ([`evals/README.md`](./evals/README.md)).
+
+## The documentation site
+
+`site/` is published at `https://toniio.github.io/DSAIReadable/` by the `Site`
+workflow (`.github/workflows/site-pages.yml`), apart from `ci.yml`: deploying
+needs `pages: write` and `id-token: write`, which the workflow that runs on every
+pull request never receives. It runs when a release tag `vX.Y.Z` is pushed, and
+by hand (`gh workflow run site-pages.yml`, on the ref to deploy). The site prints the
+version of `mcp-server/context/ds-metadata.json` and links its sources at
+`blob/v<version>`, so a deployment at the tag describes exactly the published
+version, and `main` never shows unreleased work under the last version's number.
+The workflow fails on a tag that is not the version of `package.json`, and on a
+clone with no tags: the Changes page reads each release's date from its tag.
+
+`npm run site:test` checks what the deployment serves. After a `site:build` made
+with the same `SITE_BASE_PATH` (CI sets `/DSAIReadable`), it serves `site/out`
+like GitHub Pages does and loads, in headless Chromium and in both themes, every
+page, the story and example previews of every component and the previews of every
+pattern and foundation. A load fails on an axe violation (WCAG 2.2 A and AA), a
+page or console error, a response of 400 and above, or a tab stop that is hidden
+or has no focus indicator with a part at 3:1 (the measure is
+`tests/focus-measure.ts`, the one the component tests use; each distinct element
+is measured once). Responses of 404 that a spec's example causes by pointing at
+a file or a page of the project that uses it (Avatar's pictures, sign-in's
+links) are listed in `KNOWN_404` of `scripts/test-site.ts`, and the focus gaps it
+found in the components themselves in `KNOWN_FOCUS_GAPS`, each with its reason.
+`--only=<substring>` restricts the routes, for a quick look.
+
+Two settings are not in the repository, and a maintainer sets them once:
+
+- Settings → Pages → Source: **GitHub Actions**.
+- Settings → Environments → `github-pages` → Deployment branches and tags: allow
+  `main` and the tag pattern `v*.*.*`. A deployment from a ref the environment
+  does not allow is refused.
+
+`site/` was merged after `v0.1.2`, so the first deployment is a manual run from
+`main`; every later release deploys by itself.
 
 ## Dependabot pull requests
 

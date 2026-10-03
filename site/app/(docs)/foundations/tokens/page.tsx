@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { FoundationEyebrow } from "@/site/foundation-docs/a/page-bits"
+import { FoundationEyebrow } from "@/site/foundation-docs/tokens/page-bits"
 import { LINK } from "@/site/ui/link"
-import { tokensData } from "@/site/foundation-docs/a/tokens-data"
-import { TokensTable } from "@/site/foundation-docs/a/tokens-table"
+import { tokensData } from "@/site/foundation-docs/tokens/tokens-data"
+import { TokensTable } from "@/site/foundation-docs/tokens/tokens-table"
 import { foundation, foundationsNav } from "@/site/lib/nav"
 import { DocSection } from "@/site/ui/doc-section"
 import { DocsPage } from "@/site/ui/docs-page"

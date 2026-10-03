@@ -56,6 +56,13 @@ export interface Story {
    */
   grid?: boolean
   /**
+   * The forced states these args draw something for, when that depends on
+   * them: a Field's input has no hover, its choice card has. The state
+   * selector offers these, out of the states the component page lists;
+   * Rest is always offered. Absent: all of them.
+   */
+  states?: (args: Args) => ForcedState[]
+  /**
    * The args the Anatomy section draws the story with, instead of the spec's
    * example: `{ open: true }` for an overlay, whose example shows only its
    * trigger.

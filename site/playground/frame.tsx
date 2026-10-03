@@ -148,14 +148,20 @@ const TABBABLE = [
 /**
  * Tells the page whether the keyboard can reach anything in the frame, each
  * time that changes: the page takes a frame with nothing to reach out of the
- * tab order (see Canvas).
+ * tab order (see Canvas). A picture, which an anatomy drawn open is (a
+ * modal's focus trap would keep the keyboard inside it), reaches nothing,
+ * and neither does what is inert.
  */
-function useReportFocusable() {
+function useReportFocusable(picture: boolean) {
   useEffect(() => {
     if (window.parent === window) return
     let last: boolean | undefined
     const report = () => {
-      const focusable = document.body.querySelector(TABBABLE) !== null
+      const focusable =
+        !picture &&
+        Array.from(document.body.querySelectorAll(TABBABLE)).some(
+          (element) => !element.closest("[inert]")
+        )
       if (focusable === last) return
       last = focusable
       window.parent.postMessage(
@@ -172,7 +178,7 @@ function useReportFocusable() {
       attributeFilter: ["tabindex", "disabled", "href", "contenteditable"],
     })
     return () => observer.disconnect()
-  }, [])
+  }, [picture])
 }
 
 /** The story of a component: the generic one, or its hand-written scenario. */
@@ -540,7 +546,7 @@ function Frame({
   const [state, setState] = useState(initial)
 
   useInertLinks()
-  useReportFocusable()
+  useReportFocusable(state.view === "anatomy")
 
   // The page drives the frame. The frame keeps saying it is ready until the
   // page answers: the page may still be hydrating when it first says so. Only

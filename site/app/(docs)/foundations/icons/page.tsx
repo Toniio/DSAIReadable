@@ -9,13 +9,16 @@ import {
   IconCatalog,
   IconSettings,
   UsedIcons,
-} from "@/site/foundation-docs/b/icon-browser"
-import { WEIGHTS, type IconSize } from "@/site/foundation-docs/b/icon-settings"
-import { iconRules, usedIcons } from "@/site/foundation-docs/b/icons"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
+} from "@/site/foundation-docs/spec-pages/icon-browser"
+import {
+  WEIGHTS,
+  type IconSize,
+} from "@/site/foundation-docs/spec-pages/icon-settings"
+import { iconRules, usedIcons } from "@/site/foundation-docs/spec-pages/icons"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
 import { LINK } from "@/site/ui/link"
-import { remToPx } from "@/site/foundation-docs/b/spec"
-import { Code } from "@/site/foundation-docs/b/token-bits"
+import { remToPx } from "@/site/foundation-docs/spec-pages/spec"
+import { Code } from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { tokenByName } from "@/site/lib/tokens"
 import { CodeBlock } from "@/site/ui/code-block"

@@ -1,0 +1,91 @@
+name: Site
+
+# Publishes the documentation site (site/) to GitHub Pages, at
+# https://toniio.github.io/DSAIReadable/.
+#
+# It runs when a release tag is pushed, and by hand. The site prints the
+# version of mcp-server/context/ds-metadata.json and links its sources at
+# `blob/v<version>`: deployed at the tag, it describes exactly the version
+# that is published, never the unreleased work on `main`. A manual run
+# deploys the ref it is started from (`main` by default); the first
+# deployment is one, because site/ was merged after the v0.1.2 tag.
+#
+# Separate from ci.yml on purpose: deploying needs `pages: write` and
+# `id-token: write`, which the workflow that runs on every pull request must
+# not receive.
+#
+# Settings that are not in this file, and a maintainer sets:
+#   - Settings → Pages → Source: GitHub Actions.
+#   - Settings → Environments → github-pages → Deployment branches and tags:
+#     `main` and the tag pattern `v*.*.*`. A deployment from a ref the
+#     environment does not allow is refused.
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, and a running one is never canceled: a newer run
+# waits for it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "24"
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # The Changes page reads the date of each release from its tag with
+          # `git log`. A shallow clone has no tag: the dates would vanish from
+          # the page without any error.
+          fetch-depth: 0
+      - name: Check that the tags are there
+        run: |
+          if [ -z "$(git tag --list 'v*.*.*')" ]; then
+            echo "::error::No release tag in the clone: the Changes page would have no dates."
+            exit 1
+          fi
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - name: Check that the tag names the version the site documents
+        if: github.ref_type == 'tag'
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::The tag is $GITHUB_REF_NAME but package.json is at $version: the site would document another version than the one released."
+            exit 1
+          fi
+      - run: npm ci
+      # Pages serves the site under /<repository>/: every link and every
+      # preview iframe is prefixed with it. Networked: next/font downloads the
+      # typefaces.
+      - run: npm run site:build
+        env:
+          SITE_BASE_PATH: /DSAIReadable
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/out
+
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

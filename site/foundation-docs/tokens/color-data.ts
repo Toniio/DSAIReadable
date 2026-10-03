@@ -3,7 +3,7 @@ import {
   colorClasses,
   primitiveName,
   reads,
-} from "@/site/foundation-docs/a/token-classes"
+} from "@/site/foundation-docs/tokens/token-classes"
 import {
   darkValue,
   referencedBy,
