@@ -147,6 +147,7 @@ problem: fix it, do not disable it.
 | `.github/workflows/ci.yml`                    | 10 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry`, `site` |
 | `.github/workflows/pr-lint.yml`               | A non-conforming PR title                                                                                                                                |
 | `.github/workflows/evals.yml`                 | Nothing: it measures. By hand only, the conformance harness runs a Claude agent with and without the MCP server (`evals/README.md`)                      |
+| `.github/workflows/site-pages.yml`            | Nothing: it publishes. On a release tag and by hand it deploys `site/` to GitHub Pages; a tag that is not `package.json`'s version fails it              |
 | `.github/workflows/dependabot-regenerate.yml` | A Dependabot PR left red by stale generated files: it reruns `registry:build`, `generate-context` and Prettier, then pushes the result                   |
 
 Each § 1 rule, and the check that enforces it:

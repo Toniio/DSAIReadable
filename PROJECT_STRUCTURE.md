@@ -270,7 +270,10 @@ with the design system itself: every page is built at build time from the
 repository's files, and every component shown is the real one from
 `components/ui/`. `npm run site:dev` serves it locally; `npm run site:build`
 writes the static site to `site/out/` (`SITE_BASE_PATH` sets the base path a
-host such as GitHub Pages serves it under).
+host such as GitHub Pages serves it under). The `Site` workflow
+(`.github/workflows/site-pages.yml`) publishes it at
+`https://toniio.github.io/DSAIReadable/` on each release tag and by hand:
+[`CONTRIBUTING.md`](./CONTRIBUTING.md#the-documentation-site).
 
 | Path                       | Role                                                                                                                                                                                                                     |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -397,6 +400,7 @@ registry is **consumable**, not just consistent.
 | `.github/CODEOWNERS`                          | Names the maintainer as reviewer of every path; the `main` ruleset does not require code-owner review                                                                       |
 | `.github/workflows/ci.yml`                    | GitHub Actions CI, 10 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry`, `site` |
 | `.github/workflows/evals.yml`                 | The conformance harness with a Claude agent, started by hand only (each run costs API credits)                                                                              |
+| `.github/workflows/site-pages.yml`            | Builds the documentation site with the GitHub Pages base path and deploys it, on a release tag and by hand (the only workflow with `pages: write`)                          |
 | `.github/workflows/dependabot-regenerate.yml` | Regenerates the generated files on a Dependabot PR and pushes the result                                                                                                    |
 | `.github/dependabot.yml`                      | Weekly grouped dependency updates                                                                                                                                           |
 | `.github/workflows/pr-lint.yml`               | Checks that the PR title follows Conventional Commits                                                                                                                       |

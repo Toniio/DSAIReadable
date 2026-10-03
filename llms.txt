@@ -4,7 +4,7 @@
 
 Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes, and reads a token that has no class through Tailwind's `(--…)` shorthand (`w-(--sidebar-width)`), never a raw value (hex, `px`, `rem`, `ms`) or a `[var(--…)]` arbitrary class; and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections. A screen that carries out a common task (create, edit, delete, filter, search, sign in, settings) starts from its page pattern.
 
-Every link points to the release tag `v0.1.2`, the published version, not to `main`, which can be ahead of it.
+Every link to a file points to the release tag `v0.1.2`, the published version, not to `main`, which can be ahead of it.
 
 ## Start here
 
@@ -12,6 +12,7 @@ Every link points to the release tag `v0.1.2`, the published version, not to `ma
 - [Conventions](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.1.2/registry/conventions/dsaireadable.md): the rules for any UI written with the components — the file the `conventions` registry item installs
 - [AGENTS.md](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.1.2/AGENTS.md): the rules for changing this repository
 - [Contributing](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.1.2/CONTRIBUTING.md): branches, commits, pull requests and the checks CI runs
+- [Documentation site](https://toniio.github.io/DSAIReadable/): the foundations, every component with a live playground, the page patterns and the changes, browsable; built from the files linked here at each release
 
 ## Machine-readable sources
 

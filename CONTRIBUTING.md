@@ -302,7 +302,9 @@ Every release comes from the changesets:
    the merge: until the tag exists, every link of `llms.txt`, of the
    `conventions` item, of the READMEs and of the ESLint plugin's rule docs
    returns a 404, and installing the Claude Code plugin or running
-   `npx skills add Toniio/DSAIReadable#vX.Y.Z` fails.
+   `npx skills add Toniio/DSAIReadable#vX.Y.Z` fails. Pushing the tag also
+   starts the `Site` workflow, which deploys the documentation site at that
+   version ([The documentation site](#the-documentation-site)).
 3. A maintainer publishes the two packages, the ESLint plugin first since the
    server pins it: `npm publish --access public --dry-run`, then without
    `--dry-run`, in `packages/eslint-plugin/`, then in `mcp-server/`. A published
@@ -346,6 +348,29 @@ and the README's are removed together.
 | `site`              | `npm run site:check` (the examples copied from the specs are fresh, the consumer lint passes on `site/`, every focus ring it composes has a solid part), `site:build` (every page prerenders) |
 
 The `Evals` workflow runs apart, only when started by hand (each run costs API credits), never on a pull request: the conformance harness with a Claude agent, with and without the MCP server, its reports uploaded as an artifact ([`evals/README.md`](./evals/README.md)).
+
+## The documentation site
+
+`site/` is published at `https://toniio.github.io/DSAIReadable/` by the `Site`
+workflow (`.github/workflows/site-pages.yml`), apart from `ci.yml`: deploying
+needs `pages: write` and `id-token: write`, which the workflow that runs on every
+pull request never receives. It runs when a release tag `vX.Y.Z` is pushed, and
+by hand (`gh workflow run site-pages.yml`, on the ref to deploy). The site prints the
+version of `mcp-server/context/ds-metadata.json` and links its sources at
+`blob/v<version>`, so a deployment at the tag describes exactly the published
+version, and `main` never shows unreleased work under the last version's number.
+The workflow fails on a tag that is not the version of `package.json`, and on a
+clone with no tags: the Changes page reads each release's date from its tag.
+
+Two settings are not in the repository, and a maintainer sets them once:
+
+- Settings → Pages → Source: **GitHub Actions**.
+- Settings → Environments → `github-pages` → Deployment branches and tags: allow
+  `main` and the tag pattern `v*.*.*`. GitHub creates the environment limited to
+  the default branch, and refuses a deployment from any other ref.
+
+`site/` was merged after `v0.1.2`, so the first deployment is a manual run from
+`main`; every later release deploys by itself.
 
 ## Dependabot pull requests
 

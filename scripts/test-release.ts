@@ -18,8 +18,8 @@
  *      item, the server's README, `npx skills add`, the Claude Code plugin's
  *      `ref`); it also refuses a distributed file that links to `main`;
  *   ④ `docs:llms:check` passes on the copy at the old version, fails once the
- *      version moves, and `docs:llms` takes every link of llms.txt to the new
- *      tag.
+ *      version moves, and `docs:llms` takes every link of llms.txt to a file
+ *      to the new tag (the documentation site's address stays as it is).
  *
  *   npx tsx scripts/test-release.ts
  */
@@ -41,6 +41,8 @@ import { fileURLToPath } from "node:url"
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHANGESET_CLI = resolve(ROOT, "node_modules/@changesets/cli/bin.js")
 const SUMMARY = "component-api: Add the `xs` size to Button."
+/** The documentation site's address, the one link of llms.txt that is not a file. */
+const SITE_URL = "https://toniio.github.io/DSAIReadable/"
 /** A link of llms.txt: the path of the file it opens at the release tag. */
 const LINKED =
   /\]\(https:\/\/raw\.githubusercontent\.com\/Toniio\/DSAIReadable\/[^/)]+\/([^)]+)\)/g
@@ -282,14 +284,20 @@ try {
       /\]\((https:[^)]+)\)/g
     ),
   ].map(([, url]) => url)
+  // The documentation site is an address, not a file: it has no tag.
+  const files = links.filter((url) => url !== SITE_URL)
   expect(
-    links.length > 0 &&
-      links.every((url) =>
+    files.length > 0 &&
+      files.every((url) =>
         url.startsWith(
           `https://raw.githubusercontent.com/Toniio/DSAIReadable/v${next}/`
         )
       ),
-    `every link of llms.txt names the tag v${next}`
+    `every link of llms.txt to a file names the tag v${next}`
+  )
+  expect(
+    links.length === files.length + 1,
+    "llms.txt links the documentation site once"
   )
   expect(
     script("build-llms-txt", "--check").ok,

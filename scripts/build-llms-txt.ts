@@ -15,7 +15,8 @@
  * has bumped the version, and `--check` fails until then. The script refuses a
  * link whose file does not exist in the working tree; a file added since the
  * last release is linked at a tag that does not have it yet, until the next
- * release.
+ * release. One link is not a file: the documentation site's address, which
+ * the Site workflow publishes at each release tag.
  *
  *   npx tsx scripts/build-llms-txt.ts [--check] [--root <dir>]
  *   --root <dir>    act on another checkout (the release test)
@@ -46,7 +47,13 @@ if (!VERSION || !/^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/.test(VERSION)) {
 const TAG = `v${VERSION}`
 const RAW = `https://raw.githubusercontent.com/Toniio/DSAIReadable/${TAG}`
 
-type Link = { path: string; name: string; notes?: string }
+/** A file of the repository, linked at the release tag, or an address elsewhere. */
+type Link = { name: string; notes?: string } & (
+  { path: string } | { url: string }
+)
+
+/** The documentation site on GitHub Pages (.github/workflows/site-pages.yml). */
+const SITE_URL = "https://toniio.github.io/DSAIReadable/"
 
 const START: Link[] = [
   {
@@ -70,6 +77,12 @@ const START: Link[] = [
     path: "CONTRIBUTING.md",
     name: "Contributing",
     notes: "branches, commits, pull requests and the checks CI runs",
+  },
+  {
+    url: SITE_URL,
+    name: "Documentation site",
+    notes:
+      "the foundations, every component with a live playground, the page patterns and the changes, browsable; built from the files linked here at each release",
   },
 ]
 
@@ -165,8 +178,8 @@ const sections: [string, Link[]][] = [
 
 const missing = sections
   .flatMap(([, links]) => links)
-  .filter((link) => !existsSync(resolve(ROOT, link.path)))
-  .map((link) => link.path)
+  .flatMap((link) => ("path" in link ? [link.path] : []))
+  .filter((path) => !existsSync(resolve(ROOT, path)))
 if (missing.length > 0) {
   console.error(
     `❌ build-llms-txt: link to a file that does not exist: ${missing.join(", ")}`
@@ -174,8 +187,8 @@ if (missing.length > 0) {
   process.exit(1)
 }
 
-const item = ({ path, name, notes }: Link) =>
-  `- [${name}](${RAW}/${path})${notes ? `: ${notes}` : ""}`
+const item = (link: Link) =>
+  `- [${link.name}](${"url" in link ? link.url : `${RAW}/${link.path}`})${link.notes ? `: ${link.notes}` : ""}`
 
 const text = [
   "# DSAIReadable",
@@ -184,7 +197,7 @@ const text = [
   "",
   "Code written with this design system uses its components, never a native element they replace; styles through its semantic Tailwind classes, and reads a token that has no class through Tailwind's `(--…)` shorthand (`w-(--sidebar-width)`), never a raw value (hex, `px`, `rem`, `ms`) or a `[var(--…)]` arbitrary class; and Phosphor icons (`@phosphor-icons/react`) only. Dark mode is the `.dark` class on `<html>`. Read a component's spec before using or changing it: it is the behavioral source of truth, in 13 sections. A screen that carries out a common task (create, edit, delete, filter, search, sign in, settings) starts from its page pattern.",
   "",
-  `Every link points to the release tag \`${TAG}\`, the published version, not to \`main\`, which can be ahead of it.`,
+  `Every link to a file points to the release tag \`${TAG}\`, the published version, not to \`main\`, which can be ahead of it.`,
   "",
   ...sections.flatMap(([title, links]) => [
     `## ${title}`,
