@@ -28,6 +28,7 @@ A complete side navigation panel: responsive (a Sheet on mobile), collapsible, w
 - **MUST NOT** — place more than one `Sidebar` per side in the same `SidebarProvider`
 - **MUST** — check that a nested layout copes with the margins and shadows of the `floating` and `inset` variants
 - **MUST** — give a `tooltip` to every `SidebarMenuButton` collapsed to its icon
+- **MUST** — render a `SidebarMenuButton` that has a `tooltip` under a `TooltipProvider`, in the root layout or around the `SidebarProvider`: its `Tooltip` throws without one
 - **MUST NOT** — bind `Ctrl+B` / `⌘+B` to another action: `SidebarProvider` registers it to collapse the bar
 - **MUST** — in an interface that is not in English, translate the strings the sidebar renders for screen readers: `toggleLabel` on `SidebarTrigger` and `SidebarRail`, `mobileTitle` and `mobileDescription` on `Sidebar` (defaults in `UI_STRINGS.sidebar`)
 
@@ -450,7 +451,7 @@ export default function Example() {
 
 - `Sheet` — used internally for the mobile mode
 - `Button` — the base of `SidebarTrigger`
-- `Tooltip` — shown on `SidebarMenuButton`s in collapsed mode
+- `Tooltip` — shown on `SidebarMenuButton`s in collapsed mode, under a `TooltipProvider`
 - `Separator` — the base of `SidebarSeparator`
 - `Skeleton` — the base of `SidebarMenuSkeleton`
 - `Input` — the base of `SidebarInput`
