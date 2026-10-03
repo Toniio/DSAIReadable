@@ -256,7 +256,8 @@ function placeParts(
   const half = size / 2
   const placed: Part[] = []
   return slots.map((slot) => {
-    const element = root.querySelector(`[data-slot="${slot}"]`)
+    // The document, not the root: an overlay's parts are portaled to <body>.
+    const element = document.querySelector(`[data-slot="${slot}"]`)
     if (!element) return null
     const rect = element.getBoundingClientRect()
     if (rect.width === 0 && rect.height === 0) return null
@@ -300,12 +301,20 @@ function AnatomyMarkers({
     if (!root) return
     const measure = () =>
       setParts(placeParts(root, slots, probe.current?.offsetWidth ?? 0))
-    const frame = requestAnimationFrame(measure)
-    const observer = new ResizeObserver(() => requestAnimationFrame(measure))
+    let frame = requestAnimationFrame(measure)
+    const again = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(measure)
+    }
+    const observer = new ResizeObserver(again)
     observer.observe(root)
+    // An overlay mounts its portal after the root: measure again when it does.
+    const mutations = new MutationObserver(again)
+    mutations.observe(document.body, { childList: true })
     return () => {
       cancelAnimationFrame(frame)
       observer.disconnect()
+      mutations.disconnect()
     }
   }, [root, slots])
 
