@@ -62,9 +62,7 @@ export default function OverviewPage() {
         eyebrow={
           <span className="flex flex-wrap items-center gap-2">
             <Badge variant="outline">v{VERSION}</Badge>
-            {/* The metadata names shadcn/ui by its GitHub organization,
-                shadcn-ui; every page of the site writes the project's name. */}
-            <span>{META.framework.replace("shadcn-ui", "shadcn/ui")}</span>
+            <span>{META.framework}</span>
           </span>
         }
         title={META.name}

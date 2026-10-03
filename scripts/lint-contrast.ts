@@ -220,6 +220,15 @@ const PAIRS: Pair[] = [
     threshold: 3 as const,
     modes: ["dark" as Mode],
   })),
+  // The on state of Toggle and ToggleGroupItem: a solid border-foreground
+  // frame over the muted fill, which hover shares, against the surface the
+  // control sits on.
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `Toggle and ToggleGroupItem on-state frame (border-foreground) on the ${surface}`,
+    fg: "color.text.default",
+    bg,
+    threshold: 3 as const,
+  })),
   // The resting border of a form control against what it sits on.
   ...SURFACES.map(([bg, surface]) => ({
     label: `resting border of a field, checkbox or radio (border-input) on the ${surface}`,

@@ -165,7 +165,7 @@ Collected from `components/ui/avatar.tsx` and the `lib/` constants it imports. *
 
 **Pattern**: Image (`img`) with a text fallback (Radix Avatar)
 
-**Role**: `AvatarImage` renders an `img`; `AvatarFallback` only shows when the image fails or is missing.
+**Role**: `AvatarImage` renders an `img`; `AvatarFallback` only shows when the image fails or is missing. An `AvatarBadge` given an `aria-label` (or `aria-labelledby`) renders `role="img"`, which the label names; a `span` with no role cannot carry one.
 
 **Keyboard**:
 
@@ -194,13 +194,16 @@ export default function Example() {
   return (
     <AvatarGroup>
       <Avatar size="default">
-        <AvatarImage src="/user1.jpg" alt="Sarah Miller" />
-        <AvatarFallback>SM</AvatarFallback>
-        <AvatarBadge />
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+        <AvatarBadge aria-label="Online" />
       </Avatar>
       <Avatar size="default">
-        <AvatarImage src="/user2.jpg" alt="James Carter" />
-        <AvatarFallback>JC</AvatarFallback>
+        <AvatarImage
+          src="https://github.com/evilrabbit.png"
+          alt="@evilrabbit"
+        />
+        <AvatarFallback>ER</AvatarFallback>
       </Avatar>
       <AvatarGroupCount>+3</AvatarGroupCount>
     </AvatarGroup>

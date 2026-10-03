@@ -93,10 +93,19 @@ function AvatarFallback({
  *   <AvatarBadge aria-label="Online" />
  * </Avatar>
  */
-function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
+function AvatarBadge({
+  className,
+  role,
+  ...props
+}: React.ComponentProps<"span">) {
+  // A labeled badge is an image of a status: a span with no role cannot carry
+  // aria-label (axe aria-prohibited-attr).
+  const labeled = !!(props["aria-label"] || props["aria-labelledby"])
+
   return (
     <span
       data-slot="avatar-badge"
+      role={role ?? (labeled ? "img" : undefined)}
       className={cn(
         `absolute right-0 bottom-0 z-dropdown inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground bg-blend-color ${SEPARATION_RING} ring-background select-none`,
         "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden",

@@ -9,7 +9,7 @@ export type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
 }
 
 /**
- * The browser's own drop-down, the light choice for picking one value out of a short list, especially below `md`.
+ * The browser's own dropdown, the light choice for picking one value out of a short list, especially below `md`.
  *
  * @example
  * <NativeSelect aria-label="Country" defaultValue="">

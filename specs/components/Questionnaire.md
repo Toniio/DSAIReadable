@@ -50,22 +50,30 @@ A form that asks one question at a time — single or multiple choice, or a free
 
 ## Anatomy
 
-| Slot                                           | Role                                                                                     |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `data-slot="questionnaire"`                    | The `form`                                                                               |
-| `data-slot="questionnaire-progress"`           | Progress bar (`role="progressbar"`) whose text is "Question 2 of 5"                      |
-| `data-slot="questionnaire-item"`               | One question, a `fieldset`; only the current one is shown                                |
-| `data-slot="questionnaire-title"`              | The question, the `legend` of the `fieldset`                                             |
-| `data-slot="questionnaire-description"`        | A hint under the question                                                                |
-| `data-slot="questionnaire-choices"`            | Grid of the choices                                                                      |
-| `data-slot="questionnaire-choice"`             | One choice, a `label` over a transparent native `input`; carries `data-checked`          |
-| `data-slot="questionnaire-choice-indicator"`   | Radio dot or checkbox check, drawn from the choice's state                               |
-| `data-slot="questionnaire-choice-label"`       | The choice's text                                                                        |
-| `data-slot="questionnaire-choice-shortcut"`    | The key that picks the choice (A, 1), shown with `shortcuts`                             |
-| `data-slot="questionnaire-choice-description"` | A second line under the choice's text                                                    |
-| `data-slot="questionnaire-input"`              | A free answer, styled as `Input`                                                         |
-| `data-slot="questionnaire-error"`              | The error of the current question                                                        |
-| `data-slot="questionnaire-actions"`            | Row of the navigation buttons: previous at the start, skip and next or submit at the end |
+| Slot                                               | Role                                                                                                                |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `data-slot="questionnaire"`                        | The `form`                                                                                                          |
+| `data-slot="questionnaire-progress"`               | Progress bar (`role="progressbar"`) whose text is "Question 2 of 5"                                                 |
+| `data-slot="questionnaire-item"`                   | One question, a `fieldset`; only the current one is shown                                                           |
+| `data-slot="questionnaire-title"`                  | The question, the `legend` of the `fieldset`                                                                        |
+| `data-slot="questionnaire-description"`            | A hint under the question                                                                                           |
+| `data-slot="questionnaire-choices"`                | Grid of the choices                                                                                                 |
+| `data-slot="questionnaire-choice"`                 | One choice, a `label` over a transparent native `input`; carries `data-checked`                                     |
+| `data-slot="questionnaire-choice-input"`           | The transparent native `input` (`radio` or `checkbox`) laid over the whole choice; it takes the focus and the click |
+| `data-slot="questionnaire-choice-indicator"`       | Radio dot or checkbox check, drawn from the choice's state                                                          |
+| `data-slot="questionnaire-choice-indicator-dot"`   | The dot of a radio choice, shown while it is checked                                                                |
+| `data-slot="questionnaire-choice-indicator-check"` | The check of a checkbox choice, shown while it is checked                                                           |
+| `data-slot="questionnaire-choice-label"`           | The choice's text                                                                                                   |
+| `data-slot="questionnaire-choice-shortcut"`        | The key that picks the choice (A, 1), shown with `shortcuts`                                                        |
+| `data-slot="questionnaire-choice-description"`     | A second line under the choice's text                                                                               |
+| `data-slot="questionnaire-input-wrapper"`          | The `div` around a free answer                                                                                      |
+| `data-slot="questionnaire-input"`                  | A free answer, styled as `Input`                                                                                    |
+| `data-slot="questionnaire-error"`                  | The error of the current question                                                                                   |
+| `data-slot="questionnaire-actions"`                | Row of the navigation buttons: previous at the start, skip and next or submit at the end                            |
+| `data-slot="questionnaire-previous"`               | The `Button` that goes back to the previous question                                                                |
+| `data-slot="questionnaire-skip"`                   | The `Button` that moves past the current question without an answer; hidden for a `required` question               |
+| `data-slot="questionnaire-next"`                   | The `Button` that validates the current answer and moves to the next question                                       |
+| `data-slot="questionnaire-submit"`                 | The submit `Button` of the last question: sends every answer through the form's `onSubmit`                          |
 
 ## Tokens
 

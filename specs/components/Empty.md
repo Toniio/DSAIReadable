@@ -204,7 +204,7 @@ export default function Example() {
         </EmptyMedia>
         <EmptyTitle>No projects yet</EmptyTitle>
         <EmptyDescription>
-          You haven't created a project yet. Start one now.
+          You haven&apos;t created a project yet. Start one now.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>

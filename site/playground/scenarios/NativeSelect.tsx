@@ -131,7 +131,7 @@ function code(args: Args): string {
 }
 
 /**
- * NativeSelect: the browser's own drop-down, with its Label. `size` is the
+ * NativeSelect: the browser's own dropdown, with its Label. `size` is the
  * component's prop, not the native attribute; `placeholder` leaves the empty
  * option selected, which mutes the text; `grouped` sorts the options into
  * NativeSelectOptGroups. The open list is the browser's: no state of the

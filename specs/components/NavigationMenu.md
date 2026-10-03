@@ -12,7 +12,7 @@
 
 ## Role
 
-Primary navigation that organizes the site's links into categories, with drop-down content panels and transition animations.
+Primary navigation that organizes the site's links into categories, with dropdown content panels and transition animations.
 
 ## Usage
 

@@ -78,7 +78,7 @@ the status says what the code does.
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `color.background.default`           | Use as the background of the root page and the main containers (`<body>`, `<main>`).                         | Do not use for cards, popovers or raised surfaces — use `color.background.subtle` or `color.background.elevated`.                                                                                                  |
 | `color.background.subtle`            | Use for cards, muted areas, secondary sidebars, inner panels.                                                | Do not use for the page's main background.                                                                                                                                                                         |
-| `color.background.elevated`          | Use for popovers, drop-downs, dialogs, light tooltips.                                                       | Do not use for inline cards — they are not "raised" on the Z axis.                                                                                                                                                 |
+| `color.background.elevated`          | Use for popovers, dropdowns, dialogs, light tooltips.                                                        | Do not use for inline cards — they are not "raised" on the Z axis.                                                                                                                                                 |
 | `color.background.inverse`           | Use for dark tooltips, inverted badges, alert banners.                                                       | Do not use as a general page background — it is reserved for occasional inverted surfaces.                                                                                                                         |
 | `color.text.default`                 | Use for all main content text, titles and important labels.                                                  | Do not lower the opacity to fake secondary text — use `color.text.subtle`.                                                                                                                                         |
 | `color.text.subtle`                  | Use for field labels, form descriptions, timestamps.                                                         | Do not use for main body content — its contrast is too low for long reading.                                                                                                                                       |
@@ -189,7 +189,7 @@ the status says what the code does.
 | `space.component.xl`           | Reserved: nothing reads it, and it has no class. Inside a component, use the spacing scale (`p-8`, 32px).  | Do not use between nearby inline elements.                                       |
 | `space.layout.page-padding`    | Horizontal padding of the root page container.                                                             | Do not apply to inner components.                                                |
 | `space.layout.section-gap`     | Vertical space between the major sections of a page.                                                       | Do not use between components of the same section.                               |
-| `space.layout.content-sm`      | `max-w-[var(--space-layout-content-sm)]` for editorial pages.                                              | Do not use as a padding value.                                                   |
+| `space.layout.content-sm`      | `max-w-2xl` (it equals this token) for editorial pages.                                                    | Do not use as a padding value.                                                   |
 | `space.layout.content-default` | The main content container of most pages.                                                                  | Do not exceed it for standard content layouts.                                   |
 | `space.layout.content-lg`      | Dashboards, data tables, multi-column layouts.                                                             | Do not use for editorial content pages.                                          |
 
@@ -278,9 +278,9 @@ the status says what the code does.
 
 **Usage rules**
 
-| Scope         | ✅ Do                                                                      | ❌ Don't                                                                |
-| ------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `elevation.*` | `shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals. | Do not combine `shadow-inner` with an outer shadow on the same element. |
+| Scope         | ✅ Do                                                                     | ❌ Don't                                                                |
+| ------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `elevation.*` | `shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals. | Do not combine `shadow-inner` with an outer shadow on the same element. |
 
 ---
 

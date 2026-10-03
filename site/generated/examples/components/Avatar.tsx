@@ -14,13 +14,16 @@ export default function Example() {
   return (
     <AvatarGroup>
       <Avatar size="default">
-        <AvatarImage src="/user1.jpg" alt="Sarah Miller" />
-        <AvatarFallback>SM</AvatarFallback>
-        <AvatarBadge />
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+        <AvatarBadge aria-label="Online" />
       </Avatar>
       <Avatar size="default">
-        <AvatarImage src="/user2.jpg" alt="James Carter" />
-        <AvatarFallback>JC</AvatarFallback>
+        <AvatarImage
+          src="https://github.com/evilrabbit.png"
+          alt="@evilrabbit"
+        />
+        <AvatarFallback>ER</AvatarFallback>
       </Avatar>
       <AvatarGroupCount>+3</AvatarGroupCount>
     </AvatarGroup>

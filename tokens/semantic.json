@@ -34,7 +34,7 @@
         "$extensions": {
           "docs": {
             "description": "A floating surface above the main content.",
-            "do": "Use for popovers, drop-downs, dialogs, light tooltips.",
+            "do": "Use for popovers, dropdowns, dialogs, light tooltips.",
             "dont": "Do not use for inline cards — they are not \"raised\" on the Z axis."
           },
           "status": "active"
@@ -1264,7 +1264,7 @@
         "$description": "Narrow content column max-width (42rem). Not for full-width or wide layouts.",
         "$extensions": {
           "docs": {
-            "do": "`max-w-[var(--space-layout-content-sm)]` for editorial pages.",
+            "do": "`max-w-2xl` (it equals this token) for editorial pages.",
             "dont": "Do not use as a padding value."
           },
           "status": "reserved"
@@ -1886,7 +1886,7 @@
     },
     "$extensions": {
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element."
       }
     }
@@ -2055,7 +2055,7 @@
     "dropdown": {
       "$value": "{primitive.zindex.dropdown}",
       "$type": "number",
-      "$description": "Dropdown menus. Renders above page content.",
+      "$description": "The lowest global layer (1000), above the page content. No floating surface of the design system takes it: its menus, popovers and lists draw `z-popover`. Seven components raise one of their own parts with it — the AvatarBadge, a focused ButtonGroup child, a Calendar day, the active InputOTP slot, the Resizable grip, a focused ToggleGroup item and Select's scroll buttons —, a local order that specs/foundations/elevation.md gives to small raw z-index values: do not copy it.",
       "$extensions": {
         "docs": {
           "tailwind": "z-dropdown"
@@ -2110,7 +2110,7 @@
     "popover": {
       "$value": "{primitive.zindex.popover}",
       "$type": "number",
-      "$description": "Popovers and tooltips of high priority. Renders above modals.",
+      "$description": "Floating surfaces (1500): popovers, hover cards, dropdown, context and menubar menus, the Select, Combobox and NavigationMenu panels. Renders above modals, so a menu opened in a dialog shows.",
       "$extensions": {
         "docs": {
           "tailwind": "z-popover"
@@ -2121,7 +2121,7 @@
     "toast": {
       "$value": "{primitive.zindex.toast}",
       "$type": "number",
-      "$description": "Toast notifications. Always visible above other layers.",
+      "$description": "Toast notifications (1600): above popovers, below tooltips. No component reads it yet: the Sonner `Toaster` keeps sonner's own z-index (999999999), above every layer of this scale.",
       "$extensions": {
         "docs": {
           "tailwind": "z-toast"

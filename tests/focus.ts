@@ -172,6 +172,28 @@ export function ringOf(element: Element): number {
 }
 
 /**
+ * The borders an element paints, as a key two states can be compared by, and
+ * the contrast of the weakest one against what it is drawn on (1 when it
+ * paints none): a state drawn by a border, such as the on state of a Toggle,
+ * needs 3:1 (WCAG 1.4.11) and a paint of its own.
+ */
+export function borderPaint(element: Element): {
+  key: string
+  contrast: number
+} {
+  const borders =
+    paintOf(element)?.parts.filter((part) => part.kind.startsWith("border")) ??
+    []
+  return {
+    key: JSON.stringify(borders),
+    contrast: Math.min(
+      ...borders.map((part) => partContrast(element, part)),
+      borders.length ? Infinity : 1
+    ),
+  }
+}
+
+/**
  * The contrast of the indicator that moving focus to `focused` showed,
  * comparing the document before and after the move: the best part that
  * appeared or changed — on the focused element, on the group that wraps it

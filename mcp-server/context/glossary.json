@@ -29,7 +29,7 @@
   },
   {
     "term": "data-slot",
-    "definition": "An HTML data attribute marking a component's anatomical part. Used for CSS targeting and Code Connect prop mapping. Value matches the component or sub-part name."
+    "definition": "An HTML data attribute marking a component's anatomical part. Used for CSS targeting across component boundaries (has-[[data-slot=input-group-control]:focus-visible]) and to recognize a component in rendered markup (dsaireadable_validate_screen). Value matches the component or sub-part name; each spec's Anatomy lists the slots its component renders."
   },
   {
     "term": "allow-raw",
@@ -101,7 +101,7 @@
   },
   {
     "term": "foundation",
-    "definition": "The base layer of the design system — color, typography, spacing, elevation, radius, opacity, motion."
+    "definition": "The base layer of the design system: the eleven token foundations — color, space, typography, radius, elevation, motion, opacity, z-index, breakpoint, border width and size — and the guidance built on them (focus, content, voice and tone), each in specs/foundations/."
   },
   {
     "term": "slot",

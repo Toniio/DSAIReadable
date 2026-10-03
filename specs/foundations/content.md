@@ -34,22 +34,26 @@ wants it.
 Every string can be reached through a prop, never through a fork of the
 component.
 
-| Component                               | Prop                               | Default                                            |
-| --------------------------------------- | ---------------------------------- | -------------------------------------------------- |
-| `BreadcrumbEllipsis`                    | `srLabel`                          | `More`                                             |
-| `CarouselPrevious` / `CarouselNext`     | `srLabel`                          | `Previous slide` / `Next slide`                    |
-| `DialogContent` / `DialogFooter`        | `closeLabel`                       | `Close`                                            |
-| `SheetContent`                          | `closeLabel`                       | `Close`                                            |
-| `Illustration`                          | `alt`                              | `Illustration`                                     |
-| `PaginationPrevious` / `PaginationNext` | `text`, `label`                    | `Previous` / `Go to previous page`                 |
-| `PaginationEllipsis`                    | `srLabel`                          | `More pages`                                       |
-| `Spinner`                               | `aria-label`                       | `Loading`                                          |
-| `CommandDialog`                         | `title`, `description`             | `Command palette` / `Search for a command to run…` |
-| `ComboboxTrigger` / `ComboboxClear`     | `triggerLabel` / `clearLabel`      | `Open list` / `Clear selection`                    |
-| `ComboboxChip`                          | `removeLabel`                      | `Remove <item>`                                    |
-| `Sidebar` (mobile Sheet)                | `mobileTitle`, `mobileDescription` | `Sidebar` / `Displays the mobile sidebar.`         |
-| `SidebarTrigger` / `SidebarRail`        | `toggleLabel`                      | `Show or hide the sidebar`                         |
-| `PasswordInput`                         | `showLabel` / `hideLabel`          | `Show password` / `Hide password`                  |
+| Component                                                                                   | Prop                               | Default                                                                   |
+| ------------------------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------- |
+| `BreadcrumbEllipsis`                                                                        | `srLabel`                          | `More`                                                                    |
+| `CarouselPrevious` / `CarouselNext`                                                         | `srLabel`                          | `Previous slide` / `Next slide`                                           |
+| `DialogContent` / `DialogFooter`                                                            | `closeLabel`                       | `Close`                                                                   |
+| `SheetContent`                                                                              | `closeLabel`                       | `Close`                                                                   |
+| `Illustration`                                                                              | `alt`                              | `Illustration`                                                            |
+| `PaginationPrevious` / `PaginationNext`                                                     | `text`, `label`                    | `Previous` / `Go to previous page`                                        |
+| `PaginationEllipsis`                                                                        | `srLabel`                          | `More pages`                                                              |
+| `Spinner`                                                                                   | `aria-label`                       | `Loading`                                                                 |
+| `CommandDialog`                                                                             | `title`, `description`             | `Command palette` / `Search for a command to run…`                        |
+| `ComboboxTrigger` / `ComboboxClear`                                                         | `triggerLabel` / `clearLabel`      | `Open list` / `Clear selection`                                           |
+| `ComboboxChip`                                                                              | `removeLabel`                      | `Remove {item}`                                                           |
+| `Sidebar` (mobile Sheet)                                                                    | `mobileTitle`, `mobileDescription` | `Sidebar` / `Displays the mobile sidebar.`                                |
+| `SidebarTrigger` / `SidebarRail`                                                            | `toggleLabel`                      | `Show or hide the sidebar`                                                |
+| `PasswordInput`                                                                             | `showLabel` / `hideLabel`          | `Show password` / `Hide password`                                         |
+| `MessageScrollerViewport`                                                                   | `aria-label`                       | `Messages`                                                                |
+| `MessageScrollerButton`                                                                     | `children`                         | `Scroll to end` / `Scroll to start`, screen-reader text next to the arrow |
+| `QuestionnaireProgress`                                                                     | `aria-label`                       | `Questionnaire progress`                                                  |
+| `QuestionnairePrevious` / `QuestionnaireSkip` / `QuestionnaireNext` / `QuestionnaireSubmit` | `children`                         | `Previous` / `Skip` / `Next` / `Submit`                                   |
 
 To translate a whole application, pass the props from the application's own
 i18n layer. `UI_STRINGS` reads no locale and is not reactive: it is a set of

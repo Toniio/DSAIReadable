@@ -1318,7 +1318,7 @@
       }
     ],
     "accessibility": "**Pattern**: None — a layout container\n\n**Role**: No role: a `div` that sets its child's ratio.\n\n**Keyboard**:\n\nNo keyboard interaction.\n\n**Accessible name**: Carried by the content: a child image has its `alt` (empty when decorative), a video its captions.\n\n**Pitfalls**:\n\n- Cropping must not hide information the image exists to convey.",
-    "code_example": "import { AspectRatio } from \"@/components/ui/aspect-ratio\"\n\nexport default function Example() {\n  return (\n    <AspectRatio ratio={16 / 9}>\n      <img\n        src=\"/placeholder.jpg\"\n        alt=\"Mountain landscape\"\n        className=\"size-full rounded-none object-cover\"\n      />\n    </AspectRatio>\n  )\n}",
+    "code_example": "import { AspectRatio } from \"@/components/ui/aspect-ratio\"\n\nexport default function Example() {\n  return (\n    <AspectRatio ratio={16 / 9}>\n      <img\n        src=\"https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80\"\n        alt=\"Photo by Drew Beamer\"\n        className=\"size-full rounded-none object-cover\"\n      />\n    </AspectRatio>\n  )\n}",
     "cross_references": [
       "Card",
       "Skeleton"
@@ -2358,8 +2358,8 @@
         "behavior": "The image failed; the fallback (initials) is shown"
       }
     ],
-    "accessibility": "**Pattern**: Image (`img`) with a text fallback (Radix Avatar)\n\n**Role**: `AvatarImage` renders an `img`; `AvatarFallback` only shows when the image fails or is missing.\n\n**Keyboard**:\n\nNo keyboard interaction of its own.\n\n**Accessible name**: `alt` is required on `AvatarImage` (the person's name), or `alt=\"\"` when the name is already written next to it.\n\n**Pitfalls**:\n\n- When the name is shown next to the avatar, the fallback initials repeat it: hide them with `aria-hidden`.\n- A clickable avatar must be wrapped in a named link or button, not made clickable itself.",
-    "code_example": "import {\n  Avatar,\n  AvatarImage,\n  AvatarFallback,\n  AvatarBadge,\n  AvatarGroup,\n  AvatarGroupCount,\n} from \"@/components/ui/avatar\"\n\nexport default function Example() {\n  return (\n    <AvatarGroup>\n      <Avatar size=\"default\">\n        <AvatarImage src=\"/user1.jpg\" alt=\"Sarah Miller\" />\n        <AvatarFallback>SM</AvatarFallback>\n        <AvatarBadge />\n      </Avatar>\n      <Avatar size=\"default\">\n        <AvatarImage src=\"/user2.jpg\" alt=\"James Carter\" />\n        <AvatarFallback>JC</AvatarFallback>\n      </Avatar>\n      <AvatarGroupCount>+3</AvatarGroupCount>\n    </AvatarGroup>\n  )\n}",
+    "accessibility": "**Pattern**: Image (`img`) with a text fallback (Radix Avatar)\n\n**Role**: `AvatarImage` renders an `img`; `AvatarFallback` only shows when the image fails or is missing. An `AvatarBadge` given an `aria-label` (or `aria-labelledby`) renders `role=\"img\"`, which the label names; a `span` with no role cannot carry one.\n\n**Keyboard**:\n\nNo keyboard interaction of its own.\n\n**Accessible name**: `alt` is required on `AvatarImage` (the person's name), or `alt=\"\"` when the name is already written next to it.\n\n**Pitfalls**:\n\n- When the name is shown next to the avatar, the fallback initials repeat it: hide them with `aria-hidden`.\n- A clickable avatar must be wrapped in a named link or button, not made clickable itself.",
+    "code_example": "import {\n  Avatar,\n  AvatarImage,\n  AvatarFallback,\n  AvatarBadge,\n  AvatarGroup,\n  AvatarGroupCount,\n} from \"@/components/ui/avatar\"\n\nexport default function Example() {\n  return (\n    <AvatarGroup>\n      <Avatar size=\"default\">\n        <AvatarImage src=\"https://github.com/shadcn.png\" alt=\"@shadcn\" />\n        <AvatarFallback>CN</AvatarFallback>\n        <AvatarBadge aria-label=\"Online\" />\n      </Avatar>\n      <Avatar size=\"default\">\n        <AvatarImage\n          src=\"https://github.com/evilrabbit.png\"\n          alt=\"@evilrabbit\"\n        />\n        <AvatarFallback>ER</AvatarFallback>\n      </Avatar>\n      <AvatarGroupCount>+3</AvatarGroupCount>\n    </AvatarGroup>\n  )\n}",
     "cross_references": [
       "Item",
       "DropdownMenu",
@@ -2782,7 +2782,7 @@
       "**MUST NOT** — serve as primary navigation: it is a contextual landmark",
       "**MUST** — place a single `Breadcrumb` per page, at the top of the main content",
       "**MUST NOT** — make the last item (`BreadcrumbPage`) clickable",
-      "**Note** — separators and the ellipsis are hidden from screen readers (`aria-hidden`)",
+      "**Note** — separators are hidden from screen readers (`aria-hidden`); the ellipsis hides its icon only and announces its `srLabel`",
       "**MUST NOT** — replace the root's `aria-label=\"breadcrumb\"`, **unless** to translate it",
       "**MUST** — in an interface that is not in English, translate the `UI_STRINGS.breadcrumb` strings (`srLabel` on `BreadcrumbEllipsis`)"
     ],
@@ -4272,7 +4272,8 @@
     "constraints": [
       "**MUST NOT** — serve as a scheduler or planner (day or week views): the design system does not provide one",
       "**MUST NOT** — show more than one `Calendar` per view, **unless** comparing two date ranges",
-      "**MUST** — place the `Calendar` inside a container (`Popover`, `Card`…): it does not position itself",
+      "**MUST** — place the `Calendar` inside a container (`Popover`, `Dialog`…): it does not position itself",
+      "**MUST NOT** — place the `Calendar` in a `CardContent`: it drops its own `bg-background` there (`in-data-[slot=card-content]:bg-transparent`) and shows the card, `color.background.subtle`, the token `bg-muted` reads too, so the days between the ends of a range and today lose their fill. A `Popover` (`color.background.elevated`) keeps it",
       "**MUST** — keep disabled days visible (`opacity-disabled`, `aria-disabled`)",
       "**MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)",
       "**Note** — the first and last days of a range take a raw `z-0` with `isolate`, so their highlight pseudo-elements paint under the day cells; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`"
@@ -4660,7 +4661,7 @@
       {
         "name": "Calendar",
         "summary": "Renders `DayPicker`.",
-        "description": "Picks a date or a date range with month navigation; place it in a `Popover` or a `Card`, it does not position itself.",
+        "description": "Picks a date or a date range with month navigation; place it in a `Popover`, it does not position itself.",
         "example": "<Calendar mode=\"single\" selected={date} onSelect={setDate} />"
       },
       {
@@ -5504,6 +5505,7 @@
       "**MUST** — pass `ChartContainer` a `config` with at least one entry",
       "**Note** — in `ChartConfig`, `theme` takes precedence over `color`",
       "**MUST** — read a series' color from the `--color-<key>` variable that `ChartStyle` injects for each `config` key (`fill=\"var(--color-revenue)\"`); it is not a token: its value comes from `config`",
+      "**MUST** — give a series' `color` in `config` as a semantic variable, `var(--color-chart-1)`, not the shadcn alias `var(--chart-1)`: the alias resolves once, on `:root`, so a chart inside a nested `.dark` subtree keeps its light colors",
       "**MUST NOT** — nest `ChartContainer`s: one container per chart",
       "**MUST** — name the chart on the Recharts element, not on `ChartContainer`: `<BarChart accessibilityLayer aria-label=\"Revenue by month\">`. The label reaches the focusable `<svg role=\"application\">`; on `ChartContainer`, a `div` with no role, `aria-label` names nothing",
       "**MUST** — give the chart a visible text summary of what it shows (its takeaway); give its data as a visible `Table` too when readers need the values, under a disclosure such as `Collapsible` if the screen is short on room",
@@ -5775,7 +5777,7 @@
         "name": "ChartContainer",
         "summary": "Renders `<div>`.",
         "description": "The responsive frame for one Recharts chart; its `config` names each series and sets the `--color-<key>` colors the chart reads.",
-        "example": "<ChartContainer config={{ revenue: { label: \"Revenue\", color: \"var(--chart-1)\" } }} className=\"min-h-52 w-full\">\n  <BarChart data={[{ month: \"Jan\", revenue: 186 }]}>\n    <Bar dataKey=\"revenue\" fill=\"var(--color-revenue)\" />\n  </BarChart>\n</ChartContainer>"
+        "example": "<ChartContainer config={{ revenue: { label: \"Revenue\", color: \"var(--color-chart-1)\" } }} className=\"min-h-52 w-full\">\n  <BarChart data={[{ month: \"Jan\", revenue: 186 }]}>\n    <Bar dataKey=\"revenue\" fill=\"var(--color-revenue)\" />\n  </BarChart>\n</ChartContainer>"
       },
       {
         "name": "ChartTooltip",
@@ -5805,7 +5807,7 @@
         "name": "ChartStyle",
         "summary": "Renders `<style>`.",
         "description": "Writes the `--color-<key>` variables for each `config` entry, light and dark; `ChartContainer` renders it, so you rarely use it directly.",
-        "example": "<ChartStyle id=\"chart-revenue\" config={{ revenue: { label: \"Revenue\", color: \"var(--chart-1)\" } }} />"
+        "example": "<ChartStyle id=\"chart-revenue\" config={{ revenue: { label: \"Revenue\", color: \"var(--color-chart-1)\" } }} />"
       }
     ],
     "props": [
@@ -5987,7 +5989,7 @@
       }
     ],
     "accessibility": "**Pattern**: SVG chart (Recharts) — no APG pattern\n\n**Role**: An SVG drawn by Recharts with its accessibility layer on (the default): the surface is a focusable `application`, named by the `aria-label` of the chart element. The tooltip appears on hover and, from the keyboard, on the data point the arrow keys reach.\n\n**Keyboard**:\n\n| Key                        | Action                                                                                                                      |\n| -------------------------- | --------------------------------------------------------------------------------------------------------------------------- |\n| `Tab` / `Shift+Tab`        | Moves focus to the chart and away from it; `ChartContainer` shows its ring on every focus, with or without a `ChartTooltip` |\n| `ArrowLeft` / `ArrowRight` | Moves the tooltip and its cursor to the previous / next data point; the first one is shown when the chart receives focus    |\n| `Enter`                    | Hides or shows the tooltip of the current data point                                                                        |\n\nEverything the tooltip shows must also be in the text summary or the data table: a pointer user hovers, a keyboard user steps through the points, and neither is asked to find a value only the tooltip holds.\n\n**Accessible name**: `aria-label` on the Recharts element (`BarChart`, `LineChart`, `PieChart`…) says what the chart shows; a visible title and a text summary of its takeaway sit next to it.\n\n**Pitfalls**:\n\n- Provide the data in another form as well (a visible text summary, a visible `Table`): a screen reader does not read bars. A chart with no `ChartTooltip` is still a tab stop where nothing changes but the ring; turn the layer off with `accessibilityLayer={false}` only when a table gives the same data.\n- Categorical palette: the series stay distinct under color blindness (`npm run tokens:lint-chart`), but back the colors up with a legend or labels (see `specs/foundations/color.md`).",
-    "code_example": "import {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n  type ChartConfig,\n} from \"@/components/ui/chart\"\nimport { BarChart, Bar, XAxis } from \"recharts\"\n\nconst config: ChartConfig = {\n  revenue: {\n    label: \"Revenue\",\n    color: \"var(--chart-1)\",\n  },\n}\n\nconst data = [\n  { month: \"Jan\", revenue: 186 },\n  { month: \"Feb\", revenue: 305 },\n  { month: \"Mar\", revenue: 237 },\n]\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <ChartContainer config={config} className=\"min-h-52 w-full\">\n        <BarChart accessibilityLayer aria-label=\"Revenue by month\" data={data}>\n          <XAxis dataKey=\"month\" />\n          <Bar dataKey=\"revenue\" fill=\"var(--color-revenue)\" />\n          <ChartTooltip content={<ChartTooltipContent />} />\n        </BarChart>\n      </ChartContainer>\n      <p className=\"text-xs text-muted-foreground\">\n        Revenue peaked in February at 305, after 186 in January.\n      </p>\n    </div>\n  )\n}",
+    "code_example": "import {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n  type ChartConfig,\n} from \"@/components/ui/chart\"\nimport { BarChart, Bar, XAxis } from \"recharts\"\n\nconst config: ChartConfig = {\n  revenue: {\n    label: \"Revenue\",\n    color: \"var(--color-chart-1)\",\n  },\n}\n\nconst data = [\n  { month: \"Jan\", revenue: 186 },\n  { month: \"Feb\", revenue: 305 },\n  { month: \"Mar\", revenue: 237 },\n]\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <ChartContainer config={config} className=\"min-h-52 w-full\">\n        <BarChart accessibilityLayer aria-label=\"Revenue by month\" data={data}>\n          <XAxis dataKey=\"month\" />\n          <Bar dataKey=\"revenue\" fill=\"var(--color-revenue)\" />\n          <ChartTooltip content={<ChartTooltipContent />} />\n        </BarChart>\n      </ChartContainer>\n      <p className=\"text-xs text-muted-foreground\">\n        Revenue peaked in February at 305, after 186 in January.\n      </p>\n    </div>\n  )\n}",
     "cross_references": [
       "Card",
       "Table",
@@ -6474,16 +6476,32 @@
     ],
     "anatomy": [
       {
+        "slot": "`data-slot=\"input-group\"`",
+        "role": "Root of `ComboboxInput`: an `InputGroup`, with no `combobox-*` slot of its own"
+      },
+      {
+        "slot": "`data-slot=\"input-group-control\"`",
+        "role": "Text field of `ComboboxInput`, an `InputGroupInput` with `role=\"combobox\"`"
+      },
+      {
+        "slot": "`data-slot=\"input-group-addon\"`",
+        "role": "`align=\"inline-end\"` area of `ComboboxInput` that holds the trigger and the clear button"
+      },
+      {
+        "slot": "`data-slot=\"input-group-button\"`",
+        "role": "Trigger of `ComboboxInput`: a `ComboboxTrigger` rendered through `InputGroupButton`, whose slot replaces `combobox-trigger`; hidden while the clear button shows"
+      },
+      {
         "slot": "`data-slot=\"combobox-value\"`",
         "role": "Shows the selected value"
       },
       {
         "slot": "`data-slot=\"combobox-trigger\"`",
-        "role": "Button that opens the popup"
+        "role": "Button that opens the popup, when `ComboboxTrigger` is placed on its own; inside `ComboboxInput` it carries `input-group-button`"
       },
       {
         "slot": "`data-slot=\"combobox-clear\"`",
-        "role": "Button that clears the selection"
+        "role": "Button that clears the selection, rendered while a value is selected"
       },
       {
         "slot": "`data-slot=\"combobox-content\"`",
@@ -8866,6 +8884,7 @@
     "constraints": [
       "**MUST NOT** — nest `DirectionProvider`s with conflicting directions",
       "**MUST** — place the `DirectionProvider` above every Radix component that reads the direction",
+      "**MUST** — pass `dir`: the type keeps Radix's required prop, so `direction` alone does not compile",
       "**MUST** — keep the `dir` attribute of `<html>` consistent with the `DirectionProvider`, which does not replace it",
       "**Note** — a utility component: it renders nothing visible",
       "**Note** — **The only component in the system without a `data-slot`**: it renders no DOM node of its own, so no element can carry the attribute. The exception is declared in the code with `// no-data-slot:` and checked by `npm run index:data-slot`. Target the direction through the `dir` attribute Radix sets on the consuming components"
@@ -8901,14 +8920,14 @@
         "prop": "`direction`",
         "type": "`React.ComponentProps<typeof Direction.DirectionProvider>[\"dir\"]`",
         "default": "—",
-        "description": "Alias of `dir`, for a more explicit API; wins when both are given"
+        "description": "Alias of `dir`; wins when both are given. It does not replace `dir`, which the type still requires"
       },
       {
         "component": "DirectionProvider",
         "prop": "`dir`",
         "type": "`Direction`",
         "default": "—",
-        "description": "Reading direction (the native Radix prop)"
+        "description": "Reading direction, the native Radix prop. Required: `<DirectionProvider direction=\"rtl\">` alone does not compile (TS2741)"
       },
       {
         "component": "DirectionProvider",
@@ -8955,7 +8974,7 @@
       }
     ],
     "accessibility": "**Pattern**: None — a context provider\n\n**Role**: Renders nothing: passes `dir` (`ltr` / `rtl`) to the Radix primitives.\n\n**Keyboard**:\n\nNo interaction; in `rtl`, the primitives reverse the horizontal arrow keys.\n\n**Accessible name**: Not applicable.\n\n**Pitfalls**:\n\n- Set the `dir` (and `lang`) attribute on the document too: the provider only informs Radix components, not screen readers.",
-    "code_example": "import { DirectionProvider } from \"@/components/ui/direction\"\n\nexport default function App() {\n  return (\n    <DirectionProvider dir=\"rtl\">\n      <div dir=\"rtl\" lang=\"ar\">\n        {/* The application */}\n        <p>Right-to-left content</p>\n      </div>\n    </DirectionProvider>\n  )\n}",
+    "code_example": "import { DirectionProvider } from \"@/components/ui/direction\"\n\nexport default function App() {\n  return (\n    <DirectionProvider dir=\"rtl\">\n      <div dir=\"rtl\">\n        {/* The application */}\n        <p>Right-to-left content</p>\n      </div>\n    </DirectionProvider>\n  )\n}",
     "cross_references": [
       "Sidebar",
       "Tooltip"
@@ -10445,7 +10464,7 @@
       }
     ],
     "accessibility": "**Pattern**: None — a composed empty state\n\n**Role**: Plain `div`s, except `EmptyTitle`: a native heading (`<h2>` by default, level set through `as`) that screen readers list.\n\n**Keyboard**:\n\nNo interaction of its own; the actions placed in `EmptyContent` are focusable.\n\n**Accessible name**: Not applicable; the `EmptyTitle` text is the empty state's heading.\n\n**Pitfalls**:\n\n- Set `as` from the real hierarchy: the default `<h2>` assumes the empty state fills a view headed by an `h1`. Inside an `h2` section, pass `as=\"h3\"`.\n- Do not wrap `EmptyTitle` in a `Heading`: that would nest two headings.\n- When the empty state appears after an action (a search with no results), announce it through an `aria-live` region.\n- The `EmptyMedia` illustration is decorative unless it carries information: `alt=\"\"` by default.",
-    "code_example": "import {\n  Empty,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n  EmptyDescription,\n  EmptyContent,\n} from \"@/components/ui/empty\"\nimport { Button } from \"@/components/ui/button\"\nimport { PlusIcon, FolderIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <Empty>\n      <EmptyHeader>\n        <EmptyMedia variant=\"icon\">\n          <FolderIcon />\n        </EmptyMedia>\n        <EmptyTitle>No projects yet</EmptyTitle>\n        <EmptyDescription>\n          You haven't created a project yet. Start one now.\n        </EmptyDescription>\n      </EmptyHeader>\n      <EmptyContent>\n        <Button size=\"sm\">\n          <PlusIcon /> Create a project\n        </Button>\n      </EmptyContent>\n    </Empty>\n  )\n}",
+    "code_example": "import {\n  Empty,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n  EmptyDescription,\n  EmptyContent,\n} from \"@/components/ui/empty\"\nimport { Button } from \"@/components/ui/button\"\nimport { PlusIcon, FolderIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <Empty>\n      <EmptyHeader>\n        <EmptyMedia variant=\"icon\">\n          <FolderIcon />\n        </EmptyMedia>\n        <EmptyTitle>No projects yet</EmptyTitle>\n        <EmptyDescription>\n          You haven&apos;t created a project yet. Start one now.\n        </EmptyDescription>\n      </EmptyHeader>\n      <EmptyContent>\n        <Button size=\"sm\">\n          <PlusIcon /> Create a project\n        </Button>\n      </EmptyContent>\n    </Empty>\n  )\n}",
     "cross_references": [
       "Button",
       "Card"
@@ -12518,7 +12537,7 @@
       }
     ],
     "accessibility": "**Pattern**: A group (`role=\"group\"`) around a field\n\n**Role**: `role=\"group\"`; the field keeps its semantics; clicking an add-on moves focus to the field.\n\n**Keyboard**:\n\nNo interaction of its own; the field and the `InputGroupButton`s receive focus as usual.\n\n**Accessible name**: The field must be labeled like an `Input`. An icon-only `InputGroupButton` needs an `aria-label` (\"Clear search\").\n\n**Pitfalls**:\n\n- **MUST** — when an add-on's text (\"https://\", \"$\") carries meaning, repeat it in the label or the description: it is not read as part of the label.\n- The error is styled on the group through the field's `aria-invalid`; the message still has to be linked.",
-    "code_example": "import {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupButton,\n  InputGroupInput,\n  InputGroupText,\n} from \"@/components/ui/input-group\"\nimport { MagnifyingGlassIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <InputGroup>\n      <InputGroupAddon align=\"inline-start\">\n        <InputGroupText>\n          <MagnifyingGlassIcon />\n        </InputGroupText>\n      </InputGroupAddon>\n      <InputGroupInput placeholder=\"Search…\" />\n    </InputGroup>\n  )\n}",
+    "code_example": "import {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupInput,\n  InputGroupText,\n} from \"@/components/ui/input-group\"\nimport { MagnifyingGlassIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <InputGroup>\n      <InputGroupAddon align=\"inline-start\">\n        <InputGroupText>\n          <MagnifyingGlassIcon />\n        </InputGroupText>\n      </InputGroupAddon>\n      <InputGroupInput placeholder=\"Search…\" />\n    </InputGroup>\n  )\n}",
     "cross_references": [
       "Input",
       "Textarea",
@@ -14334,10 +14353,10 @@
     "name": "Menubar",
     "category": "Navigation",
     "status": "stable",
-    "role": "A horizontal bar of drop-down menus, with submenus, checkable items, radio groups and keyboard shortcuts.",
+    "role": "A horizontal bar of dropdown menus, with submenus, checkable items, radio groups and keyboard shortcuts.",
     "usage": [
       "A desktop-style application menu bar (File, Edit, View…)",
-      "Gather actions and options into themed drop-down menus",
+      "Gather actions and options into themed dropdown menus",
       "Offer checkable options or exclusive (radio) choices inside a menu",
       "Show the keyboard shortcut of each action",
       "Organize complex actions into nested submenus"
@@ -14372,7 +14391,7 @@
       },
       {
         "slot": "`data-slot=\"menubar-content\"`",
-        "role": "Content of the drop-down menu"
+        "role": "Content of the dropdown menu"
       },
       {
         "slot": "`data-slot=\"menubar-group\"`",
@@ -14732,7 +14751,7 @@
       {
         "name": "Menubar",
         "summary": "Renders `MenubarPrimitive.Root`.",
-        "description": "A horizontal bar of drop-down menus for the commands of a desktop-style application, such as File, Edit and View.",
+        "description": "A horizontal bar of dropdown menus for the commands of a desktop-style application, such as File, Edit and View.",
         "example": "<Menubar>\n  <MenubarMenu>\n    <MenubarTrigger>File</MenubarTrigger>\n    <MenubarContent>\n      <MenubarItem>New file</MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n</Menubar>"
       },
       {
@@ -15708,7 +15727,7 @@
     "name": "NativeSelect",
     "category": "Forms",
     "status": "stable",
-    "role": "The browser's native drop-down: a light, accessible way to pick one option from a list.",
+    "role": "The browser's native dropdown: a light, accessible way to pick one option from a list.",
     "usage": [
       "Pick one value out of 6 to 15 options below `md`",
       "Mobile forms, where the system picker is the most comfortable to use",
@@ -15944,7 +15963,7 @@
       {
         "name": "NativeSelect",
         "summary": "Renders `<select>`, inside a `<div>`.",
-        "description": "The browser's own drop-down, the light choice for picking one value out of a short list, especially below `md`.",
+        "description": "The browser's own dropdown, the light choice for picking one value out of a short list, especially below `md`.",
         "example": "<NativeSelect aria-label=\"Country\" defaultValue=\"\">\n  <NativeSelectOption value=\"\">Select a country</NativeSelectOption>\n  <NativeSelectOption value=\"fr\">France</NativeSelectOption>\n  <NativeSelectOption value=\"us\">United States</NativeSelectOption>\n</NativeSelect>"
       },
       {
@@ -16026,7 +16045,7 @@
       },
       {
         "state": "open",
-        "behavior": "The browser's native drop-down is open"
+        "behavior": "The browser's native dropdown is open"
       },
       {
         "state": "disabled",
@@ -16057,7 +16076,7 @@
     "name": "NavigationMenu",
     "category": "Navigation",
     "status": "stable",
-    "role": "Primary navigation that organizes the site's links into categories, with drop-down content panels and transition animations.",
+    "role": "Primary navigation that organizes the site's links into categories, with dropdown content panels and transition animations.",
     "usage": [
       "The primary navigation of a site or an app (in the header)",
       "Group links by category, with rich content panels",
@@ -16395,7 +16414,7 @@
       {
         "name": "NavigationMenu",
         "summary": "Renders `NavigationMenuPrimitive.Root`.",
-        "description": "The primary navigation of a site or app: links grouped by category with drop-down panels, inline when `viewport` is false.",
+        "description": "The primary navigation of a site or app: links grouped by category with dropdown panels, inline when `viewport` is false.",
         "example": "<NavigationMenu>\n  <NavigationMenuList>\n    <NavigationMenuItem>\n      <NavigationMenuLink href=\"/pricing\">Pricing</NavigationMenuLink>\n    </NavigationMenuItem>\n  </NavigationMenuList>\n</NavigationMenu>"
       },
       {
@@ -16925,7 +16944,7 @@
       "`InputGroupInput` — the underlying input",
       "`InputGroupAddon` — the area that holds the toggle button",
       "`InputGroupButton` — a ghost `icon-xs` button",
-      "`@phosphor-icons/react` (`Eye`, `EyeSlash`) — the only icons"
+      "`@phosphor-icons/react` (`EyeIcon`, `EyeSlashIcon`) — the only icons"
     ],
     "anatomy": [
       {
@@ -16941,8 +16960,8 @@
         "role": "`align=\"inline-end\"` area of the toggle button"
       },
       {
-        "slot": "toggle button",
-        "role": "`Eye` / `EyeSlash` button with a dynamic `aria-label`"
+        "slot": "`data-slot=\"input-group-button\"`",
+        "role": "The show / hide toggle, an `InputGroupButton` with an eye icon, crossed out while the password shows, and a dynamic `aria-label`"
       }
     ],
     "tokens": [],
@@ -17011,7 +17030,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Password hidden, `Eye` icon, \"Show password\" label"
+        "behavior": "Password hidden, `EyeIcon`, \"Show password\" label"
       },
       {
         "state": "hover",
@@ -17035,7 +17054,7 @@
       },
       {
         "state": "visible",
-        "behavior": "Password shown in plain text (`type=\"text\"`), `EyeSlash` icon, \"Hide password\" label"
+        "behavior": "Password shown in plain text (`type=\"text\"`), `EyeSlashIcon`, \"Hide password\" label"
       }
     ],
     "accessibility": "**Pattern**: Native `input` field with a visibility button\n\n**Role**: A native `input` (`type=\"password\"` or `text`); a `button` toggles visibility.\n\n**Keyboard**:\n\n| Key               | Action                                  |\n| ----------------- | --------------------------------------- |\n| `Tab`             | From the field to the visibility button |\n| `Enter` / `Space` | Shows / hides the password              |\n\n**Accessible name**: The field is labeled like an `Input`. The button is named by `showLabel` / `hideLabel` (defaults `UI_STRINGS.passwordInput.show` / `.hide`), depending on the state.\n\n**Pitfalls**:\n\n- Set `autocomplete=\"current-password\"` or `\"new-password\"`.\n- Disable the field with the `disabled` prop, not only through a `<fieldset disabled>`: the fieldset disables the toggle too, but a value already shown stays shown.\n- Show the password rules before the user types, linked through `aria-describedby`.",
@@ -17656,8 +17675,20 @@
         "role": "One choice, a `label` over a transparent native `input`; carries `data-checked`"
       },
       {
+        "slot": "`data-slot=\"questionnaire-choice-input\"`",
+        "role": "The transparent native `input` (`radio` or `checkbox`) laid over the whole choice; it takes the focus and the click"
+      },
+      {
         "slot": "`data-slot=\"questionnaire-choice-indicator\"`",
         "role": "Radio dot or checkbox check, drawn from the choice's state"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choice-indicator-dot\"`",
+        "role": "The dot of a radio choice, shown while it is checked"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-choice-indicator-check\"`",
+        "role": "The check of a checkbox choice, shown while it is checked"
       },
       {
         "slot": "`data-slot=\"questionnaire-choice-label\"`",
@@ -17672,6 +17703,10 @@
         "role": "A second line under the choice's text"
       },
       {
+        "slot": "`data-slot=\"questionnaire-input-wrapper\"`",
+        "role": "The `div` around a free answer"
+      },
+      {
         "slot": "`data-slot=\"questionnaire-input\"`",
         "role": "A free answer, styled as `Input`"
       },
@@ -17682,6 +17717,22 @@
       {
         "slot": "`data-slot=\"questionnaire-actions\"`",
         "role": "Row of the navigation buttons: previous at the start, skip and next or submit at the end"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-previous\"`",
+        "role": "The `Button` that goes back to the previous question"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-skip\"`",
+        "role": "The `Button` that moves past the current question without an answer; hidden for a `required` question"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-next\"`",
+        "role": "The `Button` that validates the current answer and moves to the next question"
+      },
+      {
+        "slot": "`data-slot=\"questionnaire-submit\"`",
+        "role": "The submit `Button` of the last question: sends every answer through the form's `onSubmit`"
       }
     ],
     "tokens": [
@@ -19006,7 +19057,7 @@
     "usage": [
       "A container for long lists that scroll vertically (menus, file lists)",
       "A horizontal scroll area for carousels or wide tables",
-      "The inside of a side panel, a drop-down or a dialog whose content varies in length",
+      "The inside of a side panel, a dropdown or a dialog whose content varies in length",
       "Scrolling that looks the same across browsers and operating systems",
       "Paired with `ResizablePanel` for scrolling content inside a resizable panel"
     ],
@@ -19196,7 +19247,7 @@
       }
     ],
     "accessibility": "**Pattern**: Scrolling region (Radix ScrollArea)\n\n**Role**: A natively scrolling `viewport`; the custom scrollbars are decorative.\n\n**Keyboard**:\n\nThe viewport is in the tab order (`tabIndex={0}`, with the focus ring): once it has focus, the arrow keys, `PageUp` / `PageDown`, `Home` / `End` and `Space` scroll it natively. Wheel and touch scroll it too.\n\n**Accessible name**: Name the area: `role=\"region\"` and an `aria-label` on `ScrollArea`, so the region the keyboard lands in is announced.\n\n**Pitfalls**:\n\n- The viewport is a tab stop even when its content holds links or buttons: Safari puts no scrolling area in the tab order by itself, so the component always does (WCAG 2.1.1).\n- Never nest scrolling areas on the same axis.\n- The `ScrollBar` is 10px wide, below the 24px of WCAG 2.2 SC 2.5.8 (Target Size), and no exception covers it: a known gap, listed in `specs/foundations/size.md`. Wheel, touch and keyboard scroll the same area.",
-    "code_example": "import { ScrollArea, ScrollBar } from \"@/components/ui/scroll-area\"\n\nexport default function Example() {\n  return (\n    <ScrollArea\n      role=\"region\"\n      aria-label=\"Tags\"\n      className=\"h-72 w-48 rounded-none border\"\n    >\n      <div className=\"p-4\">\n        {Array.from({ length: 50 }, (_, i) => (\n          <p key={i} className=\"text-sm\">\n            Item {i + 1}\n          </p>\n        ))}\n      </div>\n      <ScrollBar orientation=\"vertical\" />\n    </ScrollArea>\n  )\n}",
+    "code_example": "import { ScrollArea } from \"@/components/ui/scroll-area\"\n\nexport default function Example() {\n  return (\n    <ScrollArea\n      role=\"region\"\n      aria-label=\"Tags\"\n      className=\"h-72 w-48 rounded-none border\"\n    >\n      <div className=\"p-4\">\n        {Array.from({ length: 50 }, (_, i) => (\n          <p key={i} className=\"text-sm\">\n            Item {i + 1}\n          </p>\n        ))}\n      </div>\n    </ScrollArea>\n  )\n}",
     "cross_references": [
       "ResizablePanel",
       "Sidebar",
@@ -19211,10 +19262,10 @@
     "name": "Select",
     "category": "Forms",
     "status": "stable",
-    "role": "A styled drop-down built on Radix for picking one option from a list, with automatic positioning and option groups.",
+    "role": "A styled dropdown built on Radix for picking one option from a list, with automatic positioning and option groups.",
     "usage": [
       "Pick a value in a form (a category, a role, a status)",
-      "A drop-down list with option groups and separators",
+      "A dropdown list with option groups and separators",
       "A styled alternative to the native `<select>`, with full control over rendering",
       "A selection whose options need icons or rich content",
       "**Choice** (`rule-20`) — Pick the selection control from the number of options and the screen width. One value out of 2 to 5 options: `RadioGroup`, with every option visible. Out of 6 to 15: `Select` from `md` up; below `md`, `NativeSelect`, **unless** the options need rich rendering (icons, descriptions) → `Select`. More than 15 options, or search required: `Combobox`. Several values: `Checkbox` up to 5 options, `Combobox` in multiple mode beyond that. An on/off toggle that takes effect immediately: `Switch`."
@@ -19559,7 +19610,7 @@
       {
         "name": "Select",
         "summary": "Renders `SelectPrimitive.Root`.",
-        "description": "The root of a styled drop-down for picking one option from a list, with groups and rich item content.",
+        "description": "The root of a styled dropdown for picking one option from a list, with groups and rich item content.",
         "example": "<Select>\n  <SelectTrigger aria-label=\"Role\">\n    <SelectValue placeholder=\"Select a role\" />\n  </SelectTrigger>\n  <SelectContent>\n    <SelectItem value=\"editor\">Editor</SelectItem>\n  </SelectContent>\n</Select>"
       },
       {
@@ -20703,6 +20754,15 @@
         ]
       },
       {
+        "token": "size.target.min",
+        "classes": [
+          "min-w-target"
+        ],
+        "where": [
+          "SidebarMenuAction"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -20774,6 +20834,7 @@
         "token": "space.scale.0-5",
         "classes": [
           "-inset-0.5",
+          "-m-0.5",
           "py-0.5",
           "w-0.5"
         ],
@@ -22027,8 +22088,8 @@
     ],
     "anatomy": [
       {
-        "slot": "`<Sonner>` (root)",
-        "role": "Mount point of the toasts; carries the `toaster group` class"
+        "slot": "`data-slot=\"toaster\"`",
+        "role": "Written on Sonner's `Toaster`, which does not forward it: no element of the DOM carries it. Target `ol[data-sonner-toaster]`, the list Sonner renders while a toast shows, with the `toaster group` class; each toast is an `li[data-sonner-toast]`"
       }
     ],
     "tokens": [
@@ -22052,6 +22113,15 @@
           "Toaster.loading",
           "Toaster.success",
           "Toaster.warning"
+        ]
+      },
+      {
+        "token": "typography.font-family.mono",
+        "classes": [
+          "var(--font-mono)"
+        ],
+        "where": [
+          "Toaster.fontFamily"
         ]
       }
     ],
@@ -22142,8 +22212,8 @@
     ],
     "anatomy": [
       {
-        "slot": "_(no data-slot)_",
-        "role": "`<svg>` rendered directly through `SpinnerIcon`; carries `role=\"status\"` and `aria-label`"
+        "slot": "`data-slot=\"spinner\"`",
+        "role": "The `<svg>` of `SpinnerIcon`, rendered directly; carries `role=\"status\"` and `aria-label`"
       }
     ],
     "tokens": [
@@ -23686,6 +23756,7 @@
         ],
         "where": [
           "toggleVariants.variant.default",
+          "toggleVariants.variant.outline",
           "toggleVariants via FOCUS_RING (lib/focus.ts)"
         ]
       },
@@ -23713,6 +23784,7 @@
       {
         "token": "color.text.default",
         "classes": [
+          "border-foreground",
           "text-foreground"
         ],
         "where": [
@@ -23939,7 +24011,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Transparent background, inherited text"
+        "behavior": "Transparent background, inherited text; the `default` variant draws a transparent border (`border border-transparent`), so the on-state frame moves nothing"
       },
       {
         "state": "hover",
@@ -23947,11 +24019,11 @@
       },
       {
         "state": "focus",
-        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`, around a solid part: a `ring` border on the `outline` variant, and an `outline-ring` outline `--border-width-default` wide on the default variant, which has no border width; an invalid toggle's outline is `outline-destructive`"
+        "behavior": "`ring-ring/50` ring `--space-focus-ring-width` wide through `focus-visible`, around a solid part: a `ring` border on the `outline` variant, and an `outline-ring` outline `--border-width-default` wide on the default variant, whose border stays transparent at focus (`focus-visible:border-transparent`); a pressed toggle keeps its on-state frame at focus on the default variant, and turns its border `border-ring` on the `outline` variant (`focus-visible:data-[state=on]:border-ring`); an invalid toggle's outline is `outline-destructive`"
       },
       {
         "state": "pressed",
-        "behavior": "`muted` background, through `aria-pressed` / `data-[state=on]`"
+        "behavior": "`muted` background, the hover fill, and a solid `border-foreground` frame that hover does not draw (19.72:1 on the page in light mode, 18.99:1 in dark), through `aria-pressed` / `data-[state=on]`; the frame wins over the invalid border color, and over the focus border color on the default variant"
       },
       {
         "state": "disabled",
@@ -23959,7 +24031,7 @@
       },
       {
         "state": "error",
-        "behavior": "`destructive` border on the `outline` variant through `aria-invalid`; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
+        "behavior": "`destructive` border through `aria-invalid`, on both variants, unless the toggle is pressed, where its frame shows; on focus, a `ring-destructive/20` ring and a solid `outline-destructive` outline `--border-width-default` wide"
       }
     ],
     "accessibility": "**Pattern**: Toggle [button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)\n\n**Role**: A `button` with `aria-pressed`.\n\n**Keyboard**:\n\n| Key               | Action            |\n| ----------------- | ----------------- |\n| `Enter` / `Space` | Toggles the state |\n\n**Accessible name**: The button text; an icon-only toggle needs an `aria-label` that names the action (\"Bold\"), not the state.\n\n**Pitfalls**:\n\n- The label must not change with the state: `aria-pressed` carries the state.",
@@ -24013,6 +24085,7 @@
       {
         "token": "border-width.default",
         "classes": [
+          "border",
           "border-l",
           "border-t",
           "outline-(length:--border-width-default)"
@@ -24059,6 +24132,7 @@
       {
         "token": "color.text.default",
         "classes": [
+          "border-foreground",
           "text-foreground"
         ],
         "where": [
@@ -24324,7 +24398,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Unselected item, styled by `toggleVariants`"
+        "behavior": "Unselected item, styled by `toggleVariants`; a `default` item draws a transparent border (`border border-transparent`), so the on-state frame moves nothing"
       },
       {
         "state": "hover",
@@ -24332,11 +24406,11 @@
       },
       {
         "state": "focus",
-        "behavior": "The focused item rises above its neighbors (`focus:z-dropdown`) and draws the focus ring of `toggleVariants`: a `focus-visible:ring-ring/50` ring around a solid part, the `focus-visible:outline-ring` outline of the `default` variant or the `focus-visible:border-ring` border of the `outline` variant"
+        "behavior": "The focused item rises above its neighbors (`focus:z-dropdown`) and draws the focus ring of `toggleVariants`: a `focus-visible:ring-ring/50` ring around a solid part, the `focus-visible:outline-ring` outline of the `default` variant, whose border stays transparent at focus, or the `focus-visible:border-ring` border of the `outline` variant; a pressed `default` item keeps its on-state frame, and a pressed `outline` item takes the `focus-visible:border-ring` border in its place"
       },
       {
         "state": "pressed",
-        "behavior": "A pressed item takes `data-[state=on]:bg-muted` from `toggleVariants`: Radix writes `data-state=\"on\"` in both kinds of group, and `aria-pressed` only in a `multiple` one, whose items are buttons (a `single` group's items are radios with `aria-checked`)"
+        "behavior": "A pressed item takes `data-[state=on]:bg-muted`, the hover fill, and a solid `data-[state=on]:border-foreground` frame that hover does not draw, from `toggleVariants`: Radix writes `data-state=\"on\"` in both kinds of group, and `aria-pressed` only in a `multiple` one, whose items are buttons (a `single` group's items are radios with `aria-checked`). In a joined `outline` group (`spacing={0}`), an item's leading border is its neighbor's (`border-l-0`, `border-t-0` when vertical), so the frame shows on three sides"
       },
       {
         "state": "disabled",
@@ -24344,7 +24418,7 @@
       },
       {
         "state": "error",
-        "behavior": "An item given `aria-invalid`, which the group never sets, takes it from `toggleVariants`: on focus, a solid `aria-invalid:focus-visible:outline-destructive` outline and an `aria-invalid:ring-destructive/20` ring; an `outline` item also takes the `aria-invalid:border-destructive` border"
+        "behavior": "An item given `aria-invalid`, which the group never sets, takes it from `toggleVariants`: the `aria-invalid:border-destructive` border, unless the item is pressed, where its frame shows; on focus, a solid `aria-invalid:focus-visible:outline-destructive` outline and an `aria-invalid:ring-destructive/20` ring"
       },
       {
         "state": "spacing-0",

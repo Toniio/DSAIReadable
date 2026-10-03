@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Eye, EyeSlash } from "@phosphor-icons/react"
+import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react"
 
 import { cn } from "@/lib/utils"
 import {
@@ -52,7 +52,7 @@ function PasswordInput({
           disabled={disabled}
           onClick={() => setVisible((v) => !v)}
         >
-          {shown ? <EyeSlash /> : <Eye />}
+          {shown ? <EyeSlashIcon /> : <EyeIcon />}
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>

@@ -855,7 +855,7 @@ function generateGlossary() {
     {
       term: "foundation",
       definition:
-        "The base layer of the design system — color, typography, spacing, elevation, radius, opacity, motion.",
+        "The base layer of the design system: the eleven token foundations — color, space, typography, radius, elevation, motion, opacity, z-index, breakpoint, border width and size — and the guidance built on them (focus, content, voice and tone), each in specs/foundations/.",
     },
     {
       term: "slot",
@@ -1336,7 +1336,7 @@ function generateDsMetadata() {
       next: range("next"),
       tailwindcss: range("tailwindcss"),
     },
-    framework: `React ${major("react")} / Next.js ${major("next")} / Tailwind CSS v${major("tailwindcss")} / shadcn-ui`,
+    framework: `React ${major("react")} / Next.js ${major("next")} / Tailwind CSS v${major("tailwindcss")} / shadcn/ui`,
     shadcn_excluded: dsIndex.shadcn.excluded,
     sources: {
       design_system_version: "design-system.index.json#version",

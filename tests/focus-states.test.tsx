@@ -42,6 +42,11 @@ const states: Record<string, ReactNode> = {
       B
     </Toggle>
   ),
+  "Toggle, outline variant, pressed": (
+    <Toggle aria-label="Bold" variant="outline" defaultPressed>
+      B
+    </Toggle>
+  ),
   "Toggle, invalid": (
     <Toggle aria-label="Bold" aria-invalid>
       B
@@ -49,6 +54,25 @@ const states: Record<string, ReactNode> = {
   ),
   "ToggleGroupItem, default variant": (
     <ToggleGroup type="single" aria-label="View">
+      <ToggleGroupItem value="list" aria-label="List">
+        L
+      </ToggleGroupItem>
+    </ToggleGroup>
+  ),
+  "ToggleGroupItem, outline variant, on": (
+    <ToggleGroup
+      type="single"
+      variant="outline"
+      defaultValue="list"
+      aria-label="View"
+    >
+      <ToggleGroupItem value="list" aria-label="List">
+        L
+      </ToggleGroupItem>
+    </ToggleGroup>
+  ),
+  "ToggleGroupItem, default variant, on": (
+    <ToggleGroup type="single" defaultValue="list" aria-label="View">
       <ToggleGroupItem value="list" aria-label="List">
         L
       </ToggleGroupItem>

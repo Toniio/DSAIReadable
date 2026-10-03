@@ -1049,7 +1049,12 @@
       "status": "reanchored"
     },
     "sidebar": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "SidebarMenuAction sits on its menu button, so its own box is the target that tools measure and that covers the button: a 20px box clicking through a 24px after: area read as a 20px target overlapping the button (axe target-size). min-w-target makes the box itself 24 x 24 (size.target.min; aspect-square sets the height) and -m-0.5 grows it 2px on every side of the 20px box it replaces, so it stays centered where it was; the button keeps every pixel the action does not cover (WCAG 2.5.8).",
+      "added": [
+        "min-w-target",
+        "-m-0.5"
+      ]
     },
     "skeleton": {
       "status": "reanchored"
@@ -1098,14 +1103,21 @@
     },
     "toggle": {
       "status": "reanchored",
-      "reason": "The default variant has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark. An invalid toggle keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators).",
+      "reason": "The default variant has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark. An invalid toggle keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators). The on state was the muted fill alone, the hover fill, at 1.11:1 on the page in light mode and 1.33:1 in dark: a pressed toggle could not be told from a hovered one (WCAG 1.4.11). It keeps the fill and draws a solid border-foreground frame (aria-pressed and data-[state=on], color.text.default), 19.72:1 light and 18.99:1 dark on the page, which hover does not draw. The default variant gets a transparent 1px border at rest (border border-transparent), so nothing moves when the frame shows, and keeps it transparent at focus (focus-visible:border-transparent), where its outline-ring draws the focus as before. On the outline variant, focus turns a pressed toggle's frame into the border-ring border (focus-visible:aria-pressed:border-ring, focus-visible:data-[state=on]:border-ring), as on an unpressed one: the frame alone did not change at focus, which left the ring-ring/50 halo alone, about 1.9:1.",
       "added": [
         "focus-visible:outline-solid",
         "focus-visible:outline-(length:--border-width-default)",
         "focus-visible:outline-ring",
         "aria-invalid:focus-visible:outline-solid",
         "aria-invalid:focus-visible:outline-(length:--border-width-default)",
-        "aria-invalid:focus-visible:outline-destructive"
+        "aria-invalid:focus-visible:outline-destructive",
+        "border",
+        "border-transparent",
+        "focus-visible:border-transparent",
+        "aria-pressed:border-foreground",
+        "data-[state=on]:border-foreground",
+        "focus-visible:aria-pressed:border-ring",
+        "focus-visible:data-[state=on]:border-ring"
       ]
     },
     "toggle-group": {

@@ -37,9 +37,9 @@ An animated loading indicator that signals an asynchronous operation is in progr
 
 ## Anatomy
 
-| Slot             | Role                                                                                      |
-| ---------------- | ----------------------------------------------------------------------------------------- |
-| _(no data-slot)_ | `<svg>` rendered directly through `SpinnerIcon`; carries `role="status"` and `aria-label` |
+| Slot                  | Role                                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| `data-slot="spinner"` | The `<svg>` of `SpinnerIcon`, rendered directly; carries `role="status"` and `aria-label` |
 
 ## Tokens
 

@@ -6,7 +6,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 export default function App() {
   return (
     <DirectionProvider dir="rtl">
-      <div dir="rtl" lang="ar">
+      <div dir="rtl">
         {/* The application */}
         <p>Right-to-left content</p>
       </div>

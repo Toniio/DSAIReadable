@@ -12,12 +12,12 @@
 
 ## Role
 
-A horizontal bar of drop-down menus, with submenus, checkable items, radio groups and keyboard shortcuts.
+A horizontal bar of dropdown menus, with submenus, checkable items, radio groups and keyboard shortcuts.
 
 ## Usage
 
 - A desktop-style application menu bar (File, Edit, View…)
-- Gather actions and options into themed drop-down menus
+- Gather actions and options into themed dropdown menus
 - Offer checkable options or exclusive (radio) choices inside a menu
 - Show the keyboard shortcut of each action
 - Organize complex actions into nested submenus
@@ -43,7 +43,7 @@ A horizontal bar of drop-down menus, with submenus, checkable items, radio group
 | `data-slot="menubar-menu"`          | Container of a single menu                        |
 | `data-slot="menubar-trigger"`       | Button that opens a menu                          |
 | `data-slot="menubar-portal"`        | Portal that renders outside the parent DOM        |
-| `data-slot="menubar-content"`       | Content of the drop-down menu                     |
+| `data-slot="menubar-content"`       | Content of the dropdown menu                      |
 | `data-slot="menubar-group"`         | A logical group of items                          |
 | `data-slot="menubar-item"`          | An action item in the menu                        |
 | `data-slot="menubar-checkbox-item"` | A checkable item with a visual indicator          |

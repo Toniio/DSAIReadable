@@ -28,6 +28,7 @@ A container and a set of helpers for data visualization, built on `recharts`: th
 - **MUST** — pass `ChartContainer` a `config` with at least one entry
 - **Note** — in `ChartConfig`, `theme` takes precedence over `color`
 - **MUST** — read a series' color from the `--color-<key>` variable that `ChartStyle` injects for each `config` key (`fill="var(--color-revenue)"`); it is not a token: its value comes from `config`
+- **MUST** — give a series' `color` in `config` as a semantic variable, `var(--color-chart-1)`, not the shadcn alias `var(--chart-1)`: the alias resolves once, on `:root`, so a chart inside a nested `.dark` subtree keeps its light colors
 - **MUST NOT** — nest `ChartContainer`s: one container per chart
 - **MUST** — name the chart on the Recharts element, not on `ChartContainer`: `<BarChart accessibilityLayer aria-label="Revenue by month">`. The label reaches the focusable `<svg role="application">`; on `ChartContainer`, a `div` with no role, `aria-label` names nothing
 - **MUST** — give the chart a visible text summary of what it shows (its takeaway); give its data as a visible `Table` too when readers need the values, under a disclosure such as `Collapsible` if the screen is short on room
@@ -209,7 +210,7 @@ import { BarChart, Bar, XAxis } from "recharts"
 const config: ChartConfig = {
   revenue: {
     label: "Revenue",
-    color: "var(--chart-1)",
+    color: "var(--color-chart-1)",
   },
 }
 

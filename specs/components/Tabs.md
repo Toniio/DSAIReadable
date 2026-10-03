@@ -198,5 +198,5 @@ export default function Example() {
 ## Cross-references
 
 - `Accordion` — the alternative for cumulative content (several sections open)
-- `NavigationMenu` — primary navigation with drop-down submenus
+- `NavigationMenu` — primary navigation with dropdown submenus
 - `Card` — often the container of a tab's content

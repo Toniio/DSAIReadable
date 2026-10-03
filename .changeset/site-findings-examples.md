@@ -1,0 +1,5 @@
+---
+"dsaireadable": patch
+---
+
+docs: Spec examples that rendered wrong or failed a project's lint. Avatar and AspectRatio load images that exist, shadcn/ui's (`https://github.com/shadcn.png`, `https://github.com/evilrabbit.png` and its Unsplash photo), where `/user1.jpg`, `/user2.jpg` and `/placeholder.jpg` returned a 404 in every project. ScrollArea renders one vertical scrollbar, where its extra `<ScrollBar orientation="vertical" />` drew a second one. InputGroup no longer imports an `InputGroupButton` it never uses. Empty and the delete, saving, search and sign-in patterns escape their `'` and `"` in JSX text (`&apos;`, `&quot;`), which `react/no-unescaped-entities` rejected. Direction documents `dir` as required, since `direction` alone does not compile (TS2741), and its example no longer marks an English sentence `lang="ar"`. Chart colors its series with `var(--color-chart-1)`, in the spec and in the component's JSDoc, where `var(--chart-1)` kept light colors inside a nested `.dark` subtree; a new Constraints line says why.

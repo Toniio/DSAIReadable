@@ -34,16 +34,16 @@ A password field with a button that toggles visibility (open eye / slashed eye).
 - `InputGroupInput` — the underlying input
 - `InputGroupAddon` — the area that holds the toggle button
 - `InputGroupButton` — a ghost `icon-xs` button
-- `@phosphor-icons/react` (`Eye`, `EyeSlash`) — the only icons
+- `@phosphor-icons/react` (`EyeIcon`, `EyeSlashIcon`) — the only icons
 
 ## Anatomy
 
-| Slot                              | Role                                                                                                           |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `data-slot="password-input"`      | Root container: an `InputGroup` whose slot is replaced, so `[data-slot=input-group]` selectors do not match it |
-| `data-slot="input-group-control"` | Input whose `type` follows the visibility state                                                                |
-| `data-slot="input-group-addon"`   | `align="inline-end"` area of the toggle button                                                                 |
-| toggle button                     | `Eye` / `EyeSlash` button with a dynamic `aria-label`                                                          |
+| Slot                              | Role                                                                                                                             |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `data-slot="password-input"`      | Root container: an `InputGroup` whose slot is replaced, so `[data-slot=input-group]` selectors do not match it                   |
+| `data-slot="input-group-control"` | Input whose `type` follows the visibility state                                                                                  |
+| `data-slot="input-group-addon"`   | `align="inline-end"` area of the toggle button                                                                                   |
+| `data-slot="input-group-button"`  | The show / hide toggle, an `InputGroupButton` with an eye icon, crossed out while the password shows, and a dynamic `aria-label` |
 
 ## Tokens
 
@@ -85,13 +85,13 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 | State      | Classes | Description                                                                                                                                                                                                                                                                                                             |
 | ---------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `default`  | —       | Password hidden, `Eye` icon, "Show password" label                                                                                                                                                                                                                                                                      |
+| `default`  | —       | Password hidden, `EyeIcon`, "Show password" label                                                                                                                                                                                                                                                                       |
 | `hover`    | —       | Ghost hover on the toggle button                                                                                                                                                                                                                                                                                        |
 | `focus`    | —       | Focus ring on the container, inherited from `InputGroup`                                                                                                                                                                                                                                                                |
 | `active`   | —       | Clicking toggles visibility, without submitting the form                                                                                                                                                                                                                                                                |
 | `disabled` | —       | `disabled`: the group takes the disabled background and reduced opacity of `InputGroup`, the field takes no input, the toggle is disabled with it (out of the tab order, no hover, no click) and the value is masked again whatever the visibility state. `readOnly` keeps the toggle usable: showing a value is a read |
 | `error`    | —       | `aria-invalid="true"`: `destructive` border and ring, and a solid outline at focus, inherited from `InputGroup`                                                                                                                                                                                                         |
-| `visible`  | —       | Password shown in plain text (`type="text"`), `EyeSlash` icon, "Hide password" label                                                                                                                                                                                                                                    |
+| `visible`  | —       | Password shown in plain text (`type="text"`), `EyeSlashIcon`, "Hide password" label                                                                                                                                                                                                                                     |
 
 Collected from `components/ui/password-input.tsx` and the `lib/` constants it imports. **Classes**: each class whose variants name the state, as written (`dark:` included); a class that stacks two states is listed under both. `—`: no class of its own — `default` is what the other states change.
 

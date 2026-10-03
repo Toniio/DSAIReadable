@@ -106,8 +106,8 @@ export default function Example() {
   return (
     <AspectRatio ratio={16 / 9}>
       <img
-        src="/placeholder.jpg"
-        alt="Mountain landscape"
+        src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+        alt="Photo by Drew Beamer"
         className="size-full rounded-none object-cover"
       />
     </AspectRatio>

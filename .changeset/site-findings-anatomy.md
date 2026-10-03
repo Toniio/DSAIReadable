@@ -1,0 +1,5 @@
+---
+"dsaireadable": patch
+---
+
+docs: Five Anatomy tables now name the `data-slot`s their component renders. Spinner's root carries `spinner`, where the spec said it had none. Sonner's `toaster` is written on the `Toaster` but never reaches the DOM, since sonner does not forward it: target `ol[data-sonner-toaster]`, where the spec named a `<Sonner>` root. PasswordInput's toggle is an `input-group-button`, where the spec named a "toggle button". Combobox lists the `input-group`, `input-group-control`, `input-group-addon` and `input-group-button` that `ComboboxInput` renders; inside it the trigger carries `input-group-button`, and `combobox-trigger` only shows on a `ComboboxTrigger` placed on its own. Questionnaire adds the eight slots it left out: `questionnaire-choice-input`, `-choice-indicator-dot`, `-choice-indicator-check`, `-input-wrapper`, `-previous`, `-skip`, `-next` and `-submit`. `npm run specs:validate` now fails on an Anatomy that names a slot nothing renders, or leaves out one its component writes.

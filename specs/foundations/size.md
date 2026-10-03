@@ -26,10 +26,14 @@ not. The area grows without moving the drawing:
 - a pseudo-element on a `relative` control: the Checkbox and the Radio draw a
   16px box and click through `after:-inset-x-3 after:-inset-y-2` (40 × 32);
   the Slider thumb draws 12px and clicks through `after:-inset-2` (28 × 28);
-  the Sidebar actions draw 20px and click through `after:-inset-2` below `md`,
-  `after:-inset-0.5` (24 × 24) above;
+  `SidebarGroupAction` draws 20px and clicks through `after:-inset-2` below
+  `md`, `after:-inset-0.5` (24 × 24) above;
 - a minimum size: `min-w-target` keeps an `InputGroupButton` of size `xs` 24px
-  wide with a one-character label;
+  wide with a one-character label, and makes `SidebarMenuAction` 24 × 24
+  (`-m-0.5` keeps it centered where its 20px box was). It sits on its menu
+  button, so its own box has to reach 24px: a hit area on a pseudo-element
+  covers the button without being measured as the action's (axe
+  `target-size`);
 - the library's own hit area: `ResizablePanelGroup` sets
   `resizeTargetMinimumSize` to 24px for mouse and touch (the library defaults
   to 10 and 20).
@@ -38,7 +42,8 @@ not. The area grows without moving the drawing:
 
 ## Target Size Audit
 
-Every interactive element of `components/ui`, audited on 2026-09-30. A
+Every interactive element of `components/ui`, audited on 2026-09-30;
+`SidebarMenuAction` and the Slider thumbs revised on 2026-10-03. A
 consumer-composed trigger (Popover, Tooltip, HoverCard, Collapsible, Dialog,
 DropdownMenu) takes the size of its child, usually a `Button`.
 
@@ -47,7 +52,7 @@ exactly), Toggle and ToggleGroup items, Checkbox and Radio (hit area 40 × 32),
 Switch (hit area 56 × 36, `sm` 48 × 30), Slider thumb (28), Pagination links
 (32), InputOTP slots (32), Calendar day and navigation buttons (28), Carousel
 previous / next (28), SidebarTrigger (28), SidebarMenuButton (28 to 48),
-SidebarMenuSubButton (28), SidebarMenuAction and SidebarGroupAction (24 hit
+SidebarMenuSubButton (28), SidebarMenuAction (24), SidebarGroupAction (24 hit
 area), Dialog and Sheet close buttons (28), AccordionTrigger (38), Select
 trigger, items and scroll buttons, Combobox trigger, items, clear and chip
 remove buttons, menu and command items (32), MenubarTrigger (24),
@@ -57,14 +62,15 @@ QuestionnaireChoice (44), InputGroupButton (24), MessageScroller scroll button
 
 **Exceptions** — below 24px, conforming through an exception of SC 2.5.8:
 
-| Element                        | Size        | Exception                                                                                                                                    |
-| ------------------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TabsTrigger` (horizontal)     | 23px tall   | Spacing: the 24px circle overflows by half a pixel into the list's own padding, where no other target sits                                   |
-| `BreadcrumbLink`               | text × 16px | Spacing: links sit at least 26px apart; wrapped rows are 8px apart (`gap-y-2`), so the circles never meet                                    |
-| `Badge` rendered as a link     | 20px tall   | Spacing: MUST keep 4px of clear space above and below; `overflow-hidden` clips a pseudo-element hit area                                     |
-| `SidebarRail`                  | 16px wide   | Equivalent: `SidebarTrigger` toggles the same sidebar — a page that renders the rail MUST render the trigger too                             |
-| Calendar month / year `Select` | 20px tall   | Spacing: 6px apart, and the caption's `px-(--cell-size)` keeps them 28px away from the navigation buttons                                    |
-| `ScrollBar` and its thumb      | 10px wide   | **Known gap**: no exception applies. A wider hit area would cover the content along the edge; wheel, touch and keyboard scroll the same area |
+| Element                                         | Size                         | Exception                                                                                                                                                                                                                                      |
+| ----------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TabsTrigger` (horizontal)                      | 23px tall                    | Spacing: the 24px circle overflows by half a pixel into the list's own padding, where no other target sits                                                                                                                                     |
+| `BreadcrumbLink`                                | text × 16px                  | Spacing: links sit at least 26px apart; wrapped rows are 8px apart (`gap-y-2`), so the circles never meet                                                                                                                                      |
+| `Badge` rendered as a link                      | 20px tall                    | Spacing: MUST keep 4px of clear space above and below; `overflow-hidden` clips a pseudo-element hit area                                                                                                                                       |
+| `SidebarRail`                                   | 16px wide                    | Equivalent: `SidebarTrigger` toggles the same sidebar — a page that renders the rail MUST render the trigger too                                                                                                                               |
+| Calendar month / year `Select`                  | 20px tall                    | Spacing: 6px apart, and the caption's `px-(--cell-size)` keeps them 28px away from the navigation buttons                                                                                                                                      |
+| `Slider` thumbs of a range less than 24px apart | 12px drawn, 28 × 28 hit area | **Known gap**: the two hit areas overlap, and no exception applies. A pointer anywhere on the track moves the closer thumb, and the arrow keys move each one. axe `target-size` flags the thumbs only then: at rest a range's thumbs sit apart |
+| `ScrollBar` and its thumb                       | 10px wide                    | **Known gap**: no exception applies. A wider hit area would cover the content along the edge; wheel, touch and keyboard scroll the same area                                                                                                   |
 
 ---
 

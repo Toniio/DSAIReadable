@@ -24,9 +24,10 @@ export function DeleteProject({ name }: { name: string }) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete "{name}"?</AlertDialogTitle>
+          <AlertDialogTitle>Delete &quot;{name}&quot;?</AlertDialogTitle>
           <AlertDialogDescription>
-            Its tasks and files go with it. You won't be able to get them back.
+            Its tasks and files go with it. You won&apos;t be able to get them
+            back.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
