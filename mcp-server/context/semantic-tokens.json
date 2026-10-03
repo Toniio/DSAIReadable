@@ -1573,7 +1573,7 @@
     "dark": "{primitive.zindex.dropdown}",
     "type": "number",
     "status": "active",
-    "usage": "Dropdown menus. Renders above page content."
+    "usage": "The lowest global layer (1000), above the page content. No floating surface of the design system takes it: its menus, popovers and lists draw `z-popover`. Seven components raise one of their own parts with it — the AvatarBadge, a focused ButtonGroup child, a Calendar day, the active InputOTP slot, the Resizable grip, a focused ToggleGroup item and Select's scroll buttons —, a local order that specs/foundations/elevation.md gives to small raw z-index values: do not copy it."
   },
   {
     "path": "zindex.sticky",
@@ -1618,7 +1618,7 @@
     "dark": "{primitive.zindex.popover}",
     "type": "number",
     "status": "active",
-    "usage": "Popovers and tooltips of high priority. Renders above modals."
+    "usage": "Floating surfaces (1500): popovers, hover cards, dropdown, context and menubar menus, the Select, Combobox and NavigationMenu panels. Renders above modals, so a menu opened in a dialog shows."
   },
   {
     "path": "zindex.toast",
@@ -1627,7 +1627,7 @@
     "dark": "{primitive.zindex.toast}",
     "type": "number",
     "status": "active",
-    "usage": "Toast notifications. Always visible above other layers."
+    "usage": "Toast notifications (1600): above popovers, below tooltips. No component reads it yet: the Sonner `Toaster` keeps sonner's own z-index (999999999), above every layer of this scale."
   },
   {
     "path": "zindex.tooltip",

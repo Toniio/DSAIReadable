@@ -17,7 +17,7 @@ import {
 } from "@phosphor-icons/react"
 
 /**
- * Picks a date or a date range with month navigation; place it in a `Popover` or a `Card`, it does not position itself.
+ * Picks a date or a date range with month navigation; place it in a `Popover`, it does not position itself.
  *
  * @example
  * <Calendar mode="single" selected={date} onSelect={setDate} />

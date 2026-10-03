@@ -39,9 +39,9 @@ The provider for short-lived toast notifications, built on the `sonner` library,
 
 ## Anatomy
 
-| Slot              | Role                                                         |
-| ----------------- | ------------------------------------------------------------ |
-| `<Sonner>` (root) | Mount point of the toasts; carries the `toaster group` class |
+| Slot                  | Role                                                                                                                                                                                                                                                |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-slot="toaster"` | Written on Sonner's `Toaster`, which does not forward it: no element of the DOM carries it. Target `ol[data-sonner-toaster]`, the list Sonner renders while a toast shows, with the `toaster group` class; each toast is an `li[data-sonner-toast]` |
 
 ## Tokens
 

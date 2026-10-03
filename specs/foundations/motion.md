@@ -74,16 +74,18 @@ The default `Select` list (`item-aligned`) has no animation, by design: see "Red
 
 ### Standard hover (color / opacity)
 
-`Button`, `Toggle` and the menu items already carry their hover transition: these classes go on a surface the screen draws itself.
+`Button`, `Toggle` and the menu items already carry their hover transition: these classes go on a surface the screen draws itself, on the page background. A `Card` would not show the hover: `bg-card` and `bg-muted` read the same token, `color.background.subtle`.
 
 ```tsx
-import { Card, CardContent } from "@/components/ui/card"
+import { Heading } from "@/components/ui/heading"
 
 export default function Example() {
   return (
-    <Card className="transition-colors duration-fast ease-default hover:bg-muted">
-      <CardContent>Recent activity</CardContent>
-    </Card>
+    <div className="border bg-background p-4 transition-colors duration-fast ease-default hover:bg-muted">
+      <Heading level={3} as="h2">
+        Recent activity
+      </Heading>
+    </div>
   )
 }
 ```
@@ -100,7 +102,7 @@ export default function Example() {
 
 A screen does not animate a modal surface itself: `Dialog`, `AlertDialog`, `Sheet` and `Drawer` enter and leave on their own, with the timing the table above gives. Their backdrop fades with `OVERLAY_BASE` (`lib/overlay.ts`), `Dialog` and `AlertDialog` zoom in with `MODAL_CONTENT_BASE`, `Sheet` slides in from its side, and `Drawer` moves with vaul. Use the component as it is, and do not re-time it.
 
-### A drop-down leaving
+### A dropdown leaving
 
 ```tsx
 <div className="transition-all duration-normal ease-in data-[state=closed]:scale-95 data-[state=closed]:opacity-0">

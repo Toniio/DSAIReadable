@@ -2509,7 +2509,7 @@ assert(
     (dep) => meta.stack?.[dep] === rootDeps[dep]
   ) &&
     meta.framework ===
-      `React ${/\d+/.exec(rootDeps.react)?.[0]} / Next.js ${/\d+/.exec(rootDeps.next)?.[0]} / Tailwind CSS v${/\d+/.exec(rootDeps.tailwindcss)?.[0]} / shadcn-ui`,
+      `React ${/\d+/.exec(rootDeps.react)?.[0]} / Next.js ${/\d+/.exec(rootDeps.next)?.[0]} / Tailwind CSS v${/\d+/.exec(rootDeps.tailwindcss)?.[0]} / shadcn/ui`,
   `stack and framework come from package.json (${meta.framework})`
 )
 assert(

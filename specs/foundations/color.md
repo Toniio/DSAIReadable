@@ -12,7 +12,7 @@
 | --------------------------- | ----------------------------- | -------------------- | -------------------- | ------------------------------------------------------- |
 | `color.background.default`  | `--color-background-default`  | `#ffffff` (mist.0)   | `#090b0c` (mist.950) | Main surface — the root page, the body                  |
 | `color.background.subtle`   | `--color-background-subtle`   | `#f1f3f3` (mist.100) | `#22292b` (mist.800) | Secondary surfaces — cards, muted areas                 |
-| `color.background.elevated` | `--color-background-elevated` | `#ffffff` (mist.0)   | `#161b1d` (mist.900) | Floating surfaces — popovers, drop-downs, dialogs       |
+| `color.background.elevated` | `--color-background-elevated` | `#ffffff` (mist.0)   | `#161b1d` (mist.900) | Floating surfaces — popovers, dropdowns, dialogs        |
 | `color.background.inverse`  | `--color-background-inverse`  | `#090b0c` (mist.950) | `#ffffff` (mist.0)   | Inverted surfaces — dark tooltips, high-contrast badges |
 
 **Do / Don't:**
@@ -32,7 +32,7 @@
 | `color.text.subtle`              | `--color-text-subtle`              | mist.600    | mist.400    | Secondary text — captions, helper text, metadata                       |
 | `color.text.bold`                | `--color-text-bold`                | mist.950    | mist.50     | High-contrast emphasized text                                          |
 | `color.text.inverse`             | `--color-text-inverse`             | mist.0      | mist.950    | Text on an inverse surface (a dark background in light mode)           |
-| `color.text.action.default`      | `--color-text-action-default`      | violet.600  | violet.400  | Links, primary action labels                                           |
+| `color.text.action.default`      | `--color-text-action-default`      | violet.600  | violet.300  | Links, primary action labels                                           |
 | `color.text.action.on`           | `--color-text-action-on`           | violet.50   | violet.50   | Text on an `action.background.default` background                      |
 | `color.text.destructive.default` | `--color-text-destructive-default` | red.800     | red.300     | Error messages, destructive labels, on a surface or a tint             |
 | `color.text.success.default`     | `--color-text-success-default`     | emerald.800 | emerald.300 | Success messages and labels, on a surface or a tint                    |
@@ -55,7 +55,7 @@
 | `color.border.default` | `--color-border-default` | mist.200 | white-alpha.10 | Standard separators, component outlines    |
 | `color.border.subtle`  | `--color-border-subtle`  | mist.200 | white-alpha.10 | Discreet separators, minimal visual weight |
 | `color.border.input`   | `--color-border-input`   | mist.200 | white-alpha.15 | The border of form fields                  |
-| `color.border.focus`   | `--color-border-focus`   | mist.500 | mist.500       | Focus ring for keyboard accessibility      |
+| `color.border.focus`   | `--color-border-focus`   | mist.500 | mist.400       | Focus ring for keyboard accessibility      |
 
 **Do / Don't:**
 
@@ -248,7 +248,7 @@ these utility classes:
 
 ## Measured contrast
 
-WCAG 2.x ratios of the pairs under watch, as of the fix of the 6 failures on 2026-09-17; the focus rows as of the dark `color.border.focus` of 0.1.2.
+WCAG 2.x ratios of the pairs under watch, as `npm run tokens:lint-contrast` measures them on the tokens of 0.1.2. The table was first drawn for the fix of the 6 failures on 2026-09-17.
 
 | Pair                                                          | Light | Dark  | Threshold |
 | ------------------------------------------------------------- | ----- | ----- | --------- |
@@ -258,7 +258,7 @@ WCAG 2.x ratios of the pairs under watch, as of the fix of the 6 failures on 202
 | `text.default` on `background.default`                        | 19.72 | 18.99 | 4.5       |
 | `text.subtle` on `background.default`                         | 5.10  | 8.08  | 4.5       |
 | `text.subtle` on `background.subtle` (`muted-foreground`)     | 4.58  | 6.06  | 4.5       |
-| `text.action.default` on `background.default`                 | 8.09  | 4.93  | 4.5       |
+| `text.action.default` on `background.default`                 | 8.09  | 9.81  | 4.5       |
 | `action.background.foreground` on `action.background.default` | 7.24  | 8.99  | 4.5       |
 | `feedback.error.foreground` on `feedback.error.default`       | 4.77  | 6.83  | 4.5       |
 | `sidebar.primary.on` on `sidebar.primary.default`             | 5.78  | 4.58  | 4.5       |
@@ -278,7 +278,7 @@ labels had been measured only against the solid fill, and read at 3.00:1 on a
 card under the hover tint. **`red.800`** (`#9f0712`) and **`red.300`**
 (`#ffa2a2`) keep the hue and give the text its own token; the weakest tint is
 the 20% hover tint over a card in light mode and the 30% one in dark mode.
-The success and warning rows date from the same day (P4-19): new primitives
+The success and warning rows date from the same day, released in 0.1.0: new primitives
 **`emerald.300`**, **`.400`**, **`.700`**, **`.800`** and **`amber.300`**,
 **`.400`**, **`.450`**, **`.700`**, taken from Tailwind v4's palette like the
 red steps; their weakest tint is the 20% one over a card in both modes.

@@ -38,12 +38,12 @@ A password field with a button that toggles visibility (open eye / slashed eye).
 
 ## Anatomy
 
-| Slot                              | Role                                                                                                           |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `data-slot="password-input"`      | Root container: an `InputGroup` whose slot is replaced, so `[data-slot=input-group]` selectors do not match it |
-| `data-slot="input-group-control"` | Input whose `type` follows the visibility state                                                                |
-| `data-slot="input-group-addon"`   | `align="inline-end"` area of the toggle button                                                                 |
-| toggle button                     | `Eye` / `EyeSlash` button with a dynamic `aria-label`                                                          |
+| Slot                              | Role                                                                                                                             |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `data-slot="password-input"`      | Root container: an `InputGroup` whose slot is replaced, so `[data-slot=input-group]` selectors do not match it                   |
+| `data-slot="input-group-control"` | Input whose `type` follows the visibility state                                                                                  |
+| `data-slot="input-group-addon"`   | `align="inline-end"` area of the toggle button                                                                                   |
+| `data-slot="input-group-button"`  | The show / hide toggle, an `InputGroupButton` with an eye icon, crossed out while the password shows, and a dynamic `aria-label` |
 
 ## Tokens
 

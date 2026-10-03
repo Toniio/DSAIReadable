@@ -3295,7 +3295,7 @@
       "description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
       "docs": {
         "description": "A floating surface above the main content.",
-        "do": "Use for popovers, drop-downs, dialogs, light tooltips.",
+        "do": "Use for popovers, dropdowns, dialogs, light tooltips.",
         "dont": "Do not use for inline cards — they are not \"raised\" on the Z axis."
       }
     },
@@ -5324,7 +5324,7 @@
       },
       "description": "Narrow content column max-width (42rem). Not for full-width or wide layouts.",
       "docs": {
-        "do": "`max-w-[var(--space-layout-content-sm)]` for editorial pages.",
+        "do": "`max-w-2xl` (it equals this token) for editorial pages.",
         "dont": "Do not use as a padding value."
       }
     },
@@ -6206,7 +6206,7 @@
       },
       "description": "Minimal lift for interactive elements. Not for decorative purposes.",
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-xs"
       }
@@ -6228,7 +6228,7 @@
       },
       "description": "Small lift for cards and hover states. Not for fixed navigation.",
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-sm"
       }
@@ -6250,7 +6250,7 @@
       },
       "description": "Medium elevation for dropdowns and context menus. Not for inline content.",
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-md"
       }
@@ -6272,7 +6272,7 @@
       },
       "description": "Large elevation for modals and side panels. Not for standard cards.",
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-lg"
       }
@@ -6294,7 +6294,7 @@
       },
       "description": "Extra-large elevation for full overlay panels. Not for inline components.",
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-xl"
       }
@@ -6316,7 +6316,7 @@
       },
       "description": "Maximum elevation for toasts and high-priority overlays. Use sparingly.",
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-2xl"
       }
@@ -6338,7 +6338,7 @@
       },
       "description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements.",
       "docs": {
-        "do": "`shadow-sm` for cards, `shadow-md` for drop-downs, `shadow-lg` for modals.",
+        "do": "`shadow-sm` for cards, `shadow-md` for dropdowns, `shadow-lg` for modals.",
         "dont": "Do not combine `shadow-inner` with an outer shadow on the same element.",
         "tailwind": "shadow-inner"
       }
@@ -6613,7 +6613,7 @@
       "value": {
         "light": "1000"
       },
-      "description": "Dropdown menus. Renders above page content.",
+      "description": "The lowest global layer (1000), above the page content. No floating surface of the design system takes it: its menus, popovers and lists draw `z-popover`. Seven components raise one of their own parts with it — the AvatarBadge, a focused ButtonGroup child, a Calendar day, the active InputOTP slot, the Resizable grip, a focused ToggleGroup item and Select's scroll buttons —, a local order that specs/foundations/elevation.md gives to small raw z-index values: do not copy it.",
       "docs": {
         "do": "Always use the z-index tokens — never hard-coded numeric values.",
         "dont": "Do not create new z-index levels outside this scale without approval.",
@@ -6713,7 +6713,7 @@
       "value": {
         "light": "1500"
       },
-      "description": "Popovers and tooltips of high priority. Renders above modals.",
+      "description": "Floating surfaces (1500): popovers, hover cards, dropdown, context and menubar menus, the Select, Combobox and NavigationMenu panels. Renders above modals, so a menu opened in a dialog shows.",
       "docs": {
         "do": "Always use the z-index tokens — never hard-coded numeric values.",
         "dont": "Do not create new z-index levels outside this scale without approval.",
@@ -6733,7 +6733,7 @@
       "value": {
         "light": "1600"
       },
-      "description": "Toast notifications. Always visible above other layers.",
+      "description": "Toast notifications (1600): above popovers, below tooltips. No component reads it yet: the Sonner `Toaster` keeps sonner's own z-index (999999999), above every layer of this scale.",
       "docs": {
         "do": "Always use the z-index tokens — never hard-coded numeric values.",
         "dont": "Do not create new z-index levels outside this scale without approval.",

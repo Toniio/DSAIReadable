@@ -86,17 +86,20 @@ breakpoints, they are not bridged: Tailwind's own values are the
 
 **Layout** space: page padding, gaps between sections, maximum content widths.
 
-| Token                          | CSS Variable                     | Value            | Typical use                                         |
-| ------------------------------ | -------------------------------- | ---------------- | --------------------------------------------------- |
-| `space.layout.page-padding`    | `--space-layout-page-padding`    | `1.5rem` (24 px) | Horizontal padding of the root page container       |
-| `space.layout.section-gap`     | `--space-layout-section-gap`     | `4rem` (64 px)   | Vertical space between the major sections of a page |
-| `space.layout.content-sm`      | `--space-layout-content-sm`      | `42rem`          | `max-width` of a narrow column (an article, prose)  |
-| `space.layout.content-default` | `--space-layout-content-default` | `64rem`          | Default `max-width` of the main content             |
-| `space.layout.content-lg`      | `--space-layout-content-lg`      | `80rem`          | `max-width` of wide layouts (dashboards)            |
+| Token                          | CSS Variable                     | Value            | Typical use                                                                  |
+| ------------------------------ | -------------------------------- | ---------------- | ---------------------------------------------------------------------------- |
+| `space.layout.page-padding`    | `--space-layout-page-padding`    | `1.5rem` (24 px) | Horizontal padding of the root page container                                |
+| `space.layout.section-gap`     | `--space-layout-section-gap`     | `4rem` (64 px)   | Vertical space between the major sections of a page                          |
+| `space.layout.content-sm`      | `--space-layout-content-sm`      | `42rem`          | `max-width` of a narrow column (an article, prose)                           |
+| `space.layout.content-default` | `--space-layout-content-default` | `64rem`          | Default `max-width` of the main content                                      |
+| `space.layout.content-lg`      | `--space-layout-content-lg`      | `80rem`          | `max-width` of wide layouts (dashboards)                                     |
+| `space.layout.sidebar`         | `--space-layout-sidebar`         | `16rem` (256 px) | Width of the navigation sidebar: `w-sidebar`                                 |
+| `space.layout.sidebar-mobile`  | `--space-layout-sidebar-mobile`  | `18rem` (288 px) | Width of the sidebar on mobile viewports, in its `Sheet`: `w-sidebar-mobile` |
+| `space.layout.sidebar-icon`    | `--space-layout-sidebar-icon`    | `3rem` (48 px)   | Width of the sidebar collapsed to its icons: `w-sidebar-icon`                |
 
 ### Generated Tailwind classes
 
-Through `@theme inline` in `globals.css`, `px-page`, `py-section` and `gap-section` read the layout tokens. The content widths have no class of their own: use the container steps they equal (see Container widths):
+Through `@theme inline` in `globals.css`, `px-page`, `py-section` and `gap-section` read the layout tokens, and `w-sidebar`, `w-sidebar-mobile` and `w-sidebar-icon` the sidebar widths. The content widths have no class of their own: use the container steps they equal (see Container widths):
 
 ```tsx
 // Page container — px-page = 1.5rem of horizontal padding

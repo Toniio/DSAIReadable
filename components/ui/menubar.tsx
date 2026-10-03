@@ -9,7 +9,7 @@ import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CheckIcon, CaretRightIcon } from "@phosphor-icons/react"
 
 /**
- * A horizontal bar of drop-down menus for the commands of a desktop-style application, such as File, Edit and View.
+ * A horizontal bar of dropdown menus for the commands of a desktop-style application, such as File, Edit and View.
  *
  * @example
  * <Menubar>

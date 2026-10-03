@@ -1090,7 +1090,7 @@
     "cva": "Class Variance Authority — the utility used to declare typed variant APIs on components. Required for all multi-variant components.",
     "cn": "The class merging utility from @/lib/utils, combining clsx and tailwind-merge. The only approved way to compose Tailwind class strings in this codebase.",
     "asChild": "A prop pattern (from Radix UI / shadcn) that delegates a component's rendering to its child element via Slot.Root, preserving all props and event handlers.",
-    "data-slot": "An HTML data attribute marking a component's anatomical part. Used for CSS targeting and Code Connect prop mapping. Value matches the component or sub-part name.",
+    "data-slot": "An HTML data attribute marking a component's anatomical part. Used for CSS targeting across component boundaries (has-[[data-slot=input-group-control]:focus-visible]) and to recognize a component in rendered markup (dsaireadable_validate_screen). Value matches the component or sub-part name; each spec's Anatomy lists the slots its component renders.",
     "allow-raw": "An inline code annotation (// allow-raw: <reason>) that exempts a specific raw value from the lint-raw-values check. Only valid when the raw value is technically unavoidable (e.g., third-party CSS attribute selectors).",
     "Tier 0": "The flat CSS variable structure (e.g., --background: oklch(...)) that existed before the 3-tier DTCG migration. Retained only as Layer 3 compatibility aliases pointing to Semantic tokens.",
     "Layer 1": "The CSS output of tokens/primitive.json — all --ds-prim-* variables. Private; never used directly in components.",

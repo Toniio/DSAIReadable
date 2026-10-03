@@ -12,12 +12,12 @@
 
 ## Role
 
-A styled drop-down built on Radix for picking one option from a list, with automatic positioning and option groups.
+A styled dropdown built on Radix for picking one option from a list, with automatic positioning and option groups.
 
 ## Usage
 
 - Pick a value in a form (a category, a role, a status)
-- A drop-down list with option groups and separators
+- A dropdown list with option groups and separators
 - A styled alternative to the native `<select>`, with full control over rendering
 - A selection whose options need icons or rich content
 

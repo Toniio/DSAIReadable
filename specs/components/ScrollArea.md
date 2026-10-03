@@ -18,7 +18,7 @@ A scroll container with styled scrollbars that replace the browser's native ones
 
 - A container for long lists that scroll vertically (menus, file lists)
 - A horizontal scroll area for carousels or wide tables
-- The inside of a side panel, a drop-down or a dialog whose content varies in length
+- The inside of a side panel, a dropdown or a dialog whose content varies in length
 - Scrolling that looks the same across browsers and operating systems
 - Paired with `ResizablePanel` for scrolling content inside a resizable panel
 
@@ -128,7 +128,7 @@ The viewport is in the tab order (`tabIndex={0}`, with the focus ring): once it 
 ## Code example
 
 ```tsx
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function Example() {
   return (
@@ -144,7 +144,6 @@ export default function Example() {
           </p>
         ))}
       </div>
-      <ScrollBar orientation="vertical" />
     </ScrollArea>
   )
 }

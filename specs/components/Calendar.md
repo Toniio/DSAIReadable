@@ -26,7 +26,8 @@ An interactive date picker built on `react-day-picker`: single, multiple or rang
 
 - **MUST NOT** — serve as a scheduler or planner (day or week views): the design system does not provide one
 - **MUST NOT** — show more than one `Calendar` per view, **unless** comparing two date ranges
-- **MUST** — place the `Calendar` inside a container (`Popover`, `Card`…): it does not position itself
+- **MUST** — place the `Calendar` inside a container (`Popover`, `Dialog`…): it does not position itself
+- **MUST NOT** — place the `Calendar` in a `CardContent`: it drops its own `bg-background` there (`in-data-[slot=card-content]:bg-transparent`) and shows the card, `color.background.subtle`, the token `bg-muted` reads too, so the days between the ends of a range and today lose their fill. A `Popover` (`color.background.elevated`) keeps it
 - **MUST** — keep disabled days visible (`opacity-disabled`, `aria-disabled`)
 - **MUST NOT** — break keyboard navigation (arrows between days, Tab to the controls)
 - **Note** — the first and last days of a range take a raw `z-0` with `isolate`, so their highlight pseudo-elements paint under the day cells; internal to the component, declared in `tokens/allow-raw.registry.json` (`local-stacking`) and listed in `specs/foundations/elevation.md`

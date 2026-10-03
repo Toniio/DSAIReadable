@@ -111,8 +111,8 @@ export function ProjectSearch({ projects }: { projects: string[] }) {
       </InputGroup>
       {query && (
         <p aria-live="polite" className="text-sm text-muted-foreground">
-          {results.length} {results.length === 1 ? "result" : "results"} for "
-          {query}"
+          {results.length} {results.length === 1 ? "result" : "results"} for
+          &quot;{query}&quot;
         </p>
       )}
       {results.length > 0 ? (
@@ -128,7 +128,7 @@ export function ProjectSearch({ projects }: { projects: string[] }) {
       ) : (
         <Empty>
           <EmptyHeader>
-            <EmptyTitle>No results for "{query}"</EmptyTitle>
+            <EmptyTitle>No results for &quot;{query}&quot;</EmptyTitle>
             <EmptyDescription>
               Check the spelling or try another word.
             </EmptyDescription>

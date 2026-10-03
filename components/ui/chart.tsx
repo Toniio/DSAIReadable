@@ -43,7 +43,7 @@ function useChart() {
  * The responsive frame for one Recharts chart; its `config` names each series and sets the `--color-<key>` colors the chart reads.
  *
  * @example
- * <ChartContainer config={{ revenue: { label: "Revenue", color: "var(--chart-1)" } }} className="min-h-52 w-full">
+ * <ChartContainer config={{ revenue: { label: "Revenue", color: "var(--color-chart-1)" } }} className="min-h-52 w-full">
  *   <BarChart data={[{ month: "Jan", revenue: 186 }]}>
  *     <Bar dataKey="revenue" fill="var(--color-revenue)" />
  *   </BarChart>
@@ -104,7 +104,7 @@ function ChartContainer({
  * Writes the `--color-<key>` variables for each `config` entry, light and dark; `ChartContainer` renders it, so you rarely use it directly.
  *
  * @example
- * <ChartStyle id="chart-revenue" config={{ revenue: { label: "Revenue", color: "var(--chart-1)" } }} />
+ * <ChartStyle id="chart-revenue" config={{ revenue: { label: "Revenue", color: "var(--color-chart-1)" } }} />
  */
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(

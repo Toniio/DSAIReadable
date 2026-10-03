@@ -12,7 +12,7 @@ Elevation expresses the **relative height** of a surface in the visual hierarchy
 | ----------------- | ------------------- | -------------- | ------------------------------------------------------- |
 | `elevation.xs`    | `--elevation-xs`    | `shadow-xs`    | Micro-lift — hover on an interactive element            |
 | `elevation.sm`    | `--elevation-sm`    | `shadow-sm`    | Light lift — a card at rest, a stronger hover           |
-| `elevation.md`    | `--elevation-md`    | `shadow-md`    | Standard elevation — drop-downs, context menus          |
+| `elevation.md`    | `--elevation-md`    | `shadow-md`    | Standard elevation — dropdowns, context menus           |
 | `elevation.lg`    | `--elevation-lg`    | `shadow-lg`    | Marked elevation — modals, side panels                  |
 | `elevation.xl`    | `--elevation-xl`    | `shadow-xl`    | High elevation — full-screen panel, drawer              |
 | `elevation.2xl`   | `--elevation-2xl`   | `shadow-2xl`   | Maximum elevation — toasts, high-priority notifications |
@@ -55,10 +55,10 @@ Elevation expresses the **relative height** of a surface in the visual hierarchy
 ```
 Level        Surface type                      Approximate z-index
 ─────────────────────────────────────────────────────────────────────
-2xl   ████   Toasts, urgent notifications       z-toast (1600)
+2xl   ████   Toasts, urgent notifications       z-toast (1600), unread by Sonner
 xl    ███    Drawers, full-screen panels        z-modal (1400)
 lg    ███    Modals, dialogs                    z-modal (1400)
-md    ██     Drop-downs, context menus          z-dropdown (1000)
+md    ██     Dropdowns, context menus           z-popover (1500)
 sm    █      Cards at rest, element hover       —
 xs    ░      Micro-interactions, subtle hover   —
 inner ▼      Sunken inputs, pressed state       —
@@ -82,7 +82,14 @@ layers, and needs no token.
 
 These values are reserved to the component files that use them: each one is
 declared `allow-raw: local-stacking` in `tokens/allow-raw.registry.json`, with
-its reason, and `npm run tokens:lint-values` rejects any other. Code built
+its reason, and `npm run tokens:lint-values` rejects any other.
+
+Seven components still order their own parts with the global `z-dropdown`
+layer, against this rule: the `AvatarBadge`, a focused `ButtonGroup` child, a
+`Calendar` day, the active `InputOTP` slot, the `Resizable` grip, a focused
+`ToggleGroup` item and the scroll buttons of `Select`. Do not copy it. The
+Sonner `Toaster` does not read `z-toast` either: it keeps sonner's own
+z-index (999999999), above every layer of the scale. Code built
 with the design system never writes a z-index of its own: it composes the
 components, and places a surface above the page with a global layer.
 
@@ -99,7 +106,7 @@ components, and places a surface above the page with a global layer.
   ...
 </div>
 
-// Drop-down menu level — DropdownMenuContent and PopoverContent already draw it
+// Dropdown menu level — DropdownMenuContent and PopoverContent already draw it
 <div className="shadow-md bg-popover p-2">...</div>
 
 // Modal level — Sheet already draws it

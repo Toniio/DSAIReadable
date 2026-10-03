@@ -10,7 +10,10 @@
  *   ③ British spellings. One spelling per word means a search for `color`
  *      finds every occurrence, and what the MCP server serves reads the same
  *      from one spec to the next. `aria-labelledby` is the attribute's name,
- *      not prose: a match stops at letters, so it is left alone.
+ *      not prose: a match stops at letters, so it is left alone;
+ *   ④ the second spelling of a word the repository writes one way, for the
+ *      same reason: `dropdown`, as the API writes it (`DropdownMenu`,
+ *      `z-dropdown`, `captionLayout="dropdown"`), never `drop-down`.
  *
  * Known false positives are left out of the word list rather than excused
  * per line: "sans" is the font family (`sans-serif`, `font-sans`, Geist Sans).
@@ -88,6 +91,13 @@ const BRITISH = new RegExp(
   "giu"
 )
 
+/** Second spellings of a word written one way across the repository. */
+const SECOND_SPELLINGS = ["drop-downs?"]
+const SECOND_SPELLING = new RegExp(
+  `(?<![\\p{L}])(?:${SECOND_SPELLINGS.join("|")})(?![\\p{L}])`,
+  "giu"
+)
+
 // Letters French uses and English does not; ä, ö, ü are left to German names
 // (Björn Ottosson, cited for OKLab).
 const DIACRITIC = /[àâçéèêëîïôùûœ]/giu
@@ -128,7 +138,7 @@ for (const file of files) {
     continue // a symlink to a directory, or a file deleted but not yet staged
   }
   source.split("\n").forEach((line, i) => {
-    for (const pattern of [WORD, DIACRITIC, BRITISH]) {
+    for (const pattern of [WORD, DIACRITIC, BRITISH, SECOND_SPELLING]) {
       for (const m of line.matchAll(pattern)) {
         findings.push({ file, line: i + 1, match: m[0] })
       }
@@ -138,12 +148,12 @@ for (const file of files) {
 
 if (findings.length > 0) {
   console.error(
-    `❌ lint-language: ${findings.length} French word(s) or letter(s), or British spelling(s).\n`
+    `❌ lint-language: ${findings.length} French word(s) or letter(s), British spelling(s) or second spelling(s).\n`
   )
   for (const f of findings)
     console.error(`   ${f.file}:${f.line} — "${f.match}"`)
   console.error(
-    `\n   Everything committed is written in American English (AGENTS.md § 1): rewrite natively, do not translate; color, behavior, labeled, -ize.`
+    `\n   Everything committed is written in American English (AGENTS.md § 1): rewrite natively, do not translate; color, behavior, labeled, -ize, dropdown.`
   )
   process.exit(1)
 }

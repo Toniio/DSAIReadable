@@ -24,9 +24,9 @@ type Indicator = "dot" | "line" | "dashed"
 
 /** The series, in the order the `series` control adds them. */
 const SERIES = [
-  { key: "online", label: "Online", color: "var(--chart-1)" },
-  { key: "retail", label: "Retail", color: "var(--chart-2)" },
-  { key: "wholesale", label: "Wholesale", color: "var(--chart-3)" },
+  { key: "online", label: "Online", color: "var(--color-chart-1)" },
+  { key: "retail", label: "Retail", color: "var(--color-chart-2)" },
+  { key: "wholesale", label: "Wholesale", color: "var(--color-chart-3)" },
 ] as const
 
 type Series = (typeof SERIES)[number]

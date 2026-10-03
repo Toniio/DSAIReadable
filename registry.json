@@ -1968,7 +1968,7 @@
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",
-      "description": "A horizontal bar of drop-down menus, with submenus, checkable items, radio groups and keyboard shortcuts.",
+      "description": "A horizontal bar of dropdown menus, with submenus, checkable items, radio groups and keyboard shortcuts.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.6.7"
@@ -2031,7 +2031,7 @@
       "name": "native-select",
       "type": "registry:ui",
       "title": "NativeSelect",
-      "description": "The browser's native drop-down: a light, accessible way to pick one option from a list.",
+      "description": "The browser's native dropdown: a light, accessible way to pick one option from a list.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10"
       ],
@@ -2052,7 +2052,7 @@
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "NavigationMenu",
-      "description": "Primary navigation that organizes the site's links into categories, with drop-down content panels and transition animations.",
+      "description": "Primary navigation that organizes the site's links into categories, with dropdown content panels and transition animations.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "class-variance-authority@^0.7.1",
@@ -2247,7 +2247,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "A styled drop-down built on Radix for picking one option from a list, with automatic positioning and option groups.",
+      "description": "A styled dropdown built on Radix for picking one option from a list, with automatic positioning and option groups.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10",
         "radix-ui@^1.6.7"

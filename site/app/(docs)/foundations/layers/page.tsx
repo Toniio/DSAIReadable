@@ -82,8 +82,8 @@ export default function LayersPage() {
         title="Stack"
         description={
           <>
-            {layers.length} layers, from the drop-down menus to the tooltips.
-            The cards below are written in reverse order: each one&apos;s{" "}
+            {layers.length} layers, from the dropdown menus to the tooltips. The
+            cards below are written in reverse order: each one&apos;s{" "}
             <Code>z-index</Code> token, not its place in the page, puts it above
             the one before.
           </>

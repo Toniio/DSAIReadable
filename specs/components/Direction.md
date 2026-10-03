@@ -25,6 +25,7 @@ A context provider that passes the reading direction (LTR / RTL) down to every c
 
 - **MUST NOT** — nest `DirectionProvider`s with conflicting directions
 - **MUST** — place the `DirectionProvider` above every Radix component that reads the direction
+- **MUST** — pass `dir`: the type keeps Radix's required prop, so `direction` alone does not compile
 - **MUST** — keep the `dir` attribute of `<html>` consistent with the `DirectionProvider`, which does not replace it
 - **Note** — a utility component: it renders nothing visible
 - **Note** — **The only component in the system without a `data-slot`**: it renders no DOM node of its own, so no element can carry the attribute. The exception is declared in the code with `// no-data-slot:` and checked by `npm run index:data-slot`. Target the direction through the `dir` attribute Radix sets on the consuming components
@@ -53,12 +54,12 @@ No token: `components/ui/direction.tsx` uses no class or variable that leads to 
 
 Renders `Direction.DirectionProvider`.
 
-| Prop        | Type                                                              | Default | Description                                                       |
-| ----------- | ----------------------------------------------------------------- | ------- | ----------------------------------------------------------------- |
-| `direction` | `React.ComponentProps<typeof Direction.DirectionProvider>["dir"]` | —       | Alias of `dir`, for a more explicit API; wins when both are given |
-| `dir`       | `Direction`                                                       | —       | Reading direction (the native Radix prop)                         |
-| `children`  | `React.ReactNode`                                                 | —       | Tree of child components                                          |
-| `...props`  | `React.ComponentProps<typeof Direction.DirectionProvider>`        | —       | `Direction.DirectionProvider` props                               |
+| Prop        | Type                                                              | Default | Description                                                                                                               |
+| ----------- | ----------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `direction` | `React.ComponentProps<typeof Direction.DirectionProvider>["dir"]` | —       | Alias of `dir`; wins when both are given. It does not replace `dir`, which the type still requires                        |
+| `dir`       | `Direction`                                                       | —       | Reading direction, the native Radix prop. Required: `<DirectionProvider direction="rtl">` alone does not compile (TS2741) |
+| `children`  | `React.ReactNode`                                                 | —       | Tree of child components                                                                                                  |
+| `...props`  | `React.ComponentProps<typeof Direction.DirectionProvider>`        | —       | `Direction.DirectionProvider` props                                                                                       |
 
 ### `useDirection`
 
@@ -118,7 +119,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 export default function App() {
   return (
     <DirectionProvider dir="rtl">
-      <div dir="rtl" lang="ar">
+      <div dir="rtl">
         {/* The application */}
         <p>Right-to-left content</p>
       </div>

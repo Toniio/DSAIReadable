@@ -9,7 +9,7 @@ import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CaretDownIcon, CheckIcon, CaretUpIcon } from "@phosphor-icons/react"
 
 /**
- * The root of a styled drop-down for picking one option from a list, with groups and rich item content.
+ * The root of a styled dropdown for picking one option from a list, with groups and rich item content.
  *
  * @example
  * <Select>

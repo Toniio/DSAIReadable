@@ -8,7 +8,7 @@ import { SURFACE_OUTLINE } from "@/lib/surface"
 import { CaretDownIcon } from "@phosphor-icons/react"
 
 /**
- * The primary navigation of a site or app: links grouped by category with drop-down panels, inline when `viewport` is false.
+ * The primary navigation of a site or app: links grouped by category with dropdown panels, inline when `viewport` is false.
  *
  * @example
  * <NavigationMenu>

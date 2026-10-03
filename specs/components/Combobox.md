@@ -45,23 +45,27 @@ A text input with autocomplete that picks from a filterable list of options; sup
 
 ## Anatomy
 
-| Slot                               | Role                                        |
-| ---------------------------------- | ------------------------------------------- |
-| `data-slot="combobox-value"`       | Shows the selected value                    |
-| `data-slot="combobox-trigger"`     | Button that opens the popup                 |
-| `data-slot="combobox-clear"`       | Button that clears the selection            |
-| `data-slot="combobox-content"`     | Popup container of the options              |
-| `data-slot="combobox-list"`        | Scrolling list of options                   |
-| `data-slot="combobox-item"`        | A single option                             |
-| `data-slot="combobox-group"`       | A logical group of options                  |
-| `data-slot="combobox-label"`       | Label of a group of options                 |
-| `data-slot="combobox-collection"`  | A data collection                           |
-| `data-slot="combobox-empty"`       | Message shown when nothing matches          |
-| `data-slot="combobox-separator"`   | Visual separator between groups             |
-| `data-slot="combobox-chips"`       | Container of the chips (multiple selection) |
-| `data-slot="combobox-chip"`        | A single chip (a selected value)            |
-| `data-slot="combobox-chip-remove"` | Button that removes a chip                  |
-| `data-slot="combobox-chip-input"`  | Text input inside the chips                 |
+| Slot                               | Role                                                                                                                                                             |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-slot="input-group"`          | Root of `ComboboxInput`: an `InputGroup`, with no `combobox-*` slot of its own                                                                                   |
+| `data-slot="input-group-control"`  | Text field of `ComboboxInput`, an `InputGroupInput` with `role="combobox"`                                                                                       |
+| `data-slot="input-group-addon"`    | `align="inline-end"` area of `ComboboxInput` that holds the trigger and the clear button                                                                         |
+| `data-slot="input-group-button"`   | Trigger of `ComboboxInput`: a `ComboboxTrigger` rendered through `InputGroupButton`, whose slot replaces `combobox-trigger`; hidden while the clear button shows |
+| `data-slot="combobox-value"`       | Shows the selected value                                                                                                                                         |
+| `data-slot="combobox-trigger"`     | Button that opens the popup, when `ComboboxTrigger` is placed on its own; inside `ComboboxInput` it carries `input-group-button`                                 |
+| `data-slot="combobox-clear"`       | Button that clears the selection, rendered while a value is selected                                                                                             |
+| `data-slot="combobox-content"`     | Popup container of the options                                                                                                                                   |
+| `data-slot="combobox-list"`        | Scrolling list of options                                                                                                                                        |
+| `data-slot="combobox-item"`        | A single option                                                                                                                                                  |
+| `data-slot="combobox-group"`       | A logical group of options                                                                                                                                       |
+| `data-slot="combobox-label"`       | Label of a group of options                                                                                                                                      |
+| `data-slot="combobox-collection"`  | A data collection                                                                                                                                                |
+| `data-slot="combobox-empty"`       | Message shown when nothing matches                                                                                                                               |
+| `data-slot="combobox-separator"`   | Visual separator between groups                                                                                                                                  |
+| `data-slot="combobox-chips"`       | Container of the chips (multiple selection)                                                                                                                      |
+| `data-slot="combobox-chip"`        | A single chip (a selected value)                                                                                                                                 |
+| `data-slot="combobox-chip-remove"` | Button that removes a chip                                                                                                                                       |
+| `data-slot="combobox-chip-input"`  | Text input inside the chips                                                                                                                                      |
 
 ## Tokens
 

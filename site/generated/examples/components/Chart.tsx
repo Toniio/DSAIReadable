@@ -12,7 +12,7 @@ import { BarChart, Bar, XAxis } from "recharts"
 const config: ChartConfig = {
   revenue: {
     label: "Revenue",
-    color: "var(--chart-1)",
+    color: "var(--color-chart-1)",
   },
 }
 

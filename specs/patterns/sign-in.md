@@ -111,10 +111,10 @@ export default function SignInPage() {
                 {failed && (
                   <Alert variant="destructive">
                     <WarningCircleIcon />
-                    <AlertTitle>We couldn't sign you in</AlertTitle>
+                    <AlertTitle>We couldn&apos;t sign you in</AlertTitle>
                     <AlertDescription>
-                      That email and password don't match. Check them and try
-                      again.
+                      That email and password don&apos;t match. Check them and
+                      try again.
                     </AlertDescription>
                   </Alert>
                 )}

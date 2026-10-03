@@ -99,7 +99,7 @@ export function ProfileForm({
         {failed && (
           <Alert variant="destructive">
             <WarningCircleIcon />
-            <AlertTitle>We couldn't save your changes</AlertTitle>
+            <AlertTitle>We couldn&apos;t save your changes</AlertTitle>
             <AlertDescription>
               Check your connection and try again.
             </AlertDescription>
