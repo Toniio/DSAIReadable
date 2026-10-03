@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -15,10 +15,13 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
+import { cn } from "@/lib/utils"
 import { FilterInput } from "@/site/foundation-docs/a/filter-input"
 import {
   Code,
   CopyCode,
+  DottedName,
   Fill,
   StatusBadge,
 } from "@/site/foundation-docs/a/token-ui"
@@ -47,6 +50,7 @@ function haystack(row: TokenRow): string {
     row.light,
     row.dark,
     ...(row.classes ?? []),
+    ...(row.chain ?? []),
   ]
     .filter(Boolean)
     .join(" ")
@@ -86,6 +90,22 @@ export function TokensTable({ data }: { data: TokensData }) {
   const [status, setStatus] = useState("all")
   const [query, setQuery] = useState("")
   const [limit, setLimit] = useState(PAGE)
+  /**
+   * The rank of the first row the last "Show" press revealed. The button that
+   * had focus unmounts with the last page, which drops focus to the top of
+   * the document: focus moves to that row instead, so the reader carries on
+   * where the new rows start. The row keeps its tabIndex until a filter
+   * changes: taking it off the focused row would drop focus again.
+   */
+  const [anchor, setAnchor] = useState<number | null>(null)
+  const anchorRow = useRef<HTMLTableRowElement>(null)
+  const pendingFocus = useRef(false)
+
+  useEffect(() => {
+    if (!pendingFocus.current) return
+    pendingFocus.current = false
+    anchorRow.current?.focus()
+  }, [anchor, limit])
 
   const types = [...new Set(data.rows.map((row) => row.type))].sort()
   const needle = query.trim().toLowerCase()
@@ -99,7 +119,16 @@ export function TokensTable({ data }: { data: TokensData }) {
   const visible = rows.slice(0, limit)
 
   /** A filter changed: start again from the first page. */
-  const reset = () => setLimit(PAGE)
+  const reset = () => {
+    setLimit(PAGE)
+    setAnchor(null)
+  }
+
+  const reveal = (next: number) => {
+    pendingFocus.current = true
+    setAnchor(visible.length)
+    setLimit(next)
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -192,15 +221,18 @@ export function TokensTable({ data }: { data: TokensData }) {
           : "."}
       </p>
 
-      <Table className="min-w-4xl">
+      {/* Fixed columns: in an automatic layout, the longest status badge
+          widened its column and the class names broke a letter at a time.
+          A long name wraps after a hyphen. */}
+      <Table className="min-w-4xl table-fixed">
         <TableHeader>
           <TableRow>
             <TableHead>Token</TableHead>
-            <TableHead>CSS variable</TableHead>
-            <TableHead>Tailwind</TableHead>
-            <TableHead>Light</TableHead>
-            <TableHead>Dark</TableHead>
-            <TableHead>Status</TableHead>
+            <TableHead className="w-56">CSS variable</TableHead>
+            <TableHead className="w-48">Tailwind</TableHead>
+            <TableHead className="w-32">Light</TableHead>
+            <TableHead className="w-32">Dark</TableHead>
+            <TableHead className="w-28">Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -211,31 +243,42 @@ export function TokensTable({ data }: { data: TokensData }) {
               </TableCell>
             </TableRow>
           ) : null}
-          {visible.map((row) => (
-            <TableRow key={row.token}>
-              <TableCell className="max-w-xs min-w-48 align-top whitespace-normal">
+          {visible.map((row, index) => (
+            <TableRow
+              key={row.token}
+              ref={index === anchor ? anchorRow : undefined}
+              tabIndex={index === anchor ? -1 : undefined}
+              // Inset: the table's scroll box clips a ring drawn outside the
+              // row, which would leave only its top and bottom edges.
+              className={cn(
+                FOCUS_OUTLINE_RESET,
+                FOCUS_RING,
+                "focus-visible:ring-inset"
+              )}
+            >
+              <TableCell className="align-top whitespace-normal">
                 <div className="flex flex-col items-start gap-1">
-                  <span className="font-mono text-xs font-medium break-all">
-                    {row.token}
+                  <span className="font-mono text-xs font-medium break-words">
+                    <DottedName name={row.token} />
                   </span>
                   <span className="text-xs text-muted-foreground">
                     {row.tier} · {row.type}
                   </span>
                 </div>
               </TableCell>
-              <TableCell className="align-top">
+              <TableCell className="align-top whitespace-normal">
                 {row.tier === "primitive" ? (
                   <Code className="text-muted-foreground">{row.cssVar}</Code>
                 ) : (
-                  <CopyCode value={row.cssVar} />
+                  <CopyCode value={row.cssVar} wrap className="max-w-full" />
                 )}
               </TableCell>
-              <TableCell className="max-w-xs align-top whitespace-normal">
+              <TableCell className="align-top whitespace-normal">
                 {row.classes ? (
-                  <ul className="flex flex-wrap gap-1">
+                  <ul className="flex flex-wrap gap-x-2 gap-y-1">
                     {row.classes.map((value) => (
-                      <li key={value}>
-                        <Code>{value}</Code>
+                      <li key={value} className="flex max-w-full min-w-0">
+                        <CopyCode value={value} wrap />
                       </li>
                     ))}
                   </ul>
@@ -243,14 +286,14 @@ export function TokensTable({ data }: { data: TokensData }) {
                   <span className="text-xs text-muted-foreground">—</span>
                 )}
               </TableCell>
-              <TableCell className="max-w-48 min-w-32 align-top whitespace-normal">
+              <TableCell className="align-top whitespace-normal">
                 <Value
                   row={row}
                   value={row.light}
                   surface={data.surfaces.light}
                 />
               </TableCell>
-              <TableCell className="max-w-48 min-w-32 align-top whitespace-normal">
+              <TableCell className="align-top whitespace-normal">
                 {row.dark !== undefined ? (
                   <Value
                     row={row}
@@ -263,7 +306,7 @@ export function TokensTable({ data }: { data: TokensData }) {
                   </span>
                 )}
               </TableCell>
-              <TableCell className="align-top">
+              <TableCell className="align-top whitespace-normal">
                 {row.tier === "primitive" ? (
                   <span className="flex flex-col items-start gap-1">
                     <Badge variant="secondary">private</Badge>
@@ -272,10 +315,15 @@ export function TokensTable({ data }: { data: TokensData }) {
                 ) : row.status === "active" ? (
                   <span className="text-xs text-muted-foreground">active</span>
                 ) : (
-                  <StatusBadge
-                    status={row.status}
-                    replacement={row.replacement}
-                  />
+                  // The replacement goes under the badge, which never wraps.
+                  <span className="flex flex-col items-start gap-1">
+                    <StatusBadge status={row.status} />
+                    {row.replacement ? (
+                      <span className="text-xs text-muted-foreground">
+                        Use <Code>{row.replacement}</Code>
+                      </span>
+                    ) : null}
+                  </span>
                 )}
               </TableCell>
             </TableRow>
@@ -288,14 +336,14 @@ export function TokensTable({ data }: { data: TokensData }) {
           <Button
             type="button"
             variant="outline"
-            onClick={() => setLimit(limit + PAGE)}
+            onClick={() => reveal(limit + PAGE)}
           >
             Show {Math.min(PAGE, rows.length - visible.length)} more
           </Button>
           <Button
             type="button"
             variant="ghost"
-            onClick={() => setLimit(rows.length)}
+            onClick={() => reveal(rows.length)}
           >
             Show all {rows.length}
           </Button>

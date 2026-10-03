@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 
 import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
-import { LiveExample } from "@/site/foundation-docs/b/live-example"
 import {
   MotionDemo,
   type MotionRow,
@@ -26,7 +25,6 @@ export const metadata: Metadata = {
 const SECTIONS = [
   { id: "duration-scale", label: "Duration scale" },
   { id: "easing-curves", label: "Easing curves" },
-  { id: "example", label: "Example" },
 ]
 
 /** The token the other axis is held at while one axis varies. */
@@ -52,7 +50,7 @@ export default function MotionPage() {
     tokenByName(HELD_DURATION) ?? durations[durations.length - 1]
 
   return (
-    <FoundationPage slug="motion" sections={SECTIONS} advice={["motion"]}>
+    <FoundationPage slug="motion" sections={SECTIONS}>
       <DocSection
         id="duration-scale"
         title="Duration scale"
@@ -86,14 +84,6 @@ export default function MotionPage() {
           label="the easings"
           rows={easings.map((entry) => row(entry, heldDuration, entry))}
         />
-      </DocSection>
-
-      <DocSection
-        id="example"
-        title="Example"
-        description="The spec's hover transition, live: point at the card."
-      >
-        <LiveExample id="motion-1" title="motion.md" />
       </DocSection>
     </FoundationPage>
   )

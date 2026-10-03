@@ -332,18 +332,18 @@ and the README's are removed together.
 
 ## What CI checks
 
-| Job                 | Command                                                                                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens-validate`   | `npm run tokens-validate`                                                                                                                               |
-| `typecheck`         | `npm run typecheck:all`                                                                                                                                 |
-| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                                                                            |
-| `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                                                                           |
-| `spec-sections`     | `npm run specs:validate`, `skills:validate`, `agentskills validate` (`skills-ref` 0.1.1)                                                                |
-| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                                                                             |
-| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                                                                                  |
-| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`, and the keyboard stress run on a Dependabot PR that bumps a primitive |
-| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test`                                                            |
-| `site`              | `npm run site:check` (the examples copied from the specs are fresh, the consumer lint passes on `site/`), `site:build` (every page prerenders)          |
+| Job                 | Command                                                                                                                                                                                       |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens-validate`   | `npm run tokens-validate`                                                                                                                                                                     |
+| `typecheck`         | `npm run typecheck:all`                                                                                                                                                                       |
+| `lint`              | `npm run lint`, `lint:language`, `prettier --check`, `knip`, `release:check`                                                                                                                  |
+| `index-schema`      | `npm run index:validate`, `shadcn:retokenize`                                                                                                                                                 |
+| `spec-sections`     | `npm run specs:validate`, `skills:validate`, `agentskills validate` (`skills-ref` 0.1.1)                                                                                                      |
+| `context-freshness` | `npm run generate-context`, then fails if the tree is dirty                                                                                                                                   |
+| `mcp-test`          | `npm run mcp:test`, `mcp:test-package`                                                                                                                                                        |
+| `component-tests`   | `npm run test:lint-coverage`, `test:components` (Chromium, cached), `evals:test`, and the keyboard stress run on a Dependabot PR that bumps a primitive                                       |
+| `registry`          | `registry:check`, shadcn validation, `registry:test-install`, `shadcn:drift`, `release:test`                                                                                                  |
+| `site`              | `npm run site:check` (the examples copied from the specs are fresh, the consumer lint passes on `site/`, every focus ring it composes has a solid part), `site:build` (every page prerenders) |
 
 The `Evals` workflow runs apart, only when started by hand (each run costs API credits), never on a pull request: the conformance harness with a Claude agent, with and without the MCP server, its reports uploaded as an artifact ([`evals/README.md`](./evals/README.md)).
 

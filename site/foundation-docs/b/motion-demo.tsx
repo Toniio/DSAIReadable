@@ -21,8 +21,10 @@ export interface MotionRow {
 
 /**
  * A square that crosses its track when Play is pressed, timed by the
- * row's tokens. It moves with the tw-animate-css entrance, which the base
- * styles reduce to a fade when the reader asks for less motion.
+ * row's tokens. It moves with the tw-animate-css entrance, whose movement the
+ * base styles drop when the reader asks for less motion: only then does it
+ * fade, so that with motion the square stays opaque and the curve shows.
+ * The chart color keeps 3:1 on the track in both modes.
  */
 export function MotionDemo({
   rows,
@@ -81,7 +83,7 @@ export function MotionDemo({
                 className={cn(
                   "flex w-full justify-end",
                   run
-                    ? "animate-in fade-in slide-in-from-left-full"
+                    ? "animate-in slide-in-from-left-full motion-reduce:fade-in"
                     : "-translate-x-full"
                 )}
                 style={
@@ -91,7 +93,7 @@ export function MotionDemo({
                   } as CSSProperties
                 }
               >
-                <div className="size-6 bg-primary" />
+                <div className="size-6 bg-chart-1" />
               </div>
             </div>
           </li>

@@ -228,8 +228,9 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
       - run: npm ci
-      # The specs' examples copied into site/generated/ match the specs, and
-      # every file of the site passes the lint a consuming project runs.
+      # The specs' examples copied into site/generated/ match the specs,
+      # every file of the site passes the lint a consuming project runs, and
+      # every focus ring the site composes has a solid part (focus.md).
       - run: npm run site:check
       # Every page of the documentation site prerenders from the repository's
       # files: a spec, a token or a context file it cannot read fails here.

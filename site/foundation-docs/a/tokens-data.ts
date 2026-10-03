@@ -1,5 +1,9 @@
-import { tokenClasses } from "@/site/foundation-docs/a/token-classes"
-import { tokenByName, tokens } from "@/site/lib/tokens"
+import {
+  primitiveName,
+  reads,
+  tokenClasses,
+} from "@/site/foundation-docs/a/token-classes"
+import { tokenByName, tokens, type Token } from "@/site/lib/tokens"
 
 /** One token of the "All tokens" table: only what the table shows. */
 export interface TokenRow {
@@ -13,6 +17,11 @@ export interface TokenRow {
   light: string
   /** Absent when dark mode changes nothing. */
   dark?: string
+  /**
+   * The tokens it reads, down to the primitive, in either mode: a search for
+   * `mist.950` finds the semantic tokens and the aliases that resolve to it.
+   */
+  chain?: string[]
 }
 
 export interface TokensData {
@@ -24,6 +33,23 @@ export interface TokensData {
 /** The table lists what components read first, the private tier last. */
 const TIER_ORDER: TokenRow["tier"][] = ["semantic", "component", "primitive"]
 
+/** The references a token follows to its value, in both modes, short names included. */
+function chain(entry: Token): string[] {
+  const found = new Set<string>()
+  for (const mode of ["light", "dark"] as const) {
+    let current: Token | undefined = entry
+    // A reference names a token of a lower tier: the walk ends at a literal.
+    for (let depth = 0; current && depth < 3; depth++) {
+      const next = reads(current, mode)
+      if (!next) break
+      found.add(next)
+      if (next.startsWith("primitive.")) found.add(primitiveName(next))
+      current = tokenByName(next)
+    }
+  }
+  return [...found]
+}
+
 /** Every token of tokens.manifest.json, compacted for the client table. */
 export function tokensData(): TokensData {
   const page = tokenByName("color.background.default")
@@ -33,6 +59,7 @@ export function tokensData(): TokensData {
   return {
     rows: ordered.map((entry) => {
       const classes = tokenClasses(entry)
+      const reached = chain(entry)
       return {
         token: entry.token,
         tier: entry.tier,
@@ -46,6 +73,7 @@ export function tokensData(): TokensData {
         entry.value.dark !== entry.value.light
           ? { dark: entry.value.dark }
           : {}),
+        ...(reached.length ? { chain: reached } : {}),
       }
     }),
     surfaces: {

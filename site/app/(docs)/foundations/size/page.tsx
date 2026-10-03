@@ -24,7 +24,7 @@ export default function SizePage() {
   const [target] = tokenGroup("size.target")
 
   return (
-    <FoundationPage slug="size" sections={SECTIONS} advice={["size"]}>
+    <FoundationPage slug="size" sections={SECTIONS}>
       <DocSection
         id="target"
         title="Minimum target"
@@ -69,7 +69,7 @@ export default function SizePage() {
                 </Button>
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 border border-dashed border-primary"
+                  className="pointer-events-none absolute inset-0 border border-dashed border-foreground"
                 />
               </div>
             </div>
@@ -88,7 +88,7 @@ export default function SizePage() {
                   <Checkbox id="size-terms" defaultChecked />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -inset-x-3 -inset-y-2 border border-dashed border-primary"
+                    className="pointer-events-none absolute -inset-x-3 -inset-y-2 border border-dashed border-foreground"
                   />
                 </div>
                 <Label htmlFor="size-terms">Email me updates</Label>

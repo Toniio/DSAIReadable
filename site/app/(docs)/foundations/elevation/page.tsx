@@ -23,7 +23,7 @@ export default function ElevationPage() {
   const levels = tokenGroup("elevation")
 
   return (
-    <FoundationPage slug="elevation" sections={SECTIONS} advice={["elevation"]}>
+    <FoundationPage slug="elevation" sections={SECTIONS}>
       <DocSection
         id="levels"
         title="Levels"

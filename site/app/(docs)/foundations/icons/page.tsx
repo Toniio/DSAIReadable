@@ -74,7 +74,13 @@ export default function IconsPage() {
 
   return (
     <FoundationPage slug="icons" sections={SECTIONS}>
-      <DocSection id="rules" title="Rules" description={rules.description}>
+      {/* The bullets are the rules: the summary and the rule paragraph of
+          icons.json say the same again, so the page shows neither. */}
+      <DocSection
+        id="rules"
+        title="Rules"
+        description="The icon rules, as agents read them from the MCP server."
+      >
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-3 border p-4">
             <ul className="flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed">
@@ -82,9 +88,6 @@ export default function IconsPage() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              {rules.rule}
-            </p>
             <p className="text-xs text-muted-foreground">
               Browse the library on{" "}
               <Link href={rules.catalog_url} className={LINK}>

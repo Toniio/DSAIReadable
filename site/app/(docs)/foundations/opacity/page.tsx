@@ -57,7 +57,7 @@ export default function OpacityPage() {
   const active = scale.filter((entry) => entry.status === "active")
 
   return (
-    <FoundationPage slug="opacity" sections={SECTIONS} advice={["opacity"]}>
+    <FoundationPage slug="opacity" sections={SECTIONS}>
       <DocSection
         id="tokens"
         title="Tokens"

@@ -40,7 +40,6 @@ export function EvalChart({ data }: { data: EvalBar[] }) {
         aria-label="Eval scores by recorded run, in percent"
         data={data}
         layout="vertical"
-        margin={{ left: 0, right: 8 }}
       >
         <CartesianGrid horizontal={false} />
         <XAxis
@@ -51,15 +50,20 @@ export function EvalChart({ data }: { data: EvalBar[] }) {
           tickLine={false}
           axisLine={false}
         />
+        {/* Sized to its longest label: a fixed width in pixels would wrap
+            `MCP + skills · 0.1.1` mid-name at one font size and waste room at
+            another. */}
         <YAxis
           type="category"
           dataKey="run"
-          width={120}
+          width="auto"
           tickLine={false}
           axisLine={false}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
-        <ChartLegend content={<ChartLegendContent />} />
+        {/* Wraps whole entries on a phone: without it each label breaks
+            inside itself, `Conformance` over `(%)`. */}
+        <ChartLegend content={<ChartLegendContent className="flex-wrap" />} />
         {SERIES.map((key) => (
           <Bar key={key} dataKey={key} fill={`var(--color-${key})`} />
         ))}

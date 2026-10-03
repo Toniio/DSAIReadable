@@ -111,6 +111,7 @@ export function Example() {
  * after `openDelay`.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     { kind: "select", name: "side", options: SIDES, default: "bottom" },

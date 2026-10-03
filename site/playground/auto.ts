@@ -21,6 +21,18 @@ export interface AutoStory {
   controls?: Control[]
   /** Props always passed, not editable: an accessible name, a size for a shape. */
   fixed?: Args
+  /**
+   * The values of a prop that draw an icon alone (Button's `icon-*` sizes):
+   * the story then renders a Phosphor `PlusIcon` in place of the text child,
+   * named by `label` through `aria-label`, as the spec requires.
+   */
+  iconOnly?: { prop: string; match: RegExp; label: string }
+  /**
+   * Where the text child links to when the `asChild` control is on (Badge):
+   * the story then renders it as an `<a>`. A Badge's hover classes apply to
+   * a link only (`[a]:hover:`), and only a link takes focus.
+   */
+  link?: string
 }
 
 const disabled: Control = { kind: "boolean", name: "disabled", default: false }
@@ -36,7 +48,8 @@ export const AUTO: Record<string, AutoStory> = {
     export: "Badge",
     load: () => import("@/components/ui/badge"),
     children: "Badge",
-    props: ["variant"],
+    props: ["variant", "asChild"],
+    link: "/releases",
   },
   Button: {
     export: "Button",
@@ -44,6 +57,7 @@ export const AUTO: Record<string, AutoStory> = {
     children: "Button",
     props: ["variant", "size"],
     controls: [disabled, invalid],
+    iconOnly: { prop: "size", match: /^icon/, label: "Add" },
   },
   Checkbox: {
     export: "Checkbox",
@@ -83,7 +97,12 @@ export const AUTO: Record<string, AutoStory> = {
         options: ["text", "email", "number", "search", "tel", "url", "file"],
         default: "text",
       },
-      { kind: "text", name: "placeholder", default: "name@example.com" },
+      {
+        kind: "text",
+        name: "placeholder",
+        default: "name@example.com",
+        always: true,
+      },
       disabled,
       invalid,
     ],
@@ -107,15 +126,31 @@ export const AUTO: Record<string, AutoStory> = {
   PasswordInput: {
     export: "PasswordInput",
     load: () => import("@/components/ui/password-input"),
-    props: ["placeholder"],
-    controls: [disabled, invalid],
+    controls: [
+      {
+        kind: "text",
+        name: "placeholder",
+        default: "At least 12 characters",
+        always: true,
+      },
+      disabled,
+      invalid,
+    ],
     fixed: { "aria-label": "Password" },
   },
   Progress: {
     export: "Progress",
     load: () => import("@/components/ui/progress"),
     controls: [
-      { kind: "number", name: "value", default: 60, min: 0, max: 100, step: 5 },
+      {
+        kind: "number",
+        name: "value",
+        default: 60,
+        min: 0,
+        max: 100,
+        step: 5,
+        always: true,
+      },
     ],
     fixed: { "aria-label": "Upload progress", className: "w-64" },
   },
@@ -148,8 +183,16 @@ export const AUTO: Record<string, AutoStory> = {
   Textarea: {
     export: "Textarea",
     load: () => import("@/components/ui/textarea"),
-    props: ["placeholder", "disabled"],
-    controls: [invalid],
+    props: ["disabled"],
+    controls: [
+      {
+        kind: "text",
+        name: "placeholder",
+        default: "What should the team know before the review?",
+        always: true,
+      },
+      invalid,
+    ],
     fixed: { "aria-label": "Message", className: "w-80" },
   },
   Toggle: {
@@ -159,6 +202,17 @@ export const AUTO: Record<string, AutoStory> = {
     props: ["variant", "size", "disabled"],
     controls: [{ kind: "boolean", name: "defaultPressed", default: false }],
   },
+}
+
+/** Whether these args draw the story's icon alone: `size="icon-sm"`. */
+export function isIconOnly(story: AutoStory, args: Args): boolean {
+  const rule = story.iconOnly
+  return rule !== undefined && rule.match.test(String(args[rule.prop] ?? ""))
+}
+
+/** Whether these args draw the story's text child as a link: `asChild` on. */
+export function isLink(story: AutoStory, args: Args): boolean {
+  return story.link !== undefined && args.asChild === true
 }
 
 /** The component an auto story renders, once its module is loaded. */

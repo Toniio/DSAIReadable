@@ -10,6 +10,7 @@ import {
 } from "@phosphor-icons/react/ssr"
 import type { Icon } from "@phosphor-icons/react"
 
+import { headingVariants } from "@/components/ui/heading"
 import { cn } from "@/lib/utils"
 import { LINK } from "@/site/ui/link"
 
@@ -30,8 +31,8 @@ export function Rules({
   targetSize,
   divergences,
 }: {
-  /** The `size.target.min` token, resolved. */
-  targetSize?: string
+  /** The `size.target.min` token, resolved to CSS pixels. */
+  targetSize?: number
   divergences: { total: number; components: number }
 }) {
   const rules: Rule[] = [
@@ -41,8 +42,10 @@ export function Rules({
       body: (
         <>
           Every color, space, radius, shadow and duration comes from a semantic
-          token, through its Tailwind class or its CSS variable. Never a literal
-          value, never a primitive token.
+          token or a shadcn/ui alias (
+          <code className={cn(CODE, "whitespace-nowrap")}>--primary</code>),
+          through its Tailwind class or its CSS variable. Never a literal value,
+          never a primitive token.
         </>
       ),
       link: { href: "/foundations/tokens/", label: "All tokens" },
@@ -78,7 +81,8 @@ export function Rules({
         <>
           Dark mode is the <code className={CODE}>.dark</code> class on{" "}
           <code className={CODE}>&lt;html&gt;</code>, set by the application,
-          never by a media query. Every token has its dark value.
+          never by a media query. Every color token resolves in both modes: the
+          dark context redefines only the ones that change.
         </>
       ),
       link: { href: "/foundations/color/", label: "Color" },
@@ -91,8 +95,8 @@ export function Rules({
           Contrast in light and dark, a visible focus indicator on every control
           {targetSize ? (
             <>
-              , and pointer targets of at least{" "}
-              <code className={CODE}>{targetSize}</code>
+              , and pointer targets of at least {targetSize} by {targetSize} CSS
+              pixels (<code className={CODE}>size.target.min</code>)
             </>
           ) : null}
           .
@@ -119,7 +123,7 @@ export function Rules({
       {rules.map((rule) => (
         <li key={rule.title} className="flex flex-col gap-3 bg-background p-5">
           <rule.icon aria-hidden="true" className="size-5 text-primary" />
-          <p className="font-heading text-sm font-semibold">{rule.title}</p>
+          <p className={headingVariants({ level: 4 })}>{rule.title}</p>
           <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
             {rule.body}
           </p>

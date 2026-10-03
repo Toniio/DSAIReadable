@@ -27,6 +27,12 @@
 @custom-variant focus-within (&:focus-within, &:is([data-force-state="focus"] *));
 @custom-variant active (&:active, &:is([data-force-state="active"] *));
 
+/* A panel that shows the light mode inside a dark page (the Light and Dark
+   panels of the foundations) resets the semantic variables to their light
+   values; the dark: variant must stop at it too. Same specificity as the
+   design system's own dark variant: the :where() part adds none. */
+@custom-variant dark (&:is(.dark *):where(:not([data-theme-scope="light"], [data-theme-scope="light"] *)));
+
 /* Three components draw their focus through an arbitrary has-[…:focus-visible]
    variant, which the redefinitions above do not reach: the group of an
    InputGroup, a Questionnaire choice, a Field choice card. Under a forced

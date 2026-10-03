@@ -4,25 +4,32 @@ import type { ReactNode } from "react"
 export type Args = Record<string, string | number | boolean>
 
 /** A control of the playground, and the prop it drives. */
-export type Control =
+export type Control = (
   | {
       kind: "select"
-      name: string
       options: string[]
       default: string
       /** The options are numbers written as text (`level` 1 to 4): the prop gets the number. */
       numeric?: boolean
     }
-  | { kind: "boolean"; name: string; default: boolean }
-  | { kind: "text"; name: string; default: string }
+  | { kind: "boolean"; default: boolean }
+  | { kind: "text"; default: string }
   | {
       kind: "number"
-      name: string
       default: number
       min: number
       max: number
       step?: number
     }
+) & {
+  name: string
+  /**
+   * The default is the story's, not the component's (a placeholder, a
+   * progress value): the code writes the prop even when it is unchanged, so
+   * the code renders what the canvas shows.
+   */
+  always?: boolean
+}
 
 /**
  * How the canvas frames a story: centered on a dotted stage, laid out with
@@ -48,6 +55,12 @@ export interface Story {
    * a dialog, a menu, a toast. A `fullscreen` story never is.
    */
   grid?: boolean
+  /**
+   * The args the Anatomy section draws the story with, instead of the spec's
+   * example: `{ open: true }` for an overlay, whose example shows only its
+   * trigger.
+   */
+  anatomy?: Args
 }
 
 /** The interaction states a canvas can force: Rest is none. */

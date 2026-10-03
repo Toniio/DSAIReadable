@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import { LockSimpleIcon } from "@phosphor-icons/react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -32,6 +32,7 @@ import { FilterInput } from "@/site/foundation-docs/a/filter-input"
 import {
   Code,
   CopyCode,
+  DottedName,
   DualFill,
   Fill,
   StatusBadge,
@@ -110,18 +111,42 @@ function Values({
   )
 }
 
-function Classes({ classes }: { classes: string[] }) {
+/** The classes of a color; in a table column, `wrap` keeps each one whole. */
+function Classes({
+  classes,
+  wrap = false,
+}: {
+  classes: string[]
+  wrap?: boolean
+}) {
   if (classes.length === 0)
     return <p className="text-xs text-muted-foreground">No utility class</p>
   return (
     <ul className="flex flex-wrap gap-x-2 gap-y-1">
       {classes.map((value) => (
-        <li key={value} className="flex min-w-0">
-          <CopyCode value={value} />
+        <li key={value} className="flex max-w-full min-w-0">
+          <CopyCode value={value} wrap={wrap} />
         </li>
       ))}
     </ul>
   )
+}
+
+/**
+ * A color value that wraps after its opening parenthesis or a comma, never
+ * inside a number: a translucent white breaks into its channels and its
+ * alpha in a narrow tile or column, not mid-digit.
+ */
+function ColorValue({ value }: { value: string }) {
+  return value
+    .replace(/,\s+/g, ",")
+    .split(/(?<=[(,])/)
+    .map((part, index) => (
+      <Fragment key={index}>
+        {index ? <wbr /> : null}
+        {part}
+      </Fragment>
+    ))
 }
 
 function ColorCard({
@@ -178,8 +203,10 @@ function ValueCell({
         surface={surface}
         className="size-6 shrink-0 border"
       />
-      <div className="flex min-w-0 flex-col font-mono text-xs">
-        <span className="break-all">{value}</span>
+      <div className="flex min-w-0 flex-col font-mono text-xs whitespace-normal">
+        <span className="break-words">
+          <ColorValue value={value} />
+        </span>
         {reference ? (
           <span className="text-muted-foreground">{reference}</span>
         ) : null}
@@ -244,7 +271,7 @@ function ColorTable({
               </TableCell>
             ))}
             <TableCell className="align-top whitespace-normal">
-              <Classes classes={color.classes} />
+              <Classes classes={color.classes} wrap />
             </TableCell>
           </TableRow>
         ))}
@@ -291,29 +318,35 @@ function AliasTable({
   mode: Mode
   surfaces: Surfaces
 }) {
+  // Fixed columns, as in ColorTable: in an automatic layout, the Reads
+  // column shrank to a few letters a line.
   return (
-    <Table>
+    <Table className="min-w-2xl table-fixed">
       <TableHeader>
         <TableRow>
-          <TableHead>CSS variable</TableHead>
+          <TableHead className="w-56">CSS variable</TableHead>
           <TableHead>Reads</TableHead>
           {shown(mode).map((item) => (
-            <TableHead key={item.value}>{item.label}</TableHead>
+            <TableHead key={item.value} className="w-36">
+              {item.label}
+            </TableHead>
           ))}
-          <TableHead>Classes</TableHead>
+          <TableHead className="w-56">Classes</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {aliases.map((alias) => (
           <TableRow key={alias.cssVar}>
-            <TableCell className="align-top">
-              <CopyCode value={alias.cssVar} />
+            <TableCell className="align-top whitespace-normal">
+              <CopyCode value={alias.cssVar} wrap className="max-w-full" />
             </TableCell>
             <TableCell className="align-top whitespace-normal">
-              <span className="font-mono text-xs break-all">{alias.reads}</span>
+              <span className="font-mono text-xs break-words">
+                <DottedName name={alias.reads} />
+              </span>
             </TableCell>
             {shown(mode).map((item) => (
-              <TableCell key={item.value} className="w-36 align-top">
+              <TableCell key={item.value} className="align-top">
                 <ValueCell
                   value={item.value === "light" ? alias.light : alias.dark}
                   surface={surfaces[item.value]}
@@ -321,7 +354,7 @@ function AliasTable({
               </TableCell>
             ))}
             <TableCell className="align-top whitespace-normal">
-              <Classes classes={alias.classes} />
+              <Classes classes={alias.classes} wrap />
             </TableCell>
           </TableRow>
         ))}
@@ -344,8 +377,13 @@ function UsedBy({ step }: { step: PrimitiveStep }) {
   )
 }
 
-function readers(count: number): string {
-  if (count === 0) return "Unused"
+/**
+ * How many semantic tokens read a step. A step no token reads is either
+ * reserved, with the reason in its description, or due for deletion.
+ */
+function readers(step: PrimitiveStep): string {
+  const count = step.usedBy.length
+  if (count === 0) return step.status === "reserved" ? "Reserved" : "Unused"
   return count === 1 ? "1 token" : `${count} tokens`
 }
 
@@ -374,11 +412,9 @@ function StepTile({
           />
           <span className="text-xs font-medium">{step.step}</span>
           <span className="font-mono text-xs break-words text-muted-foreground">
-            {step.value}
+            <ColorValue value={step.value} />
           </span>
-          <span className="text-xs text-muted-foreground">
-            {readers(step.usedBy.length)}
-          </span>
+          <span className="text-xs text-muted-foreground">{readers(step)}</span>
         </div>
       </TooltipTrigger>
       <TooltipContent side="bottom">
@@ -388,6 +424,11 @@ function StepTile({
               ? `${step.name} is read by`
               : `${step.name} is read by no semantic token`}
           </span>
+          {step.usedBy.length === 0 && step.description ? (
+            <span>
+              <Ticks>{step.description}</Ticks>
+            </span>
+          ) : null}
           {step.usedBy.length ? (
             <ul className="flex flex-col font-mono">
               {step.usedBy.map((name) => (
@@ -460,7 +501,7 @@ function PaletteTitle({
   children: string
 }) {
   return (
-    <div className="flex shrink-0 items-baseline gap-2 md:w-28 md:flex-col md:gap-0.5 md:p-1">
+    <div className="flex shrink-0 items-baseline gap-2 md:w-32 md:flex-col md:gap-0.5 md:p-1">
       <Heading level={3} id={`palette-${id}`} className="scroll-mt-20">
         {children}
       </Heading>
@@ -565,7 +606,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
       <DocSection
         id="semantic"
         title="Semantic colors"
-        description="The colors components read, by role. A class name also works after the other color prefixes: bg-, text-, border-, fill-, stroke-."
+        description="The colors components read, by role, with the class each one is written with. bg-, border-, ring-, fill- and stroke- read the token the class names; text-primary, text-destructive, text-success and text-warning read the matching text token instead (color.text.*), so a label keeps 4.5:1."
       >
         {groups.length === 0 ? <NoMatch query={query} /> : null}
         {groups.map((group) => (
@@ -635,7 +676,8 @@ export function ColorExplorer({ data }: { data: ColorData }) {
           <AlertTitle>Private: Tier 1</AlertTitle>
           <AlertDescription>
             Never referenced in a component. Use the semantic token that reads
-            the step: hover or focus a step to see which ones.
+            the step: hover or focus a step, or switch to the Table view, to see
+            which ones.
           </AlertDescription>
         </Alert>
         {palettes.length === 0 ? <NoMatch query={query} /> : null}

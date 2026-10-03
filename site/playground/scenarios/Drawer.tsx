@@ -195,6 +195,7 @@ ${filters}
  * by hand.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     {

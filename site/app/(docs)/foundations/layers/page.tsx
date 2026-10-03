@@ -89,7 +89,15 @@ export default function LayersPage() {
           </>
         }
       >
-        <div className="relative isolate h-60 overflow-hidden border bg-muted">
+        {/* Each card steps down by less than its height, so it visibly
+            covers part of the one before, but not the value it prints;
+            the frame fits the last card. */}
+        <div
+          className="relative isolate overflow-hidden border bg-muted"
+          style={{
+            height: `calc(var(--space-scale-5) * ${layers.length + 1} + var(--space-scale-7))`,
+          }}
+        >
           {[...layers].reverse().map((entry) => {
             const index = layers.indexOf(entry)
             return (
@@ -98,7 +106,7 @@ export default function LayersPage() {
                 className="absolute flex h-7 w-44 items-center justify-between gap-2 border bg-popover px-2 text-popover-foreground shadow-md"
                 style={{
                   zIndex: `var(${entry.cssVar})`,
-                  top: `calc(var(--space-scale-6) * ${index} + var(--space-scale-4))`,
+                  top: `calc(var(--space-scale-5) * ${index} + var(--space-scale-5))`,
                   left: `calc((100% - var(--space-scale-44) - var(--space-scale-8)) * ${index} / ${top} + var(--space-scale-4))`,
                 }}
               >

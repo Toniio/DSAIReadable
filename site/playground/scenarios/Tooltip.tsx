@@ -59,6 +59,7 @@ function CopyButton({ args }: { args: Args }) {
  * on the canvas; the code leaves it out, since hover and focus open it.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     { kind: "text", name: "label", default: "Copy" },

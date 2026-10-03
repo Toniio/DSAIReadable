@@ -10,7 +10,6 @@ import {
 } from "@/site/lib/components"
 import { plain } from "@/site/lib/markdown"
 import { componentsNav } from "@/site/lib/nav"
-import { DocsPage } from "@/site/ui/docs-page"
 import { PageHeader } from "@/site/ui/page-header"
 
 export const metadata: Metadata = {
@@ -44,17 +43,18 @@ export default function ComponentsPage() {
       })),
     }))
 
+  // The index frames the page itself: its "On this page" follows the filter.
   return (
-    <DocsPage
+    <ComponentIndex
       nav={componentsNav()}
-      navLabel="Components"
-      toc={groups.map((group) => ({ id: group.id, label: group.category }))}
-    >
-      <PageHeader
-        title="Components"
-        lead={`${all.length} components, grouped by category: ${statuses.join(", ")}. Each card draws its spec's example, live.`}
-      />
-      <ComponentIndex groups={groups} total={all.length} />
-    </DocsPage>
+      header={
+        <PageHeader
+          title="Components"
+          lead={`${all.length} components, grouped by category: ${statuses.join(", ")}. Each card draws its spec's example, live.`}
+        />
+      }
+      groups={groups}
+      total={all.length}
+    />
   )
 }

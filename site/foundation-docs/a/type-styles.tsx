@@ -16,9 +16,11 @@ import { cn } from "@/lib/utils"
 import { CopyCode, Ticks } from "@/site/foundation-docs/a/token-ui"
 import type {
   HeadingRow,
+  TextStyle,
   TypeData,
   TypeRow,
 } from "@/site/foundation-docs/a/type-data"
+import { CopyButton } from "@/site/ui/copy-button"
 import { DocSection } from "@/site/ui/doc-section"
 
 type Display = "table" | "preview"
@@ -52,6 +54,8 @@ const SPECIMEN: Record<string, string> = {
   "tracking-wide": "tracking-wide",
   "tracking-wider": "tracking-wider",
   "tracking-widest": "tracking-widest",
+  "text-foreground": "text-foreground",
+  "text-muted-foreground": "text-muted-foreground",
 }
 
 const PANGRAM = "The quick brown fox jumps over the lazy dog"
@@ -60,6 +64,126 @@ const PARAGRAPH =
 
 function specimen(className: string): string {
   return SPECIMEN[className] ?? ""
+}
+
+/** The first word of a fact: `base (16px)` → `base`. */
+function step(fact: string | undefined): string | undefined {
+  return fact?.split(" ")[0]
+}
+
+/**
+ * The classes a style's specimen draws: the spec's own sample when a screen
+ * writes one, else the classes its facts name (a component draws the style).
+ */
+function styleClasses(style: TextStyle): string {
+  const names = style.classes
+    ? style.classes.split(" ")
+    : [
+        `text-${step(style.size)}`,
+        `leading-${step(style.lineHeight)}`,
+        `font-${step(style.weight)}`,
+        `tracking-${step(style.tracking)}`,
+        `font-${step(style.family)}`,
+      ]
+  return cn(names.map(specimen))
+}
+
+/** A style's classes to copy, wrapped rather than cut: a style is a whole line. */
+function StyleClasses({ style }: { style: TextStyle }) {
+  if (!style.classes)
+    return (
+      <span className="text-xs text-muted-foreground">
+        None: the component draws it
+      </span>
+    )
+  return (
+    <span className="flex items-start gap-0.5">
+      <code className="min-w-0 bg-muted px-1 py-0.5 font-mono text-xs break-words">
+        {style.classes}
+      </code>
+      <CopyButton
+        value={style.classes}
+        label={`Copy the ${style.name} classes`}
+      />
+    </span>
+  )
+}
+
+function TextStyles({
+  styles,
+  display,
+}: {
+  styles: TextStyle[]
+  display: Display
+}) {
+  const dash = (value: string | undefined) => value ?? "—"
+  if (display === "table")
+    return (
+      <Table className="min-w-3xl table-fixed">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-36">Name</TableHead>
+            <TableHead>Classes</TableHead>
+            <TableHead className="w-28">Size</TableHead>
+            <TableHead className="w-32">Line height</TableHead>
+            <TableHead className="w-28">Weight</TableHead>
+            <TableHead className="w-28">Letter spacing</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {styles.map((style) => (
+            <TableRow key={style.name}>
+              <TableCell className="align-top whitespace-normal">
+                <span className="flex flex-col gap-0.5">
+                  <span className="font-medium">{style.name}</span>
+                  <span className="text-muted-foreground">
+                    <Ticks>{style.use}</Ticks>
+                  </span>
+                </span>
+              </TableCell>
+              <TableCell className="align-top whitespace-normal">
+                <StyleClasses style={style} />
+              </TableCell>
+              <TableCell className="align-top font-mono whitespace-normal">
+                {dash(style.size)}
+              </TableCell>
+              <TableCell className="align-top font-mono whitespace-normal">
+                {dash(style.lineHeight)}
+              </TableCell>
+              <TableCell className="align-top font-mono whitespace-normal">
+                {dash(style.weight)}
+              </TableCell>
+              <TableCell className="align-top font-mono whitespace-normal">
+                {dash(style.tracking)}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    )
+  return (
+    <ul className="flex flex-col divide-y border">
+      {styles.map((style) => (
+        <li
+          key={style.name}
+          className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-6"
+        >
+          <div className="flex shrink-0 flex-col items-start gap-1 sm:w-64">
+            <span className="text-xs font-medium">{style.name}</span>
+            <StyleClasses style={style} />
+            <span className="font-mono text-xs text-muted-foreground">
+              {[style.size, style.lineHeight, style.weight, style.tracking]
+                .filter(Boolean)
+                .join(" · ")}
+            </span>
+          </div>
+          <p className={cn("min-w-0 flex-1 break-words", styleClasses(style))}>
+            {PANGRAM}
+          </p>
+        </li>
+      ))}
+    </ul>
+  )
 }
 
 /** A table of type tokens, with the columns each kind needs. */
@@ -305,6 +429,14 @@ export function TypeStyles({ data }: { data: TypeData }) {
           keys and editorial text.
         </p>
       </div>
+
+      <DocSection
+        id="text-styles"
+        title="Text styles"
+        description="The spec's canonical styles: a size, a line height, a weight and a spacing written together. Every one is in the mono family, which html applies. A style a component draws takes no class: write the text, not the style."
+      >
+        <TextStyles styles={data.styles} display={display} />
+      </DocSection>
 
       <DocSection
         id="families"

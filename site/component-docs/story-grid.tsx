@@ -21,8 +21,27 @@ const PROP_STATES: { prop: string; label: string; value: Args[string] }[] = [
   { prop: "defaultPressed", label: "Pressed", value: true },
 ]
 
-function stateCells(controls: Control[], states: ForcedState[]): GridCell[] {
-  const base = resolveArgs(controls, defaultArgs(controls))
+/**
+ * The args a grid starts from, where the defaults would hide what it shows.
+ * A Field draws its hover and its focus on a choice card, not on an input
+ * (a card is a row: a vertical Field stretches its checkbox); a default
+ * Toggle has neither border nor fill, so its three sizes would draw the
+ * same. An axis named here still takes each of its own values.
+ */
+const GRID_BASE: Record<"states" | "axes", Record<string, Args>> = {
+  states: { Field: { control: "choice-card", orientation: "horizontal" } },
+  axes: { Toggle: { variant: "outline" } },
+}
+
+function stateCells(
+  name: string,
+  controls: Control[],
+  states: ForcedState[]
+): GridCell[] {
+  const base = resolveArgs(controls, {
+    ...defaultArgs(controls),
+    ...GRID_BASE.states[name],
+  })
   return [
     ...states.map((state) => ({
       label: FORCED_STATE_LABELS[state],
@@ -41,9 +60,13 @@ function stateCells(controls: Control[], states: ForcedState[]): GridCell[] {
   ]
 }
 
-function axisCells(controls: Control[], axis: Control): GridCell[] {
+function axisCells(
+  name: string,
+  controls: Control[],
+  axis: Control
+): GridCell[] {
   if (axis.kind !== "select") return []
-  const base = defaultArgs(controls)
+  const base = { ...defaultArgs(controls), ...GRID_BASE.axes[name] }
   return axis.options.map((option) => ({
     label: option,
     args: resolveArgs(controls, { ...base, [axis.name]: option }),
@@ -80,7 +103,7 @@ export function StoryGrid({
 
   const grids = useMemo(() => {
     if (mode === "states") {
-      const cells = stateCells(controls, states)
+      const cells = stateCells(name, controls, states)
       // Rest alone is the playground's own canvas: no grid for it.
       return cells.length > 1 ? [{ title: "States", cells }] : []
     }
@@ -88,9 +111,9 @@ export function StoryGrid({
       .filter((control) => axes.includes(control.name))
       .map((control) => ({
         title: control.name,
-        cells: axisCells(controls, control),
+        cells: axisCells(name, controls, control),
       }))
-  }, [mode, controls, states, axes])
+  }, [mode, name, controls, states, axes])
 
   if (!loaded || !gridable || controls.length === 0 || grids.length === 0)
     return null

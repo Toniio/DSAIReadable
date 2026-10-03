@@ -1,6 +1,6 @@
 "use client"
 
-import { type ReactNode, useId, useMemo, useState } from "react"
+import { type ReactNode, useId, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { ArrowUpRightIcon, XIcon } from "@phosphor-icons/react"
 
@@ -13,6 +13,12 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
 import type { CategoryTone, ReleaseDate } from "@/site/change-docs/data"
 import { LINK } from "@/site/ui/link"
+
+/**
+ * A link with its arrow: the icon is a block under the stylesheet's reset, so
+ * the link lays its text and icon out on one line.
+ */
+const EXTERNAL_LINK = cn(LINK, "inline-flex items-center gap-1")
 
 interface LogEntry {
   key: string
@@ -50,6 +56,7 @@ export function ChangeLog({
   githubUrl: string
 }) {
   const searchId = useId()
+  const searchRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState("")
   const [selected, setSelected] = useState<string[]>([])
   const needle = query.trim().toLowerCase()
@@ -85,6 +92,7 @@ export function ChangeLog({
         <div className="flex flex-col gap-2">
           <Label htmlFor={searchId}>Search the changes</Label>
           <Input
+            ref={searchRef}
             id={searchId}
             type="search"
             value={query}
@@ -128,6 +136,9 @@ export function ChangeLog({
               onClick={() => {
                 setQuery("")
                 setSelected([])
+                // The button leaves with the filters it clears: focus goes
+                // back to the search, or it would fall to the page's start.
+                searchRef.current?.focus()
               }}
             >
               <XIcon />
@@ -165,12 +176,12 @@ export function ChangeLog({
                   <span>
                     {release.total} {release.total === 1 ? "change" : "changes"}
                   </span>
-                  <Link href={release.tagUrl} className={LINK}>
+                  <Link href={release.tagUrl} className={EXTERNAL_LINK}>
                     Tag v{release.version}
                     <ArrowUpRightIcon aria-hidden="true" />
                   </Link>
                   {release.compareUrl ? (
-                    <Link href={release.compareUrl} className={LINK}>
+                    <Link href={release.compareUrl} className={EXTERNAL_LINK}>
                       Diff from the release before
                       <ArrowUpRightIcon aria-hidden="true" />
                     </Link>
@@ -185,7 +196,7 @@ export function ChangeLog({
               ) : (
                 release.sections.map((group) => (
                   <div key={group.name} className="flex flex-col gap-3">
-                    <Heading level={3} className="text-base">
+                    <Heading level={4} as="h3">
                       {group.name}{" "}
                       <span className="font-normal text-muted-foreground">
                         {group.entries.length}

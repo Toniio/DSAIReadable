@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 
 import { Label } from "@/components/ui/label"
 import {
@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useStagedState } from "@/site/playground/scenarios/use-staged-state"
 import type { Args, Story } from "@/site/playground/types"
 
 const GROUPS = [
@@ -60,15 +61,31 @@ function parts(args: Args) {
   }
 }
 
+/** The window events that close a Radix Select: see `useStagedState`. */
+const CAUSES = ["blur", "resize"] as const
+
 function FoodSelect({ args }: { args: Args }) {
   const props = parts(args)
+  const [open, setOpen] = useStagedState(Boolean(args.open), CAUSES)
+  const [, setRenders] = useState(0)
+
+  // Radix places an item-aligned list each time its content renders, never
+  // on resize, which closes it instead. Kept open here, the list renders
+  // again at each resize, so it lines up with its trigger at the new width.
+  // A popper list follows its trigger on its own.
+  useEffect(() => {
+    const render = () => setRenders((count) => count + 1)
+    window.addEventListener("resize", render)
+    return () => window.removeEventListener("resize", render)
+  }, [])
+
   return (
     <div className="flex min-h-svh items-center justify-center p-8">
       <div className="flex flex-col gap-2">
         <Label htmlFor="food">Favorite food</Label>
         <Select
-          key={`${args.open}-${args.defaultValue}`}
-          defaultOpen={Boolean(args.open)}
+          open={open}
+          onOpenChange={setOpen}
           defaultValue={props.root.defaultValue}
           disabled={props.root.disabled}
         >
@@ -109,11 +126,15 @@ function FoodSelect({ args }: { args: Args }) {
 
 /**
  * Select: a favorite food out of two groups. `open` shows the list on the
- * canvas; the code leaves it out, since the list opens from the trigger.
+ * canvas, through the clicks on the page around it and a change of width;
+ * the code leaves it out, since the list opens from the trigger. The
+ * canvas starts closed: open, the modal list hides the rest of the frame from
+ * assistive technology while the frame keeps its focus, which axe reports as
+ * aria-hidden-focus.
  */
 const story: Story = {
   controls: [
-    { kind: "boolean", name: "open", default: true },
+    { kind: "boolean", name: "open", default: false },
     {
       kind: "select",
       name: "defaultValue",
@@ -144,7 +165,11 @@ const story: Story = {
   ],
   layout: "fullscreen",
   grid: false,
-  render: (args) => <FoodSelect args={args} />,
+  // Radix reads defaultValue once, and the list opens on mount: a new `open`
+  // or default value mounts the Select again.
+  render: (args) => (
+    <FoodSelect key={`${args.open}-${args.defaultValue}`} args={args} />
+  ),
   code: (args) => {
     const props = parts(args)
     const groups = GROUPS.map((group, index) =>

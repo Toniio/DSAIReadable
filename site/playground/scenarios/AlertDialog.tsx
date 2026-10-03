@@ -94,6 +94,7 @@ function StagedAlertDialog({
  * the reader can still close it and reopen it from its trigger.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     {

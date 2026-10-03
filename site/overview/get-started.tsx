@@ -112,6 +112,12 @@ export function GetStarted({ install }: { install: Install }) {
           </Link>{" "}
           has its own command.
         </p>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          These commands read the default branch. Add{" "}
+          <code className="font-mono text-xs">#v{install.version}</code> to an
+          item to install it as this site documents it; the base item it depends
+          on is still read from the default branch, a limit of the shadcn CLI.
+        </p>
       </TabsContent>
 
       <TabsContent value="mcp" className="flex flex-col gap-4">
@@ -125,7 +131,7 @@ export function GetStarted({ install }: { install: Install }) {
         <ol className="flex flex-col gap-4">
           <Step index={1} title="Claude Code:">
             <CommandLine
-              command={`claude mcp add ${install.registry} -- npx -y ${install.mcpPackage}`}
+              command={`claude mcp add ${install.registry} -- npx -y ${install.mcpPackage}@${install.version}`}
               label="Copy the Claude Code command"
             />
           </Step>
@@ -189,13 +195,17 @@ export function GetStarted({ install }: { install: Install }) {
       <TabsContent value="eslint" className="flex flex-col gap-4">
         <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
           The design system&apos;s rules in your own lint, so a violation shows
-          where the code is written, not in review. The MCP server runs the same
-          rules.
+          where the code is written, not in review. The MCP server&apos;s{" "}
+          <code className="font-mono text-xs">dsaireadable_validate_code</code>{" "}
+          runs the rules of the <code className="font-mono text-xs">core</code>{" "}
+          config. The class check that{" "}
+          <code className="font-mono text-xs">recommended</code> adds needs your
+          stylesheet, so only your own lint runs it.
         </p>
         <ol className="flex flex-col gap-4">
           <Step index={1} title="Install the plugin:">
             <CommandLine
-              command={`npm install -D ${install.eslintPackage}`}
+              command={`npm install -D ${install.eslintPackage}@${install.version}`}
               label="Copy the ESLint plugin install command"
             />
           </Step>

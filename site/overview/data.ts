@@ -1,6 +1,7 @@
 import { readdirSync } from "node:fs"
 import path from "node:path"
 
+import { remToPx } from "@/site/foundation-docs/b/spec"
 import { components } from "@/site/lib/components"
 import { changelog } from "@/site/lib/changelog"
 import { section } from "@/site/lib/markdown"
@@ -134,6 +135,12 @@ function percent(ratio: number): string {
   return `${Math.round(ratio * 1000) / 10}%`
 }
 
+/** How the stat card names a group of Foundations pages. */
+const GROUP_NOUN: Record<string, string> = {
+  Tokens: "token foundations",
+  Reference: "reference",
+}
+
 interface Stat {
   label: string
   value: string
@@ -154,7 +161,7 @@ export function stats(): Stat[] {
     "tokens.manifest.json"
   )
   const byTier = count(tokens.tokens, (entry) => entry.tier)
-  const foundations = listFiles("specs/foundations", ".md")
+  const foundationPages = FOUNDATION_GROUPS.flatMap((group) => group.items)
   const allPatterns = patterns()
   const byKind = count(allPatterns, (entry) => entry.kind)
   const registry = readJson<{ items: RegistryItem[] }>("registry.json").items
@@ -177,9 +184,14 @@ export function stats(): Stat[] {
         .join(" · "),
     },
     {
+      // The pages the Foundations tab lists, as its index and the Sections
+      // card count them: some draw on no spec (Layers, Icons, All tokens).
       label: "Foundations",
-      value: String(foundations.length),
-      detail: `Specs, on ${FOUNDATION_GROUPS.flatMap((group) => group.items).length} pages: ${FOUNDATION_GROUPS.map((group) => group.label.toLowerCase()).join(", ")}`,
+      value: String(foundationPages.length),
+      detail: FOUNDATION_GROUPS.map(
+        (group) =>
+          `${group.items.length} ${GROUP_NOUN[group.label] ?? group.label.toLowerCase()}`
+      ).join(" · "),
     },
     {
       label: "Patterns",
@@ -202,20 +214,26 @@ export function stats(): Stat[] {
       detail: `In ${packageName("packages/eslint-plugin/package.json")}`,
     },
   ]
+  // The run is named in full: its design system version can be older than
+  // the release this page documents.
   if (evals?.withMcp !== undefined)
     out.push({
       label: "Eval conformance",
       value: percent(evals.withMcp),
-      detail:
+      detail: [
         evals.without === undefined
-          ? `With the MCP server, ${evals.tasks} tasks`
+          ? "With the MCP server"
           : `With the MCP server; ${percent(evals.without)} without`,
+        `Run on v${evals.version} with ${evals.model ?? "a model"}, ${evals.tasks} tasks`,
+      ].join(". "),
     })
   return out
 }
 
 export interface Install {
   registry: string
+  /** The release the site documents, which every command pins. */
+  version: string
   mcpPackage: string
   mcpNode?: string
   mcpConfig: string
@@ -240,14 +258,18 @@ export function install(): Install {
   const node = readJson<{ engines?: { node?: string } }>(
     "mcp-server/package.json"
   ).engines?.node
+  // Pinned to the release this site documents, as the Claude Code plugin
+  // pins it: the tools the page lists are the ones that run.
+  const mcpPinned = `${mcpPackage}@${VERSION}`
   return {
     registry,
+    version: VERSION,
     mcpPackage,
     mcpNode: node?.replace(/^>=\s*/, ""),
     mcpConfig: JSON.stringify(
       {
         mcpServers: {
-          [registry]: { command: "npx", args: ["-y", mcpPackage] },
+          [registry]: { command: "npx", args: ["-y", mcpPinned] },
         },
       },
       null,
@@ -269,11 +291,15 @@ export function install(): Install {
   }
 }
 
-/** The minimum pointer target, as its token resolves: `1.5rem`. */
-export function targetSize(): string | undefined {
-  return readJson<{ tokens: ManifestEntry[] }>(
+/**
+ * The minimum pointer target in CSS pixels, the unit WCAG 2.2 SC 2.5.8 states
+ * it in, converted from the rem value of `size.target.min`.
+ */
+export function targetSize(): number | undefined {
+  const value = readJson<{ tokens: ManifestEntry[] }>(
     "tokens.manifest.json"
   ).tokens.find((entry) => entry.token === "size.target.min")?.value.light
+  return value === undefined ? undefined : remToPx(value)
 }
 
 /** How many shadcn/ui divergences are declared, and in how many components. */
@@ -296,13 +322,16 @@ export function sectionFacts(): Record<string, string> {
   const entries = changelog()
   const releases = new Set(entries.map((entry) => entry.version)).size
   const categories = new Set(components().map((entry) => entry.category)).size
-  const runs = listFiles("evals/history", ".json").length
+  const runs = listFiles("evals/history", ".json").map(
+    (file) => readJson<EvalRun>(`evals/history/${file}`).generator
+  )
+  const gold = runs.filter((generator) => generator === "gold").length
   return {
     "/foundations/": `${FOUNDATION_GROUPS.flatMap((group) => group.items).length} pages`,
     "/components/": `${components().length} components in ${categories} categories`,
     "/patterns/": `${patterns().length} patterns`,
     "/changes/": `${entries.length} entries in ${releases} releases`,
-    "/audits/": `${runs} eval runs`,
+    "/audits/": `${runs.length - gold} model eval runs, ${gold} of the gold standard`,
   }
 }
 

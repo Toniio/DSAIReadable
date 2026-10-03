@@ -146,13 +146,18 @@ files.set(
   ].join("\n")
 )
 
-/** Every file under OUT, relative to it. */
+/**
+ * Every file under OUT, relative to it. A dotfile is the system's, not ours
+ * (a Finder .DS_Store): it is never reported stale, nor deleted.
+ */
 function existing(dir = OUT): string[] {
   if (!existsSync(dir)) return []
-  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const path = join(dir, entry.name)
-    return entry.isDirectory() ? existing(path) : [relative(OUT, path)]
-  })
+  return readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => !entry.name.startsWith("."))
+    .flatMap((entry) => {
+      const path = join(dir, entry.name)
+      return entry.isDirectory() ? existing(path) : [relative(OUT, path)]
+    })
 }
 
 const stale: string[] = []

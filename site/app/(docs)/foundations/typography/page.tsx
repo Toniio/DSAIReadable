@@ -6,6 +6,7 @@ import {
   withoutTitle,
 } from "@/site/foundation-docs/a/page-bits"
 import {
+  COMBINATIONS,
   foundationExamples,
   typeData,
 } from "@/site/foundation-docs/a/type-data"
@@ -32,12 +33,47 @@ const TABLED = [
   "Font Weights",
 ]
 
+/**
+ * The combinations section without what the page shows above it: the
+ * samples and facts are the Text styles table, the headings table is the
+ * Headings section, and each module is an Examples entry. The prose stays,
+ * and an entry with nothing else to say goes.
+ */
+function combinationsProse(part: string): string {
+  const [heading, ...rest] = part.split(/^(?=### )/m)
+  const entries = rest.map((entry) => {
+    const [title, ...lines] = entry.split("\n")
+    const kept: string[] = []
+    let fenced = false
+    for (const line of lines) {
+      if (line.startsWith("```")) {
+        fenced = !fenced
+        continue
+      }
+      if (fenced || line.trim().startsWith("|")) continue
+      // A facts line can end with a sentence: only the facts go.
+      kept.push(
+        line.startsWith("`size: ")
+          ? line.replace(/^(`[^`]+`\s*(·\s*)?)+\.?\s*/, "")
+          : line
+      )
+    }
+    const prose = kept
+      .join("\n")
+      .replace(/^-{3,}$/gm, "")
+      .trim()
+    return prose ? `${title}\n\n${prose}\n\n` : ""
+  })
+  return [heading, ...entries].join("")
+}
+
 /** The spec without its title and without the token tables shown above. */
 function guidelines(markdown: string): string {
   const parts = withoutTitle(markdown).split(/^(?=## )/m)
   return parts
     .map((part) => {
       const heading = /^## (.+)$/m.exec(part)?.[1]?.trim()
+      if (heading === COMBINATIONS) return combinationsProse(part)
       if (!heading || !TABLED.includes(heading)) return part
       const rest = part
         .split("\n")
@@ -56,6 +92,7 @@ export const metadata: Metadata = {
 }
 
 const TOC = [
+  { id: "text-styles", label: "Text styles" },
   { id: "families", label: "Font families" },
   { id: "scale", label: "Type scale" },
   { id: "weights", label: "Weights" },
@@ -75,7 +112,7 @@ export default function TypographyPage() {
       <PageHeader
         eyebrow={<FoundationEyebrow group="Tokens" />}
         title="Typography"
-        lead={`${data.families.length} typefaces, a type scale of ${data.scale.length} sizes, ${data.weights.length} weights, ${data.leading.length} line heights and ${data.tracking.length} letter spacings: ${data.tokenCount} semantic tokens. A component draws its own text style; these are for the text a screen draws.`}
+        lead={`${data.families.length} typefaces, a type scale of ${data.scale.length} sizes and their ${data.scale.length} paired line heights, ${data.weights.length} weights, ${data.leading.length} line heights and ${data.tracking.length} letter spacings: ${data.tokenCount} semantic tokens, written together as ${data.styles.length} text styles. A component draws its own text style; these are for the text a screen draws.`}
       />
 
       <div className="flex flex-col gap-12">
@@ -109,7 +146,7 @@ export default function TypographyPage() {
       <DocSection
         id="guidelines"
         title="Guidelines"
-        description="The typography spec, without the token tables laid out above."
+        description="The typography spec, without the tables, styles and examples laid out above."
       >
         <div className="flex min-w-0 flex-col gap-4">
           <Markdown from={SPEC} shift={1}>

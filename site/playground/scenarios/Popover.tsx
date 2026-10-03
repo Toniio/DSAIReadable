@@ -118,6 +118,7 @@ function code(args: Args): string {
  * an h3, as it would sit under a section's h2.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     {

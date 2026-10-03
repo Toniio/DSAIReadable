@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
+import { cn } from "@/lib/utils"
 import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
 import { LINK } from "@/site/ui/link"
 import { remToPx } from "@/site/foundation-docs/b/spec"
@@ -31,18 +32,57 @@ const SECTIONS = [
 const px = (entry: Token) => remToPx(entry.value.light) ?? 0
 const byValue = (a: Token, b: Token) => px(a) - px(b)
 
-/** A bar as wide as the token: the width is the token itself. */
-function Bar({ entry }: { entry: Token }) {
-  return (
+/**
+ * The utilities each layout token is written with, as the spec prescribes
+ * them (`px-page`, `py-section`, `gap-section`, `w-sidebar`). The bridge
+ * makes every spacing utility read the token, `p-sidebar` and `size-page`
+ * included: listing those would teach padding a block by a sidebar width.
+ */
+const LAYOUT_UTILITIES: Record<string, string[]> = {
+  "page-padding": ["px"],
+  "section-gap": ["py", "gap"],
+  sidebar: ["w"],
+  "sidebar-mobile": ["w"],
+  "sidebar-icon": ["w"],
+}
+
+/** `--spacing-page` bridges `p-page`: the classes of its axis, `px-page`. */
+function layoutClasses(entry: Token): string[] {
+  const bridged = tailwindClasses(entry.cssVar)
+  const name = bridged[0]?.replace(/^[a-z]+-/, "")
+  const utilities = LAYOUT_UTILITIES[shortName(entry, "space.layout")]
+  if (!name || !utilities) return bridged
+  return utilities.map((utility) => `${utility}-${name}`)
+}
+
+/**
+ * A bar as wide as the token: the width is the token itself. With `widest`,
+ * a list whose longest bars would not fit a phone's column draws them to
+ * scale against it below md instead. The chart color keeps 3:1 on the page
+ * in both modes, as a data mark must.
+ */
+function Bar({ entry, widest }: { entry: Token; widest?: number }) {
+  const actual = (
     <div
-      className="h-3 max-w-full bg-primary"
+      className={cn("h-3 max-w-full bg-chart-1", widest && "hidden md:block")}
       style={{ width: `var(${entry.cssVar})` }}
     />
+  )
+  if (!widest) return actual
+  return (
+    <>
+      <div
+        className="h-3 bg-chart-1 md:hidden"
+        style={{ width: `${(px(entry) / widest) * 100}%` }}
+      />
+      {actual}
+    </>
   )
 }
 
 export default function SpacingPage() {
   const scale = tokenGroup("space.scale").sort(byValue)
+  const widestStep = Math.max(...scale.map(px))
   const reserved = tokenGroup("space.component").sort(byValue)
   const layout = tokenGroup("space.layout")
   const containers = tokenGroup("space.container")
@@ -95,7 +135,7 @@ export default function SpacingPage() {
             and sizing utility reads one: <Code>p-</Code>, <Code>m-</Code>,{" "}
             <Code>gap-</Code>, <Code>w-</Code>, <Code>h-</Code>,{" "}
             <Code>size-</Code>, <Code>inset-</Code>. Each bar is as wide as its
-            token.
+            token; on a narrow screen, drawn to scale against the widest.
           </>
         }
       >
@@ -119,7 +159,7 @@ export default function SpacingPage() {
                   <Dimension value={entry.value.light} />
                 </div>
                 <div className="min-w-0 md:col-span-8">
-                  <Bar entry={entry} />
+                  <Bar entry={entry} widest={widestStep} />
                 </div>
               </li>
             )
@@ -167,7 +207,7 @@ export default function SpacingPage() {
                 <span className="text-xs leading-relaxed text-muted-foreground">
                   {entry.description}
                 </span>
-                <ClassList classes={tailwindClasses(entry.cssVar)} />
+                <ClassList classes={layoutClasses(entry)} />
               </div>
               <div className="min-w-0 md:col-span-7">
                 <Bar entry={entry} />
@@ -207,7 +247,7 @@ export default function SpacingPage() {
               </div>
               <div className="min-w-0 md:col-span-4">
                 <div
-                  className="h-3 bg-primary"
+                  className="h-3 bg-chart-1"
                   style={{ width: `${(px(entry) / widest) * 100}%` }}
                 />
               </div>

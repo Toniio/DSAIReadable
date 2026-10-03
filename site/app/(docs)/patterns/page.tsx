@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
+import { headingVariants } from "@/components/ui/heading"
 import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
 import { cn } from "@/lib/utils"
 import { plain } from "@/site/lib/markdown"
@@ -27,10 +28,14 @@ const TOC = [
 
 /**
  * The card is one link: its title stretches over the whole card, and the
- * focus indicator is drawn around the card, not the title.
+ * focus indicator is drawn around the card, not the title. The halo alone is
+ * painted at 50%, under the 3:1 focus.md asks of an indicator, so the
+ * stretched layer also draws the solid outline a borderless element adds; it
+ * lies on the card's own border.
  */
 const CARD_LINK = cn(
   "after:absolute after:inset-0 focus-visible:after:ring-(length:--space-focus-ring-width) focus-visible:after:ring-ring/50",
+  "focus-visible:after:outline-(length:--border-width-default) focus-visible:after:outline-ring focus-visible:after:outline-solid",
   FOCUS_OUTLINE_RESET
 )
 
@@ -46,7 +51,7 @@ function PatternCard({ pattern }: { pattern: Pattern }) {
         <div className="flex items-center justify-between gap-2">
           <Link
             href={`/patterns/${pattern.name}/`}
-            className={cn("font-heading text-base font-semibold", CARD_LINK)}
+            className={cn(headingVariants({ level: 4 }), CARD_LINK)}
           >
             {pattern.title}
           </Link>
@@ -56,7 +61,8 @@ function PatternCard({ pattern }: { pattern: Pattern }) {
           <InlineMarkdown>{pattern.role}</InlineMarkdown>
         </p>
         <p className="text-xs text-muted-foreground">
-          {pattern.components.length} components · {pattern.usage.length} rules
+          {pattern.components.length} components · {pattern.usage.length} usage
+          rules
         </p>
       </div>
     </li>

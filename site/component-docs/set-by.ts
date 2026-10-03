@@ -5,7 +5,11 @@
  * whose state comes from somewhere else has its own entry.
  */
 
-/** The state names most components share. */
+/**
+ * The state names most components share. `active` is a press here; the
+ * components whose spec uses it for the selected or current item (a tab, a
+ * page, a slide) say what sets it in their own entry.
+ */
 const SHARED: Record<string, string> = {
   default: "Nothing: the state at rest",
   hover: "Interaction: the pointer over it",
@@ -62,7 +66,11 @@ const BY_COMPONENT: Record<string, Record<string, string>> = {
     selected: "A click on a day, or the `selected` prop",
   },
   Card: { loading: "A `Skeleton` inside `CardContent`" },
-  Carousel: { disabled: "The scroll limit: first or last slide" },
+  Carousel: {
+    active: "The previous and next buttons, the arrow keys, or a swipe",
+    disabled: "The scroll limit: first or last slide",
+  },
+  Chart: { active: "The pointer over a data element" },
   Combobox: {
     open: "Typing, the trigger, or the `open` prop",
     pressed: "Opening the popup",
@@ -93,6 +101,9 @@ const BY_COMPONENT: Record<string, Record<string, string>> = {
     open: "The pointer resting on the trigger, or focus on it",
     closing: "The pointer leaving, or the trigger losing focus",
   },
+  InputOtp: {
+    active: "Focus on the input: the slot that takes the next character",
+  },
   Item: {
     outline: '`variant="outline"`',
     muted: '`variant="muted"`',
@@ -108,20 +119,24 @@ const BY_COMPONENT: Record<string, Record<string, string>> = {
   },
   Message: { ghost: 'A `Bubble` with `variant="ghost"` inside it' },
   MessageScroller: {
+    active: "The scroll position: content left in the button's direction",
     pending: "The first render, until the scroll position is applied",
     scrolled: "The reader scrolling up",
   },
   NavigationMenu: {
     open: "The pointer on a trigger, a click, or the `value` prop",
+    active: "The `active` prop of `NavigationMenuLink`",
   },
   NativeSelect: {
     open: "The browser, on a click or a key",
     placeholder: 'The selected option has `value=""`',
   },
+  Pagination: { active: "The `isActive` prop of `PaginationLink`" },
   PasswordInput: {
     visible: "The show password button",
     error: "`aria-invalid`, through `InputGroup`",
   },
+  Progress: { active: "The `value` prop changing" },
   Questionnaire: {
     open: "`aria-expanded`, from the popup it controls",
     error: "`data-invalid` on a choice, `aria-invalid` on the input",
@@ -132,15 +147,22 @@ const BY_COMPONENT: Record<string, Record<string, string>> = {
     checked: "A click, or the `value` prop of the group",
     unchecked: "Another item chosen, or no `value`",
   },
-  Resizable: { disabled: "The `disabled` prop of the handle" },
+  Resizable: {
+    active: "A drag on the handle",
+    disabled: "The `disabled` prop of the handle",
+  },
+  ScrollArea: { active: "A drag on the scrollbar's thumb" },
   Select: { disabled: "The `disabled` prop, on the trigger or an item" },
   Sidebar: {
+    active:
+      "The `isActive` prop of `SidebarMenuButton` or `SidebarMenuSubButton`, or a press",
     open: "Opening the menu a menu button controls",
     disabled: "The `disabled` prop of an item",
     collapsed:
       "The `SidebarTrigger`, the keyboard shortcut, or the `open` prop of `SidebarProvider`",
     mobile: "A viewport under the mobile breakpoint (`useIsMobile`)",
   },
+  Slider: { active: "A press or a drag on the thumb" },
   Sonner: {
     error: "`toast.error()`",
     success: "`toast.success()`",
@@ -149,7 +171,10 @@ const BY_COMPONENT: Record<string, Record<string, string>> = {
     loading: "`toast.loading()`",
   },
   Spinner: { loading: "Rendering it" },
-  Tabs: { disabled: "The `disabled` prop of a `TabsTrigger`" },
+  Tabs: {
+    active: "A click or an arrow key on a trigger, or the `value` prop",
+    disabled: "The `disabled` prop of a `TabsTrigger`",
+  },
   Table: {
     open: "An expanded control in the row (`aria-expanded`)",
     selected: '`data-state="selected"` on a `TableRow`',
@@ -165,9 +190,13 @@ const BY_COMPONENT: Record<string, Record<string, string>> = {
   },
 }
 
-/** A description that says the state does not apply: "Not applicable", "N/A". */
+/**
+ * A description that says the state does not apply: "Not applicable", "N/A",
+ * "— (not focusable)", "— (no hover state of its own)". "No dedicated style"
+ * is not one: the state happens, it only draws nothing.
+ */
 const NOT_APPLICABLE =
-  /^[—\s(]*(not applicable|n\/a|not defined|not supported)/i
+  /^[—\s(]*(not applicable|n\/a|not defined|not supported|not focusable|no user interaction|no \w+ state of its own)/i
 
 /** Whether a States row describes a state the component has. */
 export function applies(description: string): boolean {

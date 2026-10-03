@@ -305,6 +305,7 @@ ${OPTIONS}
  * so it can still be closed and reopened by hand.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     { kind: "boolean", name: "multiple", default: false },

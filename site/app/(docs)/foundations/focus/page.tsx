@@ -89,11 +89,17 @@ export default function FocusPage() {
       <DocSection
         id="indicator"
         title="Indicator"
-        description="Four controls with their focus drawn, in both modes: a solid part in the focus color and a halo around it. The same indicator on every control; none describes its own."
+        description="Four controls with their focus drawn, in both modes: a solid part in the focus color and a halo around it. The same indicator on every control; none describes its own. A picture: the controls take no input."
       >
         <ModePanels>
           {(mode) => (
-            <div data-force-state="focus" className="grid gap-6 sm:grid-cols-2">
+            // A picture of the indicator: inert, so that no control drawn
+            // focused is a tab stop, and the one that has focus stands out.
+            <div
+              data-force-state="focus"
+              inert
+              className="grid gap-6 sm:grid-cols-2"
+            >
               <div className="flex flex-col items-start gap-2">
                 <span className="text-xs text-muted-foreground">Button</span>
                 <Button type="button" variant="outline">

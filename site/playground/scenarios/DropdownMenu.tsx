@@ -14,6 +14,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useStagedState } from "@/site/playground/scenarios/use-staged-state"
 import type { Args, Story } from "@/site/playground/types"
 
 type Side = "top" | "right" | "bottom" | "left"
@@ -49,10 +50,16 @@ function read(args: Args): MenuArgs {
   }
 }
 
+/** The window events that close a Radix menu: see `useStagedState`. */
+const CAUSES = ["blur"] as const
+
 function AccountMenu({ a }: { a: MenuArgs }) {
+  // `defaultOpen` in the code: the canvas keeps the menu open through the
+  // clicks on the page around it, which take focus away from its window.
+  const [open, setOpen] = useStagedState(a.open, CAUSES)
   const [statusBar, setStatusBar] = useState(true)
   return (
-    <DropdownMenu defaultOpen={a.open} modal={a.modal}>
+    <DropdownMenu open={open} onOpenChange={setOpen} modal={a.modal}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Options</Button>
       </DropdownMenuTrigger>
@@ -246,13 +253,14 @@ ${lines.map((line) => `        ${line}`).join("\n")}
 
 /**
  * DropdownMenu: an account menu on its trigger. With `open` on it starts
- * open; a Radix menu closes when its window loses focus, as the canvas does
- * when the reader clicks a control, so every change remounts it. `modal`
- * starts off: a modal menu open on load hides the rest of the canvas from
- * assistive technology while its trigger stays focusable, which axe reports
- * (aria-hidden-focus).
+ * open, and stays open while the reader clicks the page around the canvas;
+ * every change of a control mounts it again, so the change shows on the open
+ * menu even after the reader closed it. `modal` starts off: a modal menu open
+ * on load hides the rest of the canvas from assistive technology while its
+ * trigger stays focusable, which axe reports (aria-hidden-focus).
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     { kind: "boolean", name: "modal", default: false },

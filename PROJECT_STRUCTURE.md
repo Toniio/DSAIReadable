@@ -278,12 +278,21 @@ host such as GitHub Pages serves it under).
 | `site/app/site.css`        | Imports `styles/globals.css`, lists the folders Tailwind scans, and redefines `hover`, `focus`, `focus-visible`, `focus-within` and `active` so a canvas can force a state (`data-force-state`), for the site build only |
 | `site/lib/`                | Build-time readers of the specs, the MCP context, `tokens.manifest.json` and the changelog                                                                                                                               |
 | `site/ui/`                 | The site's frame: header, navigation, "On this page", Markdown rendered with the design system's parts                                                                                                                   |
+| `site/overview/`           | The Overview page: getting started, the rules a consuming project follows, the figures of the design system                                                                                                              |
+| `site/foundation-docs/a/`  | The token pages: the All tokens table and its data, the color explorer, the type styles                                                                                                                                  |
+| `site/foundation-docs/b/`  | The foundation pages built from a spec: their frame, live examples, do and don't, the icon browser, the motion demo                                                                                                      |
+| `site/component-docs/`     | The parts of a component page: the index of the 65, the anatomy, the variant and state grids, the dependency graph                                                                                                       |
+| `site/pattern-docs/`       | The pattern pages' previews and thumbnails                                                                                                                                                                               |
+| `site/change-docs/`        | The change log, read from `CHANGELOG.md`                                                                                                                                                                                 |
+| `site/audit-docs/`         | The Audits page: contrast, evals, the components' checks                                                                                                                                                                 |
 | `site/playground/`         | The playground: controls derived from the cva axes and the specs' Props / API (`auto.ts`), hand-written scenarios for compound components (`scenarios/`), the canvas and its postMessage protocol                        |
 | `site/generated/examples/` | The specs' code examples, copied by `npm run site:examples` — generated, do not edit                                                                                                                                     |
 
 The site follows the repository's rules: ESLint, `tokens:lint-values` and knip
 cover `site/`, and `npm run site:check` lints it with the config a consuming
-project runs (`@dsaireadable/eslint-plugin`), the copied examples included.
+project runs (`@dsaireadable/eslint-plugin`), the copied examples included,
+and checks that every focus ring the site composes on an element with no
+border adds a solid outline (`FOCUS_BORDERLESS`, focus.md rule 6).
 
 ---
 
@@ -429,7 +438,7 @@ npm run tokens:lint-naming  # Check the tokens' DTCG grammar
 npm run tokens:lint-bridge  # Check Tailwind's @theme bridge
 npm run tokens-validate     # Every token check in sequence
 npm run specs:validate      # Specs: sections, generated parts, wording
-npm run typecheck:all       # TypeScript: components, tests and evals, scripts, eslint-plugin, mcp-server
+npm run typecheck:all       # TypeScript: components, tests and evals, scripts, eslint-plugin, mcp-server, site
 npm run mcp:test-package    # Pack the MCP server and run the tarball through npx from an empty folder
 npm run test:lint-coverage  # Every component rendered from its spec, every documented key tested
 npm run test:components     # Component tests in headless Chromium (Vitest + axe-core)
@@ -437,7 +446,7 @@ npm run skills:validate     # The agent skills: format, and every rule cites a s
 npm run evals:test          # The conformance harness scores its gold examples and fixtures, with no model
 npm run evals:generate      # Screens from Claude Code on a subscription, no API key (evals/README.md)
 npm run site:dev            # The documentation site, locally (Next.js dev server)
-npm run site:check          # The site: examples copied from the specs are fresh, the consumer lint passes
+npm run site:check          # The site: examples copied from the specs are fresh, the consumer lint and the focus check pass
 npm run site:build          # The static documentation site, in site/out/
 npm run format              # Prettier on every .ts/.tsx/.md
 ```

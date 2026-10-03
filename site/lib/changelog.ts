@@ -35,8 +35,12 @@ export function changelog(): ChangeEntry[] {
   })
 }
 
-/** The entries that name a component, as a word: `Button`, not `ButtonGroup`. */
+/**
+ * The entries that name a component, as a word: `Button`, not `ButtonGroup`,
+ * and not a key of a code path either (`components.Button`, a DayPicker key
+ * a Calendar entry names). A period after the name still ends a sentence.
+ */
 export function changesFor(name: string): ChangeEntry[] {
-  const word = new RegExp(`(^|[^\\w])${name}([^\\w]|$)`)
+  const word = new RegExp(`(^|[^\\w.])${name}([^\\w]|$)`)
   return changelog().filter((entry) => word.test(entry.text))
 }

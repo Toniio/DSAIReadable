@@ -1,3 +1,5 @@
+import { Fragment } from "react"
+
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { CopyButton } from "@/site/ui/copy-button"
@@ -62,17 +64,48 @@ export function Ticks({ children }: { children: string }) {
   )
 }
 
-/** A name to copy: a CSS variable, a class. */
+/** A dotted token name that wraps after a dot rather than inside a segment. */
+export function DottedName({ name }: { name: string }) {
+  return name.split(".").map((part, index) => (
+    <Fragment key={index}>
+      {index ? (
+        <>
+          .<wbr />
+        </>
+      ) : null}
+      {part}
+    </Fragment>
+  ))
+}
+
+/**
+ * A name to copy: a CSS variable, a class. It is cut short with an ellipsis
+ * where it has no room; with `wrap`, it wraps after a hyphen instead, for a
+ * table column whose names must be read whole.
+ */
 export function CopyCode({
   value,
+  wrap = false,
   className,
 }: {
   value: string
+  wrap?: boolean
   className?: string
 }) {
   return (
-    <span className={cn("inline-flex min-w-0 items-center gap-0.5", className)}>
-      <code className="min-w-0 truncate bg-muted px-1 py-0.5 font-mono text-xs">
+    <span
+      className={cn(
+        "inline-flex min-w-0 gap-0.5",
+        wrap ? "items-start" : "items-center",
+        className
+      )}
+    >
+      <code
+        className={cn(
+          "min-w-0 bg-muted px-1 py-0.5 font-mono text-xs",
+          wrap ? "break-words" : "truncate"
+        )}
+      >
         {value}
       </code>
       <CopyButton value={value} label={`Copy ${value}`} />

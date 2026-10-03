@@ -191,10 +191,13 @@ function code(args: Args): string {
  * under their trigger; `active` marks Pricing as the current page
  * (`aria-current`); `indicator` adds the arrow under the open trigger. The
  * landmark has a name of its own, apart from the page's main navigation.
+ * The canvas starts closed: while a panel is open, Radix renders a focusable
+ * proxy inside aria-hidden (axe aria-hidden-focus), a finding of the
+ * component, not of the story.
  */
 const story: Story = {
   controls: [
-    { kind: "boolean", name: "open", default: true },
+    { kind: "boolean", name: "open", default: false },
     { kind: "boolean", name: "viewport", default: true },
     { kind: "boolean", name: "active", default: false },
     { kind: "boolean", name: "indicator", default: false },

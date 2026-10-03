@@ -88,7 +88,7 @@ export default function BreakpointsPage() {
                 </div>
                 <div className="min-w-0 md:col-span-4">
                   <div
-                    className="h-3 bg-primary"
+                    className="h-3 bg-chart-1"
                     style={{ width: `${(px(entry) / widest) * 100}%` }}
                   />
                 </div>

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import { Fragment, type ReactNode } from "react"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -69,9 +69,25 @@ export async function generateMetadata({
 /** Where the generated part of a spec section ends and the prose resumes. */
 const END_OF_GENERATED = "<!-- End of the generated part. -->"
 
-/** `data-slot="tabs-trigger"` → `tabs-trigger`. */
-function slotName(cell: string): string {
-  return /data-slot=\\?"([^"\\]+)/.exec(cell)?.[1] ?? plain(cell)
+/**
+ * `data-slot="tabs-trigger"` → `tabs-trigger`. A part the spec names another
+ * way ("toggle button", "_(no data-slot)_") has none: no slot is made up.
+ */
+function slotName(cell: string): string | undefined {
+  return /data-slot=\\?"([^"\\]+)/.exec(cell)?.[1]
+}
+
+/**
+ * A dotted path that may wrap after each dot, `buttonVariants.size.sm`: a
+ * long one otherwise takes its whole width from the Classes column beside it.
+ */
+function DottedPath({ children }: { children: string }) {
+  return children.split(/(?<=\.)/).map((part, index) => (
+    <Fragment key={index}>
+      {index > 0 ? <wbr /> : null}
+      {part}
+    </Fragment>
+  ))
 }
 
 /** The hand-written prose that follows the generated tables of Props / API. */
@@ -115,12 +131,20 @@ export default async function ComponentPage({
   const source = `specs/components/${entry.name}.md`
   const controls = autoControls(entry.name)
   const rows = stateRows(entry.name)
-  // A state the spec marks "Not applicable" is not offered to force.
-  const states = forcedStates(entry.name).filter(
-    (state) =>
-      state === "rest" ||
-      applies(rows.find((row) => row.state === state)?.description ?? "")
-  )
+  // A forced state must draw something. Offered: a state the component draws
+  // with classes of its own, or one a component it is built on draws (the
+  // Button of a Dialog or a Pagination). Not offered: a state the spec marks
+  // "Not applicable", and one with no class at all ("No dedicated style").
+  const builtOnOthers = usesComponents(entry.slug).length > 0
+  const states = forcedStates(entry.name).filter((state) => {
+    if (state === "rest") return true
+    const row = rows.find((candidate) => candidate.state === state)
+    return (
+      !!row &&
+      applies(row.description) &&
+      (row.classes.length > 0 || builtOnOthers)
+    )
+  })
   const axes = variantAxes(entry.name)
   const musts = spec.constraints.filter((rule) => rule.startsWith("**MUST** —"))
   const mustNots = spec.constraints.filter((rule) =>
@@ -263,7 +287,7 @@ export default async function ComponentPage({
         </ul>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-3 border p-4">
-            <Badge variant="success">Do</Badge>
+            <Badge variant="success">Must</Badge>
             {musts.length ? (
               <ul className="flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed">
                 {musts.map((rule) => (
@@ -275,13 +299,11 @@ export default async function ComponentPage({
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">
-                No MUST rule beyond the usage above.
-              </p>
+              <p className="text-sm text-muted-foreground">No further rule.</p>
             )}
           </div>
           <div className="flex flex-col gap-3 border p-4">
-            <Badge variant="destructive">Don&apos;t</Badge>
+            <Badge variant="destructive">Must not</Badge>
             {mustNots.length ? (
               <ul className="flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed">
                 {mustNots.map((rule) => (
@@ -293,7 +315,7 @@ export default async function ComponentPage({
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">No MUST NOT rule.</p>
+              <p className="text-sm text-muted-foreground">No prohibition.</p>
             )}
           </div>
         </div>
@@ -312,13 +334,14 @@ export default async function ComponentPage({
         <DocSection
           id="anatomy"
           title="Anatomy"
-          description="The parts of the component, each marked with the data-slot attribute it renders."
+          description="The parts of the component, each named by the data-slot attribute it renders, where it has one."
         >
           <Anatomy
             name={entry.name}
             slug={entry.slug}
             parts={spec.anatomy.map((part) => ({
               slot: slotName(part.slot),
+              label: <InlineMarkdown from={source}>{part.slot}</InlineMarkdown>,
               role: <InlineMarkdown from={source}>{part.role}</InlineMarkdown>,
             }))}
           />
@@ -524,7 +547,7 @@ export default async function ComponentPage({
                 <TableRow>
                   <TableHead>Token</TableHead>
                   <TableHead>Value</TableHead>
-                  <TableHead>Classes</TableHead>
+                  <TableHead className="w-64">Classes</TableHead>
                   <TableHead>Where</TableHead>
                 </TableRow>
               </TableHeader>
@@ -538,11 +561,13 @@ export default async function ComponentPage({
                       <TokenValue name={token.token} />
                     </TableCell>
                     <TableCell className="align-top whitespace-normal">
+                      {/* Chips wrap between classes; a class longer than the
+                          column breaks after a hyphen, never between letters. */}
                       <span className="flex flex-wrap gap-1">
                         {token.classes.map((value) => (
                           <code
                             key={value}
-                            className="bg-muted px-1 py-0.5 font-mono text-xs break-all"
+                            className="bg-muted px-1 py-0.5 font-mono text-xs"
                           >
                             {value}
                           </code>
@@ -550,7 +575,7 @@ export default async function ComponentPage({
                       </span>
                     </TableCell>
                     <TableCell className="align-top text-xs whitespace-normal text-muted-foreground">
-                      {token.where.join(" · ")}
+                      <DottedPath>{token.where.join(" · ")}</DottedPath>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 
 import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
-import { LiveExample } from "@/site/foundation-docs/b/live-example"
 import {
   Code,
   Dimension,
@@ -20,16 +19,13 @@ export const metadata: Metadata = {
   description: ENTRY.summary,
 }
 
-const SECTIONS = [
-  { id: "scale", label: "Scale" },
-  { id: "example", label: "Example" },
-]
+const SECTIONS = [{ id: "scale", label: "Scale" }]
 
 export default function RadiusPage() {
   const scale = tokenGroup("radius")
 
   return (
-    <FoundationPage slug="radius" sections={SECTIONS} advice={["radius"]}>
+    <FoundationPage slug="radius" sections={SECTIONS}>
       <DocSection
         id="scale"
         title="Scale"
@@ -73,14 +69,6 @@ export default function RadiusPage() {
             )
           })}
         </ul>
-      </DocSection>
-
-      <DocSection
-        id="example"
-        title="Example"
-        description="The spec's example, live: a card, a table and a badge, all square, with no radius class added."
-      >
-        <LiveExample id="radius-1" title="radius.md" />
       </DocSection>
     </FoundationPage>
   )

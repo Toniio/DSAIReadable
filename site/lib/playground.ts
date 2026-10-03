@@ -18,6 +18,9 @@ function deriveControl(name: string, story: AutoStory, prop: string): Control {
       name: prop,
       options: axis.values,
       default: axis.default ?? axis.values[0],
+      // A cva axis keyed by numbers (Heading's `level`) takes a number prop:
+      // the code writes `level={2}`, which compiles, not `level="2"`.
+      numeric: axis.values.every((value) => /^\d+$/.test(value)) || undefined,
     }
 
   const row = componentSpec(name).props.find(
@@ -77,11 +80,29 @@ export function autoControls(name: string): Control[] {
  * the canvas offers to force those only. Rest is always there.
  */
 export function forcedStates(name: string): ForcedState[] {
-  const drawn = new Set(stateRows(name).map((row) => row.state))
+  const rows = stateRows(name)
   return [
     "rest",
     ...(["hover", "focus", "active"] as const).filter((state) =>
-      drawn.has(state)
+      rows.some(
+        (row) =>
+          row.state === state &&
+          // A row whose classes never use the pseudo-class names something
+          // else: Tabs' `active` is the selected tab (data-active), not a
+          // press. A row with no class of its own draws the state through a
+          // component it composes (Pagination's links are buttonVariants).
+          (row.classes.length === 0 ||
+            row.classes.some((value) => PSEUDO[state].test(value)))
+      )
     ),
   ]
+}
+
+/** The variants each forced state stands for: `focus` is focus and focus-visible. */
+// `group-hover/item:` and `has-[…:focus-visible]:` count; `data-active:`
+// (an attribute the component sets) does not.
+const PSEUDO: Record<"hover" | "focus" | "active", RegExp> = {
+  hover: /(^|[:[]|group-|peer-)hover[\]:/]/,
+  focus: /(^|[:[]|group-|peer-|has-)focus(-visible|-within)?[\]:/]/,
+  active: /(^|[:[]|group-|peer-)active[\]:/]/,
 }

@@ -8886,7 +8886,7 @@
         "name": "DirectionProvider",
         "summary": "Renders `Direction.DirectionProvider`.",
         "description": "Passes the reading direction to every Radix component below it; wrap the app or a section with it to support right-to-left languages.",
-        "example": "<DirectionProvider direction=\"rtl\">\n  <App />\n</DirectionProvider>"
+        "example": "<DirectionProvider dir=\"rtl\">\n  <App />\n</DirectionProvider>"
       },
       {
         "name": "useDirection",

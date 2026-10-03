@@ -7,6 +7,7 @@ import {
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { headingVariants } from "@/components/ui/heading"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { cn } from "@/lib/utils"
 import { SECTIONS } from "@/site/lib/nav"
@@ -25,6 +26,7 @@ import { GetStarted } from "@/site/overview/get-started"
 import { OverviewFrame } from "@/site/overview/overview-frame"
 import { Rules } from "@/site/overview/rules"
 import { DocSection } from "@/site/ui/doc-section"
+import { LINK } from "@/site/ui/link"
 import { InlineMarkdown } from "@/site/ui/markdown"
 import { PageHeader } from "@/site/ui/page-header"
 
@@ -45,7 +47,7 @@ const SECTION_LINES: Record<string, string> = {
   "/patterns/":
     "Screens that do one job, composed from the components: the rules, the structure and the code.",
   "/changes/":
-    "Every release, newest first, each change with its category and its commit.",
+    "Every release, newest first, each changeset with its category and its commit.",
   "/audits/":
     "What the checks measure: eval conformance, contrast, and the declared shadcn/ui divergences.",
 }
@@ -60,7 +62,9 @@ export default function OverviewPage() {
         eyebrow={
           <span className="flex flex-wrap items-center gap-2">
             <Badge variant="outline">v{VERSION}</Badge>
-            <span>{META.framework}</span>
+            {/* The metadata names shadcn/ui by its GitHub organization,
+                shadcn-ui; every page of the site writes the project's name. */}
+            <span>{META.framework.replace("shadcn-ui", "shadcn/ui")}</span>
           </span>
         }
         title={META.name}
@@ -124,7 +128,7 @@ export default function OverviewPage() {
       <DocSection
         id="rules"
         title="Rules"
-        description="What every screen built with the design system follows. The ESLint plugin and the MCP server check them."
+        description="What every screen built with the design system follows. The ESLint plugin and the MCP server check the first four in your code. The last two are built into the tokens and the components, and checked in the design system's own CI."
       >
         <Rules targetSize={targetSize()} divergences={divergences()} />
       </DocSection>
@@ -141,7 +145,12 @@ export default function OverviewPage() {
                   FOCUS_RING
                 )}
               >
-                <span className="flex items-center justify-between gap-2 font-heading text-base font-semibold">
+                <span
+                  className={cn(
+                    "flex items-center justify-between gap-2",
+                    headingVariants({ level: 4 })
+                  )}
+                >
                   {item.label}
                   <ArrowRightIcon
                     aria-hidden="true"
@@ -186,11 +195,7 @@ export default function OverviewPage() {
         <p className="text-xs text-muted-foreground">
           <Link
             href={sourceUrl("design-system.index.json")}
-            className={cn(
-              "inline-flex items-center gap-1 text-primary underline underline-offset-4",
-              FOCUS_OUTLINE_RESET,
-              FOCUS_RING
-            )}
+            className={cn(LINK, "inline-flex items-center gap-1")}
           >
             design-system.index.json
             <ArrowUpRightIcon aria-hidden="true" />

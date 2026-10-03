@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
@@ -12,15 +12,20 @@ export interface TocItem {
 }
 
 /**
- * The section being read: the last one whose top has passed under the
- * header, or the last of the page once the bottom is reached.
+ * The section being read: the last one whose top has reached the place a
+ * jump to it lands (its scroll margin, under the header), or the last of the
+ * page once the bottom is reached. A short section a link jumps to is
+ * marked, not the one after it.
  */
 function current(items: TocItem[]): string | undefined {
-  const line = window.innerHeight * 0.25
   let found = items[0]?.id
   for (const item of items) {
     const element = document.getElementById(item.id)
-    if (element && element.getBoundingClientRect().top <= line) found = item.id
+    if (!element) continue
+    const margin = Number.parseFloat(getComputedStyle(element).scrollMarginTop)
+    // One pixel of slack: a jump lands exactly on the margin, give or take rounding.
+    if (element.getBoundingClientRect().top <= (margin || 0) + 1)
+      found = item.id
   }
   const bottom =
     window.innerHeight + window.scrollY >=
@@ -31,20 +36,43 @@ function current(items: TocItem[]): string | undefined {
 /** "On this page": the sections of the page, the one being read marked. */
 export function PageToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState<string | undefined>(items[0]?.id)
+  // The entry just followed stays marked while its jump scrolls the page: a
+  // short last section, at the bottom, would otherwise give way to the last.
+  const chosen = useRef<string | undefined>(undefined)
 
   useEffect(() => {
     let frame = 0
     const update = () => {
       cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => setActive(current(items)))
+      frame = requestAnimationFrame(() => {
+        if (chosen.current === undefined) setActive(current(items))
+      })
     }
+    // The reader scrolls again: the page decides the entry from then on.
+    const release = () => {
+      chosen.current = undefined
+    }
+    // The jump has ended: the entry stays, and the next scroll, whatever
+    // moves it (the scrollbar dragged too), decides again. The update the
+    // jump's last scroll queued is dropped: it runs after this event.
+    const settle = () => {
+      if (chosen.current === undefined) return
+      cancelAnimationFrame(frame)
+      chosen.current = undefined
+    }
+    const RELEASES = ["wheel", "touchstart", "keydown"] as const
     update()
     window.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("scrollend", settle)
     window.addEventListener("resize", update)
+    for (const name of RELEASES)
+      window.addEventListener(name, release, { passive: true })
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener("scroll", update)
+      window.removeEventListener("scrollend", settle)
       window.removeEventListener("resize", update)
+      for (const name of RELEASES) window.removeEventListener(name, release)
     }
   }, [items])
 
@@ -58,6 +86,10 @@ export function PageToc({ items }: { items: TocItem[] }) {
           <li key={item.id}>
             <Link
               href={`#${item.id}`}
+              onClick={() => {
+                chosen.current = item.id
+                setActive(item.id)
+              }}
               aria-current={active === item.id ? "location" : undefined}
               data-active={active === item.id || undefined}
               className={cn(

@@ -10,8 +10,6 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
-import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
-import { cn } from "@/lib/utils"
 import type { Args, Story } from "@/site/playground/types"
 
 type Level = "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
@@ -132,8 +130,6 @@ ${a.action ? "  EmptyContent,\n" : ""}  EmptyDescription,
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
-import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
-import { cn } from "@/lib/utils"
 
 export function Example() {
   return (
@@ -145,10 +141,7 @@ export function Example() {
 ${title.join("\n")}
         <EmptyDescription>
           You have not created a project yet.{" "}
-          <Link href="#guide" className={cn(FOCUS_OUTLINE_RESET, FOCUS_RING)}>
-            Read the guide
-          </Link>{" "}
-          to start one.
+          <Link href="#guide">Read the guide</Link> to start one.
         </EmptyDescription>
       </EmptyHeader>${action}
     </Empty>
@@ -186,10 +179,7 @@ const story: Story = {
           <EmptyTitle as={a.as}>{a.title}</EmptyTitle>
           <EmptyDescription>
             You have not created a project yet.{" "}
-            <Link href="#guide" className={cn(FOCUS_OUTLINE_RESET, FOCUS_RING)}>
-              Read the guide
-            </Link>{" "}
-            to start one.
+            <Link href="#guide">Read the guide</Link> to start one.
           </EmptyDescription>
         </EmptyHeader>
         {a.action ? (

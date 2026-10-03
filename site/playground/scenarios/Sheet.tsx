@@ -74,6 +74,7 @@ function AccountSheet({ args }: { args: Args }) {
  * canvas; the code leaves it out, since the trigger opens it.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     {

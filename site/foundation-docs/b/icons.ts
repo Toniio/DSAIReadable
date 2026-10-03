@@ -41,11 +41,16 @@ export function usedIcons(library: string): UsedIcon[] {
       importLine
     )) {
       for (const raw of names.split(",")) {
-        const name = raw
+        const imported = raw
           .trim()
           .split(/\s+as\s+/)[0]
           ?.trim()
-        if (!name || !name.endsWith("Icon")) continue
+        // Types and helpers are not icons: an icon is a PascalCase export.
+        if (!imported || !/^[A-Z][A-Za-z0-9]*$/.test(imported)) continue
+        // The library exports each icon twice, `Eye` and `EyeIcon`: an icon
+        // is listed once, under the suffixed name, which the copied import
+        // line uses.
+        const name = imported.endsWith("Icon") ? imported : `${imported}Icon`
         const list = users.get(name) ?? []
         if (!list.some((user) => user.slug === slug))
           list.push({ name: entry.name, slug })

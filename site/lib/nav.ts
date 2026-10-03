@@ -207,18 +207,19 @@ export function patternsNav(): NavGroup[] {
   ]
 }
 
-/** The sections of the Audits page, as anchors. */
+/**
+ * The Audits section: one page, and where the rest of its story is told. Its
+ * own sections are anchors, listed once, in "On this page": the navigation
+ * marks the page the reader is on.
+ */
 export function auditsNav(): NavGroup[] {
   return [
+    { items: [{ label: "Audits", href: "/audits/" }] },
     {
+      label: "Related",
       items: [
-        { label: "Summary", href: "/audits/#summary" },
-        { label: "Evals", href: "/audits/#evals" },
-        { label: "Contrast", href: "/audits/#contrast" },
-        { label: "Components", href: "/audits/#components" },
-        { label: "shadcn/ui", href: "/audits/#shadcn" },
-        { label: "Exemptions", href: "/audits/#exemptions" },
-        { label: "Deprecations", href: "/audits/#deprecations" },
+        { label: "Change log", href: "/changes/" },
+        { label: "All tokens", href: "/foundations/tokens/" },
       ],
     },
   ]

@@ -61,6 +61,8 @@ export interface PrimitiveStep {
   step: string
   value: string
   status: Status
+  /** Why a step no token reads is kept: a reserved step's reason. */
+  description?: string
   /** The semantic tokens that read it, in either mode. */
   usedBy: string[]
   search: string
@@ -162,6 +164,12 @@ export function colorData(): ColorData {
     .map((entry): ColorAlias => {
       const target = reads(entry, "light") ?? ""
       const classes = aliasClasses(entry)
+      // The primitive steps the semantic token resolves to, so a search
+      // for `mist.950` finds `--foreground` as it finds its semantic token.
+      const semantic = tokenByName(target)
+      const steps = semantic
+        ? [reads(semantic, "light"), reads(semantic, "dark")]
+        : []
       return {
         cssVar: entry.cssVar,
         reads: target,
@@ -173,6 +181,7 @@ export function colorData(): ColorData {
           entry.token,
           entry.cssVar,
           target,
+          ...steps,
           ...classes,
           entry.value.light,
           entry.value.dark,
@@ -196,6 +205,8 @@ export function colorData(): ColorData {
       step: rest.join(".") || paletteId,
       value: entry.value.light,
       status: entry.status,
+      // Only a step no token reads needs its reason on the page.
+      description: usedBy.length ? undefined : entry.description,
       usedBy,
       search: search([name, entry.value.light, ...usedBy]),
     })

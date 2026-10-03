@@ -43,8 +43,9 @@ function clamp(value: Args[string], min: number, max: number): number {
 /** What the args draw: the items shown, and the one open on first render. */
 function resolve(args: Args) {
   const items = FAQ.slice(0, clamp(args.items, 1, FAQ.length))
-  const open =
-    args.defaultValue === "none" ? undefined : String(args.defaultValue)
+  // An item past `items` is not drawn: it opens nothing, and the code does
+  // not name it.
+  const open = items.find((item) => item.value === args.defaultValue)?.value
   return {
     items,
     open,
@@ -71,7 +72,14 @@ const story: Story = {
       default: "none",
     },
     { kind: "boolean", name: "disabled", default: false },
-    { kind: "number", name: "items", default: 3, min: 1, max: FAQ.length },
+    // Every item drawn, so each defaultValue opens one.
+    {
+      kind: "number",
+      name: "items",
+      default: FAQ.length,
+      min: 1,
+      max: FAQ.length,
+    },
   ],
   render: (args) => {
     const { items, open, multiple, collapsible, disabled } = resolve(args)

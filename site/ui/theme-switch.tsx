@@ -22,6 +22,8 @@ export function ThemeSwitch() {
       type="single"
       variant="outline"
       size="sm"
+      // Joined, one segmented control: the header fits a phone's width.
+      spacing={0}
       aria-label="Color theme"
       // Controlled from the first render: no value until the stored theme is known.
       value={mounted ? (theme ?? "system") : ""}
@@ -32,7 +34,8 @@ export function ThemeSwitch() {
       {THEMES.map(({ value, label, icon: Icon }) => (
         <ToggleGroupItem key={value} value={value} aria-label={label}>
           <Icon />
-          <span className="hidden md:inline">{label}</span>
+          {/* From lg to xl the header's tabs take the room the labels had. */}
+          <span className="hidden md:inline lg:hidden xl:inline">{label}</span>
         </ToggleGroupItem>
       ))}
     </ToggleGroup>

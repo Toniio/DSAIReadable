@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr"
 
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 import { ChangeLog, type LogRelease } from "@/site/change-docs/change-log"
 import {
   categories,
@@ -23,7 +24,7 @@ import { LINK } from "@/site/ui/link"
 export const metadata: Metadata = {
   title: "Changes",
   description:
-    "Every release of the design system, newest first, each change with its category and its commit.",
+    "Every release of the design system, newest first, each changeset with its category and its commit.",
 }
 
 const POLICY = `${sourceUrl("CONTRIBUTING.md")}#versioning-and-releases`
@@ -114,7 +115,8 @@ export default function ChangesPage() {
           <>
             Every release of the design system, newest first. One version names
             the tokens, the components, the registry, the MCP server and the
-            ESLint plugin, and each change says what it moves with its category.
+            ESLint plugin. Each change made through a changeset says what it
+            moves with its category, and links its commit.
           </>
         }
       >
@@ -221,7 +223,10 @@ export default function ChangesPage() {
           </p>
         ) : null}
         <p className="text-sm">
-          <Link href={POLICY} className={LINK}>
+          <Link
+            href={POLICY}
+            className={cn(LINK, "inline-flex items-center gap-1")}
+          >
             Versioning and releases, in CONTRIBUTING.md
             <ArrowUpRightIcon aria-hidden="true" />
           </Link>

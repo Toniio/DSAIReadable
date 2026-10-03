@@ -189,6 +189,7 @@ ${header.join("\n")}
  * hand.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     { kind: "boolean", name: "showCloseButton", default: true },

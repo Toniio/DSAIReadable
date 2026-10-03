@@ -80,6 +80,11 @@ const NAMESPACES: [RegExp, (name: string) => string[]][] = [
   [/^--transition-duration-(.+)$/, (name) => [`duration-${name}`]],
   [/^--ease-(.+)$/, (name) => [`ease-${name}`]],
   [/^--opacity-(.+)$/, (name) => [`opacity-${name}`]],
+  // The layout tokens are read by the classes spacing.md names, not by the
+  // whole spacing vocabulary: px-page, not p-page or size-page.
+  [/^--spacing-page$/, () => ["px-page"]],
+  [/^--spacing-section$/, () => ["gap-section", "py-section"]],
+  [/^--spacing-(sidebar.*)$/, (name) => [`w-${name}`]],
   [/^--spacing-(.+)$/, (name) => [`p-${name}`, `gap-${name}`, `size-${name}`]],
   [/^--border-width-(.+)$/, (name) => [`border-${name}`]],
   [/^--default-border-width$/, () => ["border"]],

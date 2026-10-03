@@ -15,6 +15,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar"
+import { useStagedState } from "@/site/playground/scenarios/use-staged-state"
 import type { Args, Story } from "@/site/playground/types"
 
 type Align = "start" | "center" | "end"
@@ -33,8 +34,14 @@ function shape(args: Args) {
   }
 }
 
+/** The window events that close a Radix menu: see `useStagedState`. */
+const CAUSES = ["blur"] as const
+
 function MenubarStory({ args }: { args: Args }) {
   const s = shape(args)
+  // The open menu: `defaultValue` in the code, kept here through the clicks
+  // on the page around the canvas. An empty value closes every menu.
+  const [value, setValue] = useStagedState(s.open ? "file" : "", CAUSES)
   const [grid, setGrid] = useState(true)
   const [rulers, setRulers] = useState(false)
   const [zoom, setZoom] = useState("fit")
@@ -42,7 +49,7 @@ function MenubarStory({ args }: { args: Args }) {
   return (
     // Room below the bar for the open menu and its submenu.
     <div className="flex min-h-96 items-start justify-center p-8">
-      <Menubar defaultValue={s.open ? "file" : undefined} loop={s.loop}>
+      <Menubar value={value} onValueChange={setValue} loop={s.loop}>
         <MenubarMenu value="file">
           <MenubarTrigger>File</MenubarTrigger>
           <MenubarContent align={align}>
@@ -218,11 +225,14 @@ function code(args: Args): string {
 /**
  * Menubar: File, Edit and View menus, with a submenu, checkable items and a
  * radio group. `open` mounts it with File open (`defaultValue`), so it still
- * closes and opens, and every change of a control mounts it again; `variant` makes the last File item the destructive
- * "Delete project"; `inset` lines plain items up with the checkable ones.
+ * closes and opens, and keeps it open while the reader clicks the page
+ * around the canvas; every change of a control mounts it again. `variant`
+ * makes the last File item the destructive "Delete project"; `inset` lines
+ * plain items up with the checkable ones.
  * No item shows a shortcut: the spec wants a real handler behind each one.
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     {
@@ -241,8 +251,8 @@ const story: Story = {
     { kind: "boolean", name: "disabled", default: false },
     { kind: "boolean", name: "loop", default: false },
   ],
-  // Any change remounts the bar: a Radix menu closes when its window loses
-  // focus, which a click on the controls does, and the change shows on File.
+  // Any change mounts the bar again: the change shows on File, open again
+  // even after the reader closed it.
   render: (args) => <MenubarStory key={JSON.stringify(args)} args={args} />,
   code,
   layout: "fullscreen",

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/context-menu"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { cn } from "@/lib/utils"
+import { useStagedState } from "@/site/playground/scenarios/use-staged-state"
 import type { Args, Story } from "@/site/playground/types"
 
 interface MenuArgs {
@@ -46,8 +47,13 @@ function read(args: Args): MenuArgs {
 const AREA =
   "flex h-36 w-64 items-center justify-center border border-dashed text-xs text-muted-foreground"
 
+/** The window events that close a Radix menu: see `useStagedState`. */
+const CAUSES = ["blur"] as const
+
 function Menu({ a }: { a: MenuArgs }) {
   const trigger = useRef<HTMLSpanElement>(null)
+  // Closed until the right-click below opens it where the pointer is.
+  const [open, setOpen] = useStagedState(false, CAUSES)
   const [showGrid, setShowGrid] = useState(true)
   const [sort, setSort] = useState("name")
 
@@ -68,7 +74,7 @@ function Menu({ a }: { a: MenuArgs }) {
   }, [a.open])
 
   return (
-    <ContextMenu modal={a.modal}>
+    <ContextMenu open={open} onOpenChange={setOpen} modal={a.modal}>
       <ContextMenuTrigger
         ref={trigger}
         tabIndex={0}
@@ -318,12 +324,14 @@ ${lines.map((line) => `        ${line}`).join("\n")}
 /**
  * ContextMenu: a right-click area and its menu; with `open` on, the canvas
  * right-clicks the center of the area once, so the menu shows where a
- * pointer would open it. A Radix menu closes when its window loses focus, as
- * the canvas does when the reader clicks a control: every change remounts
- * it. `modal` starts off: a modal menu open on load hides the focusable area
- * from assistive technology, which axe reports (aria-hidden-focus).
+ * pointer would open it, and stays open while the reader clicks the page
+ * around the canvas; every change of a control mounts it again, so the
+ * change shows on the open menu. `modal` starts off: a modal menu open on
+ * load hides the focusable area from assistive technology, which axe reports
+ * (aria-hidden-focus).
  */
 const story: Story = {
+  anatomy: { open: true },
   controls: [
     { kind: "boolean", name: "open", default: true },
     { kind: "boolean", name: "modal", default: false },

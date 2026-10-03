@@ -79,7 +79,12 @@ export function foundationDoc(file: string): FoundationDoc {
   }
   return {
     source,
-    intro: trimSection(intro.join("\n")),
+    // "Source: this file" names the spec, which the page links under its
+    // header: on a web page, "this file" names nothing.
+    intro: trimSection(intro.join("\n")).replace(
+      /Source: this file\s*(·\s*)?/g,
+      ""
+    ),
     parts: parts.map(({ heading, lines: body }) => {
       const usageRules = heading === "Usage Rules"
       const text = trimSection(body.join("\n"))
