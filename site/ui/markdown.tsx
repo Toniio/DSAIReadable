@@ -112,9 +112,25 @@ function components(from: string | undefined, shift: number): Components {
         {children}
       </Link>
     ),
-    code: ({ children }) => (
-      <code className="bg-muted px-1 py-0.5 font-mono text-xs">{children}</code>
-    ),
+    code: ({ children }) => {
+      const code = (
+        <code className="bg-muted px-1 py-0.5 font-mono text-xs">
+          {children}
+        </code>
+      )
+      // A composition rule an Usage section cites: `rule-21` links to its
+      // text on the Overview.
+      const rule = /^rule-\d+$/.test(textOf(children))
+        ? textOf(children)
+        : undefined
+      return rule ? (
+        <Link href={`/#${rule}`} className={LINK}>
+          {code}
+        </Link>
+      ) : (
+        code
+      )
+    },
     pre: ({ children }) => {
       const child = Children.toArray(children)[0] as
         ReactElement<{ className?: string; children?: ReactNode }> | undefined

@@ -2,7 +2,7 @@ import {
   primitiveName,
   reads,
   tokenClasses,
-} from "@/site/foundation-docs/a/token-classes"
+} from "@/site/foundation-docs/tokens/token-classes"
 import { tokenByName, tokens, type Token } from "@/site/lib/tokens"
 
 /** One token of the "All tokens" table: only what the table shows. */

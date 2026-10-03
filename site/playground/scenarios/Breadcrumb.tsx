@@ -1,4 +1,4 @@
-import { Fragment, type MouseEvent } from "react"
+import { Fragment } from "react"
 import { DotOutlineIcon } from "@phosphor-icons/react"
 
 import {
@@ -10,6 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { text } from "@/site/playground/jsx"
 import type { Args, Story } from "@/site/playground/types"
 
 /** The parent pages, from the top of the hierarchy down. */
@@ -41,16 +42,6 @@ function resolve(args: Args) {
   }
 }
 
-/** The canvas keeps the reader on it: a trail link does not navigate. */
-function stay(event: MouseEvent<HTMLAnchorElement>) {
-  event.preventDefault()
-}
-
-/** Text as a JSX child: braces and angle brackets go in an expression. */
-function text(value: string): string {
-  return /[{}<>]/.test(value) ? `{${JSON.stringify(value)}}` : value
-}
-
 /** Breadcrumb: a product trail whose depth, ellipsis and separator are controls. */
 const story: Story = {
   controls: [
@@ -73,9 +64,7 @@ const story: Story = {
             <Fragment key={step ? step.href : "ellipsis"}>
               <BreadcrumbItem>
                 {step ? (
-                  <BreadcrumbLink href={step.href} onClick={stay}>
-                    {step.label}
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href={step.href}>{step.label}</BreadcrumbLink>
                 ) : (
                   <BreadcrumbEllipsis />
                 )}

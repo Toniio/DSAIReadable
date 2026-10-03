@@ -144,6 +144,8 @@ export function useStoryControls(
   return {
     controls,
     code,
+    /** The forced states the story draws for some args, when it says. */
+    storyStates: scenario?.states,
     loaded: Boolean(auto) || scenario !== undefined,
     // Known before the scenario's module loads: the page starts on the
     // playground, and never shows the example first for a moment.
@@ -181,7 +183,7 @@ export function Playground({
   /** The spec's code example, shown in the Example view. */
   exampleCode: string
 }) {
-  const { controls, code, hasStory, tall } = useStoryControls(
+  const { controls, code, hasStory, tall, storyStates } = useStoryControls(
     name,
     slug,
     autoControls
@@ -202,15 +204,24 @@ export function Playground({
     [controls, edited]
   )
   const theme = themeChoice === "site" ? siteTheme : themeChoice
+  // A story can draw fewer states with some args: what the reader forced
+  // before changing them falls back to Rest, and the selector follows.
+  const offered = useMemo(() => {
+    const drawn = storyStates?.(args)
+    return drawn
+      ? states.filter((state) => state === "rest" || drawn.includes(state))
+      : states
+  }, [storyStates, args, states])
+  const shown = offered.includes(forced) ? forced : "rest"
   const frameState = useMemo<FrameState>(
     () => ({
       view: current,
       args: resolveArgs(controls, args),
-      state: current === "story" ? forced : "rest",
+      state: current === "story" ? shown : "rest",
       theme,
       nonce,
     }),
-    [current, controls, args, forced, theme, nonce]
+    [current, controls, args, shown, theme, nonce]
   )
   const shownCode =
     current === "story" ? (code(args) ?? exampleCode) : exampleCode
@@ -234,23 +245,29 @@ export function Playground({
         ) : (
           <span className="text-sm font-medium">Example</span>
         )}
-        {current === "story" && states.length > 1 ? (
-          <ToggleGroup
-            type="single"
-            variant="outline"
-            size="sm"
-            aria-label="Interaction state"
-            value={forced}
-            onValueChange={(value) => {
-              if (value) setForced(value as ForcedState)
-            }}
-          >
-            {states.map((state) => (
-              <ToggleGroupItem key={state} value={state}>
-                {FORCED_STATE_LABELS[state]}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
+        {current === "story" && offered.length > 1 ? (
+          <div className="flex flex-col gap-1">
+            <ToggleGroup
+              type="single"
+              variant="outline"
+              size="sm"
+              aria-label="Interaction state"
+              value={shown}
+              onValueChange={(value) => {
+                if (value) setForced(value as ForcedState)
+              }}
+            >
+              {offered.map((state) => (
+                <ToggleGroupItem key={state} value={state}>
+                  {FORCED_STATE_LABELS[state]}
+                </ToggleGroupItem>
+              ))}
+            </ToggleGroup>
+            <p className="text-xs text-muted-foreground">
+              A forced state applies to every part of the component that has it:
+              all the items of a menu show Hover together.
+            </p>
+          </div>
         ) : null}
         <div className="ml-auto flex flex-wrap items-center gap-2">
           <IconToggles

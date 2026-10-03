@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils"
 import { SECTIONS } from "@/site/lib/nav"
 import { GITHUB_URL, META, sourceUrl, VERSION } from "@/site/lib/site"
 import {
+  compositionRules,
   divergences,
   glossary,
   install,
@@ -22,6 +23,7 @@ import {
   stats,
   targetSize,
 } from "@/site/overview/data"
+import { CompositionRules } from "@/site/overview/composition-rules"
 import { GetStarted } from "@/site/overview/get-started"
 import { OverviewFrame } from "@/site/overview/overview-frame"
 import { Rules } from "@/site/overview/rules"
@@ -34,6 +36,7 @@ const TOC = [
   { id: "at-a-glance", label: "At a glance" },
   { id: "get-started", label: "Get started" },
   { id: "rules", label: "Rules" },
+  { id: "composition-rules", label: "Composition rules" },
   { id: "sections", label: "Sections" },
   { id: "glossary", label: "Glossary" },
 ]
@@ -129,6 +132,22 @@ export default function OverviewPage() {
         description="What every screen built with the design system follows. The ESLint plugin and the MCP server check the first four in your code. The last two are built into the tokens and the components, and checked in the design system's own CI."
       >
         <Rules targetSize={targetSize()} divergences={divergences()} />
+      </DocSection>
+
+      <DocSection
+        id="composition-rules"
+        title="Composition rules"
+        description={
+          <>
+            The choices the specs make for you, as the MCP server serves them (
+            <code className="font-mono text-xs">
+              dsaireadable_get_design_rules
+            </code>
+            ). A spec cites the rule that applies to it by its identifier.
+          </>
+        }
+      >
+        <CompositionRules rules={compositionRules()} />
       </DocSection>
 
       <DocSection id="sections" title="Sections">

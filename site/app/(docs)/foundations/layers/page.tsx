@@ -10,10 +10,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
 import { LINK } from "@/site/ui/link"
-import { tokenAdvice } from "@/site/foundation-docs/b/spec"
-import { Code } from "@/site/foundation-docs/b/token-bits"
+import { tokenAdvice } from "@/site/foundation-docs/spec-pages/spec"
+import { Code } from "@/site/foundation-docs/spec-pages/token-bits"
 import { components } from "@/site/lib/components"
 import { foundation } from "@/site/lib/nav"
 import { listFiles, readText } from "@/site/lib/repo"

@@ -1,7 +1,7 @@
 import { readdirSync } from "node:fs"
 import path from "node:path"
 
-import { remToPx } from "@/site/foundation-docs/b/spec"
+import { remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import { components } from "@/site/lib/components"
 import { changelog } from "@/site/lib/changelog"
 import { section } from "@/site/lib/markdown"
@@ -333,6 +333,26 @@ export function sectionFacts(): Record<string, string> {
     "/changes/": `${entries.length} entries in ${releases} releases`,
     "/audits/": `${runs.length - gold} model eval runs, ${gold} of the gold standard`,
   }
+}
+
+export interface CompositionRule {
+  /** `rule-21`: what the specs cite, and the anchor of the rule on the Overview. */
+  id: string
+  /** The rule, as Markdown. */
+  rule: string
+  /** The components a choice rule covers; none for a general rule. */
+  appliesTo: string[]
+}
+
+/** The composition rules of the inventory, as `dsaireadable_get_design_rules` serves them. */
+export function compositionRules(): CompositionRule[] {
+  return readJson<{
+    composition_rules: { id: string; rule: string; applies_to?: string[] }[]
+  }>("design-system.index.json").composition_rules.map((entry) => ({
+    id: entry.id,
+    rule: entry.rule,
+    appliesTo: entry.applies_to ?? [],
+  }))
 }
 
 /** The glossary the MCP server serves. */

@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import { lightScope, remToPx } from "@/site/foundation-docs/b/spec"
+import { lightScope, remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import type { Token } from "@/site/lib/tokens"
 
 /**

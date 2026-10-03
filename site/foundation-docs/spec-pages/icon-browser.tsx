@@ -20,7 +20,10 @@ import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import { Spinner } from "@/components/ui/spinner"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
-import { WEIGHTS, type IconSize } from "@/site/foundation-docs/b/icon-settings"
+import {
+  WEIGHTS,
+  type IconSize,
+} from "@/site/foundation-docs/spec-pages/icon-settings"
 import { LINK } from "@/site/ui/link"
 
 /** Each size as a whole class, so that Tailwind compiles it. */

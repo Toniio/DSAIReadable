@@ -24,12 +24,16 @@ const PROP_STATES: { prop: string; label: string; value: Args[string] }[] = [
 /**
  * The args a grid starts from, where the defaults would hide what it shows.
  * A Field draws its hover and its focus on a choice card, not on an input
- * (a card is a row: a vertical Field stretches its checkbox); a default
- * Toggle has neither border nor fill, so its three sizes would draw the
- * same. An axis named here still takes each of its own values.
+ * (a card is a row: a vertical Field stretches its checkbox); a Badge draws
+ * its hover and its focus as a link, since a badge that is not one has
+ * neither; a default Toggle has neither border nor fill, so its three sizes
+ * would draw the same. An axis named here still takes each of its own values.
  */
 const GRID_BASE: Record<"states" | "axes", Record<string, Args>> = {
-  states: { Field: { control: "choice-card", orientation: "horizontal" } },
+  states: {
+    Badge: { asChild: true },
+    Field: { control: "choice-card", orientation: "horizontal" },
+  },
   axes: { Toggle: { variant: "outline" } },
 }
 

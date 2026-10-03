@@ -9,8 +9,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { UI_STRINGS } from "@/lib/ui-strings"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
-import { Code } from "@/site/foundation-docs/b/token-bits"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
+import { Code } from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { readJson } from "@/site/lib/repo"
 import { DocSection } from "@/site/ui/doc-section"

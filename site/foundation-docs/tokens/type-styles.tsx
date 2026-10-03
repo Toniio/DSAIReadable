@@ -13,13 +13,13 @@ import {
 } from "@/components/ui/table"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
-import { CopyCode, Ticks } from "@/site/foundation-docs/a/token-ui"
+import { CopyCode, Ticks } from "@/site/foundation-docs/tokens/token-ui"
 import type {
   HeadingRow,
   TextStyle,
   TypeData,
   TypeRow,
-} from "@/site/foundation-docs/a/type-data"
+} from "@/site/foundation-docs/tokens/type-data"
 import { CopyButton } from "@/site/ui/copy-button"
 import { DocSection } from "@/site/ui/doc-section"
 

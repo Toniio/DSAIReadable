@@ -17,6 +17,7 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle,
 } from "@/components/ui/questionnaire"
+import { text } from "@/site/playground/jsx"
 import type { Args, Story } from "@/site/playground/types"
 
 type ButtonProps = ComponentProps<typeof QuestionnaireNext>
@@ -138,7 +139,7 @@ function code(args: Args): string {
     "    >",
     "      <QuestionnaireProgress />",
     `      <QuestionnaireItem${attrs(item)}>`,
-    `        <QuestionnaireTitle>${s.title}</QuestionnaireTitle>`,
+    `        <QuestionnaireTitle>${text(s.title)}</QuestionnaireTitle>`,
     ...(s.description
       ? [
           "        <QuestionnaireDescription>",

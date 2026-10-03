@@ -14,12 +14,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import * as focus from "@/lib/focus"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
 import {
   ClassList,
   Code,
   ModePanels,
-} from "@/site/foundation-docs/b/token-bits"
+} from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import {
   darkValue,

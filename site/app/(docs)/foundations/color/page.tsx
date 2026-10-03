@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { colorData } from "@/site/foundation-docs/a/color-data"
-import { ColorExplorer } from "@/site/foundation-docs/a/color-explorer"
+import { colorData } from "@/site/foundation-docs/tokens/color-data"
+import { ColorExplorer } from "@/site/foundation-docs/tokens/color-explorer"
 import {
   FoundationEyebrow,
   withoutTitle,
-} from "@/site/foundation-docs/a/page-bits"
+} from "@/site/foundation-docs/tokens/page-bits"
 import { foundation, foundationsNav } from "@/site/lib/nav"
 import { readText } from "@/site/lib/repo"
 import { DocSection } from "@/site/ui/doc-section"

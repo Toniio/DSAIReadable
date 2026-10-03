@@ -4,8 +4,12 @@ import { PlusIcon } from "@phosphor-icons/react/ssr"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { FoundationPage } from "@/site/foundation-docs/b/foundation-page"
-import { ClassList, Code, Dimension } from "@/site/foundation-docs/b/token-bits"
+import { FoundationPage } from "@/site/foundation-docs/spec-pages/foundation-page"
+import {
+  ClassList,
+  Code,
+  Dimension,
+} from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import { tailwindClasses, tokenGroup } from "@/site/lib/tokens"
 import { DocSection } from "@/site/ui/doc-section"

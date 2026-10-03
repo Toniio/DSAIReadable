@@ -26,7 +26,7 @@ import { cn } from "@/lib/utils"
 import {
   foundationCount,
   tierCounts,
-} from "@/site/foundation-docs/a/foundation-counts"
+} from "@/site/foundation-docs/tokens/foundation-counts"
 import { anchor } from "@/site/lib/markdown"
 import { FOUNDATION_GROUPS, foundationsNav } from "@/site/lib/nav"
 import { DocSection } from "@/site/ui/doc-section"

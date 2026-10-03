@@ -8,6 +8,12 @@ import type { Install } from "@/site/overview/data"
 import { CodeBlock, CommandLine } from "@/site/ui/code-block"
 import { LINK } from "@/site/ui/link"
 
+/**
+ * The list wraps (`h-auto`), so its triggers take the height of their text,
+ * under the 24px a pointer target needs (`size.target.min`).
+ */
+const TAB = "min-h-target"
+
 /** One numbered step: what it does, then its command. */
 function Step({
   index,
@@ -59,10 +65,18 @@ export function GetStarted({ install }: { install: Install }) {
         variant="line"
         className="max-w-full flex-wrap justify-start group-data-horizontal/tabs:h-auto"
       >
-        <TabsTrigger value="registry">Components</TabsTrigger>
-        <TabsTrigger value="mcp">MCP server</TabsTrigger>
-        <TabsTrigger value="skills">Agent skills</TabsTrigger>
-        <TabsTrigger value="eslint">ESLint plugin</TabsTrigger>
+        <TabsTrigger value="registry" className={TAB}>
+          Components
+        </TabsTrigger>
+        <TabsTrigger value="mcp" className={TAB}>
+          MCP server
+        </TabsTrigger>
+        <TabsTrigger value="skills" className={TAB}>
+          Agent skills
+        </TabsTrigger>
+        <TabsTrigger value="eslint" className={TAB}>
+          ESLint plugin
+        </TabsTrigger>
       </TabsList>
 
       <TabsContent value="registry" className="flex flex-col gap-4">

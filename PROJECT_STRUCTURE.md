@@ -198,7 +198,9 @@ Each script explains at the top of the file what it checks and why. They all run
 `release:check` runs the first two; `release:version` is what a release pull request runs
 ([`CONTRIBUTING.md`](./CONTRIBUTING.md#versioning-and-releases)).
 
-Shared modules: `scripts/lib/` (component API, `next/font` fonts, the re-tokenization codemod, the class equivalence behind its reasons), `wcag.ts`, `color-vision.ts`.
+Shared modules: `scripts/lib/` (component API, `next/font` fonts, the re-tokenization codemod, the class equivalence behind its reasons, the contrast pairs `lint-contrast.ts` checks and the site's Audits page shows), `wcag.ts`, `color-vision.ts`.
+
+`test-site.ts` (`npm run site:test`) is the one script that loads the built documentation site: see [`site/`](#site--the-documentation-site).
 
 ---
 
@@ -275,28 +277,35 @@ host such as GitHub Pages serves it under). The `Site` workflow
 `https://toniio.github.io/DSAIReadable/` on each release tag and by hand:
 [`CONTRIBUTING.md`](./CONTRIBUTING.md#the-documentation-site).
 
-| Path                       | Role                                                                                                                                                                                                                     |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `site/app/(docs)/`         | The pages: Overview, Foundations, Components, Patterns, Changes, Audits                                                                                                                                                  |
-| `site/app/preview/`        | The preview canvases, one document per component and pattern: the pages show them in iframes, so an overlay portaled to `<body>` takes the preview's theme and a fixed layout stays inside it                            |
-| `site/app/site.css`        | Imports `styles/globals.css`, lists the folders Tailwind scans, and redefines `hover`, `focus`, `focus-visible`, `focus-within` and `active` so a canvas can force a state (`data-force-state`), for the site build only |
-| `site/lib/`                | Build-time readers of the specs, the MCP context, `tokens.manifest.json` and the changelog                                                                                                                               |
-| `site/ui/`                 | The site's frame: header, navigation, "On this page", Markdown rendered with the design system's parts                                                                                                                   |
-| `site/overview/`           | The Overview page: getting started, the rules a consuming project follows, the figures of the design system                                                                                                              |
-| `site/foundation-docs/a/`  | The token pages: the All tokens table and its data, the color explorer, the type styles                                                                                                                                  |
-| `site/foundation-docs/b/`  | The foundation pages built from a spec: their frame, live examples, do and don't, the icon browser, the motion demo                                                                                                      |
-| `site/component-docs/`     | The parts of a component page: the index of the 65, the anatomy, the variant and state grids, the dependency graph                                                                                                       |
-| `site/pattern-docs/`       | The pattern pages' previews and thumbnails                                                                                                                                                                               |
-| `site/change-docs/`        | The change log, read from `CHANGELOG.md`                                                                                                                                                                                 |
-| `site/audit-docs/`         | The Audits page: contrast, evals, the components' checks                                                                                                                                                                 |
-| `site/playground/`         | The playground: controls derived from the cva axes and the specs' Props / API (`auto.ts`), hand-written scenarios for compound components (`scenarios/`), the canvas and its postMessage protocol                        |
-| `site/generated/examples/` | The specs' code examples, copied by `npm run site:examples` — generated, do not edit                                                                                                                                     |
+| Path                               | Role                                                                                                                                                                                                                     |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `site/app/(docs)/`                 | The pages: Overview, Foundations, Components, Patterns, Changes, Audits                                                                                                                                                  |
+| `site/app/preview/`                | The preview canvases, one document per component and pattern: the pages show them in iframes, so an overlay portaled to `<body>` takes the preview's theme and a fixed layout stays inside it                            |
+| `site/app/site.css`                | Imports `styles/globals.css`, lists the folders Tailwind scans, and redefines `hover`, `focus`, `focus-visible`, `focus-within` and `active` so a canvas can force a state (`data-force-state`), for the site build only |
+| `site/lib/`                        | Build-time readers of the specs, the MCP context, `tokens.manifest.json` and the changelog                                                                                                                               |
+| `site/ui/`                         | The site's frame: header, navigation, "On this page", Markdown rendered with the design system's parts                                                                                                                   |
+| `site/overview/`                   | The Overview page: getting started, the rules a consuming project follows, the composition rules (each one an anchor, `#rule-21`, that the specs link to), the figures of the design system                              |
+| `site/foundation-docs/tokens/`     | The token pages: the All tokens table and its data, the color explorer, the type styles                                                                                                                                  |
+| `site/foundation-docs/spec-pages/` | The foundation pages built from a spec: their frame, live examples, do and don't, the icon browser, the motion demo                                                                                                      |
+| `site/component-docs/`             | The parts of a component page: the index of the 65, the anatomy, the variant and state grids, the dependency graph                                                                                                       |
+| `site/pattern-docs/`               | The pattern pages' previews and thumbnails                                                                                                                                                                               |
+| `site/change-docs/`                | The change log, read from `CHANGELOG.md`                                                                                                                                                                                 |
+| `site/audit-docs/`                 | The Audits page: contrast, evals, the components' checks                                                                                                                                                                 |
+| `site/playground/`                 | The playground: controls derived from the cva axes and the specs' Props / API (`auto.ts`), hand-written scenarios for compound components (`scenarios/`), the canvas and its postMessage protocol                        |
+| `site/generated/examples/`         | The specs' code examples, copied by `npm run site:examples` — generated, do not edit                                                                                                                                     |
 
 The site follows the repository's rules: ESLint, `tokens:lint-values` and knip
 cover `site/`, and `npm run site:check` lints it with the config a consuming
 project runs (`@dsaireadable/eslint-plugin`), the copied examples included,
 and checks that every focus ring the site composes on an element with no
 border adds a solid outline (`FOCUS_BORDERLESS`, focus.md rule 6).
+
+`npm run site:test` checks the result a visitor gets: after `site:build`, it
+serves `site/out` under its base path and loads every page, the story and
+example previews of every component and the previews of the patterns and
+foundations in headless Chromium, in both themes (`scripts/test-site.ts`). It
+fails on an axe violation, a page error, an unexpected response and a tab stop
+with no visible indicator, and runs in the `site` job of CI.
 
 ---
 
@@ -312,16 +321,17 @@ stop; then, per component, the **Accessibility** section replayed: role,
 accessible name and each key of the Keyboard table. `npm run test:lint-coverage`
 fails when a component has no renderable example or a documented key has no test.
 
-| File                              | Role                                                                                                                                                                                                                           |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tests/examples.test.tsx`         | The 65 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                                                      |
-| `tests/components/*.test.tsx`     | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                                                                                                 |
-| `tests/spec-examples.ts`          | Vite plugin: serves each spec's code example, and each complete module of the foundations, as a module (`virtual:spec-examples`), so the tests render what agents copy                                                         |
-| `tests/axe.ts`                    | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                                                                                                                |
-| `tests/focus.ts`                  | Reads the rings painted before and after a focus move: the indicator may sit on the control, its wrapping group or the part standing for it                                                                                    |
-| `tests/reduced-motion/*.test.tsx` | The `reduced-motion` project: in a browser that reports `prefers-reduced-motion: reduce`, with the animations on, the overlays enter and leave with a fade only and the loops and slides of `specs/foundations/motion.md` stop |
-| `tests/reduced-motion/setup.ts`   | The stylesheet without `tests/no-motion.css`, for that project                                                                                                                                                                 |
-| `tests/setup.ts`                  | Loads `styles/globals.css` and `tests/no-motion.css` (no animation, so axe reads final colors); unmounts and resets the theme after each test                                                                                  |
+| File                              | Role                                                                                                                                                                                                                                 |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tests/examples.test.tsx`         | The 65 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                                                            |
+| `tests/components/*.test.tsx`     | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                                                                                                       |
+| `tests/spec-examples.ts`          | Vite plugin: serves each spec's code example, and each complete module of the foundations, as a module (`virtual:spec-examples`), so the tests render what agents copy                                                               |
+| `tests/axe.ts`                    | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                                                                                                                      |
+| `tests/focus.ts`                  | Walks the tab order with real `Tab` presses and reports each stop whose indicator has no part at 3:1                                                                                                                                 |
+| `tests/focus-measure.ts`          | Reads the rings painted before and after a focus move: the indicator may sit on the control, its wrapping group, the part standing for it or a pseudo-element; no import, so `scripts/test-site.ts` injects it into the site's pages |
+| `tests/reduced-motion/*.test.tsx` | The `reduced-motion` project: in a browser that reports `prefers-reduced-motion: reduce`, with the animations on, the overlays enter and leave with a fade only and the loops and slides of `specs/foundations/motion.md` stop       |
+| `tests/reduced-motion/setup.ts`   | The stylesheet without `tests/no-motion.css`, for that project                                                                                                                                                                       |
+| `tests/setup.ts`                  | Loads `styles/globals.css` and `tests/no-motion.css` (no animation, so axe reads final colors); unmounts and resets the theme after each test                                                                                        |
 
 The tests live outside `components/ui/` so that the linters and the registry,
 which read that folder, only see distributed code.
@@ -453,6 +463,7 @@ npm run evals:generate      # Screens from Claude Code on a subscription, no API
 npm run site:dev            # The documentation site, locally (Next.js dev server)
 npm run site:check          # The site: examples copied from the specs are fresh, the consumer lint and the focus check pass
 npm run site:build          # The static documentation site, in site/out/
+npm run site:test           # The built site served under its base path and loaded in headless Chromium: axe, page errors, a focus indicator on every tab stop
 npm run format              # Prettier on every .ts/.tsx/.md
 ```
 

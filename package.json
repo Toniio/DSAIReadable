@@ -70,6 +70,7 @@
     "check": "tsx scripts/check.ts",
     "site:dev": "next dev site",
     "site:build": "next build site",
+    "site:test": "tsx scripts/test-site.ts",
     "site:examples": "tsx scripts/build-site-examples.ts",
     "site:check": "tsx scripts/build-site-examples.ts --check && tsx scripts/lint-site.ts",
     "prepare": "husky",
