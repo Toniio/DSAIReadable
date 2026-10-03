@@ -55,8 +55,8 @@ const CONCURRENCY = Number(flag("concurrency") ?? 4)
  */
 const KNOWN_404: { path: RegExp; why: string }[] = [
   {
-    path: /\/(user1|user2)\.jpg$/,
-    why: "Avatar's example shows two pictures of the project's own",
+    path: /\/(shadcn|evilrabbit)\.png$/,
+    why: "Avatar's example shows pictures of the project's own",
   },
   {
     path: /\/placeholder\.jpg$/,
@@ -379,6 +379,13 @@ async function check(
     page.on("requestfailed", (request) => {
       // Next cancels the prefetches and preloads a navigation makes useless.
       if (request.failure()?.errorText === "net::ERR_ABORTED") return
+      // A known 404 on an image: the browser blocks the HTML answer (ORB).
+      const failed = new URL(request.url()).pathname
+      if (
+        request.failure()?.errorText === "net::ERR_BLOCKED_BY_ORB" &&
+        KNOWN_404.some((known) => known.path.test(failed))
+      )
+        return
       problems.push(
         `request failed: ${new URL(request.url()).pathname} (${request.failure()?.errorText})`
       )
