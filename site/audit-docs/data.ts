@@ -78,7 +78,7 @@ export interface EvalRun {
   generator: string
   model?: string
   via?: string
-  /** `Gold`, `No context`, `MCP`, `MCP + skills`. */
+  /** `Gold (calibration)`, `No context`, `MCP`, `MCP + skills`. */
   condition: string
   context?: string
   skills: string[]
@@ -90,10 +90,15 @@ export interface EvalRun {
   results: TaskResult[]
 }
 
-const CONDITION_ORDER = ["Gold", "No context", "MCP", "MCP + skills"]
+const CONDITION_ORDER = [
+  "Gold (calibration)",
+  "No context",
+  "MCP",
+  "MCP + skills",
+]
 
 function condition(report: RunReport): string {
-  if (report.generator === "gold") return "Gold"
+  if (report.generator === "gold") return "Gold (calibration)"
   if (report.context === "none") return "No context"
   return report.skills?.length ? "MCP + skills" : "MCP"
 }
@@ -179,10 +184,14 @@ export function evalRuns(): EvalRun[] {
     )
 }
 
-/** The runs of the most recent date: the conditions measured together. */
+/**
+ * The model runs of the most recent date: the conditions measured together.
+ * A gold run calibrates the scorer, it measures no model.
+ */
 export function latestRuns(runs: EvalRun[]): EvalRun[] {
-  const last = runs.at(-1)?.date
-  return runs.filter((run) => run.date === last)
+  const models = runs.filter((run) => run.generator !== "gold")
+  const last = models.at(-1)?.date
+  return models.filter((run) => run.date === last)
 }
 
 /** A share as a percentage: `0.981` → `98.1%`. */

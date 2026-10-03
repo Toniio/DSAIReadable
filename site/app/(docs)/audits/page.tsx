@@ -66,7 +66,7 @@ const TOC: TocItem[] = [
 
 /** How a run's condition reads in a sentence. */
 const CONDITION_PHRASE: Record<string, string> = {
-  Gold: "as the gold standard",
+  "Gold (calibration)": "as the gold standard",
   "No context": "with no context",
   MCP: "with the MCP server",
   "MCP + skills": "with the MCP server and the skills",
@@ -328,7 +328,7 @@ export default function AuditsPage() {
                   <TableCell className="font-mono">{run.version}</TableCell>
                   <TableCell className="min-w-44 whitespace-normal">
                     {run.generator === "gold" ? (
-                      "Gold standard"
+                      "Gold (calibration)"
                     ) : (
                       <span className="flex flex-col gap-0.5">
                         <span className="font-mono">
