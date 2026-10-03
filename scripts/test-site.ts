@@ -392,9 +392,15 @@ async function check(
     })
 
     const response = await page.goto(`${origin}${base}${target.url}`, {
-      waitUntil: "networkidle",
+      waitUntil: "load",
       timeout: 60_000,
     })
+    // Hydration and the story modules settle with the network. A page that
+    // keeps prefetching its links (the components index: 65 of them) may not
+    // reach idle on a slow runner, and that is not a defect of the site.
+    await page
+      .waitForLoadState("networkidle", { timeout: 15_000 })
+      .catch(() => {})
     const status = response?.status()
     const wanted = target.kind === "missing" ? 404 : 200
     if (status !== wanted)
