@@ -217,3 +217,22 @@ jobs:
       # and one number everywhere) and what a pinned install pins. Both run on
       # throwaway copies and a local git remote: no network.
       - run: npm run release:test
+
+  site:
+    name: site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      # The specs' examples copied into site/generated/ match the specs,
+      # every file of the site passes the lint a consuming project runs, and
+      # every focus ring the site composes has a solid part (focus.md).
+      - run: npm run site:check
+      # Every page of the documentation site prerenders from the repository's
+      # files: a spec, a token or a context file it cannot read fails here.
+      # Networked: next/font downloads the typefaces.
+      - run: npm run site:build

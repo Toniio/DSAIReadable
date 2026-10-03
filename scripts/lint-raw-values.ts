@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 //
 // lint-raw-values.ts
-// Scans components/, src/, hooks/, lib/ and styles/ for raw CSS values AND Tailwind utility misuses.
+// Scans components/, src/, hooks/, lib/, styles/ and site/ (the documentation site) for raw CSS values AND Tailwind utility misuses.
 // Errors:   raw colors, raw layout spacing, raw border-radius, raw durations, raw TW utilities (z-N, duration-N, duration-[X], ease-[X], ring-N, ring, ring-[X], outline-N, outline, outline-offset-N, outline-[X], rounded-[X], text-[size], shadow-[X], arbitrary spacing)
 // Warnings: unusual opacity values
 // Respects: allow-raw comments (block or inline) as opt-outs
@@ -653,6 +653,7 @@ async function main() {
     "hooks/**/*.{css,scss,ts,tsx}",
     "lib/**/*.{css,scss,ts,tsx}",
     "styles/**/*.{css,scss,ts,tsx}",
+    "site/**/*.{css,scss,ts,tsx}",
   ]
 
   // `mcp-server/**` is deliberately out of scope: it emits no CSS. The hex
@@ -668,6 +669,9 @@ async function main() {
     "tokens/**",
     "tokens.css",
     "scripts/**",
+    // The documentation site's build output.
+    "site/.next/**",
+    "site/out/**",
   ]
 
   let allFiles: string[] = []

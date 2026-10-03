@@ -1,0 +1,47 @@
+@import "../../styles/globals.css" source(none);
+
+/* The design system's sources and the site's own: automatic detection is off,
+   so Tailwind scans exactly these folders (paths relative to this file). */
+@source "../../components";
+@source "../../lib";
+@source "../../hooks";
+@source "..";
+
+/* Forced states for the playground. A preview canvas that carries
+   data-force-state draws every control inside it as if it were hovered,
+   focused or pressed: the built-in variants are redefined here, for the site
+   build only, so the design system's own stylesheet stays untouched. The
+   compound variants (group-hover, peer-hover, has-, aria-, data-) follow. */
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &:is([data-force-state="hover"] *) {
+    @slot;
+  }
+}
+@custom-variant focus (&:focus, &:is([data-force-state="focus"] *));
+@custom-variant focus-visible (&:focus-visible, &:is([data-force-state="focus"] *));
+@custom-variant focus-within (&:focus-within, &:is([data-force-state="focus"] *));
+@custom-variant active (&:active, &:is([data-force-state="active"] *));
+
+/* A panel that shows the light mode inside a dark page (the Light and Dark
+   panels of the foundations) resets the semantic variables to their light
+   values; the dark: variant must stop at it too. Same specificity as the
+   design system's own dark variant: the :where() part adds none. */
+@custom-variant dark (&:is(.dark *):where(:not([data-theme-scope="light"], [data-theme-scope="light"] *)));
+
+/* Three components draw their focus through an arbitrary has-[…:focus-visible]
+   variant, which the redefinitions above do not reach: the group of an
+   InputGroup, a Questionnaire choice, a Field choice card. Under a forced
+   focus they draw it here, with the classes the components write. */
+@layer utilities {
+  [data-force-state="focus"] [data-slot="input-group"],
+  [data-force-state="focus"] [data-slot="questionnaire-choice"],
+  [data-force-state="focus"]
+    [data-slot="field-label"]:has(> [data-slot="field"]) {
+    @apply border-ring ring-(length:--space-focus-ring-width) ring-ring/50;
+  }
+}

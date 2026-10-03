@@ -21,6 +21,7 @@
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": [
     "node_modules",
+    "site",
     "scripts",
     "packages",
     "mcp-server",

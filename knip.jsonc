@@ -30,10 +30,20 @@
       // screens the change tasks start from, read as text by evals/lib/tasks.ts.
       "ignore": ["evals/fixtures/**", "evals/bases/**"],
       "project": [
-        "{components,hooks,lib,scripts,tests,evals}/**/*.{ts,tsx}",
+        "{components,hooks,lib,scripts,tests,evals,site}/**/*.{ts,tsx}",
         "styles/*.css",
+        "site/**/*.css",
         "*.{ts,mjs}",
       ],
+      // The documentation site is a Next.js app in site/, which knip's Next.js
+      // and PostCSS plugins only look for at the workspace root.
+      "next": {
+        "config": ["site/next.config.ts"],
+        "entry": [
+          "site/app/**/{page,layout,not-found,error,loading,template,default}.tsx",
+        ],
+      },
+      "postcss": { "config": ["site/postcss.config.mjs"] },
     },
     "packages/eslint-plugin": {
       // The package.json scripts (build, test) are found by knip; `main` and

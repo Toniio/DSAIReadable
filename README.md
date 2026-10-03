@@ -50,6 +50,7 @@ dsaireadable/
 ├── styles/                     # globals.css: the @theme bridge from the tokens to Tailwind
 ├── tests/                      # Component tests: every spec example rendered in headless Chromium, with axe
 ├── evals/                      # The conformance harness: reference tasks, scoring, history of the scores
+├── site/                       # The documentation site: foundations, components with a live playground, patterns
 ├── tokens/                     # Source of truth for the tokens (three-tier DTCG JSON)
 │   ├── tokens.resolver.json    # DTCG resolver: the three tiers, then light / dark
 │   ├── primitive.json          # Tier 1 — raw values (private)
@@ -421,9 +422,10 @@ npm run tokens-validate      # Every check in sequence (required before any comm
 npm run check        # Every CI check that needs no network or API key, in one call; prints only failures
 npm run lint         # ESLint
 npm run format       # Prettier (sorts Tailwind classes automatically)
-npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP server
+npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP server, site
 npm run test:components  # Every spec example, and the foundations' complete modules, in headless Chromium: axe light and dark, focus, keyboard
 npm run evals:test   # The conformance harness scores its gold examples, with no model
+npm run site:dev     # The documentation site: foundations, components with a live playground, patterns, changes, audits
 ```
 
 ---

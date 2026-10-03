@@ -7,7 +7,7 @@ import { Direction } from "radix-ui"
  * Passes the reading direction to every Radix component below it; wrap the app or a section with it to support right-to-left languages.
  *
  * @example
- * <DirectionProvider direction="rtl">
+ * <DirectionProvider dir="rtl">
  *   <App />
  * </DirectionProvider>
  */

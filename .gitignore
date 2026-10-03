@@ -6,6 +6,8 @@ node_modules/
 dist/
 out/
 *.tsbuildinfo
+# Written by next dev and next build: it points at their generated types
+site/next-env.d.ts
 
 # Environment
 .env
