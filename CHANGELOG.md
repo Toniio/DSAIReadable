@@ -1,5 +1,91 @@
 # Changelog
 
+## 0.2.0
+
+### Minor Changes
+
+- 176b028: component-api: Alert and Badge get an `info` variant, for a notice that asks for no action (a tip, a change that took effect; a Beta or Scheduled label). Alert `info` is `text-info` on the card with its description at `text-info/90`; Badge `info` is `text-info` on a `bg-info/10` tint (`/20` in dark), `bg-info-hover` as a link. Both are declared in `shadcn.divergences`, like `success` and `warning`.
+- 9dfee97: component-api: Add the `color.background.input` token and its `bg-input-fill` class, the fill of a form control. `--input` stays the border, as in shadcn/ui, and the translucent fills that read it move to the new token with the same values (mist.200 in light, white at 15% in dark): `dark:bg-input/30` becomes `dark:bg-input-fill/30`, `disabled:bg-input/50` becomes `disabled:bg-input-fill/50` and `dark:disabled:bg-input/80` becomes `dark:disabled:bg-input-fill/80` in Bubble, Button, Checkbox, Combobox, Command, Input, InputGroup, InputOTP, NativeSelect, Questionnaire, RadioGroup, Select, Tabs and Textarea, and ButtonGroupSeparator's `bg-input` becomes `bg-input-fill`. Paint a field's fill with `bg-input-fill/<n>`: `bg-input/<n>` is now the 3:1 border color at that opacity.
+- ddba411: token-breaking: The color primitives are generated: one OKLCH ramp of 11 steps, `50` to `950`, per hue (mist, violet, red, green, emerald, blue, yellow, amber, plum), on lightness targets every hue shares, each step with its `hex` fallback. `tokens.css` declares them, and the elevation shadows, as `oklch()`. `primitive.color.mist.0` is renamed `primitive.color.white` (`--ds-prim-color-mist-0` to `--ds-prim-color-white`), `violet.550` and `amber.450` are removed, every other color primitive changes value, and each ramp gains the steps it lacked. The primitives stay private: no semantic or component token is renamed, and code that follows the rules reads none of them.
+- ddba411: mcp: `dsaireadable_get_tokens` and the token resources serve a color the way `tokens.css` declares it, as `oklch()`, where they served `#rrggbb` or `rgba()`.
+- 176b028: lint: `configs.tailwind` rejects a color with an opacity modifier under a state variant: `hover:`, `active:`, `focus:`, and the open, expanded, checked, selected and pressed variants (`hover:bg-primary/80`, `data-open:bg-muted/50`, `has-data-checked:bg-primary/5`). The message names the state token to use. A focus ring keeps its halo alpha (`focus-visible:ring-ring/50`), and a resting tint (`bg-destructive/10`) is not a state.
+- 176b028: component-api: Name the interaction states and add the info role. New tokens and classes: `color.action.background.hover` (`bg-primary-hover`, violet.700 light / violet.600 dark), `color.action.background.selected` (`bg-primary-selected`, violet.50 / violet.950), `color.action.secondary.hover` (`bg-secondary-hover`, mist.200 / mist.700), `color.action.tint.hover` (`bg-primary-tint-hover`, violet.200 / violet.700), `color.feedback.error.hover` (`bg-destructive-hover`), `color.feedback.success.hover` (`bg-success-hover`), `color.feedback.warning.hover` (`bg-warning-hover`) and `color.feedback.info.hover` (`bg-info-hover`), each at step 200 in light and 700 in dark; the veils `color.overlay.hover` (`bg-overlay-hover`, ink at 5% light, white at 8% dark) and `color.overlay.selected` (`bg-overlay-selected`, ink at 7% light, white at 8% dark); the info role, `color.feedback.info.default` (`bg-info`, blue.600 / blue.400), `color.feedback.info.foreground` (reserved) and `color.text.info.default` (`text-info`, blue.700 / blue.300). The pressed states `color.action.background.active`, `color.action.secondary.active`, `color.feedback.error.active` and `color.overlay.active` are named and reserved. New primitives: `ink-alpha.5`, `ink-alpha.7` and `white-alpha.8`.
+- 0a1ee78: mcp: `dsaireadable_validate_screen` adds a `tooltip-provider` rule: a warning, at the line of the first `<Tooltip>`, on a file that renders a `Tooltip` with neither a `<TooltipProvider>` nor a `<SidebarProvider>`, which supplies one. A `Tooltip` throws `` `Tooltip` must be used within `TooltipProvider` `` without a provider above it. It is a warning, not an error: the provider often lives in the root layout, which a check of one file does not see.
+
+### Patch Changes
+
+- 1e434af: docs: The Chart spec now says that while the pointer rests over a chart, Recharts keeps the tooltip on the hovered data point: focus shows that point, and the arrow keys and `Enter` change nothing visible until the pointer leaves the chart (recharts/recharts#7905). It also says to move the pointer off the chart before a browser test of the keyboard: a pointer an earlier test left over the chart fails the test, depending on the file order.
+- 9dfee97: visual: Control borders reach 3:1 (WCAG 1.4.11), and focus moves away from them:
+
+  - `color.border.input`: light #e0e8ea (mist.200) to #708185 (mist.500), dark white at 15% to #708185 (mist.500). The resting border of Input, Textarea, Select, NativeSelect, Checkbox, RadioGroupItem, InputOTPSlot, InputGroup, ComboboxChips, a Questionnaire choice, Calendar's dropdowns and the `outline` Button in dark goes from 1.12–1.61:1 to 3.65–4.86:1 on the page, the card and the popover. The search field of a Combobox popup keeps its `border-input/30`, now mist.500 at 30%.
+  - Switch: the unchecked track (`bg-input`, it has no border) moves with the token, and in dark it is solid where it was `bg-input/80`: 3.68:1 light and 3.65:1 dark on the card, where it measured 1.12:1 and 1.47:1.
+  - `color.border.focus`: light #708185 (mist.500) to #21292b (mist.800), dark #95a7ab (mist.400) to #e0e8ea (mist.200). Every focus indicator (`border-ring`, `outline-ring`, the `ring-ring/50` halo) is darker in light and lighter in dark: its solid part goes from 3.68–4.06:1 to 13.41–14.82:1 in light and from 5.92–7.89:1 to 11.93–15.89:1 in dark, and it sits 3.65:1 (light) and 3.27:1 (dark) away from the resting border, so a focused field no longer reads as a resting one.
+
+- 176b028: visual: Every state drawn with an opacity now takes a named token:
+
+  - Primary fill on hover (Button, Badge link, default Bubble): `bg-primary/80` to `bg-primary-hover`, violet.700 light (the label goes from 4.24:1 to 9.76:1) and violet.600 dark.
+  - Secondary fill on hover (Button, Badge link, secondary and muted Bubble): a 5% foreground mix or `/80` to `bg-secondary-hover`, mist.200 light and mist.700 dark; it now shows on a card too.
+  - Destructive tint on hover (Button, Badge link, Bubble) and highlighted destructive menu items (ContextMenu, DropdownMenu, Menubar): `bg-destructive/20` (`/30` dark; menus `/10`, `/20` dark) to `bg-destructive-hover`, red.200 light and red.700 dark. A destructive Badge link in dark changed nothing on hover; it does now.
+  - Success and warning Badge links on hover: `/20` to `bg-success-hover` and `bg-warning-hover`, step 200 light and 700 dark.
+  - Tinted Bubble on hover: a relative primary color to `bg-primary-tint-hover`, violet.200 light and violet.700 dark.
+  - Neutral hovers (table row, Attachment link, choice card, Questionnaire choice; ghost Button and Badge, outline Button, Select and NativeSelect triggers, outline and ghost Bubbles in dark): `bg-muted/50` or `bg-input-fill/50` to the `bg-overlay-hover` veil, ink at 5% light and white at 8% dark, visible on the page, a card and a popover.
+  - Open, current and expanded (NavigationMenu trigger and link, expanded table row) and the active tab in dark: `bg-muted/50` or `bg-input-fill/30` to the `bg-overlay-selected` veil, ink at 7% light and white at 8% dark.
+  - Checked choice card (FieldLabel wrapping a Field): `bg-primary/5` and `border-primary/30` (`/10` and `/20` dark) to `bg-primary-selected` (violet.50 light, violet.950 dark) and a solid `border-primary`.
+  - Checked Questionnaire choice: `border-foreground/30` to a solid `border-foreground` frame, which no longer sits lighter than the resting 3:1 border.
+  - Documentation site: the component cards and dependency links take `hover:border-foreground` instead of `hover:border-foreground/30`.
+
+- ddba411: visual: The semantic colors, re-anchored on the OKLCH ramps, move as follows (light and dark hex; one value when both modes share it). The largest moves are the chart series, and the warning fill, which turns more orange:
+
+  - `color.background.default`: dark #090b0c to #080b0c
+  - `color.background.subtle`: light #f1f3f3 to #f1f4f5, dark #22292b to #21292b
+  - `color.background.elevated`: dark #161b1d to #151b1d
+  - `color.background.inverse` (reserved): light #090b0c to #080b0c
+  - `color.text.default`: light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+  - `color.text.subtle`: light #607175 to #56676b, dark #9ca8ab to #95a7ab
+  - `color.text.bold` (reserved): light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+  - `color.text.inverse` (reserved): dark #090b0c to #080b0c
+  - `color.text.action.default`: light #432dd7 to #4c3fe6, dark #a3b3ff to #b9c3ff
+  - `color.text.action.on` (reserved): #eef2ff to #f9faff
+  - `color.text.destructive.default`: light #9f0712 to #8b0004, dark #ffa2a2 to #ffb0a5
+  - `color.text.success.default`: light #006045 to #005639, dark #5ee9b5 to #69e2ac
+  - `color.text.warning.default`: light #973c08 to #925000, dark #ffd230 to #fbba55
+  - `color.border.default`: light #e3e7e8 to #e0e8ea
+  - `color.border.subtle` (reserved): light #e3e7e8 to #e0e8ea
+  - `color.border.input`: light #e3e7e8 to #e0e8ea
+  - `color.border.focus`: light #67787c to #708185, dark #9ca8ab to #95a7ab
+  - `color.icon.default` (reserved): light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+  - `color.icon.subtle` (reserved): light #67787c to #708185, dark #9ca8ab to #95a7ab
+  - `color.icon.action` (reserved): #eef2ff to #f9faff
+  - `color.action.background.default`: light #432dd7 to #4c3fe6, dark #372aac to #3721b7
+  - `color.action.background.foreground`: #eef2ff to #f9faff
+  - `color.feedback.error.default`: light #e7000b to #ea0a10, dark #ff6467 to #ff6f60
+  - `color.feedback.error.foreground`: dark #090b0c to #080b0c
+  - `color.feedback.success.default`: light #007a55 to #00764f, dark #00d492 to #00c084
+  - `color.feedback.success.foreground`: dark #090b0c to #080b0c
+  - `color.feedback.warning.default`: light #fe9a00 to #df8f00, dark #ffb900 to #fbba55
+  - `color.feedback.warning.foreground`: #090b0c to #080b0c
+  - `color.chart.1`: light #432dd7 to #3721b7, dark #6e6cff to #6362ff
+  - `color.chart.2`: light #438fbd to #3985b3, dark #8fd6fa to #61acdc
+  - `color.chart.3`: light #af8526 to #b16a00, dark #e5e747 to #cdcf5b
+  - `color.chart.4`: light #4d2761 to #36154a, dark #9b5f7c to #f0deff
+  - `color.chart.5`: light #734e00 to #6f3600, dark #c89005 to #b16a00
+  - `color.chart.sequential.1` (reserved): #bbf451 to #d3f2bf
+  - `color.chart.sequential.2` (reserved): #7ccf00 to #a0dc75
+  - `color.chart.sequential.3` (reserved): #5ea500 to #72ba2c
+  - `color.chart.sequential.4` (reserved): #497d00 to #529100
+  - `color.chart.sequential.5` (reserved): #3c6300 to #407300
+  - `color.sidebar.background`: light #f9fbfb to #f9fafb, dark #161b1d to #151b1d
+  - `color.sidebar.foreground`: light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+  - `color.sidebar.border`: light #e3e7e8 to #e0e8ea
+  - `color.sidebar.ring`: #67787c to #708185
+  - `color.sidebar.primary.default`: light #4f39f6 to #4c3fe6, dark #615fff to #4c3fe6
+  - `color.sidebar.primary.on`: light #eef2ff to #f9faff
+  - `color.sidebar.accent.default`: light #f1f3f3 to #f1f4f5, dark #22292b to #21292b
+  - `color.sidebar.accent.foreground`: light #161b1d to #151b1d, dark #f9fbfb to #f9fafb
+
+- 0a1ee78: visual: `SidebarProvider` now wraps its children in a `TooltipProvider` (`delayDuration` 0, the default of `TooltipProvider`), so the `tooltip` of a `SidebarMenuButton` renders with no provider of the app's own. It used to throw `` `Tooltip` must be used within `TooltipProvider` `` in an app that had none: the Sidebar spec requires a `tooltip` on every button collapsed to its icon, and agents that followed it built sidebars that did not render. A `TooltipProvider` in the root layout still works, but inside the `SidebarProvider` the sidebar's is the nearer one: a `Tooltip` there, in the sidebar or in `SidebarInset`, now opens after 0 ms, whatever `delayDuration` the root provider sets. shadcn/ui's `SidebarProvider` supplies no provider: the divergence is declared in `design-system.index.json`.
+- 0a1ee78: docs: The Sidebar spec now names the `TooltipProvider`. `SidebarProvider` supplies one to everything inside it, so the `tooltip` of each `SidebarMenuButton`, which the spec requires on every button collapsed to its icon, needs no provider of the app's own; a `Tooltip` outside the `SidebarProvider` still needs a `TooltipProvider` in the root layout, and throws without one. The spec's dependencies and its `Tooltip` cross-reference name the provider.
+
 ## 0.1.3
 
 ### Patch Changes
