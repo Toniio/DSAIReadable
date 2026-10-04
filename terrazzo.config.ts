@@ -26,7 +26,7 @@ export default defineConfig({
       "core/valid-cubic-bezier": "error",
       "core/valid-number": "error",
       "core/valid-shadow": "error",
-      "core/colorspace": ["error", { colorSpace: "srgb" }],
+      "core/colorspace": ["error", { colorSpace: "oklch" }],
       "core/required-type": "error",
       "core/descriptions": "error",
       "core/consistent-naming": ["error", { format: "kebab-case" }],

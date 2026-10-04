@@ -2,7 +2,7 @@
   "color": {
     "background": {
       "default": {
-        "$value": "{primitive.color.mist.0}",
+        "$value": "{primitive.color.white}",
         "$type": "color",
         "$description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
         "$extensions": {
@@ -28,7 +28,7 @@
         }
       },
       "elevated": {
-        "$value": "{primitive.color.mist.0}",
+        "$value": "{primitive.color.white}",
         "$type": "color",
         "$description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
         "$extensions": {
@@ -95,7 +95,7 @@
         }
       },
       "inverse": {
-        "$value": "{primitive.color.mist.0}",
+        "$value": "{primitive.color.white}",
         "$type": "color",
         "$description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
         "$extensions": {
@@ -137,7 +137,7 @@
       },
       "destructive": {
         "default": {
-          "$value": "{primitive.color.red.800}",
+          "$value": "{primitive.color.red.700}",
           "$type": "color",
           "$description": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text.",
           "$extensions": {
@@ -152,7 +152,7 @@
       },
       "success": {
         "default": {
-          "$value": "{primitive.color.emerald.800}",
+          "$value": "{primitive.color.emerald.700}",
           "$type": "color",
           "$description": "Success text and icons, on a neutral surface or on a success tint. Not for warnings, errors or neutral information.",
           "$extensions": {
@@ -167,7 +167,7 @@
       },
       "warning": {
         "default": {
-          "$value": "{primitive.color.amber.700}",
+          "$value": "{primitive.color.amber.600}",
           "$type": "color",
           "$description": "Warning text and icons, on a neutral surface or on a warning tint. Not for errors, successes or neutral information.",
           "$extensions": {
@@ -309,7 +309,7 @@
     "feedback": {
       "error": {
         "default": {
-          "$value": "{primitive.color.red.600}",
+          "$value": "{primitive.color.red.500}",
           "$type": "color",
           "$description": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states.",
           "$extensions": {
@@ -322,14 +322,14 @@
           }
         },
         "foreground": {
-          "$value": "{primitive.color.mist.0}",
+          "$value": "{primitive.color.white}",
           "$type": "color",
           "$description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
           "$extensions": {
             "docs": {
               "description": "Text and icons placed **on** a solid error surface.",
               "do": "Use whenever a solid `bg-destructive` background carries text or an icon.",
-              "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.500 drops to 2.89:1."
+              "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.400 drops to 2.73:1."
             },
             "status": "active"
           }
@@ -337,7 +337,7 @@
       },
       "success": {
         "default": {
-          "$value": "{primitive.color.emerald.700}",
+          "$value": "{primitive.color.emerald.600}",
           "$type": "color",
           "$description": "Success state color for backgrounds, tints and borders. Not for text, warnings or errors.",
           "$extensions": {
@@ -350,7 +350,7 @@
           }
         },
         "foreground": {
-          "$value": "{primitive.color.mist.0}",
+          "$value": "{primitive.color.white}",
           "$type": "color",
           "$description": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface.",
           "$extensions": {
@@ -365,12 +365,12 @@
       },
       "warning": {
         "default": {
-          "$value": "{primitive.color.amber.450}",
+          "$value": "{primitive.color.amber.400}",
           "$type": "color",
           "$description": "Warning state color for backgrounds and tints. Not for text, borders or icons, not for errors or successes.",
           "$extensions": {
             "docs": {
-              "description": "Warning-state fill — solid or tinted background. At 1.92:1 on white in light mode, it never stands alone as a border or an icon.",
+              "description": "Warning-state fill — solid or tinted background. At 2.60:1 on white in light mode, it never stands alone as a border or an icon.",
               "do": "Use for the `bg-warning/10`–`/30` tints and for a solid `bg-warning` surface with `text-warning-foreground`.",
               "dont": "Do not use for text, icons or a lone border — use `color.text.warning.default` (`text-warning`). Do not use for errors."
             },
@@ -394,7 +394,7 @@
     },
     "chart": {
       "1": {
-        "$value": "{primitive.color.violet.600}",
+        "$value": "{primitive.color.violet.700}",
         "$type": "color",
         "$description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
@@ -402,7 +402,7 @@
         }
       },
       "2": {
-        "$value": "{primitive.color.blue.600}",
+        "$value": "{primitive.color.blue.500}",
         "$type": "color",
         "$description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
@@ -410,7 +410,7 @@
         }
       },
       "3": {
-        "$value": "{primitive.color.amber.600}",
+        "$value": "{primitive.color.amber.500}",
         "$type": "color",
         "$description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
@@ -426,7 +426,7 @@
         }
       },
       "5": {
-        "$value": "{primitive.color.amber.800}",
+        "$value": "{primitive.color.amber.700}",
         "$type": "color",
         "$description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
@@ -490,7 +490,7 @@
         "$description": "Sidebar panel surface. Not for the main content area or popovers.",
         "$extensions": {
           "docs": {
-            "tailwind": "mist.900"
+            "tailwind": "bg-sidebar"
           },
           "status": "active"
         }
@@ -501,7 +501,7 @@
         "$description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
         "$extensions": {
           "docs": {
-            "tailwind": "mist.50"
+            "tailwind": "text-sidebar-foreground"
           },
           "status": "active"
         }
@@ -512,7 +512,7 @@
         "$description": "Sidebar internal divider/border. Not for content-area borders.",
         "$extensions": {
           "docs": {
-            "tailwind": "white-alpha.10"
+            "tailwind": "border-sidebar-border"
           },
           "status": "active"
         }
@@ -523,19 +523,19 @@
         "$description": "Focus ring within the sidebar. Not for main content focus rings.",
         "$extensions": {
           "docs": {
-            "tailwind": "mist.500"
+            "tailwind": "ring-sidebar-ring"
           },
           "status": "active"
         }
       },
       "primary": {
         "default": {
-          "$value": "{primitive.color.violet.550}",
+          "$value": "{primitive.color.violet.600}",
           "$type": "color",
           "$description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
           "$extensions": {
             "docs": {
-              "tailwind": "violet.500"
+              "tailwind": "bg-sidebar-primary"
             },
             "status": "active"
           }
@@ -546,7 +546,7 @@
           "$description": "Text on top of the sidebar primary active item. Not for inactive item text.",
           "$extensions": {
             "docs": {
-              "tailwind": "mist.0"
+              "tailwind": "text-sidebar-primary-foreground"
             },
             "status": "active"
           }
@@ -559,7 +559,7 @@
           "$description": "Hovered or secondary sidebar item background. Not for the active primary item.",
           "$extensions": {
             "docs": {
-              "tailwind": "mist.800"
+              "tailwind": "bg-sidebar-accent"
             },
             "status": "active"
           }
@@ -570,7 +570,7 @@
           "$description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
           "$extensions": {
             "docs": {
-              "tailwind": "mist.50"
+              "tailwind": "text-sidebar-accent-foreground"
             },
             "status": "active"
           }
@@ -585,7 +585,7 @@
     },
     "static": {
       "white": {
-        "$value": "{primitive.color.mist.0}",
+        "$value": "{primitive.color.white}",
         "$type": "color",
         "$description": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies.",
         "$extensions": {

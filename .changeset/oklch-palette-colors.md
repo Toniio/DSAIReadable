@@ -1,0 +1,52 @@
+---
+"dsaireadable": patch
+---
+
+visual: The semantic colors, re-anchored on the OKLCH ramps, move as follows (light and dark hex; one value when both modes share it). The largest moves are the chart series, and the warning fill, which turns more orange:
+
+- `color.background.default`: dark #090b0c to #080b0c
+- `color.background.subtle`: light #f1f3f3 to #f1f4f5, dark #22292b to #21292b
+- `color.background.elevated`: dark #161b1d to #151b1d
+- `color.background.inverse` (reserved): light #090b0c to #080b0c
+- `color.text.default`: light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+- `color.text.subtle`: light #607175 to #56676b, dark #9ca8ab to #95a7ab
+- `color.text.bold` (reserved): light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+- `color.text.inverse` (reserved): dark #090b0c to #080b0c
+- `color.text.action.default`: light #432dd7 to #4c3fe6, dark #a3b3ff to #b9c3ff
+- `color.text.action.on` (reserved): #eef2ff to #f9faff
+- `color.text.destructive.default`: light #9f0712 to #8b0004, dark #ffa2a2 to #ffb0a5
+- `color.text.success.default`: light #006045 to #005639, dark #5ee9b5 to #69e2ac
+- `color.text.warning.default`: light #973c08 to #925000, dark #ffd230 to #fbba55
+- `color.border.default`: light #e3e7e8 to #e0e8ea
+- `color.border.subtle` (reserved): light #e3e7e8 to #e0e8ea
+- `color.border.input`: light #e3e7e8 to #e0e8ea
+- `color.border.focus`: light #67787c to #708185, dark #9ca8ab to #95a7ab
+- `color.icon.default` (reserved): light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+- `color.icon.subtle` (reserved): light #67787c to #708185, dark #9ca8ab to #95a7ab
+- `color.icon.action` (reserved): #eef2ff to #f9faff
+- `color.action.background.default`: light #432dd7 to #4c3fe6, dark #372aac to #3721b7
+- `color.action.background.foreground`: #eef2ff to #f9faff
+- `color.feedback.error.default`: light #e7000b to #ea0a10, dark #ff6467 to #ff6f60
+- `color.feedback.error.foreground`: dark #090b0c to #080b0c
+- `color.feedback.success.default`: light #007a55 to #00764f, dark #00d492 to #00c084
+- `color.feedback.success.foreground`: dark #090b0c to #080b0c
+- `color.feedback.warning.default`: light #fe9a00 to #df8f00, dark #ffb900 to #fbba55
+- `color.feedback.warning.foreground`: #090b0c to #080b0c
+- `color.chart.1`: light #432dd7 to #3721b7, dark #6e6cff to #6362ff
+- `color.chart.2`: light #438fbd to #3985b3, dark #8fd6fa to #61acdc
+- `color.chart.3`: light #af8526 to #b16a00, dark #e5e747 to #cdcf5b
+- `color.chart.4`: light #4d2761 to #36154a, dark #9b5f7c to #f0deff
+- `color.chart.5`: light #734e00 to #6f3600, dark #c89005 to #b16a00
+- `color.chart.sequential.1` (reserved): #bbf451 to #d3f2bf
+- `color.chart.sequential.2` (reserved): #7ccf00 to #a0dc75
+- `color.chart.sequential.3` (reserved): #5ea500 to #72ba2c
+- `color.chart.sequential.4` (reserved): #497d00 to #529100
+- `color.chart.sequential.5` (reserved): #3c6300 to #407300
+- `color.sidebar.background`: light #f9fbfb to #f9fafb, dark #161b1d to #151b1d
+- `color.sidebar.foreground`: light #090b0c to #080b0c, dark #f9fbfb to #f9fafb
+- `color.sidebar.border`: light #e3e7e8 to #e0e8ea
+- `color.sidebar.ring`: #67787c to #708185
+- `color.sidebar.primary.default`: light #4f39f6 to #4c3fe6, dark #615fff to #4c3fe6
+- `color.sidebar.primary.on`: light #eef2ff to #f9faff
+- `color.sidebar.accent.default`: light #f1f3f3 to #f1f4f5, dark #22292b to #21292b
+- `color.sidebar.accent.foreground`: light #161b1d to #151b1d, dark #f9fbfb to #f9fafb

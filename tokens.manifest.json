@@ -1,22 +1,6 @@
 {
-  "tokenCount": 426,
+  "tokenCount": 483,
   "tokens": [
-    {
-      "token": "primitive.color.mist.0",
-      "tier": "primitive",
-      "cssVar": "--ds-prim-color-mist-0",
-      "type": "color",
-      "status": "active",
-      "source": "tokens/primitive.json",
-      "reference": {
-        "light": "#ffffff"
-      },
-      "value": {
-        "light": "#ffffff"
-      },
-      "description": "Pure white. Primitive only.",
-      "private": true
-    },
     {
       "token": "primitive.color.mist.50",
       "tier": "primitive",
@@ -25,12 +9,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#f9fbfb"
+        "light": "oklch(98.46% 0.0017 247.84)"
       },
       "value": {
-        "light": "#f9fbfb"
+        "light": "oklch(98.46% 0.0017 247.84)"
       },
-      "description": "Near-white with mist hue.",
+      "description": "Cool neutral: surfaces, text and borders. Step 50, OKLCH lightness 0.985, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -41,12 +25,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#f1f3f3"
+        "light": "oklch(96.52% 0.0035 219.53)"
       },
       "value": {
-        "light": "#f1f3f3"
+        "light": "oklch(96.52% 0.0035 219.53)"
       },
-      "description": "Lightest mist surface.",
+      "description": "Cool neutral: surfaces, text and borders. Step 100, OKLCH lightness 0.965, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -57,12 +41,28 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#e3e7e8"
+        "light": "oklch(92.55% 0.009 214.34)"
       },
       "value": {
-        "light": "#e3e7e8"
+        "light": "oklch(92.55% 0.009 214.34)"
       },
-      "description": "Light mist border/divider.",
+      "description": "Cool neutral: surfaces, text and borders. Step 200, OKLCH lightness 0.925, generated from #67787c by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.mist.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-mist-300",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(82.95% 0.0163 216.69)"
+      },
+      "value": {
+        "light": "oklch(82.95% 0.0163 216.69)"
+      },
+      "description": "Cool neutral: surfaces, text and borders. Step 300, OKLCH lightness 0.83, generated from #67787c by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -73,12 +73,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#9ca8ab"
+        "light": "oklch(71.56% 0.021 212.57)"
       },
       "value": {
-        "light": "#9ca8ab"
+        "light": "oklch(71.56% 0.021 212.57)"
       },
-      "description": "Mid mist, used for rings and focus indicators.",
+      "description": "Cool neutral: surfaces, text and borders. Step 400, OKLCH lightness 0.715, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -89,12 +89,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#67787c"
+        "light": "oklch(59.08% 0.0208 213.49)"
       },
       "value": {
-        "light": "#67787c"
+        "light": "oklch(59.08% 0.0208 213.49)"
       },
-      "description": "Muted foreground level.",
+      "description": "Cool neutral: surfaces, text and borders. Step 500, OKLCH lightness 0.59, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -105,12 +105,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#607175"
+        "light": "oklch(50.11% 0.0215 213.54)"
       },
       "value": {
-        "light": "#607175"
+        "light": "oklch(50.11% 0.0215 213.54)"
       },
-      "description": "Muted foreground on a subtle surface — 4.58:1 on mist.100, lightest step clearing WCAG AA there.",
+      "description": "Cool neutral: surfaces, text and borders. Step 600, OKLCH lightness 0.5, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -121,12 +121,12 @@
       "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#424f52"
+        "light": "oklch(40.1% 0.0197 211.14)"
       },
       "value": {
-        "light": "#424f52"
+        "light": "oklch(40.1% 0.0197 211.14)"
       },
-      "description": "Fills the 600 → 800 gap so the scale stays monotonic and evenly spaced.",
+      "description": "Cool neutral: surfaces, text and borders. Step 700, OKLCH lightness 0.4, generated from #67787c by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -137,12 +137,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#22292b"
+        "light": "oklch(27.4% 0.0119 214.54)"
       },
       "value": {
-        "light": "#22292b"
+        "light": "oklch(27.4% 0.0119 214.54)"
       },
-      "description": "Dark surface for muted areas in dark mode.",
+      "description": "Cool neutral: surfaces, text and borders. Step 800, OKLCH lightness 0.275, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -153,12 +153,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#161b1d"
+        "light": "oklch(21.69% 0.0098 219.96)"
       },
       "value": {
-        "light": "#161b1d"
+        "light": "oklch(21.69% 0.0098 219.96)"
       },
-      "description": "Card/popover surface in dark mode.",
+      "description": "Cool neutral: surfaces, text and borders. Step 900, OKLCH lightness 0.218, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -169,12 +169,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#090b0c"
+        "light": "oklch(14.65% 0.0056 219)"
       },
       "value": {
-        "light": "#090b0c"
+        "light": "oklch(14.65% 0.0056 219)"
       },
-      "description": "Near-black background in dark mode.",
+      "description": "Cool neutral: surfaces, text and borders. Step 950, OKLCH lightness 0.148, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -185,12 +185,44 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#eef2ff"
+        "light": "oklch(98.58% 0.0067 277.17)"
       },
       "value": {
-        "light": "#eef2ff"
+        "light": "oklch(98.58% 0.0067 277.17)"
       },
-      "description": "Lightest violet, primary foreground.",
+      "description": "Brand: actions and links. Step 50, OKLCH lightness 0.985, generated from #432dd7 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.violet.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.54% 0.0164 274.82)"
+      },
+      "value": {
+        "light": "oklch(96.54% 0.0164 274.82)"
+      },
+      "description": "Brand: actions and links. Step 100, OKLCH lightness 0.965, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.violet.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-200",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.6% 0.0357 277.03)"
+      },
+      "value": {
+        "light": "oklch(92.6% 0.0357 277.03)"
+      },
+      "description": "Brand: actions and links. Step 200, OKLCH lightness 0.925, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -201,12 +233,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#a3b3ff"
+        "light": "oklch(83.05% 0.085 277.04)"
       },
       "value": {
-        "light": "#a3b3ff"
+        "light": "oklch(83.05% 0.085 277.04)"
       },
-      "description": "Light violet for action text and links in dark mode — 4.5:1 or more on every dark surface, popover included.",
+      "description": "Brand: actions and links. Step 300, OKLCH lightness 0.83, generated from #432dd7 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -214,15 +246,15 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-400",
       "type": "color",
-      "status": "active",
+      "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#6e6cff"
+        "light": "oklch(71.46% 0.1499 276.88)"
       },
       "value": {
-        "light": "#6e6cff"
+        "light": "oklch(71.46% 0.1499 276.88)"
       },
-      "description": "Light violet, the first chart series in dark mode.",
+      "description": "Brand: actions and links. Step 400, OKLCH lightness 0.715, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -233,28 +265,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#615fff"
+        "light": "oklch(58.95% 0.2266 277.16)"
       },
       "value": {
-        "light": "#615fff"
+        "light": "oklch(58.95% 0.2266 277.16)"
       },
-      "description": "Vivid violet, sidebar primary in dark mode.",
-      "private": true
-    },
-    {
-      "token": "primitive.color.violet.550",
-      "tier": "primitive",
-      "cssVar": "--ds-prim-color-violet-550",
-      "type": "color",
-      "status": "active",
-      "source": "tokens/primitive.json",
-      "reference": {
-        "light": "#4f39f6"
-      },
-      "value": {
-        "light": "#4f39f6"
-      },
-      "description": "Sidebar primary violet in light mode.",
+      "description": "Brand: actions and links. Step 500, OKLCH lightness 0.59, generated from #432dd7 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -265,12 +281,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#432dd7"
+        "light": "oklch(49.97% 0.2389 276.79)"
       },
       "value": {
-        "light": "#432dd7"
+        "light": "oklch(49.97% 0.2389 276.79)"
       },
-      "description": "Brand violet, primary action in light mode.",
+      "description": "Brand: actions and links. Step 600, OKLCH lightness 0.5, generated from #432dd7 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -281,12 +297,108 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#372aac"
+        "light": "oklch(39.99% 0.2156 276.99)"
       },
       "value": {
-        "light": "#372aac"
+        "light": "oklch(39.99% 0.2156 276.99)"
       },
-      "description": "Deep violet, primary action in dark mode.",
+      "description": "Brand: actions and links. Step 700, OKLCH lightness 0.4, generated from #432dd7 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.violet.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-800",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(27.51% 0.143 276.93)"
+      },
+      "value": {
+        "light": "oklch(27.51% 0.143 276.93)"
+      },
+      "description": "Brand: actions and links. Step 800, OKLCH lightness 0.275, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.violet.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.79% 0.1078 276.9)"
+      },
+      "value": {
+        "light": "oklch(21.79% 0.1078 276.9)"
+      },
+      "description": "Brand: actions and links. Step 900, OKLCH lightness 0.218, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.violet.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-violet-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.8% 0.0725 276.39)"
+      },
+      "value": {
+        "light": "oklch(14.8% 0.0725 276.39)"
+      },
+      "description": "Brand: actions and links. Step 950, OKLCH lightness 0.148, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.red.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.42% 0.0076 27.23)"
+      },
+      "value": {
+        "light": "oklch(98.42% 0.0076 27.23)"
+      },
+      "description": "Error and destructive. Step 50, OKLCH lightness 0.985, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.red.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.42% 0.0176 26.09)"
+      },
+      "value": {
+        "light": "oklch(96.42% 0.0176 26.09)"
+      },
+      "description": "Error and destructive. Step 100, OKLCH lightness 0.965, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.red.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-200",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.44% 0.0385 27.76)"
+      },
+      "value": {
+        "light": "oklch(92.44% 0.0385 27.76)"
+      },
+      "description": "Error and destructive. Step 200, OKLCH lightness 0.925, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -297,12 +409,28 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#ffa2a2"
+        "light": "oklch(82.99% 0.0946 28.05)"
       },
       "value": {
-        "light": "#ffa2a2"
+        "light": "oklch(82.99% 0.0946 28.05)"
       },
-      "description": "Light red, destructive text in dark mode, legible on a destructive tint.",
+      "description": "Error and destructive. Step 300, OKLCH lightness 0.83, generated from #e7000b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.red.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(71.49% 0.1787 28.33)"
+      },
+      "value": {
+        "light": "oklch(71.49% 0.1787 28.33)"
+      },
+      "description": "Error and destructive. Step 400, OKLCH lightness 0.715, generated from #e7000b by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -313,12 +441,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#ff6467"
+        "light": "oklch(59.09% 0.2389 28.47)"
       },
       "value": {
-        "light": "#ff6467"
+        "light": "oklch(59.09% 0.2389 28.47)"
       },
-      "description": "Bright red, destructive in dark mode.",
+      "description": "Error and destructive. Step 500, OKLCH lightness 0.59, generated from #e7000b by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -326,15 +454,31 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-600",
       "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(49.96% 0.2045 28.47)"
+      },
+      "value": {
+        "light": "oklch(49.96% 0.2045 28.47)"
+      },
+      "description": "Error and destructive. Step 600, OKLCH lightness 0.5, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.red.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-700",
+      "type": "color",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#e7000b"
+        "light": "oklch(40.01% 0.1637 28.38)"
       },
       "value": {
-        "light": "#e7000b"
+        "light": "oklch(40.01% 0.1637 28.38)"
       },
-      "description": "Deep red, destructive in light mode.",
+      "description": "Error and destructive. Step 700, OKLCH lightness 0.4, generated from #e7000b by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -342,15 +486,79 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-800",
       "type": "color",
-      "status": "active",
+      "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#9f0712"
+        "light": "oklch(27.56% 0.1128 28.58)"
       },
       "value": {
-        "light": "#9f0712"
+        "light": "oklch(27.56% 0.1128 28.58)"
       },
-      "description": "Dark red, destructive text in light mode, legible on a destructive tint.",
+      "description": "Error and destructive. Step 800, OKLCH lightness 0.275, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.red.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.9% 0.0895 27.95)"
+      },
+      "value": {
+        "light": "oklch(21.9% 0.0895 27.95)"
+      },
+      "description": "Error and destructive. Step 900, OKLCH lightness 0.218, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.red.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-red-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.76% 0.0606 29.23)"
+      },
+      "value": {
+        "light": "oklch(14.76% 0.0606 29.23)"
+      },
+      "description": "Error and destructive. Step 950, OKLCH lightness 0.148, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.green.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.48% 0.0179 134.92)"
+      },
+      "value": {
+        "light": "oklch(98.48% 0.0179 134.92)"
+      },
+      "description": "Sequential chart scale. Step 50, OKLCH lightness 0.985, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.green.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.56% 0.0337 132.94)"
+      },
+      "value": {
+        "light": "oklch(96.56% 0.0337 132.94)"
+      },
+      "description": "Sequential chart scale. Step 100, OKLCH lightness 0.965, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -361,12 +569,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#bbf451"
+        "light": "oklch(92.58% 0.0749 133.27)"
       },
       "value": {
-        "light": "#bbf451"
+        "light": "oklch(92.58% 0.0749 133.27)"
       },
-      "description": "Lightest green data viz, chart-1.",
+      "description": "Sequential chart scale. Step 200, OKLCH lightness 0.925, generated from #5ea500 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -377,12 +585,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#7ccf00"
+        "light": "oklch(83.04% 0.1477 133.49)"
       },
       "value": {
-        "light": "#7ccf00"
+        "light": "oklch(83.04% 0.1477 133.49)"
       },
-      "description": "Light green data viz, chart-2.",
+      "description": "Sequential chart scale. Step 300, OKLCH lightness 0.83, generated from #5ea500 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -393,12 +601,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#5ea500"
+        "light": "oklch(71.48% 0.184 133.22)"
       },
       "value": {
-        "light": "#5ea500"
+        "light": "oklch(71.48% 0.184 133.22)"
       },
-      "description": "Mid green data viz, chart-3.",
+      "description": "Sequential chart scale. Step 400, OKLCH lightness 0.715, generated from #5ea500 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -409,12 +617,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#497d00"
+        "light": "oklch(59.06% 0.1674 133.26)"
       },
       "value": {
-        "light": "#497d00"
+        "light": "oklch(59.06% 0.1674 133.26)"
       },
-      "description": "Dark green data viz, chart-4.",
+      "description": "Sequential chart scale. Step 500, OKLCH lightness 0.59, generated from #5ea500 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -425,12 +633,124 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#3c6300"
+        "light": "oklch(49.97% 0.1416 133.23)"
       },
       "value": {
-        "light": "#3c6300"
+        "light": "oklch(49.97% 0.1416 133.23)"
       },
-      "description": "Darkest green data viz, chart-5.",
+      "description": "Sequential chart scale. Step 600, OKLCH lightness 0.5, generated from #5ea500 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.green.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-700",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(40.1% 0.1138 133.33)"
+      },
+      "value": {
+        "light": "oklch(40.1% 0.1138 133.33)"
+      },
+      "description": "Sequential chart scale. Step 700, OKLCH lightness 0.4, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.green.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-800",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(27.46% 0.0777 133.15)"
+      },
+      "value": {
+        "light": "oklch(27.46% 0.0777 133.15)"
+      },
+      "description": "Sequential chart scale. Step 800, OKLCH lightness 0.275, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.green.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.92% 0.0619 133.07)"
+      },
+      "value": {
+        "light": "oklch(21.92% 0.0619 133.07)"
+      },
+      "description": "Sequential chart scale. Step 900, OKLCH lightness 0.218, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.green.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-green-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.69% 0.0421 133.96)"
+      },
+      "value": {
+        "light": "oklch(14.69% 0.0421 133.96)"
+      },
+      "description": "Sequential chart scale. Step 950, OKLCH lightness 0.148, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.55% 0.0164 162.76)"
+      },
+      "value": {
+        "light": "oklch(98.55% 0.0164 162.76)"
+      },
+      "description": "Success. Step 50, OKLCH lightness 0.985, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.4% 0.0304 162.22)"
+      },
+      "value": {
+        "light": "oklch(96.4% 0.0304 162.22)"
+      },
+      "description": "Success. Step 100, OKLCH lightness 0.965, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-200",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.54% 0.0669 162.17)"
+      },
+      "value": {
+        "light": "oklch(92.54% 0.0669 162.17)"
+      },
+      "description": "Success. Step 200, OKLCH lightness 0.925, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -441,12 +761,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#5ee9b5"
+        "light": "oklch(82.88% 0.1347 162.03)"
       },
       "value": {
-        "light": "#5ee9b5"
+        "light": "oklch(82.88% 0.1347 162.03)"
       },
-      "description": "Light emerald, success text in dark mode, legible on a success tint.",
+      "description": "Success. Step 300, OKLCH lightness 0.83, generated from #00d492 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -457,12 +777,44 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#00d492"
+        "light": "oklch(71.4% 0.1566 162.01)"
       },
       "value": {
-        "light": "#00d492"
+        "light": "oklch(71.4% 0.1566 162.01)"
       },
-      "description": "Bright emerald, success in dark mode.",
+      "description": "Success. Step 400, OKLCH lightness 0.715, generated from #00d492 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-500",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(58.92% 0.129 162.1)"
+      },
+      "value": {
+        "light": "oklch(58.92% 0.129 162.1)"
+      },
+      "description": "Success. Step 500, OKLCH lightness 0.59, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(50% 0.1102 161.68)"
+      },
+      "value": {
+        "light": "oklch(50% 0.1102 161.68)"
+      },
+      "description": "Success. Step 600, OKLCH lightness 0.5, generated from #00d492 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -473,12 +825,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#007a55"
+        "light": "oklch(40.06% 0.0877 162.11)"
       },
       "value": {
-        "light": "#007a55"
+        "light": "oklch(40.06% 0.0877 162.11)"
       },
-      "description": "Deep emerald, success in light mode; white text on it reaches 5.36:1.",
+      "description": "Success. Step 700, OKLCH lightness 0.4, generated from #00d492 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -486,15 +838,95 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-emerald-800",
       "type": "color",
-      "status": "active",
+      "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#006045"
+        "light": "oklch(27.33% 0.0599 162.09)"
       },
       "value": {
-        "light": "#006045"
+        "light": "oklch(27.33% 0.0599 162.09)"
       },
-      "description": "Dark emerald, success text in light mode, legible on a success tint.",
+      "description": "Success. Step 800, OKLCH lightness 0.275, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.89% 0.0484 161.5)"
+      },
+      "value": {
+        "light": "oklch(21.89% 0.0484 161.5)"
+      },
+      "description": "Success. Step 900, OKLCH lightness 0.218, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.emerald.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-emerald-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.89% 0.0325 162.38)"
+      },
+      "value": {
+        "light": "oklch(14.89% 0.0325 162.38)"
+      },
+      "description": "Success. Step 950, OKLCH lightness 0.148, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.47% 0.0083 236.56)"
+      },
+      "value": {
+        "light": "oklch(98.47% 0.0083 236.56)"
+      },
+      "description": "Chart series. Step 50, OKLCH lightness 0.985, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.61% 0.0183 237.76)"
+      },
+      "value": {
+        "light": "oklch(96.61% 0.0183 237.76)"
+      },
+      "description": "Chart series. Step 100, OKLCH lightness 0.965, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-200",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.52% 0.041 238.05)"
+      },
+      "value": {
+        "light": "oklch(92.52% 0.041 238.05)"
+      },
+      "description": "Chart series. Step 200, OKLCH lightness 0.925, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -502,15 +934,47 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-300",
       "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(83.11% 0.0817 237.99)"
+      },
+      "value": {
+        "light": "oklch(83.11% 0.0817 237.99)"
+      },
+      "description": "Chart series. Step 300, OKLCH lightness 0.83, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-400",
+      "type": "color",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#8fd6fa"
+        "light": "oklch(71.5% 0.1026 238.54)"
       },
       "value": {
-        "light": "#8fd6fa"
+        "light": "oklch(71.5% 0.1026 238.54)"
       },
-      "description": "Light sky blue, categorical chart series 2 in dark mode.",
+      "description": "Chart series. Step 400, OKLCH lightness 0.715, generated from #438fbd by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(58.95% 0.1025 238.59)"
+      },
+      "value": {
+        "light": "oklch(58.95% 0.1025 238.59)"
+      },
+      "description": "Chart series. Step 500, OKLCH lightness 0.59, generated from #438fbd by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -518,15 +982,111 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-600",
       "type": "color",
-      "status": "active",
+      "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#438fbd"
+        "light": "oklch(49.88% 0.1022 238.19)"
       },
       "value": {
-        "light": "#438fbd"
+        "light": "oklch(49.88% 0.1022 238.19)"
       },
-      "description": "Steel blue, categorical chart series 2 in light mode.",
+      "description": "Chart series. Step 600, OKLCH lightness 0.5, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-700",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(39.95% 0.0896 238.69)"
+      },
+      "value": {
+        "light": "oklch(39.95% 0.0896 238.69)"
+      },
+      "description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-800",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(27.47% 0.0614 238.49)"
+      },
+      "value": {
+        "light": "oklch(27.47% 0.0614 238.49)"
+      },
+      "description": "Chart series. Step 800, OKLCH lightness 0.275, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.89% 0.0464 237.25)"
+      },
+      "value": {
+        "light": "oklch(21.89% 0.0464 237.25)"
+      },
+      "description": "Chart series. Step 900, OKLCH lightness 0.218, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.blue.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-blue-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.75% 0.0303 240.35)"
+      },
+      "value": {
+        "light": "oklch(14.75% 0.0303 240.35)"
+      },
+      "description": "Chart series. Step 950, OKLCH lightness 0.148, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.38% 0.0171 110.27)"
+      },
+      "value": {
+        "light": "oklch(98.38% 0.0171 110.27)"
+      },
+      "description": "Chart series. Step 50, OKLCH lightness 0.985, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.53% 0.0316 110.85)"
+      },
+      "value": {
+        "light": "oklch(96.53% 0.0316 110.85)"
+      },
+      "description": "Chart series. Step 100, OKLCH lightness 0.965, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -534,15 +1094,191 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-yellow-200",
       "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.48% 0.0689 110.36)"
+      },
+      "value": {
+        "light": "oklch(92.48% 0.0689 110.36)"
+      },
+      "description": "Chart series. Step 200, OKLCH lightness 0.925, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-300",
+      "type": "color",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#e5e747"
+        "light": "oklch(83.02% 0.1386 109.98)"
       },
       "value": {
-        "light": "#e5e747"
+        "light": "oklch(83.02% 0.1386 109.98)"
       },
-      "description": "Bright yellow, categorical chart series 3 in dark mode.",
+      "description": "Chart series. Step 300, OKLCH lightness 0.83, generated from #e5e747 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-400",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(71.44% 0.1557 109.77)"
+      },
+      "value": {
+        "light": "oklch(71.44% 0.1557 109.77)"
+      },
+      "description": "Chart series. Step 400, OKLCH lightness 0.715, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-500",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(58.95% 0.129 110.31)"
+      },
+      "value": {
+        "light": "oklch(58.95% 0.129 110.31)"
+      },
+      "description": "Chart series. Step 500, OKLCH lightness 0.59, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-600",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(49.98% 0.1094 110.43)"
+      },
+      "value": {
+        "light": "oklch(49.98% 0.1094 110.43)"
+      },
+      "description": "Chart series. Step 600, OKLCH lightness 0.5, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-700",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(39.96% 0.0871 109.77)"
+      },
+      "value": {
+        "light": "oklch(39.96% 0.0871 109.77)"
+      },
+      "description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-800",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(27.59% 0.0601 109.77)"
+      },
+      "value": {
+        "light": "oklch(27.59% 0.0601 109.77)"
+      },
+      "description": "Chart series. Step 800, OKLCH lightness 0.275, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.92% 0.0478 109.77)"
+      },
+      "value": {
+        "light": "oklch(21.92% 0.0478 109.77)"
+      },
+      "description": "Chart series. Step 900, OKLCH lightness 0.218, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.yellow.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-yellow-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.94% 0.0326 109.77)"
+      },
+      "value": {
+        "light": "oklch(14.94% 0.0326 109.77)"
+      },
+      "description": "Chart series. Step 950, OKLCH lightness 0.148, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.47% 0.0176 92.68)"
+      },
+      "value": {
+        "light": "oklch(98.47% 0.0176 92.68)"
+      },
+      "description": "Warning and chart series. Step 50, OKLCH lightness 0.985, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.4% 0.0312 84.59)"
+      },
+      "value": {
+        "light": "oklch(96.4% 0.0312 84.59)"
+      },
+      "description": "Warning and chart series. Step 100, OKLCH lightness 0.965, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-200",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.51% 0.0697 80.17)"
+      },
+      "value": {
+        "light": "oklch(92.51% 0.0697 80.17)"
+      },
+      "description": "Warning and chart series. Step 200, OKLCH lightness 0.925, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -553,12 +1289,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#ffd230"
+        "light": "oklch(83.07% 0.1381 75.64)"
       },
       "value": {
-        "light": "#ffd230"
+        "light": "oklch(83.07% 0.1381 75.64)"
       },
-      "description": "Light amber, warning text in dark mode, legible on a warning tint.",
+      "description": "Warning and chart series. Step 300, OKLCH lightness 0.83, generated from #fe9a00 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -569,28 +1305,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#ffb900"
+        "light": "oklch(71.5% 0.1547 70.26)"
       },
       "value": {
-        "light": "#ffb900"
+        "light": "oklch(71.5% 0.1547 70.26)"
       },
-      "description": "Bright amber, warning in dark mode.",
-      "private": true
-    },
-    {
-      "token": "primitive.color.amber.450",
-      "tier": "primitive",
-      "cssVar": "--ds-prim-color-amber-450",
-      "type": "color",
-      "status": "active",
-      "source": "tokens/primitive.json",
-      "reference": {
-        "light": "#fe9a00"
-      },
-      "value": {
-        "light": "#fe9a00"
-      },
-      "description": "Orange amber, warning in light mode; for tints and solid fills with dark text, never a border on its own (1.92:1 on white).",
+      "description": "Warning and chart series. Step 400, OKLCH lightness 0.715, generated from #fe9a00 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -601,12 +1321,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#c89005"
+        "light": "oklch(58.96% 0.1317 65.56)"
       },
       "value": {
-        "light": "#c89005"
+        "light": "oklch(58.96% 0.1317 65.56)"
       },
-      "description": "Gold, categorical chart series 5 in dark mode.",
+      "description": "Warning and chart series. Step 500, OKLCH lightness 0.59, generated from #fe9a00 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -617,12 +1337,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#af8526"
+        "light": "oklch(49.96% 0.117 60.18)"
       },
       "value": {
-        "light": "#af8526"
+        "light": "oklch(49.96% 0.117 60.18)"
       },
-      "description": "Ochre, categorical chart series 3 in light mode.",
+      "description": "Warning and chart series. Step 600, OKLCH lightness 0.5, generated from #fe9a00 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -633,12 +1353,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#973c08"
+        "light": "oklch(40.01% 0.0992 54.84)"
       },
       "value": {
-        "light": "#973c08"
+        "light": "oklch(40.01% 0.0992 54.84)"
       },
-      "description": "Burnt amber, warning text in light mode, legible on a warning tint.",
+      "description": "Warning and chart series. Step 700, OKLCH lightness 0.4, generated from #fe9a00 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -646,15 +1366,127 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-amber-800",
       "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(27.51% 0.0714 51.3)"
+      },
+      "value": {
+        "light": "oklch(27.51% 0.0714 51.3)"
+      },
+      "description": "Warning and chart series. Step 800, OKLCH lightness 0.275, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.73% 0.0618 45.27)"
+      },
+      "value": {
+        "light": "oklch(21.73% 0.0618 45.27)"
+      },
+      "description": "Warning and chart series. Step 900, OKLCH lightness 0.218, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.amber.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-amber-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(15% 0.0455 41.77)"
+      },
+      "value": {
+        "light": "oklch(15% 0.0455 41.77)"
+      },
+      "description": "Warning and chart series. Step 950, OKLCH lightness 0.148, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.42% 0.0101 311.18)"
+      },
+      "value": {
+        "light": "oklch(98.42% 0.0101 311.18)"
+      },
+      "description": "Chart series. Step 50, OKLCH lightness 0.985, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.57% 0.0216 309.56)"
+      },
+      "value": {
+        "light": "oklch(96.57% 0.0216 309.56)"
+      },
+      "description": "Chart series. Step 100, OKLCH lightness 0.965, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-200",
+      "type": "color",
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#734e00"
+        "light": "oklch(92.5% 0.0481 309.77)"
       },
       "value": {
-        "light": "#734e00"
+        "light": "oklch(92.5% 0.0481 309.77)"
       },
-      "description": "Brown, categorical chart series 5 in light mode.",
+      "description": "Chart series. Step 200, OKLCH lightness 0.925, generated from #8e51b6 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-300",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(82.9% 0.1149 310.07)"
+      },
+      "value": {
+        "light": "oklch(82.9% 0.1149 310.07)"
+      },
+      "description": "Chart series. Step 300, OKLCH lightness 0.83, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-400",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(71.6% 0.1598 310.13)"
+      },
+      "value": {
+        "light": "oklch(71.6% 0.1598 310.13)"
+      },
+      "description": "Chart series. Step 400, OKLCH lightness 0.715, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -662,15 +1494,47 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-plum-500",
       "type": "color",
-      "status": "active",
+      "status": "reserved",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#9b5f7c"
+        "light": "oklch(58.94% 0.1602 309.97)"
       },
       "value": {
-        "light": "#9b5f7c"
+        "light": "oklch(58.94% 0.1602 309.97)"
       },
-      "description": "Dusty rose, categorical chart series 4 in dark mode.",
+      "description": "Chart series. Step 500, OKLCH lightness 0.59, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-600",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(50.04% 0.1603 309.98)"
+      },
+      "value": {
+        "light": "oklch(50.04% 0.1603 309.98)"
+      },
+      "description": "Chart series. Step 600, OKLCH lightness 0.5, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-700",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(39.96% 0.1442 309.95)"
+      },
+      "value": {
+        "light": "oklch(39.96% 0.1442 309.95)"
+      },
+      "description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -681,12 +1545,60 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#4d2761"
+        "light": "oklch(27.46% 0.097 310.17)"
       },
       "value": {
-        "light": "#4d2761"
+        "light": "oklch(27.46% 0.097 310.17)"
       },
-      "description": "Deep plum, categorical chart series 4 in light mode.",
+      "description": "Chart series. Step 800, OKLCH lightness 0.275, generated from #8e51b6 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.79% 0.0708 309.97)"
+      },
+      "value": {
+        "light": "oklch(21.79% 0.0708 309.97)"
+      },
+      "description": "Chart series. Step 900, OKLCH lightness 0.218, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.plum.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-plum-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.93% 0.046 310.61)"
+      },
+      "value": {
+        "light": "oklch(14.93% 0.046 310.61)"
+      },
+      "description": "Chart series. Step 950, OKLCH lightness 0.148, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.white",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-white",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(100% 0 0)"
+      },
+      "value": {
+        "light": "oklch(100% 0 0)"
+      },
+      "description": "Pure white: the light page and popover, and color.static.white.",
       "private": true
     },
     {
@@ -697,12 +1609,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "#000000"
+        "light": "oklch(0% 0 0)"
       },
       "value": {
-        "light": "#000000"
+        "light": "oklch(0% 0 0)"
       },
-      "description": "Pure black. The base of color.static.black (modal scrims); elevation values still embed rgba(0, 0, 0, …) literally.",
+      "description": "Pure black: the base of color.static.black (modal scrims) and of the elevation shadows.",
       "private": true
     },
     {
@@ -713,12 +1625,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "rgba(255, 255, 255, 0.1)"
+        "light": "oklch(100% 0 0 / 0.1)"
       },
       "value": {
-        "light": "rgba(255, 255, 255, 0.1)"
+        "light": "oklch(100% 0 0 / 0.1)"
       },
-      "description": "10% opaque white, dark mode borders.",
+      "description": "White at 10%: dark-mode borders, which take the hue of the surface under them.",
       "private": true
     },
     {
@@ -729,12 +1641,12 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "rgba(255, 255, 255, 0.15)"
+        "light": "oklch(100% 0 0 / 0.15)"
       },
       "value": {
-        "light": "rgba(255, 255, 255, 0.15)"
+        "light": "oklch(100% 0 0 / 0.15)"
       },
-      "description": "15% opaque white, dark mode input borders.",
+      "description": "White at 15%: dark-mode borders, which take the hue of the surface under them.",
       "private": true
     },
     {
@@ -2361,10 +3273,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 1px 2px rgba(0, 0, 0, 0.04)"
+        "light": "0 1px 2px oklch(0% 0 0 / 0.04)"
       },
       "value": {
-        "light": "0 1px 2px rgba(0, 0, 0, 0.04)"
+        "light": "0 1px 2px oklch(0% 0 0 / 0.04)"
       },
       "description": "Minimal elevation, barely visible.",
       "private": true
@@ -2377,10 +3289,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)"
+        "light": "0 1px 3px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.04)"
       },
       "value": {
-        "light": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)"
+        "light": "0 1px 3px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.04)"
       },
       "description": "Small elevation for cards and subtle lifts.",
       "private": true
@@ -2393,10 +3305,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)"
+        "light": "0 4px 6px oklch(0% 0 0 / 0.07), 0 2px 4px oklch(0% 0 0 / 0.04)"
       },
       "value": {
-        "light": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)"
+        "light": "0 4px 6px oklch(0% 0 0 / 0.07), 0 2px 4px oklch(0% 0 0 / 0.04)"
       },
       "description": "Medium elevation for dropdowns and popovers.",
       "private": true
@@ -2409,10 +3321,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)"
+        "light": "0 10px 15px oklch(0% 0 0 / 0.08), 0 4px 6px oklch(0% 0 0 / 0.04)"
       },
       "value": {
-        "light": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)"
+        "light": "0 10px 15px oklch(0% 0 0 / 0.08), 0 4px 6px oklch(0% 0 0 / 0.04)"
       },
       "description": "Large elevation for modals and dialogs.",
       "private": true
@@ -2425,10 +3337,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)"
+        "light": "0 20px 25px oklch(0% 0 0 / 0.08), 0 10px 10px oklch(0% 0 0 / 0.03)"
       },
       "value": {
-        "light": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)"
+        "light": "0 20px 25px oklch(0% 0 0 / 0.08), 0 10px 10px oklch(0% 0 0 / 0.03)"
       },
       "description": "Extra-large elevation for overlay panels.",
       "private": true
@@ -2441,10 +3353,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 25px 50px rgba(0, 0, 0, 0.12)"
+        "light": "0 25px 50px oklch(0% 0 0 / 0.12)"
       },
       "value": {
-        "light": "0 25px 50px rgba(0, 0, 0, 0.12)"
+        "light": "0 25px 50px oklch(0% 0 0 / 0.12)"
       },
       "description": "Maximum elevation for toasts and high-impact overlays.",
       "private": true
@@ -2457,10 +3369,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.05)"
+        "light": "inset 0 2px 4px oklch(0% 0 0 / 0.05)"
       },
       "value": {
-        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.05)"
+        "light": "inset 0 2px 4px oklch(0% 0 0 / 0.05)"
       },
       "description": "Inner shadow for pressed/inset states.",
       "private": true
@@ -2473,10 +3385,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 1px 2px rgba(0, 0, 0, 0.2)"
+        "light": "0 1px 2px oklch(0% 0 0 / 0.2)"
       },
       "value": {
-        "light": "0 1px 2px rgba(0, 0, 0, 0.2)"
+        "light": "0 1px 2px oklch(0% 0 0 / 0.2)"
       },
       "description": "Minimal elevation in dark mode.",
       "private": true
@@ -2489,10 +3401,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)"
+        "light": "0 1px 3px oklch(0% 0 0 / 0.3), 0 1px 2px oklch(0% 0 0 / 0.2)"
       },
       "value": {
-        "light": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)"
+        "light": "0 1px 3px oklch(0% 0 0 / 0.3), 0 1px 2px oklch(0% 0 0 / 0.2)"
       },
       "description": "Small elevation in dark mode.",
       "private": true
@@ -2505,10 +3417,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)"
+        "light": "0 4px 6px oklch(0% 0 0 / 0.25), 0 2px 4px oklch(0% 0 0 / 0.18)"
       },
       "value": {
-        "light": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)"
+        "light": "0 4px 6px oklch(0% 0 0 / 0.25), 0 2px 4px oklch(0% 0 0 / 0.18)"
       },
       "description": "Medium elevation in dark mode.",
       "private": true
@@ -2521,10 +3433,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)"
+        "light": "0 10px 15px oklch(0% 0 0 / 0.3), 0 4px 6px oklch(0% 0 0 / 0.2)"
       },
       "value": {
-        "light": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)"
+        "light": "0 10px 15px oklch(0% 0 0 / 0.3), 0 4px 6px oklch(0% 0 0 / 0.2)"
       },
       "description": "Large elevation in dark mode.",
       "private": true
@@ -2537,10 +3449,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)"
+        "light": "0 20px 25px oklch(0% 0 0 / 0.35), 0 10px 10px oklch(0% 0 0 / 0.2)"
       },
       "value": {
-        "light": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)"
+        "light": "0 20px 25px oklch(0% 0 0 / 0.35), 0 10px 10px oklch(0% 0 0 / 0.2)"
       },
       "description": "Extra-large elevation in dark mode.",
       "private": true
@@ -2553,10 +3465,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "0 25px 50px rgba(0, 0, 0, 0.5)"
+        "light": "0 25px 50px oklch(0% 0 0 / 0.5)"
       },
       "value": {
-        "light": "0 25px 50px rgba(0, 0, 0, 0.5)"
+        "light": "0 25px 50px oklch(0% 0 0 / 0.5)"
       },
       "description": "Maximum elevation in dark mode.",
       "private": true
@@ -2569,10 +3481,10 @@
       "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
-        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.3)"
+        "light": "inset 0 2px 4px oklch(0% 0 0 / 0.3)"
       },
       "value": {
-        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.3)"
+        "light": "inset 0 2px 4px oklch(0% 0 0 / 0.3)"
       },
       "description": "Inner shadow in dark mode.",
       "private": true
@@ -3241,12 +4153,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.0}",
+        "light": "{primitive.color.white}",
         "dark": "{primitive.color.mist.950}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#090b0c"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(14.65% 0.0056 219)"
       },
       "description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
       "docs": {
@@ -3267,8 +4179,8 @@
         "dark": "{primitive.color.mist.800}"
       },
       "value": {
-        "light": "#f1f3f3",
-        "dark": "#22292b"
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)"
       },
       "description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
       "docs": {
@@ -3285,12 +4197,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.0}",
+        "light": "{primitive.color.white}",
         "dark": "{primitive.color.mist.900}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#161b1d"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(21.69% 0.0098 219.96)"
       },
       "description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
       "docs": {
@@ -3308,11 +4220,11 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.950}",
-        "dark": "{primitive.color.mist.0}"
+        "dark": "{primitive.color.white}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#ffffff"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(100% 0 0)"
       },
       "description": "Inverted surface for contrast callouts. Not for general-purpose backgrounds.",
       "docs": {
@@ -3333,8 +4245,8 @@
         "dark": "{primitive.color.mist.50}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "Primary body and heading text. Not for secondary, placeholder, or disabled text.",
       "docs": {
@@ -3355,8 +4267,8 @@
         "dark": "{primitive.color.mist.400}"
       },
       "value": {
-        "light": "#607175",
-        "dark": "#9ca8ab"
+        "light": "oklch(50.11% 0.0215 213.54)",
+        "dark": "oklch(71.56% 0.021 212.57)"
       },
       "description": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content.",
       "docs": {
@@ -3377,8 +4289,8 @@
         "dark": "{primitive.color.mist.50}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text.",
       "docs": {
@@ -3395,12 +4307,12 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.0}",
+        "light": "{primitive.color.white}",
         "dark": "{primitive.color.mist.950}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#090b0c"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(14.65% 0.0056 219)"
       },
       "description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
       "docs": {
@@ -3421,8 +4333,8 @@
         "dark": "{primitive.color.violet.300}"
       },
       "value": {
-        "light": "#432dd7",
-        "dark": "#a3b3ff"
+        "light": "oklch(49.97% 0.2389 276.79)",
+        "dark": "oklch(83.05% 0.085 277.04)"
       },
       "description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
       "docs": {
@@ -3442,7 +4354,7 @@
         "light": "{primitive.color.violet.50}"
       },
       "value": {
-        "light": "#eef2ff"
+        "light": "oklch(98.58% 0.0067 277.17)"
       },
       "description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
@@ -3459,12 +4371,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.red.800}",
+        "light": "{primitive.color.red.700}",
         "dark": "{primitive.color.red.300}"
       },
       "value": {
-        "light": "#9f0712",
-        "dark": "#ffa2a2"
+        "light": "oklch(40.01% 0.1637 28.38)",
+        "dark": "oklch(82.99% 0.0946 28.05)"
       },
       "description": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text.",
       "docs": {
@@ -3481,12 +4393,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.emerald.800}",
+        "light": "{primitive.color.emerald.700}",
         "dark": "{primitive.color.emerald.300}"
       },
       "value": {
-        "light": "#006045",
-        "dark": "#5ee9b5"
+        "light": "oklch(40.06% 0.0877 162.11)",
+        "dark": "oklch(82.88% 0.1347 162.03)"
       },
       "description": "Success text and icons, on a neutral surface or on a success tint. Not for warnings, errors or neutral information.",
       "docs": {
@@ -3503,12 +4415,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.amber.700}",
+        "light": "{primitive.color.amber.600}",
         "dark": "{primitive.color.amber.300}"
       },
       "value": {
-        "light": "#973c08",
-        "dark": "#ffd230"
+        "light": "oklch(49.96% 0.117 60.18)",
+        "dark": "oklch(83.07% 0.1381 75.64)"
       },
       "description": "Warning text and icons, on a neutral surface or on a warning tint. Not for errors, successes or neutral information.",
       "docs": {
@@ -3529,8 +4441,8 @@
         "dark": "{primitive.color.white-alpha.10}"
       },
       "value": {
-        "light": "#e3e7e8",
-        "dark": "rgba(255, 255, 255, 0.1)"
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.1)"
       },
       "description": "Standard dividers and component outlines. Not for input fields or focus rings.",
       "docs": {
@@ -3551,8 +4463,8 @@
         "dark": "{primitive.color.white-alpha.10}"
       },
       "value": {
-        "light": "#e3e7e8",
-        "dark": "rgba(255, 255, 255, 0.1)"
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.1)"
       },
       "description": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders.",
       "docs": {
@@ -3573,8 +4485,8 @@
         "dark": "{primitive.color.white-alpha.15}"
       },
       "value": {
-        "light": "#e3e7e8",
-        "dark": "rgba(255, 255, 255, 0.15)"
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.15)"
       },
       "description": "Border for form input fields. Not for decorative dividers or layout borders.",
       "docs": {
@@ -3595,8 +4507,8 @@
         "dark": "{primitive.color.mist.400}"
       },
       "value": {
-        "light": "#67787c",
-        "dark": "#9ca8ab"
+        "light": "oklch(59.08% 0.0208 213.49)",
+        "dark": "oklch(71.56% 0.021 212.57)"
       },
       "description": "Focus ring outline for keyboard accessibility. Lighter in dark mode, so the solid part of an indicator keeps 3:1 on the dark card and on a field's fill. Not for resting or hover states.",
       "docs": {
@@ -3617,8 +4529,8 @@
         "dark": "{primitive.color.mist.50}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "Standard icon fill. Not for icons in branded or destructive contexts.",
       "docs": {
@@ -3639,8 +4551,8 @@
         "dark": "{primitive.color.mist.400}"
       },
       "value": {
-        "light": "#67787c",
-        "dark": "#9ca8ab"
+        "light": "oklch(59.08% 0.0208 213.49)",
+        "dark": "oklch(71.56% 0.021 212.57)"
       },
       "description": "Muted/secondary icon fill. Not for primary interactive icons.",
       "docs": {
@@ -3660,7 +4572,7 @@
         "light": "{primitive.color.violet.50}"
       },
       "value": {
-        "light": "#eef2ff"
+        "light": "oklch(98.58% 0.0067 277.17)"
       },
       "description": "Icon on a primary action background. Not for icons on neutral surfaces.",
       "docs": {
@@ -3681,8 +4593,8 @@
         "dark": "{primitive.color.violet.700}"
       },
       "value": {
-        "light": "#432dd7",
-        "dark": "#372aac"
+        "light": "oklch(49.97% 0.2389 276.79)",
+        "dark": "oklch(39.99% 0.2156 276.99)"
       },
       "description": "Primary call-to-action button/element background. Not for secondary or ghost variants.",
       "docs": {
@@ -3702,7 +4614,7 @@
         "light": "{primitive.color.violet.50}"
       },
       "value": {
-        "light": "#eef2ff"
+        "light": "oklch(98.58% 0.0067 277.17)"
       },
       "description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
@@ -3719,12 +4631,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.red.600}",
-        "dark": "{primitive.color.red.500}"
+        "light": "{primitive.color.red.500}",
+        "dark": "{primitive.color.red.400}"
       },
       "value": {
-        "light": "#e7000b",
-        "dark": "#ff6467"
+        "light": "oklch(59.09% 0.2389 28.47)",
+        "dark": "oklch(71.49% 0.1787 28.33)"
       },
       "description": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states.",
       "docs": {
@@ -3741,18 +4653,18 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.0}",
+        "light": "{primitive.color.white}",
         "dark": "{primitive.color.mist.950}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#090b0c"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(14.65% 0.0056 219)"
       },
       "description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
       "docs": {
         "description": "Text and icons placed **on** a solid error surface.",
         "do": "Use whenever a solid `bg-destructive` background carries text or an icon.",
-        "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.500 drops to 2.89:1."
+        "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.400 drops to 2.73:1."
       }
     },
     {
@@ -3763,12 +4675,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.emerald.700}",
+        "light": "{primitive.color.emerald.600}",
         "dark": "{primitive.color.emerald.400}"
       },
       "value": {
-        "light": "#007a55",
-        "dark": "#00d492"
+        "light": "oklch(50% 0.1102 161.68)",
+        "dark": "oklch(71.4% 0.1566 162.01)"
       },
       "description": "Success state color for backgrounds, tints and borders. Not for text, warnings or errors.",
       "docs": {
@@ -3785,12 +4697,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.0}",
+        "light": "{primitive.color.white}",
         "dark": "{primitive.color.mist.950}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#090b0c"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(14.65% 0.0056 219)"
       },
       "description": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface.",
       "docs": {
@@ -3807,16 +4719,16 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.amber.450}",
-        "dark": "{primitive.color.amber.400}"
+        "light": "{primitive.color.amber.400}",
+        "dark": "{primitive.color.amber.300}"
       },
       "value": {
-        "light": "#fe9a00",
-        "dark": "#ffb900"
+        "light": "oklch(71.5% 0.1547 70.26)",
+        "dark": "oklch(83.07% 0.1381 75.64)"
       },
       "description": "Warning state color for backgrounds and tints. Not for text, borders or icons, not for errors or successes.",
       "docs": {
-        "description": "Warning-state fill — solid or tinted background. At 1.92:1 on white in light mode, it never stands alone as a border or an icon.",
+        "description": "Warning-state fill — solid or tinted background. At 2.60:1 on white in light mode, it never stands alone as a border or an icon.",
         "do": "Use for the `bg-warning/10`–`/30` tints and for a solid `bg-warning` surface with `text-warning-foreground`.",
         "dont": "Do not use for text, icons or a lone border — use `color.text.warning.default` (`text-warning`). Do not use for errors."
       }
@@ -3832,7 +4744,7 @@
         "light": "{primitive.color.mist.950}"
       },
       "value": {
-        "light": "#090b0c"
+        "light": "oklch(14.65% 0.0056 219)"
       },
       "description": "Text and icons placed on color.feedback.warning.default, dark in both modes. Never use white on a warning surface.",
       "docs": {
@@ -3849,12 +4761,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.600}",
-        "dark": "{primitive.color.violet.400}"
+        "light": "{primitive.color.violet.700}",
+        "dark": "{primitive.color.violet.500}"
       },
       "value": {
-        "light": "#432dd7",
-        "dark": "#6e6cff"
+        "light": "oklch(39.99% 0.2156 276.99)",
+        "dark": "oklch(58.95% 0.2266 277.16)"
       },
       "description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
@@ -3871,12 +4783,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.blue.600}",
-        "dark": "{primitive.color.blue.300}"
+        "light": "{primitive.color.blue.500}",
+        "dark": "{primitive.color.blue.400}"
       },
       "value": {
-        "light": "#438fbd",
-        "dark": "#8fd6fa"
+        "light": "oklch(58.95% 0.1025 238.59)",
+        "dark": "oklch(71.5% 0.1026 238.54)"
       },
       "description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
@@ -3893,12 +4805,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.amber.600}",
-        "dark": "{primitive.color.yellow.200}"
+        "light": "{primitive.color.amber.500}",
+        "dark": "{primitive.color.yellow.300}"
       },
       "value": {
-        "light": "#af8526",
-        "dark": "#e5e747"
+        "light": "oklch(58.96% 0.1317 65.56)",
+        "dark": "oklch(83.02% 0.1386 109.98)"
       },
       "description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
@@ -3916,11 +4828,11 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.plum.800}",
-        "dark": "{primitive.color.plum.500}"
+        "dark": "{primitive.color.plum.200}"
       },
       "value": {
-        "light": "#4d2761",
-        "dark": "#9b5f7c"
+        "light": "oklch(27.46% 0.097 310.17)",
+        "dark": "oklch(92.5% 0.0481 309.77)"
       },
       "description": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
@@ -3937,12 +4849,12 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.amber.800}",
+        "light": "{primitive.color.amber.700}",
         "dark": "{primitive.color.amber.500}"
       },
       "value": {
-        "light": "#734e00",
-        "dark": "#c89005"
+        "light": "oklch(40.01% 0.0992 54.84)",
+        "dark": "oklch(58.96% 0.1317 65.56)"
       },
       "description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
@@ -3962,7 +4874,7 @@
         "light": "{primitive.color.green.200}"
       },
       "value": {
-        "light": "#bbf451"
+        "light": "oklch(92.58% 0.0749 133.27)"
       },
       "description": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -3982,7 +4894,7 @@
         "light": "{primitive.color.green.300}"
       },
       "value": {
-        "light": "#7ccf00"
+        "light": "oklch(83.04% 0.1477 133.49)"
       },
       "description": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -4002,7 +4914,7 @@
         "light": "{primitive.color.green.400}"
       },
       "value": {
-        "light": "#5ea500"
+        "light": "oklch(71.48% 0.184 133.22)"
       },
       "description": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -4022,7 +4934,7 @@
         "light": "{primitive.color.green.500}"
       },
       "value": {
-        "light": "#497d00"
+        "light": "oklch(59.06% 0.1674 133.26)"
       },
       "description": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -4042,7 +4954,7 @@
         "light": "{primitive.color.green.600}"
       },
       "value": {
-        "light": "#3c6300"
+        "light": "oklch(49.97% 0.1416 133.23)"
       },
       "description": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -4063,14 +4975,14 @@
         "dark": "{primitive.color.mist.900}"
       },
       "value": {
-        "light": "#f9fbfb",
-        "dark": "#161b1d"
+        "light": "oklch(98.46% 0.0017 247.84)",
+        "dark": "oklch(21.69% 0.0098 219.96)"
       },
       "description": "Sidebar panel surface. Not for the main content area or popovers.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "mist.900"
+        "tailwind": "bg-sidebar"
       }
     },
     {
@@ -4085,14 +4997,14 @@
         "dark": "{primitive.color.mist.50}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "mist.50"
+        "tailwind": "text-sidebar-foreground"
       }
     },
     {
@@ -4107,14 +5019,14 @@
         "dark": "{primitive.color.white-alpha.10}"
       },
       "value": {
-        "light": "#e3e7e8",
-        "dark": "rgba(255, 255, 255, 0.1)"
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.1)"
       },
       "description": "Sidebar internal divider/border. Not for content-area borders.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "white-alpha.10"
+        "tailwind": "border-sidebar-border"
       }
     },
     {
@@ -4128,13 +5040,13 @@
         "light": "{primitive.color.mist.500}"
       },
       "value": {
-        "light": "#67787c"
+        "light": "oklch(59.08% 0.0208 213.49)"
       },
       "description": "Focus ring within the sidebar. Not for main content focus rings.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "mist.500"
+        "tailwind": "ring-sidebar-ring"
       }
     },
     {
@@ -4145,18 +5057,16 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.550}",
-        "dark": "{primitive.color.violet.500}"
+        "light": "{primitive.color.violet.600}"
       },
       "value": {
-        "light": "#4f39f6",
-        "dark": "#615fff"
+        "light": "oklch(49.97% 0.2389 276.79)"
       },
       "description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "violet.500"
+        "tailwind": "bg-sidebar-primary"
       }
     },
     {
@@ -4168,17 +5078,17 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.50}",
-        "dark": "{primitive.color.mist.0}"
+        "dark": "{primitive.color.white}"
       },
       "value": {
-        "light": "#eef2ff",
-        "dark": "#ffffff"
+        "light": "oklch(98.58% 0.0067 277.17)",
+        "dark": "oklch(100% 0 0)"
       },
       "description": "Text on top of the sidebar primary active item. Not for inactive item text.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "mist.0"
+        "tailwind": "text-sidebar-primary-foreground"
       }
     },
     {
@@ -4193,14 +5103,14 @@
         "dark": "{primitive.color.mist.800}"
       },
       "value": {
-        "light": "#f1f3f3",
-        "dark": "#22292b"
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)"
       },
       "description": "Hovered or secondary sidebar item background. Not for the active primary item.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "mist.800"
+        "tailwind": "bg-sidebar-accent"
       }
     },
     {
@@ -4215,14 +5125,14 @@
         "dark": "{primitive.color.mist.50}"
       },
       "value": {
-        "light": "#161b1d",
-        "dark": "#f9fbfb"
+        "light": "oklch(21.69% 0.0098 219.96)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
       "docs": {
         "do": "Use only in side navigation components.",
         "dont": "Do not reuse these tokens in the main content — they belong to the sidebar's context.",
-        "tailwind": "mist.50"
+        "tailwind": "text-sidebar-accent-foreground"
       }
     },
     {
@@ -4233,10 +5143,10 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.0}"
+        "light": "{primitive.color.white}"
       },
       "value": {
-        "light": "#ffffff"
+        "light": "oklch(100% 0 0)"
       },
       "description": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies.",
       "docs": {
@@ -4254,7 +5164,7 @@
         "light": "{primitive.color.black}"
       },
       "value": {
-        "light": "#000000"
+        "light": "oklch(0% 0 0)"
       },
       "description": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces.",
       "docs": {
@@ -6201,8 +7111,8 @@
         "dark": "{primitive.elevation.dark.xs}"
       },
       "value": {
-        "light": "0 1px 2px rgba(0, 0, 0, 0.04)",
-        "dark": "0 1px 2px rgba(0, 0, 0, 0.2)"
+        "light": "0 1px 2px oklch(0% 0 0 / 0.04)",
+        "dark": "0 1px 2px oklch(0% 0 0 / 0.2)"
       },
       "description": "Minimal lift for interactive elements. Not for decorative purposes.",
       "docs": {
@@ -6223,8 +7133,8 @@
         "dark": "{primitive.elevation.dark.sm}"
       },
       "value": {
-        "light": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)",
-        "dark": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)"
+        "light": "0 1px 3px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.04)",
+        "dark": "0 1px 3px oklch(0% 0 0 / 0.3), 0 1px 2px oklch(0% 0 0 / 0.2)"
       },
       "description": "Small lift for cards and hover states. Not for fixed navigation.",
       "docs": {
@@ -6245,8 +7155,8 @@
         "dark": "{primitive.elevation.dark.md}"
       },
       "value": {
-        "light": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)",
-        "dark": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)"
+        "light": "0 4px 6px oklch(0% 0 0 / 0.07), 0 2px 4px oklch(0% 0 0 / 0.04)",
+        "dark": "0 4px 6px oklch(0% 0 0 / 0.25), 0 2px 4px oklch(0% 0 0 / 0.18)"
       },
       "description": "Medium elevation for dropdowns and context menus. Not for inline content.",
       "docs": {
@@ -6267,8 +7177,8 @@
         "dark": "{primitive.elevation.dark.lg}"
       },
       "value": {
-        "light": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)",
-        "dark": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)"
+        "light": "0 10px 15px oklch(0% 0 0 / 0.08), 0 4px 6px oklch(0% 0 0 / 0.04)",
+        "dark": "0 10px 15px oklch(0% 0 0 / 0.3), 0 4px 6px oklch(0% 0 0 / 0.2)"
       },
       "description": "Large elevation for modals and side panels. Not for standard cards.",
       "docs": {
@@ -6289,8 +7199,8 @@
         "dark": "{primitive.elevation.dark.xl}"
       },
       "value": {
-        "light": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)",
-        "dark": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)"
+        "light": "0 20px 25px oklch(0% 0 0 / 0.08), 0 10px 10px oklch(0% 0 0 / 0.03)",
+        "dark": "0 20px 25px oklch(0% 0 0 / 0.35), 0 10px 10px oklch(0% 0 0 / 0.2)"
       },
       "description": "Extra-large elevation for full overlay panels. Not for inline components.",
       "docs": {
@@ -6311,8 +7221,8 @@
         "dark": "{primitive.elevation.dark.2xl}"
       },
       "value": {
-        "light": "0 25px 50px rgba(0, 0, 0, 0.12)",
-        "dark": "0 25px 50px rgba(0, 0, 0, 0.5)"
+        "light": "0 25px 50px oklch(0% 0 0 / 0.12)",
+        "dark": "0 25px 50px oklch(0% 0 0 / 0.5)"
       },
       "description": "Maximum elevation for toasts and high-priority overlays. Use sparingly.",
       "docs": {
@@ -6333,8 +7243,8 @@
         "dark": "{primitive.elevation.dark.inner}"
       },
       "value": {
-        "light": "inset 0 2px 4px rgba(0, 0, 0, 0.05)",
-        "dark": "inset 0 2px 4px rgba(0, 0, 0, 0.3)"
+        "light": "inset 0 2px 4px oklch(0% 0 0 / 0.05)",
+        "dark": "inset 0 2px 4px oklch(0% 0 0 / 0.3)"
       },
       "description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements.",
       "docs": {
@@ -6935,8 +7845,8 @@
         "light": "{color.background.default}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#090b0c"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(14.65% 0.0056 219)"
       },
       "description": "shadcn --background compatibility alias. Maps the semantic default surface to the shadcn variable name expected by shadcn/ui components."
     },
@@ -6951,8 +7861,8 @@
         "light": "{color.text.default}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "shadcn --foreground compatibility alias. Maps primary text color to the shadcn variable name."
     },
@@ -6967,8 +7877,8 @@
         "light": "{color.background.subtle}"
       },
       "value": {
-        "light": "#f1f3f3",
-        "dark": "#22292b"
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)"
       },
       "description": "shadcn --card compatibility alias. Cards use the subtle surface (slightly off-white / dark mist) rather than pure default to create visual separation."
     },
@@ -6983,8 +7893,8 @@
         "light": "{color.text.default}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "shadcn --card-foreground compatibility alias. Reuses default text color for card content."
     },
@@ -6999,8 +7909,8 @@
         "light": "{color.background.elevated}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#161b1d"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(21.69% 0.0098 219.96)"
       },
       "description": "shadcn --popover compatibility alias. Popovers use the elevated surface token to convey depth above the page."
     },
@@ -7015,8 +7925,8 @@
         "light": "{color.text.default}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "shadcn --popover-foreground compatibility alias. Reuses default text color for popover content."
     },
@@ -7031,8 +7941,8 @@
         "light": "{color.action.background.default}"
       },
       "value": {
-        "light": "#432dd7",
-        "dark": "#372aac"
+        "light": "oklch(49.97% 0.2389 276.79)",
+        "dark": "oklch(39.99% 0.2156 276.99)"
       },
       "description": "shadcn --primary compatibility alias. Maps the brand action background to the shadcn primary slot."
     },
@@ -7047,7 +7957,7 @@
         "light": "{color.action.background.foreground}"
       },
       "value": {
-        "light": "#eef2ff"
+        "light": "oklch(98.58% 0.0067 277.17)"
       },
       "description": "shadcn --primary-foreground compatibility alias. Maps the on-action foreground to the shadcn primary-foreground slot."
     },
@@ -7062,8 +7972,8 @@
         "light": "{color.background.subtle}"
       },
       "value": {
-        "light": "#f1f3f3",
-        "dark": "#22292b"
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)"
       },
       "description": "shadcn --secondary compatibility alias. The secondary variant shares the subtle surface token rather than a palette of its own."
     },
@@ -7078,8 +7988,8 @@
         "light": "{color.text.default}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "shadcn --secondary-foreground compatibility alias. Secondary text uses default text color for legibility."
     },
@@ -7094,8 +8004,8 @@
         "light": "{color.background.subtle}"
       },
       "value": {
-        "light": "#f1f3f3",
-        "dark": "#22292b"
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)"
       },
       "description": "shadcn --muted compatibility alias. Muted areas share the subtle surface token."
     },
@@ -7110,8 +8020,8 @@
         "light": "{color.text.subtle}"
       },
       "value": {
-        "light": "#607175",
-        "dark": "#9ca8ab"
+        "light": "oklch(50.11% 0.0215 213.54)",
+        "dark": "oklch(71.56% 0.021 212.57)"
       },
       "description": "shadcn --muted-foreground compatibility alias. Muted foreground maps to the semantic subtle text token."
     },
@@ -7126,8 +8036,8 @@
         "light": "{color.background.subtle}"
       },
       "value": {
-        "light": "#f1f3f3",
-        "dark": "#22292b"
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)"
       },
       "description": "shadcn --accent compatibility alias. Accent hover states share the subtle surface token with muted areas."
     },
@@ -7142,8 +8052,8 @@
         "light": "{color.text.default}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "shadcn --accent-foreground compatibility alias. Accent foreground uses default text for contrast."
     },
@@ -7158,8 +8068,8 @@
         "light": "{color.feedback.error.default}"
       },
       "value": {
-        "light": "#e7000b",
-        "dark": "#ff6467"
+        "light": "oklch(59.09% 0.2389 28.47)",
+        "dark": "oklch(71.49% 0.1787 28.33)"
       },
       "description": "shadcn --destructive compatibility alias. Maps the semantic error token to the shadcn destructive slot."
     },
@@ -7174,8 +8084,8 @@
         "light": "{color.feedback.error.foreground}"
       },
       "value": {
-        "light": "#ffffff",
-        "dark": "#090b0c"
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(14.65% 0.0056 219)"
       },
       "description": "shadcn --destructive-foreground compatibility alias. Text and icons on a solid destructive surface."
     },
@@ -7190,8 +8100,8 @@
         "light": "{color.border.default}"
       },
       "value": {
-        "light": "#e3e7e8",
-        "dark": "rgba(255, 255, 255, 0.1)"
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.1)"
       },
       "description": "shadcn --border compatibility alias. Maps the semantic default border to the shadcn border slot."
     },
@@ -7206,8 +8116,8 @@
         "light": "{color.border.input}"
       },
       "value": {
-        "light": "#e3e7e8",
-        "dark": "rgba(255, 255, 255, 0.15)"
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.15)"
       },
       "description": "shadcn --input compatibility alias. Maps the semantic input border to the shadcn input slot for form field outlines."
     },
@@ -7222,8 +8132,8 @@
         "light": "{color.border.focus}"
       },
       "value": {
-        "light": "#67787c",
-        "dark": "#9ca8ab"
+        "light": "oklch(59.08% 0.0208 213.49)",
+        "dark": "oklch(71.56% 0.021 212.57)"
       },
       "description": "shadcn --ring compatibility alias. Maps the semantic focus ring to the shadcn ring slot."
     },
@@ -7253,8 +8163,8 @@
         "light": "{color.chart.1}"
       },
       "value": {
-        "light": "#432dd7",
-        "dark": "#6e6cff"
+        "light": "oklch(39.99% 0.2156 276.99)",
+        "dark": "oklch(58.95% 0.2266 277.16)"
       },
       "description": "shadcn --chart-1 compatibility alias. Maps the semantic chart series 1 token."
     },
@@ -7269,8 +8179,8 @@
         "light": "{color.chart.2}"
       },
       "value": {
-        "light": "#438fbd",
-        "dark": "#8fd6fa"
+        "light": "oklch(58.95% 0.1025 238.59)",
+        "dark": "oklch(71.5% 0.1026 238.54)"
       },
       "description": "shadcn --chart-2 compatibility alias. Maps the semantic chart series 2 token."
     },
@@ -7285,8 +8195,8 @@
         "light": "{color.chart.3}"
       },
       "value": {
-        "light": "#af8526",
-        "dark": "#e5e747"
+        "light": "oklch(58.96% 0.1317 65.56)",
+        "dark": "oklch(83.02% 0.1386 109.98)"
       },
       "description": "shadcn --chart-3 compatibility alias. Maps the semantic chart series 3 token."
     },
@@ -7301,8 +8211,8 @@
         "light": "{color.chart.4}"
       },
       "value": {
-        "light": "#4d2761",
-        "dark": "#9b5f7c"
+        "light": "oklch(27.46% 0.097 310.17)",
+        "dark": "oklch(92.5% 0.0481 309.77)"
       },
       "description": "shadcn --chart-4 compatibility alias. Maps the semantic chart series 4 token."
     },
@@ -7317,8 +8227,8 @@
         "light": "{color.chart.5}"
       },
       "value": {
-        "light": "#734e00",
-        "dark": "#c89005"
+        "light": "oklch(40.01% 0.0992 54.84)",
+        "dark": "oklch(58.96% 0.1317 65.56)"
       },
       "description": "shadcn --chart-5 compatibility alias. Maps the semantic chart series 5 token."
     },
@@ -7333,8 +8243,8 @@
         "light": "{color.sidebar.background}"
       },
       "value": {
-        "light": "#f9fbfb",
-        "dark": "#161b1d"
+        "light": "oklch(98.46% 0.0017 247.84)",
+        "dark": "oklch(21.69% 0.0098 219.96)"
       },
       "description": "shadcn --sidebar compatibility alias. Maps the semantic sidebar background token."
     },
@@ -7349,8 +8259,8 @@
         "light": "{color.sidebar.foreground}"
       },
       "value": {
-        "light": "#090b0c",
-        "dark": "#f9fbfb"
+        "light": "oklch(14.65% 0.0056 219)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "shadcn --sidebar-foreground compatibility alias. Maps the semantic sidebar foreground token."
     },
@@ -7365,8 +8275,7 @@
         "light": "{color.sidebar.primary.default}"
       },
       "value": {
-        "light": "#4f39f6",
-        "dark": "#615fff"
+        "light": "oklch(49.97% 0.2389 276.79)"
       },
       "description": "shadcn --sidebar-primary compatibility alias. Maps the active/primary sidebar item color."
     },
@@ -7381,8 +8290,8 @@
         "light": "{color.sidebar.primary.on}"
       },
       "value": {
-        "light": "#eef2ff",
-        "dark": "#ffffff"
+        "light": "oklch(98.58% 0.0067 277.17)",
+        "dark": "oklch(100% 0 0)"
       },
       "description": "shadcn --sidebar-primary-foreground compatibility alias. Maps the on-primary sidebar text; the name mismatch (primary-foreground vs primary.on) is why this bridge is needed."
     },
@@ -7397,8 +8306,8 @@
         "light": "{color.sidebar.accent.default}"
       },
       "value": {
-        "light": "#f1f3f3",
-        "dark": "#22292b"
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)"
       },
       "description": "shadcn --sidebar-accent compatibility alias. Maps the sidebar hover/accent surface token."
     },
@@ -7413,8 +8322,8 @@
         "light": "{color.sidebar.accent.foreground}"
       },
       "value": {
-        "light": "#161b1d",
-        "dark": "#f9fbfb"
+        "light": "oklch(21.69% 0.0098 219.96)",
+        "dark": "oklch(98.46% 0.0017 247.84)"
       },
       "description": "shadcn --sidebar-accent-foreground compatibility alias. Maps the sidebar accent text token."
     },
@@ -7429,8 +8338,8 @@
         "light": "{color.sidebar.border}"
       },
       "value": {
-        "light": "#e3e7e8",
-        "dark": "rgba(255, 255, 255, 0.1)"
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.1)"
       },
       "description": "shadcn --sidebar-border compatibility alias. Maps the sidebar border token."
     },
@@ -7445,7 +8354,7 @@
         "light": "{color.sidebar.ring}"
       },
       "value": {
-        "light": "#67787c"
+        "light": "oklch(59.08% 0.0208 213.49)"
       },
       "description": "shadcn --sidebar-ring compatibility alias. Maps the sidebar focus ring token."
     }
