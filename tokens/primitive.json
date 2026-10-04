@@ -37,10 +37,7 @@
             "hex": "#bccace"
           },
           "$type": "color",
-          "$description": "Cool neutral: surfaces, text and borders. Step 300, OKLCH lightness 0.83, generated from #67787c by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Cool neutral: surfaces, text and borders. Step 300, OKLCH lightness 0.83, generated from #67787c by scripts/build-palette.ts."
         },
         "400": {
           "$value": {
@@ -76,10 +73,7 @@
             "hex": "#3c4b4e"
           },
           "$type": "color",
-          "$description": "Cool neutral: surfaces, text and borders. Step 700, OKLCH lightness 0.4, generated from #67787c by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Cool neutral: surfaces, text and borders. Step 700, OKLCH lightness 0.4, generated from #67787c by scripts/build-palette.ts."
         },
         "800": {
           "$value": {
@@ -138,10 +132,7 @@
             "hex": "#e0e5ff"
           },
           "$type": "color",
-          "$description": "Brand: actions and links. Step 200, OKLCH lightness 0.925, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Brand: actions and links. Step 200, OKLCH lightness 0.925, generated from #432dd7 by scripts/build-palette.ts."
         },
         "300": {
           "$value": {
@@ -198,10 +189,7 @@
             "hex": "#1d126b"
           },
           "$type": "color",
-          "$description": "Brand: actions and links. Step 800, OKLCH lightness 0.275, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Brand: actions and links. Step 800, OKLCH lightness 0.275, generated from #432dd7 by scripts/build-palette.ts."
         },
         "900": {
           "$value": {
@@ -222,10 +210,7 @@
             "hex": "#060428"
           },
           "$type": "color",
-          "$description": "Brand: actions and links. Step 950, OKLCH lightness 0.148, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Brand: actions and links. Step 950, OKLCH lightness 0.148, generated from #432dd7 by scripts/build-palette.ts."
         }
       },
       "red": {
@@ -260,10 +245,7 @@
             "hex": "#ffddd8"
           },
           "$type": "color",
-          "$description": "Error and destructive. Step 200, OKLCH lightness 0.925, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Error and destructive. Step 200, OKLCH lightness 0.925, generated from #e7000b by scripts/build-palette.ts."
         },
         "300": {
           "$value": {
@@ -320,10 +302,7 @@
             "hex": "#520001"
           },
           "$type": "color",
-          "$description": "Error and destructive. Step 800, OKLCH lightness 0.275, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Error and destructive. Step 800, OKLCH lightness 0.275, generated from #e7000b by scripts/build-palette.ts."
         },
         "900": {
           "$value": {
@@ -501,10 +480,7 @@
             "hex": "#bff5d9"
           },
           "$type": "color",
-          "$description": "Success. Step 200, OKLCH lightness 0.925, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Success. Step 200, OKLCH lightness 0.925, generated from #00d492 by scripts/build-palette.ts."
         },
         "300": {
           "$value": {
@@ -623,10 +599,7 @@
             "hex": "#ceebff"
           },
           "$type": "color",
-          "$description": "Chart series. Step 200, OKLCH lightness 0.925, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Chart series. Step 200, OKLCH lightness 0.925, generated from #438fbd by scripts/build-palette.ts."
         },
         "300": {
           "$value": {
@@ -635,10 +608,7 @@
             "hex": "#95d0f7"
           },
           "$type": "color",
-          "$description": "Chart series. Step 300, OKLCH lightness 0.83, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Chart series. Step 300, OKLCH lightness 0.83, generated from #438fbd by scripts/build-palette.ts."
         },
         "400": {
           "$value": {
@@ -665,10 +635,7 @@
             "hex": "#176a96"
           },
           "$type": "color",
-          "$description": "Chart series. Step 600, OKLCH lightness 0.5, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Chart series. Step 600, OKLCH lightness 0.5, generated from #438fbd by scripts/build-palette.ts."
         },
         "700": {
           "$value": {
@@ -677,10 +644,7 @@
             "hex": "#004d72"
           },
           "$type": "color",
-          "$description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #438fbd by scripts/build-palette.ts."
         },
         "800": {
           "$value": {
@@ -882,10 +846,7 @@
             "hex": "#ffe2b2"
           },
           "$type": "color",
-          "$description": "Warning and chart series. Step 200, OKLCH lightness 0.925, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Warning and chart series. Step 200, OKLCH lightness 0.925, generated from #fe9a00 by scripts/build-palette.ts."
         },
         "300": {
           "$value": {
@@ -1116,6 +1077,16 @@
         "$description": "Pure black: the base of color.static.black (modal scrims) and of the elevation shadows."
       },
       "white-alpha": {
+        "8": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [1, 0, 0],
+            "alpha": 0.08,
+            "hex": "#ffffff"
+          },
+          "$type": "color",
+          "$description": "White at 8%: dark-mode borders, fills and state veils, which take the hue of the surface under them."
+        },
         "10": {
           "$value": {
             "colorSpace": "oklch",
@@ -1124,7 +1095,7 @@
             "hex": "#ffffff"
           },
           "$type": "color",
-          "$description": "White at 10%: dark-mode borders, which take the hue of the surface under them."
+          "$description": "White at 10%: dark-mode borders, fills and state veils, which take the hue of the surface under them."
         },
         "15": {
           "$value": {
@@ -1134,7 +1105,29 @@
             "hex": "#ffffff"
           },
           "$type": "color",
-          "$description": "White at 15%: dark-mode borders, which take the hue of the surface under them."
+          "$description": "White at 15%: dark-mode borders, fills and state veils, which take the hue of the surface under them."
+        }
+      },
+      "ink-alpha": {
+        "5": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.1465, 0.0056, 219],
+            "alpha": 0.05,
+            "hex": "#080b0c"
+          },
+          "$type": "color",
+          "$description": "The neutral ink (mist.950) at 5%: light-mode state veils, which take the hue of the surface under them."
+        },
+        "7": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.1465, 0.0056, 219],
+            "alpha": 0.07,
+            "hex": "#080b0c"
+          },
+          "$type": "color",
+          "$description": "The neutral ink (mist.950) at 7%: light-mode state veils, which take the hue of the surface under them."
         }
       }
     },

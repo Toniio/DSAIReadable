@@ -117,7 +117,11 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not use these tokens for the `secondary`, `ghost` or `outline` variants.",
+      "rule": "❌ Do not use these tokens for the `ghost` or `outline` variants: a neutral element with no fill of its own takes a veil ([States](#states)).",
+      "source": "color.md"
+    },
+    {
+      "rule": "✅ A role fill under the pointer takes its `hover` step, solid: one step darker in light, one lighter in dark, so its label keeps 4.5:1 (`hover:bg-primary/80` put it at 4.24:1).",
       "source": "color.md"
     },
     {
@@ -133,11 +137,15 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not use the error tokens for warnings or successes: each state has its own fill, foreground and text token. The Alert and Badge `success` and `warning` variants use them.",
+      "rule": "❌ Do not use the error tokens for warnings, successes or information: each state has its own fill, foreground and text token. The Alert and Badge `success`, `warning` and `info` variants use them.",
       "source": "color.md"
     },
     {
-      "rule": "✅ Success and warning follow the error's split: the fill (`bg-success`, `bg-warning`, their `/10`–`/30` tints) and a text token (`text-success`, `text-warning`) that stays at 4.5:1 on every surface and tint.",
+      "rule": "✅ Success, warning and info follow the error's split: the fill (`bg-success`, `bg-warning`, `bg-info`, their `/10`–`/20` tints) and a text token (`text-success`, `text-warning`, `text-info`) that stays at 4.5:1 on every surface and tint.",
+      "source": "color.md"
+    },
+    {
+      "rule": "✅ A tint under the pointer takes its role's `hover` step (`hover:bg-destructive-hover`), never a stronger tint (`hover:bg-destructive/20`): step 200 in light, 700 in dark, at 4.5:1 or more under its label.",
       "source": "color.md"
     },
     {
@@ -149,11 +157,31 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ There is no `info` state: a neutral message is the `default` Alert. The naming grammar keeps the `info` role free for the day a component needs one.",
+      "rule": "✅ `info` is for a notice that needs no action (a tip, a change that took effect); a neutral message with no tone is the `default` Alert, and one the reader should act on is a `warning`.",
       "source": "color.md"
     },
     {
       "rule": "❌ Never put hard-coded white on an error surface: in dark mode, white on red.400 drops to 2.73:1.",
+      "source": "color.md"
+    },
+    {
+      "rule": "✅ `hover:bg-overlay-hover` for a table row, a choice card, an Attachment link, and the dark hover of a ghost or outline control.",
+      "source": "color.md"
+    },
+    {
+      "rule": "✅ `data-open:bg-overlay-selected`, `data-active:bg-overlay-selected`, `has-aria-expanded:bg-overlay-selected` for what stays open, current or expanded.",
+      "source": "color.md"
+    },
+    {
+      "rule": "❌ Do not raise a veil past 8%: the subtle text it carries (a choice description, a muted cell) falls under 4.5:1 on the card. `npm run tokens:lint-contrast` measures both texts on both veils over the three surfaces.",
+      "source": "color.md"
+    },
+    {
+      "rule": "❌ Do not use a veil for a checked choice: it takes `bg-primary-selected` and `border-primary`.",
+      "source": "color.md"
+    },
+    {
+      "rule": "✅ A pressed state (`active`) is named but reserved: shadcn/ui draws none, so no component reads one yet.",
       "source": "color.md"
     },
     {
@@ -318,6 +346,10 @@
     },
     {
       "rule": "**A modal backdrop comes from `OVERLAY_BASE`** — do not write a backdrop of your own, and do not darken it: the page behind stays visible under the blur.",
+      "source": "opacity.md"
+    },
+    {
+      "rule": "**A state is a color token, never an alpha** — a hovered, highlighted, open, expanded, checked or selected element takes a named state token ([Color → States](./color.md#states)), not an opacity modifier of its resting color: `hover:bg-primary/80` put the primary label at 4.24:1, and `hover:bg-muted/50` changed nothing on a card. A third `better-tailwindcss/no-restricted-classes` rule rejects a color with an opacity modifier under `hover:`, `active:`, `focus:` or an open, expanded, checked, selected or pressed variant; a focus ring keeps its halo alpha (`ring-ring/50`, from `lib/focus.ts`).",
       "source": "opacity.md"
     },
     {
@@ -487,7 +519,7 @@
       "**MUST NOT** — act as an action button → use `Button` with `size=\"xs\"`",
       "**MUST NOT** — exceed three words of text",
       "**MUST** — keep the `destructive` variant for error or critical-alert statuses",
-      "**MUST** — keep `success` and `warning` for statuses of that meaning, never to decorate a badge with green or amber",
+      "**MUST** — keep `success`, `warning` and `info` for statuses of that meaning, never to decorate a badge with green, amber or blue",
       "**MUST NOT** — contain an interactive element",
       "**MUST** — check the contrast of the background-less `ghost` and `link` variants on every surface they appear on"
     ],

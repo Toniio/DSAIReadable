@@ -16,7 +16,7 @@ export const MODES: readonly Mode[] = ["light", "dark"]
 
 /** How the Audits table groups the pairs. */
 export type ContrastGroup =
-  "focus" | "border" | "text" | "filled" | "tint" | "info"
+  "focus" | "border" | "text" | "filled" | "tint" | "state" | "info"
 
 export interface Pair {
   label: string
@@ -35,6 +35,13 @@ export interface Pair {
   /** Measured and shown, never blocking: a part that is not the indicator. */
   informative?: boolean
 }
+
+/** The tinted feedback roles beyond destructive, and how a label names them. */
+const ROLES = [
+  ["success", "Success"],
+  ["warning", "Warning"],
+  ["info", "Info"],
+] as const
 
 /** The surfaces a component may be placed on: the page, a card, a popover. */
 const SURFACES = [
@@ -231,8 +238,8 @@ export const PAIRS: Pair[] = [
     threshold: 4.5,
     group: "filled",
   },
-  ...(["success", "warning"] as const).map((role) => ({
-    label: `${role === "success" ? "Success" : "Warning"} foreground on the ${role} surface`,
+  ...ROLES.map(([role, name]) => ({
+    label: `${name} foreground on the ${role} surface`,
     fg: `color.feedback.${role}.foreground`,
     bg: `color.feedback.${role}.default`,
     threshold: 4.5 as const,
@@ -276,16 +283,16 @@ export const PAIRS: Pair[] = [
     threshold: 4.5 as const,
     group: "text" as const,
   })),
-  ...(["success", "warning"] as const).flatMap((role) => [
+  ...ROLES.flatMap(([role, name]) => [
     ...SURFACES.map(([bg, surface]) => ({
-      label: `${role === "success" ? "Success" : "Warning"} text on the ${surface}`,
+      label: `${name} text on the ${surface}`,
       fg: `color.text.${role}.default`,
       bg,
       threshold: 4.5 as const,
       group: "text" as const,
     })),
     {
-      label: `${role === "success" ? "Success" : "Warning"} Alert description (text-${role}/90) on the card`,
+      label: `${name} Alert description (text-${role}/90) on the card`,
       fg: `color.text.${role}.default`,
       fgAlpha: 0.9,
       bg: "color.background.subtle",
@@ -294,33 +301,27 @@ export const PAIRS: Pair[] = [
     },
   ]),
 
-  // Text on a tint of its own role.
+  // Text on a resting tint of its own role. A hovered or highlighted tint is
+  // a named step, measured with the states below.
   ...tinted(
-    "Destructive Button label",
+    "Destructive Button, Badge and Bubble label",
     "color.text.destructive.default",
     "color.feedback.error.default",
-    { light: [0.1, 0.2], dark: [0.2, 0.3] }
+    { light: [0.1], dark: [0.2] }
   ),
-  ...tinted(
-    "Destructive Badge label",
-    "color.text.destructive.default",
-    "color.feedback.error.default",
-    { light: [0.1, 0.2], dark: [0.2] }
-  ),
-  ...(["success", "warning"] as const).flatMap((role) =>
+  ...ROLES.flatMap(([role, name]) =>
     tinted(
-      `${role === "success" ? "Success" : "Warning"} Badge label`,
+      `${name} Badge label`,
       `color.text.${role}.default`,
       `color.feedback.${role}.default`,
-      { light: [0.1, 0.2], dark: [0.2] }
+      { light: [0.1], dark: [0.2] }
     )
   ),
   ...tinted(
-    "Focused destructive menu item",
-    "color.text.destructive.default",
-    "color.feedback.error.default",
-    { light: [0.1], dark: [0.2] },
-    ["color.background.elevated"]
+    "Tinted Bubble text",
+    "color.text.default",
+    "color.action.background.default",
+    { light: [0.1], dark: [0.2] }
   ),
   ...MODES.map((mode) => ({
     label: "Kbd inside a Tooltip (text-background on a background tint)",
@@ -334,4 +335,108 @@ export const PAIRS: Pair[] = [
     group: "tint" as const,
     modes: [mode],
   })),
+
+  // Named states: the label of a role fill on its hovered (and, reserved,
+  // pressed) step. A hover never takes a text under 4.5:1; a step is solid,
+  // so one pair holds on every surface.
+  ...(
+    [
+      [
+        "Primary label",
+        "color.action.background.foreground",
+        "color.action.background.hover",
+        "hovered primary fill (bg-primary-hover)",
+      ],
+      [
+        "Primary label",
+        "color.action.background.foreground",
+        "color.action.background.active",
+        "pressed primary fill (reserved)",
+      ],
+      [
+        "Secondary label",
+        "color.text.default",
+        "color.action.secondary.hover",
+        "hovered secondary or muted fill (bg-secondary-hover)",
+      ],
+      [
+        "Secondary label",
+        "color.text.default",
+        "color.action.secondary.active",
+        "pressed secondary fill (reserved)",
+      ],
+      [
+        "Tinted Bubble text",
+        "color.text.default",
+        "color.action.tint.hover",
+        "hovered primary tint (bg-primary-tint-hover)",
+      ],
+      [
+        "Destructive label",
+        "color.text.destructive.default",
+        "color.feedback.error.hover",
+        "hovered or highlighted destructive tint (bg-destructive-hover)",
+      ],
+      [
+        "Destructive label",
+        "color.text.destructive.default",
+        "color.feedback.error.active",
+        "pressed destructive tint (reserved)",
+      ],
+      [
+        "Success label",
+        "color.text.success.default",
+        "color.feedback.success.hover",
+        "hovered success tint (bg-success-hover)",
+      ],
+      [
+        "Warning label",
+        "color.text.warning.default",
+        "color.feedback.warning.hover",
+        "hovered warning tint (bg-warning-hover)",
+      ],
+      [
+        "Info label",
+        "color.text.info.default",
+        "color.feedback.info.hover",
+        "hovered info tint (bg-info-hover)",
+      ],
+      [
+        "Choice card text",
+        "color.text.default",
+        "color.action.background.selected",
+        "selected choice card (bg-primary-selected)",
+      ],
+    ] as const
+  ).map(([label, fg, bg, on]) => ({
+    label: `${label} on the ${on}`,
+    fg,
+    bg,
+    threshold: 4.5 as const,
+    group: "state" as const,
+  })),
+  // A neutral element's veil, painted over each surface: the text and the
+  // subtle text it carries (a table row, a menu trigger, a choice card).
+  ...(
+    [
+      ["hovered", "color.overlay.hover", "bg-overlay-hover"],
+      ["selected", "color.overlay.selected", "bg-overlay-selected"],
+    ] as const
+  ).flatMap(([state, veil, utility]) =>
+    SURFACES.flatMap(([bg, surface]) =>
+      (
+        [
+          ["Text", "color.text.default"],
+          ["Subtle text", "color.text.subtle"],
+        ] as const
+      ).map(([name, fg]) => ({
+        label: `${name} on the ${state} veil (${utility}) over the ${surface}`,
+        fg,
+        bg,
+        tint: { color: veil, alpha: 1 },
+        threshold: 4.5 as const,
+        group: "state" as const,
+      }))
+    )
+  ),
 ]

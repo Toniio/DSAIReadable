@@ -7,7 +7,7 @@ import { FOCUS_OUTLINE_RESET, FOCUS_RING_WITHIN } from "@/lib/focus"
 import { Button } from "@/components/ui/button"
 
 const attachmentVariants = cva(
-  `group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-none border bg-card text-card-foreground transition-colors ${FOCUS_RING_WITHIN} has-[>a,>button]:hover:bg-muted/50 data-[state=error]:border-destructive/30 data-[state=idle]:border-dashed`,
+  `group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-none border bg-card text-card-foreground transition-colors ${FOCUS_RING_WITHIN} has-[>a,>button]:hover:bg-overlay-hover data-[state=error]:border-destructive/30 data-[state=idle]:border-dashed`,
   {
     variants: {
       size: {

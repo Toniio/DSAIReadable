@@ -35,7 +35,7 @@ function NativeSelect({
       <select
         data-slot="native-select"
         data-size={size}
-        className={`h-8 w-full min-w-0 appearance-none rounded-none border border-input bg-transparent py-1 pr-8 pl-2.5 text-xs transition-colors ${FOCUS_OUTLINE_RESET} select-none selection:bg-primary selection:text-primary-foreground has-[option[value='']:checked]:text-muted-foreground ${FOCUS_RING} disabled:pointer-events-none disabled:cursor-not-allowed aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:focus-visible:outline-(length:--border-width-default) aria-invalid:focus-visible:outline-destructive aria-invalid:focus-visible:outline-solid data-[size=sm]:h-7 data-[size=sm]:rounded-none data-[size=sm]:py-0.5 dark:bg-input-fill/30 dark:hover:bg-input-fill/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`}
+        className={`h-8 w-full min-w-0 appearance-none rounded-none border border-input bg-transparent py-1 pr-8 pl-2.5 text-xs transition-colors ${FOCUS_OUTLINE_RESET} select-none selection:bg-primary selection:text-primary-foreground has-[option[value='']:checked]:text-muted-foreground ${FOCUS_RING} disabled:pointer-events-none disabled:cursor-not-allowed aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:focus-visible:outline-(length:--border-width-default) aria-invalid:focus-visible:outline-destructive aria-invalid:focus-visible:outline-solid data-[size=sm]:h-7 data-[size=sm]:rounded-none data-[size=sm]:py-0.5 dark:bg-input-fill/30 dark:hover:bg-overlay-hover dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`}
         {...props}
       />
       <CaretDownIcon

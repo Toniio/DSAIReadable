@@ -30,6 +30,13 @@
             "value": "warning",
             "type": "added",
             "note": "A risk the reader can still act on before it becomes an error (low balance, expiring session): text-warning on the card, with an icon. shadcn/ui has no warning color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
+          },
+          {
+            "export": "Alert",
+            "prop": "variant",
+            "value": "info",
+            "type": "added",
+            "note": "A notice that asks for no action (a tip, a change that took effect, a scheduled maintenance): text-info on the card, with an icon. shadcn/ui has no info color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
           }
         ]
       }
@@ -115,6 +122,13 @@
             "value": "warning",
             "type": "added",
             "note": "A status that needs attention without being an error (Pending review, Expiring): text-warning on a warning tint, like the destructive variant. shadcn/ui has no warning color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
+          },
+          {
+            "export": "Badge",
+            "prop": "variant",
+            "value": "info",
+            "type": "added",
+            "note": "A neutral notice label (Beta, Scheduled): text-info on an info tint, like the destructive variant. shadcn/ui has no info color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
           }
         ]
       }

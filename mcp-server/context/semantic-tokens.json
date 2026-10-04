@@ -45,6 +45,33 @@
     "usage": "Inverted surface for contrast callouts. Not for general-purpose backgrounds."
   },
   {
+    "path": "color.overlay.hover",
+    "css_var": "--color-overlay-hover",
+    "light": "{primitive.color.ink-alpha.5}",
+    "dark": "{primitive.color.white-alpha.8}",
+    "type": "color",
+    "status": "active",
+    "usage": "The translucent veil of a neutral element under the pointer (a table row, a choice card, a ghost or outline control in dark): ink at 5% in light, white at 8% in dark, so it shows on the page, a card and a popover alike. At most 8%: a stronger veil puts the subtle text it carries under 4.5:1 on the card. Not for a role-colored fill, which has its own hover token."
+  },
+  {
+    "path": "color.overlay.active",
+    "css_var": "--color-overlay-active",
+    "light": "{primitive.color.ink-alpha.7}",
+    "dark": "{primitive.color.white-alpha.8}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "The veil of a neutral element while pressed: ink at 7% in light, white at 8% in dark, the most a veil takes before the subtle text it carries falls under 4.5:1 on the card. Reserved: shadcn/ui draws no pressed state, so no component reads it yet."
+  },
+  {
+    "path": "color.overlay.selected",
+    "css_var": "--color-overlay-selected",
+    "light": "{primitive.color.ink-alpha.7}",
+    "dark": "{primitive.color.white-alpha.8}",
+    "type": "color",
+    "status": "active",
+    "usage": "The veil of a neutral element that is open, expanded or current: an open NavigationMenu trigger, the current NavigationMenu link, an expanded table row, the active tab in dark. Ink at 7% in light, a step over color.overlay.hover; white at 8% in dark, as hover, the most a veil takes before the subtle text it carries falls under 4.5:1 on the card. Not for a checked choice, which takes color.action.background.selected."
+  },
+  {
     "path": "color.text.default",
     "css_var": "--color-text-default",
     "light": "{primitive.color.mist.950}",
@@ -124,6 +151,15 @@
     "type": "color",
     "status": "active",
     "usage": "Warning text and icons, on a neutral surface or on a warning tint. Not for errors, successes or neutral information."
+  },
+  {
+    "path": "color.text.info.default",
+    "css_var": "--color-text-info-default",
+    "light": "{primitive.color.blue.700}",
+    "dark": "{primitive.color.blue.300}",
+    "type": "color",
+    "status": "active",
+    "usage": "Info text and icons, on a neutral surface or on an info tint. Not for success, warnings or errors."
   },
   {
     "path": "color.border.default",
@@ -207,6 +243,60 @@
     "usage": "Text or icon on top of a primary action background. Not for text on neutral surfaces."
   },
   {
+    "path": "color.action.background.hover",
+    "css_var": "--color-action-background-hover",
+    "light": "{primitive.color.violet.700}",
+    "dark": "{primitive.color.violet.600}",
+    "type": "color",
+    "status": "active",
+    "usage": "The primary action fill under the pointer: one step darker in light, one step lighter in dark, so color.action.background.foreground keeps 4.5:1 or more. Not for a resting or a selected element."
+  },
+  {
+    "path": "color.action.background.active",
+    "css_var": "--color-action-background-active",
+    "light": "{primitive.color.violet.800}",
+    "dark": "{primitive.color.violet.800}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "The primary action fill while pressed: darker than its rest and hover steps in both modes. Reserved: shadcn/ui draws no pressed state, so no component reads it yet; a pressed fill takes this token, never an opacity."
+  },
+  {
+    "path": "color.action.background.selected",
+    "css_var": "--color-action-background-selected",
+    "light": "{primitive.color.violet.50}",
+    "dark": "{primitive.color.violet.950}",
+    "type": "color",
+    "status": "active",
+    "usage": "The brand-tinted surface of a selected choice: a choice card (FieldLabel wrapping a Field) whose control is checked. Not for a hover, nor for a solid primary fill."
+  },
+  {
+    "path": "color.action.secondary.hover",
+    "css_var": "--color-action-secondary-hover",
+    "light": "{primitive.color.mist.200}",
+    "dark": "{primitive.color.mist.700}",
+    "type": "color",
+    "status": "active",
+    "usage": "The secondary fill (bg-secondary, bg-muted) under the pointer: one step darker in light, one step lighter in dark, visible on a card that shares the resting fill. Not for a neutral element with no fill of its own, which takes color.overlay.hover."
+  },
+  {
+    "path": "color.action.secondary.active",
+    "css_var": "--color-action-secondary-active",
+    "light": "{primitive.color.mist.300}",
+    "dark": "{primitive.color.mist.600}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "The secondary fill while pressed: two steps from its rest. Reserved: shadcn/ui draws no pressed state, so no component reads it yet."
+  },
+  {
+    "path": "color.action.tint.hover",
+    "css_var": "--color-action-tint-hover",
+    "light": "{primitive.color.violet.200}",
+    "dark": "{primitive.color.violet.700}",
+    "type": "color",
+    "status": "active",
+    "usage": "A primary tint (bg-primary/10 at rest) under the pointer: the tinted Bubble that is a button or a link. Its text is color.text.default, at 4.5:1 or more. Not for the solid primary fill, which takes color.action.background.hover."
+  },
+  {
     "path": "color.feedback.error.default",
     "css_var": "--color-feedback-error-default",
     "light": "{primitive.color.red.500}",
@@ -223,6 +313,24 @@
     "type": "color",
     "status": "active",
     "usage": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface."
+  },
+  {
+    "path": "color.feedback.error.hover",
+    "css_var": "--color-feedback-error-hover",
+    "light": "{primitive.color.red.200}",
+    "dark": "{primitive.color.red.700}",
+    "type": "color",
+    "status": "active",
+    "usage": "A error tint (bg-destructive/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.destructive.default keeps 4.5:1 or more on it. Not for a resting tint."
+  },
+  {
+    "path": "color.feedback.error.active",
+    "css_var": "--color-feedback-error-active",
+    "light": "{primitive.color.red.300}",
+    "dark": "{primitive.color.red.800}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "A destructive tint while pressed. Reserved: shadcn/ui draws no pressed state, so no component reads it yet."
   },
   {
     "path": "color.feedback.success.default",
@@ -243,6 +351,15 @@
     "usage": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface."
   },
   {
+    "path": "color.feedback.success.hover",
+    "css_var": "--color-feedback-success-hover",
+    "light": "{primitive.color.emerald.200}",
+    "dark": "{primitive.color.emerald.700}",
+    "type": "color",
+    "status": "active",
+    "usage": "A success tint (bg-success/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.success.default keeps 4.5:1 or more on it. Not for a resting tint."
+  },
+  {
     "path": "color.feedback.warning.default",
     "css_var": "--color-feedback-warning-default",
     "light": "{primitive.color.amber.400}",
@@ -259,6 +376,42 @@
     "type": "color",
     "status": "active",
     "usage": "Text and icons placed on color.feedback.warning.default, dark in both modes. Never use white on a warning surface."
+  },
+  {
+    "path": "color.feedback.warning.hover",
+    "css_var": "--color-feedback-warning-hover",
+    "light": "{primitive.color.amber.200}",
+    "dark": "{primitive.color.amber.700}",
+    "type": "color",
+    "status": "active",
+    "usage": "A warning tint (bg-warning/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.warning.default keeps 4.5:1 or more on it. Not for a resting tint."
+  },
+  {
+    "path": "color.feedback.info.default",
+    "css_var": "--color-feedback-info-default",
+    "light": "{primitive.color.blue.600}",
+    "dark": "{primitive.color.blue.400}",
+    "type": "color",
+    "status": "active",
+    "usage": "Info state color for backgrounds, tints and borders: neutral information that needs no action. Not for text, success, warning or errors."
+  },
+  {
+    "path": "color.feedback.info.foreground",
+    "css_var": "--color-feedback-info-foreground",
+    "light": "{primitive.color.white}",
+    "dark": "{primitive.color.mist.950}",
+    "type": "color",
+    "status": "reserved",
+    "usage": "Text and icons placed on color.feedback.info.default. Reserved: no component draws a solid info surface yet."
+  },
+  {
+    "path": "color.feedback.info.hover",
+    "css_var": "--color-feedback-info-hover",
+    "light": "{primitive.color.blue.200}",
+    "dark": "{primitive.color.blue.700}",
+    "type": "color",
+    "status": "active",
+    "usage": "An info tint (bg-info/10 at rest) under the pointer: step 200 in light, 700 in dark, so color.text.info.default keeps 4.5:1 or more on it. Not for a resting tint."
   },
   {
     "path": "color.chart.1",

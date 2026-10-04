@@ -120,6 +120,8 @@ A modal / dialog backdrop              → OVERLAY_BASE (bg-black/10 + backdrop-
 Secondary / muted text                 → text-muted-foreground
 Secondary icon                         → text-muted-foreground
 Muted background                       → bg-card / bg-secondary
+A hovered role fill or tint            → hover:bg-primary-hover, bg-destructive-hover…
+A hovered, open or current element     → bg-overlay-hover / bg-overlay-selected
 Desaturate an image                    → CSS filter (outside the tokens)
 ```
 
@@ -132,3 +134,4 @@ Desaturate an image                    → CSS filter (outside the tokens)
 3. **Never use opacity to fake a subtle color** — always use `color.text.subtle` / `text-muted-foreground`, placeholders included.
 4. **Opacity is not selective** — it applies to the whole DOM subtree. When only part of it should change, use a color, or an alpha on a color (`bg-black/10`, `text-current/70`).
 5. **A modal backdrop comes from `OVERLAY_BASE`** — do not write a backdrop of your own, and do not darken it: the page behind stays visible under the blur.
+6. **A state is a color token, never an alpha** — a hovered, highlighted, open, expanded, checked or selected element takes a named state token ([Color → States](./color.md#states)), not an opacity modifier of its resting color: `hover:bg-primary/80` put the primary label at 4.24:1, and `hover:bg-muted/50` changed nothing on a card. A third `better-tailwindcss/no-restricted-classes` rule rejects a color with an opacity modifier under `hover:`, `active:`, `focus:` or an open, expanded, checked, selected or pressed variant; a focus ring keeps its halo alpha (`ring-ring/50`, from `lib/focus.ts`).

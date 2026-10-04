@@ -21,6 +21,7 @@ const alertVariants = cva(
           "bg-card text-success *:data-[slot=alert-description]:text-success/90 *:[svg]:text-current",
         warning:
           "bg-card text-warning *:data-[slot=alert-description]:text-warning/90 *:[svg]:text-current",
+        info: "bg-card text-info *:data-[slot=alert-description]:text-info/90 *:[svg]:text-current",
       },
     },
     defaultVariants: {
@@ -30,7 +31,7 @@ const alertVariants = cva(
 )
 
 /**
- * A non-modal banner that tells the user about a state they should notice; `variant` sets its tone: default, destructive, success or warning.
+ * A non-modal banner that tells the user about a state they should notice; `variant` sets its tone: default, destructive, success, warning or info.
  *
  * @example
  * <Alert variant="success">

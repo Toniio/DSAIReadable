@@ -505,6 +505,11 @@
     "type": "color"
   },
   {
+    "path": "primitive.color.white-alpha.8",
+    "value": "oklch(100% 0 0 / 0.08)",
+    "type": "color"
+  },
+  {
     "path": "primitive.color.white-alpha.10",
     "value": "oklch(100% 0 0 / 0.1)",
     "type": "color"
@@ -512,6 +517,16 @@
   {
     "path": "primitive.color.white-alpha.15",
     "value": "oklch(100% 0 0 / 0.15)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.ink-alpha.5",
+    "value": "oklch(14.65% 0.0056 219 / 0.05)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.ink-alpha.7",
+    "value": "oklch(14.65% 0.0056 219 / 0.07)",
     "type": "color"
   },
   {

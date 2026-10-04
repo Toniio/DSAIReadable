@@ -9,7 +9,7 @@ export interface GraphNode {
 }
 
 const NODE = cn(
-  "inline-flex min-h-target items-center justify-center border bg-background px-3 py-1.5 text-sm transition-colors hover:border-foreground/30 hover:bg-muted",
+  "inline-flex min-h-target items-center justify-center border bg-background px-3 py-1.5 text-sm transition-colors hover:border-foreground hover:bg-muted",
   FOCUS_OUTLINE_RESET,
   FOCUS_RING
 )

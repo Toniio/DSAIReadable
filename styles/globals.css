@@ -40,14 +40,23 @@
   --color-popover-foreground: var(--color-text-default);
   --color-primary: var(--color-action-background-default);
   --color-primary-foreground: var(--color-action-background-foreground);
+  /* Named states: a hovered, highlighted or selected fill is a step of its
+     own, never an opacity of the resting color (hover:bg-primary/80 put the
+     primary label at 4.24:1). Role fills take a solid step; a neutral element
+     takes a veil, --color-overlay-*, that shows on any surface. */
+  --color-primary-hover: var(--color-action-background-hover);
+  --color-primary-selected: var(--color-action-background-selected);
+  --color-primary-tint-hover: var(--color-action-tint-hover);
   --color-secondary: var(--color-background-subtle);
   --color-secondary-foreground: var(--color-text-default);
+  --color-secondary-hover: var(--color-action-secondary-hover);
   --color-muted: var(--color-background-subtle);
   --color-muted-foreground: var(--color-text-subtle);
   --color-accent: var(--color-background-subtle);
   --color-accent-foreground: var(--color-text-default);
   --color-destructive: var(--color-feedback-error-default);
   --color-destructive-foreground: var(--color-feedback-error-foreground);
+  --color-destructive-hover: var(--color-feedback-error-hover);
   /* text-destructive reads the text token, not the fill: Tailwind looks up
      --text-color-* before --color-*, so bg-destructive and border-destructive
      keep the error fill while every destructive label stays at 4.5:1. */
@@ -58,9 +67,15 @@
   --color-success: var(--color-feedback-success-default);
   --color-success-foreground: var(--color-feedback-success-foreground);
   --text-color-success: var(--color-text-success-default);
+  --color-success-hover: var(--color-feedback-success-hover);
   --color-warning: var(--color-feedback-warning-default);
   --color-warning-foreground: var(--color-feedback-warning-foreground);
   --text-color-warning: var(--color-text-warning-default);
+  --color-warning-hover: var(--color-feedback-warning-hover);
+  /* Info follows the same split as success and warning. */
+  --color-info: var(--color-feedback-info-default);
+  --text-color-info: var(--color-text-info-default);
+  --color-info-hover: var(--color-feedback-info-hover);
   /* Primary follows the same split: bg-primary takes the action fill, and
      text-primary (a link, a hovered link) the action text token, which stays
      at 4.5:1 on every surface in both modes. */
@@ -73,6 +88,8 @@
   --color-input: var(--color-border-input);
   --color-input-fill: var(--color-background-input);
   --color-ring: var(--color-border-focus);
+  --color-overlay-hover: var(--color-overlay-hover);
+  --color-overlay-selected: var(--color-overlay-selected);
   --color-chart-1: var(--color-chart-1);
   --color-chart-2: var(--color-chart-2);
   --color-chart-3: var(--color-chart-3);

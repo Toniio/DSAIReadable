@@ -675,7 +675,7 @@ export default async function ComponentPage({
                 <Link
                   href={componentHref(name) ?? "/components/"}
                   className={cn(
-                    "flex h-full flex-col gap-1 border p-3 transition-colors hover:border-foreground/30 hover:bg-muted",
+                    "flex h-full flex-col gap-1 border p-3 transition-colors hover:border-foreground hover:bg-muted",
                     FOCUS_OUTLINE_RESET,
                     FOCUS_RING
                   )}

@@ -1,5 +1,5 @@
 {
-  "tokenCount": 484,
+  "tokenCount": 504,
   "tokens": [
     {
       "token": "primitive.color.mist.50",
@@ -54,7 +54,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-300",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(82.95% 0.0163 216.69)"
@@ -62,7 +62,7 @@
       "value": {
         "light": "oklch(82.95% 0.0163 216.69)"
       },
-      "description": "Cool neutral: surfaces, text and borders. Step 300, OKLCH lightness 0.83, generated from #67787c by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Cool neutral: surfaces, text and borders. Step 300, OKLCH lightness 0.83, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -118,7 +118,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-mist-700",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(40.1% 0.0197 211.14)"
@@ -126,7 +126,7 @@
       "value": {
         "light": "oklch(40.1% 0.0197 211.14)"
       },
-      "description": "Cool neutral: surfaces, text and borders. Step 700, OKLCH lightness 0.4, generated from #67787c by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Cool neutral: surfaces, text and borders. Step 700, OKLCH lightness 0.4, generated from #67787c by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -214,7 +214,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-200",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(92.6% 0.0357 277.03)"
@@ -222,7 +222,7 @@
       "value": {
         "light": "oklch(92.6% 0.0357 277.03)"
       },
-      "description": "Brand: actions and links. Step 200, OKLCH lightness 0.925, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Brand: actions and links. Step 200, OKLCH lightness 0.925, generated from #432dd7 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -310,7 +310,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-800",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(27.51% 0.143 276.93)"
@@ -318,7 +318,7 @@
       "value": {
         "light": "oklch(27.51% 0.143 276.93)"
       },
-      "description": "Brand: actions and links. Step 800, OKLCH lightness 0.275, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Brand: actions and links. Step 800, OKLCH lightness 0.275, generated from #432dd7 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -342,7 +342,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-violet-950",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(14.8% 0.0725 276.39)"
@@ -350,7 +350,7 @@
       "value": {
         "light": "oklch(14.8% 0.0725 276.39)"
       },
-      "description": "Brand: actions and links. Step 950, OKLCH lightness 0.148, generated from #432dd7 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Brand: actions and links. Step 950, OKLCH lightness 0.148, generated from #432dd7 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -390,7 +390,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-200",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(92.44% 0.0385 27.76)"
@@ -398,7 +398,7 @@
       "value": {
         "light": "oklch(92.44% 0.0385 27.76)"
       },
-      "description": "Error and destructive. Step 200, OKLCH lightness 0.925, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Error and destructive. Step 200, OKLCH lightness 0.925, generated from #e7000b by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -486,7 +486,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-red-800",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(27.56% 0.1128 28.58)"
@@ -494,7 +494,7 @@
       "value": {
         "light": "oklch(27.56% 0.1128 28.58)"
       },
-      "description": "Error and destructive. Step 800, OKLCH lightness 0.275, generated from #e7000b by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Error and destructive. Step 800, OKLCH lightness 0.275, generated from #e7000b by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -742,7 +742,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-emerald-200",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(92.54% 0.0669 162.17)"
@@ -750,7 +750,7 @@
       "value": {
         "light": "oklch(92.54% 0.0669 162.17)"
       },
-      "description": "Success. Step 200, OKLCH lightness 0.925, generated from #00d492 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Success. Step 200, OKLCH lightness 0.925, generated from #00d492 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -918,7 +918,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-200",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(92.52% 0.041 238.05)"
@@ -926,7 +926,7 @@
       "value": {
         "light": "oklch(92.52% 0.041 238.05)"
       },
-      "description": "Chart series. Step 200, OKLCH lightness 0.925, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Chart series. Step 200, OKLCH lightness 0.925, generated from #438fbd by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -934,7 +934,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-300",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(83.11% 0.0817 237.99)"
@@ -942,7 +942,7 @@
       "value": {
         "light": "oklch(83.11% 0.0817 237.99)"
       },
-      "description": "Chart series. Step 300, OKLCH lightness 0.83, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Chart series. Step 300, OKLCH lightness 0.83, generated from #438fbd by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -982,7 +982,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-600",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(49.88% 0.1022 238.19)"
@@ -990,7 +990,7 @@
       "value": {
         "light": "oklch(49.88% 0.1022 238.19)"
       },
-      "description": "Chart series. Step 600, OKLCH lightness 0.5, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Chart series. Step 600, OKLCH lightness 0.5, generated from #438fbd by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -998,7 +998,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-blue-700",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(39.95% 0.0896 238.69)"
@@ -1006,7 +1006,7 @@
       "value": {
         "light": "oklch(39.95% 0.0896 238.69)"
       },
-      "description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #438fbd by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #438fbd by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -1270,7 +1270,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-amber-200",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(92.51% 0.0697 80.17)"
@@ -1278,7 +1278,7 @@
       "value": {
         "light": "oklch(92.51% 0.0697 80.17)"
       },
-      "description": "Warning and chart series. Step 200, OKLCH lightness 0.925, generated from #fe9a00 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Warning and chart series. Step 200, OKLCH lightness 0.925, generated from #fe9a00 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -1618,6 +1618,22 @@
       "private": true
     },
     {
+      "token": "primitive.color.white-alpha.8",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-white-alpha-8",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(100% 0 0 / 0.08)"
+      },
+      "value": {
+        "light": "oklch(100% 0 0 / 0.08)"
+      },
+      "description": "White at 8%: dark-mode borders, fills and state veils, which take the hue of the surface under them.",
+      "private": true
+    },
+    {
       "token": "primitive.color.white-alpha.10",
       "tier": "primitive",
       "cssVar": "--ds-prim-color-white-alpha-10",
@@ -1630,7 +1646,7 @@
       "value": {
         "light": "oklch(100% 0 0 / 0.1)"
       },
-      "description": "White at 10%: dark-mode borders, which take the hue of the surface under them.",
+      "description": "White at 10%: dark-mode borders, fills and state veils, which take the hue of the surface under them.",
       "private": true
     },
     {
@@ -1646,7 +1662,39 @@
       "value": {
         "light": "oklch(100% 0 0 / 0.15)"
       },
-      "description": "White at 15%: dark-mode borders, which take the hue of the surface under them.",
+      "description": "White at 15%: dark-mode borders, fills and state veils, which take the hue of the surface under them.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.ink-alpha.5",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-ink-alpha-5",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.65% 0.0056 219 / 0.05)"
+      },
+      "value": {
+        "light": "oklch(14.65% 0.0056 219 / 0.05)"
+      },
+      "description": "The neutral ink (mist.950) at 5%: light-mode state veils, which take the hue of the surface under them.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.ink-alpha.7",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-ink-alpha-7",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.65% 0.0056 219 / 0.07)"
+      },
+      "value": {
+        "light": "oklch(14.65% 0.0056 219 / 0.07)"
+      },
+      "description": "The neutral ink (mist.950) at 7%: light-mode state veils, which take the hue of the surface under them.",
       "private": true
     },
     {
@@ -4256,6 +4304,72 @@
       }
     },
     {
+      "token": "color.overlay.hover",
+      "tier": "semantic",
+      "cssVar": "--color-overlay-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.ink-alpha.5}",
+        "dark": "{primitive.color.white-alpha.8}"
+      },
+      "value": {
+        "light": "oklch(14.65% 0.0056 219 / 0.05)",
+        "dark": "oklch(100% 0 0 / 0.08)"
+      },
+      "description": "The translucent veil of a neutral element under the pointer (a table row, a choice card, a ghost or outline control in dark): ink at 5% in light, white at 8% in dark, so it shows on the page, a card and a popover alike. At most 8%: a stronger veil puts the subtle text it carries under 4.5:1 on the card. Not for a role-colored fill, which has its own hover token.",
+      "docs": {
+        "description": "Hover veil of a neutral element — the class `bg-overlay-hover`.",
+        "do": "Use for `hover:bg-overlay-hover` on a table row, an Attachment link, a choice card, a Questionnaire choice, and the dark hover of ghost and outline controls.",
+        "dont": "Do not write `hover:bg-muted/50`: on a card, the same mist.100 / mist.800 step, it changed nothing."
+      }
+    },
+    {
+      "token": "color.overlay.active",
+      "tier": "semantic",
+      "cssVar": "--color-overlay-active",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.ink-alpha.7}",
+        "dark": "{primitive.color.white-alpha.8}"
+      },
+      "value": {
+        "light": "oklch(14.65% 0.0056 219 / 0.07)",
+        "dark": "oklch(100% 0 0 / 0.08)"
+      },
+      "description": "The veil of a neutral element while pressed: ink at 7% in light, white at 8% in dark, the most a veil takes before the subtle text it carries falls under 4.5:1 on the card. Reserved: shadcn/ui draws no pressed state, so no component reads it yet.",
+      "docs": {
+        "description": "Pressed veil of a neutral element, for a component that draws one.",
+        "do": "Use for an `active:` veil, if one is ever drawn.",
+        "dont": "Do not use for a selected state that stays on — use `color.overlay.selected`."
+      }
+    },
+    {
+      "token": "color.overlay.selected",
+      "tier": "semantic",
+      "cssVar": "--color-overlay-selected",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.ink-alpha.7}",
+        "dark": "{primitive.color.white-alpha.8}"
+      },
+      "value": {
+        "light": "oklch(14.65% 0.0056 219 / 0.07)",
+        "dark": "oklch(100% 0 0 / 0.08)"
+      },
+      "description": "The veil of a neutral element that is open, expanded or current: an open NavigationMenu trigger, the current NavigationMenu link, an expanded table row, the active tab in dark. Ink at 7% in light, a step over color.overlay.hover; white at 8% in dark, as hover, the most a veil takes before the subtle text it carries falls under 4.5:1 on the card. Not for a checked choice, which takes color.action.background.selected.",
+      "docs": {
+        "description": "Selected veil of a neutral element — the class `bg-overlay-selected`.",
+        "do": "Use for `data-open:`, `data-active:` and `has-aria-expanded:` backgrounds of neutral elements.",
+        "dont": "Do not write `data-open:bg-muted/50`: a translucent muted fill vanishes on a card."
+      }
+    },
+    {
       "token": "color.text.default",
       "tier": "semantic",
       "cssVar": "--color-text-default",
@@ -4452,6 +4566,28 @@
       }
     },
     {
+      "token": "color.text.info.default",
+      "tier": "semantic",
+      "cssVar": "--color-text-info-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.blue.700}",
+        "dark": "{primitive.color.blue.300}"
+      },
+      "value": {
+        "light": "oklch(39.95% 0.0896 238.69)",
+        "dark": "oklch(83.11% 0.0817 237.99)"
+      },
+      "description": "Info text and icons, on a neutral surface or on an info tint. Not for success, warnings or errors.",
+      "docs": {
+        "description": "Info-state text and icons — the class `text-info`. Darker than `color.feedback.info.default` in light mode and lighter in dark mode, so it stays at 4.5:1 or more on every surface and on the `bg-info/10`–`/20` tints.",
+        "do": "Use for the info Alert and Badge: a tip, a notice, a status that needs no action.",
+        "dont": "Do not carry the meaning by color alone: an icon or a word says it too. Do not use `color.feedback.info.default` for text."
+      }
+    },
+    {
       "token": "color.border.default",
       "tier": "semantic",
       "cssVar": "--color-border-default",
@@ -4644,6 +4780,136 @@
       }
     },
     {
+      "token": "color.action.background.hover",
+      "tier": "semantic",
+      "cssVar": "--color-action-background-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.violet.700}",
+        "dark": "{primitive.color.violet.600}"
+      },
+      "value": {
+        "light": "oklch(39.99% 0.2156 276.99)",
+        "dark": "oklch(49.97% 0.2389 276.79)"
+      },
+      "description": "The primary action fill under the pointer: one step darker in light, one step lighter in dark, so color.action.background.foreground keeps 4.5:1 or more. Not for a resting or a selected element.",
+      "docs": {
+        "description": "Hover state of the primary fill — the class `bg-primary-hover`.",
+        "do": "Use for `hover:bg-primary-hover` on a primary Button, a primary Badge link and a default Bubble that is a button or a link.",
+        "dont": "Do not write `hover:bg-primary/80`: over white it put the label at 4.24:1, under 4.5:1."
+      }
+    },
+    {
+      "token": "color.action.background.active",
+      "tier": "semantic",
+      "cssVar": "--color-action-background-active",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.violet.800}"
+      },
+      "value": {
+        "light": "oklch(27.51% 0.143 276.93)"
+      },
+      "description": "The primary action fill while pressed: darker than its rest and hover steps in both modes. Reserved: shadcn/ui draws no pressed state, so no component reads it yet; a pressed fill takes this token, never an opacity.",
+      "docs": {
+        "description": "Pressed state of the primary fill, for a component that draws one.",
+        "do": "Use for an `active:` fill of a primary control, if one is ever drawn.",
+        "dont": "Do not use for a selected or a toggled-on state, which stays on until it is turned off."
+      }
+    },
+    {
+      "token": "color.action.background.selected",
+      "tier": "semantic",
+      "cssVar": "--color-action-background-selected",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.violet.50}",
+        "dark": "{primitive.color.violet.950}"
+      },
+      "value": {
+        "light": "oklch(98.58% 0.0067 277.17)",
+        "dark": "oklch(14.8% 0.0725 276.39)"
+      },
+      "description": "The brand-tinted surface of a selected choice: a choice card (FieldLabel wrapping a Field) whose control is checked. Not for a hover, nor for a solid primary fill.",
+      "docs": {
+        "description": "Background of a selected choice card — the class `bg-primary-selected`.",
+        "do": "Use with `border-primary` for a choice card whose Checkbox, RadioGroupItem or Switch is checked.",
+        "dont": "Do not write `bg-primary/5` or `bg-primary/10`: the selected surface is a named step, the same on the page, a card or a popover."
+      }
+    },
+    {
+      "token": "color.action.secondary.hover",
+      "tier": "semantic",
+      "cssVar": "--color-action-secondary-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.mist.200}",
+        "dark": "{primitive.color.mist.700}"
+      },
+      "value": {
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(40.1% 0.0197 211.14)"
+      },
+      "description": "The secondary fill (bg-secondary, bg-muted) under the pointer: one step darker in light, one step lighter in dark, visible on a card that shares the resting fill. Not for a neutral element with no fill of its own, which takes color.overlay.hover.",
+      "docs": {
+        "description": "Hover state of the secondary and muted fills — the class `bg-secondary-hover`.",
+        "do": "Use for `hover:bg-secondary-hover` on a secondary Button, a secondary Badge link, and a secondary or muted Bubble that is a button or a link.",
+        "dont": "Do not write `hover:bg-secondary/80` or `hover:bg-muted/80`: on a card, which is the same mist.100 / mist.800 step, the translucent fill changed nothing."
+      }
+    },
+    {
+      "token": "color.action.secondary.active",
+      "tier": "semantic",
+      "cssVar": "--color-action-secondary-active",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.mist.300}",
+        "dark": "{primitive.color.mist.600}"
+      },
+      "value": {
+        "light": "oklch(82.95% 0.0163 216.69)",
+        "dark": "oklch(50.11% 0.0215 213.54)"
+      },
+      "description": "The secondary fill while pressed: two steps from its rest. Reserved: shadcn/ui draws no pressed state, so no component reads it yet.",
+      "docs": {
+        "description": "Pressed state of the secondary fill, for a component that draws one.",
+        "do": "Use for an `active:` fill of a secondary control, if one is ever drawn.",
+        "dont": "Do not use for a selected state."
+      }
+    },
+    {
+      "token": "color.action.tint.hover",
+      "tier": "semantic",
+      "cssVar": "--color-action-tint-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.violet.200}",
+        "dark": "{primitive.color.violet.700}"
+      },
+      "value": {
+        "light": "oklch(92.6% 0.0357 277.03)",
+        "dark": "oklch(39.99% 0.2156 276.99)"
+      },
+      "description": "A primary tint (bg-primary/10 at rest) under the pointer: the tinted Bubble that is a button or a link. Its text is color.text.default, at 4.5:1 or more. Not for the solid primary fill, which takes color.action.background.hover.",
+      "docs": {
+        "description": "Hover state of a primary tint — the class `bg-primary-tint-hover`.",
+        "do": "Use for the hover of a tinted Bubble that is a button or a link.",
+        "dont": "Do not write `hover:bg-primary/20` or `/30`: the hovered tint is a named step."
+      }
+    },
+    {
       "token": "color.feedback.error.default",
       "tier": "semantic",
       "cssVar": "--color-feedback-error-default",
@@ -4685,6 +4951,50 @@
         "description": "Text and icons placed **on** a solid error surface.",
         "do": "Use whenever a solid `bg-destructive` background carries text or an icon.",
         "dont": "Never put `color.text.default` or `text-white` on an error surface — in dark mode, white on red.400 drops to 2.73:1."
+      }
+    },
+    {
+      "token": "color.feedback.error.hover",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-error-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.red.200}",
+        "dark": "{primitive.color.red.700}"
+      },
+      "value": {
+        "light": "oklch(92.44% 0.0385 27.76)",
+        "dark": "oklch(40.01% 0.1637 28.38)"
+      },
+      "description": "A error tint (bg-destructive/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.destructive.default keeps 4.5:1 or more on it. Not for a resting tint.",
+      "docs": {
+        "description": "Hover state of the error tint — the class `bg-destructive-hover`.",
+        "do": "Use for the hover of the destructive Button, a destructive Badge link and Bubble, and a highlighted destructive menu item.",
+        "dont": "Do not write `hover:bg-destructive/20` or `/30`: the hovered tint is a named step, so it changes on a card too."
+      }
+    },
+    {
+      "token": "color.feedback.error.active",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-error-active",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.red.300}",
+        "dark": "{primitive.color.red.800}"
+      },
+      "value": {
+        "light": "oklch(82.99% 0.0946 28.05)",
+        "dark": "oklch(27.56% 0.1128 28.58)"
+      },
+      "description": "A destructive tint while pressed. Reserved: shadcn/ui draws no pressed state, so no component reads it yet.",
+      "docs": {
+        "description": "Pressed state of the destructive tint, for a component that draws one.",
+        "do": "Use for an `active:` fill of a destructive control, if one is ever drawn.",
+        "dont": "Do not use for a resting or a hovered state."
       }
     },
     {
@@ -4732,6 +5042,28 @@
       }
     },
     {
+      "token": "color.feedback.success.hover",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-success-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.emerald.200}",
+        "dark": "{primitive.color.emerald.700}"
+      },
+      "value": {
+        "light": "oklch(92.54% 0.0669 162.17)",
+        "dark": "oklch(40.06% 0.0877 162.11)"
+      },
+      "description": "A success tint (bg-success/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.success.default keeps 4.5:1 or more on it. Not for a resting tint.",
+      "docs": {
+        "description": "Hover state of the success tint — the class `bg-success-hover`.",
+        "do": "Use for the hover of a success Badge link.",
+        "dont": "Do not write `hover:bg-success/20` or `/30`: the hovered tint is a named step, so it changes on a card too."
+      }
+    },
+    {
       "token": "color.feedback.warning.default",
       "tier": "semantic",
       "cssVar": "--color-feedback-warning-default",
@@ -4771,6 +5103,94 @@
         "description": "Text and icons placed **on** a solid warning surface — dark in both modes.",
         "do": "Use whenever a solid `bg-warning` background carries text or an icon.",
         "dont": "Never put `text-white` on a warning surface: white on the light-mode fill is below 2:1."
+      }
+    },
+    {
+      "token": "color.feedback.warning.hover",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-warning-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.amber.200}",
+        "dark": "{primitive.color.amber.700}"
+      },
+      "value": {
+        "light": "oklch(92.51% 0.0697 80.17)",
+        "dark": "oklch(40.01% 0.0992 54.84)"
+      },
+      "description": "A warning tint (bg-warning/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.warning.default keeps 4.5:1 or more on it. Not for a resting tint.",
+      "docs": {
+        "description": "Hover state of the warning tint — the class `bg-warning-hover`.",
+        "do": "Use for the hover of a warning Badge link.",
+        "dont": "Do not write `hover:bg-warning/20` or `/30`: the hovered tint is a named step, so it changes on a card too."
+      }
+    },
+    {
+      "token": "color.feedback.info.default",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-info-default",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.blue.600}",
+        "dark": "{primitive.color.blue.400}"
+      },
+      "value": {
+        "light": "oklch(49.88% 0.1022 238.19)",
+        "dark": "oklch(71.5% 0.1026 238.54)"
+      },
+      "description": "Info state color for backgrounds, tints and borders: neutral information that needs no action. Not for text, success, warning or errors.",
+      "docs": {
+        "description": "Info-state fill — solid or tinted background, border.",
+        "do": "Use for the `bg-info/10`–`/20` tints of the info Badge and for a solid `bg-info` surface with its foreground.",
+        "dont": "Do not use for text or icons — use `color.text.info.default` (`text-info`). Do not use for a status that asks the reader to act: that is a warning."
+      }
+    },
+    {
+      "token": "color.feedback.info.foreground",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-info-foreground",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.white}",
+        "dark": "{primitive.color.mist.950}"
+      },
+      "value": {
+        "light": "oklch(100% 0 0)",
+        "dark": "oklch(14.65% 0.0056 219)"
+      },
+      "description": "Text and icons placed on color.feedback.info.default. Reserved: no component draws a solid info surface yet.",
+      "docs": {
+        "description": "Text and icons placed **on** a solid info surface.",
+        "do": "Use whenever a solid `bg-info` background carries text or an icon.",
+        "dont": "Never put `text-white` on an info surface — in dark mode the fill is light and needs dark text."
+      }
+    },
+    {
+      "token": "color.feedback.info.hover",
+      "tier": "semantic",
+      "cssVar": "--color-feedback-info-hover",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.blue.200}",
+        "dark": "{primitive.color.blue.700}"
+      },
+      "value": {
+        "light": "oklch(92.52% 0.041 238.05)",
+        "dark": "oklch(39.95% 0.0896 238.69)"
+      },
+      "description": "An info tint (bg-info/10 at rest) under the pointer: step 200 in light, 700 in dark, so color.text.info.default keeps 4.5:1 or more on it. Not for a resting tint.",
+      "docs": {
+        "description": "Hover state of the info tint — the class `bg-info-hover`.",
+        "do": "Use for the hover of an info Badge link.",
+        "dont": "Do not write `hover:bg-info/20`: the hovered tint is a named step."
       }
     },
     {

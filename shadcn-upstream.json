@@ -70,16 +70,16 @@
         "reason": "A 1px focus outline is replaced by the border color change that goes with the 2px ring (border-ring). outline-1 is a raw pixel outline width, rejected by tokens:lint-values; Tabs keeps a token-width outline instead."
       },
       "hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": {
-        "to": "hover:bg-secondary/80",
-        "reason": "Hover on a secondary Button mixes 5% foreground into secondary in oklch; it becomes secondary at 80% alpha, the same /80 hover as Badge. The color-mix arbitrary value is dropped."
+        "to": "hover:bg-secondary-hover",
+        "reason": "The secondary hover mixes 5% of the foreground into the fill: a step darker in light, lighter in dark. It becomes the named step color.action.secondary.hover (mist.200 light, mist.700 dark), which also shows on a card, the same mist.100 / mist.800 step as the fill. A color-mix() is an arbitrary value the Tailwind lockdown rejects."
       },
       "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]": {
-        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-secondary/80",
-        "reason": "Hover on a secondary Bubble mixes 5% foreground into secondary in oklch; it becomes secondary at 80% alpha. The color-mix arbitrary value is dropped."
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-secondary-hover",
+        "reason": "As the Button's secondary hover: the named step color.action.secondary.hover replaces the 5% foreground mix."
       },
       "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_5%)]": {
-        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-muted/80",
-        "reason": "Hover on a muted Bubble mixes 5% foreground into muted in oklch; it becomes muted at 80% alpha. The color-mix arbitrary value is dropped."
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-secondary-hover",
+        "reason": "The muted fill is the secondary fill (mist.100 / mist.800), so its 5% foreground mix becomes the same named step, color.action.secondary.hover."
       },
       "*:data-[slot=bubble-content]:bg-[oklch(from_var(--primary)_0.93_calc(c*0.4)_h)]": {
         "to": "*:data-[slot=bubble-content]:bg-primary/10",
@@ -90,12 +90,12 @@
         "reason": "The tinted Bubble background in dark mode, a relative oklch color (lightness 0.3) derived from primary, becomes primary at 20% alpha. Relative-color arbitrary values are replaced by token alphas."
       },
       "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.88_calc(c*0.5)_h)]": {
-        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/20",
-        "reason": "Hover on a tinted Bubble button or link, a relative oklch color (lightness 0.88) derived from primary, becomes primary at 20% alpha. Relative-color arbitrary values are replaced by token alphas."
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary-tint-hover",
+        "reason": "The tinted Bubble's hover, a light relative color of the primary, becomes the named step color.action.tint.hover (violet.200 light, violet.700 dark), under text-foreground at 4.5:1 or more. A relative oklch() is an arbitrary value the Tailwind lockdown rejects."
       },
       "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.35_calc(c*0.5)_h)]": {
-        "to": "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/30",
-        "reason": "Dark-mode hover on a tinted Bubble button or link, a relative oklch color (lightness 0.35) derived from primary, becomes primary at 30% alpha. Relative-color arbitrary values are replaced by token alphas."
+        "to": "",
+        "reason": "The dark twin is dropped: color.action.tint.hover has its own dark value."
       },
       "[&>span]:opacity-70": {
         "to": "[&>span]:text-current/70",
@@ -130,6 +130,114 @@
       "group-has-[:focus-visible]/field-label:data-checked:border-primary": {
         "to": "group-has-[>[data-slot=field]]/field-label:focus-visible:data-checked:border-primary",
         "reason": "It applied to any FieldLabel, so a focused checked control in a plain label kept border-primary where it turns border-ring everywhere else (FOCUS_RING). It is scoped to a choice card, where the card draws the focus ring and the checked control keeps its border."
+      },
+      "hover:bg-primary/80": {
+        "to": "hover:bg-primary-hover",
+        "reason": "A role fill under the pointer is a named step, not an opacity of its rest: color.action.background.hover, one step darker in light and lighter in dark. bg-primary/80 put the primary label at 4.24:1 over white (WCAG 1.4.3)."
+      },
+      "[a]:hover:bg-primary/80": {
+        "to": "[a]:hover:bg-primary-hover",
+        "reason": "As hover:bg-primary/80: A role fill under the pointer is a named step, not an opacity of its rest: color.action.background.hover, one step darker in light and lighter in dark. bg-primary/80 put the primary label at 4.24:1 over white (WCAG 1.4.3)."
+      },
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary/80": {
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-primary-hover",
+        "reason": "As hover:bg-primary/80: A role fill under the pointer is a named step, not an opacity of its rest: color.action.background.hover, one step darker in light and lighter in dark. bg-primary/80 put the primary label at 4.24:1 over white (WCAG 1.4.3)."
+      },
+      "[a]:hover:bg-secondary/80": {
+        "to": "[a]:hover:bg-secondary-hover",
+        "reason": "As hover:bg-secondary/80: The secondary fill's hover is a named step, color.action.secondary.hover (mist.200 light, mist.700 dark): bg-secondary/80 changed nothing on a card, which is the same mist.100 / mist.800 step."
+      },
+      "hover:bg-destructive/20": {
+        "to": "hover:bg-destructive-hover",
+        "reason": "A destructive tint under the pointer or highlighted is a named step, color.feedback.error.hover (red.200 light, red.700 dark), where label text-destructive keeps 4.5:1. In dark, a Badge link's bg-destructive/20 hover equaled its rest tint."
+      },
+      "[a]:hover:bg-destructive/20": {
+        "to": "[a]:hover:bg-destructive-hover",
+        "reason": "As hover:bg-destructive/20: A destructive tint under the pointer or highlighted is a named step, color.feedback.error.hover (red.200 light, red.700 dark), where label text-destructive keeps 4.5:1. In dark, a Badge link's bg-destructive/20 hover equaled its rest tint."
+      },
+      "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-destructive/20": {
+        "to": "[&>[data-slot=bubble-content]:is(button,a):hover]:bg-destructive-hover",
+        "reason": "As hover:bg-destructive/20: A destructive tint under the pointer or highlighted is a named step, color.feedback.error.hover (red.200 light, red.700 dark), where label text-destructive keeps 4.5:1. In dark, a Badge link's bg-destructive/20 hover equaled its rest tint."
+      },
+      "dark:hover:bg-destructive/30": {
+        "to": "",
+        "reason": "The dark twin is dropped: the hover token has its own dark value."
+      },
+      "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-destructive/30": {
+        "to": "",
+        "reason": "The dark twin is dropped: the hover token has its own dark value."
+      },
+      "data-[variant=destructive]:focus:bg-destructive/10": {
+        "to": "data-[variant=destructive]:focus:bg-destructive-hover",
+        "reason": "A highlighted destructive menu item takes the destructive hover step, color.feedback.error.hover, as a hovered destructive Button does, instead of a 10% tint (20% in dark)."
+      },
+      "dark:data-[variant=destructive]:focus:bg-destructive/20": {
+        "to": "",
+        "reason": "The dark twin is dropped: the hover token has its own dark value."
+      },
+      "dark:hover:bg-muted/50": {
+        "to": "dark:hover:bg-overlay-hover",
+        "reason": "A neutral element under the pointer takes a veil, color.overlay.hover (ink at 5% light, white at 8% dark): it shows on the page, a card and a popover, where bg-muted/50 changed nothing on a card."
+      },
+      "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-muted/50": {
+        "to": "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-overlay-hover",
+        "reason": "As dark:hover:bg-muted/50: A neutral element under the pointer takes a veil, color.overlay.hover (ink at 5% light, white at 8% dark): it shows on the page, a card and a popover, where bg-muted/50 changed nothing on a card."
+      },
+      "dark:hover:bg-input/50": {
+        "to": "dark:hover:bg-overlay-hover",
+        "reason": "The dark hover of an outline Button, a Select trigger and a NativeSelect is the hover veil, color.overlay.hover (white at 8%), over their bg-input-fill/30 rest (white at 4.5%), not a stronger fill."
+      },
+      "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-input/30": {
+        "to": "dark:[&>[data-slot=bubble-content]:is(button,a):hover]:bg-overlay-hover",
+        "reason": "As dark:hover:bg-muted/50: A neutral element under the pointer takes a veil, color.overlay.hover (ink at 5% light, white at 8% dark): it shows on the page, a card and a popover, where bg-muted/50 changed nothing on a card."
+      },
+      "hover:bg-muted/50": {
+        "to": "hover:bg-overlay-hover",
+        "reason": "A neutral element under the pointer takes a veil, color.overlay.hover (ink at 5% light, white at 8% dark): it shows on the page, a card and a popover, where bg-muted/50 changed nothing on a card."
+      },
+      "has-[>a,>button]:hover:bg-muted/50": {
+        "to": "has-[>a,>button]:hover:bg-overlay-hover",
+        "reason": "As hover:bg-muted/50: A neutral element under the pointer takes a veil, color.overlay.hover (ink at 5% light, white at 8% dark): it shows on the page, a card and a popover, where bg-muted/50 changed nothing on a card."
+      },
+      "has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-muted/50": {
+        "to": "has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-overlay-hover",
+        "reason": "As hover:bg-muted/50: A neutral element under the pointer takes a veil, color.overlay.hover (ink at 5% light, white at 8% dark): it shows on the page, a card and a popover, where bg-muted/50 changed nothing on a card."
+      },
+      "has-aria-expanded:bg-muted/50": {
+        "to": "has-aria-expanded:bg-overlay-selected",
+        "reason": "An open, expanded or current neutral element takes the selected veil, color.overlay.selected (ink at 7% light, white at 8% dark), not a muted fill at 50% that vanished on a card."
+      },
+      "data-open:bg-muted/50": {
+        "to": "data-open:bg-overlay-selected",
+        "reason": "An open, expanded or current neutral element takes the selected veil, color.overlay.selected (ink at 7% light, white at 8% dark), not a muted fill at 50% that vanished on a card."
+      },
+      "data-active:bg-muted/50": {
+        "to": "data-active:bg-overlay-selected",
+        "reason": "An open, expanded or current neutral element takes the selected veil, color.overlay.selected (ink at 7% light, white at 8% dark), not a muted fill at 50% that vanished on a card."
+      },
+      "dark:data-active:bg-input/30": {
+        "to": "dark:data-active:bg-overlay-selected",
+        "reason": "The active tab in dark takes the selected veil, color.overlay.selected (white at 8%), not the field fill at 30% (white at 4.5%)."
+      },
+      "has-data-checked:bg-primary/5": {
+        "to": "has-data-checked:bg-primary-selected",
+        "reason": "A selected choice card takes a named step, color.action.background.selected (violet.50 light, violet.950 dark), not a primary tint at 5% (10% in dark)."
+      },
+      "has-data-checked:border-primary/30": {
+        "to": "has-data-checked:border-primary",
+        "reason": "A selected choice card's border is the solid primary, not the primary at 30% (20% in dark), which sat lighter than the resting border-input once that reached 3:1."
+      },
+      "dark:has-data-checked:bg-primary/10": {
+        "to": "",
+        "reason": "The dark twin is dropped: the hover token has its own dark value."
+      },
+      "dark:has-data-checked:border-primary/20": {
+        "to": "",
+        "reason": "The dark twin is dropped: border-primary holds in both modes."
+      },
+      "data-checked:border-foreground/30": {
+        "to": "data-checked:border-foreground",
+        "reason": "A checked Questionnaire choice draws a solid border-foreground frame, as a pressed Toggle does: foreground at 30% sat lighter than the resting border-input once that reached 3:1."
       }
     },
     "utilities": {
@@ -756,16 +864,20 @@
     },
     "alert": {
       "status": "reanchored",
-      "reason": "The success and warning variants (declared in shadcn.divergences): their colors, and the icon and description following the variant's color.",
+      "reason": "The success, warning and info variants (declared in shadcn.divergences): their colors, and the icon and description following the variant's color.",
       "added": [
+        "*:[svg]:text-current",
         "*:[svg]:text-current",
         "*:[svg]:text-current",
         "*:data-[slot=alert-description]:text-success/90",
         "*:data-[slot=alert-description]:text-warning/90",
+        "*:data-[slot=alert-description]:text-info/90",
+        "bg-card",
         "bg-card",
         "bg-card",
         "text-success",
-        "text-warning"
+        "text-warning",
+        "text-info"
       ]
     },
     "alert-dialog": {
@@ -790,17 +902,21 @@
     },
     "badge": {
       "status": "reanchored",
-      "reason": "The success and warning variants (declared in shadcn.divergences), and the destructive variant's focus border of FOCUS_RING_DESTRUCTIVE. A destructive badge link's focus border is border-destructive/40 and an invalid badge keeps its destructive border, so focus showed a halo alone, about 2.4:1 and 1.4:1: both draw a solid 1px outline-destructive at focus (border-width.default, outline-solid), 4.77:1 light and 6.83:1 dark.",
+      "reason": "The success, warning and info variants (declared in shadcn.divergences), and the destructive variant's focus border of FOCUS_RING_DESTRUCTIVE. A destructive badge link's focus border is border-destructive/40 and an invalid badge keeps its destructive border, so focus showed a halo alone, about 2.4:1 and 1.4:1: both draw a solid 1px outline-destructive at focus (border-width.default, outline-solid), 4.77:1 light and 6.83:1 dark.",
       "added": [
-        "[a]:hover:bg-success/20",
-        "[a]:hover:bg-warning/20",
+        "[a]:hover:bg-success-hover",
+        "[a]:hover:bg-warning-hover",
+        "[a]:hover:bg-info-hover",
         "bg-success/10",
         "bg-warning/10",
+        "bg-info/10",
         "dark:bg-success/20",
         "dark:bg-warning/20",
+        "dark:bg-info/20",
         "focus-visible:border-destructive/40",
         "text-success",
         "text-warning",
+        "text-info",
         "focus-visible:outline-solid",
         "focus-visible:outline-(length:--border-width-default)",
         "focus-visible:outline-destructive",

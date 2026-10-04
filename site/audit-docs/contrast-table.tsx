@@ -24,6 +24,7 @@ const GROUPS: { id: ContrastGroup; label: string }[] = [
   { id: "text", label: "Text" },
   { id: "filled", label: "Filled" },
   { id: "tint", label: "Tints" },
+  { id: "state", label: "States" },
   { id: "info", label: "Information" },
 ]
 
