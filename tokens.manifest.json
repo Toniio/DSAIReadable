@@ -1,5 +1,5 @@
 {
-  "tokenCount": 483,
+  "tokenCount": 484,
   "tokens": [
     {
       "token": "primitive.color.mist.50",
@@ -4212,6 +4212,28 @@
       }
     },
     {
+      "token": "color.background.input",
+      "tier": "semantic",
+      "cssVar": "--color-background-input",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.mist.200}",
+        "dark": "{primitive.color.white-alpha.15}"
+      },
+      "value": {
+        "light": "oklch(92.55% 0.009 214.34)",
+        "dark": "oklch(100% 0 0 / 0.15)"
+      },
+      "description": "The fill of a form control: the translucent background of a field in dark mode, of a disabled field, and of a hovered outline control. Not for a control's border, which is color.border.input.",
+      "docs": {
+        "description": "The fill of form controls, painted at an opacity (`bg-input-fill/30`, `/50`, `/80`).",
+        "do": "Use for the background of fields, selects, checkboxes and radios in dark mode, and of a disabled field.",
+        "dont": "Do not use for a control's border or a switch track — they draw its boundary and take `color.border.input`."
+      }
+    },
+    {
       "token": "color.background.inverse",
       "tier": "semantic",
       "cssVar": "--color-background-inverse",
@@ -4481,18 +4503,16 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.200}",
-        "dark": "{primitive.color.white-alpha.15}"
+        "light": "{primitive.color.mist.500}"
       },
       "value": {
-        "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.15)"
+        "light": "oklch(59.08% 0.0208 213.49)"
       },
-      "description": "Border for form input fields. Not for decorative dividers or layout borders.",
+      "description": "The boundary of a form control: the border of a field, checkbox or radio and the track of an unchecked switch, at 3:1 or more on the page, the card and the popover in both modes (WCAG 1.4.11). Not for a field's fill, nor for decorative dividers or layout borders.",
       "docs": {
-        "description": "The border of form fields.",
-        "do": "Use for every `<input>`, `<select>`, `<textarea>` and `<checkbox>` border.",
-        "dont": "Do not use for decorative separators — it is reserved for form controls."
+        "description": "The boundary of form controls, at 3:1 or more on every surface.",
+        "do": "Use for every `<input>`, `<select>`, `<textarea>`, checkbox and radio border, and for the track of an unchecked switch.",
+        "dont": "Do not use for a field's fill — use `color.background.input` (`bg-input-fill`) — nor for decorative separators."
       }
     },
     {
@@ -4503,14 +4523,14 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.500}",
-        "dark": "{primitive.color.mist.400}"
+        "light": "{primitive.color.mist.800}",
+        "dark": "{primitive.color.mist.200}"
       },
       "value": {
-        "light": "oklch(59.08% 0.0208 213.49)",
-        "dark": "oklch(71.56% 0.021 212.57)"
+        "light": "oklch(27.4% 0.0119 214.54)",
+        "dark": "oklch(92.55% 0.009 214.34)"
       },
-      "description": "Focus ring outline for keyboard accessibility. Lighter in dark mode, so the solid part of an indicator keeps 3:1 on the dark card and on a field's fill. Not for resting or hover states.",
+      "description": "Focus ring outline for keyboard accessibility. Darker than the resting border of a control in light and lighter in dark, by 3:1 or more in both modes, so a focused field never reads as a resting one; the solid part of an indicator keeps 3:1 on every surface and on a field's fill. Not for resting or hover states.",
       "docs": {
         "description": "Focus ring for keyboard accessibility (`:focus-visible`).",
         "do": "Use only for the `:focus-visible` state of interactive elements.",
@@ -8116,8 +8136,7 @@
         "light": "{color.border.input}"
       },
       "value": {
-        "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.15)"
+        "light": "oklch(59.08% 0.0208 213.49)"
       },
       "description": "shadcn --input compatibility alias. Maps the semantic input border to the shadcn input slot for form field outlines."
     },
@@ -8132,8 +8151,8 @@
         "light": "{color.border.focus}"
       },
       "value": {
-        "light": "oklch(59.08% 0.0208 213.49)",
-        "dark": "oklch(71.56% 0.021 212.57)"
+        "light": "oklch(27.4% 0.0119 214.54)",
+        "dark": "oklch(92.55% 0.009 214.34)"
       },
       "description": "shadcn --ring compatibility alias. Maps the semantic focus ring to the shadcn ring slot."
     },

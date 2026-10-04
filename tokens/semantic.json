@@ -40,6 +40,19 @@
           "status": "active"
         }
       },
+      "input": {
+        "$value": "{primitive.color.mist.200}",
+        "$type": "color",
+        "$description": "The fill of a form control: the translucent background of a field in dark mode, of a disabled field, and of a hovered outline control. Not for a control's border, which is color.border.input.",
+        "$extensions": {
+          "docs": {
+            "description": "The fill of form controls, painted at an opacity (`bg-input-fill/30`, `/50`, `/80`).",
+            "do": "Use for the background of fields, selects, checkboxes and radios in dark mode, and of a disabled field.",
+            "dont": "Do not use for a control's border or a switch track — they draw its boundary and take `color.border.input`."
+          },
+          "status": "active"
+        }
+      },
       "inverse": {
         "$value": "{primitive.color.mist.950}",
         "$type": "color",
@@ -209,22 +222,22 @@
         }
       },
       "input": {
-        "$value": "{primitive.color.mist.200}",
+        "$value": "{primitive.color.mist.500}",
         "$type": "color",
-        "$description": "Border for form input fields. Not for decorative dividers or layout borders.",
+        "$description": "The boundary of a form control: the border of a field, checkbox or radio and the track of an unchecked switch, at 3:1 or more on the page, the card and the popover in both modes (WCAG 1.4.11). Not for a field's fill, nor for decorative dividers or layout borders.",
         "$extensions": {
           "docs": {
-            "description": "The border of form fields.",
-            "do": "Use for every `<input>`, `<select>`, `<textarea>` and `<checkbox>` border.",
-            "dont": "Do not use for decorative separators — it is reserved for form controls."
+            "description": "The boundary of form controls, at 3:1 or more on every surface.",
+            "do": "Use for every `<input>`, `<select>`, `<textarea>`, checkbox and radio border, and for the track of an unchecked switch.",
+            "dont": "Do not use for a field's fill — use `color.background.input` (`bg-input-fill`) — nor for decorative separators."
           },
           "status": "active"
         }
       },
       "focus": {
-        "$value": "{primitive.color.mist.500}",
+        "$value": "{primitive.color.mist.800}",
         "$type": "color",
-        "$description": "Focus ring outline for keyboard accessibility. Lighter in dark mode, so the solid part of an indicator keeps 3:1 on the dark card and on a field's fill. Not for resting or hover states.",
+        "$description": "Focus ring outline for keyboard accessibility. Darker than the resting border of a control in light and lighter in dark, by 3:1 or more in both modes, so a focused field never reads as a resting one; the solid part of an indicator keeps 3:1 on every surface and on a field's fill. Not for resting or hover states.",
         "$extensions": {
           "docs": {
             "description": "Focus ring for keyboard accessibility (`:focus-visible`).",

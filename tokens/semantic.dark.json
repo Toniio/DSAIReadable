@@ -13,6 +13,10 @@
         "$type": "color",
         "$value": "{primitive.color.mist.900}"
       },
+      "input": {
+        "$type": "color",
+        "$value": "{primitive.color.white-alpha.15}"
+      },
       "inverse": {
         "$type": "color",
         "$value": "{primitive.color.white}"
@@ -69,13 +73,9 @@
         "$type": "color",
         "$value": "{primitive.color.white-alpha.10}"
       },
-      "input": {
-        "$type": "color",
-        "$value": "{primitive.color.white-alpha.15}"
-      },
       "focus": {
         "$type": "color",
-        "$value": "{primitive.color.mist.400}"
+        "$value": "{primitive.color.mist.200}"
       }
     },
     "icon": {

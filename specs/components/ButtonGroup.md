@@ -52,8 +52,8 @@ A container that visually joins adjacent buttons, inputs or selects by merging t
 | Token                            | Classes and variables | Where                                     |
 | -------------------------------- | --------------------- | ----------------------------------------- |
 | `border-width.default`           | `border`              | `ButtonGroupText`                         |
+| `color.background.input`         | `bg-input-fill`       | `ButtonGroupSeparator`                    |
 | `color.background.subtle`        | `bg-muted`            | `ButtonGroupText`                         |
-| `color.border.input`             | `bg-input`            | `ButtonGroupSeparator`                    |
 | `space.scale.2`                  | `gap-2`               | `ButtonGroupText` · `buttonGroupVariants` |
 | `space.scale.2-5`                | `px-2.5`              | `ButtonGroupText`                         |
 | `space.scale.4`                  | `size-4`              | `ButtonGroupText`                         |

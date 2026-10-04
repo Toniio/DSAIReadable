@@ -105,7 +105,7 @@ function CommandInput({
       {/* The group draws the ring of its input, as it does for its own
           input-group-control, which this input is not: it keeps the
           command-input slot of shadcn/ui. */}
-      <InputGroup className="h-8 border-none border-input/30 bg-input/30 shadow-none! has-[[data-slot=command-input]:focus-visible]:ring-(length:--space-focus-ring-width) has-[[data-slot=command-input]:focus-visible]:ring-ring/50 has-[[data-slot=command-input]:focus-visible]:outline-(length:--border-width-default) has-[[data-slot=command-input]:focus-visible]:outline-ring has-[[data-slot=command-input]:focus-visible]:outline-solid *:data-[slot=input-group-addon]:pl-2!">
+      <InputGroup className="h-8 border-none border-input/30 bg-input-fill/30 shadow-none! has-[[data-slot=command-input]:focus-visible]:ring-(length:--space-focus-ring-width) has-[[data-slot=command-input]:focus-visible]:ring-ring/50 has-[[data-slot=command-input]:focus-visible]:outline-(length:--border-width-default) has-[[data-slot=command-input]:focus-visible]:outline-ring has-[[data-slot=command-input]:focus-visible]:outline-solid *:data-[slot=input-group-addon]:pl-2!">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(

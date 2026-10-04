@@ -135,8 +135,8 @@ const buttonVariants = cva(
    but they are not suitable for a standalone control.
 
 6. **Every indicator has a solid part at 3:1.** The 2px halo is painted at
-   50% (`ring-ring/50`, `ring-destructive/20`): about 1.9:1, and 1.4:1 for the
-   destructive one, never enough on its own
+   an alpha (`ring-ring/50`, `ring-destructive/20`): 2.97:1 on the light card,
+   and 1.4:1 for the destructive one, never enough on its own
    ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast)
    read for focus indicators). The solid part is the element's border when it
    has one (`focus-visible:border-ring`). Without a border, `focus-visible:border-ring`
@@ -164,22 +164,28 @@ the WCAG 2.2 SC 1.4.11 threshold of **3:1** for a user-interface component, in
 both modes, and reports the halo as it is painted, at the alpha `lib/focus.ts`
 gives it:
 
-| Pair                                                                   | Light | Dark |
-| ---------------------------------------------------------------------- | ----- | ---- |
-| solid part (`border-ring`, `outline-ring`) on the page                 | 4.06  | 7.89 |
-| solid part on the card                                                 | 3.68  | 5.92 |
-| solid part on the popover                                              | 4.06  | 6.96 |
-| solid part on a field's `dark:bg-input/30` fill over the card          | —     | 5.16 |
-| invalid or destructive solid part on the page                          | 4.62  | 7.24 |
-| invalid or destructive solid part on the card                          | 4.18  | 5.43 |
-| invalid or destructive solid part on the popover                       | 4.62  | 6.38 |
-| sidebar focus ring on the sidebar surface                              | 3.89  | 4.28 |
-| halo (`ring-ring/50`) on the page, information only                    | 1.85  | 2.74 |
-| destructive halo (`ring-destructive/20`, dark `/40`), information only | 1.42  | 2.01 |
+| Pair                                                                   | Light | Dark  |
+| ---------------------------------------------------------------------- | ----- | ----- |
+| solid part (`border-ring`, `outline-ring`) on the page                 | 14.82 | 15.89 |
+| solid part on the card                                                 | 13.41 | 11.93 |
+| solid part on the popover                                              | 14.82 | 14.01 |
+| solid part on a field's `dark:bg-input-fill/30` fill over the card     | —     | 10.38 |
+| solid part against the resting border it replaces (`border-input`)     | 3.65  | 3.27  |
+| invalid or destructive solid part on the page                          | 4.62  | 7.24  |
+| invalid or destructive solid part on the card                          | 4.18  | 5.43  |
+| invalid or destructive solid part on the popover                       | 4.62  | 6.38  |
+| sidebar focus ring on the sidebar surface                              | 3.89  | 4.28  |
+| halo (`ring-ring/50`) on the page, information only                    | 3.06  | 4.53  |
+| destructive halo (`ring-destructive/20`, dark `/40`), information only | 1.42  | 2.01  |
 
-`color.border.focus` is lighter in dark mode (`mist.400`, `mist.500` in light):
-at the light value, an InputGroupButton on a field's dark fill over a card
-would measure 3.17:1, a margin of 0.17 where the dark value keeps 5.16:1.
+`color.border.focus` is `mist.800` in light and `mist.200` in dark, the
+resting border of a control (`color.border.input`) `mist.500` in both: focus
+moves a field's border 3:1 or more away from its resting color, darker in
+light and lighter in dark, so a focused field never reads as a resting one
+(the change of contrast [SC 2.4.13 Focus Appearance](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance)
+asks for, at AAA). A focus color at the resting border's step would change
+nothing at focus but the halo. `npm run tokens:lint-contrast` holds the
+resting border to 3:1 too ([Color → Border](./color.md#border)).
 
 ---
 

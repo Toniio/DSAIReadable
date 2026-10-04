@@ -15,7 +15,8 @@ export type Mode = "light" | "dark"
 export const MODES: readonly Mode[] = ["light", "dark"]
 
 /** How the Audits table groups the pairs. */
-export type ContrastGroup = "focus" | "text" | "filled" | "tint" | "info"
+export type ContrastGroup =
+  "focus" | "border" | "text" | "filled" | "tint" | "info"
 
 export interface Pair {
   label: string
@@ -33,8 +34,6 @@ export interface Pair {
   fgAlpha?: number
   /** Measured and shown, never blocking: a part that is not the indicator. */
   informative?: boolean
-  /** Which printed list an informative pair belongs to; the halo by default. */
-  section?: "halo" | "border"
 }
 
 /** The surfaces a component may be placed on: the page, a card, a popover. */
@@ -114,10 +113,10 @@ export const PAIRS: Pair[] = [
     group: "focus" as const,
   })),
   ...SURFACES.map(([bg, surface]) => ({
-    label: `Focus indicator on a field's dark:bg-input/30 fill over the ${surface}`,
+    label: `Focus indicator on a field's dark:bg-input-fill/30 fill over the ${surface}`,
     fg: "color.border.focus",
     bg,
-    tint: { color: "color.border.input", alpha: 0.3 },
+    tint: { color: "color.background.input", alpha: 0.3 },
     threshold: 3 as const,
     group: "focus" as const,
     modes: ["dark" as Mode],
@@ -141,16 +140,27 @@ export const PAIRS: Pair[] = [
     group: "focus" as const,
   })),
 
-  // Information: the resting border of a control and the focus halo.
+  // The boundary of a control at rest (WCAG 1.4.11): the border of a field,
+  // checkbox or radio, and the solid track of an unchecked Switch, against
+  // the surface around it and, in dark, against the field's own fill.
   ...SURFACES.map(([bg, surface]) => ({
-    label: `Resting border of a field, checkbox or radio (border-input) on the ${surface}`,
+    label: `Resting border of a field, checkbox or radio and unchecked Switch track (border-input, bg-input) on the ${surface}`,
     fg: "color.border.input",
     bg,
     threshold: 3 as const,
-    group: "info" as const,
-    informative: true,
-    section: "border" as const,
+    group: "border" as const,
   })),
+  ...SURFACES.map(([bg, surface]) => ({
+    label: `Resting border of a field against its dark:bg-input-fill/30 fill over the ${surface}`,
+    fg: "color.border.input",
+    bg,
+    tint: { color: "color.background.input", alpha: 0.3 },
+    threshold: 3 as const,
+    group: "border" as const,
+    modes: ["dark" as Mode],
+  })),
+
+  // Information: the focus halo.
   ...SURFACES.flatMap(([bg, surface]) =>
     MODES.flatMap((mode) => [
       {

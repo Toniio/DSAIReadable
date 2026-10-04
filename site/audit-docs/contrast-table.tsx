@@ -20,6 +20,7 @@ import type {
 
 const GROUPS: { id: ContrastGroup; label: string }[] = [
   { id: "focus", label: "Focus" },
+  { id: "border", label: "Borders" },
   { id: "text", label: "Text" },
   { id: "filled", label: "Filled" },
   { id: "tint", label: "Tints" },

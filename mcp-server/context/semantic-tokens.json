@@ -27,6 +27,15 @@
     "usage": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces."
   },
   {
+    "path": "color.background.input",
+    "css_var": "--color-background-input",
+    "light": "{primitive.color.mist.200}",
+    "dark": "{primitive.color.white-alpha.15}",
+    "type": "color",
+    "status": "active",
+    "usage": "The fill of a form control: the translucent background of a field in dark mode, of a disabled field, and of a hovered outline control. Not for a control's border, which is color.border.input."
+  },
+  {
     "path": "color.background.inverse",
     "css_var": "--color-background-inverse",
     "light": "{primitive.color.mist.950}",
@@ -137,20 +146,20 @@
   {
     "path": "color.border.input",
     "css_var": "--color-border-input",
-    "light": "{primitive.color.mist.200}",
-    "dark": "{primitive.color.white-alpha.15}",
+    "light": "{primitive.color.mist.500}",
+    "dark": "{primitive.color.mist.500}",
     "type": "color",
     "status": "active",
-    "usage": "Border for form input fields. Not for decorative dividers or layout borders."
+    "usage": "The boundary of a form control: the border of a field, checkbox or radio and the track of an unchecked switch, at 3:1 or more on the page, the card and the popover in both modes (WCAG 1.4.11). Not for a field's fill, nor for decorative dividers or layout borders."
   },
   {
     "path": "color.border.focus",
     "css_var": "--color-border-focus",
-    "light": "{primitive.color.mist.500}",
-    "dark": "{primitive.color.mist.400}",
+    "light": "{primitive.color.mist.800}",
+    "dark": "{primitive.color.mist.200}",
     "type": "color",
     "status": "active",
-    "usage": "Focus ring outline for keyboard accessibility. Lighter in dark mode, so the solid part of an indicator keeps 3:1 on the dark card and on a field's fill. Not for resting or hover states."
+    "usage": "Focus ring outline for keyboard accessibility. Darker than the resting border of a control in light and lighter in dark, by 3:1 or more in both modes, so a focused field never reads as a resting one; the solid part of an indicator keeps 3:1 on every surface and on a field's fill. Not for resting or hover states."
   },
   {
     "path": "color.icon.default",
