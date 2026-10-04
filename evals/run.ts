@@ -39,6 +39,7 @@ import * as prettier from "prettier"
 import { scoreA11y, scrubFailure } from "./lib/a11y"
 import { BUDGETS, budgetFor, compareBudget } from "./lib/budget"
 import {
+  median,
   passesA,
   passesB,
   summarize,
@@ -49,7 +50,7 @@ import {
   type TaskReport,
 } from "./lib/report"
 import { scoreStatic } from "./lib/static"
-import { readStream, toolResults } from "./lib/stream"
+import { addResults, readStream, toolResults } from "./lib/stream"
 import {
   designSystemImports,
   goldScreen,
@@ -409,6 +410,7 @@ async function selfTest() {
   )
   if (
     faqStream.map((t) => t.context).join() !== "300,400,500" ||
+    faqStream.map((t) => t.ownChars).join() !== "89,30,58" ||
     faqStream.flatMap((t) => t.calls.map((c) => c.tool)).join() !==
       "dsaireadable_get_component_specs,Skill,dsaireadable_get_component_specs"
   )
@@ -422,7 +424,8 @@ async function selfTest() {
     faqResults !==
     JSON.stringify({
       "dsaireadable_get_component_specs:detailed": { calls: 1, chars: 70 },
-      Skill: { calls: 1, chars: 35 },
+      // "Launching skill: …", then the SKILL.md Claude Code sends after it.
+      Skill: { calls: 1, chars: 90 },
       dsaireadable_get_component_specs: { calls: 1, chars: 20 },
     })
   )
@@ -440,6 +443,18 @@ async function selfTest() {
     errors.push(
       `the report counts ${generation?.turnCapReached} tasks at the turn cap, not 2`
     )
+  if (
+    median([3, 1, 2]) !== 2 ||
+    median([1, 2, 10, 20]) !== 6 ||
+    JSON.stringify(
+      addResults(
+        { a: { calls: 1, chars: 10 } },
+        { a: { calls: 2, chars: 5 }, b: { calls: 1, chars: 1 } }
+      )
+    ) !==
+      JSON.stringify({ a: { calls: 3, chars: 15 }, b: { calls: 1, chars: 1 } })
+  )
+    errors.push("median() or addResults() miscounts several tasks")
   if (generation?.medianInputTokens !== 1200 || generation.medianTurns !== 3)
     errors.push(
       `the report's median screen costs ${generation?.medianInputTokens} input tokens in ${generation?.medianTurns} turns, not 1200 in 3`
@@ -454,8 +469,8 @@ async function selfTest() {
     "1 other tool call",
     "2 tasks reached the 25-turn cap",
     "**Cost: 1,200 input tokens per screen**, in 3 turns",
-    "What the tools sent back: 0.1 KiB",
-    "| `dsaireadable_get_component_specs` | detailed | 1 | 0.1 KiB | 56 % |",
+    "What the tools sent back: 0.2 KiB",
+    "| `dsaireadable_get_component_specs` | detailed | 1 | 0.1 KiB | 39 % |",
   ])
     if (!markdown.includes(text))
       errors.push(`the report header or generation line lacks "${text}"`)
@@ -475,6 +490,12 @@ async function selfTest() {
     compareBudget(fixtureRun, withMedian(1500, 0.2), budget),
     compareBudget(fixtureRun, withMedian(2000, 0.99), budget),
     compareBudget(fixtureRun, { ...withMedian(2000, 0), model: "x" }, budget),
+    // Another Claude Code release is the same condition.
+    compareBudget(
+      { ...fixtureRun, via: "claude-code 9.9.9" },
+      withMedian(2000, 0.2),
+      budget
+    ),
   ]
   if (
     verdicts[0]?.target !== 1400 ||
@@ -482,7 +503,8 @@ async function selfTest() {
     !verdicts[0].met ||
     verdicts[1]?.met !== false ||
     verdicts[2]?.met !== false ||
-    verdicts[3] !== undefined
+    verdicts[3] !== undefined ||
+    verdicts[4]?.met !== true
   )
     errors.push(
       `compareBudget: ${JSON.stringify(verdicts)} (met under the ceiling, missed over it or at a lower conformance, none for another model)`
@@ -493,14 +515,25 @@ async function selfTest() {
     )
   )
     errors.push("the report does not print the budget line")
-  for (const { baseline, tokens } of BUDGETS)
-    if (
-      !existsSync(join(ROOT, "evals/history", `${baseline}.json`)) ||
-      !(tokens > 0 && tokens < 1)
-    )
+  for (const { baseline, tokens } of BUDGETS) {
+    const file = join(ROOT, "evals/history", `${baseline}.json`)
+    if (!existsSync(file) || !(tokens > 0 && tokens < 1)) {
       errors.push(
         `evals/lib/budget.ts: the baseline "${baseline}" is not a run of evals/history/, or ${tokens} is not a share`
       )
+      continue
+    }
+    // A run of the baseline's own condition, from a later Claude Code, gets
+    // the budget's verdict.
+    const recorded = JSON.parse(readFileSync(file, "utf-8")) as RunReport
+    if (
+      budgetFor(ROOT, { ...recorded, via: "claude-code 9.9.9" })?.baseline !==
+      baseline
+    )
+      errors.push(
+        `evals/lib/budget.ts: a run of the condition of "${baseline}" gets no verdict`
+      )
+  }
   // A failure message keeps its assertion, not the path of the machine that ran it.
   const failures = JSON.stringify(fixtureRun.tasks.map((t) => t.a11y))
   for (const [what, found] of [

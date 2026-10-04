@@ -166,7 +166,8 @@ size once per turn that follows it: cutting a turn counts as much as cutting
 an answer. Next to the conformance, the report gives the cost of the median
 screen, in input tokens and in turns, and what each tool sent back, per tool
 and per `response_format` (`—` when the call passed none). The generators
-count those characters as the agent read them; for a run recorded before
+count those characters as the agent read them, a Skill call's SKILL.md
+included; for a run recorded before
 they did, the replay reads them from the session's stream, `<task>.jsonl`.
 
 **The budget.** [`lib/budget.ts`](./lib/budget.ts) caps the median input
@@ -182,8 +183,10 @@ gets no verdict.
 **Where the tokens went.** `npm run evals:context` reads the streams of a
 run and prints, per tool and per format, the calls, the characters sent back,
 those characters times the turns after them, and the tokens that comes to
-per screen, at the run's own characters per token (a least-squares line
-through each turn's growth against the results it added). `--reserve` sends
+per screen, at the run's own characters per token: a least-squares fit of
+each turn's growth in tokens on the results it added and on what it wrote
+itself, which the next turn sends too. It reads the finished tasks only, as
+the report does. `--reserve` sends
 each recorded call of a `dsaireadable_*` tool again to the MCP server of this
 checkout and estimates the cost of the same sessions with its answers: a
 change to what the server answers can be weighed before a run measures it.

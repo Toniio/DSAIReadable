@@ -7,7 +7,7 @@
  * since a cost compares with nothing else.
  */
 
-import { readFileSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 
 import { median, type RunReport } from "./report"
@@ -108,12 +108,10 @@ export function budgetFor(
   report: RunReport
 ): BudgetResult | undefined {
   for (const budget of BUDGETS) {
-    const baseline = JSON.parse(
-      readFileSync(
-        join(root, "evals/history", `${budget.baseline}.json`),
-        "utf-8"
-      )
-    ) as RunReport
+    // A missing baseline is the self-test's to report, not a run's to crash on.
+    const file = join(root, "evals/history", `${budget.baseline}.json`)
+    if (!existsSync(file)) continue
+    const baseline = JSON.parse(readFileSync(file, "utf-8")) as RunReport
     const result = compareBudget(report, baseline, budget)
     if (result) return result
   }

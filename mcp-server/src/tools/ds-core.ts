@@ -135,11 +135,12 @@ interface PropRow {
 /**
  * A props row every part has and that says nothing more: the `...props` it
  * spreads (each export's summary names the element it renders), or a
- * `className` that only adds classes to it. A `className` row that says where
- * the classes go stays.
+ * `className` that only adds classes to it. A `...props` that adds the props
+ * of another element or library (an intersection, an Omit or a Pick) stays,
+ * and so does a `className` row that says where the classes go.
  */
 const restatesTheElement = (row: PropRow) =>
-  row.prop.startsWith("`...") ||
+  (row.prop.startsWith("`...") && !/&|\bOmit<|\bPick</.test(row.type)) ||
   (row.prop === "`className`" &&
     row.type === "`string`" &&
     row.description === "Additional CSS classes")
@@ -182,9 +183,29 @@ function componentContext(spec: ComponentSpec) {
   }
 }
 
-/** `[create](./create.md)` read as `create`: an agent follows no link, and every turn resends the path. */
+/**
+ * A link to another file of the design system read as the name it gives:
+ * `[create](./create.md)` as `create`. An agent follows no relative link, and
+ * every turn would resend the path. When the label is not that name,
+ * `[voice and tone](../foundations/voice-and-tone.md)`, the name follows it
+ * in parentheses, since the tools take the name. A link with a scheme
+ * (`https:`) stays whole: it is the only pointer to what it names.
+ */
 const withoutLinkTargets = (text: string) =>
-  text.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+  text.replace(
+    /\[([^\]]+)\]\((?![a-z][a-z\d+.-]*:)([^()\s]*)\)/gi,
+    (_, label: string, target: string) => {
+      const name = target
+        .replace(/#.*$/, "")
+        .split("/")
+        .pop()!
+        .replace(/\.md$/, "")
+      const plain = label.replace(/`/g, "").toLowerCase()
+      return !name || plain === name.toLowerCase()
+        ? label
+        : `${label} (${name})`
+    }
+  )
 
 export function registerDsCoreTools(server: McpServer): void {
   // 1. dsaireadable_get_design_system_overview
@@ -535,7 +556,7 @@ import { cn } from "@/lib/utils"`,
             'A foundation (color, spacing, focus…) or a component name: its rules and the composition rules that cover it. "composition": every composition rule. "tailwind": the critical rules'
           ),
         response_format: responseFormat(
-          "every rule without a category, and the critical rules in full with one"
+          "every rule without a category, and the critical rules, not only their titles, with one"
         ),
       }),
       outputSchema: designRulesOutput,

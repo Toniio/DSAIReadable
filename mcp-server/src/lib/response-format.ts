@@ -1,7 +1,7 @@
 /**
  * The `response_format` argument of the tools whose answers are large:
- * dsaireadable_get_component_specs (up to 18 K characters for one detailed
- * spec), dsaireadable_get_design_rules (about 70 K detailed, without a
+ * dsaireadable_get_component_specs (up to 15 K characters for one detailed
+ * spec), dsaireadable_get_design_rules (about 74 K detailed, without a
  * filter), and dsaireadable_get_pattern (a pattern and its code example).
  *
  * `concise`, the default, keeps what an agent needs to choose and to stay
@@ -85,7 +85,7 @@ export function conciseSpec(spec: ComponentSpec, detailed: object) {
     exports: (spec.exports ?? []).map((e) => e.name),
     cross_references: spec.cross_references ?? [],
     shadcn: spec.shadcn ?? null,
-    detail: `response_format: "detailed" adds ${omitted.join(", ")}, and each export's summary and description`,
+    detail: `response_format: "detailed" adds ${omitted.join(", ")}`,
   }
 }
 
@@ -144,7 +144,7 @@ export function conciseRuleSet(data: RuleSet) {
       components: Object.keys(data.component_rules ?? {}),
     },
     detail:
-      'Pass a category (a foundation or a component name) for its rules, "tailwind" for the critical rules in full, or response_format: "detailed" for every rule',
+      'Pass a category (a foundation or a component name) for its rules, "tailwind" for the critical rules, or response_format: "detailed" for every rule',
   }
 }
 

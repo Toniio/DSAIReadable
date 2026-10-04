@@ -1507,7 +1507,7 @@ assert(
     JSON.stringify(fullSpecs.Button.constraints) &&
     conciseButton.props === undefined &&
     conciseButton.detail ===
-      'response_format: "detailed" adds usage, props, accessibility, code_example, variants, sizes, composition_rules, and each export\'s summary and description',
+      'response_format: "detailed" adds usage, props, accessibility, code_example, variants, sizes, composition_rules',
   `concise keeps every constraint and names what detailed adds, read from it (${conciseButton.detail})`
 )
 
@@ -1549,7 +1549,9 @@ const detailedSpec = async (component_name: string) =>
 // detailed leaves how a component is built to the resource: its libraries,
 // data-slots, tokens and the look of each state, each export's example, and
 // the props rows every part has (the `...props` it spreads, a className that
-// only adds classes). A className row that says where the classes go stays.
+// only adds classes). A `...props` that adds another element's or library's
+// props stays (ChartTooltipContent takes Recharts' formatter), and so does a
+// className row that says where the classes go.
 {
   type ServedProp = PropRow & { description: string }
   const built = [
@@ -1570,7 +1572,8 @@ const detailedSpec = async (component_name: string) =>
     ...a.props
       .filter(
         (row: ServedProp) =>
-          row.prop.startsWith("`...") ||
+          (row.prop.startsWith("`...") &&
+            !/&|\bOmit<|\bPick</.test(row.type)) ||
           (row.prop === "`className`" &&
             row.type === "`string`" &&
             row.description === "Additional CSS classes")
@@ -1578,8 +1581,15 @@ const detailedSpec = async (component_name: string) =>
       .map((row: ServedProp) => `${a.name}.props.${row.component}.${row.prop}`),
   ])
   const otp = answers.find((a) => a.name === "InputOtp")
+  const chart = answers.find((a) => a.name === "Chart")
   assert(
     leaks.length === 0 &&
+      chart.props.some(
+        (row: ServedProp) =>
+          row.component === "ChartTooltipContent" &&
+          row.prop.startsWith("`...") &&
+          row.type.includes("RechartsPrimitive.Tooltip")
+      ) &&
       otp.props.some(
         (row: ServedProp) =>
           row.prop === "`className`" &&
@@ -1720,6 +1730,17 @@ const detailedSpec = async (component_name: string) =>
       ) as { category: string }[]
     ).map((e) => e.category)
   )
+  const versions = new Set(
+    (
+      JSON.parse(
+        readFileSync(resolve(contextDir, "changelog.json"), "utf-8")
+      ) as { version: string }[]
+    ).map((e) => e.version)
+  )
+  const changelogText = `${tool("dsaireadable_get_changelog").description} ${param("dsaireadable_get_changelog", "version")}`
+  const icons = JSON.parse(
+    readFileSync(resolve(contextDir, "icons.json"), "utf-8")
+  )
   const examples =
     /such as (.+) or (.+)$/
       .exec(param("dsaireadable_get_changelog", "category"))
@@ -1738,6 +1759,15 @@ const detailedSpec = async (component_name: string) =>
     ...(examples.length === 2 ? examples : ["(none)"])
       .filter((h) => !headings.has(h))
       .map((h) => `get_changelog names the heading ${h}`),
+    ...[...changelogText.matchAll(/Unreleased|\b\d+\.\d+\.\d+\b/g)]
+      .map(([v]) => v)
+      .filter((v) => !versions.has(v))
+      .map((v) => `get_changelog names the version ${v}`),
+    ...(/\bcatalog\b(?! URL)/.test(
+      tool("dsaireadable_get_icons").description ?? ""
+    ) || !("catalog_url" in icons)
+      ? ["get_icons promises a catalog it does not serve"]
+      : []),
   ]
   assert(
     size <= 8500 && wrong.length === 0,
@@ -3044,6 +3074,9 @@ export const Screen = () => null
 ## Cross-references
 
 - \`form\`
+- [voice and tone](../foundations/voice-and-tone.md) — the copy
+- [Payment copy guide](https://wiki.example.com/Payments_(copy)) — the wording
+- [Figma](https://figma.com/file/abc) — the mockups
 `
 const projectDir = mkdtempSync(resolve(tmpdir(), "dsai-project-"))
 const projectPatternsDir = resolve(projectDir, "design/patterns")
@@ -3090,11 +3123,21 @@ try {
         arguments: { name: "onboarding", response_format: "detailed" },
       })) as ToolText
     ).content[0].text
-  ) as { source: string; kind: string }
+  ) as { source: string; kind: string; cross_references: string[] }
   assert(
     detailed.source === "design/patterns/onboarding.md" &&
       detailed.kind === "task",
     "A project pattern is served whole, with its own source"
+  )
+  assert(
+    detailed.cross_references.join("\n") ===
+      [
+        "`form`",
+        "voice and tone (voice-and-tone) — the copy",
+        "[Payment copy guide](https://wiki.example.com/Payments_(copy)) — the wording",
+        "[Figma](https://figma.com/file/abc) — the mockups",
+      ].join("\n"),
+    `A relative link is served as the name it gives, an absolute one whole (${JSON.stringify(detailed.cross_references)})`
   )
 
   writeFileSync(

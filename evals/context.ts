@@ -11,12 +11,11 @@
  * MCP server of this checkout, and estimates what the same sessions would
  * have cost with its answers: each turn's input tokens, less the change in
  * size of the answers before it. The characters per token are the run's own
- * (each turn's growth in tokens against the characters of the results it
- * added). An estimate on the same turns: only a run measures the real cost,
- * since the answers also change what the agent does next.
+ * (charsPerToken). An estimate on the same turns: only a run measures the
+ * real cost, since the answers also change what the agent does next.
  */
 
-import { readdirSync, readFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { basename, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { parseArgs } from "node:util"
@@ -62,29 +61,45 @@ interface Session {
 }
 
 /**
- * The characters of tool results per input token: a least-squares line
- * through each turn's growth in tokens against the characters of the results
- * it added. Its intercept is what a turn adds besides (its own text and tool
- * inputs), which the line keeps out of the ratio.
+ * The characters of tool results per input token. Each turn's growth in
+ * tokens is fitted, by least squares, to the characters of the results it
+ * added and the characters it wrote itself (its text and tool inputs), which
+ * the next turn sends too: a turn that writes the screen gets little back, so
+ * a fit on the results alone would read its writing as theirs. The ratio is
+ * one over the results' coefficient.
  */
 function charsPerToken(sessions: Session[]) {
   const points = sessions.flatMap(({ turns }) =>
     turns.slice(0, -1).map((turn, k) => ({
       x: turn.calls.reduce((a, c) => a + (c.resultChars ?? 0), 0),
+      o: turn.ownChars,
       y: turns[k + 1].context - turn.context,
     }))
   )
   const n = points.length
-  const mx = points.reduce((a, p) => a + p.x, 0) / n
-  const my = points.reduce((a, p) => a + p.y, 0) / n
-  const sxx = points.reduce((a, p) => a + (p.x - mx) ** 2, 0)
-  const sxy = points.reduce((a, p) => a + (p.x - mx) * (p.y - my), 0)
-  return n > 1 && sxx > 0 && sxy > 0 ? sxx / sxy : undefined
+  const mean = (f: (p: (typeof points)[number]) => number) =>
+    points.reduce((a, p) => a + f(p), 0) / n
+  const [mx, mo, my] = [mean((p) => p.x), mean((p) => p.o), mean((p) => p.y)]
+  const s = (f: (p: (typeof points)[number]) => number) =>
+    points.reduce((a, p) => a + f(p), 0)
+  const sxx = s((p) => (p.x - mx) ** 2)
+  const soo = s((p) => (p.o - mo) ** 2)
+  const sxo = s((p) => (p.x - mx) * (p.o - mo))
+  const sxy = s((p) => (p.x - mx) * (p.y - my))
+  const soy = s((p) => (p.o - mo) * (p.y - my))
+  const det = sxx * soo - sxo ** 2
+  const slope = det > 0 ? (sxy * soo - sxo * soy) / det : 0
+  return n > 2 && slope > 0 ? 1 / slope : undefined
 }
 
+/** The streams of a run's finished tasks: an unfinished one has no metrics, and the report leaves it out too. */
 function measure(dir: string) {
   const sessions: Session[] = readdirSync(dir)
-    .filter((f) => f.endsWith(".jsonl"))
+    .filter(
+      (f) =>
+        f.endsWith(".jsonl") &&
+        existsSync(join(dir, `${basename(f, ".jsonl")}.metrics.json`))
+    )
     .sort()
     .map((f) => ({
       task: basename(f, ".jsonl"),
@@ -136,7 +151,8 @@ function rendered(answer: {
 }
 
 const server = values.reserve ? await connectMcp(ROOT) : undefined
-const served = new Map<string, number>()
+/** Each distinct call's answer: its characters, and whether it is now an error. */
+const served = new Map<string, { chars: number; isError: boolean }>()
 
 for (const dir of positionals.map((d) => resolve(d))) {
   const { sessions, rows, ratio } = measure(dir)
@@ -193,19 +209,24 @@ for (const dir of positionals.map((d) => resolve(d))) {
         )
           continue
         const id = `${call.tool}\0${JSON.stringify(call.input)}`
-        let chars = served.get(id)
-        if (chars === undefined) {
-          const answer = await server.mcp.callTool({
-            name: call.tool,
-            arguments: call.input,
-          })
-          if (answer.isError) errors++
-          chars = rendered(answer).length
-          served.set(id, chars)
+        let answer = served.get(id)
+        if (answer === undefined) {
+          // A tool this checkout no longer has is a protocol error, not an
+          // error result: count it as the error answer the agent would read.
+          const reply = await server.mcp
+            .callTool({ name: call.tool, arguments: call.input })
+            .catch((error: unknown) => ({
+              content: String(error),
+              isError: true,
+            }))
+          answer = { chars: rendered(reply).length, isError: !!reply.isError }
+          served.set(id, answer)
         }
+        if (answer.isError) errors++
         const key = resultKey(call.tool, call.input)
-        after.set(key, (after.get(key) ?? 0) + chars)
-        saved += ((call.resultChars - chars) / ratio) * (turns.length - 1 - k)
+        after.set(key, (after.get(key) ?? 0) + answer.chars)
+        saved +=
+          ((call.resultChars - answer.chars) / ratio) * (turns.length - 1 - k)
       }
     estimates.push(inputOf(turns) - saved)
   }
