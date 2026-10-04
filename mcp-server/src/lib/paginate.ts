@@ -11,15 +11,11 @@ export const pageParams = {
     .min(1)
     .max(MAX_PAGE_SIZE)
     .optional()
-    .describe(
-      `Items per page (default ${DEFAULT_PAGE_SIZE}, max ${MAX_PAGE_SIZE})`
-    ),
+    .describe(`Default ${DEFAULT_PAGE_SIZE}`),
   cursor: z
     .string()
     .optional()
-    .describe(
-      "The next_cursor of the previous page. Omit it for the first page"
-    ),
+    .describe("The next_cursor of the previous page"),
 }
 
 export interface Page<T> {

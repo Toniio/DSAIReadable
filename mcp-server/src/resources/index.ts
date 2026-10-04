@@ -13,7 +13,7 @@ function json(uri: URL, data: unknown) {
       {
         uri: uri.href,
         mimeType: JSON_MIME,
-        text: JSON.stringify(data, null, 2),
+        text: JSON.stringify(data),
       },
     ],
   }

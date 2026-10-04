@@ -27,6 +27,7 @@ Sequential navigation through paged result sets, with numbered links, previous /
 - **MUST** — manage the pagination state and URLs yourself: the component holds none
 - **MUST NOT** — duplicate `aria-current="page"`, which the active page already carries
 - **MUST** — give `PaginationPrevious` and `PaginationNext` a valid `href` or a handler
+- **MUST NOT** — pass `disabled` to `PaginationLink`, `PaginationPrevious` or `PaginationNext`: each renders an `<a>`, which has no disabled state; on the first or the last page, leave out the control that leads nowhere
 - **Note** — the ellipsis is hidden from screen readers (`aria-hidden`)
 - **MUST** — in an interface that is not in English, translate `UI_STRINGS.pagination` through `text`, `label` and `srLabel`
 

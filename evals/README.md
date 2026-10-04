@@ -34,6 +34,7 @@ npm run evals -- --generator claude --model claude-opus-5-5 --context mcp   # an
 npm run evals -- --generator claude --model claude-opus-5-5 --context none  # the same agent with no context: the baseline
 npm run evals -- --generator claude --suite skills --skills all              # the agent skills of skills/, on their suite
 npm run evals:generate -- --model sonnet --condition mcp --label <label>   # screens from Claude Code on a subscription: no API key
+npm run evals:context -- evals/.work/claude-code/<label> [--reserve]          # where a run's tokens went, per tool
 npm run evals:test                                  # the harness's own test, in npm run check and CI
 ```
 
@@ -158,6 +159,40 @@ stack frame, no local path, no port, so a recorded report names nobody and two
 runs of one screen read the same. `npm run evals:test` fails on a recorded
 report that holds a local path.
 
+## What the context costs
+
+Every turn sends the whole conversation again, so a tool's answer costs its
+size once per turn that follows it: cutting a turn counts as much as cutting
+an answer. Next to the conformance, the report gives the cost of the median
+screen, in input tokens and in turns, and what each tool sent back, per tool
+and per `response_format` (`—` when the call passed none). The generators
+count those characters as the agent read them, a Skill call's SKILL.md
+included; for a run recorded before
+they did, the replay reads them from the session's stream, `<task>.jsonl`.
+
+**The budget.** [`lib/budget.ts`](./lib/budget.ts) caps the median input
+tokens per screen at a share of a recorded run's, at a conformance no lower
+than that run's: a cheaper run that answers worse does not meet it. It holds
+the MCP server alone, through Claude Code, to 70 % of
+`2026-10-04-0.1.3-sonnet-mcp-rescored`. A report of the same condition (the
+same tasks, model, context, skills, effort and turn cap, generated the same
+way) prints the verdict under its cost; the conformance it compares is the
+mean of the stages the recorded run ran, so a run scored with `--no-a11y`
+gets no verdict.
+
+**Where the tokens went.** `npm run evals:context` reads the streams of a
+run and prints, per tool and per format, the calls, the characters sent back,
+those characters times the turns after them, and the tokens that comes to
+per screen, at the run's own characters per token: a least-squares fit of
+each turn's growth in tokens on the results it added and on what it wrote
+itself, which the next turn sends too. It reads the finished tasks only, as
+the report does. `--reserve` sends
+each recorded call of a `dsaireadable_*` tool again to the MCP server of this
+checkout and estimates the cost of the same sessions with its answers: a
+change to what the server answers can be weighed before a run measures it.
+The estimate keeps the recorded turns; only a run shows what the new answers
+make the agent do.
+
 ## The harness's own test
 
 `npm run evals:test` proves the scorer, without a model:
@@ -168,7 +203,10 @@ report that holds a local path.
   line declares (`// fails: compiles, lint:external-imports, renders`), so a
   check that stops catching anything fails here;
 - the replay generator reads the metrics written next to a screen
-  (`fixtures/faq.metrics.json`).
+  (`fixtures/faq.metrics.json`), and the session's stream for what each tool
+  sent back (`fixtures/faq.jsonl`);
+- the report prints the median cost and the tool volumes, and a budget is met
+  under its ceiling only, at a conformance no lower than its baseline's.
 
 ## Adding a task
 

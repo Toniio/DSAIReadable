@@ -23,7 +23,8 @@
  *
  * Output, evals/.work/claude-code/<label>/: per task `<task>.tsx` (when the
  * answer holds a tsx block), `<task>.metrics.json` (written last: the task is
- * done) and the session's stream `<task>.jsonl`; `run.json` with the exact
+ * done; it counts what each tool sent back) and the session's stream
+ * `<task>.jsonl`, which evals/context.ts reads; `run.json` with the exact
  * model id, the Claude Code version and a hash of the sources the sessions
  * read (the MCP server, its context, the skills, the instructions). A task
  * already done is skipped, so after a usage limit the same command resumes;
@@ -65,6 +66,7 @@ import {
   WITH_MCP,
 } from "./lib/claude"
 import type { GenerationMetrics } from "./lib/report"
+import { readStream, toolResults } from "./lib/stream"
 import { loadTasks, taskMessage, type Task } from "./lib/tasks"
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
@@ -494,6 +496,7 @@ async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
             (usage.cache_creation_input_tokens ?? 0),
           outputTokens: usage.output_tokens ?? 0,
           tools,
+          results: toolResults(readStream(stream.join("\n"))),
         },
         about: {
           subtype: result!.subtype,

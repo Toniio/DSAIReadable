@@ -20,6 +20,7 @@ import {
 } from "@modelcontextprotocol/client/stdio"
 
 import type { GenerationMetrics, RubricResult } from "./report"
+import { resultKey } from "./stream"
 import { taskMessage, type Task } from "./tasks"
 
 /** The turns a generator gives an agent to answer one task. */
@@ -167,6 +168,15 @@ export function claudeGenerator(options: {
       inputTokens: 0,
       outputTokens: 0,
       tools: {},
+      results: {},
+    }
+    /** What a call sent back, per tool and per response_format. */
+    const sentBack = (call: Anthropic.ToolUseBlock, content: string) => {
+      const entry = (metrics.results![
+        resultKey(call.name, call.input as Record<string, unknown>)
+      ] ??= { calls: 0, chars: 0 })
+      entry.calls++
+      entry.chars += content.length
     }
     const messages: Anthropic.MessageParam[] = [
       { role: "user", content: taskMessage(options.root, task) },
@@ -256,6 +266,8 @@ export function claudeGenerator(options: {
           })
         }
       }
+      for (const [i, call] of calls.entries())
+        sentBack(call, String(results[i].content ?? ""))
       messages.push({ role: "user", content: results })
     }
     return { code: screenOf(text), metrics }

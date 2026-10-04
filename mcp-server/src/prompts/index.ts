@@ -128,7 +128,7 @@ ${CRITICAL_RULES_TEXT}`,
               text: `You are a senior frontend developer working with the DSAIReadable Design System.
 
 **BEFORE making any changes, you MUST call these tools:**
-1. \`dsaireadable_get_component_specs\` (component_name: "${target}", response_format: "detailed") — its full spec, variants, sizes and composition rules${uxWritingInstruction}
+1. \`dsaireadable_get_component_specs\` (component_name: "${target}", response_format: "detailed") — its usage, props, accessibility, code example, variants, sizes and composition rules${uxWritingInstruction}
 
 **Only after gathering this information, suggest the revision.**
 
@@ -283,7 +283,7 @@ ${CRITICAL_RULES_TEXT}`,
 1. \`dsaireadable_get_design_system_overview\` — to understand the DS scope
 2. \`dsaireadable_get_components\`${category ? ` (category: "${category}")` : ""} — to get the component list
 3. For each component found, call:
-   - \`dsaireadable_get_component_specs\` (component_name: <name>, response_format: "detailed") — full spec, variants and sizes
+   - \`dsaireadable_get_component_specs\` (component_name: <name>, response_format: "detailed") — props, variants and sizes; its states and tokens are in the resource \`ds://component/<name>/spec\`
 4. \`dsaireadable_get_tokens\` — to get all design tokens
 5. \`dsaireadable_get_design_rules\` — to ensure showcase follows rules
 

@@ -29,6 +29,8 @@ A command palette with built-in search, for quickly filtering and picking an act
 - **MUST** — wire up the keyboard shortcut that `CommandShortcut` displays yourself: it is only a label
 - **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component
 - **MUST** — in dialog mode, set `title` and `description`: rendered `sr-only`, they name the dialog
+- **MUST** — wrap the content of a `CommandDialog` in a `Command`: the dialog renders its children as they are, and a `CommandInput` outside a `Command` throws
+- **Note** — `data-checked="true"` on a `CommandItem` shows its trailing check, unless the item holds a `CommandShortcut`
 
 ## Dependencies
 

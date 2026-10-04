@@ -1,12 +1,13 @@
 /**
  * The `response_format` argument of the tools whose answers are large:
- * dsaireadable_get_component_specs (up to 25 K characters for one spec),
- * dsaireadable_get_design_rules (about 50 K without a filter), and dsaireadable_get_pattern (a
- * pattern and its code example).
+ * dsaireadable_get_component_specs (up to 15 K characters for one detailed
+ * spec), dsaireadable_get_design_rules (about 74 K detailed, without a
+ * filter), and dsaireadable_get_pattern (a pattern and its code example).
  *
  * `concise`, the default, keeps what an agent needs to choose and to stay
- * within the rules, and names what `detailed` would add. The acceptance
- * threshold is ≤ 20 % of the detailed volume, held by src/test.ts.
+ * within the rules, and names what `detailed` would add. Every turn after a
+ * call sends its answer again, so `detailed` serves what a screen writes, not
+ * how the design system is built. src/test.ts holds the volumes.
  */
 import { z } from "zod"
 import { COMPONENT_RULE } from "./component-rule.js"
@@ -18,10 +19,24 @@ export function responseFormat(detailedAdds: string) {
   return z
     .enum(["concise", "detailed"])
     .default("concise")
-    .describe(`"concise" (default) or "detailed", which adds ${detailedAdds}`)
+    .describe(`"detailed" adds ${detailedAdds}`)
 }
 
 export const CRITICAL_RULES = [TAILWIND_RULE, COMPONENT_RULE]
+
+/**
+ * The critical rules as dsaireadable_get_design_rules serves them: without
+ * the `do` list, which repeats the description as classes (the prompts print
+ * it), and the token chain, which traces each class to its token — a screen
+ * writes the class, and dsaireadable_get_tokens has the values.
+ */
+export const servedCriticalRules = () =>
+  CRITICAL_RULES.map((rule) => {
+    const served: Record<string, unknown> = { ...rule }
+    delete served.do
+    delete served.token_chain_explanation
+    return served
+  })
 
 /** A critical rule reduced to what identifies it. */
 export const criticalRuleTitles = () =>
@@ -54,10 +69,11 @@ const CONCISE_SPEC_FIELDS = [
  * A spec reduced to its role, its MUST / MUST NOT constraints, the names it
  * exports, the components it points to and how its API departs from
  * shadcn/ui's: an agent writes the shadcn/ui API from memory, so the
- * divergences belong in the short answer.
+ * divergences belong in the short answer. `detail` names what the detailed
+ * answer adds, read from that answer.
  */
-export function conciseSpec(spec: ComponentSpec) {
-  const omitted = Object.keys(spec).filter(
+export function conciseSpec(spec: ComponentSpec, detailed: object) {
+  const omitted = Object.keys(detailed).filter(
     (k) => !CONCISE_SPEC_FIELDS.includes(k)
   )
   return {
@@ -128,7 +144,7 @@ export function conciseRuleSet(data: RuleSet) {
       components: Object.keys(data.component_rules ?? {}),
     },
     detail:
-      'Pass a category (a foundation or a component name) for its rules, "tailwind" for the critical rules in full, or response_format: "detailed" for every rule',
+      'Pass a category (a foundation or a component name) for its rules, "tailwind" for the critical rules, or response_format: "detailed" for every rule',
   }
 }
 
