@@ -80,6 +80,10 @@ function tooltipText() {
 async function focusFirstStop() {
   // A tab stop before the chart, so that Tab and Shift+Tab have somewhere to go.
   const before = screen.getByRole("button", { name: "before" })
+  // The pointer stays where an earlier test left it. Over the chart, Recharts
+  // shows the hovered data point instead of the first one, and the arrow keys
+  // do not move it: park the pointer on the tab stop, off the chart.
+  await userEvent.hover(before)
   before.focus()
   await tab()
 }
