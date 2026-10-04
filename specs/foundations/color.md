@@ -38,6 +38,7 @@
 | `color.text.destructive.default` | `--color-text-destructive-default` | red.700     | red.300     | Error messages, destructive labels, on a surface or a tint             |
 | `color.text.success.default`     | `--color-text-success-default`     | emerald.700 | emerald.300 | Success messages and labels, on a surface or a tint                    |
 | `color.text.warning.default`     | `--color-text-warning-default`     | amber.600   | amber.300   | Warning messages and labels, and warning icons, on a surface or a tint |
+| `color.text.info.default`        | `--color-text-info-default`        | blue.700    | blue.300    | Info messages and labels, and info icons, on a surface or a tint       |
 
 **Do / Don't:**
 
@@ -86,40 +87,75 @@
 
 ### Action
 
-| Token                                | CSS Variable                           | Light      | Dark       | Usage                                             |
-| ------------------------------------ | -------------------------------------- | ---------- | ---------- | ------------------------------------------------- |
-| `color.action.background.default`    | `--color-action-background-default`    | violet.600 | violet.700 | Background of the primary CTA button or component |
-| `color.action.background.foreground` | `--color-action-background-foreground` | violet.50  | violet.50  | Text or icon on the primary action background     |
+| Token                                | CSS Variable                           | Light      | Dark       | Usage                                                                         |
+| ------------------------------------ | -------------------------------------- | ---------- | ---------- | ----------------------------------------------------------------------------- |
+| `color.action.background.default`    | `--color-action-background-default`    | violet.600 | violet.700 | Background of the primary CTA button or component                             |
+| `color.action.background.foreground` | `--color-action-background-foreground` | violet.50  | violet.50  | Text or icon on the primary action background                                 |
+| `color.action.background.hover`      | `--color-action-background-hover`      | violet.700 | violet.600 | The primary fill under the pointer (`bg-primary-hover`)                       |
+| `color.action.background.active`     | `--color-action-background-active`     | violet.800 | violet.800 | The primary fill while pressed — reserved                                     |
+| `color.action.background.selected`   | `--color-action-background-selected`   | violet.50  | violet.950 | A selected choice card (`bg-primary-selected`)                                |
+| `color.action.secondary.hover`       | `--color-action-secondary-hover`       | mist.200   | mist.700   | The secondary or muted fill under the pointer (`bg-secondary-hover`)          |
+| `color.action.secondary.active`      | `--color-action-secondary-active`      | mist.300   | mist.600   | The secondary fill while pressed — reserved                                   |
+| `color.action.tint.hover`            | `--color-action-tint-hover`            | violet.200 | violet.700 | A primary tint under the pointer: the tinted Bubble (`bg-primary-tint-hover`) |
 
 **Do / Don't:**
 
 - ✅ Always pair `action.background.default` with `action.background.foreground` for the text.
-- ❌ Do not use these tokens for the `secondary`, `ghost` or `outline` variants.
+- ❌ Do not use these tokens for the `ghost` or `outline` variants: a neutral element with no fill of its own takes a veil ([States](#states)).
+- ✅ A role fill under the pointer takes its `hover` step, solid: one step darker in light, one lighter in dark, so its label keeps 4.5:1 (`hover:bg-primary/80` put it at 4.24:1).
 
 ---
 
 ### Feedback
 
-| Token                               | CSS Variable                          | Light       | Dark        | Usage                                                                  |
-| ----------------------------------- | ------------------------------------- | ----------- | ----------- | ---------------------------------------------------------------------- |
-| `color.feedback.error.default`      | `--color-feedback-error-default`      | red.500     | red.400     | Fill, tint, border or ring of an error state                           |
-| `color.feedback.error.foreground`   | `--color-feedback-error-foreground`   | white       | mist.950    | Text or icon placed **on** a solid error surface                       |
-| `color.feedback.success.default`    | `--color-feedback-success-default`    | emerald.600 | emerald.400 | Fill, tint or border of a success state                                |
-| `color.feedback.success.foreground` | `--color-feedback-success-foreground` | white       | mist.950    | Text or icon placed **on** a solid success surface                     |
-| `color.feedback.warning.default`    | `--color-feedback-warning-default`    | amber.400   | amber.300   | Fill or tint of a warning state — never a border or an icon on its own |
-| `color.feedback.warning.foreground` | `--color-feedback-warning-foreground` | mist.950    | mist.950    | Text or icon placed **on** a solid warning surface, dark in both modes |
+| Token                               | CSS Variable                          | Light       | Dark        | Usage                                                                        |
+| ----------------------------------- | ------------------------------------- | ----------- | ----------- | ---------------------------------------------------------------------------- |
+| `color.feedback.error.default`      | `--color-feedback-error-default`      | red.500     | red.400     | Fill, tint, border or ring of an error state                                 |
+| `color.feedback.error.foreground`   | `--color-feedback-error-foreground`   | white       | mist.950    | Text or icon placed **on** a solid error surface                             |
+| `color.feedback.success.default`    | `--color-feedback-success-default`    | emerald.600 | emerald.400 | Fill, tint or border of a success state                                      |
+| `color.feedback.success.foreground` | `--color-feedback-success-foreground` | white       | mist.950    | Text or icon placed **on** a solid success surface                           |
+| `color.feedback.warning.default`    | `--color-feedback-warning-default`    | amber.400   | amber.300   | Fill or tint of a warning state — never a border or an icon on its own       |
+| `color.feedback.warning.foreground` | `--color-feedback-warning-foreground` | mist.950    | mist.950    | Text or icon placed **on** a solid warning surface, dark in both modes       |
+| `color.feedback.info.default`       | `--color-feedback-info-default`       | blue.600    | blue.400    | Fill, tint or border of an info state                                        |
+| `color.feedback.info.foreground`    | `--color-feedback-info-foreground`    | white       | mist.950    | Text or icon placed **on** a solid info surface — reserved                   |
+| `color.feedback.error.hover`        | `--color-feedback-error-hover`        | red.200     | red.700     | A destructive tint under the pointer or highlighted (`bg-destructive-hover`) |
+| `color.feedback.error.active`       | `--color-feedback-error-active`       | red.300     | red.800     | A destructive tint while pressed — reserved                                  |
+| `color.feedback.success.hover`      | `--color-feedback-success-hover`      | emerald.200 | emerald.700 | A success tint under the pointer (`bg-success-hover`)                        |
+| `color.feedback.warning.hover`      | `--color-feedback-warning-hover`      | amber.200   | amber.700   | A warning tint under the pointer (`bg-warning-hover`)                        |
+| `color.feedback.info.hover`         | `--color-feedback-info-hover`         | blue.200    | blue.700    | An info tint under the pointer (`bg-info-hover`)                             |
 
 **Do / Don't:**
 
 - ✅ Use `feedback.error.default` for the borders and rings of invalid fields and for the `bg-destructive/10`–`/30` tints.
 - ❌ Do not use `feedback.error.default` for text or icons: on a card it drops to 4.18:1, and to 2.97:1 on a card under a 20% tint. Text goes through `text.destructive.default` (`text-destructive`).
 - ✅ On a solid error background, always use `color.feedback.error.foreground` (shadcn alias `--destructive-foreground`).
-- ❌ Do not use the error tokens for warnings or successes: each state has its own fill, foreground and text token. The Alert and Badge `success` and `warning` variants use them.
-- ✅ Success and warning follow the error's split: the fill (`bg-success`, `bg-warning`, their `/10`–`/30` tints) and a text token (`text-success`, `text-warning`) that stays at 4.5:1 on every surface and tint.
+- ❌ Do not use the error tokens for warnings, successes or information: each state has its own fill, foreground and text token. The Alert and Badge `success`, `warning` and `info` variants use them.
+- ✅ Success, warning and info follow the error's split: the fill (`bg-success`, `bg-warning`, `bg-info`, their `/10`–`/20` tints) and a text token (`text-success`, `text-warning`, `text-info`) that stays at 4.5:1 on every surface and tint.
+- ✅ A tint under the pointer takes its role's `hover` step (`hover:bg-destructive-hover`), never a stronger tint (`hover:bg-destructive/20`): step 200 in light, 700 in dark, at 4.5:1 or more under its label.
 - ❌ Do not use `feedback.warning.default` as a border or an icon: in light mode it reaches 2.60:1 on white. The icon of a warning takes `text-warning`.
 - ❌ Never carry a state by color alone: success green and error red look alike to a red-green color-blind reader. An icon or a word says it too.
-- ✅ There is no `info` state: a neutral message is the `default` Alert. The naming grammar keeps the `info` role free for the day a component needs one.
+- ✅ `info` is for a notice that needs no action (a tip, a change that took effect); a neutral message with no tone is the `default` Alert, and one the reader should act on is a `warning`.
 - ❌ Never put hard-coded white on an error surface: in dark mode, white on red.400 drops to 2.73:1.
+
+---
+
+### States
+
+A hovered, highlighted, open or selected element takes a named state token, never an opacity of its resting color (`hover:bg-muted/50`, `hover:bg-primary/80`, `data-open:bg-muted/50`). `better-tailwindcss/no-restricted-classes` rejects an opacity modifier on `hover:`, `active:`, `focus:`, and the open, expanded, checked, selected and pressed states. A role fill takes its solid `hover` step ([Action](#action), [Feedback](#feedback)). A neutral element with no fill of its own takes a **veil**: a translucent ink in light and white in dark, so it shows on the page, a card and a popover alike, where a solid step vanishes on the surface it equals (`hover:bg-muted/50` changed nothing on a card).
+
+| Token                    | CSS Variable               | Light            | Dark               | Usage                                                                                              |
+| ------------------------ | -------------------------- | ---------------- | ------------------ | -------------------------------------------------------------------------------------------------- |
+| `color.overlay.hover`    | `--color-overlay-hover`    | ink-alpha.5 (5%) | white-alpha.8 (8%) | A neutral element under the pointer (`bg-overlay-hover`)                                           |
+| `color.overlay.selected` | `--color-overlay-selected` | ink-alpha.7 (7%) | white-alpha.8 (8%) | An open trigger, an expanded row, the current link, the active tab in dark (`bg-overlay-selected`) |
+| `color.overlay.active`   | `--color-overlay-active`   | ink-alpha.7 (7%) | white-alpha.8 (8%) | A neutral element while pressed — reserved                                                         |
+
+**Do / Don't:**
+
+- ✅ `hover:bg-overlay-hover` for a table row, a choice card, an Attachment link, and the dark hover of a ghost or outline control.
+- ✅ `data-open:bg-overlay-selected`, `data-active:bg-overlay-selected`, `has-aria-expanded:bg-overlay-selected` for what stays open, current or expanded.
+- ❌ Do not raise a veil past 8%: the subtle text it carries (a choice description, a muted cell) falls under 4.5:1 on the card. `npm run tokens:lint-contrast` measures both texts on both veils over the three surfaces.
+- ❌ Do not use a veil for a checked choice: it takes `bg-primary-selected` and `border-primary`.
+- ✅ A pressed state (`active`) is named but reserved: shadcn/ui draws none, so no component reads one yet.
 
 ---
 
@@ -237,6 +273,18 @@ these utility classes:
 | `border-input`, `bg-input` | `color.border.input`                                     |
 | `bg-input-fill`            | `color.background.input`                                 |
 | `ring-ring`                | `color.border.focus`                                     |
+| `bg-primary-hover`         | `color.action.background.hover`                          |
+| `bg-primary-selected`      | `color.action.background.selected`                       |
+| `bg-primary-tint-hover`    | `color.action.tint.hover`                                |
+| `bg-secondary-hover`       | `color.action.secondary.hover`                           |
+| `bg-destructive-hover`     | `color.feedback.error.hover`                             |
+| `bg-success-hover`         | `color.feedback.success.hover`                           |
+| `bg-warning-hover`         | `color.feedback.warning.hover`                           |
+| `text-info`                | `color.text.info.default`                                |
+| `bg-info`                  | `color.feedback.info.default`                            |
+| `bg-info-hover`            | `color.feedback.info.hover`                              |
+| `bg-overlay-hover`         | `color.overlay.hover`                                    |
+| `bg-overlay-selected`      | `color.overlay.selected`                                 |
 
 ---
 

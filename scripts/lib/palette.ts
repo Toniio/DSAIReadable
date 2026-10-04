@@ -157,8 +157,9 @@ const color = (components: Oklch, hex: string, alpha?: number) => ({
 })
 
 /**
- * The `color` group of tokens/primitive.json: the ramps, then white, black
- * and the translucent whites of dark-mode borders. A step no semantic token
+ * The `color` group of tokens/primitive.json: the ramps, then white, black,
+ * the translucent whites of dark-mode borders and veils, and the translucent
+ * inks of light-mode veils. A step no semantic token
  * reads (`referenced` holds the dotted paths under `color`) is `reserved`, as
  * the lifecycle check asks: the ramp keeps every step, so a token can move one
  * step without a new primitive.
@@ -203,13 +204,28 @@ export function colorGroup(
     ...status("black"),
   }
   group["white-alpha"] = Object.fromEntries(
-    [10, 15].map((percent) => [
+    [8, 10, 15].map((percent) => [
       String(percent),
       {
         $value: color([1, 0, 0], "#ffffff", percent / 100),
         $type: "color",
-        $description: `White at ${percent}%: dark-mode borders, which take the hue of the surface under them.`,
+        $description: `White at ${percent}%: dark-mode borders, fills and state veils, which take the hue of the surface under them.`,
         ...status(`white-alpha.${percent}`),
+      },
+    ])
+  )
+  // The darkest neutral step, translucent: a light-mode state veil darkens
+  // the page, a card or a popover alike, where one solid step would vanish
+  // on the surface it equals.
+  const ink = ramp(sources.mist)["950"]
+  group["ink-alpha"] = Object.fromEntries(
+    [5, 7].map((percent) => [
+      String(percent),
+      {
+        $value: color(ink.components, ink.hex, percent / 100),
+        $type: "color",
+        $description: `The neutral ink (mist.950) at ${percent}%: light-mode state veils, which take the hue of the surface under them.`,
+        ...status(`ink-alpha.${percent}`),
       },
     ])
   )

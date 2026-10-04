@@ -130,8 +130,13 @@
   --ds-prim-color-black: oklch(0% 0 0);
 
   /* color · white-alpha */
+  --ds-prim-color-white-alpha-8:  oklch(100% 0 0 / 0.08);
   --ds-prim-color-white-alpha-10: oklch(100% 0 0 / 0.1);
   --ds-prim-color-white-alpha-15: oklch(100% 0 0 / 0.15);
+
+  /* color · ink-alpha */
+  --ds-prim-color-ink-alpha-5: oklch(14.65% 0.0056 219 / 0.05);
+  --ds-prim-color-ink-alpha-7: oklch(14.65% 0.0056 219 / 0.07);
 
   /* space */
   --ds-prim-space-0:                0rem;
@@ -329,6 +334,11 @@
   --color-background-input:    var(--ds-prim-color-mist-200);
   --color-background-inverse:  var(--ds-prim-color-mist-950);
 
+  /* color · overlay */
+  --color-overlay-hover:    var(--ds-prim-color-ink-alpha-5);
+  --color-overlay-active:   var(--ds-prim-color-ink-alpha-7);
+  --color-overlay-selected: var(--ds-prim-color-ink-alpha-7);
+
   /* color · text */
   --color-text-default:             var(--ds-prim-color-mist-950);
   --color-text-subtle:              var(--ds-prim-color-mist-600);
@@ -339,6 +349,7 @@
   --color-text-destructive-default: var(--ds-prim-color-red-700);
   --color-text-success-default:     var(--ds-prim-color-emerald-700);
   --color-text-warning-default:     var(--ds-prim-color-amber-600);
+  --color-text-info-default:        var(--ds-prim-color-blue-700);
 
   /* color · border */
   --color-border-default: var(--ds-prim-color-mist-200);
@@ -354,14 +365,27 @@
   /* color · action */
   --color-action-background-default:    var(--ds-prim-color-violet-600);
   --color-action-background-foreground: var(--ds-prim-color-violet-50);
+  --color-action-background-hover:      var(--ds-prim-color-violet-700);
+  --color-action-background-active:     var(--ds-prim-color-violet-800);
+  --color-action-background-selected:   var(--ds-prim-color-violet-50);
+  --color-action-secondary-hover:       var(--ds-prim-color-mist-200);
+  --color-action-secondary-active:      var(--ds-prim-color-mist-300);
+  --color-action-tint-hover:            var(--ds-prim-color-violet-200);
 
   /* color · feedback */
   --color-feedback-error-default:      var(--ds-prim-color-red-500);
   --color-feedback-error-foreground:   var(--ds-prim-color-white);
+  --color-feedback-error-hover:        var(--ds-prim-color-red-200);
+  --color-feedback-error-active:       var(--ds-prim-color-red-300);
   --color-feedback-success-default:    var(--ds-prim-color-emerald-600);
   --color-feedback-success-foreground: var(--ds-prim-color-white);
+  --color-feedback-success-hover:      var(--ds-prim-color-emerald-200);
   --color-feedback-warning-default:    var(--ds-prim-color-amber-400);
   --color-feedback-warning-foreground: var(--ds-prim-color-mist-950);
+  --color-feedback-warning-hover:      var(--ds-prim-color-amber-200);
+  --color-feedback-info-default:       var(--ds-prim-color-blue-600);
+  --color-feedback-info-foreground:    var(--ds-prim-color-white);
+  --color-feedback-info-hover:         var(--ds-prim-color-blue-200);
 
   /* color · chart */
   --color-chart-1:            var(--ds-prim-color-violet-700);
@@ -571,6 +595,10 @@
   --color-background-input:    var(--ds-prim-color-white-alpha-15);
   --color-background-inverse:  var(--ds-prim-color-white);
 
+  --color-overlay-hover:    var(--ds-prim-color-white-alpha-8);
+  --color-overlay-active:   var(--ds-prim-color-white-alpha-8);
+  --color-overlay-selected: var(--ds-prim-color-white-alpha-8);
+
   --color-text-default:             var(--ds-prim-color-mist-50);
   --color-text-subtle:              var(--ds-prim-color-mist-400);
   --color-text-bold:                var(--ds-prim-color-mist-50);
@@ -579,6 +607,7 @@
   --color-text-destructive-default: var(--ds-prim-color-red-300);
   --color-text-success-default:     var(--ds-prim-color-emerald-300);
   --color-text-warning-default:     var(--ds-prim-color-amber-300);
+  --color-text-info-default:        var(--ds-prim-color-blue-300);
 
   --color-border-default: var(--ds-prim-color-white-alpha-10);
   --color-border-subtle:  var(--ds-prim-color-white-alpha-10);
@@ -587,13 +616,25 @@
   --color-icon-default: var(--ds-prim-color-mist-50);
   --color-icon-subtle:  var(--ds-prim-color-mist-400);
 
-  --color-action-background-default: var(--ds-prim-color-violet-700);
+  --color-action-background-default:  var(--ds-prim-color-violet-700);
+  --color-action-background-hover:    var(--ds-prim-color-violet-600);
+  --color-action-background-selected: var(--ds-prim-color-violet-950);
+  --color-action-secondary-hover:     var(--ds-prim-color-mist-700);
+  --color-action-secondary-active:    var(--ds-prim-color-mist-600);
+  --color-action-tint-hover:          var(--ds-prim-color-violet-700);
 
   --color-feedback-error-default:      var(--ds-prim-color-red-400);
   --color-feedback-error-foreground:   var(--ds-prim-color-mist-950);
+  --color-feedback-error-hover:        var(--ds-prim-color-red-700);
+  --color-feedback-error-active:       var(--ds-prim-color-red-800);
   --color-feedback-success-default:    var(--ds-prim-color-emerald-400);
   --color-feedback-success-foreground: var(--ds-prim-color-mist-950);
+  --color-feedback-success-hover:      var(--ds-prim-color-emerald-700);
   --color-feedback-warning-default:    var(--ds-prim-color-amber-300);
+  --color-feedback-warning-hover:      var(--ds-prim-color-amber-700);
+  --color-feedback-info-default:       var(--ds-prim-color-blue-400);
+  --color-feedback-info-foreground:    var(--ds-prim-color-mist-950);
+  --color-feedback-info-hover:         var(--ds-prim-color-blue-700);
 
   --color-chart-1: var(--ds-prim-color-violet-500);
   --color-chart-2: var(--ds-prim-color-blue-400);

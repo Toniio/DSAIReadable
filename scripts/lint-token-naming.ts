@@ -61,6 +61,7 @@ const ENUMS: Record<string, string[]> = {
     "plum",
     "red",
     "white-alpha",
+    "ink-alpha",
   ],
   colorKeyword: ["black", "white", "transparent", "current"],
   mode: ["light", "dark"],
@@ -95,10 +96,12 @@ const ENUMS: Record<string, string[]> = {
   state: ["hover", "active", "focus", "disabled", "selected"],
   /** Foreground relationship: the color that sits *on* a surface. */
   onSurface: ["default", "on", "foreground"],
-  textRole: ["action", "destructive", "success", "warning"],
+  textRole: ["action", "destructive", "success", "warning", "info"],
   /** A surface that belongs to one kind of element: the fill of a form control. */
   backgroundRole: ["input"],
   borderRole: ["default", "subtle", "input", "focus"],
+  /** A filled action other than the primary one, whose states are named. */
+  actionRole: ["secondary", "tint"],
   iconRole: ["default", "subtle", "action"],
   feedbackRole: ["error", "success", "warning", "info"],
   /** Colors that ignore the mode — shadcn's bg-white / bg-black. */
@@ -245,8 +248,11 @@ const SEMANTIC_GRAMMAR: Grammar = {
     "color.icon.<iconRole>",
     "color.action.background.<onSurface>",
     "color.action.background.<state>",
+    "color.action.<actionRole>.<state>",
     "color.feedback.<feedbackRole>.<onSurface>",
     "color.feedback.<feedbackRole>.<emphasis>",
+    "color.feedback.<feedbackRole>.<state>",
+    "color.overlay.<state>",
     "color.chart.<chartIndex>",
     "color.chart.sequential.<chartIndex>",
     "color.static.<staticColor>",

@@ -24,6 +24,7 @@ const GROUP_ORDER: ContrastGroup[] = [
   "text",
   "filled",
   "tint",
+  "state",
   "info",
 ]
 

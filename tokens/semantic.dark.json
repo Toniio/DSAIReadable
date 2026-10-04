@@ -22,6 +22,20 @@
         "$value": "{primitive.color.white}"
       }
     },
+    "overlay": {
+      "hover": {
+        "$type": "color",
+        "$value": "{primitive.color.white-alpha.8}"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{primitive.color.white-alpha.8}"
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{primitive.color.white-alpha.8}"
+      }
+    },
     "text": {
       "default": {
         "$type": "color",
@@ -62,6 +76,12 @@
           "$type": "color",
           "$value": "{primitive.color.amber.300}"
         }
+      },
+      "info": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.300}"
+        }
       }
     },
     "border": {
@@ -93,6 +113,30 @@
         "default": {
           "$type": "color",
           "$value": "{primitive.color.violet.700}"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.violet.600}"
+        },
+        "selected": {
+          "$type": "color",
+          "$value": "{primitive.color.violet.950}"
+        }
+      },
+      "secondary": {
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.mist.700}"
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{primitive.color.mist.600}"
+        }
+      },
+      "tint": {
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.violet.700}"
         }
       }
     },
@@ -105,6 +149,14 @@
         "foreground": {
           "$type": "color",
           "$value": "{primitive.color.mist.950}"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.red.700}"
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{primitive.color.red.800}"
         }
       },
       "success": {
@@ -115,12 +167,34 @@
         "foreground": {
           "$type": "color",
           "$value": "{primitive.color.mist.950}"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.emerald.700}"
         }
       },
       "warning": {
         "default": {
           "$type": "color",
           "$value": "{primitive.color.amber.300}"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.700}"
+        }
+      },
+      "info": {
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.400}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{primitive.color.mist.950}"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.700}"
         }
       }
     },
