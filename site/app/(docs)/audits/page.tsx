@@ -27,6 +27,7 @@ import {
   componentAudits,
   deprecations,
   type EvalRun,
+  currentRuns,
   evalRuns,
   exemptions,
   latestRuns,
@@ -87,7 +88,7 @@ function evalSummary(runs: EvalRun[], latest: EvalRun[]): string {
   const first = latest[0]
   if (first && first.generator !== "gold") {
     sentences.push(
-      `On ${first.date}, ${first.model ?? first.generator} built the ${first.tasks} tasks on design system ${first.version}: ${list(
+      `On ${first.builtOn}, ${first.model ?? first.generator} built the ${first.tasks} tasks on design system ${first.version}${first.rescored ? `, rescored on ${first.date}` : ""}: ${list(
         latest.map(
           (run) =>
             `${percent(run.conformance)} ${CONDITION_PHRASE[run.condition] ?? run.condition}`
@@ -126,7 +127,7 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
 }
 
 export default function AuditsPage() {
-  const runs = latestVersionRuns(evalRuns())
+  const runs = latestVersionRuns(currentRuns(evalRuns()))
   const latest = latestRuns(runs)
   const best = [...latest].sort((a, b) => b.conformance - a.conformance)[0]
   const contrast = contrastRows()
@@ -289,7 +290,8 @@ export default function AuditsPage() {
             plugin. Stage B renders it in headless Chromium: no axe violation
             and a visible focus indicator on every tab stop, in light and dark.
             Conformance is the mean of the stages that ran. The page shows the
-            runs of the latest version measured; the earlier ones stay in{" "}
+            runs of the latest version measured, and a rescore in place of the
+            run whose screens it scores again; the earlier ones stay in{" "}
             <code className="font-mono">evals/history/</code>.
           </>
         }
@@ -327,7 +329,16 @@ export default function AuditsPage() {
             <TableBody>
               {runs.map((run) => (
                 <TableRow key={run.file}>
-                  <TableCell className="font-mono">{run.date}</TableCell>
+                  <TableCell className="min-w-36 whitespace-normal">
+                    <span className="flex flex-col gap-0.5">
+                      <span className="font-mono">{run.date}</span>
+                      {run.rescored ? (
+                        <span className="text-muted-foreground">
+                          Rescored, screens of {run.builtOn}
+                        </span>
+                      ) : null}
+                    </span>
+                  </TableCell>
                   <TableCell className="font-mono">{run.version}</TableCell>
                   <TableCell className="min-w-44 whitespace-normal">
                     {run.generator === "gold" ? (
@@ -380,9 +391,10 @@ export default function AuditsPage() {
           <div className="flex flex-col gap-2">
             <Heading level={3}>Per task</Heading>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              The runs of {latest[0]?.date ?? "the latest date"}, task by task.
-              Coverage is the share of the gold standard&apos;s design-system
-              modules the screen uses: it is graded, not a gate.
+              The runs of {latest[0]?.builtOn ?? "the latest date"}
+              {latest[0]?.rescored ? `, rescored on ${latest[0].date}` : ""},
+              task by task. Coverage is the share of the gold standard&apos;s
+              design-system modules the screen uses: it is graded, not a gate.
             </p>
           </div>
           <TaskMatrix runs={latest} />
