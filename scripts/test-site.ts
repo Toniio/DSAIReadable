@@ -264,9 +264,26 @@ const MEASURE = ts.transpileModule(
  * press. A stop's indicator is measured as the component tests do, between
  * the document with the previous stop focused and the document with this one
  * focused; the previous stop is focused again from script to take the first.
+ *
+ * A document walks its own stops: what its iframes hold is a preview, loaded
+ * and walked as a document of its own. Every iframe leaves the tab order and
+ * is kept out of it for the whole walk. The page sets an iframe's tabIndex
+ * itself, from what its frame reports (site/playground/canvas.tsx), and
+ * creates its frames after hydration: on a slow runner, a frame created or
+ * reporting after the walk began would put a preview back in the tab order,
+ * and Tab would stay in the focus trap of a story drawn open (AlertDialog).
  */
 const WALK = `
 ${`window.__focus = (() => { const exports = {}; ${MEASURE}\n return exports })()`};
+{
+  const untab = () => document.querySelectorAll("iframe").forEach((frame) => {
+    if (frame.getAttribute("tabindex") !== "-1") frame.tabIndex = -1
+  })
+  untab()
+  new MutationObserver(untab).observe(document.documentElement, {
+    subtree: true, childList: true, attributes: true, attributeFilter: ["tabindex"],
+  })
+}
 window.__walk = {
   seen: new Set(), frames: 0, prev: null, current: null,
   peek() {
@@ -274,11 +291,13 @@ window.__walk = {
     const focused = document.activeElement
     if (!focused || focused === document.body || focused === document.documentElement)
       return { end: true }
-    // A preview in an iframe: Tab walks through its own stops, which its
-    // canvas has as a document of its own. A Radix focus guard is no stop
-    // either: it hands focus to the modal it stands next to.
-    if (focused.tagName === "IFRAME" || focused.hasAttribute("data-radix-focus-guard"))
-      return { end: false, frame: true }
+    // An iframe focused all the same: Tab walks through the stops of its
+    // document, and the walk names it if focus never comes out. A Radix focus
+    // guard is no stop either: it hands focus to the modal it stands next to.
+    if (focused.tagName === "IFRAME")
+      return { end: false, frame: true, label: 'iframe "' + focused.title + '"' }
+    if (focused.hasAttribute("data-radix-focus-guard"))
+      return { end: false, frame: true, label: M.describeElement(focused) }
     if (this.seen.has(focused)) return { end: true }
     this.prev = this.current
     this.current = focused
@@ -434,17 +453,16 @@ async function check(
         `axe ${v.id} (${v.impact}, ${v.nodes} node${v.nodes === 1 ? "" : "s"}): ${v.help}. First: ${v.target}`
       )
 
-    // The keyboard. A page walks its own stops: what its iframes hold is a
-    // preview, which is loaded and walked as a document of its own below.
-    await page.evaluate(
-      "document.querySelectorAll('iframe').forEach((frame) => { frame.tabIndex = -1 })"
-    )
+    // The keyboard: WALK takes the page's iframes out of the tab order, and
+    // each preview is loaded and walked as a document of its own.
     await page.addScriptTag({ content: WALK })
     let end = false
+    let last = "none"
     for (let i = 0; i < MAX_STOPS && !end; i++) {
       await page.keyboard.press("Tab")
       const stop = await page.evaluate<Stop>("window.__walk.peek()")
       if (stop.end) end = true
+      else last = stop.label ?? last
       if (stop.end || stop.frame) continue
       stopsWalked++
       if (!stop.shown)
@@ -477,7 +495,9 @@ async function check(
       )
     }
     if (!end)
-      problems.push(`the Tab walk did not end within ${MAX_STOPS} stops`)
+      problems.push(
+        `the Tab walk did not end within ${MAX_STOPS} stops (the last: ${last})`
+      )
   } catch (error) {
     problems.push(`crawl: ${String(error).slice(0, 300)}`)
   } finally {
