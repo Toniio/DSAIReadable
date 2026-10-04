@@ -18,7 +18,8 @@
           "default",
           "destructive",
           "success",
-          "warning"
+          "warning",
+          "info"
         ],
         "default": "default"
       }
@@ -89,6 +90,7 @@
           "destructive",
           "success",
           "warning",
+          "info",
           "outline",
           "ghost",
           "link"

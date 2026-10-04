@@ -329,11 +329,12 @@
     "name": "Alert",
     "category": "Feedback",
     "status": "stable",
-    "role": "A non-modal banner that delivers a contextual message — informational, a success, a warning or an error — with a title, a description and an optional action.",
+    "role": "A non-modal banner that delivers a contextual message — neutral, informational, a success, a warning or an error — with a title, a description and an optional action.",
     "usage": [
       "Report an authentication error after a failed sign-in",
       "Tell the user about a system state (session expired, network error)",
       "Confirm an outcome the user should notice (payment sent, settings saved) → `variant=\"success\"`",
+      "Point out a notice that asks for no action (a tip, a change that took effect, a scheduled maintenance) → `variant=\"info\"`; one the user should act on is a `warning`",
       "Warn about a risk the user can still act on (low balance, session about to expire) → `variant=\"warning\"`",
       "Warn before an irreversible action → `variant=\"warning\"`; once the action has failed, `variant=\"destructive\"`",
       "Put an SVG icon first to strengthen the visual signal"
@@ -390,6 +391,7 @@
         "where": [
           "alertVariants.variant.default",
           "alertVariants.variant.destructive",
+          "alertVariants.variant.info",
           "alertVariants.variant.success",
           "alertVariants.variant.warning"
         ]
@@ -414,6 +416,16 @@
         ],
         "where": [
           "alertVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "color.text.info.default",
+        "classes": [
+          "text-info",
+          "text-info/90"
+        ],
+        "where": [
+          "alertVariants.variant.info"
         ]
       },
       {
@@ -556,7 +568,7 @@
       {
         "name": "Alert",
         "summary": "Renders `<div>`.",
-        "description": "A non-modal banner that tells the user about a state they should notice; `variant` sets its tone: default, destructive, success or warning.",
+        "description": "A non-modal banner that tells the user about a state they should notice; `variant` sets its tone: default, destructive, success, warning or info.",
         "example": "<Alert variant=\"success\">\n  <AlertTitle>Settings saved</AlertTitle>\n  <AlertDescription>Your changes are live for the whole team.</AlertDescription>\n</Alert>"
       },
       {
@@ -582,9 +594,9 @@
       {
         "component": "Alert",
         "prop": "`variant`",
-        "type": "`\"default\" | \"destructive\" | \"success\" | \"warning\"`",
+        "type": "`\"default\" | \"destructive\" | \"success\" | \"warning\" | \"info\"`",
         "default": "`\"default\"`",
-        "description": "Intent: informational, success, warning or error"
+        "description": "Intent: neutral, info, success, warning or error"
       },
       {
         "component": "Alert",
@@ -681,11 +693,15 @@
         "behavior": "`text-warning` text, description at `text-warning/90`; the icon inherits the current color"
       },
       {
+        "state": "info",
+        "behavior": "`text-info` text, description at `text-info/90`; the icon inherits the current color"
+      },
+      {
         "state": "loading",
         "behavior": "Not applicable"
       }
     ],
-    "accessibility": "**Pattern**: `alert` role (assertive live region)\n\n**Role**: `role=\"alert\"` on the root: screen readers announce the content as soon as it is inserted.\n\n**Keyboard**:\n\nNo keyboard interaction of its own; only the interactive elements placed inside receive focus.\n\n**Accessible name**: The title (`AlertTitle`) and the description (`AlertDescription`) make up the announced message.\n\n**Pitfalls**:\n\n- `role=\"alert\"` interrupts whatever is being read: keep `Alert` for important messages that appear in response to the user, not for a static notice present on page load.\n- The `destructive`, `success` and `warning` variants do not carry the meaning on their own: the text must say what happened (icon plus words, never color alone). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — color an alert with a raw green or amber, or with `color.feedback.success.default` / `color.feedback.warning.default`: `text-success` and `text-warning` read the text tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the card in both modes.",
+    "accessibility": "**Pattern**: `alert` role (assertive live region)\n\n**Role**: `role=\"alert\"` on the root: screen readers announce the content as soon as it is inserted.\n\n**Keyboard**:\n\nNo keyboard interaction of its own; only the interactive elements placed inside receive focus.\n\n**Accessible name**: The title (`AlertTitle`) and the description (`AlertDescription`) make up the announced message.\n\n**Pitfalls**:\n\n- `role=\"alert\"` interrupts whatever is being read: keep `Alert` for important messages that appear in response to the user, not for a static notice present on page load.\n- The `destructive`, `success`, `warning` and `info` variants do not carry the meaning on their own: the text must say what happened (icon plus words, never color alone). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — color an alert with a raw green, amber or blue, or with `color.feedback.success.default` / `.warning.default` / `.info.default`: `text-success`, `text-warning` and `text-info` read the text tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the card in both modes.",
     "code_example": "import { Alert, AlertTitle, AlertDescription } from \"@/components/ui/alert\"\nimport { WarningCircleIcon } from \"@phosphor-icons/react\"\n\nexport default function Example() {\n  return (\n    <Alert variant=\"destructive\">\n      <WarningCircleIcon />\n      <AlertTitle>Incorrect credentials</AlertTitle>\n      <AlertDescription>\n        Check your email address and password, then try again.\n      </AlertDescription>\n    </Alert>\n  )\n}",
     "cross_references": [
       "Card",
@@ -709,6 +725,13 @@
           "value": "warning",
           "type": "added",
           "note": "A risk the reader can still act on before it becomes an error (low balance, expiring session): text-warning on the card, with an icon. shadcn/ui has no warning color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
+        },
+        {
+          "export": "Alert",
+          "prop": "variant",
+          "value": "info",
+          "type": "added",
+          "note": "A notice that asks for no action (a tip, a change that took effect, a scheduled maintenance): text-info on the card, with an icon. shadcn/ui has no info color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
         }
       ]
     }
@@ -1413,8 +1436,7 @@
         "token": "color.background.subtle",
         "classes": [
           "bg-card",
-          "bg-muted",
-          "bg-muted/50"
+          "bg-muted"
         ],
         "where": [
           "attachmentMediaVariants",
@@ -1439,6 +1461,15 @@
         ],
         "where": [
           "attachmentMediaVariants",
+          "attachmentVariants"
+        ]
+      },
+      {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
+        ],
+        "where": [
           "attachmentVariants"
         ]
       },
@@ -1882,7 +1913,7 @@
       },
       {
         "state": "hover",
-        "behavior": "A tile holding a trigger or a link takes a `bg-muted/50` background"
+        "behavior": "A tile holding a trigger or a link takes the `bg-overlay-hover` veil"
       },
       {
         "state": "focus",
@@ -2376,7 +2407,7 @@
     "status": "stable",
     "role": "A compact label that categorizes an element, marks its status or highlights a piece of metadata.",
     "usage": [
-      "Show a status next to a title: `success` for a positive one (Paid, Active), `warning` for one that needs attention (Pending review), `destructive` for an error",
+      "Show a status next to a title: `success` for a positive one (Paid, Active), `warning` for one that needs attention (Pending review), `info` for a neutral notice (Beta, Scheduled), `destructive` for an error",
       "Categorize an entry in a list or a table",
       "Display a notification count",
       "Flag something new or experimental",
@@ -2386,7 +2417,7 @@
       "**MUST NOT** — act as an action button → use `Button` with `size=\"xs\"`",
       "**MUST NOT** — exceed three words of text",
       "**MUST** — keep the `destructive` variant for error or critical-alert statuses",
-      "**MUST** — keep `success` and `warning` for statuses of that meaning, never to decorate a badge with green or amber",
+      "**MUST** — keep `success`, `warning` and `info` for statuses of that meaning, never to decorate a badge with green, amber or blue",
       "**MUST NOT** — contain an interactive element",
       "**MUST** — check the contrast of the background-less `ghost` and `link` variants on every surface they appear on"
     ],
@@ -2416,8 +2447,7 @@
       {
         "token": "color.action.background.default",
         "classes": [
-          "bg-primary",
-          "bg-primary/80"
+          "bg-primary"
         ],
         "where": [
           "badgeVariants.variant.default"
@@ -2433,12 +2463,28 @@
         ]
       },
       {
+        "token": "color.action.background.hover",
+        "classes": [
+          "bg-primary-hover"
+        ],
+        "where": [
+          "badgeVariants.variant.default"
+        ]
+      },
+      {
+        "token": "color.action.secondary.hover",
+        "classes": [
+          "bg-secondary-hover"
+        ],
+        "where": [
+          "badgeVariants.variant.secondary"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
-          "bg-muted/50",
-          "bg-secondary",
-          "bg-secondary/80"
+          "bg-secondary"
         ],
         "where": [
           "badgeVariants.variant.ghost",
@@ -2483,10 +2529,47 @@
         ]
       },
       {
+        "token": "color.feedback.error.hover",
+        "classes": [
+          "bg-destructive-hover"
+        ],
+        "where": [
+          "badgeVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "color.feedback.info.default",
+        "classes": [
+          "bg-info/10",
+          "bg-info/20"
+        ],
+        "where": [
+          "badgeVariants.variant.info"
+        ]
+      },
+      {
+        "token": "color.feedback.info.hover",
+        "classes": [
+          "bg-info-hover"
+        ],
+        "where": [
+          "badgeVariants.variant.info"
+        ]
+      },
+      {
         "token": "color.feedback.success.default",
         "classes": [
           "bg-success/10",
           "bg-success/20"
+        ],
+        "where": [
+          "badgeVariants.variant.success"
+        ]
+      },
+      {
+        "token": "color.feedback.success.hover",
+        "classes": [
+          "bg-success-hover"
         ],
         "where": [
           "badgeVariants.variant.success"
@@ -2500,6 +2583,24 @@
         ],
         "where": [
           "badgeVariants.variant.warning"
+        ]
+      },
+      {
+        "token": "color.feedback.warning.hover",
+        "classes": [
+          "bg-warning-hover"
+        ],
+        "where": [
+          "badgeVariants.variant.warning"
+        ]
+      },
+      {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
+        ],
+        "where": [
+          "badgeVariants.variant.ghost"
         ]
       },
       {
@@ -2529,6 +2630,15 @@
         ],
         "where": [
           "badgeVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "color.text.info.default",
+        "classes": [
+          "text-info"
+        ],
+        "where": [
+          "badgeVariants.variant.info"
         ]
       },
       {
@@ -2688,7 +2798,7 @@
       {
         "component": "Badge",
         "prop": "`variant`",
-        "type": "`\"default\" | \"secondary\" | \"destructive\" | \"success\" | \"warning\" | \"outline\" | \"ghost\" | \"link\"`",
+        "type": "`\"default\" | \"secondary\" | \"destructive\" | \"success\" | \"warning\" | \"info\" | \"outline\" | \"ghost\" | \"link\"`",
         "default": "`\"default\"`",
         "description": "How the badge looks, or the status it announces"
       },
@@ -2721,7 +2831,7 @@
       },
       {
         "state": "hover",
-        "behavior": "As a link, `default` and `secondary` take `bg-primary/80` and `bg-secondary/80`, `destructive`, `success` and `warning` take `bg-destructive/20`, `bg-success/20` and `bg-warning/20` (deeper in light mode, unchanged in dark mode, where it is already the fill), `outline` takes `bg-muted` with `text-muted-foreground`; `ghost` takes `bg-muted` (`dark:hover:bg-muted/50`) with `text-muted-foreground` on any hover, and `link` underlines"
+        "behavior": "As a link, `default` and `secondary` take `bg-primary-hover` and `bg-secondary-hover`, `destructive`, `success`, `warning` and `info` take `bg-destructive-hover`, `bg-success-hover`, `bg-warning-hover` and `bg-info-hover` (a deeper step in light mode, a lighter one in dark mode), `outline` takes `bg-muted` with `text-muted-foreground`; `ghost` takes `bg-muted` (`dark:hover:bg-overlay-hover`) with `text-muted-foreground` on any hover, and `link` underlines"
       },
       {
         "state": "focus",
@@ -2740,7 +2850,7 @@
         "behavior": "`aria-invalid=\"true\"`: `border-destructive` border; on focus, a `ring-destructive/20` ring (`dark:aria-invalid:ring-destructive/40`) and a solid `outline-destructive` outline"
       }
     ],
-    "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red; `success` says \"Paid\", not just green). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`) or a raw color: `text-destructive`, `text-success` and `text-warning` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, in both modes.\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.\n- **MUST** — keep 4px of clear space above and below a Badge rendered as a link (`asChild`): it is 20px tall, and only the spacing exception of WCAG 2.2 SC 2.5.8 (Target Size) makes it conform (`specs/foundations/size.md`).",
+    "accessibility": "**Pattern**: Static text (`span`); a link when rendered with `asChild`\n\n**Role**: No role of its own; takes on the role of the element passed through `asChild` (an `a`, for example).\n\n**Keyboard**:\n\nNo keyboard interaction of its own; a badge rendered as a link behaves like a native link (`Enter`).\n\n**Accessible name**: The badge text. A badge that holds only an icon needs `sr-only` text.\n\n**Pitfalls**:\n\n- Color never carries the meaning on its own (`destructive` says \"Error\" in words, it is not just red; `success` says \"Paid\", not just green). Success green and error red look alike to a red-green color-blind reader.\n- **MUST NOT** — recolor an intent label with its fill token (`color.feedback.error.default`, `.success.default`, `.warning.default`, `.info.default`) or a raw color: `text-destructive`, `text-success`, `text-warning` and `text-info` read the `color.text.*` tokens, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` and `/20` tints over the page, a card and a popover, and on the hovered steps (`bg-destructive-hover`…), in both modes.\n- A count (\"3\") must be tied to what it counts — in the name of the neighboring button, for example.\n- **MUST** — keep 4px of clear space above and below a Badge rendered as a link (`asChild`): it is 20px tall, and only the spacing exception of WCAG 2.2 SC 2.5.8 (Target Size) makes it conform (`specs/foundations/size.md`).",
     "code_example": "import { Badge } from \"@/components/ui/badge\"\n\nexport default function Example() {\n  return (\n    <div className=\"flex gap-2\">\n      <Badge variant=\"default\">Active</Badge>\n      <Badge variant=\"secondary\">Draft</Badge>\n      <Badge variant=\"success\">Paid</Badge>\n      <Badge variant=\"warning\">Pending review</Badge>\n      <Badge variant=\"destructive\">Error</Badge>\n      <Badge variant=\"outline\">v2.1.0</Badge>\n    </div>\n  )\n}",
     "cross_references": [
       "Button",
@@ -2763,6 +2873,13 @@
           "value": "warning",
           "type": "added",
           "note": "A status that needs attention without being an error (Pending review, Expiring): text-warning on a warning tint, like the destructive variant. shadcn/ui has no warning color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
+        },
+        {
+          "export": "Badge",
+          "prop": "variant",
+          "value": "info",
+          "type": "added",
+          "note": "A neutral notice label (Beta, Scheduled): text-info on an info tint, like the destructive variant. shadcn/ui has no info color, and the Tailwind lockdown leaves no other conforming way to write one (color.md)."
         }
       ]
     }
@@ -3176,9 +3293,7 @@
         "classes": [
           "bg-primary",
           "bg-primary/10",
-          "bg-primary/20",
-          "bg-primary/30",
-          "bg-primary/80"
+          "bg-primary/20"
         ],
         "where": [
           "bubbleVariants.variant.default",
@@ -3195,6 +3310,34 @@
         ]
       },
       {
+        "token": "color.action.background.hover",
+        "classes": [
+          "bg-primary-hover"
+        ],
+        "where": [
+          "bubbleVariants.variant.default"
+        ]
+      },
+      {
+        "token": "color.action.secondary.hover",
+        "classes": [
+          "bg-secondary-hover"
+        ],
+        "where": [
+          "bubbleVariants.variant.muted",
+          "bubbleVariants.variant.secondary"
+        ]
+      },
+      {
+        "token": "color.action.tint.hover",
+        "classes": [
+          "bg-primary-tint-hover"
+        ],
+        "where": [
+          "bubbleVariants.variant.tinted"
+        ]
+      },
+      {
         "token": "color.background.default",
         "classes": [
           "bg-background"
@@ -3204,22 +3347,10 @@
         ]
       },
       {
-        "token": "color.background.input",
-        "classes": [
-          "bg-input-fill/30"
-        ],
-        "where": [
-          "bubbleVariants.variant.outline"
-        ]
-      },
-      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
-          "bg-muted/50",
-          "bg-muted/80",
           "bg-secondary",
-          "bg-secondary/80",
           "ring-card"
         ],
         "where": [
@@ -3253,11 +3384,29 @@
         "token": "color.feedback.error.default",
         "classes": [
           "bg-destructive/10",
-          "bg-destructive/20",
-          "bg-destructive/30"
+          "bg-destructive/20"
         ],
         "where": [
           "bubbleVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "color.feedback.error.hover",
+        "classes": [
+          "bg-destructive-hover"
+        ],
+        "where": [
+          "bubbleVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
+        ],
+        "where": [
+          "bubbleVariants.variant.ghost",
+          "bubbleVariants.variant.outline"
         ]
       },
       {
@@ -3592,8 +3741,7 @@
       {
         "token": "color.action.background.default",
         "classes": [
-          "bg-primary",
-          "bg-primary/80"
+          "bg-primary"
         ],
         "where": [
           "buttonVariants.variant.default"
@@ -3609,6 +3757,24 @@
         ]
       },
       {
+        "token": "color.action.background.hover",
+        "classes": [
+          "bg-primary-hover"
+        ],
+        "where": [
+          "buttonVariants.variant.default"
+        ]
+      },
+      {
+        "token": "color.action.secondary.hover",
+        "classes": [
+          "bg-secondary-hover"
+        ],
+        "where": [
+          "buttonVariants.variant.secondary"
+        ]
+      },
+      {
         "token": "color.background.default",
         "classes": [
           "bg-background"
@@ -3620,8 +3786,7 @@
       {
         "token": "color.background.input",
         "classes": [
-          "bg-input-fill/30",
-          "bg-input-fill/50"
+          "bg-input-fill/30"
         ],
         "where": [
           "buttonVariants.variant.outline"
@@ -3631,9 +3796,7 @@
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
-          "bg-muted/50",
-          "bg-secondary",
-          "bg-secondary/80"
+          "bg-secondary"
         ],
         "where": [
           "buttonVariants.variant.ghost",
@@ -3675,7 +3838,6 @@
         "classes": [
           "bg-destructive/10",
           "bg-destructive/20",
-          "bg-destructive/30",
           "border-destructive",
           "border-destructive/40",
           "border-destructive/50",
@@ -3687,6 +3849,25 @@
           "buttonVariants.variant.destructive",
           "buttonVariants.variant.destructive via FOCUS_RING_DESTRUCTIVE (lib/focus.ts)",
           "buttonVariants"
+        ]
+      },
+      {
+        "token": "color.feedback.error.hover",
+        "classes": [
+          "bg-destructive-hover"
+        ],
+        "where": [
+          "buttonVariants.variant.destructive"
+        ]
+      },
+      {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
+        ],
+        "where": [
+          "buttonVariants.variant.ghost",
+          "buttonVariants.variant.outline"
         ]
       },
       {
@@ -3964,7 +4145,7 @@
       },
       {
         "state": "hover",
-        "behavior": "`default` takes `bg-primary/80`, `secondary` `bg-secondary/80`, `destructive` `bg-destructive/20` (`dark:hover:bg-destructive/30`); `outline` and `ghost` take `bg-muted` with `text-foreground` (`dark:hover:bg-input-fill/50` and `dark:hover:bg-muted/50` in dark mode); `link` underlines instead"
+        "behavior": "`default` takes `bg-primary-hover`, `secondary` `bg-secondary-hover`, `destructive` `bg-destructive-hover`; `outline` and `ghost` take `bg-muted` with `text-foreground` (the `dark:hover:bg-overlay-hover` veil in dark mode); `link` underlines instead"
       },
       {
         "state": "focus",
@@ -4356,8 +4537,7 @@
       {
         "token": "color.background.subtle",
         "classes": [
-          "bg-muted",
-          "bg-muted/50"
+          "bg-muted"
         ],
         "where": [
           "Calendar.button_next via buttonVariants.variant.ghost",
@@ -4389,6 +4569,16 @@
         ],
         "where": [
           "Calendar.dropdown_root"
+        ]
+      },
+      {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants.variant.ghost",
+          "Calendar.button_previous via buttonVariants.variant.ghost"
         ]
       },
       {
@@ -4765,7 +4955,7 @@
       },
       {
         "state": "hover",
-        "behavior": "An unselected day takes the hover of its `ghost` `Button` (listed in Button's spec), with `dark:hover:text-foreground` in dark mode; a selected day, a range's first and last day and the days between keep their fill and text color under the pointer in both modes (each selected state has a `dark:hover:` twin that outranks the ghost variant's dark hover fill); the previous and next buttons, `ghost` unless `buttonVariant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants`, and `dark:hover:bg-muted/50` in dark mode"
+        "behavior": "An unselected day takes the hover of its `ghost` `Button` (listed in Button's spec), with `dark:hover:text-foreground` in dark mode; a selected day, a range's first and last day and the days between keep their fill and text color under the pointer in both modes (each selected state has a `dark:hover:` twin that outranks the ghost variant's dark hover fill); the previous and next buttons, `ghost` unless `buttonVariant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants`, and the `dark:hover:bg-overlay-hover` veil in dark mode"
       },
       {
         "state": "focus",
@@ -7924,10 +8114,9 @@
         ]
       },
       {
-        "token": "color.feedback.error.default",
+        "token": "color.feedback.error.hover",
         "classes": [
-          "bg-destructive/10",
-          "bg-destructive/20"
+          "bg-destructive-hover"
         ],
         "where": [
           "ContextMenuItem"
@@ -8398,7 +8587,7 @@
       },
       {
         "state": "focus",
-        "behavior": "The item under the pointer or the arrow keys gets `bg-accent` and `text-accent-foreground`, its icons and shortcut included; a `destructive` item gets `bg-destructive/10` (`bg-destructive/20` in dark mode) and keeps `text-destructive`"
+        "behavior": "The item under the pointer or the arrow keys gets `bg-accent` and `text-accent-foreground`, its icons and shortcut included; a `destructive` item gets `bg-destructive-hover` and keeps `text-destructive`"
       },
       {
         "state": "active",
@@ -9612,10 +9801,9 @@
         ]
       },
       {
-        "token": "color.feedback.error.default",
+        "token": "color.feedback.error.hover",
         "classes": [
-          "bg-destructive/10",
-          "bg-destructive/20"
+          "bg-destructive-hover"
         ],
         "where": [
           "DropdownMenuItem"
@@ -10093,7 +10281,7 @@
       },
       {
         "state": "focus",
-        "behavior": "The item under the pointer or the arrow keys gets `bg-accent` and `text-accent-foreground`, its icons and shortcut included; a `destructive` item gets `bg-destructive/10` (`bg-destructive/20` in dark mode) and keeps `text-destructive`"
+        "behavior": "The item under the pointer or the arrow keys gets `bg-accent` and `text-accent-foreground`, its icons and shortcut included; a `destructive` item gets `bg-destructive-hover` and keeps `text-destructive`"
       },
       {
         "state": "active",
@@ -10618,10 +10806,16 @@
       {
         "token": "color.action.background.default",
         "classes": [
-          "bg-primary/10",
-          "bg-primary/5",
-          "border-primary/20",
-          "border-primary/30"
+          "border-primary"
+        ],
+        "where": [
+          "FieldLabel"
+        ]
+      },
+      {
+        "token": "color.action.background.selected",
+        "classes": [
+          "bg-primary-selected"
         ],
         "where": [
           "FieldLabel"
@@ -10637,19 +10831,19 @@
         ]
       },
       {
-        "token": "color.background.subtle",
+        "token": "color.border.focus",
         "classes": [
-          "bg-muted/50"
+          "border-ring",
+          "ring-ring/50"
         ],
         "where": [
           "FieldLabel"
         ]
       },
       {
-        "token": "color.border.focus",
+        "token": "color.overlay.hover",
         "classes": [
-          "border-ring",
-          "ring-ring/50"
+          "bg-overlay-hover"
         ],
         "where": [
           "FieldLabel"
@@ -11157,7 +11351,7 @@
       },
       {
         "state": "hover",
-        "behavior": "A `FieldLabel` card wrapping a `Field` turns `bg-muted/50` unless its control is disabled; a link in `FieldDescription` turns `text-primary`"
+        "behavior": "A `FieldLabel` card wrapping a `Field` takes the `bg-overlay-hover` veil unless its control is disabled; a link in `FieldDescription` turns `text-primary`"
       },
       {
         "state": "focus",
@@ -11165,7 +11359,7 @@
       },
       {
         "state": "checked",
-        "behavior": "A `FieldLabel` holding a checked control gets a `bg-primary/5` background and, as a card, a `border-primary/30` border (`bg-primary/10` and `border-primary/20` in dark mode)"
+        "behavior": "A `FieldLabel` holding a checked control gets a `bg-primary-selected` background and, as a card, a `border-primary` border"
       },
       {
         "state": "disabled",
@@ -14556,10 +14750,9 @@
         ]
       },
       {
-        "token": "color.feedback.error.default",
+        "token": "color.feedback.error.hover",
         "classes": [
-          "bg-destructive/10",
-          "bg-destructive/20"
+          "bg-destructive-hover"
         ],
         "where": [
           "MenubarItem"
@@ -15104,7 +15297,7 @@
       },
       {
         "state": "focus",
-        "behavior": "Focused item: `bg-accent` background and `accent-foreground` text (destructive item: `bg-destructive/10`, dark: `bg-destructive/20`, and `text-destructive`); a trigger focused from the keyboard: `ring-ring/50` ring and a solid `outline-ring` outline `--border-width-default` wide, since the trigger has no border"
+        "behavior": "Focused item: `bg-accent` background and `accent-foreground` text (destructive item: `bg-destructive-hover` and `text-destructive`); a trigger focused from the keyboard: `ring-ring/50` ring and a solid `outline-ring` outline `--border-width-default` wide, since the trigger has no border"
       },
       {
         "state": "open",
@@ -15855,8 +16048,7 @@
       {
         "token": "color.background.input",
         "classes": [
-          "bg-input-fill/30",
-          "bg-input-fill/50"
+          "bg-input-fill/30"
         ],
         "where": [
           "NativeSelect"
@@ -15889,6 +16081,15 @@
           "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
         ],
         "where": [
           "NativeSelect"
@@ -16102,7 +16303,7 @@
       },
       {
         "state": "hover",
-        "behavior": "In dark mode, the background turns `bg-input-fill/50`"
+        "behavior": "In dark mode, the background takes the `bg-overlay-hover` veil"
       },
       {
         "state": "focus",
@@ -16223,8 +16424,7 @@
       {
         "token": "color.background.subtle",
         "classes": [
-          "bg-muted",
-          "bg-muted/50"
+          "bg-muted"
         ],
         "where": [
           "NavigationMenuLink",
@@ -16252,6 +16452,16 @@
           "NavigationMenuLink via FOCUS_RING (lib/focus.ts)",
           "navigationMenuTriggerStyle",
           "navigationMenuTriggerStyle via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "color.overlay.selected",
+        "classes": [
+          "bg-overlay-selected"
+        ],
+        "where": [
+          "NavigationMenuLink",
+          "navigationMenuTriggerStyle"
         ]
       },
       {
@@ -16646,11 +16856,11 @@
       },
       {
         "state": "active",
-        "behavior": "A link marked `active` (the current page): `bg-muted/50` background, `bg-muted` on hover and focus"
+        "behavior": "A link marked `active` (the current page): the `bg-overlay-selected` veil, `bg-muted` on hover and focus"
       },
       {
         "state": "open",
-        "behavior": "The open trigger takes `bg-muted/50` (`bg-muted` on hover and focus) and its caret turns (`rotate-180`); the viewport zooms in (`zoom-in-90`), or with `viewport={false}` the content fades and zooms in (`fade-in-0`, `zoom-in-95`); the indicator fades in"
+        "behavior": "The open trigger takes the `bg-overlay-selected` veil (`bg-muted` on hover and focus) and its caret turns (`rotate-180`); the viewport zooms in (`zoom-in-90`), or with `viewport={false}` the content fades and zooms in (`fade-in-0`, `zoom-in-95`); the indicator fades in"
       },
       {
         "state": "closing",
@@ -17820,7 +18030,6 @@
         "token": "color.action.background.default",
         "classes": [
           "bg-primary",
-          "bg-primary/80",
           "border-primary"
         ],
         "where": [
@@ -17839,6 +18048,16 @@
         "where": [
           "QuestionnaireChoice",
           "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants.variant.default",
+          "QuestionnaireSubmit via buttonVariants.variant.default"
+        ]
+      },
+      {
+        "token": "color.action.background.hover",
+        "classes": [
+          "bg-primary-hover"
+        ],
+        "where": [
           "QuestionnaireNext via buttonVariants.variant.default",
           "QuestionnaireSubmit via buttonVariants.variant.default"
         ]
@@ -17870,8 +18089,7 @@
       {
         "token": "color.background.subtle",
         "classes": [
-          "bg-muted",
-          "bg-muted/50"
+          "bg-muted"
         ],
         "where": [
           "QuestionnaireChoice",
@@ -17937,9 +18155,20 @@
         ]
       },
       {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants.variant.outline"
+        ]
+      },
+      {
         "token": "color.text.default",
         "classes": [
-          "border-foreground/30",
+          "border-foreground",
           "text-foreground"
         ],
         "where": [
@@ -18552,7 +18781,7 @@
       },
       {
         "state": "hover",
-        "behavior": "A choice takes `hover:bg-muted/50`; `QuestionnairePrevious` and `QuestionnaireSkip`, `outline` unless `variant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants` (`dark:hover:bg-input-fill/50` in dark mode), and `QuestionnaireNext` and `QuestionnaireSubmit`, on the `default` variant, take `hover:bg-primary/80`"
+        "behavior": "A choice takes the `hover:bg-overlay-hover` veil; `QuestionnairePrevious` and `QuestionnaireSkip`, `outline` unless `variant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants` (the `dark:hover:bg-overlay-hover` veil in dark mode), and `QuestionnaireNext` and `QuestionnaireSubmit`, on the `default` variant, take `hover:bg-primary-hover`"
       },
       {
         "state": "focus",
@@ -18564,7 +18793,7 @@
       },
       {
         "state": "checked",
-        "behavior": "`data-checked`: the choice takes `bg-muted` and a `border-foreground/30` border; the indicator takes the primary fill (`bg-primary`, `border-primary`) and shows its dot or check"
+        "behavior": "`data-checked`: the choice takes `bg-muted` and a solid `border-foreground` frame; the indicator takes the primary fill (`bg-primary`, `border-primary`) and shows its dot or check"
       },
       {
         "state": "open",
@@ -19433,8 +19662,7 @@
       {
         "token": "color.background.input",
         "classes": [
-          "bg-input-fill/30",
-          "bg-input-fill/50"
+          "bg-input-fill/30"
         ],
         "where": [
           "SelectTrigger"
@@ -19485,6 +19713,15 @@
           "outline-destructive",
           "ring-destructive/20",
           "ring-destructive/40"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
         ],
         "where": [
           "SelectTrigger"
@@ -19901,7 +20138,7 @@
       },
       {
         "state": "hover",
-        "behavior": "In dark mode, the trigger's background turns `bg-input-fill/50`"
+        "behavior": "In dark mode, the trigger's background takes the `bg-overlay-hover` veil"
       },
       {
         "state": "focus",
@@ -22817,6 +23054,24 @@
         ]
       },
       {
+        "token": "color.overlay.hover",
+        "classes": [
+          "bg-overlay-hover"
+        ],
+        "where": [
+          "TableRow"
+        ]
+      },
+      {
+        "token": "color.overlay.selected",
+        "classes": [
+          "bg-overlay-selected"
+        ],
+        "where": [
+          "TableRow"
+        ]
+      },
+      {
         "token": "color.text.default",
         "classes": [
           "text-foreground"
@@ -23189,15 +23444,6 @@
         ]
       },
       {
-        "token": "color.background.input",
-        "classes": [
-          "bg-input-fill/30"
-        ],
-        "where": [
-          "TabsTrigger"
-        ]
-      },
-      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted"
@@ -23223,6 +23469,15 @@
         "token": "color.border.input",
         "classes": [
           "border-input"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
+        "token": "color.overlay.selected",
+        "classes": [
+          "bg-overlay-selected"
         ],
         "where": [
           "TabsTrigger"
@@ -23530,7 +23785,7 @@
       },
       {
         "state": "active",
-        "behavior": "Selected trigger: `bg-background` background, `text-foreground` text (dark: `bg-input-fill/30`, `border-input`); in the `line` variant the background stays transparent and the indicator bar shows (`opacity-100`)"
+        "behavior": "Selected trigger: `bg-background` background, `text-foreground` text (dark: the `bg-overlay-selected` veil, `border-input`); in the `line` variant the background stays transparent and the indicator bar shows (`opacity-100`)"
       },
       {
         "state": "disabled",

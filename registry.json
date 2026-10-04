@@ -1344,7 +1344,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "A non-modal banner that delivers a contextual message — informational, a success, a warning or an error — with a title, a description and an optional action.",
+      "description": "A non-modal banner that delivers a contextual message — neutral, informational, a success, a warning or an error — with a title, a description and an optional action.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],

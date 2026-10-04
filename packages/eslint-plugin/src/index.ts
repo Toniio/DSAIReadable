@@ -110,6 +110,14 @@ const tailwind = (ignores: string[]): TSESLint.FlatConfig.Config => ({
             message:
               "Opacity is for binary states: show / hide with opacity-0 and opacity-100, or a color token such as text-muted-foreground to dim a text or an icon.",
           },
+          // A hovered, highlighted, open, expanded, checked or selected state
+          // is a named color token; a ring keeps its focus halo alpha.
+          {
+            pattern:
+              "^(?:[^:]*:)*?(?:[^:]*(?:hover|active|open|expanded|pressed|checked|selected|highlighted)[^:]*|focus):(?:[^:]*:)*(?:bg|text|border|outline|fill|stroke|decoration|divide|shadow|from|via|to)-[^/]+/\\d+$",
+            message:
+              "A state takes a named color, never an opacity of its resting one: a role fill its hover step (hover:bg-primary-hover, bg-secondary-hover, bg-destructive-hover, bg-success-hover, bg-warning-hover, bg-info-hover), a neutral element a veil (bg-overlay-hover, or bg-overlay-selected when open, expanded or current), a checked choice bg-primary-selected.",
+          },
         ],
       },
     ],

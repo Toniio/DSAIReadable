@@ -349,6 +349,10 @@
       "source": "opacity.md"
     },
     {
+      "rule": "**A state is a color token, never an alpha** — a hovered, highlighted, open, expanded, checked or selected element takes a named state token ([Color → States](./color.md#states)), not an opacity modifier of its resting color: `hover:bg-primary/80` put the primary label at 4.24:1, and `hover:bg-muted/50` changed nothing on a card. A third `better-tailwindcss/no-restricted-classes` rule rejects a color with an opacity modifier under `hover:`, `active:`, `focus:` or an open, expanded, checked, selected or pressed variant; a focus ring keeps its halo alpha (`ring-ring/50`, from `lib/focus.ts`).",
+      "source": "opacity.md"
+    },
+    {
       "rule": "**Always use the tokens** — no arbitrary values such as `rounded-[7px]`. When no token fits, escalate to the design team.",
       "source": "radius.md"
     },
@@ -515,7 +519,7 @@
       "**MUST NOT** — act as an action button → use `Button` with `size=\"xs\"`",
       "**MUST NOT** — exceed three words of text",
       "**MUST** — keep the `destructive` variant for error or critical-alert statuses",
-      "**MUST** — keep `success` and `warning` for statuses of that meaning, never to decorate a badge with green or amber",
+      "**MUST** — keep `success`, `warning` and `info` for statuses of that meaning, never to decorate a badge with green, amber or blue",
       "**MUST NOT** — contain an interactive element",
       "**MUST** — check the contrast of the background-less `ghost` and `link` variants on every surface they appear on"
     ],

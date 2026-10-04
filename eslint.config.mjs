@@ -100,6 +100,18 @@ const eslintConfig = defineConfig([
               message:
                 "Opacity is for binary states (specs/foundations/opacity.md): show / hide with opacity-0 and opacity-100, or a color token such as text-muted-foreground to dim a text or an icon.",
             },
+            // specs/foundations/color.md, States: a hovered, highlighted, open,
+            // expanded, checked or selected state is a named token. A color
+            // with an opacity modifier under one of those variants is the
+            // unnamed state it replaced (hover:bg-primary/80 put a label at
+            // 4.24:1; hover:bg-muted/50 changed nothing on a card). Focus
+            // rings (ring-*) keep their halo alpha, from lib/focus.ts.
+            {
+              pattern:
+                "^(?:[^:]*:)*?(?:[^:]*(?:hover|active|open|expanded|pressed|checked|selected|highlighted)[^:]*|focus):(?:[^:]*:)*(?:bg|text|border|outline|fill|stroke|decoration|divide|shadow|from|via|to)-[^/]+/\\d+$",
+              message:
+                "A state takes a named color, never an opacity of its resting one: a role fill its hover step (hover:bg-primary-hover, bg-secondary-hover, bg-destructive-hover, bg-success-hover, bg-warning-hover, bg-info-hover), a neutral element a veil (bg-overlay-hover, or bg-overlay-selected when open, expanded or current), a checked choice bg-primary-selected. See specs/foundations/color.md, States.",
+            },
           ],
         },
       ],

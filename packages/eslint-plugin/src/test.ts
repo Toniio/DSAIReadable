@@ -531,6 +531,37 @@ export const A = () => <Button className="bg-primary p-4"><Plus /></Button>`,
     assert.deepEqual(result.messages, [])
   })
 
+  it("rejects a state drawn with an opacity, not a named state or a focus halo", async () => {
+    const eslint = new ESLint({
+      cwd: resolve(dirname(fileURLToPath(import.meta.url)), "../../.."),
+      overrideConfigFile: true,
+      overrideConfig: [
+        {
+          files: ["**/*.tsx"],
+          languageOptions: {
+            parser: tsParser,
+            parserOptions: { ecmaFeatures: { jsx: true } },
+          },
+        },
+        ...(plugin.configs.recommended as never[]),
+      ],
+    })
+    const [result] = await eslint.lintText(
+      `export const A = () => <div className="bg-primary/10 hover:bg-primary/80 data-open:bg-muted/50 dark:hover:bg-overlay-hover focus-visible:ring-ring/50" />`,
+      { filePath: "src/screen.tsx" }
+    )
+    assert.deepEqual(
+      result.messages.map((m) => [
+        m.ruleId,
+        m.message.startsWith("A state takes a named color"),
+      ]),
+      [
+        ["better-tailwindcss/no-restricted-classes", true],
+        ["better-tailwindcss/no-restricted-classes", true],
+      ]
+    )
+  })
+
   it("leaves the installed components alone", () => {
     const messages = lint(
       `export const B = () => <button className="bg-[#fff]" />`,

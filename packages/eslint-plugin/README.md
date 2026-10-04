@@ -19,7 +19,9 @@ export default [...dsaireadable.configs.recommended]
   exactly this.
 - `configs.tailwind` — `eslint-plugin-better-tailwindcss` set up for the design
   system: a class its stylesheet does not generate (`bg-red-500`, `p-13`) is an
-  error, a disabled state reads `opacity-disabled`, and `--fix` writes a CSS
+  error, a disabled state reads `opacity-disabled`, a state drawn with an
+  opacity (`hover:bg-primary/80`, `data-open:bg-muted/50`) is an error that
+  names the state token to use, and `--fix` writes a CSS
   variable in Tailwind's shorthand (`w-[var(--x)]` becomes `w-(--x)`). The
   stylesheet is
   `styles/globals.css`; point `settings["better-tailwindcss"].entryPoint` at

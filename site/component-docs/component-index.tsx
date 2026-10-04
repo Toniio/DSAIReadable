@@ -86,7 +86,7 @@ function Card({ item }: { item: IndexCard }) {
     <Link
       href={`/components/${item.slug}/`}
       className={cn(
-        "flex h-full flex-col border bg-background transition-colors hover:border-foreground/30 hover:bg-muted",
+        "flex h-full flex-col border bg-background transition-colors hover:border-foreground hover:bg-muted",
         FOCUS_OUTLINE_RESET,
         FOCUS_RING
       )}

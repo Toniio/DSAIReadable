@@ -217,6 +217,7 @@ if (!existsSync(variantsPath)) {
           "destructive",
           "success",
           "warning",
+          "info",
           "outline",
           "ghost",
           "link",
@@ -226,7 +227,7 @@ if (!existsSync(variantsPath)) {
     },
     Alert: {
       variant: {
-        values: ["default", "destructive", "success", "warning"],
+        values: ["default", "destructive", "success", "warning", "info"],
         default: "default",
       },
     },
