@@ -20454,7 +20454,7 @@
       "**MUST NOT** — place more than one `Sidebar` per side in the same `SidebarProvider`",
       "**MUST** — check that a nested layout copes with the margins and shadows of the `floating` and `inset` variants",
       "**MUST** — give a `tooltip` to every `SidebarMenuButton` collapsed to its icon",
-      "**MUST** — render a `SidebarMenuButton` that has a `tooltip` under a `TooltipProvider`, in the root layout or around the `SidebarProvider`: its `Tooltip` throws without one",
+      "**MUST** — render a `Tooltip` outside the `SidebarProvider` under a `TooltipProvider`, in the root layout: it throws without one. `SidebarProvider` supplies one (`delayDuration` 0) to everything inside it, the `tooltip` of each `SidebarMenuButton` included",
       "**MUST NOT** — bind `Ctrl+B` / `⌘+B` to another action: `SidebarProvider` registers it to collapse the bar",
       "**MUST** — in an interface that is not in English, translate the strings the sidebar renders for screen readers: `toggleLabel` on `SidebarTrigger` and `SidebarRail`, `mobileTitle` and `mobileDescription` on `Sidebar` (defaults in `UI_STRINGS.sidebar`)"
     ],
@@ -20468,7 +20468,7 @@
       "`@/components/ui/separator` (the `Separator` component)",
       "`@/components/ui/sheet` (the `Sheet`, `SheetContent`, `SheetHeader`, `SheetTitle`, `SheetDescription` components)",
       "`@/components/ui/skeleton` (the `Skeleton` component)",
-      "`@/components/ui/tooltip` (the `Tooltip`, `TooltipContent`, `TooltipTrigger` components)",
+      "`@/components/ui/tooltip` (the `Tooltip`, `TooltipContent`, `TooltipProvider`, `TooltipTrigger` components)",
       "`@phosphor-icons/react` (the `SidebarIcon` icon)"
     ],
     "anatomy": [
@@ -21624,6 +21624,12 @@
     "shadcn": {
       "item": "sidebar",
       "divergences": [
+        {
+          "export": "SidebarProvider",
+          "type": "changed",
+          "upstream": "providers: (none)",
+          "note": "Wraps its children in a TooltipProvider (delayDuration 0, its default), as the earlier new-york sidebar of shadcn/ui did. Upstream supplies none, so the tooltip the Sidebar spec requires on each SidebarMenuButton collapsed to its icon throws there without a provider of the app's own. Nothing to write for the sidebar: a TooltipProvider in the root layout still works, and inside the SidebarProvider the nearer one, the sidebar's, sets the delay. A Tooltip outside the SidebarProvider still needs a TooltipProvider above it."
+        },
         {
           "export": "Sidebar",
           "prop": "mobileTitle",
