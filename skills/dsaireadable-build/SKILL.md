@@ -23,7 +23,7 @@ Copy this checklist and tick each step as you go:
 ```
 Build progress:
 - [ ] 1. Pattern: the screen's task has a page pattern? Read it
-- [ ] 2. Components: one detailed spec per component retained
+- [ ] 2. Components: their concise specs in one turn; detailed only if needed
 - [ ] 3. Rules: the foundations and the copy rules the screen touches
 - [ ] 4. Write the code
 - [ ] 5. Validate until zero errors
@@ -42,10 +42,25 @@ patterns.
 **2. Components.** For anything no pattern covers, call
 `dsaireadable_get_components` (filtered by `category` when you know it) and pick
 the component made for the job: a component exists for every control, so never
-rebuild one with a `div`. Then, for each component you retain, call
-`dsaireadable_get_component_specs` with `response_format: "detailed"`: props,
-variants and their defaults, sizes, constraints, and the composition rules that
-cover it. One call per component, and only for those you use.
+rebuild one with a `div`. Once you know every component the screen uses, the
+patterns' and your own, call `dsaireadable_get_component_specs` for each of
+them, all in the same turn, and only for those you use.
+
+Keep the default concise answer: the role, the MUST / MUST NOT constraints, the
+export names and how the API departs from shadcn/ui. Write the shadcn/ui API
+you know, except where a constraint or a divergence says otherwise. Ask for
+`response_format: "detailed"`, for that component alone, only when:
+
+- it is a composed component whose parts you assemble and whose structure its
+  constraints do not settle, such as `Sidebar`, `Combobox` or `Chart`: the
+  detailed answer adds its code example, the props of each part and the
+  composition rules that cover it;
+- a constraint or a divergence names a prop, a variant or a size whose values
+  or default you need to check.
+
+Every turn sends the whole conversation again, so a detailed spec read for
+nothing costs once per turn after it, at about five times the size of the
+concise one.
 
 **3. Rules.** `dsaireadable_get_design_rules` with a `category` gives the rules
 of a foundation (`spacing`, `color`, `focus`, `size`…) or of a component.
@@ -78,9 +93,10 @@ Call `dsaireadable_get_tokens` only for a token no rule names.
 **5. Validate.** Call `dsaireadable_validate_code` with the full file (the same
 ESLint rules a project runs, plus TypeScript), then
 `dsaireadable_validate_screen` (composition and token rules). Fix every error,
-then validate again; repeat until both report zero errors. When the project has
-`@dsaireadable/eslint-plugin` set up, run its ESLint on the file too: it also
-knows which Tailwind classes exist.
+then validate again; repeat until both report zero errors. An error you cannot
+fix from a component's concise spec is a constraint to check: ask for its
+detailed spec then. When the project has `@dsaireadable/eslint-plugin` set up,
+run its ESLint on the file too: it also knows which Tailwind classes exist.
 
 **6. Review.** Before you hand back, apply the `dsaireadable-ui-guard` skill:
 validation proves the code follows the system; the guard checks that the screen
@@ -90,6 +106,6 @@ is usable. Do not report the work as done before its verdict is a pass.
 
 Read the whole file first. Keep what already follows the system; change only
 what the request needs, with the same workflow for the components you add.
-When you touch a component, call `dsaireadable_get_component_specs` for it even
-if it is already on the screen: its constraints apply to your change. Validate
-the whole file, not only the lines you wrote.
+When you touch a component, read its spec as in step 2 even if it is already on
+the screen: its constraints apply to your change. Validate the whole file, not
+only the lines you wrote.

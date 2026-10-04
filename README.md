@@ -245,10 +245,10 @@ narrows the exclusion to the files the registry installed.
 Two [Agent Skills](https://agentskills.io/specification), in [`skills/`](./skills/),
 for any agent that loads them (Claude Code, Codex, Cursor, Copilot, Gemini CLI…):
 
-| Skill                   | What it does                                                                                                                                                                                                                                               |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dsaireadable-build`    | Builds or changes a screen MCP-first: the page pattern, then one detailed spec per component retained, then `dsaireadable_validate_code` and `dsaireadable_validate_screen` until both report zero errors                                                  |
-| `dsaireadable-ui-guard` | Reviews every screen it builds or changes for basic UI and UX errors before handing it back: a checklist in eight domains, then a `file:line — severity — rule — fix` review that ends in pass or fail. Each rule cites the spec or pattern that writes it |
+| Skill                   | What it does                                                                                                                                                                                                                                                                                |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dsaireadable-build`    | Builds or changes a screen MCP-first: the page pattern, then the concise spec of each component retained, in one turn (detailed only for a composed component or a constraint to check), then `dsaireadable_validate_code` and `dsaireadable_validate_screen` until both report zero errors |
+| `dsaireadable-ui-guard` | Reviews every screen it builds or changes for basic UI and UX errors before handing it back: a checklist in eight domains, then a `file:line — severity — rule — fix` review that ends in pass or fail. Each rule cites the spec or pattern that writes it                                  |
 
 The guard keeps only judgment: what a tool can check stays with the tools (the
 ESLint plugin, `dsaireadable_validate_code`, axe). It never copies a limit
