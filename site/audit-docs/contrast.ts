@@ -18,7 +18,14 @@ import { darkValue, tokenByName } from "@/site/lib/tokens"
 export type { ContrastGroup }
 
 /** The order of the groups: the blocking ones first, information last. */
-const GROUP_ORDER: ContrastGroup[] = ["focus", "text", "filled", "tint", "info"]
+const GROUP_ORDER: ContrastGroup[] = [
+  "focus",
+  "border",
+  "text",
+  "filled",
+  "tint",
+  "info",
+]
 
 interface Rgba {
   r: number

@@ -1,7 +1,7 @@
 // fails: axe, focus, lint:inline-svg, lint:native-elements, lint:off-system-classes
 // A sign-in screen built by hand: native controls, an inline icon, a raw color
 // and fields with no name. The raw white form stays white in dark mode, where
-// the focus ring is lighter: its controls' focus falls to 2.44:1. It navigates
+// the focus ring is lighter: its controls' focus falls to 1.24:1. It navigates
 // with next/navigation's useRouter, which stage B renders: it fails nothing
 // for that.
 "use client"

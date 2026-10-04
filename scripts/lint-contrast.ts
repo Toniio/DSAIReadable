@@ -21,11 +21,11 @@
  * about 1.9:1 it is never an indicator on its own, and `tests/focus.ts` fails
  * any tab stop whose indicator has no solid part.
  *
- * The resting border of a field, checkbox or radio (`border-input`) is the
- * boundary of the control, which WCAG 1.4.11 asks 3:1 for. It sits at about
- * 1.25:1 in light and 1.5:1 in dark, so it is reported for information, not
- * blocking: raising it is a change of token value, a decision of the
- * maintainer (the 0.2.0 backlog), not of a patch.
+ * The resting border of a field, checkbox or radio (`border-input`), and the
+ * solid `bg-input` track of an unchecked Switch, are the boundary of the
+ * control, which WCAG 1.4.11 asks 3:1 for: they are checked like any other
+ * pair, on the surface around them and, in dark, against the field's
+ * translucent fill (`bg-input-fill`, its own token since 0.2.0).
  *
  * Two levels, in a strict hierarchy:
  *   1. WCAG 2.2 AA ratios — blocking. The design system's conformance target,
@@ -57,13 +57,12 @@ let failures = 0
 let checked = 0
 const advisories: string[] = []
 const informative: string[] = []
-const restingBorders: string[] = []
 
 // The dark context comes from tokens/tokens.resolver.json.
 for (const m of measureContrast(loadTokens(ROOT))) {
   const { pair, mode } = m
   if (pair.informative) {
-    ;(pair.section === "border" ? restingBorders : informative).push(
+    informative.push(
       `ℹ️  ${mode.padEnd(5)} ${m.ratio.toFixed(2).padStart(5)}      ${pair.label}`
     )
     continue
@@ -89,13 +88,6 @@ console.log(
     "   It never marks focus alone: tests/focus.ts requires the solid part."
 )
 for (const line of informative) console.log(line)
-
-console.log(
-  "\n── The resting border of a control (information, non-blocking) ──\n" +
-    "   `border-input` against the surface under it: the boundary WCAG 1.4.11\n" +
-    "   asks 3:1 for. Below it, and a token value to decide, not to patch."
-)
-for (const line of restingBorders) console.log(line)
 
 console.log(
   "\n── Level 2 — APCA advisory (WCAG 3 preparation, non-blocking) ──\n" +

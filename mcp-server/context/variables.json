@@ -24,6 +24,14 @@
     "status": "active"
   },
   {
+    "path": "color.background.input",
+    "value_light": "{primitive.color.mist.200}",
+    "value_dark": "{primitive.color.white-alpha.15}",
+    "css_variable": "--color-background-input",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
     "path": "color.background.inverse",
     "value_light": "{primitive.color.mist.950}",
     "value_dark": "{primitive.color.white}",
@@ -121,16 +129,16 @@
   },
   {
     "path": "color.border.input",
-    "value_light": "{primitive.color.mist.200}",
-    "value_dark": "{primitive.color.white-alpha.15}",
+    "value_light": "{primitive.color.mist.500}",
+    "value_dark": "{primitive.color.mist.500}",
     "css_variable": "--color-border-input",
     "tier": "semantic",
     "status": "active"
   },
   {
     "path": "color.border.focus",
-    "value_light": "{primitive.color.mist.500}",
-    "value_dark": "{primitive.color.mist.400}",
+    "value_light": "{primitive.color.mist.800}",
+    "value_dark": "{primitive.color.mist.200}",
     "css_variable": "--color-border-focus",
     "tier": "semantic",
     "status": "active"

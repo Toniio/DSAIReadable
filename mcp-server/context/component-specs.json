@@ -3204,6 +3204,15 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30"
+        ],
+        "where": [
+          "bubbleVariants.variant.outline"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
@@ -3238,15 +3247,6 @@
         ],
         "where": [
           "BubbleContent"
-        ]
-      },
-      {
-        "token": "color.border.input",
-        "classes": [
-          "bg-input/30"
-        ],
-        "where": [
-          "bubbleVariants.variant.outline"
         ]
       },
       {
@@ -3618,6 +3618,16 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30",
+          "bg-input-fill/50"
+        ],
+        "where": [
+          "buttonVariants.variant.outline"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
@@ -3654,8 +3664,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
-          "bg-input/50",
           "border-input"
         ],
         "where": [
@@ -3956,7 +3964,7 @@
       },
       {
         "state": "hover",
-        "behavior": "`default` takes `bg-primary/80`, `secondary` `bg-secondary/80`, `destructive` `bg-destructive/20` (`dark:hover:bg-destructive/30`); `outline` and `ghost` take `bg-muted` with `text-foreground` (`dark:hover:bg-input/50` and `dark:hover:bg-muted/50` in dark mode); `link` underlines instead"
+        "behavior": "`default` takes `bg-primary/80`, `secondary` `bg-secondary/80`, `destructive` `bg-destructive/20` (`dark:hover:bg-destructive/30`); `outline` and `ghost` take `bg-muted` with `text-foreground` (`dark:hover:bg-input-fill/50` and `dark:hover:bg-muted/50` in dark mode); `link` underlines instead"
       },
       {
         "state": "focus",
@@ -3968,7 +3976,7 @@
       },
       {
         "state": "open",
-        "behavior": "While the popup it controls is open (`aria-expanded`), `ghost` takes `bg-muted` with `text-foreground`, and so does `outline`, in light and in dark mode (`dark:aria-expanded:bg-muted` replaces its `dark:bg-input/30` fill); `secondary` holds `bg-secondary` with `text-secondary-foreground`, without its hover fill"
+        "behavior": "While the popup it controls is open (`aria-expanded`), `ghost` takes `bg-muted` with `text-foreground`, and so does `outline`, in light and in dark mode (`dark:aria-expanded:bg-muted` replaces its `dark:bg-input-fill/30` fill); `secondary` holds `bg-secondary` with `text-secondary-foreground`, without its hover fill"
       },
       {
         "state": "disabled",
@@ -4045,21 +4053,21 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill"
+        ],
+        "where": [
+          "ButtonGroupSeparator"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted"
         ],
         "where": [
           "ButtonGroupText"
-        ]
-      },
-      {
-        "token": "color.border.input",
-        "classes": [
-          "bg-input"
-        ],
-        "where": [
-          "ButtonGroupSeparator"
         ]
       },
       {
@@ -6066,6 +6074,15 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30"
+        ],
+        "where": [
+          "Checkbox"
+        ]
+      },
+      {
         "token": "color.border.focus",
         "classes": [
           "border-ring",
@@ -6079,7 +6096,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
           "border-input"
         ],
         "where": [
@@ -6249,7 +6265,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Unchecked: transparent background (`dark:bg-input/30` in dark mode), `border-input` border, no icon"
+        "behavior": "Unchecked: transparent background (`dark:bg-input-fill/30` in dark mode), `border-input` border, no icon"
       },
       {
         "state": "hover",
@@ -6575,6 +6591,16 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30"
+        ],
+        "where": [
+          "ComboboxChips",
+          "ComboboxContent"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-accent",
@@ -6607,7 +6633,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
           "border-input",
           "border-input/30"
         ],
@@ -7347,6 +7372,15 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30"
+        ],
+        "where": [
+          "CommandInput"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted"
@@ -7377,7 +7411,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
           "border-input/30"
         ],
         "where": [
@@ -11814,6 +11847,17 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30",
+          "bg-input-fill/50",
+          "bg-input-fill/80"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
         "token": "color.border.focus",
         "classes": [
           "border-ring",
@@ -11826,9 +11870,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
-          "bg-input/50",
-          "bg-input/80",
           "border-input"
         ],
         "where": [
@@ -12003,7 +12044,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Transparent background (dark: `bg-input/30`), `border-input` border, `foreground` text"
+        "behavior": "Transparent background (dark: `bg-input-fill/30`), `border-input` border, `foreground` text"
       },
       {
         "state": "hover",
@@ -12019,7 +12060,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`pointer-events-none`, `cursor-not-allowed`, `bg-input/50`, `opacity-disabled` (dark: `bg-input/80`)"
+        "behavior": "`pointer-events-none`, `cursor-not-allowed`, `bg-input-fill/50`, `opacity-disabled` (dark: `bg-input-fill/80`)"
       },
       {
         "state": "error",
@@ -12106,6 +12147,17 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30",
+          "bg-input-fill/50",
+          "bg-input-fill/80"
+        ],
+        "where": [
+          "InputGroup"
+        ]
+      },
+      {
         "token": "color.border.focus",
         "classes": [
           "border-ring",
@@ -12118,9 +12170,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
-          "bg-input/50",
-          "bg-input/80",
           "border-input"
         ],
         "where": [
@@ -12513,7 +12562,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "`input` border, transparent background (dark: `bg-input/30`), `h-8` high"
+        "behavior": "`input` border, transparent background (dark: `bg-input-fill/30`), `h-8` high"
       },
       {
         "state": "hover",
@@ -12529,7 +12578,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`bg-input/50` background (dark: `bg-input/80`) and `opacity-disabled` on the whole group while its field (the `input-group-control` slot) is disabled, a field inside a `<fieldset disabled>` included; a disabled `InputGroupButton` alone leaves the group as it is. The field dims again through its own disabled style (`Input` and `Textarea` carry `opacity-disabled`), so its content renders at `opacity-disabled` applied twice (0.25 effective), and so does a disabled `ComboboxInput` or `PasswordInput` toggle; a disabled `CommandInput` dims only its input. `group-data-[disabled=true]/input-group` dims an add-on when the group carries `data-disabled=\"true\"`"
+        "behavior": "`bg-input-fill/50` background (dark: `bg-input-fill/80`) and `opacity-disabled` on the whole group while its field (the `input-group-control` slot) is disabled, a field inside a `<fieldset disabled>` included; a disabled `InputGroupButton` alone leaves the group as it is. The field dims again through its own disabled style (`Input` and `Textarea` carry `opacity-disabled`), so its content renders at `opacity-disabled` applied twice (0.25 effective), and so does a disabled `ComboboxInput` or `PasswordInput` toggle; a disabled `CommandInput` dims only its input. `group-data-[disabled=true]/input-group` dims an add-on when the group carries `data-disabled=\"true\"`"
       },
       {
         "state": "error",
@@ -12604,6 +12653,15 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30"
+        ],
+        "where": [
+          "InputOTPSlot"
+        ]
+      },
+      {
         "token": "color.border.focus",
         "classes": [
           "border-ring",
@@ -12616,7 +12674,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
           "border-input"
         ],
         "where": [
@@ -12848,7 +12905,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "Slots with an `input` border and a transparent background (dark: `bg-input/30`)"
+        "behavior": "Slots with an `input` border and a transparent background (dark: `bg-input-fill/30`)"
       },
       {
         "state": "hover",
@@ -15796,6 +15853,16 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30",
+          "bg-input-fill/50"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
         "token": "color.border.focus",
         "classes": [
           "border-ring",
@@ -15808,8 +15875,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
-          "bg-input/50",
           "border-input"
         ],
         "where": [
@@ -16037,7 +16102,7 @@
       },
       {
         "state": "hover",
-        "behavior": "In dark mode, the background turns `bg-input/50`"
+        "behavior": "In dark mode, the background turns `bg-input-fill/50`"
       },
       {
         "state": "focus",
@@ -17790,6 +17855,19 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30",
+          "bg-input-fill/50",
+          "bg-input-fill/80"
+        ],
+        "where": [
+          "QuestionnaireInput",
+          "QuestionnairePrevious via buttonVariants.variant.outline",
+          "QuestionnaireSkip via buttonVariants.variant.outline"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
@@ -17831,9 +17909,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
-          "bg-input/50",
-          "bg-input/80",
           "border-input"
         ],
         "where": [
@@ -18477,7 +18552,7 @@
       },
       {
         "state": "hover",
-        "behavior": "A choice takes `hover:bg-muted/50`; `QuestionnairePrevious` and `QuestionnaireSkip`, `outline` unless `variant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants` (`dark:hover:bg-input/50` in dark mode), and `QuestionnaireNext` and `QuestionnaireSubmit`, on the `default` variant, take `hover:bg-primary/80`"
+        "behavior": "A choice takes `hover:bg-muted/50`; `QuestionnairePrevious` and `QuestionnaireSkip`, `outline` unless `variant` says otherwise, take `hover:bg-muted` and `hover:text-foreground` from `buttonVariants` (`dark:hover:bg-input-fill/50` in dark mode), and `QuestionnaireNext` and `QuestionnaireSubmit`, on the `default` variant, take `hover:bg-primary/80`"
       },
       {
         "state": "focus",
@@ -18497,7 +18572,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`data-disabled` on a choice, `disabled` on the text input: `opacity-disabled`, not clickable; the text input also takes `bg-input/50`; a button given `disabled` takes `disabled:opacity-disabled` and `disabled:pointer-events-none` from `buttonVariants`"
+        "behavior": "`data-disabled` on a choice, `disabled` on the text input: `opacity-disabled`, not clickable; the text input also takes `bg-input-fill/50`; a button given `disabled` takes `disabled:opacity-disabled` and `disabled:pointer-events-none` from `buttonVariants`"
       },
       {
         "state": "error",
@@ -18591,6 +18666,15 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30"
+        ],
+        "where": [
+          "RadioGroupItem"
+        ]
+      },
+      {
         "token": "color.border.focus",
         "classes": [
           "border-ring",
@@ -18603,7 +18687,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
           "border-input"
         ],
         "where": [
@@ -19348,6 +19431,16 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30",
+          "bg-input-fill/50"
+        ],
+        "where": [
+          "SelectTrigger"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-accent"
@@ -19378,8 +19471,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
-          "bg-input/50",
           "border-input"
         ],
         "where": [
@@ -19810,7 +19901,7 @@
       },
       {
         "state": "hover",
-        "behavior": "In dark mode, the trigger's background turns `bg-input/50`"
+        "behavior": "In dark mode, the trigger's background turns `bg-input-fill/50`"
       },
       {
         "state": "focus",
@@ -22391,8 +22482,7 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input",
-          "bg-input/80"
+          "bg-input"
         ],
         "where": [
           "Switch"
@@ -22615,7 +22705,7 @@
       },
       {
         "state": "unchecked",
-        "behavior": "`input` background, thumb on the left (`translate-x-0`); in dark mode a `bg-input/80` track and a `bg-foreground` thumb"
+        "behavior": "A solid `bg-input` track, the control border token at 3:1 or more on every surface (the Switch has no border, the track is its boundary), thumb on the left (`translate-x-0`); in dark mode a `bg-foreground` thumb"
       },
       {
         "state": "disabled",
@@ -23099,6 +23189,15 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
           "bg-muted"
@@ -23123,7 +23222,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
           "border-input"
         ],
         "where": [
@@ -23432,7 +23530,7 @@
       },
       {
         "state": "active",
-        "behavior": "Selected trigger: `bg-background` background, `text-foreground` text (dark: `bg-input/30`, `border-input`); in the `line` variant the background stays transparent and the indicator bar shows (`opacity-100`)"
+        "behavior": "Selected trigger: `bg-background` background, `text-foreground` text (dark: `bg-input-fill/30`, `border-input`); in the `line` variant the background stays transparent and the indicator bar shows (`opacity-100`)"
       },
       {
         "state": "disabled",
@@ -23466,7 +23564,7 @@
       "**MUST NOT** — take single-line input → use `Input`",
       "**Note** — the field grows with its content (`field-sizing-content`); set a fixed height through `className`",
       "**Note** — minimum height: `min-h-16` (4rem)",
-      "**MUST NOT** — redefine the background without its dark counterpart (`dark:bg-input/30` by default)",
+      "**MUST NOT** — redefine the background without its dark counterpart (`dark:bg-input-fill/30` by default)",
       "**Note** — a server component: it renders without `\"use client\"`"
     ],
     "dependencies": [
@@ -23490,6 +23588,17 @@
         ]
       },
       {
+        "token": "color.background.input",
+        "classes": [
+          "bg-input-fill/30",
+          "bg-input-fill/50",
+          "bg-input-fill/80"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
         "token": "color.border.focus",
         "classes": [
           "border-ring",
@@ -23502,9 +23611,6 @@
       {
         "token": "color.border.input",
         "classes": [
-          "bg-input/30",
-          "bg-input/50",
-          "bg-input/80",
           "border-input"
         ],
         "where": [
@@ -23680,7 +23786,7 @@
       },
       {
         "state": "disabled",
-        "behavior": "`cursor-not-allowed`, `bg-input/50` background, reduced opacity (`opacity-disabled`)"
+        "behavior": "`cursor-not-allowed`, `bg-input-fill/50` background, reduced opacity (`opacity-disabled`)"
       },
       {
         "state": "error",

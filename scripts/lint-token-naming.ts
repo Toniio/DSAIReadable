@@ -96,6 +96,8 @@ const ENUMS: Record<string, string[]> = {
   /** Foreground relationship: the color that sits *on* a surface. */
   onSurface: ["default", "on", "foreground"],
   textRole: ["action", "destructive", "success", "warning"],
+  /** A surface that belongs to one kind of element: the fill of a form control. */
+  backgroundRole: ["input"],
   borderRole: ["default", "subtle", "input", "focus"],
   iconRole: ["default", "subtle", "action"],
   feedbackRole: ["error", "success", "warning", "info"],
@@ -236,6 +238,7 @@ const SEMANTIC_GRAMMAR: Grammar = {
   breakpoint: ["breakpoint.<breakpoint>"],
   color: [
     "color.background.<emphasis>",
+    "color.background.<backgroundRole>",
     "color.text.<emphasis>",
     "color.text.<textRole>.<onSurface>",
     "color.border.<borderRole>",

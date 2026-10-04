@@ -66,7 +66,12 @@
      at 4.5:1 on every surface in both modes. */
   --text-color-primary: var(--color-text-action-default);
   --color-border: var(--color-border-default);
+  /* --input stays the border, as in shadcn/ui: border-input and the solid
+     bg-input of a Switch track draw a control's boundary, at 3:1. The
+     translucent fills of fields (dark:bg-input-fill/30, disabled:…/50) read
+     their own token, so darkening the border never darkens a fill. */
   --color-input: var(--color-border-input);
+  --color-input-fill: var(--color-background-input);
   --color-ring: var(--color-border-focus);
   --color-chart-1: var(--color-chart-1);
   --color-chart-2: var(--color-chart-2);

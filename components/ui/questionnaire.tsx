@@ -263,7 +263,7 @@ function QuestionnaireInput({
       <QuestionnairePrimitive.Input
         data-slot="questionnaire-input"
         className={cn(
-          `h-8 min-h-11 w-full min-w-0 rounded-none border border-input bg-transparent px-2.5 py-1 text-xs transition-colors ${FOCUS_OUTLINE_RESET} ${FOCUS_RING} disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 sm:min-h-0 md:text-xs dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`,
+          `h-8 min-h-11 w-full min-w-0 rounded-none border border-input bg-transparent px-2.5 py-1 text-xs transition-colors ${FOCUS_OUTLINE_RESET} ${FOCUS_RING} disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input-fill/50 disabled:opacity-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 sm:min-h-0 md:text-xs dark:bg-input-fill/30 dark:disabled:bg-input-fill/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`,
           "selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground",
           className
         )}

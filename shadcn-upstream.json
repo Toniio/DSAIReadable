@@ -134,6 +134,18 @@
     },
     "utilities": {
       "opacity-50": "opacity-disabled",
+      "bg-input/30": {
+        "to": "bg-input-fill/30",
+        "reason": "--input is a control's border and is darkened to 3:1 (WCAG 1.4.11), so the translucent fills move to their own token, color.background.input (bg-input-fill), which keeps the former value: mist.200 in light, white at 15% in dark. A field's dark fill looks the same; drawn with bg-input/30 it would be mist.500 at 30%."
+      },
+      "bg-input/50": {
+        "to": "bg-input-fill/50",
+        "reason": "The disabled and hovered fill at 50%, on color.background.input for the same reason as bg-input/30: --input is now the 3:1 border."
+      },
+      "bg-input/80": {
+        "to": "bg-input-fill/80",
+        "reason": "The dark disabled fill at 80%, on color.background.input for the same reason as bg-input/30: --input is now the 3:1 border."
+      },
       "duration-100": "duration-fast",
       "duration-200": "duration-normal",
       "duration-300": "duration-slow",
@@ -352,7 +364,7 @@
         "classes": {
           "focus-visible:outline-1": {
             "to": "focus-visible:border-ring focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
-            "reason": "Upstream's 1px focus outline on the trigger and the link drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
+            "reason": "Upstream's 1px focus outline on the trigger and the link drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 14.82:1 light and 15.89:1 dark next to the ring-ring/50 halo, about 3.0:1 light and 4.5:1 dark alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
           },
           "data-popup-open:bg-muted/50": {
             "to": "",
@@ -444,6 +456,10 @@
       },
       "button-group": {
         "utilities": {
+          "bg-input": {
+            "to": "bg-input-fill",
+            "reason": "The separator between two buttons divides, it bounds no control: it keeps the former --input value through the fill token, bg-input-fill, instead of turning to the 3:1 control border."
+          },
           "z-10": {
             "to": "z-dropdown",
             "reason": "z-10 is 10; z-dropdown is 1000. A focused button of a group, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
@@ -464,7 +480,7 @@
           },
           "group-data-[focused=true]/day:border-ring": {
             "to": "group-data-[focused=true]/day:outline-solid group-data-[focused=true]/day:outline-(length:--border-width-default) group-data-[focused=true]/day:outline-ring",
-            "reason": "The focused day's border-ring drew nothing: the day button is border-0, so its indicator was the ring-ring/50 halo alone. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators), the treatment of every focusable element without a border."
+            "reason": "The focused day's border-ring drew nothing: the day button is border-0, so its indicator was the ring-ring/50 halo alone. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 14.82:1 light and 15.89:1 dark next to the ring-ring/50 halo, about 3.0:1 light and 4.5:1 dark alone (WCAG 1.4.11 read for focus indicators), the treatment of every focusable element without a border."
           }
         }
       },
@@ -508,7 +524,7 @@
           },
           "focus-visible:outline-hidden": {
             "to": "focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
-            "reason": "The handle hid its outline at focus and drew FOCUS_RING, whose border-ring paints nothing on a 1px line with no border: focus showed the halo alone. The outline is drawn instead: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators)."
+            "reason": "The handle hid its outline at focus and drew FOCUS_RING, whose border-ring paints nothing on a 1px line with no border: focus showed the halo alone. The outline is drawn instead: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 14.82:1 light and 15.89:1 dark next to the ring-ring/50 halo, about 3.0:1 light and 4.5:1 dark alone (WCAG 1.4.11 read for focus indicators)."
           },
           "aria-[orientation=vertical]:flex-col": {
             "to": "",
@@ -558,11 +574,17 @@
           },
           "focus-visible:outline-hidden": {
             "to": "focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
-            "reason": "The thumb's border-ring border is there at rest, so focus only added the ring-ring/50 halo, which hover and drag draw too. The outline is drawn instead of hidden: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators)."
+            "reason": "The thumb's border-ring border is there at rest, so focus only added the ring-ring/50 halo, which hover and drag draw too. The outline is drawn instead of hidden: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 14.82:1 light and 15.89:1 dark next to the ring-ring/50 halo, about 3.0:1 light and 4.5:1 dark alone (WCAG 1.4.11 read for focus indicators)."
           }
         }
       },
       "switch": {
+        "classes": {
+          "dark:data-unchecked:bg-input/80": {
+            "to": "",
+            "reason": "The unchecked track is the Switch's boundary (it has no border), so it keeps the solid bg-input, color.border.input, in dark too: 3.65:1 on the card, where bg-input/80 paints 2.84:1, under WCAG 1.4.11's 3:1."
+          }
+        },
         "utilities": {
           "h-[18.4px]": {
             "to": "h-5",
@@ -625,7 +647,7 @@
             "reason": "Never took effect, for the same reason as its border twin: the has-[[data-slot=input-group-control]:focus-visible] ring rule outranks it. A search field in a popup draws the standard 2px ring; the class is dropped so the source says so."
           },
           "has-disabled:bg-input/50": {
-            "to": "has-[[data-slot=input-group-control]:disabled]:bg-input/50",
+            "to": "has-[[data-slot=input-group-control]:disabled]:bg-input-fill/50",
             "reason": "has-disabled matches any disabled descendant, so a disabled InputGroupButton (a Send button) dimmed the whole group and the enabled field in it (text at 3.51:1, WCAG 1.4.3). The group now mirrors its own field only, [data-slot=input-group-control]."
           },
           "has-disabled:opacity-50": {
@@ -633,8 +655,8 @@
             "reason": "has-disabled matches any disabled descendant: a disabled InputGroupButton dimmed the whole group to 0.5 with the field enabled. The group now mirrors its own field only, [data-slot=input-group-control]; opacity-50 is opacity-disabled, as everywhere."
           },
           "dark:has-disabled:bg-input/80": {
-            "to": "dark:has-[[data-slot=input-group-control]:disabled]:bg-input/80",
-            "reason": "Same selector as has-disabled:bg-input/50, in dark: the group takes the disabled background from its own field only, not from a disabled button."
+            "to": "dark:has-[[data-slot=input-group-control]:disabled]:bg-input-fill/80",
+            "reason": "Same selector as has-disabled:bg-input/50, in dark: the group takes the disabled background from its own field only, not from a disabled button. Both read the fill token, bg-input-fill, as every translucent bg-input does."
           }
         }
       },
@@ -658,7 +680,7 @@
         "classes": {
           "focus-visible:outline-1": {
             "to": "focus-visible:border-ring focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
-            "reason": "Upstream's 1px focus outline on the viewport drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 4.61:1 light and 8.08:1 dark next to the ring-ring/50 halo, about 1.9:1 alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
+            "reason": "Upstream's 1px focus outline on the viewport drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 14.82:1 light and 15.89:1 dark next to the ring-ring/50 halo, about 3.0:1 light and 4.5:1 dark alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
           }
         }
       },
@@ -884,7 +906,7 @@
     },
     "command": {
       "status": "reanchored",
-      "reason": "The input's InputGroup draws the focus ring (WCAG 2.4.7): upstream's input-group rule never matches the command-input slot. The group has no border (border-none), so that halo alone, about 1.9:1, was the indicator: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.33:1 light and 6.35:1 dark on the popover as painted.",
+      "reason": "The input's InputGroup draws the focus ring (WCAG 2.4.7): upstream's input-group rule never matches the command-input slot. The group has no border (border-none), so that halo alone, 3.02:1 light and 4.19:1 dark, was the indicator: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 13.91:1 light and 12.47:1 dark on the popover as painted.",
       "added": [
         "has-[[data-slot=command-input]:focus-visible]:ring-(length:--space-focus-ring-width)",
         "has-[[data-slot=command-input]:focus-visible]:ring-ring/50",
@@ -971,7 +993,7 @@
     },
     "menubar": {
       "status": "reanchored",
-      "reason": "The menubar trigger draws FOCUS_RING: upstream shows no focus indicator on it (WCAG 2.4.7). MenubarCheckboxItem takes data-disabled:opacity-disabled and a size-4 icon, as its siblings do: every shadcn style omits both on the checkbox item alone. The trigger has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark.",
+      "reason": "The menubar trigger draws FOCUS_RING: upstream shows no focus indicator on it (WCAG 2.4.7). MenubarCheckboxItem takes data-disabled:opacity-disabled and a size-4 icon, as its siblings do: every shadcn style omits both on the checkbox item alone. The trigger has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 3.0:1 light and 4.5:1 dark: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 14.82:1 light and 15.89:1 dark.",
       "added": [
         "focus-visible:border-ring",
         "focus-visible:ring-(length:--space-focus-ring-width)",
@@ -1082,7 +1104,7 @@
     },
     "tabs": {
       "status": "reanchored",
-      "reason": "TabsContent, a tab stop, draws FOCUS_RING (WCAG 2.4.7); upstream resets its outline and draws nothing. TabsContent has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark, as TabsTrigger does.",
+      "reason": "TabsContent, a tab stop, draws FOCUS_RING (WCAG 2.4.7); upstream resets its outline and draws nothing. TabsContent has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 3.0:1 light and 4.5:1 dark: it also draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 14.82:1 light and 15.89:1 dark, as TabsTrigger does.",
       "added": [
         "focus-visible:border-ring",
         "focus-visible:ring-(length:--space-focus-ring-width)",
@@ -1103,7 +1125,7 @@
     },
     "toggle": {
       "status": "reanchored",
-      "reason": "The default variant has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 1.9:1: it draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.61:1 light and 8.08:1 dark. An invalid toggle keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators). The on state was the muted fill alone, the hover fill, at 1.11:1 on the page in light mode and 1.33:1 in dark: a pressed toggle could not be told from a hovered one (WCAG 1.4.11). It keeps the fill and draws a solid border-foreground frame (aria-pressed and data-[state=on], color.text.default), 19.72:1 light and 18.99:1 dark on the page, which hover does not draw. The default variant gets a transparent 1px border at rest (border border-transparent), so nothing moves when the frame shows, and keeps it transparent at focus (focus-visible:border-transparent), where its outline-ring draws the focus as before. On the outline variant, focus turns a pressed toggle's frame into the border-ring border (focus-visible:aria-pressed:border-ring, focus-visible:data-[state=on]:border-ring), as on an unpressed one: the frame alone did not change at focus, which left the ring-ring/50 halo alone, about 1.9:1.",
+      "reason": "The default variant has no border, so FOCUS_RING's border-ring paints nothing and focus showed the ring-ring/50 halo alone, about 3.0:1 light and 4.5:1 dark: it draws a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 14.82:1 light and 15.89:1 dark. An invalid toggle keeps its destructive border at focus, so focus showed the ring-destructive/20 halo alone (dark ring-destructive/40), about 1.4:1 light and 1.9:1 dark. At focus it draws a solid 1px outline-destructive (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark (WCAG 1.4.11 read for focus indicators). The on state was the muted fill alone, the hover fill, at 1.11:1 on the page in light mode and 1.33:1 in dark: a pressed toggle could not be told from a hovered one (WCAG 1.4.11). It keeps the fill and draws a solid border-foreground frame (aria-pressed and data-[state=on], color.text.default), 19.72:1 light and 18.99:1 dark on the page, which hover does not draw. The default variant gets a transparent 1px border at rest (border border-transparent), so nothing moves when the frame shows, and keeps it transparent at focus (focus-visible:border-transparent), where its outline-ring draws the focus as before. On the outline variant, focus turns a pressed toggle's frame into the border-ring border (focus-visible:aria-pressed:border-ring, focus-visible:data-[state=on]:border-ring), as on an unpressed one: the frame alone did not change at focus, which left the ring-ring/50 halo alone, about 3.0:1 light and 4.5:1 dark.",
       "added": [
         "focus-visible:outline-solid",
         "focus-visible:outline-(length:--border-width-default)",

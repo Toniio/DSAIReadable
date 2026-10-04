@@ -8,12 +8,13 @@
 
 ### Background
 
-| Token                       | CSS Variable                  | Light                | Dark                 | Usage                                                   |
-| --------------------------- | ----------------------------- | -------------------- | -------------------- | ------------------------------------------------------- |
-| `color.background.default`  | `--color-background-default`  | `#ffffff` (white)    | `#080b0c` (mist.950) | Main surface — the root page, the body                  |
-| `color.background.subtle`   | `--color-background-subtle`   | `#f1f4f5` (mist.100) | `#21292b` (mist.800) | Secondary surfaces — cards, muted areas                 |
-| `color.background.elevated` | `--color-background-elevated` | `#ffffff` (white)    | `#151b1d` (mist.900) | Floating surfaces — popovers, dropdowns, dialogs        |
-| `color.background.inverse`  | `--color-background-inverse`  | `#080b0c` (mist.950) | `#ffffff` (white)    | Inverted surfaces — dark tooltips, high-contrast badges |
+| Token                       | CSS Variable                  | Light                | Dark                          | Usage                                                                      |
+| --------------------------- | ----------------------------- | -------------------- | ----------------------------- | -------------------------------------------------------------------------- |
+| `color.background.default`  | `--color-background-default`  | `#ffffff` (white)    | `#080b0c` (mist.950)          | Main surface — the root page, the body                                     |
+| `color.background.subtle`   | `--color-background-subtle`   | `#f1f4f5` (mist.100) | `#21292b` (mist.800)          | Secondary surfaces — cards, muted areas                                    |
+| `color.background.elevated` | `--color-background-elevated` | `#ffffff` (white)    | `#151b1d` (mist.900)          | Floating surfaces — popovers, dropdowns, dialogs                           |
+| `color.background.input`    | `--color-background-input`    | `#e0e8ea` (mist.200) | white at 15% (white-alpha.15) | The fill of form controls, at an opacity: `bg-input-fill/30`, `/50`, `/80` |
+| `color.background.inverse`  | `--color-background-inverse`  | `#080b0c` (mist.950) | `#ffffff` (white)             | Inverted surfaces — dark tooltips, high-contrast badges                    |
 
 **Do / Don't:**
 
@@ -54,12 +55,14 @@
 | ---------------------- | ------------------------ | -------- | -------------- | ------------------------------------------ |
 | `color.border.default` | `--color-border-default` | mist.200 | white-alpha.10 | Standard separators, component outlines    |
 | `color.border.subtle`  | `--color-border-subtle`  | mist.200 | white-alpha.10 | Discreet separators, minimal visual weight |
-| `color.border.input`   | `--color-border-input`   | mist.200 | white-alpha.15 | The border of form fields                  |
-| `color.border.focus`   | `--color-border-focus`   | mist.500 | mist.400       | Focus ring for keyboard accessibility      |
+| `color.border.input`   | `--color-border-input`   | mist.500 | mist.500       | The boundary of form controls, at 3:1      |
+| `color.border.focus`   | `--color-border-focus`   | mist.800 | mist.200       | Focus ring for keyboard accessibility      |
 
 **Do / Don't:**
 
-- ✅ `border.input` for every `<input>`, `<select>` and `<textarea>` border.
+- ✅ `border.input` for every `<input>`, `<select>`, `<textarea>`, checkbox and radio border, and for the track of an unchecked Switch (`bg-input`): the boundary of a control, at 3:1 or more on the page, the card and the popover in both modes ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast)), blocking in `npm run tokens:lint-contrast`.
+- ❌ Do not paint a field's fill with `border.input` (`bg-input/30`): the translucent fills take `background.input` (`bg-input-fill/30`, `/50`, `/80`), so a darker border never darkens a fill.
+- ✅ `border.focus` sits 3:1 or more away from `border.input` (3.65:1 in light, 3.27:1 in dark): a focused field never reads as a resting one.
 - ❌ Do not use `border.focus` at rest or on hover — only for the `:focus-visible` state.
 - ✅ `border.subtle` for dividers between the sections of a page.
 - ❌ Do not mix `border.default` and `border.subtle` in the same component.
@@ -214,25 +217,26 @@ Turned on by the `.dark` class on `<html>`. Every override is defined in
 The tokens are exposed through `@theme inline` in `globals.css`, which generates
 these utility classes:
 
-| Class                     | Token                                                    |
-| ------------------------- | -------------------------------------------------------- |
-| `bg-background`           | `color.background.default`                               |
-| `bg-card`                 | `color.background.subtle`                                |
-| `bg-popover`              | `color.background.elevated`                              |
-| `text-foreground`         | `color.text.default`                                     |
-| `text-muted-foreground`   | `color.text.subtle`                                      |
-| `text-primary`            | `color.text.action.default` (through the shadcn mapping) |
-| `text-destructive`        | `color.text.destructive.default`                         |
-| `bg-destructive`          | `color.feedback.error.default`                           |
-| `text-success`            | `color.text.success.default`                             |
-| `bg-success`              | `color.feedback.success.default`                         |
-| `text-success-foreground` | `color.feedback.success.foreground`                      |
-| `text-warning`            | `color.text.warning.default`                             |
-| `bg-warning`              | `color.feedback.warning.default`                         |
-| `text-warning-foreground` | `color.feedback.warning.foreground`                      |
-| `border-border`           | `color.border.default`                                   |
-| `border-input`            | `color.border.input`                                     |
-| `ring-ring`               | `color.border.focus`                                     |
+| Class                      | Token                                                    |
+| -------------------------- | -------------------------------------------------------- |
+| `bg-background`            | `color.background.default`                               |
+| `bg-card`                  | `color.background.subtle`                                |
+| `bg-popover`               | `color.background.elevated`                              |
+| `text-foreground`          | `color.text.default`                                     |
+| `text-muted-foreground`    | `color.text.subtle`                                      |
+| `text-primary`             | `color.text.action.default` (through the shadcn mapping) |
+| `text-destructive`         | `color.text.destructive.default`                         |
+| `bg-destructive`           | `color.feedback.error.default`                           |
+| `text-success`             | `color.text.success.default`                             |
+| `bg-success`               | `color.feedback.success.default`                         |
+| `text-success-foreground`  | `color.feedback.success.foreground`                      |
+| `text-warning`             | `color.text.warning.default`                             |
+| `bg-warning`               | `color.feedback.warning.default`                         |
+| `text-warning-foreground`  | `color.feedback.warning.foreground`                      |
+| `border-border`            | `color.border.default`                                   |
+| `border-input`, `bg-input` | `color.border.input`                                     |
+| `bg-input-fill`            | `color.background.input`                                 |
+| `ring-ring`                | `color.border.focus`                                     |
 
 ---
 
@@ -252,8 +256,11 @@ WCAG 2.x ratios of the pairs under watch, as `npm run tokens:lint-contrast` meas
 
 | Pair                                                          | Light | Dark  | Threshold |
 | ------------------------------------------------------------- | ----- | ----- | --------- |
-| focus indicator's solid part on the `default` surface         | 4.06  | 7.89  | 3.0       |
-| focus indicator's solid part on the `subtle` surface          | 3.68  | 5.92  | 3.0       |
+| focus indicator's solid part on the `default` surface         | 14.82 | 15.89 | 3.0       |
+| focus indicator's solid part on the `subtle` surface          | 13.41 | 11.93 | 3.0       |
+| control border (`border.input`) on the `default` surface      | 4.06  | 4.86  | 3.0       |
+| control border on the `subtle` surface                        | 3.68  | 3.65  | 3.0       |
+| control border against a field's dark fill on the card        | —     | 3.17  | 3.0       |
 | sidebar focus ring on the sidebar surface                     | 3.89  | 4.28  | 3.0       |
 | `text.default` on `background.default`                        | 19.75 | 18.90 | 4.5       |
 | `text.subtle` on `background.default`                         | 5.92  | 7.89  | 4.5       |

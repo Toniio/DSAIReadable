@@ -326,6 +326,7 @@
   --color-background-default:  var(--ds-prim-color-white);
   --color-background-subtle:   var(--ds-prim-color-mist-100);
   --color-background-elevated: var(--ds-prim-color-white);
+  --color-background-input:    var(--ds-prim-color-mist-200);
   --color-background-inverse:  var(--ds-prim-color-mist-950);
 
   /* color · text */
@@ -342,8 +343,8 @@
   /* color · border */
   --color-border-default: var(--ds-prim-color-mist-200);
   --color-border-subtle:  var(--ds-prim-color-mist-200);
-  --color-border-input:   var(--ds-prim-color-mist-200);
-  --color-border-focus:   var(--ds-prim-color-mist-500);
+  --color-border-input:   var(--ds-prim-color-mist-500);
+  --color-border-focus:   var(--ds-prim-color-mist-800);
 
   /* color · icon */
   --color-icon-default: var(--ds-prim-color-mist-950);
@@ -567,6 +568,7 @@
   --color-background-default:  var(--ds-prim-color-mist-950);
   --color-background-subtle:   var(--ds-prim-color-mist-800);
   --color-background-elevated: var(--ds-prim-color-mist-900);
+  --color-background-input:    var(--ds-prim-color-white-alpha-15);
   --color-background-inverse:  var(--ds-prim-color-white);
 
   --color-text-default:             var(--ds-prim-color-mist-50);
@@ -580,8 +582,7 @@
 
   --color-border-default: var(--ds-prim-color-white-alpha-10);
   --color-border-subtle:  var(--ds-prim-color-white-alpha-10);
-  --color-border-input:   var(--ds-prim-color-white-alpha-15);
-  --color-border-focus:   var(--ds-prim-color-mist-400);
+  --color-border-focus:   var(--ds-prim-color-mist-200);
 
   --color-icon-default: var(--ds-prim-color-mist-50);
   --color-icon-subtle:  var(--ds-prim-color-mist-400);
