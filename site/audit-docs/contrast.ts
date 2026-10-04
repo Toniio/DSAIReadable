@@ -5,6 +5,7 @@ import {
   PAIRS,
   type Pair,
 } from "@/scripts/lib/contrast-pairs"
+import { oklchToSrgb } from "@/mcp-server/src/lib/dtcg"
 import { darkValue, tokenByName } from "@/site/lib/tokens"
 
 /**
@@ -26,7 +27,7 @@ interface Rgba {
   a: number
 }
 
-/** A resolved manifest color, a hex value or an rgba() one, as channels. */
+/** A resolved manifest color, a hex, oklch() or rgba() value, as channels. */
 function parse(value: string): Rgba {
   const text = value.trim()
   if (text.startsWith("#")) {
@@ -45,6 +46,16 @@ function parse(value: string): Rgba {
     }
   }
   const inner = /\(([^)]*)\)/.exec(text)?.[1]
+  if (text.startsWith("oklch") && inner) {
+    // tokens.css writes the palette in OKLCH: lightness as a percentage,
+    // then chroma, hue and an optional alpha after a slash.
+    const [l, c, h, a] = inner.split(/[\s/]+/).filter(Boolean)
+    const lightness = l.endsWith("%") ? Number(l.slice(0, -1)) / 100 : Number(l)
+    const [r, g, b] = oklchToSrgb([lightness, Number(c), Number(h)]).map(
+      (channel) => Math.round(Math.min(1, Math.max(0, channel)) * 255)
+    )
+    return { r, g, b, a: a === undefined ? 1 : Number(a) }
+  }
   if (text.startsWith("rgb") && inner) {
     const [r, g, b, a] = inner
       .split(/[\s,/]+/)

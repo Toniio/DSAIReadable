@@ -166,20 +166,20 @@ gives it:
 
 | Pair                                                                   | Light | Dark |
 | ---------------------------------------------------------------------- | ----- | ---- |
-| solid part (`border-ring`, `outline-ring`) on the page                 | 4.61  | 8.08 |
-| solid part on the card                                                 | 4.14  | 6.06 |
-| solid part on the popover                                              | 4.61  | 7.12 |
-| solid part on a field's `dark:bg-input/30` fill over the card          | —     | 5.27 |
-| invalid or destructive solid part on the page                          | 4.77  | 6.83 |
-| invalid or destructive solid part on the card                          | 4.28  | 5.12 |
-| invalid or destructive solid part on the popover                       | 4.77  | 6.02 |
-| sidebar focus ring on the sidebar surface                              | 4.44  | 3.77 |
-| halo (`ring-ring/50`) on the page, information only                    | 1.93  | 2.80 |
-| destructive halo (`ring-destructive/20`, dark `/40`), information only | 1.44  | 1.95 |
+| solid part (`border-ring`, `outline-ring`) on the page                 | 4.06  | 7.89 |
+| solid part on the card                                                 | 3.68  | 5.92 |
+| solid part on the popover                                              | 4.06  | 6.96 |
+| solid part on a field's `dark:bg-input/30` fill over the card          | —     | 5.16 |
+| invalid or destructive solid part on the page                          | 4.62  | 7.24 |
+| invalid or destructive solid part on the card                          | 4.18  | 5.43 |
+| invalid or destructive solid part on the popover                       | 4.62  | 6.38 |
+| sidebar focus ring on the sidebar surface                              | 3.89  | 4.28 |
+| halo (`ring-ring/50`) on the page, information only                    | 1.85  | 2.74 |
+| destructive halo (`ring-destructive/20`, dark `/40`), information only | 1.42  | 2.01 |
 
 `color.border.focus` is lighter in dark mode (`mist.400`, `mist.500` in light):
 at the light value, an InputGroupButton on a field's dark fill over a card
-measured 2.80:1.
+would measure 3.17:1, a margin of 0.17 where the dark value keeps 5.16:1.
 
 ---
 

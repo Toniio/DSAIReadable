@@ -57,7 +57,7 @@ The `@theme` bridge in `styles/globals.css` turns the token into a Tailwind clas
 Input, Textarea, Select, NativeSelect and ComboboxChipsInput color their placeholder with the subtle text token, each through the class its element answers to: `placeholder:text-muted-foreground` on an `<input>` or `<textarea>`, `data-placeholder:text-muted-foreground` on Select (Radix marks its empty trigger), `has-[option[value='']:checked]:text-muted-foreground` on NativeSelect (a `<select>` has no `::placeholder`; its empty-value option is the placeholder):
 
 ```tsx
-// ✅ What the fields do: color.text.subtle, 5.10:1 on white
+// ✅ What the fields do: color.text.subtle, 5.92:1 on white
 // Input draws its placeholder with placeholder:text-muted-foreground
 <Input placeholder="Search accounts…" />
 

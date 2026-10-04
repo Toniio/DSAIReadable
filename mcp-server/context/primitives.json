@@ -1,232 +1,517 @@
 [
   {
-    "path": "primitive.color.mist.0",
-    "value": "#ffffff",
-    "type": "color"
-  },
-  {
     "path": "primitive.color.mist.50",
-    "value": "#f9fbfb",
+    "value": "oklch(98.46% 0.0017 247.84)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.100",
-    "value": "#f1f3f3",
+    "value": "oklch(96.52% 0.0035 219.53)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.200",
-    "value": "#e3e7e8",
+    "value": "oklch(92.55% 0.009 214.34)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.mist.300",
+    "value": "oklch(82.95% 0.0163 216.69)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.400",
-    "value": "#9ca8ab",
+    "value": "oklch(71.56% 0.021 212.57)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.500",
-    "value": "#67787c",
+    "value": "oklch(59.08% 0.0208 213.49)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.600",
-    "value": "#607175",
+    "value": "oklch(50.11% 0.0215 213.54)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.700",
-    "value": "#424f52",
+    "value": "oklch(40.1% 0.0197 211.14)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.800",
-    "value": "#22292b",
+    "value": "oklch(27.4% 0.0119 214.54)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.900",
-    "value": "#161b1d",
+    "value": "oklch(21.69% 0.0098 219.96)",
     "type": "color"
   },
   {
     "path": "primitive.color.mist.950",
-    "value": "#090b0c",
+    "value": "oklch(14.65% 0.0056 219)",
     "type": "color"
   },
   {
     "path": "primitive.color.violet.50",
-    "value": "#eef2ff",
+    "value": "oklch(98.58% 0.0067 277.17)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.violet.100",
+    "value": "oklch(96.54% 0.0164 274.82)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.violet.200",
+    "value": "oklch(92.6% 0.0357 277.03)",
     "type": "color"
   },
   {
     "path": "primitive.color.violet.300",
-    "value": "#a3b3ff",
+    "value": "oklch(83.05% 0.085 277.04)",
     "type": "color"
   },
   {
     "path": "primitive.color.violet.400",
-    "value": "#6e6cff",
+    "value": "oklch(71.46% 0.1499 276.88)",
     "type": "color"
   },
   {
     "path": "primitive.color.violet.500",
-    "value": "#615fff",
-    "type": "color"
-  },
-  {
-    "path": "primitive.color.violet.550",
-    "value": "#4f39f6",
+    "value": "oklch(58.95% 0.2266 277.16)",
     "type": "color"
   },
   {
     "path": "primitive.color.violet.600",
-    "value": "#432dd7",
+    "value": "oklch(49.97% 0.2389 276.79)",
     "type": "color"
   },
   {
     "path": "primitive.color.violet.700",
-    "value": "#372aac",
+    "value": "oklch(39.99% 0.2156 276.99)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.violet.800",
+    "value": "oklch(27.51% 0.143 276.93)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.violet.900",
+    "value": "oklch(21.79% 0.1078 276.9)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.violet.950",
+    "value": "oklch(14.8% 0.0725 276.39)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.red.50",
+    "value": "oklch(98.42% 0.0076 27.23)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.red.100",
+    "value": "oklch(96.42% 0.0176 26.09)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.red.200",
+    "value": "oklch(92.44% 0.0385 27.76)",
     "type": "color"
   },
   {
     "path": "primitive.color.red.300",
-    "value": "#ffa2a2",
+    "value": "oklch(82.99% 0.0946 28.05)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.red.400",
+    "value": "oklch(71.49% 0.1787 28.33)",
     "type": "color"
   },
   {
     "path": "primitive.color.red.500",
-    "value": "#ff6467",
+    "value": "oklch(59.09% 0.2389 28.47)",
     "type": "color"
   },
   {
     "path": "primitive.color.red.600",
-    "value": "#e7000b",
+    "value": "oklch(49.96% 0.2045 28.47)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.red.700",
+    "value": "oklch(40.01% 0.1637 28.38)",
     "type": "color"
   },
   {
     "path": "primitive.color.red.800",
-    "value": "#9f0712",
+    "value": "oklch(27.56% 0.1128 28.58)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.red.900",
+    "value": "oklch(21.9% 0.0895 27.95)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.red.950",
+    "value": "oklch(14.76% 0.0606 29.23)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.green.50",
+    "value": "oklch(98.48% 0.0179 134.92)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.green.100",
+    "value": "oklch(96.56% 0.0337 132.94)",
     "type": "color"
   },
   {
     "path": "primitive.color.green.200",
-    "value": "#bbf451",
+    "value": "oklch(92.58% 0.0749 133.27)",
     "type": "color"
   },
   {
     "path": "primitive.color.green.300",
-    "value": "#7ccf00",
+    "value": "oklch(83.04% 0.1477 133.49)",
     "type": "color"
   },
   {
     "path": "primitive.color.green.400",
-    "value": "#5ea500",
+    "value": "oklch(71.48% 0.184 133.22)",
     "type": "color"
   },
   {
     "path": "primitive.color.green.500",
-    "value": "#497d00",
+    "value": "oklch(59.06% 0.1674 133.26)",
     "type": "color"
   },
   {
     "path": "primitive.color.green.600",
-    "value": "#3c6300",
+    "value": "oklch(49.97% 0.1416 133.23)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.green.700",
+    "value": "oklch(40.1% 0.1138 133.33)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.green.800",
+    "value": "oklch(27.46% 0.0777 133.15)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.green.900",
+    "value": "oklch(21.92% 0.0619 133.07)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.green.950",
+    "value": "oklch(14.69% 0.0421 133.96)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.50",
+    "value": "oklch(98.55% 0.0164 162.76)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.100",
+    "value": "oklch(96.4% 0.0304 162.22)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.200",
+    "value": "oklch(92.54% 0.0669 162.17)",
     "type": "color"
   },
   {
     "path": "primitive.color.emerald.300",
-    "value": "#5ee9b5",
+    "value": "oklch(82.88% 0.1347 162.03)",
     "type": "color"
   },
   {
     "path": "primitive.color.emerald.400",
-    "value": "#00d492",
+    "value": "oklch(71.4% 0.1566 162.01)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.500",
+    "value": "oklch(58.92% 0.129 162.1)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.600",
+    "value": "oklch(50% 0.1102 161.68)",
     "type": "color"
   },
   {
     "path": "primitive.color.emerald.700",
-    "value": "#007a55",
+    "value": "oklch(40.06% 0.0877 162.11)",
     "type": "color"
   },
   {
     "path": "primitive.color.emerald.800",
-    "value": "#006045",
+    "value": "oklch(27.33% 0.0599 162.09)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.900",
+    "value": "oklch(21.89% 0.0484 161.5)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.emerald.950",
+    "value": "oklch(14.89% 0.0325 162.38)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.50",
+    "value": "oklch(98.47% 0.0083 236.56)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.100",
+    "value": "oklch(96.61% 0.0183 237.76)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.200",
+    "value": "oklch(92.52% 0.041 238.05)",
     "type": "color"
   },
   {
     "path": "primitive.color.blue.300",
-    "value": "#8fd6fa",
+    "value": "oklch(83.11% 0.0817 237.99)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.400",
+    "value": "oklch(71.5% 0.1026 238.54)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.500",
+    "value": "oklch(58.95% 0.1025 238.59)",
     "type": "color"
   },
   {
     "path": "primitive.color.blue.600",
-    "value": "#438fbd",
+    "value": "oklch(49.88% 0.1022 238.19)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.700",
+    "value": "oklch(39.95% 0.0896 238.69)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.800",
+    "value": "oklch(27.47% 0.0614 238.49)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.900",
+    "value": "oklch(21.89% 0.0464 237.25)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.blue.950",
+    "value": "oklch(14.75% 0.0303 240.35)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.50",
+    "value": "oklch(98.38% 0.0171 110.27)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.100",
+    "value": "oklch(96.53% 0.0316 110.85)",
     "type": "color"
   },
   {
     "path": "primitive.color.yellow.200",
-    "value": "#e5e747",
+    "value": "oklch(92.48% 0.0689 110.36)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.300",
+    "value": "oklch(83.02% 0.1386 109.98)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.400",
+    "value": "oklch(71.44% 0.1557 109.77)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.500",
+    "value": "oklch(58.95% 0.129 110.31)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.600",
+    "value": "oklch(49.98% 0.1094 110.43)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.700",
+    "value": "oklch(39.96% 0.0871 109.77)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.800",
+    "value": "oklch(27.59% 0.0601 109.77)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.900",
+    "value": "oklch(21.92% 0.0478 109.77)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.yellow.950",
+    "value": "oklch(14.94% 0.0326 109.77)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.50",
+    "value": "oklch(98.47% 0.0176 92.68)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.100",
+    "value": "oklch(96.4% 0.0312 84.59)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.200",
+    "value": "oklch(92.51% 0.0697 80.17)",
     "type": "color"
   },
   {
     "path": "primitive.color.amber.300",
-    "value": "#ffd230",
+    "value": "oklch(83.07% 0.1381 75.64)",
     "type": "color"
   },
   {
     "path": "primitive.color.amber.400",
-    "value": "#ffb900",
-    "type": "color"
-  },
-  {
-    "path": "primitive.color.amber.450",
-    "value": "#fe9a00",
+    "value": "oklch(71.5% 0.1547 70.26)",
     "type": "color"
   },
   {
     "path": "primitive.color.amber.500",
-    "value": "#c89005",
+    "value": "oklch(58.96% 0.1317 65.56)",
     "type": "color"
   },
   {
     "path": "primitive.color.amber.600",
-    "value": "#af8526",
+    "value": "oklch(49.96% 0.117 60.18)",
     "type": "color"
   },
   {
     "path": "primitive.color.amber.700",
-    "value": "#973c08",
+    "value": "oklch(40.01% 0.0992 54.84)",
     "type": "color"
   },
   {
     "path": "primitive.color.amber.800",
-    "value": "#734e00",
+    "value": "oklch(27.51% 0.0714 51.3)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.900",
+    "value": "oklch(21.73% 0.0618 45.27)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.amber.950",
+    "value": "oklch(15% 0.0455 41.77)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.50",
+    "value": "oklch(98.42% 0.0101 311.18)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.100",
+    "value": "oklch(96.57% 0.0216 309.56)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.200",
+    "value": "oklch(92.5% 0.0481 309.77)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.300",
+    "value": "oklch(82.9% 0.1149 310.07)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.400",
+    "value": "oklch(71.6% 0.1598 310.13)",
     "type": "color"
   },
   {
     "path": "primitive.color.plum.500",
-    "value": "#9b5f7c",
+    "value": "oklch(58.94% 0.1602 309.97)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.600",
+    "value": "oklch(50.04% 0.1603 309.98)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.700",
+    "value": "oklch(39.96% 0.1442 309.95)",
     "type": "color"
   },
   {
     "path": "primitive.color.plum.800",
-    "value": "#4d2761",
+    "value": "oklch(27.46% 0.097 310.17)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.900",
+    "value": "oklch(21.79% 0.0708 309.97)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.plum.950",
+    "value": "oklch(14.93% 0.046 310.61)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.white",
+    "value": "oklch(100% 0 0)",
     "type": "color"
   },
   {
     "path": "primitive.color.black",
-    "value": "#000000",
+    "value": "oklch(0% 0 0)",
     "type": "color"
   },
   {
     "path": "primitive.color.white-alpha.10",
-    "value": "rgba(255, 255, 255, 0.1)",
+    "value": "oklch(100% 0 0 / 0.1)",
     "type": "color"
   },
   {
     "path": "primitive.color.white-alpha.15",
-    "value": "rgba(255, 255, 255, 0.15)",
+    "value": "oklch(100% 0 0 / 0.15)",
     "type": "color"
   },
   {
@@ -736,72 +1021,72 @@
   },
   {
     "path": "primitive.elevation.light.xs",
-    "value": "0 1px 2px rgba(0, 0, 0, 0.04)",
+    "value": "0 1px 2px oklch(0% 0 0 / 0.04)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.light.sm",
-    "value": "0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)",
+    "value": "0 1px 3px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.04)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.light.md",
-    "value": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04)",
+    "value": "0 4px 6px oklch(0% 0 0 / 0.07), 0 2px 4px oklch(0% 0 0 / 0.04)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.light.lg",
-    "value": "0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04)",
+    "value": "0 10px 15px oklch(0% 0 0 / 0.08), 0 4px 6px oklch(0% 0 0 / 0.04)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.light.xl",
-    "value": "0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.03)",
+    "value": "0 20px 25px oklch(0% 0 0 / 0.08), 0 10px 10px oklch(0% 0 0 / 0.03)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.light.2xl",
-    "value": "0 25px 50px rgba(0, 0, 0, 0.12)",
+    "value": "0 25px 50px oklch(0% 0 0 / 0.12)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.light.inner",
-    "value": "inset 0 2px 4px rgba(0, 0, 0, 0.05)",
+    "value": "inset 0 2px 4px oklch(0% 0 0 / 0.05)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.dark.xs",
-    "value": "0 1px 2px rgba(0, 0, 0, 0.2)",
+    "value": "0 1px 2px oklch(0% 0 0 / 0.2)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.dark.sm",
-    "value": "0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)",
+    "value": "0 1px 3px oklch(0% 0 0 / 0.3), 0 1px 2px oklch(0% 0 0 / 0.2)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.dark.md",
-    "value": "0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.18)",
+    "value": "0 4px 6px oklch(0% 0 0 / 0.25), 0 2px 4px oklch(0% 0 0 / 0.18)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.dark.lg",
-    "value": "0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2)",
+    "value": "0 10px 15px oklch(0% 0 0 / 0.3), 0 4px 6px oklch(0% 0 0 / 0.2)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.dark.xl",
-    "value": "0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2)",
+    "value": "0 20px 25px oklch(0% 0 0 / 0.35), 0 10px 10px oklch(0% 0 0 / 0.2)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.dark.2xl",
-    "value": "0 25px 50px rgba(0, 0, 0, 0.5)",
+    "value": "0 25px 50px oklch(0% 0 0 / 0.5)",
     "type": "shadow"
   },
   {
     "path": "primitive.elevation.dark.inner",
-    "value": "inset 0 2px 4px rgba(0, 0, 0, 0.3)",
+    "value": "inset 0 2px 4px oklch(0% 0 0 / 0.3)",
     "type": "shadow"
   },
   {
