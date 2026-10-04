@@ -677,7 +677,7 @@
       "**MUST** — keep `FieldLegend variant=\"legend\"` for `<fieldset>`s; everywhere else, `variant=\"label\"`",
       "**Note** — `FieldError` renders nothing without `children` or a non-empty `errors`",
       "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`",
-      "**Note** — a choice card is a `FieldLabel` wrapping a `Field orientation=\"horizontal\"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring",
+      "**Note** — a choice card is a `FieldLabel` wrapping a `Field orientation=\"horizontal\"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring, and takes the card's text as its name",
       "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)"
     ],
     "Heading": [

@@ -35,7 +35,7 @@ A layout system for form fields: it ties a label to its control, carries the inv
 - **MUST** — keep `FieldLegend variant="legend"` for `<fieldset>`s; everywhere else, `variant="label"`
 - **Note** — `FieldError` renders nothing without `children` or a non-empty `errors`
 - **MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`
-- **Note** — a choice card is a `FieldLabel` wrapping a `Field orientation="horizontal"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring
+- **Note** — a choice card is a `FieldLabel` wrapping a `Field orientation="horizontal"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring, and takes the card's text as its name
 - **MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)
 
 ## Dependencies
@@ -47,18 +47,18 @@ A layout system for form fields: it ties a label to its control, carries the inv
 
 ## Anatomy
 
-| Slot                                  | Role                                                                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `data-slot="field-set"`               | Root `<fieldset>`; groups semantically related fields                                       |
-| `data-slot="field-legend"`            | The fieldset's `<legend>`, the group's title; carries `data-variant`                        |
-| `data-slot="field-group"`             | Spaced vertical `<div>` container (`gap-5`); defines the `@container/field-group` container |
-| `data-slot="field"`                   | A field's main `<div role="group">`; carries `data-orientation` and receives `data-invalid` |
-| `data-slot="field-label"`             | The field's `<label>` (`FieldLabel`) or a non-interactive title (`FieldTitle`)              |
-| `data-slot="field-content"`           | Text column `<div>` (title and description) next to a control                               |
-| `data-slot="field-description"`       | Help text `<p>` below the control                                                           |
-| `data-slot="field-error"`             | Validation error message, a `<div role="alert">`                                            |
-| `data-slot="field-separator"`         | Separator `<div>` between groups; carries `data-content`                                    |
-| `data-slot="field-separator-content"` | Label `<span>` centered on the separator                                                    |
+| Slot                                  | Role                                                                                                                          |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `data-slot="field-set"`               | Root `<fieldset>`; groups semantically related fields                                                                         |
+| `data-slot="field-legend"`            | The fieldset's `<legend>`, the group's title; carries `data-variant`                                                          |
+| `data-slot="field-group"`             | Spaced vertical `<div>` container (`gap-5`); defines the `@container/field-group` container                                   |
+| `data-slot="field"`                   | A field's main `<div role="group">`, a plain `<div>` in a choice card; carries `data-orientation` and receives `data-invalid` |
+| `data-slot="field-label"`             | The field's `<label>` (`FieldLabel`) or a non-interactive title (`FieldTitle`)                                                |
+| `data-slot="field-content"`           | Text column `<div>` (title and description) next to a control                                                                 |
+| `data-slot="field-description"`       | Help text `<p>` below the control                                                                                             |
+| `data-slot="field-error"`             | Validation error message, a `<div role="alert">`                                                                              |
+| `data-slot="field-separator"`         | Separator `<div>` between groups; carries `data-content`                                                                      |
+| `data-slot="field-separator-content"` | Label `<span>` centered on the separator                                                                                      |
 
 ## Tokens
 
@@ -237,13 +237,13 @@ Composes `Label`, `Separator` — their states are listed in their own specs.
 
 **Pattern**: Form field group
 
-**Role**: `Field` carries `role="group"`; `FieldSet` / `FieldLegend` render `fieldset` / `legend`; `FieldError` carries `role="alert"`.
+**Role**: `Field` carries `role="group"`, except inside a `FieldLabel`: the text of a group inside a `<label>` is left out of the name the label gives its control; `FieldSet` / `FieldLegend` render `fieldset` / `legend`; `FieldError` carries `role="alert"`.
 
 **Keyboard**:
 
 No interaction of its own; the control inside keeps its keyboard behavior.
 
-**Accessible name**: `FieldLabel` must be tied to the control (`htmlFor` / `id`). A group of checkboxes or radios is named by its `FieldLegend`.
+**Accessible name**: `FieldLabel` must be tied to the control (`htmlFor` / `id`). A group of checkboxes or radios is named by its `FieldLegend`. In a choice card, the `FieldLabel` names its control with the card's text, `FieldTitle` then `FieldDescription`.
 
 **Pitfalls**:
 
