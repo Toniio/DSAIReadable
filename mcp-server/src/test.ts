@@ -512,6 +512,12 @@ const NEGATIVE_FIXTURES: Array<{ rule: string; label: string; code: string }> =
       code: `import { useState } from "react"
 export const C = () => <div>{useState(0)[0]}</div>`,
     },
+    {
+      rule: "tooltip-provider",
+      label: "a Tooltip with no provider in the file",
+      code: `import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+export const C = () => <Tooltip><TooltipTrigger>Plan</TooltipTrigger><TooltipContent>Renews monthly</TooltipContent></Tooltip>`,
+    },
   ]
 
 const declaredRules = new Set([
@@ -575,6 +581,73 @@ assert(
         .map((i) => `${i.rule}@${i.line}`)
         .join(", ")}`
 )
+
+// tooltip-provider: a Tooltip throws without a provider above it. A warning,
+// not an error: the provider often lives in the root layout, which a check of
+// one file does not see. A SidebarProvider supplies one.
+{
+  const tooltip = `<Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="ghost">Copy</Button>
+        </TooltipTrigger>
+        <TooltipContent>Copy the link</TooltipContent>
+      </Tooltip>`
+  const screen = (open: string, close: string, imports = "") =>
+    `import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"${imports}
+
+export function CopyLink() {
+  return (
+    ${open}
+      ${tooltip}
+    ${close}
+  )
+}`
+  const flagged = (code: string) =>
+    validateScreen(code).issues.filter((i) => i.rule === "tooltip-provider")
+
+  const lone = validateScreen(screen("<div>", "</div>"))
+  const [issue] = lone.issues.filter((i) => i.rule === "tooltip-provider")
+  const warned =
+    issue?.severity === "warning" &&
+    issue.line === 12 &&
+    lone.total_issues === 1 &&
+    lone.errors === 0
+  assert(
+    warned,
+    `tooltip-provider warns once, at the <Tooltip> line, on a Tooltip with no provider${warned ? "" : ` (got ${JSON.stringify(lone.issues)})`}`
+  )
+  const underProvider = flagged(
+    screen("<TooltipProvider>", "</TooltipProvider>")
+  )
+  assert(
+    underProvider.length === 0,
+    "tooltip-provider passes a Tooltip under a TooltipProvider"
+  )
+  const inSidebar = flagged(
+    screen(
+      "<SidebarProvider>\n      <SidebarInset>",
+      "</SidebarInset>\n    </SidebarProvider>",
+      `\nimport { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"`
+    )
+  )
+  assert(
+    inSidebar.length === 0,
+    "tooltip-provider passes a Tooltip inside a SidebarProvider, which supplies one"
+  )
+  const commented = flagged(
+    `import { Button } from "@/components/ui/button"\n// <Tooltip> needs a provider\nexport const C = () => <Button>Save</Button>`
+  )
+  assert(
+    commented.length === 0,
+    "tooltip-provider reads no <Tooltip> in a comment"
+  )
+}
 
 // --- Test 6b: dsaireadable_validate_code (P4-05) ---
 // The design system's ESLint rules, run on the syntax tree. One failing
