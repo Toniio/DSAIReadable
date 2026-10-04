@@ -19,7 +19,7 @@ import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { luminance } from "./wcag.js"
-import { cssValue, primitiveGroups } from "../mcp-server/src/lib/dtcg.js"
+import { primitiveGroups, srgbCss } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const HEX = /^#[0-9a-f]{6}$/i
@@ -38,7 +38,7 @@ for (const [palette, steps] of Object.entries(colors)) {
     .filter(([step]) => /^\d+$/.test(step))
     .map(([step, leaf]) => ({
       step: Number(step),
-      hex: cssValue(leaf.$value, leaf.$type),
+      hex: srgbCss(leaf.$value),
     }))
     .filter(({ hex }) => HEX.test(hex))
     .map((entry) => ({ ...entry, lum: luminance(entry.hex) }))

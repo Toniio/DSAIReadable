@@ -1,7 +1,7 @@
 [
   {
     "path": "color.background.default",
-    "value_light": "{primitive.color.mist.0}",
+    "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
     "css_variable": "--color-background-default",
     "tier": "semantic",
@@ -17,7 +17,7 @@
   },
   {
     "path": "color.background.elevated",
-    "value_light": "{primitive.color.mist.0}",
+    "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.900}",
     "css_variable": "--color-background-elevated",
     "tier": "semantic",
@@ -26,7 +26,7 @@
   {
     "path": "color.background.inverse",
     "value_light": "{primitive.color.mist.950}",
-    "value_dark": "{primitive.color.mist.0}",
+    "value_dark": "{primitive.color.white}",
     "css_variable": "--color-background-inverse",
     "tier": "semantic",
     "status": "reserved"
@@ -57,7 +57,7 @@
   },
   {
     "path": "color.text.inverse",
-    "value_light": "{primitive.color.mist.0}",
+    "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
     "css_variable": "--color-text-inverse",
     "tier": "semantic",
@@ -81,7 +81,7 @@
   },
   {
     "path": "color.text.destructive.default",
-    "value_light": "{primitive.color.red.800}",
+    "value_light": "{primitive.color.red.700}",
     "value_dark": "{primitive.color.red.300}",
     "css_variable": "--color-text-destructive-default",
     "tier": "semantic",
@@ -89,7 +89,7 @@
   },
   {
     "path": "color.text.success.default",
-    "value_light": "{primitive.color.emerald.800}",
+    "value_light": "{primitive.color.emerald.700}",
     "value_dark": "{primitive.color.emerald.300}",
     "css_variable": "--color-text-success-default",
     "tier": "semantic",
@@ -97,7 +97,7 @@
   },
   {
     "path": "color.text.warning.default",
-    "value_light": "{primitive.color.amber.700}",
+    "value_light": "{primitive.color.amber.600}",
     "value_dark": "{primitive.color.amber.300}",
     "css_variable": "--color-text-warning-default",
     "tier": "semantic",
@@ -177,15 +177,15 @@
   },
   {
     "path": "color.feedback.error.default",
-    "value_light": "{primitive.color.red.600}",
-    "value_dark": "{primitive.color.red.500}",
+    "value_light": "{primitive.color.red.500}",
+    "value_dark": "{primitive.color.red.400}",
     "css_variable": "--color-feedback-error-default",
     "tier": "semantic",
     "status": "active"
   },
   {
     "path": "color.feedback.error.foreground",
-    "value_light": "{primitive.color.mist.0}",
+    "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
     "css_variable": "--color-feedback-error-foreground",
     "tier": "semantic",
@@ -193,7 +193,7 @@
   },
   {
     "path": "color.feedback.success.default",
-    "value_light": "{primitive.color.emerald.700}",
+    "value_light": "{primitive.color.emerald.600}",
     "value_dark": "{primitive.color.emerald.400}",
     "css_variable": "--color-feedback-success-default",
     "tier": "semantic",
@@ -201,7 +201,7 @@
   },
   {
     "path": "color.feedback.success.foreground",
-    "value_light": "{primitive.color.mist.0}",
+    "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
     "css_variable": "--color-feedback-success-foreground",
     "tier": "semantic",
@@ -209,8 +209,8 @@
   },
   {
     "path": "color.feedback.warning.default",
-    "value_light": "{primitive.color.amber.450}",
-    "value_dark": "{primitive.color.amber.400}",
+    "value_light": "{primitive.color.amber.400}",
+    "value_dark": "{primitive.color.amber.300}",
     "css_variable": "--color-feedback-warning-default",
     "tier": "semantic",
     "status": "active"
@@ -225,24 +225,24 @@
   },
   {
     "path": "color.chart.1",
-    "value_light": "{primitive.color.violet.600}",
-    "value_dark": "{primitive.color.violet.400}",
+    "value_light": "{primitive.color.violet.700}",
+    "value_dark": "{primitive.color.violet.500}",
     "css_variable": "--color-chart-1",
     "tier": "semantic",
     "status": "active"
   },
   {
     "path": "color.chart.2",
-    "value_light": "{primitive.color.blue.600}",
-    "value_dark": "{primitive.color.blue.300}",
+    "value_light": "{primitive.color.blue.500}",
+    "value_dark": "{primitive.color.blue.400}",
     "css_variable": "--color-chart-2",
     "tier": "semantic",
     "status": "active"
   },
   {
     "path": "color.chart.3",
-    "value_light": "{primitive.color.amber.600}",
-    "value_dark": "{primitive.color.yellow.200}",
+    "value_light": "{primitive.color.amber.500}",
+    "value_dark": "{primitive.color.yellow.300}",
     "css_variable": "--color-chart-3",
     "tier": "semantic",
     "status": "active"
@@ -250,14 +250,14 @@
   {
     "path": "color.chart.4",
     "value_light": "{primitive.color.plum.800}",
-    "value_dark": "{primitive.color.plum.500}",
+    "value_dark": "{primitive.color.plum.200}",
     "css_variable": "--color-chart-4",
     "tier": "semantic",
     "status": "active"
   },
   {
     "path": "color.chart.5",
-    "value_light": "{primitive.color.amber.800}",
+    "value_light": "{primitive.color.amber.700}",
     "value_dark": "{primitive.color.amber.500}",
     "css_variable": "--color-chart-5",
     "tier": "semantic",
@@ -337,8 +337,8 @@
   },
   {
     "path": "color.sidebar.primary.default",
-    "value_light": "{primitive.color.violet.550}",
-    "value_dark": "{primitive.color.violet.500}",
+    "value_light": "{primitive.color.violet.600}",
+    "value_dark": "{primitive.color.violet.600}",
     "css_variable": "--color-sidebar-primary-default",
     "tier": "semantic",
     "status": "active"
@@ -346,7 +346,7 @@
   {
     "path": "color.sidebar.primary.on",
     "value_light": "{primitive.color.violet.50}",
-    "value_dark": "{primitive.color.mist.0}",
+    "value_dark": "{primitive.color.white}",
     "css_variable": "--color-sidebar-primary-on",
     "tier": "semantic",
     "status": "active"
@@ -369,8 +369,8 @@
   },
   {
     "path": "color.static.white",
-    "value_light": "{primitive.color.mist.0}",
-    "value_dark": "{primitive.color.mist.0}",
+    "value_light": "{primitive.color.white}",
+    "value_dark": "{primitive.color.white}",
     "css_variable": "--color-static-white",
     "tier": "semantic",
     "status": "active"

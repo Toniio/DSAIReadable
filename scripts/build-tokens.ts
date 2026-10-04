@@ -32,8 +32,8 @@ type Group = { label: string | null; leaves: Leaf[] }
 
 // The tiers and the dark context, as tokens/tokens.resolver.json declares them.
 const tokens = loadTokens(ROOT)
-// Walked without its `primitive` root group: --ds-prim-color-mist-0, not
-// --ds-prim-primitive-color-mist-0.
+// Walked without its `primitive` root group: --ds-prim-color-mist-50, not
+// --ds-prim-primitive-color-mist-50.
 const primitive = primitiveGroups(tokens.tiers.primitive.tree)
 const semantic = tokens.tiers.semantic.tree
 const component = tokens.tiers.component.tree
@@ -80,7 +80,7 @@ function hasPath(tree: Record<string, unknown>, dotted: string): boolean {
 
 /**
  * Turn a DTCG value into CSS. A reference becomes a var() pointing at the tier
- * below: `{primitive.color.mist.0}` in the semantic tier, `{color.text.default}`
+ * below: `{primitive.color.mist.50}` in the semantic tier, `{color.text.default}`
  * in the component tier.
  */
 function toCss(

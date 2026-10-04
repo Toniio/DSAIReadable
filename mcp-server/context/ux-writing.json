@@ -117,7 +117,7 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not use `feedback.error.default` for text or icons: on a card it drops to 4.28:1, and to 3.00:1 on a card under a 20% tint. Text goes through `text.destructive.default` (`text-destructive`).",
+      "rule": "❌ Do not use `feedback.error.default` for text or icons: on a card it drops to 4.18:1, and to 2.97:1 on a card under a 20% tint. Text goes through `text.destructive.default` (`text-destructive`).",
       "source": "color.md"
     },
     {
@@ -133,7 +133,7 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not use `feedback.warning.default` as a border or an icon: in light mode it reaches 1.92:1 on white. The icon of a warning takes `text-warning`.",
+      "rule": "❌ Do not use `feedback.warning.default` as a border or an icon: in light mode it reaches 2.60:1 on white. The icon of a warning takes `text-warning`.",
       "source": "color.md"
     },
     {
@@ -145,7 +145,7 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Never put hard-coded white on an error surface: in dark mode, white on red.500 drops to 2.89:1.",
+      "rule": "❌ Never put hard-coded white on an error surface: in dark mode, white on red.400 drops to 2.73:1.",
       "source": "color.md"
     },
     {
@@ -197,7 +197,7 @@
       "source": "color.md"
     },
     {
-      "rule": "**Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lint-contrast.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.",
+      "rule": "**Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lib/contrast-pairs.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.",
       "source": "color.md"
     },
     {
@@ -833,7 +833,7 @@
       "**MUST NOT** — place more than one `Sidebar` per side in the same `SidebarProvider`",
       "**MUST** — check that a nested layout copes with the margins and shadows of the `floating` and `inset` variants",
       "**MUST** — give a `tooltip` to every `SidebarMenuButton` collapsed to its icon",
-      "**MUST** — render a `SidebarMenuButton` that has a `tooltip` under a `TooltipProvider`, in the root layout or around the `SidebarProvider`: its `Tooltip` throws without one",
+      "**MUST** — render a `Tooltip` outside the `SidebarProvider` under a `TooltipProvider`, in the root layout: it throws without one. `SidebarProvider` supplies one (`delayDuration` 0) to everything inside it, the `tooltip` of each `SidebarMenuButton` included",
       "**MUST NOT** — bind `Ctrl+B` / `⌘+B` to another action: `SidebarProvider` registers it to collapse the bar",
       "**MUST** — in an interface that is not in English, translate the strings the sidebar renders for screen readers: `toggleLabel` on `SidebarTrigger` and `SidebarRail`, `mobileTitle` and `mobileDescription` on `Sidebar` (defaults in `UI_STRINGS.sidebar`)"
     ],

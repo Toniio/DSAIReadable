@@ -3983,7 +3983,7 @@
         "behavior": "Render a `<Spinner>` as a child; the consumer sets `aria-busy=\"true\"`"
       }
     ],
-    "accessibility": "**Pattern**: [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) — native `button` element\n\n**Role**: Native `button` (or the element passed through `asChild`, such as a link).\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Enter` / `Space` | Activates the button            |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.\n\n**Pitfalls**:\n\n- **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.\n- A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.\n- `variant=\"destructive\"` must come with an explicit label.\n- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 3.00:1 on a hovered button inside a card.",
+    "accessibility": "**Pattern**: [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) — native `button` element\n\n**Role**: Native `button` (or the element passed through `asChild`, such as a link).\n\n**Keyboard**:\n\n| Key               | Action                          |\n| ----------------- | ------------------------------- |\n| `Enter` / `Space` | Activates the button            |\n| `Tab`             | Moves focus to the next element |\n\n**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.\n\n**Pitfalls**:\n\n- **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.\n- A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.\n- `variant=\"destructive\"` must come with an explicit label.\n- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 2.97:1 on a hovered button inside a card.",
     "code_example": "import { Button } from \"@/components/ui/button\"\n\nexport default function Example() {\n  return (\n    <Button variant=\"default\" size=\"default\" type=\"submit\">\n      Sign in\n    </Button>\n  )\n}",
     "cross_references": [
       "Field",
@@ -20454,7 +20454,7 @@
       "**MUST NOT** — place more than one `Sidebar` per side in the same `SidebarProvider`",
       "**MUST** — check that a nested layout copes with the margins and shadows of the `floating` and `inset` variants",
       "**MUST** — give a `tooltip` to every `SidebarMenuButton` collapsed to its icon",
-      "**MUST** — render a `SidebarMenuButton` that has a `tooltip` under a `TooltipProvider`, in the root layout or around the `SidebarProvider`: its `Tooltip` throws without one",
+      "**MUST** — render a `Tooltip` outside the `SidebarProvider` under a `TooltipProvider`, in the root layout: it throws without one. `SidebarProvider` supplies one (`delayDuration` 0) to everything inside it, the `tooltip` of each `SidebarMenuButton` included",
       "**MUST NOT** — bind `Ctrl+B` / `⌘+B` to another action: `SidebarProvider` registers it to collapse the bar",
       "**MUST** — in an interface that is not in English, translate the strings the sidebar renders for screen readers: `toggleLabel` on `SidebarTrigger` and `SidebarRail`, `mobileTitle` and `mobileDescription` on `Sidebar` (defaults in `UI_STRINGS.sidebar`)"
     ],
@@ -20468,7 +20468,7 @@
       "`@/components/ui/separator` (the `Separator` component)",
       "`@/components/ui/sheet` (the `Sheet`, `SheetContent`, `SheetHeader`, `SheetTitle`, `SheetDescription` components)",
       "`@/components/ui/skeleton` (the `Skeleton` component)",
-      "`@/components/ui/tooltip` (the `Tooltip`, `TooltipContent`, `TooltipTrigger` components)",
+      "`@/components/ui/tooltip` (the `Tooltip`, `TooltipContent`, `TooltipProvider`, `TooltipTrigger` components)",
       "`@phosphor-icons/react` (the `SidebarIcon` icon)"
     ],
     "anatomy": [
@@ -21624,6 +21624,12 @@
     "shadcn": {
       "item": "sidebar",
       "divergences": [
+        {
+          "export": "SidebarProvider",
+          "type": "changed",
+          "upstream": "providers: (none)",
+          "note": "Wraps its children in a TooltipProvider (delayDuration 0, its default), as the earlier new-york sidebar of shadcn/ui did. Upstream supplies none, so the tooltip the Sidebar spec requires on each SidebarMenuButton collapsed to its icon throws there without a provider of the app's own. Nothing to write for the sidebar: a TooltipProvider in the root layout still works, and inside the SidebarProvider the nearer one, the sidebar's, sets the delay. A Tooltip outside the SidebarProvider still needs a TooltipProvider above it."
+        },
         {
           "export": "Sidebar",
           "prop": "mobileTitle",

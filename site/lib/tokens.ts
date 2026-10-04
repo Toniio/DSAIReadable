@@ -2,7 +2,7 @@ import { readJson, readText } from "@/site/lib/repo"
 
 /** One token of `tokens.manifest.json` (scripts/build-token-docs.ts). */
 export interface Token {
-  /** `color.background.default`, `primitive.color.mist.0`, `shadcn.primary`. */
+  /** `color.background.default`, `primitive.color.mist.50`, `shadcn.primary`. */
   token: string
   tier: "primitive" | "semantic" | "component"
   cssVar: string

@@ -34,7 +34,7 @@ export function colorClasses(entry: Pick<Token, "token" | "cssVar">): string[] {
   return picked.length ? picked : all
 }
 
-/** A primitive's short name: `primitive.color.mist.0` → `mist.0`. */
+/** A primitive's short name: `primitive.color.mist.50` → `mist.50`. */
 export function primitiveName(token: string): string {
   return token.replace(/^primitive\.(color\.)?/, "")
 }

@@ -16,10 +16,12 @@
  * compares each component file with it, offline:
  *
  * - exports: added, removed, or of another kind (a component, a hook);
- * - for a component, the element that receives its props, and each prop it
- *   accepts: added, removed, another type, another default. A prop whose type
- *   is a union of literals (`size`, `variant`) is compared value by value;
- *   a default read from `UI_STRINGS` is compared by its text.
+ * - for a component, the element that receives its props, the provider
+ *   components it renders (a `TooltipProvider` its children can rely on),
+ *   and each prop it accepts: added, removed, another type, another
+ *   default. A prop whose type is a union of literals (`size`, `variant`) is
+ *   compared value by value; a default read from `UI_STRINGS` is compared by
+ *   its text.
  *
  * Each difference must match one `shadcn.divergences` entry of the index, and
  * each entry one difference: a declaration the code no longer needs fails too.
@@ -87,6 +89,8 @@ type BaselineExport =
       name: string
       kind: "component"
       element: string
+      /** The `<XProvider>` elements it renders, by name; absent when none. */
+      providers?: string[]
       /** Its base props type, as written: `React.ComponentProps<"div">`. */
       base?: string
       /** Key of the set of React DOM attributes it accepts, in `dom`. */
@@ -169,6 +173,7 @@ function snapshot(api: ApiExport[], domSets: Map<string, string[]>) {
       name: e.name,
       kind: "component",
       element: e.renders.element,
+      ...(e.renders.providers && { providers: e.renders.providers }),
       ...(e.rest !== undefined && { base: e.rest }),
       dom: key.slice(0, 10),
       props,
@@ -383,6 +388,13 @@ function compare(
         upstream: t.element,
         ours: o.element,
       })
+    // The context its children receive: code written for one side throws on
+    // the other when a provider is missing (`Tooltip` without its provider).
+    const [op, tp] = [o.providers, t.providers].map(
+      (p) => `providers: ${p?.join(", ") ?? "(none)"}`
+    )
+    if (op !== tp)
+      findings.push({ export: name, type: "changed", upstream: tp, ours: op })
     // The element the props are typed for; a local alias's name
     // (`CarouselProps`) is not API, the props it holds are compared below.
     const [ob, tb] = [elementTypes(o.base), elementTypes(t.base)]

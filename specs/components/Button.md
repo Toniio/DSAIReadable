@@ -155,7 +155,7 @@ Collected from `components/ui/button.tsx` and the `lib/` constants it imports. *
 - **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.
 - A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.
 - `variant="destructive"` must come with an explicit label.
-- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 3.00:1 on a hovered button inside a card.
+- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 2.97:1 on a hovered button inside a card.
 
 ## Code example
 

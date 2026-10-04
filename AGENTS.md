@@ -47,7 +47,7 @@ A Tier 2 or 3 token holds **only** `{…}` references, never a literal value.
 The three files form one DTCG document: the primitives sit under the
 `primitive` group, so a semantic token names one in full,
 `{primitive.radius.md}`. Values take the 2025.10 object forms
-(`{ "colorSpace": "srgb", "components": […] }`, `{ "value": 1, "unit": "rem" }`),
+(`{ "colorSpace": "oklch", "components": […], "hex": "#…" }`, `{ "value": 1, "unit": "rem" }`),
 and `mcp-server/src/lib/dtcg.ts` prints them as CSS. One declared divergence:
 letter spacing stays in `em`, which the Format Module does not list.
 
@@ -62,7 +62,10 @@ repeats the light value is an error, and `color.static.*` never has one.
 resolver: a script that needs a value in a mode asks it.
 `$extensions.modes` is rejected by `tokens:lint-naming`.
 `tokens.css` is generated: any direct edit is overwritten by the next build and
-caught by `npm run tokens:check`.
+caught by `npm run tokens:check`. So is the `color` group of `primitive.json`:
+`npm run tokens:palette` writes one OKLCH ramp per source color of
+`scripts/lib/palette.ts`, and `npm run tokens:palette-check` fails on a step
+edited by hand.
 
 Every semantic token declares its lifecycle, checked by
 `npm run tokens:lint-lifecycle`: `$extensions.status` is `active` (consumed; a
@@ -77,7 +80,7 @@ the reason why.
 ## 3. Validation commands
 
 ```bash
-npm run tokens-validate   # DTCG 2025.10 conformance + naming + raw values + @theme bridge + focus + contrast + palette monotonicity + chart palette + fonts + lifecycle + freshness
+npm run tokens-validate   # generated palette + DTCG 2025.10 conformance + naming + raw values + @theme bridge + focus + contrast + rebrand + palette monotonicity + chart palette + fonts + lifecycle + freshness
 npm run typecheck:all     # components + tests + evals, scripts, eslint-plugin, mcp-server, site
 npm run lint              # ESLint, zero warnings
 npm run lint:language     # American English only: French words, diacritics and British spellings
@@ -162,7 +165,7 @@ Each § 1 rule, and the check that enforces it:
 | Class-based dark mode                    | `tokens:lint-values` (`prefers-color-scheme`, no `allow-raw` opt-out)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | WCAG 2.2 AA                              | `tokens:lint-contrast` level 1 (4.5:1 text, 3:1 non-text, blocking; level 2 APCA is advisory), `tokens:lint-focus`, axe-core in `test:components` (headless Chromium, light and dark: contrast and target size computed on the rendered page, a focus indicator on every tab stop), `site:check` for the focus rings the site composes (a solid part, not a halo alone), `site:test` for the built site (axe on every page and preview, light and dark, and a focus indicator on every tab stop it walks); target size is also audited by hand in `specs/foundations/size.md` |
 | Read the spec first                      | Not checkable; `specs:validate` keeps each spec in step with its code (Anatomy, Variants, Tokens, Props / API, States) and `index:schema` keeps its Metadata in step with the index, so what the spec says is true                                                                                                                                                                                                                                                                                                                                                            |
-| The shadcn/ui API is the contract        | `index:shadcn` — each component's exports, rendered element, props, union values and defaults against `shadcn-api.baseline.json` (the upstream API, extracted from the registry of the `components.json` style): every difference is declared in `shadcn.divergences`, and every declaration matches a difference; `shadcn:drift` — each component's classes against its upstream, re-tokenized by the table of `shadcn-upstream.json`                                                                                                                                        |
+| The shadcn/ui API is the contract        | `index:shadcn` — each component's exports, rendered element, props, union values, defaults and the provider components it renders against `shadcn-api.baseline.json` (the upstream API, extracted from the registry of the `components.json` style): every difference is declared in `shadcn.divergences`, and every declaration matches a difference; `shadcn:drift` — each component's classes against its upstream, re-tokenized by the table of `shadcn-upstream.json`                                                                                                    |
 | `tokens-validate` before every commit    | The required `tokens-validate` CI job, and `npm run check`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Everything committed in American English | `lint:language`, in `npm run check` and the CI `lint` job                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | Declare the semver intent                | `changesets:lint` (category known, bump matches it), `versions:check` (the version is the same in `package.json`, `design-system.index.json`, `mcp-server/package.json`, `packages/eslint-plugin/package.json` and the lockfile), `release:test` (the pipeline from changeset to CHANGELOG entry); all three run in `npm run check` and CI                                                                                                                                                                                                                                    |
@@ -187,6 +190,8 @@ reorder them by hand.
 ## 8. Areas not to touch without an explicit instruction
 
 - `tokens.css` — generated by `npm run tokens:build`
+- the `color` group of `tokens/primitive.json` — generated by `npm run tokens:palette` (edit the source
+  colors, lightness targets and chroma shares in `scripts/lib/palette.ts`)
 - `mcp-server/context/*.json` — generated by `npm run generate-context`
 - `packages/eslint-plugin/src/deprecations.ts` — generated by `npm run generate-context` (the tokens'
   `$deprecated` and the components' JSDoc `@deprecated`)

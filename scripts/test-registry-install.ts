@@ -120,7 +120,7 @@ const ABSENT = [
   "text-slate-900",
   "shadow-2xs",
   "bg-color-primary",
-  "bg-ds-prim-color-mist-0",
+  "bg-ds-prim-color-white",
   "p-13",
   "text-7xl",
   "font-serif",

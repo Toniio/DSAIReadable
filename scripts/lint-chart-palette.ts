@@ -29,15 +29,15 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { luminance } from "./wcag.js"
 import { deltaE, VISIONS } from "./color-vision.js"
-import { cssValue, loadTokens, MODES } from "../mcp-server/src/lib/dtcg.js"
+import { loadTokens, MODES, srgbCss } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
 /**
- * Floor for ② in OKLab units. The adopted palette's worst pair is 0.19 in
- * every vision; IBM Carbon's categorical palette falls to 0.06 under
- * deuteranopia. 0.15 leaves the current palette a margin and rejects any
- * pair that collapses for a color-blind reader.
+ * Floor for ② in OKLab units. The adopted palette's worst pair is 0.18, in
+ * dark mode under protanopia and deuteranopia; IBM Carbon's categorical
+ * palette falls to 0.06 under deuteranopia. 0.15 leaves the current palette a
+ * margin and rejects any pair that collapses for a color-blind reader.
  */
 const MIN_DELTA_E = 0.15
 const MIN_CONTRAST = 3
@@ -62,8 +62,7 @@ function hexOf(path: string, mode: (typeof MODES)[number]): string {
   if (!node?.$value) throw new Error(`Unknown semantic token ${path}`)
   const ref = String(tokens.override(path, mode) ?? node.$value)
   const leaf = at(primitive, ref.replace(/^\{|\}$/g, ""))
-  const target =
-    leaf?.$value === undefined ? undefined : cssValue(leaf.$value, leaf.$type)
+  const target = leaf?.$value === undefined ? undefined : srgbCss(leaf.$value)
   if (!target || !/^#[0-9a-f]{6}$/i.test(target))
     throw new Error(`${path} (${mode}) does not resolve to a hex color`)
   return target

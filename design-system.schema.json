@@ -89,11 +89,11 @@
                     "type": {
                       "type": "string",
                       "enum": ["added", "removed", "renamed", "changed"],
-                      "description": "added: shadcn/ui does not have it. removed: shadcn/ui has it, this component does not. renamed: this is shadcn/ui's upstream under another name. changed: same name, another element, props type, type or default (upstream says which)."
+                      "description": "added: shadcn/ui does not have it. removed: shadcn/ui has it, this component does not. renamed: this is shadcn/ui's upstream under another name. changed: same name, another element, providers, props type, type or default (upstream says which)."
                     },
                     "upstream": {
                       "type": "string",
-                      "description": "What shadcn/ui has: the former name (renamed); the rendered element, the props type, the prop's type, or its default written = value (changed)."
+                      "description": "What shadcn/ui has: the former name (renamed); the rendered element, the provider components it renders written providers: TooltipProvider (providers: (none) for none), the props type, the prop's type, or its default written = value (changed)."
                     },
                     "note": {
                       "type": "string",
