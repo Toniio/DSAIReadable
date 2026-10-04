@@ -87,26 +87,58 @@ containScrolling()
  * page as it loads, or as a control of the page mounts the overlay again. In
  * a preview, focus() does nothing while the frame's document does not have
  * focus; once the reader clicks or tabs into the frame, it works as usual.
+ *
+ * The focus held back is kept for when the reader enters. A modal traps the
+ * keyboard by sending focus that leaves it back to the last element focused
+ * inside it, and one that opened while the frame had no focus has none: Tab
+ * into the frame would stop on its focus guard and on its trigger, which the
+ * modal hides from assistive technology (aria-hidden). Focus that enters on
+ * a hidden element goes where the modal asked for instead, as if it had
+ * opened with the frame focused.
  */
 function containFocus() {
   if (typeof window === "undefined" || window.parent === window) return
+  let held: {
+    element: HTMLElement
+    options?: FocusOptions
+    select?: () => void
+  } | null = null
   const focus = HTMLElement.prototype.focus
   HTMLElement.prototype.focus = function contained(
     this: HTMLElement,
     options?: FocusOptions
   ) {
-    if (!document.hasFocus()) return
-    focus.call(this, options)
+    if (document.hasFocus()) focus.call(this, options)
+    // The first one, while it is there: Radix tries each field of a dialog
+    // in turn, then the dialog itself.
+    else if (!held?.element.isConnected) held = { element: this, options }
   }
   // Selecting a field's text focuses it too: Radix selects the first field
   // of a dialog after focusing it.
   for (const field of [HTMLInputElement, HTMLTextAreaElement]) {
     const select = field.prototype.select
     field.prototype.select = function contained(this: HTMLInputElement) {
-      if (!document.hasFocus()) return
-      select.call(this)
+      if (document.hasFocus()) select.call(this)
+      else if (held?.element === this) held.select = () => select.call(this)
     }
   }
+  // Before the modal's own listener, which then finds focus inside it.
+  document.addEventListener(
+    "focusin",
+    (event) => {
+      const wanted = held
+      held = null
+      if (
+        wanted?.element.isConnected &&
+        event.target instanceof Element &&
+        event.target.closest('[aria-hidden="true"]')
+      ) {
+        focus.call(wanted.element, wanted.options)
+        wanted.select?.()
+      }
+    },
+    { capture: true }
+  )
 }
 containFocus()
 
