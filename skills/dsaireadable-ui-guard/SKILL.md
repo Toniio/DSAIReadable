@@ -21,13 +21,14 @@ the work, not an extra the user has to ask for.
    errors: what a tool checks, this guard does not repeat.
 2. **Copy the checklist below** into your working notes and tick each line
    against the screen. A line that does not apply is ticked with `n/a`. When a
-   line is unclear, open its reference file: each rule there says why it
-   holds and where the design system writes it.
+   line is unclear, open its reference file, and only that one: each rule
+   there says why it holds and where the design system writes it.
 3. **Write the review**, one line per finding, then the verdict.
 4. **Fix every blocking finding, then review again.** Hand back only on a pass.
 
 Every rule cites its source: `spec:<Component>` is read with
-`dsaireadable_get_component_specs` (`component_name`), `pattern:<name>` with
+`dsaireadable_get_component_specs` (`component_name`), whose default concise
+answer holds the constraints and their limits, `pattern:<name>` with
 `dsaireadable_get_pattern` (`name`), `foundation:<name>` with
 `dsaireadable_get_design_rules` (`category`). Limits and thresholds live in
 those sources, never in this skill: read the source when a count matters.
