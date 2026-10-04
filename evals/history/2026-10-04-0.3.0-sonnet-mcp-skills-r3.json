@@ -1,0 +1,2210 @@
+{
+  "label": "0.3.0-sonnet-mcp-skills-r3",
+  "date": "2026-10-04",
+  "generator": "replay",
+  "model": "claude-sonnet-5-5",
+  "context": "mcp",
+  "skills": ["dsaireadable-build", "dsaireadable-ui-guard"],
+  "via": "claude-code 2.1.288",
+  "generated": {
+    "run": "0.3.0-sonnet-mcp-skills-r3",
+    "commit": "2a6b96ac79274300dd62af9b98282d97a09f37b0",
+    "version": "0.2.0",
+    "dirty": false,
+    "sources": "46bd2f8f802bf5f9",
+    "effort": "high",
+    "maxTurns": 25,
+    "modelOption": "claude-sonnet-5-5",
+    "claudeCode": "2.1.288",
+    "sessionPlugins": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-telemetry@builtin"
+    ]
+  },
+  "designSystem": {
+    "version": "0.2.0",
+    "commit": "2a6b96ac79274300dd62af9b98282d97a09f37b0"
+  },
+  "summary": {
+    "tasks": 26,
+    "generated": 26,
+    "stageA": {
+      "compiles": 1,
+      "lint": 1,
+      "coverage": 0.971,
+      "pass": 1,
+      "lintByFamily": {}
+    },
+    "stageB": {
+      "renders": 1,
+      "axe": 1,
+      "focus": 1,
+      "pass": 1
+    },
+    "stageC": null,
+    "conformance": 1,
+    "generation": {
+      "turns": 211,
+      "mcpCalls": 387,
+      "otherCalls": 45,
+      "toolErrors": 2,
+      "inputTokens": 4681632,
+      "outputTokens": 240397,
+      "turnCapReached": 2,
+      "medianInputTokens": 167711,
+      "medianTurns": 8,
+      "results": {
+        "Skill": {
+          "calls": 43,
+          "chars": 224712
+        },
+        "dsaireadable_list_patterns": {
+          "calls": 25,
+          "chars": 53300
+        },
+        "dsaireadable_get_pattern:detailed": {
+          "calls": 43,
+          "chars": 241910
+        },
+        "dsaireadable_get_component_specs": {
+          "calls": 144,
+          "chars": 161845
+        },
+        "dsaireadable_get_design_rules": {
+          "calls": 19,
+          "chars": 36663
+        },
+        "dsaireadable_get_ux_writing_rules": {
+          "calls": 21,
+          "chars": 34902
+        },
+        "dsaireadable_get_component_specs:detailed": {
+          "calls": 24,
+          "chars": 141683
+        },
+        "dsaireadable_validate_code": {
+          "calls": 37,
+          "chars": 2516
+        },
+        "dsaireadable_validate_screen": {
+          "calls": 37,
+          "chars": 2849
+        },
+        "dsaireadable_get_pattern:concise": {
+          "calls": 1,
+          "chars": 1118
+        },
+        "dsaireadable_get_components": {
+          "calls": 17,
+          "chars": 32768
+        },
+        "dsaireadable_get_tokens": {
+          "calls": 8,
+          "chars": 80052
+        },
+        "dsaireadable_get_typography": {
+          "calls": 1,
+          "chars": 5678
+        },
+        "Read": {
+          "calls": 2,
+          "chars": 2564
+        },
+        "dsaireadable_get_dataviz_recommendation": {
+          "calls": 2,
+          "chars": 3267
+        },
+        "dsaireadable_get_dataviz_specs": {
+          "calls": 2,
+          "chars": 1130
+        },
+        "dsaireadable_get_icons": {
+          "calls": 3,
+          "chars": 1500
+        },
+        "dsaireadable_get_pattern": {
+          "calls": 1,
+          "chars": 1118
+        },
+        "dsaireadable_get_content_library": {
+          "calls": 2,
+          "chars": 2816
+        }
+      }
+    }
+  },
+  "tasks": [
+    {
+      "id": "sign-in",
+      "generated": true,
+      "metrics": {
+        "turns": 7,
+        "toolCalls": 17,
+        "toolErrors": 0,
+        "inputTokens": 139872,
+        "outputTokens": 6413,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_component_specs": 9,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 7467
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 8,
+            "chars": 9470
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1463
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 3843
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 20,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "create-project",
+      "generated": true,
+      "metrics": {
+        "turns": 10,
+        "toolCalls": 23,
+        "toolErrors": 0,
+        "inputTokens": 274556,
+        "outputTokens": 12747,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 5,
+          "dsaireadable_get_component_specs": 11,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 4,
+            "chars": 23475
+          },
+          "dsaireadable_get_pattern:concise": {
+            "calls": 1,
+            "chars": 1118
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 11,
+            "chars": 13329
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 26,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "delete-project",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 15,
+        "toolErrors": 0,
+        "inputTokens": 165263,
+        "outputTokens": 6276,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_component_specs": 6,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 2,
+            "chars": 10851
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 6,
+            "chars": 5698
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 7850
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "edit-project",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 20,
+        "toolErrors": 0,
+        "inputTokens": 185716,
+        "outputTokens": 13871,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 4,
+          "dsaireadable_get_component_specs": 11,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 4,
+            "chars": 22471
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 11,
+            "chars": 12173
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 22,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "empty-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 18,
+        "toolErrors": 0,
+        "inputTokens": 170159,
+        "outputTokens": 7159,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_component_specs": 9,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 3,
+            "chars": 15806
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 9,
+            "chars": 10433
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 20,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "filter-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 12,
+        "toolCalls": 20,
+        "toolErrors": 0,
+        "inputTokens": 297364,
+        "outputTokens": 12161,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_component_specs": 8,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_get_tokens": 2,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 2,
+            "chars": 8860
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 7,
+            "chars": 8419
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 133
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 2463
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_get_tokens": {
+            "calls": 2,
+            "chars": 20013
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 22,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-form",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 17,
+        "toolErrors": 0,
+        "inputTokens": 170234,
+        "outputTokens": 10881,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_component_specs": 7,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 2,
+            "chars": 11744
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 6,
+            "chars": 6597
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 133
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 2463
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 19,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.75,
+        "missing": ["radio-group"]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "loading-cards",
+      "generated": true,
+      "metrics": {
+        "turns": 9,
+        "toolCalls": 15,
+        "toolErrors": 0,
+        "inputTokens": 162184,
+        "outputTokens": 4535,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_component_specs": 4,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 2,
+          "dsaireadable_get_components": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 3655
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 3,
+            "chars": 2634
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 133
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 2463
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 18,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-navigation",
+      "generated": true,
+      "metrics": {
+        "turns": 6,
+        "toolCalls": 12,
+        "toolErrors": 0,
+        "inputTokens": 121908,
+        "outputTokens": 5954,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_component_specs": 4,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 6175
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 779
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 15055
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 3,
+            "chars": 3105
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "save-profile",
+      "generated": true,
+      "metrics": {
+        "turns": 9,
+        "toolCalls": 19,
+        "toolErrors": 0,
+        "inputTokens": 217855,
+        "outputTokens": 12043,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_component_specs": 8,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 3,
+            "chars": 16296
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 8,
+            "chars": 9288
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 22,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "search-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 9,
+        "toolCalls": 17,
+        "toolErrors": 0,
+        "inputTokens": 219955,
+        "outputTokens": 8618,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_get_tokens": 2,
+          "dsaireadable_get_typography": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 2,
+            "chars": 9227
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 4,
+            "chars": 5039
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_get_tokens": {
+            "calls": 2,
+            "chars": 20013
+          },
+          "dsaireadable_get_typography": {
+            "calls": 1,
+            "chars": 5678
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 2463
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 20,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "settings-page",
+      "generated": true,
+      "metrics": {
+        "turns": 9,
+        "toolCalls": 20,
+        "toolErrors": 0,
+        "inputTokens": 227481,
+        "outputTokens": 17789,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_component_specs": 9,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 3,
+            "chars": 16704
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 9,
+            "chars": 10396
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 23,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "invoices-table",
+      "generated": true,
+      "metrics": {
+        "turns": 10,
+        "toolCalls": 16,
+        "toolErrors": 0,
+        "inputTokens": 187000,
+        "outputTokens": 8040,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_component_specs": 4,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 2,
+          "Read": 1,
+          "dsaireadable_get_pattern": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 610
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 4,
+            "chars": 4486
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1220
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          },
+          "Read": {
+            "calls": 1,
+            "chars": 2433
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 6175
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 19,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "results-pagination",
+      "generated": true,
+      "metrics": {
+        "turns": 10,
+        "toolCalls": 14,
+        "toolErrors": 0,
+        "inputTokens": 212432,
+        "outputTokens": 10512,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_component_specs": 3,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_components": 2,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 2,
+            "chars": 9137
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 5508
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1064
+          },
+          "dsaireadable_get_components": {
+            "calls": 2,
+            "chars": 743
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 1,
+            "chars": 1112
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "visitors-chart",
+      "generated": true,
+      "metrics": {
+        "turns": 10,
+        "toolCalls": 22,
+        "toolErrors": 2,
+        "inputTokens": 245256,
+        "outputTokens": 11372,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_get_dataviz_recommendation": 2,
+          "dsaireadable_get_dataviz_specs": 2,
+          "dsaireadable_get_component_specs": 7,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "Read": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_get_dataviz_recommendation": {
+            "calls": 2,
+            "chars": 3267
+          },
+          "dsaireadable_get_dataviz_specs": {
+            "calls": 2,
+            "chars": 1130
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 2,
+            "chars": 13376
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 5,
+            "chars": 4343
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 2,
+            "chars": 2999
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "Read": {
+            "calls": 1,
+            "chars": 131
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 25,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-sidebar",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 12,
+        "toolErrors": 0,
+        "inputTokens": 116071,
+        "outputTokens": 8581,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 6175
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 15055
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 4,
+            "chars": 4146
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_icons": {
+            "calls": 1,
+            "chars": 500
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "command-palette",
+      "generated": true,
+      "metrics": {
+        "turns": 7,
+        "toolCalls": 18,
+        "toolErrors": 0,
+        "inputTokens": 165151,
+        "outputTokens": 10442,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_component_specs": 7,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 7850
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 2,
+            "chars": 11683
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 2,
+            "chars": 8525
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 5,
+            "chars": 5288
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_icons": {
+            "calls": 1,
+            "chars": 500
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-tabs",
+      "generated": true,
+      "metrics": {
+        "turns": 7,
+        "toolCalls": 19,
+        "toolErrors": 0,
+        "inputTokens": 150899,
+        "outputTokens": 13135,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_pattern": 4,
+          "dsaireadable_get_component_specs": 9,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 779
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 4,
+            "chars": 22536
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 4464
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 8,
+            "chars": 9288
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "date-picker",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 13,
+        "toolErrors": 0,
+        "inputTokens": 152511,
+        "outputTokens": 7576,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 5303
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 4,
+            "chars": 5313
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 16,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "attachments",
+      "generated": true,
+      "metrics": {
+        "turns": 10,
+        "toolCalls": 18,
+        "toolErrors": 0,
+        "inputTokens": 261319,
+        "outputTokens": 11327,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_component_specs": 7,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 1,
+          "dsaireadable_get_tokens": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 7850
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 2,
+            "chars": 11856
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 5,
+            "chars": 5307
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_pattern": {
+            "calls": 1,
+            "chars": 1118
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1855
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          },
+          "dsaireadable_get_tokens": {
+            "calls": 2,
+            "chars": 20013
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 20,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.5,
+        "missing": ["spinner"]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "chat-thread",
+      "generated": true,
+      "metrics": {
+        "turns": 7,
+        "toolCalls": 17,
+        "toolErrors": 0,
+        "inputTokens": 161117,
+        "outputTokens": 11105,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_component_specs": 9,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 2
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 907
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 3,
+            "chars": 21540
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 6,
+            "chars": 6890
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 7349
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 2,
+            "chars": 154
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 19,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "faq",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 14,
+        "toolErrors": 0,
+        "inputTokens": 154794,
+        "outputTokens": 3913,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 2,
+          "dsaireadable_get_component_specs": 2,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_tokens": 2,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 2,
+            "chars": 1231
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 1,
+            "chars": 849
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 2,
+            "chars": 2542
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 2463
+          },
+          "dsaireadable_get_tokens": {
+            "calls": 2,
+            "chars": 20013
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "user-menu",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 18,
+        "toolErrors": 0,
+        "inputTokens": 164604,
+        "outputTokens": 4994,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 2,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_component_specs": 6,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_content_library": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 2,
+            "chars": 1759
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 6175
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 5,
+            "chars": 4695
+          },
+          "dsaireadable_get_icons": {
+            "calls": 1,
+            "chars": 500
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 8688
+          },
+          "dsaireadable_get_content_library": {
+            "calls": 1,
+            "chars": 1874
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1868
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "verification-code",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 18,
+        "toolErrors": 0,
+        "inputTokens": 185915,
+        "outputTokens": 11605,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_component_specs": 7,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_content_library": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_components": {
+            "calls": 1,
+            "chars": 2011
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 2,
+            "chars": 13299
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 4038
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 6,
+            "chars": 7587
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_get_content_library": {
+            "calls": 1,
+            "chars": 942
+          },
+          "dsaireadable_validate_code": {
+            "calls": 2,
+            "chars": 136
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-plan-choice",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 9,
+        "toolErrors": 0,
+        "inputTokens": 83741,
+        "outputTokens": 3567,
+        "tools": {
+          "Skill": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_component_specs": 2,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 2,
+            "chars": 10233
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 1,
+            "chars": 1055
+          },
+          "dsaireadable_get_design_rules": {
+            "calls": 1,
+            "chars": 1463
+          },
+          "dsaireadable_get_component_specs:detailed": {
+            "calls": 1,
+            "chars": 8488
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 1,
+            "chars": 5832
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 12,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-notifications",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 11,
+        "toolErrors": 0,
+        "inputTokens": 88275,
+        "outputTokens": 5781,
+        "tools": {
+          "Skill": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_component_specs": 4,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        },
+        "results": {
+          "Skill": {
+            "calls": 1,
+            "chars": 5639
+          },
+          "dsaireadable_list_patterns": {
+            "calls": 1,
+            "chars": 2132
+          },
+          "dsaireadable_get_pattern:detailed": {
+            "calls": 2,
+            "chars": 11796
+          },
+          "dsaireadable_get_component_specs": {
+            "calls": 4,
+            "chars": 4905
+          },
+          "dsaireadable_get_ux_writing_rules": {
+            "calls": 1,
+            "chars": 1662
+          },
+          "dsaireadable_validate_code": {
+            "calls": 1,
+            "chars": 68
+          },
+          "dsaireadable_validate_screen": {
+            "calls": 1,
+            "chars": 77
+          }
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 13,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    }
+  ]
+}
