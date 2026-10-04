@@ -36,7 +36,7 @@ export function registerAdminTools(server: McpServer): void {
     {
       title: "Design system stats",
       description:
-        "Returns design system stats: total components, tokens per tier, spec coverage",
+        "Returns component counts by status and category, token counts per tier, and spec coverage",
       outputSchema: statsOutput,
       annotations: READ_ONLY,
     },
@@ -85,13 +85,9 @@ export function registerAdminTools(server: McpServer): void {
     {
       title: "Validate a screen",
       description:
-        "Analyzes code against DS rules: checks DS component usage, token usage, composition rules. Returns a list of issues/warnings",
+        "Checks TSX as text, even before it parses: raw values, inline styles, the default palette, primitive tokens, prefers-color-scheme, native elements, import origins, a Tooltip with no provider",
       inputSchema: z.object({
-        code: z
-          .string()
-          .describe(
-            "React/TSX code to validate against the design system rules"
-          ),
+        code: z.string().describe("The screen's TSX"),
       }),
       outputSchema: screenReportOutput,
       annotations: READ_ONLY,
@@ -105,13 +101,9 @@ export function registerAdminTools(server: McpServer): void {
     {
       title: "Validate code with the ESLint rules",
       description:
-        "Lints and type-checks TSX with the design system's own ESLint rules (@dsaireadable/eslint-plugin, the same a project runs): native elements instead of components, other UI or icon libraries, raw colors, default-palette and arbitrary Tailwind values, primitive tokens, deprecated imports, plus syntax and undefined names from TypeScript. Reads the syntax tree where dsaireadable_validate_screen reads text, so run it on the final code. Unknown Tailwind classes are checked by the project's own lint, which reads its stylesheet",
+        "Lints TSX with @dsaireadable/eslint-plugin, the rules a project runs (native elements, other UI or icon libraries, raw colors, default-palette and arbitrary Tailwind values, primitive tokens, deprecated imports), and type-checks it: syntax, undefined names. Run it on the final code. It does not check that a Tailwind class exists",
       inputSchema: z.object({
-        code: z
-          .string()
-          .describe(
-            "TSX code to validate, as it would be saved in a .tsx file"
-          ),
+        code: z.string().describe("The whole .tsx file, imports included"),
       }),
       outputSchema: codeReportOutput,
       annotations: READ_ONLY,

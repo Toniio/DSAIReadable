@@ -105,6 +105,7 @@ npm run test:components   # headless Chromium: the 65 spec examples and the foun
 npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
 npm run evals:generate    # screens from Claude Code in print mode, on a subscription (no API key), for the replay generator (evals/README.md)
+npm run evals:context     # where a recorded run's input tokens went, per tool and format; --reserve re-serves its calls with this checkout (evals/README.md)
 npm run site:check        # the documentation site: the examples copied into site/generated/ match the specs + site/ passes the consumer ESLint config + every focus ring it composes has a solid part
 npm run site:build        # the documentation site, statically exported to site/out/ (networked: next/font)
 npm run site:test         # the built site, served under its base path, loaded in headless Chromium: every page and preview, light and dark: axe (WCAG 2.2 AA), page errors, responses, a focus indicator on every tab stop

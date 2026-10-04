@@ -67,6 +67,7 @@
     "test:components": "vitest run",
     "evals": "tsx evals/run.ts",
     "evals:test": "tsx evals/run.ts --self-test",
+    "evals:context": "tsx evals/context.ts",
     "evals:generate": "tsx evals/generate-claude-code.ts",
     "test:lint-coverage": "tsx scripts/lint-test-coverage.ts",
     "test": "npm run test:components && npm run plugin:test && npm run mcp:test",

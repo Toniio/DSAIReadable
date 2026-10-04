@@ -28,6 +28,7 @@ Triggers a primary or secondary action; comes in several visual variants and siz
 - **MUST NOT** — place more than 2 `variant="default"` (primary) buttons in the same view
 - **MUST NOT** — convey a state through color alone: add text or a tooltip
 - **MUST** — give an `icon-*` button an `aria-label`
+- **MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy="true"` on the button
 - **MUST NOT** — nest a `<button>` inside another, including through `asChild`
 
 ## Dependencies

@@ -21,7 +21,7 @@ export function registerUxWritingTools(server: McpServer): void {
     {
       title: "UX writing rules",
       description:
-        "Returns the rules for the text a UI renders: the voice and tone rules (sentence case, verb-first buttons, errors that say what happened and how to fix it, word list) and the content rules (default strings from UI_STRINGS, one override prop per string, language of the defaults). The other rules — foundations, component constraints, composition — are served by dsaireadable_get_design_rules",
+        "Returns the rules for UI text: voice and tone (sentence case, verb-first buttons, errors that say what happened and how to fix it, word list) and content (UI_STRINGS defaults, one override prop per string, the defaults' language). Other rules: dsaireadable_get_design_rules",
       outputSchema: uxWritingRulesOutput,
       annotations: READ_ONLY,
     },
@@ -33,9 +33,9 @@ export function registerUxWritingTools(server: McpServer): void {
     "dsaireadable_get_glossary",
     {
       title: "Glossary",
-      description: "Returns the full glossary or a specific term definition",
+      description: "Returns the glossary, or one term's definition",
       inputSchema: z.object({
-        term: z.string().optional().describe("Specific term to look up"),
+        term: z.string().optional(),
       }),
       outputSchema: glossaryOutput,
       annotations: READ_ONLY,
@@ -69,12 +69,9 @@ export function registerUxWritingTools(server: McpServer): void {
     {
       title: "Content library",
       description:
-        "Returns content examples (labels, placeholders, messages), optionally filtered by category",
+        "Returns example UI strings: labels, placeholders and messages",
       inputSchema: z.object({
-        category: z
-          .enum(["labels", "placeholders", "messages"])
-          .optional()
-          .describe("Content category to filter by"),
+        category: z.enum(["labels", "placeholders", "messages"]).optional(),
       }),
       outputSchema: contentLibraryOutput,
       annotations: READ_ONLY,

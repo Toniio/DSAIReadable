@@ -14,18 +14,16 @@ export function registerDatavizTools(server: McpServer): void {
     {
       title: "Chart recommendation",
       description:
-        "Returns recommended chart types for a given data visualization objective",
+        "Returns the chart types recommended for an objective, each with its spec",
       inputSchema: z.object({
-        objective: z
-          .enum([
-            "evolution",
-            "correlation",
-            "comparison",
-            "distribution",
-            "proportion",
-            "kpi",
-          ])
-          .describe("The data visualization objective"),
+        objective: z.enum([
+          "evolution",
+          "correlation",
+          "comparison",
+          "distribution",
+          "proportion",
+          "kpi",
+        ]),
       }),
       outputSchema: chartRecommendationOutput,
       annotations: READ_ONLY,
@@ -71,13 +69,9 @@ export function registerDatavizTools(server: McpServer): void {
     {
       title: "Chart spec",
       description:
-        "Returns full specs for a chart type (tokens, anatomy, do/don't, library, variants)",
+        "Returns one chart type's spec: library, component, tokens, anatomy, do/don't, variants",
       inputSchema: z.object({
-        chart_type: z
-          .string()
-          .describe(
-            "The chart type to get specs for (e.g. 'bar', 'line', 'pie')"
-          ),
+        chart_type: z.string().describe("e.g. bar, line, pie, data_card"),
       }),
       outputSchema: chartSpecOutput,
       annotations: READ_ONLY,

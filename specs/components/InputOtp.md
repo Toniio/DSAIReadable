@@ -25,6 +25,7 @@ A segmented input for one-time passcodes (OTP), with automatic movement between 
 
 - **MUST NOT** — take free text or more than 8 characters: it is meant for codes of 4 to 8 characters
 - **MUST** — give each `InputOTPSlot` the `index` of its position
+- **MUST** — set `aria-invalid` on each `InputOTPSlot` to show an error: set on `InputOTP` itself, it draws nothing
 - **Note** — `spellCheck` is off by default: the browser offers no correction on a code
 - **MUST NOT** — redefine the ARIA roles: the `input-otp` library handles them
 - **MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`"use client"`), and only serializable props reach it from a server component

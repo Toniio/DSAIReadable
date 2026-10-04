@@ -97,7 +97,6 @@ export const componentsOutput = page(
     category: z.string(),
     status: z.string(),
     code_path: z.string(),
-    has_spec: z.boolean(),
     sizes: strings,
   })
 )
@@ -133,18 +132,11 @@ export const componentSpecOutput = forms(
   z.strictObject({
     ...specHead,
     usage: strings,
-    dependencies: strings,
-    anatomy: z.array(z.strictObject({ slot: z.string(), role: z.string() })),
-    tokens: z.array(
-      z.strictObject({ token: z.string(), classes: strings, where: strings })
-    ),
-    tokens_from: strings,
     exports: z.array(
       z.strictObject({
         name: z.string(),
         summary: z.string(),
         description: z.string(),
-        example: z.string(),
       })
     ),
     props: z.array(
@@ -156,17 +148,12 @@ export const componentSpecOutput = forms(
         description: z.string(),
       })
     ),
-    states: z.array(
-      z.strictObject({ state: z.string(), behavior: z.string() })
-    ),
     accessibility: z.string(),
     code_example: z.string(),
     variants: z.record(
       z.string(),
       z.strictObject({ values: strings, default: z.string().nullable() })
     ),
-    variant_sources: strings,
-    part_of: z.string().nullable(),
     sizes: strings,
     composition_rules: z.array(compositionRule),
   })
@@ -260,14 +247,6 @@ const criticalRule = z.strictObject({
   severity: z.string(),
   title: z.string(),
   description: strings,
-  token_chain_explanation: z
-    .strictObject({
-      description: z.string(),
-      example: z.string(),
-      mapping: record,
-    })
-    .optional(),
-  do: strings.optional(),
   dont: strings.optional(),
   mandatory_mappings: record.optional(),
   page_structure: strings.optional(),

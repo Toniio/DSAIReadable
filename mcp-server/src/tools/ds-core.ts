@@ -26,9 +26,9 @@ import {
   conciseRuleSet,
   concisePattern,
   conciseSpec,
-  CRITICAL_RULES,
   criticalRuleTitles,
   responseFormat,
+  servedCriticalRules,
   type ComponentSpec,
   type Pattern,
   type ResponseFormat,
@@ -110,9 +110,45 @@ interface VariantEntry {
 }
 
 /**
- * The detailed answer of dsaireadable_get_component_specs: the full spec, plus what an
- * agent needs to write the component in one call — its cva variants, the
- * sizes its size prop accepts, and the composition rules that cover it.
+ * What the detailed answer of dsaireadable_get_component_specs leaves to the
+ * resource ds://component/{name}/spec: how the component is built — the
+ * libraries it wraps, its data-slots, the tokens its classes read, how each
+ * state looks. A screen that uses the component writes none of it, and what a
+ * state asks of the screen is one of the spec's constraints.
+ */
+const BUILD_FIELDS = new Set([
+  "dependencies",
+  "anatomy",
+  "tokens",
+  "tokens_from",
+  "states",
+])
+
+interface PropRow {
+  component: string
+  prop: string
+  type: string
+  default: string
+  description: string
+}
+
+/**
+ * A props row every part has and that says nothing more: the `...props` it
+ * spreads (each export's summary names the element it renders), or a
+ * `className` that only adds classes to it. A `className` row that says where
+ * the classes go stays.
+ */
+const restatesTheElement = (row: PropRow) =>
+  row.prop.startsWith("`...") ||
+  (row.prop === "`className`" &&
+    row.type === "`string`" &&
+    row.description === "Additional CSS classes")
+
+/**
+ * The detailed answer of dsaireadable_get_component_specs: what a screen needs
+ * to use the component in one call — its usage, constraints, exports, props,
+ * accessibility and code example, its cva variants, the sizes its size prop
+ * accepts, and the composition rules that cover it.
  */
 function componentContext(spec: ComponentSpec) {
   const variants = loadContext<Record<string, VariantEntry>>(
@@ -122,11 +158,22 @@ function componentContext(spec: ComponentSpec) {
     (c) => c.name === spec.name
   )
   const rules = loadContext<RuleSet>("ux-writing.json").composition_rules
+  const kept = Object.fromEntries(
+    Object.entries(spec).filter(([field]) => !BUILD_FIELDS.has(field))
+  )
   return {
-    ...spec,
+    ...kept,
+    exports: (
+      (spec.exports ?? []) as Array<{
+        name: string
+        summary: string
+        description: string
+      }>
+    ).map(({ name, summary, description }) => ({ name, summary, description })),
+    props: ((spec.props ?? []) as PropRow[]).filter(
+      (row) => !restatesTheElement(row)
+    ),
     variants: variants?.variants ?? {},
-    variant_sources: variants?.sources ?? [],
-    part_of: variants?.part_of ?? null,
     sizes: entry?.sizes ?? [],
     composition_rules: compositionRulesFor(
       (rules as CompositionRule[] | undefined) ?? [],
@@ -135,6 +182,10 @@ function componentContext(spec: ComponentSpec) {
   }
 }
 
+/** `[create](./create.md)` read as `create`: an agent follows no link, and every turn resends the path. */
+const withoutLinkTargets = (text: string) =>
+  text.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+
 export function registerDsCoreTools(server: McpServer): void {
   // 1. dsaireadable_get_design_system_overview
   server.registerTool(
@@ -142,7 +193,7 @@ export function registerDsCoreTools(server: McpServer): void {
     {
       title: "Design system overview",
       description:
-        "Returns DS version, library info, stats summary (components, tokens, spec coverage)",
+        "Returns the versions, the install command, the required imports, the shadcn/ui components left out, counts and categories",
       outputSchema: overviewOutput,
       annotations: READ_ONLY,
     },
@@ -227,13 +278,13 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Components",
       description:
-        "Returns the list of components, optionally filtered by category, one page at a time: { total, items, next_cursor }",
+        "Lists the components with their category, status, code path and sizes: { total, items, next_cursor }",
       inputSchema: z.object({
         category: z
           .string()
           .optional()
           .describe(
-            "Filter by category (Brand, Conversation, Data, Feedback, Forms, Layout, Media, Misc, Navigation, Overlay, Typography)"
+            "Brand, Conversation, Data, Feedback, Forms, Layout, Media, Misc, Navigation, Overlay or Typography"
           ),
         ...pageParams,
       }),
@@ -247,7 +298,18 @@ import { cn } from "@/lib/utils"`,
         const cat = category.toLowerCase()
         components = components.filter((c) => c.category?.toLowerCase() === cat)
       }
-      return result(paginate(components, limit, cursor))
+      // has_spec is true for every component: the overview counts it, the
+      // list does not resend it.
+      const items = components.map(
+        ({ name, category, status, code_path, sizes }) => ({
+          name,
+          category,
+          status,
+          code_path,
+          sizes,
+        })
+      )
+      return result(paginate(items, limit, cursor))
     }
   )
 
@@ -257,13 +319,11 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Component spec",
       description:
-        'Returns the spec of one component. "concise" (default): role, MUST / MUST NOT constraints, exported names, cross-references, and how its API departs from shadcn/ui (shadcn: the registry item it derives from, and each divergence — added, removed, renamed or changed — with the reason; write the shadcn/ui API everywhere else). "detailed": everything needed to write the component in one call — the full spec (usage, anatomy, tokens, props, states, accessibility: ARIA pattern, keyboard, accessible name, known pitfalls; code example), its cva variants with their defaults, the sizes its size prop accepts, and the composition rules that cover it. The spec alone is also the resource ds://component/{name}/spec',
+        "Returns one component's spec: role, MUST / MUST NOT constraints, export names, cross-references and how its API departs from shadcn/ui (each divergence, with the reason; write the shadcn/ui API everywhere else). The whole spec, with anatomy, tokens and states, is the resource ds://component/{name}/spec",
       inputSchema: z.object({
-        component_name: z
-          .string()
-          .describe("Component name (e.g. Button, Card, Dialog)"),
+        component_name: z.string().describe("e.g. Button, Card, Dialog"),
         response_format: responseFormat(
-          "the full spec, the cva variants, the sizes and the composition rules"
+          "usage, export summaries and descriptions, props, accessibility (ARIA pattern, keyboard, accessible name, pitfalls), the code example, the cva variants with their defaults, the sizes and the composition rules that cover it"
         ),
       }),
       outputSchema: componentSpecOutput,
@@ -274,12 +334,14 @@ import { cn } from "@/lib/utils"`,
         "component-specs.json"
       )
       const needle = component_name.toLowerCase().replace(/[\s-_]/g, "")
-      const answer = (spec: ComponentSpec) =>
-        result(
+      const answer = (spec: ComponentSpec) => {
+        const detailed = componentContext(spec)
+        return result(
           response_format === "detailed"
-            ? componentContext(spec)
-            : conciseSpec(spec)
+            ? detailed
+            : conciseSpec(spec, detailed)
         )
+      }
 
       // Exact match first
       for (const [key, value] of Object.entries(specs)) {
@@ -316,7 +378,7 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Semantic tokens",
       description:
-        "Returns the semantic design tokens, filtered by category or all of them, one page at a time: { total, items, next_cursor }. One token is also the resource ds://token/{path}",
+        "Returns the semantic tokens: { total, items, next_cursor }. One token is the resource ds://token/{path}",
       inputSchema: z.object({
         category: z
           .enum([
@@ -332,8 +394,7 @@ import { cn } from "@/lib/utils"`,
             "border-width",
             "size",
           ])
-          .optional()
-          .describe("Token category to filter by"),
+          .optional(),
         ...pageParams,
       }),
       outputSchema: tokensOutput,
@@ -357,12 +418,9 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Deprecations",
       description:
-        "Returns everything the design system has deprecated: tokens (with the token that replaces them) and component exports (with the export to use instead). Check it before using a token or an export you know from an earlier version. @dsaireadable/eslint-plugin lints the same list",
+        "Returns the deprecated tokens and component exports, each with its replacement. Check it before using a token or an export from an earlier version",
       inputSchema: z.object({
-        kind: z
-          .enum(["token", "export"])
-          .optional()
-          .describe("Only the deprecated tokens, or only the exports"),
+        kind: z.enum(["token", "export"]).optional().describe("Omit for both"),
       }),
       outputSchema: deprecationsOutput,
       annotations: READ_ONLY,
@@ -388,16 +446,13 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Changelog",
       description:
-        "Returns the changelog, one entry per change, newest release first: { total, items, next_cursor }. Filter by version (`Unreleased`, or a release number from the `version` of an earlier answer) or by category (`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`). Read it to see what moved between the version you know and the current one",
+        "Returns the changelog, one entry per change, newest release first: { total, items, next_cursor }. Read it for what changed since the version you know",
       inputSchema: z.object({
-        version: z
-          .string()
-          .optional()
-          .describe("A release number, or `Unreleased`"),
+        version: z.string().optional().describe("A release number"),
         category: z
           .string()
           .optional()
-          .describe("A heading of the changelog, such as `Deprecated`"),
+          .describe("A changelog heading, such as Minor Changes or Fixed"),
         ...pageParams,
       }),
       outputSchema: changelogOutput,
@@ -439,7 +494,7 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Typography",
       description:
-        "Returns the full typography system (families, scale, weights, line-heights)",
+        "Returns the font families, type scale, weights, line heights, letter spacing and usage rules",
       outputSchema: typographyOutput,
       annotations: READ_ONLY,
     },
@@ -454,7 +509,8 @@ import { cn } from "@/lib/utils"`,
     "dsaireadable_get_icons",
     {
       title: "Icons",
-      description: "Returns the icon catalog and recommendations",
+      description:
+        "Returns the icon library, its default size, its usage rules and the catalog URL",
       outputSchema: iconsOutput,
       annotations: READ_ONLY,
     },
@@ -470,12 +526,14 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Design rules",
       description:
-        'Returns design rules: foundation do/don\'t, component constraints and the composition rules of design-system.index.json. Filter by category: a foundation (color, typography…), a component name (its constraints and the composition rules that cover it), "composition" for every composition rule, or "tailwind" for the critical rules in full. Without a category, "concise" (default) returns the composition rules, the titles of the critical rules and the categories; "detailed" returns every rule. With a category, "concise" reduces the critical rules to their titles',
+        "Returns the design rules. Without a category: the composition rules, the titles of the critical rules and the categories to pass",
       inputSchema: z.object({
         category: z
           .string()
           .optional()
-          .describe("Filter rules by category (e.g. color, radius, Button)"),
+          .describe(
+            'A foundation (color, spacing, focus…) or a component name: its rules and the composition rules that cover it. "composition": every composition rule. "tailwind": the critical rules'
+          ),
         response_format: responseFormat(
           "every rule without a category, and the critical rules in full with one"
         ),
@@ -486,12 +544,12 @@ import { cn } from "@/lib/utils"`,
     async ({ category, response_format }) => {
       const data = loadContext<RuleSet>("ux-writing.json")
       const critical = (format: ResponseFormat) =>
-        format === "detailed" ? CRITICAL_RULES : criticalRuleTitles()
+        format === "detailed" ? servedCriticalRules() : criticalRuleTitles()
 
       if (!category) {
         return result(
           response_format === "detailed"
-            ? { ...data, critical_rules: CRITICAL_RULES }
+            ? { ...data, critical_rules: servedCriticalRules() }
             : conciseRuleSet(data)
         )
       }
@@ -505,7 +563,7 @@ import { cn } from "@/lib/utils"`,
         return result({ category, composition_rules: composition })
 
       if (cat === "tailwind" || cat === "css" || cat === "styling") {
-        return result({ category, rules: CRITICAL_RULES })
+        return result({ category, rules: servedCriticalRules() })
       }
 
       // Check general_rules and component_rules
@@ -565,12 +623,9 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Page patterns",
       description:
-        "Lists the page patterns: tasks a screen carries out (create, edit, delete, filter, search, sign-in, settings) and UI patterns they share (empty-state, form, loading, navigation, saving), each with its name, title, kind and role. Pass a name to dsaireadable_get_pattern for the whole pattern",
+        "Lists the page patterns with name, title, kind and role: tasks (create, edit, delete, filter, search, sign-in, settings), the UI patterns they share (empty-state, form, loading, navigation, saving) and the project's own",
       inputSchema: z.object({
-        kind: z
-          .enum(["task", "ui"])
-          .optional()
-          .describe('"task" or "ui"; omit for every pattern'),
+        kind: z.enum(["task", "ui"]).optional(),
       }),
       outputSchema: patternListOutput,
       annotations: READ_ONLY,
@@ -597,15 +652,11 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Page pattern",
       description:
-        'Returns one page pattern by name (dsaireadable_list_patterns lists them). "concise" (default): role, usage rules and the components it takes. "detailed": the whole pattern — structure (regions and their components), components with their variants, spacing rules, content (what to write, what not to), code example and cross-references',
+        "Returns one page pattern by name or title: role, usage rules and the components it takes",
       inputSchema: z.object({
-        name: z
-          .string()
-          .describe(
-            'Pattern name or title (e.g. "create", "sign-in", "Empty state")'
-          ),
+        name: z.string().describe('e.g. "create", "sign-in", "Empty state"'),
         response_format: responseFormat(
-          "the structure, spacing and content rules, and the code example"
+          "the structure (regions and their components), the component variants, the spacing and content rules, the code example and the cross-references"
         ),
       }),
       outputSchema: patternOutput,
@@ -624,7 +675,14 @@ import { cn } from "@/lib/utils"`,
           Object.keys(patterns)
         )
       return result(
-        response_format === "detailed" ? pattern : concisePattern(pattern)
+        response_format === "detailed"
+          ? {
+              ...pattern,
+              cross_references: (
+                (pattern.cross_references ?? []) as string[]
+              ).map(withoutLinkTargets),
+            }
+          : concisePattern(pattern)
       )
     }
   )

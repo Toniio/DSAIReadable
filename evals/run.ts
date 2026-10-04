@@ -37,6 +37,7 @@ import { fileURLToPath } from "node:url"
 import * as prettier from "prettier"
 
 import { scoreA11y, scrubFailure } from "./lib/a11y"
+import { BUDGETS, budgetFor, compareBudget } from "./lib/budget"
 import {
   passesA,
   passesB,
@@ -48,6 +49,7 @@ import {
   type TaskReport,
 } from "./lib/report"
 import { scoreStatic } from "./lib/static"
+import { readStream, toolResults } from "./lib/stream"
 import {
   designSystemImports,
   goldScreen,
@@ -102,24 +104,35 @@ function readRunFile(dir: string): RunFile | undefined {
 }
 
 /**
+ * The metrics of the session that wrote a screen, `<dir>/<task>.metrics.json`.
+ * Metrics written before the tools' results were measured get them from the
+ * session's stream, `<dir>/<task>.jsonl`, when it is there.
+ */
+function replayMetrics(dir: string, id: string) {
+  const file = resolve(dir, `${id}.metrics.json`)
+  if (!existsSync(file)) return undefined
+  const metrics = JSON.parse(readFileSync(file, "utf-8")) as GenerationMetrics
+  const stream = resolve(dir, `${id}.jsonl`)
+  if (!metrics.results && existsSync(stream))
+    metrics.results = toolResults(readStream(readFileSync(stream, "utf-8")))
+  return metrics
+}
+
+/**
  * Screens written elsewhere: `<dir>/<task>.tsx`, with the metrics of the
  * session that wrote it when there is a `<dir>/<task>.metrics.json`, and how
  * that session ended when `<dir>/run.json` says (evals/generate-claude-code.ts
- * writes all three).
+ * writes all three, and the session's stream).
  */
 function replayGenerator(dir: string): Generator {
   const outcomes = readRunFile(dir)?.tasks ?? {}
   return async (task) => {
     const file = resolve(dir, `${task.id}.tsx`)
-    const metrics = resolve(dir, `${task.id}.metrics.json`)
+    const metrics = replayMetrics(dir, task.id)
     const outcome = outcomes[task.id]
     return {
       code: existsSync(file) ? readFileSync(file, "utf-8") : null,
-      ...(existsSync(metrics) && {
-        metrics: JSON.parse(
-          readFileSync(metrics, "utf-8")
-        ) as GenerationMetrics,
-      }),
+      ...(metrics && { metrics }),
       ...(outcome?.subtype && {
         session: {
           subtype: outcome.subtype,
@@ -262,7 +275,7 @@ async function run(options: {
 
   const tasks = options.tasks.map((t) => reports.get(t.id)!)
   const about = from ? replayAbout(from) : {}
-  const report: RunReport = {
+  const head: Omit<RunReport, "tasks"> = {
     label: options.label,
     date: new Date().toISOString().slice(0, 10),
     generator: options.generator,
@@ -284,8 +297,10 @@ async function run(options: {
       }).trim(),
     },
     summary: summarize(tasks, options.a11y, about.generated?.maxTurns),
-    tasks,
   }
+  // The budget reads before the tasks in report.json.
+  const budget = budgetFor(ROOT, { ...head, tasks })
+  const report: RunReport = { ...head, ...(budget && { budget }), tasks }
   writeFileSync(
     join(dir, "report.json"),
     JSON.stringify(report, null, 2) + "\n"
@@ -385,6 +400,35 @@ async function selfTest() {
     errors.push(
       `evals/fixtures/run.json: the faq task did not carry how its session ended (${JSON.stringify(faqSession)})`
     )
+  // faq.jsonl stands for the stream evals:generate keeps: the turns of the
+  // main loop (a subagent's lines left out), the context each one sent, and
+  // what each call sent back, per tool and per response_format. The metrics
+  // next to it predate that measure, so the replay reads the stream.
+  const faqStream = readStream(
+    readFileSync(join(fixturesDir, "faq.jsonl"), "utf-8")
+  )
+  if (
+    faqStream.map((t) => t.context).join() !== "300,400,500" ||
+    faqStream.flatMap((t) => t.calls.map((c) => c.tool)).join() !==
+      "dsaireadable_get_component_specs,Skill,dsaireadable_get_component_specs"
+  )
+    errors.push(
+      `evals/fixtures/faq.jsonl: readStream reads ${JSON.stringify(faqStream)}`
+    )
+  const faqResults = JSON.stringify(
+    fixtureRun.tasks.find((t) => t.id === "faq")?.metrics?.results
+  )
+  if (
+    faqResults !==
+    JSON.stringify({
+      "dsaireadable_get_component_specs:detailed": { calls: 1, chars: 70 },
+      Skill: { calls: 1, chars: 35 },
+      dsaireadable_get_component_specs: { calls: 1, chars: 20 },
+    })
+  )
+    errors.push(
+      `evals/fixtures/faq.jsonl: the replay did not measure what each tool sent back (${faqResults})`
+    )
   // faq.metrics.json holds two MCP calls and one Skill call.
   const generation = fixtureRun.summary.generation
   if (generation?.mcpCalls !== 2 || generation.otherCalls !== 1)
@@ -396,6 +440,10 @@ async function selfTest() {
     errors.push(
       `the report counts ${generation?.turnCapReached} tasks at the turn cap, not 2`
     )
+  if (generation?.medianInputTokens !== 1200 || generation.medianTurns !== 3)
+    errors.push(
+      `the report's median screen costs ${generation?.medianInputTokens} input tokens in ${generation?.medianTurns} turns, not 1200 in 3`
+    )
   const markdown = toMarkdown(fixtureRun)
   for (const text of [
     "generated at `abcdef1`",
@@ -405,9 +453,54 @@ async function selfTest() {
     "2 MCP tool calls",
     "1 other tool call",
     "2 tasks reached the 25-turn cap",
+    "**Cost: 1,200 input tokens per screen**, in 3 turns",
+    "What the tools sent back: 0.1 KiB",
+    "| `dsaireadable_get_component_specs` | detailed | 1 | 0.1 KiB | 56 % |",
   ])
     if (!markdown.includes(text))
       errors.push(`the report header or generation line lacks "${text}"`)
+
+  // A budget compares a run with its baseline's condition only, and holds it
+  // to the token ceiling at a conformance no lower than the baseline's.
+  const withMedian = (inputTokens: number, conformance: number) => ({
+    ...fixtureRun,
+    summary: { ...fixtureRun.summary, conformance },
+    tasks: fixtureRun.tasks.map((t) =>
+      t.metrics ? { ...t, metrics: { ...t.metrics, inputTokens } } : t
+    ),
+  })
+  const budget = { baseline: "fixture", tokens: 0.7 }
+  const verdicts = [
+    compareBudget(fixtureRun, withMedian(2000, 0.2), budget),
+    compareBudget(fixtureRun, withMedian(1500, 0.2), budget),
+    compareBudget(fixtureRun, withMedian(2000, 0.99), budget),
+    compareBudget(fixtureRun, { ...withMedian(2000, 0), model: "x" }, budget),
+  ]
+  if (
+    verdicts[0]?.target !== 1400 ||
+    verdicts[0].medianInputTokens !== 1200 ||
+    !verdicts[0].met ||
+    verdicts[1]?.met !== false ||
+    verdicts[2]?.met !== false ||
+    verdicts[3] !== undefined
+  )
+    errors.push(
+      `compareBudget: ${JSON.stringify(verdicts)} (met under the ceiling, missed over it or at a lower conformance, none for another model)`
+    )
+  if (
+    !toMarkdown({ ...fixtureRun, budget: verdicts[0] }).includes(
+      "Budget against `fixture`: 1,200 input tokens per screen for at most 1,400 (-30 % of 2,000) ✅"
+    )
+  )
+    errors.push("the report does not print the budget line")
+  for (const { baseline, tokens } of BUDGETS)
+    if (
+      !existsSync(join(ROOT, "evals/history", `${baseline}.json`)) ||
+      !(tokens > 0 && tokens < 1)
+    )
+      errors.push(
+        `evals/lib/budget.ts: the baseline "${baseline}" is not a run of evals/history/, or ${tokens} is not a share`
+      )
   // A failure message keeps its assertion, not the path of the machine that ran it.
   const failures = JSON.stringify(fixtureRun.tasks.map((t) => t.a11y))
   for (const [what, found] of [

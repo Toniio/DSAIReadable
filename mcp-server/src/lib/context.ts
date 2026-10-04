@@ -55,14 +55,15 @@ export function loadContext<T = unknown>(filename: string): T {
 /**
  * Wrap a payload as a tool result: `structuredContent`, which the server
  * validates against the tool's output schema, and the same JSON as text for
- * clients that read only the text.
+ * clients that read only the text. Compact: an agent reads it as well
+ * indented or not, and every turn after the call sends the indentation again.
  */
 export function result(data: object): {
   content: { type: "text"; text: string }[]
   structuredContent: Record<string, unknown>
 } {
   return {
-    content: [{ type: "text" as const, text: JSON.stringify(data, null, 2) }],
+    content: [{ type: "text" as const, text: JSON.stringify(data) }],
     structuredContent: data as Record<string, unknown>,
   }
 }
@@ -83,7 +84,7 @@ export function notFound(
     content: [
       {
         type: "text" as const,
-        text: JSON.stringify({ error, available }, null, 2),
+        text: JSON.stringify({ error, available }),
       },
     ],
     isError: true,

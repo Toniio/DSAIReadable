@@ -28,6 +28,7 @@ A composable empty state, shown when a view, a list or a section has no data.
 - **MUST NOT** — show more than one `Empty` per view
 - **MUST NOT** — put essential information in `EmptyMedia`: the media is decorative
 - **MUST NOT** — exceed two sentences of description; frame it around the action to take
+- **Note** — `Empty` draws no border: the `border` class adds a dashed one
 - **MUST** — `EmptyTitle` renders an `<h2>`: pass `as` (`"h3"`…) to follow the page's hierarchy — one level below the heading of the section that holds the empty state. Do not style through `as`: the look is fixed
 
 ## Dependencies

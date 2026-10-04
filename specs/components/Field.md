@@ -29,11 +29,13 @@ A layout system for form fields: it ties a label to its control, carries the inv
 - **MUST NOT** — nest `FieldSet`s more than 2 levels deep
 - **MUST** — set `data-invalid` yourself, from the validation result (server or client): `Field` validates nothing
 - **MUST** — set `aria-invalid` on the control itself: `Field` does not pass it down
+- **MUST** — set `data-disabled` on a `Field` whose control is disabled: its `FieldLabel` and `FieldTitle` dim through it
 - **MUST NOT** — use `orientation="horizontal"` in a layout that has to fit on mobile → `orientation="responsive"`, which switches to a row once its `FieldGroup` is wide enough
 - **MUST** — place a `Field` with `orientation="responsive"` inside a `FieldGroup`, whose width it reads (`@container/field-group`)
 - **MUST** — keep `FieldLegend variant="legend"` for `<fieldset>`s; everywhere else, `variant="label"`
 - **Note** — `FieldError` renders nothing without `children` or a non-empty `errors`
 - **MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`
+- **Note** — a choice card is a `FieldLabel` wrapping a `Field orientation="horizontal"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring
 - **MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)
 
 ## Dependencies

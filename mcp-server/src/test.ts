@@ -929,8 +929,10 @@ assert(
   "exportDocs lists an export with no JSDoc, or no example, with an empty string instead of skipping it"
 )
 
-// Every export of every component spec is served with both, so an agent never
-// has to open the file to learn what an export is for or how it is written.
+// Every export of every component spec has both, so an agent never has to
+// open the file to learn what an export is for or how it is written: the
+// detailed answer serves the description, the resource and the site the
+// example too.
 const undocumented = Object.entries(apiSpecs).flatMap(([name, spec]) =>
   spec.exports.flatMap((e) => [
     ...(e.description === "" ? [`${name}.${e.name}: description`] : []),
@@ -1459,10 +1461,14 @@ assert(
   "Completion finds a component name and a token path by prefix"
 )
 
-// concise is the default and stays ≤ 20 % of detailed: summed over every
-// spec for dsaireadable_get_component_specs, unfiltered for the two rule tools.
+// Every turn after a call sends its answer again. Summed over every spec,
+// concise stays ≤ 20 % of the spec whole (the resource), and detailed serves
+// what a screen writes: ≤ 55 % of it, where it served the spec whole and the
+// variants on top. Unfiltered, the concise rules stay ≤ 20 % of the detailed
+// ones.
 let conciseTotal = 0
 let detailedTotal = 0
+let wholeTotal = 0
 for (const name of specNames) {
   conciseTotal += (
     await payload("dsaireadable_get_component_specs", { component_name: name })
@@ -1473,23 +1479,24 @@ for (const name of specNames) {
       response_format: "detailed",
     })
   ).length
+  wholeTotal += (
+    (await client.readResource({ uri: `ds://component/${name}/spec` }))
+      .contents[0] as { text: string }
+  ).text.length
 }
-const ratios = {
-  dsaireadable_get_component_specs: conciseTotal / detailedTotal,
-  dsaireadable_get_design_rules:
-    (await payload("dsaireadable_get_design_rules")).length /
-    (
-      await payload("dsaireadable_get_design_rules", {
-        response_format: "detailed",
-      })
-    ).length,
-}
-for (const [tool, ratio] of Object.entries(ratios)) {
-  assert(
-    ratio <= 0.2,
-    `${tool}: concise is ${Math.round(ratio * 100)} % of detailed (≤ 20 %)`
-  )
-}
+const rulesRatio =
+  (await payload("dsaireadable_get_design_rules")).length /
+  (
+    await payload("dsaireadable_get_design_rules", {
+      response_format: "detailed",
+    })
+  ).length
+assert(
+  conciseTotal / wholeTotal <= 0.2 &&
+    detailedTotal / wholeTotal <= 0.55 &&
+    rulesRatio <= 0.2,
+  `dsaireadable_get_component_specs: concise is ${Math.round((conciseTotal / wholeTotal) * 100)} % of the specs whole (≤ 20 %), detailed ${Math.round((detailedTotal / wholeTotal) * 100)} % (≤ 55 %); dsaireadable_get_design_rules: concise is ${Math.round(rulesRatio * 100)} % of detailed (≤ 20 %)`
+)
 const conciseButton = JSON.parse(
   await payload("dsaireadable_get_component_specs", {
     component_name: "Button",
@@ -1499,23 +1506,24 @@ assert(
   JSON.stringify(conciseButton.constraints) ===
     JSON.stringify(fullSpecs.Button.constraints) &&
     conciseButton.props === undefined &&
-    conciseButton.detail.includes("props"),
-  "concise keeps every constraint and names what detailed adds"
+    conciseButton.detail ===
+      'response_format: "detailed" adds usage, props, accessibility, code_example, variants, sizes, composition_rules, and each export\'s summary and description',
+  `concise keeps every constraint and names what detailed adds, read from it (${conciseButton.detail})`
 )
 
 // detailed answers everything needed to write the component in one call:
 // its cva variants, the sizes of its size prop (design-system.index.json,
 // served nowhere else before) and the composition rules that cover it.
+const detailedSpec = async (component_name: string) =>
+  JSON.parse(
+    await payload("dsaireadable_get_component_specs", {
+      component_name,
+      response_format: "detailed",
+    })
+  )
 {
-  const detailed = async (component_name: string) =>
-    JSON.parse(
-      await payload("dsaireadable_get_component_specs", {
-        component_name,
-        response_format: "detailed",
-      })
-    )
-  const button = await detailed("Button")
-  const select = await detailed("Select")
+  const button = await detailedSpec("Button")
+  const select = await detailedSpec("Select")
   const index = JSON.parse(
     readFileSync(resolve(__dirname, "../../design-system.index.json"), "utf-8")
   ) as { inventory: { name: string; sizes?: string[] }[] }
@@ -1537,15 +1545,223 @@ assert(
     "detailed serves the variants, the sizes and the composition rules; dsaireadable_get_components serves the sizes"
   )
 }
-assert(
-  JSON.parse(
-    await payload("dsaireadable_get_component_specs", {
-      component_name: "Button",
+
+// detailed leaves how a component is built to the resource: its libraries,
+// data-slots, tokens and the look of each state, each export's example, and
+// the props rows every part has (the `...props` it spreads, a className that
+// only adds classes). A className row that says where the classes go stays.
+{
+  type ServedProp = PropRow & { description: string }
+  const built = [
+    "dependencies",
+    "anatomy",
+    "tokens",
+    "tokens_from",
+    "states",
+    "variant_sources",
+    "part_of",
+  ]
+  const answers = await Promise.all(specNames.map(detailedSpec))
+  const leaks = answers.flatMap((a) => [
+    ...built.filter((field) => field in a).map((f) => `${a.name}.${f}`),
+    ...a.exports
+      .filter((e: Json) => Object.keys(e).join() !== "name,summary,description")
+      .map((e: Json) => `${a.name}.exports.${e.name}`),
+    ...a.props
+      .filter(
+        (row: ServedProp) =>
+          row.prop.startsWith("`...") ||
+          (row.prop === "`className`" &&
+            row.type === "`string`" &&
+            row.description === "Additional CSS classes")
+      )
+      .map((row: ServedProp) => `${a.name}.props.${row.component}.${row.prop}`),
+  ])
+  const otp = answers.find((a) => a.name === "InputOtp")
+  assert(
+    leaks.length === 0 &&
+      otp.props.some(
+        (row: ServedProp) =>
+          row.prop === "`className`" &&
+          row.description === "CSS classes on the hidden input"
+      ) &&
+      answers.every((a) => a.accessibility === fullSpecs[a.name].accessibility),
+    `detailed serves what a screen writes, accessibility whole, and leaves the build to the resource${leaks.length ? `: ${leaks.slice(0, 8).join(", ")}` : ""}`
+  )
+}
+
+// What a state asked of the screen is a constraint, served in both formats
+// now that detailed leaves the States table to the resource.
+{
+  const constraints = async (component_name: string) =>
+    (
+      JSON.parse(
+        await payload("dsaireadable_get_component_specs", { component_name })
+      ).constraints as string[]
+    ).join("\n")
+  const facts: [string, RegExp][] = [
+    ["InputOtp", /`aria-invalid` on each `InputOTPSlot`/],
+    ["Pagination", /pass `disabled` to `PaginationLink`/],
+    ["Field", /`data-disabled` on a `Field`/],
+    ["Field", /a choice card is a `FieldLabel` wrapping a `Field/],
+    ["Command", /wrap the content of a `CommandDialog` in a `Command`/],
+    ["Button", /a `Spinner` as a child[^\n]*`aria-busy="true"`/],
+  ]
+  const missing = []
+  for (const [name, fact] of facts)
+    if (!fact.test(await constraints(name))) missing.push(`${name}: ${fact}`)
+  assert(
+    missing.length === 0,
+    `The obligations of the States tables are constraints${missing.length ? `; missing: ${missing.join(", ")}` : ""}`
+  )
+}
+
+// The critical rules are served without the `do` list (the prompts print it)
+// and the token chain: a screen writes the class, not the token it reads.
+{
+  const tailwind = JSON.parse(
+    await payload("dsaireadable_get_design_rules", { category: "tailwind" })
+  )
+  const detailedRules = JSON.parse(
+    await payload("dsaireadable_get_design_rules", {
       response_format: "detailed",
     })
-  ).accessibility === fullSpecs.Button.accessibility,
-  "detailed serves the spec whole"
-)
+  )
+  const lean = (rules: Json[]) =>
+    rules.every((r) => !("do" in r) && !("token_chain_explanation" in r)) &&
+    rules.some(
+      (r) =>
+        r.id === TAILWIND_RULE.id &&
+        JSON.stringify(r.dont) === JSON.stringify(TAILWIND_RULE.dont) &&
+        JSON.stringify(r.description) ===
+          JSON.stringify(TAILWIND_RULE.description)
+    )
+  assert(
+    lean(tailwind.rules) && lean(detailedRules.critical_rules),
+    "dsaireadable_get_design_rules serves the critical rules without their do list and token chain"
+  )
+}
+
+// A detailed pattern's cross-references are names: an agent follows no link,
+// and every turn would resend the path.
+{
+  const names = Object.keys(
+    JSON.parse(readFileSync(resolve(contextDir, "patterns.json"), "utf-8"))
+  )
+  const linked: string[] = []
+  for (const name of names) {
+    const pattern = JSON.parse(
+      await payload("dsaireadable_get_pattern", {
+        name,
+        response_format: "detailed",
+      })
+    )
+    for (const ref of pattern.cross_references as string[])
+      if (/\]\(/.test(ref)) linked.push(`${name}: ${ref}`)
+  }
+  const form = JSON.parse(
+    await payload("dsaireadable_get_pattern", {
+      name: "form",
+      response_format: "detailed",
+    })
+  )
+  assert(
+    linked.length === 0 &&
+      form.cross_references.some((r: string) =>
+        r.startsWith("create, edit, sign-in")
+      ),
+    `dsaireadable_get_pattern serves its cross-references without link targets${linked.length ? `: ${linked.slice(0, 3).join(" · ")}` : ""}`
+  )
+}
+
+// The list leaves out has_spec, true for every component: the overview
+// counts the coverage.
+{
+  const listed = JSON.parse(await payload("dsaireadable_get_components"))
+  assert(
+    listed.items.length === specNames.length &&
+      listed.items.every(
+        (c: Json) =>
+          Object.keys(c).join() === "name,category,status,code_path,sizes"
+      ),
+    "dsaireadable_get_components lists name, category, status, code path and sizes"
+  )
+}
+
+// Every turn resends the tool definitions: they stay under 8,500 characters
+// (10,386 in 0.2.0), and what their descriptions name exists.
+{
+  const definitions = tools.map((t) => ({
+    name: t.name,
+    description: t.description,
+    input_schema: t.inputSchema,
+  }))
+  const size = JSON.stringify(definitions).length
+  const tool = (name: string) => tools.find((t) => t.name === name)!
+  const param = (name: string, key: string) =>
+    (tool(name).inputSchema.properties?.[key] as { description?: string })
+      ?.description ?? ""
+  const patternNames = Object.keys(
+    JSON.parse(readFileSync(resolve(contextDir, "patterns.json"), "utf-8"))
+  )
+  const categories = [
+    ...new Set(
+      (
+        JSON.parse(
+          readFileSync(resolve(contextDir, "components.json"), "utf-8")
+        ) as { category: string }[]
+      ).map((c) => c.category)
+    ),
+  ]
+  const headings = new Set(
+    (
+      JSON.parse(
+        readFileSync(resolve(contextDir, "changelog.json"), "utf-8")
+      ) as { category: string }[]
+    ).map((e) => e.category)
+  )
+  const examples =
+    /such as (.+) or (.+)$/
+      .exec(param("dsaireadable_get_changelog", "category"))
+      ?.slice(1) ?? []
+  const wrong = [
+    ...patternNames
+      .filter(
+        (n) => !tool("dsaireadable_list_patterns").description?.includes(n)
+      )
+      .map((n) => `list_patterns does not name ${n}`),
+    ...categories
+      .filter(
+        (c) => !param("dsaireadable_get_components", "category").includes(c)
+      )
+      .map((c) => `get_components does not name ${c}`),
+    ...(examples.length === 2 ? examples : ["(none)"])
+      .filter((h) => !headings.has(h))
+      .map((h) => `get_changelog names the heading ${h}`),
+  ]
+  assert(
+    size <= 8500 && wrong.length === 0,
+    `The tool definitions take ${size} characters (≤ 8,500), and what they name exists${wrong.length ? `: ${wrong.join(", ")}` : ""}`
+  )
+}
+
+// An error and a resource are compact JSON too.
+{
+  const error = await call("dsaireadable_get_component_specs", {
+    component_name: "NoSuchThing",
+  })
+  const resource = (
+    (await client.readResource({ uri: "ds://component/Button/spec" }))
+      .contents[0] as { text: string }
+  ).text
+  assert(
+    error.isError === true &&
+      error.content[0].text ===
+        JSON.stringify(JSON.parse(error.content[0].text)) &&
+      resource === JSON.stringify(JSON.parse(resource)),
+    "notFound() and the resources answer compact JSON"
+  )
+}
 
 // Divergences from shadcn/ui (design-system.index.json) reach the agent in the
 // concise answer: it writes the shadcn/ui API from memory.
@@ -2748,11 +2964,11 @@ for (const [name, args] of inputs) {
     structuredContent?: unknown
     isError?: boolean
   }
-  // The text is the same JSON, for clients that read only the text.
+  // The text is the same JSON, for clients that read only the text, and
+  // compact: every turn after the call sends it again, indentation included.
   if (
     answer.isError ||
-    JSON.stringify(answer.structuredContent) !==
-      JSON.stringify(JSON.parse(answer.content[0].text))
+    answer.content[0].text !== JSON.stringify(answer.structuredContent)
   )
     nonConforming.push(
       `${name} ${JSON.stringify(args)}: ${answer.content[0].text.slice(0, 200)}`
@@ -2760,7 +2976,7 @@ for (const [name, args] of inputs) {
 }
 assert(
   nonConforming.length === 0 && declared.every((t) => calledTools.has(t.name)),
-  `${inputs.length} calls over the ${calledTools.size} tools conform to their output schema, text and structuredContent alike${nonConforming.length ? `:\n    ${nonConforming.join("\n    ")}` : ""}`
+  `${inputs.length} calls over the ${calledTools.size} tools conform to their output schema, text and structuredContent alike, the text compact${nonConforming.length ? `:\n    ${nonConforming.join("\n    ")}` : ""}`
 )
 
 // An argument outside the input schema is a tool execution error, which the

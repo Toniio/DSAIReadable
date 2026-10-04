@@ -545,6 +545,7 @@
       "**MUST NOT** — place more than 2 `variant=\"default\"` (primary) buttons in the same view",
       "**MUST NOT** — convey a state through color alone: add text or a tooltip",
       "**MUST** — give an `icon-*` button an `aria-label`",
+      "**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\"true\"` on the button",
       "**MUST NOT** — nest a `<button>` inside another, including through `asChild`"
     ],
     "ButtonGroup": [
@@ -617,7 +618,9 @@
       "**MUST** — render a `CommandEmpty` for the \"no results\" case",
       "**MUST** — wire up the keyboard shortcut that `CommandShortcut` displays yourself: it is only a label",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component",
-      "**MUST** — in dialog mode, set `title` and `description`: rendered `sr-only`, they name the dialog"
+      "**MUST** — in dialog mode, set `title` and `description`: rendered `sr-only`, they name the dialog",
+      "**MUST** — wrap the content of a `CommandDialog` in a `Command`: the dialog renders its children as they are, and a `CommandInput` outside a `Command` throws",
+      "**Note** — `data-checked=\"true\"` on a `CommandItem` shows its trailing check, unless the item holds a `CommandShortcut`"
     ],
     "ContextMenu": [
       "**MUST NOT** — serve as the main navigation menu → use `DropdownMenu`",
@@ -661,17 +664,20 @@
       "**MUST NOT** — show more than one `Empty` per view",
       "**MUST NOT** — put essential information in `EmptyMedia`: the media is decorative",
       "**MUST NOT** — exceed two sentences of description; frame it around the action to take",
+      "**Note** — `Empty` draws no border: the `border` class adds a dashed one",
       "**MUST** — `EmptyTitle` renders an `<h2>`: pass `as` (`\"h3\"`…) to follow the page's hierarchy — one level below the heading of the section that holds the empty state. Do not style through `as`: the look is fixed"
     ],
     "Field": [
       "**MUST NOT** — nest `FieldSet`s more than 2 levels deep",
       "**MUST** — set `data-invalid` yourself, from the validation result (server or client): `Field` validates nothing",
       "**MUST** — set `aria-invalid` on the control itself: `Field` does not pass it down",
+      "**MUST** — set `data-disabled` on a `Field` whose control is disabled: its `FieldLabel` and `FieldTitle` dim through it",
       "**MUST NOT** — use `orientation=\"horizontal\"` in a layout that has to fit on mobile → `orientation=\"responsive\"`, which switches to a row once its `FieldGroup` is wide enough",
       "**MUST** — place a `Field` with `orientation=\"responsive\"` inside a `FieldGroup`, whose width it reads (`@container/field-group`)",
       "**MUST** — keep `FieldLegend variant=\"legend\"` for `<fieldset>`s; everywhere else, `variant=\"label\"`",
       "**Note** — `FieldError` renders nothing without `children` or a non-empty `errors`",
       "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`",
+      "**Note** — a choice card is a `FieldLabel` wrapping a `Field orientation=\"horizontal\"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring",
       "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)"
     ],
     "Heading": [
@@ -711,6 +717,7 @@
     "InputOtp": [
       "**MUST NOT** — take free text or more than 8 characters: it is meant for codes of 4 to 8 characters",
       "**MUST** — give each `InputOTPSlot` the `index` of its position",
+      "**MUST** — set `aria-invalid` on each `InputOTPSlot` to show an error: set on `InputOTP` itself, it draws nothing",
       "**Note** — `spellCheck` is off by default: the browser offers no correction on a code",
       "**MUST NOT** — redefine the ARIA roles: the `input-otp` library handles them",
       "**MUST NOT** — receive a function (callback, event handler) from a server component: it is a client component (`\"use client\"`), and only serializable props reach it from a server component"
@@ -790,6 +797,7 @@
       "**MUST** — manage the pagination state and URLs yourself: the component holds none",
       "**MUST NOT** — duplicate `aria-current=\"page\"`, which the active page already carries",
       "**MUST** — give `PaginationPrevious` and `PaginationNext` a valid `href` or a handler",
+      "**MUST NOT** — pass `disabled` to `PaginationLink`, `PaginationPrevious` or `PaginationNext`: each renders an `<a>`, which has no disabled state; on the first or the last page, leave out the control that leads nowhere",
       "**Note** — the ellipsis is hidden from screen readers (`aria-hidden`)",
       "**MUST** — in an interface that is not in English, translate `UI_STRINGS.pagination` through `text`, `label` and `srLabel`"
     ],
