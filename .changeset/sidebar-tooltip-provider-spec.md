@@ -2,4 +2,4 @@
 "dsaireadable": patch
 ---
 
-docs: The Sidebar spec's constraint on the `TooltipProvider` is rewritten now that `SidebarProvider` supplies one: a `Tooltip` inside the `SidebarProvider`, the `tooltip` of each `SidebarMenuButton` included, needs no provider of the app's own, and a `Tooltip` outside it still needs a `TooltipProvider` in the root layout. The spec's dependencies name `TooltipProvider`.
+docs: The Sidebar spec now names the `TooltipProvider`. `SidebarProvider` supplies one to everything inside it, so the `tooltip` of each `SidebarMenuButton`, which the spec requires on every button collapsed to its icon, needs no provider of the app's own; a `Tooltip` outside the `SidebarProvider` still needs a `TooltipProvider` in the root layout, and throws without one. The spec's dependencies and its `Tooltip` cross-reference name the provider.
