@@ -146,3 +146,26 @@ describe.each(Object.keys(states))("%s", (name) => {
     expect(await unmarkedTabStops(5)).toEqual([])
   })
 })
+
+/**
+ * The walk itself, on a control rendered with focus: a verification-code
+ * screen sets `autoFocus` on its InputOTP, whose active slot is React state.
+ * The walk takes focus away first, and measured before the blur re-rendered,
+ * the slot's ring was compared with itself on the first Tab press: 0:1 in
+ * light, though the slot shows it.
+ */
+describe("InputOTP, rendered with focus", () => {
+  it("shows a focus indicator with a solid 3:1 part, light and dark", async () => {
+    render(
+      <div className="p-4">
+        <InputOTP maxLength={2} aria-label="Code" autoFocus>
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+          </InputOTPGroup>
+        </InputOTP>
+      </div>
+    )
+    expect(await unmarkedTabStops(5)).toEqual([])
+  })
+})
