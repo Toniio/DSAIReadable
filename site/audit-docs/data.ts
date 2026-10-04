@@ -39,6 +39,8 @@ interface RunReport {
   skills?: string[]
   via?: string
   designSystem: { version: string; commit: string }
+  /** Where the screens come from: absent from a gold run. */
+  generated?: { commit: string; sources?: string }
   summary: {
     tasks: number
     generated: number
@@ -80,6 +82,15 @@ export interface EvalRun {
   via?: string
   /** `Gold (calibration)`, `No context`, `MCP`, `MCP + skills`. */
   condition: string
+  /**
+   * The screens it scores, by the commit and sources they were generated
+   * from: null for a gold run, which scores the gold examples.
+   */
+  screens: string | null
+  /** The date its screens were first scored: `date`, unless it rescores them. */
+  builtOn: string
+  /** It scores again the screens of an earlier run, with a later scorer. */
+  rescored: boolean
   context?: string
   skills: string[]
   tasks: number
@@ -136,10 +147,19 @@ function goldLink(task: EvalTask | undefined): TaskResult["gold"] {
     : undefined
 }
 
+/**
+ * The runs that score the same screens under the same condition: a run and
+ * its rescores share it. A run with no screens of its own is alone.
+ */
+const sameScreens = (run: EvalRun) =>
+  run.screens
+    ? [run.version, run.model, run.condition, run.screens].join("|")
+    : run.file
+
 /** Every recorded run of evals/history/, oldest first. */
 export function evalRuns(): EvalRun[] {
   const tasks = readJson<{ tasks: EvalTask[] }>("evals/tasks.json").tasks
-  return listFiles("evals/history", ".json")
+  const runs: EvalRun[] = listFiles("evals/history", ".json")
     .map((file) => {
       const report = readJson<RunReport>(`evals/history/${file}`)
       return {
@@ -150,6 +170,11 @@ export function evalRuns(): EvalRun[] {
         model: report.model,
         via: report.via,
         condition: condition(report),
+        screens: report.generated
+          ? `${report.generated.commit}:${report.generated.sources ?? ""}`
+          : null,
+        builtOn: report.date,
+        rescored: false,
         context: report.context,
         skills: report.skills ?? [],
         tasks: report.summary.tasks,
@@ -182,6 +207,24 @@ export function evalRuns(): EvalRun[] {
         CONDITION_ORDER.indexOf(a.condition) -
           CONDITION_ORDER.indexOf(b.condition)
     )
+  const firstScored = new Map<string, string>()
+  for (const run of runs) {
+    const first = firstScored.get(sameScreens(run))
+    if (first === undefined) firstScored.set(sameScreens(run), run.date)
+    else if (first !== run.date)
+      Object.assign(run, { builtOn: first, rescored: true })
+  }
+  return runs
+}
+
+/**
+ * The runs the page shows: a run whose screens a later run scores again (a
+ * rescore, after a fix of the scorer) gives way to it. evals/history/ keeps
+ * both.
+ */
+export function currentRuns(runs: EvalRun[]): EvalRun[] {
+  const last = new Map(runs.map((run) => [sameScreens(run), run]))
+  return runs.filter((run) => last.get(sameScreens(run)) === run)
 }
 
 /** The runs of the most recent version measured; the others stay in evals/history/. */
@@ -194,13 +237,17 @@ export function latestVersionRuns(runs: EvalRun[]): EvalRun[] {
 }
 
 /**
- * The model runs of the most recent date: the conditions measured together.
- * A gold run calibrates the scorer, it measures no model.
+ * The model runs whose screens were built last: the conditions measured
+ * together, rescored or not. A gold run calibrates the scorer, it measures no
+ * model.
  */
 export function latestRuns(runs: EvalRun[]): EvalRun[] {
   const models = runs.filter((run) => run.generator !== "gold")
-  const last = models.at(-1)?.date
-  return models.filter((run) => run.date === last)
+  const last = models
+    .map((run) => run.builtOn)
+    .sort()
+    .at(-1)
+  return models.filter((run) => run.builtOn === last)
 }
 
 /** A share as a percentage: `0.981` → `98.1%`. */

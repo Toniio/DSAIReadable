@@ -793,6 +793,12 @@
         "item": "sidebar",
         "divergences": [
           {
+            "export": "SidebarProvider",
+            "type": "changed",
+            "upstream": "providers: (none)",
+            "note": "Wraps its children in a TooltipProvider (delayDuration 0, its default), as the earlier new-york sidebar of shadcn/ui did. Upstream supplies none, so the tooltip the Sidebar spec requires on each SidebarMenuButton collapsed to its icon throws there without a provider of the app's own. Nothing to write for the sidebar: a TooltipProvider in the root layout still works, and inside the SidebarProvider the nearer one, the sidebar's, sets the delay. A Tooltip outside the SidebarProvider still needs a TooltipProvider above it."
+          },
+          {
             "export": "Sidebar",
             "prop": "mobileTitle",
             "type": "added",

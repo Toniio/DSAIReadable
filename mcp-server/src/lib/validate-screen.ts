@@ -42,7 +42,11 @@ interface LineRule {
  * SCREEN_RULES. Listed here so the test suite asks a failing fixture of each,
  * as it does of every line rule.
  */
-export const SCREEN_WIDE_RULES = ["ui-import-origin", "ds-imports"]
+export const SCREEN_WIDE_RULES = [
+  "ui-import-origin",
+  "ds-imports",
+  "tooltip-provider",
+]
 
 /** Tailwind's default palette — none of it is part of this design system. */
 const TAILWIND_PALETTE =
@@ -167,6 +171,11 @@ const CANONICAL_UI_IMPORT = "@/components/ui/"
 const FOREIGN_UI_IMPORT =
   /import\s+[^;]*?from\s+["']([^"']*(?:components\/ui|design-system|make-kit|ui-kit)[^"']*)["']/g
 
+/** `<Tooltip>` itself, not `<TooltipTrigger>` or `<TooltipContent>`. */
+const TOOLTIP = /<Tooltip\b/
+/** What supplies a `TooltipProvider`: the provider, or a `SidebarProvider`. */
+const TOOLTIP_PROVIDER = /<(?:TooltipProvider|SidebarProvider)\b/
+
 export function validateScreen(code: string): ScreenReport {
   const issues: ScreenIssue[] = []
   const lines = code.split("\n")
@@ -219,6 +228,24 @@ export function validateScreen(code: string): ScreenReport {
       line: code.slice(0, match.index ?? 0).split("\n").length,
     })
   }
+
+  // A Tooltip throws without a TooltipProvider above it. A warning, not an
+  // error: the provider often lives in the root layout, which this file does
+  // not show.
+  const tooltipLine = lines.findIndex(
+    (line) => !isComment(line) && TOOLTIP.test(line)
+  )
+  const provided = lines.some(
+    (line) => !isComment(line) && TOOLTIP_PROVIDER.test(line)
+  )
+  if (tooltipLine >= 0 && !provided)
+    issues.push({
+      severity: "warning",
+      rule: "tooltip-provider",
+      message:
+        "<Tooltip> with no <TooltipProvider> or <SidebarProvider> in this file. A Tooltip throws without a provider above it: render <TooltipProvider> in the root layout (a SidebarProvider supplies one to everything inside it). If the root layout already renders one, ignore this warning",
+      line: tooltipLine + 1,
+    })
 
   const hasUiImports = new RegExp(
     `import\\s+.*from\\s+["']${CANONICAL_UI_IMPORT.replace(/\//g, "\\/")}[^"']+["']`
