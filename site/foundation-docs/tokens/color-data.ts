@@ -28,7 +28,7 @@ export interface SemanticColor {
   replacement?: string
   light: string
   dark: string
-  /** The primitive each mode reads: `mist.0`. */
+  /** The primitive each mode reads: `mist.50`. */
   lightRef?: string
   darkRef?: string
   classes: string[]
@@ -55,7 +55,7 @@ export interface ColorAlias {
 }
 
 export interface PrimitiveStep {
-  /** `mist.0` */
+  /** `mist.50` */
   name: string
   /** `0`, or the palette name for a palette of one. */
   step: string

@@ -2,7 +2,7 @@
   {
     "path": "color.background.default",
     "css_var": "--color-background-default",
-    "light": "{primitive.color.mist.0}",
+    "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
     "type": "color",
     "status": "active",
@@ -20,7 +20,7 @@
   {
     "path": "color.background.elevated",
     "css_var": "--color-background-elevated",
-    "light": "{primitive.color.mist.0}",
+    "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.900}",
     "type": "color",
     "status": "active",
@@ -30,7 +30,7 @@
     "path": "color.background.inverse",
     "css_var": "--color-background-inverse",
     "light": "{primitive.color.mist.950}",
-    "dark": "{primitive.color.mist.0}",
+    "dark": "{primitive.color.white}",
     "type": "color",
     "status": "reserved",
     "usage": "Inverted surface for contrast callouts. Not for general-purpose backgrounds."
@@ -65,7 +65,7 @@
   {
     "path": "color.text.inverse",
     "css_var": "--color-text-inverse",
-    "light": "{primitive.color.mist.0}",
+    "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
     "type": "color",
     "status": "reserved",
@@ -92,7 +92,7 @@
   {
     "path": "color.text.destructive.default",
     "css_var": "--color-text-destructive-default",
-    "light": "{primitive.color.red.800}",
+    "light": "{primitive.color.red.700}",
     "dark": "{primitive.color.red.300}",
     "type": "color",
     "status": "active",
@@ -101,7 +101,7 @@
   {
     "path": "color.text.success.default",
     "css_var": "--color-text-success-default",
-    "light": "{primitive.color.emerald.800}",
+    "light": "{primitive.color.emerald.700}",
     "dark": "{primitive.color.emerald.300}",
     "type": "color",
     "status": "active",
@@ -110,7 +110,7 @@
   {
     "path": "color.text.warning.default",
     "css_var": "--color-text-warning-default",
-    "light": "{primitive.color.amber.700}",
+    "light": "{primitive.color.amber.600}",
     "dark": "{primitive.color.amber.300}",
     "type": "color",
     "status": "active",
@@ -200,8 +200,8 @@
   {
     "path": "color.feedback.error.default",
     "css_var": "--color-feedback-error-default",
-    "light": "{primitive.color.red.600}",
-    "dark": "{primitive.color.red.500}",
+    "light": "{primitive.color.red.500}",
+    "dark": "{primitive.color.red.400}",
     "type": "color",
     "status": "active",
     "usage": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states."
@@ -209,7 +209,7 @@
   {
     "path": "color.feedback.error.foreground",
     "css_var": "--color-feedback-error-foreground",
-    "light": "{primitive.color.mist.0}",
+    "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
     "type": "color",
     "status": "active",
@@ -218,7 +218,7 @@
   {
     "path": "color.feedback.success.default",
     "css_var": "--color-feedback-success-default",
-    "light": "{primitive.color.emerald.700}",
+    "light": "{primitive.color.emerald.600}",
     "dark": "{primitive.color.emerald.400}",
     "type": "color",
     "status": "active",
@@ -227,7 +227,7 @@
   {
     "path": "color.feedback.success.foreground",
     "css_var": "--color-feedback-success-foreground",
-    "light": "{primitive.color.mist.0}",
+    "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
     "type": "color",
     "status": "active",
@@ -236,8 +236,8 @@
   {
     "path": "color.feedback.warning.default",
     "css_var": "--color-feedback-warning-default",
-    "light": "{primitive.color.amber.450}",
-    "dark": "{primitive.color.amber.400}",
+    "light": "{primitive.color.amber.400}",
+    "dark": "{primitive.color.amber.300}",
     "type": "color",
     "status": "active",
     "usage": "Warning state color for backgrounds and tints. Not for text, borders or icons, not for errors or successes."
@@ -254,8 +254,8 @@
   {
     "path": "color.chart.1",
     "css_var": "--color-chart-1",
-    "light": "{primitive.color.violet.600}",
-    "dark": "{primitive.color.violet.400}",
+    "light": "{primitive.color.violet.700}",
+    "dark": "{primitive.color.violet.500}",
     "type": "color",
     "status": "active",
     "usage": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
@@ -263,8 +263,8 @@
   {
     "path": "color.chart.2",
     "css_var": "--color-chart-2",
-    "light": "{primitive.color.blue.600}",
-    "dark": "{primitive.color.blue.300}",
+    "light": "{primitive.color.blue.500}",
+    "dark": "{primitive.color.blue.400}",
     "type": "color",
     "status": "active",
     "usage": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
@@ -272,8 +272,8 @@
   {
     "path": "color.chart.3",
     "css_var": "--color-chart-3",
-    "light": "{primitive.color.amber.600}",
-    "dark": "{primitive.color.yellow.200}",
+    "light": "{primitive.color.amber.500}",
+    "dark": "{primitive.color.yellow.300}",
     "type": "color",
     "status": "active",
     "usage": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
@@ -282,7 +282,7 @@
     "path": "color.chart.4",
     "css_var": "--color-chart-4",
     "light": "{primitive.color.plum.800}",
-    "dark": "{primitive.color.plum.500}",
+    "dark": "{primitive.color.plum.200}",
     "type": "color",
     "status": "active",
     "usage": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
@@ -290,7 +290,7 @@
   {
     "path": "color.chart.5",
     "css_var": "--color-chart-5",
-    "light": "{primitive.color.amber.800}",
+    "light": "{primitive.color.amber.700}",
     "dark": "{primitive.color.amber.500}",
     "type": "color",
     "status": "active",
@@ -380,8 +380,8 @@
   {
     "path": "color.sidebar.primary.default",
     "css_var": "--color-sidebar-primary-default",
-    "light": "{primitive.color.violet.550}",
-    "dark": "{primitive.color.violet.500}",
+    "light": "{primitive.color.violet.600}",
+    "dark": "{primitive.color.violet.600}",
     "type": "color",
     "status": "active",
     "usage": "Active/primary nav item background in the sidebar. Not for generic sidebar items."
@@ -390,7 +390,7 @@
     "path": "color.sidebar.primary.on",
     "css_var": "--color-sidebar-primary-on",
     "light": "{primitive.color.violet.50}",
-    "dark": "{primitive.color.mist.0}",
+    "dark": "{primitive.color.white}",
     "type": "color",
     "status": "active",
     "usage": "Text on top of the sidebar primary active item. Not for inactive item text."
@@ -416,8 +416,8 @@
   {
     "path": "color.static.white",
     "css_var": "--color-static-white",
-    "light": "{primitive.color.mist.0}",
-    "dark": "{primitive.color.mist.0}",
+    "light": "{primitive.color.white}",
+    "dark": "{primitive.color.white}",
     "type": "color",
     "status": "active",
     "usage": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies."

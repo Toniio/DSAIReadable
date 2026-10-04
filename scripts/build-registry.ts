@@ -312,7 +312,7 @@ function allRootVars(css: string): Record<string, string> {
 /**
  * The tokens travel in the `css` field, not in `cssVars`: for every cssVars
  * key the CLI (4.21) also writes a mirror into `@theme inline`. That mirror
- * turned each primitive into a class (`bg-ds-prim-color-mist-0`) and compiled
+ * turned each primitive into a class (`bg-ds-prim-color-mist-50`) and compiled
  * `sm:` into `@media (width >= var(--breakpoint-sm))`, a query no browser
  * matches — every responsive variant was dead in the consumer's app.
  *

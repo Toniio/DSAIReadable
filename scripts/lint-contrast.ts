@@ -41,71 +41,10 @@
 
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { PAIRS } from "./lib/contrast-pairs.js"
-import { apcaContrast, blend, luminance } from "./wcag.js"
-import {
-  cssValue,
-  loadTokens,
-  MODES,
-  type Mode,
-} from "../mcp-server/src/lib/dtcg.js"
+import { measureContrast } from "./lib/contrast.js"
+import { loadTokens } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-
-type Json = Record<string, unknown>
-
-// The three tiers form one DTCG document: `{primitive.color.mist.500}` lives in
-// primitive.json, `{color.text.default}` in semantic.json. The dark context
-// comes from tokens/tokens.resolver.json.
-const tokens = loadTokens(ROOT)
-const TIERS = Object.values(tokens.tiers).map((t) => t.tree)
-
-function lookup(path: string): Json | undefined {
-  for (const tier of TIERS) {
-    let node: unknown = tier
-    let found = true
-    for (const key of path.split(".")) {
-      if (typeof node === "object" && node !== null && key in (node as Json)) {
-        node = (node as Json)[key]
-      } else {
-        found = false
-        break
-      }
-    }
-    if (found && typeof node === "object" && node !== null) return node as Json
-  }
-  return undefined
-}
-
-const REF = /^\{(.+)\}$/
-
-/** Resolves a token path down to a literal hex value, following mode overrides. */
-function resolveColor(
-  path: string,
-  mode: Mode,
-  seen = new Set<string>()
-): string {
-  if (seen.has(`${path}:${mode}`)) {
-    throw new Error(`Reference cycle on ${path} (${mode})`)
-  }
-  seen.add(`${path}:${mode}`)
-
-  const node = lookup(path)
-  if (!node) throw new Error(`Unknown token: ${path}`)
-
-  const value = tokens.override(path, mode) ?? node.$value
-  if (value === undefined) throw new Error(`Token ${path} has no $value`)
-
-  const ref = typeof value === "string" ? REF.exec(value) : null
-  return ref
-    ? resolveColor(ref[1], mode, seen)
-    : cssValue(value, node.$type as string)
-}
-
-function ratio(a: string, b: string): number {
-  const [x, y] = [luminance(a), luminance(b)]
-  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05)
-}
 
 /**
  * APCA Bronze Simple Mode levels matched to each WCAG 2 threshold: Lc 60 is
@@ -114,62 +53,32 @@ function ratio(a: string, b: string): number {
  */
 const APCA_LEVEL = { 4.5: 60, 3: 45 } as const
 
-/**
- * A `bg-<role>/<n>` tint over `surface`. A role that is itself translucent
- * (`color.border.input` is white at 15% in dark) multiplies the two alphas.
- */
-function tint(color: string, alpha: number, surface: string): string {
-  const rgba = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)$/.exec(color)
-  if (!rgba) return blend(color, alpha, surface)
-  const hex = `#${rgba
-    .slice(1, 4)
-    .map((v) => Number(v).toString(16).padStart(2, "0"))
-    .join("")}`
-  return blend(hex, alpha * Number(rgba[4]), surface)
-}
-
 let failures = 0
 let checked = 0
 const advisories: string[] = []
 const informative: string[] = []
 const restingBorders: string[] = []
 
-for (const pair of PAIRS) {
-  for (const mode of pair.modes ?? MODES) {
-    if (pair.informative) {
-      const bg = resolveColor(pair.bg, mode)
-      const fg = tint(resolveColor(pair.fg, mode), pair.fgAlpha ?? 1, bg)
-      ;(pair.section === "border" ? restingBorders : informative).push(
-        `ℹ️  ${mode.padEnd(5)} ${ratio(fg, bg).toFixed(2).padStart(5)}      ${pair.label}`
-      )
-      continue
-    }
-    checked++
-    const surface = resolveColor(pair.bg, mode)
-    const bg = pair.tint
-      ? tint(resolveColor(pair.tint.color, mode), pair.tint.alpha, surface)
-      : surface
-    const solid = resolveColor(pair.fg, mode)
-    const fg = pair.fgAlpha ? blend(solid, pair.fgAlpha, bg) : solid
-    const value = ratio(fg, bg)
-    const pass = value >= pair.threshold
-    if (!pass) failures++
-    const mark = pass ? "✅" : "❌"
-    const line = `${mark} ${mode.padEnd(5)} ${value.toFixed(2).padStart(5)} / ${pair.threshold}  ${pair.label}`
-    const under = pair.tint
-      ? `${pair.tint.color} at ${pair.tint.alpha} over ${pair.bg} = ${bg}`
-      : `${pair.bg} = ${bg}`
-    if (pass) console.log(line)
-    else console.error(`${line}\n     ${pair.fg} = ${fg} on ${under}`)
-
-    const lc = Math.abs(apcaContrast(fg, bg))
-    const level = APCA_LEVEL[pair.threshold]
-    if (lc < level) {
-      advisories.push(
-        `⚠️  ${mode.padEnd(5)} Lc ${lc.toFixed(1).padStart(5)} / ${level}  ${pair.label}`
-      )
-    }
+// The dark context comes from tokens/tokens.resolver.json.
+for (const m of measureContrast(loadTokens(ROOT))) {
+  const { pair, mode } = m
+  if (pair.informative) {
+    ;(pair.section === "border" ? restingBorders : informative).push(
+      `ℹ️  ${mode.padEnd(5)} ${m.ratio.toFixed(2).padStart(5)}      ${pair.label}`
+    )
+    continue
   }
+  checked++
+  if (!m.pass) failures++
+  const line = `${m.pass ? "✅" : "❌"} ${mode.padEnd(5)} ${m.ratio.toFixed(2).padStart(5)} / ${pair.threshold}  ${pair.label}`
+  if (m.pass) console.log(line)
+  else console.error(`${line}\n     ${pair.fg} = ${m.fg} on ${m.under}`)
+
+  const level = APCA_LEVEL[pair.threshold]
+  if (m.lc < level)
+    advisories.push(
+      `⚠️  ${mode.padEnd(5)} Lc ${m.lc.toFixed(1).padStart(5)} / ${level}  ${pair.label}`
+    )
 }
 
 console.log(`\n📊 ${checked} pair(s) checked, ${failures} failure(s).`)

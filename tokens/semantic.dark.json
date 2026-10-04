@@ -15,7 +15,7 @@
       },
       "inverse": {
         "$type": "color",
-        "$value": "{primitive.color.mist.0}"
+        "$value": "{primitive.color.white}"
       }
     },
     "text": {
@@ -100,7 +100,7 @@
       "error": {
         "default": {
           "$type": "color",
-          "$value": "{primitive.color.red.500}"
+          "$value": "{primitive.color.red.400}"
         },
         "foreground": {
           "$type": "color",
@@ -120,26 +120,26 @@
       "warning": {
         "default": {
           "$type": "color",
-          "$value": "{primitive.color.amber.400}"
+          "$value": "{primitive.color.amber.300}"
         }
       }
     },
     "chart": {
       "1": {
         "$type": "color",
-        "$value": "{primitive.color.violet.400}"
+        "$value": "{primitive.color.violet.500}"
       },
       "2": {
         "$type": "color",
-        "$value": "{primitive.color.blue.300}"
+        "$value": "{primitive.color.blue.400}"
       },
       "3": {
         "$type": "color",
-        "$value": "{primitive.color.yellow.200}"
+        "$value": "{primitive.color.yellow.300}"
       },
       "4": {
         "$type": "color",
-        "$value": "{primitive.color.plum.500}"
+        "$value": "{primitive.color.plum.200}"
       },
       "5": {
         "$type": "color",
@@ -160,13 +160,9 @@
         "$value": "{primitive.color.white-alpha.10}"
       },
       "primary": {
-        "default": {
-          "$type": "color",
-          "$value": "{primitive.color.violet.500}"
-        },
         "on": {
           "$type": "color",
-          "$value": "{primitive.color.mist.0}"
+          "$value": "{primitive.color.white}"
         }
       },
       "accent": {

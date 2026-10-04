@@ -1223,9 +1223,9 @@ const primitives =
 const shadow = primitives.find((p) => p.path === "primitive.elevation.light.xs")
 assert(
   primitives.every((p) => typeof p.value === "string") &&
-    primitives.find((p) => p.path === "primitive.color.mist.0")?.value ===
-      "#ffffff" &&
-    shadow?.value === "0 1px 2px rgba(0, 0, 0, 0.04)",
+    primitives.find((p) => p.path === "primitive.color.white")?.value ===
+      "oklch(100% 0 0)" &&
+    shadow?.value === "0 1px 2px oklch(0% 0 0 / 0.04)",
   `Every primitive is served as CSS (${primitives.filter((p) => typeof p.value !== "string").length} objects)`
 )
 

@@ -378,7 +378,7 @@ Three-tier architecture in the [W3C DTCG](https://www.designtokens.org/TR/2025.1
 
 ```
 tokens/tokens.resolver.json → the three tiers, then the color-scheme modifier (light by default, dark)
-tokens/primitive.json       → raw values (hex, rem, ms) — never referenced directly
+tokens/primitive.json       → raw values (OKLCH ramps, rem, ms) — never referenced directly
 tokens/semantic.json        → design decisions, light values
 tokens/semantic.dark.json   → the dark values of the semantic tokens that change
 tokens/component.json       → shadcn/ui aliases (--background, --primary, --ring…)
@@ -405,6 +405,8 @@ The MCP server ingests these specs through `dsaireadable_get_component_specs`; t
 ### Token validation
 
 ```bash
+npm run tokens:palette       # Regenerates the OKLCH color ramps from the source colors of scripts/lib/palette.ts
+npm run tokens:test-rebrand  # Regenerates the brand ramp from other source colors and replays every contrast pair
 npm run tokens:lint-naming   # Checks the keys of the 3 tiers against the declarative grammar
 npm run docs:tokens          # Regenerates token-reference.md + tokens.manifest.json
 npm run tokens:lint-values   # Detects raw values in components
