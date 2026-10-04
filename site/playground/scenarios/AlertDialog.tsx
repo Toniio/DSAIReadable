@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { TrashIcon } from "@phosphor-icons/react"
 
 import {
@@ -40,35 +39,23 @@ function resolve(args: Args) {
 }
 
 /**
- * The dialog, open on first render when `open` is set. Opened that way it
- * leaves the focus where the reader is, in the page's controls: moving it
- * into the canvas would trap the keyboard in a dialog nobody opened. Opened
- * from its trigger, it focuses Cancel, as the spec says.
+ * The dialog, open on first render when `open` is set. It focuses Cancel, as
+ * the spec says, when the reader enters the canvas: until then the frame
+ * leaves the focus where the reader is, in the page's controls.
  */
-function StagedAlertDialog({
+function DeleteProjectDialog({
   open,
   size,
   variant,
   showMedia,
   title,
 }: ReturnType<typeof resolve>) {
-  const [staged, setStaged] = useState(open)
   return (
-    <AlertDialog
-      defaultOpen={open}
-      onOpenChange={(next) => {
-        if (!next) setStaged(false)
-      }}
-    >
+    <AlertDialog defaultOpen={open}>
       <AlertDialogTrigger asChild>
         <Button variant="destructive">Delete project</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent
-        size={size}
-        onOpenAutoFocus={
-          staged ? (event: Event) => event.preventDefault() : undefined
-        }
-      >
+      <AlertDialogContent size={size}>
         <AlertDialogHeader>
           {showMedia ? (
             <AlertDialogMedia>
@@ -117,7 +104,10 @@ const story: Story = {
   render: (args) => (
     <div className="flex min-h-svh items-center justify-center p-8">
       {/* Radix reads defaultOpen once: a new `open` remounts the dialog. */}
-      <StagedAlertDialog key={String(Boolean(args.open))} {...resolve(args)} />
+      <DeleteProjectDialog
+        key={String(Boolean(args.open))}
+        {...resolve(args)}
+      />
     </div>
   ),
   code: (args) => {
