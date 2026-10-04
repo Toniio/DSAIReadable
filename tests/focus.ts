@@ -42,6 +42,12 @@ async function walkTabStops(max: number): Promise<string[]> {
   anchor.tabIndex = -1
   document.body.prepend(anchor)
   anchor.focus()
+  // What was rendered with focus (`autoFocus`) has just lost it to the anchor.
+  // An indicator drawn from React state, like InputOTP's active slot, goes on
+  // the next render: the first snapshot waits a frame for it, as the
+  // documentation site's crawl does, or the first Tab press compares the
+  // indicator with itself and seems to show nothing.
+  await new Promise(requestAnimationFrame)
   const unmarked: string[] = []
   const seen = new Set<Element>()
   try {

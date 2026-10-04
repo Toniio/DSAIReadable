@@ -1,4 +1,4 @@
-import { DotsThreeIcon } from "@phosphor-icons/react"
+import { DotsThreeIcon, HouseIcon } from "@phosphor-icons/react"
 import { render, screen, within } from "@testing-library/react"
 import { describe, expect, it, vi } from "vitest"
 import { page, userEvent } from "vitest/browser"
@@ -72,6 +72,28 @@ function WithAction({
                 >
                   <DotsThreeIcon />
                 </SidebarMenuAction>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
+    </SidebarProvider>
+  )
+}
+
+// Collapsed to its icons, with no TooltipProvider of its own around it.
+function Collapsed() {
+  return (
+    <SidebarProvider defaultOpen={false}>
+      <Sidebar collapsible="icon">
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton tooltip="Dashboard">
+                  <HouseIcon />
+                  <span>Dashboard</span>
+                </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroup>
@@ -175,6 +197,20 @@ describe("Sidebar", () => {
     expect(onSettings).toHaveBeenCalledTimes(1)
     await userEvent.keyboard(" ")
     expect(onSettings).toHaveBeenCalledTimes(2)
+  })
+
+  it("tooltip: a SidebarMenuButton's tooltip shows with no TooltipProvider around the SidebarProvider", async () => {
+    render(<Collapsed />)
+    expect(sidebarState()).toBe("collapsed")
+    screen.getByRole("button", { name: "Dashboard" }).focus()
+    const tooltip = await screen.findByRole("tooltip")
+    expect(tooltip.textContent).toBe("Dashboard")
+    expect(
+      screen.getByRole("button", {
+        name: "Dashboard",
+        description: "Dashboard",
+      })
+    ).toBe(document.activeElement)
   })
 
   it("target size: SidebarMenuAction is 24 × 24, centered on its menu button, axe clean in both themes", async () => {

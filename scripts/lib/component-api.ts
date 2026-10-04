@@ -29,6 +29,12 @@ interface Rendered {
   swappedBy?: "asChild" | "as"
   /** The outermost element, when the props go to one inside it. */
   inside?: string
+  /**
+   * The provider components it renders (`TooltipProvider`): the context its
+   * children receive. A React context's own `.Provider`
+   * (`SidebarContext.Provider`) is not one. Absent when there is none.
+   */
+  providers?: string[]
 }
 
 export type ApiExport =
@@ -153,6 +159,24 @@ function renderedTag(fn: ts.FunctionLikeDeclaration): string | undefined {
   }
   if (fn.body) visit(fn.body)
   return tag
+}
+
+/** The `<XProvider>` elements a function renders, by name, sorted. */
+function providersOf(fn: ts.FunctionLikeDeclaration): string[] {
+  const found = new Set<string>()
+  const visit = (node: ts.Node): void => {
+    // Nested functions (callbacks, render props) render their own tree.
+    if (ts.isFunctionLike(node) && node !== fn) return
+    if (
+      (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
+      ts.isIdentifier(node.tagName) &&
+      /^[A-Z]\w*Provider$/.test(node.tagName.text)
+    )
+      found.add(node.tagName.text)
+    ts.forEachChild(node, visit)
+  }
+  if (fn.body) visit(fn.body)
+  return [...found].sort()
 }
 
 const showTag = (t: string) => (/^[a-z]/.test(t) ? `<${t}>` : t)
@@ -313,6 +337,8 @@ function componentOf(
   const renders: Rendered = target ? renderedOf(fn, target) : { element: "—" }
   if (outer && target && outer !== target && /^[a-z]/.test(outer))
     renders.inside = showTag(outer)
+  const providers = providersOf(fn)
+  if (providers.length > 0) renders.providers = providers
   const documented = [...accepts.values()].filter(
     (p) => p.own || p.default !== undefined
   )

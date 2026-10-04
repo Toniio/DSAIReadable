@@ -1,0 +1,1100 @@
+{
+  "label": "0.1.3-sonnet-mcp-rescored",
+  "date": "2026-10-04",
+  "generator": "replay",
+  "model": "claude-sonnet-5-5",
+  "context": "mcp",
+  "skills": [],
+  "via": "claude-code 2.1.288",
+  "generated": {
+    "commit": "6795e65d431a05d6a6040d6824872238bad3d0fd",
+    "version": "0.1.3",
+    "dirty": false,
+    "sources": "3f73a0d50aed8aa8",
+    "effort": "high",
+    "maxTurns": 25,
+    "modelOption": "claude-sonnet-5-5",
+    "claudeCode": "2.1.288",
+    "sessionPlugins": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-telemetry@builtin"
+    ]
+  },
+  "designSystem": {
+    "version": "0.1.3",
+    "commit": "fc828b32b08c73f36a1aa3e227c626d368d8f9b1"
+  },
+  "summary": {
+    "tasks": 26,
+    "generated": 26,
+    "stageA": {
+      "compiles": 0.962,
+      "lint": 1,
+      "coverage": 1,
+      "pass": 0.962,
+      "lintByFamily": {}
+    },
+    "stageB": {
+      "renders": 0.923,
+      "axe": 0.923,
+      "focus": 0.923,
+      "pass": 0.923
+    },
+    "stageC": null,
+    "conformance": 0.943,
+    "generation": {
+      "turns": 123,
+      "mcpCalls": 283,
+      "otherCalls": 0,
+      "toolErrors": 0,
+      "inputTokens": 2930688,
+      "outputTokens": 175271,
+      "turnCapReached": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": "sign-in",
+      "generated": true,
+      "metrics": {
+        "turns": 4,
+        "toolCalls": 6,
+        "toolErrors": 0,
+        "inputTokens": 54439,
+        "outputTokens": 4682,
+        "tools": {
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_component_specs": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 7,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "create-project",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 16,
+        "toolErrors": 0,
+        "inputTokens": 151608,
+        "outputTokens": 11152,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 6,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "delete-project",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 9,
+        "toolErrors": 0,
+        "inputTokens": 106826,
+        "outputTokens": 4961,
+        "tools": {
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_component_specs": 3,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 10,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "edit-project",
+      "generated": true,
+      "metrics": {
+        "turns": 6,
+        "toolCalls": 15,
+        "toolErrors": 0,
+        "inputTokens": 178679,
+        "outputTokens": 12982,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_pattern": 4,
+          "dsaireadable_get_component_specs": 6,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 16,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "empty-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 13,
+        "toolErrors": 0,
+        "inputTokens": 134539,
+        "outputTokens": 7415,
+        "tools": {
+          "dsaireadable_get_pattern": 4,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "filter-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 13,
+        "toolErrors": 0,
+        "inputTokens": 151173,
+        "outputTokens": 10676,
+        "tools": {
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_component_specs": 6,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-form",
+      "generated": true,
+      "metrics": {
+        "turns": 8,
+        "toolCalls": 20,
+        "toolErrors": 0,
+        "inputTokens": 301528,
+        "outputTokens": 13775,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_component_specs": 8,
+          "dsaireadable_get_content_library": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 21,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "loading-cards",
+      "generated": true,
+      "metrics": {
+        "turns": 4,
+        "toolCalls": 9,
+        "toolErrors": 0,
+        "inputTokens": 79930,
+        "outputTokens": 2962,
+        "tools": {
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_component_specs": 4,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 10,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-navigation",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 12,
+        "toolErrors": 0,
+        "inputTokens": 148145,
+        "outputTokens": 6355,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_component_specs": 3,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 13,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": false,
+        "axe": false,
+        "focus": false,
+        "failures": [
+          "renders: Error: `Tooltip` must be used within `TooltipProvider`",
+          "axe: Error: `Tooltip` must be used within `TooltipProvider`",
+          "focus: Error: `Tooltip` must be used within `TooltipProvider`"
+        ]
+      }
+    },
+    {
+      "id": "save-profile",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 10,
+        "toolErrors": 0,
+        "inputTokens": 78645,
+        "outputTokens": 7134,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_component_specs": 3,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 11,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": false,
+        "typeErrors": [
+          "98:46 TS2339 Property 'focus' does not exist on type 'Element | RadioNodeList'.   Property 'focus' does not exist on type 'Element'.",
+          "113:43 TS2339 Property 'focus' does not exist on type 'Element | RadioNodeList'.   Property 'focus' does not exist on type 'Element'."
+        ],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "search-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 4,
+        "toolCalls": 7,
+        "toolErrors": 0,
+        "inputTokens": 64897,
+        "outputTokens": 5621,
+        "tools": {
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_component_specs": 2,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 8,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "settings-page",
+      "generated": true,
+      "metrics": {
+        "turns": 6,
+        "toolCalls": 14,
+        "toolErrors": 0,
+        "inputTokens": 140566,
+        "outputTokens": 8297,
+        "tools": {
+          "dsaireadable_get_pattern": 4,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_get_deprecations": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "invoices-table",
+      "generated": true,
+      "metrics": {
+        "turns": 3,
+        "toolCalls": 6,
+        "toolErrors": 0,
+        "inputTokens": 47278,
+        "outputTokens": 3672,
+        "tools": {
+          "dsaireadable_get_component_specs": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 7,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "results-pagination",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 8,
+        "toolErrors": 0,
+        "inputTokens": 80000,
+        "outputTokens": 6728,
+        "tools": {
+          "dsaireadable_get_component_specs": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_validate_code": 2,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 9,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "visitors-chart",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 14,
+        "toolErrors": 0,
+        "inputTokens": 128258,
+        "outputTokens": 6471,
+        "tools": {
+          "dsaireadable_get_dataviz_recommendation": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_dataviz_specs": 2,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-sidebar",
+      "generated": true,
+      "metrics": {
+        "turns": 4,
+        "toolCalls": 10,
+        "toolErrors": 0,
+        "inputTokens": 116053,
+        "outputTokens": 7498,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_component_specs": 3,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 11,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": false,
+        "axe": false,
+        "focus": false,
+        "failures": [
+          "renders: Error: `Tooltip` must be used within `TooltipProvider`",
+          "axe: Error: `Tooltip` must be used within `TooltipProvider`",
+          "focus: Error: `Tooltip` must be used within `TooltipProvider`"
+        ]
+      }
+    },
+    {
+      "id": "command-palette",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 16,
+        "toolErrors": 0,
+        "inputTokens": 132520,
+        "outputTokens": 8197,
+        "tools": {
+          "dsaireadable_get_components": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 3,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 17,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-tabs",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 13,
+        "toolErrors": 0,
+        "inputTokens": 110596,
+        "outputTokens": 8446,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_component_specs": 4,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "date-picker",
+      "generated": true,
+      "metrics": {
+        "turns": 4,
+        "toolCalls": 8,
+        "toolErrors": 0,
+        "inputTokens": 67460,
+        "outputTokens": 4840,
+        "tools": {
+          "dsaireadable_get_component_specs": 2,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 9,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "attachments",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 10,
+        "toolErrors": 0,
+        "inputTokens": 104650,
+        "outputTokens": 5121,
+        "tools": {
+          "dsaireadable_get_components": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_component_specs": 4,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 11,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "chat-thread",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 11,
+        "toolErrors": 0,
+        "inputTokens": 117261,
+        "outputTokens": 5508,
+        "tools": {
+          "dsaireadable_get_components": 1,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_get_component_specs": 5,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 12,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "faq",
+      "generated": true,
+      "metrics": {
+        "turns": 4,
+        "toolCalls": 7,
+        "toolErrors": 0,
+        "inputTokens": 64230,
+        "outputTokens": 3319,
+        "tools": {
+          "dsaireadable_get_component_specs": 2,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 8,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "user-menu",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 13,
+        "toolErrors": 0,
+        "inputTokens": 159877,
+        "outputTokens": 5284,
+        "tools": {
+          "dsaireadable_get_component_specs": 3,
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_icons": 1,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_content_library": 1,
+          "dsaireadable_get_tokens": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 14,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "verification-code",
+      "generated": true,
+      "metrics": {
+        "turns": 5,
+        "toolCalls": 14,
+        "toolErrors": 0,
+        "inputTokens": 131795,
+        "outputTokens": 7391,
+        "tools": {
+          "dsaireadable_list_patterns": 1,
+          "dsaireadable_get_components": 1,
+          "dsaireadable_get_design_rules": 2,
+          "dsaireadable_get_ux_writing_rules": 1,
+          "dsaireadable_get_component_specs": 2,
+          "dsaireadable_get_pattern": 3,
+          "dsaireadable_get_content_library": 1,
+          "dsaireadable_get_deprecations": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 15,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-plan-choice",
+      "generated": true,
+      "metrics": {
+        "turns": 3,
+        "toolCalls": 4,
+        "toolErrors": 0,
+        "inputTokens": 38066,
+        "outputTokens": 2123,
+        "tools": {
+          "dsaireadable_get_component_specs": 1,
+          "dsaireadable_get_pattern": 1,
+          "dsaireadable_get_design_rules": 1,
+          "dsaireadable_validate_code": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 5,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-notifications",
+      "generated": true,
+      "metrics": {
+        "turns": 3,
+        "toolCalls": 5,
+        "toolErrors": 0,
+        "inputTokens": 41669,
+        "outputTokens": 4661,
+        "tools": {
+          "dsaireadable_get_pattern": 2,
+          "dsaireadable_get_component_specs": 1,
+          "dsaireadable_validate_code": 1,
+          "dsaireadable_validate_screen": 1
+        }
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 6,
+        "stopReason": "end_turn"
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    }
+  ]
+}
