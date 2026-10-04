@@ -194,6 +194,7 @@ Everything the tooltip shows must also be in the text summary or the data table:
 **Pitfalls**:
 
 - Provide the data in another form as well (a visible text summary, a visible `Table`): a screen reader does not read bars. A chart with no `ChartTooltip` is still a tab stop where nothing changes but the ring; turn the layer off with `accessibilityLayer={false}` only when a table gives the same data.
+- While the pointer rests over the chart, Recharts keeps the tooltip on the data point under the pointer: focus shows that point instead of the first one, and `ArrowLeft`, `ArrowRight` and `Enter` change nothing visible until the pointer leaves the chart ([recharts/recharts#7905](https://github.com/recharts/recharts/issues/7905)). A keyboard user loses no value as long as the text summary or the table holds everything the tooltip shows. In a browser test of the keyboard, move the pointer off the chart before the focus (`userEvent.hover` on the tab stop before it): a pointer an earlier test left over the chart fails the test, depending on the file order.
 - Categorical palette: the series stay distinct under color blindness (`npm run tokens:lint-chart`), but back the colors up with a legend or labels (see `specs/foundations/color.md`).
 
 ## Code example
