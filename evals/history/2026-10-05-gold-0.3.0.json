@@ -1,0 +1,525 @@
+{
+  "label": "gold-0.3.0",
+  "date": "2026-10-05",
+  "generator": "gold",
+  "designSystem": {
+    "version": "0.3.0",
+    "commit": "1e4632bac594cce863914727f496bb7190a14fab"
+  },
+  "summary": {
+    "tasks": 26,
+    "generated": 26,
+    "stageA": {
+      "compiles": 1,
+      "lint": 1,
+      "coverage": 1,
+      "pass": 1,
+      "lintByFamily": {}
+    },
+    "stageB": {
+      "renders": 1,
+      "axe": 1,
+      "focus": 1,
+      "pass": 1
+    },
+    "stageC": null,
+    "conformance": 1,
+    "generation": null
+  },
+  "tasks": [
+    {
+      "id": "sign-in",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "create-project",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "delete-project",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "edit-project",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "empty-projects",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "filter-projects",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-form",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "loading-cards",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-navigation",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "save-profile",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "search-projects",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "settings-page",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "invoices-table",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "results-pagination",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "visitors-chart",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-sidebar",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "command-palette",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-tabs",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "date-picker",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "attachments",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "chat-thread",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "faq",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "user-menu",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "verification-code",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-plan-choice",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-notifications",
+      "generated": true,
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    }
+  ]
+}

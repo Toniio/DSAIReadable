@@ -313,10 +313,8 @@ export function sectionFacts(): Record<string, string> {
   const entries = changelog()
   const releases = new Set(entries.map((entry) => entry.version)).size
   const categories = new Set(components().map((entry) => entry.category)).size
-  const runs = listFiles("evals/history", ".json").map(
-    (file) => readJson<{ generator: string }>(`evals/history/${file}`).generator
-  )
-  const gold = runs.filter((generator) => generator === "gold").length
+  const runs = latestVersionRuns(currentRuns(evalRuns()))
+  const gold = runs.filter((run) => run.generator === "gold").length
   return {
     "/foundations/": `${FOUNDATION_GROUPS.flatMap((group) => group.items).length} pages`,
     "/components/": `${components().length} components in ${categories} categories`,
