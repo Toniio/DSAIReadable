@@ -170,9 +170,9 @@ export function GetStarted({ install }: { install: Install }) {
 
       <TabsContent value="skills" className="flex flex-col gap-4">
         <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          The skills build a screen MCP-first and review it before handing it
-          back. They are pinned to this release, so the tools they name always
-          exist.
+          The UI guard reviews a screen for basic UI and UX errors when you ask
+          for a review. It is pinned to this release, so the tools it names
+          always exist.
         </p>
         <ol className="flex flex-col gap-4">
           <Step
@@ -186,7 +186,7 @@ export function GetStarted({ install }: { install: Install }) {
           </Step>
           <Step
             index={2}
-            title="Claude Code: the skills and the MCP server in one plugin."
+            title="Claude Code: the skill and the MCP server in one plugin."
           >
             <div className="flex flex-col gap-2">
               <CommandLine
@@ -201,7 +201,7 @@ export function GetStarted({ install }: { install: Install }) {
           </Step>
         </ol>
         <Names
-          label={`${install.skills.length} skills`}
+          label={`${install.skills.length} ${install.skills.length === 1 ? "skill" : "skills"}`}
           names={install.skills}
         />
       </TabsContent>

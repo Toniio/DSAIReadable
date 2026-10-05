@@ -70,16 +70,17 @@ The rubric of stage C uses the same key; `EVALS_JUDGE_MODEL` changes its model.
 
 ## Measuring the agent skills
 
-`--skills all` (or `--skills dsaireadable-build,dsaireadable-ui-guard`) gives
+`--skills all` (or `--skills dsaireadable-ui-guard`) gives
 the agent the skills of [`skills/`](../skills/) the way a client does: each
 skill's name and description in the system prompt, and a `read_skill_file`
 tool that reads its `SKILL.md`, then the files it names. The report counts
 those reads like the MCP calls, so a run shows whether the skill triggered.
 
 The `skills` suite of `tasks.json` holds the eighteen tasks the skills are
-measured on: ten screens to build from the page patterns, where neither skill
-should load, and eight changes to an existing screen (`base`: the file the
-agent starts from, given with the prompt), which `dsaireadable-build` is for.
+measured on: ten screens to build from the page patterns, and eight changes
+to an existing screen (`base`: the file the agent starts from, given with the
+prompt). The removed `dsaireadable-build` skill was last measured on it
+(`history/2026-10-05-0.3.0-suite-skills-*`).
 Six of those changes are out of the default run (`"default": false`), so the
 26 tasks the recorded runs compare stay the same. A measurement compares the same model and context with and without
 the skills, on at least two models:
