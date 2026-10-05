@@ -45,12 +45,12 @@ export function registerUxWritingTools(server: McpServer): void {
       // An object at the root, as structuredContent requires.
       if (!term) return result({ terms })
 
+      // The exact term first: "token" is also inside "component-token", listed
+      // before it. A partial match answers only when no term is exact.
       const needle = term.toLowerCase()
-      const match = terms.find(
-        (t) =>
-          t.term.toLowerCase() === needle ||
-          t.term.toLowerCase().includes(needle)
-      )
+      const match =
+        terms.find((t) => t.term.toLowerCase() === needle) ??
+        terms.find((t) => t.term.toLowerCase().includes(needle))
 
       if (!match) {
         return notFound(
