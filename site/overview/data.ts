@@ -35,6 +35,8 @@ interface EvalRun {
   context?: "mcp" | "none"
   skills?: string[]
   designSystem: { version: string }
+  /** The checkout its screens were generated from: absent from a gold run. */
+  generated?: { commit: string; sources?: string }
   summary: { tasks: number; conformance: number }
 }
 
@@ -102,31 +104,71 @@ interface EvalSummary {
   tasks: number
   withMcp?: number
   without?: number
+  /** The passes of the condition with the MCP server. */
+  passes: number
 }
 
-/** The latest model run of the conformance harness, with and without the MCP server. */
+/** `0.1.10` after `0.1.9`. */
+function compareVersions(a: string, b: string): number {
+  const [x, y] = [a, b].map((value) => value.split(".").map(Number))
+  for (let i = 0; i < Math.max(x.length, y.length); i++) {
+    const delta = (x[i] ?? 0) - (y[i] ?? 0)
+    if (delta) return delta
+  }
+  return 0
+}
+
+/**
+ * The latest model runs of the conformance harness, on the latest version
+ * measured, with and without the MCP server: the mean of their passes when a
+ * condition ran several.
+ */
 function latestEval(): EvalSummary | undefined {
   const runs = listFiles("evals/history", ".json")
     .map((file) => readJson<EvalRun>(`evals/history/${file}`))
     .filter((run) => run.generator !== "gold")
+  const version = runs
+    .map((run) => run.designSystem.version)
+    .sort(compareVersions)
+    .at(-1)
   const date = runs
+    .filter((run) => run.designSystem.version === version)
     .map((run) => run.date)
     .sort()
     .at(-1)
   if (!date) return undefined
-  const latest = runs.filter((run) => run.date === date)
+  // A pass scored the day before belongs to the same measurement: the same
+  // checkout generated its screens.
+  const checkout = (run: EvalRun) =>
+    run.generated && `${run.generated.commit}:${run.generated.sources ?? ""}`
+  const measured = new Set(
+    runs
+      .filter((run) => run.date === date && checkout(run))
+      .map((run) => checkout(run))
+  )
+  const latest = runs.filter(
+    (run) =>
+      run.designSystem.version === version &&
+      (run.date === date || measured.has(checkout(run)))
+  )
   const plain = (context: "mcp" | "none") =>
-    latest.find((run) => run.context === context && !run.skills?.length)
+    latest.filter((run) => run.context === context && !run.skills?.length)
+  const mean = (passes: EvalRun[]) =>
+    passes.length
+      ? passes.reduce((sum, run) => sum + run.summary.conformance, 0) /
+        passes.length
+      : undefined
   const withMcp = plain("mcp")
   const without = plain("none")
-  const reference = withMcp ?? without ?? latest[0]
+  const reference = withMcp[0] ?? without[0] ?? latest[0]
   return {
     date,
     version: reference.designSystem.version,
     model: reference.model,
     tasks: reference.summary.tasks,
-    withMcp: withMcp?.summary.conformance,
-    without: without?.summary.conformance,
+    withMcp: mean(withMcp),
+    without: mean(without),
+    passes: withMcp.length,
   }
 }
 
@@ -224,7 +266,7 @@ export function stats(): Stat[] {
         evals.without === undefined
           ? "With the MCP server"
           : `With the MCP server; ${percent(evals.without)} without`,
-        `Run on v${evals.version} with ${evals.model ?? "a model"}, ${evals.tasks} tasks`,
+        `Run on v${evals.version} with ${evals.model ?? "a model"}, ${evals.tasks} tasks${evals.passes > 1 ? `, mean of ${evals.passes} passes` : ""}`,
       ].join(". "),
     })
   return out

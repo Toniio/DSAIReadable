@@ -26,9 +26,10 @@ import { ContrastTable } from "@/site/audit-docs/contrast-table"
 import {
   componentAudits,
   deprecations,
-  type EvalRun,
+  type EvalSeries,
   currentRuns,
   evalRuns,
+  evalSeries,
   exemptions,
   latestRuns,
   latestVersionRuns,
@@ -74,6 +75,8 @@ const CONDITION_PHRASE: Record<string, string> = {
   "MCP + skills": "with the MCP server and the skills",
 }
 
+const capitalize = (text: string) => text[0].toUpperCase() + text.slice(1)
+
 /** "a, b and c". */
 function list(items: string[]): string {
   return items.length < 2
@@ -81,17 +84,28 @@ function list(items: string[]): string {
     : `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`
 }
 
-/** The takeaway of the chart, from the runs it draws. */
-function evalSummary(runs: EvalRun[], latest: EvalRun[]): string {
-  const gold = runs.filter((run) => run.generator === "gold")
+/** When the screens of the measurements were built: one day, or the first and last. */
+function builtWhen(latest: EvalSeries[]): string {
+  const days = [
+    ...new Set(latest.flatMap((entry) => entry.runs.map((run) => run.builtOn))),
+  ].sort()
+  return days.length > 1
+    ? `from ${days[0]} to ${days.at(-1)}`
+    : `on ${days[0] ?? "the latest date"}`
+}
+
+/** The takeaway of the chart, from the measurements it draws. */
+function evalSummary(series: EvalSeries[], latest: EvalSeries[]): string {
+  const gold = series.filter((entry) => entry.generator === "gold")
   const sentences: string[] = []
   const first = latest[0]
   if (first && first.generator !== "gold") {
+    const passes = Math.max(...latest.map((entry) => entry.runs.length))
     sentences.push(
-      `On ${first.builtOn}, ${first.model ?? first.generator} built the ${first.tasks} tasks on design system ${first.version}${first.rescored ? `, rescored on ${first.date}` : ""}: ${list(
+      `${capitalize(builtWhen(latest))}, ${first.model ?? first.generator} built the ${first.tasks} tasks on design system ${first.version}${passes > 1 ? `, in ${passes} passes` : ""}${first.rescored ? `, rescored on ${first.date}` : ""}: ${passes > 1 ? "a mean conformance of " : ""}${list(
         latest.map(
-          (run) =>
-            `${percent(run.conformance)} ${CONDITION_PHRASE[run.condition] ?? run.condition}`
+          (entry) =>
+            `${percent(entry.conformance)} ${CONDITION_PHRASE[entry.condition] ?? entry.condition}`
         )
       )}.`
     )
@@ -128,7 +142,8 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
 
 export default function AuditsPage() {
   const runs = latestVersionRuns(currentRuns(evalRuns()))
-  const latest = latestRuns(runs)
+  const series = evalSeries(runs)
+  const latest = evalSeries(latestRuns(runs))
   const best = [...latest].sort((a, b) => b.conformance - a.conformance)[0]
   const contrast = contrastRows()
   const totals = contrastTotals(contrast)
@@ -232,7 +247,7 @@ export default function AuditsPage() {
               value={best ? percent(best.conformance) : "—"}
             >
               {best
-                ? `${best.model ?? best.generator} ${CONDITION_PHRASE[best.condition] ?? best.condition}, design system ${best.version}`
+                ? `${best.model ?? best.generator} ${CONDITION_PHRASE[best.condition] ?? best.condition}, design system ${best.version}${best.runs.length > 1 ? `, mean of ${best.runs.length} passes` : ""}`
                 : "No recorded run"}
             </StatCard>
           </li>
@@ -292,22 +307,26 @@ export default function AuditsPage() {
             Conformance is the mean of the stages that ran. The page shows the
             runs of the latest version measured, and a rescore in place of the
             run whose screens it scores again; the earlier ones stay in{" "}
-            <code className="font-mono">evals/history/</code>.
+            <code className="font-mono">evals/history/</code>. A condition
+            measured in several passes, each on its own screens, has a row per
+            pass in the table and their mean in the chart.
           </>
         }
       >
         <div className="flex flex-col gap-2">
           <EvalChart
-            data={runs.map((run) => ({
-              run: `${run.condition} · ${run.version}`,
-              conformance: Math.round(run.conformance * 1000) / 10,
-              stageA: Math.round(run.stageA * 1000) / 10,
+            data={series.map((entry) => ({
+              run: `${entry.condition} · ${entry.version}${entry.runs.length > 1 ? ` · ${entry.runs.length} passes` : ""}`,
+              conformance: Math.round(entry.conformance * 1000) / 10,
+              stageA: Math.round(entry.stageA * 1000) / 10,
               stageB:
-                run.stageB === null ? null : Math.round(run.stageB * 1000) / 10,
+                entry.stageB === null
+                  ? null
+                  : Math.round(entry.stageB * 1000) / 10,
             }))}
           />
           <p className="text-sm leading-relaxed text-muted-foreground">
-            {evalSummary(runs, latest)}
+            {evalSummary(series, latest)}
           </p>
         </div>
         <div className="flex min-w-0 flex-col gap-4">
@@ -327,63 +346,76 @@ export default function AuditsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {runs.map((run) => (
-                <TableRow key={run.file}>
-                  <TableCell className="min-w-36 whitespace-normal">
-                    <span className="flex flex-col gap-0.5">
-                      <span className="font-mono">{run.date}</span>
-                      {run.rescored ? (
-                        <span className="text-muted-foreground">
-                          Rescored, screens of {run.builtOn}
-                        </span>
-                      ) : null}
-                    </span>
-                  </TableCell>
-                  <TableCell className="font-mono">{run.version}</TableCell>
-                  <TableCell className="min-w-44 whitespace-normal">
-                    {run.generator === "gold" ? (
-                      "Gold (calibration)"
-                    ) : (
+              {series
+                .flatMap((entry) =>
+                  entry.runs.map((run, pass) => ({
+                    run,
+                    pass: entry.runs.length > 1 ? pass + 1 : null,
+                    of: entry.runs.length,
+                  }))
+                )
+                .map(({ run, pass, of }) => (
+                  <TableRow key={run.file}>
+                    <TableCell className="min-w-36 whitespace-normal">
                       <span className="flex flex-col gap-0.5">
-                        <span className="font-mono">
-                          {run.model ?? run.generator}
-                        </span>
-                        <span className="text-muted-foreground">
-                          {run.generator}
-                          {run.via ? ` via ${run.via}` : ""}
-                        </span>
+                        <span className="font-mono">{run.date}</span>
+                        {pass ? (
+                          <span className="text-muted-foreground">
+                            Pass {pass} of {of}
+                          </span>
+                        ) : null}
+                        {run.rescored ? (
+                          <span className="text-muted-foreground">
+                            Rescored, screens of {run.builtOn}
+                          </span>
+                        ) : null}
                       </span>
-                    )}
-                  </TableCell>
-                  <TableCell>{run.context ?? "—"}</TableCell>
-                  <TableCell>
-                    {run.skills.length ? (
-                      <span className="flex flex-col gap-0.5 font-mono">
-                        {run.skills.map((skill) => (
-                          <span key={skill}>{skill}</span>
-                        ))}
-                      </span>
-                    ) : (
-                      "—"
-                    )}
-                  </TableCell>
-                  <TableCell className="font-mono tabular-nums">
-                    {run.tasks}
-                  </TableCell>
-                  <TableCell className="font-mono tabular-nums">
-                    {percent(run.stageA)}
-                  </TableCell>
-                  <TableCell className="font-mono tabular-nums">
-                    {run.stageB === null ? "Not run" : percent(run.stageB)}
-                  </TableCell>
-                  <TableCell className="font-mono font-semibold tabular-nums">
-                    {percent(run.conformance)}
-                  </TableCell>
-                  <TableCell className="font-mono tabular-nums">
-                    {run.mcpCalls ?? "—"}
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                    <TableCell className="font-mono">{run.version}</TableCell>
+                    <TableCell className="min-w-44 whitespace-normal">
+                      {run.generator === "gold" ? (
+                        "Gold (calibration)"
+                      ) : (
+                        <span className="flex flex-col gap-0.5">
+                          <span className="font-mono">
+                            {run.model ?? run.generator}
+                          </span>
+                          <span className="text-muted-foreground">
+                            {run.generator}
+                            {run.via ? ` via ${run.via}` : ""}
+                          </span>
+                        </span>
+                      )}
+                    </TableCell>
+                    <TableCell>{run.context ?? "—"}</TableCell>
+                    <TableCell>
+                      {run.skills.length ? (
+                        <span className="flex flex-col gap-0.5 font-mono">
+                          {run.skills.map((skill) => (
+                            <span key={skill}>{skill}</span>
+                          ))}
+                        </span>
+                      ) : (
+                        "—"
+                      )}
+                    </TableCell>
+                    <TableCell className="font-mono tabular-nums">
+                      {run.tasks}
+                    </TableCell>
+                    <TableCell className="font-mono tabular-nums">
+                      {percent(run.stageA)}
+                    </TableCell>
+                    <TableCell className="font-mono tabular-nums">
+                      {run.stageB === null ? "Not run" : percent(run.stageB)}
+                    </TableCell>
+                    <TableCell className="font-mono font-semibold tabular-nums">
+                      {percent(run.conformance)}
+                    </TableCell>
+                    <TableCell className="font-mono tabular-nums">
+                      {run.mcpCalls ?? "—"}
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </div>
@@ -391,13 +423,15 @@ export default function AuditsPage() {
           <div className="flex flex-col gap-2">
             <Heading level={3}>Per task</Heading>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              The runs of {latest[0]?.builtOn ?? "the latest date"}
+              The runs built {builtWhen(latest)}
               {latest[0]?.rescored ? `, rescored on ${latest[0].date}` : ""},
               task by task. Coverage is the share of the gold standard&apos;s
               design-system modules the screen uses: it is graded, not a gate.
+              Over several passes, a check shows how many it passed, and the
+              coverage is their mean.
             </p>
           </div>
-          <TaskMatrix runs={latest} />
+          <TaskMatrix series={latest} />
         </div>
       </DocSection>
 

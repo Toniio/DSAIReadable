@@ -31,7 +31,7 @@ import {
   writeFileSync,
 } from "node:fs"
 import { homedir } from "node:os"
-import { join, relative, resolve } from "node:path"
+import { basename, join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import * as prettier from "prettier"
@@ -166,6 +166,7 @@ function replayAbout(
       about.effort &&
       about.maxTurns !== undefined && {
         generated: {
+          run: basename(resolve(dir)),
           commit: ds.commit,
           version: ds.version,
           dirty: ds.dirty,
@@ -379,7 +380,8 @@ async function selfTest() {
   // where the screens were generated, and how each session ended.
   const generated = fixtureRun.generated
   if (
-    generated?.commit !== "abcdef1234567890abcdef1234567890abcdef12" ||
+    generated?.run !== "fixtures" ||
+    generated.commit !== "abcdef1234567890abcdef1234567890abcdef12" ||
     generated.version !== "0.0.0-fixture" ||
     generated.dirty !== false ||
     generated.sources !== "0123456789abcdef" ||
