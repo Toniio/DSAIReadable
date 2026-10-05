@@ -76,14 +76,20 @@ skill's name and description in the system prompt, and a `read_skill_file`
 tool that reads its `SKILL.md`, then the files it names. The report counts
 those reads like the MCP calls, so a run shows whether the skill triggered.
 
-The `skills` suite of `tasks.json` holds the eighteen tasks the skills are
-measured on: ten screens to build from the page patterns, and eight changes
-to an existing screen (`base`: the file the agent starts from, given with the
-prompt). The removed `dsaireadable-build` skill was last measured on it
-(`history/2026-10-05-0.3.0-suite-skills-*`).
-Six of those changes are out of the default run (`"default": false`), so the
-26 tasks the recorded runs compare stay the same. A measurement compares the same model and context with and without
-the skills, on at least two models:
+The `skills` suite of `tasks.json` holds eighteen tasks: ten screens to build
+from the page patterns, and eight changes to an existing screen (`base`: the
+file the agent starts from, given with the prompt). Six of those changes are
+out of the default run (`"default": false`), so the 26 tasks the recorded runs
+compare stay the same.
+
+The suite measures a skill that builds or changes screens: the harness scores
+screens, not reviews. The removed `dsaireadable-build` skill was the last one
+measured on it (`history/2026-10-05-0.3.0-suite-skills-*`).
+`dsaireadable-ui-guard` loads when someone asks for a review, and no task
+does: with it alone, a run with `--skills all` only checks that installing it
+changes neither conformance nor cost. Measuring the review itself would take a
+scoring of its own. A measurement compares the same model and context with
+and without the skills, on at least two models:
 
 ```bash
 npm run evals -- --generator claude --model claude-sonnet-5-5 --suite skills --record
