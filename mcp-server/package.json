@@ -1,6 +1,6 @@
 {
   "name": "@dsaireadable/mcp-server",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "MCP Server for the DSAIReadable Design System",
   "keywords": [
     "mcp",
@@ -42,7 +42,7 @@
     "test:package": "tsx src/test-package.ts"
   },
   "dependencies": {
-    "@dsaireadable/eslint-plugin": "0.2.0",
+    "@dsaireadable/eslint-plugin": "0.3.0",
     "@modelcontextprotocol/node": "^2.1.0",
     "@modelcontextprotocol/server": "^2.2.0",
     "@typescript-eslint/parser": "^8.70.1",
