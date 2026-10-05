@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- 21edf4b: mcp: No answer of the MCP server passes 40,000 characters, under the 25,000 tokens Claude Code accepts from one MCP result by default (`MAX_MCP_OUTPUT_TOKENS`). Over it, the agent reads an error and the path of a file instead of the answer: in the 0.3.0 evals, 19 calls of `dsaireadable_get_design_rules` `detailed` without a category got that error.
+
+  - `dsaireadable_get_design_rules` `detailed` without a category serves the critical rules whole, every foundation's rules (`general_rules`) and the composition rules, as `ds://guidelines` does, with the `categories` to pass and a `detail` line; it stops serving `component_rules`, the constraints of the 65 component specs (73,517 to 36,879 characters). A component's rules stay its `category`'s answer, and `dsaireadable_get_component_specs` serves them as `constraints`.
+  - `dsaireadable_get_components`, `dsaireadable_get_tokens` and `dsaireadable_get_changelog` end a page before 40,000 characters, so `limit` is a maximum: `next_cursor` points at the first item left out. A page of 200 tokens came to 62,726 characters, and the changelog's default page to 61,940.
+  - `dsaireadable_validate_screen` and `dsaireadable_validate_code` list the issues that fit and count the rest in `issues_not_listed`; `total_issues`, `errors` and `warnings` still count every issue.
+
+- 2a6b96a: skills: `dsaireadable-ui-guard` opens only the reference file of the line it cannot decide, and says that a spec's concise answer holds its limits.
+- e81390f: skills: `dsaireadable-build` is removed, from `skills/` and from the Claude Code plugin. The harness measured it against the MCP server alone with claude-sonnet-5-5, three passes each: on new screens (0.3.0 evals, 26 tasks) 96.8 % against 98.1 % conformance at 164,878 input tokens per screen against 95,446; narrowed to changes of an existing screen (the `skills` suite, 8 edit tasks), 21 of 24 against 23 of 24 at a median 59,206 tokens against 35,468 (+22 % once the test environment's own overhead is taken out). The server's instructions, patterns and validation tools carry the workflow: an agent that loaded the skill asks the server directly. `dsaireadable-ui-guard` now reviews a screen when asked to, instead of on every screen built or changed.
+- 2ea7672: mcp: The MCP server sends less over a session, since every turn of an agent sends the whole conversation again:
+
+  - `dsaireadable_get_component_specs` `detailed` serves what a screen writes with the component, and stops serving how it is built: `dependencies`, `anatomy`, `tokens`, `tokens_from`, `states`, `variant_sources` and `part_of`, each export's `example`, and the props rows every part has (the `...props` it spreads, a `className` that only adds classes; a `...props` that adds another library's props, and a `className` that says where its classes go, stay). The whole spec stays the resource `ds://component/{name}/spec`. The concise `detail` line names what `detailed` adds, read from it; the concise answer changes only by the constraints the specs gained.
+  - `dsaireadable_get_design_rules` serves the two critical rules without their `do` list and their token chain; the prompts still print the `do` list.
+  - `dsaireadable_get_pattern` `detailed` serves a relative link of its cross-references as the name it gives, `create` for `[create](./create.md)`, followed by that name in parentheses when the label differs; a link with a scheme stays whole.
+  - `dsaireadable_get_components` leaves out `has_spec`, true for every component; the overview and `dsaireadable_get_stats` still count the coverage.
+  - The text of every answer, error and resource is compact JSON, as `structuredContent` already was.
+  - The 19 tool descriptions and their parameters say the same in fewer words (10,386 to 8,319 characters, sent with every turn), and three wrong facts are put right: `dsaireadable_get_changelog` named a `Deprecated` heading and an `Unreleased` version that do not exist, and `dsaireadable_get_icons` promised a catalog where it serves its URL. `dsaireadable_validate_screen` names the checks it runs.
+
+### Patch Changes
+
+- a9ae8c9: visual: The control of a choice card has a name. Inside a `FieldLabel`, `Field` now renders a plain `<div>` instead of a `<div role="group">`: Chromium and axe leave the text of a group out of the name a `<label>` gives its control, so the `Checkbox`, `RadioGroupItem` or `Switch` of a card built as the Field spec says (a `FieldLabel` wrapping a `Field` with its `FieldContent`, then the control) was announced with no name, and axe reported `button-name`. The card's text names it now, `FieldTitle` then `FieldDescription`. A `Field` outside a `FieldLabel` keeps `role="group"`; no prop, class or look changes.
+- 2ea7672: docs: What six States tables asked of a screen is now a constraint of its spec, which `dsaireadable_get_component_specs` serves in both formats: `aria-invalid` on each `InputOTPSlot` (on `InputOTP` it draws nothing); no `disabled` on `PaginationLink`, `PaginationPrevious` or `PaginationNext`, which render an `<a>`; `data-disabled` on the `Field` of a disabled control, and how a choice card is built; a `Command` around the content of a `CommandDialog`, and `data-checked` on a `CommandItem`; a `Spinner` child and `aria-busy` on a pending `Button`; the `border` class for the dashed outline of an `Empty`.
+
 ## 0.2.0
 
 ### Minor Changes

@@ -11,10 +11,10 @@
       "source": {
         "source": "github",
         "repo": "Toniio/DSAIReadable",
-        "ref": "v0.2.0"
+        "ref": "v0.3.0"
       },
       "description": "The DSAIReadable design system's MCP server, which builds and changes React screens with it, and the dsaireadable-ui-guard skill, which reviews a screen for basic UI and UX errors on request.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "license": "MIT",
       "homepage": "https://github.com/Toniio/DSAIReadable",
       "repository": "https://github.com/Toniio/DSAIReadable",
@@ -22,7 +22,7 @@
       "mcpServers": {
         "dsaireadable": {
           "command": "npx",
-          "args": ["-y", "@dsaireadable/mcp-server@0.2.0"]
+          "args": ["-y", "@dsaireadable/mcp-server@0.3.0"]
         }
       }
     }
