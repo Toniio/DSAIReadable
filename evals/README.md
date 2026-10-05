@@ -191,7 +191,10 @@ each recorded call of a `dsaireadable_*` tool again to the MCP server of this
 checkout and estimates the cost of the same sessions with its answers: a
 change to what the server answers can be weighed before a run measures it.
 The estimate keeps the recorded turns; only a run shows what the new answers
-make the agent do.
+make the agent do. A result Claude Code refused for its size ("exceeds
+maximum allowed tokens") was recorded as that error, which is what the agent
+read: the estimate keeps it as recorded, and a table of its own shows what
+this checkout answers instead and whether Claude Code would still refuse it.
 
 ## The harness's own test
 

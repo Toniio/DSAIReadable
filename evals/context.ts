@@ -12,7 +12,9 @@
  * have cost with its answers: each turn's input tokens, less the change in
  * size of the answers before it. The characters per token are the run's own
  * (charsPerToken). An estimate on the same turns: only a run measures the
- * real cost, since the answers also change what the agent does next.
+ * real cost, since the answers also change what the agent does next. A result
+ * Claude Code refused for its size was recorded as its error, which is what
+ * the agent read: those calls are kept as recorded and weighed apart.
  */
 
 import { existsSync, readdirSync, readFileSync } from "node:fs"
@@ -52,6 +54,8 @@ const median = (values: number[]) => {
       : (sorted[mid - 1] + sorted[mid]) / 2
 }
 const int = (n: number) => Math.round(n).toLocaleString("en-US")
+/** Claude Code's limit on one MCP result, in tokens: MAX_MCP_OUTPUT_TOKENS, 25,000 by default. */
+const CLIENT_LIMIT_TOKENS = Number(process.env.MAX_MCP_OUTPUT_TOKENS) || 25_000
 const kib = (chars: number) => `${int(chars / 1024)} KiB`
 const pct = (n: number) => `${n > 0 ? "+" : ""}${Math.round(n * 100)} %`
 
@@ -163,8 +167,11 @@ for (const dir of positionals.map((d) => resolve(d))) {
   const total = [...rows.values()].reduce((a, r) => a + r.chars, 0)
   const resent = [...rows.values()].reduce((a, r) => a + r.resent, 0)
   const inputs = sessions.map((s) => inputOf(s.turns))
+  const refusals = sessions
+    .flatMap((s) => s.turns.flatMap((t) => t.calls))
+    .filter((c) => c.refused).length
   console.log(
-    `\n## ${basename(dir)}\n\n${sessions.length} sessions · median ${int(median(inputs))} input tokens per screen · median ${median(sessions.map((s) => s.turns.length))} turns · ${kib(total)} of tool results${ratio ? ` · ${ratio.toFixed(2)} characters per token` : ""}\n`
+    `\n## ${basename(dir)}\n\n${sessions.length} sessions · median ${int(median(inputs))} input tokens per screen · median ${median(sessions.map((s) => s.turns.length))} turns · ${kib(total)} of tool results${ratio ? ` · ${ratio.toFixed(2)} characters per token` : ""}${refusals ? ` · ${refusals} results refused by Claude Code for their size` : ""}\n`
   )
   console.log(
     table(
@@ -196,7 +203,16 @@ for (const dir of positionals.map((d) => resolve(d))) {
     console.log("\nNo turn grew with a tool result: nothing to estimate.")
     continue
   }
-  const after = new Map<string, number>()
+  /** Per key, the calls the agent read: how many, recorded and re-served characters. */
+  const after = new Map<
+    string,
+    { calls: number; recorded: number; now: number }
+  >()
+  /** Per key, the calls Claude Code refused, and how many of them would still pass its limit. */
+  const refused = new Map<
+    string,
+    { calls: number; recorded: number; now: number; over: number }
+  >()
   let errors = 0
   const estimates: number[] = []
   for (const { turns } of sessions) {
@@ -222,31 +238,76 @@ for (const dir of positionals.map((d) => resolve(d))) {
           answer = { chars: rendered(reply).length, isError: !!reply.isError }
           served.set(id, answer)
         }
-        if (answer.isError) errors++
         const key = resultKey(call.tool, call.input)
-        after.set(key, (after.get(key) ?? 0) + answer.chars)
+        // The recorded turns carried Claude Code's error, not the answer:
+        // counting the answer would weigh characters the agent never read.
+        if (call.refused) {
+          const row = refused.get(key) ?? {
+            calls: 0,
+            recorded: 0,
+            now: 0,
+            over: 0,
+          }
+          row.calls++
+          row.recorded += call.resultChars
+          row.now += answer.chars
+          if (answer.chars / ratio > CLIENT_LIMIT_TOKENS) row.over++
+          refused.set(key, row)
+          continue
+        }
+        if (answer.isError) errors++
+        const row = after.get(key) ?? { calls: 0, recorded: 0, now: 0 }
+        row.calls++
+        row.recorded += call.resultChars
+        row.now += answer.chars
+        after.set(key, row)
         saved +=
           ((call.resultChars - answer.chars) / ratio) * (turns.length - 1 - k)
       }
     estimates.push(inputOf(turns) - saved)
   }
-  const before = [...after.keys()].reduce((a, k) => a + rows.get(k)!.chars, 0)
-  const now = [...after.values()].reduce((a, n) => a + n, 0)
+  const before = [...after.values()].reduce((a, r) => a + r.recorded, 0)
+  const now = [...after.values()].reduce((a, r) => a + r.now, 0)
+  const refusedCalls = [...refused.values()].reduce((a, r) => a + r.calls, 0)
   console.log(
-    `\nRe-served by this checkout: the \`dsaireadable_*\` results go from ${kib(before)} to ${kib(now)} (${pct(now / before - 1)}); estimated median input tokens per screen ${int(median(inputs))} → ${int(median(estimates))} (${pct(median(estimates) / median(inputs) - 1)}), on the same turns${errors ? ` · ${errors} answers are now errors` : ""}.\n`
+    `\nRe-served by this checkout: the \`dsaireadable_*\` results go from ${kib(before)} to ${kib(now)} (${pct(now / before - 1)}); estimated median input tokens per screen ${int(median(inputs))} → ${int(median(estimates))} (${pct(median(estimates) / median(inputs) - 1)}), on the same turns${errors ? ` · ${errors} answers are now errors` : ""}${refusedCalls ? ` · the ${refusedCalls} results Claude Code refused stay as recorded, below` : ""}.\n`
   )
   console.log(
     table(
       ["Tool", "Calls", "Recorded", "Re-served", "Change"],
       [...after.entries()]
-        .sort((a, b) => rows.get(b[0])!.chars - rows.get(a[0])!.chars)
-        .map(([key, chars]) => [
+        .sort((a, b) => b[1].recorded - a[1].recorded)
+        .map(([key, r]) => [
           `\`${key}\``,
-          String(rows.get(key)!.calls),
-          kib(rows.get(key)!.chars),
-          kib(chars),
-          pct(chars / rows.get(key)!.chars - 1),
+          String(r.calls),
+          kib(r.recorded),
+          kib(r.now),
+          pct(r.now / r.recorded - 1),
         ])
+    )
+  )
+  if (refused.size === 0) continue
+  console.log(
+    `\nRefused by Claude Code for their size ("exceeds maximum allowed tokens", over ${int(CLIENT_LIMIT_TOKENS)} tokens): the agent read the error, so the estimate above keeps it. Re-served, at ${ratio.toFixed(2)} characters per token:\n`
+  )
+  console.log(
+    table(
+      [
+        "Tool",
+        "Calls",
+        "Recorded error",
+        "Re-served",
+        "≈ tokens each",
+        "Still refused",
+      ],
+      [...refused.entries()].map(([key, r]) => [
+        `\`${key}\``,
+        String(r.calls),
+        kib(r.recorded),
+        kib(r.now),
+        int(r.now / r.calls / ratio),
+        `${r.over} of ${r.calls}`,
+      ])
     )
   )
 }
