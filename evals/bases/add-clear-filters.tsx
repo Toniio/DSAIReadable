@@ -13,7 +13,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 const OWNERS = ["Ana", "Ben", "Chloe", "Dev", "Eli", "Femi"]
 
-export default function ProjectFilters() {
+export default function ProjectFilters({ count = 12 }: { count?: number }) {
   const [status, setStatus] = React.useState("all")
   const [owner, setOwner] = React.useState("")
 
@@ -44,6 +44,9 @@ export default function ProjectFilters() {
           </SelectContent>
         </Select>
       </div>
+      <p aria-live="polite" className="text-sm text-muted-foreground">
+        {count} {count === 1 ? "project" : "projects"}
+      </p>
       {/* The collection: a Table, or an ItemGroup */}
     </div>
   )

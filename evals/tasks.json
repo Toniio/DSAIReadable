@@ -164,7 +164,7 @@
     },
     {
       "id": "add-clear-filters",
-      "prompt": "Add a way to clear these filters in one step, and show how many projects match them: 12 right now.",
+      "prompt": "Add a way to clear these filters in one step, so people get back to every project at once.",
       "gold": {
         "pattern": "filter",
         "render": "<ProjectFilters count={12} />"
