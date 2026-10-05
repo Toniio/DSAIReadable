@@ -251,22 +251,27 @@ const criticalRule = z.strictObject({
   mandatory_mappings: record.optional(),
   page_structure: strings.optional(),
 })
-const ruleSet = {
-  general_rules: z.array(generalRule),
-  component_rules: z.record(z.string(), strings),
-  composition_rules: z.array(compositionRule),
-}
+const ruleCategories = z.strictObject({
+  foundations: strings,
+  components: strings,
+})
 
 export const designRulesOutput = forms(
   // No category, concise
   z.strictObject({
     critical_rules: z.array(criticalTitle),
     composition_rules: z.array(compositionRule),
-    categories: z.strictObject({ foundations: strings, components: strings }),
+    categories: ruleCategories,
     detail: z.string(),
   }),
   // No category, detailed
-  z.strictObject({ ...ruleSet, critical_rules: z.array(criticalRule) }),
+  z.strictObject({
+    critical_rules: z.array(criticalRule),
+    general_rules: z.array(generalRule),
+    composition_rules: z.array(compositionRule),
+    categories: ruleCategories,
+    detail: z.string(),
+  }),
   // "composition"
   z.strictObject({
     category: z.string(),
@@ -399,6 +404,15 @@ export const statsOutput = z.strictObject({
   components_by_category: z.record(z.string(), z.number().int()),
 })
 
+/** Set when a validation report lists only the issues that fit in one answer (src/lib/answer-size.ts). */
+const issuesNotListed = z
+  .number()
+  .int()
+  .optional()
+  .describe(
+    "The issues past the size of one answer: fix the listed ones and validate again"
+  )
+
 export const screenReportOutput = z.strictObject({
   total_issues: z.number().int(),
   errors: z.number().int(),
@@ -413,6 +427,7 @@ export const screenReportOutput = z.strictObject({
       line: z.number().int().optional(),
     })
   ),
+  issues_not_listed: issuesNotListed,
 })
 
 export const codeReportOutput = z.strictObject({
@@ -430,4 +445,5 @@ export const codeReportOutput = z.strictObject({
       column: z.number().int(),
     })
   ),
+  issues_not_listed: issuesNotListed,
 })

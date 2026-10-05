@@ -140,6 +140,15 @@ changed since the run started. Then score and record the run:
 npm run evals -- --generator replay --from evals/.work/claude-code/<label> --label <label> --no-rubric --record
 ```
 
+**Passes.** A model does not build a screen the same way twice, so one run
+cannot tell a real gap from noise. Generate each condition several times from
+the same checkout, each pass under its own label (`<label>-r1` to `-r3`), and
+record every pass. The report keeps the folder its screens were written in
+(`generated.run`): the Audits page of the site counts each pass as its own
+screens, with a row per pass and their mean in the chart. Compare two
+conditions task by task, with a test for paired outcomes (McNemar's): with 26
+tasks, a gap of a few tasks is within the noise.
+
 The replay reads `<task>.metrics.json` and `run.json`, so the report carries
 the turns, the MCP calls by tool, the tool errors and the tokens, the model and
 `via claude-code <version>`. These runs compare with each other, not with the
@@ -191,7 +200,10 @@ each recorded call of a `dsaireadable_*` tool again to the MCP server of this
 checkout and estimates the cost of the same sessions with its answers: a
 change to what the server answers can be weighed before a run measures it.
 The estimate keeps the recorded turns; only a run shows what the new answers
-make the agent do.
+make the agent do. A result Claude Code refused for its size ("exceeds
+maximum allowed tokens") was recorded as that error, which is what the agent
+read: the estimate keeps it as recorded, and a table of its own shows what
+this checkout answers instead and whether Claude Code would still refuse it.
 
 ## The harness's own test
 

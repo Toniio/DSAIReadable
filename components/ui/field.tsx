@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { createContext, useContext, useMemo } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -8,6 +8,15 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
 import type { ComponentProps } from "react"
+
+/**
+ * True inside a `FieldLabel`. A `Field` there is the body of a choice card and
+ * renders no `role="group"`: the text of a group inside a `<label>` is left out
+ * of the name the label gives its control, in Chromium as in axe, so the card's
+ * Checkbox, RadioGroupItem or Switch would have no name.
+ */
+const FieldLabelContext = createContext(false)
+
 /**
  * Groups related controls in a semantic `fieldset`, such as the options of one multiple choice; nest it at most two levels deep.
  *
@@ -122,9 +131,10 @@ function Field({
   orientation = "vertical",
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
+  const inLabel = useContext(FieldLabelContext)
   return (
     <div
-      role="group"
+      role={inLabel ? undefined : "group"}
       data-slot="field"
       data-orientation={orientation}
       className={cn(fieldVariants({ orientation }), className)}
@@ -172,15 +182,17 @@ function FieldLabel({
   ...props
 }: React.ComponentProps<typeof Label>) {
   return (
-    <Label
-      data-slot="field-label"
-      className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-disabled has-data-checked:border-primary has-data-checked:bg-primary-selected has-[>[data-slot=field]]:rounded-none has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-overlay-hover has-[>[data-slot=field]]:has-[:focus-visible]:border-ring has-[>[data-slot=field]]:has-[:focus-visible]:ring-(length:--space-focus-ring-width) has-[>[data-slot=field]]:has-[:focus-visible]:ring-ring/50 *:data-[slot=field]:p-2",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
-        className
-      )}
-      {...props}
-    />
+    <FieldLabelContext.Provider value={true}>
+      <Label
+        data-slot="field-label"
+        className={cn(
+          "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-disabled has-data-checked:border-primary has-data-checked:bg-primary-selected has-[>[data-slot=field]]:rounded-none has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-overlay-hover has-[>[data-slot=field]]:has-[:focus-visible]:border-ring has-[>[data-slot=field]]:has-[:focus-visible]:ring-(length:--space-focus-ring-width) has-[>[data-slot=field]]:has-[:focus-visible]:ring-ring/50 *:data-[slot=field]:p-2",
+          "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
+          className
+        )}
+        {...props}
+      />
+    </FieldLabelContext.Provider>
   )
 }
 

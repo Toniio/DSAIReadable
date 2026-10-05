@@ -31,7 +31,7 @@ import {
   writeFileSync,
 } from "node:fs"
 import { homedir } from "node:os"
-import { join, relative, resolve } from "node:path"
+import { basename, join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import * as prettier from "prettier"
@@ -166,6 +166,7 @@ function replayAbout(
       about.effort &&
       about.maxTurns !== undefined && {
         generated: {
+          run: basename(resolve(dir)),
           commit: ds.commit,
           version: ds.version,
           dirty: ds.dirty,
@@ -379,7 +380,8 @@ async function selfTest() {
   // where the screens were generated, and how each session ended.
   const generated = fixtureRun.generated
   if (
-    generated?.commit !== "abcdef1234567890abcdef1234567890abcdef12" ||
+    generated?.run !== "fixtures" ||
+    generated.commit !== "abcdef1234567890abcdef1234567890abcdef12" ||
     generated.version !== "0.0.0-fixture" ||
     generated.dirty !== false ||
     generated.sources !== "0123456789abcdef" ||
@@ -416,6 +418,53 @@ async function selfTest() {
   )
     errors.push(
       `evals/fixtures/faq.jsonl: readStream reads ${JSON.stringify(faqStream)}`
+    )
+  // A result over Claude Code's output limit reaches the agent as an error:
+  // the stream records that error, and evals:context --reserve weighs the
+  // call apart rather than as the answer the agent never read.
+  const refusedStream = readStream(
+    [
+      {
+        type: "assistant",
+        message: {
+          id: "msg_1",
+          content: ["toolu_1", "toolu_2"].map((id) => ({
+            type: "tool_use",
+            id,
+            name: "mcp__dsaireadable__dsaireadable_get_design_rules",
+            input: { response_format: "detailed" },
+          })),
+          usage: { input_tokens: 100 },
+        },
+      },
+      {
+        type: "user",
+        message: {
+          content: [
+            {
+              type: "tool_result",
+              tool_use_id: "toolu_1",
+              content:
+                "Error: result (73,517 characters) exceeds maximum allowed tokens. Output has been saved to /tmp/rules.txt.",
+            },
+            {
+              type: "tool_result",
+              tool_use_id: "toolu_2",
+              content: [{ type: "text", text: '{"rules":[]}' }],
+            },
+          ],
+        },
+      },
+    ]
+      .map((line) => JSON.stringify(line))
+      .join("\n")
+  )
+  if (
+    refusedStream[0]?.calls.map((c) => c.refused === true).join() !==
+    "true,false"
+  )
+    errors.push(
+      `readStream does not flag the result Claude Code refused for its size (${JSON.stringify(refusedStream)})`
     )
   const faqResults = JSON.stringify(
     fixtureRun.tasks.find((t) => t.id === "faq")?.metrics?.results

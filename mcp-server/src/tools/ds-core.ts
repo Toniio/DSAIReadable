@@ -27,6 +27,7 @@ import {
   concisePattern,
   conciseSpec,
   criticalRuleTitles,
+  detailedRuleSet,
   responseFormat,
   servedCriticalRules,
   type ComponentSpec,
@@ -556,7 +557,7 @@ import { cn } from "@/lib/utils"`,
             'A foundation (color, spacing, focus…) or a component name: its rules and the composition rules that cover it. "composition": every composition rule. "tailwind": the critical rules'
           ),
         response_format: responseFormat(
-          "every rule without a category, and the critical rules, not only their titles, with one"
+          "the critical rules, not only their titles, and every foundation's rules without a category"
         ),
       }),
       outputSchema: designRulesOutput,
@@ -570,7 +571,7 @@ import { cn } from "@/lib/utils"`,
       if (!category) {
         return result(
           response_format === "detailed"
-            ? { ...data, critical_rules: servedCriticalRules() }
+            ? detailedRuleSet(data)
             : conciseRuleSet(data)
         )
       }

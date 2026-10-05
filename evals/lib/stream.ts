@@ -11,6 +11,14 @@
 /** Claude Code names an MCP tool `mcp__<server>__<tool>`. */
 const MCP_PREFIX = /^mcp__.+?__/
 
+/**
+ * What Claude Code answers in place of an MCP result over its output limit
+ * (MAX_MCP_OUTPUT_TOKENS, 25,000 tokens by default): the size, the path of a
+ * file holding the result, and how to read it.
+ */
+const CLIENT_LIMIT =
+  /^Error: result \([\d,]+ characters\) exceeds maximum allowed tokens\b/
+
 interface StreamCall {
   id: string
   /** The tool's own name, without Claude Code's `mcp__<server>__` prefix. */
@@ -18,6 +26,8 @@ interface StreamCall {
   input: Record<string, unknown>
   /** The characters of what the call sent back; undefined when no result came. */
   resultChars?: number
+  /** Claude Code refused the result for its size: the agent read that error, not the answer. */
+  refused?: boolean
 }
 
 export interface StreamTurn {
@@ -129,7 +139,9 @@ export function readStream(text: string): StreamTurn[] {
             ? calls.get(block.tool_use_id)
             : undefined
         if (call) {
-          call.resultChars = resultText(block.content).length
+          const text = resultText(block.content)
+          call.resultChars = text.length
+          if (CLIENT_LIMIT.test(text)) call.refused = true
           answered = call
         } else if (
           line.isSynthetic &&
