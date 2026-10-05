@@ -61,7 +61,7 @@ dsaireadable/
 ├── specs/                      # The design system's Markdown documentation
 │   ├── components/             # 65 component specs (13 sections each)
 │   ├── foundations/            # Color, typography, spacing, motion, radius… specs
-│   └── tokens/token-reference.md  # Reference of the 426 tokens (generated)
+│   └── tokens/token-reference.md  # Reference of the 504 tokens (generated)
 ├── mcp-server/                 # MCP server @dsaireadable/mcp-server
 │   ├── src/
 │   │   ├── tools/              # MCP tools (ds-core, dataviz, ux-writing, admin)
@@ -72,7 +72,7 @@ dsaireadable/
 ├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
 ├── skills/                     # Agent skill: dsaireadable-ui-guard
 ├── .changeset/                 # Pending changesets: the semver intent of each change
-├── .claude-plugin/             # Claude Code plugin marketplace: the skills and the MCP server in one install
+├── .claude-plugin/             # Claude Code plugin marketplace: the skill and the MCP server in one install
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
 ├── registry/                   # Sources of the registry items that are not components
 ├── registry.json               # shadcn registry — generated
@@ -277,9 +277,10 @@ claude plugin install dsaireadable@dsaireadable
 The plugin installs its skill from the release tag and starts the MCP server
 with `npx`, pinned to the same release, so the skill and the tools it names
 always agree. The `#vX.Y.Z` of `npx skills add` does the same for the first
-command. A skill's gain can be measured on the conformance
-harness, with and without it: `npm run evals -- --generator claude
---suite skills --skills all` ([`evals/README.md`](./evals/README.md)).
+command. The conformance harness measures a skill that builds or changes
+screens, with and without it: `npm run evals -- --generator claude
+--suite skills --skills all`. The UI guard runs only on request, so such a run
+checks that installing it changes nothing ([`evals/README.md`](./evals/README.md#measuring-the-agent-skills)).
 
 ---
 
@@ -438,7 +439,7 @@ npm run lint         # ESLint
 npm run format       # Prettier (sorts Tailwind classes automatically)
 npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP server, site
 npm run test:components  # Every spec example, and the foundations' complete modules, in headless Chromium: axe light and dark, focus, keyboard
-npm run evals:test   # The conformance harness scores its gold examples, with no model
+npm run evals:test   # The conformance harness scores its gold examples and the edit tasks' bases, with no model
 npm run site:dev     # The documentation site: foundations, components with a live playground, patterns, changes, audits
 npm run site:build && npm run site:test  # The built site, loaded in headless Chromium: axe, page errors and a focus indicator on every tab stop, light and dark
 ```
