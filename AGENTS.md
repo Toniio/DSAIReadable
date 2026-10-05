@@ -102,7 +102,7 @@ npm run plugin:test       # the ESLint plugin's rules, each against a failing an
 npm run mcp:test          # the MCP server's test suite
 npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
 npm run test:components   # headless Chromium: the 65 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard, reduced motion
-npm run evals:test        # the conformance harness scores the gold examples (pass) and its fixtures (fail what they declare)
+npm run evals:test        # the conformance harness scores the gold examples and the edit tasks' bases (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
 npm run evals:generate    # screens from Claude Code in print mode, on a subscription (no API key), for the replay generator (evals/README.md)
 npm run evals:context     # where a recorded run's input tokens went, per tool and format; --reserve re-serves its calls with this checkout (evals/README.md)
