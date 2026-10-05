@@ -166,7 +166,10 @@ execution error that names it. Lists and resources carry a one-hour, `public` ca
 `response_format`: `concise` by default, `detailed` for what a screen needs to use the component or follow the rule; a component's whole
 spec, with its anatomy, tokens and states, is the resource `ds://component/{name}/spec`.
 `dsaireadable_get_components`, `dsaireadable_get_tokens` and `dsaireadable_get_changelog` paginate: `limit` (100 by default) and `cursor`, with a
-`{ total, items, next_cursor }` response.
+`{ total, items, next_cursor }` response. No answer passes 40,000 characters, well under the 25,000 tokens Claude Code accepts
+from one MCP result by default (`MAX_MCP_OUTPUT_TOKENS`): a page ends there before `limit`, a validation report past it lists
+the issues that fit and counts the rest (`issues_not_listed`), and `dsaireadable_get_design_rules` `detailed` without a
+category serves every foundation's rules and names the components, whose rules a `category` returns.
 
 ### Resources
 

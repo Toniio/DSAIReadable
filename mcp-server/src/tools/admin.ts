@@ -4,6 +4,7 @@ import { loadContext, result } from "../lib/context.js"
 import { validateScreen } from "../lib/validate-screen.js"
 import { validateCode } from "../lib/validate-code.js"
 import { READ_ONLY } from "../lib/annotations.js"
+import { withinCap } from "../lib/answer-size.js"
 import {
   codeReportOutput,
   screenReportOutput,
@@ -92,7 +93,7 @@ export function registerAdminTools(server: McpServer): void {
       outputSchema: screenReportOutput,
       annotations: READ_ONLY,
     },
-    async ({ code }) => result(validateScreen(code))
+    async ({ code }) => result(withinCap(validateScreen(code)))
   )
 
   // 3. dsaireadable_validate_code
@@ -108,7 +109,7 @@ export function registerAdminTools(server: McpServer): void {
       outputSchema: codeReportOutput,
       annotations: READ_ONLY,
     },
-    async ({ code }) => result(validateCode(code))
+    async ({ code }) => result(withinCap(validateCode(code)))
   )
 }
 
