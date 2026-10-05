@@ -407,6 +407,12 @@ export const PAIRS: Pair[] = [
         "color.action.background.selected",
         "selected choice card (bg-primary-selected)",
       ],
+      [
+        "Choice card description",
+        "color.text.subtle",
+        "color.action.background.selected",
+        "selected choice card (bg-primary-selected)",
+      ],
     ] as const
   ).map(([label, fg, bg, on]) => ({
     label: `${label} on the ${on}`,

@@ -10748,7 +10748,7 @@
       "**MUST** — keep `FieldLegend variant=\"legend\"` for `<fieldset>`s; everywhere else, `variant=\"label\"`",
       "**Note** — `FieldError` renders nothing without `children` or a non-empty `errors`",
       "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`",
-      "**Note** — a choice card is a `FieldLabel` wrapping a `Field orientation=\"horizontal\"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring",
+      "**Note** — a choice card is a `FieldLabel` wrapping a `Field orientation=\"horizontal\"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring, and takes the card's text as its name",
       "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)"
     ],
     "dependencies": [
@@ -10772,7 +10772,7 @@
       },
       {
         "slot": "`data-slot=\"field\"`",
-        "role": "A field's main `<div role=\"group\">`; carries `data-orientation` and receives `data-invalid`"
+        "role": "A field's main `<div role=\"group\">`, a plain `<div>` in a choice card; carries `data-orientation` and receives `data-invalid`"
       },
       {
         "slot": "`data-slot=\"field-label\"`",
@@ -11380,7 +11380,7 @@
         "behavior": "Not applicable at the Field level"
       }
     ],
-    "accessibility": "**Pattern**: Form field group\n\n**Role**: `Field` carries `role=\"group\"`; `FieldSet` / `FieldLegend` render `fieldset` / `legend`; `FieldError` carries `role=\"alert\"`.\n\n**Keyboard**:\n\nNo interaction of its own; the control inside keeps its keyboard behavior.\n\n**Accessible name**: `FieldLabel` must be tied to the control (`htmlFor` / `id`). A group of checkboxes or radios is named by its `FieldLegend`.\n\n**Pitfalls**:\n\n- Link `FieldDescription` and `FieldError` to the control through `aria-describedby`: the component does not do it for you.\n- Set `aria-invalid` on the control in error; `FieldError` announces the message when it appears.\n- Never replace the label with the `placeholder`.",
+    "accessibility": "**Pattern**: Form field group\n\n**Role**: `Field` carries `role=\"group\"`, except inside a `FieldLabel`: the text of a group inside a `<label>` is left out of the name the label gives its control; `FieldSet` / `FieldLegend` render `fieldset` / `legend`; `FieldError` carries `role=\"alert\"`.\n\n**Keyboard**:\n\nNo interaction of its own; the control inside keeps its keyboard behavior.\n\n**Accessible name**: `FieldLabel` must be tied to the control (`htmlFor` / `id`). A group of checkboxes or radios is named by its `FieldLegend`. In a choice card, the `FieldLabel` names its control with the card's text, `FieldTitle` then `FieldDescription`.\n\n**Pitfalls**:\n\n- Link `FieldDescription` and `FieldError` to the control through `aria-describedby`: the component does not do it for you.\n- Set `aria-invalid` on the control in error; `FieldError` announces the message when it appears.\n- Never replace the label with the `placeholder`.",
     "code_example": "import {\n  Field,\n  FieldDescription,\n  FieldError,\n  FieldGroup,\n  FieldLabel,\n} from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\n\nexport default function Example() {\n  return (\n    <FieldGroup>\n      <Field data-invalid=\"true\">\n        <FieldLabel htmlFor=\"email\">Email address</FieldLabel>\n        <Input id=\"email\" type=\"email\" aria-invalid=\"true\" />\n        <FieldDescription>We only use it to send receipts.</FieldDescription>\n        <FieldError>Enter a valid email address.</FieldError>\n      </Field>\n    </FieldGroup>\n  )\n}",
     "cross_references": [
       "Label",

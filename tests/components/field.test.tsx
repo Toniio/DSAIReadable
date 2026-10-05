@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Switch } from "@/components/ui/switch"
 
+import { chromiumName } from "../accessible-name"
 import { axeViolations } from "../axe"
 import { ringOf, unmarkedTabStops } from "../focus"
 
@@ -231,6 +232,56 @@ describe("Field, choice card", () => {
       expect(await unmarkedTabStops(5)).toEqual([])
     }
   )
+
+  // The card's text names its control: a Field inside a FieldLabel renders no
+  // group, whose text Chromium and axe would leave out of that name.
+  it.each(Object.keys(controls))(
+    "%s: named by the card's text, checked or not, with no axe violation, light and dark",
+    async (name) => {
+      const { role, render: draw } = controls[name as keyof typeof controls]
+      for (const checked of [false, true]) {
+        render(<ChoiceCard>{draw({ checked })}</ChoiceCard>)
+        expect(await chromiumName(screen.getByRole(role))).toBe(
+          "Pro plan Unlimited projects for your team."
+        )
+        expect(await axeViolations()).toEqual([])
+        cleanup()
+      }
+    }
+  )
+
+  it("names each card of a radio group in a FieldSet, as a settings screen builds it", async () => {
+    const themes = [
+      ["light", "Light", "Dark text on a bright background."],
+      ["dark", "Dark", "Light text on a dim background."],
+    ]
+    render(
+      <FieldSet>
+        <FieldLegend>Theme</FieldLegend>
+        <RadioGroup defaultValue="light">
+          {themes.map(([value, title, description]) => (
+            <FieldLabel key={value} htmlFor={`theme-${value}`}>
+              <Field orientation="horizontal">
+                <FieldContent>
+                  <FieldTitle>{title}</FieldTitle>
+                  <FieldDescription>{description}</FieldDescription>
+                </FieldContent>
+                <RadioGroupItem value={value} id={`theme-${value}`} />
+              </Field>
+            </FieldLabel>
+          ))}
+        </RadioGroup>
+      </FieldSet>
+    )
+    const names = []
+    for (const radio of screen.getAllByRole("radio"))
+      names.push(await chromiumName(radio))
+    expect(names).toEqual([
+      "Light Dark text on a bright background.",
+      "Dark Light text on a dim background.",
+    ])
+    expect(await axeViolations()).toEqual([])
+  })
 
   it.each(["Checkbox", "Switch"] as const)(
     "%s in a FieldLabel that is not a card keeps its own ring, light and dark",
