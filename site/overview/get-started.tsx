@@ -166,6 +166,13 @@ export function GetStarted({ install }: { install: Install }) {
           </Step>
         </ol>
         <Names label={`${install.tools.length} tools`} names={install.tools} />
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          <Link href="/mcp-and-skills/" className={LINK}>
+            How the server works
+          </Link>
+          : why a server beside llms.txt, how its answers are compiled, and a
+          recorded session, tool by tool.
+        </p>
       </TabsContent>
 
       <TabsContent value="skills" className="flex flex-col gap-4">
@@ -204,6 +211,12 @@ export function GetStarted({ install }: { install: Install }) {
           label={`${install.skills.length} ${install.skills.length === 1 ? "skill" : "skills"}`}
           names={install.skills}
         />
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          <Link href="/mcp-and-skills/#the-ui-guard-skill" className={LINK}>
+            How the UI guard works
+          </Link>
+          : its checklist, domain by domain, and the review it writes.
+        </p>
       </TabsContent>
 
       <TabsContent value="eslint" className="flex flex-col gap-4">

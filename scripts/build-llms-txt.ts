@@ -3,8 +3,9 @@
  * agents, in the llms.txt v2 format (llmstxt.org) — an H1, a summary in a
  * blockquote, then H2 sections of `- [name](url): notes` links.
  *
- * The entry points are listed below by hand; the foundations, the page
- * patterns and the component specs are read from specs/, each pattern with its
+ * The entry points are listed below by hand; the pages of the MCP & Skills
+ * section are read from docs/mcp-and-skills/, and the foundations, the page
+ * patterns and the component specs from specs/, each pattern with its
  * kind and each component with its category, both with the one sentence of
  * their Role section. A spec added, renamed or re-worded
  * therefore changes llms.txt, and `--check` fails until it is regenerated.
@@ -167,9 +168,23 @@ const patterns: Link[] = specFiles("specs/patterns").map((path) => {
   return { path, name, notes: `${kind} — ${role}` }
 })
 
+/**
+ * A page of the documentation site's MCP & Skills section, written in
+ * docs/mcp-and-skills/: named by its H1, noted with its `## ` sections.
+ */
+const mcpSkillsDocs: Link[] = specFiles("docs/mcp-and-skills").map((path) => {
+  const doc = read(path)
+  const title = /^# (.+)$/m.exec(doc)?.[1]
+  const parts = [...doc.matchAll(/^## (.+)$/gm)].map((match) => match[1])
+  if (!title || parts.length === 0)
+    throw new Error(`${path}: no H1 or no ## section`)
+  return { path, name: `MCP & Skills: ${title}`, notes: parts.join("; ") }
+})
+
 const sections: [string, Link[]][] = [
   ["Start here", START],
   ["Machine-readable sources", MACHINE],
+  ["MCP server and skills", mcpSkillsDocs],
   ["Foundations", foundations],
   ["Page patterns", patterns],
   ["Component specs", components],

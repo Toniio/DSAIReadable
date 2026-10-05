@@ -49,6 +49,8 @@ const SECTION_LINES: Record<string, string> = {
     "Each component with a live playground, its anatomy, properties, states, tokens and accessibility.",
   "/patterns/":
     "Screens that do one job, composed from the components: the rules, the structure and the code.",
+  "/mcp-and-skills/":
+    "How an agent reads the design system: what the MCP server serves, how it compiles its answers, and the UI guard skill.",
   "/changes/":
     "Every release, newest first, each changeset with its category and its commit.",
   "/audits/":

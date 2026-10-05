@@ -20,6 +20,7 @@ dsaireadable/
 ├── tokens.css                  # Generated CSS custom properties — do not edit
 ├── tokens.manifest.json        # Generated machine-readable list of the tokens — do not edit
 ├── specs/                      # The design system's Markdown documentation (components, foundations, patterns, tokens)
+├── docs/mcp-and-skills/        # The prose of the documentation site's MCP & Skills pages, listed in llms.txt
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
 ├── tests/                      # Component tests (Vitest, Testing Library, axe-core)
 ├── mcp-server/                 # MCP server that serves the design system to agents (its own rules: its AGENTS.md)
@@ -279,7 +280,7 @@ host such as GitHub Pages serves it under). The `Site` workflow
 
 | Path                               | Role                                                                                                                                                                                                                     |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `site/app/(docs)/`                 | The pages: Overview, Foundations, Components, Patterns, Changes, Audits                                                                                                                                                  |
+| `site/app/(docs)/`                 | The pages: Overview, Foundations, Components, Patterns, MCP & Skills, Changes, Audits                                                                                                                                    |
 | `site/app/preview/`                | The preview canvases, one document per component and pattern: the pages show them in iframes, so an overlay portaled to `<body>` takes the preview's theme and a fixed layout stays inside it                            |
 | `site/app/site.css`                | Imports `styles/globals.css`, lists the folders Tailwind scans, and redefines `hover`, `focus`, `focus-visible`, `focus-within` and `active` so a canvas can force a state (`data-force-state`), for the site build only |
 | `site/lib/`                        | Build-time readers of the specs, the MCP context, `tokens.manifest.json` and the changelog                                                                                                                               |
@@ -290,6 +291,7 @@ host such as GitHub Pages serves it under). The `Site` workflow
 | `site/component-docs/`             | The parts of a component page: the index of the 65, the anatomy, the variant and state grids, the dependency graph                                                                                                       |
 | `site/pattern-docs/`               | The pattern pages' previews and thumbnails                                                                                                                                                                               |
 | `site/change-docs/`                | The change log, read from `CHANGELOG.md`                                                                                                                                                                                 |
+| `site/mcp-skills-docs/`            | The MCP & Skills pages: their prose read from `docs/mcp-and-skills/`, the pipeline, a recorded session, the UI guard's checklist                                                                                         |
 | `site/audit-docs/`                 | The Audits page: contrast, evals, the components' checks                                                                                                                                                                 |
 | `site/playground/`                 | The playground: controls derived from the cva axes and the specs' Props / API (`auto.ts`), hand-written scenarios for compound components (`scenarios/`), the canvas and its postMessage protocol                        |
 | `site/generated/examples/`         | The specs' code examples, copied by `npm run site:examples` — generated, do not edit                                                                                                                                     |

@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
 import path from "node:path"
 
 /**
@@ -31,6 +31,19 @@ export function listFiles(dir: string, extension: string): string[] {
   return readdirSync(full)
     .filter((file) => file.endsWith(extension))
     .sort()
+}
+
+/** The names of the folders under a repository folder, sorted. */
+export function folders(dir: string): string[] {
+  return readdirSync(path.join(ROOT, dir), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort()
+}
+
+/** The size of a repository file, in bytes. */
+export function fileSize(file: string): number {
+  return statSync(path.join(ROOT, file)).size
 }
 
 /** Whether a repository path exists. */
