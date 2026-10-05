@@ -218,9 +218,20 @@ jobs:
       # throwaway copies and a local git remote: no network.
       - run: npm run release:test
 
-  site:
-    name: site
+  # The documentation site, tested in three shards on three runners: in one
+  # job, site:test alone took 6 minutes and set the wall time of every run.
+  # Each shard builds the site itself (about 45 s) rather than waiting for a
+  # build job to upload it (about 80 s before any shard could start): its
+  # pages start loading sooner.
+  site-test:
+    name: site-test (${{ matrix.shard }}/3)
     runs-on: ubuntu-latest
+    strategy:
+      # Every shard runs to its end: a failure in one does not cancel the
+      # others, so one run reports every load that has a problem.
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
     env:
       # The site as GitHub Pages serves it, under /<repository>/ (the Site
       # workflow builds it the same way): every link and preview iframe is
@@ -235,8 +246,11 @@ jobs:
       - run: npm ci
       # The specs' examples copied into site/generated/ match the specs,
       # every file of the site passes the lint a consuming project runs, and
-      # every focus ring the site composes has a solid part (focus.md).
-      - run: npm run site:check
+      # every focus ring the site composes has a solid part (focus.md). In
+      # the first shard only: it adds about 7 s to that shard, where a job of
+      # its own would spend about 20 s on npm ci for it.
+      - if: matrix.shard == 1
+        run: npm run site:check
       # Every page of the documentation site prerenders from the repository's
       # files: a spec, a token or a context file it cannot read fails here.
       # Networked: next/font downloads the typefaces.
@@ -257,4 +271,28 @@ jobs:
         run: npx playwright install --with-deps --only-shell chromium
       - if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
-      - run: npm run site:test
+      # This shard's third of the loads, four at a time as in one job (the
+      # CI-only flakes so far came from CPU pressure): a route's light and
+      # dark loads stay in one shard, the shards' loads add up to the whole
+      # run's, and the 404 page is loaded in one of them (scripts/lib/shard.ts).
+      - run: npm run site:test -- --shard=${{ matrix.shard }}/3
+
+  # One check for the documentation site, whatever its number of shards: it
+  # fails unless every shard of site-test passed. `always()` runs it after a
+  # shard that failed or was canceled too, where it must fail rather than be
+  # skipped.
+  site:
+    name: site
+    needs: site-test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail unless every shard passed
+        env:
+          RESULT: ${{ needs.site-test.result }}
+        run: |
+          if [ "$RESULT" != "success" ]; then
+            echo "::error::A shard of site-test did not pass (its result: $RESULT). Its log names the loads that have a problem."
+            exit 1
+          fi
+          echo "Every shard of site-test passed."
