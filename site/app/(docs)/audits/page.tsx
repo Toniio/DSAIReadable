@@ -298,9 +298,6 @@ export default function AuditsPage() {
         title="Evals"
         description={
           <>
-            <span className="text-border">
-              Counter-check: this text fails contrast.
-            </span>{" "}
             A generator builds each task of{" "}
             <code className="font-mono">evals/tasks.json</code> as one screen.
             Stage A is deterministic: the screen compiles against the real
