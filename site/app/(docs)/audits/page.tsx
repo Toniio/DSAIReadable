@@ -72,7 +72,6 @@ const CONDITION_PHRASE: Record<string, string> = {
   "Gold (calibration)": "as the gold standard",
   "No context": "with no context",
   MCP: "with the MCP server",
-  "MCP + skills": "with the MCP server and the skills",
 }
 
 const capitalize = (text: string) => text[0].toUpperCase() + text.slice(1)
@@ -300,19 +299,14 @@ export default function AuditsPage() {
           <>
             A generator builds each task of{" "}
             <code className="font-mono">evals/tasks.json</code> as one screen.
-            Stage A is deterministic: the screen compiles against the real
-            components and lints clean with the design system&apos;s ESLint
-            plugin. Stage B renders it in headless Chromium: no axe violation
-            and a visible focus indicator on every tab stop, in light and dark.
-            Conformance is the mean of the stages that ran. The page shows the
-            runs of the latest version measured, and a rescore in place of the
-            run whose screens it scores again; the earlier ones stay in{" "}
-            <code className="font-mono">evals/history/</code>. A condition
-            measured in several passes, each on its own screens, has a row per
-            pass in the table and their mean in the chart. A suite&apos;s runs,
-            a subset of the tasks such as the one the agent skills are measured
-            on, are in the chart and the table; the summary and the per-task
-            view keep the latest run of the default tasks.
+            Stage A: it compiles against the real components and lints clean
+            with the design system&apos;s ESLint plugin. Stage B: in headless
+            Chromium, no axe violation and a visible focus indicator on every
+            tab stop, in light and dark. Conformance is the mean of the stages
+            that ran. The page shows the latest version measured; earlier runs
+            stay in <code className="font-mono">evals/history/</code>. A
+            condition run in several passes has a row per pass and its mean in
+            the chart.
           </>
         }
       >
@@ -340,7 +334,6 @@ export default function AuditsPage() {
                 <TableHead>Version</TableHead>
                 <TableHead>Generator</TableHead>
                 <TableHead>Context</TableHead>
-                <TableHead>Skills</TableHead>
                 <TableHead>Tasks</TableHead>
                 <TableHead>Stage A</TableHead>
                 <TableHead>Stage B</TableHead>
@@ -391,17 +384,6 @@ export default function AuditsPage() {
                       )}
                     </TableCell>
                     <TableCell>{run.context ?? "—"}</TableCell>
-                    <TableCell>
-                      {run.skills.length ? (
-                        <span className="flex flex-col gap-0.5 font-mono">
-                          {run.skills.map((skill) => (
-                            <span key={skill}>{skill}</span>
-                          ))}
-                        </span>
-                      ) : (
-                        "—"
-                      )}
-                    </TableCell>
                     <TableCell className="whitespace-normal">
                       <span className="flex flex-col gap-0.5">
                         <span className="font-mono tabular-nums">

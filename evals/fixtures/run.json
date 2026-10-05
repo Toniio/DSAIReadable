@@ -21,7 +21,8 @@
     "faq": {
       "subtype": "success",
       "stopReason": "end_turn",
-      "numTurns": 7
+      "numTurns": 7,
+      "costUsd": 0.2131922
     },
     "sign-in": {
       "subtype": "success",

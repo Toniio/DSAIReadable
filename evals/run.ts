@@ -147,6 +147,7 @@ function replayGenerator(dir: string): Generator {
           subtype: outcome.subtype,
           numTurns: outcome.numTurns,
           stopReason: outcome.stopReason ?? null,
+          ...(outcome.costUsd !== undefined && { costUsd: outcome.costUsd }),
         },
       }),
     }
@@ -424,7 +425,8 @@ async function selfTest() {
   if (
     faqSession?.subtype !== "success" ||
     faqSession.numTurns !== 7 ||
-    faqSession.stopReason !== "end_turn"
+    faqSession.stopReason !== "end_turn" ||
+    faqSession.costUsd !== 0.2131922
   )
     errors.push(
       `evals/fixtures/run.json: the faq task did not carry how its session ended (${JSON.stringify(faqSession)})`

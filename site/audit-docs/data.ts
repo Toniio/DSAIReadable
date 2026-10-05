@@ -58,6 +58,8 @@ interface RunReport {
     generated: boolean
     static?: StaticResult
     a11y?: A11yResult
+    metrics?: { inputTokens: number; outputTokens: number }
+    session?: { costUsd?: number }
   }[]
 }
 
@@ -75,6 +77,15 @@ interface TaskResult {
   findings: string[]
 }
 
+/** What generating screens used: the tokens each session read and wrote, and Claude Code's estimate of its cost. */
+interface Usage {
+  sessions: number
+  inputTokens: number
+  outputTokens: number
+  /** Null when a session of the run did not report one. */
+  costUsd: number | null
+}
+
 export interface EvalRun {
   /** The history file, without `.json`. */
   file: string
@@ -83,7 +94,7 @@ export interface EvalRun {
   generator: string
   model?: string
   via?: string
-  /** `Gold (calibration)`, `No context`, `MCP`, `MCP + skills`. */
+  /** `Gold (calibration)`, `No context`, `MCP`. */
   condition: string
   /**
    * The screens it scores, by the commit and sources they were generated
@@ -102,31 +113,43 @@ export interface EvalRun {
   /** It scores again the screens of an earlier run, with a later scorer. */
   rescored: boolean
   context?: string
-  skills: string[]
   tasks: number
   stageA: number
   stageB: number | null
   conformance: number
   mcpCalls: number | null
+  /** What its sessions used, summed over the tasks it generated; null for a gold run. */
+  usage: Usage | null
   results: TaskResult[]
   /**
-   * The suite of evals/tasks.json whose tasks it ran (`skills`), or undefined
-   * for the default run.
+   * The suite of evals/tasks.json whose tasks it ran, or undefined for the
+   * default run.
    */
   suite?: string
 }
 
-const CONDITION_ORDER = [
-  "Gold (calibration)",
-  "No context",
-  "MCP",
-  "MCP + skills",
-]
+const CONDITION_ORDER = ["Gold (calibration)", "No context", "MCP"]
 
 function condition(report: RunReport): string {
   if (report.generator === "gold") return "Gold (calibration)"
-  if (report.context === "none") return "No context"
-  return report.skills?.length ? "MCP + skills" : "MCP"
+  return report.context === "none" ? "No context" : "MCP"
+}
+
+const sum = (values: number[]) =>
+  values.reduce((total, value) => total + value, 0)
+
+function usageOf(tasks: RunReport["tasks"]): Usage | null {
+  const sessions = tasks.filter((task) => task.metrics)
+  if (sessions.length === 0) return null
+  const costs = sessions.map((task) => task.session?.costUsd)
+  return {
+    sessions: sessions.length,
+    inputTokens: sum(sessions.map((task) => task.metrics?.inputTokens ?? 0)),
+    outputTokens: sum(sessions.map((task) => task.metrics?.outputTokens ?? 0)),
+    costUsd: costs.every((cost) => cost !== undefined)
+      ? sum(costs as number[])
+      : null,
+  }
 }
 
 /** `0.1.10` after `0.1.9`. */
@@ -182,15 +205,23 @@ function suiteOf(
   )?.[0]
 }
 
-/** Every recorded run of evals/history/, oldest first. */
+/**
+ * Every recorded run of evals/history/ that the page lists, oldest first. A
+ * run that gave the agent skills stays in evals/history/, and is not listed:
+ * the page measures the design system with and without its MCP server.
+ */
 export function evalRuns(): EvalRun[] {
   const { tasks, suites } = readJson<{
     tasks: EvalTask[]
     suites: Record<string, string[]>
   }>("evals/tasks.json")
   const runs: EvalRun[] = listFiles("evals/history", ".json")
-    .map((file) => {
-      const report = readJson<RunReport>(`evals/history/${file}`)
+    .map((file) => ({
+      file,
+      report: readJson<RunReport>(`evals/history/${file}`),
+    }))
+    .filter(({ report }) => !report.skills?.length)
+    .map(({ file, report }) => {
       const checkout = report.generated
         ? `${report.generated.commit}:${report.generated.sources ?? ""}`
         : null
@@ -214,12 +245,12 @@ export function evalRuns(): EvalRun[] {
         builtOn: report.date,
         rescored: false,
         context: report.context,
-        skills: report.skills ?? [],
         tasks: report.summary.tasks,
         stageA: report.summary.stageA.pass,
         stageB: report.summary.stageB?.pass ?? null,
         conformance: report.summary.conformance,
         mcpCalls: report.summary.generation?.mcpCalls ?? null,
+        usage: usageOf(report.tasks),
         results: report.tasks.map((task) => ({
           id: task.id,
           gold: goldLink(tasks.find((entry) => entry.id === task.id)),
@@ -282,8 +313,8 @@ export function latestVersionRuns(runs: EvalRun[]): EvalRun[] {
  * The model runs whose screens were built last: the conditions measured
  * together, rescored or not, with every pass of each, even one scored the
  * day before. A gold run calibrates the scorer, it measures no model; a
- * suite's run measures a subset of the tasks (the skills on theirs), so the
- * latest run of the default tasks stays the one shown.
+ * suite's run measures a subset of the tasks, so the latest run of the
+ * default tasks stays the one shown.
  */
 export function latestRuns(runs: EvalRun[]): EvalRun[] {
   const models = runs.filter(
@@ -319,12 +350,34 @@ export interface EvalSeries {
   stageA: number
   stageB: number | null
   conformance: number
+  /** What one task's session used on average over its passes; null for a gold run. */
+  perTask: {
+    inputTokens: number
+    outputTokens: number
+    /** Claude Code's estimate at API prices; null when a session did not report one. */
+    costUsd: number | null
+  } | null
   /** Its passes, in the order they were recorded. */
   runs: EvalRun[]
 }
 
-const mean = (values: number[]) =>
-  values.reduce((sum, value) => sum + value, 0) / values.length
+const mean = (values: number[]) => sum(values) / values.length
+
+/** What one task's session used on average over the passes of a series. */
+function perTask(passes: EvalRun[]): EvalSeries["perTask"] {
+  const usages = passes.map((run) => run.usage)
+  if (usages.some((usage) => usage === null)) return null
+  const used = usages as Usage[]
+  const sessions = sum(used.map((usage) => usage.sessions))
+  const costs = used.map((usage) => usage.costUsd)
+  return {
+    inputTokens: sum(used.map((usage) => usage.inputTokens)) / sessions,
+    outputTokens: sum(used.map((usage) => usage.outputTokens)) / sessions,
+    costUsd: costs.every((cost) => cost !== null)
+      ? sum(costs as number[]) / sessions
+      : null,
+  }
+}
 
 /** The runs grouped by measurement, in the order of their first pass. */
 export function evalSeries(runs: EvalRun[]): EvalSeries[] {
@@ -350,6 +403,7 @@ export function evalSeries(runs: EvalRun[]): EvalSeries[] {
         ? mean(stageB as number[])
         : null,
       conformance: mean(passes.map((run) => run.conformance)),
+      perTask: perTask(passes),
       runs: passes,
     }
   })
