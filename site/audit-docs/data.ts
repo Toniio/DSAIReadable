@@ -39,8 +39,11 @@ interface RunReport {
   skills?: string[]
   via?: string
   designSystem: { version: string; commit: string }
-  /** Where the screens come from: absent from a gold run. */
-  generated?: { commit: string; sources?: string }
+  /**
+   * Where the screens come from: absent from a gold run. `run` is the folder
+   * evals:generate wrote them in, absent from a report recorded before it.
+   */
+  generated?: { run?: string; commit: string; sources?: string }
   summary: {
     tasks: number
     generated: number
@@ -84,9 +87,16 @@ export interface EvalRun {
   condition: string
   /**
    * The screens it scores, by the commit and sources they were generated
-   * from: null for a gold run, which scores the gold examples.
+   * from and the folder they were written in: null for a gold run, which
+   * scores the gold examples.
    */
   screens: string | null
+  /**
+   * The measurement it is a pass of: the runs of one condition generated from
+   * the same commit and sources, each with its own screens. Its file for a
+   * gold run.
+   */
+  measurement: string
   /** The date its screens were first scored: `date`, unless it rescores them. */
   builtOn: string
   /** It scores again the screens of an earlier run, with a later scorer. */
@@ -162,6 +172,9 @@ export function evalRuns(): EvalRun[] {
   const runs: EvalRun[] = listFiles("evals/history", ".json")
     .map((file) => {
       const report = readJson<RunReport>(`evals/history/${file}`)
+      const checkout = report.generated
+        ? `${report.generated.commit}:${report.generated.sources ?? ""}`
+        : null
       return {
         file: file.replace(/\.json$/, ""),
         date: report.date,
@@ -170,9 +183,15 @@ export function evalRuns(): EvalRun[] {
         model: report.model,
         via: report.via,
         condition: condition(report),
-        screens: report.generated
-          ? `${report.generated.commit}:${report.generated.sources ?? ""}`
-          : null,
+        screens: checkout && `${checkout}:${report.generated?.run ?? ""}`,
+        measurement: checkout
+          ? [
+              report.designSystem.version,
+              report.model,
+              condition(report),
+              checkout,
+            ].join("|")
+          : file,
         builtOn: report.date,
         rescored: false,
         context: report.context,
@@ -238,8 +257,8 @@ export function latestVersionRuns(runs: EvalRun[]): EvalRun[] {
 
 /**
  * The model runs whose screens were built last: the conditions measured
- * together, rescored or not. A gold run calibrates the scorer, it measures no
- * model.
+ * together, rescored or not, with every pass of each, even one scored the
+ * day before. A gold run calibrates the scorer, it measures no model.
  */
 export function latestRuns(runs: EvalRun[]): EvalRun[] {
   const models = runs.filter((run) => run.generator !== "gold")
@@ -247,7 +266,63 @@ export function latestRuns(runs: EvalRun[]): EvalRun[] {
     .map((run) => run.builtOn)
     .sort()
     .at(-1)
-  return models.filter((run) => run.builtOn === last)
+  const measured = new Set(
+    models.filter((run) => run.builtOn === last).map((run) => run.measurement)
+  )
+  return models.filter((run) => measured.has(run.measurement))
+}
+
+/**
+ * One measurement: the passes of a condition, each run on its own screens,
+ * and their means. A condition measured once is a series of one run.
+ */
+export interface EvalSeries {
+  /** Its first pass's history file. */
+  file: string
+  condition: string
+  version: string
+  generator: string
+  model?: string
+  builtOn: string
+  date: string
+  rescored: boolean
+  tasks: number
+  stageA: number
+  stageB: number | null
+  conformance: number
+  /** Its passes, in the order they were recorded. */
+  runs: EvalRun[]
+}
+
+const mean = (values: number[]) =>
+  values.reduce((sum, value) => sum + value, 0) / values.length
+
+/** The runs grouped by measurement, in the order of their first pass. */
+export function evalSeries(runs: EvalRun[]): EvalSeries[] {
+  const groups = new Map<string, EvalRun[]>()
+  for (const run of runs)
+    groups.set(run.measurement, [...(groups.get(run.measurement) ?? []), run])
+  return [...groups.values()].map((passes) => {
+    const [first] = passes
+    const stageB = passes.map((run) => run.stageB)
+    return {
+      file: first.file,
+      condition: first.condition,
+      version: first.version,
+      generator: first.generator,
+      model: first.model,
+      builtOn: first.builtOn,
+      date: first.date,
+      rescored: first.rescored,
+      tasks: first.tasks,
+      stageA: mean(passes.map((run) => run.stageA)),
+      stageB: stageB.every((value) => value !== null)
+        ? mean(stageB as number[])
+        : null,
+      conformance: mean(passes.map((run) => run.conformance)),
+      runs: passes,
+    }
+  })
 }
 
 /** A share as a percentage: `0.981` → `98.1%`. */

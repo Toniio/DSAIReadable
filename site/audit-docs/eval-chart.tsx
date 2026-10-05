@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/chart"
 
 export interface EvalBar {
-  /** The run, as the axis names it: `MCP · 0.1.1`. */
+  /** The measurement, as the axis names it: `MCP · 0.1.1`, `MCP · 0.2.0 · 3 passes`. */
   run: string
   conformance: number
   stageA: number
@@ -29,8 +29,9 @@ const CONFIG = {
 const SERIES = Object.keys(CONFIG) as (keyof typeof CONFIG)[]
 
 /**
- * The scores of every recorded run, one group of bars per run: the
- * conformance and the share of tasks that pass each stage, in percent.
+ * The scores of every recorded measurement, one group of bars each: the
+ * conformance and the share of tasks that pass each stage, in percent, the
+ * mean of its passes when it has several.
  */
 export function EvalChart({ data }: { data: EvalBar[] }) {
   return (
