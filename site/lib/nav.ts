@@ -236,6 +236,11 @@ export interface McpSkillsPage {
 /** The MCP & Skills pages, in the order the navigation lists them. */
 export const MCP_SKILLS_PAGES: McpSkillsPage[] = [
   { label: "How it works", href: "/mcp-and-skills/", file: "how-it-works.md" },
+  {
+    label: "Optimization",
+    href: "/mcp-and-skills/optimization/",
+    file: "optimization.md",
+  },
 ]
 
 /** The MCP & Skills section: its pages, then where the rest is told. */

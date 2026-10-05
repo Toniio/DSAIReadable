@@ -1,0 +1,565 @@
+import { listFiles, readJson } from "@/site/lib/repo"
+
+/**
+ * What the Optimization page reads at build time: the recorded runs of
+ * evals/history/, grouped by the version their screens were generated from
+ * (`generated.version`), not by the checkout that scored them. Every figure
+ * is computed here; the page measures nothing itself.
+ */
+
+// ── The recorded runs ──────────────────────────────────────────────────────
+
+/** One task of a recorded run, as evals/lib/report.ts writes it. */
+interface ReportTask {
+  id: string
+  static?: {
+    compiles: boolean
+    lint: boolean
+    /** The lint findings, counted by family (evals/lib/static.ts). */
+    lintByFamily?: Record<string, number>
+  }
+  a11y?: { renders: boolean; axe: boolean; focus: boolean }
+  metrics?: {
+    inputTokens: number
+    outputTokens: number
+    /** What each tool sent back in the session, by `tool` or `tool:format`. */
+    results?: Record<string, { calls: number; chars: number }>
+  }
+  /** Claude Code's estimate of the session's cost at API prices, from 0.3.0 on. */
+  session?: { costUsd?: number }
+}
+
+interface Report {
+  date: string
+  generator: string
+  model?: string
+  context?: string
+  skills?: string[]
+  /** Where the screens come from: absent from a gold run. */
+  generated?: {
+    version?: string
+    commit: string
+    sources?: string
+    /** The folder its screens were written in; absent before passes. */
+    run?: string
+  }
+  summary: {
+    tasks: number
+    conformance: number
+    generation: {
+      /** What each tool sent back, by `tool` or `tool:format`. */
+      results: Record<string, { calls: number; chars: number }> | null
+    } | null
+  }
+  /** The cost budget the report tracked, when one applies to its condition. */
+  budget?: { target: number }
+  tasks: ReportTask[]
+}
+
+interface EvalTasks {
+  tasks: { id: string; prompt: string; base?: string }[]
+  suites: Record<string, string[]>
+}
+
+export type Condition = "none" | "mcp"
+
+interface Run {
+  report: Report
+  version: string
+  condition: Condition
+  skills: string[]
+  /** Its tasks are exactly a suite's, not the default run's. */
+  suite: boolean
+}
+
+/** `0.1.10` after `0.1.9`. */
+function compareVersions(a: string, b: string): number {
+  const x = a.split(".").map(Number)
+  const y = b.split(".").map(Number)
+  for (let i = 0; i < Math.max(x.length, y.length); i++) {
+    const delta = (x[i] ?? 0) - (y[i] ?? 0)
+    if (delta) return delta
+  }
+  return 0
+}
+
+const evalTasks = () => readJson<EvalTasks>("evals/tasks.json")
+
+/**
+ * The model runs of evals/history/, each set of screens once: a later report
+ * that scores the same screens again (a rescore, after a fix of the scorer)
+ * replaces the earlier one.
+ */
+function runs(): Run[] {
+  const { suites } = evalTasks()
+  const members = Object.values(suites).map((ids) => [...ids].sort().join())
+  const reports = listFiles("evals/history", ".json")
+    .map((file) => ({
+      file,
+      report: readJson<Report>(`evals/history/${file}`),
+    }))
+    .filter(
+      ({ report }) =>
+        report.generator !== "gold" && report.generated?.version !== undefined
+    )
+    .sort(
+      (a, b) =>
+        a.report.date.localeCompare(b.report.date) ||
+        a.file.localeCompare(b.file)
+    )
+  const latest = new Map<string, Report>()
+  for (const { report } of reports) {
+    const { commit, sources, run } = report.generated ?? { commit: "" }
+    const screens = [
+      report.model,
+      report.context,
+      [...(report.skills ?? [])].sort().join("+"),
+      commit,
+      sources ?? "",
+      run ?? "",
+    ].join("|")
+    latest.set(screens, report)
+  }
+  return [...latest.values()].map((report) => ({
+    report,
+    version: report.generated?.version ?? "",
+    condition: report.context === "none" ? "none" : "mcp",
+    skills: report.skills ?? [],
+    suite: members.includes(
+      report.tasks
+        .map((task) => task.id)
+        .sort()
+        .join()
+    ),
+  }))
+}
+
+/** The runs of the two conditions the page compares: the default tasks, no skills. */
+const measured = () =>
+  runs().filter((run) => !run.suite && run.skills.length === 0)
+
+const sum = (values: number[]) =>
+  values.reduce((total, value) => total + value, 0)
+
+const mean = (values: number[]) => sum(values) / values.length
+
+/** The middle value; the mean of the two middle ones for an even count. */
+function median(values: number[]): number {
+  const sorted = [...values].sort((a, b) => a - b)
+  const middle = sorted.length >> 1
+  return sorted.length % 2
+    ? sorted[middle]
+    : (sorted[middle - 1] + sorted[middle]) / 2
+}
+
+/** Stage A (compiles, lints clean) and stage B (renders, axe, focus) pass. */
+const fullyConformant = (task: ReportTask) =>
+  Boolean(
+    task.static?.compiles &&
+    task.static.lint &&
+    task.a11y?.renders &&
+    task.a11y.axe &&
+    task.a11y.focus
+  )
+
+const sessions = (group: Run[]) =>
+  group.flatMap((run) => run.report.tasks).filter((task) => task.metrics)
+
+// ── Cost ───────────────────────────────────────────────────────────────────
+
+/**
+ * The price of an output token of claude-sonnet-5-5, the model of every
+ * recorded run: $10 per million. A session's cost is its input at the rate
+ * fitted below, plus its output at this price.
+ */
+const OUTPUT_PRICE = 10 / 1_000_000
+
+/** Every session of these runs records Claude Code's cost estimate. */
+const costRecorded = (group: Run[]) =>
+  sessions(group).every((task) => task.session?.costUsd !== undefined)
+
+/**
+ * The price of an input token in each condition, fitted on the sessions of
+ * the latest version whose every session records its cost: what they cost
+ * past their output, over their input tokens. It blends fresh input, cache
+ * reads and cache writes in the shares the condition uses them.
+ */
+function inputRates(all: Run[]): Record<Condition, number> | null {
+  const version = [...new Set(all.map((run) => run.version))]
+    .sort(compareVersions)
+    .reverse()
+    .find((candidate) =>
+      costRecorded(all.filter((run) => run.version === candidate))
+    )
+  if (version === undefined) return null
+  const rate = (condition: Condition) => {
+    const fitted = sessions(
+      all.filter(
+        (run) => run.version === version && run.condition === condition
+      )
+    )
+    return (
+      (sum(fitted.map((task) => task.session?.costUsd ?? 0)) -
+        OUTPUT_PRICE *
+          sum(fitted.map((task) => task.metrics?.outputTokens ?? 0))) /
+      sum(fitted.map((task) => task.metrics?.inputTokens ?? 0))
+    )
+  }
+  return { none: rate("none"), mcp: rate("mcp") }
+}
+
+/**
+ * What one session cost: as Claude Code recorded it when every session of
+ * its version does, estimated from its tokens otherwise.
+ */
+function sessionCost(
+  task: ReportTask,
+  condition: Condition,
+  recorded: boolean,
+  rates: Record<Condition, number> | null
+): number | null {
+  if (recorded) return task.session?.costUsd ?? null
+  if (!rates || !task.metrics) return null
+  return (
+    rates[condition] * task.metrics.inputTokens +
+    OUTPUT_PRICE * task.metrics.outputTokens
+  )
+}
+
+// ── By version ─────────────────────────────────────────────────────────────
+
+/**
+ * The first version whose screens the current scorer scored. The 0.1.0
+ * screens were scored by an earlier scorer and are no longer on disk to be
+ * scored again, so their conformance does not compare with the versions after
+ * them; their tokens and cost do.
+ */
+const SCORED_FROM = "0.1.3"
+
+/** One condition at one version: its passes pooled. */
+export interface Measurement {
+  version: string
+  condition: Condition
+  passes: number
+  screens: number
+  /** The harness's score, the mean of its passes; null before SCORED_FROM. */
+  conformance: number | null
+  /** How many screens pass stages A and B; null before SCORED_FROM. */
+  fullyConformant: number | null
+  medianInputTokens: number
+  /** The mean over its sessions, in dollars. */
+  costPerScreen: number | null
+  /** The cost is estimated from the tokens, not recorded. */
+  estimated: boolean
+}
+
+/** Both conditions at every version measured, the oldest first. */
+export function measurements(): Measurement[] {
+  const all = measured()
+  const rates = inputRates(all)
+  const versions = [...new Set(all.map((run) => run.version))].sort(
+    compareVersions
+  )
+  return versions.flatMap((version) => {
+    const atVersion = all.filter((run) => run.version === version)
+    const recorded = costRecorded(atVersion)
+    const scored = compareVersions(version, SCORED_FROM) >= 0
+    return (["none", "mcp"] as const).flatMap((condition) => {
+      const group = atVersion.filter((run) => run.condition === condition)
+      if (group.length === 0) return []
+      const tasks = group.flatMap((run) => run.report.tasks)
+      const used = sessions(group)
+      const costs = used.map((task) =>
+        sessionCost(task, condition, recorded, rates)
+      )
+      return [
+        {
+          version,
+          condition,
+          passes: group.length,
+          screens: tasks.length,
+          conformance: scored
+            ? mean(group.map((run) => run.report.summary.conformance))
+            : null,
+          fullyConformant: scored ? tasks.filter(fullyConformant).length : null,
+          medianInputTokens: median(
+            used.map((task) => task.metrics?.inputTokens ?? 0)
+          ),
+          costPerScreen: costs.every((cost) => cost !== null)
+            ? mean(costs as number[])
+            : null,
+          estimated: !recorded,
+        },
+      ]
+    })
+  })
+}
+
+/** The two conditions at the latest version. */
+export function latest(): { none: Measurement; mcp: Measurement } {
+  const rows = measurements()
+  const version = rows.at(-1)?.version
+  const pick = (condition: Condition) => {
+    const row = rows.find(
+      (entry) => entry.version === version && entry.condition === condition
+    )
+    if (!row)
+      throw new Error(`evals/history: no ${condition} run at ${version}`)
+    return row
+  }
+  return { none: pick("none"), mcp: pick("mcp") }
+}
+
+// ── What the tokens buy ────────────────────────────────────────────────────
+
+/** The latest version's runs of one condition. */
+function latestRuns(condition: Condition): Run[] {
+  const { mcp } = latest()
+  return measured().filter(
+    (run) => run.version === mcp.version && run.condition === condition
+  )
+}
+
+/** The share of a measurement's screens that pass stages A and B. */
+export const conformantShare = (row: Measurement) =>
+  row.fullyConformant === null ? null : row.fullyConformant / row.screens
+
+/**
+ * What the server's tokens buy at the latest version: what it adds to the
+ * cost of a screen, the share of screens it makes fully conformant, the cost
+ * of each screen it rescues (the first over the second), and what one pass of
+ * the default tasks costs in each condition.
+ */
+export function returns() {
+  const { none, mcp } = latest()
+  const withServer = conformantShare(mcp)
+  const without = conformantShare(none)
+  if (
+    mcp.costPerScreen === null ||
+    none.costPerScreen === null ||
+    withServer === null ||
+    without === null
+  )
+    return null
+  const extraCost = mcp.costPerScreen - none.costPerScreen
+  const gained = withServer - without
+  const tasks = latestRuns("mcp")[0].report.summary.tasks
+  return {
+    version: mcp.version,
+    estimated: mcp.estimated,
+    extraCost,
+    gained,
+    perRescued: gained > 0 ? extraCost / gained : null,
+    tasks,
+    run: { none: none.costPerScreen * tasks, mcp: mcp.costPerScreen * tasks },
+  }
+}
+
+/**
+ * Why the screens built with no context at the latest version are not fully
+ * conformant: the lint findings of the failing screens by family, and the
+ * screens that fail the other checks.
+ */
+export function failures() {
+  const tasks = latestRuns("none").flatMap((run) => run.report.tasks)
+  const failing = tasks.filter((task) => !fullyConformant(task))
+  const families = new Map<string, { screens: number; findings: number }>()
+  for (const task of failing)
+    for (const [family, findings] of Object.entries(
+      task.static?.lintByFamily ?? {}
+    )) {
+      const entry = families.get(family) ?? { screens: 0, findings: 0 }
+      families.set(family, {
+        screens: entry.screens + 1,
+        findings: entry.findings + findings,
+      })
+    }
+  return {
+    screens: tasks.length,
+    failing: failing.length,
+    compile: failing.filter((task) => !task.static?.compiles).length,
+    lint: failing.filter((task) => !task.static?.lint).length,
+    a11y: failing.filter(
+      (task) => !(task.a11y?.renders && task.a11y.axe && task.a11y.focus)
+    ).length,
+    families: [...families.entries()]
+      .map(([family, counts]) => ({ family, ...counts }))
+      .sort((a, b) => b.screens - a.screens || b.findings - a.findings),
+  }
+}
+
+/**
+ * The task the server rescues for the least: among the tasks no pass gets
+ * fully conformant with no context and every pass gets with the server, the
+ * one whose sessions with the server cost the least, by their median.
+ */
+export function cheapestRescue() {
+  const { mcp } = latest()
+  const rates = inputRates(measured())
+  const outcomes = (condition: Condition) => {
+    const group = latestRuns(condition)
+    const recorded = costRecorded(group)
+    return group
+      .flatMap((run) => run.report.tasks)
+      .map((task) => ({
+        id: task.id,
+        passes: fullyConformant(task),
+        cost: sessionCost(task, condition, recorded, rates),
+      }))
+  }
+  const none = outcomes("none")
+  const server = outcomes("mcp")
+  const rescued = [...new Set(server.map((task) => task.id))]
+    .map((id) => {
+      const without = none.filter((task) => task.id === id)
+      const withServer = server.filter((task) => task.id === id)
+      const costs = withServer.map((task) => task.cost)
+      return {
+        id,
+        passes: withServer.length,
+        none: without.filter((task) => task.passes).length,
+        mcp: withServer.filter((task) => task.passes).length,
+        medianCost: costs.every((cost) => cost !== null)
+          ? median(costs as number[])
+          : null,
+        noneRuns: without.length,
+      }
+    })
+    .filter(
+      (task) =>
+        task.noneRuns > 0 &&
+        task.none === 0 &&
+        task.mcp === task.passes &&
+        task.medianCost !== null
+    )
+    .sort((a, b) => (a.medianCost ?? 0) - (b.medianCost ?? 0))
+  const [cheapest] = rescued
+  if (!cheapest) return null
+  return {
+    version: mcp.version,
+    task: cheapest.id,
+    prompt:
+      evalTasks().tasks.find((task) => task.id === cheapest.id)?.prompt ?? "",
+    /** The passes that built it with the server, all fully conformant. */
+    passes: cheapest.passes,
+    /** The passes that built it with no context, none fully conformant. */
+    noneRuns: cheapest.noneRuns,
+    medianCost: cheapest.medianCost ?? 0,
+    estimated: mcp.estimated,
+    /** How many tasks the server takes from no pass to every pass. */
+    rescued: rescued.length,
+  }
+}
+
+// ── The build skill ────────────────────────────────────────────────────────
+
+const BUILD_SKILL = "dsaireadable-build"
+
+/** One condition of the build skill's comparison. */
+export interface SkillMeasurement {
+  /** `new`: the default tasks; `edits`: the edits of a suite. */
+  screens: "new" | "edits"
+  version: string
+  /** The skills the agent was given; none for the server alone. */
+  skills: string[]
+  passes: number
+  tasks: number
+  conformance: number
+  fullyConformant: number
+  medianInputTokens: number
+}
+
+function skillMeasurement(
+  screens: SkillMeasurement["screens"],
+  group: Run[],
+  keep: (task: ReportTask) => boolean
+): SkillMeasurement {
+  const tasks = group.flatMap((run) => run.report.tasks).filter(keep)
+  const share = (passes: (task: ReportTask) => boolean) =>
+    tasks.filter(passes).length / tasks.length
+  return {
+    screens,
+    version: group[0].version,
+    skills: group[0].skills,
+    passes: group.length,
+    tasks: tasks.length,
+    // The harness's score: its report's for whole runs, and over the edits
+    // alone the same mean of stages A and B.
+    conformance:
+      screens === "new"
+        ? mean(group.map((run) => run.report.summary.conformance))
+        : (share((task) => Boolean(task.static?.compiles && task.static.lint)) +
+            share((task) =>
+              Boolean(task.a11y?.renders && task.a11y.axe && task.a11y.focus)
+            )) /
+          2,
+    fullyConformant: tasks.filter(fullyConformant).length,
+    medianInputTokens: median(
+      tasks.flatMap((task) => (task.metrics ? [task.metrics.inputTokens] : []))
+    ),
+  }
+}
+
+/**
+ * The runs whose agent had the build skill against the server alone, built
+ * from the same version: on the default tasks, and on a suite's edits of an
+ * existing screen. Each pair with the skill first.
+ */
+export function buildSkill(): [SkillMeasurement, SkillMeasurement][] {
+  const all = runs().filter((run) => run.condition === "mcp")
+  const edits = new Set(
+    evalTasks()
+      .tasks.filter((task) => task.base)
+      .map((task) => task.id)
+  )
+  const versions = [...new Set(all.map((run) => run.version))].sort(
+    compareVersions
+  )
+  const pairs: [SkillMeasurement, SkillMeasurement][] = []
+  for (const screens of ["new", "edits"] as const)
+    for (const version of versions) {
+      const group = all.filter(
+        (run) => run.version === version && run.suite === (screens === "edits")
+      )
+      const keep = (task: ReportTask) => screens === "new" || edits.has(task.id)
+      const withSkill = group.filter((run) => run.skills.includes(BUILD_SKILL))
+      const alone = group.filter((run) => run.skills.length === 0)
+      if (withSkill.length && alone.length)
+        pairs.push([
+          skillMeasurement(screens, withSkill, keep),
+          skillMeasurement(screens, alone, keep),
+        ])
+    }
+  return pairs
+}
+
+// ── What's next ────────────────────────────────────────────────────────────
+
+/**
+ * At the latest version, with the server: the answer that makes up the
+ * largest share of the characters the tools sent back, and the median input
+ * tokens per screen against the budget the harness tracks.
+ */
+export function nextLever() {
+  const group = latestRuns("mcp")
+  const totals = new Map<string, number>()
+  for (const run of group)
+    for (const [key, { chars }] of Object.entries(
+      run.report.summary.generation?.results ?? {}
+    ))
+      totals.set(key, (totals.get(key) ?? 0) + chars)
+  const [top] = [...totals.entries()].sort((a, b) => b[1] - a[1])
+  if (!top) return null
+  const [tool, format] = top[0].split(":")
+  const tasks = group.flatMap((run) => run.report.tasks)
+  return {
+    tool,
+    format,
+    share: top[1] / sum([...totals.values()]),
+    /** The sessions that asked for it at least once. */
+    sessions: tasks.filter((task) => task.metrics?.results?.[top[0]]).length,
+    screens: tasks.length,
+    median: latest().mcp.medianInputTokens,
+    budget: group[0].report.budget?.target ?? null,
+  }
+}
