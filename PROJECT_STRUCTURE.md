@@ -198,7 +198,7 @@ Each script explains at the top of the file what it checks and why. They all run
 `release:check` runs the first two; `release:version` is what a release pull request runs
 ([`CONTRIBUTING.md`](./CONTRIBUTING.md#versioning-and-releases)).
 
-Shared modules: `scripts/lib/` (component API, `next/font` fonts, the re-tokenization codemod, the class equivalence behind its reasons, the contrast pairs `lint-contrast.ts` checks and the site's Audits page shows), `wcag.ts`, `color-vision.ts`.
+Shared modules: `scripts/lib/` (component API, `next/font` fonts, the re-tokenization codemod, the class equivalence behind its reasons, the contrast pairs `lint-contrast.ts` checks and the site's Audits page shows, the shards of `site:test`), `wcag.ts`, `color-vision.ts`.
 
 `test-site.ts` (`npm run site:test`) is the one script that loads the built documentation site: see [`site/`](#site--the-documentation-site).
 
@@ -305,7 +305,9 @@ serves `site/out` under its base path and loads every page, the story and
 example previews of every component and the previews of the patterns and
 foundations in headless Chromium, in both themes (`scripts/test-site.ts`). It
 fails on an axe violation, a page error, an unexpected response and a tab stop
-with no visible indicator, and runs in the `site` job of CI.
+with no visible indicator. CI runs it in three shards (`--shard=<i>/3`, the
+`site-test` jobs, each building the site), and the `site` job fails unless
+every shard passed.
 
 ---
 
@@ -403,17 +405,17 @@ registry is **consumable**, not just consistent.
 
 ### `.github/`
 
-| File                                          | Role                                                                                                                                                                        |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.github/copilot-instructions.md`             | Points to `AGENTS.md`, the single source of truth for agent rules                                                                                                           |
-| `.github/pull_request_template.md`            | PR template                                                                                                                                                                 |
-| `.github/CODEOWNERS`                          | Names the maintainer as reviewer of every path; the `main` ruleset does not require code-owner review                                                                       |
-| `.github/workflows/ci.yml`                    | GitHub Actions CI, 10 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry`, `site` |
-| `.github/workflows/evals.yml`                 | The conformance harness with a Claude agent, started by hand only (each run costs API credits)                                                                              |
-| `.github/workflows/site-pages.yml`            | Builds the documentation site with the GitHub Pages base path and deploys it, on a release tag and by hand (the only workflow with `pages: write`)                          |
-| `.github/workflows/dependabot-regenerate.yml` | Regenerates the generated files on a Dependabot PR and pushes the result                                                                                                    |
-| `.github/dependabot.yml`                      | Weekly grouped dependency updates                                                                                                                                           |
-| `.github/workflows/pr-lint.yml`               | Checks that the PR title follows Conventional Commits                                                                                                                       |
+| File                                          | Role                                                                                                                                                                                                                                      |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.github/copilot-instructions.md`             | Points to `AGENTS.md`, the single source of truth for agent rules                                                                                                                                                                         |
+| `.github/pull_request_template.md`            | PR template                                                                                                                                                                                                                               |
+| `.github/CODEOWNERS`                          | Names the maintainer as reviewer of every path; the `main` ruleset does not require code-owner review                                                                                                                                     |
+| `.github/workflows/ci.yml`                    | GitHub Actions CI, 11 jobs: `tokens-validate`, `typecheck`, `lint`, `index-schema`, `spec-sections`, `context-freshness`, `mcp-test`, `component-tests`, `registry`, `site-test` (three shards), `site` (fails unless every shard passed) |
+| `.github/workflows/evals.yml`                 | The conformance harness with a Claude agent, started by hand only (each run costs API credits)                                                                                                                                            |
+| `.github/workflows/site-pages.yml`            | Builds the documentation site with the GitHub Pages base path and deploys it, on a release tag and by hand (the only workflow with `pages: write`)                                                                                        |
+| `.github/workflows/dependabot-regenerate.yml` | Regenerates the generated files on a Dependabot PR and pushes the result                                                                                                                                                                  |
+| `.github/dependabot.yml`                      | Weekly grouped dependency updates                                                                                                                                                                                                         |
+| `.github/workflows/pr-lint.yml`               | Checks that the PR title follows Conventional Commits                                                                                                                                                                                     |
 
 ### `.vscode/`
 

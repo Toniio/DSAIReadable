@@ -23,9 +23,14 @@
  *     distinct element (tag, classes, role, and the color under it) and theme:
  *     the same classes on the same surface paint the same ring.
  *
+ * `--shard=<i>/<n>` loads only the i-th of n shards, as CI does on three
+ * runners: a route's loads stay in one shard, the shards' loads add up to the
+ * whole run's, and the 404 page is loaded in one of them (scripts/lib/shard.ts).
+ *
  *   npm run site:build       (with the SITE_BASE_PATH of the deployment)
  *   npm run site:test
  *   npm run site:test -- --only=components/button --concurrency=2
+ *   npm run site:test -- --shard=2/3
  */
 
 import { createServer } from "node:http"
@@ -37,6 +42,8 @@ import axe from "axe-core"
 import { chromium, type Browser } from "playwright"
 import ts from "typescript"
 
+import { parseShard, shard } from "./lib/shard.js"
+
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const OUT = resolve(ROOT, "site/out")
 
@@ -45,6 +52,22 @@ const flag = (name: string) =>
   args.find((arg) => arg.startsWith(`--${name}=`))?.split("=")[1]
 const ONLY = flag("only")
 const CONCURRENCY = Number(flag("concurrency") ?? 4)
+/**
+ * `--shard=<i>/<n>`, read first: a malformed value, or `--shard` with no
+ * value, stops the run before it serves or launches anything.
+ */
+const SHARD = (() => {
+  const option = args.find(
+    (arg) => arg === "--shard" || arg.startsWith("--shard=")
+  )
+  if (option === undefined) return undefined
+  try {
+    return parseShard(option.slice("--shard=".length))
+  } catch (error) {
+    console.error(`❌ site:test: ${(error as Error).message}`)
+    process.exit(1)
+  }
+})()
 
 /**
  * Responses of 404 the examples of the specs cause on purpose: each is a
@@ -510,21 +533,33 @@ async function check(
 
 const base = basePathOf()
 const all = targets()
+// A route is one group: its light and dark loads, and its two views for a
+// component's preview.
+const loads = SHARD
+  ? shard(all, (target) => target.url.split("#")[0], SHARD)
+  : all
+/** What the run's lines name: the run, or its shard and its share of the loads. */
+const RUN = SHARD
+  ? `site:test, shard ${SHARD.index}/${SHARD.count}`
+  : "site:test"
+const LOADS = SHARD
+  ? `${loads.length} of ${all.length} loads`
+  : `${all.length} loads`
 const { origin, close } = await serve(base)
 const browser = await chromium.launch()
 console.log(
-  `site:test: ${all.length} loads of site/out under "${base || "/"}", ${CONCURRENCY} at a time, at ${origin}`
+  `${RUN}: ${LOADS} of site/out under "${base || "/"}", ${CONCURRENCY} at a time, at ${origin}`
 )
 
 const failures: { target: Target; problems: string[] }[] = []
 let next = 0
 let done = 0
 async function worker() {
-  while (next < all.length) {
-    const target = all[next++]
+  while (next < loads.length) {
+    const target = loads[next++]
     const problems = await check(browser, origin, base, target)
     if (problems.length > 0) failures.push({ target, problems })
-    if (++done % 50 === 0) console.log(`  ${done}/${all.length}`)
+    if (++done % 50 === 0) console.log(`  ${done}/${loads.length}`)
   }
 }
 await Promise.all(Array.from({ length: CONCURRENCY }, worker))
@@ -543,10 +578,10 @@ for (const { target, problems } of failures.sort((a, b) =>
 
 if (failures.length > 0) {
   console.error(
-    `\n❌ site:test: ${failures.length} of ${all.length} loads have a problem.`
+    `\n❌ ${RUN}: ${failures.length} of ${loads.length} loads have a problem.`
   )
   process.exit(1)
 }
 console.log(
-  `✅ site:test: ${all.length} loads (light and dark), no axe violation, page error or unexpected response; ${stopsWalked} tab stops walked, ${measured.size} focus indicators measured, ${unmeasured} stops in an open modal left unmeasured.`
+  `✅ ${RUN}: ${LOADS} (light and dark), no axe violation, page error or unexpected response; ${stopsWalked} tab stops walked, ${measured.size} focus indicators measured, ${unmeasured} stops in an open modal left unmeasured.`
 )
