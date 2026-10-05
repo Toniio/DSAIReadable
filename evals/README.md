@@ -169,7 +169,7 @@ that scores a run is rarely the one that generated it. `design system <version>
 sources <hash> · effort · turns max` is the one the sessions ran from (the
 `generated` field of `report.json`, with the Claude Code version, the `--model`
 option and the plugins the sessions listed), and each task keeps how its
-session ended (`session`: `subtype`, `numTurns`, `stopReason`). The Generation
+session ended and what Claude Code estimated it cost at API prices (`session`: `subtype`, `numTurns`, `stopReason`, `costUsd`). The Generation
 line counts the calls to the `dsaireadable_*` MCP tools apart from the others
 (`Skill`, `Read`, `read_skill_file`), and the tasks whose session used all its
 turns or stopped on the cap. A failure of stage B keeps its assertion only: no

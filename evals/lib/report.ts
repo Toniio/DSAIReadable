@@ -53,6 +53,8 @@ export interface SessionOutcome {
   subtype: string
   numTurns?: number
   stopReason: string | null
+  /** Claude Code's estimate of the session's cost in USD (`total_cost_usd`), at API prices: a subscription is not billed it. */
+  costUsd?: number
 }
 
 export interface RubricResult {

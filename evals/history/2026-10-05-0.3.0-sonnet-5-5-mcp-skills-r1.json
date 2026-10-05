@@ -26,7 +26,7 @@
   },
   "designSystem": {
     "version": "0.3.0",
-    "commit": "1e4632bac594cce863914727f496bb7190a14fab"
+    "commit": "b8de2d382a0e7c6c97a9b85aa3c049e0adbd0900"
   },
   "summary": {
     "tasks": 26,
@@ -172,7 +172,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 8,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2024118
       },
       "static": {
         "compiles": true,
@@ -237,7 +238,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 15,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.27056399999999997
       },
       "static": {
         "compiles": true,
@@ -307,7 +309,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 14,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2629236
       },
       "static": {
         "compiles": true,
@@ -386,7 +389,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 19,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.4110416
       },
       "static": {
         "compiles": true,
@@ -451,7 +455,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 13,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2621998
       },
       "static": {
         "compiles": true,
@@ -526,7 +531,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 15,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.3547598
       },
       "static": {
         "compiles": true,
@@ -596,7 +602,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 15,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2969438
       },
       "static": {
         "compiles": true,
@@ -661,7 +668,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 11,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.130424
       },
       "static": {
         "compiles": true,
@@ -749,7 +757,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 14,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.1645336
       },
       "static": {
         "compiles": true,
@@ -829,7 +838,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 17,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2754792
       },
       "static": {
         "compiles": true,
@@ -898,7 +908,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 12,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.18414460000000002
       },
       "static": {
         "compiles": true,
@@ -968,7 +979,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 14,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.269328
       },
       "static": {
         "compiles": true,
@@ -1043,7 +1055,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 12,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.1963012
       },
       "static": {
         "compiles": true,
@@ -1111,7 +1124,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 10,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.14037840000000001
       },
       "static": {
         "compiles": true,
@@ -1191,7 +1205,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 16,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.24155980000000002
       },
       "static": {
         "compiles": true,
@@ -1271,7 +1286,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 13,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.3230088
       },
       "static": {
         "compiles": true,
@@ -1364,7 +1380,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 16,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.20838620000000002
       },
       "static": {
         "compiles": true,
@@ -1433,7 +1450,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 12,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.18961499999999998
       },
       "static": {
         "compiles": true,
@@ -1502,7 +1520,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 13,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.20410399999999998
       },
       "static": {
         "compiles": true,
@@ -1572,7 +1591,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 12,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2443674
       },
       "static": {
         "compiles": true,
@@ -1661,7 +1681,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 20,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.35870720000000006
       },
       "static": {
         "compiles": true,
@@ -1729,7 +1750,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 9,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.10321840000000002
       },
       "static": {
         "compiles": true,
@@ -1809,7 +1831,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 12,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2108616
       },
       "static": {
         "compiles": true,
@@ -1888,7 +1911,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 12,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.2357648
       },
       "static": {
         "compiles": true,
@@ -1938,7 +1962,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 5,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.0812906
       },
       "static": {
         "compiles": true,
@@ -1993,7 +2018,8 @@
       "session": {
         "subtype": "success",
         "numTurns": 6,
-        "stopReason": "end_turn"
+        "stopReason": "end_turn",
+        "costUsd": 0.0986428
       },
       "static": {
         "compiles": true,

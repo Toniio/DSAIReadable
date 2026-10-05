@@ -25,6 +25,19 @@ const CHECKS = [
 
 type Check = (typeof CHECKS)[number]["key"]
 
+const count = (value: number) => Math.round(value).toLocaleString("en-US")
+
+/** What one task's session used on average: `130,522 tokens (124,081 input, 6,441 output), an estimated $0.20`. */
+function usageSentence({ perTask }: EvalSeries): string {
+  if (!perTask) return ""
+  const tokens = `${count(perTask.inputTokens + perTask.outputTokens)} tokens (${count(perTask.inputTokens)} input, ${count(perTask.outputTokens)} output)`
+  const cost =
+    perTask.costUsd === null
+      ? ""
+      : `, an estimated $${perTask.costUsd.toFixed(2)} at API prices`
+  return ` A task used ${tokens} on average${cost}.`
+}
+
 /**
  * A check's outcome over the passes: pass or fail when there is one, else
  * how many of the passes that ran it it passed.
@@ -77,7 +90,7 @@ function SeriesMatrix({ series }: { series: EvalSeries }) {
         {series.model ? `${series.model}, ` : ""}
         design system {series.version},{" "}
         {several ? "mean conformance" : "conformance"}{" "}
-        {percent(series.conformance)}.
+        {percent(series.conformance)}.{usageSentence(series)}
       </p>
       <Table>
         <TableHeader>

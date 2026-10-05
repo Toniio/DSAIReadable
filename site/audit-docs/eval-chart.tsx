@@ -52,7 +52,7 @@ export function EvalChart({ data }: { data: EvalBar[] }) {
           axisLine={false}
         />
         {/* Sized to its longest label: a fixed width in pixels would wrap
-            `MCP + skills · 0.1.1` mid-name at one font size and waste room at
+            `No context · 0.3.0 · 3 passes` mid-name at one font size and waste room at
             another. */}
         <YAxis
           type="category"
