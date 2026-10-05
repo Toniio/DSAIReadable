@@ -109,6 +109,11 @@ export interface EvalRun {
   conformance: number
   mcpCalls: number | null
   results: TaskResult[]
+  /**
+   * The suite of evals/tasks.json whose tasks it ran (`skills`), or undefined
+   * for the default run.
+   */
+  suite?: string
 }
 
 const CONDITION_ORDER = [
@@ -166,9 +171,23 @@ const sameScreens = (run: EvalRun) =>
     ? [run.version, run.model, run.condition, run.screens].join("|")
     : run.file
 
+/** The suite whose tasks a run ran, if its tasks are exactly one suite's. */
+function suiteOf(
+  ids: string[],
+  suites: Record<string, string[]>
+): string | undefined {
+  const ran = [...ids].sort().join()
+  return Object.entries(suites).find(
+    ([, members]) => [...members].sort().join() === ran
+  )?.[0]
+}
+
 /** Every recorded run of evals/history/, oldest first. */
 export function evalRuns(): EvalRun[] {
-  const tasks = readJson<{ tasks: EvalTask[] }>("evals/tasks.json").tasks
+  const { tasks, suites } = readJson<{
+    tasks: EvalTask[]
+    suites: Record<string, string[]>
+  }>("evals/tasks.json")
   const runs: EvalRun[] = listFiles("evals/history", ".json")
     .map((file) => {
       const report = readJson<RunReport>(`evals/history/${file}`)
@@ -217,6 +236,10 @@ export function evalRuns(): EvalRun[] {
             ...(task.a11y?.failures ?? []),
           ],
         })),
+        suite: suiteOf(
+          report.tasks.map((task) => task.id),
+          suites
+        ),
       }
     })
     .sort(
@@ -258,10 +281,14 @@ export function latestVersionRuns(runs: EvalRun[]): EvalRun[] {
 /**
  * The model runs whose screens were built last: the conditions measured
  * together, rescored or not, with every pass of each, even one scored the
- * day before. A gold run calibrates the scorer, it measures no model.
+ * day before. A gold run calibrates the scorer, it measures no model; a
+ * suite's run measures a subset of the tasks (the skills on theirs), so the
+ * latest run of the default tasks stays the one shown.
  */
 export function latestRuns(runs: EvalRun[]): EvalRun[] {
-  const models = runs.filter((run) => run.generator !== "gold")
+  const models = runs.filter(
+    (run) => run.generator !== "gold" && run.suite === undefined
+  )
   const last = models
     .map((run) => run.builtOn)
     .sort()
@@ -287,6 +314,8 @@ export interface EvalSeries {
   date: string
   rescored: boolean
   tasks: number
+  /** The suite of evals/tasks.json it ran, or undefined for the default run. */
+  suite?: string
   stageA: number
   stageB: number | null
   conformance: number
@@ -315,6 +344,7 @@ export function evalSeries(runs: EvalRun[]): EvalSeries[] {
       date: first.date,
       rescored: first.rescored,
       tasks: first.tasks,
+      suite: first.suite,
       stageA: mean(passes.map((run) => run.stageA)),
       stageB: stageB.every((value) => value !== null)
         ? mean(stageB as number[])
