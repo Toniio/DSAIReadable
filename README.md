@@ -277,9 +277,10 @@ claude plugin install dsaireadable@dsaireadable
 The plugin installs its skill from the release tag and starts the MCP server
 with `npx`, pinned to the same release, so the skill and the tools it names
 always agree. The `#vX.Y.Z` of `npx skills add` does the same for the first
-command. A skill's gain can be measured on the conformance
-harness, with and without it: `npm run evals -- --generator claude
---suite skills --skills all` ([`evals/README.md`](./evals/README.md)).
+command. The conformance harness measures a skill that builds or changes
+screens, with and without it: `npm run evals -- --generator claude
+--suite skills --skills all`. The UI guard runs only on request, so such a run
+checks that installing it changes nothing ([`evals/README.md`](./evals/README.md#measuring-the-agent-skills)).
 
 ---
 
