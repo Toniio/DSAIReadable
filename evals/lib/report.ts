@@ -26,6 +26,13 @@ const MCP_TOOL_PREFIX = "dsaireadable_"
 
 /** Where the screens of a replayed run were generated: what `evals/generate-claude-code.ts` wrote in its run.json. */
 interface GenerationProvenance {
+  /**
+   * The folder evals:generate wrote the screens in,
+   * `evals/.work/claude-code/<run>`: two passes from one checkout differ by
+   * it, a rescore of the same screens keeps it. Absent from a report
+   * recorded before it was kept.
+   */
+  run?: string
   /** The checkout the sessions ran from, which is not always the one that scores. */
   commit: string
   version: string

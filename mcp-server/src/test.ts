@@ -1464,8 +1464,8 @@ assert(
 // Every turn after a call sends its answer again. Summed over every spec,
 // concise stays ≤ 20 % of the spec whole (the resource), and detailed serves
 // what a screen writes: ≤ 55 % of it, where it served the spec whole and the
-// variants on top. Unfiltered, the concise rules stay ≤ 20 % of the detailed
-// ones.
+// variants on top. Unfiltered, the concise rules stay ≤ 25 % of the detailed
+// ones, which add every foundation's rules and the critical rules whole.
 let conciseTotal = 0
 let detailedTotal = 0
 let wholeTotal = 0
@@ -1494,8 +1494,8 @@ const rulesRatio =
 assert(
   conciseTotal / wholeTotal <= 0.2 &&
     detailedTotal / wholeTotal <= 0.55 &&
-    rulesRatio <= 0.2,
-  `dsaireadable_get_component_specs: concise is ${Math.round((conciseTotal / wholeTotal) * 100)} % of the specs whole (≤ 20 %), detailed ${Math.round((detailedTotal / wholeTotal) * 100)} % (≤ 55 %); dsaireadable_get_design_rules: concise is ${Math.round(rulesRatio * 100)} % of detailed (≤ 20 %)`
+    rulesRatio <= 0.25,
+  `dsaireadable_get_component_specs: concise is ${Math.round((conciseTotal / wholeTotal) * 100)} % of the specs whole (≤ 20 %), detailed ${Math.round((detailedTotal / wholeTotal) * 100)} % (≤ 55 %); dsaireadable_get_design_rules: concise is ${Math.round(rulesRatio * 100)} % of detailed (≤ 25 %)`
 )
 const conciseButton = JSON.parse(
   await payload("dsaireadable_get_component_specs", {
@@ -1649,6 +1649,31 @@ const detailedSpec = async (component_name: string) =>
   assert(
     lean(tailwind.rules) && lean(detailedRules.critical_rules),
     "dsaireadable_get_design_rules serves the critical rules without their do list and token chain"
+  )
+}
+
+// Unfiltered, detailed served every rule: 73,517 characters, which Claude Code
+// refused as one result. A component's rules are the constraints of its spec,
+// and the 65 of them made half of it: detailed names the components and serves
+// every foundation's rules, the critical rules whole and the composition rules.
+{
+  const detailed = JSON.parse(
+    await payload("dsaireadable_get_design_rules", {
+      response_format: "detailed",
+    })
+  )
+  const select = JSON.parse(
+    await payload("dsaireadable_get_design_rules", { category: "Select" })
+  )
+  assert(
+    !("component_rules" in detailed) &&
+      detailed.general_rules.length === uxRules.length &&
+      detailed.composition_rules.length === indexRules.length &&
+      detailed.critical_rules.every((r: Json) => "description" in r) &&
+      detailed.categories.components.length === specNames.length &&
+      JSON.stringify(select.rules) ===
+        JSON.stringify(fullSpecs.Select.constraints),
+    `dsaireadable_get_design_rules detailed without a category serves the ${uxRules.length} foundation rules, the critical rules whole and the ${indexRules.length} composition rules, and names the ${specNames.length} components whose rules a category returns`
   )
 }
 
@@ -2987,13 +3012,22 @@ const inputs: [string, Record<string, unknown>][] = [
 ]
 const nonConforming: string[] = []
 const calledTools = new Set<string>()
-for (const [name, args] of inputs) {
-  calledTools.add(name)
+/** Each tool's largest answer, in characters, and the input that drew it. */
+const largest = new Map<string, { chars: number; args: object }>()
+const measured = async (name: string, args: Record<string, unknown>) => {
   const answer = (await schemaClient.callTool({ name, arguments: args })) as {
     content: { text: string }[]
-    structuredContent?: unknown
+    structuredContent?: Json
     isError?: boolean
   }
+  const chars = answer.content[0].text.length
+  if (chars > (largest.get(name)?.chars ?? -1))
+    largest.set(name, { chars, args })
+  return answer
+}
+for (const [name, args] of inputs) {
+  calledTools.add(name)
+  const answer = await measured(name, args)
   // The text is the same JSON, for clients that read only the text, and
   // compact: every turn after the call sends it again, indentation included.
   if (
@@ -3007,6 +3041,83 @@ for (const [name, args] of inputs) {
 assert(
   nonConforming.length === 0 && declared.every((t) => calledTools.has(t.name)),
   `${inputs.length} calls over the ${calledTools.size} tools conform to their output schema, text and structuredContent alike, the text compact${nonConforming.length ? `:\n    ${nonConforming.join("\n    ")}` : ""}`
+)
+
+// Claude Code refuses an MCP result over 25,000 tokens by default
+// (MAX_MCP_OUTPUT_TOKENS): the agent reads an error and the path of a file,
+// and under the evals' MCP condition it has no Read tool to open it.
+// dsaireadable_get_design_rules detailed without a category answered 73,517
+// characters, refused 19 times over the three 0.3.0 MCP passes; a page of 200
+// tokens came to 62,726, the changelog's default page to 61,940, and a report
+// listed every issue. At the 2.47 characters per token of those runs, the
+// limit falls near 61,700 characters: each tool's largest answer stays under
+// 40,000, over every input above, every list read to its end at its largest
+// page, and both validators on a screen with 2,000 issues.
+const ANSWER_CAP = 40_000
+const pagesCover: string[] = []
+for (const name of [
+  "dsaireadable_get_components",
+  "dsaireadable_get_tokens",
+  "dsaireadable_get_changelog",
+]) {
+  let cursor: string | undefined
+  let read = 0
+  let total = 0
+  let pages = 0
+  do {
+    const page = (
+      await measured(name, { limit: 200, ...(cursor ? { cursor } : {}) })
+    ).structuredContent
+    read += page.items.length
+    total = page.total
+    cursor = page.next_cursor
+    pages++
+  } while (cursor && pages < 50)
+  pagesCover.push(`${name.replace("dsaireadable_", "")} ${pages}`)
+  if (read !== total) pagesCover.push(`${read} of ${total} read`)
+}
+const crowded = `import { Button } from "@/components/ui/button"
+
+export default function Page() {
+  return (
+    <main>
+${Array.from(
+  { length: 400 },
+  (_, k) =>
+    `      <div style={{ color: "#ff0000", padding: "13px" }} className="bg-red-500 p-[13px] text-[#123456] rounded-lg">Row ${k}</div>`
+).join("\n")}
+    </main>
+  )
+}
+`
+const reports: Json[] = []
+for (const name of [
+  "dsaireadable_validate_screen",
+  "dsaireadable_validate_code",
+])
+  reports.push((await measured(name, { code: crowded })).structuredContent)
+const ranked = [...largest].sort((a, b) => b[1].chars - a[1].chars)
+const over = ranked.filter(([, a]) => a.chars > ANSWER_CAP)
+assert(
+  over.length === 0 &&
+    largest.size === declared.length &&
+    !pagesCover.some((p) => p.includes(" read")),
+  `Every tool's largest answer stays under ${ANSWER_CAP.toLocaleString("en-US")} characters (${ranked
+    .slice(0, 3)
+    .map(([n, a]) => `${n} ${a.chars.toLocaleString("en-US")}`)
+    .join(
+      ", "
+    )}…), each list read to its end at limit 200 (pages: ${pagesCover.join(", ")})${over.length ? `; over: ${over.map(([n, a]) => `${n} ${JSON.stringify(a.args).slice(0, 80)} ${a.chars}`).join(", ")}` : ""}`
+)
+assert(
+  reports.every(
+    (r) =>
+      r.total_issues >= 2000 &&
+      r.issues_not_listed > 0 &&
+      r.issues.length + r.issues_not_listed === r.total_issues &&
+      r.errors + r.warnings + (r.info ?? 0) === r.total_issues
+  ),
+  `A validation report past the cap keeps its counts whole and counts the issues it leaves out (${reports.map((r) => `${r.issues.length} of ${r.total_issues} listed`).join(", ")})`
 )
 
 // An argument outside the input schema is a tool execution error, which the
