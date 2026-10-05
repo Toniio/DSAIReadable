@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
@@ -28,14 +29,24 @@ type Check = (typeof CHECKS)[number]["key"]
 const count = (value: number) => Math.round(value).toLocaleString("en-US")
 
 /** What one task's session used on average: `130,522 tokens (124,081 input, 6,441 output), an estimated $0.20`. */
-function usageSentence({ perTask }: EvalSeries): string {
-  if (!perTask) return ""
+function usageSentence({ perTask }: EvalSeries): ReactNode {
+  if (!perTask) return null
   const tokens = `${count(perTask.inputTokens + perTask.outputTokens)} tokens (${count(perTask.inputTokens)} input, ${count(perTask.outputTokens)} output)`
-  const cost =
-    perTask.costUsd === null
-      ? ""
-      : `, an estimated $${perTask.costUsd.toFixed(2)} at API prices`
-  return ` A task used ${tokens} on average${cost}.`
+  return (
+    <>
+      A task used {tokens} on average
+      {perTask.costUsd === null ? null : (
+        <>
+          , an estimated{" "}
+          <strong className="font-semibold text-foreground">
+            ${perTask.costUsd.toFixed(2)}
+          </strong>{" "}
+          at API prices
+        </>
+      )}
+      .
+    </>
+  )
 }
 
 /**
@@ -81,16 +92,28 @@ function SeriesMatrix({ series }: { series: EvalSeries }) {
   )
   const outcomes = (task: (typeof tasks)[number], key: Check) =>
     task.passes.map((result) => (result ? result[key] : null))
+  const usage = usageSentence(series)
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-sm text-muted-foreground">
-        {several
-          ? `${passing} of ${tasks.length} tasks pass every check in ${runs.length === 2 ? "both" : `all ${runs.length}`} passes; ${perPass.slice(0, -1).join(", ")} and ${perPass.at(-1)} in each pass, in order. `
-          : `${passing} of ${tasks.length} tasks pass every check. `}
-        {series.model ? `${series.model}, ` : ""}
-        design system {series.version},{" "}
-        {several ? "mean conformance" : "conformance"}{" "}
-        {percent(series.conformance)}.{usageSentence(series)}
+      <p className="flex flex-col gap-1 text-sm text-muted-foreground">
+        <span>
+          <strong className="font-semibold text-foreground">
+            {passing} of {tasks.length}
+          </strong>{" "}
+          {several
+            ? `tasks pass every check in ${runs.length === 2 ? "both" : `all ${runs.length}`} passes; ${perPass.slice(0, -1).join(", ")} and ${perPass.at(-1)} in each pass, in order.`
+            : "tasks pass every check."}
+        </span>
+        <span>
+          {series.model ? `${series.model}, ` : ""}
+          design system {series.version},{" "}
+          {several ? "mean conformance" : "conformance"}{" "}
+          <strong className="font-semibold text-foreground">
+            {percent(series.conformance)}
+          </strong>
+          .
+        </span>
+        {usage ? <span>{usage}</span> : null}
       </p>
       <Table>
         <TableHeader>
