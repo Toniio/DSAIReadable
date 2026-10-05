@@ -22,7 +22,7 @@ import {
 import { cn } from "@/lib/utils"
 import { componentByName } from "@/site/lib/components"
 import { anchor, stripComments } from "@/site/lib/markdown"
-import { FOUNDATION_GROUPS } from "@/site/lib/nav"
+import { FOUNDATION_GROUPS, MCP_SKILLS_PAGES } from "@/site/lib/nav"
 import { sourceUrl } from "@/site/lib/site"
 import { CodeBlock } from "@/site/ui/code-block"
 import { LINK } from "@/site/ui/link"
@@ -33,7 +33,8 @@ const FOUNDATIONS = new Set(
 
 /**
  * A link of a spec, made a link of the site: `../components/Field.md` →
- * `/components/field/`, `./create.md` → `/patterns/create/`. A link to any
+ * `/components/field/`, `./create.md` → `/patterns/create/`, a page of
+ * docs/mcp-and-skills/ → its page of the MCP & Skills section. A link to any
  * other repository file opens it on GitHub at the release tag.
  */
 function siteHref(href: string, from?: string): string {
@@ -53,6 +54,10 @@ function siteHref(href: string, from?: string): string {
     return `/foundations/${foundation}/${suffix}`
   if (target === "specs/tokens/token-reference.md")
     return "/foundations/tokens/"
+  const page = MCP_SKILLS_PAGES.find(
+    (entry) => `docs/mcp-and-skills/${entry.file}` === target
+  )
+  if (page) return page.href + suffix
   return sourceUrl(target) + suffix
 }
 

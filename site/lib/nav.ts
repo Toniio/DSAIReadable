@@ -19,6 +19,7 @@ export const SECTIONS: NavItem[] = [
   { label: "Foundations", href: "/foundations/" },
   { label: "Components", href: "/components/" },
   { label: "Patterns", href: "/patterns/" },
+  { label: "MCP & Skills", href: "/mcp-and-skills/" },
   { label: "Changes", href: "/changes/" },
   { label: "Audits", href: "/audits/" },
 ]
@@ -220,6 +221,34 @@ export function auditsNav(): NavGroup[] {
       items: [
         { label: "Change log", href: "/changes/" },
         { label: "All tokens", href: "/foundations/tokens/" },
+      ],
+    },
+  ]
+}
+
+/** A page of the MCP & Skills section, and the Markdown in docs/mcp-and-skills/ that writes it. */
+export interface McpSkillsPage {
+  label: string
+  href: string
+  file: string
+}
+
+/** The MCP & Skills pages, in the order the navigation lists them. */
+export const MCP_SKILLS_PAGES: McpSkillsPage[] = [
+  { label: "How it works", href: "/mcp-and-skills/", file: "how-it-works.md" },
+]
+
+/** The MCP & Skills section: its pages, then where the rest is told. */
+export function mcpSkillsNav(): NavGroup[] {
+  return [
+    {
+      items: MCP_SKILLS_PAGES.map(({ label, href }) => ({ label, href })),
+    },
+    {
+      label: "Related",
+      items: [
+        { label: "Get started", href: "/#get-started" },
+        { label: "Audits", href: "/audits/" },
       ],
     },
   ]

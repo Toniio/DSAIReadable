@@ -1,6 +1,3 @@
-import { readdirSync } from "node:fs"
-import path from "node:path"
-
 import {
   currentRuns,
   evalRuns,
@@ -13,9 +10,10 @@ import { remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import { components } from "@/site/lib/components"
 import { changelog } from "@/site/lib/changelog"
 import { section } from "@/site/lib/markdown"
+import { mcpPrompts, mcpResources, mcpTools, skills } from "@/site/lib/mcp"
 import { FOUNDATION_GROUPS } from "@/site/lib/nav"
 import { patterns } from "@/site/lib/patterns"
-import { listFiles, readJson, readText, ROOT } from "@/site/lib/repo"
+import { listFiles, readJson, readText } from "@/site/lib/repo"
 import { META, REPOSITORY, VERSION } from "@/site/lib/site"
 
 /**
@@ -39,14 +37,6 @@ interface IndexEntry {
   shadcn: { divergences: unknown[] }
 }
 
-/** The names of the folders under a repository folder. */
-function folders(dir: string): string[] {
-  return readdirSync(path.join(ROOT, dir), { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort()
-}
-
 function packageName(file: string): string {
   return readJson<{ name: string }>(file).name
 }
@@ -67,29 +57,11 @@ export function ships(): string[] {
     .map((row) => row.slice(2).trim())
 }
 
-/** The tools the MCP server registers, by name, from its sources. */
-function mcpTools(): string[] {
-  return listFiles("mcp-server/src/tools", ".ts")
-    .filter((file) => !file.endsWith(".test.ts"))
-    .flatMap((file) =>
-      [
-        ...readText(`mcp-server/src/tools/${file}`).matchAll(
-          /registerTool\(\s*"([\w-]+)"/g
-        ),
-      ].map((match) => match[1])
-    )
-}
-
 /** The rules of the ESLint plugin, one file each. */
 function eslintRules(): string[] {
   return listFiles("packages/eslint-plugin/src/rules", ".ts")
     .filter((file) => file !== "utils.ts" && !file.endsWith(".test.ts"))
     .map((file) => file.replace(/\.ts$/, ""))
-}
-
-/** The agent skills of skills/. */
-function skills(): string[] {
-  return folders("skills")
 }
 
 interface EvalSummary {
@@ -319,6 +291,7 @@ export function sectionFacts(): Record<string, string> {
     "/foundations/": `${FOUNDATION_GROUPS.flatMap((group) => group.items).length} pages`,
     "/components/": `${components().length} components in ${categories} categories`,
     "/patterns/": `${patterns().length} patterns`,
+    "/mcp-and-skills/": `${mcpTools().length} tools, ${mcpResources().length} resources, ${mcpPrompts().length} prompts, ${skills().length} ${skills().length === 1 ? "skill" : "skills"}`,
     "/changes/": `${entries.length} entries in ${releases} releases`,
     "/audits/": `${runs.length - gold} model eval runs, ${gold} of the gold standard`,
   }

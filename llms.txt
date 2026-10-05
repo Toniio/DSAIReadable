@@ -22,6 +22,10 @@ Every link to a file points to the release tag `v0.3.0`, the published version, 
 - [tokens.manifest.json](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.0/tokens.manifest.json): the same tokens as JSON
 - [registry.json](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.0/registry.json): the shadcn registry; install an item with `npx shadcn@latest add Toniio/DSAIReadable/<item>`
 
+## MCP server and skills
+
+- [MCP & Skills: How it works](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.0/docs/mcp-and-skills/how-it-works.md): From sources to answers; A session, tool by tool; The UI guard skill
+
 ## Foundations
 
 - [Border Width](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.0/specs/foundations/border-width.md)
