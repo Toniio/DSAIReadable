@@ -2,21 +2,6 @@
 
 An agent that writes interfaces with DSAIReadable reads the design system through two pieces. The MCP server serves it: the components and their specs, the tokens, the page patterns, the rules and the copy, with two tools that check the code the agent writes. The UI guard skill gives a screen a second look when someone asks for a review. The eval harness measures what the server changes, on the same screens built with it and without it.
 
-## Why a server, beside llms.txt
-
-[`llms.txt`](../../llms.txt) is a map of the repository for agents: a list of files, each to read whole. The server answers the question the agent asks, at the depth it asks, then checks what the agent wrote.
-
-|                            | `llms.txt`                                             | The MCP server                                                                                                                              |
-| -------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| What the agent gets        | Whole files, linked at the release tag                 | The answer to one question: a component, a rule, a page pattern, a category of tokens                                                       |
-| Depth                      | The file as written                                    | `concise` by default, `detailed` when asked, and never more than 40,000 characters                                                          |
-| Checking the code          | None: the rules are only written down                  | `dsaireadable_validate_code` runs the ESLint plugin's rules and TypeScript; `dsaireadable_validate_screen` checks the design system's rules |
-| A name that does not exist | No file to find                                        | An error that lists the accepted values                                                                                                     |
-| The project's own patterns | Not known                                              | `design/patterns/*.md`, served beside the design system's                                                                                   |
-| Network                    | Each file from GitHub, unless the repository is cloned | None: the server runs on the machine                                                                                                        |
-
-The two work together. `llms.txt` serves the agents that cannot start a server, such as a chat that reads a link, and both are generated from the same specs. The comparison is reasoned, not measured: the eval harness compares screens built with no context against screens built with the server, and a run that gives the agent `llms.txt` alone is still to come.
-
 ## From sources to answers
 
 The server never reads the specs while it runs. `npm run generate-context` compiles them, with the tokens, the component index and the component sources, into the JSON files of `mcp-server/context/`, and each answer is a lookup in that cache.

@@ -1,5 +1,4 @@
 import type { ReactNode } from "react"
-import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -11,7 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import type { Session } from "@/site/mcp-skills-docs/data"
-import { LINK } from "@/site/ui/link"
 
 const number = (value: number) => value.toLocaleString("en-US")
 
@@ -41,14 +39,7 @@ export function SessionBlock({
     <div className="flex min-w-0 flex-col gap-4">
       <dl className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-3 lg:grid-cols-6">
         <Fact term="Task">
-          <span className="flex flex-col gap-0.5">
-            <code className="font-mono">{session.task}</code>
-            {session.gold ? (
-              <Link href={session.gold.href} className={LINK}>
-                {session.gold.label}
-              </Link>
-            ) : null}
-          </span>
+          <code className="font-mono">{session.task}</code>
         </Fact>
         <Fact term="Turns">{number(session.turns)}</Fact>
         <Fact term="Tool calls">{number(session.toolCalls)}</Fact>
@@ -110,14 +101,6 @@ export function SessionBlock({
           })}
         </TableBody>
       </Table>
-      <p className="text-xs leading-relaxed text-muted-foreground">
-        {session.model ?? "The model"} through the eval harness, design system{" "}
-        {session.version}: the median of {session.of} sessions with the server,
-        recorded in{" "}
-        <code className="font-mono">evals/history/{session.file}.json</code>.
-        Input tokens count everything each turn sends again, cached or not; the
-        cost is Claude Code&apos;s estimate at API prices.
-      </p>
     </div>
   )
 }

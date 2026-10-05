@@ -170,8 +170,7 @@ export function GetStarted({ install }: { install: Install }) {
           <Link href="/mcp-and-skills/" className={LINK}>
             How the server works
           </Link>
-          : why a server beside llms.txt, how its answers are compiled, and a
-          recorded session, tool by tool.
+          : how its answers are compiled, and a recorded session, tool by tool.
         </p>
       </TabsContent>
 

@@ -173,14 +173,6 @@ export interface Session {
   task: string
   /** The request the agent was given. */
   prompt: string
-  /** The page of the gold standard the screen is scored against. */
-  gold?: { label: string; href: string }
-  /** The history file it is recorded in, without `.json`. */
-  file: string
-  version: string
-  model?: string
-  /** How many sessions it is the median of. */
-  of: number
   turns: number
   toolCalls: number
   inputTokens: number
@@ -204,21 +196,16 @@ export function medianSession(): Session | undefined {
       readJson<{ tasks: SessionTask[] }>(
         `evals/history/${run.file}.json`
       ).tasks.flatMap((task) =>
-        task.metrics ? [{ run, task, metrics: task.metrics }] : []
+        task.metrics ? [{ task, metrics: task.metrics }] : []
       )
     )
     .sort((a, b) => a.metrics.inputTokens - b.metrics.inputTokens)
   const middle = sessions[Math.floor((sessions.length - 1) / 2)]
   if (!middle) return undefined
-  const { run, task, metrics } = middle
+  const { task, metrics } = middle
   return {
     task: task.id,
     prompt: tasks.find((entry) => entry.id === task.id)?.prompt ?? "",
-    gold: run.results.find((result) => result.id === task.id)?.gold,
-    file: run.file,
-    version: run.version,
-    model: run.model,
-    of: sessions.length,
     turns: metrics.turns,
     toolCalls: metrics.toolCalls,
     inputTokens: metrics.inputTokens,

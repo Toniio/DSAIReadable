@@ -1,16 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import {
-  ArrowRightIcon,
-  ArrowUpRightIcon,
-  GithubLogoIcon,
-} from "@phosphor-icons/react/ssr"
+import { ArrowRightIcon, GithubLogoIcon } from "@phosphor-icons/react/ssr"
 
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import { answerCap } from "@/site/lib/mcp"
 import { mcpSkillsNav } from "@/site/lib/nav"
-import { GITHUB_URL, sourceUrl, VERSION } from "@/site/lib/site"
+import { GITHUB_URL, VERSION } from "@/site/lib/site"
 import {
   medianSession,
   pipelineSteps,
@@ -24,14 +19,13 @@ import { Pipeline } from "@/site/mcp-skills-docs/pipeline"
 import { SessionBlock } from "@/site/mcp-skills-docs/session"
 import { UiGuard } from "@/site/mcp-skills-docs/ui-guard"
 import { DocsPage } from "@/site/ui/docs-page"
-import { LINK } from "@/site/ui/link"
 import { InlineMarkdown } from "@/site/ui/markdown"
 import { PageHeader } from "@/site/ui/page-header"
 
 export const metadata: Metadata = {
   title: "MCP & Skills",
   description:
-    "How an agent reads the design system: why an MCP server beside llms.txt, how its answers are compiled, a recorded session tool by tool, and the UI guard skill.",
+    "How an agent reads the design system: how the MCP server compiles its answers, a recorded session tool by tool, and the UI guard skill.",
 }
 
 export default function HowItWorksPage() {
@@ -108,16 +102,6 @@ export default function HowItWorksPage() {
             </Link>
           </Button>
         </div>
-        <p className="text-xs text-muted-foreground">
-          Written in{" "}
-          <Link
-            href={sourceUrl(doc.source)}
-            className={cn(LINK, "inline-flex items-center gap-1")}
-          >
-            {doc.source}
-            <ArrowUpRightIcon aria-hidden="true" />
-          </Link>
-        </p>
       </PageHeader>
 
       <DocParts
