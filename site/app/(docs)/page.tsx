@@ -121,7 +121,7 @@ export default function OverviewPage() {
       <DocSection
         id="get-started"
         title="Get started"
-        description="Four channels, one version. Use the registry for the components, then give your agent the MCP server, the skills and the lint rules."
+        description="Four channels, one version. Use the registry for the components, then give your agent the MCP server, the UI guard skill and the lint rules."
       >
         <GetStarted install={install()} />
       </DocSection>
