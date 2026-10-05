@@ -131,7 +131,7 @@ npm run evals:generate -- --model sonnet --condition mcp-skills --tasks sign-in 
 launch, with no session. The script was checked against Claude Code 2.1.285
 (`--max-turns` is hidden from its `--help`, but defined) and warns on another
 version; `--claude <path>` picks the install. Under `mcp-skills`, Claude Code's
-bundled skills are listed next to the two of `skills/`: no flag hides them
+bundled skills are listed next to the one of `skills/`: no flag hides them
 alone, so `run.json` records the skills the sessions saw, and the plugins built
 into Claude Code (`cc-plugin-diff@builtin`…), which the check accepts while it
 refuses any other plugin.

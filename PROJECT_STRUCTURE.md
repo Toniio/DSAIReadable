@@ -25,7 +25,7 @@ dsaireadable/
 ├── mcp-server/                 # MCP server that serves the design system to agents (its own rules: its AGENTS.md)
 ├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
 ├── skills/                     # Agent skill: dsaireadable-ui-guard
-├── .claude-plugin/             # Claude Code plugin marketplace: the skills and the MCP server in one install
+├── .claude-plugin/             # Claude Code plugin marketplace: the skill and the MCP server in one install
 ├── .changeset/                 # Pending changesets: the semver intent of each change
 ├── .github/                    # CI workflows, PR template, CODEOWNERS, Dependabot
 ├── .vscode/                    # MCP server configuration template for VS Code
@@ -188,12 +188,12 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Versioning and release
 
-| Script                   | npm command                        | Role                                                                                                         |
-| ------------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `sync-versions.ts`       | `versions:sync` / `versions:check` | The root `package.json` version copied to the index, the MCP server and both lockfiles                       |
-| `lint-changesets.ts`     | `changesets:lint`                  | Each pending `.changeset/*.md` has a known category and the bump that category takes                         |
-| `test-release.ts`        | `release:test`                     | A changeset becomes a version, a CHANGELOG entry and `llms.txt` links on the new tag, on a copy of the files |
-| `test-pinned-install.ts` | `release:test`                     | What the shadcn CLI pins when an item is installed at a tag, against a local git remote                      |
+| Script                   | npm command                        | Role                                                                                                                                    |
+| ------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `sync-versions.ts`       | `versions:sync` / `versions:check` | The root `package.json` version copied to the index, both package manifests, the Claude Code plugin, the lockfile and the release links |
+| `lint-changesets.ts`     | `changesets:lint`                  | Each pending `.changeset/*.md` has a known category and the bump that category takes                                                    |
+| `test-release.ts`        | `release:test`                     | A changeset becomes a version, a CHANGELOG entry and `llms.txt` links on the new tag, on a copy of the files                            |
+| `test-pinned-install.ts` | `release:test`                     | What the shadcn CLI pins when an item is installed at a tag, against a local git remote                                                 |
 
 `release:check` runs the first two; `release:version` is what a release pull request runs
 ([`CONTRIBUTING.md`](./CONTRIBUTING.md#versioning-and-releases)).
@@ -255,7 +255,7 @@ documents (`generate-context` fails otherwise); every code example passes
 
 ### `specs/tokens/token-reference.md` · `tokens.manifest.json` — generated
 
-An exhaustive reference of the **426** tokens of the three tiers: CSS variable,
+An exhaustive reference of the **504** tokens of the three tiers: CSS variable,
 type, resolved light / dark values, Tailwind utility, Do / Don't. The Markdown is
 meant for people, `tokens.manifest.json` for tooling.
 
@@ -460,7 +460,7 @@ npm run mcp:test-package    # Pack the MCP server and run the tarball through np
 npm run test:lint-coverage  # Every component rendered from its spec, every documented key tested
 npm run test:components     # Component tests in headless Chromium (Vitest + axe-core)
 npm run skills:validate     # The agent skills: format, and every rule cites a source that exists
-npm run evals:test          # The conformance harness scores its gold examples and fixtures, with no model
+npm run evals:test          # The conformance harness scores its gold examples, the edit tasks' bases and its fixtures, with no model
 npm run evals:generate      # Screens from Claude Code on a subscription, no API key (evals/README.md)
 npm run site:dev            # The documentation site, locally (Next.js dev server)
 npm run site:check          # The site: examples copied from the specs are fresh, the consumer lint and the focus check pass

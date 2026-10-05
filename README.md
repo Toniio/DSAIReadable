@@ -61,7 +61,7 @@ dsaireadable/
 ├── specs/                      # The design system's Markdown documentation
 │   ├── components/             # 65 component specs (13 sections each)
 │   ├── foundations/            # Color, typography, spacing, motion, radius… specs
-│   └── tokens/token-reference.md  # Reference of the 426 tokens (generated)
+│   └── tokens/token-reference.md  # Reference of the 504 tokens (generated)
 ├── mcp-server/                 # MCP server @dsaireadable/mcp-server
 │   ├── src/
 │   │   ├── tools/              # MCP tools (ds-core, dataviz, ux-writing, admin)
@@ -72,7 +72,7 @@ dsaireadable/
 ├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
 ├── skills/                     # Agent skill: dsaireadable-ui-guard
 ├── .changeset/                 # Pending changesets: the semver intent of each change
-├── .claude-plugin/             # Claude Code plugin marketplace: the skills and the MCP server in one install
+├── .claude-plugin/             # Claude Code plugin marketplace: the skill and the MCP server in one install
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
 ├── registry/                   # Sources of the registry items that are not components
 ├── registry.json               # shadcn registry — generated
@@ -439,7 +439,7 @@ npm run lint         # ESLint
 npm run format       # Prettier (sorts Tailwind classes automatically)
 npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP server, site
 npm run test:components  # Every spec example, and the foundations' complete modules, in headless Chromium: axe light and dark, focus, keyboard
-npm run evals:test   # The conformance harness scores its gold examples, with no model
+npm run evals:test   # The conformance harness scores its gold examples and the edit tasks' bases, with no model
 npm run site:dev     # The documentation site: foundations, components with a live playground, patterns, changes, audits
 npm run site:build && npm run site:test  # The built site, loaded in headless Chromium: axe, page errors and a focus indicator on every tab stop, light and dark
 ```

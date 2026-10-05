@@ -1,6 +1,14 @@
 import { readdirSync } from "node:fs"
 import path from "node:path"
 
+import {
+  currentRuns,
+  evalRuns,
+  evalSeries,
+  latestRuns,
+  latestVersionRuns,
+  percent,
+} from "@/site/audit-docs/data"
 import { remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import { components } from "@/site/lib/components"
 import { changelog } from "@/site/lib/changelog"
@@ -25,19 +33,6 @@ interface ManifestEntry {
 interface RegistryItem {
   name: string
   type: string
-}
-
-interface EvalRun {
-  label: string
-  date: string
-  generator: string
-  model?: string
-  context?: "mcp" | "none"
-  skills?: string[]
-  designSystem: { version: string }
-  /** The checkout its screens were generated from: absent from a gold run. */
-  generated?: { commit: string; sources?: string }
-  summary: { tasks: number; conformance: number }
 }
 
 interface IndexEntry {
@@ -98,7 +93,6 @@ function skills(): string[] {
 }
 
 interface EvalSummary {
-  date: string
   version: string
   model?: string
   tasks: number
@@ -108,73 +102,28 @@ interface EvalSummary {
   passes: number
 }
 
-/** `0.1.10` after `0.1.9`. */
-function compareVersions(a: string, b: string): number {
-  const [x, y] = [a, b].map((value) => value.split(".").map(Number))
-  for (let i = 0; i < Math.max(x.length, y.length); i++) {
-    const delta = (x[i] ?? 0) - (y[i] ?? 0)
-    if (delta) return delta
-  }
-  return 0
-}
-
 /**
- * The latest model runs of the conformance harness, on the latest version
- * measured, with and without the MCP server: the mean of their passes when a
- * condition ran several.
+ * The measurement the Audits page leads with: the latest model runs of the
+ * default tasks, on the latest version measured, with and without the MCP
+ * server, the mean of their passes when a condition ran several. A suite's
+ * runs measure a subset of the tasks, so they never stand in for it.
  */
 function latestEval(): EvalSummary | undefined {
-  const runs = listFiles("evals/history", ".json")
-    .map((file) => readJson<EvalRun>(`evals/history/${file}`))
-    .filter((run) => run.generator !== "gold")
-  const version = runs
-    .map((run) => run.designSystem.version)
-    .sort(compareVersions)
-    .at(-1)
-  const date = runs
-    .filter((run) => run.designSystem.version === version)
-    .map((run) => run.date)
-    .sort()
-    .at(-1)
-  if (!date) return undefined
-  // A pass scored the day before belongs to the same measurement: the same
-  // checkout generated its screens.
-  const checkout = (run: EvalRun) =>
-    run.generated && `${run.generated.commit}:${run.generated.sources ?? ""}`
-  const measured = new Set(
-    runs
-      .filter((run) => run.date === date && checkout(run))
-      .map((run) => checkout(run))
+  const latest = evalSeries(
+    latestRuns(latestVersionRuns(currentRuns(evalRuns())))
   )
-  const latest = runs.filter(
-    (run) =>
-      run.designSystem.version === version &&
-      (run.date === date || measured.has(checkout(run)))
-  )
-  const plain = (context: "mcp" | "none") =>
-    latest.filter((run) => run.context === context && !run.skills?.length)
-  const mean = (passes: EvalRun[]) =>
-    passes.length
-      ? passes.reduce((sum, run) => sum + run.summary.conformance, 0) /
-        passes.length
-      : undefined
-  const withMcp = plain("mcp")
-  const without = plain("none")
-  const reference = withMcp[0] ?? without[0] ?? latest[0]
+  const withMcp = latest.find((series) => series.condition === "MCP")
+  const without = latest.find((series) => series.condition === "No context")
+  const reference = withMcp ?? without ?? latest[0]
+  if (!reference) return undefined
   return {
-    date,
-    version: reference.designSystem.version,
+    version: reference.version,
     model: reference.model,
-    tasks: reference.summary.tasks,
-    withMcp: mean(withMcp),
-    without: mean(without),
-    passes: withMcp.length,
+    tasks: reference.tasks,
+    withMcp: withMcp?.conformance,
+    without: without?.conformance,
+    passes: withMcp?.runs.length ?? 0,
   }
-}
-
-/** A ratio as a percentage with one decimal: 0.981 → `98.1%`. */
-function percent(ratio: number): string {
-  return `${Math.round(ratio * 1000) / 10}%`
 }
 
 /** How the stat card names a group of Foundations pages. */
@@ -365,7 +314,7 @@ export function sectionFacts(): Record<string, string> {
   const releases = new Set(entries.map((entry) => entry.version)).size
   const categories = new Set(components().map((entry) => entry.category)).size
   const runs = listFiles("evals/history", ".json").map(
-    (file) => readJson<EvalRun>(`evals/history/${file}`).generator
+    (file) => readJson<{ generator: string }>(`evals/history/${file}`).generator
   )
   const gold = runs.filter((generator) => generator === "gold").length
   return {

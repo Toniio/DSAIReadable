@@ -57,7 +57,7 @@ function Names({ label, names }: { label: string; names: string[] }) {
   )
 }
 
-/** The four ways in: the registry, the MCP server, the skills, the lint rules. */
+/** The four ways in: the registry, the MCP server, the skill, the lint rules. */
 export function GetStarted({ install }: { install: Install }) {
   return (
     <Tabs defaultValue="registry" className="gap-4">
