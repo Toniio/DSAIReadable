@@ -54,6 +54,7 @@ import { addResults, readStream, toolResults } from "./lib/stream"
 import {
   designSystemImports,
   goldScreen,
+  allTasks,
   loadTasks,
   suiteIds,
   type Task,
@@ -80,6 +81,13 @@ type Generator = (task: Task) => Promise<Generated>
 
 function goldGenerator(): Generator {
   return async (task) => ({ code: goldScreen(ROOT, task) })
+}
+
+/** The screen a change starts from: the `base` of a task, unchanged. */
+function baseGenerator(): Generator {
+  return async (task) => ({
+    code: task.base ? readFileSync(join(ROOT, task.base), "utf-8") : null,
+  })
 }
 
 /** What evals/generate-claude-code.ts writes in `<dir>/run.json`; a run recorded before a field existed lacks it. */
@@ -183,6 +191,7 @@ function replayAbout(
 
 async function generatorFor(name: string): Promise<Generator> {
   if (name === "gold") return goldGenerator()
+  if (name === "base") return baseGenerator()
   if (name === "replay") {
     const dir = option("from")
     if (!dir) throw new Error("--generator replay needs --from <dir>")
@@ -197,7 +206,7 @@ async function generatorFor(name: string): Promise<Generator> {
       skills: skillsOption(),
     })
   }
-  throw new Error(`unknown generator "${name}": gold, replay or claude`)
+  throw new Error(`unknown generator "${name}": gold, base, replay or claude`)
 }
 
 /** Generates, writes and scores one run; returns its report. */
@@ -320,7 +329,7 @@ async function run(options: {
  */
 async function selfTest() {
   const errors: string[] = []
-  const tasks = loadTasks(ROOT)
+  const tasks = allTasks(ROOT)
   const gold = await run({
     label: "self-test-gold",
     generator: "gold",
@@ -335,6 +344,23 @@ async function selfTest() {
       )
     if (!passesB(t.a11y))
       errors.push(`gold ${t.id} fails stage B:\n${t.a11y?.failures.join("\n")}`)
+  }
+  // A change starts from a screen that follows the system: its base passes
+  // stages A and B too, short of the gold modules the prompt asks to add.
+  const bases = await run({
+    label: "self-test-bases",
+    generator: "base",
+    tasks: tasks.filter((t) => t.base && existsSync(join(ROOT, t.base))),
+    a11y: true,
+    rubric: false,
+  })
+  for (const t of bases.tasks) {
+    if (!passesA(t.static))
+      errors.push(
+        `base ${t.id} fails stage A:\n${[...(t.static?.typeErrors ?? []), ...(t.static?.lintErrors ?? [])].join("\n")}`
+      )
+    if (!passesB(t.a11y))
+      errors.push(`base ${t.id} fails stage B:\n${t.a11y?.failures.join("\n")}`)
   }
 
   const fixturesDir = join(ROOT, "evals/fixtures")
@@ -638,7 +664,7 @@ async function selfTest() {
     process.exit(1)
   }
   console.log(
-    `✅ evals self-test: the ${gold.tasks.length} gold screens pass stages A and B; the ${declared.size} fixtures fail exactly what they declare.`
+    `✅ evals self-test: the ${gold.tasks.length} gold screens and the ${bases.tasks.length} bases pass stages A and B; the ${declared.size} fixtures fail exactly what they declare.`
   )
 }
 

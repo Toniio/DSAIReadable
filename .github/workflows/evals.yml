@@ -16,7 +16,7 @@ on:
         description: "none: no agent skill; with: the skills of skills/ loadable; both: each context run without, then with them"
         default: none
       suite:
-        description: "A suite of evals/tasks.json (skills), or empty for every task"
+        description: "A suite of evals/tasks.json (skills), or empty for the default run"
         default: ""
 
 permissions:

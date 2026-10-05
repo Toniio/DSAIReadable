@@ -1,6 +1,6 @@
 {
   "name": "dsaireadable",
-  "description": "The DSAIReadable design system for agents: its MCP server and the skills that build and review UI with it.",
+  "description": "The DSAIReadable design system for agents: its MCP server and the skills that change and review UI with it.",
   "owner": {
     "name": "Anthony Besnault",
     "url": "https://github.com/Toniio"
@@ -13,7 +13,7 @@
         "repo": "Toniio/DSAIReadable",
         "ref": "v0.2.0"
       },
-      "description": "Builds React screens with the DSAIReadable design system and reviews them for basic UI and UX errors: the dsaireadable-build and dsaireadable-ui-guard skills, and the design system's MCP server.",
+      "description": "The DSAIReadable design system's MCP server, which builds React screens with it, and two skills: dsaireadable-build keeps a change to an existing screen in line with the system, dsaireadable-ui-guard reviews a screen for basic UI and UX errors on request.",
       "version": "0.2.0",
       "license": "MIT",
       "homepage": "https://github.com/Toniio/DSAIReadable",

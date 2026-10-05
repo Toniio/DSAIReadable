@@ -1,5 +1,5 @@
 {
-  "$comment": "The reference tasks of the conformance harness (evals/README.md). Each prompt is written the way a product team asks for a screen: it names the need, never a component. `gold` points at the code that answers it in the design system: the `## Code example` of a page pattern or of a component spec. `render` is the JSX that mounts a pattern example whose export takes props. `base` makes a task a change to an existing screen: the generator receives that file with the prompt, and the gold is the screen once changed. `suites` names subsets of the tasks: `skills` is the one the agent skills are measured on (`--suite skills`).",
+  "$comment": "The reference tasks of the conformance harness (evals/README.md). Each prompt is written the way a product team asks for a screen: it names the need, never a component. `gold` points at the code that answers it in the design system: the `## Code example` of a page pattern or of a component spec. `render` is the JSX that mounts a pattern example whose export takes props. `base` makes a task a change to an existing screen: the generator receives that file with the prompt, and the gold is the screen once changed. `\"default\": false` keeps a task out of the default run: it runs only when a suite or `--tasks` names it, so adding it leaves the 26 tasks the recorded runs and the budgets compare unchanged. `suites` names subsets of the tasks: `skills` is the one the agent skills are measured on (`--suite skills`).",
   "tasks": [
     {
       "id": "sign-in",
@@ -144,6 +144,60 @@
       "prompt": "Add notification preferences to this settings page: a weekly summary of their projects every Monday, on by default, and an email when someone mentions them. Each preference should take effect as soon as it's changed.",
       "gold": { "pattern": "settings" },
       "base": "evals/bases/add-notifications.tsx"
+    },
+    {
+      "id": "add-sign-in-error",
+      "prompt": "When the email and password don't match, this sign-in page stays as it was and people can't tell what went wrong. Tell them clearly when that happens.",
+      "gold": { "pattern": "sign-in" },
+      "base": "evals/bases/add-sign-in-error.tsx",
+      "default": false
+    },
+    {
+      "id": "add-delete-confirmation",
+      "prompt": "This button deletes the project \"Website redesign\" on the first click, and a deletion can't be undone. Make the person confirm before it happens.",
+      "gold": {
+        "pattern": "delete",
+        "render": "<DeleteProject name=\"Website redesign\" />"
+      },
+      "base": "evals/bases/add-delete-confirmation.tsx",
+      "default": false
+    },
+    {
+      "id": "add-clear-filters",
+      "prompt": "Add a way to clear these filters in one step, and show how many projects match them: 12 right now.",
+      "gold": {
+        "pattern": "filter",
+        "render": "<ProjectFilters count={12} />"
+      },
+      "base": "evals/bases/add-clear-filters.tsx",
+      "default": false
+    },
+    {
+      "id": "add-save-feedback",
+      "prompt": "This save button gives no feedback. Tell the person while their changes are saving, once they're saved, and what to do if saving fails.",
+      "gold": {
+        "pattern": "saving",
+        "render": "<ProfileForm save={async () => {}} />"
+      },
+      "base": "evals/bases/add-save-feedback.tsx",
+      "default": false
+    },
+    {
+      "id": "add-search-no-results",
+      "prompt": "When nothing matches the search, the list just goes blank. Say so plainly and give the person a way out.",
+      "gold": {
+        "pattern": "search",
+        "render": "<ProjectSearch projects={[\"Apollo\", \"Borealis\", \"Cassini\", \"Discovery\"]} />"
+      },
+      "base": "evals/bases/add-search-no-results.tsx",
+      "default": false
+    },
+    {
+      "id": "add-discard-changes",
+      "prompt": "People can't take back what they typed in this form before they save. Add a way to discard their changes, and tell them once the changes are saved.",
+      "gold": { "pattern": "edit", "render": "<ProjectDetails />" },
+      "base": "evals/bases/add-discard-changes.tsx",
+      "default": false
     }
   ],
   "suites": {
@@ -159,7 +213,13 @@
       "save-profile",
       "settings-page",
       "add-plan-choice",
-      "add-notifications"
+      "add-notifications",
+      "add-sign-in-error",
+      "add-delete-confirmation",
+      "add-clear-filters",
+      "add-save-feedback",
+      "add-search-no-results",
+      "add-discard-changes"
     ]
   }
 }
