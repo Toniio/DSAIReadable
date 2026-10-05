@@ -24,7 +24,7 @@ dsaireadable/
 ├── tests/                      # Component tests (Vitest, Testing Library, axe-core)
 ├── mcp-server/                 # MCP server that serves the design system to agents (its own rules: its AGENTS.md)
 ├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
-├── skills/                     # Agent skills: dsaireadable-build and dsaireadable-ui-guard
+├── skills/                     # Agent skill: dsaireadable-ui-guard
 ├── .claude-plugin/             # Claude Code plugin marketplace: the skills and the MCP server in one install
 ├── .changeset/                 # Pending changesets: the semver intent of each change
 ├── .github/                    # CI workflows, PR template, CODEOWNERS, Dependabot

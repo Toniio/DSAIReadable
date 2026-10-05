@@ -6,7 +6,7 @@ functional fidelity, not the respect of a given system. This harness does, in
 one command.
 
 A **generator** answers the 26 reference tasks of [`tasks.json`](./tasks.json)
-with one screen each: a TSX module whose default export renders the screen.
+(its default run) with one screen each: a TSX module whose default export renders the screen.
 Each prompt asks for a screen the way a product team would, and names no
 component. Each task points at its **gold standard**, the `## Code example` of a
 page pattern (`specs/patterns/`) or a component spec (`specs/components/`): the
@@ -70,16 +70,19 @@ The rubric of stage C uses the same key; `EVALS_JUDGE_MODEL` changes its model.
 
 ## Measuring the agent skills
 
-`--skills all` (or `--skills dsaireadable-build,dsaireadable-ui-guard`) gives
+`--skills all` (or `--skills dsaireadable-ui-guard`) gives
 the agent the skills of [`skills/`](../skills/) the way a client does: each
 skill's name and description in the system prompt, and a `read_skill_file`
 tool that reads its `SKILL.md`, then the files it names. The report counts
 those reads like the MCP calls, so a run shows whether the skill triggered.
 
-The `skills` suite of `tasks.json` holds the twelve tasks the skills are
-measured on: ten screens to build from the page patterns, and two changes to an
-existing screen (`base`: the file the agent starts from, given with the
-prompt). A measurement compares the same model and context with and without
+The `skills` suite of `tasks.json` holds the eighteen tasks the skills are
+measured on: ten screens to build from the page patterns, and eight changes
+to an existing screen (`base`: the file the agent starts from, given with the
+prompt). The removed `dsaireadable-build` skill was last measured on it
+(`history/2026-10-05-0.3.0-suite-skills-*`).
+Six of those changes are out of the default run (`"default": false`), so the
+26 tasks the recorded runs compare stay the same. A measurement compares the same model and context with and without
 the skills, on at least two models:
 
 ```bash
@@ -209,8 +212,11 @@ this checkout answers instead and whether Claude Code would still refuse it.
 
 `npm run evals:test` proves the scorer, without a model:
 
-- the 26 gold screens pass stages A and B — otherwise the scorer is wrong, or a
-  spec example is, and the example is fixed in its spec;
+- the gold screen of every task passes stages A and B — otherwise the scorer is
+  wrong, or a spec example is, and the example is fixed in its spec;
+- every `base` of [`bases/`](./bases/) passes them too, short of the gold
+  modules its prompt asks to add: a change starts from a screen that follows
+  the system;
 - each screen of [`fixtures/`](./fixtures/) fails exactly the checks its first
   line declares (`// fails: compiles, lint:external-imports, renders`), so a
   check that stops catching anything fails here;
@@ -226,5 +232,7 @@ Add it to `tasks.json`: an `id`, the `prompt` as a product team would write it,
 and the `gold` it is scored against (`pattern` or `component`; `render` mounts
 a pattern example whose export takes props). A change to an existing screen
 also names its `base`, a file of [`bases/`](./bases/): the gold minus what the
-prompt asks to add. Then `npm run evals:test`: the
-gold must pass, which also proves the example works.
+prompt asks to add. A task that only a suite runs takes `"default": false`, so
+the default run, and the budgets measured on it, stay comparable. Then
+`npm run evals:test`: the gold and the base must pass, which also proves the
+example works.

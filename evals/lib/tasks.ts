@@ -19,6 +19,12 @@ export interface Task {
    * with the prompt. The gold is the screen once changed.
    */
   base?: string
+  /**
+   * `false`: the task runs only when a suite or `--tasks` names it, so adding
+   * it leaves the default run, and the recorded runs and budgets that compare
+   * with it, unchanged.
+   */
+  default?: boolean
 }
 
 interface TaskFile {
@@ -33,7 +39,10 @@ function readTasks(root: string): TaskFile {
   ) as TaskFile
 }
 
-/** The tasks, all of them, the ids of `only`, or those of a suite. */
+/**
+ * The tasks of the default run, the ids of `only`, or those of a suite. A task
+ * marked `"default": false` runs only when named.
+ */
 export function loadTasks(
   root: string,
   only?: string[],
@@ -48,7 +57,14 @@ export function loadTasks(
   const wanted = only?.length ? only : suite ? suites[suite] : undefined
   for (const id of wanted ?? [])
     if (!ids.has(id)) throw new Error(`evals/tasks.json has no task "${id}"`)
-  return wanted ? tasks.filter((t) => wanted.includes(t.id)) : tasks
+  return wanted
+    ? tasks.filter((t) => wanted.includes(t.id))
+    : tasks.filter((t) => t.default !== false)
+}
+
+/** Every task, those out of the default run included: the harness's own test. */
+export function allTasks(root: string): Task[] {
+  return readTasks(root).tasks
 }
 
 /** Every suite's ids, to check they name tasks that exist. */

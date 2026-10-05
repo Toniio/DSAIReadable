@@ -309,14 +309,17 @@ export default function AuditsPage() {
             run whose screens it scores again; the earlier ones stay in{" "}
             <code className="font-mono">evals/history/</code>. A condition
             measured in several passes, each on its own screens, has a row per
-            pass in the table and their mean in the chart.
+            pass in the table and their mean in the chart. A suite&apos;s runs,
+            a subset of the tasks such as the one the agent skills are measured
+            on, are in the chart and the table; the summary and the per-task
+            view keep the latest run of the default tasks.
           </>
         }
       >
         <div className="flex flex-col gap-2">
           <EvalChart
             data={series.map((entry) => ({
-              run: `${entry.condition} · ${entry.version}${entry.runs.length > 1 ? ` · ${entry.runs.length} passes` : ""}`,
+              run: `${entry.condition}${entry.suite ? ` · ${entry.suite} suite` : ""} · ${entry.version}${entry.runs.length > 1 ? ` · ${entry.runs.length} passes` : ""}`,
               conformance: Math.round(entry.conformance * 1000) / 10,
               stageA: Math.round(entry.stageA * 1000) / 10,
               stageB:
@@ -399,8 +402,17 @@ export default function AuditsPage() {
                         "—"
                       )}
                     </TableCell>
-                    <TableCell className="font-mono tabular-nums">
-                      {run.tasks}
+                    <TableCell className="whitespace-normal">
+                      <span className="flex flex-col gap-0.5">
+                        <span className="font-mono tabular-nums">
+                          {run.tasks}
+                        </span>
+                        {run.suite ? (
+                          <span className="text-muted-foreground">
+                            {run.suite} suite
+                          </span>
+                        ) : null}
+                      </span>
                     </TableCell>
                     <TableCell className="font-mono tabular-nums">
                       {percent(run.stageA)}

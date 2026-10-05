@@ -70,7 +70,7 @@ dsaireadable/
 │   │   └── context/            # generate.ts: builds the cache
 │   └── context/                # Precompiled JSON files (the design system cache) — generated
 ├── packages/eslint-plugin/     # ESLint plugin @dsaireadable/eslint-plugin: the design system's rules for a project's own lint
-├── skills/                     # Agent skills: dsaireadable-build and dsaireadable-ui-guard
+├── skills/                     # Agent skill: dsaireadable-ui-guard
 ├── .changeset/                 # Pending changesets: the semver intent of each change
 ├── .claude-plugin/             # Claude Code plugin marketplace: the skills and the MCP server in one install
 ├── scripts/                    # Tooling: token, spec, index and registry generation and linting
@@ -245,13 +245,18 @@ narrows the exclusion to the files the registry installed.
 
 ## Agent skills
 
-Two [Agent Skills](https://agentskills.io/specification), in [`skills/`](./skills/),
-for any agent that loads them (Claude Code, Codex, Cursor, Copilot, Gemini CLI…):
+One [Agent Skill](https://agentskills.io/specification), in [`skills/`](./skills/),
+for any agent that loads it (Claude Code, Codex, Cursor, Copilot, Gemini CLI…):
 
-| Skill                   | What it does                                                                                                                                                                                                                                                                                |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dsaireadable-build`    | Builds or changes a screen MCP-first: the page pattern, then the concise spec of each component retained, in one turn (detailed only for a composed component or a constraint to check), then `dsaireadable_validate_code` and `dsaireadable_validate_screen` until both report zero errors |
-| `dsaireadable-ui-guard` | Reviews every screen it builds or changes for basic UI and UX errors before handing it back: a checklist in eight domains, then a `file:line — severity — rule — fix` review that ends in pass or fail. Each rule cites the spec or pattern that writes it                                  |
+| Skill                   | What it does                                                                                                                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dsaireadable-ui-guard` | Reviews a screen for basic UI and UX errors when asked to: a checklist in eight domains, then a `file:line — severity — rule — fix` review that ends in pass or fail. Each rule cites the spec or pattern that writes it |
+
+Building and changing a screen needs no skill: the MCP server's instructions,
+patterns and validation tools carry the workflow. 0.3.0 removed the
+`dsaireadable-build` skill after the harness measured it against the server
+alone, on new screens and on changes to existing ones: no gain in conformance,
+and more input tokens per screen ([`evals/history/`](./evals/history/)).
 
 The guard keeps only judgment: what a tool can check stays with the tools (the
 ESLint plugin, `dsaireadable_validate_code`, axe). It never copies a limit
@@ -264,16 +269,16 @@ checks the format and that every cited source exists.
 # Any agent that reads skills/ from a repository
 npx skills add Toniio/DSAIReadable#v0.2.0
 
-# Claude Code: the two skills and the MCP server in one plugin
+# Claude Code: the skill and the MCP server in one plugin
 claude plugin marketplace add Toniio/DSAIReadable
 claude plugin install dsaireadable@dsaireadable
 ```
 
-The plugin installs its skills from the release tag and starts the MCP server
-with `npx`, pinned to the same release, so the skills and the tools they name
+The plugin installs its skill from the release tag and starts the MCP server
+with `npx`, pinned to the same release, so the skill and the tools it names
 always agree. The `#vX.Y.Z` of `npx skills add` does the same for the first
-command. Their gain can be measured on the conformance
-harness, with and without the skills: `npm run evals -- --generator claude
+command. A skill's gain can be measured on the conformance
+harness, with and without it: `npm run evals -- --generator claude
 --suite skills --skills all` ([`evals/README.md`](./evals/README.md)).
 
 ---
@@ -364,7 +369,7 @@ Every component has its spec — props, variants, states, accessibility — in [
 1. **The rules**: the `conventions` item drops the same file wherever each tool loads its rules on its own — `.cursor/rules/dsaireadable.mdc`, `.claude/rules/dsaireadable.md`, `.github/instructions/dsaireadable.instructions.md`. It overwrites no `AGENTS.md`. For a tool that only reads `AGENTS.md` (Codex…): add a line there that points to `.claude/rules/dsaireadable.md`.
 2. **The catalog**: `npx shadcn@latest mcp init --client claude` (or `cursor`, `vscode`, `codex`, `opencode`) wires up shadcn's MCP server. It accepts the `Toniio/DSAIReadable` registry to search, browse and get the install command of an item; the rules above give the agent the address.
 3. **The design system in detail** (specs, tokens, screen validation): the [repository's MCP server](#mcp-server), run locally.
-4. **The workflow and the review**: the [agent skills](#agent-skills), which call that server before writing and review the screen before handing it back.
+4. **The review**: the [agent skill](#agent-skills) that reviews a screen for basic UI and UX errors on request.
 
 ### Versions
 

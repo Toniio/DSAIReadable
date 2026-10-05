@@ -1,6 +1,6 @@
 ---
 name: dsaireadable-ui-guard
-description: Reviews every screen built or changed with the DSAIReadable design system for basic UI and UX errors before handing it back — hierarchy, forms, empty, loading and error states, destructive actions, navigation, accessibility, microcopy and dark patterns — with a checklist and a file:line review that ends in pass or fail. Use whenever you create, edit or refactor a page, screen, form, dialog, list, table, empty state, settings page or any React UI that imports from @/components/ui, even when the user did not ask for a review.
+description: Reviews a screen built with the DSAIReadable design system for basic UI and UX errors — hierarchy, forms, empty, loading and error states, destructive actions, navigation, accessibility, microcopy and dark patterns — with a checklist and a file:line review that ends in pass or fail. Use when the user asks to review, audit or check the UI or UX of a page, screen, form, dialog, list, table, empty state, settings page or any React UI that imports from @/components/ui.
 license: MIT
 compatibility: Reads its sources through the DSAIReadable MCP server (npx -y @dsaireadable/mcp-server) connected as "dsaireadable".
 ---
@@ -9,9 +9,10 @@ compatibility: Reads its sources through the DSAIReadable MCP server (npx -y @ds
 
 A screen can pass every lint and still be hard to use: two buttons fight for
 attention, a list goes blank with no next step, a delete happens without a
-word. This guard catches those before you hand the work back. Apply it on your
-own, every time you create or change UI with the design system: it is part of
-the work, not an extra the user has to ask for.
+word. This guard is the second look that catches those, when someone asks for
+a review of a screen. While a screen is built, the MCP server's patterns and
+validation tools already carry the rules: the guard does not run on every
+change.
 
 ## How to apply it
 
