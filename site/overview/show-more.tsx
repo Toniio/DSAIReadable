@@ -1,16 +1,20 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react"
 import type { ReactNode } from "react"
+import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react/ssr"
 
-import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible"
-import { DisclosureTrigger } from "@/site/mcp-skills-docs/disclosure"
+import { Button } from "@/components/ui/button"
 
 /**
- * The entries of an Overview list past the first few, closed at first. When
- * they carry anchors a spec links to (a composition rule, `/#rule-21`) and
- * the address names one of them, the list opens and the page jumps to it,
- * which a closed list cannot do.
+ * The entries of an Overview list past the first few, closed at first.
+ *
+ * They stay in the page, `hidden="until-found"`: the browser's find in page
+ * reaches them and opens the list (`beforematch`), where a browser without
+ * it keeps them hidden. Radix's `CollapsibleContent` cannot do this, it
+ * renders nothing while closed. When the entries carry anchors a spec links
+ * to (a composition rule, `/#rule-21`) and the address names one of them,
+ * the list opens and the page jumps to it.
  */
 export function ShowMore({
   count,
@@ -28,6 +32,8 @@ export function ShowMore({
 }) {
   const [open, setOpen] = useState(false)
   const target = useRef<string>(undefined)
+  const content = useRef<HTMLDivElement>(null)
+  const contentId = useId()
 
   useEffect(() => {
     const reveal = () => {
@@ -41,8 +47,18 @@ export function ShowMore({
     return () => window.removeEventListener("hashchange", reveal)
   }, [ids])
 
-  // Once the rule is rendered: the jump made before it existed found nothing.
-  // An open list needs no help, the browser's own jump finds the rule.
+  // React writes `hidden` as a boolean: the value that lets find in page in
+  // is set here, before the browser paints the closed list.
+  useLayoutEffect(() => {
+    const node = content.current
+    if (!node) return
+    if (!open) node.setAttribute("hidden", "until-found")
+    const found = () => setOpen(true)
+    node.addEventListener("beforematch", found)
+    return () => node.removeEventListener("beforematch", found)
+  }, [open])
+
+  // Once the list is open: a jump made while it was hidden found nothing.
   useEffect(() => {
     if (!open || !target.current) return
     document.getElementById(target.current)?.scrollIntoView()
@@ -50,15 +66,31 @@ export function ShowMore({
   }, [open])
 
   return (
-    <Collapsible
-      open={open}
-      onOpenChange={setOpen}
-      className="flex flex-col gap-3"
-    >
-      <CollapsibleContent>{children}</CollapsibleContent>
-      <DisclosureTrigger>
+    <div className="flex flex-col gap-3">
+      <div ref={content} id={contentId} hidden={!open}>
+        {children}
+      </div>
+      <Button
+        type="button"
+        variant="ghost"
+        size="xs"
+        aria-expanded={open}
+        aria-controls={contentId}
+        onClick={() => setOpen(!open)}
+        className="group/disclosure -ml-2 w-fit"
+      >
         {open ? `Show fewer ${noun}` : `Show ${count} more ${noun}`}
-      </DisclosureTrigger>
-    </Collapsible>
+        <CaretDownIcon
+          data-icon="inline-end"
+          aria-hidden="true"
+          className="group-aria-expanded/disclosure:hidden"
+        />
+        <CaretUpIcon
+          data-icon="inline-end"
+          aria-hidden="true"
+          className="hidden group-aria-expanded/disclosure:inline"
+        />
+      </Button>
+    </div>
   )
 }
