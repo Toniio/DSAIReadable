@@ -12,12 +12,7 @@ import { listFiles, readJson } from "@/site/lib/repo"
 /** One task of a recorded run, as evals/lib/report.ts writes it. */
 interface ReportTask {
   id: string
-  static?: {
-    compiles: boolean
-    lint: boolean
-    /** The lint findings, counted by family (evals/lib/static.ts). */
-    lintByFamily?: Record<string, number>
-  }
+  static?: { compiles: boolean; lint: boolean }
   a11y?: { renders: boolean; axe: boolean; focus: boolean }
   metrics?: {
     inputTokens: number
@@ -57,7 +52,7 @@ interface Report {
 }
 
 interface EvalTasks {
-  tasks: { id: string; prompt: string; base?: string }[]
+  tasks: { id: string; prompt: string }[]
   suites: Record<string, string[]>
 }
 
@@ -229,10 +224,9 @@ function sessionCost(
 // ── By version ─────────────────────────────────────────────────────────────
 
 /**
- * The first version whose screens the current scorer scored. The 0.1.0
- * screens were scored by an earlier scorer and are no longer on disk to be
- * scored again, so their conformance does not compare with the versions after
- * them; their tokens and cost do.
+ * The first version the page compares: the first whose screens the current
+ * scorer scored. The 0.1.0 screens were scored by an earlier scorer and are
+ * no longer on disk to be scored again.
  */
 const SCORED_FROM = "0.1.3"
 
@@ -242,10 +236,10 @@ export interface Measurement {
   condition: Condition
   passes: number
   screens: number
-  /** The harness's score, the mean of its passes; null before SCORED_FROM. */
-  conformance: number | null
-  /** How many screens pass stages A and B; null before SCORED_FROM. */
-  fullyConformant: number | null
+  /** The harness's score, the mean of its passes. */
+  conformance: number
+  /** How many screens pass stages A and B. */
+  fullyConformant: number
   medianInputTokens: number
   /** The mean over its sessions, in dollars. */
   costPerScreen: number | null
@@ -253,17 +247,16 @@ export interface Measurement {
   estimated: boolean
 }
 
-/** Both conditions at every version measured, the oldest first. */
+/** Both conditions at every version from SCORED_FROM on, the oldest first. */
 export function measurements(): Measurement[] {
   const all = measured()
   const rates = inputRates(all)
-  const versions = [...new Set(all.map((run) => run.version))].sort(
-    compareVersions
-  )
+  const versions = [...new Set(all.map((run) => run.version))]
+    .filter((version) => compareVersions(version, SCORED_FROM) >= 0)
+    .sort(compareVersions)
   return versions.flatMap((version) => {
     const atVersion = all.filter((run) => run.version === version)
     const recorded = costRecorded(atVersion)
-    const scored = compareVersions(version, SCORED_FROM) >= 0
     return (["none", "mcp"] as const).flatMap((condition) => {
       const group = atVersion.filter((run) => run.condition === condition)
       if (group.length === 0) return []
@@ -278,10 +271,8 @@ export function measurements(): Measurement[] {
           condition,
           passes: group.length,
           screens: tasks.length,
-          conformance: scored
-            ? mean(group.map((run) => run.report.summary.conformance))
-            : null,
-          fullyConformant: scored ? tasks.filter(fullyConformant).length : null,
+          conformance: mean(group.map((run) => run.report.summary.conformance)),
+          fullyConformant: tasks.filter(fullyConformant).length,
           medianInputTokens: median(
             used.map((task) => task.metrics?.inputTokens ?? 0)
           ),
@@ -322,69 +313,26 @@ function latestRuns(condition: Condition): Run[] {
 
 /** The share of a measurement's screens that pass stages A and B. */
 export const conformantShare = (row: Measurement) =>
-  row.fullyConformant === null ? null : row.fullyConformant / row.screens
+  row.fullyConformant / row.screens
 
 /**
  * What the server's tokens buy at the latest version: what it adds to the
- * cost of a screen, the share of screens it makes fully conformant, the cost
- * of each screen it rescues (the first over the second), and what one pass of
- * the default tasks costs in each condition.
+ * cost of a screen, the share of screens it makes fully conformant, and what
+ * one pass of the default tasks costs in each condition.
  */
 export function returns() {
   const { none, mcp } = latest()
-  const withServer = conformantShare(mcp)
-  const without = conformantShare(none)
-  if (
-    mcp.costPerScreen === null ||
-    none.costPerScreen === null ||
-    withServer === null ||
-    without === null
-  )
-    return null
+  if (mcp.costPerScreen === null || none.costPerScreen === null) return null
   const extraCost = mcp.costPerScreen - none.costPerScreen
-  const gained = withServer - without
+  const gained = conformantShare(mcp) - conformantShare(none)
   const tasks = latestRuns("mcp")[0].report.summary.tasks
   return {
     version: mcp.version,
     estimated: mcp.estimated,
     extraCost,
     gained,
-    perRescued: gained > 0 ? extraCost / gained : null,
     tasks,
     run: { none: none.costPerScreen * tasks, mcp: mcp.costPerScreen * tasks },
-  }
-}
-
-/**
- * Why the screens built with no context at the latest version are not fully
- * conformant: the lint findings of the failing screens by family, and the
- * screens that fail the other checks.
- */
-export function failures() {
-  const tasks = latestRuns("none").flatMap((run) => run.report.tasks)
-  const failing = tasks.filter((task) => !fullyConformant(task))
-  const families = new Map<string, { screens: number; findings: number }>()
-  for (const task of failing)
-    for (const [family, findings] of Object.entries(
-      task.static?.lintByFamily ?? {}
-    )) {
-      const entry = families.get(family) ?? { screens: 0, findings: 0 }
-      families.set(family, {
-        screens: entry.screens + 1,
-        findings: entry.findings + findings,
-      })
-    }
-  return {
-    screens: tasks.length,
-    failing: failing.length,
-    compile: failing.filter((task) => !task.static?.compiles).length,
-    lint: failing.filter((task) => !task.static?.lint).length,
-    a11y: failing.filter(
-      (task) => !(task.a11y?.renders && task.a11y.axe && task.a11y.focus)
-    ).length,
-    families: [...families.entries()]
-      .map(([family, counts]) => ({ family, ...counts }))
-      .sort((a, b) => b.screens - a.screens || b.findings - a.findings),
   }
 }
 
@@ -449,88 +397,6 @@ export function cheapestRescue() {
     /** How many tasks the server takes from no pass to every pass. */
     rescued: rescued.length,
   }
-}
-
-// ── The build skill ────────────────────────────────────────────────────────
-
-const BUILD_SKILL = "dsaireadable-build"
-
-/** One condition of the build skill's comparison. */
-export interface SkillMeasurement {
-  /** `new`: the default tasks; `edits`: the edits of a suite. */
-  screens: "new" | "edits"
-  version: string
-  /** The skills the agent was given; none for the server alone. */
-  skills: string[]
-  passes: number
-  tasks: number
-  conformance: number
-  fullyConformant: number
-  medianInputTokens: number
-}
-
-function skillMeasurement(
-  screens: SkillMeasurement["screens"],
-  group: Run[],
-  keep: (task: ReportTask) => boolean
-): SkillMeasurement {
-  const tasks = group.flatMap((run) => run.report.tasks).filter(keep)
-  const share = (passes: (task: ReportTask) => boolean) =>
-    tasks.filter(passes).length / tasks.length
-  return {
-    screens,
-    version: group[0].version,
-    skills: group[0].skills,
-    passes: group.length,
-    tasks: tasks.length,
-    // The harness's score: its report's for whole runs, and over the edits
-    // alone the same mean of stages A and B.
-    conformance:
-      screens === "new"
-        ? mean(group.map((run) => run.report.summary.conformance))
-        : (share((task) => Boolean(task.static?.compiles && task.static.lint)) +
-            share((task) =>
-              Boolean(task.a11y?.renders && task.a11y.axe && task.a11y.focus)
-            )) /
-          2,
-    fullyConformant: tasks.filter(fullyConformant).length,
-    medianInputTokens: median(
-      tasks.flatMap((task) => (task.metrics ? [task.metrics.inputTokens] : []))
-    ),
-  }
-}
-
-/**
- * The runs whose agent had the build skill against the server alone, built
- * from the same version: on the default tasks, and on a suite's edits of an
- * existing screen. Each pair with the skill first.
- */
-export function buildSkill(): [SkillMeasurement, SkillMeasurement][] {
-  const all = runs().filter((run) => run.condition === "mcp")
-  const edits = new Set(
-    evalTasks()
-      .tasks.filter((task) => task.base)
-      .map((task) => task.id)
-  )
-  const versions = [...new Set(all.map((run) => run.version))].sort(
-    compareVersions
-  )
-  const pairs: [SkillMeasurement, SkillMeasurement][] = []
-  for (const screens of ["new", "edits"] as const)
-    for (const version of versions) {
-      const group = all.filter(
-        (run) => run.version === version && run.suite === (screens === "edits")
-      )
-      const keep = (task: ReportTask) => screens === "new" || edits.has(task.id)
-      const withSkill = group.filter((run) => run.skills.includes(BUILD_SKILL))
-      const alone = group.filter((run) => run.skills.length === 0)
-      if (withSkill.length && alone.length)
-        pairs.push([
-          skillMeasurement(screens, withSkill, keep),
-          skillMeasurement(screens, alone, keep),
-        ])
-    }
-  return pairs
 }
 
 // ── What's next ────────────────────────────────────────────────────────────

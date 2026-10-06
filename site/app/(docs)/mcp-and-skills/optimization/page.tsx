@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible"
 import { mcpSkillsNav } from "@/site/lib/nav"
 import { sectionDoc } from "@/site/mcp-skills-docs/data"
+import { DisclosureTrigger } from "@/site/mcp-skills-docs/disclosure"
 import { DocParts } from "@/site/mcp-skills-docs/doc-parts"
 import {
-  BuildSkill,
-  Failures,
   Headline,
   Next,
   Rescue,
@@ -13,10 +13,7 @@ import {
   Versions,
 } from "@/site/mcp-skills-docs/optimization"
 import {
-  buildSkill,
   cheapestRescue,
-  failures,
-  latest,
   measurements,
   nextLever,
 } from "@/site/mcp-skills-docs/optimization-data"
@@ -27,7 +24,7 @@ import { PageHeader } from "@/site/ui/page-header"
 export const metadata: Metadata = {
   title: "Optimization",
   description:
-    "What the MCP server costs and what it buys: conformance, input tokens and dollars per screen with and without it, version by version, the levers that moved them, and the skill that cost more.",
+    "What the MCP server costs and what it buys: conformance, input tokens and dollars per screen with and without it, version by version, and the levers that moved them.",
 }
 
 export default function OptimizationPage() {
@@ -54,9 +51,6 @@ export default function OptimizationPage() {
         blocks={{
           versions: <Versions rows={measurements()} />,
           returns: <Returns />,
-          failures: (
-            <Failures data={failures()} version={latest().none.version} />
-          ),
           rescue: rescue ? (
             <Rescue data={rescue} />
           ) : (
@@ -65,7 +59,14 @@ export default function OptimizationPage() {
               with the server.
             </p>
           ),
-          "build-skill": <BuildSkill pairs={buildSkill()} />,
+          levers: (table) => (
+            <Collapsible className="flex min-w-0 flex-col gap-2">
+              <DisclosureTrigger>Changes by release</DisclosureTrigger>
+              <CollapsibleContent className="min-w-0">
+                {table}
+              </CollapsibleContent>
+            </Collapsible>
+          ),
           next: next ? (
             <Next data={next} />
           ) : (

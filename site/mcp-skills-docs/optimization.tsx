@@ -14,12 +14,10 @@ import {
   type cheapestRescue,
   type Condition,
   conformantShare,
-  type failures,
   latest,
   type Measurement,
   type nextLever,
   returns,
-  type SkillMeasurement,
 } from "@/site/mcp-skills-docs/optimization-data"
 import {
   type VersionBar,
@@ -90,19 +88,15 @@ function Value({ children, note }: { children: ReactNode; note?: ReactNode }) {
 
 // ── The header ─────────────────────────────────────────────────────────────
 
-/** The latest version, with and without the server, and what a rescued screen costs. */
+/** The latest version, with and without the server. */
 export function Headline() {
   const { none, mcp } = latest()
-  const gain = returns()
   const at = `at ${mcp.version}`
   const figures: Figure[] = [
     {
       label: "Conformance with the server",
-      value: mcp.conformance === null ? "—" : percent(mcp.conformance),
-      detail:
-        none.conformance === null
-          ? at
-          : `${percent(none.conformance)} with no context, ${at}`,
+      value: percent(mcp.conformance),
+      detail: `${percent(none.conformance)} with no context, ${at}`,
     },
     {
       label: "Median input tokens per screen",
@@ -121,13 +115,7 @@ export function Headline() {
           : `${usd(none.costPerScreen, none.estimated)} with no context`,
     },
   ]
-  if (gain?.perRescued != null)
-    figures.push({
-      label: "Cost per screen the server rescues",
-      value: usd(gain.perRescued, gain.estimated, 2),
-      detail: `${usd(gain.extraCost, gain.estimated)} more per screen, for ${points(gain.gained)} points more of them fully conformant`,
-    })
-  return <Figures figures={figures} className="grid-cols-2 lg:grid-cols-4" />
+  return <Figures figures={figures} className="sm:grid-cols-3" />
 }
 
 // ── No context against the server ──────────────────────────────────────────
@@ -164,11 +152,9 @@ export function Versions({ rows }: { rows: Measurement[] }) {
     {
       title: "Conformance",
       unit: "percent" as const,
-      data: bars(rows, (row) =>
-        row.conformance === null
-          ? null
-          : Math.round(row.conformance * 1000) / 10
-      ).map((bar) => ({ ...bar, estimated: false })),
+      data: bars(rows, (row) => Math.round(row.conformance * 1000) / 10).map(
+        (bar) => ({ ...bar, estimated: false })
+      ),
     },
     {
       title: "Median input tokens per screen",
@@ -226,7 +212,6 @@ export function Versions({ rows }: { rows: Measurement[] }) {
         <TableBody>
           {rows.map((row) => {
             const before = previous(row)
-            const share = conformantShare(row)
             const since = (from: number | null | undefined, to: number) =>
               before && from
                 ? `${change(from, to)} from ${before.version}`
@@ -240,18 +225,12 @@ export function Versions({ rows }: { rows: Measurement[] }) {
                 </TableCell>
                 <TableCell>{CONDITION[row.condition]}</TableCell>
                 <TableCell>
-                  <Value>
-                    {row.conformance === null ? "—" : percent(row.conformance)}
-                  </Value>
+                  <Value>{percent(row.conformance)}</Value>
                 </TableCell>
                 <TableCell className="whitespace-normal">
-                  {share === null ? (
-                    <Value>—</Value>
-                  ) : (
-                    <Value note={`${row.fullyConformant} of ${row.screens}`}>
-                      {percent(share)}
-                    </Value>
-                  )}
+                  <Value note={`${row.fullyConformant} of ${row.screens}`}>
+                    {percent(conformantShare(row))}
+                  </Value>
                 </TableCell>
                 <TableCell className="whitespace-normal">
                   <Value
@@ -289,8 +268,7 @@ export function Versions({ rows }: { rows: Measurement[] }) {
 export function Returns() {
   const gain = returns()
   const { none, mcp } = latest()
-  const [withServer, without] = [conformantShare(mcp), conformantShare(none)]
-  if (!gain || withServer === null || without === null)
+  if (!gain)
     return (
       <p className="text-sm text-muted-foreground">
         No cost is recorded at the latest version.
@@ -308,7 +286,7 @@ export function Returns() {
         {
           label: "Points of fully conformant screens",
           value: `+${points(gain.gained)}`,
-          detail: `${percent(withServer)} with the server, ${percent(without)} with no context`,
+          detail: `${percent(conformantShare(mcp))} with the server, ${percent(conformantShare(none))} with no context`,
         },
         {
           label: `${gain.tasks} screens with the server`,
@@ -322,62 +300,6 @@ export function Returns() {
         },
       ]}
     />
-  )
-}
-
-/** What the harness calls each lint family (evals/lib/static.ts). */
-const FAMILY: Record<string, string> = {
-  "native-elements": "Native elements",
-  "off-system-classes": "Off-system classes and raw values",
-  "external-imports": "External UI imports",
-  "inline-svg": "Inline SVG",
-  deprecated: "Deprecations",
-  parse: "Parse errors",
-}
-
-/** Why the screens built with no context fail, by lint family. */
-export function Failures({
-  data,
-  version,
-}: {
-  data: ReturnType<typeof failures>
-  version: string
-}) {
-  const others = [
-    data.compile ? `${data.compile} do not compile` : null,
-    `${data.lint} fail the lint`,
-    data.a11y ? `${data.a11y} fail axe or the focus check` : null,
-  ].filter(Boolean)
-  return (
-    <div className="flex min-w-0 flex-col gap-4">
-      <p className="text-sm leading-relaxed">
-        At {version}, {data.failing} of the {data.screens} screens built with no
-        context are not fully conformant: {others.join(", ")}, some of them
-        both.
-      </p>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Lint family</TableHead>
-            <TableHead>Screens</TableHead>
-            <TableHead>Findings</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.families.map((entry) => (
-            <TableRow key={entry.family}>
-              <TableCell>{FAMILY[entry.family] ?? entry.family}</TableCell>
-              <TableCell className="font-mono tabular-nums">
-                {entry.screens}
-              </TableCell>
-              <TableCell className="font-mono tabular-nums">
-                {entry.findings}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
   )
 }
 
@@ -423,77 +345,6 @@ export function Rescue({
         {data.prompt}
       </blockquote>
     </div>
-  )
-}
-
-// ── The build skill ────────────────────────────────────────────────────────
-
-/** The build skill against the server alone, pair by pair. */
-export function BuildSkill({
-  pairs,
-}: {
-  pairs: [SkillMeasurement, SkillMeasurement][]
-}) {
-  return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Screens</TableHead>
-          <TableHead>Version</TableHead>
-          <TableHead>Condition</TableHead>
-          <TableHead>Conformance</TableHead>
-          <TableHead>Fully conformant</TableHead>
-          <TableHead>Median input tokens</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {pairs.flatMap(([skill, alone]) =>
-          [skill, alone].map((row) => (
-            <TableRow
-              key={`${row.screens}:${row.version}:${row.skills.join()}`}
-            >
-              <TableCell className="whitespace-normal">
-                <Value note={row.passes > 1 ? `${row.passes} passes` : null}>
-                  {row.screens === "new" ? "New" : "Edits"}
-                </Value>
-              </TableCell>
-              <TableCell className="font-mono">{row.version}</TableCell>
-              <TableCell className="min-w-44 whitespace-normal">
-                {row.skills.length ? (
-                  <span className="flex flex-col gap-0.5">
-                    <span>MCP and skills</span>
-                    <span className="text-muted-foreground">
-                      {row.skills.join(", ")}
-                    </span>
-                  </span>
-                ) : (
-                  "MCP alone"
-                )}
-              </TableCell>
-              <TableCell>
-                <Value>{percent(row.conformance)}</Value>
-              </TableCell>
-              <TableCell>
-                <Value>
-                  {row.fullyConformant} of {row.tasks}
-                </Value>
-              </TableCell>
-              <TableCell className="whitespace-normal">
-                <Value
-                  note={
-                    row === skill
-                      ? `${change(alone.medianInputTokens, row.medianInputTokens)} against the server alone`
-                      : null
-                  }
-                >
-                  {number(row.medianInputTokens)}
-                </Value>
-              </TableCell>
-            </TableRow>
-          ))
-        )}
-      </TableBody>
-    </Table>
   )
 }
 
