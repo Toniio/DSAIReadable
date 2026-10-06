@@ -50,7 +50,7 @@ import {
   type TaskReport,
 } from "./lib/report"
 import { scoreStatic } from "./lib/static"
-import { addResults, readStream, toolResults } from "./lib/stream"
+import { addResults, readStream, timeline, toolResults } from "./lib/stream"
 import {
   designSystemImports,
   goldScreen,
@@ -115,15 +115,18 @@ function readRunFile(dir: string): RunFile | undefined {
 /**
  * The metrics of the session that wrote a screen, `<dir>/<task>.metrics.json`.
  * Metrics written before the tools' results were measured get them from the
- * session's stream, `<dir>/<task>.jsonl`, when it is there.
+ * session's stream, `<dir>/<task>.jsonl`, when it is there; so do the turns.
  */
 function replayMetrics(dir: string, id: string) {
   const file = resolve(dir, `${id}.metrics.json`)
   if (!existsSync(file)) return undefined
   const metrics = JSON.parse(readFileSync(file, "utf-8")) as GenerationMetrics
   const stream = resolve(dir, `${id}.jsonl`)
-  if (!metrics.results && existsSync(stream))
-    metrics.results = toolResults(readStream(readFileSync(stream, "utf-8")))
+  if ((!metrics.results || !metrics.timeline) && existsSync(stream)) {
+    const turns = readStream(readFileSync(stream, "utf-8"))
+    metrics.results ??= toolResults(turns)
+    metrics.timeline ??= timeline(turns)
+  }
   return metrics
 }
 

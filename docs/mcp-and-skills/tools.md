@@ -12,7 +12,7 @@ A prompt opens a task on the server's workflow: the tools to call first, then th
 
 An agent that builds a screen asks the same questions in the same order: what the design system holds, how a component is used, which rules apply, which page pattern fits the task, which words to write, whether its code is right, and what changed since the version it knows. Each tool answers one of them. Depth goes through parameters, not through more tools.
 
-**Every definition is sent with every request.** A client sends the name, description and input schema of each tool on every turn, whether the agent calls it or not. [#136](https://github.com/Toniio/DSAIReadable/pull/136) cut them from 10,386 to 8,315 characters, with the same facts.
+**Every definition is sent with every request.** A client sends the name, description and input schema of each tool on every turn, whether the agent calls it or not. [#136](https://github.com/Toniio/DSAIReadable/pull/136) cut them from about 4,600 to about 3,900 tokens per turn, with the same facts.
 
 ## DS Core
 

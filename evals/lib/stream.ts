@@ -176,6 +176,27 @@ export function toolResults(turns: StreamTurn[]): ToolResults {
   return results
 }
 
+/** What a session did, turn by turn: the input tokens each turn sent, and the calls it made at once. */
+export interface TimelineTurn {
+  context: number
+  calls: { tool: string; format?: string; chars?: number }[]
+}
+
+/** The calls of each turn in the order the agent wrote them, without their inputs: the history is public. */
+export function timeline(turns: StreamTurn[]): TimelineTurn[] {
+  return turns.map(({ context, calls }) => ({
+    context,
+    calls: calls.map(({ tool, input, resultChars }) => {
+      const format = input.response_format
+      return {
+        tool,
+        ...(typeof format === "string" && { format }),
+        ...(resultChars !== undefined && { chars: resultChars }),
+      }
+    }),
+  }))
+}
+
 /** Adds the volumes of `more` into `into`. */
 export function addResults(into: ToolResults, more: ToolResults) {
   for (const [key, { calls, chars }] of Object.entries(more)) {
