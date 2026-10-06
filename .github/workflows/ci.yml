@@ -244,10 +244,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
       - run: npm ci
-      # The specs' examples copied into site/generated/ match the specs,
+      # The specs' examples copied into site/generated/ match the specs and
+      # the MCP answers recorded there match the server,
       # every file of the site passes the lint a consuming project runs, and
       # every focus ring the site composes has a solid part (focus.md). In
-      # the first shard only: it adds about 7 s to that shard, where a job of
+      # the first shard only: it adds about 10 s to that shard, where a job of
       # its own would spend about 20 s on npm ci for it.
       - if: matrix.shard == 1
         run: npm run site:check

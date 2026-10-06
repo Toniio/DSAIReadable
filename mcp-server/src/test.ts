@@ -2511,6 +2511,38 @@ for (const [tool, c] of Object.entries(TOOL_CASES)) {
   }
 }
 
+// An exact term wins over a term that contains it: "token" is also inside
+// "component-token", listed first, which answered instead. A partial match
+// answers only when no term is exact; both ignore case.
+const glossary = readContext<{ term: string }[]>("glossary.json")
+const shadowedTerms = glossary
+  .map((e) => e.term)
+  .filter((term) =>
+    glossary.some(
+      (other) =>
+        other.term !== term &&
+        other.term.toLowerCase().includes(term.toLowerCase())
+    )
+  )
+const glossaryLookups: Array<[asked: string, expected: string]> = [
+  ...shadowedTerms.map((term): [string, string] => [term, term]),
+  ["TOKEN", "token"],
+  ["dtcg", "DTCG"],
+  ["prim", "primitive"],
+]
+const wrongLookups: string[] = []
+for (const [asked, expected] of glossaryLookups) {
+  const { isError, text } = await callTool("dsaireadable_get_glossary", {
+    term: asked,
+  })
+  const served = isError ? "not found" : JSON.parse(text).term
+  if (served !== expected) wrongLookups.push(`"${asked}" → ${served}`)
+}
+assert(
+  shadowedTerms.includes("token") && wrongLookups.length === 0,
+  `dsaireadable_get_glossary: the exact term wins over a partial match, case-insensitive (${wrongLookups.join(", ") || `${glossaryLookups.length} lookups`})`
+)
+
 // A missing cache must fail the call and say how to rebuild it — never
 // answer as an empty design system. dsaireadable_validate_screen and dsaireadable_validate_code read no cache.
 const emptyContextDir = mkdtempSync(

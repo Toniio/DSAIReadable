@@ -1,0 +1,82 @@
+{
+  "prompts": [
+    {
+      "name": "build_screen",
+      "description": "Generate a complete React screen using only DS components and tokens",
+      "arguments": [
+        {
+          "name": "task",
+          "description": "Description of the screen to build",
+          "required": true
+        },
+        {
+          "name": "context",
+          "description": "Additional context about the screen",
+          "required": false
+        },
+        { "name": "device", "description": "Target device", "required": true },
+        { "name": "mode", "description": "Color mode", "required": true }
+      ]
+    },
+    {
+      "name": "revise_design",
+      "description": "Revise a specific component or element in the current design",
+      "arguments": [
+        {
+          "name": "target",
+          "description": "The component or element to change",
+          "required": true
+        },
+        {
+          "name": "change",
+          "description": "What to change about it",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "generate_idea",
+      "description": "Generate a screen/feature idea using DS components and patterns",
+      "arguments": [
+        {
+          "name": "experience",
+          "description": "Type of experience (e.g. onboarding, dashboard, form)",
+          "required": false
+        },
+        {
+          "name": "industry",
+          "description": "Industry context (e.g. energy, utilities)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "suggest_next_steps",
+      "description": "Suggest next steps or screens based on the current screen context",
+      "arguments": [
+        {
+          "name": "current_screen",
+          "description": "Description of the current screen",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "showcase_components",
+      "description": "Generate a showcase/storybook-like view of DS components",
+      "arguments": [
+        {
+          "name": "category",
+          "description": "Component category to showcase (or all if omitted)",
+          "required": false
+        },
+        {
+          "name": "device",
+          "description": "Target device for the showcase",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "buildScreenBudget": "4 calls + 1 per component you retain"
+}
