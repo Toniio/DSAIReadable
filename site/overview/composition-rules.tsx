@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { componentByName } from "@/site/lib/components"
 import type { CompositionRule } from "@/site/overview/data"
-import { MoreRules } from "@/site/overview/more-rules"
+import { ShowMore } from "@/site/overview/show-more"
 import { LINK } from "@/site/ui/link"
 import { InlineMarkdown } from "@/site/ui/markdown"
 
@@ -59,13 +59,17 @@ export function CompositionRules({ rules }: { rules: CompositionRule[] }) {
         ))}
       </ol>
       {rest.length > 0 ? (
-        <MoreRules ids={rest.map((rule) => rule.id)}>
+        <ShowMore
+          count={rest.length}
+          noun="rules"
+          ids={rest.map((rule) => rule.id)}
+        >
           <ol start={FIRST + 1} className="flex flex-col">
             {rest.map((rule) => (
               <Rule key={rule.id} rule={rule} />
             ))}
           </ol>
-        </MoreRules>
+        </ShowMore>
       ) : null}
     </div>
   )

@@ -25,6 +25,7 @@ import {
 } from "@/site/overview/data"
 import { CompositionRules } from "@/site/overview/composition-rules"
 import { GetStarted } from "@/site/overview/get-started"
+import { Glossary } from "@/site/overview/glossary"
 import { OverviewFrame } from "@/site/overview/overview-frame"
 import { Rules } from "@/site/overview/rules"
 import { DocSection } from "@/site/ui/doc-section"
@@ -59,7 +60,6 @@ const SECTION_LINES: Record<string, string> = {
 
 export default function OverviewPage() {
   const facts = sectionFacts()
-  const terms = glossary()
 
   return (
     <OverviewFrame toc={TOC}>
@@ -201,16 +201,7 @@ export default function OverviewPage() {
           </>
         }
       >
-        <dl className="grid gap-x-8 gap-y-4 border-t pt-4 md:grid-cols-2">
-          {terms.map((entry) => (
-            <div key={entry.term} className="flex flex-col gap-1">
-              <dt className="font-mono text-sm font-medium">{entry.term}</dt>
-              <dd className="text-sm leading-relaxed text-muted-foreground">
-                <InlineMarkdown>{entry.definition}</InlineMarkdown>
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <Glossary terms={glossary()} />
         <p className="text-xs text-muted-foreground">
           <Link
             href={sourceUrl("design-system.index.json")}

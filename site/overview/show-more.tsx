@@ -7,15 +7,23 @@ import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible"
 import { DisclosureTrigger } from "@/site/mcp-skills-docs/disclosure"
 
 /**
- * The composition rules past the first few, closed at first. A spec links to
- * a rule by its anchor (`/#rule-21`): when the address names one of these,
- * the list opens and the page jumps to it, which a closed list cannot do.
+ * The entries of an Overview list past the first few, closed at first. When
+ * they carry anchors a spec links to (a composition rule, `/#rule-21`) and
+ * the address names one of them, the list opens and the page jumps to it,
+ * which a closed list cannot do.
  */
-export function MoreRules({
-  ids,
+export function ShowMore({
+  count,
+  noun,
+  ids = [],
   children,
 }: {
-  ids: string[]
+  /** How many entries the list hides. */
+  count: number
+  /** What an entry is, in the plural: "rules", "terms". */
+  noun: string
+  /** The anchors of the hidden entries, if they have any. */
+  ids?: string[]
   children: ReactNode
 }) {
   const [open, setOpen] = useState(false)
@@ -49,7 +57,7 @@ export function MoreRules({
     >
       <CollapsibleContent>{children}</CollapsibleContent>
       <DisclosureTrigger>
-        {open ? "Show fewer rules" : `Show ${ids.length} more rules`}
+        {open ? `Show fewer ${noun}` : `Show ${count} more ${noun}`}
       </DisclosureTrigger>
     </Collapsible>
   )
