@@ -34,4 +34,4 @@ Started inside a project, the server also serves that project's
 `design/patterns/*.md` beside the design system's page patterns.
 
 The tools, resources, prompts and the HTTP mode are documented in the
-[repository README](https://github.com/Toniio/DSAIReadable/blob/v0.3.0/README.md#mcp-server).
+[repository README](https://github.com/Toniio/DSAIReadable/blob/v0.3.1/README.md#mcp-server).

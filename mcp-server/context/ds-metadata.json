@@ -1,8 +1,8 @@
 {
   "name": "DSAIReadable",
   "description": "Design System AI-Readable",
-  "design_system_version": "0.3.0",
-  "mcp_server_version": "0.3.0",
+  "design_system_version": "0.3.1",
+  "mcp_server_version": "0.3.1",
   "registry_source": {
     "repository": "Toniio/DSAIReadable",
     "registry": "dsaireadable",
