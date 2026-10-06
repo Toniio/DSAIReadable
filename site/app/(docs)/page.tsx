@@ -1,9 +1,5 @@
 import Link from "next/link"
-import {
-  ArrowRightIcon,
-  ArrowUpRightIcon,
-  GithubLogoIcon,
-} from "@phosphor-icons/react/ssr"
+import { ArrowRightIcon, GithubLogoIcon } from "@phosphor-icons/react/ssr"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -11,7 +7,7 @@ import { headingVariants } from "@/components/ui/heading"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { cn } from "@/lib/utils"
 import { SECTIONS } from "@/site/lib/nav"
-import { GITHUB_URL, META, sourceUrl, VERSION } from "@/site/lib/site"
+import { GITHUB_URL, META, VERSION } from "@/site/lib/site"
 import {
   compositionRules,
   divergences,
@@ -29,7 +25,6 @@ import { Glossary } from "@/site/overview/glossary"
 import { OverviewFrame } from "@/site/overview/overview-frame"
 import { Rules } from "@/site/overview/rules"
 import { DocSection } from "@/site/ui/doc-section"
-import { LINK } from "@/site/ui/link"
 import { InlineMarkdown } from "@/site/ui/markdown"
 import { PageHeader } from "@/site/ui/page-header"
 
@@ -202,16 +197,6 @@ export default function OverviewPage() {
         }
       >
         <Glossary terms={glossary()} />
-        <p className="text-xs text-muted-foreground">
-          <Link
-            href={sourceUrl("design-system.index.json")}
-            className={cn(LINK, "inline-flex items-center gap-1")}
-          >
-            design-system.index.json
-            <ArrowUpRightIcon aria-hidden="true" />
-          </Link>{" "}
-          holds the source of most terms.
-        </p>
       </DocSection>
     </OverviewFrame>
   )
