@@ -25,6 +25,7 @@ Every link to a file points to the release tag `v0.3.0`, the published version, 
 ## MCP server and skills
 
 - [MCP & Skills: How it works](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.0/docs/mcp-and-skills/how-it-works.md): From sources to answers; A session, tool by tool; The UI guard skill
+- [MCP & Skills: Optimization](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.0/docs/mcp-and-skills/optimization.md): No context against the server; What the tokens buy; Five levers; What's next
 - [MCP & Skills: Tools](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.0/docs/mcp-and-skills/tools.md): Prompts; Why these tools; DS Core; Lifecycle; Patterns; Dataviz; UX Writing; Admin; Resources
 
 ## Foundations
