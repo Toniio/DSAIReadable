@@ -1,5 +1,4 @@
 {
-  "definitionChars": 8319,
   "tools": [
     {
       "name": "dsaireadable_get_design_system_overview",
@@ -12,7 +11,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 237,
       "answers": [
         {
           "input": {},
@@ -51,7 +49,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 565,
       "answers": [
         {
           "input": { "category": "Forms" },
@@ -87,7 +84,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 917,
       "answers": [
         {
           "format": "concise",
@@ -148,7 +144,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 571,
       "answers": [
         {
           "input": { "category": "radius" },
@@ -178,7 +173,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 389,
       "answers": [
         {
           "input": {},
@@ -218,7 +212,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 627,
       "answers": [
         {
           "input": { "limit": 3 },
@@ -238,7 +231,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 196,
       "answers": [
         {
           "input": {},
@@ -258,7 +250,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 178,
       "answers": [
         {
           "input": {},
@@ -293,19 +284,18 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 730,
       "answers": [
         {
           "format": "concise",
-          "input": { "category": "focus" },
-          "text": "{\"category\":\"focus\",\"rules\":[{\"rule\":\"**Never hard-code a ring width on a focus state** — `ring-1`, `ring-2` and `ring-3` are pixels, forbidden by the repository's first rule. The linter rejects them under any `focus`, `focus-visible`, `focus-within`, `data-[active=true]`, `data-[focused=true]` or `aria-invalid` prefix.\",\"source\":\"focus.md\"},{\"rule\":\"**Never `outline-none`** — use `FOCUS_OUTLINE_RESET` (`outline-hidden`). In forced-colors mode, `box-shadow`s are not painted: `outline-none` leaves the element with no indicator at all, whereas `outline-hidden` keeps a transparent outline that the mode makes visible. Both set `--tw-outline-style` to none, which silently disabled the `outline-1` of ScrollArea and NavigationMenu: an outline drawn at focus after a reset takes `outline-solid` (rule 6).\",\"source\":\"focus.md\"},{\"rule\":\"**The invalid state colors the ring, never sizes it** — a control's `aria-invalid:` utilities set the border and the ring color; the width comes from the focus state only. A ring always on for an invalid field looks the same with and without focus, and keyboard focus disappears on it (WCAG 2.4.7) — caught by `tests/examples.test.tsx`. A group that wraps several controls (InputOTP, the Combobox chips) may keep a ring on `has-aria-invalid:`: focus shows on the control inside it.\",\"source\":\"focus.md\"},{\"rule\":\"**A bare `ring-0` is a legitimate removal** — it is how a wrapper such as InputGroup takes over the indicator of its inner control, and how a choice card (a `FieldLabel` that wraps a `Field`) takes over the ring of the Checkbox, RadioGroupItem or Switch inside it: one ring, the card's, and the control keeps its resting border. Under a focus state (`focus-visible:ring-0`) it removes the indicator, and counts as a reset under rule 5. Scope it to the wrapper that draws the ring (`group-has-[>[data-slot=field]]/field-label:`): a control in a plain `FieldLabel` keeps its own.\",\"source\":\"focus.md\"},{\"rule\":\"**Hiding the outline requires drawing a ring — checked occurrence by occurrence, and target by target.** The ring must appear in the _same_ class string, on the _same_ target: a reset written under `**:`, `*:`, `[&_x]:` or `before:` hides the indicator of other nodes, and only a ring under the same variant answers it. A component that neutralizes the outline in ten places and draws a ring in one does not meet the rule, and neither did NavigationMenu, whose `**:data-[slot=navigation-menu-link]:focus:outline-none` hid every link's ring while the menu drew its own.\",\"source\":\"focus.md\"},{\"rule\":\"**Every indicator has a solid part at 3:1.** The 2px halo is painted at an alpha (`ring-ring/50`, `ring-destructive/20`): 2.97:1 on the light card, and 1.4:1 for the destructive one, never enough on its own ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast) read for focus indicators). The solid part is the element's border when it has one (`focus-visible:border-ring`). Without a border, `focus-visible:border-ring` paints nothing: the element adds a 1px outline, `focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring` (Toggle's default variant, MenubarTrigger, NavigationMenu's trigger and link, TabsContent, the ScrollArea viewport, the Resizable handle, the Slider thumb, a focused Calendar day). `outline-solid` is required: `outline-hidden` sets the outline style to none, and a width alone would draw nothing. A state that keeps its border at focus draws the outline in its own color: an invalid control (`aria-invalid:focus-visible:outline-destructive`) and the destructive variants of Button and Badge (`outline-destructive`). An element that draws no focus style at all, a link or an unstyled trigger, keeps the browser's own outline, colored `outline-ring` at full alpha by the base layer of `styles/globals.css`. `tests/focus.ts` walks every tab stop of every spec example, light and dark, and fails one whose indicator has no part at 3:1, the color composited over what is under it.\",\"source\":\"focus.md\"}],\"composition_rules\":[],\"critical_rules\":[{\"id\":\"tailwind-tokens\",\"severity\":\"critical\",\"title\":\"Always use standard Tailwind CSS classes mapped to DS tokens\"},{\"id\":\"use-ds-components\",\"severity\":\"critical\",\"title\":\"ALWAYS use DS React components — NEVER use raw HTML elements\"}]}",
-          "chars": 4350
+          "input": { "category": "Button" },
+          "text": "{\"category\":\"Button\",\"rules\":[\"**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look\",\"**MUST NOT** — place more than 2 `variant=\\\"default\\\"` (primary) buttons in the same view\",\"**MUST NOT** — convey a state through color alone: add text or a tooltip\",\"**MUST** — give an `icon-*` button an `aria-label`\",\"**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\\\"true\\\"` on the button\",\"**MUST NOT** — nest a `<button>` inside another, including through `asChild`\"],\"composition_rules\":[{\"id\":\"rule-13\",\"rule\":\"All new components must expose a data-slot attribute on the root element whose value matches the component name (e.g., data-slot='button'). Sub-parts also carry data-slot for CSS targeting.\"}],\"critical_rules\":[{\"id\":\"tailwind-tokens\",\"severity\":\"critical\",\"title\":\"Always use standard Tailwind CSS classes mapped to DS tokens\"},{\"id\":\"use-ds-components\",\"severity\":\"critical\",\"title\":\"ALWAYS use DS React components — NEVER use raw HTML elements\"}]}",
+          "chars": 1068
         },
         {
           "format": "detailed",
-          "input": { "category": "focus", "response_format": "detailed" },
-          "text": "{\"category\":\"focus\",\"rules\":[{\"rule\":\"**Never hard-code a ring width on a focus state** — `ring-1`, `ring-2` and `ring-3` are pixels, forbidden by the repository's first rule. The linter rejects them under any `focus`, `focus-visible`, `focus-within`, `data-[active=true]`, `data-[focused=true]` or `aria-invalid` prefix.\",\"source\":\"focus.md\"},{\"rule\":\"**Never `outline-none`** — use `FOCUS_OUTLINE_RESET` (`outline-hidden`). In forced-colors mode, `box-shadow`s are not painted: `outline-none` leaves the element with no indicator at all, whereas `outline-hidden` keeps a transparent outline that the mode makes visible. Both set `--tw-outline-style` to none, which silently disabled the `outline-1` of ScrollArea and NavigationMenu: an outline drawn at focus after a reset takes `outline-solid` (rule 6).\",\"source\":\"focus.md\"},{\"rule\":\"**The invalid state colors the ring, never sizes it** — a control's `aria-invalid:` utilities set the border and the ring color; the width comes from the focus state only. A ring always on for an invalid field looks the same with and without focus, and keyboard focus disappears on it (WCAG 2.4.7) — caught by `tests/examples.test.tsx`. A group that wraps several controls (InputOTP, the Combobox chips) may keep a ring on `has-aria-invalid:`: focus shows on the control inside it.\",\"source\":\"focus.md\"},{\"rule\":\"**A bare `ring-0` is a legitimate removal** — it is how a wrapper such as InputGroup takes over the indicator of its inner control, and how a choice card (a `FieldLabel` that wraps a `Field`) takes over the ring of the Checkbox, RadioGroupItem or Switch inside it: one ring, the card's, and the control keeps its resting border. Under a focus state (`focus-visible:ring-0`) it removes the indicator, and counts as a reset under rule 5. Scope it to the wrapper that draws the ring (`group-has-[>[data-slot=field]]/field-label:`): a control in a plain `FieldLabel` keeps its own.\",\"source\":\"focus.md\"},{\"rule\":\"**Hiding the outline requires drawing a ring — checked occurrence by occurrence, and target by target.** The ring must appear in the _same_ class string, on the _same_ target: a reset written under `**:`, `*:`, `[&_x]:` or `before:` hides the indicator of other nodes, and only a ring under the same variant answers it. A component that neutralizes the outline in ten places and draws a ring in one does not meet the rule, and neither did NavigationMenu, whose `**:data-[slot=navigation-menu-link]:focus:outline-none` hid every link's ring while the menu drew its own.\",\"source\":\"focus.md\"},{\"rule\":\"**Every indicator has a solid part at 3:1.** The 2px halo is painted at an alpha (`ring-ring/50`, `ring-destructive/20`): 2.97:1 on the light card, and 1.4:1 for the destructive one, never enough on its own ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast) read for focus indicators). The solid part is the element's border when it has one (`focus-visible:border-ring`). Without a border, `focus-visible:border-ring` paints nothing: the element adds a 1px outline, `focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring` (Toggle's default variant, MenubarTrigger, NavigationMenu's trigger and link, TabsContent, the ScrollArea viewport, the Resizable handle, the Slider thumb, a focused Calendar day). `outline-solid` is required: `outline-hidden` sets the outline style to none, and a width alone would draw nothing. A state that keeps its border at focus draws the outline in its own color: an invalid control (`aria-invalid:focus-visible:outline-destructive`) and the destructive variants of Button and Badge (`outline-destructive`). An element that draws no focus style at all, a link or an unstyled trigger, keeps the browser's own outline, colored `outline-ring` at full alpha by the base layer of `styles/globals.css`. `tests/focus.ts` walks every tab stop of every spec example, light and dark, and fails one whose indicator has no part at 3:1, the color composited over what is under it.\",\"source\":\"focus.md\"}],\"composition_rules\":[],\"critical_rules\":[{\"id\":\"tailwind-tokens\",\"severity\":\"critical\",\"title\":\"Always use standard Tailwind CSS classes mapped to DS tokens\",\"description\":[\"ALWAYS use the Tailwind utility classes the design system maps to its tokens.\",\"styles/globals.css imports tokens.css and bridges each token into Tailwind with an @theme inline block: bg-primary reads --color-action-background-default, a semantic token.\",\"Tailwind's default colors, radii, shadows, spacing and type scale are removed: bg-red-500, p-13 or text-7xl generate no CSS, and ESLint refuses them.\",\"Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.\",\"For spacing and sizes, use Tailwind v3's spacing scale, each step read from a space.scale.* token: p-4, gap-1.5, m-2, h-9, w-72. Off-scale steps (p-13, gap-17) do not exist.\",\"For text, use text-xs … text-4xl, font-sans / font-mono / font-heading, font-normal … font-bold, leading-tight … leading-loose, tracking-tight … tracking-widest. Label, FieldLabel and Heading draw their own text style (12px regular, and the size of their level): give them no text-*, font-*, tracking-* or leading-* class.\",\"For state colors on text, use text-success and text-warning, text-destructive for errors.\",\"Every component is square and draws its own corners: add no rounded-* class to one, and keep a surface you draw yourself square too. rounded-full is for a round shape; rounded-xs … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero.\",\"For shadows, use: shadow-xs … shadow-2xl (mapped to --elevation-*).\",\"For a disabled state, use opacity-disabled under its variant: disabled:opacity-disabled.\",\"A class comes first. For a token or a runtime variable that has no class, use Tailwind's shorthand utility-(--variable): w-(--radix-popover-trigger-width), bg-(--color-chart-sequential-3); never a bracket, w-[var(--…)]. An inline style may read a token too, style={{ width: 'var(--sidebar-width)' }}, but never a raw value.\"],\"dont\":[\"bg-[#432dd7] — NEVER use arbitrary hex colors\",\"text-[var(--ds-prim-color-violet-600)] — NEVER reference primitive tokens directly\",\"w-[var(--sidebar-width)] — NEVER bracket a variable: write w-(--sidebar-width)\",\"style={{ padding: '12px' }} — NEVER use a raw value in an inline style\",\"bg-violet-600 — NEVER use Tailwind's default palette: it is removed, use DS semantic classes\",\"p-[1.5rem] — NEVER use arbitrary spacing values, use the spacing scale\",\"p-13 text-7xl font-serif — NEVER: off-scale classes generate no CSS\",\"rounded-[0.625rem] — NEVER use arbitrary radius values\",\"disabled:opacity-50 — NEVER: a disabled state uses opacity-disabled\",\"rounded (without a size) — NEVER: it generates no CSS. A component draws its own corners; use rounded-full for a round shape\",\"rounded-md on a Button, rounded-lg on a Card or rounded-xl on a Dialog — NEVER: the components are square, and a rounded surface among them is the mixed look the system does not have\"]},{\"id\":\"use-ds-components\",\"severity\":\"critical\",\"title\":\"ALWAYS use DS React components — NEVER use raw HTML elements\",\"description\":[\"The design system provides pre-built React components that enforce tokens, accessibility, and visual consistency.\",\"ALWAYS prefer DS components over raw HTML elements. Every visual element should come from @/components/ui/<name>.\"],\"mandatory_mappings\":{\"Content sections / containers\":\"Use <Card>, <CardHeader>, <CardContent>, <CardFooter> — NOT a raw <div> with a border or a shadow (a <div> for layout, flex or grid, is fine)\",\"Titles / headings\":\"Use <Heading> component — NOT raw <h1>, <h2>, <h3>\",\"Buttons / CTAs\":\"Use <Button> component with variant prop — NOT raw <button> or <a> styled as button\",\"Form fields\":\"Use <Input>, <Label>, <Checkbox>, <Select>, <Textarea>, <RadioGroup> — NOT raw <input>\",\"Form groups\":\"Use <Field>, <FieldLabel>, <FieldDescription>, <FieldError> — NOT raw <div> + <label>\",\"Links with icon\":\"Use <Button variant='link'> or <Button variant='ghost'> — NOT raw <a>\",\"Separators\":\"Use <Separator> — NOT raw <hr> or border-b\",\"Loading / empty states\":\"Use <Skeleton>, <Spinner>, <Empty> — NOT custom loading divs\",\"Modals / dialogs\":\"Use <Dialog> or <AlertDialog> — NOT custom overlay divs\",\"Icons\":\"Use @phosphor-icons/react — NOT raw <svg> elements\",\"Navigation\":\"Use <NavigationMenu>, <Breadcrumb>, <Tabs> — NOT raw <nav> + <a>\",\"Tooltips\":\"Use <Tooltip> — NOT title attribute\",\"Lists of items\":\"Use <Item>, <ItemHeader>, <ItemContent> — NOT raw <li> or <div>\",\"Data display\":\"Use <Table>, <Badge>, <Avatar> — NOT custom layouts\",\"Notifications\":\"Use <Alert>, Toaster (sonner) — NOT custom notification divs\"},\"page_structure\":[\"Root container MUST have: className='min-h-screen bg-background text-foreground'\",\"Every page MUST set bg-background and text-foreground on the outermost element\",\"Wrap content sections in <Card> components for visual grouping\",\"Use <Heading> for all titles with proper level (1-4)\",\"All interactive elements MUST be DS components (Button, Input, etc.)\"]}]}",
-          "chars": 9161
+          "input": { "category": "Button", "response_format": "detailed" },
+          "text": "{\"category\":\"Button\",\"rules\":[\"**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look\",\"**MUST NOT** — place more than 2 `variant=\\\"default\\\"` (primary) buttons in the same view\",\"**MUST NOT** — convey a state through color alone: add text or a tooltip\",\"**MUST** — give an `icon-*` button an `aria-label`\",\"**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\\\"true\\\"` on the button\",\"**MUST NOT** — nest a `<button>` inside another, including through `asChild`\"],\"composition_rules\":[{\"id\":\"rule-13\",\"rule\":\"All new components must expose a data-slot attribute on the root element whose value matches the component name (e.g., data-slot='button'). Sub-parts also carry data-slot for CSS targeting.\"}],\"critical_rules\":[{\"id\":\"tailwind-tokens\",\"severity\":\"critical\",\"title\":\"Always use standard Tailwind CSS classes mapped to DS tokens\",\"description\":[\"ALWAYS use the Tailwind utility classes the design system maps to its tokens.\",\"styles/globals.css imports tokens.css and bridges each token into Tailwind with an @theme inline block: bg-primary reads --color-action-background-default, a semantic token.\",\"Tailwind's default colors, radii, shadows, spacing and type scale are removed: bg-red-500, p-13 or text-7xl generate no CSS, and ESLint refuses them.\",\"Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.\",\"For spacing and sizes, use Tailwind v3's spacing scale, each step read from a space.scale.* token: p-4, gap-1.5, m-2, h-9, w-72. Off-scale steps (p-13, gap-17) do not exist.\",\"For text, use text-xs … text-4xl, font-sans / font-mono / font-heading, font-normal … font-bold, leading-tight … leading-loose, tracking-tight … tracking-widest. Label, FieldLabel and Heading draw their own text style (12px regular, and the size of their level): give them no text-*, font-*, tracking-* or leading-* class.\",\"For state colors on text, use text-success and text-warning, text-destructive for errors.\",\"Every component is square and draws its own corners: add no rounded-* class to one, and keep a surface you draw yourself square too. rounded-full is for a round shape; rounded-xs … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero.\",\"For shadows, use: shadow-xs … shadow-2xl (mapped to --elevation-*).\",\"For a disabled state, use opacity-disabled under its variant: disabled:opacity-disabled.\",\"A class comes first. For a token or a runtime variable that has no class, use Tailwind's shorthand utility-(--variable): w-(--radix-popover-trigger-width), bg-(--color-chart-sequential-3); never a bracket, w-[var(--…)]. An inline style may read a token too, style={{ width: 'var(--sidebar-width)' }}, but never a raw value.\"],\"dont\":[\"bg-[#432dd7] — NEVER use arbitrary hex colors\",\"text-[var(--ds-prim-color-violet-600)] — NEVER reference primitive tokens directly\",\"w-[var(--sidebar-width)] — NEVER bracket a variable: write w-(--sidebar-width)\",\"style={{ padding: '12px' }} — NEVER use a raw value in an inline style\",\"bg-violet-600 — NEVER use Tailwind's default palette: it is removed, use DS semantic classes\",\"p-[1.5rem] — NEVER use arbitrary spacing values, use the spacing scale\",\"p-13 text-7xl font-serif — NEVER: off-scale classes generate no CSS\",\"rounded-[0.625rem] — NEVER use arbitrary radius values\",\"disabled:opacity-50 — NEVER: a disabled state uses opacity-disabled\",\"rounded (without a size) — NEVER: it generates no CSS. A component draws its own corners; use rounded-full for a round shape\",\"rounded-md on a Button, rounded-lg on a Card or rounded-xl on a Dialog — NEVER: the components are square, and a rounded surface among them is the mixed look the system does not have\"]},{\"id\":\"use-ds-components\",\"severity\":\"critical\",\"title\":\"ALWAYS use DS React components — NEVER use raw HTML elements\",\"description\":[\"The design system provides pre-built React components that enforce tokens, accessibility, and visual consistency.\",\"ALWAYS prefer DS components over raw HTML elements. Every visual element should come from @/components/ui/<name>.\"],\"mandatory_mappings\":{\"Content sections / containers\":\"Use <Card>, <CardHeader>, <CardContent>, <CardFooter> — NOT a raw <div> with a border or a shadow (a <div> for layout, flex or grid, is fine)\",\"Titles / headings\":\"Use <Heading> component — NOT raw <h1>, <h2>, <h3>\",\"Buttons / CTAs\":\"Use <Button> component with variant prop — NOT raw <button> or <a> styled as button\",\"Form fields\":\"Use <Input>, <Label>, <Checkbox>, <Select>, <Textarea>, <RadioGroup> — NOT raw <input>\",\"Form groups\":\"Use <Field>, <FieldLabel>, <FieldDescription>, <FieldError> — NOT raw <div> + <label>\",\"Links with icon\":\"Use <Button variant='link'> or <Button variant='ghost'> — NOT raw <a>\",\"Separators\":\"Use <Separator> — NOT raw <hr> or border-b\",\"Loading / empty states\":\"Use <Skeleton>, <Spinner>, <Empty> — NOT custom loading divs\",\"Modals / dialogs\":\"Use <Dialog> or <AlertDialog> — NOT custom overlay divs\",\"Icons\":\"Use @phosphor-icons/react — NOT raw <svg> elements\",\"Navigation\":\"Use <NavigationMenu>, <Breadcrumb>, <Tabs> — NOT raw <nav> + <a>\",\"Tooltips\":\"Use <Tooltip> — NOT title attribute\",\"Lists of items\":\"Use <Item>, <ItemHeader>, <ItemContent> — NOT raw <li> or <div>\",\"Data display\":\"Use <Table>, <Badge>, <Avatar> — NOT custom layouts\",\"Notifications\":\"Use <Alert>, Toaster (sonner) — NOT custom notification divs\"},\"page_structure\":[\"Root container MUST have: className='min-h-screen bg-background text-foreground'\",\"Every page MUST set bg-background and text-foreground on the outermost element\",\"Wrap content sections in <Card> components for visual grouping\",\"Use <Heading> for all titles with proper level (1-4)\",\"All interactive elements MUST be DS components (Button, Input, etc.)\"]}]}",
+          "chars": 5879
         }
       ]
     },
@@ -324,7 +314,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 424,
       "answers": [
         {
           "input": { "kind": "task" },
@@ -360,7 +349,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 615,
       "answers": [
         {
           "format": "concise",
@@ -404,7 +392,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 381,
       "answers": [
         {
           "input": { "objective": "evolution" },
@@ -434,7 +421,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 353,
       "answers": [
         {
           "input": { "chart_type": "line" },
@@ -454,7 +440,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 383,
       "answers": [
         {
           "input": {},
@@ -478,7 +463,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 229,
       "answers": [
         {
           "input": { "term": "asChild" },
@@ -507,7 +491,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 299,
       "answers": [
         {
           "input": { "category": "messages" },
@@ -527,7 +510,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 188,
       "answers": [
         {
           "input": {},
@@ -554,7 +536,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 429,
       "answers": [
         {
           "input": {
@@ -586,7 +567,6 @@
         "idempotentHint": true,
         "openWorldHint": false
       },
-      "definitionChars": 588,
       "answers": [
         {
           "input": {

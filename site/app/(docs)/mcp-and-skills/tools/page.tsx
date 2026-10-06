@@ -8,13 +8,11 @@ import {
   ResourceTable,
 } from "@/site/mcp-skills-docs/resources-prompts"
 import { ToolCards } from "@/site/mcp-skills-docs/tool-card"
-import { ToolUsageBlock } from "@/site/mcp-skills-docs/tool-usage"
 import {
   recordedPrompts,
   recordedResources,
   recordedTools,
   toolCategories,
-  toolUsage,
 } from "@/site/mcp-skills-docs/tools-data"
 import { DocsPage } from "@/site/ui/docs-page"
 import { InlineMarkdown } from "@/site/ui/markdown"
@@ -23,16 +21,20 @@ import { PageHeader } from "@/site/ui/page-header"
 export const metadata: Metadata = {
   title: "Tools",
   description:
-    "Every tool of the MCP server with its definition and a real answer, how often agents call each one, and the resources and prompts.",
+    "Every tool of the MCP server with its definition and a real answer, and the resources and prompts.",
 }
 
 export default function ToolsPage() {
   const doc = sectionDoc("tools.md")
-  const { definitionChars, tools } = recordedTools()
+  const { tools } = recordedTools()
   const resources = recordedResources()
   const { prompts, buildScreenBudget } = recordedPrompts()
-  const usage = toolUsage()
   const stats = [
+    {
+      label: "Prompts",
+      value: prompts.length,
+      detail: "A task opened on the server's workflow",
+    },
     {
       label: "Tools",
       value: tools.length,
@@ -42,16 +44,6 @@ export default function ToolsPage() {
       label: "Resources",
       value: resources.length,
       detail: "Attached without a tool call",
-    },
-    {
-      label: "Prompts",
-      value: prompts.length,
-      detail: "A task opened on the server's workflow",
-    },
-    {
-      label: "Tool definitions",
-      value: definitionChars.toLocaleString("en-US"),
-      detail: "Characters sent with every request",
     },
   ]
 
@@ -66,7 +58,7 @@ export default function ToolsPage() {
         title={doc.title}
         lead={<InlineMarkdown from={doc.source}>{doc.lead}</InlineMarkdown>}
       >
-        <dl className="grid grid-cols-2 gap-px border bg-border lg:grid-cols-4">
+        <dl className="grid gap-px border bg-border sm:grid-cols-3">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -87,13 +79,6 @@ export default function ToolsPage() {
       <DocParts
         doc={doc}
         blocks={{
-          usage: usage ? (
-            <ToolUsageBlock usage={usage} />
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              No run with the server is recorded yet.
-            </p>
-          ),
           ...Object.fromEntries(
             toolCategories().map((category) => [
               category.id,

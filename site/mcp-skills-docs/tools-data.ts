@@ -1,9 +1,3 @@
-import {
-  currentRuns,
-  evalRuns,
-  latestRuns,
-  latestVersionRuns,
-} from "@/site/audit-docs/data"
 import { anchor, plain, tables } from "@/site/lib/markdown"
 import { mcpTools } from "@/site/lib/mcp"
 import { readJson, readText } from "@/site/lib/repo"
@@ -11,8 +5,7 @@ import { readJson, readText } from "@/site/lib/repo"
 /**
  * What the Tools page reads at build time: the definitions and answers
  * scripts/build-site-mcp.ts recorded from the server into
- * site/generated/mcp/, the categories of the README's tool table, and the
- * calls the eval harness recorded in evals/history/.
+ * site/generated/mcp/, and the categories of the README's tool table.
  */
 
 const GENERATED = "site/generated/mcp"
@@ -50,8 +43,6 @@ export interface ToolRecord {
     required?: string[]
   }
   annotations: { readOnlyHint?: boolean }
-  /** What a client sends the model for it: its name, description and input schema. */
-  definitionChars: number
   answers: ToolAnswer[]
 }
 
@@ -60,13 +51,8 @@ export interface ToolRecord {
  * missing from the record (or the reverse) fails the build: the record is
  * stale, and `npm run site:mcp` writes it again.
  */
-export function recordedTools(): {
-  definitionChars: number
-  tools: ToolRecord[]
-} {
-  const record = readJson<{ definitionChars: number; tools: ToolRecord[] }>(
-    `${GENERATED}/tools.json`
-  )
+export function recordedTools(): { tools: ToolRecord[] } {
+  const record = readJson<{ tools: ToolRecord[] }>(`${GENERATED}/tools.json`)
   const registered = [...mcpTools()].sort().join()
   const recorded = record.tools
     .map((tool) => tool.name)
@@ -200,67 +186,4 @@ export function recordedPrompts(): {
   buildScreenBudget: string
 } {
   return readJson(`${GENERATED}/prompts.json`)
-}
-
-// ── What the agents called ─────────────────────────────────────────────────
-
-/** One tool's calls over the latest eval runs with the server. */
-interface ToolUsageRow {
-  name: string
-  calls: number
-  /** The characters of all its answers. */
-  chars: number
-}
-
-export interface ToolUsage {
-  version: string
-  model?: string
-  /** The sessions the runs recorded: one per task and pass. */
-  sessions: number
-  rows: ToolUsageRow[]
-}
-
-/**
- * The calls of each tool over the latest runs with the server, every pass of
- * the default tasks pooled, as the How it works page reads its session. A
- * key of the recorded results is `tool` or `tool:format`: both formats count
- * for the tool. Every tool the server serves is listed, those no session
- * called at zero; most called first.
- */
-export function toolUsage(): ToolUsage | undefined {
-  const runs = latestRuns(latestVersionRuns(currentRuns(evalRuns()))).filter(
-    (run) => run.condition === "MCP"
-  )
-  if (!runs.length) return undefined
-  const totals = new Map<string, { calls: number; chars: number }>()
-  for (const run of runs) {
-    const { summary } = readJson<{
-      summary: {
-        generation?: {
-          results?: Record<string, { calls: number; chars: number }>
-        }
-      }
-    }>(`evals/history/${run.file}.json`)
-    for (const [key, { calls, chars }] of Object.entries(
-      summary.generation?.results ?? {}
-    )) {
-      const tool = key.split(":")[0]
-      const total = totals.get(tool) ?? { calls: 0, chars: 0 }
-      totals.set(tool, {
-        calls: total.calls + calls,
-        chars: total.chars + chars,
-      })
-    }
-  }
-  return {
-    version: runs[0].version,
-    model: runs[0].model,
-    sessions: runs.reduce((sum, run) => sum + (run.usage?.sessions ?? 0), 0),
-    rows: recordedTools()
-      .tools.map((tool) => ({
-        name: tool.name,
-        ...(totals.get(tool.name) ?? { calls: 0, chars: 0 }),
-      }))
-      .sort((a, b) => b.calls - a.calls || a.name.localeCompare(b.name)),
-  }
 }

@@ -5,6 +5,7 @@ import {
   CardDescription,
   CardHeader,
 } from "@/components/ui/card"
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible"
 import { Heading } from "@/components/ui/heading"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
@@ -21,6 +22,7 @@ import {
   type ToolAnswer,
   type ToolRecord,
 } from "@/site/mcp-skills-docs/tools-data"
+import { DisclosureTrigger } from "@/site/mcp-skills-docs/disclosure"
 import { CodeBlock } from "@/site/ui/code-block"
 import { CopyButton } from "@/site/ui/copy-button"
 
@@ -92,25 +94,32 @@ function Parameters({ tool }: { tool: ToolRecord }) {
   )
 }
 
-/** The arguments of the example call: a block of code for a multi-line one. */
-function ExampleInput({ input }: { input: Record<string, unknown> }) {
-  const entries = Object.entries(input)
+/** An argument of the example call, by name. */
+type Argument = [name: string, value: unknown]
+
+/** An argument that runs over several lines: a screen's code. */
+const multiline = (entry: Argument): entry is [string, string] =>
+  typeof entry[1] === "string" && entry[1].includes("\n")
+
+/**
+ * The arguments of the example call that fit on a line, shown beside the
+ * trigger; a multi-line one, a screen's code, opens with the answer.
+ */
+function ExampleInput({ entries }: { entries: Argument[] }) {
+  const inline = entries.filter((entry) => !multiline(entry))
   if (!entries.length)
     return <p className="text-sm text-muted-foreground">No arguments.</p>
+  if (!inline.length) return null
   return (
     <div className="flex min-w-0 flex-col gap-2">
-      {entries.map(([name, value]) =>
-        typeof value === "string" && value.includes("\n") ? (
-          <CodeBlock key={name} code={value} language="tsx" title={name} />
-        ) : (
-          <code
-            key={name}
-            className="w-fit bg-muted px-2 py-1 font-mono text-xs break-all"
-          >
-            {name}: {JSON.stringify(value)}
-          </code>
-        )
-      )}
+      {inline.map(([name, value]) => (
+        <code
+          key={name}
+          className="w-fit bg-muted px-2 py-1 font-mono text-xs break-all"
+        >
+          {name}: {JSON.stringify(value)}
+        </code>
+      ))}
     </div>
   )
 }
@@ -160,16 +169,15 @@ function Answer({ tool, answer }: { tool: string; answer: ToolAnswer }) {
 
 /**
  * A tool as an agent meets it: its definition, with its parameters and its
- * behaviors, then what it answered to an example input. The concise and the
- * detailed answer of a tool that takes `response_format` sit side by side.
+ * behaviors, then an example call, whose answer opens on demand. The concise
+ * and the detailed answer of a tool that takes `response_format` sit side by
+ * side.
  */
 function ToolCard({ tool }: { tool: ToolRecord }) {
   const behaviors = toolBehaviors(tool)
-  const input = Object.fromEntries(
-    Object.entries(tool.answers[0]?.input ?? {}).filter(
-      ([name]) => name !== "response_format"
-    )
-  )
+  const entries: Argument[] = Object.entries(
+    tool.answers[0]?.input ?? {}
+  ).filter(([name]) => name !== "response_format")
   return (
     <Card id={tool.name} className="scroll-mt-20">
       <CardHeader>
@@ -192,27 +200,30 @@ function ToolCard({ tool }: { tool: ToolRecord }) {
           </ul>
         ) : null}
         <Parameters tool={tool} />
-        <div className="flex min-w-0 flex-col gap-2">
-          <p className="text-xs font-medium text-muted-foreground">
-            Example call
-          </p>
-          <ExampleInput input={input} />
-        </div>
-        <div
-          className={
-            tool.answers.length > 1
-              ? "grid min-w-0 gap-4 lg:grid-cols-2"
-              : "flex min-w-0 flex-col"
-          }
-        >
-          {tool.answers.map((answer) => (
-            <Answer
-              key={answer.format ?? "answer"}
-              tool={tool.name}
-              answer={answer}
-            />
-          ))}
-        </div>
+        <Collapsible className="flex min-w-0 flex-col gap-2">
+          <DisclosureTrigger>Example call</DisclosureTrigger>
+          <ExampleInput entries={entries} />
+          <CollapsibleContent className="mt-2 flex min-w-0 flex-col gap-4">
+            {entries.filter(multiline).map(([name, code]) => (
+              <CodeBlock key={name} code={code} language="tsx" title={name} />
+            ))}
+            <div
+              className={
+                tool.answers.length > 1
+                  ? "grid min-w-0 gap-4 lg:grid-cols-2"
+                  : "flex min-w-0 flex-col"
+              }
+            >
+              {tool.answers.map((answer) => (
+                <Answer
+                  key={answer.format ?? "answer"}
+                  tool={tool.name}
+                  answer={answer}
+                />
+              ))}
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
       </CardContent>
     </Card>
   )

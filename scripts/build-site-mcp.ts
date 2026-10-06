@@ -10,10 +10,7 @@
  * - tools.json: each tool's definition as `tools/list` serves it (name,
  *   title, description, input schema, annotations), and its answer to the
  *   example input of EXAMPLES; for a tool that takes `response_format`, the
- *   concise and the detailed answer of the same input. `definitionChars`
- *   counts what a client sends the model for every tool on every request:
- *   its name, description and input schema, as JSON (mcp-server/src/test.ts
- *   measures the same);
+ *   concise and the detailed answer of the same input;
  * - resources.json: the resources, the number of each that resources/list
  *   lists, and the size of one read of each;
  * - prompts.json: the prompts as prompts/list serves them, and the call
@@ -73,7 +70,7 @@ const EXAMPLES: Record<string, Record<string, unknown>> = {
   dsaireadable_get_changelog: { limit: 3 },
   dsaireadable_get_typography: {},
   dsaireadable_get_icons: {},
-  dsaireadable_get_design_rules: { category: "focus" },
+  dsaireadable_get_design_rules: { category: "Button" },
   dsaireadable_list_patterns: { kind: "task" },
   dsaireadable_get_pattern: { name: "create" },
   dsaireadable_get_dataviz_recommendation: { objective: "evolution" },
@@ -100,7 +97,7 @@ const BUILD_SCREEN_ARGS = {
 }
 
 const problems: string[] = []
-const { mcp, definitions } = await connectMcp(ROOT)
+const { mcp } = await connectMcp(ROOT)
 
 /** The text of a tool's answer, or of its error. */
 async function answer(name: string, args: Record<string, unknown>) {
@@ -148,14 +145,12 @@ for (const tool of tools) {
     answers.some((entry) => JSON.parse(entry.text).passed !== false)
   )
     problems.push(`${tool.name}: the example screen reports no issue`)
-  const definition = definitions.find((entry) => entry.name === tool.name)
   recordedTools.push({
     name: tool.name,
     title: tool.title,
     description: tool.description,
     inputSchema: tool.inputSchema,
     annotations: tool.annotations,
-    definitionChars: JSON.stringify(definition).length,
     answers,
   })
 }
@@ -240,13 +235,7 @@ if (problems.length > 0) {
 // ── The files ──────────────────────────────────────────────────────────────
 
 const files = new Map<string, unknown>([
-  [
-    "tools.json",
-    {
-      definitionChars: JSON.stringify(definitions).length,
-      tools: recordedTools,
-    },
-  ],
+  ["tools.json", { tools: recordedTools }],
   ["resources.json", { resources: recordedResources }],
   ["prompts.json", { prompts, buildScreenBudget: budget }],
 ])
