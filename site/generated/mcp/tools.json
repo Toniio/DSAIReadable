@@ -1,0 +1,581 @@
+{
+  "tools": [
+    {
+      "name": "dsaireadable_get_design_system_overview",
+      "title": "Design system overview",
+      "description": "Returns the versions, the install command, the required imports, the shadcn/ui components left out, counts and categories",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {},
+          "text": "{\"name\":\"DSAIReadable\",\"description\":\"Design System AI-Readable\",\"design_system_version\":\"0.3.0\",\"mcp_server_version\":\"0.3.0\",\"framework\":\"React 19 / Next.js 16 / Tailwind CSS v4 / shadcn/ui\",\"stack\":{\"react\":\"^19.3.0\",\"next\":\"16.3.8\",\"tailwindcss\":\"^4.3.3\"},\"distribution\":{\"model\":\"shadcn registry — component source is copied into the consuming project, there is no npm package to install\",\"registry_source\":{\"repository\":\"Toniio/DSAIReadable\",\"registry\":\"dsaireadable\",\"item_address\":\"Toniio/DSAIReadable/<item>\"},\"install\":\"npx shadcn@latest add Toniio/DSAIReadable/<item>\",\"component_location\":\"components/ui/<name>.tsx\"},\"sources\":{\"design_system_version\":\"design-system.index.json#version\",\"mcp_server_version\":\"mcp-server/package.json#version\",\"registry_source\":\"registry.json#homepage,name\",\"stack\":\"package.json#dependencies\",\"shadcn_excluded\":\"design-system.index.json#shadcn.excluded\"},\"shadcn_excluded\":[{\"item\":\"form\",\"reason\":\"shadcn/ui's former form layer, built on react-hook-form. shadcn/ui now builds its forms on Field, which the design system ships: Field lays out the label, the control, the description and the error, and leaves the form state to whichever library the app uses.\",\"instead\":\"Field\"}],\"required_setup\":{\"description\":\"MANDATORY: Every generated file MUST import each component from its own module inside the consuming project.\",\"component_import\":\"import { Button } from \\\"@/components/ui/button\\\"  // one import per component\",\"utils_import\":\"import { cn } from \\\"@/lib/utils\\\"\",\"css_setup\":\"styles/globals.css already does `@import \\\"../tokens.css\\\"` and bridges the tokens into Tailwind v4 with `@theme inline`.\",\"explanation\":\"Tokens are loaded once by the application stylesheet. Generated files must never import a stylesheet themselves, and must never reference a token variable directly in JSX.\",\"full_example\":\"// components/example.tsx\\nimport { Button } from \\\"@/components/ui/button\\\"\\nimport { Card, CardContent } from \\\"@/components/ui/card\\\"\\nimport { Input } from \\\"@/components/ui/input\\\"\\nimport { cn } from \\\"@/lib/utils\\\"\"},\"stats\":{\"total_components\":65,\"spec_coverage\":\"65/65 (100%)\",\"tokens\":{\"semantic\":209,\"primitive\":262,\"component\":33,\"total\":504},\"context_files\":18},\"categories\":[\"Navigation\",\"Feedback\",\"Overlay\",\"Layout\",\"Conversation\",\"Misc\",\"Forms\",\"Data\",\"Typography\",\"Media\",\"Brand\"]}",
+          "chars": 2358
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_components",
+      "title": "Components",
+      "description": "Lists the components with their category, status, code path and sizes: { total, items, next_cursor }",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "description": "Brand, Conversation, Data, Feedback, Forms, Layout, Media, Misc, Navigation, Overlay or Typography",
+            "type": "string"
+          },
+          "limit": {
+            "description": "Default 100",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "cursor": {
+            "description": "The next_cursor of the previous page",
+            "type": "string"
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "category": "Forms" },
+          "text": "{\"total\":17,\"items\":[{\"name\":\"Button\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/button.tsx\",\"sizes\":[\"xs\",\"sm\",\"default\",\"lg\",\"icon-xs\",\"icon-sm\",\"icon\",\"icon-lg\"]},{\"name\":\"Checkbox\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/checkbox.tsx\",\"sizes\":[]},{\"name\":\"Combobox\",\"category\":\"Forms\",\"status\":\"beta\",\"code_path\":\"components/ui/combobox.tsx\",\"sizes\":[]},{\"name\":\"Command\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/command.tsx\",\"sizes\":[]},{\"name\":\"Field\",\"category\":\"Forms\",\"status\":\"beta\",\"code_path\":\"components/ui/field.tsx\",\"sizes\":[]},{\"name\":\"Input\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/input.tsx\",\"sizes\":[]},{\"name\":\"InputGroup\",\"category\":\"Forms\",\"status\":\"beta\",\"code_path\":\"components/ui/input-group.tsx\",\"sizes\":[\"xs\",\"sm\",\"icon-xs\",\"icon-sm\"]},{\"name\":\"InputOtp\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/input-otp.tsx\",\"sizes\":[]},{\"name\":\"Label\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/label.tsx\",\"sizes\":[]},{\"name\":\"NativeSelect\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/native-select.tsx\",\"sizes\":[\"sm\",\"default\"]},{\"name\":\"PasswordInput\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/password-input.tsx\",\"sizes\":[]},{\"name\":\"RadioGroup\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/radio-group.tsx\",\"sizes\":[]},{\"name\":\"Select\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/select.tsx\",\"sizes\":[\"sm\",\"default\"]},{\"name\":\"Slider\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/slider.tsx\",\"sizes\":[]},{\"name\":\"Switch\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/switch.tsx\",\"sizes\":[\"sm\",\"default\"]},{\"name\":\"Textarea\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/textarea.tsx\",\"sizes\":[]},{\"name\":\"Toggle\",\"category\":\"Forms\",\"status\":\"stable\",\"code_path\":\"components/ui/toggle.tsx\",\"sizes\":[\"sm\",\"default\",\"lg\"]}]}",
+          "chars": 2011
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_component_specs",
+      "title": "Component spec",
+      "description": "Returns one component's spec: role, MUST / MUST NOT constraints, export names, cross-references and how its API departs from shadcn/ui (each divergence, with the reason; write the shadcn/ui API everywhere else). The whole spec, with anatomy, tokens and states, is the resource ds://component/{name}/spec",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "component_name": {
+            "type": "string",
+            "description": "e.g. Button, Card, Dialog"
+          },
+          "response_format": {
+            "default": "concise",
+            "description": "\"detailed\" adds usage, export summaries and descriptions, props, accessibility (ARIA pattern, keyboard, accessible name, pitfalls), the code example, the cva variants with their defaults, the sizes and the composition rules that cover it",
+            "type": "string",
+            "enum": ["concise", "detailed"]
+          }
+        },
+        "required": ["component_name"],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "format": "concise",
+          "input": { "component_name": "Button" },
+          "text": "{\"name\":\"Button\",\"category\":\"Forms\",\"status\":\"stable\",\"role\":\"Triggers a primary or secondary action; comes in several visual variants and sizes.\",\"constraints\":[\"**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look\",\"**MUST NOT** — place more than 2 `variant=\\\"default\\\"` (primary) buttons in the same view\",\"**MUST NOT** — convey a state through color alone: add text or a tooltip\",\"**MUST** — give an `icon-*` button an `aria-label`\",\"**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\\\"true\\\"` on the button\",\"**MUST NOT** — nest a `<button>` inside another, including through `asChild`\"],\"exports\":[\"Button\",\"buttonVariants\"],\"cross_references\":[\"Field\",\"Spinner\",\"Input\"],\"shadcn\":{\"item\":\"button\",\"divergences\":[]},\"detail\":\"response_format: \\\"detailed\\\" adds usage, props, accessibility, code_example, variants, sizes, composition_rules\"}",
+          "chars": 958
+        },
+        {
+          "format": "detailed",
+          "input": {
+            "component_name": "Button",
+            "response_format": "detailed"
+          },
+          "text": "{\"name\":\"Button\",\"category\":\"Forms\",\"status\":\"stable\",\"role\":\"Triggers a primary or secondary action; comes in several visual variants and sizes.\",\"usage\":[\"Submit a form (`type=\\\"submit\\\"`)\",\"Trigger a key action (for example \\\"Sign in\\\", \\\"Confirm\\\")\",\"Navigate within the app through `asChild` and `<Link>`\",\"Icon-only actions (the `icon-*` sizes)\",\"Destructive button for irreversible actions (the `destructive` variant)\"],\"constraints\":[\"**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look\",\"**MUST NOT** — place more than 2 `variant=\\\"default\\\"` (primary) buttons in the same view\",\"**MUST NOT** — convey a state through color alone: add text or a tooltip\",\"**MUST** — give an `icon-*` button an `aria-label`\",\"**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\\\"true\\\"` on the button\",\"**MUST NOT** — nest a `<button>` inside another, including through `asChild`\"],\"exports\":[{\"name\":\"Button\",\"summary\":\"Renders `<button>`, or its child with `asChild`.\",\"description\":\"The control that starts an action. Use `variant` to rank it among the actions around it.\"},{\"name\":\"buttonVariants\",\"summary\":\"A `cva` function: returns the classes for a combination of its axes (see **Variants**), to give another element this style.\",\"description\":\"The classes of a `Button` for a combination of `variant` and `size`, to give another element the same look.\"}],\"props\":[{\"component\":\"Button\",\"prop\":\"`variant`\",\"type\":\"`\\\"default\\\" | \\\"outline\\\" | \\\"secondary\\\" | \\\"ghost\\\" | \\\"destructive\\\" | \\\"link\\\"`\",\"default\":\"`\\\"default\\\"`\",\"description\":\"How the button looks\"},{\"component\":\"Button\",\"prop\":\"`size`\",\"type\":\"`\\\"default\\\" | \\\"xs\\\" | \\\"sm\\\" | \\\"lg\\\" | \\\"icon\\\" | \\\"icon-xs\\\" | \\\"icon-sm\\\" | \\\"icon-lg\\\"`\",\"default\":\"`\\\"default\\\"`\",\"description\":\"Button size (`h-8` by default)\"},{\"component\":\"Button\",\"prop\":\"`asChild`\",\"type\":\"`boolean`\",\"default\":\"`false`\",\"description\":\"Renders the first child instead, through Radix Slot\"}],\"accessibility\":\"**Pattern**: [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) — native `button` element\\n\\n**Role**: Native `button` (or the element passed through `asChild`, such as a link).\\n\\n**Keyboard**:\\n\\n| Key               | Action                          |\\n| ----------------- | ------------------------------- |\\n| `Enter` / `Space` | Activates the button            |\\n| `Tab`             | Moves focus to the next element |\\n\\n**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.\\n\\n**Pitfalls**:\\n\\n- **MUST** — when the user needs to understand why the action is unavailable, use `aria-disabled` and an explanation: `disabled` removes the button from the tab order.\\n- A button that navigates must be a link (`asChild` with an `a`), not an `onClick` that changes the page.\\n- `variant=\\\"destructive\\\"` must come with an explicit label.\\n- **MUST NOT** — recolor the `destructive` label with `color.feedback.error.default` or a raw red: `text-destructive` reads `color.text.destructive.default`, which `tokens:lint-contrast` holds at 4.5:1 or more on the `/10` to `/30` tints over the page, a card and a popover, in both modes. The fill color drops to 2.97:1 on a hovered button inside a card.\",\"code_example\":\"import { Button } from \\\"@/components/ui/button\\\"\\n\\nexport default function Example() {\\n  return (\\n    <Button variant=\\\"default\\\" size=\\\"default\\\" type=\\\"submit\\\">\\n      Sign in\\n    </Button>\\n  )\\n}\",\"cross_references\":[\"Field\",\"Spinner\",\"Input\"],\"shadcn\":{\"item\":\"button\",\"divergences\":[]},\"variants\":{\"variant\":{\"values\":[\"default\",\"outline\",\"secondary\",\"ghost\",\"destructive\",\"link\"],\"default\":\"default\"},\"size\":{\"values\":[\"default\",\"xs\",\"sm\",\"lg\",\"icon\",\"icon-xs\",\"icon-sm\",\"icon-lg\"],\"default\":\"default\"}},\"sizes\":[\"xs\",\"sm\",\"default\",\"lg\",\"icon-xs\",\"icon-sm\",\"icon\",\"icon-lg\"],\"composition_rules\":[{\"id\":\"rule-13\",\"rule\":\"All new components must expose a data-slot attribute on the root element whose value matches the component name (e.g., data-slot='button'). Sub-parts also carry data-slot for CSS targeting.\"}]}",
+          "chars": 4191
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_tokens",
+      "title": "Semantic tokens",
+      "description": "Returns the semantic tokens: { total, items, next_cursor }. One token is the resource ds://token/{path}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "color",
+              "space",
+              "typography",
+              "radius",
+              "elevation",
+              "motion",
+              "opacity",
+              "zindex",
+              "breakpoint",
+              "border-width",
+              "size"
+            ]
+          },
+          "limit": {
+            "description": "Default 100",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "cursor": {
+            "description": "The next_cursor of the previous page",
+            "type": "string"
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "category": "radius" },
+          "text": "{\"total\":10,\"items\":[{\"path\":\"radius.none\",\"css_var\":\"--radius-none\",\"light\":\"{primitive.radius.none}\",\"dark\":\"{primitive.radius.none}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one.\"},{\"path\":\"radius.xs\",\"css_var\":\"--radius-xs\",\"light\":\"{primitive.radius.xs}\",\"dark\":\"{primitive.radius.xs}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Minimal rounding (0.4× base). The legend and tooltip indicators of a chart.\"},{\"path\":\"radius.sm\",\"css_var\":\"--radius-sm\",\"light\":\"{primitive.radius.sm}\",\"dark\":\"{primitive.radius.sm}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Small rounding (0.6× base). For content a screen draws itself; no component uses it.\"},{\"path\":\"radius.md\",\"css_var\":\"--radius-md\",\"light\":\"{primitive.radius.md}\",\"dark\":\"{primitive.radius.md}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Medium rounding (0.8× base). For content a screen draws itself; no component uses it.\"},{\"path\":\"radius.lg\",\"css_var\":\"--radius-lg\",\"light\":\"{primitive.radius.lg}\",\"dark\":\"{primitive.radius.lg}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Base rounding (1× = 0.625rem). For content a screen draws itself, and the shadcn --radius alias; no component reads it.\"},{\"path\":\"radius.xl\",\"css_var\":\"--radius-xl\",\"light\":\"{primitive.radius.xl}\",\"dark\":\"{primitive.radius.xl}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Larger rounding (1.4× base). For content a screen draws itself; no component uses it.\"},{\"path\":\"radius.2xl\",\"css_var\":\"--radius-2xl\",\"light\":\"{primitive.radius.2xl}\",\"dark\":\"{primitive.radius.2xl}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Extra-large rounding (1.8× base). For content a screen draws itself (a hero); no component uses it.\"},{\"path\":\"radius.3xl\",\"css_var\":\"--radius-3xl\",\"light\":\"{primitive.radius.3xl}\",\"dark\":\"{primitive.radius.3xl}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Very large rounding (2.2× base). Use sparingly for decorative content; no component uses it.\"},{\"path\":\"radius.4xl\",\"css_var\":\"--radius-4xl\",\"light\":\"{primitive.radius.4xl}\",\"dark\":\"{primitive.radius.4xl}\",\"type\":\"dimension\",\"status\":\"active\",\"usage\":\"Maximum rounding (2.6× base). Use only for hero content; no component uses it.\"},{\"path\":\"radius.full\",\"css_var\":\"--radius-full\",\"light\":\"{primitive.radius.full}\",\"dark\":\"{primitive.radius.full}\",\"type\":\"dimension\",\"status\":\"reserved\",\"usage\":\"Pill/full rounding. A round shape: Avatar, RadioGroup and Switch draw rounded-full, a static class that reads no token.\"}]}",
+          "chars": 2599
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_deprecations",
+      "title": "Deprecations",
+      "description": "Returns the deprecated tokens and component exports, each with its replacement. Check it before using a token or an export from an earlier version",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "description": "Omit for both",
+            "type": "string",
+            "enum": ["token", "export"]
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {},
+          "text": "{\"total\":2,\"tokens\":[{\"token\":\"opacity.placeholder\",\"css_var\":\"--opacity-placeholder\",\"tailwind\":null,\"message\":\"Form fields color their placeholder instead of fading it: use `placeholder:text-muted-foreground` (color.text.subtle). Faded default text drops to 3.70:1 on white.\",\"replacement\":{\"token\":\"color.text.subtle\",\"css_var\":\"--color-text-subtle\"}},{\"token\":\"opacity.overlay\",\"css_var\":\"--opacity-overlay\",\"tailwind\":null,\"message\":\"Modal backdrops use shadcn/ui v4's scrim, `bg-black/10` with `backdrop-blur-xs` (OVERLAY_BASE in lib/overlay.ts); no opacity token drives it. At 0.8 the backdrop hid the page.\",\"replacement\":null}],\"exports\":[]}",
+          "chars": 650
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_changelog",
+      "title": "Changelog",
+      "description": "Returns the changelog, one entry per change, newest release first: { total, items, next_cursor }. Read it for what changed since the version you know",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "version": { "description": "A release number", "type": "string" },
+          "category": {
+            "description": "A changelog heading, such as Minor Changes or Fixed",
+            "type": "string"
+          },
+          "limit": {
+            "description": "Default 100",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "cursor": {
+            "description": "The next_cursor of the previous page",
+            "type": "string"
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "limit": 3 },
+          "text": "{\"total\":139,\"items\":[{\"version\":\"0.3.0\",\"date\":null,\"category\":\"Minor Changes\",\"text\":\"21edf4b: mcp: No answer of the MCP server passes 40,000 characters, under the 25,000 tokens Claude Code accepts from one MCP result by default (`MAX_MCP_OUTPUT_TOKENS`). Over it, the agent reads an error and the path of a file instead of the answer: in the 0.3.0 evals, 19 calls of `dsaireadable_get_design_rules` `detailed` without a category got that error. - `dsaireadable_get_design_rules` `detailed` without a category serves the critical rules whole, every foundation's rules (`general_rules`) and the composition rules, as `ds://guidelines` does, with the `categories` to pass and a `detail` line; it stops serving `component_rules`, the constraints of the 65 component specs (73,517 to 36,879 characters). A component's rules stay its `category`'s answer, and `dsaireadable_get_component_specs` serves them as `constraints`. - `dsaireadable_get_components`, `dsaireadable_get_tokens` and `dsaireadable_get_changelog` end a page before 40,000 characters, so `limit` is a maximum: `next_cursor` points at the first item left out. A page of 200 tokens came to 62,726 characters, and the changelog's default page to 61,940. - `dsaireadable_validate_screen` and `dsaireadable_validate_code` list the issues that fit and count the rest in `issues_not_listed`; `total_issues`, `errors` and `warnings` still count every issue.\"},{\"version\":\"0.3.0\",\"date\":null,\"category\":\"Minor Changes\",\"text\":\"2a6b96a: skills: `dsaireadable-ui-guard` opens only the reference file of the line it cannot decide, and says that a spec's concise answer holds its limits.\"},{\"version\":\"0.3.0\",\"date\":null,\"category\":\"Minor Changes\",\"text\":\"e81390f: skills: `dsaireadable-build` is removed, from `skills/` and from the Claude Code plugin. The harness measured it against the MCP server alone with claude-sonnet-5-5, three passes each: on new screens (0.3.0 evals, 26 tasks) 96.8 % against 98.1 % conformance at 164,878 input tokens per screen against 95,446; narrowed to changes of an existing screen (the `skills` suite, 8 edit tasks), 21 of 24 against 23 of 24 at a median 59,206 tokens against 35,468 (+22 % once the test environment's own overhead is taken out). The server's instructions, patterns and validation tools carry the workflow: an agent that loaded the skill asks the server directly. `dsaireadable-ui-guard` now reviews a screen when asked to, instead of on every screen built or changed.\"}],\"next_cursor\":\"b2Zmc2V0OjM\"}",
+          "chars": 2504
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_typography",
+      "title": "Typography",
+      "description": "Returns the font families, type scale, weights, line heights, letter spacing and usage rules",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {},
+          "text": "{\"font_families\":[{\"token\":\"typography.font-family.mono\",\"css_variable\":\"--typography-font-family-mono\",\"family\":\"JetBrains Mono\",\"tailwind_class\":\"font-mono\",\"usage\":\"The application's default typeface — all UI text\"},{\"token\":\"typography.font-family.sans\",\"css_variable\":\"--typography-font-family-sans\",\"family\":\"Geist Sans\",\"tailwind_class\":\"font-sans\",\"usage\":\"Kbd keys and long editorial content; never for the interface\"}],\"type_scale\":[{\"token\":\"typography.size.xs\",\"css_variable\":\"--typography-size-xs\",\"rem\":\"0.75rem\",\"px\":\"12 px\",\"tailwind_class\":\"text-xs\",\"usage\":\"Component text: labels (Label, FieldLabel), buttons, inputs, badges, menu items, descriptions, chart legends\"},{\"token\":\"typography.size.sm\",\"css_variable\":\"--typography-size-sm\",\"rem\":\"0.875rem\",\"px\":\"14 px\",\"tailwind_class\":\"text-sm\",\"usage\":\"Titles inside a component (CardTitle, DialogTitle…), the FieldLegend legend, a screen's secondary text\"},{\"token\":\"typography.size.base\",\"css_variable\":\"--typography-size-base\",\"rem\":\"1rem\",\"px\":\"16 px\",\"tailwind_class\":\"text-base\",\"usage\":\"Main body text; Heading level 4\"},{\"token\":\"typography.size.lg\",\"css_variable\":\"--typography-size-lg\",\"rem\":\"1.125rem\",\"px\":\"18 px\",\"tailwind_class\":\"text-lg\",\"usage\":\"Emphasized body text, introductions; Heading level 3\"},{\"token\":\"typography.size.xl\",\"css_variable\":\"--typography-size-xl\",\"rem\":\"1.25rem\",\"px\":\"20 px\",\"tailwind_class\":\"text-xl\",\"usage\":\"Heading level 2: section headings\"},{\"token\":\"typography.size.2xl\",\"css_variable\":\"--typography-size-2xl\",\"rem\":\"1.5rem\",\"px\":\"24 px\",\"tailwind_class\":\"text-2xl\",\"usage\":\"Heading level 1: the page title\"},{\"token\":\"typography.size.3xl\",\"css_variable\":\"--typography-size-3xl\",\"rem\":\"1.875rem\",\"px\":\"30 px\",\"tailwind_class\":\"text-3xl\",\"usage\":\"Hero text a screen draws; no component uses it\"},{\"token\":\"typography.size.4xl\",\"css_variable\":\"--typography-size-4xl\",\"rem\":\"2.25rem\",\"px\":\"36 px\",\"tailwind_class\":\"text-4xl\",\"usage\":\"Display text a screen draws, rare; no component uses it\"}],\"line_heights\":[{\"token\":\"typography.line-height.tight\",\"css_variable\":\"--typography-line-height-tight\",\"value\":\"1.25\",\"tailwind_class\":\"leading-tight\",\"usage\":\"Short text on 1 or 2 lines\"},{\"token\":\"typography.line-height.snug\",\"css_variable\":\"--typography-line-height-snug\",\"value\":\"1.375\",\"tailwind_class\":\"leading-snug\",\"usage\":\"Multi-line labels: FieldLabel draws it\"},{\"token\":\"typography.line-height.normal\",\"css_variable\":\"--typography-line-height-normal\",\"value\":\"1.5\",\"tailwind_class\":\"leading-normal\",\"usage\":\"Default body text\"},{\"token\":\"typography.line-height.relaxed\",\"css_variable\":\"--typography-line-height-relaxed\",\"value\":\"1.625\",\"tailwind_class\":\"leading-relaxed\",\"usage\":\"Long-form text, articles\"},{\"token\":\"typography.line-height.loose\",\"css_variable\":\"--typography-line-height-loose\",\"value\":\"2\",\"tailwind_class\":\"leading-loose\",\"usage\":\"Very airy text — seldom used\"}],\"font_weights\":[{\"token\":\"typography.font-weight.normal\",\"css_variable\":\"--typography-font-weight-normal\",\"value\":\"400\",\"tailwind_class\":\"font-normal\",\"usage\":\"Body text, labels (Label, FieldLabel), descriptions\"},{\"token\":\"typography.font-weight.medium\",\"css_variable\":\"--typography-font-weight-medium\",\"value\":\"500\",\"tailwind_class\":\"font-medium\",\"usage\":\"Buttons, tabs, badges, component titles (CardTitle, DialogTitle…), table headers\"},{\"token\":\"typography.font-weight.semibold\",\"css_variable\":\"--typography-font-weight-semibold\",\"value\":\"600\",\"tailwind_class\":\"font-semibold\",\"usage\":\"Headings — Heading draws it at every level\"},{\"token\":\"typography.font-weight.bold\",\"css_variable\":\"--typography-font-weight-bold\",\"value\":\"700\",\"tailwind_class\":\"font-bold\",\"usage\":\"Strong emphasis a screen draws; the Logo\"}],\"letter_spacings\":[{\"token\":\"typography.letter-spacing.tight\",\"css_variable\":\"--typography-letter-spacing-tight\",\"value\":\"-0.025em\",\"tailwind_class\":\"tracking-tight\",\"usage\":\"Headings — Heading draws it at every level\"},{\"token\":\"typography.letter-spacing.normal\",\"css_variable\":\"--typography-letter-spacing-normal\",\"value\":\"0em\",\"tailwind_class\":\"tracking-normal\",\"usage\":\"Running text — the default\"},{\"token\":\"typography.letter-spacing.wide\",\"css_variable\":\"--typography-letter-spacing-wide\",\"value\":\"0.025em\",\"tailwind_class\":\"tracking-wide\",\"usage\":\"Captions a screen draws; no component uses it\"},{\"token\":\"typography.letter-spacing.wider\",\"css_variable\":\"--typography-letter-spacing-wider\",\"value\":\"0.05em\",\"tailwind_class\":\"tracking-wider\",\"usage\":\"All-caps text, overlines; no component uses it\"},{\"token\":\"typography.letter-spacing.widest\",\"css_variable\":\"--typography-letter-spacing-widest\",\"value\":\"0.1em\",\"tailwind_class\":\"tracking-widest\",\"usage\":\"Keyboard shortcuts in menus and Command\"}],\"usage_rules\":[\"**JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.\",\"**A heading is a `Heading`, a field label a `FieldLabel`** — each draws its own size, weight, tracking and line height, so pass it no `text-*`, `font-*`, `tracking-*` or `leading-*` class. For text a screen draws itself, a `text-*` class already carries its paired line height: add `leading-*` only to change it.\",\"**`tracking-tight` belongs to headings** — `Heading` draws it at every level; on running text, negative spacing hurts readability.\",\"**`tracking-wider` is for all-caps only** — never use it on regular lowercase text. `tracking-widest` is for keyboard shortcuts only.\",\"**A strict weight hierarchy** — `normal` → body text, labels and descriptions, `medium` → buttons, tabs, badges and component titles, `semibold` → headings, `bold` → strong emphasis a screen draws. A field label stays `normal`.\"]}",
+          "chars": 5678
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_icons",
+      "title": "Icons",
+      "description": "Returns the icon library, its default size, its usage rules and the catalog URL",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {},
+          "text": "{\"library\":\"@phosphor-icons/react\",\"description\":\"The design system uses Phosphor Icons exclusively, through @phosphor-icons/react.\",\"default_size\":\"size-4 (1rem)\",\"rule\":\"Icons must come exclusively from @phosphor-icons/react. No other icon library may be used. Default icon size within components is size-4 (1rem).\",\"usage\":[\"Every icon comes from @phosphor-icons/react\",\"Default size inside components: size-4 (1rem)\",\"No other icon library is allowed\"],\"catalog_url\":\"https://phosphoricons.com/\"}",
+          "chars": 500
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_design_rules",
+      "title": "Design rules",
+      "description": "Returns the design rules. Without a category: the composition rules, the titles of the critical rules and the categories to pass",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "description": "A foundation (color, spacing, focus…) or a component name: its rules and the composition rules that cover it. \"composition\": every composition rule. \"tailwind\": the critical rules",
+            "type": "string"
+          },
+          "response_format": {
+            "default": "concise",
+            "description": "\"detailed\" adds the critical rules, not only their titles, and every foundation's rules without a category",
+            "type": "string",
+            "enum": ["concise", "detailed"]
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "format": "concise",
+          "input": { "category": "Button" },
+          "text": "{\"category\":\"Button\",\"rules\":[\"**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look\",\"**MUST NOT** — place more than 2 `variant=\\\"default\\\"` (primary) buttons in the same view\",\"**MUST NOT** — convey a state through color alone: add text or a tooltip\",\"**MUST** — give an `icon-*` button an `aria-label`\",\"**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\\\"true\\\"` on the button\",\"**MUST NOT** — nest a `<button>` inside another, including through `asChild`\"],\"composition_rules\":[{\"id\":\"rule-13\",\"rule\":\"All new components must expose a data-slot attribute on the root element whose value matches the component name (e.g., data-slot='button'). Sub-parts also carry data-slot for CSS targeting.\"}],\"critical_rules\":[{\"id\":\"tailwind-tokens\",\"severity\":\"critical\",\"title\":\"Always use standard Tailwind CSS classes mapped to DS tokens\"},{\"id\":\"use-ds-components\",\"severity\":\"critical\",\"title\":\"ALWAYS use DS React components — NEVER use raw HTML elements\"}]}",
+          "chars": 1068
+        },
+        {
+          "format": "detailed",
+          "input": { "category": "Button", "response_format": "detailed" },
+          "text": "{\"category\":\"Button\",\"rules\":[\"**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look\",\"**MUST NOT** — place more than 2 `variant=\\\"default\\\"` (primary) buttons in the same view\",\"**MUST NOT** — convey a state through color alone: add text or a tooltip\",\"**MUST** — give an `icon-*` button an `aria-label`\",\"**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\\\"true\\\"` on the button\",\"**MUST NOT** — nest a `<button>` inside another, including through `asChild`\"],\"composition_rules\":[{\"id\":\"rule-13\",\"rule\":\"All new components must expose a data-slot attribute on the root element whose value matches the component name (e.g., data-slot='button'). Sub-parts also carry data-slot for CSS targeting.\"}],\"critical_rules\":[{\"id\":\"tailwind-tokens\",\"severity\":\"critical\",\"title\":\"Always use standard Tailwind CSS classes mapped to DS tokens\",\"description\":[\"ALWAYS use the Tailwind utility classes the design system maps to its tokens.\",\"styles/globals.css imports tokens.css and bridges each token into Tailwind with an @theme inline block: bg-primary reads --color-action-background-default, a semantic token.\",\"Tailwind's default colors, radii, shadows, spacing and type scale are removed: bg-red-500, p-13 or text-7xl generate no CSS, and ESLint refuses them.\",\"Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.\",\"For spacing and sizes, use Tailwind v3's spacing scale, each step read from a space.scale.* token: p-4, gap-1.5, m-2, h-9, w-72. Off-scale steps (p-13, gap-17) do not exist.\",\"For text, use text-xs … text-4xl, font-sans / font-mono / font-heading, font-normal … font-bold, leading-tight … leading-loose, tracking-tight … tracking-widest. Label, FieldLabel and Heading draw their own text style (12px regular, and the size of their level): give them no text-*, font-*, tracking-* or leading-* class.\",\"For state colors on text, use text-success and text-warning, text-destructive for errors.\",\"Every component is square and draws its own corners: add no rounded-* class to one, and keep a surface you draw yourself square too. rounded-full is for a round shape; rounded-xs … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero.\",\"For shadows, use: shadow-xs … shadow-2xl (mapped to --elevation-*).\",\"For a disabled state, use opacity-disabled under its variant: disabled:opacity-disabled.\",\"A class comes first. For a token or a runtime variable that has no class, use Tailwind's shorthand utility-(--variable): w-(--radix-popover-trigger-width), bg-(--color-chart-sequential-3); never a bracket, w-[var(--…)]. An inline style may read a token too, style={{ width: 'var(--sidebar-width)' }}, but never a raw value.\"],\"dont\":[\"bg-[#432dd7] — NEVER use arbitrary hex colors\",\"text-[var(--ds-prim-color-violet-600)] — NEVER reference primitive tokens directly\",\"w-[var(--sidebar-width)] — NEVER bracket a variable: write w-(--sidebar-width)\",\"style={{ padding: '12px' }} — NEVER use a raw value in an inline style\",\"bg-violet-600 — NEVER use Tailwind's default palette: it is removed, use DS semantic classes\",\"p-[1.5rem] — NEVER use arbitrary spacing values, use the spacing scale\",\"p-13 text-7xl font-serif — NEVER: off-scale classes generate no CSS\",\"rounded-[0.625rem] — NEVER use arbitrary radius values\",\"disabled:opacity-50 — NEVER: a disabled state uses opacity-disabled\",\"rounded (without a size) — NEVER: it generates no CSS. A component draws its own corners; use rounded-full for a round shape\",\"rounded-md on a Button, rounded-lg on a Card or rounded-xl on a Dialog — NEVER: the components are square, and a rounded surface among them is the mixed look the system does not have\"]},{\"id\":\"use-ds-components\",\"severity\":\"critical\",\"title\":\"ALWAYS use DS React components — NEVER use raw HTML elements\",\"description\":[\"The design system provides pre-built React components that enforce tokens, accessibility, and visual consistency.\",\"ALWAYS prefer DS components over raw HTML elements. Every visual element should come from @/components/ui/<name>.\"],\"mandatory_mappings\":{\"Content sections / containers\":\"Use <Card>, <CardHeader>, <CardContent>, <CardFooter> — NOT a raw <div> with a border or a shadow (a <div> for layout, flex or grid, is fine)\",\"Titles / headings\":\"Use <Heading> component — NOT raw <h1>, <h2>, <h3>\",\"Buttons / CTAs\":\"Use <Button> component with variant prop — NOT raw <button> or <a> styled as button\",\"Form fields\":\"Use <Input>, <Label>, <Checkbox>, <Select>, <Textarea>, <RadioGroup> — NOT raw <input>\",\"Form groups\":\"Use <Field>, <FieldLabel>, <FieldDescription>, <FieldError> — NOT raw <div> + <label>\",\"Links with icon\":\"Use <Button variant='link'> or <Button variant='ghost'> — NOT raw <a>\",\"Separators\":\"Use <Separator> — NOT raw <hr> or border-b\",\"Loading / empty states\":\"Use <Skeleton>, <Spinner>, <Empty> — NOT custom loading divs\",\"Modals / dialogs\":\"Use <Dialog> or <AlertDialog> — NOT custom overlay divs\",\"Icons\":\"Use @phosphor-icons/react — NOT raw <svg> elements\",\"Navigation\":\"Use <NavigationMenu>, <Breadcrumb>, <Tabs> — NOT raw <nav> + <a>\",\"Tooltips\":\"Use <Tooltip> — NOT title attribute\",\"Lists of items\":\"Use <Item>, <ItemHeader>, <ItemContent> — NOT raw <li> or <div>\",\"Data display\":\"Use <Table>, <Badge>, <Avatar> — NOT custom layouts\",\"Notifications\":\"Use <Alert>, Toaster (sonner) — NOT custom notification divs\"},\"page_structure\":[\"Root container MUST have: className='min-h-screen bg-background text-foreground'\",\"Every page MUST set bg-background and text-foreground on the outermost element\",\"Wrap content sections in <Card> components for visual grouping\",\"Use <Heading> for all titles with proper level (1-4)\",\"All interactive elements MUST be DS components (Button, Input, etc.)\"]}]}",
+          "chars": 5879
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_list_patterns",
+      "title": "Page patterns",
+      "description": "Lists the page patterns with name, title, kind and role: tasks (create, edit, delete, filter, search, sign-in, settings), the UI patterns they share (empty-state, form, loading, navigation, saving) and the project's own",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "kind": { "type": "string", "enum": ["task", "ui"] } },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "kind": "task" },
+          "text": "{\"total\":7,\"patterns\":[{\"name\":\"create\",\"title\":\"Create\",\"kind\":\"task\",\"role\":\"Adds one new object — a project, an invoice, a member — to a collection, and shows it there once it exists.\"},{\"name\":\"delete\",\"title\":\"Delete\",\"kind\":\"task\",\"role\":\"Destroys an object for good, once the person has confirmed they mean it.\"},{\"name\":\"edit\",\"title\":\"Edit\",\"kind\":\"task\",\"role\":\"Changes the details of an object that already exists, and saves them only when the person asks to.\"},{\"name\":\"filter\",\"title\":\"Filter\",\"kind\":\"task\",\"role\":\"Narrows a collection to the entries whose attributes match what the person picks, and says how many are left.\"},{\"name\":\"search\",\"title\":\"Search\",\"kind\":\"task\",\"role\":\"Finds the entries of a collection that match a text query, and says plainly when nothing does.\"},{\"name\":\"settings\",\"title\":\"Settings\",\"kind\":\"task\",\"role\":\"Gathers the preferences of a person, a workspace or an object on one page, in sections the person can scan, and saves each change the way it is made.\"},{\"name\":\"sign-in\",\"title\":\"Sign in\",\"kind\":\"task\",\"role\":\"Lets a person with an account prove who they are with their email and password, and recovers from a failed attempt without making them start over.\"}]}",
+          "chars": 1214
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_pattern",
+      "title": "Page pattern",
+      "description": "Returns one page pattern by name or title: role, usage rules and the components it takes",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "e.g. \"create\", \"sign-in\", \"Empty state\""
+          },
+          "response_format": {
+            "default": "concise",
+            "description": "\"detailed\" adds the structure (regions and their components), the component variants, the spacing and content rules, the code example and the cross-references",
+            "type": "string",
+            "enum": ["concise", "detailed"]
+          }
+        },
+        "required": ["name"],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "format": "concise",
+          "input": { "name": "create" },
+          "text": "{\"name\":\"create\",\"title\":\"Create\",\"kind\":\"task\",\"role\":\"Adds one new object — a project, an invoice, a member — to a collection, and shows it there once it exists.\",\"usage\":[\"**MUST** — open a `Dialog` when the object takes at most 6 fields and no inner scrolling; beyond that, or with a field that needs room (rich text, a file list), use a full page at `/<collection>/new`\",\"**MUST** — start from a `Button` `variant=\\\"default\\\"` in the header of the collection it adds to, labeled with the verb and the object: `Create project`\",\"**MUST** — ask only for what creation needs; every other field waits for the [edit](./edit.md) page\",\"**MUST** — on success, close the surface, show the new object in its collection and confirm with one `toast.success`\",\"**MUST NOT** — clear what the person typed when creation fails: keep every value and show the error as [saving](./saving.md) describes\",\"**Note** — an empty collection offers the same action from its [empty state](./empty-state.md)\"],\"components\":[\"Button\",\"Dialog\",\"FieldGroup\",\"Toaster\"],\"detail\":\"response_format: \\\"detailed\\\" adds structure, spacing, content, code_example, cross_references, source\"}",
+          "chars": 1158
+        },
+        {
+          "format": "detailed",
+          "input": { "name": "create", "response_format": "detailed" },
+          "text": "{\"name\":\"create\",\"title\":\"Create\",\"kind\":\"task\",\"role\":\"Adds one new object — a project, an invoice, a member — to a collection, and shows it there once it exists.\",\"usage\":[\"**MUST** — open a `Dialog` when the object takes at most 6 fields and no inner scrolling; beyond that, or with a field that needs room (rich text, a file list), use a full page at `/<collection>/new`\",\"**MUST** — start from a `Button` `variant=\\\"default\\\"` in the header of the collection it adds to, labeled with the verb and the object: `Create project`\",\"**MUST** — ask only for what creation needs; every other field waits for the [edit](./edit.md) page\",\"**MUST** — on success, close the surface, show the new object in its collection and confirm with one `toast.success`\",\"**MUST NOT** — clear what the person typed when creation fails: keep every value and show the error as [saving](./saving.md) describes\",\"**Note** — an empty collection offers the same action from its [empty state](./empty-state.md)\"],\"structure\":[{\"region\":\"Trigger\",\"content\":\"The create action, in the header of the collection\",\"components\":\"Button\"},{\"region\":\"Surface\",\"content\":\"A dialog, or a page for a long form\",\"components\":\"Dialog, or the page layout of [navigation](./navigation.md)\"},{\"region\":\"Header\",\"content\":\"What is being created, and one sentence on what comes next\",\"components\":\"DialogTitle, DialogDescription\"},{\"region\":\"Fields\",\"content\":\"The required fields, in the order the person thinks of them\",\"components\":\"FieldGroup, Field, Input, Textarea, Select\"},{\"region\":\"Actions\",\"content\":\"Cancel, then the create action\",\"components\":\"DialogFooter, DialogClose, Button\"},{\"region\":\"Confirmation\",\"content\":\"One line that names the new object\",\"components\":\"toast.success from sonner\"}],\"components\":[{\"component\":\"Button\",\"variant_props\":\"variant=\\\"default\\\" with a PlusIcon\",\"job\":\"The trigger, and the submit button\"},{\"component\":\"Button\",\"variant_props\":\"variant=\\\"outline\\\", type=\\\"button\\\"\",\"job\":\"Cancel, inside DialogClose asChild\"},{\"component\":\"Dialog\",\"variant_props\":\"controlled through open/onOpenChange\",\"job\":\"Closes itself once the object is created\"},{\"component\":\"FieldGroup\",\"variant_props\":\"—\",\"job\":\"Spaces the fields and ties labels to inputs\"},{\"component\":\"Toaster\",\"variant_props\":\"once, at the layout root\",\"job\":\"Shows the confirmation (toast of sonner)\"}],\"spacing\":[\"**MUST** — let `FieldGroup` space the fields (`gap-5`, `space.scale.5`); a `Field` takes no margin\",\"**MUST** — put the `form` inside `DialogContent` with `flex flex-col gap-4`, so header, fields and footer keep the dialog's rhythm (`DialogContent` spaces its parts with `gap-4`)\",\"**MUST** — on a full page, set the form column to `max-w-2xl` (`space.layout.content-sm`) inside the page container of [navigation](./navigation.md)\"],\"content\":[{\"element\":\"Trigger\",\"write\":\"Create project\",\"not\":\"New, Add +, Create\"},{\"element\":\"Title\",\"write\":\"Create a project\",\"not\":\"New project form\"},{\"element\":\"Submit\",\"write\":\"Create project\",\"not\":\"Submit, OK\"},{\"element\":\"Success\",\"write\":\"Your project \\\"Q3 launch\\\" is ready.\",\"not\":\"Success! Project created successfully!\"},{\"element\":\"Error\",\"write\":\"We couldn't create the project. Check your connection and try again.\",\"not\":\"Error 500\"}],\"code_example\":\"\\\"use client\\\"\\n\\nimport * as React from \\\"react\\\"\\nimport { PlusIcon } from \\\"@phosphor-icons/react\\\"\\nimport { toast } from \\\"sonner\\\"\\n\\nimport { Button } from \\\"@/components/ui/button\\\"\\nimport {\\n  Dialog,\\n  DialogClose,\\n  DialogContent,\\n  DialogDescription,\\n  DialogFooter,\\n  DialogHeader,\\n  DialogTitle,\\n  DialogTrigger,\\n} from \\\"@/components/ui/dialog\\\"\\nimport { Field, FieldGroup, FieldLabel } from \\\"@/components/ui/field\\\"\\nimport { Input } from \\\"@/components/ui/input\\\"\\nimport { Textarea } from \\\"@/components/ui/textarea\\\"\\n\\nexport function CreateProject() {\\n  const [open, setOpen] = React.useState(false)\\n\\n  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\\n    event.preventDefault()\\n    const name = new FormData(event.currentTarget).get(\\\"name\\\")\\n    setOpen(false)\\n    toast.success(`Your project \\\"${name}\\\" is ready.`)\\n  }\\n\\n  return (\\n    <Dialog open={open} onOpenChange={setOpen}>\\n      <DialogTrigger asChild>\\n        <Button>\\n          <PlusIcon />\\n          Create project\\n        </Button>\\n      </DialogTrigger>\\n      <DialogContent>\\n        <form onSubmit={handleSubmit} className=\\\"flex flex-col gap-4\\\">\\n          <DialogHeader>\\n            <DialogTitle>Create a project</DialogTitle>\\n            <DialogDescription>\\n              Give it a name now. You can add the details later.\\n            </DialogDescription>\\n          </DialogHeader>\\n          <FieldGroup>\\n            <Field>\\n              <FieldLabel htmlFor=\\\"project-name\\\">Name</FieldLabel>\\n              <Input id=\\\"project-name\\\" name=\\\"name\\\" required />\\n            </Field>\\n            <Field>\\n              <FieldLabel htmlFor=\\\"project-summary\\\">\\n                Summary (optional)\\n              </FieldLabel>\\n              <Textarea id=\\\"project-summary\\\" name=\\\"summary\\\" />\\n            </Field>\\n          </FieldGroup>\\n          <DialogFooter>\\n            <DialogClose asChild>\\n              <Button type=\\\"button\\\" variant=\\\"outline\\\">\\n                Cancel\\n              </Button>\\n            </DialogClose>\\n            <Button type=\\\"submit\\\">Create project</Button>\\n          </DialogFooter>\\n        </form>\\n      </DialogContent>\\n    </Dialog>\\n  )\\n}\",\"cross_references\":[\"edit — changes the object once it exists, with the fields creation leaves out\",\"form — the layout, labels and validation of the fields\",\"saving — the pending state of the submit button and the error when creation fails\",\"empty-state — the same action, offered by an empty collection\",\"`Dialog`, `Field`, `Sonner` — the component specs\"],\"source\":\"specs/patterns/create.md\"}",
+          "chars": 5912
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_dataviz_recommendation",
+      "title": "Chart recommendation",
+      "description": "Returns the chart types recommended for an objective, each with its spec",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "objective": {
+            "type": "string",
+            "enum": [
+              "evolution",
+              "correlation",
+              "comparison",
+              "distribution",
+              "proportion",
+              "kpi"
+            ]
+          }
+        },
+        "required": ["objective"],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "objective": "evolution" },
+          "text": "{\"objective\":\"Evolution\",\"description\":\"Show change over time\",\"recommended_charts\":[{\"type\":\"line\",\"name\":\"Line Chart\",\"description\":\"Line chart for change over time\",\"library\":\"recharts\",\"component\":\"LineChart\",\"tokens\":[\"--color-chart-1\",\"--color-chart-2\",\"--color-chart-3\",\"--color-chart-4\",\"--color-chart-5\"],\"anatomy\":[\"axes\",\"lines\",\"dots\",\"tooltip\",\"legend\"],\"do\":[\"Keep it to 5 series at most\",\"Use the --color-chart-* tokens for the series colors\",\"Add a tooltip for the detailed values\"],\"dont\":[\"Do not use it to compare categories that are not over time\",\"Do not exceed 5 series in the same chart\"],\"variants\":[\"single\",\"multi\",\"stacked\"]},{\"type\":\"area\",\"name\":\"Area Chart\",\"description\":\"Area chart for volumes over time\",\"library\":\"recharts\",\"component\":\"AreaChart\",\"tokens\":[\"--color-chart-1\",\"--color-chart-2\",\"--color-chart-3\",\"--color-chart-4\",\"--color-chart-5\"],\"anatomy\":[\"axes\",\"areas\",\"tooltip\",\"legend\"],\"do\":[\"Use transparency for stacked areas\",\"Keep it to 3 series for readability\"],\"dont\":[\"Do not stack more than 3 series\",\"Do not use it without a time axis\"],\"variants\":[\"single\",\"stacked\",\"gradient\"]},{\"type\":\"difference\",\"name\":\"Difference Chart\",\"description\":\"Chart showing the gap between two series over time\",\"library\":\"recharts\",\"component\":\"AreaChart\",\"tokens\":[\"--color-chart-1\",\"--color-chart-2\"],\"anatomy\":[\"axes\",\"areas\",\"baseline\",\"tooltip\"],\"do\":[\"Color the positive and negative areas differently\",\"Add a reference line at zero\"],\"dont\":[\"Do not use it for more than 2 series\",\"Do not leave out the baseline\"],\"variants\":[\"standard\"]}]}",
+          "chars": 1584
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_dataviz_specs",
+      "title": "Chart spec",
+      "description": "Returns one chart type's spec: library, component, tokens, anatomy, do/don't, variants",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "chart_type": {
+            "type": "string",
+            "description": "e.g. bar, line, pie, data_card"
+          }
+        },
+        "required": ["chart_type"],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "chart_type": "line" },
+          "text": "{\"type\":\"line\",\"name\":\"Line Chart\",\"description\":\"Line chart for change over time\",\"library\":\"recharts\",\"component\":\"LineChart\",\"tokens\":[\"--color-chart-1\",\"--color-chart-2\",\"--color-chart-3\",\"--color-chart-4\",\"--color-chart-5\"],\"anatomy\":[\"axes\",\"lines\",\"dots\",\"tooltip\",\"legend\"],\"do\":[\"Keep it to 5 series at most\",\"Use the --color-chart-* tokens for the series colors\",\"Add a tooltip for the detailed values\"],\"dont\":[\"Do not use it to compare categories that are not over time\",\"Do not exceed 5 series in the same chart\"],\"variants\":[\"single\",\"multi\",\"stacked\"]}",
+          "chars": 567
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_ux_writing_rules",
+      "title": "UX writing rules",
+      "description": "Returns the rules for UI text: voice and tone (sentence case, verb-first buttons, errors that say what happened and how to fix it, word list) and content (UI_STRINGS defaults, one override prop per string, the defaults' language). Other rules: dsaireadable_get_design_rules",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {},
+          "text": "{\"rules\":[{\"rule\":\"✅ Read every default string from `UI_STRINGS`, never as a literal in the JSX\",\"source\":\"content.md\"},{\"rule\":\"✅ Expose an override prop for every string a component renders\",\"source\":\"content.md\"},{\"rule\":\"✅ Write the defaults in English; supply the other locales through props\",\"source\":\"content.md\"},{\"rule\":\"❌ Never hard-code an `aria-label`, a `title` or `sr-only` text in a component\",\"source\":\"content.md\"},{\"rule\":\"❌ Never mix two languages in the defaults — `npm run index:strings` fails on any literal\",\"source\":\"content.md\"},{\"rule\":\"✅ Write every interface text in sentence case, accessible names included\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"✅ Start a button with a verb that names its result, and repeat that verb on the confirmation button of a destructive action\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"✅ Say what happened, then how to fix it, in every error message\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"✅ Use contractions and \\\"you\\\"; let the product say \\\"we\\\" when it acts or fails\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"✅ Write `…` as one character, and numbers as numerals\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"❌ Never write \\\"please\\\", \\\"oops\\\" or \\\"whoops\\\", and never an exclamation mark in an error\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"❌ Never blame the reader (\\\"You entered an invalid date\\\"): describe the problem and the fix\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"❌ Never use a term from the \\\"Not\\\" column of the word list\",\"source\":\"voice-and-tone.md\"},{\"rule\":\"❌ Never shame a refusal: the way out reads `Not now` or `Cancel`, never `No thanks, I prefer paying more`\",\"source\":\"voice-and-tone.md\"}]}",
+          "chars": 1662
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_glossary",
+      "title": "Glossary",
+      "description": "Returns the glossary, or one term's definition",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "term": { "type": "string" } },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "term": "asChild" },
+          "text": "{\"term\":\"asChild\",\"definition\":\"A prop pattern (from Radix UI / shadcn) that delegates a component's rendering to its child element via Slot.Root, preserving all props and event handlers.\"}",
+          "chars": 189
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_content_library",
+      "title": "Content library",
+      "description": "Returns example UI strings: labels, placeholders and messages",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["labels", "placeholders", "messages"]
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": { "category": "messages" },
+          "text": "{\"messages\":{\"saving\":\"Saving…\",\"success_saved\":\"All set! Your changes are saved.\",\"error_save\":\"We couldn't save your changes. Check your connection and try again.\",\"leave_guard\":\"Leave without saving?\",\"success_created\":\"Your project \\\"{name}\\\" is ready.\",\"error_create\":\"We couldn't create the project. Check your connection and try again.\",\"confirm_delete_title\":\"Delete \\\"{name}\\\"?\",\"confirm_delete\":\"Its tasks and files go with it. You won't be able to get them back.\",\"confirm_delete_action\":\"Delete project\",\"success_deleted\":\"\\\"{name}\\\" is deleted.\",\"empty_state_title\":\"No projects yet\",\"empty_state\":\"Create your first project to get started.\",\"empty_search_title\":\"No results for \\\"{query}\\\"\",\"empty_search\":\"Check the spelling or try another word.\",\"loading\":\"Loading your projects…\",\"error_sign_in\":\"That email and password don't match. Check them and try again.\",\"error_email\":\"Enter an email address, like name@example.com.\"}}",
+          "chars": 942
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_get_stats",
+      "title": "Design system stats",
+      "description": "Returns component counts by status and category, token counts per tier, and spec coverage",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {},
+          "text": "{\"total_components\":65,\"spec_coverage\":\"65/65 (100%)\",\"total_tokens\":{\"semantic\":209,\"primitive\":262,\"component\":33,\"total\":504},\"components_with_variants\":21,\"components_by_status\":{\"stable\":50,\"beta\":15},\"components_by_category\":{\"Navigation\":6,\"Feedback\":5,\"Overlay\":8,\"Layout\":9,\"Conversation\":6,\"Misc\":6,\"Forms\":17,\"Data\":5,\"Typography\":1,\"Media\":1,\"Brand\":1}}",
+          "chars": 365
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_validate_screen",
+      "title": "Validate a screen",
+      "description": "Checks TSX as text, even before it parses: raw values, inline styles, the default palette, primitive tokens, prefers-color-scheme, native elements, import origins, a Tooltip with no provider",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string", "description": "The screen's TSX" }
+        },
+        "required": ["code"],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {
+            "code": "import { Button } from \"@/components/ui/button\"\n\nexport default function SaveBar() {\n  return (\n    <div className=\"flex justify-end gap-2 bg-blue-50 p-4\">\n      <Button variant=\"outline\">Cancel</Button>\n      <Button>Save</Button>\n    </div>\n  )\n}\n"
+          },
+          "text": "{\"total_issues\":1,\"errors\":1,\"warnings\":0,\"info\":0,\"passed\":false,\"issues\":[{\"severity\":\"error\",\"rule\":\"no-default-palette\",\"message\":\"Tailwind default palette class \\\"bg-blue-50\\\" found. It ignores the DS palette and does not switch in dark mode — use a semantic token class (bg-primary, text-muted-foreground…)\",\"line\":5}]}",
+          "chars": 325
+        }
+      ]
+    },
+    {
+      "name": "dsaireadable_validate_code",
+      "title": "Validate code with the ESLint rules",
+      "description": "Lints TSX with @dsaireadable/eslint-plugin, the rules a project runs (native elements, other UI or icon libraries, raw colors, default-palette and arbitrary Tailwind values, primitive tokens, deprecated imports), and type-checks it: syntax, undefined names. Run it on the final code. It does not check that a Tailwind class exists",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The whole .tsx file, imports included"
+          }
+        },
+        "required": ["code"],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "answers": [
+        {
+          "input": {
+            "code": "import { Button } from \"@/components/ui/button\"\n\nexport default function SaveBar() {\n  return (\n    <div className=\"flex justify-end gap-2 bg-blue-50 p-4\">\n      <Button variant=\"outline\">Cancel</Button>\n      <Button>Save</Button>\n    </div>\n  )\n}\n"
+          },
+          "text": "{\"total_issues\":1,\"errors\":1,\"warnings\":0,\"passed\":false,\"issues\":[{\"source\":\"eslint\",\"severity\":\"error\",\"rule\":\"dsaireadable/no-raw-values\",\"message\":\"Tailwind default palette class \\\"bg-blue-50\\\": the palette is removed from this design system. Use a semantic class (bg-primary, text-muted-foreground…).\",\"line\":5,\"column\":20}]}",
+          "chars": 330
+        }
+      ]
+    }
+  ]
+}

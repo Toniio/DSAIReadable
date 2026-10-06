@@ -295,6 +295,7 @@ host such as GitHub Pages serves it under). The `Site` workflow
 | `site/audit-docs/`                 | The Audits page: contrast, evals, the components' checks                                                                                                                                                                 |
 | `site/playground/`                 | The playground: controls derived from the cva axes and the specs' Props / API (`auto.ts`), hand-written scenarios for compound components (`scenarios/`), the canvas and its postMessage protocol                        |
 | `site/generated/examples/`         | The specs' code examples, copied by `npm run site:examples` — generated, do not edit                                                                                                                                     |
+| `site/generated/mcp/`              | The MCP server's tool definitions, answers to example inputs, resources and prompts, recorded by `npm run site:mcp` (`scripts/build-site-mcp.ts`) for the Tools page — generated, do not edit                            |
 
 The site follows the repository's rules: ESLint, `tokens:lint-values` and knip
 cover `site/`, and `npm run site:check` lints it with the config a consuming
@@ -465,7 +466,8 @@ npm run skills:validate     # The agent skills: format, and every rule cites a s
 npm run evals:test          # The conformance harness scores its gold examples, the edit tasks' bases and its fixtures, with no model
 npm run evals:generate      # Screens from Claude Code on a subscription, no API key (evals/README.md)
 npm run site:dev            # The documentation site, locally (Next.js dev server)
-npm run site:check          # The site: examples copied from the specs are fresh, the consumer lint and the focus check pass
+npm run site:mcp            # Records the MCP server's definitions and answers for the site's Tools page, in site/generated/mcp/
+npm run site:check          # The site: examples copied from the specs and the MCP answers are fresh, the consumer lint and the focus check pass
 npm run site:build          # The static documentation site, in site/out/
 npm run site:test           # The built site served under its base path and loaded in headless Chromium: axe, page errors, a focus indicator on every tab stop
 npm run format              # Prettier on every .ts/.tsx/.md

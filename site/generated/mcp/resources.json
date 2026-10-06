@@ -1,0 +1,31 @@
+{
+  "resources": [
+    {
+      "name": "component-spec",
+      "title": "Component spec",
+      "uriTemplate": "ds://component/{name}/spec",
+      "description": "The full spec of one component: role, usage, constraints, anatomy, tokens, props, states, accessibility, code example, cross-references",
+      "mimeType": "application/json",
+      "listed": 65,
+      "example": { "uri": "ds://component/Button/spec", "chars": 10613 }
+    },
+    {
+      "name": "token",
+      "title": "Semantic token",
+      "uriTemplate": "ds://token/{path}",
+      "description": "One semantic token: its CSS variable, its light and dark values, its status and usage. The path uses dots, e.g. ds://token/color.background.default",
+      "mimeType": "application/json",
+      "listed": 0,
+      "example": { "uri": "ds://token/color.background.default", "chars": 255 }
+    },
+    {
+      "name": "guidelines",
+      "title": "Design guidelines",
+      "uri": "ds://guidelines",
+      "description": "Every design rule: the critical rules, the foundation do/don't and the composition rules of design-system.index.json",
+      "mimeType": "application/json",
+      "listed": 1,
+      "example": { "uri": "ds://guidelines", "chars": 37428 }
+    }
+  ]
+}
