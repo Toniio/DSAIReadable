@@ -6,7 +6,7 @@
 import type { A11yResult } from "./a11y"
 import type { BudgetResult } from "./budget"
 import type { LintFamily, StaticResult } from "./static"
-import { addResults, type ToolResults } from "./stream"
+import { addResults, type TimelineTurn, type ToolResults } from "./stream"
 
 /** What the generator measured while it worked: the MCP tools in use, and what they cost. */
 export interface GenerationMetrics {
@@ -19,6 +19,8 @@ export interface GenerationMetrics {
   tools: Record<string, number>
   /** The characters each tool sent back; absent from metrics written before it was measured. */
   results?: ToolResults
+  /** The calls of each turn; absent from metrics written before it was kept. */
+  timeline?: TimelineTurn[]
 }
 
 /** The tools of the design system's MCP server are named `dsaireadable_*`: any other call (Skill, Read, read_skill_file) is not one. */
@@ -197,7 +199,10 @@ export function summarize(
       : null
   const metrics = tasks.flatMap((t) => (t.metrics ? [t.metrics] : []))
   const sum = (
-    key: keyof Omit<GenerationMetrics, "tools" | "toolCalls" | "results">
+    key: keyof Omit<
+      GenerationMetrics,
+      "tools" | "toolCalls" | "results" | "timeline"
+    >
   ) => metrics.reduce((a, m) => a + m[key], 0)
   const calls = metrics.flatMap((m) => Object.entries(m.tools))
   const mcpCalls = calls

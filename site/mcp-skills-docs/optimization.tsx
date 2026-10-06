@@ -291,7 +291,7 @@ export function Returns() {
         {
           label: `${gain.tasks} screens with the server`,
           value: usd(gain.run.mcp, gain.estimated, 2),
-          detail: "One pass of the default tasks",
+          detail: `${gain.tasks} default tasks, built once`,
         },
         {
           label: `${gain.tasks} screens with no context`,

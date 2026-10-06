@@ -152,20 +152,49 @@ interface SessionTask {
     toolCalls: number
     inputTokens: number
     outputTokens: number
-    /** By `tool` or `tool:format`: the calls and the characters of their answers. */
-    results?: Record<string, { calls: number; chars: number }>
+    /** What each turn sent and the calls it made at once. */
+    timeline?: {
+      context: number
+      calls: { tool: string; format?: string; chars?: number }[]
+    }[]
   }
   session?: { costUsd?: number }
 }
 
-/** One tool, at one format, in a session. */
-interface SessionAnswer {
+/** The calls of one tool, at one format, in one turn. */
+interface SessionCall {
   tool: string
   /** `concise` or `detailed`, for a tool that takes `response_format`. */
   format?: string
   calls: number
   /** The characters of one answer: the mean when the agent called it more than once. */
   perAnswer: number
+}
+
+/** One turn of a session: the agent answers with calls, which run together, or with its screen. */
+interface SessionTurn {
+  /** The input tokens the turn sent: the whole conversation so far. */
+  context: number
+  calls: SessionCall[]
+}
+
+/**
+ * Where a tool comes in a turn, whose calls have no order of their own: the
+ * workflow's, with the writing rules after the pattern. A tool not listed
+ * comes last, and `concise` comes before `detailed`.
+ */
+const TURN_ORDER = [
+  "dsaireadable_get_design_system_overview",
+  "dsaireadable_get_design_rules",
+  "dsaireadable_get_pattern",
+  "dsaireadable_get_ux_writing_rules",
+  "dsaireadable_get_component_specs",
+  "dsaireadable_validate_code",
+]
+
+const turnRank = (tool: string) => {
+  const rank = TURN_ORDER.indexOf(tool)
+  return rank === -1 ? TURN_ORDER.length : rank
 }
 
 /** A recorded session of the eval harness: one screen, built with the server. */
@@ -178,7 +207,7 @@ export interface Session {
   inputTokens: number
   outputTokens: number
   costUsd?: number
-  answers: SessionAnswer[]
+  timeline: SessionTurn[]
 }
 
 /**
@@ -196,7 +225,7 @@ export function medianSession(): Session | undefined {
       readJson<{ tasks: SessionTask[] }>(
         `evals/history/${run.file}.json`
       ).tasks.flatMap((task) =>
-        task.metrics ? [{ task, metrics: task.metrics }] : []
+        task.metrics?.timeline ? [{ task, metrics: task.metrics }] : []
       )
     )
     .sort((a, b) => a.metrics.inputTokens - b.metrics.inputTokens)
@@ -211,12 +240,35 @@ export function medianSession(): Session | undefined {
     inputTokens: metrics.inputTokens,
     outputTokens: metrics.outputTokens,
     costUsd: task.session?.costUsd,
-    answers: Object.entries(metrics.results ?? {})
-      .map(([key, { calls, chars }]) => {
-        const [tool, format] = key.split(":")
-        return { tool, format, calls, perAnswer: Math.round(chars / calls) }
-      })
-      .sort((a, b) => b.perAnswer - a.perAnswer),
+    timeline: (metrics.timeline ?? []).map(({ context, calls }) => {
+      const grouped = new Map<string, SessionCall & { chars: number }>()
+      for (const { tool, format, chars } of calls) {
+        const key = `${tool}:${format ?? ""}`
+        const group = grouped.get(key) ?? {
+          tool,
+          format,
+          calls: 0,
+          perAnswer: 0,
+          chars: 0,
+        }
+        group.calls++
+        group.chars += chars ?? 0
+        grouped.set(key, group)
+      }
+      return {
+        context,
+        calls: [...grouped.values()]
+          .map(({ chars, ...group }) => ({
+            ...group,
+            perAnswer: Math.round(chars / group.calls),
+          }))
+          .sort(
+            (a, b) =>
+              turnRank(a.tool) - turnRank(b.tool) ||
+              (a.format ?? "").localeCompare(b.format ?? "")
+          ),
+      }
+    }),
   }
 }
 

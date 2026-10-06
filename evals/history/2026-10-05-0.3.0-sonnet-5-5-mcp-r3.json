@@ -177,7 +177,56 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6027,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 7467
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 24289,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 3843
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5067
+              }
+            ]
+          },
+          {
+            "context": 28022,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 30023,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -248,7 +297,94 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6011,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5912
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 25624,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5556
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 7771
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8762
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2780
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5780
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              }
+            ]
+          },
+          {
+            "context": 44646,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 48082,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -314,7 +450,65 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6015,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 4611
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 23350,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6240
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2780
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 9050
+              }
+            ]
+          },
+          {
+            "context": 31133,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 34351,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -384,7 +578,102 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6003,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 8681
+              }
+            ]
+          },
+          {
+            "context": 11288,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 4908
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5556
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              }
+            ]
+          },
+          {
+            "context": 18061,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8762
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 9050
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5462
+              }
+            ]
+          },
+          {
+            "context": 31678,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 3875
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 994
+              }
+            ]
+          },
+          {
+            "context": 35258,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 39552,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -449,7 +738,86 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6002,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 3719
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5912
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 25309,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4827
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5556
+              }
+            ]
+          },
+          {
+            "context": 33508,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 6809
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "concise",
+                "chars": 1534
+              }
+            ]
+          },
+          {
+            "context": 37664,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 40171,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -525,7 +893,102 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6022,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5141
+              },
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 7349
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 12953,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5428
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 7547
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5780
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4827
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5048
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 3719
+              }
+            ]
+          },
+          {
+            "context": 26810,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_components",
+                "chars": 133
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              }
+            ]
+          },
+          {
+            "context": 27842,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              }
+            ]
+          },
+          {
+            "context": 28952,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 32364,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -606,7 +1069,107 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6018,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 23236,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5912
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8762
+              },
+              {
+                "tool": "dsaireadable_get_content_library",
+                "chars": 2887
+              }
+            ]
+          },
+          {
+            "context": 32873,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2384
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5462
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4128
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5556
+              }
+            ]
+          },
+          {
+            "context": 41638,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 46439,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 47320,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -682,7 +1245,93 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5989,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 3655
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2169
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              }
+            ]
+          },
+          {
+            "context": 24976,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4128
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4191
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5912
+              }
+            ]
+          },
+          {
+            "context": 32193,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_tokens",
+                "chars": 19619
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              }
+            ]
+          },
+          {
+            "context": 43195,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 46252,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -758,7 +1407,96 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6011,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_components",
+                "chars": 779
+              },
+              {
+                "tool": "dsaireadable_get_components",
+                "chars": 1098
+              }
+            ]
+          },
+          {
+            "context": 25349,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 15055
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4767
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              }
+            ]
+          },
+          {
+            "context": 35339,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 6809
+              }
+            ]
+          },
+          {
+            "context": 38981,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 40767,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 43895,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -842,7 +1580,106 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6010,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 23246,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5556
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 4908
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8762
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4191
+              }
+            ]
+          },
+          {
+            "context": 35366,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2846
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5067
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 936
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "chars": 1150
+              }
+            ]
+          },
+          {
+            "context": 41023,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 44299,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -907,7 +1744,97 @@
             "calls": 2,
             "chars": 20013
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6023,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5508
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 3719
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              }
+            ]
+          },
+          {
+            "context": 24498,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4686
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4827
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 811
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 1112
+              }
+            ]
+          },
+          {
+            "context": 29737,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              }
+            ]
+          },
+          {
+            "context": 31478,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_get_tokens",
+                "chars": 394
+              }
+            ]
+          },
+          {
+            "context": 33743,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_tokens",
+                "chars": 19619
+              }
+            ]
+          },
+          {
+            "context": 41960,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 43986,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -973,7 +1900,70 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6001,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6240
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              }
+            ]
+          },
+          {
+            "context": 24110,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5462
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8762
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 4908
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2780
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 34153,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 37021,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1044,7 +2034,73 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5998,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5780
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5048
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              }
+            ]
+          },
+          {
+            "context": 26861,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4128
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              }
+            ]
+          },
+          {
+            "context": 30061,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 33582,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1115,7 +2171,58 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6009,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 6674
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 7349
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              }
+            ]
+          },
+          {
+            "context": 12571,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5508
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 15691,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 18650,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1200,7 +2307,103 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5999,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_get_dataviz_recommendation",
+                "chars": 1683
+              },
+              {
+                "tool": "dsaireadable_get_dataviz_recommendation",
+                "chars": 1584
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 7349
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              }
+            ]
+          },
+          {
+            "context": 12295,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_dataviz_specs",
+                "chars": 563
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 10913
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4128
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 5082
+              }
+            ]
+          },
+          {
+            "context": 21081,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_dataviz_specs",
+                "chars": 567
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5780
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 3114
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              }
+            ]
+          },
+          {
+            "context": 26830,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 30486,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1271,7 +2474,77 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6007,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 8681
+              }
+            ]
+          },
+          {
+            "context": 11292,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 15055
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 5082
+              }
+            ]
+          },
+          {
+            "context": 22495,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8688
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4517
+              }
+            ]
+          },
+          {
+            "context": 28591,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 31670,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1356,7 +2629,105 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5999,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 6450
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 26148,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5508
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2075
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4191
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 811
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 936
+              },
+              {
+                "tool": "dsaireadable_get_content_library",
+                "chars": 2887
+              }
+            ]
+          },
+          {
+            "context": 33498,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4128
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              }
+            ]
+          },
+          {
+            "context": 39880,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 43959,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1431,7 +2802,93 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5996,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4464
+              }
+            ]
+          },
+          {
+            "context": 24370,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6240
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 4908
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 3843
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8762
+              }
+            ]
+          },
+          {
+            "context": 36558,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5556
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 861
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              }
+            ]
+          },
+          {
+            "context": 39656,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 43498,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1501,7 +2958,90 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5986,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5303
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              }
+            ]
+          },
+          {
+            "context": 23558,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 6764
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4686
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              }
+            ]
+          },
+          {
+            "context": 30931,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "concise",
+                "chars": 861
+              }
+            ]
+          },
+          {
+            "context": 32751,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "concise",
+                "chars": 1902
+              }
+            ]
+          },
+          {
+            "context": 35834,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 36348,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1586,7 +3126,90 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5998,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_components",
+                "chars": 7850
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              }
+            ]
+          },
+          {
+            "context": 26020,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 9393
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2458
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              }
+            ]
+          },
+          {
+            "context": 32071,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4827
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "chars": 994
+              },
+              {
+                "tool": "dsaireadable_get_content_library",
+                "chars": 2887
+              }
+            ]
+          },
+          {
+            "context": 37603,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 41519,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1662,7 +3285,97 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6007,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_get_components",
+                "chars": 907
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              }
+            ]
+          },
+          {
+            "context": 22991,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 10104
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 6373
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 6970
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5063
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 35486,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4517
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4128
+              }
+            ]
+          },
+          {
+            "context": 40651,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 43770,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1723,7 +3436,55 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5987,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4787
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              }
+            ]
+          },
+          {
+            "context": 23298,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 2463
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              }
+            ]
+          },
+          {
+            "context": 25218,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 26227,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1808,7 +3569,81 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6001,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_design_system_overview",
+                "chars": 2358
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8688
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4517
+              },
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_icons",
+                "chars": 500
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 5082
+              }
+            ]
+          },
+          {
+            "context": 16072,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6175
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4191
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 1182
+              }
+            ]
+          },
+          {
+            "context": 21928,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 25363,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1879,7 +3714,69 @@
             "calls": 1,
             "chars": 77
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 5990,
+            "calls": [
+              {
+                "tool": "dsaireadable_list_patterns",
+                "chars": 2132
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "format": "detailed",
+                "chars": 36879
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4038
+              }
+            ]
+          },
+          {
+            "context": 23135,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 7467
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              },
+              {
+                "tool": "dsaireadable_get_ux_writing_rules",
+                "chars": 1662
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 8762
+              }
+            ]
+          },
+          {
+            "context": 32851,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              },
+              {
+                "tool": "dsaireadable_validate_screen",
+                "chars": 77
+              }
+            ]
+          },
+          {
+            "context": 36352,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1935,7 +3832,41 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6634,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 5462
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 1463
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5832
+              }
+            ]
+          },
+          {
+            "context": 12104,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 13158,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",
@@ -1991,7 +3922,46 @@
             "calls": 1,
             "chars": 68
           }
-        }
+        },
+        "timeline": [
+          {
+            "context": 6548,
+            "calls": [
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 6240
+              },
+              {
+                "tool": "dsaireadable_get_component_specs",
+                "format": "detailed",
+                "chars": 4527
+              },
+              {
+                "tool": "dsaireadable_get_pattern",
+                "format": "detailed",
+                "chars": 5556
+              },
+              {
+                "tool": "dsaireadable_get_design_rules",
+                "chars": 7349
+              }
+            ]
+          },
+          {
+            "context": 16177,
+            "calls": [
+              {
+                "tool": "dsaireadable_validate_code",
+                "chars": 68
+              }
+            ]
+          },
+          {
+            "context": 18122,
+            "calls": []
+          }
+        ]
       },
       "session": {
         "subtype": "success",

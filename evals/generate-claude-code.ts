@@ -66,7 +66,7 @@ import {
   WITH_MCP,
 } from "./lib/claude"
 import type { GenerationMetrics } from "./lib/report"
-import { readStream, toolResults } from "./lib/stream"
+import { readStream, timeline, toolResults } from "./lib/stream"
 import { loadTasks, taskMessage, type Task } from "./lib/tasks"
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
@@ -482,6 +482,7 @@ async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
         (result.subtype === "success" && !result.is_error))
     if (complete) {
       const usage = result!.usage!
+      const turns = readStream(stream.join("\n"))
       return {
         kind: "done",
         // A refusal is a task with no output, as the claude generator counts it.
@@ -496,7 +497,8 @@ async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
             (usage.cache_creation_input_tokens ?? 0),
           outputTokens: usage.output_tokens ?? 0,
           tools,
-          results: toolResults(readStream(stream.join("\n"))),
+          results: toolResults(turns),
+          timeline: timeline(turns),
         },
         about: {
           subtype: result!.subtype,

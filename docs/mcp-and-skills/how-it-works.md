@@ -27,7 +27,9 @@ The [`build_screen`](../../mcp-server/src/prompts/index.ts) prompt sets the work
 5. `dsaireadable_get_component_specs`, once for each component kept.
 6. The screen, then `dsaireadable_validate_screen` and `dsaireadable_validate_code`, again after each fix, until both report no error.
 
-The eval harness records each session it runs: the tools the agent called, how many times, and the size of their answers, in `evals/history/`. The session in the middle of the latest version's runs with the server, by input tokens, shows where the context of a typical screen goes.
+That is the workflow the prompt prescribes, not what every session does. An agent skips a step it does not need: `dsaireadable_get_components` when the pattern already names the components.
+
+The eval harness records what each session did in `evals/history/`. This typical session shows where the context of a typical screen goes, turn by turn. The calls of a turn run together, so they are grouped by tool, and each turn sends the whole conversation again.
 
 <!-- site: session -->
 
@@ -36,7 +38,7 @@ The eval harness records each session it runs: the tools the agent called, how m
 A screen can pass every lint and still be hard to use: two buttons fight for attention, a list goes blank with no next step, a delete happens without a word. The `dsaireadable-ui-guard` agent skill gives a screen that second look when someone asks for a review. It runs the validation tools first, ticks its checklist domain by domain, writes one line per finding, and ends with a verdict: pass or fail.
 
 - **On request only.** While a screen is built, the server's patterns and validation tools carry the rules.
-- **Judgment only.** What a tool can check stays with the tools: the ESLint plugin, `dsaireadable_validate_code`, axe.
+- **Judgment only.** What a tool can check stays with the tools: the ESLint plugin, `dsaireadable_validate_code`, axe-core (accessibility audit).
 - **No copied limit.** Each rule names its source (`spec:Button`, `pattern:delete`, `foundation:voice-and-tone`), and the agent reads the value there through the server, so the skill cannot drift from the specs. `npm run skills:validate` checks that every source it cites exists.
 - **Pinned to the release.** `npx skills add` and the Claude Code plugin install it from the release tag, so the tools it names always exist.
 

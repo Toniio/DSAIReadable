@@ -25,7 +25,7 @@ function Fact({ term, children }: { term: string; children: ReactNode }) {
 
 /**
  * A recorded session of the eval harness: the request, what the session
- * used, then each tool the agent called with the size of one of its answers
+ * used, then each turn with its calls, grouped by tool, and the size of their answers
  * against the server's cap.
  */
 export function SessionBlock({
@@ -54,53 +54,75 @@ export function SessionBlock({
       <blockquote className="border-l border-primary pl-4 text-sm leading-relaxed text-muted-foreground">
         {session.prompt}
       </blockquote>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Tool</TableHead>
-            <TableHead>Calls</TableHead>
-            <TableHead>Characters per answer</TableHead>
-            <TableHead>Of the {number(cap)}-character cap</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {session.answers.map((answer) => {
-            const share = Math.round((answer.perAnswer / cap) * 100)
-            return (
-              <TableRow key={`${answer.tool}:${answer.format ?? ""}`}>
-                <TableCell>
-                  <span className="flex flex-wrap items-center gap-2">
-                    <code className="font-mono">{answer.tool}</code>
-                    {answer.format ? (
-                      <Badge variant="outline">{answer.format}</Badge>
-                    ) : null}
-                  </span>
-                </TableCell>
-                <TableCell className="font-mono tabular-nums">
-                  {answer.calls}
-                </TableCell>
-                <TableCell className="font-mono tabular-nums">
-                  {number(answer.perAnswer)}
-                </TableCell>
-                <TableCell>
-                  <span className="flex items-center gap-2">
-                    <span
-                      aria-hidden="true"
-                      className="block h-2 w-24 bg-muted"
-                    >
-                      <span
-                        className="block h-full bg-primary"
-                        style={{ width: `${Math.max(share, 1)}%` }}
-                      />
-                    </span>
-                    <span className="font-mono tabular-nums">{share}%</span>
-                  </span>
-                </TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </Table>
+      <ol className="flex min-w-0 flex-col gap-4">
+        {session.timeline.map((turn, index) => (
+          <li key={index} className="flex min-w-0 flex-col gap-2">
+            <h4 className="text-sm font-medium">
+              Turn {index + 1}
+              <span className="font-normal text-muted-foreground">
+                {" "}
+                · {number(turn.context)} input tokens
+                {turn.calls.length === 0 ? " · the screen, no tool" : ""}
+              </span>
+            </h4>
+            {turn.calls.length > 0 ? (
+              <Table className="table-fixed">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-2/5">Tool</TableHead>
+                    <TableHead className="w-1/12">Calls</TableHead>
+                    <TableHead className="w-1/4 whitespace-normal">
+                      Characters per answer
+                    </TableHead>
+                    <TableHead className="whitespace-normal">
+                      Of the {number(cap)}-character cap
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {turn.calls.map((call, k) => {
+                    const share = Math.round((call.perAnswer / cap) * 100)
+                    return (
+                      <TableRow key={k}>
+                        <TableCell>
+                          <span className="flex flex-wrap items-center gap-2">
+                            <code className="font-mono">{call.tool}</code>
+                            {call.format ? (
+                              <Badge variant="outline">{call.format}</Badge>
+                            ) : null}
+                          </span>
+                        </TableCell>
+                        <TableCell className="font-mono tabular-nums">
+                          {call.calls}
+                        </TableCell>
+                        <TableCell className="font-mono tabular-nums">
+                          {number(call.perAnswer)}
+                        </TableCell>
+                        <TableCell>
+                          <span className="flex items-center gap-2">
+                            <span
+                              aria-hidden="true"
+                              className="block h-2 w-24 bg-muted"
+                            >
+                              <span
+                                className="block h-full bg-primary"
+                                style={{ width: `${Math.max(share, 1)}%` }}
+                              />
+                            </span>
+                            <span className="font-mono tabular-nums">
+                              {share}%
+                            </span>
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            ) : null}
+          </li>
+        ))}
+      </ol>
     </div>
   )
 }
