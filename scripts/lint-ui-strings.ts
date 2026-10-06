@@ -15,6 +15,9 @@
  * The strings themselves follow the voice (specs/foundations/voice-and-tone.md):
  * sentence case, `…` as one character, no word the word list rejects, and no
  * final period or exclamation mark on an accessible name.
+ *
+ * Each one has its row in the Overriding table of specs/foundations/content.md,
+ * with the prop that replaces it and the same default.
  */
 import { readFileSync, readdirSync } from "node:fs"
 import { join } from "node:path"
@@ -173,6 +176,60 @@ if (voice.length > 0) {
   process.exit(1)
 }
 
+/**
+ * The Overriding table of content.md: one row per key of `UI_STRINGS`, with
+ * the prop that replaces it and its default. Agents read the spec, not the
+ * code: a key missing there is a string they cannot replace.
+ */
+const SPEC = "specs/foundations/content.md"
+const table: string[] = []
+
+function overridingRows(): Map<string, string> {
+  const markdown = readFileSync(SPEC, "utf8")
+  const section = markdown
+    .split(/^## /m)
+    .find((s) => s.startsWith("Overriding"))
+  const rows = new Map<string, string>()
+  for (const line of (section ?? "").split("\n")) {
+    const cells = line.split("|").map((cell) => cell.trim())
+    const key = cells[1]?.match(/^`([\w.]+)(?:\(item\))?`$/)?.[1]
+    if (!key) continue
+    if (rows.has(key)) table.push(`\`${key}\` has two rows`)
+    rows.set(key, cells[4]?.replace(/^`|`$/g, "") ?? "")
+  }
+  return rows
+}
+
+const rows = overridingRows()
+const codeStrings = new Map(
+  Object.entries(UI_STRINGS).flatMap(([group, entries]) =>
+    Object.entries(entries as Record<string, unknown>).map(([key, value]) => [
+      `${group}.${key}`,
+      typeof value === "function"
+        ? String((value as (item: string) => string)("{item}"))
+        : String(value),
+    ])
+  )
+)
+
+for (const [key, value] of codeStrings) {
+  const row = rows.get(key)
+  if (row === undefined) table.push(`\`${key}\` has no row`)
+  else if (row !== value)
+    table.push(`\`${key}\`: the table says "${row}", the code "${value}"`)
+}
+for (const key of rows.keys()) {
+  if (!codeStrings.has(key)) table.push(`\`${key}\` is not a key of UI_STRINGS`)
+}
+
+if (table.length > 0) {
+  console.error(
+    `❌ lint-ui-strings: the Overriding table of ${SPEC} is out of step with lib/ui-strings.ts.\n`
+  )
+  for (const t of table) console.error(`   ${t}`)
+  process.exit(1)
+}
+
 if (findings.length > 0) {
   console.error(`❌ lint-ui-strings: ${findings.length} hardcoded string(s).\n`)
   for (const f of findings) {
@@ -191,5 +248,5 @@ const consumers = modules.filter((f) =>
 ).length
 
 console.log(
-  `✅ lint-ui-strings: no hardcoded accessible name, ${consumers} component(s) read lib/ui-strings.ts, ${strings(UI_STRINGS).length} default strings follow the voice.`
+  `✅ lint-ui-strings: no hardcoded accessible name, ${consumers} component(s) read lib/ui-strings.ts, ${strings(UI_STRINGS).length} default strings follow the voice and have their row in the Overriding table of ${SPEC}.`
 )
