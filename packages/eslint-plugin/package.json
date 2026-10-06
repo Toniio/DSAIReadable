@@ -1,6 +1,6 @@
 {
   "name": "@dsaireadable/eslint-plugin",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "ESLint rules that keep code on the DSAIReadable design system",
   "keywords": [
     "eslint",

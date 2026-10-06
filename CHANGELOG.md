@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.1
+
+### Patch Changes
+
+- 9fd1a7e: mcp: `dsaireadable_get_glossary` answers with the exact term before a term that contains it. Asked for `token`, it served `component-token`; `component`, `slot` and `variant` served `component-token`, `data-slot` and `variant-axis` the same way. A partial match now answers only when no term is exact, and both still ignore case.
+- f8099d4: docs: `llms.txt` lists a new section, "MCP server and skills": the three pages of the documentation site's MCP & Skills section, written in `docs/mcp-and-skills/`.
+
+  - How it works: how the server compiles its answers from the specs before it starts, what a recorded session reads tool by tool, and what the UI guard skill checks.
+  - Tools: the server's prompts, each of its tools with its definition and a real answer, and its resources.
+  - Optimization: what the server costs and what it buys against no context, version by version, in conformance, input tokens and dollars per screen; and the levers behind each change, with their pull requests.
+
 ## 0.3.0
 
 ### Minor Changes
