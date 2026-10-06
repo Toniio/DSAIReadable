@@ -1,9 +1,5 @@
 import Link from "next/link"
-import {
-  ArrowRightIcon,
-  ArrowUpRightIcon,
-  GithubLogoIcon,
-} from "@phosphor-icons/react/ssr"
+import { ArrowRightIcon, GithubLogoIcon } from "@phosphor-icons/react/ssr"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -11,7 +7,7 @@ import { headingVariants } from "@/components/ui/heading"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { cn } from "@/lib/utils"
 import { SECTIONS } from "@/site/lib/nav"
-import { GITHUB_URL, META, sourceUrl, VERSION } from "@/site/lib/site"
+import { GITHUB_URL, META, VERSION } from "@/site/lib/site"
 import {
   compositionRules,
   divergences,
@@ -25,10 +21,10 @@ import {
 } from "@/site/overview/data"
 import { CompositionRules } from "@/site/overview/composition-rules"
 import { GetStarted } from "@/site/overview/get-started"
+import { Glossary } from "@/site/overview/glossary"
 import { OverviewFrame } from "@/site/overview/overview-frame"
 import { Rules } from "@/site/overview/rules"
 import { DocSection } from "@/site/ui/doc-section"
-import { LINK } from "@/site/ui/link"
 import { InlineMarkdown } from "@/site/ui/markdown"
 import { PageHeader } from "@/site/ui/page-header"
 
@@ -59,7 +55,6 @@ const SECTION_LINES: Record<string, string> = {
 
 export default function OverviewPage() {
   const facts = sectionFacts()
-  const terms = glossary()
 
   return (
     <OverviewFrame toc={TOC}>
@@ -201,26 +196,7 @@ export default function OverviewPage() {
           </>
         }
       >
-        <dl className="grid gap-x-8 gap-y-4 border-t pt-4 md:grid-cols-2">
-          {terms.map((entry) => (
-            <div key={entry.term} className="flex flex-col gap-1">
-              <dt className="font-mono text-sm font-medium">{entry.term}</dt>
-              <dd className="text-sm leading-relaxed text-muted-foreground">
-                <InlineMarkdown>{entry.definition}</InlineMarkdown>
-              </dd>
-            </div>
-          ))}
-        </dl>
-        <p className="text-xs text-muted-foreground">
-          <Link
-            href={sourceUrl("design-system.index.json")}
-            className={cn(LINK, "inline-flex items-center gap-1")}
-          >
-            design-system.index.json
-            <ArrowUpRightIcon aria-hidden="true" />
-          </Link>{" "}
-          holds the source of most terms.
-        </p>
+        <Glossary terms={glossary()} />
       </DocSection>
     </OverviewFrame>
   )
