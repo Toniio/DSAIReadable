@@ -35,24 +35,24 @@ export default function HowItWorksPage() {
   const guard = uiGuard()
   const stats = [
     {
-      label: "Tools",
-      value: facts.tools,
-      detail: "Read-only, each named dsaireadable_*",
-    },
-    {
-      label: "Resources",
-      value: facts.resources,
-      detail: "A spec, a token, the guidelines",
-    },
-    {
       label: "Prompts",
       value: facts.prompts,
       detail: "A task opened on the server's workflow",
     },
     {
+      label: "Tools",
+      value: facts.tools,
+      detail: "Read-only, each named dsaireadable_*",
+    },
+    {
       label: facts.skills.length === 1 ? "Skill" : "Skills",
       value: facts.skills.length,
       detail: facts.skills.join(", "),
+    },
+    {
+      label: "Resources",
+      value: facts.resources,
+      detail: "A spec, a token, the guidelines",
     },
     {
       label: "Context cache",

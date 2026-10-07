@@ -72,7 +72,7 @@ export function SessionBlock({
                     <TableHead className="w-2/5">Tool</TableHead>
                     <TableHead className="w-1/12">Calls</TableHead>
                     <TableHead className="w-1/4 whitespace-normal">
-                      Characters per answer
+                      Tokens per answer
                     </TableHead>
                     <TableHead className="whitespace-normal">
                       Of the {number(cap)}-character cap
