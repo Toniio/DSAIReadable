@@ -50,7 +50,7 @@ export function ResourceTable({ resources }: { resources: ResourceRecord[] }) {
               <span className="flex flex-col gap-1">
                 <code className="font-mono">{resource.example.uri}</code>
                 <span className="text-muted-foreground tabular-nums">
-                  {number(resource.example.chars)} characters
+                  {number(resource.example.chars)} tokens
                 </span>
               </span>
             </TableCell>

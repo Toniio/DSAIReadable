@@ -28,11 +28,6 @@ interface ManifestEntry {
   value: { light: string; dark?: string }
 }
 
-interface RegistryItem {
-  name: string
-  type: string
-}
-
 interface IndexEntry {
   shadcn: { divergences: unknown[] }
 }
@@ -127,8 +122,6 @@ export function stats(): Stat[] {
   const foundationPages = FOUNDATION_GROUPS.flatMap((group) => group.items)
   const allPatterns = patterns()
   const byKind = count(allPatterns, (entry) => entry.kind)
-  const registry = readJson<{ items: RegistryItem[] }>("registry.json").items
-  const ui = registry.filter((item) => item.type === "registry:ui").length
   const tools = mcpTools()
   const evals = latestEval()
   const rules = eslintRules()
@@ -160,11 +153,6 @@ export function stats(): Stat[] {
       label: "Patterns",
       value: String(allPatterns.length),
       detail: `${byKind.get("task") ?? 0} tasks · ${byKind.get("ui") ?? 0} interface`,
-    },
-    {
-      label: "Registry items",
-      value: String(registry.length),
-      detail: `${ui} components · ${registry.length - ui} base, fonts and rules`,
     },
     {
       label: "MCP tools",
