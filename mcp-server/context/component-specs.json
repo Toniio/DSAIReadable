@@ -4975,7 +4975,7 @@
         "behavior": "A disabled day cannot be selected: its cell takes `text-muted-foreground` and `opacity-disabled` (0.5) once, whether the day has a button or not: the cell dims itself only when its button is not disabled, since a disabled button dims itself; a previous or next button with no month to reach (`aria-disabled`) also takes `opacity-disabled`"
       }
     ],
-    "accessibility": "**Pattern**: A date [grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (react-day-picker)\n\n**Role**: A grid of dates; the selected day carries `aria-selected`; an unavailable day is a `disabled` button.\n\n**Keyboard**:\n\n| Key                               | Action                            |\n| --------------------------------- | --------------------------------- |\n| `ArrowLeft` / `ArrowRight`        | Previous / next day               |\n| `ArrowUp` / `ArrowDown`           | Same day the previous / next week |\n| `Home` / `End`                    | Start / end of the week           |\n| `PageUp` / `PageDown`             | Previous / next month             |\n| `Shift+PageUp` / `Shift+PageDown` | Previous / next year              |\n| `Enter` / `Space`                 | Selects the focused day           |\n\n**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop.\n\n**Pitfalls**:\n\n- A calendar alone is not enough to enter a date the user already knows: offer a text input as well.\n- Mark unavailable days by something other than color.",
+    "accessibility": "**Pattern**: A date [grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (react-day-picker)\n\n**Role**: A grid of dates; the selected day carries `aria-selected`; an unavailable day is a `disabled` button.\n\n**Keyboard**:\n\n| Key                               | Action                            |\n| --------------------------------- | --------------------------------- |\n| `ArrowLeft` / `ArrowRight`        | Previous / next day               |\n| `ArrowUp` / `ArrowDown`           | Same day the previous / next week |\n| `Home` / `End`                    | Start / end of the week           |\n| `PageUp` / `PageDown`             | Previous / next month             |\n| `Shift+PageUp` / `Shift+PageDown` | Previous / next year              |\n| `Enter` / `Space`                 | Selects the focused day           |\n\n**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop. Each day button is named by its full date in the calendar's `locale` (\"Sunday, September 27, 2026\"), with the number the button shows: no ordinal (\"27th\"), so a speech user who says the visible number reaches it (WCAG 2.5.3, Label in Name).\n\n**Pitfalls**:\n\n- A calendar alone is not enough to enter a date the user already knows: offer a text input as well.\n- Mark unavailable days by something other than color.",
     "code_example": "import { Calendar } from \"@/components/ui/calendar\"\nimport { useState } from \"react\"\n\nexport default function Example() {\n  const [date, setDate] = useState<Date | undefined>(new Date())\n\n  return (\n    <Calendar\n      mode=\"single\"\n      selected={date}\n      onSelect={setDate}\n      showOutsideDays\n    />\n  )\n}",
     "cross_references": [
       "Popover",
@@ -6111,7 +6111,7 @@
       {
         "component": "ChartLegendContent",
         "prop": "`verticalAlign`",
-        "type": "`VerticalAlignmentType`",
+        "type": "`\"bottom\" | \"middle\" | \"top\"`",
         "default": "`\"bottom\"`",
         "description": "Vertical position of the legend"
       },
@@ -7254,14 +7254,14 @@
       {
         "component": "ComboboxContent",
         "prop": "`align`",
-        "type": "`Align`",
+        "type": "`\"center\" | \"end\" | \"start\"`",
         "default": "`\"start\"`",
         "description": "Alignment of the popup"
       },
       {
         "component": "ComboboxContent",
         "prop": "`side`",
-        "type": "`Side`",
+        "type": "`\"bottom\" | \"inline-end\" | \"inline-start\" | \"left\" | \"right\" | \"top\"`",
         "default": "`\"bottom\"`",
         "description": "Side the popup opens on"
       },
@@ -9150,7 +9150,7 @@
       {
         "component": "DirectionProvider",
         "prop": "`dir`",
-        "type": "`Direction`",
+        "type": "`\"ltr\" | \"rtl\"`",
         "default": "—",
         "description": "Reading direction, the native Radix prop. Required: `<DirectionProvider direction=\"rtl\">` alone does not compile (TS2741)"
       },
@@ -9547,7 +9547,7 @@
       {
         "component": "Drawer",
         "prop": "`direction`",
-        "type": "`\"left\" | \"right\" | \"top\" | \"bottom\"`",
+        "type": "`\"top\" | \"bottom\" | \"left\" | \"right\"`",
         "default": "`\"bottom\"`",
         "description": "Edge the panel slides in from (through vaul's `data-vaul-drawer-direction`)"
       },
@@ -12698,7 +12698,7 @@
       {
         "component": "InputGroupButton",
         "prop": "`type`",
-        "type": "`\"button\" | \"submit\" | \"reset\"`",
+        "type": "`\"submit\" | \"reset\" | \"button\"`",
         "default": "`\"button\"`",
         "description": "HTML type of the button"
       },
@@ -15911,7 +15911,7 @@
       {
         "component": "MessageScrollerButton",
         "prop": "`direction`",
-        "type": "`MessageScrollerButtonDirection`",
+        "type": "`\"end\" | \"start\"`",
         "default": "`\"end\"`",
         "description": "The end it scrolls to: `end` (pinned to the bottom, the latest message) or `start` (pinned to the top, arrow turned up)"
       },
@@ -16759,7 +16759,7 @@
       {
         "component": "NavigationMenu",
         "prop": "`orientation`",
-        "type": "`Orientation`",
+        "type": "`\"horizontal\" | \"vertical\"`",
         "default": "`\"horizontal\"`",
         "description": "Orientation of the navigation menu"
       },

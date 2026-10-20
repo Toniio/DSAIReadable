@@ -57,7 +57,7 @@ Renders `Direction.DirectionProvider`.
 | Prop        | Type                                                              | Default | Description                                                                                                               |
 | ----------- | ----------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `direction` | `React.ComponentProps<typeof Direction.DirectionProvider>["dir"]` | —       | Alias of `dir`; wins when both are given. It does not replace `dir`, which the type still requires                        |
-| `dir`       | `Direction`                                                       | —       | Reading direction, the native Radix prop. Required: `<DirectionProvider direction="rtl">` alone does not compile (TS2741) |
+| `dir`       | `"ltr" \| "rtl"`                                                  | —       | Reading direction, the native Radix prop. Required: `<DirectionProvider direction="rtl">` alone does not compile (TS2741) |
 | `children`  | `React.ReactNode`                                                 | —       | Tree of child components                                                                                                  |
 | `...props`  | `React.ComponentProps<typeof Direction.DirectionProvider>`        | —       | `Direction.DirectionProvider` props                                                                                       |
 

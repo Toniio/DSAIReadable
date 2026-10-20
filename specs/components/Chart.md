@@ -128,7 +128,7 @@ Renders `<div>`.
 | --------------- | --------------------------------------------------------------------------- | ---------- | ------------------------------- |
 | `hideIcon`      | `boolean`                                                                   | `false`    | Hides the icon in the legend    |
 | `nameKey`       | `string`                                                                    | —          | Key used for the series name    |
-| `verticalAlign` | `VerticalAlignmentType`                                                     | `"bottom"` | Vertical position of the legend |
+| `verticalAlign` | `"bottom" \| "middle" \| "top"`                                             | `"bottom"` | Vertical position of the legend |
 | `...props`      | `React.ComponentProps<"div"> & RechartsPrimitive.DefaultLegendContentProps` | —          | `React.Component` props         |
 
 ### `ChartStyle`

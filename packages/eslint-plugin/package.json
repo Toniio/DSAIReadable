@@ -40,14 +40,14 @@
     "test": "tsx src/test.ts"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^8.71.0",
-    "eslint-plugin-better-tailwindcss": "^4.7.0"
+    "@typescript-eslint/utils": "^8.71.2",
+    "eslint-plugin-better-tailwindcss": "^4.9.1"
   },
   "peerDependencies": {
     "eslint": "^9.0.0 || ^10.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.70.1",
-    "eslint": "^10.11.0"
+    "@typescript-eslint/parser": "^8.71.2",
+    "eslint": "^10.12.0"
   }
 }

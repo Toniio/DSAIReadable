@@ -9,8 +9,8 @@
     "item_address": "Toniio/DSAIReadable/<item>"
   },
   "stack": {
-    "react": "^19.3.0",
-    "next": "16.3.8",
+    "react": "^19.3.1",
+    "next": "16.4.2",
     "tailwindcss": "^4.3.3"
   },
   "framework": "React 19 / Next.js 16 / Tailwind CSS v4 / shadcn/ui",
@@ -19,6 +19,15 @@
       "item": "form",
       "reason": "shadcn/ui's former form layer, built on react-hook-form. shadcn/ui now builds its forms on Field, which the design system ships: Field lays out the label, the control, the description and the error, and leaves the form state to whichever library the app uses.",
       "instead": "Field"
+    },
+    {
+      "item": "code-block",
+      "reason": "Added to shadcn/ui in October 2026 and not shipped yet: whether the design system adopts it is decided in https://github.com/Toniio/DSAIReadable/issues/179. Until then, no component renders a code block."
+    },
+    {
+      "item": "trace",
+      "reason": "Added to shadcn/ui in October 2026 and not shipped yet: whether the design system adopts it is decided in https://github.com/Toniio/DSAIReadable/issues/179. Upstream builds its expandable lines on Collapsible, which the design system ships.",
+      "instead": "Collapsible"
     }
   ],
   "sources": {
