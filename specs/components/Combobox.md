@@ -137,8 +137,8 @@ Renders `ComboboxPrimitive.Popup`.
 
 | Prop          | Type                                                                                                                                         | Default    | Description                     |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------- |
-| `align`       | `Align`                                                                                                                                      | `"start"`  | Alignment of the popup          |
-| `side`        | `Side`                                                                                                                                       | `"bottom"` | Side the popup opens on         |
+| `align`       | `"center" \| "end" \| "start"`                                                                                                               | `"start"`  | Alignment of the popup          |
+| `side`        | `"bottom" \| "inline-end" \| "inline-start" \| "left" \| "right" \| "top"`                                                                   | `"bottom"` | Side the popup opens on         |
 | `sideOffset`  | `number \| OffsetFunction`                                                                                                                   | `6`        | Distance from the trigger       |
 | `alignOffset` | `number \| OffsetFunction`                                                                                                                   | `0`        | Offset along the alignment axis |
 | `anchor`      | `Element \| VirtualElement \| React.RefObject<Element \| null> \| () => Element \| VirtualElement \| null`                                   | —          | Anchor element (for chips mode) |

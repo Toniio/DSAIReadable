@@ -113,7 +113,7 @@ Renders `Button`.
 
 | Prop       | Type                                                                          | Default    | Description                                            |
 | ---------- | ----------------------------------------------------------------------------- | ---------- | ------------------------------------------------------ |
-| `type`     | `"button" \| "submit" \| "reset"`                                             | `"button"` | HTML type of the button                                |
+| `type`     | `"submit" \| "reset" \| "button"`                                             | `"button"` | HTML type of the button                                |
 | `variant`  | `"link" \| "default" \| "destructive" \| "outline" \| "secondary" \| "ghost"` | `"ghost"`  | Visual variant of the button (inherited from `Button`) |
 | `size`     | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"`                                      | `"xs"`     | Size of the button inside the group                    |
 | `...props` | `Omit<React.ComponentProps<typeof Button>, "size">`                           | —          | Props passed to the rendered element                   |

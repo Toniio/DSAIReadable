@@ -67,26 +67,72 @@ const FLAGS =
   ts.TypeFormatFlags.NoTruncation |
   ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
 
+/**
+ * A named union of literals, spelled out and sorted: Radix's `Orientation` →
+ * `"horizontal" | "vertical"`. Its name tells an agent nothing, and nothing
+ * writes its order: the checker lists the members by when each literal was
+ * first created, which moves with every dependency.
+ */
+function aliasedLiterals(checker: ts.TypeChecker, named: ts.Type) {
+  if (!named.isUnion()) return undefined
+  const kept = named.types.filter(
+    (t) => !(t.flags & (ts.TypeFlags.Undefined | ts.TypeFlags.Null))
+  )
+  if (!kept.every((t) => t.isStringLiteral() || t.isNumberLiteral()))
+    return undefined
+  return kept
+    .map((t) => checker.typeToString(t))
+    .sort()
+    .join(" | ")
+}
+
+/**
+ * A union of literals a property declaration writes out, in its written order:
+ * react-resizable-panels' `"horizontal" | "vertical"` stays so even once
+ * another package has created `"vertical"` first.
+ */
+function writtenLiterals(symbol: ts.Symbol) {
+  const node = symbol.getDeclarations()?.find(ts.isPropertySignature)?.type
+  if (!node || !ts.isUnionTypeNode(node)) return undefined
+  const texts: string[] = []
+  for (const member of node.types) {
+    if (member.kind === ts.SyntaxKind.UndefinedKeyword) continue
+    if (!ts.isLiteralTypeNode(member)) return undefined
+    const { literal } = member
+    if (literal.kind === ts.SyntaxKind.NullKeyword) continue
+    if (ts.isStringLiteral(literal)) texts.push(JSON.stringify(literal.text))
+    else if (ts.isNumericLiteral(literal)) texts.push(literal.text)
+    else return undefined
+  }
+  return texts.length > 1 ? texts.join(" | ") : undefined
+}
+
 /** `"a" | "b" | null | undefined` → `"a" | "b"`: optionality is the table's job. */
 function typeText(checker: ts.TypeChecker, type: ts.Type, at: ts.Node) {
   // A named type (React.ReactNode, HTMLInputAutoCompleteAttribute) is shown
   // by its name: splitting it to drop undefined would unroll it.
-  if (type.aliasSymbol) return checker.typeToString(type, at, FLAGS)
   const nonNull = checker.getNonNullableType(type)
-  if (nonNull.aliasSymbol) return checker.typeToString(nonNull, at, FLAGS)
   // `alias | undefined` loses the alias; the declaration still names it.
-  const named = type.isUnion()
+  const member = type.isUnion()
     ? type.types.find((t) => t.aliasSymbol)
     : undefined
-  if (
-    named &&
-    type.isUnion() &&
-    type.types.every(
-      (t) =>
-        t === named || t.flags & (ts.TypeFlags.Undefined | ts.TypeFlags.Null)
+  const named = type.aliasSymbol
+    ? type
+    : nonNull.aliasSymbol
+      ? nonNull
+      : member &&
+          type.isUnion() &&
+          type.types.every(
+            (t) =>
+              t === member ||
+              t.flags & (ts.TypeFlags.Undefined | ts.TypeFlags.Null)
+          )
+        ? member
+        : undefined
+  if (named)
+    return (
+      aliasedLiterals(checker, named) ?? checker.typeToString(named, at, FLAGS)
     )
-  )
-    return checker.typeToString(named, at, FLAGS)
   const parts = type.isUnion() ? type.types : [type]
   const kept = parts.filter(
     (t) => !(t.flags & (ts.TypeFlags.Undefined | ts.TypeFlags.Null))
@@ -315,12 +361,14 @@ function componentOf(
         type: written
           ? written.type!.getText().replace(/\s+/g, " ")
           : unionText(
-              variants.map((v) =>
-                typeText(
-                  checker,
-                  checker.getTypeOfSymbolAtLocation(v, param),
-                  param
-                )
+              variants.map(
+                (v) =>
+                  writtenLiterals(v) ??
+                  typeText(
+                    checker,
+                    checker.getTypeOfSymbolAtLocation(v, param),
+                    param
+                  )
               )
             ),
         default: defaults.get(symbol.name),

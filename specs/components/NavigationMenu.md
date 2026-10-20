@@ -97,7 +97,7 @@ Renders `NavigationMenuPrimitive.Root`.
 | Prop            | Type                                                        | Default        | Description                                 |
 | --------------- | ----------------------------------------------------------- | -------------- | ------------------------------------------- |
 | `viewport`      | `boolean`                                                   | `true`         | Turns the shared content viewport on or off |
-| `orientation`   | `Orientation`                                               | `"horizontal"` | Orientation of the navigation menu          |
+| `orientation`   | `"horizontal" \| "vertical"`                                | `"horizontal"` | Orientation of the navigation menu          |
 | `value`         | `string`                                                    | —              | Active item (controlled)                    |
 | `defaultValue`  | `string`                                                    | —              | Item active by default                      |
 | `onValueChange` | `(value: string) => void`                                   | —              | Called when the active item changes         |

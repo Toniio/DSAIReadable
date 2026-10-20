@@ -169,7 +169,7 @@ Composes `Button` — Button in CalendarDayButton: variant ghost, size icon; its
 | `Shift+PageUp` / `Shift+PageDown` | Previous / next year              |
 | `Enter` / `Space`                 | Selects the focused day           |
 
-**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop.
+**Accessible name**: react-day-picker names the month navigation buttons, in English by default: pass localized labels through its `labels` prop. Each day button is named by its full date in the calendar's `locale` ("Sunday, September 27, 2026"), with the number the button shows: no ordinal ("27th"), so a speech user who says the visible number reaches it (WCAG 2.5.3, Label in Name).
 
 **Pitfalls**:
 

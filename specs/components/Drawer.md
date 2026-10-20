@@ -92,7 +92,7 @@ Renders `DrawerPrimitive.Root`.
 | ----------------------- | --------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
 | `open`                  | `boolean`                                           | `undefined` | Whether the drawer is open (controlled mode)                                |
 | `onOpenChange`          | `(open: boolean) => void`                           | —           | Called when the drawer opens or closes                                      |
-| `direction`             | `"left" \| "right" \| "top" \| "bottom"`            | `"bottom"`  | Edge the panel slides in from (through vaul's `data-vaul-drawer-direction`) |
+| `direction`             | `"top" \| "bottom" \| "left" \| "right"`            | `"bottom"`  | Edge the panel slides in from (through vaul's `data-vaul-drawer-direction`) |
 | `shouldScaleBackground` | `boolean`                                           | —           | Scales the background down while the drawer is open                         |
 | `...props`              | `React.ComponentProps<typeof DrawerPrimitive.Root>` | —           | `DrawerPrimitive.Root` props                                                |
 

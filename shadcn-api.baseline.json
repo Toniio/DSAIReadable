@@ -1,6 +1,6 @@
 {
   "source": "https://ui.shadcn.com/r/styles/radix-lyra",
-  "fetched": "2026-10-02",
+  "fetched": "2026-10-20",
   "dom": {
     "common": [
       "about",
@@ -1849,7 +1849,7 @@
         "dom": "3a72cf30cf",
         "props": {
           "orientation": {
-            "type": "\"horizontal\" | \"vertical\"",
+            "type": "\"vertical\" | \"horizontal\"",
             "default": "\"horizontal\""
           },
           "size": {
@@ -2183,7 +2183,7 @@
         "dom": "3a72cf30cf",
         "props": {
           "orientation": {
-            "type": "\"horizontal\" | \"vertical\""
+            "type": "\"vertical\" | \"horizontal\""
           }
         }
       },
@@ -3192,6 +3192,7 @@
         "base": "React.ComponentProps<typeof ContextMenuPrimitive.Content>",
         "dom": "6097c3de5a",
         "props": {
+          "align": {},
           "alignOffset": {},
           "arrowPadding": {},
           "asChild": {},
@@ -3209,6 +3210,7 @@
           "side": {
             "type": "\"top\" | \"right\" | \"bottom\" | \"left\""
           },
+          "sideOffset": {},
           "sticky": {},
           "updatePositionStrategy": {}
         }
@@ -3965,7 +3967,7 @@
         "dom": "3a72cf30cf",
         "props": {
           "orientation": {
-            "type": "\"horizontal\" | \"vertical\" | \"responsive\"",
+            "type": "\"vertical\" | \"horizontal\" | \"responsive\"",
             "default": "\"vertical\""
           }
         }
@@ -4849,6 +4851,7 @@
         "base": "React.ComponentProps<typeof NavigationMenuPrimitive.Root>",
         "dom": "f33e968c93",
         "props": {
+          "activationMode": {},
           "asChild": {},
           "defaultValue": {},
           "delayDuration": {},
@@ -6031,6 +6034,7 @@
           "onValueChange": {},
           "onValueCommit": {},
           "orientation": {},
+          "preserveThumbOrder": {},
           "step": {},
           "value": {}
         }
@@ -6403,6 +6407,7 @@
     "carousel",
     "chart",
     "checkbox",
+    "code-block",
     "collapsible",
     "combobox",
     "command",
@@ -6448,6 +6453,7 @@
     "textarea",
     "toggle",
     "toggle-group",
-    "tooltip"
+    "tooltip",
+    "trace"
   ]
 }

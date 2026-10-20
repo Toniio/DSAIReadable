@@ -2,8 +2,10 @@
 
 import * as React from "react"
 import {
+  DateLib,
   DayPicker,
   getDefaultClassNames,
+  labelDayButton,
   type DayButton,
   type Locale,
 } from "react-day-picker"
@@ -30,6 +32,7 @@ function Calendar({
   buttonVariant = "ghost",
   locale,
   formatters,
+  labels,
   components,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
@@ -52,6 +55,22 @@ function Calendar({
         formatMonthDropdown: (date) =>
           date.toLocaleString(locale?.code, { month: "short" }),
         ...formatters,
+      }}
+      labels={{
+        // The day spelled with the number the button shows: date-fns' "PPPP"
+        // writes "September 27th" in English, which a speech user saying
+        // "27" does not match (WCAG 2.5.3, Label in Name).
+        labelDayButton: (date, modifiers, options, dateLib) =>
+          labelDayButton(date, modifiers, options, dateLib).replace(
+            (dateLib ?? new DateLib(options)).format(date, "PPPP"),
+            date.toLocaleDateString(locale?.code, {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          ),
+        ...labels,
       }}
       classNames={{
         root: cn("w-fit", defaultClassNames.root),
