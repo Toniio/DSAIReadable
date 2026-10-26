@@ -45,8 +45,8 @@
     "@dsaireadable/eslint-plugin": "0.3.1",
     "@modelcontextprotocol/node": "^2.1.1",
     "@modelcontextprotocol/server": "^2.3.0",
-    "@typescript-eslint/parser": "^8.71.2",
-    "eslint": "^10.12.0",
+    "@typescript-eslint/parser": "^8.72.0",
+    "eslint": "^10.13.0",
     "typescript": "^5.9.3",
     "zod": "^4.6.7"
   },
