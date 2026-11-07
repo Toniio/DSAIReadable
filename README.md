@@ -268,7 +268,7 @@ checks the format and that every cited source exists.
 
 ```bash
 # Any agent that reads skills/ from a repository
-npx skills add Toniio/DSAIReadable#v0.3.1
+npx skills add Toniio/DSAIReadable#v0.4.0
 
 # Claude Code: the skill and the MCP server in one plugin
 claude plugin marketplace add Toniio/DSAIReadable
