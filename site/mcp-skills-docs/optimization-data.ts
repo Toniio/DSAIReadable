@@ -30,6 +30,8 @@ interface Report {
   model?: string
   context?: string
   skills?: string[]
+  /** The MCP prompt its sessions started from, under evals:generate's mcp-prompt condition. */
+  prompt?: string
   /** Where the screens come from: absent from a gold run. */
   generated?: {
     version?: string
@@ -63,6 +65,7 @@ interface Run {
   version: string
   condition: Condition
   skills: string[]
+  prompt?: string
   /** Its tasks are exactly a suite's, not the default run's. */
   suite: boolean
 }
@@ -83,15 +86,16 @@ const evalTasks = () => readJson<EvalTasks>("evals/tasks.json")
 /**
  * The model runs of evals/history/, each set of screens once: a later report
  * that scores the same screens again (a rescore, after a fix of the scorer)
- * replaces the earlier one.
+ * replaces the earlier one. `npm run evals:test` reads a folder of its own
+ * (`history`, from the repository root).
  */
-function runs(): Run[] {
+function runs(history: string): Run[] {
   const { suites } = evalTasks()
   const members = Object.values(suites).map((ids) => [...ids].sort().join())
-  const reports = listFiles("evals/history", ".json")
+  const reports = listFiles(history, ".json")
     .map((file) => ({
       file,
-      report: readJson<Report>(`evals/history/${file}`),
+      report: readJson<Report>(`${history}/${file}`),
     }))
     .filter(
       ({ report }) =>
@@ -109,6 +113,7 @@ function runs(): Run[] {
       report.model,
       report.context,
       [...(report.skills ?? [])].sort().join("+"),
+      report.prompt ?? "",
       commit,
       sources ?? "",
       run ?? "",
@@ -120,6 +125,7 @@ function runs(): Run[] {
     version: report.generated?.version ?? "",
     condition: report.context === "none" ? "none" : "mcp",
     skills: report.skills ?? [],
+    prompt: report.prompt,
     suite: members.includes(
       report.tasks
         .map((task) => task.id)
@@ -129,9 +135,11 @@ function runs(): Run[] {
   }))
 }
 
-/** The runs of the two conditions the page compares: the default tasks, no skills. */
-const measured = () =>
-  runs().filter((run) => !run.suite && run.skills.length === 0)
+/** The runs of the two conditions the page compares: the default tasks, no skills, no prompt. */
+const measured = (history = "evals/history") =>
+  runs(history).filter(
+    (run) => !run.suite && run.skills.length === 0 && run.prompt === undefined
+  )
 
 const sum = (values: number[]) =>
   values.reduce((total, value) => total + value, 0)
@@ -248,8 +256,8 @@ export interface Measurement {
 }
 
 /** Both conditions at every version from SCORED_FROM on, the oldest first. */
-export function measurements(): Measurement[] {
-  const all = measured()
+export function measurements(history?: string): Measurement[] {
+  const all = measured(history)
   const rates = inputRates(all)
   const versions = [...new Set(all.map((run) => run.version))]
     .filter((version) => compareVersions(version, SCORED_FROM) >= 0)

@@ -3,8 +3,8 @@
  * per screen at a share of a recorded baseline's, at a conformance no lower
  * than the baseline's: a run that costs less by answering worse does not meet
  * it. It applies to the runs of the baseline's condition only — the same
- * tasks, model, context, skills, effort and turn cap, generated the same way —
- * since a cost compares with nothing else.
+ * tasks, model, context, skills, prompt, effort and turn cap, generated the
+ * same way — since a cost compares with nothing else.
  */
 
 import { existsSync, readFileSync } from "node:fs"
@@ -49,6 +49,7 @@ function condition(report: RunReport) {
     model: report.model ?? null,
     context: report.context ?? null,
     skills: [...(report.skills ?? [])].sort(),
+    prompt: report.prompt ?? null,
     effort: report.generated?.effort ?? null,
     maxTurns: report.generated?.maxTurns ?? null,
     tasks: report.tasks.map((t) => t.id).sort(),

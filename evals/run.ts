@@ -96,6 +96,8 @@ interface RunFile {
   modelOption?: string
   context: string
   skills: string[]
+  /** The MCP prompt the sessions started from: `build_screen` under mcp-prompt. */
+  prompt?: string
   claudeCode: string
   sessionPlugins?: string[]
   maxTurns?: number
@@ -164,7 +166,10 @@ function replayGenerator(dir: string): Generator {
  */
 function replayAbout(
   dir: string
-): Pick<RunReport, "model" | "context" | "skills" | "via" | "generated"> {
+): Pick<
+  RunReport,
+  "model" | "context" | "skills" | "prompt" | "via" | "generated"
+> {
   const about = readRunFile(dir)
   if (!about) return {}
   const { designSystem: ds } = about
@@ -172,6 +177,7 @@ function replayAbout(
     model: about.model,
     context: about.context,
     skills: about.skills,
+    ...(about.prompt && { prompt: about.prompt }),
     via: `claude-code ${about.claudeCode}`,
     ...(ds &&
       about.sources &&
@@ -576,6 +582,12 @@ async function selfTest() {
       withMedian(2000, 0.2),
       budget
     ),
+    // Sessions started from an MCP prompt are not: the mcp-prompt condition.
+    compareBudget(
+      { ...fixtureRun, prompt: "build_screen" },
+      withMedian(2000, 0.2),
+      budget
+    ),
   ]
   if (
     verdicts[0]?.target !== 1400 ||
@@ -584,10 +596,110 @@ async function selfTest() {
     verdicts[1]?.met !== false ||
     verdicts[2]?.met !== false ||
     verdicts[3] !== undefined ||
-    verdicts[4]?.met !== true
+    verdicts[4]?.met !== true ||
+    verdicts[5] !== undefined
   )
     errors.push(
-      `compareBudget: ${JSON.stringify(verdicts)} (met under the ceiling, missed over it or at a lower conformance, none for another model)`
+      `compareBudget: ${JSON.stringify(verdicts)} (met under the ceiling, missed over it or at a lower conformance, none for another model or for sessions started from a prompt)`
+    )
+
+  // The mcp-prompt condition of evals:generate: the server's build_screen
+  // prompt carries the task's request, and the screen to change as its
+  // context; the system prompt keeps the answer format alone; run.json names
+  // the prompt, the report and its header carry it, and the site's eval pages
+  // list the run nowhere.
+  const { connectMcp, promptMessage, SYSTEM, WITH_MCP } =
+    await import("./lib/claude")
+  const { mcp } = await connectMcp(ROOT)
+  try {
+    for (const task of [
+      tasks.find((t) => !t.base),
+      tasks.find((t) => t.base),
+    ]) {
+      if (!task) continue
+      const text = await promptMessage(mcp, ROOT, task)
+      const base = task.base && readFileSync(join(ROOT, task.base), "utf-8")
+      if (
+        !text.includes(task.prompt) ||
+        (base ? !text.includes(base) : text.includes("The current screen:"))
+      )
+        errors.push(
+          `promptMessage: the build_screen prompt rendered for ${task.id} does not carry its request${base ? " and its current screen" : " alone"}`
+        )
+    }
+  } finally {
+    await mcp.close()
+  }
+  const { newRunFile, sessionArgs } = await import("./lib/claude-code")
+  for (const [condition, appended] of [
+    ["none", SYSTEM],
+    ["mcp", SYSTEM + WITH_MCP],
+    ["mcp-skills", SYSTEM + WITH_MCP],
+    ["mcp-prompt", SYSTEM],
+  ] as const) {
+    const args = sessionArgs(ROOT, "sonnet", condition)
+    if (args[args.indexOf("--append-system-prompt") + 1] !== appended)
+      errors.push(
+        `sessionArgs: under ${condition}, Claude Code's system prompt does not get ${appended === SYSTEM ? "SYSTEM alone" : "SYSTEM and WITH_MCP"}`
+      )
+  }
+  // A run.json as evals:generate writes it before the first session, with
+  // what that session's init message fills in, replayed into a report.
+  const fixtureAbout = readRunFile(fixturesDir)!
+  const generatedRuns = Object.fromEntries(
+    (["mcp", "mcp-prompt"] as const).map((condition) => {
+      const dir = join(WORK, `self-test-${condition}`)
+      mkdirSync(dir, { recursive: true })
+      writeFileSync(
+        join(dir, "run.json"),
+        JSON.stringify({
+          ...newRunFile(ROOT, {
+            condition,
+            modelOption: "sonnet",
+            claudePath: "claude",
+            designSystem: {
+              ...fixtureAbout.designSystem!,
+              version: fixtureRun.designSystem.version,
+            },
+          }),
+          model: fixtureAbout.model,
+          claudeCode: fixtureAbout.claudeCode,
+        })
+      )
+      return [condition, { ...fixtureRun, ...replayAbout(dir) }]
+    })
+  )
+  const promptReport = generatedRuns["mcp-prompt"]
+  if (
+    generatedRuns.mcp.prompt !== undefined ||
+    promptReport.prompt !== "build_screen"
+  )
+    errors.push(
+      `newRunFile: the prompt of run.json reaches the report as ${JSON.stringify(promptReport.prompt)} under mcp-prompt, ${JSON.stringify(generatedRuns.mcp.prompt)} under mcp`
+    )
+  if (
+    !toMarkdown(promptReport).includes(
+      "context `mcp` · prompt `build_screen` · design system"
+    )
+  )
+    errors.push("the report header does not name the prompt of the sessions")
+  // The site's eval pages measure the server alone: a recorded run whose
+  // sessions started from the prompt stays in evals/history/, unlisted.
+  const history = join(WORK, "self-test-history")
+  rmSync(history, { recursive: true, force: true })
+  mkdirSync(history, { recursive: true })
+  for (const [condition, report] of Object.entries(generatedRuns))
+    writeFileSync(join(history, `${condition}.json`), JSON.stringify(report))
+  const { evalRuns } = await import("../site/audit-docs/data")
+  const { measurements } =
+    await import("../site/mcp-skills-docs/optimization-data")
+  const listed = evalRuns(relative(ROOT, history)).map((run) => run.file)
+  const pooled = measurements(relative(ROOT, history)).map(
+    (row) => `${row.condition} × ${row.passes}`
+  )
+  if (listed.join() !== "mcp" || pooled.join() !== "mcp × 1")
+    errors.push(
+      `the site's eval pages take in a run started from the build_screen prompt: the Audits page lists ${JSON.stringify(listed)}, the Optimization page pools ${JSON.stringify(pooled)}`
     )
   if (
     !toMarkdown({ ...fixtureRun, budget: verdicts[0] }).includes(
