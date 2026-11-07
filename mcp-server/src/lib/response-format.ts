@@ -186,8 +186,9 @@ const isUxWritingRule = (rule: { source?: string }) =>
  * the 74 K characters Claude Code refused as one result, so they stay one
  * category away.
  *
- * The foundation rules are grouped by foundation, its name without ".md":
- * each rule carried its own `source`, the same file names once per rule.
+ * The foundation rules are keyed by the foundation's name without ".md":
+ * each rule carried its own `source`, which repeated the same file name on
+ * every rule.
  * ds://guidelines and a foundation's category answer keep the flat list of
  * `{ rule, source }` that ux-writing.json holds.
  */

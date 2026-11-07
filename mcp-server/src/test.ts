@@ -1901,9 +1901,10 @@ const detailedSpec = async (component_name: string) =>
 }
 
 // Unfiltered, detailed groups the foundation rules by foundation: each rule
-// carried its own "source", the same file names once per rule (#188). The
-// grouping keeps every rule it served, once, in the cache's order; the
-// category answers and ds://guidelines keep the flat list of the cache.
+// carried its own "source", which repeated the same file name on every rule
+// (#188). The grouping keeps every rule it served, once, in the cache's
+// order; the category answers and ds://guidelines keep the flat list of the
+// cache.
 {
   const detailed = JSON.parse(
     await payload("dsaireadable_get_design_rules", {
@@ -1940,7 +1941,7 @@ const detailedSpec = async (component_name: string) =>
       JSON.stringify(color.rules) ===
         JSON.stringify(generalRules.filter((r) => r.source === "color.md")) &&
       JSON.stringify(guidelines.general_rules) === JSON.stringify(generalRules),
-    `dsaireadable_get_design_rules detailed serves the foundation rules grouped by foundation, ${Object.keys(grouped).length} names without ".md", every rule once in the cache's order (${servedOnce.length} of ${Object.values(expected).flat().length}), no general_rules; the color category and ds://guidelines keep the flat list`
+    `dsaireadable_get_design_rules detailed serves the foundation rules grouped by foundation, ${Object.keys(grouped).filter((f) => !f.endsWith(".md")).length} of ${Object.keys(grouped).length} names without ".md", every rule once in the cache's order (${servedOnce.length} of ${Object.values(expected).flat().length}), no general_rules; the color category and ds://guidelines keep the flat list`
   )
 }
 
