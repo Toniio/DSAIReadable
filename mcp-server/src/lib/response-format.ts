@@ -164,7 +164,8 @@ const isUxWritingRule = (rule: { source?: string }) =>
  * their two foundations. A component's rules are the constraints of its spec,
  * which dsaireadable_get_component_specs serves too: all 65 came to 37 K of
  * the 74 K characters Claude Code refused as one result, so they stay one
- * category away. ds://guidelines holds every rule.
+ * category away. ds://guidelines holds the critical, foundation and
+ * composition rules.
  */
 export function detailedRuleSet(data: RuleSet) {
   const { composition_rules, categories } = conciseRuleSet(data)
