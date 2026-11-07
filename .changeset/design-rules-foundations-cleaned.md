@@ -2,7 +2,7 @@
 "dsaireadable": minor
 ---
 
-mcp: `dsaireadable_get_design_rules` `detailed` without a category serves the foundation rules a screen needs once, as plain text: 36,879 to 33,747 characters, and 118 to 102 rules.
+mcp: `dsaireadable_get_design_rules` `detailed` without a category serves the foundation rules a screen needs once, as plain text: 35,312 to 32,180 characters, and 104 to 88 rules, once the rules for UI text have left it.
 
 - It leaves out the 5 rules of `radius.md`, which restate the critical styling rule served whole beside them; the `radius` category still returns them. The styling rule first gives content the scale `radius.md` gives it, `rounded-sm` … `rounded-4xl`, and says `rounded-xs` draws the Chart's indicators: it gave content `rounded-xs` … `rounded-4xl`.
 - It serves the foundation rules without the `**` around a numbered rule's title. The category answers and `ds://guidelines` keep it.
