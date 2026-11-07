@@ -834,11 +834,11 @@
         "classes": {
           "*:has-[>[data-slot=trace-line]]:focus-visible:ring-1": {
             "to": "*:has-[>[data-slot=trace-line]]:focus-visible:ring-(length:--space-focus-ring-width) *:has-[>[data-slot=trace-line]]:focus-visible:outline-solid *:has-[>[data-slot=trace-line]]:focus-visible:outline-(length:--border-width-default) *:has-[>[data-slot=trace-line]]:focus-visible:outline-ring",
-            "reason": "A link or a dialog trigger that wraps a TraceLine in a Trace has no border, so its 1px ring-ring/50 halo was the whole indicator, under 3:1. The ring goes to 2px (space.focus-ring-width), the shared focus ring width, and a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none) marks focus at 14.82:1 light and 15.89:1 dark (WCAG 1.4.11 read for focus indicators)."
+            "reason": "A link or a dialog trigger that wraps a TraceLine in a Trace has no border, so its 1px ring-ring/50 halo was the whole indicator: 3.06:1 light on the page, at the edge of the 3:1 bar, and 2.98:1 on a card or a muted surface, under it. The ring goes to 2px (space.focus-ring-width), the shared focus ring width, and a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none) marks focus at 14.82:1 light and 15.89:1 dark (WCAG 1.4.11 read for focus indicators)."
           },
           "focus-visible:ring-1": {
             "to": "focus-visible:ring-(length:--space-focus-ring-width) focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
-            "reason": "TraceCollapsibleTrigger has no border, so its ring-ring/50 halo was the whole indicator, about 3.0:1 light. The ring goes from 1px to 2px (space.focus-ring-width), as the shared table maps focus-visible:ring-1, and a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none) marks focus at 14.82:1 light and 15.89:1 dark, as on the Menubar trigger."
+            "reason": "TraceCollapsibleTrigger has no border, so its ring-ring/50 halo was the whole indicator: 3.06:1 light on the page, at the edge of the 3:1 bar, and 2.98:1 on a card or a muted surface, under it. The ring goes from 1px to 2px (space.focus-ring-width), as the shared table maps focus-visible:ring-1, and a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none) marks focus at 14.82:1 light and 15.89:1 dark, as on the Menubar trigger."
           },
           "data-[status=pending]:opacity-60": {
             "to": "",
@@ -1057,7 +1057,7 @@
     },
     "code-block": {
       "status": "reanchored",
-      "reason": "The destructive variant keeps its border-destructive/30 at focus, so focusing its content showed the ring-ring/50 halo alone, under 3:1. It turns border-ring while its content has focus-visible, as the default variant does: the indicator's solid part.",
+      "reason": "The destructive variant keeps its border-destructive/30 at focus, so focusing its content showed the ring-ring/50 halo alone: 3.06:1 light on the page, at the edge of the 3:1 bar, and 2.98:1 on a card or a muted surface, under it. It turns border-ring while its content has focus-visible, as the default variant does: the indicator's solid part.",
       "added": [
         "has-[>[data-slot=code-block-content]:focus-visible]:border-ring"
       ]

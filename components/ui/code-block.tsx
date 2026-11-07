@@ -176,8 +176,9 @@ function CodeBlockCopyButton({
         className={cn(className)}
         onClick={(event) => {
           onClick?.(event)
+          // navigator.clipboard is undefined outside a secure context (plain HTTP).
           navigator.clipboard
-            .writeText(value)
+            ?.writeText(value)
             .then(() => setCopied(true))
             .catch(() => {})
         }}

@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { UI_STRINGS } from "@/lib/ui-strings"
 
-import { ringOf, unmarkedTabStops } from "../focus"
+import { borderPaint, ringOf, unmarkedTabStops } from "../focus"
 
 const code = "npm install @dsaireadable/eslint-plugin"
 const long = `const message = "${"a long line of output ".repeat(20)}"`
@@ -237,16 +237,76 @@ describe("CodeBlock", () => {
     expect(getComputedStyle(added, "::after").content).toBe('"+"')
   })
 
-  it("a destructive block and a floating copy button show a focus indicator, light and dark", async () => {
+  it("a destructive block and a floating copy button show a focus indicator on a card, light and dark", async () => {
+    // On a card the ring-ring/50 halo alone measures 2.98:1 in light: the
+    // border-ring is what reaches 3:1.
     render(
-      <>
+      <div className="bg-card">
         <CodeBlock variant="destructive">
           <CodeBlockContent>Error: cannot find module</CodeBlockContent>
         </CodeBlock>
         <Floating />
-      </>
+      </div>
     )
     expect(await unmarkedTabStops()).toEqual([])
+  })
+
+  it("a destructive block turns its border border-ring while its code has focus-visible, light and dark", async () => {
+    render(
+      <CodeBlock variant="destructive">
+        <CodeBlockContent>Error: cannot find module</CodeBlockContent>
+      </CodeBlock>
+    )
+    const block = document.querySelector<HTMLElement>(
+      '[data-slot="code-block"]'
+    )!
+    const root = document.documentElement
+    const anchor = document.createElement("span")
+    anchor.tabIndex = -1
+    document.body.prepend(anchor)
+    try {
+      for (const theme of ["light", "dark"] as const) {
+        root.classList.toggle("dark", theme === "dark")
+        anchor.focus()
+        const rest = borderPaint(block)
+        await userEvent.tab()
+        expect(document.activeElement?.getAttribute("data-slot")).toBe(
+          "code-block-content"
+        )
+        const focused = borderPaint(block)
+        expect(focused.key, theme).not.toBe(rest.key)
+        expect(focused.contrast, theme).toBeGreaterThanOrEqual(3)
+      }
+    } finally {
+      root.classList.remove("dark")
+      anchor.remove()
+    }
+  })
+
+  it("with no Clipboard API (plain HTTP), a click throws nothing: the button keeps its name and nothing is announced", async () => {
+    vi.spyOn(navigator, "clipboard", "get").mockReturnValue(
+      undefined as unknown as Clipboard
+    )
+    const errors: unknown[] = []
+    const onError = (event: ErrorEvent) => {
+      errors.push(event.error)
+      event.preventDefault()
+    }
+    window.addEventListener("error", onError)
+    try {
+      render(<WithHeader />)
+      await userEvent.click(
+        screen.getByRole("button", { name: UI_STRINGS.codeBlock.copy })
+      )
+      await new Promise(requestAnimationFrame)
+    } finally {
+      window.removeEventListener("error", onError)
+    }
+    expect(errors).toEqual([])
+    expect(
+      screen.getByRole("button", { name: UI_STRINGS.codeBlock.copy })
+    ).toBeTruthy()
+    expect(liveRegion().textContent).toBe("")
   })
 
   it("a floating copy button trades the ring that sets it off the code for the focus ring every Button draws", async () => {

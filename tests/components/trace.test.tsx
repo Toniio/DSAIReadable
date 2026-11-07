@@ -49,6 +49,27 @@ function Steps() {
   )
 }
 
+/** A line wrapped in a link, then a step whose line is in its trigger. */
+function Linked() {
+  return (
+    <Trace>
+      <a href="#docs">
+        <TraceLine>
+          <TraceTitle>Read the cache docs</TraceTitle>
+        </TraceLine>
+      </a>
+      <TraceCollapsible>
+        <TraceCollapsibleTrigger>
+          <TraceLine>
+            <TraceTitle>Ran npm install</TraceTitle>
+          </TraceLine>
+        </TraceCollapsibleTrigger>
+        <TraceCollapsibleContent>added 214 packages</TraceCollapsibleContent>
+      </TraceCollapsible>
+    </Trace>
+  )
+}
+
 describe("Trace", () => {
   it("role: a div and spans with no role, and a trigger that is a button with aria-expanded and aria-controls", async () => {
     render(<Steps />)
@@ -113,17 +134,43 @@ describe("Trace", () => {
     expect(screen.queryByText("added 214 packages")).toBeNull()
   })
 
-  it("a link that wraps a line in Trace shows a focus indicator, light and dark", async () => {
+  it("a trigger, and a link that wraps a line in Trace, show a focus indicator on a card, light and dark", async () => {
+    // On a card the ring-ring/50 halo alone measures 2.98:1 in light: the
+    // solid outline-ring is what reaches 3:1.
     render(
-      <Trace>
-        <a href="#docs">
-          <TraceLine>
-            <TraceTitle>Read the cache docs</TraceTitle>
-          </TraceLine>
-        </a>
-      </Trace>
+      <div className="bg-card">
+        <Linked />
+      </div>
     )
     expect(await unmarkedTabStops()).toEqual([])
+  })
+
+  it("a trigger, and a link that wraps a line in Trace, draw a solid outline-ring while focused, light and dark", async () => {
+    render(<Linked />)
+    const stops = [
+      screen.getByRole("link", { name: "Read the cache docs" }),
+      screen.getByRole("button", { name: "Ran npm install" }),
+    ]
+    const root = document.documentElement
+    const anchor = document.createElement("span")
+    anchor.tabIndex = -1
+    document.body.prepend(anchor)
+    try {
+      for (const theme of ["light", "dark"] as const) {
+        root.classList.toggle("dark", theme === "dark")
+        anchor.focus()
+        for (const stop of stops) {
+          await userEvent.tab()
+          expect(document.activeElement).toBe(stop)
+          const style = getComputedStyle(stop)
+          expect(style.outlineStyle, `${theme} ${stop.tagName}`).toBe("solid")
+          expect(Number.parseFloat(style.outlineWidth)).toBeGreaterThan(0)
+        }
+      }
+    } finally {
+      root.classList.remove("dark")
+      anchor.remove()
+    }
   })
 
   it("a step's status is drawn: error in the destructive color, running with a shimmer, pending with no style of its own", () => {
