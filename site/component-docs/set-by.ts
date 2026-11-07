@@ -1,7 +1,7 @@
 /**
  * What puts a component in a state, for the "Set by" column of the States
  * table: the reader's interaction, a prop, an attribute, or the library.
- * Covers every state name the 65 specs' States tables use; a component
+ * Covers every state name the 67 specs' States tables use; a component
  * whose state comes from somewhere else has its own entry.
  */
 
@@ -187,6 +187,13 @@ const BY_COMPONENT: Record<string, Record<string, string>> = {
   Tooltip: {
     open: "The pointer resting on the trigger, or focus on it",
     closing: "The pointer leaving, the trigger losing focus, or `Escape`",
+  },
+  Trace: {
+    open: "A click, `Enter` or `Space` on the trigger, `defaultOpen`, or the `open` prop",
+    closing:
+      "A click, `Enter` or `Space` on the open trigger, or `open={false}`",
+    error: '`status="error"` on `TraceLine`',
+    running: '`status="running"` on `TraceLine`',
   },
 }
 

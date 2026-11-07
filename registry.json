@@ -1220,7 +1220,7 @@
               "--tw-exit-rotate": "initial !important",
               "--tw-exit-blur": "initial !important"
             },
-            "[data-slot=\"accordion-content\"], [data-slot=\"skeleton\"], [data-slot=\"input-otp-slot\"] *": {
+            "[data-slot=\"accordion-content\"], [data-slot=\"trace-collapsible-content\"], [data-slot=\"skeleton\"], [data-slot=\"input-otp-slot\"] *": {
               "animation-name": "none !important"
             },
             "[data-vaul-drawer][data-vaul-snap-points=\"false\"][data-state=\"open\"]:not([data-vaul-animate=\"false\"])": {
@@ -1639,6 +1639,29 @@
       ],
       "meta": {
         "status": "stable"
+      }
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "CodeBlock",
+      "description": "A block of code, terminal output or a diff, in one color, with an optional header that names it and a button that copies it.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "Toniio/DSAIReadable/button",
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/code-block.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
       }
     },
     {
@@ -2065,7 +2088,7 @@
       "name": "marker",
       "type": "registry:ui",
       "title": "Marker",
-      "description": "A line of muted text that marks an event in a conversation nobody said: a date, a tool call, a resumed session.",
+      "description": "A line of muted text that marks an event in a conversation nobody said: a date, a resumed session, a finished step with nothing to open.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.8.1"
@@ -2684,6 +2707,28 @@
       ],
       "meta": {
         "status": "stable"
+      }
+    },
+    {
+      "name": "trace",
+      "type": "registry:ui",
+      "title": "Trace",
+      "description": "The steps an assistant takes while it works (a tool call, its reasoning, the sources it read), one line each, with a status and details that open under the line.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "Toniio/DSAIReadable/collapsible",
+        "Toniio/DSAIReadable/design-system"
+      ],
+      "files": [
+        {
+          "path": "components/ui/trace.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "status": "beta"
       }
     }
   ]

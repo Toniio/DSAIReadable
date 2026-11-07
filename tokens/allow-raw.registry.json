@@ -136,6 +136,13 @@
     },
     {
       "id": "local-stacking",
+      "file": "components/ui/code-block.tsx",
+      "reason": "z-10 keeps CodeBlockActions, when they float at the top end of a block with no header, above the content they overlap, which scrolls under them. Local ordering inside the block; the z-index scale addresses global layers (dropdown, modal, tooltip).",
+      "token_candidate": null,
+      "review_after": "2027-11-07"
+    },
+    {
+      "id": "local-stacking",
       "file": "components/ui/questionnaire.tsx",
       "reason": "z-10 lays the transparent native input of a QuestionnaireChoice over its indicator and label, so the whole choice is the click target. Local ordering; the z-index scale addresses global layers (dropdown, modal, tooltip).",
       "token_candidate": null,

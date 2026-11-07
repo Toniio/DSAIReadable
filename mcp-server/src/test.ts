@@ -340,7 +340,7 @@ if (!existsSync(variantsPath)) {
   // Every component must be present, so agents get an explicit answer
   // instead of a lookup error.
   assert(
-    Object.keys(variants).length >= 65,
+    Object.keys(variants).length >= 67,
     `All components emitted (${Object.keys(variants).length} entries)`
   )
 }
@@ -1879,6 +1879,34 @@ const detailedSpec = async (component_name: string) =>
         (x) => x.item === "form" && x.instead === "Field"
       ),
     "an excluded shadcn/ui component (Form) answers with its reason and Field"
+  )
+}
+
+// shadcn/ui's code-block and trace, decided in #179: shipped, so their specs
+// resolve, and form is the only exclusion left.
+{
+  const overview = JSON.parse(
+    await payload("dsaireadable_get_design_system_overview")
+  ) as { shadcn_excluded: { item: string }[] }
+  const shipped = await Promise.all(
+    [
+      ["CodeBlock", "code-block"],
+      ["Trace", "trace"],
+    ].map(async ([component_name, item]) => {
+      const answer = await call("dsaireadable_get_component_specs", {
+        component_name,
+      })
+      return (
+        answer.isError !== true &&
+        (JSON.parse(answer.content[0].text) as { shadcn: { item: string } })
+          .shadcn.item === item
+      )
+    })
+  )
+  assert(
+    shipped.every(Boolean) &&
+      overview.shadcn_excluded.map((x) => x.item).join() === "form",
+    "CodeBlock and Trace specs resolve, and form is the only shadcn/ui exclusion"
   )
 }
 

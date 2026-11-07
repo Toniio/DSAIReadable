@@ -12,25 +12,27 @@
 
 ## Role
 
-A line of muted text that marks an event in a conversation nobody said: a date, a tool call, a resumed session.
+A line of muted text that marks an event in a conversation nobody said: a date, a resumed session, a finished step with nothing to open.
 
 ## Usage
 
 - Separate the days of a thread with `variant="separator"` ("Today", "Monday 12 May")
 - Record an event in the thread: "Searched 4 sources", "Conversation resumed", "Ana joined"
 - Close a section of the thread with `variant="border"`
-- Make the marker a link or a button (open the tool call's details) with `asChild`
+- Make the marker a link or a button (open a page, a dialog) with `asChild`
+- Put a step of the assistant's work that has a status or details (a running tool call, its output, its sources) in a `Trace`: its `TraceCollapsible` opens the details under the line
 - Put a Phosphor icon in front of the text with `MarkerIcon`
 
 <!-- rule-23: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. An event nobody said (a date, a tool call, "Conversation resumed"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
+- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, with a `CodeBlockCopyButton` in its `CodeBlockActions`. A step of the assistant's work that has a status or details to open (a tool call, its reasoning, its sources): `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event nobody said, with nothing to open (a date, "Conversation resumed"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
 
 ## Constraints
 
 - **MUST** — put the text in a `MarkerContent` and the icon in a `MarkerIcon`
 - **MUST NOT** — use a `Marker` for what a speaker says: that is a `Message` with a `Bubble`
 - **MUST NOT** — use a `Marker` for an error the user must act on → `Alert`
+- **MUST NOT** — use a `Marker` for a step that has a status or details to open (a tool call while it runs, its output) → `Trace`
 - **MUST** — keep the text to one line of 60 characters or less
 - **Note** — `MarkerIcon` is hidden from screen readers (`aria-hidden`): the text carries the meaning
 
@@ -172,5 +174,6 @@ export default function Example() {
 ## Cross-references
 
 - `Message` — what a speaker says, where a `Marker` records what happened
+- `Trace` — a step of the assistant's work with a status or details to open, where a `Marker` has neither
 - `Separator` — a rule with no text, outside a conversation
 - `Alert` — an error or a warning the user must read, which a muted marker does not carry

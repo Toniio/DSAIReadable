@@ -80,6 +80,9 @@
     "preview": "Preview",
     "code": "Code",
     "bold": "Bold",
+    "ran_npm_install": "Ran npm install",
+    "failed_to_run_npm_test": "Failed to run npm test",
+    "searching_the_docs_for_cart_li": "Searching the docs for cart limits",
     "confirm": "Confirm",
     "save": "Save",
     "close": "Close"

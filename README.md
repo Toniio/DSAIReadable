@@ -44,7 +44,7 @@ The project started from one observation: for an LLM to generate code that confo
 
 ```
 dsaireadable/
-├── components/ui/              # The design system's 65 React components (customized shadcn/ui)
+├── components/ui/              # The design system's 67 React components (customized shadcn/ui)
 ├── lib/                        # Shared modules: utils, focus, ui-strings, overlay, surface, fonts
 ├── hooks/                      # Shared hooks (use-mobile)
 ├── styles/                     # globals.css: the @theme bridge from the tokens to Tailwind
@@ -59,7 +59,7 @@ dsaireadable/
 │   └── component.json          # Tier 3 — shadcn/ui aliases (public)
 ├── tokens.css                  # Generated CSS custom properties — do not edit
 ├── specs/                      # The design system's Markdown documentation
-│   ├── components/             # 65 component specs (13 sections each)
+│   ├── components/             # 67 component specs (13 sections each)
 │   ├── foundations/            # Color, typography, spacing, motion, radius… specs
 │   └── tokens/token-reference.md  # Reference of the 504 tokens (generated)
 ├── mcp-server/                 # MCP server @dsaireadable/mcp-server
@@ -175,7 +175,7 @@ category serves every foundation's rules and names the components, whose rules a
 
 | URI                          | Content                                                                          |
 | ---------------------------- | -------------------------------------------------------------------------------- |
-| `ds://component/{name}/spec` | A component's full spec; all 65 are listed, and `{name}` autocompletes           |
+| `ds://component/{name}/spec` | A component's full spec; all 67 are listed, and `{name}` autocompletes           |
 | `ds://token/{path}`          | A semantic token (`ds://token/color.background.default`); `{path}` autocompletes |
 | `ds://guidelines`            | Critical rules, foundation rules, composition rules                              |
 
@@ -378,7 +378,7 @@ With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the reque
 
 ### Guarantees
 
-`registry.json` is **generated** — `npm run registry:build` derives it from the inventory, the specs and the actual imports. CI rejects a registry that is out of sync, an internal dependency written as a bare name and, above all, an **unusable** registry: `npm run registry:test-install` installs the 69 items in a blank app with non-standard aliases, type-checks it, then builds its stylesheet and checks what Tailwind emits: the lockdown holds, both fonts resolve to a declared `@font-face`, `dark:`, `sm:`, `data-open:` and `z-modal` compile. On a PR, it tests the registry built by the branch; after each merge, the published addresses.
+`registry.json` is **generated** — `npm run registry:build` derives it from the inventory, the specs and the actual imports. CI rejects a registry that is out of sync, an internal dependency written as a bare name and, above all, an **unusable** registry: `npm run registry:test-install` installs the 71 items in a blank app with non-standard aliases, type-checks it, then builds its stylesheet and checks what Tailwind emits: the lockdown holds, both fonts resolve to a declared `@font-face`, `dark:`, `sm:`, `data-open:` and `z-modal` compile. On a PR, it tests the registry built by the branch; after each merge, the published addresses.
 
 ---
 

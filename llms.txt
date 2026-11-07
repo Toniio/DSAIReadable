@@ -77,6 +77,7 @@ Every link to a file points to the release tag `v0.3.1`, the published version, 
 - [Carousel](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Carousel.md): Data — A horizontal or vertical scroller that moves between slides with buttons or the keyboard, built on `embla-carousel`.
 - [Chart](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Chart.md): Data — A container and a set of helpers for data visualization, built on `recharts`: theming, tooltips and a legend, all configured through a `ChartConfig` object.
 - [Checkbox](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Checkbox.md): Forms — A two-state (or indeterminate) checkbox for selecting an option in a form, built on Radix `Checkbox.Root`.
+- [CodeBlock](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/CodeBlock.md): Typography — A block of code, terminal output or a diff, in one color, with an optional header that names it and a button that copies it.
 - [Collapsible](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Collapsible.md): Layout — A disclosure: a trigger that shows or hides one section of content.
 - [Combobox](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Combobox.md): Forms — A text input with autocomplete that picks from a filterable list of options; supports single and multiple selection (chips).
 - [Command](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Command.md): Forms — A command palette with built-in search, for quickly filtering and picking an action or an item from a structured list.
@@ -97,7 +98,7 @@ Every link to a file points to the release tag `v0.3.1`, the published version, 
 - [Kbd](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Kbd.md): Misc — An inline label that shows a keyboard key or a key combination.
 - [Label](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Label.md): Forms — An accessible label tied to a form control, built on Radix `Label.Root`.
 - [Logo](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Logo.md): Brand — The application's brand mark. The component renders the pictogram alone; it is a placeholder, to be swapped for the real brand assets once they are provided.
-- [Marker](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Marker.md): Conversation — A line of muted text that marks an event in a conversation nobody said: a date, a tool call, a resumed session.
+- [Marker](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Marker.md): Conversation — A line of muted text that marks an event in a conversation nobody said: a date, a resumed session, a finished step with nothing to open.
 - [Menubar](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Menubar.md): Navigation — A horizontal bar of dropdown menus, with submenus, checkable items, radio groups and keyboard shortcuts.
 - [Message](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Message.md): Conversation — One turn of a conversation: who speaks, with an optional avatar, a header, the content and a footer, aligned to the start or the end of the thread.
 - [MessageScroller](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/MessageScroller.md): Conversation — The scrolling thread of a conversation: it keeps the latest message in view as messages arrive, announces them, and offers buttons to jump to either end.
@@ -126,6 +127,7 @@ Every link to a file points to the release tag `v0.3.1`, the published version, 
 - [Toggle](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Toggle.md): Forms — A two-state (pressed / not pressed) toggle button in several variants and sizes; its variants are exported for reuse (by `ToggleGroup`, for example).
 - [ToggleGroup](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/ToggleGroup.md): Misc — A group of toggle buttons — exclusive or multi-select — built on Radix ToggleGroup, sharing one variant and size through context.
 - [Tooltip](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Tooltip.md): Feedback — A small contextual label that appears when a trigger is hovered or focused, built on Radix Tooltip.
+- [Trace](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.3.1/specs/components/Trace.md): Conversation — The steps an assistant takes while it works (a tool call, its reasoning, the sources it read), one line each, with a status and details that open under the line.
 
 ## Optional
 

@@ -813,6 +813,54 @@
             "reason": "The Sonner toast radius var(--radius), which is radius.lg (10px), becomes var(--radius-none), 0: radix-lyra's style sheet makes every surface square, the toast included (.cn-toast { rounded-none }), but its marker class is never resolved, so upstream's installed toast is rounded. Square, like Card, Popover and Dialog."
           }
         }
+      },
+      "code-block": {
+        "classes": {
+          "has-[>[data-slot=code-block-content]:focus-visible]:ring-1": {
+            "to": "has-[>[data-slot=code-block-content]:focus-visible]:ring-(length:--space-focus-ring-width)",
+            "reason": "The ring a CodeBlock draws while its content has focus-visible goes from 1px to 2px (space.focus-ring-width), the shared focus ring width. ring-1 is a raw pixel width."
+          },
+          "[[data-slot=code-block]>&]:*:[button]:ring-1": {
+            "to": "[[data-slot=code-block]>&]:*:[button]:not-focus-visible:ring-(length:--border-width-default)",
+            "reason": "The 1px ring that sets a floating button off the code is written under a selector that outranks the Button's focus ring ((0,2,1) against (0,2,0)), so a focused floating copy button kept it and lost its 2px ring-ring/50 halo. It applies while the button is not focus-visible, so focus draws the shared ring (space.focus-ring-width) on it, as on any Button."
+          },
+          "[[data-slot=code-block]>&]:*:[button]:ring-foreground/10": {
+            "to": "[[data-slot=code-block]>&]:*:[button]:not-focus-visible:ring-foreground/10",
+            "reason": "As its width: the color of the ring that sets a floating button off the code applies while the button is not focus-visible, so it no longer replaces the ring-ring/50 color of the Button's focus ring."
+          }
+        }
+      },
+      "trace": {
+        "classes": {
+          "*:has-[>[data-slot=trace-line]]:focus-visible:ring-1": {
+            "to": "*:has-[>[data-slot=trace-line]]:focus-visible:ring-(length:--space-focus-ring-width) *:has-[>[data-slot=trace-line]]:focus-visible:outline-solid *:has-[>[data-slot=trace-line]]:focus-visible:outline-(length:--border-width-default) *:has-[>[data-slot=trace-line]]:focus-visible:outline-ring",
+            "reason": "A link or a dialog trigger that wraps a TraceLine in a Trace has no border, so its 1px ring-ring/50 halo was the whole indicator, under 3:1. The ring goes to 2px (space.focus-ring-width), the shared focus ring width, and a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none) marks focus at 14.82:1 light and 15.89:1 dark (WCAG 1.4.11 read for focus indicators)."
+          },
+          "focus-visible:ring-1": {
+            "to": "focus-visible:ring-(length:--space-focus-ring-width) focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
+            "reason": "TraceCollapsibleTrigger has no border, so its ring-ring/50 halo was the whole indicator, about 3.0:1 light. The ring goes from 1px to 2px (space.focus-ring-width), as the shared table maps focus-visible:ring-1, and a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none) marks focus at 14.82:1 light and 15.89:1 dark, as on the Menubar trigger."
+          },
+          "data-[status=pending]:opacity-60": {
+            "to": "",
+            "reason": "A pending step faded to 60% opacity put its muted text at 2.55:1 light and 3.48:1 dark (WCAG 1.4.3), and opacity is for binary states. A pending step keeps the muted text of a done one: its title says it has not started (\"Run npm test\"), as the spec requires of every status."
+          },
+          "text-muted-foreground/70": {
+            "to": "text-muted-foreground",
+            "reason": "TraceDescription's muted text at 70% alpha measured 3.08:1 on the page in light (WCAG 1.4.3). It takes text-muted-foreground (color.text.subtle) whole, the token measured for contrast, as the title of a done step does."
+          },
+          "motion-reduce:shimmer-none": {
+            "to": "",
+            "reason": "The shimmer utility of shadcn/tailwind.css stops itself under prefers-reduced-motion (no animation, no gradient, the text in its color), as on the Attachment title, and the design system's components carry no motion-reduce: class (motion.md, Reduced motion)."
+          },
+          "ml-[calc(--spacing(1.75)-1px)]": {
+            "to": "ml-1.5",
+            "reason": "ml-[calc(--spacing(1.75)-1px)] draws nothing, as --spacing() no longer compiles. It becomes ml-1.5 (6px), the margin upstream computes (7px less the 1px rule), so the rule of the details stays under the center of the 14px TraceIcon."
+          },
+          "pl-3.75": {
+            "to": "pl-3.5",
+            "reason": "pl-3.75 (15px) is not a step of the locked spacing scale and draws nothing here. It becomes pl-3.5 (14px), the nearest step under it: the details start 21px from the line's start, 1px before the title they sit under instead of level with it."
+          }
+        }
       }
     },
     "constants": [
@@ -1005,6 +1053,13 @@
         "group-data-[state=indeterminate]/checkbox:hidden",
         "hidden",
         "group-data-[state=indeterminate]/checkbox:block"
+      ]
+    },
+    "code-block": {
+      "status": "reanchored",
+      "reason": "The destructive variant keeps its border-destructive/30 at focus, so focusing its content showed the ring-ring/50 halo alone, under 3:1. It turns border-ring while its content has focus-visible, as the default variant does: the indicator's solid part.",
+      "added": [
+        "has-[>[data-slot=code-block-content]:focus-visible]:border-ring"
       ]
     },
     "collapsible": {
@@ -1262,6 +1317,9 @@
       "status": "reanchored"
     },
     "tooltip": {
+      "status": "reanchored"
+    },
+    "trace": {
       "status": "reanchored"
     }
   }

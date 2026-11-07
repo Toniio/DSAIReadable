@@ -6,7 +6,7 @@
       "uriTemplate": "ds://component/{name}/spec",
       "description": "The full spec of one component: role, usage, constraints, anatomy, tokens, props, states, accessibility, code example, cross-references",
       "mimeType": "application/json",
-      "listed": 65,
+      "listed": 67,
       "example": { "uri": "ds://component/Button/spec", "chars": 10613 }
     },
     {
@@ -25,7 +25,7 @@
       "description": "Every design rule: the critical rules, the foundation do/don't and the composition rules of design-system.index.json",
       "mimeType": "application/json",
       "listed": 1,
-      "example": { "uri": "ds://guidelines", "chars": 37428 }
+      "example": { "uri": "ds://guidelines", "chars": 37758 }
     }
   ]
 }

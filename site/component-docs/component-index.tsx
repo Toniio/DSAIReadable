@@ -39,7 +39,7 @@ export interface IndexGroup {
 /**
  * Whether an element is on screen or within half a screen of it. Each
  * thumbnail is a whole preview document: the index keeps only those near
- * the reader alive, rather than 65 of them for the life of the page.
+ * the reader alive, rather than 67 of them for the life of the page.
  */
 function useNearScreen(): [(element: HTMLElement | null) => void, boolean] {
   const [element, setElement] = useState<HTMLElement | null>(null)

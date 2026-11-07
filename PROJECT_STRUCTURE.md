@@ -12,7 +12,7 @@ This repository is a **code-first design system**: the React components, the tok
 
 ```
 dsaireadable/
-├── components/ui/              # The design system's 65 React components
+├── components/ui/              # The design system's 67 React components
 ├── styles/globals.css          # Tailwind entry point: the @theme bridge from the tokens to the classes
 ├── lib/                        # Shared modules: utils, focus, ui-strings, overlay, surface, fonts
 ├── hooks/                      # Shared hooks (use-mobile)
@@ -35,7 +35,7 @@ dsaireadable/
 ├── design-system.index.json    # Machine-readable inventory of the design system
 ├── design-system.schema.json   # JSON Schema that validates the index
 ├── shadcn-api.baseline.json    # The upstream shadcn/ui API the components are checked against — generated
-├── shadcn-upstream.json        # Re-anchoring on shadcn/ui: the anchored tag, the re-tokenization table, the 65 components classified
+├── shadcn-upstream.json        # Re-anchoring on shadcn/ui: the anchored tag, the re-tokenization table, the 67 components classified
 ├── evals/                      # The conformance harness: reference tasks, scoring, the history of the scores (evals/README.md)
 ├── site/                       # The documentation site: foundations, components with a live playground, patterns, changes, audits
 ├── llms.txt                    # Documentation map for agents (llms.txt format) — generated
@@ -54,7 +54,7 @@ dsaireadable/
 
 ### `components/ui/` — Component library
 
-65 customized shadcn/ui components. Each file exports one or more React components with:
+67 customized shadcn/ui components. Each file exports one or more React components with:
 
 - variants handled by `class-variance-authority` (cva)
 - design tokens through the Tailwind classes the `@theme` bridge ties to tokens (`bg-primary`, `text-muted-foreground`…) — the exact list per component is in the "Tokens" section of its spec
@@ -209,7 +209,7 @@ Shared modules: `scripts/lib/` (component API, `next/font` fonts, the re-tokeniz
 
 Structured Markdown documentation, consumable by people **and LLMs** (through MCP).
 
-### `specs/components/` — Component specs (65 files)
+### `specs/components/` — Component specs (67 files)
 
 One spec per component, in 13 sections:
 `Metadata` · `Role` · `Usage` · `Constraints` · `Dependencies` · `Anatomy` · `Tokens` · `Props / API` · `Variants` · `States` · `Accessibility` · `Code example` · `Cross-references`
@@ -288,7 +288,7 @@ host such as GitHub Pages serves it under). The `Site` workflow
 | `site/overview/`                   | The Overview page: getting started, the rules a consuming project follows, the composition rules (each one an anchor, `#rule-21`, that the specs link to), the figures of the design system                              |
 | `site/foundation-docs/tokens/`     | The token pages: the All tokens table and its data, the color explorer, the type styles                                                                                                                                  |
 | `site/foundation-docs/spec-pages/` | The foundation pages built from a spec: their frame, live examples, do and don't, the icon browser, the motion demo                                                                                                      |
-| `site/component-docs/`             | The parts of a component page: the index of the 65, the anatomy, the variant and state grids, the dependency graph                                                                                                       |
+| `site/component-docs/`             | The parts of a component page: the index of the 67, the anatomy, the variant and state grids, the dependency graph                                                                                                       |
 | `site/pattern-docs/`               | The pattern pages' previews and thumbnails                                                                                                                                                                               |
 | `site/change-docs/`                | The change log, read from `CHANGELOG.md`                                                                                                                                                                                 |
 | `site/mcp-skills-docs/`            | The MCP & Skills pages: their prose read from `docs/mcp-and-skills/`, the pipeline, a recorded session, the UI guard's checklist                                                                                         |
@@ -328,7 +328,7 @@ fails when a component has no renderable example or a documented key has no test
 
 | File                              | Role                                                                                                                                                                                                                                 |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tests/examples.test.tsx`         | The 65 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                                                            |
+| `tests/examples.test.tsx`         | The 67 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                                                            |
 | `tests/components/*.test.tsx`     | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                                                                                                       |
 | `tests/spec-examples.ts`          | Vite plugin: serves each spec's code example, and each complete module of the foundations, as a module (`virtual:spec-examples`), so the tests render what agents copy                                                               |
 | `tests/axe.ts`                    | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                                                                                                                      |

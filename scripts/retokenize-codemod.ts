@@ -7,7 +7,7 @@
  * `shadcn-upstream.json` holds the three parts: the upstream release the
  * components are anchored to (`upstream`), the codemod's mapping table (`map`,
  * the single source of truth for "a shadcn/ui class → the design system's"),
- * and the classification of the 65 components (`components`).
+ * and the classification of the 67 components (`components`).
  *
  * The upstream component is rebuilt the way `shadcn add` writes it, offline
  * from ui.shadcn.com: the raw source of the base (`radix`) and the style sheet

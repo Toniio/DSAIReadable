@@ -42,6 +42,8 @@ or its default differs from the code.
 | `breadcrumb.ellipsis`           | `BreadcrumbEllipsis`             | `srLabel`           | `More`                         |
 | `carousel.previous`             | `CarouselPrevious`               | `srLabel`           | `Previous slide`               |
 | `carousel.next`                 | `CarouselNext`                   | `srLabel`           | `Next slide`                   |
+| `codeBlock.copy`                | `CodeBlockCopyButton`            | `copyLabel`         | `Copy`                         |
+| `codeBlock.copied`              | `CodeBlockCopyButton`            | `copiedLabel`       | `Copied`                       |
 | `combobox.trigger`              | `ComboboxTrigger`                | `triggerLabel`      | `Open list`                    |
 | `combobox.clear`                | `ComboboxClear`                  | `clearLabel`        | `Clear selection`              |
 | `combobox.remove(item)`         | `ComboboxChip`                   | `removeLabel`       | `Remove {item}`                |

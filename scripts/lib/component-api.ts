@@ -340,16 +340,32 @@ function componentOf(
         symbols.set(symbol.name, [...(symbols.get(symbol.name) ?? []), symbol])
     for (const variants of symbols.values()) {
       const symbol = variants[0]
-      const decls = symbol.getDeclarations() ?? []
+      // Every member's declarations: TraceCollapsible writes `open` in two
+      // members, and `onOpenChange` in the second one only.
+      const decls = [
+        ...new Set(variants.flatMap((v) => v.getDeclarations() ?? [])),
+      ]
       const own = decls.some((d) => d.getSourceFile() === file)
       // A type the file writes itself is shown as written: the checker would
       // expand `React.ComponentProps<typeof TooltipContent>` into its members.
-      const written = decls.find(
-        (d): d is ts.PropertySignature =>
-          ts.isPropertySignature(d) &&
-          d.getSourceFile() === file &&
-          d.type !== undefined
-      )
+      const writtenTypes = [
+        ...new Set(
+          decls
+            .filter(
+              (d): d is ts.PropertySignature =>
+                ts.isPropertySignature(d) &&
+                d.getSourceFile() === file &&
+                d.type !== undefined
+            )
+            .map((d) => d.type!.getText().replace(/\s+/g, " "))
+        ),
+      ]
+      // A member that writes `open?: undefined` says to leave the prop out;
+      // the member that types it says what it takes.
+      const written =
+        writtenTypes.length > 1
+          ? writtenTypes.filter((t) => t !== "undefined")
+          : writtenTypes
       const elsewhere = decls
         .map((d) => d.getSourceFile().fileName)
         .find((f) => f !== file.fileName && /\/components\/ui\//.test(f))
@@ -358,8 +374,8 @@ function componentOf(
         from: own
           ? undefined
           : elsewhere?.replace(/^.*\/(components\/ui\/)/, "$1"),
-        type: written
-          ? written.type!.getText().replace(/\s+/g, " ")
+        type: written.length
+          ? unionText(written)
           : unionText(
               variants.map(
                 (v) =>
