@@ -169,7 +169,8 @@ spec, with its anatomy, tokens and states, is the resource `ds://component/{name
 `{ total, items, next_cursor }` response. No answer passes 40,000 characters, well under the 25,000 tokens Claude Code accepts
 from one MCP result by default (`MAX_MCP_OUTPUT_TOKENS`): a page ends there before `limit`, a validation report past it lists
 the issues that fit and counts the rest (`issues_not_listed`), and `dsaireadable_get_design_rules` `detailed` without a
-category serves every foundation's rules and names the components, whose rules a `category` returns.
+category serves the foundation rules, except the rules for UI text that `dsaireadable_get_ux_writing_rules` serves and those
+of `radius` that the critical rules state, and names the components, whose rules a `category` returns.
 
 ### Resources
 

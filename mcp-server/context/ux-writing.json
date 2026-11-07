@@ -9,10 +9,6 @@
       "source": "border-width.md"
     },
     {
-      "rule": "✅ Add a `border-width.*` token named after its role when a component genuinely needs another width",
-      "source": "border-width.md"
-    },
-    {
       "rule": "✅ Outline a surface with `SURFACE_OUTLINE`, and write `ring-(length:--border-width-default)` under a variant (`group-data-[variant=floating]:`)",
       "source": "border-width.md"
     },
@@ -41,10 +37,6 @@
       "source": "breakpoints.md"
     },
     {
-      "rule": "❌ Do not change a `breakpoint.*` value without declaring the same value, as a literal, in the `@theme` of `styles/globals.css` — the bridge lint will remind you",
-      "source": "breakpoints.md"
-    },
-    {
       "rule": "✅ `background.default` — the background of `<html>` and of root containers.",
       "source": "color.md"
     },
@@ -69,7 +61,7 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ `text.action.on` only on a `color.action.background.default` background.",
+      "rule": "✅ Text on a `bg-primary` fill is `text-primary-foreground` (`action.background.foreground`): `text.action.on` is reserved.",
       "source": "color.md"
     },
     {
@@ -97,19 +89,11 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ `border.subtle` for dividers between the sections of a page.",
+      "rule": "✅ A divider between the sections of a page is a `Separator`, drawn in `border.default` (`bg-border`): `border.subtle` is reserved.",
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not mix `border.default` and `border.subtle` in the same component.",
-      "source": "color.md"
-    },
-    {
-      "rule": "✅ `icon.action` only inside a primary button or an action badge.",
-      "source": "color.md"
-    },
-    {
-      "rule": "❌ Do not use `icon.default` for an icon inside a primary button — use `icon.action`.",
+      "rule": "✅ An icon takes the color of its text: inside a primary button or badge it inherits `text-primary-foreground`, and a secondary icon takes `text-muted-foreground`. The `icon.*` tokens are reserved.",
       "source": "color.md"
     },
     {
@@ -193,7 +177,7 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ Ordered data: `color.chart.sequential.*`, from lightest (low value) to darkest.",
+      "rule": "✅ Ordered data: `color.chart.sequential.*`, from lightest (low value) to darkest, read through `bg-(--color-chart-sequential-N)`.",
       "source": "color.md"
     },
     {
@@ -217,27 +201,7 @@
       "source": "color.md"
     },
     {
-      "rule": "**Never fake subtlety with opacity** — use `color.text.subtle`, not `color.text.default` with `opacity-50`.",
-      "source": "color.md"
-    },
-    {
-      "rule": "**Follow the surface hierarchy**: `default` → `subtle` → `elevated`. A card is `subtle`, a popover is `elevated`.",
-      "source": "color.md"
-    },
-    {
-      "rule": "**Always test both modes** — every component must be checked in light AND dark before it ships.",
-      "source": "color.md"
-    },
-    {
-      "rule": "**Accessibility first** — the conformance target is WCAG 2.2 AA: the minimum contrast ratio is 4.5:1 for body text (SC 1.4.3), and 3:1 for large text and UI components (SC 1.4.11).",
-      "source": "color.md"
-    },
-    {
-      "rule": "**Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lib/contrast-pairs.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.",
-      "source": "color.md"
-    },
-    {
-      "rule": "**APCA is advisory, WCAG 2 decides** — the same lint prints a second level: the APCA lightness contrast (Lc) of every pair, against Lc 60 for text and Lc 45 for non-text (APCA Bronze Simple Mode), tagged as WCAG 3 preparation. WCAG 3 is a Working Draft and regulations cite WCAG 2.x, so an APCA warning never fails the build and never justifies a token change that lowers a WCAG 2 ratio below its threshold. Weigh the warnings when a palette step changes for another reason, and keep the change only if both levels hold or improve.",
+      "rule": "**Accessibility first** — the conformance target is WCAG 2.2 AA: the minimum contrast ratio is 4.5:1 for body text and 3:1 for large text (SC 1.4.3), and 3:1 for UI components (SC 1.4.11).",
       "source": "color.md"
     },
     {
@@ -262,10 +226,6 @@
     },
     {
       "rule": "**Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.",
-      "source": "elevation.md"
-    },
-    {
-      "rule": "**Always test in dark mode** — light-mode shadows vanish in dark mode unless adjusted. The tokens handle this automatically.",
       "source": "elevation.md"
     },
     {
@@ -309,10 +269,6 @@
       "source": "motion.md"
     },
     {
-      "rule": "**Always use the CSS tokens** — never hard-code a duration or an easing in the code.",
-      "source": "motion.md"
-    },
-    {
       "rule": "**`ease-in` for exits, `ease-out` for entrances** — a universal UX convention that matches natural physical motion.",
       "source": "motion.md"
     },
@@ -321,7 +277,7 @@
       "source": "motion.md"
     },
     {
-      "rule": "**Never work around the tokens** — no hard-coded values and no `!important` on transition properties.",
+      "rule": "**Never work around the tokens** — no hard-coded duration or easing, and no `!important` on transition properties.",
       "source": "motion.md"
     },
     {
@@ -417,7 +373,7 @@
       "source": "spacing.md"
     },
     {
-      "rule": "**`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center.",
+      "rule": "**A content column is `max-w-2xl`, `max-w-5xl` or `max-w-7xl`** — narrow, default or wide: a maximum width, not a padding. Always pair it with `mx-auto` to center.",
       "source": "spacing.md"
     },
     {

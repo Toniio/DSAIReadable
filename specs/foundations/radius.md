@@ -76,7 +76,7 @@ If the surface is one a screen draws itself (a panel, a tile, a table cell)
 If the shape is round (an avatar-like image, a dot)
   → Use rounded-full
 If it is content, not interface (an image, a hero, an illustration)
-  → Use radius.lg to radius.4xl, depending on its size
+  → Use radius.sm to radius.4xl, depending on its size
 ```
 
 ```tsx

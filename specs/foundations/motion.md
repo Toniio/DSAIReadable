@@ -163,8 +163,7 @@ A new entrance or exit uses the tw-animate-css classes, which this block already
 ## Usage Rules
 
 1. **A transition with no duration class is already right** — it runs at `motion.duration.fast` (100ms) with `motion.easing.default`. Add a `duration-*` class only to a transition a screen draws itself that has to be slower: `motion.duration.normal` (200ms) with `motion.easing.default` for a fade.
-2. **Always use the CSS tokens** — never hard-code a duration or an easing in the code.
-3. **`ease-in` for exits, `ease-out` for entrances** — a universal UX convention that matches natural physical motion.
-4. **`ease-spring` sparingly** — only for expressive, deliberate interactions (positive feedback, gamification). Never on basic state transitions.
-5. **Never work around the tokens** — no hard-coded values and no `!important` on transition properties.
-6. **Do not re-time a component** — its overlays and panels enter and leave on their own timing; a `duration-*` class on `DialogContent` or `SheetContent` does not make them slower, it makes this page's table wrong for that screen.
+2. **`ease-in` for exits, `ease-out` for entrances** — a universal UX convention that matches natural physical motion.
+3. **`ease-spring` sparingly** — only for expressive, deliberate interactions (positive feedback, gamification). Never on basic state transitions.
+4. **Never work around the tokens** — no hard-coded duration or easing, and no `!important` on transition properties.
+5. **Do not re-time a component** — its overlays and panels enter and leave on their own timing; a `duration-*` class on `DialogContent` or `SheetContent` does not make them slower, it makes this page's table wrong for that screen.

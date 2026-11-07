@@ -7,9 +7,10 @@ breakpoint other than these, and their values are the `breakpoint.*` tokens.
 
 Tailwind compiles `md:` into a media query at build time, and a media query
 cannot read a CSS variable: the token therefore does not drive Tailwind — it is
-**the reference value** Tailwind must match. `npm run tokens:lint-bridge` fails
-when the tokens and the values Tailwind compiles drift apart, in either
-direction.
+**the reference value** Tailwind must match. Changing a `breakpoint.*` value
+means declaring the same value, as a literal, in the `@theme` of
+`styles/globals.css`: `npm run tokens:lint-bridge` fails when the tokens and the
+values Tailwind compiles drift apart, in either direction.
 
 ---
 
@@ -45,4 +46,3 @@ for wide layouts.
 - ✅ Pick the first breakpoint at which the layout breaks, not a specific device
 - ❌ Never write an arbitrary breakpoint (`min-[600px]:`, `max-[900px]:`) — only the prefixes in the table exist
 - ❌ Never read `var(--breakpoint-*)` inside a media query: media queries do not resolve variables
-- ❌ Do not change a `breakpoint.*` value without declaring the same value, as a literal, in the `@theme` of `styles/globals.css` — the bridge lint will remind you
