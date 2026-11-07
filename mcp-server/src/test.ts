@@ -26,7 +26,7 @@ import {
   type CompositionRule,
 } from "./lib/composition-rules.js"
 import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
-import { mdWithoutCode } from "./lib/markdown.js"
+import { mdSection, mdTables, mdWithoutCode } from "./lib/markdown.js"
 import { COMPONENT_RULE } from "./lib/component-rule.js"
 import { registerResources } from "./resources/index.js"
 import {
@@ -1080,6 +1080,34 @@ assert(
   "The styling rule says the components are square and a label draws its own text style"
 )
 
+// The detailed design rules leave radius.md's rules to the styling rule, so it
+// gives content the classes radius.md gives it. It said rounded-xs …
+// rounded-4xl, where rounded-xs draws the Chart's indicators.
+{
+  const radiusTable = mdTables(
+    mdSection(
+      readFileSync(
+        resolve(__dirname, "../../specs/foundations/radius.md"),
+        "utf-8"
+      ),
+      "Token Reference"
+    )
+  )[0]
+  const column = (name: string) => radiusTable.header.indexOf(name)
+  const forContent = radiusTable.rows
+    .filter((row) => row[column("Use")].startsWith("Content"))
+    .map((row) => row[column("Tailwind Class")].replace(/`/g, ""))
+  const scale = `${forContent[0]} … ${forContent.at(-1)}`
+  const radiusLine =
+    TAILWIND_RULE.description.find((line) => /\brounded-full\b/.test(line)) ??
+    ""
+  assert(
+    forContent.length > 1 &&
+      radiusLine.includes(`${scale} (mapped to --radius-*) are for content`),
+    `The styling rule gives content the radius scale of radius.md, ${scale}${radiusLine.includes(scale) ? "" : `: "${radiusLine}"`}`
+  )
+}
+
 // The styling rule is served in every prompt and by get_design_rules, and it
 // had drifted from the plugin more than once (an inline style it forbade and
 // the plugin allows, a class it called valid and no stylesheet generates).
@@ -1225,6 +1253,97 @@ assert(
     generalRules.every((r) => !r.rule.includes("| Mechanism")),
   "A wrapped numbered rule is served whole, without what is nested under it"
 )
+
+// A foundation's rules say what a screen does. Six were steps of the design
+// system's own upkeep: a spec keeps them out of its rules.
+{
+  const upkeep = [
+    "Always test both modes",
+    "Contrast is checked mechanically",
+    "APCA is advisory",
+    "Always test in dark mode",
+    "Add a `border-width.*` token",
+    "Do not change a `breakpoint.*` value",
+  ]
+  const served = generalRules.filter((r) =>
+    upkeep.some((step) => r.rule.includes(step))
+  )
+  assert(
+    served.length === 0,
+    `No foundation rule is a step of the design system's upkeep${served.length ? `: ${served.map((r) => `${r.source} "${r.rule.slice(0, 40)}…"`).join(", ")}` : ""}`
+  )
+}
+
+// A rule names the class a screen writes. A reserved token that no class of
+// styles/globals.css reads has none: rules sent screens to `text.action.on`,
+// `border.subtle`, `icon.action` and `content-*`, which a screen cannot
+// write, where the components write text-primary-foreground, a Separator,
+// an inherited color and max-w-*. A rule that names one says that this token
+// is reserved, or gives the shorthand that reads it. Breakpoints and
+// container widths are Tailwind's own values, which globals.css does not
+// bridge.
+{
+  const globalsCss = readFileSync(
+    resolve(__dirname, "../../styles/globals.css"),
+    "utf-8"
+  )
+  const semantic = readContext<
+    { path: string; css_var: string; status: string }[]
+  >("semantic-tokens.json")
+  const classless = semantic.filter(
+    (t) =>
+      t.status === "reserved" &&
+      !globalsCss.includes(`var(${t.css_var})`) &&
+      !/^(breakpoint|space\.container)\./.test(t.path)
+  )
+  // `text.subtle` names color.text.subtle, `content-*` the tokens whose last
+  // segment starts with content-.
+  const named = (code: string) => {
+    if (!/[.*]/.test(code)) return []
+    const path = new RegExp(
+      `(^|\\.)${code.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]*")}$`
+    )
+    return semantic.filter((t) => path.test(t.path))
+  }
+  const shorthand = (rule: string, cssVar: string) =>
+    rule.includes(`(${cssVar})`) ||
+    rule.includes(`(${cssVar.replace(/[^-]+$/, "N")})`)
+  // "`text.action.on` is reserved", "The `icon.*` tokens are reserved": the
+  // rule says that the token it names is reserved. "Reserved for primary
+  // actions" says nothing of the kind.
+  const saysReserved = (rule: string, code: string) =>
+    new RegExp(
+      `\`${code.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\`(?: tokens?)? (?:is|are) \`?reserved\\b`
+    ).test(rule)
+  const sendsTo = (rule: string) =>
+    [...rule.matchAll(/`([^`]+)`/g)]
+      .filter((m) => !saysReserved(rule, m[1]))
+      .map((m) => named(m[1]))
+      .filter(
+        (tokens) =>
+          tokens.length > 0 &&
+          tokens.every(
+            (t) => classless.includes(t) && !shorthand(rule, t.css_var)
+          )
+      )
+  const sent = generalRules.flatMap(({ rule, source }) =>
+    sendsTo(rule).map((tokens) => `${source} ${tokens[0].path}`)
+  )
+  assert(
+    classless.length > 0 && sent.length === 0,
+    `No foundation rule sends a screen to a reserved token no class reads (${classless.length} such tokens)${sent.length ? `: ${sent.join(", ")}` : ""}`
+  )
+  const [sample] = classless
+  assert(
+    sendsTo(
+      `✅ \`${sample.path}\` only inside a primary button: that color is reserved for primary actions.`
+    ).length === 1 &&
+      sendsTo(
+        `✅ A primary button's text is \`text-primary-foreground\`: \`${sample.path}\` is reserved.`
+      ).length === 0,
+    `A rule that names a classless token gets past only by saying that token is reserved, not by the word "reserved" in another sense (${sample.path})`
+  )
+}
 
 // dsaireadable_get_typography serves values an agent copies: no Markdown around them.
 // Its usage_rules are prose, whose inline code stays, as in every rule.
@@ -1695,6 +1814,35 @@ const detailedSpec = async (component_name: string) =>
   )
 }
 
+// Unfiltered, detailed serves the styling rule whole beside the foundation
+// rules: radius.md's restated it, so they stay in the radius category. The
+// `**` around a numbered rule's title is markup an agent reads past; the
+// category answers keep it, since the docs site tells a numbered rule by it.
+{
+  const detailed = JSON.parse(
+    await payload("dsaireadable_get_design_rules", {
+      response_format: "detailed",
+    })
+  )
+  const radius = JSON.parse(
+    await payload("dsaireadable_get_design_rules", { category: "radius" })
+  )
+  const written = generalRules.filter((r) => r.source === "radius.md")
+  const restated = detailed.general_rules.filter(
+    (r: Json) => r.source === "radius.md"
+  ).length
+  const markup = (JSON.stringify(detailed.general_rules).match(/\*\*/g) ?? [])
+    .length
+  assert(
+    restated === 0 &&
+      markup === 0 &&
+      written.length > 0 &&
+      JSON.stringify(radius.rules) === JSON.stringify(written) &&
+      detailed.categories.foundations.includes("radius"),
+    `dsaireadable_get_design_rules detailed leaves radius.md's rules to the styling rule and serves the foundation rules without ** markup, and the radius category serves them as written${restated ? `; serves ${restated} radius.md rules` : ""}${markup ? `; ${markup} ** markers` : ""}`
+  )
+}
+
 // The critical rules are served without the `do` list (the prompts print it)
 // and the token chain: a screen writes the class, not the token it reads.
 {
@@ -1724,7 +1872,8 @@ const detailedSpec = async (component_name: string) =>
 // Unfiltered, detailed served every rule: 73,517 characters, which Claude Code
 // refused as one result. A component's rules are the constraints of its spec,
 // and the 65 of them made half of it: detailed names the components and serves
-// the foundation rules, the critical rules whole and the composition rules.
+// the foundation rules but radius.md's and those for UI text, the critical
+// rules whole and the composition rules.
 {
   const detailed = JSON.parse(
     await payload("dsaireadable_get_design_rules", {
@@ -1739,13 +1888,14 @@ const detailedSpec = async (component_name: string) =>
   ).rules
   assert(
     !("component_rules" in detailed) &&
-      detailed.general_rules.length + uiText.length === uxRules.length &&
+      detailed.general_rules.length + uiText.length ===
+        generalRules.filter((r) => r.source !== "radius.md").length &&
       detailed.composition_rules.length === indexRules.length &&
       detailed.critical_rules.every((r: Json) => "description" in r) &&
       detailed.categories.components.length === specNames.length &&
       JSON.stringify(select.rules) ===
         JSON.stringify(fullSpecs.Select.constraints),
-    `dsaireadable_get_design_rules detailed without a category serves ${detailed.general_rules.length} foundation rules, ${uxRules.length} with the ${uiText.length} of dsaireadable_get_ux_writing_rules, the critical rules whole and the ${indexRules.length} composition rules, and names the ${specNames.length} components whose rules a category returns`
+    `dsaireadable_get_design_rules detailed without a category serves ${detailed.general_rules.length} foundation rules, ${uxRules.length} with the ${uiText.length} of dsaireadable_get_ux_writing_rules and radius.md's, the critical rules whole and the ${indexRules.length} composition rules, and names the ${specNames.length} components whose rules a category returns`
   )
 }
 

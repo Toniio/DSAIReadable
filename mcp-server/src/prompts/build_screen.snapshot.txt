@@ -35,7 +35,7 @@ Requirements:
 - For spacing and sizes, use Tailwind v3's spacing scale, each step read from a space.scale.* token: p-4, gap-1.5, m-2, h-9, w-72. Off-scale steps (p-13, gap-17) do not exist.
 - For text, use text-xs … text-4xl, font-sans / font-mono / font-heading, font-normal … font-bold, leading-tight … leading-loose, tracking-tight … tracking-widest. Label, FieldLabel and Heading draw their own text style (12px regular, and the size of their level): give them no text-*, font-*, tracking-* or leading-* class.
 - For state colors on text, use text-success and text-warning, text-destructive for errors.
-- Every component is square and draws its own corners: add no rounded-* class to one, and keep a surface you draw yourself square too. rounded-full is for a round shape; rounded-xs … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero.
+- Every component is square and draws its own corners: add no rounded-* class to one, and keep a surface you draw yourself square too. rounded-full is for a round shape (an avatar, a dot); rounded-sm … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero; rounded-xs draws the Chart's indicators.
 - For shadows, use: shadow-xs … shadow-2xl (mapped to --elevation-*).
 - For a disabled state, use opacity-disabled under its variant: disabled:opacity-disabled.
 - A class comes first. For a token or a runtime variable that has no class, use Tailwind's shorthand utility-(--variable): w-(--radix-popover-trigger-width), bg-(--color-chart-sequential-3); never a bracket, w-[var(--…)]. An inline style may read a token too, style={{ width: 'var(--sidebar-width)' }}, but never a raw value.
