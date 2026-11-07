@@ -150,7 +150,9 @@ const restatesTheElement = (row: PropRow) =>
  * The detailed answer of dsaireadable_get_component_specs: what a screen needs
  * to use the component in one call — its usage, constraints, exports, props,
  * accessibility and code example, its cva variants, the sizes its size prop
- * accepts, and the composition rules that cover it.
+ * accepts, and the composition rules about it. A choice rule is copied into
+ * the usage of each spec it covers (npm run specs:choices): served there, it
+ * is not served again in composition_rules.
  */
 function componentContext(spec: ComponentSpec) {
   const variants = loadContext<Record<string, VariantEntry>>(
@@ -160,6 +162,7 @@ function componentContext(spec: ComponentSpec) {
     (c) => c.name === spec.name
   )
   const rules = loadContext<RuleSet>("ux-writing.json").composition_rules
+  const usage = (spec.usage ?? []) as string[]
   const kept = Object.fromEntries(
     Object.entries(spec).filter(([field]) => !BUILD_FIELDS.has(field))
   )
@@ -179,8 +182,9 @@ function componentContext(spec: ComponentSpec) {
     sizes: entry?.sizes ?? [],
     composition_rules: compositionRulesFor(
       (rules as CompositionRule[] | undefined) ?? [],
-      spec.name
-    ),
+      spec.name,
+      [spec.name]
+    ).filter((r) => !usage.some((bullet) => bullet.includes(r.rule))),
   }
 }
 
@@ -557,7 +561,7 @@ import { cn } from "@/lib/utils"`,
             'A foundation (color, spacing, focus…) or a component name: its rules and the composition rules that cover it. "composition": every composition rule. "tailwind": the critical rules'
           ),
         response_format: responseFormat(
-          "the critical rules, not only their titles, and every foundation's rules without a category"
+          "the critical rules whole and, without a category, the foundation rules except those for UI text"
         ),
       }),
       outputSchema: designRulesOutput,
@@ -579,7 +583,8 @@ import { cn } from "@/lib/utils"`,
       const cat = category.toLowerCase()
       const composition = compositionRulesFor(
         (data.composition_rules as CompositionRule[] | undefined) ?? [],
-        category
+        category,
+        Object.keys(data.component_rules ?? {})
       )
       if (["composition", "composition_rules", "rules"].includes(cat))
         return result({ category, composition_rules: composition })
