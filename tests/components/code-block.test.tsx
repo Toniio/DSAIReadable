@@ -55,6 +55,16 @@ function stubClipboard() {
   return writeText
 }
 
+/** Resolves once the element's scroll position has held for five frames. */
+async function scrollEnded(element: HTMLElement) {
+  let last = element.scrollLeft
+  for (let still = 0; still < 5;) {
+    await new Promise(requestAnimationFrame)
+    still = element.scrollLeft === last ? still + 1 : 0
+    last = element.scrollLeft
+  }
+}
+
 const liveRegion = () =>
   document.querySelector<HTMLElement>('[data-slot="code-block"] [aria-live]')!
 
@@ -155,9 +165,14 @@ describe("CodeBlock", () => {
     expect(content.scrollLeft).toBe(0)
 
     await userEvent.keyboard("{ArrowRight}")
-    await expect.poll(() => content.scrollLeft).toBeGreaterThan(0)
+    await expect
+      .poll(() => content.scrollLeft, { timeout: 5000 })
+      .toBeGreaterThan(0)
+    // The keyboard scrolls smoothly: let it end before scrolling back, or a
+    // busy machine presses ArrowLeft while the first scroll still runs.
+    await scrollEnded(content)
     await userEvent.keyboard("{ArrowLeft}")
-    await expect.poll(() => content.scrollLeft).toBe(0)
+    await expect.poll(() => content.scrollLeft, { timeout: 5000 }).toBe(0)
   })
 
   it("copiedLabel replaces the name and the announcement after a copy", async () => {
