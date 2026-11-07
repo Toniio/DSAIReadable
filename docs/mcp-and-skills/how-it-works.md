@@ -14,7 +14,7 @@ The server never reads the specs while it runs. `npm run generate-context` compi
 - **A parse error stops the build, not the agent.** `generate-context` fails when a parser does or when the index drifts from `components/ui/`, and the server refuses a missing cache rather than serve an empty design system.
 - **People and agents read the same data.** The documentation site is built from the same cache: the components, patterns and rules it shows are the ones the server serves.
 
-The server runs on the machine, over stdio, or over HTTP bound to `127.0.0.1`. A hosted server is on the backlog.
+The server runs on the machine, over stdio, or over HTTP bound to `127.0.0.1`.
 
 ## A session, tool by tool
 
