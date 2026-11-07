@@ -1,7 +1,7 @@
 /**
  * The `response_format` argument of the tools whose answers are large:
  * dsaireadable_get_component_specs (up to 15 K characters for one detailed
- * spec), dsaireadable_get_design_rules (about 37 K detailed, without a
+ * spec), dsaireadable_get_design_rules (about 35 K detailed, without a
  * filter), and dsaireadable_get_pattern (a pattern and its code example).
  *
  * `concise`, the default, keeps what an agent needs to choose and to stay
@@ -144,37 +144,42 @@ export function conciseRuleSet(data: RuleSet) {
       components: Object.keys(data.component_rules ?? {}),
     },
     detail:
-      'Pass a category (a foundation or a component name) for its rules, "tailwind" for the critical rules, or response_format: "detailed" for every foundation\'s rules and the critical rules whole',
-  }
-}
-
-/**
- * The unfiltered detailed answer of dsaireadable_get_design_rules: the
- * critical rules whole, every foundation's rules and the composition rules,
- * the rules ds://guidelines holds. A component's rules are the constraints of
- * its spec, which dsaireadable_get_component_specs serves too: all 65 came to
- * 37 K of the 74 K characters Claude Code refused as one result, so they stay
- * one category away.
- */
-export function detailedRuleSet(data: RuleSet) {
-  const { composition_rules, categories } = conciseRuleSet(data)
-  return {
-    critical_rules: servedCriticalRules(),
-    general_rules: data.general_rules ?? [],
-    composition_rules,
-    categories,
-    detail:
-      "A component's rules are the constraints of its spec: pass its name as category for them and the composition rules that cover it",
+      'Pass a category (a foundation or a component name) for its rules, "tailwind" for the critical rules, or response_format: "detailed" for the foundation rules and the critical rules whole; dsaireadable_get_ux_writing_rules has the rules for UI text',
   }
 }
 
 /** The foundations about text: the voice it is written in, the strings a component ships. */
 const UX_WRITING_SOURCES = ["voice-and-tone.md", "content.md"]
 
-export function uxWritingRules(data: RuleSet) {
+const isUxWritingRule = (rule: { source?: string }) =>
+  UX_WRITING_SOURCES.includes(rule.source ?? "")
+
+/**
+ * The unfiltered detailed answer of dsaireadable_get_design_rules: the
+ * critical rules whole, the foundation rules and the composition rules.
+ *
+ * The rules for UI text are the answer of dsaireadable_get_ux_writing_rules,
+ * which most sessions that read this one call too: every later turn sent them
+ * twice, so `detail` names that tool instead, and `categories` still lists
+ * their two foundations. A component's rules are the constraints of its spec,
+ * which dsaireadable_get_component_specs serves too: all 65 came to 37 K of
+ * the 74 K characters Claude Code refused as one result, so they stay one
+ * category away. ds://guidelines holds every rule.
+ */
+export function detailedRuleSet(data: RuleSet) {
+  const { composition_rules, categories } = conciseRuleSet(data)
   return {
-    rules: (data.general_rules ?? []).filter((r) =>
-      UX_WRITING_SOURCES.includes(r.source ?? "")
+    critical_rules: servedCriticalRules(),
+    general_rules: (data.general_rules ?? []).filter(
+      (rule) => !isUxWritingRule(rule)
     ),
+    composition_rules,
+    categories,
+    detail:
+      "A component's rules are the constraints of its spec: pass its name as category for them and the composition rules that cover it. The rules for UI text (voice-and-tone, content): dsaireadable_get_ux_writing_rules",
   }
+}
+
+export function uxWritingRules(data: RuleSet) {
+  return { rules: (data.general_rules ?? []).filter(isUxWritingRule) }
 }
