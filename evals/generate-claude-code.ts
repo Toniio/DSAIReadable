@@ -11,6 +11,9 @@
  *   none        no MCP server, no skill: the baseline
  *   mcp         the dsaireadable MCP server, started from this checkout
  *   mcp-skills  the server, and the skills of skills/ in the session's .claude/skills/
+ *   mcp-prompt  the server, and the session starts from its build_screen prompt
+ *               with the task's request as `task` (`SYSTEM` alone: the prompt
+ *               says how to use the server)
  *
  * The session loads none of the user's own configuration (user settings,
  * plugins, hooks, CLAUDE.md, auto memory, MCP servers, claude.ai connectors;
@@ -29,6 +32,8 @@
  * read (the MCP server, its context, the skills, the instructions). A task
  * already done is skipped, so after a usage limit the same command resumes;
  * it refuses to resume when the model, Claude Code or those sources changed.
+ * The command line, that hash and a new run.json come from
+ * evals/lib/claude-code.ts, which `npm run evals:test` checks.
  *
  *   npm run evals:generate -- --model sonnet --condition mcp [--label 0.1.1-sonnet-mcp]
  *     [--tasks a,b | --suite skills] [--timeout-minutes 20] [--claude <path>] [--dry-run]
@@ -40,40 +45,39 @@
  */
 
 import { execFileSync, execSync, spawn } from "node:child_process"
-import { createHash } from "node:crypto"
 import {
   cpSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
-  readdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
 } from "node:fs"
 import { tmpdir } from "node:os"
-import { join, relative, resolve } from "node:path"
+import { join, resolve } from "node:path"
 import { createInterface } from "node:readline"
 import { fileURLToPath } from "node:url"
 import { parseArgs } from "node:util"
 
+import { connectMcp, PROMPT, promptMessage, screenOf } from "./lib/claude"
 import {
-  connectMcp,
-  MAX_TURNS,
-  mcpServerLaunch,
-  screenOf,
-  SYSTEM,
-  WITH_MCP,
-} from "./lib/claude"
+  conditionOf,
+  CONDITIONS,
+  newRunFile,
+  SERVER,
+  sessionArgs,
+  skillsOf,
+  sourcesHash,
+  type Condition,
+  type RunFile,
+} from "./lib/claude-code"
 import type { GenerationMetrics } from "./lib/report"
 import { readStream, timeline, toolResults } from "./lib/stream"
 import { loadTasks, taskMessage, type Task } from "./lib/tasks"
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
-const SERVER = "dsaireadable"
 const MCP_PREFIX = `mcp__${SERVER}__`
-const CONDITIONS = ["none", "mcp", "mcp-skills"] as const
-type Condition = (typeof CONDITIONS)[number]
 /** The Claude Code release whose flags and stream this script was checked against. */
 const CHECKED_ON = "2.1.285"
 
@@ -107,11 +111,12 @@ const timeoutMs = Number(values["timeout-minutes"]) * 60_000
 if (!(timeoutMs > 0)) fail("--timeout-minutes is a positive number")
 const CLAUDE = values.claude
 
-const withMcp = condition !== "none"
-const withSkills = condition === "mcp-skills"
-const SKILLS = readdirSync(resolve(ROOT, "skills")).filter((name) =>
-  existsSync(resolve(ROOT, "skills", name, "SKILL.md"))
-)
+const {
+  mcp: withMcp,
+  skills: withSkills,
+  prompt: withPrompt,
+} = conditionOf(condition)
+const SKILLS = skillsOf(ROOT)
 const OUT = join(ROOT, "evals/.work/claude-code", label)
 const tasks = loadTasks(ROOT, values.tasks?.split(","), values.suite)
 
@@ -119,45 +124,8 @@ const tasks = loadTasks(ROOT, values.tasks?.split(","), values.suite)
 // The session
 // ---------------------------------------------------------------------------
 
-/** What Claude Code is told: the same as the claude generator, plus the server and the tools of the condition. */
-const ARGS = [
-  "-p",
-  "--model",
-  model,
-  "--output-format",
-  "stream-json",
-  "--verbose",
-  "--append-system-prompt",
-  SYSTEM + (withMcp ? WITH_MCP : ""),
-  // Hidden from `claude --help`, defined in Claude Code 2.1.76 and 2.1.285.
-  "--max-turns",
-  String(MAX_TURNS),
-  "--effort",
-  "high",
-  "--permission-mode",
-  "dontAsk",
-  "--setting-sources",
-  "project",
-  "--strict-mcp-config",
-  ...(withMcp
-    ? [
-        "--mcp-config",
-        JSON.stringify({
-          mcpServers: { [SERVER]: { type: "stdio", ...mcpServerLaunch(ROOT) } },
-        }),
-      ]
-    : []),
-  "--tools",
-  withSkills ? "Skill,Read" : "",
-  // Read needs no rule: inside the session's folder, where .claude/skills/
-  // sits, it is allowed, and dontAsk denies it anywhere else.
-  ...(withMcp
-    ? ["--allowedTools", withSkills ? `mcp__${SERVER},Skill` : `mcp__${SERVER}`]
-    : []),
-  ...(withSkills ? [] : ["--disable-slash-commands"]),
-  "--no-session-persistence",
-  "--no-chrome",
-]
+/** What Claude Code is told (evals/lib/claude-code.ts). */
+const ARGS = sessionArgs(ROOT, model, condition)
 
 /**
  * The variables a session takes from the shell: none of ANTHROPIC_* (an API
@@ -327,7 +295,11 @@ type Outcome =
 const lastLine = (text: string) => text.trim().split("\n").at(-1) ?? ""
 
 /** Runs one task in a fresh folder outside the repository and reads its stream. */
-async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
+async function session(
+  task: Task,
+  message: string,
+  init: { value?: Init }
+): Promise<Outcome> {
   const wd = mkdtempSync(join(tmpdir(), "dsaireadable-evals-"))
   try {
     if (withSkills)
@@ -338,7 +310,7 @@ async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
           { recursive: true }
         )
     const child = spawn(CLAUDE, ARGS, { cwd: wd, env: ENV })
-    child.stdin.end(taskMessage(ROOT, task))
+    child.stdin.end(message)
     let stderr = ""
     child.stderr.on("data", (chunk: Buffer) => {
       stderr = (stderr + chunk.toString()).slice(-2000)
@@ -548,42 +520,21 @@ async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
 // ---------------------------------------------------------------------------
 
 /**
- * A hash of what the sessions read from this checkout: the MCP server's
- * sources and context, the skills, the instructions. A resumed run must find
- * the same, or its tasks would be measured against different sources.
+ * What each session is sent: the task's message, or under mcp-prompt the
+ * build_screen prompt the server renders for it.
  */
-function sourcesHash(): string {
-  const hash = createHash("sha256")
-  hash.update(SYSTEM + WITH_MCP)
-  const walk = (dir: string): string[] =>
-    readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-      const path = join(dir, entry.name)
-      return entry.isDirectory() ? walk(path) : [path]
-    })
-  for (const dir of ["mcp-server/src", "mcp-server/context", "skills"])
-    for (const file of walk(resolve(ROOT, dir)).sort())
-      hash.update(`\0${relative(ROOT, file)}\0`).update(readFileSync(file))
-  return hash.digest("hex").slice(0, 16)
-}
-
-interface RunFile {
-  generator: "claude-code"
-  claudeCode: string
-  claudePath: string
-  model: string
-  modelOption: string
-  condition: Condition
-  context: "mcp" | "none"
-  skills: string[]
-  /** Every skill the sessions listed, Claude Code's bundled ones included. */
-  sessionSkills: string[]
-  /** Every plugin built into Claude Code that the sessions listed. */
-  sessionPlugins: string[]
-  maxTurns: number
-  effort: string
-  sources: string
-  designSystem: { version: string; commit: string; dirty: boolean }
-  tasks: Record<string, Record<string, unknown>>
+async function messages(of: Task[]): Promise<Map<string, string>> {
+  if (!withPrompt)
+    return new Map(of.map((task) => [task.id, taskMessage(ROOT, task)]))
+  const { mcp } = await connectMcp(ROOT)
+  try {
+    const rendered = new Map<string, string>()
+    for (const task of of)
+      rendered.set(task.id, await promptMessage(mcp, ROOT, task))
+    return rendered
+  } finally {
+    await mcp.close()
+  }
 }
 
 if (process.env.CLAUDECODE || process.env.CLAUDE_CODE_ENTRYPOINT)
@@ -637,29 +588,25 @@ if (values["dry-run"]) {
       `MCP server "${SERVER}" started through the session's launch: ${definitions.length} tools.`
     )
   }
+  if (withPrompt && tasks.length > 0) {
+    const [task] = tasks
+    const text = (await messages([task])).get(task.id)!
+    console.log(
+      `The session's message for ${task.id}: the ${PROMPT.name} prompt (device ${PROMPT.device}, mode ${PROMPT.mode}), ${text.length} characters, from "${text.split("\n")[0]}"`
+    )
+  }
   console.log("\n✅ evals:generate --dry-run: no session started.")
   process.exit(0)
 }
 
 mkdirSync(OUT, { recursive: true })
 const runFile = join(OUT, "run.json")
-const sources = sourcesHash()
 const run: RunFile = existsSync(runFile)
   ? (JSON.parse(readFileSync(runFile, "utf-8")) as RunFile)
-  : {
-      generator: "claude-code",
-      claudeCode: "",
-      claudePath,
-      model: "",
-      modelOption: model,
+  : newRunFile(ROOT, {
       condition,
-      context: withMcp ? "mcp" : "none",
-      skills: withSkills ? SKILLS : [],
-      sessionSkills: [],
-      sessionPlugins: [],
-      maxTurns: MAX_TURNS,
-      effort: "high",
-      sources,
+      modelOption: model,
+      claudePath,
       designSystem: {
         version: (
           JSON.parse(readFileSync(join(ROOT, "package.json"), "utf-8")) as {
@@ -676,8 +623,7 @@ const run: RunFile = existsSync(runFile)
             encoding: "utf-8",
           }).trim() !== "",
       },
-      tasks: {},
-    }
+    })
 if (run.condition !== condition || run.modelOption !== model)
   fail(
     `evals/.work/claude-code/${label}/ holds a run of --model ${run.modelOption} --condition ${run.condition}: give this one another --label`
@@ -693,6 +639,7 @@ const init: { value?: Init } = run.model
     }
   : {}
 
+const sent = await messages(tasks)
 let produced = 0
 let skipped = 0
 const retry: string[] = []
@@ -701,14 +648,14 @@ for (const task of tasks) {
     skipped++
     continue
   }
-  if (sourcesHash() !== run.sources)
+  if (sourcesHash(ROOT, condition) !== run.sources)
     fail(
       `the MCP server, its context, the skills or the instructions changed since this run started (evals/.work/claude-code/${label}/run.json): give this one another --label`
     )
   // A screen left by an attempt that did not finish must not be scored.
   rmSync(join(OUT, `${task.id}.tsx`), { force: true })
   process.stdout.write(`  ${task.id}… `)
-  const outcome = await session(task, init)
+  const outcome = await session(task, sent.get(task.id)!, init)
   if (outcome.kind === "stop") {
     console.log("stopped")
     fail(outcome.reason, outcome.exitCode)

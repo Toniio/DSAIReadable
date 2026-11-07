@@ -72,11 +72,17 @@ export function suiteIds(root: string): Record<string, string[]> {
   return readTasks(root).suites
 }
 
+/** The screen a change starts from, as the generator receives it; undefined for a new screen. */
+export function currentScreen(root: string, task: Task): string | undefined {
+  if (!task.base) return undefined
+  const code = readFileSync(resolve(root, task.base), "utf-8")
+  return `The current screen:\n\n\`\`\`tsx\n${code}\`\`\``
+}
+
 /** What the generator receives: the request, and the screen to change if any. */
 export function taskMessage(root: string, task: Task): string {
-  if (!task.base) return task.prompt
-  const code = readFileSync(resolve(root, task.base), "utf-8")
-  return `${task.prompt}\n\nThe current screen:\n\n\`\`\`tsx\n${code}\`\`\``
+  const screen = currentScreen(root, task)
+  return screen ? `${task.prompt}\n\n${screen}` : task.prompt
 }
 
 /** Where a task's gold standard is written. */
