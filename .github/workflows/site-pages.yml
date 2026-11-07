@@ -87,5 +87,15 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Pages names a deployment after the commit it deploys. When the action
+      # times out it cancels that deployment, and the commit cannot be
+      # deployed again: a rerun, or a new manual run on the same commit, polls
+      # the canceled deployment until it times out in turn. The only way back
+      # is a new commit. So the timeout is twice the action's default of
+      # 10 minutes: a slow sync on Pages' side (it sat in `syncing_files` for
+      # the whole 10 minutes on 2026-11-07) gets time to finish instead of
+      # being canceled.
       - id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          timeout: 1200000
