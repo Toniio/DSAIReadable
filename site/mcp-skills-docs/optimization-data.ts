@@ -232,11 +232,13 @@ function sessionCost(
 // ── By version ─────────────────────────────────────────────────────────────
 
 /**
- * The first version the page compares: the first whose screens the current
- * scorer scored. The 0.1.0 screens were scored by an earlier scorer and are
- * no longer on disk to be scored again.
+ * The first version the page compares: 0.2.0, the first measured in three
+ * passes of each condition, as every version since. The 0.1.x runs are one
+ * pass each, so a figure of theirs is one draw where the later ones pool
+ * three: they stay in evals/history/, and 0.1.3's MCP run still defines the
+ * budget (evals/lib/budget.ts), but the page does not chart them.
  */
-const SCORED_FROM = "0.1.3"
+const FIRST_VERSION = "0.2.0"
 
 /** One condition at one version: its passes pooled. */
 export interface Measurement {
@@ -255,12 +257,12 @@ export interface Measurement {
   estimated: boolean
 }
 
-/** Both conditions at every version from SCORED_FROM on, the oldest first. */
+/** Both conditions at every version from FIRST_VERSION on, the oldest first. */
 export function measurements(history?: string): Measurement[] {
   const all = measured(history)
   const rates = inputRates(all)
   const versions = [...new Set(all.map((run) => run.version))]
-    .filter((version) => compareVersions(version, SCORED_FROM) >= 0)
+    .filter((version) => compareVersions(version, FIRST_VERSION) >= 0)
     .sort(compareVersions)
   return versions.flatMap((version) => {
     const atVersion = all.filter((run) => run.version === version)

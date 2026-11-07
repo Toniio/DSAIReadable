@@ -23,8 +23,8 @@ The [`build_screen`](../../mcp-server/src/prompts/index.ts) prompt sets the work
 1. `dsaireadable_get_design_system_overview`: the setup, the imports and the component categories.
 2. `dsaireadable_get_pattern`, outside the budget, when the screen carries out a common task (create, edit, delete, filter, search, sign in, settings): the components, structure, spacing and copy of that task.
 3. `dsaireadable_get_components`: the components the screen needs, and only those.
-4. `dsaireadable_get_design_rules`: the composition rules and the critical rules.
-5. `dsaireadable_get_component_specs`, once for each component kept.
+4. `dsaireadable_get_design_rules`: the composition rules and the critical rules. `detailed` without a category adds the other foundation rules, grouped by foundation, except the rules for UI text, which `dsaireadable_get_ux_writing_rules` serves, and those of `radius`, which the critical rules state.
+5. `dsaireadable_get_component_specs`, once for each component kept: concise by default, with its role, constraints and exports, and `detailed` only for a component whose props or variants the screen sets.
 6. The screen, then `dsaireadable_validate_screen` and `dsaireadable_validate_code`, again after each fix, until both report no error.
 
 That is the workflow the prompt prescribes, not what every session does. An agent skips a step it does not need: `dsaireadable_get_components` when the pattern already names the components. Claude Code (2.1.318) cannot pass a request of several words to the prompt: [Tools](./tools.md) says what to do instead.
