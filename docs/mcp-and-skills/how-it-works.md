@@ -27,7 +27,7 @@ The [`build_screen`](../../mcp-server/src/prompts/index.ts) prompt sets the work
 5. `dsaireadable_get_component_specs`, once for each component kept.
 6. The screen, then `dsaireadable_validate_screen` and `dsaireadable_validate_code`, again after each fix, until both report no error.
 
-That is the workflow the prompt prescribes, not what every session does. An agent skips a step it does not need: `dsaireadable_get_components` when the pattern already names the components.
+That is the workflow the prompt prescribes, not what every session does. An agent skips a step it does not need: `dsaireadable_get_components` when the pattern already names the components. Claude Code (2.1.318) cannot pass a request of several words to the prompt: [Tools](./tools.md) says what to do instead.
 
 The eval harness records what each session did in `evals/history/`. This typical session shows where the context of a typical screen goes, turn by turn. The calls of a turn run together, so they are grouped by tool, and each turn sends the whole conversation again.
 

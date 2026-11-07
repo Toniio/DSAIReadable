@@ -8,6 +8,8 @@ A prompt opens a task on the server's workflow: the tools to call first, then th
 
 <!-- site: prompts -->
 
+**From Claude Code, ask for the screen in plain words.** Claude Code (2.1.318) runs the prompt as the slash command `/mcp__<server>__build_screen`, where `<server>` is the name the server is registered under: `/mcp__dsaireadable__build_screen` after `claude mcp add dsaireadable`, `/mcp__plugin_dsaireadable_dsaireadable__build_screen` after the plugin install. It splits what follows the command at each space and gives one word to each argument in order: `task`, `context`, `device`, `mode`. Quotes do not group words, and words past the fourth are dropped. With fewer than four words, Claude Code stops on a missing argument; with four or more, the third and fourth must be a device and a mode, or the server rejects them. A request of several words never reaches `task`. Ask the agent for the screen instead: it calls the tools itself and picks its own calls, without the prompt's workflow and call budget. A client that fills a prompt's arguments in a form, or calls `prompts/get`, passes the whole request.
+
 ## Why these tools
 
 An agent that builds a screen asks the same questions in the same order: what the design system holds, how a component is used, which rules apply, which page pattern fits the task, which words to write, whether its code is right, and what changed since the version it knows. Each tool answers one of them. Depth goes through parameters, not through more tools.
