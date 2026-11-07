@@ -184,16 +184,25 @@ const isUxWritingRule = (rule: { source?: string }) =>
  * their two foundations. A component's rules are the constraints of its spec,
  * which dsaireadable_get_component_specs serves too: all 65 came to 37 K of
  * the 74 K characters Claude Code refused as one result, so they stay one
- * category away. ds://guidelines holds the critical, foundation and
- * composition rules.
+ * category away.
+ *
+ * The foundation rules are keyed by the foundation's name without ".md":
+ * each rule carried its own `source`, which repeated the same file name on
+ * every rule.
+ * ds://guidelines and a foundation's category answer keep the flat list of
+ * `{ rule, source }` that ux-writing.json holds.
  */
 export function detailedRuleSet(data: RuleSet) {
   const { composition_rules, categories } = conciseRuleSet(data)
+  const foundation_rules: Record<string, string[]> = {}
+  for (const rule of data.general_rules ?? []) {
+    if (isUxWritingRule(rule) || restatesTheStylingRule(rule)) continue
+    const foundation = (rule.source ?? "").replace(/\.md$/, "")
+    ;(foundation_rules[foundation] ??= []).push(withoutMarkup(rule).rule)
+  }
   return {
     critical_rules: servedCriticalRules(),
-    general_rules: (data.general_rules ?? [])
-      .filter((rule) => !isUxWritingRule(rule) && !restatesTheStylingRule(rule))
-      .map(withoutMarkup),
+    foundation_rules,
     composition_rules,
     categories,
     detail:

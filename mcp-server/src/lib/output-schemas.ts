@@ -267,7 +267,7 @@ export const designRulesOutput = forms(
   // No category, detailed
   z.strictObject({
     critical_rules: z.array(criticalRule),
-    general_rules: z.array(generalRule),
+    foundation_rules: z.record(z.string(), strings),
     composition_rules: z.array(compositionRule),
     categories: ruleCategories,
     detail: z.string(),
