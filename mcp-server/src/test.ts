@@ -1657,8 +1657,8 @@ assert(
   conciseTotal / wholeTotal <= 0.2 &&
     detailedTotal / wholeTotal <= 0.55 &&
     conciseRules <= 10_000 &&
-    detailedRules <= 36_000,
-  `dsaireadable_get_component_specs: concise is ${Math.round((conciseTotal / wholeTotal) * 100)} % of the specs whole (≤ 20 %), detailed ${Math.round((detailedTotal / wholeTotal) * 100)} % (≤ 55 %); dsaireadable_get_design_rules without a category: concise ${conciseRules.toLocaleString("en-US")} characters (≤ 10,000), detailed ${detailedRules.toLocaleString("en-US")} (≤ 36,000)`
+    detailedRules <= 31_000,
+  `dsaireadable_get_component_specs: concise is ${Math.round((conciseTotal / wholeTotal) * 100)} % of the specs whole (≤ 20 %), detailed ${Math.round((detailedTotal / wholeTotal) * 100)} % (≤ 55 %); dsaireadable_get_design_rules without a category: concise ${conciseRules.toLocaleString("en-US")} characters (≤ 10,000), detailed ${detailedRules.toLocaleString("en-US")} (≤ 31,000)`
 )
 const conciseButton = JSON.parse(
   await payload("dsaireadable_get_component_specs", {
@@ -1829,11 +1829,10 @@ const detailedSpec = async (component_name: string) =>
     await payload("dsaireadable_get_design_rules", { category: "radius" })
   )
   const written = generalRules.filter((r) => r.source === "radius.md")
-  const restated = detailed.general_rules.filter(
-    (r: Json) => r.source === "radius.md"
+  const restated = (detailed.foundation_rules?.radius ?? []).length
+  const markup = (
+    JSON.stringify(detailed.foundation_rules ?? {}).match(/\*\*/g) ?? []
   ).length
-  const markup = (JSON.stringify(detailed.general_rules).match(/\*\*/g) ?? [])
-    .length
   assert(
     restated === 0 &&
       markup === 0 &&
@@ -1887,16 +1886,61 @@ const detailedSpec = async (component_name: string) =>
   const uiText = JSON.parse(
     await payload("dsaireadable_get_ux_writing_rules")
   ).rules
+  const foundationRules = Object.values(detailed.foundation_rules ?? {}).flat()
   assert(
     !("component_rules" in detailed) &&
-      detailed.general_rules.length + uiText.length ===
+      foundationRules.length + uiText.length ===
         generalRules.filter((r) => r.source !== "radius.md").length &&
       detailed.composition_rules.length === indexRules.length &&
       detailed.critical_rules.every((r: Json) => "description" in r) &&
       detailed.categories.components.length === specNames.length &&
       JSON.stringify(select.rules) ===
         JSON.stringify(fullSpecs.Select.constraints),
-    `dsaireadable_get_design_rules detailed without a category serves ${detailed.general_rules.length} foundation rules, ${uxRules.length} with the ${uiText.length} of dsaireadable_get_ux_writing_rules and radius.md's, the critical rules whole and the ${indexRules.length} composition rules, and names the ${specNames.length} components whose rules a category returns`
+    `dsaireadable_get_design_rules detailed without a category serves ${foundationRules.length} foundation rules, ${uxRules.length} with the ${uiText.length} of dsaireadable_get_ux_writing_rules and radius.md's, the critical rules whole and the ${indexRules.length} composition rules, and names the ${specNames.length} components whose rules a category returns`
+  )
+}
+
+// Unfiltered, detailed groups the foundation rules by foundation: each rule
+// carried its own "source", the same file names once per rule (#188). The
+// grouping keeps every rule it served, once, in the cache's order; the
+// category answers and ds://guidelines keep the flat list of the cache.
+{
+  const detailed = JSON.parse(
+    await payload("dsaireadable_get_design_rules", {
+      response_format: "detailed",
+    })
+  )
+  const grouped = (detailed.foundation_rules ?? {}) as Record<string, string[]>
+  const expected: Record<string, string[]> = {}
+  for (const { rule, source } of generalRules) {
+    if (["radius.md", "voice-and-tone.md", "content.md"].includes(source))
+      continue
+    ;(expected[source.replace(/\.md$/, "")] ??= []).push(
+      rule.replace(/\*\*(.+?)\*\*/g, "$1")
+    )
+  }
+  const servedOnce = Object.values(grouped).flat()
+  const color = JSON.parse(
+    await payload("dsaireadable_get_design_rules", { category: "color" })
+  )
+  const guidelines = JSON.parse(
+    (
+      (await client.readResource({ uri: "ds://guidelines" })).contents[0] as {
+        text: string
+      }
+    ).text
+  )
+  assert(
+    !("general_rules" in detailed) &&
+      Object.keys(grouped).every((f) => !f.endsWith(".md")) &&
+      JSON.stringify(Object.keys(grouped)) ===
+        JSON.stringify(Object.keys(expected)) &&
+      JSON.stringify(grouped) === JSON.stringify(expected) &&
+      new Set(servedOnce).size === servedOnce.length &&
+      JSON.stringify(color.rules) ===
+        JSON.stringify(generalRules.filter((r) => r.source === "color.md")) &&
+      JSON.stringify(guidelines.general_rules) === JSON.stringify(generalRules),
+    `dsaireadable_get_design_rules detailed serves the foundation rules grouped by foundation, ${Object.keys(grouped).length} names without ".md", every rule once in the cache's order (${servedOnce.length} of ${Object.values(expected).flat().length}), no general_rules; the color category and ds://guidelines keep the flat list`
   )
 }
 
@@ -1923,8 +1967,8 @@ const detailedSpec = async (component_name: string) =>
       JSON.stringify(uiText.filter((r) => r.source === `${category}.md`)),
     ])
   )
-  const served = detailed.general_rules.filter((r: Json) =>
-    uiTextSources.includes(r.source.replace(/\.md$/, ""))
+  const served = uiTextSources.flatMap(
+    (f) => detailed.foundation_rules?.[f] ?? []
   )
   assert(
     served.length === 0 &&
