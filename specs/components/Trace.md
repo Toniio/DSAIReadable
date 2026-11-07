@@ -12,11 +12,11 @@
 
 ## Role
 
-The steps an assistant takes while it works (a tool call, its reasoning, the sources it read), one line each, with a status and details that open under the line.
+The steps an assistant takes while it works (a tool call, its reasoning, the sources it read), one line each, every step included, with its status and, when it has some, details that open under the line.
 
 ## Usage
 
-- Show each step of the assistant's work as a `TraceLine`: a `TraceIcon`, a `TraceTitle` that says what happened, and a `TraceDescription` for a duration, a count or a diff stat
+- Show each step of the assistant's work as a `TraceLine`, a finished step with nothing to open included: a `TraceIcon`, a `TraceTitle` that says what happened, and a `TraceDescription` for a duration, a count or a diff stat
 - Show the details of a step under it with a `TraceCollapsible`: the `TraceLine` in a `TraceCollapsibleTrigger`, the details in a `TraceCollapsibleContent`
 - Show a tool's output in the details with a `CodeBlock` of `size="sm"`, `variant="destructive"` for a step that failed
 - Set `status="running"` while a step runs (its title shimmers), `status="error"` when it failed, `status="pending"` before it starts, and no status once it is done
@@ -26,15 +26,16 @@ The steps an assistant takes while it works (a tool call, its reasoning, the sou
 
 <!-- rule-23: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, with a `CodeBlockCopyButton` in its `CodeBlockActions`. A step of the assistant's work that has a status or details to open (a tool call, its reasoning, its sources): `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event nobody said, with nothing to open (a date, "Conversation resumed"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
+- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, inside a `ghost` or `outline` `Bubble`, with a `CodeBlockCopyButton` in its `CodeBlockActions`. Every step of the assistant's work (a tool call, its reasoning, a search), running, failed or done, with details or without: `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event of the conversation that is not a step of the assistant's work (a date, "Conversation resumed", "Ana joined"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
 
 ## Constraints
 
 - **MUST** — state the status in the words of `TraceTitle`: "Running npm test", "Failed to run npm test", "Run npm test" for a pending step. The shimmer and the color are not announced, and a pending step looks like a done one (WCAG 1.4.1)
 - **MUST** — write `TraceTitle` as one sentence that says what happened ("Edited trace.tsx", not "trace.tsx"), on one line: it truncates, and it names the trigger
 - **MUST** — wrap a `TraceLine` in a `TraceCollapsibleTrigger`, a link or a dialog trigger to make it act: a `TraceLine` alone is text, not a tab stop
-- **MUST NOT** — use a `Trace` step for an event with no status and nothing to open (a date, "Conversation resumed") → `Marker`
+- **MUST NOT** — use a `Trace` for an event that is not a step of the assistant's work (a date, "Conversation resumed", "Ana joined") → `Marker`
 - **MUST NOT** — put what the assistant says to the user in a `Trace` → a `Bubble` in `MessageContent`
+- **MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin (WCAG 2.5.8, `specs/foundations/size.md`)
 - **MUST** — give a block with a muted fill placed in `TraceCollapsibleContent` its own `text-foreground`: the details are muted text (`CodeBlock` sets its own color)
 - **Note** — a pending step has no style of its own: shadcn/ui dims it to 60% opacity, which puts its muted text at 2.55:1 in light (WCAG 1.4.3)
 - **Note** — `TraceIcon` is hidden from screen readers (`aria-hidden`): the title carries the meaning
@@ -273,7 +274,7 @@ export default function Example() {
 
 ## Cross-references
 
-- `Marker` — an event nobody said, with no status and nothing to open, where a `Trace` step has one or the other
+- `Marker` — an event of the conversation that is not a step of the assistant's work (a date, a resumed session), where every step, a finished one with nothing to open included, is a `TraceLine`
 - `CodeBlock` — the output of a tool in the details of a step, `size="sm"`
 - `Collapsible` — the disclosure each `TraceCollapsible` renders
 - `Message` — the turn the steps belong to; its `Bubble` holds the answer

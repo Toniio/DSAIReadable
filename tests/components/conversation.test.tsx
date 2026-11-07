@@ -134,12 +134,12 @@ describe("Marker", () => {
         <MarkerIcon>
           <SparkleIcon />
         </MarkerIcon>
-        <MarkerContent>Searched 4 sources</MarkerContent>
+        <MarkerContent>Conversation resumed</MarkerContent>
       </Marker>
     )
     const icon = document.querySelector('[data-slot="marker-icon"]')
     expect(icon?.getAttribute("aria-hidden")).toBe("true")
-    expect(screen.getByText("Searched 4 sources")).toBeTruthy()
+    expect(screen.getByText("Conversation resumed")).toBeTruthy()
   })
 })
 

@@ -385,6 +385,10 @@
       "source": "size.md"
     },
     {
+      "rule": "✅ Keep the `gap-2` between the steps of a `Trace`: its 16px triggers and wrapped links conform through the spacing exception, with no margin to spare",
+      "source": "size.md"
+    },
+    {
       "rule": "❌ Never shrink a `Button` below size `xs` / `icon-xs`, or add a hit area that overlaps another target",
       "source": "size.md"
     },
@@ -600,6 +604,7 @@
     ],
     "CodeBlock": [
       "**MUST** — pass `CodeBlockCopyButton` the exact text the block shows, in `value`",
+      "**MUST** — put a `CodeBlock` in a `ghost` or `outline` `Bubble`, never in a filled one: the `secondary` and `muted` fills are `bg-muted`, the fill of the `added` and `highlighted` lines, which then vanish, and on the primary fill of `default` the code measures 2.97:1 and its line numbers 1.12:1 in light (WCAG 1.4.3)",
       "**MUST NOT** — add a syntax highlighter or a color per token (shiki, Prism, highlight.js, shadcn/ui's `use-highlighted-code` hook): the design system has no syntax tokens, and shiki's GitHub themes put tokens under 4.5:1 (the orange of a variable at 3.49:1 on white, the gray of a comment at 3.78:1 on the block's dark fill, WCAG 1.4.3)",
       "**MUST NOT** — color the code with the chart colors or a status color: the code is `text-foreground`, or `text-destructive` with `variant=\"destructive\"`",
       "**MUST** — write code inside a sentence (a file name, a prop) as a `<code>` element in the text, and keep `CodeBlock` for a block of its own",
@@ -761,7 +766,7 @@
       "**MUST** — put the text in a `MarkerContent` and the icon in a `MarkerIcon`",
       "**MUST NOT** — use a `Marker` for what a speaker says: that is a `Message` with a `Bubble`",
       "**MUST NOT** — use a `Marker` for an error the user must act on → `Alert`",
-      "**MUST NOT** — use a `Marker` for a step that has a status or details to open (a tool call while it runs, its output) → `Trace`",
+      "**MUST NOT** — use a `Marker` for a step of the assistant's work, running, failed or done, with details or without (a tool call, its reasoning, \"Searched 4 sources\") → `Trace`",
       "**MUST** — keep the text to one line of 60 characters or less",
       "**Note** — `MarkerIcon` is hidden from screen readers (`aria-hidden`): the text carries the meaning"
     ],
@@ -978,8 +983,9 @@
       "**MUST** — state the status in the words of `TraceTitle`: \"Running npm test\", \"Failed to run npm test\", \"Run npm test\" for a pending step. The shimmer and the color are not announced, and a pending step looks like a done one (WCAG 1.4.1)",
       "**MUST** — write `TraceTitle` as one sentence that says what happened (\"Edited trace.tsx\", not \"trace.tsx\"), on one line: it truncates, and it names the trigger",
       "**MUST** — wrap a `TraceLine` in a `TraceCollapsibleTrigger`, a link or a dialog trigger to make it act: a `TraceLine` alone is text, not a tab stop",
-      "**MUST NOT** — use a `Trace` step for an event with no status and nothing to open (a date, \"Conversation resumed\") → `Marker`",
+      "**MUST NOT** — use a `Trace` for an event that is not a step of the assistant's work (a date, \"Conversation resumed\", \"Ana joined\") → `Marker`",
       "**MUST NOT** — put what the assistant says to the user in a `Trace` → a `Bubble` in `MessageContent`",
+      "**MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin (WCAG 2.5.8, `specs/foundations/size.md`)",
       "**MUST** — give a block with a muted fill placed in `TraceCollapsibleContent` its own `text-foreground`: the details are muted text (`CodeBlock` sets its own color)",
       "**Note** — a pending step has no style of its own: shadcn/ui dims it to 60% opacity, which puts its muted text at 2.55:1 in light (WCAG 1.4.3)",
       "**Note** — `TraceIcon` is hidden from screen readers (`aria-hidden`): the title carries the meaning"
@@ -1099,7 +1105,7 @@
     },
     {
       "id": "rule-23",
-      "rule": "Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, with a `CodeBlockCopyButton` in its `CodeBlockActions`. A step of the assistant's work that has a status or details to open (a tool call, its reasoning, its sources): `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event nobody said, with nothing to open (a date, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.",
+      "rule": "Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, inside a `ghost` or `outline` `Bubble`, with a `CodeBlockCopyButton` in its `CodeBlockActions`. Every step of the assistant's work (a tool call, its reasoning, a search), running, failed or done, with details or without: `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event of the conversation that is not a step of the assistant's work (a date, \"Conversation resumed\", \"Ana joined\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.",
       "applies_to": [
         "MessageScroller",
         "Message",

@@ -16,7 +16,7 @@ A block of code, terminal output or a diff, in one color, with an optional heade
 
 ## Usage
 
-- Show code in an assistant's answer, inside the `Bubble` of its `MessageContent`, between two paragraphs
+- Show code in an assistant's answer, inside the `ghost` or `outline` `Bubble` of its `MessageContent`, between two paragraphs
 - Show a command, a file or a log, named in a `CodeBlockTitle` with a `CodeBlockCopyButton` next to it in `CodeBlockActions`, both in a `CodeBlockHeader`
 - Show the output of a tool in a `TraceCollapsibleContent` with `size="sm"`, and failed output with `variant="destructive"`
 - Number the lines with `lineNumbers`, from `startLine` for an excerpt of a longer file
@@ -27,11 +27,12 @@ A block of code, terminal output or a diff, in one color, with an optional heade
 
 <!-- rule-23: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, with a `CodeBlockCopyButton` in its `CodeBlockActions`. A step of the assistant's work that has a status or details to open (a tool call, its reasoning, its sources): `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event nobody said, with nothing to open (a date, "Conversation resumed"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
+- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, inside a `ghost` or `outline` `Bubble`, with a `CodeBlockCopyButton` in its `CodeBlockActions`. Every step of the assistant's work (a tool call, its reasoning, a search), running, failed or done, with details or without: `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event of the conversation that is not a step of the assistant's work (a date, "Conversation resumed", "Ana joined"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
 
 ## Constraints
 
 - **MUST** — pass `CodeBlockCopyButton` the exact text the block shows, in `value`
+- **MUST** — put a `CodeBlock` in a `ghost` or `outline` `Bubble`, never in a filled one: the `secondary` and `muted` fills are `bg-muted`, the fill of the `added` and `highlighted` lines, which then vanish, and on the primary fill of `default` the code measures 2.97:1 and its line numbers 1.12:1 in light (WCAG 1.4.3)
 - **MUST NOT** — add a syntax highlighter or a color per token (shiki, Prism, highlight.js, shadcn/ui's `use-highlighted-code` hook): the design system has no syntax tokens, and shiki's GitHub themes put tokens under 4.5:1 (the orange of a variable at 3.49:1 on white, the gray of a comment at 3.78:1 on the block's dark fill, WCAG 1.4.3)
 - **MUST NOT** — color the code with the chart colors or a status color: the code is `text-foreground`, or `text-destructive` with `variant="destructive"`
 - **MUST** — write code inside a sentence (a file name, a prop) as a `<code>` element in the text, and keep `CodeBlock` for a block of its own
@@ -289,7 +290,7 @@ export default function Example() {
 ## Cross-references
 
 - `Trace` — the steps of an assistant's work, whose details hold a `size="sm"` `CodeBlock` with a tool's output
-- `Bubble` — the text of a turn, `variant="ghost"`, that holds a `CodeBlock` in an answer
+- `Bubble` — the text of a turn, `variant="ghost"` or `"outline"`, that holds a `CodeBlock` in an answer
 - `Kbd` — a key or a shortcut inside a sentence, where a `CodeBlock` is a block of its own
 - `Button` — rendered by `CodeBlockCopyButton`, with its variants and sizes
 - `ScrollArea` — a scrolling region with a custom scrollbar, for content other than code

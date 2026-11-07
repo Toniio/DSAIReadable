@@ -9,7 +9,7 @@ import {
 import { CaretRightIcon } from "@phosphor-icons/react"
 
 /**
- * The list of the steps an assistant takes, one line each; it also styles a link or a dialog trigger that wraps a `TraceLine`.
+ * The list of every step an assistant takes, one line each, a finished step with nothing to open included; it also styles a link or a dialog trigger that wraps a `TraceLine`.
  *
  * @example
  * <Trace>

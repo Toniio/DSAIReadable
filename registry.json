@@ -2088,7 +2088,7 @@
       "name": "marker",
       "type": "registry:ui",
       "title": "Marker",
-      "description": "A line of muted text that marks an event in a conversation nobody said: a date, a resumed session, a finished step with nothing to open.",
+      "description": "A line of muted text that marks an event of a conversation that is neither a message nor a step of the assistant's work: a date, a resumed session, someone who joined.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.8.1"
@@ -2713,7 +2713,7 @@
       "name": "trace",
       "type": "registry:ui",
       "title": "Trace",
-      "description": "The steps an assistant takes while it works (a tool call, its reasoning, the sources it read), one line each, with a status and details that open under the line.",
+      "description": "The steps an assistant takes while it works (a tool call, its reasoning, the sources it read), one line each, every step included, with its status and, when it has some, details that open under the line.",
       "dependencies": [
         "@phosphor-icons/react@^2.1.10"
       ],
