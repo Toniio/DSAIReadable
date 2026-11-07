@@ -561,7 +561,7 @@ import { cn } from "@/lib/utils"`,
             'A foundation (color, spacing, focus…) or a component name: its rules and the composition rules that cover it. "composition": every composition rule. "tailwind": the critical rules'
           ),
         response_format: responseFormat(
-          "the critical rules whole and, without a category, the foundation rules except those for UI text"
+          "the critical rules whole and, without a category, the other foundation rules except those for UI text"
         ),
       }),
       outputSchema: designRulesOutput,

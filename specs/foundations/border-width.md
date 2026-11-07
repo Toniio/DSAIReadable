@@ -16,6 +16,9 @@ wires the tokens into Tailwind — a bare `border` reads `--border-width-default
 | `border-width.chart-indicator` | `--border-width-chart-indicator` | 1.5px | `border-chart-indicator`                      | Dashed stroke of the series indicator (Chart)                            |
 | `border-width.separation`      | `--border-width-separation`      | 2px   | `SEPARATION_RING` (`lib/surface`)             | Background-colored ring around overlapping avatars and an avatar's badge |
 
+A component that needs another width gets its own `border-width.*` token, named
+after its role, like `chart-indicator` and `separation`.
+
 The focus ring is not a border: its width is `space.focus-ring-width`, applied
 by the `lib/focus` presets (see [focus.md](./focus.md)).
 
@@ -42,7 +45,6 @@ and an `allow-raw` comment does not excuse them.
 
 - ✅ Write `border` (or `border-t`, `border-b`…): the width comes from the `border-width.default` token
 - ✅ Remove a border with `border-0` / `border-t-0` — a reset to zero is not a value
-- ✅ Add a `border-width.*` token named after its role when a component genuinely needs another width
 - ✅ Outline a surface with `SURFACE_OUTLINE`, and write `ring-(length:--border-width-default)` under a variant (`group-data-[variant=floating]:`)
 - ❌ Never hard-code a width: `border-2`, `border-[1.5px]`, `border-(length:3px)`, `ring-1`, `ring` — `npm run tokens:lint-values` rejects them
 - ❌ Do not use `border-none` to remove a border: it sets the border **style**, not its width
