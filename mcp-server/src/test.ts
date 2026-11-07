@@ -1236,9 +1236,10 @@ assert(
 // styles/globals.css reads has none: rules sent screens to `text.action.on`,
 // `border.subtle`, `icon.action` and `content-*`, which a screen cannot
 // write, where the components write text-primary-foreground, a Separator,
-// an inherited color and max-w-*. A rule that names one says it is reserved,
-// or gives the shorthand that reads it. Breakpoints and container widths are
-// Tailwind's own values, which globals.css does not bridge.
+// an inherited color and max-w-*. A rule that names one says that this token
+// is reserved, or gives the shorthand that reads it. Breakpoints and
+// container widths are Tailwind's own values, which globals.css does not
+// bridge.
 {
   const globalsCss = readFileSync(
     resolve(__dirname, "../../styles/globals.css"),
@@ -1265,23 +1266,40 @@ assert(
   const shorthand = (rule: string, cssVar: string) =>
     rule.includes(`(${cssVar})`) ||
     rule.includes(`(${cssVar.replace(/[^-]+$/, "N")})`)
-  const sent = generalRules.flatMap(({ rule, source }) =>
-    /\breserved\b/.test(rule)
-      ? []
-      : [...rule.matchAll(/`([^`]+)`/g)]
-          .map((m) => named(m[1]))
-          .filter(
-            (tokens) =>
-              tokens.length > 0 &&
-              tokens.every(
-                (t) => classless.includes(t) && !shorthand(rule, t.css_var)
-              )
+  // "`text.action.on` is reserved", "The `icon.*` tokens are reserved": the
+  // rule says that the token it names is reserved. "Reserved for primary
+  // actions" says nothing of the kind.
+  const saysReserved = (rule: string, code: string) =>
+    new RegExp(
+      `\`${code.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\`(?: tokens?)? (?:is|are) \`?reserved\\b`
+    ).test(rule)
+  const sendsTo = (rule: string) =>
+    [...rule.matchAll(/`([^`]+)`/g)]
+      .filter((m) => !saysReserved(rule, m[1]))
+      .map((m) => named(m[1]))
+      .filter(
+        (tokens) =>
+          tokens.length > 0 &&
+          tokens.every(
+            (t) => classless.includes(t) && !shorthand(rule, t.css_var)
           )
-          .map((tokens) => `${source} ${tokens[0].path}`)
+      )
+  const sent = generalRules.flatMap(({ rule, source }) =>
+    sendsTo(rule).map((tokens) => `${source} ${tokens[0].path}`)
   )
   assert(
     classless.length > 0 && sent.length === 0,
     `No foundation rule sends a screen to a reserved token no class reads (${classless.length} such tokens)${sent.length ? `: ${sent.join(", ")}` : ""}`
+  )
+  const [sample] = classless
+  assert(
+    sendsTo(
+      `✅ \`${sample.path}\` only inside a primary button: that color is reserved for primary actions.`
+    ).length === 1 &&
+      sendsTo(
+        `✅ A primary button's text is \`text-primary-foreground\`: \`${sample.path}\` is reserved.`
+      ).length === 0,
+    `A rule that names a classless token gets past only by saying that token is reserved, not by the word "reserved" in another sense (${sample.path})`
   )
 }
 
