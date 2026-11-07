@@ -46,7 +46,7 @@ Elevation expresses the **relative height** of a surface in the visual hierarchy
 | `elevation.2xl`   | `0 25px 50px rgba(0, 0, 0, 0.5)`                                  |
 | `elevation.inner` | `inset 0 2px 4px rgba(0, 0, 0, 0.3)`                              |
 
-> **Why higher opacities in dark mode?** Dark backgrounds swallow light shadows. An opacity of 0.08 is nearly invisible in dark mode — it takes 0.25–0.50 to get the same perceived result as in light mode.
+> **Why higher opacities in dark mode?** Dark backgrounds swallow light shadows. An opacity of 0.08 is nearly invisible in dark mode — it takes 0.25–0.50 to get the same perceived result as in light mode. The tokens switch with the mode on their own, so a `shadow-*` class needs no `dark:` variant; test a change to an elevation token in dark mode too.
 
 ---
 
@@ -144,7 +144,6 @@ components, and places a surface above the page with a global layer.
 ## Usage Rules
 
 1. **Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.
-2. **Always test in dark mode** — light-mode shadows vanish in dark mode unless adjusted. The tokens handle this automatically.
-3. **Elevation transitions** — use `transition-shadow` with `duration-normal` (200ms) on state changes (hover, focus).
-4. **`shadow-inner` stands alone** — never pair it with an outer shadow on the same element.
-5. **No decorative shadows** — elevation expresses structure, not style. Do not add `shadow-lg` to a card just to make it look nice.
+2. **Elevation transitions** — use `transition-shadow` with `duration-normal` (200ms) on state changes (hover, focus).
+3. **`shadow-inner` stands alone** — never pair it with an outer shadow on the same element.
+4. **No decorative shadows** — elevation expresses structure, not style. Do not add `shadow-lg` to a card just to make it look nice.

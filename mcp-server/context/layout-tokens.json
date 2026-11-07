@@ -580,7 +580,7 @@
     "**No arbitrary values** — use the steps of the scale only. When an in-between value is needed, discuss it with the design team first.",
     "**Keep the component's rhythm** — a form lets `FieldGroup` space its fields (`gap-5`), and a card spaces its content with `--card-spacing` (`space.scale.4`, `space.scale.3` at `size=\"sm\"`). Keep to those steps throughout the same component.",
     "**`page-padding` is applied once** — on the page's root container, not on each section.",
-    "**`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center."
+    "**A content column is `max-w-2xl`, `max-w-5xl` or `max-w-7xl`** — narrow, default or wide: a maximum width, not a padding. Always pair it with `mx-auto` to center."
   ],
   "radius_rules": [
     "**Always use the tokens** — no arbitrary values such as `rounded-[7px]`. When no token fits, escalate to the design team.",
@@ -591,7 +591,6 @@
   ],
   "elevation_rules": [
     "**Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.",
-    "**Always test in dark mode** — light-mode shadows vanish in dark mode unless adjusted. The tokens handle this automatically.",
     "**Elevation transitions** — use `transition-shadow` with `duration-normal` (200ms) on state changes (hover, focus).",
     "**`shadow-inner` stands alone** — never pair it with an outer shadow on the same element.",
     "**No decorative shadows** — elevation expresses structure, not style. Do not add `shadow-lg` to a card just to make it look nice."

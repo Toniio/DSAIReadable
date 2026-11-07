@@ -44,7 +44,7 @@
 
 - ✅ `text.subtle` for field labels, visible placeholders, metadata.
 - ❌ Do not dim `text.default` with opacity to fake `text.subtle` — use the dedicated token.
-- ✅ `text.action.on` only on a `color.action.background.default` background.
+- ✅ Text on a `bg-primary` fill is `text-primary-foreground` (`action.background.foreground`): `text.action.on` is reserved.
 - ❌ Do not use `text.destructive.default` for warnings — it is reserved for errors. A warning is `text.warning.default` (`text-warning`), a success `text.success.default` (`text-success`).
 - ✅ `text.destructive.default` for every destructive label, including on a `bg-destructive/10`–`/30` tint: it is darker than the error fill in light mode and lighter in dark mode, so it stays at 4.5:1 or more on the page, a card and a popover.
 
@@ -65,8 +65,7 @@
 - ❌ Do not paint a field's fill with `border.input` (`bg-input/30`): the translucent fills take `background.input` (`bg-input-fill/30`, `/50`, `/80`), so a darker border never darkens a fill.
 - ✅ `border.focus` sits 3:1 or more away from `border.input` (3.65:1 in light, 3.27:1 in dark): a focused field never reads as a resting one.
 - ❌ Do not use `border.focus` at rest or on hover — only for the `:focus-visible` state.
-- ✅ `border.subtle` for dividers between the sections of a page.
-- ❌ Do not mix `border.default` and `border.subtle` in the same component.
+- ✅ A divider between the sections of a page is a `Separator`, drawn in `border.default` (`bg-border`): `border.subtle` is reserved.
 
 ---
 
@@ -80,8 +79,7 @@
 
 **Do / Don't:**
 
-- ✅ `icon.action` only inside a primary button or an action badge.
-- ❌ Do not use `icon.default` for an icon inside a primary button — use `icon.action`.
+- ✅ An icon takes the color of its text: inside a primary button or badge it inherits `text-primary-foreground`, and a secondary icon takes `text-muted-foreground`. The `icon.*` tokens are reserved.
 
 ---
 
@@ -196,7 +194,7 @@ class — read it through Tailwind's shorthand, `bg-(--color-chart-sequential-N)
 
 - ✅ Unordered categories: `chart-1` to `chart-5`, in order, skipping none.
 - ✅ Back every color up with a label or a legend: color alone never carries meaning.
-- ✅ Ordered data: `color.chart.sequential.*`, from lightest (low value) to darkest.
+- ✅ Ordered data: `color.chart.sequential.*`, from lightest (low value) to darkest, read through `bg-(--color-chart-sequential-N)`.
 - ❌ Never use the sequential palette for categories: its steps blur together.
 - ❌ Do not use a series color for text or for a state (positive, negative): these are not feedback colors.
 
@@ -291,12 +289,15 @@ these utility classes:
 ## Usage Rules
 
 1. **Always use the semantic tokens** — never the `mist.X` or `violet.X` primitive values directly in components. Primitives are private (`--ds-prim-*`).
-2. **Never fake subtlety with opacity** — use `color.text.subtle`, not `color.text.default` with `opacity-50`.
-3. **Follow the surface hierarchy**: `default` → `subtle` → `elevated`. A card is `subtle`, a popover is `elevated`.
-4. **Always test both modes** — every component must be checked in light AND dark before it ships.
-5. **Accessibility first** — the conformance target is WCAG 2.2 AA: the minimum contrast ratio is 4.5:1 for body text (SC 1.4.3), and 3:1 for large text and UI components (SC 1.4.11).
-6. **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lib/contrast-pairs.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.
-7. **APCA is advisory, WCAG 2 decides** — the same lint prints a second level: the APCA lightness contrast (Lc) of every pair, against Lc 60 for text and Lc 45 for non-text (APCA Bronze Simple Mode), tagged as WCAG 3 preparation. WCAG 3 is a Working Draft and regulations cite WCAG 2.x, so an APCA warning never fails the build and never justifies a token change that lowers a WCAG 2 ratio below its threshold. Weigh the warnings when a palette step changes for another reason, and keep the change only if both levels hold or improve.
+2. **Accessibility first** — the conformance target is WCAG 2.2 AA: the minimum contrast ratio is 4.5:1 for body text and 3:1 for large text (SC 1.4.3), and 3:1 for UI components (SC 1.4.11).
+
+## Checking a change
+
+What the design system checks before a change ships; a screen built with it has none of these steps to take.
+
+- **Always test both modes** — every component must be checked in light and in dark before it ships.
+- **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lib/contrast-pairs.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.
+- **APCA is advisory, WCAG 2 decides** — the same lint prints a second level: the APCA lightness contrast (Lc) of every pair, against Lc 60 for text and Lc 45 for non-text (APCA Bronze Simple Mode), tagged as WCAG 3 preparation. WCAG 3 is a Working Draft and regulations cite WCAG 2.x, so an APCA warning never fails the build and never justifies a token change that lowers a WCAG 2 ratio below its threshold. Weigh the warnings when a palette step changes for another reason, and keep the change only if both levels hold or improve.
 
 ## Measured contrast
 

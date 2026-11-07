@@ -195,7 +195,7 @@ token.
 2. **No arbitrary values** — use the steps of the scale only. When an in-between value is needed, discuss it with the design team first.
 3. **Keep the component's rhythm** — a form lets `FieldGroup` space its fields (`gap-5`), and a card spaces its content with `--card-spacing` (`space.scale.4`, `space.scale.3` at `size="sm"`). Keep to those steps throughout the same component.
 4. **`page-padding` is applied once** — on the page's root container, not on each section.
-5. **`content-*` through `max-width`** — these tokens set maximum widths, not padding. Always pair them with `mx-auto` to center.
+5. **A content column is `max-w-2xl`, `max-w-5xl` or `max-w-7xl`** — narrow, default or wide: a maximum width, not a padding. Always pair it with `mx-auto` to center.
 
 ### Arbitrary values: reading a token is free, computing one is not
 
