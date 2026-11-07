@@ -438,7 +438,7 @@ async function check(
       timeout: 60_000,
     })
     // Hydration and the story modules settle with the network. A page that
-    // keeps prefetching its links (the components index: 65 of them) may not
+    // keeps prefetching its links (the components index: 67 of them) may not
     // reach idle on a slow runner, and that is not a defect of the site.
     await page
       .waitForLoadState("networkidle", { timeout: 15_000 })

@@ -55,6 +55,14 @@ import {
 } from "@/components/ui/sidebar"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Spinner } from "@/components/ui/spinner"
+import {
+  Trace,
+  TraceCollapsible,
+  TraceCollapsibleContent,
+  TraceCollapsibleTrigger,
+  TraceLine,
+  TraceTitle,
+} from "@/components/ui/trace"
 
 function slot(name: string) {
   return document.querySelector<HTMLElement>(`[data-slot="${name}"]`)!
@@ -237,6 +245,35 @@ describe("Reduced motion: components", () => {
     expect(style.backgroundImage).toBe("none")
     // The text is painted in its color again, not clipped to the gradient.
     expect(style.getPropertyValue("-webkit-text-fill-color")).toBe(style.color)
+  })
+
+  it("Trace: the details of a step open and close at once, and a running title does not shimmer", async () => {
+    render(
+      <Trace>
+        <TraceCollapsible>
+          <TraceCollapsibleTrigger>
+            <TraceLine status="running">
+              <TraceTitle>Running npm test</TraceTitle>
+            </TraceLine>
+          </TraceCollapsibleTrigger>
+          <TraceCollapsibleContent>3 of 12 suites</TraceCollapsibleContent>
+        </TraceCollapsible>
+      </Trace>
+    )
+    const title = getComputedStyle(slot("trace-title"))
+    expect(title.animationName).toBe("none")
+    expect(title.backgroundImage).toBe("none")
+    expect(title.getPropertyValue("-webkit-text-fill-color")).toBe(title.color)
+
+    const trigger = screen.getByRole("button", { name: "Running npm test" })
+    await userEvent.click(trigger)
+    const details = slot("trace-collapsible-content")
+    expect(getComputedStyle(details).animationName).toBe("none")
+
+    await userEvent.click(trigger)
+    // With no closing animation, Radix removes the details at once.
+    expect(trigger.getAttribute("aria-expanded")).toBe("false")
+    expect(screen.queryByText("3 of 12 suites")).toBeNull()
   })
 
   it("Spinner: keeps spinning, on purpose", () => {

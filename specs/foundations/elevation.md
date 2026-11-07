@@ -76,6 +76,7 @@ layers, and needs no token.
 | ---------------- | -------------- | -------------------------------------------------------------------------------- |
 | `Attachment`     | `z-10`, `z-20` | `AttachmentTrigger` over the media and the content, `AttachmentActions` above it |
 | `Bubble`         | `z-10`         | `BubbleReactions` over the bubble it overlaps                                    |
+| `CodeBlock`      | `z-10`         | Floating `CodeBlockActions` over the code that scrolls under them                |
 | `Questionnaire`  | `z-10`         | The transparent native input of a choice over its indicator and label            |
 | `NavigationMenu` | `z-1`          | `NavigationMenuIndicator` above the menu bar border                              |
 | `Calendar`       | `z-0`          | The ends of a range, isolated so their highlight paints under the day cells      |

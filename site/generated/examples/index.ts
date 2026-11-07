@@ -22,6 +22,7 @@ export const components: Loaders = {
   Carousel: () => import("./components/Carousel"),
   Chart: () => import("./components/Chart"),
   Checkbox: () => import("./components/Checkbox"),
+  CodeBlock: () => import("./components/CodeBlock"),
   Collapsible: () => import("./components/Collapsible"),
   Combobox: () => import("./components/Combobox"),
   Command: () => import("./components/Command"),
@@ -71,6 +72,7 @@ export const components: Loaders = {
   Toggle: () => import("./components/Toggle"),
   ToggleGroup: () => import("./components/ToggleGroup"),
   Tooltip: () => import("./components/Tooltip"),
+  Trace: () => import("./components/Trace"),
 }
 
 /** The `## Code example` of each pattern, by file name. */

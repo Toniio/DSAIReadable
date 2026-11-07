@@ -244,6 +244,39 @@
     "part_of": null,
     "has_variants": false
   },
+  "CodeBlock": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "destructive"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [
+      "codeBlockVariants",
+      "codeBlockLineVariants"
+    ],
+    "part_of": null,
+    "has_variants": true
+  },
+  "CodeBlockLine": {
+    "variants": {
+      "variant": {
+        "values": [
+          "default",
+          "added",
+          "removed",
+          "highlighted"
+        ],
+        "default": "default"
+      }
+    },
+    "sources": [],
+    "part_of": "CodeBlock",
+    "has_variants": true
+  },
   "Collapsible": {
     "variants": {},
     "sources": [],
@@ -729,6 +762,12 @@
     "has_variants": true
   },
   "Tooltip": {
+    "variants": {},
+    "sources": [],
+    "part_of": null,
+    "has_variants": false
+  },
+  "Trace": {
     "variants": {},
     "sources": [],
     "part_of": null,

@@ -59,9 +59,9 @@ function Marker({
  * @example
  * <Marker>
  *   <MarkerIcon>
- *     <MagnifyingGlassIcon />
+ *     <ClockCounterClockwiseIcon />
  *   </MarkerIcon>
- *   <MarkerContent>Searched 4 sources</MarkerContent>
+ *   <MarkerContent>Conversation resumed</MarkerContent>
  * </Marker>
  */
 function MarkerIcon({ className, ...props }: React.ComponentProps<"span">) {

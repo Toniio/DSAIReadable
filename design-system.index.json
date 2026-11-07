@@ -259,6 +259,38 @@
       }
     },
     {
+      "name": "CodeBlock",
+      "code_path": "components/ui/code-block.tsx",
+      "sizes": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg"
+      ],
+      "status": "beta",
+      "shadcn": {
+        "item": "code-block",
+        "divergences": [
+          {
+            "export": "CodeBlockCopyButton",
+            "prop": "copyLabel",
+            "type": "added",
+            "note": "Overrides its default accessible name, UI_STRINGS.codeBlock.copy, so the string can be translated, or name what it copies when several blocks share a page (content.md)."
+          },
+          {
+            "export": "CodeBlockCopyButton",
+            "prop": "copiedLabel",
+            "type": "added",
+            "note": "Overrides the name it takes once the copy succeeded, UI_STRINGS.codeBlock.copied, which its live region also announces, so the string can be translated (content.md)."
+          }
+        ]
+      }
+    },
+    {
       "name": "Collapsible",
       "code_path": "components/ui/collapsible.tsx",
       "status": "stable",
@@ -966,6 +998,15 @@
         "item": "tooltip",
         "divergences": []
       }
+    },
+    {
+      "name": "Trace",
+      "code_path": "components/ui/trace.tsx",
+      "status": "beta",
+      "shadcn": {
+        "item": "trace",
+        "divergences": []
+      }
     }
   ],
   "shadcn": {
@@ -974,15 +1015,6 @@
         "item": "form",
         "reason": "shadcn/ui's former form layer, built on react-hook-form. shadcn/ui now builds its forms on Field, which the design system ships: Field lays out the label, the control, the description and the error, and leaves the form state to whichever library the app uses.",
         "instead": "Field"
-      },
-      {
-        "item": "code-block",
-        "reason": "Added to shadcn/ui in October 2026 and not shipped yet: whether the design system adopts it is decided in https://github.com/Toniio/DSAIReadable/issues/179. Until then, no component renders a code block."
-      },
-      {
-        "item": "trace",
-        "reason": "Added to shadcn/ui in October 2026 and not shipped yet: whether the design system adopts it is decided in https://github.com/Toniio/DSAIReadable/issues/179. Upstream builds its expandable lines on Collapsible, which the design system ships.",
-        "instead": "Collapsible"
       }
     ]
   },
@@ -1104,11 +1136,13 @@
         "MessageScroller",
         "Message",
         "Bubble",
+        "CodeBlock",
+        "Trace",
         "Marker",
         "Attachment",
         "Questionnaire"
       ],
-      "rule": "Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. An event nobody said (a date, a tool call, \"Conversation resumed\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
+      "rule": "Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align=\"end\"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant=\"ghost\"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, inside a `ghost` or `outline` `Bubble`, with a `CodeBlockCopyButton` in its `CodeBlockActions`. Every step of the assistant's work (a tool call, its reasoning, a search), running, failed or done, with details or without: `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event of the conversation that is not a step of the assistant's work (a date, \"Conversation resumed\", \"Ana joined\"): `Marker`, `variant=\"separator\"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`."
     }
   ],
   "glossary": {

@@ -163,7 +163,9 @@ To give another element a heading's look, `headingVariants({ level })` returns i
 
 `size: xs (12px)` · `lineHeight: normal (1.5)` · `weight: normal (400)` · `tracking: wide`
 
-### Code — code blocks and inline code
+### Code — inline code and code blocks
+
+Code inside a sentence is a `<code>` element:
 
 ```tsx
 <code className="font-mono text-sm leading-relaxed text-foreground">
@@ -173,7 +175,15 @@ To give another element a heading's look, `headingVariants({ level })` returns i
 
 `size: sm (14px)` · `lineHeight: relaxed (1.625)` · `family: mono` · `weight: normal (400)`
 
-> Note: the project already sets `font-mono` on `<html>`, so code blocks need no extra family class.
+A block of code (a file, a command, a tool's output) is a `CodeBlock`: it draws the same size, line height and family in its frame, numbers or wraps the lines, and copies the code with its `CodeBlockCopyButton`. It stays one color, with no syntax highlighting: the design system has no syntax tokens.
+
+```tsx
+<CodeBlock>
+  <CodeBlockContent>npm install @dsaireadable/eslint-plugin</CodeBlockContent>
+</CodeBlock>
+```
+
+> Note: the project already sets `font-mono` on `<html>`, so code needs no extra family class.
 
 ---
 

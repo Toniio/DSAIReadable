@@ -113,7 +113,7 @@ without being told. Keep it:
 ### Re-anchoring on shadcn/ui
 
 The components are shadcn/ui's, with the design system's classes. The
-difference is mechanical, so it is written once, as a table, and not in 65
+difference is mechanical, so it is written once, as a table, and not in 67
 hand-made forks. `shadcn-upstream.json` holds:
 
 - `upstream`: the shadcn/ui tag the components are anchored to, its base
@@ -128,7 +128,7 @@ hand-made forks. `shadcn-upstream.json` holds:
   `z-popover` in a popover, `z-modal` in a dialog); `constants` groups classes
   into the shared constants of `lib/` (`FOCUS_RING`, `OVERLAY_BASE`…); `values`
   maps the CSS values of a `style` attribute;
-- `components`: each of the 65, `reanchored` (its classes are its upstream's
+- `components`: each of the 67, `reanchored` (its classes are its upstream's
   run through the table, plus the `added` classes it declares, with the
   `reason`) or `outside` (no shadcn/ui item: Heading, Illustration, Logo,
   PasswordInput). A `fork`, which drops upstream classes, declares them in

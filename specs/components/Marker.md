@@ -12,25 +12,27 @@
 
 ## Role
 
-A line of muted text that marks an event in a conversation nobody said: a date, a tool call, a resumed session.
+A line of muted text that marks an event of a conversation that is neither a message nor a step of the assistant's work: a date, a resumed session, someone who joined.
 
 ## Usage
 
 - Separate the days of a thread with `variant="separator"` ("Today", "Monday 12 May")
-- Record an event in the thread: "Searched 4 sources", "Conversation resumed", "Ana joined"
+- Record an event in the thread: "Conversation resumed", "Ana joined"
 - Close a section of the thread with `variant="border"`
-- Make the marker a link or a button (open the tool call's details) with `asChild`
+- Make the marker a link or a button (open the earlier conversation, a profile) with `asChild`
+- Put every step of the assistant's work in a `Trace`, a finished one with nothing to open included ("Searched 4 sources"): one `TraceLine` per step, in a `TraceCollapsible` when it has details
 - Put a Phosphor icon in front of the text with `MarkerIcon`
 
 <!-- rule-23: generated from design-system.index.json by scripts/build-spec-choices.ts — do not edit by hand. -->
 
-- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. An event nobody said (a date, a tool call, "Conversation resumed"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
+- **Choice** (`rule-23`) — Build a conversation from its family, one component per job. The scrolling thread that follows new messages: `MessageScroller`, one `MessageScrollerItem` per message. One turn of a speaker, with avatar, header and footer: `Message`, `align="end"` for the user's own turns. The text of a turn: `Bubble` inside `MessageContent`, `variant="ghost"` for an answer that reads as a document. Code in an answer: `CodeBlock`, in one color, inside a `ghost` or `outline` `Bubble`, with a `CodeBlockCopyButton` in its `CodeBlockActions`. Every step of the assistant's work (a tool call, its reasoning, a search), running, failed or done, with details or without: `Trace`, one `TraceLine` per step, wrapped in a `TraceCollapsible` when it has details. An event of the conversation that is not a step of the assistant's work (a date, "Conversation resumed", "Ana joined"): `Marker`, `variant="separator"` between days. A file sent or received: `Attachment`, several in an `AttachmentGroup`. Questions the assistant asks one at a time: `Questionnaire`; a form shown all at once, outside the thread: `Field`s in a `form`.
 
 ## Constraints
 
 - **MUST** — put the text in a `MarkerContent` and the icon in a `MarkerIcon`
 - **MUST NOT** — use a `Marker` for what a speaker says: that is a `Message` with a `Bubble`
 - **MUST NOT** — use a `Marker` for an error the user must act on → `Alert`
+- **MUST NOT** — use a `Marker` for a step of the assistant's work, running, failed or done, with details or without (a tool call, its reasoning, "Searched 4 sources") → `Trace`
 - **MUST** — keep the text to one line of 60 characters or less
 - **Note** — `MarkerIcon` is hidden from screen readers (`aria-hidden`): the text carries the meaning
 
@@ -150,7 +152,7 @@ No interaction of its own; a `Marker` rendered as a link or a button behaves nat
 
 ```tsx
 import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker"
-import { MagnifyingGlassIcon } from "@phosphor-icons/react"
+import { ClockCounterClockwiseIcon } from "@phosphor-icons/react"
 
 export default function Example() {
   return (
@@ -160,9 +162,9 @@ export default function Example() {
       </Marker>
       <Marker>
         <MarkerIcon>
-          <MagnifyingGlassIcon />
+          <ClockCounterClockwiseIcon />
         </MarkerIcon>
-        <MarkerContent>Searched 4 sources</MarkerContent>
+        <MarkerContent>Conversation resumed</MarkerContent>
       </Marker>
     </div>
   )
@@ -172,5 +174,6 @@ export default function Example() {
 ## Cross-references
 
 - `Message` — what a speaker says, where a `Marker` records what happened
+- `Trace` — every step of the assistant's work, done or running, with details or without, where a `Marker` marks an event that is not a step
 - `Separator` — a rule with no text, outside a conversation
 - `Alert` — an error or a warning the user must read, which a muted marker does not carry

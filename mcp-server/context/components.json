@@ -171,6 +171,23 @@
     "sizes": []
   },
   {
+    "name": "CodeBlock",
+    "category": "Typography",
+    "status": "beta",
+    "code_path": "components/ui/code-block.tsx",
+    "has_spec": true,
+    "sizes": [
+      "xs",
+      "sm",
+      "default",
+      "lg",
+      "icon-xs",
+      "icon-sm",
+      "icon",
+      "icon-lg"
+    ]
+  },
+  {
     "name": "Collapsible",
     "category": "Layout",
     "status": "stable",
@@ -625,6 +642,14 @@
     "category": "Feedback",
     "status": "stable",
     "code_path": "components/ui/tooltip.tsx",
+    "has_spec": true,
+    "sizes": []
+  },
+  {
+    "name": "Trace",
+    "category": "Conversation",
+    "status": "beta",
+    "code_path": "components/ui/trace.tsx",
     "has_spec": true,
     "sizes": []
   }

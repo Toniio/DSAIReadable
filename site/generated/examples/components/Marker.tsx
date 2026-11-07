@@ -2,7 +2,7 @@
 "use client"
 
 import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker"
-import { MagnifyingGlassIcon } from "@phosphor-icons/react"
+import { ClockCounterClockwiseIcon } from "@phosphor-icons/react"
 
 export default function Example() {
   return (
@@ -12,9 +12,9 @@ export default function Example() {
       </Marker>
       <Marker>
         <MarkerIcon>
-          <MagnifyingGlassIcon />
+          <ClockCounterClockwiseIcon />
         </MarkerIcon>
-        <MarkerContent>Searched 4 sources</MarkerContent>
+        <MarkerContent>Conversation resumed</MarkerContent>
       </Marker>
     </div>
   )

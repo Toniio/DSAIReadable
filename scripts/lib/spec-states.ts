@@ -73,24 +73,24 @@ const SELECTOR_STATES: [string, RegExp][] = [
     "disabled",
     /:disabled\b|\[data-disabled(?:=true)?\]|\[aria-disabled=true\]/,
   ],
-  ["error", /\[aria-invalid(?:=true)?\]/],
+  ["error", /\[aria-invalid(?:=true)?\]|\[data-status=error\]/],
 ]
 
 /** Variants that name no state: themes, breakpoints, pseudo-elements, structure, a component's variant or slot. */
 const LAYOUT: RegExp[] = [
-  /^(?:dark|light|rtl|ltr|print|forced-colors|motion-safe|motion-reduce|portrait|landscape|contrast-more|contrast-less)$/,
+  /^(?:dark|light|rtl|ltr|print|forced-colors|motion-safe|motion-reduce|portrait|landscape|contrast-more|contrast-less|pointer-coarse|pointer-fine|pointer-none)$/,
   /^(?:sm|md|lg|xl|2xl|max-sm|max-md|max-lg|max-xl|max-2xl|min-\[[^\]]+\]|max-\[[^\]]+\])$/,
   /^@[\w-]*(?:\/[\w-]+)?$|^@\[[^\]]+\](?:\/[\w-]+)?$/,
   /^supports-[\w-]+$|^supports-\[[^\]]+\]$/,
   /^(?:after|before|file|selection|marker|backdrop|first-letter|first-line)$/,
   /^(?:\*|\*\*|first|last|only|odd|even|first-of-type|last-of-type|only-of-type|nth-[\w-]+|nth-\[[^\]]+\]|nth-last-[\w-]+|nth-last-\[[^\]]+\])$/,
   /^(?:data|aria)-\[(?:slot|size|side|variant|orientation|align|align-trigger|spacing|direction|position|vaul-drawer-direction|motion|chips|viewport|type|shortcut|icon|sidebar|inset|level|sizing|haspopup|panel-group-direction|swipe|swipe-direction|starting-style|ending-style|separator|sorted|layout|mobile|nav|disabled=false|active=false|selected=false|state=inactive)(?:\^?=[^\]]*)?\]$/,
-  /^data-(?:slot|vertical|horizontal|inset|side|align|orientation|starting-style|ending-style)$/,
+  /^data-(?:slot|vertical|horizontal|inset|side|align|orientation|starting-style|ending-style|wrap|numbered)$/,
   /^aria-(?:haspopup|orientation)$/,
 ]
 
-/** Any `data-[state=…]` value the tables above do not name is a state of its own (Attachment's `uploading`, `done`). */
-const DATA_STATE = /^data-\[state=([\w-]+)\]$/
+/** Any `data-[state=…]` or `data-[status=…]` value the tables above do not name is a state of its own (Attachment's `uploading`, Trace's `running`). */
+const DATA_STATE = /^data-\[(?:state|status)=([\w-]+)\]$/
 
 export const unclassified = new Set<string>()
 

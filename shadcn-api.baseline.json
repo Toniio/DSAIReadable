@@ -1,6 +1,6 @@
 {
   "source": "https://ui.shadcn.com/r/styles/radix-lyra",
-  "fetched": "2026-10-20",
+  "fetched": "2026-11-07",
   "dom": {
     "common": [
       "about",
@@ -2768,6 +2768,110 @@
         }
       }
     ],
+    "code-block": [
+      {
+        "name": "CodeBlock",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "size": {
+            "type": "\"default\" | \"sm\"",
+            "default": "\"default\""
+          },
+          "variant": {
+            "type": "\"default\" | \"destructive\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "CodeBlockHeader",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CodeBlockTitle",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CodeBlockActions",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "CodeBlockCopyButton",
+        "kind": "component",
+        "element": "Button",
+        "base": "React.ComponentProps<typeof Button>",
+        "dom": "2efd361f24",
+        "props": {
+          "asChild": {},
+          "size": {
+            "default": "\"icon-xs\""
+          },
+          "value": {
+            "type": "string"
+          },
+          "variant": {
+            "default": "\"ghost\""
+          }
+        }
+      },
+      {
+        "name": "CodeBlockContent",
+        "kind": "component",
+        "element": "<pre>",
+        "base": "React.ComponentProps<\"pre\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "lineNumbers": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "startLine": {
+            "type": "number",
+            "default": "1"
+          },
+          "wrap": {
+            "type": "boolean",
+            "default": "false"
+          }
+        }
+      },
+      {
+        "name": "CodeBlockLine",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "variant": {
+            "type": "\"default\" | \"added\" | \"removed\" | \"highlighted\"",
+            "default": "\"default\""
+          }
+        }
+      },
+      {
+        "name": "CodeBlockFooter",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      }
+    ],
     "collapsible": [
       {
         "name": "Collapsible",
@@ -4144,7 +4248,7 @@
         "dom": "3a72cf30cf",
         "props": {
           "align": {
-            "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+            "type": "\"inline-end\" | \"inline-start\" | \"block-end\" | \"block-start\"",
             "default": "\"inline-start\""
           }
         }
@@ -6380,6 +6484,87 @@
         "dom": "5df36366d3",
         "props": {
           "asChild": {}
+        }
+      }
+    ],
+    "trace": [
+      {
+        "name": "Trace",
+        "kind": "component",
+        "element": "<div>",
+        "base": "React.ComponentProps<\"div\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TraceLine",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "status": {
+            "type": "\"running\" | \"error\" | \"pending\""
+          }
+        }
+      },
+      {
+        "name": "TraceIcon",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TraceTitle",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TraceDescription",
+        "kind": "component",
+        "element": "<span>",
+        "base": "React.ComponentProps<\"span\">",
+        "dom": "3a72cf30cf",
+        "props": {}
+      },
+      {
+        "name": "TraceCollapsible",
+        "kind": "component",
+        "element": "Collapsible",
+        "base": "Omit<React.ComponentProps<typeof Collapsible>, \"asChild\" | \"open\"> & ( | { open?: undefined } | { open: boolean onOpenChange: NonNullable< React.ComponentProps<typeof Collapsible>[\"onOpenChange\"] > } )",
+        "dom": "3a72cf30cf",
+        "props": {
+          "defaultOpen": {},
+          "disabled": {},
+          "onOpenChange": {
+            "type": "NonNullable< React.ComponentProps<typeof Collapsible>[\"onOpenChange\"] >"
+          },
+          "open": {
+            "type": "boolean"
+          }
+        }
+      },
+      {
+        "name": "TraceCollapsibleTrigger",
+        "kind": "component",
+        "element": "CollapsibleTrigger",
+        "base": "Omit<React.ComponentProps<typeof CollapsibleTrigger>, \"asChild\">",
+        "dom": "5df36366d3",
+        "props": {}
+      },
+      {
+        "name": "TraceCollapsibleContent",
+        "kind": "component",
+        "element": "CollapsibleContent",
+        "base": "Omit<React.ComponentProps<typeof CollapsibleContent>, \"asChild\">",
+        "dom": "3a72cf30cf",
+        "props": {
+          "forceMount": {}
         }
       }
     ]

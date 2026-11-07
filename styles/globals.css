@@ -316,8 +316,8 @@
       --tw-exit-rotate: initial !important;
       --tw-exit-blur: initial !important;
     }
-    /* Accordion opens and closes at once; Skeleton and the InputOTP caret hold still. */
-    [data-slot="accordion-content"], [data-slot="skeleton"], [data-slot="input-otp-slot"] * {
+    /* Accordion and the details of a Trace step open and close at once; Skeleton and the InputOTP caret hold still. */
+    [data-slot="accordion-content"], [data-slot="trace-collapsible-content"], [data-slot="skeleton"], [data-slot="input-otp-slot"] * {
       animation-name: none !important;
     }
     /* vaul slides the Drawer with its own keyframes and reads no media query:

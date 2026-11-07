@@ -24,6 +24,12 @@ export const UI_STRINGS = Object.freeze({
     previous: "Previous slide",
     next: "Next slide",
   }),
+  codeBlock: Object.freeze({
+    /** Name of the copy button. */
+    copy: "Copy",
+    /** Its name once the copy succeeded, also announced by its live region. */
+    copied: "Copied",
+  }),
   combobox: Object.freeze({
     /** The caret button that opens the list. */
     trigger: "Open list",

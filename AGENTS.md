@@ -87,13 +87,13 @@ npm run lint:language     # American English only: French words, diacritics and 
 npm run knip              # zero-base: no unused file, export or dependency (knip.jsonc says why each entry point stays)
 npm run index:validate    # 6 checks: JSON Schema, sizes, data-slot, UI strings, Props types, shadcn/ui API
 npm run shadcn:baseline   # refetches the shadcn/ui API into shadcn-api.baseline.json (network)
-npm run shadcn:retokenize # the re-tokenization codemod is a fixpoint on the 65 components + each one is classified in shadcn-upstream.json
+npm run shadcn:retokenize # the re-tokenization codemod is a fixpoint on the 67 components + each one is classified in shadcn-upstream.json
 npm run shadcn:drift      # each component against its shadcn/ui upstream run through the codemod: re-anchored, or every difference declared (network)
-npm run specs:validate    # the class collector's fixture test + the 65 specs against the 13 canonical sections, the 12 page patterns against their 9 + each Anatomy names the data-slots its component renders + Variants, Tokens, Props / API, States and choice rules up to date + no hedged wording + the foundations' tsx and ts examples pass the ESLint plugin + llms.txt up to date
+npm run specs:validate    # the class collector's fixture test + the 67 specs against the 13 canonical sections, the 12 page patterns against their 9 + each Anatomy names the data-slots its component renders + Variants, Tokens, Props / API, States and choice rules up to date + no hedged wording + the foundations' tsx and ts examples pass the ESLint plugin + llms.txt up to date
 npm run skills:validate   # the agent skills of skills/: Agent Skills format + every rule cites a spec, pattern or foundation that exists + every tool it names exists
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
 npm run registry:check    # registry.json freshness + internal dependencies
-npm run registry:test-install  # installs the 69 items in a blank app, builds it and its CSS
+npm run registry:test-install  # installs the 71 items in a blank app, builds it and its CSS
 npm run release:check     # one version everywhere it is served + each pending changeset follows the semver policy
 npm run release:test      # a changeset becomes a version, a CHANGELOG entry and llms.txt links on the new tag (on a copy of the files) + what a pinned install pins
 npm run generate-context  # regenerates the MCP cache — must produce zero diff
@@ -101,7 +101,7 @@ npm run mcp:test-package  # packs the MCP server and runs the tarball through np
 npm run plugin:test       # the ESLint plugin's rules, each against a failing and a conforming fixture
 npm run mcp:test          # the MCP server's test suite
 npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
-npm run test:components   # headless Chromium: the 65 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard, reduced motion
+npm run test:components   # headless Chromium: the 67 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard, reduced motion
 npm run evals:test        # the conformance harness scores the gold examples and the edit tasks' bases (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
 npm run evals:generate    # screens from Claude Code in print mode, on a subscription (no API key), for the replay generator (evals/README.md)

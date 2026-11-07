@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MagnifyingGlassIcon } from "@phosphor-icons/react"
+import { ClockCounterClockwiseIcon } from "@phosphor-icons/react"
 
 import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker"
 import type { Args, Story } from "@/site/playground/types"
@@ -21,7 +21,7 @@ function MarkerStory({ args }: { args: Args }) {
     <>
       {s.icon ? (
         <MarkerIcon>
-          <MagnifyingGlassIcon />
+          <ClockCounterClockwiseIcon />
         </MarkerIcon>
       ) : null}
       <MarkerContent>{s.text}</MarkerContent>
@@ -32,7 +32,7 @@ function MarkerStory({ args }: { args: Args }) {
     <div className="w-80 max-w-full">
       {s.link ? (
         <Marker variant={s.variant} asChild>
-          <Link href="#sources">{inner}</Link>
+          <Link href="#history">{inner}</Link>
         </Marker>
       ) : (
         <Marker variant={s.variant}>{inner}</Marker>
@@ -51,7 +51,10 @@ function code(args: Args): string {
   const parts = ["Marker", "MarkerContent", ...(s.icon ? ["MarkerIcon"] : [])]
   return [
     ...(s.icon
-      ? ['import { MagnifyingGlassIcon } from "@phosphor-icons/react"', ""]
+      ? [
+          'import { ClockCounterClockwiseIcon } from "@phosphor-icons/react"',
+          "",
+        ]
       : []),
     `import { ${parts.join(", ")} } from "@/components/ui/marker"`,
     "",
@@ -59,11 +62,11 @@ function code(args: Args): string {
     "  return (",
     '    <div className="w-80 max-w-full">',
     `      <Marker${props.map((prop) => ` ${prop}`).join("")}>`,
-    ...(s.link ? ['        <a href="#sources">'] : []),
+    ...(s.link ? ['        <a href="#history">'] : []),
     ...(s.icon
       ? [
           `${pad}        <MarkerIcon>`,
-          `${pad}          <MagnifyingGlassIcon />`,
+          `${pad}          <ClockCounterClockwiseIcon />`,
           `${pad}        </MarkerIcon>`,
         ]
       : []),
@@ -91,7 +94,7 @@ const story: Story = {
       options: ["default", "separator", "border"],
       default: "default",
     },
-    { kind: "text", name: "children", default: "Searched 4 sources" },
+    { kind: "text", name: "children", default: "Conversation resumed" },
     { kind: "boolean", name: "icon", default: true },
     { kind: "boolean", name: "asChild", default: false },
   ],
