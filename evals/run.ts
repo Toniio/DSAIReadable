@@ -605,8 +605,11 @@ async function selfTest() {
 
   // The mcp-prompt condition of evals:generate: the server's build_screen
   // prompt carries the task's request, and the screen to change as its
-  // context; run.json names the prompt, and the report and its header carry it.
-  const { connectMcp, promptMessage } = await import("./lib/claude")
+  // context; the system prompt keeps the answer format alone; run.json names
+  // the prompt, the report and its header carry it, and the site's eval pages
+  // list the run nowhere.
+  const { connectMcp, promptMessage, SYSTEM, WITH_MCP } =
+    await import("./lib/claude")
   const { mcp } = await connectMcp(ROOT)
   try {
     for (const task of [
@@ -627,30 +630,77 @@ async function selfTest() {
   } finally {
     await mcp.close()
   }
-  const promptRun = join(WORK, "self-test-prompt")
-  mkdirSync(promptRun, { recursive: true })
-  writeFileSync(
-    join(promptRun, "run.json"),
-    JSON.stringify({
-      ...(JSON.parse(
-        readFileSync(join(fixturesDir, "run.json"), "utf-8")
-      ) as RunFile),
-      condition: "mcp-prompt",
-      skills: [],
-      prompt: "build_screen",
+  const { newRunFile, sessionArgs } = await import("./lib/claude-code")
+  for (const [condition, appended] of [
+    ["none", SYSTEM],
+    ["mcp", SYSTEM + WITH_MCP],
+    ["mcp-skills", SYSTEM + WITH_MCP],
+    ["mcp-prompt", SYSTEM],
+  ] as const) {
+    const args = sessionArgs(ROOT, "sonnet", condition)
+    if (args[args.indexOf("--append-system-prompt") + 1] !== appended)
+      errors.push(
+        `sessionArgs: under ${condition}, Claude Code's system prompt does not get ${appended === SYSTEM ? "SYSTEM alone" : "SYSTEM and WITH_MCP"}`
+      )
+  }
+  // A run.json as evals:generate writes it before the first session, with
+  // what that session's init message fills in, replayed into a report.
+  const fixtureAbout = readRunFile(fixturesDir)!
+  const generatedRuns = Object.fromEntries(
+    (["mcp", "mcp-prompt"] as const).map((condition) => {
+      const dir = join(WORK, `self-test-${condition}`)
+      mkdirSync(dir, { recursive: true })
+      writeFileSync(
+        join(dir, "run.json"),
+        JSON.stringify({
+          ...newRunFile(ROOT, {
+            condition,
+            modelOption: "sonnet",
+            claudePath: "claude",
+            designSystem: {
+              ...fixtureAbout.designSystem!,
+              version: fixtureRun.designSystem.version,
+            },
+          }),
+          model: fixtureAbout.model,
+          claudeCode: fixtureAbout.claudeCode,
+        })
+      )
+      return [condition, { ...fixtureRun, ...replayAbout(dir) }]
     })
   )
-  const promptAbout = replayAbout(promptRun)
-  if (fixtureRun.prompt !== undefined || promptAbout.prompt !== "build_screen")
+  const promptReport = generatedRuns["mcp-prompt"]
+  if (
+    generatedRuns.mcp.prompt !== undefined ||
+    promptReport.prompt !== "build_screen"
+  )
     errors.push(
-      `replayAbout: the prompt of run.json reaches the report as ${JSON.stringify(promptAbout.prompt)} under mcp-prompt, ${JSON.stringify(fixtureRun.prompt)} under mcp-skills`
+      `newRunFile: the prompt of run.json reaches the report as ${JSON.stringify(promptReport.prompt)} under mcp-prompt, ${JSON.stringify(generatedRuns.mcp.prompt)} under mcp`
     )
   if (
-    !toMarkdown({ ...fixtureRun, ...promptAbout }).includes(
+    !toMarkdown(promptReport).includes(
       "context `mcp` · prompt `build_screen` · design system"
     )
   )
     errors.push("the report header does not name the prompt of the sessions")
+  // The site's eval pages measure the server alone: a recorded run whose
+  // sessions started from the prompt stays in evals/history/, unlisted.
+  const history = join(WORK, "self-test-history")
+  rmSync(history, { recursive: true, force: true })
+  mkdirSync(history, { recursive: true })
+  for (const [condition, report] of Object.entries(generatedRuns))
+    writeFileSync(join(history, `${condition}.json`), JSON.stringify(report))
+  const { evalRuns } = await import("../site/audit-docs/data")
+  const { measurements } =
+    await import("../site/mcp-skills-docs/optimization-data")
+  const listed = evalRuns(relative(ROOT, history)).map((run) => run.file)
+  const pooled = measurements(relative(ROOT, history)).map(
+    (row) => `${row.condition} × ${row.passes}`
+  )
+  if (listed.join() !== "mcp" || pooled.join() !== "mcp × 1")
+    errors.push(
+      `the site's eval pages take in a run started from the build_screen prompt: the Audits page lists ${JSON.stringify(listed)}, the Optimization page pools ${JSON.stringify(pooled)}`
+    )
   if (
     !toMarkdown({ ...fixtureRun, budget: verdicts[0] }).includes(
       "Budget against `fixture`: 1,200 input tokens per screen for at most 1,400 (-30 % of 2,000) ✅"

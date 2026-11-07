@@ -211,17 +211,18 @@ function suiteOf(
  * Every recorded run of evals/history/ that the page lists, oldest first. A
  * run that gave the agent skills, or started its sessions from an MCP prompt,
  * stays in evals/history/ and is not listed: the page measures the design
- * system with and without its MCP server.
+ * system with and without its MCP server. `npm run evals:test` reads a folder
+ * of its own (`history`, from the repository root).
  */
-export function evalRuns(): EvalRun[] {
+export function evalRuns(history = "evals/history"): EvalRun[] {
   const { tasks, suites } = readJson<{
     tasks: EvalTask[]
     suites: Record<string, string[]>
   }>("evals/tasks.json")
-  const runs: EvalRun[] = listFiles("evals/history", ".json")
+  const runs: EvalRun[] = listFiles(history, ".json")
     .map((file) => ({
       file,
-      report: readJson<RunReport>(`evals/history/${file}`),
+      report: readJson<RunReport>(`${history}/${file}`),
     }))
     .filter(({ report }) => !report.skills?.length && !report.prompt)
     .map(({ file, report }) => {

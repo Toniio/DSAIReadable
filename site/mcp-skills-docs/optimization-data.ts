@@ -86,15 +86,16 @@ const evalTasks = () => readJson<EvalTasks>("evals/tasks.json")
 /**
  * The model runs of evals/history/, each set of screens once: a later report
  * that scores the same screens again (a rescore, after a fix of the scorer)
- * replaces the earlier one.
+ * replaces the earlier one. `npm run evals:test` reads a folder of its own
+ * (`history`, from the repository root).
  */
-function runs(): Run[] {
+function runs(history: string): Run[] {
   const { suites } = evalTasks()
   const members = Object.values(suites).map((ids) => [...ids].sort().join())
-  const reports = listFiles("evals/history", ".json")
+  const reports = listFiles(history, ".json")
     .map((file) => ({
       file,
-      report: readJson<Report>(`evals/history/${file}`),
+      report: readJson<Report>(`${history}/${file}`),
     }))
     .filter(
       ({ report }) =>
@@ -135,8 +136,8 @@ function runs(): Run[] {
 }
 
 /** The runs of the two conditions the page compares: the default tasks, no skills, no prompt. */
-const measured = () =>
-  runs().filter(
+const measured = (history = "evals/history") =>
+  runs(history).filter(
     (run) => !run.suite && run.skills.length === 0 && run.prompt === undefined
   )
 
@@ -255,8 +256,8 @@ export interface Measurement {
 }
 
 /** Both conditions at every version from SCORED_FROM on, the oldest first. */
-export function measurements(): Measurement[] {
-  const all = measured()
+export function measurements(history?: string): Measurement[] {
+  const all = measured(history)
   const rates = inputRates(all)
   const versions = [...new Set(all.map((run) => run.version))]
     .filter((version) => compareVersions(version, SCORED_FROM) >= 0)

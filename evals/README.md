@@ -252,10 +252,14 @@ this checkout answers instead and whether Claude Code would still refuse it.
 - the replay generator reads the metrics written next to a screen
   (`fixtures/faq.metrics.json`), and the session's stream for what each tool
   sent back (`fixtures/faq.jsonl`);
-- the `build_screen` prompt the server renders under `mcp-prompt` carries a
-  task's request, and the screen to change for a task with a `base`; the
-  report and its header carry the prompt `run.json` names, and a budget gives
-  a run started from it no verdict;
+- under `mcp-prompt`, the `build_screen` prompt the server renders carries a
+  task's request, and the screen to change for a task with a `base`, and
+  Claude Code's system prompt gets `SYSTEM` alone (`WITH_MCP` too under `mcp`
+  and `mcp-skills`); the `run.json` that `evals:generate` writes before its
+  first session ([`lib/claude-code.ts`](./lib/claude-code.ts)) names the
+  prompt, and the replay carries it into the report and its header; a budget
+  gives such a run no verdict, and the Audits and Optimization pages of the
+  site, given a history folder of the test's own, leave it out;
 - the report prints the median cost and the tool volumes, and a budget is met
   under its ceiling only, at a conformance no lower than its baseline's.
 
