@@ -44,7 +44,7 @@ const tokens = () =>
  *
  * - ds://component/{name}/spec — the full spec of a component, listed
  * - ds://token/{path}          — one semantic token, found by completion
- * - ds://guidelines            — every rule, as dsaireadable_get_design_rules serves them
+ * - ds://guidelines            — the critical rules whole, every foundation's rules and the composition rules
  */
 export function registerResources(server: McpServer): void {
   server.registerResource(
