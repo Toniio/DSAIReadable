@@ -34,6 +34,7 @@ npm run evals -- --generator claude --model claude-opus-5-5 --context mcp   # an
 npm run evals -- --generator claude --model claude-opus-5-5 --context none  # the same agent with no context: the baseline
 npm run evals -- --generator claude --suite skills --skills all              # the agent skills of skills/, on their suite
 npm run evals:generate -- --model sonnet --condition mcp --label <label>   # screens from Claude Code on a subscription: no API key
+npm run evals:generate -- --model sonnet --condition mcp-prompt --label <label>   # the same, each session started from the build_screen prompt
 npm run evals:context -- evals/.work/claude-code/<label> [--reserve]          # where a run's tokens went, per tool
 npm run evals:test                                  # the harness's own test, in npm run check and CI
 ```
@@ -106,11 +107,12 @@ generator's instructions appended to Claude Code's own system prompt. The
 replay generator then scores the screens on stages A and B; stage C needs the
 API and does not run.
 
-| `--condition` | MCP server                                 | Skills                                                 |
-| ------------- | ------------------------------------------ | ------------------------------------------------------ |
-| `none`        | no                                         | no                                                     |
-| `mcp`         | `dsaireadable`, started from this checkout | no                                                     |
-| `mcp-skills`  | `dsaireadable`, started from this checkout | the skills of `skills/`, copied into `.claude/skills/` |
+| `--condition` | MCP server                                 | Skills                                                 | The session's message                                         |
+| ------------- | ------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `none`        | no                                         | no                                                     | the task's request                                            |
+| `mcp`         | `dsaireadable`, started from this checkout | no                                                     | the task's request                                            |
+| `mcp-skills`  | `dsaireadable`, started from this checkout | the skills of `skills/`, copied into `.claude/skills/` | the task's request                                            |
+| `mcp-prompt`  | `dsaireadable`, started from this checkout | no                                                     | the server's `build_screen` prompt, the request as its `task` |
 
 Each task runs in an empty folder outside the repository. The session has no
 built-in tool except `Skill` and `Read` under `mcp-skills`, and 25 turns at
@@ -127,8 +129,29 @@ task:
 npm run evals:generate -- --model sonnet --condition mcp-skills --tasks sign-in --label smoke
 ```
 
+**Starting from the prompt.** Under `mcp-prompt`, a session starts the way a
+user of the server's `build_screen` prompt does. The script asks the server
+for the prompt (`prompts/get`) with the task's request as `task`, the screen
+to change as `context` when the task has a `base`, and `desktop` and `light`
+for `device` and `mode`, which no task names. The text the server renders is
+the session's message, in place of the bare request, and the system prompt
+gets the answer format of the claude generator's instructions only (`SYSTEM`,
+not `WITH_MCP`): the prompt says how to use the server. Claude Code lists the
+prompt as the slash command `/mcp__dsaireadable__build_screen`, but it splits
+a slash command's arguments on whitespace, even inside quotes, and gives each
+word to the next argument in the order the prompt declares them (`task
+context device mode`, checked on 2.1.318): a request of several words cannot
+reach `task`, and `/mcp__dsaireadable__build_screen Build the sign-in page…`
+fails on the server's check of `device` before any turn. So the script
+renders the prompt itself, as a client that fills a prompt's arguments in a
+form does, and sends the text Claude Code would insert. `run.json`
+and the report name the prompt (`"prompt": "build_screen"`): a budget gives
+its runs no verdict against a run that started from the request, and the site
+lists them nowhere, as it does the runs with skills.
+
 `--dry-run` prints the command and starts the MCP server through the same
-launch, with no session. The script was checked against Claude Code 2.1.285
+launch, with no session; under `mcp-prompt`, it prints the size and the first
+line of the first task's message. The script was checked against Claude Code 2.1.285
 (`--max-turns` is hidden from its `--help`, but defined) and warns on another
 version; `--claude <path>` picks the install. Under `mcp-skills`, Claude Code's
 bundled skills are listed next to the one of `skills/`: no flag hides them
@@ -159,8 +182,8 @@ conditions task by task, with a test for paired outcomes (McNemar's): with 26
 tasks, a gap of a few tasks is within the noise.
 
 The replay reads `<task>.metrics.json` and `run.json`, so the report carries
-the turns, the MCP calls by tool, the tool errors and the tokens, the model and
-`via claude-code <version>`. These runs compare with each other, not with the
+the turns, the MCP calls by tool, the tool errors and the tokens, the model,
+the prompt the sessions started from and `via claude-code <version>`. These runs compare with each other, not with the
 claude generator's: the system prompt and the tools differ.
 
 The report also says where the screens were generated, because the checkout
@@ -193,8 +216,8 @@ tokens per screen at a share of a recorded run's, at a conformance no lower
 than that run's: a cheaper run that answers worse does not meet it. It holds
 the MCP server alone, through Claude Code, to 70 % of
 `2026-10-04-0.1.3-sonnet-mcp-rescored`. A report of the same condition (the
-same tasks, model, context, skills, effort and turn cap, generated the same
-way) prints the verdict under its cost; the conformance it compares is the
+same tasks, model, context, skills, prompt, effort and turn cap, generated
+the same way) prints the verdict under its cost; the conformance it compares is the
 mean of the stages the recorded run ran, so a run scored with `--no-a11y`
 gets no verdict.
 
@@ -229,6 +252,10 @@ this checkout answers instead and whether Claude Code would still refuse it.
 - the replay generator reads the metrics written next to a screen
   (`fixtures/faq.metrics.json`), and the session's stream for what each tool
   sent back (`fixtures/faq.jsonl`);
+- the `build_screen` prompt the server renders under `mcp-prompt` carries a
+  task's request, and the screen to change for a task with a `base`; the
+  report and its header carry the prompt `run.json` names, and a budget gives
+  a run started from it no verdict;
 - the report prints the median cost and the tool volumes, and a budget is met
   under its ceiling only, at a conformance no lower than its baseline's.
 

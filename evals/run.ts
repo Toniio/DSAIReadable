@@ -96,6 +96,8 @@ interface RunFile {
   modelOption?: string
   context: string
   skills: string[]
+  /** The MCP prompt the sessions started from: `build_screen` under mcp-prompt. */
+  prompt?: string
   claudeCode: string
   sessionPlugins?: string[]
   maxTurns?: number
@@ -164,7 +166,10 @@ function replayGenerator(dir: string): Generator {
  */
 function replayAbout(
   dir: string
-): Pick<RunReport, "model" | "context" | "skills" | "via" | "generated"> {
+): Pick<
+  RunReport,
+  "model" | "context" | "skills" | "prompt" | "via" | "generated"
+> {
   const about = readRunFile(dir)
   if (!about) return {}
   const { designSystem: ds } = about
@@ -172,6 +177,7 @@ function replayAbout(
     model: about.model,
     context: about.context,
     skills: about.skills,
+    ...(about.prompt && { prompt: about.prompt }),
     via: `claude-code ${about.claudeCode}`,
     ...(ds &&
       about.sources &&
@@ -576,6 +582,12 @@ async function selfTest() {
       withMedian(2000, 0.2),
       budget
     ),
+    // Sessions started from an MCP prompt are not: the mcp-prompt condition.
+    compareBudget(
+      { ...fixtureRun, prompt: "build_screen" },
+      withMedian(2000, 0.2),
+      budget
+    ),
   ]
   if (
     verdicts[0]?.target !== 1400 ||
@@ -584,11 +596,61 @@ async function selfTest() {
     verdicts[1]?.met !== false ||
     verdicts[2]?.met !== false ||
     verdicts[3] !== undefined ||
-    verdicts[4]?.met !== true
+    verdicts[4]?.met !== true ||
+    verdicts[5] !== undefined
   )
     errors.push(
-      `compareBudget: ${JSON.stringify(verdicts)} (met under the ceiling, missed over it or at a lower conformance, none for another model)`
+      `compareBudget: ${JSON.stringify(verdicts)} (met under the ceiling, missed over it or at a lower conformance, none for another model or for sessions started from a prompt)`
     )
+
+  // The mcp-prompt condition of evals:generate: the server's build_screen
+  // prompt carries the task's request, and the screen to change as its
+  // context; run.json names the prompt, and the report and its header carry it.
+  const { connectMcp, promptMessage } = await import("./lib/claude")
+  const { mcp } = await connectMcp(ROOT)
+  try {
+    for (const task of [
+      tasks.find((t) => !t.base),
+      tasks.find((t) => t.base),
+    ]) {
+      if (!task) continue
+      const text = await promptMessage(mcp, ROOT, task)
+      const base = task.base && readFileSync(join(ROOT, task.base), "utf-8")
+      if (
+        !text.includes(task.prompt) ||
+        (base ? !text.includes(base) : text.includes("The current screen:"))
+      )
+        errors.push(
+          `promptMessage: the build_screen prompt rendered for ${task.id} does not carry its request${base ? " and its current screen" : " alone"}`
+        )
+    }
+  } finally {
+    await mcp.close()
+  }
+  const promptRun = join(WORK, "self-test-prompt")
+  mkdirSync(promptRun, { recursive: true })
+  writeFileSync(
+    join(promptRun, "run.json"),
+    JSON.stringify({
+      ...(JSON.parse(
+        readFileSync(join(fixturesDir, "run.json"), "utf-8")
+      ) as RunFile),
+      condition: "mcp-prompt",
+      skills: [],
+      prompt: "build_screen",
+    })
+  )
+  const promptAbout = replayAbout(promptRun)
+  if (fixtureRun.prompt !== undefined || promptAbout.prompt !== "build_screen")
+    errors.push(
+      `replayAbout: the prompt of run.json reaches the report as ${JSON.stringify(promptAbout.prompt)} under mcp-prompt, ${JSON.stringify(fixtureRun.prompt)} under mcp-skills`
+    )
+  if (
+    !toMarkdown({ ...fixtureRun, ...promptAbout }).includes(
+      "context `mcp` · prompt `build_screen` · design system"
+    )
+  )
+    errors.push("the report header does not name the prompt of the sessions")
   if (
     !toMarkdown({ ...fixtureRun, budget: verdicts[0] }).includes(
       "Budget against `fixture`: 1,200 input tokens per screen for at most 1,400 (-30 % of 2,000) ✅"

@@ -37,6 +37,8 @@ interface RunReport {
   model?: string
   context?: string
   skills?: string[]
+  /** The MCP prompt its sessions started from, under evals:generate's mcp-prompt condition. */
+  prompt?: string
   via?: string
   designSystem: { version: string; commit: string }
   /**
@@ -207,8 +209,9 @@ function suiteOf(
 
 /**
  * Every recorded run of evals/history/ that the page lists, oldest first. A
- * run that gave the agent skills stays in evals/history/, and is not listed:
- * the page measures the design system with and without its MCP server.
+ * run that gave the agent skills, or started its sessions from an MCP prompt,
+ * stays in evals/history/ and is not listed: the page measures the design
+ * system with and without its MCP server.
  */
 export function evalRuns(): EvalRun[] {
   const { tasks, suites } = readJson<{
@@ -220,7 +223,7 @@ export function evalRuns(): EvalRun[] {
       file,
       report: readJson<RunReport>(`evals/history/${file}`),
     }))
-    .filter(({ report }) => !report.skills?.length)
+    .filter(({ report }) => !report.skills?.length && !report.prompt)
     .map(({ file, report }) => {
       const checkout = report.generated
         ? `${report.generated.commit}:${report.generated.sources ?? ""}`

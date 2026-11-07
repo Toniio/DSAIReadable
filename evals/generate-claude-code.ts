@@ -11,6 +11,9 @@
  *   none        no MCP server, no skill: the baseline
  *   mcp         the dsaireadable MCP server, started from this checkout
  *   mcp-skills  the server, and the skills of skills/ in the session's .claude/skills/
+ *   mcp-prompt  the server, and the session starts from its build_screen prompt
+ *               with the task's request as `task` (`SYSTEM` alone: the prompt
+ *               says how to use the server)
  *
  * The session loads none of the user's own configuration (user settings,
  * plugins, hooks, CLAUDE.md, auto memory, MCP servers, claude.ai connectors;
@@ -61,6 +64,8 @@ import {
   connectMcp,
   MAX_TURNS,
   mcpServerLaunch,
+  PROMPT,
+  promptMessage,
   screenOf,
   SYSTEM,
   WITH_MCP,
@@ -72,7 +77,7 @@ import { loadTasks, taskMessage, type Task } from "./lib/tasks"
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
 const SERVER = "dsaireadable"
 const MCP_PREFIX = `mcp__${SERVER}__`
-const CONDITIONS = ["none", "mcp", "mcp-skills"] as const
+const CONDITIONS = ["none", "mcp", "mcp-skills", "mcp-prompt"] as const
 type Condition = (typeof CONDITIONS)[number]
 /** The Claude Code release whose flags and stream this script was checked against. */
 const CHECKED_ON = "2.1.285"
@@ -109,6 +114,15 @@ const CLAUDE = values.claude
 
 const withMcp = condition !== "none"
 const withSkills = condition === "mcp-skills"
+/**
+ * The session starts from the server's build_screen prompt. Claude Code lists
+ * it as `/mcp__dsaireadable__build_screen`, but splits a slash command's
+ * arguments on whitespace and gives each word to the next argument (2.1.318):
+ * a request of several words cannot reach `task`. The script asks the server
+ * for the prompt itself, as a client that fills its arguments does, and sends
+ * the text it renders as the session's message (evals/README.md).
+ */
+const withPrompt = condition === "mcp-prompt"
 const SKILLS = readdirSync(resolve(ROOT, "skills")).filter((name) =>
   existsSync(resolve(ROOT, "skills", name, "SKILL.md"))
 )
@@ -128,7 +142,7 @@ const ARGS = [
   "stream-json",
   "--verbose",
   "--append-system-prompt",
-  SYSTEM + (withMcp ? WITH_MCP : ""),
+  SYSTEM + (withMcp && !withPrompt ? WITH_MCP : ""),
   // Hidden from `claude --help`, defined in Claude Code 2.1.76 and 2.1.285.
   "--max-turns",
   String(MAX_TURNS),
@@ -327,7 +341,11 @@ type Outcome =
 const lastLine = (text: string) => text.trim().split("\n").at(-1) ?? ""
 
 /** Runs one task in a fresh folder outside the repository and reads its stream. */
-async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
+async function session(
+  task: Task,
+  message: string,
+  init: { value?: Init }
+): Promise<Outcome> {
   const wd = mkdtempSync(join(tmpdir(), "dsaireadable-evals-"))
   try {
     if (withSkills)
@@ -338,7 +356,7 @@ async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
           { recursive: true }
         )
     const child = spawn(CLAUDE, ARGS, { cwd: wd, env: ENV })
-    child.stdin.end(taskMessage(ROOT, task))
+    child.stdin.end(message)
     let stderr = ""
     child.stderr.on("data", (chunk: Buffer) => {
       stderr = (stderr + chunk.toString()).slice(-2000)
@@ -555,6 +573,7 @@ async function session(task: Task, init: { value?: Init }): Promise<Outcome> {
 function sourcesHash(): string {
   const hash = createHash("sha256")
   hash.update(SYSTEM + WITH_MCP)
+  if (withPrompt) hash.update(JSON.stringify(PROMPT))
   const walk = (dir: string): string[] =>
     readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
       const path = join(dir, entry.name)
@@ -575,6 +594,8 @@ interface RunFile {
   condition: Condition
   context: "mcp" | "none"
   skills: string[]
+  /** The MCP prompt each session started from, under mcp-prompt. */
+  prompt?: string
   /** Every skill the sessions listed, Claude Code's bundled ones included. */
   sessionSkills: string[]
   /** Every plugin built into Claude Code that the sessions listed. */
@@ -584,6 +605,24 @@ interface RunFile {
   sources: string
   designSystem: { version: string; commit: string; dirty: boolean }
   tasks: Record<string, Record<string, unknown>>
+}
+
+/**
+ * What each session is sent: the task's message, or under mcp-prompt the
+ * build_screen prompt the server renders for it.
+ */
+async function messages(of: Task[]): Promise<Map<string, string>> {
+  if (!withPrompt)
+    return new Map(of.map((task) => [task.id, taskMessage(ROOT, task)]))
+  const { mcp } = await connectMcp(ROOT)
+  try {
+    const rendered = new Map<string, string>()
+    for (const task of of)
+      rendered.set(task.id, await promptMessage(mcp, ROOT, task))
+    return rendered
+  } finally {
+    await mcp.close()
+  }
 }
 
 if (process.env.CLAUDECODE || process.env.CLAUDE_CODE_ENTRYPOINT)
@@ -637,6 +676,13 @@ if (values["dry-run"]) {
       `MCP server "${SERVER}" started through the session's launch: ${definitions.length} tools.`
     )
   }
+  if (withPrompt && tasks.length > 0) {
+    const [task] = tasks
+    const text = (await messages([task])).get(task.id)!
+    console.log(
+      `The session's message for ${task.id}: the ${PROMPT.name} prompt (device ${PROMPT.device}, mode ${PROMPT.mode}), ${text.length} characters, from "${text.split("\n")[0]}"`
+    )
+  }
   console.log("\n✅ evals:generate --dry-run: no session started.")
   process.exit(0)
 }
@@ -655,6 +701,7 @@ const run: RunFile = existsSync(runFile)
       condition,
       context: withMcp ? "mcp" : "none",
       skills: withSkills ? SKILLS : [],
+      ...(withPrompt && { prompt: PROMPT.name }),
       sessionSkills: [],
       sessionPlugins: [],
       maxTurns: MAX_TURNS,
@@ -693,6 +740,7 @@ const init: { value?: Init } = run.model
     }
   : {}
 
+const sent = await messages(tasks)
 let produced = 0
 let skipped = 0
 const retry: string[] = []
@@ -708,7 +756,7 @@ for (const task of tasks) {
   // A screen left by an attempt that did not finish must not be scored.
   rmSync(join(OUT, `${task.id}.tsx`), { force: true })
   process.stdout.write(`  ${task.id}… `)
-  const outcome = await session(task, init)
+  const outcome = await session(task, sent.get(task.id)!, init)
   if (outcome.kind === "stop") {
     console.log("stopped")
     fail(outcome.reason, outcome.exitCode)

@@ -21,7 +21,7 @@ import {
 
 import type { GenerationMetrics, RubricResult } from "./report"
 import { resultKey } from "./stream"
-import { taskMessage, type Task } from "./tasks"
+import { currentScreen, taskMessage, type Task } from "./tasks"
 
 /** The turns a generator gives an agent to answer one task. */
 export const MAX_TURNS = 25
@@ -37,6 +37,48 @@ Answer with exactly one \`\`\`tsx code block: a complete module whose default ex
 
 /** Added to SYSTEM when the agent has the MCP server. */
 export const WITH_MCP = `\n\nThe dsaireadable MCP server describes the design system: its components, page patterns, tokens and rules, and validates code. Use it before and after you write the screen.`
+
+/**
+ * The MCP prompt a session of the `mcp-prompt` condition starts from, and the
+ * arguments a task does not give: no task names a device or a color mode.
+ */
+export const PROMPT = {
+  name: "build_screen",
+  device: "desktop",
+  mode: "light",
+} as const
+
+/**
+ * The first message of a session that starts from the server's
+ * `build_screen` prompt: what a client that fills a prompt's arguments sends
+ * once the server renders it, with the task's request as `task` and the
+ * screen to change, if any, as `context`.
+ */
+export async function promptMessage(
+  mcp: Client,
+  root: string,
+  task: Task
+): Promise<string> {
+  const context = currentScreen(root, task)
+  const { messages } = await mcp.getPrompt({
+    name: PROMPT.name,
+    arguments: {
+      task: task.prompt,
+      ...(context && { context }),
+      device: PROMPT.device,
+      mode: PROMPT.mode,
+    },
+  })
+  return messages
+    .map(({ role, content }) => {
+      if (role !== "user" || content.type !== "text")
+        throw new Error(
+          `the ${PROMPT.name} prompt holds a ${role} ${content.type} message: a session starts from one user message`
+        )
+      return content.text
+    })
+    .join("\n\n")
+}
 
 /**
  * The skills as an agent meets them: their name and description up front, the

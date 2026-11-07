@@ -30,6 +30,8 @@ interface Report {
   model?: string
   context?: string
   skills?: string[]
+  /** The MCP prompt its sessions started from, under evals:generate's mcp-prompt condition. */
+  prompt?: string
   /** Where the screens come from: absent from a gold run. */
   generated?: {
     version?: string
@@ -63,6 +65,7 @@ interface Run {
   version: string
   condition: Condition
   skills: string[]
+  prompt?: string
   /** Its tasks are exactly a suite's, not the default run's. */
   suite: boolean
 }
@@ -109,6 +112,7 @@ function runs(): Run[] {
       report.model,
       report.context,
       [...(report.skills ?? [])].sort().join("+"),
+      report.prompt ?? "",
       commit,
       sources ?? "",
       run ?? "",
@@ -120,6 +124,7 @@ function runs(): Run[] {
     version: report.generated?.version ?? "",
     condition: report.context === "none" ? "none" : "mcp",
     skills: report.skills ?? [],
+    prompt: report.prompt,
     suite: members.includes(
       report.tasks
         .map((task) => task.id)
@@ -129,9 +134,11 @@ function runs(): Run[] {
   }))
 }
 
-/** The runs of the two conditions the page compares: the default tasks, no skills. */
+/** The runs of the two conditions the page compares: the default tasks, no skills, no prompt. */
 const measured = () =>
-  runs().filter((run) => !run.suite && run.skills.length === 0)
+  runs().filter(
+    (run) => !run.suite && run.skills.length === 0 && run.prompt === undefined
+  )
 
 const sum = (values: number[]) =>
   values.reduce((total, value) => total + value, 0)
