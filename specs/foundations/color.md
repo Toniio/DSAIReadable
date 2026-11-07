@@ -293,7 +293,7 @@ these utility classes:
 
 ## Checking a change
 
-What the design system checks before a change ships; a screen built with it has none of these steps to take.
+What the design system checks before a change to a token or a component ships.
 
 - **Always test both modes** — every component must be checked in light and in dark before it ships.
 - **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lib/contrast-pairs.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.
