@@ -1,5 +1,65 @@
 [
   {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Minor Changes",
+    "text": "f4f3531: mcp: The `build_screen` prompt asks for each retained component's spec in the default concise format, and for `response_format: \"detailed\"` only for a component whose props or variants the screen sets (a Button's `variant` or `size`, a Badge's `variant`). It asked for a detailed spec per component. Measured with claude-sonnet-5-5 on the 26 eval tasks, three passes started from each text: 7.5k fewer input tokens per screen paired by task, 21 of 26 tasks cheaper, 75 of 78 screens passed against 73 of 78, and 39 % of the spec calls detailed instead of 99.8 %."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Minor Changes",
+    "text": "c5a5fb8: component-api: Add two `beta` components from shadcn/ui, with their registry items: `CodeBlock` (`code-block`, on `button`) and `Trace` (`trace`, on `collapsible`). - `CodeBlock` shows code, terminal output or a diff in one color, with a header, a title, line numbers, wrapping and a copy button. It has no syntax highlighting: shadcn/ui's `use-highlighted-code` hook is not shipped, because shiki's theme colors put some tokens under 4.5:1 and the design system has no syntax tokens. It goes in a `ghost` or `outline` `Bubble`: a filled one hides its `added` and `highlighted` lines, or puts its code under 4.5:1. Where the browser has no Clipboard API (plain HTTP), its copy button does nothing and says nothing. - `CodeBlockCopyButton` adds two optional props to shadcn/ui's, `copyLabel` and `copiedLabel`, which replace its default names, `UI_STRINGS.codeBlock.copy` (\"Copy\") and `UI_STRINGS.codeBlock.copied` (\"Copied\"). - `Trace` lists the steps of an assistant's work, one `TraceLine` each, with a `running`, `error` or `pending` status and details that open under the line in a `TraceCollapsible`. A pending step keeps the muted text of a done one instead of fading to 60% opacity (2.55:1), and `TraceDescription` is `text-muted-foreground` instead of 70% of it (3.08:1). - The details of a Trace step open and close at once under `prefers-reduced-motion`, like an Accordion panel."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Minor Changes",
+    "text": "86c37ce: mcp: Two answers of the MCP server stop repeating rules that another answer serves, and the detailed design rules come grouped by foundation, since every turn of an agent sends each answer it read again. - `dsaireadable_get_design_rules` `detailed` without a category serves the foundation rules in a `foundation_rules` object keyed by the foundation's name (`\"color\": [\"…\", …]`), in place of `general_rules`, a list where each rule carried its own `\"source\": \"<foundation>.md\"`. The answer goes from 36,879 to 30,237 characters, and from 118 foundation rules to 89, of 10 foundations, for the reasons below. A foundation's `category` answer and `ds://guidelines` keep the flat list of `{ rule, source }`. Re-served on the six 0.3.0 runs with the MCP server (claude-sonnet-5-5, with and without the skills), the grouping alone makes the answer 7 to 8 % lighter and cuts the estimated median input tokens per screen by 2,000 to 3,200 per run. - It leaves out the 14 rules of `voice-and-tone` and `content`, which `dsaireadable_get_ux_writing_rules` serves, and names that tool in its `detail` line. Both foundations stay in `categories`, and a `category` still returns their rules. In the 0.3.0 evals, 76 of the 102 sessions that read this answer called `dsaireadable_get_ux_writing_rules` too. - It leaves out the 5 rules of `radius.md`, which restate the critical styling rule served whole beside them; the `radius` category still returns them. The styling rule now gives content the scale `radius.md` gives it, `rounded-sm` … `rounded-4xl`, and says `rounded-xs` draws the Chart's indicators: it gave content `rounded-xs` … `rounded-4xl`. - It serves the foundation rules without the `**` around a numbered rule's title. The category answers and `ds://guidelines` keep it. - Every answer that serves the foundation rules drops 11 of them: the 6 steps of the design system's upkeep and 3 rules said twice, and the rules on reserved tokens name the class a screen writes, in 2 fewer lines (the `docs` entry of 0500b6b lists them). Size gains one, the `gap-2` between the steps of a `Trace`. - The `response_format` description and the concise `detail` line no longer promise every foundation's rules: `detailed` adds \"the other foundation rules\". - `dsaireadable_get_component_specs` `detailed` serves in `composition_rules` the rules about the component that its `usage` does not already carry: a choice rule (rule-20 to rule-23) is copied into the usage of each spec it covers, and 23 specs served it twice in one answer. The 65 detailed specs went from 357,940 to 337,140 characters. - A component's composition rules, in that answer and in `dsaireadable_get_design_rules` with the component's name as `category`, are the rules whose `applies_to` lists it, or, for a rule without `applies_to`, whose text names it in its case. Matched in any case, 9 components got a rule about something else: Button got rule-13, the `data-slot` authoring rule, for `data-slot='button'` (`category: \"Button\"` went from 1,068 to 853 characters), and Message got rule-09 for \"an error message\". A foundation's name still matches in any case: `spacing` returns rule-12."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Minor Changes",
+    "text": "c5a5fb8: mcp: The MCP server serves two new specs, `CodeBlock` and `Trace`, and composition rule `rule-23` gives each one its job in a conversation: code in an answer is a `CodeBlock`, in one color, inside a `ghost` or `outline` `Bubble`, with its copy button in `CodeBlockActions`; every step of the assistant's work (a tool call, its reasoning, a search), running, failed or done, with details or without, is a `Trace` step; an event that is not a step (a date, a resumed session) stays a `Marker`. `shadcn_excluded` lists `form` alone."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "32cdbbc: docs: The Tools page of the MCP & Skills section now says what Claude Code (2.1.318) does with the arguments of the `build_screen` prompt: it gives one word to each of `task`, `context`, `device` and `mode`, so a request of several words never reaches `task`. From Claude Code, ask the agent for the screen in plain words, without the prompt's call budget; a client that fills a prompt's arguments in a form, or calls `prompts/get`, passes the whole request. How it works points to it."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "515143b: visual: Calendar names each day button by its full date without an ordinal, \"Sunday, September 27, 2026\" instead of \"Sunday, September 27th, 2026\", so the name contains the number the button shows (WCAG 2.5.3, Label in Name). The date follows the calendar's `locale`; the \"Today\" and \"selected\" parts and a `labels.labelDayButton` passed in are unchanged."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "9aab95e: docs: the Overriding table of the Content foundation lists every default string, one row per `UI_STRINGS` key, with the prop that replaces it. It missed the two landmark names, `Breadcrumb` and `Pagination` (replaced through `aria-label`), and the `PaginationNext` defaults. `npm run index:strings` now fails when the table and `lib/ui-strings.ts` disagree. The site's Content page drops its Default strings table, which repeated the values without the props."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "0500b6b: docs: The foundation specs keep in their rules what a screen does, and name the class it writes. - Rules said twice: Color drops \"Never fake subtlety with opacity\", which its ❌ line on `text.subtle` says, and \"Follow the surface hierarchy\", which its `background.*` lines say. Motion merges \"Always use the CSS tokens\" into \"Never work around the tokens\". - Steps of the design system's own upkeep leave the rules: Color's \"Always test both modes\", \"Contrast is checked mechanically\" and \"APCA is advisory, WCAG 2 decides\" move to a new \"Checking a change\" section, Elevation's \"Always test in dark mode\" to its note on dark-mode shadows, and Border width's \"Add a `border-width.*` token\" and Breakpoints' \"Do not change a `breakpoint.*` value\" to the prose of their pages. - Rules that sent a screen to a reserved token no class reads now name the class: text on `bg-primary` is `text-primary-foreground`, not `text.action.on`; a divider between sections is a `Separator`, not `border.subtle`; an icon takes the color of its text, not `icon.action` or `icon.default`; a content column is `max-w-2xl`, `max-w-5xl` or `max-w-7xl`, not `content-*`; and the sequential chart palette is read through `bg-(--color-chart-sequential-N)`. - Color's \"Accessibility first\" cites SC 1.4.3 for 3:1 on large text, and SC 1.4.11 for UI components only. - Radius's decision rule gives content `radius.sm` to `radius.4xl`, as its token table and rules do; it said `radius.lg`."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "c5a5fb8: docs: The Marker spec sends every step of the assistant's work to `Trace`, a finished one with nothing to open included, and keeps `Marker` for the events that are not a step (a date, a resumed session, someone who joined): its role no longer names a tool call, and its examples mark a resumed conversation instead of a search. The Code section of the Typography foundation says a block of code is a `CodeBlock`, in one color, and keeps `<code>` for code inside a sentence. The Motion foundation lists the Trace details and the running Trace title under reduced motion, and the Elevation foundation lists the `z-10` of floating `CodeBlockActions`. The target audit of the Size foundation lists `CodeBlockCopyButton` (24px) and the Trace triggers, 16px tall, which meet WCAG 2.5.8 through the spacing exception of the `gap-2` between the steps."
+  },
+  {
+    "version": "0.4.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "515143b: docs: The Props / API tables spell out a prop typed by a named union of literals instead of printing the name: Combobox `align` and `side`, Chart `verticalAlign`, Direction `dir`, MessageScroller `direction` and NavigationMenu `orientation` now list their values. A union a declaration writes out keeps its written order: Drawer `direction` reads `\"top\" | \"bottom\" | \"left\" | \"right\"` and InputGroup `type` `\"submit\" | \"reset\" | \"button\"`."
+  },
+  {
     "version": "0.3.1",
     "date": null,
     "category": "Patch Changes",
