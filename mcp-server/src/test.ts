@@ -970,19 +970,61 @@ assert(
     ),
   `Every composition rule is served as written in the index (${indexRules.length})`
 )
-const forSelect = compositionRulesFor(servedRules, "Select").map((r) => r.id)
-assert(
-  forSelect.includes("rule-09") && forSelect.includes("rule-20"),
-  "A component name gets the rules that cover it (Select: rule-09, rule-20)"
+const componentNames = Object.keys(
+  (
+    JSON.parse(
+      readFileSync(resolve(contextDir, "ux-writing.json"), "utf-8")
+    ) as { component_rules: Record<string, unknown> }
+  ).component_rules
 )
 assert(
-  compositionRulesFor(servedRules, "composition").length ===
+  compositionRulesFor(servedRules, "composition", componentNames).length ===
     indexRules.length &&
-    compositionRulesFor(servedRules, "Heading").every(
+    compositionRulesFor(servedRules, "Heading", componentNames).every(
       (r) => !r.applies_to || r.applies_to.includes("Heading")
     ),
   '"composition" gets every rule; a component gets only rules that cover it'
 )
+
+// A component gets the rules about it: the ones whose applies_to lists it, and
+// the ones without applies_to whose text names it, in its case. Matched in any
+// case, 9 of these 10 components got a rule about something else: Button
+// rule-13 for data-slot='button', Message rule-09 for "an error message", Item
+// rule-17 for "active item". A rule's applies_to is the whole list: rule-21
+// names Sidebar to explain a Sheet, and is not about Sidebar. A foundation is
+// matched in any case: "spacing" finds rule-12's "Spacing".
+{
+  const ruleIds = (category: string) =>
+    compositionRulesFor(servedRules, category, componentNames)
+      .map((r) => r.id)
+      .join()
+  const expected: [string, string][] = [
+    ["Select", "rule-09,rule-20"],
+    ["select", "rule-09,rule-20"],
+    ["Button", ""],
+    ["button", ""],
+    ["Field", "rule-09"],
+    ["Label", "rule-09"],
+    ["Item", "rule-22"],
+    ["Message", "rule-23"],
+    ["Sidebar", "rule-17"],
+    ["Toggle", ""],
+    ["Avatar", ""],
+    ["Separator", ""],
+    ["spacing", "rule-12"],
+    ["color", "rule-01,rule-11,rule-16,rule-17"],
+  ]
+  const wrong = expected
+    .filter(([category, ids]) => ruleIds(category) !== ids)
+    .map(
+      ([category, ids]) =>
+        `${category}: ${ruleIds(category) || "none"} (expected ${ids || "none"})`
+    )
+  assert(
+    wrong.length === 0,
+    `A component gets the composition rules about it, a foundation the rules that name it${wrong.length ? `: ${wrong.join("; ")}` : ""}`
+  )
+}
 
 // The styling rule served with every dsaireadable_get_design_rules answer: each link of
 // its token chain must be the one styles/globals.css declares, and it quotes no
@@ -1659,10 +1701,36 @@ const detailedSpec = async (component_name: string) =>
       button.sizes.join() === buttonSizes.join() &&
       listed.items.find((c) => c.name === "Button")?.sizes.join() ===
         buttonSizes.join() &&
-      select.composition_rules.some((r: CompositionRule) =>
-        r.applies_to?.includes("Select")
-      ),
+      select.composition_rules.map((r: CompositionRule) => r.id).join() ===
+        "rule-09" &&
+      (select.usage as string[]).some((u) => u.includes("`rule-20`")),
     "detailed serves the variants, the sizes and the composition rules; dsaireadable_get_components serves the sizes"
+  )
+}
+
+// A choice rule (rule-20 to rule-23) lives in composition_rules and is copied
+// into the Usage of each spec it covers (npm run specs:choices): a detailed
+// spec serves it there and not again in its composition_rules, where 23 specs
+// carried it twice in one answer. A spec's composition_rules are about it,
+// and so are its category's: Button's held rule-13, the data-slot rule, for
+// its data-slot='button'.
+{
+  const answers = await Promise.all(specNames.map(detailedSpec))
+  const twice = answers.flatMap((a) =>
+    (a.composition_rules as CompositionRule[])
+      .filter((r) =>
+        ((a.usage ?? []) as string[]).some((u) => u.includes(r.rule))
+      )
+      .map((r) => `${a.name} ${r.id}`)
+  )
+  const ids = (rules: CompositionRule[]) => rules.map((r) => r.id).join(", ")
+  const button = answers.find((a) => a.name === "Button").composition_rules
+  const buttonCategory = JSON.parse(
+    await payload("dsaireadable_get_design_rules", { category: "button" })
+  ).composition_rules
+  assert(
+    twice.length === 0 && button.length === 0 && buttonCategory.length === 0,
+    `A detailed spec serves a composition rule once, and only one about it, as its category does${twice.length ? `; in usage and composition_rules: ${twice.length} (${twice.slice(0, 6).join(", ")}…)` : ""}${button.length ? `; the Button spec gets ${ids(button)}` : ""}${buttonCategory.length ? `; category "button" gets ${ids(buttonCategory)}` : ""}`
   )
 }
 
@@ -1804,8 +1872,8 @@ const detailedSpec = async (component_name: string) =>
 // Unfiltered, detailed served every rule: 73,517 characters, which Claude Code
 // refused as one result. A component's rules are the constraints of its spec,
 // and the 65 of them made half of it: detailed names the components and serves
-// the foundation rules but radius.md's, the critical rules whole and the
-// composition rules.
+// the foundation rules but radius.md's and those for UI text, the critical
+// rules whole and the composition rules.
 {
   const detailed = JSON.parse(
     await payload("dsaireadable_get_design_rules", {
@@ -1815,16 +1883,54 @@ const detailedSpec = async (component_name: string) =>
   const select = JSON.parse(
     await payload("dsaireadable_get_design_rules", { category: "Select" })
   )
+  const uiText = JSON.parse(
+    await payload("dsaireadable_get_ux_writing_rules")
+  ).rules
   assert(
     !("component_rules" in detailed) &&
-      detailed.general_rules.length ===
+      detailed.general_rules.length + uiText.length ===
         generalRules.filter((r) => r.source !== "radius.md").length &&
       detailed.composition_rules.length === indexRules.length &&
       detailed.critical_rules.every((r: Json) => "description" in r) &&
       detailed.categories.components.length === specNames.length &&
       JSON.stringify(select.rules) ===
         JSON.stringify(fullSpecs.Select.constraints),
-    `dsaireadable_get_design_rules detailed without a category serves ${detailed.general_rules.length} of the ${uxRules.length} foundation rules, all but radius.md's, the critical rules whole and the ${indexRules.length} composition rules, and names the ${specNames.length} components whose rules a category returns`
+    `dsaireadable_get_design_rules detailed without a category serves ${detailed.general_rules.length} foundation rules, ${uxRules.length} with the ${uiText.length} of dsaireadable_get_ux_writing_rules and radius.md's, the critical rules whole and the ${indexRules.length} composition rules, and names the ${specNames.length} components whose rules a category returns`
+  )
+}
+
+// The rules for UI text (voice-and-tone, content) are the answer of
+// dsaireadable_get_ux_writing_rules: 76 of the 102 sessions that read the
+// unfiltered detailed rules in the 0.3.0 evals called it too, and every later
+// turn sent the 14 rules twice. Detailed leaves them out and names that tool;
+// both foundations stay categories that answer them.
+{
+  const detailed = JSON.parse(
+    await payload("dsaireadable_get_design_rules", {
+      response_format: "detailed",
+    })
+  )
+  const uiText = JSON.parse(await payload("dsaireadable_get_ux_writing_rules"))
+    .rules as Json[]
+  const uiTextSources = ["voice-and-tone", "content"]
+  const categoryAnswers = await Promise.all(
+    uiTextSources.map(async (category) => [
+      JSON.stringify(
+        JSON.parse(await payload("dsaireadable_get_design_rules", { category }))
+          .rules
+      ),
+      JSON.stringify(uiText.filter((r) => r.source === `${category}.md`)),
+    ])
+  )
+  const served = detailed.general_rules.filter((r: Json) =>
+    uiTextSources.includes(r.source.replace(/\.md$/, ""))
+  )
+  assert(
+    served.length === 0 &&
+      detailed.detail.includes("dsaireadable_get_ux_writing_rules") &&
+      uiTextSources.every((f) => detailed.categories.foundations.includes(f)) &&
+      categoryAnswers.every(([answer, rules]) => answer === rules),
+    `dsaireadable_get_design_rules detailed leaves the rules for UI text to dsaireadable_get_ux_writing_rules and names it; voice-and-tone and content stay categories${served.length ? ` (serves ${served.length} of them)` : ""}`
   )
 }
 
