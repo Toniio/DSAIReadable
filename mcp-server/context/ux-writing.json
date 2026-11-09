@@ -485,6 +485,7 @@
       "**MUST** — provide an `AvatarFallback`, shown when the image is missing",
       "**MUST NOT** — use `AvatarBadge` without an `aria-label` that says what it signals",
       "**MUST** — give `AvatarImage` a descriptive `alt`",
+      "**MUST NOT** — put an `aria-label` on a button or link whose content is an `Avatar`: name it with a `sr-only` span next to the avatar, so the name keeps the initials the control shows",
       "**MUST NOT** — show more than 4 avatars in an `AvatarGroup`: beyond that, show the first 3 and put the rest in `AvatarGroupCount`"
     ],
     "Badge": [
@@ -516,7 +517,7 @@
       "**MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look",
       "**MUST NOT** — place more than 2 `variant=\"default\"` (primary) buttons in the same view",
       "**MUST NOT** — convey a state through color alone: add text or a tooltip",
-      "**MUST** — give an `icon-*` button an `aria-label`",
+      "**MUST** — give an `icon-*` button an `aria-label`, except one whose content is an `Avatar`, which takes a `sr-only` span (see `Avatar`)",
       "**MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy=\"true\"` on the button",
       "**MUST NOT** — nest a `<button>` inside another, including through `asChild`"
     ],

@@ -27,6 +27,7 @@ A visual stand-in for a person or an entity — a photo, initials or an icon —
 - **MUST** — provide an `AvatarFallback`, shown when the image is missing
 - **MUST NOT** — use `AvatarBadge` without an `aria-label` that says what it signals
 - **MUST** — give `AvatarImage` a descriptive `alt`
+- **MUST NOT** — put an `aria-label` on a button or link whose content is an `Avatar`: name it with a `sr-only` span next to the avatar, so the name keeps the initials the control shows
 - **MUST NOT** — show more than 4 avatars in an `AvatarGroup`: beyond that, show the first 3 and put the rest in `AvatarGroupCount`
 
 ## Dependencies
@@ -179,6 +180,7 @@ No keyboard interaction of its own.
 
 - When the name is shown next to the avatar, the fallback initials repeat it: hide them with `aria-hidden`.
 - A clickable avatar must be wrapped in a named link or button, not made clickable itself.
+- The initials of `AvatarFallback` are the visible text of that link or button, so its accessible name must contain them (WCAG 2.5.3, Label in Name). An `aria-label` replaces them, and axe reports `label-content-name-mismatch`. Add the name beside the avatar and leave the initials exposed, with no `aria-hidden`: `<Button variant="ghost" size="icon"><Avatar><AvatarFallback>AB</AvatarFallback></Avatar><span className="sr-only">Open account menu</span></Button>` is named "AB Open account menu".
 
 ## Code example
 

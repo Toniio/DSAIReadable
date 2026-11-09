@@ -273,7 +273,7 @@ Collected from `components/ui/dropdown-menu.tsx` and the `lib/` constants it imp
 | `Escape`                        | Closes the menu and returns focus to the trigger    |
 | Typing                          | Moves to the item that starts with the typed letter |
 
-**Accessible name**: The trigger must be named; an icon-only trigger ("…") needs an `aria-label` ("Row actions").
+**Accessible name**: The trigger must be named; an icon-only trigger ("…") needs an `aria-label` ("Row actions"); an `Avatar` trigger takes a `sr-only` span instead, which keeps its initials in the name (see `Avatar`).
 
 **Pitfalls**:
 

@@ -27,7 +27,7 @@ Triggers a primary or secondary action; comes in several visual variants and siz
 - **MUST NOT** — render a `<button>` to navigate to an external site → an `<a href>`, through `asChild` to keep the look
 - **MUST NOT** — place more than 2 `variant="default"` (primary) buttons in the same view
 - **MUST NOT** — convey a state through color alone: add text or a tooltip
-- **MUST** — give an `icon-*` button an `aria-label`
+- **MUST** — give an `icon-*` button an `aria-label`, except one whose content is an `Avatar`, which takes a `sr-only` span (see `Avatar`)
 - **MUST** — show a pending action with a `Spinner` as a child, next to the label, and `aria-busy="true"` on the button
 - **MUST NOT** — nest a `<button>` inside another, including through `asChild`
 
@@ -158,7 +158,7 @@ Collected from `components/ui/button.tsx` and the `lib/` constants it imports. *
 | `Enter` / `Space` | Activates the button            |
 | `Tab`             | Moves focus to the next element |
 
-**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required.
+**Accessible name**: The button text. The `icon`, `icon-xs`, `icon-sm` and `icon-lg` sizes have no visible text: `aria-label` is required. An `Avatar` shows initials, which are visible text: the name goes in a `sr-only` span instead (see `Avatar`).
 
 **Pitfalls**:
 
