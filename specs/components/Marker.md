@@ -40,7 +40,7 @@ A line of muted text that marks an event of a conversation that is neither a mes
 
 - `class-variance-authority` for the `Marker` variants
 - `Slot.Root` from `radix-ui` (used by `Marker` when `asChild={true}`)
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -65,8 +65,8 @@ A line of muted text that marks an event of a conversation that is neither a mes
 | `space.scale.2`                  | `gap-2` · `pb-2`              | `markerVariants.variant.border` · `markerVariants`                   |
 | `space.scale.3-5`                | `size-3.5`                    | `MarkerIcon` · `markerVariants`                                      |
 | `space.scale.4`                  | `min-h-4`                     | `markerVariants`                                                     |
-| `typography.size-line-height.xs` | `text-xs`                     | `markerVariants`                                                     |
-| `typography.size.xs`             | `text-xs`                     | `markerVariants`                                                     |
+| `typography.size-line-height.ui` | `text-ui`                     | `markerVariants`                                                     |
+| `typography.size.ui`             | `text-ui`                     | `markerVariants`                                                     |
 
 Collected from `components/ui/marker.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

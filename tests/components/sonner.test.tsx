@@ -6,6 +6,8 @@ import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/sonner"
 
+import { setTheme } from "../themes"
+
 function Example({ onUndo }: { onUndo?: () => void }) {
   return (
     <>
@@ -60,18 +62,23 @@ describe("Sonner", () => {
     ).toBeTruthy()
   })
 
-  it.each(["light", "dark"])(
-    "a toast is square, like every surface of the system (%s)",
-    async (theme) => {
-      document.documentElement.classList.toggle("dark", theme === "dark")
+  it.each([
+    ["light", "0px"],
+    ["dark", "0px"],
+    ["nova-light", "10px"],
+    ["nova-dark", "10px"],
+  ] as const)(
+    "a toast takes the radius of a control, in the brand (%s)",
+    async (theme, radius) => {
+      setTheme(theme)
       await showToast()
       // Sonner's own unlayered rule reads --border-radius: the Toaster sets it
-      // to radius.none, where it set radius.md (8px) before.
+      // to radius.control, square in lyra and 10px in nova.
       const toastElement = document.querySelector<HTMLElement>(
         "[data-sonner-toast]"
       )!
       expect(toastElement.dataset.styled).toBe("true")
-      expect(getComputedStyle(toastElement).borderRadius).toBe("0px")
+      expect(getComputedStyle(toastElement).borderRadius).toBe(radius)
     }
   )
 
@@ -107,12 +114,16 @@ describe("Sonner", () => {
     expect(onUndo).toHaveBeenCalledTimes(1)
   })
 
-  it("typeface: a toast is set in the page's font, not in sonner's system stack", async () => {
-    await showToast()
-    const toastFont = getComputedStyle(
-      region().querySelector("[data-sonner-toast]")!
-    ).fontFamily
-    expect(toastFont).toBe(getComputedStyle(document.body).fontFamily)
-    expect(toastFont).not.toMatch(/ui-sans-serif/)
-  })
+  it.each(["light", "nova-light"] as const)(
+    "typeface: a toast is set in the page's font, not in sonner's system stack (%s)",
+    async (theme) => {
+      setTheme(theme)
+      await showToast()
+      const toastFont = getComputedStyle(
+        region().querySelector("[data-sonner-toast]")!
+      ).fontFamily
+      expect(toastFont).toBe(getComputedStyle(document.body).fontFamily)
+      expect(toastFont).not.toMatch(/ui-sans-serif/)
+    }
+  )
 })

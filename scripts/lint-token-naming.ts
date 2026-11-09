@@ -25,11 +25,18 @@
  * `fontWeight`), or a `$`-property it does not define (`$private`), is an
  * error — Terrazzo accepts both silently.
  *
- * The dark context (tokens/tokens.resolver.json) is held to the semantic
+ * The theme contexts (tokens/tokens.resolver.json) are held to the semantic
  * tier's rules: each override names an existing semantic token, keeps its
- * `$type`, carries nothing but `$type` and `$value`, and is a `{…}` reference.
+ * `$type`, carries nothing but `$type` and `$value`, and is a `{…}` reference;
+ * one that repeats the value of the layer below it in its chain is an error.
  * A mode left in `$extensions.modes`, the convention the resolver replaced,
  * is an error: no DTCG tool reads it.
+ *
+ * Three more rules hold the brands together. `.nova` beats `.dark` by source
+ * order on `<html class="nova dark">`, so a token both override must say what
+ * it is under both, in tokens/semantic.nova.dark.json. A nova theme resolves
+ * to no violet or mist ramp: those are lyra's. And nova never moves a
+ * breakpoint or a container width, which Tailwind compiles at build time.
  *
  * Exit 1 on any invalid key.
  */
@@ -39,9 +46,9 @@ import path from "path"
 import {
   DTCG_TYPES,
   loadTokens,
-  MODES,
   PRIMITIVE_ROOT,
   primitiveGroups,
+  THEMES,
   type Tokens,
 } from "../mcp-server/src/lib/dtcg.js"
 
@@ -60,6 +67,8 @@ const ENUMS: Record<string, string[]> = {
     "amber",
     "plum",
     "red",
+    "stone",
+    "teal",
     "white-alpha",
     "ink-alpha",
   ],
@@ -98,7 +107,7 @@ const ENUMS: Record<string, string[]> = {
   onSurface: ["default", "on", "foreground"],
   textRole: ["action", "destructive", "success", "warning", "info"],
   /** A surface that belongs to one kind of element: the fill of a form control. */
-  backgroundRole: ["input"],
+  backgroundRole: ["input", "card"],
   borderRole: ["default", "subtle", "input", "focus"],
   /** A filled action other than the primary one, whose states are named. */
   actionRole: ["secondary", "tint"],
@@ -121,6 +130,8 @@ const ENUMS: Record<string, string[]> = {
     "4xl",
     "full",
   ],
+  /** Radii named by what they round: what a brand can change at once. */
+  radiusRole: ["surface", "control", "item", "inset", "mark", "pill"],
   componentSize: ["xs", "sm", "md", "lg", "xl"],
   /** Tailwind's container scale: `max-w-sm`, `w-2xl`. */
   containerSize: [
@@ -166,11 +177,15 @@ const ENUMS: Record<string, string[]> = {
   // Shared across tiers
   durationName: ["instant", "fast", "normal", "slow", "slower", "extra-slow"],
   easingName: ["default", "in", "out", "spring"],
-  fontFamily: ["sans", "mono", "serif"],
+  fontFamily: ["sans", "mono", "serif", "body", "heading"],
+  /** Tier 1 names a font-family by its face. */
+  fontFace: ["sans", "mono", "lora", "dm-sans", "geist-mono"],
   fontWeight: ["normal", "medium", "semibold", "bold"],
   letterSpacing: ["tight", "normal", "wide", "wider", "widest"],
   lineHeight: ["tight", "snug", "normal", "relaxed", "loose"],
   typeScale: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl"],
+  /** Text sizes named by what they set: what a brand can change at once. */
+  typeRole: ["ui", "description", "title", "control"],
 }
 
 // ---------------------------------------------------------------------------
@@ -206,7 +221,6 @@ const PATTERNS: Record<string, { pattern: RegExp; label: string }> = {
 type Grammar = Record<string, string[]>
 
 const TYPOGRAPHY_SHAPES = [
-  "typography.font-family.<fontFamily>",
   "typography.font-weight.<fontWeight>",
   "typography.letter-spacing.<letterSpacing>",
   "typography.line-height.<lineHeight>",
@@ -232,7 +246,7 @@ const PRIMITIVE_GRAMMAR: Grammar = {
     "space.<spaceAlias>",
     "space.container.<containerSize>",
   ],
-  typography: TYPOGRAPHY_SHAPES,
+  typography: [...TYPOGRAPHY_SHAPES, "typography.font-family.<fontFace>"],
   zindex: ["zindex.<zLayer>"],
 }
 
@@ -262,7 +276,7 @@ const SEMANTIC_GRAMMAR: Grammar = {
   elevation: ["elevation.<elevationSize>"],
   motion: MOTION_SHAPES,
   opacity: ["opacity.<opacityRole>"],
-  radius: ["radius.<radiusSize>"],
+  radius: ["radius.<radiusSize>", "radius.<radiusRole>"],
   space: [
     "space.component.<componentSize>",
     "space.scale.<spaceStep>",
@@ -271,7 +285,12 @@ const SEMANTIC_GRAMMAR: Grammar = {
     "space.focus-ring-width",
   ],
   size: ["size.target.min"],
-  typography: TYPOGRAPHY_SHAPES,
+  typography: [
+    ...TYPOGRAPHY_SHAPES,
+    "typography.font-family.<fontFamily>",
+    "typography.size.<typeRole>",
+    "typography.size-line-height.<typeRole>",
+  ],
   zindex: ["zindex.<zLayer>"],
 }
 
@@ -430,7 +449,7 @@ function checkNoExtensionModes(
   if (ext && "modes" in ext)
     errors.push({
       key: prefix || "(root)",
-      reason: `$extensions.modes is not read any more: a mode's value goes in the file its context names in tokens/tokens.resolver.json (dark: tokens/semantic.dark.json).`,
+      reason: `$extensions.modes is not read any more: a theme's value goes in the file its context names in tokens/tokens.resolver.json (dark: tokens/semantic.dark.json).`,
     })
   for (const [key, value] of Object.entries(obj))
     if (!key.startsWith("$") && value && typeof value === "object")
@@ -443,7 +462,16 @@ function checkNoExtensionModes(
   return errors
 }
 
-/** Each override of a mode context redefines the value of a semantic token. */
+/** Ramps that belong to lyra: no nova theme resolves to one of them. */
+const LYRA_RAMPS = /^\{primitive\.color\.(?:violet|mist)\./
+/** What Tailwind compiles at build time: a brand cannot move it per class. */
+const BUILD_TIME_TOKENS = /^(?:breakpoint|space\.container)\./
+
+/**
+ * Each override of a theme context redefines the value of a semantic token,
+ * and changes it: the last source of a context, the one that brings its name,
+ * is compared with what the sources before it leave.
+ */
 function checkOverrides(tokens: Tokens): KeyError[] {
   const semantic = tokens.tiers.semantic.tree
   const errors: KeyError[] = []
@@ -460,14 +488,16 @@ function checkOverrides(tokens: Tokens): KeyError[] {
         }
       : undefined
   }
-  for (const mode of MODES)
-    for (const [key, override] of tokens.overrides[mode]) {
+  for (const theme of THEMES) {
+    const layers = tokens.layers[theme]
+    const below = new Map(layers.slice(0, -1).flatMap((l) => [...l.map]))
+    for (const [key, override] of layers.at(-1)?.map ?? []) {
       const where = `${override.file} → ${key}`
       const target = lookup(key)
       if (!target) {
         errors.push({
           key: where,
-          reason: `The ${mode} context overrides a token tokens/semantic.json does not define. A mode changes the value of a semantic token; it never adds one.`,
+          reason: `The ${theme} context overrides a token tokens/semantic.json does not define. A theme changes the value of a semantic token; it never adds one.`,
         })
         continue
       }
@@ -476,19 +506,64 @@ function checkOverrides(tokens: Tokens): KeyError[] {
           key: where,
           reason: `$type "${String(override.$type)}" differs from the semantic token's "${String(target.$type)}".`,
         })
-      const error = literalError(where, `mode "${mode}"`, override.$value)
+      const error = literalError(where, `theme "${theme}"`, override.$value)
       if (error) errors.push(error)
       if (key.startsWith("color.static."))
         errors.push({
           key: where,
-          reason: `color.static.* never has an override: these colors ignore the mode by definition. Remove it.`,
+          reason: `color.static.* never has an override: these colors ignore the theme by definition. Remove it.`,
         })
       else if (
-        JSON.stringify(override.$value) === JSON.stringify(target.$value)
+        JSON.stringify(override.$value) ===
+        JSON.stringify(below.get(key)?.$value ?? target.$value)
       )
         errors.push({
           key: where,
-          reason: `The ${mode} context repeats the value of tokens/semantic.json. Remove it: the mode already inherits the default value, and a frozen copy diverges when that value changes.`,
+          reason: `The ${theme} context repeats the value of the layer below it. Remove it: the theme already inherits that value, and a frozen copy diverges when it changes.`,
+        })
+    }
+  }
+  return errors
+}
+
+/** The rules that hold the brand's overrides together (see the file's header). */
+function checkBrand(tokens: Tokens): KeyError[] {
+  const errors: KeyError[] = []
+  const [dark, nova, novaDark] = tokens.layers["nova-dark"].map((l) => l.map)
+  for (const key of dark.keys())
+    if (nova.has(key) && !novaDark.has(key))
+      errors.push({
+        key,
+        reason: `The dark and nova contexts both override it, so on <html class="nova dark"> .nova would win with its light value. Add it to tokens/semantic.nova.dark.json.`,
+      })
+  for (const [key, override] of [...nova, ...novaDark])
+    if (BUILD_TIME_TOKENS.test(key))
+      errors.push({
+        key: `${override.file} → ${key}`,
+        reason: `Tailwind compiles this token at build time, so a brand cannot change it under a class.`,
+      })
+  const leaves = (node: Record<string, unknown>, prefix = ""): string[] =>
+    Object.entries(node).flatMap(([key, value]) => {
+      if (key.startsWith("$") || !value || typeof value !== "object") return []
+      const path = prefix ? `${prefix}.${key}` : key
+      return "$value" in value
+        ? [path]
+        : leaves(value as Record<string, unknown>, path)
+    })
+  const valueOf = (path: string) =>
+    path
+      .split(".")
+      .reduce<unknown>(
+        (node, key) => (node as Record<string, unknown>)[key],
+        tokens.tiers.semantic.tree
+      ) as { $value: unknown }
+  for (const theme of ["nova-light", "nova-dark"] as const)
+    for (const path of leaves(tokens.tiers.semantic.tree)) {
+      const value = tokens.override(path, theme) ?? valueOf(path).$value
+      if (typeof value === "string" && LYRA_RAMPS.test(value))
+        errors.push({
+          key: path,
+          reason: `In ${theme} it resolves to ${value}, a ramp that belongs to lyra. Add an override on a ramp of nova's.`,
         })
     }
   return errors
@@ -699,8 +774,8 @@ function main() {
   // The mode contexts of tokens/tokens.resolver.json.
   const tokens = loadTokens(root)
   const overrideFiles = new Set(
-    MODES.flatMap((mode) =>
-      [...tokens.overrides[mode].values()].map((o) => o.file)
+    THEMES.flatMap((theme) =>
+      [...tokens.overrides[theme].values()].map((o) => o.file)
     )
   )
   for (const file of overrideFiles) {
@@ -717,14 +792,15 @@ function main() {
     ]
     totalKeys += keys.length
     totalErrors += errors.length
-    report(file, errors, keys.length, "Tier 2 — mode overrides")
+    report(file, errors, keys.length, "Tier 2 — theme overrides")
   }
-  const overrideErrors = checkOverrides(tokens)
+  const overrideErrors = [...checkOverrides(tokens), ...checkBrand(tokens)]
   totalErrors += overrideErrors.length
-  if (overrideErrors.length > 0) report("mode overrides", overrideErrors, 0, "")
+  if (overrideErrors.length > 0)
+    report("theme overrides", overrideErrors, 0, "")
 
   console.log(
-    `\n📊 Summary: ${totalErrors} error(s) in ${totalKeys} keys across ${tiers.length} tier(s) and ${overrideFiles.size} mode file(s).`
+    `\n📊 Summary: ${totalErrors} error(s) in ${totalKeys} keys across ${tiers.length} tier(s) and ${overrideFiles.size} theme file(s).`
   )
 
   if (totalErrors > 0) {

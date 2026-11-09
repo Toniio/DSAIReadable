@@ -4,6 +4,7 @@ import {
 } from "@/site/lib/foundation-examples"
 import { plain, section, tables } from "@/site/lib/markdown"
 import { readJson, readText } from "@/site/lib/repo"
+import { remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import { tokenByName, tokens } from "@/site/lib/tokens"
 
 const SPEC = "specs/foundations/typography.md"
@@ -42,6 +43,8 @@ export interface TypeRow {
   /** The line height a size sets with it. */
   lineHeight?: string
   usage: string
+  /** What nova changes in this row, when it changes something. */
+  nova?: Partial<Pick<TypeRow, "value" | "detail" | "stack" | "lineHeight">>
 }
 
 export interface HeadingRow {
@@ -104,6 +107,11 @@ function ratio(value: string | undefined): string | undefined {
   return Number.isFinite(number)
     ? String(Math.round(number * 100) / 100)
     : value
+}
+
+/** The first family of a stack: `Lora, serif` → `Lora`. */
+function firstFamily(stack: string): string {
+  return stack.split(",")[0]
 }
 
 /** The Headings table of the spec: each level, its tag and its use. */
@@ -183,18 +191,36 @@ export function typeData(): TypeData {
   const styles = readJson<TextStyles>("mcp-server/context/text-styles.json")
   return {
     styles: textStyles(),
-    families: styles.font_families.map((entry) => ({
-      ...row(entry, entry.family),
-      stack: tokenByName(entry.token)?.value.light,
-    })),
-    scale: styles.type_scale.map((entry) => ({
-      ...row(entry, entry.rem),
-      detail: entry.px,
-      lineHeight: ratio(
-        tokenByName(`typography.size-line-height.${last(entry.token)}`)?.value
-          .light
-      ),
-    })),
+    families: styles.font_families.map((entry) => {
+      const value = tokenByName(entry.token)?.value
+      return {
+        ...row(entry, value ? firstFamily(value.light) : entry.family),
+        stack: value?.light,
+        ...(value?.nova
+          ? { nova: { value: firstFamily(value.nova), stack: value.nova } }
+          : {}),
+      }
+    }),
+    scale: styles.type_scale.map((entry) => {
+      const size = tokenByName(entry.token)?.value
+      const lineHeight = tokenByName(
+        `typography.size-line-height.${last(entry.token)}`
+      )?.value
+      return {
+        ...row(entry, entry.rem),
+        detail: entry.px,
+        lineHeight: ratio(lineHeight?.light),
+        ...(size?.nova
+          ? {
+              nova: {
+                value: size.nova,
+                detail: `${remToPx(size.nova) ?? ""}px`,
+                lineHeight: ratio(lineHeight?.nova ?? lineHeight?.light),
+              },
+            }
+          : {}),
+      }
+    }),
     weights: styles.font_weights.map((entry) => row(entry, entry.value)),
     leading: styles.line_heights.map((entry) => row(entry, entry.value)),
     tracking: styles.letter_spacings.map((entry) => row(entry, entry.value)),

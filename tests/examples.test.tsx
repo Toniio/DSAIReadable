@@ -6,6 +6,7 @@ import index from "@/design-system.index.json"
 
 import { axeViolations } from "./axe"
 import { unmarkedTabStops } from "./focus"
+import { EVERY_THEME_TIMEOUT } from "./themes"
 
 // Enough to cross the largest example, Sidebar, and come back to <body>.
 const MAX_TAB_STOPS = 40
@@ -25,15 +26,23 @@ describe.each(index.inventory.map((component) => component.name))(
       expect(container.firstElementChild).not.toBeNull()
     }
 
-    it("renders its spec example with no axe violation, light and dark", async () => {
-      await renderExample()
-      expect(await axeViolations()).toEqual([])
-    })
+    it(
+      "renders its spec example with no axe violation, in the four themes",
+      async () => {
+        await renderExample()
+        expect(await axeViolations()).toEqual([])
+      },
+      EVERY_THEME_TIMEOUT
+    )
 
-    it("shows a focus indicator on every tab stop of its spec example", async () => {
-      await renderExample()
-      expect(await unmarkedTabStops(MAX_TAB_STOPS)).toEqual([])
-    })
+    it(
+      "shows a focus indicator on every tab stop of its spec example",
+      async () => {
+        await renderExample()
+        expect(await unmarkedTabStops(MAX_TAB_STOPS)).toEqual([])
+      },
+      EVERY_THEME_TIMEOUT
+    )
   }
 )
 
@@ -52,14 +61,22 @@ describe.each(Object.keys(foundationExamples))(
       expect(container.firstElementChild).not.toBeNull()
     }
 
-    it("renders with no axe violation, light and dark", async () => {
-      await renderExample()
-      expect(await axeViolations()).toEqual([])
-    })
+    it(
+      "renders with no axe violation, in the four themes",
+      async () => {
+        await renderExample()
+        expect(await axeViolations()).toEqual([])
+      },
+      EVERY_THEME_TIMEOUT
+    )
 
-    it("shows a focus indicator on every tab stop", async () => {
-      await renderExample()
-      expect(await unmarkedTabStops(MAX_TAB_STOPS)).toEqual([])
-    })
+    it(
+      "shows a focus indicator on every tab stop",
+      async () => {
+        await renderExample()
+        expect(await unmarkedTabStops(MAX_TAB_STOPS)).toEqual([])
+      },
+      EVERY_THEME_TIMEOUT
+    )
   }
 )

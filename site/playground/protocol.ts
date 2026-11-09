@@ -1,3 +1,4 @@
+import { BRANDS, type Brand } from "@/site/lib/brand"
 import type { Args, ForcedState } from "@/site/playground/types"
 
 /**
@@ -41,6 +42,7 @@ export interface FrameState {
   args: Args
   state: ForcedState
   theme: "light" | "dark"
+  brand: Brand
   /** The cells of the grid view. */
   cells?: GridCell[]
   /** The `data-slot` of each anatomy part, numbered from 1. */
@@ -141,6 +143,7 @@ export function parseState(value: unknown): FrameState | undefined {
     args: parseArgs(value.args),
     state: oneOf(value.state, FORCED) ?? "rest",
     theme: value.theme === "dark" ? "dark" : "light",
+    brand: oneOf(value.brand, BRANDS) ?? "lyra",
   }
   if (Array.isArray(value.cells))
     state.cells = value.cells.filter(isRecord).map((cell) => ({

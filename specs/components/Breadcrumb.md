@@ -64,8 +64,8 @@ Secondary navigation that shows the path to the current page, so the user can cl
 | `space.scale.4`                  | `size-4`                | `BreadcrumbEllipsis`                |
 | `space.scale.5`                  | `size-5`                | `BreadcrumbEllipsis`                |
 | `typography.font-weight.normal`  | `font-normal`           | `BreadcrumbPage`                    |
-| `typography.size-line-height.xs` | `text-xs`               | `BreadcrumbList`                    |
-| `typography.size.xs`             | `text-xs`               | `BreadcrumbList`                    |
+| `typography.size-line-height.ui` | `text-ui`               | `BreadcrumbList`                    |
+| `typography.size.ui`             | `text-ui`               | `BreadcrumbList`                    |
 
 Collected from `components/ui/breadcrumb.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

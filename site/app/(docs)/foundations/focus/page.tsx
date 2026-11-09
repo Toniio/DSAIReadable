@@ -22,12 +22,15 @@ import {
 } from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
 import {
-  darkValue,
+  darkIn,
+  differsInNova,
+  lightIn,
   tailwindClasses,
   tokenByName,
   type Token,
 } from "@/site/lib/tokens"
 import { DocSection } from "@/site/ui/doc-section"
+import { InBrand } from "@/site/ui/in-brand"
 import { InlineMarkdown } from "@/site/ui/markdown"
 
 const ENTRY = foundation("focus")
@@ -160,10 +163,21 @@ export default function FocusPage() {
                   </span>
                 </TableCell>
                 <TableCell className="align-top">
-                  <Value entry={entry} value={entry.value.light} />
+                  <InBrand differs={differsInNova(entry.value)}>
+                    {(brand) => (
+                      <Value
+                        entry={entry}
+                        value={lightIn(entry.value, brand)}
+                      />
+                    )}
+                  </InBrand>
                 </TableCell>
                 <TableCell className="align-top">
-                  <Value entry={entry} value={darkValue(entry)} />
+                  <InBrand differs={differsInNova(entry.value)}>
+                    {(brand) => (
+                      <Value entry={entry} value={darkIn(entry.value, brand)} />
+                    )}
+                  </InBrand>
                 </TableCell>
                 <TableCell className="align-top whitespace-normal">
                   <ClassList classes={classesFor(entry)} />

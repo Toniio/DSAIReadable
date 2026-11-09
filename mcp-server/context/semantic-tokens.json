@@ -4,6 +4,8 @@
     "css_var": "--color-background-default",
     "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.stone.950}",
     "type": "color",
     "status": "active",
     "usage": "Main page/app surface. Not for cards, popovers, or elevated layers."
@@ -13,15 +15,30 @@
     "css_var": "--color-background-subtle",
     "light": "{primitive.color.mist.100}",
     "dark": "{primitive.color.mist.800}",
+    "nova_light": "{primitive.color.stone.100}",
+    "nova_dark": "{primitive.color.stone.800}",
     "type": "color",
     "status": "active",
-    "usage": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface."
+    "usage": "Recessed or secondary surface (muted areas, secondary). Cards read color.background.card. Not for the main page surface."
+  },
+  {
+    "path": "color.background.card",
+    "css_var": "--color-background-card",
+    "light": "{primitive.color.mist.100}",
+    "dark": "{primitive.color.mist.800}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.stone.900}",
+    "type": "color",
+    "status": "active",
+    "usage": "Surface of a card. Equal to color.background.subtle in lyra; a brand may set it apart from the muted surfaces."
   },
   {
     "path": "color.background.elevated",
     "css_var": "--color-background-elevated",
     "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.900}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.stone.900}",
     "type": "color",
     "status": "active",
     "usage": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces."
@@ -31,6 +48,8 @@
     "css_var": "--color-background-input",
     "light": "{primitive.color.mist.200}",
     "dark": "{primitive.color.white-alpha.15}",
+    "nova_light": "{primitive.color.stone.200}",
+    "nova_dark": "{primitive.color.white-alpha.15}",
     "type": "color",
     "status": "active",
     "usage": "The fill of a form control: the translucent background of a field in dark mode, of a disabled field, and of a hovered outline control. Not for a control's border, which is color.border.input."
@@ -40,6 +59,8 @@
     "css_var": "--color-background-inverse",
     "light": "{primitive.color.mist.950}",
     "dark": "{primitive.color.white}",
+    "nova_light": "{primitive.color.stone.950}",
+    "nova_dark": "{primitive.color.white}",
     "type": "color",
     "status": "reserved",
     "usage": "Inverted surface for contrast callouts. Not for general-purpose backgrounds."
@@ -49,6 +70,8 @@
     "css_var": "--color-overlay-hover",
     "light": "{primitive.color.ink-alpha.5}",
     "dark": "{primitive.color.white-alpha.8}",
+    "nova_light": "{primitive.color.ink-alpha.5}",
+    "nova_dark": "{primitive.color.white-alpha.8}",
     "type": "color",
     "status": "active",
     "usage": "The translucent veil of a neutral element under the pointer (a table row, a choice card, a ghost or outline control in dark): ink at 5% in light, white at 8% in dark, so it shows on the page, a card and a popover alike. At most 8%: a stronger veil puts the subtle text it carries under 4.5:1 on the card. Not for a role-colored fill, which has its own hover token."
@@ -58,6 +81,8 @@
     "css_var": "--color-overlay-active",
     "light": "{primitive.color.ink-alpha.7}",
     "dark": "{primitive.color.white-alpha.8}",
+    "nova_light": "{primitive.color.ink-alpha.7}",
+    "nova_dark": "{primitive.color.white-alpha.8}",
     "type": "color",
     "status": "reserved",
     "usage": "The veil of a neutral element while pressed: ink at 7% in light, white at 8% in dark, the most a veil takes before the subtle text it carries falls under 4.5:1 on the card. Reserved: shadcn/ui draws no pressed state, so no component reads it yet."
@@ -67,6 +92,8 @@
     "css_var": "--color-overlay-selected",
     "light": "{primitive.color.ink-alpha.7}",
     "dark": "{primitive.color.white-alpha.8}",
+    "nova_light": "{primitive.color.ink-alpha.7}",
+    "nova_dark": "{primitive.color.white-alpha.8}",
     "type": "color",
     "status": "active",
     "usage": "The veil of a neutral element that is open, expanded or current: an open NavigationMenu trigger, the current NavigationMenu link, an expanded table row, the active tab in dark. Ink at 7% in light, a step over color.overlay.hover; white at 8% in dark, as hover, the most a veil takes before the subtle text it carries falls under 4.5:1 on the card. Not for a checked choice, which takes color.action.background.selected."
@@ -76,6 +103,8 @@
     "css_var": "--color-text-default",
     "light": "{primitive.color.mist.950}",
     "dark": "{primitive.color.mist.50}",
+    "nova_light": "{primitive.color.stone.950}",
+    "nova_dark": "{primitive.color.stone.50}",
     "type": "color",
     "status": "active",
     "usage": "Primary body and heading text. Not for secondary, placeholder, or disabled text."
@@ -85,6 +114,8 @@
     "css_var": "--color-text-subtle",
     "light": "{primitive.color.mist.600}",
     "dark": "{primitive.color.mist.400}",
+    "nova_light": "{primitive.color.stone.600}",
+    "nova_dark": "{primitive.color.stone.400}",
     "type": "color",
     "status": "active",
     "usage": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content."
@@ -94,6 +125,8 @@
     "css_var": "--color-text-bold",
     "light": "{primitive.color.mist.950}",
     "dark": "{primitive.color.mist.50}",
+    "nova_light": "{primitive.color.stone.950}",
+    "nova_dark": "{primitive.color.stone.50}",
     "type": "color",
     "status": "reserved",
     "usage": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text."
@@ -103,6 +136,8 @@
     "css_var": "--color-text-inverse",
     "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.stone.950}",
     "type": "color",
     "status": "reserved",
     "usage": "Text on top of inverse (dark) surfaces. Not for default surface text."
@@ -112,6 +147,8 @@
     "css_var": "--color-text-action-default",
     "light": "{primitive.color.violet.600}",
     "dark": "{primitive.color.violet.300}",
+    "nova_light": "{primitive.color.stone.900}",
+    "nova_dark": "{primitive.color.stone.200}",
     "type": "color",
     "status": "active",
     "usage": "Text conveying a primary action (links, active button labels). Not for generic body text."
@@ -121,6 +158,8 @@
     "css_var": "--color-text-action-on",
     "light": "{primitive.color.violet.50}",
     "dark": "{primitive.color.violet.50}",
+    "nova_light": "{primitive.color.stone.50}",
+    "nova_dark": "{primitive.color.stone.900}",
     "type": "color",
     "status": "reserved",
     "usage": "Text rendered on top of a primary action background. Not for text on neutral surfaces."
@@ -130,6 +169,8 @@
     "css_var": "--color-text-destructive-default",
     "light": "{primitive.color.red.700}",
     "dark": "{primitive.color.red.300}",
+    "nova_light": "{primitive.color.red.700}",
+    "nova_dark": "{primitive.color.red.300}",
     "type": "color",
     "status": "active",
     "usage": "Error, danger, or destructive action text and icons, on a neutral surface or on a destructive tint. Not for general warning or informational text."
@@ -139,6 +180,8 @@
     "css_var": "--color-text-success-default",
     "light": "{primitive.color.emerald.700}",
     "dark": "{primitive.color.emerald.300}",
+    "nova_light": "{primitive.color.emerald.700}",
+    "nova_dark": "{primitive.color.emerald.300}",
     "type": "color",
     "status": "active",
     "usage": "Success text and icons, on a neutral surface or on a success tint. Not for warnings, errors or neutral information."
@@ -148,6 +191,8 @@
     "css_var": "--color-text-warning-default",
     "light": "{primitive.color.amber.600}",
     "dark": "{primitive.color.amber.300}",
+    "nova_light": "{primitive.color.amber.600}",
+    "nova_dark": "{primitive.color.amber.300}",
     "type": "color",
     "status": "active",
     "usage": "Warning text and icons, on a neutral surface or on a warning tint. Not for errors, successes or neutral information."
@@ -157,6 +202,8 @@
     "css_var": "--color-text-info-default",
     "light": "{primitive.color.blue.700}",
     "dark": "{primitive.color.blue.300}",
+    "nova_light": "{primitive.color.blue.700}",
+    "nova_dark": "{primitive.color.blue.300}",
     "type": "color",
     "status": "active",
     "usage": "Info text and icons, on a neutral surface or on an info tint. Not for success, warnings or errors."
@@ -166,6 +213,8 @@
     "css_var": "--color-border-default",
     "light": "{primitive.color.mist.200}",
     "dark": "{primitive.color.white-alpha.10}",
+    "nova_light": "{primitive.color.stone.200}",
+    "nova_dark": "{primitive.color.white-alpha.10}",
     "type": "color",
     "status": "active",
     "usage": "Standard dividers and component outlines. Not for input fields or focus rings."
@@ -175,6 +224,8 @@
     "css_var": "--color-border-subtle",
     "light": "{primitive.color.mist.200}",
     "dark": "{primitive.color.white-alpha.10}",
+    "nova_light": "{primitive.color.stone.200}",
+    "nova_dark": "{primitive.color.white-alpha.10}",
     "type": "color",
     "status": "reserved",
     "usage": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders."
@@ -184,6 +235,8 @@
     "css_var": "--color-border-input",
     "light": "{primitive.color.mist.500}",
     "dark": "{primitive.color.mist.500}",
+    "nova_light": "{primitive.color.stone.500}",
+    "nova_dark": "{primitive.color.stone.500}",
     "type": "color",
     "status": "active",
     "usage": "The boundary of a form control: the border of a field, checkbox or radio and the track of an unchecked switch, at 3:1 or more on the page, the card and the popover in both modes (WCAG 1.4.11). Not for a field's fill, nor for decorative dividers or layout borders."
@@ -193,6 +246,8 @@
     "css_var": "--color-border-focus",
     "light": "{primitive.color.mist.800}",
     "dark": "{primitive.color.mist.200}",
+    "nova_light": "{primitive.color.stone.800}",
+    "nova_dark": "{primitive.color.stone.200}",
     "type": "color",
     "status": "active",
     "usage": "Focus ring outline for keyboard accessibility. Darker than the resting border of a control in light and lighter in dark, by 3:1 or more in both modes, so a focused field never reads as a resting one; the solid part of an indicator keeps 3:1 on every surface and on a field's fill. Not for resting or hover states."
@@ -202,6 +257,8 @@
     "css_var": "--color-icon-default",
     "light": "{primitive.color.mist.950}",
     "dark": "{primitive.color.mist.50}",
+    "nova_light": "{primitive.color.stone.950}",
+    "nova_dark": "{primitive.color.stone.50}",
     "type": "color",
     "status": "reserved",
     "usage": "Standard icon fill. Not for icons in branded or destructive contexts."
@@ -211,6 +268,8 @@
     "css_var": "--color-icon-subtle",
     "light": "{primitive.color.mist.500}",
     "dark": "{primitive.color.mist.400}",
+    "nova_light": "{primitive.color.stone.500}",
+    "nova_dark": "{primitive.color.stone.400}",
     "type": "color",
     "status": "reserved",
     "usage": "Muted/secondary icon fill. Not for primary interactive icons."
@@ -220,6 +279,8 @@
     "css_var": "--color-icon-action",
     "light": "{primitive.color.violet.50}",
     "dark": "{primitive.color.violet.50}",
+    "nova_light": "{primitive.color.stone.50}",
+    "nova_dark": "{primitive.color.stone.900}",
     "type": "color",
     "status": "reserved",
     "usage": "Icon on a primary action background. Not for icons on neutral surfaces."
@@ -229,6 +290,8 @@
     "css_var": "--color-action-background-default",
     "light": "{primitive.color.violet.600}",
     "dark": "{primitive.color.violet.700}",
+    "nova_light": "{primitive.color.stone.900}",
+    "nova_dark": "{primitive.color.stone.200}",
     "type": "color",
     "status": "active",
     "usage": "Primary call-to-action button/element background. Not for secondary or ghost variants."
@@ -238,6 +301,8 @@
     "css_var": "--color-action-background-foreground",
     "light": "{primitive.color.violet.50}",
     "dark": "{primitive.color.violet.50}",
+    "nova_light": "{primitive.color.stone.50}",
+    "nova_dark": "{primitive.color.stone.900}",
     "type": "color",
     "status": "active",
     "usage": "Text or icon on top of a primary action background. Not for text on neutral surfaces."
@@ -247,6 +312,8 @@
     "css_var": "--color-action-background-hover",
     "light": "{primitive.color.violet.700}",
     "dark": "{primitive.color.violet.600}",
+    "nova_light": "{primitive.color.stone.800}",
+    "nova_dark": "{primitive.color.stone.300}",
     "type": "color",
     "status": "active",
     "usage": "The primary action fill under the pointer: one step darker in light, one step lighter in dark, so color.action.background.foreground keeps 4.5:1 or more. Not for a resting or a selected element."
@@ -256,6 +323,8 @@
     "css_var": "--color-action-background-active",
     "light": "{primitive.color.violet.800}",
     "dark": "{primitive.color.violet.800}",
+    "nova_light": "{primitive.color.stone.700}",
+    "nova_dark": "{primitive.color.stone.400}",
     "type": "color",
     "status": "reserved",
     "usage": "The primary action fill while pressed: darker than its rest and hover steps in both modes. Reserved: shadcn/ui draws no pressed state, so no component reads it yet; a pressed fill takes this token, never an opacity."
@@ -265,6 +334,8 @@
     "css_var": "--color-action-background-selected",
     "light": "{primitive.color.violet.50}",
     "dark": "{primitive.color.violet.950}",
+    "nova_light": "{primitive.color.stone.100}",
+    "nova_dark": "{primitive.color.stone.900}",
     "type": "color",
     "status": "active",
     "usage": "The brand-tinted surface of a selected choice: a choice card (FieldLabel wrapping a Field) whose control is checked. Not for a hover, nor for a solid primary fill."
@@ -274,6 +345,8 @@
     "css_var": "--color-action-secondary-hover",
     "light": "{primitive.color.mist.200}",
     "dark": "{primitive.color.mist.700}",
+    "nova_light": "{primitive.color.stone.200}",
+    "nova_dark": "{primitive.color.stone.700}",
     "type": "color",
     "status": "active",
     "usage": "The secondary fill (bg-secondary, bg-muted) under the pointer: one step darker in light, one step lighter in dark, visible on a card that shares the resting fill. Not for a neutral element with no fill of its own, which takes color.overlay.hover."
@@ -283,6 +356,8 @@
     "css_var": "--color-action-secondary-active",
     "light": "{primitive.color.mist.300}",
     "dark": "{primitive.color.mist.600}",
+    "nova_light": "{primitive.color.stone.300}",
+    "nova_dark": "{primitive.color.stone.600}",
     "type": "color",
     "status": "reserved",
     "usage": "The secondary fill while pressed: two steps from its rest. Reserved: shadcn/ui draws no pressed state, so no component reads it yet."
@@ -292,6 +367,8 @@
     "css_var": "--color-action-tint-hover",
     "light": "{primitive.color.violet.200}",
     "dark": "{primitive.color.violet.700}",
+    "nova_light": "{primitive.color.stone.200}",
+    "nova_dark": "{primitive.color.stone.700}",
     "type": "color",
     "status": "active",
     "usage": "A primary tint (bg-primary/10 at rest) under the pointer: the tinted Bubble that is a button or a link. Its text is color.text.default, at 4.5:1 or more. Not for the solid primary fill, which takes color.action.background.hover."
@@ -301,6 +378,8 @@
     "css_var": "--color-feedback-error-default",
     "light": "{primitive.color.red.500}",
     "dark": "{primitive.color.red.400}",
+    "nova_light": "{primitive.color.red.500}",
+    "nova_dark": "{primitive.color.red.400}",
     "type": "color",
     "status": "active",
     "usage": "Error state color for backgrounds, tints and borders. Not for text, warnings or success states."
@@ -310,6 +389,8 @@
     "css_var": "--color-feedback-error-foreground",
     "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.stone.950}",
     "type": "color",
     "status": "active",
     "usage": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface."
@@ -319,6 +400,8 @@
     "css_var": "--color-feedback-error-hover",
     "light": "{primitive.color.red.200}",
     "dark": "{primitive.color.red.700}",
+    "nova_light": "{primitive.color.red.200}",
+    "nova_dark": "{primitive.color.red.700}",
     "type": "color",
     "status": "active",
     "usage": "A error tint (bg-destructive/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.destructive.default keeps 4.5:1 or more on it. Not for a resting tint."
@@ -328,6 +411,8 @@
     "css_var": "--color-feedback-error-active",
     "light": "{primitive.color.red.300}",
     "dark": "{primitive.color.red.800}",
+    "nova_light": "{primitive.color.red.300}",
+    "nova_dark": "{primitive.color.red.800}",
     "type": "color",
     "status": "reserved",
     "usage": "A destructive tint while pressed. Reserved: shadcn/ui draws no pressed state, so no component reads it yet."
@@ -337,6 +422,8 @@
     "css_var": "--color-feedback-success-default",
     "light": "{primitive.color.emerald.600}",
     "dark": "{primitive.color.emerald.400}",
+    "nova_light": "{primitive.color.emerald.600}",
+    "nova_dark": "{primitive.color.emerald.400}",
     "type": "color",
     "status": "active",
     "usage": "Success state color for backgrounds, tints and borders. Not for text, warnings or errors."
@@ -346,6 +433,8 @@
     "css_var": "--color-feedback-success-foreground",
     "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.stone.950}",
     "type": "color",
     "status": "active",
     "usage": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface."
@@ -355,6 +444,8 @@
     "css_var": "--color-feedback-success-hover",
     "light": "{primitive.color.emerald.200}",
     "dark": "{primitive.color.emerald.700}",
+    "nova_light": "{primitive.color.emerald.200}",
+    "nova_dark": "{primitive.color.emerald.700}",
     "type": "color",
     "status": "active",
     "usage": "A success tint (bg-success/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.success.default keeps 4.5:1 or more on it. Not for a resting tint."
@@ -364,6 +455,8 @@
     "css_var": "--color-feedback-warning-default",
     "light": "{primitive.color.amber.400}",
     "dark": "{primitive.color.amber.300}",
+    "nova_light": "{primitive.color.amber.400}",
+    "nova_dark": "{primitive.color.amber.300}",
     "type": "color",
     "status": "active",
     "usage": "Warning state color for backgrounds and tints. Not for text, borders or icons, not for errors or successes."
@@ -373,6 +466,8 @@
     "css_var": "--color-feedback-warning-foreground",
     "light": "{primitive.color.mist.950}",
     "dark": "{primitive.color.mist.950}",
+    "nova_light": "{primitive.color.stone.950}",
+    "nova_dark": "{primitive.color.stone.950}",
     "type": "color",
     "status": "active",
     "usage": "Text and icons placed on color.feedback.warning.default, dark in both modes. Never use white on a warning surface."
@@ -382,6 +477,8 @@
     "css_var": "--color-feedback-warning-hover",
     "light": "{primitive.color.amber.200}",
     "dark": "{primitive.color.amber.700}",
+    "nova_light": "{primitive.color.amber.200}",
+    "nova_dark": "{primitive.color.amber.700}",
     "type": "color",
     "status": "active",
     "usage": "A warning tint (bg-warning/10 at rest) under the pointer or highlighted: step 200 in light, 700 in dark, so color.text.warning.default keeps 4.5:1 or more on it. Not for a resting tint."
@@ -391,6 +488,8 @@
     "css_var": "--color-feedback-info-default",
     "light": "{primitive.color.blue.600}",
     "dark": "{primitive.color.blue.400}",
+    "nova_light": "{primitive.color.blue.600}",
+    "nova_dark": "{primitive.color.blue.400}",
     "type": "color",
     "status": "active",
     "usage": "Info state color for backgrounds, tints and borders: neutral information that needs no action. Not for text, success, warning or errors."
@@ -400,6 +499,8 @@
     "css_var": "--color-feedback-info-foreground",
     "light": "{primitive.color.white}",
     "dark": "{primitive.color.mist.950}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.stone.950}",
     "type": "color",
     "status": "reserved",
     "usage": "Text and icons placed on color.feedback.info.default. Reserved: no component draws a solid info surface yet."
@@ -409,6 +510,8 @@
     "css_var": "--color-feedback-info-hover",
     "light": "{primitive.color.blue.200}",
     "dark": "{primitive.color.blue.700}",
+    "nova_light": "{primitive.color.blue.200}",
+    "nova_dark": "{primitive.color.blue.700}",
     "type": "color",
     "status": "active",
     "usage": "An info tint (bg-info/10 at rest) under the pointer: step 200 in light, 700 in dark, so color.text.info.default keeps 4.5:1 or more on it. Not for a resting tint."
@@ -418,15 +521,19 @@
     "css_var": "--color-chart-1",
     "light": "{primitive.color.violet.700}",
     "dark": "{primitive.color.violet.500}",
+    "nova_light": "{primitive.color.teal.800}",
+    "nova_dark": "{primitive.color.teal.400}",
     "type": "color",
     "status": "active",
-    "usage": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+    "usage": "Categorical chart Series 1 — the lead hue of the brand: violet in lyra, teal in nova. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
   },
   {
     "path": "color.chart.2",
     "css_var": "--color-chart-2",
     "light": "{primitive.color.blue.500}",
     "dark": "{primitive.color.blue.400}",
+    "nova_light": "{primitive.color.blue.500}",
+    "nova_dark": "{primitive.color.blue.500}",
     "type": "color",
     "status": "active",
     "usage": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
@@ -436,15 +543,19 @@
     "css_var": "--color-chart-3",
     "light": "{primitive.color.amber.500}",
     "dark": "{primitive.color.yellow.300}",
+    "nova_light": "{primitive.color.yellow.500}",
+    "nova_dark": "{primitive.color.yellow.300}",
     "type": "color",
     "status": "active",
-    "usage": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+    "usage": "Categorical chart Series 3 — ochre in lyra, olive in nova, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
   },
   {
     "path": "color.chart.4",
     "css_var": "--color-chart-4",
     "light": "{primitive.color.plum.800}",
     "dark": "{primitive.color.plum.200}",
+    "nova_light": "{primitive.color.plum.700}",
+    "nova_dark": "{primitive.color.plum.200}",
     "type": "color",
     "status": "active",
     "usage": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
@@ -454,15 +565,19 @@
     "css_var": "--color-chart-5",
     "light": "{primitive.color.amber.700}",
     "dark": "{primitive.color.amber.500}",
+    "nova_light": "{primitive.color.green.700}",
+    "nova_dark": "{primitive.color.amber.500}",
     "type": "color",
     "status": "active",
-    "usage": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
+    "usage": "Categorical chart Series 5 — brown in lyra, green in nova, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*."
   },
   {
     "path": "color.chart.sequential.1",
     "css_var": "--color-chart-sequential-1",
     "light": "{primitive.color.green.200}",
     "dark": "{primitive.color.green.200}",
+    "nova_light": "{primitive.color.teal.200}",
+    "nova_dark": "{primitive.color.teal.200}",
     "type": "color",
     "status": "reserved",
     "usage": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
@@ -472,6 +587,8 @@
     "css_var": "--color-chart-sequential-2",
     "light": "{primitive.color.green.300}",
     "dark": "{primitive.color.green.300}",
+    "nova_light": "{primitive.color.teal.300}",
+    "nova_dark": "{primitive.color.teal.300}",
     "type": "color",
     "status": "reserved",
     "usage": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
@@ -481,6 +598,8 @@
     "css_var": "--color-chart-sequential-3",
     "light": "{primitive.color.green.400}",
     "dark": "{primitive.color.green.400}",
+    "nova_light": "{primitive.color.teal.400}",
+    "nova_dark": "{primitive.color.teal.400}",
     "type": "color",
     "status": "reserved",
     "usage": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
@@ -490,6 +609,8 @@
     "css_var": "--color-chart-sequential-4",
     "light": "{primitive.color.green.500}",
     "dark": "{primitive.color.green.500}",
+    "nova_light": "{primitive.color.teal.500}",
+    "nova_dark": "{primitive.color.teal.500}",
     "type": "color",
     "status": "reserved",
     "usage": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
@@ -499,6 +620,8 @@
     "css_var": "--color-chart-sequential-5",
     "light": "{primitive.color.green.600}",
     "dark": "{primitive.color.green.600}",
+    "nova_light": "{primitive.color.teal.600}",
+    "nova_dark": "{primitive.color.teal.600}",
     "type": "color",
     "status": "reserved",
     "usage": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart."
@@ -508,6 +631,8 @@
     "css_var": "--color-sidebar-background",
     "light": "{primitive.color.mist.50}",
     "dark": "{primitive.color.mist.900}",
+    "nova_light": "{primitive.color.stone.50}",
+    "nova_dark": "{primitive.color.stone.900}",
     "type": "color",
     "status": "active",
     "usage": "Sidebar panel surface. Not for the main content area or popovers."
@@ -517,6 +642,8 @@
     "css_var": "--color-sidebar-foreground",
     "light": "{primitive.color.mist.950}",
     "dark": "{primitive.color.mist.50}",
+    "nova_light": "{primitive.color.stone.950}",
+    "nova_dark": "{primitive.color.stone.50}",
     "type": "color",
     "status": "active",
     "usage": "Default text and icon color within the sidebar. Not for sidebar accent or muted items."
@@ -526,6 +653,8 @@
     "css_var": "--color-sidebar-border",
     "light": "{primitive.color.mist.200}",
     "dark": "{primitive.color.white-alpha.10}",
+    "nova_light": "{primitive.color.stone.200}",
+    "nova_dark": "{primitive.color.white-alpha.10}",
     "type": "color",
     "status": "active",
     "usage": "Sidebar internal divider/border. Not for content-area borders."
@@ -535,6 +664,8 @@
     "css_var": "--color-sidebar-ring",
     "light": "{primitive.color.mist.500}",
     "dark": "{primitive.color.mist.500}",
+    "nova_light": "{primitive.color.stone.500}",
+    "nova_dark": "{primitive.color.stone.500}",
     "type": "color",
     "status": "active",
     "usage": "Focus ring within the sidebar. Not for main content focus rings."
@@ -544,6 +675,8 @@
     "css_var": "--color-sidebar-primary-default",
     "light": "{primitive.color.violet.600}",
     "dark": "{primitive.color.violet.600}",
+    "nova_light": "{primitive.color.stone.900}",
+    "nova_dark": "{primitive.color.stone.200}",
     "type": "color",
     "status": "active",
     "usage": "Active/primary nav item background in the sidebar. Not for generic sidebar items."
@@ -553,6 +686,8 @@
     "css_var": "--color-sidebar-primary-on",
     "light": "{primitive.color.violet.50}",
     "dark": "{primitive.color.white}",
+    "nova_light": "{primitive.color.stone.50}",
+    "nova_dark": "{primitive.color.stone.900}",
     "type": "color",
     "status": "active",
     "usage": "Text on top of the sidebar primary active item. Not for inactive item text."
@@ -562,6 +697,8 @@
     "css_var": "--color-sidebar-accent-default",
     "light": "{primitive.color.mist.100}",
     "dark": "{primitive.color.mist.800}",
+    "nova_light": "{primitive.color.stone.100}",
+    "nova_dark": "{primitive.color.stone.800}",
     "type": "color",
     "status": "active",
     "usage": "Hovered or secondary sidebar item background. Not for the active primary item."
@@ -571,6 +708,8 @@
     "css_var": "--color-sidebar-accent-foreground",
     "light": "{primitive.color.mist.900}",
     "dark": "{primitive.color.mist.50}",
+    "nova_light": "{primitive.color.stone.900}",
+    "nova_dark": "{primitive.color.stone.50}",
     "type": "color",
     "status": "active",
     "usage": "Text on sidebar accent (hover) surfaces. Not for primary active item text."
@@ -580,6 +719,8 @@
     "css_var": "--color-static-white",
     "light": "{primitive.color.white}",
     "dark": "{primitive.color.white}",
+    "nova_light": "{primitive.color.white}",
+    "nova_dark": "{primitive.color.white}",
     "type": "color",
     "status": "active",
     "usage": "White that stays white in both modes: a slider thumb, text on a photo. Not for surfaces — use color.background.* so dark mode applies."
@@ -589,6 +730,8 @@
     "css_var": "--color-static-black",
     "light": "{primitive.color.black}",
     "dark": "{primitive.color.black}",
+    "nova_light": "{primitive.color.black}",
+    "nova_dark": "{primitive.color.black}",
     "type": "color",
     "status": "active",
     "usage": "Black that stays black in both modes, used with an opacity modifier for scrims behind modals (bg-black/10). Not for text or surfaces."
@@ -598,6 +741,8 @@
     "css_var": "--space-component-xs",
     "light": "{primitive.space.1}",
     "dark": "{primitive.space.1}",
+    "nova_light": "{primitive.space.1}",
+    "nova_dark": "{primitive.space.1}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Extra-small component padding/gap (4px). Not for layout or section spacing."
@@ -607,6 +752,8 @@
     "css_var": "--space-component-sm",
     "light": "{primitive.space.2}",
     "dark": "{primitive.space.2}",
+    "nova_light": "{primitive.space.2}",
+    "nova_dark": "{primitive.space.2}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Small component padding/gap (8px). Not for layout or section spacing."
@@ -616,6 +763,8 @@
     "css_var": "--space-component-md",
     "light": "{primitive.space.4}",
     "dark": "{primitive.space.4}",
+    "nova_light": "{primitive.space.4}",
+    "nova_dark": "{primitive.space.4}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Medium component padding/gap (16px). Not for layout or section spacing."
@@ -625,6 +774,8 @@
     "css_var": "--space-component-lg",
     "light": "{primitive.space.6}",
     "dark": "{primitive.space.6}",
+    "nova_light": "{primitive.space.6}",
+    "nova_dark": "{primitive.space.6}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Large component spacing (24px). Reserved: nothing reads it. DialogContent keeps its viewport gutter through the spacing scale (32px in all, `space.scale.8`). Not for layout or section spacing."
@@ -634,6 +785,8 @@
     "css_var": "--space-component-xl",
     "light": "{primitive.space.8}",
     "dark": "{primitive.space.8}",
+    "nova_light": "{primitive.space.8}",
+    "nova_dark": "{primitive.space.8}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Extra-large component padding/gap (32px). Not for layout or section spacing."
@@ -643,6 +796,8 @@
     "css_var": "--space-scale-0",
     "light": "{primitive.space.0}",
     "dark": "{primitive.space.0}",
+    "nova_light": "{primitive.space.0}",
+    "nova_dark": "{primitive.space.0}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 0 (0px): the `0` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -652,6 +807,8 @@
     "css_var": "--space-scale-1",
     "light": "{primitive.space.1}",
     "dark": "{primitive.space.1}",
+    "nova_light": "{primitive.space.1}",
+    "nova_dark": "{primitive.space.1}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 1 (4px): the `1` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -661,6 +818,8 @@
     "css_var": "--space-scale-2",
     "light": "{primitive.space.2}",
     "dark": "{primitive.space.2}",
+    "nova_light": "{primitive.space.2}",
+    "nova_dark": "{primitive.space.2}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 2 (8px): the `2` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -670,6 +829,8 @@
     "css_var": "--space-scale-3",
     "light": "{primitive.space.3}",
     "dark": "{primitive.space.3}",
+    "nova_light": "{primitive.space.3}",
+    "nova_dark": "{primitive.space.3}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 3 (12px): the `3` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -679,6 +840,8 @@
     "css_var": "--space-scale-4",
     "light": "{primitive.space.4}",
     "dark": "{primitive.space.4}",
+    "nova_light": "{primitive.space.4}",
+    "nova_dark": "{primitive.space.4}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 4 (16px): the `4` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -688,6 +851,8 @@
     "css_var": "--space-scale-5",
     "light": "{primitive.space.5}",
     "dark": "{primitive.space.5}",
+    "nova_light": "{primitive.space.5}",
+    "nova_dark": "{primitive.space.5}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 5 (20px): the `5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -697,6 +862,8 @@
     "css_var": "--space-scale-6",
     "light": "{primitive.space.6}",
     "dark": "{primitive.space.6}",
+    "nova_light": "{primitive.space.6}",
+    "nova_dark": "{primitive.space.6}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 6 (24px): the `6` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -706,6 +873,8 @@
     "css_var": "--space-scale-7",
     "light": "{primitive.space.7}",
     "dark": "{primitive.space.7}",
+    "nova_light": "{primitive.space.7}",
+    "nova_dark": "{primitive.space.7}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 7 (28px): the `7` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -715,6 +884,8 @@
     "css_var": "--space-scale-8",
     "light": "{primitive.space.8}",
     "dark": "{primitive.space.8}",
+    "nova_light": "{primitive.space.8}",
+    "nova_dark": "{primitive.space.8}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 8 (32px): the `8` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -724,6 +895,8 @@
     "css_var": "--space-scale-9",
     "light": "{primitive.space.9}",
     "dark": "{primitive.space.9}",
+    "nova_light": "{primitive.space.9}",
+    "nova_dark": "{primitive.space.9}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 9 (36px): the `9` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -733,6 +906,8 @@
     "css_var": "--space-scale-10",
     "light": "{primitive.space.10}",
     "dark": "{primitive.space.10}",
+    "nova_light": "{primitive.space.10}",
+    "nova_dark": "{primitive.space.10}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 10 (40px): the `10` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -742,6 +917,8 @@
     "css_var": "--space-scale-11",
     "light": "{primitive.space.11}",
     "dark": "{primitive.space.11}",
+    "nova_light": "{primitive.space.11}",
+    "nova_dark": "{primitive.space.11}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 11 (44px): the `11` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -751,6 +928,8 @@
     "css_var": "--space-scale-12",
     "light": "{primitive.space.12}",
     "dark": "{primitive.space.12}",
+    "nova_light": "{primitive.space.12}",
+    "nova_dark": "{primitive.space.12}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 12 (48px): the `12` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -760,6 +939,8 @@
     "css_var": "--space-scale-14",
     "light": "{primitive.space.14}",
     "dark": "{primitive.space.14}",
+    "nova_light": "{primitive.space.14}",
+    "nova_dark": "{primitive.space.14}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 14 (56px): the `14` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -769,6 +950,8 @@
     "css_var": "--space-scale-16",
     "light": "{primitive.space.16}",
     "dark": "{primitive.space.16}",
+    "nova_light": "{primitive.space.16}",
+    "nova_dark": "{primitive.space.16}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 16 (64px): the `16` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -778,6 +961,8 @@
     "css_var": "--space-scale-18",
     "light": "{primitive.space.18}",
     "dark": "{primitive.space.18}",
+    "nova_light": "{primitive.space.18}",
+    "nova_dark": "{primitive.space.18}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 18 (72px): the `18` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the room `Alert` leaves for its action (`pr-18`), as shadcn/ui draws it."
@@ -787,6 +972,8 @@
     "css_var": "--space-scale-20",
     "light": "{primitive.space.20}",
     "dark": "{primitive.space.20}",
+    "nova_light": "{primitive.space.20}",
+    "nova_dark": "{primitive.space.20}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 20 (80px): the `20` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -796,6 +983,8 @@
     "css_var": "--space-scale-24",
     "light": "{primitive.space.24}",
     "dark": "{primitive.space.24}",
+    "nova_light": "{primitive.space.24}",
+    "nova_dark": "{primitive.space.24}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 24 (96px): the `24` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -805,6 +994,8 @@
     "css_var": "--space-scale-28",
     "light": "{primitive.space.28}",
     "dark": "{primitive.space.28}",
+    "nova_light": "{primitive.space.28}",
+    "nova_dark": "{primitive.space.28}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 28 (112px): the `28` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -814,6 +1005,8 @@
     "css_var": "--space-scale-32",
     "light": "{primitive.space.32}",
     "dark": "{primitive.space.32}",
+    "nova_light": "{primitive.space.32}",
+    "nova_dark": "{primitive.space.32}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 32 (128px): the `32` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -823,6 +1016,8 @@
     "css_var": "--space-scale-36",
     "light": "{primitive.space.36}",
     "dark": "{primitive.space.36}",
+    "nova_light": "{primitive.space.36}",
+    "nova_dark": "{primitive.space.36}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 36 (144px): the `36` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -832,6 +1027,8 @@
     "css_var": "--space-scale-40",
     "light": "{primitive.space.40}",
     "dark": "{primitive.space.40}",
+    "nova_light": "{primitive.space.40}",
+    "nova_dark": "{primitive.space.40}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 40 (160px): the `40` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -841,6 +1038,8 @@
     "css_var": "--space-scale-44",
     "light": "{primitive.space.44}",
     "dark": "{primitive.space.44}",
+    "nova_light": "{primitive.space.44}",
+    "nova_dark": "{primitive.space.44}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 44 (176px): the `44` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -850,6 +1049,8 @@
     "css_var": "--space-scale-48",
     "light": "{primitive.space.48}",
     "dark": "{primitive.space.48}",
+    "nova_light": "{primitive.space.48}",
+    "nova_dark": "{primitive.space.48}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 48 (192px): the `48` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -859,6 +1060,8 @@
     "css_var": "--space-scale-52",
     "light": "{primitive.space.52}",
     "dark": "{primitive.space.52}",
+    "nova_light": "{primitive.space.52}",
+    "nova_dark": "{primitive.space.52}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 52 (208px): the `52` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -868,6 +1071,8 @@
     "css_var": "--space-scale-56",
     "light": "{primitive.space.56}",
     "dark": "{primitive.space.56}",
+    "nova_light": "{primitive.space.56}",
+    "nova_dark": "{primitive.space.56}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 56 (224px): the `56` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -877,6 +1082,8 @@
     "css_var": "--space-scale-60",
     "light": "{primitive.space.60}",
     "dark": "{primitive.space.60}",
+    "nova_light": "{primitive.space.60}",
+    "nova_dark": "{primitive.space.60}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 60 (240px): the `60` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -886,6 +1093,8 @@
     "css_var": "--space-scale-64",
     "light": "{primitive.space.64}",
     "dark": "{primitive.space.64}",
+    "nova_light": "{primitive.space.64}",
+    "nova_dark": "{primitive.space.64}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 64 (256px): the `64` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -895,6 +1104,8 @@
     "css_var": "--space-scale-72",
     "light": "{primitive.space.72}",
     "dark": "{primitive.space.72}",
+    "nova_light": "{primitive.space.72}",
+    "nova_dark": "{primitive.space.72}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 72 (288px): the `72` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -904,6 +1115,8 @@
     "css_var": "--space-scale-80",
     "light": "{primitive.space.80}",
     "dark": "{primitive.space.80}",
+    "nova_light": "{primitive.space.80}",
+    "nova_dark": "{primitive.space.80}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 80 (320px): the `80` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -913,6 +1126,8 @@
     "css_var": "--space-scale-96",
     "light": "{primitive.space.96}",
     "dark": "{primitive.space.96}",
+    "nova_light": "{primitive.space.96}",
+    "nova_dark": "{primitive.space.96}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 96 (384px): the `96` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -922,6 +1137,8 @@
     "css_var": "--space-scale-0-5",
     "light": "{primitive.space.0-5}",
     "dark": "{primitive.space.0-5}",
+    "nova_light": "{primitive.space.0-5}",
+    "nova_dark": "{primitive.space.0-5}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 0.5 (2px): the `0.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -931,6 +1148,8 @@
     "css_var": "--space-scale-1-25",
     "light": "{primitive.space.1-25}",
     "dark": "{primitive.space.1-25}",
+    "nova_light": "{primitive.space.1-25}",
+    "nova_dark": "{primitive.space.1-25}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 1.25 (5px): the `1.25` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the close button of `Alert` (`top-1.25 right-1.25`), as shadcn/ui draws it."
@@ -940,6 +1159,8 @@
     "css_var": "--space-scale-1-5",
     "light": "{primitive.space.1-5}",
     "dark": "{primitive.space.1-5}",
+    "nova_light": "{primitive.space.1-5}",
+    "nova_dark": "{primitive.space.1-5}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 1.5 (6px): the `1.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -949,6 +1170,8 @@
     "css_var": "--space-scale-2-5",
     "light": "{primitive.space.2-5}",
     "dark": "{primitive.space.2-5}",
+    "nova_light": "{primitive.space.2-5}",
+    "nova_dark": "{primitive.space.2-5}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 2.5 (10px): the `2.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -958,6 +1181,8 @@
     "css_var": "--space-scale-3-5",
     "light": "{primitive.space.3-5}",
     "dark": "{primitive.space.3-5}",
+    "nova_light": "{primitive.space.3-5}",
+    "nova_dark": "{primitive.space.3-5}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 3.5 (14px): the `3.5` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes."
@@ -967,6 +1192,8 @@
     "css_var": "--space-scale-5-25",
     "light": "{primitive.space.5-25}",
     "dark": "{primitive.space.5-25}",
+    "nova_light": "{primitive.space.5-25}",
+    "nova_dark": "{primitive.space.5-25}",
     "type": "dimension",
     "status": "active",
     "usage": "Spacing step 5.25 (21px): the `5.25` step of the Tailwind spacing scale, for padding, margin, gap, inset, translate and sizes. Outside Tailwind v3's scale: kept for the chip of `Combobox` (`h-5.25`), as shadcn/ui draws it."
@@ -976,6 +1203,8 @@
     "css_var": "--space-container-3xs",
     "light": "{primitive.space.container.3xs}",
     "dark": "{primitive.space.container.3xs}",
+    "nova_light": "{primitive.space.container.3xs}",
+    "nova_dark": "{primitive.space.container.3xs}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 3xs (256px): the value Tailwind compiles into `max-w-3xs` and `@3xs:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -985,6 +1214,8 @@
     "css_var": "--space-container-2xs",
     "light": "{primitive.space.container.2xs}",
     "dark": "{primitive.space.container.2xs}",
+    "nova_light": "{primitive.space.container.2xs}",
+    "nova_dark": "{primitive.space.container.2xs}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 2xs (288px): the value Tailwind compiles into `max-w-2xs` and `@2xs:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -994,6 +1225,8 @@
     "css_var": "--space-container-xs",
     "light": "{primitive.space.container.xs}",
     "dark": "{primitive.space.container.xs}",
+    "nova_light": "{primitive.space.container.xs}",
+    "nova_dark": "{primitive.space.container.xs}",
     "type": "dimension",
     "status": "active",
     "usage": "Container width xs (320px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-xs` and `@xs:` itself; lint-theme-bridge checks it equals the token."
@@ -1003,6 +1236,8 @@
     "css_var": "--space-container-sm",
     "light": "{primitive.space.container.sm}",
     "dark": "{primitive.space.container.sm}",
+    "nova_light": "{primitive.space.container.sm}",
+    "nova_dark": "{primitive.space.container.sm}",
     "type": "dimension",
     "status": "active",
     "usage": "Container width sm (384px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-sm` and `@sm:` itself; lint-theme-bridge checks it equals the token."
@@ -1012,6 +1247,8 @@
     "css_var": "--space-container-md",
     "light": "{primitive.space.container.md}",
     "dark": "{primitive.space.container.md}",
+    "nova_light": "{primitive.space.container.md}",
+    "nova_dark": "{primitive.space.container.md}",
     "type": "dimension",
     "status": "active",
     "usage": "Container width md (448px), for a max-width or a width that holds content. Tailwind compiles this value into `max-w-md` and `@md:` itself; lint-theme-bridge checks it equals the token."
@@ -1021,6 +1258,8 @@
     "css_var": "--space-container-lg",
     "light": "{primitive.space.container.lg}",
     "dark": "{primitive.space.container.lg}",
+    "nova_light": "{primitive.space.container.lg}",
+    "nova_dark": "{primitive.space.container.lg}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width lg (512px): the value Tailwind compiles into `max-w-lg` and `@lg:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1030,6 +1269,8 @@
     "css_var": "--space-container-xl",
     "light": "{primitive.space.container.xl}",
     "dark": "{primitive.space.container.xl}",
+    "nova_light": "{primitive.space.container.xl}",
+    "nova_dark": "{primitive.space.container.xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width xl (576px): the value Tailwind compiles into `max-w-xl` and `@xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1039,6 +1280,8 @@
     "css_var": "--space-container-2xl",
     "light": "{primitive.space.container.2xl}",
     "dark": "{primitive.space.container.2xl}",
+    "nova_light": "{primitive.space.container.2xl}",
+    "nova_dark": "{primitive.space.container.2xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 2xl (672px): the value Tailwind compiles into `max-w-2xl` and `@2xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1048,6 +1291,8 @@
     "css_var": "--space-container-3xl",
     "light": "{primitive.space.container.3xl}",
     "dark": "{primitive.space.container.3xl}",
+    "nova_light": "{primitive.space.container.3xl}",
+    "nova_dark": "{primitive.space.container.3xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 3xl (768px): the value Tailwind compiles into `max-w-3xl` and `@3xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1057,6 +1302,8 @@
     "css_var": "--space-container-4xl",
     "light": "{primitive.space.container.4xl}",
     "dark": "{primitive.space.container.4xl}",
+    "nova_light": "{primitive.space.container.4xl}",
+    "nova_dark": "{primitive.space.container.4xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 4xl (896px): the value Tailwind compiles into `max-w-4xl` and `@4xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1066,6 +1313,8 @@
     "css_var": "--space-container-5xl",
     "light": "{primitive.space.container.5xl}",
     "dark": "{primitive.space.container.5xl}",
+    "nova_light": "{primitive.space.container.5xl}",
+    "nova_dark": "{primitive.space.container.5xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 5xl (1024px): the value Tailwind compiles into `max-w-5xl` and `@5xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1075,6 +1324,8 @@
     "css_var": "--space-container-6xl",
     "light": "{primitive.space.container.6xl}",
     "dark": "{primitive.space.container.6xl}",
+    "nova_light": "{primitive.space.container.6xl}",
+    "nova_dark": "{primitive.space.container.6xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 6xl (1152px): the value Tailwind compiles into `max-w-6xl` and `@6xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1084,6 +1335,8 @@
     "css_var": "--space-container-7xl",
     "light": "{primitive.space.container.7xl}",
     "dark": "{primitive.space.container.7xl}",
+    "nova_light": "{primitive.space.container.7xl}",
+    "nova_dark": "{primitive.space.container.7xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Container width 7xl (1280px): the value Tailwind compiles into `max-w-7xl` and `@7xl:`, which lint-theme-bridge checks equals the token. Nothing in the design system draws with it yet."
@@ -1093,6 +1346,8 @@
     "css_var": "--space-focus-ring-width",
     "light": "{primitive.space.focus-ring-width}",
     "dark": "{primitive.space.focus-ring-width}",
+    "nova_light": "{primitive.space.focus-ring-width}",
+    "nova_dark": "{primitive.space.focus-ring-width}",
     "type": "dimension",
     "status": "active",
     "usage": "Width of the focus ring indicator (2px). Use for all focus-visible ring styles."
@@ -1102,6 +1357,8 @@
     "css_var": "--space-layout-page-padding",
     "light": "{primitive.space.page}",
     "dark": "{primitive.space.page}",
+    "nova_light": "{primitive.space.page}",
+    "nova_dark": "{primitive.space.page}",
     "type": "dimension",
     "status": "active",
     "usage": "Horizontal padding for the main page container. Not for component-level spacing."
@@ -1111,6 +1368,8 @@
     "css_var": "--space-layout-section-gap",
     "light": "{primitive.space.section}",
     "dark": "{primitive.space.section}",
+    "nova_light": "{primitive.space.section}",
+    "nova_dark": "{primitive.space.section}",
     "type": "dimension",
     "status": "active",
     "usage": "Vertical gap between major page sections. Not for component-level spacing."
@@ -1120,6 +1379,8 @@
     "css_var": "--space-layout-content-sm",
     "light": "{primitive.space.content-sm}",
     "dark": "{primitive.space.content-sm}",
+    "nova_light": "{primitive.space.content-sm}",
+    "nova_dark": "{primitive.space.content-sm}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Narrow content column max-width (42rem). Not for full-width or wide layouts."
@@ -1129,6 +1390,8 @@
     "css_var": "--space-layout-content-default",
     "light": "{primitive.space.content}",
     "dark": "{primitive.space.content}",
+    "nova_light": "{primitive.space.content}",
+    "nova_dark": "{primitive.space.content}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Default content column max-width (64rem). Not for narrow or wide layouts."
@@ -1138,6 +1401,8 @@
     "css_var": "--space-layout-content-lg",
     "light": "{primitive.space.content-lg}",
     "dark": "{primitive.space.content-lg}",
+    "nova_light": "{primitive.space.content-lg}",
+    "nova_dark": "{primitive.space.content-lg}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Wide content column max-width (80rem). Not for narrow or default layouts."
@@ -1147,6 +1412,8 @@
     "css_var": "--space-layout-sidebar",
     "light": "{primitive.space.sidebar}",
     "dark": "{primitive.space.sidebar}",
+    "nova_light": "{primitive.space.sidebar}",
+    "nova_dark": "{primitive.space.sidebar}",
     "type": "dimension",
     "status": "active",
     "usage": "Default sidebar width (16rem). Use for the main navigation sidebar."
@@ -1156,6 +1423,8 @@
     "css_var": "--space-layout-sidebar-mobile",
     "light": "{primitive.space.sidebar-mobile}",
     "dark": "{primitive.space.sidebar-mobile}",
+    "nova_light": "{primitive.space.sidebar-mobile}",
+    "nova_dark": "{primitive.space.sidebar-mobile}",
     "type": "dimension",
     "status": "active",
     "usage": "Sidebar width on mobile viewports (18rem). Slightly wider for touch targets."
@@ -1165,6 +1434,8 @@
     "css_var": "--space-layout-sidebar-icon",
     "light": "{primitive.space.12}",
     "dark": "{primitive.space.12}",
+    "nova_light": "{primitive.space.12}",
+    "nova_dark": "{primitive.space.12}",
     "type": "dimension",
     "status": "active",
     "usage": "Sidebar width in icon-only/collapsed mode (3rem)."
@@ -1174,24 +1445,30 @@
     "css_var": "--typography-size-xs",
     "light": "{primitive.typography.size.xs}",
     "dark": "{primitive.typography.size.xs}",
+    "nova_light": "{primitive.typography.size.xs}",
+    "nova_dark": "{primitive.typography.size.xs}",
     "type": "dimension",
     "status": "active",
-    "usage": "Extra-small text size (12px). The text of components: labels, buttons, inputs, badges, menu items, descriptions."
+    "usage": "Extra-small text size (12px), the same in every brand: badges, Kbd, Tooltip, menu shortcuts and group labels, chart legends, a caption. The interface text of a component is `text-ui`, its description `text-description`."
   },
   {
     "path": "typography.size.sm",
     "css_var": "--typography-size-sm",
     "light": "{primitive.typography.size.sm}",
     "dark": "{primitive.typography.size.sm}",
+    "nova_light": "{primitive.typography.size.sm}",
+    "nova_dark": "{primitive.typography.size.sm}",
     "type": "dimension",
     "status": "active",
-    "usage": "Small text size (14px). Use for titles inside components (CardTitle, DialogTitle) and a screen's secondary content. A field label stays text-xs."
+    "usage": "Small text size (14px), the same in every brand: a screen's secondary text, inline code. The title of a component is `text-title`, and text a screen sets next to components takes the role of what it sits beside."
   },
   {
     "path": "typography.size.base",
     "css_var": "--typography-size-base",
     "light": "{primitive.typography.size.base}",
     "dark": "{primitive.typography.size.base}",
+    "nova_light": "{primitive.typography.size.base}",
+    "nova_dark": "{primitive.typography.size.base}",
     "type": "dimension",
     "status": "active",
     "usage": "Default body text size (16px). Use for main readable content."
@@ -1201,6 +1478,8 @@
     "css_var": "--typography-size-lg",
     "light": "{primitive.typography.size.lg}",
     "dark": "{primitive.typography.size.lg}",
+    "nova_light": "{primitive.typography.size.lg}",
+    "nova_dark": "{primitive.typography.size.lg}",
     "type": "dimension",
     "status": "active",
     "usage": "Large text size (18px). Use for featured body text; Heading level 3."
@@ -1210,6 +1489,8 @@
     "css_var": "--typography-size-xl",
     "light": "{primitive.typography.size.xl}",
     "dark": "{primitive.typography.size.xl}",
+    "nova_light": "{primitive.typography.size.xl}",
+    "nova_dark": "{primitive.typography.size.xl}",
     "type": "dimension",
     "status": "active",
     "usage": "XL text (20px). Heading level 2: section headings."
@@ -1219,6 +1500,8 @@
     "css_var": "--typography-size-2xl",
     "light": "{primitive.typography.size.2xl}",
     "dark": "{primitive.typography.size.2xl}",
+    "nova_light": "{primitive.typography.size.2xl}",
+    "nova_dark": "{primitive.typography.size.2xl}",
     "type": "dimension",
     "status": "active",
     "usage": "2XL text (24px). Heading level 1: the page title."
@@ -1228,6 +1511,8 @@
     "css_var": "--typography-size-3xl",
     "light": "{primitive.typography.size.3xl}",
     "dark": "{primitive.typography.size.3xl}",
+    "nova_light": "{primitive.typography.size.3xl}",
+    "nova_dark": "{primitive.typography.size.3xl}",
     "type": "dimension",
     "status": "active",
     "usage": "3XL text (30px). Hero text a screen draws; no component uses it."
@@ -1237,15 +1522,63 @@
     "css_var": "--typography-size-4xl",
     "light": "{primitive.typography.size.4xl}",
     "dark": "{primitive.typography.size.4xl}",
+    "nova_light": "{primitive.typography.size.4xl}",
+    "nova_dark": "{primitive.typography.size.4xl}",
     "type": "dimension",
     "status": "active",
     "usage": "4XL text (36px). Display text a screen draws, rarely; no component uses it."
+  },
+  {
+    "path": "typography.size.ui",
+    "css_var": "--typography-size-ui",
+    "light": "{primitive.typography.size.xs}",
+    "dark": "{primitive.typography.size.xs}",
+    "nova_light": "{primitive.typography.size.sm}",
+    "nova_dark": "{primitive.typography.size.sm}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Text size of a component's interface text: labels, menu items, buttons. 12px in lyra, 14px in nova."
+  },
+  {
+    "path": "typography.size.description",
+    "css_var": "--typography-size-description",
+    "light": "{primitive.typography.size.xs}",
+    "dark": "{primitive.typography.size.xs}",
+    "nova_light": "{primitive.typography.size.sm}",
+    "nova_dark": "{primitive.typography.size.sm}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Text size of a component's descriptive text, paired with a looser line. 12px in lyra, 14px in nova."
+  },
+  {
+    "path": "typography.size.title",
+    "css_var": "--typography-size-title",
+    "light": "{primitive.typography.size.sm}",
+    "dark": "{primitive.typography.size.sm}",
+    "nova_light": "{primitive.typography.size.base}",
+    "nova_dark": "{primitive.typography.size.base}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Text size of a component's title. 14px in lyra, 16px in nova."
+  },
+  {
+    "path": "typography.size.control",
+    "css_var": "--typography-size-control",
+    "light": "{primitive.typography.size.xs}",
+    "dark": "{primitive.typography.size.xs}",
+    "nova_light": "{primitive.typography.size.base}",
+    "nova_dark": "{primitive.typography.size.base}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Text size of a text field on a small viewport, written beside `md:text-ui`. 12px in lyra, 16px in nova, which keeps a phone from zooming into a focused field."
   },
   {
     "path": "typography.size-line-height.xs",
     "css_var": "--typography-size-line-height-xs",
     "light": "{primitive.typography.size-line-height.xs}",
     "dark": "{primitive.typography.size-line-height.xs}",
+    "nova_light": "{primitive.typography.size-line-height.xs}",
+    "nova_dark": "{primitive.typography.size-line-height.xs}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-xs` sets with its size. `leading-*` or `text-xs/<leading>` overrides it."
@@ -1255,6 +1588,8 @@
     "css_var": "--typography-size-line-height-sm",
     "light": "{primitive.typography.size-line-height.sm}",
     "dark": "{primitive.typography.size-line-height.sm}",
+    "nova_light": "{primitive.typography.size-line-height.sm}",
+    "nova_dark": "{primitive.typography.size-line-height.sm}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-sm` sets with its size. `leading-*` or `text-sm/<leading>` overrides it."
@@ -1264,6 +1599,8 @@
     "css_var": "--typography-size-line-height-base",
     "light": "{primitive.typography.size-line-height.base}",
     "dark": "{primitive.typography.size-line-height.base}",
+    "nova_light": "{primitive.typography.size-line-height.base}",
+    "nova_dark": "{primitive.typography.size-line-height.base}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-base` sets with its size. `leading-*` or `text-base/<leading>` overrides it."
@@ -1273,6 +1610,8 @@
     "css_var": "--typography-size-line-height-lg",
     "light": "{primitive.typography.size-line-height.lg}",
     "dark": "{primitive.typography.size-line-height.lg}",
+    "nova_light": "{primitive.typography.size-line-height.lg}",
+    "nova_dark": "{primitive.typography.size-line-height.lg}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-lg` sets with its size. `leading-*` or `text-lg/<leading>` overrides it."
@@ -1282,6 +1621,8 @@
     "css_var": "--typography-size-line-height-xl",
     "light": "{primitive.typography.size-line-height.xl}",
     "dark": "{primitive.typography.size-line-height.xl}",
+    "nova_light": "{primitive.typography.size-line-height.xl}",
+    "nova_dark": "{primitive.typography.size-line-height.xl}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-xl` sets with its size. `leading-*` or `text-xl/<leading>` overrides it."
@@ -1291,6 +1632,8 @@
     "css_var": "--typography-size-line-height-2xl",
     "light": "{primitive.typography.size-line-height.2xl}",
     "dark": "{primitive.typography.size-line-height.2xl}",
+    "nova_light": "{primitive.typography.size-line-height.2xl}",
+    "nova_dark": "{primitive.typography.size-line-height.2xl}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-2xl` sets with its size. `leading-*` or `text-2xl/<leading>` overrides it."
@@ -1300,6 +1643,8 @@
     "css_var": "--typography-size-line-height-3xl",
     "light": "{primitive.typography.size-line-height.3xl}",
     "dark": "{primitive.typography.size-line-height.3xl}",
+    "nova_light": "{primitive.typography.size-line-height.3xl}",
+    "nova_dark": "{primitive.typography.size-line-height.3xl}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-3xl` sets with its size. `leading-*` or `text-3xl/<leading>` overrides it."
@@ -1309,15 +1654,63 @@
     "css_var": "--typography-size-line-height-4xl",
     "light": "{primitive.typography.size-line-height.4xl}",
     "dark": "{primitive.typography.size-line-height.4xl}",
+    "nova_light": "{primitive.typography.size-line-height.4xl}",
+    "nova_dark": "{primitive.typography.size-line-height.4xl}",
     "type": "number",
     "status": "active",
     "usage": "Line height that `text-4xl` sets with its size. `leading-*` or `text-4xl/<leading>` overrides it."
+  },
+  {
+    "path": "typography.size-line-height.ui",
+    "css_var": "--typography-size-line-height-ui",
+    "light": "{primitive.typography.size-line-height.xs}",
+    "dark": "{primitive.typography.size-line-height.xs}",
+    "nova_light": "{primitive.typography.size-line-height.sm}",
+    "nova_dark": "{primitive.typography.size-line-height.sm}",
+    "type": "number",
+    "status": "active",
+    "usage": "Line height paired with typography.size.ui."
+  },
+  {
+    "path": "typography.size-line-height.description",
+    "css_var": "--typography-size-line-height-description",
+    "light": "{primitive.typography.line-height.relaxed}",
+    "dark": "{primitive.typography.line-height.relaxed}",
+    "nova_light": "{primitive.typography.size-line-height.sm}",
+    "nova_dark": "{primitive.typography.size-line-height.sm}",
+    "type": "number",
+    "status": "active",
+    "usage": "Line height paired with typography.size.description: relaxed in lyra, the sm pair in nova."
+  },
+  {
+    "path": "typography.size-line-height.title",
+    "css_var": "--typography-size-line-height-title",
+    "light": "{primitive.typography.size-line-height.sm}",
+    "dark": "{primitive.typography.size-line-height.sm}",
+    "nova_light": "{primitive.typography.size-line-height.base}",
+    "nova_dark": "{primitive.typography.size-line-height.base}",
+    "type": "number",
+    "status": "active",
+    "usage": "Line height paired with typography.size.title."
+  },
+  {
+    "path": "typography.size-line-height.control",
+    "css_var": "--typography-size-line-height-control",
+    "light": "{primitive.typography.size-line-height.xs}",
+    "dark": "{primitive.typography.size-line-height.xs}",
+    "nova_light": "{primitive.typography.size-line-height.base}",
+    "nova_dark": "{primitive.typography.size-line-height.base}",
+    "type": "number",
+    "status": "active",
+    "usage": "Line height paired with typography.size.control."
   },
   {
     "path": "typography.line-height.tight",
     "css_var": "--typography-line-height-tight",
     "light": "{primitive.typography.line-height.tight}",
     "dark": "{primitive.typography.line-height.tight}",
+    "nova_light": "{primitive.typography.line-height.tight}",
+    "nova_dark": "{primitive.typography.line-height.tight}",
     "type": "number",
     "status": "active",
     "usage": "Tight line height for short text on one or two lines. Not for paragraph text."
@@ -1327,6 +1720,8 @@
     "css_var": "--typography-line-height-snug",
     "light": "{primitive.typography.line-height.snug}",
     "dark": "{primitive.typography.line-height.snug}",
+    "nova_light": "{primitive.typography.line-height.snug}",
+    "nova_dark": "{primitive.typography.line-height.snug}",
     "type": "number",
     "status": "active",
     "usage": "Snug line height: FieldLabel draws it. Not for long-form reading content."
@@ -1336,6 +1731,8 @@
     "css_var": "--typography-line-height-normal",
     "light": "{primitive.typography.line-height.normal}",
     "dark": "{primitive.typography.line-height.normal}",
+    "nova_light": "{primitive.typography.line-height.normal}",
+    "nova_dark": "{primitive.typography.line-height.normal}",
     "type": "number",
     "status": "active",
     "usage": "Default line height for body text."
@@ -1345,6 +1742,8 @@
     "css_var": "--typography-line-height-relaxed",
     "light": "{primitive.typography.line-height.relaxed}",
     "dark": "{primitive.typography.line-height.relaxed}",
+    "nova_light": "{primitive.typography.line-height.relaxed}",
+    "nova_dark": "{primitive.typography.line-height.relaxed}",
     "type": "number",
     "status": "active",
     "usage": "Relaxed line height for improved readability in long-form content."
@@ -1354,6 +1753,8 @@
     "css_var": "--typography-line-height-loose",
     "light": "{primitive.typography.line-height.loose}",
     "dark": "{primitive.typography.line-height.loose}",
+    "nova_light": "{primitive.typography.line-height.loose}",
+    "nova_dark": "{primitive.typography.line-height.loose}",
     "type": "number",
     "status": "active",
     "usage": "Loose line height for highly spaced text. Not for dense UIs."
@@ -1363,6 +1764,8 @@
     "css_var": "--typography-letter-spacing-tight",
     "light": "{primitive.typography.letter-spacing.tight}",
     "dark": "{primitive.typography.letter-spacing.tight}",
+    "nova_light": "{primitive.typography.letter-spacing.tight}",
+    "nova_dark": "{primitive.typography.letter-spacing.tight}",
     "type": "dimension",
     "status": "active",
     "usage": "Tight letter spacing for headings: Heading draws it at every level. Not for body text."
@@ -1372,6 +1775,8 @@
     "css_var": "--typography-letter-spacing-normal",
     "light": "{primitive.typography.letter-spacing.normal}",
     "dark": "{primitive.typography.letter-spacing.normal}",
+    "nova_light": "{primitive.typography.letter-spacing.normal}",
+    "nova_dark": "{primitive.typography.letter-spacing.normal}",
     "type": "dimension",
     "status": "active",
     "usage": "Default letter spacing. Use as baseline."
@@ -1381,6 +1786,8 @@
     "css_var": "--typography-letter-spacing-wide",
     "light": "{primitive.typography.letter-spacing.wide}",
     "dark": "{primitive.typography.letter-spacing.wide}",
+    "nova_light": "{primitive.typography.letter-spacing.wide}",
+    "nova_dark": "{primitive.typography.letter-spacing.wide}",
     "type": "dimension",
     "status": "active",
     "usage": "Wide letter spacing for captions. No component draws it."
@@ -1390,6 +1797,8 @@
     "css_var": "--typography-letter-spacing-wider",
     "light": "{primitive.typography.letter-spacing.wider}",
     "dark": "{primitive.typography.letter-spacing.wider}",
+    "nova_light": "{primitive.typography.letter-spacing.wider}",
+    "nova_dark": "{primitive.typography.letter-spacing.wider}",
     "type": "dimension",
     "status": "active",
     "usage": "Wider letter spacing for all-caps or overline text."
@@ -1399,6 +1808,8 @@
     "css_var": "--typography-letter-spacing-widest",
     "light": "{primitive.typography.letter-spacing.widest}",
     "dark": "{primitive.typography.letter-spacing.widest}",
+    "nova_light": "{primitive.typography.letter-spacing.widest}",
+    "nova_dark": "{primitive.typography.letter-spacing.widest}",
     "type": "dimension",
     "status": "active",
     "usage": "Widest letter spacing, for the keyboard shortcuts of menus and the command palette."
@@ -1408,6 +1819,8 @@
     "css_var": "--typography-font-weight-normal",
     "light": "{primitive.typography.font-weight.normal}",
     "dark": "{primitive.typography.font-weight.normal}",
+    "nova_light": "{primitive.typography.font-weight.normal}",
+    "nova_dark": "{primitive.typography.font-weight.normal}",
     "type": "fontWeight",
     "status": "active",
     "usage": "Normal weight for body text, labels and descriptions."
@@ -1417,6 +1830,8 @@
     "css_var": "--typography-font-weight-medium",
     "light": "{primitive.typography.font-weight.medium}",
     "dark": "{primitive.typography.font-weight.medium}",
+    "nova_light": "{primitive.typography.font-weight.medium}",
+    "nova_dark": "{primitive.typography.font-weight.medium}",
     "type": "fontWeight",
     "status": "active",
     "usage": "Medium weight for buttons, tabs, badges and component titles. A field label stays normal."
@@ -1426,6 +1841,8 @@
     "css_var": "--typography-font-weight-semibold",
     "light": "{primitive.typography.font-weight.semibold}",
     "dark": "{primitive.typography.font-weight.semibold}",
+    "nova_light": "{primitive.typography.font-weight.semibold}",
+    "nova_dark": "{primitive.typography.font-weight.semibold}",
     "type": "fontWeight",
     "status": "active",
     "usage": "Semibold for headings: Heading draws it at every level."
@@ -1435,6 +1852,8 @@
     "css_var": "--typography-font-weight-bold",
     "light": "{primitive.typography.font-weight.bold}",
     "dark": "{primitive.typography.font-weight.bold}",
+    "nova_light": "{primitive.typography.font-weight.bold}",
+    "nova_dark": "{primitive.typography.font-weight.bold}",
     "type": "fontWeight",
     "status": "active",
     "usage": "Bold for strong emphasis a screen draws, and the logo."
@@ -1444,33 +1863,63 @@
     "css_var": "--typography-font-family-sans",
     "light": "{primitive.typography.font-family.sans}",
     "dark": "{primitive.typography.font-family.sans}",
+    "nova_light": "{primitive.typography.font-family.dm-sans}",
+    "nova_dark": "{primitive.typography.font-family.dm-sans}",
     "type": "fontFamily",
     "status": "active",
-    "usage": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in lib/fonts.ts under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens)."
+    "usage": "Secondary sans-serif typeface: Kbd keys and long-form editorial text. Geist in lyra, DM Sans in nova; next/font loads each face under its --font-<face> variable, which this token reads (lint-font-tokens)."
   },
   {
     "path": "typography.font-family.mono",
     "css_var": "--typography-font-family-mono",
     "light": "{primitive.typography.font-family.mono}",
     "dark": "{primitive.typography.font-family.mono}",
+    "nova_light": "{primitive.typography.font-family.geist-mono}",
+    "nova_dark": "{primitive.typography.font-family.geist-mono}",
     "type": "fontFamily",
     "status": "active",
-    "usage": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in lib/fonts.ts under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens)."
+    "usage": "Monospace typeface for code and tabular data, read by font-mono. JetBrains Mono in lyra, Geist Mono in nova; next/font loads each face under its --font-<face> variable, which this token reads (lint-font-tokens)."
+  },
+  {
+    "path": "typography.font-family.body",
+    "css_var": "--typography-font-family-body",
+    "light": "{primitive.typography.font-family.mono}",
+    "dark": "{primitive.typography.font-family.mono}",
+    "nova_light": "{primitive.typography.font-family.lora}",
+    "nova_dark": "{primitive.typography.font-family.lora}",
+    "type": "fontFamily",
+    "status": "active",
+    "usage": "Typeface of the interface and running text, set on <html> with font-body. JetBrains Mono in lyra, Lora in nova."
+  },
+  {
+    "path": "typography.font-family.heading",
+    "css_var": "--typography-font-family-heading",
+    "light": "{primitive.typography.font-family.mono}",
+    "dark": "{primitive.typography.font-family.mono}",
+    "nova_light": "{primitive.typography.font-family.dm-sans}",
+    "nova_dark": "{primitive.typography.font-family.dm-sans}",
+    "type": "fontFamily",
+    "status": "active",
+    "usage": "Typeface of titles and headings, read by font-heading. JetBrains Mono in lyra, DM Sans in nova."
   },
   {
     "path": "radius.none",
     "css_var": "--radius-none",
     "light": "{primitive.radius.none}",
     "dark": "{primitive.radius.none}",
+    "nova_light": "{primitive.radius.none}",
+    "nova_dark": "{primitive.radius.none}",
     "type": "dimension",
-    "status": "active",
-    "usage": "Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one."
+    "status": "reserved",
+    "usage": "Zero radius, square corners. `rounded-none` is a static class that reads no token, and the radius of a component comes from its role (`radius.surface`, `radius.control`…). Reserved for a value that must stay square in every brand and cannot be written as a class."
   },
   {
     "path": "radius.xs",
     "css_var": "--radius-xs",
     "light": "{primitive.radius.xs}",
     "dark": "{primitive.radius.xs}",
+    "nova_light": "{primitive.radius.xs}",
+    "nova_dark": "{primitive.radius.xs}",
     "type": "dimension",
     "status": "active",
     "usage": "Minimal rounding (0.4× base). The legend and tooltip indicators of a chart."
@@ -1480,6 +1929,8 @@
     "css_var": "--radius-sm",
     "light": "{primitive.radius.sm}",
     "dark": "{primitive.radius.sm}",
+    "nova_light": "{primitive.radius.sm}",
+    "nova_dark": "{primitive.radius.sm}",
     "type": "dimension",
     "status": "active",
     "usage": "Small rounding (0.6× base). For content a screen draws itself; no component uses it."
@@ -1489,6 +1940,8 @@
     "css_var": "--radius-md",
     "light": "{primitive.radius.md}",
     "dark": "{primitive.radius.md}",
+    "nova_light": "{primitive.radius.md}",
+    "nova_dark": "{primitive.radius.md}",
     "type": "dimension",
     "status": "active",
     "usage": "Medium rounding (0.8× base). For content a screen draws itself; no component uses it."
@@ -1498,6 +1951,8 @@
     "css_var": "--radius-lg",
     "light": "{primitive.radius.lg}",
     "dark": "{primitive.radius.lg}",
+    "nova_light": "{primitive.radius.lg}",
+    "nova_dark": "{primitive.radius.lg}",
     "type": "dimension",
     "status": "active",
     "usage": "Base rounding (1× = 0.625rem). For content a screen draws itself, and the shadcn --radius alias; no component reads it."
@@ -1507,6 +1962,8 @@
     "css_var": "--radius-xl",
     "light": "{primitive.radius.xl}",
     "dark": "{primitive.radius.xl}",
+    "nova_light": "{primitive.radius.xl}",
+    "nova_dark": "{primitive.radius.xl}",
     "type": "dimension",
     "status": "active",
     "usage": "Larger rounding (1.4× base). For content a screen draws itself; no component uses it."
@@ -1516,6 +1973,8 @@
     "css_var": "--radius-2xl",
     "light": "{primitive.radius.2xl}",
     "dark": "{primitive.radius.2xl}",
+    "nova_light": "{primitive.radius.2xl}",
+    "nova_dark": "{primitive.radius.2xl}",
     "type": "dimension",
     "status": "active",
     "usage": "Extra-large rounding (1.8× base). For content a screen draws itself (a hero); no component uses it."
@@ -1525,6 +1984,8 @@
     "css_var": "--radius-3xl",
     "light": "{primitive.radius.3xl}",
     "dark": "{primitive.radius.3xl}",
+    "nova_light": "{primitive.radius.3xl}",
+    "nova_dark": "{primitive.radius.3xl}",
     "type": "dimension",
     "status": "active",
     "usage": "Very large rounding (2.2× base). Use sparingly for decorative content; no component uses it."
@@ -1534,6 +1995,8 @@
     "css_var": "--radius-4xl",
     "light": "{primitive.radius.4xl}",
     "dark": "{primitive.radius.4xl}",
+    "nova_light": "{primitive.radius.4xl}",
+    "nova_dark": "{primitive.radius.4xl}",
     "type": "dimension",
     "status": "active",
     "usage": "Maximum rounding (2.6× base). Use only for hero content; no component uses it."
@@ -1543,15 +2006,85 @@
     "css_var": "--radius-full",
     "light": "{primitive.radius.full}",
     "dark": "{primitive.radius.full}",
+    "nova_light": "{primitive.radius.full}",
+    "nova_dark": "{primitive.radius.full}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Pill/full rounding. A round shape: Avatar, RadioGroup and Switch draw rounded-full, a static class that reads no token."
+  },
+  {
+    "path": "radius.surface",
+    "css_var": "--radius-surface",
+    "light": "{primitive.radius.none}",
+    "dark": "{primitive.radius.none}",
+    "nova_light": "{primitive.radius.xl}",
+    "nova_dark": "{primitive.radius.xl}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Radius of a surface: card, dialog, drawer edge, bubble content, empty state, sidebar inset, command palette. Square in lyra, rounded in nova."
+  },
+  {
+    "path": "radius.control",
+    "css_var": "--radius-control",
+    "light": "{primitive.radius.none}",
+    "dark": "{primitive.radius.none}",
+    "nova_light": "{primitive.radius.lg}",
+    "nova_dark": "{primitive.radius.lg}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Radius of a control: button, input, popover, menu panel, tabs list. Square in lyra, rounded in nova."
+  },
+  {
+    "path": "radius.item",
+    "css_var": "--radius-item",
+    "light": "{primitive.radius.none}",
+    "dark": "{primitive.radius.none}",
+    "nova_light": "{primitive.radius.md}",
+    "nova_dark": "{primitive.radius.md}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Radius of an item inside a panel: menu and sidebar items, tooltip, skeleton, tabs trigger, calendar cell. Square in lyra, rounded in nova."
+  },
+  {
+    "path": "radius.inset",
+    "css_var": "--radius-inset",
+    "light": "{primitive.radius.none}",
+    "dark": "{primitive.radius.none}",
+    "nova_light": "{primitive.radius.sm}",
+    "nova_dark": "{primitive.radius.sm}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Radius of a part nested in a control: kbd, chip, command item, menubar trigger, the extra-small buttons of an input group. Square in lyra, rounded in nova."
+  },
+  {
+    "path": "radius.mark",
+    "css_var": "--radius-mark",
+    "light": "{primitive.radius.none}",
+    "dark": "{primitive.radius.none}",
+    "nova_light": "{primitive.radius.xs}",
+    "nova_dark": "{primitive.radius.xs}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Radius of a small mark: checkbox, questionnaire indicator, tooltip arrow. Square in lyra, rounded in nova."
+  },
+  {
+    "path": "radius.pill",
+    "css_var": "--radius-pill",
+    "light": "{primitive.radius.none}",
+    "dark": "{primitive.radius.none}",
+    "nova_light": "{primitive.radius.full}",
+    "nova_dark": "{primitive.radius.full}",
+    "type": "dimension",
+    "status": "active",
+    "usage": "Radius of a fully rounded element: badge, bubble, carousel button, drawer handle, progress, scroll thumb, slider. Square in lyra, a pill in nova."
   },
   {
     "path": "elevation.xs",
     "css_var": "--elevation-xs",
     "light": "{primitive.elevation.light.xs}",
     "dark": "{primitive.elevation.dark.xs}",
+    "nova_light": "{primitive.elevation.light.xs}",
+    "nova_dark": "{primitive.elevation.dark.xs}",
     "type": "shadow",
     "status": "active",
     "usage": "Minimal lift for interactive elements. Not for decorative purposes."
@@ -1561,6 +2094,8 @@
     "css_var": "--elevation-sm",
     "light": "{primitive.elevation.light.sm}",
     "dark": "{primitive.elevation.dark.sm}",
+    "nova_light": "{primitive.elevation.light.sm}",
+    "nova_dark": "{primitive.elevation.dark.sm}",
     "type": "shadow",
     "status": "active",
     "usage": "Small lift for cards and hover states. Not for fixed navigation."
@@ -1570,6 +2105,8 @@
     "css_var": "--elevation-md",
     "light": "{primitive.elevation.light.md}",
     "dark": "{primitive.elevation.dark.md}",
+    "nova_light": "{primitive.elevation.light.md}",
+    "nova_dark": "{primitive.elevation.dark.md}",
     "type": "shadow",
     "status": "active",
     "usage": "Medium elevation for dropdowns and context menus. Not for inline content."
@@ -1579,6 +2116,8 @@
     "css_var": "--elevation-lg",
     "light": "{primitive.elevation.light.lg}",
     "dark": "{primitive.elevation.dark.lg}",
+    "nova_light": "{primitive.elevation.light.lg}",
+    "nova_dark": "{primitive.elevation.dark.lg}",
     "type": "shadow",
     "status": "active",
     "usage": "Large elevation for modals and side panels. Not for standard cards."
@@ -1588,6 +2127,8 @@
     "css_var": "--elevation-xl",
     "light": "{primitive.elevation.light.xl}",
     "dark": "{primitive.elevation.dark.xl}",
+    "nova_light": "{primitive.elevation.light.xl}",
+    "nova_dark": "{primitive.elevation.dark.xl}",
     "type": "shadow",
     "status": "active",
     "usage": "Extra-large elevation for full overlay panels. Not for inline components."
@@ -1597,6 +2138,8 @@
     "css_var": "--elevation-2xl",
     "light": "{primitive.elevation.light.2xl}",
     "dark": "{primitive.elevation.dark.2xl}",
+    "nova_light": "{primitive.elevation.light.2xl}",
+    "nova_dark": "{primitive.elevation.dark.2xl}",
     "type": "shadow",
     "status": "active",
     "usage": "Maximum elevation for toasts and high-priority overlays. Use sparingly."
@@ -1606,6 +2149,8 @@
     "css_var": "--elevation-inner",
     "light": "{primitive.elevation.light.inner}",
     "dark": "{primitive.elevation.dark.inner}",
+    "nova_light": "{primitive.elevation.light.inner}",
+    "nova_dark": "{primitive.elevation.dark.inner}",
     "type": "shadow",
     "status": "active",
     "usage": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements."
@@ -1615,6 +2160,8 @@
     "css_var": "--motion-duration-instant",
     "light": "{primitive.motion.duration.instant}",
     "dark": "{primitive.motion.duration.instant}",
+    "nova_light": "{primitive.motion.duration.instant}",
+    "nova_dark": "{primitive.motion.duration.instant}",
     "type": "duration",
     "status": "reserved",
     "usage": "No duration — for immediate state changes. Not for visual transitions."
@@ -1624,6 +2171,8 @@
     "css_var": "--motion-duration-fast",
     "light": "{primitive.motion.duration.fast}",
     "dark": "{primitive.motion.duration.fast}",
+    "nova_light": "{primitive.motion.duration.fast}",
+    "nova_dark": "{primitive.motion.duration.fast}",
     "type": "duration",
     "status": "active",
     "usage": "Fast micro-interactions (100ms). The default of a transition with no duration class: hover and focus feedback, and most overlays the components draw."
@@ -1633,6 +2182,8 @@
     "css_var": "--motion-duration-normal",
     "light": "{primitive.motion.duration.normal}",
     "dark": "{primitive.motion.duration.normal}",
+    "nova_light": "{primitive.motion.duration.normal}",
+    "nova_dark": "{primitive.motion.duration.normal}",
     "type": "duration",
     "status": "active",
     "usage": "Standard transition duration (200ms). For a fade or a move a screen draws itself, and the Sheet's slide."
@@ -1642,6 +2193,8 @@
     "css_var": "--motion-duration-slow",
     "light": "{primitive.motion.duration.slow}",
     "dark": "{primitive.motion.duration.slow}",
+    "nova_light": "{primitive.motion.duration.slow}",
+    "nova_dark": "{primitive.motion.duration.slow}",
     "type": "duration",
     "status": "active",
     "usage": "Slow, deliberate transitions (300ms). The NavigationMenu content without a viewport and its chevron, the MessageScrollerButton's exit; no modal or drawer uses it."
@@ -1651,6 +2204,8 @@
     "css_var": "--motion-duration-slower",
     "light": "{primitive.motion.duration.slower}",
     "dark": "{primitive.motion.duration.slower}",
+    "nova_light": "{primitive.motion.duration.slower}",
+    "nova_dark": "{primitive.motion.duration.slower}",
     "type": "duration",
     "status": "active",
     "usage": "Slowest transitions (500ms). Use only for complex animations; no component uses it (the Drawer's own 500ms is vaul's)."
@@ -1660,6 +2215,8 @@
     "css_var": "--motion-duration-extra-slow",
     "light": "{primitive.motion.duration.extra-slow}",
     "dark": "{primitive.motion.duration.extra-slow}",
+    "nova_light": "{primitive.motion.duration.extra-slow}",
+    "nova_dark": "{primitive.motion.duration.extra-slow}",
     "type": "duration",
     "status": "active",
     "usage": "Extra-slow duration (1000ms), for a transition or animate-in and animate-out. No component uses it: a keyframe loop (caret-blink, pulse, spin) sets its own duration."
@@ -1669,6 +2226,8 @@
     "css_var": "--motion-easing-default",
     "light": "{primitive.motion.easing.default}",
     "dark": "{primitive.motion.easing.default}",
+    "nova_light": "{primitive.motion.easing.default}",
+    "nova_dark": "{primitive.motion.easing.default}",
     "type": "cubicBezier",
     "status": "active",
     "usage": "Standard ease-in-out. Default for all UI transitions."
@@ -1678,6 +2237,8 @@
     "css_var": "--motion-easing-in",
     "light": "{primitive.motion.easing.in}",
     "dark": "{primitive.motion.easing.in}",
+    "nova_light": "{primitive.motion.easing.in}",
+    "nova_dark": "{primitive.motion.easing.in}",
     "type": "cubicBezier",
     "status": "active",
     "usage": "Ease-in curve. Use for elements exiting the screen."
@@ -1687,6 +2248,8 @@
     "css_var": "--motion-easing-out",
     "light": "{primitive.motion.easing.out}",
     "dark": "{primitive.motion.easing.out}",
+    "nova_light": "{primitive.motion.easing.out}",
+    "nova_dark": "{primitive.motion.easing.out}",
     "type": "cubicBezier",
     "status": "active",
     "usage": "Ease-out curve. Use for elements entering the screen."
@@ -1696,6 +2259,8 @@
     "css_var": "--motion-easing-spring",
     "light": "{primitive.motion.easing.spring}",
     "dark": "{primitive.motion.easing.spring}",
+    "nova_light": "{primitive.motion.easing.spring}",
+    "nova_dark": "{primitive.motion.easing.spring}",
     "type": "cubicBezier",
     "status": "active",
     "usage": "Spring overshoot. Use for playful or bouncy interactions only."
@@ -1705,6 +2270,8 @@
     "css_var": "--opacity-disabled",
     "light": "{primitive.opacity.0-50}",
     "dark": "{primitive.opacity.0-50}",
+    "nova_light": "{primitive.opacity.0-50}",
+    "nova_dark": "{primitive.opacity.0-50}",
     "type": "number",
     "status": "active",
     "usage": "Opacity for disabled interactive elements. Not for placeholder or overlay use."
@@ -1714,6 +2281,8 @@
     "css_var": "--opacity-placeholder",
     "light": "{primitive.opacity.0-50}",
     "dark": "{primitive.opacity.0-50}",
+    "nova_light": "{primitive.opacity.0-50}",
+    "nova_dark": "{primitive.opacity.0-50}",
     "type": "number",
     "status": "deprecated",
     "replacement": "color.text.subtle",
@@ -1724,6 +2293,8 @@
     "css_var": "--opacity-overlay",
     "light": "{primitive.opacity.0-80}",
     "dark": "{primitive.opacity.0-80}",
+    "nova_light": "{primitive.opacity.0-80}",
+    "nova_dark": "{primitive.opacity.0-80}",
     "type": "number",
     "status": "deprecated",
     "usage": "Deprecated: modal backdrops never read it. They use a 10% static-black scrim with a backdrop blur."
@@ -1733,6 +2304,8 @@
     "css_var": "--zindex-dropdown",
     "light": "{primitive.zindex.dropdown}",
     "dark": "{primitive.zindex.dropdown}",
+    "nova_light": "{primitive.zindex.dropdown}",
+    "nova_dark": "{primitive.zindex.dropdown}",
     "type": "number",
     "status": "active",
     "usage": "The lowest global layer (1000), above the page content. No floating surface of the design system takes it: its menus, popovers and lists draw `z-popover`. Seven components raise one of their own parts with it — the AvatarBadge, a focused ButtonGroup child, a Calendar day, the active InputOTP slot, the Resizable grip, a focused ToggleGroup item and Select's scroll buttons —, a local order that specs/foundations/elevation.md gives to small raw z-index values: do not copy it."
@@ -1742,6 +2315,8 @@
     "css_var": "--zindex-sticky",
     "light": "{primitive.zindex.sticky}",
     "dark": "{primitive.zindex.sticky}",
+    "nova_light": "{primitive.zindex.sticky}",
+    "nova_dark": "{primitive.zindex.sticky}",
     "type": "number",
     "status": "active",
     "usage": "Sticky headers/footers. Renders above dropdowns."
@@ -1751,6 +2326,8 @@
     "css_var": "--zindex-fixed",
     "light": "{primitive.zindex.fixed}",
     "dark": "{primitive.zindex.fixed}",
+    "nova_light": "{primitive.zindex.fixed}",
+    "nova_dark": "{primitive.zindex.fixed}",
     "type": "number",
     "status": "active",
     "usage": "Fixed position elements. Renders above sticky."
@@ -1760,6 +2337,8 @@
     "css_var": "--zindex-overlay",
     "light": "{primitive.zindex.overlay}",
     "dark": "{primitive.zindex.overlay}",
+    "nova_light": "{primitive.zindex.overlay}",
+    "nova_dark": "{primitive.zindex.overlay}",
     "type": "number",
     "status": "active",
     "usage": "Overlay/backdrop. Renders above fixed elements."
@@ -1769,6 +2348,8 @@
     "css_var": "--zindex-modal",
     "light": "{primitive.zindex.modal}",
     "dark": "{primitive.zindex.modal}",
+    "nova_light": "{primitive.zindex.modal}",
+    "nova_dark": "{primitive.zindex.modal}",
     "type": "number",
     "status": "active",
     "usage": "Modal dialogs. Renders above overlays."
@@ -1778,6 +2359,8 @@
     "css_var": "--zindex-popover",
     "light": "{primitive.zindex.popover}",
     "dark": "{primitive.zindex.popover}",
+    "nova_light": "{primitive.zindex.popover}",
+    "nova_dark": "{primitive.zindex.popover}",
     "type": "number",
     "status": "active",
     "usage": "Floating surfaces (1500): popovers, hover cards, dropdown, context and menubar menus, the Select, Combobox and NavigationMenu panels. Renders above modals, so a menu opened in a dialog shows."
@@ -1787,6 +2370,8 @@
     "css_var": "--zindex-toast",
     "light": "{primitive.zindex.toast}",
     "dark": "{primitive.zindex.toast}",
+    "nova_light": "{primitive.zindex.toast}",
+    "nova_dark": "{primitive.zindex.toast}",
     "type": "number",
     "status": "active",
     "usage": "Toast notifications (1600): above popovers, below tooltips. No component reads it yet: the Sonner `Toaster` keeps sonner's own z-index (999999999), above every layer of this scale."
@@ -1796,6 +2381,8 @@
     "css_var": "--zindex-tooltip",
     "light": "{primitive.zindex.tooltip}",
     "dark": "{primitive.zindex.tooltip}",
+    "nova_light": "{primitive.zindex.tooltip}",
+    "nova_dark": "{primitive.zindex.tooltip}",
     "type": "number",
     "status": "active",
     "usage": "Tooltips. Highest z-index to always appear on top."
@@ -1805,6 +2392,8 @@
     "css_var": "--breakpoint-sm",
     "light": "{primitive.breakpoint.sm}",
     "dark": "{primitive.breakpoint.sm}",
+    "nova_light": "{primitive.breakpoint.sm}",
+    "nova_dark": "{primitive.breakpoint.sm}",
     "type": "dimension",
     "status": "active",
     "usage": "Viewport width from which the `sm:` variant applies (mobile-first, min-width). Not a container width."
@@ -1814,6 +2403,8 @@
     "css_var": "--breakpoint-md",
     "light": "{primitive.breakpoint.md}",
     "dark": "{primitive.breakpoint.md}",
+    "nova_light": "{primitive.breakpoint.md}",
+    "nova_dark": "{primitive.breakpoint.md}",
     "type": "dimension",
     "status": "active",
     "usage": "Viewport width from which the `md:` variant applies (mobile-first, min-width). Not a container width."
@@ -1823,6 +2414,8 @@
     "css_var": "--breakpoint-lg",
     "light": "{primitive.breakpoint.lg}",
     "dark": "{primitive.breakpoint.lg}",
+    "nova_light": "{primitive.breakpoint.lg}",
+    "nova_dark": "{primitive.breakpoint.lg}",
     "type": "dimension",
     "status": "active",
     "usage": "Viewport width from which the `lg:` variant applies (mobile-first, min-width). Not a container width."
@@ -1832,6 +2425,8 @@
     "css_var": "--breakpoint-xl",
     "light": "{primitive.breakpoint.xl}",
     "dark": "{primitive.breakpoint.xl}",
+    "nova_light": "{primitive.breakpoint.xl}",
+    "nova_dark": "{primitive.breakpoint.xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Viewport width from which the `xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts."
@@ -1841,6 +2436,8 @@
     "css_var": "--breakpoint-2xl",
     "light": "{primitive.breakpoint.2xl}",
     "dark": "{primitive.breakpoint.2xl}",
+    "nova_light": "{primitive.breakpoint.2xl}",
+    "nova_dark": "{primitive.breakpoint.2xl}",
     "type": "dimension",
     "status": "reserved",
     "usage": "Viewport width from which the `2xl:` variant applies (mobile-first, min-width). No component needs it yet; Tailwind compiles it regardless, so the token keeps its value on record for wide layouts."
@@ -1850,6 +2447,8 @@
     "css_var": "--border-width-default",
     "light": "{primitive.border-width.1}",
     "dark": "{primitive.border-width.1}",
+    "nova_light": "{primitive.border-width.1}",
+    "nova_dark": "{primitive.border-width.1}",
     "type": "dimension",
     "status": "active",
     "usage": "Width of every plain border: `border`, `border-t`, `divide-x`… and of the solid outline a focus indicator draws on an element without a border (`outline-(length:--border-width-default)`). Not for focus rings, which use space.focus-ring-width."
@@ -1859,6 +2458,8 @@
     "css_var": "--border-width-chart-indicator",
     "light": "{primitive.border-width.1-5}",
     "dark": "{primitive.border-width.1-5}",
+    "nova_light": "{primitive.border-width.1-5}",
+    "nova_dark": "{primitive.border-width.1-5}",
     "type": "dimension",
     "status": "active",
     "usage": "Stroke of the dashed series indicator in chart tooltips. Not for component borders."
@@ -1868,6 +2469,8 @@
     "css_var": "--border-width-separation",
     "light": "{primitive.border-width.2}",
     "dark": "{primitive.border-width.2}",
+    "nova_light": "{primitive.border-width.2}",
+    "nova_dark": "{primitive.border-width.2}",
     "type": "dimension",
     "status": "active",
     "usage": "Ring painted in the background color around an element that overlaps another, cutting it out: stacked avatars, an avatar's badge. Not for borders or focus rings."
@@ -1877,6 +2480,8 @@
     "css_var": "--size-target-min",
     "light": "{primitive.space.6}",
     "dark": "{primitive.space.6}",
+    "nova_light": "{primitive.space.6}",
+    "nova_dark": "{primitive.space.6}",
     "type": "dimension",
     "status": "active",
     "usage": "Minimum pointer target (24px): WCAG 2.2 SC 2.5.8 Target Size (Minimum), level AA. The clickable area of every control reaches it, or the control meets one of the exceptions listed in specs/foundations/size.md."

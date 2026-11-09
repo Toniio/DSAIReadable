@@ -116,7 +116,7 @@ export default function Example() {
       <p>Sign in with email</p>
       <div className="flex items-center gap-2">
         <Separator />
-        <span className="text-xs whitespace-nowrap text-muted-foreground">
+        <span className="text-ui whitespace-nowrap text-muted-foreground">
           or
         </span>
         <Separator />

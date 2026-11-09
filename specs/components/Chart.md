@@ -39,7 +39,7 @@ A container and a set of helpers for data visualization, built on `recharts`: th
 ## Dependencies
 
 - `recharts` — the charting library (`ResponsiveContainer`, `Tooltip`, `Legend`…)
-- `cn` (`@/lib/utils`) — the class-merging utility
+- `cn` (`@/lib/cn`) — the class-merging utility
 
 ## Anatomy
 
@@ -64,6 +64,7 @@ A container and a set of helpers for data visualization, built on `recharts`: th
 | `color.text.default`             | `text-foreground`                                         | `ChartTooltipContent`                                           |
 | `color.text.subtle`              | `fill-muted-foreground` · `text-muted-foreground`         | `ChartContainer` · `ChartLegendContent` · `ChartTooltipContent` |
 | `elevation.xl`                   | `shadow-xl`                                               | `ChartTooltipContent`                                           |
+| `radius.control`                 | `rounded-control`                                         | `ChartTooltipContent`                                           |
 | `radius.xs`                      | `rounded-xs`                                              | `ChartLegendContent` · `ChartTooltipContent`                    |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                  | `ChartContainer`                                                |
 | `space.scale.0`                  | `w-0`                                                     | `ChartTooltipContent`                                           |
@@ -231,7 +232,7 @@ export default function Example() {
           <ChartTooltip content={<ChartTooltipContent />} />
         </BarChart>
       </ChartContainer>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-ui text-muted-foreground">
         Revenue peaked in February at 305, after 186 in January.
       </p>
     </div>

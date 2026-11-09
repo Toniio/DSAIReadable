@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils"
 import { Canvas, useSiteTheme } from "@/site/playground/canvas"
 import { useStoryControls } from "@/site/playground/playground"
 import type { FrameState } from "@/site/playground/protocol"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 export interface AnatomyPart {
   /**
@@ -57,6 +58,7 @@ export function Anatomy({
   parts: AnatomyPart[]
 }) {
   const theme = useSiteTheme()
+  const brand = useSiteBrand()
   // An overlay drawn open needs the tall stage its playground has.
   const { tall } = useStoryControls(name, slug, [])
   const [pinned, setPinned] = useState(0)
@@ -71,10 +73,11 @@ export function Anatomy({
       args: {},
       state: "rest",
       theme,
+      brand,
       slots,
       highlight,
     }),
-    [theme, slots, highlight]
+    [theme, brand, slots, highlight]
   )
 
   return (

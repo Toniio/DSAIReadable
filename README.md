@@ -45,23 +45,25 @@ The project started from one observation: for an LLM to generate code that confo
 ```
 dsaireadable/
 ├── components/ui/              # The design system's 67 React components (customized shadcn/ui)
-├── lib/                        # Shared modules: utils, focus, ui-strings, overlay, surface, fonts
+├── lib/                        # Shared modules: utils, cn, focus, ui-strings, overlay, surface, fonts
 ├── hooks/                      # Shared hooks (use-mobile)
 ├── styles/                     # globals.css: the @theme bridge from the tokens to Tailwind
 ├── tests/                      # Component tests: every spec example rendered in headless Chromium, with axe
 ├── evals/                      # The conformance harness: reference tasks, scoring, history of the scores
 ├── site/                       # The documentation site: foundations, components with a live playground, patterns
 ├── tokens/                     # Source of truth for the tokens (three-tier DTCG JSON)
-│   ├── tokens.resolver.json    # DTCG resolver: the three tiers, then light / dark
+│   ├── tokens.resolver.json    # DTCG resolver: the three tiers, then the four themes
 │   ├── primitive.json          # Tier 1 — raw values (private)
-│   ├── semantic.json           # Tier 2 — semantic tokens (public), light values
+│   ├── semantic.json           # Tier 2 — semantic tokens (public), lyra's light values
 │   ├── semantic.dark.json      # Tier 2 — dark overrides
+│   ├── semantic.nova.json      # Tier 2 — the nova brand's overrides
+│   ├── semantic.nova.dark.json # Tier 2 — nova's dark overrides
 │   └── component.json          # Tier 3 — shadcn/ui aliases (public)
 ├── tokens.css                  # Generated CSS custom properties — do not edit
 ├── specs/                      # The design system's Markdown documentation
 │   ├── components/             # 67 component specs (13 sections each)
 │   ├── foundations/            # Color, typography, spacing, motion, radius… specs
-│   └── tokens/token-reference.md  # Reference of the 504 tokens (generated)
+│   └── tokens/token-reference.md  # Reference of the 546 tokens (generated)
 ├── mcp-server/                 # MCP server @dsaireadable/mcp-server
 │   ├── src/
 │   │   ├── tools/              # MCP tools (ds-core, dataviz, ux-writing, admin)
@@ -231,10 +233,11 @@ export default [...dsaireadable.configs.recommended]
 | `dsaireadable/no-inline-svg`                  | An inline `<svg>`: icons come from `@phosphor-icons/react`                                                                                 |
 | `dsaireadable/no-class-interpolation`         | A Tailwind class built by interpolation (`` `text-${tone}` ``): Tailwind never generates it                                                |
 | `dsaireadable/no-raw-values`                  | Raw hex and color functions, arbitrary Tailwind values, the default palette, primitive tokens, `prefers-color-scheme`                      |
+| `dsaireadable/no-text-role-in-stock-cn`       | A text role (`text-ui`…) passed to a `cn` imported from a module other than `@/lib/cn`, whose tailwind-merge can drop it                   |
 | `dsaireadable/no-deprecated-imports`          | A component export the design system has deprecated (JSDoc `@deprecated`); the list is generated and empty until the first one             |
 | `dsaireadable/no-deprecated-token`            | A token the design system has deprecated (`$deprecated`), by its CSS variable or its Tailwind class                                        |
 
-`configs.core` holds those seven rules and reads the code alone. `configs.recommended`
+`configs.core` holds those eight rules and reads the code alone. `configs.recommended`
 adds the Tailwind half of the lockdown through `eslint-plugin-better-tailwindcss`: a class the real
 stylesheet does not generate (`bg-red-500`, `p-13`) is an error, and a disabled state must read
 `opacity-disabled`. Point `settings["better-tailwindcss"].entryPoint` at your stylesheet if it is not
@@ -329,6 +332,9 @@ npx shadcn@latest add Toniio/DSAIReadable/button
 
 # The design system's rules for the project's agents
 npx shadcn@latest add Toniio/DSAIReadable/conventions
+
+# The nova brand, opt-in: its tokens under .nova and its three fonts. Put the `nova` class on <html> to turn it on
+npx shadcn@latest add Toniio/DSAIReadable/theme-nova
 ```
 
 **Always the full address** `Toniio/DSAIReadable/<item>`: a bare name (`npx shadcn add button`) points to the official shadcn registry, and would replace the design system's component with its own.
@@ -340,18 +346,19 @@ The CLI copies the source into the project, which then imports it locally:
 ```tsx
 import { Button } from "@/components/ui/button"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 ```
 
-Tokens are not imported into TSX: the base item merges their CSS variables into the project's stylesheet, `@theme inline` bridge included. Classes are therefore written with the semantic names (`bg-primary`, `text-muted-foreground`, `rounded-lg`).
+Tokens are not imported into TSX: the base item merges their CSS variables into the project's stylesheet, `@theme inline` bridge included. Classes are therefore written with the semantic names (`bg-primary`, `text-muted-foreground`, `rounded-control`).
 
 ### After install
 
 The base item changes more than the project's components folder:
 
-- **The stylesheet** (`tailwind.css` in `components.json`) receives the tokens (`:root`, `.dark`), the `@theme inline` bridge, `tw-animate-css` and `shadcn/tailwind.css` (animations, `data-open:` and the other state variants), the `z-modal`… utilities and a `@layer base` that sets `<html>` in `font-mono`.
+- **The stylesheet** (`tailwind.css` in `components.json`) receives the tokens (`:root`, `.dark`), the `@theme inline` bridge, `tw-animate-css` and `shadcn/tailwind.css` (animations, `data-open:` and the other state variants), the `z-modal`… utilities and a `@layer base` that sets `<html>` in `font-body`.
 - **The lockdown**: every Tailwind default color, radius, shadow, spacing step and type style the design system does not redefine is reset to `initial`. `bg-red-500`, `shadow-2xs`, `p-13` or `text-7xl` then generate no CSS, in the consumer's project as in this repository. The spacing scale is Tailwind v3's (`p-2`, `gap-1.5`, `h-9`).
-- **The fonts**: JetBrains Mono (`font-mono`, the whole interface) and Geist (`font-sans`, `Kbd` keys) come as `registry:font` items. In a Next.js app, the CLI adds their `next/font/google` loaders to the root layout; elsewhere (Vite…), it installs `@fontsource-variable/jetbrains-mono` and `@fontsource-variable/geist` and imports them.
+- **The fonts**: JetBrains Mono (`font-body`, `font-heading` and `font-mono`, the whole interface in lyra) and Geist (`font-sans`, `Kbd` keys) come as `registry:font` items. In a Next.js app, the CLI adds their `next/font/google` loaders to the root layout; elsewhere (Vite…), it installs `@fontsource-variable/jetbrains-mono` and `@fontsource-variable/geist` and imports them.
+- **The nova brand changes nothing until it is on**: `theme-nova` only adds `.nova` blocks and the Lora, DM Sans and Geist Mono font items. Lyra's stylesheet names no nova font. Toggling the `nova` class on `<html>` is the application's job.
 - **Dark mode is the `.dark` class on `<html>`** — never `prefers-color-scheme`. The `dark:` variant is declared; toggling the class is the application's job. With `next-themes`: `<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>`.
 
 ### Explore
@@ -362,7 +369,7 @@ npx shadcn@latest view Toniio/DSAIReadable/card        # view an item and its so
 npx shadcn@latest add Toniio/DSAIReadable/card --dry-run
 ```
 
-The [documentation site](https://toniio.github.io/DSAIReadable/) browses the design system: the foundations, every component with a live playground (variants, sizes, forced states, light and dark), the page patterns and the changes. It is rebuilt from the repository at each release tag, so it documents the published version.
+The [documentation site](https://toniio.github.io/DSAIReadable/) browses the design system: the foundations, every component with a live playground (variants, sizes, forced states, light and dark, in either brand), the page patterns and the changes. It is rebuilt from the repository at each release tag, so it documents the published version.
 
 Every component has its spec — props, variants, states, accessibility — in [`specs/components/`](./specs/components/). [`llms.txt`](./llms.txt) lists every spec with its role, the entry points and the machine-readable sources, in the [llms.txt](https://llmstxt.org/) format.
 
@@ -379,7 +386,7 @@ With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the reque
 
 ### Guarantees
 
-`registry.json` is **generated** — `npm run registry:build` derives it from the inventory, the specs and the actual imports. CI rejects a registry that is out of sync, an internal dependency written as a bare name and, above all, an **unusable** registry: `npm run registry:test-install` installs the 71 items in a blank app with non-standard aliases, type-checks it, then builds its stylesheet and checks what Tailwind emits: the lockdown holds, both fonts resolve to a declared `@font-face`, `dark:`, `sm:`, `data-open:` and `z-modal` compile. On a PR, it tests the registry built by the branch; after each merge, the published addresses.
+`registry.json` is **generated** — `npm run registry:build` derives it from the inventory, the specs and the actual imports. CI rejects a registry that is out of sync, an internal dependency written as a bare name and, above all, an **unusable** registry: `npm run registry:test-install` installs the 75 items in a blank app with non-standard aliases, type-checks it, then builds its stylesheet and checks what Tailwind emits: the lockdown holds, both fonts resolve to a declared `@font-face`, `dark:`, `sm:`, `data-open:` and `z-modal` compile. On a PR, it tests the registry built by the branch; after each merge, the published addresses.
 
 ---
 
@@ -388,14 +395,20 @@ With no suffix, an item installs from `main`. `#<tag|full SHA>` pins **the reque
 Three-tier architecture in the [W3C DTCG](https://www.designtokens.org/TR/2025.10/format/) format (Format and Resolver Modules 2025.10, checked by Terrazzo):
 
 ```
-tokens/tokens.resolver.json → the three tiers, then the color-scheme modifier (light by default, dark)
-tokens/primitive.json       → raw values (OKLCH ramps, rem, ms) — never referenced directly
-tokens/semantic.json        → design decisions, light values
-tokens/semantic.dark.json   → the dark values of the semantic tokens that change
-tokens/component.json       → shadcn/ui aliases (--background, --primary, --ring…)
+tokens/tokens.resolver.json    → the three tiers, then the theme modifier (light by default, dark, nova-light, nova-dark)
+tokens/primitive.json          → raw values (OKLCH ramps, rem, ms) — never referenced directly
+tokens/semantic.json           → design decisions, lyra's light values
+tokens/semantic.dark.json      → the dark values of the semantic tokens that change
+tokens/semantic.nova.json      → what the nova brand changes
+tokens/semantic.nova.dark.json → what nova's dark changes on top of those
+tokens/component.json          → shadcn/ui aliases (--background, --primary, --ring…)
 ```
 
 The tokens are exported as CSS custom properties in `tokens.css`.
+
+### Brands
+
+Two brands share one set of components. **Lyra** is the default: square corners, 12px component text, JetBrains Mono. **Nova** is the `nova` class on `<html>`, next to `dark`: stone neutrals, rounded corners from 4px to 14px, 14px component text, Lora for the page and DM Sans for headings. Only colors, typefaces, radii and text sizes differ, and both meet WCAG 2.2 AA. A component names a role (`rounded-surface`, `text-ui`) and the brand sets its value, so a class never needs a brand variant: [radius](./specs/foundations/radius.md), [typography](./specs/foundations/typography.md), [color](./specs/foundations/color.md#brands).
 
 ---
 
@@ -439,10 +452,10 @@ npm run check        # Every CI check that needs no network or API key, in one c
 npm run lint         # ESLint
 npm run format       # Prettier (sorts Tailwind classes automatically)
 npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP server, site
-npm run test:components  # Every spec example, and the foundations' complete modules, in headless Chromium: axe light and dark, focus, keyboard
+npm run test:components  # Every spec example, and the foundations' complete modules, in headless Chromium: axe in the four themes, focus, keyboard
 npm run evals:test   # The conformance harness scores its gold examples and the edit tasks' bases, with no model
 npm run site:dev     # The documentation site: foundations, components with a live playground, patterns, changes, audits
-npm run site:build && npm run site:test  # The built site, loaded in headless Chromium: axe, page errors and a focus indicator on every tab stop, light and dark
+npm run site:build && npm run site:test  # The built site, loaded in headless Chromium: axe, page errors and a focus indicator on every tab stop, light and dark, the previews in nova too
 ```
 
 ---
@@ -453,8 +466,8 @@ npm run site:build && npm run site:test  # The built site, loaded in headless Ch
 - **Never a Primitive token directly** — only the Semantic (`tokens/semantic.json`) and Component (`tokens/component.json`) tiers are public.
 - **`npm run tokens-validate` before every commit** — zero errors required to merge.
 - **Phosphor icons only** — `@phosphor-icons/react`. No Lucide, no Heroicons.
-- **Class-based dark mode** — the `.dark` class on `<html>`. No `prefers-color-scheme`.
-- **WCAG 2.2 AA** — contrast (checked in both modes), 24px minimum pointer targets (`size.target.min`), visible focus. APCA is reported as an advisory level only.
+- **Class-based dark mode and brand** — the `.dark` and `.nova` classes on `<html>`. No `prefers-color-scheme`.
+- **WCAG 2.2 AA** — contrast (checked in all four themes), 24px minimum pointer targets (`size.target.min`), visible focus. APCA is reported as an advisory level only.
 - **Read the spec** before writing or changing a component (`specs/components/<component>.md`).
 - **Everything in American English** — code, comments, docs, specs and UI copy.
 

@@ -34,8 +34,8 @@ export function ThemeSwitch() {
       {THEMES.map(({ value, label, icon: Icon }) => (
         <ToggleGroupItem key={value} value={value} aria-label={label}>
           <Icon />
-          {/* From lg to xl the header's tabs take the room the labels had. */}
-          <span className="hidden md:inline lg:hidden xl:inline">{label}</span>
+          {/* From xl to 2xl the header's tabs take the room the labels had. */}
+          <span className="hidden md:inline xl:hidden 2xl:inline">{label}</span>
         </ToggleGroupItem>
       ))}
     </ToggleGroup>

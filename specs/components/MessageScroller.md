@@ -43,7 +43,7 @@ The scrolling thread of a conversation: it keeps the latest message in view as m
 - `ArrowDownIcon` from `@phosphor-icons/react`
 - `UI_STRINGS.messageScroller` from `@/lib/ui-strings` for the region name and the button text
 - The `scroll-fade-b` utility of `shadcn/tailwind.css`, imported by `styles/globals.css`
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 

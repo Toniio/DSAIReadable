@@ -7,6 +7,17 @@
 @source "../../hooks";
 @source "..";
 
+/* InBrand: the static HTML holds a value once per brand, and the class the
+   blocking script sets on <html> picks one before the first paint. The wrapper
+   of the variant shown adds no box. */
+[data-brand] {
+  display: contents;
+}
+html:not(.nova) [data-brand="nova"],
+html.nova [data-brand="lyra"] {
+  display: none;
+}
+
 /* Forced states for the playground. A preview canvas that carries
    data-force-state draws every control inside it as if it were hovered,
    focused or pressed: the built-in variants are redefined here, for the site

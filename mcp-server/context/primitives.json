@@ -495,6 +495,116 @@
     "type": "color"
   },
   {
+    "path": "primitive.color.stone.50",
+    "value": "oklch(98.56% 0.0017 67.8)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.100",
+    "value": "oklch(96.54% 0.0025 48.72)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.200",
+    "value": "oklch(92.45% 0.0051 48.68)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.300",
+    "value": "oklch(83.05% 0.0114 63.33)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.400",
+    "value": "oklch(71.49% 0.0136 56.17)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.500",
+    "value": "oklch(58.91% 0.0143 56.1)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.600",
+    "value": "oklch(50.08% 0.013 63.17)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.700",
+    "value": "oklch(39.95% 0.0126 57.92)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.800",
+    "value": "oklch(27.6% 0.0081 59.33)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.900",
+    "value": "oklch(21.61% 0.0061 56.04)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.stone.950",
+    "value": "oklch(14.69% 0.0041 49.25)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.50",
+    "value": "oklch(98.6% 0.0108 182.88)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.100",
+    "value": "oklch(96.5% 0.0193 184.92)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.200",
+    "value": "oklch(92.58% 0.0412 185.15)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.300",
+    "value": "oklch(82.91% 0.0828 185.05)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.400",
+    "value": "oklch(71.47% 0.1039 184.68)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.500",
+    "value": "oklch(59.04% 0.1039 184.63)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.600",
+    "value": "oklch(49.93% 0.0883 184.39)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.700",
+    "value": "oklch(40.06% 0.071 183.86)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.800",
+    "value": "oklch(27.46% 0.0482 185.94)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.900",
+    "value": "oklch(21.87% 0.0389 183.19)",
+    "type": "color"
+  },
+  {
+    "path": "primitive.color.teal.950",
+    "value": "oklch(14.73% 0.0259 185.18)",
+    "type": "color"
+  },
+  {
     "path": "primitive.color.white",
     "value": "oklch(100% 0 0)",
     "type": "color"
@@ -992,6 +1102,21 @@
   {
     "path": "primitive.typography.font-family.mono",
     "value": "JetBrains Mono, monospace",
+    "type": "fontFamily"
+  },
+  {
+    "path": "primitive.typography.font-family.lora",
+    "value": "Lora, serif",
+    "type": "fontFamily"
+  },
+  {
+    "path": "primitive.typography.font-family.dm-sans",
+    "value": "DM Sans, sans-serif",
+    "type": "fontFamily"
+  },
+  {
+    "path": "primitive.typography.font-family.geist-mono",
+    "value": "Geist Mono, monospace",
     "type": "fontFamily"
   },
   {

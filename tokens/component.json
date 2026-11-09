@@ -11,9 +11,9 @@
       "$description": "shadcn --foreground compatibility alias. Maps primary text color to the shadcn variable name."
     },
     "card": {
-      "$value": "{color.background.subtle}",
+      "$value": "{color.background.card}",
       "$type": "color",
-      "$description": "shadcn --card compatibility alias. Cards use the subtle surface (slightly off-white / dark mist) rather than pure default to create visual separation."
+      "$description": "shadcn --card compatibility alias. Cards read their own surface token, so that a brand can set a card apart from the muted surfaces."
     },
     "card-foreground": {
       "$value": "{color.text.default}",
@@ -98,7 +98,7 @@
     "radius": {
       "$value": "{radius.lg}",
       "$type": "dimension",
-      "$description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem). No component reads it: radix-lyra draws every component with rounded-none."
+      "$description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem). No component reads it: a component names a radius role (`radius.surface`, `radius.control`…), which each brand sets."
     },
     "chart-1": {
       "$value": "{color.chart.1}",

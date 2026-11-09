@@ -32,7 +32,7 @@ A scroll container with styled scrollbars that replace the browser's native ones
 ## Dependencies
 
 - `ScrollArea.Root`, `ScrollArea.Viewport`, `ScrollArea.ScrollAreaScrollbar`, `ScrollArea.ScrollAreaThumb`, `ScrollArea.Corner` from `radix-ui`
-- `cn` from `@/lib/utils`
+- `cn` from `@/lib/cn`
 
 ## Anatomy
 
@@ -54,6 +54,7 @@ A scroll container with styled scrollbars that replace the browser's native ones
 | `color.border.focus`     | `border-ring` · `outline-ring` · `ring-ring/50`                     | `ScrollArea` · `ScrollArea` via `FOCUS_RING` (`lib/focus.ts`) |
 | `motion.duration.fast`   | `transition-[color,box-shadow]` · `transition-colors`               | `ScrollArea` · `ScrollBar`                                    |
 | `motion.easing.default`  | `transition-[color,box-shadow]` · `transition-colors`               | `ScrollArea` · `ScrollBar`                                    |
+| `radius.pill`            | `rounded-pill`                                                      | `ScrollBar`                                                   |
 | `space.focus-ring-width` | `ring-(length:--space-focus-ring-width)`                            | `ScrollArea` via `FOCUS_RING` (`lib/focus.ts`)                |
 | `space.scale.2-5`        | `h-2.5` · `w-2.5`                                                   | `ScrollBar`                                                   |
 

@@ -7,9 +7,9 @@
  * distance of 0.08, below what a reader tells apart at a glance. It was a
  * sequential ramp used for unordered categories.
  *
- * Two rules, per mode:
- *   ① each series `color.chart.1…5` reaches 3:1 against the default, subtle
- *      and elevated surfaces it can be drawn on (WCAG 2.2 SC 1.4.11,
+ * Two rules, per theme:
+ *   ① each series `color.chart.1…5` reaches 3:1 against the default, card,
+ *      subtle and elevated surfaces it can be drawn on (WCAG 2.2 SC 1.4.11,
  *      non-text contrast);
  *   ② every pair of series is at least MIN_DELTA_E apart in OKLab, in normal
  *      vision and simulated protanopia and deuteranopia. All pairs, not only
@@ -29,7 +29,12 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { luminance } from "./wcag.js"
 import { deltaE, VISIONS } from "./color-vision.js"
-import { loadTokens, MODES, srgbCss } from "../mcp-server/src/lib/dtcg.js"
+import {
+  loadTokens,
+  srgbCss,
+  THEMES,
+  type Theme,
+} from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -42,7 +47,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const MIN_DELTA_E = 0.15
 const MIN_CONTRAST = 3
 const SERIES = ["1", "2", "3", "4", "5"]
-const SURFACES = ["default", "subtle", "elevated"]
+const SURFACES = ["default", "card", "subtle", "elevated"]
 type Node = { $value?: unknown; $type?: string }
 const tokens = loadTokens(ROOT)
 const primitive = tokens.tiers.primitive.tree
@@ -56,15 +61,15 @@ const at = (tree: Record<string, unknown>, path: string) =>
       tree
     ) as Node | undefined
 
-/** Hex value of a semantic color in a mode (semantic → primitive). */
-function hexOf(path: string, mode: (typeof MODES)[number]): string {
+/** Hex value of a semantic color in a theme (semantic → primitive). */
+function hexOf(path: string, theme: Theme): string {
   const node = at(semantic, path)
   if (!node?.$value) throw new Error(`Unknown semantic token ${path}`)
-  const ref = String(tokens.override(path, mode) ?? node.$value)
+  const ref = String(tokens.override(path, theme) ?? node.$value)
   const leaf = at(primitive, ref.replace(/^\{|\}$/g, ""))
   const target = leaf?.$value === undefined ? undefined : srgbCss(leaf.$value)
   if (!target || !/^#[0-9a-f]{6}$/i.test(target))
-    throw new Error(`${path} (${mode}) does not resolve to a hex color`)
+    throw new Error(`${path} (${theme}) does not resolve to a hex color`)
   return target
 }
 
@@ -76,21 +81,21 @@ const ratio = (a: string, b: string) => {
 const findings: string[] = []
 const report: string[] = []
 
-for (const mode of MODES) {
+for (const theme of THEMES) {
   const series = SERIES.map((n) => ({
     n,
-    hex: hexOf(`color.chart.${n}`, mode),
+    hex: hexOf(`color.chart.${n}`, theme),
   }))
 
   let worstContrast = Infinity
   for (const surface of SURFACES) {
-    const bg = hexOf(`color.background.${surface}`, mode)
+    const bg = hexOf(`color.background.${surface}`, theme)
     for (const { n, hex } of series) {
       const r = ratio(hex, bg)
       worstContrast = Math.min(worstContrast, r)
       if (r < MIN_CONTRAST)
         findings.push(
-          `① ${mode}: chart.${n} ${hex} is ${r.toFixed(2)}:1 on background.${surface} ${bg} — below ${MIN_CONTRAST}:1`
+          `① ${theme}: chart.${n} ${hex} is ${r.toFixed(2)}:1 on background.${surface} ${bg} — below ${MIN_CONTRAST}:1`
         )
     }
   }
@@ -105,13 +110,13 @@ for (const mode of MODES) {
         worstDelta[vision] = Math.min(worstDelta[vision], d)
         if (d < MIN_DELTA_E)
           findings.push(
-            `② ${mode}, ${vision}: chart.${a.n} ${a.hex} and chart.${b.n} ${b.hex} are ${d.toFixed(3)} apart — below ${MIN_DELTA_E}`
+            `② ${theme}, ${vision}: chart.${a.n} ${a.hex} and chart.${b.n} ${b.hex} are ${d.toFixed(3)} apart — below ${MIN_DELTA_E}`
           )
       }
   }
 
   report.push(
-    `${mode}: ≥ ${worstContrast.toFixed(2)}:1 on every surface, pairs ≥ ` +
+    `${theme}: ≥ ${worstContrast.toFixed(2)}:1 on every surface, pairs ≥ ` +
       VISIONS.map((v) => `${worstDelta[v].toFixed(2)} ${v}`).join(" / ")
   )
 }

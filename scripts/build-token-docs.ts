@@ -23,7 +23,7 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { format, resolveConfig } from "prettier"
 import { replacementOf } from "../mcp-server/src/lib/deprecations.js"
-import { cssValue, loadTokens, type Mode } from "../mcp-server/src/lib/dtcg.js"
+import { cssValue, loadTokens, type Theme } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -51,6 +51,18 @@ interface RawNode {
   } & Record<string, unknown>
 }
 
+/**
+ * A token's value in each theme: `light`, `dark` where dark changes it, and
+ * `nova` and `novaDark` where the nova brand does. A reader takes `novaDark`,
+ * then `dark`, then `light` in nova dark; `nova`, then `light` in nova light.
+ */
+interface ThemedValue {
+  light: string
+  dark?: string
+  nova?: string
+  novaDark?: string
+}
+
 interface Entry {
   token: string
   tier: Tier
@@ -65,15 +77,15 @@ interface Entry {
   /** On a deprecated token, the token to use instead (`$extensions["design.dsaireadable"].replacement`). */
   replacement?: string
   source: string
-  reference: { light: string; dark?: string }
-  value: { light: string; dark?: string }
+  reference: ThemedValue
+  value: ThemedValue
   description?: string
   docs?: Docs
   private?: true
 }
 
 // ---------------------------------------------------------------------------
-// Load the three tiers and the dark context (tokens/tokens.resolver.json)
+// Load the three tiers and the theme contexts (tokens/tokens.resolver.json)
 // ---------------------------------------------------------------------------
 const tokens = loadTokens(ROOT)
 
@@ -163,14 +175,14 @@ const BELOW: Record<Tier, Tier[]> = {
   component: ["semantic", "primitive"],
 }
 
-function resolveValue(raw: string, tier: Tier, mode: Mode): string {
+function resolveValue(raw: string, tier: Tier, theme: Theme): string {
   return raw.replace(/\{([^}]+)\}/g, (whole, ref: string) => {
     for (const below of BELOW[tier]) {
       const node = nodeAt(trees[below], ref)
       if (!node) continue
-      const next = tokens.override(ref, mode) ?? node.$value
+      const next = tokens.override(ref, theme) ?? node.$value
       return next
-        ? resolveValue(cssValue(next, node.$type), below, mode)
+        ? resolveValue(cssValue(next, node.$type), below, theme)
         : whole
     }
     return whole
@@ -209,6 +221,21 @@ for (const { tier, file } of TIERS) {
     const darkRef =
       darkValue === undefined ? undefined : cssValue(darkValue, node.$type)
     const dark = darkRef || hasDark(lightRef, tier) ? lightRef : undefined
+    const value = (theme: Theme, ref: string) => resolveValue(ref, tier, theme)
+    const lightValue = value("light", lightRef)
+    const darkResolved =
+      darkRef || dark ? value("dark", darkRef ?? lightRef) : undefined
+    const refIn = (theme: "nova-light" | "nova-dark") => {
+      const override = tokens.override(token, theme)
+      return override === undefined ? undefined : cssValue(override, node.$type)
+    }
+    const novaRef = refIn("nova-light")
+    const novaDarkRef = refIn("nova-dark")
+    const novaResolved = value("nova-light", novaRef ?? lightRef)
+    const novaDarkResolved = value(
+      "nova-dark",
+      novaDarkRef ?? darkRef ?? lightRef
+    )
     const docs = { ...inheritedDocs(trees[tier], path) }
 
     entries.push({
@@ -224,11 +251,20 @@ for (const { tier, file } of TIERS) {
         ? { replacement: replacementOf(node) as string }
         : {}),
       source: file,
-      reference: { light: lightRef, ...(darkRef ? { dark: darkRef } : {}) },
+      reference: {
+        light: lightRef,
+        ...(darkRef ? { dark: darkRef } : {}),
+        ...(novaRef ? { nova: novaRef } : {}),
+        ...(novaDarkRef && novaDarkRef !== darkRef
+          ? { novaDark: novaDarkRef }
+          : {}),
+      },
       value: {
-        light: resolveValue(lightRef, tier, "light"),
-        ...(darkRef || dark
-          ? { dark: resolveValue(darkRef ?? lightRef, tier, "dark") }
+        light: lightValue,
+        ...(darkResolved !== undefined ? { dark: darkResolved } : {}),
+        ...(novaResolved !== lightValue ? { nova: novaResolved } : {}),
+        ...(novaDarkResolved !== (darkResolved ?? lightValue)
+          ? { novaDark: novaDarkResolved }
           : {}),
       },
       ...(node.$description ? { description: node.$description } : {}),
@@ -289,32 +325,36 @@ const statusCell = (e: Entry) =>
   e.replacement ? `${e.status} → ${code(e.replacement)}` : e.status
 
 function foundationTable(rows: Entry[], showDark: boolean): string[] {
-  const head = showDark
-    ? "| Token | CSS variable | Type | Status | Light | Dark | Tailwind |"
-    : "| Token | CSS variable | Type | Status | Value | Tailwind |"
-  const sep = showDark
-    ? "|---|---|---|---|---|---|---|"
-    : "|---|---|---|---|---|---|"
-  const lines = [head, sep]
+  const showNova = rows.some(
+    (e) => e.value.nova !== undefined || e.value.novaDark !== undefined
+  )
+  const valueHeads = [
+    ...(showDark ? ["Light", "Dark"] : ["Value"]),
+    ...(showNova ? ["Nova", "Nova dark"] : []),
+  ]
+  const head = [
+    "Token",
+    "CSS variable",
+    "Type",
+    "Status",
+    ...valueHeads,
+    "Tailwind",
+  ]
+  const lines = [
+    `| ${head.join(" | ")} |`,
+    `|${head.map(() => "---").join("|")}|`,
+  ]
   for (const e of rows) {
-    const cells = showDark
-      ? [
-          code(e.token),
-          code(e.cssVar),
-          e.type,
-          statusCell(e),
-          code(e.value.light),
-          code(e.value.dark),
-          code(e.docs?.tailwind),
-        ]
-      : [
-          code(e.token),
-          code(e.cssVar),
-          e.type,
-          statusCell(e),
-          code(e.value.light),
-          code(e.docs?.tailwind),
-        ]
+    const cells = [
+      code(e.token),
+      code(e.cssVar),
+      e.type,
+      statusCell(e),
+      code(e.value.light),
+      ...(showDark ? [code(e.value.dark)] : []),
+      ...(showNova ? [code(e.value.nova), code(e.value.novaDark)] : []),
+      code(e.docs?.tailwind),
+    ]
     lines.push(`| ${cells.join(" | ")} |`)
   }
   return lines
@@ -350,7 +390,7 @@ const md: string[] = [
   "",
   "# Token Reference",
   "",
-  `> ${entries.length} tokens · source \`tokens/tokens.resolver.json\`: \`primitive.json\` · \`semantic.json\` · \`semantic.dark.json\` · \`component.json\``,
+  `> ${entries.length} tokens · source \`tokens/tokens.resolver.json\`: \`primitive.json\` · \`semantic.json\` · \`semantic.dark.json\` · \`semantic.nova.json\` · \`semantic.nova.dark.json\` · \`component.json\``,
   "> Machine-readable counterpart: `tokens.manifest.json`",
   "",
   "The public tokens are the Semantic and Component tiers. The Primitive tier is private:",

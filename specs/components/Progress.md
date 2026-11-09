@@ -33,7 +33,7 @@ A linear progress bar that shows how far an operation or a process has gone, bui
 ## Dependencies
 
 - `radix-ui` (`Progress`) — the `Progress.Root` and `Progress.Indicator` primitives
-- `cn` (`@/lib/utils`) — the class-merging utility
+- `cn` (`@/lib/cn`) — the class-merging utility
 
 ## Anatomy
 
@@ -52,6 +52,7 @@ A linear progress bar that shows how far an operation or a process has gone, bui
 | `color.background.subtle`         | `bg-muted`            | `Progress` |
 | `motion.duration.fast`            | `transition-all`      | `Progress` |
 | `motion.easing.default`           | `transition-all`      | `Progress` |
+| `radius.pill`                     | `rounded-pill`        | `Progress` |
 | `space.scale.1`                   | `h-1`                 | `Progress` |
 
 Collected from `components/ui/progress.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.

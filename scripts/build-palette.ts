@@ -16,14 +16,18 @@ import { readFileSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { format, resolveConfig } from "prettier"
-import { loadTokens, primitiveGroups } from "../mcp-server/src/lib/dtcg.js"
+import {
+  loadTokens,
+  primitiveGroups,
+  THEMES,
+} from "../mcp-server/src/lib/dtcg.js"
 import { colorGroup, SOURCES } from "./lib/palette.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const PATH = resolve(ROOT, "tokens/primitive.json")
 const CHECK = process.argv.includes("--check")
 
-/** Every `{primitive.color.…}` the semantic tier reads, in either mode. */
+/** Every `{primitive.color.…}` the semantic tier reads, in any theme. */
 function referencedColors(): Set<string> {
   const tokens = loadTokens(ROOT)
   const found = new Set<string>()
@@ -35,7 +39,9 @@ function referencedColors(): Set<string> {
       Object.values(node).forEach(visit)
   }
   visit(tokens.tiers.semantic.tree)
-  for (const override of tokens.overrides.dark.values()) visit(override.$value)
+  for (const theme of THEMES)
+    for (const override of tokens.overrides[theme].values())
+      visit(override.$value)
   return found
 }
 

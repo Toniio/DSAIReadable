@@ -4,6 +4,7 @@ import { useMemo } from "react"
 
 import { Canvas, useSiteTheme } from "@/site/playground/canvas"
 import type { FrameState } from "@/site/playground/protocol"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 /**
  * A complete module of a foundation spec, rendered live in its own preview
@@ -20,9 +21,10 @@ export function FoundationExample({
   title: string
 }) {
   const theme = useSiteTheme()
+  const brand = useSiteBrand()
   const state = useMemo<FrameState>(
-    () => ({ view: "example", args: {}, state: "rest", theme }),
-    [theme]
+    () => ({ view: "example", args: {}, state: "rest", theme, brand }),
+    [theme, brand]
   )
   return (
     <Canvas

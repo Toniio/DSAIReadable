@@ -29,6 +29,7 @@ import type {
   TokenRow,
   TokensData,
 } from "@/site/foundation-docs/tokens/tokens-data"
+import { InBrand } from "@/site/ui/in-brand"
 
 /** How many rows a page shows, and how many more each "Show more" adds. */
 const PAGE = 100
@@ -52,6 +53,8 @@ function haystack(row: TokenRow): string {
     row.type,
     row.light,
     row.dark,
+    row.nova?.light,
+    row.nova?.dark,
     ...(row.classes ?? []),
     ...(row.chain ?? []),
   ]
@@ -80,6 +83,30 @@ function Value({
       ) : null}
       <span className="min-w-0 font-mono text-xs break-words">{value}</span>
     </div>
+  )
+}
+
+/** A token in one mode, in the site's brand; a swatch sits on that brand's page. */
+function ModeCell({
+  row,
+  mode,
+  surfaces,
+}: {
+  row: TokenRow
+  mode: "light" | "dark"
+  surfaces: TokensData["surfaces"]
+}) {
+  return (
+    <InBrand differs={row.nova !== undefined || row.type === "color"}>
+      {(brand) => {
+        const value = ((brand === "nova" && row.nova) || row)[mode]
+        return value !== undefined ? (
+          <Value row={row} value={value} surface={surfaces[brand][mode]} />
+        ) : (
+          <span className="text-xs text-muted-foreground">Same as light</span>
+        )
+      }}
+    </InBrand>
   )
 }
 
@@ -290,24 +317,10 @@ export function TokensTable({ data }: { data: TokensData }) {
                 )}
               </TableCell>
               <TableCell className="align-top whitespace-normal">
-                <Value
-                  row={row}
-                  value={row.light}
-                  surface={data.surfaces.light}
-                />
+                <ModeCell row={row} mode="light" surfaces={data.surfaces} />
               </TableCell>
               <TableCell className="align-top whitespace-normal">
-                {row.dark !== undefined ? (
-                  <Value
-                    row={row}
-                    value={row.dark}
-                    surface={data.surfaces.dark}
-                  />
-                ) : (
-                  <span className="text-xs text-muted-foreground">
-                    Same as light
-                  </span>
-                )}
+                <ModeCell row={row} mode="dark" surfaces={data.surfaces} />
               </TableCell>
               <TableCell className="align-top whitespace-normal">
                 {row.tier === "primitive" ? (

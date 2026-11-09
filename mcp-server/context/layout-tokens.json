@@ -453,7 +453,7 @@
       "css_var": "--radius-none",
       "value": "{primitive.radius.none}",
       "type": "dimension",
-      "description": "Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one."
+      "description": "Zero radius, square corners. `rounded-none` is a static class that reads no token, and the radius of a component comes from its role (`radius.surface`, `radius.control`…). Reserved for a value that must stay square in every brand and cannot be written as a class."
     },
     {
       "path": "radius.xs",
@@ -519,10 +519,65 @@
       "description": "Pill/full rounding. A round shape: Avatar, RadioGroup and Switch draw rounded-full, a static class that reads no token."
     },
     {
+      "path": "radius.surface",
+      "css_var": "--radius-surface",
+      "value": "{primitive.radius.none}",
+      "nova_light_value": "{primitive.radius.xl}",
+      "nova_dark_value": "{primitive.radius.xl}",
+      "type": "dimension",
+      "description": "Radius of a surface: card, dialog, drawer edge, bubble content, empty state, sidebar inset, command palette. Square in lyra, rounded in nova."
+    },
+    {
+      "path": "radius.control",
+      "css_var": "--radius-control",
+      "value": "{primitive.radius.none}",
+      "nova_light_value": "{primitive.radius.lg}",
+      "nova_dark_value": "{primitive.radius.lg}",
+      "type": "dimension",
+      "description": "Radius of a control: button, input, popover, menu panel, tabs list. Square in lyra, rounded in nova."
+    },
+    {
+      "path": "radius.item",
+      "css_var": "--radius-item",
+      "value": "{primitive.radius.none}",
+      "nova_light_value": "{primitive.radius.md}",
+      "nova_dark_value": "{primitive.radius.md}",
+      "type": "dimension",
+      "description": "Radius of an item inside a panel: menu and sidebar items, tooltip, skeleton, tabs trigger, calendar cell. Square in lyra, rounded in nova."
+    },
+    {
+      "path": "radius.inset",
+      "css_var": "--radius-inset",
+      "value": "{primitive.radius.none}",
+      "nova_light_value": "{primitive.radius.sm}",
+      "nova_dark_value": "{primitive.radius.sm}",
+      "type": "dimension",
+      "description": "Radius of a part nested in a control: kbd, chip, command item, menubar trigger, the extra-small buttons of an input group. Square in lyra, rounded in nova."
+    },
+    {
+      "path": "radius.mark",
+      "css_var": "--radius-mark",
+      "value": "{primitive.radius.none}",
+      "nova_light_value": "{primitive.radius.xs}",
+      "nova_dark_value": "{primitive.radius.xs}",
+      "type": "dimension",
+      "description": "Radius of a small mark: checkbox, questionnaire indicator, tooltip arrow. Square in lyra, rounded in nova."
+    },
+    {
+      "path": "radius.pill",
+      "css_var": "--radius-pill",
+      "value": "{primitive.radius.none}",
+      "nova_light_value": "{primitive.radius.full}",
+      "nova_dark_value": "{primitive.radius.full}",
+      "type": "dimension",
+      "description": "Radius of a fully rounded element: badge, bubble, carousel button, drawer handle, progress, scroll thumb, slider. Square in lyra, a pill in nova."
+    },
+    {
       "path": "elevation.xs",
       "css_var": "--elevation-xs",
       "value": "{primitive.elevation.light.xs}",
       "dark_value": "{primitive.elevation.dark.xs}",
+      "nova_dark_value": "{primitive.elevation.dark.xs}",
       "type": "shadow",
       "description": "Minimal lift for interactive elements. Not for decorative purposes."
     },
@@ -531,6 +586,7 @@
       "css_var": "--elevation-sm",
       "value": "{primitive.elevation.light.sm}",
       "dark_value": "{primitive.elevation.dark.sm}",
+      "nova_dark_value": "{primitive.elevation.dark.sm}",
       "type": "shadow",
       "description": "Small lift for cards and hover states. Not for fixed navigation."
     },
@@ -539,6 +595,7 @@
       "css_var": "--elevation-md",
       "value": "{primitive.elevation.light.md}",
       "dark_value": "{primitive.elevation.dark.md}",
+      "nova_dark_value": "{primitive.elevation.dark.md}",
       "type": "shadow",
       "description": "Medium elevation for dropdowns and context menus. Not for inline content."
     },
@@ -547,6 +604,7 @@
       "css_var": "--elevation-lg",
       "value": "{primitive.elevation.light.lg}",
       "dark_value": "{primitive.elevation.dark.lg}",
+      "nova_dark_value": "{primitive.elevation.dark.lg}",
       "type": "shadow",
       "description": "Large elevation for modals and side panels. Not for standard cards."
     },
@@ -555,6 +613,7 @@
       "css_var": "--elevation-xl",
       "value": "{primitive.elevation.light.xl}",
       "dark_value": "{primitive.elevation.dark.xl}",
+      "nova_dark_value": "{primitive.elevation.dark.xl}",
       "type": "shadow",
       "description": "Extra-large elevation for full overlay panels. Not for inline components."
     },
@@ -563,6 +622,7 @@
       "css_var": "--elevation-2xl",
       "value": "{primitive.elevation.light.2xl}",
       "dark_value": "{primitive.elevation.dark.2xl}",
+      "nova_dark_value": "{primitive.elevation.dark.2xl}",
       "type": "shadow",
       "description": "Maximum elevation for toasts and high-priority overlays. Use sparingly."
     },
@@ -571,6 +631,7 @@
       "css_var": "--elevation-inner",
       "value": "{primitive.elevation.light.inner}",
       "dark_value": "{primitive.elevation.dark.inner}",
+      "nova_dark_value": "{primitive.elevation.dark.inner}",
       "type": "shadow",
       "description": "Inner shadow for pressed, inset, or sunken element states. Not for raised elements."
     }
@@ -584,10 +645,10 @@
   ],
   "radius_rules": [
     "**Always use the tokens** — no arbitrary values such as `rounded-[7px]`. When no token fits, escalate to the design team.",
-    "**Consistency across the interface** — every system surface is square, so a surface a screen draws next to them stays square. A rounded one among them is the mixed look the system does not have.",
+    "**Next to components, a screen uses a role** — `rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark` or `rounded-pill`, the role of what it sits beside, so that it matches them in either brand.",
     "**A component draws its own corners** — add no `rounded-*` class to a `Button`, `Input`, `Card`, `Dialog` or any other component.",
-    "**`rounded-full` only for a round shape** — an avatar, a dot. Do not use it on a button, a badge or a card.",
-    "**The `radius.sm` to `radius.4xl` scale is for content** — an image, an illustration, a hero. `rounded-none` and `rounded-full` are static Tailwind classes that read no radius token, which is why `radius.full` is `reserved`."
+    "**`rounded-none` and `rounded-full` are fixed in every brand** — `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape, an avatar or a dot. Do not use `rounded-full` on a button, a badge or a card: a pill that follows the brand is `rounded-pill`.",
+    "**The `radius.sm` to `radius.4xl` scale is for content** — an image, an illustration, a hero. Its steps are the same in both brands. `rounded-none` and `rounded-full` are static Tailwind classes that read no radius token, which is why `radius.full` is `reserved`."
   ],
   "elevation_rules": [
     "**Follow the hierarchy** — elevation must reflect the surface's real position on the Z axis. A popover never has less elevation than an inline card.",

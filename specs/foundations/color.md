@@ -2,6 +2,8 @@
 
 > Source: `tokens/semantic.json` · CSS variables: `tokens.css` Layer 2
 
+The tables below give the values of **lyra**, the default brand. **Nova** re-themes the same tokens with no change to a class or a component: see [Brands](#brands).
+
 ---
 
 ## Semantic Tokens
@@ -11,7 +13,8 @@
 | Token                       | CSS Variable                  | Light                | Dark                          | Usage                                                                      |
 | --------------------------- | ----------------------------- | -------------------- | ----------------------------- | -------------------------------------------------------------------------- |
 | `color.background.default`  | `--color-background-default`  | `#ffffff` (white)    | `#080b0c` (mist.950)          | Main surface — the root page, the body                                     |
-| `color.background.subtle`   | `--color-background-subtle`   | `#f1f4f5` (mist.100) | `#21292b` (mist.800)          | Secondary surfaces — cards, muted areas                                    |
+| `color.background.subtle`   | `--color-background-subtle`   | `#f1f4f5` (mist.100) | `#21292b` (mist.800)          | Secondary surfaces — muted areas (`bg-muted`, `bg-secondary`)              |
+| `color.background.card`     | `--color-background-card`     | `#f1f4f5` (mist.100) | `#21292b` (mist.800)          | Inline cards (`bg-card`): the value of `subtle` in lyra, its own in nova   |
 | `color.background.elevated` | `--color-background-elevated` | `#ffffff` (white)    | `#151b1d` (mist.900)          | Floating surfaces — popovers, dropdowns, dialogs                           |
 | `color.background.input`    | `--color-background-input`    | `#e0e8ea` (mist.200) | white at 15% (white-alpha.15) | The fill of form controls, at an opacity: `bg-input-fill/30`, `/50`, `/80` |
 | `color.background.inverse`  | `--color-background-inverse`  | `#080b0c` (mist.950) | `#ffffff` (white)             | Inverted surfaces — dark tooltips, high-contrast badges                    |
@@ -19,7 +22,7 @@
 **Do / Don't:**
 
 - ✅ `background.default` — the background of `<html>` and of root containers.
-- ❌ Do not use `background.default` for cards — use `background.subtle`.
+- ❌ Do not use `background.default` for cards — use `background.card` (`bg-card`).
 - ✅ `background.elevated` for anything that floats above the content (a menu, a dialog).
 - ❌ Do not use `background.elevated` for an inline card — it is not a floating surface.
 
@@ -61,9 +64,9 @@
 
 **Do / Don't:**
 
-- ✅ `border.input` for every `<input>`, `<select>`, `<textarea>`, checkbox and radio border, and for the track of an unchecked Switch (`bg-input`): the boundary of a control, at 3:1 or more on the page, the card and the popover in both modes ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast)), blocking in `npm run tokens:lint-contrast`.
+- ✅ `border.input` for every `<input>`, `<select>`, `<textarea>`, checkbox and radio border, and for the track of an unchecked Switch (`bg-input`): the boundary of a control, at 3:1 or more on the page, the card and the popover in both modes ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast)).
 - ❌ Do not paint a field's fill with `border.input` (`bg-input/30`): the translucent fills take `background.input` (`bg-input-fill/30`, `/50`, `/80`), so a darker border never darkens a fill.
-- ✅ `border.focus` sits 3:1 or more away from `border.input` (3.65:1 in light, 3.27:1 in dark): a focused field never reads as a resting one.
+- ✅ `border.focus` sits 3:1 or more away from `border.input` (3.65:1 in light and 3.27:1 in dark in lyra, 3.58:1 and 3.31:1 in nova): a focused field never reads as a resting one.
 - ❌ Do not use `border.focus` at rest or on hover — only for the `:focus-visible` state.
 - ✅ A divider between the sections of a page is a `Separator`, drawn in `border.default` (`bg-border`): `border.subtle` is reserved.
 
@@ -100,7 +103,7 @@
 
 - ✅ Always pair `action.background.default` with `action.background.foreground` for the text.
 - ❌ Do not use these tokens for the `ghost` or `outline` variants: a neutral element with no fill of its own takes a veil ([States](#states)).
-- ✅ A role fill under the pointer takes its `hover` step, solid: one step darker in light, one lighter in dark, so its label keeps 4.5:1 (`hover:bg-primary/80` put it at 4.24:1).
+- ✅ A role fill under the pointer takes its `hover` step, solid: in lyra one step darker in light, one lighter in dark, so its label keeps 4.5:1 (`hover:bg-primary/80` put it at 4.24:1). Nova's primary sits at the far end of its ramp, so its `hover` step moves toward the middle instead.
 
 ---
 
@@ -166,7 +169,7 @@ Two palettes, for two kinds of data. Mixing them up is the mistake that
 channels). Series are told apart by **hue**. Every series reaches 3:1 against
 the `default`, `subtle` and `elevated` backgrounds of its mode (WCAG 1.4.11),
 and every pair stays distinct under normal vision, protanopia and deuteranopia
-(OKLab distance ≥ 0.15; the current palette's worst pair is at 0.18).
+(OKLab distance ≥ 0.15; lyra's worst pair is at 0.18, nova's at 0.15).
 
 | Token           | CSS Variable      | Light                | Dark                 | Tailwind     |
 | --------------- | ----------------- | -------------------- | -------------------- | ------------ |
@@ -182,13 +185,13 @@ categories. Status `reserved`: no component uses it yet, and it has no Tailwind
 class — read it through Tailwind's shorthand, `bg-(--color-chart-sequential-N)`
 (`fill-(--color-chart-sequential-N)` in an SVG), never `bg-[var(--…)]`.
 
-| Token                      | CSS Variable                 | Value (both modes)  |
-| -------------------------- | ---------------------------- | ------------------- |
-| `color.chart.sequential.1` | `--color-chart-sequential-1` | green.200 `#d3f2bf` |
-| `color.chart.sequential.2` | `--color-chart-sequential-2` | green.300 `#a0dc75` |
-| `color.chart.sequential.3` | `--color-chart-sequential-3` | green.400 `#72ba2c` |
-| `color.chart.sequential.4` | `--color-chart-sequential-4` | green.500 `#529100` |
-| `color.chart.sequential.5` | `--color-chart-sequential-5` | green.600 `#407300` |
+| Token                      | CSS Variable                 | Value (both modes, lyra) |
+| -------------------------- | ---------------------------- | ------------------------ |
+| `color.chart.sequential.1` | `--color-chart-sequential-1` | green.200 `#d3f2bf`      |
+| `color.chart.sequential.2` | `--color-chart-sequential-2` | green.300 `#a0dc75`      |
+| `color.chart.sequential.3` | `--color-chart-sequential-3` | green.400 `#72ba2c`      |
+| `color.chart.sequential.4` | `--color-chart-sequential-4` | green.500 `#529100`      |
+| `color.chart.sequential.5` | `--color-chart-sequential-5` | green.600 `#407300`      |
 
 **Do / Don't:**
 
@@ -246,6 +249,87 @@ Turned on by the `.dark` class on `<html>`. Every override is defined in
 
 ---
 
+## Brands
+
+A brand is a second axis, next to the color scheme. **Lyra** is the default: it is the absence of a class. **Nova** is the `nova` class on `<html>`, and it combines with `dark`, which makes four themes: `light`, `dark`, `nova-light`, `nova-dark`. There is no `prefers-color-scheme` here either.
+
+```html
+<!-- Lyra, light -->
+<html></html>
+<!-- Lyra, dark -->
+<html class="dark"></html>
+<!-- Nova, light -->
+<html class="nova"></html>
+<!-- Nova, dark -->
+<html class="nova dark"></html>
+```
+
+A brand changes tokens and nothing else: no component is written twice and no class changes name, so `bg-primary` is violet in lyra and near-black stone in nova. `tokens/semantic.nova.json` overrides what nova changes, and `tokens/semantic.nova.dark.json` what nova's dark changes on top of it. `.nova` comes after `.dark` in `tokens.css` and has the same specificity, so it wins on `<html class="nova dark">`: every key set by both must be set again in the dark file, and `npm run tokens:lint-naming` fails when one is missing. Nova covers colors, typefaces, radii and text sizes. Spacing, weights and the focus ring width are lyra's.
+
+### Nova's values
+
+Neutrals are the generated `stone` ramp, in place of `mist`. The primary is near-black in light and near-white in dark, in place of violet. Feedback colors and `destructive` stay on their ramps; only the foregrounds that read `mist.950` change, to `stone.950`.
+
+| Token                                                     | Nova light           | Nova dark            |
+| --------------------------------------------------------- | -------------------- | -------------------- |
+| `color.background.default`                                | white                | stone.950            |
+| `color.background.subtle`                                 | stone.100            | stone.800            |
+| `color.background.card`                                   | white                | stone.900            |
+| `color.background.elevated`                               | white                | stone.900            |
+| `color.background.input`                                  | stone.200            | white-alpha.15       |
+| `color.text.default`, `color.text.bold`                   | stone.950            | stone.50             |
+| `color.text.subtle`                                       | stone.600            | stone.400            |
+| `color.text.action.default`                               | stone.900            | stone.200            |
+| `color.border.default`, `color.border.subtle`             | stone.200            | white-alpha.10       |
+| `color.border.input`                                      | stone.500            | stone.500            |
+| `color.border.focus`                                      | stone.800            | stone.200            |
+| `color.action.background.default`                         | stone.900            | stone.200            |
+| `color.action.background.foreground`                      | stone.50             | stone.900            |
+| `color.text.action.on`, `color.icon.action`               | stone.50             | stone.900            |
+| `color.action.background.hover`                           | stone.800            | stone.300            |
+| `color.action.background.selected`                        | stone.100            | stone.900            |
+| `color.action.secondary.hover`, `color.action.tint.hover` | stone.200            | stone.700            |
+| `color.sidebar.background`                                | stone.50             | stone.900            |
+| `color.sidebar.primary.default`                           | stone.900            | stone.200            |
+| `color.sidebar.accent.default`                            | stone.100            | stone.800            |
+| `color.sidebar.ring`                                      | stone.500            | stone.500            |
+| `color.chart.1`                                           | teal.800             | teal.400             |
+| `color.chart.2`                                           | blue.500             | blue.500             |
+| `color.chart.3`                                           | yellow.500           | yellow.300           |
+| `color.chart.4`                                           | plum.700             | plum.200             |
+| `color.chart.5`                                           | green.700            | amber.500            |
+| `color.chart.sequential.1` to `.5`                        | teal.200 to teal.600 | teal.200 to teal.600 |
+
+### What was adjusted for WCAG 2.2 AA
+
+Nova starts from shadcn/ui's stone theme. Its neutrals are lighter than this system's rules accept, and no threshold is relaxed for a brand: `npm run tokens:lint-contrast` holds nova's pairs to the same 4.5:1 and 3:1 as lyra's, so these steps moved until every pair passed. The ratios are measured on this repository's `stone` ramp.
+
+| Token                        | The theme draws | Nova ships                     | Before → after                                                                  | Why                                                                                                                  |
+| ---------------------------- | --------------- | ------------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `color.text.subtle` (light)  | stone.500       | stone.600                      | 3.74 → 5.42 on a muted surface; threshold 4.5                                   | Secondary text, on the weakest surface it sits on                                                                    |
+| `color.border.input` (light) | stone.200       | stone.500                      | 1.25 → 4.14 on the page; threshold 3                                            | The boundary of a control must be seen ([SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast))  |
+| `color.border.input` (dark)  | white at 15%    | stone.500                      | 4.77 on the page, 3.58 on a muted surface; threshold 3                          | The same boundary, which a translucent white cannot draw at 3:1                                                      |
+| `color.border.focus` (light) | stone.400       | stone.800                      | 2.54 → 14.81 on the page; threshold 3                                           | The solid part of the focus indicator, 3:1 or more from the resting border; dark takes stone.200 for the same reason |
+| `color.chart.1` to `.5`      | a teal ramp     | teal first, then distinct hues | 3.65:1 or more on every surface in light, 3.48:1 in dark; pairs at 0.15 or more | A single hue cannot keep series apart under the OKLab floor of [Chart](#chart)                                       |
+
+`color.chart.1` is `teal.800`, close to black in light: it is the lightest teal step that keeps both 3:1 on white and the distance to the other series. Teal shows as a hue in dark mode (`teal.400`) and in `color.chart.sequential.*`. A role fill under the pointer stays a solid step, as in lyra, and never an opacity of its resting color.
+
+Measured, as `npm run tokens:lint-contrast` reports them:
+
+| Pair                                                          | Nova light | Nova dark | Threshold |
+| ------------------------------------------------------------- | ---------- | --------- | --------- |
+| focus indicator's solid part on the page                      | 14.81      | 15.79     | 3.0       |
+| focus indicator's solid part on the muted surface             | 13.38      | 11.83     | 3.0       |
+| control border (`border.input`) on the page                   | 4.14       | 4.77      | 3.0       |
+| control border on the muted surface                           | 3.74       | 3.58      | 3.0       |
+| `text.subtle` on the page                                     | 6.00       | 7.79      | 4.5       |
+| `text.subtle` on the muted surface (`muted-foreground`)       | 5.42       | 5.84      | 4.5       |
+| `action.background.foreground` on `action.background.default` | 16.78      | 13.98     | 4.5       |
+| `feedback.error.foreground` on `feedback.error.default`       | 4.62       | 7.24      | 4.5       |
+| subtle text on the selected veil over a muted surface         | 4.68       | 4.57      | 4.5       |
+
+---
+
 ## Tailwind Classes
 
 The tokens are exposed through `@theme inline` in `globals.css`, which generates
@@ -254,7 +338,7 @@ these utility classes:
 | Class                      | Token                                                    |
 | -------------------------- | -------------------------------------------------------- |
 | `bg-background`            | `color.background.default`                               |
-| `bg-card`                  | `color.background.subtle`                                |
+| `bg-card`                  | `color.background.card`                                  |
 | `bg-popover`               | `color.background.elevated`                              |
 | `text-foreground`          | `color.text.default`                                     |
 | `text-muted-foreground`    | `color.text.subtle`                                      |
@@ -295,13 +379,13 @@ these utility classes:
 
 What the design system checks before a change to a token or a component ships.
 
-- **Always test both modes** — every component must be checked in light and in dark before it ships.
-- **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in both modes, and fails below the threshold. The pairs under watch are declared in `scripts/lib/contrast-pairs.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.
+- **Always test every theme** — every component must be checked in light and in dark, in each brand, before it ships.
+- **Contrast is checked mechanically** — `npm run tokens:lint-contrast` (part of `npm run tokens-validate`) resolves every background / text pair the system actually ships, in each of the four themes, and fails below the threshold. The pairs under watch are declared in `scripts/lib/contrast-pairs.ts`: **add a pair as soon as a new background / text combination appears in the system**, otherwise nothing covers it. A pair is checked as it renders: a `bg-<role>/<n>` tint is composited onto each surface it can sit on (page, card, popover), in each state (rest, hover, focus), before the ratio is measured. Fix the token, never the threshold.
 - **APCA is advisory, WCAG 2 decides** — the same lint prints a second level: the APCA lightness contrast (Lc) of every pair, against Lc 60 for text and Lc 45 for non-text (APCA Bronze Simple Mode), tagged as WCAG 3 preparation. WCAG 3 is a Working Draft and regulations cite WCAG 2.x, so an APCA warning never fails the build and never justifies a token change that lowers a WCAG 2 ratio below its threshold. Weigh the warnings when a palette step changes for another reason, and keep the change only if both levels hold or improve.
 
 ## Measured contrast
 
-WCAG 2.x ratios of the pairs under watch, as `npm run tokens:lint-contrast` measures them on the OKLCH ramps of 0.2.0. The table was first drawn for the fix of the 6 failures on 2026-09-17.
+WCAG 2.x ratios of lyra's pairs under watch, as `npm run tokens:lint-contrast` measures them on the OKLCH ramps of 0.2.0. Nova's are in [Brands](#brands). The table was first drawn for the fix of the 6 failures on 2026-09-17.
 
 | Pair                                                          | Light | Dark  | Threshold |
 | ------------------------------------------------------------- | ----- | ----- | --------- |
@@ -349,9 +433,11 @@ color, because every step is brought inside the sRGB gamut first.
   so its dark steps do not turn olive.
 - **A step no semantic token reads is `reserved`.** The ramp keeps all 11, so a
   token can move one step without a new primitive.
-- **A rebrand is a source color.** `npm run tokens:test-rebrand` regenerates the
-  brand ramp (`violet`) from five other colors around the hue wheel and replays
-  every pair above on each: they all hold, with no semantic token moved.
+- **A rebrand is a source color.** `npm run tokens:test-rebrand` regenerates
+  lyra's brand ramp (`violet`) from five other colors around the hue wheel and
+  replays every pair above on each: they all hold, with no semantic token moved.
+- **Nova's ramps are generated like the others.** `stone` and `teal` are two more
+  source colors of `scripts/lib/palette.ts`; no step of theirs is written by hand.
 - `npm run tokens:palette` regenerates the ramps; `tokens:palette-check`, in
   `npm run tokens-validate`, fails when the committed palette is not the one
   the sources generate.

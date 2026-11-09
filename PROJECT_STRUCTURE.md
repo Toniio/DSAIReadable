@@ -1,6 +1,6 @@
 # Project structure — Design System
 
-> Next.js 16 · React 19 · Tailwind CSS v4 · shadcn/ui (`radix-lyra` style) · TypeScript 5
+> Next.js 16 · React 19 · Tailwind CSS v4 · shadcn/ui (`radix-lyra` style, with a second brand, nova) · TypeScript 5
 
 This repository is a **code-first design system**: the React components, the tokens and the machine-readable documentation have a single source, in the code. Every visual value has a single source.
 
@@ -14,7 +14,7 @@ This repository is a **code-first design system**: the React components, the tok
 dsaireadable/
 ├── components/ui/              # The design system's 67 React components
 ├── styles/globals.css          # Tailwind entry point: the @theme bridge from the tokens to the classes
-├── lib/                        # Shared modules: utils, focus, ui-strings, overlay, surface, fonts
+├── lib/                        # Shared modules: utils, cn, focus, ui-strings, overlay, surface, fonts
 ├── hooks/                      # Shared hooks (use-mobile)
 ├── tokens/                     # Source of truth for the tokens (DTCG JSON)
 ├── tokens.css                  # Generated CSS custom properties — do not edit
@@ -46,7 +46,7 @@ dsaireadable/
 
 ## `styles/globals.css` and `lib/fonts.ts` — what every page loads
 
-`styles/globals.css` imports Tailwind and `tokens.css`, removes Tailwind's default colors, radii and shadows, and its `@theme inline` bridge turns the tokens into Tailwind classes. `lib/fonts.ts` loads the typefaces with `next/font` (Geist, JetBrains Mono) under the `--font-*` variables the `typography.font-family.*` tokens describe.
+`styles/globals.css` imports Tailwind and `tokens.css`, removes Tailwind's default colors, radii and shadows, and its `@theme inline` bridge turns the tokens into Tailwind classes, the radius and text roles included. `lib/fonts.ts` loads lyra's typefaces with `next/font` (Geist, JetBrains Mono) and `lib/fonts-nova.ts` nova's (Lora, DM Sans, Geist Mono), each under the `--font-*` variable a `typography.font-family.*` token reads, so the token chooses the face.
 
 ---
 
@@ -87,11 +87,13 @@ A **three-tier** architecture (in the [W3C DTCG](https://www.designtokens.org/TR
 
 ```
 tokens/
-├── tokens.resolver.json  # The three tiers in order, then the light / dark modifier
-├── primitive.json        # Tier 1: raw values (private)
-├── semantic.json         # Tier 2: semantic tokens (public), light values
-├── semantic.dark.json    # Tier 2: the dark context — the semantic tokens dark changes
-└── component.json        # Tier 3: shadcn/ui aliases (public)
+├── tokens.resolver.json     # The three tiers in order, then the theme modifier (light, dark, nova-light, nova-dark)
+├── primitive.json           # Tier 1: raw values (private)
+├── semantic.json            # Tier 2: semantic tokens (public), lyra's light values
+├── semantic.dark.json       # Tier 2: the semantic tokens dark changes
+├── semantic.nova.json       # Tier 2: the semantic tokens the nova brand changes
+├── semantic.nova.dark.json  # Tier 2: what nova's dark changes on top of those
+└── component.json           # Tier 3: shadcn/ui aliases (public)
 ```
 
 ### `tokens/primitive.json` — Tier 1, Primitive
@@ -103,7 +105,7 @@ Examples: `primitive.color.mist.100`, `primitive.space.4`, `primitive.radius.md`
 ### `tokens/semantic.json` — Tier 2, Semantic
 
 Tokens that carry meaning — they reference the primitives by full path, `{primitive.color.mist.100}`.  
-Its values are the light mode, the resolver's default. The dark **mode** is `tokens/semantic.dark.json`, the `dark` context of the `color-scheme` modifier: each override names a semantic token and gives its `$type` and dark `$value`.  
+Its values are lyra's light theme, the resolver's default. The other themes are contexts of the `theme` modifier: `dark` (`tokens/semantic.dark.json`), `nova-light` (`tokens/semantic.nova.json`) and `nova-dark` (the three files, in that order, `tokens/semantic.nova.dark.json` last). Each override names a semantic token and gives its `$type` and `$value`.  
 Examples: `color.background.default`, `color.text.subtle`, `space.component.md`.
 
 This is the layer the components read: the `@theme` bridge in `styles/globals.css` ties each Tailwind class (`bg-background`) to a semantic token (`--color-background-default`).
@@ -126,6 +128,14 @@ A file **generated only by `npm run tokens:build` — never edit it** (`tokens:c
 .dark {
   --color-background-default: #090b0c;
 }
+.nova {
+  /* what the brand changes */
+}
+.nova.dark,
+.nova .dark,
+.dark .nova {
+  /* what nova's dark changes */
+}
 ```
 
 Imported into `styles/globals.css`, whose `@theme inline` block bridges these variables to the Tailwind classes.
@@ -138,20 +148,20 @@ Each script explains at the top of the file what it checks and why. They all run
 
 ### Tokens — `npm run tokens-validate`
 
-| Script                      | npm command                         | Role                                                                                                                                                                                            |
-| --------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build-tokens.ts`           | `tokens:build` / `tokens:check`     | Generates `tokens.css` from the DTCG sources; `--check` fails on drift                                                                                                                          |
-| `lint-dtcg.ts`              | `tokens:lint-dtcg`                  | DTCG 2025.10 conformance of every resolver permutation (Terrazzo, `terrazzo.config.ts`): value forms, units, sRGB colors, descriptions, kebab-case names                                        |
-| `lint-token-naming.ts`      | `tokens:lint-naming`                | Key grammar (`foundation.property[.role][.emphasis][.state]`); tiers 2 and 3 and the dark overrides hold only references; DTCG 2025.10 `$type`s and `$`-properties only; no `$extensions.modes` |
-| `lint-raw-values.ts`        | `tokens:lint-values`                | Detects raw values (hex, px, rem…) in components. Exception: `// allow-raw: <reason>`                                                                                                           |
-| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | The `@theme` bridge in `styles/globals.css`: references resolve, no private tier, every name in a Tailwind namespace                                                                            |
-| `lint-focus-ring.ts`        | `tokens:lint-focus`                 | A single focus ring (`lib/focus.ts`) for every focusable component                                                                                                                              |
-| `lint-contrast.ts`          | `tokens:lint-contrast`              | WCAG contrast of the text / background pairs, in light and dark                                                                                                                                 |
-| `lint-palette-monotonic.ts` | `tokens:lint-monotonic`             | In every palette, luminance strictly decreases as the step goes up                                                                                                                              |
-| `lint-chart-palette.ts`     | `tokens:lint-chart`                 | Every `color.chart.*` series at 3:1 on its backgrounds; pairs distinct in OKLab under normal vision, protanopia and deuteranopia                                                                |
-| `lint-font-tokens.ts`       | `tokens:lint-fonts`                 | Every `typography.font-family.*` token names the font `next/font` loads under its variable                                                                                                      |
-| `lint-token-lifecycle.ts`   | `tokens:lint-lifecycle`             | Every semantic token declares `active`, `reserved` or `$deprecated`, and the status matches the code                                                                                            |
-| `build-token-docs.ts`       | `docs:tokens` / `docs:tokens:check` | Generates `specs/tokens/token-reference.md` and `tokens.manifest.json`                                                                                                                          |
+| Script                      | npm command                         | Role                                                                                                                                                                                             |
+| --------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `build-tokens.ts`           | `tokens:build` / `tokens:check`     | Generates `tokens.css` from the DTCG sources; `--check` fails on drift                                                                                                                           |
+| `lint-dtcg.ts`              | `tokens:lint-dtcg`                  | DTCG 2025.10 conformance of every resolver permutation (Terrazzo, `terrazzo.config.ts`): value forms, units, sRGB colors, descriptions, kebab-case names                                         |
+| `lint-token-naming.ts`      | `tokens:lint-naming`                | Key grammar (`foundation.property[.role][.emphasis][.state]`); tiers 2 and 3 and the theme overrides hold only references; DTCG 2025.10 `$type`s and `$`-properties only; no `$extensions.modes` |
+| `lint-raw-values.ts`        | `tokens:lint-values`                | Detects raw values (hex, px, rem…) in components. Exception: `// allow-raw: <reason>`                                                                                                            |
+| `lint-theme-bridge.ts`      | `tokens:lint-bridge`                | The `@theme` bridge in `styles/globals.css`: references resolve, no private tier, every name in a Tailwind namespace                                                                             |
+| `lint-focus-ring.ts`        | `tokens:lint-focus`                 | A single focus ring (`lib/focus.ts`) for every focusable component                                                                                                                               |
+| `lint-contrast.ts`          | `tokens:lint-contrast`              | WCAG contrast of the text / background pairs, in the four themes                                                                                                                                 |
+| `lint-palette-monotonic.ts` | `tokens:lint-monotonic`             | In every palette, luminance strictly decreases as the step goes up                                                                                                                               |
+| `lint-chart-palette.ts`     | `tokens:lint-chart`                 | Every `color.chart.*` series at 3:1 on its backgrounds; pairs distinct in OKLab under normal vision, protanopia and deuteranopia                                                                 |
+| `lint-font-tokens.ts`       | `tokens:lint-fonts`                 | In each brand, every `typography.font-family.*` token resolves to a face that brand's file loads, and `font-mono` stays monospace                                                                |
+| `lint-token-lifecycle.ts`   | `tokens:lint-lifecycle`             | Every semantic token declares `active`, `reserved` or `$deprecated`, and the status matches the code                                                                                             |
+| `build-token-docs.ts`       | `docs:tokens` / `docs:tokens:check` | Generates `specs/tokens/token-reference.md` and `tokens.manifest.json`                                                                                                                           |
 
 ### Specs — `npm run specs:validate`
 
@@ -228,16 +238,16 @@ the rules for choosing between sibling components (the index's `composition_rule
 | ------------------- | ------------------------------------------------------------------------------------------------ |
 | `border-width.md`   | The two border widths and how they are wired into Tailwind                                       |
 | `breakpoints.md`    | The responsive prefixes as a contract; the values of the `breakpoint.*` tokens                   |
-| `color.md`          | The full table of light / dark color tokens + Do / Don't, the WCAG 2 / APCA contrast levels      |
+| `color.md`          | The full table of color tokens, nova's overrides + Do / Don't, the WCAG 2 / APCA contrast levels |
 | `content.md`        | Default strings (`UI_STRINGS`) and how to override them for another locale                       |
 | `elevation.md`      | Shadows and depth levels                                                                         |
 | `focus.md`          | The single focus ring and its presets (`lib/focus.ts`)                                           |
 | `motion.md`         | Animation durations and easings                                                                  |
 | `opacity.md`        | The three semantic opacity levels                                                                |
-| `radius.md`         | Border-radius values                                                                             |
+| `radius.md`         | The six radius roles of a brand, the border-radius scale                                         |
 | `size.md`           | The 24px minimum target size (WCAG 2.2 SC 2.5.8) and the audit of every control                  |
 | `spacing.md`        | The spacing scale (`space.scale.*`), container widths and layout spacing                         |
-| `typography.md`     | Type scale, families, weights                                                                    |
+| `typography.md`     | Type scale, the families and text roles a brand sets, weights                                    |
 | `voice-and-tone.md` | The voice, the tone by situation, grammar and mechanics, the word list — checked on `UI_STRINGS` |
 
 ### `specs/patterns/` — Page patterns (12 files)
@@ -256,8 +266,8 @@ documents (`generate-context` fails otherwise); every code example passes
 
 ### `specs/tokens/token-reference.md` · `tokens.manifest.json` — generated
 
-An exhaustive reference of the **504** tokens of the three tiers: CSS variable,
-type, resolved light / dark values, Tailwind utility, Do / Don't. The Markdown is
+An exhaustive reference of the **546** tokens of the three tiers: CSS variable,
+type, resolved light / dark values and nova's, Tailwind utility, Do / Don't. The Markdown is
 meant for people, `tokens.manifest.json` for tooling.
 
 Both are produced by `npm run docs:tokens` from `tokens/*.json` — the prose lives
@@ -306,7 +316,8 @@ border adds a solid outline (`FOCUS_BORDERLESS`, focus.md rule 6).
 `npm run site:test` checks the result a visitor gets: after `site:build`, it
 serves `site/out` under its base path and loads every page, the story and
 example previews of every component and the previews of the patterns and
-foundations in headless Chromium, in both themes (`scripts/test-site.ts`). It
+foundations in headless Chromium, in both themes, every preview and the pages
+that follow the brand in nova too (`scripts/test-site.ts`). It
 fails on an axe violation, a page error, an unexpected response and a tab stop
 with no visible indicator. CI runs it in three shards (`--shard=<i>/3`, the
 `site-test` jobs, each building the site), and the `site` job fails unless
@@ -320,22 +331,24 @@ every shard passed.
 browser mode, Playwright) with the design system's stylesheet, and checks them
 against their spec: every spec's `## Code example`, and every complete module
 (imports and a default export) among the foundations' examples, rendered as written, with
-zero axe-core violation on the WCAG 2.2 A and AA rules in the light and the dark
-theme (contrast and target size included) and a focus indicator on every tab
+zero axe-core violation on the WCAG 2.2 A and AA rules in the four themes
+(contrast and target size included) and a focus indicator on every tab
 stop; then, per component, the **Accessibility** section replayed: role,
 accessible name and each key of the Keyboard table. `npm run test:lint-coverage`
 fails when a component has no renderable example or a documented key has no test.
 
 | File                              | Role                                                                                                                                                                                                                                 |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tests/examples.test.tsx`         | The 67 spec examples and the complete modules of the foundations: axe light and dark, a focus indicator on every tab stop (real Playwright `Tab` presses)                                                                            |
+| `tests/examples.test.tsx`         | The 67 spec examples and the complete modules of the foundations: axe and a focus indicator on every tab stop (real Playwright `Tab` presses), in the four themes                                                                    |
 | `tests/components/*.test.tsx`     | One file per component with keys in its spec (`it("<keys>: …")`, `role: …`, `accessible name: …`), and `conversation.test.tsx`                                                                                                       |
 | `tests/spec-examples.ts`          | Vite plugin: serves each spec's code example, and each complete module of the foundations, as a module (`virtual:spec-examples`), so the tests render what agents copy                                                               |
-| `tests/axe.ts`                    | Runs axe-core on the whole document (popups are portalled), light then dark, and returns one line per violation                                                                                                                      |
+| `tests/axe.ts`                    | Runs axe-core on the whole document (popups are portalled), in each of the four themes, and returns one line per violation                                                                                                           |
 | `tests/focus.ts`                  | Walks the tab order with real `Tab` presses and reports each stop whose indicator has no part at 3:1                                                                                                                                 |
 | `tests/focus-measure.ts`          | Reads the rings painted before and after a focus move: the indicator may sit on the control, its wrapping group, the part standing for it or a pseudo-element; no import, so `scripts/test-site.ts` injects it into the site's pages |
 | `tests/reduced-motion/*.test.tsx` | The `reduced-motion` project: in a browser that reports `prefers-reduced-motion: reduce`, with the animations on, the overlays enter and leave with a fade only and the loops and slides of `specs/foundations/motion.md` stop       |
 | `tests/reduced-motion/setup.ts`   | The stylesheet without `tests/no-motion.css`, for that project                                                                                                                                                                       |
+| `tests/themes.ts`                 | The four themes the tests loop over: lyra and nova, light and dark, set as classes on `<html>`                                                                                                                                       |
+| `tests/cn.test.tsx`               | `cn` keeps the radius and text roles: without them `tailwind-merge` deletes `text-ui` next to a text color                                                                                                                           |
 | `tests/setup.ts`                  | Loads `styles/globals.css` and `tests/no-motion.css` (no animation, so axe reads final colors); unmounts and resets the theme after each test                                                                                        |
 
 The tests live outside `components/ui/` so that the linters and the registry,
@@ -351,12 +364,13 @@ and `@dsaireadable/eslint-plugin`). The
 `registry.json` at the root is enough — no server, no per-item JSON to host.
 Full consumer guide: [README → _Consuming the design system_](./README.md#consuming-the-design-system).
 
-| Item                                | Content                                                                                                                                                                                               |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Toniio/DSAIReadable/design-system` | Base item: the stylesheet (tokens, `@theme inline` bridge, lockdown, `z-*` utilities, base layer), `lib/utils`, `lib/focus`, `lib/ui-strings`, `lib/overlay`, `lib/surface` — follows every component |
-| `Toniio/DSAIReadable/font-<family>` | One `registry:font` item per font `lib/fonts.ts` loads (`font-jetbrains-mono`, `font-geist`) — follows the base item                                                                                  |
-| `Toniio/DSAIReadable/<component>`   | One item per component in `components/ui/`                                                                                                                                                            |
-| `Toniio/DSAIReadable/conventions`   | `registry/conventions/dsaireadable.md`, dropped as Cursor, Claude Code and Copilot rules                                                                                                              |
+| Item                                | Content                                                                                                                                                                                                         |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Toniio/DSAIReadable/design-system` | Base item: the stylesheet (tokens, `@theme inline` bridge, lockdown, `z-*` utilities, base layer), `lib/utils`, `lib/cn`, `lib/focus`, `lib/ui-strings`, `lib/overlay`, `lib/surface` — follows every component |
+| `Toniio/DSAIReadable/font-<family>` | One `registry:font` item per font `lib/fonts.ts` loads (`font-jetbrains-mono`, `font-geist`) — follows the base item                                                                                            |
+| `Toniio/DSAIReadable/theme-nova`    | The opt-in nova brand: the `.nova` blocks of `tokens.css` and its three `registry:font` items (`font-lora`, `font-dm-sans`, `font-geist-mono`). Nothing changes until `nova` is on `<html>`                     |
+| `Toniio/DSAIReadable/<component>`   | One item per component in `components/ui/`                                                                                                                                                                      |
+| `Toniio/DSAIReadable/conventions`   | `registry/conventions/dsaireadable.md`, dropped as Cursor, Claude Code and Copilot rules                                                                                                                        |
 
 `registry.json` is **generated** by `npm run registry:build` from
 `design-system.index.json`, the specs and the components' actual imports — do
@@ -369,7 +383,8 @@ from `package.json`.
 > does not see it.
 
 `npm run registry:test-install` installs every item in a blank app with
-non-standard aliases and builds it: it is the only check that proves the
+non-standard aliases and builds it, `theme-nova` in a second step so that what a
+lyra consumer gets is checked first: it is the only check that proves the
 registry is **consumable**, not just consistent.
 
 ---
@@ -380,7 +395,7 @@ registry is **consumable**, not just consistent.
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `design-system.index.json`  | Machine-readable inventory: lists every component (`code_path`, status, divergences from shadcn/ui), the shadcn/ui components left out (`shadcn.excluded`), the composition rules, the glossary. Read by the MCP scripts and by the registry generation. |
 | `design-system.schema.json` | JSON Schema that validates the structure of `design-system.index.json`                                                                                                                                                                                   |
-| `components.json`           | shadcn CLI config: `radix-lyra` style, `mist` base color, Phosphor icons, alias paths                                                                                                                                                                    |
+| `components.json`           | shadcn CLI config: `radix-lyra` style, `mist` base color, Phosphor icons, alias paths. It describes lyra: nova has no place there                                                                                                                        |
 | `tokens.css`                | The tokens' CSS variables (imported by `globals.css`)                                                                                                                                                                                                    |
 | `tsconfig.json`             | Strict TypeScript for the app; `scripts/`, `packages/eslint-plugin/` and `mcp-server/` have their own projects                                                                                                                                           |
 | `eslint.config.mjs`         | ESLint: Next.js rules, and `better-tailwindcss`, which rejects classes outside the design system and `opacity-N` on a disabled state                                                                                                                     |

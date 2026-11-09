@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Dialog as SheetPrimitive } from "radix-ui"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { OVERLAY_BASE, SIDE_PANEL_CONTENT_BASE } from "@/lib/overlay"
 import { Button } from "@/components/ui/button"
 import { XIcon } from "@phosphor-icons/react"
@@ -183,7 +183,7 @@ function SheetTitle({
     <SheetPrimitive.Title
       data-slot="sheet-title"
       className={cn(
-        "font-heading text-sm font-medium text-foreground",
+        "font-heading text-title font-medium text-foreground",
         className
       )}
       {...props}
@@ -207,7 +207,7 @@ function SheetDescription({
   return (
     <SheetPrimitive.Description
       data-slot="sheet-description"
-      className={cn("text-xs/relaxed text-muted-foreground", className)}
+      className={cn("text-description text-muted-foreground", className)}
       {...props}
     />
   )

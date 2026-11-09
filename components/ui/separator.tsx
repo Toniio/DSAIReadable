@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Separator as SeparatorPrimitive } from "radix-ui"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 /**
  * A thin rule that divides two groups of content; keep `decorative` unless the division carries meaning.

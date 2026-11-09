@@ -262,7 +262,7 @@ describe("Calendar, dark and disabled states", () => {
     }
   )
 
-  it("captionLayout dropdown: every tab stop shows a focus indicator, light and dark", async () => {
+  it("captionLayout dropdown: every tab stop shows a focus indicator, in the four themes", async () => {
     render(
       <Calendar mode="single" captionLayout="dropdown" defaultMonth={START} />
     )

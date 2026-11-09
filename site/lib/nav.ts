@@ -50,7 +50,7 @@ export const FOUNDATION_GROUPS: { label: string; items: Foundation[] }[] = [
         label: "Typography",
         spec: "typography.md",
         summary:
-          "The two typefaces, the type scale, weights, line heights and letter spacing.",
+          "The typefaces of each brand, the type scale, weights, line heights and letter spacing.",
       },
       {
         slug: "spacing",
@@ -63,7 +63,7 @@ export const FOUNDATION_GROUPS: { label: string; items: Foundation[] }[] = [
         slug: "radius",
         label: "Radius",
         spec: "radius.md",
-        summary: "The corner radius scale: square surfaces, round shapes.",
+        summary: "The corner radius scale and the roles each brand rounds.",
       },
       {
         slug: "elevation",

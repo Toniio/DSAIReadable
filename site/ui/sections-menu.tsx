@@ -17,7 +17,7 @@ import { sectionHolds } from "@/site/ui/header-tabs"
 import { SectionNav } from "@/site/ui/section-nav"
 
 /**
- * Below the lg breakpoint, the header has no room for its tabs: this button
+ * Below the xl breakpoint, the header has no room for its tabs: this button
  * opens the site's sections in a sheet, on every page, the Overview and the
  * 404 page included. The pages of the current section stay in the page's own
  * menu (MobileNav).

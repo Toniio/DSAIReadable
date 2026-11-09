@@ -4,7 +4,7 @@
  * `tz check` on tokens/tokens.resolver.json parses and lints the default
  * permutation only: a broken reference in the dark context passed it. This
  * script runs the same parser and the same rules (terrazzo.config.ts) on every
- * permutation the resolver declares — light, then dark.
+ * permutation the resolver declares: the four themes.
  *
  *   npx tsx scripts/lint-dtcg.ts
  */

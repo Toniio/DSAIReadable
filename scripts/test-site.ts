@@ -9,19 +9,21 @@
  *   - the preview canvas of every component, in its story view and in its
  *     example view, and the example of every pattern and foundation: the
  *     documents the pages show in iframes, which axe does not enter from a page.
- * and checks each load for:
+ * Every preview is loaded in the nova brand too, which the page sends it
+ * through its state, and so are `NOVA_PAGES`, the pages whose content follows
+ * the brand, with the brand a visitor stored. Each load is checked for:
  *   - an axe violation on the WCAG 2.x A and AA rules, 2.2 AA included;
  *   - a page error, a console error, or a response of 400 and above that is
  *     not one of `KNOWN_404`;
  *   - the theme: the `.dark` class is on `<html>` when, and only when, the
- *     dark theme was asked for;
+ *     dark theme was asked for, and the `.nova` class likewise for the brand;
  *   - the keyboard: Tab from the top of the document to its end, and every tab
  *     stop must be displayed and carry a focus indicator with a part at 3:1
  *     against what it is drawn on (focus.md, rule 6; the measure is
  *     tests/focus-measure.ts, the one the component tests run). The walk
  *     crosses every stop of every load, but measures an indicator once per
- *     distinct element (tag, classes, role, and the color under it) and theme:
- *     the same classes on the same surface paint the same ring.
+ *     distinct element (tag, classes, role, and the color under it), theme and
+ *     brand: the same classes on the same surface paint the same ring.
  *
  * `--shard=<i>/<n>` loads only the i-th of n shards, as CI does on three
  * runners: a route's loads stay in one shard, the shards' loads add up to the
@@ -129,11 +131,22 @@ const MAX_STOPS = 600
 
 type Theme = "light" | "dark"
 
+type Brand = "lyra" | "nova"
+
+/** The pages drawn from the tokens of the brand, loaded in nova as well. */
+const NOVA_PAGES = [
+  "/",
+  "/foundations/color/",
+  "/foundations/radius/",
+  "/foundations/typography/",
+]
+
 type Kind = "page" | "preview-story" | "preview-example" | "missing"
 
 interface Target {
   kind: Kind
   theme: Theme
+  brand: Brand
   /** The path under the base path, with its hash for a preview. */
   url: string
 }
@@ -232,36 +245,51 @@ function routes(dir = OUT, prefix = ""): string[] {
 }
 
 /** The hash a preview canvas reads its state from (site/playground/protocol.ts). */
-const frameState = (view: "story" | "example", theme: Theme) =>
-  `#${encodeURIComponent(JSON.stringify({ view, args: {}, state: "rest", theme }))}`
+const frameState = (view: "story" | "example", theme: Theme, brand: Brand) =>
+  `#${encodeURIComponent(JSON.stringify({ view, args: {}, state: "rest", theme, brand }))}`
 
 function targets(): Target[] {
   const out: Target[] = []
   for (const route of routes().filter((r) => !ONLY || r.includes(ONLY))) {
     for (const theme of ["light", "dark"] as const) {
       if (route.startsWith("/preview/components/")) {
-        out.push({
-          kind: "preview-story",
-          theme,
-          url: route + frameState("story", theme),
-        })
-        out.push({
-          kind: "preview-example",
-          theme,
-          url: route + frameState("example", theme),
-        })
+        for (const brand of ["lyra", "nova"] as const) {
+          out.push({
+            kind: "preview-story",
+            theme,
+            brand,
+            url: route + frameState("story", theme, brand),
+          })
+          out.push({
+            kind: "preview-example",
+            theme,
+            brand,
+            url: route + frameState("example", theme, brand),
+          })
+        }
       } else if (route.startsWith("/preview/")) {
-        out.push({
-          kind: "preview-example",
-          theme,
-          url: route + frameState("example", theme),
-        })
-      } else out.push({ kind: "page", theme, url: route })
+        for (const brand of ["lyra", "nova"] as const)
+          out.push({
+            kind: "preview-example",
+            theme,
+            brand,
+            url: route + frameState("example", theme, brand),
+          })
+      } else {
+        out.push({ kind: "page", theme, brand: "lyra", url: route })
+        if (NOVA_PAGES.includes(route))
+          out.push({ kind: "page", theme, brand: "nova", url: route })
+      }
     }
   }
   if (!ONLY)
     for (const theme of ["light", "dark"] as const)
-      out.push({ kind: "missing", theme, url: "/this-page-does-not-exist/" })
+      out.push({
+        kind: "missing",
+        theme,
+        brand: "lyra",
+        url: "/this-page-does-not-exist/",
+      })
   return out
 }
 
@@ -369,7 +397,7 @@ interface Stop {
 
 // ── One load ─────────────────────────────────────────────────────────────
 
-/** Indicators measured so far, by theme and element: each is measured once. */
+/** Indicators measured so far, by theme, brand and element: each is measured once. */
 const measured = new Set<string>()
 let stopsWalked = 0
 /** Stops in an open modal, whose focus cannot be taken off them to measure. */
@@ -387,14 +415,22 @@ async function check(
     // The overlays and the loops of the design system stop: axe reads final colors.
     reducedMotion: "reduce",
   })
-  // next-themes reads the theme from here before the first paint.
-  await context.addInitScript((theme) => {
-    try {
-      localStorage.setItem("theme", theme)
-    } catch {
-      // A page with no storage keeps the theme it was given at load.
+  // next-themes reads the theme from here before the first paint, and the
+  // root layout's script the brand. A preview takes its brand from its state.
+  await context.addInitScript(
+    ({ theme, brand }) => {
+      try {
+        localStorage.setItem("theme", theme)
+        if (brand) localStorage.setItem("brand", brand)
+      } catch {
+        // A page with no storage keeps the theme it was given at load.
+      }
+    },
+    {
+      theme: target.theme,
+      brand: target.kind === "page" ? target.brand : undefined,
     }
-  }, target.theme)
+  )
   const page = await context.newPage()
   try {
     page.on("pageerror", (error) =>
@@ -457,6 +493,11 @@ async function check(
     )
     if (dark !== (target.theme === "dark"))
       problems.push(`the ${target.theme} theme was not applied`)
+    const nova = await page.evaluate<boolean>(
+      "document.documentElement.classList.contains('nova')"
+    )
+    if (nova !== (target.brand === "nova"))
+      problems.push(`the ${target.brand} brand was not applied`)
 
     // Accessibility.
     await page.addScriptTag({ content: axe.source })
@@ -492,7 +533,7 @@ async function check(
         problems.push(
           `tab stop ${stop.label} is focused but hidden (display or visibility)`
         )
-      const key = `${target.theme}|${stop.signature ?? stop.label}`
+      const key = `${target.theme}|${target.brand}|${stop.signature ?? stop.label}`
       if (measured.has(key)) continue
       const result = await page.evaluate<{
         shown?: number
@@ -533,8 +574,8 @@ async function check(
 
 const base = basePathOf()
 const all = targets()
-// A route is one group: its light and dark loads, and its two views for a
-// component's preview.
+// A route is one group: its light and dark loads in each brand, and its two
+// views for a component's preview.
 const loads = SHARD
   ? shard(all, (target) => target.url.split("#")[0], SHARD)
   : all
@@ -570,7 +611,7 @@ for (const { target, problems } of failures.sort((a, b) =>
   a.target.url.localeCompare(b.target.url)
 )) {
   console.error(
-    `\n✖ ${target.kind} ${target.theme} ${base}${target.url.split("#")[0]}`
+    `\n✖ ${target.kind} ${target.theme} ${target.brand} ${base}${target.url.split("#")[0]}`
   )
   for (const problem of problems.slice(0, 12)) console.error(`    ${problem}`)
   if (problems.length > 12) console.error(`    … ${problems.length - 12} more`)
@@ -583,5 +624,5 @@ if (failures.length > 0) {
   process.exit(1)
 }
 console.log(
-  `✅ ${RUN}: ${LOADS} (light and dark), no axe violation, page error or unexpected response; ${stopsWalked} tab stops walked, ${measured.size} focus indicators measured, ${unmeasured} stops in an open modal left unmeasured.`
+  `✅ ${RUN}: ${LOADS} (light and dark, previews and NOVA_PAGES in both brands), no axe violation, page error or unexpected response; ${stopsWalked} tab stops walked, ${measured.size} focus indicators measured, ${unmeasured} stops in an open modal left unmeasured.`
 )
