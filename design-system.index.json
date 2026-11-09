@@ -1029,7 +1029,7 @@
     },
     {
       "id": "rule-03",
-      "rule": "All class name composition must use cn() from @/lib/utils. Inline conditional className strings are not permitted."
+      "rule": "All class name composition must use cn() from @/lib/cn. Inline conditional className strings are not permitted."
     },
     {
       "id": "rule-04",
@@ -1151,7 +1151,7 @@
     "component-token": "A local override in tokens/component.json used only when a Semantic token cannot cover the use case. Primarily holds shadcn CSS variable aliases.",
     "DTCG": "Design Token Community Group — the open standard format for design tokens, Format Module 2025.10 (checked by Terrazzo, npm run tokens:lint-dtcg). Each token carries $value, $type, and $description keys; values use the 2025.10 object forms ({ colorSpace, components }, { value, unit }). The light and dark modes follow the Resolver Module 2025.10: tokens/tokens.resolver.json, whose dark context is tokens/semantic.dark.json.",
     "cva": "Class Variance Authority — the utility used to declare typed variant APIs on components. Required for all multi-variant components.",
-    "cn": "The class merging utility from @/lib/utils, combining clsx and tailwind-merge. The only approved way to compose Tailwind class strings in this codebase.",
+    "cn": "The class merging utility from @/lib/cn, combining clsx and a tailwind-merge that knows the radius and text roles. The only approved way to compose Tailwind class strings in this codebase.",
     "asChild": "A prop pattern (from Radix UI / shadcn) that delegates a component's rendering to its child element via Slot.Root, preserving all props and event handlers.",
     "data-slot": "An HTML data attribute marking a component's anatomical part. Used for CSS targeting across component boundaries (has-[[data-slot=input-group-control]:focus-visible]) and to recognize a component in rendered markup (dsaireadable_validate_screen). Value matches the component or sub-part name; each spec's Anatomy lists the slots its component renders.",
     "allow-raw": "An inline code annotation (// allow-raw: <reason>) that exempts a specific raw value from the lint-raw-values check. Only valid when the raw value is technically unavoidable (e.g., third-party CSS attribute selectors).",

@@ -1,15 +1,16 @@
-import { PAIRS, type Pair } from "./contrast-pairs.js"
+import { MODES, PAIRS, type Pair } from "./contrast-pairs.js"
 import { apcaContrast, blend, luminance } from "../wcag.js"
 import {
-  MODES,
+  schemeOf,
   srgbCss,
-  type Mode,
+  THEMES,
+  type Theme,
   type Tokens,
 } from "../../mcp-server/src/lib/dtcg.js"
 
 /**
- * The contrast of every pair of scripts/lib/contrast-pairs.ts, in each of its
- * modes, measured on a set of tokens as it renders: a `bg-<role>/<n>` tint
+ * The contrast of every pair of scripts/lib/contrast-pairs.ts, in each theme
+ * of its color schemes, measured on a set of tokens as it renders: a `bg-<role>/<n>` tint
  * composited onto the surface under it, a `text-<role>/<n>` label onto that.
  * scripts/lint-contrast.ts reports it on the committed tokens;
  * scripts/test-rebrand.ts replays it on a palette regenerated in memory. No
@@ -20,7 +21,7 @@ type Json = Record<string, unknown>
 
 export interface Measure {
   pair: Pair
-  mode: Mode
+  theme: Theme
   /** The foreground and background as painted. */
   fg: string
   bg: string
@@ -78,36 +79,37 @@ export function measureContrast(tokens: Tokens): Measure[] {
 
   /**
    * Resolves a token path down to its sRGB value (the `hex` fallback, or
-   * rgba() when translucent), following mode overrides.
+   * rgba() when translucent), following theme overrides.
    */
   function resolveColor(
     path: string,
-    mode: Mode,
+    theme: Theme,
     seen = new Set<string>()
   ): string {
-    if (seen.has(`${path}:${mode}`))
-      throw new Error(`Reference cycle on ${path} (${mode})`)
-    seen.add(`${path}:${mode}`)
+    if (seen.has(`${path}:${theme}`))
+      throw new Error(`Reference cycle on ${path} (${theme})`)
+    seen.add(`${path}:${theme}`)
     const node = lookup(path)
     if (!node) throw new Error(`Unknown token: ${path}`)
-    const value = tokens.override(path, mode) ?? node.$value
+    const value = tokens.override(path, theme) ?? node.$value
     if (value === undefined) throw new Error(`Token ${path} has no $value`)
     const ref = typeof value === "string" ? REF.exec(value) : null
-    return ref ? resolveColor(ref[1], mode, seen) : srgbCss(value)
+    return ref ? resolveColor(ref[1], theme, seen) : srgbCss(value)
   }
 
   const measures: Measure[] = []
   for (const pair of PAIRS)
-    for (const mode of pair.modes ?? MODES) {
-      const surface = resolveColor(pair.bg, mode)
+    for (const theme of THEMES) {
+      if (!(pair.modes ?? MODES).includes(schemeOf(theme))) continue
+      const surface = resolveColor(pair.bg, theme)
       const bg = pair.tint
-        ? tint(resolveColor(pair.tint.color, mode), pair.tint.alpha, surface)
+        ? tint(resolveColor(pair.tint.color, theme), pair.tint.alpha, surface)
         : surface
-      const fg = tint(resolveColor(pair.fg, mode), pair.fgAlpha ?? 1, bg)
+      const fg = tint(resolveColor(pair.fg, theme), pair.fgAlpha ?? 1, bg)
       const value = ratio(fg, bg)
       measures.push({
         pair,
-        mode,
+        theme,
         fg,
         bg,
         under: pair.tint

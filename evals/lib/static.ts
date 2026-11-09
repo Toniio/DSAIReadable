@@ -33,6 +33,7 @@ const FAMILY: Record<string, LintFamily> = {
   "dsaireadable/no-external-ui-imports": "external-imports",
   "dsaireadable/no-inline-svg": "inline-svg",
   "dsaireadable/no-raw-values": "off-system-classes",
+  "dsaireadable/no-text-role-in-stock-cn": "off-system-classes",
   "dsaireadable/no-class-interpolation": "off-system-classes",
   "better-tailwindcss/no-unknown-classes": "off-system-classes",
   "better-tailwindcss/no-restricted-classes": "off-system-classes",

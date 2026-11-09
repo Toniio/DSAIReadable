@@ -33,7 +33,7 @@ Resizable panels: an area split into sections the user adjusts by dragging the h
 ## Dependencies
 
 - `react-resizable-panels` (`Group`, `Panel`, `Separator`)
-- `cn` from `@/lib/utils`
+- `cn` from `@/lib/cn`
 
 ## Anatomy
 
@@ -53,6 +53,7 @@ Resizable panels: an area split into sections the user adjusts by dragging the h
 | `color.background.default` | `ring-offset-background`                        | `ResizableHandle`                                                       |
 | `color.border.default`     | `bg-border`                                     | `ResizableHandle`                                                       |
 | `color.border.focus`       | `border-ring` · `outline-ring` · `ring-ring/50` | `ResizableHandle` · `ResizableHandle` via `FOCUS_RING` (`lib/focus.ts`) |
+| `radius.control`           | `rounded-control`                               | `ResizableHandle`                                                       |
 | `space.focus-ring-width`   | `ring-(length:--space-focus-ring-width)`        | `ResizableHandle` via `FOCUS_RING` (`lib/focus.ts`)                     |
 | `space.scale.0`            | `inset-y-0` · `left-0` · `translate-x-0`        | `ResizableHandle`                                                       |
 | `space.scale.1`            | `h-1` · `w-1`                                   | `ResizableHandle`                                                       |

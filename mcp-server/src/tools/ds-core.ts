@@ -49,6 +49,11 @@ interface DsMetadata {
   }
   stack: Record<string, string>
   framework: string
+  brands: {
+    default: string
+    activation: string
+    items: Array<{ name: string; html_class: string | null; install: string }>
+  }
   shadcn_excluded: ShadcnExclusion[]
   sources: Record<string, string>
 }
@@ -219,7 +224,7 @@ export function registerDsCoreTools(server: McpServer): void {
     {
       title: "Design system overview",
       description:
-        "Returns the versions, the install command, the required imports, the shadcn/ui components left out, counts and categories",
+        "Returns the versions, the install command, the brands and how to switch them, the required imports, the shadcn/ui components left out, counts and categories",
       outputSchema: overviewOutput,
       annotations: READ_ONLY,
     },
@@ -261,6 +266,7 @@ export function registerDsCoreTools(server: McpServer): void {
           install: `npx shadcn@latest add ${meta.registry_source.item_address}`,
           component_location: "components/ui/<name>.tsx",
         },
+        brands: meta.brands,
         sources: meta.sources,
         // shadcn/ui components left out on purpose, and what to use instead.
         shadcn_excluded: meta.shadcn_excluded,
@@ -269,7 +275,7 @@ export function registerDsCoreTools(server: McpServer): void {
             "MANDATORY: Every generated file MUST import each component from its own module inside the consuming project.",
           component_import:
             'import { Button } from "@/components/ui/button"  // one import per component',
-          utils_import: 'import { cn } from "@/lib/utils"',
+          utils_import: 'import { cn } from "@/lib/cn"',
           css_setup:
             'styles/globals.css already does `@import "../tokens.css"` and bridges the tokens into Tailwind v4 with `@theme inline`.',
           explanation:
@@ -278,7 +284,7 @@ export function registerDsCoreTools(server: McpServer): void {
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"`,
+import { cn } from "@/lib/cn"`,
         },
         stats: {
           total_components: components.length,
@@ -520,7 +526,7 @@ import { cn } from "@/lib/utils"`,
     {
       title: "Typography",
       description:
-        "Returns the font families, type scale, weights, line heights, letter spacing and usage rules",
+        "Returns the font families, type scale, text roles with their size in each brand, weights, line heights, letter spacing and usage rules",
       outputSchema: typographyOutput,
       annotations: READ_ONLY,
     },

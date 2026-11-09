@@ -69,6 +69,7 @@ source.
 | To change                                                               | Edit                                                                                                                              | Then run                                                                                                                              |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | A token value or decision                                               | `tokens/*.json`                                                                                                                   | `npm run tokens:build && npm run docs:tokens`                                                                                         |
+| What a brand changes                                                    | `tokens/semantic.nova.json`, and `tokens/semantic.nova.dark.json` for a key dark overrides too; a `{…}` reference only            | `npm run tokens:build && npm run docs:tokens`, then `npm run tokens-validate`: every contrast pair runs in each of the four themes    |
 | A component                                                             | `components/ui/<component>.tsx`, after reading its spec                                                                           | `npm run specs:variants && npm run specs:tokens && npm run specs:api && npm run specs:states`                                         |
 | A state a component never enters through another component's `cva` call | a "Not entered through" line in its spec's States section, its reason read from the dependency's source (Calendar's is the model) | `npm run specs:states && npm run specs:tokens`                                                                                        |
 | A component's behavior, usage or accessibility                          | `specs/components/<Component>.md`, outside generated sections                                                                     | `npm run docs:llms` when the Role changed                                                                                             |
@@ -85,7 +86,8 @@ source.
 
 **A new or changed component arrives with its test.** `tests/examples.test.tsx`
 renders every spec's `## Code example`, and every foundation example written as
-a complete module (imports and a default export), in headless Chromium, light and dark:
+a complete module (imports and a default export), in headless Chromium, in the
+four themes:
 zero axe violation (contrast and target size included) and a visible focus
 indicator on every tab stop. An example that fails is fixed in the spec, which
 is what agents copy. Each row of a spec's Accessibility › Keyboard table has its
@@ -125,7 +127,12 @@ hand-made forks. `shadcn-upstream.json` holds:
   `opacity-disabled`, so `disabled:opacity-50` → `disabled:opacity-disabled`);
   `patterns` rewrites inside arbitrary values (`--spacing(7)` →
   `var(--space-scale-7)`); `files` holds the rules of one component (`z-50` →
-  `z-popover` in a popover, `z-modal` in a dialog); `constants` groups classes
+  `z-popover` in a popover, `z-modal` in a dialog), and its `places` the rules of
+  one place in that component, keyed by whole class, for a class whose
+  replacement depends on the slot (`rounded-none` → `rounded-item` in
+  `buttonVariants.size.xs`, `rounded-control` in `buttonVariants`; the most
+  specific place wins, and a place can name its element,
+  `TooltipContent>TooltipPrimitive.Arrow`); `constants` groups classes
   into the shared constants of `lib/` (`FOCUS_RING`, `OVERLAY_BASE`…); `values`
   maps the CSS values of a `style` attribute;
 - `components`: each of the 67, `reanchored` (its classes are its upstream's
@@ -145,6 +152,13 @@ brought to `px` and `calc()` is evaluated. A bare entry that draws something
 else fails the check; a reason on an entry that draws the same is harmless. The
 check also proves, on arbitrary values, that it still tells the two apart.
 `patterns` rewrite inside arbitrary values and are not drawn.
+
+The upstream stays lyra's. Nova is not a second upstream: its radii and text
+sizes reach the components through the roles, so a `rounded-none` that becomes
+a role takes a reason in `places` (it draws 0 in lyra and something else in
+nova), and a `text-xs` that becomes `text-ui` is bare, because it draws the same
+in lyra. A place the component no longer has, or a replacement the table maps
+again, fails the check.
 
 A class of upstream that is dead (it draws nothing, or never matches),
 unreachable or wrong is corrected the same way: in `map`, in
@@ -370,7 +384,8 @@ clone with no tags: the Changes page reads each release's date from its tag.
 with the same `SITE_BASE_PATH` (CI sets `/DSAIReadable`), it serves `site/out`
 like GitHub Pages does and loads, in headless Chromium and in both themes, every
 page, the story and example previews of every component and the previews of every
-pattern and foundation. A load fails on an axe violation (WCAG 2.2 A and AA), a
+pattern and foundation; every preview, and the pages that follow the brand, load
+in nova too. A load fails on an axe violation (WCAG 2.2 A and AA), a
 page or console error, a response of 400 and above, or a tab stop that is hidden
 or has no focus indicator with a part at 3:1 (the measure is
 `tests/focus-measure.ts`, the one the component tests use; each distinct element

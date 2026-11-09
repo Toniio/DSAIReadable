@@ -225,7 +225,7 @@ describe("Field, choice card", () => {
   })
 
   it.each(Object.keys(controls))(
-    "%s: the card's indicator keeps a solid 3:1 part, light and dark",
+    "%s: the card's indicator keeps a solid 3:1 part, in the four themes",
     async (name) => {
       const { render: draw } = controls[name as keyof typeof controls]
       render(<ChoiceCard>{draw({})}</ChoiceCard>)
@@ -236,7 +236,7 @@ describe("Field, choice card", () => {
   // The card's text names its control: a Field inside a FieldLabel renders no
   // group, whose text Chromium and axe would leave out of that name.
   it.each(Object.keys(controls))(
-    "%s: named by the card's text, checked or not, with no axe violation, light and dark",
+    "%s: named by the card's text, checked or not, with no axe violation, in the four themes",
     async (name) => {
       const { role, render: draw } = controls[name as keyof typeof controls]
       for (const checked of [false, true]) {

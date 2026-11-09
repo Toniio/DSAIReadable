@@ -156,6 +156,8 @@ describe("Button", () => {
     expect(await axeViolations()).toEqual([
       expect.stringMatching(/^light button-name: /),
       expect.stringMatching(/^dark button-name: /),
+      expect.stringMatching(/^nova-light button-name: /),
+      expect.stringMatching(/^nova-dark button-name: /),
     ])
   })
 })

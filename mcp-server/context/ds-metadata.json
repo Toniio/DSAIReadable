@@ -14,6 +14,22 @@
     "tailwindcss": "^4.3.3"
   },
   "framework": "React 19 / Next.js 16 / Tailwind CSS v4 / shadcn/ui",
+  "brands": {
+    "default": "lyra",
+    "activation": "A brand is a class on <html>, next to `dark`: nova is the `nova` class, lyra the absence of a class. It covers colors, typefaces, corners and text sizes, and semantic classes follow it: never write a value or a class for one brand.",
+    "items": [
+      {
+        "name": "lyra",
+        "html_class": null,
+        "install": "npx shadcn@latest add Toniio/DSAIReadable/design-system"
+      },
+      {
+        "name": "nova",
+        "html_class": "nova",
+        "install": "npx shadcn@latest add Toniio/DSAIReadable/theme-nova"
+      }
+    ]
+  },
   "shadcn_excluded": [
     {
       "item": "form",
@@ -26,6 +42,7 @@
     "mcp_server_version": "mcp-server/package.json#version",
     "registry_source": "registry.json#homepage,name",
     "stack": "package.json#dependencies",
+    "brands": "tokens/tokens.resolver.json#modifiers.theme",
     "shadcn_excluded": "design-system.index.json#shadcn.excluded"
   }
 }

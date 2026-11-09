@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Progress as ProgressPrimitive } from "radix-ui"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 /**
  * A linear bar that shows how far a task has gone; `value` runs from 0 to 100, and it needs an `aria-label` for its name.
@@ -21,7 +21,7 @@ function Progress({
       data-slot="progress"
       value={value}
       className={cn(
-        "relative flex h-1 w-full items-center overflow-x-hidden rounded-none bg-muted",
+        "relative flex h-1 w-full items-center overflow-x-hidden rounded-pill bg-muted",
         className
       )}
       {...props}

@@ -11,10 +11,10 @@
  * `primitive` group, and a semantic token names one in full,
  * `{primitive.radius.md}`.
  *
- * The light and dark modes come from the DTCG Resolver Module 2025.10:
- * tokens/tokens.resolver.json merges the three tiers, then the `color-scheme`
- * modifier. `loadTokens` is the only reader of that file; every script and
- * the MCP generator get a token's value in a mode from it.
+ * The themes (lyra light and dark, nova light and dark) come from the DTCG
+ * Resolver Module 2025.10: tokens/tokens.resolver.json merges the three tiers,
+ * then the `theme` modifier. `loadTokens` is the only reader of that file; every
+ * script and the MCP generator get a token's value in a theme from it.
  */
 
 import { readFileSync } from "node:fs"
@@ -219,19 +219,39 @@ export function primitiveGroups(
 }
 
 // ---------------------------------------------------------------------------
-// Resolver — the tiers and the color-scheme contexts
+// Resolver — the tiers and the theme contexts
 // ---------------------------------------------------------------------------
 
 /** The resolver document, relative to the repository root. */
 const RESOLVER_PATH = "tokens/tokens.resolver.json"
 
 type Tier = "primitive" | "semantic" | "component"
-export type Mode = "light" | "dark"
-export const MODES: readonly Mode[] = ["light", "dark"]
 
-/** The modifier that carries the modes, and its default context. */
-const COLOR_SCHEME = "color-scheme"
-const DEFAULT_MODE: Mode = "light"
+/**
+ * The four themes, each a context of the resolver's `theme` modifier: a brand
+ * (lyra, the default, is the absence of a class; nova is `.nova` on <html>) in
+ * a color scheme (dark is `.dark` on <html>).
+ */
+export type Theme = "light" | "dark" | "nova-light" | "nova-dark"
+export const THEMES: readonly Theme[] = [
+  "light",
+  "dark",
+  "nova-light",
+  "nova-dark",
+]
+
+export type Scheme = "light" | "dark"
+export type Brand = "lyra" | "nova"
+export const BRANDS: readonly Brand[] = ["lyra", "nova"]
+
+export const schemeOf = (theme: Theme): Scheme =>
+  theme.endsWith("dark") ? "dark" : "light"
+export const brandOf = (theme: Theme): Brand =>
+  theme.startsWith("nova") ? "nova" : "lyra"
+
+/** The modifier that carries the themes, and its default context. */
+const THEME_MODIFIER = "theme"
+const DEFAULT_THEME: Theme = "light"
 const TIERS: readonly Tier[] = ["primitive", "semantic", "component"]
 
 type Tree = Record<string, unknown>
@@ -244,13 +264,39 @@ interface Override {
   $value: unknown
 }
 
+/** One source of a context: what that file alone overrides, by dotted path. */
+interface Layer {
+  file: string
+  map: Map<string, Override>
+}
+
 export interface Tokens {
   /** Each tier as authored — its values are the default (light) context. */
   tiers: Record<Tier, { file: string; tree: Tree }>
-  /** Per mode, the tokens its context overrides, by dotted path. */
-  overrides: Record<Mode, Map<string, Override>>
+  /**
+   * Per theme, the tokens its context overrides once its sources are merged,
+   * by dotted path: a later source wins, as in the resolver.
+   */
+  overrides: Record<Theme, Map<string, Override>>
+  /** Per theme, the sources of its context in order, each with its own delta. */
+  layers: Record<Theme, Layer[]>
   /** The value a context gives a token, or undefined when it keeps its own. */
-  override(path: string, mode: Mode): unknown
+  override(path: string, theme: Theme): unknown
+}
+
+/** A node's extensions in this design system's own namespace. */
+const dsExtensions = (node: Tree) =>
+  (node.$extensions as Tree | undefined)?.["design.dsaireadable"] as
+    Tree | undefined
+
+/**
+ * The custom property a font-family primitive is loaded under, when it has
+ * one: next/font sets `--font-<face>` on <html> and tokens.css reads it first,
+ * so the token drives the self-hosted face and still names a family without it.
+ */
+export function fontVariableOf(node: Tree): string | undefined {
+  const variable = dsExtensions(node)?.fontVariable
+  return typeof variable === "string" ? variable : undefined
 }
 
 const readJson = (file: string) =>
@@ -267,8 +313,8 @@ function* leavesOf(tree: Tree, path: string[] = []): Generator<[string, Tree]> {
 
 /**
  * Read tokens/tokens.resolver.json: its three sets are the tiers, in that
- * order, and its `color-scheme` modifier maps `light` (the default) and
- * `dark` to the files that override them.
+ * order, and its `theme` modifier maps each theme (light, the default, then
+ * dark, nova-light and nova-dark) to the files that override it, in order.
  */
 export function loadTokens(root: string): Tokens {
   const resolverFile = resolve(root, RESOLVER_PATH)
@@ -282,7 +328,7 @@ export function loadTokens(root: string): Tokens {
   const order = (doc.resolutionOrder as Ref[]).map((r) => r.$ref)
   const expected = [
     ...TIERS.map((t) => `#/sets/${t}`),
-    `#/modifiers/${COLOR_SCHEME}`,
+    `#/modifiers/${THEME_MODIFIER}`,
   ]
   if (order.join() !== expected.join())
     fail(`resolutionOrder must be ${expected.join(", ")}`)
@@ -297,34 +343,45 @@ export function loadTokens(root: string): Tokens {
     })
   ) as Tokens["tiers"]
 
-  const modifier = (doc.modifiers as Tree)[COLOR_SCHEME] as {
+  const modifier = (doc.modifiers as Tree)[THEME_MODIFIER] as {
     contexts: Record<string, Ref[]>
     default?: string
   }
-  if (Object.keys(modifier.contexts).sort().join() !== [...MODES].sort().join())
-    fail(`"${COLOR_SCHEME}" must have the contexts ${MODES.join(", ")}`)
-  if (modifier.default !== DEFAULT_MODE)
-    fail(`"${COLOR_SCHEME}" must default to "${DEFAULT_MODE}"`)
+  if (
+    Object.keys(modifier.contexts).sort().join() !== [...THEMES].sort().join()
+  )
+    fail(`"${THEME_MODIFIER}" must have the contexts ${THEMES.join(", ")}`)
+  if (modifier.default !== DEFAULT_THEME)
+    fail(`"${THEME_MODIFIER}" must default to "${DEFAULT_THEME}"`)
 
-  const overrides = Object.fromEntries(
-    MODES.map((mode) => {
-      const map = new Map<string, Override>()
-      for (const ref of modifier.contexts[mode]) {
+  const layers = Object.fromEntries(
+    THEMES.map((theme) => [
+      theme,
+      modifier.contexts[theme].map((ref): Layer => {
         const file = fileOf(ref)
+        const map = new Map<string, Override>()
         for (const [path, node] of leavesOf(readJson(resolve(root, file))))
           map.set(path, {
             file,
             $type: node.$type as string | undefined,
             $value: node.$value,
           })
-      }
-      return [mode, map]
-    })
+        return { file, map }
+      }),
+    ])
+  ) as Tokens["layers"]
+
+  const overrides = Object.fromEntries(
+    THEMES.map((theme) => [
+      theme,
+      new Map(layers[theme].flatMap((layer) => [...layer.map])),
+    ])
   ) as Tokens["overrides"]
 
   return {
     tiers,
     overrides,
-    override: (path, mode) => overrides[mode].get(path)?.$value,
+    layers,
+    override: (path, theme) => overrides[theme].get(path)?.$value,
   }
 }

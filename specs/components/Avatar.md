@@ -33,7 +33,7 @@ A visual stand-in for a person or an entity — a photo, initials or an icon —
 ## Dependencies
 
 - `radix-ui` — the `Avatar` primitive (Root, Image, Fallback)
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -70,9 +70,11 @@ A visual stand-in for a person or an entity — a photo, initials or an icon —
 | `space.scale.6`                      | `size-6`                                  | `AvatarGroupCount` · `Avatar`                                                                                                        |
 | `space.scale.8`                      | `size-8`                                  | `AvatarGroupCount` · `Avatar`                                                                                                        |
 | `typography.size-line-height.sm`     | `text-sm`                                 | `AvatarFallback`                                                                                                                     |
-| `typography.size-line-height.xs`     | `text-xs`                                 | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
+| `typography.size-line-height.ui`     | `text-ui`                                 | `AvatarGroupCount`                                                                                                                   |
+| `typography.size-line-height.xs`     | `text-xs`                                 | `AvatarFallback`                                                                                                                     |
 | `typography.size.sm`                 | `text-sm`                                 | `AvatarFallback`                                                                                                                     |
-| `typography.size.xs`                 | `text-xs`                                 | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
+| `typography.size.ui`                 | `text-ui`                                 | `AvatarGroupCount`                                                                                                                   |
+| `typography.size.xs`                 | `text-xs`                                 | `AvatarFallback`                                                                                                                     |
 | `zindex.dropdown`                    | `z-dropdown`                              | `AvatarBadge`                                                                                                                        |
 
 Collected from `components/ui/avatar.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.

@@ -93,6 +93,11 @@ export const SOURCES: Record<string, Source> = {
   yellow: { hex: "#e5e747", role: "Chart series" },
   amber: { hex: "#fe9a00", role: "Warning and chart series", hueShift: -50 },
   plum: { hex: "#8e51b6", role: "Chart series" },
+  stone: {
+    hex: "#79716b",
+    role: "Warm neutral of the nova brand: surfaces, text and borders",
+  },
+  teal: { hex: "#0d9488", role: "Chart scale of the nova brand" },
 }
 
 /** Rounding of the stored components: enough to render back to the same hex. */

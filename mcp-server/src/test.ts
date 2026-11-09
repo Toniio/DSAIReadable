@@ -26,6 +26,7 @@ import {
   type CompositionRule,
 } from "./lib/composition-rules.js"
 import { TAILWIND_RULE } from "./lib/tailwind-rule.js"
+import { loadTokens } from "./lib/dtcg.js"
 import { mdSection, mdTables, mdWithoutCode } from "./lib/markdown.js"
 import { COMPONENT_RULE } from "./lib/component-rule.js"
 import { registerResources } from "./resources/index.js"
@@ -664,6 +665,7 @@ const CODE_FIXTURES: Record<string, string> = {
   "no-raw-values": `export const C = () => <div className="bg-[#432dd7] text-red-500" />`,
   "no-deprecated-imports": "",
   "no-deprecated-token": `export const C = () => <div className="p-4" style={{ opacity: "var(--opacity-placeholder)" }} />`,
+  "no-text-role-in-stock-cn": `import { cn } from "@/lib/utils"\nexport const C = () => <div className={cn("text-ui text-muted-foreground")} />`,
 }
 const codeRules = Object.keys(plugin.rules)
 const missingCodeFixtures = codeRules.filter(
@@ -1065,21 +1067,68 @@ assert(
 )
 
 // The critical rule is served in every prompt, so it says what the components
-// draw: square (rounded-none), a label and a heading with a text style of
-// their own. It recommended rounded-lg rounded-md and a 14px medium label.
+// draw: corners from a role the brand sets, a label and a heading with a text
+// style of their own. It recommended rounded-lg rounded-md and a 14px medium
+// label, then said every component is square, which nova is not, and that a
+// label is 12px, which only lyra's text-ui is.
 assert(
   !TAILWIND_RULE.do.some((line) =>
     /\brounded-(?:sm|md|lg|xl|2xl)\b/.test(line)
   ) &&
-    TAILWIND_RULE.do.some((line) => /\brounded-none\b/.test(line)) &&
+    TAILWIND_RULE.do.some((line) => /\brounded-surface\b/.test(line)) &&
+    !/components are square|Every component is square|12px regular/.test(
+      ruleText
+    ) &&
     TAILWIND_RULE.description.some(
-      (line) => /square/.test(line) && /\brounded-/.test(line)
+      (line) =>
+        /square in lyra/.test(line) &&
+        /rounded in nova/.test(line) &&
+        /\brounded-surface\b/.test(line)
     ) &&
     TAILWIND_RULE.description.some((line) =>
       /FieldLabel[^.]*no text-\*, font-\*, tracking-\* or leading-\*/.test(line)
     ),
-  "The styling rule says the components are square and a label draws its own text style"
+  "The styling rule names the radius roles, and no value that only one brand draws"
 )
+
+// It said which text classes exist, not when to use one: an agent wrote
+// text-sm beside a CardDescription, and the two parted in nova. It also read
+// as if Heading were regular.
+{
+  const textLine =
+    TAILWIND_RULE.description.find((line) => /\btext-title\b/.test(line)) ?? ""
+  const doLine =
+    TAILWIND_RULE.do.find((line) => /\bfont-medium\b/.test(line)) ?? ""
+  assert(
+    /beside components names the role/.test(textLine) &&
+      /text-control with md:text-ui, only on a field/.test(textLine) &&
+      /text-xs … text-4xl are fixed/.test(textLine) &&
+      /Label and FieldLabel are regular at text-ui, Heading semibold/.test(
+        textLine
+      ) &&
+      /\btext-ui text-description text-title\b/.test(doLine) &&
+      !/\btext-(?:xs|sm)\b/.test(doLine),
+    "The styling rule says when text takes a role, and that text-control goes with md:text-ui"
+  )
+  const message =
+    validateScreen(`const s = { fontSize: 14 }`).issues.find(
+      (i) => i.rule === "no-raw-font-sizes"
+    )?.message ?? ""
+  assert(
+    /\btext-ui, text-description, text-title\b/.test(message),
+    `A raw font size is answered with the text roles: "${message}"`
+  )
+}
+{
+  const message =
+    validateScreen(`const s = "border-radius: 8px"`).issues.find(
+      (i) => i.rule === "no-raw-radius"
+    )?.message ?? ""
+  assert(
+    /\brounded-surface\b/.test(message) && !/are square/.test(message),
+    `A raw border-radius is answered with the radius roles: "${message}"`
+  )
+}
 
 // The detailed design rules leave radius.md's rules to the styling rule, so it
 // gives content the classes radius.md gives it. It said rounded-xs …
@@ -1118,7 +1167,7 @@ assert(
 // A `dont` that is a convention, valid on purpose, is listed here by name.
 const CONVENTION_DONTS: Record<string, string> = {
   "rounded-md on a Button, rounded-lg on a Card or rounded-xl on a Dialog":
-    "valid classes: the components are square by convention, which no stylesheet or lint rule enforces",
+    "valid classes: a component reads its radius role by convention, which no stylesheet or lint rule enforces",
 }
 const ruleLinter = new ESLint({
   cwd: resolve(__dirname, "../.."),
@@ -1428,6 +1477,68 @@ assert(
     servedDark.get("color.background.default") === "{primitive.color.mist.950}",
   `Every dark override is served as the token's dark value (${overrides.length - wrongDark.length}/${overrides.length})`
 )
+
+// Nova's values are served next to them, from the merged context of each theme:
+// a token only dark changes keeps its dark value in nova dark, and a role nova
+// changes in light keeps that value in nova dark.
+{
+  const resolved = loadTokens(resolve(__dirname, "../.."))
+  const semantic = readContext<
+    Array<{
+      path: string
+      light: string
+      dark: string
+      nova_light: string
+      nova_dark: string
+    }>
+  >("semantic-tokens.json")
+  const variables = new Map(
+    readContext<
+      Array<{
+        path: string
+        value_nova_light: string
+        value_nova_dark: string
+      }>
+    >("variables.json").map((t) => [t.path, t])
+  )
+  const wrongNova = semantic.filter(
+    (t) =>
+      t.nova_light !== (resolved.override(t.path, "nova-light") ?? t.light) ||
+      t.nova_dark !== (resolved.override(t.path, "nova-dark") ?? t.light) ||
+      variables.get(t.path)?.value_nova_light !== t.nova_light ||
+      variables.get(t.path)?.value_nova_dark !== t.nova_dark
+  )
+  const served = new Map(semantic.map((t) => [t.path, t]))
+  const novaOnlyDark = semantic.find(
+    (t) =>
+      t.dark !== t.light &&
+      resolved.override(t.path, "nova-light") === undefined &&
+      t.nova_dark === t.dark
+  )
+  const layout = readContext<{
+    tokens: Array<{
+      path: string
+      value: string
+      nova_light_value?: string
+      nova_dark_value?: string
+    }>
+  }>("layout-tokens.json").tokens.find((t) => t.path === "radius.surface")
+  assert(
+    wrongNova.length === 0 &&
+      served.get("color.background.card")?.nova_light ===
+        "{primitive.color.white}" &&
+      served.get("color.background.default")?.nova_light ===
+        served.get("color.background.default")?.light &&
+      served.get("color.background.default")?.nova_dark ===
+        "{primitive.color.stone.950}" &&
+      served.get("radius.surface")?.nova_dark === "{primitive.radius.xl}" &&
+      novaOnlyDark !== undefined &&
+      layout?.value === "{primitive.radius.none}" &&
+      layout.nova_light_value === "{primitive.radius.xl}" &&
+      layout.nova_dark_value === "{primitive.radius.xl}",
+    `Every token is served with its nova values, in light and dark (${wrongNova.map((t) => t.path).join(", ") || "all"})`
+  )
+}
 
 // --- Test 7c: the content library speaks in the foundation's voice ---
 // The generator served "Something went wrong", word for word in the "Not"
@@ -2657,6 +2768,15 @@ const TOOL_CASES: Record<string, ToolCase> = {
       p.mcp_server_version === meta.mcp_server_version &&
       p.distribution.install ===
         `npx shadcn@latest add ${meta.registry_source.item_address}` &&
+      p.brands.default === "lyra" &&
+      p.brands.items.find((b: Json) => b.name === "lyra")?.html_class ===
+        null &&
+      p.brands.items.find((b: Json) => b.name === "nova")?.html_class ===
+        "nova" &&
+      p.brands.items
+        .find((b: Json) => b.name === "nova")
+        ?.install.endsWith("/theme-nova") &&
+      /`nova` class/.test(p.brands.activation) &&
       p.stats.total_components === specNames.length,
   },
   dsaireadable_get_components: {
@@ -2722,7 +2842,16 @@ const TOOL_CASES: Record<string, ToolCase> = {
       p.font_families.length > 0 &&
       p.font_families.every((f: Json) =>
         semanticPaths.has(f.token.replace(/`/g, ""))
-      ),
+      ) &&
+      // The roles draw most of a component's text, and their size depends on
+      // the brand: the tool served the fixed sizes alone.
+      p.text_roles.map((r: Json) => r.tailwind_class).join() ===
+        "text-ui,text-description,text-title,text-control" &&
+      p.text_roles.every(
+        (r: Json) =>
+          semanticPaths.has(r.token) && r.lyra !== "" && r.lyra !== r.nova
+      ) &&
+      /md:text-ui/.test(p.text_roles[3].usage),
   },
   dsaireadable_get_icons: {
     args: {},

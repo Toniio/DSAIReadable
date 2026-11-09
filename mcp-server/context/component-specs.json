@@ -112,6 +112,15 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "AccordionTrigger"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -161,9 +170,9 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "AccordionContent",
@@ -171,9 +180,9 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "AccordionContent",
@@ -384,7 +393,7 @@
         ]
       },
       {
-        "token": "color.background.subtle",
+        "token": "color.background.card",
         "classes": [
           "bg-card"
         ],
@@ -455,6 +464,15 @@
         ],
         "where": [
           "alertVariants.variant.warning"
+        ]
+      },
+      {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "alertVariants"
         ]
       },
       {
@@ -534,31 +552,38 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "AlertDescription"
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "alertVariants"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.description",
         "classes": [
-          "text-xs",
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
-          "AlertDescription",
+          "AlertDescription"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "alertVariants"
         ]
       }
@@ -878,6 +903,24 @@
         ]
       },
       {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "AlertDialogMedia"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-surface"
+        ],
+        "where": [
+          "AlertDialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
         "token": "space.scale.0",
         "classes": [
           "inset-0"
@@ -946,7 +989,7 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -964,39 +1007,39 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "AlertDialogDescription"
         ]
       },
       {
-        "token": "typography.size-line-height.sm",
+        "token": "typography.size-line-height.title",
         "classes": [
-          "text-sm"
+          "text-title"
         ],
         "where": [
           "AlertDialogTitle"
         ]
       },
       {
-        "token": "typography.size.sm",
+        "token": "typography.size.description",
         "classes": [
-          "text-sm"
-        ],
-        "where": [
-          "AlertDialogTitle"
-        ]
-      },
-      {
-        "token": "typography.size.xs",
-        "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "AlertDialogDescription"
+        ]
+      },
+      {
+        "token": "typography.size.title",
+        "classes": [
+          "text-title"
+        ],
+        "where": [
+          "AlertDialogTitle"
         ]
       },
       {
@@ -1382,7 +1425,7 @@
       "`Button` from `@/components/ui/button` (rendered by `AttachmentAction`)",
       "The focus ring from `@/lib/focus`",
       "The `shimmer`, `scroll-fade-x` and `no-scrollbar` utilities of `shadcn/tailwind.css`, imported by `styles/globals.css`",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -1433,14 +1476,21 @@
         ]
       },
       {
+        "token": "color.background.card",
+        "classes": [
+          "bg-card"
+        ],
+        "where": [
+          "attachmentVariants"
+        ]
+      },
+      {
         "token": "color.background.subtle",
         "classes": [
-          "bg-card",
           "bg-muted"
         ],
         "where": [
-          "attachmentMediaVariants",
-          "attachmentVariants"
+          "attachmentMediaVariants"
         ]
       },
       {
@@ -1516,6 +1566,34 @@
         "token": "motion.easing.default",
         "classes": [
           "transition-colors"
+        ],
+        "where": [
+          "attachmentVariants"
+        ]
+      },
+      {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "attachmentMediaVariants",
+          "attachmentVariants.size.xs"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "attachmentMediaVariants"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-surface"
         ],
         "where": [
           "attachmentVariants"
@@ -1716,15 +1794,32 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "attachmentVariants.size.default"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
           "AttachmentDescription",
-          "attachmentVariants.size.default",
           "attachmentVariants.size.sm",
           "attachmentVariants.size.xs"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "attachmentVariants.size.default"
         ]
       },
       {
@@ -1734,7 +1829,6 @@
         ],
         "where": [
           "AttachmentDescription",
-          "attachmentVariants.size.default",
           "attachmentVariants.size.sm",
           "attachmentVariants.size.xs"
         ]
@@ -1983,7 +2077,7 @@
     ],
     "dependencies": [
       "`radix-ui` — the `Avatar` primitive (Root, Image, Fallback)",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -2190,13 +2284,21 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "AvatarGroupCount"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
-          "AvatarFallback",
-          "AvatarGroupCount"
+          "AvatarFallback"
         ]
       },
       {
@@ -2209,13 +2311,21 @@
         ]
       },
       {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "AvatarGroupCount"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
-          "AvatarFallback",
-          "AvatarGroupCount"
+          "AvatarFallback"
         ]
       },
       {
@@ -2425,7 +2535,7 @@
     "dependencies": [
       "`class-variance-authority` for the variants",
       "`Slot.Root` from `radix-ui` (used when `asChild={true}`)",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -2683,6 +2793,15 @@
         "token": "motion.easing.default",
         "classes": [
           "transition-all"
+        ],
+        "where": [
+          "badgeVariants"
+        ]
+      },
+      {
+        "token": "radius.pill",
+        "classes": [
+          "rounded-pill"
         ],
         "where": [
           "badgeVariants"
@@ -3040,18 +3159,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "BreadcrumbList"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "BreadcrumbList"
@@ -3250,7 +3369,7 @@
     "dependencies": [
       "`class-variance-authority` for the `Bubble` variants and the `BubbleReactions` position",
       "`Slot.Root` from `radix-ui` (used by `BubbleContent` when `asChild={true}`)",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -3339,6 +3458,15 @@
         ]
       },
       {
+        "token": "color.background.card",
+        "classes": [
+          "ring-card"
+        ],
+        "where": [
+          "bubbleReactionsVariants"
+        ]
+      },
+      {
         "token": "color.background.default",
         "classes": [
           "bg-background"
@@ -3351,8 +3479,7 @@
         "token": "color.background.subtle",
         "classes": [
           "bg-muted",
-          "bg-secondary",
-          "ring-card"
+          "bg-secondary"
         ],
         "where": [
           "bubbleReactionsVariants",
@@ -3445,6 +3572,24 @@
         "token": "motion.easing.default",
         "classes": [
           "transition-colors"
+        ],
+        "where": [
+          "BubbleContent"
+        ]
+      },
+      {
+        "token": "radius.pill",
+        "classes": [
+          "rounded-pill"
+        ],
+        "where": [
+          "bubbleReactionsVariants"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-surface"
         ],
         "where": [
           "BubbleContent"
@@ -3546,9 +3691,9 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "BubbleContent",
@@ -3556,9 +3701,9 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "BubbleContent",
@@ -3930,6 +4075,31 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "buttonVariants.size.icon-sm",
+          "buttonVariants.size.icon-xs",
+          "buttonVariants.size.sm",
+          "buttonVariants.size.xs",
+          "buttonVariants"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "buttonVariants.size.icon-sm",
+          "buttonVariants.size.icon-xs",
+          "buttonVariants.size.sm",
+          "buttonVariants.size.xs"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -4068,12 +4238,29 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "buttonVariants"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
-          "buttonVariants.size.xs",
+          "buttonVariants.size.xs"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "buttonVariants"
         ]
       },
@@ -4083,8 +4270,7 @@
           "text-xs"
         ],
         "where": [
-          "buttonVariants.size.xs",
-          "buttonVariants"
+          "buttonVariants.size.xs"
         ]
       }
     ],
@@ -4209,7 +4395,7 @@
       "`class-variance-authority` for the orientation variants",
       "`Slot.Root` from `radix-ui` (used by `ButtonGroupText` when `asChild={true}`)",
       "`Separator` from `@/components/ui/separator`",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -4254,6 +4440,20 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-b-control",
+          "rounded-control",
+          "rounded-r-control"
+        ],
+        "where": [
+          "ButtonGroupText",
+          "buttonGroupVariants.orientation.horizontal",
+          "buttonGroupVariants.orientation.vertical",
+          "buttonGroupVariants"
+        ]
+      },
+      {
         "token": "space.scale.2",
         "classes": [
           "gap-2"
@@ -4291,18 +4491,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "ButtonGroupText"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "ButtonGroupText"
@@ -4474,7 +4674,7 @@
       "`Button` (`@/components/ui/button`) — navigation buttons and day cells",
       "`buttonVariants` (`@/components/ui/button`) — the navigation buttons' classes",
       "`CaretLeftIcon`, `CaretRightIcon`, `CaretDownIcon` (`@phosphor-icons/react`) — navigation icons",
-      "`cn` (`@/lib/utils`) — the class-merging utility"
+      "`cn` (`@/lib/cn`) — the class-merging utility"
     ],
     "anatomy": [
       {
@@ -4637,6 +4837,25 @@
           "Calendar.button_next",
           "Calendar.button_previous",
           "Calendar.disabled"
+        ]
+      },
+      {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "[--cell-radius:var(--radius-item)]"
+        ],
+        "where": [
+          "Calendar"
         ]
       },
       {
@@ -4809,13 +5028,21 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
-          "Calendar.button_next via buttonVariants",
-          "Calendar.button_previous via buttonVariants",
           "Calendar.week_number",
           "Calendar.weekday",
           "CalendarDayButton"
@@ -4832,13 +5059,21 @@
         ]
       },
       {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "Calendar.button_next via buttonVariants",
+          "Calendar.button_previous via buttonVariants"
+        ]
+      },
+      {
         "token": "typography.size.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
-          "Calendar.button_next via buttonVariants",
-          "Calendar.button_previous via buttonVariants",
           "Calendar.week_number",
           "Calendar.weekday",
           "CalendarDayButton"
@@ -5054,7 +5289,7 @@
         ]
       },
       {
-        "token": "color.background.subtle",
+        "token": "color.background.card",
         "classes": [
           "bg-card"
         ],
@@ -5079,6 +5314,19 @@
         ],
         "where": [
           "CardDescription"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-b-surface",
+          "rounded-surface",
+          "rounded-t-surface"
+        ],
+        "where": [
+          "CardFooter",
+          "CardHeader",
+          "Card"
         ]
       },
       {
@@ -5119,7 +5367,7 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -5137,9 +5385,9 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "CardDescription",
@@ -5156,6 +5404,25 @@
         ]
       },
       {
+        "token": "typography.size-line-height.title",
+        "classes": [
+          "text-title"
+        ],
+        "where": [
+          "CardTitle"
+        ]
+      },
+      {
+        "token": "typography.size.description",
+        "classes": [
+          "text-description"
+        ],
+        "where": [
+          "CardDescription",
+          "Card"
+        ]
+      },
+      {
         "token": "typography.size.sm",
         "classes": [
           "text-sm"
@@ -5165,13 +5432,12 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.title",
         "classes": [
-          "text-xs/relaxed"
+          "text-title"
         ],
         "where": [
-          "CardDescription",
-          "Card"
+          "CardTitle"
         ]
       }
     ],
@@ -5330,7 +5596,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "`bg-card` background, a `ring-foreground/10` ring `--border-width-default` wide (`SURFACE_OUTLINE`), square corners (`rounded-none`)"
+        "behavior": "`bg-card` background, a `ring-foreground/10` ring `--border-width-default` wide (`SURFACE_OUTLINE`), `rounded-surface` corners, square in lyra and rounded in nova"
       },
       {
         "state": "hover",
@@ -5394,7 +5660,7 @@
       "`embla-carousel-react` — the carousel engine and its types (`UseEmblaCarouselType`)",
       "`Button` (`@/components/ui/button`) — the previous / next buttons",
       "`CaretLeftIcon`, `CaretRightIcon` (`@phosphor-icons/react`) — navigation icons",
-      "`cn` (`@/lib/utils`) — the class-merging utility"
+      "`cn` (`@/lib/cn`) — the class-merging utility"
     ],
     "anatomy": [
       {
@@ -5419,6 +5685,16 @@
       }
     ],
     "tokens": [
+      {
+        "token": "radius.pill",
+        "classes": [
+          "rounded-pill"
+        ],
+        "where": [
+          "CarouselNext",
+          "CarouselPrevious"
+        ]
+      },
       {
         "token": "space.scale.0",
         "classes": [
@@ -5715,7 +5991,7 @@
     ],
     "dependencies": [
       "`recharts` — the charting library (`ResponsiveContainer`, `Tooltip`, `Legend`…)",
-      "`cn` (`@/lib/utils`) — the class-merging utility"
+      "`cn` (`@/lib/cn`) — the class-merging utility"
     ],
     "anatomy": [
       {
@@ -5817,6 +6093,15 @@
         "token": "elevation.xl",
         "classes": [
           "shadow-xl"
+        ],
+        "where": [
+          "ChartTooltipContent"
+        ]
+      },
+      {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
         ],
         "where": [
           "ChartTooltipContent"
@@ -6189,7 +6474,7 @@
       }
     ],
     "accessibility": "**Pattern**: SVG chart (Recharts) — no APG pattern\n\n**Role**: An SVG drawn by Recharts with its accessibility layer on (the default): the surface is a focusable `application`, named by the `aria-label` of the chart element. The tooltip appears on hover and, from the keyboard, on the data point the arrow keys reach.\n\n**Keyboard**:\n\n| Key                        | Action                                                                                                                      |\n| -------------------------- | --------------------------------------------------------------------------------------------------------------------------- |\n| `Tab` / `Shift+Tab`        | Moves focus to the chart and away from it; `ChartContainer` shows its ring on every focus, with or without a `ChartTooltip` |\n| `ArrowLeft` / `ArrowRight` | Moves the tooltip and its cursor to the previous / next data point; the first one is shown when the chart receives focus    |\n| `Enter`                    | Hides or shows the tooltip of the current data point                                                                        |\n\nEverything the tooltip shows must also be in the text summary or the data table: a pointer user hovers, a keyboard user steps through the points, and neither is asked to find a value only the tooltip holds.\n\n**Accessible name**: `aria-label` on the Recharts element (`BarChart`, `LineChart`, `PieChart`…) says what the chart shows; a visible title and a text summary of its takeaway sit next to it.\n\n**Pitfalls**:\n\n- Provide the data in another form as well (a visible text summary, a visible `Table`): a screen reader does not read bars. A chart with no `ChartTooltip` is still a tab stop where nothing changes but the ring; turn the layer off with `accessibilityLayer={false}` only when a table gives the same data.\n- While the pointer rests over the chart, Recharts keeps the tooltip on the data point under the pointer: focus shows that point instead of the first one, and `ArrowLeft`, `ArrowRight` and `Enter` change nothing visible until the pointer leaves the chart ([recharts/recharts#7905](https://github.com/recharts/recharts/issues/7905)). A keyboard user loses no value as long as the text summary or the table holds everything the tooltip shows. In a browser test of the keyboard, move the pointer off the chart before the focus (`userEvent.hover` on the tab stop before it): a pointer an earlier test left over the chart fails the test, depending on the file order.\n- Categorical palette: the series stay distinct under color blindness (`npm run tokens:lint-chart`), but back the colors up with a legend or labels (see `specs/foundations/color.md`).",
-    "code_example": "import {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n  type ChartConfig,\n} from \"@/components/ui/chart\"\nimport { BarChart, Bar, XAxis } from \"recharts\"\n\nconst config: ChartConfig = {\n  revenue: {\n    label: \"Revenue\",\n    color: \"var(--color-chart-1)\",\n  },\n}\n\nconst data = [\n  { month: \"Jan\", revenue: 186 },\n  { month: \"Feb\", revenue: 305 },\n  { month: \"Mar\", revenue: 237 },\n]\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <ChartContainer config={config} className=\"min-h-52 w-full\">\n        <BarChart accessibilityLayer aria-label=\"Revenue by month\" data={data}>\n          <XAxis dataKey=\"month\" />\n          <Bar dataKey=\"revenue\" fill=\"var(--color-revenue)\" />\n          <ChartTooltip content={<ChartTooltipContent />} />\n        </BarChart>\n      </ChartContainer>\n      <p className=\"text-xs text-muted-foreground\">\n        Revenue peaked in February at 305, after 186 in January.\n      </p>\n    </div>\n  )\n}",
+    "code_example": "import {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n  type ChartConfig,\n} from \"@/components/ui/chart\"\nimport { BarChart, Bar, XAxis } from \"recharts\"\n\nconst config: ChartConfig = {\n  revenue: {\n    label: \"Revenue\",\n    color: \"var(--color-chart-1)\",\n  },\n}\n\nconst data = [\n  { month: \"Jan\", revenue: 186 },\n  { month: \"Feb\", revenue: 305 },\n  { month: \"Mar\", revenue: 237 },\n]\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <ChartContainer config={config} className=\"min-h-52 w-full\">\n        <BarChart accessibilityLayer aria-label=\"Revenue by month\" data={data}>\n          <XAxis dataKey=\"month\" />\n          <Bar dataKey=\"revenue\" fill=\"var(--color-revenue)\" />\n          <ChartTooltip content={<ChartTooltipContent />} />\n        </BarChart>\n      </ChartContainer>\n      <p className=\"text-ui text-muted-foreground\">\n        Revenue peaked in February at 305, after 186 in January.\n      </p>\n    </div>\n  )\n}",
     "cross_references": [
       "Card",
       "Table",
@@ -6329,6 +6614,15 @@
         "token": "opacity.disabled",
         "classes": [
           "opacity-disabled"
+        ],
+        "where": [
+          "Checkbox"
+        ]
+      },
+      {
+        "token": "radius.mark",
+        "classes": [
+          "rounded-mark"
         ],
         "where": [
           "Checkbox"
@@ -6539,7 +6833,7 @@
       "The default names of the copy button, `UI_STRINGS.codeBlock`, from `@/lib/ui-strings`",
       "The `scroll-fade-x` and `scroll-fade-y` utilities of `shadcn/tailwind.css`, imported by `styles/globals.css`",
       "The Clipboard API (`navigator.clipboard.writeText`), which the browser grants on HTTPS and on `localhost` only",
-      "The `cn` utility from `@/lib/utils`",
+      "The `cn` utility from `@/lib/cn`",
       "**Not shipped**: shadcn/ui's `use-highlighted-code` hook and its `lib/highlighter.tsx`, which bring shiki and the hex colors of its themes. The registry item depends on `button` alone"
     ],
     "anatomy": [
@@ -6712,6 +7006,15 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "codeBlockVariants"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -6867,6 +7170,15 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "CodeBlockTitle"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
@@ -6883,6 +7195,15 @@
         ],
         "where": [
           "codeBlockVariants"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "CodeBlockTitle"
         ]
       },
       {
@@ -7533,6 +7854,34 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "ComboboxChips",
+          "ComboboxContent"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-inset"
+        ],
+        "where": [
+          "ComboboxChip"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "ComboboxItem"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -7685,16 +8034,35 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "ComboboxChips",
+          "ComboboxEmpty",
+          "ComboboxItem"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
           "ComboboxChip",
+          "ComboboxLabel"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "ComboboxChips",
           "ComboboxEmpty",
-          "ComboboxItem",
-          "ComboboxLabel"
+          "ComboboxItem"
         ]
       },
       {
@@ -7704,9 +8072,6 @@
         ],
         "where": [
           "ComboboxChip",
-          "ComboboxChips",
-          "ComboboxEmpty",
-          "ComboboxItem",
           "ComboboxLabel"
         ]
       },
@@ -8266,6 +8631,34 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "CommandItem"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-inset"
+        ],
+        "where": [
+          "CommandItem"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-surface"
+        ],
+        "where": [
+          "CommandDialog",
+          "Command"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -8367,16 +8760,35 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "CommandEmpty",
+          "CommandInput",
+          "CommandItem"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
-          "CommandEmpty",
           "CommandGroup",
-          "CommandInput",
-          "CommandItem",
           "CommandShortcut"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "CommandEmpty",
+          "CommandInput",
+          "CommandItem"
         ]
       },
       {
@@ -8385,10 +8797,7 @@
           "text-xs"
         ],
         "where": [
-          "CommandEmpty",
           "CommandGroup",
-          "CommandInput",
-          "CommandItem",
           "CommandShortcut"
         ]
       }
@@ -8822,6 +9231,28 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "ContextMenuContent",
+          "ContextMenuSubContent"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuRadioItem",
+          "ContextMenuSubTrigger"
+        ]
+      },
+      {
         "token": "space.scale.1",
         "classes": [
           "-mx-1"
@@ -8910,16 +9341,36 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "ContextMenuCheckboxItem",
+          "ContextMenuItem",
+          "ContextMenuRadioItem",
+          "ContextMenuSubTrigger"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
+          "ContextMenuLabel",
+          "ContextMenuShortcut"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "ContextMenuCheckboxItem",
           "ContextMenuItem",
-          "ContextMenuLabel",
           "ContextMenuRadioItem",
-          "ContextMenuShortcut",
           "ContextMenuSubTrigger"
         ]
       },
@@ -8929,12 +9380,8 @@
           "text-xs"
         ],
         "where": [
-          "ContextMenuCheckboxItem",
-          "ContextMenuItem",
           "ContextMenuLabel",
-          "ContextMenuRadioItem",
-          "ContextMenuShortcut",
-          "ContextMenuSubTrigger"
+          "ContextMenuShortcut"
         ]
       },
       {
@@ -9370,6 +9817,15 @@
         ]
       },
       {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-surface"
+        ],
+        "where": [
+          "DialogContent via MODAL_CONTENT_BASE (lib/overlay.ts)"
+        ]
+      },
+      {
         "token": "space.scale.0",
         "classes": [
           "inset-0"
@@ -9419,7 +9875,7 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -9437,9 +9893,9 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "DialogContent",
@@ -9447,31 +9903,31 @@
         ]
       },
       {
-        "token": "typography.size-line-height.sm",
+        "token": "typography.size-line-height.title",
         "classes": [
-          "text-sm"
+          "text-title"
         ],
         "where": [
           "DialogTitle"
         ]
       },
       {
-        "token": "typography.size.sm",
+        "token": "typography.size.description",
         "classes": [
-          "text-sm"
-        ],
-        "where": [
-          "DialogTitle"
-        ]
-      },
-      {
-        "token": "typography.size.xs",
-        "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "DialogContent",
           "DialogDescription"
+        ]
+      },
+      {
+        "token": "typography.size.title",
+        "classes": [
+          "text-title"
+        ],
+        "where": [
+          "DialogTitle"
         ]
       },
       {
@@ -9955,6 +10411,27 @@
         ]
       },
       {
+        "token": "radius.pill",
+        "classes": [
+          "rounded-pill"
+        ],
+        "where": [
+          "DrawerContent"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-b-surface",
+          "rounded-l-surface",
+          "rounded-r-surface",
+          "rounded-t-surface"
+        ],
+        "where": [
+          "DrawerContent"
+        ]
+      },
+      {
         "token": "space.scale.0",
         "classes": [
           "bottom-0",
@@ -10021,7 +10498,7 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -10039,9 +10516,9 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
@@ -10049,31 +10526,31 @@
         ]
       },
       {
-        "token": "typography.size-line-height.sm",
+        "token": "typography.size-line-height.title",
         "classes": [
-          "text-sm"
+          "text-title"
         ],
         "where": [
           "DrawerTitle"
         ]
       },
       {
-        "token": "typography.size.sm",
+        "token": "typography.size.description",
         "classes": [
-          "text-sm"
-        ],
-        "where": [
-          "DrawerTitle"
-        ]
-      },
-      {
-        "token": "typography.size.xs",
-        "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "DrawerContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
           "DrawerDescription"
+        ]
+      },
+      {
+        "token": "typography.size.title",
+        "classes": [
+          "text-title"
+        ],
+        "where": [
+          "DrawerTitle"
         ]
       },
       {
@@ -10509,6 +10986,28 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "DropdownMenuContent",
+          "DropdownMenuSubContent"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuRadioItem",
+          "DropdownMenuSubTrigger"
+        ]
+      },
+      {
         "token": "space.scale.1",
         "classes": [
           "-mx-1"
@@ -10597,16 +11096,36 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuItem",
+          "DropdownMenuRadioItem",
+          "DropdownMenuSubTrigger"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
+          "DropdownMenuLabel",
+          "DropdownMenuShortcut"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "DropdownMenuCheckboxItem",
           "DropdownMenuItem",
-          "DropdownMenuLabel",
           "DropdownMenuRadioItem",
-          "DropdownMenuShortcut",
           "DropdownMenuSubTrigger"
         ]
       },
@@ -10616,12 +11135,8 @@
           "text-xs"
         ],
         "where": [
-          "DropdownMenuCheckboxItem",
-          "DropdownMenuItem",
           "DropdownMenuLabel",
-          "DropdownMenuRadioItem",
-          "DropdownMenuShortcut",
-          "DropdownMenuSubTrigger"
+          "DropdownMenuShortcut"
         ]
       },
       {
@@ -10958,7 +11473,7 @@
     ],
     "dependencies": [
       "`class-variance-authority` for the `EmptyMedia` variants",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -11024,6 +11539,24 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "emptyMediaVariants.variant.icon"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-surface"
+        ],
+        "where": [
+          "Empty"
+        ]
+      },
+      {
         "token": "space.scale.0",
         "classes": [
           "min-w-0"
@@ -11083,7 +11616,7 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -11103,7 +11636,7 @@
       {
         "token": "typography.line-height.relaxed",
         "classes": [
-          "text-xs/relaxed"
+          "text-ui/relaxed"
         ],
         "where": [
           "EmptyDescription"
@@ -11119,9 +11652,9 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "EmptyContent"
@@ -11137,10 +11670,10 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs",
-          "text-xs/relaxed"
+          "text-ui",
+          "text-ui/relaxed"
         ],
         "where": [
           "EmptyContent",
@@ -11370,7 +11903,7 @@
       "**Note** — `FieldError` renders nothing without `children` or a non-empty `errors`",
       "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`",
       "**Note** — a choice card is a `FieldLabel` wrapping a `Field orientation=\"horizontal\"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring, and takes the card's text as its name",
-      "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)"
+      "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, in `text-ui` regular with `leading-snug` (12px in lyra, 14px in nova), the same in every form (typography.md)"
     ],
     "dependencies": [
       "`Label` — the primitive `FieldLabel` is built on",
@@ -11516,6 +12049,15 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "FieldLabel"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -11651,16 +12193,6 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
-        "classes": [
-          "text-xs/relaxed"
-        ],
-        "where": [
-          "FieldDescription",
-          "FieldTitle"
-        ]
-      },
-      {
         "token": "typography.line-height.snug",
         "classes": [
           "leading-snug"
@@ -11671,18 +12203,28 @@
         ]
       },
       {
-        "token": "typography.size-line-height.sm",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-sm"
+          "text-description"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldTitle"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.title",
+        "classes": [
+          "text-title"
         ],
         "where": [
           "FieldLegend"
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "FieldError",
@@ -11691,26 +12233,33 @@
         ]
       },
       {
-        "token": "typography.size.sm",
+        "token": "typography.size.description",
         "classes": [
-          "text-sm"
+          "text-description"
+        ],
+        "where": [
+          "FieldDescription",
+          "FieldTitle"
+        ]
+      },
+      {
+        "token": "typography.size.title",
+        "classes": [
+          "text-title"
         ],
         "where": [
           "FieldLegend"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs",
-          "text-xs/relaxed"
+          "text-ui"
         ],
         "where": [
-          "FieldDescription",
           "FieldError",
           "FieldLegend",
-          "FieldSeparator",
-          "FieldTitle"
+          "FieldSeparator"
         ]
       }
     ],
@@ -11891,7 +12440,7 @@
         "prop": "`variant`",
         "type": "`\"legend\" | \"label\"`",
         "default": "`\"legend\"`",
-        "description": "Type style, exposed as `data-variant` (`text-sm` or `text-xs`)"
+        "description": "Type style, exposed as `data-variant` (`text-title` or `text-ui`)"
       },
       {
         "component": "FieldLegend",
@@ -12032,7 +12581,7 @@
     ],
     "dependencies": [
       "`class-variance-authority` for the `level` variants",
-      "`cn` (`@/lib/utils`) to merge classes"
+      "`cn` (`@/lib/cn`) to merge classes"
     ],
     "anatomy": [
       {
@@ -12042,7 +12591,7 @@
     ],
     "tokens": [
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -12321,6 +12870,15 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "HoverCardContent"
+        ]
+      },
+      {
         "token": "space.scale.2-5",
         "classes": [
           "p-2.5"
@@ -12339,18 +12897,18 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "HoverCardContent"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "HoverCardContent"
@@ -12475,7 +13033,7 @@
       }
     ],
     "accessibility": "**Pattern**: Hover preview (Radix HoverCard) — no APG pattern\n\n**Role**: Floating content opened on hover or on focus of the trigger.\n\n**Keyboard**:\n\n| Key                          | Action             |\n| ---------------------------- | ------------------ |\n| `Tab` (focus on the trigger) | Opens the preview  |\n| Focus leaves                 | Closes the preview |\n\n**Accessible name**: The trigger's, most often a link named by its text.\n\n**Pitfalls**:\n\n- The content cannot be reached reliably from the keyboard, nor is it announced: only put information there that is already available elsewhere (the link's target page).\n- Never put an action in it; for interactive content, use `Popover`.",
-    "code_example": "import {\n  HoverCard,\n  HoverCardContent,\n  HoverCardTrigger,\n} from \"@/components/ui/hover-card\"\n\nexport default function Example() {\n  return (\n    <HoverCard>\n      <HoverCardTrigger asChild>\n        <a href=\"/profile\" className=\"underline\">\n          @jcarter\n        </a>\n      </HoverCardTrigger>\n      <HoverCardContent>\n        <div className=\"flex flex-col gap-2\">\n          <p className=\"text-sm font-medium\">James Carter</p>\n          <p className=\"text-xs text-muted-foreground\">\n            Front-end developer · Joined March 2024\n          </p>\n        </div>\n      </HoverCardContent>\n    </HoverCard>\n  )\n}",
+    "code_example": "import {\n  HoverCard,\n  HoverCardContent,\n  HoverCardTrigger,\n} from \"@/components/ui/hover-card\"\n\nexport default function Example() {\n  return (\n    <HoverCard>\n      <HoverCardTrigger asChild>\n        <a href=\"/profile\" className=\"underline\">\n          @jcarter\n        </a>\n      </HoverCardTrigger>\n      <HoverCardContent>\n        <div className=\"flex flex-col gap-2\">\n          <p className=\"text-title font-medium\">James Carter</p>\n          <p className=\"text-ui text-muted-foreground\">\n            Front-end developer · Joined March 2024\n          </p>\n        </div>\n      </HoverCardContent>\n    </HoverCard>\n  )\n}",
     "cross_references": [
       "Popover",
       "Tooltip",
@@ -12505,7 +13063,7 @@
       "**MUST** — in an interface that is not in English, translate the default alternative text (`UI_STRINGS.illustration`) through `alt`"
     ],
     "dependencies": [
-      "`cn` (`@/lib/utils`) to merge classes",
+      "`cn` (`@/lib/cn`) to merge classes",
       "No external dependency — the placeholder SVG lives inside the component"
     ],
     "anatomy": [
@@ -12756,6 +13314,15 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -12819,18 +13386,36 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.control",
         "classes": [
-          "text-xs"
+          "text-control"
         ],
         "where": [
           "Input"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "typography.size.control",
+        "classes": [
+          "text-control"
+        ],
+        "where": [
+          "Input"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
         ],
         "where": [
           "Input"
@@ -13048,6 +13633,26 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "InputGroup"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-inset"
+        ],
+        "where": [
+          "inputGroupAddonVariants",
+          "inputGroupButtonVariants.size.icon-xs",
+          "inputGroupButtonVariants.size.xs"
+        ]
+      },
+      {
         "token": "size.target.min",
         "classes": [
           "min-w-target"
@@ -13215,9 +13820,9 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "InputGroupText",
@@ -13226,9 +13831,9 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "InputGroupText",
@@ -13552,6 +14157,18 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control",
+          "rounded-l-control",
+          "rounded-r-control"
+        ],
+        "where": [
+          "InputOTPGroup",
+          "InputOTPSlot"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -13591,18 +14208,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "InputOTPSlot"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "InputOTPSlot"
@@ -13781,7 +14398,7 @@
       "`class-variance-authority` for the `Item` and `ItemMedia` variants",
       "`Slot.Root` from `radix-ui` (used by `Item` when `asChild={true}`)",
       "`Separator` from `@/components/ui/separator`",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -13900,6 +14517,24 @@
         ],
         "where": [
           "itemVariants"
+        ]
+      },
+      {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "itemVariants"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-inset"
+        ],
+        "where": [
+          "itemMediaVariants.variant.image"
         ]
       },
       {
@@ -14048,9 +14683,37 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs"
+          "text-description"
+        ],
+        "where": [
+          "ItemDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "ItemTitle",
+          "itemVariants"
+        ]
+      },
+      {
+        "token": "typography.size.description",
+        "classes": [
+          "text-description"
+        ],
+        "where": [
+          "ItemDescription"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
         ],
         "where": [
           "ItemTitle",
@@ -14060,13 +14723,10 @@
       {
         "token": "typography.size.xs",
         "classes": [
-          "text-xs",
           "text-xs/relaxed"
         ],
         "where": [
-          "ItemDescription",
-          "ItemTitle",
-          "itemVariants"
+          "ItemDescription"
         ]
       }
     ],
@@ -14367,7 +15027,7 @@
       "**MUST** — pair a symbol key (⌘, ⇧) with a text label for screen readers"
     ],
     "dependencies": [
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -14404,6 +15064,15 @@
         "token": "color.text.subtle",
         "classes": [
           "text-muted-foreground"
+        ],
+        "where": [
+          "Kbd"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-inset"
         ],
         "where": [
           "Kbd"
@@ -14612,18 +15281,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "Label"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "Label"
@@ -14665,7 +15334,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "`text-xs leading-none` text with no color class of its own: it inherits the surrounding text color"
+        "behavior": "`text-ui leading-none` text with no color class of its own: it inherits the surrounding text color"
       },
       {
         "state": "hover",
@@ -14722,7 +15391,7 @@
       "**MUST** — replace this placeholder with the real brand assets as soon as they exist"
     ],
     "dependencies": [
-      "`cn` (`@/lib/utils`) to merge classes",
+      "`cn` (`@/lib/cn`) to merge classes",
       "No external dependency — the pictogram is an internal SVG"
     ],
     "anatomy": [
@@ -14732,7 +15401,7 @@
       },
       {
         "slot": "icon (div)",
-        "role": "`bg-primary` square that centers the pictogram, `aria-hidden`"
+        "role": "`bg-primary` square, in every brand, that centers the pictogram, `aria-hidden`"
       },
       {
         "slot": "svg",
@@ -14822,7 +15491,7 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -15007,7 +15676,7 @@
     "dependencies": [
       "`class-variance-authority` for the `Marker` variants",
       "`Slot.Root` from `radix-ui` (used by `Marker` when `asChild={true}`)",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -15114,18 +15783,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "markerVariants"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "markerVariants"
@@ -15464,6 +16133,38 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "MenubarContent",
+          "MenubarSubContent",
+          "Menubar"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-inset"
+        ],
+        "where": [
+          "MenubarTrigger"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarRadioItem",
+          "MenubarSubTrigger"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -15587,16 +16288,38 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "MenubarCheckboxItem",
           "MenubarItem",
           "MenubarLabel",
           "MenubarRadioItem",
-          "MenubarShortcut",
+          "MenubarSubTrigger",
+          "MenubarTrigger"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "MenubarShortcut"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "MenubarCheckboxItem",
+          "MenubarItem",
+          "MenubarLabel",
+          "MenubarRadioItem",
           "MenubarSubTrigger",
           "MenubarTrigger"
         ]
@@ -15607,13 +16330,7 @@
           "text-xs"
         ],
         "where": [
-          "MenubarCheckboxItem",
-          "MenubarItem",
-          "MenubarLabel",
-          "MenubarRadioItem",
-          "MenubarShortcut",
-          "MenubarSubTrigger",
-          "MenubarTrigger"
+          "MenubarShortcut"
         ]
       },
       {
@@ -15976,7 +16693,7 @@
       "**Note** — `MessageAvatar` sits at the bottom of the turn and moves up above a `MessageFooter`; it holds an `Avatar`, it does not replace it"
     ],
     "dependencies": [
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -16088,13 +16805,30 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "Message"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
           "MessageFooter",
-          "MessageHeader",
+          "MessageHeader"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "Message"
         ]
       },
@@ -16105,8 +16839,7 @@
         ],
         "where": [
           "MessageFooter",
-          "MessageHeader",
-          "Message"
+          "MessageHeader"
         ]
       }
     ],
@@ -16272,7 +17005,7 @@
       "`ArrowDownIcon` from `@phosphor-icons/react`",
       "`UI_STRINGS.messageScroller` from `@/lib/ui-strings` for the region name and the button text",
       "The `scroll-fade-b` utility of `shadcn/tailwind.css`, imported by `styles/globals.css`",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -16763,6 +17496,24 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "NativeSelect"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -16837,18 +17588,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "NativeSelect"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "NativeSelect"
@@ -17180,6 +17931,36 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "NavigationMenuContent",
+          "NavigationMenuLink",
+          "NavigationMenuViewport",
+          "navigationMenuTriggerStyle"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-tl-inset"
+        ],
+        "where": [
+          "NavigationMenuIndicator"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "NavigationMenuLink"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -17286,9 +18067,9 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "NavigationMenuLink",
@@ -17296,9 +18077,9 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "NavigationMenuLink",
@@ -18092,6 +18873,15 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "PopoverContent"
+        ]
+      },
+      {
         "token": "space.scale.1",
         "classes": [
           "gap-1"
@@ -18129,9 +18919,9 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "PopoverDescription"
@@ -18147,13 +18937,22 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "PopoverContent",
           "PopoverHeader"
+        ]
+      },
+      {
+        "token": "typography.size.description",
+        "classes": [
+          "text-description"
+        ],
+        "where": [
+          "PopoverDescription"
         ]
       },
       {
@@ -18166,14 +18965,12 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs",
-          "text-xs/relaxed"
+          "text-ui"
         ],
         "where": [
           "PopoverContent",
-          "PopoverDescription",
           "PopoverHeader"
         ]
       },
@@ -18387,7 +19184,7 @@
     ],
     "dependencies": [
       "`radix-ui` (`Progress`) — the `Progress.Root` and `Progress.Indicator` primitives",
-      "`cn` (`@/lib/utils`) — the class-merging utility"
+      "`cn` (`@/lib/cn`) — the class-merging utility"
     ],
     "anatomy": [
       {
@@ -18431,6 +19228,15 @@
         "token": "motion.easing.default",
         "classes": [
           "transition-all"
+        ],
+        "where": [
+          "Progress"
+        ]
+      },
+      {
+        "token": "radius.pill",
+        "classes": [
+          "rounded-pill"
         ],
         "where": [
           "Progress"
@@ -18550,7 +19356,7 @@
       "`CheckIcon` from `@phosphor-icons/react`",
       "`UI_STRINGS.questionnaire` from `@/lib/ui-strings` for the progress name and the button labels",
       "The focus ring from `@/lib/focus`",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -18876,6 +19682,38 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
+        "token": "radius.mark",
+        "classes": [
+          "rounded-mark"
+        ],
+        "where": [
+          "QuestionnaireChoice"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -19052,14 +19890,21 @@
         ]
       },
       {
+        "token": "typography.font-family.heading",
+        "classes": [
+          "font-heading"
+        ],
+        "where": [
+          "QuestionnaireTitle"
+        ]
+      },
+      {
         "token": "typography.font-family.mono",
         "classes": [
-          "font-heading",
           "font-mono"
         ],
         "where": [
-          "QuestionnaireChoice",
-          "QuestionnaireTitle"
+          "QuestionnaireChoice"
         ]
       },
       {
@@ -19078,15 +19923,6 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
-        "classes": [
-          "text-xs/relaxed"
-        ],
-        "where": [
-          "QuestionnaireDescription"
-        ]
-      },
-      {
         "token": "typography.line-height.snug",
         "classes": [
           "leading-snug"
@@ -19096,12 +19932,45 @@
         ]
       },
       {
-        "token": "typography.size-line-height.sm",
+        "token": "typography.size-line-height.control",
         "classes": [
-          "text-sm"
+          "text-control"
+        ],
+        "where": [
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.description",
+        "classes": [
+          "text-description"
+        ],
+        "where": [
+          "QuestionnaireDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.title",
+        "classes": [
+          "text-title"
         ],
         "where": [
           "QuestionnaireTitle"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireError",
+          "QuestionnaireInput",
+          "QuestionnaireNext via buttonVariants",
+          "QuestionnairePrevious via buttonVariants",
+          "QuestionnaireSkip via buttonVariants",
+          "QuestionnaireSubmit via buttonVariants"
         ]
       },
       {
@@ -19111,40 +19980,59 @@
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireError",
-          "QuestionnaireInput",
-          "QuestionnaireNext via buttonVariants",
-          "QuestionnairePrevious via buttonVariants",
-          "QuestionnaireProgress",
-          "QuestionnaireSkip via buttonVariants",
-          "QuestionnaireSubmit via buttonVariants"
+          "QuestionnaireProgress"
         ]
       },
       {
-        "token": "typography.size.sm",
+        "token": "typography.size.control",
         "classes": [
-          "text-sm"
+          "text-control"
+        ],
+        "where": [
+          "QuestionnaireInput"
+        ]
+      },
+      {
+        "token": "typography.size.description",
+        "classes": [
+          "text-description"
+        ],
+        "where": [
+          "QuestionnaireDescription"
+        ]
+      },
+      {
+        "token": "typography.size.title",
+        "classes": [
+          "text-title"
         ],
         "where": [
           "QuestionnaireTitle"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs",
-          "text-xs/relaxed"
+          "text-ui"
         ],
         "where": [
           "QuestionnaireChoice",
-          "QuestionnaireDescription",
           "QuestionnaireError",
           "QuestionnaireInput",
           "QuestionnaireNext via buttonVariants",
           "QuestionnairePrevious via buttonVariants",
-          "QuestionnaireProgress",
           "QuestionnaireSkip via buttonVariants",
           "QuestionnaireSubmit via buttonVariants"
+        ]
+      },
+      {
+        "token": "typography.size.xs",
+        "classes": [
+          "text-xs"
+        ],
+        "where": [
+          "QuestionnaireChoice",
+          "QuestionnaireProgress"
         ]
       }
     ],
@@ -19761,7 +20649,7 @@
     ],
     "dependencies": [
       "`react-resizable-panels` (`Group`, `Panel`, `Separator`)",
-      "`cn` from `@/lib/utils`"
+      "`cn` from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -19815,6 +20703,15 @@
         "where": [
           "ResizableHandle",
           "ResizableHandle via FOCUS_RING (lib/focus.ts)"
+        ]
+      },
+      {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "ResizableHandle"
         ]
       },
       {
@@ -20013,7 +20910,7 @@
     ],
     "dependencies": [
       "`ScrollArea.Root`, `ScrollArea.Viewport`, `ScrollArea.ScrollAreaScrollbar`, `ScrollArea.ScrollAreaThumb`, `ScrollArea.Corner` from `radix-ui`",
-      "`cn` from `@/lib/utils`"
+      "`cn` from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -20086,6 +20983,15 @@
         ],
         "where": [
           "ScrollArea",
+          "ScrollBar"
+        ]
+      },
+      {
+        "token": "radius.pill",
+        "classes": [
+          "rounded-pill"
+        ],
+        "where": [
           "ScrollBar"
         ]
       },
@@ -20421,6 +21327,26 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "SelectContent",
+          "SelectTrigger"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectTrigger"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -20524,13 +21450,31 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "SelectItem",
+          "SelectTrigger"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
+          "SelectLabel"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "SelectItem",
-          "SelectLabel",
           "SelectTrigger"
         ]
       },
@@ -20540,9 +21484,7 @@
           "text-xs"
         ],
         "where": [
-          "SelectItem",
-          "SelectLabel",
-          "SelectTrigger"
+          "SelectLabel"
         ]
       },
       {
@@ -20917,7 +21859,7 @@
       }
     ],
     "accessibility": "**Pattern**: Separator (Radix Separator)\n\n**Role**: Decorative by default (`role=\"none\"`); `decorative={false}` gives it `role=\"separator\"` and `aria-orientation`.\n\n**Keyboard**:\n\nNo keyboard interaction.\n\n**Accessible name**: Not applicable.\n\n**Pitfalls**:\n\n- Keep the decorative default unless the separator really delimits two groups of content.",
-    "code_example": "import { Separator } from \"@/components/ui/separator\"\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <p>Sign in with email</p>\n      <div className=\"flex items-center gap-2\">\n        <Separator />\n        <span className=\"text-xs whitespace-nowrap text-muted-foreground\">\n          or\n        </span>\n        <Separator />\n      </div>\n      <p>Sign in with SSO</p>\n    </div>\n  )\n}",
+    "code_example": "import { Separator } from \"@/components/ui/separator\"\n\nexport default function Example() {\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <p>Sign in with email</p>\n      <div className=\"flex items-center gap-2\">\n        <Separator />\n        <span className=\"text-ui whitespace-nowrap text-muted-foreground\">\n          or\n        </span>\n        <Separator />\n      </div>\n      <p>Sign in with SSO</p>\n    </div>\n  )\n}",
     "cross_references": [
       "Card",
       "Field",
@@ -21141,7 +22083,7 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.heading",
         "classes": [
           "font-heading"
         ],
@@ -21164,24 +22106,42 @@
           "text-xs/relaxed"
         ],
         "where": [
-          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
-          "SheetDescription",
           "SheetOverlay"
         ]
       },
       {
-        "token": "typography.size-line-height.sm",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-sm"
+          "text-description"
+        ],
+        "where": [
+          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "SheetDescription"
+        ]
+      },
+      {
+        "token": "typography.size-line-height.title",
+        "classes": [
+          "text-title"
         ],
         "where": [
           "SheetTitle"
         ]
       },
       {
-        "token": "typography.size.sm",
+        "token": "typography.size.description",
         "classes": [
-          "text-sm"
+          "text-description"
+        ],
+        "where": [
+          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
+          "SheetDescription"
+        ]
+      },
+      {
+        "token": "typography.size.title",
+        "classes": [
+          "text-title"
         ],
         "where": [
           "SheetTitle"
@@ -21193,8 +22153,6 @@
           "text-xs/relaxed"
         ],
         "where": [
-          "SheetContent via SIDE_PANEL_CONTENT_BASE (lib/overlay.ts)",
-          "SheetDescription",
           "SheetOverlay"
         ]
       },
@@ -21422,7 +22380,7 @@
       "`Slot.Root` from `radix-ui` (for `asChild`)",
       "`class-variance-authority` (the `SidebarMenuButton` variants)",
       "`@/hooks/use-mobile` (the `useIsMobile` hook)",
-      "`@/lib/utils` (the `cn` utility)",
+      "`@/lib/cn` (the `cn` utility)",
       "`@/components/ui/button` (the `Button` component)",
       "`@/components/ui/input` (the `Input` component)",
       "`@/components/ui/separator` (the `Separator` component)",
@@ -21715,6 +22673,39 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "Sidebar"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "SidebarGroupAction",
+          "SidebarGroupLabel",
+          "SidebarMenuAction",
+          "SidebarMenuBadge",
+          "SidebarMenuSkeleton",
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
+        "token": "radius.surface",
+        "classes": [
+          "rounded-surface"
+        ],
+        "where": [
+          "SidebarInset"
+        ]
+      },
+      {
         "token": "size.target.min",
         "classes": [
           "min-w-target"
@@ -21971,18 +22962,40 @@
         ]
       },
       {
+        "token": "typography.size-line-height.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "SidebarGroupContent",
+          "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants.size.default",
+          "sidebarMenuButtonVariants.size.lg",
+          "sidebarMenuButtonVariants"
+        ]
+      },
+      {
         "token": "typography.size-line-height.xs",
         "classes": [
           "text-xs"
         ],
         "where": [
-          "SidebarGroupContent",
           "SidebarGroupLabel",
           "SidebarMenuBadge",
           "SidebarMenuSubButton",
+          "sidebarMenuButtonVariants.size.sm"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
+          "SidebarGroupContent",
+          "SidebarMenuSubButton",
           "sidebarMenuButtonVariants.size.default",
           "sidebarMenuButtonVariants.size.lg",
-          "sidebarMenuButtonVariants.size.sm",
           "sidebarMenuButtonVariants"
         ]
       },
@@ -21992,14 +23005,10 @@
           "text-xs"
         ],
         "where": [
-          "SidebarGroupContent",
           "SidebarGroupLabel",
           "SidebarMenuBadge",
           "SidebarMenuSubButton",
-          "sidebarMenuButtonVariants.size.default",
-          "sidebarMenuButtonVariants.size.lg",
-          "sidebarMenuButtonVariants.size.sm",
-          "sidebarMenuButtonVariants"
+          "sidebarMenuButtonVariants.size.sm"
         ]
       },
       {
@@ -22644,7 +23653,7 @@
       "**MUST NOT** — show more skeletons than the entries expected: each one holds the place of content that is coming"
     ],
     "dependencies": [
-      "`cn` from `@/lib/utils`"
+      "`cn` from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -22657,6 +23666,15 @@
         "token": "color.background.subtle",
         "classes": [
           "bg-muted"
+        ],
+        "where": [
+          "Skeleton"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
         ],
         "where": [
           "Skeleton"
@@ -22833,6 +23851,15 @@
         "token": "opacity.disabled",
         "classes": [
           "opacity-disabled"
+        ],
+        "where": [
+          "Slider"
+        ]
+      },
+      {
+        "token": "radius.pill",
+        "classes": [
+          "rounded-pill"
         ],
         "where": [
           "Slider"
@@ -23046,7 +24073,7 @@
       "**MUST NOT** — show more than 3 toasts at once",
       "**MUST NOT** — exceed two sentences",
       "**Note** — `sonner` announces toasts to screen readers (`aria-live`)",
-      "**Note** — a toast is square, like every surface of the system: `Toaster` sets `--border-radius` to `var(--radius-none)`, the one lever `sonner`'s own stylesheet leaves"
+      "**Note** — a toast takes the `control` radius role, square in lyra and 10px in nova: `Toaster` sets `--border-radius` to `var(--radius-control)`, the one lever `sonner`'s own stylesheet leaves"
     ],
     "dependencies": [
       "`sonner` (external library) — the `Toaster` component and the `ToasterProps` types",
@@ -23061,9 +24088,9 @@
     ],
     "tokens": [
       {
-        "token": "radius.none",
+        "token": "radius.control",
         "classes": [
-          "var(--radius-none)"
+          "var(--radius-control)"
         ],
         "where": [
           "Toaster.--border-radius"
@@ -23083,9 +24110,9 @@
         ]
       },
       {
-        "token": "typography.font-family.mono",
+        "token": "typography.font-family.body",
         "classes": [
-          "var(--font-mono)"
+          "var(--typography-font-family-body)"
         ],
         "where": [
           "Toaster.fontFamily"
@@ -23620,7 +24647,7 @@
       "**MUST** — name the table (`TableCaption` or `aria-label`) when the context does not"
     ],
     "dependencies": [
-      "`cn` (`@/lib/utils`) — the class-merging utility",
+      "`cn` (`@/lib/cn`) — the class-merging utility",
       "No external dependency (native HTML `table`, `thead`, `tbody`… elements)"
     ],
     "anatomy": [
@@ -23789,9 +24816,9 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "TableCaption",
@@ -23799,9 +24826,9 @@
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "TableCaption",
@@ -24166,6 +25193,24 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "tabsListVariants"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "TabsTrigger"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -24268,31 +25313,38 @@
         ]
       },
       {
-        "token": "typography.line-height.relaxed",
+        "token": "typography.size-line-height.description",
         "classes": [
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
           "TabsContent"
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "TabsTrigger"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.description",
         "classes": [
-          "text-xs",
-          "text-xs/relaxed"
+          "text-description"
         ],
         "where": [
-          "TabsContent",
+          "TabsContent"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
+        ],
+        "where": [
           "TabsTrigger"
         ]
       }
@@ -24554,6 +25606,15 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -24590,18 +25651,36 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.control",
         "classes": [
-          "text-xs"
+          "text-control"
         ],
         "where": [
           "Textarea"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
+        "token": "typography.size.control",
+        "classes": [
+          "text-control"
+        ],
+        "where": [
+          "Textarea"
+        ]
+      },
+      {
+        "token": "typography.size.ui",
+        "classes": [
+          "text-ui"
         ],
         "where": [
           "Textarea"
@@ -24657,7 +25736,7 @@
     "states": [
       {
         "state": "default",
-        "behavior": "`input` border, transparent background, `text-xs` text, automatic height"
+        "behavior": "`input` border, transparent background, `text-control` text, automatic height"
       },
       {
         "state": "hover",
@@ -24819,6 +25898,24 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-control"
+        ],
+        "where": [
+          "toggleVariants"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "toggleVariants.size.sm"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -24917,18 +26014,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "toggleVariants"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "toggleVariants"
@@ -25069,7 +26166,7 @@
       "`radix-ui` — the `ToggleGroup` primitive (Root, Item)",
       "`class-variance-authority` — the `VariantProps` types",
       "`toggleVariants` from `@/components/ui/toggle` — styles shared with the `Toggle` component",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -25167,6 +26264,30 @@
         ]
       },
       {
+        "token": "radius.control",
+        "classes": [
+          "rounded-b-control",
+          "rounded-control",
+          "rounded-l-control",
+          "rounded-r-control",
+          "rounded-t-control"
+        ],
+        "where": [
+          "ToggleGroupItem",
+          "ToggleGroupItem via toggleVariants",
+          "ToggleGroup"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "ToggleGroup"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -25244,18 +26365,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "ToggleGroupItem via toggleVariants"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "ToggleGroupItem via toggleVariants"
@@ -25463,7 +26584,7 @@
     ],
     "dependencies": [
       "`radix-ui` — the `Tooltip` primitive (Provider, Root, Trigger, Content, Portal, Arrow)",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -25498,6 +26619,33 @@
         "classes": [
           "bg-foreground",
           "fill-foreground"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
+      },
+      {
+        "token": "radius.inset",
+        "classes": [
+          "rounded-inset"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
+      },
+      {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "TooltipContent"
+        ]
+      },
+      {
+        "token": "radius.mark",
+        "classes": [
+          "rounded-mark"
         ],
         "where": [
           "TooltipContent"
@@ -25708,7 +26856,7 @@
       "**MUST** — wrap a `TraceLine` in a `TraceCollapsibleTrigger`, a link or a dialog trigger to make it act: a `TraceLine` alone is text, not a tab stop",
       "**MUST NOT** — use a `Trace` for an event that is not a step of the assistant's work (a date, \"Conversation resumed\", \"Ana joined\") → `Marker`",
       "**MUST NOT** — put what the assistant says to the user in a `Trace` → a `Bubble` in `MessageContent`",
-      "**MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin (WCAG 2.5.8, `specs/foundations/size.md`)",
+      "**MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall (20px in nova) and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin in lyra (WCAG 2.5.8, `specs/foundations/size.md`)",
       "**MUST** — give a block with a muted fill placed in `TraceCollapsibleContent` its own `text-foreground`: the details are muted text (`CodeBlock` sets its own color)",
       "**Note** — a pending step has no style of its own: shadcn/ui dims it to 60% opacity, which puts its muted text at 2.55:1 in light (WCAG 1.4.3)",
       "**Note** — `TraceIcon` is hidden from screen readers (`aria-hidden`): the title carries the meaning"
@@ -25717,7 +26865,7 @@
       "`Collapsible`, `CollapsibleTrigger` and `CollapsibleContent` from `@/components/ui/collapsible` (Radix Collapsible)",
       "`CaretRightIcon` from `@phosphor-icons/react`",
       "The `shimmer` utility of `shadcn/tailwind.css` and the `accordion-down` / `accordion-up` animations of `tw-animate-css`, imported by `styles/globals.css`",
-      "The `cn` utility from `@/lib/utils`"
+      "The `cn` utility from `@/lib/cn`"
     ],
     "anatomy": [
       {
@@ -25845,6 +26993,16 @@
         ]
       },
       {
+        "token": "radius.item",
+        "classes": [
+          "rounded-item"
+        ],
+        "where": [
+          "TraceCollapsibleTrigger",
+          "Trace"
+        ]
+      },
+      {
         "token": "space.focus-ring-width",
         "classes": [
           "ring-(length:--space-focus-ring-width)"
@@ -25924,18 +27082,18 @@
         ]
       },
       {
-        "token": "typography.size-line-height.xs",
+        "token": "typography.size-line-height.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "TraceLine"
         ]
       },
       {
-        "token": "typography.size.xs",
+        "token": "typography.size.ui",
         "classes": [
-          "text-xs"
+          "text-ui"
         ],
         "where": [
           "TraceLine"

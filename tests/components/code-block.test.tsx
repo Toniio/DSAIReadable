@@ -237,7 +237,7 @@ describe("CodeBlock", () => {
     expect(getComputedStyle(added, "::after").content).toBe('"+"')
   })
 
-  it("a destructive block and a floating copy button show a focus indicator on a card, light and dark", async () => {
+  it("a destructive block and a floating copy button show a focus indicator on a card, in the four themes", async () => {
     // On a card the ring-ring/50 halo alone measures 2.98:1 in light: the
     // border-ring is what reaches 3:1.
     render(

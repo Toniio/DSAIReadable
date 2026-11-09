@@ -23,18 +23,20 @@
   --leading-*: initial;
   --tracking-*: initial;
 
-  /* Font families → font-sans, font-mono, font-heading. next/font sets
-     --font-sans and --font-mono on <html> (lib/fonts.ts). */
-  --font-sans: var(--font-sans);
-  --font-heading: var(--font-mono);
-  --font-mono: var(--font-mono);
+  /* Font families → font-body, font-heading, font-sans, font-mono. The tokens
+     choose the face; next/font loads it under its own variable on <html>
+     (lib/fonts.ts, lib/fonts-nova.ts). */
+  --font-body: var(--typography-font-family-body);
+  --font-heading: var(--typography-font-family-heading);
+  --font-sans: var(--typography-font-family-sans);
+  --font-mono: var(--typography-font-family-mono);
 
   /* Colors → Tailwind utilities (via semantic Layer 2) */
   --color-white: var(--color-static-white);
   --color-black: var(--color-static-black);
   --color-background: var(--color-background-default);
   --color-foreground: var(--color-text-default);
-  --color-card: var(--color-background-subtle);
+  --color-card: var(--color-background-card);
   --color-card-foreground: var(--color-text-default);
   --color-popover: var(--color-background-elevated);
   --color-popover-foreground: var(--color-text-default);
@@ -114,6 +116,15 @@
   --radius-3xl: var(--radius-3xl);
   --radius-4xl: var(--radius-4xl);
 
+  /* Radius roles → rounded-surface … rounded-pill: square in lyra, rounded in
+     nova. rounded-none stays the static class for what must stay square. */
+  --radius-surface: var(--radius-surface);
+  --radius-control: var(--radius-control);
+  --radius-item: var(--radius-item);
+  --radius-inset: var(--radius-inset);
+  --radius-mark: var(--radius-mark);
+  --radius-pill: var(--radius-pill);
+
   /* Typography → text-xs … text-4xl, font-medium, leading-snug, tracking-wide.
      The values equal Tailwind's defaults, so nothing moves on screen; what
      changes is that the tokens now decide them. Each text-* sets its paired
@@ -135,6 +146,16 @@
   --text-3xl--line-height: var(--typography-size-line-height-3xl);
   --text-4xl: var(--typography-size-4xl);
   --text-4xl--line-height: var(--typography-size-line-height-4xl);
+  /* Text roles → text-ui, text-description, text-title, text-control: the
+     size a component's text takes in the current brand, with its line. */
+  --text-ui: var(--typography-size-ui);
+  --text-ui--line-height: var(--typography-size-line-height-ui);
+  --text-description: var(--typography-size-description);
+  --text-description--line-height: var(--typography-size-line-height-description);
+  --text-title: var(--typography-size-title);
+  --text-title--line-height: var(--typography-size-line-height-title);
+  --text-control: var(--typography-size-control);
+  --text-control--line-height: var(--typography-size-line-height-control);
   --font-weight-normal: var(--typography-font-weight-normal);
   --font-weight-medium: var(--typography-font-weight-medium);
   --font-weight-semibold: var(--typography-font-weight-semibold);
@@ -292,7 +313,7 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-mono;
+    @apply font-body;
   }
 
   /* Reduced motion (specs/foundations/motion.md, Reduced motion): under the

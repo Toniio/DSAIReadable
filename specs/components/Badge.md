@@ -35,7 +35,7 @@ A compact label that categorizes an element, marks its status or highlights a pi
 
 - `class-variance-authority` for the variants
 - `Slot.Root` from `radix-ui` (used when `asChild={true}`)
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -75,6 +75,7 @@ A compact label that categorizes an element, marks its status or highlights a pi
 | `color.text.warning.default`         | `text-warning`                                                                                                                                                     | `badgeVariants.variant.warning`                                                                                                           |
 | `motion.duration.fast`               | `transition-all`                                                                                                                                                   | `badgeVariants`                                                                                                                           |
 | `motion.easing.default`              | `transition-all`                                                                                                                                                   | `badgeVariants`                                                                                                                           |
+| `radius.pill`                        | `rounded-pill`                                                                                                                                                     | `badgeVariants`                                                                                                                           |
 | `space.focus-ring-width`             | `ring-(length:--space-focus-ring-width)`                                                                                                                           | `badgeVariants` via `FOCUS_RING` (`lib/focus.ts`)                                                                                         |
 | `space.scale.0-5`                    | `py-0.5`                                                                                                                                                           | `badgeVariants`                                                                                                                           |
 | `space.scale.1`                      | `gap-1`                                                                                                                                                            | `badgeVariants`                                                                                                                           |

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { MODAL_CONTENT_BASE, OVERLAY_BASE } from "@/lib/overlay"
 import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
 import { Button } from "@/components/ui/button"
@@ -123,7 +123,7 @@ function DialogContent({
           // allow-raw: viewport-gutter — the dialog is capped at the viewport minus one
           // gutter on each side. A token can hold the gutter; it cannot hold the
           // subtraction from a width the component does not know.
-          `max-w-[calc(100%-var(--space-scale-8))] text-xs/relaxed ${FOCUS_OUTLINE_RESET} sm:max-w-sm`,
+          `max-w-[calc(100%-var(--space-scale-8))] text-description ${FOCUS_OUTLINE_RESET} sm:max-w-sm`,
           className
         )}
         {...props}
@@ -215,7 +215,7 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("font-heading text-sm font-medium", className)}
+      className={cn("font-heading text-title font-medium", className)}
       {...props}
     />
   )
@@ -237,7 +237,7 @@ function DialogDescription({
     <DialogPrimitive.Description
       data-slot="dialog-description"
       className={cn(
-        "text-xs/relaxed text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+        "text-description text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
         className
       )}
       {...props}

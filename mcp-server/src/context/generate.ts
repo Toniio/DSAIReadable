@@ -17,7 +17,7 @@ import ts from "typescript"
 
 import { parseChangelog } from "../lib/changelog.js"
 import { collectDeprecations, tokenDeprecations } from "../lib/deprecations.js"
-import { cssValue, loadTokens } from "../lib/dtcg.js"
+import { BRANDS, cssValue, loadTokens, type Theme } from "../lib/dtcg.js"
 import { exportDocs } from "../lib/jsdoc.js"
 import {
   mdCode,
@@ -98,15 +98,15 @@ const inventory: Array<{
   shadcn: { item: string | null; divergences: JsonObject[] }
 }> = dsIndex.inventory
 
-// The tiers and the dark context, as tokens/tokens.resolver.json declares them.
+// The tiers and the theme contexts, as tokens/tokens.resolver.json declares them.
 const tokens = loadTokens(ROOT)
 const semanticTokens = tokens.tiers.semantic.tree as JsonObject
 const componentTokens = tokens.tiers.component.tree as JsonObject
 const primitiveTokens = tokens.tiers.primitive.tree as JsonObject
 
-/** The dark value of a semantic token, when the dark context overrides it. */
-function darkValue(leaf: { path: string }): string | undefined {
-  const value = tokens.override(leaf.path, "dark")
+/** The value a theme gives a semantic token, when its context overrides it. */
+function themeValue(leaf: { path: string }, theme: Theme): string | undefined {
+  const value = tokens.override(leaf.path, theme)
   return typeof value === "string" ? value : undefined
 }
 
@@ -574,7 +574,9 @@ function generateVariables() {
     ...semFlat.map((t) => ({
       path: t.path,
       value_light: t.$value,
-      value_dark: darkValue(t) ?? t.$value,
+      value_dark: themeValue(t, "dark") ?? t.$value,
+      value_nova_light: themeValue(t, "nova-light") ?? t.$value,
+      value_nova_dark: themeValue(t, "nova-dark") ?? t.$value,
       css_variable: toVar(t.path, ""),
       tier: "semantic",
       status: statusOf(t),
@@ -585,6 +587,8 @@ function generateVariables() {
       path: t.path,
       value_light: t.$value,
       value_dark: t.$value,
+      value_nova_light: t.$value,
+      value_nova_dark: t.$value,
       css_variable: toVar(t.path.split(".").slice(1).join("."), ""),
       tier: "component",
     })),
@@ -605,7 +609,9 @@ function generateSemanticTokens() {
     path: t.path,
     css_var: `--${t.path.replace(/\./g, "-")}`,
     light: t.$value,
-    dark: darkValue(t) ?? t.$value,
+    dark: themeValue(t, "dark") ?? t.$value,
+    nova_light: themeValue(t, "nova-light") ?? t.$value,
+    nova_dark: themeValue(t, "nova-dark") ?? t.$value,
     type: t.$type ?? "",
     status: statusOf(t),
     // What to use instead, on a deprecated token that names one.
@@ -642,7 +648,9 @@ function generateLayoutTokens() {
       path: t.path,
       css_var: `--${t.path.replace(/\./g, "-")}`,
       value: t.$value,
-      dark_value: darkValue(t),
+      dark_value: themeValue(t, "dark"),
+      nova_light_value: themeValue(t, "nova-light"),
+      nova_dark_value: themeValue(t, "nova-dark"),
       type: t.$type ?? "",
       description: t.$description ?? "",
     })),
@@ -697,6 +705,21 @@ function generateTextStyles() {
     usage: r[5] ?? "",
   }))
 
+  // Text roles: what a class draws depends on the brand, so the table has a
+  // column per brand, read by its header.
+  const [roleTable] = mdTables(mdSection(typoMd, "Text Roles"))
+  const roleColumn = (start: string) =>
+    roleTable.header.findIndex((cell) => cell.startsWith(start))
+  const roleCell = (row: string[], start: string) =>
+    mdPlain(row[roleColumn(start)] ?? "")
+  const textRoles = roleTable.rows.map((r) => ({
+    tailwind_class: roleCell(r, "Class"),
+    token: roleCell(r, "Token"),
+    lyra: roleCell(r, "Lyra"),
+    nova: roleCell(r, "Nova"),
+    usage: roleCell(r, "What it draws"),
+  }))
+
   // Line heights
   const lhRows = rowsOf("Line Heights")
   const lineHeights = lhRows.map((r) => ({
@@ -733,6 +756,7 @@ function generateTextStyles() {
   return write("text-styles.json", {
     font_families: fontFamilies,
     type_scale: typeScale,
+    text_roles: textRoles,
     line_heights: lineHeights,
     font_weights: fontWeights,
     letter_spacings: letterSpacings,
@@ -1288,6 +1312,8 @@ function generateDatavizCatalog() {
 }
 
 // ── 15. ds-metadata.json ────────────────────────────────────────────
+const DEFAULT_BRAND = "lyra"
+
 /**
  * Single source of truth for versions and identity, so no tool has to
  * hardcode them. Each field is read from the file `sources` names:
@@ -1300,6 +1326,8 @@ function generateDatavizCatalog() {
  * - stack, framework:      the root package.json dependencies
  * - shadcn_excluded:       design-system.index.json, the shadcn/ui components
  *   the design system does not ship, with the reason and what to use
+ * - brands:                the resolver's brands (BRANDS, which loadTokens holds
+ *   to its contexts), each with the registry item that brings it
  */
 function generateDsMetadata() {
   const mcpPkg = JSON.parse(
@@ -1320,6 +1348,12 @@ function generateDsMetadata() {
   }
   const major = (name: string) => /\d+/.exec(range(name))?.[0]
   const repository = new URL(registry.homepage).pathname.replace(/^\/|\/$/g, "")
+  const itemOfBrand = (brand: string) => {
+    const item = brand === DEFAULT_BRAND ? "design-system" : `theme-${brand}`
+    if (!registry.items.some((i: { name: string }) => i.name === item))
+      throw new Error(`registry.json has no "${item}" item for ${brand}`)
+    return item
+  }
 
   return write("ds-metadata.json", {
     name: "DSAIReadable",
@@ -1337,12 +1371,23 @@ function generateDsMetadata() {
       tailwindcss: range("tailwindcss"),
     },
     framework: `React ${major("react")} / Next.js ${major("next")} / Tailwind CSS v${major("tailwindcss")} / shadcn/ui`,
+    brands: {
+      default: DEFAULT_BRAND,
+      activation:
+        "A brand is a class on <html>, next to `dark`: nova is the `nova` class, lyra the absence of a class. It covers colors, typefaces, corners and text sizes, and semantic classes follow it: never write a value or a class for one brand.",
+      items: BRANDS.map((name) => ({
+        name,
+        html_class: name === DEFAULT_BRAND ? null : name,
+        install: `npx shadcn@latest add ${repository}/${itemOfBrand(name)}`,
+      })),
+    },
     shadcn_excluded: dsIndex.shadcn.excluded,
     sources: {
       design_system_version: "design-system.index.json#version",
       mcp_server_version: "mcp-server/package.json#version",
       registry_source: "registry.json#homepage,name",
       stack: "package.json#dependencies",
+      brands: "tokens/tokens.resolver.json#modifiers.theme",
       shadcn_excluded: "design-system.index.json#shadcn.excluded",
     },
   })

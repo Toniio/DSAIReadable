@@ -41,7 +41,7 @@
       "source": "color.md"
     },
     {
-      "rule": "❌ Do not use `background.default` for cards — use `background.subtle`.",
+      "rule": "❌ Do not use `background.default` for cards — use `background.card` (`bg-card`).",
       "source": "color.md"
     },
     {
@@ -73,7 +73,7 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ `border.input` for every `<input>`, `<select>`, `<textarea>`, checkbox and radio border, and for the track of an unchecked Switch (`bg-input`): the boundary of a control, at 3:1 or more on the page, the card and the popover in both modes ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast)), blocking in `npm run tokens:lint-contrast`.",
+      "rule": "✅ `border.input` for every `<input>`, `<select>`, `<textarea>`, checkbox and radio border, and for the track of an unchecked Switch (`bg-input`): the boundary of a control, at 3:1 or more on the page, the card and the popover in both modes ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast)).",
       "source": "color.md"
     },
     {
@@ -81,7 +81,7 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ `border.focus` sits 3:1 or more away from `border.input` (3.65:1 in light, 3.27:1 in dark): a focused field never reads as a resting one.",
+      "rule": "✅ `border.focus` sits 3:1 or more away from `border.input` (3.65:1 in light and 3.27:1 in dark in lyra, 3.58:1 and 3.31:1 in nova): a focused field never reads as a resting one.",
       "source": "color.md"
     },
     {
@@ -105,7 +105,7 @@
       "source": "color.md"
     },
     {
-      "rule": "✅ A role fill under the pointer takes its `hover` step, solid: one step darker in light, one lighter in dark, so its label keeps 4.5:1 (`hover:bg-primary/80` put it at 4.24:1).",
+      "rule": "✅ A role fill under the pointer takes its `hover` step, solid: in lyra one step darker in light, one lighter in dark, so its label keeps 4.5:1 (`hover:bg-primary/80` put it at 4.24:1). Nova's primary sits at the far end of its ramp, so its `hover` step moves toward the middle instead.",
       "source": "color.md"
     },
     {
@@ -257,11 +257,11 @@
       "source": "focus.md"
     },
     {
-      "rule": "**Hiding the outline requires drawing a ring — checked occurrence by occurrence, and target by target.** The ring must appear in the _same_ class string, on the _same_ target: a reset written under `**:`, `*:`, `[&_x]:` or `before:` hides the indicator of other nodes, and only a ring under the same variant answers it. A component that neutralizes the outline in ten places and draws a ring in one does not meet the rule, and neither did NavigationMenu, whose `**:data-[slot=navigation-menu-link]:focus:outline-none` hid every link's ring while the menu drew its own.",
+      "rule": "**Hiding the outline requires drawing a ring — checked occurrence by occurrence, and target by target.** The ring must appear in the _same_ class string, on the _same_ target: a reset written under a child or descendant variant (`*:`, `[&_x]:`) or `before:` hides the indicator of other nodes, and only a ring under the same variant answers it. A component that neutralizes the outline in ten places and draws a ring in one does not meet the rule.",
       "source": "focus.md"
     },
     {
-      "rule": "**Every indicator has a solid part at 3:1.** The 2px halo is painted at an alpha (`ring-ring/50`, `ring-destructive/20`): 2.97:1 on the light card, and 1.4:1 for the destructive one, never enough on its own ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast) read for focus indicators). The solid part is the element's border when it has one (`focus-visible:border-ring`). Without a border, `focus-visible:border-ring` paints nothing: the element adds a 1px outline, `focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring` (Toggle's default variant, MenubarTrigger, NavigationMenu's trigger and link, TabsContent, the ScrollArea viewport, the Resizable handle, the Slider thumb, a focused Calendar day). `outline-solid` is required: `outline-hidden` sets the outline style to none, and a width alone would draw nothing. A state that keeps its border at focus draws the outline in its own color: an invalid control (`aria-invalid:focus-visible:outline-destructive`) and the destructive variants of Button and Badge (`outline-destructive`). An element that draws no focus style at all, a link or an unstyled trigger, keeps the browser's own outline, colored `outline-ring` at full alpha by the base layer of `styles/globals.css`. `tests/focus.ts` walks every tab stop of every spec example, light and dark, and fails one whose indicator has no part at 3:1, the color composited over what is under it.",
+      "rule": "**Every indicator has a solid part at 3:1.** The 2px halo is painted at an alpha (`ring-ring/50`, `ring-destructive/20`): 2.97:1 on the light card, and 1.4:1 for the destructive one, never enough on its own ([WCAG 2.2 SC 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast) read for focus indicators). The solid part is the element's border when it has one (`focus-visible:border-ring`). Without a border, `focus-visible:border-ring` paints nothing: the element adds a 1px outline, `focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring` (Toggle's default variant, MenubarTrigger, TabsContent, the Slider thumb). `outline-solid` is required: `outline-hidden` sets the outline style to none, and a width alone would draw nothing. A state that keeps its border at focus draws the outline in its own color: an invalid control (`aria-invalid:focus-visible:outline-destructive`) and the destructive variants of Button and Badge (`outline-destructive`). An element that draws no focus style at all, a link or an unstyled trigger, keeps the browser's own outline, colored `outline-ring` at full alpha by the base layer of `styles/globals.css`. `tests/focus.ts` fails a tab stop of a spec example, in any of the four themes, whose indicator has no part at 3:1.",
       "source": "focus.md"
     },
     {
@@ -313,7 +313,7 @@
       "source": "radius.md"
     },
     {
-      "rule": "**Consistency across the interface** — every system surface is square, so a surface a screen draws next to them stays square. A rounded one among them is the mixed look the system does not have.",
+      "rule": "**Next to components, a screen uses a role** — `rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark` or `rounded-pill`, the role of what it sits beside, so that it matches them in either brand.",
       "source": "radius.md"
     },
     {
@@ -321,11 +321,11 @@
       "source": "radius.md"
     },
     {
-      "rule": "**`rounded-full` only for a round shape** — an avatar, a dot. Do not use it on a button, a badge or a card.",
+      "rule": "**`rounded-none` and `rounded-full` are fixed in every brand** — `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape, an avatar or a dot. Do not use `rounded-full` on a button, a badge or a card: a pill that follows the brand is `rounded-pill`.",
       "source": "radius.md"
     },
     {
-      "rule": "**The `radius.sm` to `radius.4xl` scale is for content** — an image, an illustration, a hero. `rounded-none` and `rounded-full` are static Tailwind classes that read no radius token, which is why `radius.full` is `reserved`.",
+      "rule": "**The `radius.sm` to `radius.4xl` scale is for content** — an image, an illustration, a hero. Its steps are the same in both brands. `rounded-none` and `rounded-full` are static Tailwind classes that read no radius token, which is why `radius.full` is `reserved`.",
       "source": "radius.md"
     },
     {
@@ -341,7 +341,7 @@
       "source": "size.md"
     },
     {
-      "rule": "✅ Keep the `gap-2` between the steps of a `Trace`: its 16px triggers and wrapped links conform through the spacing exception, with no margin to spare",
+      "rule": "✅ Keep the `gap-2` between the steps of a `Trace`: its triggers and wrapped links conform through the spacing exception, with no margin to spare in lyra",
       "source": "size.md"
     },
     {
@@ -377,7 +377,7 @@
       "source": "spacing.md"
     },
     {
-      "rule": "**JetBrains Mono is the default typeface** — never override `font-family` on standard UI components without design approval.",
+      "rule": "**`font-body` is the default typeface, and the brand chooses it** — never override `font-family` on standard UI components without design approval.",
       "source": "typography.md"
     },
     {
@@ -394,6 +394,18 @@
     },
     {
       "rule": "**A strict weight hierarchy** — `normal` → body text, labels and descriptions, `medium` → buttons, tabs, badges and component titles, `semibold` → headings, `bold` → strong emphasis a screen draws. A field label stays `normal`.",
+      "source": "typography.md"
+    },
+    {
+      "rule": "**Next to components, text uses a role** — `text-ui`, `text-description` or `text-title`, the role of what it sits beside, so that it matches them in either brand. `text-xs` and `text-sm` are fixed sizes: use them only for text that must not follow the brand, and `text-sm` for a screen's own line that no component draws (a result count).",
+      "source": "typography.md"
+    },
+    {
+      "rule": "**`font-mono` means code** — write it on code and tabular values only, and write it even where the page already looks monospace.",
+      "source": "typography.md"
+    },
+    {
+      "rule": "**A text role in a `cn` call needs the `cn` of `@/lib/cn`** — the stock `cn` of `@/lib/utils` drops the role.",
       "source": "typography.md"
     },
     {
@@ -650,7 +662,7 @@
       "**Note** — `FieldError` renders nothing without `children` or a non-empty `errors`",
       "**MUST** — use `FieldLabel` to tie a label to a control (`htmlFor`): `FieldTitle` is not a `<label>`",
       "**Note** — a choice card is a `FieldLabel` wrapping a `Field orientation=\"horizontal\"`: a `FieldContent` with its `FieldTitle` and `FieldDescription`, then the `Checkbox`, `RadioGroupItem` or `Switch`. The card draws the focus ring and the checked look; the control inside draws no ring, and takes the card's text as its name",
-      "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, 12px regular with `leading-snug`, the same in every form (typography.md)"
+      "**MUST NOT** — pass `text-*`, `font-*`, `tracking-*` or `leading-*` to `FieldLabel` (or `Label`): it draws the field label, in `text-ui` regular with `leading-snug` (12px in lyra, 14px in nova), the same in every form (typography.md)"
     ],
     "Heading": [
       "**MUST NOT** — skip a heading level (an `h3` under an `h1`)",
@@ -877,7 +889,7 @@
       "**MUST NOT** — show more than 3 toasts at once",
       "**MUST NOT** — exceed two sentences",
       "**Note** — `sonner` announces toasts to screen readers (`aria-live`)",
-      "**Note** — a toast is square, like every surface of the system: `Toaster` sets `--border-radius` to `var(--radius-none)`, the one lever `sonner`'s own stylesheet leaves"
+      "**Note** — a toast takes the `control` radius role, square in lyra and 10px in nova: `Toaster` sets `--border-radius` to `var(--radius-control)`, the one lever `sonner`'s own stylesheet leaves"
     ],
     "Spinner": [
       "**MUST** — replace the default `aria-label` (`\"Loading\"`) with a label that describes the action (\"Signing in\")",
@@ -942,7 +954,7 @@
       "**MUST** — wrap a `TraceLine` in a `TraceCollapsibleTrigger`, a link or a dialog trigger to make it act: a `TraceLine` alone is text, not a tab stop",
       "**MUST NOT** — use a `Trace` for an event that is not a step of the assistant's work (a date, \"Conversation resumed\", \"Ana joined\") → `Marker`",
       "**MUST NOT** — put what the assistant says to the user in a `Trace` → a `Bubble` in `MessageContent`",
-      "**MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin (WCAG 2.5.8, `specs/foundations/size.md`)",
+      "**MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall (20px in nova) and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin in lyra (WCAG 2.5.8, `specs/foundations/size.md`)",
       "**MUST** — give a block with a muted fill placed in `TraceCollapsibleContent` its own `text-foreground`: the details are muted text (`CodeBlock` sets its own color)",
       "**Note** — a pending step has no style of its own: shadcn/ui dims it to 60% opacity, which puts its muted text at 2.55:1 in light (WCAG 1.4.3)",
       "**Note** — `TraceIcon` is hidden from screen readers (`aria-hidden`): the title carries the meaning"
@@ -959,7 +971,7 @@
     },
     {
       "id": "rule-03",
-      "rule": "All class name composition must use cn() from @/lib/utils. Inline conditional className strings are not permitted."
+      "rule": "All class name composition must use cn() from @/lib/cn. Inline conditional className strings are not permitted."
     },
     {
       "id": "rule-04",

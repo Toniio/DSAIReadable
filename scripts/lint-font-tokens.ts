@@ -1,89 +1,125 @@
 /**
- * Font token lint — the typography.font-family tokens say which typefaces
- * the design system loads, and they say it truly.
+ * Font token lint — the typography.font-family tokens choose the face each
+ * brand renders in, and each face they choose is loaded.
  *
- * The fonts are loaded by next/font in lib/fonts.ts, which self-hosts them
- * and adjusts their fallback metrics; the tokens describe that choice rather
- * than drive it (decision P3-14). Descriptions drift silently: the `sans`
- * token presented Geist as the typeface "for UI text" while the whole
- * interface is set in JetBrains Mono, and the layout imported a third font,
- * Geist Mono, that nothing loaded.
+ * next/font self-hosts the faces (lib/fonts.ts for lyra, lib/fonts-nova.ts for
+ * nova) and sets `--font-<face>` on <html>; tokens.css prints a primitive as
+ * `var(--font-<face>, Family, generic)`, so the token drives the face.
+ * Descriptions drift silently, and a name no file loads falls back without a
+ * word: the `sans` token once presented Geist as the typeface "for UI text"
+ * while the whole interface was set in JetBrains Mono.
  *
  * Rules:
- *   ① every `typography.font-family.<key>` token names, as the first family
- *      of its stack, the family next/font loads under `--font-<key>`;
- *   ② every font next/font loads is described by such a token;
- *   ③ every loader imported from next/font/google is called.
+ *   ① every font-family primitive names, as the first family of its stack, the
+ *      family next/font loads under its `fontVariable`;
+ *   ② every font next/font loads has such a primitive;
+ *   ③ every loader imported from next/font/google is called;
+ *   ④ in each brand, each `typography.font-family.<role>` token resolves to a
+ *      face that brand's file loads;
+ *   ⑤ `typography.font-family.mono` ends in `monospace` in every brand: the
+ *      `font-mono` class keeps meaning monospace.
  *
  *   npx tsx scripts/lint-font-tokens.ts
  */
 
-import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import {
-  FONTS,
-  firstFamily,
+  brandOf,
   fontVariableOf,
+  loadTokens,
+  THEMES,
+  type Brand,
+} from "../mcp-server/src/lib/dtcg.js"
+import {
+  FONTS,
+  NOVA_FONTS,
+  firstFamily,
   nextFontsOf,
 } from "./lib/next-fonts.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
-type Tree = { [key: string]: Tree | string | boolean | undefined }
-const read = (file: string) =>
-  JSON.parse(readFileSync(resolve(ROOT, file), "utf-8")) as Tree
-const primitive = read("tokens/primitive.json")
-const semantic = read("tokens/semantic.json")
-
+type Tree = Record<string, unknown>
 const at = (tree: Tree, path: string) =>
   path
     .split(".")
-    .reduce<Tree | undefined>((node, key) => node?.[key] as Tree, tree)
+    .reduce<unknown>((node, key) => (node as Tree | undefined)?.[key], tree) as
+    Tree | undefined
 
-/** The font stack a semantic token resolves to, through its primitive. */
-function stackOf(path: string): string | undefined {
-  const value = at(semantic, path)?.$value
-  if (typeof value !== "string") return undefined
-  const ref = value.match(/^\{(.+)\}$/)?.[1]
-  const resolved = ref ? at(primitive, ref)?.$value : value
-  return typeof resolved === "string" ? resolved : undefined
+const tokens = loadTokens(ROOT)
+const primitive = tokens.tiers.primitive.tree
+const semantic = tokens.tiers.semantic.tree
+
+const FAMILY_GROUP = "typography.font-family"
+const keysOf = (node: Tree | undefined) =>
+  Object.keys(node ?? {}).filter((key) => !key.startsWith("$"))
+
+const faces = keysOf(at(primitive, `primitive.${FAMILY_GROUP}`)).map((key) => {
+  const node = at(primitive, `primitive.${FAMILY_GROUP}.${key}`) as Tree
+  return {
+    path: `primitive.${FAMILY_GROUP}.${key}`,
+    stack: String(node.$value),
+    variable: fontVariableOf(node),
+  }
+})
+
+const fileOf: Record<Brand, string> = { lyra: FONTS, nova: NOVA_FONTS }
+const fontsOf = {
+  lyra: nextFontsOf(ROOT, FONTS),
+  nova: nextFontsOf(ROOT, NOVA_FONTS),
 }
-
-const families = at(semantic, "typography.font-family") ?? {}
-const tokens = Object.keys(families)
-  .filter((key) => !key.startsWith("$"))
-  .map((key) => `typography.font-family.${key}`)
-
-const { loaded, unused } = nextFontsOf(ROOT)
+const loaded = [...fontsOf.lyra.loaded, ...fontsOf.nova.loaded]
 const findings: string[] = []
 
-for (const path of tokens) {
-  const variable = fontVariableOf(path)!
-  const stack = stackOf(path)
+for (const { path, stack, variable } of faces) {
   const font = loaded.find((f) => f.variable === variable)
   if (!font)
     findings.push(
-      `① ${path} has no font behind it — ${FONTS} loads nothing under ${variable}`
+      `① ${path} has no font behind it — nothing loads it under ${variable ?? "a fontVariable"}`
     )
-  else if (!stack || firstFamily(stack) !== font.family)
+  else if (firstFamily(stack) !== font.family)
     findings.push(
-      `① ${path} names "${stack ? firstFamily(stack) : "?"}" but ${FONTS} loads ${font.family} (${font.loader}) under ${variable}`
+      `① ${path} names "${firstFamily(stack)}" but next/font loads ${font.family} (${font.loader}) under ${variable}`
     )
 }
 
-for (const font of loaded) {
-  const described = tokens.some((p) => fontVariableOf(p) === font.variable)
-  if (!described)
+for (const font of loaded)
+  if (!faces.some((face) => face.variable === font.variable))
     findings.push(
-      `② ${font.family} (${font.loader}) is loaded under ${font.variable ?? "no variable"} but no typography.font-family token describes it`
+      `② ${font.family} (${font.loader}) is loaded under ${font.variable ?? "no variable"} but no typography.font-family primitive reads it`
     )
-}
 
-for (const loader of unused)
-  findings.push(
-    `③ ${loader} is imported from next/font/google in ${FONTS} but never loaded — remove the import`
-  )
+for (const brand of ["lyra", "nova"] as const)
+  for (const loader of fontsOf[brand].unused)
+    findings.push(
+      `③ ${loader} is imported from next/font/google in ${fileOf[brand]} but never loaded — remove the import`
+    )
+
+const roles = keysOf(at(semantic, FAMILY_GROUP)).map(
+  (key) => `${FAMILY_GROUP}.${key}`
+)
+
+for (const theme of THEMES) {
+  const brand = brandOf(theme)
+  for (const path of roles) {
+    const value = tokens.override(path, theme) ?? at(semantic, path)?.$value
+    const ref = String(value).match(/^\{(.+)\}$/)?.[1]
+    const face = faces.find((f) => f.path === ref)
+    if (!face) {
+      findings.push(`④ ${path} (${theme}) resolves to no font-family primitive`)
+      continue
+    }
+    if (!fontsOf[brand].loaded.some((f) => f.variable === face.variable))
+      findings.push(
+        `④ ${path} (${theme}) resolves to ${firstFamily(face.stack)}, which ${fileOf[brand]} does not load`
+      )
+    if (path === `${FAMILY_GROUP}.mono` && !/monospace\s*$/.test(face.stack))
+      findings.push(
+        `⑤ ${path} (${theme}) resolves to "${face.stack}", which does not end in monospace`
+      )
+  }
+}
 
 if (findings.length > 0) {
   console.error(
@@ -92,7 +128,7 @@ if (findings.length > 0) {
   process.exit(1)
 }
 console.log(
-  `✅ lint-font-tokens: ${tokens.length} font-family token(s), each naming the family next/font loads under its variable (${loaded
+  `✅ lint-font-tokens: ${roles.length} font-family token(s) in ${THEMES.length} themes, each resolving to a face its brand loads (${loaded
     .map((f) => `${f.variable} → ${f.family}`)
     .join(", ")}).`
 )

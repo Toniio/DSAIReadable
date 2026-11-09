@@ -49,7 +49,7 @@ A block of code, terminal output or a diff, in one color, with an optional heade
 - The default names of the copy button, `UI_STRINGS.codeBlock`, from `@/lib/ui-strings`
 - The `scroll-fade-x` and `scroll-fade-y` utilities of `shadcn/tailwind.css`, imported by `styles/globals.css`
 - The Clipboard API (`navigator.clipboard.writeText`), which the browser grants on HTTPS and on `localhost` only
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 - **Not shipped**: shadcn/ui's `use-highlighted-code` hook and its `lib/highlighter.tsx`, which bring shiki and the hex colors of its themes. The registry item depends on `button` alone
 
 ## Anatomy
@@ -85,6 +85,7 @@ A block of code, terminal output or a diff, in one color, with an optional heade
 | `color.text.subtle`              | `text-muted-foreground`                                                   | `CodeBlockFooter` · `CodeBlockHeader` · `codeBlockLineVariants`                                                                                                      |
 | `motion.duration.fast`           | `transition-opacity`                                                      | `CodeBlockActions`                                                                                                                                                   |
 | `motion.easing.default`          | `transition-opacity`                                                      | `CodeBlockActions`                                                                                                                                                   |
+| `radius.control`                 | `rounded-control`                                                         | `codeBlockVariants`                                                                                                                                                  |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                                  | `codeBlockVariants`                                                                                                                                                  |
 | `space.scale.0`                  | `m-0` · `min-h-0` · `min-w-0` · `top-0`                                   | `CodeBlockActions` · `CodeBlockContent` · `CodeBlockFooter` · `CodeBlockHeader` · `CodeBlockLine` · `CodeBlockTitle` · `codeBlockLineVariants` · `codeBlockVariants` |
 | `space.scale.1`                  | `-my-1` · `gap-1` · `start-1`                                             | `CodeBlockActions` · `codeBlockLineVariants`                                                                                                                         |
@@ -98,8 +99,10 @@ A block of code, terminal output or a diff, in one color, with an optional heade
 | `typography.font-weight.medium`  | `font-medium`                                                             | `CodeBlockTitle`                                                                                                                                                     |
 | `typography.line-height.relaxed` | `leading-relaxed`                                                         | `CodeBlockContent`                                                                                                                                                   |
 | `typography.size-line-height.sm` | `text-sm`                                                                 | `codeBlockVariants`                                                                                                                                                  |
+| `typography.size-line-height.ui` | `text-ui`                                                                 | `CodeBlockTitle`                                                                                                                                                     |
 | `typography.size-line-height.xs` | `text-xs`                                                                 | `CodeBlockTitle` · `codeBlockVariants`                                                                                                                               |
 | `typography.size.sm`             | `text-sm`                                                                 | `codeBlockVariants`                                                                                                                                                  |
+| `typography.size.ui`             | `text-ui`                                                                 | `CodeBlockTitle`                                                                                                                                                     |
 | `typography.size.xs`             | `text-xs`                                                                 | `CodeBlockTitle` · `codeBlockVariants`                                                                                                                               |
 
 Collected from `components/ui/code-block.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.

@@ -42,6 +42,7 @@ import {
 } from "@/site/playground/types"
 import { useModule } from "@/site/playground/use-module"
 import { CodeBlock } from "@/site/ui/code-block"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 type ThemeChoice = "site" | "light" | "dark"
 
@@ -189,6 +190,7 @@ export function Playground({
     autoControls
   )
   const siteTheme = useSiteTheme()
+  const brand = useSiteBrand()
   const [view, setView] = useState<"story" | "example">()
   const [edited, setEdited] = useState<Args>({})
   const [forced, setForced] = useState<ForcedState>("rest")
@@ -219,9 +221,10 @@ export function Playground({
       args: resolveArgs(controls, args),
       state: current === "story" ? shown : "rest",
       theme,
+      brand,
       nonce,
     }),
-    [current, controls, args, shown, theme, nonce]
+    [current, controls, args, shown, theme, brand, nonce]
   )
   const shownCode =
     current === "story" ? (code(args) ?? exampleCode) : exampleCode

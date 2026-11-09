@@ -3,6 +3,8 @@
     "path": "color.background.default",
     "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.stone.950}",
     "css_variable": "--color-background-default",
     "tier": "semantic",
     "status": "active"
@@ -11,7 +13,19 @@
     "path": "color.background.subtle",
     "value_light": "{primitive.color.mist.100}",
     "value_dark": "{primitive.color.mist.800}",
+    "value_nova_light": "{primitive.color.stone.100}",
+    "value_nova_dark": "{primitive.color.stone.800}",
     "css_variable": "--color-background-subtle",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "color.background.card",
+    "value_light": "{primitive.color.mist.100}",
+    "value_dark": "{primitive.color.mist.800}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.stone.900}",
+    "css_variable": "--color-background-card",
     "tier": "semantic",
     "status": "active"
   },
@@ -19,6 +33,8 @@
     "path": "color.background.elevated",
     "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.900}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.stone.900}",
     "css_variable": "--color-background-elevated",
     "tier": "semantic",
     "status": "active"
@@ -27,6 +43,8 @@
     "path": "color.background.input",
     "value_light": "{primitive.color.mist.200}",
     "value_dark": "{primitive.color.white-alpha.15}",
+    "value_nova_light": "{primitive.color.stone.200}",
+    "value_nova_dark": "{primitive.color.white-alpha.15}",
     "css_variable": "--color-background-input",
     "tier": "semantic",
     "status": "active"
@@ -35,6 +53,8 @@
     "path": "color.background.inverse",
     "value_light": "{primitive.color.mist.950}",
     "value_dark": "{primitive.color.white}",
+    "value_nova_light": "{primitive.color.stone.950}",
+    "value_nova_dark": "{primitive.color.white}",
     "css_variable": "--color-background-inverse",
     "tier": "semantic",
     "status": "reserved"
@@ -43,6 +63,8 @@
     "path": "color.overlay.hover",
     "value_light": "{primitive.color.ink-alpha.5}",
     "value_dark": "{primitive.color.white-alpha.8}",
+    "value_nova_light": "{primitive.color.ink-alpha.5}",
+    "value_nova_dark": "{primitive.color.white-alpha.8}",
     "css_variable": "--color-overlay-hover",
     "tier": "semantic",
     "status": "active"
@@ -51,6 +73,8 @@
     "path": "color.overlay.active",
     "value_light": "{primitive.color.ink-alpha.7}",
     "value_dark": "{primitive.color.white-alpha.8}",
+    "value_nova_light": "{primitive.color.ink-alpha.7}",
+    "value_nova_dark": "{primitive.color.white-alpha.8}",
     "css_variable": "--color-overlay-active",
     "tier": "semantic",
     "status": "reserved"
@@ -59,6 +83,8 @@
     "path": "color.overlay.selected",
     "value_light": "{primitive.color.ink-alpha.7}",
     "value_dark": "{primitive.color.white-alpha.8}",
+    "value_nova_light": "{primitive.color.ink-alpha.7}",
+    "value_nova_dark": "{primitive.color.white-alpha.8}",
     "css_variable": "--color-overlay-selected",
     "tier": "semantic",
     "status": "active"
@@ -67,6 +93,8 @@
     "path": "color.text.default",
     "value_light": "{primitive.color.mist.950}",
     "value_dark": "{primitive.color.mist.50}",
+    "value_nova_light": "{primitive.color.stone.950}",
+    "value_nova_dark": "{primitive.color.stone.50}",
     "css_variable": "--color-text-default",
     "tier": "semantic",
     "status": "active"
@@ -75,6 +103,8 @@
     "path": "color.text.subtle",
     "value_light": "{primitive.color.mist.600}",
     "value_dark": "{primitive.color.mist.400}",
+    "value_nova_light": "{primitive.color.stone.600}",
+    "value_nova_dark": "{primitive.color.stone.400}",
     "css_variable": "--color-text-subtle",
     "tier": "semantic",
     "status": "active"
@@ -83,6 +113,8 @@
     "path": "color.text.bold",
     "value_light": "{primitive.color.mist.950}",
     "value_dark": "{primitive.color.mist.50}",
+    "value_nova_light": "{primitive.color.stone.950}",
+    "value_nova_dark": "{primitive.color.stone.50}",
     "css_variable": "--color-text-bold",
     "tier": "semantic",
     "status": "reserved"
@@ -91,6 +123,8 @@
     "path": "color.text.inverse",
     "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.stone.950}",
     "css_variable": "--color-text-inverse",
     "tier": "semantic",
     "status": "reserved"
@@ -99,6 +133,8 @@
     "path": "color.text.action.default",
     "value_light": "{primitive.color.violet.600}",
     "value_dark": "{primitive.color.violet.300}",
+    "value_nova_light": "{primitive.color.stone.900}",
+    "value_nova_dark": "{primitive.color.stone.200}",
     "css_variable": "--color-text-action-default",
     "tier": "semantic",
     "status": "active"
@@ -107,6 +143,8 @@
     "path": "color.text.action.on",
     "value_light": "{primitive.color.violet.50}",
     "value_dark": "{primitive.color.violet.50}",
+    "value_nova_light": "{primitive.color.stone.50}",
+    "value_nova_dark": "{primitive.color.stone.900}",
     "css_variable": "--color-text-action-on",
     "tier": "semantic",
     "status": "reserved"
@@ -115,6 +153,8 @@
     "path": "color.text.destructive.default",
     "value_light": "{primitive.color.red.700}",
     "value_dark": "{primitive.color.red.300}",
+    "value_nova_light": "{primitive.color.red.700}",
+    "value_nova_dark": "{primitive.color.red.300}",
     "css_variable": "--color-text-destructive-default",
     "tier": "semantic",
     "status": "active"
@@ -123,6 +163,8 @@
     "path": "color.text.success.default",
     "value_light": "{primitive.color.emerald.700}",
     "value_dark": "{primitive.color.emerald.300}",
+    "value_nova_light": "{primitive.color.emerald.700}",
+    "value_nova_dark": "{primitive.color.emerald.300}",
     "css_variable": "--color-text-success-default",
     "tier": "semantic",
     "status": "active"
@@ -131,6 +173,8 @@
     "path": "color.text.warning.default",
     "value_light": "{primitive.color.amber.600}",
     "value_dark": "{primitive.color.amber.300}",
+    "value_nova_light": "{primitive.color.amber.600}",
+    "value_nova_dark": "{primitive.color.amber.300}",
     "css_variable": "--color-text-warning-default",
     "tier": "semantic",
     "status": "active"
@@ -139,6 +183,8 @@
     "path": "color.text.info.default",
     "value_light": "{primitive.color.blue.700}",
     "value_dark": "{primitive.color.blue.300}",
+    "value_nova_light": "{primitive.color.blue.700}",
+    "value_nova_dark": "{primitive.color.blue.300}",
     "css_variable": "--color-text-info-default",
     "tier": "semantic",
     "status": "active"
@@ -147,6 +193,8 @@
     "path": "color.border.default",
     "value_light": "{primitive.color.mist.200}",
     "value_dark": "{primitive.color.white-alpha.10}",
+    "value_nova_light": "{primitive.color.stone.200}",
+    "value_nova_dark": "{primitive.color.white-alpha.10}",
     "css_variable": "--color-border-default",
     "tier": "semantic",
     "status": "active"
@@ -155,6 +203,8 @@
     "path": "color.border.subtle",
     "value_light": "{primitive.color.mist.200}",
     "value_dark": "{primitive.color.white-alpha.10}",
+    "value_nova_light": "{primitive.color.stone.200}",
+    "value_nova_dark": "{primitive.color.white-alpha.10}",
     "css_variable": "--color-border-subtle",
     "tier": "semantic",
     "status": "reserved"
@@ -163,6 +213,8 @@
     "path": "color.border.input",
     "value_light": "{primitive.color.mist.500}",
     "value_dark": "{primitive.color.mist.500}",
+    "value_nova_light": "{primitive.color.stone.500}",
+    "value_nova_dark": "{primitive.color.stone.500}",
     "css_variable": "--color-border-input",
     "tier": "semantic",
     "status": "active"
@@ -171,6 +223,8 @@
     "path": "color.border.focus",
     "value_light": "{primitive.color.mist.800}",
     "value_dark": "{primitive.color.mist.200}",
+    "value_nova_light": "{primitive.color.stone.800}",
+    "value_nova_dark": "{primitive.color.stone.200}",
     "css_variable": "--color-border-focus",
     "tier": "semantic",
     "status": "active"
@@ -179,6 +233,8 @@
     "path": "color.icon.default",
     "value_light": "{primitive.color.mist.950}",
     "value_dark": "{primitive.color.mist.50}",
+    "value_nova_light": "{primitive.color.stone.950}",
+    "value_nova_dark": "{primitive.color.stone.50}",
     "css_variable": "--color-icon-default",
     "tier": "semantic",
     "status": "reserved"
@@ -187,6 +243,8 @@
     "path": "color.icon.subtle",
     "value_light": "{primitive.color.mist.500}",
     "value_dark": "{primitive.color.mist.400}",
+    "value_nova_light": "{primitive.color.stone.500}",
+    "value_nova_dark": "{primitive.color.stone.400}",
     "css_variable": "--color-icon-subtle",
     "tier": "semantic",
     "status": "reserved"
@@ -195,6 +253,8 @@
     "path": "color.icon.action",
     "value_light": "{primitive.color.violet.50}",
     "value_dark": "{primitive.color.violet.50}",
+    "value_nova_light": "{primitive.color.stone.50}",
+    "value_nova_dark": "{primitive.color.stone.900}",
     "css_variable": "--color-icon-action",
     "tier": "semantic",
     "status": "reserved"
@@ -203,6 +263,8 @@
     "path": "color.action.background.default",
     "value_light": "{primitive.color.violet.600}",
     "value_dark": "{primitive.color.violet.700}",
+    "value_nova_light": "{primitive.color.stone.900}",
+    "value_nova_dark": "{primitive.color.stone.200}",
     "css_variable": "--color-action-background-default",
     "tier": "semantic",
     "status": "active"
@@ -211,6 +273,8 @@
     "path": "color.action.background.foreground",
     "value_light": "{primitive.color.violet.50}",
     "value_dark": "{primitive.color.violet.50}",
+    "value_nova_light": "{primitive.color.stone.50}",
+    "value_nova_dark": "{primitive.color.stone.900}",
     "css_variable": "--color-action-background-foreground",
     "tier": "semantic",
     "status": "active"
@@ -219,6 +283,8 @@
     "path": "color.action.background.hover",
     "value_light": "{primitive.color.violet.700}",
     "value_dark": "{primitive.color.violet.600}",
+    "value_nova_light": "{primitive.color.stone.800}",
+    "value_nova_dark": "{primitive.color.stone.300}",
     "css_variable": "--color-action-background-hover",
     "tier": "semantic",
     "status": "active"
@@ -227,6 +293,8 @@
     "path": "color.action.background.active",
     "value_light": "{primitive.color.violet.800}",
     "value_dark": "{primitive.color.violet.800}",
+    "value_nova_light": "{primitive.color.stone.700}",
+    "value_nova_dark": "{primitive.color.stone.400}",
     "css_variable": "--color-action-background-active",
     "tier": "semantic",
     "status": "reserved"
@@ -235,6 +303,8 @@
     "path": "color.action.background.selected",
     "value_light": "{primitive.color.violet.50}",
     "value_dark": "{primitive.color.violet.950}",
+    "value_nova_light": "{primitive.color.stone.100}",
+    "value_nova_dark": "{primitive.color.stone.900}",
     "css_variable": "--color-action-background-selected",
     "tier": "semantic",
     "status": "active"
@@ -243,6 +313,8 @@
     "path": "color.action.secondary.hover",
     "value_light": "{primitive.color.mist.200}",
     "value_dark": "{primitive.color.mist.700}",
+    "value_nova_light": "{primitive.color.stone.200}",
+    "value_nova_dark": "{primitive.color.stone.700}",
     "css_variable": "--color-action-secondary-hover",
     "tier": "semantic",
     "status": "active"
@@ -251,6 +323,8 @@
     "path": "color.action.secondary.active",
     "value_light": "{primitive.color.mist.300}",
     "value_dark": "{primitive.color.mist.600}",
+    "value_nova_light": "{primitive.color.stone.300}",
+    "value_nova_dark": "{primitive.color.stone.600}",
     "css_variable": "--color-action-secondary-active",
     "tier": "semantic",
     "status": "reserved"
@@ -259,6 +333,8 @@
     "path": "color.action.tint.hover",
     "value_light": "{primitive.color.violet.200}",
     "value_dark": "{primitive.color.violet.700}",
+    "value_nova_light": "{primitive.color.stone.200}",
+    "value_nova_dark": "{primitive.color.stone.700}",
     "css_variable": "--color-action-tint-hover",
     "tier": "semantic",
     "status": "active"
@@ -267,6 +343,8 @@
     "path": "color.feedback.error.default",
     "value_light": "{primitive.color.red.500}",
     "value_dark": "{primitive.color.red.400}",
+    "value_nova_light": "{primitive.color.red.500}",
+    "value_nova_dark": "{primitive.color.red.400}",
     "css_variable": "--color-feedback-error-default",
     "tier": "semantic",
     "status": "active"
@@ -275,6 +353,8 @@
     "path": "color.feedback.error.foreground",
     "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.stone.950}",
     "css_variable": "--color-feedback-error-foreground",
     "tier": "semantic",
     "status": "active"
@@ -283,6 +363,8 @@
     "path": "color.feedback.error.hover",
     "value_light": "{primitive.color.red.200}",
     "value_dark": "{primitive.color.red.700}",
+    "value_nova_light": "{primitive.color.red.200}",
+    "value_nova_dark": "{primitive.color.red.700}",
     "css_variable": "--color-feedback-error-hover",
     "tier": "semantic",
     "status": "active"
@@ -291,6 +373,8 @@
     "path": "color.feedback.error.active",
     "value_light": "{primitive.color.red.300}",
     "value_dark": "{primitive.color.red.800}",
+    "value_nova_light": "{primitive.color.red.300}",
+    "value_nova_dark": "{primitive.color.red.800}",
     "css_variable": "--color-feedback-error-active",
     "tier": "semantic",
     "status": "reserved"
@@ -299,6 +383,8 @@
     "path": "color.feedback.success.default",
     "value_light": "{primitive.color.emerald.600}",
     "value_dark": "{primitive.color.emerald.400}",
+    "value_nova_light": "{primitive.color.emerald.600}",
+    "value_nova_dark": "{primitive.color.emerald.400}",
     "css_variable": "--color-feedback-success-default",
     "tier": "semantic",
     "status": "active"
@@ -307,6 +393,8 @@
     "path": "color.feedback.success.foreground",
     "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.stone.950}",
     "css_variable": "--color-feedback-success-foreground",
     "tier": "semantic",
     "status": "active"
@@ -315,6 +403,8 @@
     "path": "color.feedback.success.hover",
     "value_light": "{primitive.color.emerald.200}",
     "value_dark": "{primitive.color.emerald.700}",
+    "value_nova_light": "{primitive.color.emerald.200}",
+    "value_nova_dark": "{primitive.color.emerald.700}",
     "css_variable": "--color-feedback-success-hover",
     "tier": "semantic",
     "status": "active"
@@ -323,6 +413,8 @@
     "path": "color.feedback.warning.default",
     "value_light": "{primitive.color.amber.400}",
     "value_dark": "{primitive.color.amber.300}",
+    "value_nova_light": "{primitive.color.amber.400}",
+    "value_nova_dark": "{primitive.color.amber.300}",
     "css_variable": "--color-feedback-warning-default",
     "tier": "semantic",
     "status": "active"
@@ -331,6 +423,8 @@
     "path": "color.feedback.warning.foreground",
     "value_light": "{primitive.color.mist.950}",
     "value_dark": "{primitive.color.mist.950}",
+    "value_nova_light": "{primitive.color.stone.950}",
+    "value_nova_dark": "{primitive.color.stone.950}",
     "css_variable": "--color-feedback-warning-foreground",
     "tier": "semantic",
     "status": "active"
@@ -339,6 +433,8 @@
     "path": "color.feedback.warning.hover",
     "value_light": "{primitive.color.amber.200}",
     "value_dark": "{primitive.color.amber.700}",
+    "value_nova_light": "{primitive.color.amber.200}",
+    "value_nova_dark": "{primitive.color.amber.700}",
     "css_variable": "--color-feedback-warning-hover",
     "tier": "semantic",
     "status": "active"
@@ -347,6 +443,8 @@
     "path": "color.feedback.info.default",
     "value_light": "{primitive.color.blue.600}",
     "value_dark": "{primitive.color.blue.400}",
+    "value_nova_light": "{primitive.color.blue.600}",
+    "value_nova_dark": "{primitive.color.blue.400}",
     "css_variable": "--color-feedback-info-default",
     "tier": "semantic",
     "status": "active"
@@ -355,6 +453,8 @@
     "path": "color.feedback.info.foreground",
     "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.mist.950}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.stone.950}",
     "css_variable": "--color-feedback-info-foreground",
     "tier": "semantic",
     "status": "reserved"
@@ -363,6 +463,8 @@
     "path": "color.feedback.info.hover",
     "value_light": "{primitive.color.blue.200}",
     "value_dark": "{primitive.color.blue.700}",
+    "value_nova_light": "{primitive.color.blue.200}",
+    "value_nova_dark": "{primitive.color.blue.700}",
     "css_variable": "--color-feedback-info-hover",
     "tier": "semantic",
     "status": "active"
@@ -371,6 +473,8 @@
     "path": "color.chart.1",
     "value_light": "{primitive.color.violet.700}",
     "value_dark": "{primitive.color.violet.500}",
+    "value_nova_light": "{primitive.color.teal.800}",
+    "value_nova_dark": "{primitive.color.teal.400}",
     "css_variable": "--color-chart-1",
     "tier": "semantic",
     "status": "active"
@@ -379,6 +483,8 @@
     "path": "color.chart.2",
     "value_light": "{primitive.color.blue.500}",
     "value_dark": "{primitive.color.blue.400}",
+    "value_nova_light": "{primitive.color.blue.500}",
+    "value_nova_dark": "{primitive.color.blue.500}",
     "css_variable": "--color-chart-2",
     "tier": "semantic",
     "status": "active"
@@ -387,6 +493,8 @@
     "path": "color.chart.3",
     "value_light": "{primitive.color.amber.500}",
     "value_dark": "{primitive.color.yellow.300}",
+    "value_nova_light": "{primitive.color.yellow.500}",
+    "value_nova_dark": "{primitive.color.yellow.300}",
     "css_variable": "--color-chart-3",
     "tier": "semantic",
     "status": "active"
@@ -395,6 +503,8 @@
     "path": "color.chart.4",
     "value_light": "{primitive.color.plum.800}",
     "value_dark": "{primitive.color.plum.200}",
+    "value_nova_light": "{primitive.color.plum.700}",
+    "value_nova_dark": "{primitive.color.plum.200}",
     "css_variable": "--color-chart-4",
     "tier": "semantic",
     "status": "active"
@@ -403,6 +513,8 @@
     "path": "color.chart.5",
     "value_light": "{primitive.color.amber.700}",
     "value_dark": "{primitive.color.amber.500}",
+    "value_nova_light": "{primitive.color.green.700}",
+    "value_nova_dark": "{primitive.color.amber.500}",
     "css_variable": "--color-chart-5",
     "tier": "semantic",
     "status": "active"
@@ -411,6 +523,8 @@
     "path": "color.chart.sequential.1",
     "value_light": "{primitive.color.green.200}",
     "value_dark": "{primitive.color.green.200}",
+    "value_nova_light": "{primitive.color.teal.200}",
+    "value_nova_dark": "{primitive.color.teal.200}",
     "css_variable": "--color-chart-sequential-1",
     "tier": "semantic",
     "status": "reserved"
@@ -419,6 +533,8 @@
     "path": "color.chart.sequential.2",
     "value_light": "{primitive.color.green.300}",
     "value_dark": "{primitive.color.green.300}",
+    "value_nova_light": "{primitive.color.teal.300}",
+    "value_nova_dark": "{primitive.color.teal.300}",
     "css_variable": "--color-chart-sequential-2",
     "tier": "semantic",
     "status": "reserved"
@@ -427,6 +543,8 @@
     "path": "color.chart.sequential.3",
     "value_light": "{primitive.color.green.400}",
     "value_dark": "{primitive.color.green.400}",
+    "value_nova_light": "{primitive.color.teal.400}",
+    "value_nova_dark": "{primitive.color.teal.400}",
     "css_variable": "--color-chart-sequential-3",
     "tier": "semantic",
     "status": "reserved"
@@ -435,6 +553,8 @@
     "path": "color.chart.sequential.4",
     "value_light": "{primitive.color.green.500}",
     "value_dark": "{primitive.color.green.500}",
+    "value_nova_light": "{primitive.color.teal.500}",
+    "value_nova_dark": "{primitive.color.teal.500}",
     "css_variable": "--color-chart-sequential-4",
     "tier": "semantic",
     "status": "reserved"
@@ -443,6 +563,8 @@
     "path": "color.chart.sequential.5",
     "value_light": "{primitive.color.green.600}",
     "value_dark": "{primitive.color.green.600}",
+    "value_nova_light": "{primitive.color.teal.600}",
+    "value_nova_dark": "{primitive.color.teal.600}",
     "css_variable": "--color-chart-sequential-5",
     "tier": "semantic",
     "status": "reserved"
@@ -451,6 +573,8 @@
     "path": "color.sidebar.background",
     "value_light": "{primitive.color.mist.50}",
     "value_dark": "{primitive.color.mist.900}",
+    "value_nova_light": "{primitive.color.stone.50}",
+    "value_nova_dark": "{primitive.color.stone.900}",
     "css_variable": "--color-sidebar-background",
     "tier": "semantic",
     "status": "active"
@@ -459,6 +583,8 @@
     "path": "color.sidebar.foreground",
     "value_light": "{primitive.color.mist.950}",
     "value_dark": "{primitive.color.mist.50}",
+    "value_nova_light": "{primitive.color.stone.950}",
+    "value_nova_dark": "{primitive.color.stone.50}",
     "css_variable": "--color-sidebar-foreground",
     "tier": "semantic",
     "status": "active"
@@ -467,6 +593,8 @@
     "path": "color.sidebar.border",
     "value_light": "{primitive.color.mist.200}",
     "value_dark": "{primitive.color.white-alpha.10}",
+    "value_nova_light": "{primitive.color.stone.200}",
+    "value_nova_dark": "{primitive.color.white-alpha.10}",
     "css_variable": "--color-sidebar-border",
     "tier": "semantic",
     "status": "active"
@@ -475,6 +603,8 @@
     "path": "color.sidebar.ring",
     "value_light": "{primitive.color.mist.500}",
     "value_dark": "{primitive.color.mist.500}",
+    "value_nova_light": "{primitive.color.stone.500}",
+    "value_nova_dark": "{primitive.color.stone.500}",
     "css_variable": "--color-sidebar-ring",
     "tier": "semantic",
     "status": "active"
@@ -483,6 +613,8 @@
     "path": "color.sidebar.primary.default",
     "value_light": "{primitive.color.violet.600}",
     "value_dark": "{primitive.color.violet.600}",
+    "value_nova_light": "{primitive.color.stone.900}",
+    "value_nova_dark": "{primitive.color.stone.200}",
     "css_variable": "--color-sidebar-primary-default",
     "tier": "semantic",
     "status": "active"
@@ -491,6 +623,8 @@
     "path": "color.sidebar.primary.on",
     "value_light": "{primitive.color.violet.50}",
     "value_dark": "{primitive.color.white}",
+    "value_nova_light": "{primitive.color.stone.50}",
+    "value_nova_dark": "{primitive.color.stone.900}",
     "css_variable": "--color-sidebar-primary-on",
     "tier": "semantic",
     "status": "active"
@@ -499,6 +633,8 @@
     "path": "color.sidebar.accent.default",
     "value_light": "{primitive.color.mist.100}",
     "value_dark": "{primitive.color.mist.800}",
+    "value_nova_light": "{primitive.color.stone.100}",
+    "value_nova_dark": "{primitive.color.stone.800}",
     "css_variable": "--color-sidebar-accent-default",
     "tier": "semantic",
     "status": "active"
@@ -507,6 +643,8 @@
     "path": "color.sidebar.accent.foreground",
     "value_light": "{primitive.color.mist.900}",
     "value_dark": "{primitive.color.mist.50}",
+    "value_nova_light": "{primitive.color.stone.900}",
+    "value_nova_dark": "{primitive.color.stone.50}",
     "css_variable": "--color-sidebar-accent-foreground",
     "tier": "semantic",
     "status": "active"
@@ -515,6 +653,8 @@
     "path": "color.static.white",
     "value_light": "{primitive.color.white}",
     "value_dark": "{primitive.color.white}",
+    "value_nova_light": "{primitive.color.white}",
+    "value_nova_dark": "{primitive.color.white}",
     "css_variable": "--color-static-white",
     "tier": "semantic",
     "status": "active"
@@ -523,6 +663,8 @@
     "path": "color.static.black",
     "value_light": "{primitive.color.black}",
     "value_dark": "{primitive.color.black}",
+    "value_nova_light": "{primitive.color.black}",
+    "value_nova_dark": "{primitive.color.black}",
     "css_variable": "--color-static-black",
     "tier": "semantic",
     "status": "active"
@@ -531,6 +673,8 @@
     "path": "space.component.xs",
     "value_light": "{primitive.space.1}",
     "value_dark": "{primitive.space.1}",
+    "value_nova_light": "{primitive.space.1}",
+    "value_nova_dark": "{primitive.space.1}",
     "css_variable": "--space-component-xs",
     "tier": "semantic",
     "status": "reserved"
@@ -539,6 +683,8 @@
     "path": "space.component.sm",
     "value_light": "{primitive.space.2}",
     "value_dark": "{primitive.space.2}",
+    "value_nova_light": "{primitive.space.2}",
+    "value_nova_dark": "{primitive.space.2}",
     "css_variable": "--space-component-sm",
     "tier": "semantic",
     "status": "reserved"
@@ -547,6 +693,8 @@
     "path": "space.component.md",
     "value_light": "{primitive.space.4}",
     "value_dark": "{primitive.space.4}",
+    "value_nova_light": "{primitive.space.4}",
+    "value_nova_dark": "{primitive.space.4}",
     "css_variable": "--space-component-md",
     "tier": "semantic",
     "status": "reserved"
@@ -555,6 +703,8 @@
     "path": "space.component.lg",
     "value_light": "{primitive.space.6}",
     "value_dark": "{primitive.space.6}",
+    "value_nova_light": "{primitive.space.6}",
+    "value_nova_dark": "{primitive.space.6}",
     "css_variable": "--space-component-lg",
     "tier": "semantic",
     "status": "reserved"
@@ -563,6 +713,8 @@
     "path": "space.component.xl",
     "value_light": "{primitive.space.8}",
     "value_dark": "{primitive.space.8}",
+    "value_nova_light": "{primitive.space.8}",
+    "value_nova_dark": "{primitive.space.8}",
     "css_variable": "--space-component-xl",
     "tier": "semantic",
     "status": "reserved"
@@ -571,6 +723,8 @@
     "path": "space.scale.0",
     "value_light": "{primitive.space.0}",
     "value_dark": "{primitive.space.0}",
+    "value_nova_light": "{primitive.space.0}",
+    "value_nova_dark": "{primitive.space.0}",
     "css_variable": "--space-scale-0",
     "tier": "semantic",
     "status": "active"
@@ -579,6 +733,8 @@
     "path": "space.scale.1",
     "value_light": "{primitive.space.1}",
     "value_dark": "{primitive.space.1}",
+    "value_nova_light": "{primitive.space.1}",
+    "value_nova_dark": "{primitive.space.1}",
     "css_variable": "--space-scale-1",
     "tier": "semantic",
     "status": "active"
@@ -587,6 +743,8 @@
     "path": "space.scale.2",
     "value_light": "{primitive.space.2}",
     "value_dark": "{primitive.space.2}",
+    "value_nova_light": "{primitive.space.2}",
+    "value_nova_dark": "{primitive.space.2}",
     "css_variable": "--space-scale-2",
     "tier": "semantic",
     "status": "active"
@@ -595,6 +753,8 @@
     "path": "space.scale.3",
     "value_light": "{primitive.space.3}",
     "value_dark": "{primitive.space.3}",
+    "value_nova_light": "{primitive.space.3}",
+    "value_nova_dark": "{primitive.space.3}",
     "css_variable": "--space-scale-3",
     "tier": "semantic",
     "status": "active"
@@ -603,6 +763,8 @@
     "path": "space.scale.4",
     "value_light": "{primitive.space.4}",
     "value_dark": "{primitive.space.4}",
+    "value_nova_light": "{primitive.space.4}",
+    "value_nova_dark": "{primitive.space.4}",
     "css_variable": "--space-scale-4",
     "tier": "semantic",
     "status": "active"
@@ -611,6 +773,8 @@
     "path": "space.scale.5",
     "value_light": "{primitive.space.5}",
     "value_dark": "{primitive.space.5}",
+    "value_nova_light": "{primitive.space.5}",
+    "value_nova_dark": "{primitive.space.5}",
     "css_variable": "--space-scale-5",
     "tier": "semantic",
     "status": "active"
@@ -619,6 +783,8 @@
     "path": "space.scale.6",
     "value_light": "{primitive.space.6}",
     "value_dark": "{primitive.space.6}",
+    "value_nova_light": "{primitive.space.6}",
+    "value_nova_dark": "{primitive.space.6}",
     "css_variable": "--space-scale-6",
     "tier": "semantic",
     "status": "active"
@@ -627,6 +793,8 @@
     "path": "space.scale.7",
     "value_light": "{primitive.space.7}",
     "value_dark": "{primitive.space.7}",
+    "value_nova_light": "{primitive.space.7}",
+    "value_nova_dark": "{primitive.space.7}",
     "css_variable": "--space-scale-7",
     "tier": "semantic",
     "status": "active"
@@ -635,6 +803,8 @@
     "path": "space.scale.8",
     "value_light": "{primitive.space.8}",
     "value_dark": "{primitive.space.8}",
+    "value_nova_light": "{primitive.space.8}",
+    "value_nova_dark": "{primitive.space.8}",
     "css_variable": "--space-scale-8",
     "tier": "semantic",
     "status": "active"
@@ -643,6 +813,8 @@
     "path": "space.scale.9",
     "value_light": "{primitive.space.9}",
     "value_dark": "{primitive.space.9}",
+    "value_nova_light": "{primitive.space.9}",
+    "value_nova_dark": "{primitive.space.9}",
     "css_variable": "--space-scale-9",
     "tier": "semantic",
     "status": "active"
@@ -651,6 +823,8 @@
     "path": "space.scale.10",
     "value_light": "{primitive.space.10}",
     "value_dark": "{primitive.space.10}",
+    "value_nova_light": "{primitive.space.10}",
+    "value_nova_dark": "{primitive.space.10}",
     "css_variable": "--space-scale-10",
     "tier": "semantic",
     "status": "active"
@@ -659,6 +833,8 @@
     "path": "space.scale.11",
     "value_light": "{primitive.space.11}",
     "value_dark": "{primitive.space.11}",
+    "value_nova_light": "{primitive.space.11}",
+    "value_nova_dark": "{primitive.space.11}",
     "css_variable": "--space-scale-11",
     "tier": "semantic",
     "status": "active"
@@ -667,6 +843,8 @@
     "path": "space.scale.12",
     "value_light": "{primitive.space.12}",
     "value_dark": "{primitive.space.12}",
+    "value_nova_light": "{primitive.space.12}",
+    "value_nova_dark": "{primitive.space.12}",
     "css_variable": "--space-scale-12",
     "tier": "semantic",
     "status": "active"
@@ -675,6 +853,8 @@
     "path": "space.scale.14",
     "value_light": "{primitive.space.14}",
     "value_dark": "{primitive.space.14}",
+    "value_nova_light": "{primitive.space.14}",
+    "value_nova_dark": "{primitive.space.14}",
     "css_variable": "--space-scale-14",
     "tier": "semantic",
     "status": "active"
@@ -683,6 +863,8 @@
     "path": "space.scale.16",
     "value_light": "{primitive.space.16}",
     "value_dark": "{primitive.space.16}",
+    "value_nova_light": "{primitive.space.16}",
+    "value_nova_dark": "{primitive.space.16}",
     "css_variable": "--space-scale-16",
     "tier": "semantic",
     "status": "active"
@@ -691,6 +873,8 @@
     "path": "space.scale.18",
     "value_light": "{primitive.space.18}",
     "value_dark": "{primitive.space.18}",
+    "value_nova_light": "{primitive.space.18}",
+    "value_nova_dark": "{primitive.space.18}",
     "css_variable": "--space-scale-18",
     "tier": "semantic",
     "status": "active"
@@ -699,6 +883,8 @@
     "path": "space.scale.20",
     "value_light": "{primitive.space.20}",
     "value_dark": "{primitive.space.20}",
+    "value_nova_light": "{primitive.space.20}",
+    "value_nova_dark": "{primitive.space.20}",
     "css_variable": "--space-scale-20",
     "tier": "semantic",
     "status": "active"
@@ -707,6 +893,8 @@
     "path": "space.scale.24",
     "value_light": "{primitive.space.24}",
     "value_dark": "{primitive.space.24}",
+    "value_nova_light": "{primitive.space.24}",
+    "value_nova_dark": "{primitive.space.24}",
     "css_variable": "--space-scale-24",
     "tier": "semantic",
     "status": "active"
@@ -715,6 +903,8 @@
     "path": "space.scale.28",
     "value_light": "{primitive.space.28}",
     "value_dark": "{primitive.space.28}",
+    "value_nova_light": "{primitive.space.28}",
+    "value_nova_dark": "{primitive.space.28}",
     "css_variable": "--space-scale-28",
     "tier": "semantic",
     "status": "active"
@@ -723,6 +913,8 @@
     "path": "space.scale.32",
     "value_light": "{primitive.space.32}",
     "value_dark": "{primitive.space.32}",
+    "value_nova_light": "{primitive.space.32}",
+    "value_nova_dark": "{primitive.space.32}",
     "css_variable": "--space-scale-32",
     "tier": "semantic",
     "status": "active"
@@ -731,6 +923,8 @@
     "path": "space.scale.36",
     "value_light": "{primitive.space.36}",
     "value_dark": "{primitive.space.36}",
+    "value_nova_light": "{primitive.space.36}",
+    "value_nova_dark": "{primitive.space.36}",
     "css_variable": "--space-scale-36",
     "tier": "semantic",
     "status": "active"
@@ -739,6 +933,8 @@
     "path": "space.scale.40",
     "value_light": "{primitive.space.40}",
     "value_dark": "{primitive.space.40}",
+    "value_nova_light": "{primitive.space.40}",
+    "value_nova_dark": "{primitive.space.40}",
     "css_variable": "--space-scale-40",
     "tier": "semantic",
     "status": "active"
@@ -747,6 +943,8 @@
     "path": "space.scale.44",
     "value_light": "{primitive.space.44}",
     "value_dark": "{primitive.space.44}",
+    "value_nova_light": "{primitive.space.44}",
+    "value_nova_dark": "{primitive.space.44}",
     "css_variable": "--space-scale-44",
     "tier": "semantic",
     "status": "active"
@@ -755,6 +953,8 @@
     "path": "space.scale.48",
     "value_light": "{primitive.space.48}",
     "value_dark": "{primitive.space.48}",
+    "value_nova_light": "{primitive.space.48}",
+    "value_nova_dark": "{primitive.space.48}",
     "css_variable": "--space-scale-48",
     "tier": "semantic",
     "status": "active"
@@ -763,6 +963,8 @@
     "path": "space.scale.52",
     "value_light": "{primitive.space.52}",
     "value_dark": "{primitive.space.52}",
+    "value_nova_light": "{primitive.space.52}",
+    "value_nova_dark": "{primitive.space.52}",
     "css_variable": "--space-scale-52",
     "tier": "semantic",
     "status": "active"
@@ -771,6 +973,8 @@
     "path": "space.scale.56",
     "value_light": "{primitive.space.56}",
     "value_dark": "{primitive.space.56}",
+    "value_nova_light": "{primitive.space.56}",
+    "value_nova_dark": "{primitive.space.56}",
     "css_variable": "--space-scale-56",
     "tier": "semantic",
     "status": "active"
@@ -779,6 +983,8 @@
     "path": "space.scale.60",
     "value_light": "{primitive.space.60}",
     "value_dark": "{primitive.space.60}",
+    "value_nova_light": "{primitive.space.60}",
+    "value_nova_dark": "{primitive.space.60}",
     "css_variable": "--space-scale-60",
     "tier": "semantic",
     "status": "active"
@@ -787,6 +993,8 @@
     "path": "space.scale.64",
     "value_light": "{primitive.space.64}",
     "value_dark": "{primitive.space.64}",
+    "value_nova_light": "{primitive.space.64}",
+    "value_nova_dark": "{primitive.space.64}",
     "css_variable": "--space-scale-64",
     "tier": "semantic",
     "status": "active"
@@ -795,6 +1003,8 @@
     "path": "space.scale.72",
     "value_light": "{primitive.space.72}",
     "value_dark": "{primitive.space.72}",
+    "value_nova_light": "{primitive.space.72}",
+    "value_nova_dark": "{primitive.space.72}",
     "css_variable": "--space-scale-72",
     "tier": "semantic",
     "status": "active"
@@ -803,6 +1013,8 @@
     "path": "space.scale.80",
     "value_light": "{primitive.space.80}",
     "value_dark": "{primitive.space.80}",
+    "value_nova_light": "{primitive.space.80}",
+    "value_nova_dark": "{primitive.space.80}",
     "css_variable": "--space-scale-80",
     "tier": "semantic",
     "status": "active"
@@ -811,6 +1023,8 @@
     "path": "space.scale.96",
     "value_light": "{primitive.space.96}",
     "value_dark": "{primitive.space.96}",
+    "value_nova_light": "{primitive.space.96}",
+    "value_nova_dark": "{primitive.space.96}",
     "css_variable": "--space-scale-96",
     "tier": "semantic",
     "status": "active"
@@ -819,6 +1033,8 @@
     "path": "space.scale.0-5",
     "value_light": "{primitive.space.0-5}",
     "value_dark": "{primitive.space.0-5}",
+    "value_nova_light": "{primitive.space.0-5}",
+    "value_nova_dark": "{primitive.space.0-5}",
     "css_variable": "--space-scale-0-5",
     "tier": "semantic",
     "status": "active"
@@ -827,6 +1043,8 @@
     "path": "space.scale.1-25",
     "value_light": "{primitive.space.1-25}",
     "value_dark": "{primitive.space.1-25}",
+    "value_nova_light": "{primitive.space.1-25}",
+    "value_nova_dark": "{primitive.space.1-25}",
     "css_variable": "--space-scale-1-25",
     "tier": "semantic",
     "status": "active"
@@ -835,6 +1053,8 @@
     "path": "space.scale.1-5",
     "value_light": "{primitive.space.1-5}",
     "value_dark": "{primitive.space.1-5}",
+    "value_nova_light": "{primitive.space.1-5}",
+    "value_nova_dark": "{primitive.space.1-5}",
     "css_variable": "--space-scale-1-5",
     "tier": "semantic",
     "status": "active"
@@ -843,6 +1063,8 @@
     "path": "space.scale.2-5",
     "value_light": "{primitive.space.2-5}",
     "value_dark": "{primitive.space.2-5}",
+    "value_nova_light": "{primitive.space.2-5}",
+    "value_nova_dark": "{primitive.space.2-5}",
     "css_variable": "--space-scale-2-5",
     "tier": "semantic",
     "status": "active"
@@ -851,6 +1073,8 @@
     "path": "space.scale.3-5",
     "value_light": "{primitive.space.3-5}",
     "value_dark": "{primitive.space.3-5}",
+    "value_nova_light": "{primitive.space.3-5}",
+    "value_nova_dark": "{primitive.space.3-5}",
     "css_variable": "--space-scale-3-5",
     "tier": "semantic",
     "status": "active"
@@ -859,6 +1083,8 @@
     "path": "space.scale.5-25",
     "value_light": "{primitive.space.5-25}",
     "value_dark": "{primitive.space.5-25}",
+    "value_nova_light": "{primitive.space.5-25}",
+    "value_nova_dark": "{primitive.space.5-25}",
     "css_variable": "--space-scale-5-25",
     "tier": "semantic",
     "status": "active"
@@ -867,6 +1093,8 @@
     "path": "space.container.3xs",
     "value_light": "{primitive.space.container.3xs}",
     "value_dark": "{primitive.space.container.3xs}",
+    "value_nova_light": "{primitive.space.container.3xs}",
+    "value_nova_dark": "{primitive.space.container.3xs}",
     "css_variable": "--space-container-3xs",
     "tier": "semantic",
     "status": "reserved"
@@ -875,6 +1103,8 @@
     "path": "space.container.2xs",
     "value_light": "{primitive.space.container.2xs}",
     "value_dark": "{primitive.space.container.2xs}",
+    "value_nova_light": "{primitive.space.container.2xs}",
+    "value_nova_dark": "{primitive.space.container.2xs}",
     "css_variable": "--space-container-2xs",
     "tier": "semantic",
     "status": "reserved"
@@ -883,6 +1113,8 @@
     "path": "space.container.xs",
     "value_light": "{primitive.space.container.xs}",
     "value_dark": "{primitive.space.container.xs}",
+    "value_nova_light": "{primitive.space.container.xs}",
+    "value_nova_dark": "{primitive.space.container.xs}",
     "css_variable": "--space-container-xs",
     "tier": "semantic",
     "status": "active"
@@ -891,6 +1123,8 @@
     "path": "space.container.sm",
     "value_light": "{primitive.space.container.sm}",
     "value_dark": "{primitive.space.container.sm}",
+    "value_nova_light": "{primitive.space.container.sm}",
+    "value_nova_dark": "{primitive.space.container.sm}",
     "css_variable": "--space-container-sm",
     "tier": "semantic",
     "status": "active"
@@ -899,6 +1133,8 @@
     "path": "space.container.md",
     "value_light": "{primitive.space.container.md}",
     "value_dark": "{primitive.space.container.md}",
+    "value_nova_light": "{primitive.space.container.md}",
+    "value_nova_dark": "{primitive.space.container.md}",
     "css_variable": "--space-container-md",
     "tier": "semantic",
     "status": "active"
@@ -907,6 +1143,8 @@
     "path": "space.container.lg",
     "value_light": "{primitive.space.container.lg}",
     "value_dark": "{primitive.space.container.lg}",
+    "value_nova_light": "{primitive.space.container.lg}",
+    "value_nova_dark": "{primitive.space.container.lg}",
     "css_variable": "--space-container-lg",
     "tier": "semantic",
     "status": "reserved"
@@ -915,6 +1153,8 @@
     "path": "space.container.xl",
     "value_light": "{primitive.space.container.xl}",
     "value_dark": "{primitive.space.container.xl}",
+    "value_nova_light": "{primitive.space.container.xl}",
+    "value_nova_dark": "{primitive.space.container.xl}",
     "css_variable": "--space-container-xl",
     "tier": "semantic",
     "status": "reserved"
@@ -923,6 +1163,8 @@
     "path": "space.container.2xl",
     "value_light": "{primitive.space.container.2xl}",
     "value_dark": "{primitive.space.container.2xl}",
+    "value_nova_light": "{primitive.space.container.2xl}",
+    "value_nova_dark": "{primitive.space.container.2xl}",
     "css_variable": "--space-container-2xl",
     "tier": "semantic",
     "status": "reserved"
@@ -931,6 +1173,8 @@
     "path": "space.container.3xl",
     "value_light": "{primitive.space.container.3xl}",
     "value_dark": "{primitive.space.container.3xl}",
+    "value_nova_light": "{primitive.space.container.3xl}",
+    "value_nova_dark": "{primitive.space.container.3xl}",
     "css_variable": "--space-container-3xl",
     "tier": "semantic",
     "status": "reserved"
@@ -939,6 +1183,8 @@
     "path": "space.container.4xl",
     "value_light": "{primitive.space.container.4xl}",
     "value_dark": "{primitive.space.container.4xl}",
+    "value_nova_light": "{primitive.space.container.4xl}",
+    "value_nova_dark": "{primitive.space.container.4xl}",
     "css_variable": "--space-container-4xl",
     "tier": "semantic",
     "status": "reserved"
@@ -947,6 +1193,8 @@
     "path": "space.container.5xl",
     "value_light": "{primitive.space.container.5xl}",
     "value_dark": "{primitive.space.container.5xl}",
+    "value_nova_light": "{primitive.space.container.5xl}",
+    "value_nova_dark": "{primitive.space.container.5xl}",
     "css_variable": "--space-container-5xl",
     "tier": "semantic",
     "status": "reserved"
@@ -955,6 +1203,8 @@
     "path": "space.container.6xl",
     "value_light": "{primitive.space.container.6xl}",
     "value_dark": "{primitive.space.container.6xl}",
+    "value_nova_light": "{primitive.space.container.6xl}",
+    "value_nova_dark": "{primitive.space.container.6xl}",
     "css_variable": "--space-container-6xl",
     "tier": "semantic",
     "status": "reserved"
@@ -963,6 +1213,8 @@
     "path": "space.container.7xl",
     "value_light": "{primitive.space.container.7xl}",
     "value_dark": "{primitive.space.container.7xl}",
+    "value_nova_light": "{primitive.space.container.7xl}",
+    "value_nova_dark": "{primitive.space.container.7xl}",
     "css_variable": "--space-container-7xl",
     "tier": "semantic",
     "status": "reserved"
@@ -971,6 +1223,8 @@
     "path": "space.focus-ring-width",
     "value_light": "{primitive.space.focus-ring-width}",
     "value_dark": "{primitive.space.focus-ring-width}",
+    "value_nova_light": "{primitive.space.focus-ring-width}",
+    "value_nova_dark": "{primitive.space.focus-ring-width}",
     "css_variable": "--space-focus-ring-width",
     "tier": "semantic",
     "status": "active"
@@ -979,6 +1233,8 @@
     "path": "space.layout.page-padding",
     "value_light": "{primitive.space.page}",
     "value_dark": "{primitive.space.page}",
+    "value_nova_light": "{primitive.space.page}",
+    "value_nova_dark": "{primitive.space.page}",
     "css_variable": "--space-layout-page-padding",
     "tier": "semantic",
     "status": "active"
@@ -987,6 +1243,8 @@
     "path": "space.layout.section-gap",
     "value_light": "{primitive.space.section}",
     "value_dark": "{primitive.space.section}",
+    "value_nova_light": "{primitive.space.section}",
+    "value_nova_dark": "{primitive.space.section}",
     "css_variable": "--space-layout-section-gap",
     "tier": "semantic",
     "status": "active"
@@ -995,6 +1253,8 @@
     "path": "space.layout.content-sm",
     "value_light": "{primitive.space.content-sm}",
     "value_dark": "{primitive.space.content-sm}",
+    "value_nova_light": "{primitive.space.content-sm}",
+    "value_nova_dark": "{primitive.space.content-sm}",
     "css_variable": "--space-layout-content-sm",
     "tier": "semantic",
     "status": "reserved"
@@ -1003,6 +1263,8 @@
     "path": "space.layout.content-default",
     "value_light": "{primitive.space.content}",
     "value_dark": "{primitive.space.content}",
+    "value_nova_light": "{primitive.space.content}",
+    "value_nova_dark": "{primitive.space.content}",
     "css_variable": "--space-layout-content-default",
     "tier": "semantic",
     "status": "reserved"
@@ -1011,6 +1273,8 @@
     "path": "space.layout.content-lg",
     "value_light": "{primitive.space.content-lg}",
     "value_dark": "{primitive.space.content-lg}",
+    "value_nova_light": "{primitive.space.content-lg}",
+    "value_nova_dark": "{primitive.space.content-lg}",
     "css_variable": "--space-layout-content-lg",
     "tier": "semantic",
     "status": "reserved"
@@ -1019,6 +1283,8 @@
     "path": "space.layout.sidebar",
     "value_light": "{primitive.space.sidebar}",
     "value_dark": "{primitive.space.sidebar}",
+    "value_nova_light": "{primitive.space.sidebar}",
+    "value_nova_dark": "{primitive.space.sidebar}",
     "css_variable": "--space-layout-sidebar",
     "tier": "semantic",
     "status": "active"
@@ -1027,6 +1293,8 @@
     "path": "space.layout.sidebar-mobile",
     "value_light": "{primitive.space.sidebar-mobile}",
     "value_dark": "{primitive.space.sidebar-mobile}",
+    "value_nova_light": "{primitive.space.sidebar-mobile}",
+    "value_nova_dark": "{primitive.space.sidebar-mobile}",
     "css_variable": "--space-layout-sidebar-mobile",
     "tier": "semantic",
     "status": "active"
@@ -1035,6 +1303,8 @@
     "path": "space.layout.sidebar-icon",
     "value_light": "{primitive.space.12}",
     "value_dark": "{primitive.space.12}",
+    "value_nova_light": "{primitive.space.12}",
+    "value_nova_dark": "{primitive.space.12}",
     "css_variable": "--space-layout-sidebar-icon",
     "tier": "semantic",
     "status": "active"
@@ -1043,6 +1313,8 @@
     "path": "typography.size.xs",
     "value_light": "{primitive.typography.size.xs}",
     "value_dark": "{primitive.typography.size.xs}",
+    "value_nova_light": "{primitive.typography.size.xs}",
+    "value_nova_dark": "{primitive.typography.size.xs}",
     "css_variable": "--typography-size-xs",
     "tier": "semantic",
     "status": "active"
@@ -1051,6 +1323,8 @@
     "path": "typography.size.sm",
     "value_light": "{primitive.typography.size.sm}",
     "value_dark": "{primitive.typography.size.sm}",
+    "value_nova_light": "{primitive.typography.size.sm}",
+    "value_nova_dark": "{primitive.typography.size.sm}",
     "css_variable": "--typography-size-sm",
     "tier": "semantic",
     "status": "active"
@@ -1059,6 +1333,8 @@
     "path": "typography.size.base",
     "value_light": "{primitive.typography.size.base}",
     "value_dark": "{primitive.typography.size.base}",
+    "value_nova_light": "{primitive.typography.size.base}",
+    "value_nova_dark": "{primitive.typography.size.base}",
     "css_variable": "--typography-size-base",
     "tier": "semantic",
     "status": "active"
@@ -1067,6 +1343,8 @@
     "path": "typography.size.lg",
     "value_light": "{primitive.typography.size.lg}",
     "value_dark": "{primitive.typography.size.lg}",
+    "value_nova_light": "{primitive.typography.size.lg}",
+    "value_nova_dark": "{primitive.typography.size.lg}",
     "css_variable": "--typography-size-lg",
     "tier": "semantic",
     "status": "active"
@@ -1075,6 +1353,8 @@
     "path": "typography.size.xl",
     "value_light": "{primitive.typography.size.xl}",
     "value_dark": "{primitive.typography.size.xl}",
+    "value_nova_light": "{primitive.typography.size.xl}",
+    "value_nova_dark": "{primitive.typography.size.xl}",
     "css_variable": "--typography-size-xl",
     "tier": "semantic",
     "status": "active"
@@ -1083,6 +1363,8 @@
     "path": "typography.size.2xl",
     "value_light": "{primitive.typography.size.2xl}",
     "value_dark": "{primitive.typography.size.2xl}",
+    "value_nova_light": "{primitive.typography.size.2xl}",
+    "value_nova_dark": "{primitive.typography.size.2xl}",
     "css_variable": "--typography-size-2xl",
     "tier": "semantic",
     "status": "active"
@@ -1091,6 +1373,8 @@
     "path": "typography.size.3xl",
     "value_light": "{primitive.typography.size.3xl}",
     "value_dark": "{primitive.typography.size.3xl}",
+    "value_nova_light": "{primitive.typography.size.3xl}",
+    "value_nova_dark": "{primitive.typography.size.3xl}",
     "css_variable": "--typography-size-3xl",
     "tier": "semantic",
     "status": "active"
@@ -1099,7 +1383,49 @@
     "path": "typography.size.4xl",
     "value_light": "{primitive.typography.size.4xl}",
     "value_dark": "{primitive.typography.size.4xl}",
+    "value_nova_light": "{primitive.typography.size.4xl}",
+    "value_nova_dark": "{primitive.typography.size.4xl}",
     "css_variable": "--typography-size-4xl",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size.ui",
+    "value_light": "{primitive.typography.size.xs}",
+    "value_dark": "{primitive.typography.size.xs}",
+    "value_nova_light": "{primitive.typography.size.sm}",
+    "value_nova_dark": "{primitive.typography.size.sm}",
+    "css_variable": "--typography-size-ui",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size.description",
+    "value_light": "{primitive.typography.size.xs}",
+    "value_dark": "{primitive.typography.size.xs}",
+    "value_nova_light": "{primitive.typography.size.sm}",
+    "value_nova_dark": "{primitive.typography.size.sm}",
+    "css_variable": "--typography-size-description",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size.title",
+    "value_light": "{primitive.typography.size.sm}",
+    "value_dark": "{primitive.typography.size.sm}",
+    "value_nova_light": "{primitive.typography.size.base}",
+    "value_nova_dark": "{primitive.typography.size.base}",
+    "css_variable": "--typography-size-title",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size.control",
+    "value_light": "{primitive.typography.size.xs}",
+    "value_dark": "{primitive.typography.size.xs}",
+    "value_nova_light": "{primitive.typography.size.base}",
+    "value_nova_dark": "{primitive.typography.size.base}",
+    "css_variable": "--typography-size-control",
     "tier": "semantic",
     "status": "active"
   },
@@ -1107,6 +1433,8 @@
     "path": "typography.size-line-height.xs",
     "value_light": "{primitive.typography.size-line-height.xs}",
     "value_dark": "{primitive.typography.size-line-height.xs}",
+    "value_nova_light": "{primitive.typography.size-line-height.xs}",
+    "value_nova_dark": "{primitive.typography.size-line-height.xs}",
     "css_variable": "--typography-size-line-height-xs",
     "tier": "semantic",
     "status": "active"
@@ -1115,6 +1443,8 @@
     "path": "typography.size-line-height.sm",
     "value_light": "{primitive.typography.size-line-height.sm}",
     "value_dark": "{primitive.typography.size-line-height.sm}",
+    "value_nova_light": "{primitive.typography.size-line-height.sm}",
+    "value_nova_dark": "{primitive.typography.size-line-height.sm}",
     "css_variable": "--typography-size-line-height-sm",
     "tier": "semantic",
     "status": "active"
@@ -1123,6 +1453,8 @@
     "path": "typography.size-line-height.base",
     "value_light": "{primitive.typography.size-line-height.base}",
     "value_dark": "{primitive.typography.size-line-height.base}",
+    "value_nova_light": "{primitive.typography.size-line-height.base}",
+    "value_nova_dark": "{primitive.typography.size-line-height.base}",
     "css_variable": "--typography-size-line-height-base",
     "tier": "semantic",
     "status": "active"
@@ -1131,6 +1463,8 @@
     "path": "typography.size-line-height.lg",
     "value_light": "{primitive.typography.size-line-height.lg}",
     "value_dark": "{primitive.typography.size-line-height.lg}",
+    "value_nova_light": "{primitive.typography.size-line-height.lg}",
+    "value_nova_dark": "{primitive.typography.size-line-height.lg}",
     "css_variable": "--typography-size-line-height-lg",
     "tier": "semantic",
     "status": "active"
@@ -1139,6 +1473,8 @@
     "path": "typography.size-line-height.xl",
     "value_light": "{primitive.typography.size-line-height.xl}",
     "value_dark": "{primitive.typography.size-line-height.xl}",
+    "value_nova_light": "{primitive.typography.size-line-height.xl}",
+    "value_nova_dark": "{primitive.typography.size-line-height.xl}",
     "css_variable": "--typography-size-line-height-xl",
     "tier": "semantic",
     "status": "active"
@@ -1147,6 +1483,8 @@
     "path": "typography.size-line-height.2xl",
     "value_light": "{primitive.typography.size-line-height.2xl}",
     "value_dark": "{primitive.typography.size-line-height.2xl}",
+    "value_nova_light": "{primitive.typography.size-line-height.2xl}",
+    "value_nova_dark": "{primitive.typography.size-line-height.2xl}",
     "css_variable": "--typography-size-line-height-2xl",
     "tier": "semantic",
     "status": "active"
@@ -1155,6 +1493,8 @@
     "path": "typography.size-line-height.3xl",
     "value_light": "{primitive.typography.size-line-height.3xl}",
     "value_dark": "{primitive.typography.size-line-height.3xl}",
+    "value_nova_light": "{primitive.typography.size-line-height.3xl}",
+    "value_nova_dark": "{primitive.typography.size-line-height.3xl}",
     "css_variable": "--typography-size-line-height-3xl",
     "tier": "semantic",
     "status": "active"
@@ -1163,7 +1503,49 @@
     "path": "typography.size-line-height.4xl",
     "value_light": "{primitive.typography.size-line-height.4xl}",
     "value_dark": "{primitive.typography.size-line-height.4xl}",
+    "value_nova_light": "{primitive.typography.size-line-height.4xl}",
+    "value_nova_dark": "{primitive.typography.size-line-height.4xl}",
     "css_variable": "--typography-size-line-height-4xl",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.ui",
+    "value_light": "{primitive.typography.size-line-height.xs}",
+    "value_dark": "{primitive.typography.size-line-height.xs}",
+    "value_nova_light": "{primitive.typography.size-line-height.sm}",
+    "value_nova_dark": "{primitive.typography.size-line-height.sm}",
+    "css_variable": "--typography-size-line-height-ui",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.description",
+    "value_light": "{primitive.typography.line-height.relaxed}",
+    "value_dark": "{primitive.typography.line-height.relaxed}",
+    "value_nova_light": "{primitive.typography.size-line-height.sm}",
+    "value_nova_dark": "{primitive.typography.size-line-height.sm}",
+    "css_variable": "--typography-size-line-height-description",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.title",
+    "value_light": "{primitive.typography.size-line-height.sm}",
+    "value_dark": "{primitive.typography.size-line-height.sm}",
+    "value_nova_light": "{primitive.typography.size-line-height.base}",
+    "value_nova_dark": "{primitive.typography.size-line-height.base}",
+    "css_variable": "--typography-size-line-height-title",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.size-line-height.control",
+    "value_light": "{primitive.typography.size-line-height.xs}",
+    "value_dark": "{primitive.typography.size-line-height.xs}",
+    "value_nova_light": "{primitive.typography.size-line-height.base}",
+    "value_nova_dark": "{primitive.typography.size-line-height.base}",
+    "css_variable": "--typography-size-line-height-control",
     "tier": "semantic",
     "status": "active"
   },
@@ -1171,6 +1553,8 @@
     "path": "typography.line-height.tight",
     "value_light": "{primitive.typography.line-height.tight}",
     "value_dark": "{primitive.typography.line-height.tight}",
+    "value_nova_light": "{primitive.typography.line-height.tight}",
+    "value_nova_dark": "{primitive.typography.line-height.tight}",
     "css_variable": "--typography-line-height-tight",
     "tier": "semantic",
     "status": "active"
@@ -1179,6 +1563,8 @@
     "path": "typography.line-height.snug",
     "value_light": "{primitive.typography.line-height.snug}",
     "value_dark": "{primitive.typography.line-height.snug}",
+    "value_nova_light": "{primitive.typography.line-height.snug}",
+    "value_nova_dark": "{primitive.typography.line-height.snug}",
     "css_variable": "--typography-line-height-snug",
     "tier": "semantic",
     "status": "active"
@@ -1187,6 +1573,8 @@
     "path": "typography.line-height.normal",
     "value_light": "{primitive.typography.line-height.normal}",
     "value_dark": "{primitive.typography.line-height.normal}",
+    "value_nova_light": "{primitive.typography.line-height.normal}",
+    "value_nova_dark": "{primitive.typography.line-height.normal}",
     "css_variable": "--typography-line-height-normal",
     "tier": "semantic",
     "status": "active"
@@ -1195,6 +1583,8 @@
     "path": "typography.line-height.relaxed",
     "value_light": "{primitive.typography.line-height.relaxed}",
     "value_dark": "{primitive.typography.line-height.relaxed}",
+    "value_nova_light": "{primitive.typography.line-height.relaxed}",
+    "value_nova_dark": "{primitive.typography.line-height.relaxed}",
     "css_variable": "--typography-line-height-relaxed",
     "tier": "semantic",
     "status": "active"
@@ -1203,6 +1593,8 @@
     "path": "typography.line-height.loose",
     "value_light": "{primitive.typography.line-height.loose}",
     "value_dark": "{primitive.typography.line-height.loose}",
+    "value_nova_light": "{primitive.typography.line-height.loose}",
+    "value_nova_dark": "{primitive.typography.line-height.loose}",
     "css_variable": "--typography-line-height-loose",
     "tier": "semantic",
     "status": "active"
@@ -1211,6 +1603,8 @@
     "path": "typography.letter-spacing.tight",
     "value_light": "{primitive.typography.letter-spacing.tight}",
     "value_dark": "{primitive.typography.letter-spacing.tight}",
+    "value_nova_light": "{primitive.typography.letter-spacing.tight}",
+    "value_nova_dark": "{primitive.typography.letter-spacing.tight}",
     "css_variable": "--typography-letter-spacing-tight",
     "tier": "semantic",
     "status": "active"
@@ -1219,6 +1613,8 @@
     "path": "typography.letter-spacing.normal",
     "value_light": "{primitive.typography.letter-spacing.normal}",
     "value_dark": "{primitive.typography.letter-spacing.normal}",
+    "value_nova_light": "{primitive.typography.letter-spacing.normal}",
+    "value_nova_dark": "{primitive.typography.letter-spacing.normal}",
     "css_variable": "--typography-letter-spacing-normal",
     "tier": "semantic",
     "status": "active"
@@ -1227,6 +1623,8 @@
     "path": "typography.letter-spacing.wide",
     "value_light": "{primitive.typography.letter-spacing.wide}",
     "value_dark": "{primitive.typography.letter-spacing.wide}",
+    "value_nova_light": "{primitive.typography.letter-spacing.wide}",
+    "value_nova_dark": "{primitive.typography.letter-spacing.wide}",
     "css_variable": "--typography-letter-spacing-wide",
     "tier": "semantic",
     "status": "active"
@@ -1235,6 +1633,8 @@
     "path": "typography.letter-spacing.wider",
     "value_light": "{primitive.typography.letter-spacing.wider}",
     "value_dark": "{primitive.typography.letter-spacing.wider}",
+    "value_nova_light": "{primitive.typography.letter-spacing.wider}",
+    "value_nova_dark": "{primitive.typography.letter-spacing.wider}",
     "css_variable": "--typography-letter-spacing-wider",
     "tier": "semantic",
     "status": "active"
@@ -1243,6 +1643,8 @@
     "path": "typography.letter-spacing.widest",
     "value_light": "{primitive.typography.letter-spacing.widest}",
     "value_dark": "{primitive.typography.letter-spacing.widest}",
+    "value_nova_light": "{primitive.typography.letter-spacing.widest}",
+    "value_nova_dark": "{primitive.typography.letter-spacing.widest}",
     "css_variable": "--typography-letter-spacing-widest",
     "tier": "semantic",
     "status": "active"
@@ -1251,6 +1653,8 @@
     "path": "typography.font-weight.normal",
     "value_light": "{primitive.typography.font-weight.normal}",
     "value_dark": "{primitive.typography.font-weight.normal}",
+    "value_nova_light": "{primitive.typography.font-weight.normal}",
+    "value_nova_dark": "{primitive.typography.font-weight.normal}",
     "css_variable": "--typography-font-weight-normal",
     "tier": "semantic",
     "status": "active"
@@ -1259,6 +1663,8 @@
     "path": "typography.font-weight.medium",
     "value_light": "{primitive.typography.font-weight.medium}",
     "value_dark": "{primitive.typography.font-weight.medium}",
+    "value_nova_light": "{primitive.typography.font-weight.medium}",
+    "value_nova_dark": "{primitive.typography.font-weight.medium}",
     "css_variable": "--typography-font-weight-medium",
     "tier": "semantic",
     "status": "active"
@@ -1267,6 +1673,8 @@
     "path": "typography.font-weight.semibold",
     "value_light": "{primitive.typography.font-weight.semibold}",
     "value_dark": "{primitive.typography.font-weight.semibold}",
+    "value_nova_light": "{primitive.typography.font-weight.semibold}",
+    "value_nova_dark": "{primitive.typography.font-weight.semibold}",
     "css_variable": "--typography-font-weight-semibold",
     "tier": "semantic",
     "status": "active"
@@ -1275,6 +1683,8 @@
     "path": "typography.font-weight.bold",
     "value_light": "{primitive.typography.font-weight.bold}",
     "value_dark": "{primitive.typography.font-weight.bold}",
+    "value_nova_light": "{primitive.typography.font-weight.bold}",
+    "value_nova_dark": "{primitive.typography.font-weight.bold}",
     "css_variable": "--typography-font-weight-bold",
     "tier": "semantic",
     "status": "active"
@@ -1283,6 +1693,8 @@
     "path": "typography.font-family.sans",
     "value_light": "{primitive.typography.font-family.sans}",
     "value_dark": "{primitive.typography.font-family.sans}",
+    "value_nova_light": "{primitive.typography.font-family.dm-sans}",
+    "value_nova_dark": "{primitive.typography.font-family.dm-sans}",
     "css_variable": "--typography-font-family-sans",
     "tier": "semantic",
     "status": "active"
@@ -1291,7 +1703,29 @@
     "path": "typography.font-family.mono",
     "value_light": "{primitive.typography.font-family.mono}",
     "value_dark": "{primitive.typography.font-family.mono}",
+    "value_nova_light": "{primitive.typography.font-family.geist-mono}",
+    "value_nova_dark": "{primitive.typography.font-family.geist-mono}",
     "css_variable": "--typography-font-family-mono",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.font-family.body",
+    "value_light": "{primitive.typography.font-family.mono}",
+    "value_dark": "{primitive.typography.font-family.mono}",
+    "value_nova_light": "{primitive.typography.font-family.lora}",
+    "value_nova_dark": "{primitive.typography.font-family.lora}",
+    "css_variable": "--typography-font-family-body",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "typography.font-family.heading",
+    "value_light": "{primitive.typography.font-family.mono}",
+    "value_dark": "{primitive.typography.font-family.mono}",
+    "value_nova_light": "{primitive.typography.font-family.dm-sans}",
+    "value_nova_dark": "{primitive.typography.font-family.dm-sans}",
+    "css_variable": "--typography-font-family-heading",
     "tier": "semantic",
     "status": "active"
   },
@@ -1299,14 +1733,18 @@
     "path": "radius.none",
     "value_light": "{primitive.radius.none}",
     "value_dark": "{primitive.radius.none}",
+    "value_nova_light": "{primitive.radius.none}",
+    "value_nova_dark": "{primitive.radius.none}",
     "css_variable": "--radius-none",
     "tier": "semantic",
-    "status": "active"
+    "status": "reserved"
   },
   {
     "path": "radius.xs",
     "value_light": "{primitive.radius.xs}",
     "value_dark": "{primitive.radius.xs}",
+    "value_nova_light": "{primitive.radius.xs}",
+    "value_nova_dark": "{primitive.radius.xs}",
     "css_variable": "--radius-xs",
     "tier": "semantic",
     "status": "active"
@@ -1315,6 +1753,8 @@
     "path": "radius.sm",
     "value_light": "{primitive.radius.sm}",
     "value_dark": "{primitive.radius.sm}",
+    "value_nova_light": "{primitive.radius.sm}",
+    "value_nova_dark": "{primitive.radius.sm}",
     "css_variable": "--radius-sm",
     "tier": "semantic",
     "status": "active"
@@ -1323,6 +1763,8 @@
     "path": "radius.md",
     "value_light": "{primitive.radius.md}",
     "value_dark": "{primitive.radius.md}",
+    "value_nova_light": "{primitive.radius.md}",
+    "value_nova_dark": "{primitive.radius.md}",
     "css_variable": "--radius-md",
     "tier": "semantic",
     "status": "active"
@@ -1331,6 +1773,8 @@
     "path": "radius.lg",
     "value_light": "{primitive.radius.lg}",
     "value_dark": "{primitive.radius.lg}",
+    "value_nova_light": "{primitive.radius.lg}",
+    "value_nova_dark": "{primitive.radius.lg}",
     "css_variable": "--radius-lg",
     "tier": "semantic",
     "status": "active"
@@ -1339,6 +1783,8 @@
     "path": "radius.xl",
     "value_light": "{primitive.radius.xl}",
     "value_dark": "{primitive.radius.xl}",
+    "value_nova_light": "{primitive.radius.xl}",
+    "value_nova_dark": "{primitive.radius.xl}",
     "css_variable": "--radius-xl",
     "tier": "semantic",
     "status": "active"
@@ -1347,6 +1793,8 @@
     "path": "radius.2xl",
     "value_light": "{primitive.radius.2xl}",
     "value_dark": "{primitive.radius.2xl}",
+    "value_nova_light": "{primitive.radius.2xl}",
+    "value_nova_dark": "{primitive.radius.2xl}",
     "css_variable": "--radius-2xl",
     "tier": "semantic",
     "status": "active"
@@ -1355,6 +1803,8 @@
     "path": "radius.3xl",
     "value_light": "{primitive.radius.3xl}",
     "value_dark": "{primitive.radius.3xl}",
+    "value_nova_light": "{primitive.radius.3xl}",
+    "value_nova_dark": "{primitive.radius.3xl}",
     "css_variable": "--radius-3xl",
     "tier": "semantic",
     "status": "active"
@@ -1363,6 +1813,8 @@
     "path": "radius.4xl",
     "value_light": "{primitive.radius.4xl}",
     "value_dark": "{primitive.radius.4xl}",
+    "value_nova_light": "{primitive.radius.4xl}",
+    "value_nova_dark": "{primitive.radius.4xl}",
     "css_variable": "--radius-4xl",
     "tier": "semantic",
     "status": "active"
@@ -1371,14 +1823,78 @@
     "path": "radius.full",
     "value_light": "{primitive.radius.full}",
     "value_dark": "{primitive.radius.full}",
+    "value_nova_light": "{primitive.radius.full}",
+    "value_nova_dark": "{primitive.radius.full}",
     "css_variable": "--radius-full",
     "tier": "semantic",
     "status": "reserved"
   },
   {
+    "path": "radius.surface",
+    "value_light": "{primitive.radius.none}",
+    "value_dark": "{primitive.radius.none}",
+    "value_nova_light": "{primitive.radius.xl}",
+    "value_nova_dark": "{primitive.radius.xl}",
+    "css_variable": "--radius-surface",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "radius.control",
+    "value_light": "{primitive.radius.none}",
+    "value_dark": "{primitive.radius.none}",
+    "value_nova_light": "{primitive.radius.lg}",
+    "value_nova_dark": "{primitive.radius.lg}",
+    "css_variable": "--radius-control",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "radius.item",
+    "value_light": "{primitive.radius.none}",
+    "value_dark": "{primitive.radius.none}",
+    "value_nova_light": "{primitive.radius.md}",
+    "value_nova_dark": "{primitive.radius.md}",
+    "css_variable": "--radius-item",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "radius.inset",
+    "value_light": "{primitive.radius.none}",
+    "value_dark": "{primitive.radius.none}",
+    "value_nova_light": "{primitive.radius.sm}",
+    "value_nova_dark": "{primitive.radius.sm}",
+    "css_variable": "--radius-inset",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "radius.mark",
+    "value_light": "{primitive.radius.none}",
+    "value_dark": "{primitive.radius.none}",
+    "value_nova_light": "{primitive.radius.xs}",
+    "value_nova_dark": "{primitive.radius.xs}",
+    "css_variable": "--radius-mark",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
+    "path": "radius.pill",
+    "value_light": "{primitive.radius.none}",
+    "value_dark": "{primitive.radius.none}",
+    "value_nova_light": "{primitive.radius.full}",
+    "value_nova_dark": "{primitive.radius.full}",
+    "css_variable": "--radius-pill",
+    "tier": "semantic",
+    "status": "active"
+  },
+  {
     "path": "elevation.xs",
     "value_light": "{primitive.elevation.light.xs}",
     "value_dark": "{primitive.elevation.dark.xs}",
+    "value_nova_light": "{primitive.elevation.light.xs}",
+    "value_nova_dark": "{primitive.elevation.dark.xs}",
     "css_variable": "--elevation-xs",
     "tier": "semantic",
     "status": "active"
@@ -1387,6 +1903,8 @@
     "path": "elevation.sm",
     "value_light": "{primitive.elevation.light.sm}",
     "value_dark": "{primitive.elevation.dark.sm}",
+    "value_nova_light": "{primitive.elevation.light.sm}",
+    "value_nova_dark": "{primitive.elevation.dark.sm}",
     "css_variable": "--elevation-sm",
     "tier": "semantic",
     "status": "active"
@@ -1395,6 +1913,8 @@
     "path": "elevation.md",
     "value_light": "{primitive.elevation.light.md}",
     "value_dark": "{primitive.elevation.dark.md}",
+    "value_nova_light": "{primitive.elevation.light.md}",
+    "value_nova_dark": "{primitive.elevation.dark.md}",
     "css_variable": "--elevation-md",
     "tier": "semantic",
     "status": "active"
@@ -1403,6 +1923,8 @@
     "path": "elevation.lg",
     "value_light": "{primitive.elevation.light.lg}",
     "value_dark": "{primitive.elevation.dark.lg}",
+    "value_nova_light": "{primitive.elevation.light.lg}",
+    "value_nova_dark": "{primitive.elevation.dark.lg}",
     "css_variable": "--elevation-lg",
     "tier": "semantic",
     "status": "active"
@@ -1411,6 +1933,8 @@
     "path": "elevation.xl",
     "value_light": "{primitive.elevation.light.xl}",
     "value_dark": "{primitive.elevation.dark.xl}",
+    "value_nova_light": "{primitive.elevation.light.xl}",
+    "value_nova_dark": "{primitive.elevation.dark.xl}",
     "css_variable": "--elevation-xl",
     "tier": "semantic",
     "status": "active"
@@ -1419,6 +1943,8 @@
     "path": "elevation.2xl",
     "value_light": "{primitive.elevation.light.2xl}",
     "value_dark": "{primitive.elevation.dark.2xl}",
+    "value_nova_light": "{primitive.elevation.light.2xl}",
+    "value_nova_dark": "{primitive.elevation.dark.2xl}",
     "css_variable": "--elevation-2xl",
     "tier": "semantic",
     "status": "active"
@@ -1427,6 +1953,8 @@
     "path": "elevation.inner",
     "value_light": "{primitive.elevation.light.inner}",
     "value_dark": "{primitive.elevation.dark.inner}",
+    "value_nova_light": "{primitive.elevation.light.inner}",
+    "value_nova_dark": "{primitive.elevation.dark.inner}",
     "css_variable": "--elevation-inner",
     "tier": "semantic",
     "status": "active"
@@ -1435,6 +1963,8 @@
     "path": "motion.duration.instant",
     "value_light": "{primitive.motion.duration.instant}",
     "value_dark": "{primitive.motion.duration.instant}",
+    "value_nova_light": "{primitive.motion.duration.instant}",
+    "value_nova_dark": "{primitive.motion.duration.instant}",
     "css_variable": "--motion-duration-instant",
     "tier": "semantic",
     "status": "reserved"
@@ -1443,6 +1973,8 @@
     "path": "motion.duration.fast",
     "value_light": "{primitive.motion.duration.fast}",
     "value_dark": "{primitive.motion.duration.fast}",
+    "value_nova_light": "{primitive.motion.duration.fast}",
+    "value_nova_dark": "{primitive.motion.duration.fast}",
     "css_variable": "--motion-duration-fast",
     "tier": "semantic",
     "status": "active"
@@ -1451,6 +1983,8 @@
     "path": "motion.duration.normal",
     "value_light": "{primitive.motion.duration.normal}",
     "value_dark": "{primitive.motion.duration.normal}",
+    "value_nova_light": "{primitive.motion.duration.normal}",
+    "value_nova_dark": "{primitive.motion.duration.normal}",
     "css_variable": "--motion-duration-normal",
     "tier": "semantic",
     "status": "active"
@@ -1459,6 +1993,8 @@
     "path": "motion.duration.slow",
     "value_light": "{primitive.motion.duration.slow}",
     "value_dark": "{primitive.motion.duration.slow}",
+    "value_nova_light": "{primitive.motion.duration.slow}",
+    "value_nova_dark": "{primitive.motion.duration.slow}",
     "css_variable": "--motion-duration-slow",
     "tier": "semantic",
     "status": "active"
@@ -1467,6 +2003,8 @@
     "path": "motion.duration.slower",
     "value_light": "{primitive.motion.duration.slower}",
     "value_dark": "{primitive.motion.duration.slower}",
+    "value_nova_light": "{primitive.motion.duration.slower}",
+    "value_nova_dark": "{primitive.motion.duration.slower}",
     "css_variable": "--motion-duration-slower",
     "tier": "semantic",
     "status": "active"
@@ -1475,6 +2013,8 @@
     "path": "motion.duration.extra-slow",
     "value_light": "{primitive.motion.duration.extra-slow}",
     "value_dark": "{primitive.motion.duration.extra-slow}",
+    "value_nova_light": "{primitive.motion.duration.extra-slow}",
+    "value_nova_dark": "{primitive.motion.duration.extra-slow}",
     "css_variable": "--motion-duration-extra-slow",
     "tier": "semantic",
     "status": "active"
@@ -1483,6 +2023,8 @@
     "path": "motion.easing.default",
     "value_light": "{primitive.motion.easing.default}",
     "value_dark": "{primitive.motion.easing.default}",
+    "value_nova_light": "{primitive.motion.easing.default}",
+    "value_nova_dark": "{primitive.motion.easing.default}",
     "css_variable": "--motion-easing-default",
     "tier": "semantic",
     "status": "active"
@@ -1491,6 +2033,8 @@
     "path": "motion.easing.in",
     "value_light": "{primitive.motion.easing.in}",
     "value_dark": "{primitive.motion.easing.in}",
+    "value_nova_light": "{primitive.motion.easing.in}",
+    "value_nova_dark": "{primitive.motion.easing.in}",
     "css_variable": "--motion-easing-in",
     "tier": "semantic",
     "status": "active"
@@ -1499,6 +2043,8 @@
     "path": "motion.easing.out",
     "value_light": "{primitive.motion.easing.out}",
     "value_dark": "{primitive.motion.easing.out}",
+    "value_nova_light": "{primitive.motion.easing.out}",
+    "value_nova_dark": "{primitive.motion.easing.out}",
     "css_variable": "--motion-easing-out",
     "tier": "semantic",
     "status": "active"
@@ -1507,6 +2053,8 @@
     "path": "motion.easing.spring",
     "value_light": "{primitive.motion.easing.spring}",
     "value_dark": "{primitive.motion.easing.spring}",
+    "value_nova_light": "{primitive.motion.easing.spring}",
+    "value_nova_dark": "{primitive.motion.easing.spring}",
     "css_variable": "--motion-easing-spring",
     "tier": "semantic",
     "status": "active"
@@ -1515,6 +2063,8 @@
     "path": "opacity.disabled",
     "value_light": "{primitive.opacity.0-50}",
     "value_dark": "{primitive.opacity.0-50}",
+    "value_nova_light": "{primitive.opacity.0-50}",
+    "value_nova_dark": "{primitive.opacity.0-50}",
     "css_variable": "--opacity-disabled",
     "tier": "semantic",
     "status": "active"
@@ -1523,6 +2073,8 @@
     "path": "opacity.placeholder",
     "value_light": "{primitive.opacity.0-50}",
     "value_dark": "{primitive.opacity.0-50}",
+    "value_nova_light": "{primitive.opacity.0-50}",
+    "value_nova_dark": "{primitive.opacity.0-50}",
     "css_variable": "--opacity-placeholder",
     "tier": "semantic",
     "status": "deprecated"
@@ -1531,6 +2083,8 @@
     "path": "opacity.overlay",
     "value_light": "{primitive.opacity.0-80}",
     "value_dark": "{primitive.opacity.0-80}",
+    "value_nova_light": "{primitive.opacity.0-80}",
+    "value_nova_dark": "{primitive.opacity.0-80}",
     "css_variable": "--opacity-overlay",
     "tier": "semantic",
     "status": "deprecated"
@@ -1539,6 +2093,8 @@
     "path": "zindex.dropdown",
     "value_light": "{primitive.zindex.dropdown}",
     "value_dark": "{primitive.zindex.dropdown}",
+    "value_nova_light": "{primitive.zindex.dropdown}",
+    "value_nova_dark": "{primitive.zindex.dropdown}",
     "css_variable": "--zindex-dropdown",
     "tier": "semantic",
     "status": "active"
@@ -1547,6 +2103,8 @@
     "path": "zindex.sticky",
     "value_light": "{primitive.zindex.sticky}",
     "value_dark": "{primitive.zindex.sticky}",
+    "value_nova_light": "{primitive.zindex.sticky}",
+    "value_nova_dark": "{primitive.zindex.sticky}",
     "css_variable": "--zindex-sticky",
     "tier": "semantic",
     "status": "active"
@@ -1555,6 +2113,8 @@
     "path": "zindex.fixed",
     "value_light": "{primitive.zindex.fixed}",
     "value_dark": "{primitive.zindex.fixed}",
+    "value_nova_light": "{primitive.zindex.fixed}",
+    "value_nova_dark": "{primitive.zindex.fixed}",
     "css_variable": "--zindex-fixed",
     "tier": "semantic",
     "status": "active"
@@ -1563,6 +2123,8 @@
     "path": "zindex.overlay",
     "value_light": "{primitive.zindex.overlay}",
     "value_dark": "{primitive.zindex.overlay}",
+    "value_nova_light": "{primitive.zindex.overlay}",
+    "value_nova_dark": "{primitive.zindex.overlay}",
     "css_variable": "--zindex-overlay",
     "tier": "semantic",
     "status": "active"
@@ -1571,6 +2133,8 @@
     "path": "zindex.modal",
     "value_light": "{primitive.zindex.modal}",
     "value_dark": "{primitive.zindex.modal}",
+    "value_nova_light": "{primitive.zindex.modal}",
+    "value_nova_dark": "{primitive.zindex.modal}",
     "css_variable": "--zindex-modal",
     "tier": "semantic",
     "status": "active"
@@ -1579,6 +2143,8 @@
     "path": "zindex.popover",
     "value_light": "{primitive.zindex.popover}",
     "value_dark": "{primitive.zindex.popover}",
+    "value_nova_light": "{primitive.zindex.popover}",
+    "value_nova_dark": "{primitive.zindex.popover}",
     "css_variable": "--zindex-popover",
     "tier": "semantic",
     "status": "active"
@@ -1587,6 +2153,8 @@
     "path": "zindex.toast",
     "value_light": "{primitive.zindex.toast}",
     "value_dark": "{primitive.zindex.toast}",
+    "value_nova_light": "{primitive.zindex.toast}",
+    "value_nova_dark": "{primitive.zindex.toast}",
     "css_variable": "--zindex-toast",
     "tier": "semantic",
     "status": "active"
@@ -1595,6 +2163,8 @@
     "path": "zindex.tooltip",
     "value_light": "{primitive.zindex.tooltip}",
     "value_dark": "{primitive.zindex.tooltip}",
+    "value_nova_light": "{primitive.zindex.tooltip}",
+    "value_nova_dark": "{primitive.zindex.tooltip}",
     "css_variable": "--zindex-tooltip",
     "tier": "semantic",
     "status": "active"
@@ -1603,6 +2173,8 @@
     "path": "breakpoint.sm",
     "value_light": "{primitive.breakpoint.sm}",
     "value_dark": "{primitive.breakpoint.sm}",
+    "value_nova_light": "{primitive.breakpoint.sm}",
+    "value_nova_dark": "{primitive.breakpoint.sm}",
     "css_variable": "--breakpoint-sm",
     "tier": "semantic",
     "status": "active"
@@ -1611,6 +2183,8 @@
     "path": "breakpoint.md",
     "value_light": "{primitive.breakpoint.md}",
     "value_dark": "{primitive.breakpoint.md}",
+    "value_nova_light": "{primitive.breakpoint.md}",
+    "value_nova_dark": "{primitive.breakpoint.md}",
     "css_variable": "--breakpoint-md",
     "tier": "semantic",
     "status": "active"
@@ -1619,6 +2193,8 @@
     "path": "breakpoint.lg",
     "value_light": "{primitive.breakpoint.lg}",
     "value_dark": "{primitive.breakpoint.lg}",
+    "value_nova_light": "{primitive.breakpoint.lg}",
+    "value_nova_dark": "{primitive.breakpoint.lg}",
     "css_variable": "--breakpoint-lg",
     "tier": "semantic",
     "status": "active"
@@ -1627,6 +2203,8 @@
     "path": "breakpoint.xl",
     "value_light": "{primitive.breakpoint.xl}",
     "value_dark": "{primitive.breakpoint.xl}",
+    "value_nova_light": "{primitive.breakpoint.xl}",
+    "value_nova_dark": "{primitive.breakpoint.xl}",
     "css_variable": "--breakpoint-xl",
     "tier": "semantic",
     "status": "reserved"
@@ -1635,6 +2213,8 @@
     "path": "breakpoint.2xl",
     "value_light": "{primitive.breakpoint.2xl}",
     "value_dark": "{primitive.breakpoint.2xl}",
+    "value_nova_light": "{primitive.breakpoint.2xl}",
+    "value_nova_dark": "{primitive.breakpoint.2xl}",
     "css_variable": "--breakpoint-2xl",
     "tier": "semantic",
     "status": "reserved"
@@ -1643,6 +2223,8 @@
     "path": "border-width.default",
     "value_light": "{primitive.border-width.1}",
     "value_dark": "{primitive.border-width.1}",
+    "value_nova_light": "{primitive.border-width.1}",
+    "value_nova_dark": "{primitive.border-width.1}",
     "css_variable": "--border-width-default",
     "tier": "semantic",
     "status": "active"
@@ -1651,6 +2233,8 @@
     "path": "border-width.chart-indicator",
     "value_light": "{primitive.border-width.1-5}",
     "value_dark": "{primitive.border-width.1-5}",
+    "value_nova_light": "{primitive.border-width.1-5}",
+    "value_nova_dark": "{primitive.border-width.1-5}",
     "css_variable": "--border-width-chart-indicator",
     "tier": "semantic",
     "status": "active"
@@ -1659,6 +2243,8 @@
     "path": "border-width.separation",
     "value_light": "{primitive.border-width.2}",
     "value_dark": "{primitive.border-width.2}",
+    "value_nova_light": "{primitive.border-width.2}",
+    "value_nova_dark": "{primitive.border-width.2}",
     "css_variable": "--border-width-separation",
     "tier": "semantic",
     "status": "active"
@@ -1667,6 +2253,8 @@
     "path": "size.target.min",
     "value_light": "{primitive.space.6}",
     "value_dark": "{primitive.space.6}",
+    "value_nova_light": "{primitive.space.6}",
+    "value_nova_dark": "{primitive.space.6}",
     "css_variable": "--size-target-min",
     "tier": "semantic",
     "status": "active"
@@ -1675,6 +2263,8 @@
     "path": "shadcn.background",
     "value_light": "{color.background.default}",
     "value_dark": "{color.background.default}",
+    "value_nova_light": "{color.background.default}",
+    "value_nova_dark": "{color.background.default}",
     "css_variable": "--background",
     "tier": "component"
   },
@@ -1682,13 +2272,17 @@
     "path": "shadcn.foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
+    "value_nova_light": "{color.text.default}",
+    "value_nova_dark": "{color.text.default}",
     "css_variable": "--foreground",
     "tier": "component"
   },
   {
     "path": "shadcn.card",
-    "value_light": "{color.background.subtle}",
-    "value_dark": "{color.background.subtle}",
+    "value_light": "{color.background.card}",
+    "value_dark": "{color.background.card}",
+    "value_nova_light": "{color.background.card}",
+    "value_nova_dark": "{color.background.card}",
     "css_variable": "--card",
     "tier": "component"
   },
@@ -1696,6 +2290,8 @@
     "path": "shadcn.card-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
+    "value_nova_light": "{color.text.default}",
+    "value_nova_dark": "{color.text.default}",
     "css_variable": "--card-foreground",
     "tier": "component"
   },
@@ -1703,6 +2299,8 @@
     "path": "shadcn.popover",
     "value_light": "{color.background.elevated}",
     "value_dark": "{color.background.elevated}",
+    "value_nova_light": "{color.background.elevated}",
+    "value_nova_dark": "{color.background.elevated}",
     "css_variable": "--popover",
     "tier": "component"
   },
@@ -1710,6 +2308,8 @@
     "path": "shadcn.popover-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
+    "value_nova_light": "{color.text.default}",
+    "value_nova_dark": "{color.text.default}",
     "css_variable": "--popover-foreground",
     "tier": "component"
   },
@@ -1717,6 +2317,8 @@
     "path": "shadcn.primary",
     "value_light": "{color.action.background.default}",
     "value_dark": "{color.action.background.default}",
+    "value_nova_light": "{color.action.background.default}",
+    "value_nova_dark": "{color.action.background.default}",
     "css_variable": "--primary",
     "tier": "component"
   },
@@ -1724,6 +2326,8 @@
     "path": "shadcn.primary-foreground",
     "value_light": "{color.action.background.foreground}",
     "value_dark": "{color.action.background.foreground}",
+    "value_nova_light": "{color.action.background.foreground}",
+    "value_nova_dark": "{color.action.background.foreground}",
     "css_variable": "--primary-foreground",
     "tier": "component"
   },
@@ -1731,6 +2335,8 @@
     "path": "shadcn.secondary",
     "value_light": "{color.background.subtle}",
     "value_dark": "{color.background.subtle}",
+    "value_nova_light": "{color.background.subtle}",
+    "value_nova_dark": "{color.background.subtle}",
     "css_variable": "--secondary",
     "tier": "component"
   },
@@ -1738,6 +2344,8 @@
     "path": "shadcn.secondary-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
+    "value_nova_light": "{color.text.default}",
+    "value_nova_dark": "{color.text.default}",
     "css_variable": "--secondary-foreground",
     "tier": "component"
   },
@@ -1745,6 +2353,8 @@
     "path": "shadcn.muted",
     "value_light": "{color.background.subtle}",
     "value_dark": "{color.background.subtle}",
+    "value_nova_light": "{color.background.subtle}",
+    "value_nova_dark": "{color.background.subtle}",
     "css_variable": "--muted",
     "tier": "component"
   },
@@ -1752,6 +2362,8 @@
     "path": "shadcn.muted-foreground",
     "value_light": "{color.text.subtle}",
     "value_dark": "{color.text.subtle}",
+    "value_nova_light": "{color.text.subtle}",
+    "value_nova_dark": "{color.text.subtle}",
     "css_variable": "--muted-foreground",
     "tier": "component"
   },
@@ -1759,6 +2371,8 @@
     "path": "shadcn.accent",
     "value_light": "{color.background.subtle}",
     "value_dark": "{color.background.subtle}",
+    "value_nova_light": "{color.background.subtle}",
+    "value_nova_dark": "{color.background.subtle}",
     "css_variable": "--accent",
     "tier": "component"
   },
@@ -1766,6 +2380,8 @@
     "path": "shadcn.accent-foreground",
     "value_light": "{color.text.default}",
     "value_dark": "{color.text.default}",
+    "value_nova_light": "{color.text.default}",
+    "value_nova_dark": "{color.text.default}",
     "css_variable": "--accent-foreground",
     "tier": "component"
   },
@@ -1773,6 +2389,8 @@
     "path": "shadcn.destructive",
     "value_light": "{color.feedback.error.default}",
     "value_dark": "{color.feedback.error.default}",
+    "value_nova_light": "{color.feedback.error.default}",
+    "value_nova_dark": "{color.feedback.error.default}",
     "css_variable": "--destructive",
     "tier": "component"
   },
@@ -1780,6 +2398,8 @@
     "path": "shadcn.destructive-foreground",
     "value_light": "{color.feedback.error.foreground}",
     "value_dark": "{color.feedback.error.foreground}",
+    "value_nova_light": "{color.feedback.error.foreground}",
+    "value_nova_dark": "{color.feedback.error.foreground}",
     "css_variable": "--destructive-foreground",
     "tier": "component"
   },
@@ -1787,6 +2407,8 @@
     "path": "shadcn.border",
     "value_light": "{color.border.default}",
     "value_dark": "{color.border.default}",
+    "value_nova_light": "{color.border.default}",
+    "value_nova_dark": "{color.border.default}",
     "css_variable": "--border",
     "tier": "component"
   },
@@ -1794,6 +2416,8 @@
     "path": "shadcn.input",
     "value_light": "{color.border.input}",
     "value_dark": "{color.border.input}",
+    "value_nova_light": "{color.border.input}",
+    "value_nova_dark": "{color.border.input}",
     "css_variable": "--input",
     "tier": "component"
   },
@@ -1801,6 +2425,8 @@
     "path": "shadcn.ring",
     "value_light": "{color.border.focus}",
     "value_dark": "{color.border.focus}",
+    "value_nova_light": "{color.border.focus}",
+    "value_nova_dark": "{color.border.focus}",
     "css_variable": "--ring",
     "tier": "component"
   },
@@ -1808,6 +2434,8 @@
     "path": "shadcn.radius",
     "value_light": "{radius.lg}",
     "value_dark": "{radius.lg}",
+    "value_nova_light": "{radius.lg}",
+    "value_nova_dark": "{radius.lg}",
     "css_variable": "--radius",
     "tier": "component"
   },
@@ -1815,6 +2443,8 @@
     "path": "shadcn.chart-1",
     "value_light": "{color.chart.1}",
     "value_dark": "{color.chart.1}",
+    "value_nova_light": "{color.chart.1}",
+    "value_nova_dark": "{color.chart.1}",
     "css_variable": "--chart-1",
     "tier": "component"
   },
@@ -1822,6 +2452,8 @@
     "path": "shadcn.chart-2",
     "value_light": "{color.chart.2}",
     "value_dark": "{color.chart.2}",
+    "value_nova_light": "{color.chart.2}",
+    "value_nova_dark": "{color.chart.2}",
     "css_variable": "--chart-2",
     "tier": "component"
   },
@@ -1829,6 +2461,8 @@
     "path": "shadcn.chart-3",
     "value_light": "{color.chart.3}",
     "value_dark": "{color.chart.3}",
+    "value_nova_light": "{color.chart.3}",
+    "value_nova_dark": "{color.chart.3}",
     "css_variable": "--chart-3",
     "tier": "component"
   },
@@ -1836,6 +2470,8 @@
     "path": "shadcn.chart-4",
     "value_light": "{color.chart.4}",
     "value_dark": "{color.chart.4}",
+    "value_nova_light": "{color.chart.4}",
+    "value_nova_dark": "{color.chart.4}",
     "css_variable": "--chart-4",
     "tier": "component"
   },
@@ -1843,6 +2479,8 @@
     "path": "shadcn.chart-5",
     "value_light": "{color.chart.5}",
     "value_dark": "{color.chart.5}",
+    "value_nova_light": "{color.chart.5}",
+    "value_nova_dark": "{color.chart.5}",
     "css_variable": "--chart-5",
     "tier": "component"
   },
@@ -1850,6 +2488,8 @@
     "path": "shadcn.sidebar",
     "value_light": "{color.sidebar.background}",
     "value_dark": "{color.sidebar.background}",
+    "value_nova_light": "{color.sidebar.background}",
+    "value_nova_dark": "{color.sidebar.background}",
     "css_variable": "--sidebar",
     "tier": "component"
   },
@@ -1857,6 +2497,8 @@
     "path": "shadcn.sidebar-foreground",
     "value_light": "{color.sidebar.foreground}",
     "value_dark": "{color.sidebar.foreground}",
+    "value_nova_light": "{color.sidebar.foreground}",
+    "value_nova_dark": "{color.sidebar.foreground}",
     "css_variable": "--sidebar-foreground",
     "tier": "component"
   },
@@ -1864,6 +2506,8 @@
     "path": "shadcn.sidebar-primary",
     "value_light": "{color.sidebar.primary.default}",
     "value_dark": "{color.sidebar.primary.default}",
+    "value_nova_light": "{color.sidebar.primary.default}",
+    "value_nova_dark": "{color.sidebar.primary.default}",
     "css_variable": "--sidebar-primary",
     "tier": "component"
   },
@@ -1871,6 +2515,8 @@
     "path": "shadcn.sidebar-primary-foreground",
     "value_light": "{color.sidebar.primary.on}",
     "value_dark": "{color.sidebar.primary.on}",
+    "value_nova_light": "{color.sidebar.primary.on}",
+    "value_nova_dark": "{color.sidebar.primary.on}",
     "css_variable": "--sidebar-primary-foreground",
     "tier": "component"
   },
@@ -1878,6 +2524,8 @@
     "path": "shadcn.sidebar-accent",
     "value_light": "{color.sidebar.accent.default}",
     "value_dark": "{color.sidebar.accent.default}",
+    "value_nova_light": "{color.sidebar.accent.default}",
+    "value_nova_dark": "{color.sidebar.accent.default}",
     "css_variable": "--sidebar-accent",
     "tier": "component"
   },
@@ -1885,6 +2533,8 @@
     "path": "shadcn.sidebar-accent-foreground",
     "value_light": "{color.sidebar.accent.foreground}",
     "value_dark": "{color.sidebar.accent.foreground}",
+    "value_nova_light": "{color.sidebar.accent.foreground}",
+    "value_nova_dark": "{color.sidebar.accent.foreground}",
     "css_variable": "--sidebar-accent-foreground",
     "tier": "component"
   },
@@ -1892,6 +2542,8 @@
     "path": "shadcn.sidebar-border",
     "value_light": "{color.sidebar.border}",
     "value_dark": "{color.sidebar.border}",
+    "value_nova_light": "{color.sidebar.border}",
+    "value_nova_dark": "{color.sidebar.border}",
     "css_variable": "--sidebar-border",
     "tier": "component"
   },
@@ -1899,6 +2551,8 @@
     "path": "shadcn.sidebar-ring",
     "value_light": "{color.sidebar.ring}",
     "value_dark": "{color.sidebar.ring}",
+    "value_nova_light": "{color.sidebar.ring}",
+    "value_nova_dark": "{color.sidebar.ring}",
     "css_variable": "--sidebar-ring",
     "tier": "component"
   }

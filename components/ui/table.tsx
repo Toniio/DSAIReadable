@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 /**
  * The root of a semantic data table that scrolls sideways inside its container; use it for rows that share the same columns.
@@ -25,7 +25,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
     >
       <table
         data-slot="table"
-        className={cn("w-full caption-bottom text-xs", className)}
+        className={cn("w-full caption-bottom text-ui", className)}
         {...props}
       />
     </div>
@@ -184,7 +184,7 @@ function TableCaption({
   return (
     <caption
       data-slot="table-caption"
-      className={cn("mt-4 text-xs text-muted-foreground", className)}
+      className={cn("mt-4 text-ui text-muted-foreground", className)}
       {...props}
     />
   )

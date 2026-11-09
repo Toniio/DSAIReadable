@@ -3,7 +3,7 @@
 import * as React from "react"
 import { ScrollArea as ScrollAreaPrimitive } from "radix-ui"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 
 /**
@@ -68,7 +68,7 @@ function ScrollBar({
     >
       <ScrollAreaPrimitive.ScrollAreaThumb
         data-slot="scroll-area-thumb"
-        className="relative flex-1 rounded-none bg-border"
+        className="relative flex-1 rounded-pill bg-border"
       />
     </ScrollAreaPrimitive.ScrollAreaScrollbar>
   )

@@ -235,8 +235,8 @@ export default function AuditsPage() {
               label="Contrast"
               value={`${totals.checked - totals.failures} / ${totals.checked}`}
             >
-              Measurements at WCAG 2.2 AA in light and dark; {totals.failures}{" "}
-              below threshold
+              Measurements at WCAG 2.2 AA in both brands, light and dark;{" "}
+              {totals.failures} below threshold
             </StatCard>
           </li>
           <li>
@@ -439,6 +439,7 @@ export default function AuditsPage() {
             checks, computed from the resolved token values: 4.5:1 for text, 3:1
             for a focus indicator. A tint or a translucent color is painted over
             its surface first. Information rows are measured and never block.
+            The table shows the ratios of the brand this site is showing.
           </>
         }
       >

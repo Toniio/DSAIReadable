@@ -14,6 +14,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Canvas, useSiteTheme, type Viewport } from "@/site/playground/canvas"
 import { encodeState, type FrameState } from "@/site/playground/protocol"
 import { useMounted } from "@/site/ui/use-mounted"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 const VIEWPORTS: {
   value: Viewport
@@ -48,12 +49,13 @@ export function PatternPreview({
 }) {
   const [viewport, setViewport] = useState<Viewport>("desktop")
   const theme = useSiteTheme()
+  const brand = useSiteBrand()
   // The frame is created after hydration, so the page listens before the
   // frame says it is ready, and its first URL carries the site's theme.
   const mounted = useMounted()
   const state = useMemo<FrameState>(
-    () => ({ view: "example", args: {}, state: "rest", theme }),
-    [theme]
+    () => ({ view: "example", args: {}, state: "rest", theme, brand }),
+    [theme, brand]
   )
 
   return (

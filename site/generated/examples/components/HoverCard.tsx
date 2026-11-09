@@ -17,8 +17,8 @@ export default function Example() {
       </HoverCardTrigger>
       <HoverCardContent>
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-medium">James Carter</p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-title font-medium">James Carter</p>
+          <p className="text-ui text-muted-foreground">
             Front-end developer · Joined March 2024
           </p>
         </div>

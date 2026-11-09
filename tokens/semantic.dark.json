@@ -9,6 +9,10 @@
         "$type": "color",
         "$value": "{primitive.color.mist.800}"
       },
+      "card": {
+        "$type": "color",
+        "$value": "{primitive.color.mist.800}"
+      },
       "elevated": {
         "$type": "color",
         "$value": "{primitive.color.mist.900}"

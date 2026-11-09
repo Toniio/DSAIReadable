@@ -32,7 +32,7 @@ export default function Example() {
           <ChartTooltip content={<ChartTooltipContent />} />
         </BarChart>
       </ChartContainer>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-ui text-muted-foreground">
         Revenue peaked in February at 305, after 186 in January.
       </p>
     </div>

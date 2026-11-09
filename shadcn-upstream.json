@@ -379,18 +379,9 @@
       }
     },
     "patterns": [
-      [
-        "-\\[calc\\(--spacing\\(([\\d.]+)\\)\\)\\]$",
-        "-$1"
-      ],
-      [
-        "\\(--spacing\\(([\\d.]+)\\)\\)",
-        "var(--space-scale-$1)"
-      ],
-      [
-        "--spacing\\(([\\d.]+)\\)",
-        "var(--space-scale-$1)"
-      ]
+      ["-\\[calc\\(--spacing\\(([\\d.]+)\\)\\)\\]$", "-$1"],
+      ["\\(--spacing\\(([\\d.]+)\\)\\)", "var(--space-scale-$1)"],
+      ["--spacing\\(([\\d.]+)\\)", "var(--space-scale-$1)"]
     ],
     "values": {
       "var(--popover)": "var(--color-popover)",
@@ -404,6 +395,14 @@
             "to": "z-popover",
             "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a popover opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-ui",
+          "text-xs/relaxed": "text-description"
         }
       },
       "hover-card": {
@@ -412,6 +411,13 @@
             "to": "z-popover",
             "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a hover card opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs/relaxed": "text-description"
         }
       },
       "dropdown-menu": {
@@ -420,6 +426,48 @@
             "to": "z-popover",
             "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "places": {
+          "DropdownMenuContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "DropdownMenuSubContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "DropdownMenuItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "DropdownMenuCheckboxItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "DropdownMenuRadioItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "DropdownMenuSubTrigger": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          }
         }
       },
       "context-menu": {
@@ -427,6 +475,48 @@
           "z-50": {
             "to": "z-popover",
             "reason": "z-50 is 50; z-popover is 1500, above z-modal (1400), so a context menu opened from a dialog stays above it. Layers come from the zindex tokens, never hard-coded numbers."
+          }
+        },
+        "places": {
+          "ContextMenuContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "ContextMenuSubContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "ContextMenuItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "ContextMenuSubTrigger": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "ContextMenuCheckboxItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "ContextMenuRadioItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
           }
         }
       },
@@ -441,6 +531,64 @@
           "pr-28": {
             "to": "pr-2",
             "reason": "pr-28 is 112px, a typo of radix-lyra's .cn-menubar-checkbox-item (vega: pr-2, nova: pr-1.5, maia and luma: pr-3): it padded a checkbox item 112px on the right and made every menu holding one about 100px wider than its content. pr-2 is the padding of MenubarRadioItem, 8px."
+          }
+        },
+        "places": {
+          "Menubar": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "MenubarContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "MenubarSubContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "MenubarItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "MenubarCheckboxItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "MenubarRadioItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "MenubarSubTrigger": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "MenubarTrigger": {
+            "rounded-none": {
+              "to": "rounded-inset",
+              "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+            },
+            "text-xs": "text-ui"
+          },
+          "MenubarLabel": {
+            "text-xs": "text-ui"
           }
         }
       },
@@ -459,6 +607,37 @@
           "hover:opacity-100": {
             "to": "",
             "reason": "The chip remove button no longer fades from 50% to 100% opacity on hover: its color is the static text-muted-foreground, and the hover step is dropped."
+          }
+        },
+        "places": {
+          "ComboboxContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "ComboboxChips": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            },
+            "text-xs": "text-ui"
+          },
+          "ComboboxItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          },
+          "ComboboxChip": {
+            "rounded-none": {
+              "to": "rounded-inset",
+              "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+            }
+          },
+          "ComboboxEmpty": {
+            "text-xs": "text-ui"
           }
         }
       },
@@ -485,6 +664,41 @@
           "group-data-popup-open/navigation-menu-trigger:rotate-180": {
             "to": "",
             "reason": "Base UI-only twin of group-data-open/navigation-menu-trigger:rotate-180, which turns the caret of an open trigger on Radix."
+          },
+          "group-data-[viewport=false]/navigation-menu:rounded-none": {
+            "to": "group-data-[viewport=false]/navigation-menu:rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "in-data-[slot=navigation-menu-content]:rounded-none": {
+            "to": "in-data-[slot=navigation-menu-content]:rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          },
+          "text-xs": "text-ui"
+        },
+        "places": {
+          "navigationMenuTriggerStyle": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "NavigationMenuViewport": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "NavigationMenuLink": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "NavigationMenuIndicator": {
+            "rounded-none": {
+              "to": "rounded-tl-inset",
+              "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+            }
           }
         }
       },
@@ -494,6 +708,18 @@
             "to": "z-modal",
             "reason": "z-50 is 50; z-modal is 1400. Dialog layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "places": {
+          "DialogContent": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          }
+        },
+        "classes": {
+          "text-xs/relaxed": "text-description",
+          "text-sm": "text-title"
         }
       },
       "alert-dialog": {
@@ -502,6 +728,24 @@
             "to": "z-modal",
             "reason": "z-50 is 50; z-modal is 1400. Alert dialog layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "places": {
+          "AlertDialogMedia": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          },
+          "AlertDialogContent": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          }
+        },
+        "classes": {
+          "text-xs/relaxed": "text-description",
+          "text-sm": "text-title"
         }
       },
       "sheet": {
@@ -510,6 +754,17 @@
             "to": "z-modal",
             "reason": "z-50 is 50; z-modal is 1400. Sheet layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "places": {
+          "SheetContent": {
+            "text-xs/relaxed": "text-description"
+          },
+          "SheetDescription": {
+            "text-xs/relaxed": "text-description"
+          }
+        },
+        "classes": {
+          "text-sm": "text-title"
         }
       },
       "drawer": {
@@ -517,6 +772,37 @@
           "z-50": {
             "to": "z-modal",
             "reason": "z-50 is 50; z-modal is 1400. Drawer layers come from the zindex tokens, never hard-coded numbers."
+          }
+        },
+        "classes": {
+          "data-[vaul-drawer-direction=bottom]:rounded-none": {
+            "to": "data-[vaul-drawer-direction=bottom]:rounded-t-surface",
+            "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+          },
+          "data-[vaul-drawer-direction=left]:rounded-none": {
+            "to": "data-[vaul-drawer-direction=left]:rounded-r-surface",
+            "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+          },
+          "data-[vaul-drawer-direction=right]:rounded-none": {
+            "to": "data-[vaul-drawer-direction=right]:rounded-l-surface",
+            "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+          },
+          "data-[vaul-drawer-direction=top]:rounded-none": {
+            "to": "data-[vaul-drawer-direction=top]:rounded-b-surface",
+            "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+          },
+          "rounded-none": {
+            "to": "rounded-pill",
+            "reason": "The pill radius role, for badges, bubbles and tracks: 0 in lyra, as rounded-none drew, and radius.full in nova (radius.pill)."
+          },
+          "text-sm": "text-title"
+        },
+        "places": {
+          "DrawerContent": {
+            "text-xs/relaxed": "text-description"
+          },
+          "DrawerDescription": {
+            "text-xs/relaxed": "text-description"
           }
         }
       },
@@ -539,6 +825,24 @@
           "data-open:zoom-in-95": {
             "to": "data-[state=instant-open]:zoom-in-95",
             "reason": "Same as data-open:animate-in: the zoom-in of an instant-open tooltip (keyboard focus, a hover soon after another tooltip closed)."
+          },
+          "**:data-[slot=kbd]:rounded-none": {
+            "to": "**:data-[slot=kbd]:rounded-inset",
+            "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+          }
+        },
+        "places": {
+          "TooltipContent>TooltipPrimitive.Content": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          },
+          "TooltipContent>TooltipPrimitive.Arrow": {
+            "rounded-none": {
+              "to": "rounded-mark",
+              "reason": "The mark radius role, for checkboxes, choice indicators and the tooltip arrow: 0 in lyra, as rounded-none drew, and radius.xs in nova (radius.mark)."
+            }
           }
         }
       },
@@ -552,6 +856,34 @@
             "to": "z-dropdown",
             "reason": "z-10 is 10; z-dropdown is 1000. The select's scroll buttons, a local ordering, now sit on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "places": {
+          "SelectTrigger": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            },
+            "text-xs": "text-ui"
+          },
+          "SelectContent": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "SelectItem": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            },
+            "text-xs": "text-ui"
+          }
+        },
+        "classes": {
+          "data-[size=sm]:rounded-none": {
+            "to": "data-[size=sm]:rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          }
         }
       },
       "avatar": {
@@ -560,6 +892,9 @@
             "to": "z-dropdown",
             "reason": "z-10 is 10; z-dropdown is 1000. An avatar's badge, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
           }
+        },
+        "classes": {
+          "text-xs": "text-ui"
         }
       },
       "button-group": {
@@ -571,6 +906,21 @@
           "z-10": {
             "to": "z-dropdown",
             "reason": "z-10 is 10; z-dropdown is 1000. A focused button of a group, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
+        },
+        "classes": {
+          "has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-none": {
+            "to": "has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-ui"
+        },
+        "places": {
+          "ButtonGroupText": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
           }
         }
       },
@@ -607,7 +957,20 @@
           "cn-input-otp": {
             "to": "",
             "reason": "A marker class of shadcn's style sheet: the shadcn CLI replaces it with the style's rules when it installs the component, and the design system has no such rule, so it draws nothing. input-otp targets .cn-input-otp from its own stylesheet; nothing here does."
-          }
+          },
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "first:rounded-none": {
+            "to": "first:rounded-l-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "last:rounded-none": {
+            "to": "last:rounded-r-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-ui"
         }
       },
       "toggle-group": {
@@ -615,6 +978,32 @@
           "z-10": {
             "to": "z-dropdown",
             "reason": "z-10 is 10; z-dropdown is 1000. A focused toggle of a group, a local ordering, now sits on a global layer. Layers come from the zindex tokens, never hard-coded numbers."
+          }
+        },
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-none": {
+            "to": "group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-none": {
+            "to": "group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-none": {
+            "to": "group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-none": {
+            "to": "group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "data-[size=sm]:rounded-none": {
+            "to": "data-[size=sm]:rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
           }
         }
       },
@@ -637,6 +1026,10 @@
           "aria-[orientation=vertical]:flex-col": {
             "to": "",
             "reason": "react-resizable-panels v4 renders no aria-orientation on the group (only on the separator), so the class never matched; the group's inline flex-direction already stacks a vertical group."
+          },
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
           }
         }
       },
@@ -665,8 +1058,34 @@
             "reason": "The hit area of a sidebar action button is no longer hidden from md up: after:-inset-0.5 extends it 2px past the button, so the target is 24x24 (WCAG 2.5.8, size.target.min)."
           },
           "data-[size=md]:text-xs": {
-            "to": "data-[size=default]:text-xs",
-            "reason": "data-size=\"md\" becomes data-size=\"default\" on SidebarMenuSubButton: the size scale names the base size default and has no md. The text size is unchanged (text-xs)."
+            "to": "data-[size=default]:text-ui",
+            "reason": "data-size=\"md\" becomes data-size=\"default\" on SidebarMenuSubButton: the size scale names the base size default and has no md. The text size is the ui role: text-xs in lyra, unchanged, and text-sm in nova."
+          },
+          "group-data-[variant=floating]:rounded-none": {
+            "to": "group-data-[variant=floating]:rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "rounded-none": {
+            "to": "rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          },
+          "md:peer-data-[variant=inset]:rounded-none": {
+            "to": "md:peer-data-[variant=inset]:rounded-surface",
+            "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+          }
+        },
+        "places": {
+          "SidebarGroupContent": {
+            "text-xs": "text-ui"
+          },
+          "sidebarMenuButtonVariants": {
+            "text-xs": "text-ui"
+          },
+          "sidebarMenuButtonVariants.size.default": {
+            "text-xs": "text-ui"
+          },
+          "sidebarMenuButtonVariants.size.lg": {
+            "text-xs": "text-ui"
           }
         }
       },
@@ -683,6 +1102,10 @@
           "focus-visible:outline-hidden": {
             "to": "focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
             "reason": "The thumb's border-ring border is there at rest, so focus only added the ring-ring/50 halo, which hover and drag draw too. The outline is drawn instead of hidden: a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 14.82:1 light and 15.89:1 dark next to the ring-ring/50 halo, about 3.0:1 light and 4.5:1 dark alone (WCAG 1.4.11 read for focus indicators)."
+          },
+          "rounded-none": {
+            "to": "rounded-pill",
+            "reason": "The pill radius role, for badges, bubbles and tracks: 0 in lyra, as rounded-none drew, and radius.full in nova (radius.pill)."
           }
         }
       },
@@ -705,7 +1128,23 @@
       },
       "tabs": {
         "classes": {
-          "focus-visible:outline-1": "focus-visible:outline-(length:--border-width-default)"
+          "focus-visible:outline-1": "focus-visible:outline-(length:--border-width-default)",
+          "text-xs": "text-ui",
+          "text-xs/relaxed": "text-description"
+        },
+        "places": {
+          "tabsListVariants": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "TabsTrigger": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          }
         }
       },
       "command": {
@@ -713,6 +1152,37 @@
           "opacity-50": {
             "to": "text-muted-foreground",
             "reason": "The Command search icon faded to 50% opacity; it is now text-muted-foreground (a color, not an opacity). Opacity is reserved for binary states."
+          },
+          "in-data-[slot=dialog-content]:rounded-none!": {
+            "to": "in-data-[slot=dialog-content]:rounded-control!",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          }
+        },
+        "places": {
+          "Command": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          },
+          "CommandDialog": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          },
+          "CommandItem": {
+            "rounded-none": {
+              "to": "rounded-inset",
+              "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+            },
+            "text-xs": "text-ui"
+          },
+          "CommandInput": {
+            "text-xs": "text-ui"
+          },
+          "CommandEmpty": {
+            "text-xs": "text-ui"
           }
         }
       },
@@ -734,6 +1204,35 @@
             "to": "text-destructive",
             "reason": "The error description of an attachment is destructive text at 80% alpha; it becomes full text-destructive, the token measured for contrast. The reason is not recorded."
           }
+        },
+        "places": {
+          "attachmentVariants.size.xs": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "attachmentMediaVariants": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "attachmentVariants": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          },
+          "attachmentVariants.size.default": {
+            "text-xs": "text-ui"
+          }
+        },
+        "classes": {
+          "group-data-[size=xs]/attachment:rounded-none": {
+            "to": "group-data-[size=xs]/attachment:rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          }
         }
       },
       "breadcrumb": {
@@ -741,7 +1240,8 @@
           "gap-1.5": {
             "to": "gap-x-1.5 gap-y-2",
             "reason": "The gap of the breadcrumb list is 6px both ways; it becomes 6px between items and 8px between wrapped rows (gap-x-1.5 gap-y-2), so rows are 8px apart and the target size spacing exception holds."
-          }
+          },
+          "text-xs": "text-ui"
         }
       },
       "input-group": {
@@ -765,6 +1265,31 @@
           "dark:has-disabled:bg-input/80": {
             "to": "dark:has-[[data-slot=input-group-control]:disabled]:bg-input-fill/80",
             "reason": "Same selector as has-disabled:bg-input/50, in dark: the group takes the disabled background from its own field only, not from a disabled button. Both read the fill token, bg-input-fill, as every translucent bg-input does."
+          },
+          "[&>kbd]:rounded-none": {
+            "to": "[&>kbd]:rounded-inset",
+            "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+          },
+          "text-xs": "text-ui"
+        },
+        "places": {
+          "InputGroup": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "inputGroupButtonVariants.size.xs": {
+            "rounded-none": {
+              "to": "rounded-inset",
+              "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+            }
+          },
+          "inputGroupButtonVariants.size.icon-xs": {
+            "rounded-none": {
+              "to": "rounded-inset",
+              "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+            }
           }
         }
       },
@@ -773,7 +1298,16 @@
           "placeholder:text-muted-foreground": {
             "to": "has-[option[value='']:checked]:text-muted-foreground",
             "reason": "A <select> has no ::placeholder, so the class drew nothing and the \"Choose a city\" option read as a chosen value (text-foreground). The selected empty-value option is a select's placeholder: the select takes text-muted-foreground (color.text.subtle) while it is selected, as Select does with data-placeholder."
-          }
+          },
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "data-[size=sm]:rounded-none": {
+            "to": "data-[size=sm]:rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          },
+          "text-xs": "text-ui"
         }
       },
       "accordion": {
@@ -781,7 +1315,12 @@
           "focus-visible:after:border-ring": {
             "to": "",
             "reason": "Dead class: it colors the border of the trigger's ::after, which has no box (no content, size or border width), so it drew nothing. The trigger's focus indicator is FOCUS_RING; the class is dropped so the States table does not list a style that does nothing."
-          }
+          },
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-ui"
         }
       },
       "scroll-area": {
@@ -789,6 +1328,10 @@
           "focus-visible:outline-1": {
             "to": "focus-visible:border-ring focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring",
             "reason": "Upstream's 1px focus outline on the viewport drew nothing: outline-hidden sets the outline style to none, and its color was the base outline-ring/50. It becomes a solid 1px outline-ring (border-width.default; outline-solid, because outline-hidden sets the outline style to none), the indicator's solid part at 14.82:1 light and 15.89:1 dark next to the ring-ring/50 halo, about 3.0:1 light and 4.5:1 dark alone (WCAG 1.4.11 read for focus indicators). focus-visible:border-ring stays, as the shared table maps outline-1, so FOCUS_RING stays whole."
+          },
+          "rounded-none": {
+            "to": "rounded-pill",
+            "reason": "The pill radius role, for badges, bubbles and tracks: 0 in lyra, as rounded-none drew, and radius.full in nova (radius.pill)."
           }
         }
       },
@@ -797,6 +1340,10 @@
           "group-has-disabled/field:opacity-50": {
             "to": "group-has-[[data-slot=checkbox]:disabled]/field:opacity-disabled",
             "reason": "group-has-disabled matches any disabled control of the Field, so an enabled Checkbox next to a disabled input (\"Other: [text]\") was dimmed to 0.5. The checkbox mirrors a disabled checkbox of its Field only, [data-slot=checkbox]; its own disabled state is drawn by disabled:opacity-disabled. opacity-50 is opacity-disabled, as everywhere."
+          },
+          "rounded-none": {
+            "to": "rounded-mark",
+            "reason": "The mark radius role, for checkboxes, choice indicators and the tooltip arrow: 0 in lyra, as rounded-none drew, and radius.xs in nova (radius.mark)."
           }
         }
       },
@@ -809,8 +1356,8 @@
         },
         "values": {
           "var(--radius)": {
-            "to": "var(--radius-none)",
-            "reason": "The Sonner toast radius var(--radius), which is radius.lg (10px), becomes var(--radius-none), 0: radix-lyra's style sheet makes every surface square, the toast included (.cn-toast { rounded-none }), but its marker class is never resolved, so upstream's installed toast is rounded. Square, like Card, Popover and Dialog."
+            "to": "var(--radius-control)",
+            "reason": "The Sonner toast radius var(--radius), which is radius.lg (10px), becomes the control radius role: 0 in lyra, where radix-lyra's style sheet makes every surface square (its marker class .cn-toast { rounded-none } is never resolved, so upstream's installed toast is rounded), and radius.lg in nova."
           }
         }
       },
@@ -827,7 +1374,12 @@
           "[[data-slot=code-block]>&]:*:[button]:ring-foreground/10": {
             "to": "[[data-slot=code-block]>&]:*:[button]:not-focus-visible:ring-foreground/10",
             "reason": "As its width: the color of the ring that sets a floating button off the code applies while the button is not focus-visible, so it no longer replaces the ring-ring/50 color of the Button's focus ring."
-          }
+          },
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-ui"
         }
       },
       "trace": {
@@ -859,7 +1411,306 @@
           "pl-3.75": {
             "to": "pl-3.5",
             "reason": "pl-3.75 (15px) is not a step of the locked spacing scale and draws nothing here. It becomes pl-3.5 (14px), the nearest step under it: the details start 21px from the line's start, 1px before the title they sit under instead of level with it."
+          },
+          "*:has-[>[data-slot=trace-line]]:rounded-none": {
+            "to": "*:has-[>[data-slot=trace-line]]:rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          },
+          "rounded-none": {
+            "to": "rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          },
+          "text-xs": "text-ui"
+        }
+      },
+      "alert": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-ui",
+          "text-xs/relaxed": "text-description"
+        }
+      },
+      "button": {
+        "places": {
+          "buttonVariants": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            },
+            "text-xs": "text-ui"
+          },
+          "buttonVariants.size.xs": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          },
+          "buttonVariants.size.sm": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          },
+          "buttonVariants.size.icon-xs": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          },
+          "buttonVariants.size.icon-sm": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
           }
+        }
+      },
+      "chart": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          }
+        }
+      },
+      "empty": {
+        "places": {
+          "emptyMediaVariants.variant.icon": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "Empty": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          }
+        },
+        "classes": {
+          "text-xs": "text-ui",
+          "text-xs/relaxed": "text-ui/relaxed"
+        }
+      },
+      "field": {
+        "classes": {
+          "has-[>[data-slot=field]]:rounded-none": {
+            "to": "has-[>[data-slot=field]]:rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-ui",
+          "text-xs/relaxed": "text-description",
+          "data-[variant=label]:text-xs": "data-[variant=label]:text-ui",
+          "data-[variant=legend]:text-sm": "data-[variant=legend]:text-title"
+        }
+      },
+      "input": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-control",
+          "md:text-xs": "md:text-ui",
+          "file:text-xs": "file:text-ui"
+        }
+      },
+      "item": {
+        "places": {
+          "itemVariants": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "itemMediaVariants.variant.image": {
+            "rounded-none": {
+              "to": "rounded-inset",
+              "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+            }
+          }
+        },
+        "classes": {
+          "text-xs": "text-ui",
+          "text-xs/relaxed": "text-description"
+        }
+      },
+      "questionnaire": {
+        "places": {
+          "QuestionnaireChoice>QuestionnairePrimitive.Choice": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            },
+            "text-xs": "text-ui"
+          },
+          "QuestionnaireChoice>QuestionnairePrimitive.ChoiceShortcut": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          },
+          "QuestionnaireChoice>span": {
+            "rounded-none": {
+              "to": "rounded-mark",
+              "reason": "The mark radius role, for checkboxes, choice indicators and the tooltip arrow: 0 in lyra, as rounded-none drew, and radius.xs in nova (radius.mark)."
+            }
+          },
+          "QuestionnaireInput": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            },
+            "text-xs": "text-control"
+          },
+          "QuestionnaireError": {
+            "text-xs": "text-ui"
+          }
+        },
+        "classes": {
+          "text-xs/relaxed": "text-description",
+          "text-sm": "text-title",
+          "md:text-xs": "md:text-ui"
+        }
+      },
+      "textarea": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-control",
+            "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+          },
+          "text-xs": "text-control",
+          "md:text-xs": "md:text-ui"
+        }
+      },
+      "toggle": {
+        "places": {
+          "toggleVariants": {
+            "rounded-none": {
+              "to": "rounded-control",
+              "reason": "The control radius role, for buttons, inputs, popovers and menu panels: 0 in lyra, as rounded-none drew, and radius.lg in nova (radius.control)."
+            }
+          },
+          "toggleVariants.size.sm": {
+            "rounded-none": {
+              "to": "rounded-item",
+              "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+            }
+          }
+        },
+        "classes": {
+          "text-xs": "text-ui"
+        }
+      },
+      "skeleton": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-item",
+            "reason": "The item radius role, for menu and sidebar items, tooltips and skeletons: 0 in lyra, as rounded-none drew, and radius.md in nova (radius.item)."
+          }
+        }
+      },
+      "bubble": {
+        "places": {
+          "BubbleContent": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          },
+          "bubbleReactionsVariants": {
+            "rounded-none": {
+              "to": "rounded-pill",
+              "reason": "The pill radius role, for badges, bubbles and tracks: 0 in lyra, as rounded-none drew, and radius.full in nova (radius.pill)."
+            }
+          }
+        },
+        "classes": {
+          "text-xs": "text-ui"
+        }
+      },
+      "card": {
+        "places": {
+          "Card": {
+            "rounded-none": {
+              "to": "rounded-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          },
+          "CardHeader": {
+            "rounded-none": {
+              "to": "rounded-t-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          },
+          "CardFooter": {
+            "rounded-none": {
+              "to": "rounded-b-surface",
+              "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+            }
+          }
+        },
+        "classes": {
+          "*:[img:first-child]:rounded-none": {
+            "to": "*:[img:first-child]:rounded-t-surface",
+            "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+          },
+          "*:[img:last-child]:rounded-none": {
+            "to": "*:[img:last-child]:rounded-b-surface",
+            "reason": "The surface radius role, for cards, dialogs, drawers and other surfaces: 0 in lyra, as rounded-none drew, and radius.xl in nova (radius.surface)."
+          },
+          "text-xs/relaxed": "text-description",
+          "text-sm": "text-title"
+        }
+      },
+      "badge": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-pill",
+            "reason": "The pill radius role, for badges, bubbles and tracks: 0 in lyra, as rounded-none drew, and radius.full in nova (radius.pill)."
+          }
+        }
+      },
+      "progress": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-pill",
+            "reason": "The pill radius role, for badges, bubbles and tracks: 0 in lyra, as rounded-none drew, and radius.full in nova (radius.pill)."
+          }
+        }
+      },
+      "kbd": {
+        "classes": {
+          "rounded-none": {
+            "to": "rounded-inset",
+            "reason": "The inset radius role, for what nests in a rounded control (keyboard hints, chips, small buttons): 0 in lyra, as rounded-none drew, and radius.sm in nova (radius.inset)."
+          }
+        }
+      },
+      "label": {
+        "classes": {
+          "text-xs": "text-ui"
+        }
+      },
+      "marker": {
+        "classes": {
+          "text-xs": "text-ui"
+        }
+      },
+      "message": {
+        "places": {
+          "Message": {
+            "text-xs": "text-ui"
+          }
+        }
+      },
+      "table": {
+        "classes": {
+          "text-xs": "text-ui"
         }
       }
     },
@@ -931,9 +1782,7 @@
     "alert-dialog": {
       "status": "reanchored",
       "reason": "Upstream sizes the content with max-w-xs (20rem) alone, so it is flush with the viewport at 320px. It takes the gutter DialogContent keeps, 2rem in all (space.scale.8), as a width: min(100% minus the gutter, 20rem) is 288px at 320px and still 320px from 352px. A second max-width cannot cap it: the data-[size] max-width is more specific.",
-      "added": [
-        "w-[calc(100%-var(--space-scale-8))]"
-      ]
+      "added": ["w-[calc(100%-var(--space-scale-8))]"]
     },
     "aspect-ratio": {
       "status": "reanchored"
@@ -941,9 +1790,7 @@
     "attachment": {
       "status": "reanchored",
       "reason": "The focus-within ring is FOCUS_RING_WITHIN, with its border color: every focus indicator of the design system has both.",
-      "added": [
-        "focus-within:border-ring"
-      ]
+      "added": ["focus-within:border-ring"]
     },
     "avatar": {
       "status": "reanchored"
@@ -981,7 +1828,7 @@
     },
     "button": {
       "status": "reanchored",
-      "reason": "The outline variant's bare dark:border-input and dark:bg-input/30 tie in specificity with focus-visible:border-ring and aria-expanded:bg-muted and win on emission order, so in dark an open outline button looked closed and its focused border was border-input (WCAG 1.4.11 part of the indicator). Each gets a dark twin. The destructive variant's focus border is border-destructive/40 and an invalid button keeps its destructive border, so focus showed a halo alone, about 2.1:1 and 1.4:1: both draw a solid 1px outline-destructive at focus (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark.",
+      "reason": "The outline variant's bare dark:border-input and dark:bg-input/30 tie in specificity with focus-visible:border-ring and aria-expanded:bg-muted and win on emission order, so in dark an open outline button looked closed and its focused border was border-input (WCAG 1.4.11 part of the indicator). Each gets a dark twin. The destructive variant's focus border is border-destructive/40 and an invalid button keeps its destructive border, so focus showed a halo alone, about 2.1:1 and 1.4:1: both draw a solid 1px outline-destructive at focus (border-width.default; outline-solid, because outline-hidden sets the outline style to none), 4.77:1 light and 6.83:1 dark. Inside a ButtonGroup the four small sizes take the control radius role, 0 in lyra and radius.lg in nova, the step of shadcn/ui's nova button: the outer corners of a mixed group match.",
       "added": [
         "dark:aria-expanded:bg-muted",
         "dark:focus-visible:border-ring",
@@ -990,11 +1837,20 @@
         "focus-visible:outline-destructive",
         "aria-invalid:focus-visible:outline-solid",
         "aria-invalid:focus-visible:outline-(length:--border-width-default)",
-        "aria-invalid:focus-visible:outline-destructive"
+        "aria-invalid:focus-visible:outline-destructive",
+        "in-data-[slot=button-group]:rounded-control",
+        "in-data-[slot=button-group]:rounded-control",
+        "in-data-[slot=button-group]:rounded-control",
+        "in-data-[slot=button-group]:rounded-control"
       ]
     },
     "button-group": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "added": [
+        "[&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-control!",
+        "[&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-control!"
+      ],
+      "reason": "The last child of a group takes the control radius role on its end corners, 0 in lyra and radius.lg in nova, as shadcn/ui's nova group does: a child on a smaller radius role still closes the group with the corners of the others."
     },
     "calendar": {
       "status": "reanchored",
@@ -1013,15 +1869,18 @@
         "dark:hover:data-[range-start=true]:text-primary-foreground",
         "dark:hover:data-[range-end=true]:bg-primary",
         "dark:hover:data-[range-end=true]:text-primary-foreground",
-        "dark:hover:data-[range-middle=true]:bg-muted"
+        "dark:hover:data-[range-middle=true]:bg-muted",
+        "[--cell-radius:var(--radius-item)]"
       ],
-      "reason": "(1) shadcn's style transform skips the classNames object of DayPicker, so lyra's look of the dropdown root (border-input, border-ring and a ring on focus) and of the dropdown caption label (h-6 pr-1 pl-1.5) never reached the install: the invisible select was a tab stop that showed nothing (WCAG 2.4.7). (2) Ghost's dark:hover:bg-muted/50 (.dark and :hover, one class more) outranks the day's data-[selected-single=true]:bg-primary, so a hovered selected day lost its fill in dark; each selected state gets a dark hover twin, and the range middle keeps bg-muted."
+      "reason": "(1) shadcn's style transform skips the classNames object of DayPicker, so lyra's look of the dropdown root (border-input, border-ring and a ring on focus) and of the dropdown caption label (h-6 pr-1 pl-1.5) never reached the install: the invisible select was a tab stop that showed nothing (WCAG 2.4.7). (2) Ghost's dark:hover:bg-muted/50 (.dark and :hover, one class more) outranks the day's data-[selected-single=true]:bg-primary, so a hovered selected day lost its fill in dark; each selected state gets a dark hover twin, and the range middle keeps bg-muted. (3) The root assigns the item radius role to --cell-radius, which lyra's upstream leaves undeclared: 0 in lyra, as the undeclared variable drew, and radius.md in nova (radius.item), where shadcn/ui's nova calendar declares it too. The cells keep reading the variable, so a consumer can still set it."
     },
     "card": {
       "status": "reanchored"
     },
     "carousel": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "added": ["rounded-pill", "rounded-pill"],
+      "reason": "The previous and next buttons take the pill radius role: 0 in lyra, where upstream draws no radius of its own there, and radius.full in nova, the circle of shadcn/ui's nova carousel (radius.pill)."
     },
     "chart": {
       "status": "reanchored",
@@ -1057,9 +1916,10 @@
     },
     "code-block": {
       "status": "reanchored",
-      "reason": "The destructive variant keeps its border-destructive/30 at focus, so focusing its content showed the ring-ring/50 halo alone: 3.06:1 light on the page, at the edge of the 3:1 bar, and 2.98:1 on a card or a muted surface, under it. It turns border-ring while its content has focus-visible, as the default variant does: the indicator's solid part.",
+      "reason": "The destructive variant keeps its border-destructive/30 at focus, so focusing its content showed the ring-ring/50 halo alone: 3.06:1 light on the page, at the edge of the 3:1 bar, and 2.98:1 on a card or a muted surface, under it. It turns border-ring while its content has focus-visible, as the default variant does: the indicator's solid part. The title of a size sm block steps down to text-xs, the size of its code: text-ui is already that size in lyra, and larger in nova, as in shadcn/ui's nova code block.",
       "added": [
-        "has-[>[data-slot=code-block-content]:focus-visible]:border-ring"
+        "has-[>[data-slot=code-block-content]:focus-visible]:border-ring",
+        "group-data-[size=sm]/code-block:text-xs"
       ]
     },
     "collapsible": {
@@ -1244,10 +2104,7 @@
     "sidebar": {
       "status": "reanchored",
       "reason": "SidebarMenuAction sits on its menu button, so its own box is the target that tools measure and that covers the button: a 20px box clicking through a 24px after: area read as a 20px target overlapping the button (axe target-size). min-w-target makes the box itself 24 x 24 (size.target.min; aspect-square sets the height) and -m-0.5 grows it 2px on every side of the 20px box it replaces, so it stays centered where it was; the button keeps every pixel the action does not cover (WCAG 2.5.8).",
-      "added": [
-        "min-w-target",
-        "-m-0.5"
-      ]
+      "added": ["min-w-target", "-m-0.5"]
     },
     "skeleton": {
       "status": "reanchored"

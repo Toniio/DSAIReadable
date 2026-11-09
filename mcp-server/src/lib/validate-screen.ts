@@ -114,7 +114,7 @@ export const SCREEN_RULES: LineRule[] = [
     severity: "warning",
     pattern: /font-size\s*:\s*\d|fontSize\s*:\s*["']?\d/,
     message: () =>
-      "Raw font size found. Use DS typography tokens (text-sm, text-base, text-lg, etc.)",
+      "Raw font size found. Text beside components names the role of what it sits beside, so that it follows the brand (text-ui, text-description, text-title); use a fixed DS size (text-sm, text-base, text-lg…) only for text that keeps its size",
   },
   {
     rule: "no-raw-spacing",
@@ -128,7 +128,7 @@ export const SCREEN_RULES: LineRule[] = [
     severity: "warning",
     pattern: /border-radius\s*:\s*\d/,
     message: () =>
-      "Raw border-radius found. The components are square: draw yours square too (no radius class), use rounded-full for a round shape, or a DS radius token (rounded-lg, rounded-xl…) for content such as an image",
+      "Raw border-radius found. A surface you draw names a radius role, so that it follows the brand (rounded-surface, rounded-control, rounded-item…); use rounded-full for a round shape, or a DS radius token (rounded-lg, rounded-xl…) for content such as an image",
   },
   {
     rule: "no-raw-duration",

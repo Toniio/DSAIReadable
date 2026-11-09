@@ -4,8 +4,10 @@ import {
   primitiveName,
   reads,
 } from "@/site/foundation-docs/tokens/token-classes"
+import type { Brand } from "@/site/lib/brand"
 import {
-  darkValue,
+  darkIn,
+  lightIn,
   referencedBy,
   tailwindClasses,
   tokenByName,
@@ -21,16 +23,22 @@ export interface Surfaces {
   dark: string
 }
 
-export interface SemanticColor {
+/** The page surfaces of each brand. */
+export type BrandSurfaces = Record<Brand, Surfaces>
+
+/** A color in both modes, with the primitive each mode reads: `mist.50`. */
+interface ModeValues extends Surfaces {
+  lightRef?: string
+  darkRef?: string
+}
+
+/** The lyra values at the top level, and the same ones in nova. */
+export interface SemanticColor extends ModeValues {
   token: string
   cssVar: string
   status: Status
   replacement?: string
-  light: string
-  dark: string
-  /** The primitive each mode reads: `mist.50`. */
-  lightRef?: string
-  darkRef?: string
+  nova: ModeValues
   classes: string[]
   description?: string
   /** Every name, class and value, lowercased, for the filter. */
@@ -50,6 +58,7 @@ export interface ColorAlias {
   classes: string[]
   light: string
   dark: string
+  nova: Surfaces
   status: Status
   search: string
 }
@@ -75,7 +84,7 @@ interface Palette {
 }
 
 export interface ColorData {
-  surfaces: Surfaces
+  surfaces: BrandSurfaces
   groups: ColorGroup[]
   aliases: ColorAlias[]
   palettes: Palette[]
@@ -106,19 +115,45 @@ function search(parts: (string | undefined)[]): string {
     .toLowerCase()
 }
 
+/** The values of a token in a brand, as the swatches take them. */
+function surfacesIn(entry: Token, brand: Brand): Surfaces {
+  return {
+    light: lightIn(entry.value, brand),
+    dark: darkIn(entry.value, brand),
+  }
+}
+
+/** Where a swatch of each brand and mode sits: its page background. */
+export function pageSurfaces(): BrandSurfaces {
+  const page = tokenByName("color.background.default")
+  const inBrand = (brand: Brand): Surfaces =>
+    page ? surfacesIn(page, brand) : { light: "", dark: "" }
+  return { lyra: inBrand("lyra"), nova: inBrand("nova") }
+}
+
+function modeRef(reference: string | undefined): string | undefined {
+  return reference ? primitiveName(reference) : undefined
+}
+
 function semanticColor(entry: Token): SemanticColor {
   const lightRef = reads(entry, "light")
   const darkRef = reads(entry, "dark")
+  const novaLightRef = reads(entry, "light", "nova")
+  const novaDarkRef = reads(entry, "dark", "nova")
   const classes = colorClasses(entry)
   return {
     token: entry.token,
     cssVar: entry.cssVar,
     status: entry.status,
     replacement: entry.replacement,
-    light: entry.value.light,
-    dark: darkValue(entry),
-    lightRef: lightRef ? primitiveName(lightRef) : undefined,
-    darkRef: darkRef ? primitiveName(darkRef) : undefined,
+    ...surfacesIn(entry, "lyra"),
+    lightRef: modeRef(lightRef),
+    darkRef: modeRef(darkRef),
+    nova: {
+      ...surfacesIn(entry, "nova"),
+      lightRef: modeRef(novaLightRef),
+      darkRef: modeRef(novaDarkRef),
+    },
     classes,
     description: entry.description,
     search: search([
@@ -126,10 +161,11 @@ function semanticColor(entry: Token): SemanticColor {
       entry.cssVar,
       ...classes,
       ...tailwindClasses(entry.cssVar),
-      entry.value.light,
-      entry.value.dark,
+      ...Object.values(entry.value),
       lightRef,
       darkRef,
+      novaLightRef,
+      novaDarkRef,
     ]),
   }
 }
@@ -137,7 +173,6 @@ function semanticColor(entry: Token): SemanticColor {
 /** Everything the Color page shows, read from the token build. */
 export function colorData(): ColorData {
   const all = tokens()
-  const page = tokenByName("color.background.default")
   const semantic = all.filter(
     (entry) => entry.tier === "semantic" && entry.type === "color"
   )
@@ -168,14 +203,19 @@ export function colorData(): ColorData {
       // for `mist.950` finds `--foreground` as it finds its semantic token.
       const semantic = tokenByName(target)
       const steps = semantic
-        ? [reads(semantic, "light"), reads(semantic, "dark")]
+        ? [
+            reads(semantic, "light"),
+            reads(semantic, "dark"),
+            reads(semantic, "light", "nova"),
+            reads(semantic, "dark", "nova"),
+          ]
         : []
       return {
         cssVar: entry.cssVar,
         reads: target,
         classes,
-        light: entry.value.light,
-        dark: darkValue(entry),
+        ...surfacesIn(entry, "lyra"),
+        nova: surfacesIn(entry, "nova"),
         status: entry.status,
         search: search([
           entry.token,
@@ -183,8 +223,7 @@ export function colorData(): ColorData {
           target,
           ...steps,
           ...classes,
-          entry.value.light,
-          entry.value.dark,
+          ...Object.values(entry.value),
         ]),
       }
     })
@@ -213,10 +252,7 @@ export function colorData(): ColorData {
   }
 
   return {
-    surfaces: {
-      light: page?.value.light ?? "",
-      dark: page ? darkValue(page) : "",
-    },
+    surfaces: pageSurfaces(),
     groups,
     aliases,
     palettes,

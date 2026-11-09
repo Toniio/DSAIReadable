@@ -406,10 +406,7 @@
             "hex": "#2d5400"
           },
           "$type": "color",
-          "$description": "Sequential chart scale. Step 700, OKLCH lightness 0.4, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Sequential chart scale. Step 700, OKLCH lightness 0.4, generated from #5ea500 by scripts/build-palette.ts."
         },
         "800": {
           "$value": {
@@ -748,10 +745,7 @@
             "hex": "#828300"
           },
           "$type": "color",
-          "$description": "Chart series. Step 500, OKLCH lightness 0.59, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Chart series. Step 500, OKLCH lightness 0.59, generated from #e5e747 by scripts/build-palette.ts."
         },
         "600": {
           "$value": {
@@ -1019,10 +1013,7 @@
             "hex": "#5f2980"
           },
           "$type": "color",
-          "$description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
-          "$extensions": {
-            "status": "reserved"
-          }
+          "$description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #8e51b6 by scripts/build-palette.ts."
         },
         "800": {
           "$value": {
@@ -1053,6 +1044,223 @@
           },
           "$type": "color",
           "$description": "Chart series. Step 950, OKLCH lightness 0.148, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        }
+      },
+      "stone": {
+        "50": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.9856, 0.0017, 67.8],
+            "hex": "#fbfaf9"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 50, OKLCH lightness 0.985, generated from #79716b by scripts/build-palette.ts."
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.9654, 0.0025, 48.72],
+            "hex": "#f5f3f2"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 100, OKLCH lightness 0.965, generated from #79716b by scripts/build-palette.ts."
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.9245, 0.0051, 48.68],
+            "hex": "#e9e5e3"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 200, OKLCH lightness 0.925, generated from #79716b by scripts/build-palette.ts."
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.8305, 0.0114, 63.33],
+            "hex": "#cdc6c0"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 300, OKLCH lightness 0.83, generated from #79716b by scripts/build-palette.ts."
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.7149, 0.0136, 56.17],
+            "hex": "#aaa19b"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 400, OKLCH lightness 0.715, generated from #79716b by scripts/build-palette.ts."
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.5891, 0.0143, 56.1],
+            "hex": "#847b75"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 500, OKLCH lightness 0.59, generated from #79716b by scripts/build-palette.ts."
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.5008, 0.013, 63.17],
+            "hex": "#69625c"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 600, OKLCH lightness 0.5, generated from #79716b by scripts/build-palette.ts."
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.3995, 0.0126, 57.92],
+            "hex": "#4d4641"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 700, OKLCH lightness 0.4, generated from #79716b by scripts/build-palette.ts."
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.276, 0.0081, 59.33],
+            "hex": "#2b2724"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 800, OKLCH lightness 0.275, generated from #79716b by scripts/build-palette.ts."
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.2161, 0.0061, 56.04],
+            "hex": "#1c1917"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 900, OKLCH lightness 0.218, generated from #79716b by scripts/build-palette.ts."
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.1469, 0.0041, 49.25],
+            "hex": "#0c0a09"
+          },
+          "$type": "color",
+          "$description": "Warm neutral of the nova brand: surfaces, text and borders. Step 950, OKLCH lightness 0.148, generated from #79716b by scripts/build-palette.ts."
+        }
+      },
+      "teal": {
+        "50": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.986, 0.0108, 182.88],
+            "hex": "#f3fdfb"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 50, OKLCH lightness 0.985, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.965, 0.0193, 184.92],
+            "hex": "#e6f8f5"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 100, OKLCH lightness 0.965, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.9258, 0.0412, 185.15],
+            "hex": "#c9f0ea"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 200, OKLCH lightness 0.925, generated from #0d9488 by scripts/build-palette.ts."
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.8291, 0.0828, 185.05],
+            "hex": "#86d9ce"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 300, OKLCH lightness 0.83, generated from #0d9488 by scripts/build-palette.ts."
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.7147, 0.1039, 184.68],
+            "hex": "#46b8ab"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 400, OKLCH lightness 0.715, generated from #0d9488 by scripts/build-palette.ts."
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.5904, 0.1039, 184.63],
+            "hex": "#029185"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 500, OKLCH lightness 0.59, generated from #0d9488 by scripts/build-palette.ts."
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.4993, 0.0883, 184.39],
+            "hex": "#007369"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 600, OKLCH lightness 0.5, generated from #0d9488 by scripts/build-palette.ts."
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.4006, 0.071, 183.86],
+            "hex": "#00544c"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 700, OKLCH lightness 0.4, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.2746, 0.0482, 185.94],
+            "hex": "#002f2b"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 800, OKLCH lightness 0.275, generated from #0d9488 by scripts/build-palette.ts."
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.2187, 0.0389, 183.19],
+            "hex": "#00201c"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 900, OKLCH lightness 0.218, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+          "$extensions": {
+            "status": "reserved"
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [0.1473, 0.0259, 185.18],
+            "hex": "#000e0c"
+          },
+          "$type": "color",
+          "$description": "Chart scale of the nova brand. Step 950, OKLCH lightness 0.148, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
           "$extensions": {
             "status": "reserved"
           }
@@ -1854,12 +2062,42 @@
         "sans": {
           "$value": "Geist, sans-serif",
           "$type": "fontFamily",
-          "$description": "Primary sans-serif typeface."
+          "$description": "Primary sans-serif typeface.",
+          "$extensions": {
+            "design.dsaireadable": { "fontVariable": "--font-sans" }
+          }
         },
         "mono": {
           "$value": "JetBrains Mono, monospace",
           "$type": "fontFamily",
-          "$description": "Monospace typeface for code and numeric data."
+          "$description": "Monospace typeface for code and numeric data.",
+          "$extensions": {
+            "design.dsaireadable": { "fontVariable": "--font-mono" }
+          }
+        },
+        "lora": {
+          "$value": "Lora, serif",
+          "$type": "fontFamily",
+          "$description": "Serif typeface of the nova brand's body text.",
+          "$extensions": {
+            "design.dsaireadable": { "fontVariable": "--font-lora" }
+          }
+        },
+        "dm-sans": {
+          "$value": "DM Sans, sans-serif",
+          "$type": "fontFamily",
+          "$description": "Sans-serif typeface of the nova brand's headings.",
+          "$extensions": {
+            "design.dsaireadable": { "fontVariable": "--font-dm-sans" }
+          }
+        },
+        "geist-mono": {
+          "$value": "Geist Mono, monospace",
+          "$type": "fontFamily",
+          "$description": "Monospace typeface of the nova brand's code and numeric data.",
+          "$extensions": {
+            "design.dsaireadable": { "fontVariable": "--font-geist-mono" }
+          }
         }
       },
       "size-line-height": {

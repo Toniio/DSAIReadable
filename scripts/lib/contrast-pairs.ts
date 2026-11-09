@@ -1,8 +1,8 @@
 import { FOCUS_RING, FOCUS_RING_DESTRUCTIVE } from "../../lib/focus"
 
 /**
- * The foreground and background pairs the design system ships, in each mode:
- * what scripts/lint-contrast.ts holds to its WCAG 2.2 thresholds and what the
+ * The foreground and background pairs the design system ships, in each color
+ * scheme: what scripts/lint-contrast.ts holds, in each brand, to its WCAG 2.2 thresholds and what the
  * documentation site's Audits page measures and shows. They are declared once,
  * here, so the page cannot drift from the check. Contrast is a property of a
  * pair, so a pair cannot be derived from the token files: a pair added to the
@@ -32,7 +32,7 @@ export interface Pair {
   tint?: { color: string; alpha: number }
   /** The opacity of the foreground itself, as Tailwind's `text-<role>/<n>`. */
   fgAlpha?: number
-  /** Measured and shown, never blocking: a part that is not the indicator. */
+  /** Measured and shown, never blocking: a ratio no WCAG criterion holds to its threshold. */
   informative?: boolean
 }
 
@@ -43,10 +43,11 @@ const ROLES = [
   ["info", "Info"],
 ] as const
 
-/** The surfaces a component may be placed on: the page, a card, a popover. */
+/** The surfaces a component may be placed on: the page, a card, a muted area, a popover. */
 const SURFACES = [
   ["color.background.default", "page"],
-  ["color.background.subtle", "card"],
+  ["color.background.card", "card"],
+  ["color.background.subtle", "muted surface"],
   ["color.background.elevated", "popover"],
 ] as const
 
@@ -193,6 +194,20 @@ export const PAIRS: Pair[] = [
     ])
   ),
 
+  // Information: the solid part against a primary fill. Over a bg-clip-padding
+  // border it replaces the backdrop, which is what WCAG 1.4.11 and the pairs
+  // above measure, so no threshold applies; the number says how much of a
+  // filled control's indicator the solid part carries, in each theme.
+  {
+    label:
+      "Focus indicator (border-ring) against the fill of a primary control",
+    fg: "color.border.focus",
+    bg: "color.action.background.default",
+    threshold: 3,
+    group: "info",
+    informative: true,
+  },
+
   // Body text on every surface it may sit on.
   ...SURFACES.map(([bg, surface]) => ({
     label: `Default text on the ${surface}`,
@@ -209,7 +224,14 @@ export const PAIRS: Pair[] = [
     group: "text",
   },
   {
-    label: "Subtle text on the card (muted-foreground on muted)",
+    label: "Subtle text on the card",
+    fg: "color.text.subtle",
+    bg: "color.background.card",
+    threshold: 4.5,
+    group: "text",
+  },
+  {
+    label: "Subtle text on the muted surface (muted-foreground on muted)",
     fg: "color.text.subtle",
     bg: "color.background.subtle",
     threshold: 4.5,
@@ -229,6 +251,20 @@ export const PAIRS: Pair[] = [
     fg: "color.action.background.foreground",
     bg: "color.action.background.default",
     threshold: 4.5,
+    group: "filled",
+  },
+  {
+    label: "Action text (color.text.action.on) on the primary surface",
+    fg: "color.text.action.on",
+    bg: "color.action.background.default",
+    threshold: 4.5,
+    group: "filled",
+  },
+  {
+    label: "Action icon (color.icon.action) on the primary surface",
+    fg: "color.icon.action",
+    bg: "color.action.background.default",
+    threshold: 3,
     group: "filled",
   },
   {
@@ -272,7 +308,7 @@ export const PAIRS: Pair[] = [
     label: "Destructive Alert description (text-destructive/90) on the card",
     fg: "color.text.destructive.default",
     fgAlpha: 0.9,
-    bg: "color.background.subtle",
+    bg: "color.background.card",
     threshold: 4.5,
     group: "text",
   },
@@ -295,7 +331,7 @@ export const PAIRS: Pair[] = [
       label: `${name} Alert description (text-${role}/90) on the card`,
       fg: `color.text.${role}.default`,
       fgAlpha: 0.9,
-      bg: "color.background.subtle",
+      bg: "color.background.card",
       threshold: 4.5 as const,
       group: "text" as const,
     },

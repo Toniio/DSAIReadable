@@ -37,7 +37,7 @@ A small contextual label that appears when a trigger is hovered or focused, buil
 ## Dependencies
 
 - `radix-ui` — the `Tooltip` primitive (Provider, Root, Trigger, Content, Portal, Arrow)
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -56,6 +56,9 @@ A small contextual label that appears when a trigger is hovered or focused, buil
 | -------------------------------- | ----------------------------------- | ---------------- |
 | `color.background.default`       | `text-background`                   | `TooltipContent` |
 | `color.text.default`             | `bg-foreground` · `fill-foreground` | `TooltipContent` |
+| `radius.inset`                   | `rounded-inset`                     | `TooltipContent` |
+| `radius.item`                    | `rounded-item`                      | `TooltipContent` |
+| `radius.mark`                    | `rounded-mark`                      | `TooltipContent` |
 | `space.scale.1-5`                | `gap-1.5` · `pr-1.5` · `py-1.5`     | `TooltipContent` |
 | `space.scale.2-5`                | `size-2.5`                          | `TooltipContent` |
 | `space.scale.3`                  | `px-3`                              | `TooltipContent` |

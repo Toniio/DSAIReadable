@@ -14,7 +14,7 @@ export default [...dsaireadable.configs.recommended]
 
 ## Configs
 
-- `configs.core` — the seven rules below. They read the code alone: no stylesheet,
+- `configs.core` — the eight rules below. They read the code alone: no stylesheet,
   no Tailwind. The `dsaireadable_validate_code` tool of the MCP server runs
   exactly this.
 - `configs.tailwind` — `eslint-plugin-better-tailwindcss` set up for the design
@@ -85,6 +85,15 @@ or `bg-(--color-chart-sequential-3)`, never `w-[var(--…)]`: the rule names the
 shorthand, with the variants kept (`hover:w-[var(--x)]` → `hover:w-(--x)`). A
 class of the design system comes first (`p-4`, `w-sidebar`). A `style` prop may
 also read a token: `style={{ width: "var(--sidebar-width)" }}`.
+
+### `no-text-role-in-stock-cn`
+
+Flags a text role class (`text-ui`, `text-description`, `text-title`,
+`text-control`, with any variant) passed to a `cn` imported from a module other
+than `@/lib/cn`. The stock `cn` of `@/lib/utils` runs a tailwind-merge that does
+not know the roles: it reads `text-ui` as a color and drops it next to
+`text-muted-foreground`. Import `cn` from `@/lib/cn`, under your own alias if
+you have one.
 
 ### `no-deprecated-imports`
 
