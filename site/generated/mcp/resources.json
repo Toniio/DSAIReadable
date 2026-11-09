@@ -7,7 +7,7 @@
       "description": "The full spec of one component: role, usage, constraints, anatomy, tokens, props, states, accessibility, code example, cross-references",
       "mimeType": "application/json",
       "listed": 67,
-      "example": { "uri": "ds://component/Button/spec", "chars": 10613 }
+      "example": { "uri": "ds://component/Button/spec", "chars": 10809 }
     },
     {
       "name": "token",
