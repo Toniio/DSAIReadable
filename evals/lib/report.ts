@@ -296,7 +296,7 @@ export function toMarkdown(report: RunReport): string {
     "| --- | --- | --- |",
     `| A. Deterministic | ${pct(s.stageA.pass)} | compiles ${pct(s.stageA.compiles)} · lint clean ${pct(s.stageA.lint)} · gold components used ${pct(s.stageA.coverage)} |`,
     s.stageB
-      ? `| B. Accessibility | ${pct(s.stageB.pass)} | renders ${pct(s.stageB.renders)} · axe light + dark ${pct(s.stageB.axe)} · focus on every tab stop ${pct(s.stageB.focus)} |`
+      ? `| B. Accessibility | ${pct(s.stageB.pass)} | renders ${pct(s.stageB.renders)} · axe in the four themes ${pct(s.stageB.axe)} · focus on every tab stop ${pct(s.stageB.focus)} |`
       : "| B. Accessibility | — | not run |",
     s.stageC
       ? `| C. Rubric | ${pct(s.stageC.score)} | ${Object.entries(
