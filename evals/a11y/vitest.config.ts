@@ -40,8 +40,9 @@ function evalScreens(): Plugin {
 
 /**
  * Stage B of the conformance harness (evals/README.md): each generated screen
- * rendered in headless Chromium, with the component tests' own checks (axe,
- * light and dark; a focus indicator on every tab stop). Run by `evals/run.ts`.
+ * rendered in headless Chromium, with the component tests' own checks (axe
+ * and a focus indicator on every tab stop, in the four themes of
+ * `tests/themes.ts`). Run by `evals/run.ts`.
  */
 export default defineConfig({
   root: ROOT,

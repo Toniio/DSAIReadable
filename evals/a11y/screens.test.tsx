@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest"
 
 import { axeViolations } from "../../tests/axe"
 import { unmarkedTabStops } from "../../tests/focus"
+import { EVERY_THEME_TIMEOUT } from "../../tests/themes"
 
 /**
  * One block per generated screen; the harness reads the outcome of each test
@@ -27,15 +28,23 @@ describe.each(Object.keys(screens))("%s", (id) => {
     await renderScreen()
   })
 
-  it("axe", async () => {
-    await renderScreen()
-    const violations = await axeViolations()
-    expect(violations, violations.join("\n")).toEqual([])
-  })
+  it(
+    "axe",
+    async () => {
+      await renderScreen()
+      const violations = await axeViolations()
+      expect(violations, violations.join("\n")).toEqual([])
+    },
+    EVERY_THEME_TIMEOUT
+  )
 
-  it("focus", async () => {
-    await renderScreen()
-    const unmarked = await unmarkedTabStops()
-    expect(unmarked, `no focus indicator: ${unmarked.join(", ")}`).toEqual([])
-  })
+  it(
+    "focus",
+    async () => {
+      await renderScreen()
+      const unmarked = await unmarkedTabStops()
+      expect(unmarked, `no focus indicator: ${unmarked.join(", ")}`).toEqual([])
+    },
+    EVERY_THEME_TIMEOUT
+  )
 })

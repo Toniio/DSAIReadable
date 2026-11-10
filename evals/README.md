@@ -14,16 +14,22 @@ code the design system tells agents to follow.
 
 Every screen is scored in three stages:
 
-| Stage                | Checks                                                                                                                                                                                                                                                                                                                                                                                   | Needs               |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| **A. Deterministic** | TypeScript against the real components; ESLint with `@dsaireadable/eslint-plugin`'s `recommended` config, its findings counted by family (native elements, external UI imports, off-system classes and raw values, inline SVG, deprecations); the share of the gold standard's design-system modules it uses                                                                             | nothing             |
-| **B. Accessibility** | Rendered in headless Chromium with `styles/globals.css`: zero axe violation (WCAG 2.2 A and AA) in light and dark, a focus indicator with a part at 3:1 against what it is drawn on on every tab stop, in light and dark (a `ring-ring/50` halo alone does not count, nor a ring on an element that paints nothing) — the component tests' own checks (`tests/axe.ts`, `tests/focus.ts`) | Chromium            |
-| **C. Rubric**        | A model grades component choice, variants, hierarchy and copy from 1 to 5 against the gold standard                                                                                                                                                                                                                                                                                      | `ANTHROPIC_API_KEY` |
+| Stage                | Checks                                                                                                                                                                                                                                                                                                                                                                                                    | Needs               |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| **A. Deterministic** | TypeScript against the real components; ESLint with `@dsaireadable/eslint-plugin`'s `recommended` config, its findings counted by family (native elements, external UI imports, off-system classes and raw values, inline SVG, deprecations); the share of the gold standard's design-system modules it uses                                                                                              | nothing             |
+| **B. Accessibility** | Rendered in headless Chromium with `styles/globals.css`: zero axe violation (WCAG 2.2 A and AA) and a focus indicator with a part at 3:1 against what it is drawn on on every tab stop, in the four themes: lyra and nova, light and dark (a `ring-ring/50` halo alone does not count, nor a ring on an element that paints nothing) — the component tests' own checks (`tests/axe.ts`, `tests/focus.ts`) | Chromium            |
+| **C. Rubric**        | A model grades component choice, variants, hierarchy and copy from 1 to 5 against the gold standard                                                                                                                                                                                                                                                                                                       | `ANTHROPIC_API_KEY` |
 
 A task passes stage A when it compiles and lints clean (the coverage is graded,
 not a gate: another valid component is no error), and stage B when it renders
 with no axe violation and a visible focus everywhere. The **conformance** score
 is the mean of the stages that ran.
+
+**Brands.** No task names a brand, and no session is told one: a screen follows
+the brand through the design system's classes, so each screen is generated once
+and stage B scores it in the four themes. A screen fails stage B when one theme
+fails, and the failure names the theme. The lint checks that a class exists, not
+that it follows the brand: a fixed radius step such as `rounded-lg` passes.
 
 ## Commands
 
@@ -180,6 +186,12 @@ record every pass. The report keeps the folder its screens were written in
 screens, with a row per pass and their mean in the chart. Compare two
 conditions task by task, with a test for paired outcomes (McNemar's): with 26
 tasks, a gap of a few tasks is within the noise.
+
+Score and record every pass of an audit on the same UTC day: the report's date
+is UTC, and the Audits page keeps the reports of the latest date. Record only
+the passes the release generated. A rescore of an earlier version's screens with
+a later scorer, which tells a change of scorer from a change of screens, stays
+out of `history/`: recorded, it would replace the earlier version's row.
 
 The replay reads `<task>.metrics.json` and `run.json`, so the report carries
 the turns, the MCP calls by tool, the tool errors and the tokens, the model,
