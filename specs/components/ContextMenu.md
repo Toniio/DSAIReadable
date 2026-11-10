@@ -286,7 +286,7 @@ import {
 export default function Example() {
   return (
     <ContextMenu>
-      <ContextMenuTrigger className="flex h-36 w-64 items-center justify-center border border-dashed">
+      <ContextMenuTrigger className="flex h-36 w-64 items-center justify-center rounded-control border border-dashed">
         Right-click here
       </ContextMenuTrigger>
       <ContextMenuContent>

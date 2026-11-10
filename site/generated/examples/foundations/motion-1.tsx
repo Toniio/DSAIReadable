@@ -5,7 +5,7 @@ import { Heading } from "@/components/ui/heading"
 
 export default function Example() {
   return (
-    <div className="border bg-background p-4 transition-colors duration-fast ease-default hover:bg-muted">
+    <div className="rounded-surface border bg-background p-4 transition-colors duration-fast ease-default hover:bg-muted">
       <Heading level={3} as="h2">
         Recent activity
       </Heading>

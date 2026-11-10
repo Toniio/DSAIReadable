@@ -136,7 +136,7 @@ export default function Example() {
     <ScrollArea
       role="region"
       aria-label="Tags"
-      className="h-72 w-48 rounded-none border"
+      className="h-72 w-48 rounded-surface border"
     >
       <div className="p-4">
         {Array.from({ length: 50 }, (_, i) => (
