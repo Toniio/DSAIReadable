@@ -2651,7 +2651,7 @@
       "title": "Resizable",
       "description": "Resizable panels: an area split into sections the user adjusts by dragging the handles between them.",
       "dependencies": [
-        "react-resizable-panels@^4.15.2"
+        "react-resizable-panels@^4.21.0"
       ],
       "registryDependencies": [
         "Toniio/DSAIReadable/design-system"
