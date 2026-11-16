@@ -2,7 +2,7 @@
 
 import * as ResizablePrimitive from "react-resizable-panels"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { FOCUS_RING } from "@/lib/focus"
 
 import type { ComponentProps } from "react"
@@ -70,7 +70,7 @@ function ResizableHandle({
       {...props}
     >
       {withHandle && (
-        <div className="z-dropdown flex h-6 w-1 shrink-0 rounded-none bg-border" />
+        <div className="z-dropdown flex h-6 w-1 shrink-0 rounded-control bg-border" />
       )}
     </ResizablePrimitive.Separator>
   )

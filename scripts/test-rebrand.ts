@@ -8,14 +8,15 @@
  * link and sidebar tokens read) with each color of REBRANDS, regenerates the
  * ramp in memory, and replays every contrast pair of scripts/lint-contrast.ts
  * on it, with no semantic token moved. A pair that fails names the lightness
- * target or the chroma share to revisit, not the brand.
+ * target or the chroma share to revisit, not the brand. Only lyra's themes are
+ * replayed: nova reads no violet step, so its pairs cannot move here.
  *
  *   npx tsx scripts/test-rebrand.ts
  */
 
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import { loadTokens, type Tokens } from "../mcp-server/src/lib/dtcg.js"
+import { brandOf, loadTokens, type Tokens } from "../mcp-server/src/lib/dtcg.js"
 import { measureContrast } from "./lib/contrast.js"
 import { colorGroup, SOURCES } from "./lib/palette.js"
 
@@ -57,12 +58,12 @@ let checked = 0
 for (const [name, hex] of Object.entries(REBRANDS)) {
   const sources = { ...SOURCES, [BRAND]: { ...SOURCES[BRAND], hex } }
   const measures = measureContrast(withPalette(sources)).filter(
-    (m) => !m.pair.informative
+    (m) => !m.pair.informative && brandOf(m.theme) === "lyra"
   )
   checked = measures.length
   for (const m of measures.filter((m) => !m.pass))
     failures.push(
-      `${name} ${hex}, ${m.mode}: ${m.ratio.toFixed(2)} / ${m.pair.threshold}  ${m.pair.label} (${m.fg} on ${m.under})`
+      `${name} ${hex}, ${m.theme}: ${m.ratio.toFixed(2)} / ${m.pair.threshold}  ${m.pair.label} (${m.fg} on ${m.under})`
     )
 }
 

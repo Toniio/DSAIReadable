@@ -12,6 +12,7 @@ import {
   FORCED_STATE_LABELS,
   type ForcedState,
 } from "@/site/playground/types"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 /** The props that put a component in a state of its own: disabled, invalid, checked. */
 const PROP_STATES: { prop: string; label: string; value: Args[string] }[] = [
@@ -104,6 +105,7 @@ export function StoryGrid({
     autoControls
   )
   const theme = useSiteTheme()
+  const brand = useSiteBrand()
 
   const grids = useMemo(() => {
     if (mode === "states") {
@@ -130,6 +132,7 @@ export function StoryGrid({
           args: {},
           state: "rest",
           theme,
+          brand,
           cells: grid.cells,
         }
         return (

@@ -14,9 +14,11 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import {
   cssValue,
+  fontVariableOf,
   loadTokens,
   PRIMITIVE_ROOT,
   primitiveGroups,
+  type Theme,
 } from "../mcp-server/src/lib/dtcg.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -25,12 +27,13 @@ const OUT = resolve(ROOT, "tokens.css")
 type Leaf = {
   path: string[]
   value: string
-  dark?: string
+  /** Its value in an override file, when that file sets it. */
+  override: (file: string) => string | undefined
 }
 
 type Group = { label: string | null; leaves: Leaf[] }
 
-// The tiers and the dark context, as tokens/tokens.resolver.json declares them.
+// The tiers and the theme contexts, as tokens/tokens.resolver.json declares them.
 const tokens = loadTokens(ROOT)
 // Walked without its `primitive` root group: --ds-prim-color-mist-50, not
 // --ds-prim-primitive-color-mist-50.
@@ -38,9 +41,20 @@ const primitive = primitiveGroups(tokens.tiers.primitive.tree)
 const semantic = tokens.tiers.semantic.tree
 const component = tokens.tiers.component.tree
 
+/** The sources of a theme's context, and the file that brings it. */
+const layersOf = (theme: Theme) => tokens.layers[theme]
+const lastFile = (theme: Theme) => layersOf(theme).at(-1)!.file
+
+/** The delta one source file makes, by dotted path. */
+const deltaOf = (file: string) =>
+  Object.values(tokens.layers)
+    .flat()
+    .find((layer) => layer.file === file)?.map
+
 /**
  * Depth-first walk yielding every DTCG leaf (a node carrying $value), with
- * its dark value when the dark context overrides it.
+ * its value in each override file. A font-family primitive loaded by next/font
+ * reads the self-hosted face first, and names the family without it.
  */
 function* walk(
   node: Record<string, unknown>,
@@ -52,11 +66,16 @@ function* walk(
     const obj = child as Record<string, unknown>
     if ("$value" in obj) {
       const type = obj.$type as string | undefined
-      const dark = tokens.override([...path, key].join("."), "dark")
+      const dotted = [...path, key].join(".")
+      const printed = cssValue(obj.$value, type)
+      const variable = fontVariableOf(obj)
       yield {
         path: [...path, key],
-        value: cssValue(obj.$value, type),
-        dark: dark !== undefined ? cssValue(dark, type) : undefined,
+        value: variable ? `var(${variable}, ${printed})` : printed,
+        override: (file) => {
+          const value = deltaOf(file)?.get(dotted)?.$value
+          return value === undefined ? undefined : cssValue(value, type)
+        },
       }
     } else {
       yield* walk(obj, [...path, key])
@@ -196,7 +215,10 @@ function buildSemantic(): string[] {
   lines.push("}")
 
   // Dark overrides, grouped the same way but without comments.
-  const darkGroups = groupLeaves(leaves.filter((l) => l.dark !== undefined))
+  const dark = lastFile("dark")
+  const darkGroups = groupLeaves(
+    leaves.filter((l) => l.override(dark) !== undefined)
+  )
   if (darkGroups.length > 0) {
     lines.push(
       "",
@@ -209,7 +231,7 @@ function buildSemantic(): string[] {
         ...renderGroup(
           group.leaves.map((l) => ({
             name: varName(l),
-            value: toCss(l.dark!, "semantic"),
+            value: toCss(l.override(dark)!, "semantic"),
           }))
         )
       )
@@ -217,6 +239,59 @@ function buildSemantic(): string[] {
     lines.push("}")
   }
 
+  return lines
+}
+
+/** The Layer 3 declaration of an alias. */
+const aliasName = (l: Leaf) => `--${l.path.slice(1).join("-")}`
+
+/**
+ * A nova block, in the order the cascade needs: the semantic tokens its source
+ * file overrides, then the Layer 3 aliases of every token its theme changes,
+ * so that a `.nova` element inside the page resolves them there and not at
+ * `:root`. `.nova` beats `.dark` by source order on `<html class="nova dark">`;
+ * the last selector list, of specificity (0,2,0), beats them both.
+ */
+function buildNovaBlock(
+  theme: Theme,
+  title: string,
+  selector: string
+): string[] {
+  const file = lastFile(theme)
+  const semanticGroups = groupLeaves(
+    [...walk(semantic)].filter((l) => l.override(file) !== undefined)
+  )
+  const changed = tokens.overrides[theme]
+  const aliases = [...walk(component)].filter((l) =>
+    changed.has(l.value.replace(/^\{|\}$/g, ""))
+  )
+  const lines = [
+    `/* ── ${title} ${"─".repeat(Math.max(0, 54 - title.length))} */`,
+    `${selector} {`,
+  ]
+  semanticGroups.forEach((group, i) => {
+    if (i > 0) lines.push("")
+    lines.push(
+      ...renderGroup(
+        group.leaves.map((l) => ({
+          name: varName(l),
+          value: toCss(l.override(file)!, "semantic"),
+        }))
+      )
+    )
+  })
+  if (aliases.length > 0) {
+    lines.push("", "  /* shadcn aliases */")
+    lines.push(
+      ...renderGroup(
+        aliases.map((l) => ({
+          name: aliasName(l),
+          value: toCss(l.value, "component"),
+        }))
+      )
+    )
+  }
+  lines.push("}")
   return lines
 }
 
@@ -228,7 +303,7 @@ function buildComponent(): string[] {
     ...renderGroup(
       leaves.map((l) => ({
         // Drop the "shadcn" namespace: the variable name is what shadcn expects.
-        name: `--${l.path.slice(1).join("-")}`,
+        name: aliasName(l),
         value: toCss(l.value, "component"),
       }))
     ),
@@ -240,7 +315,8 @@ function buildComponent(): string[] {
 const header = `/* ============================================================
    DS Tokens — 3-Tier CSS Output
    Generated from tokens/tokens.resolver.json: primitive.json + semantic.json
-   (+ semantic.dark.json under .dark) + component.json
+   (+ semantic.dark.json under .dark) + component.json, then the nova brand
+   (semantic.nova.json under .nova, semantic.nova.dark.json under both)
    DO NOT EDIT DIRECTLY — edit the source JSON files instead.
    Regenerate with: npm run tokens:build
    ============================================================ */`
@@ -254,6 +330,14 @@ const css =
     ...buildSemantic(),
     "",
     ...buildComponent(),
+    "",
+    ...buildNovaBlock("nova-light", "Nova brand · light", ".nova"),
+    "",
+    ...buildNovaBlock(
+      "nova-dark",
+      "Nova brand · dark",
+      ".nova.dark, .nova .dark, .dark .nova"
+    ),
   ].join("\n") + "\n"
 
 const check = process.argv.includes("--check")

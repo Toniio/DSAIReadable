@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 /**
  * Stacks the consecutive turns of one speaker in a column.
@@ -48,7 +48,7 @@ function Message({
       data-slot="message"
       data-align={align}
       className={cn(
-        "group/message relative flex w-full min-w-0 gap-1.5 text-xs data-[align=end]:flex-row-reverse",
+        "group/message relative flex w-full min-w-0 gap-1.5 text-ui data-[align=end]:flex-row-reverse",
         className
       )}
       {...props}

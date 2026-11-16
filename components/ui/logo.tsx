@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 /**
  * The brand mark pictogram, a placeholder until the real brand assets exist; set `size` to fit its surroundings.

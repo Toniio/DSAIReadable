@@ -47,8 +47,8 @@ An accessible label tied to a form control, built on Radix `Label.Root`.
 | -------------------------------- | --------------------- | ------- |
 | `opacity.disabled`               | `opacity-disabled`    | `Label` |
 | `space.scale.2`                  | `gap-2`               | `Label` |
-| `typography.size-line-height.xs` | `text-xs`             | `Label` |
-| `typography.size.xs`             | `text-xs`             | `Label` |
+| `typography.size-line-height.ui` | `text-ui`             | `Label` |
+| `typography.size.ui`             | `text-ui`             | `Label` |
 
 Collected from `components/ui/label.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 
@@ -80,7 +80,7 @@ No variant axis: the component does not call `cva()`. Its appearance is set thro
 
 | State      | Classes                                                                                                                                                                  | Description                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `default`  | —                                                                                                                                                                        | `text-xs leading-none` text with no color class of its own: it inherits the surrounding text color                                                                                     |
+| `default`  | —                                                                                                                                                                        | `text-ui leading-none` text with no color class of its own: it inherits the surrounding text color                                                                                     |
 | `hover`    | —                                                                                                                                                                        | No dedicated style                                                                                                                                                                     |
 | `focus`    | —                                                                                                                                                                        | No dedicated style (focus is on the control)                                                                                                                                           |
 | `active`   | —                                                                                                                                                                        | No dedicated style                                                                                                                                                                     |

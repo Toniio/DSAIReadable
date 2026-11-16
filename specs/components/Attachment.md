@@ -46,7 +46,7 @@ A tile that stands for one file sent or received — its icon or preview, its na
 - `Button` from `@/components/ui/button` (rendered by `AttachmentAction`)
 - The focus ring from `@/lib/focus`
 - The `shimmer`, `scroll-fade-x` and `no-scrollbar` utilities of `shadcn/tailwind.css`, imported by `styles/globals.css`
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -69,7 +69,8 @@ A tile that stands for one file sent or received — its icon or preview, its na
 | Token                            | Classes and variables                             | Where                                                                                                                              |
 | -------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `border-width.default`           | `border`                                          | `attachmentVariants`                                                                                                               |
-| `color.background.subtle`        | `bg-card` · `bg-muted`                            | `attachmentMediaVariants` · `attachmentVariants`                                                                                   |
+| `color.background.card`          | `bg-card`                                         | `attachmentVariants`                                                                                                               |
+| `color.background.subtle`        | `bg-muted`                                        | `attachmentMediaVariants`                                                                                                          |
 | `color.border.focus`             | `border-ring` · `ring-ring/50`                    | `attachmentVariants` via `FOCUS_RING_WITHIN` (`lib/focus.ts`)                                                                      |
 | `color.feedback.error.default`   | `bg-destructive/10` · `border-destructive/30`     | `attachmentMediaVariants` · `attachmentVariants`                                                                                   |
 | `color.overlay.hover`            | `bg-overlay-hover`                                | `attachmentVariants`                                                                                                               |
@@ -78,6 +79,9 @@ A tile that stands for one file sent or received — its icon or preview, its na
 | `color.text.subtle`              | `text-muted-foreground`                           | `AttachmentDescription`                                                                                                            |
 | `motion.duration.fast`           | `transition-colors`                               | `attachmentVariants`                                                                                                               |
 | `motion.easing.default`          | `transition-colors`                               | `attachmentVariants`                                                                                                               |
+| `radius.control`                 | `rounded-control`                                 | `attachmentMediaVariants` · `attachmentVariants.size.xs`                                                                           |
+| `radius.item`                    | `rounded-item`                                    | `attachmentMediaVariants`                                                                                                          |
+| `radius.surface`                 | `rounded-surface`                                 | `attachmentVariants`                                                                                                               |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`          | `attachmentVariants` via `FOCUS_RING_WITHIN` (`lib/focus.ts`)                                                                      |
 | `space.scale.0`                  | `inset-0` · `min-w-0`                             | `AttachmentContent` · `AttachmentDescription` · `AttachmentGroup` · `AttachmentTitle` · `AttachmentTrigger` · `attachmentVariants` |
 | `space.scale.0-5`                | `mt-0.5`                                          | `AttachmentDescription`                                                                                                            |
@@ -97,8 +101,10 @@ A tile that stands for one file sent or received — its icon or preview, its na
 | `space.scale.8`                  | `w-8`                                             | `attachmentMediaVariants`                                                                                                          |
 | `typography.font-weight.medium`  | `font-medium`                                     | `AttachmentTitle`                                                                                                                  |
 | `typography.line-height.tight`   | `leading-tight`                                   | `AttachmentContent`                                                                                                                |
-| `typography.size-line-height.xs` | `text-xs`                                         | `AttachmentDescription` · `attachmentVariants.size.default` · `attachmentVariants.size.sm` · `attachmentVariants.size.xs`          |
-| `typography.size.xs`             | `text-xs`                                         | `AttachmentDescription` · `attachmentVariants.size.default` · `attachmentVariants.size.sm` · `attachmentVariants.size.xs`          |
+| `typography.size-line-height.ui` | `text-ui`                                         | `attachmentVariants.size.default`                                                                                                  |
+| `typography.size-line-height.xs` | `text-xs`                                         | `AttachmentDescription` · `attachmentVariants.size.sm` · `attachmentVariants.size.xs`                                              |
+| `typography.size.ui`             | `text-ui`                                         | `attachmentVariants.size.default`                                                                                                  |
+| `typography.size.xs`             | `text-xs`                                         | `AttachmentDescription` · `attachmentVariants.size.sm` · `attachmentVariants.size.xs`                                              |
 
 Collected from `components/ui/attachment.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

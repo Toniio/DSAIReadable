@@ -8,8 +8,14 @@ import {
   StatusBadge,
 } from "@/site/foundation-docs/spec-pages/token-bits"
 import { foundation } from "@/site/lib/nav"
-import { tailwindClasses, tokenGroup } from "@/site/lib/tokens"
+import {
+  differsInNova,
+  lightIn,
+  tailwindClasses,
+  tokenGroup,
+} from "@/site/lib/tokens"
 import { DocSection } from "@/site/ui/doc-section"
+import { InBrand } from "@/site/ui/in-brand"
 import { InlineMarkdown } from "@/site/ui/markdown"
 
 const ENTRY = foundation("radius")
@@ -31,10 +37,15 @@ export default function RadiusPage() {
         title="Scale"
         description={
           <>
-            Every surface is square, <Code>rounded-none</Code>: buttons, fields,
-            cards, menus, dialogs. <Code>rounded-full</Code> is for a round
-            shape: an avatar, a radio, a switch. The steps between are for
-            content a screen draws itself, such as an image or a hero.
+            A component draws its corners with a role:{" "}
+            <Code>rounded-surface</Code> for a card or a dialog,{" "}
+            <Code>rounded-control</Code> for a button or a field, and{" "}
+            <Code>item</Code>, <Code>inset</Code>, <Code>mark</Code>,{" "}
+            <Code>pill</Code> inside them. Every role is square in lyra and
+            rounded in nova; the values below follow the brand this site is
+            showing. <Code>rounded-full</Code> is for a round shape: an avatar,
+            a radio, a switch. The steps between are for content a screen draws
+            itself, such as an image or a hero.
           </>
         }
       >
@@ -60,7 +71,11 @@ export default function RadiusPage() {
                     <StatusBadge status={entry.status} />
                   </span>
                   <Code className="w-fit">{bridged ?? `rounded-${name}`}</Code>
-                  <Dimension value={entry.value.light} />
+                  <InBrand differs={differsInNova(entry.value)}>
+                    {(brand) => (
+                      <Dimension value={lightIn(entry.value, brand)} />
+                    )}
+                  </InBrand>
                   <span className="text-xs leading-relaxed text-muted-foreground">
                     <InlineMarkdown>{entry.description ?? ""}</InlineMarkdown>
                   </span>

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Command as CommandPrimitive } from "cmdk"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
 import { UI_STRINGS } from "@/lib/ui-strings"
 import {
@@ -35,7 +35,7 @@ function Command({
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        "flex size-full flex-col overflow-hidden rounded-none bg-popover text-popover-foreground",
+        "flex size-full flex-col overflow-hidden rounded-surface bg-popover text-popover-foreground",
         className
       )}
       {...props}
@@ -79,7 +79,7 @@ function CommandDialog({
       </DialogHeader>
       <DialogContent
         className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-none p-0",
+          "top-1/3 translate-y-0 overflow-hidden rounded-surface p-0",
           className
         )}
         showCloseButton={showCloseButton}
@@ -112,7 +112,7 @@ function CommandInput({
             // focus-managed: this control sits inside an InputGroup, whose
             // has-[[data-slot=command-input]:focus-visible] rule (above) draws the
             // ring around the whole group. A second ring would nest inside the first.
-            "w-full text-xs outline-hidden disabled:cursor-not-allowed disabled:opacity-disabled",
+            "w-full text-ui outline-hidden disabled:cursor-not-allowed disabled:opacity-disabled",
             className
           )}
           {...props}
@@ -168,7 +168,7 @@ function CommandEmpty({
   return (
     <CommandPrimitive.Empty
       data-slot="command-empty"
-      className={cn("py-6 text-center text-xs", className)}
+      className={cn("py-6 text-center text-ui", className)}
       {...props}
     />
   )
@@ -248,7 +248,7 @@ function CommandItem({
         // active item with aria-activedescendant, marking it data-selected, which
         // the background color below renders. A ring here would double an
         // indicator that already exists.
-        "group/command-item relative flex cursor-default items-center gap-2 rounded-none px-2 py-2 text-xs outline-hidden select-none in-data-[slot=dialog-content]:rounded-none! data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-disabled data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
+        "group/command-item relative flex cursor-default items-center gap-2 rounded-inset px-2 py-2 text-ui outline-hidden select-none in-data-[slot=dialog-content]:rounded-control! data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-disabled data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
         className
       )}
       {...props}

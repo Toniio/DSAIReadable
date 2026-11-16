@@ -1,8 +1,8 @@
 import { Geist, JetBrains_Mono } from "next/font/google"
 
 /**
- * The typefaces of the design system. next/font self-hosts them and sets
- * `--font-<key>`, which `typography.font-family.<key>` describes
+ * The typefaces of the lyra brand, the default. next/font self-hosts them and
+ * sets `--font-sans` and `--font-mono`, which `typography.font-family.*` reads
  * (tokens:lint-fonts). The root layout puts `fontVariables` on <html>.
  */
 const fontSans = Geist({

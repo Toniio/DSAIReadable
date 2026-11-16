@@ -17,7 +17,7 @@ Color mode: light
 
 Requirements:
 - MANDATORY: Import each component from its own module, e.g. `import { Button } from "@/components/ui/button"` and `import { Card, CardContent } from "@/components/ui/card"`
-- Import the `cn` helper from `@/lib/utils` when you need to merge classes
+- Import the `cn` helper from `@/lib/cn` when you need to merge classes
 - NEVER import a stylesheet: `styles/globals.css` already imports `tokens.css` and bridges it into Tailwind v4
 - Use DS components for every element they cover — never a raw <button>, <input>, <select>, <textarea>, <table>, <dialog>, <a>, <label>, <h1>–<h6> or <svg>. A <div> is fine for layout (flex, grid); a content section is a <Card>
 - Use ONLY DS tokens via Tailwind classes (no raw hex colors, no arbitrary Tailwind values)
@@ -33,13 +33,13 @@ Requirements:
 - Tailwind's default colors, radii, shadows, spacing and type scale are removed: bg-red-500, p-13 or text-7xl generate no CSS, and ESLint refuses them.
 - Use classes like: bg-background, text-foreground, text-primary, bg-muted, border-border, text-muted-foreground, bg-destructive, etc.
 - For spacing and sizes, use Tailwind v3's spacing scale, each step read from a space.scale.* token: p-4, gap-1.5, m-2, h-9, w-72. Off-scale steps (p-13, gap-17) do not exist.
-- For text, use text-xs … text-4xl, font-sans / font-mono / font-heading, font-normal … font-bold, leading-tight … leading-loose, tracking-tight … tracking-widest. Label, FieldLabel and Heading draw their own text style (12px regular, and the size of their level): give them no text-*, font-*, tracking-* or leading-* class.
+- Text beside components names the role of what it sits beside, and follows the brand: text-title, text-description, text-ui; text-control with md:text-ui, only on a field you draw. text-xs … text-4xl are fixed sizes, for text that keeps its size. Also font-body / font-heading / font-sans / font-mono, font-normal … font-bold, leading-tight … leading-loose, tracking-tight … tracking-widest. Label and FieldLabel are regular at text-ui, Heading semibold at the size of its level: give them no text-*, font-*, tracking-* or leading-* class.
 - For state colors on text, use text-success and text-warning, text-destructive for errors.
-- Every component is square and draws its own corners: add no rounded-* class to one, and keep a surface you draw yourself square too. rounded-full is for a round shape (an avatar, a dot); rounded-sm … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero; rounded-xs draws the Chart's indicators.
+- Every component draws its corners from a radius role, square in lyra and rounded in nova: add no rounded-* class to one. A surface you draw names a role too: rounded-surface, rounded-control, rounded-item…. rounded-full is for a round shape (an avatar, a dot); rounded-sm … rounded-4xl (mapped to --radius-*) are for content, such as an image or a hero; rounded-xs draws the Chart's indicators.
 - For shadows, use: shadow-xs … shadow-2xl (mapped to --elevation-*).
 - For a disabled state, use opacity-disabled under its variant: disabled:opacity-disabled.
 - A class comes first. For a token or a runtime variable that has no class, use Tailwind's shorthand utility-(--variable): w-(--radix-popover-trigger-width), bg-(--color-chart-sequential-3); never a bracket, w-[var(--…)]. An inline style may read a token too, style={{ width: 'var(--sidebar-width)' }}, but never a raw value.
-- Do: bg-background text-foreground · bg-primary text-primary-foreground · bg-muted text-muted-foreground · border-border · bg-card text-card-foreground · bg-destructive · p-4 gap-1.5 m-2 space-y-4 h-9 max-w-sm (the locked spacing and container scales) · text-success text-warning · rounded-none rounded-full (a round shape): the components are square · shadow-sm shadow-md · text-xs text-sm text-base font-normal font-medium (FieldLabel, Button and Heading need none) · disabled:opacity-disabled · w-(--radix-popover-trigger-width) bg-(--color-chart-sequential-3) (a variable with no class: the shorthand) · style={{ width: 'var(--sidebar-width)' }} (a token read in an inline style)
+- Do: bg-background text-foreground · bg-primary text-primary-foreground · bg-muted text-muted-foreground · border-border · bg-card text-card-foreground · bg-destructive · p-4 gap-1.5 m-2 space-y-4 h-9 max-w-sm (the locked spacing and container scales) · text-success text-warning · rounded-surface rounded-control rounded-full (a round shape) · shadow-sm shadow-md · text-ui text-description text-title font-normal font-medium (FieldLabel, Button and Heading need none) · disabled:opacity-disabled · w-(--radix-popover-trigger-width) bg-(--color-chart-sequential-3) (a variable with no class: the shorthand) · style={{ width: 'var(--sidebar-width)' }} (a token read in an inline style)
 - Don't: bg-[#432dd7] — NEVER use arbitrary hex colors
 - Don't: text-[var(--ds-prim-color-violet-600)] — NEVER reference primitive tokens directly
 - Don't: w-[var(--sidebar-width)] — NEVER bracket a variable: write w-(--sidebar-width)
@@ -50,7 +50,7 @@ Requirements:
 - Don't: rounded-[0.625rem] — NEVER use arbitrary radius values
 - Don't: disabled:opacity-50 — NEVER: a disabled state uses opacity-disabled
 - Don't: rounded (without a size) — NEVER: it generates no CSS. A component draws its own corners; use rounded-full for a round shape
-- Don't: rounded-md on a Button, rounded-lg on a Card or rounded-xl on a Dialog — NEVER: the components are square, and a rounded surface among them is the mixed look the system does not have
+- Don't: rounded-md on a Button, rounded-lg on a Card or rounded-xl on a Dialog — NEVER: a component reads its radius role, and a fixed step on it stays the same when the brand changes
 
 **CRITICAL COMPONENT RULE — ALWAYS use DS React components — NEVER use raw HTML elements:**
 - The design system provides pre-built React components that enforce tokens, accessibility, and visual consistency.

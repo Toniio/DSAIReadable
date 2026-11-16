@@ -11,7 +11,9 @@
  *   · specs/components/*.md     — human titles and the one-line role
  *   · components/ui/*.tsx       — real imports, for npm and internal deps
  *   · tokens.css + globals.css  — the stylesheet shipped by the base item
- *   · lib/fonts.ts              — the fonts, one registry:font item each
+ *   · tokens.css, .nova blocks  — the opt-in theme-nova item
+ *   · lib/fonts.ts              — lyra's fonts, one registry:font item each
+ *   · lib/fonts-nova.ts         — nova's fonts, required by theme-nova only
  *
  *   npx tsx scripts/build-registry.ts [--check]
  */
@@ -19,7 +21,12 @@
 import { readFileSync, writeFileSync, readdirSync } from "node:fs"
 import { resolve, dirname, basename } from "node:path"
 import { fileURLToPath } from "node:url"
-import { firstFamily, nextFontsOf } from "./lib/next-fonts.js"
+import {
+  firstFamily,
+  FONTS,
+  NOVA_FONTS,
+  nextFontsOf,
+} from "./lib/next-fonts.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CHECK = process.argv.includes("--check")
@@ -46,6 +53,7 @@ const AMBIENT_PACKAGES = new Set(["react", "react-dom", "next"])
  * the consumer gets an import that resolves to nothing.
  */
 const BASE_MODULES = new Map([
+  ["@/lib/cn", "lib/cn.ts"],
   ["@/lib/utils", "lib/utils.ts"],
   ["@/lib/focus", "lib/focus.ts"],
   ["@/lib/ui-strings", "lib/ui-strings.ts"],
@@ -329,11 +337,21 @@ const layer3 = blockVars(
 const rootVars = allRootVars(tokensCss)
 const darkVars = { ...blockVars(tokensCss, /\.dark\s*\{/), ...layer3 }
 
-// --- The fonts: one registry:font item per font lib/fonts.ts loads ---------
-/** `var(--typography-font-family-mono)` → the primitive stack it resolves to. */
+// --- The fonts: one registry:font item per font a brand's file loads ---------
+/**
+ * `--ds-prim-typography-font-family-mono` → the stack it falls back on: the
+ * primitive prints `var(--font-mono, JetBrains Mono, monospace)`, where
+ * `--font-mono` is the variable next/font sets and no stylesheet declares.
+ */
 function stackOf(variable: string): string {
-  let value = rootVars[variable]
-  while (value?.startsWith("var(")) value = rootVars[value.slice(4, -1)]
+  let value: string | undefined = rootVars[variable]
+  for (;;) {
+    const ref: RegExpMatchArray | null | undefined = value?.match(
+      /^var\((--[\w-]+)(?:,\s*(.+))?\)$/
+    )
+    if (!ref) break
+    value = rootVars[ref[1]] ?? ref[2]
+  }
   if (!value) throw new Error(`build-registry: ${variable} resolves to nothing`)
   return value
 }
@@ -350,33 +368,43 @@ function stackOf(variable: string): string {
  * <html> for each font (it stacked `font-mono font-sans font-mono`): which
  * font <html> gets is globals.css's `@layer base`, shipped below.
  */
-const fonts: RegistryItem[] = nextFontsOf(ROOT).loaded.map((font) => {
-  if (!font.variable)
-    throw new Error(`build-registry: ${font.loader} sets no --font-* variable`)
-  const key = font.variable.replace(/^--font-/, "")
-  const [first, ...fallbacks] = stackOf(
-    `--typography-font-family-${key}`
-  ).split(",")
-  const family = firstFamily(first)
-  const slug = family.toLowerCase().replace(/\s+/g, "-")
-  return {
-    name: `font-${slug}`,
-    type: "registry:font",
-    title: family,
-    description: `The ${family} typeface behind font-${key}: next/font in a Next.js app, @fontsource-variable elsewhere.`,
-    font: {
-      family: [`'${family} Variable'`, ...fallbacks.map((f) => f.trim())].join(
-        ", "
-      ),
-      provider: "google",
-      import: font.loader,
-      variable: font.variable,
-      subsets: font.subsets,
-      dependency: `@fontsource-variable/${slug}`,
-      selector: "",
-    },
-  }
-})
+const fontItemsOf = (
+  file: string,
+  usedFor: (key: string) => string
+): RegistryItem[] =>
+  nextFontsOf(ROOT, file).loaded.map((font) => {
+    if (!font.variable)
+      throw new Error(
+        `build-registry: ${font.loader} sets no --font-* variable`
+      )
+    const key = font.variable.replace(/^--font-/, "")
+    const [first, ...fallbacks] = stackOf(
+      `--ds-prim-typography-font-family-${key}`
+    ).split(",")
+    const family = firstFamily(first)
+    const slug = family.toLowerCase().replace(/\s+/g, "-")
+    return {
+      name: `font-${slug}`,
+      type: "registry:font",
+      title: family,
+      description: `The ${family} typeface ${usedFor(key)}: next/font in a Next.js app, @fontsource-variable elsewhere.`,
+      font: {
+        family: [
+          `'${family} Variable'`,
+          ...fallbacks.map((f) => f.trim()),
+        ].join(", "),
+        provider: "google",
+        import: font.loader,
+        variable: font.variable,
+        subsets: font.subsets,
+        dependency: `@fontsource-variable/${slug}`,
+        selector: "",
+      },
+    }
+  })
+
+const fonts = fontItemsOf(FONTS, (key) => `behind font-${key}`)
+const novaFonts = fontItemsOf(NOVA_FONTS, () => "of the nova brand")
 
 // --- The @theme bridge, and the lockdown --------------------------------------
 const themeBlock = globals.find(
@@ -429,6 +457,82 @@ for (const ns of lockedNamespaces)
 for (const [key, value] of Object.entries(theme))
   if (value.includes("--color-")) theme[`color-${key}`] ??= "initial"
 
+// --- What belongs to nova alone: its typefaces and its blocks ------------------
+/**
+ * A nova typeface's primitive reads the variable its font item sets, so it
+ * travels with theme-nova: the base item names no nova font, and a lyra
+ * consumer's stylesheet never mentions one.
+ */
+const novaFontVariables = novaFonts.map(
+  (f) => (f.font as { variable: string }).variable
+)
+const isNovaFont = ([, value]: [string, string]) =>
+  novaFontVariables.some((v) => value.startsWith(`var(${v},`))
+const lyraRootVars = Object.fromEntries(
+  Object.entries(rootVars).filter((entry) => !isNovaFont(entry))
+)
+const novaRootVars = Object.fromEntries(
+  Object.entries(rootVars).filter(isNovaFont)
+)
+if (Object.keys(novaRootVars).length !== novaFonts.length)
+  throw new Error(
+    `build-registry: ${novaFonts.length} nova fonts, ${Object.keys(novaRootVars).length} primitives reading them`
+  )
+
+/** The blocks of tokens.css, under the selector it writes: `.nova`, then
+ * nova in dark, which already re-declare the Layer 3 aliases they change. */
+const novaBlocks = Object.fromEntries(
+  [...tokensCss.matchAll(/(?:^|\n)(\.nova[^{]*?)\s*\{/g)].map((m) => [
+    m[1],
+    blockVars(tokensCss.slice(m.index), /\.nova[^{]*\{/),
+  ])
+)
+if (Object.keys(novaBlocks).length !== 2)
+  throw new Error(
+    `build-registry: expected the two .nova blocks of tokens.css, found: ${Object.keys(novaBlocks).join(" | ")}`
+  )
+
+/**
+ * Opt-in, in the `css` field for the reason the base item is. An item of its
+ * own, of type registry:item: registry:theme would have the CLI announce that
+ * existing variables are overwritten, and this one only adds blocks.
+ */
+const themeNova: RegistryItem = {
+  name: "theme-nova",
+  type: "registry:item",
+  title: "Nova theme",
+  description:
+    "The nova brand: its colors, radius roles, text sizes and typefaces under the .nova class on <html>, next to .dark. Lyra stays the default, and nothing changes until the class is set.",
+  registryDependencies: [
+    selfRef("design-system"),
+    ...novaFonts.map((f) => selfRef(f.name)),
+  ],
+  css: {
+    ":root": novaRootVars,
+    ...novaBlocks,
+    // Preflight sets code, kbd, samp and pre in this variable, which Tailwind
+    // compiles from lyra's --font-mono; those elements need no font-mono class.
+    ".nova": {
+      ...novaBlocks[".nova"],
+      "--default-mono-font-family": "var(--typography-font-family-mono)",
+    },
+    // The base item leaves --font-sans and --font-mono to the font items, so
+    // Tailwind inlines lyra's family into font-sans and font-mono: no block can
+    // reach those classes. Under .nova they read the token instead.
+    "@layer utilities": Object.fromEntries(
+      fonts.map((f) => {
+        const key = (f.font as { variable: string }).variable.slice(
+          "--font-".length
+        )
+        return [
+          `.nova .font-${key}`,
+          { "font-family": `var(--typography-font-family-${key})` },
+        ]
+      })
+    ),
+  },
+}
+
 // --- Everything else in globals.css --------------------------------------------
 const css: CssObject = {}
 const cssDependencies: string[] = []
@@ -456,7 +560,7 @@ for (const node of globals) {
       `build-registry: styles/globals.css has "${node.kind === "block" ? node.selector : node.kind === "statement" ? node.text : node.prop}", which the base item does not know how to ship`
     )
 }
-css[":root"] = rootVars
+css[":root"] = lyraRootVars
 css[".dark"] = darkVars
 for (const node of globals)
   if (node.kind === "block" && /^@(utility|layer)\s/.test(node.selector))
@@ -556,13 +660,15 @@ const SELF_PREFIX = `${OWNER}/${REPO}/`
 const knownItems = new Set([
   base.name,
   conventions.name,
+  themeNova.name,
   ...fonts.map((f) => f.name),
+  ...novaFonts.map((f) => f.name),
   ...items.map((i) => i.name),
 ])
 const danglingDeps: string[] = []
 const bareDeps: string[] = []
 
-for (const item of [base, ...items]) {
+for (const item of [base, themeNova, ...items]) {
   for (const dep of item.registryDependencies ?? []) {
     if (dep.startsWith(SELF_PREFIX)) {
       if (!knownItems.has(dep.slice(SELF_PREFIX.length)))
@@ -592,7 +698,7 @@ const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: REGISTRY_NAME,
   homepage: HOMEPAGE,
-  items: [base, ...fonts, conventions, ...items],
+  items: [base, ...fonts, themeNova, ...novaFonts, conventions, ...items],
 }
 
 const content = JSON.stringify(registry, null, 2) + "\n"
@@ -612,12 +718,12 @@ if (CHECK) {
     process.exit(1)
   }
   console.log(
-    `✅ build-registry: registry.json up to date — ${items.length} components + base, ${fonts.length} font and conventions items.`
+    `✅ build-registry: registry.json up to date — ${items.length} components + base, ${fonts.length + novaFonts.length} font, theme-nova and conventions items.`
   )
   process.exit(0)
 }
 
 writeFileSync(OUT, content)
 console.log(
-  `✅ build-registry: registry.json — ${items.length} components + base, ${fonts.length} font and conventions items.`
+  `✅ build-registry: registry.json — ${items.length} components + base, ${fonts.length + novaFonts.length} font, theme-nova and conventions items.`
 )

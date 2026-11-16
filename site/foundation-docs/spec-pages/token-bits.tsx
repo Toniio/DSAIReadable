@@ -75,9 +75,10 @@ export function shortName(entry: Token, prefix: string): string {
 }
 
 /**
- * A light and a dark panel, side by side: the same content in both modes.
- * On a dark page, the light panel resets the semantic variables, and
- * `data-theme-scope="light"` keeps the `dark:` variant out of it
+ * A light and a dark panel, side by side: the same content in both modes,
+ * in the site's brand. On a dark page, `data-theme-scope="light"` resets the
+ * semantic variables of the light panel (`lightScope`, one stylesheet however
+ * many panels a page has) and keeps the `dark:` variant out of it
  * (site/app/site.css).
  */
 export function ModePanels({
@@ -87,9 +88,11 @@ export function ModePanels({
 }) {
   return (
     <div className="grid gap-px border bg-border md:grid-cols-2">
+      <style href="light-scope" precedence="default">
+        {lightScope()}
+      </style>
       <div
         data-theme-scope="light"
-        style={lightScope()}
         className="flex flex-col gap-4 bg-background p-6 text-foreground"
       >
         <p className="text-xs font-medium text-muted-foreground">Light</p>

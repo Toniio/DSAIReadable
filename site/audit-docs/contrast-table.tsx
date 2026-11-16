@@ -16,7 +16,10 @@ import type {
   ContrastGroup,
   ContrastRow,
   Measure,
+  ModeMeasures,
 } from "@/site/audit-docs/contrast"
+import type { Brand } from "@/site/lib/brand"
+import { InBrand } from "@/site/ui/in-brand"
 
 const GROUPS: { id: ContrastGroup; label: string }[] = [
   { id: "focus", label: "Focus" },
@@ -73,9 +76,22 @@ function Ratio({
   )
 }
 
-function Result({ row }: { row: ContrastRow }) {
+/** A row's measures in a brand: lyra's sit at its top level. */
+function measuresIn(row: ContrastRow, brand: Brand): ModeMeasures {
+  return brand === "nova" ? row.nova : row
+}
+
+function Result({
+  measures,
+  row,
+}: {
+  measures: ModeMeasures
+  row: ContrastRow
+}) {
   if (row.informative) return <Badge variant="secondary">Info</Badge>
-  const pass = [row.light, row.dark].every((entry) => !entry || entry.pass)
+  const pass = [measures.light, measures.dark].every(
+    (entry) => !entry || entry.pass
+  )
   return pass ? (
     <Badge variant="success">Pass</Badge>
   ) : (
@@ -85,8 +101,8 @@ function Result({ row }: { row: ContrastRow }) {
 
 /**
  * Every pair the contrast lint measures, filtered by kind: the ratio in
- * light and in dark next to a swatch of the colors as painted, the threshold
- * and the result.
+ * light and in dark, in the site's brand, next to a swatch of the colors as
+ * painted, the threshold and the result.
  */
 export function ContrastTable({ rows }: { rows: ContrastRow[] }) {
   const [filter, setFilter] = useState<Filter>("all")
@@ -141,22 +157,34 @@ export function ContrastTable({ rows }: { rows: ContrastRow[] }) {
                 </span>
               </TableCell>
               <TableCell>
-                <Ratio
-                  measure={row.light}
-                  mode="light"
-                  text={row.threshold === 4.5}
-                />
+                <InBrand>
+                  {(brand) => (
+                    <Ratio
+                      measure={measuresIn(row, brand).light}
+                      mode="light"
+                      text={row.threshold === 4.5}
+                    />
+                  )}
+                </InBrand>
               </TableCell>
               <TableCell>
-                <Ratio
-                  measure={row.dark}
-                  mode="dark"
-                  text={row.threshold === 4.5}
-                />
+                <InBrand>
+                  {(brand) => (
+                    <Ratio
+                      measure={measuresIn(row, brand).dark}
+                      mode="dark"
+                      text={row.threshold === 4.5}
+                    />
+                  )}
+                </InBrand>
               </TableCell>
               <TableCell className="font-mono">{row.threshold}:1</TableCell>
               <TableCell>
-                <Result row={row} />
+                <InBrand>
+                  {(brand) => (
+                    <Result measures={measuresIn(row, brand)} row={row} />
+                  )}
+                </InBrand>
               </TableCell>
             </TableRow>
           ))}

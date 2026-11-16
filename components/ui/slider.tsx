@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Slider as SliderPrimitive } from "radix-ui"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { FOCUS_RING_WIDTH } from "@/lib/focus"
 
 /**
@@ -66,7 +66,7 @@ function Slider({
     >
       <SliderPrimitive.Track
         data-slot="slider-track"
-        className="relative grow overflow-hidden rounded-none bg-muted data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
+        className="relative grow overflow-hidden rounded-pill bg-muted data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
       >
         <SliderPrimitive.Range
           data-slot="slider-range"
@@ -83,7 +83,7 @@ function Slider({
             ariaLabel,
             ariaLabelledBy
           )}
-          className={`relative block size-3 shrink-0 rounded-none border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-(length:--space-focus-ring-width) ${FOCUS_RING_WIDTH} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid active:ring-(length:--space-focus-ring-width) disabled:pointer-events-none disabled:opacity-disabled`}
+          className={`relative block size-3 shrink-0 rounded-pill border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-(length:--space-focus-ring-width) ${FOCUS_RING_WIDTH} focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring focus-visible:outline-solid active:ring-(length:--space-focus-ring-width) disabled:pointer-events-none disabled:opacity-disabled`}
         />
       ))}
     </SliderPrimitive.Root>

@@ -20,8 +20,10 @@ import type {
   TypeData,
   TypeRow,
 } from "@/site/foundation-docs/tokens/type-data"
+import type { Brand } from "@/site/lib/brand"
 import { CopyButton } from "@/site/ui/copy-button"
 import { DocSection } from "@/site/ui/doc-section"
+import { InBrand } from "@/site/ui/in-brand"
 
 type Display = "table" | "preview"
 
@@ -30,8 +32,14 @@ type Display = "table" | "preview"
  * names come from the data, the classes from this table.
  */
 const SPECIMEN: Record<string, string> = {
+  "font-body": "font-body",
+  "font-heading": "font-heading",
   "font-mono": "font-mono",
   "font-sans": "font-sans",
+  "text-ui": "text-ui",
+  "text-description": "text-description",
+  "text-title": "text-title",
+  "text-control": "text-control",
   "text-xs": "text-xs",
   "text-sm": "text-sm",
   "text-base": "text-base",
@@ -404,6 +412,8 @@ function Headings({
  */
 export function TypeStyles({ data }: { data: TypeData }) {
   const [display, setDisplay] = useState<Display>("table")
+  const inBrand = (rows: TypeRow[], brand: Brand) =>
+    brand === "nova" ? rows.map((row) => ({ ...row, ...row.nova })) : rows
 
   return (
     <>
@@ -423,17 +433,19 @@ export function TypeStyles({ data }: { data: TypeData }) {
           <ToggleGroupItem value="preview">Preview</ToggleGroupItem>
         </ToggleGroup>
         <p className="max-w-3xl border-l border-primary pl-3 text-xs leading-relaxed text-muted-foreground">
-          Specimens render in this site&apos;s own fonts, the ones{" "}
-          <code className="font-mono">lib/fonts.ts</code> loads: JetBrains Mono
-          for the interface, Geist for <code className="font-mono">Kbd</code>{" "}
-          keys and editorial text.
+          Specimens render in the fonts of the brand this site is showing.{" "}
+          <code className="font-mono">lib/fonts.ts</code> loads lyra&apos;s:
+          JetBrains Mono for the interface, Geist for{" "}
+          <code className="font-mono">Kbd</code> keys and editorial text.{" "}
+          <code className="font-mono">lib/fonts-nova.ts</code> loads
+          nova&apos;s: Lora for text, DM Sans for headings, Geist Mono for code.
         </p>
       </div>
 
       <DocSection
         id="text-styles"
         title="Text styles"
-        description="The spec's canonical styles: a size, a line height, a weight and a spacing written together. Every one is in the mono family, which html applies. A style a component draws takes no class: write the text, not the style."
+        description="The spec's canonical styles: a size, a line height, a weight and a spacing written together. Every one is in the body family, which html applies. A style a component draws takes no class: write the text, not the style."
       >
         <TextStyles styles={data.styles} display={display} />
       </DocSection>
@@ -441,9 +453,13 @@ export function TypeStyles({ data }: { data: TypeData }) {
       <DocSection
         id="families"
         title="Font families"
-        description="Two typefaces. The mono family is the whole interface: html applies font-mono."
+        description="The stack of each family in the brand this site is showing. html applies font-body: JetBrains Mono in lyra, Lora in nova."
       >
-        <Families rows={data.families} display={display} />
+        <InBrand>
+          {(brand) => (
+            <Families rows={inBrand(data.families, brand)} display={display} />
+          )}
+        </InBrand>
       </DocSection>
 
       <DocSection
@@ -451,25 +467,29 @@ export function TypeStyles({ data }: { data: TypeData }) {
         title="Type scale"
         description="Each size sets its paired line height: add a leading class only to change it."
       >
-        {display === "table" ? (
-          <TypeTable
-            rows={data.scale}
-            value="Size"
-            extra={{
-              label: "Line height",
-              cell: (row) => row.lineHeight ?? "—",
-            }}
-          />
-        ) : (
-          <SpecimenList
-            rows={data.scale}
-            base=""
-            facts={(row) => [
-              `${row.value} · ${row.detail ?? ""}`,
-              row.lineHeight ? `line height ${row.lineHeight}` : "",
-            ]}
-          />
-        )}
+        <InBrand>
+          {(brand) =>
+            display === "table" ? (
+              <TypeTable
+                rows={inBrand(data.scale, brand)}
+                value="Size"
+                extra={{
+                  label: "Line height",
+                  cell: (row) => row.lineHeight ?? "—",
+                }}
+              />
+            ) : (
+              <SpecimenList
+                rows={inBrand(data.scale, brand)}
+                base=""
+                facts={(row) => [
+                  `${row.value} · ${row.detail ?? ""}`,
+                  row.lineHeight ? `line height ${row.lineHeight}` : "",
+                ]}
+              />
+            )
+          }
+        </InBrand>
       </DocSection>
 
       <DocSection
@@ -522,7 +542,15 @@ export function TypeStyles({ data }: { data: TypeData }) {
         title="Headings"
         description="The Heading component draws each level: the size follows level, and the family, weight and spacing stay the same."
       >
-        <Headings rows={data.headings} scale={data.scale} display={display} />
+        <InBrand>
+          {(brand) => (
+            <Headings
+              rows={data.headings}
+              scale={inBrand(data.scale, brand)}
+              display={display}
+            />
+          )}
+        </InBrand>
       </DocSection>
     </>
   )

@@ -31,7 +31,7 @@ An animated loading placeholder in the shape of the content to come, which makes
 
 ## Dependencies
 
-- `cn` from `@/lib/utils`
+- `cn` from `@/lib/cn`
 
 ## Anatomy
 
@@ -46,6 +46,7 @@ An animated loading placeholder in the shape of the content to come, which makes
 | Token                     | Classes and variables | Where      |
 | ------------------------- | --------------------- | ---------- |
 | `color.background.subtle` | `bg-muted`            | `Skeleton` |
+| `radius.item`             | `rounded-item`        | `Skeleton` |
 
 Collected from `components/ui/skeleton.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

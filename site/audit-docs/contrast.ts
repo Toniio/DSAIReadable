@@ -6,7 +6,8 @@ import {
   type Pair,
 } from "@/scripts/lib/contrast-pairs"
 import { oklchToSrgb } from "@/mcp-server/src/lib/dtcg"
-import { darkValue, tokenByName } from "@/site/lib/tokens"
+import type { Brand } from "@/site/lib/brand"
+import { darkIn, lightIn, tokenByName } from "@/site/lib/tokens"
 
 /**
  * The contrast audit, measured at build time from the resolved values of
@@ -115,14 +116,11 @@ function hex({ r, g, b }: Rgba): string {
   return `#${[r, g, b].map((value) => value.toString(16).padStart(2, "0")).join("")}`
 }
 
-function resolved(token: string, mode: Mode): Rgba {
-  const entry = tokenByName(token)
-  if (!entry) throw new Error(`Unknown token: ${token}`)
-  const value = mode === "dark" ? darkValue(entry) : entry.value.light
-  const color = parse(value)
+function resolved(token: string, mode: Mode, brand: Brand): Rgba {
+  const color = parse(valueOf(token, mode, brand))
   if (color.a === 1) return color
   // A translucent surface sits on the page.
-  return over(color, 1, resolved("color.background.default", mode))
+  return over(color, 1, resolved("color.background.default", mode, brand))
 }
 
 /** One mode of a pair, as painted. */
@@ -134,7 +132,11 @@ export interface Measure {
   bg: string
 }
 
-export interface ContrastRow {
+/** A pair's measures in the modes it is measured in. */
+export type ModeMeasures = Partial<Record<Mode, Measure>>
+
+/** Lyra's measures at the top level, and the same ones in nova. */
+export interface ContrastRow extends ModeMeasures {
   label: string
   group: ContrastGroup
   fg: string
@@ -143,16 +145,19 @@ export interface ContrastRow {
   tint?: string
   threshold: 3 | 4.5
   informative: boolean
-  light?: Measure
-  dark?: Measure
+  nova: ModeMeasures
 }
 
-function measure(pair: Pair, mode: Mode): Measure {
-  const surface = resolved(pair.bg, mode)
+function measure(pair: Pair, mode: Mode, brand: Brand): Measure {
+  const surface = resolved(pair.bg, mode, brand)
   const bg = pair.tint
-    ? over(parse(valueOf(pair.tint.color, mode)), pair.tint.alpha, surface)
+    ? over(
+        parse(valueOf(pair.tint.color, mode, brand)),
+        pair.tint.alpha,
+        surface
+      )
     : surface
-  const fg = over(parse(valueOf(pair.fg, mode)), pair.fgAlpha ?? 1, bg)
+  const fg = over(parse(valueOf(pair.fg, mode, brand)), pair.fgAlpha ?? 1, bg)
   const value = ratio(fg, bg)
   return {
     ratio: value,
@@ -162,10 +167,12 @@ function measure(pair: Pair, mode: Mode): Measure {
   }
 }
 
-function valueOf(token: string, mode: Mode): string {
+function valueOf(token: string, mode: Mode, brand: Brand): string {
   const entry = tokenByName(token)
   if (!entry) throw new Error(`Unknown token: ${token}`)
-  return mode === "dark" ? darkValue(entry) : entry.value.light
+  return mode === "dark"
+    ? darkIn(entry.value, brand)
+    : lightIn(entry.value, brand)
 }
 
 /**
@@ -183,8 +190,12 @@ export function contrastRows(): ContrastRow[] {
       tint: pair.tint?.color,
       threshold: pair.threshold,
       informative: Boolean(pair.informative),
+      nova: {},
     }
-    for (const mode of pair.modes ?? MODES) row[mode] = measure(pair, mode)
+    for (const mode of pair.modes ?? MODES) {
+      row[mode] = measure(pair, mode, "lyra")
+      row.nova[mode] = measure(pair, mode, "nova")
+    }
     rows.set(pair.label, row)
   }
   return [...rows.values()].sort(
@@ -192,11 +203,11 @@ export function contrastRows(): ContrastRow[] {
   )
 }
 
-/** The blocking measurements, as the script counts them: one per pair and mode. */
+/** The blocking measurements, as the script counts them: one per pair and theme. */
 export function contrastTotals(rows: ContrastRow[]) {
   const measures = rows
     .filter((row) => !row.informative)
-    .flatMap((row) => [row.light, row.dark])
+    .flatMap((row) => [row.light, row.dark, row.nova.light, row.nova.dark])
     .filter((entry): entry is Measure => Boolean(entry))
   return {
     checked: measures.length,

@@ -1,5 +1,35 @@
 [
   {
+    "version": "0.5.0",
+    "date": null,
+    "category": "Minor Changes",
+    "text": "d943a51: lint: Add `no-text-role-in-stock-cn` to `configs.core`: a text role (`text-ui`, `text-description`, `text-title`, `text-control`) passed to a `cn` imported from a module other than `@/lib/cn`, whose tailwind-merge does not know the roles and can drop them."
+  },
+  {
+    "version": "0.5.0",
+    "date": null,
+    "category": "Minor Changes",
+    "text": "d943a51: mcp: `dsaireadable_get_tokens` and `dsaireadable_get_design_system_overview` report the nova brand: its values as `nova_light` and `nova_dark`, next to `light` and `dark`, and an overview field that lists the brands and the class that turns each on. `dsaireadable_get_typography` adds `text_roles`, each role with its size in each brand. The served rules no longer say that every component is square: a screen next to components uses the radius and text roles, which follow the brand."
+  },
+  {
+    "version": "0.5.0",
+    "date": null,
+    "category": "Minor Changes",
+    "text": "d943a51: component-api: Add a second brand, nova, next to lyra, the default. The `nova` class on `<html>`, next to `dark`, gives stone neutrals, rounded corners, larger component text and Lora, DM Sans and Geist Mono; every pair meets WCAG 2.2 AA in the four themes. New tokens: `radius.surface`, `control`, `item`, `inset`, `mark` and `pill` (classes `rounded-surface`…), `typography.size.ui`, `description`, `title` and `control` with their line heights (classes `text-ui`…), `typography.font-family.body` and `heading` (classes `font-body`, `font-heading`), `color.background.card`. New registry item: `theme-nova`, opt-in, with its fonts. Components now name these roles, and lyra resolves each to the value it replaces, so lyra's rendering does not change. Two precedences move, in lyra too: under `asChild`, where no merge runs, a fixed `rounded-*` or `text-*` class on the child that sorts after the role, such as `rounded-lg` or `text-xl`, now wins over the component's role; and the last child of a `ButtonGroup` takes the control radius on its end corners, over a radius set on it. The components import `cn` from the new `@/lib/cn`, which knows the roles; `lib/utils.ts` stays stock, so installing never asks to overwrite it."
+  },
+  {
+    "version": "0.5.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "5a4bde1: docs: Name a button or link whose content is an `Avatar` with a `sr-only` span, not an `aria-label`, so its name keeps the visible initials (WCAG 2.5.3, reported by axe-core 4.14)."
+  },
+  {
+    "version": "0.5.0",
+    "date": null,
+    "category": "Patch Changes",
+    "text": "929044f: docs: The MCP & Skills section follows the 0.4.0 release. Optimization compares 0.2.0, 0.3.0 and 0.4.0, the versions measured in three passes, and its lever table adds the 0.4.0 changes and the 0.4.0 audit; What's next names the detailed component specs, now the largest share of what the server sends. How it works says that `build_screen` asks for each spec concise first, and what the detailed design rules serve without a category."
+  },
+  {
     "version": "0.4.0",
     "date": null,
     "category": "Minor Changes",

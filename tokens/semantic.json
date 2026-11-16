@@ -17,12 +17,23 @@
       "subtle": {
         "$value": "{primitive.color.mist.100}",
         "$type": "color",
-        "$description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
+        "$description": "Recessed or secondary surface (muted areas, secondary). Cards read color.background.card. Not for the main page surface.",
         "$extensions": {
           "docs": {
             "description": "A slightly muted secondary surface that creates visual hierarchy.",
-            "do": "Use for cards, muted areas, secondary sidebars, inner panels.",
+            "do": "Use for muted areas, secondary sidebars, inner panels.",
             "dont": "Do not use for the page's main background."
+          },
+          "status": "active"
+        }
+      },
+      "card": {
+        "$value": "{primitive.color.mist.100}",
+        "$type": "color",
+        "$description": "Surface of a card. Equal to color.background.subtle in lyra; a brand may set it apart from the muted surfaces.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "bg-card"
           },
           "status": "active"
         }
@@ -76,7 +87,7 @@
           "docs": {
             "description": "Hover veil of a neutral element — the class `bg-overlay-hover`.",
             "do": "Use for `hover:bg-overlay-hover` on a table row, an Attachment link, a choice card, a Questionnaire choice, and the dark hover of ghost and outline controls.",
-            "dont": "Do not write `hover:bg-muted/50`: on a card, the same mist.100 / mist.800 step, it changed nothing."
+            "dont": "Do not write `hover:bg-muted/50`: on a lyra card, the same mist.100 / mist.800 step, it changed nothing."
           },
           "status": "active"
         }
@@ -183,7 +194,7 @@
             "docs": {
               "description": "Text on a `color.action.background.default` background.",
               "do": "Use for the label of a primary button.",
-              "dont": "Do not use on neutral surfaces — the contrast is too low on a light background."
+              "dont": "Do not use on neutral surfaces — its contrast is measured against the primary action background only."
             },
             "status": "reserved"
           }
@@ -339,7 +350,7 @@
           "docs": {
             "description": "An icon on a primary action background.",
             "do": "Use for icons inside primary buttons or action badges.",
-            "dont": "Do not use on a neutral or light background."
+            "dont": "Do not use on neutral surfaces — its contrast is measured against the primary action background only."
           },
           "status": "reserved"
         }
@@ -368,7 +379,7 @@
             "docs": {
               "description": "Text or icon on a primary action background.",
               "do": "Always pair with `color.action.background.default` for the text of a primary button.",
-              "dont": "Do not use on a neutral or light background."
+              "dont": "Do not use on neutral surfaces — its contrast is measured against the primary action background only."
             },
             "status": "active"
           }
@@ -422,7 +433,7 @@
             "docs": {
               "description": "Hover state of the secondary and muted fills — the class `bg-secondary-hover`.",
               "do": "Use for `hover:bg-secondary-hover` on a secondary Button, a secondary Badge link, and a secondary or muted Bubble that is a button or a link.",
-              "dont": "Do not write `hover:bg-secondary/80` or `hover:bg-muted/80`: on a card, which is the same mist.100 / mist.800 step, the translucent fill changed nothing."
+              "dont": "Do not write `hover:bg-secondary/80` or `hover:bg-muted/80`: on a lyra card, which is the same mist.100 / mist.800 step, the translucent fill changed nothing."
             },
             "status": "active"
           }
@@ -640,7 +651,7 @@
       "1": {
         "$value": "{primitive.color.violet.700}",
         "$type": "color",
-        "$description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$description": "Categorical chart Series 1 — the lead hue of the brand: violet in lyra, teal in nova. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "status": "active"
         }
@@ -656,7 +667,7 @@
       "3": {
         "$value": "{primitive.color.amber.500}",
         "$type": "color",
-        "$description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$description": "Categorical chart Series 3 — ochre in lyra, olive in nova, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "status": "active"
         }
@@ -672,7 +683,7 @@
       "5": {
         "$value": "{primitive.color.amber.700}",
         "$type": "color",
-        "$description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+        "$description": "Categorical chart Series 5 — brown in lyra, green in nova, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
         "$extensions": {
           "status": "active"
         }
@@ -1569,7 +1580,7 @@
       "xs": {
         "$value": "{primitive.typography.size.xs}",
         "$type": "dimension",
-        "$description": "Extra-small text size (12px). The text of components: labels, buttons, inputs, badges, menu items, descriptions.",
+        "$description": "Extra-small text size (12px), the same in every brand: badges, Kbd, Tooltip, menu shortcuts and group labels, chart legends, a caption. The interface text of a component is `text-ui`, its description `text-description`.",
         "$extensions": {
           "docs": {
             "tailwind": "text-xs"
@@ -1580,7 +1591,7 @@
       "sm": {
         "$value": "{primitive.typography.size.sm}",
         "$type": "dimension",
-        "$description": "Small text size (14px). Use for titles inside components (CardTitle, DialogTitle) and a screen's secondary content. A field label stays text-xs.",
+        "$description": "Small text size (14px), the same in every brand: a screen's secondary text, inline code. The title of a component is `text-title`, and text a screen sets next to components takes the role of what it sits beside.",
         "$extensions": {
           "docs": {
             "tailwind": "text-sm"
@@ -1650,6 +1661,50 @@
         "$extensions": {
           "docs": {
             "tailwind": "text-4xl"
+          },
+          "status": "active"
+        }
+      },
+      "ui": {
+        "$value": "{primitive.typography.size.xs}",
+        "$type": "dimension",
+        "$description": "Text size of a component's interface text: labels, menu items, buttons. 12px in lyra, 14px in nova.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-ui"
+          },
+          "status": "active"
+        }
+      },
+      "description": {
+        "$value": "{primitive.typography.size.xs}",
+        "$type": "dimension",
+        "$description": "Text size of a component's descriptive text, paired with a looser line. 12px in lyra, 14px in nova.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-description"
+          },
+          "status": "active"
+        }
+      },
+      "title": {
+        "$value": "{primitive.typography.size.sm}",
+        "$type": "dimension",
+        "$description": "Text size of a component's title. 14px in lyra, 16px in nova.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-title"
+          },
+          "status": "active"
+        }
+      },
+      "control": {
+        "$value": "{primitive.typography.size.xs}",
+        "$type": "dimension",
+        "$description": "Text size of a text field on a small viewport, written beside `md:text-ui`. 12px in lyra, 16px in nova, which keeps a phone from zooming into a focused field.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "text-control"
           },
           "status": "active"
         }
@@ -1741,6 +1796,38 @@
           "docs": {
             "tailwind": "text-4xl"
           },
+          "status": "active"
+        }
+      },
+      "ui": {
+        "$value": "{primitive.typography.size-line-height.xs}",
+        "$type": "number",
+        "$description": "Line height paired with typography.size.ui.",
+        "$extensions": {
+          "status": "active"
+        }
+      },
+      "description": {
+        "$value": "{primitive.typography.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Line height paired with typography.size.description: relaxed in lyra, the sm pair in nova.",
+        "$extensions": {
+          "status": "active"
+        }
+      },
+      "title": {
+        "$value": "{primitive.typography.size-line-height.sm}",
+        "$type": "number",
+        "$description": "Line height paired with typography.size.title.",
+        "$extensions": {
+          "status": "active"
+        }
+      },
+      "control": {
+        "$value": "{primitive.typography.size-line-height.xs}",
+        "$type": "number",
+        "$description": "Line height paired with typography.size.control.",
+        "$extensions": {
           "status": "active"
         }
       }
@@ -1909,11 +1996,11 @@
       "sans": {
         "$value": "{primitive.typography.font-family.sans}",
         "$type": "fontFamily",
-        "$description": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in lib/fonts.ts under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens).",
+        "$description": "Secondary sans-serif typeface: Kbd keys and long-form editorial text. Geist in lyra, DM Sans in nova; next/font loads each face under its --font-<face> variable, which this token reads (lint-font-tokens).",
         "$extensions": {
           "docs": {
             "do": "Keep it for `Kbd` keys and long editorial content (`font-sans`).",
-            "dont": "Do not use it for the interface: all UI text is set in `font-mono`."
+            "dont": "Do not use it for the interface: every component inherits `font-body` from `<html>`."
           },
           "status": "active"
         }
@@ -1921,11 +2008,35 @@
       "mono": {
         "$value": "{primitive.typography.font-family.mono}",
         "$type": "fontFamily",
-        "$description": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in lib/fonts.ts under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens).",
+        "$description": "Monospace typeface for code and tabular data, read by font-mono. JetBrains Mono in lyra, Geist Mono in nova; next/font loads each face under its --font-<face> variable, which this token reads (lint-font-tokens).",
         "$extensions": {
           "docs": {
-            "do": "The default typeface of every UI component, set on `<html>`.",
-            "dont": "Do not change the typeface here alone: it is loaded by `next/font` in `lib/fonts.ts`, which `tokens:lint-fonts` checks against this token."
+            "do": "Use `font-mono` for code and data that must align in columns.",
+            "dont": "Do not change the typeface here alone: `next/font` loads it in `lib/fonts.ts` or `lib/fonts-nova.ts`, which `tokens:lint-fonts` checks against this token."
+          },
+          "status": "active"
+        }
+      },
+      "body": {
+        "$value": "{primitive.typography.font-family.mono}",
+        "$type": "fontFamily",
+        "$description": "Typeface of the interface and running text, set on <html> with font-body. JetBrains Mono in lyra, Lora in nova.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "font-body",
+            "do": "Let `<html>` carry it: every component inherits it.",
+            "dont": "Do not set it on a component: a screen that needs a typeface by role uses `font-heading` or `font-mono`."
+          },
+          "status": "active"
+        }
+      },
+      "heading": {
+        "$value": "{primitive.typography.font-family.mono}",
+        "$type": "fontFamily",
+        "$description": "Typeface of titles and headings, read by font-heading. JetBrains Mono in lyra, DM Sans in nova.",
+        "$extensions": {
+          "docs": {
+            "tailwind": "font-heading"
           },
           "status": "active"
         }
@@ -1936,12 +2047,12 @@
     "none": {
       "$value": "{primitive.radius.none}",
       "$type": "dimension",
-      "$description": "Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one.",
+      "$description": "Zero radius, square corners. `rounded-none` is a static class that reads no token, and the radius of a component comes from its role (`radius.surface`, `radius.control`…). Reserved for a value that must stay square in every brand and cannot be written as a class.",
       "$extensions": {
         "docs": {
           "tailwind": "rounded-none"
         },
-        "status": "active"
+        "status": "reserved"
       }
     },
     "xs": {
@@ -2045,8 +2156,74 @@
     },
     "$extensions": {
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component."
+      }
+    },
+    "surface": {
+      "$value": "{primitive.radius.none}",
+      "$type": "dimension",
+      "$description": "Radius of a surface: card, dialog, drawer edge, bubble content, empty state, sidebar inset, command palette. Square in lyra, rounded in nova.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-surface"
+        },
+        "status": "active"
+      }
+    },
+    "control": {
+      "$value": "{primitive.radius.none}",
+      "$type": "dimension",
+      "$description": "Radius of a control: button, input, popover, menu panel, tabs list. Square in lyra, rounded in nova.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-control"
+        },
+        "status": "active"
+      }
+    },
+    "item": {
+      "$value": "{primitive.radius.none}",
+      "$type": "dimension",
+      "$description": "Radius of an item inside a panel: menu and sidebar items, tooltip, skeleton, tabs trigger, calendar cell. Square in lyra, rounded in nova.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-item"
+        },
+        "status": "active"
+      }
+    },
+    "inset": {
+      "$value": "{primitive.radius.none}",
+      "$type": "dimension",
+      "$description": "Radius of a part nested in a control: kbd, chip, command item, menubar trigger, the extra-small buttons of an input group. Square in lyra, rounded in nova.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-inset"
+        },
+        "status": "active"
+      }
+    },
+    "mark": {
+      "$value": "{primitive.radius.none}",
+      "$type": "dimension",
+      "$description": "Radius of a small mark: checkbox, questionnaire indicator, tooltip arrow. Square in lyra, rounded in nova.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-mark"
+        },
+        "status": "active"
+      }
+    },
+    "pill": {
+      "$value": "{primitive.radius.none}",
+      "$type": "dimension",
+      "$description": "Radius of a fully rounded element: badge, bubble, carousel button, drawer handle, progress, scroll thumb, slider. Square in lyra, a pill in nova.",
+      "$extensions": {
+        "docs": {
+          "tailwind": "rounded-pill"
+        },
+        "status": "active"
       }
     }
   },

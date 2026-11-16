@@ -30,7 +30,7 @@ An inline label that shows a keyboard key or a key combination.
 
 ## Dependencies
 
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -48,6 +48,7 @@ An inline label that shows a keyboard key or a key combination.
 | `color.background.default`       | `bg-background/10` · `bg-background/20` · `text-background` | `Kbd`              |
 | `color.background.subtle`        | `bg-muted`                                                  | `Kbd`              |
 | `color.text.subtle`              | `text-muted-foreground`                                     | `Kbd`              |
+| `radius.inset`                   | `rounded-inset`                                             | `Kbd`              |
 | `space.scale.1`                  | `gap-1` · `px-1`                                            | `KbdGroup` · `Kbd` |
 | `space.scale.3`                  | `size-3`                                                    | `Kbd`              |
 | `space.scale.5`                  | `h-5` · `min-w-5`                                           | `Kbd`              |

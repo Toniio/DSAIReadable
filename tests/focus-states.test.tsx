@@ -27,11 +27,12 @@ import { Toggle } from "@/components/ui/toggle"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 import { unmarkedTabStops } from "./focus"
+import { EVERY_THEME_TIMEOUT } from "./themes"
 
 /**
  * The focus indicator of the states the spec examples do not render, held to
- * the same rule as `tests/examples.test.tsx`: on every tab stop, light and
- * dark, a part that reaches 3:1 against what it is drawn on. Each case drew a
+ * the same rule as `tests/examples.test.tsx`: on every tab stop, in the four
+ * themes, a part that reaches 3:1 against what it is drawn on. Each case drew a
  * `ring-ring/50` or `ring-destructive/20` halo alone (about 1.4 to 2.1:1), or
  * nothing at all (an invalid InputGroup, whose ring is on at rest).
  */
@@ -141,10 +142,14 @@ const states: Record<string, ReactNode> = {
 }
 
 describe.each(Object.keys(states))("%s", (name) => {
-  it("shows a focus indicator with a solid 3:1 part, light and dark", async () => {
-    render(<div className="p-4">{states[name]}</div>)
-    expect(await unmarkedTabStops(5)).toEqual([])
-  })
+  it(
+    "shows a focus indicator with a solid 3:1 part, in the four themes",
+    async () => {
+      render(<div className="p-4">{states[name]}</div>)
+      expect(await unmarkedTabStops(5)).toEqual([])
+    },
+    EVERY_THEME_TIMEOUT
+  )
 })
 
 /**
@@ -155,17 +160,21 @@ describe.each(Object.keys(states))("%s", (name) => {
  * light, though the slot shows it.
  */
 describe("InputOTP, rendered with focus", () => {
-  it("shows a focus indicator with a solid 3:1 part, light and dark", async () => {
-    render(
-      <div className="p-4">
-        <InputOTP maxLength={2} aria-label="Code" autoFocus>
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-          </InputOTPGroup>
-        </InputOTP>
-      </div>
-    )
-    expect(await unmarkedTabStops(5)).toEqual([])
-  })
+  it(
+    "shows a focus indicator with a solid 3:1 part, in the four themes",
+    async () => {
+      render(
+        <div className="p-4">
+          <InputOTP maxLength={2} aria-label="Code" autoFocus>
+            <InputOTPGroup>
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+            </InputOTPGroup>
+          </InputOTP>
+        </div>
+      )
+      expect(await unmarkedTabStops(5)).toEqual([])
+    },
+    EVERY_THEME_TIMEOUT
+  )
 })

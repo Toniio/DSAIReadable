@@ -3,7 +3,7 @@
 import * as React from "react"
 import { OTPInput, OTPInputContext } from "input-otp"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { FOCUS_OUTLINE_RESET } from "@/lib/focus"
 import { MinusIcon } from "@phosphor-icons/react"
 
@@ -58,7 +58,7 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="input-otp-group"
       className={cn(
-        "flex items-center rounded-none has-aria-invalid:border-destructive has-aria-invalid:ring-(length:--space-focus-ring-width) has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40",
+        "flex items-center rounded-control has-aria-invalid:border-destructive has-aria-invalid:ring-(length:--space-focus-ring-width) has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40",
         className
       )}
       {...props}
@@ -90,7 +90,7 @@ function InputOTPSlot({
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn(
-        `relative flex size-8 items-center justify-center border-y border-r border-input text-xs transition-all data-[active=true]:z-dropdown ${FOCUS_OUTLINE_RESET} first:rounded-none first:border-l last:rounded-none aria-invalid:border-destructive data-[active=true]:border-ring data-[active=true]:ring-(length:--space-focus-ring-width) data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 data-[active=true]:aria-invalid:outline-(length:--border-width-default) data-[active=true]:aria-invalid:outline-destructive data-[active=true]:aria-invalid:outline-solid dark:bg-input-fill/30 dark:data-[active=true]:aria-invalid:ring-destructive/40`,
+        `relative flex size-8 items-center justify-center border-y border-r border-input text-ui transition-all data-[active=true]:z-dropdown ${FOCUS_OUTLINE_RESET} first:rounded-l-control first:border-l last:rounded-r-control aria-invalid:border-destructive data-[active=true]:border-ring data-[active=true]:ring-(length:--space-focus-ring-width) data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 data-[active=true]:aria-invalid:outline-(length:--border-width-default) data-[active=true]:aria-invalid:outline-destructive data-[active=true]:aria-invalid:outline-solid dark:bg-input-fill/30 dark:data-[active=true]:aria-invalid:ring-destructive/40`,
         className
       )}
       {...props}

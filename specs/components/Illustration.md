@@ -31,7 +31,7 @@ A placeholder for illustrations and decorative images, used in split-screen layo
 
 ## Dependencies
 
-- `cn` (`@/lib/utils`) to merge classes
+- `cn` (`@/lib/cn`) to merge classes
 - No external dependency — the placeholder SVG lives inside the component
 
 ## Anatomy

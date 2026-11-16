@@ -1,4 +1,13 @@
+import type { Brand } from "@/site/lib/brand"
 import { readJson, readText } from "@/site/lib/repo"
+
+/** A value per theme: `nova` and `novaDark` where the nova brand differs. */
+interface ThemeValues {
+  light: string
+  dark?: string
+  nova?: string
+  novaDark?: string
+}
 
 /** One token of `tokens.manifest.json` (scripts/build-token-docs.ts). */
 export interface Token {
@@ -11,9 +20,9 @@ export interface Token {
   replacement?: string
   source: string
   /** The value as written: a `{reference}` or, for a primitive, a literal. */
-  reference: { light: string; dark?: string }
-  /** The resolved literal; `dark` only where the dark mode changes it. */
-  value: { light: string; dark?: string }
+  reference: ThemeValues
+  /** The resolved literal; each key but `light` only where that theme changes it. */
+  value: ThemeValues
   description?: string
   docs?: { description?: string; do?: string; dont?: string; tailwind?: string }
   private?: true
@@ -40,9 +49,29 @@ export function tokenGroup(
   )
 }
 
+/** A value in light mode, in a brand: lyra's when nova changes nothing. */
+export function lightIn(values: ThemeValues, brand: Brand): string {
+  return brand === "nova" ? (values.nova ?? values.light) : values.light
+}
+
+/** A value in dark mode, in a brand: the theme below it when that one changes nothing. */
+export function darkIn(values: ThemeValues, brand: Brand): string {
+  return brand === "nova"
+    ? (values.novaDark ?? values.dark ?? values.light)
+    : (values.dark ?? values.light)
+}
+
+/** Whether nova resolves a token to another value than lyra, in either mode. */
+export function differsInNova(values: ThemeValues): boolean {
+  return (
+    lightIn(values, "nova") !== lightIn(values, "lyra") ||
+    darkIn(values, "nova") !== darkIn(values, "lyra")
+  )
+}
+
 /** The value in dark mode: the light one when dark changes nothing. */
 export function darkValue(entry: Token): string {
-  return entry.value.dark ?? entry.value.light
+  return darkIn(entry.value, "lyra")
 }
 
 /** The token a `{reference}` names, without its braces. */
@@ -51,15 +80,14 @@ export function referenced(reference: string): string | undefined {
 }
 
 /**
- * The tokens that reference a token directly, in either mode: the semantic
+ * The tokens that reference a token directly, in any theme: the semantic
  * tokens a primitive feeds, the aliases a semantic token feeds.
  */
 export function referencedBy(name: string): Token[] {
-  return tokens().filter(
-    (entry) =>
-      referenced(entry.reference.light) === name ||
-      (entry.reference.dark !== undefined &&
-        referenced(entry.reference.dark) === name)
+  return tokens().filter((entry) =>
+    Object.values(entry.reference).some(
+      (reference) => referenced(reference) === name
+    )
   )
 }
 

@@ -7,8 +7,11 @@
  * and the `className` attributes and properties (plus the values of a `style`
  * attribute, by `values`). Each class is mapped in this order:
  *
- * 1. `files[item].classes`, then `classes`: the whole class, variants included
- *    (`focus-visible:ring-1`);
+ * 1. `files[item].places[place]`, then `files[item].classes`, then `classes`:
+ *    the whole class, variants included (`focus-visible:ring-1`). A place is
+ *    where the class string sits in the file (see `placesOf`), so that one
+ *    upstream class can take a different value per slot: `rounded-none` is the
+ *    `control` radius on a menu panel and the `item` radius on its items;
  * 2. `files[item].utilities`, then `utilities`: the utility once its variants
  *    are set aside, which the replacement keeps (`opacity-50` turns
  *    `disabled:opacity-50` into `disabled:opacity-disabled`);
@@ -24,6 +27,9 @@
  * `constants` (`FOCUS_RING`, `OVERLAY_BASE`…) whose classes all sit in one
  * string replaces them, imported from its module; a one-class constant is
  * only read, when two files are compared.
+ *
+ * The import of `cn` moves from `@/lib/utils`, which stays the stock file of
+ * shadcn/ui, to `@/lib/cn`, whose tailwind-merge knows the radius and text roles.
  *
  * The codemod is a fixpoint: the design system's own files go through it
  * unchanged, and running it twice gives the result of running it once.
@@ -54,9 +60,16 @@ interface RetokenizeRules {
   utilities?: Record<string, Replacement>
   /** The CSS values of one component's `style` attributes, which win over the global `values`. */
   values?: Record<string, Replacement>
+  /**
+   * Whole classes by place in the file, for a class whose replacement depends
+   * on the slot. Keyed by a place of `placesOf`; the most specific place wins.
+   */
+  places?: Record<string, Record<string, Replacement>>
 }
 
-export interface RetokenizeMap extends Required<RetokenizeRules> {
+export interface RetokenizeMap extends Required<
+  Omit<RetokenizeRules, "places">
+> {
   patterns: [string, string][]
   values: Record<string, Replacement>
   files: Record<string, RetokenizeRules>
@@ -88,10 +101,21 @@ function splitVariants(token: string): [string, string] {
     : [token.slice(0, last + 1), token.slice(last + 1)]
 }
 
-/** One class through the table: its replacement, `""` to remove it. */
-export function mapClass(token: string, item: string, map: RetokenizeMap) {
+/**
+ * One class through the table: its replacement, `""` to remove it. `places`
+ * are where the class sits in the file, most specific first (`placesOf`).
+ */
+export function mapClass(
+  token: string,
+  item: string,
+  map: RetokenizeMap,
+  places: string[] = []
+) {
   const local = map.files[item] ?? {}
-  const exact = local.classes?.[token] ?? map.classes[token]
+  const placed = places
+    .map((place) => local.places?.[place]?.[token])
+    .find((rule) => rule !== undefined)
+  const exact = placed ?? local.classes?.[token] ?? map.classes[token]
   if (exact !== undefined) return replacementOf(exact)
   const [variants, utility] = splitVariants(token)
   const utilityRule = local.utilities?.[utility] ?? map.utilities[utility]
@@ -206,6 +230,74 @@ function classStrings(sourceFile: SourceFile): ClassString[] {
   return out
 }
 
+/** A property of a `cn({ "classes": condition })` object: its key is classes, not a place. */
+function isCnArgument(property: Node) {
+  const call = property.getParent()?.getParent()
+  return (
+    !!call &&
+    Node.isCallExpression(call) &&
+    call.getExpression().getText() === "cn"
+  )
+}
+
+/**
+ * Where a class string sits, most specific first: the top-level declaration
+ * that holds it and the object keys down to it (`buttonVariants.size.xs`,
+ * `Calendar.range_middle`, `DropdownMenuItem`; the logic of `placeOf` in
+ * scripts/lib/spec-classes.ts, on ts-morph's nodes, whose TypeScript is not
+ * the repository's). A string in a JSX `className` also has that place with
+ * the element after it (`TooltipContent>TooltipPrimitive.Arrow`), for a
+ * function whose elements take different values for one class.
+ */
+function placesOf(node: Node): string[] {
+  const keys: string[] = []
+  let name = "?"
+  let child = node
+  let element: string | undefined
+  for (let n: Node | undefined = node; n; child = n, n = n.getParent()) {
+    if (Node.isPropertyAssignment(n)) {
+      if (n.getNameNode() !== child && !isCnArgument(n)) {
+        const key = n.getNameNode()
+        keys.unshift(
+          Node.isStringLiteral(key) || Node.isNumericLiteral(key)
+            ? String(key.getLiteralValue())
+            : Node.isIdentifier(key)
+              ? key.getText()
+              : "?"
+        )
+      }
+    } else if (Node.isJsxAttribute(n) && element === undefined) {
+      const owner = n.getParent()?.getParent()
+      if (
+        owner &&
+        (Node.isJsxOpeningElement(owner) ||
+          Node.isJsxSelfClosingElement(owner)) &&
+        CLASS_PROPERTIES.has(n.getNameNode().getText())
+      )
+        element = owner.getTagNameNode().getText()
+    }
+    const parent: Node | undefined = n.getParent()
+    if (parent && Node.isSourceFile(parent)) {
+      if (Node.isFunctionDeclaration(n)) name = n.getName() ?? name
+      else if (Node.isVariableStatement(n))
+        name = n.getDeclarations()[0]?.getName() ?? name
+      break
+    }
+  }
+  if (keys[0] === "variants") keys.shift()
+  const place = [name, ...keys].join(".")
+  return element ? [`${place}>${element}`, place] : [place]
+}
+
+/** Every place a class string of a file sits at, as `files[item].places` is keyed. */
+export function placesIn(source: string): Set<string> {
+  const project = new Project({ useInMemoryFileSystem: true })
+  const sourceFile = project.createSourceFile("component.tsx", source, {
+    scriptKind: ScriptKind.TSX,
+  })
+  return new Set(classStrings(sourceFile).flatMap(placesOf))
+}
+
 /** The literal text of a class string, `${…}` kept as written. */
 function innerText(node: ClassString) {
   return Node.isStringLiteral(node)
@@ -238,6 +330,10 @@ export function retokenize(
   })
   const imports = new Map<string, Set<string>>()
 
+  sourceFile
+    .getImportDeclaration((d) => d.getModuleSpecifierValue() === "@/lib/utils")
+    ?.setModuleSpecifier("@/lib/cn")
+
   const local = map.files[item]?.values ?? {}
   for (const node of styleValues(sourceFile)) {
     const value =
@@ -249,8 +345,9 @@ export function retokenize(
   for (const node of classStrings(sourceFile).reverse()) {
     if (node.wasForgotten()) continue
     const before = words(innerText(node))
+    const places = placesOf(node)
     let after = before.flatMap((word) =>
-      isExpression(word) ? [word] : mapClass(word, item, map).split(" ")
+      isExpression(word) ? [word] : mapClass(word, item, map, places).split(" ")
     )
     after = after.filter(Boolean)
 
@@ -377,27 +474,39 @@ function replaceClassString(node: ClassString, after: string[]) {
   else node.replaceWithText(literal)
 }
 
+/** One class of a file and where it sits, most specific place first. */
+export interface PlacedClass {
+  name: string
+  places: string[]
+}
+
 /**
- * The classes of a file as a sorted list, constants resolved: what two files
- * are compared by. An expression other than a constant counts as one word.
+ * The classes of a file with their places, constants resolved. An expression
+ * other than a constant counts as one word.
  */
-export function classesOf(source: string, constants: ClassConstant[]) {
+export function placedClassesOf(
+  source: string,
+  constants: ClassConstant[]
+): PlacedClass[] {
   const project = new Project({ useInMemoryFileSystem: true })
   const sourceFile = project.createSourceFile("component.tsx", source, {
     scriptKind: ScriptKind.TSX,
   })
   const byName = new Map(constants.map((c) => [c.name, c.value]))
-  const out: string[] = []
+  const out: PlacedClass[] = []
   const expand = (word: string) => {
     const name = word.match(/^\$\{(\w+)\}$/)?.[1]
     const value = name ? byName.get(name) : undefined
     return value ? value.split(/\s+/) : [word]
   }
+  const add = (word: string, node: Node) => {
+    const places = placesOf(node)
+    out.push(...expand(word).map((name) => ({ name, places })))
+  }
   for (const node of classStrings(sourceFile))
     for (const word of words(innerText(node)))
       // Strings inside `${…}` are listed on their own.
-      if (!isExpression(word) || /^\$\{\w+\}$/.test(word))
-        out.push(...expand(word))
+      if (!isExpression(word) || /^\$\{\w+\}$/.test(word)) add(word, node)
   // A constant passed whole: `cn(OVERLAY_BASE, …)`, `className={FOCUS_RING}`.
   const ids = new Set<Node>()
   for (const root of classRoots(sourceFile))
@@ -408,6 +517,13 @@ export function classesOf(source: string, constants: ClassConstant[]) {
         !id.getFirstAncestor((a) => Node.isTemplateExpression(a))
       )
         ids.add(id)
-  for (const id of ids) out.push(...expand(`\${${id.getText()}}`))
-  return out.sort()
+  for (const id of ids) add(`\${${id.getText()}}`, id)
+  return out
+}
+
+/** The classes of a file as a sorted list: what two files are compared by. */
+export function classesOf(source: string, constants: ClassConstant[]) {
+  return placedClassesOf(source, constants)
+    .map((c) => c.name)
+    .sort()
 }

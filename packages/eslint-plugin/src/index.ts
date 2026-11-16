@@ -8,6 +8,7 @@ import noExternalUiImports from "./rules/no-external-ui-imports.js"
 import noInlineSvg from "./rules/no-inline-svg.js"
 import noNativeInteractiveElements from "./rules/no-native-interactive-elements.js"
 import noRawValues from "./rules/no-raw-values.js"
+import noTextRoleInStockCn from "./rules/no-text-role-in-stock-cn.js"
 import { version } from "./rules/utils.js"
 
 const rules = {
@@ -18,6 +19,7 @@ const rules = {
   "no-inline-svg": noInlineSvg,
   "no-native-interactive-elements": noNativeInteractiveElements,
   "no-raw-values": noRawValues,
+  "no-text-role-in-stock-cn": noTextRoleInStockCn,
 }
 
 const SOURCE_FILES = ["**/*.{js,jsx,mjs,ts,tsx}"]
@@ -62,6 +64,7 @@ const core = (ignores: string[]): TSESLint.FlatConfig.Config => ({
     "dsaireadable/no-inline-svg": "error",
     "dsaireadable/no-class-interpolation": "error",
     "dsaireadable/no-raw-values": "error",
+    "dsaireadable/no-text-role-in-stock-cn": "error",
     "dsaireadable/no-deprecated-imports": [
       "error",
       { modules: DEPRECATED_IMPORTS },

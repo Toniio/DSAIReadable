@@ -5,6 +5,7 @@ import {
   Fragment,
   type ReactNode,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react"
@@ -14,6 +15,7 @@ import { PlusIcon } from "@phosphor-icons/react"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
 import * as examples from "@/site/generated/examples"
+import { NOVA_CLASS } from "@/site/lib/brand"
 import { defaultArgs, resolveArgs } from "@/site/playground/args"
 import { AUTO, autoComponent, isIconOnly, isLink } from "@/site/playground/auto"
 import {
@@ -30,6 +32,7 @@ import { SCENARIOS } from "@/site/playground/scenarios"
 import type { Args, Story, StoryLayout } from "@/site/playground/types"
 import { useModule } from "@/site/playground/use-module"
 import { useMounted } from "@/site/ui/use-mounted"
+import { documentBrand } from "@/site/ui/use-site-brand"
 
 /**
  * How the frame lays out what it draws: a story's layout, or `stage`, the
@@ -436,6 +439,14 @@ function Body({
     setTheme(state.theme)
   }, [setTheme, state.theme])
 
+  // The page says the brand: the frame's own document never picks one.
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle(
+      NOVA_CLASS,
+      state.brand === "nova"
+    )
+  }, [state.brand])
+
   // A forced state goes on <body>, so it reaches overlays portaled there too.
   useEffect(() => {
     const forced = state.view === "story" && state.state !== "rest"
@@ -632,7 +643,7 @@ function Frame({
 
 /**
  * The inside of a preview iframe: renders what the page asks for, in the
- * theme it asks for, and reports its height. Opened on its own, it reads its
+ * theme and the brand it asks for, and reports its height. Opened on its own, it reads its
  * state from the URL hash.
  */
 export function PreviewFrame({
@@ -649,6 +660,7 @@ export function PreviewFrame({
     args: {},
     state: "rest",
     theme: "light",
+    brand: documentBrand(),
   }
   return <Frame kind={kind} name={name} initial={initial} />
 }

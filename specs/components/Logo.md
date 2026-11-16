@@ -29,16 +29,16 @@ The application's brand mark. The component renders the pictogram alone; it is a
 
 ## Dependencies
 
-- `cn` (`@/lib/utils`) to merge classes
+- `cn` (`@/lib/cn`) to merge classes
 - No external dependency — the pictogram is an internal SVG
 
 ## Anatomy
 
-| Slot               | Role                                                          |
-| ------------------ | ------------------------------------------------------------- |
-| `data-slot="logo"` | `inline-flex` container; carries `data-size`                  |
-| icon (div)         | `bg-primary` square that centers the pictogram, `aria-hidden` |
-| svg                | Lightning-bolt pictogram, `currentColor`                      |
+| Slot               | Role                                                                           |
+| ------------------ | ------------------------------------------------------------------------------ |
+| `data-slot="logo"` | `inline-flex` container; carries `data-size`                                   |
+| icon (div)         | `bg-primary` square, in every brand, that centers the pictogram, `aria-hidden` |
+| svg                | Lightning-bolt pictogram, `currentColor`                                       |
 
 ## Tokens
 
@@ -55,7 +55,7 @@ The application's brand mark. The component renders the pictogram alone; it is a
 | `space.scale.6`                      | `size-6`                  | `Logo` |
 | `space.scale.7`                      | `size-7`                  | `Logo` |
 | `space.scale.9`                      | `size-9`                  | `Logo` |
-| `typography.font-family.mono`        | `font-heading`            | `Logo` |
+| `typography.font-family.heading`     | `font-heading`            | `Logo` |
 | `typography.font-weight.bold`        | `font-bold`               | `Logo` |
 | `typography.letter-spacing.tight`    | `tracking-tight`          | `Logo` |
 | `typography.size-line-height.2xl`    | `text-2xl`                | `Logo` |

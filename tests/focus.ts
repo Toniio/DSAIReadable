@@ -6,31 +6,24 @@ import {
   MIN_CONTRAST,
   snapshot,
 } from "./focus-measure"
+import { inEveryTheme } from "./themes"
 
 export { borderPaint, ringOf } from "./focus-measure"
 
 /**
- * Walks the tab order of what is rendered with real Tab key presses, in the
- * light theme and then in the dark one (the `.dark` class on `<html>`), and
- * returns each tab stop whose focus indicator has no part reaching 3:1 against
+ * Walks the tab order of what is rendered with real Tab key presses, in each
+ * of the four themes (`tests/themes.ts`), and returns each tab stop whose focus indicator has no part reaching 3:1 against
  * what it is drawn on, prefixed with its theme and followed by the best
  * contrast it reached. `max` bounds each walk: enough to cross the largest
  * example and come back to `<body>`.
  */
 export async function unmarkedTabStops(max = 40): Promise<string[]> {
-  const root = document.documentElement
-  const initiallyDark = root.classList.contains("dark")
   const unmarked: string[] = []
-  try {
-    for (const theme of ["light", "dark"] as const) {
-      root.classList.toggle("dark", theme === "dark")
-      for (const stop of await walkTabStops(max)) {
-        unmarked.push(`${theme} ${stop}`)
-      }
+  await inEveryTheme(async (theme) => {
+    for (const stop of await walkTabStops(max)) {
+      unmarked.push(`${theme} ${stop}`)
     }
-  } finally {
-    root.classList.toggle("dark", initiallyDark)
-  }
+  })
   return unmarked
 }
 

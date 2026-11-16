@@ -22,6 +22,7 @@ import {
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
 import { cn } from "@/lib/utils"
 import type {
+  BrandSurfaces,
   ColorAlias,
   ColorData,
   PrimitiveStep,
@@ -38,7 +39,9 @@ import {
   StatusBadge,
   Ticks,
 } from "@/site/foundation-docs/tokens/token-ui"
+import type { Brand } from "@/site/lib/brand"
 import { DocSection } from "@/site/ui/doc-section"
+import { InBrand } from "@/site/ui/in-brand"
 
 type View = "swatches" | "table"
 type Mode = "both" | "light" | "dark"
@@ -52,16 +55,22 @@ function shown(mode: Mode) {
   return MODES.filter((item) => mode === "both" || item.value === mode)
 }
 
+/** A color's values in a brand: lyra's sit at its top level. */
+function valuesIn<Values>(
+  item: Values & { nova: Values },
+  brand: Brand
+): Values {
+  return brand === "nova" ? item.nova : item
+}
+
 /** The swatch of a semantic color: each mode shown is drawn on its own surface. */
 function ModeSwatch({
-  light,
-  dark,
+  values,
   mode,
   surfaces,
   className,
 }: {
-  light: string
-  dark: string
+  values: Surfaces
   mode: Mode
   surfaces: Surfaces
   className?: string
@@ -71,7 +80,7 @@ function ModeSwatch({
       {shown(mode).map((item) => (
         <Fill
           key={item.value}
-          value={item.value === "light" ? light : dark}
+          value={values[item.value]}
           surface={surfaces[item.value]}
           className="flex-1"
         />
@@ -156,17 +165,20 @@ function ColorCard({
 }: {
   color: SemanticColor
   mode: Mode
-  surfaces: Surfaces
+  surfaces: BrandSurfaces
 }) {
   return (
     <article className="flex h-full min-w-0 flex-col border bg-background">
-      <ModeSwatch
-        light={color.light}
-        dark={color.dark}
-        mode={mode}
-        surfaces={surfaces}
-        className="h-14 shrink-0 border-x-0 border-t-0"
-      />
+      <InBrand>
+        {(brand) => (
+          <ModeSwatch
+            values={valuesIn(color, brand)}
+            mode={mode}
+            surfaces={surfaces[brand]}
+            className="h-14 shrink-0 border-x-0 border-t-0"
+          />
+        )}
+      </InBrand>
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-3">
         <div className="flex flex-wrap items-center gap-2">
           <p className="font-mono text-sm font-medium break-all">
@@ -176,7 +188,9 @@ function ColorCard({
         </div>
         <CopyCode value={color.cssVar} />
         <Classes classes={color.classes} />
-        <Values color={color} mode={mode} />
+        <InBrand>
+          {(brand) => <Values color={valuesIn(color, brand)} mode={mode} />}
+        </InBrand>
         {color.description ? (
           <p className="text-xs leading-relaxed text-muted-foreground">
             <Ticks>{color.description}</Ticks>
@@ -222,7 +236,7 @@ function ColorTable({
 }: {
   colors: SemanticColor[]
   mode: Mode
-  surfaces: Surfaces
+  surfaces: BrandSurfaces
 }) {
   return (
     <Table className="min-w-2xl table-fixed">
@@ -261,13 +275,22 @@ function ColorTable({
             </TableCell>
             {shown(mode).map((item) => (
               <TableCell key={item.value} className="align-top">
-                <ValueCell
-                  value={item.value === "light" ? color.light : color.dark}
-                  reference={
-                    item.value === "light" ? color.lightRef : color.darkRef
-                  }
-                  surface={surfaces[item.value]}
-                />
+                <InBrand>
+                  {(brand) => {
+                    const values = valuesIn(color, brand)
+                    return (
+                      <ValueCell
+                        value={values[item.value]}
+                        reference={
+                          item.value === "light"
+                            ? values.lightRef
+                            : values.darkRef
+                        }
+                        surface={surfaces[brand][item.value]}
+                      />
+                    )
+                  }}
+                </InBrand>
               </TableCell>
             ))}
             <TableCell className="align-top whitespace-normal">
@@ -287,17 +310,20 @@ function AliasCard({
 }: {
   alias: ColorAlias
   mode: Mode
-  surfaces: Surfaces
+  surfaces: BrandSurfaces
 }) {
   return (
     <article className="flex h-full min-w-0 flex-col border bg-background">
-      <ModeSwatch
-        light={alias.light}
-        dark={alias.dark}
-        mode={mode}
-        surfaces={surfaces}
-        className="h-10 border-x-0 border-t-0"
-      />
+      <InBrand>
+        {(brand) => (
+          <ModeSwatch
+            values={valuesIn(alias, brand)}
+            mode={mode}
+            surfaces={surfaces[brand]}
+            className="h-10 border-x-0 border-t-0"
+          />
+        )}
+      </InBrand>
       <div className="flex min-w-0 flex-col gap-2 p-3">
         <CopyCode value={alias.cssVar} />
         <p className="flex min-w-0 flex-wrap items-center gap-1 text-xs text-muted-foreground">
@@ -316,7 +342,7 @@ function AliasTable({
 }: {
   aliases: ColorAlias[]
   mode: Mode
-  surfaces: Surfaces
+  surfaces: BrandSurfaces
 }) {
   // Fixed columns, as in ColorTable: in an automatic layout, the Reads
   // column shrank to a few letters a line.
@@ -347,10 +373,14 @@ function AliasTable({
             </TableCell>
             {shown(mode).map((item) => (
               <TableCell key={item.value} className="align-top">
-                <ValueCell
-                  value={item.value === "light" ? alias.light : alias.dark}
-                  surface={surfaces[item.value]}
-                />
+                <InBrand>
+                  {(brand) => (
+                    <ValueCell
+                      value={valuesIn(alias, brand)[item.value]}
+                      surface={surfaces[brand][item.value]}
+                    />
+                  )}
+                </InBrand>
               </TableCell>
             ))}
             <TableCell className="align-top whitespace-normal">
@@ -392,7 +422,7 @@ function StepTile({
   surfaces,
 }: {
   step: PrimitiveStep
-  surfaces: Surfaces
+  surfaces: BrandSurfaces
 }) {
   return (
     <Tooltip>
@@ -405,11 +435,15 @@ function StepTile({
             FOCUS_RING
           )}
         >
-          <DualFill
-            value={step.value}
-            surfaces={surfaces}
-            className="h-12 border"
-          />
+          <InBrand>
+            {(brand) => (
+              <DualFill
+                value={step.value}
+                surfaces={surfaces[brand]}
+                className="h-12 border"
+              />
+            )}
+          </InBrand>
           <span className="text-xs font-medium">{step.step}</span>
           <span className="font-mono text-xs break-words text-muted-foreground">
             <ColorValue value={step.value} />
@@ -447,7 +481,7 @@ function PrimitiveTable({
   surfaces,
 }: {
   steps: PrimitiveStep[]
-  surfaces: Surfaces
+  surfaces: BrandSurfaces
 }) {
   return (
     <Table className="min-w-xl table-fixed">
@@ -471,11 +505,15 @@ function PrimitiveTable({
             </TableCell>
             <TableCell className="align-top whitespace-normal">
               <div className="flex items-start gap-2">
-                <DualFill
-                  value={step.value}
-                  surfaces={surfaces}
-                  className="h-6 w-12 shrink-0 border"
-                />
+                <InBrand>
+                  {(brand) => (
+                    <DualFill
+                      value={step.value}
+                      surfaces={surfaces[brand]}
+                      className="h-6 w-12 shrink-0 border"
+                    />
+                  )}
+                </InBrand>
                 <span className="font-mono text-xs break-all">
                   {step.value}
                 </span>
@@ -522,11 +560,13 @@ function NoMatch({ query }: { query: string }) {
  * The colors of the design system, in three tiers: the semantic tokens the
  * components read, the shadcn/ui aliases over them, and the private palette
  * underneath. One toolbar drives the three: the view, the modes, the filter.
+ * The values are those of the site's brand.
  */
 export function ColorExplorer({ data }: { data: ColorData }) {
   const [view, setView] = useState<View>("swatches")
   const [mode, setMode] = useState<Mode>("both")
   const [query, setQuery] = useState("")
+  const { surfaces } = data
 
   const needle = query.trim().toLowerCase()
   const match = (search: string) => needle === "" || search.includes(needle)
@@ -627,11 +667,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
               <ul className="grid gap-3 lg:grid-cols-2">
                 {group.colors.map((color) => (
                   <li key={color.token} className="min-w-0">
-                    <ColorCard
-                      color={color}
-                      mode={mode}
-                      surfaces={data.surfaces}
-                    />
+                    <ColorCard color={color} mode={mode} surfaces={surfaces} />
                   </li>
                 ))}
               </ul>
@@ -639,7 +675,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
               <ColorTable
                 colors={group.colors}
                 mode={mode}
-                surfaces={data.surfaces}
+                surfaces={surfaces}
               />
             )}
           </div>
@@ -657,12 +693,12 @@ export function ColorExplorer({ data }: { data: ColorData }) {
           <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {aliases.map((alias) => (
               <li key={alias.cssVar} className="min-w-0">
-                <AliasCard alias={alias} mode={mode} surfaces={data.surfaces} />
+                <AliasCard alias={alias} mode={mode} surfaces={surfaces} />
               </li>
             ))}
           </ul>
         ) : (
-          <AliasTable aliases={aliases} mode={mode} surfaces={data.surfaces} />
+          <AliasTable aliases={aliases} mode={mode} surfaces={surfaces} />
         )}
       </DocSection>
 
@@ -694,7 +730,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
                 <ul className="grid min-w-0 flex-1 grid-cols-3 gap-1 sm:grid-cols-6 lg:grid-cols-11">
                   {palette.steps.map((step) => (
                     <li key={step.name} className="min-w-0">
-                      <StepTile step={step} surfaces={data.surfaces} />
+                      <StepTile step={step} surfaces={surfaces} />
                     </li>
                   ))}
                 </ul>
@@ -708,10 +744,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
                 <PaletteTitle id={palette.id} steps={palette.steps.length}>
                   {palette.label}
                 </PaletteTitle>
-                <PrimitiveTable
-                  steps={palette.steps}
-                  surfaces={data.surfaces}
-                />
+                <PrimitiveTable steps={palette.steps} surfaces={surfaces} />
               </div>
             ))
           : null}

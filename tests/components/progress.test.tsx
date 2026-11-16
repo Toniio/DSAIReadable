@@ -56,6 +56,8 @@ describe("Progress", () => {
     expect(await axeViolations()).toEqual([
       expect.stringMatching(/^light aria-progressbar-name: /),
       expect.stringMatching(/^dark aria-progressbar-name: /),
+      expect.stringMatching(/^nova-light aria-progressbar-name: /),
+      expect.stringMatching(/^nova-dark aria-progressbar-name: /),
     ])
   })
 })

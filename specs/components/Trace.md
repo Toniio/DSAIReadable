@@ -35,7 +35,7 @@ The steps an assistant takes while it works (a tool call, its reasoning, the sou
 - **MUST** — wrap a `TraceLine` in a `TraceCollapsibleTrigger`, a link or a dialog trigger to make it act: a `TraceLine` alone is text, not a tab stop
 - **MUST NOT** — use a `Trace` for an event that is not a step of the assistant's work (a date, "Conversation resumed", "Ana joined") → `Marker`
 - **MUST NOT** — put what the assistant says to the user in a `Trace` → a `Bubble` in `MessageContent`
-- **MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin (WCAG 2.5.8, `specs/foundations/size.md`)
+- **MUST NOT** — tighten the `gap-2` between the steps of a `Trace`: a trigger or a wrapped link is 16px tall (20px in nova) and meets the 24px target size through the spacing exception, which the 8px gap gives with no margin in lyra (WCAG 2.5.8, `specs/foundations/size.md`)
 - **MUST** — give a block with a muted fill placed in `TraceCollapsibleContent` its own `text-foreground`: the details are muted text (`CodeBlock` sets its own color)
 - **Note** — a pending step has no style of its own: shadcn/ui dims it to 60% opacity, which puts its muted text at 2.55:1 in light (WCAG 1.4.3)
 - **Note** — `TraceIcon` is hidden from screen readers (`aria-hidden`): the title carries the meaning
@@ -45,7 +45,7 @@ The steps an assistant takes while it works (a tool call, its reasoning, the sou
 - `Collapsible`, `CollapsibleTrigger` and `CollapsibleContent` from `@/components/ui/collapsible` (Radix Collapsible)
 - `CaretRightIcon` from `@phosphor-icons/react`
 - The `shimmer` utility of `shadcn/tailwind.css` and the `accordion-down` / `accordion-up` animations of `tw-animate-css`, imported by `styles/globals.css`
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -75,6 +75,7 @@ The steps an assistant takes while it works (a tool call, its reasoning, the sou
 | `motion.duration.fast`           | `transition-colors` · `transition-transform`           | `TraceCollapsibleTrigger` · `TraceLine`                                                                           |
 | `motion.duration.normal`         | `duration-normal`                                      | `TraceCollapsibleContent`                                                                                         |
 | `motion.easing.default`          | `transition-colors` · `transition-transform`           | `TraceCollapsibleTrigger` · `TraceLine`                                                                           |
+| `radius.item`                    | `rounded-item`                                         | `TraceCollapsibleTrigger` · `Trace`                                                                               |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`               | `TraceCollapsibleTrigger` · `Trace`                                                                               |
 | `space.scale.0`                  | `min-w-0`                                              | `TraceCollapsibleContent` · `TraceCollapsibleTrigger` · `TraceCollapsible` · `TraceLine` · `TraceTitle` · `Trace` |
 | `space.scale.1`                  | `-ml-1` · `gap-1` · `mb-1` · `pr-1`                    | `TraceCollapsibleContent` · `TraceCollapsibleTrigger` · `TraceIcon`                                               |
@@ -82,8 +83,8 @@ The steps an assistant takes while it works (a tool call, its reasoning, the sou
 | `space.scale.2`                  | `gap-2` · `mt-2`                                       | `TraceCollapsibleContent` · `TraceLine` · `Trace`                                                                 |
 | `space.scale.3-5`                | `pl-3.5` · `size-3.5`                                  | `TraceCollapsibleContent` · `TraceIcon`                                                                           |
 | `typography.line-height.relaxed` | `leading-relaxed`                                      | `TraceCollapsibleContent`                                                                                         |
-| `typography.size-line-height.xs` | `text-xs`                                              | `TraceLine`                                                                                                       |
-| `typography.size.xs`             | `text-xs`                                              | `TraceLine`                                                                                                       |
+| `typography.size-line-height.ui` | `text-ui`                                              | `TraceLine`                                                                                                       |
+| `typography.size.ui`             | `text-ui`                                              | `TraceLine`                                                                                                       |
 
 Collected from `components/ui/trace.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

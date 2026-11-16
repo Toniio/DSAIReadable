@@ -21,7 +21,7 @@
   },
   {
     "term": "cn",
-    "definition": "The class merging utility from @/lib/utils, combining clsx and tailwind-merge. The only approved way to compose Tailwind class strings in this codebase."
+    "definition": "The class merging utility from @/lib/cn, combining clsx and a tailwind-merge that knows the radius and text roles. The only approved way to compose Tailwind class strings in this codebase."
   },
   {
     "term": "asChild",

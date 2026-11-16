@@ -1,4 +1,7 @@
+import type { Brand } from "@/site/lib/brand"
 import {
+  darkIn,
+  lightIn,
   referenced,
   tailwindClasses,
   tokenByName,
@@ -39,15 +42,16 @@ export function primitiveName(token: string): string {
   return token.replace(/^primitive\.(color\.)?/, "")
 }
 
-/** The token a value reads, in a mode, without its braces. */
+/** The token a value reads, in a mode and a brand, without its braces. */
 export function reads(
   entry: Token,
-  mode: "light" | "dark"
+  mode: "light" | "dark",
+  brand: Brand = "lyra"
 ): string | undefined {
   const reference =
     mode === "dark"
-      ? (entry.reference.dark ?? entry.reference.light)
-      : entry.reference.light
+      ? darkIn(entry.reference, brand)
+      : lightIn(entry.reference, brand)
   return referenced(reference)
 }
 

@@ -58,13 +58,14 @@ A vertical stack of collapsible panels that shows and hides sections of content.
 | `motion.duration.fast`           | `transition-all`                         | `AccordionTrigger`                                   |
 | `motion.easing.default`          | `transition-all`                         | `AccordionTrigger`                                   |
 | `opacity.disabled`               | `opacity-disabled`                       | `AccordionTrigger`                                   |
+| `radius.control`                 | `rounded-control`                        | `AccordionTrigger`                                   |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)` | `AccordionTrigger` via `FOCUS_RING` (`lib/focus.ts`) |
 | `space.scale.0`                  | `pt-0`                                   | `AccordionContent`                                   |
 | `space.scale.2-5`                | `pb-2.5` · `py-2.5`                      | `AccordionContent` · `AccordionTrigger`              |
 | `space.scale.4`                  | `mb-4` · `size-4`                        | `AccordionContent` · `AccordionTrigger`              |
 | `typography.font-weight.medium`  | `font-medium`                            | `AccordionTrigger`                                   |
-| `typography.size-line-height.xs` | `text-xs`                                | `AccordionContent` · `AccordionTrigger`              |
-| `typography.size.xs`             | `text-xs`                                | `AccordionContent` · `AccordionTrigger`              |
+| `typography.size-line-height.ui` | `text-ui`                                | `AccordionContent` · `AccordionTrigger`              |
+| `typography.size.ui`             | `text-ui`                                | `AccordionContent` · `AccordionTrigger`              |
 
 Collected from `components/ui/accordion.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

@@ -61,6 +61,18 @@ export const overviewOutput = z.strictObject({
     install: z.string(),
     component_location: z.string(),
   }),
+  brands: z.strictObject({
+    default: z.string(),
+    activation: z.string(),
+    items: z.array(
+      z.strictObject({
+        name: z.string(),
+        /** The class on <html>; null for the default brand, which has none. */
+        html_class: z.string().nullable(),
+        install: z.string(),
+      })
+    ),
+  }),
   sources: record,
   shadcn_excluded: z.array(
     z.strictObject({
@@ -165,6 +177,8 @@ export const tokensOutput = page(
     css_var: z.string(),
     light: z.string(),
     dark: z.string(),
+    nova_light: z.string(),
+    nova_dark: z.string(),
     type: z.string(),
     status: z.string(),
     /** The token to use instead, on a deprecated token that has one. */
@@ -219,6 +233,15 @@ const typeStyle = <T extends z.ZodRawShape>(value: T) =>
 export const typographyOutput = z.strictObject({
   font_families: typeStyle({ family: z.string() }),
   type_scale: typeStyle({ rem: z.string(), px: z.string() }),
+  text_roles: z.array(
+    z.strictObject({
+      tailwind_class: z.string(),
+      token: z.string(),
+      lyra: z.string(),
+      nova: z.string(),
+      usage: z.string(),
+    })
+  ),
   line_heights: typeStyle({ value: z.string() }),
   font_weights: typeStyle({ value: z.string() }),
   letter_spacings: typeStyle({ value: z.string() }),

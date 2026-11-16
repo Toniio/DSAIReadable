@@ -110,12 +110,10 @@ const buttonVariants = cva(
    `FieldLabel` keeps its own.
 5. **Hiding the outline requires drawing a ring — checked occurrence by
    occurrence, and target by target.** The ring must appear in the _same_ class
-   string, on the _same_ target: a reset written under `**:`, `*:`,
-   `[&_x]:` or `before:` hides the indicator of other nodes, and only a ring
+   string, on the _same_ target: a reset written under a child or
+   descendant variant (`*:`, `[&_x]:`) or `before:` hides the indicator of other nodes, and only a ring
    under the same variant answers it. A component that neutralizes the outline
-   in ten places and draws a ring in one does not meet the rule, and neither
-   did NavigationMenu, whose `**:data-[slot=navigation-menu-link]:focus:outline-none`
-   hid every link's ring while the menu drew its own.
+   in ten places and draws a ring in one does not meet the rule.
 
    Six replacement mechanisms are allowed, each declared by a
    `// focus-managed: <mechanism>` comment, which the linter requires to be
@@ -142,18 +140,16 @@ const buttonVariants = cva(
    has one (`focus-visible:border-ring`). Without a border, `focus-visible:border-ring`
    paints nothing: the element adds a 1px outline,
    `focus-visible:outline-solid focus-visible:outline-(length:--border-width-default) focus-visible:outline-ring`
-   (Toggle's default variant, MenubarTrigger, NavigationMenu's trigger and
-   link, TabsContent, the ScrollArea viewport, the Resizable handle, the
-   Slider thumb, a focused Calendar day). `outline-solid` is required:
+   (Toggle's default variant, MenubarTrigger, TabsContent, the Slider thumb).
+   `outline-solid` is required:
    `outline-hidden` sets the outline style to none, and a width alone would
    draw nothing. A state that keeps its border at focus draws the outline in
    its own color: an invalid control (`aria-invalid:focus-visible:outline-destructive`)
    and the destructive variants of Button and Badge (`outline-destructive`).
    An element that draws no focus style at all, a link or an unstyled trigger,
    keeps the browser's own outline, colored `outline-ring` at full alpha by the
-   base layer of `styles/globals.css`. `tests/focus.ts` walks every tab stop of
-   every spec example, light and dark, and fails one whose indicator has no
-   part at 3:1, the color composited over what is under it.
+   base layer of `styles/globals.css`. `tests/focus.ts` fails a tab stop of a
+   spec example, in any of the four themes, whose indicator has no part at 3:1.
 
 ---
 
@@ -161,8 +157,8 @@ const buttonVariants = cva(
 
 `npm run tokens:lint-contrast` checks the solid part of the indicator against
 the WCAG 2.2 SC 1.4.11 threshold of **3:1** for a user-interface component, in
-both modes, and reports the halo as it is painted, at the alpha `lib/focus.ts`
-gives it:
+each theme, and reports the halo as it is painted, at the alpha `lib/focus.ts`
+gives it. Lyra's values:
 
 | Pair                                                                   | Light | Dark  |
 | ---------------------------------------------------------------------- | ----- | ----- |
@@ -186,6 +182,19 @@ light and lighter in dark, so a focused field never reads as a resting one
 asks for, at AAA). A focus color at the resting border's step would change
 nothing at focus but the halo. `npm run tokens:lint-contrast` holds the
 resting border to 3:1 too ([Color → Border](./color.md#border)).
+
+Nova draws the same ring, at the same width, from its own colors. Its solid
+part reaches 14.81:1 on the page and 13.38:1 on a muted surface in light,
+15.79:1 and 11.83:1 in dark. It holds the same distance from the resting border:
+`color.border.focus` is `stone.800` in light and `stone.200` in dark, the
+resting border `stone.500` in both, 3.58:1 and 3.31:1 apart.
+
+On a filled primary control the solid part meets the fill instead of the page:
+1.18:1 in light and 1.00:1 in dark, against lyra's 2.23:1 and 8.19:1. The halo
+carries the change there, at 3.06:1 on the page in light (2.98:1 on a muted
+surface) and 4.51:1 in dark. `npm run tokens:lint-contrast` reports the pair for
+information. No step does better: holding 3:1 from the resting border leaves at
+most 1.41:1 against the fill in light and 1.25:1 in dark.
 
 ---
 

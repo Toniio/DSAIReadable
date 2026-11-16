@@ -134,7 +134,7 @@ describe("Trace", () => {
     expect(screen.queryByText("added 214 packages")).toBeNull()
   })
 
-  it("a trigger, and a link that wraps a line in Trace, show a focus indicator on a card, light and dark", async () => {
+  it("a trigger, and a link that wraps a line in Trace, show a focus indicator on a card, in the four themes", async () => {
     // On a card the ring-ring/50 halo alone measures 2.98:1 in light: the
     // solid outline-ring is what reaches 3:1.
     render(

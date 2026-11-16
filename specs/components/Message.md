@@ -36,7 +36,7 @@ One turn of a conversation: who speaks, with an optional avatar, a header, the c
 
 ## Dependencies
 
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -63,8 +63,10 @@ One turn of a conversation: who speaks, with an optional avatar, a header, the c
 | `space.scale.2-5`                | `px-2.5`                     | `MessageFooter` · `MessageHeader`                                                 |
 | `space.scale.8`                  | `-translate-y-8` · `min-w-8` | `MessageAvatar`                                                                   |
 | `typography.font-weight.medium`  | `font-medium`                | `MessageFooter` · `MessageHeader`                                                 |
-| `typography.size-line-height.xs` | `text-xs`                    | `MessageFooter` · `MessageHeader` · `Message`                                     |
-| `typography.size.xs`             | `text-xs`                    | `MessageFooter` · `MessageHeader` · `Message`                                     |
+| `typography.size-line-height.ui` | `text-ui`                    | `Message`                                                                         |
+| `typography.size-line-height.xs` | `text-xs`                    | `MessageFooter` · `MessageHeader`                                                 |
+| `typography.size.ui`             | `text-ui`                    | `Message`                                                                         |
+| `typography.size.xs`             | `text-xs`                    | `MessageFooter` · `MessageHeader`                                                 |
 
 Collected from `components/ui/message.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

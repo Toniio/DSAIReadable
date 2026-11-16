@@ -5,8 +5,8 @@
  *
  *   A. deterministic — TypeScript, the design system's ESLint plugin, the gold
  *      components used;
- *   B. accessibility — rendered in headless Chromium, axe light and dark, a
- *      focus indicator on every tab stop;
+ *   B. accessibility — rendered in headless Chromium, axe and a focus
+ *      indicator on every tab stop, in the four themes;
  *   C. rubric — a model grades component choice, variants, hierarchy and copy
  *      against the gold standard (needs ANTHROPIC_API_KEY).
  *

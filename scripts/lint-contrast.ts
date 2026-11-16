@@ -1,6 +1,6 @@
 /**
  * Contrast lint — every foreground/background pair the design system actually
- * ships must meet its WCAG 2.2 threshold, in both modes.
+ * ships must meet its WCAG 2.2 threshold, in every theme.
  *
  * The other token linters check structure (naming, references, freshness);
  * none of them can see that a perfectly well-formed token pair is unreadable.
@@ -58,34 +58,35 @@ let checked = 0
 const advisories: string[] = []
 const informative: string[] = []
 
-// The dark context comes from tokens/tokens.resolver.json.
+// The theme contexts come from tokens/tokens.resolver.json.
 for (const m of measureContrast(loadTokens(ROOT))) {
-  const { pair, mode } = m
+  const { pair, theme } = m
   if (pair.informative) {
     informative.push(
-      `ℹ️  ${mode.padEnd(5)} ${m.ratio.toFixed(2).padStart(5)}      ${pair.label}`
+      `ℹ️  ${theme.padEnd(10)} ${m.ratio.toFixed(2).padStart(5)}      ${pair.label}`
     )
     continue
   }
   checked++
   if (!m.pass) failures++
-  const line = `${m.pass ? "✅" : "❌"} ${mode.padEnd(5)} ${m.ratio.toFixed(2).padStart(5)} / ${pair.threshold}  ${pair.label}`
+  const line = `${m.pass ? "✅" : "❌"} ${theme.padEnd(10)} ${m.ratio.toFixed(2).padStart(5)} / ${pair.threshold}  ${pair.label}`
   if (m.pass) console.log(line)
   else console.error(`${line}\n     ${pair.fg} = ${m.fg} on ${m.under}`)
 
   const level = APCA_LEVEL[pair.threshold]
   if (m.lc < level)
     advisories.push(
-      `⚠️  ${mode.padEnd(5)} Lc ${m.lc.toFixed(1).padStart(5)} / ${level}  ${pair.label}`
+      `⚠️  ${theme.padEnd(10)} Lc ${m.lc.toFixed(1).padStart(5)} / ${level}  ${pair.label}`
     )
 }
 
 console.log(`\n📊 ${checked} pair(s) checked, ${failures} failure(s).`)
 
 console.log(
-  "\n── The focus halo as painted (information, non-blocking) ──\n" +
-    "   The 2px ring around a focus indicator's solid part, at its alpha.\n" +
-    "   It never marks focus alone: tests/focus.ts requires the solid part."
+  "\n── The focus indicator, informative parts (non-blocking) ──\n" +
+    "   The 2px ring around a focus indicator's solid part, at its alpha:\n" +
+    "   it never marks focus alone, tests/focus.ts requires the solid part.\n" +
+    "   The solid part against a primary fill: 3:1 is held on the backdrop."
 )
 for (const line of informative) console.log(line)
 

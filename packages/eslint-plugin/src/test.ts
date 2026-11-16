@@ -19,6 +19,7 @@ import noExternalUiImports from "./rules/no-external-ui-imports.js"
 import noInlineSvg from "./rules/no-inline-svg.js"
 import noNativeInteractiveElements from "./rules/no-native-interactive-elements.js"
 import noRawValues from "./rules/no-raw-values.js"
+import noTextRoleInStockCn from "./rules/no-text-role-in-stock-cn.js"
 
 RuleTester.describe = describe
 RuleTester.it = it
@@ -302,6 +303,51 @@ tester.run("no-raw-values", asEslint(noRawValues), {
     {
       code: `const a = matchMedia("(prefers-color-scheme: dark)")`,
       errors: [{ messageId: "mediaDark" }],
+    },
+  ],
+})
+
+tester.run("no-text-role-in-stock-cn", asEslint(noTextRoleInStockCn), {
+  valid: [
+    `import { cn } from "@/lib/cn"\nconst a = cn("text-ui text-muted-foreground")`,
+    // The registry rewrites the alias to the consumer's own.
+    `import { cn } from "~/lib/cn"\nconst a = cn("md:text-title")`,
+    `import { cn } from "../lib/cn"\nconst a = cn("text-description")`,
+    // A fixed size merges as it always did.
+    `import { cn } from "@/lib/utils"\nconst a = cn("text-sm text-muted-foreground")`,
+    // A condition's string is no class, and neither is a value of an object.
+    `import { cn } from "@/lib/utils"\nconst a = cn(tone === "text-ui" && "p-2", { "p-4": "text-ui" })`,
+    // Without tailwind-merge, nothing is dropped.
+    `const a = <div className="text-ui text-muted-foreground" />`,
+    `const cn = (s) => s\nconst a = cn("text-ui")`,
+  ],
+  invalid: [
+    {
+      code: `import { cn } from "@/lib/utils"\nconst a = cn("text-ui text-muted-foreground")`,
+      errors: [
+        {
+          messageId: "stockCn",
+          data: { role: "text-ui", source: "@/lib/utils" },
+        },
+      ],
+    },
+    {
+      code: `import { cn } from "~/lib/utils"\nconst a = cn("p-2", "md:text-title!")`,
+      errors: [
+        {
+          messageId: "stockCn",
+          data: { role: "md:text-title!", source: "~/lib/utils" },
+        },
+      ],
+    },
+    {
+      code: `import { cn as merge } from "@/lib/utils"\nconst a = merge(big ? "text-control" : "p-2", ["text-description"], { "text-ui": on }, \`text-title \${x}\`)`,
+      errors: [
+        { messageId: "stockCn" },
+        { messageId: "stockCn" },
+        { messageId: "stockCn" },
+        { messageId: "stockCn" },
+      ],
     },
   ],
 })

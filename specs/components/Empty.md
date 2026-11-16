@@ -34,7 +34,7 @@ A composable empty state, shown when a view, a list or a section has no data.
 ## Dependencies
 
 - `class-variance-authority` for the `EmptyMedia` variants
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -57,19 +57,21 @@ A composable empty state, shown when a view, a list or a section has no data.
 | `color.text.action.default`      | `text-primary`                | `EmptyDescription`                          |
 | `color.text.default`             | `text-foreground`             | `emptyMediaVariants.variant.icon`           |
 | `color.text.subtle`              | `text-muted-foreground`       | `EmptyDescription`                          |
+| `radius.control`                 | `rounded-control`             | `emptyMediaVariants.variant.icon`           |
+| `radius.surface`                 | `rounded-surface`             | `Empty`                                     |
 | `space.scale.0`                  | `min-w-0`                     | `EmptyContent` · `Empty`                    |
 | `space.scale.2`                  | `gap-2` · `mb-2`              | `EmptyHeader` · `emptyMediaVariants`        |
 | `space.scale.2-5`                | `gap-2.5`                     | `EmptyContent`                              |
 | `space.scale.4`                  | `gap-4` · `size-4`            | `Empty` · `emptyMediaVariants.variant.icon` |
 | `space.scale.6`                  | `p-6`                         | `Empty`                                     |
 | `space.scale.8`                  | `size-8`                      | `emptyMediaVariants.variant.icon`           |
-| `typography.font-family.mono`    | `font-heading`                | `EmptyTitle`                                |
+| `typography.font-family.heading` | `font-heading`                | `EmptyTitle`                                |
 | `typography.font-weight.medium`  | `font-medium`                 | `EmptyTitle`                                |
-| `typography.line-height.relaxed` | `text-xs/relaxed`             | `EmptyDescription`                          |
+| `typography.line-height.relaxed` | `text-ui/relaxed`             | `EmptyDescription`                          |
 | `typography.size-line-height.sm` | `text-sm`                     | `EmptyTitle`                                |
-| `typography.size-line-height.xs` | `text-xs`                     | `EmptyContent`                              |
+| `typography.size-line-height.ui` | `text-ui`                     | `EmptyContent`                              |
 | `typography.size.sm`             | `text-sm`                     | `EmptyTitle`                                |
-| `typography.size.xs`             | `text-xs` · `text-xs/relaxed` | `EmptyContent` · `EmptyDescription`         |
+| `typography.size.ui`             | `text-ui` · `text-ui/relaxed` | `EmptyContent` · `EmptyDescription`         |
 
 Collected from `components/ui/empty.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

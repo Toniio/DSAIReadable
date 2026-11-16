@@ -23,11 +23,14 @@
  *       # this one into components/ui (network), then re-run --drift
  *
  * The offline check: every replacement of the table is a fixpoint, every
- * component file goes through the codemod unchanged (the design system's
- * classes are never rewritten), and each inventory entry is classified.
+ * rule of `places` names a place of its component, every component file goes
+ * through the codemod unchanged (the design system's classes are never
+ * rewritten), and each inventory entry is classified.
  * `--drift` adds: the codemod run twice gives the result of running it once,
  * a re-anchored component has exactly the classes of its retokenized upstream,
- * and a fork has exactly the differences it declares.
+ * a fork has exactly the differences it declares, every rule of `places` finds
+ * its class at its place upstream, and a component that declares `places` has
+ * each class at the same place as its retokenized upstream.
  */
 
 import { execFile, spawnSync } from "node:child_process"
@@ -51,9 +54,12 @@ import { equivalence, type Equivalence } from "./lib/class-equivalence"
 import {
   classesOf,
   mapClass,
+  placedClassesOf,
+  placesIn,
   replacementOf,
   retokenize,
   type ClassConstant,
+  type PlacedClass,
   type Replacement,
   type RetokenizeMap,
 } from "./lib/retokenize"
@@ -125,6 +131,7 @@ function checkTable() {
     ...Object.values(config.map.files).flatMap((r) => [
       ...Object.values(r.classes ?? {}),
       ...Object.values(r.utilities ?? {}),
+      ...Object.values(r.places ?? {}).flatMap((p) => Object.values(p)),
     ]),
   ].map(replacementOf)
   for (const replacement of replacements)
@@ -141,6 +148,40 @@ function checkTable() {
     } catch {
       errors.push(`map.patterns: invalid regular expression ${pattern}`)
     }
+  checkPlaces()
+}
+
+/**
+ * A rule of `files[item].places` names a place of the component and is not
+ * re-mapped there; one that stopped naming a place would stop applying
+ * without any other check noticing, on the design system's own file.
+ */
+function checkPlaces() {
+  for (const [item, rules] of Object.entries(config.map.files)) {
+    if (!rules.places) continue
+    const entry = inventory.find((e) => fileOf(e) === item)
+    if (!entry) {
+      errors.push(`map.files.${item}: no such component in the inventory`)
+      continue
+    }
+    const known = placesIn(
+      readFileSync(resolve(ROOT, entry.code_path), "utf-8")
+    )
+    for (const [place, classes] of Object.entries(rules.places)) {
+      if (!known.has(place))
+        errors.push(
+          `map.files.${item}.places: "${place}" is not a place of ${entry.code_path}`
+        )
+      for (const replacement of Object.values(classes).map(replacementOf))
+        for (const token of replacement.split(/\s+/).filter(Boolean)) {
+          const again = mapClass(token, item, config.map, [place])
+          if (again !== token)
+            errors.push(
+              `map.files.${item}.places["${place}"]: "${token}" is a replacement, but the table maps it again there, to "${again}"`
+            )
+        }
+    }
+  }
 }
 
 /**
@@ -181,6 +222,8 @@ function unexplained(map: RetokenizeMap, same: Equivalence): string[] {
   for (const [item, rule] of Object.entries(map.files)) {
     rules(`map.files.${item}.classes`, rule.classes)
     rules(`map.files.${item}.utilities`, rule.utilities)
+    for (const [place, classes] of Object.entries(rule.places ?? {}))
+      rules(`map.files.${item}.places["${place}"]`, classes)
   }
   const values = (
     where: string,
@@ -441,6 +484,91 @@ function minus(a: string[], b: string[]) {
 const sameList = (a: string[], b: string[]) =>
   [...a].sort().join("\n") === [...b].sort().join("\n")
 
+/** Each class under the most specific place it sits at. */
+function byPlace(classes: PlacedClass[]) {
+  const out = new Map<string, string[]>()
+  for (const { name, places } of classes)
+    out.set(places[0], [...(out.get(places[0]) ?? []), name])
+  return out
+}
+
+/**
+ * `EmptyTitle>Comp` here, `EmptyTitle>div` upstream: the same slot, once the
+ * design system added `asChild`. A slot left alone on each side of one function
+ * is read as one, under the name it has upstream.
+ */
+function alignElements(
+  ours: Map<string, string[]>,
+  theirs: Map<string, string[]>
+) {
+  const unmatched = (a: Map<string, string[]>, b: Map<string, string[]>) =>
+    [...a.keys()].filter((place) => place.includes(">") && !b.has(place))
+  const baseOf = (place: string) => place.slice(0, place.indexOf(">"))
+  const [mine, upstream] = [unmatched(ours, theirs), unmatched(theirs, ours)]
+  for (const place of mine) {
+    const sameBase = (p: string) => baseOf(p) === baseOf(place)
+    const twin = upstream.filter(sameBase)
+    if (twin.length !== 1 || mine.filter(sameBase).length !== 1) continue
+    ours.set(twin[0], ours.get(place)!)
+    ours.delete(place)
+  }
+}
+
+/**
+ * The slots of a component that declares `places`: a place rule whose class
+ * is not at that place upstream does nothing, and two slots that swap their
+ * roles leave the file's classes the same. What differs at a place and is not
+ * among the file's declared differences moved from one slot to another.
+ */
+function checkSlots(
+  item: string,
+  c: Classification,
+  vanilla: string,
+  ours: PlacedClass[],
+  retokenized: PlacedClass[],
+  constants: ClassConstant[]
+) {
+  const rules = config.map.files[item]?.places
+  if (!rules) return
+  const upstream = placedClassesOf(vanilla, constants)
+  for (const [place, classes] of Object.entries(rules))
+    for (const name of Object.keys(classes))
+      if (!upstream.some((u) => u.name === name && u.places.includes(place)))
+        errors.push(
+          `map.files.${item}.places["${place}"]: "${name}" never occurs at that place upstream, so the rule does nothing`
+        )
+
+  const [mine, theirs] = [byPlace(ours), byPlace(retokenized)]
+  alignElements(mine, theirs)
+  const atPlace = (a: Map<string, string[]>, b: Map<string, string[]>) =>
+    [...a].flatMap(([place, names]) =>
+      minus(names, b.get(place) ?? []).map((name) => ({ name, place }))
+    )
+  const undeclared = (
+    found: { name: string; place: string }[],
+    declared: string[]
+  ) => {
+    const left = [...declared]
+    return found.filter(({ name }) => {
+      const i = left.indexOf(name)
+      if (i >= 0) left.splice(i, 1)
+      return i < 0
+    })
+  }
+  const moved = [
+    ...undeclared(atPlace(mine, theirs), c.added ?? []).map(
+      ({ name, place }) => `    "${name}" is at ${place}, and not upstream`
+    ),
+    ...undeclared(atPlace(theirs, mine), c.removed ?? []).map(
+      ({ name, place }) => `    "${name}" is at ${place} upstream, and not here`
+    ),
+  ]
+  if (moved.length > 0)
+    errors.push(
+      `${item}: a class sits at another place than in its retokenized upstream (${OUT_DIR}/${config.upstream.ref}/${item}.tsx):\n${moved.join("\n")}\n  Put it back at its place, or change the place rules of "map".`
+    )
+}
+
 async function drift(constants: ClassConstant[]) {
   const { ref } = config.upstream
   const upstream = await buildUpstream(ref)
@@ -470,10 +598,8 @@ async function drift(constants: ClassConstant[]) {
       errors.push(`${item}: the codemod is not idempotent on the upstream file`)
     writeFileSync(join(outDir, `${item}.tsx`), once)
 
-    const ours = classesOf(
-      readFileSync(resolve(ROOT, entry.code_path), "utf-8"),
-      constants
-    )
+    const source = readFileSync(resolve(ROOT, entry.code_path), "utf-8")
+    const ours = classesOf(source, constants)
     const theirs = classesOf(once, constants)
     const removed = minus(theirs, ours)
     const added = minus(ours, theirs)
@@ -483,6 +609,15 @@ async function drift(constants: ClassConstant[]) {
     if (!sameList(c.removed ?? [], removed) || !sameList(c.added ?? [], added))
       errors.push(
         `${item}: ${c.status}, but its classes differ from the retokenized upstream (${OUT_DIR}/${ref}/${item}.tsx) other than it declares:\n    "removed": ${JSON.stringify(removed)}\n    "added":   ${JSON.stringify(added)}\n  Adopt the upstream classes, map them in "map", or declare the difference with its reason.`
+      )
+    else
+      checkSlots(
+        item,
+        c,
+        vanilla,
+        placedClassesOf(source, constants),
+        placedClassesOf(once, constants),
+        constants
       )
   }
   console.log(

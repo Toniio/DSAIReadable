@@ -1,8 +1,7 @@
-import type { CSSProperties } from "react"
-
 import { anchor, plain, tables } from "@/site/lib/markdown"
 import { readJson, readText } from "@/site/lib/repo"
-import { tokens, type Token } from "@/site/lib/tokens"
+import { NOVA_CLASS, type Brand } from "@/site/lib/brand"
+import { darkIn, lightIn, tokens, type Token } from "@/site/lib/tokens"
 
 /** One `## ` section of a foundation spec. */
 interface SpecPart {
@@ -152,18 +151,35 @@ export function remToPx(value: string): number | undefined {
   return px === undefined ? undefined : Number(px)
 }
 
+/** What a panel that shows the light mode wears (ModePanels, site/app/site.css). */
+const LIGHT_SCOPE = '[data-theme-scope="light"]'
+
 /**
- * The light value of every semantic token dark mode changes, as custom
- * properties: a panel that wears it shows the light mode inside a page shown
- * dark. The values are the manifest's, resolved at build time.
+ * The light value of every semantic token a dark mode changes, per brand, as
+ * CSS: `data-theme-scope="light"` shows the light mode inside a page shown
+ * dark, and in the page's brand without waiting for a script. The values are
+ * the manifest's, resolved at build time.
  */
-export function lightScope(): CSSProperties {
-  const style: Record<string, string> = {}
-  for (const entry of tokens()) {
-    if (entry.tier === "semantic" && entry.value.dark !== undefined)
-      style[entry.cssVar] = entry.value.light
-  }
-  return style as CSSProperties
+export function lightScope(): string {
+  const semantic = tokens().filter((entry) => entry.tier === "semantic")
+  const block = (selector: string, chosen: Token[], brand: Brand) =>
+    `${selector}{${chosen
+      .map((entry) => `${entry.cssVar}:${lightIn(entry.value, brand)}`)
+      .join(";")}}`
+  const inLyra = semantic.filter((entry) => entry.value.dark !== undefined)
+  return [
+    block(LIGHT_SCOPE, inLyra, "lyra"),
+    // Every token the lyra block sets, or nova would keep lyra's light value.
+    block(
+      `.${NOVA_CLASS} ${LIGHT_SCOPE}`,
+      semantic.filter(
+        (entry) =>
+          entry.value.dark !== undefined ||
+          lightIn(entry.value, "nova") !== darkIn(entry.value, "nova")
+      ),
+      "nova"
+    ),
+  ].join("")
 }
 
 /**

@@ -36,7 +36,7 @@ A horizontal or vertical scroller that moves between slides with buttons or the 
 - `embla-carousel-react` — the carousel engine and its types (`UseEmblaCarouselType`)
 - `Button` (`@/components/ui/button`) — the previous / next buttons
 - `CaretLeftIcon`, `CaretRightIcon` (`@phosphor-icons/react`) — navigation icons
-- `cn` (`@/lib/utils`) — the class-merging utility
+- `cn` (`@/lib/cn`) — the class-merging utility
 
 ## Anatomy
 
@@ -54,6 +54,7 @@ A horizontal or vertical scroller that moves between slides with buttons or the 
 
 | Token            | Classes and variables                               | Where                                                |
 | ---------------- | --------------------------------------------------- | ---------------------------------------------------- |
+| `radius.pill`    | `rounded-pill`                                      | `CarouselNext` · `CarouselPrevious`                  |
 | `space.scale.0`  | `inset-y-0` · `min-w-0`                             | `CarouselItem` · `CarouselNext` · `CarouselPrevious` |
 | `space.scale.12` | `-bottom-12` · `-left-12` · `-right-12` · `-top-12` | `CarouselNext` · `CarouselPrevious`                  |
 | `space.scale.4`  | `-ml-4` · `-mt-4` · `pl-4` · `pt-4`                 | `CarouselContent` · `CarouselItem`                   |

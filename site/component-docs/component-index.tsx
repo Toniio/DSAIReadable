@@ -20,6 +20,7 @@ import type { FrameState } from "@/site/playground/protocol"
 import { DocSection } from "@/site/ui/doc-section"
 import { DocsPage } from "@/site/ui/docs-page"
 import type { TocItem } from "@/site/ui/page-toc"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 interface IndexCard {
   name: string
@@ -59,10 +60,11 @@ function useNearScreen(): [(element: HTMLElement | null) => void, boolean] {
 /** The spec's example, small and inert: the card is the link, not the preview. */
 function Thumbnail({ name, slug }: { name: string; slug: string }) {
   const theme = useSiteTheme()
+  const brand = useSiteBrand()
   const [ref, near] = useNearScreen()
   const state = useMemo<FrameState>(
-    () => ({ view: "example", args: {}, state: "rest", theme }),
-    [theme]
+    () => ({ view: "example", args: {}, state: "rest", theme, brand }),
+    [theme, brand]
   )
   return (
     <div

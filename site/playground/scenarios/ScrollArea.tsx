@@ -23,7 +23,7 @@ function Area({ args }: { args: Args }) {
       <ScrollArea
         role="region"
         aria-label="Releases"
-        className="w-96 max-w-full border"
+        className="w-96 max-w-full rounded-surface border"
       >
         <div className="flex w-max gap-4 p-4">
           {tags(count).map((tag) => (
@@ -39,7 +39,11 @@ function Area({ args }: { args: Args }) {
       </ScrollArea>
     )
   return (
-    <ScrollArea role="region" aria-label="Tags" className="h-72 w-48 border">
+    <ScrollArea
+      role="region"
+      aria-label="Tags"
+      className="h-72 w-48 rounded-surface border"
+    >
       <div className="p-4">
         <p className="mb-4 text-sm font-medium">Tags</p>
         {tags(count).map((tag, index) => (
@@ -81,7 +85,7 @@ export function Example() {
     <ScrollArea
       role="region"
       aria-label="Releases"
-      className="w-96 max-w-full border"
+      className="w-96 max-w-full rounded-surface border"
     >
       <div className="flex w-max gap-4 p-4">
         {tags.map((tag) => (
@@ -107,7 +111,7 @@ ${list}
 
 export function Example() {
   return (
-    <ScrollArea role="region" aria-label="Tags" className="h-72 w-48 border">
+    <ScrollArea role="region" aria-label="Tags" className="h-72 w-48 rounded-surface border">
       <div className="p-4">
         <p className="mb-4 text-sm font-medium">Tags</p>
         {tags.map((tag, index) => (

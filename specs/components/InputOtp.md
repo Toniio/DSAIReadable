@@ -59,12 +59,13 @@ A segmented input for one-time passcodes (OTP), with automatic movement between 
 | `motion.duration.fast`           | `transition-all`                                                                             | `InputOTPSlot`                       |
 | `motion.easing.default`          | `transition-all`                                                                             | `InputOTPSlot`                       |
 | `opacity.disabled`               | `opacity-disabled`                                                                           | `InputOTP`                           |
+| `radius.control`                 | `rounded-control` · `rounded-l-control` · `rounded-r-control`                                | `InputOTPGroup` · `InputOTPSlot`     |
 | `space.focus-ring-width`         | `ring-(length:--space-focus-ring-width)`                                                     | `InputOTPGroup` · `InputOTPSlot`     |
 | `space.scale.0`                  | `inset-0`                                                                                    | `InputOTPSlot`                       |
 | `space.scale.4`                  | `h-4` · `size-4`                                                                             | `InputOTPSeparator` · `InputOTPSlot` |
 | `space.scale.8`                  | `size-8`                                                                                     | `InputOTPSlot`                       |
-| `typography.size-line-height.xs` | `text-xs`                                                                                    | `InputOTPSlot`                       |
-| `typography.size.xs`             | `text-xs`                                                                                    | `InputOTPSlot`                       |
+| `typography.size-line-height.ui` | `text-ui`                                                                                    | `InputOTPSlot`                       |
+| `typography.size.ui`             | `text-ui`                                                                                    | `InputOTPSlot`                       |
 | `zindex.dropdown`                | `z-dropdown`                                                                                 | `InputOTPSlot`                       |
 
 Collected from `components/ui/input-otp.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.

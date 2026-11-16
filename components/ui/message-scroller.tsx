@@ -8,7 +8,7 @@ import {
   useMessageScrollerVisibility,
 } from "@shadcn/react/message-scroller"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { UI_STRINGS } from "@/lib/ui-strings"
 import { Button } from "@/components/ui/button"
 import { ArrowDownIcon } from "@phosphor-icons/react"

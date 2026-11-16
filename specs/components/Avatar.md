@@ -27,12 +27,13 @@ A visual stand-in for a person or an entity — a photo, initials or an icon —
 - **MUST** — provide an `AvatarFallback`, shown when the image is missing
 - **MUST NOT** — use `AvatarBadge` without an `aria-label` that says what it signals
 - **MUST** — give `AvatarImage` a descriptive `alt`
+- **MUST NOT** — put an `aria-label` on a button or link whose content is an `Avatar`: name it with a `sr-only` span next to the avatar, so the name keeps the initials the control shows
 - **MUST NOT** — show more than 4 avatars in an `AvatarGroup`: beyond that, show the first 3 and put the rest in `AvatarGroupCount`
 
 ## Dependencies
 
 - `radix-ui` — the `Avatar` primitive (Root, Image, Fallback)
-- The `cn` utility from `@/lib/utils`
+- The `cn` utility from `@/lib/cn`
 
 ## Anatomy
 
@@ -69,9 +70,11 @@ A visual stand-in for a person or an entity — a photo, initials or an icon —
 | `space.scale.6`                      | `size-6`                                  | `AvatarGroupCount` · `Avatar`                                                                                                        |
 | `space.scale.8`                      | `size-8`                                  | `AvatarGroupCount` · `Avatar`                                                                                                        |
 | `typography.size-line-height.sm`     | `text-sm`                                 | `AvatarFallback`                                                                                                                     |
-| `typography.size-line-height.xs`     | `text-xs`                                 | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
+| `typography.size-line-height.ui`     | `text-ui`                                 | `AvatarGroupCount`                                                                                                                   |
+| `typography.size-line-height.xs`     | `text-xs`                                 | `AvatarFallback`                                                                                                                     |
 | `typography.size.sm`                 | `text-sm`                                 | `AvatarFallback`                                                                                                                     |
-| `typography.size.xs`                 | `text-xs`                                 | `AvatarFallback` · `AvatarGroupCount`                                                                                                |
+| `typography.size.ui`                 | `text-ui`                                 | `AvatarGroupCount`                                                                                                                   |
+| `typography.size.xs`                 | `text-xs`                                 | `AvatarFallback`                                                                                                                     |
 | `zindex.dropdown`                    | `z-dropdown`                              | `AvatarBadge`                                                                                                                        |
 
 Collected from `components/ui/avatar.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
@@ -177,6 +180,7 @@ No keyboard interaction of its own.
 
 - When the name is shown next to the avatar, the fallback initials repeat it: hide them with `aria-hidden`.
 - A clickable avatar must be wrapped in a named link or button, not made clickable itself.
+- The initials of `AvatarFallback` are the visible text of that link or button, so its accessible name must contain them (WCAG 2.5.3, Label in Name). An `aria-label` replaces them, and axe reports `label-content-name-mismatch`. Add the name beside the avatar and leave the initials exposed, with no `aria-hidden`: `<Button variant="ghost" size="icon"><Avatar><AvatarFallback>AB</AvatarFallback></Avatar><span className="sr-only">Open account menu</span></Button>` is named "AB Open account menu".
 
 ## Code example
 

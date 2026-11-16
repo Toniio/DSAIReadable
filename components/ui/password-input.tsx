@@ -3,7 +3,7 @@
 import * as React from "react"
 import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import {
   InputGroup,
   InputGroupAddon,

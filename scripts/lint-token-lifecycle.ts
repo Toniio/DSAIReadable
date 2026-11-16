@@ -13,11 +13,9 @@
  *
  *   active     consumed — aliased by the component tier, bridged by
  *              styles/globals.css, read with var() in components/, lib/ or
- *              hooks/, for a breakpoint used as its `sm:` variant, for a
+ *              hooks/, for a breakpoint used as its `sm:` variant, or for a
  *              container width used as its class (`max-w-sm`) or its `@sm:`
- *              container-query variant, or,
- *              for a font family, loaded by next/font under its variable
- *              (lint-font-tokens checks it names that font)
+ *              container-query variant
  *   reserved   a deliberate decision nothing consumes yet; its $description
  *              states the intent
  *   $deprecated  still resolvable, must not be used anywhere
@@ -43,8 +41,11 @@
 import { readFileSync, readdirSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { fontVariableOf, nextFontsOf } from "./lib/next-fonts.js"
-import { loadTokens, PRIMITIVE_ROOT } from "../mcp-server/src/lib/dtcg.js"
+import {
+  loadTokens,
+  PRIMITIVE_ROOT,
+  THEMES,
+} from "../mcp-server/src/lib/dtcg.js"
 import { replacementOf } from "../mcp-server/src/lib/deprecations.js"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -78,13 +79,15 @@ const referencesOf = (node: Node) =>
     (m) => m[1]
   )
 
-// The tiers, and the dark context whose overrides reference primitives too
+// The tiers, and the theme contexts whose overrides reference primitives too
 // (tokens/tokens.resolver.json).
 const tokens = loadTokens(ROOT)
 const primitives = leaves(tokens.tiers.primitive.tree)
 const semantic = leaves(tokens.tiers.semantic.tree)
 const component = leaves(tokens.tiers.component.tree)
-const darkOverrides = [...tokens.overrides.dark.values()]
+const themeOverrides = THEMES.flatMap((theme) => [
+  ...tokens.overrides[theme].values(),
+])
 
 // The three tiers form one DTCG document, so a reference names its full path:
 // `{primitive.radius.sm}` is the primitive, `{radius.sm}` the semantic token.
@@ -93,7 +96,7 @@ const componentRefs = component.flatMap((t) => referencesOf(t.node))
 
 /** Primitives some token resolves to. */
 const referencedPrimitives = new Set(
-  [...semantic, ...component, ...darkOverrides.map((node) => ({ node }))]
+  [...semantic, ...component, ...themeOverrides.map((node) => ({ node }))]
     .flatMap((t) => referencesOf(t.node))
     .filter((ref) => ref.startsWith(`${PRIMITIVE_ROOT}.`))
 )
@@ -134,14 +137,6 @@ const usesVariant = (path: string) => {
   )
 }
 
-// A font family is consumed by next/font, which loads it under
-// `--font-<key>`: the token describes the font rather than driving it.
-const fontVariables = new Set(nextFontsOf(ROOT).loaded.map((f) => f.variable))
-const loadedFont = (path: string) => {
-  const variable = fontVariableOf(path)
-  return variable !== undefined && fontVariables.has(variable)
-}
-
 // A container width is consumed the same way: Tailwind compiles its own value
 // into `max-w-sm` and `@sm:` (lint-theme-bridge checks it equals the token).
 const usesContainer = (path: string) => {
@@ -158,8 +153,7 @@ const consumed = (path: string) =>
   referencedByComponent.has(path) ||
   readByCode(path) ||
   usesVariant(path) ||
-  usesContainer(path) ||
-  loadedFont(path)
+  usesContainer(path)
 
 const findings: string[] = []
 const count = { active: 0, reserved: 0, deprecated: 0 }

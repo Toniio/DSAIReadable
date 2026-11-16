@@ -17,7 +17,7 @@ below exists because breaking it produces non-conforming generated code.
 | **Never reference a Primitive token directly**                                                                                                                                         | `tokens/primitive.json` is Tier 1, private. Only Semantic (`tokens/semantic.json`) and Component (`tokens/component.json`) are public                                                                                                                                                                                                               |
 | **Phosphor icons only** — `@phosphor-icons/react`                                                                                                                                      | No Lucide, no Heroicons, no inline SVG                                                                                                                                                                                                                                                                                                              |
 | **Only the design system's Tailwind classes exist**                                                                                                                                    | `styles/globals.css` removes Tailwind's default colors, radii, shadows, spacing and type scale (`--color-*: initial`, `--spacing: initial`…): `bg-red-500`, `p-13` or `text-7xl` generate no CSS, and `better-tailwindcss/no-unknown-classes` rejects them at lint time. Fixed white and black: `bg-white`, `bg-black/10` (`color.static.*` tokens) |
-| **Class-based dark mode** — the `.dark` class on `<html>`                                                                                                                              | No `prefers-color-scheme`                                                                                                                                                                                                                                                                                                                           |
+| **Class-based dark mode and brand** — the `.dark` and `.nova` classes on `<html>`                                                                                                      | No `prefers-color-scheme`. Lyra is the default brand, the absence of `.nova`                                                                                                                                                                                                                                                                        |
 | **Accessibility target: WCAG 2.2 AA** — contrast, target size (`size.target.min`, 24px), focus                                                                                         | The level regulations cite. APCA (WCAG 3 draft) is only an advisory second level of `tokens:lint-contrast`: never clear an APCA warning by breaking a WCAG 2 ratio                                                                                                                                                                                  |
 | **Read `specs/components/<Component>.md` before writing or changing a component**                                                                                                      | The spec is the behavioral source of truth, in 13 sections                                                                                                                                                                                                                                                                                          |
 | **The shadcn/ui API is the contract** — a divergence is additive (a new optional prop, a new component); renaming or removing a prop, export or value takes a reason and a declaration | Models write the shadcn/ui API from their training data. An undeclared divergence is code that does not compile, or that behaves differently. Every divergence is declared in `design-system.index.json` (`shadcn.divergences`, with the reason), which the MCP server serves with each spec                                                        |
@@ -32,11 +32,13 @@ format — Format Module 2025.10 and Resolver Module 2025.10, checked by Terrazz
 (`npm run tokens:lint-dtcg`, `terrazzo.config.ts`) — in this strict order of reference:
 
 ```
-tokens/tokens.resolver.json  the three sets below, in this order, then the color-scheme modifier
-tokens/primitive.json        Tier 1 — raw values                PRIVATE, never referenced outside Tier 2
-tokens/semantic.json         Tier 2 — decisions, light values
-tokens/semantic.dark.json    Tier 2 — the dark context: the semantic tokens dark changes
-tokens/component.json        Tier 3 — shadcn/ui aliases (--background, --primary, --ring…)
+tokens/tokens.resolver.json     the three sets below, in this order, then the theme modifier
+tokens/primitive.json           Tier 1 — raw values                PRIVATE, never referenced outside Tier 2
+tokens/semantic.json            Tier 2 — decisions, lyra's light values
+tokens/semantic.dark.json       Tier 2 — the semantic tokens dark changes
+tokens/semantic.nova.json       Tier 2 — the semantic tokens the nova brand changes
+tokens/semantic.nova.dark.json  Tier 2 — what nova's dark changes on top of those
+tokens/component.json           Tier 3 — shadcn/ui aliases (--background, --primary, --ring…)
         ↓ npm run tokens:build
 tokens.css              generated CSS custom properties — NEVER EDIT BY HAND
         ↓ @theme bridge
@@ -51,16 +53,35 @@ The three files form one DTCG document: the primitives sit under the
 and `mcp-server/src/lib/dtcg.ts` prints them as CSS. One declared divergence:
 letter spacing stays in `em`, which the Format Module does not list.
 
-Modes follow the Resolver Module: the `color-scheme` modifier of
-`tokens/tokens.resolver.json` defaults to `light` (the values of
-`semantic.json`), and its `dark` context is `semantic.dark.json`. An override
-there redefines an existing semantic token with its `$type` and a `{…}`
-reference, nothing else; its description, status and docs stay in
-`semantic.json`. An override exists only if it changes the value: one that
-repeats the light value is an error, and `color.static.*` never has one.
+Themes follow the Resolver Module. The `theme` modifier of
+`tokens/tokens.resolver.json` has four contexts: `light`, the default (the
+values of `semantic.json`); `dark` (`semantic.dark.json`); `nova-light`
+(`semantic.nova.json`); and `nova-dark` (`semantic.dark.json`, then
+`semantic.nova.json`, then `semantic.nova.dark.json`). An override redefines an
+existing semantic token with its `$type` and a `{…}` reference, nothing else;
+its description, status and docs stay in `semantic.json`. An override exists
+only if it changes the value of the layer below it in its chain: one that
+repeats it is an error, and `color.static.*` never has one.
 `loadTokens` in `mcp-server/src/lib/dtcg.ts` is the only reader of the
-resolver: a script that needs a value in a mode asks it.
+resolver: a script that needs a value in a theme asks it.
 `$extensions.modes` is rejected by `tokens:lint-naming`.
+
+A brand is a class on `<html>`: `nova`, next to `dark`; lyra is the absence of
+the class. `.nova` beats `.dark` by source order on `<html class="nova dark">`,
+so a key both override must be in `semantic.nova.dark.json`, and no nova theme
+resolves to a `violet` or `mist` ramp (`tokens:lint-naming` checks both).
+`tokens.css` emits, in this order, `:root` (lyra light), `.dark`, `.nova` and
+`.nova.dark, .nova .dark, .dark .nova`. Never write `:root, […]` for lyra:
+`class-equivalence.ts` and `build-registry.ts` match a bare `:root {`.
+
+A brand moves colors, typefaces, radii and text sizes only, and lyra must not
+move when nova does. A component names a role, `rounded-surface` or `text-ui`,
+and the brand gives it its value ([radius](./specs/foundations/radius.md),
+[typography](./specs/foundations/typography.md)); `rounded-none`, `rounded-full`,
+`text-xs` and `text-sm` stay fixed in every brand. The
+`typography.font-family.*` tokens drive the typeface: a primitive prints
+`var(--font-<face>, Family, generic)`, and `next/font` loads the faces
+(`lib/fonts.ts` for lyra, `lib/fonts-nova.ts` for nova).
 `tokens.css` is generated: any direct edit is overwritten by the next build and
 caught by `npm run tokens:check`. So is the `color` group of `primitive.json`:
 `npm run tokens:palette` writes one OKLCH ramp per source color of
@@ -93,7 +114,7 @@ npm run specs:validate    # the class collector's fixture test + the 67 specs ag
 npm run skills:validate   # the agent skills of skills/: Agent Skills format + every rule cites a spec, pattern or foundation that exists + every tool it names exists
 npm run docs:tokens       # regenerates token-reference.md + tokens.manifest.json
 npm run registry:check    # registry.json freshness + internal dependencies
-npm run registry:test-install  # installs the 71 items in a blank app, builds it and its CSS
+npm run registry:test-install  # installs the 75 items in a blank app, the opt-in nova brand last, builds it and its CSS
 npm run release:check     # one version everywhere it is served + each pending changeset follows the semver policy
 npm run release:test      # a changeset becomes a version, a CHANGELOG entry and llms.txt links on the new tag (on a copy of the files) + what a pinned install pins
 npm run generate-context  # regenerates the MCP cache — must produce zero diff
@@ -101,14 +122,14 @@ npm run mcp:test-package  # packs the MCP server and runs the tarball through np
 npm run plugin:test       # the ESLint plugin's rules, each against a failing and a conforming fixture
 npm run mcp:test          # the MCP server's test suite
 npm run test:lint-coverage  # every component rendered from its spec example, every documented key has its test
-npm run test:components   # headless Chromium: the 67 spec examples and the foundations' complete modules (axe light + dark, focus ring), roles, names, keyboard, reduced motion
+npm run test:components   # headless Chromium: the 67 spec examples and the foundations' complete modules (axe and focus ring, in the four themes), roles, names, keyboard, reduced motion
 npm run evals:test        # the conformance harness scores the gold examples and the edit tasks' bases (pass) and its fixtures (fail what they declare)
 npm run evals             # the conformance harness: a generator answers 26 tasks, scored deterministic + a11y + rubric (evals/README.md)
 npm run evals:generate    # screens from Claude Code in print mode, on a subscription (no API key), for the replay generator (evals/README.md)
 npm run evals:context     # where a recorded run's input tokens went, per tool and format; --reserve re-serves its calls with this checkout (evals/README.md)
 npm run site:check        # the documentation site: the examples copied into site/generated/ match the specs + the MCP answers recorded there match the server + site/ passes the consumer ESLint config + every focus ring it composes has a solid part
 npm run site:build        # the documentation site, statically exported to site/out/ (networked: next/font)
-npm run site:test         # the built site, served under its base path, loaded in headless Chromium: every page and preview, light and dark: axe (WCAG 2.2 AA), page errors, responses, a focus indicator on every tab stop
+npm run site:test         # the built site, served under its base path, loaded in headless Chromium: every page and preview, light and dark, the previews and the pages that follow the brand in nova too: axe (WCAG 2.2 AA), page errors, responses, a focus indicator on every tab stop
 ```
 
 A new or changed component arrives with its test: its spec example must pass
@@ -157,19 +178,19 @@ problem: fix it, do not disable it.
 
 Each § 1 rule, and the check that enforces it:
 
-| § 1 rule                                 | Enforced by                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Never a raw value                        | `tokens:lint-values` — hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`, arbitrary Tailwind values (`duration-[…]`, `ease-[…]`, `p-[…]`…), pixel ring and outline widths (`ring-1`, bare `ring`, `outline-1`, bare `outline`, `outline-offset-2`, never exemptable), each `allow-raw` checked against `tokens/allow-raw.registry.json`; `tokens:lint-focus` for focus-ring widths                                                                                                                                                                                                   |
-| Never reference a Primitive token        | `tokens:lint-values` (`--ds-prim-*` in `components/`, `lib/`, `hooks/`, `styles/`, `site/`, no `allow-raw` opt-out), `tokens:lint-bridge` (the `@theme` bridge), `tokens:build` (Tier 3 may reference Tier 2 only)                                                                                                                                                                                                                                                                                                                                                            |
-| Phosphor icons only                      | ESLint `no-restricted-imports` (other icon kits) and `no-restricted-syntax` (inline `<svg>`; `logo.tsx` and `illustration.tsx` declared as artwork in `eslint.config.mjs`)                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Only the design system's classes         | ESLint `better-tailwindcss/no-unknown-classes`, and `no-restricted-classes` for opacity outside binary states                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Class-based dark mode                    | `tokens:lint-values` (`prefers-color-scheme`, no `allow-raw` opt-out)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| WCAG 2.2 AA                              | `tokens:lint-contrast` level 1 (4.5:1 text, 3:1 non-text, blocking; level 2 APCA is advisory), `tokens:lint-focus`, axe-core in `test:components` (headless Chromium, light and dark: contrast and target size computed on the rendered page, a focus indicator on every tab stop), `site:check` for the focus rings the site composes (a solid part, not a halo alone), `site:test` for the built site (axe on every page and preview, light and dark, and a focus indicator on every tab stop it walks); target size is also audited by hand in `specs/foundations/size.md` |
-| Read the spec first                      | Not checkable; `specs:validate` keeps each spec in step with its code (Anatomy, Variants, Tokens, Props / API, States) and `index:schema` keeps its Metadata in step with the index, so what the spec says is true                                                                                                                                                                                                                                                                                                                                                            |
-| The shadcn/ui API is the contract        | `index:shadcn` — each component's exports, rendered element, props, union values, defaults and the provider components it renders against `shadcn-api.baseline.json` (the upstream API, extracted from the registry of the `components.json` style): every difference is declared in `shadcn.divergences`, and every declaration matches a difference; `shadcn:drift` — each component's classes against its upstream, re-tokenized by the table of `shadcn-upstream.json`                                                                                                    |
-| `tokens-validate` before every commit    | The required `tokens-validate` CI job, and `npm run check`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Everything committed in American English | `lint:language`, in `npm run check` and the CI `lint` job                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Declare the semver intent                | `changesets:lint` (category known, bump matches it), `versions:check` (the version is the same in `package.json`, `design-system.index.json`, `mcp-server/package.json`, `packages/eslint-plugin/package.json` and the lockfile), `release:test` (the pipeline from changeset to CHANGELOG entry); all three run in `npm run check` and CI                                                                                                                                                                                                                                    |
+| § 1 rule                                 | Enforced by                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Never a raw value                        | `tokens:lint-values` — hex, `rgb()`, `oklch()`, `px`, `rem`, `ms`, arbitrary Tailwind values (`duration-[…]`, `ease-[…]`, `p-[…]`…), pixel ring and outline widths (`ring-1`, bare `ring`, `outline-1`, bare `outline`, `outline-offset-2`, never exemptable), each `allow-raw` checked against `tokens/allow-raw.registry.json`; `tokens:lint-focus` for focus-ring widths                                                                                                                                                                                                                                 |
+| Never reference a Primitive token        | `tokens:lint-values` (`--ds-prim-*` in `components/`, `lib/`, `hooks/`, `styles/`, `site/`, no `allow-raw` opt-out), `tokens:lint-bridge` (the `@theme` bridge), `tokens:build` (Tier 3 may reference Tier 2 only)                                                                                                                                                                                                                                                                                                                                                                                          |
+| Phosphor icons only                      | ESLint `no-restricted-imports` (other icon kits) and `no-restricted-syntax` (inline `<svg>`; `logo.tsx` and `illustration.tsx` declared as artwork in `eslint.config.mjs`)                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Only the design system's classes         | ESLint `better-tailwindcss/no-unknown-classes`, and `no-restricted-classes` for opacity outside binary states                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Class-based dark mode and brand          | `tokens:lint-values` (`prefers-color-scheme`, no `allow-raw` opt-out)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| WCAG 2.2 AA                              | `tokens:lint-contrast` level 1 (4.5:1 text, 3:1 non-text, blocking; level 2 APCA is advisory), `tokens:lint-focus`, axe-core in `test:components` (headless Chromium, in the four themes: contrast and target size computed on the rendered page, a focus indicator on every tab stop), `site:check` for the focus rings the site composes (a solid part, not a halo alone), `site:test` for the built site (axe on every page and preview, light and dark, the previews in nova too, and a focus indicator on every tab stop it walks); target size is also audited by hand in `specs/foundations/size.md` |
+| Read the spec first                      | Not checkable; `specs:validate` keeps each spec in step with its code (Anatomy, Variants, Tokens, Props / API, States) and `index:schema` keeps its Metadata in step with the index, so what the spec says is true                                                                                                                                                                                                                                                                                                                                                                                          |
+| The shadcn/ui API is the contract        | `index:shadcn` — each component's exports, rendered element, props, union values, defaults and the provider components it renders against `shadcn-api.baseline.json` (the upstream API, extracted from the registry of the `components.json` style): every difference is declared in `shadcn.divergences`, and every declaration matches a difference; `shadcn:drift` — each component's classes against its upstream, re-tokenized by the table of `shadcn-upstream.json`                                                                                                                                  |
+| `tokens-validate` before every commit    | The required `tokens-validate` CI job, and `npm run check`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Everything committed in American English | `lint:language`, in `npm run check` and the CI `lint` job                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Declare the semver intent                | `changesets:lint` (category known, bump matches it), `versions:check` (the version is the same in `package.json`, `design-system.index.json`, `mcp-server/package.json`, `packages/eslint-plugin/package.json` and the lockfile), `release:test` (the pipeline from changeset to CHANGELOG entry); all three run in `npm run check` and CI                                                                                                                                                                                                                                                                  |
 
 ## 6. Publishing identity
 
@@ -190,14 +211,14 @@ reorder them by hand.
 
 ## 8. Areas not to touch without an explicit instruction
 
-- `tokens.css` — generated by `npm run tokens:build`
+- `tokens.css` — generated by `npm run tokens:build`, its `.nova` blocks included
 - the `color` group of `tokens/primitive.json` — generated by `npm run tokens:palette` (edit the source
   colors, lightness targets and chroma shares in `scripts/lib/palette.ts`)
 - `mcp-server/context/*.json` — generated by `npm run generate-context`
 - `packages/eslint-plugin/src/deprecations.ts` — generated by `npm run generate-context` (the tokens'
   `$deprecated` and the components' JSDoc `@deprecated`)
 - `design-system.index.json` — the inventory, regenerated by the tooling
-- `registry.json` — the shadcn registry, generated by `npm run registry:build`
+- `registry.json` — the shadcn registry, generated by `npm run registry:build`, its `theme-nova` item included (from the `.nova` blocks of `tokens.css` and `lib/fonts-nova.ts`)
 - `shadcn-api.baseline.json` — the upstream shadcn/ui API, generated by `npm run shadcn:baseline`
 - `specs/tokens/token-reference.md` and `tokens.manifest.json` — generated by `npm run docs:tokens`
   (edit the editorial prose in the `$extensions.docs` of `tokens/*.json`)

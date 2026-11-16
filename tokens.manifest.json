@@ -1,5 +1,5 @@
 {
-  "tokenCount": 504,
+  "tokenCount": 546,
   "tokens": [
     {
       "token": "primitive.color.mist.50",
@@ -646,7 +646,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-green-700",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(40.1% 0.1138 133.33)"
@@ -654,7 +654,7 @@
       "value": {
         "light": "oklch(40.1% 0.1138 133.33)"
       },
-      "description": "Sequential chart scale. Step 700, OKLCH lightness 0.4, generated from #5ea500 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Sequential chart scale. Step 700, OKLCH lightness 0.4, generated from #5ea500 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -1142,7 +1142,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-yellow-500",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(58.95% 0.129 110.31)"
@@ -1150,7 +1150,7 @@
       "value": {
         "light": "oklch(58.95% 0.129 110.31)"
       },
-      "description": "Chart series. Step 500, OKLCH lightness 0.59, generated from #e5e747 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Chart series. Step 500, OKLCH lightness 0.59, generated from #e5e747 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -1526,7 +1526,7 @@
       "tier": "primitive",
       "cssVar": "--ds-prim-color-plum-700",
       "type": "color",
-      "status": "reserved",
+      "status": "active",
       "source": "tokens/primitive.json",
       "reference": {
         "light": "oklch(39.96% 0.1442 309.95)"
@@ -1534,7 +1534,7 @@
       "value": {
         "light": "oklch(39.96% 0.1442 309.95)"
       },
-      "description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "description": "Chart series. Step 700, OKLCH lightness 0.4, generated from #8e51b6 by scripts/build-palette.ts.",
       "private": true
     },
     {
@@ -1583,6 +1583,358 @@
         "light": "oklch(14.93% 0.046 310.61)"
       },
       "description": "Chart series. Step 950, OKLCH lightness 0.148, generated from #8e51b6 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-50",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.56% 0.0017 67.8)"
+      },
+      "value": {
+        "light": "oklch(98.56% 0.0017 67.8)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 50, OKLCH lightness 0.985, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-100",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.54% 0.0025 48.72)"
+      },
+      "value": {
+        "light": "oklch(96.54% 0.0025 48.72)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 100, OKLCH lightness 0.965, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-200",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.45% 0.0051 48.68)"
+      },
+      "value": {
+        "light": "oklch(92.45% 0.0051 48.68)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 200, OKLCH lightness 0.925, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(83.05% 0.0114 63.33)"
+      },
+      "value": {
+        "light": "oklch(83.05% 0.0114 63.33)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 300, OKLCH lightness 0.83, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(71.49% 0.0136 56.17)"
+      },
+      "value": {
+        "light": "oklch(71.49% 0.0136 56.17)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 400, OKLCH lightness 0.715, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(58.91% 0.0143 56.1)"
+      },
+      "value": {
+        "light": "oklch(58.91% 0.0143 56.1)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 500, OKLCH lightness 0.59, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(50.08% 0.013 63.17)"
+      },
+      "value": {
+        "light": "oklch(50.08% 0.013 63.17)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 600, OKLCH lightness 0.5, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-700",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(39.95% 0.0126 57.92)"
+      },
+      "value": {
+        "light": "oklch(39.95% 0.0126 57.92)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 700, OKLCH lightness 0.4, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-800",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(27.6% 0.0081 59.33)"
+      },
+      "value": {
+        "light": "oklch(27.6% 0.0081 59.33)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 800, OKLCH lightness 0.275, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-900",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.61% 0.0061 56.04)"
+      },
+      "value": {
+        "light": "oklch(21.61% 0.0061 56.04)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 900, OKLCH lightness 0.218, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.stone.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-stone-950",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.69% 0.0041 49.25)"
+      },
+      "value": {
+        "light": "oklch(14.69% 0.0041 49.25)"
+      },
+      "description": "Warm neutral of the nova brand: surfaces, text and borders. Step 950, OKLCH lightness 0.148, generated from #79716b by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.50",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-50",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(98.6% 0.0108 182.88)"
+      },
+      "value": {
+        "light": "oklch(98.6% 0.0108 182.88)"
+      },
+      "description": "Chart scale of the nova brand. Step 50, OKLCH lightness 0.985, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.100",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-100",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(96.5% 0.0193 184.92)"
+      },
+      "value": {
+        "light": "oklch(96.5% 0.0193 184.92)"
+      },
+      "description": "Chart scale of the nova brand. Step 100, OKLCH lightness 0.965, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.200",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-200",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(92.58% 0.0412 185.15)"
+      },
+      "value": {
+        "light": "oklch(92.58% 0.0412 185.15)"
+      },
+      "description": "Chart scale of the nova brand. Step 200, OKLCH lightness 0.925, generated from #0d9488 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.300",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-300",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(82.91% 0.0828 185.05)"
+      },
+      "value": {
+        "light": "oklch(82.91% 0.0828 185.05)"
+      },
+      "description": "Chart scale of the nova brand. Step 300, OKLCH lightness 0.83, generated from #0d9488 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.400",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-400",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(71.47% 0.1039 184.68)"
+      },
+      "value": {
+        "light": "oklch(71.47% 0.1039 184.68)"
+      },
+      "description": "Chart scale of the nova brand. Step 400, OKLCH lightness 0.715, generated from #0d9488 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.500",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-500",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(59.04% 0.1039 184.63)"
+      },
+      "value": {
+        "light": "oklch(59.04% 0.1039 184.63)"
+      },
+      "description": "Chart scale of the nova brand. Step 500, OKLCH lightness 0.59, generated from #0d9488 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.600",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-600",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(49.93% 0.0883 184.39)"
+      },
+      "value": {
+        "light": "oklch(49.93% 0.0883 184.39)"
+      },
+      "description": "Chart scale of the nova brand. Step 600, OKLCH lightness 0.5, generated from #0d9488 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.700",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-700",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(40.06% 0.071 183.86)"
+      },
+      "value": {
+        "light": "oklch(40.06% 0.071 183.86)"
+      },
+      "description": "Chart scale of the nova brand. Step 700, OKLCH lightness 0.4, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.800",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-800",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(27.46% 0.0482 185.94)"
+      },
+      "value": {
+        "light": "oklch(27.46% 0.0482 185.94)"
+      },
+      "description": "Chart scale of the nova brand. Step 800, OKLCH lightness 0.275, generated from #0d9488 by scripts/build-palette.ts.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.900",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-900",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(21.87% 0.0389 183.19)"
+      },
+      "value": {
+        "light": "oklch(21.87% 0.0389 183.19)"
+      },
+      "description": "Chart scale of the nova brand. Step 900, OKLCH lightness 0.218, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
+      "private": true
+    },
+    {
+      "token": "primitive.color.teal.950",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-color-teal-950",
+      "type": "color",
+      "status": "reserved",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "oklch(14.73% 0.0259 185.18)"
+      },
+      "value": {
+        "light": "oklch(14.73% 0.0259 185.18)"
+      },
+      "description": "Chart scale of the nova brand. Step 950, OKLCH lightness 0.148, generated from #0d9488 by scripts/build-palette.ts. No semantic token reads it yet.",
       "private": true
     },
     {
@@ -3186,6 +3538,54 @@
       "private": true
     },
     {
+      "token": "primitive.typography.font-family.lora",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-family-lora",
+      "type": "fontFamily",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "Lora, serif"
+      },
+      "value": {
+        "light": "Lora, serif"
+      },
+      "description": "Serif typeface of the nova brand's body text.",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.font-family.dm-sans",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-family-dm-sans",
+      "type": "fontFamily",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "DM Sans, sans-serif"
+      },
+      "value": {
+        "light": "DM Sans, sans-serif"
+      },
+      "description": "Sans-serif typeface of the nova brand's headings.",
+      "private": true
+    },
+    {
+      "token": "primitive.typography.font-family.geist-mono",
+      "tier": "primitive",
+      "cssVar": "--ds-prim-typography-font-family-geist-mono",
+      "type": "fontFamily",
+      "status": "active",
+      "source": "tokens/primitive.json",
+      "reference": {
+        "light": "Geist Mono, monospace"
+      },
+      "value": {
+        "light": "Geist Mono, monospace"
+      },
+      "description": "Monospace typeface of the nova brand's code and numeric data.",
+      "private": true
+    },
+    {
       "token": "primitive.typography.size-line-height.xs",
       "tier": "primitive",
       "cssVar": "--ds-prim-typography-size-line-height-xs",
@@ -4202,11 +4602,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.white}",
-        "dark": "{primitive.color.mist.950}"
+        "dark": "{primitive.color.mist.950}",
+        "novaDark": "{primitive.color.stone.950}"
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(14.65% 0.0056 219)"
+        "dark": "oklch(14.65% 0.0056 219)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "Main page/app surface. Not for cards, popovers, or elevated layers.",
       "docs": {
@@ -4224,17 +4626,45 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.100}",
-        "dark": "{primitive.color.mist.800}"
+        "dark": "{primitive.color.mist.800}",
+        "nova": "{primitive.color.stone.100}",
+        "novaDark": "{primitive.color.stone.800}"
       },
       "value": {
         "light": "oklch(96.52% 0.0035 219.53)",
-        "dark": "oklch(27.4% 0.0119 214.54)"
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(96.54% 0.0025 48.72)",
+        "novaDark": "oklch(27.6% 0.0081 59.33)"
       },
-      "description": "Recessed or secondary surface (cards, muted areas, secondary). Not for the main page surface.",
+      "description": "Recessed or secondary surface (muted areas, secondary). Cards read color.background.card. Not for the main page surface.",
       "docs": {
         "description": "A slightly muted secondary surface that creates visual hierarchy.",
-        "do": "Use for cards, muted areas, secondary sidebars, inner panels.",
+        "do": "Use for muted areas, secondary sidebars, inner panels.",
         "dont": "Do not use for the page's main background."
+      }
+    },
+    {
+      "token": "color.background.card",
+      "tier": "semantic",
+      "cssVar": "--color-background-card",
+      "type": "color",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.color.mist.100}",
+        "dark": "{primitive.color.mist.800}",
+        "nova": "{primitive.color.white}",
+        "novaDark": "{primitive.color.stone.900}"
+      },
+      "value": {
+        "light": "oklch(96.52% 0.0035 219.53)",
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(100% 0 0)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
+      },
+      "description": "Surface of a card. Equal to color.background.subtle in lyra; a brand may set it apart from the muted surfaces.",
+      "docs": {
+        "tailwind": "bg-card"
       }
     },
     {
@@ -4246,11 +4676,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.white}",
-        "dark": "{primitive.color.mist.900}"
+        "dark": "{primitive.color.mist.900}",
+        "novaDark": "{primitive.color.stone.900}"
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(21.69% 0.0098 219.96)"
+        "dark": "oklch(21.69% 0.0098 219.96)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "Raised surface above the default layer (popovers, dropdowns, dialogs). Not for inline card surfaces.",
       "docs": {
@@ -4268,11 +4700,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.200}",
-        "dark": "{primitive.color.white-alpha.15}"
+        "dark": "{primitive.color.white-alpha.15}",
+        "nova": "{primitive.color.stone.200}"
       },
       "value": {
         "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.15)"
+        "dark": "oklch(100% 0 0 / 0.15)",
+        "nova": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "The fill of a form control: the translucent background of a field in dark mode, of a disabled field, and of a hovered outline control. Not for a control's border, which is color.border.input.",
       "docs": {
@@ -4290,11 +4724,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.950}",
-        "dark": "{primitive.color.white}"
+        "dark": "{primitive.color.white}",
+        "nova": "{primitive.color.stone.950}"
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(100% 0 0)"
+        "dark": "oklch(100% 0 0)",
+        "nova": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "Inverted surface for contrast callouts. Not for general-purpose backgrounds.",
       "docs": {
@@ -4322,7 +4758,7 @@
       "docs": {
         "description": "Hover veil of a neutral element — the class `bg-overlay-hover`.",
         "do": "Use for `hover:bg-overlay-hover` on a table row, an Attachment link, a choice card, a Questionnaire choice, and the dark hover of ghost and outline controls.",
-        "dont": "Do not write `hover:bg-muted/50`: on a card, the same mist.100 / mist.800 step, it changed nothing."
+        "dont": "Do not write `hover:bg-muted/50`: on a lyra card, the same mist.100 / mist.800 step, it changed nothing."
       }
     },
     {
@@ -4378,11 +4814,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.950}",
-        "dark": "{primitive.color.mist.50}"
+        "dark": "{primitive.color.mist.50}",
+        "nova": "{primitive.color.stone.950}",
+        "novaDark": "{primitive.color.stone.50}"
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "Primary body and heading text. Not for secondary, placeholder, or disabled text.",
       "docs": {
@@ -4400,11 +4840,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.600}",
-        "dark": "{primitive.color.mist.400}"
+        "dark": "{primitive.color.mist.400}",
+        "nova": "{primitive.color.stone.600}",
+        "novaDark": "{primitive.color.stone.400}"
       },
       "value": {
         "light": "oklch(50.11% 0.0215 213.54)",
-        "dark": "oklch(71.56% 0.021 212.57)"
+        "dark": "oklch(71.56% 0.021 212.57)",
+        "nova": "oklch(50.08% 0.013 63.17)",
+        "novaDark": "oklch(71.49% 0.0136 56.17)"
       },
       "description": "Secondary or supporting text (captions, helper text, metadata). Not for primary readable content.",
       "docs": {
@@ -4422,11 +4866,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.950}",
-        "dark": "{primitive.color.mist.50}"
+        "dark": "{primitive.color.mist.50}",
+        "nova": "{primitive.color.stone.950}",
+        "novaDark": "{primitive.color.stone.50}"
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "Emphatic text with stronger contrast when needed. Not for subtle or secondary text.",
       "docs": {
@@ -4444,11 +4892,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.white}",
-        "dark": "{primitive.color.mist.950}"
+        "dark": "{primitive.color.mist.950}",
+        "novaDark": "{primitive.color.stone.950}"
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(14.65% 0.0056 219)"
+        "dark": "oklch(14.65% 0.0056 219)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "Text on top of inverse (dark) surfaces. Not for default surface text.",
       "docs": {
@@ -4466,11 +4916,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.600}",
-        "dark": "{primitive.color.violet.300}"
+        "dark": "{primitive.color.violet.300}",
+        "nova": "{primitive.color.stone.900}",
+        "novaDark": "{primitive.color.stone.200}"
       },
       "value": {
         "light": "oklch(49.97% 0.2389 276.79)",
-        "dark": "oklch(83.05% 0.085 277.04)"
+        "dark": "oklch(83.05% 0.085 277.04)",
+        "nova": "oklch(21.61% 0.0061 56.04)",
+        "novaDark": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "Text conveying a primary action (links, active button labels). Not for generic body text.",
       "docs": {
@@ -4487,16 +4941,20 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.50}"
+        "light": "{primitive.color.violet.50}",
+        "nova": "{primitive.color.stone.50}",
+        "novaDark": "{primitive.color.stone.900}"
       },
       "value": {
-        "light": "oklch(98.58% 0.0067 277.17)"
+        "light": "oklch(98.58% 0.0067 277.17)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "Text rendered on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
         "description": "Text on a `color.action.background.default` background.",
         "do": "Use for the label of a primary button.",
-        "dont": "Do not use on neutral surfaces — the contrast is too low on a light background."
+        "dont": "Do not use on neutral surfaces — its contrast is measured against the primary action background only."
       }
     },
     {
@@ -4596,11 +5054,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.200}",
-        "dark": "{primitive.color.white-alpha.10}"
+        "dark": "{primitive.color.white-alpha.10}",
+        "nova": "{primitive.color.stone.200}"
       },
       "value": {
         "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.1)"
+        "dark": "oklch(100% 0 0 / 0.1)",
+        "nova": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "Standard dividers and component outlines. Not for input fields or focus rings.",
       "docs": {
@@ -4618,11 +5078,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.200}",
-        "dark": "{primitive.color.white-alpha.10}"
+        "dark": "{primitive.color.white-alpha.10}",
+        "nova": "{primitive.color.stone.200}"
       },
       "value": {
         "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.1)"
+        "dark": "oklch(100% 0 0 / 0.1)",
+        "nova": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "Lightweight dividers where minimal visual weight is preferred. Not for interactive element borders.",
       "docs": {
@@ -4639,10 +5101,14 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.500}"
+        "light": "{primitive.color.mist.500}",
+        "nova": "{primitive.color.stone.500}",
+        "novaDark": "{primitive.color.stone.500}"
       },
       "value": {
-        "light": "oklch(59.08% 0.0208 213.49)"
+        "light": "oklch(59.08% 0.0208 213.49)",
+        "nova": "oklch(58.91% 0.0143 56.1)",
+        "novaDark": "oklch(58.91% 0.0143 56.1)"
       },
       "description": "The boundary of a form control: the border of a field, checkbox or radio and the track of an unchecked switch, at 3:1 or more on the page, the card and the popover in both modes (WCAG 1.4.11). Not for a field's fill, nor for decorative dividers or layout borders.",
       "docs": {
@@ -4660,11 +5126,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.800}",
-        "dark": "{primitive.color.mist.200}"
+        "dark": "{primitive.color.mist.200}",
+        "nova": "{primitive.color.stone.800}",
+        "novaDark": "{primitive.color.stone.200}"
       },
       "value": {
         "light": "oklch(27.4% 0.0119 214.54)",
-        "dark": "oklch(92.55% 0.009 214.34)"
+        "dark": "oklch(92.55% 0.009 214.34)",
+        "nova": "oklch(27.6% 0.0081 59.33)",
+        "novaDark": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "Focus ring outline for keyboard accessibility. Darker than the resting border of a control in light and lighter in dark, by 3:1 or more in both modes, so a focused field never reads as a resting one; the solid part of an indicator keeps 3:1 on every surface and on a field's fill. Not for resting or hover states.",
       "docs": {
@@ -4682,11 +5152,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.950}",
-        "dark": "{primitive.color.mist.50}"
+        "dark": "{primitive.color.mist.50}",
+        "nova": "{primitive.color.stone.950}",
+        "novaDark": "{primitive.color.stone.50}"
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "Standard icon fill. Not for icons in branded or destructive contexts.",
       "docs": {
@@ -4704,11 +5178,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.500}",
-        "dark": "{primitive.color.mist.400}"
+        "dark": "{primitive.color.mist.400}",
+        "nova": "{primitive.color.stone.500}",
+        "novaDark": "{primitive.color.stone.400}"
       },
       "value": {
         "light": "oklch(59.08% 0.0208 213.49)",
-        "dark": "oklch(71.56% 0.021 212.57)"
+        "dark": "oklch(71.56% 0.021 212.57)",
+        "nova": "oklch(58.91% 0.0143 56.1)",
+        "novaDark": "oklch(71.49% 0.0136 56.17)"
       },
       "description": "Muted/secondary icon fill. Not for primary interactive icons.",
       "docs": {
@@ -4725,16 +5203,20 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.50}"
+        "light": "{primitive.color.violet.50}",
+        "nova": "{primitive.color.stone.50}",
+        "novaDark": "{primitive.color.stone.900}"
       },
       "value": {
-        "light": "oklch(98.58% 0.0067 277.17)"
+        "light": "oklch(98.58% 0.0067 277.17)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "Icon on a primary action background. Not for icons on neutral surfaces.",
       "docs": {
         "description": "An icon on a primary action background.",
         "do": "Use for icons inside primary buttons or action badges.",
-        "dont": "Do not use on a neutral or light background."
+        "dont": "Do not use on neutral surfaces — its contrast is measured against the primary action background only."
       }
     },
     {
@@ -4746,11 +5228,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.600}",
-        "dark": "{primitive.color.violet.700}"
+        "dark": "{primitive.color.violet.700}",
+        "nova": "{primitive.color.stone.900}",
+        "novaDark": "{primitive.color.stone.200}"
       },
       "value": {
         "light": "oklch(49.97% 0.2389 276.79)",
-        "dark": "oklch(39.99% 0.2156 276.99)"
+        "dark": "oklch(39.99% 0.2156 276.99)",
+        "nova": "oklch(21.61% 0.0061 56.04)",
+        "novaDark": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "Primary call-to-action button/element background. Not for secondary or ghost variants.",
       "docs": {
@@ -4767,16 +5253,20 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.50}"
+        "light": "{primitive.color.violet.50}",
+        "nova": "{primitive.color.stone.50}",
+        "novaDark": "{primitive.color.stone.900}"
       },
       "value": {
-        "light": "oklch(98.58% 0.0067 277.17)"
+        "light": "oklch(98.58% 0.0067 277.17)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "Text or icon on top of a primary action background. Not for text on neutral surfaces.",
       "docs": {
         "description": "Text or icon on a primary action background.",
         "do": "Always pair with `color.action.background.default` for the text of a primary button.",
-        "dont": "Do not use on a neutral or light background."
+        "dont": "Do not use on neutral surfaces — its contrast is measured against the primary action background only."
       }
     },
     {
@@ -4788,11 +5278,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.700}",
-        "dark": "{primitive.color.violet.600}"
+        "dark": "{primitive.color.violet.600}",
+        "nova": "{primitive.color.stone.800}",
+        "novaDark": "{primitive.color.stone.300}"
       },
       "value": {
         "light": "oklch(39.99% 0.2156 276.99)",
-        "dark": "oklch(49.97% 0.2389 276.79)"
+        "dark": "oklch(49.97% 0.2389 276.79)",
+        "nova": "oklch(27.6% 0.0081 59.33)",
+        "novaDark": "oklch(83.05% 0.0114 63.33)"
       },
       "description": "The primary action fill under the pointer: one step darker in light, one step lighter in dark, so color.action.background.foreground keeps 4.5:1 or more. Not for a resting or a selected element.",
       "docs": {
@@ -4809,10 +5303,14 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.800}"
+        "light": "{primitive.color.violet.800}",
+        "nova": "{primitive.color.stone.700}",
+        "novaDark": "{primitive.color.stone.400}"
       },
       "value": {
-        "light": "oklch(27.51% 0.143 276.93)"
+        "light": "oklch(27.51% 0.143 276.93)",
+        "nova": "oklch(39.95% 0.0126 57.92)",
+        "novaDark": "oklch(71.49% 0.0136 56.17)"
       },
       "description": "The primary action fill while pressed: darker than its rest and hover steps in both modes. Reserved: shadcn/ui draws no pressed state, so no component reads it yet; a pressed fill takes this token, never an opacity.",
       "docs": {
@@ -4830,11 +5328,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.50}",
-        "dark": "{primitive.color.violet.950}"
+        "dark": "{primitive.color.violet.950}",
+        "nova": "{primitive.color.stone.100}",
+        "novaDark": "{primitive.color.stone.900}"
       },
       "value": {
         "light": "oklch(98.58% 0.0067 277.17)",
-        "dark": "oklch(14.8% 0.0725 276.39)"
+        "dark": "oklch(14.8% 0.0725 276.39)",
+        "nova": "oklch(96.54% 0.0025 48.72)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "The brand-tinted surface of a selected choice: a choice card (FieldLabel wrapping a Field) whose control is checked. Not for a hover, nor for a solid primary fill.",
       "docs": {
@@ -4852,17 +5354,21 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.200}",
-        "dark": "{primitive.color.mist.700}"
+        "dark": "{primitive.color.mist.700}",
+        "nova": "{primitive.color.stone.200}",
+        "novaDark": "{primitive.color.stone.700}"
       },
       "value": {
         "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(40.1% 0.0197 211.14)"
+        "dark": "oklch(40.1% 0.0197 211.14)",
+        "nova": "oklch(92.45% 0.0051 48.68)",
+        "novaDark": "oklch(39.95% 0.0126 57.92)"
       },
       "description": "The secondary fill (bg-secondary, bg-muted) under the pointer: one step darker in light, one step lighter in dark, visible on a card that shares the resting fill. Not for a neutral element with no fill of its own, which takes color.overlay.hover.",
       "docs": {
         "description": "Hover state of the secondary and muted fills — the class `bg-secondary-hover`.",
         "do": "Use for `hover:bg-secondary-hover` on a secondary Button, a secondary Badge link, and a secondary or muted Bubble that is a button or a link.",
-        "dont": "Do not write `hover:bg-secondary/80` or `hover:bg-muted/80`: on a card, which is the same mist.100 / mist.800 step, the translucent fill changed nothing."
+        "dont": "Do not write `hover:bg-secondary/80` or `hover:bg-muted/80`: on a lyra card, which is the same mist.100 / mist.800 step, the translucent fill changed nothing."
       }
     },
     {
@@ -4874,11 +5380,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.300}",
-        "dark": "{primitive.color.mist.600}"
+        "dark": "{primitive.color.mist.600}",
+        "nova": "{primitive.color.stone.300}",
+        "novaDark": "{primitive.color.stone.600}"
       },
       "value": {
         "light": "oklch(82.95% 0.0163 216.69)",
-        "dark": "oklch(50.11% 0.0215 213.54)"
+        "dark": "oklch(50.11% 0.0215 213.54)",
+        "nova": "oklch(83.05% 0.0114 63.33)",
+        "novaDark": "oklch(50.08% 0.013 63.17)"
       },
       "description": "The secondary fill while pressed: two steps from its rest. Reserved: shadcn/ui draws no pressed state, so no component reads it yet.",
       "docs": {
@@ -4896,11 +5406,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.200}",
-        "dark": "{primitive.color.violet.700}"
+        "dark": "{primitive.color.violet.700}",
+        "nova": "{primitive.color.stone.200}",
+        "novaDark": "{primitive.color.stone.700}"
       },
       "value": {
         "light": "oklch(92.6% 0.0357 277.03)",
-        "dark": "oklch(39.99% 0.2156 276.99)"
+        "dark": "oklch(39.99% 0.2156 276.99)",
+        "nova": "oklch(92.45% 0.0051 48.68)",
+        "novaDark": "oklch(39.95% 0.0126 57.92)"
       },
       "description": "A primary tint (bg-primary/10 at rest) under the pointer: the tinted Bubble that is a button or a link. Its text is color.text.default, at 4.5:1 or more. Not for the solid primary fill, which takes color.action.background.hover.",
       "docs": {
@@ -4940,11 +5454,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.white}",
-        "dark": "{primitive.color.mist.950}"
+        "dark": "{primitive.color.mist.950}",
+        "novaDark": "{primitive.color.stone.950}"
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(14.65% 0.0056 219)"
+        "dark": "oklch(14.65% 0.0056 219)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "Text and icons placed on color.feedback.error.default. Never use color.text.default on an error surface.",
       "docs": {
@@ -5028,11 +5544,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.white}",
-        "dark": "{primitive.color.mist.950}"
+        "dark": "{primitive.color.mist.950}",
+        "novaDark": "{primitive.color.stone.950}"
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(14.65% 0.0056 219)"
+        "dark": "oklch(14.65% 0.0056 219)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "Text and icons placed on color.feedback.success.default. Never use color.text.default on a success surface.",
       "docs": {
@@ -5093,10 +5611,14 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.950}"
+        "light": "{primitive.color.mist.950}",
+        "nova": "{primitive.color.stone.950}",
+        "novaDark": "{primitive.color.stone.950}"
       },
       "value": {
-        "light": "oklch(14.65% 0.0056 219)"
+        "light": "oklch(14.65% 0.0056 219)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "Text and icons placed on color.feedback.warning.default, dark in both modes. Never use white on a warning surface.",
       "docs": {
@@ -5158,11 +5680,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.white}",
-        "dark": "{primitive.color.mist.950}"
+        "dark": "{primitive.color.mist.950}",
+        "novaDark": "{primitive.color.stone.950}"
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(14.65% 0.0056 219)"
+        "dark": "oklch(14.65% 0.0056 219)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "Text and icons placed on color.feedback.info.default. Reserved: no component draws a solid info surface yet.",
       "docs": {
@@ -5202,13 +5726,17 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.700}",
-        "dark": "{primitive.color.violet.500}"
+        "dark": "{primitive.color.violet.500}",
+        "nova": "{primitive.color.teal.800}",
+        "novaDark": "{primitive.color.teal.400}"
       },
       "value": {
         "light": "oklch(39.99% 0.2156 276.99)",
-        "dark": "oklch(58.95% 0.2266 277.16)"
+        "dark": "oklch(58.95% 0.2266 277.16)",
+        "nova": "oklch(27.46% 0.0482 185.94)",
+        "novaDark": "oklch(71.47% 0.1039 184.68)"
       },
-      "description": "Categorical chart Series 1 — the brand violet. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "description": "Categorical chart Series 1 — the lead hue of the brand: violet in lyra, teal in nova. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
         "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
         "do": "Use in order (1 → 5) for chart series.",
@@ -5224,11 +5752,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.blue.500}",
-        "dark": "{primitive.color.blue.400}"
+        "dark": "{primitive.color.blue.400}",
+        "novaDark": "{primitive.color.blue.500}"
       },
       "value": {
         "light": "oklch(58.95% 0.1025 238.59)",
-        "dark": "oklch(71.5% 0.1026 238.54)"
+        "dark": "oklch(71.5% 0.1026 238.54)",
+        "novaDark": "oklch(58.95% 0.1025 238.59)"
       },
       "description": "Categorical chart Series 2 — blue. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
@@ -5246,13 +5776,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.amber.500}",
-        "dark": "{primitive.color.yellow.300}"
+        "dark": "{primitive.color.yellow.300}",
+        "nova": "{primitive.color.yellow.500}"
       },
       "value": {
         "light": "oklch(58.96% 0.1317 65.56)",
-        "dark": "oklch(83.02% 0.1386 109.98)"
+        "dark": "oklch(83.02% 0.1386 109.98)",
+        "nova": "oklch(58.95% 0.129 110.31)"
       },
-      "description": "Categorical chart Series 3 — ochre, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "description": "Categorical chart Series 3 — ochre in lyra, olive in nova, yellow in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
         "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
         "do": "Use in order (1 → 5) for chart series.",
@@ -5268,11 +5800,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.plum.800}",
-        "dark": "{primitive.color.plum.200}"
+        "dark": "{primitive.color.plum.200}",
+        "nova": "{primitive.color.plum.700}"
       },
       "value": {
         "light": "oklch(27.46% 0.097 310.17)",
-        "dark": "oklch(92.5% 0.0481 309.77)"
+        "dark": "oklch(92.5% 0.0481 309.77)",
+        "nova": "oklch(39.96% 0.1442 309.95)"
       },
       "description": "Categorical chart Series 4 — plum. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
@@ -5290,13 +5824,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.amber.700}",
-        "dark": "{primitive.color.amber.500}"
+        "dark": "{primitive.color.amber.500}",
+        "nova": "{primitive.color.green.700}"
       },
       "value": {
         "light": "oklch(40.01% 0.0992 54.84)",
-        "dark": "oklch(58.96% 0.1317 65.56)"
+        "dark": "oklch(58.96% 0.1317 65.56)",
+        "nova": "oklch(40.1% 0.1138 133.33)"
       },
-      "description": "Categorical chart Series 5 — brown, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
+      "description": "Categorical chart Series 5 — brown in lyra, green in nova, gold in dark mode. For unordered categories: every series is at least 3:1 on the default and subtle surfaces of its mode, and distinguishable from the others under protanopia and deuteranopia (lint-chart-palette). Not for ordered data — use color.chart.sequential.*.",
       "docs": {
         "description": "Categorical palette for chart series (unordered categories); ordered data uses `color.chart.sequential.*`.",
         "do": "Use in order (1 → 5) for chart series.",
@@ -5311,10 +5847,14 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.green.200}"
+        "light": "{primitive.color.green.200}",
+        "nova": "{primitive.color.teal.200}",
+        "novaDark": "{primitive.color.teal.200}"
       },
       "value": {
-        "light": "oklch(92.58% 0.0749 133.27)"
+        "light": "oklch(92.58% 0.0749 133.27)",
+        "nova": "oklch(92.58% 0.0412 185.15)",
+        "novaDark": "oklch(92.58% 0.0412 185.15)"
       },
       "description": "Sequential chart step 1 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -5331,10 +5871,14 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.green.300}"
+        "light": "{primitive.color.green.300}",
+        "nova": "{primitive.color.teal.300}",
+        "novaDark": "{primitive.color.teal.300}"
       },
       "value": {
-        "light": "oklch(83.04% 0.1477 133.49)"
+        "light": "oklch(83.04% 0.1477 133.49)",
+        "nova": "oklch(82.91% 0.0828 185.05)",
+        "novaDark": "oklch(82.91% 0.0828 185.05)"
       },
       "description": "Sequential chart step 2 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -5351,10 +5895,14 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.green.400}"
+        "light": "{primitive.color.green.400}",
+        "nova": "{primitive.color.teal.400}",
+        "novaDark": "{primitive.color.teal.400}"
       },
       "value": {
-        "light": "oklch(71.48% 0.184 133.22)"
+        "light": "oklch(71.48% 0.184 133.22)",
+        "nova": "oklch(71.47% 0.1039 184.68)",
+        "novaDark": "oklch(71.47% 0.1039 184.68)"
       },
       "description": "Sequential chart step 3 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -5371,10 +5919,14 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.green.500}"
+        "light": "{primitive.color.green.500}",
+        "nova": "{primitive.color.teal.500}",
+        "novaDark": "{primitive.color.teal.500}"
       },
       "value": {
-        "light": "oklch(59.06% 0.1674 133.26)"
+        "light": "oklch(59.06% 0.1674 133.26)",
+        "nova": "oklch(59.04% 0.1039 184.63)",
+        "novaDark": "oklch(59.04% 0.1039 184.63)"
       },
       "description": "Sequential chart step 4 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -5391,10 +5943,14 @@
       "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.green.600}"
+        "light": "{primitive.color.green.600}",
+        "nova": "{primitive.color.teal.600}",
+        "novaDark": "{primitive.color.teal.600}"
       },
       "value": {
-        "light": "oklch(49.97% 0.1416 133.23)"
+        "light": "oklch(49.97% 0.1416 133.23)",
+        "nova": "oklch(49.93% 0.0883 184.39)",
+        "novaDark": "oklch(49.93% 0.0883 184.39)"
       },
       "description": "Sequential chart step 5 of 5, lightest to darkest. Ordered data only (a heatmap, a scale of intensity): its steps differ by lightness, not hue, so they cannot tell unordered categories apart.",
       "docs": {
@@ -5412,11 +5968,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.50}",
-        "dark": "{primitive.color.mist.900}"
+        "dark": "{primitive.color.mist.900}",
+        "nova": "{primitive.color.stone.50}",
+        "novaDark": "{primitive.color.stone.900}"
       },
       "value": {
         "light": "oklch(98.46% 0.0017 247.84)",
-        "dark": "oklch(21.69% 0.0098 219.96)"
+        "dark": "oklch(21.69% 0.0098 219.96)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "Sidebar panel surface. Not for the main content area or popovers.",
       "docs": {
@@ -5434,11 +5994,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.950}",
-        "dark": "{primitive.color.mist.50}"
+        "dark": "{primitive.color.mist.50}",
+        "nova": "{primitive.color.stone.950}",
+        "novaDark": "{primitive.color.stone.50}"
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "Default text and icon color within the sidebar. Not for sidebar accent or muted items.",
       "docs": {
@@ -5456,11 +6020,13 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.200}",
-        "dark": "{primitive.color.white-alpha.10}"
+        "dark": "{primitive.color.white-alpha.10}",
+        "nova": "{primitive.color.stone.200}"
       },
       "value": {
         "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.1)"
+        "dark": "oklch(100% 0 0 / 0.1)",
+        "nova": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "Sidebar internal divider/border. Not for content-area borders.",
       "docs": {
@@ -5477,10 +6043,14 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.mist.500}"
+        "light": "{primitive.color.mist.500}",
+        "nova": "{primitive.color.stone.500}",
+        "novaDark": "{primitive.color.stone.500}"
       },
       "value": {
-        "light": "oklch(59.08% 0.0208 213.49)"
+        "light": "oklch(59.08% 0.0208 213.49)",
+        "nova": "oklch(58.91% 0.0143 56.1)",
+        "novaDark": "oklch(58.91% 0.0143 56.1)"
       },
       "description": "Focus ring within the sidebar. Not for main content focus rings.",
       "docs": {
@@ -5497,10 +6067,14 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.color.violet.600}"
+        "light": "{primitive.color.violet.600}",
+        "nova": "{primitive.color.stone.900}",
+        "novaDark": "{primitive.color.stone.200}"
       },
       "value": {
-        "light": "oklch(49.97% 0.2389 276.79)"
+        "light": "oklch(49.97% 0.2389 276.79)",
+        "nova": "oklch(21.61% 0.0061 56.04)",
+        "novaDark": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "Active/primary nav item background in the sidebar. Not for generic sidebar items.",
       "docs": {
@@ -5518,11 +6092,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.violet.50}",
-        "dark": "{primitive.color.white}"
+        "dark": "{primitive.color.white}",
+        "nova": "{primitive.color.stone.50}",
+        "novaDark": "{primitive.color.stone.900}"
       },
       "value": {
         "light": "oklch(98.58% 0.0067 277.17)",
-        "dark": "oklch(100% 0 0)"
+        "dark": "oklch(100% 0 0)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "Text on top of the sidebar primary active item. Not for inactive item text.",
       "docs": {
@@ -5540,11 +6118,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.100}",
-        "dark": "{primitive.color.mist.800}"
+        "dark": "{primitive.color.mist.800}",
+        "nova": "{primitive.color.stone.100}",
+        "novaDark": "{primitive.color.stone.800}"
       },
       "value": {
         "light": "oklch(96.52% 0.0035 219.53)",
-        "dark": "oklch(27.4% 0.0119 214.54)"
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(96.54% 0.0025 48.72)",
+        "novaDark": "oklch(27.6% 0.0081 59.33)"
       },
       "description": "Hovered or secondary sidebar item background. Not for the active primary item.",
       "docs": {
@@ -5562,11 +6144,15 @@
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.color.mist.900}",
-        "dark": "{primitive.color.mist.50}"
+        "dark": "{primitive.color.mist.50}",
+        "nova": "{primitive.color.stone.900}",
+        "novaDark": "{primitive.color.stone.50}"
       },
       "value": {
         "light": "oklch(21.69% 0.0098 219.96)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(21.61% 0.0061 56.04)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "Text on sidebar accent (hover) surfaces. Not for primary active item text.",
       "docs": {
@@ -6774,7 +7360,7 @@
       "value": {
         "light": "0.75rem"
       },
-      "description": "Extra-small text size (12px). The text of components: labels, buttons, inputs, badges, menu items, descriptions.",
+      "description": "Extra-small text size (12px), the same in every brand: badges, Kbd, Tooltip, menu shortcuts and group labels, chart legends, a caption. The interface text of a component is `text-ui`, its description `text-description`.",
       "docs": {
         "tailwind": "text-xs"
       }
@@ -6792,7 +7378,7 @@
       "value": {
         "light": "0.875rem"
       },
-      "description": "Small text size (14px). Use for titles inside components (CardTitle, DialogTitle) and a screen's secondary content. A field label stays text-xs.",
+      "description": "Small text size (14px), the same in every brand: a screen's secondary text, inline code. The title of a component is `text-title`, and text a screen sets next to components takes the role of what it sits beside.",
       "docs": {
         "tailwind": "text-sm"
       }
@@ -6903,6 +7489,94 @@
       "description": "4XL text (36px). Display text a screen draws, rarely; no component uses it.",
       "docs": {
         "tailwind": "text-4xl"
+      }
+    },
+    {
+      "token": "typography.size.ui",
+      "tier": "semantic",
+      "cssVar": "--typography-size-ui",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size.xs}",
+        "nova": "{primitive.typography.size.sm}",
+        "novaDark": "{primitive.typography.size.sm}"
+      },
+      "value": {
+        "light": "0.75rem",
+        "nova": "0.875rem",
+        "novaDark": "0.875rem"
+      },
+      "description": "Text size of a component's interface text: labels, menu items, buttons. 12px in lyra, 14px in nova.",
+      "docs": {
+        "tailwind": "text-ui"
+      }
+    },
+    {
+      "token": "typography.size.description",
+      "tier": "semantic",
+      "cssVar": "--typography-size-description",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size.xs}",
+        "nova": "{primitive.typography.size.sm}",
+        "novaDark": "{primitive.typography.size.sm}"
+      },
+      "value": {
+        "light": "0.75rem",
+        "nova": "0.875rem",
+        "novaDark": "0.875rem"
+      },
+      "description": "Text size of a component's descriptive text, paired with a looser line. 12px in lyra, 14px in nova.",
+      "docs": {
+        "tailwind": "text-description"
+      }
+    },
+    {
+      "token": "typography.size.title",
+      "tier": "semantic",
+      "cssVar": "--typography-size-title",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size.sm}",
+        "nova": "{primitive.typography.size.base}",
+        "novaDark": "{primitive.typography.size.base}"
+      },
+      "value": {
+        "light": "0.875rem",
+        "nova": "1rem",
+        "novaDark": "1rem"
+      },
+      "description": "Text size of a component's title. 14px in lyra, 16px in nova.",
+      "docs": {
+        "tailwind": "text-title"
+      }
+    },
+    {
+      "token": "typography.size.control",
+      "tier": "semantic",
+      "cssVar": "--typography-size-control",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size.xs}",
+        "nova": "{primitive.typography.size.base}",
+        "novaDark": "{primitive.typography.size.base}"
+      },
+      "value": {
+        "light": "0.75rem",
+        "nova": "1rem",
+        "novaDark": "1rem"
+      },
+      "description": "Text size of a text field on a small viewport, written beside `md:text-ui`. 12px in lyra, 16px in nova, which keeps a phone from zooming into a focused field.",
+      "docs": {
+        "tailwind": "text-control"
       }
     },
     {
@@ -7048,6 +7722,82 @@
       "docs": {
         "tailwind": "text-4xl"
       }
+    },
+    {
+      "token": "typography.size-line-height.ui",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-ui",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.xs}",
+        "nova": "{primitive.typography.size-line-height.sm}",
+        "novaDark": "{primitive.typography.size-line-height.sm}"
+      },
+      "value": {
+        "light": "1.33334",
+        "nova": "1.42858",
+        "novaDark": "1.42858"
+      },
+      "description": "Line height paired with typography.size.ui."
+    },
+    {
+      "token": "typography.size-line-height.description",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-description",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.line-height.relaxed}",
+        "nova": "{primitive.typography.size-line-height.sm}",
+        "novaDark": "{primitive.typography.size-line-height.sm}"
+      },
+      "value": {
+        "light": "1.625",
+        "nova": "1.42858",
+        "novaDark": "1.42858"
+      },
+      "description": "Line height paired with typography.size.description: relaxed in lyra, the sm pair in nova."
+    },
+    {
+      "token": "typography.size-line-height.title",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-title",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.sm}",
+        "nova": "{primitive.typography.size-line-height.base}",
+        "novaDark": "{primitive.typography.size-line-height.base}"
+      },
+      "value": {
+        "light": "1.42858",
+        "nova": "1.5",
+        "novaDark": "1.5"
+      },
+      "description": "Line height paired with typography.size.title."
+    },
+    {
+      "token": "typography.size-line-height.control",
+      "tier": "semantic",
+      "cssVar": "--typography-size-line-height-control",
+      "type": "number",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.size-line-height.xs}",
+        "nova": "{primitive.typography.size-line-height.base}",
+        "novaDark": "{primitive.typography.size-line-height.base}"
+      },
+      "value": {
+        "light": "1.33334",
+        "nova": "1.5",
+        "novaDark": "1.5"
+      },
+      "description": "Line height paired with typography.size.control."
     },
     {
       "token": "typography.line-height.tight",
@@ -7309,15 +8059,19 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.typography.font-family.sans}"
+        "light": "{primitive.typography.font-family.sans}",
+        "nova": "{primitive.typography.font-family.dm-sans}",
+        "novaDark": "{primitive.typography.font-family.dm-sans}"
       },
       "value": {
-        "light": "Geist, sans-serif"
+        "light": "Geist, sans-serif",
+        "nova": "DM Sans, sans-serif",
+        "novaDark": "DM Sans, sans-serif"
       },
-      "description": "Secondary sans-serif typeface (Geist): Kbd keys and long-form editorial text. Loaded by next/font in lib/fonts.ts under --font-sans; this token describes that choice, it does not drive it (lint-font-tokens).",
+      "description": "Secondary sans-serif typeface: Kbd keys and long-form editorial text. Geist in lyra, DM Sans in nova; next/font loads each face under its --font-<face> variable, which this token reads (lint-font-tokens).",
       "docs": {
         "do": "Keep it for `Kbd` keys and long editorial content (`font-sans`).",
-        "dont": "Do not use it for the interface: all UI text is set in `font-mono`."
+        "dont": "Do not use it for the interface: every component inherits `font-body` from `<html>`."
       }
     },
     {
@@ -7328,15 +8082,65 @@
       "status": "active",
       "source": "tokens/semantic.json",
       "reference": {
-        "light": "{primitive.typography.font-family.mono}"
+        "light": "{primitive.typography.font-family.mono}",
+        "nova": "{primitive.typography.font-family.geist-mono}",
+        "novaDark": "{primitive.typography.font-family.geist-mono}"
       },
       "value": {
-        "light": "JetBrains Mono, monospace"
+        "light": "JetBrains Mono, monospace",
+        "nova": "Geist Mono, monospace",
+        "novaDark": "Geist Mono, monospace"
       },
-      "description": "Typeface of the whole interface (JetBrains Mono), set on <html> with font-mono. Loaded by next/font in lib/fonts.ts under --font-mono; this token describes that choice, it does not drive it (lint-font-tokens).",
+      "description": "Monospace typeface for code and tabular data, read by font-mono. JetBrains Mono in lyra, Geist Mono in nova; next/font loads each face under its --font-<face> variable, which this token reads (lint-font-tokens).",
       "docs": {
-        "do": "The default typeface of every UI component, set on `<html>`.",
-        "dont": "Do not change the typeface here alone: it is loaded by `next/font` in `lib/fonts.ts`, which `tokens:lint-fonts` checks against this token."
+        "do": "Use `font-mono` for code and data that must align in columns.",
+        "dont": "Do not change the typeface here alone: `next/font` loads it in `lib/fonts.ts` or `lib/fonts-nova.ts`, which `tokens:lint-fonts` checks against this token."
+      }
+    },
+    {
+      "token": "typography.font-family.body",
+      "tier": "semantic",
+      "cssVar": "--typography-font-family-body",
+      "type": "fontFamily",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.font-family.mono}",
+        "nova": "{primitive.typography.font-family.lora}",
+        "novaDark": "{primitive.typography.font-family.lora}"
+      },
+      "value": {
+        "light": "JetBrains Mono, monospace",
+        "nova": "Lora, serif",
+        "novaDark": "Lora, serif"
+      },
+      "description": "Typeface of the interface and running text, set on <html> with font-body. JetBrains Mono in lyra, Lora in nova.",
+      "docs": {
+        "tailwind": "font-body",
+        "do": "Let `<html>` carry it: every component inherits it.",
+        "dont": "Do not set it on a component: a screen that needs a typeface by role uses `font-heading` or `font-mono`."
+      }
+    },
+    {
+      "token": "typography.font-family.heading",
+      "tier": "semantic",
+      "cssVar": "--typography-font-family-heading",
+      "type": "fontFamily",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.typography.font-family.mono}",
+        "nova": "{primitive.typography.font-family.dm-sans}",
+        "novaDark": "{primitive.typography.font-family.dm-sans}"
+      },
+      "value": {
+        "light": "JetBrains Mono, monospace",
+        "nova": "DM Sans, sans-serif",
+        "novaDark": "DM Sans, sans-serif"
+      },
+      "description": "Typeface of titles and headings, read by font-heading. JetBrains Mono in lyra, DM Sans in nova.",
+      "docs": {
+        "tailwind": "font-heading"
       }
     },
     {
@@ -7344,7 +8148,7 @@
       "tier": "semantic",
       "cssVar": "--radius-none",
       "type": "dimension",
-      "status": "active",
+      "status": "reserved",
       "source": "tokens/semantic.json",
       "reference": {
         "light": "{primitive.radius.none}"
@@ -7352,9 +8156,9 @@
       "value": {
         "light": "0rem"
       },
-      "description": "Zero radius, square corners: the radius of every component. `rounded-none` is a static class that reads no token; only the Sonner toast reads this one.",
+      "description": "Zero radius, square corners. `rounded-none` is a static class that reads no token, and the radius of a component comes from its role (`radius.surface`, `radius.control`…). Reserved for a value that must stay square in every brand and cannot be written as a class.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-none"
       }
@@ -7374,7 +8178,7 @@
       },
       "description": "Minimal rounding (0.4× base). The legend and tooltip indicators of a chart.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-xs"
       }
@@ -7394,7 +8198,7 @@
       },
       "description": "Small rounding (0.6× base). For content a screen draws itself; no component uses it.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-sm"
       }
@@ -7414,7 +8218,7 @@
       },
       "description": "Medium rounding (0.8× base). For content a screen draws itself; no component uses it.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-md"
       }
@@ -7434,7 +8238,7 @@
       },
       "description": "Base rounding (1× = 0.625rem). For content a screen draws itself, and the shadcn --radius alias; no component reads it.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-lg"
       }
@@ -7454,7 +8258,7 @@
       },
       "description": "Larger rounding (1.4× base). For content a screen draws itself; no component uses it.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-xl"
       }
@@ -7474,7 +8278,7 @@
       },
       "description": "Extra-large rounding (1.8× base). For content a screen draws itself (a hero); no component uses it.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-2xl"
       }
@@ -7494,7 +8298,7 @@
       },
       "description": "Very large rounding (2.2× base). Use sparingly for decorative content; no component uses it.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-3xl"
       }
@@ -7514,7 +8318,7 @@
       },
       "description": "Maximum rounding (2.6× base). Use only for hero content; no component uses it.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-4xl"
       }
@@ -7534,9 +8338,153 @@
       },
       "description": "Pill/full rounding. A round shape: Avatar, RadioGroup and Switch draw rounded-full, a static class that reads no token.",
       "docs": {
-        "do": "Square (`rounded-none`) for every surface; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
         "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
         "tailwind": "rounded-full"
+      }
+    },
+    {
+      "token": "radius.surface",
+      "tier": "semantic",
+      "cssVar": "--radius-surface",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.radius.none}",
+        "nova": "{primitive.radius.xl}",
+        "novaDark": "{primitive.radius.xl}"
+      },
+      "value": {
+        "light": "0rem",
+        "nova": "0.875rem",
+        "novaDark": "0.875rem"
+      },
+      "description": "Radius of a surface: card, dialog, drawer edge, bubble content, empty state, sidebar inset, command palette. Square in lyra, rounded in nova.",
+      "docs": {
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
+        "tailwind": "rounded-surface"
+      }
+    },
+    {
+      "token": "radius.control",
+      "tier": "semantic",
+      "cssVar": "--radius-control",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.radius.none}",
+        "nova": "{primitive.radius.lg}",
+        "novaDark": "{primitive.radius.lg}"
+      },
+      "value": {
+        "light": "0rem",
+        "nova": "0.625rem",
+        "novaDark": "0.625rem"
+      },
+      "description": "Radius of a control: button, input, popover, menu panel, tabs list. Square in lyra, rounded in nova.",
+      "docs": {
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
+        "tailwind": "rounded-control"
+      }
+    },
+    {
+      "token": "radius.item",
+      "tier": "semantic",
+      "cssVar": "--radius-item",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.radius.none}",
+        "nova": "{primitive.radius.md}",
+        "novaDark": "{primitive.radius.md}"
+      },
+      "value": {
+        "light": "0rem",
+        "nova": "0.5rem",
+        "novaDark": "0.5rem"
+      },
+      "description": "Radius of an item inside a panel: menu and sidebar items, tooltip, skeleton, tabs trigger, calendar cell. Square in lyra, rounded in nova.",
+      "docs": {
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
+        "tailwind": "rounded-item"
+      }
+    },
+    {
+      "token": "radius.inset",
+      "tier": "semantic",
+      "cssVar": "--radius-inset",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.radius.none}",
+        "nova": "{primitive.radius.sm}",
+        "novaDark": "{primitive.radius.sm}"
+      },
+      "value": {
+        "light": "0rem",
+        "nova": "0.375rem",
+        "novaDark": "0.375rem"
+      },
+      "description": "Radius of a part nested in a control: kbd, chip, command item, menubar trigger, the extra-small buttons of an input group. Square in lyra, rounded in nova.",
+      "docs": {
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
+        "tailwind": "rounded-inset"
+      }
+    },
+    {
+      "token": "radius.mark",
+      "tier": "semantic",
+      "cssVar": "--radius-mark",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.radius.none}",
+        "nova": "{primitive.radius.xs}",
+        "novaDark": "{primitive.radius.xs}"
+      },
+      "value": {
+        "light": "0rem",
+        "nova": "0.25rem",
+        "novaDark": "0.25rem"
+      },
+      "description": "Radius of a small mark: checkbox, questionnaire indicator, tooltip arrow. Square in lyra, rounded in nova.",
+      "docs": {
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
+        "tailwind": "rounded-mark"
+      }
+    },
+    {
+      "token": "radius.pill",
+      "tier": "semantic",
+      "cssVar": "--radius-pill",
+      "type": "dimension",
+      "status": "active",
+      "source": "tokens/semantic.json",
+      "reference": {
+        "light": "{primitive.radius.none}",
+        "nova": "{primitive.radius.full}",
+        "novaDark": "{primitive.radius.full}"
+      },
+      "value": {
+        "light": "0rem",
+        "nova": "9999px",
+        "novaDark": "9999px"
+      },
+      "description": "Radius of a fully rounded element: badge, bubble, carousel button, drawer handle, progress, scroll thumb, slider. Square in lyra, a pill in nova.",
+      "docs": {
+        "do": "Next to components, the role of what it sits beside (`rounded-surface`, `rounded-control`, `rounded-item`, `rounded-inset`, `rounded-mark`, `rounded-pill`); `rounded-none` for a seam, an edge that meets another element; `rounded-full` for a round shape; `radius.sm` to `radius.4xl` for content a screen draws (an image, a hero).",
+        "dont": "No arbitrary values, always a token from the system; no `rounded-*` class on a component.",
+        "tailwind": "rounded-pill"
       }
     },
     {
@@ -8286,7 +9234,8 @@
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(14.65% 0.0056 219)"
+        "dark": "oklch(14.65% 0.0056 219)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "shadcn --background compatibility alias. Maps the semantic default surface to the shadcn variable name expected by shadcn/ui components."
     },
@@ -8302,7 +9251,9 @@
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "shadcn --foreground compatibility alias. Maps primary text color to the shadcn variable name."
     },
@@ -8314,13 +9265,15 @@
       "status": "active",
       "source": "tokens/component.json",
       "reference": {
-        "light": "{color.background.subtle}"
+        "light": "{color.background.card}"
       },
       "value": {
         "light": "oklch(96.52% 0.0035 219.53)",
-        "dark": "oklch(27.4% 0.0119 214.54)"
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(100% 0 0)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
-      "description": "shadcn --card compatibility alias. Cards use the subtle surface (slightly off-white / dark mist) rather than pure default to create visual separation."
+      "description": "shadcn --card compatibility alias. Cards read their own surface token, so that a brand can set a card apart from the muted surfaces."
     },
     {
       "token": "shadcn.card-foreground",
@@ -8334,7 +9287,9 @@
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "shadcn --card-foreground compatibility alias. Reuses default text color for card content."
     },
@@ -8350,7 +9305,8 @@
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(21.69% 0.0098 219.96)"
+        "dark": "oklch(21.69% 0.0098 219.96)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "shadcn --popover compatibility alias. Popovers use the elevated surface token to convey depth above the page."
     },
@@ -8366,7 +9322,9 @@
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "shadcn --popover-foreground compatibility alias. Reuses default text color for popover content."
     },
@@ -8382,7 +9340,9 @@
       },
       "value": {
         "light": "oklch(49.97% 0.2389 276.79)",
-        "dark": "oklch(39.99% 0.2156 276.99)"
+        "dark": "oklch(39.99% 0.2156 276.99)",
+        "nova": "oklch(21.61% 0.0061 56.04)",
+        "novaDark": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "shadcn --primary compatibility alias. Maps the brand action background to the shadcn primary slot."
     },
@@ -8397,7 +9357,9 @@
         "light": "{color.action.background.foreground}"
       },
       "value": {
-        "light": "oklch(98.58% 0.0067 277.17)"
+        "light": "oklch(98.58% 0.0067 277.17)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "shadcn --primary-foreground compatibility alias. Maps the on-action foreground to the shadcn primary-foreground slot."
     },
@@ -8413,7 +9375,9 @@
       },
       "value": {
         "light": "oklch(96.52% 0.0035 219.53)",
-        "dark": "oklch(27.4% 0.0119 214.54)"
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(96.54% 0.0025 48.72)",
+        "novaDark": "oklch(27.6% 0.0081 59.33)"
       },
       "description": "shadcn --secondary compatibility alias. The secondary variant shares the subtle surface token rather than a palette of its own."
     },
@@ -8429,7 +9393,9 @@
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "shadcn --secondary-foreground compatibility alias. Secondary text uses default text color for legibility."
     },
@@ -8445,7 +9411,9 @@
       },
       "value": {
         "light": "oklch(96.52% 0.0035 219.53)",
-        "dark": "oklch(27.4% 0.0119 214.54)"
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(96.54% 0.0025 48.72)",
+        "novaDark": "oklch(27.6% 0.0081 59.33)"
       },
       "description": "shadcn --muted compatibility alias. Muted areas share the subtle surface token."
     },
@@ -8461,7 +9429,9 @@
       },
       "value": {
         "light": "oklch(50.11% 0.0215 213.54)",
-        "dark": "oklch(71.56% 0.021 212.57)"
+        "dark": "oklch(71.56% 0.021 212.57)",
+        "nova": "oklch(50.08% 0.013 63.17)",
+        "novaDark": "oklch(71.49% 0.0136 56.17)"
       },
       "description": "shadcn --muted-foreground compatibility alias. Muted foreground maps to the semantic subtle text token."
     },
@@ -8477,7 +9447,9 @@
       },
       "value": {
         "light": "oklch(96.52% 0.0035 219.53)",
-        "dark": "oklch(27.4% 0.0119 214.54)"
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(96.54% 0.0025 48.72)",
+        "novaDark": "oklch(27.6% 0.0081 59.33)"
       },
       "description": "shadcn --accent compatibility alias. Accent hover states share the subtle surface token with muted areas."
     },
@@ -8493,7 +9465,9 @@
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "shadcn --accent-foreground compatibility alias. Accent foreground uses default text for contrast."
     },
@@ -8525,7 +9499,8 @@
       },
       "value": {
         "light": "oklch(100% 0 0)",
-        "dark": "oklch(14.65% 0.0056 219)"
+        "dark": "oklch(14.65% 0.0056 219)",
+        "novaDark": "oklch(14.69% 0.0041 49.25)"
       },
       "description": "shadcn --destructive-foreground compatibility alias. Text and icons on a solid destructive surface."
     },
@@ -8541,7 +9516,8 @@
       },
       "value": {
         "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.1)"
+        "dark": "oklch(100% 0 0 / 0.1)",
+        "nova": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "shadcn --border compatibility alias. Maps the semantic default border to the shadcn border slot."
     },
@@ -8556,7 +9532,9 @@
         "light": "{color.border.input}"
       },
       "value": {
-        "light": "oklch(59.08% 0.0208 213.49)"
+        "light": "oklch(59.08% 0.0208 213.49)",
+        "nova": "oklch(58.91% 0.0143 56.1)",
+        "novaDark": "oklch(58.91% 0.0143 56.1)"
       },
       "description": "shadcn --input compatibility alias. Maps the semantic input border to the shadcn input slot for form field outlines."
     },
@@ -8572,7 +9550,9 @@
       },
       "value": {
         "light": "oklch(27.4% 0.0119 214.54)",
-        "dark": "oklch(92.55% 0.009 214.34)"
+        "dark": "oklch(92.55% 0.009 214.34)",
+        "nova": "oklch(27.6% 0.0081 59.33)",
+        "novaDark": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "shadcn --ring compatibility alias. Maps the semantic focus ring to the shadcn ring slot."
     },
@@ -8589,7 +9569,7 @@
       "value": {
         "light": "0.625rem"
       },
-      "description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem). No component reads it: radix-lyra draws every component with rounded-none."
+      "description": "shadcn --radius compatibility alias. Maps to radius.lg (= radius.base = 0.625rem). No component reads it: a component names a radius role (`radius.surface`, `radius.control`…), which each brand sets."
     },
     {
       "token": "shadcn.chart-1",
@@ -8603,7 +9583,9 @@
       },
       "value": {
         "light": "oklch(39.99% 0.2156 276.99)",
-        "dark": "oklch(58.95% 0.2266 277.16)"
+        "dark": "oklch(58.95% 0.2266 277.16)",
+        "nova": "oklch(27.46% 0.0482 185.94)",
+        "novaDark": "oklch(71.47% 0.1039 184.68)"
       },
       "description": "shadcn --chart-1 compatibility alias. Maps the semantic chart series 1 token."
     },
@@ -8619,7 +9601,8 @@
       },
       "value": {
         "light": "oklch(58.95% 0.1025 238.59)",
-        "dark": "oklch(71.5% 0.1026 238.54)"
+        "dark": "oklch(71.5% 0.1026 238.54)",
+        "novaDark": "oklch(58.95% 0.1025 238.59)"
       },
       "description": "shadcn --chart-2 compatibility alias. Maps the semantic chart series 2 token."
     },
@@ -8635,7 +9618,8 @@
       },
       "value": {
         "light": "oklch(58.96% 0.1317 65.56)",
-        "dark": "oklch(83.02% 0.1386 109.98)"
+        "dark": "oklch(83.02% 0.1386 109.98)",
+        "nova": "oklch(58.95% 0.129 110.31)"
       },
       "description": "shadcn --chart-3 compatibility alias. Maps the semantic chart series 3 token."
     },
@@ -8651,7 +9635,8 @@
       },
       "value": {
         "light": "oklch(27.46% 0.097 310.17)",
-        "dark": "oklch(92.5% 0.0481 309.77)"
+        "dark": "oklch(92.5% 0.0481 309.77)",
+        "nova": "oklch(39.96% 0.1442 309.95)"
       },
       "description": "shadcn --chart-4 compatibility alias. Maps the semantic chart series 4 token."
     },
@@ -8667,7 +9652,8 @@
       },
       "value": {
         "light": "oklch(40.01% 0.0992 54.84)",
-        "dark": "oklch(58.96% 0.1317 65.56)"
+        "dark": "oklch(58.96% 0.1317 65.56)",
+        "nova": "oklch(40.1% 0.1138 133.33)"
       },
       "description": "shadcn --chart-5 compatibility alias. Maps the semantic chart series 5 token."
     },
@@ -8683,7 +9669,9 @@
       },
       "value": {
         "light": "oklch(98.46% 0.0017 247.84)",
-        "dark": "oklch(21.69% 0.0098 219.96)"
+        "dark": "oklch(21.69% 0.0098 219.96)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "shadcn --sidebar compatibility alias. Maps the semantic sidebar background token."
     },
@@ -8699,7 +9687,9 @@
       },
       "value": {
         "light": "oklch(14.65% 0.0056 219)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(14.69% 0.0041 49.25)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "shadcn --sidebar-foreground compatibility alias. Maps the semantic sidebar foreground token."
     },
@@ -8714,7 +9704,9 @@
         "light": "{color.sidebar.primary.default}"
       },
       "value": {
-        "light": "oklch(49.97% 0.2389 276.79)"
+        "light": "oklch(49.97% 0.2389 276.79)",
+        "nova": "oklch(21.61% 0.0061 56.04)",
+        "novaDark": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "shadcn --sidebar-primary compatibility alias. Maps the active/primary sidebar item color."
     },
@@ -8730,7 +9722,9 @@
       },
       "value": {
         "light": "oklch(98.58% 0.0067 277.17)",
-        "dark": "oklch(100% 0 0)"
+        "dark": "oklch(100% 0 0)",
+        "nova": "oklch(98.56% 0.0017 67.8)",
+        "novaDark": "oklch(21.61% 0.0061 56.04)"
       },
       "description": "shadcn --sidebar-primary-foreground compatibility alias. Maps the on-primary sidebar text; the name mismatch (primary-foreground vs primary.on) is why this bridge is needed."
     },
@@ -8746,7 +9740,9 @@
       },
       "value": {
         "light": "oklch(96.52% 0.0035 219.53)",
-        "dark": "oklch(27.4% 0.0119 214.54)"
+        "dark": "oklch(27.4% 0.0119 214.54)",
+        "nova": "oklch(96.54% 0.0025 48.72)",
+        "novaDark": "oklch(27.6% 0.0081 59.33)"
       },
       "description": "shadcn --sidebar-accent compatibility alias. Maps the sidebar hover/accent surface token."
     },
@@ -8762,7 +9758,9 @@
       },
       "value": {
         "light": "oklch(21.69% 0.0098 219.96)",
-        "dark": "oklch(98.46% 0.0017 247.84)"
+        "dark": "oklch(98.46% 0.0017 247.84)",
+        "nova": "oklch(21.61% 0.0061 56.04)",
+        "novaDark": "oklch(98.56% 0.0017 67.8)"
       },
       "description": "shadcn --sidebar-accent-foreground compatibility alias. Maps the sidebar accent text token."
     },
@@ -8778,7 +9776,8 @@
       },
       "value": {
         "light": "oklch(92.55% 0.009 214.34)",
-        "dark": "oklch(100% 0 0 / 0.1)"
+        "dark": "oklch(100% 0 0 / 0.1)",
+        "nova": "oklch(92.45% 0.0051 48.68)"
       },
       "description": "shadcn --sidebar-border compatibility alias. Maps the sidebar border token."
     },
@@ -8793,7 +9792,9 @@
         "light": "{color.sidebar.ring}"
       },
       "value": {
-        "light": "oklch(59.08% 0.0208 213.49)"
+        "light": "oklch(59.08% 0.0208 213.49)",
+        "nova": "oklch(58.91% 0.0143 56.1)",
+        "novaDark": "oklch(58.91% 0.0143 56.1)"
       },
       "description": "shadcn --sidebar-ring compatibility alias. Maps the sidebar focus ring token."
     }

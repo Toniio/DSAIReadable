@@ -36,7 +36,7 @@ A set of components for building semantic data tables — header, body, footer a
 
 ## Dependencies
 
-- `cn` (`@/lib/utils`) — the class-merging utility
+- `cn` (`@/lib/cn`) — the class-merging utility
 - No external dependency (native HTML `table`, `thead`, `tbody`… elements)
 
 ## Anatomy
@@ -72,8 +72,8 @@ A set of components for building semantic data tables — header, body, footer a
 | `space.scale.2`                  | `p-2` · `px-2`             | `TableCell` · `TableHead`                  |
 | `space.scale.4`                  | `mt-4`                     | `TableCaption`                             |
 | `typography.font-weight.medium`  | `font-medium`              | `TableFooter` · `TableHead`                |
-| `typography.size-line-height.xs` | `text-xs`                  | `TableCaption` · `Table`                   |
-| `typography.size.xs`             | `text-xs`                  | `TableCaption` · `Table`                   |
+| `typography.size-line-height.ui` | `text-ui`                  | `TableCaption` · `Table`                   |
+| `typography.size.ui`             | `text-ui`                  | `TableCaption` · `Table`                   |
 
 Collected from `components/ui/table.tsx` and the `lib/` constants it imports; Tailwind resolves each class down to its semantic token. **Where**: the sub-component, the `cva` variant path or the constant the class comes from. Classes that read no token (`w-full`, `flex`, layout) are left out.
 

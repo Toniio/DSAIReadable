@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING_WITHIN } from "@/lib/focus"
 import { Button } from "@/components/ui/button"
 import {
@@ -187,7 +187,7 @@ function ComboboxContent({
             // allow-raw: anchor-relative-width — --anchor-width is measured by Base UI at open
             // time; the popup must clear the trigger plus room for the clear and chevron
             // buttons. Only the buttons' width is a token.
-            `group/combobox-content relative max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) min-w-[calc(var(--anchor-width)+var(--space-scale-7))] origin-(--transform-origin) overflow-hidden rounded-none bg-popover text-popover-foreground shadow-md ${SURFACE_OUTLINE} ring-foreground/10 duration-fast data-[chips=true]:min-w-(--anchor-width) data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 *:data-[slot=input-group]:m-1 *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:border-input/30 *:data-[slot=input-group]:bg-input-fill/30 *:data-[slot=input-group]:shadow-none data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95`,
+            `group/combobox-content relative max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) min-w-[calc(var(--anchor-width)+var(--space-scale-7))] origin-(--transform-origin) overflow-hidden rounded-control bg-popover text-popover-foreground shadow-md ${SURFACE_OUTLINE} ring-foreground/10 duration-fast data-[chips=true]:min-w-(--anchor-width) data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 *:data-[slot=input-group]:m-1 *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:border-input/30 *:data-[slot=input-group]:bg-input-fill/30 *:data-[slot=input-group]:shadow-none data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95`,
             className
           )}
           {...props}
@@ -244,7 +244,7 @@ function ComboboxItem({
         // active option with aria-activedescendant, marking it data-highlighted,
         // which the background color below renders. A ring here would double an
         // indicator that already exists.
-        "relative flex w-full cursor-default items-center gap-2 rounded-none py-2 pr-8 pl-2 text-xs outline-hidden select-none data-highlighted:bg-accent data-highlighted:text-accent-foreground not-data-[variant=destructive]:data-highlighted:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "relative flex w-full cursor-default items-center gap-2 rounded-item py-2 pr-8 pl-2 text-ui outline-hidden select-none data-highlighted:bg-accent data-highlighted:text-accent-foreground not-data-[variant=destructive]:data-highlighted:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
@@ -334,7 +334,7 @@ function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props) {
     <ComboboxPrimitive.Empty
       data-slot="combobox-empty"
       className={cn(
-        "hidden w-full justify-center py-2 text-center text-xs text-muted-foreground group-data-empty/combobox-content:flex",
+        "hidden w-full justify-center py-2 text-center text-ui text-muted-foreground group-data-empty/combobox-content:flex",
         className
       )}
       {...props}
@@ -384,7 +384,7 @@ function ComboboxChips({
     <ComboboxPrimitive.Chips
       data-slot="combobox-chips"
       className={cn(
-        `flex min-h-8 flex-wrap items-center gap-1 rounded-none border border-input bg-transparent bg-clip-padding px-2.5 py-1 text-xs transition-colors ${FOCUS_RING_WITHIN} has-aria-invalid:border-destructive has-aria-invalid:ring-(length:--space-focus-ring-width) has-aria-invalid:ring-destructive/20 has-aria-invalid:focus-within:outline-(length:--border-width-default) has-aria-invalid:focus-within:outline-destructive has-aria-invalid:focus-within:outline-solid has-data-[slot=combobox-chip]:px-1 dark:bg-input-fill/30 dark:has-aria-invalid:border-destructive/50 dark:has-aria-invalid:ring-destructive/40`,
+        `flex min-h-8 flex-wrap items-center gap-1 rounded-control border border-input bg-transparent bg-clip-padding px-2.5 py-1 text-ui transition-colors ${FOCUS_RING_WITHIN} has-aria-invalid:border-destructive has-aria-invalid:ring-(length:--space-focus-ring-width) has-aria-invalid:ring-destructive/20 has-aria-invalid:focus-within:outline-(length:--border-width-default) has-aria-invalid:focus-within:outline-destructive has-aria-invalid:focus-within:outline-solid has-data-[slot=combobox-chip]:px-1 dark:bg-input-fill/30 dark:has-aria-invalid:border-destructive/50 dark:has-aria-invalid:ring-destructive/40`,
         className
       )}
       {...props}
@@ -431,7 +431,7 @@ function ComboboxChip({
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
       className={cn(
-        "flex h-5.25 w-fit items-center justify-center gap-1 rounded-none bg-muted px-1.5 text-xs font-medium whitespace-nowrap text-foreground has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-disabled has-data-[slot=combobox-chip-remove]:pr-0",
+        "flex h-5.25 w-fit items-center justify-center gap-1 rounded-inset bg-muted px-1.5 text-xs font-medium whitespace-nowrap text-foreground has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-disabled has-data-[slot=combobox-chip-remove]:pr-0",
         className
       )}
       {...props}

@@ -14,7 +14,7 @@ export function sectionHolds(href: string, pathname: string): boolean {
 }
 
 /**
- * The site's sections, as tabs of the header, from the lg breakpoint; below
+ * The site's sections, as tabs of the header, from the xl breakpoint; below
  * it, the header's sections menu lists them (SectionsMenu). The current tab
  * is marked with the foreground color: the primary color is under 3:1 on the
  * dark page.

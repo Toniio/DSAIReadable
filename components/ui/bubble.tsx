@@ -2,7 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Slot } from "radix-ui"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 /**
  * Stacks the consecutive bubbles of one turn in a column, inside a `MessageContent`.
@@ -117,7 +117,7 @@ function BubbleContent({
     <Comp
       data-slot="bubble-content"
       className={cn(
-        "w-fit max-w-full min-w-0 overflow-hidden rounded-none border border-transparent px-2.5 py-2 text-xs leading-relaxed wrap-break-word group-data-[align=end]/bubble:self-end [button]:text-left [button,a]:outline-hidden [button,a]:transition-colors [button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-(length:--space-focus-ring-width) [button,a]:focus-visible:ring-ring/50",
+        "w-fit max-w-full min-w-0 overflow-hidden rounded-surface border border-transparent px-2.5 py-2 text-ui leading-relaxed wrap-break-word group-data-[align=end]/bubble:self-end [button]:text-left [button,a]:outline-hidden [button,a]:transition-colors [button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-(length:--space-focus-ring-width) [button,a]:focus-visible:ring-ring/50",
         className
       )}
       {...props}
@@ -138,7 +138,7 @@ function BubbleContent({
  */
 const bubbleReactionsVariants = cva(
   // allow-raw: local-stacking — z-10 lifts the reactions over the bubble they overlap
-  "absolute z-10 flex w-fit shrink-0 items-center justify-center gap-1 rounded-none bg-muted px-1.5 py-0.5 text-xs ring-(length:--border-width-separation) ring-card has-[button]:p-0",
+  "absolute z-10 flex w-fit shrink-0 items-center justify-center gap-1 rounded-pill bg-muted px-1.5 py-0.5 text-ui ring-(length:--border-width-separation) ring-card has-[button]:p-0",
   {
     variants: {
       side: {

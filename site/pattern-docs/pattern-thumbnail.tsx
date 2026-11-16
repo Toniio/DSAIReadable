@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { Canvas, useSiteTheme } from "@/site/playground/canvas"
 import type { FrameState } from "@/site/playground/protocol"
 import { useMounted } from "@/site/ui/use-mounted"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 /**
  * A pattern's example drawn at two thirds of its size, cropped to the top: a
@@ -23,12 +24,13 @@ export function PatternThumbnail({
   fill?: boolean
 }) {
   const theme = useSiteTheme()
+  const brand = useSiteBrand()
   // The frame is created after hydration, so the page listens before the
   // frame says it is ready, and its first URL carries the site's theme.
   const mounted = useMounted()
   const state = useMemo<FrameState>(
-    () => ({ view: "example", args: {}, state: "rest", theme }),
-    [theme]
+    () => ({ view: "example", args: {}, state: "rest", theme, brand }),
+    [theme, brand]
   )
 
   return (
