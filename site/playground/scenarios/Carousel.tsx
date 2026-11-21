@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import type { Args, Story } from "@/site/playground/types"
 
 const PRODUCTS = [
@@ -54,7 +54,7 @@ function resolve(args: Args) {
 }
 
 const SLIDE =
-  "flex items-center justify-center border bg-card p-6 text-sm font-medium"
+  "flex items-center justify-center rounded-surface border bg-card p-6 text-title font-medium"
 
 /**
  * Carousel: a product gallery. The previous and next buttons sit outside the

@@ -43,7 +43,7 @@ function Step({
 function Names({ label, names }: { label: string; names: string[] }) {
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-xs font-medium text-muted-foreground">{label}</p>
+      <p className="text-ui font-medium text-muted-foreground">{label}</p>
       <ul className="flex flex-wrap gap-1">
         {names.map((name) => (
           <li key={name}>
@@ -97,7 +97,7 @@ export function GetStarted({ install }: { install: Install }) {
             title={
               <>
                 Add a component. The base item (tokens, dark mode, fonts,{" "}
-                <code className="font-mono text-xs">cn()</code>, focus) comes
+                <code className="font-mono text-ui">cn()</code>, focus) comes
                 along with it.
               </>
             }
@@ -119,7 +119,7 @@ export function GetStarted({ install }: { install: Install }) {
         </ol>
         <p className="text-sm leading-relaxed text-muted-foreground">
           Always the full address,{" "}
-          <code className="font-mono text-xs">{REPOSITORY}/&lt;item&gt;</code>:
+          <code className="font-mono text-ui">{REPOSITORY}/&lt;item&gt;</code>:
           a bare name installs the official shadcn/ui component instead. Each{" "}
           <Link href="/components/" className={LINK}>
             component page
@@ -128,7 +128,7 @@ export function GetStarted({ install }: { install: Install }) {
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground">
           These commands read the default branch. Add{" "}
-          <code className="font-mono text-xs">#v{install.version}</code> to an
+          <code className="font-mono text-ui">#v{install.version}</code> to an
           item to install it as this site documents it; the base item it depends
           on is still read from the default branch, a limit of the shadcn CLI.
         </p>
@@ -137,7 +137,7 @@ export function GetStarted({ install }: { install: Install }) {
       <TabsContent value="mcp" className="flex flex-col gap-4">
         <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
           The server runs on your machine over stdio, with{" "}
-          <code className="font-mono text-xs">npx</code>: nothing is hosted.
+          <code className="font-mono text-ui">npx</code>: nothing is hosted.
           {install.mcpNode
             ? ` It needs Node.js ${install.mcpNode} or later.`
             : ""}
@@ -222,10 +222,10 @@ export function GetStarted({ install }: { install: Install }) {
         <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
           The design system&apos;s rules in your own lint, so a violation shows
           where the code is written, not in review. The MCP server&apos;s{" "}
-          <code className="font-mono text-xs">dsaireadable_validate_code</code>{" "}
-          runs the rules of the <code className="font-mono text-xs">core</code>{" "}
+          <code className="font-mono text-ui">dsaireadable_validate_code</code>{" "}
+          runs the rules of the <code className="font-mono text-ui">core</code>{" "}
           config. The class check that{" "}
-          <code className="font-mono text-xs">recommended</code> adds needs your
+          <code className="font-mono text-ui">recommended</code> adds needs your
           stylesheet, so only your own lint runs it.
         </p>
         <ol className="flex flex-col gap-4">

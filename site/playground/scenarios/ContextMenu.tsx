@@ -15,8 +15,8 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu"
+import { cn } from "@/lib/cn"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
-import { cn } from "@/lib/utils"
 import { useStagedState } from "@/site/playground/scenarios/use-staged-state"
 import type { Args, Story } from "@/site/playground/types"
 
@@ -45,7 +45,7 @@ function read(args: Args): MenuArgs {
 }
 
 const AREA =
-  "flex h-36 w-64 items-center justify-center border border-dashed text-xs text-muted-foreground"
+  "flex h-36 w-64 items-center justify-center rounded-control border border-dashed text-ui text-muted-foreground"
 
 /** The window events that close a Radix menu: see `useStagedState`. */
 const CAUSES = ["blur"] as const
@@ -296,8 +296,8 @@ function code(args: Args): string {
   return `${state.length ? 'import { useState } from "react"\n\n' : ""}import {
 ${imports.map((name) => `  ${name},`).join("\n")}
 } from "@/components/ui/context-menu"
+import { cn } from "@/lib/cn"
 import { FOCUS_OUTLINE_RESET, FOCUS_RING } from "@/lib/focus"
-import { cn } from "@/lib/utils"
 
 export function Example() {
 ${state.length ? `${state.join("\n")}\n` : ""}  return (

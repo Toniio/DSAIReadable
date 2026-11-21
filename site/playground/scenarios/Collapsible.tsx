@@ -17,7 +17,7 @@ const ITEMS = [
   "Trekking poles",
 ]
 
-const ROW = "border px-3 py-2 text-xs"
+const ROW = "rounded-control border px-3 py-2 text-ui"
 
 function read(args: Args) {
   return {
@@ -110,7 +110,7 @@ const story: Story = {
         className="flex w-sm max-w-full flex-col gap-2"
       >
         <div className="flex items-center justify-between gap-4">
-          <p className="text-sm font-medium">{heading(a.title, a.items)}</p>
+          <p className="text-title font-medium">{heading(a.title, a.items)}</p>
           <CollapsibleTrigger asChild>
             <Button variant="ghost" size="icon-sm">
               <CaretUpDownIcon />
@@ -150,7 +150,7 @@ export function Example() {
   return (
 ${opening(4, "Collapsible", props).join("\n")}
       <div className="flex items-center justify-between gap-4">
-${element(8, "p", ['className="text-sm font-medium"'], heading(a.title, a.items)).join("\n")}
+${element(8, "p", ['className="text-title font-medium"'], heading(a.title, a.items)).join("\n")}
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="icon-sm">
             <CaretUpDownIcon />

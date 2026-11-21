@@ -71,8 +71,8 @@ export default function BreakpointsPage() {
                 className="grid gap-2 border-b py-3 md:grid-cols-12 md:items-center md:gap-4"
               >
                 <div className="flex flex-wrap items-center gap-2 md:col-span-5">
-                  <Code className="text-sm">{prefix}</Code>
-                  <span className="font-mono text-xs text-muted-foreground">
+                  <Code className="text-title">{prefix}</Code>
+                  <span className="font-mono text-ui text-muted-foreground">
                     {entry.token}
                   </span>
                   <StatusBadge status={entry.status} />

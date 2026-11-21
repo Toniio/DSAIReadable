@@ -125,8 +125,11 @@ export default function TypographyPage() {
         description="The spec's examples, rendered live: the text style comes with the component."
       >
         {examples.map((example) => (
-          <div key={example.key} className="flex flex-col border">
-            <p className="border-b px-4 py-2 text-xs font-medium">
+          <div
+            key={example.key}
+            className="flex flex-col rounded-surface border"
+          >
+            <p className="border-b px-4 py-2 font-heading text-ui font-medium">
               {example.title}
             </p>
             <FoundationExample
@@ -137,7 +140,7 @@ export default function TypographyPage() {
               code={example.code}
               language="tsx"
               title={`${example.key}.tsx`}
-              className="border-x-0 border-b-0"
+              className="rounded-none rounded-b-surface border-x-0 border-b-0"
             />
           </div>
         ))}

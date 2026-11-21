@@ -121,7 +121,7 @@ function evalSummary(series: EvalSeries[], latest: EvalSeries[]): string {
 function Fact({ term, children }: { term: string; children: ReactNode }) {
   return (
     <div className="flex min-w-0 flex-col gap-1 bg-background p-3">
-      <dt className="text-xs text-muted-foreground">{term}</dt>
+      <dt className="text-ui text-muted-foreground">{term}</dt>
       <dd className="min-w-0 text-sm break-words">{children}</dd>
     </div>
   )
@@ -131,7 +131,7 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
   return (
     <Link
       href={href}
-      className={cn(LINK, "inline-flex items-center gap-1 break-all")}
+      className={cn(LINK, "inline-flex items-center gap-1 font-mono break-all")}
     >
       {children}
       <ArrowUpRightIcon aria-hidden="true" className="shrink-0" />
@@ -192,7 +192,7 @@ export default function AuditsPage() {
       </PageHeader>
 
       <DocSection id="summary" title="Summary">
-        <ul className="grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-2 lg:grid-cols-4">
           <li>
             <StatCard
               href="#components"
@@ -480,7 +480,7 @@ export default function AuditsPage() {
         title="shadcn/ui"
         description="The shadcn/ui API is the contract: each component is re-anchored on its upstream through the re-tokenization table, and every difference from it is declared with its reason."
       >
-        <dl className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-3 lg:grid-cols-6">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3 lg:grid-cols-6">
           <Fact term="Upstream">
             <code className="font-mono">{shadcn.upstream.repository}</code>
           </Fact>

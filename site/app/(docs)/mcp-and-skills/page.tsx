@@ -72,17 +72,17 @@ export default function HowItWorksPage() {
         title={doc.title}
         lead={<InlineMarkdown from={doc.source}>{doc.lead}</InlineMarkdown>}
       >
-        <dl className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-3 lg:grid-cols-5">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3 lg:grid-cols-5">
           {stats.map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col gap-1 bg-background p-4"
             >
-              <dt className="text-xs text-muted-foreground">{stat.label}</dt>
+              <dt className="text-ui text-muted-foreground">{stat.label}</dt>
               <dd className="font-heading text-3xl font-semibold tracking-tight tabular-nums">
                 {stat.value}
               </dd>
-              <dd className="text-xs break-words text-muted-foreground">
+              <dd className="text-ui break-words text-muted-foreground">
                 {stat.detail}
               </dd>
             </div>

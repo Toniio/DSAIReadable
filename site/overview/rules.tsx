@@ -11,10 +11,10 @@ import {
 import type { Icon } from "@phosphor-icons/react"
 
 import { headingVariants } from "@/components/ui/heading"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { LINK } from "@/site/ui/link"
 
-const CODE = "bg-muted px-1 py-0.5 font-mono text-xs"
+const CODE = "rounded-inset bg-muted px-1 py-0.5 font-mono text-ui"
 
 interface Rule {
   icon: Icon
@@ -119,7 +119,7 @@ export function Rules({
   ]
 
   return (
-    <ul className="grid gap-px border bg-border md:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid gap-px overflow-hidden rounded-surface border bg-border md:grid-cols-2 lg:grid-cols-3">
       {rules.map((rule) => (
         <li key={rule.title} className="flex flex-col gap-3 bg-background p-5">
           <rule.icon aria-hidden="true" className="size-5 text-primary" />

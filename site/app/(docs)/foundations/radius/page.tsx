@@ -49,7 +49,7 @@ export default function RadiusPage() {
           </>
         }
       >
-        <ul className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-3 lg:grid-cols-5">
+        <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3 lg:grid-cols-5">
           {scale.map((entry) => {
             const name = shortName(entry, "radius")
             const bridged = tailwindClasses(entry.cssVar)[0]
@@ -65,7 +65,7 @@ export default function RadiusPage() {
                 />
                 <div className="flex flex-col gap-1">
                   <span className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-sm font-medium">
+                    <span className="font-mono text-title font-medium">
                       {name}
                     </span>
                     <StatusBadge status={entry.status} />
@@ -76,7 +76,7 @@ export default function RadiusPage() {
                       <Dimension value={lightIn(entry.value, brand)} />
                     )}
                   </InBrand>
-                  <span className="text-xs leading-relaxed text-muted-foreground">
+                  <span className="text-description text-muted-foreground">
                     <InlineMarkdown>{entry.description ?? ""}</InlineMarkdown>
                   </span>
                 </div>

@@ -93,7 +93,7 @@ export default function LayersPage() {
             covers part of the one before, but not the value it prints;
             the frame fits the last card. */}
         <div
-          className="relative isolate overflow-hidden border bg-muted"
+          className="relative isolate overflow-hidden rounded-surface border bg-muted"
           style={{
             height: `calc(var(--space-scale-5) * ${layers.length + 1} + var(--space-scale-7))`,
           }}
@@ -103,17 +103,17 @@ export default function LayersPage() {
             return (
               <div
                 key={entry.token}
-                className="absolute flex h-7 w-44 items-center justify-between gap-2 border bg-popover px-2 text-popover-foreground shadow-md"
+                className="absolute flex h-7 w-44 items-center justify-between gap-2 rounded-control border bg-popover px-2 text-popover-foreground shadow-md"
                 style={{
                   zIndex: `var(${entry.cssVar})`,
                   top: `calc(var(--space-scale-5) * ${index} + var(--space-scale-5))`,
                   left: `calc((100% - var(--space-scale-44) - var(--space-scale-8)) * ${index} / ${top} + var(--space-scale-4))`,
                 }}
               >
-                <span className="font-mono text-xs font-medium">
+                <span className="font-mono text-ui font-medium">
                   {classOf(entry.cssVar)}
                 </span>
-                <span className="font-mono text-xs text-muted-foreground">
+                <span className="font-mono text-ui text-muted-foreground">
                   {entry.value.light}
                 </span>
               </div>
@@ -157,7 +157,7 @@ export default function LayersPage() {
                   <TableCell className="align-top">
                     <span className="flex flex-col gap-1">
                       <Code className="w-fit">{name}</Code>
-                      <span className="font-mono text-xs text-muted-foreground">
+                      <span className="font-mono text-ui text-muted-foreground">
                         {entry.token}
                       </span>
                     </span>

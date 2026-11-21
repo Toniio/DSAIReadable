@@ -152,7 +152,7 @@ export function FoundationPage({
             Written in{" "}
             <Link
               href={sourceUrl(doc.source)}
-              className={cn(LINK, "inline-flex items-center gap-1")}
+              className={cn(LINK, "inline-flex items-center gap-1 font-mono")}
             >
               {doc.source}
               <ArrowUpRightIcon aria-hidden="true" />

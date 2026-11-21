@@ -2,6 +2,7 @@
 
 import { useMemo } from "react"
 
+import { cn } from "@/lib/utils"
 import { Canvas, useSiteTheme } from "@/site/playground/canvas"
 import type { FrameState } from "@/site/playground/protocol"
 import { useSiteBrand } from "@/site/ui/use-site-brand"
@@ -14,11 +15,14 @@ import { useSiteBrand } from "@/site/ui/use-site-brand"
 export function FoundationExample({
   exampleKey,
   title,
+  className,
 }: {
   /** `<file>-<rank>`: `radius-1`. */
   exampleKey: string
   /** The iframe's accessible name. */
   title: string
+  /** Classes for the canvas: the corners it shares with a framing panel. */
+  className?: string
 }) {
   const theme = useSiteTheme()
   const brand = useSiteBrand()
@@ -32,7 +36,7 @@ export function FoundationExample({
       slug={exampleKey}
       state={state}
       title={title}
-      className="bg-background"
+      className={cn("bg-background", className)}
     />
   )
 }

@@ -63,7 +63,11 @@ function valuesIn<Values>(
   return brand === "nova" ? item.nova : item
 }
 
-/** The swatch of a semantic color: each mode shown is drawn on its own surface. */
+/**
+ * The swatch of a semantic color: each mode shown is drawn on its own surface.
+ * It is the band across the top of a card, which rounds and clips it: its
+ * edges meet the card, a seam (rounded-none).
+ */
 function ModeSwatch({
   values,
   mode,
@@ -76,7 +80,7 @@ function ModeSwatch({
   className?: string
 }) {
   return (
-    <div className={cn("flex border", className)}>
+    <div className={cn("flex rounded-none border", className)}>
       {shown(mode).map((item) => (
         <Fill
           key={item.value}
@@ -98,7 +102,7 @@ function Values({
   mode: Mode
 }) {
   return (
-    <dl className="flex flex-col gap-0.5 text-xs">
+    <dl className="flex flex-col gap-0.5 text-ui">
       {shown(mode).map((item) => {
         const value = item.value === "light" ? color.light : color.dark
         const ref = item.value === "light" ? color.lightRef : color.darkRef
@@ -129,7 +133,7 @@ function Classes({
   wrap?: boolean
 }) {
   if (classes.length === 0)
-    return <p className="text-xs text-muted-foreground">No utility class</p>
+    return <p className="text-ui text-muted-foreground">No utility class</p>
   return (
     <ul className="flex flex-wrap gap-x-2 gap-y-1">
       {classes.map((value) => (
@@ -168,7 +172,7 @@ function ColorCard({
   surfaces: BrandSurfaces
 }) {
   return (
-    <article className="flex h-full min-w-0 flex-col border bg-background">
+    <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-surface border bg-background">
       <InBrand>
         {(brand) => (
           <ModeSwatch
@@ -181,7 +185,7 @@ function ColorCard({
       </InBrand>
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-3">
         <div className="flex flex-wrap items-center gap-2">
-          <p className="font-mono text-sm font-medium break-all">
+          <p className="font-mono text-title font-medium break-all">
             {color.token}
           </p>
           <StatusBadge status={color.status} replacement={color.replacement} />
@@ -192,7 +196,7 @@ function ColorCard({
           {(brand) => <Values color={valuesIn(color, brand)} mode={mode} />}
         </InBrand>
         {color.description ? (
-          <p className="text-xs leading-relaxed text-muted-foreground">
+          <p className="text-description text-muted-foreground">
             <Ticks>{color.description}</Ticks>
           </p>
         ) : null}
@@ -215,9 +219,9 @@ function ValueCell({
       <Fill
         value={value}
         surface={surface}
-        className="size-6 shrink-0 border"
+        className="size-6 shrink-0 rounded-mark border"
       />
-      <div className="flex min-w-0 flex-col font-mono text-xs whitespace-normal">
+      <div className="flex min-w-0 flex-col font-mono text-ui whitespace-normal">
         <span className="break-words">
           <ColorValue value={value} />
         </span>
@@ -257,7 +261,7 @@ function ColorTable({
             <TableCell className="align-top whitespace-normal">
               <div className="flex min-w-0 flex-col items-start gap-1.5">
                 <span className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-xs font-medium break-all">
+                  <span className="font-mono text-ui font-medium break-all">
                     {color.token}
                   </span>
                   <StatusBadge
@@ -267,7 +271,7 @@ function ColorTable({
                 </span>
                 <CopyCode value={color.cssVar} className="max-w-full" />
                 {color.description ? (
-                  <span className="text-xs leading-relaxed text-muted-foreground">
+                  <span className="text-description text-muted-foreground">
                     <Ticks>{color.description}</Ticks>
                   </span>
                 ) : null}
@@ -313,7 +317,7 @@ function AliasCard({
   surfaces: BrandSurfaces
 }) {
   return (
-    <article className="flex h-full min-w-0 flex-col border bg-background">
+    <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-surface border bg-background">
       <InBrand>
         {(brand) => (
           <ModeSwatch
@@ -326,7 +330,7 @@ function AliasCard({
       </InBrand>
       <div className="flex min-w-0 flex-col gap-2 p-3">
         <CopyCode value={alias.cssVar} />
-        <p className="flex min-w-0 flex-wrap items-center gap-1 text-xs text-muted-foreground">
+        <p className="flex min-w-0 flex-wrap items-center gap-1 text-ui text-muted-foreground">
           Reads <Code>{alias.reads}</Code>
         </p>
         <Classes classes={alias.classes} />
@@ -367,7 +371,7 @@ function AliasTable({
               <CopyCode value={alias.cssVar} wrap className="max-w-full" />
             </TableCell>
             <TableCell className="align-top whitespace-normal">
-              <span className="font-mono text-xs break-words">
+              <span className="font-mono text-ui break-words">
                 <DottedName name={alias.reads} />
               </span>
             </TableCell>
@@ -403,7 +407,7 @@ function UsedBy({ step }: { step: PrimitiveStep }) {
       ))}
     </ul>
   ) : (
-    <span className="text-xs text-muted-foreground">No semantic token</span>
+    <span className="text-ui text-muted-foreground">No semantic token</span>
   )
 }
 
@@ -430,7 +434,7 @@ function StepTile({
         <div
           tabIndex={0}
           className={cn(
-            "flex h-full min-w-0 flex-col gap-1 border border-transparent p-1 transition-colors hover:border-border",
+            "flex h-full min-w-0 flex-col gap-1 rounded-control border border-transparent p-1 transition-colors hover:border-border",
             FOCUS_OUTLINE_RESET,
             FOCUS_RING
           )}
@@ -440,7 +444,7 @@ function StepTile({
               <DualFill
                 value={step.value}
                 surfaces={surfaces[brand]}
-                className="h-12 border"
+                className="h-12 rounded-inset border"
               />
             )}
           </InBrand>
@@ -497,7 +501,7 @@ function PrimitiveTable({
           <TableRow key={step.name}>
             <TableCell className="align-top">
               <div className="flex flex-col items-start gap-1">
-                <span className="font-mono text-xs font-medium">
+                <span className="font-mono text-ui font-medium">
                   {step.name}
                 </span>
                 <StatusBadge status={step.status} />
@@ -510,11 +514,11 @@ function PrimitiveTable({
                     <DualFill
                       value={step.value}
                       surfaces={surfaces[brand]}
-                      className="h-6 w-12 shrink-0 border"
+                      className="h-6 w-12 shrink-0 rounded-mark border"
                     />
                   )}
                 </InBrand>
-                <span className="font-mono text-xs break-all">
+                <span className="font-mono text-ui break-all">
                   {step.value}
                 </span>
               </div>
@@ -543,7 +547,7 @@ function PaletteTitle({
       <Heading level={3} id={`palette-${id}`} className="scroll-mt-20">
         {children}
       </Heading>
-      <span className="text-xs text-muted-foreground">
+      <span className="text-ui text-muted-foreground">
         {steps === 1 ? "1 step" : `${steps} steps`}
       </span>
     </div>
@@ -636,7 +640,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
             className="w-full sm:ml-auto sm:w-80"
           />
         </div>
-        <p role="status" className="text-xs text-muted-foreground">
+        <p role="status" className="text-ui text-muted-foreground">
           {needle
             ? `${found} of ${total} colors match.`
             : `${total} colors. Swatches show each mode on its own page surface.`}
@@ -659,7 +663,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
               >
                 {group.label}
               </Heading>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-ui text-muted-foreground">
                 {group.colors.length}
               </span>
             </div>
@@ -718,7 +722,7 @@ export function ColorExplorer({ data }: { data: ColorData }) {
         </Alert>
         {palettes.length === 0 ? <NoMatch query={query} /> : null}
         {palettes.length > 0 && view === "swatches" ? (
-          <ul className="flex flex-col divide-y border">
+          <ul className="flex flex-col divide-y rounded-surface border">
             {palettes.map((palette) => (
               <li
                 key={palette.id}

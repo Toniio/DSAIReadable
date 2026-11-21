@@ -52,7 +52,7 @@ function LabeledSlider({ args }: { args: Args }) {
     >
       <div className="flex items-center justify-between gap-4">
         <Label id={`${id}-label`}>{copy.label}</Label>
-        <span className="text-xs text-muted-foreground tabular-nums">
+        <span className="text-ui text-muted-foreground tabular-nums">
           {copy.format(values)}
         </span>
       </div>
@@ -120,7 +120,7 @@ export function Example() {
     <div className="${vertical ? "flex flex-col items-center gap-3" : "flex w-64 flex-col gap-3"}">
       <div className="flex items-center justify-between gap-4">
         <Label id="${args.range ? "price" : "volume"}-label">${copy.label}</Label>
-        <span className="text-xs text-muted-foreground tabular-nums">
+        <span className="text-ui text-muted-foreground tabular-nums">
           {${shown}}
         </span>
       </div>

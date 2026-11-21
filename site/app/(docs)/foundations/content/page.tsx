@@ -31,16 +31,14 @@ export default function ContentPage() {
             title="Glossary"
             description={`${glossary.length} terms the specs and the MCP server use, as agents read them.`}
           >
-            <dl className="grid gap-px border bg-border md:grid-cols-2">
+            <dl className="grid gap-px overflow-hidden rounded-surface border bg-border md:grid-cols-2">
               {glossary.map((entry) => (
                 <div
                   key={entry.term}
                   className="flex flex-col gap-1 bg-background p-4 md:last:odd:col-span-2"
                 >
-                  <dt className="font-mono text-sm font-semibold">
-                    {entry.term}
-                  </dt>
-                  <dd className="text-xs leading-relaxed text-muted-foreground">
+                  <dt className="text-sm font-semibold">{entry.term}</dt>
+                  <dd className="text-description text-muted-foreground">
                     <InlineMarkdown>{entry.definition}</InlineMarkdown>
                   </dd>
                 </div>

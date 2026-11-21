@@ -60,7 +60,10 @@ function Parameters({ tool }: { tool: ToolRecord }) {
               {parameter.values ? (
                 <span className="flex flex-wrap gap-1">
                   {parameter.values.map((value) => (
-                    <code key={value} className="bg-muted px-1 font-mono">
+                    <code
+                      key={value}
+                      className="rounded-inset bg-muted px-1 font-mono"
+                    >
                       {JSON.stringify(value)}
                     </code>
                   ))}
@@ -115,7 +118,7 @@ function ExampleInput({ entries }: { entries: Argument[] }) {
       {inline.map(([name, value]) => (
         <code
           key={name}
-          className="w-fit bg-muted px-2 py-1 font-mono text-xs break-all"
+          className="w-fit rounded-inset bg-muted px-2 py-1 font-mono text-ui break-all"
         >
           {name}: {JSON.stringify(value)}
         </code>
@@ -133,14 +136,14 @@ function Answer({ tool, answer }: { tool: string; answer: ToolAnswer }) {
   const text = JSON.stringify(JSON.parse(answer.text), null, 2)
   const label = answer.format ? `${answer.format} answer` : "answer"
   const code = (
-    <pre className="p-4 font-mono text-xs leading-relaxed wrap-anywhere whitespace-pre-wrap text-foreground">
+    <pre className="p-4 font-mono text-ui leading-relaxed wrap-anywhere whitespace-pre-wrap text-foreground">
       <code>{text}</code>
     </pre>
   )
   return (
-    <figure className="flex min-w-0 flex-col border bg-muted">
+    <figure className="flex min-w-0 flex-col rounded-control border bg-muted">
       <figcaption className="flex min-h-9 items-center justify-between gap-2 border-b pr-1 pl-3">
-        <span className="flex min-w-0 flex-wrap items-center gap-2 text-xs text-muted-foreground">
+        <span className="flex min-w-0 flex-wrap items-center gap-2 truncate font-heading text-ui text-muted-foreground">
           {answer.format ? (
             <Badge variant="outline">{answer.format}</Badge>
           ) : (
@@ -156,7 +159,7 @@ function Answer({ tool, answer }: { tool: string; answer: ToolAnswer }) {
         <ScrollArea
           role="region"
           aria-label={`The ${label} of ${tool}`}
-          className="h-80"
+          className="h-80 rounded-b-control"
         >
           {code}
         </ScrollArea>

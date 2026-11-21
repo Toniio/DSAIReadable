@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 
 import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { CopyButton } from "@/site/ui/copy-button"
 
 /**
@@ -18,7 +18,10 @@ export function Fill({
   className?: string
 }) {
   return (
-    <div className={cn("relative", className)} style={{ background: surface }}>
+    <div
+      className={cn("relative overflow-hidden", className)}
+      style={{ background: surface }}
+    >
       <div className="absolute inset-0" style={{ background: value }} />
     </div>
   )
@@ -38,7 +41,7 @@ export function DualFill({
   className?: string
 }) {
   return (
-    <div className={cn("relative flex", className)}>
+    <div className={cn("relative flex overflow-hidden", className)}>
       <div className="flex-1" style={{ background: surfaces.light }} />
       <div className="flex-1" style={{ background: surfaces.dark }} />
       <div className="absolute inset-0" style={{ background: value }} />
@@ -102,7 +105,7 @@ export function CopyCode({
     >
       <code
         className={cn(
-          "min-w-0 bg-muted px-1 py-0.5 font-mono text-xs",
+          "min-w-0 rounded-inset bg-muted px-1 py-0.5 font-mono text-ui",
           wrap ? "break-words" : "truncate"
         )}
       >
@@ -124,7 +127,7 @@ export function Code({
   return (
     <code
       className={cn(
-        "bg-muted px-1 py-0.5 font-mono text-xs break-all",
+        "rounded-inset bg-muted px-1 py-0.5 font-mono text-ui break-all",
         className
       )}
     >

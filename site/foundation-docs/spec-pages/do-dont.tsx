@@ -27,7 +27,7 @@ export function DoDont({
   if (!dos.length && !donts.length) return null
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <div className="flex flex-col gap-3 border p-4">
+      <div className="flex flex-col gap-3 rounded-surface border p-4">
         <Badge variant="success">Do</Badge>
         {dos.length ? (
           <RuleList items={dos} from={from} />
@@ -35,7 +35,7 @@ export function DoDont({
           <p className="text-sm text-muted-foreground">No rule of this kind.</p>
         )}
       </div>
-      <div className="flex flex-col gap-3 border p-4">
+      <div className="flex flex-col gap-3 rounded-surface border p-4">
         <Badge variant="destructive">Don&apos;t</Badge>
         {donts.length ? (
           <RuleList items={donts} from={from} />
@@ -56,7 +56,7 @@ export function NumberedRules({
   from?: string
 }) {
   return (
-    <ol className="grid gap-px border bg-border md:grid-cols-2">
+    <ol className="grid gap-px overflow-hidden rounded-surface border bg-border md:grid-cols-2">
       {items.map((item, index) => (
         <li
           key={item}

@@ -122,27 +122,27 @@ export default async function PatternPage({
         title={entry.title}
         lead={<InlineMarkdown from={source}>{entry.role}</InlineMarkdown>}
       >
-        <dl className="grid grid-cols-2 gap-px border bg-border lg:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border lg:grid-cols-4">
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Kind</dt>
+            <dt className="text-ui text-muted-foreground">Kind</dt>
             <dd>
               <Badge variant="secondary">{KIND_LABEL[entry.kind]}</Badge>
             </dd>
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Regions</dt>
+            <dt className="text-ui text-muted-foreground">Regions</dt>
             <dd className="text-sm">{entry.structure.length}</dd>
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Components</dt>
+            <dt className="text-ui text-muted-foreground">Components</dt>
             <dd className="text-sm">{entry.components.length}</dd>
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Spec</dt>
+            <dt className="text-ui text-muted-foreground">Spec</dt>
             <dd className="text-sm">
               <Link
                 href={sourceUrl(source)}
-                className={cn(LINK, "inline-flex items-center gap-1")}
+                className={cn(LINK, "inline-flex items-center gap-1 font-mono")}
               >
                 {source.split("/").pop()}
                 <ArrowUpRightIcon aria-hidden="true" />
@@ -160,7 +160,7 @@ export default async function PatternPage({
 
       <DocSection id="usage" title="Usage">
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="flex flex-col gap-3 border p-4">
+          <div className="flex flex-col gap-3 rounded-surface border p-4">
             <Badge variant="success">Do</Badge>
             {musts.length ? (
               <RuleList rules={musts} prefix={MUST} from={source} />
@@ -168,7 +168,7 @@ export default async function PatternPage({
               <p className="text-sm text-muted-foreground">No MUST rule.</p>
             )}
           </div>
-          <div className="flex flex-col gap-3 border p-4">
+          <div className="flex flex-col gap-3 rounded-surface border p-4">
             <Badge variant="destructive">Don&apos;t</Badge>
             {mustNots.length ? (
               <RuleList rules={mustNots} prefix={MUST_NOT} from={source} />

@@ -10,7 +10,7 @@ const GRID = "grid gap-x-8 gap-y-4 md:grid-cols-2"
 function Term({ entry }: { entry: { term: string; definition: string } }) {
   return (
     <div className="flex flex-col gap-1">
-      <dt className="font-mono text-sm font-medium">{entry.term}</dt>
+      <dt className="text-sm font-medium">{entry.term}</dt>
       <dd className="text-sm leading-relaxed text-muted-foreground">
         <InlineMarkdown>{entry.definition}</InlineMarkdown>
       </dd>

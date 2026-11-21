@@ -99,17 +99,17 @@ export default function OverviewPage() {
         title="At a glance"
         description="Counted from the repository at build time."
       >
-        <dl className="grid grid-cols-2 gap-px border bg-border lg:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border lg:grid-cols-4">
           {stats().map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col gap-1 bg-background p-4"
             >
-              <dt className="text-xs text-muted-foreground">{stat.label}</dt>
+              <dt className="text-ui text-muted-foreground">{stat.label}</dt>
               <dd className="font-heading text-3xl font-semibold tracking-tight">
                 {stat.value}
               </dd>
-              <dd className="text-xs text-muted-foreground">{stat.detail}</dd>
+              <dd className="text-ui text-muted-foreground">{stat.detail}</dd>
             </div>
           ))}
         </dl>
@@ -137,7 +137,7 @@ export default function OverviewPage() {
         description={
           <>
             The choices the specs make for you, as the MCP server serves them (
-            <code className="font-mono text-xs">
+            <code className="font-mono text-ui">
               dsaireadable_get_design_rules
             </code>
             ). A spec cites the rule that applies to it by its identifier.
@@ -154,7 +154,7 @@ export default function OverviewPage() {
               <Link
                 href={item.href}
                 className={cn(
-                  "group flex flex-1 flex-col gap-2 border p-5 transition-colors hover:bg-muted",
+                  "group flex flex-1 flex-col gap-2 rounded-surface border p-5 transition-colors hover:bg-muted",
                   FOCUS_OUTLINE_RESET,
                   FOCUS_RING
                 )}
@@ -191,7 +191,7 @@ export default function OverviewPage() {
         description={
           <>
             The terms the specs use, as the MCP server serves them (
-            <code className="font-mono text-xs">dsaireadable_get_glossary</code>
+            <code className="font-mono text-ui">dsaireadable_get_glossary</code>
             ).
           </>
         }

@@ -88,7 +88,7 @@ function Card({ item }: { item: IndexCard }) {
     <Link
       href={`/components/${item.slug}/`}
       className={cn(
-        "flex h-full flex-col border bg-background transition-colors hover:border-foreground hover:bg-muted",
+        "flex h-full flex-col overflow-hidden rounded-surface border bg-background transition-colors hover:border-foreground hover:bg-muted",
         FOCUS_OUTLINE_RESET,
         FOCUS_RING
       )}
@@ -96,14 +96,16 @@ function Card({ item }: { item: IndexCard }) {
       <Thumbnail name={item.name} slug={item.slug} />
       <span className="flex flex-col gap-1 p-4">
         <span className="flex items-center gap-2">
-          <span className="text-sm font-semibold">{item.name}</span>
+          <span className="font-heading text-title font-semibold">
+            {item.name}
+          </span>
           {item.status === "stable" ? null : (
             <Badge variant={item.status === "beta" ? "warning" : "destructive"}>
               {item.status}
             </Badge>
           )}
         </span>
-        <span className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+        <span className="line-clamp-2 text-description text-muted-foreground">
           {item.role}
         </span>
       </span>
@@ -172,7 +174,7 @@ export function ComponentIndex({
             autoComplete="off"
             className="h-10 text-sm md:text-sm"
           />
-          <p role="status" className="text-xs text-muted-foreground">
+          <p role="status" className="text-ui text-muted-foreground">
             {query
               ? `${count} of ${total} components match “${filter.trim()}”.`
               : ""}

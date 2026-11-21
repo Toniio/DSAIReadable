@@ -149,10 +149,10 @@ export default function SpacingPage() {
               >
                 <div className="flex items-baseline justify-between gap-3 md:col-span-4">
                   <span className="flex items-baseline gap-3">
-                    <span className="w-10 font-mono text-sm font-medium">
+                    <span className="w-10 font-mono text-title font-medium">
                       {step ?? shortName(entry, "space.scale")}
                     </span>
-                    <span className="font-mono text-xs text-muted-foreground">
+                    <span className="font-mono text-ui text-muted-foreground">
                       {entry.token}
                     </span>
                   </span>
@@ -165,8 +165,8 @@ export default function SpacingPage() {
             )
           })}
         </ul>
-        <div className="flex flex-col gap-2 border p-4">
-          <p className="flex flex-wrap items-center gap-2 text-sm font-medium">
+        <div className="flex flex-col gap-2 rounded-surface border p-4">
+          <p className="flex flex-wrap items-center gap-2 text-title font-medium">
             <code className="font-mono">space.component.*</code>
             <StatusBadge status="reserved" />
           </p>
@@ -198,13 +198,13 @@ export default function SpacingPage() {
             >
               <div className="flex flex-col gap-1 md:col-span-5">
                 <span className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-sm font-medium">
+                  <span className="font-mono text-title font-medium">
                     {shortName(entry, "space.layout")}
                   </span>
                   <Dimension value={entry.value.light} />
                   <StatusBadge status={entry.status} />
                 </span>
-                <span className="text-xs leading-relaxed text-muted-foreground">
+                <span className="text-description text-muted-foreground">
                   {entry.description}
                 </span>
                 <ClassList classes={layoutClasses(entry)} />
@@ -238,7 +238,7 @@ export default function SpacingPage() {
               className="grid gap-2 border-b py-1.5 md:grid-cols-12 md:items-center md:gap-4"
             >
               <div className="flex flex-wrap items-center gap-2 md:col-span-5">
-                <span className="font-mono text-xs">{entry.token}</span>
+                <span className="font-mono text-ui">{entry.token}</span>
                 <StatusBadge status={entry.status} />
               </div>
               <div className="flex items-center justify-between gap-2 md:col-span-3">
