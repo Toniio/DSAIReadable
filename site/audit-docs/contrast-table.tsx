@@ -41,13 +41,16 @@ function Swatch({ measure, text }: { measure: Measure; text: boolean }) {
   return (
     <span
       aria-hidden="true"
-      className="flex size-8 shrink-0 items-center justify-center border text-xs font-semibold"
+      className="flex size-8 shrink-0 items-center justify-center rounded-inset border text-xs font-semibold"
       style={{ backgroundColor: measure.bg, color: measure.fg }}
     >
       {text ? (
         "Aa"
       ) : (
-        <span className="size-3" style={{ backgroundColor: measure.fg }} />
+        <span
+          className="size-3 rounded-mark"
+          style={{ backgroundColor: measure.fg }}
+        />
       )}
     </span>
   )
@@ -150,7 +153,7 @@ export function ContrastTable({ rows }: { rows: ContrastRow[] }) {
               <TableCell className="min-w-64 whitespace-normal">
                 <span className="flex flex-col gap-1">
                   <span className="text-sm">{row.label}</span>
-                  <span className="font-mono text-xs break-words text-muted-foreground">
+                  <span className="font-mono text-ui break-words text-muted-foreground">
                     {row.fg} on {row.bg}
                     {row.tint ? ` under a tint of ${row.tint}` : ""}
                   </span>

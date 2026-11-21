@@ -230,7 +230,7 @@ export function Playground({
     current === "story" ? (code(args) ?? exampleCode) : exampleCode
 
   return (
-    <div className="flex flex-col border">
+    <div className="flex flex-col rounded-surface border">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b px-3 py-2">
         {hasStory ? (
           <ToggleGroup
@@ -246,7 +246,7 @@ export function Playground({
             <ToggleGroupItem value="example">Example</ToggleGroupItem>
           </ToggleGroup>
         ) : (
-          <span className="text-sm font-medium">Example</span>
+          <span className="font-heading text-title font-medium">Example</span>
         )}
         {current === "story" && offered.length > 1 ? (
           <div className="flex flex-col gap-1">
@@ -266,7 +266,7 @@ export function Playground({
                 </ToggleGroupItem>
               ))}
             </ToggleGroup>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-ui text-muted-foreground">
               A forced state applies to every part of the component that has it:
               all the items of a menu show Hover together.
             </p>
@@ -308,7 +308,7 @@ export function Playground({
       {current === "story" ? (
         <div className="flex flex-col gap-4 border-t p-4">
           <div className="flex items-center justify-between gap-4">
-            <p className="text-sm font-medium">Controls</p>
+            <p className="font-heading text-title font-medium">Controls</p>
             <Button
               variant="ghost"
               size="sm"
@@ -337,7 +337,8 @@ export function Playground({
         code={shownCode}
         language="tsx"
         title="Code"
-        className="border-0"
+        // The frame's bottom corners: the block fills them, under a seam.
+        className="rounded-none rounded-b-surface border-0"
       />
     </div>
   )

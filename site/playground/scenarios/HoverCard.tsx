@@ -42,8 +42,8 @@ function Profile() {
         <AvatarFallback>JC</AvatarFallback>
       </Avatar>
       <div className="flex flex-col gap-1">
-        <p className="text-sm font-medium">James Carter</p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-title font-medium">James Carter</p>
+        <p className="text-ui text-muted-foreground">
           Front-end developer. Joined in March 2024.
         </p>
       </div>
@@ -92,8 +92,8 @@ export function Example() {
             <AvatarFallback>JC</AvatarFallback>
           </Avatar>
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-medium">James Carter</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-title font-medium">James Carter</p>
+            <p className="text-ui text-muted-foreground">
               Front-end developer. Joined in March 2024.
             </p>
           </div>

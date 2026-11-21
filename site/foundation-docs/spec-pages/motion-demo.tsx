@@ -58,16 +58,16 @@ export function MotionDemo({
           >
             <div className="flex flex-col gap-1 md:col-span-5">
               <span className="flex flex-wrap items-center gap-2">
-                <span className="font-mono text-sm font-medium">
+                <span className="font-mono text-title font-medium">
                   {row.token}
                 </span>
                 {row.status === "active" ? null : (
                   <Badge variant="warning">{row.status}</Badge>
                 )}
               </span>
-              <span className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted-foreground">
+              <span className="flex flex-wrap items-center gap-2 font-mono text-ui text-muted-foreground">
                 {row.className ? (
-                  <code className="bg-muted px-1 py-0.5 text-foreground">
+                  <code className="rounded-inset bg-muted px-1 py-0.5 text-foreground">
                     {row.className}
                   </code>
                 ) : null}
@@ -76,7 +76,7 @@ export function MotionDemo({
             </div>
             <div
               aria-hidden="true"
-              className="overflow-hidden border bg-muted py-1 pl-6 md:col-span-7"
+              className="overflow-hidden rounded-control border bg-muted py-1 pl-6 md:col-span-7"
             >
               <div
                 key={run}

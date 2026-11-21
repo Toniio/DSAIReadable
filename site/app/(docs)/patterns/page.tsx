@@ -34,20 +34,20 @@ const TOC = [
  * lies on the card's own border.
  */
 const CARD_LINK = cn(
-  "after:absolute after:inset-0 focus-visible:after:ring-(length:--space-focus-ring-width) focus-visible:after:ring-ring/50",
+  "after:absolute after:inset-0 after:rounded-surface focus-visible:after:ring-(length:--space-focus-ring-width) focus-visible:after:ring-ring/50",
   "focus-visible:after:outline-(length:--border-width-default) focus-visible:after:outline-ring focus-visible:after:outline-solid",
   FOCUS_OUTLINE_RESET
 )
 
 function PatternCard({ pattern }: { pattern: Pattern }) {
   return (
-    <li className="group relative flex flex-col border bg-background">
+    <li className="group relative flex flex-col rounded-surface border bg-background">
       <PatternThumbnail
         slug={pattern.name}
         title={pattern.title}
         fill={fillsViewport(pattern)}
       />
-      <div className="flex flex-1 flex-col gap-2 p-4 transition-colors group-hover:bg-muted">
+      <div className="flex flex-1 flex-col gap-2 rounded-b-surface p-4 transition-colors group-hover:bg-muted">
         <div className="flex items-center justify-between gap-2">
           <Link
             href={`/patterns/${pattern.name}/`}

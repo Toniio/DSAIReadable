@@ -15,7 +15,7 @@ import { PlusIcon } from "@phosphor-icons/react"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
 import * as examples from "@/site/generated/examples"
-import { NOVA_CLASS } from "@/site/lib/brand"
+import { type Brand, NOVA_CLASS } from "@/site/lib/brand"
 import { defaultArgs, resolveArgs } from "@/site/playground/args"
 import { AUTO, autoComponent, isIconOnly, isLink } from "@/site/playground/auto"
 import {
@@ -276,6 +276,8 @@ function useStory(name: string): Story | undefined {
 interface Part {
   /** The part's box, relative to the root. */
   box: DOMRect
+  /** The part's corners, as its computed style gives them: none in lyra. */
+  radius?: string
   /** Where its number sits: the box's top left, moved clear of the others. */
   x: number
   y: number
@@ -286,12 +288,15 @@ interface Part {
  * A part the example does not draw (absent, or `display: none`) has none.
  * Nested parts share a top-left corner: a number that would cover an earlier
  * one moves right, one marker's width at a time, and every number stays
- * inside the root, so a part at the frame's edge is not cut.
+ * inside the root, so a part at the frame's edge is not cut. In nova, the
+ * outline takes each part's corners; lyra keeps a square outline, even
+ * around a round part.
  */
 function placeParts(
   root: HTMLElement,
   slots: string[],
-  size: number
+  size: number,
+  rounded: boolean
 ): (Part | null)[] {
   const origin = root.getBoundingClientRect()
   const half = size / 2
@@ -318,7 +323,8 @@ function placeParts(
       )
     )
       x += size
-    const part = { box, x, y }
+    const radius = rounded ? getComputedStyle(element).borderRadius : undefined
+    const part = { box, radius, x, y }
     placed.push(part)
     return part
   })
@@ -329,10 +335,13 @@ function AnatomyMarkers({
   root,
   slots,
   highlight,
+  brand,
 }: {
   root: HTMLElement | null
   slots: string[]
   highlight: number
+  /** A change of brand moves the parts and their corners: measured again. */
+  brand: Brand
 }) {
   const [parts, setParts] = useState<(Part | null)[]>([])
   // A hidden marker gives the size the numbers are spaced by: the class, not a number here.
@@ -341,7 +350,14 @@ function AnatomyMarkers({
   useEffect(() => {
     if (!root) return
     const measure = () =>
-      setParts(placeParts(root, slots, probe.current?.offsetWidth ?? 0))
+      setParts(
+        placeParts(
+          root,
+          slots,
+          probe.current?.offsetWidth ?? 0,
+          brand === "nova"
+        )
+      )
     let frame = requestAnimationFrame(measure)
     const again = () => {
       cancelAnimationFrame(frame)
@@ -357,7 +373,7 @@ function AnatomyMarkers({
       observer.disconnect()
       mutations.disconnect()
     }
-  }, [root, slots])
+  }, [root, slots, brand])
 
   // Above everything the example stacks (a Sidebar is fixed): the top layer.
   return (
@@ -377,6 +393,7 @@ function AnatomyMarkers({
                   top: part.box.y,
                   width: part.box.width,
                   height: part.box.height,
+                  borderRadius: part.radius,
                 }}
               />
             ) : null}
@@ -439,12 +456,21 @@ function Body({
     setTheme(state.theme)
   }, [setTheme, state.theme])
 
-  // The page says the brand: the frame's own document never picks one.
+  // The page says the brand: the frame's own document never picks one. As on
+  // the page, nothing transitions while the class changes: a part takes its
+  // new corners and size at once, so the anatomy measures the new ones.
   useLayoutEffect(() => {
-    document.documentElement.classList.toggle(
-      NOVA_CLASS,
-      state.brand === "nova"
-    )
+    const html = document.documentElement
+    const nova = state.brand === "nova"
+    if (html.classList.contains(NOVA_CLASS) === nova) return
+    const style = document.createElement("style")
+    style.textContent = "*,*::before,*::after{transition:none!important}"
+    document.head.appendChild(style)
+    html.classList.toggle(NOVA_CLASS, nova)
+    // A reflow computes the new styles while transitions are off: removing
+    // the style afterwards starts none.
+    void document.body.offsetHeight
+    style.remove()
   }, [state.brand])
 
   // A forced state goes on <body>, so it reaches overlays portaled there too.
@@ -526,7 +552,7 @@ function Body({
               >
                 {story.render(cell.args)}
               </div>
-              <figcaption className="text-xs text-muted-foreground">
+              <figcaption className="text-ui text-muted-foreground">
                 {cell.label}
               </figcaption>
             </figure>
@@ -568,6 +594,7 @@ function Body({
             root={root}
             slots={state.slots}
             highlight={state.highlight ?? 0}
+            brand={state.brand}
           />
         ) : null}
       </div>
@@ -655,12 +682,15 @@ export function PreviewFrame({
 }) {
   const mounted = useMounted()
   if (!mounted) return null
-  const initial: FrameState = decodeState(window.location.hash) ?? {
+  // A state with no brand (a link from before brands, or written by hand)
+  // takes the brand of this document, as no state at all does.
+  const brand = documentBrand()
+  const initial: FrameState = decodeState(window.location.hash, brand) ?? {
     view: "example",
     args: {},
     state: "rest",
     theme: "light",
-    brand: documentBrand(),
+    brand,
   }
   return <Frame kind={kind} name={name} initial={initial} />
 }

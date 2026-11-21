@@ -120,7 +120,7 @@ export function ControlPanel({
                   : id
               }
             >
-              <code className="font-mono text-xs">{control.name}</code>
+              <code className="font-mono text-ui">{control.name}</code>
             </Label>
             <ControlInput
               id={id}

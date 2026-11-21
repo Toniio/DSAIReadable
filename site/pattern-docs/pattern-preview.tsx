@@ -11,6 +11,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { cn } from "@/lib/cn"
 import { Canvas, useSiteTheme, type Viewport } from "@/site/playground/canvas"
 import { encodeState, type FrameState } from "@/site/playground/protocol"
 import { useMounted } from "@/site/ui/use-mounted"
@@ -59,9 +60,9 @@ export function PatternPreview({
   )
 
   return (
-    <div className="flex flex-col border">
+    <div className="flex flex-col overflow-hidden rounded-surface border">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b px-3 py-2">
-        <p className="text-xs text-muted-foreground">
+        <p className="text-ui text-muted-foreground">
           {fill
             ? "The code example below, live, as tall as your window: it fills the screen"
             : "The code example below, live"}
@@ -105,10 +106,10 @@ export function PatternPreview({
             viewport={viewport}
             title={`${title} pattern preview`}
             tall
-            className={fill ? "*:h-svh!" : undefined}
+            className={cn("*:rounded-surface", fill && "*:h-svh!")}
           />
         ) : (
-          <div className="min-h-96 bg-background" />
+          <div className="min-h-96 rounded-surface bg-background" />
         )}
       </div>
     </div>

@@ -69,13 +69,13 @@ export default function VoiceAndTonePage() {
           </>
         }
       >
-        <ul className="grid gap-px border bg-border md:grid-cols-2">
+        <ul className="grid gap-px overflow-hidden rounded-surface border bg-border md:grid-cols-2">
           {messages.map(([key, text]) => (
             <li
               key={key}
               className="flex flex-col gap-2 bg-background p-4 md:last:odd:col-span-2"
             >
-              <code className="font-mono text-xs text-muted-foreground">
+              <code className="font-mono text-ui text-muted-foreground">
                 {key}
               </code>
               <p className="text-sm leading-relaxed">{text}</p>

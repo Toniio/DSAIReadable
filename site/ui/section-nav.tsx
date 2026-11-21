@@ -80,7 +80,7 @@ export function SectionNav({
                     aria-current={current ? "page" : undefined}
                     data-active={current || undefined}
                     className={cn(
-                      "flex min-h-target items-center justify-between gap-2 border-l border-transparent px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                      "flex min-h-target items-center justify-between gap-2 rounded-r-item border-l border-transparent px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                       // The foreground marks the current page: the primary
                       // color is under 3:1 on the dark sidebar accent.
                       "data-active:border-foreground data-active:bg-sidebar-accent data-active:font-medium data-active:text-sidebar-accent-foreground",

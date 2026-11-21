@@ -20,17 +20,17 @@ export function ExampleCards({
   return (
     <>
       {before ? <Markdown from={from}>{before}</Markdown> : null}
-      <ul className="grid gap-px border bg-border md:grid-cols-2">
+      <ul className="grid gap-px overflow-hidden rounded-surface border bg-border md:grid-cols-2">
         {rows.map(([title, meaning, write, not]) => (
           <li
             key={title}
             className="flex flex-col gap-3 bg-background p-4 md:last:odd:col-span-2"
           >
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-semibold">
+              <p className="font-heading text-title font-semibold">
                 <InlineMarkdown from={from}>{title}</InlineMarkdown>
               </p>
-              <p className="text-xs leading-relaxed text-muted-foreground">
+              <p className="text-description text-muted-foreground">
                 <InlineMarkdown from={from}>{meaning}</InlineMarkdown>
               </p>
             </div>

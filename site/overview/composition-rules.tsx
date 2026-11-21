@@ -6,19 +6,22 @@ import { ShowMore } from "@/site/overview/show-more"
 import { LINK } from "@/site/ui/link"
 import { InlineMarkdown } from "@/site/ui/markdown"
 
-/** One rule: its identifier, its text and the components it applies to. */
+/**
+ * One rule: its identifier, its text and the components it applies to. A row
+ * of a divided list: its edges meet the rows around it, a seam (rounded-none).
+ */
 function Rule({ rule }: { rule: CompositionRule }) {
   return (
     <li
       id={rule.id}
-      className="flex scroll-mt-20 flex-col gap-1 border-b py-3 target:bg-muted"
+      className="flex scroll-mt-20 flex-col gap-1 rounded-none border-b py-3 target:bg-muted"
     >
-      <p className="font-mono text-xs font-medium">{rule.id}</p>
+      <p className="font-mono text-ui font-medium">{rule.id}</p>
       <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
         <InlineMarkdown>{rule.rule}</InlineMarkdown>
       </p>
       {rule.appliesTo.length > 0 ? (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-ui text-muted-foreground">
           Applies to{" "}
           {rule.appliesTo.map((name, index) => {
             const entry = componentByName(name)

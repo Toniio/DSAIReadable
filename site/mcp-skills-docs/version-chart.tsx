@@ -10,6 +10,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 /** One version, both conditions: a value of one figure each. */
 export interface VersionBar {
@@ -73,8 +74,15 @@ export function VersionChart({
   label: string
 }) {
   const scale = ticks(data, unit)
+  // Keyed on the brand: the axis measures its labels once, so a switch of
+  // typeface remounts the chart to measure them again.
+  const brand = useSiteBrand()
   return (
-    <ChartContainer config={CONFIG} className="aspect-auto h-64 w-full">
+    <ChartContainer
+      key={brand}
+      config={CONFIG}
+      className="aspect-auto h-64 w-full"
+    >
       <BarChart accessibilityLayer aria-label={label} data={data}>
         <CartesianGrid vertical={false} />
         <XAxis

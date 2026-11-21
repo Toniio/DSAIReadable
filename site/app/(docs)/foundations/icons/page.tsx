@@ -85,7 +85,7 @@ export default function IconsPage() {
         description="The icon rules, as agents read them from the MCP server."
       >
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="flex flex-col gap-3 border p-4">
+          <div className="flex flex-col gap-3 rounded-surface border p-4">
             <ul className="flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed">
               {rules.usage.map((item) => (
                 <li key={item}>{item}</li>

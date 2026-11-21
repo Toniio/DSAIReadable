@@ -37,7 +37,7 @@ export function PatternThumbnail({
     <div
       inert
       aria-hidden="true"
-      className="pointer-events-none relative h-48 overflow-hidden border-b bg-background"
+      className="pointer-events-none relative h-48 overflow-hidden rounded-t-surface border-b bg-background"
     >
       {mounted ? (
         <Canvas

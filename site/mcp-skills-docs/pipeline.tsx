@@ -7,7 +7,7 @@ import type { PipelineStep } from "@/site/mcp-skills-docs/data"
  */
 export function Pipeline({ steps }: { steps: PipelineStep[] }) {
   return (
-    <ol className="flex flex-col gap-px border bg-border">
+    <ol className="flex flex-col gap-px overflow-hidden rounded-surface border bg-border">
       {steps.map((step, index) => (
         <li
           key={step.title}
@@ -21,8 +21,10 @@ export function Pipeline({ steps }: { steps: PipelineStep[] }) {
               {index + 1}
             </span>
             <div className="flex min-w-0 flex-col gap-1">
-              <span className="text-sm font-medium">{step.title}</span>
-              <code className="font-mono text-xs break-words text-muted-foreground">
+              <span className="font-heading text-title font-medium">
+                {step.title}
+              </span>
+              <code className="font-mono text-ui break-words text-muted-foreground">
                 {step.where}
               </code>
             </div>

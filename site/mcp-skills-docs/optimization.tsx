@@ -57,17 +57,22 @@ function Figures({
   className: string
 }) {
   return (
-    <dl className={cn("grid gap-px border bg-border", className)}>
+    <dl
+      className={cn(
+        "grid gap-px overflow-hidden rounded-surface border bg-border",
+        className
+      )}
+    >
       {figures.map((figure) => (
         <div
           key={figure.label}
           className="flex min-w-0 flex-col gap-1 bg-background p-4"
         >
-          <dt className="text-xs text-muted-foreground">{figure.label}</dt>
+          <dt className="text-ui text-muted-foreground">{figure.label}</dt>
           <dd className="font-heading text-3xl font-semibold tracking-tight tabular-nums">
             {figure.value}
           </dd>
-          <dd className="text-xs leading-relaxed break-words text-muted-foreground">
+          <dd className="text-description break-words text-muted-foreground">
             {figure.detail}
           </dd>
         </div>
@@ -181,13 +186,13 @@ export function Versions({ rows }: { rows: Measurement[] }) {
 
   return (
     <div className="flex min-w-0 flex-col gap-4">
-      <div className="grid gap-px border bg-border lg:grid-cols-3">
+      <div className="grid gap-px overflow-hidden rounded-surface border bg-border lg:grid-cols-3">
         {charts.map((chart) => (
           <figure
             key={chart.title}
             className="flex min-w-0 flex-col gap-2 bg-background p-4"
           >
-            <figcaption className="text-sm font-medium">
+            <figcaption className="font-heading text-title font-medium">
               {chart.title}
             </figcaption>
             <VersionChart
@@ -307,7 +312,7 @@ export function Returns() {
 function Fact({ term, children }: { term: string; children: ReactNode }) {
   return (
     <div className="flex min-w-0 flex-col gap-1 bg-background p-3">
-      <dt className="text-xs text-muted-foreground">{term}</dt>
+      <dt className="text-ui text-muted-foreground">{term}</dt>
       <dd className="min-w-0 text-sm break-words">{children}</dd>
     </div>
   )
@@ -327,7 +332,7 @@ export function Rescue({
           ? "one task qualifies:"
           : `${data.rescued} tasks qualify; the cheapest:`}
       </p>
-      <dl className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-4">
         <Fact term="Task">
           <code className="font-mono">{data.task}</code>
         </Fact>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { CopyButton } from "@/site/ui/copy-button"
 import { FOCUS_BORDERLESS } from "@/site/ui/link"
 
@@ -43,9 +43,14 @@ export function CodeBlock({
   }, [])
 
   return (
-    <div className={cn("flex min-w-0 flex-col border bg-muted", className)}>
+    <div
+      className={cn(
+        "flex min-w-0 flex-col rounded-control border bg-muted",
+        className
+      )}
+    >
       <div className="flex min-h-9 items-center justify-between gap-2 border-b pr-1 pl-3">
-        <span className="truncate text-xs text-muted-foreground">
+        <span className="truncate font-heading text-ui text-muted-foreground">
           {title ?? language ?? "code"}
         </span>
         <CopyButton value={text} label={`Copy ${title ?? "the code"}`} />
@@ -53,7 +58,7 @@ export function CodeBlock({
       <pre
         ref={pre}
         className={cn(
-          "overflow-x-auto p-4 font-mono text-xs leading-relaxed text-foreground",
+          "overflow-x-auto rounded-b-control p-4 font-mono text-ui leading-relaxed text-foreground",
           FOCUS_BORDERLESS
         )}
       >
@@ -76,8 +81,8 @@ export function CommandLine({
   label: string
 }) {
   return (
-    <div className="flex min-w-0 items-center gap-2 border bg-muted py-1 pr-1 pl-3">
-      <code className="min-w-0 flex-1 font-mono text-xs break-all">
+    <div className="flex min-w-0 items-center gap-2 rounded-control border bg-muted py-1 pr-1 pl-3">
+      <code className="min-w-0 flex-1 font-mono text-ui break-all">
         {command}
       </code>
       <CopyButton value={command} label={label} />

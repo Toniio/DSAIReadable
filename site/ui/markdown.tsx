@@ -119,7 +119,7 @@ function components(from: string | undefined, shift: number): Components {
     ),
     code: ({ children }) => {
       const code = (
-        <code className="bg-muted px-1 py-0.5 font-mono text-xs">
+        <code className="rounded-inset bg-muted px-1 py-0.5 font-mono text-ui">
           {children}
         </code>
       )
@@ -129,7 +129,7 @@ function components(from: string | undefined, shift: number): Components {
         ? textOf(children)
         : undefined
       return rule ? (
-        <Link href={`/#${rule}`} className={LINK}>
+        <Link href={`/#${rule}`} className={cn(LINK, "rounded-inset")}>
           {code}
         </Link>
       ) : (

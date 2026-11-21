@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { CopyCode, Ticks } from "@/site/foundation-docs/tokens/token-ui"
 import type {
   HeadingRow,
@@ -100,13 +100,13 @@ function styleClasses(style: TextStyle): string {
 function StyleClasses({ style }: { style: TextStyle }) {
   if (!style.classes)
     return (
-      <span className="text-xs text-muted-foreground">
+      <span className="text-ui text-muted-foreground">
         None: the component draws it
       </span>
     )
   return (
     <span className="flex items-start gap-0.5">
-      <code className="min-w-0 bg-muted px-1 py-0.5 font-mono text-xs break-words">
+      <code className="min-w-0 rounded-inset bg-muted px-1 py-0.5 font-mono text-ui break-words">
         {style.classes}
       </code>
       <CopyButton
@@ -170,16 +170,16 @@ function TextStyles({
       </Table>
     )
   return (
-    <ul className="flex flex-col divide-y border">
+    <ul className="flex flex-col divide-y rounded-surface border">
       {styles.map((style) => (
         <li
           key={style.name}
           className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-6"
         >
           <div className="flex shrink-0 flex-col items-start gap-1 sm:w-64">
-            <span className="text-xs font-medium">{style.name}</span>
+            <span className="text-ui font-medium">{style.name}</span>
             <StyleClasses style={style} />
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="font-mono text-ui text-muted-foreground">
               {[style.size, style.lineHeight, style.weight, style.tracking]
                 .filter(Boolean)
                 .join(" · ")}
@@ -226,7 +226,7 @@ function TypeTable({
               <CopyCode value={row.className} />
             </TableCell>
             <TableCell className="align-top">
-              <span className="font-mono text-xs">{row.token}</span>
+              <span className="font-mono text-ui">{row.token}</span>
             </TableCell>
             <TableCell className="align-top font-mono">
               {row.value}
@@ -255,7 +255,7 @@ function Meta({ row, facts }: { row: TypeRow; facts: string[] }) {
     <div className="flex shrink-0 flex-col items-start gap-1 sm:w-48">
       <CopyCode value={row.className} />
       {facts.filter(Boolean).map((fact) => (
-        <span key={fact} className="font-mono text-xs text-muted-foreground">
+        <span key={fact} className="font-mono text-ui text-muted-foreground">
           {fact}
         </span>
       ))}
@@ -277,7 +277,7 @@ function SpecimenList({
   base?: string
 }) {
   return (
-    <ul className="flex flex-col divide-y border">
+    <ul className="flex flex-col divide-y rounded-surface border">
       {rows.map((row) => (
         <li
           key={row.token}
@@ -311,7 +311,10 @@ function Families({ rows, display }: { rows: TypeRow[]; display: Display }) {
   return (
     <ul className="grid gap-3 md:grid-cols-2">
       {rows.map((row) => (
-        <li key={row.token} className="flex flex-col gap-4 border p-4">
+        <li
+          key={row.token}
+          className="flex flex-col gap-4 rounded-surface border p-4"
+        >
           <div className={cn("flex flex-col gap-2", specimen(row.className))}>
             <span className="text-4xl">Aa</span>
             <span className="text-sm break-words">
@@ -319,9 +322,9 @@ function Families({ rows, display }: { rows: TypeRow[]; display: Display }) {
             </span>
           </div>
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-medium">{row.value}</p>
+            <p className="font-heading text-title font-medium">{row.value}</p>
             <CopyCode value={row.className} />
-            <p className="text-xs leading-relaxed text-muted-foreground">
+            <p className="text-description text-muted-foreground">
               <Ticks>{row.usage}</Ticks>
             </p>
           </div>
@@ -378,17 +381,17 @@ function Headings({
       </Table>
     )
   return (
-    <ul className="flex flex-col divide-y border">
+    <ul className="flex flex-col divide-y rounded-surface border">
       {rows.map((row) => (
         <li
           key={row.level}
           className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-6"
         >
           <div className="flex shrink-0 flex-col items-start gap-1 sm:w-48">
-            <span className="text-xs font-medium">
+            <span className="text-ui font-medium">
               level {row.level} · {row.tag}
             </span>
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="font-mono text-ui text-muted-foreground">
               {size(row.level)?.className} · {size(row.level)?.detail}
             </span>
           </div>
@@ -432,7 +435,7 @@ export function TypeStyles({ data }: { data: TypeData }) {
           <ToggleGroupItem value="table">Table</ToggleGroupItem>
           <ToggleGroupItem value="preview">Preview</ToggleGroupItem>
         </ToggleGroup>
-        <p className="max-w-3xl border-l border-primary pl-3 text-xs leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl border-l border-primary pl-3 text-description text-muted-foreground">
           Specimens render in the fonts of the brand this site is showing.{" "}
           <code className="font-mono">lib/fonts.ts</code> loads lyra&apos;s:
           JetBrains Mono for the interface, Geist for{" "}
@@ -445,7 +448,7 @@ export function TypeStyles({ data }: { data: TypeData }) {
       <DocSection
         id="text-styles"
         title="Text styles"
-        description="The spec's canonical styles: a size, a line height, a weight and a spacing written together. Every one is in the body family, which html applies. A style a component draws takes no class: write the text, not the style."
+        description="The spec's canonical styles: a size, a line height, a weight and a spacing written together. Every one but Code is in the body family, which html applies; Code writes font-mono. A style a component draws takes no class: write the text, not the style."
       >
         <TextStyles styles={data.styles} display={display} />
       </DocSection>
@@ -514,7 +517,10 @@ export function TypeStyles({ data }: { data: TypeData }) {
         ) : (
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {data.leading.map((row) => (
-              <li key={row.token} className="flex flex-col gap-3 border p-4">
+              <li
+                key={row.token}
+                className="flex flex-col gap-3 rounded-surface border p-4"
+              >
                 <Meta row={row} facts={[row.value]} />
                 <p className={cn("bg-muted text-sm", specimen(row.className))}>
                   {PARAGRAPH}
