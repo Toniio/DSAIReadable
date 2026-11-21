@@ -1,520 +1,478 @@
-# Reintegrating the Figma layer
+# Building the Figma library
 
-> **Status**: Figma layer removed from the repository on **2026-09-17**.
-> This document is the full spec for rebuilding it.
-> Why it was removed: to get a **code-first** source-of-truth design system that
-> an AI design agent can consume without depending on an external tool.
+> **Status**: this repository has no Figma layer. The one it had was removed on
+> **2026-09-17** to keep the design system code-first, and the Figma file it
+> pointed to no longer matches the code.
+>
+> **This document** is the brief for rebuilding the library in Figma from the
+> code, with the Figma agent. It is written for **v0.5.0**: its counts and its
+> links are that release's. [`llms.txt`](./llms.txt) lists the links of the
+> current release.
 
----
-
-## 0. Backup archive
-
-At the time, the repository **was not under git**. An archive of every file
-deleted or modified was created before the operation:
-
-```
-~/.copilot/session-state/73c95c37-f3bc-49dc-b749-63a3e92eb8fa/files/figma-archive/figma-removed-2026-09-17.tar.gz
-```
-
-It holds the original state of:
-`components/ui/*.figma.tsx`, `scripts/figma/`, `scripts/figma-push-variables.py`,
-`scripts/tokens-diff.ts`, `figma.config.json`, `tsconfig.figma.json`,
-`types/figma-code-connect.d.ts`, `design-system.index.json`, `design-system.schema.json`,
-`mcp-server/src/**`, `README.md`, `PROJECT_STRUCTURE.md`, `specs/`.
-
-> ⚠️ The archive also holds `packages/make-kit/**`. That package has since been **deleted from the repository**:
-> distribution goes through the shadcn registry. Do not restore it — see the obsolete section at the end of §7.
-
-**Before any reintegration, extract this archive into a temporary folder to
-recover the Code Connect prop mappings** (not reproduced in full below).
+The code is the source of truth, and it stays so. The Figma library is a
+rendering of it: every variable, style and component below is read from a file
+of this repository, and nothing is designed in Figma first.
 
 ---
 
-## 1. What existed — overview
+## 1. What to give the agent
 
-The Figma layer covered **five separate responsibilities**. They are independent:
-any one of them can be reintegrated without the others.
+Two links name the design system:
 
-| #   | Building block                                               | Direction    | Files                                                                                  |
-| --- | ------------------------------------------------------------ | ------------ | -------------------------------------------------------------------------------------- |
-| 1   | **Code Connect** — React component ↔ Figma component mapping | code → Figma | `components/ui/*.figma.tsx` (54), `figma.config.json`, `types/figma-code-connect.d.ts` |
-| 2   | **Token push** — DTCG tokens → Figma Variables               | code → Figma | `scripts/figma-push-variables.py`                                                      |
-| 3   | **Token diff** — code ↔ Figma drift detection                | Figma → code | `scripts/tokens-diff.ts`                                                               |
-| 4   | **Figma component creation** through the Plugin API          | code → Figma | `scripts/figma/*.ts` + `*.cjs` (17)                                                    |
-| 5   | **Inventory metadata** — `figma_node_id`, `figma_file_key`   | descriptive  | `design-system.index.json`, `specs/components/*.md`, MCP context                       |
+| Link                                         | What it holds                                                                                |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `https://github.com/Toniio/DSAIReadable.git` | The source: tokens, components, specs. **It decides** whenever the two disagree              |
+| `https://toniio.github.io/DSAIReadable/`     | The documentation site, built from the release: every component rendered, in the four themes |
 
-### Coordinates of the source Figma file
+The Figma agent works inside a Figma Design file. What it takes as context,
+according to Figma's Help Center on 2026-11-21
+([Work with the Figma agent in design files](https://help.figma.com/hc/en-us/articles/37998629035799-Work-with-the-Figma-agent-in-design-files)):
+attached text and code files, images, Figma design URLs, the libraries
+connected to the file, MCP connectors and skills, and web search on a paid
+plan. Importing a GitHub repository as a library's code source is a closed
+beta. A link pasted in a prompt is therefore read only as far as web search
+reaches it, and a repository of this size is not read whole.
 
-The real values are not published: the file and its registry belong to a private
-Figma workspace. Look them up in Figma (_Share → Copy link_ for the key; the
-organization settings for the registry) and never commit them.
+So give the links **and attach the files each phase reads**. They are small:
 
-| Key                  | Value                                                          |
-| -------------------- | -------------------------------------------------------------- |
-| `figma_file_key`     | `<FIGMA_FILE_KEY>`                                             |
-| `figma_site`         | `https://www.figma.com/design/<FIGMA_FILE_KEY>/DSAIReadable`   |
-| `last_publish`       | `2025-07-08T12:00:00Z`                                         |
-| Private npm registry | `https://registry.figma.com/npm/<FIGMA_REGISTRY_ID>/registry/` |
+| Phase                     | Attach                                                                                                                                                                                 |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Every phase               | This document                                                                                                                                                                          |
+| Variables (§ 4)           | `tokens/primitive.json`, `tokens/semantic.json`, `tokens/semantic.dark.json`, `tokens/semantic.nova.json`, `tokens/semantic.nova.dark.json`, `tokens/component.json` (230 KB together) |
+| Styles (§ 5)              | `tokens/primitive.json`, `specs/foundations/typography.md`, `specs/foundations/elevation.md`                                                                                           |
+| Components (§ 7), a batch | The `specs/components/<Component>.md` of the batch, `specs/foundations/radius.md`, `specs/foundations/focus.md`, and a screenshot of each component's site page                        |
 
-### Required environment variables
-
-| Variable          | Used by                                     | Scopes / role                                                                                       |
-| ----------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `FIGMA_FILE_KEY`  | `tokens-diff.ts`, `figma-push-variables.py` | the file key                                                                                        |
-| `FIGMA_TOKEN`     | same                                        | a PAT with `file_content:read`, `library_content:read`, `file_variables:write`                      |
-| `FIGMA_NPM_TOKEN` | `.npmrc`                                    | ~~auth for the `registry.figma.com` registry~~ — **obsolete**: no npm package is published any more |
+The site keeps its brand switch (lyra, nova) and its theme switch (Auto, Light,
+Dark) in the browser, not in the URL: a page fetched by its link is lyra, in the
+reader's color scheme. A screenshot carries the theme; a link does not.
 
 ---
 
-## 2. `figma_node_id` mapping — restore as is
+## 2. Sources of truth
 
-The full reference table at the time of the removal. The specs' `figma_node_id`
-rows were **kept but emptied**: repopulating them with these values is enough.
+Every link below points to the release tag. `main` can be ahead of it.
 
-| Component      | figma_node_id | code_path                         | Had a Code Connect |
-| -------------- | ------------- | --------------------------------- | ------------------ |
-| Accordion      | 176:2492      | components/ui/accordion.tsx       | yes                |
-| Alert          | 176:2331      | components/ui/alert.tsx           | yes                |
-| AlertDialog    | 176:2678      | components/ui/alert-dialog.tsx    | yes                |
-| AspectRatio    | —             | components/ui/aspect-ratio.tsx    | —                  |
-| Avatar         | 176:2401      | components/ui/avatar.tsx          | yes                |
-| Badge          | 176:2394      | components/ui/badge.tsx           | yes                |
-| Breadcrumb     | 176:2474      | components/ui/breadcrumb.tsx      | yes                |
-| Button         | 176:2322      | components/ui/button.tsx          | yes                |
-| ButtonGroup    | 176:2593      | components/ui/button-group.tsx    | yes                |
-| Calendar       | 176:2812      | components/ui/calendar.tsx        | yes                |
-| Card           | 176:2356      | components/ui/card.tsx            | yes                |
-| Carousel       | 176:2773      | components/ui/carousel.tsx        | yes                |
-| Chart          | 176:2957      | components/ui/chart.tsx           | yes                |
-| Checkbox       | 176:2273      | components/ui/checkbox.tsx        | yes                |
-| Collapsible    | 176:2662      | components/ui/collapsible.tsx     | yes                |
-| Combobox       | 176:2763      | components/ui/combobox.tsx        | yes                |
-| Command        | 176:2719      | components/ui/command.tsx         | yes                |
-| ContextMenu    | 176:2702      | components/ui/context-menu.tsx    | yes                |
-| Dialog         | 176:2510      | components/ui/dialog.tsx          | yes                |
-| Direction      | —             | components/ui/direction.tsx       | —                  |
-| Drawer         | 176:2701      | components/ui/drawer.tsx          | yes                |
-| DropdownMenu   | 176:2533      | components/ui/dropdown-menu.tsx   | yes                |
-| Empty          | 176:2571      | components/ui/empty.tsx           | yes                |
-| Field          | 176:2381      | components/ui/field.tsx           | yes                |
-| Heading        | 176:2549      | components/ui/heading.tsx         | yes                |
-| HoverCard      | 176:2689      | components/ui/hover-card.tsx      | yes                |
-| Illustration   | —             | components/ui/illustration.tsx    | —                  |
-| Input          | 176:2262      | components/ui/input.tsx           | yes                |
-| InputGroup     | 176:2618      | components/ui/input-group.tsx     | yes                |
-| InputOtp       | 176:2619      | components/ui/input-otp.tsx       | yes                |
-| Item           | 176:2811      | components/ui/item.tsx            | yes                |
-| Kbd            | 176:2554      | components/ui/kbd.tsx             | yes                |
-| Label          | 176:2244      | components/ui/label.tsx           | yes                |
-| Logo           | —             | components/ui/logo.tsx            | —                  |
-| Menubar        | 176:2712      | components/ui/menubar.tsx         | yes                |
-| NativeSelect   | 176:2634      | components/ui/native-select.tsx   | yes                |
-| NavigationMenu | 176:2738      | components/ui/navigation-menu.tsx | yes                |
-| Pagination     | 176:2493      | components/ui/pagination.tsx      | yes                |
-| PasswordInput  | —             | components/ui/password-input.tsx  | —                  |
-| Popover        | 176:2687      | components/ui/popover.tsx         | yes                |
-| Progress       | 176:2507      | components/ui/progress.tsx        | yes                |
-| RadioGroup     | 176:2430      | components/ui/radio-group.tsx     | yes                |
-| Resizable      | 176:2677      | components/ui/resizable.tsx       | yes                |
-| ScrollArea     | 176:2772      | components/ui/scroll-area.tsx     | yes                |
-| Select         | 176:2456      | components/ui/select.tsx          | yes                |
-| Separator      | 176:2250      | components/ui/separator.tsx       | yes                |
-| Sheet          | 176:2532      | components/ui/sheet.tsx           | yes                |
-| Sidebar        | 176:2935      | components/ui/sidebar.tsx         | yes                |
-| Skeleton       | 176:2553      | components/ui/skeleton.tsx        | yes                |
-| Slider         | 176:2440      | components/ui/slider.tsx          | yes                |
-| Sonner         | 176:2956      | components/ui/sonner.tsx          | yes                |
-| Spinner        | 176:2251      | components/ui/spinner.tsx         | yes                |
-| Switch         | 176:2410      | components/ui/switch.tsx          | yes                |
-| Table          | 176:2570      | components/ui/table.tsx           | yes                |
-| Tabs           | 176:2473      | components/ui/tabs.tsx            | yes                |
-| Textarea       | 176:2439      | components/ui/textarea.tsx        | yes                |
-| Toggle         | 176:2423      | components/ui/toggle.tsx          | yes                |
-| ToggleGroup    | 176:2651      | components/ui/toggle-group.tsx    | yes                |
-| Tooltip        | 176:2520      | components/ui/tooltip.tsx         | yes                |
+| What                                    | File                                                                                                                                  | On the site                               |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| Every entry point, one line each        | [`llms.txt`](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/llms.txt)                                                   | `/`                                       |
+| Raw values, with a `hex` for each color | [`tokens/primitive.json`](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/tokens/primitive.json)                         | `/foundations/color/`                     |
+| The themes and their order              | [`tokens/tokens.resolver.json`](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/tokens/tokens.resolver.json)             | `/foundations/layers/`                    |
+| Every token, resolved in each theme     | [`tokens.manifest.json`](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/tokens.manifest.json) (333 KB)                  | `/foundations/tokens/`                    |
+| The same, as a table                    | [`specs/tokens/token-reference.md`](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/specs/tokens/token-reference.md)     | `/foundations/tokens/`                    |
+| The same, as CSS, one block per theme   | [`tokens.css`](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/tokens.css) (48 KB)                                       | —                                         |
+| The 67 components and their status      | [`design-system.index.json`](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/design-system.index.json)                   | `/components/`                            |
+| One component: the behavioral contract  | `specs/components/<Component>.md` ([Button](https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/specs/components/Button.md)) | `/components/<component>/`, in kebab case |
+| One component: its classes              | `components/ui/<component>.tsx`                                                                                                       | `/preview/components/<component>/`        |
+| The 13 foundations                      | `specs/foundations/<foundation>.md`                                                                                                   | `/foundations/<foundation>/`              |
+| The 12 page patterns                    | `specs/patterns/<pattern>.md`                                                                                                         | `/patterns/<pattern>/`                    |
 
-> Every node-id belongs to the `176:*` page of the source file. `AspectRatio`,
-> `Direction`, `Illustration`, `Logo` and `PasswordInput` **never** had a Figma counterpart.
+A component spec has 13 sections. Four of them are generated from the code, so
+they say what the component draws: **Anatomy** (its `data-slot` parts),
+**Tokens** (each class and the token it reads), **Variants** (the axes and
+their values) and **States** (the classes of each state).
 
 ---
 
-## 3. Building block 1 — Figma Code Connect
+## 3. Rules of the build
 
-### Removed npm dependencies
-
-```jsonc
-// package.json → devDependencies
-"@figma/code-connect": "^1.4.4",
-"@figma/plugin-typings": "^1.138.0"
-```
-
-### `figma.config.json` (to recreate at the root)
-
-```json
-{
-  "codeConnect": {
-    "parser": "react",
-    "include": ["components/ui/**/*.tsx"],
-    "paths": {
-      "@/*": ["./*"]
-    }
-  }
-}
-```
-
-### `types/figma-code-connect.d.ts` (to recreate)
-
-A type augmentation, needed because the `instructions` key — used to give LLMs
-usage context through Dev Mode — is not declared by the upstream package.
-
-```ts
-import "@figma/code-connect"
-
-declare module "@figma/code-connect/dist/connect/api" {
-  interface FigmaConnectMeta<
-    PropsT = {},
-    ResolvedPropsT = {},
-    ExampleFnReturnT = unknown,
-    ExtraExampleT = never,
-  > {
-    instructions?: string
-  }
-}
-```
-
-### `tsconfig.json` — path mapping to add back
-
-```jsonc
-"paths": {
-  "@figma/code-connect/dist/connect/api": [
-    "./node_modules/@figma/code-connect/dist/connect/api"
-  ]
-}
-```
-
-### `eslint.config.mjs` — override to add back
-
-```js
-{
-  // Declaration merging with @figma/code-connect requires type parameters
-  // that are strictly identical to upstream, default values included.
-  // Replacing `{}` with `object` breaks the merge, so the rule cannot apply.
-  files: ["types/figma-code-connect.d.ts"],
-  rules: { "@typescript-eslint/no-empty-object-type": "off" },
-}
-```
-
-### Anatomy of a `.figma.tsx` file (reference: `button.figma.tsx`)
-
-```tsx
-import figma from "@figma/code-connect"
-import { Button } from "@/components/ui/button"
-
-figma.connect(
-  Button,
-  "https://www.figma.com/design/<FILE_KEY>?node-id=176:2322",
-  {
-    links: [
-      {
-        name: "Source",
-        url: "https://github.com/Toniio/DSAIReadable/blob/main/components/ui/button.tsx",
-      },
-    ],
-    props: {
-      variant: figma.enum("Variant", {
-        Default: "default",
-        Outline: "outline",
-        Secondary: "secondary",
-        Ghost: "ghost",
-        Destructive: "destructive",
-        Link: "link",
-      }),
-      size: figma.enum("Size", {
-        Default: "default",
-        Sm: "sm",
-        Lg: "lg",
-        Icon: "icon",
-      }),
-      label: figma.string("label"),
-    },
-    example: ({ variant, size, label }) => (
-      <Button variant={variant} size={size}>
-        {label}
-      </Button>
-    ),
-    instructions: `
-    Button is the primary action trigger. Use variant="default" for primary actions,
-    "outline" for secondary actions, "destructive" for irreversible actions, and "ghost"
-    or "link" for low-emphasis navigation. Always provide an aria-label for icon-only sizes.
-  `,
-  }
-)
-```
-
-**Invariant rules observed across the 54 files:**
-
-- one `figma.connect()` per root component; sub-components (such as `CardHeader`)
-  get their own `figma.connect()` calls in the same file;
-- `figma.enum()` maps a Figma variant property (key = the Figma label,
-  **capitalized**) to the React prop value (**kebab / lowercase**);
-- `figma.string()` / `figma.boolean()` / `figma.children()` for content;
-- `links[]` always points to the source file on GitHub;
-- `instructions` is English text that says _when_ to use the component — that
-  information **already exists** in `specs/components/<Name>.md` (the
-  `## Role`, `## Usage` and `## Constraints` sections) and can be regenerated
-  from it.
-
-> **The exact enum mappings are not reproduced here** (54 files).
-> Recover them from the §0 archive, or regenerate them from the components' `cva` blocks.
-
-### npm scripts to restore
-
-```jsonc
-"typecheck:figma": "tsc --noEmit -p tsconfig.figma.json",
-"typecheck:all": "npm run typecheck && npm run typecheck:scripts && npm run typecheck:figma && npm run typecheck:mcp"
-```
-
-Publishing: `npx figma connect publish`.
+1. **The repository decides.** When the site, a screenshot or a memory of
+   shadcn/ui disagrees with a file of the release, the file is right.
+2. **Nothing is invented.** No token, variant, value, prop or state that a
+   source file does not hold. What Figma cannot express is reported (§ 9), not
+   approximated.
+3. **Names are the code's, verbatim.** A variable is its token path, a
+   component its React export, a property its prop, a value its union member:
+   `variant`, `icon-sm`, `default`, in lower case as the code writes them. No
+   mapping table then stands between a Figma instance and the code.
+4. **Every value is bound.** A fill, a stroke, a radius, a gap, a padding, a
+   size, a typeface: each reads a Semantic or a Component variable. A component
+   never reads a Primitive variable, and never holds a raw value.
+5. **Four themes, one component.** A component is drawn once and renders
+   lyra light, lyra dark, nova light and nova dark through the mode of the
+   frame that holds it.
+6. **The accessibility target is WCAG 2.2 AA.** The token pairs meet it in the
+   four themes; a color changed by hand breaks that guarantee.
 
 ---
 
-## 4. Building block 2 — Pushing tokens to Figma Variables
+## 4. Variables
 
-File: `scripts/figma-push-variables.py` (~19 KB, Python 3, standard library only).
+Three collections mirror the three token tiers. Each variable is named by its
+full token path, dots turned into slashes: `color.action.background.default`
+is `color/action/background/default`. No path is both a variable and a group.
 
-### Behavior
+| Collection  | Source                  | Modes                                      | Variables                                  | Publishing |
+| ----------- | ----------------------- | ------------------------------------------ | ------------------------------------------ | ---------- |
+| `Primitive` | `tokens/primitive.json` | one                                        | 263, holding raw values                    | **hidden** |
+| `Semantic`  | `tokens/semantic*.json` | `light`, `dark`, `nova-light`, `nova-dark` | 207, each an alias of a Primitive variable | published  |
+| `Component` | `tokens/component.json` | one                                        | 33, each an alias of a Semantic variable   | published  |
 
-1. reads the tiers through `tokens/tokens.resolver.json` (DTCG format): `primitive.json`, `semantic.json`, `component.json`, and the dark values from `semantic.dark.json`;
-2. creates or updates **3** Figma Variables **collections**:
-   - `Primitive` — a collection **hidden** from publishing (`hiddenFromPublishing: true`),
-   - `Semantic` — **2 modes**: `light` + `dark`,
-   - `Component` — a single mode;
-3. converts `oklch(...)` → sRGB `{r,g,b,a}` (the Figma API does not accept oklch);
-4. `POST https://api.figma.com/v1/files/{FIGMA_FILE_KEY}/variables` with the
-   header `X-Figma-Token: $FIGMA_TOKEN`;
-5. translates the local dot notation (`color.background.default`) into Figma's
-   slash notation (`color/background/default`).
+The `Component` collection needs no mode of its own: an alias resolves in the
+mode its target has on the frame.
 
-### npm scripts to restore
+### Themes
 
-```jsonc
-"figma:push": "python3 scripts/figma-push-variables.py",
-"figma:push:dry": "python3 scripts/figma-push-variables.py --dry-run"
-```
+A theme is a brand in a color scheme, and the `Semantic` collection has one
+mode per context of `tokens/tokens.resolver.json`. A theme file holds only the
+tokens it changes, so a mode with no entry for a token falls back:
 
----
+| Mode         | Brand and scheme | Reads, last one wins                                        | Key in `tokens.manifest.json` | When the key is absent |
+| ------------ | ---------------- | ----------------------------------------------------------- | ----------------------------- | ---------------------- |
+| `light`      | lyra, light      | `semantic.json`                                             | `light`                       | —                      |
+| `dark`       | lyra, dark       | then `semantic.dark.json` (59 tokens)                       | `dark`                        | `light`                |
+| `nova-light` | nova, light      | `semantic.json`, then `semantic.nova.json` (60 tokens)      | `nova`                        | `light`                |
+| `nova-dark`  | nova, dark       | dark, then nova, then `semantic.nova.dark.json` (41 tokens) | `novaDark`                    | `dark`, then `light`   |
 
-## 5. Building block 3 — Code ↔ Figma token diff
+In `tokens.manifest.json`, `reference` is the alias to write in each mode and
+`value` is what it resolves to. `tokens.css` says the same in four blocks:
+`:root`, `.dark`, `.nova`, and `.nova.dark`.
 
-File: `scripts/tokens-diff.ts` (~14 KB, tsx). **It was wired into `tokens-validate`,
-and therefore into CI.**
+A brand moves colors, typefaces, radii and text sizes, and nothing else.
 
-### Behavior
+### From a token to a variable
 
-- `GET https://api.figma.com/v1/files/{FIGMA_FILE_KEY}/variables/local`;
-- when `FIGMA_FILE_KEY` or `FIGMA_TOKEN` is missing → **exit 0 with a warning** (not blocking locally);
-- compares three sets and exits with an error on `valueMismatch`:
-  - `onlyInLocal` (warning), `onlyInFigma` (warning), `valueMismatch` (**exit 1**).
+| DTCG `$type`                                           | Figma variable | Conversion                                                                                                                                                                                                  |
+| ------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color` (128 primitives)                               | Color          | The `hex` of the `$value`, with its `alpha` when it has one (`white-alpha`, `ink-alpha`). The OKLCH components are the source and the `hex` its sRGB rendering: never convert them by hand                  |
+| `dimension` in `rem`                                   | Number         | × 16, in pixels: `0.625rem` is `10`                                                                                                                                                                         |
+| `dimension` in `px`                                    | Number         | As written. `radius.full` is `9999`                                                                                                                                                                         |
+| `dimension` in `em`                                    | Number         | The 5 letter spacings, × 100, as a percentage: `-0.025em` is `-2.5`. Set in the text styles, not bound: Figma binds letter spacing in pixels                                                                |
+| `number`, `typography.line-height.*`                   | Number         | The ratio, as written. Applied in a text style as a percentage, not bound                                                                                                                                   |
+| `number`, `typography.size-line-height.*`              | Number         | In pixels: the ratio × the `typography.size.*` of the same name in the same mode, to the half pixel. `ui` is `16` in lyra (12 × 1.33334) and `20` in nova (14 × 1.42858). Figma binds line height in pixels |
+| `number`, `opacity.*`                                  | Number         | × 100: `0.5` is `50`                                                                                                                                                                                        |
+| `number`, `zindex.*`                                   | Number         | As written, with no scope: Figma has no stacking order to bind                                                                                                                                              |
+| `fontWeight`                                           | Number         | As written: `400`, `500`, `600`, `700`                                                                                                                                                                      |
+| `fontFamily`                                           | String         | The first family of the list: `JetBrains Mono, monospace` is `JetBrains Mono`                                                                                                                               |
+| `shadow` (14 primitives, 7 semantic)                   | none           | An effect style (§ 5)                                                                                                                                                                                       |
+| `duration`, `cubicBezier` (10 primitives, 10 semantic) | none           | No variable: listed as text on the Motion page                                                                                                                                                              |
 
-### Normalization rules to reproduce exactly
+On each variable:
 
-| Case              | Rule                                                                                                    |
-| ----------------- | ------------------------------------------------------------------------------------------------------- |
-| Name separator    | Figma `/` ↔ code `.`                                                                                    |
-| Colors            | Figma returns `{r,g,b,a}` floats → convert to `#hex`, case-insensitive comparison                       |
-| Variable alias    | `{type: "VARIABLE_ALIAS"}` → **ignore** (a reference to another variable)                               |
-| Numbers           | absolute tolerance of **0.02** (Figma's floating-point precision)                                       |
-| `letter-spacing`  | Figma cannot represent `em` → stores `0`; tolerance of **1** on these keys                              |
-| Shadows / effects | **excluded** from the comparison (Figma stores them as effect objects, not CSS strings)                 |
-| Compound words    | Figma uses no hyphen → the `FIGMA_NAME_NORMALIZATION` table                                             |
-| Renames           | a two-way `CODE_TO_FIGMA_ALIASES` / `FIGMA_TO_CODE_ALIASES` table, while Figma catches up with the code |
+- **Description**: the token's `$description`. A token whose
+  `$extensions.status` is `reserved` starts its description with `Reserved:`;
+  it is a valid decision that no component reads yet.
+- **Code syntax, Web**: `var(<cssVar>)`, the `cssVar` of `tokens.manifest.json`
+  (`var(--color-action-background-default)`), on Semantic and Component
+  variables. Primitive variables get none: they are private.
+- **Scope**: what the group draws. `color/background`, `color/overlay`,
+  `color/action` and `color/feedback` fill frames and shapes; `color/text` and
+  `color/icon` fill text and icons; `color/border` draws strokes; `radius`
+  rounds corners; `space` sets gaps, paddings, widths and heights; `opacity`
+  sets layer opacity; `border-width` sets stroke weight.
+- **Deprecated tokens are not created**: `opacity.placeholder` and
+  `opacity.overlay`, the two tokens that carry `$deprecated`.
 
-### npm scripts to restore
+### What must hold once the variables exist
 
-```jsonc
-"tokens:diff": "tsx scripts/tokens-diff.ts",
-"tokens-validate": "npm run tokens:check && npm run tokens:lint-naming && npm run tokens:lint-values && npm run tokens:lint-bridge && npm run tokens:diff"
-```
-
----
-
-## 6. Building block 4 — Creating the Figma components programmatically
-
-Folder: `scripts/figma/` (17 files). It drove the **Figma Plugin API** from VS Code
-through the `figma-console-mcp` MCP server.
-
-| File                                              | Role                                                                                        |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `_helpers.ts`                                     | shared primitives: frame creation, variable binding, auto-layout                            |
-| `01-label.ts` → `10-finalize.ts`                  | one component per script, **in dependency order** (Label before Field, Input before Field…) |
-| `run-all.ts`                                      | sequential orchestrator                                                                     |
-| `all-components.js` (177 KB)                      | a generated dump of every component                                                         |
-| `get-node-ids.js`                                 | extracts the node-ids after creation → feeds `design-system.index.json`                     |
-| `mcp-client.cjs`, `run-query.cjs`, `sync-all.cjs` | low-level MCP client + synchronization                                                      |
-
-### `tsconfig.figma.json` (to recreate)
-
-A separate TS project: the Figma Plugin sandbox has **no** Node.js types, hence
-`types: ["@figma/plugin-typings"]` and `lib: ["ES2020"]`, kept apart.
-
-```json
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "noEmit": true,
-    "types": ["@figma/plugin-typings"],
-    "lib": ["ES2020"]
-  },
-  "include": ["scripts/figma/**/*.ts"],
-  "exclude": []
-}
-```
-
-The root `tsconfig.json` must then **exclude** `scripts/figma/**`.
-
-### MCP configuration (`.vscode/mcp.json`, not in the repository today)
-
-The `figma-console-mcp` server must be registered again. The golden rule back
-then: **never edit the source Figma kit by hand** — everything goes through these scripts.
+- `color/static/white` and `color/static/black` have the same value in the
+  four modes.
+- No alias of a `nova-light` or `nova-dark` mode points to a `violet` or a
+  `mist` primitive: nova's neutrals are `stone`.
+- `radius/surface`, `radius/control`, `radius/item`, `radius/inset`,
+  `radius/mark` and `radius/pill` are `0` in `light` and `dark`, and `14`,
+  `10`, `8`, `6`, `4` and `9999` in the two nova modes.
+- `typography/size/ui` is `12` in lyra and `14` in nova.
+- Every Semantic alias points to the `Primitive` collection, and every
+  Component alias to the `Semantic` one.
 
 ---
 
-## 7. Building block 5 — Inventory metadata
+## 5. Styles
 
-### `design-system.index.json`
+### Text styles
 
-```jsonc
-{
-  "library": {
-    "figma_file_key": "<FIGMA_FILE_KEY>",
-    "figma_site": "https://www.figma.com/design/<FIGMA_FILE_KEY>/DSAIReadable",
-    "last_publish": "2025-07-08T12:00:00Z",
-  },
-  "inventory": [
-    {
-      "name": "Button",
-      "figma_node_id": "176:2322",
-      "code_path": "components/ui/button.tsx",
-      "status": "stable",
-    },
-  ],
-  "glossary": {
-    "figma_node_id": "The Figma node identifier for a component instance. Used by Code Connect to map Figma instances to code. Null until Figma components are published in the library.",
-  },
-}
-```
+`specs/foundations/typography.md` holds the type system. Each style binds its
+family, size, line height and weight to Semantic variables, so that one style
+follows the brand: lyra sets the interface in JetBrains Mono, nova in Lora with
+DM Sans headings.
 
-### `design-system.schema.json`
+| Style                      | Family (`typography/font-family/…`) | Size and line height (`typography/size/…`) | Weight     | Letter spacing |
+| -------------------------- | ----------------------------------- | ------------------------------------------ | ---------- | -------------- |
+| `role/ui`                  | `body`                              | `ui`                                       | `normal`   | 0              |
+| `role/ui-medium`           | `body`                              | `ui`                                       | `medium`   | 0              |
+| `role/description`         | `body`                              | `description`                              | `normal`   | 0              |
+| `role/title`               | `heading`                           | `title`                                    | `medium`   | 0              |
+| `role/control`             | `body`                              | `control`                                  | `normal`   | 0              |
+| `heading/1` to `heading/4` | `heading`                           | `2xl`, `xl`, `lg`, `base`                  | `semibold` | -2.5%          |
+| `fixed/xs` to `fixed/4xl`  | `body`                              | `xs` to `4xl`, the 8 fixed sizes           | `normal`   | 0              |
+| `code`                     | `mono`                              | `sm`, line height 162.5%                   | `normal`   | 0              |
 
-- `library`: the object was removed along with `last_publish` (P3-09: only the
-  Figma library filled it in). Add it back at the root (`required` and
-  `properties`), with `required: ["last_publish", "figma_file_key"]` and the
-  `last_publish`, `figma_file_key` and `figma_site` properties (strings,
-  `additionalProperties: false`);
-- `inventory.items.required`: add `"figma_node_id"` back;
-- `inventory.items.properties.figma_node_id`: `{ "type": ["string","null"] }`.
+A size takes the line height of the same name
+(`typography/size-line-height/<name>`). A combination no style holds is set on
+the layer with the same variables; it does not get a style.
 
-### `specs/components/*.md` — **kept, emptied**
+In nova, the text typed in a field (`role/control`) is 16px on a phone and
+14px from the `md` breakpoint up. A variable mode holds one value: the style
+carries the 16px of the token.
 
-The `| figma_node_id | |` row is **still present in all 59 specs**, with an
-empty value. It is the intended anchor: repopulate it from the §2 table.
-`mcp-server/src/context/generate.ts` no longer reads it; restoring
-`figma_node_id: get("figma_node_id") || null` (below) is what brings it back to
-the MCP context.
+### Effect styles
 
-Two sections were also renamed and one was deleted:
+Figma has no shadow variable. Each of the 14 `primitive.elevation` tokens is an
+effect style, named as the primitive is: `elevation/light/md`,
+`elevation/dark/md`, for `xs`, `sm`, `md`, `lg`, `xl`, `2xl` and `inner`. A
+`$value` is one layer or a list of layers; each has a color (`hex` and
+`alpha`), `offsetX`, `offsetY`, `blur` and `spread` in pixels, and
+`"inset": true` makes it an inner shadow.
 
-| File                                | Before                            | After         |
-| ----------------------------------- | --------------------------------- | ------------- |
-| `specs/components/Heading.md`       | A "Figma variants" section        | `## Variants` |
-| `specs/components/PasswordInput.md` | A "Figma variants" section        | `## Variants` |
-| `specs/components/Illustration.md`  | A "Figma notes" section (2 lines) | deleted       |
+The two schemes share their geometry and differ in the alpha of their layers. A
+style does not follow a variable mode: a component drawn in a dark frame takes
+the `dark` style by hand. Nova keeps lyra's shadows.
 
-### `mcp-server/src/context/generate.ts`
+### Fonts and icons
 
-To restore:
-
-- the type `inventory[].figma_node_id: string | null`;
-- `components.json`: the `figma_node_id` and
-  `has_code_connect: existsSync(code_path.replace(/\.tsx$/, ".figma.tsx"))` fields;
-- the `components/ui/` scan filter: `!f.endsWith(".figma.tsx")`;
-- `component-specs.json`: `figma_node_id: get("figma_node_id") || null`;
-- `ds-metadata.json`: a `figma: { file_key, site, last_publish }` block.
-
-### `mcp-server/src/tools/ds-core.ts` and `admin.ts`
-
-To restore: `figma_coverage` and `code_connect_coverage` in the stats, and the
-`figma: { file_key, site }` block in `ds_overview`.
-
-### `mcp-server/src/index.ts`
-
-```ts
-const DEFAULT_ALLOWED_ORIGINS = [
-  "https://www.figma.com", // required for Figma Make in HTTP mode
-  "https://figma.com",
-  `http://localhost:${port}`,
-  `http://127.0.0.1:${port}`,
-]
-```
-
-And the server description ended with `… tokens, Figma-synced`.
-
-### ~~`packages/make-kit`~~ — obsolete section
-
-The `make-kit` package was **deleted from the repository** (decision of 2026-09-17): it
-was the delivery vehicle for Figma Make, and its npm scope `@DSAIReadable` — npm
-forbids capitals — could not have been published anyway. The single distribution
-channel is now the **shadcn registry** carried by this repository.
-
-Nothing to restore here. For the record, the Figma elements it carried were:
-`publishConfig.registry` pointing to `registry.figma.com`, a `## Figma library`
-section in its README, a `> Figma library: …` header in `guidelines.md`, a copy
-of `design-system.index.json` and an `.npmrc` redirecting the scope to the Figma
-registry.
+- **Fonts**: JetBrains Mono and Geist for lyra; Lora, DM Sans and Geist Mono
+  for nova. All five are Google Fonts, at weights 400 to 700.
+- **Icons**: Phosphor only, the library the code imports
+  (`@phosphor-icons/react`), in its `regular` weight, at 16px inside a
+  component unless its spec's Tokens table names another size. An icon is an
+  instance from a Phosphor icon library for Figma, never a drawn vector.
+- **Artwork**: `Logo` and `Illustration` are placeholders drawn as inline SVG in
+  `components/ui/logo.tsx` and `components/ui/illustration.tsx`. Their paths
+  are imported from those files.
 
 ---
 
-## 8. Suggested reintegration procedure
+## 6. Structure of the file
 
-The building blocks are independent; doing them in this order keeps the risk down.
+| Page                                  | Holds                                                                                                                                                               |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Cover`                               | The name, the version built from (`v0.5.0`), the two links                                                                                                          |
+| `Foundations`                         | One section per foundation that Figma can show: color (the semantic roles, in the four modes), typography, radius, spacing, elevation, focus, icons, motion as text |
+| One page per category, 11 in all      | The components of the category, one section per component: the component set, then its parts                                                                        |
+| `Theme check`                         | The same sample of components in four frames, one per mode of the `Semantic` collection                                                                             |
+| `Patterns`, once the components exist | The 12 page patterns of `specs/patterns/`, each as a screen made of instances                                                                                       |
 
-1. **Metadata first** (building block 5) — repopulate `figma_node_id` in the
-   specs from §2, then `design-system.index.json` + `design-system.schema.json`,
-   then restore the fields in `generate.ts` / `ds-core.ts` / `admin.ts`.
-   → `npm run generate-context && npm run typecheck:mcp`
-2. **Tokens going up** (building block 2) — `figma-push-variables.py`: the source
-   of truth flows out of the code, so it carries no risk for the design system.
-   → `npm run figma:push:dry`
-3. **Tokens coming down** (building block 3) — `tokens-diff.ts`, then wire it back
-   into `tokens-validate` **only once it passes**, otherwise CI breaks.
-4. **Code Connect** (building block 1) — reinstall `@figma/code-connect`, recreate
-   `figma.config.json` + `types/figma-code-connect.d.ts` + the tsconfig / eslint
-   overrides, then restore the `.figma.tsx` files from the §0 archive.
-   → `npm run typecheck:figma && npx figma connect publish`
-5. **Figma component generation** (building block 4) — the heaviest; only redo
-   it if the Figma kit has to be regenerated from scratch.
+The 67 components by category, as each spec's Metadata says (`beta` marks the
+17 components whose API can still change):
 
-### Verification checklist
-
-```bash
-npm run typecheck:all
-npm run tokens-validate
-npm run generate-context
-npm run test
-```
+| Category     | Components                                                                                                                                                                             |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Forms        | Button, Checkbox, Combobox (beta), Command, Field (beta), Input, InputGroup (beta), InputOtp, Label, NativeSelect, PasswordInput, RadioGroup, Select, Slider, Switch, Textarea, Toggle |
+| Layout       | AspectRatio, Card, Collapsible, Direction (beta), Resizable, ScrollArea, Separator, Sidebar, Skeleton                                                                                  |
+| Overlay      | AlertDialog, ContextMenu, Dialog, Drawer, DropdownMenu, HoverCard, Popover, Sheet                                                                                                      |
+| Navigation   | Accordion, Breadcrumb, Menubar, NavigationMenu, Pagination, Tabs                                                                                                                       |
+| Data         | Calendar, Carousel, Chart, Progress, Table                                                                                                                                             |
+| Feedback     | Alert, Empty (beta), Sonner, Spinner (beta), Tooltip                                                                                                                                   |
+| Conversation | Attachment (beta), Bubble (beta), Marker (beta), Message (beta), MessageScroller (beta), Questionnaire (beta), Trace (beta)                                                            |
+| Misc         | Avatar, Badge, ButtonGroup (beta), Item (beta), Kbd (beta), ToggleGroup                                                                                                                |
+| Typography   | CodeBlock (beta), Heading                                                                                                                                                              |
+| Media        | Illustration                                                                                                                                                                           |
+| Brand        | Logo                                                                                                                                                                                   |
 
 ---
 
-## 9. What matters for an "AI-driven design system"
+## 7. Components
 
-The Figma layer carried two things of a different nature:
+One component of the code is one section of its category page. Read its spec
+first, whole.
 
-- **synchronization plumbing** (building blocks 1–4) — useless to an AI agent that
-  generates code, since it reads the specs and the tokens directly;
-- **design semantics** (the `instructions` field of the Code Connect files, the
-  "Figma variants" tables) — **valuable** to an agent.
+| In the spec                        | In Figma                                                                                                                                                                                                                                                     |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Metadata**, **Role**             | The component's name, its React export (`Button`, `CardHeader`, `DropdownMenuItem`), and its description: the Role sentence, `beta` when the status says so, and the link to the spec                                                                        |
+| **Anatomy**                        | The layers. A part that has its own export is its own component, placed in the section of its root and nested as an instance; a layer is named after its `data-slot`                                                                                         |
+| **Variants**, **Props / API**      | The properties. A `cva` axis or a prop typed as a union of literals is a variant property, named as the prop and holding its values as written; a `boolean` prop is a boolean property; the text child is a text property; the default of each is the code's |
+| **States**                         | A `state` variant property, holding the states the table lists and no other. Button has `default`, `hover`, `focus`, `active`, `open`, `disabled`, `error` and `loading`                                                                                     |
+| **Tokens**                         | The bindings. Each row names a token, the classes that read it and the part or the variant that carries them: bind the variable of that token, at that place                                                                                                 |
+| **Constraints**, **Accessibility** | The component's description keeps the constraints a designer can break: an icon-only button needs a name, a view takes at most two primary buttons                                                                                                           |
 
-Those semantics were not lost: they overlap with `specs/components/*.md`
-(`## Role`, `## Usage`, `## Constraints`, `## Props / API`) and with
-`mcp-server/context/component-specs.json`. **If building block 1 is reintegrated,
-generate the `instructions` from the specs instead of maintaining them twice.**
+How a class becomes a property of a layer:
+
+- **Layout**: every component is an auto layout frame. `gap-*`, `p-*`, `px-*`,
+  `h-*` and `size-*` read the spacing scale: `h-8` is `space/scale/8`, 32px;
+  `px-2.5` is `space/scale/2-5`.
+- **Corners**: the radius role its Tokens table names (`radius/control` for a
+  button, `radius/surface` for a card), never a number. Lyra is square because
+  its roles are `0`, not because the corner is unset. A seam (`rounded-none`)
+  is `0`, and a round shape (`rounded-full`) is fully rounded, in every brand.
+- **A color with an opacity modifier**: `bg-destructive/10` is the variable of
+  `color.feedback.error.default` on a fill at 10% opacity.
+- **Disabled**: the layer's opacity bound to `opacity/disabled`.
+- **Focus**: one ring for every component, from `specs/foundations/focus.md`: a
+  1px solid stroke in `color/border/focus`, and around it a halo
+  `space/focus-ring-width` wide (2px) in the same color at 50%. A destructive
+  or invalid control draws the ring its States table gives.
+- **Target size**: a pointer target is at least `size/target/min`, 24px.
+
+The size of a component set stays bounded: the full matrix of `variant` and
+`size` at the `default` state, and the other states for every `variant` at the
+default size.
+
+An overlay (Dialog, Popover, DropdownMenu, Tooltip, Sheet, Drawer…) is drawn
+open: its content panel is the component, and its trigger is an instance of
+Button.
+
+Five components are not a drawing of their own:
+
+| Component         | What to build                                                                                                               |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `Direction`       | Nothing: a provider of the reading direction, with nothing to render                                                        |
+| `AspectRatio`     | A frame with a locked ratio, shown at 16:9, 4:3 and 1:1                                                                     |
+| `Sonner`          | The toast it renders, in each of its types (`success`, `error`, `warning`, `info`, `loading`)                               |
+| `Chart`           | Its container, tooltip and legend, bound to `color/chart/1` to `color/chart/5`. A plot is a static example, not a component |
+| `MessageScroller` | Its frame and its two jump buttons; scrolling is behavior                                                                   |
+
+### The order
+
+A component is built after the components it renders. From the dependencies of
+`registry.json`:
+
+1. **First, 47 components that render no other**: Accordion, Alert, AspectRatio,
+   Avatar, Badge, Breadcrumb, Bubble, Button, Card, Chart, Checkbox,
+   Collapsible, ContextMenu, Direction, Drawer, DropdownMenu, Empty, Heading,
+   HoverCard, Illustration, Input, InputOtp, Kbd, Label, Logo, Marker, Menubar,
+   Message, NativeSelect, NavigationMenu, Popover, Progress, RadioGroup,
+   Resizable, ScrollArea, Select, Separator, Skeleton, Slider, Sonner, Spinner,
+   Switch, Table, Tabs, Textarea, Toggle, Tooltip.
+2. **Then 16 that render one of them**: AlertDialog, Attachment, ButtonGroup,
+   Calendar, Carousel, CodeBlock, Dialog, Field, InputGroup, Item,
+   MessageScroller, Pagination, Questionnaire, Sheet, ToggleGroup, Trace.
+3. **Then 4**: Combobox, Command, PasswordInput, Sidebar.
+
+Button, Input, Label, Separator and Spinner come first within the first group:
+most of the others hold one.
+
+---
+
+## 8. Prompts
+
+One phase per prompt, in a new chat each time, with the files of § 1 attached.
+Check each phase (§ 10) before starting the next.
+
+**Variables**
+
+```text
+Build the variables of the DSAIReadable design system in this file, from the
+attached token files. Follow § 4 of the attached FIGMA_REINTEGRATION.md exactly:
+three collections (Primitive, Semantic, Component), four modes on Semantic
+(light, dark, nova-light, nova-dark), each variable named by its token path
+with slashes, each Semantic variable an alias of a Primitive variable in every
+mode, with the fallback of the Themes table. Take each color from the hex and
+alpha of tokens/primitive.json. Invent no variable. When you are done, report
+the number of variables per collection and every token you could not create.
+Source: https://github.com/Toniio/DSAIReadable.git at tag v0.5.0.
+```
+
+**Styles**
+
+```text
+Create the text styles and the effect styles of § 5 of the attached
+FIGMA_REINTEGRATION.md, bound to the Semantic variables of this file. The
+attached typography.md and elevation.md are the reference; primitive.json holds
+the layers of each shadow. Then build the Foundations page of § 6. Create no
+style that § 5 does not list.
+```
+
+**Components, one batch**
+
+```text
+Build these components of the DSAIReadable design system on the <Category>
+page: <Component>, <Component>, <Component>. Their specs are attached, with a
+screenshot of each from https://toniio.github.io/DSAIReadable/components/.
+Follow § 3 and § 7 of the attached FIGMA_REINTEGRATION.md: names, properties
+and values exactly as the spec writes them, every fill, stroke, radius, gap and
+text bound to the variable its Tokens table names, auto layout everywhere, the
+states of its States table. Use the components this file already has as
+instances. Report every class you could not express, by component.
+```
+
+**Check**
+
+```text
+Audit this file against § 10 of the attached FIGMA_REINTEGRATION.md. For each
+check, answer pass or fail with the layers that fail. Change nothing.
+```
+
+Batches of three to five components keep a prompt within what the agent holds
+at once: a spec runs from 120 to 465 lines.
+
+---
+
+## 9. What Figma does not hold
+
+Each of these is a declared difference between the library and the code, not a
+defect to work around:
+
+| In the code                                                        | In Figma                                                                                                                                                                    |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Colors in OKLCH                                                    | sRGB, from the `hex` each primitive carries                                                                                                                                 |
+| Sizes in `rem`                                                     | Pixels, at 16 to the `rem`                                                                                                                                                  |
+| Letter spacing in `em`                                             | A percentage in the text styles                                                                                                                                             |
+| Shadows that follow the color scheme                               | Two sets of effect styles, switched by hand                                                                                                                                 |
+| `dark:` classes: 21 components bind a different token in dark mode | A variable mode changes a value, not which variable a layer reads. The component holds the light binding, and each such layer is listed in the build report, with its class |
+| Motion (`motion.duration.*`, `motion.easing.*`), reduced motion    | Text on the Foundations page. Prototyping is set by hand                                                                                                                    |
+| Stacking order (`zindex.*`)                                        | Documentation only                                                                                                                                                          |
+| Breakpoints, responsive classes (`md:text-ui`)                     | Numbers for frame widths; a component is drawn at its base size                                                                                                             |
+| Keyboard behavior, roles, accessible names                         | The spec's Accessibility section; nothing to draw                                                                                                                           |
+| Default strings (`lib/ui-strings.ts`)                              | The text of the layers, in English as the code ships them                                                                                                                   |
+
+---
+
+## 10. Checks
+
+**Variables**
+
+- [ ] Three collections: `Primitive` (263 variables, hidden from publishing),
+      `Semantic` (207, four modes), `Component` (33).
+- [ ] Every Semantic and Component variable is an alias; none holds a raw value.
+- [ ] The five statements of § 4, _What must hold once the variables exist_.
+- [ ] Every published variable has its description and its Web code syntax.
+
+**Styles**
+
+- [ ] 18 text styles, each bound to variables for family, size, line height and
+      weight.
+- [ ] 14 effect styles, `elevation/light/*` and `elevation/dark/*`.
+
+**Components**
+
+- [ ] 66 component sections, Direction left out, each on the page of its
+      category.
+- [ ] Each property and each value of a component exists in its spec, with the
+      same spelling and the same default.
+- [ ] No layer holds a raw color, radius, gap or font size; none reads a
+      Primitive variable.
+- [ ] Switching a frame through the four modes changes colors in all four, and
+      corners, typefaces and component text sizes between lyra and nova.
+- [ ] Every focusable component has its `focus` state, with the ring of § 7.
+- [ ] Every icon is a Phosphor instance.
+
+**Against the site**
+
+- [ ] Each component, side by side with its page of the site in lyra light and
+      nova dark: same spacing, same corners, same colors.
+
+---
+
+## 11. Once the library exists
+
+1. **Publish it**, with the `Primitive` collection hidden.
+2. **Attach guidelines to it** (_Library → Manage guidelines_), so that the
+   agent follows the system when it designs with the library. Figma takes
+   Markdown, text and JSON files, 200 KB in all, and recommends three to eight
+   files under 100 KB
+   ([Add guidelines files to a design library](https://help.figma.com/hc/en-us/articles/43509372175511-Add-guidelines-files-to-a-design-library)).
+   Five foundations fit, at 94 KB: `specs/foundations/color.md`,
+   `typography.md`, `radius.md`, `spacing.md` and `voice-and-tone.md`. They are
+   written for code, and name the same roles and tokens the variables carry.
+3. **Report the node ids.** Every spec keeps an empty `figma_node_id` row in its
+   Metadata, the anchor for the Figma component. Filling those rows is a change of
+   this repository, with its own pull request.
+4. **Decide what comes back into the repository.** The removed layer did five
+   jobs, each independent of the others:
+
+   | Job                                                                | State                                                                                             |
+   | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+   | Creating the Figma components from the code                        | Replaced by this document and the Figma agent                                                     |
+   | Pushing the tokens to Figma variables                              | Replaced by § 4. A script returns only if the variables must follow each release without a prompt |
+   | Detecting drift between the tokens and the variables               | Not rebuilt. It was part of `tokens-validate`, so it could fail CI on a change made in Figma      |
+   | Code Connect, the mapping from a Figma component to its React code | Not rebuilt. With names and values verbatim (§ 3), a mapping is one line per component            |
+   | Inventory metadata (`figma_node_id`, the library's file key)       | The empty row of each spec; nothing reads it today                                                |
+
+   The spec of that layer — its scripts, its dependencies, its configuration and
+   the node ids of the former file — is the version of this document at the
+   `v0.5.0` tag:
+   [`FIGMA_REINTEGRATION.md` at v0.5.0](https://github.com/Toniio/DSAIReadable/blob/v0.5.0/FIGMA_REINTEGRATION.md).
+   It describes the 59 components and the two themes of September 2026, and its
+   node ids belong to a file that is no longer the reference.
+
+The key of the Figma file and any access token stay out of the repository.

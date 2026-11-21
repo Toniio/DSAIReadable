@@ -4,7 +4,7 @@
 
 This repository is a **code-first design system**: the React components, the tokens and the machine-readable documentation have a single source, in the code. Every visual value has a single source.
 
-> The Figma integration layer has been removed. Reintegration spec: [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).
+> The Figma integration layer has been removed. The brief for rebuilding the Figma library from the code: [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).
 
 ---
 

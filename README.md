@@ -36,7 +36,7 @@ The project started from one observation: for an LLM to generate code that confo
 
 5. **Validation CI** — GitHub Actions checks the DTCG naming of the tokens and the absence of raw values in components on every push and PR.
 
-> The Figma integration layer (Code Connect, variable sync, component generation) has been removed from the repository. See [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md) for the reintegration spec.
+> The Figma integration layer (Code Connect, variable sync, component generation) has been removed from the repository. [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md) is the brief for rebuilding the Figma library from the code.
 
 ---
 
@@ -479,8 +479,10 @@ The integration layer with a design tool (Code Connect, variable sync,
 programmatic component generation) has been removed from the repository to keep
 the design system **code-first** and driven by AI agents only.
 
-The full reintegration spec — node-id mapping, script behavior, dependencies and
-configuration — is kept in [`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md).
+A Figma library is rebuilt from the code, not maintained beside it:
+[`FIGMA_REINTEGRATION.md`](./FIGMA_REINTEGRATION.md) is the brief a Figma agent
+follows — the variables of the four themes, the styles, the 67 components and
+the checks — and it says where the spec of the removed layer is kept.
 
 ---
 
