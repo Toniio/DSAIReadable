@@ -302,11 +302,11 @@ export default function AuditsPage() {
             Stage A: it compiles against the real components and lints clean
             with the design system&apos;s ESLint plugin. Stage B: in headless
             Chromium, no axe violation and a visible focus indicator on every
-            tab stop, in light and dark. Conformance is the mean of the stages
-            that ran. The page shows the latest version measured; earlier runs
-            stay in <code className="font-mono">evals/history/</code>. A
-            condition run in several passes has a row per pass and its mean in
-            the chart.
+            tab stop, in the four themes: lyra and nova, light and dark.
+            Conformance is the mean of the stages that ran. The page shows the
+            latest version measured; earlier runs stay in{" "}
+            <code className="font-mono">evals/history/</code>. A condition run
+            in several passes has a row per pass and its mean in the chart.
           </>
         }
       >

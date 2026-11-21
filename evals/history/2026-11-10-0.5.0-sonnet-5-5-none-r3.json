@@ -1,0 +1,1175 @@
+{
+  "label": "0.5.0-sonnet-5-5-none-r3",
+  "date": "2026-11-10",
+  "generator": "replay",
+  "model": "claude-sonnet-5-5",
+  "context": "none",
+  "skills": [],
+  "via": "claude-code 2.1.318",
+  "generated": {
+    "run": "0.5.0-sonnet-5-5-none-r3",
+    "commit": "a0e2e3d575b7fb0150e8cd731ee27d230ae20868",
+    "version": "0.5.0",
+    "dirty": false,
+    "sources": "84ac3b5c80c3200d",
+    "effort": "high",
+    "maxTurns": 25,
+    "modelOption": "claude-sonnet-5-5",
+    "claudeCode": "2.1.318",
+    "sessionPlugins": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-privacy@builtin",
+      "cc-plugin-telemetry@builtin"
+    ]
+  },
+  "designSystem": {
+    "version": "0.5.0",
+    "commit": "a0e2e3d575b7fb0150e8cd731ee27d230ae20868"
+  },
+  "summary": {
+    "tasks": 26,
+    "generated": 26,
+    "stageA": {
+      "compiles": 1,
+      "lint": 0.731,
+      "coverage": 0.761,
+      "pass": 0.731,
+      "lintByFamily": {
+        "native-elements": 6,
+        "off-system-classes": 2
+      }
+    },
+    "stageB": {
+      "renders": 1,
+      "axe": 0.923,
+      "focus": 1,
+      "pass": 0.923
+    },
+    "stageC": null,
+    "conformance": 0.827,
+    "generation": {
+      "turns": 26,
+      "mcpCalls": 0,
+      "otherCalls": 0,
+      "toolErrors": 0,
+      "inputTokens": 60232,
+      "outputTokens": 89687,
+      "turnCapReached": 0,
+      "medianInputTokens": 2271.5,
+      "medianTurns": 1,
+      "results": {}
+    }
+  },
+  "tasks": [
+    {
+      "id": "sign-in",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2293,
+        "outputTokens": 2832,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2293,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0299064
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.5,
+        "missing": [
+          "field",
+          "heading",
+          "password-input",
+          "spinner"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "create-project",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2279,
+        "outputTokens": 3665,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2279,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0382428
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.8,
+        "missing": [
+          "field"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "delete-project",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2282,
+        "outputTokens": 2970,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2282,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0312892
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "edit-project",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2270,
+        "outputTokens": 4010,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2270,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.04168799999999999
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.8,
+        "missing": [
+          "field"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "empty-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2269,
+        "outputTokens": 3948,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2269,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0410679
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "154:19 dsaireadable/no-native-interactive-elements Use Button (`@/components/ui/button`) instead of a native <button>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 0.5,
+        "missing": [
+          "empty"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "filter-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2289,
+        "outputTokens": 3672,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2289,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.038309899999999994
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.6666666666666666,
+        "missing": [
+          "toggle-group"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "account-form",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2284,
+        "outputTokens": 5471,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2284,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0562994
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "253:25 dsaireadable/no-native-interactive-elements Use Button (`@/components/ui/button`) instead of a native <button>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 0.5,
+        "missing": [
+          "field",
+          "radio-group"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "loading-cards",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2257,
+        "outputTokens": 2034,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2257,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.021930599999999998
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-navigation",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2279,
+        "outputTokens": 4740,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2279,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0489928
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.5,
+        "missing": [
+          "heading",
+          "sidebar"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "save-profile",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2277,
+        "outputTokens": 3713,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2277,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.038718699999999995
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.6,
+        "missing": [
+          "field",
+          "spinner"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "search-projects",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2291,
+        "outputTokens": 2090,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2291,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0224901
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0.25,
+        "missing": [
+          "empty",
+          "input-group",
+          "item"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "settings-page",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2268,
+        "outputTokens": 5812,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2268,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0597078
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "146:15 dsaireadable/no-native-interactive-elements Use Button with `asChild` (`@/components/ui/button`), which keeps the look of the design system instead of a native <a>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 0.6666666666666666,
+        "missing": [
+          "field",
+          "heading"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "invoices-table",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2265,
+        "outputTokens": 1965,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2265,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.021233600000000002
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "results-pagination",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2274,
+        "outputTokens": 3968,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2274,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.041264499999999996
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "169:17 dsaireadable/no-native-interactive-elements Use Button with `asChild` (`@/components/ui/button`), which keeps the look of the design system instead of a native <a>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "visitors-chart",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2265,
+        "outputTokens": 3025,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2265,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0318375
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "app-sidebar",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2273,
+        "outputTokens": 4483,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2273,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0464105
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "command-palette",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2265,
+        "outputTokens": 5399,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2265,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.055577499999999995
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "71:73 better-tailwindcss/no-unknown-classes Unknown class detected: rounded",
+          "154:29 better-tailwindcss/no-unknown-classes Unknown class detected: dark"
+        ],
+        "lintByFamily": {
+          "off-system-classes": 2
+        },
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": false,
+        "focus": true,
+        "failures": [
+          "axe: AssertionError: light label-content-name-mismatch: button\ndark label-content-name-mismatch: button\nnova-light label-content-name-mismatch: button\nnova-dark label-content-name-mismatch: button: expected [ …(4) ] to deeply equal []"
+        ]
+      }
+    },
+    {
+      "id": "account-tabs",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2263,
+        "outputTokens": 3731,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2263,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.03889729999999999
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "date-picker",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2252,
+        "outputTokens": 2329,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2252,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0248723
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "attachments",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2265,
+        "outputTokens": 3543,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2265,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.037017499999999995
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 0,
+        "missing": [
+          "attachment",
+          "spinner"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "chat-thread",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2275,
+        "outputTokens": 5124,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2275,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.052828499999999994
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "295:11 dsaireadable/no-native-interactive-elements Use Label (`@/components/ui/label`), or FieldLabel inside a Field instead of a native <label>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 0,
+        "missing": [
+          "bubble",
+          "message",
+          "message-scroller"
+        ]
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "faq",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2254,
+        "outputTokens": 1214,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2254,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0137264
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "user-menu",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2268,
+        "outputTokens": 2386,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2268,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0254439
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": false,
+        "lintErrors": [
+          "53:11 dsaireadable/no-native-interactive-elements Use Button (`@/components/ui/button`) instead of a native <button>: it carries the design system's tokens, states and accessibility."
+        ],
+        "lintByFamily": {
+          "native-elements": 1
+        },
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": false,
+        "focus": true,
+        "failures": [
+          "axe: AssertionError: light label-content-name-mismatch: #radix-_r_5p_\ndark label-content-name-mismatch: #radix-_r_5p_\nnova-light label-content-name-mismatch: #radix-_r_5p_\nnova-dark label-content-name-mismatch: #radix-_r_5p_: expected [ …(4) ] to deeply equal []"
+        ]
+      }
+    },
+    {
+      "id": "verification-code",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2257,
+        "outputTokens": 3698,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2257,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.038566699999999995
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-plan-choice",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2902,
+        "outputTokens": 1472,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2902,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.016371200000000002
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    },
+    {
+      "id": "add-notifications",
+      "generated": true,
+      "metrics": {
+        "turns": 1,
+        "toolCalls": 0,
+        "toolErrors": 0,
+        "inputTokens": 2816,
+        "outputTokens": 2393,
+        "tools": {},
+        "results": {},
+        "timeline": [
+          {
+            "context": 2816,
+            "calls": []
+          }
+        ]
+      },
+      "session": {
+        "subtype": "success",
+        "numTurns": 1,
+        "stopReason": "end_turn",
+        "costUsd": 0.0255726
+      },
+      "static": {
+        "compiles": true,
+        "typeErrors": [],
+        "lint": true,
+        "lintErrors": [],
+        "lintByFamily": {},
+        "coverage": 1,
+        "missing": []
+      },
+      "a11y": {
+        "renders": true,
+        "axe": true,
+        "focus": true,
+        "failures": []
+      }
+    }
+  ]
+}
