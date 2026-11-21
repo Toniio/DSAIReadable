@@ -67,7 +67,7 @@ function MessageScrollerStory({ args }: { args: Args }) {
   }
   return (
     <div className="flex w-full max-w-md flex-col gap-3">
-      <div className="h-80 border">
+      <div className="h-80 rounded-surface border">
         <MessageScrollerProvider
           defaultScrollPosition={s.position}
           autoScroll={s.autoScroll}
@@ -176,7 +176,7 @@ function code(args: Args): string {
     "  const [messages, setMessages] = useState(thread)",
     "  return (",
     '    <div className="flex w-full max-w-md flex-col gap-3">',
-    '      <div className="h-80 border">',
+    '      <div className="h-80 rounded-surface border">',
     `        <MessageScrollerProvider${attrs(provider)}>`,
     "          <MessageScroller>",
     '            <MessageScrollerViewport aria-label="Order support conversation">',

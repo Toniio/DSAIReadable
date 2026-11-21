@@ -10,6 +10,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { useSiteBrand } from "@/site/ui/use-site-brand"
 
 export interface EvalBar {
   /** The measurement, as the axis names it: `MCP · 0.1.1`, `MCP · 0.2.0 · 3 passes`. */
@@ -34,8 +35,15 @@ const SERIES = Object.keys(CONFIG) as (keyof typeof CONFIG)[]
  * mean of its passes when it has several.
  */
 export function EvalChart({ data }: { data: EvalBar[] }) {
+  // The category axis measures its labels once: a brand sets another
+  // typeface and size, so a switch mounts the chart again to measure anew.
+  const brand = useSiteBrand()
   return (
-    <ChartContainer config={CONFIG} className="aspect-auto h-96 w-full">
+    <ChartContainer
+      key={brand}
+      config={CONFIG}
+      className="aspect-auto h-96 w-full"
+    >
       <BarChart
         accessibilityLayer
         aria-label="Eval scores by recorded run, in percent"

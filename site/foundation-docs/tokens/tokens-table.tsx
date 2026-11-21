@@ -63,6 +63,11 @@ function haystack(row: TokenRow): string {
     .toLowerCase()
 }
 
+/**
+ * A value of the Light or Dark column. It keeps text-xs in nova, where the
+ * rest of the row takes text-ui: at 14px an oklch value breaks inside its
+ * numbers in the w-32 column.
+ */
 function Value({
   row,
   value,
@@ -78,7 +83,7 @@ function Value({
         <Fill
           value={value}
           surface={surface}
-          className="size-4 shrink-0 border"
+          className="size-4 shrink-0 rounded-mark border"
         />
       ) : null}
       <span className="min-w-0 font-mono text-xs break-words">{value}</span>
@@ -103,7 +108,7 @@ function ModeCell({
         return value !== undefined ? (
           <Value row={row} value={value} surface={surfaces[brand][mode]} />
         ) : (
-          <span className="text-xs text-muted-foreground">Same as light</span>
+          <span className="text-ui text-muted-foreground">Same as light</span>
         )
       }}
     </InBrand>
@@ -242,7 +247,7 @@ export function TokensTable({ data }: { data: TokensData }) {
         />
       </div>
 
-      <p role="status" className="text-xs text-muted-foreground">
+      <p role="status" className="text-ui text-muted-foreground">
         {rows.length === data.rows.length
           ? `${rows.length} tokens`
           : `${rows.length} of ${data.rows.length} tokens match`}
@@ -288,10 +293,10 @@ export function TokensTable({ data }: { data: TokensData }) {
             >
               <TableCell className="align-top whitespace-normal">
                 <div className="flex flex-col items-start gap-1">
-                  <span className="font-mono text-xs font-medium break-words">
+                  <span className="font-mono text-ui font-medium break-words">
                     <DottedName name={row.token} />
                   </span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-ui text-muted-foreground">
                     {row.tier} · {row.type}
                   </span>
                 </div>
@@ -313,7 +318,7 @@ export function TokensTable({ data }: { data: TokensData }) {
                     ))}
                   </ul>
                 ) : (
-                  <span className="text-xs text-muted-foreground">—</span>
+                  <span className="text-ui text-muted-foreground">—</span>
                 )}
               </TableCell>
               <TableCell className="align-top whitespace-normal">
@@ -329,13 +334,13 @@ export function TokensTable({ data }: { data: TokensData }) {
                     <StatusBadge status={row.status} />
                   </span>
                 ) : row.status === "active" ? (
-                  <span className="text-xs text-muted-foreground">active</span>
+                  <span className="text-ui text-muted-foreground">active</span>
                 ) : (
                   // The replacement goes under the badge, which never wraps.
                   <span className="flex flex-col items-start gap-1">
                     <StatusBadge status={row.status} />
                     {row.replacement ? (
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-ui text-muted-foreground">
                         Use <Code>{row.replacement}</Code>
                       </span>
                     ) : null}

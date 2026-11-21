@@ -60,7 +60,7 @@ const ICONS: Record<string, Icon> = {
 }
 
 const CARD = cn(
-  "group flex h-full flex-col gap-3 border bg-background p-4 transition-colors hover:bg-muted",
+  "group flex h-full flex-col gap-3 rounded-surface border bg-background p-4 transition-colors hover:bg-muted",
   FOCUS_OUTLINE_RESET,
   FOCUS_RING
 )
@@ -92,34 +92,40 @@ export default function FoundationsPage() {
         title="Foundations"
         lead={`The decisions every component is built from: ${tiers.semantic} semantic tokens across ${tokenPages} foundations, in light and dark, and the guidelines that say how to use them.`}
       >
-        <dl className="grid gap-px border bg-border sm:grid-cols-3">
+        <dl className="grid gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3">
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">
+            <dt className="text-ui text-muted-foreground">
               Tier 1 · Primitive
             </dt>
             <dd className="flex flex-col gap-1">
-              <span className="text-2xl font-semibold">{tiers.primitive}</span>
-              <span className="text-xs leading-relaxed text-muted-foreground">
+              <span className="font-heading text-2xl font-semibold">
+                {tiers.primitive}
+              </span>
+              <span className="text-description text-muted-foreground">
                 Raw values. Private: only semantic tokens read them.
               </span>
             </dd>
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Tier 2 · Semantic</dt>
+            <dt className="text-ui text-muted-foreground">Tier 2 · Semantic</dt>
             <dd className="flex flex-col gap-1">
-              <span className="text-2xl font-semibold">{tiers.semantic}</span>
-              <span className="text-xs leading-relaxed text-muted-foreground">
+              <span className="font-heading text-2xl font-semibold">
+                {tiers.semantic}
+              </span>
+              <span className="text-description text-muted-foreground">
                 The decisions components read, by role and by mode.
               </span>
             </dd>
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">
+            <dt className="text-ui text-muted-foreground">
               Tier 3 · Component
             </dt>
             <dd className="flex flex-col gap-1">
-              <span className="text-2xl font-semibold">{tiers.component}</span>
-              <span className="text-xs leading-relaxed text-muted-foreground">
+              <span className="font-heading text-2xl font-semibold">
+                {tiers.component}
+              </span>
+              <span className="text-description text-muted-foreground">
                 The shadcn/ui aliases, such as --primary and --background.
               </span>
             </dd>
@@ -152,14 +158,14 @@ export default function FoundationsPage() {
                         </span>
                       ) : null}
                     </span>
-                    <span className="flex items-center gap-1 text-sm font-medium">
+                    <span className="flex items-center gap-1 font-heading text-title font-medium">
                       {item.label}
                       <ArrowRightIcon
                         aria-hidden="true"
                         className="size-3 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
                       />
                     </span>
-                    <span className="text-xs leading-relaxed text-muted-foreground">
+                    <span className="text-description text-muted-foreground">
                       {item.summary}
                     </span>
                   </Link>

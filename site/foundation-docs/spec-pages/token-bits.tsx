@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 
 import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import { lightScope, remToPx } from "@/site/foundation-docs/spec-pages/spec"
 import type { Token } from "@/site/lib/tokens"
 
@@ -21,7 +21,12 @@ export function Code({
   className?: string
 }) {
   return (
-    <code className={cn("bg-muted px-1 py-0.5 font-mono text-xs", className)}>
+    <code
+      className={cn(
+        "rounded-inset bg-muted px-1 py-0.5 font-mono text-ui",
+        className
+      )}
+    >
       {children}
     </code>
   )
@@ -41,7 +46,7 @@ export function StatusBadge({ status }: { status: Token["status"] }) {
 export function Dimension({ value }: { value: string }) {
   const px = remToPx(value)
   return (
-    <span className="font-mono text-xs">
+    <span className="font-mono text-ui">
       {value}
       {px !== undefined && !value.endsWith("px") ? (
         <span className="text-muted-foreground"> · {px}px</span>
@@ -59,7 +64,7 @@ export function ClassList({
   empty?: string
 }) {
   if (!classes.length)
-    return <span className="text-xs text-muted-foreground">{empty}</span>
+    return <span className="text-ui text-muted-foreground">{empty}</span>
   return (
     <span className="flex flex-wrap gap-1">
       {classes.map((value) => (
@@ -87,20 +92,20 @@ export function ModePanels({
   children: (mode: "light" | "dark") => ReactNode
 }) {
   return (
-    <div className="grid gap-px border bg-border md:grid-cols-2">
+    <div className="grid gap-px rounded-surface border bg-border md:grid-cols-2">
       <style href="light-scope" precedence="default">
         {lightScope()}
       </style>
       <div
         data-theme-scope="light"
-        className="flex flex-col gap-4 bg-background p-6 text-foreground"
+        className="flex flex-col gap-4 rounded-t-surface bg-background p-6 text-foreground md:rounded-tr-none md:rounded-bl-surface"
       >
-        <p className="text-xs font-medium text-muted-foreground">Light</p>
+        <p className="text-ui font-medium text-muted-foreground">Light</p>
         {children("light")}
       </div>
       <div className={DARK_THEME}>
-        <div className="flex h-full flex-col gap-4 bg-background p-6 text-foreground">
-          <p className="text-xs font-medium text-muted-foreground">Dark</p>
+        <div className="flex h-full flex-col gap-4 rounded-b-surface bg-background p-6 text-foreground md:rounded-tr-surface md:rounded-bl-none">
+          <p className="text-ui font-medium text-muted-foreground">Dark</p>
           {children("dark")}
         </div>
       </div>

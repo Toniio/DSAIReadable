@@ -60,7 +60,7 @@ function AppSidebar({ args }: { args: Args }) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" tooltip="Acme Inc">
-              <span className="flex size-8 shrink-0 items-center justify-center bg-sidebar-primary text-sidebar-primary-foreground">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-inset bg-sidebar-primary text-sidebar-primary-foreground">
                 <CubeIcon />
               </span>
               <span className="font-medium">Acme Inc</span>
@@ -149,15 +149,15 @@ function Page() {
           orientation="vertical"
           className="data-vertical:h-4 data-vertical:self-center"
         />
-        <span className="text-sm font-medium">Home</span>
+        <span className="text-title font-medium">Home</span>
       </header>
       <div className="flex flex-1 flex-col gap-4 p-4">
         <div className="grid gap-4 sm:grid-cols-3">
-          <div className="h-24 bg-muted" />
-          <div className="h-24 bg-muted" />
-          <div className="h-24 bg-muted" />
+          <div className="h-24 rounded-surface bg-muted" />
+          <div className="h-24 rounded-surface bg-muted" />
+          <div className="h-24 rounded-surface bg-muted" />
         </div>
-        <div className="min-h-72 flex-1 bg-muted" />
+        <div className="min-h-72 flex-1 rounded-surface bg-muted" />
       </div>
     </SidebarInset>
   )
@@ -258,7 +258,7 @@ const story: Story = {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" tooltip="Acme Inc">
-                <span className="flex size-8 shrink-0 items-center justify-center bg-sidebar-primary text-sidebar-primary-foreground">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-inset bg-sidebar-primary text-sidebar-primary-foreground">
                   <CubeIcon />
                 </span>
                 <span className="font-medium">Acme Inc</span>
@@ -325,15 +325,15 @@ ${tag("SidebarMenuButton", { tooltip: "Maya Johnson", ...button }, "            
             orientation="vertical"
             className="data-vertical:h-4 data-vertical:self-center"
           />
-          <span className="text-sm font-medium">Home</span>
+          <span className="text-title font-medium">Home</span>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="grid gap-4 sm:grid-cols-3">
-            <div className="h-24 bg-muted" />
-            <div className="h-24 bg-muted" />
-            <div className="h-24 bg-muted" />
+            <div className="h-24 rounded-surface bg-muted" />
+            <div className="h-24 rounded-surface bg-muted" />
+            <div className="h-24 rounded-surface bg-muted" />
           </div>
-          <div className="min-h-72 flex-1 bg-muted" />
+          <div className="min-h-72 flex-1 rounded-surface bg-muted" />
         </div>
       </SidebarInset>`
     const provider = args.defaultOpen

@@ -17,13 +17,17 @@ export function LiveExample({
   title: string
 }) {
   return (
-    <div className="flex flex-col border">
-      <FoundationExample exampleKey={id} title={`${title}: live example`} />
+    <div className="flex flex-col rounded-surface border">
+      <FoundationExample
+        exampleKey={id}
+        title={`${title}: live example`}
+        className="rounded-t-surface"
+      />
       <CodeBlock
         code={foundationExampleCode(id).trim()}
         language="tsx"
         title={title}
-        className="border-x-0 border-b-0"
+        className="rounded-none rounded-b-surface border-x-0 border-b-0"
       />
     </div>
   )

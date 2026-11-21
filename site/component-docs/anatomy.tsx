@@ -82,7 +82,7 @@ export function Anatomy({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col border">
+      <div className="flex flex-col overflow-hidden rounded-surface border">
         <Canvas
           slug={slug}
           state={state}
@@ -90,7 +90,7 @@ export function Anatomy({
           tall={tall}
           className="bg-muted"
         />
-        <p className="border-t px-3 py-2 text-xs text-muted-foreground">
+        <p className="border-t px-3 py-2 text-ui text-muted-foreground">
           The spec&apos;s example, or an overlay drawn open; each number marks a
           part the table names. A part with no data-slot, or one the drawing
           does not render, has no marker.
@@ -132,11 +132,11 @@ export function Anatomy({
                   </TableCell>
                   <TableCell className="align-top">
                     {part.slot ? (
-                      <code className="bg-muted px-1 py-0.5 font-mono text-xs">
+                      <code className="rounded-inset bg-muted px-1 py-0.5 font-mono text-ui">
                         data-slot=&quot;{part.slot}&quot;
                       </code>
                     ) : (
-                      <span className="text-xs">{part.label}</span>
+                      <span className="text-ui">{part.label}</span>
                     )}
                   </TableCell>
                   <TableCell className="align-top whitespace-normal">

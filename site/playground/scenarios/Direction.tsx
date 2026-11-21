@@ -29,11 +29,11 @@ function Section({ dir }: { dir: Dir }) {
             <TabsTrigger value="account">Account</TabsTrigger>
             <TabsTrigger value="billing">Billing</TabsTrigger>
           </TabsList>
-          <TabsContent value="account" className="text-xs">
+          <TabsContent value="account" className="text-ui">
             The slider fills from the start edge, and the arrow keys follow the
             reading direction.
           </TabsContent>
-          <TabsContent value="billing" className="text-xs">
+          <TabsContent value="billing" className="text-ui">
             Your plan renews on the first of each month.
           </TabsContent>
         </Tabs>
@@ -75,11 +75,11 @@ export function Example() {
             <TabsTrigger value="account">Account</TabsTrigger>
             <TabsTrigger value="billing">Billing</TabsTrigger>
           </TabsList>
-          <TabsContent value="account" className="text-xs">
+          <TabsContent value="account" className="text-ui">
             The slider fills from the start edge, and the arrow keys follow the
             reading direction.
           </TabsContent>
-          <TabsContent value="billing" className="text-xs">
+          <TabsContent value="billing" className="text-ui">
             Your plan renews on the first of each month.
           </TabsContent>
         </Tabs>

@@ -9,7 +9,7 @@ export interface GraphNode {
 }
 
 const NODE = cn(
-  "inline-flex min-h-target items-center justify-center border bg-background px-3 py-1.5 text-sm transition-colors hover:border-foreground hover:bg-muted",
+  "inline-flex min-h-target items-center justify-center rounded-control border bg-background px-3 py-1.5 text-sm transition-colors hover:border-foreground hover:bg-muted",
   FOCUS_OUTLINE_RESET,
   FOCUS_RING
 )
@@ -117,7 +117,7 @@ export function DependencyGraph({
   usedBy: GraphNode[]
 }) {
   return (
-    <div className="flex flex-col gap-6 border bg-background p-6 sm:flex-row sm:items-center sm:gap-0 sm:pt-14">
+    <div className="flex flex-col gap-6 rounded-surface border bg-background p-6 sm:flex-row sm:items-center sm:gap-0 sm:pt-14">
       <Side
         label="Built on"
         side="start"
@@ -132,7 +132,7 @@ export function DependencyGraph({
             uses.length ? "sm:block" : "sm:invisible sm:block"
           )}
         />
-        <p className="border border-primary bg-primary/10 px-4 py-2 text-sm font-semibold">
+        <p className="rounded-control border border-primary bg-primary/10 px-4 py-2 text-sm font-semibold">
           {name}
         </p>
         <span

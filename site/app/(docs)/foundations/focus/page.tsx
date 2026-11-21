@@ -72,7 +72,7 @@ function Value({ entry, value }: { entry: Token; value: string }) {
       {entry.type === "color" ? (
         <span
           aria-hidden="true"
-          className="size-4 shrink-0 border"
+          className="size-4 shrink-0 rounded-mark border"
           style={{ background: value }}
         />
       ) : null}
@@ -104,13 +104,13 @@ export default function FocusPage() {
               className="grid gap-6 sm:grid-cols-2"
             >
               <div className="flex flex-col items-start gap-2">
-                <span className="text-xs text-muted-foreground">Button</span>
+                <span className="text-ui text-muted-foreground">Button</span>
                 <Button type="button" variant="outline">
                   Save draft
                 </Button>
               </div>
               <div className="flex flex-col items-start gap-2">
-                <span className="text-xs text-muted-foreground">Link</span>
+                <span className="text-ui text-muted-foreground">Link</span>
                 <Button variant="link" asChild className="px-0">
                   <Link href="/foundations/focus/">Focus foundation</Link>
                 </Button>
@@ -124,7 +124,7 @@ export default function FocusPage() {
                 />
               </div>
               <div className="flex flex-col items-start gap-2">
-                <span className="text-xs text-muted-foreground">Switch</span>
+                <span className="text-ui text-muted-foreground">Switch</span>
                 <div className="flex items-center gap-2">
                   <Switch id={`focus-${mode}-alerts`} defaultChecked />
                   <Label htmlFor={`focus-${mode}-alerts`}>Email alerts</Label>
@@ -155,7 +155,7 @@ export default function FocusPage() {
                 <TableCell className="align-top whitespace-normal">
                   <span className="flex flex-col gap-1">
                     <Code className="w-fit">{entry.token}</Code>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-ui text-muted-foreground">
                       <InlineMarkdown>
                         {entry.docs?.description ?? entry.description ?? ""}
                       </InlineMarkdown>
@@ -199,13 +199,13 @@ export default function FocusPage() {
           </>
         }
       >
-        <ul className="flex flex-col gap-px border bg-border">
+        <ul className="flex flex-col gap-px overflow-hidden rounded-surface border bg-border">
           {presets.map(([name, classes]) => (
             <li
               key={name}
               className="grid gap-2 bg-background p-4 md:grid-cols-3"
             >
-              <code className="font-mono text-sm font-medium">{name}</code>
+              <code className="font-mono text-title font-medium">{name}</code>
               <span className="md:col-span-2">
                 <ClassList classes={classes.split(" ")} />
               </span>

@@ -139,7 +139,7 @@ export function StoryGrid({
           <div key={grid.title} className="flex flex-col gap-2">
             {mode === "axes" ? (
               <p className="text-sm">
-                <code className="bg-muted px-1 py-0.5 font-mono text-xs">
+                <code className="rounded-inset bg-muted px-1 py-0.5 font-mono text-ui">
                   {grid.title}
                 </code>
               </p>
@@ -148,7 +148,7 @@ export function StoryGrid({
               slug={slug}
               state={state}
               title={`${name} ${grid.title}`}
-              className="border bg-muted"
+              className="rounded-surface border bg-muted"
             />
           </div>
         )

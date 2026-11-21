@@ -41,16 +41,16 @@ export default function ElevationPage() {
               {levels.map((entry) => (
                 <li
                   key={entry.token}
-                  className="flex min-h-28 flex-col justify-between gap-3 bg-popover p-4 text-popover-foreground"
+                  className="flex min-h-28 flex-col justify-between gap-3 rounded-surface bg-popover p-4 text-popover-foreground"
                   style={{ boxShadow: `var(${entry.cssVar})` }}
                 >
                   <span className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-sm font-medium">
+                    <span className="font-mono text-title font-medium">
                       {shortName(entry, "elevation")}
                     </span>
                     <Code>{tailwindClasses(entry.cssVar)[0]}</Code>
                   </span>
-                  <span className="font-mono text-xs leading-relaxed break-words text-muted-foreground">
+                  <span className="font-mono text-description break-words text-muted-foreground">
                     {mode === "light" ? entry.value.light : darkValue(entry)}
                   </span>
                 </li>

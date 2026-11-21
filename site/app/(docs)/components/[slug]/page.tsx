@@ -101,7 +101,7 @@ function propsProse(name: string): string {
 function Fact({ term, children }: { term: string; children: ReactNode }) {
   return (
     <div className="flex min-w-0 flex-col gap-1 bg-background p-3">
-      <dt className="text-xs text-muted-foreground">{term}</dt>
+      <dt className="text-ui text-muted-foreground">{term}</dt>
       <dd className="min-w-0 text-sm break-words">{children}</dd>
     </div>
   )
@@ -112,7 +112,7 @@ function SourceLink({ href, children }: { href: string; children: string }) {
   return (
     <Link
       href={href}
-      className={cn(LINK, "inline-flex items-center gap-1 break-all")}
+      className={cn(LINK, "inline-flex items-center gap-1 font-mono break-all")}
     >
       {children}
       <ArrowUpRightIcon aria-hidden="true" className="shrink-0" />
@@ -221,7 +221,7 @@ export default async function ComponentPage({
         title={entry.name}
         lead={<InlineMarkdown from={source}>{spec.role}</InlineMarkdown>}
       >
-        <dl className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-3">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3">
           <Fact term="Status">
             <Badge
               variant={
@@ -286,7 +286,7 @@ export default async function ComponentPage({
           ))}
         </ul>
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="flex flex-col gap-3 border p-4">
+          <div className="flex flex-col gap-3 rounded-surface border p-4">
             <Badge variant="success">Must</Badge>
             {musts.length ? (
               <ul className="flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed">
@@ -302,7 +302,7 @@ export default async function ComponentPage({
               <p className="text-sm text-muted-foreground">No further rule.</p>
             )}
           </div>
-          <div className="flex flex-col gap-3 border p-4">
+          <div className="flex flex-col gap-3 rounded-surface border p-4">
             <Badge variant="destructive">Must not</Badge>
             {mustNots.length ? (
               <ul className="flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed">
@@ -388,12 +388,12 @@ export default async function ComponentPage({
                     {axes.map((axis) => (
                       <TableRow key={`${axis.component}-${axis.axis}`}>
                         <TableCell className="align-top">
-                          <code className="font-mono text-xs">
+                          <code className="font-mono text-ui">
                             {axis.component}
                           </code>
                         </TableCell>
                         <TableCell className="align-top">
-                          <code className="font-mono text-xs">{axis.axis}</code>
+                          <code className="font-mono text-ui">{axis.axis}</code>
                         </TableCell>
                         <TableCell className="whitespace-normal">
                           <ul className="flex flex-wrap gap-1">
@@ -555,7 +555,7 @@ export default async function ComponentPage({
                 {spec.tokens.map((token) => (
                   <TableRow key={token.token}>
                     <TableCell className="align-top">
-                      <code className="font-mono text-xs">{token.token}</code>
+                      <code className="font-mono text-ui">{token.token}</code>
                     </TableCell>
                     <TableCell className="max-w-xs align-top whitespace-normal">
                       <TokenValue name={token.token} />
@@ -567,14 +567,14 @@ export default async function ComponentPage({
                         {token.classes.map((value) => (
                           <code
                             key={value}
-                            className="bg-muted px-1 py-0.5 font-mono text-xs"
+                            className="rounded-inset bg-muted px-1 py-0.5 font-mono text-ui"
                           >
                             {value}
                           </code>
                         ))}
                       </span>
                     </TableCell>
-                    <TableCell className="align-top text-xs whitespace-normal text-muted-foreground">
+                    <TableCell className="align-top font-mono whitespace-normal text-muted-foreground">
                       <DottedPath>{token.where.join(" · ")}</DottedPath>
                     </TableCell>
                   </TableRow>
@@ -636,7 +636,7 @@ export default async function ComponentPage({
                     <TableCell className="align-top">
                       <Badge variant="outline">{divergence.type}</Badge>
                     </TableCell>
-                    <TableCell className="align-top font-mono text-xs whitespace-normal">
+                    <TableCell className="align-top font-mono whitespace-normal">
                       {[divergence.export, divergence.prop, divergence.value]
                         .filter(Boolean)
                         .join(" · ") || "—"}
@@ -675,13 +675,15 @@ export default async function ComponentPage({
                 <Link
                   href={componentHref(name) ?? "/components/"}
                   className={cn(
-                    "flex h-full flex-col gap-1 border p-3 transition-colors hover:border-foreground hover:bg-muted",
+                    "flex h-full flex-col gap-1 rounded-surface border p-3 transition-colors hover:border-foreground hover:bg-muted",
                     FOCUS_OUTLINE_RESET,
                     FOCUS_RING
                   )}
                 >
-                  <span className="text-sm font-semibold">{name}</span>
-                  <span className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                  <span className="font-heading text-title font-semibold">
+                    {name}
+                  </span>
+                  <span className="line-clamp-2 text-description text-muted-foreground">
                     {plain(componentSpec(name).role)}
                   </span>
                 </Link>
@@ -710,7 +712,7 @@ export default async function ComponentPage({
                   <TableRow key={index}>
                     <TableCell className="align-top">
                       <span className="flex flex-col items-start gap-1">
-                        <span className="font-mono text-xs">
+                        <span className="font-mono text-ui">
                           {change.version}
                         </span>
                         {change.category ? (

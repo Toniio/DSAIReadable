@@ -93,7 +93,7 @@ export function PageToc({ items }: { items: TocItem[] }) {
               aria-current={active === item.id ? "location" : undefined}
               data-active={active === item.id || undefined}
               className={cn(
-                "-ml-px flex min-h-target items-center border-l border-transparent py-1 pl-3 text-sm text-muted-foreground transition-colors hover:text-foreground",
+                "-ml-px flex min-h-target items-center rounded-r-item border-l border-transparent py-1 pl-3 text-sm text-muted-foreground transition-colors hover:text-foreground",
                 "data-active:border-foreground data-active:text-foreground",
                 FOCUS_OUTLINE_RESET,
                 FOCUS_RING

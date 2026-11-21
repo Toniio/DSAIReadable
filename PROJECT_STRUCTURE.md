@@ -310,14 +310,16 @@ host such as GitHub Pages serves it under). The `Site` workflow
 The site follows the repository's rules: ESLint, `tokens:lint-values` and knip
 cover `site/`, and `npm run site:check` lints it with the config a consuming
 project runs (`@dsaireadable/eslint-plugin`), the copied examples included,
-and checks that every focus ring the site composes on an element with no
-border adds a solid outline (`FOCUS_BORDERLESS`, focus.md rule 6).
+checks that every focus ring the site composes on an element with no
+border adds a solid outline (`FOCUS_BORDERLESS`, focus.md rule 6), and that
+every box the site draws itself names a radius role, so that it follows the
+brand (radius.md, rule 2).
 
 `npm run site:test` checks the result a visitor gets: after `site:build`, it
 serves `site/out` under its base path and loads every page, the story and
 example previews of every component and the previews of the patterns and
-foundations in headless Chromium, in both themes, every preview and the pages
-that follow the brand in nova too (`scripts/test-site.ts`). It
+foundations in headless Chromium, in both themes, every page and every preview
+in nova too (`scripts/test-site.ts`). It
 fails on an axe violation, a page error, an unexpected response and a tab stop
 with no visible indicator. CI runs it in three shards (`--shard=<i>/3`, the
 `site-test` jobs, each building the site), and the `site` job fails unless
@@ -482,7 +484,7 @@ npm run evals:test          # The conformance harness scores its gold examples, 
 npm run evals:generate      # Screens from Claude Code on a subscription, no API key (evals/README.md)
 npm run site:dev            # The documentation site, locally (Next.js dev server)
 npm run site:mcp            # Records the MCP server's definitions and answers for the site's Tools page, in site/generated/mcp/
-npm run site:check          # The site: examples copied from the specs and the MCP answers are fresh, the consumer lint and the focus check pass
+npm run site:check          # The site: examples copied from the specs and the MCP answers are fresh, the consumer lint, the focus check and the radius check pass
 npm run site:build          # The static documentation site, in site/out/
 npm run site:test           # The built site served under its base path and loaded in headless Chromium: axe, page errors, a focus indicator on every tab stop
 npm run format              # Prettier on every .ts/.tsx/.md

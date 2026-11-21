@@ -10,7 +10,7 @@ import { Heading } from "@/components/ui/heading"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 import type { CategoryTone, ReleaseDate } from "@/site/change-docs/data"
 import { LINK } from "@/site/ui/link"
 
@@ -88,7 +88,7 @@ export function ChangeLog({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-4 border p-4">
+      <div className="flex flex-col gap-4 rounded-surface border p-4">
         <div className="flex flex-col gap-2">
           <Label htmlFor={searchId}>Search the changes</Label>
           <Input
@@ -102,7 +102,7 @@ export function ChangeLog({
           />
         </div>
         <div className="flex flex-col gap-2">
-          <p className="text-xs font-medium text-muted-foreground">
+          <p className="text-ui font-medium text-muted-foreground">
             Changeset category
           </p>
           <ToggleGroup
@@ -222,7 +222,7 @@ export function ChangeLog({
                               {entry.commit ? (
                                 <Link
                                   href={`${githubUrl}/commit/${entry.commit}`}
-                                  className={cn(LINK, "font-mono text-xs")}
+                                  className={cn(LINK, "font-mono text-ui")}
                                 >
                                   <span className="sr-only">Commit </span>
                                   {entry.commit}

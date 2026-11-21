@@ -9,6 +9,11 @@ import {
 } from "@/site/lib/tokens"
 import { InBrand } from "@/site/ui/in-brand"
 
+/**
+ * A resolved value and its mode. Both keep text-xs in nova, as the Light and
+ * Dark columns of All tokens do: at 14px a color with an alpha no longer fits
+ * on one line beside its swatch, and the Tokens table scrolls sideways.
+ */
 function Row({
   mode,
   value,
@@ -23,7 +28,7 @@ function Row({
       {color ? (
         <span
           aria-hidden="true"
-          className="size-4 shrink-0 border"
+          className="size-4 shrink-0 rounded-mark border"
           // The resolved value, read from tokens.manifest.json at build time.
           style={{ background: value }}
         />

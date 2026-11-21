@@ -176,7 +176,7 @@ function render(args: Args) {
       <ChartContainer config={config(series)} className="min-h-52 w-full">
         {chart}
       </ChartContainer>
-      <p className="text-xs text-muted-foreground">{summary(series, rows)}</p>
+      <p className="text-ui text-muted-foreground">{summary(series, rows)}</p>
     </div>
   )
 }
@@ -354,7 +354,7 @@ export function Example() {
 ${body.join("\n")}
         </${root}>
       </ChartContainer>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-ui text-muted-foreground">
 ${fill(8, summary(series, rows)).join("\n")}
       </p>
     </div>

@@ -44,7 +44,7 @@ function Sample({ entry }: { entry: Token }) {
   if (name === "placeholder")
     return <Input aria-label="Search accounts" placeholder="Search accounts…" />
   return (
-    <div className="relative isolate flex h-16 w-full items-center justify-center overflow-hidden border bg-background">
+    <div className="relative isolate flex h-16 w-full items-center justify-center overflow-hidden rounded-control border bg-background">
       <span className="text-sm">The page behind</span>
       {/* The scrim modal surfaces draw: a tint, not an opacity. */}
       <div className={cn(OVERLAY_BASE, "absolute left-1/2")} />
@@ -69,29 +69,29 @@ export default function OpacityPage() {
           </>
         }
       >
-        <ul className="grid gap-px border bg-border md:grid-cols-3">
+        <ul className="grid gap-px overflow-hidden rounded-surface border bg-border md:grid-cols-3">
           {scale.map((entry) => (
             <li
               key={entry.token}
               className="flex flex-col gap-3 bg-background p-4"
             >
               <span className="flex flex-wrap items-center gap-2">
-                <span className="font-mono text-sm font-medium">
+                <span className="font-mono text-title font-medium">
                   {entry.token}
                 </span>
                 <StatusBadge status={entry.status} />
               </span>
               <span className="flex flex-wrap items-center gap-2">
-                <span className="font-mono text-xs">{entry.value.light}</span>
+                <span className="font-mono text-ui">{entry.value.light}</span>
                 {tailwindClasses(entry.cssVar).length ? (
                   <ClassList classes={tailwindClasses(entry.cssVar)} />
                 ) : null}
               </span>
-              <p className="text-xs leading-relaxed text-muted-foreground">
+              <p className="text-description text-muted-foreground">
                 <InlineMarkdown>{entry.description ?? ""}</InlineMarkdown>
               </p>
               {entry.replacement ? (
-                <p className="text-xs">
+                <p className="text-ui">
                   Replaced by <Code>{entry.replacement}</Code>
                 </p>
               ) : null}
@@ -108,31 +108,31 @@ export default function OpacityPage() {
         title="Binary states"
         description="Opacity shows, hides or disables. Three classes exist; every other opacity class is rejected by ESLint. To quiet a text or an icon, use a color."
       >
-        <ul className="grid gap-px border bg-border sm:grid-cols-3">
+        <ul className="grid gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3">
           <li className="flex flex-col gap-3 bg-background p-4">
             <Code className="w-fit">opacity-0</Code>
-            <div className="flex h-16 items-center justify-center border border-dashed">
+            <div className="flex h-16 items-center justify-center rounded-control border border-dashed">
               <Badge className="opacity-0">Hidden</Badge>
             </div>
-            <p className="text-xs text-muted-foreground">Hidden</p>
+            <p className="text-ui text-muted-foreground">Hidden</p>
           </li>
           <li className="flex flex-col gap-3 bg-background p-4">
             <Code className="w-fit">opacity-100</Code>
-            <div className="flex h-16 items-center justify-center border border-dashed">
+            <div className="flex h-16 items-center justify-center rounded-control border border-dashed">
               <Badge className="opacity-100">Shown</Badge>
             </div>
-            <p className="text-xs text-muted-foreground">Shown</p>
+            <p className="text-ui text-muted-foreground">Shown</p>
           </li>
           <li className="flex flex-col gap-3 bg-background p-4">
             <ClassList
               classes={active.flatMap((entry) => tailwindClasses(entry.cssVar))}
             />
-            <div className="flex h-16 items-center justify-center border border-dashed">
+            <div className="flex h-16 items-center justify-center rounded-control border border-dashed">
               <Button type="button" disabled>
                 Disabled
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-ui text-muted-foreground">
               Disabled, under its variant:{" "}
               <Code>disabled:opacity-disabled</Code>
             </p>

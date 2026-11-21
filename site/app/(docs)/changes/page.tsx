@@ -120,26 +120,26 @@ export default function ChangesPage() {
           </>
         }
       >
-        <dl className="grid grid-cols-2 gap-px border bg-border lg:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border lg:grid-cols-4">
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Current version</dt>
+            <dt className="text-ui text-muted-foreground">Current version</dt>
             <dd className="text-sm font-medium">v{VERSION}</dd>
             {latest?.version === VERSION && latest.date ? (
-              <dd className="text-xs text-muted-foreground">
+              <dd className="text-ui text-muted-foreground">
                 <time dateTime={latest.date.iso}>{latest.date.label}</time>
               </dd>
             ) : null}
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Releases</dt>
+            <dt className="text-ui text-muted-foreground">Releases</dt>
             <dd className="text-sm font-medium">{all.length}</dd>
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Changes</dt>
+            <dt className="text-ui text-muted-foreground">Changes</dt>
             <dd className="text-sm font-medium">{total}</dd>
           </div>
           <div className="flex flex-col gap-1 bg-background p-3">
-            <dt className="text-xs text-muted-foreground">Pending</dt>
+            <dt className="text-ui text-muted-foreground">Pending</dt>
             <dd className="text-sm font-medium">{pending.length}</dd>
           </div>
         </dl>
@@ -164,7 +164,7 @@ export default function ChangesPage() {
                     </Badge>
                   ) : null}
                   {change.bump ? (
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-ui text-muted-foreground">
                       {change.bump}
                     </span>
                   ) : null}
@@ -175,7 +175,7 @@ export default function ChangesPage() {
                       {change.text}
                     </InlineMarkdown>
                   </p>
-                  <p className="font-mono text-xs text-muted-foreground">
+                  <p className="font-mono text-ui text-muted-foreground">
                     .changeset/{change.file}
                   </p>
                 </div>

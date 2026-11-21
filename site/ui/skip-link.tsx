@@ -21,7 +21,7 @@ export function SkipLink() {
         main.focus()
       }}
       className={cn(
-        "sr-only bg-background text-sm focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:px-3 focus:py-2",
+        "sr-only rounded-control bg-background text-sm focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:px-3 focus:py-2",
         FOCUS_BORDERLESS
       )}
     >

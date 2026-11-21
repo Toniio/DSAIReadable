@@ -40,9 +40,9 @@ export default function SizePage() {
           </>
         }
       >
-        <div className="flex flex-col gap-2 border p-4">
+        <div className="flex flex-col gap-2 rounded-surface border p-4">
           <span className="flex flex-wrap items-baseline gap-2">
-            <span className="font-mono text-sm font-medium">
+            <span className="font-mono text-title font-medium">
               {target.token}
             </span>
             <Dimension value={target.value.light} />
@@ -55,13 +55,13 @@ export default function SizePage() {
               ),
             ]}
           />
-          <p className="text-xs leading-relaxed text-muted-foreground">
+          <p className="text-description text-muted-foreground">
             <InlineMarkdown>{target.description ?? ""}</InlineMarkdown>
           </p>
         </div>
-        <div className="grid gap-px border bg-border md:grid-cols-2">
+        <div className="grid gap-px overflow-hidden rounded-surface border bg-border md:grid-cols-2">
           <figure className="flex flex-col gap-4 bg-background p-6">
-            <div className="flex h-24 items-center justify-center bg-muted">
+            <div className="flex h-24 items-center justify-center rounded-control bg-muted">
               <div className="relative">
                 <Button
                   type="button"
@@ -73,11 +73,11 @@ export default function SizePage() {
                 </Button>
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 border border-dashed border-foreground"
+                  className="pointer-events-none absolute inset-0 rounded-none border border-dashed border-foreground"
                 />
               </div>
             </div>
-            <figcaption className="flex flex-col gap-1 text-xs leading-relaxed">
+            <figcaption className="flex flex-col gap-1 text-description">
               <span className="font-medium">Drawn at the target</span>
               <span className="text-muted-foreground">
                 A <Code>Button</Code> at <Code>size=&quot;icon-xs&quot;</Code>,
@@ -86,19 +86,19 @@ export default function SizePage() {
             </figcaption>
           </figure>
           <figure className="flex flex-col gap-4 bg-background p-6">
-            <div className="flex h-24 items-center justify-center bg-muted">
+            <div className="flex h-24 items-center justify-center rounded-control bg-muted">
               <div className="flex items-center gap-3">
                 <div className="relative flex">
                   <Checkbox id="size-terms" defaultChecked />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -inset-x-3 -inset-y-2 border border-dashed border-foreground"
+                    className="pointer-events-none absolute -inset-x-3 -inset-y-2 rounded-none border border-dashed border-foreground"
                   />
                 </div>
                 <Label htmlFor="size-terms">Email me updates</Label>
               </div>
             </div>
-            <figcaption className="flex flex-col gap-1 text-xs leading-relaxed">
+            <figcaption className="flex flex-col gap-1 text-description">
               <span className="font-medium">
                 Drawn smaller, hit area extended
               </span>

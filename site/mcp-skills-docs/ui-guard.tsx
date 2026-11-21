@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Heading } from "@/components/ui/heading"
+import { cn } from "@/lib/cn"
 import type { GuardDomain } from "@/site/mcp-skills-docs/data"
 import { sourceUrl } from "@/site/lib/site"
 import { LINK } from "@/site/ui/link"
@@ -37,7 +38,7 @@ export function UiGuard({
                   <CardDescription>
                     <Link
                       href={sourceUrl(`${folder}/${domain.reference}`)}
-                      className={LINK}
+                      className={cn(LINK, "font-mono")}
                     >
                       {domain.reference}
                     </Link>

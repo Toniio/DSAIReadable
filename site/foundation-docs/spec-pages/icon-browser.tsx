@@ -69,7 +69,7 @@ function SettingsControls({ sizes }: { sizes: IconSize[] }) {
   return (
     <div className="flex flex-wrap items-end gap-4">
       <div className="flex flex-col gap-1.5">
-        <span id={`${id}-size`} className="text-xs text-muted-foreground">
+        <span id={`${id}-size`} className="text-ui text-muted-foreground">
           Size
         </span>
         <ToggleGroup
@@ -90,7 +90,7 @@ function SettingsControls({ sizes }: { sizes: IconSize[] }) {
         </ToggleGroup>
       </div>
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor={`${id}-weight`} className="text-xs font-normal">
+        <Label htmlFor={`${id}-weight`} className="text-ui font-normal">
           Weight
         </Label>
         <NativeSelect
@@ -125,7 +125,7 @@ function SearchField({
   const id = useId()
   return (
     <div className="flex min-w-56 flex-1 flex-col gap-1.5">
-      <Label htmlFor={id} className="text-xs font-normal">
+      <Label htmlFor={id} className="text-ui font-normal">
         {label}
       </Label>
       <div className="relative">
@@ -185,14 +185,14 @@ function Tile({
       <Button
         type="button"
         variant="ghost"
-        className="h-auto w-full flex-col gap-3 px-2 py-5 whitespace-normal"
+        className="h-auto w-full flex-col gap-3 px-2 py-5 whitespace-normal focus-visible:ring-inset"
         aria-label={`Copy the import of ${name}`}
         onClick={onCopy}
       >
         <span className="flex size-6 items-center justify-center text-foreground">
           {copied ? <CheckIcon className="size-4 text-success" /> : glyph}
         </span>
-        <span className="max-w-full font-mono text-xs font-normal break-all">
+        <span className="max-w-full font-mono font-normal break-all">
           {name}
         </span>
       </Button>
@@ -243,7 +243,7 @@ export function UsedIcons({
         <ul
           data-size={size}
           data-weight={weight}
-          className="group/icons grid grid-cols-2 gap-px border bg-border sm:grid-cols-3 lg:grid-cols-4"
+          className="group/icons grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3 lg:grid-cols-4"
         >
           {shown.map((icon) => (
             <Tile
@@ -253,7 +253,7 @@ export function UsedIcons({
               copied={copied === icon.name}
               onCopy={() => copy(icon.name)}
             >
-              <p className="flex flex-wrap justify-center gap-x-2 px-2 pb-3 text-center text-xs text-muted-foreground">
+              <p className="flex flex-wrap justify-center gap-x-2 px-2 pb-3 text-center text-ui text-muted-foreground">
                 {icon.usedBy.map((user) => (
                   <Link
                     key={user.slug}
@@ -271,7 +271,7 @@ export function UsedIcons({
           ))}
         </ul>
       ) : (
-        <p className="border p-6 text-sm text-muted-foreground">
+        <p className="rounded-surface border p-6 text-sm text-muted-foreground">
           No icon of the components matches “{query}”.
         </p>
       )}
@@ -327,7 +327,7 @@ export function IconCatalog({
 
   if (!catalog)
     return (
-      <div className="flex flex-col items-start gap-3 border p-6">
+      <div className="flex flex-col items-start gap-3 rounded-surface border p-6">
         <p className="text-sm text-muted-foreground">
           Every icon of the library, searchable. It loads on demand, so this
           page stays light until you ask for it. The same icons are on{" "}
@@ -363,13 +363,13 @@ export function IconCatalog({
         />
         <SettingsControls sizes={sizes} />
       </div>
-      <p role="status" className="text-xs text-muted-foreground">
+      <p role="status" className="text-ui text-muted-foreground">
         {copied
           ? `Copied the import of ${copied}`
           : `Showing ${shown.length} of ${matches.length}`}
       </p>
       {shown.length ? (
-        <ul className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-3 lg:grid-cols-5">
+        <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3 lg:grid-cols-5">
           {shown.map(({ name, Icon }) => (
             <Tile
               key={name}
@@ -387,7 +387,7 @@ export function IconCatalog({
           ))}
         </ul>
       ) : (
-        <p className="border p-6 text-sm text-muted-foreground">
+        <p className="rounded-surface border p-6 text-sm text-muted-foreground">
           No icon matches “{query}”.
         </p>
       )}

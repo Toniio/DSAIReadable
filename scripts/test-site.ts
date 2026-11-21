@@ -9,9 +9,11 @@
  *   - the preview canvas of every component, in its story view and in its
  *     example view, and the example of every pattern and foundation: the
  *     documents the pages show in iframes, which axe does not enter from a page.
- * Every preview is loaded in the nova brand too, which the page sends it
- * through its state, and so are `NOVA_PAGES`, the pages whose content follows
- * the brand, with the brand a visitor stored. Each load is checked for:
+ * Every page and every preview is loaded in the nova brand too: a page with
+ * the brand a visitor stored, a preview with the brand its page sends it
+ * through its state. Every page is drawn from the brand, the boxes the site
+ * draws itself included (scripts/lint-site.ts keeps them on a radius role).
+ * Each load is checked for:
  *   - an axe violation on the WCAG 2.x A and AA rules, 2.2 AA included;
  *   - a page error, a console error, or a response of 400 and above that is
  *     not one of `KNOWN_404`;
@@ -132,14 +134,6 @@ const MAX_STOPS = 600
 type Theme = "light" | "dark"
 
 type Brand = "lyra" | "nova"
-
-/** The pages drawn from the tokens of the brand, loaded in nova as well. */
-const NOVA_PAGES = [
-  "/",
-  "/foundations/color/",
-  "/foundations/radius/",
-  "/foundations/typography/",
-]
 
 type Kind = "page" | "preview-story" | "preview-example" | "missing"
 
@@ -276,9 +270,8 @@ function targets(): Target[] {
             url: route + frameState("example", theme, brand),
           })
       } else {
-        out.push({ kind: "page", theme, brand: "lyra", url: route })
-        if (NOVA_PAGES.includes(route))
-          out.push({ kind: "page", theme, brand: "nova", url: route })
+        for (const brand of ["lyra", "nova"] as const)
+          out.push({ kind: "page", theme, brand, url: route })
       }
     }
   }
@@ -624,5 +617,5 @@ if (failures.length > 0) {
   process.exit(1)
 }
 console.log(
-  `✅ ${RUN}: ${LOADS} (light and dark, previews and NOVA_PAGES in both brands), no axe violation, page error or unexpected response; ${stopsWalked} tab stops walked, ${measured.size} focus indicators measured, ${unmeasured} stops in an open modal left unmeasured.`
+  `✅ ${RUN}: ${LOADS} (light and dark, every page and preview in both brands), no axe violation, page error or unexpected response; ${stopsWalked} tab stops walked, ${measured.size} focus indicators measured, ${unmeasured} stops in an open modal left unmeasured.`
 )

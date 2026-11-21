@@ -170,14 +170,14 @@ function SeriesMatrix({ series }: { series: EvalSeries }) {
           <ul className="flex flex-col gap-3">
             {failing.map((task) => (
               <li key={task.id} className="flex flex-col gap-1 border-l pl-3">
-                <span className="font-mono text-xs font-semibold">
+                <span className="font-mono text-ui font-semibold">
                   {task.id}
                 </span>
                 {task.passes.flatMap((result, pass) =>
                   (result?.findings ?? []).map((finding, index) => (
                     <span
                       key={`${pass}-${index}`}
-                      className="font-mono text-xs leading-relaxed break-words whitespace-pre-wrap text-muted-foreground"
+                      className="font-mono text-description break-words whitespace-pre-wrap text-muted-foreground"
                     >
                       {several ? `Pass ${pass + 1}: ${finding}` : finding}
                     </span>

@@ -455,7 +455,7 @@ npm run typecheck:all  # TypeScript: components, scripts, ESLint plugin, MCP ser
 npm run test:components  # Every spec example, and the foundations' complete modules, in headless Chromium: axe in the four themes, focus, keyboard
 npm run evals:test   # The conformance harness scores its gold examples and the edit tasks' bases, with no model
 npm run site:dev     # The documentation site: foundations, components with a live playground, patterns, changes, audits
-npm run site:build && npm run site:test  # The built site, loaded in headless Chromium: axe, page errors and a focus indicator on every tab stop, light and dark, the previews in nova too
+npm run site:build && npm run site:test  # The built site, loaded in headless Chromium: axe, page errors and a focus indicator on every tab stop, light and dark, in both brands
 ```
 
 ---

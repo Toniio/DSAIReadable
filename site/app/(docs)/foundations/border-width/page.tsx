@@ -70,7 +70,7 @@ export default function BorderWidthPage() {
         title="Widths"
         description="Each width drawn at its token: a box, a rule, and for the separation, the band of background color that cuts overlapping avatars apart."
       >
-        <ul className="flex flex-col gap-px border bg-border">
+        <ul className="flex flex-col gap-px overflow-hidden rounded-surface border bg-border">
           {widths.map((entry) => {
             const classes = tailwindClasses(entry.cssVar)
             return (
@@ -80,7 +80,7 @@ export default function BorderWidthPage() {
               >
                 <div className="flex flex-col gap-2">
                   <span className="flex flex-wrap items-baseline gap-2">
-                    <span className="font-mono text-sm font-medium">
+                    <span className="font-mono text-title font-medium">
                       {shortName(entry, "border-width")}
                     </span>
                     <Dimension value={entry.value.light} />
@@ -94,7 +94,7 @@ export default function BorderWidthPage() {
                           : []
                     }
                   />
-                  <p className="text-xs leading-relaxed text-muted-foreground">
+                  <p className="text-description text-muted-foreground">
                     <InlineMarkdown>{entry.description ?? ""}</InlineMarkdown>
                   </p>
                 </div>

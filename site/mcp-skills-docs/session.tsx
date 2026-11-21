@@ -17,7 +17,7 @@ const number = (value: number) => value.toLocaleString("en-US")
 function Fact({ term, children }: { term: string; children: ReactNode }) {
   return (
     <div className="flex min-w-0 flex-col gap-1 bg-background p-3">
-      <dt className="text-xs text-muted-foreground">{term}</dt>
+      <dt className="text-ui text-muted-foreground">{term}</dt>
       <dd className="min-w-0 text-sm break-words">{children}</dd>
     </div>
   )
@@ -37,7 +37,7 @@ export function SessionBlock({
 }) {
   return (
     <div className="flex min-w-0 flex-col gap-4">
-      <dl className="grid grid-cols-2 gap-px border bg-border sm:grid-cols-3 lg:grid-cols-6">
+      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border bg-border sm:grid-cols-3 lg:grid-cols-6">
         <Fact term="Task">
           <code className="font-mono">{session.task}</code>
         </Fact>
@@ -57,7 +57,7 @@ export function SessionBlock({
       <ol className="flex min-w-0 flex-col gap-4">
         {session.timeline.map((turn, index) => (
           <li key={index} className="flex min-w-0 flex-col gap-2">
-            <h4 className="text-sm font-medium">
+            <h4 className="font-heading text-title font-medium">
               Turn {index + 1}
               <span className="font-normal text-muted-foreground">
                 {" "}
@@ -102,7 +102,7 @@ export function SessionBlock({
                           <span className="flex items-center gap-2">
                             <span
                               aria-hidden="true"
-                              className="block h-2 w-24 bg-muted"
+                              className="block h-2 w-24 overflow-hidden rounded-pill bg-muted"
                             >
                               <span
                                 className="block h-full bg-primary"

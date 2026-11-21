@@ -79,7 +79,7 @@ export function ComponentTable({
             ))}
           </NativeSelect>
         </div>
-        <p role="status" className="pb-2 text-xs text-muted-foreground">
+        <p role="status" className="pb-2 text-ui text-muted-foreground">
           {shown.length} of {rows.length} components
         </p>
       </div>

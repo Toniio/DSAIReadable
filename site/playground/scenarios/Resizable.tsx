@@ -33,7 +33,7 @@ function Panels({ args }: { args: Args }) {
     <ResizablePanelGroup
       key={`${args.orientation}-${count}`}
       orientation={orientation}
-      className="min-h-52 border"
+      className="min-h-52 rounded-surface border"
     >
       {sizes(count).map((size, index) => (
         <Fragment key={PANELS[index]}>
@@ -45,7 +45,7 @@ function Panels({ args }: { args: Args }) {
             />
           ) : null}
           <ResizablePanel defaultSize={size} minSize="15%">
-            <div className="flex h-full items-center justify-center p-4 text-xs font-medium">
+            <div className="flex h-full items-center justify-center p-4 text-ui font-medium">
               {PANELS[index]}
             </div>
           </ResizablePanel>
@@ -74,8 +74,8 @@ const story: Story = {
     const count = panelCount(args)
     const group =
       args.orientation === "vertical"
-        ? `    <ResizablePanelGroup orientation="vertical" className="min-h-52 border">`
-        : `    <ResizablePanelGroup className="min-h-52 border">`
+        ? `    <ResizablePanelGroup orientation="vertical" className="min-h-52 rounded-surface border">`
+        : `    <ResizablePanelGroup className="min-h-52 rounded-surface border">`
     const handle = (index: number) => {
       const props = [
         args.withHandle ? "withHandle" : "",
@@ -88,7 +88,7 @@ const story: Story = {
       [
         index > 0 ? handle(index) : "",
         `      <ResizablePanel defaultSize="${size}" minSize="15%">`,
-        `        <div className="flex h-full items-center justify-center p-4 text-xs font-medium">`,
+        `        <div className="flex h-full items-center justify-center p-4 text-ui font-medium">`,
         `          ${PANELS[index]}`,
         `        </div>`,
         `      </ResizablePanel>`,

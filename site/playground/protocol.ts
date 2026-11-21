@@ -132,9 +132,13 @@ function parseArgs(value: unknown): Args {
 /**
  * A frame state from untrusted data: the URL hash anyone can write, or a
  * message. Every field is checked against what the page sends; anything else
- * is dropped, and a value that is not a state at all gives `undefined`.
+ * is dropped, and a value that is not a state at all gives `undefined`. A
+ * state with no brand takes `brand`: a message from the page always has one.
  */
-export function parseState(value: unknown): FrameState | undefined {
+export function parseState(
+  value: unknown,
+  brand: Brand = "lyra"
+): FrameState | undefined {
   if (!isRecord(value)) return undefined
   const view = oneOf(value.view, VIEWS)
   if (!view) return undefined
@@ -143,7 +147,7 @@ export function parseState(value: unknown): FrameState | undefined {
     args: parseArgs(value.args),
     state: oneOf(value.state, FORCED) ?? "rest",
     theme: value.theme === "dark" ? "dark" : "light",
-    brand: oneOf(value.brand, BRANDS) ?? "lyra",
+    brand: oneOf(value.brand, BRANDS) ?? brand,
   }
   if (Array.isArray(value.cells))
     state.cells = value.cells.filter(isRecord).map((cell) => ({
@@ -162,9 +166,20 @@ export function parseState(value: unknown): FrameState | undefined {
   return state
 }
 
-export function decodeState(hash: string): FrameState | undefined {
+/**
+ * The state a preview's URL hash carries. One with no brand (a link saved
+ * before brands, or written by hand) takes `brand`: in the browser, the
+ * brand of the document that opens it.
+ */
+export function decodeState(
+  hash: string,
+  brand?: Brand
+): FrameState | undefined {
   try {
-    return parseState(JSON.parse(decodeURIComponent(hash.replace(/^#/, ""))))
+    return parseState(
+      JSON.parse(decodeURIComponent(hash.replace(/^#/, ""))),
+      brand
+    )
   } catch {
     return undefined
   }
