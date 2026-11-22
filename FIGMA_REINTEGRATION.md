@@ -245,6 +245,8 @@ the `dark` style by hand. Nova keeps lyra's shadows.
   `CaretUpIcon`, `CheckCircleIcon`, `CheckIcon`, `CopyIcon`, `DotsThreeIcon`,
   `EyeIcon`, `EyeSlashIcon`, `InfoIcon`, `MagnifyingGlassIcon`, `MinusIcon`,
   `SidebarIcon`, `SpinnerIcon`, `WarningIcon`, `XCircleIcon` and `XIcon`.
+  The page also holds `PlusIcon`, which no component imports: the site's
+  icon-only Button examples show it.
 - **An icon the page lacks**: the `Icons` page is not a closed set, since the
   code can import any Phosphor icon. When a screen needs one that is missing:
   1. no icon of the page already says it (`XIcon` closes, `CheckIcon`
@@ -304,7 +306,7 @@ first, whole.
 
 | In the spec                        | In Figma                                                                                                                                                                                                                                                     |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Metadata**, **Role**             | The component's name, its React export (`Button`, `CardHeader`, `DropdownMenuItem`), and its description: the Role sentence, `beta` when the status says so, and the link to the spec                                                                        |
+| **Metadata**, **Role**             | The component's name, its React export (`Button`, `CardHeader`, `DropdownMenuItem`), and its description, in plain text with no HTML entity: the Role sentence, `beta` when the status says so, and the link to the spec                                     |
 | **Anatomy**                        | The layers. A part that has its own export is its own component, placed in the section of its root and nested as an instance; a layer is named after its `data-slot`                                                                                         |
 | **Variants**, **Props / API**      | The properties. A `cva` axis or a prop typed as a union of literals is a variant property, named as the prop and holding its values as written; a `boolean` prop is a boolean property; the text child is a text property; the default of each is the code's |
 | **States**                         | A `state` variant property, holding the states the table lists and no other. Button has `default`, `hover`, `focus`, `active`, `open`, `disabled`, `error` and `loading`                                                                                     |
@@ -320,13 +322,28 @@ How a class becomes a property of a layer:
   button, `radius/surface` for a card), never a number. Lyra is square because
   its roles are `0`, not because the corner is unset. A seam (`rounded-none`)
   is `0`, and a round shape (`rounded-full`) is fully rounded, in every brand.
+- **Borders**: `border` is a 1px inside stroke, counted in the layout, its
+  weight bound to `border-width/default`. The code counts the border in the
+  size of the element, so `border-transparent` keeps that stroke, bound to
+  `color/border/default` at 0% opacity: without it a variant is 2px narrower
+  than its outlined sibling, and a button grows when it takes focus. Every
+  variant of one size has the same width in every state that adds no content.
+- **Text**: a text layer takes the text style of its size and weight. When a
+  class leaves every style — `font-medium` on `text-xs`, `leading-none`,
+  `underline` — the layer takes no style and binds the same variables itself:
+  family, size, line height and weight. `leading-none` is a line height of
+  100%.
+- **The text of a field**: a field shows a typed value in `color/text/default`,
+  behind a text property named `value`. The placeholder, in
+  `color/text/subtle`, shows in the `placeholder` state only.
 - **A color with an opacity modifier**: `bg-destructive/10` is the variable of
   `color.feedback.error.default` on a fill at 10% opacity.
 - **Disabled**: the layer's opacity bound to `opacity/disabled`.
 - **Focus**: one ring for every component, from `specs/foundations/focus.md`: a
   1px solid stroke in `color/border/focus`, and around it a halo
-  `space/focus-ring-width` wide (2px) in the same color at 50%. A destructive
-  or invalid control draws the ring its States table gives.
+  `space/focus-ring-width` wide (2px) in the same color at 50%, the weight of
+  each bound to its variable. A destructive or invalid control draws the ring
+  its States table gives.
 - **Target size**: a pointer target is at least `size/target/min`, 24px.
 
 The size of a component set stays bounded: the full matrix of `variant` and
@@ -408,9 +425,11 @@ screenshot of each from https://toniio.github.io/DSAIReadable/components/.
 Follow § 3 and § 7 of the attached FIGMA_REINTEGRATION.md: names, properties
 and values exactly as the spec writes them, every fill, stroke, radius, gap and
 text bound to the variable its Tokens table names, auto layout everywhere, the
-states of its States table. Use the components this file already has as
-instances, and take every icon from the components of the Icons page. Report
-every class you could not express, by component.
+states of its States table. Bind every stroke weight to its variable, and keep
+the 1px stroke of a transparent border. Use the components this file already
+has as instances, and take every icon from the components of the Icons page:
+when one is missing, stop and name it. Report every class you could not
+express, by component.
 ```
 
 **Check**
@@ -468,8 +487,12 @@ defect to work around:
       category.
 - [ ] Each property and each value of a component exists in its spec, with the
       same spelling and the same default.
-- [ ] No layer holds a raw color, radius, gap or font size; none reads a
-      Primitive variable.
+- [ ] No layer holds a raw color, radius, gap, stroke weight or font size; none
+      reads a Primitive variable.
+- [ ] Every variant of one size has the same width in every state that adds no
+      content (`loading` adds a spinner).
+- [ ] A text layer has a text style, or its family, size and weight bound to
+      variables.
 - [ ] Switching a frame through the four modes changes colors in all four, and
       corners, typefaces and component text sizes between lyra and nova.
 - [ ] Every focusable component has its `focus` state, with the ring of § 7.
