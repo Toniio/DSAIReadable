@@ -101,14 +101,22 @@ Three collections mirror the three token tiers. Each variable is named by its
 full token path, dots turned into slashes: `color.action.background.default`
 is `color/action/background/default`. No path is both a variable and a group.
 
-| Collection  | Source                  | Modes                                      | Variables                                  | Publishing |
-| ----------- | ----------------------- | ------------------------------------------ | ------------------------------------------ | ---------- |
-| `Primitive` | `tokens/primitive.json` | one                                        | 263, holding raw values                    | **hidden** |
-| `Semantic`  | `tokens/semantic*.json` | `light`, `dark`, `nova-light`, `nova-dark` | 207, each an alias of a Primitive variable | published  |
-| `Component` | `tokens/component.json` | one                                        | 33, each an alias of a Semantic variable   | published  |
+| Collection  | Source                  | Modes                                      | Variables                                                     | Publishing |
+| ----------- | ----------------------- | ------------------------------------------ | ------------------------------------------------------------- | ---------- |
+| `Primitive` | `tokens/primitive.json` | one                                        | 263, holding raw values                                       | **hidden** |
+| `Semantic`  | `tokens/semantic*.json` | `light`, `dark`, `nova-light`, `nova-dark` | 207, aliases of Primitive variables, with one exception below | published  |
+| `Component` | `tokens/component.json` | one                                        | 33, each an alias of a Semantic variable                      | published  |
 
 The `Component` collection needs no mode of its own: an alias resolves in the
 mode its target has on the frame.
+
+One Semantic variable holds a raw value in two modes:
+`typography/size-line-height/description` is `19.5` in `light` and `dark`, and
+an alias of `primitive/typography/size-line-height/sm` in `nova-light` and
+`nova-dark`. In lyra the token references the ratio
+`primitive.typography.line-height.relaxed` (1.625), a variable that stays a
+ratio, while Figma binds a line height in pixels: 12 × 1.625. It is the only
+exception, and every other Semantic variable is an alias in its four modes.
 
 ### Themes
 
@@ -131,20 +139,20 @@ A brand moves colors, typefaces, radii and text sizes, and nothing else.
 
 ### From a token to a variable
 
-| DTCG `$type`                                           | Figma variable | Conversion                                                                                                                                                                                                  |
-| ------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `color` (128 primitives)                               | Color          | The `hex` of the `$value`, with its `alpha` when it has one (`white-alpha`, `ink-alpha`). The OKLCH components are the source and the `hex` its sRGB rendering: never convert them by hand                  |
-| `dimension` in `rem`                                   | Number         | × 16, in pixels: `0.625rem` is `10`                                                                                                                                                                         |
-| `dimension` in `px`                                    | Number         | As written. `radius.full` is `9999`                                                                                                                                                                         |
-| `dimension` in `em`                                    | Number         | The 5 letter spacings, × 100, as a percentage: `-0.025em` is `-2.5`. Set in the text styles, not bound: Figma binds letter spacing in pixels                                                                |
-| `number`, `typography.line-height.*`                   | Number         | The ratio, as written. Applied in a text style as a percentage, not bound                                                                                                                                   |
-| `number`, `typography.size-line-height.*`              | Number         | In pixels: the ratio × the `typography.size.*` of the same name in the same mode, to the half pixel. `ui` is `16` in lyra (12 × 1.33334) and `20` in nova (14 × 1.42858). Figma binds line height in pixels |
-| `number`, `opacity.*`                                  | Number         | × 100: `0.5` is `50`                                                                                                                                                                                        |
-| `number`, `zindex.*`                                   | Number         | As written, with no scope: Figma has no stacking order to bind                                                                                                                                              |
-| `fontWeight`                                           | Number         | As written: `400`, `500`, `600`, `700`                                                                                                                                                                      |
-| `fontFamily`                                           | String         | The first family of the list: `JetBrains Mono, monospace` is `JetBrains Mono`                                                                                                                               |
-| `shadow` (14 primitives, 7 semantic)                   | none           | An effect style (§ 5)                                                                                                                                                                                       |
-| `duration`, `cubicBezier` (10 primitives, 10 semantic) | none           | No variable: listed as text on the Motion page                                                                                                                                                              |
+| DTCG `$type`                                           | Figma variable | Conversion                                                                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color` (128 primitives)                               | Color          | The `hex` of the `$value`, with its `alpha` when it has one (`white-alpha`, `ink-alpha`). The OKLCH components are the source and the `hex` its sRGB rendering: never convert them by hand                                                                                                                              |
+| `dimension` in `rem`                                   | Number         | × 16, in pixels: `0.625rem` is `10`                                                                                                                                                                                                                                                                                     |
+| `dimension` in `px`                                    | Number         | As written. `radius.full` is `9999`                                                                                                                                                                                                                                                                                     |
+| `dimension` in `em`                                    | Number         | The 5 letter spacings, × 100, as a percentage: `-0.025em` is `-2.5`. Set in the text styles, not bound: Figma binds letter spacing in pixels                                                                                                                                                                            |
+| `number`, `typography.line-height.*`                   | Number         | The ratio, as written. Applied in a text style as a percentage, not bound                                                                                                                                                                                                                                               |
+| `number`, `typography.size-line-height.*`              | Number         | In pixels: the ratio × the `typography.size.*` of the same name in the same mode, to the half pixel. `ui` is `16` in lyra (12 × 1.33334) and `20` in nova (14 × 1.42858). Figma binds line height in pixels. A primitive holds the number, and a Semantic variable aliases it, except `description` in lyra (see above) |
+| `number`, `opacity.*`                                  | Number         | × 100: `0.5` is `50`                                                                                                                                                                                                                                                                                                    |
+| `number`, `zindex.*`                                   | Number         | As written, with no scope: Figma has no stacking order to bind                                                                                                                                                                                                                                                          |
+| `fontWeight`                                           | Number         | As written: `400`, `500`, `600`, `700`                                                                                                                                                                                                                                                                                  |
+| `fontFamily`                                           | String         | The first family of the list: `JetBrains Mono, monospace` is `JetBrains Mono`                                                                                                                                                                                                                                           |
+| `shadow` (14 primitives, 7 semantic)                   | none           | An effect style (§ 5)                                                                                                                                                                                                                                                                                                   |
+| `duration`, `cubicBezier` (10 primitives, 10 semantic) | none           | No variable: listed as text on the Motion page                                                                                                                                                                                                                                                                          |
 
 On each variable:
 
@@ -174,6 +182,8 @@ On each variable:
 - `typography/size/ui` is `12` in lyra and `14` in nova.
 - Every Semantic alias points to the `Primitive` collection, and every
   Component alias to the `Semantic` one.
+- `typography/size-line-height/description` is `19.5` in `light` and `dark`,
+  and `20` in the two nova modes.
 
 ---
 
@@ -372,7 +382,8 @@ attached token files. Follow § 4 of the attached FIGMA_REINTEGRATION.md exactly
 three collections (Primitive, Semantic, Component), four modes on Semantic
 (light, dark, nova-light, nova-dark), each variable named by its token path
 with slashes, each Semantic variable an alias of a Primitive variable in every
-mode, with the fallback of the Themes table. Take each color from the hex and
+mode, with the fallback of the Themes table and the one exception § 4 names
+(typography/size-line-height/description). Take each color from the hex and
 alpha of tokens/primitive.json. Invent no variable. When you are done, report
 the number of variables per collection and every token you could not create.
 Source: https://github.com/Toniio/DSAIReadable.git at tag v0.5.0.
@@ -440,8 +451,9 @@ defect to work around:
 
 - [ ] Three collections: `Primitive` (263 variables, hidden from publishing),
       `Semantic` (207, four modes), `Component` (33).
-- [ ] Every Semantic and Component variable is an alias; none holds a raw value.
-- [ ] The five statements of § 4, _What must hold once the variables exist_.
+- [ ] Every Semantic and Component variable is an alias; none holds a raw value,
+      except `typography/size-line-height/description` in `light` and `dark`.
+- [ ] The six statements of § 4, _What must hold once the variables exist_.
 - [ ] Every published variable has its description and its Web code syntax.
 
 **Styles**
