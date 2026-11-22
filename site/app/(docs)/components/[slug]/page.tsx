@@ -29,6 +29,7 @@ import {
   componentMarkdown,
   components,
   componentSpec,
+  figmaNodeId,
   stateRows,
   usedByComponents,
   usesComponents,
@@ -128,6 +129,7 @@ export default async function ComponentPage({
   const entry = componentBySlug((await params).slug)
   if (!entry) notFound()
   const spec = componentSpec(entry.name)
+  const figmaNode = figmaNodeId(entry.name)
   const source = `specs/components/${entry.name}.md`
   const controls = autoControls(entry.name)
   const rows = stateRows(entry.name)
@@ -255,11 +257,11 @@ export default async function ComponentPage({
               href={sourceUrl(source)}
             >{`${entry.name}.md`}</SourceLink>
           </Fact>
-          <Fact term="shadcn/ui">
-            {spec.shadcn.item ? (
-              <code className="font-mono">{spec.shadcn.item}</code>
+          <Fact term="Figma node">
+            {figmaNode ? (
+              <code className="font-mono">{figmaNode}</code>
             ) : (
-              <span className="text-muted-foreground">Design system only</span>
+              <span className="text-muted-foreground">Not in Figma yet</span>
             )}
           </Fact>
         </dl>
