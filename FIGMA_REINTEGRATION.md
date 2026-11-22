@@ -234,8 +234,33 @@ the `dark` style by hand. Nova keeps lyra's shadows.
   for nova. All five are Google Fonts, at weights 400 to 700.
 - **Icons**: Phosphor only, the library the code imports
   (`@phosphor-icons/react`), in its `regular` weight, at 16px inside a
-  component unless its spec's Tokens table names another size. An icon is an
-  instance from a Phosphor icon library for Figma, never a drawn vector.
+  component unless its spec's Tokens table names another size. The file holds
+  its own: an `Icons` page with one component per icon the code imports, named
+  as the import (`CheckIcon`), 16 by 16, its path taken from the `regular`
+  weight of the package at the version of `package.json`. An icon in a
+  component is an instance of one of them, never a drawn vector, so no icon
+  library has to be enabled or published. They are placed before the
+  components: Figma's agent does not create icons yet. The components import
+  19: `ArrowDownIcon`, `CaretDownIcon`, `CaretLeftIcon`, `CaretRightIcon`,
+  `CaretUpIcon`, `CheckCircleIcon`, `CheckIcon`, `CopyIcon`, `DotsThreeIcon`,
+  `EyeIcon`, `EyeSlashIcon`, `InfoIcon`, `MagnifyingGlassIcon`, `MinusIcon`,
+  `SidebarIcon`, `SpinnerIcon`, `WarningIcon`, `XCircleIcon` and `XIcon`.
+- **An icon the page lacks**: the `Icons` page is not a closed set, since the
+  code can import any Phosphor icon. When a screen needs one that is missing:
+  1. no icon of the page already says it (`XIcon` closes, `CheckIcon`
+     confirms);
+  2. it comes from Phosphor, never drawn and never from another set;
+  3. it joins the `Icons` page first, in the format of the others — named as
+     its import (`BankIcon`), `regular`, 16 by 16, with a description of what
+     it stands for — and the screen takes an instance;
+  4. another size is set on the instance, and its color is the color of the
+     text beside it.
+
+  An agent that can write vectors, through Figma's MCP server, adds the
+  component from the package's path. One that cannot stops and names the
+  Phosphor icon it lacks: it draws no look-alike. The `Icons` page carries the
+  same rule in a Spec block, for the people who design in the file.
+
 - **Artwork**: `Logo` and `Illustration` are placeholders drawn as inline SVG in
   `components/ui/logo.tsx` and `components/ui/illustration.tsx`. Their paths
   are imported from those files.
@@ -248,6 +273,7 @@ the `dark` style by hand. Nova keeps lyra's shadows.
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Cover`                               | The name, the version built from (`v0.5.0`), the two links                                                                                                          |
 | `Foundations`                         | One section per foundation that Figma can show: color (the semantic roles, in the four modes), typography, radius, spacing, elevation, focus, icons, motion as text |
+| `Icons`                               | The 19 Phosphor icons the components import, one component each (§ 5)                                                                                               |
 | One page per category, 11 in all      | The components of the category, one section per component: the component set, then its parts                                                                        |
 | `Theme check`                         | The same sample of components in four frames, one per mode of the `Semantic` collection                                                                             |
 | `Patterns`, once the components exist | The 12 page patterns of `specs/patterns/`, each as a screen made of instances                                                                                       |
@@ -383,7 +409,8 @@ Follow § 3 and § 7 of the attached FIGMA_REINTEGRATION.md: names, properties
 and values exactly as the spec writes them, every fill, stroke, radius, gap and
 text bound to the variable its Tokens table names, auto layout everywhere, the
 states of its States table. Use the components this file already has as
-instances. Report every class you could not express, by component.
+instances, and take every icon from the components of the Icons page. Report
+every class you could not express, by component.
 ```
 
 **Check**
@@ -446,7 +473,7 @@ defect to work around:
 - [ ] Switching a frame through the four modes changes colors in all four, and
       corners, typefaces and component text sizes between lyra and nova.
 - [ ] Every focusable component has its `focus` state, with the ring of § 7.
-- [ ] Every icon is a Phosphor instance.
+- [ ] Every icon is an instance of a component of the `Icons` page.
 
 **Against the site**
 
@@ -457,7 +484,9 @@ defect to work around:
 
 ## 11. Once the library exists
 
-1. **Publish it**, with the `Primitive` collection hidden.
+1. **Publish it** when other files are to use it, with the `Primitive`
+   collection hidden. A library that stays in its own file skips this step and
+   the next: guidelines attach to a published library.
 2. **Attach guidelines to it** (_Library → Manage guidelines_), so that the
    agent follows the system when it designs with the library. Figma takes
    Markdown, text and JSON files, 200 KB in all, and recommends three to eight
