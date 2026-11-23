@@ -8,6 +8,13 @@
 > code, with the Figma agent. It is written for **v0.5.0**: its counts and its
 > links are that release's. [`llms.txt`](./llms.txt) lists the links of the
 > current release.
+>
+> A first build from this brief, on 2026-11-22 and 23, produced the variables,
+> the styles, the 66 component sections and the 12 pattern screens. What it
+> taught is written into § 7 to § 10. The container parts gained their
+> `children` slot afterwards (§ 7), and the pattern screens, PasswordInput and
+> CommandDialog were rebuilt on it. A check of the instances then moved every
+> opacity modifier off the paints bound to a variable (§ 7).
 
 The code is the source of truth, and it stays so. The Figma library is a
 rendering of it: every variable, style and component below is read from a file
@@ -33,7 +40,13 @@ plan. Importing a GitHub repository as a library's code source is a closed
 beta. A link pasted in a prompt is therefore read only as far as web search
 reaches it, and a repository of this size is not read whole.
 
-So give the links **and attach the files each phase reads**. They are small:
+In practice the agent fetches a raw GitHub link written in a prompt: during the
+build it read this document and the specs from
+`raw.githubusercontent.com`, and of its own accord the source of each component
+and two foundations. A prompt that names its links therefore needs no
+attachment, and the agent takes ten attachments at most.
+
+So give the links, **or attach the files each phase reads**. They are small:
 
 | Phase                     | Attach                                                                                                                                                                                 |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -245,8 +258,12 @@ the `dark` style by hand. Nova keeps lyra's shadows.
   `CaretUpIcon`, `CheckCircleIcon`, `CheckIcon`, `CopyIcon`, `DotsThreeIcon`,
   `EyeIcon`, `EyeSlashIcon`, `InfoIcon`, `MagnifyingGlassIcon`, `MinusIcon`,
   `SidebarIcon`, `SpinnerIcon`, `WarningIcon`, `XCircleIcon` and `XIcon`.
-  The page also holds `PlusIcon`, which no component imports: the site's
-  icon-only Button examples show it.
+  The page also holds 13 icons that no component imports, because the examples
+  of the specs and the patterns show them: `ClockCounterClockwiseIcon`,
+  `FileIcon`, `FilePdfIcon`, `FileTsIcon`, `FolderIcon`, `GearIcon`,
+  `GridFourIcon`, `ListIcon`, `PlusIcon`, `TableIcon`, `TerminalIcon`,
+  `TextBolderIcon` and `WarningCircleIcon`. Place them before the batch that
+  needs them: the agent stops on a missing icon.
 - **An icon the page lacks**: the `Icons` page is not a closed set, since the
   code can import any Phosphor icon. When a screen needs one that is missing:
   1. no icon of the page already says it (`XIcon` closes, `CheckIcon`
@@ -271,14 +288,14 @@ the `dark` style by hand. Nova keeps lyra's shadows.
 
 ## 6. Structure of the file
 
-| Page                                  | Holds                                                                                                                                                               |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Cover`                               | The name, the version built from (`v0.5.0`), the two links                                                                                                          |
-| `Foundations`                         | One section per foundation that Figma can show: color (the semantic roles, in the four modes), typography, radius, spacing, elevation, focus, icons, motion as text |
-| `Icons`                               | The 19 Phosphor icons the components import, one component each (§ 5)                                                                                               |
-| One page per category, 11 in all      | The components of the category, one section per component: the component set, then its parts                                                                        |
-| `Theme check`                         | The same sample of components in four frames, one per mode of the `Semantic` collection                                                                             |
-| `Patterns`, once the components exist | The 12 page patterns of `specs/patterns/`, each as a screen made of instances                                                                                       |
+| Page                                  | Holds                                                                                                                                                                                                                                       |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Cover`                               | The name, the version built from (`v0.5.0`), the two links                                                                                                                                                                                  |
+| `Foundations`                         | One section per foundation that Figma can show: color (the semantic roles, in the four modes), typography, radius, spacing, elevation, focus, icons, motion as text                                                                         |
+| `Icons`                               | The 19 Phosphor icons the components import and the 13 their examples show, one component each (§ 5)                                                                                                                                        |
+| One page per category, 11 in all      | The components of the category, one section per component: the component set, then its parts                                                                                                                                                |
+| `Theme check`                         | Four frames, each set to one mode of the `Semantic` collection, each holding an instance of the same sample component                                                                                                                       |
+| `Patterns`, once the components exist | The 12 page patterns of `specs/patterns/`, each a screen of 1280 by 800 made of instances, a container holding its content in its `children` slot (§ 7). A frame takes no documentation link: the link to the pattern spec is an annotation |
 
 The 67 components by category, as each spec's Metadata says (`beta` marks the
 17 components whose API can still change):
@@ -304,30 +321,37 @@ The 67 components by category, as each spec's Metadata says (`beta` marks the
 One component of the code is one section of its category page. Read its spec
 first, whole.
 
-| In the spec                        | In Figma                                                                                                                                                                                                                                                     |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Metadata**, **Role**             | The component's name, its React export (`Button`, `CardHeader`, `DropdownMenuItem`), and its description, in plain text with no HTML entity: the Role sentence, `beta` when the status says so, and the link to the spec                                     |
-| **Anatomy**                        | The layers. A part that has its own export is its own component, placed in the section of its root and nested as an instance; a layer is named after its `data-slot`                                                                                         |
-| **Variants**, **Props / API**      | The properties. A `cva` axis or a prop typed as a union of literals is a variant property, named as the prop and holding its values as written; a `boolean` prop is a boolean property; the text child is a text property; the default of each is the code's |
-| **States**                         | A `state` variant property, holding the states the table lists and no other. Button has `default`, `hover`, `focus`, `active`, `open`, `disabled`, `error` and `loading`                                                                                     |
-| **Tokens**                         | The bindings. Each row names a token, the classes that read it and the part or the variant that carries them: bind the variable of that token, at that place                                                                                                 |
-| **Constraints**, **Accessibility** | The component's description keeps the constraints a designer can break: an icon-only button needs a name, a view takes at most two primary buttons                                                                                                           |
+| In the spec                        | In Figma                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Metadata**, **Role**             | The component's name, its React export (`Button`, `CardHeader`, `DropdownMenuItem`), its description, in plain text with no HTML entity (the Role sentence, and `beta` when the status says so), and its documentation link, on the set and on each variant: the spec on GitHub. The description does not repeat that link                                                                                                                                                                                                                                                                                                                             |
+| **Anatomy**                        | The layers. A part that has its own export is its own component, placed in the section of its root and nested as an instance; a layer is named after its `data-slot`. A `cva` function or a style helper (`buttonVariants`) is not a component, and a part that renders no layer (a provider, a collection) can be left out                                                                                                                                                                                                                                                                                                                            |
+| **Variants**, **Props / API**      | The properties. A `cva` axis or a prop typed as a union of literals is a variant property, named as the prop and holding its values as written; a `boolean` prop is a boolean property; the text child is a text property; the default of each is the code's. Three kinds of property that the Props table does not list are accepted: a native prop a designer sets (`value`, `placeholder`, a `label`), a value the code passes through context to the part that draws it (`DrawerContent` takes `direction`, `AvatarBadge` takes `size`, `QuestionnaireChoice` takes `type`), and the `children` slot of a part that holds other components (below) |
+| **States**                         | A `state` variant property, holding the states the table lists and no other. Button has `default`, `hover`, `focus`, `active`, `open`, `disabled`, `error` and `loading`. A part takes only the states that change its look: a separator or a group has no `state`                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Tokens**                         | The bindings. Each row names a token, the classes that read it and the part or the variant that carries them: bind the variable of that token, at that place                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Constraints**, **Accessibility** | The component's description keeps the constraints a designer can break: an icon-only button needs a name, a view takes at most two primary buttons                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 How a class becomes a property of a layer:
 
 - **Layout**: every component is an auto layout frame. `gap-*`, `p-*`, `px-*`,
   `h-*` and `size-*` read the spacing scale: `h-8` is `space/scale/8`, 32px;
   `px-2.5` is `space/scale/2-5`.
+- **Height**: a component hugs its content, unless a class sets its height
+  (`h-8`, bound to its variable). A fixed height left by a first draft shows
+  against the site: `AlertTitle` was 20px high around a 16px line, and Alert
+  60px where the code gives 56.
 - **Corners**: the radius role its Tokens table names (`radius/control` for a
   button, `radius/surface` for a card), never a number. Lyra is square because
   its roles are `0`, not because the corner is unset. A seam (`rounded-none`)
-  is `0`, and a round shape (`rounded-full`) is fully rounded, in every brand.
+  is `0`, and a round shape (`rounded-full`) is bound to `radius/full`, never a
+  raw `9999`, in every brand.
 - **Borders**: `border` is a 1px inside stroke, counted in the layout, its
   weight bound to `border-width/default`. The code counts the border in the
-  size of the element, so `border-transparent` keeps that stroke, bound to
-  `color/border/default` at 0% opacity: without it a variant is 2px narrower
-  than its outlined sibling, and a button grows when it takes focus. Every
-  variant of one size has the same width in every state that adds no content.
+  size of the element, so `border-transparent` keeps that stroke, with a paint
+  that is fully transparent and bound to no variable: `transparent` is not a
+  token. A hidden paint will not do, it stops counting in the layout. Without
+  that stroke a variant is 2px narrower than its outlined sibling, and a button
+  grows when it takes focus. Every variant of one size has the same width in
+  every state that adds no content.
 - **Text**: a text layer takes the text style of its size and weight. When a
   class leaves every style — `font-medium` on `text-xs`, `leading-none`,
   `underline` — the layer takes no style and binds the same variables itself:
@@ -336,19 +360,78 @@ How a class becomes a property of a layer:
 - **The text of a field**: a field shows a typed value in `color/text/default`,
   behind a text property named `value`. The placeholder, in
   `color/text/subtle`, shows in the `placeholder` state only.
-- **A color with an opacity modifier**: `bg-destructive/10` is the variable of
-  `color.feedback.error.default` on a fill at 10% opacity.
+- **A color with an opacity modifier**: a paint bound to a variable has no
+  opacity of its own. Its alpha is the variable's, and an opacity written on
+  the paint stays on the main component: every instance draws it at 100%. So
+  `bg-destructive/10`, `ring-foreground/10` and `text-foreground/60` are a
+  layer opacity. It sits on the layer itself when the layer draws nothing else
+  (a text, a focus ring, the scrim of an overlay). Otherwise it sits on a layer
+  of its own, absolutely positioned, stretched to its parent and bound to the
+  same corner variables: `background` under the content for a fill, `ring` or
+  `border` above it for a stroke, the parent keeping a transparent stroke where
+  the border counts in the layout. A parent that clips its content would clip
+  a ring drawn outside it, so it stops clipping. When a component tints a part
+  it nests (`Bubble` and its `BubbleContent`), the tinted layer sits in the
+  component, behind the instance. A token whose value already carries an alpha
+  (`color.overlay.hover`) needs none of this.
 - **Disabled**: the layer's opacity bound to `opacity/disabled`.
 - **Focus**: one ring for every component, from `specs/foundations/focus.md`: a
   1px solid stroke in `color/border/focus`, and around it a halo
-  `space/focus-ring-width` wide (2px) in the same color at 50%, the weight of
-  each bound to its variable. A destructive or invalid control draws the ring
-  its States table gives.
+  `space/focus-ring-width` wide (2px) in the same color at 50%, a layer
+  opacity, the weight of each bound to its variable. A destructive or invalid
+  control draws the ring its States table gives.
 - **Target size**: a pointer target is at least `size/target/min`, 24px.
 
 The size of a component set stays bounded: the full matrix of `variant` and
 `size` at the `default` state, and the other states for every `variant` at the
-default size.
+default size. A third axis joins the matrix at the `default` state only:
+Calendar, with `captionLayout`, `buttonVariant` and six states, holds 54
+variants, not 144.
+
+A component that renders another one holds one instance of it, never a copy of
+its variants: `AlertDialogAction` is one component with a Button inside, whose
+`variant` and `size` stay those of the nested instance. When its classes
+restyle what it renders, it is drawn as its own layers: `InputGroupButton` has
+its own `size` axis, corner and padding. When it renders a container around
+its own parts, it fills the slot of that instance: `PasswordInput` holds an
+`InputGroup` in the matching state, whose slot holds the field and the add-on
+of the toggle. A prop it only passes on is not copied either: `CommandDialog`
+holds a `DialogContent`, exposed as a nested instance, and `showCloseButton` is
+set there.
+
+A part that takes children other than a text holds them in a slot: `Card`,
+`CardContent`, `DialogFooter`, `Field`, `InputGroup`, `DropdownMenuContent`,
+`TableRow`. The slot is a property named `children`, one for the whole set,
+and each variant has its slot layer, whose default content is the example the
+part shows. The slot takes the auto layout of the part (direction, gap
+variable, alignment, wrapping) and fills it, with no fill, no padding and no
+clipping of its own; the part keeps its padding, fill, border, radius and
+effect style. What the part draws itself stays outside the slot: an absolutely
+positioned layer (a close button, a focus ring), a layer a boolean property
+shows, and a fixed piece of anatomy (the handle of a drawer, the scroll buttons
+of a Select, the heading of a CommandGroup). A text inside a slot takes no
+text property, which a slot does not carry: an override changes it. When an
+instance overrides the gap or the alignment of a part, it carries the same
+override on the slot.
+
+A part whose child is a text keeps its text property (`CardTitle`,
+`DropdownMenuItem`, `TableCell`). A root that renders no layer, a portal, a
+provider, a trigger and a part that renders another component
+(`AlertDialogAction`) take no slot. Neither does a part whose children are its
+own fixed anatomy: `Avatar` (image, fallback, badge), `Bubble` (content,
+reactions), `Collapsible` (a trigger and the content it opens), an icon holder
+such as `MarkerIcon`.
+
+So a composition that passes children to a container — a form in a Card, a
+list of rows in a Table, a pattern screen — places an instance of the container
+and fills its slot with instances of the parts and of the leaf components. The
+slot of a nested part is reached from the instance that holds it. An icon or a
+text inside a nested instance is changed by an override on the instance. No
+existing component gains another property for it.
+
+A root that renders no layer of its own (Select, Combobox, DropdownMenu) is
+still a component: the composition of its parts that a designer drops on a
+screen.
 
 An overlay (Dialog, Popover, DropdownMenu, Tooltip, Sheet, Drawer…) is drawn
 open: its content panel is the component, and its trigger is an instance of
@@ -388,8 +471,9 @@ most of the others hold one.
 
 ## 8. Prompts
 
-One phase per prompt, in a new chat each time, with the files of § 1 attached.
-Check each phase (§ 10) before starting the next.
+One phase per prompt, in a new chat each time, with the files of § 1 attached
+or their raw links written in the prompt. Check each phase (§ 10) before
+starting the next.
 
 **Variables**
 
@@ -420,16 +504,53 @@ style that § 5 does not list.
 
 ```text
 Build these components of the DSAIReadable design system on the <Category>
-page: <Component>, <Component>, <Component>. Their specs are attached, with a
-screenshot of each from https://toniio.github.io/DSAIReadable/components/.
-Follow § 3 and § 7 of the attached FIGMA_REINTEGRATION.md: names, properties
-and values exactly as the spec writes them, every fill, stroke, radius, gap and
-text bound to the variable its Tokens table names, auto layout everywhere, the
-states of its States table. Bind every stroke weight to its variable, and keep
-the 1px stroke of a transparent border. Use the components this file already
-has as instances, and take every icon from the components of the Icons page:
-when one is missing, stop and name it. Report every class you could not
-express, by component.
+page: <Component>, <Component>, <Component>. First fetch and read the brief,
+and follow its sections 3 and 7:
+https://raw.githubusercontent.com/Toniio/DSAIReadable/main/FIGMA_REINTEGRATION.md
+Then fetch and read each spec, whole:
+https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/specs/components/<Component>.md
+Names, properties and values exactly as the spec writes them, every fill,
+stroke, stroke weight, radius, gap and text bound to the variable its Tokens
+table names, auto layout everywhere, the states of its States table. A part
+that has its own export is its own component, in the section of its root, and
+takes only the states that change its look. A part that renders a component
+this file already has is one component holding one instance of it, never a copy
+of its variants, and no existing component gains a property. A part that takes
+children other than a text holds them in a slot property named children, as
+section 7 describes. Do not build a component for a cva function or a style
+helper. Keep each component set to the
+bounded matrix of section 7. Name each section with the component name alone.
+border-transparent is a 1px stroke whose paint is fully transparent and bound
+to no variable. An opacity modifier (/10, /50) is a layer opacity, never an
+opacity on a paint bound to a variable: section 7. A fully
+rounded corner is bound to radius/full. Write each description in plain text,
+without the spec URL: put the link to the spec in the documentation link of
+each component set and each variant. Take every icon from the components of
+the Icons page: when one is missing, stop and name it. Report every class you
+could not express, by component.
+```
+
+**Patterns, four at a time**
+
+```text
+Build these page patterns of the DSAIReadable design system on the Patterns
+page: <pattern>, <pattern>, <pattern>, <pattern>. First fetch and read the
+brief, and follow its sections 3, 6 and 7:
+https://raw.githubusercontent.com/Toniio/DSAIReadable/main/FIGMA_REINTEGRATION.md
+Then fetch and read each pattern spec, whole:
+https://raw.githubusercontent.com/Toniio/DSAIReadable/v0.5.0/specs/patterns/<pattern>.md
+A pattern is a screen, not a component. For each one, add a section named as
+the pattern, holding one frame of 1280 by 800: the screen its Structure table
+and its code example describe, with the regions in the order of the table. Use
+an intact instance of a component of this file wherever its example content
+fits. Change no existing component: a container that must hold custom content
+is an instance whose children slot you fill with instances of the parts and of
+the leaf components. Every gap, padding and width is bound to the variable its
+Spacing section names; texts take the text styles of the file and the wording
+of its Content table, in English. Take every icon from the Icons page: when one
+is missing, stop and name it. Record the link to the pattern spec in a screen
+annotation. Report, by pattern, each container you could not use as an
+instance and anything the spec asks for that you could not show.
 ```
 
 **Check**
@@ -439,8 +560,26 @@ Audit this file against § 10 of the attached FIGMA_REINTEGRATION.md. For each
 check, answer pass or fail with the layers that fail. Change nothing.
 ```
 
-Batches of three to five components keep a prompt within what the agent holds
-at once: a spec runs from 120 to 465 lines.
+A batch holds up to six components with one part each, and two or three when
+they have many (Menubar and NavigationMenu count 24 parts between them): a spec
+runs from 120 to 465 lines, and a batch takes the agent two to twelve minutes.
+
+Three things happen during a batch:
+
+- **The agent stops on a missing icon**, as the prompt asks. Add the icon to the
+  `Icons` page (§ 5) and tell it to continue.
+- **The agent asks a question** when the brief leaves a choice open, most often
+  whether to add a property to an existing component. The answer is in § 7: a
+  container already has its `children` slot, and no existing component gains
+  another property.
+- **A run ends on an error.** Do not start it again, which would build the
+  batch twice: ask the agent, in the same chat, to check what exists and to
+  finish what is missing.
+
+Check a batch in the file itself before the next one. The agent's report says
+what it meant to build: only the layers say what it built. Check a new instance
+of each variant too, not the main component alone: what an instance does not
+inherit shows nowhere else.
 
 ---
 
@@ -461,6 +600,12 @@ defect to work around:
 | Breakpoints, responsive classes (`md:text-ui`)                     | Numbers for frame widths; a component is drawn at its base size                                                                                                             |
 | Keyboard behavior, roles, accessible names                         | The spec's Accessibility section; nothing to draw                                                                                                                           |
 | Default strings (`lib/ui-strings.ts`)                              | The text of the layers, in English as the code ships them                                                                                                                   |
+| Children passed to a container (`Card`, `Dialog`, `Field`)         | A slot property named `children`, whose default content is an example. A composition fills the slot of an instance (§ 7)                                                    |
+| A negative margin (`-space-x-2` of `AvatarGroup`)                  | A raw negative gap: no variable holds the opposite of a spacing step                                                                                                        |
+| An opacity modifier on a color (`bg-destructive/10`)               | A layer opacity, on a layer of its own when the part draws anything else (§ 7)                                                                                              |
+| `border-transparent`                                               | A stroke whose paint is transparent and bound to no variable: `transparent` is not a token                                                                                  |
+| A backdrop blur (`backdrop-blur-xs` of an overlay)                 | A layer blur with no style: the code names no token for it                                                                                                                  |
+| The text of a toast, 13px from the stylesheet of `sonner`          | A raw 13px: the code sets the typeface of a toast, not its size                                                                                                             |
 
 ---
 
@@ -486,9 +631,22 @@ defect to work around:
 - [ ] 66 component sections, Direction left out, each on the page of its
       category.
 - [ ] Each property and each value of a component exists in its spec, with the
-      same spelling and the same default.
-- [ ] No layer holds a raw color, radius, gap, stroke weight or font size; none
-      reads a Primitive variable.
+      same spelling and the same default, or is one of the three kinds § 7
+      accepts: a native prop, a value passed through context, the `children`
+      slot.
+- [ ] Every part that § 7 gives a slot has one `children` slot property and one
+      slot layer per variant, with no fill and no padding of its own, and the
+      gap variable of the part.
+- [ ] Every component set and every variant has its documentation link, and no
+      description repeats it.
+- [ ] No component has a fixed height that differs from the height of its
+      content, unless a class sets it.
+- [ ] No layer holds a raw color, radius, gap, stroke weight or font size,
+      except the transparent paint of a `border-transparent`; none reads a
+      Primitive variable.
+- [ ] No paint bound to a variable has an opacity other than the alpha of its
+      variable.
+- [ ] A new instance of each variant renders as the variant does.
 - [ ] Every variant of one size has the same width in every state that adds no
       content (`loading` adds a spinner).
 - [ ] A text layer has a text style, or its family, size and weight bound to
@@ -498,10 +656,17 @@ defect to work around:
 - [ ] Every focusable component has its `focus` state, with the ring of § 7.
 - [ ] Every icon is an instance of a component of the `Icons` page.
 
+**Screens**
+
+- [ ] `Theme check`: four frames, one per mode, that hold the same sample.
+- [ ] `Patterns`: 12 screens, with no raw value and no detached instance.
+
 **Against the site**
 
 - [ ] Each component, side by side with its page of the site in lyra light and
-      nova dark: same spacing, same corners, same colors.
+      nova dark: same spacing, same corners, same colors. The preview of a
+      component is `/preview/components/<component>/`, and its computed styles
+      can be measured against the values the variables resolve to in the mode.
 
 ---
 
