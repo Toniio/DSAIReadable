@@ -6,7 +6,7 @@
 | ------------- | ----------------------- |
 | Name          | Field                   |
 | Category      | Forms                   |
-| Status        | beta                    |
+| Status        | stable                  |
 | figma_node_id | 263:1717                |
 | code_path     | components/ui/field.tsx |
 

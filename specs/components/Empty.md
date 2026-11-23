@@ -6,7 +6,7 @@
 | ------------- | ----------------------- |
 | Name          | Empty                   |
 | Category      | Feedback                |
-| Status        | beta                    |
+| Status        | stable                  |
 | figma_node_id | 223:2541                |
 | code_path     | components/ui/empty.tsx |
 

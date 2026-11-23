@@ -6,7 +6,7 @@
 | ------------- | ------------------------------ |
 | Name          | ButtonGroup                    |
 | Category      | Misc                           |
-| Status        | beta                           |
+| Status        | stable                         |
 | figma_node_id | 264:1776                       |
 | code_path     | components/ui/button-group.tsx |
 

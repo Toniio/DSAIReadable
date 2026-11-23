@@ -6,7 +6,7 @@
 | ------------- | ------------------------------- |
 | Name          | Questionnaire                   |
 | Category      | Conversation                    |
-| Status        | beta                            |
+| Status        | stable                          |
 | figma_node_id | 300:1976                        |
 | code_path     | components/ui/questionnaire.tsx |
 

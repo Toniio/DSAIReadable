@@ -6,7 +6,7 @@
 | ------------- | ---------------------- |
 | Name          | Item                   |
 | Category      | Misc                   |
-| Status        | beta                   |
+| Status        | stable                 |
 | figma_node_id | 264:2134               |
 | code_path     | components/ui/item.tsx |
 

@@ -6,7 +6,7 @@
 | ------------- | --------------------- |
 | Name          | Kbd                   |
 | Category      | Misc                  |
-| Status        | beta                  |
+| Status        | stable                |
 | figma_node_id | 225:1800              |
 | code_path     | components/ui/kbd.tsx |
 
