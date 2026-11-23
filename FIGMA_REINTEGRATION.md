@@ -12,11 +12,9 @@
 > A first build from this brief, on 2026-11-22 and 23, produced the variables,
 > the styles, the 66 component sections and the 12 pattern screens. What it
 > taught is written into § 7 to § 10. The container parts gained their
-> `children` slot afterwards (§ 7), and the pattern screens were rebuilt on it.
-> PasswordInput and CommandDialog were drawn before it and still reproduce
-> their container as a frame bound to the same variables. A check of the
-> instances then moved every opacity modifier off the paints bound to a
-> variable (§ 7).
+> `children` slot afterwards (§ 7), and the pattern screens, PasswordInput and
+> CommandDialog were rebuilt on it. A check of the instances then moved every
+> opacity modifier off the paints bound to a variable (§ 7).
 
 The code is the source of truth, and it stays so. The Figma library is a
 rendering of it: every variable, style and component below is read from a file
@@ -394,7 +392,12 @@ A component that renders another one holds one instance of it, never a copy of
 its variants: `AlertDialogAction` is one component with a Button inside, whose
 `variant` and `size` stay those of the nested instance. When its classes
 restyle what it renders, it is drawn as its own layers: `InputGroupButton` has
-its own `size` axis, corner and padding.
+its own `size` axis, corner and padding. When it renders a container around
+its own parts, it fills the slot of that instance: `PasswordInput` holds an
+`InputGroup` in the matching state, whose slot holds the field and the add-on
+of the toggle. A prop it only passes on is not copied either: `CommandDialog`
+holds a `DialogContent`, exposed as a nested instance, and `showCloseButton` is
+set there.
 
 A part that takes children other than a text holds them in a slot: `Card`,
 `CardContent`, `DialogFooter`, `Field`, `InputGroup`, `DropdownMenuContent`,
