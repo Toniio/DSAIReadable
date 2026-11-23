@@ -7,7 +7,7 @@
 | Name          | ScrollArea                    |
 | Category      | Layout                        |
 | Status        | stable                        |
-| figma_node_id |                               |
+| figma_node_id | 221:1964                      |
 | code_path     | components/ui/scroll-area.tsx |
 
 ## Role

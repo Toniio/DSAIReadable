@@ -7,7 +7,7 @@
 | Name          | Logo                   |
 | Category      | Brand                  |
 | Status        | stable                 |
-| figma_node_id |                        |
+| figma_node_id | 259:1751               |
 | code_path     | components/ui/logo.tsx |
 
 ## Role

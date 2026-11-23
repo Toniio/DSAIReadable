@@ -7,7 +7,7 @@
 | Name          | HoverCard                    |
 | Category      | Overlay                      |
 | Status        | stable                       |
-| figma_node_id |                              |
+| figma_node_id | 231:2760                     |
 | code_path     | components/ui/hover-card.tsx |
 
 ## Role

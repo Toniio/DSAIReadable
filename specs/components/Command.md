@@ -7,7 +7,7 @@
 | Name          | Command                   |
 | Category      | Forms                     |
 | Status        | stable                    |
-| figma_node_id |                           |
+| figma_node_id | 304:2567                  |
 | code_path     | components/ui/command.tsx |
 
 ## Role

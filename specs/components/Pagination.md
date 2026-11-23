@@ -7,7 +7,7 @@
 | Name          | Pagination                   |
 | Category      | Navigation                   |
 | Status        | stable                       |
-| figma_node_id |                              |
+| figma_node_id | 297:2183                     |
 | code_path     | components/ui/pagination.tsx |
 
 ## Role

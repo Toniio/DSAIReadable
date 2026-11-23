@@ -7,7 +7,7 @@
 | Name          | Sonner                   |
 | Category      | Feedback                 |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 223:2637                 |
 | code_path     | components/ui/sonner.tsx |
 
 ## Role

@@ -1397,7 +1397,7 @@
   "Attachment": {
     "name": "Attachment",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "role": "A tile that stands for one file sent or received — its icon or preview, its name, its size — with its upload state and its actions.",
     "usage": [
       "Show a file attached to a message, or queued in a composer before it is sent",
@@ -3345,7 +3345,7 @@
   "Bubble": {
     "name": "Bubble",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "role": "The colored block that holds the text of a conversation turn, with optional reactions pinned to its edge.",
     "usage": [
       "Show the text of a turn inside `MessageContent`",
@@ -4375,7 +4375,7 @@
   "ButtonGroup": {
     "name": "ButtonGroup",
     "category": "Misc",
-    "status": "beta",
+    "status": "stable",
     "role": "A container that visually joins adjacent buttons, inputs or selects by merging their borders and corners.",
     "usage": [
       "Group related actions (for example \"Previous / Next\")",
@@ -6802,7 +6802,7 @@
   "CodeBlock": {
     "name": "CodeBlock",
     "category": "Typography",
-    "status": "beta",
+    "status": "stable",
     "role": "A block of code, terminal output or a diff, in one color, with an optional header that names it and a button that copies it.",
     "usage": [
       "Show code in an assistant's answer, inside the `ghost` or `outline` `Bubble` of its `MessageContent`, between two paragraphs",
@@ -7598,7 +7598,7 @@
   "Combobox": {
     "name": "Combobox",
     "category": "Forms",
-    "status": "beta",
+    "status": "stable",
     "role": "A text input with autocomplete that picks from a filterable list of options; supports single and multiple selection (chips).",
     "usage": [
       "Pick a value from a long list (countries, cities)",
@@ -10175,7 +10175,7 @@
   "Direction": {
     "name": "Direction",
     "category": "Layout",
-    "status": "beta",
+    "status": "stable",
     "role": "A context provider that passes the reading direction (LTR / RTL) down to every child component.",
     "usage": [
       "Wrap the app or a section to support right-to-left languages (Arabic, Hebrew…)",
@@ -11454,7 +11454,7 @@
   "Empty": {
     "name": "Empty",
     "category": "Feedback",
-    "status": "beta",
+    "status": "stable",
     "role": "A composable empty state, shown when a view, a list or a section has no data.",
     "usage": [
       "Say that a list or a table has no results",
@@ -11881,7 +11881,7 @@
   "Field": {
     "name": "Field",
     "category": "Forms",
-    "status": "beta",
+    "status": "stable",
     "role": "A layout system for form fields: it ties a label to its control, carries the invalid state, and holds help text and error messages.",
     "usage": [
       "Wrap each `FieldLabel` and control pair in a `<Field>` for consistency and error handling",
@@ -13497,7 +13497,7 @@
   "InputGroup": {
     "name": "InputGroup",
     "category": "Forms",
-    "status": "beta",
+    "status": "stable",
     "role": "A container that arranges an input with add-ons — icons, buttons, text, labels — around it.",
     "usage": [
       "Add an icon or a label to the left or right of an input",
@@ -14377,7 +14377,7 @@
   "Item": {
     "name": "Item",
     "category": "Misc",
-    "status": "beta",
+    "status": "stable",
     "role": "A composable row that stands for one entry in a list, with slots for media, a title, a description, actions, and header and footer sections.",
     "usage": [
       "Show an entry in a list of results or a feed",
@@ -15012,7 +15012,7 @@
   "Kbd": {
     "name": "Kbd",
     "category": "Misc",
-    "status": "beta",
+    "status": "stable",
     "role": "An inline label that shows a keyboard key or a key combination.",
     "usage": [
       "Show a keyboard shortcut next to an action (`⌘K` for search, say)",
@@ -15654,7 +15654,7 @@
   "Marker": {
     "name": "Marker",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "role": "A line of muted text that marks an event of a conversation that is neither a message nor a step of the assistant's work: a date, a resumed session, someone who joined.",
     "usage": [
       "Separate the days of a thread with `variant=\"separator\"` (\"Today\", \"Monday 12 May\")",
@@ -16675,7 +16675,7 @@
   "Message": {
     "name": "Message",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "role": "One turn of a conversation: who speaks, with an optional avatar, a header, the content and a footer, aligned to the start or the end of the thread.",
     "usage": [
       "Show one turn of a chat between a user and an assistant, or between people",
@@ -16980,7 +16980,7 @@
   "MessageScroller": {
     "name": "MessageScroller",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "role": "The scrolling thread of a conversation: it keeps the latest message in view as messages arrive, announces them, and offers buttons to jump to either end.",
     "usage": [
       "Hold the turns of a chat, one `MessageScrollerItem` per message, in a panel of fixed height",
@@ -19328,7 +19328,7 @@
   "Questionnaire": {
     "name": "Questionnaire",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "role": "A form that asks one question at a time — single or multiple choice, or a free answer — with its progress and the controls to go back, skip, go on and submit.",
     "usage": [
       "Ask the user a few questions inside a conversation before the assistant acts (the trip's dates, the report's audience)",
@@ -24184,7 +24184,7 @@
   "Spinner": {
     "name": "Spinner",
     "category": "Feedback",
-    "status": "beta",
+    "status": "stable",
     "role": "An animated loading indicator that signals an asynchronous operation is in progress.",
     "usage": [
       "Show a `Button`'s `loading` state while a form submits",
@@ -26844,7 +26844,7 @@
   "Trace": {
     "name": "Trace",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "role": "The steps an assistant takes while it works (a tool call, its reasoning, the sources it read), one line each, every step included, with its status and, when it has some, details that open under the line.",
     "usage": [
       "Show each step of the assistant's work as a `TraceLine`, a finished step with nothing to open included: a `TraceIcon`, a `TraceTitle` that says what happened, and a `TraceDescription` for a duration, a count or a diff stat",

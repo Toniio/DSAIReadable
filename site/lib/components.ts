@@ -144,6 +144,17 @@ export function componentMarkdown(name: string): string {
   return readText(`specs/components/${name}.md`)
 }
 
+/**
+ * The Figma node of a component, from the `figma_node_id` row of its spec's
+ * Metadata; `null` while the row is empty (not drawn in Figma yet).
+ */
+export function figmaNodeId(name: string): string | null {
+  const value = componentMarkdown(name).match(
+    /^\|\s*figma_node_id\s*\|\s*([^|]*?)\s*\|/m
+  )?.[1]
+  return value ? value : null
+}
+
 export interface VariantAxis {
   /** The export that takes the axis: `Button`, `TabsList`. */
   component: string
