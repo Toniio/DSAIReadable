@@ -35,6 +35,15 @@ updates:
       - dependency-name: "@types/node"
         update-types:
           - version-update:semver-major
+      # Ignored on 2026-11-23 (Toniio/DSAIReadable#218). Recharts 3.11.0 drops
+      # the tabindex="-1" of its z-index layer groups, and Chromium then stops
+      # Tab on them: a PieChart gains an invisible tab stop, and
+      # tests/components/chart.test.tsx fails. The upstream fix
+      # (recharts/recharts@e49109d) is not released yet. Delete this entry
+      # once a later version is out; this pin covers 3.11.0 only.
+      - dependency-name: recharts
+        versions:
+          - 3.11.0
     commit-message:
       prefix: chore
       include: scope
