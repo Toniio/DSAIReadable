@@ -7,7 +7,7 @@
 | Name          | Checkbox                   |
 | Category      | Forms                      |
 | Status        | stable                     |
-| figma_node_id |                            |
+| figma_node_id | 218:323                    |
 | code_path     | components/ui/checkbox.tsx |
 
 ## Role

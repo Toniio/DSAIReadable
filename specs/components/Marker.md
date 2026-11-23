@@ -7,7 +7,7 @@
 | Name          | Marker                   |
 | Category      | Conversation             |
 | Status        | beta                     |
-| figma_node_id |                          |
+| figma_node_id | 254:1990                 |
 | code_path     | components/ui/marker.tsx |
 
 ## Role

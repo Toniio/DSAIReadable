@@ -7,7 +7,7 @@
 | Name          | Label                   |
 | Category      | Forms                   |
 | Status        | stable                  |
-| figma_node_id |                         |
+| figma_node_id | 74:370                  |
 | code_path     | components/ui/label.tsx |
 
 ## Role

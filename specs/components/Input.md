@@ -7,7 +7,7 @@
 | Name          | Input                   |
 | Category      | Forms                   |
 | Status        | stable                  |
-| figma_node_id |                         |
+| figma_node_id | 74:355                  |
 | code_path     | components/ui/input.tsx |
 
 ## Role

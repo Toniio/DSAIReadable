@@ -7,7 +7,7 @@
 | Name          | Message                   |
 | Category      | Conversation              |
 | Status        | beta                      |
-| figma_node_id |                           |
+| figma_node_id | 254:2283                  |
 | code_path     | components/ui/message.tsx |
 
 ## Role

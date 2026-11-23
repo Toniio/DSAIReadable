@@ -7,7 +7,7 @@
 | Name          | NativeSelect                    |
 | Category      | Forms                           |
 | Status        | stable                          |
-| figma_node_id |                                 |
+| figma_node_id | 220:1300                        |
 | code_path     | components/ui/native-select.tsx |
 
 ## Role

@@ -7,7 +7,7 @@
 | Name          | Tooltip                   |
 | Category      | Feedback                  |
 | Status        | stable                    |
-| figma_node_id |                           |
+| figma_node_id | 223:2705                  |
 | code_path     | components/ui/tooltip.tsx |
 
 ## Role

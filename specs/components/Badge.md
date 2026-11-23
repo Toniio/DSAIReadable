@@ -7,7 +7,7 @@
 | Name          | Badge                   |
 | Category      | Misc                    |
 | Status        | stable                  |
-| figma_node_id |                         |
+| figma_node_id | 225:1786                |
 | code_path     | components/ui/badge.tsx |
 
 ## Role

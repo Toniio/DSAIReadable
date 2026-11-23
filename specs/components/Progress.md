@@ -7,7 +7,7 @@
 | Name          | Progress                   |
 | Category      | Data                       |
 | Status        | stable                     |
-| figma_node_id |                            |
+| figma_node_id | 233:1932                   |
 | code_path     | components/ui/progress.tsx |
 
 ## Role

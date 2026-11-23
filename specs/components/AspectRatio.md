@@ -7,7 +7,7 @@
 | Name          | AspectRatio                    |
 | Category      | Layout                         |
 | Status        | stable                         |
-| figma_node_id |                                |
+| figma_node_id | 221:1620                       |
 | code_path     | components/ui/aspect-ratio.tsx |
 
 ## Role

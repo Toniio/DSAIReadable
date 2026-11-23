@@ -7,7 +7,7 @@
 | Name          | Illustration                   |
 | Category      | Media                          |
 | Status        | stable                         |
-| figma_node_id |                                |
+| figma_node_id | 259:1637                       |
 | code_path     | components/ui/illustration.tsx |
 
 ## Role

@@ -7,7 +7,7 @@
 | Name          | Attachment                   |
 | Category      | Conversation                 |
 | Status        | beta                         |
-| figma_node_id |                              |
+| figma_node_id | 298:913                      |
 | code_path     | components/ui/attachment.tsx |
 
 ## Role

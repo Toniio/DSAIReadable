@@ -7,7 +7,7 @@
 | Name          | Empty                   |
 | Category      | Feedback                |
 | Status        | beta                    |
-| figma_node_id |                         |
+| figma_node_id | 223:2541                |
 | code_path     | components/ui/empty.tsx |
 
 ## Role

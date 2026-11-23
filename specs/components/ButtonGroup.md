@@ -7,7 +7,7 @@
 | Name          | ButtonGroup                    |
 | Category      | Misc                           |
 | Status        | beta                           |
-| figma_node_id |                                |
+| figma_node_id | 264:1776                       |
 | code_path     | components/ui/button-group.tsx |
 
 ## Role

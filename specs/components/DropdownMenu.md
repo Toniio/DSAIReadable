@@ -7,7 +7,7 @@
 | Name          | DropdownMenu                    |
 | Category      | Overlay                         |
 | Status        | stable                          |
-| figma_node_id |                                 |
+| figma_node_id | 230:2422                        |
 | code_path     | components/ui/dropdown-menu.tsx |
 
 ## Role

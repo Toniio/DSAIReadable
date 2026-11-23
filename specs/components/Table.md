@@ -7,7 +7,7 @@
 | Name          | Table                   |
 | Category      | Data                    |
 | Status        | stable                  |
-| figma_node_id |                         |
+| figma_node_id | 233:1921                |
 | code_path     | components/ui/table.tsx |
 
 ## Role

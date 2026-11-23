@@ -7,7 +7,7 @@
 | Name          | RadioGroup                    |
 | Category      | Forms                         |
 | Status        | stable                        |
-| figma_node_id |                               |
+| figma_node_id | 218:1353                      |
 | code_path     | components/ui/radio-group.tsx |
 
 ## Role

@@ -7,7 +7,7 @@
 | Name          | Select                   |
 | Category      | Forms                    |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 220:1719                 |
 | code_path     | components/ui/select.tsx |
 
 ## Role

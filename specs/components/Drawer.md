@@ -7,7 +7,7 @@
 | Name          | Drawer                   |
 | Category      | Overlay                  |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 231:3099                 |
 | code_path     | components/ui/drawer.tsx |
 
 ## Role
