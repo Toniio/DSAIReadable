@@ -43,7 +43,7 @@
   {
     "name": "Attachment",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/attachment.tsx",
     "has_spec": true,
     "sizes": [
@@ -88,7 +88,7 @@
   {
     "name": "Bubble",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/bubble.tsx",
     "has_spec": true,
     "sizes": []
@@ -113,7 +113,7 @@
   {
     "name": "ButtonGroup",
     "category": "Misc",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/button-group.tsx",
     "has_spec": true,
     "sizes": []
@@ -173,7 +173,7 @@
   {
     "name": "CodeBlock",
     "category": "Typography",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/code-block.tsx",
     "has_spec": true,
     "sizes": [
@@ -198,7 +198,7 @@
   {
     "name": "Combobox",
     "category": "Forms",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/combobox.tsx",
     "has_spec": true,
     "sizes": []
@@ -230,7 +230,7 @@
   {
     "name": "Direction",
     "category": "Layout",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/direction.tsx",
     "has_spec": true,
     "sizes": []
@@ -254,7 +254,7 @@
   {
     "name": "Empty",
     "category": "Feedback",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/empty.tsx",
     "has_spec": true,
     "sizes": []
@@ -262,7 +262,7 @@
   {
     "name": "Field",
     "category": "Forms",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/field.tsx",
     "has_spec": true,
     "sizes": []
@@ -302,7 +302,7 @@
   {
     "name": "InputGroup",
     "category": "Forms",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/input-group.tsx",
     "has_spec": true,
     "sizes": [
@@ -323,7 +323,7 @@
   {
     "name": "Item",
     "category": "Misc",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/item.tsx",
     "has_spec": true,
     "sizes": [
@@ -335,7 +335,7 @@
   {
     "name": "Kbd",
     "category": "Misc",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/kbd.tsx",
     "has_spec": true,
     "sizes": []
@@ -363,7 +363,7 @@
   {
     "name": "Marker",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/marker.tsx",
     "has_spec": true,
     "sizes": []
@@ -379,7 +379,7 @@
   {
     "name": "Message",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/message.tsx",
     "has_spec": true,
     "sizes": []
@@ -387,7 +387,7 @@
   {
     "name": "MessageScroller",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/message-scroller.tsx",
     "has_spec": true,
     "sizes": [
@@ -464,7 +464,7 @@
   {
     "name": "Questionnaire",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/questionnaire.tsx",
     "has_spec": true,
     "sizes": [
@@ -573,7 +573,7 @@
   {
     "name": "Spinner",
     "category": "Feedback",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/spinner.tsx",
     "has_spec": true,
     "sizes": []
@@ -648,7 +648,7 @@
   {
     "name": "Trace",
     "category": "Conversation",
-    "status": "beta",
+    "status": "stable",
     "code_path": "components/ui/trace.tsx",
     "has_spec": true,
     "sizes": []

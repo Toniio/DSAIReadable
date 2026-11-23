@@ -7,7 +7,7 @@
 | Name          | Tabs                   |
 | Category      | Navigation             |
 | Status        | stable                 |
-| figma_node_id |                        |
+| figma_node_id | 227:2198               |
 | code_path     | components/ui/tabs.tsx |
 
 ## Role

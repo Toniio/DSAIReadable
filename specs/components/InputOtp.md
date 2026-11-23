@@ -7,7 +7,7 @@
 | Name          | InputOtp                    |
 | Category      | Forms                       |
 | Status        | stable                      |
-| figma_node_id |                             |
+| figma_node_id | 220:1873                    |
 | code_path     | components/ui/input-otp.tsx |
 
 ## Role

@@ -6,7 +6,7 @@
 | ------------- | --------------------------- |
 | Name          | Direction                   |
 | Category      | Layout                      |
-| Status        | beta                        |
+| Status        | stable                      |
 | figma_node_id |                             |
 | code_path     | components/ui/direction.tsx |
 

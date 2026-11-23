@@ -7,7 +7,7 @@
 | Name          | Sheet                   |
 | Category      | Overlay                 |
 | Status        | stable                  |
-| figma_node_id |                         |
+| figma_node_id | 261:5051                |
 | code_path     | components/ui/sheet.tsx |
 
 ## Role

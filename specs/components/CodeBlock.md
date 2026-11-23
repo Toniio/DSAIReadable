@@ -6,8 +6,8 @@
 | ------------- | ---------------------------- |
 | Name          | CodeBlock                    |
 | Category      | Typography                   |
-| Status        | beta                         |
-| figma_node_id |                              |
+| Status        | stable                       |
+| figma_node_id | 297:2453                     |
 | code_path     | components/ui/code-block.tsx |
 
 ## Role

@@ -7,7 +7,7 @@
 | Name          | Dialog                   |
 | Category      | Overlay                  |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 261:4860                 |
 | code_path     | components/ui/dialog.tsx |
 
 ## Role

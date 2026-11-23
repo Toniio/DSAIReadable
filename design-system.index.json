@@ -82,7 +82,7 @@
         "icon",
         "icon-lg"
       ],
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "attachment",
         "divergences": []
@@ -152,7 +152,7 @@
     {
       "name": "Bubble",
       "code_path": "components/ui/bubble.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "bubble",
         "divergences": []
@@ -180,7 +180,7 @@
     {
       "name": "ButtonGroup",
       "code_path": "components/ui/button-group.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "button-group",
         "divergences": []
@@ -271,7 +271,7 @@
         "icon",
         "icon-lg"
       ],
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "code-block",
         "divergences": [
@@ -302,7 +302,7 @@
     {
       "name": "Combobox",
       "code_path": "components/ui/combobox.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "combobox",
         "divergences": [
@@ -391,7 +391,7 @@
     {
       "name": "Direction",
       "code_path": "components/ui/direction.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "direction",
         "divergences": []
@@ -418,7 +418,7 @@
     {
       "name": "Empty",
       "code_path": "components/ui/empty.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "empty",
         "divergences": [
@@ -452,7 +452,7 @@
     {
       "name": "Field",
       "code_path": "components/ui/field.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "field",
         "divergences": []
@@ -513,7 +513,7 @@
         "icon-xs",
         "icon-sm"
       ],
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "input-group",
         "divergences": []
@@ -536,7 +536,7 @@
         "sm",
         "default"
       ],
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "item",
         "divergences": []
@@ -545,7 +545,7 @@
     {
       "name": "Kbd",
       "code_path": "components/ui/kbd.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "kbd",
         "divergences": [
@@ -589,7 +589,7 @@
     {
       "name": "Marker",
       "code_path": "components/ui/marker.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "marker",
         "divergences": []
@@ -607,7 +607,7 @@
     {
       "name": "Message",
       "code_path": "components/ui/message.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "message",
         "divergences": []
@@ -626,7 +626,7 @@
         "icon",
         "icon-lg"
       ],
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "message-scroller",
         "divergences": []
@@ -750,7 +750,7 @@
         "icon",
         "icon-lg"
       ],
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "questionnaire",
         "divergences": []
@@ -916,7 +916,7 @@
     {
       "name": "Spinner",
       "code_path": "components/ui/spinner.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "spinner",
         "divergences": []
@@ -1002,7 +1002,7 @@
     {
       "name": "Trace",
       "code_path": "components/ui/trace.tsx",
-      "status": "beta",
+      "status": "stable",
       "shadcn": {
         "item": "trace",
         "divergences": []

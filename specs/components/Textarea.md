@@ -7,7 +7,7 @@
 | Name          | Textarea                   |
 | Category      | Forms                      |
 | Status        | stable                     |
-| figma_node_id |                            |
+| figma_node_id | 218:815                    |
 | code_path     | components/ui/textarea.tsx |
 
 ## Role

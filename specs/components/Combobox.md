@@ -6,8 +6,8 @@
 | ------------- | -------------------------- |
 | Name          | Combobox                   |
 | Category      | Forms                      |
-| Status        | beta                       |
-| figma_node_id |                            |
+| Status        | stable                     |
+| figma_node_id | 304:2820                   |
 | code_path     | components/ui/combobox.tsx |
 
 ## Role

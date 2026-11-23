@@ -7,7 +7,7 @@
 | Name          | Skeleton                   |
 | Category      | Layout                     |
 | Status        | stable                     |
-| figma_node_id |                            |
+| figma_node_id | 221:1602                   |
 | code_path     | components/ui/skeleton.tsx |
 
 ## Role

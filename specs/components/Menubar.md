@@ -7,7 +7,7 @@
 | Name          | Menubar                   |
 | Category      | Navigation                |
 | Status        | stable                    |
-| figma_node_id |                           |
+| figma_node_id | 228:3901                  |
 | code_path     | components/ui/menubar.tsx |
 
 ## Role

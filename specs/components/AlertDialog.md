@@ -7,7 +7,7 @@
 | Name          | AlertDialog                    |
 | Category      | Overlay                        |
 | Status        | stable                         |
-| figma_node_id |                                |
+| figma_node_id | 261:4653                       |
 | code_path     | components/ui/alert-dialog.tsx |
 
 ## Role

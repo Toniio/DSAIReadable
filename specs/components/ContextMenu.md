@@ -7,7 +7,7 @@
 | Name          | ContextMenu                    |
 | Category      | Overlay                        |
 | Status        | stable                         |
-| figma_node_id |                                |
+| figma_node_id | 230:2641                       |
 | code_path     | components/ui/context-menu.tsx |
 
 ## Role

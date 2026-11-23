@@ -7,7 +7,7 @@
 | Name          | Slider                   |
 | Category      | Forms                    |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 218:1949                 |
 | code_path     | components/ui/slider.tsx |
 
 ## Role

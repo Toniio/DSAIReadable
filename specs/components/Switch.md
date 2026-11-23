@@ -7,7 +7,7 @@
 | Name          | Switch                   |
 | Category      | Forms                    |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 218:581                  |
 | code_path     | components/ui/switch.tsx |
 
 ## Role
