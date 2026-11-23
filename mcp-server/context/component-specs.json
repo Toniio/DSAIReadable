@@ -26205,11 +26205,14 @@
       {
         "token": "color.border.focus",
         "classes": [
+          "border-b-ring",
+          "border-r-ring",
           "border-ring",
           "outline-ring",
           "ring-ring/50"
         ],
         "where": [
+          "ToggleGroupItem",
           "ToggleGroupItem via toggleVariants.variant.default",
           "ToggleGroupItem via toggleVariants via FOCUS_RING (lib/focus.ts)"
         ]
@@ -26229,10 +26232,13 @@
       {
         "token": "color.text.default",
         "classes": [
+          "border-b-foreground",
           "border-foreground",
+          "border-r-foreground",
           "text-foreground"
         ],
         "where": [
+          "ToggleGroupItem",
           "ToggleGroupItem via toggleVariants"
         ]
       },
@@ -26527,11 +26533,11 @@
       },
       {
         "state": "focus",
-        "behavior": "The focused item rises above its neighbors (`focus:z-dropdown`) and draws the focus ring of `toggleVariants`: a `focus-visible:ring-ring/50` ring around a solid part, the `focus-visible:outline-ring` outline of the `default` variant, whose border stays transparent at focus, or the `focus-visible:border-ring` border of the `outline` variant; a pressed `default` item keeps its on-state frame, and a pressed `outline` item takes the `focus-visible:border-ring` border in its place"
+        "behavior": "The focused item rises above its neighbors (`focus:z-dropdown`) and draws the focus ring of `toggleVariants`: a `focus-visible:ring-ring/50` ring around a solid part, the `focus-visible:outline-ring` outline of the `default` variant, whose border stays transparent at focus, or the `focus-visible:border-ring` border of the `outline` variant; a pressed `default` item keeps its on-state frame, and a pressed `outline` item takes the `focus-visible:border-ring` border in its place; in a joined `outline` group, the item before it turns their shared edge to `border-r-ring` (`border-b-ring` when vertical), so that border closes too"
       },
       {
         "state": "pressed",
-        "behavior": "A pressed item takes `data-[state=on]:bg-muted`, the hover fill, and a solid `data-[state=on]:border-foreground` frame that hover does not draw, from `toggleVariants`: Radix writes `data-state=\"on\"` in both kinds of group, and `aria-pressed` only in a `multiple` one, whose items are buttons (a `single` group's items are radios with `aria-checked`). In a joined `outline` group (`spacing={0}`), an item's leading border is its neighbor's (`border-l-0`, `border-t-0` when vertical), so the frame shows on three sides"
+        "behavior": "A pressed item takes `data-[state=on]:bg-muted`, the hover fill, and a solid `data-[state=on]:border-foreground` frame that hover does not draw, from `toggleVariants`: Radix writes `data-state=\"on\"` in both kinds of group, and `aria-pressed` only in a `multiple` one, whose items are buttons (a `single` group's items are radios with `aria-checked`). In a joined `outline` group (`spacing={0}`), an item's leading border is its neighbor's (`border-l-0`, `border-t-0` when vertical), so the item before a pressed one draws their shared edge in the frame's color (`border-r-foreground`, `border-b-foreground` when vertical) and the frame closes on all four sides"
       },
       {
         "state": "disabled",
@@ -26543,7 +26549,7 @@
       },
       {
         "state": "spacing-0",
-        "behavior": "Items touch with no gap; `outline` items share their borders (`border-l-0`, or `border-t-0` when vertical)"
+        "behavior": "Items touch with no gap; `outline` items share their borders (`border-l-0`, or `border-t-0` when vertical), and the item before a pressed one colors their shared edge as the frame"
       },
       {
         "state": "vertical",
