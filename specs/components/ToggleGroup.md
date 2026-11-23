@@ -7,7 +7,7 @@
 | Name          | ToggleGroup                    |
 | Category      | Misc                           |
 | Status        | stable                         |
-| figma_node_id |                                |
+| figma_node_id | 264:3148                       |
 | code_path     | components/ui/toggle-group.tsx |
 
 ## Role

@@ -6,8 +6,8 @@
 | ------------- | ------------------------- |
 | Name          | Spinner                   |
 | Category      | Feedback                  |
-| Status        | beta                      |
-| figma_node_id |                           |
+| Status        | stable                    |
+| figma_node_id | 193:48                    |
 | code_path     | components/ui/spinner.tsx |
 
 ## Role

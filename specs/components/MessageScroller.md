@@ -6,8 +6,8 @@
 | ------------- | ---------------------------------- |
 | Name          | MessageScroller                    |
 | Category      | Conversation                       |
-| Status        | beta                               |
-| figma_node_id |                                    |
+| Status        | stable                             |
+| figma_node_id | 298:1097                           |
 | code_path     | components/ui/message-scroller.tsx |
 
 ## Role

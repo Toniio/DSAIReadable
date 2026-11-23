@@ -7,7 +7,7 @@
 | Name          | NavigationMenu                    |
 | Category      | Navigation                        |
 | Status        | stable                            |
-| figma_node_id |                                   |
+| figma_node_id | 228:4366                          |
 | code_path     | components/ui/navigation-menu.tsx |
 
 ## Role

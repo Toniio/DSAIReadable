@@ -7,7 +7,7 @@
 | Name          | Chart                   |
 | Category      | Data                    |
 | Status        | stable                  |
-| figma_node_id |                         |
+| figma_node_id | 233:2157                |
 | code_path     | components/ui/chart.tsx |
 
 ## Role

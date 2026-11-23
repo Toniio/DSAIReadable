@@ -7,7 +7,7 @@
 | Name          | Toggle                   |
 | Category      | Forms                    |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 218:1050                 |
 | code_path     | components/ui/toggle.tsx |
 
 ## Role

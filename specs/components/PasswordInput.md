@@ -7,7 +7,7 @@
 | Name          | PasswordInput                    |
 | Category      | Forms                            |
 | Status        | stable                           |
-| figma_node_id |                                  |
+| figma_node_id | 304:1965                         |
 | code_path     | components/ui/password-input.tsx |
 
 ## Role

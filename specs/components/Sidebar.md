@@ -7,7 +7,7 @@
 | Name          | Sidebar                   |
 | Category      | Layout                    |
 | Status        | stable                    |
-| figma_node_id |                           |
+| figma_node_id | 305:1888                  |
 | code_path     | components/ui/sidebar.tsx |
 
 ## Role

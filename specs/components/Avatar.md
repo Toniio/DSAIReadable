@@ -7,7 +7,7 @@
 | Name          | Avatar                   |
 | Category      | Misc                     |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 225:1642                 |
 | code_path     | components/ui/avatar.tsx |
 
 ## Role

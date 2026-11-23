@@ -7,7 +7,7 @@
 | Name          | Carousel                   |
 | Category      | Data                       |
 | Status        | stable                     |
-| figma_node_id |                            |
+| figma_node_id | 267:15779                  |
 | code_path     | components/ui/carousel.tsx |
 
 ## Role

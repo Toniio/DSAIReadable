@@ -6,8 +6,8 @@
 | ------------- | ----------------------- |
 | Name          | Trace                   |
 | Category      | Conversation            |
-| Status        | beta                    |
-| figma_node_id |                         |
+| Status        | stable                  |
+| figma_node_id | 300:2348                |
 | code_path     | components/ui/trace.tsx |
 
 ## Role

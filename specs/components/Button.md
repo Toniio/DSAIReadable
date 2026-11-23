@@ -7,7 +7,7 @@
 | Name          | Button                   |
 | Category      | Forms                    |
 | Status        | stable                   |
-| figma_node_id |                          |
+| figma_node_id | 74:315                   |
 | code_path     | components/ui/button.tsx |
 
 ## Role
