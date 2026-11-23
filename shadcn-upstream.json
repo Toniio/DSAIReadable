@@ -2171,7 +2171,14 @@
       ]
     },
     "toggle-group": {
-      "status": "reanchored"
+      "status": "reanchored",
+      "reason": "Toggle draws a pressed item's border-foreground frame, which upstream does not have. In a joined outline group (spacing={0}), an item drops its leading border (border-l-0, border-t-0 when vertical) and shows its neighbor's trailing one, so that frame closed on three sides only, its leading edge left the border-input gray. The item before a pressed one now draws their shared edge in the frame's color ([&:has(+[data-state=on])]:border-r-foreground, border-b-foreground when vertical; color.text.default), and in border-ring while the pressed item has keyboard focus, matching its focus-visible:border-ring. No border is added, so nothing shifts.",
+      "added": [
+        "group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:[&:has(+[data-state=on])]:border-r-foreground",
+        "group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:[&:has(+[data-state=on])]:border-b-foreground",
+        "group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:[&:has(+[data-state=on]:focus-visible)]:border-r-ring",
+        "group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:[&:has(+[data-state=on]:focus-visible)]:border-b-ring"
+      ]
     },
     "tooltip": {
       "status": "reanchored"
